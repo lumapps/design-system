@@ -1,9 +1,26 @@
 {
-  "extends": "eslint:recommended",
-  "globals": {
-    "angular": true
-  },
-  "plugins": [
-    "angular"
-  ]
+    "extends": "eslint:recommended",
+    "globals": {
+        "angular": true
+    },
+    "plugins": [
+        "angular"
+    ],
+    "rules": {
+        "brace-style": [
+            "error",
+            "1tbs",
+            {
+                "allowSingleLine": false
+            }
+        ],
+        "space-before-blocks": [
+            "error",
+            {
+                "classes": "always",
+                "functions": "always",
+                "keywords": "always"
+            }
+        ]
+    }
 }
