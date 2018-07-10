@@ -4,7 +4,7 @@ var sass = require('gulp-sass');
 
 gulp.task('styles', function() {
     gulp.src('app/scss/**/*.scss')
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass({includePaths: ['app/libs/mdi/scss/', 'app/libs/sass-mq/']}).on('error', sass.logError))
         .pipe(gulp.dest('app/scss/'))
         .pipe(browserSync.stream());
 });

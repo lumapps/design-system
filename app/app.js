@@ -4,6 +4,7 @@
     /////////////////////////////
 
     var DEPENDENCIES = [
+        'lumx',
         'ui.router',
     ];
 
