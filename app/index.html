@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="design-system">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>Design System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="scss/app.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+</head>
+<body>
+    <div class="sidebar" ui-view="sidebar"></div>
+
+    <div class="app">
+        <div class="app__header" ui-view="header"></div>
+        <div class="app__main" ui-view="main"></div>
+    </div>
+
+    <script src="libs/jquery/dist/jquery.js"></script>
+    <script src="libs/angular/angular.js"></script>
+    <script src="libs/angular-ui-router/release/angular-ui-router.js"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>

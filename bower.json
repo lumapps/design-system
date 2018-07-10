@@ -1,0 +1,10 @@
+{
+  "name": "design-system",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "angular": "^1.7.2",
+    "angular-ui-router": "^1.0.18",
+    "jquery": "^3.3.1"
+  }
+}
