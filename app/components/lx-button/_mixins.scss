@@ -1,0 +1,73 @@
+@import "./variables";
+
+@mixin lx-button-base_() {
+    @include lx-typography(button);
+
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-width: 64px;
+    height: $lx-button-height;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+
+    line-height: inherit;
+    user-select: none;
+    -webkit-appearance: none;
+    overflow: hidden;
+    vertical-align: middle;
+
+    &::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+    }
+
+    &:active {
+        outline: none;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@mixin lx-button-theme($type, $theme) {
+    @if $type == 'text' {
+        padding: 0 $lx-button-text-horizontal-padding;
+        background-color: transparent;
+        color: map-get($lx-theme-property-values, $theme);
+
+        &:hover:before {
+            background-color: rgba(map-get($lx-theme-property-values, $theme), .04);
+        }
+
+        &:focus:before {
+            background-color: rgba(map-get($lx-theme-property-values, $theme), .12);
+        }
+
+        .lx-ripple {
+            background-color: rgba(map-get($lx-theme-property-values, $theme), .16);
+        }
+    }
+
+    @if $type == 'contained' {
+        padding: 0 $lx-button-contained-horizontal-padding;
+        background-color: map-get($lx-theme-property-values, $theme);
+        color: map-get($lx-theme-property-values, #{on-}$theme);
+
+        &:hover:before {
+            background-color: rgba(#fff, .08);
+        }
+
+        &:focus:before {
+            background-color: rgba(#fff, .24);
+        }
+
+        .lx-ripple {
+            background-color: rgba(#fff, .32);
+        }
+    }
+}

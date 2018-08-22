@@ -1,0 +1,13 @@
+@import "./variables";
+
+html {
+    box-sizing: border-box;
+
+    @include lx-typography-base_;
+    font-size: ($lx-base-font-size / 16px) * 1em;
+    line-height: $lx-base-line-height / $lx-base-font-size;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}

@@ -20,13 +20,17 @@
                 header: {
                     templateUrl: 'layout/header/header.html',
                 },
-                main: {
-                    templateUrl: 'layout/main/main.html',
-                },
                 sidebar: {
                     templateUrl: 'layout/sidebar/sidebar.html',
                 },
             },
+        }).state('app.button', {
+            url: 'button',
+            views: {
+                'main@': {
+                    templateUrl: 'demo/lx-button/demo.html'
+                }
+            }
         });
     }
 

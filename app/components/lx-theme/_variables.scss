@@ -1,0 +1,21 @@
+$lx-theme-primary: #6200ee !default;
+$lx-theme-on-primary: #fff !default;
+$lx-theme-secondary: #018786 !default;
+$lx-theme-on-secondary: #fff !default;
+$lx-theme-background: #fff !default;
+$lx-theme-on-background: #000 !default;
+$lx-theme-surface: #fff !default;
+$lx-theme-on-surface: #000 !default;
+$lx-theme-error: #c51162 !default;
+$lx-theme-on-error: #fff !default;
+
+$lx-theme-property-values: (
+  primary: $lx-theme-primary,
+  on-primary: $lx-theme-on-primary,
+  secondary: $lx-theme-secondary,
+  on-secondary: $lx-theme-on-secondary,
+  background: $lx-theme-background,
+  on-background: $lx-theme-on-background,
+  surface: $lx-theme-surface,
+  on-surface: $lx-theme-on-surface
+)

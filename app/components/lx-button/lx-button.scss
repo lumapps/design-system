@@ -1,0 +1,30 @@
+@import "./mixins";
+
+.lx-button {
+    @include lx-button-base_;
+}
+
+.lx-button--text.lx-button--primary {
+    @include lx-button-theme(text, primary);
+}
+
+.lx-button--text.lx-button--secondary {
+    @include lx-button-theme(text, secondary);
+}
+
+.lx-button--contained.lx-button--primary {
+    @include lx-button-theme(contained, primary);
+}
+
+.lx-button--contained.lx-button--secondary {
+    @include lx-button-theme(contained, secondary);
+}
+
+    .lx-button__icon {
+        margin-right: $lx-base-spacing-unit;
+        font-size: 18px;
+
+        .lx-button--contained & {
+            margin-left: -($lx-base-spacing-unit / 2);
+        }
+    }

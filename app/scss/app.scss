@@ -2,9 +2,9 @@
 //    #APP
 //\*------------------------------------*/
 
-@import "../core/scss/lumx";
+@import "settings/defaults";
 
-@import "elements/page";
+@import "../core/scss/lumx";
 
 @import "../layout/app/app";
 @import "../layout/header/header";

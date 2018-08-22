@@ -5,6 +5,7 @@
   "devDependencies": {
     "bower": "^1.8.4",
     "browser-sync": "^2.24.5",
+    "connect-history-api-fallback": "^1.5.0",
     "eslint": "^5.1.0",
     "eslint-plugin-angular": "^3.3.0",
     "gulp": "^3.9.1",

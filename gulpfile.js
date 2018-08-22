@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var historyApiFallback = require('connect-history-api-fallback')
 var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
 
@@ -12,7 +13,8 @@ gulp.task('styles', function() {
 gulp.task('default', function() {
     browserSync.init({
         server: {
-            baseDir: "./app"
+            baseDir: "./app",
+            middleware: [ historyApiFallback() ]
         }
     });
 

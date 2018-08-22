@@ -1,0 +1,126 @@
+@mixin lx-typography-base_() {
+    font-family: Roboto, sans-serif;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin lx-typography($style) {
+    @include lx-typography-base_;
+
+    @if $style == 'headline1' {
+        font-size: 6rem; // 96sp
+        line-height: 6rem;
+        font-weight: 300;
+        letter-spacing: -1.5px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'headline2' {
+        font-size: 3.75rem; // 60sp
+        line-height: 3.75rem;
+        font-weight: 300;
+        letter-spacing: -.5px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'headline3' {
+        font-size: 3rem; // 48px
+        line-height: 3.125rem; // 50px
+        font-weight: 400;
+        letter-spacing: normal;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'headline4' {
+        font-size: 2.125rem; // 34sp
+        line-height: 2.5rem; // 40sp
+        font-weight: 400;
+        letter-spacing: .25px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'headline5' {
+        font-size: 1.5rem; // 24sp
+        line-height: 2rem; // 32sp
+        font-weight: 400;
+        letter-spacing: normal;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'headline6' {
+        font-size: 1.25rem; // 20sp
+        line-height: 2rem; // 32sp
+        font-weight: 500;
+        letter-spacing: .15px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'subtitle1' {
+        font-size: 1rem; // 16sp
+        line-height: 1.75rem; // 28sp
+        font-weight: 400;
+        letter-spacing: .15px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'subtitle2' {
+        font-size: .875rem; // 14sp
+        line-height: 1.375rem; // 22sp
+        font-weight: 500;
+        letter-spacing: .1px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'body1' {
+        font-size: 1rem; // 16sp
+        line-height: 1.5rem; // 24sp
+        font-weight: 400;
+        letter-spacing: .5px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'body2' {
+        font-size: .875rem; // 14sp
+        line-height: 1.25rem; // 20sp
+        font-weight: 400;
+        letter-spacing: .25px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'button' {
+        font-size: .875rem; // 14sp
+        line-height: 2.25rem; // 36sp
+        font-weight: 500;
+        letter-spacing: .75px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+
+    @if $style == 'caption' {
+        font-size: .75rem; // 12sp
+        line-height: 1.25rem; // 20sp
+        font-weight: 400;
+        letter-spacing: .4px;
+        text-decoration: inherit;
+        text-transform: inherit;
+    }
+
+    @if $style == 'overline' {
+        font-size: .75rem; // 12sp
+        line-height: 2rem; // 32sp
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+}

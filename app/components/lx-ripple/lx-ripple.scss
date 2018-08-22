@@ -1,0 +1,31 @@
+@import "./keyframes";
+
+.has-lx-ripple {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    &:before {
+        content: '';
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.lx-ripple {
+    display: block;
+    position: absolute;
+    z-index: -1;
+    border-radius: 100%;
+    pointer-events: none;
+    transform: scale(0);
+}
+
+.lx-ripple--is-animated {
+    animation-name: lx-ripple;
+    animation-duration: 0.65s;
+}
