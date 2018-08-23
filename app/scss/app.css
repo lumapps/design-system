@@ -8366,10 +8366,10 @@ html {
   font-family: Roboto, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 2.25rem;
   font-weight: 500;
-  letter-spacing: .75px;
+  letter-spacing: 0.05357em;
   text-decoration: none;
   text-transform: uppercase;
   display: inline-flex;
@@ -8461,6 +8461,6 @@ html {
 
 .lx-button__icon {
   margin-right: 8px;
-  font-size: 18px; }
+  font-size: 1.125rem; }
   .lx-button--contained .lx-button__icon {
     margin-left: -4px; }

@@ -22,7 +22,7 @@
 
     .lx-button__icon {
         margin-right: $lx-base-spacing-unit;
-        font-size: 18px;
+        font-size: lx-typography-to-rem_(18px);
 
         .lx-button--contained & {
             margin-left: -($lx-base-spacing-unit / 2);
