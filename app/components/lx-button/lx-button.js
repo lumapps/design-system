@@ -5,18 +5,22 @@
 
     function lxButtonDirective() {
         function getTemplate(el, attrs) {
-            var buttonType = (typeof attrs.lxType === 'undefined') ? 'text' : attrs.lxType;
-            var buttonTheme = (typeof attrs.lxTheme === 'undefined') ? 'primary' : attrs.lxTheme;
+            var buttonType = angular.isDefined(attrs.lxType) ?  attrs.lxType : 'text';
+            var buttonTheme = angular.isDefined(attrs.lxTheme) ? attrs.lxTheme : 'primary';
+            var buttonClass = 'lx-button lx-button--' + buttonType + ' lx-button--'+ buttonTheme;
 
             if (isAnchor(attrs)) {
-                return '<a class="lx-button lx-button--' + buttonType + ' lx-button--'+ buttonTheme + '" lx-ripple ng-transclude></a>';
+                return '<a class="' + buttonClass + '" lx-ripple ng-transclude></a>';
             } else {
-                return '<button class="lx-button lx-button--' + buttonType + ' lx-button--'+ buttonTheme + '" lx-ripple ng-transclude></button>';
+                return '<button class="' + buttonClass + '" lx-ripple ng-transclude></button>';
             }
         }
 
         function isAnchor(attrs) {
-            return angular.isDefined(attrs.href) || angular.isDefined(attrs.ngHref) || angular.isDefined(attrs.ngLink) || angular.isDefined(attrs.uiSref);
+            return angular.isDefined(attrs.href) ||
+                angular.isDefined(attrs.ngHref) ||
+                angular.isDefined(attrs.ngLink) ||
+                angular.isDefined(attrs.uiSref);
         }
 
         function link(scope, el, attrs) {
