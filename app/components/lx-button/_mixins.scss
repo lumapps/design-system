@@ -34,50 +34,60 @@
     }
 }
 
-@mixin lx-button-theme($type, $theme) {
+@mixin lx-button__icon_() {
+    margin-right: $lx-base-spacing-unit;
+    font-size: lx-typography-to-rem_(18px);
+}
+
+@mixin lx-button__icon-contained_() {
+    margin-left: -($lx-base-spacing-unit / 2);
+}
+
+@mixin lx-button--text($theme) {
+    padding: 0 $lx-button-text-horizontal-padding;
+    background-color: transparent;
+    color: map-get($lx-theme-property-values, $theme);
+
     &:disabled {
         color: map-get(map-get($lx-theme-text-colors, dark), disabled);
         cursor: default;
         pointer-events: none;
     }
 
-    @if $type == 'text' {
-        padding: 0 $lx-button-text-horizontal-padding;
-        background-color: transparent;
-        color: map-get($lx-theme-property-values, $theme);
-
-        &:hover:before {
-            background-color: rgba(map-get($lx-theme-property-values, $theme), .04);
-        }
-
-        &:focus:before {
-            background-color: rgba(map-get($lx-theme-property-values, $theme), .12);
-        }
-
-        .lx-ripple {
-            background-color: rgba(map-get($lx-theme-property-values, $theme), .16);
-        }
+    &:hover:before {
+        background-color: rgba(map-get($lx-theme-property-values, $theme), .04);
     }
 
-    @if $type == 'contained' {
-        padding: 0 $lx-button-contained-horizontal-padding;
-        background-color: map-get($lx-theme-property-values, $theme);
-        color: map-get($lx-theme-property-values, #{on-}$theme);
+    &:focus:before {
+        background-color: rgba(map-get($lx-theme-property-values, $theme), .12);
+    }
 
-        &:disabled {
-            background-color: rgba(map-get($lx-theme-property-values, on-surface), .12);
-        }
+    .lx-ripple {
+        background-color: rgba(map-get($lx-theme-property-values, $theme), .16);
+    }
+}
 
-        &:hover:before {
-            background-color: rgba(#fff, .08);
-        }
+@mixin lx-button--contained($theme) {
+    padding: 0 $lx-button-contained-horizontal-padding;
+    background-color: map-get($lx-theme-property-values, $theme);
+    color: map-get($lx-theme-property-values, #{on-}$theme);
 
-        &:focus:before {
-            background-color: rgba(#fff, .24);
-        }
+    &:disabled {
+        color: map-get(map-get($lx-theme-text-colors, dark), disabled);
+        background-color: rgba(map-get($lx-theme-property-values, on-surface), .12);
+        cursor: default;
+        pointer-events: none;
+    }
 
-        .lx-ripple {
-            background-color: rgba(#fff, .32);
-        }
+    &:hover:before {
+        background-color: rgba(#fff, .08);
+    }
+
+    &:focus:before {
+        background-color: rgba(#fff, .24);
+    }
+
+    .lx-ripple {
+        background-color: rgba(#fff, .32);
     }
 }

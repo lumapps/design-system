@@ -8394,6 +8394,12 @@ html {
     outline: none; }
   .lx-button:hover {
     cursor: pointer; }
+  .lx-button .lx-button__icon {
+    margin-right: 8px;
+    font-size: 1.125rem; }
+
+.lx-button--contained .lx-button__icon {
+  margin-left: -4px; }
 
 .lx-button--text.lx-button--primary {
   padding: 0 8px;
@@ -8431,10 +8437,9 @@ html {
   color: #fff; }
   .lx-button--contained.lx-button--primary:disabled {
     color: rgba(0, 0, 0, 0.38);
+    background-color: rgba(0, 0, 0, 0.12);
     cursor: default;
     pointer-events: none; }
-  .lx-button--contained.lx-button--primary:disabled {
-    background-color: rgba(0, 0, 0, 0.12); }
   .lx-button--contained.lx-button--primary:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
   .lx-button--contained.lx-button--primary:focus:before {
@@ -8448,19 +8453,12 @@ html {
   color: #fff; }
   .lx-button--contained.lx-button--secondary:disabled {
     color: rgba(0, 0, 0, 0.38);
+    background-color: rgba(0, 0, 0, 0.12);
     cursor: default;
     pointer-events: none; }
-  .lx-button--contained.lx-button--secondary:disabled {
-    background-color: rgba(0, 0, 0, 0.12); }
   .lx-button--contained.lx-button--secondary:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
   .lx-button--contained.lx-button--secondary:focus:before {
     background-color: rgba(255, 255, 255, 0.24); }
   .lx-button--contained.lx-button--secondary .lx-ripple {
     background-color: rgba(255, 255, 255, 0.32); }
-
-.lx-button__icon {
-  margin-right: 8px;
-  font-size: 1.125rem; }
-  .lx-button--contained .lx-button__icon {
-    margin-left: -4px; }

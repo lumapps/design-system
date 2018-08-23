@@ -2,29 +2,30 @@
 
 .lx-button {
     @include lx-button-base_;
+
+    .lx-button__icon {
+        @include lx-button__icon_;
+    }
+}
+
+.lx-button--contained {
+    .lx-button__icon {
+        @include lx-button__icon-contained_;
+    }
 }
 
 .lx-button--text.lx-button--primary {
-    @include lx-button-theme(text, primary);
+    @include lx-button--text(primary);
 }
 
 .lx-button--text.lx-button--secondary {
-    @include lx-button-theme(text, secondary);
+    @include lx-button--text(secondary);
 }
 
 .lx-button--contained.lx-button--primary {
-    @include lx-button-theme(contained, primary);
+    @include lx-button--contained(primary);
 }
 
 .lx-button--contained.lx-button--secondary {
-    @include lx-button-theme(contained, secondary);
+    @include lx-button--contained(secondary);
 }
-
-    .lx-button__icon {
-        margin-right: $lx-base-spacing-unit;
-        font-size: lx-typography-to-rem_(18px);
-
-        .lx-button--contained & {
-            margin-left: -($lx-base-spacing-unit / 2);
-        }
-    }
