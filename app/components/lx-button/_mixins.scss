@@ -65,7 +65,7 @@
         background-color: rgba(map-get($lx-theme-property-values, $theme), .12);
     }
 
-    .lx-ripple {
+    #{$lx-ripple-identifier} {
         background-color: rgba(map-get($lx-theme-property-values, $theme), .16);
     }
 }
@@ -88,7 +88,7 @@
         background-color: rgba(#fff, .24);
     }
 
-    .lx-ripple {
+    #{$lx-ripple-identifier} {
         background-color: rgba(#fff, .32);
     }
 }
