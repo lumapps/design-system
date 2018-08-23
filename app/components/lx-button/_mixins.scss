@@ -35,6 +35,12 @@
 }
 
 @mixin lx-button-theme($type, $theme) {
+    &:disabled {
+        color: map-get(map-get($lx-theme-text-colors, dark), disabled);
+        cursor: default;
+        pointer-events: none;
+    }
+
     @if $type == 'text' {
         padding: 0 $lx-button-text-horizontal-padding;
         background-color: transparent;
@@ -57,6 +63,10 @@
         padding: 0 $lx-button-contained-horizontal-padding;
         background-color: map-get($lx-theme-property-values, $theme);
         color: map-get($lx-theme-property-values, #{on-}$theme);
+
+        &:disabled {
+            background-color: rgba(map-get($lx-theme-property-values, on-surface), .12);
+        }
 
         &:hover:before {
             background-color: rgba(#fff, .08);

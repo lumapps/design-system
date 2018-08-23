@@ -9,13 +9,30 @@ $lx-theme-on-surface: #000 !default;
 $lx-theme-error: #c51162 !default;
 $lx-theme-on-error: #fff !default;
 
+$lx-theme-text-colors: (
+    dark: (
+        primary: rgba(black, .87),
+        secondary: rgba(black, .54),
+        hint: rgba(black, .38),
+        disabled: rgba(black, .38),
+        icon: rgba(black, .38)
+    ),
+    light: (
+        primary: white,
+        secondary: rgba(white, .7),
+        hint: rgba(white, .5),
+        disabled: rgba(white, .5),
+        icon: rgba(white, .5)
+    )
+) !default;
+
 $lx-theme-property-values: (
-  primary: $lx-theme-primary,
-  on-primary: $lx-theme-on-primary,
-  secondary: $lx-theme-secondary,
-  on-secondary: $lx-theme-on-secondary,
-  background: $lx-theme-background,
-  on-background: $lx-theme-on-background,
-  surface: $lx-theme-surface,
-  on-surface: $lx-theme-on-surface
+    primary: $lx-theme-primary,
+    on-primary: $lx-theme-on-primary,
+    secondary: $lx-theme-secondary,
+    on-secondary: $lx-theme-on-secondary,
+    background: $lx-theme-background,
+    on-background: $lx-theme-on-background,
+    surface: $lx-theme-surface,
+    on-surface: $lx-theme-on-surface
 )
