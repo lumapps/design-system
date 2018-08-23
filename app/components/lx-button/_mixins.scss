@@ -32,6 +32,11 @@
     &:hover {
         cursor: pointer;
     }
+
+    &:disabled {
+        cursor: default;
+        pointer-events: none;
+    }
 }
 
 @mixin lx-button__icon_() {
@@ -50,8 +55,6 @@
 
     &:disabled {
         color: map-get(map-get($lx-theme-text-colors, dark), disabled);
-        cursor: default;
-        pointer-events: none;
     }
 
     &:hover:before {
@@ -75,8 +78,6 @@
     &:disabled {
         color: map-get(map-get($lx-theme-text-colors, dark), disabled);
         background-color: rgba(map-get($lx-theme-property-values, on-surface), .12);
-        cursor: default;
-        pointer-events: none;
     }
 
     &:hover:before {

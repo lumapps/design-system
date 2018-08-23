@@ -8394,6 +8394,9 @@ html {
     outline: none; }
   .lx-button:hover {
     cursor: pointer; }
+  .lx-button:disabled {
+    cursor: default;
+    pointer-events: none; }
   .lx-button .lx-button__icon {
     margin-right: 8px;
     font-size: 1.125rem; }
@@ -8406,9 +8409,7 @@ html {
   background-color: transparent;
   color: #6200ee; }
   .lx-button--text.lx-button--primary:disabled {
-    color: rgba(0, 0, 0, 0.38);
-    cursor: default;
-    pointer-events: none; }
+    color: rgba(0, 0, 0, 0.38); }
   .lx-button--text.lx-button--primary:hover:before {
     background-color: rgba(98, 0, 238, 0.04); }
   .lx-button--text.lx-button--primary:focus:before {
@@ -8421,9 +8422,7 @@ html {
   background-color: transparent;
   color: #018786; }
   .lx-button--text.lx-button--secondary:disabled {
-    color: rgba(0, 0, 0, 0.38);
-    cursor: default;
-    pointer-events: none; }
+    color: rgba(0, 0, 0, 0.38); }
   .lx-button--text.lx-button--secondary:hover:before {
     background-color: rgba(1, 135, 134, 0.04); }
   .lx-button--text.lx-button--secondary:focus:before {
@@ -8437,9 +8436,7 @@ html {
   color: #fff; }
   .lx-button--contained.lx-button--primary:disabled {
     color: rgba(0, 0, 0, 0.38);
-    background-color: rgba(0, 0, 0, 0.12);
-    cursor: default;
-    pointer-events: none; }
+    background-color: rgba(0, 0, 0, 0.12); }
   .lx-button--contained.lx-button--primary:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
   .lx-button--contained.lx-button--primary:focus:before {
@@ -8453,9 +8450,7 @@ html {
   color: #fff; }
   .lx-button--contained.lx-button--secondary:disabled {
     color: rgba(0, 0, 0, 0.38);
-    background-color: rgba(0, 0, 0, 0.12);
-    cursor: default;
-    pointer-events: none; }
+    background-color: rgba(0, 0, 0, 0.12); }
   .lx-button--contained.lx-button--secondary:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
   .lx-button--contained.lx-button--secondary:focus:before {
