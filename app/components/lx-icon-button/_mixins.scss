@@ -1,0 +1,86 @@
+@import "./variables";
+
+@mixin lx-icon-button-size($width, $height: $width, $padding: max($width, $height)/2) {
+    width: $width + $padding * 2;
+    height: $height + $padding * 2;
+    font-size: max($width, $height);
+}
+
+@mixin lx-icon-button-base_() {
+    @include lx-icon-button-size($lx-icon-button-size);
+
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    text-decoration: none;
+
+    line-height: inherit;
+    user-select: none;
+    -webkit-appearance: none;
+    overflow: hidden;
+    vertical-align: middle;
+
+    &::-moz-focus-inner {
+        padding: 0;
+        border: 0;
+    }
+
+    &:active {
+        outline: none;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:disabled {
+        cursor: default;
+        pointer-events: none;
+    }
+}
+
+@mixin lx-icon-button--dark_() {
+    color: map-get(map-get($lx-theme-text-colors, dark), primary);
+
+    &:disabled {
+        color: map-get(map-get($lx-theme-text-colors, dark), disabled);
+    }
+
+    &:hover:before {
+        background-color: rgba(map-get(map-get($lx-theme-text-colors, dark), primary), .04);
+    }
+
+    &:focus:before {
+        background-color: rgba(map-get(map-get($lx-theme-text-colors, dark), primary), .12);
+    }
+
+    #{$lx-ripple-identifier} {
+        background-color: rgba(map-get(map-get($lx-theme-text-colors, dark), primary), .16);
+    }
+}
+
+@mixin lx-icon-button--light_() {
+    color: map-get(map-get($lx-theme-text-colors, light), primary);
+
+    &:disabled {
+        color: map-get(map-get($lx-theme-text-colors, light), disabled);
+    }
+
+    &:hover:before {
+        background-color: rgba(map-get(map-get($lx-theme-text-colors, light), primary), .08);
+    }
+
+    &:focus:before {
+        background-color: rgba(map-get(map-get($lx-theme-text-colors, light), primary), .24);
+    }
+
+    #{$lx-ripple-identifier} {
+        background-color: rgba(map-get(map-get($lx-theme-text-colors, light), primary), .32);
+    }
+}

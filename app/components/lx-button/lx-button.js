@@ -7,7 +7,7 @@
         function getTemplate(el, attrs) {
             var buttonType = angular.isDefined(attrs.lxType) ?  attrs.lxType : 'text';
             var buttonTheme = angular.isDefined(attrs.lxTheme) ? attrs.lxTheme : 'primary';
-            var buttonClass = 'lx-button lx-button--' + buttonType + ' lx-button--'+ buttonTheme;
+            var buttonClass = 'lx-button lx-button--' + buttonType + ' lx-button--' + buttonTheme;
 
             if (isAnchor(attrs)) {
                 return '<a class="' + buttonClass + '" lx-ripple ng-transclude></a>';

@@ -1,0 +1,13 @@
+@import "./mixins";
+
+.lx-icon-button {
+    @include lx-icon-button-base_;
+}
+
+.lx-icon-button--dark {
+    @include lx-icon-button--dark_;
+}
+
+.lx-icon-button--light {
+    @include lx-icon-button--light_;
+}

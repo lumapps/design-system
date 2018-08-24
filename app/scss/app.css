@@ -8382,6 +8382,7 @@ html {
   border-radius: 2px;
   border: none;
   outline: none;
+  text-decoration: none;
   line-height: inherit;
   user-select: none;
   -webkit-appearance: none;
@@ -8456,4 +8457,56 @@ html {
   .lx-button--contained.lx-button--secondary:focus:before {
     background-color: rgba(255, 255, 255, 0.24); }
   .lx-button--contained.lx-button--secondary .lx-ripple {
+    background-color: rgba(255, 255, 255, 0.32); }
+
+.lx-icon-button {
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  text-decoration: none;
+  line-height: inherit;
+  user-select: none;
+  -webkit-appearance: none;
+  overflow: hidden;
+  vertical-align: middle; }
+  .lx-icon-button::-moz-focus-inner {
+    padding: 0;
+    border: 0; }
+  .lx-icon-button:active {
+    outline: none; }
+  .lx-icon-button:hover {
+    cursor: pointer; }
+  .lx-icon-button:disabled {
+    cursor: default;
+    pointer-events: none; }
+
+.lx-icon-button--dark {
+  color: rgba(0, 0, 0, 0.87); }
+  .lx-icon-button--dark:disabled {
+    color: rgba(0, 0, 0, 0.38); }
+  .lx-icon-button--dark:hover:before {
+    background-color: rgba(0, 0, 0, 0.04); }
+  .lx-icon-button--dark:focus:before {
+    background-color: rgba(0, 0, 0, 0.12); }
+  .lx-icon-button--dark .lx-ripple {
+    background-color: rgba(0, 0, 0, 0.16); }
+
+.lx-icon-button--light {
+  color: white; }
+  .lx-icon-button--light:disabled {
+    color: rgba(255, 255, 255, 0.5); }
+  .lx-icon-button--light:hover:before {
+    background-color: rgba(255, 255, 255, 0.08); }
+  .lx-icon-button--light:focus:before {
+    background-color: rgba(255, 255, 255, 0.24); }
+  .lx-icon-button--light .lx-ripple {
     background-color: rgba(255, 255, 255, 0.32); }
