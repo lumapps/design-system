@@ -3,7 +3,7 @@
 @mixin lx-icon-button-size($width, $height: $width, $padding: max($width, $height)/2) {
     width: $width + $padding * 2;
     height: $height + $padding * 2;
-    font-size: max($width, $height);
+    font-size: lx-typography-to-rem(max($width, $height));
 }
 
 @mixin lx-icon-button-base() {

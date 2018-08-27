@@ -43,7 +43,7 @@
 
 @mixin lx-button__icon() {
     margin-right: $lx-base-spacing-unit;
-    font-size: lx-typography-to-rem_(18px);
+    font-size: lx-typography-to-rem(18px);
 }
 
 @mixin lx-button__icon-contained() {
