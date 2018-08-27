@@ -1,16 +1,16 @@
 @import "./mixins";
 
 .lx-button {
-    @include lx-button-base_;
+    @include lx-button-base;
 
     .lx-button__icon {
-        @include lx-button__icon_;
+        @include lx-button__icon;
     }
 }
 
 .lx-button--contained {
     .lx-button__icon {
-        @include lx-button__icon-contained_;
+        @include lx-button__icon-contained;
     }
 }
 

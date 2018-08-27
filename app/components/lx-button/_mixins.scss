@@ -1,6 +1,6 @@
 @import "./variables";
 
-@mixin lx-button-base_() {
+@mixin lx-button-base() {
     @include lx-typography(button);
 
     display: inline-flex;
@@ -35,50 +35,46 @@
     }
 
     &:disabled {
+        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
         cursor: default;
         pointer-events: none;
     }
 }
 
-@mixin lx-button__icon_() {
+@mixin lx-button__icon() {
     margin-right: $lx-base-spacing-unit;
     font-size: lx-typography-to-rem_(18px);
 }
 
-@mixin lx-button__icon-contained_() {
+@mixin lx-button__icon-contained() {
     margin-left: -($lx-base-spacing-unit / 2);
 }
 
 @mixin lx-button--text($theme) {
     padding: 0 $lx-button-text-horizontal-padding;
     background-color: transparent;
-    color: map-get($lx-theme-property-values, $theme);
-
-    &:disabled {
-        color: map-get(map-get($lx-theme-text-colors, dark), disabled);
-    }
+    color: map-get($lx-theme-colors, $theme);
 
     &:hover:before {
-        background-color: rgba(map-get($lx-theme-property-values, $theme), .04);
+        background-color: rgba(map-get($lx-theme-colors, $theme), .04);
     }
 
     &:focus:before {
-        background-color: rgba(map-get($lx-theme-property-values, $theme), .12);
+        background-color: rgba(map-get($lx-theme-colors, $theme), .12);
     }
 
     #{$lx-ripple-identifier} {
-        background-color: rgba(map-get($lx-theme-property-values, $theme), .16);
+        background-color: rgba(map-get($lx-theme-colors, $theme), .16);
     }
 }
 
 @mixin lx-button--contained($theme) {
     padding: 0 $lx-button-contained-horizontal-padding;
-    background-color: map-get($lx-theme-property-values, $theme);
-    color: map-get($lx-theme-property-values, #{on-}$theme);
+    background-color: map-get($lx-theme-colors, $theme);
+    color: map-get($lx-theme-colors, #{on-}$theme);
 
     &:disabled {
-        color: map-get(map-get($lx-theme-text-colors, dark), disabled);
-        background-color: rgba(map-get($lx-theme-property-values, on-surface), .12);
+        background-color: rgba(#000, .12);
     }
 
     &:hover:before {

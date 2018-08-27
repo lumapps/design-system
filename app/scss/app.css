@@ -8316,10 +8316,10 @@
     transform: rotate(359deg); } }
 
 html {
-  box-sizing: border-box;
   font-family: Roboto, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
   font-size: 1em;
   line-height: 1.5; }
 
@@ -8396,11 +8396,12 @@ html {
   .lx-button:hover {
     cursor: pointer; }
   .lx-button:disabled {
+    color: rgba(0, 0, 0, 0.38);
     cursor: default;
     pointer-events: none; }
   .lx-button .lx-button__icon {
     margin-right: 8px;
-    font-size: 1.125rem; }
+    font-size: lx-typography-to-rem_(18px); }
 
 .lx-button--contained .lx-button__icon {
   margin-left: -4px; }
@@ -8409,8 +8410,6 @@ html {
   padding: 0 8px;
   background-color: transparent;
   color: #6200ee; }
-  .lx-button--text.lx-button--primary:disabled {
-    color: rgba(0, 0, 0, 0.38); }
   .lx-button--text.lx-button--primary:hover:before {
     background-color: rgba(98, 0, 238, 0.04); }
   .lx-button--text.lx-button--primary:focus:before {
@@ -8422,8 +8421,6 @@ html {
   padding: 0 8px;
   background-color: transparent;
   color: #018786; }
-  .lx-button--text.lx-button--secondary:disabled {
-    color: rgba(0, 0, 0, 0.38); }
   .lx-button--text.lx-button--secondary:hover:before {
     background-color: rgba(1, 135, 134, 0.04); }
   .lx-button--text.lx-button--secondary:focus:before {
@@ -8436,7 +8433,6 @@ html {
   background-color: #6200ee;
   color: #fff; }
   .lx-button--contained.lx-button--primary:disabled {
-    color: rgba(0, 0, 0, 0.38);
     background-color: rgba(0, 0, 0, 0.12); }
   .lx-button--contained.lx-button--primary:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
@@ -8450,7 +8446,6 @@ html {
   background-color: #018786;
   color: #fff; }
   .lx-button--contained.lx-button--secondary:disabled {
-    color: rgba(0, 0, 0, 0.38);
     background-color: rgba(0, 0, 0, 0.12); }
   .lx-button--contained.lx-button--secondary:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
@@ -8490,7 +8485,7 @@ html {
     pointer-events: none; }
 
 .lx-icon-button--dark {
-  color: rgba(0, 0, 0, 0.87); }
+  color: #000; }
   .lx-icon-button--dark:disabled {
     color: rgba(0, 0, 0, 0.38); }
   .lx-icon-button--dark:hover:before {
@@ -8501,9 +8496,9 @@ html {
     background-color: rgba(0, 0, 0, 0.16); }
 
 .lx-icon-button--light {
-  color: white; }
+  color: #fff; }
   .lx-icon-button--light:disabled {
-    color: rgba(255, 255, 255, 0.5); }
+    color: rgba(255, 255, 255, 0.38); }
   .lx-icon-button--light:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
   .lx-icon-button--light:focus:before {

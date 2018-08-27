@@ -1,35 +1,35 @@
 @import "./functions";
 
-@mixin lx-typography-base_() {
+@mixin lx-typography-base() {
     font-family: $lx-typography-font-family;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
 
 @mixin lx-typography($style) {
-    @include lx-typography-base_;
+    @include lx-typography-base;
 
     @if $style == 'headline1' {
-        font-size: lx-typography-to-rem_(96px);
-        line-height: lx-typography-to-rem_(96px);
+        font-size: lx-typography-to-rem(96px);
+        line-height: lx-typography-to-rem(96px);
         font-weight: 300;
-        letter-spacing: lx-typography-get-letter-spacing_(-1.5, 96);
+        letter-spacing: lx-typography-get-letter-spacing(-1.5, 96);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'headline2' {
-        font-size: lx-typography-to-rem_(60px);
-        line-height: lx-typography-to-rem_(60px);
+        font-size: lx-typography-to-rem(60px);
+        line-height: lx-typography-to-rem(60px);
         font-weight: 300;
-        letter-spacing: lx-typography-get-letter-spacing_(-.5, 60);
+        letter-spacing: lx-typography-get-letter-spacing(-.5, 60);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'headline3' {
-        font-size: lx-typography-to-rem_(48px);
-        line-height: lx-typography-to-rem_(50px);
+        font-size: lx-typography-to-rem(48px);
+        line-height: lx-typography-to-rem(50px);
         font-weight: 400;
         letter-spacing: normal;
         text-decoration: inherit;
@@ -37,17 +37,17 @@
     }
 
     @if $style == 'headline4' {
-        font-size: lx-typography-to-rem_(34px);
-        line-height: lx-typography-to-rem_(40px);
+        font-size: lx-typography-to-rem(34px);
+        line-height: lx-typography-to-rem(40px);
         font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing_(.25, 34);
+        letter-spacing: lx-typography-get-letter-spacing(.25, 34);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'headline5' {
-        font-size: lx-typography-to-rem_(24px);
-        line-height: lx-typography-to-rem_(32px);
+        font-size: lx-typography-to-rem(24px);
+        line-height: lx-typography-to-rem(32px);
         font-weight: 400;
         letter-spacing: normal;
         text-decoration: inherit;
@@ -55,73 +55,73 @@
     }
 
     @if $style == 'headline6' {
-        font-size: lx-typography-to-rem_(20px);
-        line-height: lx-typography-to-rem_(32px);
+        font-size: lx-typography-to-rem(20px);
+        line-height: lx-typography-to-rem(32px);
         font-weight: 500;
-        letter-spacing: lx-typography-get-letter-spacing_(.15, 20);
+        letter-spacing: lx-typography-get-letter-spacing(.15, 20);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'subtitle1' {
-        font-size: lx-typography-to-rem_(16px);
-        line-height: lx-typography-to-rem_(28px);
+        font-size: lx-typography-to-rem(16px);
+        line-height: lx-typography-to-rem(28px);
         font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing_(.15, 16);
+        letter-spacing: lx-typography-get-letter-spacing(.15, 16);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'subtitle2' {
-        font-size: lx-typography-to-rem_(14px);
-        line-height: lx-typography-to-rem_(22px);
+        font-size: lx-typography-to-rem(14px);
+        line-height: lx-typography-to-rem(22px);
         font-weight: 500;
-        letter-spacing: lx-typography-get-letter-spacing_(.1, 14);
+        letter-spacing: lx-typography-get-letter-spacing(.1, 14);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'body1' {
-        font-size: lx-typography-to-rem_(16px);
-        line-height: lx-typography-to-rem_(24px);
+        font-size: lx-typography-to-rem(16px);
+        line-height: lx-typography-to-rem(24px);
         font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing_(.5, 16);
+        letter-spacing: lx-typography-get-letter-spacing(.5, 16);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'body2' {
-        font-size: lx-typography-to-rem_(14px);
-        line-height: lx-typography-to-rem_(20px);
+        font-size: lx-typography-to-rem(14px);
+        line-height: lx-typography-to-rem(20px);
         font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing_(.25, 14);
+        letter-spacing: lx-typography-get-letter-spacing(.25, 14);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'button' {
-        font-size: lx-typography-to-rem_(14px);
-        line-height: lx-typography-to-rem_(36px);
+        font-size: lx-typography-to-rem(14px);
+        line-height: lx-typography-to-rem(36px);
         font-weight: 500;
-        letter-spacing: lx-typography-get-letter-spacing_(.75, 14);
+        letter-spacing: lx-typography-get-letter-spacing(.75, 14);
         text-decoration: none;
         text-transform: uppercase;
     }
 
     @if $style == 'caption' {
-        font-size: lx-typography-to-rem_(12px);
-        line-height: lx-typography-to-rem_(20px);
+        font-size: lx-typography-to-rem(12px);
+        line-height: lx-typography-to-rem(20px);
         font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing_(.4, 12);
+        letter-spacing: lx-typography-get-letter-spacing(.4, 12);
         text-decoration: inherit;
         text-transform: inherit;
     }
 
     @if $style == 'overline' {
-        font-size: lx-typography-to-rem_(12px);
-        line-height: lx-typography-to-rem_(32px);
+        font-size: lx-typography-to-rem(12px);
+        line-height: lx-typography-to-rem(32px);
         font-weight: 500;
-        letter-spacing: lx-typography-get-letter-spacing_(1.5, 12);
+        letter-spacing: lx-typography-get-letter-spacing(1.5, 12);
         text-decoration: none;
         text-transform: uppercase;
     }

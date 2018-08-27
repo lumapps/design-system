@@ -1,8 +1,8 @@
-@function lx-typography-to-rem_($size) {
+@function lx-typography-to-rem($size) {
     $remSize: $size / $lx-typography-font-size;
     @return #{$remSize}rem;
 }
 
-@function lx-typography-get-letter-spacing_($tracking, $font-size) {
+@function lx-typography-get-letter-spacing($tracking, $font-size) {
     @return $tracking / $font-size * 1em;
 }

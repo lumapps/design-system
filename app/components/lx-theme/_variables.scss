@@ -1,38 +1,12 @@
-$lx-theme-primary: #6200ee !default;
-$lx-theme-on-primary: #fff !default;
-$lx-theme-secondary: #018786 !default;
-$lx-theme-on-secondary: #fff !default;
-$lx-theme-background: #fff !default;
-$lx-theme-on-background: #000 !default;
-$lx-theme-surface: #fff !default;
-$lx-theme-on-surface: #000 !default;
-$lx-theme-error: #c51162 !default;
-$lx-theme-on-error: #fff !default;
-
-$lx-theme-text-colors: (
-    dark: (
-        primary: rgba(black, .87),
-        secondary: rgba(black, .54),
-        hint: rgba(black, .38),
-        disabled: rgba(black, .38),
-        icon: rgba(black, .38)
-    ),
-    light: (
-        primary: white,
-        secondary: rgba(white, .7),
-        hint: rgba(white, .5),
-        disabled: rgba(white, .5),
-        icon: rgba(white, .5)
-    )
+$lx-theme-colors: (
+    primary: #6200ee,
+    on-primary: #fff,
+    secondary: #018786,
+    on-secondary: #fff
 ) !default;
 
-$lx-theme-property-values: (
-    primary: $lx-theme-primary,
-    on-primary: $lx-theme-on-primary,
-    secondary: $lx-theme-secondary,
-    on-secondary: $lx-theme-on-secondary,
-    background: $lx-theme-background,
-    on-background: $lx-theme-on-background,
-    surface: $lx-theme-surface,
-    on-surface: $lx-theme-on-surface
-)
+$lx-theme-text-opacities: (
+    high: .87,
+    medium: .60,
+    disabled: .38
+) !default;

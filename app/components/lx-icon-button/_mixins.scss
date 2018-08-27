@@ -6,7 +6,7 @@
     font-size: max($width, $height);
 }
 
-@mixin lx-icon-button-base_() {
+@mixin lx-icon-button-base() {
     @include lx-icon-button-size($lx-icon-button-size);
 
     display: inline-flex;
@@ -45,42 +45,42 @@
     }
 }
 
-@mixin lx-icon-button--dark_() {
-    color: map-get(map-get($lx-theme-text-colors, dark), primary);
+@mixin lx-icon-button--dark() {
+    color: #000;
 
     &:disabled {
-        color: map-get(map-get($lx-theme-text-colors, dark), disabled);
+        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
     }
 
     &:hover:before {
-        background-color: rgba(map-get(map-get($lx-theme-text-colors, dark), primary), .04);
+        background-color: rgba(#000, .04);
     }
 
     &:focus:before {
-        background-color: rgba(map-get(map-get($lx-theme-text-colors, dark), primary), .12);
+        background-color: rgba(#000, .12);
     }
 
     #{$lx-ripple-identifier} {
-        background-color: rgba(map-get(map-get($lx-theme-text-colors, dark), primary), .16);
+        background-color: rgba(#000, .16);
     }
 }
 
-@mixin lx-icon-button--light_() {
-    color: map-get(map-get($lx-theme-text-colors, light), primary);
+@mixin lx-icon-button--light() {
+    color: #fff;
 
     &:disabled {
-        color: map-get(map-get($lx-theme-text-colors, light), disabled);
+        color: rgba(#fff, map-get($lx-theme-text-opacities, disabled));
     }
 
     &:hover:before {
-        background-color: rgba(map-get(map-get($lx-theme-text-colors, light), primary), .08);
+        background-color: rgba(#fff, .08);
     }
 
     &:focus:before {
-        background-color: rgba(map-get(map-get($lx-theme-text-colors, light), primary), .24);
+        background-color: rgba(#fff, .24);
     }
 
     #{$lx-ripple-identifier} {
-        background-color: rgba(map-get(map-get($lx-theme-text-colors, light), primary), .32);
+        background-color: rgba(#fff, .32);
     }
 }
