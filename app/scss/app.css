@@ -8326,16 +8326,27 @@ html {
 *, *:before, *:after {
   box-sizing: inherit; }
 
-@keyframes lx-ripple {
+@keyframes lx-ripple-from-mouse {
   0% {
     opacity: 1;
     transform: scale(0); }
-  50% {
+  60% {
     opacity: 1;
     transform: scale(2.5); }
   100% {
     opacity: 0;
     transform: scale(2.5); } }
+
+@keyframes lx-ripple-from-center {
+  0% {
+    opacity: 1;
+    transform: scale(0); }
+  60% {
+    opacity: 1;
+    transform: scale(1); }
+  100% {
+    opacity: 0;
+    transform: scale(1); } }
 
 .has-lx-ripple {
   position: relative;
@@ -8359,8 +8370,13 @@ html {
   transform: scale(0); }
 
 .lx-ripple--is-animated {
-  animation-name: lx-ripple;
-  animation-duration: 0.65s; }
+  animation-duration: 0.5s; }
+
+.lx-ripple--from-mouse.lx-ripple--is-animated {
+  animation-name: lx-ripple-from-mouse; }
+
+.lx-ripple--from-center.lx-ripple--is-animated {
+  animation-name: lx-ripple-from-center; }
 
 .lx-button {
   font-family: Roboto, sans-serif;
@@ -8379,7 +8395,7 @@ html {
   box-sizing: border-box;
   min-width: 64px;
   height: 36px;
-  border-radius: 2px;
+  border-radius: 4px;
   border: none;
   outline: none;
   text-decoration: none;
@@ -8432,27 +8448,106 @@ html {
   padding: 0 16px;
   background-color: #6200ee;
   color: #fff; }
-  .lx-button--contained.lx-button--primary:disabled {
-    background-color: rgba(0, 0, 0, 0.12); }
   .lx-button--contained.lx-button--primary:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
   .lx-button--contained.lx-button--primary:focus:before {
     background-color: rgba(255, 255, 255, 0.24); }
   .lx-button--contained.lx-button--primary .lx-ripple {
     background-color: rgba(255, 255, 255, 0.32); }
+  .lx-button--contained.lx-button--primary:disabled {
+    background-color: rgba(0, 0, 0, 0.12); }
 
 .lx-button--contained.lx-button--secondary {
   padding: 0 16px;
   background-color: #018786;
   color: #fff; }
-  .lx-button--contained.lx-button--secondary:disabled {
-    background-color: rgba(0, 0, 0, 0.12); }
   .lx-button--contained.lx-button--secondary:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
   .lx-button--contained.lx-button--secondary:focus:before {
     background-color: rgba(255, 255, 255, 0.24); }
   .lx-button--contained.lx-button--secondary .lx-ripple {
     background-color: rgba(255, 255, 255, 0.32); }
+  .lx-button--contained.lx-button--secondary:disabled {
+    background-color: rgba(0, 0, 0, 0.12); }
+
+.lx-checkbox {
+  display: flex; }
+
+.lx-checkbox__input {
+  position: relative;
+  width: 40px;
+  height: 40px; }
+
+.lx-checkbox__native-control {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer; }
+  .lx-checkbox__native-control:not(:checked) + .lx-checkbox__background:after {
+    content: "\F131";
+    color: rgba(0, 0, 0, 0.54); }
+  .lx-checkbox__native-control:not(:checked):hover + .lx-checkbox__background:before {
+    background-color: rgba(0, 0, 0, 0.04); }
+  .lx-checkbox__native-control:not(:checked):focus + .lx-checkbox__background:before {
+    background-color: rgba(0, 0, 0, 0.12); }
+  .lx-checkbox__native-control:not(:checked) + .lx-checkbox__background .lx-ripple {
+    background-color: rgba(0, 0, 0, 0.16); }
+  .lx-checkbox__native-control:checked + .lx-checkbox__background:after {
+    content: "\F132";
+    color: #018786; }
+  .lx-checkbox__native-control:checked:hover + .lx-checkbox__background:before {
+    background-color: rgba(1, 135, 134, 0.04); }
+  .lx-checkbox__native-control:checked:focus + .lx-checkbox__background:before {
+    background-color: rgba(1, 135, 134, 0.12); }
+  .lx-checkbox__native-control:checked + .lx-checkbox__background .lx-ripple {
+    background-color: rgba(1, 135, 134, 0.16); }
+  .lx-checkbox__native-control:disabled {
+    cursor: default;
+    pointer-events: none; }
+    .lx-checkbox__native-control:disabled + .lx-checkbox__background:after {
+      color: rgba(0, 0, 0, 0.38); }
+
+.lx-checkbox__background {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; }
+  .lx-checkbox__background:after {
+    display: inline-block;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: inherit;
+    text-rendering: auto;
+    line-height: inherit;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 1.375rem; }
+
+.lx-checkbox__content {
+  margin-left: 8px; }
+
+.lx-checkbox__label {
+  display: block;
+  line-height: 40px;
+  color: rgba(0, 0, 0, 0.87); }
+  .lx-checkbox--is-disabled .lx-checkbox__label {
+    color: rgba(0, 0, 0, 0.38);
+    pointer-events: none; }
+
+.lx-checkbox__help {
+  display: block;
+  color: rgba(0, 0, 0, 0.54); }
+  .lx-checkbox--is-disabled .lx-checkbox__help {
+    color: rgba(0, 0, 0, 0.38); }
 
 .lx-icon-button {
   width: 48px;
@@ -8486,22 +8581,22 @@ html {
 
 .lx-icon-button--dark {
   color: #000; }
-  .lx-icon-button--dark:disabled {
-    color: rgba(0, 0, 0, 0.38); }
   .lx-icon-button--dark:hover:before {
     background-color: rgba(0, 0, 0, 0.04); }
   .lx-icon-button--dark:focus:before {
     background-color: rgba(0, 0, 0, 0.12); }
   .lx-icon-button--dark .lx-ripple {
     background-color: rgba(0, 0, 0, 0.16); }
+  .lx-icon-button--dark:disabled {
+    color: rgba(0, 0, 0, 0.38); }
 
 .lx-icon-button--light {
   color: #fff; }
-  .lx-icon-button--light:disabled {
-    color: rgba(255, 255, 255, 0.38); }
   .lx-icon-button--light:hover:before {
     background-color: rgba(255, 255, 255, 0.08); }
   .lx-icon-button--light:focus:before {
     background-color: rgba(255, 255, 255, 0.24); }
   .lx-icon-button--light .lx-ripple {
     background-color: rgba(255, 255, 255, 0.32); }
+  .lx-icon-button--light:disabled {
+    color: rgba(255, 255, 255, 0.38); }

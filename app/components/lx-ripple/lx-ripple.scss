@@ -27,6 +27,14 @@
 }
 
 .lx-ripple--is-animated {
-    animation-name: lx-ripple;
-    animation-duration: 0.65s;
+    animation-duration: 0.5s;
+    // animation-timing-function: ease-out;
+}
+
+.lx-ripple--from-mouse.lx-ripple--is-animated {
+    animation-name: lx-ripple-from-mouse;
+}
+
+.lx-ripple--from-center.lx-ripple--is-animated {
+    animation-name: lx-ripple-from-center;
 }

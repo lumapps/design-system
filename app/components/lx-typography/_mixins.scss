@@ -9,7 +9,7 @@
 @mixin lx-typography($style) {
     @include lx-typography-base;
 
-    @if $style == 'headline1' {
+    @if $style == headline1 {
         font-size: lx-typography-to-rem(96px);
         line-height: lx-typography-to-rem(96px);
         font-weight: 300;
@@ -18,7 +18,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'headline2' {
+    @if $style == headline2 {
         font-size: lx-typography-to-rem(60px);
         line-height: lx-typography-to-rem(60px);
         font-weight: 300;
@@ -27,7 +27,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'headline3' {
+    @if $style == headline3 {
         font-size: lx-typography-to-rem(48px);
         line-height: lx-typography-to-rem(50px);
         font-weight: 400;
@@ -36,7 +36,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'headline4' {
+    @if $style == headline4 {
         font-size: lx-typography-to-rem(34px);
         line-height: lx-typography-to-rem(40px);
         font-weight: 400;
@@ -45,7 +45,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'headline5' {
+    @if $style == headline5 {
         font-size: lx-typography-to-rem(24px);
         line-height: lx-typography-to-rem(32px);
         font-weight: 400;
@@ -54,7 +54,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'headline6' {
+    @if $style == headline6 {
         font-size: lx-typography-to-rem(20px);
         line-height: lx-typography-to-rem(32px);
         font-weight: 500;
@@ -63,7 +63,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'subtitle1' {
+    @if $style == subtitle1 {
         font-size: lx-typography-to-rem(16px);
         line-height: lx-typography-to-rem(28px);
         font-weight: 400;
@@ -72,7 +72,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'subtitle2' {
+    @if $style == subtitle2 {
         font-size: lx-typography-to-rem(14px);
         line-height: lx-typography-to-rem(22px);
         font-weight: 500;
@@ -81,7 +81,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'body1' {
+    @if $style == body1 {
         font-size: lx-typography-to-rem(16px);
         line-height: lx-typography-to-rem(24px);
         font-weight: 400;
@@ -90,7 +90,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'body2' {
+    @if $style == body2 {
         font-size: lx-typography-to-rem(14px);
         line-height: lx-typography-to-rem(20px);
         font-weight: 400;
@@ -99,7 +99,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'button' {
+    @if $style == button {
         font-size: lx-typography-to-rem(14px);
         line-height: lx-typography-to-rem(36px);
         font-weight: 500;
@@ -108,7 +108,7 @@
         text-transform: uppercase;
     }
 
-    @if $style == 'caption' {
+    @if $style == caption {
         font-size: lx-typography-to-rem(12px);
         line-height: lx-typography-to-rem(20px);
         font-weight: 400;
@@ -117,7 +117,7 @@
         text-transform: inherit;
     }
 
-    @if $style == 'overline' {
+    @if $style == overline {
         font-size: lx-typography-to-rem(12px);
         line-height: lx-typography-to-rem(32px);
         font-weight: 500;

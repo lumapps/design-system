@@ -3,16 +3,18 @@
 
     /////////////////////////////
 
-    function lxIconButtonDirective() {
+    lxIconButtonDirective.$inject = ['LxRipple'];
+
+    function lxIconButtonDirective(LxRipple) {
         function getTemplate(el, attrs) {
             var buttonTheme = angular.isDefined(attrs.lxTheme) ? attrs.lxTheme : 'dark';
-            var buttonClass = 'lx-icon-button lx-icon-button--' + buttonTheme;
+            var buttonClass = 'has-lx-ripple lx-icon-button lx-icon-button--' + buttonTheme;
             var iconClass = 'lx-icon-button__icon mdi mdi-' + attrs.lxIcon;
 
             if (isAnchor(attrs)) {
-                return '<a class="' + buttonClass + '" lx-ripple><i class="' + iconClass + '"></i></a>';
+                return '<a class="' + buttonClass + '"><i class="' + iconClass + '"></i></a>';
             } else {
-                return '<button class="' + buttonClass + '" lx-ripple><i class="' + iconClass + '"></i></button>';
+                return '<button class="' + buttonClass + '"><i class="' + iconClass + '"></i></button>';
             }
         }
 
@@ -23,7 +25,14 @@
                 angular.isDefined(attrs.uiSref);
         }
 
+        function link(scope, el) {
+            el.on('click', function onButtonClick(evt) {
+                LxRipple.launch(el, 'mouse', evt);
+            });
+        }
+
         return {
+            link: link,
             replace: true,
             restrict: 'E',
             template: getTemplate,

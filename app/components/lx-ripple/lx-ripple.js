@@ -3,52 +3,65 @@
 
     /////////////////////////////
 
-    lxRippleDirective.$inject = ['$timeout'];
+    LxRippleService.$inject = ['$timeout'];
 
-    function lxRippleDirective($timeout) {
-        function link(scope, el) {
-            var timer;
+    function LxRippleService($timeout) {
+        var service = this;
 
-            el.addClass('has-lx-ripple').on('mousedown', function(e) {
-                var ripple = angular.element('<span/>', {
-                    class: 'lx-ripple'
-                });
+        /////////////////////////////
+        //                         //
+        //     Public functions    //
+        //                         //
+        /////////////////////////////
 
-                el.prepend(ripple);
+        /**
+         * Launch the ripple.
+         *
+         * @param {element} el   The element to prepend the ripple.
+         * @param {string}  from Wether to start the animation from the center or the mouse position.
+         * @param {event}   evt  The click event.
+         */
+        function launch(el, from, evt) {
+            var ripple = angular.element('<span/>', {
+                class: 'lx-ripple'
+            });
 
-                var diameter = Math.max(el.outerWidth(), el.outerHeight());
+            el.prepend(ripple);
 
-                ripple.css( {
-                    height: diameter,
-                    width: diameter
-                });
+            var diameter = Math.max(el.outerWidth(), el.outerHeight());
 
-                var x = e.pageX - el.offset().left - ripple.width() / 2;
-                var y = e.pageY - el.offset().top - ripple.height() / 2;
+            ripple.css( {
+                height: diameter,
+                width: diameter
+            });
+
+            if (from === 'mouse') {
+                var x = evt.pageX - el.offset().left - ripple.width() / 2;
+                var y = evt.pageY - el.offset().top - ripple.height() / 2;
 
                 ripple.css({
                     top: y + 'px',
                     left: x + 'px'
-                }).addClass('lx-ripple--is-animated');
+                });
 
-                timer = $timeout(function() {
-                    ripple.remove();
-                }, 650);
-            });
+                ripple.addClass('lx-ripple--from-mouse');
+            } else {
+                ripple.addClass('lx-ripple--from-center');
+            }
 
-            scope.$on('$destroy', function() {
-                $timeout.cancel(timer);
-                el.off();
-            });
+            ripple.addClass('lx-ripple--is-animated');
+
+            $timeout(function removeRipple() {
+                ripple.remove();
+            }, 500);
         }
 
-        return {
-            link: link,
-            restrict: 'A',
-        };
+        /////////////////////////////
+
+        service.launch = launch;
     }
 
     /////////////////////////////
 
-    angular.module('lumx.ripple').directive('lxRipple', lxRippleDirective);
+    angular.module('lumx.ripple').service('LxRipple', LxRippleService);
 })();

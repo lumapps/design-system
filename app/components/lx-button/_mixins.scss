@@ -10,7 +10,7 @@
     box-sizing: border-box;
     min-width: 64px;
     height: $lx-button-height;
-    border-radius: 2px;
+    border-radius: 4px;
     border: none;
     outline: none;
     text-decoration: none;
@@ -56,15 +56,15 @@
     color: map-get($lx-theme-colors, $theme);
 
     &:hover:before {
-        background-color: rgba(map-get($lx-theme-colors, $theme), .04);
+        background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, hover));
     }
 
     &:focus:before {
-        background-color: rgba(map-get($lx-theme-colors, $theme), .12);
+        background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, focus));
     }
 
     #{$lx-ripple-identifier} {
-        background-color: rgba(map-get($lx-theme-colors, $theme), .16);
+        background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, ripple));
     }
 }
 
@@ -73,19 +73,19 @@
     background-color: map-get($lx-theme-colors, $theme);
     color: map-get($lx-theme-colors, #{on-}$theme);
 
-    &:disabled {
-        background-color: rgba(#000, .12);
-    }
-
     &:hover:before {
-        background-color: rgba(#fff, .08);
+        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, hover));
     }
 
     &:focus:before {
-        background-color: rgba(#fff, .24);
+        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, focus));
     }
 
     #{$lx-ripple-identifier} {
-        background-color: rgba(#fff, .32);
+        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, ripple));
+    }
+
+    &:disabled {
+        background-color: rgba(#000, .12);
     }
 }

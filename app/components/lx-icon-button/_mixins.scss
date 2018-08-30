@@ -48,39 +48,39 @@
 @mixin lx-icon-button--dark() {
     color: #000;
 
-    &:disabled {
-        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
-    }
-
     &:hover:before {
-        background-color: rgba(#000, .04);
+        background-color: rgba(#000, map-get($lx-ripple-light-opacities, hover));
     }
 
     &:focus:before {
-        background-color: rgba(#000, .12);
+        background-color: rgba(#000, map-get($lx-ripple-light-opacities, focus));
     }
 
     #{$lx-ripple-identifier} {
-        background-color: rgba(#000, .16);
+        background-color: rgba(#000, map-get($lx-ripple-light-opacities, ripple));
+    }
+
+    &:disabled {
+        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
     }
 }
 
 @mixin lx-icon-button--light() {
     color: #fff;
 
-    &:disabled {
-        color: rgba(#fff, map-get($lx-theme-text-opacities, disabled));
-    }
-
     &:hover:before {
-        background-color: rgba(#fff, .08);
+        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, hover));
     }
 
     &:focus:before {
-        background-color: rgba(#fff, .24);
+        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, focus));
     }
 
     #{$lx-ripple-identifier} {
-        background-color: rgba(#fff, .32);
+        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, ripple));
+    }
+
+    &:disabled {
+        color: rgba(#fff, map-get($lx-theme-text-opacities, disabled));
     }
 }

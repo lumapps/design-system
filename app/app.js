@@ -28,14 +28,23 @@
             url: 'button',
             views: {
                 'main@': {
-                    templateUrl: 'demo/lx-button/demo.html'
+                    templateUrl: 'demo/lx-button/demo.html',
+                }
+            }
+        }).state('app.checkbox', {
+            url: 'checkbox',
+            views: {
+                'main@': {
+                    controller: 'DemoCheckboxController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-checkbox/demo.html',
                 }
             }
         }).state('app.icon-button', {
             url: 'icon-button',
             views: {
                 'main@': {
-                    templateUrl: 'demo/lx-icon-button/demo.html'
+                    templateUrl: 'demo/lx-icon-button/demo.html',
                 }
             }
         });

@@ -1,0 +1,20 @@
+<div class="lx-checkbox">
+    <div class="lx-checkbox__input">
+        <input type="checkbox"
+               id="{{ lxCheckbox.checkboxId }}"
+               class="lx-checkbox__native-control"
+               ng-model="lxCheckbox.viewValue"
+               ng-click="lxCheckbox.updateViewValue()">
+
+        <div class="has-lx-ripple lx-checkbox__background"></div>
+    </div>
+
+    <div class="lx-checkbox__content" ng-if="!lxCheckbox.hasChildren">
+        <label for="{{ lxCheckbox.checkboxId }}" class="lx-checkbox__label" ng-transclude></label>
+    </div>
+
+    <div class="lx-checkbox__content" ng-if="lxCheckbox.hasChildren">
+        <label for="{{ lxCheckbox.checkboxId }}" class="lx-checkbox__label" ng-transclude="label"></label>
+        <span class="lx-checkbox__help" ng-transclude="help"></span>
+    </div>
+</div>
