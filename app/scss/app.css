@@ -8475,16 +8475,16 @@ html {
 
 .lx-checkbox__input {
   position: relative;
-  width: 40px;
-  height: 40px; }
+  width: 24px;
+  height: 24px; }
 
 .lx-checkbox__native-control {
-  position: absolute;
+  position: relative;
   z-index: 2;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
+  width: 24px;
+  height: 24px;
   margin: 0;
   padding: 0;
   opacity: 0;
@@ -8514,6 +8514,10 @@ html {
       color: rgba(0, 0, 0, 0.38); }
 
 .lx-checkbox__background {
+  position: absolute;
+  z-index: 1;
+  top: -8px;
+  left: -8px;
   width: 40px;
   height: 40px;
   border-radius: 50%; }
@@ -8533,11 +8537,19 @@ html {
     font-size: 1.375rem; }
 
 .lx-checkbox__content {
-  margin-left: 8px; }
+  margin-left: 16px; }
 
 .lx-checkbox__label {
   display: block;
-  line-height: 40px;
+  font-family: Roboto, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.03125em;
+  text-decoration: inherit;
+  text-transform: inherit;
   color: rgba(0, 0, 0, 0.87); }
   .lx-checkbox--is-disabled .lx-checkbox__label {
     color: rgba(0, 0, 0, 0.38);
@@ -8545,6 +8557,15 @@ html {
 
 .lx-checkbox__help {
   display: block;
+  font-family: Roboto, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.03333em;
+  text-decoration: inherit;
+  text-transform: inherit;
   color: rgba(0, 0, 0, 0.54); }
   .lx-checkbox--is-disabled .lx-checkbox__help {
     color: rgba(0, 0, 0, 0.38); }
