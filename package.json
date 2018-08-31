@@ -9,7 +9,13 @@
     "eslint": "^5.1.0",
     "eslint-plugin-angular": "^3.3.0",
     "gulp": "^3.9.1",
-    "gulp-sass": "^4.0.1"
+    "gulp-sass": "^4.0.1",
+    "postcss": "^7.0.2",
+    "stylelint": "^9.5.0",
+    "stylelint-config-idiomatic-order": "^5.0.0",
+    "stylelint-config-recommended-scss": "^3.2.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-scss": "^3.3.0"
   },
   "scripts": {
     "postinstall": "bower install",
