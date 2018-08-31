@@ -8315,6 +8315,15 @@
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/* ==========================================================================
+   Theme
+   ========================================================================== */
+/* ==========================================================================
+   Base
+   ========================================================================== */
 html {
   font-family: Roboto, sans-serif;
   -moz-osx-font-smoothing: grayscale;
@@ -8323,9 +8332,17 @@ html {
   font-size: 1em;
   line-height: 1.5; }
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
   box-sizing: inherit; }
 
+/* ==========================================================================
+   Icon
+   ========================================================================== */
+/* ==========================================================================
+   Ripple
+   ========================================================================== */
 @keyframes lx-ripple-from-mouse {
   0% {
     opacity: 1;
@@ -8350,25 +8367,27 @@ html {
 
 .has-lx-ripple {
   position: relative;
-  overflow: hidden;
-  z-index: 1; }
-  .has-lx-ripple:before {
-    content: '';
+  z-index: 1;
+  overflow: hidden; }
+  .has-lx-ripple::before {
     position: absolute;
     z-index: -2;
     top: 0;
     right: 0;
     bottom: 0;
-    left: 0; }
+    left: 0;
+    content: ''; }
 
 .lx-ripple {
-  display: block;
   position: absolute;
   z-index: -1;
+  display: block;
   border-radius: 100%;
   pointer-events: none;
   transform: scale(0); }
 
+/* Ripple animation
+   ========================================================================== */
 .lx-ripple--is-animated {
   animation-duration: 0.5s; }
 
@@ -8378,96 +8397,95 @@ html {
 .lx-ripple--from-center.lx-ripple--is-animated {
   animation-name: lx-ripple-from-center; }
 
+/* ==========================================================================
+   Button
+   ========================================================================== */
 .lx-button {
   font-family: Roboto, sans-serif;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-size: 0.875rem;
-  line-height: 2.25rem;
   font-weight: 500;
   letter-spacing: 0.05357em;
+  line-height: 2.25rem;
   text-decoration: none;
   text-transform: uppercase;
-  display: inline-flex;
   position: relative;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
+  display: inline-flex;
+  overflow: hidden;
   min-width: 64px;
   height: 36px;
-  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
   border: none;
+  border-radius: 4px;
+  line-height: inherit;
   outline: none;
   text-decoration: none;
-  line-height: inherit;
   user-select: none;
-  -webkit-appearance: none;
-  overflow: hidden;
   vertical-align: middle; }
-  .lx-button::-moz-focus-inner {
-    padding: 0;
-    border: 0; }
-  .lx-button:active {
-    outline: none; }
   .lx-button:hover {
     cursor: pointer; }
   .lx-button:disabled {
     color: rgba(0, 0, 0, 0.38);
     cursor: default;
     pointer-events: none; }
-  .lx-button .lx-button__icon {
+  .lx-button--text .lx-button__icon {
     margin-right: 8px;
     font-size: 1.125rem; }
+  .lx-button--contained .lx-button__icon {
+    margin-right: 8px;
+    font-size: 1.125rem;
+    margin-left: -4px; }
 
-.lx-button--contained .lx-button__icon {
-  margin-left: -4px; }
-
-.lx-button--text.lx-button--primary {
+/* Button themes
+   ========================================================================== */
+.lx-button--primary.lx-button--text {
   padding: 0 8px;
   background-color: transparent;
   color: #6200ee; }
-  .lx-button--text.lx-button--primary:hover:before {
+  .lx-button--primary.lx-button--text:hover::before {
     background-color: rgba(98, 0, 238, 0.04); }
-  .lx-button--text.lx-button--primary:focus:before {
+  .lx-button--primary.lx-button--text:focus::before {
     background-color: rgba(98, 0, 238, 0.12); }
-  .lx-button--text.lx-button--primary .lx-ripple {
+  .lx-button--primary.lx-button--text .lx-ripple {
     background-color: rgba(98, 0, 238, 0.16); }
 
-.lx-button--text.lx-button--secondary {
-  padding: 0 8px;
-  background-color: transparent;
-  color: #018786; }
-  .lx-button--text.lx-button--secondary:hover:before {
-    background-color: rgba(1, 135, 134, 0.04); }
-  .lx-button--text.lx-button--secondary:focus:before {
-    background-color: rgba(1, 135, 134, 0.12); }
-  .lx-button--text.lx-button--secondary .lx-ripple {
-    background-color: rgba(1, 135, 134, 0.16); }
-
-.lx-button--contained.lx-button--primary {
+.lx-button--primary.lx-button--contained {
   padding: 0 16px;
   background-color: #6200ee;
   color: #fff; }
-  .lx-button--contained.lx-button--primary:hover:before {
+  .lx-button--primary.lx-button--contained:hover::before {
     background-color: rgba(255, 255, 255, 0.08); }
-  .lx-button--contained.lx-button--primary:focus:before {
+  .lx-button--primary.lx-button--contained:focus::before {
     background-color: rgba(255, 255, 255, 0.24); }
-  .lx-button--contained.lx-button--primary .lx-ripple {
+  .lx-button--primary.lx-button--contained .lx-ripple {
     background-color: rgba(255, 255, 255, 0.32); }
-  .lx-button--contained.lx-button--primary:disabled {
+  .lx-button--primary.lx-button--contained:disabled {
     background-color: rgba(0, 0, 0, 0.12); }
 
-.lx-button--contained.lx-button--secondary {
+.lx-button--secondary.lx-button--text {
+  padding: 0 8px;
+  background-color: transparent;
+  color: #018786; }
+  .lx-button--secondary.lx-button--text:hover::before {
+    background-color: rgba(1, 135, 134, 0.04); }
+  .lx-button--secondary.lx-button--text:focus::before {
+    background-color: rgba(1, 135, 134, 0.12); }
+  .lx-button--secondary.lx-button--text .lx-ripple {
+    background-color: rgba(1, 135, 134, 0.16); }
+
+.lx-button--secondary.lx-button--contained {
   padding: 0 16px;
   background-color: #018786;
   color: #fff; }
-  .lx-button--contained.lx-button--secondary:hover:before {
+  .lx-button--secondary.lx-button--contained:hover::before {
     background-color: rgba(255, 255, 255, 0.08); }
-  .lx-button--contained.lx-button--secondary:focus:before {
+  .lx-button--secondary.lx-button--contained:focus::before {
     background-color: rgba(255, 255, 255, 0.24); }
-  .lx-button--contained.lx-button--secondary .lx-ripple {
+  .lx-button--secondary.lx-button--contained .lx-ripple {
     background-color: rgba(255, 255, 255, 0.32); }
-  .lx-button--contained.lx-button--secondary:disabled {
+  .lx-button--secondary.lx-button--contained:disabled {
     background-color: rgba(0, 0, 0, 0.12); }
 
 /* ==========================================================================
@@ -8502,10 +8520,10 @@ html {
       display: inline-block;
       font: normal normal normal 24px/1 "Material Design Icons";
       font-size: inherit;
-      text-rendering: auto;
-      line-height: inherit;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      line-height: inherit;
+      text-rendering: auto;
       display: flex;
       width: 40px;
       height: 40px;
@@ -8519,9 +8537,9 @@ html {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-size: 1rem;
-    line-height: 1.5rem;
     font-weight: 400;
     letter-spacing: 0.03125em;
+    line-height: 1.5rem;
     text-decoration: inherit;
     text-transform: inherit;
     display: block;
@@ -8531,9 +8549,9 @@ html {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-size: 0.75rem;
-    line-height: 1.25rem;
     font-weight: 400;
     letter-spacing: 0.03333em;
+    line-height: 1.25rem;
     text-decoration: inherit;
     text-transform: inherit;
     display: block;
@@ -8583,41 +8601,39 @@ html {
 .lx-checkbox.lx-checkbox--is-disabled .lx-checkbox__help {
   color: rgba(0, 0, 0, 0.38); }
 
+/* ==========================================================================
+   Icon button
+   ========================================================================== */
 .lx-icon-button {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
   width: 48px;
   height: 48px;
-  font-size: 1.5rem;
-  display: inline-flex;
-  position: relative;
   align-items: center;
   justify-content: center;
-  box-sizing: border-box;
-  border-radius: 50%;
   border: none;
   background-color: transparent;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: inherit;
   outline: none;
   text-decoration: none;
-  line-height: inherit;
   user-select: none;
-  -webkit-appearance: none;
-  overflow: hidden;
   vertical-align: middle; }
-  .lx-icon-button::-moz-focus-inner {
-    padding: 0;
-    border: 0; }
-  .lx-icon-button:active {
-    outline: none; }
   .lx-icon-button:hover {
     cursor: pointer; }
   .lx-icon-button:disabled {
     cursor: default;
     pointer-events: none; }
 
+/* Button themes
+   ========================================================================== */
 .lx-icon-button--dark {
   color: #000; }
-  .lx-icon-button--dark:hover:before {
+  .lx-icon-button--dark:hover::before {
     background-color: rgba(0, 0, 0, 0.04); }
-  .lx-icon-button--dark:focus:before {
+  .lx-icon-button--dark:focus::before {
     background-color: rgba(0, 0, 0, 0.12); }
   .lx-icon-button--dark .lx-ripple {
     background-color: rgba(0, 0, 0, 0.16); }
@@ -8626,9 +8642,9 @@ html {
 
 .lx-icon-button--light {
   color: #fff; }
-  .lx-icon-button--light:hover:before {
+  .lx-icon-button--light:hover::before {
     background-color: rgba(255, 255, 255, 0.08); }
-  .lx-icon-button--light:focus:before {
+  .lx-icon-button--light:focus::before {
     background-color: rgba(255, 255, 255, 0.24); }
   .lx-icon-button--light .lx-ripple {
     background-color: rgba(255, 255, 255, 0.32); }

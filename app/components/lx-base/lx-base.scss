@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
 @import "./variables";
 
 html {
@@ -8,6 +12,8 @@ html {
     line-height: $lx-typography-line-height / $lx-typography-font-size;
 }
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
     box-sizing: inherit;
 }

@@ -1,39 +1,23 @@
 @import "./variables";
 
-@mixin lx-icon-button-size($width, $height: $width, $padding: max($width, $height)/2) {
-    width: $width + $padding * 2;
-    height: $height + $padding * 2;
-    font-size: lx-typography-to-rem(max($width, $height));
-}
-
+/// Icon button base mixin to reset native styles and apply global structure.
 @mixin lx-icon-button-base() {
-    @include lx-icon-button-size($lx-icon-button-size);
-
-    display: inline-flex;
     position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    width: $lx-icon-button-size * 2;
+    height: $lx-icon-button-size * 2;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    border-radius: 50%;
     border: none;
     background-color: transparent;
+    border-radius: 50%;
+    font-size: lx-typography-to-rem($lx-icon-button-size);
+    line-height: inherit;
     outline: none;
     text-decoration: none;
-
-    line-height: inherit;
     user-select: none;
-    -webkit-appearance: none;
-    overflow: hidden;
     vertical-align: middle;
-
-    &::-moz-focus-inner {
-        padding: 0;
-        border: 0;
-    }
-
-    &:active {
-        outline: none;
-    }
 
     &:hover {
         cursor: pointer;
@@ -45,42 +29,47 @@
     }
 }
 
-@mixin lx-icon-button--dark() {
-    color: #000;
+/// Icon button theme mixin to style icon button regarding the theme.
+///
+/// @param {String} $theme - The button theme, either dark or light
+@mixin lx-icon-button-theme($theme) {
+    @if $theme == dark {
+        color: #000;
 
-    &:hover:before {
-        background-color: rgba(#000, map-get($lx-ripple-light-opacities, hover));
+        &:hover::before {
+            background-color: rgba(#000, map-get($lx-ripple-light-opacities, hover));
+        }
+
+        &:focus::before {
+            background-color: rgba(#000, map-get($lx-ripple-light-opacities, focus));
+        }
+
+        #{$lx-ripple-identifier} {
+            background-color: rgba(#000, map-get($lx-ripple-light-opacities, ripple));
+        }
+
+        &:disabled {
+            color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
+        }
     }
 
-    &:focus:before {
-        background-color: rgba(#000, map-get($lx-ripple-light-opacities, focus));
-    }
+    @if $theme == light {
+        color: #fff;
 
-    #{$lx-ripple-identifier} {
-        background-color: rgba(#000, map-get($lx-ripple-light-opacities, ripple));
-    }
+        &:hover::before {
+            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, hover));
+        }
 
-    &:disabled {
-        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
-    }
-}
+        &:focus::before {
+            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, focus));
+        }
 
-@mixin lx-icon-button--light() {
-    color: #fff;
+        #{$lx-ripple-identifier} {
+            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, ripple));
+        }
 
-    &:hover:before {
-        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, hover));
-    }
-
-    &:focus:before {
-        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, focus));
-    }
-
-    #{$lx-ripple-identifier} {
-        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, ripple));
-    }
-
-    &:disabled {
-        color: rgba(#fff, map-get($lx-theme-text-opacities, disabled));
+        &:disabled {
+            color: rgba(#fff, map-get($lx-theme-text-opacities, disabled));
+        }
     }
 }

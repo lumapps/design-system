@@ -1,13 +1,13 @@
 $lx-ripple-identifier: '.lx-ripple';
 
 $lx-ripple-light-opacities: (
-    hover: .04,
-    focus: .12,
-    ripple: .16
+    hover: 0.04,
+    focus: 0.12,
+    ripple: 0.16
 ) !default;
 
 $lx-ripple-dark-opacities: (
-    hover: .08,
-    focus: .24,
-    ripple: .32
+    hover: 0.08,
+    focus: 0.24,
+    ripple: 0.32
 ) !default;

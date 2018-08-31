@@ -1,34 +1,40 @@
+/* ==========================================================================
+   Ripple
+   ========================================================================== */
+
 @import "./variables";
 @import "./keyframes";
 
 .has-lx-ripple {
     position: relative;
-    overflow: hidden;
     z-index: 1;
+    overflow: hidden;
 
-    &:before {
-        content: '';
+    &::before {
         position: absolute;
         z-index: -2;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
+        content: '';
     }
 }
 
 .lx-ripple {
-    display: block;
     position: absolute;
     z-index: -1;
+    display: block;
     border-radius: 100%;
     pointer-events: none;
     transform: scale(0);
 }
 
+/* Ripple animation
+   ========================================================================== */
+
 .lx-ripple--is-animated {
     animation-duration: 0.5s;
-    // animation-timing-function: ease-out;
 }
 
 .lx-ripple--from-mouse.lx-ripple--is-animated {

@@ -1,31 +1,42 @@
+/* ==========================================================================
+   Button
+   ========================================================================== */
+
 @import "./mixins";
 
 .lx-button {
+    $self: &;
+
     @include lx-button-base;
 
-    .lx-button__icon {
-        @include lx-button__icon;
+    &--text {
+        #{ $self }__icon {
+            @include lx-button-icon(text);
+        }
+    }
+
+    &--contained {
+        #{ $self }__icon {
+            @include lx-button-icon(contained);
+        }
     }
 }
 
-.lx-button--contained {
-    .lx-button__icon {
-        @include lx-button__icon-contained;
-    }
+/* Button themes
+   ========================================================================== */
+
+.lx-button--primary.lx-button--text {
+    @include lx-button-theme(primary, text);
 }
 
-.lx-button--text.lx-button--primary {
-    @include lx-button--text(primary);
+.lx-button--primary.lx-button--contained {
+    @include lx-button-theme(primary, contained);
 }
 
-.lx-button--text.lx-button--secondary {
-    @include lx-button--text(secondary);
+.lx-button--secondary.lx-button--text {
+    @include lx-button-theme(secondary, text);
 }
 
-.lx-button--contained.lx-button--primary {
-    @include lx-button--contained(primary);
-}
-
-.lx-button--contained.lx-button--secondary {
-    @include lx-button--contained(secondary);
+.lx-button--secondary.lx-button--contained {
+    @include lx-button-theme(secondary, contained);
 }

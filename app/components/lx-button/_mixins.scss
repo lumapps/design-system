@@ -1,34 +1,23 @@
 @import "./variables";
 
+/// Button base mixin to reset native styles and apply global structure.
 @mixin lx-button-base() {
     @include lx-typography(button);
 
-    display: inline-flex;
     position: relative;
+    display: inline-flex;
+    overflow: hidden;
+    min-width: $lx-button-min-width;
+    height: $lx-button-height;
     align-items: center;
     justify-content: center;
-    box-sizing: border-box;
-    min-width: 64px;
-    height: $lx-button-height;
-    border-radius: 4px;
     border: none;
+    border-radius: 4px;
+    line-height: inherit;
     outline: none;
     text-decoration: none;
-
-    line-height: inherit;
     user-select: none;
-    -webkit-appearance: none;
-    overflow: hidden;
     vertical-align: middle;
-
-    &::-moz-focus-inner {
-        padding: 0;
-        border: 0;
-    }
-
-    &:active {
-        outline: none;
-    }
 
     &:hover {
         cursor: pointer;
@@ -41,51 +30,60 @@
     }
 }
 
-@mixin lx-button__icon() {
+/// Button theme mixin to style button regarding the theme and the type.
+///
+/// @param {String} $theme - The button theme, either primary or secondary
+/// @param {String} $type - The button type, either text or contained
+@mixin lx-button-theme($theme, $type) {
+    @if $type == text {
+        padding: 0 $lx-button-text-horizontal-padding;
+        background-color: transparent;
+        color: map-get($lx-theme-colors, $theme);
+
+        &:hover::before {
+            background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, hover));
+        }
+
+        &:focus::before {
+            background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, focus));
+        }
+
+        #{$lx-ripple-identifier} {
+            background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, ripple));
+        }
+    }
+
+    @if $type == contained {
+        padding: 0 $lx-button-contained-horizontal-padding;
+        background-color: map-get($lx-theme-colors, $theme);
+        color: map-get($lx-theme-colors, #{on-}$theme);
+
+        &:hover::before {
+            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, hover));
+        }
+
+        &:focus::before {
+            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, focus));
+        }
+
+        #{$lx-ripple-identifier} {
+            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, ripple));
+        }
+
+        &:disabled {
+            background-color: rgba(#000, 0.12);
+        }
+    }
+}
+
+/// Button icon mixin to style an icon within a button.
+///
+/// @param {String} $type - The button type, either text or contained
+@mixin lx-button-icon($type) {
     margin-right: $lx-base-spacing-unit;
     font-size: lx-typography-to-rem(18px);
-}
 
-@mixin lx-button__icon-contained() {
-    margin-left: -($lx-base-spacing-unit / 2);
-}
-
-@mixin lx-button--text($theme) {
-    padding: 0 $lx-button-text-horizontal-padding;
-    background-color: transparent;
-    color: map-get($lx-theme-colors, $theme);
-
-    &:hover:before {
-        background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, hover));
-    }
-
-    &:focus:before {
-        background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, focus));
-    }
-
-    #{$lx-ripple-identifier} {
-        background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, ripple));
-    }
-}
-
-@mixin lx-button--contained($theme) {
-    padding: 0 $lx-button-contained-horizontal-padding;
-    background-color: map-get($lx-theme-colors, $theme);
-    color: map-get($lx-theme-colors, #{on-}$theme);
-
-    &:hover:before {
-        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, hover));
-    }
-
-    &:focus:before {
-        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, focus));
-    }
-
-    #{$lx-ripple-identifier} {
-        background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, ripple));
-    }
-
-    &:disabled {
-        background-color: rgba(#000, .12);
+    @if $type == contained {
+        margin-left: -($lx-base-spacing-unit / 2);
     }
 }

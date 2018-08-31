@@ -26,8 +26,8 @@
         }
 
         function link(scope, el) {
-            el.on('click', function onButtonClick(evt) {
-                LxRipple.launch(el, 'mouse', evt);
+            el.on('click', function onButtonClick() {
+                LxRipple.launch(el, 'center');
             });
         }
 
