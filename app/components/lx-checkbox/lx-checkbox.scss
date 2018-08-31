@@ -1,110 +1,134 @@
+/* ==========================================================================
+   Checkbox
+   ========================================================================== */
+
+@import "./variables";
+
 .lx-checkbox {
     display: flex;
-}
 
-    .lx-checkbox__input {
+    &__input {
         position: relative;
-        width: 24px;
-        height: 24px;
+        width: $lx-checkbox-size;
+        height: $lx-checkbox-size;
     }
 
-    .lx-checkbox__native-control {
+    &__native-control {
         position: relative;
         z-index: 2;
         top: 0;
         left: 0;
-        width: 24px;
-        height: 24px;
-        margin: 0;
+        width: $lx-checkbox-size;
+        height: $lx-checkbox-size;
         padding: 0;
-        opacity: 0;
+        margin: 0;
         cursor: pointer;
-
-        &:not(:checked) + .lx-checkbox__background:after {
-            content: mdi('checkbox-blank-outline');
-            color: rgba(#000, map-get($lx-theme-text-opacities, medium));
-        }
-
-        &:not(:checked):hover + .lx-checkbox__background:before {
-            background-color: rgba(#000, map-get($lx-ripple-light-opacities, hover));
-        }
-
-        &:not(:checked):focus + .lx-checkbox__background:before {
-            background-color: rgba(#000, map-get($lx-ripple-light-opacities, focus));
-        }
-
-        &:not(:checked) + .lx-checkbox__background #{$lx-ripple-identifier} {
-            background-color: rgba(#000, map-get($lx-ripple-light-opacities, ripple));
-        }
-
-        &:checked + .lx-checkbox__background:after {
-            content: mdi('checkbox-marked');
-            color: map-get($lx-theme-colors, secondary);
-        }
-
-        &:checked:hover + .lx-checkbox__background:before {
-            background-color: rgba(map-get($lx-theme-colors, secondary), map-get($lx-ripple-light-opacities, hover));
-        }
-
-        &:checked:focus + .lx-checkbox__background:before {
-            background-color: rgba(map-get($lx-theme-colors, secondary), map-get($lx-ripple-light-opacities, focus));
-        }
-
-        &:checked + .lx-checkbox__background #{$lx-ripple-identifier} {
-            background-color: rgba(map-get($lx-theme-colors, secondary), map-get($lx-ripple-light-opacities, ripple));
-        }
-
-        &:disabled {
-            cursor: default;
-            pointer-events: none;
-
-            & + .lx-checkbox__background:after {
-                color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
-            }
-        }
+        opacity: 0;
     }
 
-    .lx-checkbox__background {
+    &__background {
         position: absolute;
         z-index: 1;
         top: -($lx-base-spacing-unit);
         left: -($lx-base-spacing-unit);
-        width: 40px;
-        height: 40px;
+        width: $lx-checkbox-ripple-size;
+        height: $lx-checkbox-ripple-size;
         border-radius: 50%;
 
-        &:after {
+        &::after {
             @include lx-icon-base;
+
             display: flex;
+            width: $lx-checkbox-ripple-size;
+            height: $lx-checkbox-ripple-size;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
             font-size: lx-typography-to-rem(22px);
         }
     }
 
-    .lx-checkbox__content {
+    &__content {
         margin-left: $lx-base-spacing-unit * 2;
     }
 
-    .lx-checkbox__label {
-        display: block;
+    &__label {
         @include lx-typography(body1);
-        color: rgba(#000, map-get($lx-theme-text-opacities, high));
 
-        .lx-checkbox--is-disabled & {
+        display: block;
+        color: rgba(#000, map-get($lx-theme-text-opacities, high));
+    }
+
+    &__help {
+        @include lx-typography(caption);
+
+        display: block;
+        color: rgba(#000, map-get($lx-theme-text-opacities, medium));
+    }
+}
+
+/* Checkbox states
+   ========================================================================== */
+
+/* Unchecked */
+
+.lx-checkbox .lx-checkbox__native-control:not(:checked) {
+    & + .lx-checkbox__background::after {
+        color: rgba(#000, map-get($lx-theme-text-opacities, medium));
+        content: mdi('checkbox-blank-outline');
+    }
+
+    &:hover + .lx-checkbox__background::before {
+        background-color: rgba(#000, map-get($lx-ripple-light-opacities, hover));
+    }
+
+    &:focus + .lx-checkbox__background::before {
+        background-color: rgba(#000, map-get($lx-ripple-light-opacities, focus));
+    }
+
+    & + .lx-checkbox__background #{$lx-ripple-identifier} {
+        background-color: rgba(#000, map-get($lx-ripple-light-opacities, ripple));
+    }
+}
+
+/* Checked */
+
+.lx-checkbox .lx-checkbox__native-control:checked {
+    & + .lx-checkbox__background::after {
+        color: map-get($lx-theme-colors, secondary);
+        content: mdi('checkbox-marked');
+    }
+
+    &:hover + .lx-checkbox__background::before {
+        background-color: rgba(map-get($lx-theme-colors, secondary), map-get($lx-ripple-light-opacities, hover));
+    }
+
+    &:focus + .lx-checkbox__background::before {
+        background-color: rgba(map-get($lx-theme-colors, secondary), map-get($lx-ripple-light-opacities, focus));
+    }
+
+    & + .lx-checkbox__background #{$lx-ripple-identifier} {
+        background-color: rgba(map-get($lx-theme-colors, secondary), map-get($lx-ripple-light-opacities, ripple));
+    }
+}
+
+/* Disabled */
+
+.lx-checkbox.lx-checkbox--is-disabled {
+    .lx-checkbox__native-control {
+        cursor: default;
+        pointer-events: none;
+
+        & + .lx-checkbox__background::after {
             color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
-            pointer-events: none;
         }
+    }
+
+    .lx-checkbox__label {
+        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
+        pointer-events: none;
     }
 
     .lx-checkbox__help {
-        display: block;
-        @include lx-typography(caption);
-        color: rgba(#000, map-get($lx-theme-text-opacities, medium));
-
-        .lx-checkbox--is-disabled & {
-            color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
-        }
+        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
     }
+}
