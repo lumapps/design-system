@@ -12,6 +12,7 @@
 ///
 /// @param {Length} $tracking - The tracking size to convert
 /// @param {Length} $font-size - The relative font size
+/// @return {Length}
 @function lx-typography-get-letter-spacing($tracking, $font-size) {
     @return $tracking / $font-size * 1em;
 }
