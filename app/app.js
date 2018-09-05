@@ -47,6 +47,15 @@
                     templateUrl: 'demo/lx-icon-button/demo.html',
                 }
             }
+        }).state('app.text-field', {
+            url: 'text-field',
+            views: {
+                'main@': {
+                    controller: 'DemoTextFieldController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-text-field/demo.html',
+                }
+            }
         });
     }
 

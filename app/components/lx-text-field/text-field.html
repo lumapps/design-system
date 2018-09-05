@@ -1,0 +1,16 @@
+<div class="lx-text-field"
+     ng-class="{ 'lx-text-field--light': lxTextField.theme === 'light',
+                 'lx-text-field--medium': !lxTextField.theme || lxTextField.theme === 'medium',
+                 'lx-text-field--dark': lxTextField.theme === 'dark' }">
+    <label class="lx-text-field__label" ng-if="lxTextField.label">
+        {{ lxTextField.label }}
+    </label>
+
+    <div class="lx-text-field__input">
+        <div class="lx-text-field__native-control" ng-transclude></div>
+
+        <span class="lx-text-field__suffix" ng-if="lxTextField.suffix">
+            {{ lxTextField.suffix }}
+        </span>
+    </div>
+</div>

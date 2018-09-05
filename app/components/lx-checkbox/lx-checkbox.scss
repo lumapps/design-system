@@ -52,17 +52,17 @@
     }
 
     &__label {
-        @include lx-typography(body1);
-
         display: block;
-        color: rgba(#000, map-get($lx-theme-text-opacities, high));
+        color: rgba(#000, map-get($lx-theme-dark-text-opacities, high));
+        font-size: lx-typography-to-rem(16px);
+        line-height: lx-typography-to-rem(24px);
     }
 
     &__help {
-        @include lx-typography(caption);
-
         display: block;
-        color: rgba(#000, map-get($lx-theme-text-opacities, medium));
+        color: rgba(#000, map-get($lx-theme-dark-text-opacities, medium));
+        font-size: lx-typography-to-rem(14px);
+        line-height: lx-typography-to-rem(20px);
     }
 }
 
@@ -73,7 +73,7 @@
 
 .lx-checkbox .lx-checkbox__native-control:not(:checked) {
     & + .lx-checkbox__background::after {
-        color: rgba(#000, map-get($lx-theme-text-opacities, medium));
+        color: rgba(#000, map-get($lx-theme-dark-text-opacities, medium));
         content: mdi('checkbox-blank-outline');
     }
 
@@ -119,16 +119,16 @@
         pointer-events: none;
 
         & + .lx-checkbox__background::after {
-            color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
+            color: rgba(#000, map-get($lx-theme-dark-text-opacities, disabled));
         }
     }
 
     .lx-checkbox__label {
-        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
+        color: rgba(#000, map-get($lx-theme-dark-text-opacities, disabled));
         pointer-events: none;
     }
 
     .lx-checkbox__help {
-        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
+        color: rgba(#000, map-get($lx-theme-dark-text-opacities, disabled));
     }
 }

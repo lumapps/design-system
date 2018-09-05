@@ -11,12 +11,14 @@
     angular.module('lumx.checkbox', []);
     angular.module('lumx.icon-button', []);
     angular.module('lumx.ripple', []);
+    angular.module('lumx.text-field', []);
 
     angular.module('lumx', [
         'lumx.button',
         'lumx.checkbox',
         'lumx.icon-button',
         'lumx.ripple',
+        'lumx.text-field',
         'lumx.utils',
     ]);
 })();

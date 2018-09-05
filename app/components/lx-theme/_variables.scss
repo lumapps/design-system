@@ -5,8 +5,14 @@ $lx-theme-colors: (
     on-secondary: #fff
 ) !default;
 
-$lx-theme-text-opacities: (
+$lx-theme-dark-text-opacities: (
     high: 0.87,
     medium: 0.54,
     disabled: 0.38
+) !default;
+
+$lx-theme-light-text-opacities: (
+    high: 1,
+    medium: 0.7,
+    disabled: 0.3
 ) !default;

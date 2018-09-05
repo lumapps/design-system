@@ -1,0 +1,14 @@
+@import "./variables";
+
+/// Text field base mixin to reset native styles and apply global structure.
+@mixin lx-text-field-base() {
+    display: block;
+    height: $lx-text-field-height;
+    padding: 0 $lx-text-field-horizontal-padding;
+    border: none;
+    margin: 0;
+    background-color: transparent;
+    font-size: lx-typography-to-rem(16px);
+    font-weight: 400;
+    outline: none;
+}

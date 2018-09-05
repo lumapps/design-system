@@ -86,10 +86,10 @@
     /////////////////////////////
 
     function lxCheckboxDirective() {
-        function link(scope, el, attrs, ctrls, $transclude) {
+        function link(scope, el, attrs, ctrls, transclude) {
             ctrls[0].setModelController(ctrls[1]);
 
-            if ($transclude.isSlotFilled('label') && $transclude.isSlotFilled('help')) {
+            if (transclude.isSlotFilled('label') && transclude.isSlotFilled('help')) {
                  ctrls[0].hasChildren = true;
             }
 
@@ -115,9 +115,9 @@
             scope: {},
             templateUrl: 'components/lx-checkbox/checkbox.html',
             transclude: {
-                label: '?lxCheckboxLabel',
                 help: '?lxCheckboxHelp',
-            }
+                label: '?lxCheckboxLabel',
+            },
         };
     }
 

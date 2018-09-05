@@ -24,7 +24,7 @@
     }
 
     &:disabled {
-        color: rgba(#000, map-get($lx-theme-text-opacities, disabled));
+        color: rgba(#000, map-get($lx-theme-dark-text-opacities, disabled));
         cursor: default;
         pointer-events: none;
     }
