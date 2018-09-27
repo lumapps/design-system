@@ -1,0 +1,19 @@
+@import "./variables";
+
+/// Applies the correct CSS rules to an element to give it the elevation specified by $z-value.
+///
+/// @param {Integer} $z-value - The shadow elvation between 0 and 24
+@mixin lx-elevation($z-value) {
+    $umbra-z-value: map-get($lx-elevation-umbra-map, $z-value);
+    $penumbra-z-value: map-get($lx-elevation-penumbra-map, $z-value);
+    $ambient-z-value: map-get($lx-elevation-ambient-map, $z-value);
+
+    $umbra-color: rgba($lx-elevation-baseline-color, $lx-elevation-umbra-opacity);
+    $penumbra-color: rgba($lx-elevation-baseline-color, $lx-elevation-penumbra-opacity);
+    $ambient-color: rgba($lx-elevation-baseline-color, $lx-elevation-ambient-opacity);
+
+    box-shadow:
+        #{"#{$umbra-z-value} #{$umbra-color}"},
+        #{"#{$penumbra-z-value} #{$penumbra-color}"},
+        #{$ambient-z-value} $ambient-color;
+}

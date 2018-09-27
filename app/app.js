@@ -47,6 +47,24 @@
                     templateUrl: 'demo/lx-icon-button/demo.html',
                 }
             }
+        }).state('app.menu', {
+            url: 'menu',
+            views: {
+                'main@': {
+                    controller: 'DemoMenuController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-menu/demo.html',
+                }
+            }
+        }).state('app.select', {
+            url: 'select',
+            views: {
+                'main@': {
+                    controller: 'DemoSelectController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-select/demo.html',
+                }
+            }
         }).state('app.text-field', {
             url: 'text-field',
             views: {

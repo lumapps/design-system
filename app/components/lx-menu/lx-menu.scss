@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Menu
+   ========================================================================== */
+
+.lx-menu {
+    display: inline-block;
+    vertical-align: top;
+
+    &__target {
+        @include lx-elevation(8);
+
+        position: fixed;
+        overflow: auto;
+        background-color: #fff;
+        border-radius: 4px;
+    }
+}

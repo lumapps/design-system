@@ -1,0 +1,23 @@
+<div class="lx-select">
+    <span class="lx-select__label" ng-if="lxSelect.label">
+        {{ lxSelect.label }}
+    </span>
+
+    <div class="lx-select__input">
+        <lx-menu>
+            <lx-menu-source>
+                <span class="lx-select__selected">{{ lxSelect.modelLabel || 'Select a value' }}</span>
+            </lx-menu-source>
+
+            <lx-menu-target>
+                <ul>
+                    <li class="lx-select__choice"
+                        ng-class="{ 'lx-select__choice--is-active': lxSelect.isSelected(choice) }"
+                        ng-repeat="choice in lxSelect.choices">
+                        <a ng-click="lxSelect.select(choice)">{{ lxSelect.getChoiceLabel(choice) }}</a>
+                    </li>
+                </ul>
+            </lx-menu-target>
+        </lx-menu>
+    </div>
+</div>

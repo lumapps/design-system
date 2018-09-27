@@ -12,6 +12,18 @@
         //                         //
         /////////////////////////////
 
+        function disableBodyScroll() {
+            angular.element('body').css({
+                overflow: 'hidden'
+            });
+        }
+
+        function restoreBodyScroll() {
+            angular.element('body').css({
+                overflow: 'visible'
+            });
+        }
+
         function generateUUID() {
             var d = new Date().getTime();
 
@@ -27,6 +39,8 @@
 
         /////////////////////////////
 
+        service.disableBodyScroll = disableBodyScroll;
+        service.restoreBodyScroll = restoreBodyScroll;
         service.generateUUID = generateUUID;
     }
 
