@@ -238,8 +238,8 @@
             },
             templateUrl: 'components/lx-menu/menu.html',
             transclude: {
-                source: '?lxMenuSource',
-                target: '?lxMenuTarget',
+                source: 'lxMenuSource',
+                target: 'lxMenuTarget',
             },
         };
     }
