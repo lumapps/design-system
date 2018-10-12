@@ -3,7 +3,9 @@
 
     /////////////////////////////
 
-    function lxSelectController() {
+    lxSelectController.$inject = ['$interpolate', '$sce'];
+
+    function lxSelectController($interpolate, $sce) {
         var lxSelect = this;
 
         /////////////////////////////
@@ -13,11 +15,25 @@
         /////////////////////////////
 
         /**
+         * The choice template.
+         *
+         * @type {string}
+         */
+        var _choiceTemplate;
+
+        /**
          * The model controller.
          *
          * @type {Object}
          */
         var _modelController;
+
+        /**
+         * The selected template.
+         *
+         * @type {string}
+         */
+        var _selectedTemplate;
 
         /////////////////////////////
         //                         //
@@ -32,6 +48,13 @@
          */
         lxSelect.modelLabel = undefined;
 
+        /**
+         * The model view value.
+         *
+         * @type {string}
+         */
+        lxSelect.viewValue = undefined;
+
         /////////////////////////////
         //                         //
         //     Public functions    //
@@ -39,39 +62,46 @@
         /////////////////////////////
 
         /**
-         * Return the choice label.
+         * Display the choice according to the choice template.
          *
          * @param  {Object} choice The choice object.
          * @return {string} The choice label.
          */
-        function getChoiceLabel(choice) {
-            var choiceLabel;
+        function displayChoice(choice) {
+            var choiceScope = {
+                $choice: choice
+            };
 
-            if (angular.isObject(choice)) {
-                choiceLabel = choice.label;
-            } else {
-                choiceLabel = choice;
-            }
-
-            return choiceLabel;
+            var interpolatedChoice = $interpolate(_choiceTemplate)(choiceScope);
+            return $sce.trustAsHtml(interpolatedChoice);
         }
 
         /**
-         * Return the choice value.
+         * Display the selected item according to the selected template.
          *
-         * @param  {Object} choice The choice object.
-         * @return {string} The choice value.
+         * @param  {Object} [selected] The selected object.
+         * @return {string} The selected label.
          */
-        function getChoiceValue(choice) {
-            var choiceValue;
+        function displaySelected(selected) {
+            var selectedScope = {
+                $selected: angular.isDefined(selected) ? selected : _modelController.$viewValue
+            };
 
-            if (angular.isObject(choice)) {
-                choiceValue = choice.value;
+            var interpolatedSelected = $interpolate(_selectedTemplate)(selectedScope);
+            return $sce.trustAsHtml(interpolatedSelected);
+        }
+
+        /**
+         * Check if the model is empty
+         *
+         * @return {boolean} Wether the model is empty or not.
+         */
+        function isModelEmpty() {
+            if (lxSelect.multiple) {
+                return _modelController.$viewValue.length === 0
             } else {
-                choiceValue = choice;
+                return angular.isUndefined(_modelController.$viewValue);
             }
-
-            return choiceValue;
         }
 
         /**
@@ -81,23 +111,61 @@
          * @return {boolean} Wether the choice is selected or not.
          */
         function isSelected(choice) {
-            var choiceValue = getChoiceValue(choice);
+            var isSelected = false;
 
-            return choiceValue === _modelController.$viewValue;
+            if (lxSelect.multiple) {
+                isSelected = _modelController.$viewValue.includes(choice);
+            } else {
+                isSelected = choice === _modelController.$viewValue;
+            }
+
+            return isSelected;
+        }
+
+        /**
+         * Register the choice template.
+         *
+         * @param {string} choiceTemplate The choice template.
+         */
+        function registerChoiceTemplate(choiceTemplate) {
+            _choiceTemplate = choiceTemplate;
+        }
+
+        /**
+         * Select the selected template.
+         *
+         * @param {string} choiceTemplate The choice template.
+         */
+        function registerSelectedTemplate(selectedTemplate) {
+            _selectedTemplate = selectedTemplate;
         }
 
         /**
          * Select a choice.
          *
          * @param {Object} choice The choice object.
+         * @param {Event}  [ev]   The event that triggered the function.
          */
-        function select(choice) {
-            var choiceLabel = getChoiceLabel(choice);
-            var choiceValue = getChoiceValue(choice);
+        function select(choice, ev) {
+            if (lxSelect.multiple ) {
+                ev.stopPropagation();
+            }
 
-            _modelController.$setViewValue(choiceValue);
+            var updatedModel;
 
-            lxSelect.modelLabel = choiceLabel;
+            if (lxSelect.multiple) {
+                updatedModel = _modelController.$viewValue;
+
+                if (_modelController.$viewValue.includes(choice)) {
+                    updatedModel.splice(updatedModel.indexOf(choice), 1);
+                } else {
+                    updatedModel.push(choice);
+                }
+            } else {
+                updatedModel = choice;
+            }
+
+            _modelController.$setViewValue(updatedModel);
         }
 
         /**
@@ -109,23 +177,17 @@
             _modelController = modelController;
 
             _modelController.$render = function onModelRender() {
-                if (angular.isDefined(_modelController.$viewValue)) {
-                    angular.forEach(lxSelect.choices, function forEachChoice(choice) {
-                        var choiceLabel = getChoiceLabel(choice);
-                        var choiceValue = getChoiceValue(choice);
-
-                        if (choiceValue === _modelController.$viewValue) {
-                            lxSelect.modelLabel = choiceLabel;
-                        }
-                    });
-                }
+                lxSelect.viewValue = _modelController.$viewValue;
             };
         }
 
         /////////////////////////////
 
-        lxSelect.getChoiceLabel = getChoiceLabel;
-        lxSelect.getChoiceValue = getChoiceValue;
+        lxSelect.displayChoice = displayChoice;
+        lxSelect.displaySelected = displaySelected;
+        lxSelect.isModelEmpty = isModelEmpty;
+        lxSelect.registerChoiceTemplate = registerChoiceTemplate;
+        lxSelect.registerSelectedTemplate = registerSelectedTemplate;
         lxSelect.select = select;
         lxSelect.isSelected = isSelected;
         lxSelect.setModelController = setModelController;
@@ -134,8 +196,28 @@
     /////////////////////////////
 
     function lxSelectDirective() {
-        function link(scope, el, attrs, ctrls) {
+        function link(scope, el, attrs, ctrls, transclude) {
             ctrls[0].setModelController(ctrls[1]);
+
+            transclude(scope, function(clone) {
+                var template = '';
+
+                for (var i = 0; i < clone.length; i++) {
+                    template += clone[i].data || clone[i].outerHTML || '';
+                }
+
+                ctrls[0].registerChoiceTemplate(template);
+            }, null, 'choices');
+
+            transclude(scope, function(clone) {
+                var template = '';
+
+                for (var i = 0; i < clone.length; i++) {
+                    template += clone[i].data || clone[i].outerHTML || '';
+                }
+
+                ctrls[0].registerSelectedTemplate(template);
+            }, null, 'selected');
         }
 
         return {
@@ -149,9 +231,13 @@
             scope: {
                 choices: '=lxChoices',
                 label: '@?lxLabel',
+                multiple: '=?lxMultiple'
             },
             templateUrl: 'components/lx-select/select.html',
-            transclude: true,
+            transclude: {
+                choices: 'lxSelectChoices',
+                selected: 'lxSelectSelected',
+            },
         };
     }
 

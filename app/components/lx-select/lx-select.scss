@@ -1,0 +1,35 @@
+/* ==========================================================================
+   Select
+   ========================================================================== */
+
+.lx-select {
+    &__label {
+        @include lx-typography('caption');
+
+        display: block;
+        margin-bottom: $lx-base-spacing-unit;
+        color: rgba(#000, map-get($lx-theme-dark-text-opacities, medium));
+    }
+
+    &__selected {
+        display: flex;
+        overflow: hidden;
+        height: 36px;
+        align-items: center;
+        padding: 0 $lx-base-spacing-unit;
+        background-color: #fff;
+        border-radius: 2px;
+
+        &::after {
+            @include lx-icon-base;
+
+            width: 14px;
+            color: rgba(#000, map-get($lx-theme-dark-text-opacities, medium));
+            content: mdi('menu-down');
+        }
+    }
+
+    &__choice--is-active {
+        background-color: #ccc;
+    }
+}

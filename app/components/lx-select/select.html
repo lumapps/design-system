@@ -6,7 +6,12 @@
     <div class="lx-select__input">
         <lx-menu>
             <lx-menu-source>
-                <span class="lx-select__selected">{{ lxSelect.modelLabel || 'Select a value' }}</span>
+                <div class="lx-select__selected">
+                    <span class="lx-select__selected-item" ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple">Select a value</span>
+                    <span class="lx-select__selected-item" ng-bind-html="lxSelect.displaySelected()" ng-if="!lxSelect.isModelEmpty() && !lxSelect.multiple"></span>
+                    <span class="lx-select__selected-item" ng-if="lxSelect.isModelEmpty() && lxSelect.multiple">Select values</span>
+                    <span class="lx-select__selected-item" ng-repeat="selected in lxSelect.viewValue" ng-bind-html="lxSelect.displaySelected(selected)" ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple"></span>
+                </div>
             </lx-menu-source>
 
             <lx-menu-target>
@@ -14,7 +19,7 @@
                     <li class="lx-select__choice"
                         ng-class="{ 'lx-select__choice--is-active': lxSelect.isSelected(choice) }"
                         ng-repeat="choice in lxSelect.choices">
-                        <a ng-click="lxSelect.select(choice)">{{ lxSelect.getChoiceLabel(choice) }}</a>
+                        <a ng-bind-html="lxSelect.displayChoice(choice)" ng-click="lxSelect.select(choice, $event)"></a>
                     </li>
                 </ul>
             </lx-menu-target>
