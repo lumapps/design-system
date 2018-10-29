@@ -8,6 +8,12 @@
     function DemoSelectController($http) {
         var vm = this;
 
+        /////////////////////////////
+        //                         //
+        //    Public attributes    //
+        //                         //
+        /////////////////////////////
+
         vm.selectAjax = {
             selected: ['Bossk', 'Boba Fett'],
             list: [],
@@ -54,13 +60,6 @@
             loading: false
         };
 
-        $http.get('https://swapi.co/api/people/?search=bo')
-            .then(function updateSuccess(response) {
-                if (response.data && response.data.results) {
-                    vm.selectAjax.list = response.data.results;
-                }
-            });
-
         vm.selectPeople = [{
             name: 'Adam',
             email: 'adam@email.com',
@@ -99,6 +98,36 @@
             selectedPerson: undefined,
             selectedPeople: [vm.selectPeople[2], vm.selectPeople[4]],
         };
+
+        /////////////////////////////
+        //                         //
+        //     Public functions    //
+        //                         //
+        /////////////////////////////
+
+        function selectCallback() {
+            console.log('New value: ', vm.selectAjax.selected);
+        }
+
+        /////////////////////////////
+
+        vm.selectCallback = selectCallback;
+
+        /////////////////////////////
+
+        /**
+         * Initialize the controller.
+         */
+        function init() {
+            $http.get('https://swapi.co/api/people/?search=bo')
+                .then(function updateSuccess(response) {
+                    if (response.data && response.data.results) {
+                        vm.selectAjax.list = response.data.results;
+                    }
+                });
+        }
+
+        init();
     }
 
     /////////////////////////////
