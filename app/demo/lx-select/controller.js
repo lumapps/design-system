@@ -3,8 +3,63 @@
 
     /////////////////////////////
 
-    function DemoSelectController() {
+    DemoSelectController.$inject = ['$http'];
+
+    function DemoSelectController($http) {
         var vm = this;
+
+        vm.selectAjax = {
+            selected: ['Bossk', 'Boba Fett'],
+            list: [],
+            update: function(newFilter) {
+                if (newFilter) {
+                    vm.selectAjax.loading = true;
+
+                    $http.get('https://swapi.co/api/people/?search=' + escape(newFilter))
+                        .then(function updateSuccess(response) {
+                            if (response.data && response.data.results) {
+                                vm.selectAjax.list = response.data.results;
+                            }
+                            vm.selectAjax.loading = false;
+                        })
+                        .catch(function updateError() {
+                            vm.selectAjax.loading = false;
+                        });
+                } else {
+                    vm.selectAjax.list = false;
+                }
+            },
+            toModel: function(data, callback) {
+                if (data) {
+                    callback(data.name);
+                } else {
+                    callback();
+                }
+            },
+            toSelection: function(data, callback) {
+                if (data) {
+                    $http.get('https://swapi.co/api/people/?search=' + escape(data))
+                        .then(function toSelectionSuccess(response) {
+                            if (response.data && response.data.results) {
+                                callback(response.data.results[0]);
+                            }
+                        })
+                        .catch(function toSelectionError() {
+                            callback();
+                        });
+                } else {
+                    callback();
+                }
+            },
+            loading: false
+        };
+
+        $http.get('https://swapi.co/api/people/?search=bo')
+            .then(function updateSuccess(response) {
+                if (response.data && response.data.results) {
+                    vm.selectAjax.list = response.data.results;
+                }
+            });
 
         vm.selectPeople = [{
             name: 'Adam',

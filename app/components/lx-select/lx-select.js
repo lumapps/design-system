@@ -37,6 +37,102 @@
 
         /////////////////////////////
         //                         //
+        //    Private functions    //
+        //                         //
+        /////////////////////////////
+
+        /**
+         * Returns the object index in an array.
+         *
+         * @param  {Array}   arr The array to check in.
+         * @param  {Object}  obj The object to check.
+         * @return {integer} The object index.
+         */
+        function _arrayObjectIndexOf(arr, obj) {
+            for (var i = 0, len = arr.length; i < len; i++) {
+                if (angular.equals(obj, arr[i])) {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        /**
+         * Init view value.
+         */
+        function _initViewValue() {
+            if (angular.isDefined(lxSelect.modelToSelection)) {
+                if (lxSelect.multiple) {
+                    lxSelect.viewValue = [];
+
+                    angular.forEach(_modelController.$viewValue, function(item) {
+                        lxSelect.modelToSelection({
+                            data: item,
+                            callback: function(resp) {
+                                lxSelect.viewValue.push(resp);
+                            }
+                        });
+                    });
+                } else {
+                    lxSelect.modelToSelection({
+                        data: _modelController.$viewValue,
+                        callback: function(resp) {
+                            lxSelect.viewValue = resp;
+                        }
+                    });
+                }
+            } else {
+                lxSelect.viewValue = _modelController.$viewValue;
+            }
+        }
+
+        /**
+         * Select item synchronously (no selectiontoModel)
+         *
+         * @param {Object} choice The choice object.
+         */
+        function _updateModel(choice) {
+            var updatedModel;
+
+            if (lxSelect.multiple) {
+                updatedModel = angular.copy(_modelController.$viewValue);
+
+                var choiceIndex = _arrayObjectIndexOf(_modelController.$viewValue, choice);
+
+                if (choiceIndex !== -1) {
+                    updatedModel.splice(choiceIndex, 1);
+                } else {
+                    updatedModel.push(choice);
+                }
+            } else {
+                updatedModel = choice;
+            }
+
+            _modelController.$setViewValue(updatedModel);
+        }
+
+        /**
+         * Update view value on select.
+         *
+         * @param {Object} choice The choice object.
+         */
+        function _updateViewValue(choice) {
+            if (lxSelect.multiple) {
+                var choiceIndex = _arrayObjectIndexOf(lxSelect.viewValue, choice);
+
+                if (choiceIndex !== -1) {
+                    lxSelect.viewValue.splice(choiceIndex, 1);
+                } else {
+                    lxSelect.viewValue.push(choice);
+                }
+            } else {
+                lxSelect.viewValue = choice;
+            }
+        }
+
+        /////////////////////////////
+        //                         //
         //    Public attributes    //
         //                         //
         /////////////////////////////
@@ -84,7 +180,7 @@
          */
         function displaySelected(selected) {
             var selectedScope = {
-                $selected: angular.isDefined(selected) ? selected : _modelController.$viewValue
+                $selected: angular.isDefined(selected) ? selected : lxSelect.viewValue
             };
 
             var interpolatedSelected = $interpolate(_selectedTemplate)(selectedScope);
@@ -111,15 +207,11 @@
          * @return {boolean} Wether the choice is selected or not.
          */
         function isSelected(choice) {
-            var isSelected = false;
-
             if (lxSelect.multiple) {
-                isSelected = _modelController.$viewValue.includes(choice);
+               return _arrayObjectIndexOf(lxSelect.viewValue, choice) !== -1;
             } else {
-                isSelected = choice === _modelController.$viewValue;
+                return angular.equals(choice, lxSelect.viewValue);
             }
-
-            return isSelected;
         }
 
         /**
@@ -151,21 +243,18 @@
                 ev.stopPropagation();
             }
 
-            var updatedModel;
-
-            if (lxSelect.multiple) {
-                updatedModel = _modelController.$viewValue;
-
-                if (_modelController.$viewValue.includes(choice)) {
-                    updatedModel.splice(updatedModel.indexOf(choice), 1);
-                } else {
-                    updatedModel.push(choice);
-                }
+            if (angular.isDefined(lxSelect.selectionToModel)) {
+                lxSelect.selectionToModel({
+                    data: choice,
+                    callback: function(resp) {
+                        _updateModel(resp);
+                        _updateViewValue(choice);
+                    }
+                });
             } else {
-                updatedModel = choice;
+                _updateModel(choice);
+                _updateViewValue(choice);
             }
-
-            _modelController.$setViewValue(updatedModel);
         }
 
         /**
@@ -176,9 +265,7 @@
         function setModelController(modelController) {
             _modelController = modelController;
 
-            _modelController.$render = function onModelRender() {
-                lxSelect.viewValue = _modelController.$viewValue;
-            };
+            _modelController.$render = _initViewValue;
         }
 
         /////////////////////////////
@@ -231,7 +318,9 @@
             scope: {
                 choices: '=lxChoices',
                 label: '@?lxLabel',
-                multiple: '=?lxMultiple'
+                modelToSelection: '&?lxModelToSelection',
+                multiple: '=?lxMultiple',
+                selectionToModel: '&?lxSelectionToModel',
             },
             templateUrl: 'components/lx-select/select.html',
             transclude: {
