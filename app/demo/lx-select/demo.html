@@ -26,6 +26,8 @@
 <lx-select ng-change="vm.selectCallback()"
            ng-model="vm.selectAjax.selected"
            lx-choices="vm.selectAjax.list"
+           lx-display-filter="true"
+           lx-filter="vm.selectAjax.update(newValue)"
            lx-label="Lorem Ipsum"
            lx-multiple="true"
            lx-model-to-selection="vm.selectAjax.toSelection(data, callback)"

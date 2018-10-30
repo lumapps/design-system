@@ -15,10 +15,14 @@
             </lx-menu-source>
 
             <lx-menu-target>
+                <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
+                    <input type="text" ng-model="lxSelect.filterModel" ng-change="lxSelect.updateFilter()" lx-select-filter>
+                </div>
+
                 <ul>
                     <li class="lx-select__choice"
                         ng-class="{ 'lx-select__choice--is-active': lxSelect.isSelected(choice) }"
-                        ng-repeat="choice in lxSelect.choices">
+                        ng-repeat="choice in lxSelect.choices | lxSelectChoices:lxSelect.filter:lxSelect.filterModel">
                         <a ng-bind-html="lxSelect.displayChoice(choice)" ng-click="lxSelect.select(choice, $event)"></a>
                     </li>
                 </ul>

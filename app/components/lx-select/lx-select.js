@@ -138,11 +138,11 @@
         /////////////////////////////
 
         /**
-         * The model label.
+         * The filter model.
          *
          * @type {string}
          */
-        lxSelect.modelLabel = undefined;
+        lxSelect.filterModel = undefined;
 
         /**
          * The model view value.
@@ -268,16 +268,28 @@
             _modelController.$render = _initViewValue;
         }
 
+        /**
+         * Update choices list according to filter model.
+         */
+        function updateFilter() {
+            if (angular.isDefined(lxSelect.filter)) {
+                lxSelect.filter({
+                    newValue: lxSelect.filterModel
+                });
+            }
+        }
+
         /////////////////////////////
 
         lxSelect.displayChoice = displayChoice;
         lxSelect.displaySelected = displaySelected;
         lxSelect.isModelEmpty = isModelEmpty;
+        lxSelect.isSelected = isSelected;
         lxSelect.registerChoiceTemplate = registerChoiceTemplate;
         lxSelect.registerSelectedTemplate = registerSelectedTemplate;
         lxSelect.select = select;
-        lxSelect.isSelected = isSelected;
         lxSelect.setModelController = setModelController;
+        lxSelect.updateFilter = updateFilter;
     }
 
     /////////////////////////////
@@ -317,6 +329,8 @@
             restrict: 'E',
             scope: {
                 choices: '=lxChoices',
+                displayFilter: '=?lxDisplayFilter',
+                filter: '&?lxFilter',
                 label: '@?lxLabel',
                 modelToSelection: '&?lxModelToSelection',
                 multiple: '=?lxMultiple',
