@@ -16,7 +16,11 @@
 
             <lx-menu-target>
                 <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
-                    <input type="text" ng-model="lxSelect.filterModel" ng-change="lxSelect.updateFilter()" lx-select-filter>
+                    <input type="text"
+                           ng-model="lxSelect.filterModel"
+                           ng-model-options="{ debounce: 500 }"
+                           ng-change="lxSelect.updateFilter()"
+                           lx-select-filter>
                 </div>
 
                 <ul>
