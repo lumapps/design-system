@@ -26,6 +26,8 @@
                         <a ng-bind-html="lxSelect.displayChoice(choice)" ng-click="lxSelect.select(choice, $event)"></a>
                     </li>
                 </ul>
+
+                <span class="lx-select__helper" ng-if="lxSelect.displayHelper">{{ lxSelect.helper }}</span>
             </lx-menu-target>
         </lx-menu>
     </div>

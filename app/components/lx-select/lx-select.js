@@ -330,7 +330,9 @@
             scope: {
                 choices: '=lxChoices',
                 displayFilter: '=?lxDisplayFilter',
+                displayHelper: '=?lxDisplayHelper',
                 filter: '&?lxFilter',
+                helper: '@?lxHelper',
                 label: '@?lxLabel',
                 modelToSelection: '&?lxModelToSelection',
                 multiple: '=?lxMultiple',
