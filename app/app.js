@@ -40,20 +40,20 @@
                     templateUrl: 'demo/lx-checkbox/demo.html',
                 }
             }
+        }).state('app.dropdown', {
+            url: 'dropdown',
+            views: {
+                'main@': {
+                    controller: 'DemoDropdownController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-dropdown/demo.html',
+                }
+            }
         }).state('app.icon-button', {
             url: 'icon-button',
             views: {
                 'main@': {
                     templateUrl: 'demo/lx-icon-button/demo.html',
-                }
-            }
-        }).state('app.menu', {
-            url: 'menu',
-            views: {
-                'main@': {
-                    controller: 'DemoMenuController',
-                    controllerAs: 'vm',
-                    templateUrl: 'demo/lx-menu/demo.html',
                 }
             }
         }).state('app.select', {

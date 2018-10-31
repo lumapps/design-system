@@ -1,0 +1,6 @@
+<div class="lx-dropdown">
+    <div class="lx-dropdown__source" ng-click="lxDropdown.toggle()" ng-transclude="toggle"></div>
+    <div class="lx-dropdown__target">
+        <div class="lx-dropdown__content" ng-transclude="menu" ng-if="lxDropdown.isOpen"></div>
+    </div>
+</div>

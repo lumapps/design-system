@@ -4,17 +4,17 @@
     </span>
 
     <div class="lx-select__input">
-        <lx-menu>
-            <lx-menu-source>
+        <lx-dropdown>
+            <lx-dropdown-toggle>
                 <div class="lx-select__selected">
                     <span class="lx-select__selected-item" ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple">Select a value</span>
                     <span class="lx-select__selected-item" ng-bind-html="lxSelect.displaySelected()" ng-if="!lxSelect.isModelEmpty() && !lxSelect.multiple"></span>
                     <span class="lx-select__selected-item" ng-if="lxSelect.isModelEmpty() && lxSelect.multiple">Select values</span>
                     <span class="lx-select__selected-item" ng-repeat="selected in lxSelect.viewValue" ng-bind-html="lxSelect.displaySelected(selected)" ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple"></span>
                 </div>
-            </lx-menu-source>
+            </lx-dropdown-toggle>
 
-            <lx-menu-target>
+            <lx-dropdown-menu>
                 <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
                     <input type="text"
                            ng-model="lxSelect.filterModel"
@@ -32,7 +32,7 @@
                 </ul>
 
                 <span class="lx-select__helper" ng-if="lxSelect.displayHelper">{{ lxSelect.helper }}</span>
-            </lx-menu-target>
-        </lx-menu>
+            </lx-dropdown-menu>
+        </lx-dropdown>
     </div>
 </div>

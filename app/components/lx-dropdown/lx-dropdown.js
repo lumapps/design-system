@@ -3,10 +3,10 @@
 
     /////////////////////////////
 
-    lxMenuController.$inject = ['$document', '$timeout', '$window', 'LxDepth', 'LxUtils'];
+    lxDropdownController.$inject = ['$document', '$timeout', '$window', 'LxDepth', 'LxUtils'];
 
-    function lxMenuController($document, $timeout, $window, LxDepth, LxUtils) {
-        var lxMenu = this;
+    function lxDropdownController($document, $timeout, $window, LxDepth, LxUtils) {
+        var lxDropdown = this;
 
         /////////////////////////////
         //                         //
@@ -15,7 +15,7 @@
         /////////////////////////////
 
         /**
-         * Offset from the edge of the view port if menu is higher.
+         * Offset from the edge of the view port if dropdown is higher.
          *
          * @type {integer}
          */
@@ -42,11 +42,11 @@
         /////////////////////////////
 
         /**
-         * Wether the menu is open or not.
+         * Wether the dropdown is open or not.
          *
          * @type {boolean}
          */
-        lxMenu.isOpen = false;
+        lxDropdown.isOpen = false;
 
         /////////////////////////////
         //                         //
@@ -69,7 +69,7 @@
                 height: $window.innerHeight,
             };
 
-            if (lxMenu.overSource) {
+            if (lxDropdown.overToggle) {
                 availaibleHeight.above = sourceProps.top;
                 availaibleHeight.below = windowProps.height - sourceProps.top;
             } else {
@@ -95,10 +95,10 @@
                 width: $window.innerWidth,
             };
 
-            if (lxMenu.position === 'left') {
+            if (lxDropdown.position === 'left') {
                 targetProps.left = sourceProps.left;
                 targetProps.right = 'auto';
-            } else if (lxMenu.position === 'right') {
+            } else if (lxDropdown.position === 'right') {
                 targetProps.left = 'auto';
                 targetProps.right = windowProps.width - sourceProps.width - sourceProps.left;
             }
@@ -120,7 +120,7 @@
             };
 
             if (availaibleHeight.below > availaibleHeight.above) {
-                if (lxMenu.overSource) {
+                if (lxDropdown.overToggle) {
                     targetProps.top = availaibleHeight.above;
                     targetProps.maxHeight = availaibleHeight.below;
                 } else {
@@ -128,7 +128,7 @@
                     targetProps.maxHeight = availaibleHeight.below;
                 }
             } else {
-                if (lxMenu.overSource) {
+                if (lxDropdown.overToggle) {
                     targetProps.bottom = windowProps.height - availaibleHeight.above - _sourceEl.outerHeight();
                     targetProps.maxHeight = availaibleHeight.above + _sourceEl.outerHeight();
                 } else {
@@ -143,7 +143,7 @@
         }
 
         /**
-         * Close menu on document clickn.
+         * Close dropdown on document clickn.
          */
         function _onDocumentClick() {
             close();
@@ -156,10 +156,10 @@
         /////////////////////////////
 
         /**
-         * Close menu.
+         * Close dropdown.
          */
         function close() {
-            lxMenu.isOpen = false;
+            lxDropdown.isOpen = false;
             LxUtils.restoreBodyScroll();
 
             $timeout(function() {
@@ -170,7 +170,7 @@
         }
 
         /**
-         * Open menu.
+         * Open dropdown.
          */
         function open() {
             LxDepth.increase();
@@ -183,7 +183,7 @@
                 _initHorizontalPosition();
                 _initVerticalPosition();
 
-                lxMenu.isOpen = true;
+                lxDropdown.isOpen = true;
                 LxUtils.disableBodyScroll();
 
                 $document.on('click', _onDocumentClick);
@@ -202,10 +202,10 @@
         }
 
         /**
-         * Toggle the menu on source click.
+         * Toggle the dropdown on source click.
          */
         function toggle() {
-            if (lxMenu.isOpen) {
+            if (lxDropdown.isOpen) {
                 close();
             } else {
                 open();
@@ -214,37 +214,37 @@
 
         /////////////////////////////
 
-        lxMenu.registerElements = registerElements;
-        lxMenu.toggle = toggle;
+        lxDropdown.registerElements = registerElements;
+        lxDropdown.toggle = toggle;
     }
 
     /////////////////////////////
 
-    function lxMenuDirective() {
+    function lxDropdownDirective() {
         function link(scope, el, attrs, ctrl) {
-            ctrl.registerElements(el.find('.lx-menu__source'), el.find('.lx-menu__target'));
+            ctrl.registerElements(el.find('.lx-dropdown__source'), el.find('.lx-dropdown__target'));
         }
 
         return {
             bindToController: true,
-            controller: lxMenuController,
-            controllerAs: 'lxMenu',
+            controller: lxDropdownController,
+            controllerAs: 'lxDropdown',
             link: link,
             replace: true,
             restrict: 'E',
             scope: {
-                overSource: '=?lxOverSource',
+                overToggle: '=?lxOverToggle',
                 position: '@?lxPosition',
             },
-            templateUrl: 'components/lx-menu/menu.html',
+            templateUrl: 'components/lx-dropdown/dropdown.html',
             transclude: {
-                source: 'lxMenuSource',
-                target: 'lxMenuTarget',
+                toggle: 'lxDropdownToggle',
+                menu: 'lxDropdownMenu',
             },
         };
     }
 
     /////////////////////////////
 
-    angular.module('lumx.menu').directive('lxMenu', lxMenuDirective);
+    angular.module('lumx.dropdown').directive('lxDropdown', lxDropdownDirective);
 })();
