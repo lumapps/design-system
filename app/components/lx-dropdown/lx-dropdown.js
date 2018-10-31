@@ -150,7 +150,7 @@
         }
 
         /**
-         * Close dropdown on document clickn.
+         * Close dropdown on document click.
          */
         function _onDocumentClick() {
             close();
