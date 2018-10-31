@@ -2,10 +2,12 @@
     'use strict';
 
     angular.module('lumx.utils.depth', []);
+    angular.module('lumx.utils.event-scheduler', []);
     angular.module('lumx.utils.utils', []);
 
     angular.module('lumx.utils', [
         'lumx.utils.depth',
+        'lumx.utils.event-scheduler',
         'lumx.utils.utils',
     ]);
 

@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    lxDropdownController.$inject = ['$document', '$scope', '$timeout', '$window', 'LxDepthService', 'LxDropdownService', 'LxUtilsService'];
+    lxDropdownController.$inject = ['$document', '$scope', '$timeout', '$window', 'LxDepthService', 'LxDropdownService', 'LxEventSchedulerService', 'LxUtilsService'];
 
-    function lxDropdownController($document, $scope, $timeout, $window, LxDepthService, LxDropdownService, LxUtilsService) {
+    function lxDropdownController($document, $scope, $timeout, $window, LxDepthService, LxDropdownService, LxEventSchedulerService, LxUtilsService) {
         var lxDropdown = this;
 
         /////////////////////////////
@@ -20,6 +20,13 @@
          * @type {integer}
          */
         var _OFFSET_FROM_EDGE = 16;
+
+        /**
+         * The event scheduler id.
+         *
+         * @type {string}
+         */
+        var _idEventScheduler;
 
         /**
          * The menu element.
@@ -158,6 +165,19 @@
             }
         }
 
+        /**
+         * Close dropdown on echap key up.
+         *
+         * @param {Event} evt The key up event.
+         */
+        function _onKeyUp(evt) {
+            if (evt.keyCode == 27) {
+                close();
+            }
+
+            evt.stopPropagation();
+        }
+
         /////////////////////////////
         //                         //
         //     Public functions    //
@@ -177,6 +197,11 @@
             $timeout(function() {
                 _menuEl.removeAttr('style').insertAfter(_toggleEl);
 
+                if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
+                    LxEventSchedulerService.unregister(_idEventScheduler);
+                    _idEventScheduler = undefined;
+                }
+
                 $document.off('click', _onDocumentClick);
             });
         }
@@ -187,6 +212,10 @@
         function open() {
             LxDropdownService.closeActiveDropdown();
             LxDropdownService.registerActiveDropdownUuid(lxDropdown.uuid);
+
+            if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
+                _idEventScheduler = LxEventSchedulerService.register('keyup', _onKeyUp);
+            }
 
             LxDepthService.increase();
 
@@ -293,6 +322,7 @@
             restrict: 'E',
             scope: {
                 closeOnClick: '=?lxCloseOnClick',
+                escapeClose: '=?lxEscapeClose',
                 overToggle: '=?lxOverToggle',
                 position: '@?lxPosition',
             },
