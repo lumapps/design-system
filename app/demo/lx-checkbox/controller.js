@@ -6,6 +6,12 @@
     function DemoCheckboxController() {
         var vm = this;
 
+        /////////////////////////////
+        //                         //
+        //    Public attributes    //
+        //                         //
+        /////////////////////////////
+
         vm.checkboxes = {
             model: {
                 checked: true,

@@ -6,6 +6,12 @@
     function DemoTextFieldController() {
         var vm = this;
 
+        /////////////////////////////
+        //                         //
+        //    Public attributes    //
+        //                         //
+        /////////////////////////////
+
         vm.textFields = {
             model: {
                 name: 'Matthias Manoukian',
