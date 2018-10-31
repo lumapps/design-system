@@ -153,7 +153,9 @@
          * Close dropdown on document click.
          */
         function _onDocumentClick() {
-            close();
+            if (angular.isUndefined(lxDropdown.closeOnClick) || lxDropdown.closeOnClick) {
+                close();
+            }
         }
 
         /////////////////////////////
@@ -290,6 +292,7 @@
             replace: true,
             restrict: 'E',
             scope: {
+                closeOnClick: '=?lxCloseOnClick',
                 overToggle: '=?lxOverToggle',
                 position: '@?lxPosition',
             },
