@@ -36,6 +36,14 @@
         var _menuEl;
 
         /**
+         * Wether the user pointer is on menu or not.
+         * Useful to know wether or not close the menu in hover mode.
+         *
+         * @type {boolean}
+         */
+        var _mouseOnMenu = false;
+
+        /**
          * The toggle element.
          *
          * @type {element}
@@ -67,6 +75,28 @@
         //    Private functions    //
         //                         //
         /////////////////////////////
+
+        /**
+         * Close dropdown.
+         */
+        function _close() {
+            lxDropdown.isOpen = false;
+
+            LxDropdownService.resetActiveDropdownUuid();
+
+            LxUtilsService.restoreBodyScroll();
+
+            $timeout(function() {
+                _menuEl.removeAttr('style').insertAfter(_toggleEl);
+
+                if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
+                    LxEventSchedulerService.unregister(_idEventScheduler);
+                    _idEventScheduler = undefined;
+                }
+
+                $document.off('click', _onDocumentClick);
+            });
+        }
 
         /**
          * Get available height.
@@ -161,7 +191,7 @@
          */
         function _onDocumentClick() {
             if (angular.isUndefined(lxDropdown.closeOnClick) || lxDropdown.closeOnClick) {
-                close();
+                _close();
             }
         }
 
@@ -172,44 +202,16 @@
          */
         function _onKeyUp(evt) {
             if (evt.keyCode == 27) {
-                close();
+                _close();
             }
 
             evt.stopPropagation();
         }
 
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
-
-        /**
-         * Close dropdown.
-         */
-        function close() {
-            lxDropdown.isOpen = false;
-
-            LxDropdownService.resetActiveDropdownUuid();
-
-            LxUtilsService.restoreBodyScroll();
-
-            $timeout(function() {
-                _menuEl.removeAttr('style').insertAfter(_toggleEl);
-
-                if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
-                    LxEventSchedulerService.unregister(_idEventScheduler);
-                    _idEventScheduler = undefined;
-                }
-
-                $document.off('click', _onDocumentClick);
-            });
-        }
-
         /**
          * Open dropdown.
          */
-        function open() {
+        function _open() {
             LxDropdownService.closeActiveDropdown();
             LxDropdownService.registerActiveDropdownUuid(lxDropdown.uuid);
 
@@ -234,6 +236,44 @@
             });
         }
 
+        /////////////////////////////
+        //                         //
+        //     Public functions    //
+        //                         //
+        /////////////////////////////
+
+        /**
+         * Close dropdown on mouse enter.
+         *
+         * @param {string} fromMenu Wether the function is triggered from the menu or from the toggle.
+         */
+        function closeOnMouseLeave(fromMenu) {
+            if (!lxDropdown.hover) {
+                return;
+            }
+
+            $timeout(function() {
+                if (!_mouseOnMenu || fromMenu) {
+                    _close();
+                }
+
+                if (fromMenu) {
+                    _mouseOnMenu = false;
+                }
+            });
+        }
+
+        /**
+         * Open dropdown on mouse leave.
+         */
+        function openOnMouseEnter() {
+            if (!lxDropdown.hover || lxDropdown.isOpen) {
+                return;
+            }
+
+            _open();
+        }
+
         /**
          * Register menu.
          *
@@ -241,6 +281,13 @@
          */
         function registerMenu(menuEl) {
             _menuEl = menuEl;
+        }
+
+        /**
+         * Register the fact that user pointer is on the menu.
+         */
+        function registerMouseEnterEvent() {
+            _mouseOnMenu = true;
         }
 
         /**
@@ -256,16 +303,23 @@
          * Toggle the dropdown on toggle click.
          */
         function toggle() {
+            if (lxDropdown.hover) {
+                return;
+            }
+
             if (lxDropdown.isOpen) {
-                close();
+                _close();
             } else {
-                open();
+                _open();
             }
         }
 
         /////////////////////////////
 
+        lxDropdown.closeOnMouseLeave = closeOnMouseLeave;
+        lxDropdown.openOnMouseEnter = openOnMouseEnter;
         lxDropdown.registerMenu = registerMenu;
+        lxDropdown.registerMouseEnterEvent = registerMouseEnterEvent;
         lxDropdown.registerToggle = registerToggle;
         lxDropdown.toggle = toggle;
 
@@ -284,7 +338,7 @@
         $scope.$on('lx-dropdown__open', function onDropdownOpen(evt, params) {
             if (params.uuid === lxDropdown.uuid && !lxDropdown.isOpen) {
                 registerToggle(angular.element(params.target));
-                open();
+                _open();
             }
         });
 
@@ -296,7 +350,7 @@
          */
         $scope.$on('lx-dropdown__close', function(evt, params) {
             if (params.uuid === lxDropdown.uuid && lxDropdown.isOpen) {
-                close();
+                _close();
             }
         });
     }
@@ -323,6 +377,7 @@
             scope: {
                 closeOnClick: '=?lxCloseOnClick',
                 escapeClose: '=?lxEscapeClose',
+                hover: '=?lxHover',
                 overToggle: '=?lxOverToggle',
                 position: '@?lxPosition',
             },
