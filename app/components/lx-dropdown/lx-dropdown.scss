@@ -6,7 +6,7 @@
     display: inline-block;
     vertical-align: top;
 
-    &__target {
+    &__menu {
         @include lx-elevation(8);
 
         position: fixed;

@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    lxDropdownController.$inject = ['$document', '$timeout', '$window', 'LxDepth', 'LxUtils'];
+    lxDropdownController.$inject = ['$document', '$scope', '$timeout', '$window', 'LxDepth', 'LxDropdownService', 'LxUtils'];
 
-    function lxDropdownController($document, $timeout, $window, LxDepth, LxUtils) {
+    function lxDropdownController($document, $scope, $timeout, $window, LxDepth, LxDropdownService, LxUtils) {
         var lxDropdown = this;
 
         /////////////////////////////
@@ -22,18 +22,18 @@
         var _OFFSET_FROM_EDGE = 16;
 
         /**
-         * The source element.
+         * The menu element.
          *
          * @type {element}
          */
-        var _sourceEl;
+        var _menuEl;
 
         /**
-         * The target element.
+         * The toggle element.
          *
          * @type {element}
          */
-        var _targetEl;
+        var _toggleEl;
 
         /////////////////////////////
         //                         //
@@ -48,6 +48,13 @@
          */
         lxDropdown.isOpen = false;
 
+        /**
+         * The dropdown uuid.
+         *
+         * @type {string}
+         */
+        lxDropdown.uuid = LxUtils.generateUUID();
+
         /////////////////////////////
         //                         //
         //    Private functions    //
@@ -55,26 +62,26 @@
         /////////////////////////////
 
         /**
-         * Get available height
+         * Get available height.
          *
          * @return {Object} Available height on top / bottom.
          */
         function _getAvailableHeight() {
             var availaibleHeight = {};
-            var sourceProps = {
-                height: _sourceEl.outerHeight(),
-                top: _sourceEl.offset().top - angular.element($window).scrollTop(),
+            var toggleProps = {
+                height: _toggleEl.outerHeight(),
+                top: _toggleEl.offset().top - angular.element($window).scrollTop(),
             };
             var windowProps = {
                 height: $window.innerHeight,
             };
 
             if (lxDropdown.overToggle) {
-                availaibleHeight.above = sourceProps.top;
-                availaibleHeight.below = windowProps.height - sourceProps.top;
+                availaibleHeight.above = toggleProps.top;
+                availaibleHeight.below = windowProps.height - toggleProps.top;
             } else {
-                availaibleHeight.above = sourceProps.top;
-                availaibleHeight.below = windowProps.height - (sourceProps.top + sourceProps.height);
+                availaibleHeight.above = toggleProps.top;
+                availaibleHeight.below = windowProps.height - (toggleProps.top + toggleProps.height);
             }
 
             return availaibleHeight;
@@ -84,28 +91,28 @@
          * Initialize horizontal position.
          */
         function _initHorizontalPosition() {
-            var sourceProps = {
-                left: _sourceEl.offset().left,
-                height: _sourceEl.outerHeight(),
-                width: _sourceEl.outerWidth(),
+            var menuProps = {};
+            var toggleProps = {
+                left: _toggleEl.offset().left,
+                height: _toggleEl.outerHeight(),
+                width: _toggleEl.outerWidth(),
             };
-            var targetProps = {};
             var windowProps = {
                 height: $window.innerHeight,
                 width: $window.innerWidth,
             };
 
             if (lxDropdown.position === 'left') {
-                targetProps.left = sourceProps.left;
-                targetProps.right = 'auto';
+                menuProps.left = toggleProps.left;
+                menuProps.right = 'auto';
             } else if (lxDropdown.position === 'right') {
-                targetProps.left = 'auto';
-                targetProps.right = windowProps.width - sourceProps.width - sourceProps.left;
+                menuProps.left = 'auto';
+                menuProps.right = windowProps.width - toggleProps.width - toggleProps.left;
             }
 
-            _targetEl.css({
-                left: targetProps.left,
-                right: targetProps.right,
+            _menuEl.css({
+                left: menuProps.left,
+                right: menuProps.right,
             })
         }
 
@@ -114,32 +121,32 @@
          */
         function _initVerticalPosition() {
             var availaibleHeight = _getAvailableHeight();
-            var targetProps = {};
+            var menuProps = {};
             var windowProps = {
                 height: $window.innerHeight,
             };
 
             if (availaibleHeight.below > availaibleHeight.above) {
                 if (lxDropdown.overToggle) {
-                    targetProps.top = availaibleHeight.above;
-                    targetProps.maxHeight = availaibleHeight.below;
+                    menuProps.top = availaibleHeight.above;
+                    menuProps.maxHeight = availaibleHeight.below;
                 } else {
-                    targetProps.top = availaibleHeight.above + _sourceEl.outerHeight();
-                    targetProps.maxHeight = availaibleHeight.below;
+                    menuProps.top = availaibleHeight.above + _toggleEl.outerHeight();
+                    menuProps.maxHeight = availaibleHeight.below;
                 }
             } else {
                 if (lxDropdown.overToggle) {
-                    targetProps.bottom = windowProps.height - availaibleHeight.above - _sourceEl.outerHeight();
-                    targetProps.maxHeight = availaibleHeight.above + _sourceEl.outerHeight();
+                    menuProps.bottom = windowProps.height - availaibleHeight.above - _toggleEl.outerHeight();
+                    menuProps.maxHeight = availaibleHeight.above + _toggleEl.outerHeight();
                 } else {
-                    targetProps.bottom = windowProps.height - availaibleHeight.above;
-                    targetProps.maxHeight = availaibleHeight.above;
+                    menuProps.bottom = windowProps.height - availaibleHeight.above;
+                    menuProps.maxHeight = availaibleHeight.above;
                 }
             }
 
-            targetProps.maxHeight -= _OFFSET_FROM_EDGE;
+            menuProps.maxHeight -= _OFFSET_FROM_EDGE;
 
-            _targetEl.css(targetProps);
+            _menuEl.css(menuProps);
         }
 
         /**
@@ -160,10 +167,13 @@
          */
         function close() {
             lxDropdown.isOpen = false;
+
+            LxDropdownService.resetActiveDropdownUuid();
+
             LxUtils.restoreBodyScroll();
 
             $timeout(function() {
-                _targetEl.removeAttr('style').insertAfter(_sourceEl);
+                _menuEl.removeAttr('style').insertAfter(_toggleEl);
 
                 $document.off('click', _onDocumentClick);
             });
@@ -173,9 +183,12 @@
          * Open dropdown.
          */
         function open() {
+            LxDropdownService.closeActiveDropdown();
+            LxDropdownService.registerActiveDropdownUuid(lxDropdown.uuid);
+
             LxDepth.increase();
 
-            _targetEl
+            _menuEl
                 .appendTo('body')
                 .css('z-index', LxDepth.get());
 
@@ -191,18 +204,25 @@
         }
 
         /**
-         * Register elements.
+         * Register menu.
          *
-         * @param {element} sourceEl The source element.
-         * @param {element} sourceEl The target element.
+         * @param {element} menuEl The menu element.
          */
-        function registerElements(sourceEl, targetEl) {
-            _sourceEl = sourceEl;
-            _targetEl = targetEl;
+        function registerMenu(menuEl) {
+            _menuEl = menuEl;
         }
 
         /**
-         * Toggle the dropdown on source click.
+         * Register toggle.
+         *
+         * @param {element} toggleEl The toggle element.
+         */
+        function registerToggle(toggleEl) {
+            _toggleEl = toggleEl;
+        }
+
+        /**
+         * Toggle the dropdown on toggle click.
          */
         function toggle() {
             if (lxDropdown.isOpen) {
@@ -214,15 +234,52 @@
 
         /////////////////////////////
 
-        lxDropdown.registerElements = registerElements;
+        lxDropdown.registerMenu = registerMenu;
+        lxDropdown.registerToggle = registerToggle;
         lxDropdown.toggle = toggle;
+
+        /////////////////////////////
+        //                         //
+        //          Events         //
+        //                         //
+        /////////////////////////////
+
+        /**
+         * Open a given dropdown.
+         *
+         * @param {Event}  evt    The dropdown open event.
+         * @param {Ovject} params The dropdown uuid and the target id.
+         */
+        $scope.$on('lx-dropdown__open', function onDropdownOpen(evt, params) {
+            if (params.uuid === lxDropdown.uuid && !lxDropdown.isOpen) {
+                registerToggle(angular.element(params.target));
+                open();
+            }
+        });
+
+        /**
+         * Close a given dropdown.
+         *
+         * @param {Event}  evt    The dropdown open event.
+         * @param {Ovject} params The dropdown uuid.
+         */
+        $scope.$on('lx-dropdown__close', function(evt, params) {
+            if (params.uuid === lxDropdown.uuid && lxDropdown.isOpen) {
+                close();
+            }
+        });
     }
 
     /////////////////////////////
 
     function lxDropdownDirective() {
         function link(scope, el, attrs, ctrl) {
-            ctrl.registerElements(el.find('.lx-dropdown__source'), el.find('.lx-dropdown__target'));
+            ctrl.registerToggle(el.find('.lx-dropdown__toggle'));
+            ctrl.registerMenu(el.find('.lx-dropdown__menu'));
+
+            attrs.$observe('id', function(id) {
+                ctrl.uuid = id;
+            });
         }
 
         return {
@@ -238,7 +295,7 @@
             },
             templateUrl: 'components/lx-dropdown/dropdown.html',
             transclude: {
-                toggle: 'lxDropdownToggle',
+                toggle: '?lxDropdownToggle',
                 menu: 'lxDropdownMenu',
             },
         };
