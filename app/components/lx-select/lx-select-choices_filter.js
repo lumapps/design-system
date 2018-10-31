@@ -31,5 +31,5 @@
 
     /////////////////////////////
 
-    angular.module('lumx.select').filter('lxSelectChoices', lxSelectChoicesFilter);
+    angular.module('lumx.select').filter('lxSelectChoicesFilter', lxSelectChoicesFilter);
 })();

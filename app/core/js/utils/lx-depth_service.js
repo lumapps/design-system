@@ -41,5 +41,5 @@
 
     /////////////////////////////
 
-    angular.module('lumx.utils.depth').service('LxDepth', LxDepthService);
+    angular.module('lumx.utils.depth').service('LxDepthService', LxDepthService);
 })();

@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    lxCheckboxControler.$inject = ['$element', 'LxRipple', 'LxUtils'];
+    lxCheckboxControler.$inject = ['$element', 'LxRipple', 'LxUtilsService'];
 
-    function lxCheckboxControler($element, LxRipple, LxUtils) {
+    function lxCheckboxControler($element, LxRipple, LxUtilsService) {
         var lxCheckbox = this;
 
         /////////////////////////////
@@ -32,7 +32,7 @@
          *
          * @type {string}
          */
-        lxCheckbox.checkboxId = LxUtils.generateUUID();
+        lxCheckbox.checkboxId = LxUtilsService.generateUUID();
 
         /**
          * Wether the directive has children directive or not.
@@ -113,7 +113,7 @@
             require: ['lxCheckbox','ngModel'],
             restrict: 'E',
             scope: {},
-            templateUrl: 'components/lx-checkbox/checkbox.html',
+            templateUrl: 'components/lx-checkbox/lx-checkbox.html',
             transclude: {
                 help: '?lxCheckboxHelp',
                 label: '?lxCheckboxLabel',

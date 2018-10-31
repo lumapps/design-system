@@ -338,7 +338,7 @@
                 multiple: '=?lxMultiple',
                 selectionToModel: '&?lxSelectionToModel',
             },
-            templateUrl: 'components/lx-select/select.html',
+            templateUrl: 'components/lx-select/lx-select.html',
             transclude: {
                 choices: 'lxSelectChoices',
                 selected: 'lxSelectSelected',

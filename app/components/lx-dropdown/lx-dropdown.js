@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    lxDropdownController.$inject = ['$document', '$scope', '$timeout', '$window', 'LxDepth', 'LxDropdownService', 'LxUtils'];
+    lxDropdownController.$inject = ['$document', '$scope', '$timeout', '$window', 'LxDepthService', 'LxDropdownService', 'LxUtilsService'];
 
-    function lxDropdownController($document, $scope, $timeout, $window, LxDepth, LxDropdownService, LxUtils) {
+    function lxDropdownController($document, $scope, $timeout, $window, LxDepthService, LxDropdownService, LxUtilsService) {
         var lxDropdown = this;
 
         /////////////////////////////
@@ -53,7 +53,7 @@
          *
          * @type {string}
          */
-        lxDropdown.uuid = LxUtils.generateUUID();
+        lxDropdown.uuid = LxUtilsService.generateUUID();
 
         /////////////////////////////
         //                         //
@@ -170,7 +170,7 @@
 
             LxDropdownService.resetActiveDropdownUuid();
 
-            LxUtils.restoreBodyScroll();
+            LxUtilsService.restoreBodyScroll();
 
             $timeout(function() {
                 _menuEl.removeAttr('style').insertAfter(_toggleEl);
@@ -186,18 +186,18 @@
             LxDropdownService.closeActiveDropdown();
             LxDropdownService.registerActiveDropdownUuid(lxDropdown.uuid);
 
-            LxDepth.increase();
+            LxDepthService.increase();
 
             _menuEl
                 .appendTo('body')
-                .css('z-index', LxDepth.get());
+                .css('z-index', LxDepthService.get());
 
             $timeout(function() {
                 _initHorizontalPosition();
                 _initVerticalPosition();
 
                 lxDropdown.isOpen = true;
-                LxUtils.disableBodyScroll();
+                LxUtilsService.disableBodyScroll();
 
                 $document.on('click', _onDocumentClick);
             });
@@ -293,7 +293,7 @@
                 overToggle: '=?lxOverToggle',
                 position: '@?lxPosition',
             },
-            templateUrl: 'components/lx-dropdown/dropdown.html',
+            templateUrl: 'components/lx-dropdown/lx-dropdown.html',
             transclude: {
                 toggle: '?lxDropdownToggle',
                 menu: 'lxDropdownMenu',

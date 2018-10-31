@@ -46,5 +46,5 @@
 
     /////////////////////////////
 
-    angular.module('lumx.utils.utils').service('LxUtils', LxUtilsService);
+    angular.module('lumx.utils.utils').service('LxUtilsService', LxUtilsService);
 })();

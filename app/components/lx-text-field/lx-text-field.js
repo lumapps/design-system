@@ -43,7 +43,7 @@
                 suffix: '@?lxSuffix',
                 theme: '@?lxTheme',
             },
-            templateUrl: 'components/lx-text-field/text-field.html',
+            templateUrl: 'components/lx-text-field/lx-text-field.html',
             transclude: true,
         };
     }

@@ -26,7 +26,7 @@
                 <ul>
                     <li class="lx-select__choice"
                         ng-class="{ 'lx-select__choice--is-active': lxSelect.isSelected(choice) }"
-                        ng-repeat="choice in lxSelect.choices | lxSelectChoices:lxSelect.filter:lxSelect.filterModel">
+                        ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel">
                         <a ng-bind-html="lxSelect.displayChoice(choice)" ng-click="lxSelect.select(choice, $event)"></a>
                     </li>
                 </ul>
