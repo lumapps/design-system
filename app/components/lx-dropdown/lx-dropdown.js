@@ -168,7 +168,7 @@
                     menuProps.top = availaibleHeight.above;
                     menuProps.maxHeight = availaibleHeight.below;
                 } else {
-                    menuProps.top = availaibleHeight.above + _toggleEl.outerHeight();
+                    menuProps.top = availaibleHeight.above + _toggleEl.outerHeight() + ~~lxDropdown.offset;
                     menuProps.maxHeight = availaibleHeight.below;
                 }
             } else {
@@ -176,7 +176,7 @@
                     menuProps.bottom = windowProps.height - availaibleHeight.above - _toggleEl.outerHeight();
                     menuProps.maxHeight = availaibleHeight.above + _toggleEl.outerHeight();
                 } else {
-                    menuProps.bottom = windowProps.height - availaibleHeight.above;
+                    menuProps.bottom = windowProps.height - availaibleHeight.above + ~~lxDropdown.offset;
                     menuProps.maxHeight = availaibleHeight.above;
                 }
             }
@@ -379,6 +379,7 @@
                 escapeClose: '=?lxEscapeClose',
                 hover: '=?lxHover',
                 hoverDelay: '=?lxHoverDelay',
+                offset: '@?lxOffset',
                 overToggle: '=?lxOverToggle',
                 position: '@?lxPosition',
             },
