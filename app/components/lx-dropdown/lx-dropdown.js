@@ -139,6 +139,16 @@
                 width: $window.innerWidth,
             };
 
+            if (angular.isDefined(lxDropdown.width)) {
+                if (lxDropdown.width.indexOf('%') > -1) {
+                    menuProps.width = toggleProps.width * (lxDropdown.width.slice(0, -1) / 100);
+                } else {
+                    menuProps.width = lxDropdown.width;
+                }
+            } else {
+                menuProps.width = 'auto';
+            }
+
             if (lxDropdown.position === 'left') {
                 menuProps.left = toggleProps.left;
                 menuProps.right = 'auto';
@@ -150,6 +160,7 @@
             _menuEl.css({
                 left: menuProps.left,
                 right: menuProps.right,
+                width: menuProps.width,
             })
         }
 
@@ -382,6 +393,7 @@
                 offset: '@?lxOffset',
                 overToggle: '=?lxOverToggle',
                 position: '@?lxPosition',
+                width: '@?lxWidth',
             },
             templateUrl: 'components/lx-dropdown/lx-dropdown.html',
             transclude: {
