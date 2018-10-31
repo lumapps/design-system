@@ -260,7 +260,7 @@
                 if (fromMenu) {
                     _mouseOnMenu = false;
                 }
-            });
+            }, lxDropdown.hoverDelay);
         }
 
         /**
@@ -271,7 +271,7 @@
                 return;
             }
 
-            _open();
+            $timeout(_open, lxDropdown.hoverDelay)
         }
 
         /**
@@ -378,6 +378,7 @@
                 closeOnClick: '=?lxCloseOnClick',
                 escapeClose: '=?lxEscapeClose',
                 hover: '=?lxHover',
+                hoverDelay: '=?lxHoverDelay',
                 overToggle: '=?lxOverToggle',
                 position: '@?lxPosition',
             },
