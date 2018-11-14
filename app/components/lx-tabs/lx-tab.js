@@ -72,7 +72,7 @@
         lxTab.isTabActive = isTabActive;
         lxTab.registerTab = registerTab;
 
-         /////////////////////////////
+        /////////////////////////////
         //                         //
         //        Watchers         //
         //                         //
