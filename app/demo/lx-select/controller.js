@@ -115,9 +115,6 @@
 
         /////////////////////////////
 
-        /**
-         * Initialize the controller.
-         */
         function init() {
             $http.get('https://swapi.co/api/people/?search=bo')
                 .then(function updateSuccess(response) {
