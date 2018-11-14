@@ -17,6 +17,7 @@
     angular.module('lumx.icon-button', []);
     angular.module('lumx.ripple', []);
     angular.module('lumx.select', []);
+    angular.module('lumx.tabs', []);
     angular.module('lumx.text-field', []);
 
     angular.module('lumx', [
@@ -26,6 +27,7 @@
         'lumx.icon-button',
         'lumx.ripple',
         'lumx.select',
+        'lumx.tabs',
         'lumx.text-field',
         'lumx.utils',
     ]);

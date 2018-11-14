@@ -1,0 +1,12 @@
+<div class="lx-tabs">
+    <div class="lx-tabs__links">
+        <a class="lx-tabs__link"
+           ng-repeat="tab in lxTabs.tabs"
+           ng-click="lxTabs.setActiveTab(tab)">
+           <lx-icon lx-id="{{ tab.icon }}" ng-if="tab.icon"></lx-icon>
+           <span ng-if="tab.label">{{ tab.label }}</span>
+        </a>
+    </div>
+
+    <div class="lx-tabs__panes" ng-transclude></div>
+</div>

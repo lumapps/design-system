@@ -65,6 +65,15 @@
                     templateUrl: 'demo/lx-select/demo.html',
                 }
             }
+        }).state('app.tabs', {
+            url: 'tabs',
+            views: {
+                'main@': {
+                    controller: 'DemoTabsController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-tabs/demo.html',
+                }
+            }
         }).state('app.text-field', {
             url: 'text-field',
             views: {
