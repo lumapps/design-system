@@ -90,7 +90,7 @@
         });
 
         /**
-         * Remove tab on destroy.
+         * Remove the current tab on destroy.
          */
         $scope.$on('$destroy', function() {
             _parentController.removeTab(lxTab.tab);
