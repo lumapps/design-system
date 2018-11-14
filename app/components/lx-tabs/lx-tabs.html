@@ -1,6 +1,8 @@
 <div class="lx-tabs">
     <div class="lx-tabs__links">
         <a class="lx-tabs__link"
+           ng-class="{ 'lx-tabs__link--is-active': lxTabs.isTabActive(tab.index),
+                       'lx-tabs__link--is-disabled': tab.isDisabled }"
            ng-repeat="tab in lxTabs.tabs"
            ng-click="lxTabs.setActiveTab(tab)">
            <lx-icon lx-id="{{ tab.icon }}" ng-if="tab.icon"></lx-icon>

@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    lxTabController.$inject = ['LxUtilsService'];
+    lxTabController.$inject = [ '$scope', 'LxUtilsService'];
 
-    function lxTabController(LxUtilsService) {
+    function lxTabController($scope, LxUtilsService) {
         var lxTab = this;
 
         /////////////////////////////
@@ -21,12 +21,18 @@
          */
         var _parentController;
 
-         /**
+        /////////////////////////////
+        //                         //
+        //    Public attributes    //
+        //                         //
+        /////////////////////////////
+
+        /**
          * The current tab properties.
          *
          * @type {Object}
          */
-        var _tab;
+        lxTab.tab = {};
 
         /////////////////////////////
         //                         //
@@ -40,7 +46,7 @@
          * @return {boolean} Wether the current tab is active or not.
          */
         function isTabActive() {
-            return _parentController.isTabActive(_tab.index);
+            return _parentController.isTabActive(lxTab.tab.index);
         }
 
         /**
@@ -52,20 +58,43 @@
         function registerTab(parentController, tabIndex) {
             _parentController = parentController;
 
-            _tab = {
-                uuid: LxUtilsService.generateUUID(),
+            lxTab.tab = {
                 index: tabIndex,
-                label: lxTab.tabLabel,
-                icon: lxTab.tabIcon
+                label: lxTab.label,
+                uuid: LxUtilsService.generateUUID(),
             };
 
-            _parentController.addTab(_tab);
+            _parentController.addTab(lxTab.tab);
         }
 
         /////////////////////////////
 
         lxTab.isTabActive = isTabActive;
         lxTab.registerTab = registerTab;
+
+         /////////////////////////////
+        //                         //
+        //        Watchers         //
+        //                         //
+        /////////////////////////////
+
+        /**
+         * Watch for any changes of the current tab disabled state.
+         *
+         * @param {boolean} isDisabled Wether the tab is disabled or not.
+         */
+        $scope.$watch('lxTab.isDisabled', function isDisableddWatcher(isDisabled) {
+            lxTab.tab.isDisabled = isDisabled;
+
+            _parentController.updateTab(lxTab.tab);
+        });
+
+        /**
+         * Remove tab on destroy.
+         */
+        $scope.$on('$destroy', function() {
+            _parentController.removeTab(lxTab.tab);
+        });
     }
 
     /////////////////////////////
@@ -84,8 +113,8 @@
             restrict: 'E',
             require: ['lxTab', '^lxTabs'],
             scope: {
-                tabIcon: '@?lxIcon',
-                tabLabel: '@?lxLabel',
+                isDisabled: '=?ngDisabled',
+                label: '@?lxLabel',
             },
             templateUrl: 'components/lx-tabs/lx-tab.html',
             transclude: true,

@@ -17,7 +17,7 @@
          *
          * @type {number}
          */
-        lxTabs.activeTabIndex = 0;
+        lxTabs.activeTab = angular.isDefined(lxTabs.activeTab) ? lxTabs.activeTab : 0;
 
         /**
          * The list of tabs.
@@ -35,10 +35,10 @@
         /**
          * Add a tab to the list of tabs.
          *
-         * @param {Object} tab The tab.
+         * @param {Object} tab The tab to add.
          */
-        function addTab(tab) {
-            lxTabs.tabs.push(tab);
+        function addTab(tabToAdd) {
+            lxTabs.tabs.push(tabToAdd);
         }
 
         /**
@@ -48,23 +48,57 @@
          * @return {boolean} Wether the given tab is active or not.
          */
         function isTabActive(tabIndex) {
-            return lxTabs.activeTabIndex === tabIndex;
+            return lxTabs.activeTab === tabIndex;
         }
 
         /**
-         * Set the given tab as active
+         * Remove the given tab.
+         *
+         * @param {Object} tabToRemove The tab to remove.
+         */
+        function removeTab(tabToRemove) {
+            lxTabs.tabs.splice(tabToRemove.index, 1);
+
+            angular.forEach(lxTabs.tabs, function(tab, index) {
+                tab.index = index;
+            });
+
+            if (lxTabs.tabs.length > 0) {
+                setActiveTab(lxTabs.tabs[0]);
+            }
+        }
+
+        /**
+         * Set the given tab as active.
          *
          * @param {Object} tab The tab.
          */
         function setActiveTab(tab) {
-            lxTabs.activeTabIndex = tab.index;
+            if (!tab.isDisabled) {
+                lxTabs.activeTab = tab.index;
+            }
+        }
+
+        /**
+         * Update the given tab.
+         *
+         * @param {Object} updatedTab The tab to update.
+         */
+        function updateTab(updatedTab) {
+            angular.forEach(lxTabs.tabs, function(tab) {
+                if (tab.uuid === tab.uuid) {
+                    tab = updatedTab;
+                }
+            });
         }
 
         /////////////////////////////
 
         lxTabs.addTab = addTab;
         lxTabs.isTabActive = isTabActive;
+        lxTabs.removeTab = removeTab;
         lxTabs.setActiveTab = setActiveTab;
+        lxTabs.updateTab = updateTab;
     }
 
     /////////////////////////////
@@ -76,7 +110,9 @@
             controllerAs: 'lxTabs',
             replace: true,
             restrict: 'E',
-            scope: {},
+            scope: {
+                activeTab: '=?lxActiveTab',
+            },
             templateUrl: 'components/lx-tabs/lx-tabs.html',
             transclude: true,
         };
