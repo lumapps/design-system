@@ -1,0 +1,28 @@
+<div class="p+">
+    <lx-button ng-click="vm.openDialog()">Open dialog</lx-button>
+</div>
+
+<lx-dialog id="{{ vm.dialogId }}">
+    <lx-dialog-header>
+        <div class="toolbar bgc-primary pl++">
+            <span class="toolbar__label tc-white fs-title">
+                Lorem Ipsum
+            </span>
+
+            <div class="toolbar__right">
+                <lx-button ng-click="vm.addPerson()">Add</lx-button>
+            </div>
+        </div>
+    </lx-dialog-header>
+
+    <lx-dialog-content>
+        <div ng-repeat="person in vm.people">
+            {{ person.name }} - {{ person.email }} - {{ person.age }}
+        </div>
+    </lx-dialog-content>
+
+    <lx-dialog-footer>
+        <lx-button lx-dialog-close>Cancel</lx-button>
+        <lx-button lx-dialog-close>Ok</lx-button>
+    </lx-dialog-footer>
+</lx-dialog>

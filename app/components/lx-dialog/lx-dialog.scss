@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Dialog
+   ========================================================================== */
+
+@import "./variables";
+
+.lx-dialog-filter {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity $lx-dialog-transition-duration;
+
+    &--is-shown {
+        opacity: 1;
+    }
+}
+
+.lx-dialog {
+    position: fixed;
+    top: $lx-dialog-offset;
+    left: 50%;
+    display: none;
+    width: 800px;
+    height: calc(100% - 120px);
+    opacity: 0;
+    transform: translateX(-50%) translateY(-30px);
+    transition: opacity $lx-dialog-transition-duration, transform $lx-dialog-transition-duration;
+
+    &--is-shown {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    &__wrapper {
+        display: flex;
+        max-height: 100%;
+        flex-direction: column;
+        background-color: #fff;
+        border-radius: 4px;
+    }
+
+    &__header,
+    &__footer {
+        flex-shrink: 0;
+    }
+
+    &__content {
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}

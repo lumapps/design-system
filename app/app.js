@@ -40,6 +40,15 @@
                     templateUrl: 'demo/lx-checkbox/demo.html',
                 }
             }
+        }).state('app.dialog', {
+            url: 'dialog',
+            views: {
+                'main@': {
+                    controller: 'DemoDialogController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-dialog/demo.html',
+                }
+            }
         }).state('app.dropdown', {
             url: 'dropdown',
             views: {
