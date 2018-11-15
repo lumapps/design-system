@@ -217,6 +217,27 @@
                 _open(params);
             }
         });
+
+        /**
+         * Close a given dialog.
+         *
+         * @param {Event}   evt      The dropdown open event.
+         * @param {string}  dialogId The dialog identifier.
+         * @param {boolean} canceled Wether the dialog is closed via a cancel or not.
+         * @param {Object}  params   An optional object that holds extra parameters.
+         */
+        $scope.$on('lx-dialog__close', function(evt, dialogId, canceled, params) {
+            if (dialogId === lxDialog.id || dialogId === undefined) {
+                _close(canceled, params);
+            }
+        });
+
+        /**
+         * Close the current dialog on destroy.
+         */
+        $scope.$on('$destroy', function() {
+            _close(true);
+        });
     }
 
     /////////////////////////////
