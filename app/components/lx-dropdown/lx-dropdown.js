@@ -344,7 +344,7 @@
          * Open a given dropdown.
          *
          * @param {Event}  evt    The dropdown open event.
-         * @param {Ovject} params The dropdown uuid and the target id.
+         * @param {Object} params The dropdown uuid and the target id.
          */
         $scope.$on('lx-dropdown__open', function onDropdownOpen(evt, params) {
             if (params.uuid === lxDropdown.uuid && !lxDropdown.isOpen) {
@@ -357,7 +357,7 @@
          * Close a given dropdown.
          *
          * @param {Event}  evt    The dropdown open event.
-         * @param {Ovject} params The dropdown uuid.
+         * @param {Object} params The dropdown uuid.
          */
         $scope.$on('lx-dropdown__close', function(evt, params) {
             if (params.uuid === lxDropdown.uuid && lxDropdown.isOpen) {
