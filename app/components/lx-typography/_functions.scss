@@ -1,18 +1,9 @@
-/// Get the converted value from px to rem.
+/// Get the converted value from px to rem
 ///
-/// @param {Length} $size - The size to convert
-/// @return {Length}
+/// @param  {String} $size - the size to convert
+/// @return {String} the converted size
 @function lx-typography-to-rem($size) {
     $remSize: $size / $lx-typography-font-size;
 
     @return #{$remSize}rem;
-}
-
-/// Get the converted letter spacing value from px to em.
-///
-/// @param {Length} $tracking - The tracking size to convert
-/// @param {Length} $font-size - The relative font size
-/// @return {Length}
-@function lx-typography-get-letter-spacing($tracking, $font-size) {
-    @return $tracking / $font-size * 1em;
 }

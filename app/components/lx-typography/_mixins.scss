@@ -1,132 +1,70 @@
 @import "./functions";
 
-/// Typography base mixin to apply Roboto and smooth font.
+/// Typography base mixin to apply Roboto and smooth font
 @mixin lx-typography-base() {
     font-family: $lx-typography-font-family;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
 
-/// Typography mixin to style text.
+/// Typography mixin to style text
 ///
-/// @param {String} $style - The wanted style
+/// @param {String} $style - the wanted style
 @mixin lx-typography($style) {
     @include lx-typography-base;
 
     @if $style == headline1 {
         font-size: lx-typography-to-rem(96px);
-        font-weight: 300;
-        letter-spacing: lx-typography-get-letter-spacing(-1.5, 96);
-        line-height: lx-typography-to-rem(96px);
-        text-decoration: inherit;
-        text-transform: inherit;
+        font-weight: 500;
     }
 
     @if $style == headline2 {
         font-size: lx-typography-to-rem(60px);
-        font-weight: 300;
-        letter-spacing: lx-typography-get-letter-spacing(-0.5, 60);
-        line-height: lx-typography-to-rem(60px);
-        text-decoration: inherit;
-        text-transform: inherit;
+        font-weight: 500;
     }
 
     @if $style == headline3 {
         font-size: lx-typography-to-rem(48px);
-        font-weight: 400;
-        letter-spacing: normal;
-        line-height: lx-typography-to-rem(50px);
-        text-decoration: inherit;
-        text-transform: inherit;
+        font-weight: 500;
     }
 
     @if $style == headline4 {
         font-size: lx-typography-to-rem(34px);
-        font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing(0.25, 34);
-        line-height: lx-typography-to-rem(40px);
-        text-decoration: inherit;
-        text-transform: inherit;
+        font-weight: 500;
     }
 
     @if $style == headline5 {
         font-size: lx-typography-to-rem(24px);
-        font-weight: 400;
-        letter-spacing: normal;
-        line-height: lx-typography-to-rem(32px);
-        text-decoration: inherit;
-        text-transform: inherit;
+        font-weight: 500;
     }
 
     @if $style == headline6 {
         font-size: lx-typography-to-rem(20px);
         font-weight: 500;
-        letter-spacing: lx-typography-get-letter-spacing(0.15, 20);
-        line-height: lx-typography-to-rem(32px);
-        text-decoration: inherit;
-        text-transform: inherit;
     }
 
     @if $style == subtitle1 {
         font-size: lx-typography-to-rem(16px);
-        font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing(0.15, 16);
-        line-height: lx-typography-to-rem(28px);
-        text-decoration: inherit;
-        text-transform: inherit;
+        font-weight: 500;
     }
 
     @if $style == subtitle2 {
         font-size: lx-typography-to-rem(14px);
         font-weight: 500;
-        letter-spacing: lx-typography-get-letter-spacing(0.1, 14);
-        line-height: lx-typography-to-rem(22px);
-        text-decoration: inherit;
-        text-transform: inherit;
     }
 
     @if $style == body1 {
         font-size: lx-typography-to-rem(16px);
         font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing(0.5, 16);
-        line-height: lx-typography-to-rem(24px);
-        text-decoration: inherit;
-        text-transform: inherit;
     }
 
     @if $style == body2 {
         font-size: lx-typography-to-rem(14px);
         font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing(0.25, 14);
-        line-height: lx-typography-to-rem(20px);
-        text-decoration: inherit;
-        text-transform: inherit;
-    }
-
-    @if $style == button {
-        font-size: lx-typography-to-rem(14px);
-        font-weight: 500;
-        letter-spacing: lx-typography-get-letter-spacing(0.75, 14);
-        line-height: lx-typography-to-rem(36px);
-        text-decoration: none;
-        text-transform: uppercase;
     }
 
     @if $style == caption {
         font-size: lx-typography-to-rem(12px);
         font-weight: 400;
-        letter-spacing: lx-typography-get-letter-spacing(0.4, 12);
-        line-height: lx-typography-to-rem(20px);
-        text-decoration: inherit;
-        text-transform: inherit;
-    }
-
-    @if $style == overline {
-        font-size: lx-typography-to-rem(12px);
-        font-weight: 500;
-        letter-spacing: lx-typography-get-letter-spacing(1.5, 12);
-        line-height: lx-typography-to-rem(32px);
-        text-decoration: none;
-        text-transform: uppercase;
     }
 }
