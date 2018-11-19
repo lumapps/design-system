@@ -1,0 +1,66 @@
+@import "./variables";
+
+/// Get hexadecimal color luminance value
+///
+/// @param  {String} $color - the color hexadecimal value
+/// @return {String} the luminance value
+@function lx-theme-color-luminance($color) {
+    $rgba: red($color), green($color), blue($color);
+    $rgba2: ();
+
+    @for $i from 1 through 3 {
+        $rgb: nth($rgba, $i);
+        $rgb: $rgb / 255;
+
+        $rgb: if($rgb < 0.03928, $rgb / 12.92, ch-pow(($rgb + 0.055) / 1.055, 2.4, 16));
+
+        $rgba2: append($rgba2, $rgb);
+    }
+
+    @return 0.2126 * nth($rgba2, 1) + 0.7152 * nth($rgba2, 2) + 0.0722 * nth($rgba2, 3);
+}
+
+/// Get coontrast ratio between two given colors
+///
+/// @param  {String} $color1 - the first color hexadecimal value
+/// @param  {String} $color2 - the second color hexadecimal value
+/// @return {String} the contrast ratio
+@function lx-theme-color-contrast($color1, $color2) {
+    $luminance1: lx-theme-color-luminance($color1) + 0.05;
+    $luminance2: lx-theme-color-luminance($color2) + 0.05;
+    $ratio: $luminance1 / $luminance2;
+
+    @if $luminance2 > $luminance1 {
+        $ratio: 1 / $ratio;
+    }
+
+    $ratio: round($ratio * 10) / 10;
+
+    @return $ratio;
+}
+
+/// Get coontrast ratio between two given colors
+///
+/// @param  {String} $base - the surface color to test
+/// @param  {Array}  $colors - the colors to test
+/// @return {String} the best color that fits to the surface to test
+@function lx-theme-pick-best-color($base, $colors: ($lx-theme-body-light, $lx-theme-body-dark)) {
+    $best: nth($colors, 1);
+    $contrast: lx-theme-color-contrast($base, $best);
+
+    @for $i from 2 through length($colors) {
+        $currentColor: nth($colors, $i);
+        $currentContrast: lx-theme-color-contrast($base, $currentColor);
+
+        @if ($currentContrast - $contrast > 0) {
+            $best: $currentColor;
+            $contrast: $currentContrast;
+        }
+    }
+
+    @if ($contrast < 3) {
+        @warn "Contrast ratio of #{$best} on #{$base} is pretty bad, just #{$contrast}";
+    }
+
+    @return $best;
+}
