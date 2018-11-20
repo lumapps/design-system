@@ -9457,47 +9457,95 @@ html {
 
 /* Button sizes
    ========================================================================== */
-.lx-button--size-s {
+.lx-button--type-primary.lx-button--size-s {
   height: 32px;
   border-radius: 16px; }
-  .lx-button--size-s.lx-button--shape-standard {
+  .lx-button--type-primary.lx-button--size-s.lx-button--shape-standard {
     padding: 0 16px; }
-  .lx-button--size-s.lx-button--shape-circle {
+  .lx-button--type-primary.lx-button--size-s.lx-button--shape-circle {
     width: 32px; }
-  .lx-button--size-s .lx-button__icon {
+  .lx-button--type-primary.lx-button--size-s .lx-button__icon {
     font-size: 1.125rem; }
-  .lx-button--size-s .lx-button__icon--has-sibling {
+  .lx-button--type-primary.lx-button--size-s .lx-button__icon--has-sibling {
     margin-right: 8px; }
-  .lx-button--size-s .lx-button__text {
-    font-size: 0.75rem; }
+  .lx-button--type-primary.lx-button--size-s .lx-button__text {
+    font-size: 0.75rem;
+    line-height: 2rem; }
 
-.lx-button--size-m {
+.lx-button--type-secondary.lx-button--size-s {
+  height: 32px;
+  border-radius: 16px; }
+  .lx-button--type-secondary.lx-button--size-s.lx-button--shape-standard {
+    padding: 0 16px; }
+  .lx-button--type-secondary.lx-button--size-s.lx-button--shape-circle {
+    width: 32px; }
+  .lx-button--type-secondary.lx-button--size-s .lx-button__icon {
+    font-size: 1.125rem; }
+  .lx-button--type-secondary.lx-button--size-s .lx-button__icon--has-sibling {
+    margin-right: 8px; }
+  .lx-button--type-secondary.lx-button--size-s .lx-button__text {
+    font-size: 0.75rem;
+    line-height: 1.875rem; }
+
+.lx-button--type-primary.lx-button--size-m {
   height: 36px;
   border-radius: 18px; }
-  .lx-button--size-m.lx-button--shape-standard {
+  .lx-button--type-primary.lx-button--size-m.lx-button--shape-standard {
     padding: 0 16px; }
-  .lx-button--size-m.lx-button--shape-circle {
+  .lx-button--type-primary.lx-button--size-m.lx-button--shape-circle {
     width: 36px; }
-  .lx-button--size-m .lx-button__icon {
+  .lx-button--type-primary.lx-button--size-m .lx-button__icon {
     font-size: 1.25rem; }
-  .lx-button--size-m .lx-button__icon--has-sibling {
+  .lx-button--type-primary.lx-button--size-m .lx-button__icon--has-sibling {
     margin-right: 8px; }
-  .lx-button--size-m .lx-button__text {
-    font-size: 0.875rem; }
+  .lx-button--type-primary.lx-button--size-m .lx-button__text {
+    font-size: 0.875rem;
+    line-height: 2.25rem; }
 
-.lx-button--size-l {
+.lx-button--type-secondary.lx-button--size-m {
+  height: 36px;
+  border-radius: 18px; }
+  .lx-button--type-secondary.lx-button--size-m.lx-button--shape-standard {
+    padding: 0 16px; }
+  .lx-button--type-secondary.lx-button--size-m.lx-button--shape-circle {
+    width: 36px; }
+  .lx-button--type-secondary.lx-button--size-m .lx-button__icon {
+    font-size: 1.25rem; }
+  .lx-button--type-secondary.lx-button--size-m .lx-button__icon--has-sibling {
+    margin-right: 8px; }
+  .lx-button--type-secondary.lx-button--size-m .lx-button__text {
+    font-size: 0.875rem;
+    line-height: 2.125rem; }
+
+.lx-button--type-primary.lx-button--size-l {
   height: 40px;
   border-radius: 20px; }
-  .lx-button--size-l.lx-button--shape-standard {
+  .lx-button--type-primary.lx-button--size-l.lx-button--shape-standard {
     padding: 0 16px; }
-  .lx-button--size-l.lx-button--shape-circle {
+  .lx-button--type-primary.lx-button--size-l.lx-button--shape-circle {
     width: 40px; }
-  .lx-button--size-l .lx-button__icon {
+  .lx-button--type-primary.lx-button--size-l .lx-button__icon {
     font-size: 1.5rem; }
-  .lx-button--size-l .lx-button__icon--has-sibling {
+  .lx-button--type-primary.lx-button--size-l .lx-button__icon--has-sibling {
     margin-right: 8px; }
-  .lx-button--size-l .lx-button__text {
-    font-size: 1rem; }
+  .lx-button--type-primary.lx-button--size-l .lx-button__text {
+    font-size: 1rem;
+    line-height: 2.5rem; }
+
+.lx-button--type-secondary.lx-button--size-l {
+  height: 40px;
+  border-radius: 20px; }
+  .lx-button--type-secondary.lx-button--size-l.lx-button--shape-standard {
+    padding: 0 16px; }
+  .lx-button--type-secondary.lx-button--size-l.lx-button--shape-circle {
+    width: 40px; }
+  .lx-button--type-secondary.lx-button--size-l .lx-button__icon {
+    font-size: 1.5rem; }
+  .lx-button--type-secondary.lx-button--size-l .lx-button__icon--has-sibling {
+    margin-right: 8px; }
+  .lx-button--type-secondary.lx-button--size-l .lx-button__text {
+    font-size: 1rem;
+    line-height: 2.375rem; }
 
 /* Button colors
    ========================================================================== */
@@ -9677,7 +9725,7 @@ html {
 
 .lx-button--type-primary.lx-button--color-green {
   background-color: #0fa15a;
-  color: #28336d;
+  color: #fff;
   transition: background-color 0.1s, box-shadow 0.1s; }
   .lx-button--type-primary.lx-button--color-green:hover {
     background-color: #13d074; }

@@ -1,29 +1,4 @@
-@import "./constants";
 @import "./variables";
-
-/// Get hexadecimal color luminance value
-///
-/// @param  {String} $color - the color hexadecimal value
-/// @return {String} the luminance value
-@function lx-theme-color-luminance($color) {
-    $red: nth($lx-theme-linear-channel-values, red($color) + 1);
-    $green: nth($lx-theme-linear-channel-values, green($color) + 1);
-    $blue: nth($lx-theme-linear-channel-values, blue($color) + 1);
-
-    @return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
-}
-
-/// Get coontrast ratio between two given colors
-///
-/// @param  {String} $back - the first color hexadecimal value
-/// @param  {String} $front - the second color hexadecimal value
-/// @return {String} the contrast ratio
-@function lx-theme-color-contrast($back, $front) {
-    $backLum: lx-theme-color-luminance($back) + 0.05;
-    $foreLum: lx-theme-color-luminance($front) + 0.05;
-
-    @return max($backLum, $foreLum) / min($backLum, $foreLum);
-}
 
 /// Get coontrast ratio between two given colors
 ///
@@ -31,10 +6,10 @@
 /// @param  {Array}  $colors - the colors to test
 /// @return {String} the best color that fits to the surface to test
 @function lx-theme-pick-best-color($base, $colors: ($lx-theme-body-light, $lx-theme-body-dark)) {
-    $lightContrast: lx-theme-color-contrast($base, nth($colors, 1));
-    $darkContrast: lx-theme-color-contrast($base, nth($colors, 2));
+    $color-brightness: round((red($base) * 299) + (green($base) * 587) + (blue($base) * 114) / 1000);
+    $light-color: round((red(#fff) * 299) + (green(#fff) * 587) + (blue(#fff) * 114) / 1000);
 
-    @if ($lightContrast > $darkContrast) {
+    @if abs($color-brightness) < ($light-color/2) {
         @return nth($colors, 1);
     }
 

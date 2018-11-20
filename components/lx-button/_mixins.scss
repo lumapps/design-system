@@ -31,7 +31,8 @@
 /// Button size mixin to style button regarding the size and the type
 ///
 /// @param {String} $color - The button size, either s or m or l
-@mixin lx-button-size($size) {
+/// @param {String} $type - The button type, either primary or secondary
+@mixin lx-button-size($size, $type) {
     height: map-get($lx-button-sizes, $size);
     border-radius: map-get($lx-button-sizes, $size) / 2;
 
@@ -53,6 +54,14 @@
 
     .lx-button__text {
         font-size: lx-typography-to-rem(map-get($lx-button-text-sizes, $size));
+
+        @if $type == primary {
+            line-height: lx-typography-to-rem(map-get($lx-button-sizes, $size));
+        }
+
+        @if $type == secondary {
+            line-height: lx-typography-to-rem(map-get($lx-button-sizes, $size) - 2);
+        }
     }
 }
 

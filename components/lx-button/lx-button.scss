@@ -12,8 +12,12 @@
    ========================================================================== */
 
 @each $key, $size in $lx-button-sizes {
-    .lx-button--size-#{$key} {
-        @include lx-button-size($key);
+    .lx-button--type-primary.lx-button--size-#{$key} {
+        @include lx-button-size($key, primary);
+    }
+
+    .lx-button--type-secondary.lx-button--size-#{$key} {
+        @include lx-button-size($key, secondary);
     }
 }
 
