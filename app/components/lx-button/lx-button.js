@@ -3,13 +3,12 @@
 
     /////////////////////////////
 
-    lxButtonDirective.$inject = ['LxRipple'];
-
-    function lxButtonDirective(LxRipple) {
+    function lxButtonDirective() {
         function getTemplate(el, attrs) {
-            var buttonType = angular.isDefined(attrs.lxType) ?  attrs.lxType : 'text';
-            var buttonTheme = angular.isDefined(attrs.lxTheme) ? attrs.lxTheme : 'primary';
-            var buttonClass = 'has-lx-ripple lx-button lx-button--' + buttonType + ' lx-button--' + buttonTheme;
+            var buttonType = angular.isDefined(attrs.lxType) ?  attrs.lxType : 'primary';
+            var buttonColor = angular.isDefined(attrs.lxColor) ? attrs.lxColor : 'primary';
+            var buttonSize = angular.isDefined(attrs.lxSize) ? attrs.lxSize : 'm';
+            var buttonClass = 'lx-button lx-button--type-' + buttonType + ' lx-button--color-' + buttonColor + ' lx-button--size-' + buttonSize;
 
             if (isAnchor(attrs)) {
                 return '<a class="' + buttonClass + '" ng-transclude></a>';
@@ -25,18 +24,31 @@
                 angular.isDefined(attrs.uiSref);
         }
 
-        function link(scope, el, attrs) {
-            if (angular.isDefined(attrs.lxIcon)) {
-                var icon = angular.element('<i/>', {
-                    class: 'lx-button__icon mdi mdi-' + attrs.lxIcon
-                });
+        function link(scope, el) {
+            var transcludedIcon = el.find('i');
+            var tanscludedText = el.find('span');
 
-                el.prepend(icon);
+            if (transcludedIcon.length && !tanscludedText.length) {
+                el.addClass('lx-button--shape-circle');
+            } else {
+                el.addClass('lx-button--shape-standard');
             }
 
-            el.on('click', function onButtonClick(evt) {
-                LxRipple.launch(el, 'mouse', evt);
-            });
+            if (!transcludedIcon.length && !tanscludedText.length) {
+                el.wrapInner('<span class="lx-button__text"></span>');
+            }
+
+            if (transcludedIcon.length) {
+                transcludedIcon.addClass('lx-button__icon');
+            }
+
+            if (transcludedIcon.length && tanscludedText.length) {
+                transcludedIcon.addClass('lx-button__icon--has-sibling');
+            }
+
+            if (tanscludedText.length) {
+                tanscludedText.addClass('lx-button__text');
+            }
         }
 
         return {

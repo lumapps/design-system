@@ -5,38 +5,27 @@
 @import "./mixins";
 
 .lx-button {
-    $self: &;
-
     @include lx-button-base;
-
-    &--text {
-        #{ $self }__icon {
-            @include lx-button-icon(text);
-        }
-    }
-
-    &--contained {
-        #{ $self }__icon {
-            @include lx-button-icon(contained);
-        }
-    }
 }
 
-/* Button themes
+/* Button sizes
    ========================================================================== */
 
-.lx-button--primary.lx-button--text {
-    @include lx-button-theme(primary, text);
+@each $key, $size in $lx-button-sizes {
+    .lx-button--size-#{$key} {
+        @include lx-button-size($key);
+    }
 }
 
-.lx-button--primary.lx-button--contained {
-    @include lx-button-theme(primary, contained);
-}
+/* Button colors
+   ========================================================================== */
 
-.lx-button--secondary.lx-button--text {
-    @include lx-button-theme(secondary, text);
-}
+@each $key, $color in $lx-theme-color-palette {
+    .lx-button--type-primary.lx-button--color-#{$key} {
+        @include lx-button-color($key, primary);
+    }
 
-.lx-button--secondary.lx-button--contained {
-    @include lx-button-theme(secondary, contained);
+    .lx-button--type-secondary.lx-button--color-#{$key} {
+        @include lx-button-color($key, secondary);
+    }
 }

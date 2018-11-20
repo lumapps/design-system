@@ -1,19 +1,13 @@
 @import "./variables";
 
-/// Button base mixin to reset native styles and apply global structure.
+/// Button base mixin to reset native styles and apply global structure
 @mixin lx-button-base() {
-    @include lx-typography(button);
-
     position: relative;
     display: inline-flex;
     overflow: hidden;
-    min-width: $lx-button-min-width;
-    height: $lx-button-height;
     align-items: center;
     justify-content: center;
     border: none;
-    border-radius: 4px;
-    line-height: inherit;
     outline: none;
     text-decoration: none;
     user-select: none;
@@ -24,66 +18,88 @@
     }
 
     &:disabled {
-        color: rgba(#000, map-get($lx-theme-dark-text-opacities, disabled));
         cursor: default;
         pointer-events: none;
     }
+
+    &__text {
+        font-weight: 600;
+    }
 }
 
-/// Button theme mixin to style button regarding the theme and the type.
+/// Button size mixin to style button regarding the size and the type
 ///
-/// @param {String} $theme - The button theme, either primary or secondary
-/// @param {String} $type - The button type, either text or contained
-@mixin lx-button-theme($theme, $type) {
-    @if $type == text {
-        padding: 0 $lx-button-text-horizontal-padding;
-        background-color: transparent;
-        color: map-get($lx-theme-colors, $theme);
+/// @param {String} $color - The button size, either s or m or l
+@mixin lx-button-size($size) {
+    height: map-get($lx-button-sizes, $size);
+    border-radius: map-get($lx-button-sizes, $size) / 2;
 
-        &:hover::before {
-            background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, hover));
-        }
-
-        &:focus::before {
-            background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, focus));
-        }
-
-        #{$lx-ripple-identifier} {
-            background-color: rgba(map-get($lx-theme-colors, $theme), map-get($lx-ripple-light-opacities, ripple));
-        }
+    &.lx-button--shape-standard {
+        padding: 0 $lx-button-horizontal-padding;
     }
 
-    @if $type == contained {
-        padding: 0 $lx-button-contained-horizontal-padding;
-        background-color: map-get($lx-theme-colors, $theme);
-        color: map-get($lx-theme-colors, #{on-}$theme);
+    &.lx-button--shape-circle {
+        width: map-get($lx-button-sizes, $size);
+    }
 
-        &:hover::before {
-            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, hover));
+    .lx-button__icon {
+        font-size: lx-typography-to-rem(map-get($lx-button-icon-sizes, $size));
+    }
+
+    .lx-button__icon--has-sibling {
+        margin-right: $lx-base-spacing-unit;
+    }
+
+    .lx-button__text {
+        font-size: lx-typography-to-rem(map-get($lx-button-text-sizes, $size));
+    }
+}
+
+/// Button color mixin to style button regarding the theme and the type
+///
+/// @param {String} $color - The button color, either primary or secondary or colors from the color palette
+/// @param {String} $type - The button type, either primary or secondary
+@mixin lx-button-color($color, $type) {
+    @if $type == primary {
+        $lx-button-primary-color: map-get($lx-theme-color-palette, $color);
+
+        background-color: $lx-button-primary-color;
+        color: lx-theme-pick-best-color($lx-button-primary-color);
+        transition: background-color $lx-button-transition-duration;
+
+        &:hover {
+            background-color: lighten($lx-button-primary-color, 10%);
         }
 
-        &:focus::before {
-            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, focus));
-        }
-
-        #{$lx-ripple-identifier} {
-            background-color: rgba(#fff, map-get($lx-ripple-dark-opacities, ripple));
+        &:active {
+            background-color: darken($lx-button-primary-color, 10%);
         }
 
         &:disabled {
-            background-color: rgba(#000, 0.12);
+            background-color: rgba($lx-button-primary-color, 0.4);
         }
     }
-}
 
-/// Button icon mixin to style an icon within a button.
-///
-/// @param {String} $type - The button type, either text or contained
-@mixin lx-button-icon($type) {
-    margin-right: $lx-base-spacing-unit;
-    font-size: lx-typography-to-rem(18px);
+    @if $type == secondary {
+        $lx-button-secondary-color: $lx-theme-body-dark;
 
-    @if $type == contained {
-        margin-left: -($lx-base-spacing-unit / 2);
+        border: 1px solid $lx-button-secondary-color;
+        color: $lx-button-secondary-color;
+        transition: border-color $lx-button-transition-duration, color $lx-button-transition-duration;
+
+        &:hover {
+            border-color: lighten($lx-button-secondary-color, 20%);
+            color: lighten($lx-button-secondary-color, 20%);
+        }
+
+        &:active {
+            border-color: darken($lx-button-secondary-color, 20%);
+            color: darken($lx-button-secondary-color, 20%);
+        }
+
+        &:disabled {
+            border-color: rgba($lx-button-secondary-color, 0.4);
+            color: rgba($lx-button-secondary-color, 0.4);
+        }
     }
 }
