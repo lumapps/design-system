@@ -3,10 +3,8 @@
 //\*------------------------------------*/
 
 @import "settings/defaults";
-
 @import "../core/scss/lumx";
-
 @import "../layout/app/app";
-@import "../layout/header/header";
+@import "../layout/main-nav/main-nav";
+@import "../layout/sub-nav/sub-nav";
 @import "../layout/main/main";
-@import "../layout/sidebar/sidebar";

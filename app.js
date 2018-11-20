@@ -17,11 +17,11 @@
             name: 'app',
             url: '/',
             views: {
-                header: {
-                    templateUrl: 'layout/header/header.html',
+                'main-nav': {
+                    templateUrl: 'layout/main-nav/main-nav.html',
                 },
-                sidebar: {
-                    templateUrl: 'layout/sidebar/sidebar.html',
+                'sub-nav': {
+                    templateUrl: 'layout/sub-nav/sub-nav.html',
                 },
             },
         }).state('app.button', {

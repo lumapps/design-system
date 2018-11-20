@@ -1,32 +1,28 @@
 @import "./color-palette";
 
-$lx-theme-colors: (
-    primary: $lx-theme-blue,
-    secondary: $lx-theme-golden
-) !default;
+$lx-theme-primary: $lx-theme-blue !default;
+$lx-theme-secondary: $lx-theme-golden !default;
+$lx-theme-body-dark: $lx-theme-dark-blue !default;
+$lx-theme-body-light: $lx-theme-white !default;
 
 $lx-theme-color-palette: (
-    primary: map-get($lx-theme-colors, primary),
-    secondary: map-get($lx-theme-colors, primary),
+    primary: $lx-theme-primary,
+    secondary: $lx-theme-secondary,
     dark-blue: $lx-theme-dark-blue,
     blue: $lx-theme-blue,
     golden: $lx-theme-golden,
     red: $lx-theme-red,
     green: $lx-theme-green
-) !default;
-
-$lx-theme-body-dark: $lx-theme-dark-blue;
+);
 
 $lx-theme-body-dark-emphasis: (
     high: $lx-theme-body-dark,
     medium: rgba($lx-theme-body-dark, 0.6),
     low: rgba($lx-theme-body-dark, 0.4)
-) !default;
-
-$lx-theme-body-light: $lx-theme-white;
+);
 
 $lx-theme-body-light-emphasis: (
     high: $lx-theme-body-light,
     medium: rgba($lx-theme-body-light, 0.6),
     low: rgba($lx-theme-body-light, 0.4)
-) !default;
+);

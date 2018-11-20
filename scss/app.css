@@ -9361,6 +9361,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
+  color: #28336d;
   font-size: 1em;
   line-height: 1.5; }
 
@@ -9579,17 +9580,17 @@ html {
     box-shadow: 0 0 0 2px rgba(40, 51, 109, 0.4); }
 
 .lx-button--type-primary.lx-button--color-secondary {
-  background-color: #2884f6;
-  color: #fff;
+  background-color: #ffc425;
+  color: #28336d;
   transition: background-color 0.1s, box-shadow 0.1s; }
   .lx-button--type-primary.lx-button--color-secondary:hover {
-    background-color: #59a0f8; }
+    background-color: #ffd258; }
   .lx-button--type-primary.lx-button--color-secondary:active {
-    background-color: #096ae2; }
+    background-color: #f1b000; }
   .lx-button--type-primary.lx-button--color-secondary:disabled {
-    background-color: rgba(40, 132, 246, 0.4); }
+    background-color: rgba(255, 196, 37, 0.4); }
   .lx-button--type-primary.lx-button--color-secondary[data-focus-visible-added] {
-    box-shadow: 0 0 0 2px rgba(40, 132, 246, 0.4); }
+    box-shadow: 0 0 0 2px rgba(255, 196, 37, 0.4); }
 
 .lx-button--type-secondary.lx-button--color-secondary {
   border: 1px solid #28336d;
@@ -9751,3 +9752,66 @@ html {
     color: rgba(40, 51, 109, 0.4); }
   .lx-button--type-secondary.lx-button--color-green[data-focus-visible-added] {
     box-shadow: 0 0 0 2px rgba(40, 51, 109, 0.4); }
+
+/* ==========================================================================
+   App
+   ========================================================================== */
+.app {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex; }
+
+/* ==========================================================================
+   Main nav
+   ========================================================================== */
+.main-nav {
+  overflow: auto;
+  width: 56px;
+  flex-shrink: 0;
+  background-color: #2884f6; }
+
+/* ==========================================================================
+   Sub nav
+   ========================================================================== */
+.sub-nav {
+  display: flex;
+  overflow: auto;
+  width: 228px;
+  flex-direction: column;
+  flex-shrink: 0; }
+  .sub-nav__wrapper {
+    flex: 1;
+    padding: 24px;
+    border-right: 1px solid #e8e8e8; }
+  .sub-nav__item {
+    position: relative;
+    display: block;
+    min-height: 36px;
+    padding: 0 16px;
+    margin-bottom: 4px;
+    border-radius: 5px;
+    color: #28336d;
+    font-size: 0.875rem;
+    line-height: 36px;
+    text-decoration: none; }
+    .sub-nav__item:last-child {
+      margin-bottom: 0; }
+    .sub-nav__item:hover, .sub-nav__item--is-active {
+      background-color: rgba(40, 132, 246, 0.1); }
+    .sub-nav__item--is-active::after {
+      position: absolute;
+      top: 0;
+      right: -25px;
+      bottom: 0;
+      width: 2px;
+      background-color: #ffc425;
+      content: ''; }
+
+/* ==========================================================================
+   Main
+   ========================================================================== */
+.main {
+  flex: 1; }

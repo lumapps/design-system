@@ -8,6 +8,7 @@ html {
     @include lx-typography-base;
 
     box-sizing: border-box;
+    color: $lx-theme-body-dark;
     font-size: ($lx-typography-font-size / 16px) * 1em;
     line-height: $lx-typography-line-height / $lx-typography-font-size;
 }

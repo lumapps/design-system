@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Sub nav
+   ========================================================================== */
+
+.sub-nav {
+    display: flex;
+    overflow: auto;
+    width: 228px;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    &__wrapper {
+        flex: 1;
+        padding: $lx-base-spacing-unit * 3;
+        border-right: 1px solid #e8e8e8;
+    }
+
+    &__item {
+        position: relative;
+        display: block;
+        min-height: 36px;
+        padding: 0 $lx-base-spacing-unit * 2;
+        margin-bottom: $lx-base-spacing-unit / 2;
+        border-radius: 5px;
+        color: $lx-theme-body-dark;
+        font-size: lx-typography-to-rem(14px);
+        line-height: 36px;
+        text-decoration: none;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        &:hover,
+        &--is-active {
+            background-color: rgba($lx-theme-primary, 0.1);
+        }
+
+        &--is-active::after {
+            position: absolute;
+            top: 0;
+            right: -($lx-base-spacing-unit * 3) - 1;
+            bottom: 0;
+            width: 2px;
+            background-color: $lx-theme-secondary;
+            content: '';
+        }
+    }
+}

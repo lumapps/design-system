@@ -10,11 +10,10 @@
     <link rel="stylesheet" href="scss/app.css">
 </head>
 <body>
-    <div class="sidebar" ui-view="sidebar"></div>
-
     <div class="app">
-        <div class="app__header" ui-view="header"></div>
-        <div class="app__main" ui-view="main"></div>
+        <div class="main-nav"></div>
+        <div class="sub-nav" ui-view="sub-nav"></div>
+        <div class="main" ui-view="main"></div>
     </div>
 
     <!-- Libs -->
