@@ -4,21 +4,21 @@ var browserSync = require('browser-sync').create();
 var sass = require('gulp-sass');
 
 gulp.task('styles', function() {
-    gulp.src('app/scss/**/*.scss')
-        .pipe(sass({includePaths: ['app/libs/mdi/scss/', 'app/libs/sass-mq/']}).on('error', sass.logError))
-        .pipe(gulp.dest('app/scss/'))
+    gulp.src('scss/**/*.scss')
+        .pipe(sass({includePaths: ['node_modules/@mdi/font/scss/', 'node_modules/sass-mq/']}).on('error', sass.logError))
+        .pipe(gulp.dest('scss/'))
         .pipe(browserSync.stream());
 });
 
 gulp.task('default', function() {
     browserSync.init({
         server: {
-            baseDir: "./app",
+            baseDir: "./",
             middleware: [ historyApiFallback() ]
         }
     });
 
-    gulp.watch('app/**/*.scss', ['styles']);
-    gulp.watch("app/**/*.html").on('change', browserSync.reload);
-    gulp.watch("app/**/*.js").on('change', browserSync.reload);
+    gulp.watch(['components/**/*.scss', 'core/scss/lumx.scss', 'layout/**/*.scss', 'scss/app.scss', 'scss/**/*.scss'], ['styles']);
+    gulp.watch(['components/**/*.html', 'demo/**/*.html', 'layout/**/*.html']).on('change', browserSync.reload);
+    gulp.watch(['components/**/*.js', 'core/**/*.js', 'demo/**/*.js']).on('change', browserSync.reload);
 });
