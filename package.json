@@ -21,6 +21,7 @@
   "dependencies": {
     "@mdi/font": "^3.0.39",
     "angular": "^1.7.5",
+    "focus-visible": "^4.1.5",
     "jquery": "^3.3.1",
     "sass-mq": "^5.0.0"
   }

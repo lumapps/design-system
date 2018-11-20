@@ -14,6 +14,7 @@
     vertical-align: middle;
 
     &:hover {
+        box-shadow: none !important;
         cursor: pointer;
     }
 
@@ -65,7 +66,7 @@
 
         background-color: $lx-button-primary-color;
         color: lx-theme-pick-best-color($lx-button-primary-color);
-        transition: background-color $lx-button-transition-duration;
+        transition: background-color $lx-button-transition-duration, box-shadow $lx-button-transition-duration;
 
         &:hover {
             background-color: lighten($lx-button-primary-color, 10%);
@@ -78,6 +79,10 @@
         &:disabled {
             background-color: rgba($lx-button-primary-color, 0.4);
         }
+
+        &[data-focus-visible-added] {
+            box-shadow: 0 0 0 2px rgba($lx-button-primary-color, 0.4);
+        }
     }
 
     @if $type == secondary {
@@ -85,7 +90,7 @@
 
         border: 1px solid $lx-button-secondary-color;
         color: $lx-button-secondary-color;
-        transition: border-color $lx-button-transition-duration, color $lx-button-transition-duration;
+        transition: border-color $lx-button-transition-duration, box-shadow $lx-button-transition-duration, color $lx-button-transition-duration;
 
         &:hover {
             border-color: lighten($lx-button-secondary-color, 20%);
@@ -100,6 +105,10 @@
         &:disabled {
             border-color: rgba($lx-button-secondary-color, 0.4);
             color: rgba($lx-button-secondary-color, 0.4);
+        }
+
+        &[data-focus-visible-added] {
+            box-shadow: 0 0 0 2px rgba($lx-button-secondary-color, 0.4);
         }
     }
 }
