@@ -78,11 +78,23 @@
         transition: background-color $lx-button-transition-duration, box-shadow $lx-button-transition-duration;
 
         &:hover {
-            background-color: lighten($lx-button-primary-color, 10%);
+            @if lightness($lx-button-primary-color) > 50% {
+                background-color: darken($lx-button-primary-color, 10%);
+            }
+
+            @else {
+                background-color: lighten($lx-button-primary-color, 10%);
+            }
         }
 
         &:active {
-            background-color: darken($lx-button-primary-color, 10%);
+            @if lightness($lx-button-primary-color) > 50% {
+                background-color: darken($lx-button-primary-color, 20%);
+            }
+
+            @else {
+                background-color: lighten($lx-button-primary-color, 20%);
+            }
         }
 
         &:disabled {
@@ -107,8 +119,8 @@
         }
 
         &:active {
-            border-color: darken($lx-button-secondary-color, 20%);
-            color: darken($lx-button-secondary-color, 20%);
+            border-color: lighten($lx-button-secondary-color, 40%);
+            color: lighten($lx-button-secondary-color, 40%);
         }
 
         &:disabled {
