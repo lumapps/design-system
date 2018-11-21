@@ -1,10 +1,15 @@
-/// Icon base mixin to apply mdi font.
-@mixin lx-icon-base() {
-    display: inline-block;
-    font: normal normal normal #{$mdi-font-size-base}/1 '#{$mdi-font-name}';
-    font-size: inherit;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    line-height: inherit;
-    text-rendering: auto;
+@import "./variables";
+
+/// Icon size mixin to style icon regarding the size
+///
+/// @param {String} $size - The button size, either xs, s, m, l or xl
+@mixin lx-icon-size($size) {
+    font-size: lx-typography-to-rem(map-get($lx-icon-sizes, $size));
+}
+
+/// Icon color mixin to style button regarding the color
+///
+/// @param {String} $color - The icon color, either primary, secondary or colors from the color palette
+@mixin lx-icon-color($color) {
+    color: map-get($lx-theme-color-palette, $color);
 }

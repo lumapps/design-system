@@ -15,6 +15,7 @@
     angular.module('lumx.checkbox', []);
     angular.module('lumx.dialog', []);
     angular.module('lumx.dropdown', []);
+    angular.module('lumx.icon', []);
     angular.module('lumx.ripple', []);
     angular.module('lumx.select', []);
     angular.module('lumx.tabs', []);
@@ -25,6 +26,7 @@
         'lumx.checkbox',
         'lumx.dialog',
         'lumx.dropdown',
+        'lumx.icon',
         'lumx.ripple',
         'lumx.select',
         'lumx.tabs',

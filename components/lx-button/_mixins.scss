@@ -30,7 +30,7 @@
 
 /// Button size mixin to style button regarding the size and the type
 ///
-/// @param {String} $color - The button size, either s or m or l
+/// @param {String} $size - The button size, either s, m or l
 /// @param {String} $type - The button type, either primary or secondary
 @mixin lx-button-size($size, $type) {
     height: map-get($lx-button-sizes, $size);
@@ -67,7 +67,7 @@
 
 /// Button color mixin to style button regarding the theme and the type
 ///
-/// @param {String} $color - The button color, either primary or secondary or colors from the color palette
+/// @param {String} $color - The button color, either primary, secondary or colors from the color palette
 /// @param {String} $type - The button type, either primary or secondary
 @mixin lx-button-color($color, $type) {
     @if $type == primary {

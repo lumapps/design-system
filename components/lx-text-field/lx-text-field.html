@@ -5,15 +5,12 @@
     </label>
 
     <div class="lx-text-field__input">
-        <div class="lx-text-field__icon" ng-if="lxTextField.icon">
-            <i class="mdi mdi-{{ lxTextField.icon }}"></i>
-        </div>
-
+        <lx-icon class="lx-text-field__icon" ng-if="lxTextField.icon">{{ lxTextField.icon }}</lx-icon>
         <div class="lx-text-field__native-control" ng-transclude></div>
     </div>
 
     <div class="lx-text-field__helper" ng-if="lxTextField.helper">
-        <i class="mdi mdi-help-circle"></i>
+        <lx-icon>help</lx-icon>
         <span>{{ lxTextField.helper }}</span>
     </div>
 </div>
