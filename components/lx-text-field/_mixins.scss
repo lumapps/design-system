@@ -2,13 +2,16 @@
 
 /// Text field base mixin to reset native styles and apply global structure.
 @mixin lx-text-field-base() {
-    display: block;
+    @include lx-typography-base;
+
     height: $lx-text-field-height;
-    padding: 0 $lx-text-field-horizontal-padding;
+    padding: 0;
     border: none;
     margin: 0;
     background-color: transparent;
-    font-size: lx-typography-to-rem(16px);
+    color: $lx-theme-body-dark;
+    font-size: lx-typography-to-rem(14px);
     font-weight: 400;
+    line-height: $lx-text-field-height;
     outline: none;
 }

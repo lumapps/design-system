@@ -39,9 +39,9 @@
             replace: true,
             restrict: 'E',
             scope: {
+                helper: '@?lxHelper',
+                icon: '@?lxIcon',
                 label: '@?lxLabel',
-                suffix: '@?lxSuffix',
-                theme: '@?lxTheme',
             },
             templateUrl: 'components/lx-text-field/lx-text-field.html',
             transclude: true,

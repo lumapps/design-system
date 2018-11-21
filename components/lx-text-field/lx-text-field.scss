@@ -6,120 +6,52 @@
 
 .lx-text-field {
     &__label {
+        @include lx-typography(caption);
+
         display: block;
         margin-bottom: $lx-base-spacing-unit;
-        font-size: lx-typography-to-rem(12px);
+        color: $lx-theme-body-dark;
     }
 
     &__input {
-        position: relative;
         display: inline-flex;
-        overflow: hidden;
         height: $lx-text-field-height;
-        border-radius: 2px;
+        align-items: center;
+        padding: 0 $lx-text-field-horizontal-padding;
+        background-color: rgba($lx-theme-body-dark, 0.05);
+        border-radius: 4px;
+        box-shadow: 0 0 0 1px rgba($lx-theme-body-dark, 0.1);
+        transition: box-shadow $lx-text-field-transition-duration;
+    }
 
-        &::after {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            height: 2px;
-            content: '';
-            transform: scaleX(0);
-            transition: transform 0.2s;
-        }
+    &__icon {
+        margin-right: $lx-base-spacing-unit;
+        color: $lx-theme-body-dark;
+        font-size: lx-typography-to-rem(20px);
     }
 
     &__native-control input {
         @include lx-text-field-base;
-    }
-
-    &__suffix {
-        padding: 0 $lx-text-field-horizontal-padding;
-        font-size: lx-typography-to-rem(16px);
-        font-weight: 400;
-        line-height: lx-typography-to-rem($lx-text-field-height);
-    }
-}
-
-/* Text field themes
-   ========================================================================== */
-
-.lx-text-field--medium {
-    .lx-text-field__label {
-        color: rgba(#000, map-get($lx-theme-dark-text-opacities, medium));
-    }
-
-    .lx-text-field__input {
-        background-color: rgba(#000, 0.04);
-
-        &::after {
-            background-color: map-get($lx-theme-colors, primary);
-        }
-    }
-
-    .lx-text-field__native-control input {
-        color: rgba(#000, map-get($lx-theme-dark-text-opacities, high));
 
         &::placeholder {
-            color: rgba(#000, map-get($lx-theme-dark-text-opacities, disabled));
+            color: map-get($lx-theme-body-dark-emphasis, medium);
         }
     }
 
-    .lx-text-field__suffix {
-        color: rgba(#000, map-get($lx-theme-dark-text-opacities, medium));
-    }
-}
+    &__helper {
+        display: flex;
+        align-items: center;
+        margin-top: $lx-base-spacing-unit;
+        color: map-get($lx-theme-body-dark-emphasis, medium);
 
-.lx-text-field--light {
-    .lx-text-field__label {
-        color: rgba(#000, map-get($lx-theme-dark-text-opacities, medium));
-    }
-
-    .lx-text-field__input {
-        background-color: #fff;
-
-        &::after {
-            background-color: map-get($lx-theme-colors, primary);
+        i {
+            margin-right: $lx-base-spacing-unit / 2;
+            font-size: lx-typography-to-rem(14px);
         }
-    }
 
-    .lx-text-field__native-control input {
-        color: rgba(#000, map-get($lx-theme-dark-text-opacities, high));
-
-        &::placeholder {
-            color: rgba(#000, map-get($lx-theme-dark-text-opacities, disabled));
+        span {
+            @include lx-typography(caption);
         }
-    }
-
-    .lx-text-field__suffix {
-        color: rgba(#000, map-get($lx-theme-dark-text-opacities, medium));
-    }
-}
-
-.lx-text-field--dark {
-    .lx-text-field__label {
-        color: rgba(#fff, map-get($lx-theme-light-text-opacities, medium));
-    }
-
-    .lx-text-field__input {
-        background-color: rgba(#fff, 0.3);
-
-        &::after {
-            background-color: #fff;
-        }
-    }
-
-    .lx-text-field__native-control input {
-        color: rgba(#fff, map-get($lx-theme-light-text-opacities, high));
-
-        &::placeholder {
-            color: rgba(#fff, map-get($lx-theme-light-text-opacities, disabled));
-        }
-    }
-
-    .lx-text-field__suffix {
-        color: rgba(#fff, map-get($lx-theme-light-text-opacities, medium));
     }
 }
 
@@ -127,32 +59,27 @@
    ========================================================================== */
 
 .lx-text-field--is-focus {
-    .lx-text-field__input::after {
-        transform: scaleX(1);
+    .lx-text-field__input {
+        box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.6);
     }
 }
 
-.lx-text-field--is-disabled.lx-text-field--medium,
-.lx-text-field--is-disabled.lx-text-field--light {
+.lx-text-field--is-disabled {
     .lx-text-field__label,
-    .lx-text-field__native-control input,
-    .lx-text-field__suffix {
-        color: rgba(#000, map-get($lx-theme-dark-text-opacities, disabled));
+    .lx-text-field__icon,
+    .lx-text-field__helper {
+        color: map-get($lx-theme-body-dark-emphasis, low);
     }
 
     .lx-text-field__input {
-        background-color: rgba(#000, 0.08);
-    }
-}
-
-.lx-text-field--is-disabled.lx-text-field--dark {
-    .lx-text-field__label,
-    .lx-text-field__native-control input,
-    .lx-text-field__suffix {
-        color: rgba(#fff, map-get($lx-theme-dark-text-opacities, disabled));
+        background-color: $lx-theme-white;
     }
 
-    .lx-text-field__input {
-        background-color: rgba(#fff, 0.12);
+    .lx-text-field__native-control input {
+        color: map-get($lx-theme-body-dark-emphasis, low);
+
+        &::placeholder {
+            color: map-get($lx-theme-body-dark-emphasis, low);
+        }
     }
 }

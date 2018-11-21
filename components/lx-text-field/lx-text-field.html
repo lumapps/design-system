@@ -1,16 +1,19 @@
 <div class="lx-text-field"
-     ng-class="{ 'lx-text-field--light': lxTextField.theme === 'light',
-                 'lx-text-field--medium': !lxTextField.theme || lxTextField.theme === 'medium',
-                 'lx-text-field--dark': lxTextField.theme === 'dark' }">
+     ng-class="{ 'lx-text-field--has-icon': lxTextField.icon }">
     <label class="lx-text-field__label" ng-if="lxTextField.label">
         {{ lxTextField.label }}
     </label>
 
     <div class="lx-text-field__input">
-        <div class="lx-text-field__native-control" ng-transclude></div>
+        <div class="lx-text-field__icon" ng-if="lxTextField.icon">
+            <i class="mdi mdi-{{ lxTextField.icon }}"></i>
+        </div>
 
-        <span class="lx-text-field__suffix" ng-if="lxTextField.suffix">
-            {{ lxTextField.suffix }}
-        </span>
+        <div class="lx-text-field__native-control" ng-transclude></div>
+    </div>
+
+    <div class="lx-text-field__helper" ng-if="lxTextField.helper">
+        <i class="mdi mdi-help-circle"></i>
+        <span>{{ lxTextField.helper }}</span>
     </div>
 </div>

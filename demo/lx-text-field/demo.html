@@ -1,17 +1,23 @@
 <div style="padding: 24px;">
-    <lx-text-field lx-label="Name" lx-suffix="px">
+    <lx-text-field lx-label="Name">
         <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder">
     </lx-text-field>
 </div>
 
-<div style="background-color: #eee; padding: 24px;">
-    <lx-text-field lx-label="Name" lx-suffix="px" lx-theme="light">
+<div style="padding: 24px;">
+    <lx-text-field lx-label="Name" lx-icon="magnify">
         <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder">
     </lx-text-field>
 </div>
 
-<div style="background-color: #000; padding: 24px;"">
-    <lx-text-field lx-label="Name" lx-suffix="px" lx-theme="dark">
+<div style="padding: 24px;">
+    <lx-text-field lx-label="Name" lx-icon="magnify" lx-helper="Optional helper text">
         <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder">
+    </lx-text-field>
+</div>
+
+<div style="padding: 24px;">
+    <lx-text-field lx-label="Name" lx-icon="magnify" lx-helper="Optional helper text">
+        <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" ng-disabled="true">
     </lx-text-field>
 </div>
