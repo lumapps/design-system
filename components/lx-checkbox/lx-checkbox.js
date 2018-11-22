@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    lxCheckboxControler.$inject = ['$element', 'LxRipple', 'LxUtilsService'];
+    lxCheckboxControler.$inject = ['$element', 'LxUtilsService'];
 
-    function lxCheckboxControler($element, LxRipple, LxUtilsService) {
+    function lxCheckboxControler($element, LxUtilsService) {
         var lxCheckbox = this;
 
         /////////////////////////////
@@ -73,8 +73,6 @@
         function updateViewValue() {
             _modelController.$setViewValue(!_modelController.$viewValue);
             _modelController.$render();
-
-            LxRipple.launch($element.find('.lx-checkbox__background'), 'center');
         }
 
         /////////////////////////////
