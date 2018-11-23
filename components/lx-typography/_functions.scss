@@ -1,7 +1,7 @@
 /// Get the converted value from px to rem
 ///
-/// @param  {String} $size - the size to convert
-/// @return {String} the converted size
+/// @param  {String} $size - The size to convert
+/// @return {String} The converted size
 @function lx-typography-to-rem($size) {
     $remSize: $size / $lx-typography-font-size;
 

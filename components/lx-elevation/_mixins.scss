@@ -1,6 +1,6 @@
 @import "./variables";
 
-/// Applies the correct CSS rules to an element to give it the elevation specified by $z-value.
+/// Applies the correct CSS rules to an element to give it the elevation specified by $z-value
 ///
 /// @param {Integer} $z-value - The shadow elvation between 0 and 24
 @mixin lx-elevation($z-value) {

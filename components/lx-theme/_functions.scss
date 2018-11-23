@@ -2,9 +2,9 @@
 
 /// Get coontrast ratio between two given colors
 ///
-/// @param  {String} $base - the surface color to test
-/// @param  {Array}  $colors - the colors to test
-/// @return {String} the best color that fits to the surface to test
+/// @param  {String} $base - The surface color to test
+/// @param  {Array}  $colors - The colors to test
+/// @return {String} The best color that fits to the surface to test
 @function lx-theme-pick-best-color($base, $colors: ($lx-theme-body-light, $lx-theme-body-dark)) {
     $color-brightness: round((red($base) * 299) + (green($base) * 587) + (blue($base) * 114) / 1000);
     $light-color: round((red(#fff) * 299) + (green(#fff) * 587) + (blue(#fff) * 114) / 1000);

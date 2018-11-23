@@ -1,6 +1,6 @@
 @import "./variables";
 
-/// Text field base mixin to reset native styles and apply global structure.
+/// Text field base mixin to reset native styles and apply global structure
 @mixin lx-text-field-base() {
     @include lx-typography-base;
 

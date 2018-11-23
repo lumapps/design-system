@@ -9,7 +9,7 @@
 
 /// Typography mixin to style text
 ///
-/// @param {String} $style - the wanted style
+/// @param {String} $style - The wanted style
 @mixin lx-typography($style) {
     @include lx-typography-base;
 
