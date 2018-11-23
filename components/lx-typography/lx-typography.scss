@@ -4,3 +4,9 @@
 
 @import "./variables";
 @import "./mixins";
+
+@each $style in $lx-typography-styles {
+    .lx-typography-#{$style} {
+        @include lx-typography($style);
+    }
+}
