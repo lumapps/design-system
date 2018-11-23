@@ -3,3 +3,13 @@
    ========================================================================== */
 
 @import "./functions";
+
+@each $key, $color in $lx-theme-color-palette {
+    .lx-theme-background-#{$key} {
+        background-color: $color;
+    }
+
+    .lx-theme-color-#{$key} {
+        color: $color;
+    }
+}
