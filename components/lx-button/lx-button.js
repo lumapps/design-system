@@ -8,7 +8,8 @@
             var buttonType = angular.isDefined(attrs.lxType) ?  attrs.lxType : 'primary';
             var buttonColor = angular.isDefined(attrs.lxColor) ? attrs.lxColor : 'primary';
             var buttonSize = angular.isDefined(attrs.lxSize) ? attrs.lxSize : 'm';
-            var buttonClass = 'lx-button lx-button--type-' + buttonType + ' lx-button--color-' + buttonColor + ' lx-button--size-' + buttonSize;
+            var buttonTheme = angular.isDefined(attrs.lxTheme) ? attrs.lxTheme : 'light';
+            var buttonClass = 'lx-button lx-button--type-' + buttonType +' lx-button--color-' + buttonColor + ' lx-button--size-' + buttonSize + ' lx-button--theme-' + buttonTheme;
 
             if (isAnchor(attrs)) {
                 return '<a class="' + buttonClass + '" ng-transclude></a>';

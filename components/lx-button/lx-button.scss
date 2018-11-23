@@ -25,11 +25,19 @@
    ========================================================================== */
 
 @each $key, $color in $lx-theme-color-palette {
-    .lx-button--type-primary.lx-button--color-#{$key} {
-        @include lx-button-color($key, primary);
+    .lx-button--type-primary.lx-button--theme-light.lx-button--color-#{$key} {
+        @include lx-button-color($key, primary, light);
     }
 
-    .lx-button--type-secondary.lx-button--color-#{$key} {
-        @include lx-button-color($key, secondary);
+    .lx-button--type-primary.lx-button--theme-dark.lx-button--color-#{$key} {
+        @include lx-button-color($key, primary, dark);
+    }
+
+    .lx-button--type-secondary.lx-button--theme-light.lx-button--color-#{$key} {
+        @include lx-button-color($key, secondary, light);
+    }
+
+    .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-#{$key} {
+        @include lx-button-color($key, secondary, dark);
     }
 }

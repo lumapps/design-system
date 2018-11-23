@@ -69,67 +69,138 @@
 ///
 /// @param {String} $color - The button color, either primary, secondary or colors from the color palette
 /// @param {String} $type - The button type, either primary or secondary
-@mixin lx-button-color($color, $type) {
+/// @param {String} $theme - The button theme, either light or dark
+@mixin lx-button-color($color, $type, $theme: light) {
     @if $type == primary {
         $lx-button-primary-color: map-get($lx-theme-color-palette, $color);
 
-        background-color: $lx-button-primary-color;
-        color: lx-theme-pick-best-color($lx-button-primary-color);
+        @if $theme == light {
+            background-color: $lx-button-primary-color;
+            color: lx-theme-pick-best-color($lx-button-primary-color);
+        }
+
+        @else {
+            background-color: $lx-theme-white;
+            color: $lx-button-primary-color;
+        }
+
         transition: background-color $lx-button-transition-duration, box-shadow $lx-button-transition-duration;
 
         &:hover {
-            @if lightness($lx-button-primary-color) > 50% {
-                background-color: darken($lx-button-primary-color, 10%);
+            @if $theme == light {
+                @if lightness($lx-button-primary-color) > 50% {
+                    background-color: darken($lx-button-primary-color, 10%);
+                }
+
+                @else {
+                    background-color: lighten($lx-button-primary-color, 10%);
+                }
             }
 
             @else {
-                background-color: lighten($lx-button-primary-color, 10%);
+                background-color: rgba($lx-theme-white, 0.9);
             }
         }
 
         &:active {
-            @if lightness($lx-button-primary-color) > 50% {
-                background-color: darken($lx-button-primary-color, 20%);
+            @if $theme == light {
+                @if lightness($lx-button-primary-color) > 50% {
+                    background-color: darken($lx-button-primary-color, 20%);
+                }
+
+                @else {
+                    background-color: lighten($lx-button-primary-color, 20%);
+                }
             }
 
             @else {
-                background-color: lighten($lx-button-primary-color, 20%);
+                background-color: rgba($lx-theme-white, 0.8);
             }
         }
 
         &:disabled {
-            background-color: rgba($lx-button-primary-color, 0.4);
+            @if $theme == light {
+                background-color: rgba($lx-button-primary-color, 0.4);
+            }
+
+            @else {
+                background-color: rgba($lx-theme-white, 0.4);
+                color: rgba($lx-theme-white, 0.6);
+            }
         }
 
         &[data-focus-visible-added] {
-            box-shadow: 0 0 0 2px rgba($lx-button-primary-color, 0.4);
+            @if $theme == light {
+                box-shadow: 0 0 0 2px rgba($lx-button-primary-color, 0.4);
+            }
+
+            @else {
+                box-shadow: 0 0 0 2px rgba($lx-theme-white, 0.4);
+            }
         }
     }
 
     @if $type == secondary {
         $lx-button-secondary-color: $lx-theme-body-dark;
 
-        border: 1px solid $lx-button-secondary-color;
-        color: $lx-button-secondary-color;
+        background-color: transparent;
+
+        @if $theme == light {
+            border: 1px solid $lx-button-secondary-color;
+            color: $lx-button-secondary-color;
+        }
+
+        @else {
+            border: 1px solid $lx-theme-white;
+            color: $lx-theme-white;
+        }
+
         transition: border-color $lx-button-transition-duration, box-shadow $lx-button-transition-duration, color $lx-button-transition-duration;
 
         &:hover {
-            border-color: lighten($lx-button-secondary-color, 20%);
-            color: lighten($lx-button-secondary-color, 20%);
+            @if $theme == light {
+                border-color: lighten($lx-button-secondary-color, 20%);
+                color: lighten($lx-button-secondary-color, 20%);
+            }
+
+            @else {
+                border-color: rgba($lx-theme-white, 0.9);
+                color: rgba($lx-theme-white, 0.9);
+            }
         }
 
         &:active {
-            border-color: lighten($lx-button-secondary-color, 40%);
-            color: lighten($lx-button-secondary-color, 40%);
+            @if $theme == light {
+                border-color: lighten($lx-button-secondary-color, 40%);
+                color: lighten($lx-button-secondary-color, 40%);
+            }
+
+            @else {
+                border-color: rgba($lx-theme-white, 0.8);
+                color: rgba($lx-theme-white, 0.8);
+            }
         }
 
         &:disabled {
-            border-color: rgba($lx-button-secondary-color, 0.4);
-            color: rgba($lx-button-secondary-color, 0.4);
+            @if $theme == light {
+                border-color: rgba($lx-button-secondary-color, 0.4);
+                color: rgba($lx-button-secondary-color, 0.4);
+            }
+
+            @else {
+                border-color: rgba($lx-theme-white, 0.4);
+                color: rgba($lx-theme-white, 0.4);
+            }
         }
 
         &[data-focus-visible-added] {
-            box-shadow: 0 0 0 2px rgba($lx-button-secondary-color, 0.4);
+            @if $theme == light {
+                box-shadow: 0 0 0 2px rgba($lx-button-secondary-color, 0.4);
+            }
+
+            @else {
+                box-shadow: 0 0 0 2px rgba($lx-theme-white, 0.4);
+            }
         }
     }
 }
