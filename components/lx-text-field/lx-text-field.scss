@@ -20,8 +20,8 @@
         padding: 0 $lx-text-field-horizontal-padding;
         background-color: rgba($lx-theme-body-dark, 0.05);
         border-radius: 4px;
-        box-shadow: 0 0 0 1px rgba($lx-theme-body-dark, 0.1);
-        transition: box-shadow $lx-text-field-transition-duration;
+        box-shadow: 0 0 0 1px rgba($lx-theme-body-dark, 0.2);
+        transition: background-color $lx-text-field-transition-duration, box-shadow $lx-text-field-transition-duration;
     }
 
     &__icon {
@@ -60,6 +60,7 @@
 
 .lx-text-field--is-focus {
     .lx-text-field__input {
+        background-color: $lx-theme-white;
         box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.6);
     }
 }
@@ -82,4 +83,8 @@
             color: map-get($lx-theme-body-dark-emphasis, low);
         }
     }
+}
+
+.lx-text-field .lx-text-field__input:hover {
+    background-color: $lx-theme-white;
 }

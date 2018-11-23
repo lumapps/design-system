@@ -840,8 +840,8 @@ html {
   padding: 0 16px;
   background-color: rgba(40, 51, 109, 0.05);
   border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(40, 51, 109, 0.1);
-  transition: box-shadow 0.2s; }
+  box-shadow: 0 0 0 1px rgba(40, 51, 109, 0.2);
+  transition: background-color 0.2s, box-shadow 0.2s; }
 
 .lx-text-field__icon {
   margin-right: 8px;
@@ -883,6 +883,7 @@ html {
 /* Text field states
    ========================================================================== */
 .lx-text-field--is-focus .lx-text-field__input {
+  background-color: #fff;
   box-shadow: 0 0 0 2px rgba(40, 132, 246, 0.6); }
 
 .lx-text-field--is-disabled .lx-text-field__label,
@@ -897,6 +898,9 @@ html {
   color: rgba(40, 51, 109, 0.4); }
   .lx-text-field--is-disabled .lx-text-field__native-control input::placeholder {
     color: rgba(40, 51, 109, 0.4); }
+
+.lx-text-field .lx-text-field__input:hover {
+  background-color: #fff; }
 
 /* ==========================================================================
    Base
