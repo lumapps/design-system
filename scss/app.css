@@ -124,10 +124,10 @@
   color: #0fa15a; }
 
 .lx-theme-background-light-grey {
-  background-color: #ececec; }
+  background-color: #f5f5f5; }
 
 .lx-theme-color-light-grey {
-  color: #ececec; }
+  color: #f5f5f5; }
 
 /* ==========================================================================
    Base
@@ -697,21 +697,21 @@ html {
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4); }
 
 .lx-button--type-primary.lx-button--theme-light.lx-button--color-light-grey {
-  background-color: #ececec;
+  background-color: #f5f5f5;
   color: #28336d;
   transition: background-color 0.2s, box-shadow 0.2s; }
   .lx-button--type-primary.lx-button--theme-light.lx-button--color-light-grey:hover {
-    background-color: lightgray; }
+    background-color: gainsboro; }
   .lx-button--type-primary.lx-button--theme-light.lx-button--color-light-grey:active {
-    background-color: #b9b9b9; }
+    background-color: #c2c2c2; }
   .lx-button--type-primary.lx-button--theme-light.lx-button--color-light-grey:disabled {
-    background-color: rgba(236, 236, 236, 0.4); }
+    background-color: rgba(245, 245, 245, 0.4); }
   .lx-button--type-primary.lx-button--theme-light.lx-button--color-light-grey[data-focus-visible-added] {
-    box-shadow: 0 0 0 2px rgba(236, 236, 236, 0.4); }
+    box-shadow: 0 0 0 2px rgba(245, 245, 245, 0.4); }
 
 .lx-button--type-primary.lx-button--theme-dark.lx-button--color-light-grey {
   background-color: #fff;
-  color: #ececec;
+  color: #f5f5f5;
   transition: background-color 0.2s, box-shadow 0.2s; }
   .lx-button--type-primary.lx-button--theme-dark.lx-button--color-light-grey:hover {
     background-color: rgba(255, 255, 255, 0.9); }
