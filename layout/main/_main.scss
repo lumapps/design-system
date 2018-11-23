@@ -5,4 +5,9 @@
 .main {
     overflow: auto;
     flex: 1;
+    padding: $lx-base-spacing-unit * 6 $lx-base-spacing-unit * 10;
+
+    &__block {
+        margin-bottom: $lx-base-spacing-unit * 6;
+    }
 }

@@ -1,6 +1,83 @@
 /* ==========================================================================
    Typography
    ========================================================================== */
+.lx-typography-caption {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.75rem;
+  font-weight: 400; }
+
+.lx-typography-body2 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.875rem;
+  font-weight: 400; }
+
+.lx-typography-body1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1rem;
+  font-weight: 400; }
+
+.lx-typography-subtitle2 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 0.875rem;
+  font-weight: 500; }
+
+.lx-typography-subtitle1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1rem;
+  font-weight: 500; }
+
+.lx-typography-headline6 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.25rem;
+  font-weight: 500; }
+
+.lx-typography-headline5 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.5rem;
+  font-weight: 500; }
+
+.lx-typography-headline4 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 2.125rem;
+  font-weight: 500; }
+
+.lx-typography-headline3 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 3rem;
+  font-weight: 500; }
+
+.lx-typography-headline2 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 3.75rem;
+  font-weight: 500; }
+
+.lx-typography-headline1 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 6rem;
+  font-weight: 500; }
+
 /* ==========================================================================
    Theme
    ========================================================================== */
@@ -489,6 +566,36 @@ html {
     color: rgba(40, 51, 109, 0.4); }
 
 /* ==========================================================================
+   Base
+   ========================================================================== */
+h1 {
+  margin-bottom: 24px;
+  font-size: 1.875rem;
+  font-weight: 600; }
+
+h2 {
+  margin-bottom: 12px;
+  font-size: 1.25rem;
+  font-weight: 600; }
+
+ul {
+  padding: 0;
+  margin-left: 32px; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+p,
+ul,
+table {
+  margin: 0 0 24px 0; }
+  p:last-child,
+  ul:last-child,
+  table:last-child {
+    margin-bottom: 0; }
+
+/* ==========================================================================
    App
    ========================================================================== */
 .app {
@@ -550,4 +657,7 @@ html {
    ========================================================================== */
 .main {
   overflow: auto;
-  flex: 1; }
+  flex: 1;
+  padding: 48px 80px; }
+  .main__block {
+    margin-bottom: 48px; }
