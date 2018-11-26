@@ -319,11 +319,11 @@ html {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s; }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-primary:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    color: rgba(255, 255, 255, 0.9); }
-  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-primary:active {
     border-color: rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8); }
+  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-primary:active {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6); }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-primary:disabled {
     border-color: rgba(255, 255, 255, 0.4);
     color: rgba(255, 255, 255, 0.4); }
@@ -380,11 +380,11 @@ html {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s; }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-secondary:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    color: rgba(255, 255, 255, 0.9); }
-  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-secondary:active {
     border-color: rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8); }
+  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-secondary:active {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6); }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-secondary:disabled {
     border-color: rgba(255, 255, 255, 0.4);
     color: rgba(255, 255, 255, 0.4); }
@@ -441,11 +441,11 @@ html {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s; }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-dark-blue:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    color: rgba(255, 255, 255, 0.9); }
-  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-dark-blue:active {
     border-color: rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8); }
+  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-dark-blue:active {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6); }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-dark-blue:disabled {
     border-color: rgba(255, 255, 255, 0.4);
     color: rgba(255, 255, 255, 0.4); }
@@ -502,11 +502,11 @@ html {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s; }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-blue:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    color: rgba(255, 255, 255, 0.9); }
-  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-blue:active {
     border-color: rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8); }
+  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-blue:active {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6); }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-blue:disabled {
     border-color: rgba(255, 255, 255, 0.4);
     color: rgba(255, 255, 255, 0.4); }
@@ -563,11 +563,11 @@ html {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s; }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-golden:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    color: rgba(255, 255, 255, 0.9); }
-  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-golden:active {
     border-color: rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8); }
+  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-golden:active {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6); }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-golden:disabled {
     border-color: rgba(255, 255, 255, 0.4);
     color: rgba(255, 255, 255, 0.4); }
@@ -624,11 +624,11 @@ html {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s; }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-red:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    color: rgba(255, 255, 255, 0.9); }
-  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-red:active {
     border-color: rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8); }
+  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-red:active {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6); }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-red:disabled {
     border-color: rgba(255, 255, 255, 0.4);
     color: rgba(255, 255, 255, 0.4); }
@@ -685,11 +685,11 @@ html {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s; }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-green:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    color: rgba(255, 255, 255, 0.9); }
-  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-green:active {
     border-color: rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8); }
+  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-green:active {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6); }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-green:disabled {
     border-color: rgba(255, 255, 255, 0.4);
     color: rgba(255, 255, 255, 0.4); }
@@ -746,11 +746,11 @@ html {
   color: #fff;
   transition: border-color 0.2s, box-shadow 0.2s, color 0.2s; }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-light-grey:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    color: rgba(255, 255, 255, 0.9); }
-  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-light-grey:active {
     border-color: rgba(255, 255, 255, 0.8);
     color: rgba(255, 255, 255, 0.8); }
+  .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-light-grey:active {
+    border-color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.6); }
   .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-light-grey:disabled {
     border-color: rgba(255, 255, 255, 0.4);
     color: rgba(255, 255, 255, 0.4); }
