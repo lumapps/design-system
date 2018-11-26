@@ -42,6 +42,7 @@
                 helper: '@?lxHelper',
                 icon: '@?lxIcon',
                 label: '@?lxLabel',
+                theme: '@?lxTheme',
             },
             templateUrl: 'components/lx-text-field/lx-text-field.html',
             transclude: true,

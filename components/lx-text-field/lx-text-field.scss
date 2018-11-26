@@ -5,12 +5,21 @@
 @import "./mixins";
 
 .lx-text-field {
+    $self: &;
+
     &__label {
         @include lx-typography(caption);
 
         display: block;
         margin-bottom: $lx-base-spacing-unit;
-        color: $lx-theme-body-dark;
+
+        #{ $self }--theme-light & {
+            color: $lx-theme-body-dark;
+        }
+
+        #{ $self }--theme-dark & {
+            color: $lx-theme-body-light;
+        }
     }
 
     &__input {
@@ -18,23 +27,42 @@
         height: $lx-text-field-height;
         align-items: center;
         padding: 0 $lx-text-field-horizontal-padding;
-        background-color: rgba($lx-theme-body-dark, 0.05);
         border-radius: 4px;
-        box-shadow: 0 0 0 1px rgba($lx-theme-body-dark, 0.2);
         transition: background-color $lx-text-field-transition-duration, box-shadow $lx-text-field-transition-duration;
+
+        #{ $self }--theme-light & {
+            background-color: rgba($lx-theme-body-dark, 0.05);
+            box-shadow: 0 0 0 1px rgba($lx-theme-body-dark, 0.2);
+        }
+
+        #{ $self }--theme-dark & {
+            background-color: rgba($lx-theme-body-light, 0.1);
+            box-shadow: 0 0 0 1px rgba($lx-theme-body-light, 0.4);
+        }
     }
 
     &__icon {
         margin-right: $lx-base-spacing-unit;
-        color: $lx-theme-body-dark;
         font-size: lx-typography-to-rem(20px);
+
+        #{ $self }--theme-light & {
+            color: $lx-theme-body-dark;
+        }
+
+        #{ $self }--theme-dark & {
+            color: $lx-theme-body-light;
+        }
     }
 
     &__native-control input {
         @include lx-text-field-base;
 
-        &::placeholder {
+        #{ $self }--theme-light &::placeholder {
             color: map-get($lx-theme-body-dark-emphasis, medium);
+        }
+
+        #{ $self }--theme-dark &::placeholder {
+            color: map-get($lx-theme-body-light-emphasis, medium);
         }
     }
 
@@ -42,7 +70,14 @@
         display: flex;
         align-items: center;
         margin-top: $lx-base-spacing-unit;
-        color: map-get($lx-theme-body-dark-emphasis, medium);
+
+        #{ $self }--theme-light & {
+            color: map-get($lx-theme-body-dark-emphasis, medium);
+        }
+
+        #{ $self }--theme-dark & {
+            color: map-get($lx-theme-body-light-emphasis, medium);
+        }
 
         i {
             margin-right: $lx-base-spacing-unit / 2;
@@ -58,14 +93,7 @@
 /* Text field states
    ========================================================================== */
 
-.lx-text-field--is-focus {
-    .lx-text-field__input {
-        background-color: $lx-theme-white;
-        box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.6);
-    }
-}
-
-.lx-text-field--is-disabled {
+.lx-text-field--is-disabled.lx-text-field--theme-light {
     .lx-text-field__label,
     .lx-text-field__icon,
     .lx-text-field__helper {
@@ -73,7 +101,7 @@
     }
 
     .lx-text-field__input {
-        background-color: $lx-theme-white;
+        background-color: transparent;
     }
 
     .lx-text-field__native-control input {
@@ -85,6 +113,40 @@
     }
 }
 
-.lx-text-field .lx-text-field__input:hover {
-    background-color: $lx-theme-white;
+.lx-text-field--is-disabled.lx-text-field--theme-dark {
+    .lx-text-field__label,
+    .lx-text-field__icon,
+    .lx-text-field__helper {
+        color: map-get($lx-theme-body-light-emphasis, low);
+    }
+
+    .lx-text-field__input {
+        background-color: transparent;
+    }
+
+    .lx-text-field__native-control input {
+        color: map-get($lx-theme-body-light-emphasis, low);
+
+        &::placeholder {
+            color: map-get($lx-theme-body-light-emphasis, low);
+        }
+    }
+}
+
+.lx-text-field--is-focus.lx-text-field--theme-light .lx-text-field__input {
+    background-color: transparent;
+    box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.6);
+}
+
+.lx-text-field--is-focus.lx-text-field--theme-dark .lx-text-field__input {
+    background-color: transparent;
+    box-shadow: 0 0 0 2px rgba($lx-theme-white, 0.6);
+}
+
+.lx-text-field--theme-light:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
+    background-color: transparent;
+}
+
+.lx-text-field--theme-dark:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
+    background-color: transparent;
 }

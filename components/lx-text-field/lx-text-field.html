@@ -1,5 +1,7 @@
 <div class="lx-text-field"
-     ng-class="{ 'lx-text-field--has-icon': lxTextField.icon }">
+     ng-class="{ 'lx-text-field--theme-light': !lxTextField.theme || lxTextField.theme === 'light',
+                 'lx-text-field--theme-dark': lxTextField.theme === 'dark',
+                 'lx-text-field--has-icon': lxTextField.icon }">
     <label class="lx-text-field__label" ng-if="lxTextField.label">
         {{ lxTextField.label }}
     </label>

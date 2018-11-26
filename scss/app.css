@@ -830,23 +830,33 @@ html {
   font-size: 0.75rem;
   font-weight: 400;
   display: block;
-  margin-bottom: 8px;
-  color: #28336d; }
+  margin-bottom: 8px; }
+  .lx-text-field--theme-light .lx-text-field__label {
+    color: #28336d; }
+  .lx-text-field--theme-dark .lx-text-field__label {
+    color: #fff; }
 
 .lx-text-field__input {
   display: inline-flex;
   height: 36px;
   align-items: center;
   padding: 0 16px;
-  background-color: rgba(40, 51, 109, 0.05);
   border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(40, 51, 109, 0.2);
   transition: background-color 0.2s, box-shadow 0.2s; }
+  .lx-text-field--theme-light .lx-text-field__input {
+    background-color: rgba(40, 51, 109, 0.05);
+    box-shadow: 0 0 0 1px rgba(40, 51, 109, 0.2); }
+  .lx-text-field--theme-dark .lx-text-field__input {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4); }
 
 .lx-text-field__icon {
   margin-right: 8px;
-  color: #28336d;
   font-size: 1.25rem; }
+  .lx-text-field--theme-light .lx-text-field__icon {
+    color: #28336d; }
+  .lx-text-field--theme-dark .lx-text-field__icon {
+    color: #fff; }
 
 .lx-text-field__native-control input {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
@@ -857,19 +867,27 @@ html {
   border: none;
   margin: 0;
   background-color: transparent;
-  color: #28336d;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 36px;
   outline: none; }
-  .lx-text-field__native-control input::placeholder {
+  .lx-text-field--theme-light .lx-text-field__native-control input {
+    color: #28336d; }
+  .lx-text-field--theme-dark .lx-text-field__native-control input {
+    color: #fff; }
+  .lx-text-field--theme-light .lx-text-field__native-control input::placeholder {
     color: rgba(40, 51, 109, 0.6); }
+  .lx-text-field--theme-dark .lx-text-field__native-control input::placeholder {
+    color: rgba(255, 255, 255, 0.6); }
 
 .lx-text-field__helper {
   display: flex;
   align-items: center;
-  margin-top: 8px;
-  color: rgba(40, 51, 109, 0.6); }
+  margin-top: 8px; }
+  .lx-text-field--theme-light .lx-text-field__helper {
+    color: rgba(40, 51, 109, 0.6); }
+  .lx-text-field--theme-dark .lx-text-field__helper {
+    color: rgba(255, 255, 255, 0.6); }
   .lx-text-field__helper i {
     margin-right: 4px;
     font-size: 0.875rem; }
@@ -882,25 +900,45 @@ html {
 
 /* Text field states
    ========================================================================== */
-.lx-text-field--is-focus .lx-text-field__input {
-  background-color: #fff;
-  box-shadow: 0 0 0 2px rgba(40, 132, 246, 0.6); }
-
-.lx-text-field--is-disabled .lx-text-field__label,
-.lx-text-field--is-disabled .lx-text-field__icon,
-.lx-text-field--is-disabled .lx-text-field__helper {
+.lx-text-field--is-disabled.lx-text-field--theme-light .lx-text-field__label,
+.lx-text-field--is-disabled.lx-text-field--theme-light .lx-text-field__icon,
+.lx-text-field--is-disabled.lx-text-field--theme-light .lx-text-field__helper {
   color: rgba(40, 51, 109, 0.4); }
 
-.lx-text-field--is-disabled .lx-text-field__input {
-  background-color: #fff; }
+.lx-text-field--is-disabled.lx-text-field--theme-light .lx-text-field__input {
+  background-color: transparent; }
 
-.lx-text-field--is-disabled .lx-text-field__native-control input {
+.lx-text-field--is-disabled.lx-text-field--theme-light .lx-text-field__native-control input {
   color: rgba(40, 51, 109, 0.4); }
-  .lx-text-field--is-disabled .lx-text-field__native-control input::placeholder {
+  .lx-text-field--is-disabled.lx-text-field--theme-light .lx-text-field__native-control input::placeholder {
     color: rgba(40, 51, 109, 0.4); }
 
-.lx-text-field .lx-text-field__input:hover {
-  background-color: #fff; }
+.lx-text-field--is-disabled.lx-text-field--theme-dark .lx-text-field__label,
+.lx-text-field--is-disabled.lx-text-field--theme-dark .lx-text-field__icon,
+.lx-text-field--is-disabled.lx-text-field--theme-dark .lx-text-field__helper {
+  color: rgba(255, 255, 255, 0.4); }
+
+.lx-text-field--is-disabled.lx-text-field--theme-dark .lx-text-field__input {
+  background-color: transparent; }
+
+.lx-text-field--is-disabled.lx-text-field--theme-dark .lx-text-field__native-control input {
+  color: rgba(255, 255, 255, 0.4); }
+  .lx-text-field--is-disabled.lx-text-field--theme-dark .lx-text-field__native-control input::placeholder {
+    color: rgba(255, 255, 255, 0.4); }
+
+.lx-text-field--is-focus.lx-text-field--theme-light .lx-text-field__input {
+  background-color: transparent;
+  box-shadow: 0 0 0 2px rgba(40, 132, 246, 0.6); }
+
+.lx-text-field--is-focus.lx-text-field--theme-dark .lx-text-field__input {
+  background-color: transparent;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6); }
+
+.lx-text-field--theme-light:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
+  background-color: transparent; }
+
+.lx-text-field--theme-dark:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
+  background-color: transparent; }
 
 /* ==========================================================================
    Base
