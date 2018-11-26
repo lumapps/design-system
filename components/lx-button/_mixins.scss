@@ -80,7 +80,7 @@
         }
 
         @else {
-            background-color: $lx-theme-white;
+            background-color: $lx-theme-body-light;
             color: $lx-button-primary-color;
         }
 
@@ -98,7 +98,7 @@
             }
 
             @else {
-                background-color: rgba($lx-theme-white, 0.9);
+                background-color: rgba($lx-theme-body-light, 0.9);
             }
         }
 
@@ -114,7 +114,7 @@
             }
 
             @else {
-                background-color: rgba($lx-theme-white, 0.8);
+                background-color: rgba($lx-theme-body-light, 0.8);
             }
         }
 
@@ -124,8 +124,8 @@
             }
 
             @else {
-                background-color: rgba($lx-theme-white, 0.4);
-                color: rgba($lx-theme-white, 0.8);
+                background-color: rgba($lx-theme-body-light, 0.4);
+                color: rgba($lx-theme-body-light, 0.8);
             }
         }
 
@@ -135,7 +135,7 @@
             }
 
             @else {
-                box-shadow: 0 0 0 2px rgba($lx-theme-white, 0.4);
+                box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.4);
             }
         }
     }
@@ -151,8 +151,8 @@
         }
 
         @else {
-            border: 1px solid $lx-theme-white;
-            color: $lx-theme-white;
+            border: 1px solid $lx-theme-body-light;
+            color: $lx-theme-body-light;
         }
 
         transition: border-color $lx-button-transition-duration, box-shadow $lx-button-transition-duration, color $lx-button-transition-duration;
@@ -164,8 +164,8 @@
             }
 
             @else {
-                border-color: rgba($lx-theme-white, 0.8);
-                color: rgba($lx-theme-white, 0.8);
+                border-color: rgba($lx-theme-body-light, 0.8);
+                color: rgba($lx-theme-body-light, 0.8);
             }
         }
 
@@ -176,8 +176,8 @@
             }
 
             @else {
-                border-color: rgba($lx-theme-white, 0.6);
-                color: rgba($lx-theme-white, 0.6);
+                border-color: rgba($lx-theme-body-light, 0.6);
+                color: rgba($lx-theme-body-light, 0.6);
             }
         }
 
@@ -188,8 +188,8 @@
             }
 
             @else {
-                border-color: rgba($lx-theme-white, 0.4);
-                color: rgba($lx-theme-white, 0.4);
+                border-color: rgba($lx-theme-body-light, 0.4);
+                color: rgba($lx-theme-body-light, 0.4);
             }
         }
 
@@ -199,7 +199,7 @@
             }
 
             @else {
-                box-shadow: 0 0 0 2px rgba($lx-theme-white, 0.4);
+                box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.4);
             }
         }
     }
