@@ -10,6 +10,7 @@
         border-bottom-style: solid;
         border-bottom-width: 2px;
 
+        // Position
         #{ $self }--layout-clustered#{ $self }--position-left & {
             justify-content: flex-start;
         }
@@ -22,6 +23,7 @@
             justify-content: flex-end;
         }
 
+        // Theme
         #{ $self }--theme-light & {
             border-bottom-color: rgba($lx-theme-body-dark, 0.1);
         }
@@ -50,6 +52,17 @@
             content: '';
         }
 
+        i {
+            margin-right: $lx-base-spacing-unit;
+            font-size: lx-typography-to-rem(20px);
+        }
+
+        span {
+            font-size: lx-typography-to-rem(14px);
+            font-weight: 600;
+        }
+
+        // Layout
         #{ $self }--layout-fixed & {
             flex: 1;
         }
@@ -58,6 +71,7 @@
             padding: 0 $lx-base-spacing-unit * 3;
         }
 
+        // Default state
         #{ $self }--theme-light & {
             color: $lx-theme-body-dark;
         }
@@ -66,6 +80,7 @@
             color: map-get($lx-theme-body-light-emphasis, high);
         }
 
+        // Hover state
         #{ $self }--theme-light &:not(&--is-disabled):not(&--is-active):hover {
             color: $lx-theme-primary;
         }
@@ -74,6 +89,16 @@
             color: $lx-theme-body-light;
         }
 
+        // Focus state
+        #{ $self }--theme-light &:not(&--is-active)[data-focus-visible-added] {
+            box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.4);
+        }
+
+        #{ $self }--theme-dark &:not(&--is-active)[data-focus-visible-added] {
+            box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.4);
+        }
+
+        // Active state
         #{ $self }--theme-light &--is-active {
             color: $lx-theme-primary;
 
@@ -90,30 +115,13 @@
             }
         }
 
-        #{ $self }--theme-light &:not(&--is-active)[data-focus-visible-added] {
-            box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.4);
-        }
-
-        #{ $self }--theme-dark &:not(&--is-active)[data-focus-visible-added] {
-            box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.4);
-        }
-
+        // Disabled state
         #{ $self }--theme-light &--is-disabled {
             color: map-get($lx-theme-body-dark-emphasis, low);
         }
 
         #{ $self }--theme-dark &--is-disabled {
             color: map-get($lx-theme-body-light-emphasis, low);
-        }
-
-        i {
-            margin-right: $lx-base-spacing-unit;
-            font-size: lx-typography-to-rem(20px);
-        }
-
-        span {
-            font-size: lx-typography-to-rem(14px);
-            font-weight: 600;
         }
     }
 }
