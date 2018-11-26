@@ -90,11 +90,11 @@
             }
         }
 
-        #{ $self }--theme-light &[data-focus-visible-added] {
+        #{ $self }--theme-light &:not(&--is-active)[data-focus-visible-added] {
             box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.4);
         }
 
-        #{ $self }--theme-dark &[data-focus-visible-added] {
+        #{ $self }--theme-dark &:not(&--is-active)[data-focus-visible-added] {
             box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.4);
         }
 

@@ -874,9 +874,9 @@ html {
     color: #fff; }
     .lx-tabs--theme-dark .lx-tabs__link--is-active::after {
       background-color: #fff; }
-  .lx-tabs--theme-light .lx-tabs__link[data-focus-visible-added] {
+  .lx-tabs--theme-light .lx-tabs__link:not(.lx-tabs__link--is-active)[data-focus-visible-added] {
     box-shadow: 0 0 0 2px rgba(40, 132, 246, 0.4); }
-  .lx-tabs--theme-dark .lx-tabs__link[data-focus-visible-added] {
+  .lx-tabs--theme-dark .lx-tabs__link:not(.lx-tabs__link--is-active)[data-focus-visible-added] {
     box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4); }
   .lx-tabs--theme-light .lx-tabs__link--is-disabled {
     color: rgba(40, 51, 109, 0.4); }
