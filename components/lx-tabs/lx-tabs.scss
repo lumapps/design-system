@@ -1,0 +1,119 @@
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+.lx-tabs {
+    $self: &;
+
+    &__links {
+        display: flex;
+        border-bottom-style: solid;
+        border-bottom-width: 2px;
+
+        #{ $self }--layout-clustered#{ $self }--position-left & {
+            justify-content: flex-start;
+        }
+
+        #{ $self }--layout-clustered#{ $self }--position-center & {
+            justify-content: center;
+        }
+
+        #{ $self }--layout-clustered#{ $self }--position-right & {
+            justify-content: flex-end;
+        }
+
+        #{ $self }--theme-light & {
+            border-bottom-color: rgba($lx-theme-body-dark, 0.1);
+        }
+
+        #{ $self }--theme-dark & {
+            border-bottom-color: rgba($lx-theme-body-light, 0.1);
+        }
+    }
+
+    &__link {
+        position: relative;
+        display: flex;
+        height: 48px;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        outline: none;
+        transition: color 0.2s;
+
+        &::after {
+            position: absolute;
+            right: 0;
+            bottom: -2px;
+            left: 0;
+            height: 2px;
+            content: '';
+        }
+
+        #{ $self }--layout-fixed & {
+            flex: 1;
+        }
+
+        #{ $self }--layout-clustered & {
+            padding: 0 $lx-base-spacing-unit * 3;
+        }
+
+        #{ $self }--theme-light & {
+            color: $lx-theme-body-dark;
+        }
+
+        #{ $self }--theme-dark & {
+            color: map-get($lx-theme-body-light-emphasis, high);
+        }
+
+        #{ $self }--theme-light &:not(&--is-disabled):not(&--is-active):hover {
+            color: $lx-theme-primary;
+        }
+
+        #{ $self }--theme-dark &:not(&--is-disabled):not(&--is-active):hover {
+            color: $lx-theme-body-light;
+        }
+
+        #{ $self }--theme-light &--is-active {
+            color: $lx-theme-primary;
+
+            &::after {
+                background-color: $lx-theme-primary;
+            }
+        }
+
+        #{ $self }--theme-dark &--is-active {
+            color: $lx-theme-body-light;
+
+            &::after {
+                background-color: $lx-theme-body-light;
+            }
+        }
+
+        #{ $self }--theme-light &[data-focus-visible-added] {
+            box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.4);
+        }
+
+        #{ $self }--theme-dark &[data-focus-visible-added] {
+            box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.4);
+        }
+
+        #{ $self }--theme-light &--is-disabled {
+            color: map-get($lx-theme-body-dark-emphasis, low);
+        }
+
+        #{ $self }--theme-dark &--is-disabled {
+            color: map-get($lx-theme-body-light-emphasis, low);
+        }
+
+        i {
+            margin-right: $lx-base-spacing-unit;
+            font-size: lx-typography-to-rem(20px);
+        }
+
+        span {
+            font-size: lx-typography-to-rem(14px);
+            font-weight: 600;
+        }
+    }
+}

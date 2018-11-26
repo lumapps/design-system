@@ -71,12 +71,15 @@
         /**
          * Set the given tab as active.
          *
-         * @param {Object} tab The tab.
+         * @param {Object} tab   The tab.
+         * @param {Event}  [evt] The key event.
          */
-        function setActiveTab(tab) {
-            if (!tab.isDisabled) {
-                lxTabs.activeTab = tab.index;
+        function setActiveTab(tab, evt) {
+            if (tab.isDisabled || (angular.isDefined(evt) && evt.which !== 13)) {
+                return;
             }
+
+            lxTabs.activeTab = tab.index;
         }
 
         /**
@@ -112,6 +115,9 @@
             restrict: 'E',
             scope: {
                 activeTab: '=?lxActiveTab',
+                layout: '@?lxLayout',
+                position: '@?lxPosition',
+                theme: '@?lxTheme',
             },
             templateUrl: 'components/lx-tabs/lx-tabs.html',
             transclude: true,

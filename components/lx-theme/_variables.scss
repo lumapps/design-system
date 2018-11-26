@@ -17,13 +17,13 @@ $lx-theme-color-palette: (
 );
 
 $lx-theme-body-dark-emphasis: (
-    high: $lx-theme-body-dark,
+    high: rgba($lx-theme-body-dark, 0.8),
     medium: rgba($lx-theme-body-dark, 0.6),
     low: rgba($lx-theme-body-dark, 0.4)
 );
 
 $lx-theme-body-light-emphasis: (
-    high: $lx-theme-body-light,
+    high: rgba($lx-theme-body-light, 0.8),
     medium: rgba($lx-theme-body-light, 0.6),
     low: rgba($lx-theme-body-light, 0.4)
 );

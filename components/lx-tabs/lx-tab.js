@@ -59,6 +59,7 @@
             _parentController = parentController;
 
             lxTab.tab = {
+                icon: lxTab.icon,
                 index: tabIndex,
                 label: lxTab.label,
                 uuid: LxUtilsService.generateUUID(),
@@ -113,6 +114,7 @@
             restrict: 'E',
             require: ['lxTab', '^lxTabs'],
             scope: {
+                icon: '@?lxIcon',
                 isDisabled: '=?ngDisabled',
                 label: '@?lxLabel',
             },

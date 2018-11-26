@@ -1,5 +1,5 @@
 <lx-tabs lx-active-tab="vm.activeTab">
-    <lx-tab lx-label="Lorem Ipsum 1">
+    <lx-tab lx-label="Lorem Ipsum 1" lx-icon="create">
         <p class="p+">Lorem Ipsum Content 1</p>
     </lx-tab>
 
@@ -15,7 +15,7 @@
 <lx-button ng-click="vm.activeTab = 0">Set first tab as active tab</lx-button>
 <lx-button ng-click="vm.isTabDisabled = !vm.isTabDisabled">Toggle second tab disabled state</lx-button>
 
-<lx-tabs>
+<lx-tabs lx-layout="clustered">
     <lx-tab lx-label="{{ tab.heading }}" ng-repeat="tab in vm.tabs">
         <div class="p+">
             <p>{{ tab.content }}</p>

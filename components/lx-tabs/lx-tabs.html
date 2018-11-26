@@ -1,11 +1,20 @@
-<div class="lx-tabs">
+<div class="lx-tabs"
+     ng-class="{ 'lx-tabs--theme-light': !lxTabs.theme || lxTabs.theme === 'light',
+                 'lx-tabs--theme-dark': lxTabs.theme === 'dark',
+                 'lx-tabs--layout-fixed': !lxTabs.layout || lxTabs.layout === 'fixed',
+                 'lx-tabs--layout-clustered': lxTabs.layout === 'clustered',
+                 'lx-tabs--position-left': !lxTabs.position || lxTabs.position === 'left',
+                 'lx-tabs--position-center': lxTabs.position === 'center',
+                 'lx-tabs--position-right': lxTabs.position === 'right' }">
     <div class="lx-tabs__links">
         <a class="lx-tabs__link"
            ng-class="{ 'lx-tabs__link--is-active': lxTabs.isTabActive(tab.index),
                        'lx-tabs__link--is-disabled': tab.isDisabled }"
            ng-repeat="tab in lxTabs.tabs"
-           ng-click="lxTabs.setActiveTab(tab)">
-           <lx-icon lx-id="{{ tab.icon }}" ng-if="tab.icon"></lx-icon>
+           ng-click="lxTabs.setActiveTab(tab)"
+           ng-keypress="lxTabs.setActiveTab(tab, $event)"
+           tabindex="{{ tab.isDisabled || lxTabs.isTabActive(tab.index) ? -1 : 0 }}">
+           <lx-icon ng-if="tab.icon">{{ tab.icon }}</lx-icon>
            <span ng-if="tab.label">{{ tab.label }}</span>
         </a>
     </div>
