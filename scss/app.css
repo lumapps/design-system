@@ -848,7 +848,7 @@ html {
     box-shadow: 0 0 0 1px rgba(40, 51, 109, 0.2); }
   .lx-text-field--theme-dark .lx-text-field__input {
     background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4); }
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3); }
 
 .lx-text-field__icon {
   margin-right: 8px;
@@ -927,18 +927,18 @@ html {
     color: rgba(255, 255, 255, 0.4); }
 
 .lx-text-field--is-focus.lx-text-field--theme-light .lx-text-field__input {
-  background-color: transparent;
+  background-color: rgba(40, 51, 109, 0.05) !important;
   box-shadow: 0 0 0 2px rgba(40, 132, 246, 0.6); }
 
 .lx-text-field--is-focus.lx-text-field--theme-dark .lx-text-field__input {
-  background-color: transparent;
+  background-color: rgba(255, 255, 255, 0.1) !important;
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6); }
 
 .lx-text-field--theme-light:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
-  background-color: transparent; }
+  background-color: rgba(40, 51, 109, 0.1); }
 
 .lx-text-field--theme-dark:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
-  background-color: transparent; }
+  background-color: rgba(255, 255, 255, 0.2); }
 
 /* ==========================================================================
    Base

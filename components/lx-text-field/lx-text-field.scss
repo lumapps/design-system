@@ -37,7 +37,7 @@
 
         #{ $self }--theme-dark & {
             background-color: rgba($lx-theme-body-light, 0.1);
-            box-shadow: 0 0 0 1px rgba($lx-theme-body-light, 0.4);
+            box-shadow: 0 0 0 1px rgba($lx-theme-body-light, 0.3);
         }
     }
 
@@ -134,19 +134,19 @@
 }
 
 .lx-text-field--is-focus.lx-text-field--theme-light .lx-text-field__input {
-    background-color: transparent;
+    background-color: rgba($lx-theme-body-dark, 0.05) !important;
     box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.6);
 }
 
 .lx-text-field--is-focus.lx-text-field--theme-dark .lx-text-field__input {
-    background-color: transparent;
+    background-color: rgba($lx-theme-body-light, 0.1) !important;
     box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.6);
 }
 
 .lx-text-field--theme-light:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
-    background-color: transparent;
+    background-color: rgba($lx-theme-body-dark, 0.1);
 }
 
 .lx-text-field--theme-dark:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
-    background-color: transparent;
+    background-color: rgba($lx-theme-body-light, 0.2);
 }
