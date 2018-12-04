@@ -43,7 +43,7 @@
 
     &__icon {
         margin-right: $lx-base-spacing-unit;
-        font-size: lx-typography-to-rem(20px);
+        font-size: 20px;
 
         #{ $self }--theme-light & {
             color: $lx-theme-dark;
@@ -81,7 +81,7 @@
 
         i {
             margin-right: $lx-base-spacing-unit / 2;
-            font-size: lx-typography-to-rem(14px);
+            font-size: 14px;
         }
 
         span {

@@ -43,7 +43,7 @@
     }
 
     .lx-button__icon {
-        font-size: lx-typography-to-rem(map-get($lx-button-icon-sizes, $size));
+        font-size: map-get($lx-button-icon-sizes, $size);
     }
 
     .lx-button__icon--has-sibling {
@@ -51,14 +51,14 @@
     }
 
     .lx-button__text {
-        font-size: lx-typography-to-rem(map-get($lx-button-text-sizes, $size));
+        font-size: map-get($lx-button-text-sizes, $size);
 
         @if $type == primary {
-            line-height: lx-typography-to-rem(map-get($lx-button-sizes, $size));
+            line-height: map-get($lx-button-sizes, $size);
         }
 
         @if $type == secondary {
-            line-height: lx-typography-to-rem(map-get($lx-button-sizes, $size) - 2);
+            line-height: map-get($lx-button-sizes, $size) - 2;
         }
     }
 

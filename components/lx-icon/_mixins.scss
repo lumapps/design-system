@@ -4,7 +4,7 @@
 ///
 /// @param {String} $size - The button size, either xs, s, m, l or xl
 @mixin lx-icon-size($size) {
-    font-size: lx-typography-to-rem(map-get($lx-icon-sizes, $size));
+    font-size: map-get($lx-icon-sizes, $size);
 }
 
 /// Icon color mixin to style button regarding the color
