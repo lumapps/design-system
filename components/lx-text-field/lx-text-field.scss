@@ -32,12 +32,12 @@
 
         #{ $self }--theme-light & {
             background-color: rgba($lx-theme-dark, 0.05);
-            box-shadow: 0 0 0 1px rgba($lx-theme-dark, 0.2);
+            box-shadow: 0 0 0 1px lx-theme-emphasis($lx-theme-dark, low);
         }
 
         #{ $self }--theme-dark & {
             background-color: rgba($lx-theme-light, 0.1);
-            box-shadow: 0 0 0 1px rgba($lx-theme-light, 0.3);
+            box-shadow: 0 0 0 1px lx-theme-emphasis($lx-theme-light, low);
         }
     }
 
@@ -102,6 +102,7 @@
 
     .lx-text-field__input {
         background-color: transparent;
+        box-shadow: 0 0 0 1px rgba($lx-theme-dark, 0.2);
     }
 
     .lx-text-field__native-control input {
@@ -122,6 +123,7 @@
 
     .lx-text-field__input {
         background-color: transparent;
+        box-shadow: 0 0 0 1px rgba($lx-theme-light, 0.2);
     }
 
     .lx-text-field__native-control input {
@@ -134,12 +136,12 @@
 }
 
 .lx-text-field--is-focus.lx-text-field--theme-light .lx-text-field__input {
-    background-color: rgba($lx-theme-dark, 0.05) !important;
+    background-color: transparent !important;
     box-shadow: 0 0 0 2px lx-theme-emphasis($lx-theme-primary, medium);
 }
 
 .lx-text-field--is-focus.lx-text-field--theme-dark .lx-text-field__input {
-    background-color: rgba($lx-theme-light, 0.1) !important;
+    background-color: transparent !important;
     box-shadow: 0 0 0 2px lx-theme-emphasis($lx-theme-light, medium);
 }
 
