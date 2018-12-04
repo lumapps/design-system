@@ -1,7 +1,23 @@
-$lx-theme-dark-blue: #28336d;
-$lx-theme-blue: #2884f6;
-$lx-theme-golden: #ffc425;
-$lx-theme-red: #e94361;
-$lx-theme-green: #0fa15a;
-$lx-theme-light-grey: #f5f5f5;
-$lx-theme-white: #fff;
+$lx-theme-blue: (
+    500: #2493ff,
+    600: #2885f6,
+    700: #2972e2
+);
+
+$lx-theme-yellow: (
+    500: #ffc525,
+    600: #ffb71f,
+    700: #fea41c
+);
+
+$lx-theme-red: (
+    500: #e94361,
+    600: #d83e5e,
+    700: #c2395a
+);
+
+$lx-theme-green: (
+    500: #19b065,
+    600: #0fa15a,
+    700: #008f4e
+);

@@ -25,11 +25,11 @@
 
         // Theme
         #{ $self }--theme-light & {
-            border-bottom-color: rgba($lx-theme-body-dark, 0.1);
+            border-bottom-color: rgba($lx-theme-dark, 0.1);
         }
 
         #{ $self }--theme-dark & {
-            border-bottom-color: rgba($lx-theme-body-light, 0.1);
+            border-bottom-color: rgba($lx-theme-light, 0.1);
         }
     }
 
@@ -73,11 +73,11 @@
 
         // Default state
         #{ $self }--theme-light & {
-            color: $lx-theme-body-dark;
+            color: $lx-theme-dark;
         }
 
         #{ $self }--theme-dark & {
-            color: map-get($lx-theme-body-light-emphasis, high);
+            color: lx-theme-emphasis($lx-theme-light, high);
         }
 
         // Hover state
@@ -86,16 +86,16 @@
         }
 
         #{ $self }--theme-dark &:not(&--is-disabled):not(&--is-active):hover {
-            color: $lx-theme-body-light;
+            color: $lx-theme-light;
         }
 
         // Focus state
         #{ $self }--theme-light &:not(&--is-active)[data-focus-visible-added] {
-            box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.4);
+            box-shadow: 0 0 0 2px lx-theme-emphasis($lx-theme-primary, low);
         }
 
         #{ $self }--theme-dark &:not(&--is-active)[data-focus-visible-added] {
-            box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.4);
+            box-shadow: 0 0 0 2px lx-theme-emphasis($lx-theme-light, low);
         }
 
         // Active state
@@ -108,20 +108,20 @@
         }
 
         #{ $self }--theme-dark &--is-active {
-            color: $lx-theme-body-light;
+            color: $lx-theme-light;
 
             &::after {
-                background-color: $lx-theme-body-light;
+                background-color: $lx-theme-light;
             }
         }
 
         // Disabled state
         #{ $self }--theme-light &--is-disabled {
-            color: map-get($lx-theme-body-dark-emphasis, low);
+            color: lx-theme-emphasis($lx-theme-dark, low);
         }
 
         #{ $self }--theme-dark &--is-disabled {
-            color: map-get($lx-theme-body-light-emphasis, low);
+            color: lx-theme-emphasis($lx-theme-light, low);
         }
     }
 }

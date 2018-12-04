@@ -3,13 +3,21 @@
 
     /////////////////////////////
 
-    function lxButtonDirective() {
+    lxButtonDirective.$inject = ['LxThemeConstant'];
+
+    function lxButtonDirective(LxThemeConstant) {
         function getTemplate(el, attrs) {
             var buttonType = angular.isDefined(attrs.lxType) ?  attrs.lxType : 'primary';
             var buttonColor = angular.isDefined(attrs.lxColor) ? attrs.lxColor : 'primary';
             var buttonSize = angular.isDefined(attrs.lxSize) ? attrs.lxSize : 'm';
             var buttonTheme = angular.isDefined(attrs.lxTheme) ? attrs.lxTheme : 'light';
-            var buttonClass = 'lx-button lx-button--type-' + buttonType +' lx-button--color-' + buttonColor + ' lx-button--size-' + buttonSize + ' lx-button--theme-' + buttonTheme;
+            var buttonClass = 'lx-button lx-button--type-' + buttonType + ' lx-button--size-' + buttonSize + ' lx-button--theme-' + buttonTheme;
+
+            if (LxThemeConstant.includes(buttonColor)) {
+                buttonClass += ' lx-button--color-' + buttonColor;
+            } else {
+                buttonClass += ' lx-button--color-custom';
+            }
 
             if (isAnchor(attrs)) {
                 return '<a class="' + buttonClass + '" ng-transclude></a>';

@@ -6,10 +6,10 @@
 
 @each $key, $color in $lx-theme-color-palette {
     .lx-theme-background-#{$key} {
-        background-color: $color;
+        background-color: lx-theme-color-variant($key, 500);
     }
 
     .lx-theme-color-#{$key} {
-        color: $color;
+        color: lx-theme-color-variant($key, 500);
     }
 }

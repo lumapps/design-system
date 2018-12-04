@@ -14,11 +14,11 @@
         margin-bottom: $lx-base-spacing-unit;
 
         #{ $self }--theme-light & {
-            color: $lx-theme-body-dark;
+            color: $lx-theme-dark;
         }
 
         #{ $self }--theme-dark & {
-            color: $lx-theme-body-light;
+            color: $lx-theme-light;
         }
     }
 
@@ -31,13 +31,13 @@
         transition: background-color $lx-text-field-transition-duration, box-shadow $lx-text-field-transition-duration;
 
         #{ $self }--theme-light & {
-            background-color: rgba($lx-theme-body-dark, 0.05);
-            box-shadow: 0 0 0 1px rgba($lx-theme-body-dark, 0.2);
+            background-color: rgba($lx-theme-dark, 0.05);
+            box-shadow: 0 0 0 1px rgba($lx-theme-dark, 0.2);
         }
 
         #{ $self }--theme-dark & {
-            background-color: rgba($lx-theme-body-light, 0.1);
-            box-shadow: 0 0 0 1px rgba($lx-theme-body-light, 0.3);
+            background-color: rgba($lx-theme-light, 0.1);
+            box-shadow: 0 0 0 1px rgba($lx-theme-light, 0.3);
         }
     }
 
@@ -46,11 +46,11 @@
         font-size: lx-typography-to-rem(20px);
 
         #{ $self }--theme-light & {
-            color: $lx-theme-body-dark;
+            color: $lx-theme-dark;
         }
 
         #{ $self }--theme-dark & {
-            color: $lx-theme-body-light;
+            color: $lx-theme-light;
         }
     }
 
@@ -58,11 +58,11 @@
         @include lx-text-field-base;
 
         #{ $self }--theme-light &::placeholder {
-            color: map-get($lx-theme-body-dark-emphasis, medium);
+            color: lx-theme-emphasis($lx-theme-dark, medium);
         }
 
         #{ $self }--theme-dark &::placeholder {
-            color: map-get($lx-theme-body-light-emphasis, medium);
+            color: lx-theme-emphasis($lx-theme-light, medium);
         }
     }
 
@@ -72,11 +72,11 @@
         margin-top: $lx-base-spacing-unit;
 
         #{ $self }--theme-light & {
-            color: map-get($lx-theme-body-dark-emphasis, medium);
+            color: lx-theme-emphasis($lx-theme-dark, medium);
         }
 
         #{ $self }--theme-dark & {
-            color: map-get($lx-theme-body-light-emphasis, medium);
+            color: lx-theme-emphasis($lx-theme-light, medium);
         }
 
         i {
@@ -97,7 +97,7 @@
     .lx-text-field__label,
     .lx-text-field__icon,
     .lx-text-field__helper {
-        color: map-get($lx-theme-body-dark-emphasis, low);
+        color: lx-theme-emphasis($lx-theme-dark, low);
     }
 
     .lx-text-field__input {
@@ -105,10 +105,10 @@
     }
 
     .lx-text-field__native-control input {
-        color: map-get($lx-theme-body-dark-emphasis, low);
+        color: lx-theme-emphasis($lx-theme-dark, low);
 
         &::placeholder {
-            color: map-get($lx-theme-body-dark-emphasis, low);
+            color: lx-theme-emphasis($lx-theme-dark, low);
         }
     }
 }
@@ -117,7 +117,7 @@
     .lx-text-field__label,
     .lx-text-field__icon,
     .lx-text-field__helper {
-        color: map-get($lx-theme-body-light-emphasis, low);
+        color: lx-theme-emphasis($lx-theme-light, low);
     }
 
     .lx-text-field__input {
@@ -125,28 +125,28 @@
     }
 
     .lx-text-field__native-control input {
-        color: map-get($lx-theme-body-light-emphasis, low);
+        color: lx-theme-emphasis($lx-theme-light, low);
 
         &::placeholder {
-            color: map-get($lx-theme-body-light-emphasis, low);
+            color: lx-theme-emphasis($lx-theme-light, low);
         }
     }
 }
 
 .lx-text-field--is-focus.lx-text-field--theme-light .lx-text-field__input {
-    background-color: rgba($lx-theme-body-dark, 0.05) !important;
-    box-shadow: 0 0 0 2px rgba($lx-theme-primary, 0.6);
+    background-color: rgba($lx-theme-dark, 0.05) !important;
+    box-shadow: 0 0 0 2px lx-theme-emphasis($lx-theme-primary, medium);
 }
 
 .lx-text-field--is-focus.lx-text-field--theme-dark .lx-text-field__input {
-    background-color: rgba($lx-theme-body-light, 0.1) !important;
-    box-shadow: 0 0 0 2px rgba($lx-theme-body-light, 0.6);
+    background-color: rgba($lx-theme-light, 0.1) !important;
+    box-shadow: 0 0 0 2px lx-theme-emphasis($lx-theme-light, medium);
 }
 
 .lx-text-field--theme-light:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
-    background-color: rgba($lx-theme-body-dark, 0.1);
+    background-color: rgba($lx-theme-dark, 0.1);
 }
 
 .lx-text-field--theme-dark:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
-    background-color: rgba($lx-theme-body-light, 0.2);
+    background-color: rgba($lx-theme-light, 0.2);
 }

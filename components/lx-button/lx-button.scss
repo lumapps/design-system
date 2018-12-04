@@ -32,12 +32,12 @@
     .lx-button--type-primary.lx-button--theme-dark.lx-button--color-#{$key} {
         @include lx-button-color($key, primary, dark);
     }
+}
 
-    .lx-button--type-secondary.lx-button--theme-light.lx-button--color-#{$key} {
-        @include lx-button-color($key, secondary, light);
-    }
+.lx-button--type-secondary.lx-button--theme-light {
+    @include lx-button-color(null, secondary, light);
+}
 
-    .lx-button--type-secondary.lx-button--theme-dark.lx-button--color-#{$key} {
-        @include lx-button-color($key, secondary, dark);
-    }
+.lx-button--type-secondary.lx-button--theme-dark {
+    @include lx-button-color(null, secondary, dark);
 }

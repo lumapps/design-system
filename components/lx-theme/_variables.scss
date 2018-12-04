@@ -1,29 +1,19 @@
 @import "./color-palette";
 
-$lx-theme-primary: $lx-theme-blue !default;
-$lx-theme-secondary: $lx-theme-golden !default;
-$lx-theme-body-dark: $lx-theme-dark-blue !default;
-$lx-theme-body-light: $lx-theme-white !default;
+$lx-theme-primary: map-get($lx-theme-blue, 500) !default;
+$lx-theme-secondary: map-get($lx-theme-yellow, 500) !default;
+$lx-theme-dark: #28336d !default;
+$lx-theme-light: #fff !default;
 
 $lx-theme-color-palette: (
-    primary: $lx-theme-primary,
-    secondary: $lx-theme-secondary,
-    dark-blue: $lx-theme-dark-blue,
     blue: $lx-theme-blue,
-    golden: $lx-theme-golden,
+    yellow: $lx-theme-yellow,
     red: $lx-theme-red,
-    green: $lx-theme-green,
-    light-grey: $lx-theme-light-grey
+    green: $lx-theme-green
 );
 
-$lx-theme-body-dark-emphasis: (
-    high: rgba($lx-theme-body-dark, 0.8),
-    medium: rgba($lx-theme-body-dark, 0.6),
-    low: rgba($lx-theme-body-dark, 0.4)
-);
-
-$lx-theme-body-light-emphasis: (
-    high: rgba($lx-theme-body-light, 0.8),
-    medium: rgba($lx-theme-body-light, 0.6),
-    low: rgba($lx-theme-body-light, 0.4)
+$lx-theme-emphasis: (
+    high: 0.8,
+    medium: 0.6,
+    low: 0.4
 );

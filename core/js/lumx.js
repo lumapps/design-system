@@ -19,6 +19,7 @@
     angular.module('lumx.select', []);
     angular.module('lumx.tabs', []);
     angular.module('lumx.text-field', []);
+    angular.module('lumx.theme', []);
 
     angular.module('lumx', [
         'lumx.button',
@@ -29,6 +30,7 @@
         'lumx.select',
         'lumx.tabs',
         'lumx.text-field',
+        'lumx.theme',
         'lumx.utils',
     ]);
 })();
