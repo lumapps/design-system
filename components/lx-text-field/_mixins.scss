@@ -15,10 +15,10 @@
     outline: none;
 
     .lx-text-field--theme-light & {
-        color: $lx-theme-dark;
+        color: lx-theme-color-variant(dark, n);
     }
 
     .lx-text-field--theme-dark & {
-        color: $lx-theme-light;
+        color: lx-theme-color-variant(light, n);
     }
 }

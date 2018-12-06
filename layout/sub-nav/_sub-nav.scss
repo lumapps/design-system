@@ -12,7 +12,7 @@
     &__wrapper {
         flex: 1;
         padding: $lx-base-spacing-unit * 3;
-        border-right: 1px solid #e8e8e8;
+        border-right: 1px solid lx-theme-color-variant(dark, l6);
     }
 
     &__item {
@@ -22,7 +22,7 @@
         padding: 0 $lx-base-spacing-unit * 2;
         margin-bottom: $lx-base-spacing-unit / 2;
         border-radius: 5px;
-        color: $lx-theme-dark;
+        color: lx-theme-color-variant(dark, n);
         font-size: 14px;
         line-height: 36px;
         text-decoration: none;
@@ -33,7 +33,7 @@
 
         &:hover,
         &--is-active {
-            background-color: rgba($lx-theme-primary, 0.1);
+            background-color: lx-theme-color-variant(blue, l5);
         }
 
         &--is-active::after {
@@ -42,7 +42,7 @@
             right: -($lx-base-spacing-unit * 3) - 1;
             bottom: 0;
             width: 2px;
-            background-color: $lx-theme-secondary;
+            background-color: lx-theme-color-variant(yellow, n);
             content: '';
         }
     }

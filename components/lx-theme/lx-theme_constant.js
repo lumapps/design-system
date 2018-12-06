@@ -10,7 +10,7 @@
      * @constant
      * @readonly
      */
-    var LxThemeConstant = ['blue', 'yellow', 'red', 'green'];
+    var LxThemeConstant = ['primary', 'secondary', 'blue', 'yellow', 'red', 'green'];
 
     /////////////////////////////
 

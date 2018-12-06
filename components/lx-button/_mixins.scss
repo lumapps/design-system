@@ -6,7 +6,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    padding: 0;
     border: none;
+    margin: 0;
     outline: none;
     text-decoration: none;
     user-select: none;
@@ -67,7 +69,7 @@
         border-color: transparent;
         border-radius: (map-get($lx-button-sizes, $size) + 8) / 2;
         border-style: dotted;
-        border-width: 2px;
+        border-width: 1px;
         content: '';
         pointer-events: none;
         transition: border-color $lx-button-transition-duration;
@@ -94,129 +96,90 @@
 
 /// Button color mixin to style button regarding the theme and the type
 ///
-/// @param {String} $color - The button color, either primary, secondary or colors from the color palette
+/// @param {String} $color - The button color identifier from the color palette
 /// @param {String} $type - The button type, either primary or secondary
-/// @param {String} $theme - The button theme, either light or dark
-@mixin lx-button-color($color, $type, $theme: light) {
+/// @param {String} $theme - The button theme, either dark or light
+@mixin lx-button-color($color, $type, $theme: dark) {
     transition: background-color $lx-button-transition-duration;
 
     @if $type == primary {
-        $lx-button-primary-color-default: lx-theme-color-variant($color, 500);
-        $lx-button-primary-color-hover: lx-theme-color-variant($color, 600);
-        $lx-button-primary-color-active: lx-theme-color-variant($color, 700);
-
-        @if $theme == light {
-            background-color: $lx-button-primary-color-default;
-            color: lx-theme-best-color($lx-button-primary-color-default);
+        @if $theme == dark {
+            background-color: lx-theme-color-variant($color, n);
+            color: lx-theme-best-color(lx-theme-color-variant($color, n));
         }
 
         @else {
-            background-color: $lx-theme-light;
-            color: $lx-button-primary-color-default;
+            background-color: lx-theme-color-variant(light, n);
+            color: lx-theme-color-variant($color, n);
         }
 
         &:hover {
-            @if $theme == light {
-                background-color: $lx-button-primary-color-hover;
+            @if $theme == dark {
+                background-color: lx-theme-color-variant($color, d1);
             }
 
             @else {
-                background-color: rgba($lx-theme-light, 0.9);
+                background-color: lx-theme-color-variant(light, l1);
             }
         }
 
         &:active {
-            @if $theme == light {
-                background-color: $lx-button-primary-color-active;
+            @if $theme == dark {
+                background-color: lx-theme-color-variant($color, d2);
             }
 
             @else {
-                background-color: rgba($lx-theme-light, 0.8);
+                background-color: lx-theme-color-variant(light, l2);
             }
         }
 
         &:disabled {
-            @if $theme == light {
-                background-color: lx-theme-emphasis($lx-button-primary-color-default, low);
+            @if $theme == dark {
+                background-color: lx-theme-color-variant($color, l3);
             }
 
             @else {
-                background-color: lx-theme-emphasis($lx-theme-light, low);
-                color: lx-theme-emphasis($lx-theme-light, medium);
+                background-color: lx-theme-color-variant(light, l4);
+                color: lx-theme-color-variant(light, l3);
             }
         }
 
         &[data-focus-visible-added] {
-            @if $theme == light {
+            @if $theme == dark {
                 &::after {
-                    border-color: lx-theme-emphasis($lx-button-primary-color-default, medium);
+                    border-color: lx-theme-color-variant($color, n);
                 }
             }
 
             @else {
                 &::after {
-                    border-color: lx-theme-emphasis($lx-theme-light, medium);
+                    border-color: lx-theme-color-variant(light, n);
                 }
             }
         }
     }
 
     @if $type == secondary {
+        border: 1px solid lx-theme-color-variant($theme, n);
         background-color: transparent;
-
-        @if $theme == light {
-            border: 1px solid $lx-theme-dark;
-            color: $lx-theme-dark;
-        }
-
-        @else {
-            border: 1px solid $lx-theme-light;
-            color: $lx-theme-light;
-        }
+        color: lx-theme-color-variant($theme, n);
 
         &:hover {
-            @if $theme == light {
-                background-color: rgba($lx-theme-dark, 0.05);
-            }
-
-            @else {
-                background-color: rgba($lx-theme-light, 0.1);
-            }
+            background-color: lx-theme-color-variant($theme, l6);
         }
 
         &:active {
-            @if $theme == light {
-                background-color: rgba($lx-theme-dark, 0.1);
-            }
-
-            @else {
-                background-color: rgba($lx-theme-light, 0.2);
-            }
+            background-color: lx-theme-color-variant($theme, l5);
         }
 
         &:disabled {
-            @if $theme == light {
-                border-color: lx-theme-emphasis($lx-theme-dark, low);
-                color: lx-theme-emphasis($lx-theme-dark, low);
-            }
-
-            @else {
-                border-color: lx-theme-emphasis($lx-theme-light, low);
-                color: lx-theme-emphasis($lx-theme-light, low);
-            }
+            border-color: lx-theme-color-variant($theme, l3);
+            color: lx-theme-color-variant($theme, l3);
         }
 
         &[data-focus-visible-added] {
-            @if $theme == light {
-                &::after {
-                    border-color: lx-theme-emphasis($lx-theme-dark, medium);
-                }
-            }
-
-            @else {
-                &::after {
-                    border-color: lx-theme-emphasis($lx-theme-light, medium);
-                }
+            &::after {
+                border-color: lx-theme-color-variant($theme, l1);
             }
         }
     }

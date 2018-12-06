@@ -9,7 +9,7 @@
 
 /// Icon color mixin to style button regarding the color
 ///
-/// @param {String} $color - The icon color, either primary, secondary or colors from the color palette
+/// @param {String} $color - The icon color identifier from the color palette
 @mixin lx-icon-color($color) {
-    color: map-get($lx-theme-color-palette, $color);
+    color: lx-theme-color-variant($color, n);
 }
