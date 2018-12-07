@@ -12,12 +12,20 @@
    ========================================================================== */
 
 @each $key, $size in $lx-button-sizes {
-    .lx-button--type-primary.lx-button--size-#{$key} {
-        @include lx-button-size($key, primary);
+    .lx-button--type-primary.lx-button--shape-contained.lx-button--size-#{$key} {
+        @include lx-button-size($key, primary, contained);
     }
 
-    .lx-button--type-secondary.lx-button--size-#{$key} {
-        @include lx-button-size($key, secondary);
+    .lx-button--type-primary.lx-button--shape-circled.lx-button--size-#{$key} {
+        @include lx-button-size($key, primary, circled);
+    }
+
+    .lx-button--type-secondary.lx-button--shape-contained.lx-button--size-#{$key} {
+        @include lx-button-size($key, secondary, contained);
+    }
+
+    .lx-button--type-secondary.lx-button--shape-circled.lx-button--size-#{$key} {
+        @include lx-button-size($key, secondary, circled);
     }
 }
 

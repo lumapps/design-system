@@ -38,9 +38,9 @@
             var tanscludedText = el.find('span');
 
             if (transcludedIcon.length && !tanscludedText.length) {
-                el.addClass('lx-button--shape-circle');
+                el.addClass('lx-button--shape-circled');
             } else {
-                el.addClass('lx-button--shape-standard');
+                el.addClass('lx-button--shape-contained');
             }
 
             if (!transcludedIcon.length && !tanscludedText.length) {

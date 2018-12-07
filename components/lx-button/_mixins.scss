@@ -23,7 +23,7 @@
         pointer-events: none;
     }
 
-    &__text {
+    .lx-button__text {
         font-weight: 600;
     }
 }
@@ -32,36 +32,17 @@
 ///
 /// @param {String} $size - The button size, either s, m or l
 /// @param {String} $type - The button type, either primary or secondary
-@mixin lx-button-size($size, $type) {
+/// @param {String} $shape - The button shape, either contained or circled
+@mixin lx-button-size($size, $type, $shape: contained) {
     height: map-get($lx-button-sizes, $size);
     border-radius: map-get($lx-button-sizes, $size) / 2;
 
-    &.lx-button--shape-standard {
+    @if $shape == contained {
         padding: 0 $lx-button-horizontal-padding;
     }
 
-    &.lx-button--shape-circle {
+    @if $shape == circled {
         width: map-get($lx-button-sizes, $size);
-    }
-
-    .lx-button__icon {
-        font-size: map-get($lx-button-icon-sizes, $size);
-    }
-
-    .lx-button__icon--has-sibling {
-        margin-right: $lx-base-spacing-unit;
-    }
-
-    .lx-button__text {
-        font-size: map-get($lx-button-text-sizes, $size);
-
-        @if $type == primary {
-            line-height: map-get($lx-button-sizes, $size);
-        }
-
-        @if $type == secondary {
-            line-height: map-get($lx-button-sizes, $size) - 2;
-        }
     }
 
     &::after {
@@ -92,6 +73,26 @@
             left: -5px;
         }
     }
+
+    .lx-button__icon {
+        font-size: map-get($lx-button-icon-sizes, $size);
+    }
+
+    .lx-button__icon--has-sibling {
+        margin-right: $lx-base-spacing-unit;
+    }
+
+    .lx-button__text {
+        font-size: map-get($lx-button-text-sizes, $size);
+
+        @if $type == primary {
+            line-height: map-get($lx-button-sizes, $size);
+        }
+
+        @else if $type == secondary {
+            line-height: map-get($lx-button-sizes, $size) - 2;
+        }
+    }
 }
 
 /// Button color mixin to style button regarding the theme and the type
@@ -108,42 +109,23 @@
             color: lx-theme-best-color(lx-theme-color-variant($color, n));
         }
 
-        @else {
+        @else if $theme == light {
             background-color: lx-theme-color-variant(light, n);
             color: lx-theme-color-variant($color, n);
         }
 
+        // Hover state
         &:hover {
             @if $theme == dark {
                 background-color: lx-theme-color-variant($color, d1);
             }
 
-            @else {
+            @else if $theme == light {
                 background-color: lx-theme-color-variant(light, l1);
             }
         }
 
-        &:active {
-            @if $theme == dark {
-                background-color: lx-theme-color-variant($color, d2);
-            }
-
-            @else {
-                background-color: lx-theme-color-variant(light, l2);
-            }
-        }
-
-        &:disabled {
-            @if $theme == dark {
-                background-color: lx-theme-color-variant($color, l3);
-            }
-
-            @else {
-                background-color: lx-theme-color-variant(light, l4);
-                color: lx-theme-color-variant(light, l3);
-            }
-        }
-
+        // Focus state
         &[data-focus-visible-added] {
             @if $theme == dark {
                 &::after {
@@ -151,36 +133,63 @@
                 }
             }
 
-            @else {
+            @else if $theme == light {
                 &::after {
                     border-color: lx-theme-color-variant(light, n);
                 }
             }
         }
+
+        // Active state
+        &:active {
+            @if $theme == dark {
+                background-color: lx-theme-color-variant($color, d2);
+            }
+
+            @else if $theme == light {
+                background-color: lx-theme-color-variant(light, l2);
+            }
+        }
+
+        // Disabled state
+        &:disabled {
+            @if $theme == dark {
+                background-color: lx-theme-color-variant($color, l3);
+            }
+
+            @else if $theme == light {
+                background-color: lx-theme-color-variant(light, l4);
+                color: lx-theme-color-variant(light, l3);
+            }
+        }
     }
 
-    @if $type == secondary {
+    @else if $type == secondary {
         border: 1px solid lx-theme-color-variant($theme, n);
         background-color: transparent;
         color: lx-theme-color-variant($theme, n);
 
+        // Hover state
         &:hover {
             background-color: lx-theme-color-variant($theme, l6);
         }
 
-        &:active {
-            background-color: lx-theme-color-variant($theme, l5);
-        }
-
-        &:disabled {
-            border-color: lx-theme-color-variant($theme, l3);
-            color: lx-theme-color-variant($theme, l3);
-        }
-
+        // Focus state
         &[data-focus-visible-added] {
             &::after {
                 border-color: lx-theme-color-variant($theme, l1);
             }
+        }
+
+        // Active state
+        &:active {
+            background-color: lx-theme-color-variant($theme, l5);
+        }
+
+        // Disabled state
+        &:disabled {
+            border-color: lx-theme-color-variant($theme, l3);
+            color: lx-theme-color-variant($theme, l3);
         }
     }
 }
