@@ -1,136 +1,114 @@
-/// Tabs base mixin to apply global structure
-@mixin lx-tabs-base() {
-    .lx-tabs__links {
-        display: flex;
-        border-bottom-style: solid;
-        border-bottom-width: 2px;
-    }
-
-    .lx-tabs__link {
-        position: relative;
-        display: flex;
-        height: 48px;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        outline: none;
-        transition: color 0.2s;
-
-        &::after {
-            position: absolute;
-            right: 0;
-            bottom: -2px;
-            left: 0;
-            height: 2px;
-            content: '';
-        }
-
-        i {
-            margin-right: $lx-base-spacing-unit;
-            font-size: 20px;
-        }
-
-        span {
-            font-size: 14px;
-            font-weight: 600;
-        }
-    }
-}
-
-/// Tabs layout mixin to set links style and position according
-///
-/// @param {String} $layout - The tabs layoutn either fixed or clustered
-/// @param {String} $position - The links position in clustered layout, either left, center or right
-@mixin lx-tabs-layout($layout, $position: null) {
-    @if $layout == fixed {
-        .lx-tabs__link {
-            flex: 1;
-        }
-    }
-
-    @else if $layout == clustered {
-        .lx-tabs__links {
-            @if $position == left {
-                justify-content: flex-start;
-            }
-
-            @else if $position == center {
-                justify-content: center;
-            }
-
-            @else if $position == right {
-                justify-content: flex-end;
-            }
-        }
-
-        .lx-tabs__link {
-            padding: 0 $lx-base-spacing-unit * 3;
-        }
-    }
-}
-
-/// Tabs theme mixin to style links
+/// Tabs links mixin to style tabs links according to the theme
 ///
 /// @param {String} $theme - The tabs theme, either dark or light
-@mixin lx-tabs-theme($theme: dark) {
-    color: lx-theme-color-variant($theme, n);
+@mixin lx-tabs-links($theme) {
+    display: flex;
+    border-bottom: 2px solid lx-theme-color-variant($theme, l5);
+}
 
-    .lx-tabs__links {
-        border-bottom-color: lx-theme-color-variant($theme, l5);
+/// Tabs links position mixin to set tabs links position in clustered layout
+///
+/// @param {String} $position - The tabs links position in clustered layout, either left, center or right
+@mixin lx-tabs-links-position($position) {
+    @if $position == left {
+        justify-content: flex-start;
     }
 
-    // Default state
+    @else if $position == center {
+        justify-content: center;
+    }
+
+    @else if $position == right {
+        justify-content: flex-end;
+    }
+}
+
+/// Tabs link mixin to style tabs link according to the theme and the layout
+///
+/// @param {String} $theme - The tabs theme, either dark or light
+@mixin lx-tabs-link($theme) {
+    position: relative;
+    display: flex;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 $lx-base-spacing-unit * 3;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.2s;
+
     @if $theme == dark {
-        .lx-tabs__link {
-            color: lx-theme-color-variant(dark, n);
-        }
+        color: lx-theme-color-variant(dark, n);
     }
 
     @else if $theme == light {
-        .lx-tabs__link {
-            color: lx-theme-color-variant(light, l2);
-        }
+        color: lx-theme-color-variant(light, l2);
     }
 
-    // Hover state
-    @if $theme == dark {
-        .lx-tabs__link:not(.lx-tabs__link--is-disabled):not(.lx-tabs__link--is-active):hover {
+    &::after {
+        position: absolute;
+        right: 0;
+        bottom: -2px;
+        left: 0;
+        height: 2px;
+        content: '';
+    }
+
+    i {
+        margin-right: $lx-base-spacing-unit;
+        font-size: 20px;
+    }
+
+    span {
+        font-size: 14px;
+        font-weight: 600;
+    }
+}
+
+/// Tabs link layout mixin to syle tabs link according to the layout
+///
+/// @param {String} $layout - The tabs layout, either fixed or clustered
+@mixin lx-tabs-link-layout($layout) {
+    @if $layout == fixed {
+        flex: 1;
+    }
+}
+
+/// Tabs link state mixin to style tabs link according to the state and the theme
+///
+/// @param {String} $state - The tabs link state, either hover, focus, active or disabled
+/// @param {String} $theme - The tabs theme, either dark or light
+@mixin lx-tabs-link-state($state, $theme) {
+    @if $state == hover {
+        @if $theme == dark {
             color: lx-theme-color-variant(primary, n);
         }
-    }
 
-    @else if $theme == light {
-        .lx-tabs__link:not(.lx-tabs__link--is-disabled):not(.lx-tabs__link--is-active):hover {
+        @else if $theme == light {
             color: lx-theme-color-variant(light, n);
         }
     }
 
-    // Focus state
-    @if $theme == dark {
-        .lx-tabs__link:not(.lx-tabs__link--is-active)[data-focus-visible-added] {
+    @else if $state == focus {
+        @if $theme == dark {
             box-shadow: 0 0 0 2px lx-theme-color-variant(primary, l3);
         }
-    }
 
-    @else if $theme == light {
-        .lx-tabs__link:not(.lx-tabs__link--is-active)[data-focus-visible-added] {
+        @else if $theme == light {
             box-shadow: 0 0 0 2px lx-theme-color-variant(light, l3);
         }
     }
 
-    // Active state
-    @if $theme == dark {
-        .lx-tabs__link--is-active {
+    @else if $state == active {
+        @if $theme == dark {
             color: lx-theme-color-variant(primary, n);
 
             &::after {
                 background-color: lx-theme-color-variant(primary, n);
             }
         }
-    }
 
-    @else if $theme == light {
-        .lx-tabs__link--is-active {
+        @else if $theme == light {
             color: lx-theme-color-variant(light, n);
 
             &::after {
@@ -139,8 +117,7 @@
         }
     }
 
-    // Disabled state
-    .lx-tabs__link--is-disabled {
+    @else if $state == disabled {
         color: lx-theme-color-variant($theme, l3);
     }
 }

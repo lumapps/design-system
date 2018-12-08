@@ -5,35 +5,102 @@
 @import "./mixins";
 
 .lx-tabs {
-    @include lx-tabs-base;
-}
+    $self: &;
 
-/* Tabs theme
-   ========================================================================== */
+    &__links {
+        #{ $self }--theme-light & {
+            @include lx-tabs-links(dark);
+        }
 
-.lx-tabs--theme-light {
-    @include lx-tabs-theme(dark);
-}
+        #{ $self }--theme-dark & {
+            @include lx-tabs-links(light);
+        }
+    }
 
-.lx-tabs--theme-dark {
-    @include lx-tabs-theme(light);
+    &__link {
+        #{ $self }--theme-light & {
+            @include lx-tabs-link(dark);
+        }
+
+        #{ $self }--theme-dark & {
+            @include lx-tabs-link(light);
+        }
+    }
 }
 
 /* Tabs layout
    ========================================================================== */
 
 .lx-tabs--layout-fixed {
-    @include lx-tabs-layout(fixed);
+    .lx-tabs__link {
+        @include lx-tabs-link-layout(fixed);
+    }
 }
 
+/* Tabs position
+   ========================================================================== */
+
 .lx-tabs--layout-clustered.lx-tabs--position-left {
-    @include lx-tabs-layout(clustered, left);
+    .lx-tabs__links {
+        @include lx-tabs-links-position(left);
+    }
 }
 
 .lx-tabs--layout-clustered.lx-tabs--position-center {
-    @include lx-tabs-layout(clustered, center);
+    .lx-tabs__links {
+        @include lx-tabs-links-position(center);
+    }
 }
 
 .lx-tabs--layout-clustered.lx-tabs--position-right {
-    @include lx-tabs-layout(clustered, right);
+    .lx-tabs__links {
+        @include lx-tabs-links-position(right);
+    }
+}
+
+/* Tabs states
+   ========================================================================== */
+
+// Hover state
+.lx-tabs__link:not(.lx-tabs__link--is-disabled):not(.lx-tabs__link--is-active):hover {
+    .lx-tabs--theme-light & {
+        @include lx-tabs-link-state(hover, dark);
+    }
+
+    .lx-tabs--theme-dark & {
+        @include lx-tabs-link-state(hover, light);
+    }
+}
+
+// Focus state
+.lx-tabs__link:not(.lx-tabs__link--is-active)[data-focus-visible-added] {
+    .lx-tabs--theme-light & {
+        @include lx-tabs-link-state(focus, dark);
+    }
+
+    .lx-tabs--theme-dark & {
+        @include lx-tabs-link-state(focus, light);
+    }
+}
+
+// Active state
+.lx-tabs__link--is-active {
+    .lx-tabs--theme-light & {
+        @include lx-tabs-link-state(active, dark);
+    }
+
+    .lx-tabs--theme-dark & {
+        @include lx-tabs-link-state(active, light);
+    }
+}
+
+// Disabled state
+.lx-tabs__link--is-disabled {
+    .lx-tabs--theme-light & {
+        @include lx-tabs-link-state(disabled, dark);
+    }
+
+    .lx-tabs--theme-dark & {
+        @include lx-tabs-link-state(disabled, light);
+    }
 }
