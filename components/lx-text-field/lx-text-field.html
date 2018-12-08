@@ -6,9 +6,9 @@
         {{ lxTextField.label }}
     </label>
 
-    <div class="lx-text-field__input">
-        <lx-icon class="lx-text-field__icon" ng-if="lxTextField.icon">{{ lxTextField.icon }}</lx-icon>
-        <div class="lx-text-field__native-control" ng-transclude></div>
+    <div class="lx-text-field__input-wrapper">
+        <lx-icon class="lx-text-field__input-icon" ng-if="lxTextField.icon">{{ lxTextField.icon }}</lx-icon>
+        <div class="lx-text-field__input-native" ng-transclude></div>
     </div>
 
     <div class="lx-text-field__helper" ng-if="lxTextField.helper">

@@ -8,84 +8,52 @@
     $self: &;
 
     &__label {
-        @include lx-typography(caption);
-
-        display: block;
-        margin-bottom: $lx-base-spacing-unit;
-
         #{ $self }--theme-light & {
-            color: lx-theme-color-variant(dark, n);
+            @include lx-text-field-label(dark);
         }
 
         #{ $self }--theme-dark & {
-            color: lx-theme-color-variant(light, n);
+            @include lx-text-field-label(light);
         }
     }
 
-    &__input {
-        display: inline-flex;
-        height: $lx-text-field-height;
-        align-items: center;
-        padding: 0 $lx-text-field-horizontal-padding;
-        border-radius: 4px;
-        transition: background-color $lx-text-field-transition-duration, box-shadow $lx-text-field-transition-duration;
-
+    &__input-wrapper {
         #{ $self }--theme-light & {
-            background-color: lx-theme-color-variant(dark, l6);
-            box-shadow: 0 0 0 1px lx-theme-color-variant(dark, l3);
+            @include lx-text-field-input-wrapper(dark);
         }
 
         #{ $self }--theme-dark & {
-            background-color: lx-theme-color-variant(light, l6);
-            box-shadow: 0 0 0 1px lx-theme-color-variant(light, l3);
+            @include lx-text-field-input-wrapper(light);
         }
     }
 
-    &__icon {
-        margin-right: $lx-base-spacing-unit;
-        font-size: 20px;
-
+    &__input-icon {
         #{ $self }--theme-light & {
-            color: lx-theme-color-variant(dark, n);
+            @include lx-text-field-input-icon(dark);
         }
 
         #{ $self }--theme-dark & {
-            color: lx-theme-color-variant(light, n);
+            @include lx-text-field-input-icon(light);
         }
     }
 
-    &__native-control input {
-        @include lx-text-field-base;
-
-        #{ $self }--theme-light &::placeholder {
-            color: lx-theme-color-variant(dark, l2);
+    &__input-native input {
+        #{ $self }--theme-light & {
+            @include lx-text-field-input-native(dark);
         }
 
-        #{ $self }--theme-dark &::placeholder {
-            color: lx-theme-color-variant(light, l2);
+        #{ $self }--theme-dark & {
+            @include lx-text-field-input-native(light);
         }
     }
 
     &__helper {
-        display: flex;
-        align-items: center;
-        margin-top: $lx-base-spacing-unit;
-
         #{ $self }--theme-light & {
-            color: lx-theme-color-variant(dark, l2);
+            @include lx-text-field-helper(dark);
         }
 
         #{ $self }--theme-dark & {
-            color: lx-theme-color-variant(light, l2);
-        }
-
-        i {
-            margin-right: $lx-base-spacing-unit / 2;
-            font-size: 14px;
-        }
-
-        span {
-            @include lx-typography(caption);
+            @include lx-text-field-helper(light);
         }
     }
 }
@@ -93,62 +61,73 @@
 /* Text field states
    ========================================================================== */
 
-.lx-text-field--is-disabled.lx-text-field--theme-light {
-    .lx-text-field__label,
-    .lx-text-field__icon,
+// Disabled state
+.lx-text-field--theme-light.lx-text-field--is-disabled {
+    .lx-text-field__label {
+        @include lx-text-field-disabled-state(dark);
+    }
+
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-state(disabled, dark);
+    }
+
+    .lx-text-field__input-icon {
+        @include lx-text-field-disabled-state(dark);
+    }
+
+    .lx-text-field__input-native input {
+        @include lx-text-field-disabled-state(dark);
+    }
+
     .lx-text-field__helper {
-        color: lx-theme-color-variant(dark, l3);
-    }
-
-    .lx-text-field__input {
-        background-color: transparent;
-        box-shadow: 0 0 0 1px lx-theme-color-variant(dark, l4);
-    }
-
-    .lx-text-field__native-control input {
-        color: lx-theme-color-variant(dark, l3);
-
-        &::placeholder {
-            color: lx-theme-color-variant(dark, l3);
-        }
+        @include lx-text-field-disabled-state(dark);
     }
 }
 
-.lx-text-field--is-disabled.lx-text-field--theme-dark {
-    .lx-text-field__label,
-    .lx-text-field__icon,
+.lx-text-field--theme-dark.lx-text-field--is-disabled {
+    .lx-text-field__label {
+        @include lx-text-field-disabled-state(light);
+    }
+
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-state(disabled, light);
+    }
+
+    .lx-text-field__input-icon {
+        @include lx-text-field-disabled-state(light);
+    }
+
+    .lx-text-field__input-native input {
+        @include lx-text-field-disabled-state(light);
+    }
+
     .lx-text-field__helper {
-        color: lx-theme-color-variant(light, l3);
-    }
-
-    .lx-text-field__input {
-        background-color: transparent;
-        box-shadow: 0 0 0 1px lx-theme-color-variant(light, l4);
-    }
-
-    .lx-text-field__native-control input {
-        color: lx-theme-color-variant(light, l3);
-
-        &::placeholder {
-            color: lx-theme-color-variant(light, l3);
-        }
+        @include lx-text-field-disabled-state(light);
     }
 }
 
-.lx-text-field--is-focus.lx-text-field--theme-light .lx-text-field__input {
-    background-color: transparent !important;
-    box-shadow: 0 0 0 2px lx-theme-color-variant(primary, l2);
+// Hover state
+.lx-text-field--theme-light:not(.lx-text-field--is-disabled) {
+    .lx-text-field__input-wrapper:hover {
+        @include lx-text-field-input-wrapper-state(hover, dark);
+    }
 }
 
-.lx-text-field--is-focus.lx-text-field--theme-dark .lx-text-field__input {
-    background-color: transparent !important;
-    box-shadow: 0 0 0 2px lx-theme-color-variant(light, l2);
+.lx-text-field--theme-dark:not(.lx-text-field--is-disabled) {
+    .lx-text-field__input-wrapper:hover {
+        @include lx-text-field-input-wrapper-state(hover, light);
+    }
 }
 
-.lx-text-field--theme-light:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
-    background-color: lx-theme-color-variant(dark, l5);
+// Focus state
+.lx-text-field--theme-light:not(.lx-text-field--is-disabled).lx-text-field--is-focus {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-state(focus, dark);
+    }
 }
 
-.lx-text-field--theme-dark:not(.lx-text-field--is-disabled) .lx-text-field__input:hover {
-    background-color: lx-theme-color-variant(light, l5);
+.lx-text-field--theme-dark:not(.lx-text-field--is-disabled).lx-text-field--is-focus {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-state(focus, light);
+    }
 }
