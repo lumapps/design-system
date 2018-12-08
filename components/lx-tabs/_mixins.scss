@@ -119,5 +119,6 @@
 
     @else if $state == disabled {
         color: lx-theme-color-variant($theme, l3);
+        pointer-events: none;
     }
 }

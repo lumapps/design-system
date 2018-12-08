@@ -61,6 +61,32 @@
 /* Text field states
    ========================================================================== */
 
+// Hover state
+.lx-text-field--theme-light {
+    .lx-text-field__input-wrapper:hover {
+        @include lx-text-field-input-wrapper-state(hover, dark);
+    }
+}
+
+.lx-text-field--theme-dark {
+    .lx-text-field__input-wrapper:hover {
+        @include lx-text-field-input-wrapper-state(hover, light);
+    }
+}
+
+// Focus state
+.lx-text-field--theme-light.lx-text-field--is-focus {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-state(focus, dark);
+    }
+}
+
+.lx-text-field--theme-dark.lx-text-field--is-focus {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-state(focus, light);
+    }
+}
+
 // Disabled state
 .lx-text-field--theme-light.lx-text-field--is-disabled {
     .lx-text-field__label {
@@ -103,31 +129,5 @@
 
     .lx-text-field__helper {
         @include lx-text-field-disabled-state(light);
-    }
-}
-
-// Hover state
-.lx-text-field--theme-light:not(.lx-text-field--is-disabled) {
-    .lx-text-field__input-wrapper:hover {
-        @include lx-text-field-input-wrapper-state(hover, dark);
-    }
-}
-
-.lx-text-field--theme-dark:not(.lx-text-field--is-disabled) {
-    .lx-text-field__input-wrapper:hover {
-        @include lx-text-field-input-wrapper-state(hover, light);
-    }
-}
-
-// Focus state
-.lx-text-field--theme-light:not(.lx-text-field--is-disabled).lx-text-field--is-focus {
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(focus, dark);
-    }
-}
-
-.lx-text-field--theme-dark:not(.lx-text-field--is-disabled).lx-text-field--is-focus {
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(focus, light);
     }
 }

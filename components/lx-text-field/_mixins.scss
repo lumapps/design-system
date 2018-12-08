@@ -80,6 +80,7 @@
 /// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-disabled-state($theme) {
     color: lx-theme-color-variant($theme, l3);
+    pointer-events: none;
 
     &::placeholder {
         color: lx-theme-color-variant($theme, l3);
@@ -110,5 +111,6 @@
     @else if $state == disabled {
         background-color: transparent;
         box-shadow: 0 0 0 1px lx-theme-color-variant($theme, l4);
+        pointer-events: none;
     }
 }

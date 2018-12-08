@@ -62,7 +62,7 @@
    ========================================================================== */
 
 // Hover state
-.lx-tabs__link:not(.lx-tabs__link--is-disabled):not(.lx-tabs__link--is-active):hover {
+.lx-tabs__link:not(.lx-tabs__link--is-active):hover {
     .lx-tabs--theme-light & {
         @include lx-tabs-link-state(hover, dark);
     }
