@@ -22,10 +22,6 @@
         cursor: default;
         pointer-events: none;
     }
-
-    .lx-button__text {
-        font-weight: 600;
-    }
 }
 
 /// Button size mixin to style button regarding the size and the type
@@ -71,26 +67,6 @@
             right: -5px;
             bottom: -5px;
             left: -5px;
-        }
-    }
-
-    .lx-button__icon {
-        font-size: map-get($lx-button-icon-sizes, $size);
-    }
-
-    .lx-button__icon--has-sibling {
-        margin-right: $lx-base-spacing-unit;
-    }
-
-    .lx-button__text {
-        font-size: map-get($lx-button-text-sizes, $size);
-
-        @if $type == primary {
-            line-height: map-get($lx-button-sizes, $size);
-        }
-
-        @else if $type == secondary {
-            line-height: map-get($lx-button-sizes, $size) - 2;
         }
     }
 }
@@ -191,5 +167,34 @@
             border-color: lx-theme-color-variant($theme, l3);
             color: lx-theme-color-variant($theme, l3);
         }
+    }
+}
+
+/// Button icon mixin to style button icon regarding the size
+///
+/// @param {String} $size - The button size, either s, m or l
+@mixin lx-button-icon($size) {
+    font-size: map-get($lx-button-icon-sizes, $size);
+}
+
+/// Button icon sibling mixin to set button icon margin
+@mixin lx-button-icon-sibling() {
+    margin-right: $lx-base-spacing-unit;
+}
+
+/// Button text mixin to style button text regarding the size and the type
+///
+/// @param {String} $size - The button size, either s, m or l
+/// @param {String} $type - The button type, either primary or secondary
+@mixin lx-button-text($size, $type) {
+    font-size: map-get($lx-button-text-sizes, $size);
+    font-weight: 600;
+
+    @if $type == primary {
+        line-height: map-get($lx-button-sizes, $size);
+    }
+
+    @else if $type == secondary {
+        line-height: map-get($lx-button-sizes, $size) - 2;
     }
 }

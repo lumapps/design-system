@@ -6,26 +6,48 @@
 
 .lx-button {
     @include lx-button-base;
+
+    &__icon--has-sibling {
+        @include lx-button-icon-sibling;
+    }
 }
 
 /* Button sizes
    ========================================================================== */
 
 @each $key, $size in $lx-button-sizes {
-    .lx-button--type-primary.lx-button--shape-contained.lx-button--size-#{$key} {
-        @include lx-button-size($key, primary, contained);
-    }
+    .lx-button--size-#{$key} {
+        &.lx-button--type-primary {
+            &.lx-button--shape-contained {
+                @include lx-button-size($key, primary, contained);
+            }
 
-    .lx-button--type-primary.lx-button--shape-circled.lx-button--size-#{$key} {
-        @include lx-button-size($key, primary, circled);
-    }
+            &.lx-button--shape-circled {
+                @include lx-button-size($key, primary, circled);
+            }
 
-    .lx-button--type-secondary.lx-button--shape-contained.lx-button--size-#{$key} {
-        @include lx-button-size($key, secondary, contained);
-    }
+            .lx-button__text {
+                @include lx-button-text($key, primary);
+            }
+        }
 
-    .lx-button--type-secondary.lx-button--shape-circled.lx-button--size-#{$key} {
-        @include lx-button-size($key, secondary, circled);
+        &.lx-button--type-secondary {
+            &.lx-button--shape-contained {
+                @include lx-button-size($key, secondary, contained);
+            }
+
+            &.lx-button--shape-circled {
+                @include lx-button-size($key, secondary, circled);
+            }
+
+            .lx-button__text {
+                @include lx-button-text($key, secondary);
+            }
+        }
+
+        .lx-button__icon {
+            @include lx-button-icon($key);
+        }
     }
 }
 
@@ -34,12 +56,14 @@
 
 @each $key, $color in $lx-theme-color-palette {
     @if $key != dark and $key != light {
-        .lx-button--type-primary.lx-button--theme-light.lx-button--color-#{$key} {
-            @include lx-button-color($key, primary, dark);
-        }
+        .lx-button--color-#{$key} {
+            &.lx-button--type-primary.lx-button--theme-light {
+                @include lx-button-color($key, primary, dark);
+            }
 
-        .lx-button--type-primary.lx-button--theme-dark.lx-button--color-#{$key} {
-            @include lx-button-color($key, primary, light);
+            &.lx-button--type-primary.lx-button--theme-dark {
+                @include lx-button-color($key, primary, light);
+            }
         }
     }
 }
