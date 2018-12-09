@@ -7,12 +7,12 @@
     </label>
 
     <div class="lx-text-field__input-wrapper">
-        <lx-icon class="lx-text-field__input-icon" ng-if="lxTextField.icon">{{ lxTextField.icon }}</lx-icon>
+        <lx-icon lx-size="s" class="lx-text-field__input-icon" ng-if="lxTextField.icon">{{ lxTextField.icon }}</lx-icon>
         <div class="lx-text-field__input-native" ng-transclude></div>
     </div>
 
     <div class="lx-text-field__helper" ng-if="lxTextField.helper">
-        <lx-icon>help</lx-icon>
+        <lx-icon lx-size="xs">help</lx-icon>
         <span>{{ lxTextField.helper }}</span>
     </div>
 </div>

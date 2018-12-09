@@ -8,6 +8,7 @@
     margin-bottom: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
     font-size: 12px;
+    line-height: 14px;
 }
 
 /// Text field input wrapper mixin to style input wrapper according to the theme
@@ -30,7 +31,6 @@
 @mixin lx-text-field-input-icon($theme) {
     margin-right: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
-    font-size: 20px;
 }
 
 /// Text field input native mixin to reset native styles and apply global structure
@@ -66,11 +66,11 @@
 
     i {
         margin-right: $lx-base-spacing-unit / 2;
-        font-size: 14px;
     }
 
     span {
         font-size: 12px;
+        line-height: 14px;
     }
 }
 
