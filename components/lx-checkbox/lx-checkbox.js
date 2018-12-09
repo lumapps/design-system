@@ -35,11 +35,11 @@
         lxCheckbox.checkboxId = LxUtilsService.generateUUID();
 
         /**
-         * Wether the directive has children directive or not.
+         * Wether the directive has help slot filled or not.
          *
          * @type {boolean}
          */
-        lxCheckbox.hasChildren = false;
+        lxCheckbox.hasHelp = false;
 
         /**
          * The model view value.
@@ -87,8 +87,8 @@
         function link(scope, el, attrs, ctrls, transclude) {
             ctrls[0].setModelController(ctrls[1]);
 
-            if (transclude.isSlotFilled('label') && transclude.isSlotFilled('help')) {
-                 ctrls[0].hasChildren = true;
+            if (transclude.isSlotFilled('help')) {
+                 ctrls[0].hasHelp = true;
             }
 
             attrs.$observe('disabled', function(isDisabled) {
