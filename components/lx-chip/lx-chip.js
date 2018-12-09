@@ -13,6 +13,13 @@
         /////////////////////////////
 
         /**
+         * Wether the directive has label slot filled or not.
+         *
+         * @type {boolean}
+         */
+        lxChip.hasLabel = false;
+
+        /**
          * Wether the directive has primary slot filled or not.
          *
          * @type {boolean}
@@ -26,6 +33,10 @@
         function link(scope, el, attrs, ctrl, transclude) {
             if (transclude.isSlotFilled('primary')) {
                  ctrl.hasPrimary = true;
+            }
+
+            if (transclude.isSlotFilled('label')) {
+                 ctrl.hasLabel = true;
             }
         }
 
