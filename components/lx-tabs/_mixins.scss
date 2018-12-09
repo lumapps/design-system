@@ -3,7 +3,7 @@
 /// @param {String} $theme - The tabs theme, either dark or light
 @mixin lx-tabs-links($theme) {
     display: flex;
-    border-bottom: 2px solid lx-theme-color-variant($theme, l5);
+    border-bottom: 2px solid lx-theme-color-variant($theme, L5);
 }
 
 /// Tabs links position mixin to set tabs links position in clustered layout
@@ -38,11 +38,11 @@
     transition: color 0.2s;
 
     @if $theme == dark {
-        color: lx-theme-color-variant(dark, n);
+        color: lx-theme-color-variant(dark, N);
     }
 
     @else if $theme == light {
-        color: lx-theme-color-variant(light, l2);
+        color: lx-theme-color-variant(light, L2);
     }
 
     &::after {
@@ -81,44 +81,44 @@
 @mixin lx-tabs-link-state($state, $theme) {
     @if $state == hover {
         @if $theme == dark {
-            color: lx-theme-color-variant(primary, n);
+            color: lx-theme-color-variant(primary, N);
         }
 
         @else if $theme == light {
-            color: lx-theme-color-variant(light, n);
+            color: lx-theme-color-variant(light, N);
         }
     }
 
     @else if $state == focus {
         @if $theme == dark {
-            box-shadow: 0 0 0 2px lx-theme-color-variant(primary, l3);
+            box-shadow: 0 0 0 2px lx-theme-color-variant(primary, L3);
         }
 
         @else if $theme == light {
-            box-shadow: 0 0 0 2px lx-theme-color-variant(light, l3);
+            box-shadow: 0 0 0 2px lx-theme-color-variant(light, L3);
         }
     }
 
     @else if $state == active {
         @if $theme == dark {
-            color: lx-theme-color-variant(primary, n);
+            color: lx-theme-color-variant(primary, N);
 
             &::after {
-                background-color: lx-theme-color-variant(primary, n);
+                background-color: lx-theme-color-variant(primary, N);
             }
         }
 
         @else if $theme == light {
-            color: lx-theme-color-variant(light, n);
+            color: lx-theme-color-variant(light, N);
 
             &::after {
-                background-color: lx-theme-color-variant(light, n);
+                background-color: lx-theme-color-variant(light, N);
             }
         }
     }
 
     @else if $state == disabled {
-        color: lx-theme-color-variant($theme, l3);
+        color: lx-theme-color-variant($theme, L3);
         pointer-events: none;
     }
 }

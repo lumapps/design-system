@@ -80,23 +80,23 @@
 
     @if $type == primary {
         @if $theme == dark {
-            background-color: lx-theme-color-variant($color, n);
-            color: lx-theme-best-color(lx-theme-color-variant($color, n));
+            background-color: lx-theme-color-variant($color, N);
+            color: lx-theme-best-color(lx-theme-color-variant($color, N));
         }
 
         @else if $theme == light {
-            background-color: lx-theme-color-variant(light, n);
-            color: lx-theme-color-variant($color, n);
+            background-color: lx-theme-color-variant(light, N);
+            color: lx-theme-color-variant($color, N);
         }
 
         // Hover state
         &:hover {
             @if $theme == dark {
-                background-color: lx-theme-color-variant($color, d1);
+                background-color: lx-theme-color-variant($color, D1);
             }
 
             @else if $theme == light {
-                background-color: lx-theme-color-variant(light, l1);
+                background-color: lx-theme-color-variant(light, L1);
             }
         }
 
@@ -104,13 +104,13 @@
         &[data-focus-visible-added] {
             @if $theme == dark {
                 &::after {
-                    border-color: lx-theme-color-variant($color, n);
+                    border-color: lx-theme-color-variant($color, N);
                 }
             }
 
             @else if $theme == light {
                 &::after {
-                    border-color: lx-theme-color-variant(light, n);
+                    border-color: lx-theme-color-variant(light, N);
                 }
             }
         }
@@ -118,53 +118,53 @@
         // Active state
         &:active {
             @if $theme == dark {
-                background-color: lx-theme-color-variant($color, d2);
+                background-color: lx-theme-color-variant($color, D2);
             }
 
             @else if $theme == light {
-                background-color: lx-theme-color-variant(light, l2);
+                background-color: lx-theme-color-variant(light, L2);
             }
         }
 
         // Disabled state
         &:disabled {
             @if $theme == dark {
-                background-color: lx-theme-color-variant($color, l3);
+                background-color: lx-theme-color-variant($color, L3);
             }
 
             @else if $theme == light {
-                background-color: lx-theme-color-variant(light, l4);
-                color: lx-theme-color-variant(light, l3);
+                background-color: lx-theme-color-variant(light, L4);
+                color: lx-theme-color-variant(light, L3);
             }
         }
     }
 
     @else if $type == secondary {
-        border: 1px solid lx-theme-color-variant($theme, n);
+        border: 1px solid lx-theme-color-variant($theme, N);
         background-color: transparent;
-        color: lx-theme-color-variant($theme, n);
+        color: lx-theme-color-variant($theme, N);
 
         // Hover state
         &:hover {
-            background-color: lx-theme-color-variant($theme, l6);
+            background-color: lx-theme-color-variant($theme, L6);
         }
 
         // Focus state
         &[data-focus-visible-added] {
             &::after {
-                border-color: lx-theme-color-variant($theme, l1);
+                border-color: lx-theme-color-variant($theme, L1);
             }
         }
 
         // Active state
         &:active {
-            background-color: lx-theme-color-variant($theme, l5);
+            background-color: lx-theme-color-variant($theme, L5);
         }
 
         // Disabled state
         &:disabled {
-            border-color: lx-theme-color-variant($theme, l3);
-            color: lx-theme-color-variant($theme, l3);
+            border-color: lx-theme-color-variant($theme, L3);
+            color: lx-theme-color-variant($theme, L3);
         }
     }
 }
