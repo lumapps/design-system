@@ -42,6 +42,13 @@
         lxCheckbox.hasHelp = false;
 
         /**
+         * Wether the directive has label slot filled or not.
+         *
+         * @type {boolean}
+         */
+        lxCheckbox.hasLabel = false;
+
+        /**
          * The model view value.
          *
          * @type {string}
@@ -86,6 +93,10 @@
     function lxCheckboxDirective() {
         function link(scope, el, attrs, ctrls, transclude) {
             ctrls[0].setModelController(ctrls[1]);
+
+            if (transclude.isSlotFilled('label')) {
+                 ctrls[0].hasLabel = true;
+            }
 
             if (transclude.isSlotFilled('help')) {
                  ctrls[0].hasHelp = true;
