@@ -40,6 +40,13 @@
                     templateUrl: 'demo/lx-checkbox/demo.html',
                 }
             }
+        }).state('app.chip', {
+            url: 'chip',
+            views: {
+                'main@': {
+                    templateUrl: 'demo/lx-chip/demo.html',
+                }
+            }
         }).state('app.dialog', {
             url: 'dialog',
             views: {

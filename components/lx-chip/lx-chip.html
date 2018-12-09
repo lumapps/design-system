@@ -1,0 +1,8 @@
+<div class="lx-chip" ng-class="{ 'lx-chip--is-deletable': lxChip.isDeletable }">
+    <div class="lx-chip__primary" ng-transclude="primary" ng-if="lxChip.hasPrimary"></div>
+    <div class="lx-chip__label" ng-transclude="label" ng-if="lxChip.hasPrimary"></div>
+    <div class="lx-chip__label" ng-transclude ng-if="!lxChip.hasPrimary"></div>
+    <div class="lx-chip__delete" ng-if="lxChip.isDeletable">
+        <lx-icon lx-size="xs">close</lx-icon>
+    </div>
+</div>
