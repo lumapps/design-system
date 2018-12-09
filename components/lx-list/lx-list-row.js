@@ -13,6 +13,13 @@
         /////////////////////////////
 
         /**
+         * Wether the directive has content slot filled or not.
+         *
+         * @type {boolean}
+         */
+        lxListRow.hasContent = false;
+
+        /**
          * Wether the directive has primary slot filled or not.
          *
          * @type {boolean}
@@ -35,6 +42,10 @@
                  ctrl.hasPrimary = true;
             }
 
+            if (transclude.isSlotFilled('content')) {
+                 ctrl.hasContent = true;
+            }
+
             if (transclude.isSlotFilled('secondary')) {
                  ctrl.hasSecondary = true;
             }
@@ -54,7 +65,7 @@
             },
             templateUrl: 'components/lx-list/lx-list-row.html',
             transclude: {
-                content: 'lxListRowContent',
+                content: '?lxListRowContent',
                 primary: '?lxListRowPrimary',
                 secondary: '?lxListRowSecondary',
             },
