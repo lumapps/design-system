@@ -141,7 +141,7 @@
 
             if (angular.isDefined(lxDropdown.width)) {
                 if (lxDropdown.width.indexOf('%') > -1) {
-                    menuProps.width = toggleProps.width * (lxDropdown.width.slice(0, -1) / 100);
+                    menuProps.minWidth = toggleProps.width * (lxDropdown.width.slice(0, -1) / 100);
                 } else {
                     menuProps.width = lxDropdown.width;
                 }
@@ -160,8 +160,17 @@
             _menuEl.css({
                 left: menuProps.left,
                 right: menuProps.right,
-                width: menuProps.width,
-            })
+            });
+
+            if (angular.isDefined(menuProps.minWidth)) {
+                _menuEl.css({
+                    minWidth: menuProps.minWidth
+                });
+            } else {
+                _menuEl.css({
+                    width: menuProps.width
+                })
+            }
         }
 
         /**

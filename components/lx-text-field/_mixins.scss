@@ -14,15 +14,32 @@
 /// Text field input wrapper mixin to style input wrapper according to the theme
 ///
 /// @param {String} $theme - The text field theme, either dark or light
-@mixin lx-text-field-input-wrapper($theme) {
-    display: inline-flex;
-    height: $lx-text-field-height;
-    align-items: center;
-    padding: 0 $lx-text-field-horizontal-padding;
+/// @param {Boolean} $indicator - Wether the wrapper should contain an indicator values or not
+/// @param {Boolean} $multiple - Wether the wrapper should contain multiple values or not
+@mixin lx-text-field-input-wrapper($theme, $indicator: false, $multiple: false) {
+    position: relative;
+    display: flex;
     background-color: lx-theme-color-variant($theme, L6);
     border-radius: 4px;
     box-shadow: 0 0 0 1px lx-theme-color-variant($theme, L3);
+    outline: none;
     transition: background-color $lx-text-field-transition-duration, box-shadow $lx-text-field-transition-duration;
+
+    @if $multiple {
+        min-height: $lx-text-field-height;
+        flex-wrap: wrap;
+        padding: 3px;
+    }
+
+    @else {
+        height: $lx-text-field-height;
+        align-items: center;
+        padding: 0 $lx-text-field-horizontal-padding;
+    }
+
+    @if $indicator {
+        padding-right: 48px;
+    }
 }
 
 /// Text field input icon mixin to style input icon according to the theme
@@ -39,6 +56,7 @@
 @mixin lx-text-field-input-native($theme) {
     @include lx-typography-base;
 
+    width: 100%;
     height: $lx-text-field-height;
     padding: 0;
     border: none;

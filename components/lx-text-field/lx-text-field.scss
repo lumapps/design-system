@@ -28,6 +28,8 @@
     }
 
     &__input-icon {
+        flex-shrink: 0;
+
         #{ $self }--theme-light & {
             @include lx-text-field-input-icon(dark);
         }
@@ -37,13 +39,17 @@
         }
     }
 
-    &__input-native input {
-        #{ $self }--theme-light & {
-            @include lx-text-field-input-native(dark);
-        }
+    &__input-native {
+        flex: 1;
 
-        #{ $self }--theme-dark & {
-            @include lx-text-field-input-native(light);
+        input {
+            #{ $self }--theme-light & {
+                @include lx-text-field-input-native(dark);
+            }
+
+            #{ $self }--theme-dark & {
+                @include lx-text-field-input-native(light);
+            }
         }
     }
 

@@ -3,7 +3,50 @@
    ========================================================================== */
 
 .lx-select {
-    &__choice--is-active {
-        background-color: #ccc;
+    $self: &;
+
+    &__label {
+        @include lx-text-field-label(dark);
     }
+
+    &__selected {
+        cursor: pointer;
+
+        #{ $self }--is-empty &,
+        #{ $self }--has-unique & {
+            @include lx-text-field-input-wrapper(dark, true, false);
+        }
+
+        #{ $self }--has-multiple & {
+            @include lx-text-field-input-wrapper(dark, true, true);
+        }
+    }
+
+    &__selected-item {
+        @include lx-text-field-input-native(dark);
+    }
+
+    &__selected-chip {
+        margin: 3px;
+    }
+
+    &__selected-indicator {
+        position: absolute;
+        top: 50%;
+        right: 12px;
+        transform: translateY(-50%);
+    }
+}
+
+/* Select states
+   ========================================================================== */
+
+// Hover state
+.lx-select__selected:hover {
+    @include lx-text-field-input-wrapper-state(hover, dark);
+}
+
+// Focus state
+.lx-select__selected[data-focus-visible-added] {
+    @include lx-text-field-input-wrapper-state(focus, dark);
 }
