@@ -2,12 +2,17 @@
    Sub nav
    ========================================================================== */
 
+$sub-nav-width: 228px;
+
 .sub-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: $main-nav-width;
     display: flex;
     overflow: auto;
-    width: 228px;
+    width: $sub-nav-width;
     flex-direction: column;
-    flex-shrink: 0;
 
     &__wrapper {
         flex: 1;

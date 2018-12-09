@@ -4,9 +4,9 @@
 
 .main {
     overflow: auto;
-    flex: 1;
     padding: $lx-base-spacing-unit * 10;
     padding-top: $lx-base-spacing-unit * 6;
+    margin-left: $main-nav-width + $sub-nav-width;
 
     &__block {
         margin-bottom: $lx-base-spacing-unit * 6;

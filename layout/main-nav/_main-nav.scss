@@ -2,9 +2,14 @@
    Main nav
    ========================================================================== */
 
+$main-nav-width: 56px;
+
 .main-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
     overflow: auto;
-    width: 56px;
-    flex-shrink: 0;
+    width: $main-nav-width;
     background-color: lx-theme-color-variant(blue, N);
 }
