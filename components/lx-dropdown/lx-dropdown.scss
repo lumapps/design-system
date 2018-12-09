@@ -7,11 +7,12 @@
     vertical-align: top;
 
     &__menu {
-        @include lx-elevation(8);
+        @include lx-elevation(2);
 
         position: fixed;
         overflow: auto;
-        background-color: #fff;
+        padding: $lx-base-spacing-unit 0;
+        background-color: lx-theme-color-variant(light, N);
         border-radius: 4px;
     }
 }
