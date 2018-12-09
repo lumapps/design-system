@@ -1,0 +1,73 @@
+/* ==========================================================================
+   List
+   ========================================================================== */
+
+@import "./variables";
+
+.lx-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Row
+   ========================================================================== */
+
+.lx-list-row {
+    display: flex;
+    height: $lx-list-row-height;
+    align-items: center;
+    padding: 0 $lx-list-row-horizontal-padding;
+    color: lx-theme-color-variant(dark, N);
+
+    &__primary {
+        flex-shrink: 0;
+        margin-right: $lx-base-spacing-unit;
+    }
+
+    &__content {
+        flex: 1;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    &__secondary {
+        flex-shrink: 0;
+        margin-left: $lx-base-spacing-unit;
+    }
+
+    &--is-clickable {
+        cursor: pointer;
+
+        &:hover {
+            background-color: lx-theme-color-variant(dark, L5);
+        }
+    }
+
+    &--is-active {
+        color: lx-theme-color-variant(primary, N);
+    }
+}
+
+/* Subheader
+   ========================================================================== */
+
+.lx-list-subheader {
+    display: flex;
+    height: $lx-list-row-height;
+    align-items: center;
+    padding: 0 $lx-list-row-horizontal-padding;
+    color: lx-theme-color-variant(dark, L3);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Divider
+   ========================================================================== */
+
+.lx-list-divider {
+    height: 1px;
+    margin: $lx-base-spacing-unit 0;
+    background-color: lx-theme-color-variant(dark, L5);
+}

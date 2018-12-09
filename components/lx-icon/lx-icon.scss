@@ -3,3 +3,25 @@
    ========================================================================== */
 
 @import "./mixins";
+
+.lx-icon {
+    display: block;
+}
+
+/* Icon sizes
+   ========================================================================== */
+
+@each $key, $size in $lx-icon-sizes {
+    .lx-icon--size-#{$key} {
+        @include lx-icon-size($key);
+    }
+}
+
+/* Button colors
+   ========================================================================== */
+
+@each $key, $color in $lx-theme-color-palette {
+    .lx-icon--color-#{$key} {
+        @include lx-icon-color($key);
+    }
+}

@@ -58,6 +58,13 @@
                     templateUrl: 'demo/lx-dropdown/demo.html',
                 }
             }
+        }).state('app.list', {
+            url: 'list',
+            views: {
+                'main@': {
+                    templateUrl: 'demo/lx-list/demo.html',
+                }
+            }
         }).state('app.select', {
             url: 'select',
             views: {

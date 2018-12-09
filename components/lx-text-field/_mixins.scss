@@ -4,11 +4,10 @@
 ///
 /// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-label($theme) {
-    @include lx-typography(caption);
-
     display: block;
     margin-bottom: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
+    font-size: 12px;
 }
 
 /// Text field input wrapper mixin to style input wrapper according to the theme
@@ -71,7 +70,7 @@
     }
 
     span {
-        @include lx-typography(caption);
+        font-size: 12px;
     }
 }
 

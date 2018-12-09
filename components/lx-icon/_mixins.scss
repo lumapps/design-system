@@ -11,5 +11,5 @@
 ///
 /// @param {String} $color - The icon color identifier from the color palette
 @mixin lx-icon-color($color) {
-    color: lx-theme-color-variant($color, n);
+    color: lx-theme-color-variant($color, N);
 }
