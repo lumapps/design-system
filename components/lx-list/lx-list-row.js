@@ -13,14 +13,14 @@
         /////////////////////////////
 
         /**
-         * Wether the directive has has primary slot filled or not.
+         * Wether the directive has primary slot filled or not.
          *
          * @type {boolean}
          */
         lxListRow.hasPrimary = false;
 
         /**
-         * Wether the directive has has secondary slot filled or not.
+         * Wether the directive has secondary slot filled or not.
          *
          * @type {boolean}
          */
