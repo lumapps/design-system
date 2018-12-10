@@ -20,7 +20,7 @@
     padding: 0 $lx-list-row-horizontal-padding;
     color: lx-theme-color-variant(dark, N);
 
-    &__primary {
+    &__primary:not(:empty) {
         flex-shrink: 0;
         margin-right: $lx-base-spacing-unit;
     }
@@ -31,7 +31,7 @@
         line-height: 20px;
     }
 
-    &__secondary {
+    &__secondary:not(:empty) {
         flex-shrink: 0;
         margin-left: $lx-base-spacing-unit;
     }
