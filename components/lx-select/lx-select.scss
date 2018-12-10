@@ -47,7 +47,6 @@
 }
 
 // Focus state
-
 .lx-select--is-open .lx-select__input-wrapper,
 .lx-select__input-wrapper[data-focus-visible-added] {
     @include lx-text-field-input-wrapper-state(focus, dark);
