@@ -16,6 +16,10 @@
 
     &--is-deletable {
         cursor: pointer;
+
+        &:hover {
+            background-color: lx-theme-color-variant(dark, L4);
+        }
     }
 
     &__primary {
