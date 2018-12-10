@@ -9,7 +9,7 @@
         @include lx-text-field-label(dark);
     }
 
-    &__selected {
+    &__input-wrapper {
         cursor: pointer;
 
         #{ $self }--is-empty &,
@@ -22,11 +22,11 @@
         }
     }
 
-    &__selected-item {
+    &__input-native {
         @include lx-text-field-input-native(dark);
     }
 
-    &__selected-chip {
+    &__input-chip {
         margin: 3px;
     }
 
@@ -42,11 +42,11 @@
    ========================================================================== */
 
 // Hover state
-.lx-select__selected:hover {
+.lx-select__input-wrapper:hover {
     @include lx-text-field-input-wrapper-state(hover, dark);
 }
 
 // Focus state
-.lx-select__selected[data-focus-visible-added] {
+.lx-select__input-wrapper[data-focus-visible-added] {
     @include lx-text-field-input-wrapper-state(focus, dark);
 }

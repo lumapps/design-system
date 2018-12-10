@@ -8,56 +8,60 @@
         {{ lxSelect.label }}
     </span>
 
-    <div class="lx-select__input">
-        <lx-dropdown lx-position="left" lx-width="100%">
-            <lx-dropdown-toggle>
-                <div class="lx-select__selected" tabindex="0">
-                    <span class="lx-select__selected-item lx-select__selected-item--placeholder" ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple">Select a value</span>
-                    <span class="lx-select__selected-item lx-select__selected-item--placeholder" ng-if="lxSelect.isModelEmpty() && lxSelect.multiple">Select values</span>
+    <div class="lx-select__input-wrapper" id="{{ lxSelect.targetUuid }}" tabindex="0"
+         ng-click="lxSelect.openDropdown()">
+        <div class="lx-select__input-native" ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple">
+            <span>Select a value</span>
+        </div>
 
-                    <span class="lx-select__selected-item" ng-bind-html="lxSelect.displaySelected()" ng-if="!lxSelect.isModelEmpty() && !lxSelect.multiple"></span>
+        <div class="lx-select__input-native" ng-if="lxSelect.isModelEmpty() && lxSelect.multiple">
+            <span>Select values</span>
+        </div>
 
-                    <div class="lx-select__selected-chip"
-                         ng-repeat="selected in lxSelect.viewValue"
-                         ng-click="lxSelect.select(selected, $event)"
-                         ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple">
-                        <lx-chip lx-is-deletable="true">
-                            <div ng-bind-html="lxSelect.displaySelected(selected)"></div>
-                        </lx-chip>
-                    </div>
+        <div class="lx-select__input-native" ng-if="!lxSelect.isModelEmpty() && !lxSelect.multiple">
+            <span ng-bind-html="lxSelect.displaySelected()"></span>
+        </div>
 
-                    <div class="lx-select__selected-indicator">
-                        <lx-icon lx-size="m">arrow_drop_down</lx-icon>
-                    </div>
-                </div>
-            </lx-dropdown-toggle>
+        <div class="lx-select__input-chip"
+             ng-repeat="selected in lxSelect.viewValue"
+             ng-click="lxSelect.select(selected, $event)"
+             ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple">
+            <lx-chip lx-is-deletable="true">
+                <div ng-bind-html="lxSelect.displaySelected(selected)"></div>
+            </lx-chip>
+        </div>
 
-            <lx-dropdown-menu>
-                <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
-                    <input type="text"
-                           ng-model="lxSelect.filterModel"
-                           ng-model-options="{ debounce: 500 }"
-                           ng-change="lxSelect.updateFilter()"
-                           lx-select-filter>
-                </div>
-
-                <lx-list>
-                    <lx-list-row lx-is-clickable="true" lx-is-active="lxSelect.isSelected(choice)"
-                                 ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
-                                 ng-click="lxSelect.select(choice, $event)">
-                        <lx-list-row-primary ng-if="lxSelect.multiple">
-                            <lx-icon lx-size="s" ng-if="!lxSelect.isSelected(choice)">check_box_outline_blank</lx-icon>
-                            <lx-icon lx-size="s" ng-if="lxSelect.isSelected(choice)">check_box</lx-icon>
-                        </lx-list-row-primary>
-
-                        <lx-list-row-content>
-                            <div ng-bind-html="lxSelect.displayChoice(choice)"></div>
-                        </lx-list-row-content>
-                    </lx-list-row>
-                </lx-list>
-
-                <span class="lx-select__helper" ng-if="lxSelect.displayHelper">{{ lxSelect.helper }}</span>
-            </lx-dropdown-menu>
-        </lx-dropdown>
+        <div class="lx-select__selected-indicator">
+            <lx-icon lx-size="m">arrow_drop_down</lx-icon>
+        </div>
     </div>
+
+    <lx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
+        <lx-dropdown-menu>
+            <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
+                <input type="text"
+                       ng-model="lxSelect.filterModel"
+                       ng-model-options="{ debounce: 500 }"
+                       ng-change="lxSelect.updateFilter()"
+                       lx-select-filter>
+            </div>
+
+            <lx-list>
+                <lx-list-row lx-is-clickable="true" lx-is-active="lxSelect.isSelected(choice)"
+                             ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
+                             ng-click="lxSelect.select(choice, $event)">
+                    <lx-list-row-primary ng-if="lxSelect.multiple">
+                        <lx-icon lx-size="s" ng-if="!lxSelect.isSelected(choice)">check_box_outline_blank</lx-icon>
+                        <lx-icon lx-size="s" ng-if="lxSelect.isSelected(choice)">check_box</lx-icon>
+                    </lx-list-row-primary>
+
+                    <lx-list-row-content>
+                        <div ng-bind-html="lxSelect.displayChoice(choice)"></div>
+                    </lx-list-row-content>
+                </lx-list-row>
+            </lx-list>
+
+            <span class="lx-select__helper" ng-if="lxSelect.displayHelper">{{ lxSelect.helper }}</span>
+        </lx-dropdown-menu>
+    </lx-dropdown>
 </div>

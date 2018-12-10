@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    lxSelectController.$inject = ['$interpolate', '$sce'];
+    lxSelectController.$inject = ['$interpolate', '$sce', 'LxDropdownService', 'LxUtilsService'];
 
-    function lxSelectController($interpolate, $sce) {
+    function lxSelectController($interpolate, $sce, LxDropdownService, LxUtilsService) {
         var lxSelect = this;
 
         /////////////////////////////
@@ -138,11 +138,25 @@
         /////////////////////////////
 
         /**
+         * The dropdown unique identifier.
+         *
+         * @type {string}
+         */
+        lxSelect.dropdownUuid = LxUtilsService.generateUUID();
+
+        /**
          * The filter model.
          *
          * @type {string}
          */
         lxSelect.filterModel = undefined;
+
+        /**
+         * The dropdown target unique identifier.
+         *
+         * @type {string}
+         */
+        lxSelect.targetUuid = LxUtilsService.generateUUID();
 
         /**
          * The model view value.
@@ -212,6 +226,13 @@
             } else {
                 return angular.equals(choice, lxSelect.viewValue);
             }
+        }
+
+        /**
+         * Open the dropdown menu on input wrapper click.
+         */
+        function openDropdown() {
+            LxDropdownService.open(lxSelect.dropdownUuid, '#' + lxSelect.targetUuid);
         }
 
         /**
@@ -285,6 +306,7 @@
         lxSelect.displaySelected = displaySelected;
         lxSelect.isModelEmpty = isModelEmpty;
         lxSelect.isSelected = isSelected;
+        lxSelect.openDropdown = openDropdown;
         lxSelect.registerChoiceTemplate = registerChoiceTemplate;
         lxSelect.registerSelectedTemplate = registerSelectedTemplate;
         lxSelect.select = select;
