@@ -3,8 +3,10 @@
    ========================================================================== */
 
 .lx-dropdown {
-    display: inline-block;
-    vertical-align: top;
+    &--has-toggle {
+        display: inline-block;
+        vertical-align: top;
+    }
 
     &__menu {
         @include lx-elevation(2);

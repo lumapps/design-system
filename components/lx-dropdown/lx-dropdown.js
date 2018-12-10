@@ -57,6 +57,13 @@
         /////////////////////////////
 
         /**
+         * Wether the directive has toggle slot filled or not.
+         *
+         * @type {boolean}
+         */
+        lxDropdown.hasToggle = false;
+
+        /**
          * Wether the dropdown is open or not.
          *
          * @type {boolean}
@@ -378,9 +385,13 @@
     /////////////////////////////
 
     function lxDropdownDirective() {
-        function link(scope, el, attrs, ctrl) {
+        function link(scope, el, attrs, ctrl, transclude) {
             ctrl.registerToggle(el.find('.lx-dropdown__toggle'));
             ctrl.registerMenu(el.find('.lx-dropdown__menu'));
+
+            if (transclude.isSlotFilled('toggle')) {
+                ctrl.hasToggle = true;
+            }
 
             attrs.$observe('id', function(id) {
                 ctrl.uuid = id;
