@@ -13,11 +13,11 @@
          ng-click="lxSelect.openDropdown()"
          ng-focus="lxSelect.enableKeyEvents()"
          ng-blur="lxSelect.disableKeyEvents()">
-        <div class="lx-select__input-native" ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple">
+        <div class="lx-select__input-native lx-select__input-native--placeholder" ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple">
             <span>Select a value</span>
         </div>
 
-        <div class="lx-select__input-native" ng-if="lxSelect.isModelEmpty() && lxSelect.multiple">
+        <div class="lx-select__input-native lx-select__input-native--placeholder" ng-if="lxSelect.isModelEmpty() && lxSelect.multiple">
             <span>Select values</span>
         </div>
 

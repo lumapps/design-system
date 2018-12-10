@@ -24,6 +24,10 @@
 
     &__input-native {
         @include lx-text-field-input-native(dark);
+
+        &--placeholder {
+            @include lx-text-field-placeholder(dark);
+        }
     }
 
     &__input-chip {
@@ -54,6 +58,10 @@
             @include lx-text-field-input-native(dark);
 
             flex: 1;
+
+            &::placeholder {
+                @include lx-text-field-placeholder(dark);
+            }
         }
     }
 

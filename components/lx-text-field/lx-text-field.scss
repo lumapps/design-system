@@ -45,10 +45,18 @@
         input {
             #{ $self }--theme-light & {
                 @include lx-text-field-input-native(dark);
+
+                &::placeholder {
+                    @include lx-text-field-placeholder(dark);
+                }
             }
 
             #{ $self }--theme-dark & {
                 @include lx-text-field-input-native(light);
+
+                &::placeholder {
+                    @include lx-text-field-placeholder(light);
+                }
             }
         }
     }
@@ -109,6 +117,10 @@
 
     .lx-text-field__input-native input {
         @include lx-text-field-disabled-state(dark);
+
+        &::placeholder {
+            @include lx-text-field-disabled-placeholder(dark);
+        }
     }
 
     .lx-text-field__helper {
@@ -131,6 +143,10 @@
 
     .lx-text-field__input-native input {
         @include lx-text-field-disabled-state(light);
+
+        &::placeholder {
+            @include lx-text-field-disabled-placeholder(light);
+        }
     }
 
     .lx-text-field__helper {
