@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    lxSelectController.$inject = ['$interpolate', '$sce', 'LxDropdownService', 'LxUtilsService'];
+    lxSelectController.$inject = ['$interpolate', '$sce', '$scope', 'LxDropdownService', 'LxUtilsService'];
 
-    function lxSelectController($interpolate, $sce, LxDropdownService, LxUtilsService) {
+    function lxSelectController($interpolate, $sce, $scope, LxDropdownService, LxUtilsService) {
         var lxSelect = this;
 
         /////////////////////////////
@@ -136,6 +136,13 @@
         //    Public attributes    //
         //                         //
         /////////////////////////////
+
+        /**
+         * Wether the dropdown is open or not.
+         *
+         * @type {boolean}
+         */
+        lxSelect.isOpen = false;
 
         /**
          * The dropdown unique identifier.
@@ -312,6 +319,36 @@
         lxSelect.select = select;
         lxSelect.setModelController = setModelController;
         lxSelect.updateFilter = updateFilter;
+
+        /////////////////////////////
+        //                         //
+        //          Events         //
+        //                         //
+        /////////////////////////////
+
+        /**
+         * Add focus class to input wrapper on dropdown open.
+         *
+         * @param {Event}  evt    The dropdown open event.
+         * @param {Object} params The dropdown uuid and the target id.
+         */
+        $scope.$on('lx-dropdown__open', function onDropdownOpen(evt, params) {
+            if (params.uuid === lxSelect.dropdownUuid) {
+                lxSelect.isOpen = true;
+            }
+        });
+
+        /**
+         * Remove focus class to input wrapper on dropdown close.
+         *
+         * @param {Event}  evt    The dropdown open event.
+         * @param {Object} params The dropdown uuid and the target id.
+         */
+        $scope.$on('lx-dropdown__close', function onDropdownOpen(evt, params) {
+            if (params.uuid === lxSelect.dropdownUuid) {
+                lxSelect.isOpen = false;
+            }
+        });
     }
 
     /////////////////////////////

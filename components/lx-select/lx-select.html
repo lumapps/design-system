@@ -3,7 +3,8 @@
                  'lx-select--unique': !lxSelect.multiple,
                  'lx-select--has-unique': !lxSelect.isModelEmpty() && !lxSelect.multiple,
                  'lx-select--multiple': lxSelect.multiple,
-                 'lx-select--has-multiple': !lxSelect.isModelEmpty() && lxSelect.multiple }">
+                 'lx-select--has-multiple': !lxSelect.isModelEmpty() && lxSelect.multiple,
+                 'lx-select--is-open': lxSelect.isOpen }">
     <span class="lx-select__label" ng-if="lxSelect.label">
         {{ lxSelect.label }}
     </span>
