@@ -34,7 +34,7 @@
             </lx-chip>
         </div>
 
-        <div class="lx-select__selected-indicator">
+        <div class="lx-select__input-indicator">
             <lx-icon lx-size="m">arrow_drop_down</lx-icon>
         </div>
     </div>
@@ -42,7 +42,9 @@
     <lx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
         <lx-dropdown-menu>
             <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
-                <input type="text"
+                <lx-icon lx-size="s">search</lx-icon>
+
+                <input type="text" placeholder="Search"
                        ng-model="lxSelect.filterModel"
                        ng-model-options="{ debounce: 500 }"
                        ng-change="lxSelect.updateFilter()"
@@ -50,6 +52,8 @@
             </div>
 
             <lx-list>
+                <lx-list-divider ng-if="lxSelect.displayFilter"></lx-list-divider>
+
                 <lx-list-row lx-is-focus="lxSelect.activeChoiceIndex === $index" lx-is-active="lxSelect.isSelected(choice)"
                              ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
                              ng-click="lxSelect.select(choice, $event)"
