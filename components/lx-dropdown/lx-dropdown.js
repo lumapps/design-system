@@ -211,7 +211,7 @@
          */
         function _onDocumentClick() {
             if (angular.isUndefined(lxDropdown.closeOnClick) || lxDropdown.closeOnClick) {
-                _close();
+                LxDropdownService.closeActiveDropdown();
             }
         }
 
@@ -222,7 +222,7 @@
          */
         function _onKeyUp(evt) {
             if (evt.keyCode == 27) {
-                _close();
+                LxDropdownService.closeActiveDropdown();
             }
 
             evt.stopPropagation();
@@ -274,7 +274,7 @@
 
             $timeout(function() {
                 if (!_mouseOnMenu || fromMenu) {
-                    _close();
+                    LxDropdownService.closeActiveDropdown();
                 }
 
                 if (fromMenu) {
@@ -328,7 +328,7 @@
             }
 
             if (lxDropdown.isOpen) {
-                _close();
+                LxDropdownService.closeActiveDropdown();
             } else {
                 _open();
             }
