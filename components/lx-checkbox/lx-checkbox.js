@@ -95,11 +95,11 @@
             ctrls[0].setModelController(ctrls[1]);
 
             if (transclude.isSlotFilled('label')) {
-                 ctrls[0].hasLabel = true;
+                ctrls[0].hasLabel = true;
             }
 
             if (transclude.isSlotFilled('help')) {
-                 ctrls[0].hasHelp = true;
+                ctrls[0].hasHelp = true;
             }
 
             attrs.$observe('disabled', function(isDisabled) {

@@ -39,15 +39,15 @@
     function lxListRowDirective() {
         function link(scope, el, attrs, ctrl, transclude) {
             if (transclude.isSlotFilled('primary')) {
-                 ctrl.hasPrimary = true;
+                ctrl.hasPrimary = true;
             }
 
             if (transclude.isSlotFilled('content')) {
-                 ctrl.hasContent = true;
+                ctrl.hasContent = true;
             }
 
             if (transclude.isSlotFilled('secondary')) {
-                 ctrl.hasSecondary = true;
+                ctrl.hasSecondary = true;
             }
         }
 

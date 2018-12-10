@@ -32,11 +32,11 @@
     function lxChipDirective() {
         function link(scope, el, attrs, ctrl, transclude) {
             if (transclude.isSlotFilled('primary')) {
-                 ctrl.hasPrimary = true;
+                ctrl.hasPrimary = true;
             }
 
             if (transclude.isSlotFilled('label')) {
-                 ctrl.hasLabel = true;
+                ctrl.hasLabel = true;
             }
         }
 
