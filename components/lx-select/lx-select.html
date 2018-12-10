@@ -54,7 +54,7 @@
             <ul class="lx-select__choices">
                 <li class="lx-select__choice"
                     ng-class="{ 'lx-select__choice--is-focus': lxSelect.activeChoiceIndex === $index,
-                                'lx-select__choice--is-active': lxSelect.isSelected(choice) && !lxSelect.multiple }"
+                                'lx-select__choice--is-active': lxSelect.isSelected(choice) }"
                     ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
                     ng-click="lxSelect.select(choice, $event)"
                     ng-mouseover="lxSelect.activeChoiceIndex = $index">
