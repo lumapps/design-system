@@ -10,7 +10,9 @@
     </span>
 
     <div class="lx-select__input-wrapper" id="{{ lxSelect.targetUuid }}" tabindex="0"
-         ng-click="lxSelect.openDropdown()">
+         ng-click="lxSelect.openDropdown()"
+         ng-focus="lxSelect.enableKeyEvents()"
+         ng-blur="lxSelect.disableKeyEvents()">
         <div class="lx-select__input-native" ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple">
             <span>Select a value</span>
         </div>
@@ -48,9 +50,10 @@
             </div>
 
             <lx-list>
-                <lx-list-row lx-is-clickable="true" lx-is-active="lxSelect.isSelected(choice)"
+                <lx-list-row lx-is-focus="lxSelect.activeChoiceIndex === $index" lx-is-active="lxSelect.isSelected(choice)"
                              ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
-                             ng-click="lxSelect.select(choice, $event)">
+                             ng-click="lxSelect.select(choice, $event)"
+                             ng-mouseover="lxSelect.activeChoiceIndex = $index">
                     <lx-list-row-primary ng-if="lxSelect.multiple">
                         <lx-icon lx-size="s" ng-if="!lxSelect.isSelected(choice)">check_box_outline_blank</lx-icon>
                         <lx-icon lx-size="s" ng-if="lxSelect.isSelected(choice)">check_box</lx-icon>

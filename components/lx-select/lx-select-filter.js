@@ -8,8 +8,6 @@
             el.on('click', function onFilterClick(evt) {
                 evt.stopPropagation();
             });
-
-            el.focus();
         }
 
         return {

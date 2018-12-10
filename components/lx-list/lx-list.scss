@@ -38,10 +38,11 @@
 
     &--is-clickable {
         cursor: pointer;
+    }
 
-        &:hover {
-            background-color: lx-theme-color-variant(dark, L5);
-        }
+    &--is-clickable:hover,
+    &--is-focus {
+        background-color: lx-theme-color-variant(dark, L5);
     }
 
     &--is-active {

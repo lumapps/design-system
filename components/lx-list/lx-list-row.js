@@ -62,6 +62,7 @@
                 icon: '@?lxIcon',
                 isActive: '=?lxIsActive',
                 isClickable: '=?lxIsClickable',
+                isFocus: '=?lxIsFocus',
             },
             templateUrl: 'components/lx-list/lx-list-row.html',
             transclude: {
