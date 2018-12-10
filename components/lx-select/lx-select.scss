@@ -40,7 +40,9 @@
     &__filter {
         display: flex;
         align-items: center;
-        padding: 0 $lx-base-spacing-unit * 2;
+        padding: 0 $lx-base-spacing-unit * 2 $lx-base-spacing-unit;
+        border-bottom: 1px solid lx-theme-color-variant(dark, L5);
+        margin-bottom: $lx-base-spacing-unit;
 
         i {
             @include lx-text-field-input-icon(dark);
@@ -53,6 +55,31 @@
 
             flex: 1;
         }
+    }
+
+    &__choices {
+        @include lx-list;
+    }
+
+    &__choice {
+        @include lx-list-row;
+
+        &--is-focus {
+            background-color: lx-theme-color-variant(dark, L5);
+        }
+
+        &--is-active {
+            background-color: lx-theme-color-variant(dark, N);
+            color: lx-theme-color-variant(light, N);
+        }
+    }
+
+    &__choice-icon {
+        @include lx-list-row-primary;
+    }
+
+    &__choice-content {
+        @include lx-list-row-content;
     }
 }
 

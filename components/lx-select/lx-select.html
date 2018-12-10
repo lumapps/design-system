@@ -51,23 +51,21 @@
                        lx-select-filter>
             </div>
 
-            <lx-list>
-                <lx-list-divider ng-if="lxSelect.displayFilter"></lx-list-divider>
-
-                <lx-list-row lx-is-focus="lxSelect.activeChoiceIndex === $index" lx-is-active="lxSelect.isSelected(choice)"
-                             ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
-                             ng-click="lxSelect.select(choice, $event)"
-                             ng-mouseover="lxSelect.activeChoiceIndex = $index">
-                    <lx-list-row-primary ng-if="lxSelect.multiple">
+            <ul class="lx-select__choices">
+                <li class="lx-select__choice"
+                    ng-class="{ 'lx-select__choice--is-focus': lxSelect.activeChoiceIndex === $index,
+                                'lx-select__choice--is-active': lxSelect.isSelected(choice) && !lxSelect.multiple }"
+                    ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
+                    ng-click="lxSelect.select(choice, $event)"
+                    ng-mouseover="lxSelect.activeChoiceIndex = $index">
+                    <div class="lx-select__choice-icon" ng-if="lxSelect.multiple">
                         <lx-icon lx-size="s" ng-if="!lxSelect.isSelected(choice)">check_box_outline_blank</lx-icon>
                         <lx-icon lx-size="s" ng-if="lxSelect.isSelected(choice)">check_box</lx-icon>
-                    </lx-list-row-primary>
+                    </div>
 
-                    <lx-list-row-content>
-                        <div ng-bind-html="lxSelect.displayChoice(choice)"></div>
-                    </lx-list-row-content>
-                </lx-list-row>
-            </lx-list>
+                    <div class="lx-select__choice-content" ng-bind-html="lxSelect.displayChoice(choice)"></div>
+                </li>
+            </ul>
 
             <span class="lx-select__helper" ng-if="lxSelect.displayHelper">{{ lxSelect.helper }}</span>
         </lx-dropdown-menu>
