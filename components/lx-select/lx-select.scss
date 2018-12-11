@@ -120,6 +120,7 @@
     &__loader {
         display: flex;
         justify-content: center;
+        padding: $lx-base-spacing-unit * 2 0;
     }
 
     &__helper {
