@@ -73,7 +73,7 @@
                 </li>
             </ul>
 
-            <span class="lx-select__helper" ng-if="lxSelect.displayHelper">{{ lxSelect.helper }}</span>
+            <span class="lx-select__helper" ng-if="lxSelect.displayHelper && !lxSelect.loading">{{ lxSelect.helper }}</span>
         </lx-dropdown-menu>
     </lx-dropdown>
 </div>

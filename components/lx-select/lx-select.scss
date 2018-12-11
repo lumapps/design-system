@@ -121,6 +121,15 @@
         display: flex;
         justify-content: center;
     }
+
+    &__helper {
+        display: block;
+        height: 36px;
+        color: lx-theme-color-variant(dark, L3);
+        font-size: 14px;
+        line-height: 36px;
+        text-align: center;
+    }
 }
 
 /* Select states
