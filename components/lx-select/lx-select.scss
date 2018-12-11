@@ -146,12 +146,12 @@
 }
 
 // Focus state
-.lx-select--theme-light .lx-select--is-open .lx-select__input-wrapper,
+.lx-select--theme-light.lx-select--is-open .lx-select__input-wrapper,
 .lx-select--theme-light .lx-select__input-wrapper:focus {
     @include lx-text-field-input-wrapper-state(focus, dark);
 }
 
-.lx-select--theme-dark .lx-select--is-open .lx-select__input-wrapper,
+.lx-select--theme-dark.lx-select--is-open .lx-select__input-wrapper,
 .lx-select--theme-dark .lx-select__input-wrapper:focus {
     @include lx-text-field-input-wrapper-state(focus, light);
 }
