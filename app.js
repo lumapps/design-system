@@ -72,6 +72,13 @@
                     templateUrl: 'demo/lx-list/demo.html',
                 }
             }
+        }).state('app.progress', {
+            url: 'progress',
+            views: {
+                'main@': {
+                    templateUrl: 'demo/lx-progress/demo.html',
+                }
+            }
         }).state('app.select', {
             url: 'select',
             views: {
