@@ -6,27 +6,54 @@
     $self: &;
 
     &__label {
-        @include lx-text-field-label(dark);
+        #{ $self }--theme-light & {
+            @include lx-text-field-label(dark);
+        }
+
+        #{ $self }--theme-dark & {
+            @include lx-text-field-label(light);
+        }
     }
 
     &__input-wrapper {
         cursor: pointer;
 
-        #{ $self }--is-empty &,
-        #{ $self }--has-unique & {
+        #{ $self }--theme-light#{ $self }--is-empty &,
+        #{ $self }--theme-light#{ $self }--has-unique & {
             @include lx-text-field-input-wrapper(dark, true, false);
         }
 
-        #{ $self }--has-multiple & {
+        #{ $self }--theme-dark#{ $self }--is-empty &,
+        #{ $self }--theme-dark#{ $self }--has-unique & {
+            @include lx-text-field-input-wrapper(light, true, false);
+        }
+
+        #{ $self }--theme-light#{ $self }--has-multiple & {
             @include lx-text-field-input-wrapper(dark, true, true);
+        }
+
+        #{ $self }--theme-dark#{ $self }--has-multiple & {
+            @include lx-text-field-input-wrapper(light, true, true);
         }
     }
 
     &__input-native {
-        @include lx-text-field-input-native(dark);
+        #{ $self }--theme-light & {
+            @include lx-text-field-input-native(dark);
+        }
+
+        #{ $self }--theme-dark & {
+            @include lx-text-field-input-native(light);
+        }
 
         &--placeholder {
-            @include lx-text-field-placeholder(dark);
+            #{ $self }--theme-light & {
+                @include lx-text-field-placeholder(dark);
+            }
+
+            #{ $self }--theme-dark & {
+                @include lx-text-field-placeholder(light);
+            }
         }
     }
 
@@ -95,12 +122,21 @@
    ========================================================================== */
 
 // Hover state
-.lx-select__input-wrapper:hover {
+.lx-select--theme-light .lx-select__input-wrapper:hover {
     @include lx-text-field-input-wrapper-state(hover, dark);
 }
 
+.lx-select--theme-dark .lx-select__input-wrapper:hover {
+    @include lx-text-field-input-wrapper-state(hover, light);
+}
+
 // Focus state
-.lx-select--is-open .lx-select__input-wrapper,
-.lx-select__input-wrapper:focus {
+.lx-select--theme-light .lx-select--is-open .lx-select__input-wrapper,
+.lx-select--theme-light .lx-select__input-wrapper:focus {
     @include lx-text-field-input-wrapper-state(focus, dark);
+}
+
+.lx-select--theme-dark .lx-select--is-open .lx-select__input-wrapper,
+.lx-select--theme-dark .lx-select__input-wrapper:focus {
+    @include lx-text-field-input-wrapper-state(focus, light);
 }

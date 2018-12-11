@@ -4,7 +4,9 @@
                  'lx-select--has-unique': !lxSelect.isModelEmpty() && !lxSelect.multiple,
                  'lx-select--multiple': lxSelect.multiple,
                  'lx-select--has-multiple': !lxSelect.isModelEmpty() && lxSelect.multiple,
-                 'lx-select--is-open': lxSelect.isOpen }">
+                 'lx-select--is-open': lxSelect.isOpen,
+                 'lx-select--theme-light': !lxSelect.theme || lxSelect.theme === 'light',
+                 'lx-select--theme-dark': lxSelect.theme === 'dark' }">
     <span class="lx-select__label" ng-if="lxSelect.label">
         {{ lxSelect.label }}
     </span>

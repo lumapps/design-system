@@ -498,6 +498,7 @@
                 modelToSelection: '&?lxModelToSelection',
                 multiple: '=?lxMultiple',
                 selectionToModel: '&?lxSelectionToModel',
+                theme: '@?lxTheme',
             },
             templateUrl: 'components/lx-select/lx-select.html',
             transclude: {
