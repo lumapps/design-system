@@ -116,6 +116,11 @@
     &__choice-content {
         @include lx-list-row-content;
     }
+
+    &__loader {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 /* Select states

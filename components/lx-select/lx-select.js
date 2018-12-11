@@ -495,6 +495,7 @@
                 filter: '&?lxFilter',
                 helper: '@?lxHelper',
                 label: '@?lxLabel',
+                loading: '=?lxLoading',
                 modelToSelection: '&?lxModelToSelection',
                 multiple: '=?lxMultiple',
                 selectionToModel: '&?lxSelectionToModel',
