@@ -1,0 +1,42 @@
+@import "./variables";
+
+@mixin lx-chip($theme) {
+    display: inline-flex;
+    height: $lx-chip-height;
+    align-items: center;
+    padding: 0 $lx-base-spacing-unit;
+    background-color: lx-theme-color-variant($theme, L5);
+    border-radius: 2px;
+    color: lx-theme-color-variant($theme, N);
+    vertical-align: top;
+}
+
+@mixin lx-chip-primary() {
+    flex-shrink: 0;
+    margin-right: $lx-base-spacing-unit;
+}
+
+@mixin lx-chip-label() {
+    @include lx-typography(caption);
+
+    flex: 1;
+    white-space: nowrap;
+}
+
+@mixin lx-chip-secondary() {
+    flex-shrink: 0;
+    margin-left: $lx-base-spacing-unit;
+}
+
+@mixin lx-chip-state($state, $theme) {
+    @if $state == hover {
+        background-color: lx-theme-color-variant($theme, L4);
+        cursor: pointer;
+    }
+
+    @else if $state == disabled {
+        background-color: lx-theme-color-variant($theme, L6);
+        color: lx-theme-color-variant($theme, L3);
+        pointer-events: none;
+    }
+}

@@ -8,7 +8,7 @@
     <div class="lx-chip__primary" ng-transclude="primary" ng-if="lxChip.hasPrimary"></div>
     <div class="lx-chip__label" ng-transclude="label" ng-if="lxChip.hasLabel"></div>
 
-    <div class="lx-chip__delete" ng-if="lxChip.isDeletable">
+    <div class="lx-chip__secondary" ng-if="lxChip.isDeletable">
         <lx-icon lx-id="close" lx-size="xs"></lx-icon>
     </div>
 </div>
