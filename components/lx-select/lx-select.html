@@ -40,18 +40,18 @@
         <div class="lx-select__input-clear"
              ng-if="lxSelect.allowClear && !lxSelect.multiple && !lxSelect.isModelEmpty()"
              ng-click="lxSelect.clearModel($event)">
-            <lx-icon lx-size="xs">cancel</lx-icon>
+            <lx-icon lx-id="close-circle" lx-size="xs"></lx-icon>
         </div>
 
         <div class="lx-select__input-indicator">
-            <lx-icon lx-size="m">arrow_drop_down</lx-icon>
+            <lx-icon lx-id="menu-down" lx-size="m"></lx-icon>
         </div>
     </div>
 
     <lx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
         <lx-dropdown-menu>
             <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
-                <lx-icon lx-size="s">search</lx-icon>
+                <lx-icon lx-id="search" lx-size="s"></lx-icon>
 
                 <input type="text" placeholder="Search"
                        ng-model="lxSelect.filterModel"
@@ -72,8 +72,8 @@
                     ng-click="lxSelect.select(choice, $event)"
                     ng-mouseover="lxSelect.activeChoiceIndex = $index">
                     <div class="lx-select__choice-icon" ng-if="lxSelect.multiple">
-                        <lx-icon lx-size="s" ng-if="!lxSelect.isSelected(choice)">check_box_outline_blank</lx-icon>
-                        <lx-icon lx-size="s" ng-if="lxSelect.isSelected(choice)">check_box</lx-icon>
+                        <lx-icon lx-id="checkbox-blank-outline" lx-size="s" ng-if="!lxSelect.isSelected(choice)"></lx-icon>
+                        <lx-icon lx-id="checkbox-marked" lx-size="s" ng-if="lxSelect.isSelected(choice)"></lx-icon>
                     </div>
 
                     <div class="lx-select__choice-content" ng-bind-html="lxSelect.displayChoice(choice)"></div>

@@ -5,7 +5,7 @@
 
     function lxIconDirective() {
         function getTemplate(el, attrs) {
-            var iconClass = 'material-icons lx-icon';
+            var iconClass = 'lx-icon';
 
             if (angular.isDefined(attrs.lxColor)) {
                 iconClass += ' lx-icon--color-' + attrs.lxColor;
@@ -15,14 +15,13 @@
                 iconClass += ' lx-icon--size-' + attrs.lxSize;
             }
 
-            return '<i class="' + iconClass + '" ng-transclude></i>';
+            return '<i class="' + iconClass + '"><iconify-icon class="iconify" data-icon="mdi:' + attrs.lxId + '"></iconify-icon></i>';
         }
 
         return {
             replace: true,
             restrict: 'E',
             template: getTemplate,
-            transclude: true,
         };
     }
 
