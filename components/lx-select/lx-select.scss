@@ -114,6 +114,10 @@
             background-color: lx-theme-color-variant(primary, L5);
             color: lx-theme-color-variant(primary, N);
         }
+
+        &--is-focus#{ & }--is-active {
+            background-color: lx-theme-color-variant(primary, L4);
+        }
     }
 
     &__choice-icon {
