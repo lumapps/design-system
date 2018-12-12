@@ -36,6 +36,8 @@
     }
 
     &__wrapper {
+        @include lx-elevation(5);
+
         display: flex;
         max-height: 100%;
         flex-direction: column;
