@@ -1,21 +1,25 @@
 @import "./variables";
 
-/// Text field label mixin to style label according to the theme
-///
-/// @param {String} $theme - The text field theme, either dark or light
-@mixin lx-text-field-label($theme) {
-    @include lx-typography(caption);
+@mixin lx-text-field-label($theme, $has-helper: false) {
+    @include lx-typography(body1);
 
     display: block;
     margin-bottom: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
 }
 
-/// Text field input wrapper mixin to style input wrapper according to the theme
-///
-/// @param {String} $theme - The text field theme, either dark or light
-/// @param {Boolean} $indicator - Wether the wrapper should contain an indicator values or not
-/// @param {Boolean} $multiple - Wether the wrapper should contain multiple values or not
+@mixin lx-text-field-label-helper() {
+    margin-bottom: $lx-base-spacing-unit / 2;
+}
+
+@mixin lx-text-field-helper($theme) {
+    @include lx-typography(caption);
+
+    display: block;
+    margin-bottom: $lx-base-spacing-unit;
+    color: lx-theme-color-variant($theme, L2);
+}
+
 @mixin lx-text-field-input-wrapper($theme, $indicator: false, $multiple: false) {
     position: relative;
     display: flex;
@@ -42,17 +46,11 @@
     }
 }
 
-/// Text field input icon mixin to style input icon according to the theme
-///
-/// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-input-icon($theme) {
     margin-right: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
 }
 
-/// Text field input native mixin to reset native styles and apply global structure
-///
-/// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-input-native($theme) {
     @include lx-typography(body1);
 
@@ -67,50 +65,15 @@
     outline: none;
 }
 
-/// Text field placeholder mixin to style placeholder according to the theme
-///
-/// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-placeholder($theme) {
     color: lx-theme-color-variant($theme, L2);
 }
 
-/// Text field helper mixin to style helper according to the theme
-///
-/// @param {String} $theme - The text field theme, either dark or light
-@mixin lx-text-field-helper($theme) {
-    display: flex;
-    align-items: center;
-    margin-top: $lx-base-spacing-unit;
-    color: lx-theme-color-variant($theme, L2);
-
-    i {
-        margin-right: $lx-base-spacing-unit / 2;
-    }
-
-    span {
-        @include lx-typography(caption);
-    }
-}
-
-/// Text field disabled state mixin to style elements in disabled mode
-///
-/// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-disabled-state($theme) {
     color: lx-theme-color-variant($theme, L3);
     pointer-events: none;
 }
 
-/// Text field disabled placeholder mixin to style placeholder in disabled mode
-///
-/// @param {String} $theme - The text field theme, either dark or light
-@mixin lx-text-field-disabled-placeholder($theme) {
-    color: lx-theme-color-variant($theme, L3);
-}
-
-/// Text field input wrapper state mixin to style input wrapper according to the state and the theme
-///
-/// @param {String} $state - The text field state, either hover, focus or disabled
-/// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-input-wrapper-state($state, $theme) {
     @if $state == hover {
         background-color: lx-theme-color-variant($theme, L5);

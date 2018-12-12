@@ -17,6 +17,20 @@
         }
     }
 
+    &--has-helper &__label {
+        @include lx-text-field-label-helper;
+    }
+
+    &__helper {
+        #{ $self }--theme-light & {
+            @include lx-text-field-helper(dark);
+        }
+
+        #{ $self }--theme-dark & {
+            @include lx-text-field-helper(light);
+        }
+    }
+
     &__input-wrapper {
         #{ $self }--theme-light & {
             @include lx-text-field-input-wrapper(dark);
@@ -58,16 +72,6 @@
                     @include lx-text-field-placeholder(light);
                 }
             }
-        }
-    }
-
-    &__helper {
-        #{ $self }--theme-light & {
-            @include lx-text-field-helper(dark);
-        }
-
-        #{ $self }--theme-dark & {
-            @include lx-text-field-helper(light);
         }
     }
 }
@@ -119,7 +123,7 @@
         @include lx-text-field-disabled-state(dark);
 
         &::placeholder {
-            @include lx-text-field-disabled-placeholder(dark);
+            @include lx-text-field-disabled-state(dark);
         }
     }
 
@@ -145,7 +149,7 @@
         @include lx-text-field-disabled-state(light);
 
         &::placeholder {
-            @include lx-text-field-disabled-placeholder(light);
+            @include lx-text-field-disabled-state(light);
         }
     }
 

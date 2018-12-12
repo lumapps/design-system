@@ -191,7 +191,7 @@
         @include lx-text-field-disabled-state(dark);
 
         &::placeholder {
-            @include lx-text-field-disabled-placeholder(dark);
+            @include lx-text-field-disabled-state(dark);
         }
     }
 
@@ -213,7 +213,7 @@
         @include lx-text-field-disabled-state(light);
 
         &::placeholder {
-            @include lx-text-field-disabled-placeholder(light);
+            @include lx-text-field-disabled-state(light);
         }
     }
 
