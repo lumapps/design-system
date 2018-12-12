@@ -37,6 +37,12 @@
             </lx-chip>
         </div>
 
+        <div class="lx-select__input-clear"
+             ng-if="lxSelect.allowClear && !lxSelect.multiple && !lxSelect.isModelEmpty()"
+             ng-click="lxSelect.clearModel($event)">
+            <lx-icon lx-size="xs">cancel</lx-icon>
+        </div>
+
         <div class="lx-select__input-indicator">
             <lx-icon lx-size="m">arrow_drop_down</lx-icon>
         </div>

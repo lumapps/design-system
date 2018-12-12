@@ -255,6 +255,17 @@
         /////////////////////////////
 
         /**
+         * Clear the model on clear button click.
+         *
+         * @param {Event} [evt] The event that triggered the function.
+         */
+        function clearModel(evt) {
+             _modelController.$viewValue = undefined;
+
+             evt.stopPropagation();
+        }
+
+        /**
          * Close the dropdown menu.
          */
         function closeDropdown() {
@@ -408,6 +419,7 @@
 
         /////////////////////////////
 
+        lxSelect.clearModel = clearModel;
         lxSelect.closeDropdown = closeDropdown;
         lxSelect.disableKeyEvents = disableKeyEvents;
         lxSelect.displayChoice = displayChoice;
@@ -489,6 +501,7 @@
             require: ['lxSelect', 'ngModel'],
             restrict: 'E',
             scope: {
+                allowClear: '=lxAllowClear',
                 choices: '=lxChoices',
                 displayFilter: '=?lxDisplayFilter',
                 displayHelper: '=?lxDisplayHelper',

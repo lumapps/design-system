@@ -61,6 +61,18 @@
         margin: 3px;
     }
 
+    &__input-clear {
+        display: none;
+
+        &:hover {
+            color: lx-theme-color-variant(dark, L2);
+        }
+    }
+
+    &__input-wrapper:hover &__input-clear {
+        display: block;
+    }
+
     &__input-indicator {
         position: absolute;
         top: 50%;
