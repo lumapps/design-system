@@ -10,7 +10,7 @@
     display: inline-flex;
     height: $lx-chip-height;
     align-items: center;
-    padding: 0 $lx-chip-horizontal-padding;
+    padding: 0 $lx-base-spacing-unit;
     border-radius: 2px;
     vertical-align: top;
 
@@ -30,7 +30,7 @@
 
     &__primary {
         flex-shrink: 0;
-        margin-right: 6px;
+        margin-right: $lx-base-spacing-unit;
     }
 
     &__label {
@@ -42,7 +42,7 @@
 
     &__delete {
         flex-shrink: 0;
-        margin-left: 6px;
+        margin-left: $lx-base-spacing-unit;
     }
 }
 

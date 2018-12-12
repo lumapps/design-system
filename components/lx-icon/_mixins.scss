@@ -1,15 +1,9 @@
 @import "./variables";
 
-/// Icon size mixin to style icon regarding the size
-///
-/// @param {String} $size - The button size, either xs, s, m, l or xl
 @mixin lx-icon-size($size) {
     font-size: map-get($lx-icon-sizes, $size);
 }
 
-/// Icon color mixin to style button regarding the color
-///
-/// @param {String} $color - The icon color identifier from the color palette
 @mixin lx-icon-color($color) {
     color: lx-theme-color-variant($color, N);
 }

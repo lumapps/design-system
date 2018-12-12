@@ -1,19 +1,9 @@
 @import "./variables";
 
-/// Returns the hexadecimal code of a color identifier in the color palette according to the given variant
-///
-/// @param  {String} $color - The color identifier
-/// @param  {String} $variant - The color variant
-/// @return {String} The hexadecimal code from the color palette
 @function lx-theme-color-variant($color, $variant) {
     @return map-get(map-get($lx-theme-color-palette, $color), $variant);
 }
 
-/// Returns the best color according to the contrast ratio
-///
-/// @param  {String} $base - The surface color to test
-/// @param  {Array}  $colors - The colors to test
-/// @return {String} The best color that fits to the surface to test
 @function lx-theme-best-color($base, $colors: (lx-theme-color-variant(light, N), lx-theme-color-variant(dark, N))) {
     $color-brightness: round((red($base) * 299) + (green($base) * 587) + (blue($base) * 114) / 1000);
     $light-color: round((red(#fff) * 299) + (green(#fff) * 587) + (blue(#fff) * 114) / 1000);

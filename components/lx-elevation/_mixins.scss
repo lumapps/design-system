@@ -1,8 +1,5 @@
 @import "./variables";
 
-/// Applies the correct CSS rules to an element to give it the elevation specified by $z-value
-///
-/// @param {Integer} $elevation - The shadow elvation between 0 and 5
 @mixin lx-elevation($elevation) {
     @if $elevation == 0 {
         box-shadow: none;

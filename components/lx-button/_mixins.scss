@@ -1,6 +1,5 @@
 @import "./variables";
 
-/// Button base mixin to reset native styles and apply global structure
 @mixin lx-button-base() {
     position: relative;
     display: inline-flex;
@@ -23,11 +22,6 @@
     }
 }
 
-/// Button size mixin to style button regarding the size and the type
-///
-/// @param {String} $size - The button size, either s, m or l
-/// @param {String} $type - The button type, either primary or secondary
-/// @param {String} $shape - The button shape, either contained or circled
 @mixin lx-button-size($size, $type, $shape: contained) {
     height: map-get($lx-button-sizes, $size);
     border-radius: map-get($lx-button-sizes, $size) / 2;
@@ -70,11 +64,6 @@
     }
 }
 
-/// Button color mixin to style button regarding the theme and the type
-///
-/// @param {String} $color - The button color identifier from the color palette
-/// @param {String} $type - The button type, either primary or secondary
-/// @param {String} $theme - The button theme, either dark or light
 @mixin lx-button-color($color, $type, $theme: dark) {
     transition: background-color $lx-button-transition-duration;
 
@@ -89,7 +78,6 @@
             color: lx-theme-color-variant($color, N);
         }
 
-        // Hover state
         &:hover {
             @if $theme == dark {
                 background-color: lx-theme-color-variant($color, D1);
@@ -100,7 +88,6 @@
             }
         }
 
-        // Focus state
         &[data-focus-visible-added] {
             @if $theme == dark {
                 &::after {
@@ -115,7 +102,6 @@
             }
         }
 
-        // Active state
         &:active {
             @if $theme == dark {
                 background-color: lx-theme-color-variant($color, D2);
@@ -126,7 +112,6 @@
             }
         }
 
-        // Disabled state
         &:disabled {
             @if $theme == dark {
                 background-color: lx-theme-color-variant($color, L3);
@@ -144,24 +129,20 @@
         background-color: transparent;
         color: lx-theme-color-variant($theme, N);
 
-        // Hover state
         &:hover {
             background-color: lx-theme-color-variant($theme, L6);
         }
 
-        // Focus state
         &[data-focus-visible-added] {
             &::after {
                 border-color: lx-theme-color-variant($theme, L1);
             }
         }
 
-        // Active state
         &:active {
             background-color: lx-theme-color-variant($theme, L5);
         }
 
-        // Disabled state
         &:disabled {
             border-color: lx-theme-color-variant($theme, L3);
             color: lx-theme-color-variant($theme, L3);
@@ -169,22 +150,14 @@
     }
 }
 
-/// Button icon mixin to style button icon regarding the size
-///
-/// @param {String} $size - The button size, either s, m or l
 @mixin lx-button-icon($size) {
     font-size: map-get($lx-button-icon-sizes, $size);
 }
 
-/// Button icon sibling mixin to set button icon margin
 @mixin lx-button-icon-sibling() {
     margin-right: $lx-base-spacing-unit;
 }
 
-/// Button text mixin to style button text regarding the size and the type
-///
-/// @param {String} $size - The button size, either s, m or l
-/// @param {String} $type - The button type, either primary or secondary
 @mixin lx-button-text($size, $type) {
     font-size: map-get($lx-button-text-sizes, $size);
     font-weight: 600;

@@ -20,7 +20,7 @@
     color: lx-theme-color-variant($theme, L2);
 }
 
-@mixin lx-text-field-input-wrapper($theme, $indicator: false, $multiple: false) {
+@mixin lx-text-field-input-wrapper($theme, $has-indicator: false, $is-multiple: false) {
     position: relative;
     display: flex;
     background-color: lx-theme-color-variant($theme, L6);
@@ -29,7 +29,7 @@
     outline: none;
     transition: background-color $lx-text-field-transition-duration, box-shadow $lx-text-field-transition-duration;
 
-    @if $multiple {
+    @if $is-multiple {
         min-height: $lx-text-field-height;
         flex-wrap: wrap;
         padding: 3px;
@@ -41,7 +41,7 @@
         padding: 0 $lx-text-field-horizontal-padding;
     }
 
-    @if $indicator {
+    @if $has-indicator {
         padding-right: 48px;
     }
 }

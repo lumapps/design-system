@@ -1,13 +1,9 @@
-/// Typography base mixin to apply Roboto and smooth font
 @mixin lx-typography-base() {
     font-family: $lx-typography-font-family;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
 
-/// Typography mixin to style text
-///
-/// @param {String} $style - The wanted style
 @mixin lx-typography($style) {
     @include lx-typography-base;
 
