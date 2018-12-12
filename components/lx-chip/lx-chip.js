@@ -49,6 +49,8 @@
             restrict: 'E',
             scope: {
                 isDeletable: '=?lxIsDeletable',
+                isDisabled: '=?ngDisabled',
+                theme: '@?lxTheme',
             },
             templateUrl: 'components/lx-chip/lx-chip.html',
             transclude: {

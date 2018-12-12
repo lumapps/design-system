@@ -1,4 +1,8 @@
-<div class="lx-chip" ng-class="{ 'lx-chip--is-deletable': lxChip.isDeletable }">
+<div class="lx-chip"
+     ng-class="{ 'lx-chip--theme-light': !lxChip.theme || lxChip.theme === 'light',
+                 'lx-chip--theme-dark': lxChip.theme === 'dark',
+                 'lx-chip--is-deletable': lxChip.isDeletable,
+                 'lx-chip--is-disabled': lxChip.isDisabled }">
     <div class="lx-chip__label" ng-transclude ng-if="!lxChip.hasPrimary && !lxChip.hasLabel"></div>
 
     <div class="lx-chip__primary" ng-transclude="primary" ng-if="lxChip.hasPrimary"></div>

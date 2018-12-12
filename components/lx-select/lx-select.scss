@@ -66,6 +66,14 @@
         top: 50%;
         right: 12px;
         transform: translateY(-50%);
+
+        #{ $self }--theme-light & {
+            color: lx-theme-color-variant(dark, N);
+        }
+
+        #{ $self }--theme-dark & {
+            color: lx-theme-color-variant(light, N);
+        }
     }
 
     &__filter {
@@ -154,4 +162,49 @@
 .lx-select--theme-dark.lx-select--is-open .lx-select__input-wrapper,
 .lx-select--theme-dark .lx-select__input-wrapper:focus {
     @include lx-text-field-input-wrapper-state(focus, light);
+}
+
+// Disabled state
+.lx-select--theme-light.lx-select--is-disabled {
+    .lx-select__label {
+        @include lx-text-field-disabled-state(dark);
+    }
+
+    .lx-select__input-wrapper {
+        @include lx-text-field-input-wrapper-state(disabled, dark);
+    }
+
+    .lx-select__input-native {
+        @include lx-text-field-disabled-state(dark);
+
+        &::placeholder {
+            @include lx-text-field-disabled-placeholder(dark);
+        }
+    }
+
+    .lx-select__input-indicator {
+        color: lx-theme-color-variant(dark, L3);
+    }
+}
+
+.lx-select--theme-dark.lx-select--is-disabled {
+    .lx-select__label {
+        @include lx-text-field-disabled-state(light);
+    }
+
+    .lx-select__input-wrapper {
+        @include lx-text-field-input-wrapper-state(disabled, light);
+    }
+
+    .lx-select__input-native {
+        @include lx-text-field-disabled-state(light);
+
+        &::placeholder {
+            @include lx-text-field-disabled-placeholder(light);
+        }
+    }
+
+    .lx-select__input-indicator {
+        color: lx-theme-color-variant(light, L3);
+    }
 }

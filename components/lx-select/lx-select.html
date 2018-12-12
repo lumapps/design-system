@@ -6,7 +6,8 @@
                  'lx-select--has-multiple': !lxSelect.isModelEmpty() && lxSelect.multiple,
                  'lx-select--is-open': lxSelect.isOpen,
                  'lx-select--theme-light': !lxSelect.theme || lxSelect.theme === 'light',
-                 'lx-select--theme-dark': lxSelect.theme === 'dark' }">
+                 'lx-select--theme-dark': lxSelect.theme === 'dark',
+                 'lx-select--is-disabled': lxSelect.isDisabled }">
     <span class="lx-select__label" ng-if="lxSelect.label">
         {{ lxSelect.label }}
     </span>
@@ -31,7 +32,7 @@
              ng-repeat="selected in lxSelect.viewValue"
              ng-click="lxSelect.select(selected, $event)"
              ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple">
-            <lx-chip lx-is-deletable="true">
+            <lx-chip lx-theme="{{ (lxSelect.theme === 'dark') ? 'dark' : 'light' }}" lx-is-deletable="true" ng-disabled="lxSelect.isDisabled">
                 <div ng-bind-html="lxSelect.displaySelected(selected)"></div>
             </lx-chip>
         </div>

@@ -494,6 +494,7 @@
                 displayHelper: '=?lxDisplayHelper',
                 filter: '&?lxFilter',
                 helper: '@?lxHelper',
+                isDisabled: '=?ngDisabled',
                 label: '@?lxLabel',
                 loading: '=?lxLoading',
                 modelToSelection: '&?lxModelToSelection',

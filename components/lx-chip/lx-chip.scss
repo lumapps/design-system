@@ -5,21 +5,27 @@
 @import "./variables";
 
 .lx-chip {
+    $self: &;
+
     display: inline-flex;
     height: $lx-chip-height;
     align-items: center;
     padding: 0 $lx-chip-horizontal-padding;
-    background-color: lx-theme-color-variant(dark, L5);
     border-radius: 2px;
-    color: lx-theme-color-variant(dark, N);
     vertical-align: top;
+
+    &--theme-light {
+        background-color: lx-theme-color-variant(dark, L5);
+        color: lx-theme-color-variant(dark, N);
+    }
+
+    &--theme-dark {
+        background-color: lx-theme-color-variant(light, L5);
+        color: lx-theme-color-variant(light, N);
+    }
 
     &--is-deletable {
         cursor: pointer;
-
-        &:hover {
-            background-color: lx-theme-color-variant(dark, L4);
-        }
     }
 
     &__primary {
@@ -38,4 +44,27 @@
         flex-shrink: 0;
         margin-left: 6px;
     }
+}
+
+/* Chip states
+   ========================================================================== */
+
+// Hover state
+.lx-chip--theme-light.lx-chip--is-deletable:hover {
+    background-color: lx-theme-color-variant(dark, L4);
+}
+
+.lx-chip--theme-dark.lx-chip--is-deletable:hover {
+    background-color: lx-theme-color-variant(light, L4);
+}
+
+// Disabled state
+.lx-chip--theme-light.lx-chip--is-disabled {
+    background-color: lx-theme-color-variant(dark, L6);
+    color: lx-theme-color-variant(dark, L3);
+}
+
+.lx-chip--theme-dark.lx-chip--is-disabled {
+    background-color: lx-theme-color-variant(light, L6);
+    color: lx-theme-color-variant(light, L3);
 }
