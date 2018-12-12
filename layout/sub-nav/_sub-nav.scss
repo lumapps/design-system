@@ -21,15 +21,16 @@ $sub-nav-width: 228px;
     }
 
     &__item {
+        @include lx-typography(body1);
+
         position: relative;
-        display: block;
+        display: flex;
         min-height: 36px;
+        align-items: center;
         padding: 0 $lx-base-spacing-unit * 2;
         margin-bottom: $lx-base-spacing-unit / 2;
         border-radius: 5px;
         color: lx-theme-color-variant(dark, N);
-        font-size: 14px;
-        line-height: 36px;
         text-decoration: none;
 
         &:last-child {

@@ -144,12 +144,13 @@
     }
 
     &__helper {
-        display: block;
+        @include lx-typography(body1);
+
+        display: flex;
         height: 36px;
+        align-items: center;
+        justify-content: center;
         color: lx-theme-color-variant(dark, L3);
-        font-size: 14px;
-        line-height: 36px;
-        text-align: center;
     }
 }
 

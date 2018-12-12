@@ -4,11 +4,11 @@
 ///
 /// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-label($theme) {
+    @include lx-typography(caption);
+
     display: block;
     margin-bottom: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
-    font-size: 12px;
-    line-height: 14px;
 }
 
 /// Text field input wrapper mixin to style input wrapper according to the theme
@@ -54,7 +54,7 @@
 ///
 /// @param {String} $theme - The text field theme, either dark or light
 @mixin lx-text-field-input-native($theme) {
-    @include lx-typography-base;
+    @include lx-typography(body1);
 
     width: 100%;
     height: $lx-text-field-height;
@@ -63,8 +63,6 @@
     margin: 0;
     background-color: transparent;
     color: lx-theme-color-variant($theme, N);
-    font-size: 14px;
-    font-weight: 400;
     line-height: $lx-text-field-height;
     outline: none;
 }
@@ -90,8 +88,7 @@
     }
 
     span {
-        font-size: 12px;
-        line-height: 14px;
+        @include lx-typography(caption);
     }
 }
 

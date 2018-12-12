@@ -46,4 +46,11 @@
         font-weight: 400;
         line-height: 18px;
     }
+
+    @if $style == overline {
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 12px;
+        text-transform: uppercase;
+    }
 }

@@ -9,9 +9,9 @@ h1 {
 }
 
 h2 {
+    @include lx-typography(title);
+
     margin-bottom: $lx-base-spacing-unit * 1.5;
-    font-size: 20px;
-    font-weight: 600;
 }
 
 ul {
