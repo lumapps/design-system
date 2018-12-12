@@ -2,6 +2,8 @@
    Select
    ========================================================================== */
 
+@import "./mixins";
+
 .lx-select {
     $self: &;
 
@@ -58,53 +60,38 @@
     }
 
     &__input-chip {
-        margin: 3px;
+        @include lx-select-input-chip;
     }
 
     &__input-clear {
-        display: none;
-
-        &:hover {
-            color: lx-theme-color-variant(dark, L2);
-        }
-    }
-
-    &__input-wrapper:hover &__input-clear {
-        display: block;
-    }
-
-    &__input-indicator {
-        position: absolute;
-        top: 50%;
-        right: 12px;
-        transform: translateY(-50%);
-
         #{ $self }--theme-light & {
-            color: lx-theme-color-variant(dark, N);
+            @include lx-select-input-clear(dark);
         }
 
         #{ $self }--theme-dark & {
-            color: lx-theme-color-variant(light, N);
+            @include lx-select-input-clear(dark);
+        }
+    }
+
+    &__input-indicator {
+        #{ $self }--theme-light & {
+            @include lx-select-input-indicator(dark);
+        }
+
+        #{ $self }--theme-dark & {
+            @include lx-select-input-indicator(light);
         }
     }
 
     &__filter {
-        display: flex;
-        align-items: center;
-        padding: 0 $lx-base-spacing-unit * 2 $lx-base-spacing-unit;
-        border-bottom: 1px solid lx-theme-color-variant(dark, L5);
-        margin-bottom: $lx-base-spacing-unit;
+        @include lx-select-filter;
 
         i {
             @include lx-text-field-input-icon(dark);
-
-            flex-shrink: 0;
         }
 
         input {
             @include lx-text-field-input-native(dark);
-
-            flex: 1;
 
             &::placeholder {
                 @include lx-text-field-placeholder(dark);
@@ -138,19 +125,11 @@
     }
 
     &__loader {
-        display: flex;
-        justify-content: center;
-        padding: $lx-base-spacing-unit * 2 0;
+        @include lx-select-loader;
     }
 
     &__helper {
-        @include lx-typography(body1);
-
-        display: flex;
-        height: 36px;
-        align-items: center;
-        justify-content: center;
-        color: lx-theme-color-variant(dark, L3);
+        @include lx-select-helper;
     }
 }
 
