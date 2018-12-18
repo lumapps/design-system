@@ -39,10 +39,12 @@
             replace: true,
             restrict: 'E',
             scope: {
+                error: '=?lxError',
                 helper: '@?lxHelper',
                 icon: '@?lxIcon',
                 label: '@?lxLabel',
                 theme: '@?lxTheme',
+                valid: '=?lxValid',
             },
             templateUrl: 'components/lx-text-field/lx-text-field.html',
             transclude: true,

@@ -74,6 +74,10 @@
             }
         }
     }
+
+    &__input-validity {
+        flex-shrink: 0;
+    }
 }
 
 /* Text field states
@@ -155,5 +159,48 @@
 
     .lx-text-field__helper {
         @include lx-text-field-disabled-state(light);
+    }
+}
+
+/* Text field validity
+   ========================================================================== */
+
+.lx-text-field--theme-light.lx-text-field--valid {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-validity(valid, dark);
+    }
+
+    .lx-text-field__input-validity {
+        @include lx-text-field-input-validity(valid, dark);
+    }
+}
+
+.lx-text-field--theme-light.lx-text-field--error {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-validity(error, dark);
+    }
+
+    .lx-text-field__input-validity {
+        @include lx-text-field-input-validity(error, dark);
+    }
+}
+
+.lx-text-field--theme-dark.lx-text-field--valid {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-validity(valid, light);
+    }
+
+    .lx-text-field__input-validity {
+        @include lx-text-field-input-validity(valid, light);
+    }
+}
+
+.lx-text-field--theme-dark.lx-text-field--error {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-input-wrapper-validity(error, light);
+    }
+
+    .lx-text-field__input-validity {
+        @include lx-text-field-input-validity(error, light);
     }
 }

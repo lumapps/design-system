@@ -2,7 +2,9 @@
      ng-class="{ 'lx-text-field--theme-light': !lxTextField.theme || lxTextField.theme === 'light',
                  'lx-text-field--theme-dark': lxTextField.theme === 'dark',
                  'lx-text-field--has-helper': lxTextField.helper,
-                 'lx-text-field--has-icon': lxTextField.icon }">
+                 'lx-text-field--has-icon': lxTextField.icon,
+                 'lx-text-field--valid': lxTextField.valid,
+                 'lx-text-field--error': lxTextField.error }">
     <label class="lx-text-field__label" ng-if="lxTextField.label">
         {{ lxTextField.label }}
     </label>
@@ -10,7 +12,8 @@
     <span class="lx-text-field__helper" ng-if="lxTextField.helper">{{ lxTextField.helper }}</span>
 
     <div class="lx-text-field__input-wrapper">
-        <lx-icon lx-id="{{ lxTextField.icon }}" lx-size="s" class="lx-text-field__input-icon" ng-if="lxTextField.icon"></lx-icon>
+        <lx-icon class="lx-text-field__input-icon" lx-id="{{ lxTextField.icon }}" lx-size="s" ng-if="lxTextField.icon"></lx-icon>
         <div class="lx-text-field__input-native" ng-transclude></div>
+        <lx-icon class="lx-text-field__input-validity" lx-id="{{ lxTextField.valid ? 'check-circle' : 'alert-circle' }}" lx-size="s" ng-if="lxTextField.valid || lxTextField.error"></lx-icon>
     </div>
 </div>
