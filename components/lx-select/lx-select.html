@@ -7,7 +7,9 @@
                  'lx-select--is-open': lxSelect.isOpen,
                  'lx-select--theme-light': !lxSelect.theme || lxSelect.theme === 'light',
                  'lx-select--theme-dark': lxSelect.theme === 'dark',
-                 'lx-select--is-disabled': lxSelect.isDisabled }">
+                 'lx-select--is-disabled': lxSelect.isDisabled,
+                 'lx-select--valid': lxSelect.valid,
+                 'lx-select--error': lxSelect.error }">
     <span class="lx-select__label" ng-if="lxSelect.label">
         {{ lxSelect.label }}
     </span>
@@ -28,19 +30,25 @@
             <span ng-bind-html="lxSelect.displaySelected()"></span>
         </div>
 
-        <div class="lx-select__input-chip"
-             ng-repeat="selected in lxSelect.viewValue"
-             ng-click="lxSelect.select(selected, $event)"
-             ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple">
-            <lx-chip lx-theme="{{ (lxSelect.theme === 'dark') ? 'dark' : 'light' }}" lx-is-deletable="true" ng-disabled="lxSelect.isDisabled">
-                <div ng-bind-html="lxSelect.displaySelected(selected)"></div>
-            </lx-chip>
+        <div class="lx-select__input-chips">
+            <div class="lx-select__input-chip"
+                 ng-repeat="selected in lxSelect.viewValue"
+                 ng-click="lxSelect.select(selected, $event)"
+                 ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple">
+                <lx-chip lx-theme="{{ (lxSelect.theme === 'dark') ? 'dark' : 'light' }}" lx-is-deletable="true" ng-disabled="lxSelect.isDisabled">
+                    <div ng-bind-html="lxSelect.displaySelected(selected)"></div>
+                </lx-chip>
+            </div>
+        </div>
+
+        <div class="lx-select__input-validity" ng-if="lxSelect.valid || lxSelect.error">
+            <lx-icon lx-id="{{ lxSelect.valid ? 'check-circle' : 'alert-circle' }}" lx-size="s"></lx-icon>
         </div>
 
         <div class="lx-select__input-clear"
              ng-if="lxSelect.allowClear && !lxSelect.multiple && !lxSelect.isModelEmpty()"
              ng-click="lxSelect.clearModel($event)">
-            <lx-icon lx-id="close-circle" lx-size="xs"></lx-icon>
+            <lx-icon lx-id="close-circle" lx-size="s"></lx-icon>
         </div>
 
         <div class="lx-select__input-indicator">

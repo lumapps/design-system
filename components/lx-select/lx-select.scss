@@ -59,11 +59,19 @@
         }
     }
 
+    &__input-chips {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+    }
+
     &__input-chip {
         @include lx-select-input-chip;
     }
 
     &__input-clear {
+        flex-shrink: 0;
+
         #{ $self }--theme-light & {
             @include lx-select-input-clear(dark);
         }
@@ -73,7 +81,13 @@
         }
     }
 
+    &__input-validity {
+        flex-shrink: 0;
+    }
+
     &__input-indicator {
+        flex-shrink: 0;
+
         #{ $self }--theme-light & {
             @include lx-select-input-indicator(dark);
         }
@@ -202,5 +216,48 @@
 
     .lx-select__input-indicator {
         color: lx-theme-color-variant(light, L3);
+    }
+}
+
+/* Select validity
+   ========================================================================== */
+
+.lx-select--theme-light.lx-select--valid {
+    .lx-select__input-wrapper {
+        @include lx-text-field-input-wrapper-validity(valid, dark);
+    }
+
+    .lx-select__input-validity {
+        @include lx-text-field-input-validity(valid, dark);
+    }
+}
+
+.lx-select--theme-light.lx-select--error {
+    .lx-select__input-wrapper {
+        @include lx-text-field-input-wrapper-validity(error, dark);
+    }
+
+    .lx-select__input-validity {
+        @include lx-text-field-input-validity(error, dark);
+    }
+}
+
+.lx-select--theme-dark.lx-select--valid {
+    .lx-select__input-wrapper {
+        @include lx-text-field-input-wrapper-validity(valid, light);
+    }
+
+    .lx-select__input-validity {
+        @include lx-text-field-input-validity(valid, light);
+    }
+}
+
+.lx-select--theme-dark.lx-select--error {
+    .lx-select__input-wrapper {
+        @include lx-text-field-input-wrapper-validity(error, light);
+    }
+
+    .lx-select__input-validity {
+        @include lx-text-field-input-validity(error, light);
     }
 }

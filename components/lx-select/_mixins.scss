@@ -3,6 +3,7 @@
 }
 
 @mixin lx-select-input-clear($theme) {
+    margin-left: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
 
     &:hover {
@@ -11,11 +12,8 @@
 }
 
 @mixin lx-select-input-indicator($theme) {
-    position: absolute;
-    top: 50%;
-    right: 12px;
+    margin-left: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
-    transform: translateY(-50%);
 }
 
 @mixin lx-select-filter() {

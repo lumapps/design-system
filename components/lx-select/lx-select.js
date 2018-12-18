@@ -260,16 +260,16 @@
          * @param {Event} [evt] The event that triggered the function.
          */
         function clearModel(evt) {
-             _modelController.$viewValue = undefined;
+            _modelController.$setViewValue(undefined);
 
-             evt.stopPropagation();
+            evt.stopPropagation();
         }
 
         /**
          * Close the dropdown menu.
          */
         function closeDropdown() {
-             LxDropdownService.close(lxSelect.dropdownUuid);
+            LxDropdownService.close(lxSelect.dropdownUuid);
         }
 
         /**
@@ -337,7 +337,7 @@
          */
         function isSelected(choice) {
             if (lxSelect.multiple) {
-               return _arrayObjectIndexOf(lxSelect.viewValue, choice) !== -1;
+                return _arrayObjectIndexOf(lxSelect.viewValue, choice) !== -1;
             } else {
                 return angular.equals(choice, lxSelect.viewValue);
             }
@@ -505,6 +505,7 @@
                 choices: '=lxChoices',
                 displayFilter: '=?lxDisplayFilter',
                 displayHelper: '=?lxDisplayHelper',
+                error: '=?lxError',
                 filter: '&?lxFilter',
                 helper: '@?lxHelper',
                 isDisabled: '=?ngDisabled',
@@ -514,6 +515,7 @@
                 multiple: '=?lxMultiple',
                 selectionToModel: '&?lxSelectionToModel',
                 theme: '@?lxTheme',
+                valid: '=?lxValid',
             },
             templateUrl: 'components/lx-select/lx-select.html',
             transclude: {
