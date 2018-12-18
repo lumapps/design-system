@@ -33,39 +33,10 @@
     @if $shape == circled {
         width: map-get($lx-button-sizes, $size);
     }
-
-    &::after {
-        position: absolute;
-        border-color: transparent;
-        border-radius: (map-get($lx-button-sizes, $size) + 8) / 2;
-        border-style: dotted;
-        border-width: 1px;
-        content: '';
-        pointer-events: none;
-        transition: border-color $lx-button-transition-duration;
-    }
-
-    @if $type == primary {
-        &::after {
-            top: -4px;
-            right: -4px;
-            bottom: -4px;
-            left: -4px;
-        }
-    }
-
-    @if $type == secondary {
-        &::after {
-            top: -5px;
-            right: -5px;
-            bottom: -5px;
-            left: -5px;
-        }
-    }
 }
 
 @mixin lx-button-color($color, $type, $theme: dark) {
-    transition: background-color $lx-button-transition-duration;
+    transition: background-color $lx-button-transition-duration, box-shadow $lx-button-transition-duration;
 
     @if $type == primary {
         @if $theme == dark {
@@ -90,15 +61,11 @@
 
         &[data-focus-visible-added] {
             @if $theme == dark {
-                &::after {
-                    border-color: lx-theme-color-variant($color, N);
-                }
+                box-shadow: 0 0 2px 2px lx-theme-color-variant($color, L3);
             }
 
             @else if $theme == light {
-                &::after {
-                    border-color: lx-theme-color-variant(light, N);
-                }
+                box-shadow: 0 0 2px 2px lx-theme-color-variant(light, L3);
             }
         }
 
@@ -134,9 +101,7 @@
         }
 
         &[data-focus-visible-added] {
-            &::after {
-                border-color: lx-theme-color-variant($theme, L1);
-            }
+            box-shadow: 0 0 2px 2px lx-theme-color-variant($theme, L3);
         }
 
         &:active {
