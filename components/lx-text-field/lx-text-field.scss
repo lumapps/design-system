@@ -18,7 +18,11 @@
     }
 
     &--has-helper &__label {
-        @include lx-text-field-label-helper;
+        @include lx-text-field-label-spacings(true);
+    }
+
+    &:not(&--has-helper) &__label {
+        @include lx-text-field-label-spacings(false);
     }
 
     &__helper {

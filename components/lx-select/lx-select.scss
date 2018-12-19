@@ -8,6 +8,8 @@
     $self: &;
 
     &__label {
+        @include lx-text-field-label-spacings(false);
+
         #{ $self }--theme-light & {
             @include lx-text-field-label(dark);
         }

@@ -1,15 +1,20 @@
 @import "./variables";
 
-@mixin lx-text-field-label($theme, $has-helper: false) {
+@mixin lx-text-field-label($theme) {
     @include lx-typography(body1);
 
     display: block;
-    margin-bottom: $lx-base-spacing-unit;
     color: lx-theme-color-variant($theme, N);
 }
 
-@mixin lx-text-field-label-helper() {
-    margin-bottom: $lx-base-spacing-unit / 2;
+@mixin lx-text-field-label-spacings($has-helper: false) {
+    @if $has-helper {
+        margin-bottom: $lx-base-spacing-unit / 2;
+    }
+
+    @else {
+        margin-bottom: $lx-base-spacing-unit;
+    }
 }
 
 @mixin lx-text-field-helper($theme) {
@@ -64,6 +69,24 @@
     outline: none;
 }
 
+@mixin lx-text-field-input-validity($validity, $theme) {
+    margin-left: $lx-base-spacing-unit;
+
+    @if $theme == dark {
+        @if $validity == valid {
+            color: lx-theme-color-variant(green, N);
+        }
+
+        @else if $validity == error {
+            color: lx-theme-color-variant(red, N);
+        }
+    }
+
+    @else if $theme == light {
+        color: lx-theme-color-variant(light, N);
+    }
+}
+
 @mixin lx-text-field-placeholder($theme) {
     color: lx-theme-color-variant($theme, L2);
 }
@@ -110,23 +133,5 @@
 
     @else if $theme == light {
         box-shadow: inset 0 0 0 2px lx-theme-color-variant(light, N);
-    }
-}
-
-@mixin lx-text-field-input-validity($validity, $theme) {
-    margin-left: $lx-base-spacing-unit;
-
-    @if $theme == dark {
-        @if $validity == valid {
-            color: lx-theme-color-variant(green, N);
-        }
-
-        @else if $validity == error {
-            color: lx-theme-color-variant(red, N);
-        }
-    }
-
-    @else if $theme == light {
-        color: lx-theme-color-variant(light, N);
     }
 }
