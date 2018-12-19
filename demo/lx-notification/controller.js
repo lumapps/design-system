@@ -16,7 +16,9 @@
 
         function notify(type) {
             if (type === 'info') {
-                LxNotificationService.info('Lorem Ipsum');
+                LxNotificationService.info('Lorem Ipsum', 'Undo', function() {
+                    LxNotificationService.success('Callback');
+                });
             } else if (type === 'success') {
                 LxNotificationService.success('Lorem Ipsum');
             } else if (type === 'warning') {

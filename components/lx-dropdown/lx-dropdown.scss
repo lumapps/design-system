@@ -9,7 +9,7 @@
     }
 
     &__menu {
-        @include lx-elevation(2);
+        @include lx-elevation(3);
 
         position: fixed;
         overflow: auto;

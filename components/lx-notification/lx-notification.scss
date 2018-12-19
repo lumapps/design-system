@@ -7,7 +7,7 @@
 .lx-notification {
     $self: &;
 
-    @include lx-elevation(3);
+    @include lx-elevation(4);
 
     position: fixed;
     right: $lx-base-spacing-unit * 3;
@@ -37,6 +37,14 @@
 
         padding: 0 $lx-base-spacing-unit * 2;
         color: lx-theme-color-variant(dark, N);
+
+        #{ $self }--has-action & {
+            border-right: 1px solid lx-theme-color-variant(dark, L5);
+        }
+    }
+
+    &__action {
+        padding: 0 $lx-base-spacing-unit;
     }
 }
 

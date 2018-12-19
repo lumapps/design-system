@@ -61,10 +61,12 @@
         /**
          * Build the notification template.
          *
-         * @param  {string} content The notification content.
-         * @param  {string} type    The notification type, either info, success, warning or error.
+         * @param {string}   content          The notification content.
+         * @param {string}   type             The notification type, either info, success, warning or error.
+         * @param {string}   [actionLabel]    The action button label.
+         * @param {Function} [actionCallback] The action button callback function called on action button click.
          */
-        function _build(content, type) {
+        function _build(content, type, actionLabel, actionCallback) {
             var notification = angular.element('<div/>', {
                 class: 'lx-notification lx-notification--color-' + _notificationTypes[type].color,
             });
@@ -72,22 +74,46 @@
             var notificationIconWrapper = angular.element('<div/>', {
                 class: 'lx-notification__icon',
             });
-            var notificationIcon = $compile('<lx-icon lx-id="' + _notificationTypes[type].icon + '" lx-size="m">')($rootScope);
+            var notificationIcon = $compile('<lx-icon lx-id="' + _notificationTypes[type].icon + '" lx-size="m"></lx-icon>')($rootScope);
 
             var notificationText = angular.element('<span/>', {
                 class: 'lx-notification__content',
                 html: content,
             });
 
-            var notificationHideTimeout;
-
-            LxDepthService.increase();
-
             notificationIconWrapper.append(notificationIcon);
 
             notification
                 .append(notificationIconWrapper)
-                .append(notificationText)
+                .append(notificationText);
+
+            if (angular.isDefined(actionLabel)) {
+                notification.addClass('lx-notification--has-action');
+
+                var notificationActionWrapper = angular.element('<div/>', {
+                    class: 'lx-notification__action',
+                });
+                var notificationAction = $compile('<lx-button lx-type="tertiary">' + actionLabel + '</lx-button>')($rootScope);
+
+                notificationAction.on('click', function onActionCuttonClick(evt) {
+                    actionCallback();
+
+                    evt.stopPropagation();
+                });
+
+                notificationActionWrapper
+                    .append(notificationAction)
+                    .appendTo(notification);
+            }
+
+            var notificationHideTimeout;
+            notificationHideTimeout = $timeout(function waitBeforeHiding() {
+                _hide(notification);
+            }, _HIDE_DELAY);
+
+            LxDepthService.increase();
+
+            notification
                 .css('z-index', LxDepthService.get())
                 .appendTo('body')
                 .on('click', function onNotificationClick() {
@@ -95,10 +121,6 @@
 
                     $timeout.cancel(notificationHideTimeout);
                 });
-
-            notificationHideTimeout = $timeout(function waitBeforeHiding() {
-                _hide(notification);
-            }, _HIDE_DELAY);
         }
 
         /**
@@ -117,20 +139,22 @@
         /**
          * Check if an existing notification is displayed before building.
          *
-         * @param  {string} content The notification content.
-         * @param  {string} type    The notification type, either info, success, warning or error.
+         * @param {string}   content          The notification content.
+         * @param {string}   type             The notification type, either info, success, warning or error.
+         * @param {string}   [actionLabel]    The action button label.
+         * @param {Function} [actionCallback] The action button callback function called on action button click.
          */
-        function _notify(content, type) {
+        function _notify(content, type, actionLabel, actionCallback) {
             var activeNotification = angular.element('.lx-notification');
 
             if (activeNotification.length) {
                 _hide(activeNotification);
 
                 $timeout(function waitBeforeShowingNext() {
-                    _build(content, type);
+                    _build(content, type, actionLabel, actionCallback);
                 }, _TRANSITION_DURATION);
             } else {
-                _build(content, type);
+                _build(content, type, actionLabel, actionCallback);
             }
         }
 
@@ -143,37 +167,45 @@
         /**
          * Create an error notification.
          *
-         * @param {string} content The notification content.
+         * @param {string}   content          The notification content.
+         * @param {string}   [actionLabel]    The action button label.
+         * @param {Function} [actionCallback] The action button callback function called on action button click.
          */
-        function error(content) {
-            _notify(content, 'error');
+        function error(content, actionLabel, actionCallback) {
+            _notify(content, 'error', actionLabel, actionCallback);
         }
 
         /**
          * Create an info notification.
          *
-         * @param {string} content The notification content.
+         * @param {string}   content          The notification content.
+         * @param {string}   [actionLabel]    The action button label.
+         * @param {Function} [actionCallback] The action button callback function called on action button click.
          */
-        function info(content) {
-            _notify(content, 'info');
+        function info(content, actionLabel, actionCallback) {
+            _notify(content, 'info', actionLabel, actionCallback);
         }
 
         /**
          * Create a success notification.
          *
-         * @param {string} content The notification content.
+         * @param {string}   content          The notification content.
+         * @param {string}   [actionLabel]    The action button label.
+         * @param {Function} [actionCallback] The action button callback function called on action button click.
          */
-        function success(content) {
-            _notify(content, 'success');
+        function success(content, actionLabel, actionCallback) {
+            _notify(content, 'success', actionLabel, actionCallback);
         }
 
         /**
          * Create a warning notification.
          *
-         * @param {string} content The notification content.
+         * @param {string}   content          The notification content.
+         * @param {string}   [actionLabel]    The action button label.
+         * @param {Function} [actionCallback] The action button callback function called on action button click.
          */
-        function warning(content) {
-            _notify(content, 'warning');
+        function warning(content, actionLabel, actionCallback) {
+            _notify(content, 'warning', actionLabel, actionCallback);
         }
 
         /////////////////////////////
