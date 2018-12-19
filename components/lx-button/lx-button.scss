@@ -45,6 +45,20 @@
             }
         }
 
+        &.lx-button--type-tertiary {
+            &.lx-button--shape-contained {
+                @include lx-button-size($key, tertiary, contained);
+            }
+
+            &.lx-button--shape-circled {
+                @include lx-button-size($key, tertiary, circled);
+            }
+
+            .lx-button__text {
+                @include lx-button-text($key, tertiary);
+            }
+        }
+
         .lx-button__icon {
             @include lx-button-icon($key);
         }
@@ -74,4 +88,12 @@
 
 .lx-button--type-secondary.lx-button--theme-dark {
     @include lx-button-color(null, secondary, light);
+}
+
+.lx-button--type-tertiary.lx-button--theme-light {
+    @include lx-button-color(null, tertiary, dark);
+}
+
+.lx-button--type-tertiary.lx-button--theme-dark {
+    @include lx-button-color(null, tertiary, light);
 }

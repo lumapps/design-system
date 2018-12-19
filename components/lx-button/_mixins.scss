@@ -91,10 +91,13 @@
         }
     }
 
-    @else if $type == secondary {
-        border: 1px solid lx-theme-color-variant($theme, N);
+    @else if $type == secondary or $type == tertiary {
         background-color: transparent;
         color: lx-theme-color-variant($theme, N);
+
+        @if $type == secondary {
+            border: 1px solid lx-theme-color-variant($theme, N);
+        }
 
         &:hover {
             background-color: lx-theme-color-variant($theme, L6);
@@ -109,8 +112,11 @@
         }
 
         &:disabled {
-            border-color: lx-theme-color-variant($theme, L3);
             color: lx-theme-color-variant($theme, L3);
+
+            @if $type == secondary {
+                border-color: lx-theme-color-variant($theme, L3);
+            }
         }
     }
 }
