@@ -72,6 +72,15 @@
                     templateUrl: 'demo/lx-list/demo.html',
                 }
             }
+        }).state('app.notification', {
+            url: 'notification',
+            views: {
+                'main@': {
+                    controller: 'DemoNotificationController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-notification/demo.html',
+                }
+            }
         }).state('app.progress', {
             url: 'progress',
             views: {

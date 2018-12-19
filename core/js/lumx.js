@@ -18,6 +18,7 @@
     angular.module('lumx.dropdown', []);
     angular.module('lumx.icon', []);
     angular.module('lumx.list', []);
+    angular.module('lumx.notification', []);
     angular.module('lumx.progress', []);
     angular.module('lumx.select', []);
     angular.module('lumx.tabs', []);
@@ -32,6 +33,7 @@
         'lumx.dropdown',
         'lumx.icon',
         'lumx.list',
+        'lumx.notification',
         'lumx.progress',
         'lumx.select',
         'lumx.tabs',

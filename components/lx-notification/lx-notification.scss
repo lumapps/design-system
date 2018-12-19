@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Notification
+   ========================================================================== */
+
+@import "./variables";
+
+.lx-notification {
+    $self: &;
+
+    @include lx-elevation(3);
+
+    position: fixed;
+    right: $lx-base-spacing-unit * 3;
+    bottom: $lx-base-spacing-unit * 3;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    animation: lx-notification-show $lx-notification-transition-duration;
+    border-radius: 4px;
+    transition: opacity $lx-notification-transition-duration;
+
+    &--is-hidden {
+        opacity: 0;
+    }
+
+    &__icon {
+        display: flex;
+        width: $lx-notification-height;
+        height: $lx-notification-height;
+        align-items: center;
+        justify-content: center;
+        color: lx-theme-color-variant(light, L3);
+    }
+
+    &__content {
+        @include lx-typography(body1);
+
+        padding: 0 $lx-base-spacing-unit * 2;
+        color: lx-theme-color-variant(dark, N);
+    }
+}
+
+@keyframes lx-notification-show {
+    0% {
+        opacity: 0;
+        transform: translateY($lx-notification-height);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Notification colors
+   ========================================================================== */
+
+@each $color in $lx-notification-color-palette {
+    .lx-notification--color-#{$color} .lx-notification__icon {
+        background-color: lx-theme-color-variant($color, N);
+    }
+}
