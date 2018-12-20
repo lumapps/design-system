@@ -122,6 +122,8 @@
     &__choice {
         @include lx-list-row;
 
+        cursor: default;
+
         &--is-focus {
             background-color: lx-theme-color-variant(dark, L5);
         }
@@ -136,7 +138,7 @@
         }
     }
 
-    &__choice-icon {
+    &__choice-check {
         @include lx-list-row-primary;
     }
 

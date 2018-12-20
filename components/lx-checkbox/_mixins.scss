@@ -20,8 +20,8 @@
 
 @mixin lx-checkbox-placeholder($theme, $status) {
     position: absolute;
-    top: 1px;
-    left: 1px;
+    top: 2px;
+    left: 2px;
     display: flex;
     width: $lx-checkbox-control-size;
     height: $lx-checkbox-control-size;

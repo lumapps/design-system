@@ -79,9 +79,8 @@
                     ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
                     ng-click="lxSelect.select(choice, $event)"
                     ng-mouseover="lxSelect.activeChoiceIndex = $index">
-                    <div class="lx-select__choice-icon" ng-if="lxSelect.multiple">
-                        <lx-icon lx-id="checkbox-blank-outline" lx-size="s" ng-if="!lxSelect.isSelected(choice)"></lx-icon>
-                        <lx-icon lx-id="checkbox-marked" lx-size="s" ng-if="lxSelect.isSelected(choice)"></lx-icon>
+                    <div class="lx-select__choice-check" ng-if="lxSelect.multiple">
+                        <lx-checkbox ng-model="lxSelect.isSelected(choice)"></lx-checkbox>
                     </div>
 
                     <div class="lx-select__choice-content" ng-bind-html="lxSelect.displayChoice(choice)"></div>
