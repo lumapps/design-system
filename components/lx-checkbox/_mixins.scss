@@ -28,6 +28,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 2px;
+    transition: box-shadow $lx-button-transition-duration;
 
     @if $status == 'checked' {
         @if $theme == dark {
