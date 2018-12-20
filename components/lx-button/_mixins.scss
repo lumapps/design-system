@@ -61,11 +61,11 @@
 
         &[data-focus-visible-added] {
             @if $theme == dark {
-                box-shadow: 0 0 2px 2px lx-theme-color-variant($color, L3);
+                box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
             }
 
             @else if $theme == light {
-                box-shadow: 0 0 2px 2px lx-theme-color-variant(light, L3);
+                box-shadow: 0 0 0 2px lx-theme-color-variant(light, L3);
             }
         }
 
@@ -104,7 +104,7 @@
         }
 
         &[data-focus-visible-added] {
-            box-shadow: 0 0 2px 2px lx-theme-color-variant($theme, L3);
+            box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
         }
 
         &:active {
