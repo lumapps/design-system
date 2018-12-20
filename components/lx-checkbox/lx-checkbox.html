@@ -11,7 +11,10 @@
                ng-click="lxCheckbox.updateViewValue()">
 
         <div class="lx-checkbox__input-placeholder">
-            <lx-icon lx-id="check" lx-size="xs" ng-if="lxCheckbox.viewValue"></lx-icon>
+            <div class="lx-checkbox__input-background"></div>
+            <div class="lx-checkbox__input-indicator">
+                <lx-icon lx-id="check" lx-size="xs"></lx-icon>
+            </div>
         </div>
     </div>
 
