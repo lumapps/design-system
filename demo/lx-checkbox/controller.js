@@ -18,7 +18,7 @@
                 unchecked: false
             },
             states: {
-                disabled: false
+                disabled: true
             },
         };
     }

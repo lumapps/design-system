@@ -1,15 +1,21 @@
-<div class="lx-checkbox">
-    <div class="lx-checkbox__input">
+<div class="lx-checkbox"
+     ng-class="{ 'lx-checkbox--is-checked': lxCheckbox.viewValue,
+                 'lx-checkbox--is-unchecked': !lxCheckbox.viewValue,
+                 'lx-checkbox--theme-light': !lxCheckbox.theme || lxCheckbox.theme === 'light',
+                 'lx-checkbox--theme-dark': lxCheckbox.theme === 'dark' }">
+    <div class="lx-checkbox__input-wrapper">
         <input type="checkbox"
                id="{{ lxCheckbox.checkboxId }}"
-               class="lx-checkbox__native-control"
+               class="lx-checkbox__input-native"
                ng-model="lxCheckbox.viewValue"
                ng-click="lxCheckbox.updateViewValue()">
 
-        <div class="has-lx-ripple lx-checkbox__background"></div>
+        <div class="lx-checkbox__input-placeholder">
+            <lx-icon lx-id="check" lx-size="xs" ng-if="lxCheckbox.viewValue"></lx-icon>
+        </div>
     </div>
 
-    <div class="lx-checkbox__content" ng-if="!lxCheckbox.hasLabel && !lxCheckbox.hasHelp">
+    <div class="lx-checkbox__content" ng-if="!lxCheckbox.hasLabel && !lxCheckbox.hasHelp && lxCheckbox.hasTranscluded">
         <label for="{{ lxCheckbox.checkboxId }}" class="lx-checkbox__label" ng-transclude></label>
     </div>
 

@@ -1,0 +1,129 @@
+@import "./variables";
+
+@mixin lx-checkbox-input-wrapper() {
+    position: relative;
+    width: $lx-checkbox-wrapper-size;
+    height: $lx-checkbox-wrapper-size;
+}
+
+@mixin lx-checkbox-input-native() {
+    position: relative;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: $lx-checkbox-wrapper-size;
+    height: $lx-checkbox-wrapper-size;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+@mixin lx-checkbox-placeholder($theme, $status) {
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    display: flex;
+    width: $lx-checkbox-control-size;
+    height: $lx-checkbox-control-size;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+
+    @if $status == 'checked' {
+        @if $theme == dark {
+            background-color: lx-theme-color-variant(primary, N);
+            color: lx-theme-color-variant(light, N);
+        }
+
+        @else if $theme == light {
+            background-color: lx-theme-color-variant(light, N);
+            color: lx-theme-color-variant(dark, N);
+        }
+    }
+
+    @else if $status == 'unchecked' {
+        border: 2px solid lx-theme-color-variant($theme, N);
+    }
+}
+
+@mixin lx-checkbox-label($theme) {
+    @include lx-typography(body1);
+
+    display: block;
+    color: lx-theme-color-variant($theme, N);
+}
+
+@mixin lx-checkbox-help($theme) {
+    @include lx-typography(caption);
+
+    display: block;
+    margin-top: $lx-base-spacing-unit / 2;
+    color: lx-theme-color-variant($theme, L2);
+}
+
+@mixin lx-checkbox-disabled-state($theme) {
+    color: lx-theme-color-variant($theme, L3);
+    pointer-events: none;
+}
+
+@mixin lx-checkbox-placeholder-state($state, $theme, $status) {
+    @if $state == hover {
+        @if $status == 'checked' {
+            @if $theme == dark {
+                background-color: lx-theme-color-variant(primary, D1);
+            }
+
+            @else if $theme == light {
+                background-color: lx-theme-color-variant(light, L1);
+            }
+        }
+
+        @else if $status == 'unchecked' {
+            background-color: lx-theme-color-variant($theme, L6);
+        }
+    }
+
+    @else if $state == focus {
+        @if $theme == dark {
+            @if $status == 'checked' {
+                box-shadow: 0 0 0 2px lx-theme-color-variant(primary, L3);
+            }
+
+            @else if $status == 'unchecked' {
+                box-shadow: 0 0 0 2px lx-theme-color-variant(dark, L3);
+            }
+        }
+
+        @else if $theme == light {
+            box-shadow: 0 0 0 2px lx-theme-color-variant(light, L3);
+        }
+    }
+
+    @else if $state == active {
+        @if $status == 'checked' {
+            @if $theme == dark {
+                background-color: lx-theme-color-variant(primary, D2);
+            }
+
+            @else if $theme == light {
+                background-color: lx-theme-color-variant(light, L2);
+            }
+        }
+
+        @else if $status == 'unchecked' {
+            background-color: lx-theme-color-variant($theme, L5);
+        }
+    }
+
+    @else if $state == disabled {
+        pointer-events: none;
+
+        @if $status == 'checked' {
+            background-color: lx-theme-color-variant($theme, L3);
+        }
+
+        @else if $status == 'unchecked' {
+            border-color: lx-theme-color-variant($theme, L3);
+        }
+    }
+}

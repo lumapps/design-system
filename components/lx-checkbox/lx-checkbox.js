@@ -49,6 +49,13 @@
         lxCheckbox.hasLabel = false;
 
         /**
+         * Wether the directive has transcluded content if no transclude slot.
+         *
+         * @type {boolean}
+         */
+        lxCheckbox.hasTranscluded = false;
+
+        /**
          * The model view value.
          *
          * @type {string}
@@ -102,6 +109,14 @@
                 ctrls[0].hasHelp = true;
             }
 
+            if (!ctrls[0].hasLabel && !ctrls[0].hasHelp) {
+                transclude(function(clone) {
+                    if (clone.length) {
+                        ctrls[0].hasTranscluded = true;
+                    }
+                });
+            }
+
             attrs.$observe('disabled', function(isDisabled) {
                 el.find('input').attr('disabled', isDisabled);
 
@@ -121,7 +136,9 @@
             replace: true,
             require: ['lxCheckbox','ngModel'],
             restrict: 'E',
-            scope: {},
+            scope: {
+                theme: '@?lxTheme',
+            },
             templateUrl: 'components/lx-checkbox/lx-checkbox.html',
             transclude: {
                 help: '?lxCheckboxHelp',
