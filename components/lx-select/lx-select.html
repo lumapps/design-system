@@ -80,7 +80,7 @@
                     ng-click="lxSelect.select(choice, $event)"
                     ng-mouseover="lxSelect.activeChoiceIndex = $index">
                     <div class="lx-select__choice-check" ng-if="lxSelect.multiple">
-                        <lx-checkbox ng-model="lxSelect.isSelected(choice)"></lx-checkbox>
+                        <lx-checkbox ng-checked="lxSelect.isSelected(choice)"></lx-checkbox>
                     </div>
 
                     <div class="lx-select__choice-content" ng-bind-html="lxSelect.displayChoice(choice)"></div>

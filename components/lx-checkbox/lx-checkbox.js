@@ -85,6 +85,10 @@
          * Update model controller view value on checkbox click.
          */
         function updateViewValue() {
+            if (angular.isUndefined(_modelController)) {
+                return;
+            }
+
             _modelController.$setViewValue(!_modelController.$viewValue);
             _modelController.$render();
         }
@@ -99,7 +103,9 @@
 
     function lxCheckboxDirective() {
         function link(scope, el, attrs, ctrls, transclude) {
-            ctrls[0].setModelController(ctrls[1]);
+            if (ctrls[1]) {
+                ctrls[0].setModelController(ctrls[1]);
+            }
 
             if (transclude.isSlotFilled('label')) {
                 ctrls[0].hasLabel = true;
@@ -126,6 +132,12 @@
                     el.removeClass('lx-checkbox--is-disabled');
                 }
             });
+
+            attrs.$observe('checked', function(isChecked) {
+                el.find('input').attr('checked', isChecked);
+
+                ctrls[0].viewValue = isChecked;
+            });
         }
 
         return {
@@ -134,7 +146,7 @@
             controllerAs: 'lxCheckbox',
             link: link,
             replace: true,
-            require: ['lxCheckbox','ngModel'],
+            require: ['lxCheckbox','?ngModel'],
             restrict: 'E',
             scope: {
                 theme: '@?lxTheme',
