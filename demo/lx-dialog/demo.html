@@ -4,14 +4,12 @@
 
 <lx-dialog id="{{ vm.dialogId }}">
     <lx-dialog-header>
-        <div class="toolbar bgc-primary pl++">
-            <span class="toolbar__label tc-white fs-title">
+        <div lx-grid-container="row" lx-grid-h-align="center">
+            <span lx-grid-item>
                 Lorem Ipsum
             </span>
 
-            <div class="toolbar__right">
-                <lx-button ng-click="vm.addPerson()">Add</lx-button>
-            </div>
+            <lx-button ng-click="vm.addPerson()">Add</lx-button>
         </div>
     </lx-dialog-header>
 
