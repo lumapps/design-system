@@ -88,6 +88,15 @@
                     templateUrl: 'demo/lx-progress/demo.html',
                 }
             }
+        }).state('app.radio-button', {
+            url: 'radio-button',
+            views: {
+                'main@': {
+                    controller: 'DemoRadioButtonController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-radio-button/demo.html',
+                }
+            }
         }).state('app.select', {
             url: 'select',
             views: {

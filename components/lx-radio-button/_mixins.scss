@@ -1,0 +1,145 @@
+@import "./variables";
+
+@mixin lx-radio-button-input-wrapper() {
+    position: relative;
+    width: $lx-radio-button-wrapper-size;
+    height: $lx-radio-button-wrapper-size;
+}
+
+@mixin lx-radio-button-input-native() {
+    position: relative;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: $lx-radio-button-wrapper-size;
+    height: $lx-radio-button-wrapper-size;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+@mixin lx-radio-button-placeholder() {
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 2px;
+    width: $lx-radio-button-control-size;
+    height: $lx-radio-button-control-size;
+    border-radius: 50%;
+    transition: box-shadow $lx-button-transition-duration;
+}
+
+@mixin lx-radio-button-input-background($theme) {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 2px solid lx-theme-color-variant($theme, N);
+    border-radius: 50%;
+    transition: background-color $lx-button-transition-duration;
+}
+
+@mixin lx-radio-button-input-background-status($status, $theme) {
+    @if $status == 'checked' {
+        @if $theme == dark {
+            border-color: lx-theme-color-variant(primary, N);
+        }
+
+        @else if $theme == light {
+            border-color: lx-theme-color-variant(light, N);
+        }
+    }
+
+    @else if $status == 'unchecked' {
+        border-color: lx-theme-color-variant($theme, N);
+    }
+}
+
+@mixin lx-radio-button-input-indicator($theme) {
+    position: absolute;
+    z-index: 3;
+    top: 4px;
+    right: 4px;
+    bottom: 4px;
+    left: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    @if $theme == dark {
+        background-color: lx-theme-color-variant(primary, N);
+    }
+
+    @else if $theme == light {
+        background-color: lx-theme-color-variant(light, N);
+    }
+}
+
+@mixin lx-radio-button-input-indicator-status($status) {
+    @if $status == 'checked' {
+        opacity: 1;
+    }
+
+    @else if $status == 'unchecked' {
+        opacity: 0;
+    }
+}
+
+@mixin lx-radio-button-label($theme) {
+    @include lx-typography(body1);
+
+    display: block;
+    color: lx-theme-color-variant($theme, N);
+}
+
+@mixin lx-radio-button-help($theme) {
+    @include lx-typography(caption);
+
+    display: block;
+    margin-top: $lx-base-spacing-unit / 2;
+    color: lx-theme-color-variant($theme, L2);
+}
+
+@mixin lx-radio-button-input-placeholder-focus($theme, $status) {
+    @if $theme == dark {
+        @if $status == 'checked' {
+            box-shadow: 0 0 0 2px lx-theme-color-variant(primary, L3);
+        }
+
+        @else if $status == 'unchecked' {
+            box-shadow: 0 0 0 2px lx-theme-color-variant(dark, L3);
+        }
+    }
+
+    @else if $theme == light {
+        box-shadow: 0 0 0 2px lx-theme-color-variant(light, L3);
+    }
+}
+
+@mixin lx-radio-button-input-background-state($state, $theme) {
+    @if $state == hover {
+        background-color: lx-theme-color-variant($theme, L6);
+    }
+
+    @else if $state == active {
+        background-color: lx-theme-color-variant($theme, L5);
+    }
+
+    @else if $state == disabled {
+        border-color: lx-theme-color-variant($theme, L3);
+        pointer-events: none;
+    }
+}
+
+@mixin lx-radio-button-input-indicator-disabled-state($theme) {
+    background-color: lx-theme-color-variant($theme, L3);
+    pointer-events: none;
+}
+
+@mixin lx-radio-button-disabled-state($theme) {
+    color: lx-theme-color-variant($theme, L3);
+    pointer-events: none;
+}

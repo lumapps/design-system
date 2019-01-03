@@ -20,6 +20,7 @@
     angular.module('lumx.list', []);
     angular.module('lumx.notification', []);
     angular.module('lumx.progress', []);
+    angular.module('lumx.radio-button', []);
     angular.module('lumx.select', []);
     angular.module('lumx.tabs', []);
     angular.module('lumx.text-field', []);
@@ -35,6 +36,7 @@
         'lumx.list',
         'lumx.notification',
         'lumx.progress',
+        'lumx.radio-button',
         'lumx.select',
         'lumx.tabs',
         'lumx.text-field',
