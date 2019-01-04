@@ -36,97 +36,28 @@
 }
 
 @mixin lx-button-color($color, $type, $theme: dark) {
-    transition: background-color $lx-button-transition-duration, box-shadow $lx-button-transition-duration;
+    @include lx-states-transitions;
+    @include lx-states($type, map-get($lx-states, default), $theme, $color);
 
-    @if $type == primary {
-        @if $theme == dark {
-            background-color: lx-theme-color-variant($color, N);
-            color: lx-theme-best-color(lx-theme-color-variant($color, N));
-        }
-
-        @else if $theme == light {
-            background-color: lx-theme-color-variant(light, N);
-            color: lx-theme-color-variant($color, N);
-        }
-
-        &:hover {
-            @if $theme == dark {
-                background-color: lx-theme-color-variant($color, D1);
-            }
-
-            @else if $theme == light {
-                background-color: lx-theme-color-variant(light, L1);
-            }
-        }
-
-        &[data-focus-visible-added] {
-            @if $theme == dark {
-                box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
-            }
-
-            @else if $theme == light {
-                box-shadow: 0 0 0 2px lx-theme-color-variant(light, L3);
-            }
-        }
-
-        &:active {
-            @if $theme == dark {
-                background-color: lx-theme-color-variant($color, D2);
-            }
-
-            @else if $theme == light {
-                background-color: lx-theme-color-variant(light, L2);
-            }
-        }
-
-        &:disabled {
-            @if $theme == dark {
-                background-color: lx-theme-color-variant($color, L3);
-            }
-
-            @else if $theme == light {
-                background-color: lx-theme-color-variant(light, L4);
-                color: lx-theme-color-variant(light, L3);
-            }
-        }
+    &:hover {
+        @include lx-states($type, map-get($lx-states, hover), $theme, $color);
     }
 
-    @else if $type == secondary or $type == tertiary {
-        background-color: transparent;
-        color: lx-theme-color-variant($theme, N);
+    &:active {
+        @include lx-states($type, map-get($lx-states, active), $theme, $color);
+    }
 
-        @if $type == secondary {
-            border: 1px solid lx-theme-color-variant($theme, N);
-        }
+    &[data-focus-visible-added] {
+        @include lx-states($type, map-get($lx-states, focus), $theme, $color);
+    }
 
-        &:hover {
-            background-color: lx-theme-color-variant($theme, L6);
-        }
-
-        &[data-focus-visible-added] {
-            box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
-        }
-
-        &:active {
-            background-color: lx-theme-color-variant($theme, L5);
-        }
-
-        &:disabled {
-            color: lx-theme-color-variant($theme, L3);
-
-            @if $type == secondary {
-                border-color: lx-theme-color-variant($theme, L3);
-            }
-        }
+    &:disabled {
+        @include lx-states($type, map-get($lx-states, disabled), $theme, $color);
     }
 }
 
 @mixin lx-button-icon($size) {
     font-size: map-get($lx-button-icon-sizes, $size);
-}
-
-@mixin lx-button-icon-sibling() {
-    margin-right: $lx-base-spacing-unit;
 }
 
 @mixin lx-button-text($size, $type) {

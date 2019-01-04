@@ -1,0 +1,9 @@
+$lx-states: (
+    default: state-default,
+    hover: state-hover,
+    active: state-active,
+    focus: state-focus,
+    disabled: state-disabled
+);
+
+$lx-states-transition-duration: 0.2s;

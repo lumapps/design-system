@@ -8,7 +8,7 @@
     @include lx-button-base;
 
     &__icon--has-sibling {
-        @include lx-button-icon-sibling;
+        margin-right: $lx-base-spacing-unit;
     }
 }
 
