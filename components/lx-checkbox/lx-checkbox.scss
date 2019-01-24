@@ -69,21 +69,21 @@
 
     &__label {
         #{ $self }--theme-light & {
-            @include lx-checkbox-label(dark);
+            @include lx-input-label(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-checkbox-label(light);
+            @include lx-input-label(light);
         }
     }
 
     &__help {
         #{ $self }--theme-light & {
-            @include lx-checkbox-help(dark);
+            @include lx-input-helper(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-checkbox-help(light);
+            @include lx-input-helper(light);
         }
     }
 }
@@ -103,7 +103,7 @@
 
     .lx-checkbox__label,
     .lx-checkbox__help {
-        @include lx-checkbox-disabled-state(dark);
+        @include lx-input-states-disabled-text(dark);
     }
 }
 
@@ -118,7 +118,7 @@
 
     .lx-checkbox__label,
     .lx-checkbox__help {
-        @include lx-checkbox-disabled-state(light);
+        @include lx-input-states-disabled-text(light);
     }
 }
 

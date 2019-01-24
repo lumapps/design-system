@@ -73,23 +73,3 @@
         opacity: 0;
     }
 }
-
-@mixin lx-checkbox-label($theme) {
-    @include lx-typography(body1);
-
-    display: block;
-    color: lx-theme-color-variant($theme, N);
-}
-
-@mixin lx-checkbox-help($theme) {
-    @include lx-typography(caption);
-
-    display: block;
-    margin-top: $lx-base-spacing-unit / 2;
-    color: lx-theme-color-variant($theme, L2);
-}
-
-@mixin lx-checkbox-disabled-state($theme) {
-    color: lx-theme-color-variant($theme, L3);
-    pointer-events: none;
-}

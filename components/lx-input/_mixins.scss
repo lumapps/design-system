@@ -1,11 +1,5 @@
 @import "./variables";
 
-@mixin lx-input-states-transitions() {
-    transition:
-        background-color $lx-input-states-transition-duration,
-        color $lx-input-states-transition-duration;
-}
-
 @mixin lx-input-states-primary($state, $theme, $color) {
     @if $state == state-default {
         @if $theme == dark {
@@ -97,6 +91,11 @@
     }
 }
 
+@mixin lx-input-states-disabled-text($theme) {
+    color: lx-theme-color-variant($theme, L3);
+    pointer-events: none;
+}
+
 @mixin lx-input-states($type, $state, $theme, $color: null) {
     @if $type == primary {
         @include lx-input-states-primary($state, $theme, $color);
@@ -109,4 +108,25 @@
     @else if $type == tertiary {
         @include lx-input-states-tertiary($state, $theme);
     }
+}
+
+@mixin lx-input-states-transitions() {
+    transition:
+        background-color $lx-input-states-transition-duration,
+        color $lx-input-states-transition-duration;
+}
+
+@mixin lx-input-label($theme) {
+    @include lx-typography(body1);
+
+    display: block;
+    color: lx-theme-color-variant($theme, N);
+}
+
+@mixin lx-input-helper($theme) {
+    @include lx-typography(caption);
+
+    display: block;
+    margin-top: $lx-base-spacing-unit / 2;
+    color: lx-theme-color-variant($theme, L2);
 }
