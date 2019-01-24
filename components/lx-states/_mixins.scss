@@ -89,7 +89,7 @@
     @include lx-states-tertiary($state, $theme);
 
     @if $state == state-default {
-        border: 1px solid lx-theme-color-variant($theme, N);
+        border-color: lx-theme-color-variant($theme, N);
     }
 
     @else if $state == state-disabled {

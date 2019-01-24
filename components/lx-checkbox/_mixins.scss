@@ -29,16 +29,16 @@
     transition: box-shadow $lx-button-transition-duration;
 }
 
-@mixin lx-checkbox-input-background($theme) {
+@mixin lx-checkbox-input-background() {
     position: absolute;
     z-index: 2;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    border: 2px solid lx-theme-color-variant($theme, N);
     border-radius: 2px;
-    transition: background-color $lx-button-transition-duration;
+    border-style: solid;
+    border-width: 2px;
 }
 
 @mixin lx-checkbox-input-background-status($status) {
@@ -51,7 +51,7 @@
     }
 }
 
-@mixin lx-checkbox-input-indicator($theme) {
+@mixin lx-checkbox-input-indicator() {
     position: absolute;
     z-index: 3;
     top: 0;
@@ -62,17 +62,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 2px;
-    transition: background-color $lx-button-transition-duration;
-
-    @if $theme == dark {
-        background-color: lx-theme-color-variant(primary, N);
-        color: lx-theme-color-variant(light, N);
-    }
-
-    @else if $theme == light {
-        background-color: lx-theme-color-variant(light, N);
-        color: lx-theme-color-variant(dark, N);
-    }
 }
 
 @mixin lx-checkbox-input-indicator-status($status) {
@@ -98,64 +87,6 @@
     display: block;
     margin-top: $lx-base-spacing-unit / 2;
     color: lx-theme-color-variant($theme, L2);
-}
-
-@mixin lx-checkbox-input-placeholder-focus($theme, $status) {
-    @if $theme == dark {
-        @if $status == 'checked' {
-            box-shadow: 0 0 0 2px lx-theme-color-variant(primary, L3);
-        }
-
-        @else if $status == 'unchecked' {
-            box-shadow: 0 0 0 2px lx-theme-color-variant(dark, L3);
-        }
-    }
-
-    @else if $theme == light {
-        box-shadow: 0 0 0 2px lx-theme-color-variant(light, L3);
-    }
-}
-
-@mixin lx-checkbox-input-background-state($state, $theme) {
-    @if $state == hover {
-        background-color: lx-theme-color-variant($theme, L6);
-    }
-
-    @else if $state == active {
-        background-color: lx-theme-color-variant($theme, L5);
-    }
-
-    @else if $state == disabled {
-        border-color: lx-theme-color-variant($theme, L3);
-        pointer-events: none;
-    }
-}
-
-@mixin lx-checkbox-input-indicator-state($state, $theme) {
-    @if $state == hover {
-        @if $theme == dark {
-            background-color: lx-theme-color-variant(primary, D1);
-        }
-
-        @else if $theme == light {
-            background-color: lx-theme-color-variant(light, L1);
-        }
-    }
-
-    @else if $state == active {
-        @if $theme == dark {
-            background-color: lx-theme-color-variant(primary, D2);
-        }
-
-        @else if $theme == light {
-            background-color: lx-theme-color-variant(light, L2);
-        }
-    }
-
-    @else if $state == disabled {
-        background-color: lx-theme-color-variant($theme, L3);
-        pointer-events: none;
-    }
 }
 
 @mixin lx-checkbox-disabled-state($theme) {

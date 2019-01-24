@@ -39,6 +39,11 @@
     @include lx-states-transitions;
     @include lx-states($type, map-get($lx-states, default), $theme, $color);
 
+    @if $type == secondary {
+        border-style: solid;
+        border-width: 1px;
+    }
+
     &:hover {
         @include lx-states($type, map-get($lx-states, hover), $theme, $color);
     }
