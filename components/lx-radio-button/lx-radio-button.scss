@@ -22,13 +22,8 @@
     }
 
     &__input-background {
-        #{ $self }--theme-light & {
-            @include lx-radio-button-input-background(dark);
-        }
-
-        #{ $self }--theme-dark & {
-            @include lx-radio-button-input-background(light);
-        }
+        @include lx-radio-button-input-background;
+        @include lx-input-states-transitions;
 
         #{ $self }--theme-light#{ $self }--is-checked & {
             @include lx-radio-button-input-background-status(checked, dark);
@@ -48,20 +43,23 @@
     }
 
     &__input-indicator {
-        #{ $self }--theme-light & {
-            @include lx-radio-button-input-indicator(dark);
+        @include lx-radio-button-input-indicator;
+        @include lx-input-states-transitions;
+
+        #{ $self }--theme-light#{ $self }--is-checked & {
+            @include lx-radio-button-input-indicator-status(checked, dark);
         }
 
-        #{ $self }--theme-dark & {
-            @include lx-radio-button-input-indicator(light);
+        #{ $self }--theme-dark#{ $self }--is-checked & {
+            @include lx-radio-button-input-indicator-status(checked, light);
         }
 
-        #{ $self }--is-checked & {
-            @include lx-radio-button-input-indicator-status(checked);
+        #{ $self }--theme-light#{ $self }--is-unchecked & {
+            @include lx-radio-button-input-indicator-status(unchecked, dark);
         }
 
-        #{ $self }--is-unchecked & {
-            @include lx-radio-button-input-indicator-status(unchecked);
+        #{ $self }--theme-dark#{ $self }--is-unchecked & {
+            @include lx-radio-button-input-indicator-status(unchecked, light);
         }
     }
 
@@ -71,21 +69,21 @@
 
     &__label {
         #{ $self }--theme-light & {
-            @include lx-radio-button-label(dark);
+            @include lx-input-label(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-radio-button-label(light);
+            @include lx-input-label(light);
         }
     }
 
     &__help {
         #{ $self }--theme-light & {
-            @include lx-radio-button-help(dark);
+            @include lx-input-helper(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-radio-button-help(light);
+            @include lx-input-helper(light);
         }
     }
 }
@@ -96,31 +94,31 @@
 // Disabled state
 .lx-radio-button--theme-light.lx-radio-button--is-disabled {
     .lx-radio-button__input-background {
-        @include lx-radio-button-input-background-state(disabled, dark);
+        @include lx-input-states(secondary, map-get($lx-input-states, disabled), dark);
     }
 
     .lx-radio-button__input-indicator {
-        @include lx-radio-button-input-indicator-disabled-state(dark);
+        @include lx-input-states(primary, map-get($lx-input-states, disabled), dark, primary);
     }
 
     .lx-radio-button__label,
     .lx-radio-button__help {
-        @include lx-radio-button-disabled-state(dark);
+        @include lx-input-states-disabled-text(dark);
     }
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-disabled {
     .lx-radio-button__input-background {
-        @include lx-radio-button-input-background-state(disabled, light);
+        @include lx-input-states(secondary, map-get($lx-input-states, disabled), light);
     }
 
     .lx-radio-button__input-indicator {
-        @include lx-radio-button-input-indicator-disabled-state(light);
+        @include lx-input-states(primary, map-get($lx-input-states, disabled), light, primary);
     }
 
     .lx-radio-button__label,
     .lx-radio-button__help {
-        @include lx-radio-button-disabled-state(light);
+        @include lx-input-states-disabled-text(light);
     }
 }
 
@@ -131,42 +129,42 @@
 // Hover state
 .lx-radio-button--theme-light.lx-radio-button--is-unchecked .lx-radio-button__input-native:hover + .lx-radio-button__input-placeholder {
     .lx-radio-button__input-background {
-        @include lx-radio-button-input-background-state(hover, dark);
+        @include lx-input-states(secondary, map-get($lx-input-states, hover), dark);
     }
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-unchecked .lx-radio-button__input-native:hover + .lx-radio-button__input-placeholder {
     .lx-radio-button__input-background {
-        @include lx-radio-button-input-background-state(hover, light);
+        @include lx-input-states(secondary, map-get($lx-input-states, hover), light);
     }
 }
 
 // Focus state
-.lx-radio-button--theme-light.lx-radio-button--is-checked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
-    @include lx-radio-button-input-placeholder-focus(dark, checked);
-}
-
 .lx-radio-button--theme-light.lx-radio-button--is-unchecked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
-    @include lx-radio-button-input-placeholder-focus(dark, unchecked);
+    @include lx-input-states(secondary, map-get($lx-input-states, focus), dark);
 }
 
-.lx-radio-button--theme-dark.lx-radio-button--is-checked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
-    @include lx-radio-button-input-placeholder-focus(light, checked);
+.lx-radio-button--theme-light.lx-radio-button--is-checked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
+    @include lx-input-states(primary, map-get($lx-input-states, focus), dark, primary);
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-unchecked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
-    @include lx-radio-button-input-placeholder-focus(light, unchecked);
+    @include lx-input-states(secondary, map-get($lx-input-states, focus), light);
+}
+
+.lx-radio-button--theme-dark.lx-radio-button--is-checked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
+    @include lx-input-states(primary, map-get($lx-input-states, focus), light, primary);
 }
 
 // Active state
 .lx-radio-button--theme-light.lx-radio-button--is-unchecked .lx-radio-button__input-native:active + .lx-radio-button__input-placeholder {
     .lx-radio-button__input-background {
-        @include lx-radio-button-input-background-state(active, dark);
+        @include lx-input-states(secondary, map-get($lx-input-states, active), dark);
     }
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-unchecked .lx-radio-button__input-native:active + .lx-radio-button__input-placeholder {
     .lx-radio-button__input-background {
-        @include lx-radio-button-input-background-state(active, light);
+        @include lx-input-states(secondary, map-get($lx-input-states, active), light);
     }
 }

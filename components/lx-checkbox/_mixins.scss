@@ -26,7 +26,6 @@
     width: $lx-checkbox-control-size;
     height: $lx-checkbox-control-size;
     border-radius: 2px;
-    transition: box-shadow $lx-button-transition-duration;
 }
 
 @mixin lx-checkbox-input-background() {
