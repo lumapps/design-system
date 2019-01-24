@@ -8,14 +8,14 @@
     $self: &;
 
     &__label {
-        @include lx-text-field-label-spacings(false);
+        margin-bottom: $lx-base-spacing-unit;
 
         #{ $self }--theme-light & {
-            @include lx-text-field-label(dark);
+            @include lx-input-label(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-text-field-label(light);
+            @include lx-input-label(light);
         }
     }
 
@@ -181,7 +181,7 @@
 // Disabled state
 .lx-select--theme-light.lx-select--is-disabled {
     .lx-select__label {
-        @include lx-text-field-disabled-state(dark);
+        @include lx-input-states-disabled-text(dark);
     }
 
     .lx-select__input-wrapper {
@@ -189,10 +189,10 @@
     }
 
     .lx-select__input-native {
-        @include lx-text-field-disabled-state(dark);
+        @include lx-input-states-disabled-text(dark);
 
         &::placeholder {
-            @include lx-text-field-disabled-state(dark);
+            @include lx-input-states-disabled-text(dark);
         }
     }
 
@@ -203,7 +203,7 @@
 
 .lx-select--theme-dark.lx-select--is-disabled {
     .lx-select__label {
-        @include lx-text-field-disabled-state(light);
+        @include lx-input-states-disabled-text(light);
     }
 
     .lx-select__input-wrapper {
@@ -211,10 +211,10 @@
     }
 
     .lx-select__input-native {
-        @include lx-text-field-disabled-state(light);
+        @include lx-input-states-disabled-text(light);
 
         &::placeholder {
-            @include lx-text-field-disabled-state(light);
+            @include lx-input-states-disabled-text(light);
         }
     }
 

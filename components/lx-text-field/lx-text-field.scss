@@ -8,30 +8,28 @@
     $self: &;
 
     &__label {
+        margin-bottom: $lx-base-spacing-unit;
+
         #{ $self }--theme-light & {
-            @include lx-text-field-label(dark);
+            @include lx-input-label(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-text-field-label(light);
+            @include lx-input-label(light);
         }
     }
 
     &--has-helper &__label {
-        @include lx-text-field-label-spacings(true);
-    }
-
-    &:not(&--has-helper) &__label {
-        @include lx-text-field-label-spacings(false);
+        margin-bottom: $lx-base-spacing-unit / 2;
     }
 
     &__helper {
         #{ $self }--theme-light & {
-            @include lx-text-field-helper(dark);
+            @include lx-input-helper(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-text-field-helper(light);
+            @include lx-input-helper(light);
         }
     }
 
@@ -116,7 +114,7 @@
 // Disabled state
 .lx-text-field--theme-light.lx-text-field--is-disabled {
     .lx-text-field__label {
-        @include lx-text-field-disabled-state(dark);
+        @include lx-input-states-disabled-text(dark);
     }
 
     .lx-text-field__input-wrapper {
@@ -124,25 +122,25 @@
     }
 
     .lx-text-field__input-icon {
-        @include lx-text-field-disabled-state(dark);
+        @include lx-input-states-disabled-text(dark);
     }
 
     .lx-text-field__input-native input {
-        @include lx-text-field-disabled-state(dark);
+        @include lx-input-states-disabled-text(dark);
 
         &::placeholder {
-            @include lx-text-field-disabled-state(dark);
+            @include lx-input-states-disabled-text(dark);
         }
     }
 
     .lx-text-field__helper {
-        @include lx-text-field-disabled-state(dark);
+        @include lx-input-states-disabled-text(dark);
     }
 }
 
 .lx-text-field--theme-dark.lx-text-field--is-disabled {
     .lx-text-field__label {
-        @include lx-text-field-disabled-state(light);
+        @include lx-input-states-disabled-text(light);
     }
 
     .lx-text-field__input-wrapper {
@@ -150,19 +148,19 @@
     }
 
     .lx-text-field__input-icon {
-        @include lx-text-field-disabled-state(light);
+        @include lx-input-states-disabled-text(light);
     }
 
     .lx-text-field__input-native input {
-        @include lx-text-field-disabled-state(light);
+        @include lx-input-states-disabled-text(light);
 
         &::placeholder {
-            @include lx-text-field-disabled-state(light);
+            @include lx-input-states-disabled-text(light);
         }
     }
 
     .lx-text-field__helper {
-        @include lx-text-field-disabled-state(light);
+        @include lx-input-states-disabled-text(light);
     }
 }
 
