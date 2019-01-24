@@ -133,6 +133,13 @@
                     templateUrl: 'demo/lx-text-field/demo.html',
                 }
             }
+        }).state('app.tooltip', {
+            url: 'tooltip',
+            views: {
+                'main@': {
+                    templateUrl: 'demo/lx-tooltip/demo.html',
+                }
+            }
         });
     }
 

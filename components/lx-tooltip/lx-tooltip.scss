@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Tooltip
+   ========================================================================== */
+
+.lx-tooltip {
+    @include lx-elevation(3);
+
+    position: absolute;
+    padding: $lx-base-spacing-unit / 2 $lx-base-spacing-unit;
+    background-color: lx-theme-color-variant(light, N);
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+
+    &--is-shown {
+        opacity: 1;
+    }
+
+    &__text {
+        @include lx-typography(caption);
+
+        display: block;
+    }
+}
