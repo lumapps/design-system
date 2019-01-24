@@ -18,12 +18,15 @@
     }
 
     &__link {
+        @include lx-tabs-link;
+        @include lx-input-states-transitions;
+
         #{ $self }--theme-light & {
-            @include lx-tabs-link(dark);
+            @include lx-input-states(tertiary, map-get($lx-input-states, default), dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-tabs-link(light);
+            @include lx-input-states(tertiary, map-get($lx-input-states, default), light);
         }
     }
 }
@@ -58,49 +61,62 @@
     }
 }
 
-/* Tabs states
+/* Tabs link states
    ========================================================================== */
 
 // Hover state
-.lx-tabs__link:not(.lx-tabs__link--is-active):hover {
+.lx-tabs__link:hover {
     .lx-tabs--theme-light & {
-        @include lx-tabs-link-state(hover, dark);
+        @include lx-input-states(tertiary, map-get($lx-input-states, hover), dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-tabs-link-state(hover, light);
-    }
-}
-
-// Focus state
-.lx-tabs__link:not(.lx-tabs__link--is-active)[data-focus-visible-added] {
-    .lx-tabs--theme-light & {
-        @include lx-tabs-link-state(focus, dark);
-    }
-
-    .lx-tabs--theme-dark & {
-        @include lx-tabs-link-state(focus, light);
+        @include lx-input-states(tertiary, map-get($lx-input-states, hover), light);
     }
 }
 
 // Active state
-.lx-tabs__link--is-active {
+.lx-tabs__link:active {
     .lx-tabs--theme-light & {
-        @include lx-tabs-link-state(active, dark);
+        @include lx-input-states(tertiary, map-get($lx-input-states, active), dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-tabs-link-state(active, light);
+        @include lx-input-states(tertiary, map-get($lx-input-states, active), light);
+    }
+}
+
+// Focus state
+.lx-tabs__link[data-focus-visible-added] {
+    .lx-tabs--theme-light & {
+        @include lx-input-states(tertiary, map-get($lx-input-states, focus), dark);
+    }
+
+    .lx-tabs--theme-dark & {
+        @include lx-input-states(tertiary, map-get($lx-input-states, focus), light);
     }
 }
 
 // Disabled state
 .lx-tabs__link--is-disabled {
     .lx-tabs--theme-light & {
-        @include lx-tabs-link-state(disabled, dark);
+        @include lx-input-states(tertiary, map-get($lx-input-states, disabled), dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-tabs-link-state(disabled, light);
+        @include lx-input-states(tertiary, map-get($lx-input-states, disabled), light);
+    }
+}
+
+/* Tabs link active
+   ========================================================================== */
+
+.lx-tabs__link--is-active {
+    .lx-tabs--theme-light & {
+        @include lx-tabs-link-active(dark);
+    }
+
+    .lx-tabs--theme-dark & {
+        @include lx-tabs-link-active(light);
     }
 }

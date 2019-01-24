@@ -45,6 +45,7 @@
 
     @else if $state == state-disabled {
         color: lx-theme-best-color(lx-theme-color-variant($color, L3));
+        pointer-events: none;
 
         @if $theme == dark {
             background-color: lx-theme-color-variant($color, L3);
@@ -76,6 +77,7 @@
 
     @else if $state == state-disabled {
         color: lx-theme-color-variant($theme, L3);
+        pointer-events: none;
     }
 }
 

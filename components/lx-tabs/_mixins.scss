@@ -17,24 +17,16 @@
     }
 }
 
-@mixin lx-tabs-link($theme) {
+@mixin lx-tabs-link() {
     position: relative;
     display: flex;
     height: 48px;
     align-items: center;
     justify-content: center;
     padding: 0 $lx-base-spacing-unit * 3;
+    border-radius: 4px 4px 0 0;
     cursor: pointer;
     outline: none;
-    transition: color 0.2s;
-
-    @if $theme == dark {
-        color: lx-theme-color-variant(dark, N);
-    }
-
-    @else if $theme == light {
-        color: lx-theme-color-variant(light, L2);
-    }
 
     &::after {
         position: absolute;
@@ -60,47 +52,16 @@
     }
 }
 
-@mixin lx-tabs-link-state($state, $theme) {
-    @if $state == hover {
-        @if $theme == dark {
-            color: lx-theme-color-variant(primary, N);
-        }
-
-        @else if $theme == light {
-            color: lx-theme-color-variant(light, N);
+@mixin lx-tabs-link-active($theme) {
+    @if $theme == dark {
+        &::after {
+            background-color: lx-theme-color-variant(primary, N);
         }
     }
 
-    @else if $state == focus {
-        @if $theme == dark {
-            box-shadow: 0 0 0 2px lx-theme-color-variant(primary, L3);
+    @else if $theme == light {
+        &::after {
+            background-color: lx-theme-color-variant(light, N);
         }
-
-        @else if $theme == light {
-            box-shadow: 0 0 0 2px lx-theme-color-variant(light, L3);
-        }
-    }
-
-    @else if $state == active {
-        @if $theme == dark {
-            color: lx-theme-color-variant(primary, N);
-
-            &::after {
-                background-color: lx-theme-color-variant(primary, N);
-            }
-        }
-
-        @else if $theme == light {
-            color: lx-theme-color-variant(light, N);
-
-            &::after {
-                background-color: lx-theme-color-variant(light, N);
-            }
-        }
-    }
-
-    @else if $state == disabled {
-        color: lx-theme-color-variant($theme, L3);
-        pointer-events: none;
     }
 }

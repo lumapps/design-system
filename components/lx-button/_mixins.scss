@@ -16,10 +16,6 @@
     &:hover {
         cursor: pointer;
     }
-
-    &:disabled {
-        pointer-events: none;
-    }
 }
 
 @mixin lx-button-size($size, $type, $shape: contained) {

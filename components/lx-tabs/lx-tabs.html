@@ -13,7 +13,7 @@
            ng-repeat="tab in lxTabs.tabs"
            ng-click="lxTabs.setActiveTab(tab)"
            ng-keypress="lxTabs.setActiveTab(tab, $event)"
-           tabindex="{{ tab.isDisabled || lxTabs.isTabActive(tab.index) ? -1 : 0 }}">
+           tabindex="{{ tab.isDisabled ? -1 : 0 }}">
            <lx-icon lx-id="{{ tab.icon }}" lx-size="s" ng-if="tab.icon"></lx-icon>
            <span ng-if="tab.label">{{ tab.label }}</span>
         </a>
