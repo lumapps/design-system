@@ -86,6 +86,7 @@
          */
         function updateViewValue() {
             if (angular.isUndefined(_modelController)) {
+                lxCheckbox.viewValue = !lxCheckbox.viewValue;
                 return;
             }
 
