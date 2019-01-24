@@ -1,4 +1,4 @@
-$lx-states: (
+$lx-input-states: (
     default: state-default,
     hover: state-hover,
     active: state-active,
@@ -6,4 +6,4 @@ $lx-states: (
     disabled: state-disabled
 );
 
-$lx-states-transition-duration: 0.2s;
+$lx-input-states-transition-duration: 0.2s;

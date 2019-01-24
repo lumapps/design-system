@@ -1,12 +1,12 @@
 @import "./variables";
 
-@mixin lx-states-transitions() {
+@mixin lx-input-states-transitions() {
     transition:
-        background-color $lx-states-transition-duration,
-        color $lx-states-transition-duration;
+        background-color $lx-input-states-transition-duration,
+        color $lx-input-states-transition-duration;
 }
 
-@mixin lx-states-primary($state, $theme, $color) {
+@mixin lx-input-states-primary($state, $theme, $color) {
     @if $state == state-default {
         @if $theme == dark {
             background-color: lx-theme-color-variant($color, N);
@@ -62,7 +62,7 @@
     }
 }
 
-@mixin lx-states-tertiary($state, $theme) {
+@mixin lx-input-states-tertiary($state, $theme) {
     @if $state == state-default {
         background-color: transparent;
         color: lx-theme-color-variant($theme, N);
@@ -85,8 +85,8 @@
     }
 }
 
-@mixin lx-states-secondary($state, $theme) {
-    @include lx-states-tertiary($state, $theme);
+@mixin lx-input-states-secondary($state, $theme) {
+    @include lx-input-states-tertiary($state, $theme);
 
     @if $state == state-default {
         border-color: lx-theme-color-variant($theme, N);
@@ -97,16 +97,16 @@
     }
 }
 
-@mixin lx-states($type, $state, $theme, $color: null) {
+@mixin lx-input-states($type, $state, $theme, $color: null) {
     @if $type == primary {
-        @include lx-states-primary($state, $theme, $color);
+        @include lx-input-states-primary($state, $theme, $color);
     }
 
     @else if $type == secondary {
-        @include lx-states-secondary($state, $theme);
+        @include lx-input-states-secondary($state, $theme);
     }
 
     @else if $type == tertiary {
-        @include lx-states-tertiary($state, $theme);
+        @include lx-input-states-tertiary($state, $theme);
     }
 }
