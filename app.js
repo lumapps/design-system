@@ -106,6 +106,15 @@
                     templateUrl: 'demo/lx-select/demo.html',
                 }
             }
+        }).state('app.switch', {
+            url: 'switch',
+            views: {
+                'main@': {
+                    controller: 'DemoSwitchController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-switch/demo.html',
+                }
+            }
         }).state('app.tabs', {
             url: 'tabs',
             views: {

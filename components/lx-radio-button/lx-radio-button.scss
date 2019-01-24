@@ -23,7 +23,6 @@
 
     &__input-background {
         @include lx-radio-button-input-background;
-        @include lx-input-states-transitions;
 
         #{ $self }--theme-light#{ $self }--is-checked & {
             @include lx-radio-button-input-background-status(checked, dark);
@@ -44,7 +43,6 @@
 
     &__input-indicator {
         @include lx-radio-button-input-indicator;
-        @include lx-input-states-transitions;
 
         #{ $self }--theme-light#{ $self }--is-checked & {
             @include lx-radio-button-input-indicator-status(checked, dark);

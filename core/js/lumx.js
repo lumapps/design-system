@@ -22,6 +22,7 @@
     angular.module('lumx.progress', []);
     angular.module('lumx.radio-button', []);
     angular.module('lumx.select', []);
+    angular.module('lumx.switch', []);
     angular.module('lumx.tabs', []);
     angular.module('lumx.text-field', []);
     angular.module('lumx.theme', []);
@@ -38,6 +39,7 @@
         'lumx.progress',
         'lumx.radio-button',
         'lumx.select',
+        'lumx.switch',
         'lumx.tabs',
         'lumx.text-field',
         'lumx.theme',

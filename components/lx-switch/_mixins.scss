@@ -1,0 +1,74 @@
+@import "./variables";
+
+@mixin lx-switch-input-wrapper() {
+    position: relative;
+    width: $lx-switch-wrapper-width;
+    height: $lx-switch-wrapper-height;
+}
+
+@mixin lx-switch-input-native() {
+    position: relative;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: $lx-switch-wrapper-width;
+    height: $lx-switch-wrapper-height;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+@mixin lx-switch-placeholder() {
+    position: absolute;
+    z-index: 1;
+    top: 2px;
+    left: 0;
+    width: $lx-switch-control-width;
+    height: $lx-switch-control-height;
+    border-radius: $lx-switch-control-height / 2;
+}
+
+@mixin lx-switch-input-background($status) {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: $lx-switch-control-height / 2;
+
+    @if $status == 'unchecked' {
+        border-style: solid;
+        border-width: 2px;
+    }
+}
+
+@mixin lx-switch-input-indicator($status, $theme) {
+    position: absolute;
+    z-index: 3;
+    top: 4px;
+    width: $lx-switch-indicator-size;
+    height: $lx-switch-indicator-size;
+    border-radius: $lx-switch-indicator-size / 2;
+
+    @if $status == 'checked' {
+        right: 4px;
+
+        @if $theme == 'dark' {
+            background-color: lx-theme-color-variant(light, N);
+        }
+
+        @else if $theme == 'light' {
+            background-color: lx-theme-color-variant(primary, N);
+        }
+    }
+
+    @else if $status == 'unchecked' {
+        left: 4px;
+        background-color: lx-theme-color-variant($theme, N);
+    }
+}
+
+@mixin lx-switch-input-indicator-disabled($theme) {
+    background-color: lx-theme-color-variant($theme, L3);
+}

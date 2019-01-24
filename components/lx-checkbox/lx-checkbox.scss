@@ -23,7 +23,6 @@
 
     &__input-background {
         @include lx-checkbox-input-background;
-        @include lx-input-states-transitions;
 
         #{ $self }--theme-light & {
             @include lx-input-states(secondary, map-get($lx-input-states, default), dark);
@@ -44,7 +43,6 @@
 
     &__input-indicator {
         @include lx-checkbox-input-indicator;
-        @include lx-input-states-transitions;
 
         #{ $self }--theme-light & {
             @include lx-input-states(primary, map-get($lx-input-states, default), dark, primary);
