@@ -8,8 +8,6 @@
     $self: &;
 
     &__label {
-        margin-bottom: $lx-base-spacing-unit;
-
         #{ $self }--theme-light & {
             @include lx-input-label(dark);
         }
@@ -39,6 +37,10 @@
         #{ $self }--theme-dark#{ $self }--has-multiple & {
             @include lx-text-field-input-wrapper(light, true, true);
         }
+    }
+
+    &--has-label &__input-wrapper {
+        margin-top: $lx-base-spacing-unit;
     }
 
     &__input-native {
