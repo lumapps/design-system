@@ -22,6 +22,13 @@
         var _OFFSET_FROM_EDGE = 16;
 
         /**
+         * The source element mouse enter timeout.
+         *
+         * @type {Object}
+         */
+        var _hoverTimeout;
+
+        /**
          * The event scheduler id.
          *
          * @type {string}
@@ -279,6 +286,8 @@
                 return;
             }
 
+            $timeout.cancel(_hoverTimeout);
+
             $timeout(function() {
                 if (!_mouseOnMenu || fromMenu) {
                     LxDropdownService.closeActiveDropdown();
@@ -298,7 +307,7 @@
                 return;
             }
 
-            $timeout(_open, lxDropdown.hoverDelay)
+            _hoverTimeout = $timeout(_open, lxDropdown.hoverDelay);
         }
 
         /**
