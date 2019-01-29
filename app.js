@@ -47,6 +47,15 @@
                     templateUrl: 'demo/lx-chip/demo.html',
                 }
             }
+        }).state('app.data-table', {
+            url: 'data-table',
+            views: {
+                'main@': {
+                    controller: 'DemoDataTableController',
+                    controllerAs: 'vm',
+                    templateUrl: 'demo/lx-data-table/demo.html',
+                }
+            }
         }).state('app.dialog', {
             url: 'dialog',
             views: {

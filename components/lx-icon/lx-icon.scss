@@ -5,7 +5,8 @@
 @import "./mixins";
 
 .lx-icon {
-    display: block;
+    display: inline-block;
+    vertical-align: middle;
 
     svg {
         display: block;

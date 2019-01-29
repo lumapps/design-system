@@ -1,0 +1,16 @@
+<div lx-grid-container="row" lx-grid-h-align="center">
+    <div lx-grid-item>
+        <span>{{ vm.selectedRows.length || 0 }} selected item(s)</span>
+    </div>
+
+    <lx-button lx-type="scondary" ng-if="vm.selectedRows.length === 1">
+        <lx-icon lx-id="pencil"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-type="scondary" ng-if="vm.selectedRows.length >= 1">
+        <lx-icon lx-id="delete"></lx-icon>
+    </lx-button>
+</div>
+
+<lx-data-table id="{{ vm.dataTableDemo }}" lx-bulk="true" lx-border="true" lx-selectable="true" lx-activable="true" lx-thead="vm.dataTableThead" lx-tbody="vm.dataTableTbody"></lx-data-table>
+<lx-data-table lx-bulk="true" lx-border="true" lx-thumbnail="true" lx-selectable="true" lx-thead="vm.advancedDataTableThead" lx-tbody="vm.dataTableTbody"></lx-data-table>

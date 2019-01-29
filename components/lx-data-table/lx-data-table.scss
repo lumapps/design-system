@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Data table
+   ========================================================================== */
+
+.lx-data-table {
+    $self: &;
+
+    width: 100%;
+    margin: 0;
+    table-layout: fixed;
+
+    &__cell {
+        height: 56px;
+        padding: $lx-base-spacing-unit $lx-base-spacing-unit * 4 $lx-base-spacing-unit 0;
+
+        #{ $self }--thumbnail &:first-child,
+        #{ $self }--selectable &:first-child {
+            width: 68px;
+            padding-right: 0;
+        }
+
+        &--thead {
+            border-bottom: 1px solid lx-theme-color-variant(dark, L5);
+            color: lx-theme-color-variant(dark, L2);
+
+            & > i {
+                margin-right: $lx-base-spacing-unit / 2;
+            }
+
+            & > span {
+                @include lx-typography(caption);
+            }
+        }
+
+        &--is-sortable {
+            cursor: pointer;
+        }
+
+        &--is-sortable:hover,
+        &--is-sorted {
+            color: lx-theme-color-variant(dark, N);
+        }
+
+        &--tbody {
+            & > span {
+                @include lx-typography(body1);
+
+                #{ $self }__row--is-disabled & {
+                    color: lx-theme-color-variant(dark, L3);
+                }
+            }
+
+            #{ $self }--border & {
+                border-bottom: 1px solid lx-theme-color-variant(dark, L5);
+            }
+
+            #{ $self }--activable #{ $self }__row--is-enabled & {
+                cursor: pointer;
+            }
+
+            #{ $self }--activable #{ $self }__row--is-enabled:hover & {
+                background-color: lx-theme-color-variant(dark, L5);
+            }
+
+            #{ $self }--activable #{ $self }__row--is-activated & {
+                background-color: lx-theme-color-variant(dark, L6);
+            }
+        }
+    }
+
+    &__checkbox {
+        margin: 0 $lx-base-spacing-unit * 3;
+
+        #{ $self }--thumbnail #{ $self }__row--tbody & {
+            display: none;
+        }
+
+        #{ $self }--thumbnail #{ $self }__row--is-enabled:hover &,
+        #{ $self }--selectable #{ $self }__row--is-selected & {
+            display: flex;
+        }
+    }
+
+    &__thumbnail {
+        display: inline-block;
+        width: 36px;
+        height: 36px;
+        vertical-align: middle;
+
+        #{ $self }--thumbnail #{ $self }__row--is-enabled:hover &,
+        #{ $self }--selectable #{ $self }__row--is-selected & {
+            display: none;
+        }
+    }
+}
