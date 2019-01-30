@@ -3,18 +3,22 @@
                    'lx-data-table--border': lxDataTable.border,
                    'lx-data-table--thumbnail': lxDataTable.thumbnail,
                    'lx-data-table--selectable': lxDataTable.selectable,
-                   'lx-data-table--activable': lxDataTable.activable }">
+                   'lx-data-table--activable': lxDataTable.activable,
+                   'lx-data-table--theme-light': !lxDataTable.theme || lxDataTable.theme === 'light',
+                   'lx-data-table--theme-dark': lxDataTable.theme === 'dark' }">
     <thead>
         <tr class="lx-data-table__row lx-data-table__row--thead"
             ng-class="{ 'lx-data-table__row--is-selected': lxDataTable.bulk && lxDataTable.selectable && lxDataTable.allRowsSelected }">
             <th align="center" class="lx-data-table__cell lx-data-table__cell--thead" ng-if="lxDataTable.thumbnail">
                 <lx-checkbox class="lx-data-table__checkbox"
+                             lx-theme="{{ lxDataTable.theme }}"
                              ng-checked="lxDataTable.allRowsSelected"
                              ng-click="lxDataTable.toggleAllSelected()"
                              ng-if="lxDataTable.bulk && lxDataTable.selectable"></lx-checkbox>
             </th>
             <th align="center" class="lx-data-table__cell lx-data-table__cell--thead" ng-if="lxDataTable.selectable && !lxDataTable.thumbnail">
                 <lx-checkbox class="lx-data-table__checkbox"
+                             lx-theme="{{ lxDataTable.theme }}"
                              ng-checked="lxDataTable.allRowsSelected"
                              ng-click="lxDataTable.toggleAllSelected()"
                              ng-if="lxDataTable.bulk"></lx-checkbox>
@@ -46,12 +50,14 @@
                 <div class="lx-data-table__thumbnail" ng-if="lxDataTable.thead[0].format" ng-bind-html="lxDataTable.$sce.trustAsHtml(lxDataTable.thead[0].format(tr))"></div>
 
                 <lx-checkbox class="lx-data-table__checkbox"
+                             lx-theme="{{ lxDataTable.theme }}"
                              ng-checked="tr.lxDataTableSelected"
                              ng-click="lxDataTable.toggleSelection(tr, undefined, $event)"
                              ng-if="lxDataTable.selectable && !tr.lxDataTableDisabled"></lx-checkbox>
             </td>
             <td align="center" class="lx-data-table__cell lx-data-table__cell--tbody" ng-if="lxDataTable.selectable && !lxDataTable.thumbnail">
                 <lx-checkbox class="lx-data-table__checkbox"
+                             lx-theme="{{ lxDataTable.theme }}"
                              ng-checked="tr.lxDataTableSelected"
                              ng-click="lxDataTable.toggleSelection(tr, undefined, $event)"
                              ng-disabled="tr.lxDataTableDisabled"></lx-checkbox>

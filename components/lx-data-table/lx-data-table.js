@@ -256,7 +256,8 @@
                 selectable: '=?lxSelectable',
                 thumbnail: '=?lxThumbnail',
                 tbody: '=lxTbody',
-                thead: '=lxThead'
+                thead: '=lxThead',
+                theme: '@?lxTheme',
             },
             templateUrl: 'components/lx-data-table/lx-data-table.html',
         };

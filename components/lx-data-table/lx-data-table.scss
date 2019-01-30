@@ -20,8 +20,15 @@
         }
 
         &--thead {
-            border-bottom: 1px solid lx-theme-color-variant(dark, L5);
-            color: lx-theme-color-variant(dark, L2);
+            #{ $self }--theme-light & {
+                border-bottom: 1px solid lx-theme-color-variant(dark, L5);
+                color: lx-theme-color-variant(dark, L2);
+            }
+
+            #{ $self }--theme-dark & {
+                border-bottom: 1px solid lx-theme-color-variant(light, L5);
+                color: lx-theme-color-variant(light, L2);
+            }
 
             & > i {
                 margin-right: $lx-base-spacing-unit / 2;
@@ -38,32 +45,62 @@
 
         &--is-sortable:hover,
         &--is-sorted {
-            color: lx-theme-color-variant(dark, N);
+            #{ $self }--theme-light & {
+                color: lx-theme-color-variant(dark, N);
+            }
+
+            #{ $self }--theme-dark & {
+                color: lx-theme-color-variant(light, N);
+            }
         }
 
         &--tbody {
             & > span {
                 @include lx-typography(body1);
 
-                #{ $self }__row--is-disabled & {
+                #{ $self }--theme-light & {
+                    color: lx-theme-color-variant(dark, N);
+                }
+
+                #{ $self }--theme-dark & {
+                    color: lx-theme-color-variant(light, N);
+                }
+
+                #{ $self }--theme-light #{ $self }__row--is-disabled & {
                     color: lx-theme-color-variant(dark, L3);
+                }
+
+                #{ $self }--theme-dark #{ $self }__row--is-disabled & {
+                    color: lx-theme-color-variant(light, L3);
                 }
             }
 
-            #{ $self }--border & {
+            #{ $self }--theme-light#{ $self }--border & {
                 border-bottom: 1px solid lx-theme-color-variant(dark, L5);
+            }
+
+            #{ $self }--theme-dark#{ $self }--border & {
+                border-bottom: 1px solid lx-theme-color-variant(light, L5);
             }
 
             #{ $self }--activable #{ $self }__row--is-enabled & {
                 cursor: pointer;
             }
 
-            #{ $self }--activable #{ $self }__row--is-enabled:hover & {
+            #{ $self }--theme-light#{ $self }--activable #{ $self }__row--is-enabled:hover & {
                 background-color: lx-theme-color-variant(dark, L5);
             }
 
-            #{ $self }--activable #{ $self }__row--is-activated & {
+            #{ $self }--theme-dark#{ $self }--activable #{ $self }__row--is-enabled:hover & {
+                background-color: lx-theme-color-variant(light, L5);
+            }
+
+            #{ $self }--theme-light#{ $self }--activable #{ $self }__row--is-activated & {
                 background-color: lx-theme-color-variant(dark, L6);
+            }
+
+            #{ $self }--theme-dark#{ $self }--activable #{ $self }__row--is-activated & {
+                background-color: lx-theme-color-variant(light, L6);
             }
         }
     }
