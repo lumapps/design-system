@@ -14,7 +14,18 @@
         //                         //
         /////////////////////////////
 
+        /**
+         * Wether all rows are selected or not.
+         *
+         * @type {boolean}
+         */
         lxDataTable.allRowsSelected = false;
+
+        /**
+         * The array containing all selected rows.
+         *
+         * @type {Array}
+         */
         lxDataTable.selectedRows = [];
 
         /////////////////////////////
@@ -30,18 +41,36 @@
         //                         //
         /////////////////////////////
 
+        /**
+         * Activate a given row.
+         *
+         * @param {Object} row The row to activate.
+         */
         function _activate(row) {
             toggleActivation(row, true);
         }
 
+        /**
+         * Deactivate a given row.
+         *
+         * @param {Object} row The row to deactivate.
+         */
         function _deactivate(row) {
             toggleActivation(row, false);
         }
 
+        /**
+         * Select a given row.
+         *
+         * @param {Object} row The row to select.
+         */
         function _select(row) {
             toggleSelection(row, true);
         }
 
+        /**
+         * Select all rows.
+         */
         function _selectAll() {
             lxDataTable.selectedRows.length = 0;
 
@@ -57,10 +86,18 @@
             $rootScope.$broadcast('lx-data-table__unselected', lxDataTable.id, lxDataTable.selectedRows);
         }
 
+        /**
+         * Unselect a given row.
+         *
+         * @param {Object} row The row to unselect.
+         */
         function _unselect(row) {
             toggleSelection(row, false);
         }
 
+        /**
+         * Unselect all rows.
+         */
         function _unselectAll() {
             for (var i = 0, len = lxDataTable.tbody.length; i < len; i++) {
                 if (!lxDataTable.tbody[i].lxDataTableDisabled) {
@@ -80,6 +117,9 @@
         //                         //
         /////////////////////////////
 
+        /**
+         * Wether all rows are selected or not.
+         */
         function areAllRowsSelected() {
             var displayedRows = 0;
 
@@ -96,6 +136,11 @@
             }
         }
 
+        /**
+         * Sort a given column.
+         *
+         * @param {Object} column The column to sort.
+         */
         function sort(column) {
             if (!column.sortable) {
                 return;
@@ -116,6 +161,11 @@
             $rootScope.$broadcast('lx-data-table__sorted', lxDataTable.id, column);
         }
 
+        /**
+         * Activate or deactivate a given row.
+         *
+         * @param {Object} row The row to activate/deactivate.
+         */
         function toggleActivation(row) {
             if (row.lxDataTableDisabled || !lxDataTable.activable) {
                 return;
@@ -136,6 +186,9 @@
             }
         }
 
+        /**
+         * Select or unselect all rows.
+         */
         function toggleAllSelected() {
             if (!lxDataTable.bulk) {
                 return;
@@ -148,6 +201,13 @@
             }
         }
 
+        /**
+         * select or unselect a given row
+         *
+         * @param {Object}  row                 The row to select/unselect.
+         * @param {boolean} [newSelectedStatus] Wether the given row should be selected or unselected.
+         * @param {Event}   [evt]               The checkbox click event.
+         */
         function toggleSelection(row, newSelectedStatus, evt) {
             if (row.lxDataTableDisabled || !lxDataTable.selectable) {
                 return;
