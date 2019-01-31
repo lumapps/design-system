@@ -217,7 +217,7 @@
     }
 
     /**
-     * select or unselect a given row
+     * Select or unselect a given row.
      *
      * @param {Object}  row                 The row to select/unselect.
      * @param {boolean} [newSelectedStatus] Wether the given row should be selected or unselected.
@@ -288,6 +288,13 @@
     //                         //
     /////////////////////////////
 
+    /**
+     * Select a given row from broadcast event.
+     *
+     * @param {Event}  evt         The broadcast event.
+     * @param {string} dataTableId The data table identifier.
+     * @param {Object} row         The row to select.
+     */
     $scope.$on("lx-data-table__select", function(event, id, row) {
       if (id === lxDataTable.id && angular.isDefined(row)) {
         if (angular.isArray(row) && row.length > 0) {
@@ -297,12 +304,25 @@
       }
     });
 
+    /**
+     * Select all rows from broadcast event.
+     *
+     * @param {Event}  evt         The broadcast event.
+     * @param {string} dataTableId The data table identifier.
+     */
     $scope.$on("lx-data-table__select-all", function(event, id) {
       if (id === lxDataTable.id) {
         _selectAll();
       }
     });
 
+    /**
+     * Unselect a given row from broadcast event.
+     *
+     * @param {Event}  evt         The broadcast event.
+     * @param {string} dataTableId The data table identifier.
+     * @param {Object} row         The row to unselect.
+     */
     $scope.$on("lx-data-table__unselect", function(event, id, row) {
       if (id === lxDataTable.id && angular.isDefined(row)) {
         if (angular.isArray(row) && row.length > 0) {
@@ -312,12 +332,25 @@
       }
     });
 
+    /**
+     * Unselect all rows from broadcast event.
+     *
+     * @param {Event}  evt         The broadcast event.
+     * @param {string} dataTableId The data table identifier.
+     */
     $scope.$on("lx-data-table__unselect-all", function(event, id) {
       if (id === lxDataTable.id) {
         _unselectAll();
       }
     });
 
+    /**
+     * Activate a given row from broadcast event.
+     *
+     * @param {Event}  evt         The broadcast event.
+     * @param {string} dataTableId The data table identifier.
+     * @param {Object} row         The row to activate.
+     */
     $scope.$on("lx-data-table__activate", function(event, id, row) {
       if (id === lxDataTable.id && angular.isDefined(row)) {
         if (angular.isArray(row) && row.length > 0) {
@@ -327,6 +360,13 @@
       }
     });
 
+    /**
+     * Deactivate a given row from broadcast event.
+     *
+     * @param {Event}  evt         The broadcast event.
+     * @param {string} dataTableId The data table identifier.
+     * @param {Object} row         The row to deactivate.
+     */
     $scope.$on("lx-data-table__deactivate", function(event, id, row) {
       if (id === lxDataTable.id && angular.isDefined(row)) {
         if (angular.isArray(row) && row.length > 0) {
