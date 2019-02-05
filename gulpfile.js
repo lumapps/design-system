@@ -34,17 +34,18 @@ gulp.task("default", function() {
 
   gulp.watch(
     [
-      "components/**/*.scss",
-      "core/scss/lumx.scss",
-      "layout/**/*.scss",
-      "scss/app.scss"
+      "src/components/**/*.scss",
+      "src/core/scss/**/*.scss",
+      "src/core/scss/lumx.scss",
+      "demo/layout/**/*.scss",
+      "demo/scss/app.scss"
     ],
     ["styles"]
   );
   gulp
-    .watch(["components/**/*.html", "demo/**/*.html", "layout/**/*.html"])
+    .watch(["src/components/**/*.html", "demo/components/**/*.html", "demo/layout/**/*.html"])
     .on("change", browserSync.reload);
   gulp
-    .watch(["components/**/*.js", "core/**/*.js", "demo/**/*.js"])
+    .watch(["src/components/**/*.js", "src/core/**/*.js", "demo/components/**/*.js"])
     .on("change", browserSync.reload);
 });
