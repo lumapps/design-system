@@ -35,5 +35,5 @@
 
     /////////////////////////////
 
-    angular.module('lumx').controller('DemoNotificationController', DemoNotificationController);
+    angular.module('design-system').controller('DemoNotificationController', DemoNotificationController);
 })();

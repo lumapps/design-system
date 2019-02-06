@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="design-system">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <base href="/" />
+        <title>Design System</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
+        <link rel="stylesheet" href="demo/scss/app.css" />
+    </head>
+    <body>
+        <div class="app">
+            <div class="main-nav"></div>
+            <div class="sub-nav" ui-view="sub-nav"></div>
+            <div class="main" ui-view="main"></div>
+        </div>
+
+        <!-- Libs -->
+        <script src="node_modules/jquery/dist/jquery.js"></script>
+        <script src="node_modules/focus-visible/dist/focus-visible.js"></script>
+
+        <!-- Icons -->
+        <script src="//code.iconify.design/1/1.0.0-rc5/iconify.min.js"></script>
+
+        <!-- Angular -->
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
+
+        <!-- Design System -->
+        <% for (key in htmlWebpackPlugin.files.chunks) { %>
+        <script
+            src="<%= htmlWebpackPlugin.files.chunks[key].entry %>"
+            type="text/javascript"
+            crossorigin="<%= webpackConfig.output.crossOriginLoading %>"
+        ></script>
+        <% } %>
+
+        <!-- App -->
+        <script src="demo/app.js"></script>
+
+        <!-- Demo -->
+        <script src="demo/components/lx-checkbox/controller.js"></script>
+        <script src="demo/components/lx-data-table/controller.js"></script>
+        <script src="demo/components/lx-dialog/controller.js"></script>
+        <script src="demo/components/lx-dropdown/controller.js"></script>
+        <script src="demo/components/lx-notification/controller.js"></script>
+        <script src="demo/components/lx-radio-button/controller.js"></script>
+        <script src="demo/components/lx-select/controller.js"></script>
+        <script src="demo/components/lx-switch/controller.js"></script>
+        <script src="demo/components/lx-tabs/controller.js"></script>
+        <script src="demo/components/lx-text-field/controller.js"></script>
+    </body>
+</html>

@@ -43,5 +43,5 @@
 
     /////////////////////////////
 
-    angular.module('lumx').controller('DemoDropdownController', DemoDropdownController);
+    angular.module('design-system').controller('DemoDropdownController', DemoDropdownController);
 })();
