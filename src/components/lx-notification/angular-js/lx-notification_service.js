@@ -1,3 +1,5 @@
+import '../style/lx-notification.scss';
+
 (function IIFE() {
     'use strict';
 
@@ -74,7 +76,9 @@
             var notificationIconWrapper = angular.element('<div/>', {
                 class: 'lx-notification__icon',
             });
-            var notificationIcon = $compile('<lx-icon lx-id="' + _notificationTypes[type].icon + '" lx-size="m"></lx-icon>')($rootScope);
+            var notificationIcon = $compile(
+                '<lx-icon lx-id="' + _notificationTypes[type].icon + '" lx-size="m"></lx-icon>',
+            )($rootScope);
 
             var notificationText = angular.element('<span/>', {
                 class: 'lx-notification__content',
@@ -83,9 +87,7 @@
 
             notificationIconWrapper.append(notificationIcon);
 
-            notification
-                .append(notificationIconWrapper)
-                .append(notificationText);
+            notification.append(notificationIconWrapper).append(notificationText);
 
             if (angular.isDefined(actionLabel)) {
                 notification.addClass('lx-notification--has-action');
@@ -93,7 +95,9 @@
                 var notificationActionWrapper = angular.element('<div/>', {
                     class: 'lx-notification__action',
                 });
-                var notificationAction = $compile('<lx-button lx-type="tertiary">' + actionLabel + '</lx-button>')($rootScope);
+                var notificationAction = $compile('<lx-button lx-type="tertiary">' + actionLabel + '</lx-button>')(
+                    $rootScope,
+                );
 
                 notificationAction.on('click', function onActionCuttonClick(evt) {
                     actionCallback();
@@ -101,9 +105,7 @@
                     evt.stopPropagation();
                 });
 
-                notificationActionWrapper
-                    .append(notificationAction)
-                    .appendTo(notification);
+                notificationActionWrapper.append(notificationAction).appendTo(notification);
             }
 
             var notificationHideTimeout;

@@ -1,3 +1,5 @@
+import '../style/lx-list.scss';
+
 (function IIFE() {
     'use strict';
 

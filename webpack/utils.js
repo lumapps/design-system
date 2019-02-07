@@ -1,4 +1,5 @@
 const path = require('path');
+const glob = require('glob');
 
 /**
  * Gives an absolute path by resolving the provided relative path.
@@ -6,7 +7,9 @@ const path = require('path');
  * @param  {string} pathName The relative path.
  * @return {string} The resolved absolute path.
  */
-const absolutePath = (pathName) => path.resolve(__dirname, pathName);
+function absolutePath(pathName) {
+    return path.resolve(__dirname, pathName);
+}
 
 /**
  * Setup Babel transpiler.
@@ -32,7 +35,22 @@ function babelSetup({ plugins = [], presets = [] } = {}) {
     };
 }
 
+/**
+ * Get all sass ressource files which contains ressources to share across all scss files.
+ *
+ * @return {Array} The array of ressource files.
+ */
+function getSassRessourcesFiles() {
+    const ressourceFileNames = ['_mixins', '_variables', '_color-palette', '_functions'];
+
+    // Sets the paths to match according to https://github.com/isaacs/minimatch documentation.
+    const pathToMatch = `${absolutePath('../src/core/style')}/**/+(${ressourceFileNames.join('|')}).scss`;
+
+    return glob.sync(pathToMatch);
+}
+
 module.exports = {
     absolutePath,
     babelSetup,
+    getSassRessourcesFiles,
 };

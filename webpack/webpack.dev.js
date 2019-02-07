@@ -2,10 +2,14 @@ const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const { absolutePath } = require('./utils');
-const webpackAngularJsConfig = require('./webpack.angular-js');
+const webpackBaseConfig = require('./webpack.config');
 
 const webpackDevConfig = {
     cache: true,
+
+    entry: {
+        'demo-site': absolutePath('../demo/app.js'),
+    },
 
     devServer: {
         compress: true,
@@ -14,6 +18,9 @@ const webpackDevConfig = {
         headers: {
             'Access-Control-Allow-Headers': '*',
             'Access-Control-Allow-Origin': '*',
+        },
+        historyApiFallback: {
+            index: '/',
         },
         host: '0.0.0.0',
         hot: true,
@@ -31,4 +38,4 @@ const webpackDevConfig = {
     ],
 };
 
-module.exports = merge(webpackAngularJsConfig, webpackDevConfig);
+module.exports = merge(webpackBaseConfig, webpackDevConfig);

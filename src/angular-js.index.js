@@ -1,4 +1,4 @@
-import './core/js/angular-js';
+import './core/angular-js';
 
 import './components/lx-button/angular-js/lx-button';
 import './components/lx-checkbox/angular-js/lx-checkbox';

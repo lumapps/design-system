@@ -5,3 +5,4 @@ app/libs/
 tmp
 .DS_Store
 .idea
+package-lock.json
