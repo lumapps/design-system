@@ -15,15 +15,15 @@
         vm.checkboxes = {
             model: {
                 checked: true,
-                unchecked: false
+                unchecked: false,
             },
             states: {
-                disabled: true
+                disabled: true,
             },
         };
     }
 
     /////////////////////////////
 
-    angular.module('lumx').controller('DemoCheckboxController', DemoCheckboxController);
+    angular.module('design-system').controller('DemoCheckboxController', DemoCheckboxController);
 })();

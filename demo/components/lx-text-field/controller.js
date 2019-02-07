@@ -21,5 +21,5 @@
 
     /////////////////////////////
 
-    angular.module('lumx').controller('DemoTextFieldController', DemoTextFieldController);
+    angular.module('design-system').controller('DemoTextFieldController', DemoTextFieldController);
 })();

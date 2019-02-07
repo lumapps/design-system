@@ -3,6 +3,9 @@
    ========================================================================== */
 
 @import "./mixins";
+@import "./../../lx-text-field/style/variables";
+@import "./../../lx-text-field/style/mixins";
+@import "./../../lx-list/style/mixins";
 
 .lx-select {
     $self: &;

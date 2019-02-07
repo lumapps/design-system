@@ -1,3 +1,5 @@
+import '../style/lx-tooltip.scss';
+
 (function IIFE() {
     'use strict';
 
@@ -71,17 +73,17 @@
             };
 
             if (angular.isUndefined(lxTooltip.position) || lxTooltip.position === 'top') {
-                tooltipProps.left = sourceProps.left - (tooltipProps.width / 2) + (sourceProps.width / 2);
-                tooltipProps.top = (sourceProps.top - tooltipProps.height) - _OFFSET_FROM_SOURCE;
+                tooltipProps.left = sourceProps.left - tooltipProps.width / 2 + sourceProps.width / 2;
+                tooltipProps.top = sourceProps.top - tooltipProps.height - _OFFSET_FROM_SOURCE;
             } else if (lxTooltip.position === 'bottom') {
-                tooltipProps.left = sourceProps.left - (tooltipProps.width / 2) + (sourceProps.width / 2);
-                tooltipProps.top = (sourceProps.top + sourceProps.height) + _OFFSET_FROM_SOURCE;
+                tooltipProps.left = sourceProps.left - tooltipProps.width / 2 + sourceProps.width / 2;
+                tooltipProps.top = sourceProps.top + sourceProps.height + _OFFSET_FROM_SOURCE;
             } else if (lxTooltip.position === 'left') {
-                tooltipProps.left = (sourceProps.left - tooltipProps.width) - _OFFSET_FROM_SOURCE;
-                tooltipProps.top = sourceProps.top + (sourceProps.height / 2) - (tooltipProps.height / 2);
+                tooltipProps.left = sourceProps.left - tooltipProps.width - _OFFSET_FROM_SOURCE;
+                tooltipProps.top = sourceProps.top + sourceProps.height / 2 - tooltipProps.height / 2;
             } else if (lxTooltip.position === 'right') {
-                tooltipProps.left = (sourceProps.left + sourceProps.width) + _OFFSET_FROM_SOURCE;
-                tooltipProps.top = sourceProps.top + (sourceProps.height / 2) - (tooltipProps.height  / 2);
+                tooltipProps.left = sourceProps.left + sourceProps.width + _OFFSET_FROM_SOURCE;
+                tooltipProps.top = sourceProps.top + sourceProps.height / 2 - tooltipProps.height / 2;
             }
 
             _tooltip

@@ -18,7 +18,7 @@
                 test2: 'lorem',
             },
             colors: {
-                test4: 'lorem'
+                test4: 'lorem',
             },
             states: {
                 test3: 'dolor',
@@ -28,5 +28,5 @@
 
     /////////////////////////////
 
-    angular.module('lumx').controller('DemoRadioButtonController', DemoRadioButtonController);
+    angular.module('design-system').controller('DemoRadioButtonController', DemoRadioButtonController);
 })();

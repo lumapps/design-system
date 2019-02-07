@@ -15,15 +15,15 @@
         vm.switches = {
             model: {
                 checked: true,
-                unchecked: false
+                unchecked: false,
             },
             states: {
-                disabled: true
+                disabled: true,
             },
         };
     }
 
     /////////////////////////////
 
-    angular.module('lumx').controller('DemoSwitchController', DemoSwitchController);
+    angular.module('design-system').controller('DemoSwitchController', DemoSwitchController);
 })();

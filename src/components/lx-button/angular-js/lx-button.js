@@ -1,3 +1,7 @@
+import '../style/lx-button.scss';
+
+/////////////////////////////
+
 (function IIFE() {
     'use strict';
 
@@ -7,11 +11,17 @@
 
     function lxButtonDirective(LxThemeConstant) {
         function getTemplate(el, attrs) {
-            var buttonType = angular.isDefined(attrs.lxType) ?  attrs.lxType : 'primary';
+            var buttonType = angular.isDefined(attrs.lxType) ? attrs.lxType : 'primary';
             var buttonColor = angular.isDefined(attrs.lxColor) ? attrs.lxColor : 'primary';
             var buttonSize = angular.isDefined(attrs.lxSize) ? attrs.lxSize : 'm';
             var buttonTheme = angular.isDefined(attrs.lxTheme) ? attrs.lxTheme : 'light';
-            var buttonClass = 'lx-button lx-button--type-' + buttonType + ' lx-button--size-' + buttonSize + ' lx-button--theme-' + buttonTheme;
+            var buttonClass =
+                'lx-button lx-button--type-' +
+                buttonType +
+                ' lx-button--size-' +
+                buttonSize +
+                ' lx-button--theme-' +
+                buttonTheme;
 
             if (LxThemeConstant.includes(buttonColor)) {
                 buttonClass += ' lx-button--color-' + buttonColor;
@@ -27,10 +37,12 @@
         }
 
         function isAnchor(attrs) {
-            return angular.isDefined(attrs.href) ||
+            return (
+                angular.isDefined(attrs.href) ||
                 angular.isDefined(attrs.ngHref) ||
                 angular.isDefined(attrs.ngLink) ||
-                angular.isDefined(attrs.uiSref);
+                angular.isDefined(attrs.uiSref)
+            );
         }
 
         function link(scope, el) {

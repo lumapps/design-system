@@ -65,3 +65,12 @@
 .lx-chip--theme-dark.lx-chip--is-disabled {
     @include lx-chip-state(disabled, light);
 }
+
+// Active state
+.lx-chip--theme-light.lx-chip--is-deletable:active {
+    @include lx-chip-state(active, dark);
+}
+
+.lx-chip--theme-dark.lx-chip--is-deletable:active {
+    @include lx-chip-state(active, light);
+}

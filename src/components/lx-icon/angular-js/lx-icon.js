@@ -1,3 +1,5 @@
+import '../style/lx-icon.scss';
+
 (function IIFE() {
     'use strict';
 
@@ -15,7 +17,13 @@
                 iconClass += ' lx-icon--size-' + attrs.lxSize;
             }
 
-            return '<i class="' + iconClass + '"><iconify-icon class="iconify" data-icon="mdi:' + attrs.lxId + '"></iconify-icon></i>';
+            return (
+                '<i class="' +
+                iconClass +
+                '"><iconify-icon class="iconify" data-icon="mdi:' +
+                attrs.lxId +
+                '"></iconify-icon></i>'
+            );
         }
 
         return {
