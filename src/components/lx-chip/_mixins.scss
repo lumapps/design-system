@@ -34,6 +34,10 @@
         cursor: pointer;
     }
 
+    @if $state == active {
+        background-color: lx-theme-color-variant($theme, L3);
+    }
+
     @else if $state == disabled {
         background-color: lx-theme-color-variant($theme, L6);
         color: lx-theme-color-variant($theme, L3);
