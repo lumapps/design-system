@@ -547,7 +547,7 @@ import '../style/lx-select.scss';
                 theme: '@?lxTheme',
                 valid: '=?lxValid',
             },
-            templateUrl: 'src/components/lx-select/angular-js/lx-select.html',
+            template: require('./lx-select.html'),
             transclude: {
                 choices: 'lxSelectChoices',
                 selected: 'lxSelectSelected',

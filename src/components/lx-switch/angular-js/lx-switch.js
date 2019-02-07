@@ -154,7 +154,7 @@ import '../style/lx-switch.scss';
             scope: {
                 theme: '@?lxTheme',
             },
-            templateUrl: 'src/components/lx-switch/angular-js/lx-switch.html',
+            template: require('./lx-switch.html'),
             transclude: {
                 help: '?lxSwitchHelp',
                 label: '?lxSwitchLabel',

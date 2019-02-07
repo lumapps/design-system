@@ -442,7 +442,7 @@ import '../style/lx-dropdown.scss';
                 position: '@?lxPosition',
                 width: '@?lxWidth',
             },
-            templateUrl: 'src/components/lx-dropdown/angular-js/lx-dropdown.html',
+            template: require('./lx-dropdown.html'),
             transclude: {
                 toggle: '?lxDropdownToggle',
                 menu: 'lxDropdownMenu',

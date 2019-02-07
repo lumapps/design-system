@@ -54,7 +54,7 @@ import '../style/lx-chip.scss';
                 isDisabled: '=?ngDisabled',
                 theme: '@?lxTheme',
             },
-            templateUrl: 'src/components/lx-chip/angular-js/lx-chip.html',
+            template: require('./lx-chip.html'),
             transclude: {
                 label: '?lxChipLabel',
                 primary: '?lxChipPrimary',

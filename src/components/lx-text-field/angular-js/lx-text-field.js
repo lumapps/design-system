@@ -50,7 +50,7 @@ import '../style/lx-text-field.scss';
                 theme: '@?lxTheme',
                 valid: '=?lxValid',
             },
-            templateUrl: 'src/components/lx-text-field/angular-js/lx-text-field.html',
+            template: require('./lx-text-field.html'),
             transclude: true,
         };
     }

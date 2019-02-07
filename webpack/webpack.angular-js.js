@@ -7,10 +7,25 @@ const webpackAngularJsConfig = {
     entry: {
         'angularjs.lumx': absolutePath('../src/angular-js.index.js'),
     },
+
     output: {
         crossOriginLoading: 'anonymous',
         filename: '[name].js',
         libraryTarget: 'umd',
+    },
+
+    module: {
+        rules: [
+            {
+                exclude: /index.html/,
+                test: /\.(html)$/,
+                use: [
+                    {
+                        loader: 'html-loader',
+                    },
+                ],
+            },
+        ],
     },
 };
 

@@ -121,7 +121,7 @@ import '../style/lx-tabs.scss';
                 position: '@?lxPosition',
                 theme: '@?lxTheme',
             },
-            templateUrl: 'src/components/lx-tabs/angular-js/lx-tabs.html',
+            template: require('./lx-tabs.html'),
             transclude: true,
         };
     }

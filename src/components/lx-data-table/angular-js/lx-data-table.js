@@ -366,7 +366,7 @@ import '../style/lx-data-table.scss';
                 thead: '=lxThead',
                 theme: '@?lxTheme',
             },
-            templateUrl: 'src/components/lx-data-table/angular-js/lx-data-table.html',
+            template: require('./lx-data-table.html'),
         };
     }
 

@@ -21,7 +21,7 @@ import '../style/lx-progress.scss';
             scope: {
                 type: '@?lxType',
             },
-            templateUrl: 'src/components/lx-progress/angular-js/lx-progress.html',
+            template: require('./lx-progress.html'),
             transclude: {
                 help: '?lxCheckboxHelp',
                 label: '?lxCheckboxLabel',

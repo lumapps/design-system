@@ -156,7 +156,7 @@ import '../style/lx-checkbox.scss';
             scope: {
                 theme: '@?lxTheme',
             },
-            templateUrl: 'src/components/lx-checkbox/angular-js/lx-checkbox.html',
+            template: require('./lx-checkbox.html'),
             transclude: {
                 help: '?lxCheckboxHelp',
                 label: '?lxCheckboxLabel',

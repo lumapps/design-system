@@ -265,7 +265,7 @@ import '../style/lx-dialog.scss';
                 autoClose: '=?lxAutoClose',
                 escapeClose: '=?lxEscapeClose',
             },
-            templateUrl: 'src/components/lx-dialog/angular-js/lx-dialog.html',
+            template: require('./lx-dialog.html'),
             transclude: {
                 content: 'lxDialogContent',
                 footer: '?lxDialogFooter',

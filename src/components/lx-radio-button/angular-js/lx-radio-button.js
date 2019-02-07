@@ -164,7 +164,7 @@ import '../style/lx-radio-button.scss';
             scope: {
                 theme: '@?lxTheme',
             },
-            templateUrl: 'src/components/lx-radio-button/angular-js/lx-radio-button.html',
+            template: require('./lx-radio-button.html'),
             transclude: {
                 help: '?lxRadioButtonHelp',
                 label: '?lxRadioButtonLabel',
