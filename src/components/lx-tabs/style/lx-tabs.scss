@@ -22,11 +22,11 @@
         @include lx-state-transitions;
 
         #{ $self }--theme-light & {
-            @include lx-state(tertiary, map-get($lx-state, default), dark);
+            @include lx-state(tertiary, state-default, dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-state(tertiary, map-get($lx-state, default), light);
+            @include lx-state(tertiary, state-default, light);
         }
     }
 }
@@ -67,44 +67,44 @@
 // Hover state
 .lx-tabs__link:hover {
     .lx-tabs--theme-light & {
-        @include lx-state(tertiary, map-get($lx-state, hover), dark);
+        @include lx-state(tertiary, state-hover, dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(tertiary, map-get($lx-state, hover), light);
+        @include lx-state(tertiary, state-hover, light);
     }
 }
 
 // Active state
 .lx-tabs__link:active {
     .lx-tabs--theme-light & {
-        @include lx-state(tertiary, map-get($lx-state, active), dark);
+        @include lx-state(tertiary, state-active, dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(tertiary, map-get($lx-state, active), light);
+        @include lx-state(tertiary, state-active, light);
     }
 }
 
 // Focus state
 .lx-tabs__link[data-focus-visible-added] {
     .lx-tabs--theme-light & {
-        @include lx-state(tertiary, map-get($lx-state, focus), dark);
+        @include lx-state(tertiary, state-focus, dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(tertiary, map-get($lx-state, focus), light);
+        @include lx-state(tertiary, state-focus, light);
     }
 }
 
 // Disabled state
 .lx-tabs__link--is-disabled {
     .lx-tabs--theme-light & {
-        @include lx-state(tertiary, map-get($lx-state, disabled), dark);
+        @include lx-state(tertiary, state-disabled, dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(tertiary, map-get($lx-state, disabled), light);
+        @include lx-state(tertiary, state-disabled, light);
     }
 }
 
