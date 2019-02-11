@@ -31,19 +31,19 @@
         }
 
         #{ $self }--theme-light#{ $self }--is-checked & {
-            @include lx-input-states(primary, map-get($lx-input-states, default), dark, primary);
+            @include lx-state(primary, map-get($lx-state, default), dark, primary);
         }
 
         #{ $self }--theme-dark#{ $self }--is-checked & {
-            @include lx-input-states(primary, map-get($lx-input-states, default), light, primary);
+            @include lx-state(primary, map-get($lx-state, default), light, primary);
         }
 
         #{ $self }--theme-light#{ $self }--is-unchecked & {
-            @include lx-input-states(secondary, map-get($lx-input-states, default), dark);
+            @include lx-state(secondary, map-get($lx-state, default), dark);
         }
 
         #{ $self }--theme-dark#{ $self }--is-unchecked & {
-            @include lx-input-states(secondary, map-get($lx-input-states, default), light);
+            @include lx-state(secondary, map-get($lx-state, default), light);
         }
     }
 
@@ -97,13 +97,13 @@
 .lx-switch--theme-light.lx-switch--is-disabled {
     .lx-switch__label,
     .lx-switch__help {
-        @include lx-input-states-disabled-text(dark);
+        @include lx-state-disabled-text(dark);
     }
 }
 
 .lx-switch--theme-light.lx-switch--is-unchecked.lx-switch--is-disabled {
     .lx-switch__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, disabled), dark);
+        @include lx-state(secondary, map-get($lx-state, disabled), dark);
     }
 
     .lx-switch__input-indicator {
@@ -113,20 +113,20 @@
 
 .lx-switch--theme-light.lx-switch--is-checked.lx-switch--is-disabled {
     .lx-switch__input-background {
-        @include lx-input-states(primary, map-get($lx-input-states, disabled), dark, primary);
+        @include lx-state(primary, map-get($lx-state, disabled), dark, primary);
     }
 }
 
 .lx-switch--theme-dark.lx-switch--is-disabled {
     .lx-switch__label,
     .lx-switch__help {
-        @include lx-input-states-disabled-text(light);
+        @include lx-state-disabled-text(light);
     }
 }
 
 .lx-switch--theme-dark.lx-switch--is-unchecked.lx-switch--is-disabled {
     .lx-switch__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, disabled), light);
+        @include lx-state(secondary, map-get($lx-state, disabled), light);
     }
 
     .lx-switch__input-indicator {
@@ -136,7 +136,7 @@
 
 .lx-switch--theme-dark.lx-switch--is-checked.lx-switch--is-disabled {
     .lx-switch__input-background {
-        @include lx-input-states(primary, map-get($lx-input-states, disabled), light, primary);
+        @include lx-state(primary, map-get($lx-state, disabled), light, primary);
     }
 }
 
@@ -147,66 +147,66 @@
 // Hover state
 .lx-switch--theme-light.lx-switch--is-unchecked .lx-switch__input-native:hover + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, hover), dark);
+        @include lx-state(secondary, map-get($lx-state, hover), dark);
     }
 }
 
 .lx-switch--theme-dark.lx-switch--is-unchecked .lx-switch__input-native:hover + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, hover), light);
+        @include lx-state(secondary, map-get($lx-state, hover), light);
     }
 }
 
 .lx-switch--theme-light.lx-switch--is-checked .lx-switch__input-native:hover + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-input-states(primary, map-get($lx-input-states, hover), dark, primary);
+        @include lx-state(primary, map-get($lx-state, hover), dark, primary);
     }
 }
 
 .lx-switch--theme-dark.lx-switch--is-checked .lx-switch__input-native:hover + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-input-states(primary, map-get($lx-input-states, hover), light, primary);
+        @include lx-state(primary, map-get($lx-state, hover), light, primary);
     }
 }
 
 // Focus state
 .lx-switch--theme-light.lx-switch--is-unchecked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
-    @include lx-input-states(secondary, map-get($lx-input-states, focus), dark);
+    @include lx-state(secondary, map-get($lx-state, focus), dark);
 }
 
 .lx-switch--theme-light.lx-switch--is-checked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
-    @include lx-input-states(primary, map-get($lx-input-states, focus), dark, primary);
+    @include lx-state(primary, map-get($lx-state, focus), dark, primary);
 }
 
 .lx-switch--theme-dark.lx-switch--is-unchecked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
-    @include lx-input-states(secondary, map-get($lx-input-states, focus), light);
+    @include lx-state(secondary, map-get($lx-state, focus), light);
 }
 
 .lx-switch--theme-dark.lx-switch--is-checked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
-    @include lx-input-states(primary, map-get($lx-input-states, focus), light, primary);
+    @include lx-state(primary, map-get($lx-state, focus), light, primary);
 }
 
 // Active state
 .lx-switch--theme-light.lx-switch--is-unchecked .lx-switch__input-native:active + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, active), dark);
+        @include lx-state(secondary, map-get($lx-state, active), dark);
     }
 }
 
 .lx-switch--theme-dark.lx-switch--is-unchecked .lx-switch__input-native:active + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, active), light);
+        @include lx-state(secondary, map-get($lx-state, active), light);
     }
 }
 
 .lx-switch--theme-light.lx-switch--is-checked .lx-switch__input-native:active + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-input-states(primary, map-get($lx-input-states, active), dark, primary);
+        @include lx-state(primary, map-get($lx-state, active), dark, primary);
     }
 }
 
 .lx-switch--theme-dark.lx-switch--is-checked .lx-switch__input-native:active + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-input-states(primary, map-get($lx-input-states, active), light, primary);
+        @include lx-state(primary, map-get($lx-state, active), light, primary);
     }
 }

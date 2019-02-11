@@ -92,31 +92,31 @@
 // Disabled state
 .lx-radio-button--theme-light.lx-radio-button--is-disabled {
     .lx-radio-button__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, disabled), dark);
+        @include lx-state(secondary, map-get($lx-state, disabled), dark);
     }
 
     .lx-radio-button__input-indicator {
-        @include lx-input-states(primary, map-get($lx-input-states, disabled), dark, primary);
+        @include lx-state(primary, map-get($lx-state, disabled), dark, primary);
     }
 
     .lx-radio-button__label,
     .lx-radio-button__help {
-        @include lx-input-states-disabled-text(dark);
+        @include lx-state-disabled-text(dark);
     }
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-disabled {
     .lx-radio-button__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, disabled), light);
+        @include lx-state(secondary, map-get($lx-state, disabled), light);
     }
 
     .lx-radio-button__input-indicator {
-        @include lx-input-states(primary, map-get($lx-input-states, disabled), light, primary);
+        @include lx-state(primary, map-get($lx-state, disabled), light, primary);
     }
 
     .lx-radio-button__label,
     .lx-radio-button__help {
-        @include lx-input-states-disabled-text(light);
+        @include lx-state-disabled-text(light);
     }
 }
 
@@ -127,42 +127,42 @@
 // Hover state
 .lx-radio-button--theme-light.lx-radio-button--is-unchecked .lx-radio-button__input-native:hover + .lx-radio-button__input-placeholder {
     .lx-radio-button__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, hover), dark);
+        @include lx-state(secondary, map-get($lx-state, hover), dark);
     }
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-unchecked .lx-radio-button__input-native:hover + .lx-radio-button__input-placeholder {
     .lx-radio-button__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, hover), light);
+        @include lx-state(secondary, map-get($lx-state, hover), light);
     }
 }
 
 // Focus state
 .lx-radio-button--theme-light.lx-radio-button--is-unchecked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
-    @include lx-input-states(secondary, map-get($lx-input-states, focus), dark);
+    @include lx-state(secondary, map-get($lx-state, focus), dark);
 }
 
 .lx-radio-button--theme-light.lx-radio-button--is-checked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
-    @include lx-input-states(primary, map-get($lx-input-states, focus), dark, primary);
+    @include lx-state(primary, map-get($lx-state, focus), dark, primary);
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-unchecked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
-    @include lx-input-states(secondary, map-get($lx-input-states, focus), light);
+    @include lx-state(secondary, map-get($lx-state, focus), light);
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-checked .lx-radio-button__input-native[data-focus-visible-added] + .lx-radio-button__input-placeholder {
-    @include lx-input-states(primary, map-get($lx-input-states, focus), light, primary);
+    @include lx-state(primary, map-get($lx-state, focus), light, primary);
 }
 
 // Active state
 .lx-radio-button--theme-light.lx-radio-button--is-unchecked .lx-radio-button__input-native:active + .lx-radio-button__input-placeholder {
     .lx-radio-button__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, active), dark);
+        @include lx-state(secondary, map-get($lx-state, active), dark);
     }
 }
 
 .lx-radio-button--theme-dark.lx-radio-button--is-unchecked .lx-radio-button__input-native:active + .lx-radio-button__input-placeholder {
     .lx-radio-button__input-background {
-        @include lx-input-states(secondary, map-get($lx-input-states, active), light);
+        @include lx-state(secondary, map-get($lx-state, active), light);
     }
 }

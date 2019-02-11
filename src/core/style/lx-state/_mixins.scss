@@ -1,6 +1,6 @@
 @import "./variables";
 
-@mixin lx-input-states-primary($state, $theme, $color) {
+@mixin lx-state-primary($state, $theme, $color) {
     @if $state == state-default {
         @if $theme == dark {
             background-color: lx-theme-color-variant($color, N);
@@ -57,7 +57,7 @@
     }
 }
 
-@mixin lx-input-states-tertiary($state, $theme) {
+@mixin lx-state-tertiary($state, $theme) {
     @if $state == state-default {
         background-color: transparent;
         color: lx-theme-color-variant($theme, N);
@@ -81,8 +81,8 @@
     }
 }
 
-@mixin lx-input-states-secondary($state, $theme) {
-    @include lx-input-states-tertiary($state, $theme);
+@mixin lx-state-secondary($state, $theme) {
+    @include lx-state-tertiary($state, $theme);
 
     @if $state == state-default {
         border-color: lx-theme-color-variant($theme, N);
@@ -93,42 +93,27 @@
     }
 }
 
-@mixin lx-input-states-disabled-text($theme) {
+@mixin lx-state-disabled-text($theme) {
     color: lx-theme-color-variant($theme, L3);
     pointer-events: none;
 }
 
-@mixin lx-input-states($type, $state, $theme, $color: null) {
+@mixin lx-state($type, $state, $theme, $color: null) {
     @if $type == primary {
-        @include lx-input-states-primary($state, $theme, $color);
+        @include lx-state-primary($state, $theme, $color);
     }
 
     @else if $type == secondary {
-        @include lx-input-states-secondary($state, $theme);
+        @include lx-state-secondary($state, $theme);
     }
 
     @else if $type == tertiary {
-        @include lx-input-states-tertiary($state, $theme);
+        @include lx-state-tertiary($state, $theme);
     }
 }
 
-@mixin lx-input-states-transitions() {
+@mixin lx-state-transitions() {
     transition:
-        background-color $lx-input-states-transition-duration,
-        color $lx-input-states-transition-duration;
-}
-
-@mixin lx-input-label($theme) {
-    @include lx-typography(body1);
-
-    display: block;
-    color: lx-theme-color-variant($theme, N);
-}
-
-@mixin lx-input-helper($theme) {
-    @include lx-typography(caption);
-
-    display: block;
-    margin-top: $lx-base-spacing-unit / 2;
-    color: lx-theme-color-variant($theme, L2);
+        background-color $lx-state-transition-duration,
+        color $lx-state-transition-duration;
 }

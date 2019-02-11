@@ -19,14 +19,14 @@
 
     &__link {
         @include lx-tabs-link;
-        @include lx-input-states-transitions;
+        @include lx-state-transitions;
 
         #{ $self }--theme-light & {
-            @include lx-input-states(tertiary, map-get($lx-input-states, default), dark);
+            @include lx-state(tertiary, map-get($lx-state, default), dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-input-states(tertiary, map-get($lx-input-states, default), light);
+            @include lx-state(tertiary, map-get($lx-state, default), light);
         }
     }
 }
@@ -67,44 +67,44 @@
 // Hover state
 .lx-tabs__link:hover {
     .lx-tabs--theme-light & {
-        @include lx-input-states(tertiary, map-get($lx-input-states, hover), dark);
+        @include lx-state(tertiary, map-get($lx-state, hover), dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-input-states(tertiary, map-get($lx-input-states, hover), light);
+        @include lx-state(tertiary, map-get($lx-state, hover), light);
     }
 }
 
 // Active state
 .lx-tabs__link:active {
     .lx-tabs--theme-light & {
-        @include lx-input-states(tertiary, map-get($lx-input-states, active), dark);
+        @include lx-state(tertiary, map-get($lx-state, active), dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-input-states(tertiary, map-get($lx-input-states, active), light);
+        @include lx-state(tertiary, map-get($lx-state, active), light);
     }
 }
 
 // Focus state
 .lx-tabs__link[data-focus-visible-added] {
     .lx-tabs--theme-light & {
-        @include lx-input-states(tertiary, map-get($lx-input-states, focus), dark);
+        @include lx-state(tertiary, map-get($lx-state, focus), dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-input-states(tertiary, map-get($lx-input-states, focus), light);
+        @include lx-state(tertiary, map-get($lx-state, focus), light);
     }
 }
 
 // Disabled state
 .lx-tabs__link--is-disabled {
     .lx-tabs--theme-light & {
-        @include lx-input-states(tertiary, map-get($lx-input-states, disabled), dark);
+        @include lx-state(tertiary, map-get($lx-state, disabled), dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-input-states(tertiary, map-get($lx-input-states, disabled), light);
+        @include lx-state(tertiary, map-get($lx-state, disabled), light);
     }
 }
 

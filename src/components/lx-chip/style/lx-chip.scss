@@ -33,7 +33,7 @@
 
 // Deletable
 .lx-chip--is-deletable {
-    @include lx-input-states-transitions;
+    @include lx-state-transitions;
 }
 
 /* Chip states

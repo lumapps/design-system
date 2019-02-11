@@ -1,0 +1,14 @@
+@mixin lx-input-label($theme) {
+    @include lx-typography(body1);
+
+    display: block;
+    color: lx-theme-color-variant($theme, N);
+}
+
+@mixin lx-input-helper($theme) {
+    @include lx-typography(caption);
+
+    display: block;
+    margin-top: $lx-base-spacing-unit / 2;
+    color: lx-theme-color-variant($theme, L2);
+}

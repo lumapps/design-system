@@ -32,8 +32,8 @@
 }
 
 @mixin lx-button-color($color, $type, $theme: dark) {
-    @include lx-input-states-transitions;
-    @include lx-input-states($type, map-get($lx-input-states, default), $theme, $color);
+    @include lx-state-transitions;
+    @include lx-state($type, map-get($lx-state, default), $theme, $color);
 
     @if $type == secondary {
         border-style: solid;
@@ -41,19 +41,19 @@
     }
 
     &:hover {
-        @include lx-input-states($type, map-get($lx-input-states, hover), $theme, $color);
+        @include lx-state($type, map-get($lx-state, hover), $theme, $color);
     }
 
     &:active {
-        @include lx-input-states($type, map-get($lx-input-states, active), $theme, $color);
+        @include lx-state($type, map-get($lx-state, active), $theme, $color);
     }
 
     &[data-focus-visible-added] {
-        @include lx-input-states($type, map-get($lx-input-states, focus), $theme, $color);
+        @include lx-state($type, map-get($lx-state, focus), $theme, $color);
     }
 
     &:disabled {
-        @include lx-input-states($type, map-get($lx-input-states, disabled), $theme, $color);
+        @include lx-state($type, map-get($lx-state, disabled), $theme, $color);
     }
 }
 
