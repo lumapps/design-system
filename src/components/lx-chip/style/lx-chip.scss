@@ -41,36 +41,36 @@
 
 // Hover state
 .lx-chip--theme-light.lx-chip--is-deletable:hover {
-    @include lx-chip-state(hover, dark);
+    @include lx-chip-state(state-hover, dark);
 }
 
 .lx-chip--theme-dark.lx-chip--is-deletable:hover {
-    @include lx-chip-state(hover, light);
+    @include lx-chip-state(state-hover, light);
 }
 
 // Active state
 .lx-chip--theme-light.lx-chip--is-deletable:active {
-    @include lx-chip-state(active, dark);
+    @include lx-chip-state(state-active, dark);
 }
 
 .lx-chip--theme-dark.lx-chip--is-deletable:active {
-    @include lx-chip-state(active, light);
+    @include lx-chip-state(state-active, light);
 }
 
 // Disabled state
 .lx-chip--theme-light.lx-chip--is-disabled {
-    @include lx-chip-state(disabled, dark);
+    @include lx-chip-state(state-disabled, dark);
 }
 
 .lx-chip--theme-dark.lx-chip--is-disabled {
-    @include lx-chip-state(disabled, light);
+    @include lx-chip-state(state-disabled, light);
 }
 
 // Active state
 .lx-chip--theme-light.lx-chip--is-deletable:active {
-    @include lx-chip-state(active, dark);
+    @include lx-chip-state(state-active, dark);
 }
 
 .lx-chip--theme-dark.lx-chip--is-deletable:active {
-    @include lx-chip-state(active, light);
+    @include lx-chip-state(state-active, light);
 }

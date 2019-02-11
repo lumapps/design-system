@@ -29,16 +29,16 @@
 }
 
 @mixin lx-chip-state($state, $theme) {
-    @if $state == hover {
+    @if $state == state-hover {
         background-color: lx-theme-color-variant($theme, L4);
         cursor: pointer;
     }
 
-    @if $state == active {
+    @if $state == state-active {
         background-color: lx-theme-color-variant($theme, L3);
     }
 
-    @else if $state == disabled {
+    @else if $state == state-disabled {
         background-color: lx-theme-color-variant($theme, L6);
         color: lx-theme-color-variant($theme, L3);
         pointer-events: none;

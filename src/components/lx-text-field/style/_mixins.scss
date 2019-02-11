@@ -67,11 +67,11 @@
 }
 
 @mixin lx-text-field-input-wrapper-state($state, $theme) {
-    @if $state == hover {
+    @if $state == state-hover {
         background-color: lx-theme-color-variant($theme, L5);
     }
 
-    @else if $state == focus {
+    @else if $state == state-focus {
         @if $theme == dark {
             background-color: lx-theme-color-variant(light, N) !important;
             box-shadow: inset 0 0 0 2px lx-theme-color-variant(primary, L2);
@@ -83,7 +83,7 @@
         }
     }
 
-    @else if $state == disabled {
+    @else if $state == state-disabled {
         background-color: transparent;
         box-shadow: inset 0 0 0 1px lx-theme-color-variant($theme, L4);
         pointer-events: none;

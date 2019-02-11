@@ -86,26 +86,26 @@
 // Hover state
 .lx-text-field--theme-light {
     .lx-text-field__input-wrapper:hover {
-        @include lx-text-field-input-wrapper-state(hover, dark);
+        @include lx-text-field-input-wrapper-state(state-hover, dark);
     }
 }
 
 .lx-text-field--theme-dark {
     .lx-text-field__input-wrapper:hover {
-        @include lx-text-field-input-wrapper-state(hover, light);
+        @include lx-text-field-input-wrapper-state(state-hover, light);
     }
 }
 
 // Focus state
 .lx-text-field--theme-light.lx-text-field--is-focus {
     .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(focus, dark);
+        @include lx-text-field-input-wrapper-state(state-focus, dark);
     }
 }
 
 .lx-text-field--theme-dark.lx-text-field--is-focus {
     .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(focus, light);
+        @include lx-text-field-input-wrapper-state(state-focus, light);
     }
 }
 
@@ -116,7 +116,7 @@
     }
 
     .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(disabled, dark);
+        @include lx-text-field-input-wrapper-state(state-disabled, dark);
     }
 
     .lx-text-field__input-icon {
@@ -142,7 +142,7 @@
     }
 
     .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(disabled, light);
+        @include lx-text-field-input-wrapper-state(state-disabled, light);
     }
 
     .lx-text-field__input-icon {

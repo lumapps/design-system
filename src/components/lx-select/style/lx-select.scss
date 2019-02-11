@@ -165,22 +165,22 @@
 
 // Hover state
 .lx-select--theme-light .lx-select__input-wrapper:hover {
-    @include lx-text-field-input-wrapper-state(hover, dark);
+    @include lx-text-field-input-wrapper-state(state-hover, dark);
 }
 
 .lx-select--theme-dark .lx-select__input-wrapper:hover {
-    @include lx-text-field-input-wrapper-state(hover, light);
+    @include lx-text-field-input-wrapper-state(state-hover, light);
 }
 
 // Focus state
 .lx-select--theme-light.lx-select--is-open .lx-select__input-wrapper,
 .lx-select--theme-light .lx-select__input-wrapper:focus {
-    @include lx-text-field-input-wrapper-state(focus, dark);
+    @include lx-text-field-input-wrapper-state(state-focus, dark);
 }
 
 .lx-select--theme-dark.lx-select--is-open .lx-select__input-wrapper,
 .lx-select--theme-dark .lx-select__input-wrapper:focus {
-    @include lx-text-field-input-wrapper-state(focus, light);
+    @include lx-text-field-input-wrapper-state(state-focus, light);
 }
 
 // Disabled state
@@ -190,7 +190,7 @@
     }
 
     .lx-select__input-wrapper {
-        @include lx-text-field-input-wrapper-state(disabled, dark);
+        @include lx-text-field-input-wrapper-state(state-disabled, dark);
     }
 
     .lx-select__input-native {
@@ -212,7 +212,7 @@
     }
 
     .lx-select__input-wrapper {
-        @include lx-text-field-input-wrapper-state(disabled, light);
+        @include lx-text-field-input-wrapper-state(state-disabled, light);
     }
 
     .lx-select__input-native {
