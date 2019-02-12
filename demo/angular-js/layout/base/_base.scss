@@ -1,35 +1,3 @@
 /* ==========================================================================
    Base
    ========================================================================== */
-
-h1 {
-    margin-bottom: $lx-base-spacing-unit * 3;
-    font-size: 30px;
-    font-weight: 600;
-}
-
-h2 {
-    @include lx-typography(title);
-
-    margin-bottom: $lx-base-spacing-unit * 1.5;
-}
-
-ul {
-    padding: 0;
-    margin-left: $lx-base-spacing-unit * 4;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-p,
-ul,
-table {
-    margin: 0 0 $lx-base-spacing-unit * 3 0;
-
-    &:last-child {
-        margin-bottom: 0;
-    }
-}
