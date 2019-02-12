@@ -11,12 +11,13 @@
     bottom: 0;
     left: 0;
     display: none;
+    animation: lx-dialog-filter-show $lx-dialog-transition-duration;
     background-color: rgba(0, 0, 0, 0.6);
-    opacity: 0;
+    opacity: 1;
     transition: opacity $lx-dialog-transition-duration;
 
-    &--is-shown {
-        opacity: 1;
+    &--is-hidden {
+        opacity: 0;
     }
 }
 
@@ -27,13 +28,13 @@
     display: none;
     width: 800px;
     height: calc(100% - 120px);
-    opacity: 0;
-    transform: translateX(-50%) translateY(-30px);
-    transition: opacity $lx-dialog-transition-duration, transform $lx-dialog-transition-duration;
+    animation: lx-dialog-show $lx-dialog-transition-duration;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity $lx-dialog-transition-duration;
 
-    &--is-shown {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
+    &--is-hidden {
+        opacity: 0;
     }
 
     &__wrapper {
@@ -55,5 +56,27 @@
         flex: 1;
         overflow-x: hidden;
         overflow-y: auto;
+    }
+}
+
+@keyframes lx-dialog-filter-show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes lx-dialog-show {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
     }
 }

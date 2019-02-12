@@ -144,8 +144,8 @@ import '../style/lx-dialog.scss';
 
             $rootScope.$broadcast('lx-dialog__close-start', lxDialog.id, canceled, params);
 
-            _dialog.removeClass('lx-dialog--is-shown');
-            _dialogFilter.removeClass('lx-dialog-filter--is-shown');
+            _dialog.addClass('lx-dialog--is-hidden');
+            _dialogFilter.addClass('lx-dialog-filter--is-hidden');
 
             $timeout(function onDialogCloseEnd() {
                 if (_isAlertDialog || _isConfirmDialog) {
@@ -155,6 +155,9 @@ import '../style/lx-dialog.scss';
                 }
 
                 _dialogFilter.remove();
+
+                _dialog.removeClass('lx-dialog--is-hidden');
+                _dialogFilter.removeClass('lx-dialog-filter--is-hidden');
 
                 lxDialog.isOpen = false;
 
@@ -211,9 +214,6 @@ import '../style/lx-dialog.scss';
                 $rootScope.$broadcast('lx-dialog__open-start', lxDialog.id, params);
 
                 lxDialog.isOpen = true;
-
-                _dialog.addClass('lx-dialog--is-shown');
-                _dialogFilter.addClass('lx-dialog-filter--is-shown');
 
                 $timeout(function onDialogContentDisplay() {
                     _dialogContent = _dialog.find('.lx-dialog__content');
