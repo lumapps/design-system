@@ -61,6 +61,20 @@ import '../style/lx-dialog.scss';
         var _idEventScheduler;
 
         /**
+         * Wether the dialog is an alert dialog or not.
+         *
+         * @type {boolean}
+         */
+        var _isAlertDialog = false;
+
+        /**
+         * Wether the dialog is a confirm dialog or not.
+         *
+         * @type {boolean}
+         */
+        var _isConfirmDialog = false;
+
+        /**
          * The dialog parent element.
          *
          * @type {Element}
@@ -134,7 +148,12 @@ import '../style/lx-dialog.scss';
             _dialogFilter.removeClass('lx-dialog-filter--is-shown');
 
             $timeout(function onDialogCloseEnd() {
-                _dialog.hide().appendTo(_parentElement);
+                if (_isAlertDialog || _isConfirmDialog) {
+                    _dialog.remove();
+                } else {
+                    _dialog.hide().appendTo(_parentElement);
+                }
+
                 _dialogFilter.remove();
 
                 lxDialog.isOpen = false;
@@ -223,6 +242,14 @@ import '../style/lx-dialog.scss';
         $scope.$on('lx-dialog__open', function(evt, dialogId, params) {
             if (dialogId === lxDialog.id) {
                 _open(params);
+
+                if (angular.isDefined(params) && angular.isDefined(params.isAlertDialog) && params.isAlertDialog) {
+                    _isAlertDialog = true;
+                }
+
+                if (angular.isDefined(params) && angular.isDefined(params.isConfirmDialog) && params.isConfirmDialog) {
+                    _isConfirmDialog = true;
+                }
             }
         });
 

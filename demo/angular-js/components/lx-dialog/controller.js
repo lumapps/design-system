@@ -3,9 +3,9 @@
 
     /////////////////////////////
 
-    DemoDialogController.$inject = ['$scope', 'LxDialogService'];
+    DemoDialogController.$inject = ['$scope', 'LxDialogService', 'LxNotificationService'];
 
-    function DemoDialogController($scope, LxDialogService) {
+    function DemoDialogController($scope, LxDialogService, LxNotificationService) {
         var vm = this;
 
         /////////////////////////////
@@ -73,6 +73,35 @@
             });
         }
 
+        function alertDialog() {
+            LxDialogService.alert(
+                'Lorem Ipsum',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna quis nisi sodales semper pharetra eu augue.',
+                'Ok',
+                function() {
+                    LxNotificationService.info('Alert callback');
+                },
+            );
+        }
+
+        function confirmDialog() {
+            LxDialogService.confirm(
+                'Lorem Ipsum',
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna quis nisi sodales semper pharetra eu augue.',
+                {
+                    cancel: 'Disagree',
+                    ok: 'Agree',
+                },
+                function(answer) {
+                    if (answer) {
+                        LxNotificationService.success('Agree');
+                    } else {
+                        LxNotificationService.error('Disagree');
+                    }
+                },
+            );
+        }
+
         function openDialog() {
             LxDialogService.open(vm.dialogId, {
                 customMessage: 'Hello World!',
@@ -82,6 +111,8 @@
         /////////////////////////////
 
         vm.addPerson = addPerson;
+        vm.alertDialog = alertDialog;
+        vm.confirmDialog = confirmDialog;
         vm.openDialog = openDialog;
 
         /////////////////////////////
