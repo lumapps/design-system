@@ -8,7 +8,7 @@ const webpackDevConfig = {
     cache: true,
 
     entry: {
-        'demo-site': absolutePath('../demo/app.js'),
+        'demo-site': absolutePath('../demo/angular-js/app.js'),
     },
 
     devServer: {
@@ -33,7 +33,7 @@ const webpackDevConfig = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'demo/index.html',
+            template: 'demo/angular-js/index.html',
         }),
     ],
 };
