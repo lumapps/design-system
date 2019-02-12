@@ -168,7 +168,10 @@ import '../style/lx-dialog.scss';
 
             LxDepthService.increase();
 
-            _dialogFilter.css('z-index', LxDepthService.get()).appendTo('body');
+            _dialogFilter
+                .css('z-index', LxDepthService.get())
+                .appendTo('body')
+                .show();
 
             if (angular.isUndefined(lxDialog.autoClose) || lxDialog.autoClose) {
                 _dialogFilter.on('click', function() {
