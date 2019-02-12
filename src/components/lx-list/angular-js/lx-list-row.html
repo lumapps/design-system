@@ -1,6 +1,9 @@
-<li class="lx-list-row"
-    ng-class="{ 'lx-list-row--is-clickable': lxListRow.isClickable }">
-    <div class="lx-list-row__content" ng-transclude ng-if="!lxListRow.hasPrimary && !lxListRow.hasContent && !lxListRow.hasSecondary"></div>
+<li class="lx-list-row" ng-class="{ 'lx-list-row--is-clickable': lxListRow.isClickable }">
+    <div
+        class="lx-list-row__content"
+        ng-transclude
+        ng-if="!lxListRow.hasPrimary && !lxListRow.hasContent && !lxListRow.hasSecondary"
+    ></div>
 
     <div class="lx-list-row__primary" ng-transclude="primary" ng-if="lxListRow.hasPrimary"></div>
     <div class="lx-list-row__content" ng-transclude="content" ng-if="lxListRow.hasContent"></div>

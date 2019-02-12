@@ -1,14 +1,18 @@
-<div class="lx-switch"
-     ng-class="{ 'lx-switch--is-checked': lxSwitch.viewValue,
-                 'lx-switch--is-unchecked': !lxSwitch.viewValue,
-                 'lx-switch--theme-light': !lxSwitch.theme || lxSwitch.theme === 'light',
-                 'lx-switch--theme-dark': lxSwitch.theme === 'dark' }">
+<div
+    class="lx-switch"
+    ng-class="{ 'lx-switch--is-checked': lxSwitch.viewValue,
+                'lx-switch--is-unchecked': !lxSwitch.viewValue,
+                'lx-switch--theme-light': !lxSwitch.theme || lxSwitch.theme === 'light',
+                'lx-switch--theme-dark': lxSwitch.theme === 'dark' }"
+>
     <div class="lx-switch__input-wrapper">
-        <input type="checkbox"
-               id="{{ lxSwitch.switchId }}"
-               class="lx-switch__input-native"
-               ng-checked="lxRadioButton.viewValue"
-               ng-click="lxSwitch.updateViewValue()">
+        <input
+            type="checkbox"
+            id="{{ lxSwitch.switchId }}"
+            class="lx-switch__input-native"
+            ng-checked="lxRadioButton.viewValue"
+            ng-click="lxSwitch.updateViewValue()"
+        />
 
         <div class="lx-switch__input-placeholder">
             <div class="lx-switch__input-background"></div>

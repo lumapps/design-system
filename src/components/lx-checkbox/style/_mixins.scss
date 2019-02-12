@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 @mixin lx-checkbox-input-wrapper() {
     position: relative;
@@ -43,9 +43,7 @@
 @mixin lx-checkbox-input-background-status($status) {
     @if $status == 'checked' {
         opacity: 0;
-    }
-
-    @else if $status == 'unchecked' {
+    } @else if $status == 'unchecked' {
         opacity: 1;
     }
 }
@@ -66,9 +64,7 @@
 @mixin lx-checkbox-input-indicator-status($status) {
     @if $status == 'checked' {
         opacity: 1;
-    }
-
-    @else if $status == 'unchecked' {
+    } @else if $status == 'unchecked' {
         opacity: 0;
     }
 }

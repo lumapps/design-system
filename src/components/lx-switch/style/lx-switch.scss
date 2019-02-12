@@ -2,7 +2,7 @@
    Switch
    ========================================================================== */
 
-@import "./mixins";
+@import './mixins';
 
 .lx-switch {
     $self: &;
@@ -170,18 +170,22 @@
 }
 
 // Focus state
+// prettier-ignore
 .lx-switch--theme-light.lx-switch--is-unchecked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
     @include lx-state(secondary, state-focus, dark);
 }
 
+// prettier-ignore
 .lx-switch--theme-light.lx-switch--is-checked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
     @include lx-state(primary, state-focus, dark, primary);
 }
 
+// prettier-ignore
 .lx-switch--theme-dark.lx-switch--is-unchecked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
     @include lx-state(secondary, state-focus, light);
 }
 
+// prettier-ignore
 .lx-switch--theme-dark.lx-switch--is-checked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
     @include lx-state(primary, state-focus, light, primary);
 }

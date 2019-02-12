@@ -1,13 +1,17 @@
-<div class="lx-dropdown"
-     ng-class="{ 'lx-dropdown--has-toggle': lxDropdown.hasToggle }">
-    <div class="lx-dropdown__toggle"
-         ng-click="lxDropdown.toggle()"
-         ng-mouseenter="lxDropdown.openOnMouseEnter()"
-         ng-mouseleave="lxDropdown.closeOnMouseLeave(false)"
-         ng-transclude="toggle"></div>
-    <div class="lx-dropdown__menu"
-         ng-mouseenter="lxDropdown.registerMouseEnterEvent()"
-         ng-mouseleave="lxDropdown.closeOnMouseLeave(true)">
+<div class="lx-dropdown" ng-class="{ 'lx-dropdown--has-toggle': lxDropdown.hasToggle }">
+    <div
+        class="lx-dropdown__toggle"
+        ng-click="lxDropdown.toggle()"
+        ng-mouseenter="lxDropdown.openOnMouseEnter()"
+        ng-mouseleave="lxDropdown.closeOnMouseLeave(false)"
+        ng-transclude="toggle"
+    ></div>
+
+    <div
+        class="lx-dropdown__menu"
+        ng-mouseenter="lxDropdown.registerMouseEnterEvent()"
+        ng-mouseleave="lxDropdown.closeOnMouseLeave(true)"
+    >
         <div class="lx-dropdown__content" ng-transclude="menu" ng-if="lxDropdown.isOpen"></div>
     </div>
 </div>

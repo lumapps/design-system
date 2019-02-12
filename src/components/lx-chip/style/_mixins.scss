@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 @mixin lx-chip($theme) {
     display: inline-flex;
@@ -36,9 +36,7 @@
 
     @if $state == state-active {
         background-color: lx-theme-color-variant($theme, L3);
-    }
-
-    @else if $state == state-disabled {
+    } @else if $state == state-disabled {
         background-color: lx-theme-color-variant($theme, L6);
         color: lx-theme-color-variant($theme, L3);
         pointer-events: none;

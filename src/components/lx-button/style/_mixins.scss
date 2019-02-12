@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 @mixin lx-button-base() {
     position: relative;
@@ -67,9 +67,7 @@
 
     @if $type == primary {
         line-height: map-get($lx-button-sizes, $size);
-    }
-
-    @else if $type == secondary {
+    } @else if $type == secondary {
         line-height: map-get($lx-button-sizes, $size) - 2;
     }
 }

@@ -1,4 +1,4 @@
-@import "./color-palette";
+@import './color-palette';
 
 $lx-theme-primary: $lx-theme-blue !default;
 $lx-theme-secondary: $lx-theme-yellow !default;
@@ -11,7 +11,7 @@ $lx-theme-color-palette: (
     blue: $lx-theme-blue,
     yellow: $lx-theme-yellow,
     red: $lx-theme-red,
-    green: $lx-theme-green
+    green: $lx-theme-green,
 );
 
 $lx-theme-color-variants: (N, L1, L2, L3, L4, L5, L6);

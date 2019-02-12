@@ -1,11 +1,9 @@
-@import "./variables";
+@import './variables';
 
 @mixin lx-elevation($elevation) {
     @if $elevation == 0 {
         box-shadow: none;
-    }
-
-    @else {
+    } @else {
         box-shadow: map-get($lx-elevation-shadows, $elevation) $lx-elevation-shadow-color;
     }
 }

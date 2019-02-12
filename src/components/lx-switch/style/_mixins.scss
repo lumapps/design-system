@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 @mixin lx-switch-input-wrapper() {
     position: relative;
@@ -56,14 +56,10 @@
 
         @if $theme == 'dark' {
             background-color: lx-theme-color-variant(light, N);
-        }
-
-        @else if $theme == 'light' {
+        } @else if $theme == 'light' {
             background-color: lx-theme-color-variant(primary, N);
         }
-    }
-
-    @else if $status == 'unchecked' {
+    } @else if $status == 'unchecked' {
         left: 4px;
         background-color: lx-theme-color-variant($theme, N);
     }

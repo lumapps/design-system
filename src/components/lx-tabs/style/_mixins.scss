@@ -6,13 +6,9 @@
 @mixin lx-tabs-links-position($position) {
     @if $position == left {
         justify-content: flex-start;
-    }
-
-    @else if $position == center {
+    } @else if $position == center {
         justify-content: center;
-    }
-
-    @else if $position == right {
+    } @else if $position == right {
         justify-content: flex-end;
     }
 }
@@ -56,9 +52,7 @@
         &::after {
             background-color: lx-theme-color-variant(primary, N);
         }
-    }
-
-    @else if $theme == light {
+    } @else if $theme == light {
         &::after {
             background-color: lx-theme-color-variant(light, N);
         }

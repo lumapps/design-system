@@ -46,7 +46,11 @@
                 for (var i = 0, length = scheduler.length; i < length; i++) {
                     var handler = scheduler[i];
 
-                    if (angular.isDefined(handler) && angular.isDefined(handler.callback) && angular.isFunction(handler.callback)) {
+                    if (
+                        angular.isDefined(handler) &&
+                        angular.isDefined(handler.callback) &&
+                        angular.isFunction(handler.callback)
+                    ) {
                         handler.callback(evt);
 
                         if (evt.isPropagationStopped()) {
@@ -72,7 +76,7 @@
         function register(eventName, callback) {
             var handler = {
                 eventName: eventName,
-                callback: callback
+                callback: callback,
             };
 
             var id = LxUtilsService.generateUUID();

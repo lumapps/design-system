@@ -2,7 +2,7 @@
    Button
    ========================================================================== */
 
-@import "./mixins";
+@import './mixins';
 
 .lx-button {
     @include lx-button-base;

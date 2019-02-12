@@ -1,14 +1,18 @@
-<div class="lx-checkbox"
-     ng-class="{ 'lx-checkbox--is-checked': lxCheckbox.viewValue,
-                 'lx-checkbox--is-unchecked': !lxCheckbox.viewValue,
-                 'lx-checkbox--theme-light': !lxCheckbox.theme || lxCheckbox.theme === 'light',
-                 'lx-checkbox--theme-dark': lxCheckbox.theme === 'dark' }">
+<div
+    class="lx-checkbox"
+    ng-class="{ 'lx-checkbox--is-checked': lxCheckbox.viewValue,
+                'lx-checkbox--is-unchecked': !lxCheckbox.viewValue,
+                'lx-checkbox--theme-light': !lxCheckbox.theme || lxCheckbox.theme === 'light',
+                'lx-checkbox--theme-dark': lxCheckbox.theme === 'dark' }"
+>
     <div class="lx-checkbox__input-wrapper">
-        <input type="checkbox"
-               id="{{ lxCheckbox.checkboxId }}"
-               class="lx-checkbox__input-native"
-               ng-checked="lxRadioButton.viewValue"
-               ng-click="lxCheckbox.updateViewValue()">
+        <input
+            type="checkbox"
+            id="{{ lxCheckbox.checkboxId }}"
+            class="lx-checkbox__input-native"
+            ng-checked="lxRadioButton.viewValue"
+            ng-click="lxCheckbox.updateViewValue()"
+        />
 
         <div class="lx-checkbox__input-placeholder">
             <div class="lx-checkbox__input-background"></div>

@@ -1,14 +1,18 @@
-<div class="lx-radio-button"
-     ng-class="{ 'lx-radio-button--is-checked': lxRadioButton.viewValue === lxRadioButton.radioButtonValue,
-                 'lx-radio-button--is-unchecked': lxRadioButton.viewValue !== lxRadioButton.radioButtonValue,
-                 'lx-radio-button--theme-light': !lxRadioButton.theme || lxRadioButton.theme === 'light',
-                 'lx-radio-button--theme-dark': lxRadioButton.theme === 'dark' }">
+<div
+    class="lx-radio-button"
+    ng-class="{ 'lx-radio-button--is-checked': lxRadioButton.viewValue === lxRadioButton.radioButtonValue,
+                'lx-radio-button--is-unchecked': lxRadioButton.viewValue !== lxRadioButton.radioButtonValue,
+                'lx-radio-button--theme-light': !lxRadioButton.theme || lxRadioButton.theme === 'light',
+                'lx-radio-button--theme-dark': lxRadioButton.theme === 'dark' }"
+>
     <div class="lx-radio-button__input-wrapper">
-        <input type="radio"
-               id="{{ lxRadioButton.radioButtonId }}"
-               class="lx-radio-button__input-native"
-               ng-checked="lxRadioButton.viewValue === lxRadioButton.radioButtonValue"
-               ng-click="lxRadioButton.updateViewValue()">
+        <input
+            type="radio"
+            id="{{ lxRadioButton.radioButtonId }}"
+            class="lx-radio-button__input-native"
+            ng-checked="lxRadioButton.viewValue === lxRadioButton.radioButtonValue"
+            ng-click="lxRadioButton.updateViewValue()"
+        />
 
         <div class="lx-radio-button__input-placeholder">
             <div class="lx-radio-button__input-background"></div>
@@ -16,7 +20,10 @@
         </div>
     </div>
 
-    <div class="lx-radio-button__content" ng-if="!lxRadioButton.hasLabel && !lxRadioButton.hasHelp && lxRadioButton.hasTranscluded">
+    <div
+        class="lx-radio-button__content"
+        ng-if="!lxRadioButton.hasLabel && !lxRadioButton.hasHelp && lxRadioButton.hasTranscluded"
+    >
         <label for="{{ lxRadioButton.radioButtonId }}" class="lx-radio-button__label" ng-transclude></label>
     </div>
 

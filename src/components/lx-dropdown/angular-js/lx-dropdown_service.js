@@ -34,7 +34,7 @@
          */
         function close(uuid) {
             $rootScope.$broadcast('lx-dropdown__close', {
-                uuid: uuid
+                uuid: uuid,
             });
         }
 
@@ -44,7 +44,7 @@
         function closeActiveDropdown() {
             if (angular.isDefined(_activeDropdownUuid) && _activeDropdownUuid.length > 0) {
                 $rootScope.$broadcast('lx-dropdown__close', {
-                    uuid: _activeDropdownUuid
+                    uuid: _activeDropdownUuid,
                 });
             }
         }
@@ -58,7 +58,7 @@
         function open(uuid, target) {
             $rootScope.$broadcast('lx-dropdown__open', {
                 uuid: uuid,
-                target: target
+                target: target,
             });
         }
 

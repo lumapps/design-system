@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 @mixin lx-text-field-input-wrapper($theme, $has-indicator: false, $is-multiple: false) {
     position: relative;
@@ -13,9 +13,7 @@
     @if $is-multiple {
         min-height: $lx-text-field-height;
         padding: 3px;
-    }
-
-    @else {
+    } @else {
         height: $lx-text-field-height;
         padding: 0 $lx-text-field-horizontal-padding;
     }
@@ -50,14 +48,10 @@
     @if $theme == dark {
         @if $validity == valid {
             color: lx-theme-color-variant(green, N);
-        }
-
-        @else if $validity == error {
+        } @else if $validity == error {
             color: lx-theme-color-variant(red, N);
         }
-    }
-
-    @else if $theme == light {
+    } @else if $theme == light {
         color: lx-theme-color-variant(light, N);
     }
 }
@@ -69,21 +63,15 @@
 @mixin lx-text-field-input-wrapper-state($state, $theme) {
     @if $state == state-hover {
         background-color: lx-theme-color-variant($theme, L5);
-    }
-
-    @else if $state == state-focus {
+    } @else if $state == state-focus {
         @if $theme == dark {
             background-color: lx-theme-color-variant(light, N) !important;
             box-shadow: inset 0 0 0 2px lx-theme-color-variant(primary, L2);
-        }
-
-        @else if $theme == light {
+        } @else if $theme == light {
             background-color: transparent !important;
             box-shadow: inset 0 0 0 2px lx-theme-color-variant(light, L2);
         }
-    }
-
-    @else if $state == state-disabled {
+    } @else if $state == state-disabled {
         background-color: transparent;
         box-shadow: inset 0 0 0 1px lx-theme-color-variant($theme, L4);
         pointer-events: none;
@@ -94,14 +82,10 @@
     @if $theme == dark {
         @if $validity == valid {
             box-shadow: inset 0 0 0 2px lx-theme-color-variant(green, N);
-        }
-
-        @else if $validity == error {
+        } @else if $validity == error {
             box-shadow: inset 0 0 0 2px lx-theme-color-variant(red, N);
         }
-    }
-
-    @else if $theme == light {
+    } @else if $theme == light {
         box-shadow: inset 0 0 0 2px lx-theme-color-variant(light, N);
     }
 }

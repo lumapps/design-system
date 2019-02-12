@@ -2,8 +2,8 @@
    Typography
    ========================================================================== */
 
-@import "./variables";
-@import "./mixins";
+@import './variables';
+@import './mixins';
 
 @each $style in $lx-typography-styles {
     .lx-typography-#{$style} {

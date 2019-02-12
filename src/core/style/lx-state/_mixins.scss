@@ -1,57 +1,39 @@
-@import "./variables";
+@import './variables';
 
 @mixin lx-state-primary($state, $theme, $color) {
     @if $state == state-default {
         @if $theme == dark {
             background-color: lx-theme-color-variant($color, N);
             color: lx-theme-best-color(lx-theme-color-variant($color, N));
-        }
-
-        @else if $theme == light {
+        } @else if $theme == light {
             background-color: lx-theme-color-variant($theme, N);
             color: lx-theme-color-variant($color, N);
         }
-    }
-
-    @else if $state == state-hover {
+    } @else if $state == state-hover {
         @if $theme == dark {
             background-color: lx-theme-color-variant($color, D1);
-        }
-
-        @else if $theme == light {
+        } @else if $theme == light {
             background-color: lx-theme-color-variant($theme, L1);
         }
-    }
-
-    @else if $state == state-active {
+    } @else if $state == state-active {
         @if $theme == dark {
             background-color: lx-theme-color-variant($color, D2);
-        }
-
-        @else if $theme == light {
+        } @else if $theme == light {
             background-color: lx-theme-color-variant($theme, L2);
         }
-    }
-
-    @else if $state == state-focus {
+    } @else if $state == state-focus {
         @if $theme == dark {
             box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
-        }
-
-        @else if $theme == light {
+        } @else if $theme == light {
             box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
         }
-    }
-
-    @else if $state == state-disabled {
+    } @else if $state == state-disabled {
         color: lx-theme-best-color(lx-theme-color-variant($color, L3));
         pointer-events: none;
 
         @if $theme == dark {
             background-color: lx-theme-color-variant($color, L3);
-        }
-
-        @else if $theme == light {
+        } @else if $theme == light {
             background-color: lx-theme-color-variant($theme, L3);
         }
     }
@@ -61,21 +43,13 @@
     @if $state == state-default {
         background-color: transparent;
         color: lx-theme-color-variant($theme, N);
-    }
-
-    @else if $state == state-hover {
+    } @else if $state == state-hover {
         background-color: lx-theme-color-variant($theme, L6);
-    }
-
-    @else if $state == state-active {
+    } @else if $state == state-active {
         background-color: lx-theme-color-variant($theme, L5);
-    }
-
-    @else if $state == state-focus {
+    } @else if $state == state-focus {
         box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
-    }
-
-    @else if $state == state-disabled {
+    } @else if $state == state-disabled {
         color: lx-theme-color-variant($theme, L3);
         pointer-events: none;
     }
@@ -86,9 +60,7 @@
 
     @if $state == state-default {
         border-color: lx-theme-color-variant($theme, N);
-    }
-
-    @else if $state == state-disabled {
+    } @else if $state == state-disabled {
         border-color: lx-theme-color-variant($theme, L3);
     }
 }
@@ -101,19 +73,13 @@
 @mixin lx-state($type, $state, $theme, $color: null) {
     @if $type == primary {
         @include lx-state-primary($state, $theme, $color);
-    }
-
-    @else if $type == secondary {
+    } @else if $type == secondary {
         @include lx-state-secondary($state, $theme);
-    }
-
-    @else if $type == tertiary {
+    } @else if $type == tertiary {
         @include lx-state-tertiary($state, $theme);
     }
 }
 
 @mixin lx-state-transitions() {
-    transition:
-        background-color $lx-state-transition-duration,
-        color $lx-state-transition-duration;
+    transition: background-color $lx-state-transition-duration, color $lx-state-transition-duration;
 }

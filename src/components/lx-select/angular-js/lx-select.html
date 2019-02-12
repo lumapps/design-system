@@ -1,29 +1,41 @@
-<div class="lx-select"
-     ng-class="{ 'lx-select--is-empty': lxSelect.isModelEmpty(),
-                 'lx-select--unique': !lxSelect.multiple,
-                 'lx-select--has-unique': !lxSelect.isModelEmpty() && !lxSelect.multiple,
-                 'lx-select--multiple': lxSelect.multiple,
-                 'lx-select--has-multiple': !lxSelect.isModelEmpty() && lxSelect.multiple,
-                 'lx-select--is-open': lxSelect.isOpen,
-                 'lx-select--theme-light': !lxSelect.theme || lxSelect.theme === 'light',
-                 'lx-select--theme-dark': lxSelect.theme === 'dark',
-                 'lx-select--has-label': lxSelect.label,
-                 'lx-select--is-disabled': lxSelect.isDisabled,
-                 'lx-select--valid': lxSelect.valid,
-                 'lx-select--error': lxSelect.error }">
+<div
+    class="lx-select"
+    ng-class="{ 'lx-select--is-empty': lxSelect.isModelEmpty(),
+                'lx-select--unique': !lxSelect.multiple,
+                'lx-select--has-unique': !lxSelect.isModelEmpty() && !lxSelect.multiple,
+                'lx-select--multiple': lxSelect.multiple,
+                'lx-select--has-multiple': !lxSelect.isModelEmpty() && lxSelect.multiple,
+                'lx-select--is-open': lxSelect.isOpen,
+                'lx-select--theme-light': !lxSelect.theme || lxSelect.theme === 'light',
+                'lx-select--theme-dark': lxSelect.theme === 'dark',
+                'lx-select--has-label': lxSelect.label,
+                'lx-select--is-disabled': lxSelect.isDisabled,
+                'lx-select--valid': lxSelect.valid,
+                'lx-select--error': lxSelect.error }"
+>
     <span class="lx-select__label" ng-if="lxSelect.label">
         {{ lxSelect.label }}
     </span>
 
-    <div class="lx-select__input-wrapper" id="{{ lxSelect.targetUuid }}" tabindex="0"
-         ng-click="lxSelect.openDropdown()"
-         ng-focus="lxSelect.enableKeyEvents()"
-         ng-blur="lxSelect.disableKeyEvents()">
-        <div class="lx-select__input-native lx-select__input-native--placeholder" ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple">
+    <div
+        class="lx-select__input-wrapper"
+        id="{{ lxSelect.targetUuid }}"
+        tabindex="0"
+        ng-click="lxSelect.openDropdown()"
+        ng-focus="lxSelect.enableKeyEvents()"
+        ng-blur="lxSelect.disableKeyEvents()"
+    >
+        <div
+            class="lx-select__input-native lx-select__input-native--placeholder"
+            ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple"
+        >
             <span>Select a value</span>
         </div>
 
-        <div class="lx-select__input-native lx-select__input-native--placeholder" ng-if="lxSelect.isModelEmpty() && lxSelect.multiple">
+        <div
+            class="lx-select__input-native lx-select__input-native--placeholder"
+            ng-if="lxSelect.isModelEmpty() && lxSelect.multiple"
+        >
             <span>Select values</span>
         </div>
 
@@ -32,11 +44,17 @@
         </div>
 
         <div class="lx-select__input-chips">
-            <div class="lx-select__input-chip"
-                 ng-repeat="selected in lxSelect.viewValue"
-                 ng-click="lxSelect.select(selected, $event)"
-                 ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple">
-                <lx-chip lx-theme="{{ (lxSelect.theme === 'dark') ? 'dark' : 'light' }}" lx-is-deletable="true" ng-disabled="lxSelect.isDisabled">
+            <div
+                class="lx-select__input-chip"
+                ng-repeat="selected in lxSelect.viewValue"
+                ng-click="lxSelect.select(selected, $event)"
+                ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple"
+            >
+                <lx-chip
+                    lx-theme="{{ lxSelect.theme === 'dark' ? 'dark' : 'light' }}"
+                    lx-is-deletable="true"
+                    ng-disabled="lxSelect.isDisabled"
+                >
                     <div ng-bind-html="lxSelect.displaySelected(selected)"></div>
                 </lx-chip>
             </div>
@@ -46,9 +64,11 @@
             <lx-icon lx-id="{{ lxSelect.valid ? 'check-circle' : 'alert-circle' }}" lx-size="s"></lx-icon>
         </div>
 
-        <div class="lx-select__input-clear"
-             ng-if="lxSelect.allowClear && !lxSelect.multiple && !lxSelect.isModelEmpty()"
-             ng-click="lxSelect.clearModel($event)">
+        <div
+            class="lx-select__input-clear"
+            ng-if="lxSelect.allowClear && !lxSelect.multiple && !lxSelect.isModelEmpty()"
+            ng-click="lxSelect.clearModel($event)"
+        >
             <lx-icon lx-id="close-circle" lx-size="s"></lx-icon>
         </div>
 
@@ -62,11 +82,14 @@
             <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
                 <lx-icon lx-id="search" lx-size="s"></lx-icon>
 
-                <input type="text" placeholder="Search"
-                       ng-model="lxSelect.filterModel"
-                       ng-model-options="{ debounce: 500 }"
-                       ng-change="lxSelect.updateFilter()"
-                       lx-select-filter>
+                <input
+                    type="text"
+                    placeholder="Search"
+                    ng-model="lxSelect.filterModel"
+                    ng-model-options="{ debounce: 500 }"
+                    ng-change="lxSelect.updateFilter()"
+                    lx-select-filter
+                />
             </div>
 
             <div class="lx-select__loader" ng-if="lxSelect.loading">
@@ -74,12 +97,14 @@
             </div>
 
             <ul class="lx-select__choices" ng-if="!lxSelect.loading">
-                <li class="lx-select__choice"
+                <li
+                    class="lx-select__choice"
                     ng-class="{ 'lx-select__choice--is-focus': lxSelect.activeChoiceIndex === $index,
                                 'lx-select__choice--is-active': lxSelect.isSelected(choice) }"
                     ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
                     ng-click="lxSelect.select(choice, $event)"
-                    ng-mouseover="lxSelect.activeChoiceIndex = $index">
+                    ng-mouseover="lxSelect.activeChoiceIndex = $index"
+                >
                     <div class="lx-select__choice-check" ng-if="lxSelect.multiple">
                         <lx-checkbox ng-checked="lxSelect.isSelected(choice)"></lx-checkbox>
                     </div>
@@ -88,7 +113,9 @@
                 </li>
             </ul>
 
-            <span class="lx-select__helper" ng-if="lxSelect.displayHelper && !lxSelect.loading">{{ lxSelect.helper }}</span>
+            <span class="lx-select__helper" ng-if="lxSelect.displayHelper && !lxSelect.loading">
+                {{ lxSelect.helper }}
+            </span>
         </lx-dropdown-menu>
     </lx-dropdown>
 </div>

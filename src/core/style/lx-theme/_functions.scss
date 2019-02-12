@@ -1,4 +1,4 @@
-@import "./variables";
+@import './variables';
 
 @function lx-theme-color-variant($color, $variant) {
     @return map-get(map-get($lx-theme-color-palette, $color), $variant);
@@ -10,9 +10,7 @@
 
     @if abs($color-brightness) < ($light-color/2) {
         @return nth($colors, 1);
-    }
-
-    @else {
+    } @else {
         @return nth($colors, 2);
     }
 }

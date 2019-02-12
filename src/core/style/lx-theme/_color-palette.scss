@@ -1,5 +1,5 @@
 $lx-theme-dark: (
-    N: #28336d
+    N: #28336d,
 );
 
 $lx-theme-dark: map-merge(
@@ -10,12 +10,12 @@ $lx-theme-dark: map-merge(
         L3: rgba(map-get($lx-theme-dark, N), 0.4),
         L4: rgba(map-get($lx-theme-dark, N), 0.2),
         L5: rgba(map-get($lx-theme-dark, N), 0.1),
-        L6: rgba(map-get($lx-theme-dark, N), 0.05)
+        L6: rgba(map-get($lx-theme-dark, N), 0.05),
     )
 );
 
 $lx-theme-light: (
-    N: #fff
+    N: #fff,
 );
 
 $lx-theme-light: map-merge(
@@ -26,14 +26,14 @@ $lx-theme-light: map-merge(
         L3: rgba(map-get($lx-theme-light, N), 0.6),
         L4: rgba(map-get($lx-theme-light, N), 0.4),
         L5: rgba(map-get($lx-theme-light, N), 0.2),
-        L6: rgba(map-get($lx-theme-light, N), 0.1)
+        L6: rgba(map-get($lx-theme-light, N), 0.1),
     )
 );
 
 $lx-theme-blue: (
     D2: #2972e2,
     D1: #2885f6,
-    N: #2493ff
+    N: #2493ff,
 );
 
 $lx-theme-blue: map-merge(
@@ -44,14 +44,14 @@ $lx-theme-blue: map-merge(
         L3: rgba(map-get($lx-theme-blue, N), 0.4),
         L4: rgba(map-get($lx-theme-blue, N), 0.2),
         L5: rgba(map-get($lx-theme-blue, N), 0.1),
-        L6: rgba(map-get($lx-theme-blue, N), 0.05)
+        L6: rgba(map-get($lx-theme-blue, N), 0.05),
     )
 );
 
 $lx-theme-yellow: (
     D2: #fea41c,
     D1: #ffb71f,
-    N: #ffc525
+    N: #ffc525,
 );
 
 $lx-theme-yellow: map-merge(
@@ -62,14 +62,14 @@ $lx-theme-yellow: map-merge(
         L3: rgba(map-get($lx-theme-yellow, N), 0.4),
         L4: rgba(map-get($lx-theme-yellow, N), 0.2),
         L5: rgba(map-get($lx-theme-yellow, N), 0.1),
-        L6: rgba(map-get($lx-theme-yellow, N), 0.05)
+        L6: rgba(map-get($lx-theme-yellow, N), 0.05),
     )
 );
 
 $lx-theme-red: (
     D2: #c2395a,
     D1: #d83e5e,
-    N: #e94361
+    N: #e94361,
 );
 
 $lx-theme-red: map-merge(
@@ -80,14 +80,14 @@ $lx-theme-red: map-merge(
         L3: rgba(map-get($lx-theme-red, N), 0.4),
         L4: rgba(map-get($lx-theme-red, N), 0.2),
         L5: rgba(map-get($lx-theme-red, N), 0.1),
-        L6: rgba(map-get($lx-theme-red, N), 0.05)
+        L6: rgba(map-get($lx-theme-red, N), 0.05),
     )
 );
 
 $lx-theme-green: (
     D2: #008f4e,
     D1: #0fa15a,
-    N: #19b065
+    N: #19b065,
 );
 
 $lx-theme-green: map-merge(
@@ -98,6 +98,6 @@ $lx-theme-green: map-merge(
         L3: rgba(map-get($lx-theme-green, N), 0.4),
         L4: rgba(map-get($lx-theme-green, N), 0.2),
         L5: rgba(map-get($lx-theme-green, N), 0.1),
-        L6: rgba(map-get($lx-theme-green, N), 0.05)
+        L6: rgba(map-get($lx-theme-green, N), 0.05),
     )
 );
