@@ -6,3 +6,4 @@ tmp
 .DS_Store
 .idea
 package-lock.json
+.vscode/settings.json
