@@ -1,49 +1,59 @@
-(function IIFE() {
-    'use strict';
+function LxUtilsService() {
+    const service = this;
 
     /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
-    function LxUtilsService() {
-        var service = this;
+    /**
+     * Disable body scroll.
+     */
+    function disableBodyScroll() {
+        angular.element('body').css({
+            overflow: 'hidden',
+        });
+    }
 
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
+    /**
+     * Restore body scroll.
+     */
+    function restoreBodyScroll() {
+        angular.element('body').css({
+            overflow: 'visible',
+        });
+    }
 
-        function disableBodyScroll() {
-            angular.element('body').css({
-                overflow: 'hidden',
-            });
-        }
+    /**
+     * Generate a unique identifier.
+     *
+     * @return {string} A unique identifier.
+     */
+    function generateUUID() {
+        /* eslint-disable no-bitwise, no-magic-numbers */
+        let time = new Date().getTime();
 
-        function restoreBodyScroll() {
-            angular.element('body').css({
-                overflow: 'visible',
-            });
-        }
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (char) => {
+            const random = (time + Math.random() * 16) % 16 | 0;
+            time = Math.floor(time / 16);
 
-        function generateUUID() {
-            var d = new Date().getTime();
-
-            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = (d + Math.random() * 16) % 16 | 0;
-                d = Math.floor(d / 16);
-                return (c == 'x' ? r : (r & 0x3) | 0x8).toString(16);
-            });
-
-            return uuid.toUpperCase();
-        }
-
-        /////////////////////////////
-
-        service.disableBodyScroll = disableBodyScroll;
-        service.restoreBodyScroll = restoreBodyScroll;
-        service.generateUUID = generateUUID;
+            return (char === 'x' ? random : (random & 0x3) | 0x8).toString(16);
+        });
+        /* eslint-enable no-bitwise, no-magic-numbers */
     }
 
     /////////////////////////////
 
-    angular.module('lumx.utils.utils').service('LxUtilsService', LxUtilsService);
-})();
+    service.disableBodyScroll = disableBodyScroll;
+    service.restoreBodyScroll = restoreBodyScroll;
+    service.generateUUID = generateUUID;
+}
+
+/////////////////////////////
+
+angular.module('lumx.utils.utils').service('LxUtilsService', LxUtilsService);
+
+/////////////////////////////
+
+export { LxUtilsService };

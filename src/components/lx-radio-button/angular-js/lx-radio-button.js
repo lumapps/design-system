@@ -1,178 +1,177 @@
 import '../style/lx-radio-button.scss';
 
-(function IIFE() {
-    'use strict';
+/////////////////////////////
+
+function lxRadioButtonController(LxUtilsService) {
+    // eslint-disable-next-line consistent-this
+    const lxRadioButton = this;
 
     /////////////////////////////
-
-    lxRadioButtonControler.$inject = ['$element', 'LxUtilsService'];
-
-    function lxRadioButtonControler($element, LxUtilsService) {
-        var lxRadioButton = this;
-
-        /////////////////////////////
-        //                         //
-        //    Private attributes   //
-        //                         //
-        /////////////////////////////
-
-        /**
-         * The model controller.
-         *
-         * @type {Object}
-         */
-        var _modelController;
-
-        /////////////////////////////
-        //                         //
-        //    Public attributes    //
-        //                         //
-        /////////////////////////////
-
-        /**
-         * The radio button id.
-         *
-         * @type {string}
-         */
-        lxRadioButton.radioButtonId = LxUtilsService.generateUUID();
-
-        /**
-         * Wether the directive has help slot filled or not.
-         *
-         * @type {boolean}
-         */
-        lxRadioButton.hasHelp = false;
-
-        /**
-         * Wether the directive has label slot filled or not.
-         *
-         * @type {boolean}
-         */
-        lxRadioButton.hasLabel = false;
-
-        /**
-         * Wether the directive has transcluded content if no transclude slot.
-         *
-         * @type {boolean}
-         */
-        lxRadioButton.hasTranscluded = false;
-
-        /**
-         * The radio button value.
-         *
-         * @type {string}
-         */
-        lxRadioButton.radioButtonValue = undefined;
-
-        /**
-         * The model view value.
-         *
-         * @type {string}
-         */
-        lxRadioButton.viewValue = undefined;
-
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
-
-        /**
-         * Set the model controller.
-         *
-         * @param {Object} modelController The model controller.
-         */
-        function setModelController(modelController) {
-            _modelController = modelController;
-
-            _modelController.$render = function onModelRender() {
-                lxRadioButton.viewValue = _modelController.$viewValue;
-            };
-        }
-
-        /**
-         * Update model controller view value on radio button click.
-         */
-        function updateViewValue() {
-            if (angular.isUndefined(_modelController)) {
-                return;
-            }
-
-            _modelController.$setViewValue(lxRadioButton.radioButtonValue);
-            _modelController.$render();
-        }
-
-        /////////////////////////////
-
-        lxRadioButton.setModelController = setModelController;
-        lxRadioButton.updateViewValue = updateViewValue;
-    }
-
+    //                         //
+    //    Private attributes   //
+    //                         //
     /////////////////////////////
 
-    function lxRadioButtonDirective() {
-        function link(scope, el, attrs, ctrls, transclude) {
-            if (ctrls[1]) {
-                ctrls[0].setModelController(ctrls[1]);
-            }
+    /**
+     * The model controller.
+     *
+     * @type {Object}
+     */
+    let _modelController;
 
-            if (transclude.isSlotFilled('label')) {
-                ctrls[0].hasLabel = true;
-            }
+    /////////////////////////////
+    //                         //
+    //    Public attributes    //
+    //                         //
+    /////////////////////////////
 
-            if (transclude.isSlotFilled('help')) {
-                ctrls[0].hasHelp = true;
-            }
+    /**
+     * The radio button id.
+     *
+     * @type {string}
+     */
+    lxRadioButton.radioButtonId = LxUtilsService.generateUUID();
 
-            if (!ctrls[0].hasLabel && !ctrls[0].hasHelp) {
-                transclude(function(clone) {
-                    if (clone.length) {
-                        ctrls[0].hasTranscluded = true;
-                    }
-                });
-            }
+    /**
+     * Wether the directive has help slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lxRadioButton.hasHelp = false;
 
-            attrs.$observe('disabled', function(isDisabled) {
-                el.find('input').attr('disabled', isDisabled);
+    /**
+     * Wether the directive has label slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lxRadioButton.hasLabel = false;
 
-                if (isDisabled) {
-                    el.addClass('lx-radio-button--is-disabled');
-                } else {
-                    el.removeClass('lx-radio-button--is-disabled');
-                }
-            });
+    /**
+     * Wether the directive has transcluded content if no transclude slot.
+     *
+     * @type {boolean}
+     */
+    lxRadioButton.hasTranscluded = false;
 
-            attrs.$observe('name', function(newName) {
-                el.find('input').attr('name', newName);
-            });
+    /**
+     * The radio button value.
+     *
+     * @type {string}
+     */
+    lxRadioButton.radioButtonValue = undefined;
 
-            attrs.$observe('value', function(newValue) {
-                el.find('input').attr('value', newValue);
+    /**
+     * The model view value.
+     *
+     * @type {string}
+     */
+    lxRadioButton.viewValue = undefined;
 
-                ctrls[0].radioButtonValue = newValue;
-            });
-        }
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
-        return {
-            bindToController: true,
-            controller: lxRadioButtonControler,
-            controllerAs: 'lxRadioButton',
-            link: link,
-            replace: true,
-            require: ['lxRadioButton', '?ngModel'],
-            restrict: 'E',
-            scope: {
-                theme: '@?lxTheme',
-            },
-            template: require('./lx-radio-button.html'),
-            transclude: {
-                help: '?lxRadioButtonHelp',
-                label: '?lxRadioButtonLabel',
-            },
+    /**
+     * Set the model controller.
+     *
+     * @param {Object} modelController The model controller.
+     */
+    function setModelController(modelController) {
+        _modelController = modelController;
+
+        _modelController.$render = function onModelRender() {
+            lxRadioButton.viewValue = _modelController.$viewValue;
         };
     }
 
+    /**
+     * Update model controller view value on radio button click.
+     */
+    function updateViewValue() {
+        if (angular.isUndefined(_modelController)) {
+            return;
+        }
+
+        _modelController.$setViewValue(lxRadioButton.radioButtonValue);
+        _modelController.$render();
+    }
+
     /////////////////////////////
 
-    angular.module('lumx.radio-button').directive('lxRadioButton', lxRadioButtonDirective);
-})();
+    lxRadioButton.setModelController = setModelController;
+    lxRadioButton.updateViewValue = updateViewValue;
+}
+
+/////////////////////////////
+
+function lxRadioButtonDirective() {
+    function link(scope, el, attrs, ctrls, transclude) {
+        if (ctrls[1]) {
+            ctrls[0].setModelController(ctrls[1]);
+        }
+
+        if (transclude.isSlotFilled('label')) {
+            ctrls[0].hasLabel = true;
+        }
+
+        if (transclude.isSlotFilled('help')) {
+            ctrls[0].hasHelp = true;
+        }
+
+        if (!ctrls[0].hasLabel && !ctrls[0].hasHelp) {
+            transclude((clone) => {
+                if (clone.length > 0) {
+                    ctrls[0].hasTranscluded = true;
+                }
+            });
+        }
+
+        attrs.$observe('disabled', (isDisabled) => {
+            el.find('input').attr('disabled', isDisabled);
+
+            if (isDisabled) {
+                el.addClass('lx-radio-button--is-disabled');
+            } else {
+                el.removeClass('lx-radio-button--is-disabled');
+            }
+        });
+
+        attrs.$observe('name', (newName) => {
+            el.find('input').attr('name', newName);
+        });
+
+        attrs.$observe('value', (newValue) => {
+            el.find('input').attr('value', newValue);
+
+            ctrls[0].radioButtonValue = newValue;
+        });
+    }
+
+    return {
+        bindToController: true,
+        controller: lxRadioButtonController,
+        controllerAs: 'lxRadioButton',
+        link,
+        replace: true,
+        require: ['lxRadioButton', '?ngModel'],
+        restrict: 'E',
+        scope: {
+            theme: '@?lxTheme',
+        },
+        template: require('./lx-radio-button.html'),
+        transclude: {
+            help: '?lxRadioButtonHelp',
+            label: '?lxRadioButtonLabel',
+        },
+    };
+}
+
+/////////////////////////////
+
+angular.module('lumx.radio-button').directive('lxRadioButton', lxRadioButtonDirective);
+
+/////////////////////////////
+
+export { lxRadioButtonDirective };

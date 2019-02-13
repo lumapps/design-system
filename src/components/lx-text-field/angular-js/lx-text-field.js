@@ -1,61 +1,64 @@
 import '../style/lx-text-field.scss';
 
-(function IIFE() {
-    'use strict';
+/////////////////////////////
 
-    /////////////////////////////
+function lxTextFieldController() {
+    // eslint-disable-next-line consistent-this, no-unused-vars
+    const lxTextField = this;
+}
 
-    function lxTextFieldController() {}
+/////////////////////////////
 
-    /////////////////////////////
+function lxTextFieldDirective() {
+    function link(scope, el) {
+        const input = el.find('input');
+        const modelController = input.data('$ngModelController');
 
-    function lxTextFieldDirective() {
-        function link(scope, el) {
-            var input = el.find('input');
-            var modelController = input.data('$ngModelController');
-
-            input
-                .on('focus', function onFocus() {
-                    el.addClass('lx-text-field--is-focus');
-                })
-                .on('blur', function onBlur() {
-                    el.removeClass('lx-text-field--is-focus');
-                });
-
-            modelController.$$attr.$observe('disabled', function(isDisabled) {
-                if (isDisabled) {
-                    el.addClass('lx-text-field--is-disabled');
-                } else {
-                    el.removeClass('lx-text-field--is-disabled');
-                }
+        input
+            .on('focus', function onFocus() {
+                el.addClass('lx-text-field--is-focus');
+            })
+            .on('blur', function onBlur() {
+                el.removeClass('lx-text-field--is-focus');
             });
 
-            scope.$on('$destroy', function onDestroy() {
-                input.off();
-            });
-        }
+        modelController.$$attr.$observe('disabled', (isDisabled) => {
+            if (isDisabled) {
+                el.addClass('lx-text-field--is-disabled');
+            } else {
+                el.removeClass('lx-text-field--is-disabled');
+            }
+        });
 
-        return {
-            bindToController: true,
-            controller: lxTextFieldController,
-            controllerAs: 'lxTextField',
-            link: link,
-            replace: true,
-            restrict: 'E',
-            scope: {
-                error: '=?lxError',
-                helper: '@?lxHelper',
-                icon: '@?lxIcon',
-                label: '@?lxLabel',
-                theme: '@?lxTheme',
-                valid: '=?lxValid',
-            },
-            template: require('./lx-text-field.html'),
-            transclude: true,
-        };
+        scope.$on('$destroy', function onDestroy() {
+            input.off();
+        });
     }
 
-    /////////////////////////////
+    return {
+        bindToController: true,
+        controller: lxTextFieldController,
+        controllerAs: 'lxTextField',
+        link,
+        replace: true,
+        restrict: 'E',
+        scope: {
+            hasError: '=?lxError',
+            helper: '@?lxHelper',
+            icon: '@?lxIcon',
+            isValid: '=?lxValid',
+            label: '@?lxLabel',
+            theme: '@?lxTheme',
+        },
+        template: require('./lx-text-field.html'),
+        transclude: true,
+    };
+}
 
-    angular.module('lumx.text-field').directive('lxTextField', lxTextFieldDirective);
-})();
+/////////////////////////////
+
+angular.module('lumx.text-field').directive('lxTextField', lxTextFieldDirective);
+
+/////////////////////////////
+
+export { lxTextFieldDirective };

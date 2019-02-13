@@ -58,6 +58,7 @@
     "scripts": {
         "start:angular-js": "webpack-dev-server --config webpack/webpack.angular-js.js --hot",
         "prettier:demo": "prettier --write \"demo/**/*.{js,jsx,html,scss}\"",
-        "prettier:src": "prettier --write \"src/**/*.{js,jsx,html,scss}\""
+        "prettier:src": "prettier --write \"src/**/*.{js,jsx,html,scss}\"",
+        "format": "prettier-eslint --write \"src/**/*.{js,jsx}\""
     }
 }

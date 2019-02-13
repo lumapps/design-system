@@ -1,168 +1,168 @@
 import '../style/lx-switch.scss';
 
-(function IIFE() {
-    'use strict';
+/////////////////////////////
+
+function lxSwitchController(LxUtilsService) {
+    // eslint-disable-next-line consistent-this
+    const lxSwitch = this;
 
     /////////////////////////////
-
-    lxSwitchControler.$inject = ['$element', 'LxUtilsService'];
-
-    function lxSwitchControler($element, LxUtilsService) {
-        var lxSwitch = this;
-
-        /////////////////////////////
-        //                         //
-        //    Private attributes   //
-        //                         //
-        /////////////////////////////
-
-        /**
-         * The model controller.
-         *
-         * @type {Object}
-         */
-        var _modelController;
-
-        /////////////////////////////
-        //                         //
-        //    Public attributes    //
-        //                         //
-        /////////////////////////////
-
-        /**
-         * The switch id.
-         *
-         * @type {string}
-         */
-        lxSwitch.switchId = LxUtilsService.generateUUID();
-
-        /**
-         * Wether the directive has help slot filled or not.
-         *
-         * @type {boolean}
-         */
-        lxSwitch.hasHelp = false;
-
-        /**
-         * Wether the directive has label slot filled or not.
-         *
-         * @type {boolean}
-         */
-        lxSwitch.hasLabel = false;
-
-        /**
-         * Wether the directive has transcluded content if no transclude slot.
-         *
-         * @type {boolean}
-         */
-        lxSwitch.hasTranscluded = false;
-
-        /**
-         * The model view value.
-         *
-         * @type {string}
-         */
-        lxSwitch.viewValue = undefined;
-
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
-
-        /**
-         * Set the model controller.
-         *
-         * @param {Object} modelController The model controller.
-         */
-        function setModelController(modelController) {
-            _modelController = modelController;
-
-            _modelController.$render = function onModelRender() {
-                lxSwitch.viewValue = _modelController.$viewValue;
-            };
-        }
-
-        /**
-         * Update model controller view value on switch click.
-         */
-        function updateViewValue() {
-            if (angular.isUndefined(_modelController)) {
-                lxSwitch.viewValue = !lxSwitch.viewValue;
-                return;
-            }
-
-            _modelController.$setViewValue(!_modelController.$viewValue);
-            _modelController.$render();
-        }
-
-        /////////////////////////////
-
-        lxSwitch.setModelController = setModelController;
-        lxSwitch.updateViewValue = updateViewValue;
-    }
-
+    //                         //
+    //    Private attributes   //
+    //                         //
     /////////////////////////////
 
-    function lxSwitchDirective() {
-        function link(scope, el, attrs, ctrls, transclude) {
-            if (ctrls[1]) {
-                ctrls[0].setModelController(ctrls[1]);
-            }
+    /**
+     * The model controller.
+     *
+     * @type {Object}
+     */
+    let _modelController;
 
-            if (transclude.isSlotFilled('label')) {
-                ctrls[0].hasLabel = true;
-            }
+    /////////////////////////////
+    //                         //
+    //    Public attributes    //
+    //                         //
+    /////////////////////////////
 
-            if (transclude.isSlotFilled('help')) {
-                ctrls[0].hasHelp = true;
-            }
+    /**
+     * The switch id.
+     *
+     * @type {string}
+     */
+    lxSwitch.switchId = LxUtilsService.generateUUID();
 
-            if (!ctrls[0].hasLabel && !ctrls[0].hasHelp) {
-                transclude(function(clone) {
-                    if (clone.length) {
-                        ctrls[0].hasTranscluded = true;
-                    }
-                });
-            }
+    /**
+     * Wether the directive has help slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lxSwitch.hasHelp = false;
 
-            attrs.$observe('disabled', function(isDisabled) {
-                el.find('input').attr('disabled', isDisabled);
+    /**
+     * Wether the directive has label slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lxSwitch.hasLabel = false;
 
-                if (isDisabled) {
-                    el.addClass('lx-switch--is-disabled');
-                } else {
-                    el.removeClass('lx-switch--is-disabled');
-                }
-            });
+    /**
+     * Wether the directive has transcluded content if no transclude slot.
+     *
+     * @type {boolean}
+     */
+    lxSwitch.hasTranscluded = false;
 
-            attrs.$observe('checked', function(isChecked) {
-                el.find('input').attr('checked', isChecked);
+    /**
+     * The model view value.
+     *
+     * @type {string}
+     */
+    lxSwitch.viewValue = undefined;
 
-                ctrls[0].viewValue = isChecked;
-            });
-        }
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
-        return {
-            bindToController: true,
-            controller: lxSwitchControler,
-            controllerAs: 'lxSwitch',
-            link: link,
-            replace: true,
-            require: ['lxSwitch', '?ngModel'],
-            restrict: 'E',
-            scope: {
-                theme: '@?lxTheme',
-            },
-            template: require('./lx-switch.html'),
-            transclude: {
-                help: '?lxSwitchHelp',
-                label: '?lxSwitchLabel',
-            },
+    /**
+     * Set the model controller.
+     *
+     * @param {Object} modelController The model controller.
+     */
+    function setModelController(modelController) {
+        _modelController = modelController;
+
+        _modelController.$render = function onModelRender() {
+            lxSwitch.viewValue = _modelController.$viewValue;
         };
     }
 
+    /**
+     * Update model controller view value on switch click.
+     */
+    function updateViewValue() {
+        if (angular.isUndefined(_modelController)) {
+            lxSwitch.viewValue = !lxSwitch.viewValue;
+
+            return;
+        }
+
+        _modelController.$setViewValue(!_modelController.$viewValue);
+        _modelController.$render();
+    }
+
     /////////////////////////////
 
-    angular.module('lumx.switch').directive('lxSwitch', lxSwitchDirective);
-})();
+    lxSwitch.setModelController = setModelController;
+    lxSwitch.updateViewValue = updateViewValue;
+}
+
+/////////////////////////////
+
+function lxSwitchDirective() {
+    function link(scope, el, attrs, ctrls, transclude) {
+        if (ctrls[1]) {
+            ctrls[0].setModelController(ctrls[1]);
+        }
+
+        if (transclude.isSlotFilled('label')) {
+            ctrls[0].hasLabel = true;
+        }
+
+        if (transclude.isSlotFilled('help')) {
+            ctrls[0].hasHelp = true;
+        }
+
+        if (!ctrls[0].hasLabel && !ctrls[0].hasHelp) {
+            transclude((clone) => {
+                if (clone.length > 0) {
+                    ctrls[0].hasTranscluded = true;
+                }
+            });
+        }
+
+        attrs.$observe('disabled', (isDisabled) => {
+            el.find('input').attr('disabled', isDisabled);
+
+            if (isDisabled) {
+                el.addClass('lx-switch--is-disabled');
+            } else {
+                el.removeClass('lx-switch--is-disabled');
+            }
+        });
+
+        attrs.$observe('checked', (isChecked) => {
+            el.find('input').attr('checked', isChecked);
+
+            ctrls[0].viewValue = isChecked;
+        });
+    }
+
+    return {
+        bindToController: true,
+        controller: lxSwitchController,
+        controllerAs: 'lxSwitch',
+        link,
+        replace: true,
+        require: ['lxSwitch', '?ngModel'],
+        restrict: 'E',
+        scope: {
+            theme: '@?lxTheme',
+        },
+        template: require('./lx-switch.html'),
+        transclude: {
+            help: '?lxSwitchHelp',
+            label: '?lxSwitchLabel',
+        },
+    };
+}
+
+/////////////////////////////
+
+angular.module('lumx.switch').directive('lxSwitch', lxSwitchDirective);
+
+/////////////////////////////
+
+export { lxSwitchDirective };

@@ -1,134 +1,128 @@
-(function IIFE() {
-    'use strict';
+function LxEventSchedulerService($document, LxUtilsService) {
+    const service = this;
 
     /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
 
-    LxEventSchedulerService.$inject = ['$document', 'LxUtilsService'];
+    /**
+     * The handlers.
+     *
+     * @type {Object}
+     */
+    const _handlers = {};
 
-    function LxEventSchedulerService($document, LxUtilsService) {
-        var service = this;
+    /**
+     * The schedule.
+     *
+     * @type {Object}
+     */
+    const _schedule = {};
 
-        /////////////////////////////
-        //                         //
-        //    Private attributes   //
-        //                         //
-        /////////////////////////////
+    /////////////////////////////
+    //                         //
+    //    Private functions    //
+    //                         //
+    /////////////////////////////
 
-        /**
-         * The handlers.
-         *
-         * @type {Object}
-         */
-        var _handlers = {};
+    /**
+     * Handle en event.
+     *
+     * @param {Event} evt The event.
+     */
+    function _handle(evt) {
+        const scheduler = _schedule[evt.type];
 
-        /**
-         * The schedule.
-         *
-         * @type {Object}
-         */
-        var _schedule = {};
+        if (angular.isDefined(scheduler)) {
+            for (let i = 0, len = scheduler.length; i < len; i++) {
+                const handler = scheduler[i];
 
-        /////////////////////////////
-        //                         //
-        //    Private functions    //
-        //                         //
-        /////////////////////////////
+                if (angular.isDefined(handler) && angular.isDefined(handler.cb) && angular.isFunction(handler.cb)) {
+                    handler.cb(evt);
 
-        /**
-         * Handle en event.
-         *
-         * @param {Event} evt The event.
-         */
-        function _handle(evt) {
-            var scheduler = _schedule[evt.type];
-
-            if (angular.isDefined(scheduler)) {
-                for (var i = 0, length = scheduler.length; i < length; i++) {
-                    var handler = scheduler[i];
-
-                    if (
-                        angular.isDefined(handler) &&
-                        angular.isDefined(handler.callback) &&
-                        angular.isFunction(handler.callback)
-                    ) {
-                        handler.callback(evt);
-
-                        if (evt.isPropagationStopped()) {
-                            break;
-                        }
+                    if (evt.isPropagationStopped()) {
+                        break;
                     }
                 }
             }
         }
+    }
 
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
-        /**
-         * Register en event.
-         *
-         * @param {string}   eventName The event name.
-         * @param {Function} callback  The event callback.
-         */
-        function register(eventName, callback) {
-            var handler = {
-                eventName: eventName,
-                callback: callback,
-            };
+    /**
+     * Register en event.
+     *
+     * @param  {string}   eventName The event name.
+     * @param  {Function} cb        The event callback.
+     * @return {string}   The event id.
+     */
+    function register(eventName, cb) {
+        const handler = {
+            cb,
+            eventName,
+        };
 
-            var id = LxUtilsService.generateUUID();
-            _handlers[id] = handler;
+        const id = LxUtilsService.generateUUID();
+        _handlers[id] = handler;
 
-            if (angular.isUndefined(_schedule[eventName])) {
-                _schedule[eventName] = [];
+        if (angular.isUndefined(_schedule[eventName])) {
+            _schedule[eventName] = [];
 
-                $document.on(eventName, _handle);
-            }
-
-            _schedule[eventName].unshift(_handlers[id]);
-
-            return id;
+            $document.on(eventName, _handle);
         }
 
-        /**
-         * Unregister en event.
-         *
-         * @param {string} id The event id.
-         */
-        function unregister(id) {
-            var found = false;
-            var handler = _handlers[id];
+        _schedule[eventName].unshift(_handlers[id]);
 
-            if (angular.isDefined(handler) && angular.isDefined(_schedule[handler.eventName])) {
-                var index = _schedule[handler.eventName].indexOf(handler);
+        return id;
+    }
 
-                if (angular.isDefined(index) && index > -1) {
-                    _schedule[handler.eventName].splice(index, 1);
+    /**
+     * Unregister en event.
+     *
+     * @param  {string} id The event id.
+     * @return {found}  Wether the event has been found or not.
+     */
+    function unregister(id) {
+        let found = false;
+        const handler = _handlers[id];
 
-                    delete _handlers[id];
-                    found = true;
-                }
+        if (angular.isDefined(handler) && angular.isDefined(_schedule[handler.eventName])) {
+            const index = _schedule[handler.eventName].indexOf(handler);
 
-                if (_schedule[handler.eventName].length === 0) {
-                    delete _schedule[handler.eventName];
+            if (angular.isDefined(index) && index > -1) {
+                _schedule[handler.eventName].splice(index, 1);
 
-                    $document.off(handler.eventName, _handle);
-                }
+                delete _handlers[id];
+                found = true;
             }
 
-            return found;
+            if (_schedule[handler.eventName].length === 0) {
+                delete _schedule[handler.eventName];
+
+                $document.off(handler.eventName, _handle);
+            }
         }
 
-        /////////////////////////////
-
-        service.register = register;
-        service.unregister = unregister;
+        return found;
     }
 
     /////////////////////////////
 
-    angular.module('lumx.utils.event-scheduler').service('LxEventSchedulerService', LxEventSchedulerService);
-})();
+    service.register = register;
+    service.unregister = unregister;
+}
+
+/////////////////////////////
+
+angular.module('lumx.utils.event-scheduler').service('LxEventSchedulerService', LxEventSchedulerService);
+
+/////////////////////////////
+
+export { LxEventSchedulerService };

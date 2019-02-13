@@ -4,8 +4,8 @@
                 'lx-text-field--theme-dark': lxTextField.theme === 'dark',
                 'lx-text-field--has-label': lxTextField.label,
                 'lx-text-field--has-icon': lxTextField.icon,
-                'lx-text-field--valid': lxTextField.valid,
-                'lx-text-field--error': lxTextField.error }"
+                'lx-text-field--valid': lxTextField.isValid,
+                'lx-text-field--error': lxTextField.hasError }"
 >
     <label class="lx-text-field__label" ng-if="lxTextField.label">
         {{ lxTextField.label }}
@@ -25,9 +25,9 @@
 
         <lx-icon
             class="lx-text-field__input-validity"
-            lx-id="{{ lxTextField.valid ? 'check-circle' : 'alert-circle' }}"
+            lx-id="{{ lxTextField.isValid ? 'check-circle' : 'alert-circle' }}"
             lx-size="s"
-            ng-if="lxTextField.valid || lxTextField.error"
+            ng-if="lxTextField.isValid || lxTextField.hasError"
         ></lx-icon>
     </div>
 </div>

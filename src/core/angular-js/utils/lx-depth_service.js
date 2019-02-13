@@ -1,45 +1,52 @@
-(function IIFE() {
-    'use strict';
+function LxDepthService() {
+    const service = this;
 
     /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
 
-    function LxDepthService() {
-        var service = this;
+    /**
+     * The initial depth.
+     *
+     * @type {number}
+     */
+    // eslint-disable-next-line no-magic-numbers
+    let _depth = 1000;
 
-        /////////////////////////////
-        //                         //
-        //    Private attributes   //
-        //                         //
-        /////////////////////////////
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
-        /**
-         * The initial depth.
-         *
-         * @type {integer}
-         */
-        var _depth = 1000;
+    /**
+     * Get the highest depth.
+     *
+     * @return {number} The highest depth.
+     */
+    function get() {
+        return _depth;
+    }
 
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
-
-        function get() {
-            return _depth;
-        }
-
-        function increase() {
-            _depth++;
-        }
-
-        /////////////////////////////
-
-        service.get = get;
-        service.increase = increase;
+    /**
+     * Increase depth.
+     */
+    function increase() {
+        _depth++;
     }
 
     /////////////////////////////
 
-    angular.module('lumx.utils.depth').service('LxDepthService', LxDepthService);
-})();
+    service.get = get;
+    service.increase = increase;
+}
+
+/////////////////////////////
+
+angular.module('lumx.utils.depth').service('LxDepthService', LxDepthService);
+
+/////////////////////////////
+
+export { LxDepthService };

@@ -10,8 +10,8 @@
                 'lx-select--theme-dark': lxSelect.theme === 'dark',
                 'lx-select--has-label': lxSelect.label,
                 'lx-select--is-disabled': lxSelect.isDisabled,
-                'lx-select--valid': lxSelect.valid,
-                'lx-select--error': lxSelect.error }"
+                'lx-select--valid': lxSelect.isValid,
+                'lx-select--error': lxSelect.hasError }"
 >
     <span class="lx-select__label" ng-if="lxSelect.label">
         {{ lxSelect.label }}
@@ -60,8 +60,8 @@
             </div>
         </div>
 
-        <div class="lx-select__input-validity" ng-if="lxSelect.valid || lxSelect.error">
-            <lx-icon lx-id="{{ lxSelect.valid ? 'check-circle' : 'alert-circle' }}" lx-size="s"></lx-icon>
+        <div class="lx-select__input-validity" ng-if="lxSelect.isValid || lxSelect.hasError">
+            <lx-icon lx-id="{{ lxSelect.isValid ? 'check-circle' : 'alert-circle' }}" lx-size="s"></lx-icon>
         </div>
 
         <div

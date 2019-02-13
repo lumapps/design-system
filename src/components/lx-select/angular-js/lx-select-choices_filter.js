@@ -1,35 +1,29 @@
-(function IIFE() {
-    'use strict';
+function lxSelectChoicesFilter($filter) {
+    return function filteredChoices(choices, externalFilter, textFilter) {
+        if (externalFilter) {
+            return choices;
+        }
 
-    /////////////////////////////
+        let toFilter = [];
 
-    lxSelectChoicesFilter.$inject = ['$filter'];
-
-    function lxSelectChoicesFilter($filter) {
-        return function(choices, externalFilter, textFilter) {
-            if (externalFilter) {
-                return choices;
-            }
-
-            var toFilter = [];
-
-            if (!angular.isArray(choices)) {
-                if (angular.isObject(choices)) {
-                    for (var idx in choices) {
-                        if (angular.isArray(choices[idx])) {
-                            toFilter = toFilter.concat(choices[idx]);
-                        }
-                    }
+        if (angular.isArray(choices)) {
+            toFilter = choices;
+        } else if (angular.isObject(choices)) {
+            for (const idx in choices) {
+                if (angular.isArray(choices[idx])) {
+                    toFilter = toFilter.concat(choices[idx]);
                 }
-            } else {
-                toFilter = choices;
             }
+        }
 
-            return $filter('filter')(toFilter, textFilter);
-        };
-    }
+        return $filter('filter')(toFilter, textFilter);
+    };
+}
 
-    /////////////////////////////
+/////////////////////////////
 
-    angular.module('lumx.select').filter('lxSelectChoicesFilter', lxSelectChoicesFilter);
-})();
+angular.module('lumx.select').filter('lxSelectChoicesFilter', lxSelectChoicesFilter);
+
+/////////////////////////////
+
+export { lxSelectChoicesFilter };
