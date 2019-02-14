@@ -55,7 +55,7 @@ function lxButtonDirective(LxThemeConstant) {
             el.addClass('lx-button--shape-contained');
         }
 
-        if (!transcludedIcon.length > 0 && !tanscludedText.length > 0) {
+        if (transcludedIcon.length === 0 && tanscludedText.length === 0) {
             el.wrapInner('<span class="lx-button__text"></span>');
         }
 
