@@ -304,6 +304,7 @@ function lxDialogDirective() {
         scope: {
             autoClose: '=?lxAutoClose',
             escapeClose: '=?lxEscapeClose',
+            size: '@?lxSize',
         },
         template,
         transclude: {

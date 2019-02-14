@@ -26,7 +26,6 @@
     top: $lx-dialog-offset;
     left: 50%;
     display: none;
-    width: 800px;
     height: calc(100% - 120px);
     animation: lx-dialog-show $lx-dialog-transition-duration;
     opacity: 1;
@@ -78,5 +77,14 @@
     100% {
         opacity: 1;
         transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Dialog sizes
+   ========================================================================== */
+
+@each $key, $size in $lx-dialog-sizes {
+    .lx-dialog--size-#{$key} {
+        width: $size;
     }
 }
