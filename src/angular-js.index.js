@@ -13,7 +13,7 @@ import './components/lx-dropdown/angular-js/lx-dropdown_service';
 import './components/lx-icon/angular-js/lx-icon';
 import './components/lx-list/angular-js/lx-list';
 import './components/lx-list/angular-js/lx-list-divider';
-import './components/lx-list/angular-js/lx-list-row';
+import './components/lx-list/angular-js/lx-list-item';
 import './components/lx-list/angular-js/lx-list-subheader';
 import './components/lx-notification/angular-js/lx-notification_service';
 import './components/lx-progress/angular-js/lx-progress';

@@ -34,7 +34,7 @@
     @include lx-typography(body1);
 
     display: flex;
-    height: $lx-list-row-height;
+    height: $lx-list-item-height;
     align-items: center;
     justify-content: center;
     color: lx-theme-color-variant(dark, L3);

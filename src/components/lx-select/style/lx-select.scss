@@ -125,7 +125,7 @@
     }
 
     &__choice {
-        @include lx-list-row;
+        @include lx-list-item;
 
         cursor: default;
 
@@ -144,11 +144,11 @@
     }
 
     &__choice-check {
-        @include lx-list-row-primary;
+        @include lx-list-item-primary;
     }
 
     &__choice-content {
-        @include lx-list-row-content;
+        @include lx-list-item-content;
     }
 
     &__loader {

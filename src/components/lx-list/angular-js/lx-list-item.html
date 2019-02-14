@@ -1,0 +1,11 @@
+<li class="lx-list-item" ng-class="{ 'lx-list-item--is-clickable': lxListItem.isClickable }">
+    <div
+        class="lx-list-item__content"
+        ng-transclude
+        ng-if="!lxListItem.hasPrimary && !lxListItem.hasContent && !lxListItem.hasSecondary"
+    ></div>
+
+    <div class="lx-list-item__primary" ng-transclude="primary" ng-if="lxListItem.hasPrimary"></div>
+    <div class="lx-list-item__content" ng-transclude="content" ng-if="lxListItem.hasContent"></div>
+    <div class="lx-list-item__secondary" ng-transclude="secondary" ng-if="lxListItem.hasSecondary"></div>
+</li>

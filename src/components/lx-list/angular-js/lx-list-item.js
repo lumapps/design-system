@@ -1,10 +1,10 @@
-import template from './lx-list-row.html';
+import template from './lx-list-item.html';
 
 /////////////////////////////
 
-function lxListRowController() {
+function lxListItemController() {
     // eslint-disable-next-line consistent-this
-    const lxListRow = this;
+    const lxListItem = this;
 
     /////////////////////////////
     //                         //
@@ -17,26 +17,26 @@ function lxListRowController() {
      *
      * @type {boolean}
      */
-    lxListRow.hasContent = false;
+    lxListItem.hasContent = false;
 
     /**
      * Wether the directive has primary slot filled or not.
      *
      * @type {boolean}
      */
-    lxListRow.hasPrimary = false;
+    lxListItem.hasPrimary = false;
 
     /**
      * Wether the directive has secondary slot filled or not.
      *
      * @type {boolean}
      */
-    lxListRow.hasSecondary = false;
+    lxListItem.hasSecondary = false;
 }
 
 /////////////////////////////
 
-function lxListRowDirective() {
+function lxListItemDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
         if (transclude.isSlotFilled('primary')) {
             ctrl.hasPrimary = true;
@@ -53,8 +53,8 @@ function lxListRowDirective() {
 
     return {
         bindToController: true,
-        controller: lxListRowController,
-        controllerAs: 'lxListRow',
+        controller: lxListItemController,
+        controllerAs: 'lxListItem',
         link,
         replace: true,
         restrict: 'E',
@@ -64,17 +64,17 @@ function lxListRowDirective() {
         },
         template,
         transclude: {
-            content: '?lxListRowContent',
-            primary: '?lxListRowPrimary',
-            secondary: '?lxListRowSecondary',
+            content: '?lxListItemContent',
+            primary: '?lxListItemPrimary',
+            secondary: '?lxListItemSecondary',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module('lumx.list').directive('lxListRow', lxListRowDirective);
+angular.module('lumx.list').directive('lxListItem', lxListItemDirective);
 
 /////////////////////////////
 
-export { lxListRowDirective };
+export { lxListItemDirective };
