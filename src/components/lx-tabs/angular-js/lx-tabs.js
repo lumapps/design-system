@@ -1,4 +1,5 @@
 import '../style/lx-tabs.scss';
+import template from './lx-tabs.html';
 
 /////////////////////////////
 
@@ -134,7 +135,7 @@ function lxTabsDirective() {
             position: '@?lxPosition',
             theme: '@?lxTheme',
         },
-        template: require('./lx-tabs.html'),
+        template,
         transclude: true,
     };
 }

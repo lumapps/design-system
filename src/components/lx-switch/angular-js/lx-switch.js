@@ -1,4 +1,5 @@
 import '../style/lx-switch.scss';
+import template from './lx-switch.html';
 
 /////////////////////////////
 
@@ -151,7 +152,7 @@ function lxSwitchDirective() {
         scope: {
             theme: '@?lxTheme',
         },
-        template: require('./lx-switch.html'),
+        template,
         transclude: {
             help: '?lxSwitchHelp',
             label: '?lxSwitchLabel',

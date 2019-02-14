@@ -1,4 +1,5 @@
 import '../style/lx-chip.scss';
+import template from './lx-chip.html';
 
 /////////////////////////////
 
@@ -52,7 +53,7 @@ function lxChipDirective() {
             isDisabled: '=?ngDisabled',
             theme: '@?lxTheme',
         },
-        template: require('./lx-chip.html'),
+        template,
         transclude: {
             label: '?lxChipLabel',
             primary: '?lxChipPrimary',

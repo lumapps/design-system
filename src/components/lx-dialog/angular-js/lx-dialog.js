@@ -1,4 +1,5 @@
 import '../style/lx-dialog.scss';
+import template from './lx-dialog.html';
 
 /////////////////////////////
 
@@ -304,7 +305,7 @@ function lxDialogDirective() {
             autoClose: '=?lxAutoClose',
             escapeClose: '=?lxEscapeClose',
         },
-        template: require('./lx-dialog.html'),
+        template,
         transclude: {
             content: 'lxDialogContent',
             footer: '?lxDialogFooter',

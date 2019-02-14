@@ -1,4 +1,5 @@
 import '../style/lx-progress.scss';
+import template from './lx-progress.html';
 
 /////////////////////////////
 
@@ -19,7 +20,7 @@ function lxProgressDirective() {
         scope: {
             type: '@?lxType',
         },
-        template: require('./lx-progress.html'),
+        template,
         transclude: {
             help: '?lxCheckboxHelp',
             label: '?lxCheckboxLabel',

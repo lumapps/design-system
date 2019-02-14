@@ -1,3 +1,7 @@
+import template from './lx-tab.html';
+
+/////////////////////////////
+
 function lxTabController($scope, LxUtilsService) {
     // eslint-disable-next-line consistent-this
     const lxTab = this;
@@ -112,7 +116,7 @@ function lxTabDirective() {
             isDisabled: '=?ngDisabled',
             label: '@?lxLabel',
         },
-        templateUrl: 'src/components/lx-tabs/angular-js/lx-tab.html',
+        template,
         transclude: true,
     };
 }

@@ -1,4 +1,5 @@
 import '../style/lx-data-table.scss';
+import template from './lx-data-table.html';
 
 /////////////////////////////
 
@@ -358,7 +359,7 @@ function lxDataTableDirective() {
             theme: '@?lxTheme',
             thumbnail: '=?lxThumbnail',
         },
-        template: require('./lx-data-table.html'),
+        template,
     };
 }
 

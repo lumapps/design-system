@@ -1,4 +1,5 @@
 import '../style/lx-checkbox.scss';
+import template from './lx-checkbox.html';
 
 /////////////////////////////
 
@@ -151,7 +152,7 @@ function lxCheckboxDirective() {
         scope: {
             theme: '@?lxTheme',
         },
-        template: require('./lx-checkbox.html'),
+        template,
         transclude: {
             help: '?lxCheckboxHelp',
             label: '?lxCheckboxLabel',

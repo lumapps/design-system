@@ -1,3 +1,7 @@
+import template from './lx-list-row.html';
+
+/////////////////////////////
+
 function lxListRowController() {
     // eslint-disable-next-line consistent-this
     const lxListRow = this;
@@ -58,7 +62,7 @@ function lxListRowDirective() {
             icon: '@?lxIcon',
             isClickable: '=?lxIsClickable',
         },
-        templateUrl: 'src/components/lx-list/angular-js/lx-list-row.html',
+        template,
         transclude: {
             content: '?lxListRowContent',
             primary: '?lxListRowPrimary',

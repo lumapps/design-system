@@ -1,4 +1,5 @@
 import '../style/lx-text-field.scss';
+import template from './lx-text-field.html';
 
 /////////////////////////////
 
@@ -50,7 +51,7 @@ function lxTextFieldDirective() {
             label: '@?lxLabel',
             theme: '@?lxTheme',
         },
-        template: require('./lx-text-field.html'),
+        template,
         transclude: true,
     };
 }

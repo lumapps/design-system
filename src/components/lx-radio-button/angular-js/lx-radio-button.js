@@ -1,4 +1,5 @@
 import '../style/lx-radio-button.scss';
+import template from './lx-radio-button.html';
 
 /////////////////////////////
 
@@ -160,7 +161,7 @@ function lxRadioButtonDirective() {
         scope: {
             theme: '@?lxTheme',
         },
-        template: require('./lx-radio-button.html'),
+        template,
         transclude: {
             help: '?lxRadioButtonHelp',
             label: '?lxRadioButtonLabel',

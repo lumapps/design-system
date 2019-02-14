@@ -1,4 +1,5 @@
 import '../style/lx-select.scss';
+import template from './lx-select.html';
 
 /////////////////////////////
 
@@ -519,13 +520,13 @@ function lxSelectDirective() {
         transclude(
             scope,
             (clone) => {
-                let template = '';
+                let choiceTemplate = '';
 
                 for (let i = 0; i < clone.length; i++) {
-                    template += clone[i].data || clone[i].outerHTML || '';
+                    choiceTemplate += clone[i].data || clone[i].outerHTML || '';
                 }
 
-                ctrls[0].registerChoiceTemplate(template);
+                ctrls[0].registerChoiceTemplate(choiceTemplate);
             },
             null,
             'choices',
@@ -534,13 +535,13 @@ function lxSelectDirective() {
         transclude(
             scope,
             (clone) => {
-                let template = '';
+                let selectedTemplate = '';
 
                 for (let i = 0; i < clone.length; i++) {
-                    template += clone[i].data || clone[i].outerHTML || '';
+                    selectedTemplate += clone[i].data || clone[i].outerHTML || '';
                 }
 
-                ctrls[0].registerSelectedTemplate(template);
+                ctrls[0].registerSelectedTemplate(selectedTemplate);
             },
             null,
             'selected',
@@ -572,7 +573,7 @@ function lxSelectDirective() {
             selectionToModel: '&?lxSelectionToModel',
             theme: '@?lxTheme',
         },
-        template: require('./lx-select.html'),
+        template,
         transclude: {
             choices: 'lxSelectChoices',
             selected: 'lxSelectSelected',

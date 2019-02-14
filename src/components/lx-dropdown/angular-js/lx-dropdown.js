@@ -1,4 +1,5 @@
 import '../style/lx-dropdown.scss';
+import template from './lx-dropdown.html';
 
 /////////////////////////////
 
@@ -443,7 +444,7 @@ function lxDropdownDirective() {
             position: '@?lxPosition',
             width: '@?lxWidth',
         },
-        template: require('./lx-dropdown.html'),
+        template,
         transclude: {
             menu: 'lxDropdownMenu',
             toggle: '?lxDropdownToggle',
