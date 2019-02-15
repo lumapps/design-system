@@ -1,10 +1,11 @@
-const { absolutePath, babelSetup, getSassRessourcesFiles } = require('./utils');
+const { babelSetup, getSassRessourcesFiles } = require('./utils');
+const { CORE_PATH, NODE_MODULES_PATH } = require('./constants');
 
 const webpackBaseConfig = {
     module: {
         rules: [
             {
-                exclude: /(instance-scripts|node_modules)/u,
+                exclude: /node_modules/u,
                 test: /\.js$/u,
                 use: [
                     {
@@ -28,20 +29,21 @@ const webpackBaseConfig = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            sourceMap: false,
                             config: {
-                                path: absolutePath('../src/core/style/postcss.config.js'),
+                                path: `${CORE_PATH}/style/postcss.config.js`,
                             },
+                            sourceMap: false,
                         },
                     },
                     {
                         loader: 'sass-loader',
                         options: {
+                            includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
                             sourceMap: false,
-                            includePaths: [absolutePath('../node_modules/sass-mq')],
                         },
                     },
                     {
+                        // TODO: Refactor all ressources in a `lumx-ressources` file and always import it when needed.
                         loader: 'sass-resources-loader',
                         options: {
                             resources: getSassRessourcesFiles(),

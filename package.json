@@ -1,18 +1,23 @@
 {
-    "name": "design-system",
+    "name": "lumx",
     "version": "0.0.1",
     "private": true,
+    "module": "./src/react.index.jsx",
     "dependencies": {
         "angular": "^1.7.5",
+        "classnames": "^2.2.6",
         "core-js": "^2.6.3",
         "focus-visible": "^4.1.5",
         "jquery": "^3.3.1",
         "lodash": "^4.17.11",
+        "react": "^16.8.1",
+        "react-dom": "^16.8.1",
         "sass-mq": "^5.0.0"
     },
     "devDependencies": {
         "@babel/core": "^7.2.2",
         "@babel/preset-env": "^7.3.1",
+        "@babel/preset-react": "^7.0.0",
         "@uirouter/angularjs": "^1.0.20",
         "autoprefixer": "^9.4.1",
         "babel-eslint": "^10.0.1",
@@ -24,9 +29,11 @@
         "eslint-plugin-angular": "^3.3.0",
         "eslint-plugin-html": "^5.0.3",
         "eslint-plugin-import": "^2.16.0",
+        "eslint-plugin-jsx-a11y": "^6.2.1",
         "eslint-plugin-lumapps": "git+ssh://git@github.com/lumapps/eslint-plugin-lumapps#master",
         "eslint-plugin-no-useless-assign": "^1.0.2",
         "eslint-plugin-prettier": "^3.0.1",
+        "eslint-plugin-react": "^7.12.4",
         "eslint-plugin-require-jsdoc-except": "^1.3.0",
         "eslint-plugin-unicorn": "^7.1.0",
         "eslint-plugin-you-dont-need-lodash-underscore": "^6.4.0",
@@ -56,7 +63,8 @@
         "webpack-merge": "^4.2.1"
     },
     "scripts": {
-        "start:angular-js": "webpack-dev-server --config webpack/webpack.angular-js.js --hot",
+        "start:angular-js": "webpack-dev-server --config webpack/angular-js/webpack.dev.js --hot",
+        "start:react": "webpack-dev-server --config webpack/react/webpack.dev.js --hot",
         "prettier:demo": "prettier --write \"demo/**/*.{js,jsx,html,scss}\"",
         "prettier:src": "prettier --write \"src/**/*.{js,jsx,html,scss}\"",
         "format": "prettier-eslint --write \"src/**/*.{js,jsx}\""

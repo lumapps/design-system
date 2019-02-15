@@ -1,15 +1,6 @@
-const path = require('path');
 const glob = require('glob');
 
-/**
- * Gives an absolute path by resolving the provided relative path.
- *
- * @param  {string} pathName The relative path.
- * @return {string} The resolved absolute path.
- */
-function absolutePath(pathName) {
-    return path.resolve(__dirname, pathName);
-}
+const { APP_PATH, CORE_PATH, DEFAULT_HOST, DEFAULT_PORT } = require('./constants');
 
 /**
  * Setup Babel transpiler.
@@ -44,13 +35,38 @@ function getSassRessourcesFiles() {
     const ressourceFileNames = ['_mixins', '_variables', '_color-palette', '_functions'];
 
     // Sets the paths to match according to https://github.com/isaacs/minimatch documentation.
-    const pathToMatch = `${absolutePath('../src/core/style')}/**/+(${ressourceFileNames.join('|')}).scss`;
+    const pathToMatch = `${CORE_PATH}/style/**/+(${ressourceFileNames.join('|')}).scss`;
 
     return glob.sync(pathToMatch);
 }
 
+/**
+ * Returns `WebpackDevServer` default config to use in dev mode.
+ *
+ * @param  {number} port The port we want to use.
+ * @return {Object} The config object.
+ */
+function getWebpackDevServerConfig({ port } = {}) {
+    return {
+        compress: true,
+        contentBase: APP_PATH,
+        disableHostCheck: true,
+        headers: {
+            'Access-Control-Allow-Headers': '*',
+            'Access-Control-Allow-Origin': '*',
+        },
+        historyApiFallback: {
+            index: '/',
+        },
+        host: DEFAULT_HOST,
+        hot: true,
+        overlay: true,
+        port: port || DEFAULT_PORT,
+    };
+}
+
 module.exports = {
-    absolutePath,
     babelSetup,
     getSassRessourcesFiles,
+    getWebpackDevServerConfig,
 };

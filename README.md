@@ -9,6 +9,9 @@ yarn install
 # or
 npm install
 
-# For angular-js
+# For angular-js dev server
 npm run start:angular-js
+
+# For react dev server.
+npm run start:react
 ```
