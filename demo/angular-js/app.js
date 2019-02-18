@@ -159,6 +159,14 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                     template: require('./components/lx-tooltip/demo.html'),
                 },
             },
+        })
+        .state('app.toolbar', {
+            url: 'toolbar',
+            views: {
+                'main@': {
+                    template: require('./components/lx-toolbar/demo.html'),
+                },
+            },
         });
 }
 

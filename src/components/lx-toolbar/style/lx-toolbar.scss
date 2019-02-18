@@ -1,0 +1,26 @@
+/* ==========================================================================
+   Toolbar
+   ========================================================================== */
+
+@import './variables';
+
+.lx-toolbar {
+    display: flex;
+    height: $lx-toolbar-height;
+    align-items: center;
+    padding: 0 $lx-base-spacing-unit * 3;
+
+    &__left {
+        flex-shrink: 0;
+        margin-right: $lx-base-spacing-unit * 2;
+    }
+
+    &__label {
+        flex: 1;
+    }
+
+    &__right {
+        flex-shrink: 0;
+        margin-left: $lx-base-spacing-unit * 2;
+    }
+}

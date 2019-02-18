@@ -24,9 +24,11 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
         const compiledAlertDialog = $compile(
             `<lx-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
-                        <div class="p++">
-                            <span class="lx-typography-title">${title}</span>
-                        </div>
+                        <lx-toolbar>
+                            <lx-toolbar-label>
+                                <span class="lx-typography-title">${title}</span>
+                            </lx-toolbar-label>
+                        </lx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
                         <div class="ph++">
@@ -76,9 +78,11 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
         const compiledConfirmDialog = $compile(
             `<lx-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
-                        <div class="p++">
-                            <span class="lx-typography-title">${title}</span>
-                        </div>
+                        <lx-toolbar>
+                            <lx-toolbar-label>
+                                <span class="lx-typography-title">${title}</span>
+                            </lx-toolbar-label>
+                        </lx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
                         <div class="ph++">
