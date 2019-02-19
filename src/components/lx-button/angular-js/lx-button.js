@@ -26,16 +26,29 @@ function lxButtonDirective(LxThemeConstant) {
      * @return {string}  The button html template.
      */
     function getTemplate(el, attrs) {
-        const buttonType = angular.isDefined(attrs.lxType) ? attrs.lxType : 'primary';
-        const buttonColor = angular.isDefined(attrs.lxColor) ? attrs.lxColor : 'primary';
-        const buttonSize = angular.isDefined(attrs.lxSize) ? attrs.lxSize : 'm';
-        const buttonTheme = angular.isDefined(attrs.lxTheme) ? attrs.lxTheme : 'light';
-        let buttonClass = `lx-button lx-button--type-${buttonType} lx-button--size-${buttonSize} lx-button--theme-${buttonTheme}`;
+        const defaultProps = {
+            color: 'primary',
+            size: 'm',
+            theme: 'light',
+            type: 'primary',
+        };
 
-        if (LxThemeConstant.includes(buttonColor)) {
-            buttonClass += ` lx-button--color-${buttonColor}`;
-        } else {
-            buttonClass += ' lx-button--color-custom';
+        let buttonClass = 'lx-button';
+
+        if (!attrs.lxColor && (attrs.lxType === 'primary' || !attrs.lxType)) {
+            buttonClass += ` lx-button--color-${defaultProps.color}`;
+        }
+
+        if (!attrs.lxSize) {
+            buttonClass += ` lx-button--size-${defaultProps.size}`;
+        }
+
+        if (!attrs.lxTheme) {
+            buttonClass += ` lx-button--theme-${defaultProps.theme}`;
+        }
+
+        if (!attrs.lxType) {
+            buttonClass += ` lx-button--type-${defaultProps.type}`;
         }
 
         if (isAnchor(attrs)) {
@@ -45,7 +58,7 @@ function lxButtonDirective(LxThemeConstant) {
         return `<button class="${buttonClass}" ng-transclude></button>`;
     }
 
-    function link(scope, el) {
+    function link(scope, el, attrs) {
         const transcludedIcon = el.find('i');
         const tanscludedText = el.find('span');
 
@@ -70,6 +83,36 @@ function lxButtonDirective(LxThemeConstant) {
         if (tanscludedText.length > 0) {
             tanscludedText.addClass('lx-button__text');
         }
+
+        attrs.$observe('lxColor', (color) => {
+            el.removeClass((index, className) => {
+                return (className.match(/(^|\s)lx-button--color-\S+/g) || []).join(' ');
+            });
+
+            if (LxThemeConstant.includes(color)) {
+                el.addClass(`lx-button--color-${color}`);
+            } else {
+                el.addClass('lx-button--color-custom');
+            }
+        });
+
+        attrs.$observe('lxSize', (size) => {
+            el.removeClass((index, className) => {
+                return (className.match(/(^|\s)lx-button--size-\S+/g) || []).join(' ');
+            }).addClass(`lx-button--size-${size}`);
+        });
+
+        attrs.$observe('lxTheme', (theme) => {
+            el.removeClass((index, className) => {
+                return (className.match(/(^|\s)lx-button--theme-\S+/g) || []).join(' ');
+            }).addClass(`lx-button--theme-${theme}`);
+        });
+
+        attrs.$observe('lxType', (type) => {
+            el.removeClass((index, className) => {
+                return (className.match(/(^|\s)lx-button--type-\S+/g) || []).join(' ');
+            }).addClass(`lx-button--type-${type}`);
+        });
     }
 
     return {
