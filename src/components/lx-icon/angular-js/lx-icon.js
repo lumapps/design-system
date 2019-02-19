@@ -32,9 +32,6 @@ function lxIconDirective() {
         link,
         replace: true,
         restrict: 'E',
-        scope: {
-            iconId: '@lxId',
-        },
         template: getTemplate,
     };
 }
