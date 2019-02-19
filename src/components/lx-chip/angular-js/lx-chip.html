@@ -5,10 +5,10 @@
                 'lx-chip--is-deletable': lxChip.isDeletable,
                 'lx-chip--is-disabled': lxChip.isDisabled }"
 >
-    <div class="lx-chip__label" ng-transclude ng-if="!lxChip.hasPrimary && !lxChip.hasLabel"></div>
+    <div class="lx-chip__label" ng-transclude ng-if="::!lxChip.hasPrimary && !lxChip.hasLabel"></div>
 
-    <div class="lx-chip__primary" ng-transclude="primary" ng-if="lxChip.hasPrimary"></div>
-    <div class="lx-chip__label" ng-transclude="label" ng-if="lxChip.hasLabel"></div>
+    <div class="lx-chip__primary" ng-transclude="primary" ng-if="::lxChip.hasPrimary"></div>
+    <div class="lx-chip__label" ng-transclude="label" ng-if="::lxChip.hasLabel"></div>
 
     <div class="lx-chip__secondary" ng-if="lxChip.isDeletable">
         <lx-icon lx-id="close" lx-size="xs"></lx-icon>

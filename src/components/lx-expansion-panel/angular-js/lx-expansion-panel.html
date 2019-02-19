@@ -1,33 +1,37 @@
-<div class="lx-expansion-panel"
-     ng-class="{ 'lx-expansion-panel--is-open': lxExpansionPanel.isWrapperOpen,
+<div
+    class="lx-expansion-panel"
+    ng-class="{ 'lx-expansion-panel--is-open': lxExpansionPanel.isWrapperOpen,
                  'lx-expansion-panel--is-close': !lxExpansionPanel.isWrapperOpen,
                  'lx-expansion-panel--theme-light': !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light',
-                 'lx-expansion-panel--theme-dark': lxExpansionPanel.theme === 'dark' }">
+                 'lx-expansion-panel--theme-dark': lxExpansionPanel.theme === 'dark' }"
+>
     <div class="lx-expansion-panel__header">
-        <div class="lx-expansion-panel__drag-indicator" ng-if="lxExpansionPanel.isDraggable">
+        <div class="lx-expansion-panel__drag-indicator" ng-if="::lxExpansionPanel.isDraggable">
             <lx-icon
                 lx-id="drag-vertical"
-                lx-color="{{ (!lxExpansionPanel.theme || lxExpansionPanel.theme === 'light') ? 'dark' : 'light' }}"
-                lx-size="m" />
+                lx-color="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'dark' : 'light' }}"
+                lx-size="m"
+            ></lx-icon>
         </div>
 
-        <div class="lx-expansion-panel__label" ng-transclude="header" />
+        <div class="lx-expansion-panel__label" ng-transclude="header"></div>
 
         <div class="lx-expansion-panel__state-indicator">
             <lx-button
-                lx-theme="{{ (!lxExpansionPanel.theme || lxExpansionPanel.theme === 'light') ? 'light' : 'dark' }}"
+                lx-theme="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'light' : 'dark' }}"
                 lx-type="tertiary"
-                ng-click="lxExpansionPanel.toggle()">
-                <lx-icon lx-id="chevron-down" ng-show="lxExpansionPanel.isWrapperOpen" />
-                <lx-icon lx-id="chevron-right" ng-show="!lxExpansionPanel.isWrapperOpen" />
+                ng-click="lxExpansionPanel.toggle()"
+            >
+                <lx-icon lx-id="chevron-down" ng-show="lxExpansionPanel.isWrapperOpen"></lx-icon>
+                <lx-icon lx-id="chevron-right" ng-show="!lxExpansionPanel.isWrapperOpen"></lx-icon>
             </lx-button>
         </div>
     </div>
 
     <div class="lx-expansion-panel__wrapper" ng-if="lxExpansionPanel.isWrapperDisplayed">
         <div class="lx-expansion-panel__container">
-            <div class="lx-expansion-panel__content" ng-transclude="content" />
-            <div class="lx-expansion-panel__footer" ng-transclude="footer" ng-if="lxExpansionPanel.hasFooter" />
+            <div class="lx-expansion-panel__content" ng-transclude="content"></div>
+            <div class="lx-expansion-panel__footer" ng-transclude="footer" ng-if="::lxExpansionPanel.hasFooter"></div>
         </div>
     </div>
 </div>

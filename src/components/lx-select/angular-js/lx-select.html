@@ -13,7 +13,7 @@
                 'lx-select--valid': lxSelect.isValid,
                 'lx-select--error': lxSelect.hasError }"
 >
-    <span class="lx-select__label" ng-if="lxSelect.label">
+    <span class="lx-select__label" ng-if="::lxSelect.label">
         {{ lxSelect.label }}
     </span>
 
@@ -79,7 +79,7 @@
 
     <lx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
         <lx-dropdown-menu>
-            <div class="lx-select__filter" ng-if="lxSelect.displayFilter">
+            <div class="lx-select__filter" ng-if="::lxSelect.displayFilter">
                 <lx-icon lx-id="search" lx-size="s"></lx-icon>
 
                 <input
@@ -105,7 +105,7 @@
                     ng-click="lxSelect.select(choice, $event)"
                     ng-mouseover="lxSelect.activeChoiceIndex = $index"
                 >
-                    <div class="lx-select__choice-check" ng-if="lxSelect.multiple">
+                    <div class="lx-select__choice-check" ng-if="::lxSelect.multiple">
                         <lx-checkbox ng-checked="lxSelect.isSelected(choice)"></lx-checkbox>
                     </div>
 

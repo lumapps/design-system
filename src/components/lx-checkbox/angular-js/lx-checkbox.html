@@ -22,12 +22,15 @@
         </div>
     </div>
 
-    <div class="lx-checkbox__content" ng-if="!lxCheckbox.hasLabel && !lxCheckbox.hasHelp && lxCheckbox.hasTranscluded">
+    <div
+        class="lx-checkbox__content"
+        ng-if="::!lxCheckbox.hasLabel && !lxCheckbox.hasHelp && lxCheckbox.hasTranscluded"
+    >
         <label for="{{ lxCheckbox.checkboxId }}" class="lx-checkbox__label" ng-transclude></label>
     </div>
 
-    <div class="lx-checkbox__content" ng-if="lxCheckbox.hasLabel">
+    <div class="lx-checkbox__content" ng-if="::lxCheckbox.hasLabel">
         <label for="{{ lxCheckbox.checkboxId }}" class="lx-checkbox__label" ng-transclude="label"></label>
-        <span class="lx-checkbox__help" ng-transclude="help" ng-if="lxCheckbox.hasHelp"></span>
+        <span class="lx-checkbox__help" ng-transclude="help" ng-if="::lxCheckbox.hasHelp"></span>
     </div>
 </div>

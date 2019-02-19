@@ -7,18 +7,18 @@
                 'lx-text-field--valid': lxTextField.isValid,
                 'lx-text-field--error': lxTextField.hasError }"
 >
-    <label class="lx-text-field__label" ng-if="lxTextField.label">
+    <label class="lx-text-field__label" ng-if="::lxTextField.label">
         {{ lxTextField.label }}
     </label>
 
-    <span class="lx-text-field__helper" ng-if="lxTextField.helper">{{ lxTextField.helper }}</span>
+    <span class="lx-text-field__helper" ng-if="::lxTextField.helper">{{ lxTextField.helper }}</span>
 
     <div class="lx-text-field__input-wrapper">
         <lx-icon
             class="lx-text-field__input-icon"
             lx-id="{{ lxTextField.icon }}"
             lx-size="s"
-            ng-if="lxTextField.icon"
+            ng-if="::lxTextField.icon"
         ></lx-icon>
 
         <div class="lx-text-field__input-native" ng-transclude></div>

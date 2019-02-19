@@ -13,19 +13,19 @@
             class="lx-data-table__row lx-data-table__row--thead"
             ng-class="{ 'lx-data-table__row--is-selected': lxDataTable.bulk && lxDataTable.selectable && lxDataTable.allRowsSelected }"
         >
-            <th align="center" class="lx-data-table__cell lx-data-table__cell--thead" ng-if="lxDataTable.thumbnail">
+            <th align="center" class="lx-data-table__cell lx-data-table__cell--thead" ng-if="::lxDataTable.thumbnail">
                 <lx-checkbox
                     class="lx-data-table__checkbox"
                     lx-theme="{{ lxDataTable.theme }}"
                     ng-checked="lxDataTable.allRowsSelected"
                     ng-click="lxDataTable.toggleAllSelected()"
-                    ng-if="lxDataTable.bulk && lxDataTable.selectable"
+                    ng-if="::lxDataTable.bulk && lxDataTable.selectable"
                 ></lx-checkbox>
             </th>
             <th
                 align="center"
                 class="lx-data-table__cell lx-data-table__cell--thead"
-                ng-if="lxDataTable.selectable && !lxDataTable.thumbnail"
+                ng-if="::lxDataTable.selectable && !lxDataTable.thumbnail"
             >
                 <lx-checkbox
                     class="lx-data-table__checkbox"
@@ -62,7 +62,7 @@
             ng-repeat="tr in lxDataTable.tbody"
             ng-click="lxDataTable.toggleActivation(tr)"
         >
-            <td align="center" class="lx-data-table__cell lx-data-table__cell--tbody" ng-if="lxDataTable.thumbnail">
+            <td align="center" class="lx-data-table__cell lx-data-table__cell--tbody" ng-if="::lxDataTable.thumbnail">
                 <div
                     class="lx-data-table__thumbnail"
                     ng-if="lxDataTable.thead[0].format"
@@ -80,7 +80,7 @@
             <td
                 align="center"
                 class="lx-data-table__cell lx-data-table__cell--tbody"
-                ng-if="lxDataTable.selectable && !lxDataTable.thumbnail"
+                ng-if="::lxDataTable.selectable && !lxDataTable.thumbnail"
             >
                 <lx-checkbox
                     class="lx-data-table__checkbox"
