@@ -12,6 +12,7 @@ angular.module('lumx.chip', []);
 angular.module('lumx.data-table', []);
 angular.module('lumx.dialog', []);
 angular.module('lumx.dropdown', []);
+angular.module('lumx.expansion-panel', []);
 angular.module('lumx.icon', []);
 angular.module('lumx.list', []);
 angular.module('lumx.notification', []);
@@ -32,6 +33,7 @@ angular.module('lumx', [
     'lumx.data-table',
     'lumx.dialog',
     'lumx.dropdown',
+    'lumx.expansion-panel',
     'lumx.icon',
     'lumx.list',
     'lumx.notification',

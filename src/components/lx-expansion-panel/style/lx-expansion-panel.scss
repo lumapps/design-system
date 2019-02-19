@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Expansion panel
+   ========================================================================== */
+
+@import './variables';
+
+.lx-expansion-panel {
+    $self: &;
+
+    border-radius: $lx-expansion-panel-radius;
+
+    &__header {
+        display: flex;
+        height: $lx-expansion-panel-header-height;
+        align-items: center;
+    }
+
+    &__drag-indicator {
+        flex-shrink: 0;
+        margin: 0 $lx-base-spacing-unit;
+    }
+
+    &__label {
+        flex: 1;
+    }
+
+    &__state-indicator {
+        flex-shrink: 0;
+        margin: 0 $lx-base-spacing-unit;
+    }
+
+    &__wrapper {
+        overflow: hidden;
+        transition: max-height $lx-expansion-panel-transition-duration;
+
+        #{ $self }--is-close & {
+            max-height: 0 !important;
+        }
+    }
+}

@@ -10,6 +10,7 @@ import './components/lx-dialog/angular-js/lx-dialog_service';
 import './components/lx-dialog/angular-js/lx-dialog-close';
 import './components/lx-dropdown/angular-js/lx-dropdown';
 import './components/lx-dropdown/angular-js/lx-dropdown_service';
+import './components/lx-expansion-panel/angular-js/lx-expansion-panel';
 import './components/lx-icon/angular-js/lx-icon';
 import './components/lx-list/angular-js/lx-list';
 import './components/lx-list/angular-js/lx-list-divider';

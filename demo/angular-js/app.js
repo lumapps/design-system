@@ -76,6 +76,16 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 },
             },
         })
+        .state('app.expansion-panel', {
+            url: 'expansion-panel',
+            views: {
+                'main@': {
+                    controller: 'DemoExpansionPanelController',
+                    controllerAs: 'vm',
+                    template: require('./components/lx-expansion-panel/demo.html'),
+                },
+            },
+        })
         .state('app.list', {
             url: 'list',
             views: {
@@ -195,6 +205,7 @@ require('./components/lx-checkbox/controller.js');
 require('./components/lx-data-table/controller.js');
 require('./components/lx-dialog/controller.js');
 require('./components/lx-dropdown/controller.js');
+require('./components/lx-expansion-panel/controller.js');
 require('./components/lx-notification/controller.js');
 require('./components/lx-radio-button/controller.js');
 require('./components/lx-select/controller.js');
