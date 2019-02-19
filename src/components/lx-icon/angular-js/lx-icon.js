@@ -11,24 +11,30 @@ function lxIconDirective() {
      * @return {string}  The icon html template.
      */
     function getTemplate(el, attrs) {
-        let iconClass = 'lx-icon';
+        return `<i class="lx-icon"><iconify-icon class="iconify" data-icon="mdi:${attrs.lxId}"></iconify-icon></i>`;
+    }
 
-        if (angular.isDefined(attrs.lxColor)) {
-            iconClass += ` lx-icon--color-${attrs.lxColor}`;
-        }
+    function link(scope, el, attrs) {
+        attrs.$observe('lxColor', (color) => {
+            el.removeClass((index, className) => {
+                return (className.match(/(^|\s)lx-icon--color-\S+/g) || []).join(' ');
+            }).addClass(`lx-icon--color-${color}`);
+        });
 
-        if (angular.isDefined(attrs.lxSize)) {
-            iconClass += ` lx-icon--size-${attrs.lxSize}`;
-        }
-
-        return `<i class="${iconClass}"><iconify-icon class="iconify" data-icon="mdi:${
-            attrs.lxId
-        }"></iconify-icon></i>`;
+        attrs.$observe('lxSize', (size) => {
+            el.removeClass((index, className) => {
+                return (className.match(/(^|\s)lx-icon--size-\S+/g) || []).join(' ');
+            }).addClass(`lx-icon--size-${size}`);
+        });
     }
 
     return {
+        link,
         replace: true,
         restrict: 'E',
+        scope: {
+            iconId: '@lxId',
+        },
         template: getTemplate,
     };
 }
