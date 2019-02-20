@@ -37,21 +37,21 @@ function lxCheckboxController(LxUtilsService) {
     lxCheckbox.checkboxId = LxUtilsService.generateUUID();
 
     /**
-     * Wether the directive has help slot filled or not.
+     * Whether the directive has help slot filled or not.
      *
      * @type {boolean}
      */
     lxCheckbox.hasHelp = false;
 
     /**
-     * Wether the directive has label slot filled or not.
+     * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
     lxCheckbox.hasLabel = false;
 
     /**
-     * Wether the directive has transcluded content if no transclude slot.
+     * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */

@@ -13,21 +13,21 @@ function lxListItemController() {
     /////////////////////////////
 
     /**
-     * Wether the directive has content slot filled or not.
+     * Whether the directive has content slot filled or not.
      *
      * @type {boolean}
      */
     lxListItem.hasContent = false;
 
     /**
-     * Wether the directive has primary slot filled or not.
+     * Whether the directive has primary slot filled or not.
      *
      * @type {boolean}
      */
     lxListItem.hasPrimary = false;
 
     /**
-     * Wether the directive has secondary slot filled or not.
+     * Whether the directive has secondary slot filled or not.
      *
      * @type {boolean}
      */

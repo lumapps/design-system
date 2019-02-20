@@ -17,14 +17,14 @@ function lxChipController() {
     /////////////////////////////
 
     /**
-     * Wether the directive has label slot filled or not.
+     * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
     lxChip.hasLabel = false;
 
     /**
-     * Wether the directive has primary slot filled or not.
+     * Whether the directive has primary slot filled or not.
      *
      * @type {boolean}
      */

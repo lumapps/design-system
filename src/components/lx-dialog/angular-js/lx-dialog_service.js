@@ -54,7 +54,7 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
      * Close a given dialog.
      *
      * @param {string}  dialogId The dialog identifier.
-     * @param {boolean} canceled Wether the dialog is closed via a cancel or not.
+     * @param {boolean} canceled Whether the dialog is closed via a cancel or not.
      * @param {Object}  params   An optional object that holds extra parameters.
      */
     function closeDialog(dialogId, canceled, params) {

@@ -41,7 +41,7 @@ function lxTabController($scope, LxUtilsService) {
     /**
      * Check if the current tab is active.
      *
-     * @return {boolean} Wether the current tab is active or not.
+     * @return {boolean} Whether the current tab is active or not.
      */
     function isTabActive() {
         return _parentController.isTabActive(lxTab.tab.index);
@@ -80,7 +80,7 @@ function lxTabController($scope, LxUtilsService) {
     /**
      * Watch for any changes of the current tab disabled state.
      *
-     * @param {boolean} isDisabled Wether the tab is disabled or not.
+     * @param {boolean} isDisabled Whether the tab is disabled or not.
      */
     $scope.$watch('lxTab.isDisabled', function isDisableddWatcher(isDisabled) {
         lxTab.tab.isDisabled = isDisabled;

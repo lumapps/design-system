@@ -14,21 +14,21 @@ function lxToolbarController() {
     /////////////////////////////
 
     /**
-     * Wether the directive has label slot filled or not.
+     * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
     lxToolbar.hasLabel = false;
 
     /**
-     * Wether the directive has left slot filled or not.
+     * Whether the directive has left slot filled or not.
      *
      * @type {boolean}
      */
     lxToolbar.hasLeft = false;
 
     /**
-     * Wether the directive has right slot filled or not.
+     * Whether the directive has right slot filled or not.
      *
      * @type {boolean}
      */

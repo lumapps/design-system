@@ -59,7 +59,7 @@ function LxDropdownService($rootScope) {
      * Check if a given dropdown is open.
      *
      * @param  {string}  uuid The dropdown uuid.
-     * @return {boolean} Wether the given dropdown is open or not.
+     * @return {boolean} Whether the given dropdown is open or not.
      */
     function isOpen(uuid) {
         return _activeDropdownUuid === uuid;

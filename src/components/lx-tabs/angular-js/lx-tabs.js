@@ -61,7 +61,7 @@ function lxTabsController() {
      * Check if a given tab is active.
      *
      * @param  {number}  tabIndex The tab index.
-     * @return {boolean} Wether the given tab is active or not.
+     * @return {boolean} Whether the given tab is active or not.
      */
     function isTabActive(tabIndex) {
         return lxTabs.activeTab === tabIndex;

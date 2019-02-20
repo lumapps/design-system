@@ -64,8 +64,8 @@ function lxDropdownController(
     let _menuEl;
 
     /**
-     * Wether the user pointer is on menu or not.
-     * Useful to know wether or not close the menu in hover mode.
+     * Whether the user pointer is on menu or not.
+     * Useful to know Whether or not close the menu in hover mode.
      *
      * @type {boolean}
      */
@@ -85,14 +85,14 @@ function lxDropdownController(
     /////////////////////////////
 
     /**
-     * Wether the directive has toggle slot filled or not.
+     * Whether the directive has toggle slot filled or not.
      *
      * @type {boolean}
      */
     lxDropdown.hasToggle = false;
 
     /**
-     * Wether the dropdown is open or not.
+     * Whether the dropdown is open or not.
      *
      * @type {boolean}
      */
@@ -299,7 +299,7 @@ function lxDropdownController(
     /**
      * Close dropdown on mouse enter.
      *
-     * @param {string} fromMenu Wether the function is triggered from the menu or from the toggle.
+     * @param {string} fromMenu Whether the function is triggered from the menu or from the toggle.
      */
     function closeOnMouseLeave(fromMenu) {
         if (!lxDropdown.hover) {

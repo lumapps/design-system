@@ -34,21 +34,21 @@ function lxRadioButtonController(LxUtilsService) {
     lxRadioButton.radioButtonId = LxUtilsService.generateUUID();
 
     /**
-     * Wether the directive has help slot filled or not.
+     * Whether the directive has help slot filled or not.
      *
      * @type {boolean}
      */
     lxRadioButton.hasHelp = false;
 
     /**
-     * Wether the directive has label slot filled or not.
+     * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
     lxRadioButton.hasLabel = false;
 
     /**
-     * Wether the directive has transcluded content if no transclude slot.
+     * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */

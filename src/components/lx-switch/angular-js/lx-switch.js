@@ -34,21 +34,21 @@ function lxSwitchController(LxUtilsService) {
     lxSwitch.switchId = LxUtilsService.generateUUID();
 
     /**
-     * Wether the directive has help slot filled or not.
+     * Whether the directive has help slot filled or not.
      *
      * @type {boolean}
      */
     lxSwitch.hasHelp = false;
 
     /**
-     * Wether the directive has label slot filled or not.
+     * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
     lxSwitch.hasLabel = false;
 
     /**
-     * Wether the directive has transcluded content if no transclude slot.
+     * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */

@@ -87,7 +87,7 @@ function LxEventSchedulerService($document, LxUtilsService) {
      * Unregister en event.
      *
      * @param  {string} id The event id.
-     * @return {found}  Wether the event has been found or not.
+     * @return {found}  Whether the event has been found or not.
      */
     function unregister(id) {
         let found = false;

@@ -80,7 +80,7 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
     lxSelect.activeChoiceIndex = 0;
 
     /**
-     * Wether the dropdown is open or not.
+     * Whether the dropdown is open or not.
      *
      * @type {boolean}
      */
@@ -379,7 +379,7 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
     /**
      * Check if the model is empty.
      *
-     * @return {boolean} Wether the model is empty or not.
+     * @return {boolean} Whether the model is empty or not.
      */
     function isModelEmpty() {
         if (lxSelect.multiple) {
@@ -393,7 +393,7 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
      * Check if a choice is selected.
      *
      * @param  {Object}  choice The choice object.
-     * @return {boolean} Wether the choice is selected or not.
+     * @return {boolean} Whether the choice is selected or not.
      */
     function isSelected(choice) {
         if (lxSelect.multiple) {

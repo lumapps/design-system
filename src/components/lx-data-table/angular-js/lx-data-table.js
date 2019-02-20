@@ -17,7 +17,7 @@ function lxDataTableController($rootScope, $sce, $scope) {
     /////////////////////////////
 
     /**
-     * Wether all rows are selected or not.
+     * Whether all rows are selected or not.
      *
      * @type {boolean}
      */
@@ -130,7 +130,7 @@ function lxDataTableController($rootScope, $sce, $scope) {
     /////////////////////////////
 
     /**
-     * Wether all rows are selected or not.
+     * Whether all rows are selected or not.
      */
     function areAllRowsSelected() {
         let displayedRows = 0;
@@ -217,7 +217,7 @@ function lxDataTableController($rootScope, $sce, $scope) {
      * Select or unselect a given row.
      *
      * @param {Object}  row                 The row to select/unselect.
-     * @param {boolean} [newSelectedStatus] Wether the given row should be selected or unselected.
+     * @param {boolean} [newSelectedStatus] Whether the given row should be selected or unselected.
      * @param {Event}   [evt]               The checkbox click event.
      */
     function toggleSelection(row, newSelectedStatus, evt) {

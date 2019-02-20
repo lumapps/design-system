@@ -71,14 +71,14 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
     let _idEventScheduler;
 
     /**
-     * Wether the dialog is an alert dialog or not.
+     * Whether the dialog is an alert dialog or not.
      *
      * @type {boolean}
      */
     let _isAlertDialog = false;
 
     /**
-     * Wether the dialog is a confirm dialog or not.
+     * Whether the dialog is a confirm dialog or not.
      *
      * @type {boolean}
      */
@@ -105,7 +105,7 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
     lxDialog.id = undefined;
 
     /**
-     * Wether the dialog is open or not.
+     * Whether the dialog is open or not.
      *
      * @type {boolean}
      */
@@ -137,7 +137,7 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
     /**
      * Close the current dialog.
      *
-     * @param {boolean} canceled Wether the dialog is closed via a cancel or not.
+     * @param {boolean} canceled Whether the dialog is closed via a cancel or not.
      * @param {Object}  params   An optional object that holds extra parameters.
      */
     function _close(canceled, params) {
@@ -268,7 +268,7 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
      *
      * @param {Event}   evt      The dropdown open event.
      * @param {string}  dialogId The dialog identifier.
-     * @param {boolean} canceled Wether the dialog is closed via a cancel or not.
+     * @param {boolean} canceled Whether the dialog is closed via a cancel or not.
      * @param {Object}  params   An optional object that holds extra parameters.
      */
     $scope.$on('lx-dialog__close', (evt, dialogId, canceled, params) => {

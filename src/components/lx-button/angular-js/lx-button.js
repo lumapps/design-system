@@ -4,10 +4,10 @@ import '../style/lx-button.scss';
 
 function lxButtonDirective(LxThemeConstant) {
     /**
-     * Wether the button needs to be converted to a link or not.
+     * Whether the button needs to be converted to a link or not.
      *
      * @param  {Object}  attrs The directive attributes.
-     * @return {boolean} Wether the button is an anchor or not.
+     * @return {boolean} Whether the button is an anchor or not.
      */
     function isAnchor(attrs) {
         return (
