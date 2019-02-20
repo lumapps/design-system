@@ -1836,6 +1836,14 @@ module.exports = {
                 'react/void-dom-elements-no-children': 'error',
             },
         },
+        {
+            files: ['jest/**'],
+            rules: {
+                'import/no-commonjs': 'off',
+                'import/no-extraneous-dependencies': 'off',
+                'import/unambiguous': 'off',
+            },
+        },
     ],
 
     root: true,

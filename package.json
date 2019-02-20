@@ -21,9 +21,13 @@
         "@uirouter/angularjs": "^1.0.20",
         "autoprefixer": "^9.4.1",
         "babel-eslint": "^10.0.1",
+        "babel-jest": "^24.1.0",
         "babel-loader": "^8.0.5",
         "connect-history-api-fallback": "^1.5.0",
         "css-loader": "^2.1.0",
+        "enzyme": "^3.9.0",
+        "enzyme-adapter-react-16": "^1.9.1",
+        "enzyme-to-json": "^3.3.5",
         "eslint": "^5.12.1",
         "eslint-config-prettier": "^4.0.0",
         "eslint-plugin-angular": "^3.3.0",
@@ -40,6 +44,7 @@
         "glob": "^7.1.3",
         "html-loader": "^0.5.5",
         "html-webpack-plugin": "^3.2.0",
+        "jest": "^24.1.0",
         "node-sass": "^4.11.0",
         "path": "^0.12.7",
         "postcss": "^7.0.2",
@@ -68,7 +73,9 @@
         "prettier:demo": "prettier --write \"demo/**/*.{js,jsx,html,scss}\"",
         "prettier:src": "prettier --write \"src/**/*.{js,jsx,html,scss}\"",
         "start:angular-js": "webpack-dev-server --config webpack/angular-js/webpack.dev.js --hot",
-        "start:react": "webpack-dev-server --config webpack/react/webpack.dev.js --hot"
+        "start:react": "webpack-dev-server --config webpack/react/webpack.dev.js --hot",
+        "test:react": "jest --config jest/react/index.js",
+        "test:react:watch": "jest --config jest/react/index.js --watch"
     },
     "repository": {
         "type": "git",
