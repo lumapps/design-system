@@ -6,15 +6,30 @@ function lxIconDirective() {
     /**
      * Get icon template according to color and size.
      *
-     * @param  {Element} el    The directive element.
-     * @param  {Object}  attrs The directive attributes.
-     * @return {string}  The icon html template.
+     * @return {string} The icon html template.
      */
-    function getTemplate(el, attrs) {
-        return `<i class="lx-icon"><iconify-icon class="iconify" data-icon="mdi:${attrs.lxId}"></iconify-icon></i>`;
+    function getTemplate() {
+        return `
+            <i class="lx-icon">
+                <svg
+                    aria-hidden="true"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                >
+                    <path fill="currentColor" />
+                </svg>
+            </i>
+        `;
     }
 
     function link(scope, el, attrs) {
+        attrs.$observe('lxPath', (path) => {
+            el.find('path').attr('d', path);
+        });
+
         attrs.$observe('lxColor', (color) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)lx-icon--color-\S+/g) || []).join(' ');
