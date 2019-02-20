@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
+import { mdiClose } from '@lumx/icons';
+
 import '../style/lx-chip.scss';
 import template from './lx-chip.html';
 
@@ -26,6 +29,15 @@ function lxChipController() {
      * @type {boolean}
      */
     lxChip.hasPrimary = false;
+
+    /**
+     * The chips icons.
+     *
+     * @type {Object}
+     */
+    lxChip.icons = {
+        mdiClose,
+    };
 }
 
 /////////////////////////////

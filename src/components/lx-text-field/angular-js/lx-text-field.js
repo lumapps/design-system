@@ -1,11 +1,30 @@
+// eslint-disable-next-line import/no-unresolved
+import { mdiAlertCircle, mdiCheckCircle } from '@lumx/icons';
+
 import '../style/lx-text-field.scss';
 import template from './lx-text-field.html';
 
 /////////////////////////////
 
 function lxTextFieldController() {
-    // eslint-disable-next-line consistent-this, no-unused-vars
+    // eslint-disable-next-line consistent-this
     const lxTextField = this;
+
+    /////////////////////////////
+    //                         //
+    //    Public attributes    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The text field icons.
+     *
+     * @type {Object}
+     */
+    lxTextField.icons = {
+        mdiAlertCircle,
+        mdiCheckCircle,
+    };
 }
 
 /////////////////////////////

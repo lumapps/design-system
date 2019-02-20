@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
+import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
+
 import '../style/lx-select.scss';
 import template from './lx-select.html';
 
@@ -96,6 +99,19 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
      * @type {string}
      */
     lxSelect.filterModel = undefined;
+
+    /**
+     * The select icons.
+     *
+     * @type {Object}
+     */
+    lxSelect.icons = {
+        mdiAlertCircle,
+        mdiCheckCircle,
+        mdiCloseCircle,
+        mdiMagnify,
+        mdiMenuDown,
+    };
 
     /**
      * The dropdown target unique identifier.

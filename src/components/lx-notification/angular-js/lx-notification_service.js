@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
+import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from '@lumx/icons';
+
 import '../style/lx-notification.scss';
 
 /////////////////////////////
@@ -37,19 +40,19 @@ function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {
     const _notificationTypes = {
         errorNotification: {
             color: 'red',
-            icon: 'alert',
+            icon: mdiAlert,
         },
         infoNotification: {
             color: 'dark',
-            icon: 'information',
+            icon: mdiInformation,
         },
         successNotification: {
             color: 'green',
-            icon: 'check',
+            icon: mdiCheck,
         },
         warningNotification: {
             color: 'yellow',
-            icon: 'alert-circle-outline',
+            icon: mdiAlertCircleOutline,
         },
     };
 
@@ -88,7 +91,7 @@ function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {
         const notificationIconWrapper = angular.element('<div/>', {
             class: 'lx-notification__icon',
         });
-        const notificationIcon = $compile(`<lx-icon lx-id="${_notificationTypes[type].icon}" lx-size="m"></lx-icon>`)(
+        const notificationIcon = $compile(`<lx-icon lx-path="${_notificationTypes[type].icon}" lx-size="m"></lx-icon>`)(
             $rootScope,
         );
 

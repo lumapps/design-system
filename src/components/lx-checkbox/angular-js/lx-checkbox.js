@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
+import { mdiCheck } from '@lumx/icons';
+
 import '../style/lx-checkbox.scss';
 import template from './lx-checkbox.html';
 
@@ -53,6 +56,15 @@ function lxCheckboxController(LxUtilsService) {
      * @type {boolean}
      */
     lxCheckbox.hasTranscluded = false;
+
+    /**
+     * The checkbox icons.
+     *
+     * @type {Object}
+     */
+    lxCheckbox.icons = {
+        mdiCheck,
+    };
 
     /**
      * The model view value.

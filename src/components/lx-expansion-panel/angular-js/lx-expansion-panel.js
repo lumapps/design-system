@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
+import { mdiChevronDown, mdiChevronRight, mdiDragVertical } from '@lumx/icons';
+
 import '../style/lx-expansion-panel.scss';
 import template from './lx-expansion-panel.html';
 
@@ -34,6 +37,17 @@ function lxExpansionPanelController($element, $scope, $timeout) {
      * @type {boolean}
      */
     lxExpansionPanel.hasFooter = false;
+
+    /**
+     * The expansion panel icons.
+     *
+     * @type {Object}
+     */
+    lxExpansionPanel.icons = {
+        mdiChevronDown,
+        mdiChevronRight,
+        mdiDragVertical,
+    };
 
     /**
      * Whether the expansion panel wrapper is displayed or not.

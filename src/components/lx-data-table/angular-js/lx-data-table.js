@@ -1,3 +1,6 @@
+// eslint-disable-next-line import/no-unresolved
+import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
+
 import '../style/lx-data-table.scss';
 import template from './lx-data-table.html';
 
@@ -19,6 +22,16 @@ function lxDataTableController($rootScope, $sce, $scope) {
      * @type {boolean}
      */
     lxDataTable.allRowsSelected = false;
+
+    /**
+     * The data table icons.
+     *
+     * @type {Object}
+     */
+    lxDataTable.icons = {
+        mdiArrowDown,
+        mdiArrowUp,
+    };
 
     /**
      * The array containing all selected rows.

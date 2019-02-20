@@ -8,7 +8,7 @@
     <div class="lx-expansion-panel__header">
         <div class="lx-expansion-panel__drag-indicator" ng-if="::lxExpansionPanel.isDraggable">
             <lx-icon
-                lx-id="drag-vertical"
+                lx-path="{{ lxExpansionPanel.icons.mdiDragVertical }}"
                 lx-color="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'dark' : 'light' }}"
                 lx-size="m"
             ></lx-icon>
@@ -22,8 +22,14 @@
                 lx-type="tertiary"
                 ng-click="lxExpansionPanel.toggle()"
             >
-                <lx-icon lx-id="chevron-down" ng-show="lxExpansionPanel.isWrapperOpen"></lx-icon>
-                <lx-icon lx-id="chevron-right" ng-show="!lxExpansionPanel.isWrapperOpen"></lx-icon>
+                <lx-icon
+                    lx-path="{{
+                        lxExpansionPanel.isWrapperOpen
+                            ? lxExpansionPanel.icons.mdiChevronDown
+                            : lxExpansionPanel.icons.mdiChevronRight
+                    }}"
+                >
+                </lx-icon>
             </lx-button>
         </div>
     </div>
