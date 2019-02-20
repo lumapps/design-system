@@ -6,16 +6,10 @@ import classNames from 'classnames';
  * @param  {Object} props The component props.
  * @return {string} All lumX basic classes.
  */
-export const handleBasicLxClasses = ({
-    lxColor = 'primary',
-    lxSize = 'm',
-    lxTheme = 'light',
-    lxType = 'primary',
-    prefix,
-}) =>
+export const handleBasicClasses = ({ color, size, theme, variant, prefix }) =>
     classNames(prefix, {
-        [`${prefix}--color-${lxColor}`]: lxColor,
-        [`${prefix}--size-${lxSize}`]: lxSize,
-        [`${prefix}--theme-${lxTheme}`]: lxTheme,
-        [`${prefix}--type-${lxType}`]: lxType,
+        [`${prefix}--color-${color}`]: color,
+        [`${prefix}--size-${size}`]: size,
+        [`${prefix}--theme-${theme}`]: theme,
+        [`${prefix}--type-${variant}`]: variant,
     });

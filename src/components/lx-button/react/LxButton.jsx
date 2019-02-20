@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { handleBasicLxClasses } from '../../../core/utils';
+import { handleBasicClasses } from '../../../core/utils';
 import '../style/lx-button.scss';
 
 const LxButtonRoot = ({ href, children, ...props }) => {
@@ -14,12 +14,20 @@ const LxButtonRoot = ({ href, children, ...props }) => {
     );
 };
 
-const LxButton = ({ children, ...props }) => (
+const LxButton = ({
+    children,
+    className,
+    color = 'primary',
+    variant = 'primary',
+    size = 'm',
+    theme = 'light',
+    ...props
+}) => (
     <LxButtonRoot
-        className={classNames(handleBasicLxClasses({ prefix: 'lx-button', ...props }), 'lx-button--shape-contained')}
+        className={classNames(className, handleBasicClasses({ color, size, theme, variant, prefix: 'lx-button' }))}
         {...props}
     >
-        <span className="lx-button__text">{children}</span>
+        {children}
     </LxButtonRoot>
 );
 

@@ -983,7 +983,7 @@ module.exports = {
             },
         ],
         'sort-keys': [
-            'error',
+            'off',
             'asc',
             {
                 caseSensitive: true,

@@ -27,7 +27,9 @@ const webpackDevConfig = {
                 use: [
                     {
                         loader: 'babel-loader',
-                        options: babelSetup({ presets: ['@babel/preset-react'] }),
+                        options: babelSetup({
+                            presets: ['@babel/preset-react'],
+                        }),
                     },
                 ],
             },
