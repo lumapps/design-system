@@ -1,0 +1,10 @@
+{
+    "name": "@lumx/icons",
+    "version": "0.0.1",
+    "description": "Lumx Icons",
+    "main": "index.js",
+    "private": true,
+    "dependencies": {
+        "@mdi/js": "^3.4.93"
+    }
+}

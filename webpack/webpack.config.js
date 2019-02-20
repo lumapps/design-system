@@ -1,5 +1,5 @@
 const { babelSetup, getSassRessourcesFiles } = require('./utils');
-const { CORE_PATH, NODE_MODULES_PATH } = require('./constants');
+const { CORE_PATH, NODE_MODULES_PATH, ICONS_PATH } = require('./constants');
 
 const webpackBaseConfig = {
     module: {
@@ -57,6 +57,9 @@ const webpackBaseConfig = {
     resolve: {
         extensions: ['.js', '.jsx'],
         modules: ['node_modules'],
+        alias: {
+            '@lumx/icons': `${ICONS_PATH}/index.js`,
+        },
     },
 
     target: 'web',

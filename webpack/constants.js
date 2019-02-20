@@ -16,6 +16,7 @@ const NODE_MODULES_PATH = `${ROOT_PATH}/node_modules`;
 const SRC_PATH = getAbsolutePath('../src');
 const CORE_PATH = `${SRC_PATH}/core`;
 const COMPONENTS_PATH = `${SRC_PATH}/components`;
+const ICONS_PATH = `${SRC_PATH}/icons`;
 const DEMO_PATH = getAbsolutePath('../demo');
 
 // Techology relative constants.
@@ -34,6 +35,7 @@ module.exports = {
     DEFAULT_HOST,
     DEFAULT_PORT,
     DEMO_PATH,
+    ICONS_PATH,
     NODE_MODULES_PATH,
     ROOT_PATH,
     SRC_PATH,
