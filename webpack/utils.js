@@ -1,6 +1,6 @@
 const glob = require('glob');
 
-const { APP_PATH, CORE_PATH, DEFAULT_HOST, DEFAULT_PORT } = require('./constants');
+const { APP_PATH, CORE_PATH, COMPONENTS_PATH, DEFAULT_HOST, DEFAULT_PORT } = require('./constants');
 
 /**
  * Setup Babel transpiler.
@@ -25,6 +25,26 @@ function babelSetup({ plugins = [], presets = [] } = {}) {
         ],
     };
 }
+
+/**
+ * Returns all entry point for a given technology and prefix.
+ *
+ * @param  {string} prefix    The tech name (react|angular-js) to match correct path.
+ * @param  {string} extention The file extension to match.
+ * @return {Object} An object of all formatted matches to use in webpack config entry option with filename
+ *                  as key and path as value.
+ */
+const getComponents = ({ prefix, extention }) => {
+    const files = {};
+    const matches = glob.sync(`${COMPONENTS_PATH}/**/${prefix}/**/*.${extention}`);
+    const fileNameRegexp = `(?:.*)/(.*).${extention}`;
+
+    matches.forEach((match) => {
+        files[match.match(fileNameRegexp)[1]] = match;
+    });
+
+    return files;
+};
 
 /**
  * Get all sass ressource files which contains ressources to share across all scss files.
@@ -67,6 +87,7 @@ function getWebpackDevServerConfig({ port } = {}) {
 
 module.exports = {
     babelSetup,
+    getComponents,
     getSassRessourcesFiles,
     getWebpackDevServerConfig,
 };

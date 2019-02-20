@@ -1,8 +1,8 @@
 {
-    "name": "lumx",
+    "name": "@lumx/core",
     "version": "0.0.1",
     "private": true,
-    "module": "./src/react.index.jsx",
+    "main": "./dist/commonjs/index.js",
     "dependencies": {
         "angular": "^1.7.5",
         "classnames": "^2.2.6",
@@ -30,7 +30,7 @@
         "eslint-plugin-html": "^5.0.3",
         "eslint-plugin-import": "^2.16.0",
         "eslint-plugin-jsx-a11y": "^6.2.1",
-        "eslint-plugin-lumapps": "git+ssh://git@github.com/lumapps/eslint-plugin-lumapps#master",
+        "eslint-plugin-lumapps": "git+ssh://git@github.com/lumapps/eslint-plugin-lumapps.git#master",
         "eslint-plugin-no-useless-assign": "^1.0.2",
         "eslint-plugin-prettier": "^3.0.1",
         "eslint-plugin-react": "^7.12.4",
@@ -63,10 +63,19 @@
         "webpack-merge": "^4.2.1"
     },
     "scripts": {
-        "start:angular-js": "webpack-dev-server --config webpack/angular-js/webpack.dev.js --hot",
-        "start:react": "webpack-dev-server --config webpack/react/webpack.dev.js --hot",
+        "build:react:commonjs": "webpack --config webpack/react/webpack.commonjs.js",
+        "format": "prettier-eslint --write \"src/**/*.{js,jsx}\"",
         "prettier:demo": "prettier --write \"demo/**/*.{js,jsx,html,scss}\"",
         "prettier:src": "prettier --write \"src/**/*.{js,jsx,html,scss}\"",
-        "format": "prettier-eslint --write \"src/**/*.{js,jsx}\""
-    }
+        "start:angular-js": "webpack-dev-server --config webpack/angular-js/webpack.dev.js --hot",
+        "start:react": "webpack-dev-server --config webpack/react/webpack.dev.js --hot"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lumapps/design-system.git"
+    },
+    "bugs": {
+        "url": "https://github.com/lumapps/design-system/issues"
+    },
+    "homepage": "https://github.com/lumapps/design-system#readme"
 }
