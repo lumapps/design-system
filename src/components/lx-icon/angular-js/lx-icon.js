@@ -15,7 +15,6 @@ function lxIconDirective() {
                     aria-hidden="true"
                     height="1em"
                     preserveAspectRatio="xMidYMid meet"
-                    style="vertical-align: -0.125em;"
                     viewBox="0 0 24 24"
                     width="1em"
                 >
