@@ -1,8 +1,11 @@
+const { CORE_PATH } = require('../../webpack/constants');
+
 module.exports = {
     moduleDirectories: ['<rootDir>node_modules'],
     moduleFileExtensions: ['js', 'jsx'],
     moduleNameMapper: {
         '^.*\\.scss$': '<rootDir>jest/react/__mocks__/styleMock.js',
+        '^core/(.*)$': `${CORE_PATH}/$1`,
     },
     reporters: ['default'],
     rootDir: '../../',

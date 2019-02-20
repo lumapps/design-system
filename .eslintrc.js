@@ -1861,6 +1861,9 @@ module.exports = {
             node: {
                 extensions: ['.js', '.jsx'],
             },
+            webpack: {
+                config: 'webpack/webpack.config.js',
+            },
         },
         react: {
             createClass: 'createReactClass',

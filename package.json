@@ -30,6 +30,7 @@
         "enzyme-to-json": "^3.3.5",
         "eslint": "^5.12.1",
         "eslint-config-prettier": "^4.0.0",
+        "eslint-import-resolver-webpack": "^0.11.0",
         "eslint-plugin-angular": "^3.3.0",
         "eslint-plugin-html": "^5.0.3",
         "eslint-plugin-import": "^2.16.0",

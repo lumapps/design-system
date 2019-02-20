@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import '../style/lx-icon.scss';
 
-import { handleBasicClasses } from '../../../core/utils';
+import { handleBasicClasses } from 'core/utils';
 
 export const LxIcon = ({ className, icon, color, size }) => {
     return (
