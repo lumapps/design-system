@@ -1,47 +1,52 @@
-(function IIFE() {
-    'use strict';
+// eslint-disable-next-line import/no-unresolved
+import { mdiEmail, mdiSend } from '@lumx/icons';
+
+/////////////////////////////
+
+function DemoDropdownController(LxDropdownService) {
+    const vm = this;
 
     /////////////////////////////
+    //                         //
+    //    Public attributes    //
+    //                         //
+    /////////////////////////////
 
-    DemoDropdownController.$inject = ['LxDropdownService'];
+    vm.dropdownId = 'test-dropdown-menu';
+    vm.dropdownTarget = 'test-dropdown-target';
+    vm.icons = {
+        mdiEmail,
+        mdiSend,
+    };
 
-    function DemoDropdownController(LxDropdownService) {
-        var vm = this;
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
-        /////////////////////////////
-        //                         //
-        //    Public attributes    //
-        //                         //
-        /////////////////////////////
+    function closeDropdown(evt) {
+        evt.stopPropagation();
 
-        vm.dropdownId = 'test-dropdown-menu';
-        vm.dropdownTarget = 'test-dropdown-target';
+        LxDropdownService.close(vm.dropdownId);
+    }
 
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
+    function openDropdown(evt) {
+        evt.stopPropagation();
 
-        function closeDropdown(evt) {
-            evt.stopPropagation();
-
-            LxDropdownService.close(vm.dropdownId);
-        }
-
-        function openDropdown(evt) {
-            evt.stopPropagation();
-
-            LxDropdownService.open(vm.dropdownId, '#' + vm.dropdownTarget);
-        }
-
-        /////////////////////////////
-
-        vm.closeDropdown = closeDropdown;
-        vm.openDropdown = openDropdown;
+        LxDropdownService.open(vm.dropdownId, `#${vm.dropdownTarget}`);
     }
 
     /////////////////////////////
 
-    angular.module('design-system').controller('DemoDropdownController', DemoDropdownController);
-})();
+    vm.closeDropdown = closeDropdown;
+    vm.openDropdown = openDropdown;
+}
+
+/////////////////////////////
+
+angular.module('design-system').controller('DemoDropdownController', DemoDropdownController);
+
+/////////////////////////////
+
+export { DemoDropdownController };

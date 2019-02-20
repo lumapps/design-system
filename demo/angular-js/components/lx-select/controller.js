@@ -1,143 +1,139 @@
-(function IIFE() {
-    'use strict';
+function DemoSelectController($http) {
+    const vm = this;
 
     /////////////////////////////
+    //                         //
+    //    Public attributes    //
+    //                         //
+    /////////////////////////////
 
-    DemoSelectController.$inject = ['$http'];
+    vm.selectAjax = {
+        list: [],
+        loading: false,
+        selected: ['Bossk', 'Boba Fett'],
+        toModel(data, callback) {
+            if (data) {
+                callback(data.name);
+            } else {
+                callback();
+            }
+        },
+        toSelection(data, callback) {
+            if (data) {
+                $http
+                    .get(`https://swapi.co/api/people/?search=${escape(data)}`)
+                    .then(function toSelectionSuccess(response) {
+                        if (response.data && response.data.results) {
+                            callback(response.data.results[0]);
+                        }
+                    })
+                    .catch(function toSelectionError() {
+                        callback();
+                    });
+            } else {
+                callback();
+            }
+        },
+        update(newFilter) {
+            if (newFilter) {
+                vm.selectAjax.loading = true;
 
-    function DemoSelectController($http) {
-        var vm = this;
+                $http
+                    .get(`https://swapi.co/api/people/?search=${escape(newFilter)}`)
+                    .then(function updateSuccess(response) {
+                        if (response.data && response.data.results) {
+                            vm.selectAjax.list = response.data.results;
+                        }
+                        vm.selectAjax.loading = false;
+                    })
+                    .catch(function updateError() {
+                        vm.selectAjax.loading = false;
+                    });
+            } else {
+                vm.selectAjax.list = false;
+            }
+        },
+    };
 
-        /////////////////////////////
-        //                         //
-        //    Public attributes    //
-        //                         //
-        /////////////////////////////
+    vm.selectPeople = [
+        {
+            age: 10,
+            email: 'adam@email.com',
+            name: 'Adam',
+        },
+        {
+            age: 12,
+            email: 'amalie@email.com',
+            name: 'Amalie',
+        },
+        {
+            age: 30,
+            email: 'wladimir@email.com',
+            name: 'Wladimir',
+        },
+        {
+            age: 31,
+            email: 'samantha@email.com',
+            name: 'Samantha',
+        },
+        {
+            age: 16,
+            email: 'estefanía@email.com',
+            name: 'Estefanía',
+        },
+        {
+            age: 54,
+            email: 'natasha@email.com',
+            name: 'Natasha',
+        },
+        {
+            age: 43,
+            email: 'nicole@email.com',
+            name: 'Nicole',
+        },
+        {
+            age: 21,
+            email: 'adrian@email.com',
+            name: 'Adrian',
+        },
+    ];
 
-        vm.selectAjax = {
-            selected: ['Bossk', 'Boba Fett'],
-            list: [],
-            update: function(newFilter) {
-                if (newFilter) {
-                    vm.selectAjax.loading = true;
+    vm.selectModel = {
+        selectedPeople: [vm.selectPeople[2], vm.selectPeople[4]],
+        selectedPerson: undefined,
+    };
 
-                    $http
-                        .get('https://swapi.co/api/people/?search=' + escape(newFilter))
-                        .then(function updateSuccess(response) {
-                            if (response.data && response.data.results) {
-                                vm.selectAjax.list = response.data.results;
-                            }
-                            vm.selectAjax.loading = false;
-                        })
-                        .catch(function updateError() {
-                            vm.selectAjax.loading = false;
-                        });
-                } else {
-                    vm.selectAjax.list = false;
-                }
-            },
-            toModel: function(data, callback) {
-                if (data) {
-                    callback(data.name);
-                } else {
-                    callback();
-                }
-            },
-            toSelection: function(data, callback) {
-                if (data) {
-                    $http
-                        .get('https://swapi.co/api/people/?search=' + escape(data))
-                        .then(function toSelectionSuccess(response) {
-                            if (response.data && response.data.results) {
-                                callback(response.data.results[0]);
-                            }
-                        })
-                        .catch(function toSelectionError() {
-                            callback();
-                        });
-                } else {
-                    callback();
-                }
-            },
-            loading: false,
-        };
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
-        vm.selectPeople = [
-            {
-                name: 'Adam',
-                email: 'adam@email.com',
-                age: 10,
-            },
-            {
-                name: 'Amalie',
-                email: 'amalie@email.com',
-                age: 12,
-            },
-            {
-                name: 'Wladimir',
-                email: 'wladimir@email.com',
-                age: 30,
-            },
-            {
-                name: 'Samantha',
-                email: 'samantha@email.com',
-                age: 31,
-            },
-            {
-                name: 'Estefanía',
-                email: 'estefanía@email.com',
-                age: 16,
-            },
-            {
-                name: 'Natasha',
-                email: 'natasha@email.com',
-                age: 54,
-            },
-            {
-                name: 'Nicole',
-                email: 'nicole@email.com',
-                age: 43,
-            },
-            {
-                name: 'Adrian',
-                email: 'adrian@email.com',
-                age: 21,
-            },
-        ];
-
-        vm.selectModel = {
-            selectedPerson: undefined,
-            selectedPeople: [vm.selectPeople[2], vm.selectPeople[4]],
-        };
-
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
-
-        function selectCallback() {
-            console.log('New value: ', vm.selectAjax.selected);
-        }
-
-        /////////////////////////////
-
-        vm.selectCallback = selectCallback;
-
-        /////////////////////////////
-
-        function init() {
-            $http.get('https://swapi.co/api/people/?search=bo').then(function updateSuccess(response) {
-                if (response.data && response.data.results) {
-                    vm.selectAjax.list = response.data.results;
-                }
-            });
-        }
-
-        init();
+    function selectCallback() {
+        console.log('New value: ', vm.selectAjax.selected);
     }
 
     /////////////////////////////
 
-    angular.module('design-system').controller('DemoSelectController', DemoSelectController);
-})();
+    vm.selectCallback = selectCallback;
+
+    /////////////////////////////
+
+    function init() {
+        $http.get('https://swapi.co/api/people/?search=bo').then(function updateSuccess(response) {
+            if (response.data && response.data.results) {
+                vm.selectAjax.list = response.data.results;
+            }
+        });
+    }
+
+    init();
+}
+
+/////////////////////////////
+
+angular.module('design-system').controller('DemoSelectController', DemoSelectController);
+
+/////////////////////////////
+
+export { DemoSelectController };

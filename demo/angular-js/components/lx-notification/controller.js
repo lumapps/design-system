@@ -1,39 +1,35 @@
-(function IIFE() {
-    'use strict';
+function DemoNotificationController(LxNotificationService) {
+    const vm = this;
 
     /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
-    DemoNotificationController.$inject = ['LxNotificationService'];
-
-    function DemoNotificationController(LxNotificationService) {
-        var vm = this;
-
-        /////////////////////////////
-        //                         //
-        //     Public functions    //
-        //                         //
-        /////////////////////////////
-
-        function notify(type) {
-            if (type === 'info') {
-                LxNotificationService.info('Lorem Ipsum', 'Undo', function() {
-                    LxNotificationService.success('Callback');
-                });
-            } else if (type === 'success') {
-                LxNotificationService.success('Lorem Ipsum');
-            } else if (type === 'warning') {
-                LxNotificationService.warning('Lorem Ipsum');
-            } else if (type === 'error') {
-                LxNotificationService.error('Lorem Ipsum');
-            }
+    function notify(type) {
+        if (type === 'info') {
+            LxNotificationService.info('Lorem Ipsum', 'Undo', () => {
+                LxNotificationService.success('Callback');
+            });
+        } else if (type === 'success') {
+            LxNotificationService.success('Lorem Ipsum');
+        } else if (type === 'warning') {
+            LxNotificationService.warning('Lorem Ipsum');
+        } else if (type === 'error') {
+            LxNotificationService.error('Lorem Ipsum');
         }
-
-        /////////////////////////////
-
-        vm.notify = notify;
     }
 
     /////////////////////////////
 
-    angular.module('design-system').controller('DemoNotificationController', DemoNotificationController);
-})();
+    vm.notify = notify;
+}
+
+/////////////////////////////
+
+angular.module('design-system').controller('DemoNotificationController', DemoNotificationController);
+
+/////////////////////////////
+
+export { DemoNotificationController };

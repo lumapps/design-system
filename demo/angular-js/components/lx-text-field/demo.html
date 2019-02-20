@@ -17,31 +17,7 @@
 
     <div class="lx-theme-background-dark-L6" style="padding: 24px;">
         <div style="margin-bottom: 24px;">
-            <lx-text-field lx-label="Name" lx-icon="search" lx-helper="Optional helper text">
-                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
-            </lx-text-field>
-        </div>
-
-        <div style="margin-bottom: 24px;">
-            <lx-text-field lx-label="Name" lx-icon="search" lx-helper="Optional helper text" lx-valid="true">
-                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
-            </lx-text-field>
-        </div>
-
-        <div style="margin-bottom: 24px;">
-            <lx-text-field lx-label="Name" lx-icon="search" lx-helper="Optional helper text" lx-error="true">
-                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
-            </lx-text-field>
-        </div>
-
-        <lx-text-field lx-label="Name" lx-icon="search" lx-helper="Optional helper text">
-            <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" ng-disabled="true" />
-        </lx-text-field>
-    </div>
-
-    <div style="padding: 24px;" class="lx-theme-background-blue-N">
-        <div style="margin-bottom: 24px;">
-            <lx-text-field lx-label="Name" lx-icon="search" lx-helper="Optional helper text" lx-theme="dark">
+            <lx-text-field lx-label="Name" lx-icon="{{ vm.icons.mdiMagnify }}" lx-helper="Optional helper text">
                 <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
             </lx-text-field>
         </div>
@@ -49,7 +25,46 @@
         <div style="margin-bottom: 24px;">
             <lx-text-field
                 lx-label="Name"
-                lx-icon="search"
+                lx-icon="{{ vm.icons.mdiMagnify }}"
+                lx-helper="Optional helper text"
+                lx-valid="true"
+            >
+                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
+            </lx-text-field>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+            <lx-text-field
+                lx-label="Name"
+                lx-icon="{{ vm.icons.mdiMagnify }}"
+                lx-helper="Optional helper text"
+                lx-error="true"
+            >
+                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
+            </lx-text-field>
+        </div>
+
+        <lx-text-field lx-label="Name" lx-icon="{{ vm.icons.mdiMagnify }}" lx-helper="Optional helper text">
+            <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" ng-disabled="true" />
+        </lx-text-field>
+    </div>
+
+    <div style="padding: 24px;" class="lx-theme-background-blue-N">
+        <div style="margin-bottom: 24px;">
+            <lx-text-field
+                lx-label="Name"
+                lx-icon="{{ vm.icons.mdiMagnify }}"
+                lx-helper="Optional helper text"
+                lx-theme="dark"
+            >
+                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
+            </lx-text-field>
+        </div>
+
+        <div style="margin-bottom: 24px;">
+            <lx-text-field
+                lx-label="Name"
+                lx-icon="{{ vm.icons.mdiMagnify }}"
                 lx-helper="Optional helper text"
                 lx-theme="dark"
                 lx-valid="true"
@@ -61,7 +76,7 @@
         <div style="margin-bottom: 24px;">
             <lx-text-field
                 lx-label="Name"
-                lx-icon="search"
+                lx-icon="{{ vm.icons.mdiMagnify }}"
                 lx-helper="Optional helper text"
                 lx-theme="dark"
                 lx-error="true"
@@ -70,7 +85,12 @@
             </lx-text-field>
         </div>
 
-        <lx-text-field lx-label="Name" lx-icon="search" lx-helper="Optional helper text" lx-theme="dark">
+        <lx-text-field
+            lx-label="Name"
+            lx-icon="{{ vm.icons.mdiMagnify }}"
+            lx-helper="Optional helper text"
+            lx-theme="dark"
+        >
             <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" ng-disabled="true" />
         </lx-text-field>
     </div>

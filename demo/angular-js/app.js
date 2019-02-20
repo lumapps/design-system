@@ -1,6 +1,6 @@
 import './style/app.scss';
 
-var DEPENDENCIES = ['lumx', 'ui.router'];
+const DEPENDENCIES = ['lumx', 'ui.router'];
 
 function AppDefaultConfig($locationProvider, $stateProvider) {
     $locationProvider.html5Mode({
@@ -24,6 +24,8 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
             url: 'button',
             views: {
                 'main@': {
+                    controller: 'DemoButtonController',
+                    controllerAs: 'vm',
                     template: require('./components/lx-button/demo.html'),
                 },
             },
@@ -42,6 +44,8 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
             url: 'chip',
             views: {
                 'main@': {
+                    controller: 'DemoChipController',
+                    controllerAs: 'vm',
                     template: require('./components/lx-chip/demo.html'),
                 },
             },
@@ -90,6 +94,8 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
             url: 'list',
             views: {
                 'main@': {
+                    controller: 'DemoListController',
+                    controllerAs: 'vm',
                     template: require('./components/lx-list/demo.html'),
                 },
             },
@@ -162,19 +168,21 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 },
             },
         })
+        .state('app.toolbar', {
+            url: 'toolbar',
+            views: {
+                'main@': {
+                    controller: 'DemoToolbarController',
+                    controllerAs: 'vm',
+                    template: require('./components/lx-toolbar/demo.html'),
+                },
+            },
+        })
         .state('app.tooltip', {
             url: 'tooltip',
             views: {
                 'main@': {
                     template: require('./components/lx-tooltip/demo.html'),
-                },
-            },
-        })
-        .state('app.toolbar', {
-            url: 'toolbar',
-            views: {
-                'main@': {
-                    template: require('./components/lx-toolbar/demo.html'),
                 },
             },
         });
@@ -183,7 +191,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
 AppDefaultConfig.$inject = ['$locationProvider', '$stateProvider'];
 
 function AppDefaultRun($http, $templateCache) {
-    var templatesToCache = [];
+    const templatesToCache = [];
 
     angular.forEach(templatesToCache, function cacheTemplates(templatePath) {
         $http.get(templatePath).then(function cacheTemplatesSuccess(template) {
@@ -201,14 +209,18 @@ angular
     .config(AppDefaultConfig)
     .run(AppDefaultRun);
 
+require('./components/lx-button/controller.js');
 require('./components/lx-checkbox/controller.js');
+require('./components/lx-chip/controller.js');
 require('./components/lx-data-table/controller.js');
 require('./components/lx-dialog/controller.js');
 require('./components/lx-dropdown/controller.js');
 require('./components/lx-expansion-panel/controller.js');
+require('./components/lx-list/controller.js');
 require('./components/lx-notification/controller.js');
 require('./components/lx-radio-button/controller.js');
 require('./components/lx-select/controller.js');
 require('./components/lx-switch/controller.js');
 require('./components/lx-tabs/controller.js');
 require('./components/lx-text-field/controller.js');
+require('./components/lx-toolbar/controller.js');

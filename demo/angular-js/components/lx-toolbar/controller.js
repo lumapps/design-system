@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-unresolved
-import { mdiMagnify } from '@lumx/icons';
+import { mdiChevronLeft, mdiDotsVertical, mdiMagnify } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoTextFieldController() {
+function DemoToolbarController() {
     const vm = this;
 
     /////////////////////////////
@@ -13,19 +13,16 @@ function DemoTextFieldController() {
     /////////////////////////////
 
     vm.icons = {
+        mdiChevronLeft,
+        mdiDotsVertical,
         mdiMagnify,
-    };
-    vm.textFields = {
-        model: {
-            name: 'Matthias Manoukian',
-        },
     };
 }
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoTextFieldController', DemoTextFieldController);
+angular.module('design-system').controller('DemoToolbarController', DemoToolbarController);
 
 /////////////////////////////
 
-export { DemoTextFieldController };
+export { DemoToolbarController };

@@ -1,29 +1,27 @@
-(function IIFE() {
-    'use strict';
+function DemoCheckboxController() {
+    const vm = this;
 
     /////////////////////////////
-
-    function DemoCheckboxController() {
-        var vm = this;
-
-        /////////////////////////////
-        //                         //
-        //    Public attributes    //
-        //                         //
-        /////////////////////////////
-
-        vm.checkboxes = {
-            model: {
-                checked: true,
-                unchecked: false,
-            },
-            states: {
-                disabled: true,
-            },
-        };
-    }
-
+    //                         //
+    //    Public attributes    //
+    //                         //
     /////////////////////////////
 
-    angular.module('design-system').controller('DemoCheckboxController', DemoCheckboxController);
-})();
+    vm.checkboxes = {
+        model: {
+            checked: true,
+            unchecked: false,
+        },
+        states: {
+            disabled: true,
+        },
+    };
+}
+
+/////////////////////////////
+
+angular.module('design-system').controller('DemoCheckboxController', DemoCheckboxController);
+
+/////////////////////////////
+
+export { DemoCheckboxController };
