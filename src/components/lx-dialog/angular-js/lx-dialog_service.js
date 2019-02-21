@@ -25,18 +25,18 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
             `<lx-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
                         <lx-toolbar>
-                            <lx-toolbar-label>
+                            <lx-toolbar-center>
                                 <span class="lx-typography-title">${title}</span>
-                            </lx-toolbar-label>
+                            </lx-toolbar-center>
                         </lx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
-                        <div class="ph++">
+                        <div class="ph++ pb+">
                             <p>${text}</p>
                         </div>
                     </lx-dialog-content>
                     <lx-dialog-footer>
-                        <div class="p++" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
+                        <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
                             <lx-button ng-click="cb()" lx-dialog-close>${button}</lx-button>
                         </div>
                     </lx-dialog-footer>
@@ -79,18 +79,18 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
             `<lx-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
                         <lx-toolbar>
-                            <lx-toolbar-label>
+                            <lx-toolbar-center>
                                 <span class="lx-typography-title">${title}</span>
-                            </lx-toolbar-label>
+                            </lx-toolbar-center>
                         </lx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
-                        <div class="ph++">
+                        <div class="ph++ pb+">
                             <p>${text}</p>
                         </div>
                     </lx-dialog-content>
                     <lx-dialog-footer>
-                        <div class="p++" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
+                        <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
                             <lx-button lx-type="secondary" ng-click="cb(false)" lx-dialog-close>
                                 ${buttons.cancel}
                             </lx-button>

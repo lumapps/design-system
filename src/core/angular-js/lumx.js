@@ -11,6 +11,7 @@ angular.module('lumx.checkbox', []);
 angular.module('lumx.chip', []);
 angular.module('lumx.data-table', []);
 angular.module('lumx.dialog', []);
+angular.module('lumx.divider', []);
 angular.module('lumx.dropdown', []);
 angular.module('lumx.expansion-panel', []);
 angular.module('lumx.icon', []);
@@ -32,6 +33,7 @@ angular.module('lumx', [
     'lumx.chip',
     'lumx.data-table',
     'lumx.dialog',
+    'lumx.divider',
     'lumx.dropdown',
     'lumx.expansion-panel',
     'lumx.icon',

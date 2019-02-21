@@ -8,6 +8,7 @@ import './components/lx-data-table/angular-js/lx-data-table_service';
 import './components/lx-dialog/angular-js/lx-dialog';
 import './components/lx-dialog/angular-js/lx-dialog_service';
 import './components/lx-dialog/angular-js/lx-dialog-close';
+import './components/lx-divider/angular-js/lx-divider';
 import './components/lx-dropdown/angular-js/lx-dropdown';
 import './components/lx-dropdown/angular-js/lx-dropdown_service';
 import './components/lx-expansion-panel/angular-js/lx-expansion-panel';

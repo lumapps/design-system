@@ -7,9 +7,9 @@
 <lx-dialog id="{{ vm.dialogId }}">
     <lx-dialog-header>
         <lx-toolbar>
-            <lx-toolbar-label>
+            <lx-toolbar-center>
                 <span class="lx-typography-title">Dialog title</span>
-            </lx-toolbar-label>
+            </lx-toolbar-center>
 
             <lx-toolbar-right>
                 <lx-button ng-click="vm.addPerson()">
@@ -17,16 +17,20 @@
                 </lx-button>
             </lx-toolbar-right>
         </lx-toolbar>
+
+        <lx-divider></lx-divider>
     </lx-dialog-header>
 
     <lx-dialog-content>
-        <div class="ph++">
+        <div class="p++">
             <div ng-repeat="person in vm.people">{{ person.name }} - {{ person.email }} - {{ person.age }}</div>
         </div>
     </lx-dialog-content>
 
     <lx-dialog-footer>
-        <div class="p++" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
+        <lx-divider></lx-divider>
+
+        <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
             <lx-button lx-type="secondary" lx-dialog-close>Cancel</lx-button>
             <lx-button class="ml" lx-dialog-close>Ok</lx-button>
         </div>

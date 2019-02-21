@@ -1,0 +1,6 @@
+@mixin divider($theme) {
+    height: 1px;
+    border: none;
+    margin: 0;
+    background-color: lx-theme-color-variant($theme, L4);
+}

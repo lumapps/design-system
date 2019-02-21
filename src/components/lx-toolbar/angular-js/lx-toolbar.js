@@ -14,11 +14,11 @@ function lxToolbarController() {
     /////////////////////////////
 
     /**
-     * Whether the directive has label slot filled or not.
+     * Whether the directive has center slot filled or not.
      *
      * @type {boolean}
      */
-    lxToolbar.hasLabel = false;
+    lxToolbar.hasCenter = false;
 
     /**
      * Whether the directive has left slot filled or not.
@@ -39,16 +39,19 @@ function lxToolbarController() {
 
 function lxToolbarDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
-        if (transclude.isSlotFilled('label')) {
-            ctrl.hasLabel = true;
+        if (transclude.isSlotFilled('center')) {
+            ctrl.hasCenter = true;
+            el.addClass('lx-toolbar--has-center');
         }
 
         if (transclude.isSlotFilled('left')) {
             ctrl.hasLeft = true;
+            el.addClass('lx-toolbar--has-left');
         }
 
         if (transclude.isSlotFilled('right')) {
             ctrl.hasRight = true;
+            el.addClass('lx-toolbar--has-right');
         }
     }
 
@@ -61,7 +64,7 @@ function lxToolbarDirective() {
         restrict: 'E',
         template,
         transclude: {
-            label: '?lxToolbarLabel',
+            center: '?lxToolbarCenter',
             left: '?lxToolbarLeft',
             right: '?lxToolbarRight',
         },
