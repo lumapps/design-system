@@ -138,7 +138,9 @@ function lxDropdownController(
                 _idEventScheduler = undefined;
             }
 
-            $document.off('click', _onDocumentClick);
+            $document.off('click keydown keypress', _onDocumentClick);
+
+            _toggleEl.find('a, button, input').focus();
         });
     }
 
@@ -286,7 +288,7 @@ function lxDropdownController(
             lxDropdown.isOpen = true;
             LxUtilsService.disableBodyScroll();
 
-            $document.on('click', _onDocumentClick);
+            $document.on('click keydown keypress', _onDocumentClick);
         });
     }
 

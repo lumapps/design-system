@@ -23,6 +23,15 @@ function lxListController($element, $scope) {
     const _DOWN_KEY_CODE = 40;
 
     /**
+     * The tab key code.
+     *
+     * @type {number}
+     * @constant
+     * @readonly
+     */
+    const _TAB_KEY_CODE = 9;
+
+    /**
      * The up key code.
      *
      * @type {number}
@@ -93,14 +102,17 @@ function lxListController($element, $scope) {
             $scope.$apply();
 
             evt.preventDefault();
+            evt.stopPropagation();
         } else if (evt.keyCode === _UP_KEY_CODE) {
             _previousItemOnKeyUp();
             $scope.$apply();
 
             evt.preventDefault();
+            evt.stopPropagation();
+        } else if (evt.keyCode === _TAB_KEY_CODE) {
+            evt.preventDefault();
+            evt.stopPropagation();
         }
-
-        evt.stopPropagation();
     }
 
     /////////////////////////////
