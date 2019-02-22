@@ -4,6 +4,12 @@ module.exports = {
         es6: true,
     },
 
+    parserOptions: {
+        ecmaFeatures: {},
+        ecmaVersion: 2019,
+        sourceType: 'module',
+    },
+
     plugins: ['lumapps', 'no-useless-assign', 'prettier', 'require-jsdoc-except', 'unicorn'],
 
     rules: {
@@ -944,7 +950,7 @@ module.exports = {
             },
         ],
         'sort-keys': [
-            'error',
+            'off',
             'asc',
             {
                 caseSensitive: true,

@@ -59,6 +59,7 @@ const webpackBaseConfig = {
         modules: ['node_modules'],
         alias: {
             '@lumx/icons': `${ICONS_PATH}/index.js`,
+            core: CORE_PATH,
         },
     },
 

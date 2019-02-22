@@ -983,7 +983,7 @@ module.exports = {
             },
         ],
         'sort-keys': [
-            'error',
+            'off',
             'asc',
             {
                 caseSensitive: true,
@@ -1836,6 +1836,14 @@ module.exports = {
                 'react/void-dom-elements-no-children': 'error',
             },
         },
+        {
+            files: ['jest/**'],
+            rules: {
+                'import/no-commonjs': 'off',
+                'import/no-extraneous-dependencies': 'off',
+                'import/unambiguous': 'off',
+            },
+        },
     ],
 
     root: true,
@@ -1852,6 +1860,9 @@ module.exports = {
         'import/resolver': {
             node: {
                 extensions: ['.js', '.jsx'],
+            },
+            webpack: {
+                config: 'webpack/webpack.config.js',
             },
         },
         react: {
