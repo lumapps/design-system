@@ -13,11 +13,11 @@
     align-items: center;
     padding: 0 $lx-list-item-horizontal-padding;
     color: lx-theme-color-variant(dark, N);
+    outline: none;
 }
 
 @mixin lx-list-item-clickable() {
     cursor: pointer;
-    outline: none;
 
     &:hover,
     &[data-focus-visible-added] {
