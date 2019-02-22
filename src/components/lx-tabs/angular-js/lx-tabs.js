@@ -9,21 +9,6 @@ function lxTabsController() {
 
     /////////////////////////////
     //                         //
-    //    Private attributes   //
-    //                         //
-    /////////////////////////////
-
-    /**
-     * The enter key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _ENTER_KEY_CODE = 13;
-
-    /////////////////////////////
-    //                         //
     //    Public attributes    //
     //                         //
     /////////////////////////////
@@ -87,11 +72,10 @@ function lxTabsController() {
     /**
      * Set the given tab as active.
      *
-     * @param {Object} tab   The tab.
-     * @param {Event}  [evt] The key event.
+     * @param {Object} tab The tab.
      */
-    function setActiveTab(tab, evt) {
-        if (tab.isDisabled || (angular.isDefined(evt) && evt.which !== _ENTER_KEY_CODE)) {
+    function setActiveTab(tab) {
+        if (tab.isDisabled) {
             return;
         }
 
