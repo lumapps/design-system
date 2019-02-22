@@ -113,7 +113,7 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
 
     /////////////////////////////
     //                         //
-    //     Public functions    //
+    //    Private functions    //
     //                         //
     /////////////////////////////
 
