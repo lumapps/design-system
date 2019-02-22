@@ -5,7 +5,6 @@
 @import './mixins';
 @import './../../lx-text-field/style/variables';
 @import './../../lx-text-field/style/mixins';
-@import './../../lx-list/style/mixins';
 
 .lx-select {
     $self: &;
@@ -118,37 +117,6 @@
                 @include lx-text-field-placeholder(dark);
             }
         }
-    }
-
-    &__choices {
-        @include lx-list;
-    }
-
-    &__choice {
-        @include lx-list-item;
-
-        cursor: default;
-
-        &--is-focus {
-            background-color: lx-theme-color-variant(dark, L5);
-        }
-
-        &--is-active {
-            background-color: lx-theme-color-variant(primary, L5);
-            color: lx-theme-color-variant(primary, N);
-        }
-
-        &--is-focus#{ & }--is-active {
-            background-color: lx-theme-color-variant(primary, L4);
-        }
-    }
-
-    &__choice-check {
-        @include lx-list-item-primary;
-    }
-
-    &__choice-content {
-        @include lx-list-item-content;
     }
 
     &__loader {

@@ -26,24 +26,6 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
     const _DOWN_KEY_CODE = 40;
 
     /**
-     * The enter key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _ENTER_KEY_CODE = 13;
-
-    /**
-     * The up key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _UP_KEY_CODE = 38;
-
-    /**
      * The choice template.
      *
      * @type {string}
@@ -71,13 +53,6 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
     //    Public attributes    //
     //                         //
     /////////////////////////////
-
-    /**
-     * The active choice index useful when navigating with keybord arrow keys.
-     *
-     * @type {number}
-     */
-    lxSelect.activeChoiceIndex = 0;
 
     /**
      * Whether the dropdown is open or not.
@@ -184,53 +159,6 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
     }
 
     /**
-     * Increase active choice index on key down press.
-     */
-    function _nextChoiceOnKeyDown() {
-        const filteredChoices = $filter('lxSelectChoicesFilter')(
-            lxSelect.choices,
-            lxSelect.filter,
-            lxSelect.filterModel,
-        );
-
-        if (lxSelect.activeChoiceIndex + 1 >= filteredChoices.length) {
-            lxSelect.activeChoiceIndex = 0;
-        } else {
-            lxSelect.activeChoiceIndex += 1;
-        }
-    }
-
-    /**
-     * Decrease active choice index on key up press.
-     */
-    function _previousChoiceOnKeyUp() {
-        const filteredChoices = $filter('lxSelectChoicesFilter')(
-            lxSelect.choices,
-            lxSelect.filter,
-            lxSelect.filterModel,
-        );
-
-        if (lxSelect.activeChoiceIndex === 0) {
-            lxSelect.activeChoiceIndex = filteredChoices.length - 1;
-        } else {
-            lxSelect.activeChoiceIndex -= 1;
-        }
-    }
-
-    /**
-     * Select choice from filtered list according to active choice index.
-     */
-    function _selectChoiceOnKeyEnter() {
-        const filteredChoices = $filter('lxSelectChoicesFilter')(
-            lxSelect.choices,
-            lxSelect.filter,
-            lxSelect.filterModel,
-        );
-
-        lxSelect.select(filteredChoices[lxSelect.activeChoiceIndex]);
-    }
-
-    /**
      * Select item synchronously (no selectiontoModel).
      *
      * @param {Object} choice The choice object.
@@ -275,35 +203,17 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
     }
 
     /**
-     * Handle key events on input rapper focus.
+     * Handle key events on input wrapper focus.
      *
      * @param {Event} evt The key event.
      */
-    function _onKeyUp(evt) {
-        if (evt.keyCode === _DOWN_KEY_CODE) {
-            if (lxSelect.isOpen) {
-                _nextChoiceOnKeyDown();
-                $scope.$apply();
-            } else {
-                lxSelect.openDropdown();
-            }
-        } else if (evt.keyCode === _UP_KEY_CODE) {
-            if (lxSelect.isOpen) {
-                _previousChoiceOnKeyUp();
-                $scope.$apply();
-            }
-        } else if (evt.keyCode === _ENTER_KEY_CODE) {
-            if (lxSelect.isOpen) {
-                _selectChoiceOnKeyEnter();
-                $scope.$apply();
+    function _onKeyPress(evt) {
+        if (evt.keyCode === _DOWN_KEY_CODE && !lxSelect.isOpen) {
+            lxSelect.openDropdown();
 
-                if (!lxSelect.multiple) {
-                    lxSelect.closeDropdown();
-                }
-            }
+            evt.preventDefault();
+            evt.stopPropagation();
         }
-
-        evt.stopPropagation();
     }
 
     /////////////////////////////
@@ -334,7 +244,7 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
      * Disable key events on input wrapper blur.
      */
     function disableKeyEvents() {
-        $document.off('keyup', _onKeyUp);
+        $document.off('keydown keypress', _onKeyPress);
     }
 
     /**
@@ -373,7 +283,7 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
      * Enable key events on input wrapper focus.
      */
     function enableKeyEvents() {
-        $document.on('keyup', _onKeyUp);
+        $document.on('keydown keypress', _onKeyPress);
     }
 
     /**
@@ -470,8 +380,6 @@ function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDr
      * Update choices list according to filter model.
      */
     function updateFilter() {
-        lxSelect.activeChoiceIndex = 0;
-
         if (angular.isDefined(lxSelect.filter)) {
             lxSelect.filter({
                 newValue: lxSelect.filterModel,

@@ -99,22 +99,20 @@
                 <lx-progress></lx-progress>
             </div>
 
-            <ul class="lx-select__choices" ng-if="!lxSelect.loading">
-                <li
-                    class="lx-select__choice"
-                    ng-class="{ 'lx-select__choice--is-focus': lxSelect.activeChoiceIndex === $index,
-                                'lx-select__choice--is-active': lxSelect.isSelected(choice) }"
+            <lx-list lx-focus-on-init="true" lx-is-clickable="true">
+                <lx-list-item
+                    lx-is-selected="lxSelect.isSelected(choice)"
                     ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
                     ng-click="lxSelect.select(choice, $event)"
-                    ng-mouseover="lxSelect.activeChoiceIndex = $index"
+                    lx-enter-keypress="lxSelect.select(choice, $event)"
                 >
-                    <div class="lx-select__choice-check" ng-if="::lxSelect.multiple">
-                        <lx-checkbox ng-checked="lxSelect.isSelected(choice)"></lx-checkbox>
-                    </div>
+                    <lx-list-item-primary ng-if="::lxSelect.multiple"
+                        ><lx-checkbox ng-checked="lxSelect.isSelected(choice)"></lx-checkbox
+                    ></lx-list-item-primary>
 
-                    <div class="lx-select__choice-content" ng-bind-html="lxSelect.displayChoice(choice)"></div>
-                </li>
-            </ul>
+                    <lx-list-item-content ng-bind-html="lxSelect.displayChoice(choice)"></lx-list-item-content>
+                </lx-list-item>
+            </lx-list>
 
             <span class="lx-select__helper" ng-if="lxSelect.displayHelper && !lxSelect.loading">
                 {{ lxSelect.helper }}
