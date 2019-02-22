@@ -1,4 +1,8 @@
-<li class="lx-list-item" ng-class="{ 'lx-list-item--is-clickable': lxListItem.isClickable }">
+<li
+    class="lx-list-item"
+    ng-class="{ 'lx-list-item--is-selected': lxListItem.isSelected }"
+    tabindex="{{ lxListItem.parentController.isClickable ? 0 : -1 }}"
+>
     <div
         class="lx-list-item__content"
         ng-transclude

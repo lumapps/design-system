@@ -2,7 +2,7 @@ import template from './lx-list-item.html';
 
 /////////////////////////////
 
-function lxListItemController() {
+function lxListItemController($element) {
     // eslint-disable-next-line consistent-this
     const lxListItem = this;
 
@@ -32,22 +32,47 @@ function lxListItemController() {
      * @type {boolean}
      */
     lxListItem.hasSecondary = false;
+
+    /**
+     * The parent controller (list).
+     *
+     * @type {Object}
+     */
+    lxListItem.parentController = undefined;
+
+    /////////////////////////////
+    //                         //
+    //          Events         //
+    //                         //
+    /////////////////////////////
+
+    $element.on('focus', () => {
+        if (angular.isUndefined(lxListItem.parentController)) {
+            return;
+        }
+
+        lxListItem.parentController.activeItemIndex = $element.index('.lx-list-item');
+    });
 }
 
 /////////////////////////////
 
 function lxListItemDirective() {
-    function link(scope, el, attrs, ctrl, transclude) {
+    function link(scope, el, attrs, ctrls, transclude) {
         if (transclude.isSlotFilled('primary')) {
-            ctrl.hasPrimary = true;
+            ctrls[0].hasPrimary = true;
         }
 
         if (transclude.isSlotFilled('content')) {
-            ctrl.hasContent = true;
+            ctrls[0].hasContent = true;
         }
 
         if (transclude.isSlotFilled('secondary')) {
-            ctrl.hasSecondary = true;
+            ctrls[0].hasSecondary = true;
+        }
+
+        if (angular.isDefined(ctrls[1]) && ctrls[1]) {
+            ctrls[0].parentController = ctrls[1];
         }
     }
 
@@ -57,10 +82,10 @@ function lxListItemDirective() {
         controllerAs: 'lxListItem',
         link,
         replace: true,
+        require: ['lxListItem', '?^lxList'],
         restrict: 'E',
         scope: {
-            icon: '@?lxIcon',
-            isClickable: '=?lxIsClickable',
+            isSelected: '=?lxIsSelected',
         },
         template,
         transclude: {

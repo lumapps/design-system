@@ -14,8 +14,12 @@
 .lx-list-item {
     @include lx-list-item;
 
-    &--is-clickable {
+    .lx-list--is-clickable & {
         @include lx-list-item-clickable;
+    }
+
+    &--is-selected {
+        @include lx-list-item-selected;
     }
 
     &__primary {
