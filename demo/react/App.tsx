@@ -1,7 +1,6 @@
 import React from 'react';
 import { mdiPlus } from '@lumx/icons';
-
-import { LxIcon, LxIconButton } from '../../src/react.index';
+import { LxIcon, LxIconButton } from '@lumx/core';
 
 export const App = () => (
     <div>

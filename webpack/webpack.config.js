@@ -16,6 +16,23 @@ const webpackBaseConfig = {
             },
             {
                 exclude: /node_modules/u,
+                test: /\.jsx$/u,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: babelSetup({
+                            presets: ['@babel/preset-react'],
+                        }),
+                    },
+                ],
+            },
+            {
+                exclude: /node_modules/u,
+                test: /\.ts(x)?$/u,
+                loader: 'awesome-typescript-loader',
+            },
+            {
+                exclude: /node_modules/u,
                 test: /\.scss$/u,
                 use: [
                     { loader: 'style-loader' },
@@ -55,7 +72,7 @@ const webpackBaseConfig = {
     },
 
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
         modules: ['node_modules'],
         alias: {
             '@lumx/icons': `${ICONS_PATH}/index.js`,
