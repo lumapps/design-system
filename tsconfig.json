@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./src",
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "react",
+        "lib": ["es6", "dom"],
+        "module": "es6",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "paths": {
+            "@lumx/core": ["./react.index.ts"],
+            "@lumx/icons": ["./icons"],
+            "@lumx/icons/*": ["./icons/*"],
+            "core": ["./core"],
+            "core/*": ["./core/*"]
+        },
+        "strict": true,
+        "target": "es5"
+    },
+    "exclude": ["**/dist/"]
+}

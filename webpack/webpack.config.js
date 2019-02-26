@@ -1,3 +1,6 @@
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const WebpackBar = require('webpackbar');
+
 const { babelSetup, getSassRessourcesFiles } = require('./utils');
 const { CORE_PATH, NODE_MODULES_PATH, ICONS_PATH } = require('./constants');
 
@@ -13,6 +16,26 @@ const webpackBaseConfig = {
                         options: babelSetup(),
                     },
                 ],
+            },
+            {
+                exclude: /node_modules/u,
+                test: /\.jsx$/u,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: babelSetup({
+                            presets: ['@babel/preset-react'],
+                        }),
+                    },
+                ],
+            },
+            {
+                exclude: /node_modules/u,
+                test: /\.ts(x)?$/u,
+                loader: 'awesome-typescript-loader',
+                options: {
+                    silent: true,
+                },
             },
             {
                 exclude: /node_modules/u,
@@ -54,8 +77,10 @@ const webpackBaseConfig = {
         ],
     },
 
+    plugins: [new WebpackBar(), new FriendlyErrorsWebpackPlugin()],
+
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
         modules: ['node_modules'],
         alias: {
             '@lumx/icons': `${ICONS_PATH}/index.js`,

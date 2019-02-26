@@ -1,6 +1,6 @@
 const merge = require('webpack-merge');
 
-const { babelSetup, getComponents } = require('../utils');
+const { getComponents } = require('../utils');
 const { SRC_PATH, TECH_PREFIX } = require('../constants');
 
 const webpackBaseConfig = require('../webpack.config');
@@ -15,20 +15,6 @@ const webpackCommonJsConfig = {
 
     mode: 'development',
 
-    module: {
-        rules: [
-            {
-                exclude: /node_modules/u,
-                test: /\.jsx$/u,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: babelSetup({ presets: ['@babel/preset-react'] }),
-                    },
-                ],
-            },
-        ],
-    },
     output: {
         crossOriginLoading: 'anonymous',
         filename: 'commonjs/[name].js',

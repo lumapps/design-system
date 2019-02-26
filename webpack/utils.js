@@ -80,8 +80,10 @@ function getWebpackDevServerConfig({ port } = {}) {
         },
         host: DEFAULT_HOST,
         hot: true,
+        open: true,
         overlay: true,
         port: port || DEFAULT_PORT,
+        quiet: true,
     };
 }
 

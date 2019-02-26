@@ -1,8 +1,8 @@
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const { DEMO_PATH, TECH_PREFIX } = require('../constants');
-const { babelSetup, getWebpackDevServerConfig } = require('../utils');
+const { DEMO_PATH, SRC_PATH, TECH_PREFIX } = require('../constants');
+const { getWebpackDevServerConfig } = require('../utils');
 
 const webpackBaseConfig = require('../webpack.config');
 
@@ -11,30 +11,13 @@ const webpackDevConfig = {
 
     devServer: getWebpackDevServerConfig({ port: 4001 }),
 
-    devtool: 'cheap-module-source-map',
+    devtool: 'cheap-eval-source-map',
 
     entry: {
-        'demo-site': `${DEMO_PATH}/${TECH_PREFIX.react}/index.jsx`,
+        'demo-site': `${DEMO_PATH}/${TECH_PREFIX.react}/index.tsx`,
     },
 
     mode: 'development',
-
-    module: {
-        rules: [
-            {
-                exclude: /node_modules/u,
-                test: /\.jsx$/u,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: babelSetup({
-                            presets: ['@babel/preset-react'],
-                        }),
-                    },
-                ],
-            },
-        ],
-    },
 
     output: {
         crossOriginLoading: 'anonymous',
@@ -46,6 +29,11 @@ const webpackDevConfig = {
             template: `${DEMO_PATH}/${TECH_PREFIX.react}/public/index.html`,
         }),
     ],
+    resolve: {
+        alias: {
+            '@lumx/core': `${SRC_PATH}/${TECH_PREFIX.react}.index.ts`,
+        },
+    },
 };
 
 module.exports = merge(webpackBaseConfig, webpackDevConfig);
