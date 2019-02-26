@@ -695,6 +695,11 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@mdi/js@^3.5.95":
+  version "3.5.95"
+  resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.5.95.tgz#0aafcb9db89a128bb152ade440839f738561d5ac"
+  integrity sha512-CEUeJAHhI7eDDZbcQUZcYFuCB4sEuxm1B5IxxvVVeZEGbnnDMCqS8V8K3peXfc4OUd2HNIOikKsmjBYnX3iaZg==
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
