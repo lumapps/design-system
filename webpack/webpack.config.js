@@ -1,3 +1,6 @@
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const WebpackBar = require('webpackbar');
+
 const { babelSetup, getSassRessourcesFiles } = require('./utils');
 const { CORE_PATH, NODE_MODULES_PATH, ICONS_PATH } = require('./constants');
 
@@ -30,6 +33,9 @@ const webpackBaseConfig = {
                 exclude: /node_modules/u,
                 test: /\.ts(x)?$/u,
                 loader: 'awesome-typescript-loader',
+                options: {
+                    silent: true,
+                },
             },
             {
                 exclude: /node_modules/u,
@@ -70,6 +76,8 @@ const webpackBaseConfig = {
             },
         ],
     },
+
+    plugins: [new WebpackBar(), new FriendlyErrorsWebpackPlugin()],
 
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
