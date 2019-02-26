@@ -11,7 +11,7 @@ const webpackDevConfig = {
 
     devServer: getWebpackDevServerConfig({ port: 4001 }),
 
-    devtool: 'cheap-module-source-map',
+    devtool: 'cheap-eval-source-map',
 
     entry: {
         'demo-site': `${DEMO_PATH}/${TECH_PREFIX.react}/index.tsx`,
