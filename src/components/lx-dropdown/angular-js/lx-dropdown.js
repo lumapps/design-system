@@ -381,6 +381,16 @@ function lxDropdownController(
             _close();
         }
     });
+
+    /**
+     * Update the active dropdown position.
+     */
+    $scope.$on('lx-dropdown__update', () => {
+        if (LxDropdownService.isOpen(lxDropdown.uuid)) {
+            _initHorizontalPosition();
+            _initVerticalPosition();
+        }
+    });
 }
 
 /////////////////////////////
