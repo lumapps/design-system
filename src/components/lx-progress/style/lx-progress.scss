@@ -11,6 +11,9 @@
     }
 }
 
+/* Circular
+   ========================================================================== */
+
 .lx-progress-circular {
     position: relative;
     width: $lx-progress-circular-size;
@@ -26,7 +29,6 @@
         animation: lx-progress-bounce 2s infinite ease-in-out;
         background-color: lx-theme-color-variant(primary, L3);
         border-radius: 50%;
-        opacity: 0.6;
     }
 
     &__double-bounce2 {
@@ -42,5 +44,58 @@
 
     50% {
         transform: scale(1);
+    }
+}
+
+/* Linear
+   ========================================================================== */
+
+.lx-progress-linear {
+    position: relative;
+    overflow: hidden;
+    height: $lx-progress-linear-size;
+    border-radius: 2px;
+
+    &__line1,
+    &__line2 {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: lx-theme-color-variant(primary, L3);
+    }
+
+    &__line2 {
+        animation: lx-progress-expand 2s infinite ease-in-out;
+        transform: scaleX(0);
+        transform-origin: center left;
+    }
+}
+
+@keyframes lx-progress-expand {
+    0%  {
+        transform: scaleX(0);
+        transform-origin: center left;
+    }
+
+    49% {
+        transform: scaleX(1);
+        transform-origin: center left;
+    }
+
+    50% {
+        transform: scaleX(1);
+        transform-origin: center right;
+    }
+
+    99% {
+        transform: scaleX(0);
+        transform-origin: center right;
+    }
+
+    100% {
+        transform: scaleX(0);
+        transform-origin: center left;
     }
 }
