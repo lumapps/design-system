@@ -34,7 +34,7 @@ function DemoDropdownController(LxDropdownService) {
     function openDropdown(evt) {
         evt.stopPropagation();
 
-        LxDropdownService.open(vm.dropdownId, `#${vm.dropdownTarget}`);
+        LxDropdownService.open(vm.dropdownId, `#${vm.dropdownTarget}`, evt.target);
     }
 
     /////////////////////////////

@@ -45,11 +45,13 @@ function LxDropdownService($rootScope) {
     /**
      * Open a given dropdown.
      *
-     * @param {string} uuid   The dropdown uuid.
-     * @param {string} target The dropdown target.
+     * @param {string}  uuid   The dropdown uuid.
+     * @param {string}  target The dropdown target.
+     * @param {element} source The source element that triggered the dropdown.
      */
-    function openDropdown(uuid, target) {
+    function openDropdown(uuid, target, source) {
         $rootScope.$broadcast('lx-dropdown__open', {
+            source,
             target,
             uuid,
         });

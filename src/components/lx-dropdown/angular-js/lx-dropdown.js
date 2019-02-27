@@ -72,10 +72,18 @@ function lxDropdownController(
     let _mouseOnMenu = false;
 
     /**
+     * The source element.
+     *
+     * @type {element}
+     */
+    let _sourceEl;
+
+    /**
      * The toggle element.
      *
      * @type {element}
      */
+    // eslint-disable-next-line one-var
     let _toggleEl;
 
     /////////////////////////////
@@ -140,7 +148,9 @@ function lxDropdownController(
 
             $document.off('click keydown keypress', _onDocumentClick);
 
-            _toggleEl.find('a, button, input').focus();
+            if (angular.isDefined(_sourceEl)) {
+                _sourceEl.focus();
+            }
         });
     }
 
@@ -292,6 +302,15 @@ function lxDropdownController(
         });
     }
 
+    /**
+     * Register the source element that triggered the dropdown.
+     *
+     * @param {element} sourceEl The source element that triggered the dropdown.
+     */
+    function _registerSource(sourceEl) {
+        _sourceEl = sourceEl;
+    }
+
     /////////////////////////////
     //                         //
     //     Public functions    //
@@ -359,10 +378,16 @@ function lxDropdownController(
 
     /**
      * Toggle the dropdown on toggle click.
+     *
+     * @param {Event} evt The sclick event.
      */
-    function toggle() {
+    function toggle(evt) {
         if (lxDropdown.hover) {
             return;
+        }
+
+        if (angular.isDefined(evt.target)) {
+            _registerSource(angular.element(evt.target));
         }
 
         if (lxDropdown.isOpen) {
@@ -396,6 +421,11 @@ function lxDropdownController(
     $scope.$on('lx-dropdown__open', (evt, params) => {
         if (params.uuid === lxDropdown.uuid && !lxDropdown.isOpen) {
             registerToggle(angular.element(params.target));
+
+            if (angular.isDefined(params.source)) {
+                _registerSource(angular.element(params.source));
+            }
+
             _open();
         }
     });

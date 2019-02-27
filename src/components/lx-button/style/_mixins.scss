@@ -59,11 +59,13 @@
 
 @mixin lx-button-icon($size) {
     font-size: map-get($lx-button-icon-sizes, $size);
+    pointer-events: none;
 }
 
 @mixin lx-button-text($size, $type) {
     font-size: map-get($lx-button-text-sizes, $size);
     font-weight: 600;
+    pointer-events: none;
 
     @if $type == primary {
         line-height: map-get($lx-button-sizes, $size);
