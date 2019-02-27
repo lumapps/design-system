@@ -424,6 +424,8 @@ function lxDropdownController(
 
             if (angular.isDefined(params.source)) {
                 _registerSource(angular.element(params.source));
+            } else {
+                _registerSource(angular.element(params.target));
             }
 
             _open();

@@ -14,6 +14,7 @@ function DemoDropdownController(LxDropdownService) {
 
     vm.dropdownId = 'test-dropdown-menu';
     vm.dropdownTarget = 'test-dropdown-target';
+    vm.dropdownSource = 'test-dropdown-source';
     vm.icons = {
         mdiEmail,
         mdiSend,
@@ -34,7 +35,7 @@ function DemoDropdownController(LxDropdownService) {
     function openDropdown(evt) {
         evt.stopPropagation();
 
-        LxDropdownService.open(vm.dropdownId, `#${vm.dropdownTarget}`, evt.target);
+        LxDropdownService.open(vm.dropdownId, `#${vm.dropdownTarget}`, `#${vm.dropdownSource}`);
     }
 
     /////////////////////////////

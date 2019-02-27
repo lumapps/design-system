@@ -179,7 +179,7 @@
 </div>
 
 <div style="padding: 24px;">
-    <lx-button ng-click="vm.openDropdown($event)">Open dropdown</lx-button>
+    <lx-button ng-click="vm.openDropdown($event)" id="{{ vm.dropdownSource }}">Open dropdown</lx-button>
     <lx-button ng-click="vm.closeDropdown($event)">Close dropdown</lx-button>
 
     <div id="{{ vm.dropdownTarget }}">Target</div>
