@@ -41,13 +41,6 @@ function lxDropdownController(
     const _OFFSET_FROM_EDGE = 16;
 
     /**
-     * The source element mouse enter timeout.
-     *
-     * @type {Object}
-     */
-    let _hoverTimeout;
-
-    /**
      * The event scheduler id.
      *
      * @type {string}
@@ -64,18 +57,11 @@ function lxDropdownController(
     let _menuEl;
 
     /**
-     * Whether the user pointer is on menu or not.
-     * Useful to know Whether or not close the menu in hover mode.
-     *
-     * @type {boolean}
-     */
-    let _mouseOnMenu = false;
-
-    /**
      * The source element.
      *
      * @type {element}
      */
+    // eslint-disable-next-line one-var
     let _sourceEl;
 
     /**
@@ -318,53 +304,12 @@ function lxDropdownController(
     /////////////////////////////
 
     /**
-     * Close dropdown on mouse enter.
-     *
-     * @param {string} fromMenu Whether the function is triggered from the menu or from the toggle.
-     */
-    function closeOnMouseLeave(fromMenu) {
-        if (!lxDropdown.hover) {
-            return;
-        }
-
-        $timeout.cancel(_hoverTimeout);
-
-        $timeout(() => {
-            if (!_mouseOnMenu || fromMenu) {
-                LxDropdownService.closeActiveDropdown();
-            }
-
-            if (fromMenu) {
-                _mouseOnMenu = false;
-            }
-        }, lxDropdown.hoverDelay);
-    }
-
-    /**
-     * Open dropdown on mouse leave.
-     */
-    function openOnMouseEnter() {
-        if (!lxDropdown.hover || lxDropdown.isOpen) {
-            return;
-        }
-
-        _hoverTimeout = $timeout(_open, lxDropdown.hoverDelay);
-    }
-
-    /**
      * Register menu.
      *
      * @param {element} menuEl The menu element.
      */
     function registerMenu(menuEl) {
         _menuEl = menuEl;
-    }
-
-    /**
-     * Register the fact that user pointer is on the menu.
-     */
-    function registerMouseEnterEvent() {
-        _mouseOnMenu = true;
     }
 
     /**
@@ -382,10 +327,6 @@ function lxDropdownController(
      * @param {Event} evt The sclick event.
      */
     function toggle(evt) {
-        if (lxDropdown.hover) {
-            return;
-        }
-
         if (angular.isDefined(evt.target)) {
             _registerSource(angular.element(evt.target));
         }
@@ -399,10 +340,7 @@ function lxDropdownController(
 
     /////////////////////////////
 
-    lxDropdown.closeOnMouseLeave = closeOnMouseLeave;
-    lxDropdown.openOnMouseEnter = openOnMouseEnter;
     lxDropdown.registerMenu = registerMenu;
-    lxDropdown.registerMouseEnterEvent = registerMouseEnterEvent;
     lxDropdown.registerToggle = registerToggle;
     lxDropdown.toggle = toggle;
 
@@ -471,8 +409,6 @@ function lxDropdownDirective() {
         scope: {
             closeOnClick: '=?lxCloseOnClick',
             escapeClose: '=?lxEscapeClose',
-            hover: '=?lxHover',
-            hoverDelay: '=?lxHoverDelay',
             offset: '@?lxOffset',
             overToggle: '=?lxOverToggle',
             position: '@?lxPosition',

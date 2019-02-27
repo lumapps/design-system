@@ -119,66 +119,6 @@
 </div>
 
 <div style="padding: 24px;">
-    <lx-dropdown lx-position="left" lx-hover="true" lx-hover-delay="500">
-        <lx-dropdown-toggle>
-            <lx-button>Dropdown</lx-button>
-        </lx-dropdown-toggle>
-
-        <lx-dropdown-menu>
-            <lx-list lx-is-clickable="true" lx-focus-on-init="true">
-                <lx-list-subheader>Lorem ipsum</lx-list-subheader>
-
-                <lx-list-item>
-                    <lx-list-item-primary
-                        ><lx-icon lx-path="{{ vm.icons.mdiSend }}" lx-size="s"></lx-icon
-                    ></lx-list-item-primary>
-                    <lx-list-item-content>Lorem ipsum</lx-list-item-content>
-                </lx-list-item>
-
-                <lx-list-item>
-                    <lx-list-item-primary
-                        ><lx-icon lx-path="{{ vm.icons.mdiEmail }}" lx-size="s"></lx-icon
-                    ></lx-list-item-primary>
-                    <lx-list-item-content>Lorem ipsum</lx-list-item-content>
-                </lx-list-item>
-
-                <lx-list-subheader>Lorem ipsum</lx-list-subheader>
-
-                <lx-list-item>
-                    <lx-list-item-primary
-                        ><lx-icon lx-path="{{ vm.icons.mdiSend }}" lx-size="s"></lx-icon
-                    ></lx-list-item-primary>
-                    <lx-list-item-content>Lorem ipsum</lx-list-item-content>
-                </lx-list-item>
-
-                <lx-list-item>
-                    <lx-list-item-primary
-                        ><lx-icon lx-path="{{ vm.icons.mdiEmail }}" lx-size="s"></lx-icon
-                    ></lx-list-item-primary>
-                    <lx-list-item-content>Lorem ipsum</lx-list-item-content>
-                </lx-list-item>
-
-                <lx-list-divider></lx-list-divider>
-
-                <lx-list-item>
-                    <lx-list-item-primary
-                        ><lx-icon lx-path="{{ vm.icons.mdiSend }}" lx-size="s"></lx-icon
-                    ></lx-list-item-primary>
-                    <lx-list-item-content>Lorem ipsum</lx-list-item-content>
-                </lx-list-item>
-
-                <lx-list-item>
-                    <lx-list-item-primary
-                        ><lx-icon lx-path="{{ vm.icons.mdiEmail }}" lx-size="s"></lx-icon
-                    ></lx-list-item-primary>
-                    <lx-list-item-content>Lorem ipsum</lx-list-item-content>
-                </lx-list-item>
-            </lx-list>
-        </lx-dropdown-menu>
-    </lx-dropdown>
-</div>
-
-<div style="padding: 24px;">
     <lx-button ng-click="vm.openDropdown($event)" id="{{ vm.dropdownSource }}">Open dropdown</lx-button>
     <lx-button ng-click="vm.closeDropdown($event)">Close dropdown</lx-button>
 
