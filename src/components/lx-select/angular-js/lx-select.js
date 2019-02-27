@@ -6,7 +6,7 @@ import template from './lx-select.html';
 
 /////////////////////////////
 
-function lxSelectController($document, $interpolate, $sce, $scope, LxDropdownService, LxUtilsService) {
+function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxDropdownService, LxUtilsService) {
     // eslint-disable-next-line consistent-this
     const lxSelect = this;
 
@@ -362,6 +362,12 @@ function lxSelectController($document, $interpolate, $sce, $scope, LxDropdownSer
         } else {
             _updateModel(choice);
             _updateViewValue(choice);
+        }
+
+        if (lxSelect.multiple) {
+            $timeout(() => {
+                LxDropdownService.updateActiveDropdownPosition();
+            });
         }
     }
 
