@@ -6,7 +6,7 @@ import template from './lx-select.html';
 
 /////////////////////////////
 
-function lxSelectController($document, $filter, $interpolate, $sce, $scope, LxDropdownService, LxUtilsService) {
+function lxSelectController($document, $interpolate, $sce, $scope, LxDropdownService, LxUtilsService) {
     // eslint-disable-next-line consistent-this
     const lxSelect = this;
 
