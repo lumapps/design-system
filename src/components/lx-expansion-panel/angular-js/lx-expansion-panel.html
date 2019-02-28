@@ -5,7 +5,7 @@
                  'lx-expansion-panel--theme-light': !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light',
                  'lx-expansion-panel--theme-dark': lxExpansionPanel.theme === 'dark' }"
 >
-    <div class="lx-expansion-panel__header">
+    <div class="lx-expansion-panel__header" ng-click="lxExpansionPanel.toggle()">
         <div class="lx-expansion-panel__drag-indicator" ng-if="::lxExpansionPanel.isDraggable">
             <lx-icon
                 lx-path="{{ lxExpansionPanel.icons.mdiDragVertical }}"
@@ -20,13 +20,13 @@
             <lx-button
                 lx-theme="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'light' : 'dark' }}"
                 lx-type="tertiary"
-                ng-click="lxExpansionPanel.toggle()"
+                ng-click="lxExpansionPanel.toggle($event)"
             >
                 <lx-icon
                     lx-path="{{
                         lxExpansionPanel.isWrapperOpen
-                            ? lxExpansionPanel.icons.mdiChevronDown
-                            : lxExpansionPanel.icons.mdiChevronRight
+                            ? lxExpansionPanel.icons.mdiChevronUp
+                            : lxExpansionPanel.icons.mdiChevronDown
                     }}"
                 >
                 </lx-icon>

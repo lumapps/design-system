@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { mdiChevronDown, mdiChevronRight, mdiDragVertical } from '@lumx/icons';
+import { mdiChevronDown, mdiChevronUp, mdiDragVertical } from '@lumx/icons';
 
 import '../style/lx-expansion-panel.scss';
 import template from './lx-expansion-panel.html';
@@ -45,7 +45,7 @@ function lxExpansionPanelController($element, $scope, $timeout) {
      */
     lxExpansionPanel.icons = {
         mdiChevronDown,
-        mdiChevronRight,
+        mdiChevronUp,
         mdiDragVertical,
     };
 
@@ -140,7 +140,11 @@ function lxExpansionPanelController($element, $scope, $timeout) {
     /**
      * Toggle the expansion panel wrapper animation.
      */
-    function toggle() {
+    function toggle(evt) {
+        if (angular.isDefined(evt)) {
+            evt.stopPropagation();
+        }
+
         lxExpansionPanel.isOpen = !lxExpansionPanel.isOpen;
     }
 
