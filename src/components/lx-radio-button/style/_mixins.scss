@@ -43,12 +43,12 @@
 @mixin lx-radio-button-input-background-status($status, $theme) {
     @if $status == 'checked' {
         @if $theme == dark {
-            border-color: lx-theme-color-variant(primary, N);
+            color: lx-theme-color-variant(primary, N);
         } @else if $theme == light {
-            border-color: lx-theme-color-variant(light, N);
+            color: lx-theme-color-variant(light, N);
         }
     } @else if $status == 'unchecked' {
-        border-color: lx-theme-color-variant($theme, N);
+        color: lx-theme-color-variant($theme, N);
     }
 }
 

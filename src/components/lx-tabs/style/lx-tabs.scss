@@ -22,11 +22,11 @@
         @include lx-state-transitions;
 
         #{ $self }--theme-light & {
-            @include lx-state(tertiary, state-default, dark);
+            @include lx-state(state-default, emphasis-low, dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-state(tertiary, state-default, light);
+            @include lx-state(state-default, emphasis-low, light);
         }
     }
 }
@@ -67,44 +67,44 @@
 // Hover state
 .lx-tabs__link:hover {
     .lx-tabs--theme-light & {
-        @include lx-state(tertiary, state-hover, dark);
+        @include lx-state(state-hover, emphasis-low, dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(tertiary, state-hover, light);
+        @include lx-state(state-hover, emphasis-low, light);
     }
 }
 
 // Active state
 .lx-tabs__link:active {
     .lx-tabs--theme-light & {
-        @include lx-state(tertiary, state-active, dark);
+        @include lx-state(state-active, emphasis-low, dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(tertiary, state-active, light);
+        @include lx-state(state-active, emphasis-low, light);
     }
 }
 
 // Focus state
 .lx-tabs__link[data-focus-visible-added] {
     .lx-tabs--theme-light & {
-        @include lx-state(tertiary, state-focus, dark);
+        @include lx-state(state-focus, emphasis-low, dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(tertiary, state-focus, light);
+        @include lx-state(state-focus, emphasis-low, light);
     }
 }
 
 // Disabled state
 .lx-tabs__link--is-disabled {
     .lx-tabs--theme-light & {
-        @include lx-state(tertiary, state-disabled, dark);
+        @include lx-state(state-disabled, emphasis-low, dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(tertiary, state-disabled, light);
+        @include lx-state(state-disabled, emphasis-low, light);
     }
 }
 

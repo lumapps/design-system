@@ -16,15 +16,6 @@
     outline: none;
 }
 
-@mixin lx-list-item-clickable() {
-    cursor: pointer;
-
-    &:hover,
-    &[data-focus-visible-added] {
-        background-color: lx-theme-color-variant(dark, L5);
-    }
-}
-
 @mixin lx-list-item-selected() {
     background-color: lx-theme-color-variant(primary, L5);
     color: lx-theme-color-variant(primary, N);

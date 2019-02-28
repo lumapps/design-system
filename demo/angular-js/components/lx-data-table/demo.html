@@ -3,12 +3,12 @@
         <span>{{ vm.selectedRows.length || 0 }} selected item(s)</span>
     </div>
 
-    <lx-button lx-type="scondary" ng-if="vm.selectedRows.length === 1">
-        <lx-icon lx-id="pencil"></lx-icon>
+    <lx-button lx-emphasis="low" lx-variant="icon" ng-if="vm.selectedRows.length === 1">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
     </lx-button>
 
-    <lx-button lx-type="scondary" ng-if="vm.selectedRows.length >= 1">
-        <lx-icon lx-id="delete"></lx-icon>
+    <lx-button lx-emphasis="low" lx-variant="icon" ng-if="vm.selectedRows.length >= 1">
+        <lx-icon lx-path="{{ vm.icons.mdiDelete }}"></lx-icon>
     </lx-button>
 </div>
 

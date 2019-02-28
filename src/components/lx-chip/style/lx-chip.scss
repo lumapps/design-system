@@ -8,11 +8,13 @@
     $self: &;
 
     &--theme-light {
-        @include lx-chip(dark);
+        @include lx-chip();
+        @include lx-state(state-default, emphasis-medium, dark);
     }
 
     &--theme-dark {
-        @include lx-chip(light);
+        @include lx-chip();
+        @include lx-state(state-default, emphasis-medium, light);
     }
 
     &__primary {
@@ -34,6 +36,8 @@
 // Deletable
 .lx-chip--is-deletable {
     @include lx-state-transitions;
+
+    cursor: pointer;
 }
 
 /* Chip states
@@ -41,36 +45,36 @@
 
 // Hover state
 .lx-chip--theme-light.lx-chip--is-deletable:hover {
-    @include lx-chip-state(state-hover, dark);
+    @include lx-state(state-hover, emphasis-medium, dark);
 }
 
 .lx-chip--theme-dark.lx-chip--is-deletable:hover {
-    @include lx-chip-state(state-hover, light);
+    @include lx-state(state-hover, emphasis-medium, light);
 }
 
 // Active state
 .lx-chip--theme-light.lx-chip--is-deletable:active {
-    @include lx-chip-state(state-active, dark);
+    @include lx-state(state-active, emphasis-medium, dark);
 }
 
 .lx-chip--theme-dark.lx-chip--is-deletable:active {
-    @include lx-chip-state(state-active, light);
+    @include lx-state(state-active, emphasis-medium, light);
 }
 
 // Disabled state
 .lx-chip--theme-light.lx-chip--is-disabled {
-    @include lx-chip-state(state-disabled, dark);
+    @include lx-state(state-disabled, emphasis-medium, dark);
 }
 
 .lx-chip--theme-dark.lx-chip--is-disabled {
-    @include lx-chip-state(state-disabled, light);
+    @include lx-state(state-disabled, emphasis-medium, light);
 }
 
 // Active state
 .lx-chip--theme-light.lx-chip--is-deletable:active {
-    @include lx-chip-state(state-active, dark);
+    @include lx-state(state-active, emphasis-medium, dark);
 }
 
 .lx-chip--theme-dark.lx-chip--is-deletable:active {
-    @include lx-chip-state(state-active, light);
+    @include lx-state(state-active, emphasis-medium, light);
 }

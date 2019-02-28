@@ -1,7 +1,5 @@
-@import './variables';
-
 @mixin lx-icon-size($size) {
-    font-size: map-get($lx-icon-sizes, $size);
+    font-size: map-get($lx-sizes, $size);
 }
 
 @mixin lx-icon-color($color) {

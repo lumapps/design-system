@@ -18,58 +18,60 @@
     }
 }
 
-@mixin lx-button-size($size, $type, $shape: contained) {
-    height: map-get($lx-button-sizes, $size);
-    border-radius: map-get($lx-button-sizes, $size) / 2;
+@mixin lx-button-size($emphasis, $variant, $size) {
+    height: map-get($lx-sizes, $size);
 
-    @if $shape == contained {
-        padding: 0 $lx-button-horizontal-padding;
-    }
-
-    @if $shape == circled {
-        width: map-get($lx-button-sizes, $size);
+    @if $variant == variant-button {
+        border-radius: 4px;
+    } @else if $variant == variant-icon {
+        width: map-get($lx-sizes, $size);
+        border-radius: 50%;
     }
 }
 
-@mixin lx-button-color($color, $type, $theme: dark) {
+@mixin lx-button-color($emphasis, $theme, $color: null) {
     @include lx-state-transitions;
-    @include lx-state($type, state-default, $theme, $color);
-
-    @if $type == secondary {
-        border-style: solid;
-        border-width: 1px;
-    }
+    @include lx-state(state-default, $emphasis, $theme, $color);
 
     &:hover {
-        @include lx-state($type, state-hover, $theme, $color);
+        @include lx-state(state-hover, $emphasis, $theme, $color);
     }
 
     &:active {
-        @include lx-state($type, state-active, $theme, $color);
+        @include lx-state(state-active, $emphasis, $theme, $color);
     }
 
     &[data-focus-visible-added] {
-        @include lx-state($type, state-focus, $theme, $color);
+        @include lx-state(state-focus, $emphasis, $theme, $color);
     }
 
     &:disabled {
-        @include lx-state($type, state-disabled, $theme, $color);
+        @include lx-state(state-disabled, $emphasis, $theme, $color);
     }
 }
 
-@mixin lx-button-icon($size) {
+@mixin lx-button-icon($variant, $position, $size) {
     font-size: map-get($lx-button-icon-sizes, $size);
-    pointer-events: none;
+
+    @if $variant == variant-button {
+        @if $position == position-left {
+            @if $size == m {
+                margin-right: $lx-base-spacing-unit;
+            } @else if $size == s {
+                margin-right: $lx-base-spacing-unit / 2;
+            }
+        } @else if $position == position-right {
+            @if $size == m {
+                margin-left: $lx-base-spacing-unit;
+            } @else if $size == s {
+                margin-left: $lx-base-spacing-unit / 2;
+            }
+        }
+    }
 }
 
-@mixin lx-button-text($size, $type) {
+@mixin lx-button-text($size) {
     font-size: map-get($lx-button-text-sizes, $size);
     font-weight: 600;
-    pointer-events: none;
-
-    @if $type == primary {
-        line-height: map-get($lx-button-sizes, $size);
-    } @else if $type == secondary {
-        line-height: map-get($lx-button-sizes, $size) - 2;
-    }
+    line-height: map-get($lx-sizes, $size);
 }

@@ -17,7 +17,7 @@
         <lx-icon
             class="lx-text-field__input-icon"
             lx-path="{{ lxTextField.icon }}"
-            lx-size="s"
+            lx-size="xs"
             ng-if="::lxTextField.icon"
         ></lx-icon>
 
@@ -26,7 +26,7 @@
         <lx-icon
             class="lx-text-field__input-validity"
             lx-path="{{ lxTextField.isValid ? lxTextField.icons.mdiCheckCircle : lxTextField.icons.mdiAlertCircle }}"
-            lx-size="s"
+            lx-size="xs"
             ng-if="lxTextField.isValid || lxTextField.hasError"
         ></lx-icon>
     </div>

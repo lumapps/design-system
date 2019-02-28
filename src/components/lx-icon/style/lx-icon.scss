@@ -15,7 +15,7 @@
 /* Icon sizes
    ========================================================================== */
 
-@each $key, $size in $lx-icon-sizes {
+@each $key, $size in $lx-sizes {
     .lx-icon--size-#{$key} {
         @include lx-icon-size($key);
     }

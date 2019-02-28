@@ -63,7 +63,7 @@
         <div class="lx-select__input-validity" ng-if="lxSelect.isValid || lxSelect.hasError">
             <lx-icon
                 lx-path="{{ lxSelect.isValid ? lxSelect.icons.mdiCheckCircle : lxSelect.icons.mdiAlertCircle }}"
-                lx-size="s"
+                lx-size="xs"
             ></lx-icon>
         </div>
 
@@ -72,18 +72,18 @@
             ng-if="lxSelect.allowClear && !lxSelect.multiple && !lxSelect.isModelEmpty()"
             ng-click="lxSelect.clearModel($event)"
         >
-            <lx-icon lx-path="{{ lxSelect.icons.mdiCloseCircle }}" lx-size="s"></lx-icon>
+            <lx-icon lx-path="{{ lxSelect.icons.mdiCloseCircle }}" lx-size="xs"></lx-icon>
         </div>
 
         <div class="lx-select__input-indicator">
-            <lx-icon lx-path="{{ lxSelect.icons.mdiMenuDown }}" lx-size="m"></lx-icon>
+            <lx-icon lx-path="{{ lxSelect.icons.mdiMenuDown }}" lx-size="s"></lx-icon>
         </div>
     </div>
 
     <lx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
         <lx-dropdown-menu>
             <div class="lx-select__filter" ng-if="::lxSelect.displayFilter">
-                <lx-icon lx-path="{{ lxSelect.icons.mdiMagnify }}" lx-size="s"></lx-icon>
+                <lx-icon lx-path="{{ lxSelect.icons.mdiMagnify }}" lx-size="xs"></lx-icon>
 
                 <input
                     type="text"

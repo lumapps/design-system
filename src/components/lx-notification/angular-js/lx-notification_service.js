@@ -91,7 +91,7 @@ function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {
         const notificationIconWrapper = angular.element('<div/>', {
             class: 'lx-notification__icon',
         });
-        const notificationIcon = $compile(`<lx-icon lx-path="${_notificationTypes[type].icon}" lx-size="m"></lx-icon>`)(
+        const notificationIcon = $compile(`<lx-icon lx-path="${_notificationTypes[type].icon}" lx-size="s"></lx-icon>`)(
             $rootScope,
         );
 
@@ -110,7 +110,7 @@ function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {
             const notificationActionWrapper = angular.element('<div/>', {
                 class: 'lx-notification__action',
             });
-            const notificationAction = $compile(`<lx-button lx-type="tertiary">${actionLabel}</lx-button>`)($rootScope);
+            const notificationAction = $compile(`<lx-button lx-emphasis="low">${actionLabel}</lx-button>`)($rootScope);
 
             notificationAction.on('click', function onActionCuttonClick(evt) {
                 actionCallback();

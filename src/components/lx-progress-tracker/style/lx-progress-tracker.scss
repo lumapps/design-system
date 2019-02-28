@@ -106,15 +106,15 @@
 
 // Hover state
 .lx-progress-tracker-step--is-clickable:hover {
-    @include lx-state(tertiary, state-hover, dark);
+    @include lx-state(state-hover, emphasis-low, dark);
 }
 
 // Active state
 .lx-progress-tracker-step--is-clickable:active {
-    @include lx-state(tertiary, state-active, dark);
+    @include lx-state(state-active, emphasis-low, dark);
 }
 
 // Focus state
 .lx-progress-tracker-step--is-clickable[data-focus-visible-added] {
-    @include lx-state(tertiary, state-focus, dark);
+    @include lx-state(state-focus, emphasis-low, dark);
 }

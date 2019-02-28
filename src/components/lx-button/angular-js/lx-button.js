@@ -28,15 +28,20 @@ function lxButtonDirective(LxThemeConstant) {
     function getTemplate(el, attrs) {
         const defaultProps = {
             color: 'primary',
+            emphasis: 'high',
             size: 'm',
             theme: 'light',
-            type: 'primary',
+            variant: 'button',
         };
 
         let buttonClass = 'lx-button';
 
-        if (!attrs.lxColor && (attrs.lxType === 'primary' || !attrs.lxType)) {
+        if (!attrs.lxColor && (attrs.lxEmphasis === 'high' || !attrs.lxEmphasis)) {
             buttonClass += ` lx-button--color-${defaultProps.color}`;
+        }
+
+        if (!attrs.lxEmphasis) {
+            buttonClass += ` lx-button--emphasis-${defaultProps.emphasis}`;
         }
 
         if (!attrs.lxSize) {
@@ -47,8 +52,8 @@ function lxButtonDirective(LxThemeConstant) {
             buttonClass += ` lx-button--theme-${defaultProps.theme}`;
         }
 
-        if (!attrs.lxType) {
-            buttonClass += ` lx-button--type-${defaultProps.type}`;
+        if (!attrs.lxVariant) {
+            buttonClass += ` lx-button--variant-${defaultProps.variant}`;
         }
 
         if (isAnchor(attrs)) {
@@ -59,29 +64,22 @@ function lxButtonDirective(LxThemeConstant) {
     }
 
     function link(scope, el, attrs) {
-        const transcludedIcon = el.find('i');
-        const tanscludedText = el.find('span');
+        if (!attrs.lxVariant || attrs.lxVariant === 'button') {
+            const leftIcon = el.find('i:first-child');
+            const rightIcon = el.find('i:last-child');
+            const label = el.find('span');
 
-        if (transcludedIcon.length > 0 && !tanscludedText.length > 0) {
-            el.addClass('lx-button--shape-circled');
-        } else {
-            el.addClass('lx-button--shape-contained');
-        }
+            if (leftIcon.length > 0) {
+                el.addClass('lx-button--has-left-icon');
+            }
 
-        if (transcludedIcon.length === 0 && tanscludedText.length === 0) {
-            el.wrapInner('<span class="lx-button__text"></span>');
-        }
+            if (rightIcon.length > 0) {
+                el.addClass('lx-button--has-right-icon');
+            }
 
-        if (transcludedIcon.length > 0) {
-            transcludedIcon.addClass('lx-button__icon');
-        }
-
-        if (transcludedIcon.length > 0 && tanscludedText.length > 0) {
-            transcludedIcon.addClass('lx-button__icon--has-sibling');
-        }
-
-        if (tanscludedText.length > 0) {
-            tanscludedText.addClass('lx-button__text');
+            if (label.length === 0) {
+                el.wrapInner('<span></span>');
+            }
         }
 
         attrs.$observe('lxColor', (color) => {
@@ -96,6 +94,12 @@ function lxButtonDirective(LxThemeConstant) {
             }
         });
 
+        attrs.$observe('lxEmphasis', (emphasis) => {
+            el.removeClass((index, className) => {
+                return (className.match(/(^|\s)lx-button--emphasis-\S+/g) || []).join(' ');
+            }).addClass(`lx-button--emphasis-${emphasis}`);
+        });
+
         attrs.$observe('lxSize', (size) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)lx-button--size-\S+/g) || []).join(' ');
@@ -108,10 +112,10 @@ function lxButtonDirective(LxThemeConstant) {
             }).addClass(`lx-button--theme-${theme}`);
         });
 
-        attrs.$observe('lxType', (type) => {
+        attrs.$observe('lxVariant', (variant) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-button--type-\S+/g) || []).join(' ');
-            }).addClass(`lx-button--type-${type}`);
+                return (className.match(/(^|\s)lx-button--variant-\S+/g) || []).join(' ');
+            }).addClass(`lx-button--variant-${variant}`);
         });
     }
 

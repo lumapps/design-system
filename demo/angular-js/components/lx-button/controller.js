@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { mdiPencil, mdiPlus } from '@lumx/icons';
+import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
 /////////////////////////////
 
@@ -13,6 +13,7 @@ function DemoButtonController() {
     /////////////////////////////
 
     vm.icons = {
+        mdiMenuDown,
         mdiPencil,
         mdiPlus,
     };

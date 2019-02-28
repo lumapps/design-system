@@ -10,7 +10,7 @@
             <lx-icon
                 lx-path="{{ lxExpansionPanel.icons.mdiDragVertical }}"
                 lx-color="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'dark' : 'light' }}"
-                lx-size="m"
+                lx-size="s"
             ></lx-icon>
         </div>
 
@@ -18,8 +18,9 @@
 
         <div class="lx-expansion-panel__state-indicator">
             <lx-button
+                lx-emphasis="low"
                 lx-theme="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'light' : 'dark' }}"
-                lx-type="tertiary"
+                lx-variant="icon"
                 ng-click="lxExpansionPanel.toggle($event)"
             >
                 <lx-icon

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { mdiCommentOutline } from '@lumx/icons';
+import { mdiCommentOutline, mdiDelete, mdiPencil } from '@lumx/icons';
 
 /////////////////////////////
 
@@ -12,6 +12,10 @@ function DemoDataTableController($filter, $scope) {
     //                         //
     /////////////////////////////
 
+    vm.icons = {
+        mdiDelete,
+        mdiPencil,
+    };
     vm.dataTableId = 'dataTableDemo';
     vm.dataTableThead = [
         {

@@ -1,112 +1,235 @@
-<div class="main__block">
-    <h1>Buttons</h1>
-    <p class="lx-typography-body1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis suscipit velit, non porttitor sapien
-        condimentum quis. Vestibulum rhoncus, magna non tincidunt aliquam, odio eros consequat libero, non malesuada
-        elit lorem sit amet sem. Etiam eleifend vestibulum imperdiet.
-    </p>
+<!-- Theme light (m) -->
+
+<div class="p++ lx-theme-background-dark-L6">
+    <lx-button>Default</lx-button>
+    <lx-button ng-disabled="true">Disabled</lx-button>
+
+    <lx-button>
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button>
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
 </div>
 
-<div class="main__block">
-    <h2>Primary</h2>
-    <p class="lx-typography-body2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis suscipit velit, non porttitor sapien
-        condimentum quis. Vestibulum rhoncus, magna non tincidunt aliquam, odio eros consequat libero, non malesuada
-        elit lorem sit amet sem. Etiam eleifend vestibulum imperdiet.
-    </p>
+<div class="p++ lx-theme-background-dark-L6">
+    <lx-button lx-emphasis="medium">Default</lx-button>
+    <lx-button lx-emphasis="medium" ng-disabled="true">Disabled</lx-button>
 
-    <div style="padding: 24px;" class="lx-theme-background-dark-L6">
-        <lx-button lx-type="primary" lx-color="blue">Default</lx-button>
-        <lx-button lx-type="primary" lx-color="yellow">Default</lx-button>
-        <lx-button lx-type="primary" lx-color="red">Default</lx-button>
-        <lx-button lx-type="primary" lx-color="green">Default</lx-button>
-        <lx-button lx-type="primary" lx-color="blue" ng-disabled="true">Disabled</lx-button>
+    <lx-button lx-emphasis="medium">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
 
-        <lx-button lx-type="primary" lx-color="blue">
-            <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
-            <span>With Icon</span>
-        </lx-button>
+    <lx-button lx-emphasis="medium">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
 
-        <lx-button lx-type="primary" lx-color="blue"><lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon></lx-button>
-    </div>
-
-    <div style="padding: 24px;" class="lx-theme-background-blue-N">
-        <lx-button lx-type="primary" lx-color="blue" lx-theme="dark">Default</lx-button>
-        <lx-button lx-type="primary" lx-color="blue" lx-theme="dark" ng-disabled="true">Disabled</lx-button>
-
-        <lx-button lx-type="primary" lx-color="blue" lx-theme="dark">
-            <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
-            <span>With Icon</span>
-        </lx-button>
-
-        <lx-button lx-type="primary" lx-color="blue" lx-theme="dark"
-            ><lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon
-        ></lx-button>
-    </div>
+    <lx-button lx-emphasis="medium" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
 </div>
 
-<div class="main__block">
-    <h2>Secondary</h2>
-    <p class="lx-typography-body2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis suscipit velit, non porttitor sapien
-        condimentum quis. Vestibulum rhoncus, magna non tincidunt aliquam, odio eros consequat libero, non malesuada
-        elit lorem sit amet sem. Etiam eleifend vestibulum imperdiet.
-    </p>
+<div class="p++ lx-theme-background-dark-L6">
+    <lx-button lx-emphasis="low">Default</lx-button>
+    <lx-button lx-emphasis="low" ng-disabled="true">Disabled</lx-button>
 
-    <div style="padding: 24px;" class="lx-theme-background-dark-L6">
-        <lx-button lx-type="secondary">Default</lx-button>
-        <lx-button lx-type="secondary" ng-disabled="true">Disabled</lx-button>
+    <lx-button lx-emphasis="low">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
 
-        <lx-button lx-type="secondary">
-            <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
-            <span>With Icon</span>
-        </lx-button>
+    <lx-button lx-emphasis="low">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
 
-        <lx-button lx-type="secondary"><lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon></lx-button>
-    </div>
-
-    <div style="padding: 24px;" class="lx-theme-background-blue-N">
-        <lx-button lx-type="secondary" lx-theme="dark">Default</lx-button>
-        <lx-button lx-type="secondary" lx-theme="dark" ng-disabled="true">Disabled</lx-button>
-
-        <lx-button lx-type="secondary" lx-theme="dark">
-            <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
-            <span>With Icon</span>
-        </lx-button>
-
-        <lx-button lx-type="secondary" lx-theme="dark"><lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon></lx-button>
-    </div>
+    <lx-button lx-emphasis="low" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
 </div>
 
-<div class="main__block">
-    <h2>Tertiary</h2>
-    <p class="lx-typography-body2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis suscipit velit, non porttitor sapien
-        condimentum quis. Vestibulum rhoncus, magna non tincidunt aliquam, odio eros consequat libero, non malesuada
-        elit lorem sit amet sem. Etiam eleifend vestibulum imperdiet.
-    </p>
+<div class="p++ lx-theme-background-dark-L6">
+    <lx-button lx-size="s">Default</lx-button>
+    <lx-button lx-size="s" ng-disabled="true">Disabled</lx-button>
 
-    <div style="padding: 24px;" class="lx-theme-background-dark-L6">
-        <lx-button lx-type="tertiary">Default</lx-button>
-        <lx-button lx-type="tertiary" ng-disabled="true">Disabled</lx-button>
+    <lx-button lx-size="s">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
 
-        <lx-button lx-type="tertiary">
-            <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
-            <span>With Icon</span>
-        </lx-button>
+    <lx-button lx-size="s">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
 
-        <lx-button lx-type="tertiary"><lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon></lx-button>
-    </div>
+    <lx-button lx-size="s" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
+</div>
 
-    <div style="padding: 24px;" class="lx-theme-background-blue-N">
-        <lx-button lx-type="tertiary" lx-theme="dark">Default</lx-button>
-        <lx-button lx-type="tertiary" lx-theme="dark" ng-disabled="true">Disabled</lx-button>
+<!-- Theme light (s) -->
 
-        <lx-button lx-type="tertiary" lx-theme="dark">
-            <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
-            <span>With Icon</span>
-        </lx-button>
+<div class="p++ lx-theme-background-dark-L6">
+    <lx-button lx-emphasis="medium" lx-size="s">Default</lx-button>
+    <lx-button lx-emphasis="medium" lx-size="s" ng-disabled="true">Disabled</lx-button>
 
-        <lx-button lx-type="tertiary" lx-theme="dark"><lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon></lx-button>
-    </div>
+    <lx-button lx-emphasis="medium" lx-size="s">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button lx-emphasis="medium" lx-size="s">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-emphasis="medium" lx-size="s" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
+</div>
+
+<div class="p++ lx-theme-background-dark-L6">
+    <lx-button lx-emphasis="low" lx-size="s">Default</lx-button>
+    <lx-button lx-emphasis="low" lx-size="s" ng-disabled="true">Disabled</lx-button>
+
+    <lx-button lx-emphasis="low" lx-size="s">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button lx-emphasis="low" lx-size="s">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-emphasis="low" lx-size="s" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
+</div>
+
+<!-- Theme dark (m) -->
+
+<div class="p++ lx-theme-background-dark-N">
+    <lx-button lx-theme="dark">Default</lx-button>
+    <lx-button lx-theme="dark" ng-disabled="true">Disabled</lx-button>
+
+    <lx-button lx-theme="dark">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button lx-theme="dark">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-theme="dark" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
+</div>
+
+<div class="p++ lx-theme-background-dark-N">
+    <lx-button lx-emphasis="medium" lx-theme="dark">Default</lx-button>
+    <lx-button lx-emphasis="medium" lx-theme="dark" ng-disabled="true">Disabled</lx-button>
+
+    <lx-button lx-emphasis="medium" lx-theme="dark">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button lx-emphasis="medium" lx-theme="dark">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-emphasis="medium" lx-theme="dark" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
+</div>
+
+<div class="p++ lx-theme-background-dark-N">
+    <lx-button lx-emphasis="low" lx-theme="dark">Default</lx-button>
+    <lx-button lx-emphasis="low" lx-theme="dark" ng-disabled="true">Disabled</lx-button>
+
+    <lx-button lx-emphasis="low" lx-theme="dark">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button lx-emphasis="low" lx-theme="dark">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-emphasis="low" lx-theme="dark" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
+</div>
+
+<div class="p++ lx-theme-background-dark-N">
+    <lx-button lx-size="s" lx-theme="dark">Default</lx-button>
+    <lx-button lx-size="s" lx-theme="dark" ng-disabled="true">Disabled</lx-button>
+
+    <lx-button lx-size="s" lx-theme="dark">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button lx-size="s" lx-theme="dark">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-size="s" lx-theme="dark" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
+</div>
+
+<!-- Theme dark (s) -->
+
+<div class="p++ lx-theme-background-dark-N">
+    <lx-button lx-emphasis="medium" lx-size="s" lx-theme="dark">Default</lx-button>
+    <lx-button lx-emphasis="medium" lx-size="s" lx-theme="dark" ng-disabled="true">Disabled</lx-button>
+
+    <lx-button lx-emphasis="medium" lx-size="s" lx-theme="dark">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button lx-emphasis="medium" lx-size="s" lx-theme="dark">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-emphasis="medium" lx-size="s" lx-theme="dark" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
+</div>
+
+<div class="p++ lx-theme-background-dark-N">
+    <lx-button lx-emphasis="low" lx-size="s" lx-theme="dark">Default</lx-button>
+    <lx-button lx-emphasis="low" lx-size="s" lx-theme="dark" ng-disabled="true">Disabled</lx-button>
+
+    <lx-button lx-emphasis="low" lx-size="s" lx-theme="dark">
+        <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+        <span>With Icon</span>
+    </lx-button>
+
+    <lx-button lx-emphasis="low" lx-size="s" lx-theme="dark">
+        <span>Dropdown</span>
+        <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
+    </lx-button>
+
+    <lx-button lx-emphasis="low" lx-size="s" lx-theme="dark" lx-variant="icon">
+        <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
+    </lx-button>
 </div>

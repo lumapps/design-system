@@ -44,15 +44,15 @@
                 ng-repeat="th in lxDataTable.thead track by $index"
                 ng-if="!lxDataTable.thumbnail || (lxDataTable.thumbnail && $index != 0)"
             >
-                <lx-icon lx-path="{{ th.icon }}" lx-size="xs" ng-if="th.icon && !th.sortable"></lx-icon>
+                <lx-icon lx-path="{{ th.icon }}" lx-size="xxs" ng-if="th.icon && !th.sortable"></lx-icon>
                 <lx-icon
                     lx-path="{{ lxDataTable.icons.mdiArrowUp }}"
-                    lx-size="xs"
+                    lx-size="xxs"
                     ng-if="th.sortable && th.sort === 'asc'"
                 ></lx-icon>
                 <lx-icon
                     lx-path="{{ lxDataTable.icons.mdiArrowDown }}"
-                    lx-size="xs"
+                    lx-size="xxs"
                     ng-if="th.sortable && th.sort === 'desc'"
                 ></lx-icon>
                 <span>{{ th.label }}</span>

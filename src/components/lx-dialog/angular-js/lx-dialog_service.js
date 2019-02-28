@@ -91,7 +91,7 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
                     </lx-dialog-content>
                     <lx-dialog-footer>
                         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
-                            <lx-button lx-type="secondary" ng-click="cb(false)" lx-dialog-close>
+                            <lx-button lx-emphasis="medium" ng-click="cb(false)" lx-dialog-close>
                                 ${buttons.cancel}
                             </lx-button>
                             <lx-button class="ml" ng-click="cb(true)" lx-dialog-close>
