@@ -19,6 +19,8 @@ import './components/lx-list/angular-js/lx-list-item';
 import './components/lx-list/angular-js/lx-list-subheader';
 import './components/lx-notification/angular-js/lx-notification_service';
 import './components/lx-progress/angular-js/lx-progress';
+import './components/lx-progress-tracker/angular-js/lx-progress-tracker';
+import './components/lx-progress-tracker/angular-js/lx-progress-tracker-step';
 import './components/lx-radio-button/angular-js/lx-radio-button';
 import './components/lx-select/angular-js/lx-select';
 import './components/lx-select/angular-js/lx-select-choices_filter';

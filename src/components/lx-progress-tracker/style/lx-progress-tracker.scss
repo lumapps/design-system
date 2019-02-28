@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Progress tracker
+   ========================================================================== */
+
+@import './variables';
+
+.lx-progress-tracker {
+    position: relative;
+
+    &__steps {
+        position: relative;
+        z-index: 1;
+        display: flex;
+    }
+
+    &__background-bar,
+    &__foreground-bar {
+        position: absolute;
+        z-index: 0;
+        top: 19px;
+        height: $lx-progress-tracker-bar-height;
+    }
+
+    &__background-bar {
+        background-color: lx-theme-color-variant(dark, L5);
+    }
+
+    &__foreground-bar {
+        background-color: lx-theme-color-variant(primary, N);
+        transform-origin: left;
+        transition: transform $lx-progress-tracker-transition-duration;
+    }
+}
+
+/* Step
+   ========================================================================== */
+
+.lx-progress-tracker-step {
+    $self: &;
+
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    padding: $lx-base-spacing-unit 0;
+    border-radius: 4px;
+    outline: none;
+
+    &--is-clickable {
+        @include lx-state-transitions;
+
+        cursor: pointer;
+    }
+
+    &__state {
+        position: relative;
+        color: lx-theme-color-variant(dark, N);
+
+        #{ $self }--is-active &,
+        #{ $self }--is-complete & {
+            color: lx-theme-color-variant(primary, N);
+        }
+
+        #{ $self }--has-error & {
+            color: lx-theme-color-variant(red, N);
+        }
+
+        &::before {
+            position: absolute;
+            z-index: -1;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: lx-theme-color-variant(light, N);
+            content: '';
+        }
+    }
+
+    &__label {
+        @include lx-typography(body1);
+
+        margin-top: $lx-base-spacing-unit;
+        color: lx-theme-color-variant(dark, N);
+        text-align: center;
+
+        #{ $self }--has-error & {
+            color: lx-theme-color-variant(red, N);
+        }
+    }
+
+    &__helper {
+        @include lx-typography(caption);
+
+        color: lx-theme-color-variant(dark, L2);
+        text-align: center;
+
+        #{ $self }--has-error & {
+            color: lx-theme-color-variant(red, N);
+        }
+    }
+}
+
+/* Step states
+   ========================================================================== */
+
+// Hover state
+.lx-progress-tracker-step--is-clickable:hover {
+    @include lx-state(tertiary, state-hover, dark);
+}
+
+// Active state
+.lx-progress-tracker-step--is-clickable:active {
+    @include lx-state(tertiary, state-active, dark);
+}
+
+// Focus state
+.lx-progress-tracker-step--is-clickable[data-focus-visible-added] {
+    @include lx-state(tertiary, state-focus, dark);
+}

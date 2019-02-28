@@ -1,0 +1,20 @@
+<a
+    class="lx-progress-tracker-step"
+    ng-class="{ 'lx-progress-tracker-step--is-active': lxProgressTrackerStep.isActive,
+                'lx-progress-tracker-step--is-complete': lxProgressTrackerStep.isComplete,
+                'lx-progress-tracker-step--is-clickable': lxProgressTrackerStep.isClickable(),
+                'lx-progress-tracker-step--has-error': lxProgressTrackerStep.isActive && lxProgressTrackerStep.hasError }"
+    tabindex="{{ lxProgressTrackerStep.isClickable() ? 0 : -1 }}"
+>
+    <lx-icon
+        class="lx-progress-tracker-step__state"
+        lx-path="{{ lxProgressTrackerStep.getIcon() }}"
+        lx-size="m"
+    ></lx-icon>
+
+    <span class="lx-progress-tracker-step__label">{{ lxProgressTrackerStep.label }}</span>
+
+    <span class="lx-progress-tracker-step__helper" ng-if="lxProgressTrackerStep.helper">
+        {{ lxProgressTrackerStep.helper }}
+    </span>
+</a>

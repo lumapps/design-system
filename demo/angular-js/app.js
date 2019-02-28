@@ -118,6 +118,16 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 },
             },
         })
+        .state('app.progress-tracker', {
+            url: 'progress-tracker',
+            views: {
+                'main@': {
+                    controller: 'DemoProgressTrackerController',
+                    controllerAs: 'vm',
+                    template: require('./components/lx-progress-tracker/demo.html'),
+                },
+            },
+        })
         .state('app.radio-button', {
             url: 'radio-button',
             views: {
@@ -218,6 +228,7 @@ require('./components/lx-dropdown/controller.js');
 require('./components/lx-expansion-panel/controller.js');
 require('./components/lx-list/controller.js');
 require('./components/lx-notification/controller.js');
+require('./components/lx-progress-tracker/controller.js');
 require('./components/lx-radio-button/controller.js');
 require('./components/lx-select/controller.js');
 require('./components/lx-switch/controller.js');

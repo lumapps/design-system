@@ -24,6 +24,7 @@ angular.module('lumx.icon', []);
 angular.module('lumx.list', []);
 angular.module('lumx.notification', []);
 angular.module('lumx.progress', []);
+angular.module('lumx.progress-tracker', []);
 angular.module('lumx.radio-button', []);
 angular.module('lumx.select', []);
 angular.module('lumx.switch', []);
@@ -46,6 +47,7 @@ angular.module('lumx', [
     'lumx.list',
     'lumx.notification',
     'lumx.progress',
+    'lumx.progress-tracker',
     'lumx.radio-button',
     'lumx.select',
     'lumx.switch',
