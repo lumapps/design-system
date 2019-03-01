@@ -1,6 +1,16 @@
 @mixin lx-tabs-links($theme) {
+    position: relative;
     display: flex;
-    border-bottom: 2px solid lx-theme-color-variant($theme, L5);
+
+    &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background-color: lx-theme-color-variant($theme, L5);
+        content: '';
+    }
 }
 
 @mixin lx-tabs-links-position($position) {
@@ -16,7 +26,7 @@
 @mixin lx-tabs-link() {
     position: relative;
     display: flex;
-    height: 48px;
+    height: map-get($lx-sizes, l);
     align-items: center;
     justify-content: center;
     padding: 0 $lx-base-spacing-unit * 3;
@@ -26,7 +36,7 @@
     &::after {
         position: absolute;
         right: 0;
-        bottom: -2px;
+        bottom: 0;
         left: 0;
         height: 2px;
         content: '';

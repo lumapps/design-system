@@ -89,11 +89,11 @@
 // Focus state
 .lx-tabs__link[data-focus-visible-added] {
     .lx-tabs--theme-light & {
-        @include lx-state(state-focus, emphasis-low, dark);
+        @include lx-state(state-focus, emphasis-low, dark, null, true);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(state-focus, emphasis-low, light);
+        @include lx-state(state-focus, emphasis-low, light, null, true);
     }
 }
 

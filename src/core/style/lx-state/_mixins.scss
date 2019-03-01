@@ -39,7 +39,7 @@
     }
 }
 
-@mixin lx-state-medium($state, $theme) {
+@mixin lx-state-medium($state, $theme, $inset) {
     @if $state == state-default {
         background-color: lx-theme-color-variant($theme, L5);
         color: lx-theme-color-variant($theme, N);
@@ -48,7 +48,11 @@
     } @else if $state == state-active {
         background-color: lx-theme-color-variant($theme, L3);
     } @else if $state == state-focus {
-        box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
+        @if $inset == true {
+            box-shadow: inset 0 0 0 2px lx-theme-color-variant($theme, L3);
+        } @else {
+            box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
+        }
     } @else if $state == state-disabled {
         background-color: lx-theme-color-variant($theme, L6);
         color: lx-theme-color-variant($theme, L3);
@@ -56,7 +60,7 @@
     }
 }
 
-@mixin lx-state-low($state, $theme) {
+@mixin lx-state-low($state, $theme, $inset) {
     @if $state == state-default {
         background-color: transparent;
         color: lx-theme-color-variant($theme, N);
@@ -65,7 +69,11 @@
     } @else if $state == state-active {
         background-color: lx-theme-color-variant($theme, L4);
     } @else if $state == state-focus {
-        box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
+        @if $inset == true {
+            box-shadow: inset 0 0 0 2px lx-theme-color-variant($theme, L3);
+        } @else {
+            box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
+        }
     } @else if $state == state-disabled {
         background-color: transparent;
         color: lx-theme-color-variant($theme, L3);
@@ -78,13 +86,13 @@
     pointer-events: none;
 }
 
-@mixin lx-state($state, $emphasis, $theme, $color: null) {
+@mixin lx-state($state, $emphasis, $theme, $color: null, $inset: false) {
     @if $emphasis == emphasis-high {
         @include lx-state-high($state, $theme, $color);
     } @else if $emphasis == emphasis-medium {
-        @include lx-state-medium($state, $theme);
+        @include lx-state-medium($state, $theme, $inset);
     } @else if $emphasis == emphasis-low {
-        @include lx-state-low($state, $theme);
+        @include lx-state-low($state, $theme, $inset);
     }
 }
 
