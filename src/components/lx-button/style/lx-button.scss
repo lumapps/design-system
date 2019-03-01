@@ -137,3 +137,24 @@
 .lx-button--emphasis-low.lx-button--theme-dark {
     @include lx-button-color(emphasis-low, light);
 }
+
+/* Button group
+   ========================================================================== */
+
+.lx-button-group {
+    display: inline-flex;
+
+    .lx-button {
+        margin-right: 1px;
+        border-radius: 0 !important;
+
+        &:first-child {
+            border-radius: $lx-button-radius 0 0 $lx-button-radius !important;
+        }
+
+        &:last-child {
+            margin-right: 0;
+            border-radius: 0 $lx-button-radius $lx-button-radius 0 !important;
+        }
+    }
+}

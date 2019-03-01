@@ -1,6 +1,7 @@
 import './core/angular-js';
 
 import './components/lx-button/angular-js/lx-button';
+import './components/lx-button/angular-js/lx-button-group';
 import './components/lx-checkbox/angular-js/lx-checkbox';
 import './components/lx-chip/angular-js/lx-chip';
 import './components/lx-data-table/angular-js/lx-data-table';

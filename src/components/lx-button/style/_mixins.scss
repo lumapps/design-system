@@ -22,7 +22,7 @@
     height: map-get($lx-sizes, $size);
 
     @if $variant == variant-button {
-        border-radius: 4px;
+        border-radius: $lx-button-radius;
     } @else if $variant == variant-icon {
         width: map-get($lx-sizes, $size);
         border-radius: 50%;
