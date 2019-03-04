@@ -1,16 +1,33 @@
-<div
+<a
     class="lx-chip"
-    ng-class="{ 'lx-chip--theme-light': !lxChip.theme || lxChip.theme === 'light',
-                'lx-chip--theme-dark': lxChip.theme === 'dark',
-                'lx-chip--is-deletable': lxChip.isDeletable,
-                'lx-chip--is-disabled': lxChip.isDisabled }"
+    ng-class="{ 'lx-chip--has-before': lxChip.hasBefore,
+                'lx-chip--has-after': lxChip.hasAfter,
+                'lx-chip--is-idle': !lxChip.isActive,
+                'lx-chip--is-active': lxChip.isActive,
+                'lx-chip--is-clickable': lxChip.onClick,
+                'lx-chip--is-disabled': lxChip.isDisabled,
+                'lx-chip--size-m': !lxChip.size || lxChip.size === 'm',
+                'lx-chip--size-s': lxChip.size === 's',
+                'lx-chip--theme-light': !lxChip.theme || lxChip.theme === 'light',
+                'lx-chip--theme-dark': lxChip.theme === 'dark' }"
+    ng-click="lxChip.handleOnClick($event)"
+    tabindex="{{ lxChip.isDisabled ? -1 : 0 }}"
 >
-    <div class="lx-chip__label" ng-transclude ng-if="::!lxChip.hasPrimary && !lxChip.hasLabel"></div>
+    <div
+        class="lx-chip__before"
+        ng-class="{ 'lx-chip__before--is-clickable': lxChip.onBeforeClick }"
+        ng-click="lxChip.handleOnBeforeClick($event)"
+        ng-transclude="before"
+        ng-if="::lxChip.hasBefore"
+    ></div>
 
-    <div class="lx-chip__primary" ng-transclude="primary" ng-if="::lxChip.hasPrimary"></div>
-    <div class="lx-chip__label" ng-transclude="label" ng-if="::lxChip.hasLabel"></div>
+    <div class="lx-chip__label" ng-transclude="label"></div>
 
-    <div class="lx-chip__secondary" ng-if="lxChip.isDeletable">
-        <lx-icon lx-path="{{ lxChip.icons.mdiClose }}" lx-size="xxs"></lx-icon>
-    </div>
-</div>
+    <div
+        class="lx-chip__after"
+        ng-class="{ 'lx-chip__after--is-clickable': lxChip.onAfterClick }"
+        ng-click="lxChip.handleOnAfterClick($event)"
+        ng-transclude="after"
+        ng-if="::lxChip.hasAfter"
+    ></div>
+</a>

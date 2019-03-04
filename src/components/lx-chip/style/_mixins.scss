@@ -1,27 +1,37 @@
-@import './variables';
-
-@mixin lx-chip() {
+@mixin lx-chip-base() {
     display: inline-flex;
-    height: $lx-chip-height;
     align-items: center;
-    padding: 0 $lx-base-spacing-unit;
-    border-radius: 2px;
+    padding: 0;
+    border: none;
+    margin: 0;
+    outline: none;
+    text-decoration: none;
+    user-select: none;
     vertical-align: top;
 }
 
-@mixin lx-chip-primary() {
+@mixin lx-chip-size($size) {
+    height: map-get($lx-sizes, $size);
+    border-radius: (map-get($lx-sizes, $size)) / 2;
+}
+
+@mixin lx-chip-before() {
     flex-shrink: 0;
     margin-right: $lx-base-spacing-unit;
 }
 
-@mixin lx-chip-label() {
-    @include lx-typography(caption);
-
+@mixin lx-chip-label($size) {
     flex: 1;
     white-space: nowrap;
+
+    @if $size == m {
+        @include lx-typography(body1);
+    } @else if $size == s {
+        @include lx-typography(caption);
+    }
 }
 
-@mixin lx-chip-secondary() {
+@mixin lx-chip-after() {
     flex-shrink: 0;
     margin-left: $lx-base-spacing-unit;
 }

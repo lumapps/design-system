@@ -47,15 +47,18 @@
             <div
                 class="lx-select__input-chip"
                 ng-repeat="selected in lxSelect.viewValue"
-                ng-click="lxSelect.select(selected, $event)"
                 ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple"
             >
                 <lx-chip
+                    lx-on-click="lxSelect.select(selected, $event)"
+                    lx-size="s"
                     lx-theme="{{ lxSelect.theme === 'dark' ? 'dark' : 'light' }}"
-                    lx-is-deletable="true"
                     ng-disabled="lxSelect.isDisabled"
                 >
-                    <div ng-bind-html="lxSelect.displaySelected(selected)"></div>
+                    <lx-chip-label ng-bind-html="lxSelect.displaySelected(selected)"></lx-chip-label>
+                    <lx-chip-after
+                        ><lx-icon lx-path="{{ lxSelect.icons.mdiClose }}" lx-size="xxs"></lx-icon
+                    ></lx-chip-after>
                 </lx-chip>
             </div>
         </div>

@@ -1,6 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
-import { mdiClose } from '@lumx/icons';
-
 import '../style/lx-chip.scss';
 import template from './lx-chip.html';
 
@@ -17,35 +14,92 @@ function lxChipController() {
     /////////////////////////////
 
     /**
+     * Whether the directive has after slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lxChip.hasAfter = false;
+
+    /**
+     * Whether the directive has before slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lxChip.hasBefore = false;
+
+    /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
     lxChip.hasLabel = false;
 
-    /**
-     * Whether the directive has primary slot filled or not.
-     *
-     * @type {boolean}
-     */
-    lxChip.hasPrimary = false;
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
 
     /**
-     * The chips icons.
+     * Handle given function on after area click.
      *
-     * @type {Object}
+     * @param {Event} evt The click event.
      */
-    lxChip.icons = {
-        mdiClose,
-    };
+    function handleOnAfterClick(evt) {
+        if (!angular.isFunction(lxChip.onAfterClick)) {
+            return;
+        }
+
+        evt.stopPropagation();
+
+        lxChip.onAfterClick();
+    }
+
+    /**
+     * Handle given function on before area click.
+     *
+     * @param {Event} evt The click event.
+     */
+    function handleOnBeforeClick(evt) {
+        if (!angular.isFunction(lxChip.onBeforeClick)) {
+            return;
+        }
+
+        evt.stopPropagation();
+
+        lxChip.onBeforeClick();
+    }
+
+    /**
+     * Handle given function on the whole area click.
+     *
+     * @param {Event} evt The click event.
+     */
+    function handleOnClick(evt) {
+        if (!angular.isFunction(lxChip.onClick)) {
+            return;
+        }
+
+        lxChip.onClick({ $event: evt });
+    }
+
+    /////////////////////////////
+
+    lxChip.handleOnAfterClick = handleOnAfterClick;
+    lxChip.handleOnBeforeClick = handleOnBeforeClick;
+    lxChip.handleOnClick = handleOnClick;
 }
 
 /////////////////////////////
 
 function lxChipDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
-        if (transclude.isSlotFilled('primary')) {
-            ctrl.hasPrimary = true;
+        if (transclude.isSlotFilled('after')) {
+            ctrl.hasAfter = true;
+        }
+
+        if (transclude.isSlotFilled('before')) {
+            ctrl.hasBefore = true;
         }
 
         if (transclude.isSlotFilled('label')) {
@@ -61,14 +115,19 @@ function lxChipDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            isDeletable: '=?lxIsDeletable',
+            isActive: '=?lxIsActive',
             isDisabled: '=?ngDisabled',
+            onAfterClick: '&?lxOnAfterClick',
+            onBeforeClick: '&?lxOnBeforeClick',
+            onClick: '&?lxOnClick',
+            size: '@?lxSize',
             theme: '@?lxTheme',
         },
         template,
         transclude: {
-            label: '?lxChipLabel',
-            primary: '?lxChipPrimary',
+            after: '?lxChipAfter',
+            before: '?lxChipBefore',
+            label: 'lxChipLabel',
         },
     };
 }

@@ -1,9 +1,9 @@
 // eslint-disable-next-line import/no-unresolved
-import { mdiEmail } from '@lumx/icons';
+import { mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant, mdiMenuDown } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoChipController() {
+function DemoChipController(LxNotificationService) {
     const vm = this;
 
     /////////////////////////////
@@ -13,8 +13,50 @@ function DemoChipController() {
     /////////////////////////////
 
     vm.icons = {
+        mdiClose,
+        mdiCloseCircle,
         mdiEmail,
+        mdiFilterVariant,
+        mdiMenuDown,
     };
+    vm.isActive = false;
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    function activate() {
+        if (vm.isActive) {
+            return;
+        }
+
+        vm.isActive = true;
+    }
+
+    function clickCallback() {
+        LxNotificationService.success('Callback');
+    }
+
+    function deactivate() {
+        if (!vm.isActive) {
+            return;
+        }
+
+        vm.isActive = false;
+    }
+
+    function toggleCallback() {
+        vm.isActive = !vm.isActive;
+    }
+
+    /////////////////////////////
+
+    vm.activate = activate;
+    vm.clickCallback = clickCallback;
+    vm.deactivate = deactivate;
+    vm.toggleCallback = toggleCallback;
 }
 
 /////////////////////////////

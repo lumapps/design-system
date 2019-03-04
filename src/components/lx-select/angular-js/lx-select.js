@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
+import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
 
 import '../style/lx-select.scss';
 import template from './lx-select.html';
@@ -83,6 +83,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
     lxSelect.icons = {
         mdiAlertCircle,
         mdiCheckCircle,
+        mdiClose,
         mdiCloseCircle,
         mdiMagnify,
         mdiMenuDown,
