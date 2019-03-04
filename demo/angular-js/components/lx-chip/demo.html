@@ -33,11 +33,7 @@
 <div class="pv++">
     <lx-chip lx-is-active="vm.isActive" lx-on-click="vm.toggleCallback()">
         <lx-chip-before>
-            <lx-checkbox
-                lx-as-decorator="true"
-                lx-theme="{{ vm.isActive ? 'dark' : 'light' }}"
-                ng-checked="vm.isActive"
-            ></lx-checkbox>
+            <lx-checkbox lx-theme="{{ vm.isActive ? 'dark' : 'light' }}" ng-checked="vm.isActive"></lx-checkbox>
         </lx-chip-before>
         <lx-chip-label>Choice</lx-chip-label>
     </lx-chip>
