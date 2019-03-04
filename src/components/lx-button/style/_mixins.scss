@@ -30,7 +30,6 @@
 }
 
 @mixin lx-button-color($emphasis, $theme, $color: null) {
-    @include lx-state-transitions;
     @include lx-state(state-default, $emphasis, $theme, $color);
 
     &:hover {

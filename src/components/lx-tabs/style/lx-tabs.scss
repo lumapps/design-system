@@ -19,7 +19,6 @@
 
     &__link {
         @include lx-tabs-link;
-        @include lx-state-transitions;
 
         #{ $self }--theme-light & {
             @include lx-state(state-default, emphasis-low, dark);
