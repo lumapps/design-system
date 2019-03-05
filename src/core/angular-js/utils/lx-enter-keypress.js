@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function lxEnterKeypressDirective() {
     function link(scope, el, attrs) {
         const _ENTER_KEY_CODE = 13;
@@ -20,7 +24,7 @@ function lxEnterKeypressDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.utils.enter-keypress').directive('lxEnterKeypress', lxEnterKeypressDirective);
+angular.module(`${MODULE_NAME}.utils.enter-keypress`).directive('lxEnterKeypress', lxEnterKeypressDirective);
 
 /////////////////////////////
 

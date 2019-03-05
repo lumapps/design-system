@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function lxListSubheaderDirective() {
     return {
         replace: true,
@@ -9,7 +13,7 @@ function lxListSubheaderDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.list').directive('lxListSubheader', lxListSubheaderDirective);
+angular.module(`${MODULE_NAME}.list`).directive('lxListSubheader', lxListSubheaderDirective);
 
 /////////////////////////////
 

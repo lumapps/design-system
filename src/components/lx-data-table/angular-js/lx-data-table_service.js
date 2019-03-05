@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function LxDataTableService($rootScope) {
     const service = this;
 
@@ -77,7 +81,7 @@ function LxDataTableService($rootScope) {
 
 /////////////////////////////
 
-angular.module('lumx.data-table').service('LxDataTableService', LxDataTableService);
+angular.module(`${MODULE_NAME}.data-table`).service('LxDataTableService', LxDataTableService);
 
 /////////////////////////////
 

@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
 import '../style/lx-data-table.scss';
@@ -376,7 +378,7 @@ function lxDataTableDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.data-table').directive('lxDataTable', lxDataTableDirective);
+angular.module(`${MODULE_NAME}.data-table`).directive('lxDataTable', lxDataTableDirective);
 
 /////////////////////////////
 

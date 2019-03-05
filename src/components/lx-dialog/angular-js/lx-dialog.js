@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-dialog.scss';
 import template from './lx-dialog.html';
 
@@ -343,7 +345,7 @@ function lxDialogDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.dialog').directive('lxDialog', lxDialogDirective);
+angular.module(`${MODULE_NAME}.dialog`).directive('lxDialog', lxDialogDirective);
 
 /////////////////////////////
 

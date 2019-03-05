@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 /**
  * The color palette.
  *
@@ -9,7 +13,7 @@ const LxThemeConstant = ['primary', 'secondary', 'blue', 'yellow', 'red', 'green
 
 /////////////////////////////
 
-angular.module('lumx.theme').constant('LxThemeConstant', LxThemeConstant);
+angular.module(`${MODULE_NAME}.theme`).constant('LxThemeConstant', LxThemeConstant);
 
 /////////////////////////////
 

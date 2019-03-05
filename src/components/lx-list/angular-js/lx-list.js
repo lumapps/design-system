@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-list.scss';
 import template from './lx-list.html';
 
@@ -157,7 +159,7 @@ function lxListDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.list').directive('lxList', lxListDirective);
+angular.module(`${MODULE_NAME}.list`).directive('lxList', lxListDirective);
 
 /////////////////////////////
 

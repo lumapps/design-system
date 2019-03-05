@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import { mdiCheck } from '@lumx/icons';
 
 import '../style/lx-checkbox.scss';
@@ -174,7 +176,7 @@ function lxCheckboxDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.checkbox').directive('lxCheckbox', lxCheckboxDirective);
+angular.module(`${MODULE_NAME}.checkbox`).directive('lxCheckbox', lxCheckboxDirective);
 
 /////////////////////////////
 

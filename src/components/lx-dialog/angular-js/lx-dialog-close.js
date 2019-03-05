@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function lxDialogCloseDirective(LxDialogService) {
     function link(scope, el) {
         el.on('click', function onClick() {
@@ -13,7 +17,7 @@ function lxDialogCloseDirective(LxDialogService) {
 
 /////////////////////////////
 
-angular.module('lumx.dialog').directive('lxDialogClose', lxDialogCloseDirective);
+angular.module(`${MODULE_NAME}.dialog`).directive('lxDialogClose', lxDialogCloseDirective);
 
 /////////////////////////////
 

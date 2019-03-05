@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-toolbar.scss';
 import template from './lx-toolbar.html';
 
@@ -73,7 +75,7 @@ function lxToolbarDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.toolbar').directive('lxToolbar', lxToolbarDirective);
+angular.module(`${MODULE_NAME}.toolbar`).directive('lxToolbar', lxToolbarDirective);
 
 /////////////////////////////
 

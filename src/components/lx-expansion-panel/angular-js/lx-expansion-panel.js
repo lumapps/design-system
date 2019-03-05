@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import { mdiChevronDown, mdiChevronUp, mdiDragVertical } from '@lumx/icons';
 
 import '../style/lx-expansion-panel.scss';
@@ -213,7 +215,7 @@ function lxExpansionPanelDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.expansion-panel').directive('lxExpansionPanel', lxExpansionPanelDirective);
+angular.module(`${MODULE_NAME}.expansion-panel`).directive('lxExpansionPanel', lxExpansionPanelDirective);
 
 /////////////////////////////
 

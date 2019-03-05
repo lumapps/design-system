@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function LxDepthService() {
     const service = this;
 
@@ -45,7 +49,7 @@ function LxDepthService() {
 
 /////////////////////////////
 
-angular.module('lumx.utils.depth').service('LxDepthService', LxDepthService);
+angular.module(`${MODULE_NAME}.utils.depth`).service('LxDepthService', LxDepthService);
 
 /////////////////////////////
 

@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function LxEventSchedulerService($document, LxUtilsService) {
     const service = this;
 
@@ -121,7 +125,7 @@ function LxEventSchedulerService($document, LxUtilsService) {
 
 /////////////////////////////
 
-angular.module('lumx.utils.event-scheduler').service('LxEventSchedulerService', LxEventSchedulerService);
+angular.module(`${MODULE_NAME}.utils.event-scheduler`).service('LxEventSchedulerService', LxEventSchedulerService);
 
 /////////////////////////////
 

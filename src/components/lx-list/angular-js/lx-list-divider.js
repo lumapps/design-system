@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function lxListDividerDirective() {
     return {
         replace: true,
@@ -8,7 +12,7 @@ function lxListDividerDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.list').directive('lxListDivider', lxListDividerDirective);
+angular.module(`${MODULE_NAME}.list`).directive('lxListDivider', lxListDividerDirective);
 
 /////////////////////////////
 

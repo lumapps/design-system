@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from '@lumx/icons';
 
 import '../style/lx-notification.scss';
@@ -221,7 +223,7 @@ function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {
 
 /////////////////////////////
 
-angular.module('lumx.notification').service('LxNotificationService', LxNotificationService);
+angular.module(`${MODULE_NAME}.notification`).service('LxNotificationService', LxNotificationService);
 
 /////////////////////////////
 

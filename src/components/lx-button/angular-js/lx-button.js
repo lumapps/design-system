@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-button.scss';
 
 /////////////////////////////
@@ -130,7 +132,7 @@ function lxButtonDirective(LxThemeConstant) {
 
 /////////////////////////////
 
-angular.module('lumx.button').directive('lxButton', lxButtonDirective);
+angular.module(`${MDULE_NAME}.button`).directive('lxButton', lxButtonDirective);
 
 /////////////////////////////
 

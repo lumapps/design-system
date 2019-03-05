@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function lxButtonGroupDirective() {
     return {
         replace: true,
@@ -9,7 +13,7 @@ function lxButtonGroupDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.button').directive('lxButtonGroup', lxButtonGroupDirective);
+angular.module(`${MODULE_NAME}.button`).directive('lxButtonGroup', lxButtonGroupDirective);
 
 /////////////////////////////
 

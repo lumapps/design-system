@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function LxDropdownService($rootScope) {
     const service = this;
 
@@ -94,7 +98,7 @@ function LxDropdownService($rootScope) {
 
 /////////////////////////////
 
-angular.module('lumx.dropdown').service('LxDropdownService', LxDropdownService);
+angular.module(`${MODULE_NAME}.dropdown`).service('LxDropdownService', LxDropdownService);
 
 /////////////////////////////
 

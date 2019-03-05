@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-dropdown.scss';
 import template from './lx-dropdown.html';
 
@@ -435,7 +437,7 @@ function lxDropdownDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.dropdown').directive('lxDropdown', lxDropdownDirective);
+angular.module(`${MODULE_NAME}.dropdown`).directive('lxDropdown', lxDropdownDirective);
 
 /////////////////////////////
 

@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import { mdiAlertCircle, mdiCheckCircle } from '@lumx/icons';
 
 import '../style/lx-text-field.scss';
@@ -76,7 +78,7 @@ function lxTextFieldDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.text-field').directive('lxTextField', lxTextFieldDirective);
+angular.module(`${MODULE_NAME}.text-field`).directive('lxTextField', lxTextFieldDirective);
 
 /////////////////////////////
 

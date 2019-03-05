@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-tooltip.scss';
 
 /////////////////////////////
@@ -179,7 +181,7 @@ function lxTooltipDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.tooltip').directive('lxTooltip', lxTooltipDirective);
+angular.module(`${MODULE_NAME}.tooltip`).directive('lxTooltip', lxTooltipDirective);
 
 /////////////////////////////
 

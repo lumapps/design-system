@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
 
 import '../style/lx-select.scss';
@@ -536,7 +538,7 @@ function lxSelectDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.select').directive('lxSelect', lxSelectDirective);
+angular.module(`${MODULE_NAME}.select`).directive('lxSelect', lxSelectDirective);
 
 /////////////////////////////
 

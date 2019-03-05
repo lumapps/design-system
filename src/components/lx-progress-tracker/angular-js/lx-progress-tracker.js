@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-progress-tracker.scss';
 import template from './lx-progress-tracker.html';
 
@@ -71,7 +73,7 @@ function lxProgressTrackerDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.progress-tracker').directive('lxProgressTracker', lxProgressTrackerDirective);
+angular.module(`${MODULE_NAME}.progress-tracker`).directive('lxProgressTracker', lxProgressTrackerDirective);
 
 /////////////////////////////
 

@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-divider.scss';
 import template from './lx-divider.html';
 
@@ -26,7 +28,7 @@ function lxDividerDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.divider').directive('lxDivider', lxDividerDirective);
+angular.module(`${MODULE_NAME}.divider`).directive('lxDivider', lxDividerDirective);
 
 /////////////////////////////
 

@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function lxSelectFilterDirective() {
     function link(scope, el) {
         el.on('click keydown keypress', function onFilterClick(evt) {
@@ -13,7 +17,7 @@ function lxSelectFilterDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.select').directive('lxSelectFilter', lxSelectFilterDirective);
+angular.module(`${MODULE_NAME}.select`).directive('lxSelectFilter', lxSelectFilterDirective);
 
 /////////////////////////////
 

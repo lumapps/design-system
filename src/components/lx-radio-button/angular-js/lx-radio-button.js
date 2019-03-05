@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-radio-button.scss';
 import template from './lx-radio-button.html';
 
@@ -171,7 +173,7 @@ function lxRadioButtonDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.radio-button').directive('lxRadioButton', lxRadioButtonDirective);
+angular.module(`${MODULE_NAME}.radio-button`).directive('lxRadioButton', lxRadioButtonDirective);
 
 /////////////////////////////
 

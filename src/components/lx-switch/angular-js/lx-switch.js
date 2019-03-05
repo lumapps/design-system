@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-switch.scss';
 import template from './lx-switch.html';
 
@@ -162,7 +164,7 @@ function lxSwitchDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.switch').directive('lxSwitch', lxSwitchDirective);
+angular.module(`${MODULE_NAME}.switch`).directive('lxSwitch', lxSwitchDirective);
 
 /////////////////////////////
 

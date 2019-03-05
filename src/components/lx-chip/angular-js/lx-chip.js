@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-chip.scss';
 import template from './lx-chip.html';
 
@@ -134,7 +136,7 @@ function lxChipDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.chip').directive('lxChip', lxChipDirective);
+angular.module(`${MODULE_NAME}.chip`).directive('lxChip', lxChipDirective);
 
 /////////////////////////////
 

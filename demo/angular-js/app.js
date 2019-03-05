@@ -1,6 +1,12 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import './style/app.scss';
 
-const DEPENDENCIES = ['lumx', 'ui.router'];
+/////////////////////////////
+
+const DEPENDENCIES = [MODULE_NAME, 'ui.router'];
+
+/////////////////////////////
 
 function AppDefaultConfig($locationProvider, $stateProvider) {
     $locationProvider.html5Mode({

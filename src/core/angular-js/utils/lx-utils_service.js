@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function LxUtilsService() {
     const service = this;
 
@@ -52,7 +56,7 @@ function LxUtilsService() {
 
 /////////////////////////////
 
-angular.module('lumx.utils.utils').service('LxUtilsService', LxUtilsService);
+angular.module(`${MODULE_NAME}.utils.utils`).service('LxUtilsService', LxUtilsService);
 
 /////////////////////////////
 

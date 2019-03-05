@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function lxSelectChoicesFilter($filter) {
     return function filteredChoices(choices, externalFilter, textFilter) {
         if (externalFilter) {
@@ -22,7 +26,7 @@ function lxSelectChoicesFilter($filter) {
 
 /////////////////////////////
 
-angular.module('lumx.select').filter('lxSelectChoicesFilter', lxSelectChoicesFilter);
+angular.module(`${MODULE_NAME}.select`).filter('lxSelectChoicesFilter', lxSelectChoicesFilter);
 
 /////////////////////////////
 

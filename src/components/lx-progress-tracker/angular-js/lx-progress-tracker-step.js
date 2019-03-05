@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 
 import template from './lx-progress-tracker-step.html';
@@ -125,7 +127,7 @@ function lxProgressTrackerStepDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.progress-tracker').directive('lxProgressTrackerStep', lxProgressTrackerStepDirective);
+angular.module(`${MODULE_NAME}.progress-tracker`).directive('lxProgressTrackerStep', lxProgressTrackerStepDirective);
 
 /////////////////////////////
 

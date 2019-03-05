@@ -1,3 +1,7 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
+/////////////////////////////
+
 function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
     const service = this;
 
@@ -121,7 +125,7 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
 
 /////////////////////////////
 
-angular.module('lumx.dialog').service('LxDialogService', LxDialogService);
+angular.module(`${MODULE_NAME}.dialog`).service('LxDialogService', LxDialogService);
 
 /////////////////////////////
 

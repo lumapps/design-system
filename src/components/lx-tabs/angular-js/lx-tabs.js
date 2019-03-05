@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-tabs.scss';
 import template from './lx-tabs.html';
 
@@ -126,7 +128,7 @@ function lxTabsDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.tabs').directive('lxTabs', lxTabsDirective);
+angular.module(`${MODULE_NAME}.tabs`).directive('lxTabs', lxTabsDirective);
 
 /////////////////////////////
 

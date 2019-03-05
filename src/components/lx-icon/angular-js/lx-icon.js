@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-icon.scss';
 
 /////////////////////////////
@@ -52,7 +54,7 @@ function lxIconDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.icon').directive('lxIcon', lxIconDirective);
+angular.module(`${MODULE_NAME}.icon`).directive('lxIcon', lxIconDirective);
 
 /////////////////////////////
 

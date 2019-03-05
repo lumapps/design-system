@@ -1,3 +1,5 @@
+import { MODULE_NAME } from '@lumx/angularjs/lumx'
+
 import '../style/lx-progress.scss';
 import template from './lx-progress.html';
 
@@ -26,7 +28,7 @@ function lxProgressDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.progress').directive('lxProgress', lxProgressDirective);
+angular.module(`${MODULE_NAME}.progress`).directive('lxProgress', lxProgressDirective);
 
 /////////////////////////////
 
