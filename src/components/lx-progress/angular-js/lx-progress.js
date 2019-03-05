@@ -18,13 +18,9 @@ function lxProgressDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            type: '@?lxType',
+            variant: '@?lxVariant',
         },
         template,
-        transclude: {
-            help: '?lxCheckboxHelp',
-            label: '?lxCheckboxLabel',
-        },
     };
 }
 
