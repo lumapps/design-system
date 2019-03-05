@@ -37,14 +37,10 @@
 
         padding: 0 $lx-base-spacing-unit * 2;
         color: lx-theme-color-variant(dark, N);
-
-        #{ $self }--has-action & {
-            border-right: 1px solid lx-theme-color-variant(dark, L5);
-        }
     }
 
     &__action {
-        padding: 0 $lx-base-spacing-unit;
+        padding-right: $lx-base-spacing-unit;
     }
 }
 

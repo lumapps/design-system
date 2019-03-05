@@ -109,7 +109,9 @@ function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {
             const notificationActionWrapper = angular.element('<div/>', {
                 class: 'lx-notification__action',
             });
-            const notificationAction = $compile(`<lx-button lx-emphasis="low">${actionLabel}</lx-button>`)($rootScope);
+            const notificationAction = $compile(`<lx-button lx-emphasis="medium">${actionLabel}</lx-button>`)(
+                $rootScope,
+            );
 
             notificationAction.on('click', function onActionCuttonClick(evt) {
                 actionCallback();
