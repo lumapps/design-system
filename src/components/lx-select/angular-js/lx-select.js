@@ -317,7 +317,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      * Open the dropdown menu on input wrapper click.
      */
     function openDropdown() {
-        LxDropdownService.open(lxSelect.dropdownUuid, `#${lxSelect.targetUuid}`);
+        LxDropdownService.open(lxSelect.dropdownUuid, { target: `#${lxSelect.targetUuid}` });
     }
 
     /**
@@ -419,11 +419,11 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
     /**
      * Add focus class to input wrapper on dropdown open.
      *
-     * @param {Event}  evt    The dropdown open event.
-     * @param {Object} params The dropdown uuid and the target id.
+     * @param {Event}  evt        The dropdown open event.
+     * @param {Object} dropdownId The dropdown identifier.
      */
-    $scope.$on('lx-dropdown__open', (evt, params) => {
-        if (params.uuid === lxSelect.dropdownUuid) {
+    $scope.$on('lx-dropdown__open', (evt, dropdownId) => {
+        if (dropdownId === lxSelect.dropdownUuid) {
             lxSelect.isOpen = true;
         }
     });
@@ -431,11 +431,11 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
     /**
      * Remove focus class to input wrapper on dropdown close.
      *
-     * @param {Event}  evt    The dropdown open event.
-     * @param {Object} params The dropdown uuid and the target id.
+     * @param {Event}  evt        The dropdown open event.
+     * @param {Object} dropdownId The dropdown identifier.
      */
-    $scope.$on('lx-dropdown__close', (evt, params) => {
-        if (params.uuid === lxSelect.dropdownUuid) {
+    $scope.$on('lx-dropdown__close', (evt, dropdownId) => {
+        if (dropdownId === lxSelect.dropdownUuid) {
             lxSelect.isOpen = false;
         }
     });
