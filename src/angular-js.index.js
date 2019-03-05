@@ -30,5 +30,6 @@ import './components/lx-switch/angular-js/lx-switch';
 import './components/lx-tabs/angular-js/lx-tab';
 import './components/lx-tabs/angular-js/lx-tabs';
 import './components/lx-text-field/angular-js/lx-text-field';
+import './components/lx-thumbnail/angular-js/lx-thumbnail';
 import './components/lx-toolbar/angular-js/lx-toolbar';
 import './components/lx-tooltip/angular-js/lx-tooltip';

@@ -35,6 +35,7 @@ angular.module('lumx.switch', []);
 angular.module('lumx.tabs', []);
 angular.module('lumx.text-field', []);
 angular.module('lumx.theme', []);
+angular.module('lumx.thumbnail', []);
 angular.module('lumx.toolbar', []);
 angular.module('lumx.tooltip', []);
 
@@ -58,7 +59,8 @@ angular.module('lumx', [
     'lumx.tabs',
     'lumx.text-field',
     'lumx.theme',
-    'lumx.utils',
+    'lumx.thumbnail',
     'lumx.toolbar',
     'lumx.tooltip',
+    'lumx.utils',
 ]);

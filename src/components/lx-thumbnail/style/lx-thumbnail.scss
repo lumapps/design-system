@@ -1,0 +1,30 @@
+/* ==========================================================================
+   Thumbnail
+   ========================================================================== */
+
+.lx-thumbnail {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Thumbnail variants
+   ========================================================================== */
+
+.lx-thumbnail--variant-squared {
+    border-radius: 4px;
+}
+
+.lx-thumbnail--variant-rounded {
+    border-radius: 50%;
+}
+
+/* Thumbnail sizes
+   ========================================================================== */
+
+@each $key, $size in $lx-sizes {
+    .lx-thumbnail--size-#{$key} {
+        width: $size;
+        height: $size;
+    }
+}
