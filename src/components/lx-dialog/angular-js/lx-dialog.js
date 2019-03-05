@@ -3,7 +3,15 @@ import template from './lx-dialog.html';
 
 /////////////////////////////
 
-function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthService, LxEventSchedulerService) {
+function lxDialogController(
+    $element,
+    $rootScope,
+    $scope,
+    $timeout,
+    LxDepthService,
+    LxEventSchedulerService,
+    LxFocusTrapService,
+) {
     // eslint-disable-next-line consistent-this
     const lxDialog = this;
 
@@ -91,6 +99,13 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
      */
     const _parentElement = _dialog.parent();
 
+    /**
+     * The source element.
+     *
+     * @type {element}
+     */
+    let _sourceEl;
+
     /////////////////////////////
     //                         //
     //    Public attributes    //
@@ -156,6 +171,10 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
 
         _dialog.addClass('lx-dialog--is-hidden');
         _dialogFilter.addClass('lx-dialog-filter--is-hidden');
+
+        if (angular.isDefined(_sourceEl)) {
+            _sourceEl.focus();
+        }
 
         $timeout(function onDialogCloseEnd() {
             if (_isAlertDialog || _isConfirmDialog) {
@@ -224,6 +243,7 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
             $rootScope.$broadcast('lx-dialog__open-start', lxDialog.id, params);
 
             lxDialog.isOpen = true;
+            LxFocusTrapService.activate(_dialog);
 
             $timeout(function onDialogContentDisplay() {
                 _dialogContent = _dialog.find('.lx-dialog__content');
@@ -234,6 +254,15 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
         $timeout(function onDialogOpenEnd() {
             $rootScope.$broadcast('lx-dialog__open-end', lxDialog.id, params);
         }, _TRANSITION_DURATION);
+    }
+
+    /**
+     * Register the source element that triggered the dialog.
+     *
+     * @param {element} sourceEl The source element that triggered the dialog.
+     */
+    function _registerSource(sourceEl) {
+        _sourceEl = sourceEl;
     }
 
     /////////////////////////////
@@ -259,6 +288,10 @@ function lxDialogController($element, $rootScope, $scope, $timeout, LxDepthServi
 
             if (angular.isDefined(params) && angular.isDefined(params.isConfirmDialog) && params.isConfirmDialog) {
                 _isConfirmDialog = true;
+            }
+
+            if (angular.isDefined(params) && angular.isDefined(params.source) && params.source) {
+                _registerSource(angular.element(params.source));
             }
         }
     });

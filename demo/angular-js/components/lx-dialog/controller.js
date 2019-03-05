@@ -67,37 +67,44 @@ function DemoDialogController($scope, LxDialogService, LxNotificationService) {
     }
 
     function alertDialog() {
-        LxDialogService.alert(
-            'Lorem Ipsum',
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna quis nisi sodales semper pharetra eu augue.',
-            'Ok',
-            () => {
+        LxDialogService.alert({
+            cb: function onAnswer() {
                 LxNotificationService.info('Alert callback');
             },
-        );
+            buttons: {
+                ok: 'Agree',
+            },
+            source: '#alert-dialog-source',
+            text:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna quis nisi sodales semper pharetra eu augue.',
+            title: 'Lorem Ipsum',
+        });
     }
 
     function confirmDialog() {
-        LxDialogService.confirm(
-            'Lorem Ipsum',
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna quis nisi sodales semper pharetra eu augue.',
-            {
-                cancel: 'Disagree',
-                ok: 'Agree',
-            },
-            (answer) => {
+        LxDialogService.confirm({
+            cb: function onAnswer(answer) {
                 if (answer) {
                     LxNotificationService.success('Agree');
                 } else {
                     LxNotificationService.error('Disagree');
                 }
             },
-        );
+            buttons: {
+                cancel: 'Disagree',
+                ok: 'Agree',
+            },
+            source: '#confirm-dialog-source',
+            text:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet urna quis nisi sodales semper pharetra eu augue.',
+            title: 'Lorem Ipsum',
+        });
     }
 
     function openDialog() {
         LxDialogService.open(vm.dialogId, {
             customMessage: 'Hello World!',
+            source: '#default-dialog-source',
         });
     }
 

@@ -3,12 +3,16 @@ import '../style/lumx.scss';
 angular.module('lumx.utils.depth', []);
 angular.module('lumx.utils.enter-keypress', []);
 angular.module('lumx.utils.event-scheduler', []);
+angular.module('lumx.utils.focus-on-init', []);
+angular.module('lumx.utils.focus-trap', []);
 angular.module('lumx.utils.utils', []);
 
 angular.module('lumx.utils', [
     'lumx.utils.depth',
     'lumx.utils.enter-keypress',
     'lumx.utils.event-scheduler',
+    'lumx.utils.focus-on-init',
+    'lumx.utils.focus-trap',
     'lumx.utils.utils',
 ]);
 

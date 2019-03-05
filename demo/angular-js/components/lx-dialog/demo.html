@@ -1,7 +1,7 @@
 <div class="p+">
-    <lx-button ng-click="vm.openDialog()">Open dialog</lx-button>
-    <lx-button ng-click="vm.alertDialog()">Alert box</lx-button>
-    <lx-button ng-click="vm.confirmDialog()">Confirm box</lx-button>
+    <lx-button ng-click="vm.openDialog()" id="default-dialog-source">Open dialog</lx-button>
+    <lx-button ng-click="vm.alertDialog()" id="alert-dialog-source">Alert box</lx-button>
+    <lx-button ng-click="vm.confirmDialog()" id="confirm-dialog-source">Confirm box</lx-button>
 </div>
 
 <lx-dialog id="{{ vm.dialogId }}">
@@ -12,7 +12,7 @@
             </lx-toolbar-label>
 
             <lx-toolbar-after>
-                <lx-button ng-click="vm.addPerson()">
+                <lx-button ng-click="vm.addPerson()" lx-focus-on-init>
                     <span>Add</span>
                 </lx-button>
             </lx-toolbar-after>

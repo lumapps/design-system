@@ -10,34 +10,31 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
     /**
      * Build an alert dialog.
      *
-     * @param {string}   title  The alert dialog title.
-     * @param {string}   text   The alert dialog text.
-     * @param {string}   button The alert dialog button label.
-     * @param {Function} cb     The alert box callback with the answer as available parameter.
+     * @param {Object} params An object that holds title, text, button label, callback and source parameters.
      */
-    function alertDialog(title, text, button, cb) {
+    function alertDialog(params) {
         const alertDialogId = LxUtilsService.generateUUID();
         const alertDialogScope = $rootScope.$new(true);
 
-        alertDialogScope.cb = cb;
+        alertDialogScope.cb = params.cb;
 
         const compiledAlertDialog = $compile(
             `<lx-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
                         <lx-toolbar>
                             <lx-toolbar-label>
-                                <span class="lx-typography-title">${title}</span>
+                                <span class="lx-typography-title">${params.title}</span>
                             </lx-toolbar-label>
                         </lx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
                         <div class="ph++ pb+">
-                            <p>${text}</p>
+                            <p>${params.text}</p>
                         </div>
                     </lx-dialog-content>
                     <lx-dialog-footer>
                         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
-                            <lx-button ng-click="cb()" lx-dialog-close>${button}</lx-button>
+                            <lx-button ng-click="cb()" lx-dialog-close lx-focus-on-init>${params.buttons.ok}</lx-button>
                         </div>
                     </lx-dialog-footer>
                 </lx-dialog>`,
@@ -46,7 +43,7 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
         angular.element('body').append(compiledAlertDialog);
 
         $timeout(function waitBeforeOpeningAlertDialog() {
-            service.open(alertDialogId, { isAlertDialog: true });
+            service.open(alertDialogId, { isAlertDialog: true, source: params.source });
         });
     }
 
@@ -64,38 +61,35 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
     /**
      * Build a confirm dialog.
      *
-     * @param {string}   title   The confirm dialog title.
-     * @param {string}   text    The confirm dialog text.
-     * @param {string}   buttons The confirm dialog buttons label.
-     * @param {Function} cb      The confirm dialog callback with the answer as available parameter.
+     * @param {Object} params An object that holds title, text, button labels, callback and source parameters.
      */
-    function confirmDialog(title, text, buttons, cb) {
+    function confirmDialog(params) {
         const confirmDialogId = LxUtilsService.generateUUID();
         const confirmDialogScope = $rootScope.$new(true);
 
-        confirmDialogScope.cb = cb;
+        confirmDialogScope.cb = params.cb;
 
         const compiledConfirmDialog = $compile(
             `<lx-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
                         <lx-toolbar>
                             <lx-toolbar-label>
-                                <span class="lx-typography-title">${title}</span>
+                                <span class="lx-typography-title">${params.title}</span>
                             </lx-toolbar-label>
                         </lx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
                         <div class="ph++ pb+">
-                            <p>${text}</p>
+                            <p>${params.text}</p>
                         </div>
                     </lx-dialog-content>
                     <lx-dialog-footer>
                         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
                             <lx-button lx-emphasis="medium" ng-click="cb(false)" lx-dialog-close>
-                                ${buttons.cancel}
+                                ${params.buttons.cancel}
                             </lx-button>
-                            <lx-button class="ml" ng-click="cb(true)" lx-dialog-close>
-                                ${buttons.ok}
+                            <lx-button class="ml" ng-click="cb(true)" lx-dialog-close lx-focus-on-init>
+                                ${params.buttons.ok}
                             </lx-button>
                         </div>
                     </lx-dialog-footer>
@@ -105,7 +99,7 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
         angular.element('body').append(compiledConfirmDialog);
 
         $timeout(function waitBeforeOpeningAlertDialog() {
-            service.open(confirmDialogId, { isConfirmDialog: true });
+            service.open(confirmDialogId, { isConfirmDialog: true, source: params.source });
         });
     }
 

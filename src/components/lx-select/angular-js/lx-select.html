@@ -102,7 +102,7 @@
                 <lx-progress></lx-progress>
             </div>
 
-            <lx-list lx-focus-on-init="true" lx-is-clickable="true" ng-if="!lxSelect.isLoading">
+            <lx-list lx-focus-on-init lx-is-clickable="true" ng-if="!lxSelect.isLoading">
                 <lx-list-item
                     lx-is-selected="lxSelect.isSelected(choice)"
                     ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
