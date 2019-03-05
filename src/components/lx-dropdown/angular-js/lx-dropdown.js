@@ -120,7 +120,7 @@ function lxDropdownController(
     function _close() {
         lxDropdown.isOpen = false;
 
-        LxDropdownService.resetActiveDropdownUuid();
+        LxDropdownService.resetActiveDropdownId();
 
         LxUtilsService.restoreBodyScroll();
 
@@ -267,7 +267,7 @@ function lxDropdownController(
      */
     function _open() {
         LxDropdownService.closeActiveDropdown();
-        LxDropdownService.registerActiveDropdownUuid(lxDropdown.uuid);
+        LxDropdownService.registerActiveDropdownId(lxDropdown.uuid);
 
         if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
             _idEventScheduler = LxEventSchedulerService.register('keyup', _onKeyUp);
@@ -353,11 +353,12 @@ function lxDropdownController(
     /**
      * Open a given dropdown.
      *
-     * @param {Event}  evt    The dropdown open event.
-     * @param {Object} params The dropdown uuid and the target id.
+     * @param {Event}  evt        The dropdown open event.
+     * @param {string} dropdownId The dropdown identifier.
+     * @param {Object} params     An optional object that holds extra parameters.
      */
-    $scope.$on('lx-dropdown__open', (evt, params) => {
-        if (params.uuid === lxDropdown.uuid && !lxDropdown.isOpen) {
+    $scope.$on('lx-dropdown__open', (evt, dropdownId, params) => {
+        if (dropdownId === lxDropdown.uuid && !lxDropdown.isOpen) {
             registerToggle(angular.element(params.target));
 
             if (angular.isDefined(params.source)) {
@@ -373,11 +374,11 @@ function lxDropdownController(
     /**
      * Close a given dropdown.
      *
-     * @param {Event}  evt    The dropdown open event.
-     * @param {Object} params The dropdown uuid.
+     * @param {Event}  evt        The dropdown open event.
+     * @param {Object} dropdownId The dropdown identifier.
      */
-    $scope.$on('lx-dropdown__close', (evt, params) => {
-        if (params.uuid === lxDropdown.uuid && lxDropdown.isOpen) {
+    $scope.$on('lx-dropdown__close', (evt, dropdownId) => {
+        if (dropdownId === lxDropdown.uuid && lxDropdown.isOpen) {
             _close();
         }
     });

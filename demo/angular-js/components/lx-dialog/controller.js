@@ -103,7 +103,6 @@ function DemoDialogController($scope, LxDialogService, LxNotificationService) {
 
     function openDialog() {
         LxDialogService.open(vm.dialogId, {
-            customMessage: 'Hello World!',
             source: '#default-dialog-source',
         });
     }
@@ -121,9 +120,9 @@ function DemoDialogController($scope, LxDialogService, LxNotificationService) {
     //                         //
     /////////////////////////////
 
-    $scope.$on('lx-dialog__open-start', (evt, dialogId, params) => {
+    $scope.$on('lx-dialog__open-start', (evt, dialogId) => {
         if (vm.dialogId === dialogId) {
-            console.log(`Open start ${params.customMessage}`);
+            console.log('Open start');
         }
     });
 

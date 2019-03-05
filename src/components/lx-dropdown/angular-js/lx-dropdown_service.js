@@ -8,11 +8,11 @@ function LxDropdownService($rootScope) {
     /////////////////////////////
 
     /**
-     * The active dropdown uuid.
+     * The active dropdown identifier.
      *
      * @type {string}
      */
-    let _activeDropdownUuid;
+    let _activeDropdownId;
 
     /////////////////////////////
     //                         //
@@ -23,64 +23,55 @@ function LxDropdownService($rootScope) {
     /**
      * Close a given dropdown.
      *
-     * @param {string} uuid The dropdown uuid.
+     * @param {string} dropdownId The dropdown identifier.
      */
-    function closeDropdown(uuid) {
-        $rootScope.$broadcast('lx-dropdown__close', {
-            uuid,
-        });
+    function closeDropdown(dropdownId) {
+        $rootScope.$broadcast('lx-dropdown__close', dropdownId);
     }
 
     /**
      * Close the active dropdown.
      */
     function closeActiveDropdown() {
-        if (angular.isDefined(_activeDropdownUuid) && _activeDropdownUuid.length > 0) {
-            $rootScope.$broadcast('lx-dropdown__close', {
-                uuid: _activeDropdownUuid,
-            });
+        if (angular.isDefined(_activeDropdownId)) {
+            closeDropdown(_activeDropdownId);
         }
     }
 
     /**
      * Check if a given dropdown is open.
      *
-     * @param  {string}  uuid The dropdown uuid.
+     * @param  {string}  dropdownId The dropdown identifier.
      * @return {boolean} Whether the given dropdown is open or not.
      */
-    function isOpen(uuid) {
-        return _activeDropdownUuid === uuid;
+    function isOpen(dropdownId) {
+        return _activeDropdownId === dropdownId;
     }
 
     /**
      * Open a given dropdown.
      *
-     * @param {string} uuid   The dropdown uuid.
-     * @param {string} target The dropdown target.
-     * @param {string} source The dropdown source.
+     * @param {string} dropdownId The dropdown identifier.
+     * @param {Object} params     An optional object that holds extra parameters.
      */
-    function openDropdown(uuid, target, source) {
-        $rootScope.$broadcast('lx-dropdown__open', {
-            source,
-            target,
-            uuid,
-        });
+    function openDropdown(dropdownId, params) {
+        $rootScope.$broadcast('lx-dropdown__open', dropdownId, params);
     }
 
     /**
-     * Register the active dropdown uuid.
+     * Register the active dropdown identifier.
      *
-     * @param {string} uuid The dropdown uuid.
+     * @param {string} dropdownId The dropdown identifier.
      */
-    function registerActiveDropdownUuid(uuid) {
-        _activeDropdownUuid = uuid;
+    function registerActiveDropdownId(dropdownId) {
+        _activeDropdownId = dropdownId;
     }
 
     /**
-     * Reset the active dropdown uuid.
+     * Reset the active dropdown identifier.
      */
-    function resetActiveDropdownUuid() {
-        _activeDropdownUuid = undefined;
+    function resetActiveDropdownId() {
+        _activeDropdownId = undefined;
     }
 
     /**
@@ -96,8 +87,8 @@ function LxDropdownService($rootScope) {
     service.closeActiveDropdown = closeActiveDropdown;
     service.isOpen = isOpen;
     service.open = openDropdown;
-    service.registerActiveDropdownUuid = registerActiveDropdownUuid;
-    service.resetActiveDropdownUuid = resetActiveDropdownUuid;
+    service.registerActiveDropdownId = registerActiveDropdownId;
+    service.resetActiveDropdownId = resetActiveDropdownId;
     service.updateActiveDropdownPosition = updateActiveDropdownPosition;
 }
 

@@ -151,23 +151,18 @@ function lxDialogController(
 
     /**
      * Close the current dialog.
-     *
-     * @param {boolean} canceled Whether the dialog is closed via a cancel or not.
-     * @param {Object}  params   An optional object that holds extra parameters.
      */
-    function _close(canceled, params) {
+    function _close() {
         if (!lxDialog.isOpen) {
             return;
         }
-
-        params = params || {};
 
         if (angular.isDefined(_idEventScheduler)) {
             LxEventSchedulerService.unregister(_idEventScheduler);
             _idEventScheduler = undefined;
         }
 
-        $rootScope.$broadcast('lx-dialog__close-start', lxDialog.id, canceled, params);
+        $rootScope.$broadcast('lx-dialog__close-start', lxDialog.id);
 
         _dialog.addClass('lx-dialog--is-hidden');
         _dialogFilter.addClass('lx-dialog-filter--is-hidden');
@@ -190,7 +185,7 @@ function lxDialogController(
 
             lxDialog.isOpen = false;
 
-            $rootScope.$broadcast('lx-dialog__close-end', lxDialog.id, canceled, params);
+            $rootScope.$broadcast('lx-dialog__close-end', lxDialog.id);
         }, _TRANSITION_DURATION);
     }
 
@@ -201,7 +196,7 @@ function lxDialogController(
      */
     function _onKeyUp(evt) {
         if (evt.keyCode === _ESCAPE_KEY_CODE) {
-            _close(true);
+            _close();
         }
 
         evt.stopPropagation();
@@ -226,7 +221,7 @@ function lxDialogController(
 
         if (angular.isUndefined(lxDialog.autoClose) || lxDialog.autoClose) {
             _dialogFilter.on('click', () => {
-                _close(true);
+                _close();
             });
         }
 
@@ -299,14 +294,12 @@ function lxDialogController(
     /**
      * Close a given dialog.
      *
-     * @param {Event}   evt      The dropdown open event.
-     * @param {string}  dialogId The dialog identifier.
-     * @param {boolean} canceled Whether the dialog is closed via a cancel or not.
-     * @param {Object}  params   An optional object that holds extra parameters.
+     * @param {Event}  evt      The dropdown open event.
+     * @param {string} dialogId The dialog identifier.
      */
-    $scope.$on('lx-dialog__close', (evt, dialogId, canceled, params) => {
+    $scope.$on('lx-dialog__close', (evt, dialogId) => {
         if (dialogId === lxDialog.id || dialogId === undefined) {
-            _close(canceled, params);
+            _close();
         }
     });
 
@@ -314,7 +307,7 @@ function lxDialogController(
      * Close the current dialog on destroy.
      */
     $scope.$on('$destroy', () => {
-        _close(true);
+        _close();
     });
 }
 
