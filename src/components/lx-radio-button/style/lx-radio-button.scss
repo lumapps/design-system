@@ -75,7 +75,7 @@
         }
     }
 
-    &__help {
+    &__helper {
         #{ $self }--theme-light & {
             @include lx-input-helper(dark);
         }
@@ -100,7 +100,7 @@
     }
 
     .lx-radio-button__label,
-    .lx-radio-button__help {
+    .lx-radio-button__helper {
         @include lx-state-disabled-text(dark);
     }
 }
@@ -115,7 +115,7 @@
     }
 
     .lx-radio-button__label,
-    .lx-radio-button__help {
+    .lx-radio-button__helper {
         @include lx-state-disabled-text(light);
     }
 }

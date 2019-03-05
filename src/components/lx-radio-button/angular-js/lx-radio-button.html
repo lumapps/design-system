@@ -22,13 +22,13 @@
 
     <div
         class="lx-radio-button__content"
-        ng-if="::!lxRadioButton.hasLabel && !lxRadioButton.hasHelp && lxRadioButton.hasTranscluded"
+        ng-if="::!lxRadioButton.hasLabel && !lxRadioButton.hasHelper && lxRadioButton.hasTranscluded"
     >
         <label for="{{ lxRadioButton.radioButtonId }}" class="lx-radio-button__label" ng-transclude></label>
     </div>
 
     <div class="lx-radio-button__content" ng-if="::lxRadioButton.hasLabel">
         <label for="{{ lxRadioButton.radioButtonId }}" class="lx-radio-button__label" ng-transclude="label"></label>
-        <span class="lx-radio-button__help" ng-transclude="help" ng-if="::lxRadioButton.hasHelp"></span>
+        <span class="lx-radio-button__helper" ng-transclude="helper" ng-if="::lxRadioButton.hasHelper"></span>
     </div>
 </div>
