@@ -79,7 +79,7 @@
         }
     }
 
-    &__help {
+    &__helper {
         #{ $self }--theme-light & {
             @include lx-input-helper(dark);
         }
@@ -96,7 +96,7 @@
 // Disabled state
 .lx-switch--theme-light.lx-switch--is-disabled {
     .lx-switch__label,
-    .lx-switch__help {
+    .lx-switch__helper {
         @include lx-state-disabled-text(dark);
     }
 }
@@ -119,7 +119,7 @@
 
 .lx-switch--theme-dark.lx-switch--is-disabled {
     .lx-switch__label,
-    .lx-switch__help {
+    .lx-switch__helper {
         @include lx-state-disabled-text(light);
     }
 }

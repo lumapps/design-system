@@ -34,11 +34,11 @@ function lxSwitchController(LxUtilsService) {
     lxSwitch.switchId = LxUtilsService.generateUUID();
 
     /**
-     * Whether the directive has help slot filled or not.
+     * Whether the directive has helper slot filled or not.
      *
      * @type {boolean}
      */
-    lxSwitch.hasHelp = false;
+    lxSwitch.hasHelper = false;
 
     /**
      * Whether the directive has label slot filled or not.
@@ -112,11 +112,11 @@ function lxSwitchDirective() {
             ctrls[0].hasLabel = true;
         }
 
-        if (transclude.isSlotFilled('help')) {
-            ctrls[0].hasHelp = true;
+        if (transclude.isSlotFilled('helper')) {
+            ctrls[0].hasHelper = true;
         }
 
-        if (!ctrls[0].hasLabel && !ctrls[0].hasHelp) {
+        if (!ctrls[0].hasLabel && !ctrls[0].hasHelper) {
             transclude((clone) => {
                 if (clone.length > 0) {
                     ctrls[0].hasTranscluded = true;
@@ -154,7 +154,7 @@ function lxSwitchDirective() {
         },
         template,
         transclude: {
-            help: '?lxSwitchHelp',
+            helper: '?lxSwitchHelper',
             label: '?lxSwitchLabel',
         },
     };
