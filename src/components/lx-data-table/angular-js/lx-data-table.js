@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
 import '../style/lx-data-table.scss';
@@ -179,7 +178,7 @@ function lxDataTableController($rootScope, $sce, $scope) {
      * @param {Object} row The row to activate/deactivate.
      */
     function toggleActivation(row) {
-        if (row.lxDataTableDisabled || !lxDataTable.activable) {
+        if (row.lxDataTableDisabled || !lxDataTable.isActivable) {
             return;
         }
 
@@ -202,7 +201,7 @@ function lxDataTableController($rootScope, $sce, $scope) {
      * Select or unselect all rows.
      */
     function toggleAllSelected() {
-        if (!lxDataTable.bulk) {
+        if (!lxDataTable.hasBulk) {
             return;
         }
 
@@ -221,7 +220,7 @@ function lxDataTableController($rootScope, $sce, $scope) {
      * @param {Event}   [evt]               The checkbox click event.
      */
     function toggleSelection(row, newSelectedStatus, evt) {
-        if (row.lxDataTableDisabled || !lxDataTable.selectable) {
+        if (row.lxDataTableDisabled || !lxDataTable.isSelectable) {
             return;
         }
 
@@ -232,7 +231,6 @@ function lxDataTableController($rootScope, $sce, $scope) {
         row.lxDataTableSelected = angular.isDefined(newSelectedStatus) ? newSelectedStatus : !row.lxDataTableSelected;
 
         if (row.lxDataTableSelected) {
-            // Make sure it's not already in.
             if (
                 lxDataTable.selectedRows.length === 0 ||
                 (lxDataTable.selectedRows.length > 0 && lxDataTable.selectedRows.indexOf(row) === -1)
@@ -363,14 +361,14 @@ function lxDataTableDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            activable: '=?lxActivable',
-            border: '=?lxBorder',
-            bulk: '=?lxBulk',
-            selectable: '=?lxSelectable',
+            hasBorder: '=?lxHasBorder',
+            hasBulk: '=?lxHasBulk',
+            hasThumbnail: '=?lxHasThumbnail',
+            isActivable: '=?lxIsActivable',
+            isSelectable: '=?lxIsSelectable',
             tbody: '=lxTbody',
             thead: '=lxThead',
             theme: '@?lxTheme',
-            thumbnail: '=?lxThumbnail',
         },
         template,
     };

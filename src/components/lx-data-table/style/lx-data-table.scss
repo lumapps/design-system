@@ -13,8 +13,8 @@
         height: 56px;
         padding: $lx-base-spacing-unit $lx-base-spacing-unit * 4 $lx-base-spacing-unit 0;
 
-        #{ $self }--thumbnail &:first-child,
-        #{ $self }--selectable &:first-child {
+        #{ $self }--has-thumbnail &:first-child,
+        #{ $self }--is-selectable &:first-child {
             width: 68px;
             padding-right: 0;
         }
@@ -77,31 +77,31 @@
                 }
             }
 
-            #{ $self }--theme-light#{ $self }--border & {
+            #{ $self }--theme-light#{ $self }--has-border & {
                 border-bottom: 1px solid lx-theme-color-variant(dark, L5);
             }
 
-            #{ $self }--theme-dark#{ $self }--border & {
+            #{ $self }--theme-dark#{ $self }--has-border & {
                 border-bottom: 1px solid lx-theme-color-variant(light, L5);
             }
 
-            #{ $self }--activable #{ $self }__row--is-enabled & {
+            #{ $self }--is-activable #{ $self }__row--is-enabled & {
                 cursor: pointer;
             }
 
-            #{ $self }--theme-light#{ $self }--activable #{ $self }__row--is-enabled:hover & {
+            #{ $self }--theme-light#{ $self }--is-activable #{ $self }__row--is-enabled:hover & {
                 background-color: lx-theme-color-variant(dark, L5);
             }
 
-            #{ $self }--theme-dark#{ $self }--activable #{ $self }__row--is-enabled:hover & {
+            #{ $self }--theme-dark#{ $self }--is-activable #{ $self }__row--is-enabled:hover & {
                 background-color: lx-theme-color-variant(light, L5);
             }
 
-            #{ $self }--theme-light#{ $self }--activable #{ $self }__row--is-activated & {
+            #{ $self }--theme-light#{ $self }--is-activable #{ $self }__row--is-activated & {
                 background-color: lx-theme-color-variant(dark, L6);
             }
 
-            #{ $self }--theme-dark#{ $self }--activable #{ $self }__row--is-activated & {
+            #{ $self }--theme-dark#{ $self }--is-activable #{ $self }__row--is-activated & {
                 background-color: lx-theme-color-variant(light, L6);
             }
         }
@@ -110,12 +110,12 @@
     &__checkbox {
         margin: 0 $lx-base-spacing-unit * 3;
 
-        #{ $self }--thumbnail #{ $self }__row--tbody & {
+        #{ $self }--has-thumbnail #{ $self }__row--tbody & {
             display: none;
         }
 
-        #{ $self }--thumbnail #{ $self }__row--is-enabled:hover &,
-        #{ $self }--selectable #{ $self }__row--is-selected & {
+        #{ $self }--has-thumbnail #{ $self }__row--is-enabled:hover &,
+        #{ $self }--is-selectable #{ $self }__row--is-selected & {
             display: flex;
         }
     }
@@ -126,8 +126,8 @@
         height: 36px;
         vertical-align: middle;
 
-        #{ $self }--thumbnail #{ $self }__row--is-enabled:hover &,
-        #{ $self }--selectable #{ $self }__row--is-selected & {
+        #{ $self }--has-thumbnail #{ $self }__row--is-enabled:hover &,
+        #{ $self }--is-selectable #{ $self }__row--is-selected & {
             display: none;
         }
     }
