@@ -1,6 +1,8 @@
-function lxFocusOnInitDirective() {
+function lxFocusOnInitDirective($timeout) {
     function link(scope, el) {
-        el.focus();
+        $timeout(() => {
+            el.focus();
+        });
     }
 
     return {
