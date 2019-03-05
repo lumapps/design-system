@@ -13,6 +13,7 @@
             class="lx-checkbox__input-native"
             ng-checked="lxRadioButton.viewValue"
             ng-click="lxCheckbox.updateViewValue()"
+            tabindex="{{ lxCheckbox.asDecorator ? -1 : 0 }}"
         />
 
         <div class="lx-checkbox__input-placeholder">
