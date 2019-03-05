@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from '@lumx/icons';
 
 import '../style/lx-notification.scss';
