@@ -51,6 +51,7 @@
 
 @mixin lx-button-icon($variant, $position, $size) {
     font-size: map-get($lx-button-icon-sizes, $size);
+    pointer-events: none;
 
     @if $variant == variant-button {
         @if $position == position-left {
@@ -73,4 +74,5 @@
     font-size: map-get($lx-button-text-sizes, $size);
     font-weight: 600;
     line-height: map-get($lx-sizes, $size);
+    pointer-events: none;
 }
