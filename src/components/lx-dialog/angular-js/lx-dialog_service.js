@@ -25,9 +25,9 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
             `<lx-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
                         <lx-toolbar>
-                            <lx-toolbar-center>
+                            <lx-toolbar-label>
                                 <span class="lx-typography-title">${title}</span>
-                            </lx-toolbar-center>
+                            </lx-toolbar-label>
                         </lx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
@@ -79,9 +79,9 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
             `<lx-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
                         <lx-toolbar>
-                            <lx-toolbar-center>
+                            <lx-toolbar-label>
                                 <span class="lx-typography-title">${title}</span>
-                            </lx-toolbar-center>
+                            </lx-toolbar-label>
                         </lx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>

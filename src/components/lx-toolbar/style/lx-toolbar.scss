@@ -10,24 +10,24 @@
     align-items: center;
     padding: 0 $lx-base-spacing-unit * 3;
 
-    &--has-left {
+    &--has-before {
         padding-left: $lx-base-spacing-unit * 2;
     }
 
-    &--has-right {
+    &--has-after {
         padding-right: $lx-base-spacing-unit * 2;
     }
 
-    &__left {
+    &__before {
         flex-shrink: 0;
         margin-right: $lx-base-spacing-unit * 2;
     }
 
-    &__center {
+    &__label {
         flex: 1;
     }
 
-    &__right {
+    &__after {
         flex-shrink: 0;
         margin-left: $lx-base-spacing-unit * 2;
     }

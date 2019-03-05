@@ -14,44 +14,44 @@ function lxToolbarController() {
     /////////////////////////////
 
     /**
-     * Whether the directive has center slot filled or not.
+     * Whether the directive has after slot filled or not.
      *
      * @type {boolean}
      */
-    lxToolbar.hasCenter = false;
+    lxToolbar.hasAfter = false;
 
     /**
-     * Whether the directive has left slot filled or not.
+     * Whether the directive has before slot filled or not.
      *
      * @type {boolean}
      */
-    lxToolbar.hasLeft = false;
+    lxToolbar.hasBefore = false;
 
     /**
-     * Whether the directive has right slot filled or not.
+     * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lxToolbar.hasRight = false;
+    lxToolbar.hasLabel = false;
 }
 
 /////////////////////////////
 
 function lxToolbarDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
-        if (transclude.isSlotFilled('center')) {
-            ctrl.hasCenter = true;
-            el.addClass('lx-toolbar--has-center');
+        if (transclude.isSlotFilled('before')) {
+            ctrl.hasBefore = true;
+            el.addClass('lx-toolbar--has-before');
         }
 
-        if (transclude.isSlotFilled('left')) {
-            ctrl.hasLeft = true;
-            el.addClass('lx-toolbar--has-left');
+        if (transclude.isSlotFilled('label')) {
+            ctrl.hasLabel = true;
+            el.addClass('lx-toolbar--has-label');
         }
 
-        if (transclude.isSlotFilled('right')) {
-            ctrl.hasRight = true;
-            el.addClass('lx-toolbar--has-right');
+        if (transclude.isSlotFilled('after')) {
+            ctrl.hasAfter = true;
+            el.addClass('lx-toolbar--has-after');
         }
     }
 
@@ -64,9 +64,9 @@ function lxToolbarDirective() {
         restrict: 'E',
         template,
         transclude: {
-            center: '?lxToolbarCenter',
-            left: '?lxToolbarLeft',
-            right: '?lxToolbarRight',
+            after: '?lxToolbarAfter',
+            before: '?lxToolbarBefore',
+            label: '?lxToolbarLabel',
         },
     };
 }
