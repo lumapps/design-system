@@ -199,7 +199,7 @@
 /* Select validity
    ========================================================================== */
 
-.lx-select--theme-light.lx-select--valid {
+.lx-select--theme-light.lx-select--is-valid {
     .lx-select__input-wrapper {
         @include lx-text-field-input-wrapper-validity(valid, dark);
     }
@@ -209,7 +209,7 @@
     }
 }
 
-.lx-select--theme-light.lx-select--error {
+.lx-select--theme-light.lx-select--has-error {
     .lx-select__input-wrapper {
         @include lx-text-field-input-wrapper-validity(error, dark);
     }
@@ -219,7 +219,7 @@
     }
 }
 
-.lx-select--theme-dark.lx-select--valid {
+.lx-select--theme-dark.lx-select--is-valid {
     .lx-select__input-wrapper {
         @include lx-text-field-input-wrapper-validity(valid, light);
     }
@@ -229,7 +229,7 @@
     }
 }
 
-.lx-select--theme-dark.lx-select--error {
+.lx-select--theme-dark.lx-select--has-error {
     .lx-select__input-wrapper {
         @include lx-text-field-input-wrapper-validity(error, light);
     }

@@ -1,7 +1,7 @@
 <lx-select
     ng-model="vm.selectModel.selectedPerson"
-    lx-allow-clear="true"
     lx-choices="vm.selectPeople"
+    lx-is-clearable="true"
     lx-label="Lorem Ipsum"
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
@@ -10,10 +10,10 @@
 
 <lx-select
     ng-model="vm.selectModel.selectedPerson"
-    lx-allow-clear="true"
     lx-choices="vm.selectPeople"
+    lx-is-clearable="true"
+    lx-is-valid="true"
     lx-label="Lorem Ipsum"
-    lx-valid="true"
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
@@ -27,9 +27,9 @@
 <lx-select
     ng-model="vm.selectModel.selectedPeople"
     lx-choices="vm.selectPeople"
+    lx-has-error="true"
     lx-label="Lorem Ipsum"
     lx-multiple="true"
-    lx-error="true"
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
@@ -39,12 +39,12 @@
     ng-change="vm.selectCallback()"
     ng-model="vm.selectAjax.selected"
     lx-choices="vm.selectAjax.list"
-    lx-display-filter="true"
-    lx-display-helper="!vm.selectAjax.list.length"
     lx-filter="vm.selectAjax.update(newValue)"
+    lx-has-filter="true"
+    lx-has-helper="!vm.selectAjax.list.length"
     lx-helper="No results"
+    lx-is-loading="vm.selectAjax.loading"
     lx-label="Lorem Ipsum"
-    lx-loading="vm.selectAjax.loading"
     lx-multiple="true"
     lx-model-to-selection="vm.selectAjax.toSelection(data, callback)"
     lx-selection-to-model="vm.selectAjax.toModel(data, callback)"

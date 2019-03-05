@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
 
 import '../style/lx-select.scss';
@@ -488,17 +487,17 @@ function lxSelectDirective() {
         require: ['lxSelect', 'ngModel'],
         restrict: 'E',
         scope: {
-            allowClear: '=lxAllowClear',
             choices: '=lxChoices',
-            displayFilter: '=?lxDisplayFilter',
-            displayHelper: '=?lxDisplayHelper',
             filter: '&?lxFilter',
-            hasError: '=?lxError',
+            hasError: '=?lxHasError',
+            hasFilter: '=?lxHasFilter',
+            hasHelper: '=?lxHasHelper',
             helper: '@?lxHelper',
+            isClearable: '=lxIsClearable',
             isDisabled: '=?ngDisabled',
-            isValid: '=?lxValid',
+            isLoading: '=?lxIsLoading',
+            isValid: '=?lxIsValid',
             label: '@?lxLabel',
-            loading: '=?lxLoading',
             modelToSelection: '&?lxModelToSelection',
             multiple: '=?lxMultiple',
             selectionToModel: '&?lxSelectionToModel',

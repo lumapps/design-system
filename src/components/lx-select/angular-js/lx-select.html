@@ -10,8 +10,8 @@
                 'lx-select--theme-dark': lxSelect.theme === 'dark',
                 'lx-select--has-label': lxSelect.label,
                 'lx-select--is-disabled': lxSelect.isDisabled,
-                'lx-select--valid': lxSelect.isValid,
-                'lx-select--error': lxSelect.hasError }"
+                'lx-select--is-valid': lxSelect.isValid,
+                'lx-select--has-error': lxSelect.hasError }"
 >
     <span class="lx-select__label" ng-if="::lxSelect.label">
         {{ lxSelect.label }}
@@ -72,7 +72,7 @@
 
         <div
             class="lx-select__input-clear"
-            ng-if="lxSelect.allowClear && !lxSelect.multiple && !lxSelect.isModelEmpty()"
+            ng-if="lxSelect.isClearable && !lxSelect.multiple && !lxSelect.isModelEmpty()"
             ng-click="lxSelect.clearModel($event)"
         >
             <lx-icon lx-path="{{ lxSelect.icons.mdiCloseCircle }}" lx-size="xs"></lx-icon>
@@ -85,7 +85,7 @@
 
     <lx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
         <lx-dropdown-menu>
-            <div class="lx-select__filter" ng-if="::lxSelect.displayFilter">
+            <div class="lx-select__filter" ng-if="::lxSelect.hasFilter">
                 <lx-icon lx-path="{{ lxSelect.icons.mdiMagnify }}" lx-size="xs"></lx-icon>
 
                 <input
@@ -98,7 +98,7 @@
                 />
             </div>
 
-            <div class="lx-select__loader" ng-if="lxSelect.loading">
+            <div class="lx-select__loader" ng-if="lxSelect.isLoading">
                 <lx-progress></lx-progress>
             </div>
 
@@ -117,7 +117,7 @@
                 </lx-list-item>
             </lx-list>
 
-            <span class="lx-select__helper" ng-if="lxSelect.displayHelper && !lxSelect.loading">
+            <span class="lx-select__helper" ng-if="lxSelect.hasHelper && !lxSelect.isLoading">
                 {{ lxSelect.helper }}
             </span>
         </lx-dropdown-menu>
