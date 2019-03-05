@@ -65,11 +65,9 @@
         }
     }
 
-    &__content {
-        margin-left: $lx-base-spacing-unit;
-    }
-
     &__label {
+        padding-left: $lx-base-spacing-unit;
+
         #{ $self }--theme-light & {
             @include lx-input-label(dark);
         }
@@ -79,7 +77,9 @@
         }
     }
 
-    &__help {
+    &__helper {
+        padding-left: $lx-base-spacing-unit;
+
         #{ $self }--theme-light & {
             @include lx-input-helper(dark);
         }
@@ -104,7 +104,7 @@
     }
 
     .lx-checkbox__label,
-    .lx-checkbox__help {
+    .lx-checkbox__helper {
         @include lx-state-disabled-text(dark);
     }
 }
@@ -119,7 +119,7 @@
     }
 
     .lx-checkbox__label,
-    .lx-checkbox__help {
+    .lx-checkbox__helper {
         @include lx-state-disabled-text(light);
     }
 }
