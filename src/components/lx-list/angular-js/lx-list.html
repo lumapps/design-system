@@ -1,1 +1,6 @@
-<ul class="lx-list" ng-class="{ 'lx-list--is-clickable': lxList.isClickable }" tabindex="0" ng-transclude></ul>
+<ul
+    class="lx-list"
+    ng-class="{ 'lx-list--is-clickable': lxList.isClickable }"
+    tabindex="{{ lxList.isClickable ? 0 : -1 }}"
+    ng-transclude
+></ul>
