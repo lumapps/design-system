@@ -228,9 +228,17 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      * @param {Event} [evt] The event that triggered the function.
      */
     function clearModel(evt) {
-        _modelController.$setViewValue(undefined);
+        if (angular.isDefined(evt)) {
+            evt.stopPropagation();
+        }
 
-        evt.stopPropagation();
+        if (lxSelect.multiple) {
+            _modelController.$setViewValue([]);
+            lxSelect.viewValue.length = 0;
+        } else {
+            _modelController.$setViewValue(undefined);
+            lxSelect.viewValue = undefined;
+        }
     }
 
     /**
@@ -284,6 +292,19 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      */
     function enableKeyEvents() {
         $document.on('keydown keypress', _onKeyPress);
+    }
+
+    /**
+     * Handle chip after click regarding the chip state.
+     *
+     * @return {Function} Whether to open the dropdown or clear the model.
+     */
+    function handleChipClick() {
+        if (lxSelect.isModelEmpty()) {
+            return lxSelect.openDropdown();
+        }
+
+        return lxSelect.clearModel();
     }
 
     /**
@@ -401,6 +422,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
     lxSelect.displayChoice = displayChoice;
     lxSelect.displaySelected = displaySelected;
     lxSelect.enableKeyEvents = enableKeyEvents;
+    lxSelect.handleChipClick = handleChipClick;
     lxSelect.isModelEmpty = isModelEmpty;
     lxSelect.isSelected = isSelected;
     lxSelect.openDropdown = openDropdown;
@@ -502,6 +524,7 @@ function lxSelectDirective() {
             multiple: '=?lxMultiple',
             selectionToModel: '&?lxSelectionToModel',
             theme: '@?lxTheme',
+            variant: '@?lxVariant',
         },
         template,
         transclude: {

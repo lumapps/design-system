@@ -13,7 +13,7 @@
                 'lx-select--is-valid': lxSelect.isValid,
                 'lx-select--has-error': lxSelect.hasError }"
 >
-    <span class="lx-select__label" ng-if="::lxSelect.label">
+    <span class="lx-select__label" ng-if="::lxSelect.label && (!lxSelect.variant || lxSelect.variant === 'input')">
         {{ lxSelect.label }}
     </span>
 
@@ -24,6 +24,7 @@
         ng-click="lxSelect.openDropdown()"
         ng-focus="lxSelect.enableKeyEvents()"
         ng-blur="lxSelect.disableKeyEvents()"
+        ng-if="!lxSelect.variant || lxSelect.variant === 'input'"
     >
         <div
             class="lx-select__input-native lx-select__input-native--placeholder"
@@ -82,6 +83,38 @@
             <lx-icon lx-path="{{ lxSelect.icons.mdiMenuDown }}" lx-size="s"></lx-icon>
         </div>
     </div>
+
+    <lx-chip
+        id="{{ lxSelect.targetUuid }}"
+        lx-on-click="lxSelect.openDropdown()"
+        lx-on-after-click="lxSelect.handleChipClick()"
+        lx-is-active="!lxSelect.isModelEmpty()"
+        lx-theme="{{ lxSelect.theme }}"
+        ng-focus="lxSelect.enableKeyEvents()"
+        ng-blur="lxSelect.disableKeyEvents()"
+        ng-if="lxSelect.variant === 'chip'"
+    >
+        <lx-chip-label>
+            <span ng-if="lxSelect.isModelEmpty()">{{ lxSelect.label }}</span>
+
+            <span
+                ng-if="!lxSelect.isModelEmpty() && !lxSelect.multiple"
+                ng-bind-html="lxSelect.displaySelected()"
+            ></span>
+
+            <span ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple">
+                <span ng-bind-html="lxSelect.displaySelected(lxSelect.viewValue[0])"></span>
+                <span ng-if="lxSelect.viewValue.length > 1">+{{ lxSelect.viewValue.length - 1 }}</span>
+            </span>
+        </lx-chip-label>
+
+        <lx-chip-after>
+            <lx-icon
+                lx-path="{{ lxSelect.isModelEmpty() ? lxSelect.icons.mdiMenuDown : lxSelect.icons.mdiCloseCircle }}"
+                lx-size="xs"
+            ></lx-icon>
+        </lx-chip-after>
+    </lx-chip>
 
     <lx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
         <lx-dropdown-menu>
