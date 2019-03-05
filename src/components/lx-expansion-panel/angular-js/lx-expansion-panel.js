@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { mdiChevronDown, mdiChevronUp, mdiDragVertical } from '@lumx/icons';
 
 import '../style/lx-expansion-panel.scss';
@@ -139,6 +138,8 @@ function lxExpansionPanelController($element, $scope, $timeout) {
 
     /**
      * Toggle the expansion panel wrapper animation.
+     *
+     * @param {Event} [evt] The click event.
      */
     function toggle(evt) {
         if (angular.isDefined(evt)) {
