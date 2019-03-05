@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { mdiAlertCircle, mdiCheckCircle } from '@lumx/icons';
 
 import '../style/lx-text-field.scss';
@@ -63,10 +62,10 @@ function lxTextFieldDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            hasError: '=?lxError',
+            hasError: '=?lxHasError',
             helper: '@?lxHelper',
             icon: '@?lxIcon',
-            isValid: '=?lxValid',
+            isValid: '=?lxIsValid',
             label: '@?lxLabel',
             theme: '@?lxTheme',
         },
