@@ -79,11 +79,12 @@
                 class="lx-data-table__cell lx-data-table__cell--tbody"
                 ng-if="::lxDataTable.hasThumbnail"
             >
-                <div
-                    class="lx-data-table__thumbnail"
-                    ng-if="lxDataTable.thead[0].format"
-                    ng-bind-html="lxDataTable.$sce.trustAsHtml(lxDataTable.thead[0].format(tr))"
-                ></div>
+                <div class="lx-data-table__thumbnail">
+                    <lx-thumbnail
+                        lx-image="{{ tr[lxDataTable.thead[0].name] }}"
+                        lx-variant="{{ lxDataTable.thead[0].variant }}"
+                    ></lx-thumbnail>
+                </div>
 
                 <lx-checkbox
                     class="lx-data-table__checkbox"

@@ -42,10 +42,8 @@ function DemoDataTableController($filter, $scope) {
     ];
     vm.advancedDataTableThead = angular.copy(vm.dataTableThead);
     vm.advancedDataTableThead.unshift({
-        format(row) {
-            return `<img src="${row.image}" width="36" height="36">`;
-        },
         name: 'image',
+        variant: 'rounded',
     });
     vm.dataTableTbody = [
         {
@@ -54,7 +52,7 @@ function DemoDataTableController($filter, $scope) {
             dessert: 'Frozen yogurt',
             fat: 6.0,
             id: 1,
-            image: '/images/placeholder/1-square.jpg',
+            image: 'https://picsum.photos/72?image=1027',
         },
         {
             calories: 237,
@@ -62,7 +60,7 @@ function DemoDataTableController($filter, $scope) {
             dessert: 'Ice cream sandwich',
             fat: 9.0,
             id: 2,
-            image: '/images/placeholder/2-square.jpg',
+            image: 'https://picsum.photos/72?image=832',
             lxDataTableDisabled: true,
         },
         {
@@ -71,7 +69,7 @@ function DemoDataTableController($filter, $scope) {
             dessert: 'Eclair',
             fat: 16.0,
             id: 3,
-            image: '/images/placeholder/3-square.jpg',
+            image: 'https://picsum.photos/72?image=823',
         },
     ];
 
