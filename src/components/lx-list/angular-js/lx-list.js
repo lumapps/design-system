@@ -63,13 +63,19 @@ function lxListController($element, $scope) {
      * Increase active choice index on key down press.
      */
     function _nextItemOnKeyDown() {
-        const nextItem = $element.find('.lx-list-item').eq(lxList.activeItemIndex + 1);
+        let nextItem = $element.find('.lx-list-item').eq(lxList.activeItemIndex + 1);
 
         if (nextItem.length === 0) {
-            return;
+            lxList.activeItemIndex = 0;
+
+            nextItem = $element
+                .find('.lx-list-item')
+                .eq(lxList.activeItemIndex)
+                .focus();
+        } else {
+            lxList.activeItemIndex++;
         }
 
-        lxList.activeItemIndex++;
         nextItem.focus();
     }
 
@@ -77,17 +83,19 @@ function lxListController($element, $scope) {
      * Decrease active choice index on key up press.
      */
     function _previousItemOnKeyUp() {
-        if (lxList.activeItemIndex < 1) {
-            return;
-        }
-
-        const previousItem = $element.find('.lx-list-item').eq(lxList.activeItemIndex - 1);
+        let previousItem = $element.find('.lx-list-item').eq(lxList.activeItemIndex - 1);
 
         if (previousItem.length === 0) {
-            return;
+            lxList.activeItemIndex = $element.find('.lx-list-item').length - 1;
+
+            previousItem = $element
+                .find('.lx-list-item')
+                .eq(lxList.activeItemIndex)
+                .focus();
+        } else {
+            lxList.activeItemIndex--;
         }
 
-        lxList.activeItemIndex--;
         previousItem.focus();
     }
 
@@ -97,6 +105,10 @@ function lxListController($element, $scope) {
      * @param {Event} evt The key event.
      */
     function _onKeyPress(evt) {
+        if (!lxList.isClickable) {
+            return;
+        }
+
         if (evt.keyCode === _DOWN_KEY_CODE) {
             _nextItemOnKeyDown();
             $scope.$apply();
@@ -129,17 +141,10 @@ function lxListController($element, $scope) {
 /////////////////////////////
 
 function lxListDirective() {
-    function link(scope, el, attrs) {
-        if (attrs.lxFocusOnInit) {
-            el.focus();
-        }
-    }
-
     return {
         bindToController: true,
         controller: lxListController,
         controllerAs: 'lxList',
-        link,
         replace: true,
         restrict: 'E',
         scope: {
