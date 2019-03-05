@@ -31,16 +31,16 @@
         @include lx-list-item-selected;
     }
 
-    &__primary {
-        @include lx-list-item-primary;
+    &__before {
+        @include lx-list-item-before;
     }
 
     &__content {
         @include lx-list-item-content;
     }
 
-    &__secondary {
-        @include lx-list-item-secondary;
+    &__after {
+        @include lx-list-item-after;
     }
 }
 

@@ -6,10 +6,10 @@
     <div
         class="lx-list-item__content"
         ng-transclude
-        ng-if="::!lxListItem.hasPrimary && !lxListItem.hasContent && !lxListItem.hasSecondary"
+        ng-if="::!lxListItem.hasBefore && !lxListItem.hasContent && !lxListItem.hasAfter"
     ></div>
 
-    <div class="lx-list-item__primary" ng-transclude="primary" ng-if="::lxListItem.hasPrimary"></div>
+    <div class="lx-list-item__before" ng-transclude="before" ng-if="::lxListItem.hasBefore"></div>
     <div class="lx-list-item__content" ng-transclude="content" ng-if="::lxListItem.hasContent"></div>
-    <div class="lx-list-item__secondary" ng-transclude="secondary" ng-if="::lxListItem.hasSecondary"></div>
+    <div class="lx-list-item__after" ng-transclude="after" ng-if="::lxListItem.hasAfter"></div>
 </li>

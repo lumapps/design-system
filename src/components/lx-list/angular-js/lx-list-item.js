@@ -13,25 +13,25 @@ function lxListItemController($element) {
     /////////////////////////////
 
     /**
+     * Whether the directive has after slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lxListItem.hasAfter = false;
+
+    /**
+     * Whether the directive has before slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lxListItem.hasBefore = false;
+
+    /**
      * Whether the directive has content slot filled or not.
      *
      * @type {boolean}
      */
     lxListItem.hasContent = false;
-
-    /**
-     * Whether the directive has primary slot filled or not.
-     *
-     * @type {boolean}
-     */
-    lxListItem.hasPrimary = false;
-
-    /**
-     * Whether the directive has secondary slot filled or not.
-     *
-     * @type {boolean}
-     */
-    lxListItem.hasSecondary = false;
 
     /**
      * The parent controller (list).
@@ -59,16 +59,16 @@ function lxListItemController($element) {
 
 function lxListItemDirective() {
     function link(scope, el, attrs, ctrls, transclude) {
-        if (transclude.isSlotFilled('primary')) {
-            ctrls[0].hasPrimary = true;
+        if (transclude.isSlotFilled('before')) {
+            ctrls[0].hasBefore = true;
         }
 
         if (transclude.isSlotFilled('content')) {
             ctrls[0].hasContent = true;
         }
 
-        if (transclude.isSlotFilled('secondary')) {
-            ctrls[0].hasSecondary = true;
+        if (transclude.isSlotFilled('after')) {
+            ctrls[0].hasAfter = true;
         }
 
         if (angular.isDefined(ctrls[1]) && ctrls[1]) {
@@ -89,9 +89,9 @@ function lxListItemDirective() {
         },
         template,
         transclude: {
+            after: '?lxListItemAfter',
+            before: '?lxListItemBefore',
             content: '?lxListItemContent',
-            primary: '?lxListItemPrimary',
-            secondary: '?lxListItemSecondary',
         },
     };
 }

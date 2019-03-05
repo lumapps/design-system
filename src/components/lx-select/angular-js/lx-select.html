@@ -109,9 +109,9 @@
                     ng-click="lxSelect.select(choice, $event)"
                     lx-enter-keypress="lxSelect.select(choice, $event)"
                 >
-                    <lx-list-item-primary ng-if="::lxSelect.multiple">
+                    <lx-list-item-before ng-if="::lxSelect.multiple">
                         <lx-checkbox lx-as-decorator="true" ng-checked="lxSelect.isSelected(choice)"></lx-checkbox>
-                    </lx-list-item-primary>
+                    </lx-list-item-before>
 
                     <lx-list-item-content ng-bind-html="lxSelect.displayChoice(choice)"></lx-list-item-content>
                 </lx-list-item>

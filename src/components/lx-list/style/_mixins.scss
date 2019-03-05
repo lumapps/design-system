@@ -26,7 +26,7 @@
     }
 }
 
-@mixin lx-list-item-primary() {
+@mixin lx-list-item-before() {
     flex-shrink: 0;
     margin-right: $lx-base-spacing-unit;
 }
@@ -37,7 +37,7 @@
     flex: 1;
 }
 
-@mixin lx-list-item-secondary() {
+@mixin lx-list-item-after() {
     flex-shrink: 0;
     margin-left: $lx-base-spacing-unit;
 }
