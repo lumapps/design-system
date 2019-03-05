@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { mdiCommentOutline, mdiDelete, mdiPencil } from '@lumx/icons';
 
 /////////////////////////////

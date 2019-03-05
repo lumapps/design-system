@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant, mdiMenuDown } from '@lumx/icons';
 
 /////////////////////////////
