@@ -1,6 +1,6 @@
 function lxSelectFilterDirective() {
     function link(scope, el) {
-        el.on('click', function onFilterClick(evt) {
+        el.on('click keydown keypress', function onFilterClick(evt) {
             evt.stopPropagation();
         });
     }
