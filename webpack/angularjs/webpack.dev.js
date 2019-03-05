@@ -13,8 +13,8 @@ const webpackDevConfig = {
     devtool: 'cheap-module-source-map',
 
     entry: {
-        'angularjs.lumx': `${SRC_PATH}/${TECH_PREFIX['angular-js']}.index.js`,
-        'demo-site': `${DEMO_PATH}/${TECH_PREFIX['angular-js']}/app.js`,
+        'angularjs.lumx': `${SRC_PATH}/${TECH_PREFIX.angularjs]}.index.js`,
+        'demo-site': `${DEMO_PATH}/${TECH_PREFIX.angularjs}/app.js`,
     },
 
     mode: 'development',
@@ -41,7 +41,7 @@ const webpackDevConfig = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: `${DEMO_PATH}/${TECH_PREFIX['angular-js']}/index.html`,
+            template: `${DEMO_PATH}/${TECH_PREFIX.angularjs}/index.html`,
         }),
     ],
 };

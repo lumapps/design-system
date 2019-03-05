@@ -21,7 +21,7 @@ const DEMO_PATH = getAbsolutePath('../demo');
 
 // Techology relative constants.
 const TECH_PREFIX = {
-    'angular-js': 'angular-js',
+    angularjs: 'angularjs',
     react: 'react',
 };
 

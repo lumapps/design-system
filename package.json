@@ -84,7 +84,7 @@
         "format:src": "prettier-eslint --write \"src/**/*.{js,jsx}\"",
         "prettier:demo": "prettier --write \"demo/**/*.{js,jsx,html,scss}\"",
         "prettier:src": "prettier --write \"src/**/*.{js,jsx,html,scss}\"",
-        "start:angular-js": "webpack-dev-server --config webpack/angular-js/webpack.dev.js --hot",
+        "start:angularjs": "webpack-dev-server --config webpack/angularjs/webpack.dev.js --hot",
         "start:react": "webpack-dev-server --config webpack/react/webpack.dev.js --hot",
         "test:react": "jest --config jest/react/index.js",
         "test:react:watch": "jest --config jest/react/index.js --watch"

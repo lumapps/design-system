@@ -29,7 +29,7 @@ function babelSetup({ plugins = [], presets = [] } = {}) {
 /**
  * Returns all entry point for a given technology and prefix.
  *
- * @param  {string} prefix    The tech name (react|angular-js) to match correct path.
+ * @param  {string} prefix    The tech name (react|angularjs) to match correct path.
  * @param  {string} extention The file extension to match.
  * @return {Object} An object of all formatted matches to use in webpack config entry option with filename
  *                  as key and path as value.

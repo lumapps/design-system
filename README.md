@@ -17,9 +17,9 @@ npm install
 ### To start dev servers
 
 ```bash
-# For angular-js dev server
-npm run start:angular-js
+# For AngularJS dev server
+npm run start:angularjs
 
-# For react dev server
+# For React dev server
 npm run start:react
 ```
