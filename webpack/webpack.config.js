@@ -1,3 +1,5 @@
+const path = require('path');
+
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
 
@@ -83,11 +85,11 @@ const webpackBaseConfig = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
         modules: ['node_modules'],
         alias: {
-            '@lumx/icons': `${ICONS_PATH}/index.js`,
-            '@lumx/angularjs': `${CORE_PATH}/angularjs`,
-            '@lumx/react': `${CORE_PATH}/react`,
-            '@lumx/core': CORE_PATH,
-            '@lumx/components': COMPONENTS_PATH,
+            'LumX/icons': path.resolve(__dirname, `${ICONS_PATH}/index.js`),
+            'LumX/angularjs': path.resolve(__dirname, `${CORE_PATH}/angularjs`),
+            'LumX/react': path.resolve(__dirname, `${CORE_PATH}/react`),
+            'LumX/core': path.resolve(__dirname, CORE_PATH),
+            'LumX/components': path.resolve(__dirname, COMPONENTS_PATH),
         },
     },
 
