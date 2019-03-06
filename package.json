@@ -30,6 +30,7 @@
         "@babel/plugin-transform-runtime": "^7.3.4",
         "@babel/preset-env": "^7.3.4",
         "@babel/preset-react": "^7.0.0",
+        "@commitlint/cli": "^7.5.2",
         "@types/react": "^16.8.6",
         "@types/react-dom": "^16.8.2",
         "@uirouter/angularjs": "^1.0.22",
@@ -73,6 +74,7 @@
     },
     "description": "The official LumApps Design System (LumX) for AngularJS and ReactJS applications",
     "devDependencies": {
+        "@commitlint/config-conventional": "^7.5.0",
         "@mdi/js": "^3.5.95",
         "@types/jest": "^24.0.9",
         "babel-eslint": "^10.0.1",
@@ -118,7 +120,6 @@
         "tslint-eslint-rules": "^5.4.0",
         "tslint-plugin-prettier": "^2.0.1",
         "tslint-react": "^3.6.0",
-        "validate-commit-msg": "^2.14.0",
         "webpack-dev-server": "^3.2.1"
     },
     "engines": {
@@ -132,7 +133,8 @@
     "homepage": "https://github.com/lumapps/design-system",
     "husky": {
         "hooks": {
-            "pre-commit": "lint-staged"
+            "pre-commit": "lint-staged",
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
     },
     "keywords": [
@@ -169,7 +171,6 @@
         "start:react": "emon --watch webpack --ignore webpack/angularjs --ignore webpack/.eslintrc.js node_modules/.bin/webpack-dev-server -- --config webpack/react/webpack.dev.js --hot",
         "test:react": "jest --config jest/react/index.js",
         "test:react:watch": "jest --config jest/react/index.js --watch",
-        "validate-commit": "validate-commit-msg",
         "webpack": "webpack-dev-server --config webpack/webpack.dev.js",
         "webpack-defaults": "webpack-defaults"
     },
