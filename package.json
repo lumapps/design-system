@@ -148,7 +148,7 @@
     },
     "scripts": {
         "build": "yarn run -s build:all",
-        "build:all": "yarn run -s build:angularjs && yarn run -s build:react",
+        "build:all": "yarn run -s build:angularjs; yarn run -s build:react",
         "build:angularjs": "webpack --config webpack/angularjs/webpack.umd.js",
         "build:react": "yarn run -s build:react:commonjs",
         "build:react:commonjs": "webpack --config webpack/react/webpack.commonjs.js",
@@ -159,7 +159,7 @@
         "format:src": "prettier-eslint --write \"src/**/*.{js,jsx}\"",
         "prettier:demo": "prettier --write \"demo/**/*.{js,jsx,html,scss}\"",
         "prettier:src": "prettier --write \"src/**/*.{js,jsx,html,scss}\"",
-        "setup": "yarn install && cd .src/icons/ && yarn run -s install && cd -",
+        "setup": "yarn install; cd ./src/icons/; yarn install; cd -",
         "start:angularjs": "webpack-dev-server --config webpack/angularjs/webpack.dev.js --hot",
         "start:react": "webpack-dev-server --config webpack/react/webpack.dev.js --hot",
         "test:react": "jest --config jest/react/index.js",
