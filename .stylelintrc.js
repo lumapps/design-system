@@ -1,5 +1,5 @@
 module.exports = {
-    extends: ['stylelint-config-standard', 'stylelint-config-recommended-scss', 'stylelint-config-idiomatic-order'],
+    extends: ['stylelint-config-recommended', 'stylelint-config-recommended-scss', 'stylelint-config-idiomatic-order'],
     rules: {
         indentation: 4,
         'at-rule-empty-line-before': [

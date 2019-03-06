@@ -1,0 +1,106 @@
+{
+    "defaultSeverity": "error",
+    "extends": ["tslint:recommended", "tslint-eslint-rules", "tslint-react", "tslint-config-prettier"],
+    "jsRules": {},
+    "rules": {
+        "prettier": true,
+
+        "no-constant-condition": [
+            "error",
+            {
+                "checkLoops": false
+            }
+        ],
+        "no-control-regex": true,
+        "no-duplicate-case": true,
+        "no-empty-character-class": true,
+        "no-ex-assign": true,
+        "no-extra-boolean-cast": true,
+        "no-extra-semi": true,
+        "no-inner-declarations": [true, "functions"],
+        "no-invalid-regexp": [
+            true,
+            {
+                "allowConstructorFlags": []
+            }
+        ],
+        "ter-no-proto": true,
+        "ter-no-script-url": true,
+        "ter-no-self-compare": true,
+        "ter-no-sparse-arrays": true,
+        "ter-prefer-arrow-callback": [
+            true,
+            {
+                "allowNamedFunctions": true,
+                "allowUnboundThis": true
+            }
+        ],
+        "valid-jsdoc": [
+            true,
+            {
+                "matchDescription": ".+",
+                "prefer": {
+                    "arg": "param",
+                    "desc": "description",
+                    "exception": "throws",
+                    "func": "function",
+                    "readOnly": "readonly",
+                    "returns": "return",
+                    "throw": "throws"
+                },
+                "preferType": {
+                    "array": "Array",
+                    "Boolean": "boolean",
+                    "date": "Date",
+                    "Float": "number",
+                    "float": "number",
+                    "function": "Function",
+                    "integer": "number",
+                    "Integer": "number",
+                    "Number": "number",
+                    "object": "Object",
+                    "String": "string"
+                },
+                "requireParamDescription": true,
+                "requireParamType": true,
+                "requireReturn": false,
+                "requireReturnDescription": true,
+                "requireReturnType": true
+            }
+        ],
+        "valid-typeof": true,
+
+        "jsx-alignment": true,
+        "jsx-ban-elements": [true, []],
+        "jsx-ban-props": [true, []],
+        "jsx-boolean-value": [true, "always"],
+        "jsx-curly-spacing": false,
+        "jsx-equals-spacing": false,
+        "jsx-key": true,
+        "jsx-no-bind": true,
+        "jsx-no-lambda": true,
+        "jsx-no-multiline-js": false,
+        "jsx-no-string-ref": true,
+        "jsx-use-translation-function": false,
+        "jsx-self-close": true,
+        "jsx-space-before-trailing-slash": false,
+        "jsx-wrap-multiline": false,
+
+        "early-exit": [
+            true,
+            {
+                "max-length": 4,
+                "ignore-constructor": true
+            }
+        ],
+        "no-accessor-recursion": true,
+        "no-collapsible-if": true,
+        "no-else-after-return": [true, "allow-else-if"],
+        "no-unnecessary-else": true,
+        "no-unused": true,
+        "no-var-before-return": [true, "allow-destructuring"],
+        "prefer-const-enum": true,
+        "prefer-while": true
+    },
+    "rulesDirectory": ["tslint-consistent-codestyle", "tslint-plugin-prettier"]
+}
