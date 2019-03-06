@@ -1,4 +1,6 @@
-import { MODULE_NAME } from '@lumx/angularjs/lumx'
+/* eslint-disable global-require, import/no-commonjs, import/max-dependencies */
+
+import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import './style/app.scss';
 
@@ -225,6 +227,7 @@ angular
     .config(AppDefaultConfig)
     .run(AppDefaultRun);
 
+/* eslint-disable import/no-unassigned-import */
 require('./components/lx-button/controller.js');
 require('./components/lx-checkbox/controller.js');
 require('./components/lx-chip/controller.js');
@@ -241,3 +244,4 @@ require('./components/lx-switch/controller.js');
 require('./components/lx-tabs/controller.js');
 require('./components/lx-text-field/controller.js');
 require('./components/lx-toolbar/controller.js');
+/* eslint-enable import/no-unassigned-import */

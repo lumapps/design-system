@@ -1,4 +1,4 @@
-import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
+import { mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
 
 /////////////////////////////
 

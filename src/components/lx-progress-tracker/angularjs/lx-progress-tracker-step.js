@@ -1,6 +1,6 @@
-import { MODULE_NAME } from '@lumx/angularjs/lumx'
+import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
+import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from 'LumX/icons';
 
 import template from './lx-progress-tracker-step.html';
 

@@ -1,4 +1,4 @@
-import { MODULE_NAME } from '@lumx/angularjs/lumx'
+import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import '../style/lx-button.scss';
 
@@ -132,7 +132,7 @@ function lxButtonDirective(LxThemeConstant) {
 
 /////////////////////////////
 
-angular.module(`${MDULE_NAME}.button`).directive('lxButton', lxButtonDirective);
+angular.module(`${MODULE_NAME}.button`).directive('lxButton', lxButtonDirective);
 
 /////////////////////////////
 

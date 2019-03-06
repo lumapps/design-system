@@ -1,6 +1,6 @@
-import { MODULE_NAME } from '@lumx/angularjs/lumx'
+import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from '@lumx/icons';
+import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/icons';
 
 import '../style/lx-notification.scss';
 

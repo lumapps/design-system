@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unassigned-import, import/max-dependencies */
+
 import './core/angularjs';
 
 import './components/lx-button/angularjs/lx-button';

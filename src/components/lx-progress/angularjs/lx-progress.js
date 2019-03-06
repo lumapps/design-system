@@ -1,4 +1,4 @@
-import { MODULE_NAME } from '@lumx/angularjs/lumx'
+import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import '../style/lx-progress.scss';
 import template from './lx-progress.html';

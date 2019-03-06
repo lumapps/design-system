@@ -1,3 +1,5 @@
+import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+
 import '../style/lx-thumbnail.scss';
 
 /////////////////////////////
@@ -52,7 +54,7 @@ function lxThumbnailDirective() {
 
 /////////////////////////////
 
-angular.module('lumx.thumbnail').directive('lxThumbnail', lxThumbnailDirective);
+angular.module(`${MODULE_NAME}.thumbnail`).directive('lxThumbnail', lxThumbnailDirective);
 
 /////////////////////////////
 

@@ -1,4 +1,4 @@
-import { mdiChevronLeft, mdiDotsVertical, mdiMagnify } from '@lumx/icons';
+import { mdiChevronLeft, mdiDotsVertical, mdiMagnify } from 'LumX/icons';
 
 /////////////////////////////
 

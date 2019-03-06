@@ -1,4 +1,4 @@
-import { mdiEmail, mdiSend } from '@lumx/icons';
+import { mdiEmail, mdiSend } from 'LumX/icons';
 
 /////////////////////////////
 

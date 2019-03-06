@@ -1,3 +1,7 @@
+import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+
+/////////////////////////////
+
 function LxFocusTrapService() {
     const service = this;
 
@@ -59,7 +63,7 @@ function LxFocusTrapService() {
 
 /////////////////////////////
 
-angular.module('lumx.utils.focus-trap').service('LxFocusTrapService', LxFocusTrapService);
+angular.module(`${MODULE_NAME}.utils.focus-trap`).service('LxFocusTrapService', LxFocusTrapService);
 
 /////////////////////////////
 

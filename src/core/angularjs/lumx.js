@@ -1,6 +1,6 @@
-import '../style/lumx.scss';
+import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-const MODULE_NAME = '@lumx/angularjs';
+import '../style/lumx.scss';
 
 angular.module(`${MODULE_NAME}.utils.depth`, []);
 angular.module(`${MODULE_NAME}.utils.enter-keypress`, []);
@@ -66,7 +66,3 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.toolbar`,
     `${MODULE_NAME}.tooltip`,
 ]);
-
-/////////////////////////////
-
-export { MODULE_NAME };
