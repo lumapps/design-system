@@ -41,6 +41,7 @@ const webpackDevConfig = {
 
     plugins: [
         new HtmlWebpackPlugin({
+            inject: false,
             template: `${DEMO_PATH}/${TECH_PREFIX.angularjs}/index.html`,
         }),
     ],
