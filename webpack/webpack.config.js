@@ -8,7 +8,7 @@ const { COMPONENTS_PATH, CORE_PATH, NODE_MODULES_PATH, ICONS_PATH } = require('.
 
 const webpackBaseConfig = {
     entry: {
-        styleMaterial: `${CORE_PATH}/style-material/index.js`,
+        'style-material': `${CORE_PATH}/style-material/index.js`,
     },
     module: {
         rules: [
