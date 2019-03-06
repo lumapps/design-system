@@ -13,7 +13,7 @@ const webpackDevConfig = {
     devtool: 'cheap-module-source-map',
 
     entry: {
-        'angularjs.lumx': `${SRC_PATH}/${TECH_PREFIX.angularjs]}.index.js`,
+        'angularjs.lumx': `${SRC_PATH}/${TECH_PREFIX.angularjs}.index.js`,
         'demo-site': `${DEMO_PATH}/${TECH_PREFIX.angularjs}/app.js`,
     },
 
