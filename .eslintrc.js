@@ -1146,7 +1146,7 @@ module.exports = {
                 max: 30,
             },
         ],
-        'import/named': 'error',
+        'import/named': 'off',
         'import/namespace': 'error',
         'import/newline-after-import': [
             'error',
@@ -1217,7 +1217,7 @@ module.exports = {
             },
         ],
         'import/no-unresolved': [
-            'error',
+            'off',
             {
                 amd: true,
                 caseSensitive: true,
@@ -1855,11 +1855,11 @@ module.exports = {
             'report-bad-indent': 'error',
             'xml-extensions': ['.xhtm', '.xhtml', '.xuhtml', 'xml'],
         },
-        'import/extensions': ['.js', '.jsx'],
+        'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
         'import/ignore': ['node_modules', '.(s(a|c)ss|less|css)$'],
         'import/resolver': {
             node: {
-                extensions: ['.js', '.jsx'],
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
             },
             webpack: {
                 config: 'webpack/webpack.config.js',
