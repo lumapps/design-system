@@ -2,6 +2,7 @@
 
 module.exports = {
     concurrent: true,
+    ignore: ['**/dist/*', '**/build/*'],
     linters: {
         '*.{js,jsx}': ['prettier-eslint --prettier-last --write', 'git add', 'eslint'],
         '*.{ts,tsx}': ['prettier --write', 'git add', 'tslint'],
