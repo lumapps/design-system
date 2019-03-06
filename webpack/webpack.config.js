@@ -2,7 +2,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
 
 const { babelSetup, getSassRessourcesFiles } = require('./utils');
-const { CORE_PATH, NODE_MODULES_PATH, ICONS_PATH } = require('./constants');
+const { COMPONENTS_PATH, CORE_PATH, NODE_MODULES_PATH, ICONS_PATH } = require('./constants');
 
 const webpackBaseConfig = {
     module: {
