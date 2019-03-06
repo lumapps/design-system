@@ -5,8 +5,6 @@
 }
 
 @mixin lx-typography($style) {
-    @include lx-typography-base;
-
     @if $style == title {
         font-size: 20px;
         font-weight: 700;
