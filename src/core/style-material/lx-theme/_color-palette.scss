@@ -5,9 +5,12 @@ $lx-theme-material-dark: (
 $lx-theme-material-dark: map-merge(
     $lx-theme-material-dark,
     (
-        L1: rgba(0, 0, 0, 0.54),
-        L2: rgba(0, 0, 0, 0.38),
-        L3: rgba(0, 0, 0, 0.12),
+        L1: rgba(map-get($lx-theme-material-dark, N), 0.8),
+        L2: rgba(map-get($lx-theme-material-dark, N), 0.6),
+        L3: rgba(map-get($lx-theme-material-dark, N), 0.4),
+        L4: rgba(map-get($lx-theme-material-dark, N), 0.2),
+        L5: rgba(map-get($lx-theme-material-dark, N), 0.1),
+        L6: rgba(map-get($lx-theme-material-dark, N), 0.05),
     )
 );
 
@@ -18,9 +21,12 @@ $lx-theme-material-light: (
 $lx-theme-material-light: map-merge(
     $lx-theme-material-light,
     (
-        L1: rgba(255, 255, 255, 0.7),
-        L2: rgba(255, 255, 255, 0.3),
-        L3: rgba(255, 255, 255, 0.12),
+        L1: rgba(map-get($lx-theme-material-light, N), 0.9),
+        L2: rgba(map-get($lx-theme-material-light, N), 0.8),
+        L3: rgba(map-get($lx-theme-material-light, N), 0.6),
+        L4: rgba(map-get($lx-theme-material-light, N), 0.4),
+        L5: rgba(map-get($lx-theme-material-light, N), 0.2),
+        L6: rgba(map-get($lx-theme-material-light, N), 0.1),
     )
 );
 

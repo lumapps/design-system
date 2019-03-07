@@ -26,7 +26,12 @@
             box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
         }
     } @else if $state == state-disabled {
-        color: lx-theme-best-color(lx-theme-color-variant($color, L3));
+        // prettier-ignore
+        color:
+            lx-theme-best-color(
+                lx-theme-color-variant($color, L3),
+                (lx-theme-color-variant(light, N), lx-theme-color-variant(dark, L3))
+            );
         pointer-events: none;
 
         @if $theme == dark {

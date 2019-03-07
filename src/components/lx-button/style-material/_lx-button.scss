@@ -35,30 +35,26 @@
     @if $key != dark and $key != light {
         .lx-button--color-#{$key} {
             &.lx-button--emphasis-high.lx-button--theme-light {
-                @include lx-button-material-color(emphasis-high, dark, $key);
+                @include lx-button-material-color(emphasis-high, $key, dark);
             }
 
             &.lx-button--emphasis-high.lx-button--theme-dark {
-                @include lx-button-material-color(emphasis-high, light, $key);
+                @include lx-button-material-color(emphasis-high, $key, light);
             }
         }
     }
 }
 
-.lx-button--emphasis-medium.lx-button--theme-light {
-    @include lx-button-material-color(emphasis-medium, dark);
-}
+@each $key, $color in $lx-theme-color-palette {
+    .lx-button--color-#{$key} {
+        &.lx-button--emphasis-medium {
+            @include lx-button-material-color(emphasis-medium, $key);
+        }
 
-.lx-button--emphasis-medium.lx-button--theme-dark {
-    @include lx-button-material-color(emphasis-medium, light);
-}
-
-.lx-button--emphasis-low.lx-button--theme-light {
-    @include lx-button-material-color(emphasis-low, dark);
-}
-
-.lx-button--emphasis-low.lx-button--theme-dark {
-    @include lx-button-material-color(emphasis-low, light);
+        &.lx-button--emphasis-low {
+            @include lx-button-material-color(emphasis-low, $key);
+        }
+    }
 }
 
 /* Button group
