@@ -1,0 +1,30 @@
+<div
+    class="lx-image-block"
+    ng-class="{ 'lx-image-block--format-original': !lxImageBlock.aspectRatio || lxImageBlock.aspectRatio === 'original',
+                'lx-image-block--format-crop': lxImageBlock.aspectRatio && lxImageBlock.aspectRatio !== 'original',
+                'lx-image-block--aspect-ratio-horizontal': lxImageBlock.aspectRatio === 'horizontal',
+                'lx-image-block--aspect-ratio-vertical': lxImageBlock.aspectRatio === 'vertical',
+                'lx-image-block--caption-position-below': !lxImageBlock.captionPosition || lxImageBlock.captionPosition === 'below',
+                'lx-image-block--caption-position-over': lxImageBlock.captionPosition === 'over',
+                'lx-image-block--theme-light': !lxImageBlock.theme || lxImageBlock.theme === 'light',
+                'lx-image-block--theme-dark': lxImageBlock.theme === 'dark' }"
+>
+    <div class="lx-image-block__image" ng-style="lxImageBlock.getImageStyle()"></div>
+
+    <div class="lx-image-block__wrapper">
+        <div class="lx-image-block__caption" ng-if="lxImageBlock.title || lxImageBlock.description">
+            <span class="lx-image-block__title" ng-if="lxImageBlock.title">{{ lxImageBlock.title }}</span>
+            <span class="lx-image-block__description" ng-if="lxImageBlock.description">
+                {{ lxImageBlock.description }}
+            </span>
+        </div>
+
+        <div class="lx-image-block__tags" ng-if="lxImageBlock.tags.length > 0">
+            <div class="lx-image-block__tag" ng-repeat="tag in lxImageBlock.tags">
+                <lx-chip lx-size="s" lx-theme="{{ lxImageBlock.theme }}">
+                    <lx-chip-label>{{ tag }}</lx-chip-label>
+                </lx-chip>
+            </div>
+        </div>
+    </div>
+</div>

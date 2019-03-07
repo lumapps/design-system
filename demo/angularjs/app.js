@@ -98,6 +98,14 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 },
             },
         })
+        .state('app.image-block', {
+            url: 'image-block',
+            views: {
+                'main@': {
+                    template: require('./components/lx-image-block/demo.html'),
+                },
+            },
+        })
         .state('app.list', {
             url: 'list',
             views: {

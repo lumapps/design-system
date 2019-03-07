@@ -16,6 +16,7 @@ import './components/lx-dropdown/angularjs/lx-dropdown';
 import './components/lx-dropdown/angularjs/lx-dropdown_service';
 import './components/lx-expansion-panel/angularjs/lx-expansion-panel';
 import './components/lx-icon/angularjs/lx-icon';
+import './components/lx-image-block/angularjs/lx-image-block';
 import './components/lx-list/angularjs/lx-list';
 import './components/lx-list/angularjs/lx-list-divider';
 import './components/lx-list/angularjs/lx-list-item';

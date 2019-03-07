@@ -27,6 +27,7 @@ angular.module(`${MODULE_NAME}.divider`, []);
 angular.module(`${MODULE_NAME}.dropdown`, []);
 angular.module(`${MODULE_NAME}.expansion-panel`, []);
 angular.module(`${MODULE_NAME}.icon`, []);
+angular.module(`${MODULE_NAME}.image-block`, []);
 angular.module(`${MODULE_NAME}.list`, []);
 angular.module(`${MODULE_NAME}.notification`, []);
 angular.module(`${MODULE_NAME}.progress`, []);
@@ -51,6 +52,7 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.dropdown`,
     `${MODULE_NAME}.expansion-panel`,
     `${MODULE_NAME}.icon`,
+    `${MODULE_NAME}.image-block`,
     `${MODULE_NAME}.list`,
     `${MODULE_NAME}.notification`,
     `${MODULE_NAME}.progress`,
