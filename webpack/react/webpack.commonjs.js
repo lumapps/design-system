@@ -22,4 +22,4 @@ const webpackCommonJsConfig = {
     },
 };
 
-module.exports = merge(webpackBaseConfig, webpackCommonJsConfig);
+module.exports = merge.smart(webpackBaseConfig, webpackCommonJsConfig);

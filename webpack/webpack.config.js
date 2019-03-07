@@ -1,3 +1,5 @@
+const IS_CI = require('is-ci');
+
 const path = require('path');
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -18,8 +20,8 @@ const webpackBaseConfig = {
                 test: /\.js$/u,
                 use: [
                     {
-                        loader: 'babel-loader',
-                        options: babelSetup(),
+                        loader: 'babel-loader?cacheDirectory=true',
+                        options: babelSetup({ plugins: [['angularjs-annotate', { explicitOnly: true }]] }),
                     },
                 ],
             },
@@ -28,7 +30,7 @@ const webpackBaseConfig = {
                 test: /\.jsx$/u,
                 use: [
                     {
-                        loader: 'babel-loader',
+                        loader: 'babel-loader?cacheDirectory=true',
                         options: babelSetup({
                             presets: ['@babel/preset-react'],
                         }),
@@ -83,7 +85,17 @@ const webpackBaseConfig = {
         ],
     },
 
+    node: {
+        fs: 'empty',
+    },
+
+    performance: {
+        hints: false,
+    },
+
     plugins: [new WebpackBar(), new FriendlyErrorsWebpackPlugin()],
+
+    profile: false,
 
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
@@ -95,6 +107,37 @@ const webpackBaseConfig = {
             'LumX/core': path.resolve(__dirname, CORE_PATH),
             'LumX/components': path.resolve(__dirname, COMPONENTS_PATH),
         },
+    },
+
+    stats: {
+        builtAt: true,
+        colors: !IS_CI,
+        errorDetails: true,
+        errors: true,
+        performance: true,
+        timings: true,
+        warnings: true,
+
+        assets: false,
+        cached: false,
+        cachedAssets: false,
+        children: false,
+        chunkGroups: false,
+        chunkModules: false,
+        chunkOrigins: false,
+        chunks: false,
+        depth: false,
+        entrypoints: false,
+        env: false,
+        hash: false,
+        moduleTrace: false,
+        modules: false,
+        providedExports: false,
+        publicPath: false,
+        reasons: false,
+        source: false,
+        usedExports: false,
+        version: false,
     },
 
     target: 'web',

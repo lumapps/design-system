@@ -36,4 +36,4 @@ const webpackDevConfig = {
     },
 };
 
-module.exports = merge(webpackBaseConfig, webpackDevConfig);
+module.exports = merge.smart(webpackBaseConfig, webpackDevConfig);

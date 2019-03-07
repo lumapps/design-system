@@ -1,4 +1,5 @@
 const glob = require('glob');
+const { shouldPrintComment } = require('babel-plugin-smart-webpack-import');
 
 const { APP_PATH, CORE_PATH, COMPONENTS_PATH, DEFAULT_HOST, DEFAULT_PORT } = require('./constants');
 
@@ -7,11 +8,18 @@ const { APP_PATH, CORE_PATH, COMPONENTS_PATH, DEFAULT_HOST, DEFAULT_PORT } = req
  *
  * @param  {Array}  [plugins] The plugins to use.
  * @param  {Array}  [presets] The presets to use.
+ * @param  {Object} [options] The options to use.
  * @return {Object} The Babel configuration object.
  */
-function babelSetup({ plugins = [], presets = [] } = {}) {
+function babelSetup({ plugins = [], presets = [], options = {} } = {}) {
     return {
-        plugins: [...plugins],
+        ...options,
+        plugins: [
+            ...plugins,
+            '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-proposal-object-rest-spread',
+            '@babel/plugin-syntax-dynamic-import',
+        ],
         presets: [
             ...presets,
             [
@@ -23,6 +31,7 @@ function babelSetup({ plugins = [], presets = [] } = {}) {
                 },
             ],
         ],
+        shouldPrintComment,
     };
 }
 
@@ -80,7 +89,7 @@ function getWebpackDevServerConfig({ port } = {}) {
         },
         host: DEFAULT_HOST,
         hot: true,
-        open: false,
+        open: true,
         overlay: true,
         port: port || DEFAULT_PORT,
         quiet: true,
