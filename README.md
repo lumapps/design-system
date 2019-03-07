@@ -18,6 +18,9 @@ npm install @lumx/<angularjs|react>
 -   Download the latest release for [AngularJS][angularjs-release] or [ReactJS][reactjs-release]
 -   Clone the repository: `git clone https://github.com/lumapps/design-system.git`
 
+You can then use the UMD, AMD or CommonJS bundle that suits your taste.
+See [examples](./dist/examples) for more information on how to use each bundle.
+
 ## Documentation
 
 LumX's documentation is included in the "demo" directory. The demo/documentation site is built with [Webpack][webpack] and may be run locally.
@@ -67,6 +70,8 @@ yarn start:react
 # Or
 npm run start:react
 ```
+
+You can then open your browser to [http://localhost:4000/](http://localhost:4000/) to access the demo and test site.
 
 ## Project build
 
