@@ -31,11 +31,11 @@
         }
 
         #{ $self }--theme-light#{ $self }--is-checked & {
-            @include lx-state(state-default, emphasis-high, dark, primary);
+            @include lx-state(state-default, emphasis-high, primary, dark);
         }
 
         #{ $self }--theme-dark#{ $self }--is-checked & {
-            @include lx-state(state-default, emphasis-high, light, primary);
+            @include lx-state(state-default, emphasis-high, primary, light);
         }
 
         #{ $self }--theme-light#{ $self }--is-unchecked & {
@@ -113,7 +113,7 @@
 
 .lx-switch--theme-light.lx-switch--is-checked.lx-switch--is-disabled {
     .lx-switch__input-background {
-        @include lx-state(state-disabled, emphasis-high, dark, primary);
+        @include lx-state(state-disabled, emphasis-high, primary, dark);
     }
 }
 
@@ -136,7 +136,7 @@
 
 .lx-switch--theme-dark.lx-switch--is-checked.lx-switch--is-disabled {
     .lx-switch__input-background {
-        @include lx-state(state-disabled, emphasis-high, light, primary);
+        @include lx-state(state-disabled, emphasis-high, primary, light);
     }
 }
 
@@ -159,13 +159,13 @@
 
 .lx-switch--theme-light.lx-switch--is-checked .lx-switch__input-native:hover + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-state(state-hover, emphasis-high, dark, primary);
+        @include lx-state(state-hover, emphasis-high, primary, dark);
     }
 }
 
 .lx-switch--theme-dark.lx-switch--is-checked .lx-switch__input-native:hover + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-state(state-hover, emphasis-high, light, primary);
+        @include lx-state(state-hover, emphasis-high, primary, light);
     }
 }
 
@@ -177,7 +177,7 @@
 
 // prettier-ignore
 .lx-switch--theme-light.lx-switch--is-checked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
-    @include lx-state(state-focus, emphasis-high, dark, primary);
+    @include lx-state(state-focus, emphasis-high, primary, dark);
 }
 
 // prettier-ignore
@@ -187,7 +187,7 @@
 
 // prettier-ignore
 .lx-switch--theme-dark.lx-switch--is-checked .lx-switch__input-native[data-focus-visible-added] + .lx-switch__input-placeholder {
-    @include lx-state(state-focus, emphasis-high, light, primary);
+    @include lx-state(state-focus, emphasis-high, primary, light);
 }
 
 // Active state
@@ -205,12 +205,12 @@
 
 .lx-switch--theme-light.lx-switch--is-checked .lx-switch__input-native:active + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-state(state-active, emphasis-high, dark, primary);
+        @include lx-state(state-active, emphasis-high, primary, dark);
     }
 }
 
 .lx-switch--theme-dark.lx-switch--is-checked .lx-switch__input-native:active + .lx-switch__input-placeholder {
     .lx-switch__input-background {
-        @include lx-state(state-active, emphasis-high, light, primary);
+        @include lx-state(state-active, emphasis-high, primary, light);
     }
 }

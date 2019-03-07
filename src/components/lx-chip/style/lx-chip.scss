@@ -122,22 +122,22 @@
 
 .lx-chip--is-active {
     &.lx-chip--theme-light {
-        @include lx-state(state-default, emphasis-high, dark, primary);
+        @include lx-state(state-default, emphasis-high, primary, dark);
 
         &.lx-chip--is-clickable:hover {
-            @include lx-state(state-hover, emphasis-high, dark, primary);
+            @include lx-state(state-hover, emphasis-high, primary, dark);
         }
 
         &.lx-chip--is-clickable:active {
-            @include lx-state(state-active, emphasis-high, dark, primary);
+            @include lx-state(state-active, emphasis-high, primary, dark);
         }
 
         &.lx-chip--is-clickable[data-focus-visible-added] {
-            @include lx-state(state-focus, emphasis-high, dark, primary);
+            @include lx-state(state-focus, emphasis-high, primary, dark);
         }
 
         &.lx-chip--is-clickable.lx-chip--is-disabled {
-            @include lx-state(state-disabled, emphasis-high, dark, primary);
+            @include lx-state(state-disabled, emphasis-high, primary, dark);
         }
 
         .lx-chip__before--is-clickable:hover,
@@ -147,22 +147,22 @@
     }
 
     &.lx-chip--theme-dark {
-        @include lx-state(state-default, emphasis-high, light, primary);
+        @include lx-state(state-default, emphasis-high, primary, light);
 
         &.lx-chip--is-clickable:hover {
-            @include lx-state(state-hover, emphasis-high, light, primary);
+            @include lx-state(state-hover, emphasis-high, primary, light);
         }
 
         &.lx-chip--is-clickable:active {
-            @include lx-state(state-active, emphasis-high, light, primary);
+            @include lx-state(state-active, emphasis-high, primary, light);
         }
 
         &.lx-chip--is-clickable[data-focus-visible-added] {
-            @include lx-state(state-focus, emphasis-high, light, primary);
+            @include lx-state(state-focus, emphasis-high, primary, light);
         }
 
         &.lx-chip--is-clickable.lx-chip--is-disabled {
-            @include lx-state(state-disabled, emphasis-high, light, primary);
+            @include lx-state(state-disabled, emphasis-high, primary, light);
         }
 
         .lx-chip__before--is-clickable:hover,

@@ -18,8 +18,8 @@
 
         <div class="lx-expansion-panel__state-indicator">
             <lx-button
+                lx-color="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'dark' : 'light' }}"
                 lx-emphasis="low"
-                lx-theme="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'light' : 'dark' }}"
                 lx-variant="icon"
                 ng-click="lxExpansionPanel.toggle($event)"
             >
