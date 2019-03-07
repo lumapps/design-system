@@ -1,12 +1,13 @@
 import React from 'react';
+
 import classNames from 'classnames';
+import { Color, Size, Theme, Variant } from 'components';
 
 import '../style/lx-button.scss';
 
-import { handleBasicClasses } from '../../../core/utils';
-import { Color, Theme, Size, Variant } from 'components';
+import { handleBasicClasses } from 'LumX/core/utils';
 
-interface LxButtonRootProps {
+interface ILxButtonRootProps {
     /** Basic react `className` prop. */
     className?: string;
     /** The `href` to reach if there is one. */
@@ -17,8 +18,10 @@ interface LxButtonRootProps {
 
 /**
  * Conditionnaly adds `a` or `button` html tag whether there is an `href` attribute or not.
+ *
+ * @return {React.FC<ILxButtonRootProps>} The button root component.
  */
-const LxButtonRoot: React.FC<LxButtonRootProps> = ({ href, children, target, className, ...props }) => {
+const LxButtonRoot: React.FC<ILxButtonRootProps> = ({ href, children, target, className, ...props }) => {
     return href ? (
         <a href={href} target={target} className={className} {...props}>
             {children}
@@ -30,7 +33,7 @@ const LxButtonRoot: React.FC<LxButtonRootProps> = ({ href, children, target, cla
     );
 };
 
-export interface LxButtonProps extends LxButtonRootProps {
+export interface ILxButtonProps extends ILxButtonRootProps {
     /** The button color which must be defined by `lx-button--${color}` css class. */
     color?: Color;
     /** The button size which must be defined by `lx-button--${size}` css class. */
@@ -44,8 +47,10 @@ export interface LxButtonProps extends LxButtonRootProps {
 /**
  * Displays a button. If `href` property is set, it will display an `a` tag, if not
  * it will use `button` tag instead.
+ *
+ * @return {React.FC<ILxButtonProps>} The button component.
  */
-export const LxButton: React.FC<LxButtonProps> = ({
+export const LxButton: React.FC<ILxButtonProps> = ({
     children,
     className,
     color = 'primary',

@@ -5,6 +5,8 @@ import template from './lx-toolbar.html';
 /////////////////////////////
 
 function lxToolbarController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxToolbar = this;
 
@@ -39,6 +41,8 @@ function lxToolbarController() {
 /////////////////////////////
 
 function lxToolbarDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl, transclude) {
         if (transclude.isSlotFilled('before')) {
             ctrl.hasBefore = true;

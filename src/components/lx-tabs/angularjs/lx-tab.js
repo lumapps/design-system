@@ -5,6 +5,8 @@ import template from './lx-tab.html';
 /////////////////////////////
 
 function lxTabController($scope, LxUtilsService) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxTab = this;
 
@@ -101,6 +103,8 @@ function lxTabController($scope, LxUtilsService) {
 /////////////////////////////
 
 function lxTabDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrls) {
         ctrls[0].registerTab(ctrls[1], el.index());
     }

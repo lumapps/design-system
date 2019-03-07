@@ -3,6 +3,8 @@ import { mdiPencil } from 'LumX/icons';
 /////////////////////////////
 
 function DemoTabsController() {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -11,7 +13,12 @@ function DemoTabsController() {
     //                         //
     /////////////////////////////
 
-    let _tabIndex = 4;
+    /**
+     * The index of the tab that will be added.
+     *
+     * @type {number}
+     */
+    let _tabIndex;
 
     /////////////////////////////
     //                         //
@@ -19,11 +26,36 @@ function DemoTabsController() {
     //                         //
     /////////////////////////////
 
+    /**
+     * The currently active tab.
+     *
+     * @type {number}
+     */
     vm.activeTab = 1;
+
+    /**
+     * The icons to use in the template.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
     vm.icons = {
         mdiPencil,
     };
+
+    /**
+     * Indicate if a tab is disabled.
+     *
+     * @type {boolean}
+     */
     vm.isTabDisabled = false;
+
+    /**
+     * The tabs to display in the demo page.
+     *
+     * @type {Array<Object>}
+     */
     vm.tabs = [
         {
             content: 'Tab 1 content',
@@ -45,6 +77,9 @@ function DemoTabsController() {
     //                         //
     /////////////////////////////
 
+    /**
+     * Add a new tab.
+     */
     function addTab() {
         vm.tabs.push({
             content: `Tab ${_tabIndex} content`,
@@ -54,14 +89,24 @@ function DemoTabsController() {
         ++_tabIndex;
     }
 
+    /**
+     * Remove the first tab.
+     */
     function removeFirstTab() {
         vm.removeTab(0);
     }
 
-    function removeTab(_idx) {
-        if (vm.tabs.length > _idx) {
-            vm.tabs.splice(_idx, 1);
+    /**
+     * Remove the tab at the given index.
+     *
+     * @param {number} index The index of the tab to remove.
+     */
+    function removeTab(index) {
+        if (index < 0 || index >= vm.tabs.length) {
+            return;
         }
+
+        vm.tabs.splice(index, 1);
     }
 
     /////////////////////////////
@@ -69,6 +114,17 @@ function DemoTabsController() {
     vm.addTab = addTab;
     vm.removeFirstTab = removeFirstTab;
     vm.removeTab = removeTab;
+
+    /////////////////////////////
+
+    /**
+     * Initialize the controller.
+     */
+    function init() {
+        _tabIndex = vm.tabs.length + 1;
+    }
+
+    init();
 }
 
 /////////////////////////////

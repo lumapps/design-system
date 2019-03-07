@@ -5,6 +5,8 @@ import template from './lx-tabs.html';
 /////////////////////////////
 
 function lxTabsController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxTabs = this;
 
@@ -108,6 +110,8 @@ function lxTabsController() {
 /////////////////////////////
 
 function lxTabsDirective() {
+    'ngInject';
+
     return {
         bindToController: true,
         controller: lxTabsController,

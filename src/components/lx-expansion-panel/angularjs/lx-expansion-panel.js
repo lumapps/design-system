@@ -7,6 +7,8 @@ import template from './lx-expansion-panel.html';
 /////////////////////////////
 
 function lxExpansionPanelController($element, $scope, $timeout) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxExpansionPanel = this;
 
@@ -180,6 +182,8 @@ function lxExpansionPanelController($element, $scope, $timeout) {
 /////////////////////////////
 
 function lxExpansionPanelDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl, transclude) {
         ctrl.initWrapperMaxHeight();
 

@@ -7,6 +7,8 @@ import template from './lx-text-field.html';
 /////////////////////////////
 
 function lxTextFieldController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxTextField = this;
 
@@ -30,6 +32,8 @@ function lxTextFieldController() {
 /////////////////////////////
 
 function lxTextFieldDirective() {
+    'ngInject';
+
     function link(scope, el) {
         const input = el.find('input');
         const modelController = input.data('$ngModelController');

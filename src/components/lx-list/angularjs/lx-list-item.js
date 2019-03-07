@@ -5,6 +5,8 @@ import template from './lx-list-item.html';
 /////////////////////////////
 
 function lxListItemController($element) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxListItem = this;
 
@@ -60,6 +62,8 @@ function lxListItemController($element) {
 /////////////////////////////
 
 function lxListItemDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrls, transclude) {
         if (transclude.isSlotFilled('before')) {
             ctrls[0].hasBefore = true;

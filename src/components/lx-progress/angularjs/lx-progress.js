@@ -5,6 +5,8 @@ import template from './lx-progress.html';
 /////////////////////////////
 
 function lxProgressController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this, no-unused-vars
     const lxProgress = this;
 }
@@ -12,6 +14,8 @@ function lxProgressController() {
 /////////////////////////////
 
 function lxProgressDirective() {
+    'ngInject';
+
     return {
         bindToController: true,
         controller: lxProgressController,

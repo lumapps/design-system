@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unassigned-import */
+
 import './lx-depth_service';
 import './lx-enter-keypress';
 import './lx-event-scheduler_service';

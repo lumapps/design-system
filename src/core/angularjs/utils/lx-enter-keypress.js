@@ -3,6 +3,8 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 /////////////////////////////
 
 function lxEnterKeypressDirective() {
+    'ngInject';
+
     function link(scope, el, attrs) {
         const _ENTER_KEY_CODE = 13;
 

@@ -1,4 +1,6 @@
 function DemoCheckboxController() {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -7,6 +9,11 @@ function DemoCheckboxController() {
     //                         //
     /////////////////////////////
 
+    /**
+     * The various type of checkboxes states and status.
+     *
+     * @type {Object}
+     */
     vm.checkboxes = {
         model: {
             checked: true,

@@ -3,6 +3,8 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 /////////////////////////////
 
 function lxTooltipController($element, $timeout, LxDepthService) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxTooltip = this;
 
@@ -155,6 +157,8 @@ function lxTooltipController($element, $timeout, LxDepthService) {
 /////////////////////////////
 
 function lxTooltipDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl) {
         el.on('mouseenter', ctrl.showTooltip);
         el.on('mouseleave', ctrl.hideTooltip);

@@ -3,6 +3,8 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 /////////////////////////////
 
 function lxIconDirective() {
+    'ngInject';
+
     /**
      * Get icon template according to color and size.
      *

@@ -1,4 +1,6 @@
 function DemoProgressTrackerController(LxNotificationService) {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -7,7 +9,20 @@ function DemoProgressTrackerController(LxNotificationService) {
     //                         //
     /////////////////////////////
 
+    /**
+     * The index of the currently active step of the stepper.
+     *
+     * @type {number}
+     */
     vm.activeStepIndex = 0;
+
+    /**
+     * The configuration of the stepper.
+     *
+     * @type {Array<Object>}
+     * @constant
+     * @readonly
+     */
     vm.stepper = [
         {
             content: 'lorem ipsum 1',
@@ -49,10 +64,15 @@ function DemoProgressTrackerController(LxNotificationService) {
     //                         //
     /////////////////////////////
 
+    /**
+     * Check if the stepper is complete, i.e. if all the steps have been completed.
+     *
+     * @return {boolean} If the stepper is complete.
+     */
     function isComplete() {
         let countComplete = 0;
 
-        angular.forEach(vm.stepper, function(step) {
+        angular.forEach(vm.stepper, (step) => {
             if (step.isComplete) {
                 countComplete++;
             }
@@ -65,11 +85,19 @@ function DemoProgressTrackerController(LxNotificationService) {
         return false;
     }
 
+    /**
+     * Go to the next step of the stepper.
+     */
     function next() {
         vm.setCompleteStep(vm.activeStepIndex);
         vm.setActiveStep(vm.activeStepIndex + 1);
     }
 
+    /**
+     * Directly go to the given step of the stepper.
+     *
+     * @param {number} index The index of the step to go to.
+     */
     function setActiveStep(index) {
         if (
             angular.isUndefined(vm.stepper[index]) ||
@@ -78,7 +106,7 @@ function DemoProgressTrackerController(LxNotificationService) {
             return;
         }
 
-        angular.forEach(vm.stepper, function(step) {
+        angular.forEach(vm.stepper, (step) => {
             step.isActive = false;
         });
 
@@ -86,6 +114,11 @@ function DemoProgressTrackerController(LxNotificationService) {
         vm.activeStepIndex = index;
     }
 
+    /**
+     * Flag a step as completed.
+     *
+     * @param {number} index The index of the step to flag as completed.
+     */
     function setCompleteStep(index) {
         if (angular.isUndefined(vm.stepper[index])) {
             return;

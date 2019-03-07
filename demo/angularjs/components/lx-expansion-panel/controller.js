@@ -3,6 +3,8 @@ import { mdiSend } from 'LumX/icons';
 /////////////////////////////
 
 function DemoExpansionPanelController() {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -11,6 +13,13 @@ function DemoExpansionPanelController() {
     //                         //
     /////////////////////////////
 
+    /**
+     * The icons to use in the template.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
     vm.icons = {
         mdiSend,
     };

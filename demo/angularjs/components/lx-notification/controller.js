@@ -1,4 +1,6 @@
 function DemoNotificationController(LxNotificationService) {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -7,6 +9,12 @@ function DemoNotificationController(LxNotificationService) {
     //                         //
     /////////////////////////////
 
+    /**
+     * Display a notification.
+     *
+     * @param {string} type The type of notification to display.
+     *                      Possible values are: 'info', 'success', 'warning' or 'error'.
+     */
     function notify(type) {
         if (type === 'info') {
             LxNotificationService.info('Lorem Ipsum', 'Undo', () => {

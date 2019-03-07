@@ -3,6 +3,8 @@ import { mdiMagnify } from 'LumX/icons';
 /////////////////////////////
 
 function DemoTextFieldController() {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -11,9 +13,22 @@ function DemoTextFieldController() {
     //                         //
     /////////////////////////////
 
+    /**
+     * The icons to use in the template.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
     vm.icons = {
         mdiMagnify,
     };
+
+    /**
+     * The model of the text fields in the demo page.
+     *
+     * @type {Object}
+     */
     vm.textFields = {
         model: {
             name: 'Matthias Manoukian',

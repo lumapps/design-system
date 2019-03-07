@@ -3,6 +3,8 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 /////////////////////////////
 
 function lxSelectFilterDirective() {
+    'ngInject';
+
     function link(scope, el) {
         el.on('click keydown keypress', function onFilterClick(evt) {
             evt.stopPropagation();

@@ -7,6 +7,8 @@ import template from './lx-progress-tracker-step.html';
 /////////////////////////////
 
 function lxProgressTrackerStepController($scope, $element) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxProgressTrackerStep = this;
 
@@ -101,6 +103,8 @@ function lxProgressTrackerStepController($scope, $element) {
 /////////////////////////////
 
 function lxProgressTrackerStepDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrls) {
         ctrls[1].increaseStepCount();
         ctrls[0].setParentController(ctrls[1]);

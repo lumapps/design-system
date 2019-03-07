@@ -13,6 +13,8 @@ function lxDialogController(
     LxEventSchedulerService,
     LxFocusTrapService,
 ) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxDialog = this;
 

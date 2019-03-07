@@ -7,6 +7,8 @@ import template from './lx-data-table.html';
 /////////////////////////////
 
 function lxDataTableController($rootScope, $sce, $scope) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxDataTable = this;
 
@@ -355,6 +357,8 @@ function lxDataTableController($rootScope, $sce, $scope) {
 /////////////////////////////
 
 function lxDataTableDirective() {
+    'ngInject';
+
     return {
         bindToController: true,
         controller: lxDataTableController,

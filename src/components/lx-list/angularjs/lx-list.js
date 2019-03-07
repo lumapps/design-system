@@ -5,6 +5,8 @@ import template from './lx-list.html';
 /////////////////////////////
 
 function lxListController($element, $scope) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this, no-unused-vars
     const lxList = this;
 

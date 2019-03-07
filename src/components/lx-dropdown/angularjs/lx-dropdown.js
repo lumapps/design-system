@@ -14,6 +14,8 @@ function lxDropdownController(
     LxEventSchedulerService,
     LxUtilsService,
 ) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxDropdown = this;
 
@@ -398,6 +400,8 @@ function lxDropdownController(
 /////////////////////////////
 
 function lxDropdownDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl, transclude) {
         ctrl.registerToggle(el.find('.lx-dropdown__toggle'));
         ctrl.registerMenu(el.find('.lx-dropdown__menu'));

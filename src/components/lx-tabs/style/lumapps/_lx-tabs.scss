@@ -75,6 +75,7 @@
 }
 
 // Active state
+/* stylelint-disable-next-line no-descending-specificity */
 .lx-tabs__link:active {
     .lx-tabs--theme-light & {
         @include lx-state(state-active, emphasis-low, dark);

@@ -3,6 +3,8 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 /////////////////////////////
 
 function lxButtonDirective() {
+    'ngInject';
+
     /**
      * Whether the button needs to be converted to a link or not.
      *

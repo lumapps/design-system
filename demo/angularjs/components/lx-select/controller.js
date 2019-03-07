@@ -1,4 +1,6 @@
 function DemoSelectController($http) {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -7,31 +9,36 @@ function DemoSelectController($http) {
     //                         //
     /////////////////////////////
 
+    /**
+     * The configuration for the "Ajax" select demo.
+     *
+     * @type {Object}
+     */
     vm.selectAjax = {
         list: [],
         loading: false,
         selected: ['Bossk', 'Boba Fett'],
-        toModel(data, callback) {
-            if (data) {
-                callback(data.name);
+        toModel(person, cb) {
+            if (person) {
+                cb(person.name);
             } else {
-                callback();
+                cb();
             }
         },
-        toSelection(data, callback) {
-            if (data) {
+        toSelection(personName, cb) {
+            if (personName) {
                 $http
-                    .get(`https://swapi.co/api/people/?search=${escape(data)}`)
+                    .get(`https://swapi.co/api/people/?search=${escape(personName)}`)
                     .then(function toSelectionSuccess(response) {
                         if (response.data && response.data.results) {
-                            callback(response.data.results[0]);
+                            cb(response.data.results[0]);
                         }
                     })
                     .catch(function toSelectionError() {
-                        callback();
+                        cb();
                     });
             } else {
-                callback();
+                cb();
             }
         },
         update(newFilter) {
@@ -40,13 +47,12 @@ function DemoSelectController($http) {
 
                 $http
                     .get(`https://swapi.co/api/people/?search=${escape(newFilter)}`)
-                    .then(function updateSuccess(response) {
+                    .then((response) => {
                         if (response.data && response.data.results) {
                             vm.selectAjax.list = response.data.results;
                         }
-                        vm.selectAjax.loading = false;
                     })
-                    .catch(function updateError() {
+                    .finally(() => {
                         vm.selectAjax.loading = false;
                     });
             } else {
@@ -55,53 +61,73 @@ function DemoSelectController($http) {
         },
     };
 
+    /**
+     * The models of some select in the demo page.
+     *
+     * @type {Object}
+     */
+    vm.selectModel = {
+        selectedPeople: [vm.selectPeople[2], vm.selectPeople[4]],
+        selectedPerson: undefined,
+    };
+
+    /**
+     * The list of person to display in the "People" select.
+     *
+     * @type {Array<Object>}
+     * @constant
+     * @readonly
+     */
     vm.selectPeople = [
         {
+            // eslint-disable-next-line no-magic-numbers
             age: 10,
             email: 'adam@email.com',
             name: 'Adam',
         },
         {
+            // eslint-disable-next-line no-magic-numbers
             age: 12,
             email: 'amalie@email.com',
             name: 'Amalie',
         },
         {
+            // eslint-disable-next-line no-magic-numbers
             age: 30,
             email: 'wladimir@email.com',
             name: 'Wladimir',
         },
         {
+            // eslint-disable-next-line no-magic-numbers
             age: 31,
             email: 'samantha@email.com',
             name: 'Samantha',
         },
         {
+            // eslint-disable-next-line no-magic-numbers
             age: 16,
             email: 'estefanía@email.com',
             name: 'Estefanía',
         },
         {
+            // eslint-disable-next-line no-magic-numbers
             age: 54,
             email: 'natasha@email.com',
             name: 'Natasha',
         },
         {
+            // eslint-disable-next-line no-magic-numbers
             age: 43,
             email: 'nicole@email.com',
             name: 'Nicole',
         },
         {
+            // eslint-disable-next-line no-magic-numbers
             age: 21,
             email: 'adrian@email.com',
             name: 'Adrian',
         },
     ];
-
-    vm.selectModel = {
-        selectedPeople: [vm.selectPeople[2], vm.selectPeople[4]],
-        selectedPerson: undefined,
-    };
 
     /////////////////////////////
     //                         //
@@ -109,7 +135,11 @@ function DemoSelectController($http) {
     //                         //
     /////////////////////////////
 
+    /**
+     * The callback to execute when a value has been selected in the "Ajax" select.
+     */
     function selectCallback() {
+        // eslint-disable-next-line no-console
         console.log('New value: ', vm.selectAjax.selected);
     }
 
@@ -119,8 +149,11 @@ function DemoSelectController($http) {
 
     /////////////////////////////
 
+    /**
+     * Initialize the controller.
+     */
     function init() {
-        $http.get('https://swapi.co/api/people/?search=bo').then(function updateSuccess(response) {
+        $http.get('https://swapi.co/api/people/?search=bo').then((response) => {
             if (response.data && response.data.results) {
                 vm.selectAjax.list = response.data.results;
             }

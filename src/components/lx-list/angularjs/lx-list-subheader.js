@@ -3,6 +3,8 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 /////////////////////////////
 
 function lxListSubheaderDirective() {
+    'ngInject';
+
     return {
         replace: true,
         restrict: 'E',

@@ -3,6 +3,8 @@ import { mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
 /////////////////////////////
 
 function DemoButtonController() {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -11,6 +13,13 @@ function DemoButtonController() {
     //                         //
     /////////////////////////////
 
+    /**
+     * The icons to use in the template.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
     vm.icons = {
         mdiMenuDown,
         mdiPencil,

@@ -7,6 +7,8 @@ import template from './lx-chip.html';
 /////////////////////////////
 
 function lxChipController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxChip = this;
 
@@ -105,6 +107,8 @@ function lxChipController() {
 /////////////////////////////
 
 function lxChipDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl, transclude) {
         if (transclude.isSlotFilled('after')) {
             ctrl.hasAfter = true;

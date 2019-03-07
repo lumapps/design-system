@@ -3,6 +3,8 @@ import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant, mdiMenu
 /////////////////////////////
 
 function DemoChipController(LxNotificationService) {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -11,6 +13,13 @@ function DemoChipController(LxNotificationService) {
     //                         //
     /////////////////////////////
 
+    /**
+     * The icons to use in the template.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
     vm.icons = {
         mdiCheck,
         mdiClose,
@@ -19,6 +28,12 @@ function DemoChipController(LxNotificationService) {
         mdiFilterVariant,
         mdiMenuDown,
     };
+
+    /**
+     * Indicates if the chip is active or not.
+     *
+     * @type {boolean}
+     */
     vm.isSelected = false;
 
     /////////////////////////////
@@ -28,7 +43,7 @@ function DemoChipController(LxNotificationService) {
     /////////////////////////////
 
     /**
-     * Clickable chip callback.
+     * When the chip has been clicked, display a notification.
      */
     function clickCallback() {
         LxNotificationService.success('Callback');

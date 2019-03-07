@@ -3,6 +3,8 @@ import { mdiEmail, mdiSend } from 'LumX/icons';
 /////////////////////////////
 
 function DemoDropdownController(LxDropdownService) {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -11,9 +13,24 @@ function DemoDropdownController(LxDropdownService) {
     //                         //
     /////////////////////////////
 
+    /**
+     * The id of the dropdown.
+     *
+     * @type {string}
+     * @constant
+     * @readonly
+     */
     vm.dropdownId = 'test-dropdown-menu';
     vm.dropdownTarget = 'test-dropdown-target';
     vm.dropdownSource = 'test-dropdown-source';
+
+    /**
+     * The icons to use in the template.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
     vm.icons = {
         mdiEmail,
         mdiSend,
@@ -25,12 +42,22 @@ function DemoDropdownController(LxDropdownService) {
     //                         //
     /////////////////////////////
 
+    /**
+     * Close the dropdown.
+     *
+     * @param {Event} evt The event that triggered this function.
+     */
     function closeDropdown(evt) {
         evt.stopPropagation();
 
         LxDropdownService.close(vm.dropdownId);
     }
 
+    /**
+     * Open the dropdown.
+     *
+     * @param {Event} evt The event that triggered this function.
+     */
     function openDropdown(evt) {
         evt.stopPropagation();
 

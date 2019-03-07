@@ -5,6 +5,8 @@ import template from './lx-progress-tracker.html';
 /////////////////////////////
 
 function lxProgressTrackerController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxProgressTracker = this;
 
@@ -59,6 +61,8 @@ function lxProgressTrackerController() {
 /////////////////////////////
 
 function lxProgressTrackerDirective() {
+    'ngInject';
+
     return {
         bindToController: true,
         controller: lxProgressTrackerController,

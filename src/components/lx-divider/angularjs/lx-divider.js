@@ -5,6 +5,8 @@ import template from './lx-divider.html';
 /////////////////////////////
 
 function lxDividerDirective() {
+    'ngInject';
+
     function link(scope, el, attrs) {
         if (!attrs.lxTheme) {
             el.addClass('lx-divider--theme-light');

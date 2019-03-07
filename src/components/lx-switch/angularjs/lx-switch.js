@@ -5,6 +5,8 @@ import template from './lx-switch.html';
 /////////////////////////////
 
 function lxSwitchController(LxUtilsService) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
     const lxSwitch = this;
 
@@ -104,6 +106,8 @@ function lxSwitchController(LxUtilsService) {
 /////////////////////////////
 
 function lxSwitchDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrls, transclude) {
         if (ctrls[1]) {
             ctrls[0].setModelController(ctrls[1]);

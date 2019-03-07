@@ -3,6 +3,8 @@ import { mdiChevronLeft, mdiDotsVertical, mdiMagnify } from 'LumX/icons';
 /////////////////////////////
 
 function DemoToolbarController() {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -11,6 +13,13 @@ function DemoToolbarController() {
     //                         //
     /////////////////////////////
 
+    /**
+     * The icons to use in the template.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
     vm.icons = {
         mdiChevronLeft,
         mdiDotsVertical,

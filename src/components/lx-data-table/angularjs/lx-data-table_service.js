@@ -3,6 +3,8 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 /////////////////////////////
 
 function LxDataTableService($rootScope) {
+    'ngInject';
+
     const service = this;
 
     /////////////////////////////

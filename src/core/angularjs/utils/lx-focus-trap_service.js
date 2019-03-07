@@ -3,6 +3,8 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 /////////////////////////////
 
 function LxFocusTrapService() {
+    'ngInject';
+
     const service = this;
 
     /////////////////////////////

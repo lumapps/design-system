@@ -1,4 +1,6 @@
 function DemoRadioButtonController() {
+    'ngInject';
+
     const vm = this;
 
     /////////////////////////////
@@ -7,6 +9,13 @@ function DemoRadioButtonController() {
     //                         //
     /////////////////////////////
 
+    /**
+     * Contains all the available radio buttons to display on the demo page.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
     vm.radioButtons = {
         basic: {
             test1: 'ipsum',

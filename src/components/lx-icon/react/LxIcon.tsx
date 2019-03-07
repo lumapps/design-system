@@ -1,11 +1,12 @@
 import React from 'react';
+
 import classNames from 'classnames';
 
 import '../style/lx-icon.scss';
 
 import { handleBasicClasses } from 'core/utils';
 
-interface LxIconProps {
+interface ILxIconProps {
     /** The icon path to set in the html svg `d` property */
     icon: string;
     /** Basic React `className` property. */
@@ -18,8 +19,10 @@ interface LxIconProps {
 
 /**
  * Displays an html svg tag.
+ *
+ * @return {React.FC<ILxIconProps>} The icon component
  */
-export const LxIcon: React.FC<LxIconProps> = ({ icon, className, color, size }) => (
+export const LxIcon: React.FC<ILxIconProps> = ({ icon, className, color, size }) => (
     <i className={classNames(className, handleBasicClasses({ color, size, prefix: 'lx-icon' }))}>
         <svg
             aria-hidden="true"
