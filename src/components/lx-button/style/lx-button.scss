@@ -112,30 +112,26 @@
     @if $key != dark and $key != light {
         .lx-button--color-#{$key} {
             &.lx-button--emphasis-high.lx-button--theme-light {
-                @include lx-button-color(emphasis-high, dark, $key);
+                @include lx-button-color(emphasis-high, $key, dark);
             }
 
             &.lx-button--emphasis-high.lx-button--theme-dark {
-                @include lx-button-color(emphasis-high, light, $key);
+                @include lx-button-color(emphasis-high, $key, light);
             }
         }
     }
 }
 
-.lx-button--emphasis-medium.lx-button--theme-light {
-    @include lx-button-color(emphasis-medium, dark);
-}
+@each $key, $color in $lx-theme-color-palette {
+    .lx-button--color-#{$key} {
+        &.lx-button--emphasis-medium {
+            @include lx-button-color(emphasis-medium, $key);
+        }
 
-.lx-button--emphasis-medium.lx-button--theme-dark {
-    @include lx-button-color(emphasis-medium, light);
-}
-
-.lx-button--emphasis-low.lx-button--theme-light {
-    @include lx-button-color(emphasis-low, dark);
-}
-
-.lx-button--emphasis-low.lx-button--theme-dark {
-    @include lx-button-color(emphasis-low, light);
+        &.lx-button--emphasis-low {
+            @include lx-button-color(emphasis-low, $key);
+        }
+    }
 }
 
 /* Button group
@@ -143,6 +139,7 @@
 
 .lx-button-group {
     display: inline-flex;
+    vertical-align: top;
 
     .lx-button {
         margin-right: 1px;

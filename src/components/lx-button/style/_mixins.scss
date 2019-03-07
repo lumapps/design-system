@@ -29,23 +29,23 @@
     }
 }
 
-@mixin lx-button-color($emphasis, $theme, $color: null) {
-    @include lx-state(state-default, $emphasis, $theme, $color);
+@mixin lx-button-color($emphasis, $color, $theme: null) {
+    @include lx-state(state-default, $emphasis, $color, $theme);
 
     &:hover {
-        @include lx-state(state-hover, $emphasis, $theme, $color);
+        @include lx-state(state-hover, $emphasis, $color, $theme);
     }
 
     &:active {
-        @include lx-state(state-active, $emphasis, $theme, $color);
+        @include lx-state(state-active, $emphasis, $color, $theme);
     }
 
     &[data-focus-visible-added] {
-        @include lx-state(state-focus, $emphasis, $theme, $color);
+        @include lx-state(state-focus, $emphasis, $color, $theme);
     }
 
     &:disabled {
-        @include lx-state(state-disabled, $emphasis, $theme, $color);
+        @include lx-state(state-disabled, $emphasis, $color, $theme);
     }
 }
 

@@ -4,7 +4,7 @@ import '../style/lx-button.scss';
 
 /////////////////////////////
 
-function lxButtonDirective(LxThemeConstant) {
+function lxButtonDirective() {
     /**
      * Whether the button needs to be converted to a link or not.
      *
@@ -29,16 +29,21 @@ function lxButtonDirective(LxThemeConstant) {
      */
     function getTemplate(el, attrs) {
         const defaultProps = {
-            color: 'primary',
             emphasis: 'high',
             size: 'm',
             theme: 'light',
             variant: 'button',
         };
 
+        if (!attrs.lxEmphasis || attrs.lxEmphasis === 'high') {
+            defaultProps.color = 'primary';
+        } else {
+            defaultProps.color = 'dark';
+        }
+
         let buttonClass = 'lx-button';
 
-        if (!attrs.lxColor && (attrs.lxEmphasis === 'high' || !attrs.lxEmphasis)) {
+        if (!attrs.lxColor) {
             buttonClass += ` lx-button--color-${defaultProps.color}`;
         }
 
@@ -50,7 +55,7 @@ function lxButtonDirective(LxThemeConstant) {
             buttonClass += ` lx-button--size-${defaultProps.size}`;
         }
 
-        if (!attrs.lxTheme) {
+        if (!attrs.lxTheme && (!attrs.lxEmphasis || attrs.lxEmphasis === 'high')) {
             buttonClass += ` lx-button--theme-${defaultProps.theme}`;
         }
 
@@ -87,13 +92,7 @@ function lxButtonDirective(LxThemeConstant) {
         attrs.$observe('lxColor', (color) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)lx-button--color-\S+/g) || []).join(' ');
-            });
-
-            if (LxThemeConstant.includes(color)) {
-                el.addClass(`lx-button--color-${color}`);
-            } else {
-                el.addClass('lx-button--color-custom');
-            }
+            }).addClass(`lx-button--color-${color}`);
         });
 
         attrs.$observe('lxEmphasis', (emphasis) => {
@@ -109,9 +108,11 @@ function lxButtonDirective(LxThemeConstant) {
         });
 
         attrs.$observe('lxTheme', (theme) => {
-            el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-button--theme-\S+/g) || []).join(' ');
-            }).addClass(`lx-button--theme-${theme}`);
+            if (!attrs.lxEmphasis || attrs.lxEmphasis === 'high') {
+                el.removeClass((index, className) => {
+                    return (className.match(/(^|\s)lx-button--theme-\S+/g) || []).join(' ');
+                }).addClass(`lx-button--theme-${theme}`);
+            }
         });
 
         attrs.$observe('lxVariant', (variant) => {
