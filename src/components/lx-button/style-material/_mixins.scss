@@ -1,0 +1,34 @@
+@import './variables';
+
+@mixin lx-button-material-base() {
+    text-transform: uppercase;
+}
+
+@mixin lx-button-material-variant-button() {
+    border-radius: $lx-button-material-radius !important;
+}
+
+@mixin lx-button-material-color($emphasis, $theme, $color: null) {
+    @include lx-state-material(state-default, $emphasis, $theme, $color);
+
+    &:hover {
+        @include lx-state-material(state-hover, $emphasis, $theme, $color);
+    }
+
+    &:active {
+        @include lx-state-material(state-active, $emphasis, $theme, $color);
+    }
+
+    &[data-focus-visible-added] {
+        @include lx-state-material(state-focus, $emphasis, $theme, $color);
+    }
+
+    &:disabled {
+        @include lx-state-material(state-disabled, $emphasis, $theme, $color);
+    }
+}
+
+@mixin lx-button-material-text($size) {
+    font-size: map-get($lx-button-material-text-sizes, $size);
+    font-weight: 500;
+}

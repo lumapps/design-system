@@ -1,0 +1,93 @@
+$lx-theme-material-dark: (
+    N: rgba(0, 0, 0, 0.87),
+);
+
+$lx-theme-material-dark: map-merge(
+    $lx-theme-material-dark,
+    (
+        L1: rgba(0, 0, 0, 0.54),
+        L2: rgba(0, 0, 0, 0.38),
+        L3: rgba(0, 0, 0, 0.12),
+    )
+);
+
+$lx-theme-material-light: (
+    N: #fff,
+);
+
+$lx-theme-material-light: map-merge(
+    $lx-theme-material-light,
+    (
+        L1: rgba(255, 255, 255, 0.7),
+        L2: rgba(255, 255, 255, 0.3),
+        L3: rgba(255, 255, 255, 0.12),
+    )
+);
+
+$lx-theme-material-blue: (
+    D2: #1976d2,
+    D1: #1e88e5,
+    N: #2196f3,
+);
+
+$lx-theme-material-blue: map-merge(
+    $lx-theme-material-blue,
+    (
+        L1: #42a5f5,
+        L2: #64b5f6,
+        L3: #90caf9,
+        L4: #bbdefb,
+        L5: #e3f2fd,
+    )
+);
+
+$lx-theme-material-yellow: (
+    D2: #ffa000,
+    D1: #ffb300,
+    N: #ffc107,
+);
+
+$lx-theme-material-yellow: map-merge(
+    $lx-theme-material-yellow,
+    (
+        L1: #ffca28,
+        L2: #ffd54f,
+        L3: #ffe082,
+        L4: #ffecb3,
+        L5: #fff8e1,
+    )
+);
+
+$lx-theme-material-red: (
+    D2: #d32f2f,
+    D1: #e53935,
+    N: #f44336,
+);
+
+$lx-theme-material-red: map-merge(
+    $lx-theme-material-red,
+    (
+        L1: #ef5350,
+        L2: #e57373,
+        L3: #ef9a9a,
+        L4: #ffcdd2,
+        L5: #ffebee,
+    )
+);
+
+$lx-theme-material-green: (
+    D2: #388e3c,
+    D1: #43a047,
+    N: #4caf50,
+);
+
+$lx-theme-material-green: map-merge(
+    $lx-theme-material-green,
+    (
+        L1: #66bb6a,
+        L2: #81c784,
+        L3: #a5d6a7,
+        L4: #c8e6c9,
+        L5: #e8f5e9,
+    )
+);
