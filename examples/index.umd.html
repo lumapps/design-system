@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lumx-example-app">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Design System - UMD Example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../angularjs.lumx.css" />
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body class="p++">
+        <div class="center lx-typography-title">This is an example of using LumX in UMD</div>
+
+        <p class="mt+ lx-typography-body">
+            All you have to do is import <span class="code">angularjs.lumx.css</span> in your page's
+            <span class="code">head</span> and <span class="code">angularjs.lumx.js</span> at the end of your page's
+            <span class="code">body</span> after AngularJS library.
+        </p>
+        <p class="mt lx-typography-body">
+            You can then initialize an application using any LumX available Dependency Injection and use any LumX
+            directive in your templates. You can also use any CSS classes of LumX in your templates.
+        </p>
+
+        <p class="mt+++ lx-typography-body">Here is a basic example</p>
+
+        <div class="mv+++">
+            <pre>
+                &lt;!DOCTYPE html&gt;
+                &lt;html ng-app="lumx-example-app"&gt;
+                    &lt;head&gt;
+                        &lt;title&gt;Basic example&lt;/title&gt;
+                        &lt;link rel="stylesheet" href="node_modules/@lumx/dist/angularjs.lumx.css" /&gt;
+                    &lt;/head&gt;
+
+                    &lt;body class="p++"&gt;
+                        &lt;div class="lx-typography-title"&gt;This is a basic example&lt;/div&gt;
+
+                        &lt;div class="mt++"&gt;&lt;lx-button&gt;Nice!&lt;/lx-button&gt;&lt;/div&gt;
+
+                        &lt;script
+                            src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                            type="text/javascript"
+                        &gt;&lt;/script&gt;
+                        &lt;script
+                            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.7/angular.min.js"
+                            type="text/javascript"
+                        &gt;&lt;/script&gt;
+                        &lt;script src="node_modules/@lumx/dist/angularjs.lumx.js" type="text/javascript"&gt;&lt;/script&gt;
+
+                        &lt;script type="text/javascript"&gt;
+                            angular
+                                .module('lumx-example-app', ['@lumx/angularjs'])
+                                .run(function(LxNotificationService) {
+                                    LxNotificationService.success('Basic example application successfully started!');
+                                });
+                        &lt;/script&gt;
+                    &lt;/body&gt;
+                &lt;/html&gt;
+            </pre>
+        </div>
+
+        <div class="center mt++">
+            <lx-button>OK, got it!</lx-button>
+        </div>
+
+        <!-- Libs -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.7/angular.min.js"
+            type="text/javascript"
+        ></script>
+        <script src="../angularjs.lumx.js" type="text/javascript"></script>
+
+        <!-- App -->
+        <script src="app.js" type="text/javascript"></script>
+    </body>
+</html>

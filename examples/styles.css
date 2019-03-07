@@ -1,0 +1,10 @@
+.center {
+    text-align: center;
+}
+
+.code {
+    display: inline-block;
+    padding: 2px 4px;
+    background-color: lightgrey;
+    font-family: monospace;
+}
