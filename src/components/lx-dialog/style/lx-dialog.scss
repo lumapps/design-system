@@ -12,7 +12,7 @@
     left: 0;
     display: none;
     animation: lx-dialog-filter-show $lx-dialog-transition-duration;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: lx-theme-color-variant(dark, L1);
     opacity: 1;
     transition: opacity $lx-dialog-transition-duration;
 
