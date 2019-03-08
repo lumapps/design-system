@@ -16,6 +16,7 @@
     overflow: hidden;
     align-items: center;
     animation: lx-notification-show $lx-notification-transition-duration;
+    background-color: lx-theme-color-variant(light, N);
     border-radius: 4px;
     transition: opacity $lx-notification-transition-duration;
 
