@@ -4,6 +4,6 @@
     @if $elevation == 0 {
         box-shadow: none;
     } @else {
-        box-shadow: map-get($lx-elevation-shadows, $elevation) $lx-elevation-shadow-color;
+        box-shadow: map-get($lx-elevation-shadows, $elevation) lx-theme-color-variant(dark, L3);
     }
 }
