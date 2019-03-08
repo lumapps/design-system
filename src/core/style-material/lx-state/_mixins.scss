@@ -2,7 +2,7 @@
     @if $state == state-default {
         @if $theme == dark {
             background-color: lx-theme-material-color-variant($color, N);
-            color: lx-theme-material-best-color(lx-theme-material-color-variant($color, N));
+            color: lx-theme-material-color-variant(light, N);
         } @else if $theme == light {
             background-color: lx-theme-material-color-variant($theme, N);
             color: lx-theme-material-color-variant($color, N);
@@ -27,17 +27,14 @@
         }
     } @else if $state == state-disabled {
         // prettier-ignore
-        color:
-            lx-theme-material-best-color(
-                lx-theme-material-color-variant($color, L3),
-                (lx-theme-material-color-variant(light, N), lx-theme-material-color-variant(dark, L3))
-            );
         pointer-events: none;
 
         @if $theme == dark {
             background-color: lx-theme-material-color-variant($color, L3);
+            color: lx-theme-material-color-variant(light, N);
         } @else if $theme == light {
             background-color: lx-theme-material-color-variant($theme, L3);
+            color: lx-theme-material-color-variant($color, N);
         }
     }
 }

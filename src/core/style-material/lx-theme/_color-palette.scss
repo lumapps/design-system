@@ -6,10 +6,10 @@ $lx-theme-material-dark: map-merge(
     $lx-theme-material-dark,
     (
         L1: rgba(map-get($lx-theme-material-dark, N), 0.8),
-        L2: rgba(map-get($lx-theme-material-dark, N), 0.6),
-        L3: rgba(map-get($lx-theme-material-dark, N), 0.4),
+        L2: rgba(map-get($lx-theme-material-dark, N), 0.54),
+        L3: rgba(map-get($lx-theme-material-dark, N), 0.38),
         L4: rgba(map-get($lx-theme-material-dark, N), 0.2),
-        L5: rgba(map-get($lx-theme-material-dark, N), 0.1),
+        L5: rgba(map-get($lx-theme-material-dark, N), 0.12),
         L6: rgba(map-get($lx-theme-material-dark, N), 0.05),
     )
 );
