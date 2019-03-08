@@ -297,19 +297,6 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
     }
 
     /**
-     * Handle chip after click regarding the chip state.
-     *
-     * @return {Function} Whether to open the dropdown or clear the model.
-     */
-    function handleChipClick() {
-        if (lxSelect.isModelEmpty()) {
-            return lxSelect.openDropdown();
-        }
-
-        return lxSelect.clearModel();
-    }
-
-    /**
      * Check if the model is empty.
      *
      * @return {boolean} Whether the model is empty or not.
@@ -424,7 +411,6 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
     lxSelect.displayChoice = displayChoice;
     lxSelect.displaySelected = displaySelected;
     lxSelect.enableKeyEvents = enableKeyEvents;
-    lxSelect.handleChipClick = handleChipClick;
     lxSelect.isModelEmpty = isModelEmpty;
     lxSelect.isSelected = isSelected;
     lxSelect.openDropdown = openDropdown;

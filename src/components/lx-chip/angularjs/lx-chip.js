@@ -1,5 +1,7 @@
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
+import { mdiMenuDown } from 'LumX/icons';
+
 import '../style/lx-chip.scss';
 import template from './lx-chip.html';
 
@@ -35,6 +37,15 @@ function lxChipController() {
      * @type {boolean}
      */
     lxChip.hasLabel = false;
+
+    /**
+     * The chip icons.
+     *
+     * @type {Object}
+     */
+    lxChip.icons = {
+        mdiMenuDown,
+    };
 
     /////////////////////////////
     //                         //
@@ -117,8 +128,9 @@ function lxChipDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            isActive: '=?lxIsActive',
+            hasDropdownIndicator: '=?lxHasDropdownIndicator',
             isDisabled: '=?ngDisabled',
+            isSelected: '=?lxIsSelected',
             onAfterClick: '&?lxOnAfterClick',
             onBeforeClick: '&?lxOnBeforeClick',
             onClick: '&?lxOnClick',

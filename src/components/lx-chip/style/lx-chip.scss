@@ -68,7 +68,12 @@
     cursor: pointer;
 }
 
-.lx-chip--is-idle {
+.lx-chip .lx-chip__before--is-clickable:hover,
+.lx-chip .lx-chip__after--is-clickable:hover {
+    opacity: 0.8;
+}
+
+.lx-chip--is-unselected {
     &.lx-chip--theme-light {
         @include lx-state(state-default, emphasis-medium, dark);
 
@@ -82,15 +87,6 @@
 
         &.lx-chip--is-clickable[data-focus-visible-added] {
             @include lx-state(state-focus, emphasis-medium, dark);
-        }
-
-        &.lx-chip--is-clickable.lx-chip--is-disabled {
-            @include lx-state(state-disabled, emphasis-medium, dark);
-        }
-
-        .lx-chip__before--is-clickable:hover,
-        .lx-chip__after--is-clickable:hover {
-            color: lx-theme-color-variant(dark, L2);
         }
     }
 
@@ -108,66 +104,49 @@
         &.lx-chip--is-clickable[data-focus-visible-added] {
             @include lx-state(state-focus, emphasis-medium, light);
         }
-
-        &.lx-chip--is-clickable.lx-chip--is-disabled {
-            @include lx-state(state-disabled, emphasis-medium, light);
-        }
-
-        .lx-chip__before--is-clickable:hover,
-        .lx-chip__after--is-clickable:hover {
-            color: lx-theme-color-variant(light, L2);
-        }
     }
 }
 
-.lx-chip--is-active {
+.lx-chip--is-selected {
     &.lx-chip--theme-light {
-        @include lx-state(state-default, emphasis-high, primary, dark);
+        @include lx-state-as-selected(state-default, dark);
 
         &.lx-chip--is-clickable:hover {
-            @include lx-state(state-hover, emphasis-high, primary, dark);
+            @include lx-state-as-selected(state-hover, dark);
         }
 
         &.lx-chip--is-clickable:active {
-            @include lx-state(state-active, emphasis-high, primary, dark);
+            @include lx-state-as-selected(state-active, dark);
         }
 
         &.lx-chip--is-clickable[data-focus-visible-added] {
-            @include lx-state(state-focus, emphasis-high, primary, dark);
-        }
-
-        &.lx-chip--is-clickable.lx-chip--is-disabled {
-            @include lx-state(state-disabled, emphasis-high, primary, dark);
-        }
-
-        .lx-chip__before--is-clickable:hover,
-        .lx-chip__after--is-clickable:hover {
-            color: lx-theme-color-variant(light, L2);
+            @include lx-state-as-selected(state-focus, dark);
         }
     }
 
     &.lx-chip--theme-dark {
-        @include lx-state(state-default, emphasis-high, primary, light);
+        @include lx-state-as-selected(state-default, light);
 
         &.lx-chip--is-clickable:hover {
-            @include lx-state(state-hover, emphasis-high, primary, light);
+            @include lx-state-as-selected(state-hover, light);
         }
 
         &.lx-chip--is-clickable:active {
-            @include lx-state(state-active, emphasis-high, primary, light);
+            @include lx-state-as-selected(state-active, light);
         }
 
         &.lx-chip--is-clickable[data-focus-visible-added] {
-            @include lx-state(state-focus, emphasis-high, primary, light);
+            @include lx-state-as-selected(state-focus, light);
         }
+    }
+}
 
-        &.lx-chip--is-clickable.lx-chip--is-disabled {
-            @include lx-state(state-disabled, emphasis-high, primary, light);
-        }
+.lx-chip--is-disabled {
+    &.lx-chip--theme-light {
+        @include lx-state(state-disabled, emphasis-medium, dark);
+    }
 
-        .lx-chip__before--is-clickable:hover,
-        .lx-chip__after--is-clickable:hover {
-            color: lx-theme-color-variant(primary, L2);
-        }
+    &.lx-chip--theme-dark {
+        @include lx-state(state-disabled, emphasis-medium, light);
     }
 }

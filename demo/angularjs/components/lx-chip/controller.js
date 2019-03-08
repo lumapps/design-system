@@ -1,4 +1,4 @@
-import { mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant, mdiMenuDown } from 'LumX/icons';
+import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant, mdiMenuDown } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -12,13 +12,14 @@ function DemoChipController(LxNotificationService) {
     /////////////////////////////
 
     vm.icons = {
+        mdiCheck,
         mdiClose,
         mdiCloseCircle,
         mdiEmail,
         mdiFilterVariant,
         mdiMenuDown,
     };
-    vm.isActive = false;
+    vm.isSelected = false;
 
     /////////////////////////////
     //                         //
@@ -26,36 +27,48 @@ function DemoChipController(LxNotificationService) {
     //                         //
     /////////////////////////////
 
-    function activate() {
-        if (vm.isActive) {
-            return;
-        }
-
-        vm.isActive = true;
-    }
-
+    /**
+     * Clickable chip callback.
+     */
     function clickCallback() {
         LxNotificationService.success('Callback');
     }
 
-    function deactivate() {
-        if (!vm.isActive) {
+    /**
+     * Toggle chip selected state.
+     */
+    function toggleSelected() {
+        vm.isSelected = !vm.isSelected;
+    }
+
+    /**
+     * Select chip.
+     */
+    function select() {
+        if (vm.isSelected) {
             return;
         }
 
-        vm.isActive = false;
+        vm.isSelected = true;
     }
 
-    function toggleCallback() {
-        vm.isActive = !vm.isActive;
+    /**
+     * Unselect chip.
+     */
+    function unselect() {
+        if (!vm.isSelected) {
+            return;
+        }
+
+        vm.isSelected = false;
     }
 
     /////////////////////////////
 
-    vm.activate = activate;
     vm.clickCallback = clickCallback;
-    vm.deactivate = deactivate;
-    vm.toggleCallback = toggleCallback;
+    vm.toggleSelected = toggleSelected;
+    vm.select = select;
+    vm.unselect = unselect;
 }
 
 /////////////////////////////

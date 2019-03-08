@@ -86,8 +86,9 @@
 
     <lx-chip
         id="{{ lxSelect.targetUuid }}"
+        lx-has-dropdown-indicator="lxSelect.isModelEmpty()"
         lx-on-click="lxSelect.openDropdown()"
-        lx-on-after-click="lxSelect.handleChipClick()"
+        lx-on-after-click="lxSelect.clearModel()"
         lx-is-active="!lxSelect.isModelEmpty()"
         lx-theme="{{ lxSelect.theme }}"
         ng-focus="lxSelect.enableKeyEvents()"

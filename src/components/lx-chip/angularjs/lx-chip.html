@@ -1,9 +1,9 @@
 <a
     class="lx-chip"
     ng-class="{ 'lx-chip--has-before': lxChip.hasBefore,
-                'lx-chip--has-after': lxChip.hasAfter,
-                'lx-chip--is-idle': !lxChip.isActive,
-                'lx-chip--is-active': lxChip.isActive,
+                'lx-chip--has-after': lxChip.hasAfter || lxChip.hasDropdownIndicator,
+                'lx-chip--is-unselected': !lxChip.isSelected,
+                'lx-chip--is-selected': lxChip.isSelected,
                 'lx-chip--is-clickable': lxChip.onClick,
                 'lx-chip--is-disabled': lxChip.isDisabled,
                 'lx-chip--size-m': !lxChip.size || lxChip.size === 'm',
@@ -29,6 +29,10 @@
         ng-class="{ 'lx-chip__after--is-clickable': lxChip.onAfterClick }"
         ng-click="lxChip.handleOnAfterClick($event)"
         ng-transclude="after"
-        ng-if="::lxChip.hasAfter"
+        ng-if="lxChip.hasAfter && !lxChip.hasDropdownIndicator"
     ></div>
+
+    <div class="lx-chip__after" ng-if="lxChip.hasDropdownIndicator">
+        <lx-icon lx-path="{{ lxChip.icons.mdiMenuDown }}" lx-size="xs"></lx-icon>
+    </div>
 </a>
