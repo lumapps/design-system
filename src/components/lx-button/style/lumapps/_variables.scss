@@ -1,0 +1,11 @@
+$lx-button-radius: 4px !default;
+
+$lx-button-text-sizes: (
+    m: 14px,
+    s: 12px,
+) !default;
+
+$lx-button-icon-sizes: (
+    m: map-get($lx-sizes, xs),
+    s: map-get($lx-sizes, xxs),
+) !default;

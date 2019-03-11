@@ -2,7 +2,6 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiMenuDown } from 'LumX/icons';
 
-import '../style/lx-chip.scss';
 import template from './lx-chip.html';
 
 /////////////////////////////

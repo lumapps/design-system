@@ -2,7 +2,6 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiArrowDown, mdiArrowUp } from 'LumX/icons';
 
-import '../style/lx-data-table.scss';
 import template from './lx-data-table.html';
 
 /////////////////////////////

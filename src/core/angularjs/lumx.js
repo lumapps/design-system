@@ -1,7 +1,5 @@
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import '../style/lumx.scss';
-
 angular.module(`${MODULE_NAME}.utils.depth`, []);
 angular.module(`${MODULE_NAME}.utils.enter-keypress`, []);
 angular.module(`${MODULE_NAME}.utils.event-scheduler`, []);

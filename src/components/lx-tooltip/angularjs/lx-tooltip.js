@@ -1,7 +1,5 @@
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import '../style/lx-tooltip.scss';
-
 /////////////////////////////
 
 function lxTooltipController($element, $timeout, LxDepthService) {

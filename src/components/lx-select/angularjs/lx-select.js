@@ -2,7 +2,6 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from 'LumX/icons';
 
-import '../style/lx-select.scss';
 import template from './lx-select.html';
 
 /////////////////////////////

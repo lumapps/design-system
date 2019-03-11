@@ -2,7 +2,6 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiCheck } from 'LumX/icons';
 
-import '../style/lx-checkbox.scss';
 import template from './lx-checkbox.html';
 
 /////////////////////////////

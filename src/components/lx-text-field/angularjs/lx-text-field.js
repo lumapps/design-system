@@ -2,7 +2,6 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlertCircle, mdiCheckCircle } from 'LumX/icons';
 
-import '../style/lx-text-field.scss';
 import template from './lx-text-field.html';
 
 /////////////////////////////

@@ -8,7 +8,8 @@ const { COMPONENTS_PATH, CORE_PATH, NODE_MODULES_PATH, ICONS_PATH } = require('.
 
 const webpackBaseConfig = {
     entry: {
-        'style-material': `${CORE_PATH}/style-material/index.js`,
+        'style-lumapps': `${CORE_PATH}/style/lumapps/index.js`,
+        'style-material': `${CORE_PATH}/style/material/index.js`,
     },
     module: {
         rules: [
