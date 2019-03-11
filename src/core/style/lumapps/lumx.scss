@@ -3,7 +3,6 @@
    ========================================================================== */
 
 @import 'mq';
-@import './lx-typography/lx-typography';
 @import './lx-base/lx-base';
 @import './lx-elevation/lx-elevation';
 @import './lx-grid/lx-grid';
@@ -12,6 +11,7 @@
 @import './lx-spacing/lx-spacing';
 @import './lx-state/lx-state';
 @import './lx-theme/lx-theme';
+@import './lx-typography/lx-typography';
 @import '../../../components/lx-button/style/lumapps/lx-button';
 @import '../../../components/lx-checkbox/style/lumapps/lx-checkbox';
 @import '../../../components/lx-chip/style/lumapps/lx-chip';

@@ -12,6 +12,6 @@ $lx-theme-color-palette: (
     yellow: $lx-theme-yellow,
     red: $lx-theme-red,
     green: $lx-theme-green,
-);
+) !default;
 
 $lx-theme-color-variants: (N, L1, L2, L3, L4, L5, L6);
