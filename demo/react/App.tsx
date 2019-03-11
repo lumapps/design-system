@@ -1,4 +1,4 @@
-import { LxIcon, LxIconButton } from 'LumX/core';
+import { LxIcon, LxIconButton } from 'LumX';
 import { mdiPlus } from 'LumX/icons';
 import React from 'react';
 
@@ -8,7 +8,7 @@ export const App = (): JSX.Element => (
         <LxIconButton color="red">
             <LxIcon icon={mdiPlus} />
         </LxIconButton>
-        <LxIconButton href="https://www.lumapps.com" target="_blank" variant="tertiary">
+        <LxIconButton href="https://www.lumapps.com" target="_blank">
             <LxIcon icon={mdiPlus} />
         </LxIconButton>
     </div>

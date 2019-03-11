@@ -1,23 +1,18 @@
-const path = require('path');
-
-/**
- * Gives an absolute path by resolving the provided relative path.
- *
- * @param  {string} pathName The relative path.
- * @return {string} The resolved absolute path.
- */
-function getAbsolutePath(pathName) {
-    return path.resolve(__dirname, pathName);
-}
+const { getAbsolutePath } = require('./common-utils');
 
 // Path relative constants.
 const ROOT_PATH = getAbsolutePath('../');
 const NODE_MODULES_PATH = `${ROOT_PATH}/node_modules`;
 const SRC_PATH = getAbsolutePath('../src');
-const CORE_PATH = `${SRC_PATH}/core`;
 const COMPONENTS_PATH = `${SRC_PATH}/components`;
-const ICONS_PATH = `${SRC_PATH}/icons`;
+const CORE_PATH = `${SRC_PATH}/core`;
 const DEMO_PATH = getAbsolutePath('../demo');
+const EXAMPLES_PATH = getAbsolutePath('../examples');
+const ICONS_PATH = `${SRC_PATH}/icons`;
+const STYLES_PATH = `${CORE_PATH}/style`;
+
+// Indicates if we want to minify the production bundle.
+const MINIFY = true;
 
 // Techology relative constants.
 const TECH_PREFIX = {
@@ -194,9 +189,12 @@ module.exports = {
     DEFAULT_HOST,
     DEFAULT_PORT,
     DEMO_PATH,
+    EXAMPLES_PATH,
     ICONS_PATH,
+    MINIFY,
     NODE_MODULES_PATH,
     ROOT_PATH,
     SRC_PATH,
+    STYLES_PATH,
     TECH_PREFIX,
 };

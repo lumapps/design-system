@@ -1,7 +1,8 @@
+import { Color, Emphasis, Size, Theme, Variant } from 'components';
+
 import React from 'react';
 
 import classNames from 'classnames';
-import { Color, Size, Theme, Variant } from 'components';
 
 import '../style/lx-button.scss';
 
@@ -36,6 +37,8 @@ const LxButtonRoot: React.FC<ILxButtonRootProps> = ({ href, children, target, cl
 export interface ILxButtonProps extends ILxButtonRootProps {
     /** The button color which must be defined by `lx-button--${color}` css class. */
     color?: Color;
+    /** The emphasis of the button which must be defined by ``lx-button-emphasis--${emphasis} css class. */
+    emphasis?: Emphasis;
     /** The button size which must be defined by `lx-button--${size}` css class. */
     size?: Size;
     /** The button theme which must be defined by `lx-button--${theme}` css class. */
@@ -54,13 +57,17 @@ export const LxButton: React.FC<ILxButtonProps> = ({
     children,
     className,
     color = 'primary',
-    variant = 'primary',
+    emphasis = 'high',
     size = 'm',
     theme = 'light',
+    variant = 'button',
     ...props
 }) => (
     <LxButtonRoot
-        className={classNames(className, handleBasicClasses({ color, size, theme, variant, prefix: 'lx-button' }))}
+        className={classNames(
+            className,
+            handleBasicClasses({ color, emphasis, size, theme, variant, prefix: 'lx-button' }),
+        )}
         {...props}
     >
         {children}

@@ -3,7 +3,7 @@ const merge = require('webpack-merge');
 const { buildConfig } = require('../utils');
 const { MINIFY } = require('../constants');
 
-const angularJSConfig = require('./webpack.config');
+const reactConfig = require('./webpack.config');
 
 const UMDConfig = {};
 
@@ -12,8 +12,8 @@ module.exports = buildConfig(
         entry: 'replace',
         'module.rules': 'append',
         plugins: 'replace',
-    })(angularJSConfig, UMDConfig),
-    'angularjs',
+    })(reactConfig, UMDConfig),
+    'react',
     'umd',
     MINIFY,
 );

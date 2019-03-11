@@ -14,11 +14,15 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "paths": {
-            "@lumx/core": ["./react.index.ts"],
-            "@lumx/icons": ["./icons"],
-            "@lumx/icons/*": ["./icons/*"],
-            "core": ["./core"],
-            "core/*": ["./core/*"]
+            "LumX": ["./react.index.ts"],
+            "LumX/icons": ["./icons"],
+            "LumX/icons/*": ["./icons/*"],
+            "LumX/components": ["./components"],
+            "LumX/components/*": ["./components/*"],
+            "LumX/core": ["./core"],
+            "LumX/core/*": ["./core/*"],
+            "LumX/react": ["./core/react"],
+            "LumX/react/*": ["./core/react/*"]
         },
         "strict": true,
         "target": "es5"

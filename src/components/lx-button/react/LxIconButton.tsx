@@ -4,9 +4,9 @@ import classNames from 'classnames';
 
 import '../style/lx-button.scss';
 
-import { LxButton, LxButtonProps } from './LxButton';
+import { ILxButtonProps, LxButton } from './LxButton';
 
-export const LxIconButton: React.FC<LxButtonProps> = ({ children, ...props }) => (
+export const LxIconButton: React.FC<ILxButtonProps> = ({ children, ...props }) => (
     <LxButton className="lx-button--shape-circled" {...props}>
         {Children.map(children, (child: any) =>
             cloneElement(child, {

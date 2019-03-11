@@ -1,10 +1,12 @@
+import { Color, Size } from 'components';
+
 import React from 'react';
 
 import classNames from 'classnames';
 
 import '../style/lx-icon.scss';
 
-import { handleBasicClasses } from 'core/utils';
+import { handleBasicClasses } from 'LumX/core/utils';
 
 interface ILxIconProps {
     /** The icon path to set in the html svg `d` property */
@@ -12,9 +14,9 @@ interface ILxIconProps {
     /** Basic React `className` property. */
     className?: string;
     /** The icon color which must be defined by `lx-icon--${color}` css class. */
-    color?: string;
+    color?: Color;
     /** The icon size which must be defined by `lx-icon--${size}` css class. */
-    size?: string;
+    size?: Size;
 }
 
 /**

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Design System - ReactJS example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="../lumx.min.css" />
+        <link rel="stylesheet" href="./styles.css" />
+    </head>
+
+    <body class="p++">
+        <div class="center lx-typography-title">This is an example of using LumX with ReactJS</div>
+
+        <p class="mt+ lx-typography-body">
+            You have multiple choices to use LumX with ReactJS:
+        </p>
+
+        <ul>
+            <li>
+                <p class="mt+ lx-typography-body">
+                    <strong>Browser</strong>: All you have to do is import <span class="code">lumx[.min].css</span> in
+                    your page's <span class="code">head</span> and <span class="code">lumx.react[.min].js</span> at the
+                    end of your page's <span class="code">body</span> after ReactJS and ReactDOM library.
+                </p>
+
+                <div class="mv+++">
+                    <pre>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html ng-app="lumx-example-app"&gt;
+                            &lt;head&gt;
+                                &lt;title&gt;ReactJS browser example&lt;/title&gt;
+                                &lt;link rel="stylesheet" href="node_modules/@lumx/dist/lumx.min.css" /&gt;
+                            &lt;/head&gt;
+
+                            &lt;body class="p++"&gt;
+                                &lt;div id="root"&gt;&lt;/div&gt;
+
+                                &lt;script
+                                    src="https://unpkg.com/@babel/standalone/babel.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script
+                                    src="https://unpkg.com/react/umd/react.production.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script
+                                    src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script src="node_modules/@lumx/dist/lumx.react.min.js" type="text/javascript"&gt;&lt;/script&gt;
+
+                                &lt;script type="text/babel"&gt;
+                                    const { Fragment, PureComponent } = React;
+                                    const { LxButton } = LumX;
+
+                                    class MyButton extends PureComponent {
+                                        render() {
+                                            return (
+                                                &lt;LxButton color={this.props.color}&gt;{this.props.children}&lt;/LxButton&gt;
+                                            );
+                                        }
+                                    }
+
+                                    const MyFunctionnalButton = (props) => {
+                                        return (
+                                            &lt;LxButton color={props.color}&gt;{props.children}&lt;/LxButton&gt;
+                                        );
+                                    };
+
+                                    ReactDOM.render(
+                                        &lt;Fragment&gt;
+                                        &lt;div class="lx-typography-title"&gt;This is a basic example&lt;/div&gt;
+                                        &lt;MyButton&gt;Nice!&lt;/MyButton&gt;
+                                        &lt;MyFunctionnalButton color="green"&gt;Even nicer!&lt;/MyFunctionnalButton&gt;
+                                        &lt;/Fragment&gt;,
+                                        document.getElementById('root')
+                                    );
+                                &lt;/script&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </pre>
+                </div>
+            </li>
+
+            <li>
+                <p class="mt+ lx-typography-body">
+                    <strong>CommonJS[2]</strong>: All you have to do is import
+                    <span class="code">lumx[.min].css</span> in your page's <span class="code">head</span> and the
+                    components you want to use in your own ReactJS components. All components comes packaged with their
+                    own CSS, so you don't need to import any additionnal CSS in your application.
+                </p>
+
+                <div class="mv+++">
+                    <pre>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html ng-app="lumx-example-app"&gt;
+                            &lt;head&gt;
+                                &lt;title&gt;ReactJS CommonJS example&lt;/title&gt;
+                                &lt;link rel="stylesheet" href="node_modules/@lumx/dist/lumx.min.css" /&gt;
+                            &lt;/head&gt;
+
+                            &lt;body class="p++"&gt;
+                                &lt;div id="root"&gt;&lt;/div&gt;
+
+                                &lt;script
+                                    src="https://unpkg.com/@babel/standalone/babel.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script
+                                    src="https://unpkg.com/react/umd/react.production.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script
+                                    src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script src="node_modules/@lumx/dist/lumx.react.min.js" type="text/javascript"&gt;&lt;/script&gt;
+
+                                &lt;script type="text/javascript"&gt;
+                                    const { Fragment, PureComponent } = React;
+                                    const { LxButton } = require('@lumx/react');
+
+                                    class MyButton extends PureComponent {
+                                        render() {
+                                            return (
+                                                &lt;LxButton color={this.props.color}&gt;{this.props.children}&lt;/LxButton&gt;
+                                            );
+                                        }
+                                    }
+
+                                    const MyFunctionnalButton = (props) => {
+                                        return (
+                                            &lt;LxButton color={props.color}&gt;{props.children}&lt;/LxButton&gt;
+                                        );
+                                    };
+
+                                    ReactDOM.render(
+                                        &lt;Fragment&gt;
+                                        &lt;div class="lx-typography-title"&gt;This is a basic example&lt;/div&gt;
+                                        &lt;MyButton&gt;Nice!&lt;/MyButton&gt;
+                                        &lt;MyFunctionnalButton color="green"&gt;Even nicer!&lt;/MyFunctionnalButton&gt;
+                                        &lt;/Fragment&gt;,
+                                        document.getElementById('root')
+                                    );
+                                &lt;/script&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </pre>
+                </div>
+            </li>
+
+            <li>
+                <p class="mt+ lx-typography-body">
+                    <strong>AMD</strong>: All you have to do is import <span class="code">lumx[.min].css</span> in your
+                    page's <span class="code">head</span> and the components you want to use in your own ReactJS
+                    components. All components comes packaged with their own CSS, so you don't need to import any
+                    additionnal CSS in your application.
+                </p>
+
+                <div class="mv+++">
+                    <pre>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html ng-app="lumx-example-app"&gt;
+                            &lt;head&gt;
+                                &lt;title&gt;ReactJS AMD example&lt;/title&gt;
+                                &lt;link rel="stylesheet" href="node_modules/@lumx/dist/lumx.min.css" /&gt;
+                            &lt;/head&gt;
+
+                            &lt;body class="p++"&gt;
+                                &lt;div id="root"&gt;&lt;/div&gt;
+
+                                &lt;script
+                                    src="https://unpkg.com/@babel/standalone/babel.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script
+                                    src="https://unpkg.com/react/umd/react.production.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script
+                                    src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script src="node_modules/@lumx/dist/lumx.react.min.js" type="text/javascript"&gt;&lt;/script&gt;
+
+                                &lt;script type="text/javascript"&gt;
+                                    require(['@lumx/react'], (LumX) => {
+                                        const { Fragment, PureComponent } = React;
+                                        const { LxButton } = LumX;
+
+                                        class MyButton extends PureComponent {
+                                            render() {
+                                                return (
+                                                    &lt;LxButton color={this.props.color}&gt;{this.props.children}&lt;/LxButton&gt;
+                                                );
+                                            }
+                                        }
+
+                                        const MyFunctionnalButton = (props) => {
+                                            return (
+                                                &lt;LxButton color={props.color}&gt;{props.children}&lt;/LxButton&gt;
+                                            );
+                                        };
+
+                                        ReactDOM.render(
+                                            &lt;Fragment&gt;
+                                            &lt;div class="lx-typography-title"&gt;This is a basic example&lt;/div&gt;
+                                            &lt;MyButton&gt;Nice!&lt;/MyButton&gt;
+                                            &lt;MyFunctionnalButton color="green"&gt;Even nicer!&lt;/MyFunctionnalButton&gt;
+                                            &lt;/Fragment&gt;,
+                                            document.getElementById('root')
+                                        );
+                                    });
+                                &lt;/script&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </pre>
+                </div>
+            </li>
+
+            <li>
+                <p class="mt+ lx-typography-body">
+                    <strong>ES6 Modules</strong>: All you have to do is import
+                    <span class="code">lumx[.min].css</span> in your page's <span class="code">head</span> and the
+                    components you want to use in your own ReactJS components. All components comes packaged with their
+                    own CSS, so you don't need to import any additionnal CSS in your application.
+                </p>
+
+                <div class="mv+++">
+                    <pre>
+                        &lt;!DOCTYPE html&gt;
+                        &lt;html ng-app="lumx-example-app"&gt;
+                            &lt;head&gt;
+                                &lt;title&gt;ReactJS ES6 Modules example&lt;/title&gt;
+                                &lt;link rel="stylesheet" href="node_modules/@lumx/dist/lumx.min.css" /&gt;
+                            &lt;/head&gt;
+
+                            &lt;body class="p++"&gt;
+                                &lt;div id="root"&gt;&lt;/div&gt;
+
+                                &lt;script
+                                    src="https://unpkg.com/@babel/standalone/babel.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script
+                                    src="https://unpkg.com/react/umd/react.production.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script
+                                    src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+                                    type="text/javascript"
+                                &gt;&lt;/script&gt;
+                                &lt;script src="node_modules/@lumx/dist/lumx.react.min.js" type="text/javascript"&gt;&lt;/script&gt;
+
+                                &lt;script type="text/javascript"&gt;
+                                    import { Fragment, PureComponent } from 'react';
+                                    import { LxButton } from '@lumx/react';
+
+                                    class MyButton extends PureComponent {
+                                        render() {
+                                            return (
+                                                &lt;LxButton color={this.props.color}&gt;{this.props.children}&lt;/LxButton&gt;
+                                            );
+                                        }
+                                    }
+
+                                    const MyFunctionnalButton = (props) => {
+                                        return (
+                                            &lt;LxButton color={props.color}&gt;{props.children}&lt;/LxButton&gt;
+                                        );
+                                    };
+
+                                    ReactDOM.render(
+                                        &lt;Fragment&gt;
+                                        &lt;div class="lx-typography-title"&gt;This is a basic example&lt;/div&gt;
+                                        &lt;MyButton&gt;Nice!&lt;/MyButton&gt;
+                                        &lt;MyFunctionnalButton color="green"&gt;Even nicer!&lt;/MyFunctionnalButton&gt;
+                                        &lt;/Fragment&gt;,
+                                        document.getElementById('root')
+                                    );
+                                &lt;/script&gt;
+                            &lt;/body&gt;
+                        &lt;/html&gt;
+                    </pre>
+                </div>
+            </li>
+        </ul>
+
+        <div class="center mt++" id="root"></div>
+
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/react/umd/react.production.min.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" type="text/javascript"></script>
+
+        <script src="../lumx.react.min.js" type="text/javascript"></script>
+        <script data-presets="es2015,react" type="text/babel">
+            const { Fragment, PureComponent } = React;
+            const { LxButton, LxButtonRoot } = LumX;
+
+            class Nice extends PureComponent {
+                render() {
+                    const { children, color, ...props } = this.props;
+
+                    return (
+                        <LxButton color={color} {...props}>
+                            {children}
+                        </LxButton>
+                    );
+                }
+            }
+
+            const GotItButton = ({ children, color, ...props }) => {
+                return (
+                    <LxButton color={color} {...props}>
+                        {children}
+                    </LxButton>
+                );
+            };
+
+            ReactDOM.render(
+                <Fragment>
+                    {' '}
+                    <div class="lx-typography-title mb+++">This is a basic example</div>
+                    {''}
+                    <Nice onClick={() => console.info("Isn't it?!")}>Nice!</Nice>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <GotItButton color="green" onClick={() => console.info('Glad you got it!')}>
+                        I got it!
+                    </GotItButton>
+                </Fragment>,
+                document.getElementById('root'),
+                () => {
+                    const message = 'LumX Example ReactJS Application successfully started!';
+
+                    console.info(message);
+                },
+            );
+        </script>
+    </body>
+</html>

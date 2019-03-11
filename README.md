@@ -33,7 +33,7 @@ Please refer to our [contributing guidelines](CONTRIBUTING.md).
 ## Project installation
 
 [Yarn dependency manager](https://yarnpkg.com/) is recommended to launch the project. Check out the [official installation documentation](https://yarnpkg.com/en/docs/install) if not installed.
-You will need Yarn to execute some NPM script and the automatic setup script.
+You will need Yarn to execute the automatic setup script.
 
 ### Install project dependencies
 

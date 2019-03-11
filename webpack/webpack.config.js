@@ -1,18 +1,49 @@
 const IS_CI = require('is-ci');
-
 const path = require('path');
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
-const { babelSetup, getSassRessourcesFiles } = require('./utils');
-const { COMPONENTS_PATH, CORE_PATH, NODE_MODULES_PATH, ICONS_PATH } = require('./constants');
+const { babelSetup } = require('./utils');
+const { COMPONENTS_PATH, CORE_PATH, ICONS_PATH } = require('./constants');
 
-const webpackBaseConfig = {
+const plugins = [new WebpackBar(), new FriendlyErrorsWebpackPlugin()];
+if (!IS_CI) {
+    plugins.push(
+        new WebpackNotifierPlugin({
+            alwaysNotify: true,
+            title: 'LumX - Webpack',
+        }),
+    );
+}
+
+const baseConfig = {
+    cache: true,
+
+    devtool: 'cheap-module-source-map',
+
     entry: {
-        'style-lumapps': `${CORE_PATH}/style/lumapps/index.js`,
-        'style-material': `${CORE_PATH}/style/material/index.js`,
+        'lumx-lumapps': `${CORE_PATH}/style/lumapps/index.js`,
+        'lumx-material': `${CORE_PATH}/style/material/index.js`,
     },
+
+    externals: [
+        '@uirouter/angularjs',
+        'angularjs',
+        {
+            jquery: {
+                commonjs: 'jquery',
+                amd: 'jquery',
+                root: '$',
+            },
+            react: 'React',
+            'react-dom': 'ReactDOM',
+        },
+    ],
+
+    mode: 'development',
+
     module: {
         rules: [
             {
@@ -45,43 +76,6 @@ const webpackBaseConfig = {
                     silent: true,
                 },
             },
-            {
-                exclude: /node_modules/u,
-                test: /\.scss$/u,
-                use: [
-                    { loader: 'style-loader' },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            importLoaders: 2,
-                            sourceMap: false,
-                        },
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            config: {
-                                path: `${CORE_PATH}/style/postcss.config.js`,
-                            },
-                            sourceMap: false,
-                        },
-                    },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
-                            sourceMap: false,
-                        },
-                    },
-                    {
-                        // TODO: Refactor all ressources in a `lumx-ressources` file and always import it when needed.
-                        loader: 'sass-resources-loader',
-                        options: {
-                            resources: getSassRessourcesFiles(),
-                        },
-                    },
-                ],
-            },
         ],
     },
 
@@ -89,11 +83,18 @@ const webpackBaseConfig = {
         fs: 'empty',
     },
 
+    output: {
+        chunkFilename: '[name].js',
+        crossOriginLoading: 'anonymous',
+        filename: '[name].js',
+        sourceMapFilename: '[name].js.map',
+    },
+
     performance: {
         hints: false,
     },
 
-    plugins: [new WebpackBar(), new FriendlyErrorsWebpackPlugin()],
+    plugins,
 
     profile: false,
 
@@ -143,4 +144,4 @@ const webpackBaseConfig = {
     target: 'web',
 };
 
-module.exports = webpackBaseConfig;
+module.exports = baseConfig;

@@ -1,7 +1,28 @@
 const glob = require('glob');
+
+const has = require('lodash/has');
+
+const merge = require('webpack-merge');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+const HtmlMinifierPlugin = require('html-minifier-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
 const { shouldPrintComment } = require('babel-plugin-smart-webpack-import');
 
-const { APP_PATH, CORE_PATH, COMPONENTS_PATH, DEFAULT_HOST, DEFAULT_PORT } = require('./constants');
+const { getAbsolutePath } = require('./common-utils');
+const {
+    APP_PATH,
+    COMPONENTS_PATH,
+    CONFIGS,
+    CORE_PATH,
+    DEFAULT_HOST,
+    DEFAULT_PORT,
+    EXAMPLES_PATH,
+    NODE_MODULES_PATH,
+    TECH_PREFIX,
+} = require('./constants');
 
 /**
  * Setup Babel transpiler.
@@ -11,7 +32,7 @@ const { APP_PATH, CORE_PATH, COMPONENTS_PATH, DEFAULT_HOST, DEFAULT_PORT } = req
  * @param  {Object} [options] The options to use.
  * @return {Object} The Babel configuration object.
  */
-function babelSetup({ plugins = [], presets = [], options = {} } = {}) {
+const babelSetup = ({ plugins = [], presets = [], options = {} } = {}) => {
     return {
         ...options,
         plugins: [
@@ -19,6 +40,7 @@ function babelSetup({ plugins = [], presets = [], options = {} } = {}) {
             '@babel/plugin-proposal-class-properties',
             '@babel/plugin-proposal-object-rest-spread',
             '@babel/plugin-syntax-dynamic-import',
+            '@babel/plugin-proposal-optional-chaining',
         ],
         presets: [
             ...presets,
@@ -33,20 +55,20 @@ function babelSetup({ plugins = [], presets = [], options = {} } = {}) {
         ],
         shouldPrintComment,
     };
-}
+};
 
 /**
  * Returns all entry point for a given technology and prefix.
  *
  * @param  {string} prefix    The tech name (react|angularjs) to match correct path.
- * @param  {string} extention The file extension to match.
+ * @param  {string} extension The file extension to match.
  * @return {Object} An object of all formatted matches to use in webpack config entry option with filename
  *                  as key and path as value.
  */
-const getComponents = ({ prefix, extention }) => {
+const getComponents = ({ prefix, extension }) => {
     const files = {};
-    const matches = glob.sync(`${COMPONENTS_PATH}/**/${prefix}/**/*.${extention}`);
-    const fileNameRegexp = `(?:.*)/(.*).${extention}`;
+    const matches = glob.sync(`${COMPONENTS_PATH}/**/${prefix}/**/*.${extension}`);
+    const fileNameRegexp = `(?:.*)/(.*).${extension}`;
 
     matches.forEach((match) => {
         files[match.match(fileNameRegexp)[1]] = match;
@@ -96,8 +118,151 @@ function getWebpackDevServerConfig({ port } = {}) {
     };
 }
 
+/**
+ * Build the production configuration for the given tech in the given module type.
+ *
+ * @param  {Object} config         The configuration to use as the base configuration.
+ * @param  {string} tech           The tech we want to build the package of.
+ * .                               Possible values are: 'angularjs' or 'react'.
+ * @param  {string} moduleType     The type of module we want to use for the build.
+ *                                 Allowed values are the same as the Webpack `output.libraryTarget` ones (e.g. 'umd',
+ *                                 'amd', 'commonjs', ...).
+ *                                 See: https://webpack.js.org/guides/author-libraries/.
+ * @param  {boolean} [minify=true] Indicates if you want to minify the bundle.
+ * @return {Object} The built configuration for the production build.
+ */
+const buildConfig = (config, tech, moduleType, minify = true) => {
+    if (!has(TECH_PREFIX, tech)) {
+        throw new Error(`Unknown tech "${tech}"`);
+    }
+
+    const simpleFileName = `lumx${minify ? '.min' : ''}`;
+    const filename = `[name]${minify ? '.min' : ''}`;
+
+    const minimizer = [];
+
+    const plugins = [
+        ...config.plugins,
+        new ExtractCssChunks({
+            chunkFilename: `${simpleFileName}.css`,
+            filename: `${simpleFileName}.css`,
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: `${EXAMPLES_PATH}/${tech}`,
+                to: getAbsolutePath(`../dist/${tech}/examples/`),
+            },
+            {
+                from: `${EXAMPLES_PATH}/styles.css`,
+                to: getAbsolutePath(`../dist/${tech}/examples/`),
+            },
+            {
+                from: `${EXAMPLES_PATH}/package.json`,
+                to: getAbsolutePath('../dist/'),
+            },
+            {
+                from: `${EXAMPLES_PATH}/README.md`,
+                to: getAbsolutePath('../dist/'),
+            },
+        ]),
+    ];
+    if (minify) {
+        plugins.push(new HtmlMinifierPlugin(CONFIGS.htmlMinifier));
+        plugins.push(
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorOptions: CONFIGS.cssNano,
+                cssProcessorPluginOptions: {},
+            }),
+        );
+
+        minimizer.push(
+            new TerserPlugin({
+                cache: true,
+                parallel: true,
+                sourceMap: true,
+                terserOptions: CONFIGS.terser,
+            }),
+        );
+    }
+
+    return merge(config, {
+        bail: true,
+
+        devtool: 'source-map',
+        mode: 'production',
+
+        name: `${tech}-${moduleType}${minify ? '-minified' : ''}`,
+
+        module: {
+            rules: [
+                {
+                    exclude: /node_modules/u,
+                    test: /\.scss$/u,
+                    use: [
+                        ExtractCssChunks.loader,
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                // eslint-disable-next-line no-magic-numbers
+                                importLoaders: 2,
+                                sourceMap: false,
+                            },
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                config: {
+                                    path: `${CORE_PATH}/style/postcss.config.js`,
+                                },
+                                sourceMap: false,
+                            },
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
+                                sourceMap: false,
+                            },
+                        },
+                        {
+                            // TODO: Refactor all ressources in a `lumx-ressources` file and always import when needed.
+                            loader: 'sass-resources-loader',
+                            options: {
+                                resources: getSassRessourcesFiles(),
+                            },
+                        },
+                    ],
+                },
+            ],
+        },
+
+        output: {
+            ...config.output,
+            chunkFilename: `${filename}.js`,
+            filename: `${filename}.js`,
+            library: {
+                root: 'LumX',
+                amd: `@lumx/${tech}`,
+                commonjs: `@lumx/${tech}`,
+            },
+            libraryTarget: moduleType,
+            path: getAbsolutePath(`../dist/${tech}`),
+            sourceMapFilename: `${filename}.js.map`,
+            umdNamedDefine: moduleType === 'umd' ? true : undefined,
+        },
+
+        plugins,
+
+        optimization: {
+            minimize: minify,
+            minimizer,
+        },
+    });
+};
+
 module.exports = {
     babelSetup,
+    buildConfig,
     getComponents,
     getSassRessourcesFiles,
     getWebpackDevServerConfig,
