@@ -7,7 +7,7 @@
         <title>Design System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
-        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" /> -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" />
     </head>
     <body>
         <div class="app">
@@ -25,14 +25,17 @@
         <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
 
         <!-- Design System -->
-        <% for (key in htmlWebpackPlugin.files.chunks) { %> <% if (key != 'style-material') { %>
+        <% for (key in htmlWebpackPlugin.files.chunks) { %> <% if (key != 'style-lumapps' && key != 'style-material') {
+        %>
         <script
             src="<%= htmlWebpackPlugin.files.chunks[key].entry %>"
             type="text/javascript"
             crossorigin="<%= webpackConfig.output.crossOriginLoading %>"
         ></script>
-        <% } %> <% } %> <% if (htmlWebpackPlugin.files.chunks['style-material']) { %>
-        <!-- <script src="<%= htmlWebpackPlugin.files.chunks['style-material'].entry %>" charset="UTF-8" defer></script> -->
+        <% } %> <% } %> <% if (htmlWebpackPlugin.files.chunks['style-lumapps']) { %>
+        <!-- <script src="<%= htmlWebpackPlugin.files.chunks['style-lumapps'].entry %>" charset="UTF-8" defer></script> -->
+        <% } %> <% if (htmlWebpackPlugin.files.chunks['style-material']) { %>
+        <script src="<%= htmlWebpackPlugin.files.chunks['style-material'].entry %>" charset="UTF-8" defer></script>
         <% } %>
     </body>
 </html>

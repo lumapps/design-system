@@ -2,8 +2,6 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/icons';
 
-import '../style/lx-notification.scss';
-
 /////////////////////////////
 
 function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {

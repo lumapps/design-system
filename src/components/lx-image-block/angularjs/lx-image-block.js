@@ -1,6 +1,5 @@
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import '../style/lx-image-block.scss';
 import template from './lx-image-block.html';
 
 /////////////////////////////

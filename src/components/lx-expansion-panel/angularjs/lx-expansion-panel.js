@@ -2,7 +2,6 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiChevronDown, mdiChevronUp, mdiDragVertical } from 'LumX/icons';
 
-import '../style/lx-expansion-panel.scss';
 import template from './lx-expansion-panel.html';
 
 /////////////////////////////

@@ -1,6 +1,5 @@
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import '../style/lx-toolbar.scss';
 import template from './lx-toolbar.html';
 
 /////////////////////////////

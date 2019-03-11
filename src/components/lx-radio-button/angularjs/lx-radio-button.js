@@ -1,6 +1,5 @@
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import '../style/lx-radio-button.scss';
 import template from './lx-radio-button.html';
 
 /////////////////////////////
