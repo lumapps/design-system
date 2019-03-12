@@ -51,14 +51,9 @@
 @mixin lx-checkbox-input-indicator() {
     position: absolute;
     z-index: 3;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 2px;
+    top: ($lx-checkbox-control-size - $lx-checkbox-wrapper-size) / 2;
+    left: ($lx-checkbox-control-size - $lx-checkbox-wrapper-size) / 2;
+    font-size: $lx-checkbox-wrapper-size;
 }
 
 @mixin lx-checkbox-input-indicator-status($status) {

@@ -49,11 +49,11 @@
         @include lx-checkbox-input-indicator;
 
         #{ $self }--theme-light & {
-            @include lx-state(state-default, emphasis-high, $lx-checkbox-color, dark);
+            @include lx-state-high(state-default, $lx-checkbox-color, dark, 'color');
         }
 
         #{ $self }--theme-dark & {
-            @include lx-state(state-default, emphasis-high, $lx-checkbox-color, light);
+            @include lx-state-high(state-default, $lx-checkbox-color, light, 'color');
         }
 
         #{ $self }--is-checked & {
@@ -100,7 +100,7 @@
     }
 
     .lx-checkbox__input-indicator {
-        @include lx-state(state-disabled, emphasis-high, $lx-checkbox-color, dark);
+        @include lx-state-high(state-disabled, $lx-checkbox-color, dark, 'color');
     }
 
     .lx-checkbox__label,
@@ -115,7 +115,7 @@
     }
 
     .lx-checkbox__input-indicator {
-        @include lx-state(state-disabled, emphasis-high, $lx-checkbox-color, light);
+        @include lx-state-high(state-disabled, $lx-checkbox-color, light, 'color');
     }
 
     .lx-checkbox__label,
@@ -137,7 +137,7 @@
 
 .lx-checkbox--theme-light.lx-checkbox--is-checked .lx-checkbox__input-native:hover + .lx-checkbox__input-placeholder {
     .lx-checkbox__input-indicator {
-        @include lx-state(state-hover, emphasis-high, $lx-checkbox-color, dark);
+        @include lx-state-high(state-hover, $lx-checkbox-color, dark, 'color');
     }
 }
 
@@ -149,7 +149,7 @@
 
 .lx-checkbox--theme-dark.lx-checkbox--is-checked .lx-checkbox__input-native:hover + .lx-checkbox__input-placeholder {
     .lx-checkbox__input-indicator {
-        @include lx-state(state-hover, emphasis-high, $lx-checkbox-color, light);
+        @include lx-state-high(state-hover, $lx-checkbox-color, light, 'color');
     }
 }
 
@@ -185,7 +185,7 @@
 // prettier-ignore
 .lx-checkbox--theme-light.lx-checkbox--is-checked .lx-checkbox__input-native:active + .lx-checkbox__input-placeholder {
     .lx-checkbox__input-indicator {
-        @include lx-state(state-active, emphasis-high, $lx-checkbox-color, dark);
+        @include lx-state-high(state-active, $lx-checkbox-color, dark, 'color');
     }
 }
 
@@ -199,6 +199,6 @@
 // prettier-ignore
 .lx-checkbox--theme-dark.lx-checkbox--is-checked .lx-checkbox__input-native:active + .lx-checkbox__input-placeholder {
     .lx-checkbox__input-indicator {
-        @include lx-state(state-active, emphasis-high, $lx-checkbox-color, light);
+        @include lx-state-high(state-active, $lx-checkbox-color, light, 'color');
     }
 }
