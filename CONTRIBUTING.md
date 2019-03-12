@@ -1,6 +1,20 @@
 # Contributing to LumX
 
-We'd love for you to contribute to our source code and to make it even better than it is today! Here are the guidelines we'd like you to follow:
+We'd love for you to contribute to our source code and to make it even better than it is today!
+
+## Getting the source code
+
+To be able to contribute, you will have to use the global LumX package from our [GitHub repository](https://github.com/lumapps/design-system). You won't be able to contribute from the distributed packages `@lumx/<angularjs/react>`, so be sure to clone the repository before starting contributing:
+
+```bash
+git clone git@github.com:lumapps/design-system.git
+# Or with HTTPS
+git clone https://github.com/lumapps/design-system.git
+```
+
+# Table of contents
+
+Here are the guidelines we'd like you to follow.
 
 -   [Code of Conduct](#code-of-conduct)
 -   [Got a question or a problem?](#got-a-question-or-a-problem-)

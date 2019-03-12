@@ -1,19 +1,19 @@
 const merge = require('webpack-merge');
 
 const { buildConfig } = require('../utils');
-const { MINIFY } = require('../constants');
+const { MINIFY: minify } = require('../constants');
 
 const reactConfig = require('./webpack.config');
 
 const UMDConfig = {};
 
-module.exports = buildConfig(
-    merge.smartStrategy({
+module.exports = buildConfig({
+    config: merge.smartStrategy({
         entry: 'append',
         'module.rules': 'append',
         plugins: 'replace',
     })(reactConfig, UMDConfig),
-    'react',
-    'umd',
-    MINIFY,
-);
+    tech: 'react',
+    moduleType: 'umd',
+    minify,
+});

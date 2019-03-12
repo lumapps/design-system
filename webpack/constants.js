@@ -1,14 +1,28 @@
-const { getAbsolutePath } = require('./common-utils');
+const path = require('path');
+
+/**
+ * Gives an absolute path by resolving the provided relative path.
+ *
+ * @param  {string} pathName The relative path.
+ * @return {string} The resolved absolute path.
+ */
+function getAbsolutePath(pathName) {
+    return path.resolve(__dirname, pathName);
+}
 
 // Path relative constants.
 const ROOT_PATH = getAbsolutePath('../');
+
+const DEMO_PATH = `${ROOT_PATH}/demo`;
+const DIST_PATH = `${ROOT_PATH}/dist`;
+const EXAMPLES_PATH = `${ROOT_PATH}/examples`;
 const NODE_MODULES_PATH = `${ROOT_PATH}/node_modules`;
-const SRC_PATH = getAbsolutePath('../src');
+const SRC_PATH = `${ROOT_PATH}/src`;
+
 const COMPONENTS_PATH = `${SRC_PATH}/components`;
 const CORE_PATH = `${SRC_PATH}/core`;
-const DEMO_PATH = getAbsolutePath('../demo');
-const EXAMPLES_PATH = getAbsolutePath('../examples');
 const ICONS_PATH = `${SRC_PATH}/icons`;
+
 const STYLES_PATH = `${CORE_PATH}/style`;
 
 // Indicates if we want to minify the production bundle.
@@ -18,6 +32,16 @@ const MINIFY = true;
 const TECH_PREFIX = {
     angularjs: 'angularjs',
     react: 'react',
+};
+const TECH_DESCRIPTIONS = {
+    angularjs: 'The official LumApps Design System (LumX) for AngularJS applications',
+    default: 'The official LumApps Design System (LumX)',
+    react: 'The official LumApps Design System (LumX) for ReactJS applications',
+};
+const TECH_KEYWORDS = {
+    angularjs: ['AngularJS'],
+    default: ['Design System', 'LumApps', 'LumX'],
+    react: ['ReactJS'],
 };
 
 // Dev-server relative constants
@@ -189,6 +213,7 @@ module.exports = {
     DEFAULT_HOST,
     DEFAULT_PORT,
     DEMO_PATH,
+    DIST_PATH,
     EXAMPLES_PATH,
     ICONS_PATH,
     MINIFY,
@@ -196,5 +221,7 @@ module.exports = {
     ROOT_PATH,
     SRC_PATH,
     STYLES_PATH,
+    TECH_DESCRIPTIONS,
+    TECH_KEYWORDS,
     TECH_PREFIX,
 };

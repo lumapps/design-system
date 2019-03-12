@@ -18,8 +18,7 @@ npm install @lumx/<angularjs|react>
 -   Download the latest release for [AngularJS][angularjs-release] or [ReactJS][reactjs-release]
 -   Clone the repository: `git clone https://github.com/lumapps/design-system.git`
 
-You can then use the UMD, AMD or CommonJS bundle that suits your taste.
-See [examples](./dist/examples) for more information on how to use each bundle.
+See [examples](./dist/<angularjs|react>/examples) for more information on how to use each bundle.
 
 ## Documentation
 
@@ -33,7 +32,7 @@ Please refer to our [contributing guidelines](CONTRIBUTING.md).
 ## Project installation
 
 [Yarn dependency manager](https://yarnpkg.com/) is recommended to launch the project. Check out the [official installation documentation](https://yarnpkg.com/en/docs/install) if not installed.
-You will need Yarn to execute the automatic setup script.
+You will need Yarn to execute the automatic setup script as well as for publishing the package.
 
 ### Install project dependencies
 
@@ -80,12 +79,35 @@ You can then open your browser to [http://localhost:4001/](http://localhost:4001
 you can build LumX by using:
 
 ```bash
-yarn build[:<all|react[:<commonjs>]|angularjs]
+yarn build[:<all|angularjs|react]
 # Or
-npm run build:<react:commonjs|angularjs>
+npm run build:<all|angularjs|react>
 ```
 
 This will produce the target build for either AngularJS or ReactJS.
+
+## How to run examples
+
+In the `dist/<angularjs|react>` directory, run:
+
+```bash
+yarn install
+# Or
+npm install
+```
+
+This will install `http-server`, a simple HTTP server.
+
+Then run:
+
+```bash
+yarn serve
+# Or
+npm run serve
+```
+
+Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for AngularJS example or [http://localhost:8081](http://localhost:8081) for ReactJS example.
+Then, click on the `examples` directory in the showing listing and you should land on the example page.
 
 ## Copyright and license
 
@@ -93,7 +115,6 @@ Code and documentation copyright 2019 LumApps. Code released under the [MIT lice
 
 [angularjs]: https://angularjs.org/
 [reactjs]: https://reactjs.org/
-[local]: http://localhost:8888
 [material]: http://www.google.com/design/spec/material-design/introduction.html
 [angularjs-release]: https://www.npmjs.com/package/@lumx/angularjs
 [reactjs-release]: https://www.npmjs.com/package/@lumx/react

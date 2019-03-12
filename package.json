@@ -65,6 +65,7 @@
         "babel-plugin-smart-webpack-import": "^1.4.2",
         "commitizen": "^3.0.7",
         "copy-webpack-plugin": "^5.0.0",
+        "create-file-webpack": "^1.0.2",
         "css-loader": "^2.1.0",
         "enzyme": "^3.9.0",
         "enzyme-adapter-react-16": "^1.10.0",
@@ -153,10 +154,8 @@
         "ReactJS"
     ],
     "license": "MIT",
-    "main": "dist/index.js",
-    "module": "dist/lumx.esm.js",
     "name": "@lumx/lumx",
-    "private": false,
+    "private": true,
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"
@@ -166,6 +165,12 @@
         "build:all": "rm -Rf ./dist/ && npm -s run build:angularjs; npm -s run build:react",
         "build:angularjs": "rm -Rf ./dist/angularjs && webpack --config webpack/angularjs/webpack.umd.js",
         "build:react": "rm -Rf ./dist/react && webpack --config webpack/react/webpack.umd.js",
+        "prebump:major": "cd src/icons && npm --no-git-tag-version version major && git add package.json && cd -",
+        "bump:major": "npm version --force --message 'chore(release): release new major version %s' major",
+        "prebump:minor": "cd src/icons && npm --no-git-tag-version version minor && git add package.json && cd -",
+        "bump:minor": "npm version --force --message 'chore(release): release new minor version %s' minor",
+        "prebump:patch": "cd src/icons && npm --no-git-tag-version version patch && git add package.json && cd -",
+        "bump:patch": "npm version --force --message 'chore(release): release new patch version %s' patch",
         "commit": "git-cz",
         "co": "npm -s run commit",
         "cz": "npm -s run commit",
