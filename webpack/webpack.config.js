@@ -6,7 +6,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-const { babelSetup, getSassRessourcesFiles } = require('./utils');
+const { babelSetup } = require('./utils');
 const { COMPONENTS_PATH, CORE_PATH, ICONS_PATH, NODE_MODULES_PATH } = require('./constants');
 
 const plugins = [new WebpackBar(), new FriendlyErrorsWebpackPlugin()];
@@ -23,11 +23,6 @@ const baseConfig = {
     cache: true,
 
     devtool: 'cheap-module-source-map',
-
-    entry: {
-        'lumx-lumapps': `${CORE_PATH}/style/lumapps/index.js`,
-        'lumx-material': `${CORE_PATH}/style/material/index.js`,
-    },
 
     externals: [
         '@uirouter/angularjs',
@@ -105,13 +100,6 @@ const baseConfig = {
                         options: {
                             includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
                             sourceMap: false,
-                        },
-                    },
-                    {
-                        // TODO: Refactor all ressources in a `lumx-ressources` file and always import when needed.
-                        loader: 'sass-resources-loader',
-                        options: {
-                            resources: getSassRessourcesFiles(),
                         },
                     },
                 ],
