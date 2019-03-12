@@ -12,11 +12,11 @@
             "clear",
             "dir",
             "dirxml",
-            "groupCollapsed"
+            "groupCollapsed",
             "log",
             "profile",
             "profileEnd",
-            "table",
+            "table"
         ],
 
         "prettier": true,
