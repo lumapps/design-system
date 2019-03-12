@@ -450,7 +450,20 @@ module.exports = {
         'no-console': [
             'error',
             {
-                allow: ['trace', 'group', 'groupEnd'],
+                allow: [
+                    'count',
+                    'countReset',
+                    'error',
+                    'group',
+                    'groupEnd',
+                    'info',
+                    'time',
+                    'timeEnd',
+                    'timeLog',
+                    'timeStamp',
+                    'trace',
+                    'warn',
+                ],
             },
         ],
         'no-const-assign': 'error',

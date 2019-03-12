@@ -6,10 +6,23 @@
         "exclude": ["**/node_modules/**", "**/src/icons/node_modules/**", "**/*.d.ts"]
     },
     "rules": {
+        "no-console": [
+            true,
+            "assert",
+            "clear",
+            "dir",
+            "dirxml",
+            "groupCollapsed"
+            "log",
+            "profile",
+            "profileEnd",
+            "table",
+        ],
+
         "prettier": true,
 
         "no-constant-condition": [
-            "error",
+            true,
             {
                 "checkLoops": false
             }
