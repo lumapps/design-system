@@ -75,6 +75,7 @@ const baseConfig = {
                 loader: 'awesome-typescript-loader',
                 options: {
                     silent: true,
+                    useCache: true,
                 },
             },
             {
