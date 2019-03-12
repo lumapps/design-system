@@ -1,12 +1,13 @@
 const IS_CI = require('is-ci');
 const path = require('path');
 
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-const { babelSetup } = require('./utils');
-const { COMPONENTS_PATH, CORE_PATH, ICONS_PATH } = require('./constants');
+const { babelSetup, getSassRessourcesFiles } = require('./utils');
+const { COMPONENTS_PATH, CORE_PATH, ICONS_PATH, NODE_MODULES_PATH } = require('./constants');
 
 const plugins = [new WebpackBar(), new FriendlyErrorsWebpackPlugin()];
 if (!IS_CI) {
@@ -75,6 +76,44 @@ const baseConfig = {
                 options: {
                     silent: true,
                 },
+            },
+            {
+                exclude: /node_modules/u,
+                test: /\.scss$/u,
+                use: [
+                    ExtractCssChunks.loader,
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            // eslint-disable-next-line no-magic-numbers
+                            importLoaders: 2,
+                            sourceMap: false,
+                        },
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: `${CORE_PATH}/style/postcss.config.js`,
+                            },
+                            sourceMap: false,
+                        },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
+                            sourceMap: false,
+                        },
+                    },
+                    {
+                        // TODO: Refactor all ressources in a `lumx-ressources` file and always import when needed.
+                        loader: 'sass-resources-loader',
+                        options: {
+                            resources: getSassRessourcesFiles(),
+                        },
+                    },
+                ],
             },
         ],
     },

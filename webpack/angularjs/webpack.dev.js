@@ -12,7 +12,6 @@ const devConfig = {
     devServer: getWebpackDevServerConfig(),
 
     entry: {
-        ...angularJSConfig.entry,
         'demo-site': `${DEMO_PATH}/${TECH_PREFIX.angularjs}/app.js`,
     },
 
@@ -30,7 +29,7 @@ const devConfig = {
 };
 
 module.exports = merge.smartStrategy({
-    entry: 'replace',
+    entry: 'append',
     'module.rules': 'append',
     plugins: 'replace',
 })(angularJSConfig, devConfig);

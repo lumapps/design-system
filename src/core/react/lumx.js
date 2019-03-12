@@ -1,1 +1,1 @@
-import '../style/lumx.scss';
+/* eslint-disable import/unambiguous */

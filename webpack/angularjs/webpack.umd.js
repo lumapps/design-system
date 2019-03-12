@@ -9,7 +9,7 @@ const UMDConfig = {};
 
 module.exports = buildConfig(
     merge.smartStrategy({
-        entry: 'replace',
+        entry: 'append',
         'module.rules': 'append',
         plugins: 'replace',
     })(angularJSConfig, UMDConfig),

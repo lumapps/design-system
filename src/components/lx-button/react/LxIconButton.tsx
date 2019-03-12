@@ -2,8 +2,6 @@ import React, { Children, cloneElement } from 'react';
 
 import classNames from 'classnames';
 
-import '../style/lx-button.scss';
-
 import { ILxButtonProps, LxButton } from './LxButton';
 
 export const LxIconButton: React.FC<ILxButtonProps> = ({ children, ...props }) => (

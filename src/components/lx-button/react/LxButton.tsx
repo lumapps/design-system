@@ -4,8 +4,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import '../style/lx-button.scss';
-
 import { handleBasicClasses } from 'LumX/core/utils';
 
 interface ILxButtonRootProps {
@@ -56,20 +54,30 @@ export interface ILxButtonProps extends ILxButtonRootProps {
 export const LxButton: React.FC<ILxButtonProps> = ({
     children,
     className,
-    color = 'primary',
+    color = '',
     emphasis = 'high',
     size = 'm',
     theme = 'light',
     variant = 'button',
     ...props
-}) => (
-    <LxButtonRoot
-        className={classNames(
-            className,
-            handleBasicClasses({ color, emphasis, size, theme, variant, prefix: 'lx-button' }),
-        )}
-        {...props}
-    >
-        {children}
-    </LxButtonRoot>
-);
+}) => {
+    if (!color) {
+        if (!emphasis || emphasis === 'high') {
+            color = 'primary';
+        } else {
+            color = 'dark';
+        }
+    }
+
+    return (
+        <LxButtonRoot
+            className={classNames(
+                className,
+                handleBasicClasses({ color, emphasis, size, theme, variant, prefix: 'lx-button' }),
+            )}
+            {...props}
+        >
+            {children}
+        </LxButtonRoot>
+    );
+};

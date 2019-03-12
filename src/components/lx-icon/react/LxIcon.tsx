@@ -4,8 +4,6 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import '../style/lx-icon.scss';
-
 import { handleBasicClasses } from 'LumX/core/utils';
 
 interface ILxIconProps {

@@ -13,7 +13,6 @@ const devConfig = {
     devServer: getWebpackDevServerConfig({ port: 4001 }),
 
     entry: {
-        ...reactConfig.entry,
         'demo-site': `${DEMO_PATH}/${TECH_PREFIX.react}/index.tsx`,
     },
 
@@ -37,7 +36,7 @@ const devConfig = {
 };
 
 module.exports = merge.smartStrategy({
-    entry: 'replace',
+    entry: 'append',
     'module.rules': 'append',
     plugins: 'replace',
     'resolve.alias': 'append',

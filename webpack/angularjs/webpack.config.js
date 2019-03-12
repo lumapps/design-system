@@ -25,7 +25,7 @@ const angularJSConfig = {
 };
 
 module.exports = merge.smartStrategy({
-    entry: 'replace',
+    entry: 'append',
     'module.rules': 'append',
     plugins: 'replace',
 })(baseConfig, angularJSConfig);

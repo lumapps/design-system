@@ -63,6 +63,8 @@ yarn start:angularjs
 npm run start:angularjs
 ```
 
+You can then open your browser to [http://localhost:4000/](http://localhost:4000/) to access the demo and test site.
+
 For ReactJS development server:
 
 ```bash
@@ -71,7 +73,7 @@ yarn start:react
 npm run start:react
 ```
 
-You can then open your browser to [http://localhost:4000/](http://localhost:4000/) to access the demo and test site.
+You can then open your browser to [http://localhost:4001/](http://localhost:4001/) to access the demo and test site.
 
 ## Project build
 

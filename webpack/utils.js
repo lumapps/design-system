@@ -20,7 +20,6 @@ const {
     DEFAULT_HOST,
     DEFAULT_PORT,
     EXAMPLES_PATH,
-    NODE_MODULES_PATH,
     TECH_PREFIX,
 } = require('./constants');
 
@@ -136,7 +135,6 @@ const buildConfig = (config, tech, moduleType, minify = true) => {
         throw new Error(`Unknown tech "${tech}"`);
     }
 
-    const simpleFileName = `lumx${minify ? '.min' : ''}`;
     const filename = `[name]${minify ? '.min' : ''}`;
 
     const minimizer = [];
@@ -144,8 +142,8 @@ const buildConfig = (config, tech, moduleType, minify = true) => {
     const plugins = [
         ...config.plugins,
         new ExtractCssChunks({
-            chunkFilename: `${simpleFileName}.css`,
-            filename: `${simpleFileName}.css`,
+            chunkFilename: `${filename}.css`,
+            filename: `${filename}.css`,
         }),
         new CopyWebpackPlugin([
             {
@@ -192,49 +190,6 @@ const buildConfig = (config, tech, moduleType, minify = true) => {
         mode: 'production',
 
         name: `${tech}-${moduleType}${minify ? '-minified' : ''}`,
-
-        module: {
-            rules: [
-                {
-                    exclude: /node_modules/u,
-                    test: /\.scss$/u,
-                    use: [
-                        ExtractCssChunks.loader,
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                // eslint-disable-next-line no-magic-numbers
-                                importLoaders: 2,
-                                sourceMap: false,
-                            },
-                        },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                config: {
-                                    path: `${CORE_PATH}/style/postcss.config.js`,
-                                },
-                                sourceMap: false,
-                            },
-                        },
-                        {
-                            loader: 'sass-loader',
-                            options: {
-                                includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
-                                sourceMap: false,
-                            },
-                        },
-                        {
-                            // TODO: Refactor all ressources in a `lumx-ressources` file and always import when needed.
-                            loader: 'sass-resources-loader',
-                            options: {
-                                resources: getSassRessourcesFiles(),
-                            },
-                        },
-                    ],
-                },
-            ],
-        },
 
         output: {
             ...config.output,

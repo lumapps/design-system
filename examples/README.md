@@ -11,13 +11,6 @@ npm install
 ```
 
 This will install `http-server`, a simple HTTP server.
-You can also install it globally:
-
-```bash
-yarn global add http-server
-# Or
-npm install -g http-server
-```
 
 Then, simply run:
 
@@ -27,11 +20,5 @@ yarn serve:<angularjs|react>
 npm run serve:<angularjs|react>
 ```
 
-Or start your globally installed `http-server`:
-
-```bash
-http-server -p 8080 <angularjs|react> -s -o --cors -c-1
-```
-
-Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080).
+Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for AngularJS example or [http://localhost:8081](http://localhost:8081) for ReactJS example.
 Then, click on the `examples` directory in the showing listing and you should land on the example page.

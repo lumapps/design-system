@@ -25,7 +25,8 @@
     },
     "scripts": {
         "serve:angularjs": "http-server -p 8080 angularjs/ -s -o --cors -c-1",
-        "serve:react": "http-server -p 8080 react/ -s -o --cors -c-1"
+        "serve:react": "http-server -p 8081 react/ -s -o --cors -c-1",
+        "setup": "yarn install"
     },
     "version": "0.0.1"
 }

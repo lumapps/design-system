@@ -175,7 +175,7 @@
         "setup": "yarn install; cd ./src/icons/; yarn install; cd -",
         "setup:git-hooks": "node node_modules/husky/bin/uninstall.js && node node_modules/husky/bin/install.js",
         "start:angularjs": "nodemon --watch webpack --ignore webpack/react --ignore webpack/.eslintrc.js node_modules/.bin/webpack-dev-server -- --config webpack/angularjs/webpack.dev.js --hot",
-        "start:react": "emon --watch webpack --ignore webpack/angularjs --ignore webpack/.eslintrc.js node_modules/.bin/webpack-dev-server -- --config webpack/react/webpack.dev.js --hot",
+        "start:react": "nodemon --watch webpack --ignore webpack/angularjs --ignore webpack/.eslintrc.js node_modules/.bin/webpack-dev-server -- --config webpack/react/webpack.dev.js --hot",
         "stylelint:demo": "stylelint \"demo/**/*.scss\"",
         "stylelint:src": "stylelint \"src/**/*.scss\"",
         "test:react": "jest --config jest/react/index.js",
