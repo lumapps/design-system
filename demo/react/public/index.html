@@ -24,11 +24,14 @@
 
         <!-- Design System -->
         <% for (key in htmlWebpackPlugin.files.chunks) { %>
+        <!-- prettier-ignore -->
+        <% if (key != 'style-lumapps' && key != 'style-material') { %>
         <script
             src="<%= htmlWebpackPlugin.files.chunks[key].entry %>"
             type="text/javascript"
             crossorigin="<%= webpackConfig.output.crossOriginLoading %>"
         ></script>
+        <% } %>
         <!-- prettier-ignore -->
         <% } %>
     </body>
