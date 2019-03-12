@@ -18,8 +18,8 @@
     },
     "contributors": [
         "Clement Prevot <clement@lumapps.com> (https://github.com/clementprevot)",
-        "Matthias Manoukian <matthias@lumapps.com> (https://github.com/matmkian)",
-        "Marc-Olivier Castagnetti. <marc-olivier@lumapps.com> (https://github.com/mcastagnetti)"
+        "Marc-Olivier Castagnetti. <marc-olivier@lumapps.com> (https://github.com/mcastagnetti)",
+        "Matthias Manoukian <matthias@lumapps.com> (https://github.com/matmkian)"
     ],
     "dependencies": {
         "@uirouter/angularjs": "^1.0.22",
