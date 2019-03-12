@@ -10,3 +10,4 @@ package-lock.json
 dist/
 yarn-error.log
 jsconfig.json
+.awcache
