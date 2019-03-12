@@ -9,6 +9,8 @@ import { handleBasicClasses } from 'LumX/core/utils';
 interface ILxButtonRootProps {
     /** Basic react `className` prop. */
     className?: string;
+    /** Indicates if the button is disabled or not. */
+    disabled?: boolean;
     /** The `href` to reach if there is one. */
     href?: string;
     /** The `target` html property. */
