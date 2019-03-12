@@ -3,14 +3,17 @@
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <base href="/" />
-        <title>Design System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Design System</title>
+
         <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" />
 
         <link id="theme" rel="stylesheet" href="lumx-lumapps.css" />
         <link rel="stylesheet" href="demo-site.css" />
+
+        <base href="/" />
     </head>
     <body>
         <div class="app">
@@ -20,25 +23,25 @@
         </div>
 
         <!-- Libs -->
-        <script src="node_modules/jquery/dist/jquery.js"></script>
-        <script src="node_modules/focus-visible/dist/focus-visible.js"></script>
+        <script src="node_modules/jquery/dist/jquery.js" type="text/javascript"></script>
+        <script src="node_modules/focus-visible/dist/focus-visible.js" type="text/javascript"></script>
 
         <!-- Angular -->
-        <script src="node_modules/angular/angular.js"></script>
-        <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
+        <script src="node_modules/angular/angular.js" type="text/javascript"></script>
+        <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js" type="text/javascript"></script>
 
         <!-- Design System -->
-        <% for (key in htmlWebpackPlugin.files.chunks) { %> <% if (key != 'style-lumapps' && key != 'style-material') {
-        %>
+        <% for (key in htmlWebpackPlugin.files.chunks) { %>
+        <!-- prettier-ignore -->
+        <% if (key != 'style-lumapps' && key != 'style-material') { %>
         <script
             src="<%= htmlWebpackPlugin.files.chunks[key].entry %>"
             type="text/javascript"
             crossorigin="<%= webpackConfig.output.crossOriginLoading %>"
         ></script>
-        <% } %> <% } %> <% if (htmlWebpackPlugin.files.chunks['style-lumapps']) { %>
-        <!-- <script src="<%= htmlWebpackPlugin.files.chunks['style-lumapps'].entry %>" charset="UTF-8" defer></script> -->
-        <% } %> <% if (htmlWebpackPlugin.files.chunks['style-material']) { %>
-        <script src="<%= htmlWebpackPlugin.files.chunks['style-material'].entry %>" charset="UTF-8" defer></script>
+        <!-- prettier-ignore -->
+        <% } %>
+        <!-- prettier-ignore -->
         <% } %>
     </body>
 </html>

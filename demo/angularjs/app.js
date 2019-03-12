@@ -2,7 +2,7 @@
 
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import './style/app.scss';
+import '../style/app.scss';
 
 /////////////////////////////
 
