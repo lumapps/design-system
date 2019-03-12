@@ -34,9 +34,15 @@
                     &lt;/head&gt;
 
                     &lt;body class="p++"&gt;
-                        &lt;div class="lx-typography-title"&gt;This is a basic example&lt;/div&gt;
+                        &lt;div class="lx-typography-title mb+++"&gt;This is a basic example&lt;/div&gt;
 
-                        &lt;div class="mt++"&gt;&lt;lx-button&gt;Nice!&lt;/lx-button&gt;&lt;/div&gt;
+                        &lt;lx-button ng-click="LxNotificationService.info('Isn\'t it?!')"&gt;
+                            Nice!
+                        &lt;/lx-button&gt;
+                        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                        &lt;lx-button lx-color="green" ng-click="LxNotificationService.info('Glad you got it!')"&gt;
+                            OK, I got it!
+                        &lt;/lx-button&gt;
 
                         &lt;script
                             src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -49,11 +55,19 @@
                         &lt;script src="node_modules/@lumx/dist/lumx.angularjs.min.js" type="text/javascript"&gt;&lt;/script&gt;
 
                         &lt;script type="text/javascript"&gt;
-                            angular
-                                .module('lumx-example-app', ['@lumx/angularjs'])
-                                .run(function(LxNotificationService) {
-                                    LxNotificationService.success('Basic example application successfully started!');
-                                });
+                            const MODULE = angular.module('lumx-example-app', ['@lumx/angularjs']);
+
+                            MODULE.config(() => {
+                                // eslint-disable-next-line no-console
+                                console.log('Application configuration started');
+                            }).run(($rootScope, LxNotificationService) => {
+                                $rootScope.LxNotificationService = LxNotificationService;
+
+                                const message = 'LumX Example AngularJS Application successfully started!';
+
+                                console.info(message);
+                                LxNotificationService.success(message);
+                            });
                         &lt;/script&gt;
                     &lt;/body&gt;
                 &lt;/html&gt;
@@ -63,10 +77,12 @@
         <div class="center mt++">
             <div class="lx-typography-title mb+++">This is a basic example</div>
 
-            <lx-button ng-click="LxNotificationService.info('Isn\'t it?!')">Nice!</lx-button>
+            <lx-button ng-click="LxNotificationService.info('Isn\'t it?!')">
+                Nice!
+            </lx-button>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <lx-button lx-color="green" ng-click="LxNotificationService.info('Glad you got it!')"
-                >OK, I got it!
+            <lx-button lx-color="green" ng-click="LxNotificationService.info('Glad you got it!')">
+                OK, I got it!
             </lx-button>
         </div>
 
