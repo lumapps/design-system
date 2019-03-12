@@ -107,7 +107,6 @@
         "prettier-eslint-cli": "^4.7.1",
         "sass-loader": "^7.1.0",
         "sass-mq": "^5.0.0",
-        "sass-resources-loader": "^2.0.0",
         "source-map-loader": "^0.2.4",
         "style-loader": "^0.23.1",
         "stylelint": "^9.10.1",

@@ -16,7 +16,6 @@ const {
     APP_PATH,
     COMPONENTS_PATH,
     CONFIGS,
-    CORE_PATH,
     DEFAULT_HOST,
     DEFAULT_PORT,
     EXAMPLES_PATH,
@@ -75,20 +74,6 @@ const getComponents = ({ prefix, extension }) => {
 
     return files;
 };
-
-/**
- * Get all sass ressource files which contains ressources to share across all scss files.
- *
- * @return {Array} The array of ressource files.
- */
-function getSassRessourcesFiles() {
-    const ressourceFileNames = ['_mixins', '_variables', '_color-palette', '_functions'];
-
-    // Sets the paths to match according to https://github.com/isaacs/minimatch documentation.
-    const pathToMatch = `${CORE_PATH}/style/**/+(${ressourceFileNames.join('|')}).scss`;
-
-    return glob.sync(pathToMatch);
-}
 
 /**
  * Returns `WebpackDevServer` default config to use in dev mode.
@@ -219,6 +204,5 @@ module.exports = {
     babelSetup,
     buildConfig,
     getComponents,
-    getSassRessourcesFiles,
     getWebpackDevServerConfig,
 };

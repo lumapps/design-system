@@ -1,1 +1,0 @@
-import './lumx.scss';

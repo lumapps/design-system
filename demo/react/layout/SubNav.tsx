@@ -34,7 +34,7 @@ export const SubNav = ({ activeComponent, handleNavigate }: IProps): JSX.Element
         <div className="sub-nav__wrapper">
             {NAV_ITEMS.map(
                 (navItemLabel: string): JSX.Element => (
-                    <SubNavItem handleClick={handleNavigate} activeComponent={activeComponent}>
+                    <SubNavItem key={navItemLabel} handleClick={handleNavigate} activeComponent={activeComponent}>
                         {navItemLabel}
                     </SubNavItem>
                 ),

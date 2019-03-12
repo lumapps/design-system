@@ -44,7 +44,7 @@ export class Main extends PureComponent<IProps, IState> {
                 this.setState({ component: { view: undefined } });
             }
 
-            console.trace(exception);
+            console.error(exception);
         }
     }
 
