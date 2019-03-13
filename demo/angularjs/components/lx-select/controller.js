@@ -62,16 +62,6 @@ function DemoSelectController($http) {
     };
 
     /**
-     * The models of some select in the demo page.
-     *
-     * @type {Object}
-     */
-    vm.selectModel = {
-        selectedPeople: [vm.selectPeople[2], vm.selectPeople[4]],
-        selectedPerson: undefined,
-    };
-
-    /**
      * The list of person to display in the "People" select.
      *
      * @type {Array<Object>}
@@ -128,6 +118,16 @@ function DemoSelectController($http) {
             name: 'Adrian',
         },
     ];
+
+    /**
+     * The models of some select in the demo page.
+     *
+     * @type {Object}
+     */
+    vm.selectModel = {
+        selectedPeople: [vm.selectPeople[2], vm.selectPeople[4]],
+        selectedPerson: undefined,
+    };
 
     /////////////////////////////
     //                         //
