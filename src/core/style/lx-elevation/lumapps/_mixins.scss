@@ -1,5 +1,3 @@
-@import './variables';
-
 @mixin lx-elevation($elevation) {
     @if $elevation == 0 {
         box-shadow: none;

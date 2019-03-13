@@ -2,7 +2,8 @@
 
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import '../style/app.scss';
+import { changeTheme as _changeTheme } from '../utils';
+import { DEFAULT_THEME, THEMES } from '../constants';
 
 /////////////////////////////
 
@@ -24,6 +25,8 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                     template: require('./layout/main-nav/main-nav.html'),
                 },
                 'sub-nav': {
+                    controller: 'SubNavController',
+                    controllerAs: 'vm',
                     template: require('./layout/sub-nav/sub-nav.html'),
                 },
             },
@@ -216,8 +219,15 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
 
 AppDefaultConfig.$inject = ['$locationProvider', '$stateProvider'];
 
-function AppDefaultRun($http, $templateCache) {
+function AppDefaultRun($rootScope, $http, $templateCache, Theme) {
     const templatesToCache = [];
+
+    $rootScope.Theme = Theme;
+    _changeTheme(Theme.theme).then(() => {
+        $rootScope.$apply(() => {
+            Theme.loaded = true;
+        });
+    });
 
     angular.forEach(templatesToCache, function cacheTemplates(templatePath) {
         $http.get(templatePath).then(function cacheTemplatesSuccess(template) {
@@ -228,14 +238,21 @@ function AppDefaultRun($http, $templateCache) {
     });
 }
 
-AppDefaultRun.$inject = ['$http', '$templateCache'];
+AppDefaultRun.$inject = ['$rootScope', '$http', '$templateCache', 'Theme'];
 
 angular
     .module('design-system', DEPENDENCIES)
+    .value('Theme', {
+        loaded: false,
+        theme: DEFAULT_THEME,
+    })
+    .constant('Themes', THEMES)
     .config(AppDefaultConfig)
     .run(AppDefaultRun);
 
 /* eslint-disable import/no-unassigned-import */
+require('./layout/sub-nav/sub-nav_controller.js');
+
 require('./components/lx-button/controller.js');
 require('./components/lx-checkbox/controller.js');
 require('./components/lx-chip/controller.js');

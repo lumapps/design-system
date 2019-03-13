@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Theme
+   ========================================================================== */
+
+@each $color-key, $color in $lx-theme-color-palette {
+    @each $color-variant in $lx-theme-color-variants {
+        .lx-theme-background-#{$color-key}-#{$color-variant} {
+            background-color: lx-theme-color-variant($color-key, $color-variant);
+        }
+
+        .lx-theme-color-#{$color-key}-#{$color-variant} {
+            color: lx-theme-color-variant($color-key, $color-variant);
+        }
+    }
+}

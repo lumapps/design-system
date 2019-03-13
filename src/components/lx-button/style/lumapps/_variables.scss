@@ -3,6 +3,9 @@ $lx-button-text-sizes: (
     s: 12px
 ) !default;
 
+$lx-button-text-weight: 600 !default;
+$lx-button-text-transform: none !default;
+
 $lx-button-icon-sizes: (
     m: map-get($lx-sizes, xs),
     s: map-get($lx-sizes, xxs)

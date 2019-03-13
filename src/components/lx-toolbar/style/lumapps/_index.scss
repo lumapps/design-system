@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Toolbar
+   ========================================================================== */
+
+.lx-toolbar {
+    display: flex;
+    height: $lx-toolbar-height;
+    align-items: center;
+    padding: 0 $lx-spacing-unit * 3;
+
+    &--has-before {
+        padding-left: $lx-spacing-unit * 2;
+    }
+
+    &--has-after {
+        padding-right: $lx-spacing-unit * 2;
+    }
+
+    &__before {
+        flex-shrink: 0;
+        margin-right: $lx-spacing-unit * 2;
+    }
+
+    &__label {
+        flex: 1;
+    }
+
+    &__after {
+        flex-shrink: 0;
+        margin-left: $lx-spacing-unit * 2;
+    }
+}

@@ -1,0 +1,150 @@
+/* ==========================================================================
+   Chip
+   ========================================================================== */
+
+.lx-chip {
+    $self: &;
+
+    @include lx-chip-base;
+
+    &__before {
+        @include lx-chip-before;
+    }
+
+    &__label {
+        #{ $self }--size-m & {
+            @include lx-chip-label(m);
+        }
+
+        #{ $self }--size-s & {
+            @include lx-chip-label(s);
+        }
+    }
+
+    &__after {
+        @include lx-chip-after;
+    }
+}
+
+/* Chip size
+   ========================================================================== */
+
+.lx-chip--size-m {
+    @include lx-chip-size(m);
+
+    padding: 0 $lx-spacing-unit * 2;
+
+    &.lx-chip--has-before {
+        padding-left: $lx-spacing-unit * 1.5;
+    }
+
+    &.lx-chip--has-after {
+        padding-right: $lx-spacing-unit * 1.5;
+    }
+}
+
+.lx-chip--size-s {
+    @include lx-chip-size(s);
+
+    padding: 0 $lx-spacing-unit * 1.5;
+
+    &.lx-chip--has-before {
+        padding-left: $lx-spacing-unit;
+    }
+
+    &.lx-chip--has-after {
+        padding-right: $lx-spacing-unit;
+    }
+}
+
+/* Chip states
+   ========================================================================== */
+
+.lx-chip--is-clickable,
+.lx-chip .lx-chip__before--is-clickable,
+.lx-chip .lx-chip__after--is-clickable {
+    cursor: pointer;
+}
+
+.lx-chip .lx-chip__before--is-clickable:hover,
+.lx-chip .lx-chip__after--is-clickable:hover {
+    opacity: 0.8;
+}
+
+.lx-chip--is-unselected {
+    &.lx-chip--theme-light {
+        @include lx-state(state-default, emphasis-medium, dark);
+
+        &.lx-chip--is-clickable:hover {
+            @include lx-state(state-hover, emphasis-medium, dark);
+        }
+
+        &.lx-chip--is-clickable:active {
+            @include lx-state(state-active, emphasis-medium, dark);
+        }
+
+        &.lx-chip--is-clickable[data-focus-visible-added] {
+            @include lx-state(state-focus, emphasis-medium, dark);
+        }
+    }
+
+    &.lx-chip--theme-dark {
+        @include lx-state(state-default, emphasis-medium, light);
+
+        &.lx-chip--is-clickable:hover {
+            @include lx-state(state-hover, emphasis-medium, light);
+        }
+
+        &.lx-chip--is-clickable:active {
+            @include lx-state(state-active, emphasis-medium, light);
+        }
+
+        &.lx-chip--is-clickable[data-focus-visible-added] {
+            @include lx-state(state-focus, emphasis-medium, light);
+        }
+    }
+}
+
+.lx-chip--is-selected {
+    &.lx-chip--theme-light {
+        @include lx-state-as-selected(state-default, dark);
+
+        &.lx-chip--is-clickable:hover {
+            @include lx-state-as-selected(state-hover, dark);
+        }
+
+        &.lx-chip--is-clickable:active {
+            @include lx-state-as-selected(state-active, dark);
+        }
+
+        &.lx-chip--is-clickable[data-focus-visible-added] {
+            @include lx-state-as-selected(state-focus, dark);
+        }
+    }
+
+    &.lx-chip--theme-dark {
+        @include lx-state-as-selected(state-default, light);
+
+        &.lx-chip--is-clickable:hover {
+            @include lx-state-as-selected(state-hover, light);
+        }
+
+        &.lx-chip--is-clickable:active {
+            @include lx-state-as-selected(state-active, light);
+        }
+
+        &.lx-chip--is-clickable[data-focus-visible-added] {
+            @include lx-state-as-selected(state-focus, light);
+        }
+    }
+}
+
+.lx-chip--is-disabled {
+    &.lx-chip--theme-light {
+        @include lx-state(state-disabled, emphasis-medium, dark);
+    }
+
+    &.lx-chip--theme-dark {
+        @include lx-state(state-disabled, emphasis-medium, light);
+    }
+}
