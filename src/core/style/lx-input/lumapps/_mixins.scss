@@ -1,5 +1,3 @@
-@import './variables';
-
 @mixin lx-input-label($theme) {
     @include lx-typography($lx-input-label-typography);
 

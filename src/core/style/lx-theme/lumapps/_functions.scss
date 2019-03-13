@@ -1,5 +1,3 @@
-@import './variables';
-
 @function lx-theme-color-variant($color, $variant) {
     @return map-get(map-get($lx-theme-color-palette, $color), $variant);
 }

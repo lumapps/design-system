@@ -2,7 +2,9 @@
 //    #APP
 //\*------------------------------------*/
 
-@import '../../src/core/style/style-lumapps';
+@import 'mq';
+@import '../../src/core/style/core-material';
+@import '../../src/core/style/core-lumapps';
 @import './layout/base/base';
 @import './layout/main-nav/main-nav';
 @import './layout/sub-nav/sub-nav';

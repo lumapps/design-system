@@ -1,5 +1,3 @@
-@import './variables';
-
 @mixin lx-text-field-input-wrapper($theme, $has-indicator: false, $is-multiple: false) {
     position: relative;
     display: flex;

@@ -2,10 +2,6 @@
    Select
    ========================================================================== */
 
-@import './mixins';
-@import './../../../lx-text-field/style/lumapps/variables';
-@import './../../../lx-text-field/style/lumapps/mixins';
-
 .lx-select {
     $self: &;
 

@@ -1,5 +1,3 @@
-@import './variables';
-
 @mixin lx-button-base() {
     position: relative;
     display: inline-flex;
@@ -72,7 +70,8 @@
 
 @mixin lx-button-text($size) {
     font-size: map-get($lx-button-text-sizes, $size);
-    font-weight: 600;
+    font-weight: $lx-button-text-weight;
     line-height: map-get($lx-sizes, $size);
     pointer-events: none;
+    text-transform: $lx-button-text-transform;
 }

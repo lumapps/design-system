@@ -25,8 +25,8 @@ const baseConfig = {
     devtool: 'cheap-module-source-map',
 
     entry: {
-        'lumx-lumapps': `${CORE_PATH}/style/style-lumapps.scss`,
-        'lumx-material': `${CORE_PATH}/style/style-material.scss`,
+        'lumx-lumapps': `${CORE_PATH}/style/lumx-lumapps.scss`,
+        'lumx-material': `${CORE_PATH}/style/lumx-material.scss`,
     },
 
     externals: [

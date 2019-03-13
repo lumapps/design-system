@@ -1,11 +1,9 @@
 /* ==========================================================================
-   Button
+   Typography
    ========================================================================== */
 
-.lx-button {
-    text-transform: uppercase;
-
-    span {
-        font-weight: 500;
+@each $style in $lx-typography-styles {
+    .lx-typography-#{$style} {
+        @include lx-typography($style);
     }
 }
