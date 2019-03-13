@@ -15,15 +15,6 @@ function lxTooltipController($element, $timeout, LxDepthService) {
     /////////////////////////////
 
     /**
-     * Offset from the source element.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _OFFSET_FROM_SOURCE = 8;
-
-    /**
      * Delay before showing the tooltip on source element mouse enter.
      *
      * @type {number}
@@ -78,17 +69,17 @@ function lxTooltipController($element, $timeout, LxDepthService) {
         if (angular.isUndefined(lxTooltip.position) || lxTooltip.position === 'top') {
             // eslint-disable-next-line no-magic-numbers
             tooltipProps.left = sourceProps.left - tooltipProps.width / 2 + sourceProps.width / 2;
-            tooltipProps.top = sourceProps.top - tooltipProps.height - _OFFSET_FROM_SOURCE;
+            tooltipProps.top = sourceProps.top - tooltipProps.height;
         } else if (lxTooltip.position === 'bottom') {
             // eslint-disable-next-line no-magic-numbers
             tooltipProps.left = sourceProps.left - tooltipProps.width / 2 + sourceProps.width / 2;
-            tooltipProps.top = sourceProps.top + sourceProps.height + _OFFSET_FROM_SOURCE;
+            tooltipProps.top = sourceProps.top + sourceProps.height;
         } else if (lxTooltip.position === 'left') {
-            tooltipProps.left = sourceProps.left - tooltipProps.width - _OFFSET_FROM_SOURCE;
+            tooltipProps.left = sourceProps.left - tooltipProps.width;
             // eslint-disable-next-line no-magic-numbers
             tooltipProps.top = sourceProps.top + sourceProps.height / 2 - tooltipProps.height / 2;
         } else if (lxTooltip.position === 'right') {
-            tooltipProps.left = sourceProps.left + sourceProps.width + _OFFSET_FROM_SOURCE;
+            tooltipProps.left = sourceProps.left + sourceProps.width;
             // eslint-disable-next-line no-magic-numbers
             tooltipProps.top = sourceProps.top + sourceProps.height / 2 - tooltipProps.height / 2;
         }
@@ -129,8 +120,11 @@ function lxTooltipController($element, $timeout, LxDepthService) {
             return;
         }
 
+        const tooltipPoisition =
+            angular.isDefined(lxTooltip.position) && lxTooltip.position ? lxTooltip.position : 'top';
+
         _tooltip = angular.element('<div/>', {
-            class: 'lx-tooltip',
+            class: `lx-tooltip lx-tooltip--position-${tooltipPoisition}`,
         });
 
         _tooltipLabel = angular.element('<span/>', {
