@@ -1,13 +1,13 @@
 const merge = require('webpack-merge');
 
-const { buildConfig } = require('../utils');
+const { getBuildConfig } = require('../webpack.build.utils');
 const { MINIFY: minify } = require('../constants');
 
 const angularJSConfig = require('./webpack.config');
 
 const UMDConfig = {};
 
-module.exports = buildConfig({
+module.exports = getBuildConfig({
     config: merge.smartStrategy({
         entry: 'append',
         'module.rules': 'append',
