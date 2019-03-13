@@ -10,14 +10,11 @@
         <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" />
 
-        <link rel="stylesheet" href="lumx-material.css" />
-        <link rel="stylesheet" href="demo-site.css" />
-
         <base href="/" />
     </head>
     <body>
-        <div class="app">
-            <div class="main-nav"></div>
+        <div class="app" ng-show="Theme.loaded">
+            <div class="main-nav" ui-view="main-nav"></div>
             <div class="sub-nav" ui-view="sub-nav"></div>
             <div class="main" ui-view="main"></div>
         </div>
@@ -33,7 +30,7 @@
         <!-- Design System -->
         <% for (key in htmlWebpackPlugin.files.chunks) { %>
         <!-- prettier-ignore -->
-        <% if (key != 'lumx-lumapps' && key != 'lumx-material') { %>
+        <% if (key.indexOf('lumx-theme') === -1 && key.indexOf('demo-theme') === -1) { %>
         <script
             src="<%= htmlWebpackPlugin.files.chunks[key].entry %>"
             type="text/javascript"

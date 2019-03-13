@@ -1,9 +1,11 @@
 import React from 'react';
 
 import { SubNavItem } from './SubNavItem';
+import { ThemeSelector } from './ThemeSelector';
 
 interface IProps {
     activeComponent?: string;
+    changeTheme: (theme: string) => void;
     handleNavigate: (component: string) => void;
 }
 
@@ -29,9 +31,13 @@ const NAV_ITEMS: string[] = [
     'Tooltip',
 ];
 
-export const SubNav = ({ activeComponent, handleNavigate }: IProps): JSX.Element => (
+export const SubNav = ({ activeComponent, changeTheme, handleNavigate }: IProps): JSX.Element => (
     <div className="sub-nav">
         <div className="sub-nav__wrapper">
+            <ThemeSelector changeTheme={changeTheme} />
+
+            {/* <LxDivider /> */}
+
             {NAV_ITEMS.map(
                 (navItemLabel: string): JSX.Element => (
                     <SubNavItem key={navItemLabel} handleClick={handleNavigate} activeComponent={activeComponent}>

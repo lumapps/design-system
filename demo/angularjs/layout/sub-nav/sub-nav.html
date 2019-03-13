@@ -1,4 +1,19 @@
 <div class="sub-nav__wrapper">
+    <lx-select
+        lx-label="Change theme"
+        ng-model="vm.selectedTheme"
+        lx-choices="vm.THEMES"
+        lx-has-filter="false"
+        lx-is-clearable="false"
+        lx-multiple="false"
+        ng-change="vm.switchTheme()"
+    >
+        <lx-select-selected>{{ $selected.label }}</lx-select-selected>
+        <lx-select-choices>{{ $choice.label }} theme</lx-select-choices>
+    </lx-select>
+
+    <lx-divider class="mv+"></lx-divider>
+
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.button">Button</a>
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.checkbox">Checkbox</a>
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.chip">Chip</a>
@@ -10,9 +25,9 @@
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.list">List</a>
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.notification">Notification</a>
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.progress">Progress</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.progress-tracker"
-        >Progress tracker</a
-    >
+    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.progress-tracker">
+        Progress tracker
+    </a>
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.radio-button">Radio button</a>
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.select">Select</a>
     <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.switch">Switch</a>
