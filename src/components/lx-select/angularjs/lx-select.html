@@ -28,16 +28,9 @@
     >
         <div
             class="lx-select__input-native lx-select__input-native--placeholder"
-            ng-if="lxSelect.isModelEmpty() && !lxSelect.multiple"
+            ng-if="lxSelect.isModelEmpty() && lxSelect.placeholder"
         >
-            <span>Select a value</span>
-        </div>
-
-        <div
-            class="lx-select__input-native lx-select__input-native--placeholder"
-            ng-if="lxSelect.isModelEmpty() && lxSelect.multiple"
-        >
-            <span>Select values</span>
+            <span>{{ lxSelect.placeholder }}</span>
         </div>
 
         <div class="lx-select__input-native" ng-if="!lxSelect.isModelEmpty() && !lxSelect.multiple">

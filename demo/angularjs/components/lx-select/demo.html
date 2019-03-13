@@ -3,6 +3,7 @@
     lx-choices="vm.selectPeople"
     lx-is-clearable="true"
     lx-label="Lorem Ipsum"
+    lx-placeholder="Select a value"
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
@@ -14,12 +15,19 @@
     lx-is-clearable="true"
     lx-is-valid="true"
     lx-label="Lorem Ipsum"
+    lx-placeholder="Select a value"
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
 </lx-select>
 
-<lx-select ng-model="vm.selectModel.selectedPerson" lx-choices="vm.selectPeople" lx-label="Lorem Ipsum" lx-error="true">
+<lx-select
+    ng-model="vm.selectModel.selectedPerson"
+    lx-choices="vm.selectPeople"
+    lx-has-error="true"
+    lx-label="Lorem Ipsum"
+    lx-placeholder="Select a value"
+>
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
 </lx-select>
@@ -27,9 +35,9 @@
 <lx-select
     ng-model="vm.selectModel.selectedPeople"
     lx-choices="vm.selectPeople"
-    lx-has-error="true"
     lx-label="Lorem Ipsum"
     lx-multiple="true"
+    lx-placeholder="Select values"
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
@@ -48,6 +56,7 @@
     lx-multiple="true"
     lx-model-to-selection="vm.selectAjax.toSelection(data, callback)"
     lx-selection-to-model="vm.selectAjax.toModel(data, callback)"
+    lx-placeholder="Select values"
 >
     <lx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</lx-select-selected>
     <lx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</lx-select-choices>

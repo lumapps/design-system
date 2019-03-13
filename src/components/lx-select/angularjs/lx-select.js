@@ -513,6 +513,7 @@ function lxSelectDirective() {
             label: '@?lxLabel',
             modelToSelection: '&?lxModelToSelection',
             multiple: '=?lxMultiple',
+            placeholder: '@?lxPlaceholder',
             selectionToModel: '&?lxSelectionToModel',
             theme: '@?lxTheme',
             variant: '@?lxVariant',
