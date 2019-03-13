@@ -129,7 +129,7 @@ For SCSS:
 -   Except for the line wrap, please refer to [the Harry Roberts css guidelines](http://cssguidelin.es/).
 -   For the CSS properties, we follow the [concentric order](http://rhodesmill.org/brandon/2011/concentric-css/)
 
-For the ease of use and contributing, most of the coding styles are enforced with ESLint and SASS-Lint. So as long as the pre-commit script let you commit, you should be good.
+For the ease of use and contributing, most of the coding styles are enforced with ESLint, TSLint and StyleLint. So as long as the pre-commit script let you commit, you should be good.
 
 ## <a name="git-commit-guidelines"></a> Git commit guidelines
 
