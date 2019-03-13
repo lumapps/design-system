@@ -2,8 +2,6 @@
 
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import '../style/app.scss';
-
 /////////////////////////////
 
 const DEPENDENCIES = [MODULE_NAME, 'ui.router'];

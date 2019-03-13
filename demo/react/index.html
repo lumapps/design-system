@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="design-system">
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,8 +9,6 @@
 
         <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" />
-
-        <link rel="stylesheet" href="demo-site.css" />
 
         <base href="/" />
     </head>
@@ -24,7 +22,7 @@
         <!-- Design System -->
         <% for (key in htmlWebpackPlugin.files.chunks) { %>
         <!-- prettier-ignore -->
-        <% if (key != 'style-lumapps' && key != 'style-material') { %>
+        <% if (key.indexOf('lumx-theme') === -1 && key.indexOf('demo-theme') === -1) { %>
         <script
             src="<%= htmlWebpackPlugin.files.chunks[key].entry %>"
             type="text/javascript"
