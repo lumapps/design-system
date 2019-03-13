@@ -10,14 +10,14 @@
     @include lx-elevation(4);
 
     position: fixed;
-    right: $lx-base-spacing-unit * 3;
-    bottom: $lx-base-spacing-unit * 3;
+    right: $lx-spacing-unit * 3;
+    bottom: $lx-spacing-unit * 3;
     display: flex;
     overflow: hidden;
     align-items: center;
     animation: lx-notification-show $lx-notification-transition-duration;
     background-color: lx-theme-color-variant(light, N);
-    border-radius: 4px;
+    border-radius: $lx-theme-border-radius;
     transition: opacity $lx-notification-transition-duration;
 
     &--is-hidden {
@@ -36,12 +36,12 @@
     &__content {
         @include lx-typography(body1);
 
-        padding: 0 $lx-base-spacing-unit * 2;
+        padding: 0 $lx-spacing-unit * 2;
         color: lx-theme-color-variant(dark, N);
     }
 
     &__action {
-        padding-right: $lx-base-spacing-unit;
+        padding-right: $lx-spacing-unit;
     }
 }
 

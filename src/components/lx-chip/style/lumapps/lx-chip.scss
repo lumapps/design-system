@@ -34,28 +34,28 @@
 .lx-chip--size-m {
     @include lx-chip-size(m);
 
-    padding: 0 $lx-base-spacing-unit * 2;
+    padding: 0 $lx-spacing-unit * 2;
 
     &.lx-chip--has-before {
-        padding-left: $lx-base-spacing-unit * 1.5;
+        padding-left: $lx-spacing-unit * 1.5;
     }
 
     &.lx-chip--has-after {
-        padding-right: $lx-base-spacing-unit * 1.5;
+        padding-right: $lx-spacing-unit * 1.5;
     }
 }
 
 .lx-chip--size-s {
     @include lx-chip-size(s);
 
-    padding: 0 $lx-base-spacing-unit * 1.5;
+    padding: 0 $lx-spacing-unit * 1.5;
 
     &.lx-chip--has-before {
-        padding-left: $lx-base-spacing-unit;
+        padding-left: $lx-spacing-unit;
     }
 
     &.lx-chip--has-after {
-        padding-right: $lx-base-spacing-unit;
+        padding-right: $lx-spacing-unit;
     }
 }
 

@@ -22,7 +22,7 @@
     height: map-get($lx-sizes, $size);
 
     @if $variant == variant-button {
-        border-radius: $lx-button-radius;
+        border-radius: $lx-theme-border-radius;
     } @else if $variant == variant-icon {
         width: map-get($lx-sizes, $size);
         border-radius: 50%;
@@ -56,15 +56,15 @@
     @if $variant == variant-button {
         @if $position == position-left {
             @if $size == m {
-                margin-right: $lx-base-spacing-unit;
+                margin-right: $lx-spacing-unit;
             } @else if $size == s {
-                margin-right: $lx-base-spacing-unit / 2;
+                margin-right: $lx-spacing-unit / 2;
             }
         } @else if $position == position-right {
             @if $size == m {
-                margin-left: $lx-base-spacing-unit;
+                margin-left: $lx-spacing-unit;
             } @else if $size == s {
-                margin-left: $lx-base-spacing-unit / 2;
+                margin-left: $lx-spacing-unit / 2;
             }
         }
     }

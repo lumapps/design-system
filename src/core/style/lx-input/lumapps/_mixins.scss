@@ -11,6 +11,6 @@
     @include lx-typography($lx-input-helper-typography);
 
     display: block;
-    margin-top: $lx-base-spacing-unit / 2;
+    margin-top: $lx-spacing-unit / 2;
     color: lx-theme-color-variant($theme, L2);
 }

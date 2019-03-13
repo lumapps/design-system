@@ -17,7 +17,7 @@
 
 @mixin lx-chip-before() {
     flex-shrink: 0;
-    margin-right: $lx-base-spacing-unit;
+    margin-right: $lx-spacing-unit;
 }
 
 @mixin lx-chip-label($size) {
@@ -33,5 +33,5 @@
 
 @mixin lx-chip-after() {
     flex-shrink: 0;
-    margin-left: $lx-base-spacing-unit;
+    margin-left: $lx-spacing-unit;
 }

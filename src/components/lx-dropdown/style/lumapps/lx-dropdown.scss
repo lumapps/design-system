@@ -13,8 +13,8 @@
 
         position: fixed;
         overflow: auto;
-        padding: $lx-base-spacing-unit 0;
+        padding: $lx-spacing-unit 0;
         background-color: lx-theme-color-variant(light, N);
-        border-radius: 4px;
+        border-radius: $lx-theme-border-radius;
     }
 }

@@ -11,7 +11,7 @@
 
     &__cell {
         height: 56px;
-        padding: $lx-base-spacing-unit $lx-base-spacing-unit * 4 $lx-base-spacing-unit 0;
+        padding: $lx-spacing-unit $lx-spacing-unit * 4 $lx-spacing-unit 0;
 
         #{ $self }--has-thumbnail &:first-child,
         #{ $self }--is-selectable &:first-child {
@@ -32,7 +32,7 @@
 
             & > i {
                 display: inline-block;
-                margin-right: $lx-base-spacing-unit / 2;
+                margin-right: $lx-spacing-unit / 2;
                 vertical-align: middle;
             }
 
@@ -108,7 +108,7 @@
     }
 
     &__checkbox {
-        margin: 0 $lx-base-spacing-unit * 3;
+        margin: 0 $lx-spacing-unit * 3;
 
         #{ $self }--has-thumbnail #{ $self }__row--tbody & {
             display: none;

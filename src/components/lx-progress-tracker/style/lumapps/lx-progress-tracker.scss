@@ -42,8 +42,8 @@
     flex: 1;
     flex-direction: column;
     align-items: center;
-    padding: $lx-base-spacing-unit 0;
-    border-radius: 4px;
+    padding: $lx-spacing-unit 0;
+    border-radius: $lx-theme-border-radius;
     outline: none;
 
     &--is-clickable {
@@ -78,7 +78,7 @@
     &__label {
         @include lx-typography(body1);
 
-        margin-top: $lx-base-spacing-unit;
+        margin-top: $lx-spacing-unit;
         color: lx-theme-color-variant(dark, N);
         text-align: center;
 

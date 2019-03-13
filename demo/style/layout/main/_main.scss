@@ -4,12 +4,12 @@
 
 .main {
     overflow: auto;
-    padding: $lx-base-spacing-unit * 10;
-    padding-top: $lx-base-spacing-unit * 6;
+    padding: $lx-spacing-unit * 10;
+    padding-top: $lx-spacing-unit * 6;
     margin-left: $main-nav-width + $sub-nav-width;
 
     &__block {
-        margin-bottom: $lx-base-spacing-unit * 6;
+        margin-bottom: $lx-spacing-unit * 6;
 
         &:last-child {
             margin-bottom: 0;

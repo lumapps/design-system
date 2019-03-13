@@ -28,7 +28,7 @@
 
 @mixin lx-list-item-before() {
     flex-shrink: 0;
-    margin-right: $lx-base-spacing-unit;
+    margin-right: $lx-spacing-unit;
 }
 
 @mixin lx-list-item-content() {
@@ -39,7 +39,7 @@
 
 @mixin lx-list-item-after() {
     flex-shrink: 0;
-    margin-left: $lx-base-spacing-unit;
+    margin-left: $lx-spacing-unit;
 }
 
 @mixin lx-list-subheader() {
@@ -54,6 +54,6 @@
 
 @mixin lx-list-divider() {
     height: 1px;
-    margin: $lx-base-spacing-unit 0;
+    margin: $lx-spacing-unit 0;
     background-color: lx-theme-color-variant(dark, L5);
 }

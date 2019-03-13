@@ -16,7 +16,7 @@ $sub-nav-width: 228px;
 
     &__wrapper {
         flex: 1;
-        padding: $lx-base-spacing-unit * 3;
+        padding: $lx-spacing-unit * 3;
         border-right: 1px solid lx-theme-color-variant(dark, L6);
     }
 
@@ -27,8 +27,8 @@ $sub-nav-width: 228px;
         display: flex;
         min-height: 36px;
         align-items: center;
-        padding: 0 $lx-base-spacing-unit * 2;
-        margin-bottom: $lx-base-spacing-unit / 2;
+        padding: 0 $lx-spacing-unit * 2;
+        margin-bottom: $lx-spacing-unit / 2;
         border-radius: 5px;
         color: lx-theme-color-variant(dark, N);
         text-decoration: none;
@@ -45,7 +45,7 @@ $sub-nav-width: 228px;
         &--is-active::after {
             position: absolute;
             top: 0;
-            right: -($lx-base-spacing-unit * 3) - 1;
+            right: -($lx-spacing-unit * 3) - 1;
             bottom: 0;
             width: 2px;
             background-color: lx-theme-color-variant(yellow, N);

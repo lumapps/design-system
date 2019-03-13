@@ -24,7 +24,7 @@
 
     &__wrapper {
         #{ $self }--caption-position-below & {
-            margin-top: $lx-base-spacing-unit;
+            margin-top: $lx-spacing-unit;
         }
 
         #{ $self }--caption-position-over & {
@@ -32,7 +32,7 @@
             right: 0;
             bottom: 0;
             left: 0;
-            padding: $lx-base-spacing-unit * 2;
+            padding: $lx-spacing-unit * 2;
         }
 
         #{ $self }--theme-light#{ $self }--caption-position-over & {
@@ -79,11 +79,11 @@
 
     &__tags {
         display: flex;
-        margin-top: $lx-base-spacing-unit;
+        margin-top: $lx-spacing-unit;
     }
 
     &__tag {
-        margin-right: $lx-base-spacing-unit / 2;
+        margin-right: $lx-spacing-unit / 2;
 
         &:last-child {
             margin-right: 0;

@@ -66,7 +66,7 @@
     }
 
     &__label {
-        padding-left: $lx-base-spacing-unit;
+        padding-left: $lx-spacing-unit;
 
         #{ $self }--theme-light & {
             @include lx-input-label(dark);
@@ -78,7 +78,7 @@
     }
 
     &__helper {
-        padding-left: $lx-base-spacing-unit;
+        padding-left: $lx-spacing-unit;
 
         #{ $self }--theme-light & {
             @include lx-input-helper(dark);

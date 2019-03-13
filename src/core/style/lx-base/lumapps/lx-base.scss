@@ -2,8 +2,6 @@
    Base
    ========================================================================== */
 
-@import './variables';
-
 html {
     @include lx-typography-base;
 

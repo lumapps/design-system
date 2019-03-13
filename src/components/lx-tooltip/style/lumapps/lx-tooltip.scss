@@ -6,9 +6,9 @@
     @include lx-elevation(3);
 
     position: absolute;
-    padding: $lx-base-spacing-unit / 2 $lx-base-spacing-unit;
+    padding: $lx-spacing-unit / 2 $lx-spacing-unit;
     background-color: lx-theme-color-variant(light, N);
-    border-radius: 4px;
+    border-radius: $lx-theme-border-radius;
     opacity: 0;
     pointer-events: none;
 
