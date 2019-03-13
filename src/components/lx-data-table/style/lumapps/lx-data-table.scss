@@ -122,8 +122,6 @@
 
     &__thumbnail {
         display: inline-block;
-        width: 36px;
-        height: 36px;
         vertical-align: middle;
 
         #{ $self }--has-thumbnail #{ $self }__row--is-enabled:hover &,
