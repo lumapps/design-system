@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import camelCase from 'lodash/camelCase';
 import isEmpty from 'lodash/isEmpty';
@@ -18,23 +18,34 @@ interface IProps {
 }
 
 /**
- * Defines the state of the component.
- */
-interface IState {
-    /**
-     * The loaded demo component to display in the main display.
-     */
-    demoComponent?: { view?: () => JSX.Element };
-}
-
-/**
  * Defines an ESModule as it will be loaded by the dynamic component loader.
  */
 interface IESModule {
     /**
      * The default export of our fake ESModule loaded by the dynamic component loader.
      */
-    default: IState['demoComponent'];
+    default: { view?: () => JSX.Element };
+}
+
+/////////////////////////////
+//                         //
+//    Private functions    //
+//                         //
+/////////////////////////////
+
+/**
+ * Load the demo component corresponding to the currently active component.
+ *
+ * @return {Promise<IESModule>} The promise of the dynamic load of the component.
+ */
+function _loadComponent(componentFolderName: IProps['activeComponent']): Promise<IESModule> {
+    if (!componentFolderName) {
+        return Promise.reject('No component to load');
+    }
+
+    const componentName: string = upperFirst(camelCase(componentFolderName));
+
+    return import(`../components/lx-${componentFolderName}/Lx${componentName}Demo`);
 }
 
 /////////////////////////////
@@ -45,64 +56,34 @@ interface IESModule {
  * To do so, it will receive the name of the active component and will dynamically load the demo component from this
  * name.
  */
-class Main extends React.PureComponent<IProps, IState> {
-    public state: IState = {
-        demoComponent: { view: undefined },
-    };
+const Main: React.FC<IProps> = ({ activeComponent }: IProps): JSX.Element => {
+    const [demoComponent, setDemoComponent]: [IESModule['default'], any] = useState({ view: undefined });
 
-    public render(): JSX.Element {
-        const { activeComponent: componentName }: IProps = this.props;
-        if (!componentName) {
-            return <div />;
-        }
+    useEffect((): void => {
+        const loadComponent = async () => {
+            try {
+                const { default: newDemoComponent }: IESModule = await _loadComponent(activeComponent);
+                setDemoComponent(newDemoComponent);
+            } catch (exception) {
+                setDemoComponent({ view: undefined });
 
-        const { demoComponent }: IState = this.state;
-
-        if (!isEmpty(demoComponent) && isFunction(demoComponent!.view)) {
-            return <div className="main">{React.createElement(demoComponent!.view!)}</div>;
-        }
-
-        return <div className="main">Loading demo for {componentName}...</div>;
-    }
-
-    /**
-     * Each time the active component changes, change the main display (display the loading message and load the
-     * corresponding demo component).
-     *
-     * @param {IProps} previousProps The previous props of the component (to be compared with the new one available
-     *                               in `this.props`).
-     */
-    public async componentDidUpdate({ activeComponent: previousComponentName }: IProps) {
-        const { activeComponent: componentName }: IProps = this.props;
-
-        try {
-            const { default: demoComponent }: IESModule = await this._loadComponent();
-            this.setState({ demoComponent });
-        } catch (exception) {
-            if (componentName !== previousComponentName) {
-                this.setState({ demoComponent: { view: undefined } });
+                console.error(exception);
             }
+        };
 
-            console.error(exception);
-        }
+        loadComponent();
+    }, [activeComponent]);
+
+    if (!activeComponent) {
+        return <div />;
     }
 
-    /**
-     * Load the demo component corresponding to the currently active component.
-     *
-     * @return {Promise<IESModule>} The promise of the dynamic load of the component.
-     */
-    private _loadComponent(): Promise<IESModule> {
-        const { activeComponent: componentFolderName }: IProps = this.props;
-        if (!componentFolderName) {
-            return Promise.reject('No component to load');
-        }
-
-        const componentName: string = upperFirst(camelCase(componentFolderName));
-
-        return import(`../components/lx-${componentFolderName}/Lx${componentName}Demo`);
+    if (!isEmpty(demoComponent) && isFunction(demoComponent!.view)) {
+        return <div className="main">{React.createElement(demoComponent!.view!)}</div>;
     }
-}
+
+    return <div className="main">Loading demo for {activeComponent}...</div>;
+};
 
 /////////////////////////////
 

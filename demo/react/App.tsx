@@ -4,6 +4,8 @@ import { Theme } from '../constants';
 
 import React, { Fragment, useEffect, useState } from 'react';
 
+import last from 'lodash/last';
+
 import { Main } from './layout/Main';
 import { MainNav } from './layout/MainNav';
 import { SubNav } from './layout/SubNav';
@@ -22,13 +24,19 @@ import { changeTheme as _changeTheme } from '../utils';
  * @return {JSX.Element} The main application component.
  */
 const App: React.FC = (): JSX.Element => {
-    const [activeComponent, setActiveComponent]: [string, (activeComponent: string) => void] = useState('');
+    const [activeComponent, setActiveComponent]: [string, (activeComponent: string) => void] = useState(
+        last(window.location.pathname.split('/')) || '',
+    );
     const [theme, changeTheme]: [Theme, (theme: Theme) => void] = useState(DEFAULT_THEME);
     const [themeLoaded, setThemeLoaded]: [boolean, (isThemeLoaded: boolean) => void] = useState(false);
 
-    useEffect(() => {
+    useEffect((): void => {
         _changeTheme(theme).then(() => setThemeLoaded(true));
-    });
+    }, [theme]);
+
+    useEffect((): void => {
+        window.history.pushState(activeComponent, 'Design System', `/${activeComponent}`);
+    }, [activeComponent]);
 
     if (themeLoaded) {
         return (
