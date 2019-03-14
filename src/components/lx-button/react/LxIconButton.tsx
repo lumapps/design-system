@@ -1,5 +1,4 @@
 import { LxButtonProps } from './LxButton';
-// import { LxIconProps } from './LxIcon';
 
 /////////////////////////////
 
@@ -21,7 +20,7 @@ import { CLASSNAME as LXBUTTON_CLASSNAME, LxButton } from './LxButton';
  */
 const LxIconButton: React.FC<LxButtonProps> = ({ children, ...props }: LxButtonProps): JSX.Element => (
     <LxButton className="lx-button--shape-circled" {...props}>
-        {/* [XXX] Clément: Type of `icon` should be React.ReactElement<LxIconProps>, but I didn't managed to make it work. */}
+        {/* [XXX] Clement: Type of `icon` should be React.ReactElement<LxIconProps>, but I didn't managed to make it work. */}
         {Children.map(children, (icon: any) =>
             cloneElement(icon, {
                 className: classNames(icon.props.className, `${LXBUTTON_CLASSNAME}__icon`),

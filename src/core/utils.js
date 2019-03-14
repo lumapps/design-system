@@ -19,7 +19,7 @@ const handleBasicClasses = ({ prefix, color, emphasis, theme, variant, size }) =
     classNames(prefix, {
         [`${prefix}--color-${color}`]: color,
         [`${prefix}--emphasis-${emphasis}`]: emphasis,
-        [`${prefix}--theme-${theme}`]: theme,
+        [`${prefix}--theme-${theme}`]: theme && emphasis === 'high',
         [`${prefix}--variant-${variant}`]: variant,
         [`${prefix}--size-${size}`]: size,
     });

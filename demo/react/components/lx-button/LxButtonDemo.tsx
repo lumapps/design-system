@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { LxButton, LxIcon } from 'LumX';
+import { LxButton, LxButtonGroup, LxIcon } from 'LumX';
 import { mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
 
 /////////////////////////////
@@ -15,6 +15,7 @@ const LxButtonDemo = () => (
 
         <div className="p++ lx-theme-background-dark-L6">
             <LxButton>Default</LxButton>
+
             <LxButton disabled={true}>Disabled</LxButton>
 
             <LxButton>
@@ -27,13 +28,13 @@ const LxButtonDemo = () => (
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            {/* <LxButton-group>
+            <LxButtonGroup>
                 <LxButton>Split</LxButton>
 
                 <LxButton variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
-             </LxButton-group> */}
+            </LxButtonGroup>
 
             <LxButton variant="icon">
                 <LxIcon icon={mdiPlus} />
@@ -42,6 +43,7 @@ const LxButtonDemo = () => (
 
         <div className="p++ lx-theme-background-dark-L6">
             <LxButton emphasis="medium">Default</LxButton>
+
             <LxButton emphasis="medium" disabled={true}>
                 Disabled
             </LxButton>
@@ -56,13 +58,13 @@ const LxButtonDemo = () => (
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            {/* <LxButton-group>
+            <LxButtonGroup>
                 <LxButton emphasis="medium">Split</LxButton>
 
                 <LxButton emphasis="medium" variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
-            </LxButton-group> */}
+            </LxButtonGroup>
 
             <LxButton emphasis="medium" variant="icon">
                 <LxIcon icon={mdiPlus} />
@@ -71,6 +73,7 @@ const LxButtonDemo = () => (
 
         <div className="p++ lx-theme-background-dark-L6">
             <LxButton emphasis="low">Default</LxButton>
+
             <LxButton emphasis="low" disabled={true}>
                 Disabled
             </LxButton>
@@ -92,6 +95,7 @@ const LxButtonDemo = () => (
 
         <div className="p++ lx-theme-background-dark-L6">
             <LxButton size="s">Default</LxButton>
+
             <LxButton size="s" disabled={true}>
                 Disabled
             </LxButton>
@@ -106,13 +110,13 @@ const LxButtonDemo = () => (
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            {/* <LxButton-group>
+            <LxButtonGroup>
                 <LxButton size="s">Split</LxButton>
 
                 <LxButton size="s" variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
-            </LxButton-group> */}
+            </LxButtonGroup>
 
             <LxButton size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
@@ -125,6 +129,7 @@ const LxButtonDemo = () => (
             <LxButton emphasis="medium" size="s">
                 Default
             </LxButton>
+
             <LxButton emphasis="medium" size="s" disabled={true}>
                 Disabled
             </LxButton>
@@ -139,7 +144,7 @@ const LxButtonDemo = () => (
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            {/* <LxButton-group>
+            <LxButtonGroup>
                 <LxButton emphasis="medium" size="s">
                     Split
                 </LxButton>
@@ -147,7 +152,7 @@ const LxButtonDemo = () => (
                 <LxButton emphasis="medium" size="s" variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
-            </LxButton-group> */}
+            </LxButtonGroup>
 
             <LxButton emphasis="medium" size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
@@ -158,6 +163,7 @@ const LxButtonDemo = () => (
             <LxButton emphasis="low" size="s">
                 Default
             </LxButton>
+
             <LxButton emphasis="low" size="s" disabled={true}>
                 Disabled
             </LxButton>
@@ -181,6 +187,7 @@ const LxButtonDemo = () => (
 
         <div className="p++ lx-theme-background-dark-N">
             <LxButton theme="dark">Default</LxButton>
+
             <LxButton theme="dark" disabled={true}>
                 Disabled
             </LxButton>
@@ -195,13 +202,13 @@ const LxButtonDemo = () => (
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            {/* <LxButton-group>
+            <LxButtonGroup>
                 <LxButton theme="dark">Split</LxButton>
 
                 <LxButton theme="dark" variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
-            </LxButton-group> */}
+            </LxButtonGroup>
 
             <LxButton theme="dark" variant="icon">
                 <LxIcon icon={mdiPlus} />
@@ -209,57 +216,59 @@ const LxButtonDemo = () => (
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton lx-color="light" emphasis="medium">
+            <LxButton color="light" emphasis="medium">
                 Default
             </LxButton>
-            <LxButton lx-color="light" emphasis="medium" disabled={true}>
+
+            <LxButton color="light" emphasis="medium" disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="medium">
+            <LxButton color="light" emphasis="medium">
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="medium">
+            <LxButton color="light" emphasis="medium">
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            {/* <LxButton-group>
-                <LxButton lx-color="light" emphasis="medium">
+            <LxButtonGroup>
+                <LxButton color="light" emphasis="medium">
                     Split
                 </LxButton>
 
-                <LxButton lx-color="light" emphasis="medium" variant="icon">
+                <LxButton color="light" emphasis="medium" variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
-            </LxButton-group> */}
+            </LxButtonGroup>
 
-            <LxButton lx-color="light" emphasis="medium" variant="icon">
+            <LxButton color="light" emphasis="medium" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton lx-color="light" emphasis="low">
+            <LxButton color="light" emphasis="low">
                 Default
             </LxButton>
-            <LxButton lx-color="light" emphasis="low" disabled={true}>
+
+            <LxButton color="light" emphasis="low" disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="low">
+            <LxButton color="light" emphasis="low">
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="low">
+            <LxButton color="light" emphasis="low">
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="low" variant="icon">
+            <LxButton color="light" emphasis="low" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
         </div>
@@ -270,6 +279,7 @@ const LxButtonDemo = () => (
             <LxButton size="s" theme="dark">
                 Default
             </LxButton>
+
             <LxButton size="s" theme="dark" disabled={true}>
                 Disabled
             </LxButton>
@@ -284,7 +294,7 @@ const LxButtonDemo = () => (
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            {/* <LxButton-group>
+            <LxButtonGroup>
                 <LxButton size="s" theme="dark">
                     Split
                 </LxButton>
@@ -292,7 +302,7 @@ const LxButtonDemo = () => (
                 <LxButton size="s" theme="dark" variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
-            </LxButton-group> */}
+            </LxButtonGroup>
 
             <LxButton size="s" theme="dark" variant="icon">
                 <LxIcon icon={mdiPlus} />
@@ -300,57 +310,59 @@ const LxButtonDemo = () => (
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton lx-color="light" emphasis="medium" size="s">
+            <LxButton color="light" emphasis="medium" size="s">
                 Default
             </LxButton>
-            <LxButton lx-color="light" emphasis="medium" size="s" disabled={true}>
+
+            <LxButton color="light" emphasis="medium" size="s" disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="medium" size="s">
+            <LxButton color="light" emphasis="medium" size="s">
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="medium" size="s">
+            <LxButton color="light" emphasis="medium" size="s">
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            {/* <LxButton-group>
-                <LxButton lx-color="light" emphasis="medium" size="s">
+            <LxButtonGroup>
+                <LxButton color="light" emphasis="medium" size="s">
                     Split
                 </LxButton>
 
-                <LxButton lx-color="light" emphasis="medium" size="s" variant="icon">
+                <LxButton color="light" emphasis="medium" size="s" variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
-            </LxButton-group> */}
+            </LxButtonGroup>
 
-            <LxButton lx-color="light" emphasis="medium" size="s" variant="icon">
+            <LxButton color="light" emphasis="medium" size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton lx-color="light" emphasis="low" size="s">
+            <LxButton color="light" emphasis="low" size="s">
                 Default
             </LxButton>
-            <LxButton lx-color="light" emphasis="low" size="s" disabled={true}>
+
+            <LxButton color="light" emphasis="low" size="s" disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="low" size="s">
+            <LxButton color="light" emphasis="low" size="s">
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="low" size="s">
+            <LxButton color="light" emphasis="low" size="s">
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            <LxButton lx-color="light" emphasis="low" size="s" variant="icon">
+            <LxButton color="light" emphasis="low" size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
         </div>

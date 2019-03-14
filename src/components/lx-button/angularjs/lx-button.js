@@ -28,18 +28,15 @@ function lxButtonDirective() {
      * @return {string}  The button html template.
      */
     function getTemplate(el, attrs) {
+        const isDefaultEmphasis = !attrs.lxEmphasis || attrs.lxEmphasis === 'high';
+
         const defaultProps = {
+            color: isDefaultEmphasis ? 'primary' : 'dark',
             emphasis: 'high',
             size: 'm',
             theme: 'light',
             variant: 'button',
         };
-
-        if (!attrs.lxEmphasis || attrs.lxEmphasis === 'high') {
-            defaultProps.color = 'primary';
-        } else {
-            defaultProps.color = 'dark';
-        }
 
         let buttonClass = 'lx-button';
 
@@ -55,7 +52,7 @@ function lxButtonDirective() {
             buttonClass += ` lx-button--size-${defaultProps.size}`;
         }
 
-        if (!attrs.lxTheme && (!attrs.lxEmphasis || attrs.lxEmphasis === 'high')) {
+        if (!attrs.lxTheme && isDefaultEmphasis) {
             buttonClass += ` lx-button--theme-${defaultProps.theme}`;
         }
 

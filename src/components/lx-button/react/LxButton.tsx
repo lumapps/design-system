@@ -2,11 +2,13 @@ import { Color, Emphasis, Size, Theme, Variant } from 'components';
 
 /////////////////////////////
 
-import React from 'react';
+import React, { Children } from 'react';
 
 import classNames from 'classnames';
 
+import has from 'lodash/has';
 import isEmpty from 'lodash/isEmpty';
+import isString from 'lodash/isString';
 
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -68,14 +70,18 @@ const LxButtonRoot: React.FC<ILxButtonRootProps> = ({
     className,
     ...props
 }: ILxButtonRootProps): JSX.Element => {
-    return href ? (
+    if (isEmpty(href)) {
+        return (
+            <button className={className} {...props}>
+                {children}
+            </button>
+        );
+    }
+
+    return (
         <a href={href} target={target} className={className} {...props}>
             {children}
         </a>
-    ) : (
-        <button className={className} {...props}>
-            {children}
-        </button>
     );
 };
 
@@ -123,18 +129,39 @@ type LxButtonProps = ILxButtonProps;
  */
 const LxButton: React.FC<ILxButtonProps> = ({
     children,
-    className,
-    color = '',
+    className = '',
+    color,
     emphasis = 'high',
     size = 'm',
     theme = 'light',
     variant = 'button',
     ...props
 }: ILxButtonProps): JSX.Element => {
-    if ((isEmpty(color) && isEmpty(emphasis)) || emphasis === 'high') {
-        color = 'primary';
-    } else {
-        color = color || 'dark';
+    const isDefaultEmphasis = emphasis === 'high';
+    if (isEmpty(color)) {
+        color = isDefaultEmphasis ? 'primary' : 'dark';
+    }
+
+    if (variant === 'button') {
+        let index = -1;
+        children = Children.map(
+            children,
+            (child: any): JSX.Element => {
+                index++;
+
+                if (isString(child)) {
+                    return <span>{child}</span>;
+                }
+
+                if (!isString(child.type) && has(child.props, 'icon')) {
+                    className += `${isEmpty(className) ? '' : ' '}${CLASSNAME}--has-${
+                        index === 0 ? 'left' : 'right'
+                    }-icon`;
+                }
+
+                return child;
+            },
+        );
     }
 
     return (
