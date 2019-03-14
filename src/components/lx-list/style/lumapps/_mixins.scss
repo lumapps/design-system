@@ -15,12 +15,12 @@
 }
 
 @mixin lx-list-item-selected() {
-    background-color: lx-theme-color-variant(primary, L5);
-    color: lx-theme-color-variant(primary, N);
+    background-color: lx-theme-color-variant($lx-list-item-selected-color, L5);
+    color: lx-theme-color-variant($lx-list-item-selected-color, N);
 
     &:hover,
     &[data-focus-visible-added] {
-        background-color: lx-theme-color-variant(primary, L4) !important;
+        background-color: lx-theme-color-variant($lx-list-item-selected-color, L4) !important;
     }
 }
 
