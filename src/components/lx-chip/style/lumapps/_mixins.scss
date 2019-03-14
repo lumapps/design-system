@@ -11,8 +11,8 @@
 }
 
 @mixin lx-chip-size($size) {
-    height: map-get($lx-sizes, $size);
-    border-radius: (map-get($lx-sizes, $size)) / 2;
+    height: map-get($lx-chip-sizes, $size);
+    border-radius: (map-get($lx-chip-sizes, $size)) / 2;
 }
 
 @mixin lx-chip-before() {

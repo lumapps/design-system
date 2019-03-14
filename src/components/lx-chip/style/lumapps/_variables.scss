@@ -1,0 +1,4 @@
+$lx-chip-sizes: (
+    m: map-get($lx-sizes, m),
+    s: map-get($lx-sizes, s)
+) !default;
