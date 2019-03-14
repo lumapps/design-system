@@ -1,4 +1,5 @@
 @mixin lx-select-input-chip() {
+    height: map-get($lx-chip-sizes, s);
     margin: 3px;
 }
 

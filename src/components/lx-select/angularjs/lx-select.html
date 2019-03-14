@@ -1,6 +1,7 @@
 <div
     class="lx-select"
-    ng-class="{ 'lx-select--is-empty': lxSelect.isModelEmpty(),
+    ng-class="{ 'lx-select--has-value': !lxSelect.isModelEmpty(),
+                'lx-select--is-empty': lxSelect.isModelEmpty(),
                 'lx-select--unique': !lxSelect.multiple,
                 'lx-select--has-unique': !lxSelect.isModelEmpty() && !lxSelect.multiple,
                 'lx-select--multiple': lxSelect.multiple,
@@ -11,7 +12,9 @@
                 'lx-select--has-label': lxSelect.label,
                 'lx-select--is-disabled': lxSelect.isDisabled,
                 'lx-select--is-valid': lxSelect.isValid,
-                'lx-select--has-error': lxSelect.hasError }"
+                'lx-select--has-error': lxSelect.hasError,
+                'lx-select--has-placeholder': lxSelect.placeholder,
+                'lx-select--is-focus': lxSelect.isFocus }"
 >
     <span class="lx-select__label" ng-if="::lxSelect.label && (!lxSelect.variant || lxSelect.variant === 'input')">
         {{ lxSelect.label }}

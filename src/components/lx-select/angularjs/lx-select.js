@@ -57,6 +57,13 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
     /////////////////////////////
 
     /**
+     * Whether the select is focus or not.
+     *
+     * @type {boolean}
+     */
+    lxSelect.isFocus = false;
+
+    /**
      * Whether the dropdown is open or not.
      *
      * @type {boolean}
@@ -255,6 +262,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      * Disable key events on input wrapper blur.
      */
     function disableKeyEvents() {
+        lxSelect.isFocus = false;
         $document.off('keydown keypress', _onKeyPress);
     }
 
@@ -294,6 +302,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      * Enable key events on input wrapper focus.
      */
     function enableKeyEvents() {
+        lxSelect.isFocus = true;
         $document.on('keydown keypress', _onKeyPress);
     }
 
