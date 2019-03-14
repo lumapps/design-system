@@ -62,10 +62,10 @@
         background-color: lx-theme-color-variant($theme, L5);
     } @else if $state == state-focus {
         @if $theme == dark {
-            background-color: lx-theme-color-variant(light, N) !important;
+            background-color: lx-theme-color-variant(light, N);
             box-shadow: inset 0 0 0 2px lx-theme-color-variant(primary, L2);
         } @else if $theme == light {
-            background-color: transparent !important;
+            background-color: transparent;
             box-shadow: inset 0 0 0 2px lx-theme-color-variant(light, L2);
         }
     } @else if $state == state-disabled {

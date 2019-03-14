@@ -14,6 +14,19 @@ function lxTextFieldController() {
 
     /////////////////////////////
     //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The model controller.
+     *
+     * @type {Object}
+     */
+    let _modelController;
+
+    /////////////////////////////
+    //                         //
     //    Public attributes    //
     //                         //
     /////////////////////////////
@@ -27,6 +40,35 @@ function lxTextFieldController() {
         mdiAlertCircle,
         mdiCheckCircle,
     };
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Define if the model controller has a value or not.
+     *
+     * @return {boolean} Wether the model controller has a value or not.
+     */
+    function hasValue() {
+        return _modelController.$viewValue.length;
+    }
+
+    /**
+     * Set the model controller.
+     *
+     * @param {Object} modelController The model controller.
+     */
+    function setModelController(modelController) {
+        _modelController = modelController;
+    }
+
+    /////////////////////////////
+
+    lxTextField.hasValue = hasValue;
+    lxTextField.setModelController = setModelController;
 }
 
 /////////////////////////////
@@ -34,9 +76,11 @@ function lxTextFieldController() {
 function lxTextFieldDirective() {
     'ngInject';
 
-    function link(scope, el) {
+    function link(scope, el, attrs, ctrl) {
         const input = el.find('input');
         const modelController = input.data('$ngModelController');
+
+        ctrl.setModelController(modelController);
 
         input
             .on('focus', function onFocus() {
@@ -51,6 +95,14 @@ function lxTextFieldDirective() {
                 el.addClass('lx-text-field--is-disabled');
             } else {
                 el.removeClass('lx-text-field--is-disabled');
+            }
+        });
+
+        modelController.$$attr.$observe('placeholder', (placeholder) => {
+            if (placeholder.length > 0) {
+                el.addClass('lx-text-field--has-placeholder');
+            } else {
+                el.removeClass('lx-text-field--has-placeholder');
             }
         });
 

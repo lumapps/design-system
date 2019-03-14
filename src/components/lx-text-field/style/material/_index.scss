@@ -1,0 +1,75 @@
+/* ==========================================================================
+   Text field
+   ========================================================================== */
+
+.lx-text-field {
+    $self: &;
+
+    position: relative;
+    padding-top: $lx-spacing-unit * 4;
+    padding-bottom: $lx-spacing-unit;
+
+    &__label {
+        #{ $self }--theme-light & {
+            @include lx-text-field-material-label(dark);
+        }
+
+        #{ $self }--theme-dark & {
+            @include lx-text-field-material-label(light);
+        }
+
+        #{ $self }--has-placeholder &,
+        #{ $self }--has-value &,
+        #{ $self }--is-focus & {
+            transform: scale(0.75) translateY(0);
+        }
+    }
+
+    &__helper {
+        display: none !important;
+    }
+
+    &__input-wrapper {
+        #{ $self }--theme-light & {
+            @include lx-text-field-material-input-wrapper(dark);
+        }
+
+        #{ $self }--theme-dark & {
+            @include lx-text-field-material-input-wrapper(light);
+        }
+    }
+
+    &__input-native {
+        input {
+            #{ $self }--theme-light & {
+                @include lx-text-field-material-input-native(dark);
+            }
+
+            #{ $self }--theme-dark & {
+                @include lx-text-field-material-input-native(light);
+            }
+        }
+    }
+}
+
+/* Text field states
+   ========================================================================== */
+
+// Focus state
+.lx-text-field--is-focus {
+    .lx-text-field__input-wrapper {
+        @include lx-text-field-material-input-wrapper-focus;
+    }
+}
+
+.lx-text-field--theme-light.lx-text-field--is-focus {
+    .lx-text-field__label {
+        @include lx-text-field-material-label-focus(dark);
+    }
+}
+
+.lx-text-field--theme-dark.lx-text-field--is-focus {
+    .lx-text-field__label {
+        @include lx-text-field-material-label-focus(light);
+    }
+}
