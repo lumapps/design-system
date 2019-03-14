@@ -19,8 +19,8 @@
 @mixin lx-radio-button-placeholder() {
     position: absolute;
     z-index: 1;
-    top: 2px;
-    left: 2px;
+    top: ($lx-radio-button-wrapper-size - $lx-radio-button-control-size) / 2;
+    left: ($lx-radio-button-wrapper-size - $lx-radio-button-control-size) / 2;
     width: $lx-radio-button-control-size;
     height: $lx-radio-button-control-size;
     border-radius: 50%;
@@ -41,7 +41,7 @@
 @mixin lx-radio-button-input-background-status($status, $theme) {
     @if $status == 'checked' {
         @if $theme == dark {
-            color: lx-theme-color-variant(primary, N);
+            color: lx-theme-color-variant($lx-radio-button-color, N);
         } @else if $theme == light {
             color: lx-theme-color-variant(light, N);
         }
@@ -53,11 +53,11 @@
 @mixin lx-radio-button-input-indicator() {
     position: absolute;
     z-index: 3;
-    top: 4px;
-    right: 4px;
-    bottom: 4px;
-    left: 4px;
+    top: ($lx-radio-button-control-size - $lx-radio-button-indicator-size) / 2;
+    left: ($lx-radio-button-control-size - $lx-radio-button-indicator-size) / 2;
     display: flex;
+    width: $lx-radio-button-indicator-size;
+    height: $lx-radio-button-indicator-size;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
@@ -71,7 +71,7 @@
     }
 
     @if $theme == dark {
-        background-color: lx-theme-color-variant(primary, N);
+        background-color: lx-theme-color-variant($lx-radio-button-color, N);
     } @else if $theme == light {
         background-color: lx-theme-color-variant(light, N);
     }
