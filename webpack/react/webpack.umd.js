@@ -1,7 +1,8 @@
 const merge = require('webpack-merge');
 
+const { TECH_PREFIX } = require('../constants');
+
 const { getBuildConfig } = require('../webpack.build.utils');
-const { MINIFY: minify } = require('../constants');
 
 const reactConfig = require('./webpack.config');
 
@@ -13,7 +14,6 @@ module.exports = getBuildConfig({
         'module.rules': 'append',
         plugins: 'replace',
     })(reactConfig, UMDConfig),
-    tech: 'react',
+    tech: TECH_PREFIX.react,
     moduleType: 'umd',
-    minify,
 });

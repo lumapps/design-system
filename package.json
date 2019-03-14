@@ -37,7 +37,7 @@
         "react-dom": "^16.8.4",
         "slugify": "^1.3.4"
     },
-    "description": "The official LumApps Design System (LumX) for AngularJS and ReactJS applications",
+    "description": "The official LumApps Design System (LumX) for AngularJS and React applications",
     "devDependencies": {
         "@babel/core": "^7.3.4",
         "@babel/plugin-proposal-class-properties": "^7.3.4",
@@ -151,7 +151,7 @@
         "Design System",
         "LumApps",
         "LumX",
-        "ReactJS"
+        "React"
     ],
     "license": "MIT",
     "name": "@lumx/lumx",
@@ -162,10 +162,15 @@
     },
     "scripts": {
         "build": "npm run build:all",
-        "build:all": "rm -Rf ./dist/ && npm run build:angularjs; npm run build:react",
-        "build:angularjs": "rm -Rf ./dist/angularjs && webpack --config webpack/angularjs/webpack.umd.js",
+        "prebuild:all": "rm -Rf ./dist/*",
+        "build:all": "npm run build:angularjs; npm run build:react",
+        "prebuild:angularjs": "rm -Rf ./dist/angularjs/*",
+        "build:angularjs": "webpack --config webpack/angularjs/webpack.umd.js && MINIFY=true GENERATE_PACKAGE=true webpack --config webpack/angularjs/webpack.umd.js",
+        "postbuild:angularjs": "rm -f ./dist/angularjs/*-theme-*.js*",
         "ngb": "npm run build:angularjs",
-        "build:react": "rm -Rf ./dist/react && webpack --config webpack/react/webpack.umd.js",
+        "prebuild:react": "rm -Rf ./dist/react/*",
+        "build:react": "webpack --config webpack/react/webpack.umd.js && MINIFY=true GENERATE_PACKAGE=true webpack --config webpack/react/webpack.umd.js",
+        "postbuild:react": "rm -f ./dist/react/*-theme-*.js*",
         "rcb": "npm run build:react",
         "prebump:major": "cd src/icons && npm --no-git-tag-version version major && git add package.json && cd -",
         "bump:major": "npm version --force --message 'chore(release): release new major version %s' major",

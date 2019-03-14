@@ -1,3 +1,5 @@
+const IS_CI = require('is-ci');
+
 const fs = require('fs');
 const readPkg = require('read-pkg');
 
@@ -11,6 +13,7 @@ const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlMinifierPlugin = require('html-minifier-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 const { getStyleLoader } = require('./utils');
 const {
@@ -20,6 +23,7 @@ const {
     ROOT_PATH,
     TECH_DESCRIPTIONS,
     TECH_KEYWORDS,
+    TECH_NAMES,
     TECH_PREFIX,
 } = require('./constants');
 
@@ -84,20 +88,25 @@ function getReadme({ tech }) {
 
     readme = `${startOfReadme}${endOfReadme}`;
 
-    if (tech === 'angularjs') {
-        readme = readme.replace(' or [ReactJS][reactjs]', '');
-        readme = readme.replace(/@lumx\/<angularjs\|react>/g, '@lumx/angularjs');
-        readme = readme.replace(' or [ReactJS][reactjs-release]', '');
+    if (tech === TECH_PREFIX.angularjs) {
+        readme = readme.replace(` or [${TECH_NAMES.react}][${TECH_PREFIX.react}]`, '');
+        readme = readme.replace(/@lumx\/<angularjs\|react>/g, `@lumx/${TECH_PREFIX.angularjs}`);
+        readme = readme.replace(` or [${TECH_NAMES.react}][${TECH_PREFIX.react}-release]`, '');
         readme = readme.replace(
-            ' for AngularJS example or [http://localhost:8081](http://localhost:8081) for ReactJS example',
+            ` for ${TECH_NAMES.angularjs} example or [http://localhost:8081](http://localhost:8081) for ${
+                TECH_NAMES.react
+            } example`,
             '',
         );
-    } else if (tech === 'react') {
-        readme = readme.replace('[AngularJS][angularjs] or ', '');
-        readme = readme.replace(/@lumx\/<angularjs\|react>/g, '@lumx/react');
-        readme = readme.replace('[AngularJS][angularjs-release] or ', '');
-        readme = readme.replace('[http://localhost:8080](http://localhost:8080) for AngularJS example or ', '');
-        readme = readme.replace(' for ReactJS example', '');
+    } else if (tech === TECH_PREFIX.react) {
+        readme = readme.replace(`[${TECH_NAMES.angularjs}][${TECH_PREFIX.angularjs}] or `, '');
+        readme = readme.replace(/@lumx\/<angularjs\|react>/g, `@lumx/${TECH_PREFIX.react}`);
+        readme = readme.replace(`[${TECH_NAMES.angularjs}][${TECH_PREFIX.angularjs}-release] or `, '');
+        readme = readme.replace(
+            `[http://localhost:8080](http://localhost:8080) for ${TECH_NAMES.angularjs} example or `,
+            '',
+        );
+        readme = readme.replace(` for ${TECH_NAMES.react} example`, '');
     }
 
     readme = readme.replace(
@@ -123,15 +132,19 @@ function getReadme({ tech }) {
  *                                 Allowed values are the same as the Webpack `output.libraryTarget` ones (e.g. 'umd',
  *                                 'amd', 'commonjs', ...).
  *                                 See: https://webpack.js.org/guides/author-libraries/.
- * @param  {boolean} [minify=true] Indicates if you want to minify the bundle.
  * @return {Object} The built configuration for the production build.
  */
-function getBuildConfig({ config, tech, moduleType, minify = true }) {
+function getBuildConfig({ config, tech, moduleType }) {
     if (!has(TECH_PREFIX, tech)) {
         throw new Error(`Unknown tech "${tech}"`);
     }
+
+    const minify = Boolean(process.env.MINIFY);
+    const generatePackage = Boolean(process.env.GENERATE_PACKAGE);
+
     const filename = `[name]${minify ? '.min' : ''}`;
     const distTechPath = `${DIST_PATH}/${tech}`;
+
     const minimizer = [];
     const plugins = [
         ...config.plugins,
@@ -139,35 +152,54 @@ function getBuildConfig({ config, tech, moduleType, minify = true }) {
             chunkFilename: `${filename}.css`,
             filename: `${filename}.css`,
         }),
-        new CopyWebpackPlugin([
-            {
-                from: `${EXAMPLES_PATH}/${tech}`,
-                to: `${distTechPath}/examples/`,
-            },
-            {
-                from: `${EXAMPLES_PATH}/styles.css`,
-                to: `${distTechPath}/examples/`,
-            },
-            {
-                from: `${ROOT_PATH}/CONTRIBUTING.md`,
-                to: `${distTechPath}/`,
-            },
-            {
-                from: `${ROOT_PATH}/LICENSE.md`,
-                to: `${distTechPath}/`,
-            },
-        ]),
-        new CreateFileWebpack({
-            content: getPackageJson({ tech }),
-            fileName: 'package.json',
-            path: distTechPath,
-        }),
-        new CreateFileWebpack({
-            content: getReadme({ tech }),
-            fileName: 'README.md',
-            path: distTechPath,
-        }),
     ];
+
+    if (!IS_CI) {
+        plugins.push(
+            new WebpackNotifierPlugin({
+                alwaysNotify: true,
+                title: `LumX - ${TECH_NAMES[tech]} - ${minify ? 'Minified package' : 'Package'}`,
+            }),
+        );
+    }
+
+    if (generatePackage) {
+        plugins.push(
+            new CopyWebpackPlugin([
+                {
+                    from: `${EXAMPLES_PATH}/${tech}`,
+                    to: `${distTechPath}/examples/`,
+                },
+                {
+                    from: `${EXAMPLES_PATH}/styles.css`,
+                    to: `${distTechPath}/examples/`,
+                },
+                {
+                    from: `${ROOT_PATH}/CONTRIBUTING.md`,
+                    to: `${distTechPath}/`,
+                },
+                {
+                    from: `${ROOT_PATH}/LICENSE.md`,
+                    to: `${distTechPath}/`,
+                },
+            ]),
+        );
+        plugins.push(
+            new CreateFileWebpack({
+                content: getPackageJson({ tech }),
+                fileName: 'package.json',
+                path: distTechPath,
+            }),
+        );
+        plugins.push(
+            new CreateFileWebpack({
+                content: getReadme({ tech }),
+                fileName: 'README.md',
+                path: distTechPath,
+            }),
+        );
+    }
+
     if (minify) {
         plugins.push(new HtmlMinifierPlugin(CONFIGS.htmlMinifier));
         plugins.push(
@@ -193,12 +225,14 @@ function getBuildConfig({ config, tech, moduleType, minify = true }) {
         output: 'replace',
     })(config, {
         bail: true,
-        devtool: 'source-map',
+        devtool: minify ? 'source-map' : '',
         mode: 'production',
         name: `${tech}-${moduleType}${minify ? '-minified' : ''}`,
+
         module: {
             rules: [getStyleLoader({ mode: 'prod' })],
         },
+
         output: {
             ...config.output,
             chunkFilename: `${filename}.js`,
@@ -210,10 +244,12 @@ function getBuildConfig({ config, tech, moduleType, minify = true }) {
             },
             libraryTarget: moduleType,
             path: distTechPath,
-            sourceMapFilename: `${filename}.js.map`,
+            sourceMapFilename: minify ? `${filename}.js.map` : undefined,
             umdNamedDefine: moduleType === 'umd' ? true : undefined,
         },
+
         plugins,
+
         optimization: {
             minimize: minify,
             minimizer,

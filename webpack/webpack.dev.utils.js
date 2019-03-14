@@ -1,12 +1,15 @@
+const IS_CI = require('is-ci');
+
 const has = require('lodash/has');
 
 const merge = require('webpack-merge');
 
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackNotifierPlugin = require('webpack-notifier');
 
 const { getStyleLoader } = require('./utils');
-const { APP_PATH, DEFAULT_HOST, DEFAULT_PORT, DEMO_PATH, TECH_PREFIX } = require('./constants');
+const { APP_PATH, DEFAULT_HOST, DEFAULT_PORT, DEMO_PATH, TECH_NAMES, TECH_PREFIX } = require('./constants');
 
 /**
  * Returns `WebpackDevServer` default config to use in dev mode.
@@ -49,6 +52,27 @@ function getDevConfig({ config, tech, devServerPort: port }) {
         throw new Error(`Unknown tech "${tech}"`);
     }
 
+    const plugins = [
+        ...config.plugins,
+        new ExtractCssChunks({
+            chunkFilename: '[name].css',
+            filename: '[name].css',
+        }),
+        new HtmlWebpackPlugin({
+            inject: false,
+            template: `${DEMO_PATH}/${tech}/index.html`,
+        }),
+    ];
+
+    if (!IS_CI) {
+        plugins.push(
+            new WebpackNotifierPlugin({
+                alwaysNotify: true,
+                title: `LumX - ${TECH_NAMES[tech]} - Development`,
+            }),
+        );
+    }
+
     return merge.smartStrategy({
         entry: 'append',
         'module.rules': 'append',
@@ -57,23 +81,13 @@ function getDevConfig({ config, tech, devServerPort: port }) {
     })(config, {
         devServer: getWebpackDevServerConfig({ port }),
         entry: {
-            'demo-theme-lumapps': `${DEMO_PATH}/style/lumapps.js`,
-            'demo-theme-material': `${DEMO_PATH}/style/material.js`,
+            'demo-theme-lumapps': `${DEMO_PATH}/style/lumapps.scss`,
+            'demo-theme-material': `${DEMO_PATH}/style/material.scss`,
         },
         module: {
             rules: [getStyleLoader({ mode: 'dev' })],
         },
-        plugins: [
-            ...config.plugins,
-            new ExtractCssChunks({
-                chunkFilename: '[name].css',
-                filename: '[name].css',
-            }),
-            new HtmlWebpackPlugin({
-                inject: false,
-                template: `${DEMO_PATH}/${tech}/index.html`,
-            }),
-        ],
+        plugins,
     });
 }
 

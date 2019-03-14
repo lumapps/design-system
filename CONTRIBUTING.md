@@ -26,7 +26,7 @@ Here are the guidelines we'd like you to follow.
 
 ## <a name="code-of-conduct"></a> Code of Conduct
 
-As heavy users of [AngularJS](https://github.com/angular/angular.js) and [ReactJS](https://github.com/facebook/react/), we encourage you to read and follow the [AngularJS Code of Conduct](https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md) and the [React Code of Conduct](https://github.com/facebook/react/blob/master/CODE_OF_CONDUCT.md).
+As heavy users of [AngularJS](https://github.com/angular/angular.js) and [React](https://github.com/facebook/react/), we encourage you to read and follow the [AngularJS Code of Conduct](https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md) and the [React Code of Conduct](https://github.com/facebook/react/blob/master/CODE_OF_CONDUCT.md).
 
 ## <a name="got-a-question-or-a-problem-"></a> Got a question or a problem?
 

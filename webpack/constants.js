@@ -25,9 +25,6 @@ const ICONS_PATH = `${SRC_PATH}/icons`;
 
 const STYLES_PATH = `${CORE_PATH}/style`;
 
-// Indicates if we want to minify the production bundle.
-const MINIFY = true;
-
 // Techology relative constants.
 const TECH_PREFIX = {
     angularjs: 'angularjs',
@@ -36,12 +33,16 @@ const TECH_PREFIX = {
 const TECH_DESCRIPTIONS = {
     angularjs: 'The official LumApps Design System (LumX) for AngularJS applications',
     default: 'The official LumApps Design System (LumX)',
-    react: 'The official LumApps Design System (LumX) for ReactJS applications',
+    react: 'The official LumApps Design System (LumX) for React applications',
 };
 const TECH_KEYWORDS = {
     angularjs: ['AngularJS'],
     default: ['Design System', 'LumApps', 'LumX'],
-    react: ['ReactJS'],
+    react: ['React'],
+};
+const TECH_NAMES = {
+    angularjs: 'AngularJS',
+    react: 'React',
 };
 
 // Dev-server relative constants
@@ -79,6 +80,10 @@ const CONFIGS = {
         conservativeCollapse: true,
         customAttrCollapse: /ng-class/,
         customEventAttributes: [/^(on|ng)[a-z]{3,}$/],
+        html5: true,
+        minifyCSS: true,
+        minifyJS: true,
+        minifyURLs: true,
         processScripts: ['text/ng-template'],
         quoteCharacter: '"',
         removeComments: true,
@@ -87,6 +92,7 @@ const CONFIGS = {
         removeStyleLinkTypeAttributes: true,
         sortAttributes: true,
         sortClassName: true,
+        useShortDoctype: true,
     },
 
     /**
@@ -216,12 +222,12 @@ module.exports = {
     DIST_PATH,
     EXAMPLES_PATH,
     ICONS_PATH,
-    MINIFY,
     NODE_MODULES_PATH,
     ROOT_PATH,
     SRC_PATH,
     STYLES_PATH,
     TECH_DESCRIPTIONS,
     TECH_KEYWORDS,
+    TECH_NAMES,
     TECH_PREFIX,
 };

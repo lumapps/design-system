@@ -3,20 +3,11 @@ const path = require('path');
 
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
-const WebpackNotifierPlugin = require('webpack-notifier');
 
 const { babelSetup } = require('./utils');
 const { COMPONENTS_PATH, CORE_PATH, ICONS_PATH } = require('./constants');
 
 const plugins = [new WebpackBar(), new FriendlyErrorsWebpackPlugin()];
-if (!IS_CI) {
-    plugins.push(
-        new WebpackNotifierPlugin({
-            alwaysNotify: true,
-            title: 'LumX - Webpack',
-        }),
-    );
-}
 
 const baseConfig = {
     cache: true,
@@ -24,8 +15,8 @@ const baseConfig = {
     devtool: 'cheap-module-source-map',
 
     entry: {
-        'lumx-theme-lumapps': `${CORE_PATH}/style/lumx-theme-lumapps.js`,
-        'lumx-theme-material': `${CORE_PATH}/style/lumx-theme-material.js`,
+        'lumx-theme-lumapps': `${CORE_PATH}/style/lumx-theme-lumapps.scss`,
+        'lumx-theme-material': `${CORE_PATH}/style/lumx-theme-material.scss`,
     },
 
     externals: [

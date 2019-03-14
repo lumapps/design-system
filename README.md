@@ -1,6 +1,6 @@
 # LumApps Design System (LumX)
 
-The first official LumApps Design System for [AngularJS][angularjs] or [ReactJS][reactjs] applications.
+The first official LumApps Design System for [AngularJS][angularjs] or [React][react] applications.
 _LumX_ will help you design your applications faster and more easily. You will be able to use LumX with either the LumApps design styleguides or the [Google Material Design specifications][material].
 
 ## Quick start
@@ -15,7 +15,7 @@ yarn add @lumx/<angularjs|react>
 npm install @lumx/<angularjs|react>
 ```
 
--   Download the latest release for [AngularJS][angularjs-release] or [ReactJS][reactjs-release]
+-   Download the latest release for [AngularJS][angularjs-release] or [React][react-release]
 -   Clone the repository: `git clone https://github.com/lumapps/design-system.git`
 
 See [examples](./dist/<angularjs|react>/examples) for more information on how to use each bundle.
@@ -64,7 +64,7 @@ npm run start:angularjs
 
 You can then open your browser to [http://localhost:4000/](http://localhost:4000/) to access the demo and test site.
 
-For ReactJS development server:
+For React development server:
 
 ```bash
 yarn start:react
@@ -84,7 +84,7 @@ yarn build[:<all|angularjs|react]
 npm run build:<all|angularjs|react>
 ```
 
-This will produce the target build for either AngularJS or ReactJS.
+This will produce the target build for either AngularJS or React.
 
 ## How to run examples
 
@@ -106,7 +106,7 @@ yarn serve
 npm run serve
 ```
 
-Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for AngularJS example or [http://localhost:8081](http://localhost:8081) for ReactJS example.
+Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for AngularJS example or [http://localhost:8081](http://localhost:8081) for React example.
 Then, click on the `examples` directory in the showing listing and you should land on the example page.
 
 ## Copyright and license
@@ -114,8 +114,8 @@ Then, click on the `examples` directory in the showing listing and you should la
 Code and documentation copyright 2019 LumApps. Code released under the [MIT license](LICENSE.md).
 
 [angularjs]: https://angularjs.org/
-[reactjs]: https://reactjs.org/
+[react]: https://react.org/
 [material]: http://www.google.com/design/spec/material-design/introduction.html
 [angularjs-release]: https://www.npmjs.com/package/@lumx/angularjs
-[reactjs-release]: https://www.npmjs.com/package/@lumx/react
+[react-release]: https://www.npmjs.com/package/@lumx/react
 [webpack]: https://webpack.js.org/

@@ -7347,7 +7347,6 @@ lru-cache@^5.1.1:
 
 "lumapps-conventional-commit-types@git+https://git@github.com/lumapps/lumapps-conventional-commit-types#master":
   version "2.0.0"
-  uid d864be622b6d519c6cb19441a94b37a21fd4617d
   resolved "git+https://git@github.com/lumapps/lumapps-conventional-commit-types#d864be622b6d519c6cb19441a94b37a21fd4617d"
 
 "lumapps-conventional-commit-types@github:lumapps/conventional-commit-types":
