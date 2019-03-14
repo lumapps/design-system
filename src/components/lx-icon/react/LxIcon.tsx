@@ -1,28 +1,49 @@
 import { Color, Size } from 'components';
 
+/////////////////////////////
+
 import React from 'react';
 
 import classNames from 'classnames';
 
 import { handleBasicClasses } from 'LumX/core/utils';
 
-interface ILxIconProps {
-    /** The icon path to set in the html svg `d` property */
-    icon: string;
-    /** Basic React `className` property. */
-    className?: string;
-    /** The icon color which must be defined by `lx-icon--${color}` css class. */
-    color?: Color;
-    /** The icon size which must be defined by `lx-icon--${size}` css class. */
-    size?: Size;
-}
+/////////////////////////////
 
 /**
- * Displays an html svg tag.
- *
- * @return {React.FC<ILxIconProps>} The icon component
+ * Defines the props of the LxIcon component.
  */
-export const LxIcon: React.FC<ILxIconProps> = ({ icon, className, color, size }) => (
+interface IProps {
+    /**
+     * The icon path to set in the HTML SVG `d` property
+     */
+    icon: string;
+
+    /**
+     * Basic React `className` property.
+     */
+    className?: string;
+
+    /**
+     * The icon color which must be defined by `lx-icon--${color}` css class.
+     */
+    color?: Color;
+
+    /**
+     * The icon size which must be defined by `lx-icon--${size}` css class.
+     */
+    size?: Size;
+}
+type LxIconProps = IProps;
+
+/////////////////////////////
+
+/**
+ * Displays a HTML SVG tag with the wanted icon path.
+ *
+ * @return {JSX.Element} The LxIcon component
+ */
+const LxIcon: React.FC<IProps> = ({ icon, className, color, size }: IProps): JSX.Element => (
     <i className={classNames(className, handleBasicClasses({ color, size, prefix: 'lx-icon' }))}>
         <svg
             aria-hidden="true"
@@ -36,3 +57,7 @@ export const LxIcon: React.FC<ILxIconProps> = ({ icon, className, color, size })
         </svg>
     </i>
 );
+
+/////////////////////////////
+
+export { LxIcon, LxIconProps };

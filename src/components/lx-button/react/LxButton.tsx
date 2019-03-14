@@ -1,28 +1,73 @@
 import { Color, Emphasis, Size, Theme, Variant } from 'components';
 
+/////////////////////////////
+
 import React from 'react';
 
 import classNames from 'classnames';
 
+import isEmpty from 'lodash/isEmpty';
+
 import { handleBasicClasses } from 'LumX/core/utils';
 
+/////////////////////////////
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = 'lx-button';
+
+/////////////////////////////
+
+/**
+ * Defines the props of the LxButtonRoot component.
+ */
 interface ILxButtonRootProps {
-    /** Basic react `className` prop. */
+    /**
+     * Basic react `children` prop.
+     */
+    children: React.ReactNode;
+
+    /**
+     * Basic react `className` prop.
+     */
     className?: string;
-    /** Indicates if the button is disabled or not. */
+
+    /**
+     * Indicates if the button is disabled or not.
+     */
     disabled?: boolean;
-    /** The `href` to reach if there is one. */
+
+    /**
+     * The `href` to reach if there is one.
+     */
     href?: string;
-    /** The `target` html property. */
+
+    /**
+     * The `target` to open the `href` into.
+     */
     target?: string;
 }
 
+/////////////////////////////
+
 /**
- * Conditionnaly adds `a` or `button` html tag whether there is an `href` attribute or not.
+ * The root of LxButton.
+ * Conditionnaly adds a `a` or a `button` HTML tag whether there is an `href` attribute or not.
  *
- * @return {React.FC<ILxButtonRootProps>} The button root component.
+ * @return {JSX.Element} The LxButton root component.
  */
-const LxButtonRoot: React.FC<ILxButtonRootProps> = ({ href, children, target, className, ...props }) => {
+const LxButtonRoot: React.FC<ILxButtonRootProps> = ({
+    href,
+    children,
+    target,
+    className,
+    ...props
+}: ILxButtonRootProps): JSX.Element => {
     return href ? (
         <a href={href} target={target} className={className} {...props}>
             {children}
@@ -34,26 +79,49 @@ const LxButtonRoot: React.FC<ILxButtonRootProps> = ({ href, children, target, cl
     );
 };
 
-export interface ILxButtonProps extends ILxButtonRootProps {
-    /** The button color which must be defined by `lx-button--${color}` css class. */
-    color?: Color;
-    /** The emphasis of the button which must be defined by ``lx-button-emphasis--${emphasis} css class. */
-    emphasis?: Emphasis;
-    /** The button size which must be defined by `lx-button--${size}` css class. */
-    size?: Size;
-    /** The button theme which must be defined by `lx-button--${theme}` css class. */
-    theme?: Theme;
-    /** The button variant which must be defined by `lx-type--${variant}` css class. */
-    variant?: Variant;
-}
+/////////////////////////////
+/////////////////////////////
 
 /**
- * Displays a button. If `href` property is set, it will display an `a` tag, if not
- * it will use `button` tag instead.
- *
- * @return {React.FC<ILxButtonProps>} The button component.
+ * Defines the props of the LxButton component.
  */
-export const LxButton: React.FC<ILxButtonProps> = ({
+interface ILxButtonProps extends ILxButtonRootProps {
+    /**
+     * The button color which must be defined by `lx-button--${color}` css class.
+     */
+    color?: Color;
+
+    /**
+     * The emphasis of the button which must be defined by ``lx-button-emphasis--${emphasis} css class.
+     */
+    emphasis?: Emphasis;
+
+    /**
+     * The button size which must be defined by `lx-button--${size}` css class.
+     */
+    size?: Size;
+
+    /**
+     * The button theme which must be defined by `lx-button--${theme}` css class.
+     */
+    theme?: Theme;
+
+    /**
+     * The button variant which must be defined by `lx-type--${variant}` css class.
+     */
+    variant?: Variant;
+}
+type LxButtonProps = ILxButtonProps;
+
+/////////////////////////////
+
+/**
+ * Displays a button.
+ * If `href` property is set, it will display a `a` HTML tag. If not, it will use a `button` HTML tag instead.
+ *
+ * @return {JSX.Element} The LxButton component.
+ */
+const LxButton: React.FC<ILxButtonProps> = ({
     children,
     className,
     color = '',
@@ -62,20 +130,18 @@ export const LxButton: React.FC<ILxButtonProps> = ({
     theme = 'light',
     variant = 'button',
     ...props
-}) => {
-    if (!color) {
-        if (!emphasis || emphasis === 'high') {
-            color = 'primary';
-        } else {
-            color = 'dark';
-        }
+}: ILxButtonProps): JSX.Element => {
+    if ((isEmpty(color) && isEmpty(emphasis)) || emphasis === 'high') {
+        color = 'primary';
+    } else {
+        color = color || 'dark';
     }
 
     return (
         <LxButtonRoot
             className={classNames(
                 className,
-                handleBasicClasses({ color, emphasis, size, theme, variant, prefix: 'lx-button' }),
+                handleBasicClasses({ color, emphasis, size, theme, variant, prefix: CLASSNAME }),
             )}
             {...props}
         >
@@ -83,3 +149,7 @@ export const LxButton: React.FC<ILxButtonProps> = ({
         </LxButtonRoot>
     );
 };
+
+/////////////////////////////
+
+export { CLASSNAME, LxButton, LxButtonProps };

@@ -1,15 +1,35 @@
+import { LxButtonProps } from './LxButton';
+// import { LxIconProps } from './LxIcon';
+
+/////////////////////////////
+
 import React, { Children, cloneElement } from 'react';
 
 import classNames from 'classnames';
 
-import { ILxButtonProps, LxButton } from './LxButton';
+import { CLASSNAME as LXBUTTON_CLASSNAME, LxButton } from './LxButton';
 
-export const LxIconButton: React.FC<ILxButtonProps> = ({ children, ...props }) => (
+/////////////////////////////
+
+/**
+ * Displays an icon button.
+ * It's like a LxButton but displays an icon instead of a label in the body of the button.
+ *
+ * @see {@link LxButton} for more information on LxButton.
+ *
+ * @return {JSX.Element} The LxIconButton component.
+ */
+const LxIconButton: React.FC<LxButtonProps> = ({ children, ...props }: LxButtonProps): JSX.Element => (
     <LxButton className="lx-button--shape-circled" {...props}>
-        {Children.map(children, (child: any) =>
-            cloneElement(child, {
-                className: classNames(child.props.className, 'lx-button__icon'),
+        {/* [XXX] Clément: Type of `icon` should be React.ReactElement<LxIconProps>, but I didn't managed to make it work. */}
+        {Children.map(children, (icon: any) =>
+            cloneElement(icon, {
+                className: classNames(icon.props.className, `${LXBUTTON_CLASSNAME}__icon`),
             }),
         )}
     </LxButton>
 );
+
+/////////////////////////////
+
+export { LxIconButton };

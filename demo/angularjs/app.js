@@ -7,6 +7,13 @@ import { DEFAULT_THEME, THEMES } from '../constants';
 
 /////////////////////////////
 
+/**
+ * The dependencies of the AngularJS application.
+ *
+ * @type {Array<string>}
+ * @constant
+ * @readonly
+ */
 const DEPENDENCIES = [MODULE_NAME, 'ui.router'];
 
 /////////////////////////////
@@ -240,6 +247,8 @@ function AppDefaultRun($rootScope, $http, $templateCache, Theme) {
 
 AppDefaultRun.$inject = ['$rootScope', '$http', '$templateCache', 'Theme'];
 
+/////////////////////////////
+
 angular
     .module('design-system', DEPENDENCIES)
     .value('Theme', {
@@ -249,6 +258,8 @@ angular
     .constant('Themes', THEMES)
     .config(AppDefaultConfig)
     .run(AppDefaultRun);
+
+/////////////////////////////
 
 /* eslint-disable import/no-unassigned-import */
 require('./layout/sub-nav/sub-nav_controller.js');

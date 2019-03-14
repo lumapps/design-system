@@ -1,6 +1,10 @@
 import isEmpty from 'lodash/isEmpty';
 
 /////////////////////////////
+//                         //
+//    Private functions    //
+//                         //
+/////////////////////////////
 
 /**
  * Insert an element after another.
@@ -8,7 +12,7 @@ import isEmpty from 'lodash/isEmpty';
  * @param {DOMElement} newNode       The node to insert.
  * @param {DOMElement} referenceNode The node to insert after.
  */
-function insertAfter(newNode, referenceNode) {
+function _insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
@@ -21,7 +25,7 @@ function insertAfter(newNode, referenceNode) {
  * @param  {boolan}  [wait=true] Indicates if we want to wait for the script to be loaded before resolving the promise.
  * @return {Promise} A promise that resolves when the script has been loaded.
  */
-function injectScript(scriptPath, id, afterId, wait = true) {
+function _injectScript(scriptPath, id, afterId, wait = true) {
     return new Promise((resolve) => {
         const newScript = document.createElement('script');
 
@@ -42,7 +46,7 @@ function injectScript(scriptPath, id, afterId, wait = true) {
         if (isEmpty(afterElement)) {
             targetElement.append(newScript);
         } else {
-            insertAfter(newScript, afterElement);
+            _insertAfter(newScript, afterElement);
         }
 
         if (wait) {
@@ -59,14 +63,21 @@ function injectScript(scriptPath, id, afterId, wait = true) {
     });
 }
 
+/////////////////////////////
+//                         //
+//     Public functions    //
+//                         //
+/////////////////////////////
+
 /**
  * Change the theme.
  * This will change the theme of the demo site and the theme of LumX.
  * This will also cleanup the DOM and remove old themes styles and scripts.
  *
- * @param  {string}  theme The theme to enable.
- *                         Possible values are: 'lumapps' or 'material'.
- * @return {Promise} The promise of the change.
+ * @see {@link /demo/constants.d.ts} for the possible value for the theme.
+ *
+ * @param  {Theme}          theme The theme to enable.
+ * @return {Promise<Theme>} The promise of the change.
  */
 function changeTheme(theme) {
     // eslint-disable-next-line no-unused-expressions
@@ -75,8 +86,8 @@ function changeTheme(theme) {
     document.getElementById('lumx-theme')?.remove();
 
     const promises = [
-        injectScript(`demo-theme-${theme}.js`, 'demo-theme', undefined, true),
-        injectScript(`lumx-theme-${theme}.js`, 'lumx-theme', undefined, true),
+        _injectScript(`demo-theme-${theme}.js`, 'demo-theme', undefined, true),
+        _injectScript(`lumx-theme-${theme}.js`, 'lumx-theme', undefined, true),
     ];
 
     return Promise.all(promises).then(() => {
@@ -104,6 +115,8 @@ function changeTheme(theme) {
                 }
             }
         });
+
+        return theme;
     });
 }
 
