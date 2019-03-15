@@ -138,9 +138,19 @@ type LxButtonProps = ILxButtonProps;
 function _validate({ children, variant }: ILxButtonProps): React.ReactNode {
     let newChildren: React.ReactNode = children;
 
-    const childrenCount: number = Children.count(children);
+    let childrenCount: number = Children.count(children);
     if (childrenCount === 0) {
         throw new Error('Your <LxButton> must have at least 1 child for the label or the icon (got 0)!');
+    }
+
+    if (childrenCount === 1) {
+        const firstChild: React.ReactNode = Children.toArray(children)[0];
+
+        if (get(firstChild, 'type') === React.Fragment) {
+            children = get(firstChild, 'props.children', []);
+        }
+
+        childrenCount = Children.count(children);
     }
 
     if (variant === 'button') {
