@@ -52,6 +52,7 @@
         "@commitlint/config-conventional": "^7.5.0",
         "@mdi/js": "^3.5.95",
         "@types/classnames": "^2.2.7",
+        "@types/enzyme": "^3.9.0",
         "@types/jest": "^24.0.11",
         "@types/lodash": "^4.14.123",
         "@types/react": "^16.8.8",
@@ -217,6 +218,7 @@
         "test:angularjs": "",
         "test:react": "jest --config jest/react/index.js",
         "test:react:watch": "jest --config jest/react/index.js --watch",
+        "test:react:watch:all": "jest --config jest/react/index.js --watchAll",
         "webpack": "webpack-dev-server --config webpack/webpack.dev.js",
         "webpack-defaults": "webpack-defaults"
     },

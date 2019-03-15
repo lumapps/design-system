@@ -28,5 +28,5 @@
         "strict": true,
         "target": "es5"
     },
-    "exclude": ["**/dist/"]
+    "exclude": ["**/dist/", "node_modules"]
 }
