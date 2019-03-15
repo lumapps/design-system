@@ -7,8 +7,14 @@
 
     display: flex;
 
+    &--position-right {
+        flex-direction: row-reverse;
+    }
+
     &__input-wrapper {
         @include lx-switch-input-wrapper;
+
+        flex-shrink: 0;
     }
 
     &__input-native {
@@ -63,9 +69,22 @@
         }
     }
 
-    &__label {
-        padding-left: $lx-spacing-unit;
+    &__content {
+        flex: 1;
+    }
 
+    &__label,
+    &__helper {
+        #{ $self }--position-left & {
+            padding-left: $lx-spacing-unit;
+        }
+
+        #{ $self }--position-right & {
+            padding-right: $lx-spacing-unit;
+        }
+    }
+
+    &__label {
         #{ $self }--theme-light & {
             @include lx-input-label(dark);
         }
@@ -76,8 +95,6 @@
     }
 
     &__helper {
-        padding-left: $lx-spacing-unit;
-
         #{ $self }--theme-light & {
             @include lx-input-helper(dark);
         }

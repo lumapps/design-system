@@ -2,6 +2,8 @@
     class="lx-switch"
     ng-class="{ 'lx-switch--is-checked': lxSwitch.viewValue,
                 'lx-switch--is-unchecked': !lxSwitch.viewValue,
+                'lx-switch--position-left': !lxSwitch.position || lxSwitch.position === 'left',
+                'lx-switch--position-right': lxSwitch.position === 'right',
                 'lx-switch--theme-light': !lxSwitch.theme || lxSwitch.theme === 'light',
                 'lx-switch--theme-dark': lxSwitch.theme === 'dark' }"
 >

@@ -155,6 +155,7 @@ function lxSwitchDirective() {
         require: ['lxSwitch', '?ngModel'],
         restrict: 'E',
         scope: {
+            position: '@?lxPosition',
             theme: '@?lxTheme',
         },
         template,
