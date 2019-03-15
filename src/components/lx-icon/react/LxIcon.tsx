@@ -11,11 +11,11 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /////////////////////////////
 
 /**
- * Defines the props of the LxIcon component.
+ * Defines the props of the component.
  */
 interface IProps {
     /**
-     * The icon path to set in the HTML SVG `d` property
+     * The icon path to set in the <svg> `d` property
      */
     icon: string;
 
@@ -39,9 +39,9 @@ type LxIconProps = IProps;
 /////////////////////////////
 
 /**
- * Displays a HTML SVG tag with the wanted icon path.
+ * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
  *
- * @return {JSX.Element} The LxIcon component
+ * @return {JSX.Element} The <LxIcon> component
  */
 const LxIcon: React.FC<IProps> = ({ icon, className, color, size }: IProps): JSX.Element => (
     <i className={classNames(className, handleBasicClasses({ color, size, prefix: 'lx-icon' }))}>
@@ -57,6 +57,7 @@ const LxIcon: React.FC<IProps> = ({ icon, className, color, size }: IProps): JSX
         </svg>
     </i>
 );
+LxIcon.displayName = 'LxIcon';
 
 /////////////////////////////
 

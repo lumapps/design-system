@@ -36,7 +36,7 @@ const setup = (propOverrides) => {
 
 describe('<LxIconButton />', () => {
     // 1. Test render via snapshot (default state of component).
-    it('should render correctly LxIconButton component', () => {
+    it('should render correctly <LxIconButton> component', () => {
         const { wrapper } = setup();
         expect(wrapper).toMatchSnapshot();
     });

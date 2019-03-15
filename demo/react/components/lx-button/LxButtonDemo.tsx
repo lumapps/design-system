@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 
-import { LxButton, LxButtonGroup, LxIcon } from 'LumX';
-import { mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
+import { LxButton, LxButtonGroup, LxIcon, LxIconButton } from 'LumX';
+import { mdiCheck, mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
 
 /////////////////////////////
 
 /**
- * The LxButton demo component.
- * This component will display a demo of all possible configuration of the LxButton.
+ * The <LxButton> demo component.
+ * This component will display a demo of all possible configuration of the <LxButton>.
  */
 const LxButtonDemo = () => (
     <Fragment>
@@ -30,7 +30,6 @@ const LxButtonDemo = () => (
 
             <LxButtonGroup>
                 <LxButton>Split</LxButton>
-
                 <LxButton variant="icon">
                     <LxIcon icon={mdiMenuDown} />
                 </LxButton>
@@ -39,6 +38,10 @@ const LxButtonDemo = () => (
             <LxButton variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton>
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-L6">
@@ -69,6 +72,10 @@ const LxButtonDemo = () => (
             <LxButton emphasis="medium" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton emphasis="medium">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-L6">
@@ -91,6 +98,10 @@ const LxButtonDemo = () => (
             <LxButton emphasis="low" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton emphasis="low">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-L6">
@@ -121,6 +132,10 @@ const LxButtonDemo = () => (
             <LxButton size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton size="s">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         {/* Theme light (s) */}
@@ -157,6 +172,10 @@ const LxButtonDemo = () => (
             <LxButton emphasis="medium" size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton emphasis="medium" size="s">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-L6">
@@ -181,6 +200,10 @@ const LxButtonDemo = () => (
             <LxButton emphasis="low" size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton emphasis="low" size="s">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         {/* Theme dark (m) */}
@@ -213,6 +236,10 @@ const LxButtonDemo = () => (
             <LxButton theme="dark" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton theme="dark">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
@@ -247,6 +274,10 @@ const LxButtonDemo = () => (
             <LxButton color="light" emphasis="medium" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton color="light" emphasis="medium">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
@@ -271,6 +302,10 @@ const LxButtonDemo = () => (
             <LxButton color="light" emphasis="low" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton color="light" emphasis="low">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         {/* Theme dark (s) */}
@@ -307,6 +342,10 @@ const LxButtonDemo = () => (
             <LxButton size="s" theme="dark" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton size="s" theme="dark">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
@@ -341,6 +380,10 @@ const LxButtonDemo = () => (
             <LxButton color="light" emphasis="medium" size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton color="light" emphasis="medium" size="s">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
@@ -365,6 +408,10 @@ const LxButtonDemo = () => (
             <LxButton color="light" emphasis="low" size="s" variant="icon">
                 <LxIcon icon={mdiPlus} />
             </LxButton>
+
+            <LxIconButton color="light" emphasis="low" size="s">
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
         </div>
     </Fragment>
 );
@@ -373,8 +420,6 @@ const LxButtonDemo = () => (
 
 /*
  * Important Note: for the dynamic loading of the demo component in the Main component, you have to assign your
- * component as the `view` property of the default export of the module.
+ * component as the default export of the module.
  */
-export default {
-    view: LxButtonDemo,
-};
+export default LxButtonDemo;
