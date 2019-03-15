@@ -7,10 +7,6 @@
 
     display: flex;
 
-    &--as-decorator {
-        pointer-events: none;
-    }
-
     &__input-wrapper {
         @include lx-checkbox-input-wrapper;
     }

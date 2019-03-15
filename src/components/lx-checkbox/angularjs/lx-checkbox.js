@@ -166,7 +166,6 @@ function lxCheckboxDirective() {
         require: ['lxCheckbox', '?ngModel'],
         restrict: 'E',
         scope: {
-            asDecorator: '=?lxAsDecorator',
             theme: '@?lxTheme',
         },
         template,
