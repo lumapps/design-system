@@ -108,7 +108,8 @@
     }
 
     &__checkbox {
-        margin: 0 $lx-spacing-unit * 3;
+        display: inline-block;
+        vertical-align: middle;
 
         #{ $self }--has-thumbnail #{ $self }__row--tbody & {
             display: none;
