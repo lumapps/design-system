@@ -19,7 +19,7 @@
 @mixin lx-switch-placeholder() {
     position: absolute;
     z-index: 1;
-    top: 2px;
+    top: ($lx-switch-wrapper-height - $lx-switch-control-height) / 2;
     left: 0;
     width: $lx-switch-control-width;
     height: $lx-switch-control-height;
@@ -44,21 +44,21 @@
 @mixin lx-switch-input-indicator($status, $theme) {
     position: absolute;
     z-index: 3;
-    top: 4px;
+    top: ($lx-switch-control-height - $lx-switch-indicator-size) / 2;
     width: $lx-switch-indicator-size;
     height: $lx-switch-indicator-size;
     border-radius: $lx-switch-indicator-size / 2;
 
     @if $status == 'checked' {
-        right: 4px;
+        right: $lx-switch-indicator-offset;
 
         @if $theme == 'dark' {
             background-color: lx-theme-color-variant(light, N);
         } @else if $theme == 'light' {
-            background-color: lx-theme-color-variant(primary, N);
+            background-color: lx-theme-color-variant($lx-switch-checked-color, N);
         }
     } @else if $status == 'unchecked' {
-        left: 4px;
+        left: $lx-switch-indicator-offset;
         background-color: lx-theme-color-variant($theme, N);
     }
 }

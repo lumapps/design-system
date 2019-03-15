@@ -1,5 +1,7 @@
-$lx-switch-wrapper-width: 30px;
-$lx-switch-wrapper-height: 20px;
-$lx-switch-control-width: 30px;
-$lx-switch-control-height: 16px;
-$lx-switch-indicator-size: 8px;
+$lx-switch-wrapper-width: 30px !default;
+$lx-switch-wrapper-height: 20px !default;
+$lx-switch-control-width: 30px !default;
+$lx-switch-control-height: 16px !default;
+$lx-switch-indicator-size: 8px !default;
+$lx-switch-indicator-offset: 4px !default;
+$lx-switch-checked-color: primary !default;
