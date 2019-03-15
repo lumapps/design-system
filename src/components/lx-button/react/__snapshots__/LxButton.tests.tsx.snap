@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LxButton> Condition should fail when anything else than a <LxIcon> is given as child in the 'icon' \`variant\` 1`] = `"You can only have a <LxIcon> child in an 'icon' \`variant\` of <LxButton> (got 'Toto')!"`;
+
+exports[`<LxButton> Condition should fail when anything else than a text, <span> or <LxIcon> is given as child in the 'button' \`variant\` 1`] = `"The children of a <LxButton> must be either of type text, <span> or <LxIcon> (got 'div}')!"`;
+
+exports[`<LxButton> Condition should fail when more than 1 child is given in the 'icon' \`variant\` 1`] = `"You cannot have more than 1 child in an 'icon' \`variant\` of <LxButton> (got 2)!"`;
+
+exports[`<LxButton> Condition should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 1`] = `"You cannot have more than 1 text or <span> child (for the label) in a 'button' \`variant\` of <LxButton> (got at least 2)!"`;
+
+exports[`<LxButton> Condition should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 2`] = `"You cannot have more than 1 text or <span> child (for the label) in a 'button' \`variant\` of <LxButton> (got at least 2)!"`;
+
+exports[`<LxButton> Condition should fail when more than 3 children are given in the 'button' \`variant\` 1`] = `"You cannot have more than 3 children (an icon, a label, another icon) in a 'button' \`variant\` of <LxButton> (got 4)!"`;
+
+exports[`<LxButton> Condition should fail when no child is given 1`] = `"Your <LxButton> must have at least 1 child for the label or the icon (got 0)!"`;
+
+exports[`<LxButton> Condition should fail when there are 2 or more <LxIcon> in a row in the 'button' \`variant\` 1`] = `"You cannot have 2 icons children following in a 'button' \`variant\` of <LxButton>, there must be 1 text or <span> children (for the label) between them!"`;
+
+exports[`<LxButton> Snapshots should render correctly a <span> label 1`] = `
+<LxButtonRoot
+  className="lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <span
+    key=".0"
+  >
+    label
+  </span>
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly a <span> label and an icon 1`] = `
+<LxButtonRoot
+  className="lx-button--has-right-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <span
+    key=".0"
+  >
+    label
+  </span>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".1"
+  />
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly a text label 1`] = `
+<LxButtonRoot
+  className="lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <span
+    key=".0"
+  >
+    Label
+  </span>
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly a text label and an icon 1`] = `
+<LxButtonRoot
+  className="lx-button--has-right-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <span
+    key=".0"
+  >
+    label
+  </span>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".1"
+  />
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly an icon and a <span> label 1`] = `
+<LxButtonRoot
+  className="lx-button--has-left-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".0"
+  />
+  <span
+    key=".1"
+  >
+    label
+  </span>
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly an icon and a text label 1`] = `
+<LxButtonRoot
+  className="lx-button--has-left-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".0"
+  />
+  <span
+    key=".1"
+  >
+    label
+  </span>
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly an icon button with the 'button' \`variant\` 1`] = `
+<LxButtonRoot
+  className="lx-button--has-left-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".0"
+  />
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly an icon button with the 'icon' \`variant\` 1`] = `
+<LxButtonRoot
+  className="lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-icon lx-button--size-m"
+>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+  />
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly two icons and a <span> label 1`] = `
+<LxButtonRoot
+  className="lx-button--has-left-icon lx-button--has-right-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".0"
+  />
+  <span
+    key=".1"
+  >
+    label
+  </span>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".2"
+  />
+</LxButtonRoot>
+`;
+
+exports[`<LxButton> Snapshots should render correctly two icons and a text label 1`] = `
+<LxButtonRoot
+  className="lx-button--has-left-icon lx-button--has-right-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--theme-light lx-button--variant-button lx-button--size-m"
+>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".0"
+  />
+  <span
+    key=".1"
+  >
+    label
+  </span>
+  <LxIcon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".2"
+  />
+</LxButtonRoot>
+`;

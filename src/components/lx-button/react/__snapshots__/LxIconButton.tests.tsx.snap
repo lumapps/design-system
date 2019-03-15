@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LxIconButton> should render correctly 1`] = `
+<LxButton
+  variant="icon"
+>
+  <LxIcon
+    className="lx-button__icon"
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    key=".0"
+  />
+</LxButton>
+`;
