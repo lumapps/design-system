@@ -13,6 +13,8 @@
     @include lx-list-item;
 
     .lx-list--is-clickable & {
+        @include lx-state-transition;
+
         cursor: pointer;
 
         &:hover,

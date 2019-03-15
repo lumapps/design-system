@@ -63,6 +63,8 @@
 .lx-chip--is-clickable,
 .lx-chip .lx-chip__before--is-clickable,
 .lx-chip .lx-chip__after--is-clickable {
+    @include lx-state-transition;
+
     cursor: pointer;
 }
 

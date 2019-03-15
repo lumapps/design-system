@@ -86,6 +86,8 @@
             }
 
             #{ $self }--is-activable #{ $self }__row--is-enabled & {
+                @include lx-state-transition;
+
                 cursor: pointer;
             }
 

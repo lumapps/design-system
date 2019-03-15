@@ -7,7 +7,8 @@
     line-height: $lx-text-field-height;
     transform: translateY($lx-spacing-unit * 3);
     transform-origin: bottom left;
-    transition: transform 0.2s, color 0.2s;
+    transition-duration: 200ms;
+    transition-property: color, transform;
 }
 
 @mixin lx-text-field-material-label-focus($theme) {
@@ -45,7 +46,7 @@
         content: '';
         pointer-events: none;
         transform: scaleX(0);
-        transition: transform 0.2s;
+        transition: transform 200ms;
 
         @if $theme == dark {
             background-color: lx-theme-color-variant(primary, N);

@@ -45,6 +45,8 @@
     outline: none;
 
     &--is-clickable {
+        @include lx-state-transition;
+
         cursor: pointer;
     }
 

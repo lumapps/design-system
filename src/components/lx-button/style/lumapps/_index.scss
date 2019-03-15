@@ -4,6 +4,7 @@
 
 .lx-button {
     @include lx-button-base;
+    @include lx-state-transition;
 }
 
 /* Button padding

@@ -6,6 +6,8 @@
     border-radius: $lx-theme-border-radius;
     box-shadow: inset 0 0 0 1px lx-theme-color-variant($theme, L4);
     outline: none;
+    transition-duration: $lx-text-field-transition-duration;
+    transition-property: background-color, box-shadow;
 
     @if $is-multiple {
         min-height: $lx-text-field-height;

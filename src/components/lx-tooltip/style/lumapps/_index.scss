@@ -13,7 +13,8 @@
     border-radius: $lx-theme-border-radius;
     opacity: 0;
     pointer-events: none;
-    transition: transform $lx-tooltip-transition-duration, opacity $lx-tooltip-transition-duration;
+    transition-duration: $lx-tooltip-transition-duration;
+    transition-property: opacity, transform;
 
     &--is-shown {
         opacity: 1;

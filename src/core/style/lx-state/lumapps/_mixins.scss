@@ -115,3 +115,8 @@
         @include lx-state-low($state, $color, $has-focus-inset);
     }
 }
+
+@mixin lx-state-transition() {
+    transition-duration: $lx-state-transition-duration;
+    transition-property: background-color, box-shadow;
+}
