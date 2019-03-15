@@ -49,6 +49,8 @@
         </lx-button>
     </lx-button-group>
 
+    <lx-button lx-emphasis="medium" lx-is-selected="vm.isSelected" ng-click="vm.toggleSelected()">Toggle</lx-button>
+
     <lx-button lx-emphasis="medium" lx-variant="icon">
         <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>
     </lx-button>
@@ -198,6 +200,10 @@
             <lx-icon lx-path="{{ vm.icons.mdiMenuDown }}"></lx-icon>
         </lx-button>
     </lx-button-group>
+
+    <lx-button lx-color="light" lx-emphasis="medium" lx-is-selected="vm.isSelected" ng-click="vm.toggleSelected()">
+        Toggle
+    </lx-button>
 
     <lx-button lx-color="light" lx-emphasis="medium" lx-variant="icon">
         <lx-icon lx-path="{{ vm.icons.mdiPlus }}"></lx-icon>

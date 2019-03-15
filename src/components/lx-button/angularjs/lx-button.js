@@ -117,6 +117,14 @@ function lxButtonDirective() {
                 return (className.match(/(^|\s)lx-button--variant-\S+/g) || []).join(' ');
             }).addClass(`lx-button--variant-${variant}`);
         });
+
+        scope.$watch(attrs.lxIsSelected, (isSelected) => {
+            if (isSelected) {
+                el.addClass('lx-button--is-selected');
+            } else {
+                el.removeClass('lx-button--is-selected');
+            }
+        });
     }
 
     return {

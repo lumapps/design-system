@@ -25,6 +25,30 @@ function DemoButtonController() {
         mdiPencil,
         mdiPlus,
     };
+
+    /**
+     * Wheter the toggle button is selected or not.
+     *
+     * @type {Object}
+     */
+    vm.isSelected = false;
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Toggle chip selected state.
+     */
+    function toggleSelected() {
+        vm.isSelected = !vm.isSelected;
+    }
+
+    /////////////////////////////
+
+    vm.toggleSelected = toggleSelected;
 }
 
 /////////////////////////////

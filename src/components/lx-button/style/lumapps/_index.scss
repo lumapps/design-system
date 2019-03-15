@@ -133,6 +133,43 @@
     }
 }
 
+/* Toggle button
+   ========================================================================== */
+
+.lx-button--is-selected {
+    &.lx-button--color-dark {
+        @include lx-state-as-selected(state-default, dark);
+
+        &:hover {
+            @include lx-state-as-selected(state-hover, dark);
+        }
+
+        &:active {
+            @include lx-state-as-selected(state-active, dark);
+        }
+
+        &[data-focus-visible-added] {
+            @include lx-state-as-selected(state-focus, dark);
+        }
+    }
+
+    &.lx-button--color-light {
+        @include lx-state-as-selected(state-default, light);
+
+        &:hover {
+            @include lx-state-as-selected(state-hover, light);
+        }
+
+        &:active {
+            @include lx-state-as-selected(state-active, light);
+        }
+
+        &[data-focus-visible-added] {
+            @include lx-state-as-selected(state-focus, light);
+        }
+    }
+}
+
 /* Button group
    ========================================================================== */
 
