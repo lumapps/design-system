@@ -25,6 +25,7 @@ interface IProps extends LxButtonProps {
      */
     variant?: never;
 }
+type LxIconButtonProps = IProps;
 
 /////////////////////////////
 //                         //
@@ -106,4 +107,4 @@ LxIconButton.displayName = 'LxIconButton';
 
 /////////////////////////////
 
-export { LxIconButton };
+export { LxIconButton, LxIconButtonProps };
