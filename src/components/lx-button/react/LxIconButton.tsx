@@ -9,11 +9,10 @@ import classNames from 'classnames';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
+import { LxButton, LxIcon } from 'LumX';
 import { isElementOfType } from 'LumX/core/react/utils';
 
-import { LxIcon } from 'LumX';
-
-import { CLASSNAME as LXBUTTON_CLASSNAME, LxButton } from './LxButton';
+import { CLASSNAME as LXBUTTON_CLASSNAME } from './LxButton';
 
 /////////////////////////////
 

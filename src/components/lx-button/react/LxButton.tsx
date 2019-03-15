@@ -10,10 +10,9 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 
+import { LxIcon } from 'LumX';
 import { isElementOfType, isElementText } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-
-import { LxIcon } from 'LumX';
 
 /////////////////////////////
 

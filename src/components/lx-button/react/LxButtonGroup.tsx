@@ -1,8 +1,9 @@
 import React, { Children } from 'react';
 
+import { LxButton } from 'LumX';
 import { isElementOfType } from 'LumX/core/react/utils';
 
-import { CLASSNAME as LXBUTTON_CLASSNAME, LxButton } from './LxButton';
+import { CLASSNAME as LXBUTTON_CLASSNAME } from './LxButton';
 
 /////////////////////////////
 /**
