@@ -88,38 +88,28 @@
    ========================================================================== */
 
 // Disabled state
-.lx-radio-button--theme-light.lx-radio-button--is-disabled {
-    .lx-radio-button__input-background {
-        @include lx-state(state-disabled, emphasis-low, dark);
+.lx-radio-button--is-disabled {
+    .lx-radio-button__input-native {
+        pointer-events: none;
     }
 
-    .lx-radio-button__input-indicator {
-        @include lx-state(state-disabled, emphasis-high, primary, dark);
+    .lx-radio-button__input-placeholder {
+        @include lx-state-disabled-input;
     }
 
-    .lx-radio-button__label,
-    .lx-radio-button__helper {
-        @include lx-state-disabled-text(dark);
-    }
-}
-
-.lx-radio-button--theme-dark.lx-radio-button--is-disabled {
-    .lx-radio-button__input-background {
-        @include lx-state(state-disabled, emphasis-low, light);
+    &.lx-radio-button--theme-light {
+        .lx-radio-button__label,
+        .lx-radio-button__helper {
+            @include lx-state-disabled-text(dark);
+        }
     }
 
-    .lx-radio-button__input-indicator {
-        @include lx-state(state-disabled, emphasis-high, primary, light);
+    &.lx-radio-button--theme-dark {
+        .lx-radio-button__label,
+        .lx-radio-button__helper {
+            @include lx-state-disabled-text(light);
+        }
     }
-
-    .lx-radio-button__label,
-    .lx-radio-button__helper {
-        @include lx-state-disabled-text(light);
-    }
-}
-
-.lx-radio-button--is-disabled .lx-radio-button__input-native {
-    pointer-events: none;
 }
 
 // Hover state

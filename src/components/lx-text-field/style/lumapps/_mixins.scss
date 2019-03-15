@@ -31,8 +31,8 @@
     width: 100%;
     height: $lx-text-field-height;
     padding: 0;
-    border: none;
     margin: 0;
+    border: none;
     background-color: transparent;
     color: lx-theme-color-variant($theme, N);
     line-height: $lx-text-field-height;
@@ -68,10 +68,6 @@
             background-color: transparent;
             box-shadow: inset 0 0 0 2px lx-theme-color-variant(light, L2);
         }
-    } @else if $state == state-disabled {
-        background-color: transparent;
-        box-shadow: inset 0 0 0 1px lx-theme-color-variant($theme, L4);
-        pointer-events: none;
     }
 }
 

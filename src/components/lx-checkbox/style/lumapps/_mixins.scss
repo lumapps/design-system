@@ -33,9 +33,9 @@
     right: 0;
     bottom: 0;
     left: 0;
-    border-radius: 2px;
-    border-style: solid;
     border-width: 2px;
+    border-style: solid;
+    border-radius: 2px;
 }
 
 @mixin lx-checkbox-input-background-status($status) {
@@ -49,9 +49,15 @@
 @mixin lx-checkbox-input-indicator() {
     position: absolute;
     z-index: 3;
-    top: ($lx-checkbox-control-size - $lx-checkbox-wrapper-size) / 2;
-    left: ($lx-checkbox-control-size - $lx-checkbox-wrapper-size) / 2;
-    font-size: $lx-checkbox-wrapper-size;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    font-size: $lx-checkbox-control-size;
 }
 
 @mixin lx-checkbox-input-indicator-status($status) {

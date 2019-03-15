@@ -1,52 +1,29 @@
-@mixin lx-state-high($state, $color, $theme, $color-property: 'background-color') {
+@mixin lx-state-high($state, $color, $theme) {
     @if $state == state-default {
         @if $theme == dark {
-            #{$color-property}: lx-theme-color-variant($color, N);
-
-            @if $color-property == 'background-color' {
-                color: lx-theme-best-color(lx-theme-color-variant($color, N));
-            }
+            background-color: lx-theme-color-variant($color, N);
+            color: lx-theme-color-variant(light, N);
         } @else if $theme == light {
-            #{$color-property}: lx-theme-color-variant($theme, N);
-
-            @if $color-property == 'background-color' {
-                color: lx-theme-color-variant($color, N);
-            }
+            background-color: lx-theme-color-variant($theme, N);
+            color: lx-theme-color-variant($color, N);
         }
     } @else if $state == state-hover {
         @if $theme == dark {
-            #{$color-property}: lx-theme-color-variant($color, D1);
+            background-color: lx-theme-color-variant($color, D1);
         } @else if $theme == light {
-            #{$color-property}: lx-theme-color-variant($theme, L1);
+            background-color: lx-theme-color-variant($theme, L1);
         }
     } @else if $state == state-active {
         @if $theme == dark {
-            #{$color-property}: lx-theme-color-variant($color, D2);
+            background-color: lx-theme-color-variant($color, D2);
         } @else if $theme == light {
-            #{$color-property}: lx-theme-color-variant($theme, L2);
+            background-color: lx-theme-color-variant($theme, L2);
         }
     } @else if $state == state-focus {
         @if $theme == dark {
             box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
         } @else if $theme == light {
             box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
-        }
-    } @else if $state == state-disabled {
-        @if $color-property == 'background-color' {
-            // prettier-ignore
-            color:
-                lx-theme-best-color(
-                    lx-theme-color-variant($color, L3),
-                    (lx-theme-color-variant(light, N), lx-theme-color-variant(dark, L3))
-                );
-        }
-
-        pointer-events: none;
-
-        @if $theme == dark {
-            #{$color-property}: lx-theme-color-variant($color, L3);
-        } @else if $theme == light {
-            #{$color-property}: lx-theme-color-variant($theme, L3);
         }
     }
 }
@@ -65,10 +42,6 @@
         } @else {
             box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
         }
-    } @else if $state == state-disabled {
-        background-color: lx-theme-color-variant($color, L6);
-        color: lx-theme-color-variant($color, L3);
-        pointer-events: none;
     }
 }
 
@@ -120,15 +93,16 @@
         } @else {
             box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
         }
-    } @else if $state == state-disabled {
-        background-color: transparent;
-        color: lx-theme-color-variant($color, L3);
-        pointer-events: none;
     }
 }
 
 @mixin lx-state-disabled-text($theme) {
     color: lx-theme-color-variant($theme, L3);
+    pointer-events: none;
+}
+
+@mixin lx-state-disabled-input() {
+    opacity: 0.5;
     pointer-events: none;
 }
 

@@ -81,6 +81,27 @@
 /* Text field states
    ========================================================================== */
 
+// Disabled state
+.lx-text-field--is-disabled {
+    .lx-text-field__input-wrapper {
+        @include lx-state-disabled-input;
+    }
+
+    &.lx-text-field--theme-light {
+        .lx-text-field__label,
+        .lx-text-field__helper {
+            @include lx-state-disabled-text(dark);
+        }
+    }
+
+    &.lx-text-field--theme-dark {
+        .lx-text-field__label,
+        .lx-text-field__helper {
+            @include lx-state-disabled-text(light);
+        }
+    }
+}
+
 // Hover state
 .lx-text-field--theme-light {
     .lx-text-field__input-wrapper:hover {
@@ -104,59 +125,6 @@
 .lx-text-field--theme-dark.lx-text-field--is-focus {
     .lx-text-field__input-wrapper {
         @include lx-text-field-input-wrapper-state(state-focus, light);
-    }
-}
-
-// Disabled state
-.lx-text-field--theme-light.lx-text-field--is-disabled {
-    .lx-text-field__label {
-        @include lx-state-disabled-text(dark);
-    }
-
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(state-disabled, dark);
-    }
-
-    .lx-text-field__input-icon {
-        @include lx-state-disabled-text(dark);
-    }
-
-    .lx-text-field__input-native input {
-        @include lx-state-disabled-text(dark);
-
-        &::placeholder {
-            @include lx-state-disabled-text(dark);
-        }
-    }
-
-    .lx-text-field__helper {
-        @include lx-state-disabled-text(dark);
-    }
-}
-
-.lx-text-field--theme-dark.lx-text-field--is-disabled {
-    .lx-text-field__label {
-        @include lx-state-disabled-text(light);
-    }
-
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(state-disabled, light);
-    }
-
-    .lx-text-field__input-icon {
-        @include lx-state-disabled-text(light);
-    }
-
-    .lx-text-field__input-native input {
-        @include lx-state-disabled-text(light);
-
-        &::placeholder {
-            @include lx-state-disabled-text(light);
-        }
-    }
-
-    .lx-text-field__helper {
-        @include lx-state-disabled-text(light);
     }
 }
 

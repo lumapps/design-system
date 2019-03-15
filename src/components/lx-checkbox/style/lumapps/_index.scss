@@ -47,11 +47,11 @@
         @include lx-checkbox-input-indicator;
 
         #{ $self }--theme-light & {
-            @include lx-state-high(state-default, $lx-checkbox-color, dark, 'color');
+            @include lx-state(state-default, emphasis-high, $lx-checkbox-color, dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-state-high(state-default, $lx-checkbox-color, light, 'color');
+            @include lx-state(state-default, emphasis-high, $lx-checkbox-color, light);
         }
 
         #{ $self }--is-unchecked & {
@@ -92,38 +92,28 @@
    ========================================================================== */
 
 // Disabled state
-.lx-checkbox--theme-light.lx-checkbox--is-disabled {
-    .lx-checkbox__input-background {
-        @include lx-state(state-disabled, emphasis-low, dark);
+.lx-checkbox--is-disabled {
+    .lx-checkbox__input-native {
+        pointer-events: none;
     }
 
-    .lx-checkbox__input-indicator {
-        @include lx-state-high(state-disabled, $lx-checkbox-color, dark, 'color');
+    .lx-checkbox__input-placeholder {
+        @include lx-state-disabled-input;
     }
 
-    .lx-checkbox__label,
-    .lx-checkbox__helper {
-        @include lx-state-disabled-text(dark);
-    }
-}
-
-.lx-checkbox--theme-dark.lx-checkbox--is-disabled {
-    .lx-checkbox__input-background {
-        @include lx-state(state-disabled, emphasis-low, light);
+    &.lx-checkbox--theme-light {
+        .lx-checkbox__label,
+        .lx-checkbox__helper {
+            @include lx-state-disabled-text(dark);
+        }
     }
 
-    .lx-checkbox__input-indicator {
-        @include lx-state-high(state-disabled, $lx-checkbox-color, light, 'color');
+    &.lx-checkbox--theme-dark {
+        .lx-checkbox__label,
+        .lx-checkbox__helper {
+            @include lx-state-disabled-text(light);
+        }
     }
-
-    .lx-checkbox__label,
-    .lx-checkbox__helper {
-        @include lx-state-disabled-text(light);
-    }
-}
-
-.lx-checkbox--is-disabled .lx-checkbox__input-native {
-    pointer-events: none;
 }
 
 // Hover state
@@ -141,13 +131,13 @@
 
 .lx-checkbox--theme-light.lx-checkbox--is-checked .lx-checkbox__input-native:hover + .lx-checkbox__input-placeholder {
     .lx-checkbox__input-indicator {
-        @include lx-state-high(state-hover, $lx-checkbox-color, dark, 'color');
+        @include lx-state(state-hover, emphasis-high, $lx-checkbox-color, dark);
     }
 }
 
 .lx-checkbox--theme-dark.lx-checkbox--is-checked .lx-checkbox__input-native:hover + .lx-checkbox__input-placeholder {
     .lx-checkbox__input-indicator {
-        @include lx-state-high(state-hover, $lx-checkbox-color, light, 'color');
+        @include lx-state(state-hover, emphasis-high, $lx-checkbox-color, light);
     }
 }
 
@@ -168,13 +158,13 @@
 
 .lx-checkbox--theme-light.lx-checkbox--is-checked .lx-checkbox__input-native:active + .lx-checkbox__input-placeholder {
     .lx-checkbox__input-indicator {
-        @include lx-state-high(state-active, $lx-checkbox-color, dark, 'color');
+        @include lx-state(state-active, emphasis-high, $lx-checkbox-color, dark);
     }
 }
 
 .lx-checkbox--theme-dark.lx-checkbox--is-checked .lx-checkbox__input-native:active + .lx-checkbox__input-placeholder {
     .lx-checkbox__input-indicator {
-        @include lx-state-high(state-active, $lx-checkbox-color, light, 'color');
+        @include lx-state(state-active, emphasis-high, $lx-checkbox-color, light);
     }
 }
 

@@ -140,11 +140,5 @@
 }
 
 .lx-chip--is-disabled {
-    &.lx-chip--theme-light {
-        @include lx-state(state-disabled, emphasis-medium, dark);
-    }
-
-    &.lx-chip--theme-dark {
-        @include lx-state(state-disabled, emphasis-medium, light);
-    }
+    @include lx-state-disabled-input;
 }

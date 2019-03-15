@@ -4,8 +4,8 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    border: none;
     margin: 0;
+    border: none;
     outline: none;
     text-decoration: none;
     user-select: none;
@@ -43,7 +43,7 @@
     }
 
     &:disabled {
-        @include lx-state(state-disabled, $emphasis, $color, $theme);
+        @include lx-state-disabled-input;
     }
 }
 

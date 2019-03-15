@@ -1,6 +1,6 @@
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import { mdiCheckboxMarked } from 'LumX/icons';
+import { mdiCheck } from 'LumX/icons';
 
 import template from './lx-checkbox.html';
 
@@ -65,7 +65,7 @@ function lxCheckboxController(LxUtilsService) {
      * @type {Object}
      */
     lxCheckbox.icons = {
-        mdiCheckboxMarked,
+        mdiCheck,
     };
 
     /**

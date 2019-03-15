@@ -98,11 +98,11 @@
 // Disabled state
 .lx-tabs__link--is-disabled {
     .lx-tabs--theme-light & {
-        @include lx-state(state-disabled, emphasis-low, dark);
+        @include lx-state-disabled-text(dark);
     }
 
     .lx-tabs--theme-dark & {
-        @include lx-state(state-disabled, emphasis-low, light);
+        @include lx-state-disabled-text(light);
     }
 }
 
