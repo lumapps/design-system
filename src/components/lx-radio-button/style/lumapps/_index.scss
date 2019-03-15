@@ -59,11 +59,9 @@
         }
     }
 
-    &__content {
-        margin-left: $lx-spacing-unit;
-    }
-
     &__label {
+        padding-left: $lx-spacing-unit;
+
         #{ $self }--theme-light & {
             @include lx-input-label(dark);
         }
@@ -74,6 +72,8 @@
     }
 
     &__helper {
+        padding-left: $lx-spacing-unit;
+
         #{ $self }--theme-light & {
             @include lx-input-helper(dark);
         }
