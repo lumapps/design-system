@@ -15,14 +15,15 @@ import classNames from 'classnames';
  * @param  {Size}     size     The size of the component.
  * @return {string}   All LumX basic classes.
  */
-const handleBasicClasses = ({ prefix, color, emphasis, theme, variant, size }) =>
-    classNames(prefix, {
+function handleBasicClasses({ prefix, color, emphasis, theme, variant, size }) {
+    return classNames(prefix, {
         [`${prefix}--color-${color}`]: color,
         [`${prefix}--emphasis-${emphasis}`]: emphasis,
         [`${prefix}--theme-${theme}`]: theme && emphasis === 'high',
         [`${prefix}--variant-${variant}`]: variant,
         [`${prefix}--size-${size}`]: size,
     });
+}
 
 /////////////////////////////
 
