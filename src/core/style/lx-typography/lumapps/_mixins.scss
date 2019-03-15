@@ -5,46 +5,11 @@
 }
 
 @mixin lx-typography($style) {
-    @if $style == title {
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 30px;
-    }
-
-    @if $style == subtitle2 {
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 28px;
-    }
-
-    @if $style == subtitle1 {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 24px;
-    }
-
-    @if $style == body2 {
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 24px;
-    }
-
-    @if $style == body1 {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-    }
-
-    @if $style == caption {
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16px;
-    }
+    font-size: map-get($lx-typography-font-size, $style);
+    font-weight: map-get($lx-typography-font-weight, $style);
+    line-height: map-get($lx-typography-line-height, $style);
 
     @if $style == overline {
-        font-size: 10px;
-        font-weight: 700;
-        line-height: 12px;
         text-transform: uppercase;
     }
 }
