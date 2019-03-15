@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 import camelCase from 'lodash/camelCase';
 import isEmpty from 'lodash/isEmpty';
-import isFunction from 'lodash/isFunction';
 import upperFirst from 'lodash/upperFirst';
 
 /////////////////////////////
@@ -24,7 +23,7 @@ interface IESModule {
     /**
      * The default export of our fake ESModule loaded by the dynamic component loader.
      */
-    default: { view?: () => JSX.Element };
+    default?: () => JSX.Element;
 }
 
 /////////////////////////////
@@ -57,7 +56,7 @@ function _loadComponent(componentFolderName: IProps['activeComponent']): Promise
  * name.
  */
 const Main: React.FC<IProps> = ({ activeComponent }: IProps): JSX.Element => {
-    const [demoComponent, setDemoComponent]: [IESModule['default'], any] = useState({ view: undefined });
+    const [demoComponent, setDemoComponent]: [IESModule['default'], any] = useState();
 
     useEffect((): void => {
         const loadComponent = async () => {
@@ -65,7 +64,7 @@ const Main: React.FC<IProps> = ({ activeComponent }: IProps): JSX.Element => {
                 const { default: newDemoComponent }: IESModule = await _loadComponent(activeComponent);
                 setDemoComponent(newDemoComponent);
             } catch (exception) {
-                setDemoComponent({ view: undefined });
+                setDemoComponent();
 
                 console.error(exception);
             }
@@ -78,8 +77,8 @@ const Main: React.FC<IProps> = ({ activeComponent }: IProps): JSX.Element => {
         return <div />;
     }
 
-    if (!isEmpty(demoComponent) && isFunction(demoComponent!.view)) {
-        return <div className="main">{React.createElement(demoComponent!.view!)}</div>;
+    if (!isEmpty(demoComponent)) {
+        return <div className="main">{demoComponent}</div>;
     }
 
     return <div className="main">Loading demo for {activeComponent}...</div>;
