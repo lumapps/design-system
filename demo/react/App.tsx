@@ -6,6 +6,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 
 import last from 'lodash/last';
 
+import { ErrorBoundary } from './ErrorBoundary';
 import { Main } from './layout/Main';
 import { MainNav } from './layout/MainNav';
 import { SubNav } from './layout/SubNav';
@@ -47,7 +48,10 @@ const App: React.FC = (): JSX.Element => {
                     changeTheme={changeTheme}
                     activeComponent={activeComponent}
                 />
-                <Main activeComponent={activeComponent} />
+
+                <ErrorBoundary>
+                    <Main activeComponent={activeComponent} />
+                </ErrorBoundary>
             </Fragment>
         );
     }
