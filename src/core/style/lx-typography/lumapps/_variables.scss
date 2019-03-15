@@ -5,6 +5,8 @@ $lx-typography-default-font-size: 16px !default;
 $lx-typography-default-line-height: 24px !default;
 
 $lx-typography-font-size: (
+    display1: 34px,
+    headline: 24px,
     title: 20px,
     subtitle2: 16px,
     subtitle1: 14px,
@@ -15,6 +17,8 @@ $lx-typography-font-size: (
 ) !default;
 
 $lx-typography-font-weight: (
+    display1: 600,
+    headline: 600,
     title: 700,
     subtitle2: 600,
     subtitle1: 600,
@@ -25,6 +29,8 @@ $lx-typography-font-weight: (
 ) !default;
 
 $lx-typography-line-height: (
+    display1: 40px,
+    headline: 32px,
     title: 30px,
     subtitle2: 28px,
     subtitle1: 24px,
