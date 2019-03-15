@@ -155,7 +155,7 @@ function _validate({ children, variant }: ILxButtonProps): React.ReactNode {
     if (variant === 'button') {
         if (childrenCount > 3) {
             throw new Error(
-                `You cannot have more than 3 children (an icon, a label, another icon) in a 'button' <LxButton> (got ${childrenCount})!`,
+                `You cannot have more than 3 children (an icon, a label, another icon) in a 'button' \`variant\` of <LxButton> (got ${childrenCount})!`,
             );
         }
 
@@ -188,20 +188,20 @@ function _validate({ children, variant }: ILxButtonProps): React.ReactNode {
 
                 if (isChildText && index > 0 && childrenTypes[index - 1] === 'text') {
                     throw new Error(
-                        `You cannot have more than 1 text or <span> child (for the label) in a 'button' <LxButton> (got at least 2)!`,
+                        `You cannot have more than 1 text or <span> child (for the label) in a 'button' \`variant\` of <LxButton> (got at least 2)!`,
                     );
                 }
 
                 if (isChildIcon) {
                     if (childrenCount === 1) {
                         console.warn(
-                            "If you want to display an icon button, you should use the 'icon' variant of the <LxButton> instead of the 'button' variant\nYou should even consider using the <LxIconButton> component instead.",
+                            "If you want to display an icon button, you should use the 'icon' `variant` of the <LxButton> instead of the 'button' `variant`\nYou should even consider using the <LxIconButton> component instead.",
                         );
                     }
 
                     if (index > 0 && childrenTypes[index - 1] === 'icon') {
                         throw new Error(
-                            `You cannot have 2 icons children following in a 'button' <LxButton>, there must be 1 text or <span> children (for the label) between them!`,
+                            `You cannot have 2 icons children following in a 'button' \`variant\` of <LxButton>, there must be 1 text or <span> children (for the label) between them!`,
                         );
                     }
                 }
@@ -211,7 +211,9 @@ function _validate({ children, variant }: ILxButtonProps): React.ReactNode {
         );
     } else if (variant === 'icon') {
         if (childrenCount > 1) {
-            throw new Error(`You cannot have more than 1 child in an 'icon' <LxButton> (got ${childrenCount})!`);
+            throw new Error(
+                `You cannot have more than 1 child in an 'icon' \`variant\` of <LxButton> (got ${childrenCount})!`,
+            );
         }
 
         Children.forEach(
@@ -222,7 +224,7 @@ function _validate({ children, variant }: ILxButtonProps): React.ReactNode {
                 }
 
                 throw new Error(
-                    `You can only have a <LxIcon> child in an 'icon' <LxButton> (got ${get(
+                    `You can only have a <LxIcon> child in an 'icon' \`variant\` of <LxButton> (got ${get(
                         child.type,
                         'name',
                         child.type,
