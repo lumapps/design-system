@@ -1271,7 +1271,7 @@ module.exports = {
 
         'no-useless-assign/no-useless-assign': 'error',
 
-        'prettier/prettier': 'error',
+        'prettier/prettier': 'off',
 
         'require-jsdoc-except/require-jsdoc': [
             'error',
