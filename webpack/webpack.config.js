@@ -38,7 +38,7 @@ const baseConfig = {
     module: {
         rules: [
             {
-                exclude: [/node_modules/u, /\.tests?\.js/u, /testing/u],
+                exclude: [/node_modules/u, /\.(test|spec)\.js/u, /testing/u],
                 test: /\.js$/u,
                 use: [
                     {
@@ -48,7 +48,7 @@ const baseConfig = {
                 ],
             },
             {
-                exclude: [/node_modules/u, /\.tests?\.jsx/u, /testing/u],
+                exclude: [/node_modules/u, /\.(test|spec)\.jsx/u, /testing/u],
                 test: /\.jsx$/u,
                 use: [
                     {
@@ -60,11 +60,11 @@ const baseConfig = {
                 ],
             },
             {
-                exclude: [/node_modules/u, /\.tests?\.tsx?/u, /testing/u],
+                exclude: [/node_modules/u, /\.(test|spec)\.tsx?/u, /testing/u],
                 test: /\.tsx?$/u,
                 loader: 'awesome-typescript-loader',
                 options: {
-                    reportFiles: ['**/*.(!test.|tests.).(ts|tsx)'],
+                    reportFiles: ['**/*.(!test|spec).(ts|tsx)'],
                     silent: true,
                     useCache: true,
                 },
