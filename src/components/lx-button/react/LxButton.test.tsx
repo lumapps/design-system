@@ -99,21 +99,23 @@ describe(`<${LxButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a text label', (): void => {
-            const { icon, label, wrapper }: ISetup = setup();
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(false);
             expect(label.exists()).toEqual(true);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly a <span> label', (): void => {
             const children: React.ReactNode = <span>Label</span>;
 
-            const { icon, label, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(false);
             expect(label.exists()).toEqual(true);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly an icon and a text label', (): void => {
@@ -124,12 +126,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
                 </Fragment>
             );
 
-            const { icon, label, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(true);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly an icon and a <span> label', (): void => {
@@ -140,12 +143,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
                 </Fragment>
             );
 
-            const { icon, label, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(true);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly a text label and an icon', (): void => {
@@ -156,12 +160,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
                 </Fragment>
             );
 
-            const { icon, label, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(true);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly a <span> label and an icon', (): void => {
@@ -172,12 +177,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
                 </Fragment>
             );
 
-            const { icon, label, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(true);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly two icons and a text label', (): void => {
@@ -189,12 +195,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
                 </Fragment>
             );
 
-            const { icon, label, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(2);
             expect(label.exists()).toEqual(true);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly two icons and a <span> label', (): void => {
@@ -206,12 +213,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
                 </Fragment>
             );
 
-            const { icon, label, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(2);
             expect(label.exists()).toEqual(true);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it("should render correctly an icon button with the 'button' `variant`", (): void => {
@@ -220,12 +228,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
 
-            const { icon, label, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(false);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
 
             // @ts-ignore
             global.console.warn.mockRestore();
@@ -234,12 +243,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it("should render correctly an icon button with the 'icon' `variant`", (): void => {
             const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
 
-            const { icon, label, wrapper }: ISetup = setup({ children, variant: 'icon' });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children, variant: 'icon' });
             expect(wrapper).toMatchSnapshot();
 
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(false);
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
     });
 
@@ -249,6 +259,8 @@ describe(`<${LxButton.displayName}>`, (): void => {
     describe('Props', (): void => {
         it('should use default props', (): void => {
             const { buttonRoot }: ISetup = setup();
+
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
@@ -268,6 +280,8 @@ describe(`<${LxButton.displayName}>`, (): void => {
             };
 
             const { buttonRoot }: ISetup = setup(modifiedProps);
+
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
 
             expect(
                 buttonRoot.hasClass(
@@ -289,6 +303,8 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             const { buttonRoot }: ISetup = setup(modifiedProps);
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
+
             expect(
                 buttonRoot.hasClass(
                     getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
@@ -309,6 +325,8 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             const { buttonRoot }: ISetup = setup(modifiedProps);
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
+
             expect(
                 buttonRoot.hasClass(
                     getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
@@ -328,6 +346,8 @@ describe(`<${LxButton.displayName}>`, (): void => {
             };
 
             const { buttonRoot }: ISetup = setup(modifiedProps);
+
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
 
             expect(
                 buttonRoot.hasClass(
@@ -350,6 +370,8 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             const { buttonRoot }: ISetup = setup(modifiedProps);
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
+
             expect(
                 buttonRoot.hasClass(
                     getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
@@ -370,6 +392,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             const { buttonRoot }: ISetup = setup(modifiedProps);
 
+            expect(buttonRoot.prop(testedProp)).toContain(CLASSNAME);
             expect(buttonRoot.prop(testedProp)).toContain(modifiedProps[testedProp]);
         });
 

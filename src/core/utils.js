@@ -32,7 +32,7 @@ function handleBasicClasses({ prefix, color, emphasis, size, theme, variant }) {
         [getBasicClass({ prefix, type: 'color', value: color })]: color,
         [getBasicClass({ prefix, type: 'emphasis', value: emphasis })]: emphasis,
         [getBasicClass({ prefix, type: 'size', value: size })]: size,
-        [getBasicClass({ prefix, type: 'theme', value: theme })]: theme && emphasis === 'high',
+        [getBasicClass({ prefix, type: 'theme', value: theme })]: theme,
         [getBasicClass({ prefix, type: 'variant', value: variant })]: variant,
     });
 }

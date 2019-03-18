@@ -36,27 +36,27 @@ const CLASSNAME: string = 'lx-button';
  */
 interface ILxButtonProps {
     /**
-     * The button color which must be defined by `lx-button--${color}` css class.
+     * The button color which must be defined by `lx-button--${color}` CSS class.
      */
     color?: Color;
 
     /**
-     * The emphasis of the button which must be defined by `lx-button-emphasis--${emphasis}` css class.
+     * The emphasis of the button which must be defined by `lx-button-emphasis--${emphasis}` CSS class.
      */
     emphasis?: Emphasis;
 
     /**
-     * The button size which must be defined by `lx-button--${size}` css class.
+     * The button size which must be defined by `lx-button--${size}` CSS class.
      */
     size?: Size;
 
     /**
-     * The button theme which must be defined by `lx-button--${theme}` css class.
+     * The button theme which must be defined by `lx-button--${theme}` CSS class.
      */
     theme?: Theme;
 
     /**
-     * The button variant which must be defined by `lx-type--${variant}` css class.
+     * The button variant which must be defined by `lx-type--${variant}` CSS class.
      */
     variant?: Variant;
 }
@@ -243,7 +243,14 @@ const LxButton: React.FC<LxButtonProps> = ({
         <LxButtonRoot
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, color, emphasis, size, theme, variant }),
+                handleBasicClasses({
+                    color,
+                    emphasis,
+                    prefix: CLASSNAME,
+                    size,
+                    theme: emphasis === 'high' ? theme : undefined,
+                    variant,
+                }),
             )}
             {...props}
         >
