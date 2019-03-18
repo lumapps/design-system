@@ -1,4 +1,4 @@
-import { Color, Emphasis, Size, Theme, Variant } from 'components';
+import { Color, ComplexPropDefault, Emphasis, Size, Theme, Variant } from 'components';
 
 import { LxButtonRootProps } from './LxButtonRoot';
 
@@ -181,6 +181,35 @@ function _validate({ children, variant }: LxButtonProps): React.ReactNode {
 /////////////////////////////
 
 /**
+ * Define the types of the default props.
+ */
+interface ILxButtonDefaultPropsType {
+    color: ComplexPropDefault<Color>;
+    emphasis: Emphasis;
+    size: Size;
+    theme: Theme;
+    variant: Variant;
+}
+
+/**
+ * The default value of props.
+ *
+ * @type {ILxButtonDefaultPropsType}
+ * @constant
+ * @readonly
+ */
+const DEFAULT_PROPS: ILxButtonDefaultPropsType = {
+    color: {
+        default: 'dark' as Color,
+        'emphasis-high': 'primary' as Color,
+    },
+    emphasis: 'high' as Emphasis,
+    size: 'm' as Size,
+    theme: 'light' as Theme,
+    variant: 'button' as Variant,
+};
+
+/**
  * Displays a button.
  * If the `href` property is set, it will display a `<a>` HTML tag. If not, it will use a `<button>` HTML tag instead.
  *
@@ -190,10 +219,10 @@ const LxButton: React.FC<LxButtonProps> = ({
     children,
     className = '',
     color,
-    emphasis = 'high',
-    size = 'm',
-    theme = 'light',
-    variant = 'button',
+    emphasis = DEFAULT_PROPS.emphasis,
+    size = DEFAULT_PROPS.size,
+    theme = DEFAULT_PROPS.theme,
+    variant = DEFAULT_PROPS.variant,
     ...props
 }: LxButtonProps): JSX.Element => {
     children = _validate({ children, className, color, emphasis, size, theme, variant, ...props });
@@ -213,9 +242,8 @@ const LxButton: React.FC<LxButtonProps> = ({
         );
     }
 
-    const isDefaultEmphasis: boolean = emphasis === 'high';
     if (isEmpty(color)) {
-        color = isDefaultEmphasis ? 'primary' : 'dark';
+        color = DEFAULT_PROPS.color[`emphasis-${emphasis}`] || DEFAULT_PROPS.color.default;
     }
 
     return (
@@ -234,4 +262,4 @@ LxButton.displayName = 'LxButton';
 
 /////////////////////////////
 
-export { CLASSNAME, LxButton, LxButtonProps };
+export { CLASSNAME, DEFAULT_PROPS, LxButton, LxButtonProps };
