@@ -1,5 +1,7 @@
 import { Color, Emphasis, Size, Theme, Variant } from 'components';
 
+import { LxButtonRootProps } from './LxButtonRoot';
+
 /////////////////////////////
 
 import React, { Children } from 'react';
@@ -13,6 +15,8 @@ import isString from 'lodash/isString';
 import { LxIcon } from 'LumX';
 import { isElementOfType, isElementText } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
+
+import { LxButtonRoot } from './LxButtonRoot';
 
 /////////////////////////////
 
@@ -28,72 +32,9 @@ const CLASSNAME: string = 'lx-button';
 /////////////////////////////
 
 /**
- * Defines the props of the <LxButtonRoot> component.
- */
-interface ILxButtonRootProps {
-    /**
-     * Basic react `children` prop.
-     */
-    children: React.ReactNode;
-
-    /**
-     * Basic react `className` prop.
-     */
-    className?: string;
-
-    /**
-     * Indicates if the button is disabled or not.
-     */
-    disabled?: boolean;
-
-    /**
-     * The `href` to reach if there is one.
-     */
-    href?: string;
-
-    /**
-     * The `target` to open the `href` into.
-     */
-    target?: string;
-}
-
-/////////////////////////////
-
-/**
- * The root of the <LxButton> component.
- * Conditionnaly adds a `<a>` or a `<button>` HTML tag whether there is an `href` attribute or not.
- *
- * @return {JSX.Element} The <LxButton> root component.
- */
-const LxButtonRoot: React.FC<ILxButtonRootProps> = ({
-    href,
-    children,
-    target,
-    className,
-    ...props
-}: ILxButtonRootProps): JSX.Element => {
-    if (isEmpty(href)) {
-        return (
-            <button className={className} {...props}>
-                {children}
-            </button>
-        );
-    }
-
-    return (
-        <a href={href} target={target} className={className} {...props}>
-            {children}
-        </a>
-    );
-};
-
-/////////////////////////////
-/////////////////////////////
-
-/**
  * Defines the props of the <LxButton> component.
  */
-interface ILxButtonProps extends ILxButtonRootProps {
+interface ILxButtonProps {
     /**
      * The button color which must be defined by `lx-button--${color}` css class.
      */
@@ -119,7 +60,7 @@ interface ILxButtonProps extends ILxButtonRootProps {
      */
     variant?: Variant;
 }
-type LxButtonProps = ILxButtonProps;
+type LxButtonProps = ILxButtonProps & LxButtonRootProps;
 
 /////////////////////////////
 //                         //
@@ -131,10 +72,10 @@ type LxButtonProps = ILxButtonProps;
  * Validate the <LxButton> component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {ILxButtonProps}  props The children and props of the <LxButton> component.
+ * @param  {LxButtonProps}  props The children and props of the <LxButton> component.
  * @return {React.ReactNode} The processed children of the component.
  */
-function _validate({ children, variant }: ILxButtonProps): React.ReactNode {
+function _validate({ children, variant }: LxButtonProps): React.ReactNode {
     let newChildren: React.ReactNode = children;
 
     let childrenCount: number = Children.count(children);
@@ -245,7 +186,7 @@ function _validate({ children, variant }: ILxButtonProps): React.ReactNode {
  *
  * @return {JSX.Element} The <LxButton> component.
  */
-const LxButton: React.FC<ILxButtonProps> = ({
+const LxButton: React.FC<LxButtonProps> = ({
     children,
     className = '',
     color,
@@ -254,7 +195,7 @@ const LxButton: React.FC<ILxButtonProps> = ({
     theme = 'light',
     variant = 'button',
     ...props
-}: ILxButtonProps): JSX.Element => {
+}: LxButtonProps): JSX.Element => {
     children = _validate({ children, className, color, emphasis, size, theme, variant, ...props });
 
     if (variant === 'button') {
