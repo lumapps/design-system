@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LxButtonRoot> Conditions should fail when no child is given 1`] = `"<LxButtonRoot> must have at least 1 child (got 0)!"`;
+
+exports[`<LxButtonRoot> Snapshots and structure should render correctly as a button 1`] = `
+<button>
+  Label
+</button>
+`;
+
+exports[`<LxButtonRoot> Snapshots and structure should render correctly as a link 1`] = `
+<a
+  href="https://www.lumapps.com"
+>
+  Label
+</a>
+`;
