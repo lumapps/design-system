@@ -5,10 +5,6 @@
 $sub-nav-width: 228px;
 
 .sub-nav {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: $main-nav-width;
     display: flex;
     overflow: auto;
     width: $sub-nav-width;

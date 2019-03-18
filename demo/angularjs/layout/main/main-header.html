@@ -1,0 +1,17 @@
+<div>
+    <div lx-grid-container="row">
+        <div lx-grid-item>
+            <span class="lx-typography-overline lx-theme-color-dark-L3">{{ vm.category }}</span>
+        </div>
+
+        <div>
+            <lx-button lx-emphasis="low" lx-size="s">
+                <lx-icon lx-path="{{ vm.icons.mdiReact }}"></lx-icon>
+                <span>View React version</span>
+            </lx-button>
+        </div>
+    </div>
+
+    <h1 class="lx-typography-display1 mt+">{{ vm.title }}</h1>
+    <div class="lx-typography-subtitle2 mt+" ng-transclude></div>
+</div>
