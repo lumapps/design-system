@@ -6,6 +6,7 @@
         "exclude": ["**/node_modules/**", "**/src/icons/node_modules/**", "**/*.d.ts"]
     },
     "rules": {
+        "no-empty-interface": false,
         "no-console": [
             true,
             "assert",
