@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LxDivider> Snapshots and structure should render correctly 1`] = `
+<hr
+  className="lx-divider lx-divider--theme-light"
+>
+  Label
+</hr>
+`;
