@@ -69,8 +69,8 @@ git fetch && git checkout -b <feat|fix|...>/<descriptive branch name> origin/mas
 ```
 
 -   Create your patch.
--   Follow our [Coding Rules](#rules).
--   Commit your changes using a descriptive commit message that follows our [commit message conventions](#commit-message-format).
+-   Follow the [Coding Rules](#rules).
+-   Commit your changes using a descriptive commit message that follows the [commit message conventions](#commit-message-format).
 -   Check and test your changes locally.
 
 *   Push your branch to GitHub:
@@ -126,7 +126,7 @@ We're using ES6 JavaScript, TypeScript and [SCSS](http://sass-lang.com/) to buil
 [Webpack](https://webpack.js.org/) is used in the project to launch local development server and build LumX.
 NPM scripts are used to ease the setup, start and build of LumX.
 
-Our coding convention is the following:
+The coding convention is the following:
 
 -   4 spaces for indentation, for JavaScript, TypeScript and SCSS.
 -   Wrap all codes at 120 characters.
@@ -143,11 +143,11 @@ For SCSS:
 -   Except for the line wrap, please refer to [the Harry Roberts css guidelines](http://cssguidelin.es/).
 -   For the CSS properties, we follow the [concentric order](http://rhodesmill.org/brandon/2011/concentric-css/)
 
-For the ease of use and contributing, most of the coding styles are enforced with ESLint, TSLint and StyleLint. So as long as the pre-commit script let you commit, you should be good.
+For the ease of use and contributing, most of the coding styles are enforced with ESLint, TSLint, Prettier and StyleLint. So as long as the pre-commit script let you commit, you should be good.
 
 ## <a name="git-commit-guidelines"></a> Git commit guidelines
 
-We have very precise rules over how our git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**.
+We have very precise rules over how the git commit messages can be formatted. This leads to **more readable messages** that are easy to follow when looking through the **project history**.
 
 We recommend you to use [Commitizen](https://github.com/commitizen/cz-cli) with the `git cz` command to help you construct your commit message and be sure to match these guidelines.
 
