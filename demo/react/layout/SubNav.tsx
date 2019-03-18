@@ -4,6 +4,8 @@ import { Theme } from '../../constants';
 
 import React from 'react';
 
+import { LxDivider } from 'LumX';
+
 import { SubNavItem } from './SubNavItem';
 import { ThemeSelector } from './ThemeSelector';
 
@@ -78,7 +80,7 @@ const SubNav: React.FC<IProps> = ({ activeComponent, changeTheme, handleNavigate
         <div className="sub-nav__wrapper">
             <ThemeSelector changeTheme={changeTheme} />
 
-            {/* <LxDivider /> */}
+            <LxDivider className="mv+" />
 
             {NAV_ITEMS.map(
                 (navItemLabel: string): JSX.Element => (
