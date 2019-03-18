@@ -26,7 +26,7 @@ const TEST_URL: string = 'https://www.lumapps.com';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-interface ISetupProps extends Partial<LxButtonRootProps> {}
+type ISetupProps = Partial<LxButtonRootProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -94,7 +94,6 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-
     describe('Props', (): void => {
         it('can be disabled', (): void => {
             const testedProp: string = 'disabled';
@@ -180,7 +179,28 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
+    describe('Events', (): void => {
+        const onClick = jest.fn();
 
+        it('should trigger `onClick` when the button is clicked', () => {
+            const { button }: ISetup = setup({
+                onClick,
+            });
+
+            button.simulate('click');
+            expect(onClick).toHaveBeenCalled();
+
+            /////////////////////////////
+
+            const { a } = setup({
+                href: TEST_URL,
+                onClick,
+            });
+
+            a.simulate('click');
+            expect(onClick).toHaveBeenCalled();
+        });
+    });
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
@@ -197,4 +217,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
+    describe('State', (): void => {
+        // Nothing to do here.
+    });
 });

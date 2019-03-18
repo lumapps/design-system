@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LxIconButton> should render correctly 1`] = `
+exports[`<LxIconButton> Conditions should fail when anything else than <LxIcon> is given as child 1`] = `"You can only have a <LxIcon> child in a <LxIconButton> (got div)!"`;
+
+exports[`<LxIconButton> Conditions should fail when more than 1 children are given 1`] = `"You cannot have more than 1 child in a <LxIconButton> (got 2)!"`;
+
+exports[`<LxIconButton> Conditions should fail when no child is given 1`] = `"Your <LxIconButton> must have at least 1 child for the icon (got 0)!"`;
+
+exports[`<LxIconButton> Snapshots and structure should render correctly an icon button 1`] = `
 <LxButton
   variant="icon"
 >

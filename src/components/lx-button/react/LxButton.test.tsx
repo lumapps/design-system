@@ -23,7 +23,7 @@ import { CLASSNAME, DEFAULT_PROPS } from './LxButton';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-interface ISetupProps extends Partial<LxButtonProps> {}
+type ISetupProps = Partial<LxButtonProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -98,7 +98,7 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
 describe(`<${LxButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
-        it('should render correctly a text label as a button', (): void => {
+        it('should render correctly a text label', (): void => {
             const { icon, label, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -106,7 +106,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(true);
         });
 
-        it('should render correctly a <span> label as a button', (): void => {
+        it('should render correctly a <span> label', (): void => {
             const children: React.ReactNode = <span>Label</span>;
 
             const { icon, label, wrapper }: ISetup = setup({ children });
@@ -116,7 +116,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(true);
         });
 
-        it('should render correctly an icon and a text label as a button', (): void => {
+        it('should render correctly an icon and a text label', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     <LxIcon icon={mdiPlus} />
@@ -132,7 +132,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(true);
         });
 
-        it('should render correctly an icon and a <span> label as a button', (): void => {
+        it('should render correctly an icon and a <span> label', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     <LxIcon icon={mdiPlus} />
@@ -148,7 +148,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(true);
         });
 
-        it('should render correctly a text label and an icon as a button', (): void => {
+        it('should render correctly a text label and an icon', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     Label
@@ -164,7 +164,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(true);
         });
 
-        it('should render correctly a <span> label and an icon as a button', (): void => {
+        it('should render correctly a <span> label and an icon', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     <span>Label</span>
@@ -180,7 +180,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(true);
         });
 
-        it('should render correctly two icons and a text label as a button', (): void => {
+        it('should render correctly two icons and a text label', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     <LxIcon icon={mdiPlus} />
@@ -197,7 +197,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(true);
         });
 
-        it('should render correctly two icons and a <span> label as a button', (): void => {
+        it('should render correctly two icons and a <span> label', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     <LxIcon icon={mdiPlus} />
@@ -214,7 +214,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(true);
         });
 
-        it("should render correctly an icon button with the 'button' `variant` as a button", (): void => {
+        it("should render correctly an icon button with the 'button' `variant`", (): void => {
             // Disable the display of the warn message in the console.
             global.console.warn = jest.fn();
 
@@ -228,10 +228,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
             expect(label.exists()).toEqual(false);
 
             // @ts-ignore
-            global.console.warn.mockClear();
+            global.console.warn.mockRestore();
         });
 
-        it("should render correctly an icon button with the 'icon' `variant` as a button", (): void => {
+        it("should render correctly an icon button with the 'icon' `variant`", (): void => {
             const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
 
             const { icon, label, wrapper }: ISetup = setup({ children, variant: 'icon' });
@@ -246,7 +246,6 @@ describe(`<${LxButton.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-
     describe('Props', (): void => {
         it('should use default props', (): void => {
             const { buttonRoot }: ISetup = setup();
@@ -389,6 +388,9 @@ describe(`<${LxButton.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
+    describe('Events', (): void => {
+        // Nothing to do here.
+    });
 
     /////////////////////////////
 
@@ -399,7 +401,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
                 try {
                     // If `console.warn` has been mocked at least one, this exists. So disable TS here.
                     // @ts-ignore
-                    global.console.warn.mockClear();
+                    global.console.warn.mockRestore();
                 } catch (exception) {
                     // Nothing to do here.
                 }
@@ -455,8 +457,6 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             expect(
                 (): void => {
-                    // We know that children is mandatory, but we want to test the error validation. So disable TS here.
-                    // @ts-ignore
                     setup({ children });
                 },
             ).toThrowErrorMatchingSnapshot();
@@ -622,4 +622,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
+    describe('State', (): void => {
+        // Nothing to do here.
+    });
 });

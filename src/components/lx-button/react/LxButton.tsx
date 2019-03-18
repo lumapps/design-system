@@ -13,7 +13,7 @@ import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 
 import { LxIcon } from 'LumX';
-import { isElementOfType, isElementText } from 'LumX/core/react/utils';
+import { isElementOfType, isElementText, unwrapFragment } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 import { LxButtonRoot } from './LxButtonRoot';
@@ -72,26 +72,19 @@ type LxButtonProps = ILxButtonProps & LxButtonRootProps;
  * Validate the <LxButton> component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {LxButtonProps}  props The children and props of the <LxButton> component.
+ * @param  {LxButtonProps}   props The children and props of the <LxButton> component.
  * @return {React.ReactNode} The processed children of the component.
  */
 function _validate({ children, variant }: LxButtonProps): React.ReactNode {
     let newChildren: React.ReactNode = children;
 
-    let childrenCount: number = Children.count(children);
+    let childrenCount: number = Children.count(newChildren);
     if (childrenCount === 0) {
         throw new Error('Your <LxButton> must have at least 1 child for the label or the icon (got 0)!');
     }
 
-    if (childrenCount === 1) {
-        const firstChild: React.ReactNode = Children.toArray(children)[0];
-
-        if (get(firstChild, 'type') === React.Fragment) {
-            children = get(firstChild, 'props.children', []);
-        }
-
-        childrenCount = Children.count(children);
-    }
+    newChildren = unwrapFragment(newChildren);
+    childrenCount = Children.count(newChildren);
 
     if (variant === 'button') {
         if (childrenCount > 3) {
@@ -103,7 +96,7 @@ function _validate({ children, variant }: LxButtonProps): React.ReactNode {
         let index: number = -1;
         const childrenTypes: string[] = [];
         newChildren = Children.map(
-            children,
+            newChildren,
             (child: any): React.ReactElement => {
                 index++;
 
@@ -158,7 +151,7 @@ function _validate({ children, variant }: LxButtonProps): React.ReactNode {
         }
 
         Children.forEach(
-            children,
+            newChildren,
             (child: any): void => {
                 if (isElementOfType(child, LxIcon)) {
                     return;

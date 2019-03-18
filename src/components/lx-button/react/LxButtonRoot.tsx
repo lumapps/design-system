@@ -9,21 +9,6 @@ import isEmpty from 'lodash/isEmpty';
  */
 interface ILxButtonRootProps {
     /**
-     * Basic react `children` prop.
-     */
-    children: React.ReactNode;
-
-    /**
-     * Basic react `className` prop.
-     */
-    className?: string;
-
-    /**
-     * Indicates if the button is disabled or not.
-     */
-    disabled?: boolean;
-
-    /**
      * The `href` to reach if there is one.
      */
     href?: string;
@@ -32,6 +17,12 @@ interface ILxButtonRootProps {
      * The `target` to open the `href` into.
      */
     target?: string;
+
+    /**
+     * Any other supported prop for a HTML element.
+     * E.g. classNames, onClick, disabled, ...
+     */
+    [propName: string]: any;
 }
 type LxButtonRootProps = ILxButtonRootProps;
 
@@ -44,10 +35,9 @@ type LxButtonRootProps = ILxButtonRootProps;
  * @return {JSX.Element} The <LxButton> root component.
  */
 const LxButtonRoot: React.FC<LxButtonRootProps> = ({
-    href,
     children,
+    href,
     target,
-    className,
     ...props
 }: LxButtonRootProps): JSX.Element => {
     const childrenCount: number = Children.count(children);
@@ -56,15 +46,11 @@ const LxButtonRoot: React.FC<LxButtonRootProps> = ({
     }
 
     if (isEmpty(href)) {
-        return (
-            <button className={className} {...props}>
-                {children}
-            </button>
-        );
+        return <button {...props}>{children}</button>;
     }
 
     return (
-        <a href={href} target={target} className={className} {...props}>
+        <a href={href} target={target} {...props}>
             {children}
         </a>
     );
