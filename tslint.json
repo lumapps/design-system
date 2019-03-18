@@ -19,7 +19,7 @@
             "table"
         ],
 
-        "prettier": false,
+        "prettier": true,
 
         "no-constant-condition": [
             true,

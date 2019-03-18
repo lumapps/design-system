@@ -914,11 +914,11 @@ module.exports = {
             'error',
             {
                 AssignmentExpression: {
-                    array: false,
-                    object: false,
+                    array: true,
+                    object: true,
                 },
                 VariableDeclarator: {
-                    array: false,
+                    array: true,
                     object: true,
                 },
             },
@@ -1202,7 +1202,7 @@ module.exports = {
         'import/no-extraneous-dependencies': [
             'error',
             {
-                devDependencies: ['**/*.tests.jsx', '**/*.spec.js'],
+                devDependencies: ['**/*.test.jsx', '**/*.spec.js'],
                 optionalDependencies: false,
                 peerDependencies: true,
             },
@@ -1271,7 +1271,7 @@ module.exports = {
 
         'no-useless-assign/no-useless-assign': 'error',
 
-        'prettier/prettier': 'off',
+        'prettier/prettier': 'error',
 
         'require-jsdoc-except/require-jsdoc': [
             'error',
