@@ -1,12 +1,16 @@
 import { Color, Emphasis, Size, Theme, Variant } from 'components';
 
-export function handleBasicClasses({
+/////////////////////////////
+
+declare function getBasicClass({ prefix, type, value }: { prefix: string; type: string; value: string }): string;
+
+declare function handleBasicClasses({
+    prefix,
     color,
     emphasis,
     size,
     theme,
     variant,
-    prefix,
 }: {
     color?: Color;
     emphasis?: Emphasis;
@@ -15,3 +19,7 @@ export function handleBasicClasses({
     variant?: Variant;
     prefix: string;
 }): string;
+
+/////////////////////////////
+
+export { getBasicClass, handleBasicClasses };

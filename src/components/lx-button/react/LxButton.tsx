@@ -250,7 +250,7 @@ const LxButton: React.FC<LxButtonProps> = ({
         <LxButtonRoot
             className={classNames(
                 className,
-                handleBasicClasses({ color, emphasis, size, theme, variant, prefix: CLASSNAME }),
+                handleBasicClasses({ prefix: CLASSNAME, color, emphasis, size, theme, variant }),
             )}
             {...props}
         >
