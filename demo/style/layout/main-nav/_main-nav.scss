@@ -11,5 +11,50 @@ $main-nav-width: 56px;
     left: 0;
     overflow: auto;
     width: $main-nav-width;
+    flex-direction: column;
+    padding: $lx-spacing-unit * 2 0;
     background-color: lx-theme-color-variant(blue, N);
+
+    &__wrapper {
+        @include lx-list;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__logo {
+        margin-bottom: $lx-spacing-unit * 3;
+
+        img {
+            display: block;
+        }
+    }
+
+    &__item {
+        margin-bottom: $lx-spacing-unit * 2;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__link {
+        @include lx-typography(subtitle2);
+
+        display: flex;
+        width: map-get($lx-sizes, m);
+        height: map-get($lx-sizes, m);
+        align-items: center;
+        justify-content: center;
+        border-radius: 2px;
+        color: lx-theme-color-variant(light, N);
+        cursor: pointer;
+
+        &:hover,
+        &--is-selected {
+            background-color: lx-theme-color-variant(light, N);
+            color: lx-theme-color-variant(dark, N);
+        }
+    }
 }

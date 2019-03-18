@@ -12,6 +12,22 @@
     padding: 0 $lx-list-item-horizontal-padding;
     color: lx-theme-color-variant(dark, N);
     outline: none;
+    text-decoration: none;
+}
+
+@mixin lx-list-item-clickable() {
+    @include lx-state-transition;
+
+    cursor: pointer;
+
+    &:hover,
+    &[data-focus-visible-added] {
+        @include lx-state(state-hover, emphasis-low, dark);
+    }
+
+    &:active {
+        @include lx-state(state-active, emphasis-low, dark);
+    }
 }
 
 @mixin lx-list-item-selected() {
