@@ -1,9 +1,5 @@
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
 
-import { Theme } from 'components';
-
-import { LxDividerProps } from './LxDivider';
-
 /////////////////////////////
 
 import React from 'react';
@@ -12,7 +8,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, LxDivider } from './LxDivider';
+import { CLASSNAME, DEFAULT_PROPS, LxDivider, LxDividerProps, Themes } from './LxDivider';
 
 /////////////////////////////
 
@@ -28,7 +24,7 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <hr> element when the <LxButton> receives a `href` prop.
+     * The <hr> element.
      */
     hr: ShallowWrapper;
 }
@@ -77,15 +73,11 @@ describe(`<${LxDivider.displayName}>`, (): void => {
         it('should use default props', (): void => {
             const { hr }: ISetup = setup();
 
-            expect(hr.prop('className')).toContain(CLASSNAME);
-
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
-                    const defaultValue: string = DEFAULT_PROPS[prop];
-
-                    expect(hr.hasClass(getBasicClass({ prefix: CLASSNAME, type: prop, value: defaultValue }))).toEqual(
-                        true,
-                    );
+                    expect(
+                        hr.hasClass(getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] })),
+                    ).toEqual(true);
                 },
             );
         });
@@ -93,12 +85,10 @@ describe(`<${LxDivider.displayName}>`, (): void => {
         it('should use the given `theme`', (): void => {
             const testedProp: string = 'theme';
             const modifiedProps: ISetupProps = {
-                [testedProp]: 'dark' as Theme,
+                [testedProp]: Themes.dark,
             };
 
             const { hr }: ISetup = setup(modifiedProps);
-
-            expect(hr.prop('className')).toContain(CLASSNAME);
 
             expect(
                 hr.hasClass(getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] })),
