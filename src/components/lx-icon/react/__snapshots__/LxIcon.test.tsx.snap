@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LxIcon> Snapshots and structure should render correctly 1`] = `
+<i
+  className="lx-icon lx-icon--color-dark lx-icon--size-m"
+>
+  <svg
+    aria-hidden="true"
+    height="1em"
+    preserveAspectRatio="xMidYMid meet"
+    style={
+      Object {
+        "verticalAlign": "-0.125em",
+      }
+    }
+    viewBox="0 0 24 24"
+    width="1em"
+  >
+    <path
+      d="mdiPlus"
+      fill="currentColor"
+    />
+  </svg>
+</i>
+`;
