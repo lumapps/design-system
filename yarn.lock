@@ -1493,7 +1493,15 @@ amdefine@>=0.0.4:
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
   integrity sha1-SlKCrBZHKek2Gbz9OtFR+BfOkfU=
 
-angular@^1.7.8:
+angular-highlightjs@^0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/angular-highlightjs/-/angular-highlightjs-0.7.1.tgz#d7e0e1f59db4de63f00573218a6472a59ff183f4"
+  integrity sha1-1+Dh9Z203mPwBXMhimRypZ/xg/Q=
+  dependencies:
+    angular "^1.0.1"
+    highlight.js ">7.0.0"
+
+angular@^1.0.1, angular@^1.7.8:
   version "1.7.8"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.8.tgz#b77ede272ce1b261e3be30c1451a0b346905a3c9"
   integrity sha512-wtef/y4COxM7ZVhddd7JtAAhyYObq9YXKar9tsW7558BImeVYteJiTxCKeJOL45lJ/+7B4wrAC49j8gTFYEthg==
@@ -5357,6 +5365,11 @@ hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
+
+highlight.js@>7.0.0:
+  version "9.15.6"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.15.6.tgz#72d4d8d779ec066af9a17cb14360c3def0aa57c4"
+  integrity sha512-zozTAWM1D6sozHo8kqhfYgsac+B+q0PmsjXeyDrYIHHcBN0zTVT66+s2GW1GZv7DbyaROdLXKdabwS/WqPyIdQ==
 
 hmac-drbg@^1.0.0:
   version "1.0.1"

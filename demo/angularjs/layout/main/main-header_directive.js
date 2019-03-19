@@ -7,7 +7,8 @@ import template from './main-header.html';
 function mainHeaderController() {
     'ngInject';
 
-    const vm = this;
+    // eslint-disable-next-line consistent-this
+    const mainHeader = this;
 
     /////////////////////////////
     //                         //
@@ -16,11 +17,11 @@ function mainHeaderController() {
     /////////////////////////////
 
     /**
-     * The checkbox icons.
+     * The main header icons.
      *
      * @type {Object}
      */
-    vm.icons = {
+    mainHeader.icons = {
         mdiReact,
     };
 }
@@ -33,7 +34,7 @@ function mainHeaderDirective() {
     return {
         bindToController: true,
         controller: mainHeaderController,
-        controllerAs: 'vm',
+        controllerAs: 'mainHeader',
         replace: true,
         restrict: 'E',
         scope: {

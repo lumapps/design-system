@@ -7,8 +7,9 @@
 
         <title>Design System</title>
 
-        <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" />
+        <link rel="stylesheet" href="//necolas.github.io/normalize.css/latest/normalize.css" />
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css" />
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700" />
 
         <base href="/" />
     </head>
@@ -16,7 +17,9 @@
         <div class="app" ng-show="Theme.loaded">
             <div class="main-nav" ui-view="main-nav"></div>
             <div class="sub-nav" ui-view="sub-nav"></div>
-            <div class="main" ui-view="main"></div>
+            <div class="main">
+                <div class="main__wrapper" ui-view="main"></div>
+            </div>
         </div>
 
         <!-- Libs -->
@@ -26,6 +29,10 @@
         <!-- Angular -->
         <script src="node_modules/angular/angular.js" type="text/javascript"></script>
         <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js" type="text/javascript"></script>
+
+        <!-- HighlightJs -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+        <script src="node_modules/angular-highlightjs/angular-highlightjs.min.js"></script>
 
         <!-- Design System -->
         <% for (key in htmlWebpackPlugin.files.chunks) { %>
