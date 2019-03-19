@@ -1,18 +1,33 @@
-import { LxButtonProps } from './LxButton';
-
-/////////////////////////////
-
-import React, { Children, cloneElement } from 'react';
+import React, { Children, cloneElement, Fragment } from 'react';
 
 import classNames from 'classnames';
 
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
-import { LxButton, LxIcon } from 'LumX';
+import { LxIcon } from 'LumX';
 import { isElementOfType, unwrapFragment } from 'LumX/core/react/utils';
 
-import { CLASSNAME as LXBUTTON_CLASSNAME } from './LxButton';
+import {
+    CLASSNAME as LXBUTTON_CLASSNAME,
+    Color,
+    Colors,
+    Emphasis,
+    Emphasises,
+    LxButton,
+    LxButtonProps,
+    Size,
+    Sizes,
+    Theme,
+    Themes,
+} from './LxButton';
+
+/////////////////////////////
+
+enum Variants {
+    icon = 'icon',
+}
+type Variant = Variants;
 
 /////////////////////////////
 
@@ -29,6 +44,21 @@ type LxIconButtonProps = IProps;
 
 /////////////////////////////
 //                         //
+//    Public attributes    //
+//                         //
+/////////////////////////////
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = `${LXBUTTON_CLASSNAME}__icon`;
+
+/////////////////////////////
+//                         //
 //    Private functions    //
 //                         //
 /////////////////////////////
@@ -41,15 +71,12 @@ type LxIconButtonProps = IProps;
  * @return {React.ReactNode} The processed children of the component.
  */
 function _validate({ children, variant }: LxIconButtonProps): React.ReactNode {
-    let newChildren: React.ReactNode = children;
+    const newChildren: React.ReactNode = unwrapFragment(children);
 
-    let childrenCount: number = Children.count(newChildren);
+    const childrenCount: number = Children.count(newChildren);
     if (childrenCount === 0) {
         throw new Error('Your <LxIconButton> must have at least 1 child for the icon (got 0)!');
     }
-
-    newChildren = unwrapFragment(children);
-    childrenCount = Children.count(newChildren);
 
     if (childrenCount > 1) {
         throw new Error(`You cannot have more than 1 child in a <LxIconButton> (got ${childrenCount})!`);
@@ -63,8 +90,8 @@ function _validate({ children, variant }: LxIconButtonProps): React.ReactNode {
             }
 
             throw new Error(
-                `You can only have a <LxIcon> child in a <LxIconButton> (got ${get(child.type, 'name', child.type) ||
-                    `'${child}'`})!`,
+                `You can only have a <LxIcon> child in a <LxIconButton> (got '${get(child.type, 'name', child.type) ||
+                    `'${child}'`}')!`,
             );
         },
     );
@@ -94,15 +121,15 @@ const LxIconButton: React.FC<LxIconButtonProps> = ({ children, ...props }: LxIco
     children = _validate({ children, ...props });
 
     return (
-        <LxButton {...props} variant="icon">
+        <LxButton {...props} variant={Variants.icon}>
             {/* [XXX] Clement: Type of `child` should be React.ReactElement<LxIconProps>, but I didn't managed to make it work. */}
             {Children.map(children, (child: any) => {
-                if (get(child.type, 'name') !== 'LxIcon') {
-                    return undefined;
+                if (get(child.type, 'name') !== LxIcon.displayName) {
+                    return <Fragment />;
                 }
 
                 return cloneElement(child, {
-                    className: classNames(get(child.props, 'className', ''), `${LXBUTTON_CLASSNAME}__icon`),
+                    className: classNames(get(child.props, 'className', ''), CLASSNAME),
                 });
             })}
         </LxButton>
@@ -112,4 +139,18 @@ LxIconButton.displayName = 'LxIconButton';
 
 /////////////////////////////
 
-export { LxIconButton, LxIconButtonProps };
+export {
+    CLASSNAME,
+    Color,
+    Colors,
+    Emphasis,
+    Emphasises,
+    LxIconButton,
+    LxIconButtonProps,
+    Size,
+    Sizes,
+    Theme,
+    Themes,
+    Variant,
+    Variants,
+};

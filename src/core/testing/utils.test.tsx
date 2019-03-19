@@ -1,5 +1,7 @@
 import { ShallowWrapper } from 'enzyme';
 
+import { IGenericProps } from 'LumX/react/utils';
+
 /////////////////////////////
 
 /**
@@ -10,7 +12,7 @@ interface ICommonSetup {
     /**
      * The properties of the tested component.
      */
-    props: {};
+    props: IGenericProps;
 
     /**
      * The Enzyme wrapper around of the tested component.

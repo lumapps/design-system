@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LxButton> Conditions should fail when anything else than a <LxIcon> is given as child in the 'icon' \`variant\` 1`] = `"You can only have a <LxIcon> child in an 'icon' \`variant\` of <LxButton> (got 'Toto')!"`;
+exports[`<LxButton> Conditions should fail when anything else than a <LxIcon> is given as child in the 'icon' \`variant\` 1`] = `"You can only have a <LxIcon> child in an 'icon' \`variant\` of <LxButton> (got 'Label')!"`;
 
 exports[`<LxButton> Conditions should fail when anything else than a text, <span> or <LxIcon> is given as child in the 'button' \`variant\` 1`] = `"The children of a <LxButton> must be either of type text, <span> or <LxIcon> (got 'div}')!"`;
 

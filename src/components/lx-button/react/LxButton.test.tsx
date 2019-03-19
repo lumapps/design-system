@@ -1,22 +1,19 @@
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
 
-import { Color, Emphasis, Size, Theme, Variant } from 'components';
-
-import { LxButtonProps } from './LxButton';
-
 /////////////////////////////
 
 import React, { Fragment } from 'react';
 
 import { shallow, ShallowWrapper } from 'enzyme';
+import { build, fake, oneOf } from 'test-data-bot';
 
 import get from 'lodash/get';
 
-import { LxButton, LxIcon } from 'LumX';
+import { LxIcon } from 'LumX';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, DEFAULT_PROPS } from './LxButton';
+import { CLASSNAME, DEFAULT_PROPS, Emphasises, LxButton, LxButtonProps, Sizes, Themes, Variants } from './LxButton';
 
 /////////////////////////////
 
@@ -102,9 +99,9 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(false);
             expect(label.exists()).toEqual(true);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly a <span> label', (): void => {
@@ -113,9 +110,9 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(false);
             expect(label.exists()).toEqual(true);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly an icon and a text label', (): void => {
@@ -129,10 +126,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(true);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly an icon and a <span> label', (): void => {
@@ -146,10 +143,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(true);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly a text label and an icon', (): void => {
@@ -163,10 +160,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(true);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly a <span> label and an icon', (): void => {
@@ -180,10 +177,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(true);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly two icons and a text label', (): void => {
@@ -198,10 +195,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(2);
             expect(label.exists()).toEqual(true);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it('should render correctly two icons and a <span> label', (): void => {
@@ -216,10 +213,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(2);
             expect(label.exists()).toEqual(true);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
 
         it("should render correctly an icon button with the 'button' `variant`", (): void => {
@@ -231,10 +228,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(false);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
 
             // @ts-ignore
             global.console.warn.mockRestore();
@@ -243,13 +240,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it("should render correctly an icon button with the 'icon' `variant`", (): void => {
             const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
 
-            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children, variant: 'icon' });
+            const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children, variant: Variants.icon });
             expect(wrapper).toMatchSnapshot();
 
+            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
             expect(label.exists()).toEqual(false);
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
         });
     });
 
@@ -260,151 +257,43 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it('should use default props', (): void => {
             const { buttonRoot }: ISetup = setup();
 
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
-
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
-                    const defaultValue: string = _getDefaultPropValue({ prop });
-
                     expect(
-                        buttonRoot.hasClass(getBasicClass({ prefix: CLASSNAME, type: prop, value: defaultValue })),
+                        buttonRoot.hasClass(
+                            getBasicClass({ prefix: CLASSNAME, type: prop, value: _getDefaultPropValue({ prop }) }),
+                        ),
                     ).toEqual(true);
                 },
             );
         });
 
-        it('should use the given `color`', (): void => {
-            const testedProp: string = 'color';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'green' as Color,
-            };
+        it('should use the given props', (): void => {
+            const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
+                color: fake((fakeData) => fakeData.commerce.color()),
+                emphasis: oneOf(...Object.values(Emphasises)),
+                size: oneOf(...Object.values(Sizes)),
+                theme: oneOf(...Object.values(Themes)),
+                variant: oneOf(...Object.values(Variants)),
+            });
 
-            const { buttonRoot }: ISetup = setup(modifiedProps);
+            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            if (modifiedProps.emphasis !== Emphasises.high) {
+                delete modifiedProps.theme;
+            }
+            const children = modifiedProps.variant === Variants.icon ? <LxIcon icon="mdiPlus" /> : 'Label';
 
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
+            const { buttonRoot }: ISetup = setup({ children, ...modifiedProps });
 
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
-                ),
-            ).toEqual(true);
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
-                ),
-            ).toEqual(false);
-        });
-
-        it('should use the given `emphasis`', (): void => {
-            const testedProp: string = 'emphasis';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'low' as Emphasis,
-            };
-
-            const { buttonRoot }: ISetup = setup(modifiedProps);
-
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
-
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
-                ),
-            ).toEqual(true);
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
-                ),
-            ).toEqual(false);
-        });
-
-        it('should use the given `size`', (): void => {
-            const testedProp: string = 'size';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'xxs' as Size,
-            };
-
-            const { buttonRoot }: ISetup = setup(modifiedProps);
-
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
-
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
-                ),
-            ).toEqual(true);
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
-                ),
-            ).toEqual(false);
-        });
-
-        it('should use the given `theme`', (): void => {
-            const testedProp: string = 'theme';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'dark' as Theme,
-            };
-
-            const { buttonRoot }: ISetup = setup(modifiedProps);
-
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
-
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
-                ),
-            ).toEqual(true);
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
-                ),
-            ).toEqual(false);
-        });
-
-        it('should use the given `variant`', (): void => {
-            const testedProp: string = 'variant';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'icon' as Variant,
-                children: <LxIcon icon={mdiPlus} />,
-            };
-
-            const { buttonRoot }: ISetup = setup(modifiedProps);
-
-            expect(buttonRoot.prop('className')).toContain(CLASSNAME);
-
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
-                ),
-            ).toEqual(true);
-            expect(
-                buttonRoot.hasClass(
-                    getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
-                ),
-            ).toEqual(false);
-        });
-
-        it('should forward any CSS class', (): void => {
-            const testedProp: string = 'className';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'component component--is-tested',
-            };
-
-            const { buttonRoot }: ISetup = setup(modifiedProps);
-
-            expect(buttonRoot.prop(testedProp)).toContain(CLASSNAME);
-            expect(buttonRoot.prop(testedProp)).toContain(modifiedProps[testedProp]);
-        });
-
-        it('should forward any other props', (): void => {
-            const testedProp: string = 'winter';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'is coming',
-            };
-
-            const { buttonRoot }: ISetup = setup(modifiedProps);
-
-            expect(buttonRoot.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            Object.keys(modifiedProps).forEach(
+                (prop: string): void => {
+                    expect(
+                        buttonRoot.hasClass(
+                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                        ),
+                    ).toEqual(true);
+                },
+            );
         });
     });
 
@@ -533,7 +422,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
                 (): void => {
                     // We know that children is mandatory, but we want to test the error validation. So disable TS here.
                     // @ts-ignore
-                    setup({ children, variant: 'icon' });
+                    setup({ children, variant: Variants.icon });
                 },
             ).toThrowErrorMatchingSnapshot();
         });
@@ -541,11 +430,9 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it(`should fail when anything else than a <${
             LxIcon.displayName
         }> is given as child in the 'icon' \`variant\``, (): void => {
-            const children: React.ReactNode = 'Toto';
-
             expect(
                 (): void => {
-                    setup({ children, variant: 'icon' });
+                    setup({ variant: Variants.icon });
                 },
             ).toThrowErrorMatchingSnapshot();
         });
@@ -564,13 +451,13 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
 
-            setup({ children, variant: 'icon' });
+            setup({ children, variant: Variants.icon });
             expect(global.console.warn).not.toHaveBeenCalled();
         });
 
         it("should have no `theme` in any other `emphasis` than 'high'", (): void => {
             let modifiedProps: ISetupProps = {
-                emphasis: 'high' as Emphasis,
+                emphasis: Emphasises.high,
             };
 
             let { buttonRoot }: ISetup = setup(modifiedProps);
@@ -581,7 +468,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             /////////////////////////////
 
             modifiedProps = {
-                emphasis: 'medium' as Emphasis,
+                emphasis: Emphasises.medium,
             };
 
             ({ buttonRoot } = setup(modifiedProps));
@@ -592,7 +479,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             /////////////////////////////
 
             modifiedProps = {
-                emphasis: 'low' as Emphasis,
+                emphasis: Emphasises.low,
             };
 
             ({ buttonRoot } = setup(modifiedProps));

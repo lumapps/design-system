@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LxIconButton> Conditions should fail when anything else than <LxIcon> is given as child 1`] = `"You can only have a <LxIcon> child in a <LxIconButton> (got div)!"`;
+exports[`<LxIconButton> Conditions should fail when anything else than <LxIcon> is given as child 1`] = `"You can only have a <LxIcon> child in a <LxIconButton> (got 'div')!"`;
 
 exports[`<LxIconButton> Conditions should fail when more than 1 children are given 1`] = `"You cannot have more than 1 child in a <LxIconButton> (got 2)!"`;
 

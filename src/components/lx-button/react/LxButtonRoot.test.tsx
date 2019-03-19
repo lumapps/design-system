@@ -1,14 +1,12 @@
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
 
-import { LxButtonRootProps } from './LxButtonRoot';
-
 /////////////////////////////
 
 import React from 'react';
 
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { LxButtonRoot } from './LxButtonRoot';
+import { LxButtonRoot, LxButtonRootProps } from './LxButtonRoot';
 
 /////////////////////////////
 

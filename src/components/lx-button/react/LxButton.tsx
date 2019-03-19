@@ -1,6 +1,4 @@
-import { Color, ComplexPropDefault, Emphasis, Size, Theme, Variant } from 'components';
-
-import { LxButtonRootProps } from './LxButtonRoot';
+import { Color, Colors, ComplexPropDefault, Size, Sizes, Theme, Themes } from 'LumX/components';
 
 /////////////////////////////
 
@@ -16,25 +14,35 @@ import { LxIcon } from 'LumX';
 import { isElementOfType, isElementText, unwrapFragment } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
-import { LxButtonRoot } from './LxButtonRoot';
+import { LxButtonRoot, LxButtonRootProps } from './LxButtonRoot';
 
 /////////////////////////////
 
 /**
- * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
+ * The authorized values for the `emphasis` prop.
  */
-const CLASSNAME: string = 'lx-button';
+enum Emphasises {
+    low = 'low',
+    medium = 'medium',
+    high = 'high',
+}
+type Emphasis = Emphasises;
+
+/**
+ * The authorized values for the `vairant` prop.
+ */
+enum Variants {
+    button = 'button',
+    icon = 'icon',
+}
+type Variant = Variants;
 
 /////////////////////////////
 
 /**
  * Defines the props of the <LxButton> component.
  */
-interface ILxButtonProps {
+interface IProps {
     /**
      * The button color which must be defined by `lx-button--${color}` CSS class.
      */
@@ -60,7 +68,22 @@ interface ILxButtonProps {
      */
     variant?: Variant;
 }
-type LxButtonProps = ILxButtonProps & LxButtonRootProps;
+type LxButtonProps = IProps & LxButtonRootProps;
+
+/////////////////////////////
+//                         //
+//    Public attributes    //
+//                         //
+/////////////////////////////
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = 'lx-button';
 
 /////////////////////////////
 //                         //
@@ -86,7 +109,7 @@ function _validate({ children, variant }: LxButtonProps): React.ReactNode {
     newChildren = unwrapFragment(newChildren);
     childrenCount = Children.count(newChildren);
 
-    if (variant === 'button') {
+    if (variant === Variants.button) {
         if (childrenCount > 3) {
             throw new Error(
                 `You cannot have more than 3 children (an icon, a label, another icon) in a 'button' \`variant\` of <LxButton> (got ${childrenCount})!`,
@@ -143,7 +166,7 @@ function _validate({ children, variant }: LxButtonProps): React.ReactNode {
                 return newChild;
             },
         );
-    } else if (variant === 'icon') {
+    } else if (variant === Variants.icon) {
         if (childrenCount > 1) {
             throw new Error(
                 `You cannot have more than 1 child in an 'icon' \`variant\` of <LxButton> (got ${childrenCount})!`,
@@ -193,13 +216,13 @@ interface ILxButtonDefaultPropsType {
  */
 const DEFAULT_PROPS: ILxButtonDefaultPropsType = {
     color: {
-        default: 'dark' as Color,
-        'emphasis-high': 'primary' as Color,
+        default: Colors.dark,
+        [`emphasis-${Emphasises.high}`]: Colors.primary,
     },
-    emphasis: 'high' as Emphasis,
-    size: 'm' as Size,
-    theme: 'light' as Theme,
-    variant: 'button' as Variant,
+    emphasis: Emphasises.high,
+    size: Sizes.m,
+    theme: Themes.light,
+    variant: Variants.button,
 };
 
 /**
@@ -218,12 +241,12 @@ const LxButton: React.FC<LxButtonProps> = ({
     variant = DEFAULT_PROPS.variant,
     ...props
 }: LxButtonProps): JSX.Element => {
-    children = _validate({ children, className, color, emphasis, size, theme, variant, ...props });
+    const newChildren = _validate({ children, color, emphasis, size, theme, variant, ...props });
 
-    if (variant === 'button') {
+    if (variant === Variants.button) {
         let index = -1;
         Children.forEach(
-            children,
+            newChildren,
             (child: any): void => {
                 index++;
 
@@ -248,13 +271,13 @@ const LxButton: React.FC<LxButtonProps> = ({
                     emphasis,
                     prefix: CLASSNAME,
                     size,
-                    theme: emphasis === 'high' ? theme : undefined,
+                    theme: emphasis === Emphasises.high ? theme : undefined,
                     variant,
                 }),
             )}
             {...props}
         >
-            {children}
+            {newChildren}
         </LxButtonRoot>
     );
 };
@@ -262,4 +285,19 @@ LxButton.displayName = 'LxButton';
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, LxButton, LxButtonProps };
+export {
+    CLASSNAME,
+    DEFAULT_PROPS,
+    Color,
+    Colors,
+    Emphasis,
+    Emphasises,
+    LxButton,
+    LxButtonProps,
+    Size,
+    Sizes,
+    Theme,
+    Themes,
+    Variant,
+    Variants,
+};

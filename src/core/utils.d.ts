@@ -1,4 +1,4 @@
-import { Color, Emphasis, Size, Theme, Variant } from 'components';
+import { Color, Emphasis, Size, Theme, Variant } from 'LumX/components';
 
 /////////////////////////////
 

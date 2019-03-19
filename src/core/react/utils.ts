@@ -7,7 +7,21 @@ import isString from 'lodash/isString';
 
 /////////////////////////////
 
+/**
+ * Defines a generic component type.
+ */
 type Component = string | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
+
+/**
+ * Define a generic props types.
+ */
+interface IGenericProps {
+    /**
+     * Any prop (particularly any supported prop for a HTML element).
+     * E.g. classNames, onClick, disabled, ...
+     */
+    [propName: string]: any;
+}
 
 /////////////////////////////
 
@@ -70,4 +84,4 @@ function unwrapFragment(children: React.ReactNode): React.ReactNode {
 
 /////////////////////////////
 
-export { Component, isElementOfType, isElementText, unwrapFragment };
+export { Component, IGenericProps, isElementOfType, isElementText, unwrapFragment };

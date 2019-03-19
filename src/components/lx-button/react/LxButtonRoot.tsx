@@ -1,3 +1,7 @@
+import { IGenericProps } from 'LumX/react/utils';
+
+/////////////////////////////
+
 import React, { Children } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
@@ -7,7 +11,7 @@ import isEmpty from 'lodash/isEmpty';
 /**
  * Defines the props of the <LxButtonRoot> component.
  */
-interface ILxButtonRootProps {
+interface IProps extends IGenericProps {
     /**
      * The `href` to reach if there is one.
      */
@@ -17,14 +21,8 @@ interface ILxButtonRootProps {
      * The `target` to open the `href` into.
      */
     target?: string;
-
-    /**
-     * Any other supported prop for a HTML element.
-     * E.g. classNames, onClick, disabled, ...
-     */
-    [propName: string]: any;
 }
-type LxButtonRootProps = ILxButtonRootProps;
+type LxButtonRootProps = IProps;
 
 /////////////////////////////
 

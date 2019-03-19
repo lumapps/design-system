@@ -10,6 +10,7 @@ module.exports = {
         '^LumX/angularjs(.*)$': `${CORE_PATH}/angularjs$1`,
         '^LumX/react(.*)$': `${CORE_PATH}/react$1`,
         '^LumX/core(.*)$': `${CORE_PATH}$1`,
+        '^LumX/components$': `${COMPONENTS_PATH}/index.ts`,
         '^LumX/components(.*)$': `${COMPONENTS_PATH}$1`,
     },
     preset: 'ts-jest',

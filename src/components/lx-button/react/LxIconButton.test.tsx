@@ -1,16 +1,14 @@
-import { Color, Emphasis, Size, Theme, Variant } from 'components';
-
-import { LxIconButtonProps } from './LxIconButton';
-
-/////////////////////////////
-
 import React, { Fragment } from 'react';
 
 import { shallow, ShallowWrapper } from 'enzyme';
+import { build, fake, oneOf } from 'test-data-bot';
 
-import { LxButton, LxIcon, LxIconButton } from 'LumX';
+import { LxIcon } from 'LumX';
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
+
+import { LxButton, Variants } from './LxButton';
+import { CLASSNAME, Emphasises, LxIconButton, LxIconButtonProps, Sizes, Themes } from './LxIconButton';
 
 /////////////////////////////
 
@@ -70,11 +68,13 @@ describe(`<${LxIconButton.displayName}>`, () => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly an icon button', (): void => {
-            const { icon, wrapper }: ISetup = setup();
+            const { button, icon, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
+            expect(button.exists()).toEqual(true);
             expect(icon.exists()).toEqual(true);
             expect(icon.length).toEqual(1);
+            expect(icon.prop('className')).toContain(CLASSNAME);
         });
     });
 
@@ -85,7 +85,7 @@ describe(`<${LxIconButton.displayName}>`, () => {
         it('should use default props', (): void => {
             const { button }: ISetup = setup();
 
-            expect(button.prop('variant')).toEqual('icon');
+            expect(button.prop('variant')).toEqual(Variants.icon);
         });
 
         it("should user 'icon' `variant` whatever the given prop is", (): void => {
@@ -94,33 +94,37 @@ describe(`<${LxIconButton.displayName}>`, () => {
 
             const testedProp: string = 'variant';
             const modifiedProps: ISetupProps = {
-                [testedProp]: 'icon' as Variant,
+                [testedProp]: Variants.icon,
             };
 
             let { button }: ISetup = setup(modifiedProps);
 
-            expect(button.prop(testedProp)).toEqual('icon');
+            expect(button.prop(testedProp)).toEqual(Variants.icon);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = 'button';
+            modifiedProps[testedProp] = Variants.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button.prop(testedProp)).toEqual('icon');
+            expect(button.prop(testedProp)).toEqual(Variants.icon);
 
             // @ts-ignore
             global.console.warn.mockRestore();
         });
 
         it(`should forward any <${LxButton.displayName}> prop (except \`variant\`)`, (): void => {
-            const modifiedProps: ISetupProps = {
-                color: 'green' as Color,
-                emphasis: 'low' as Emphasis,
-                size: 'xxl' as Size,
-                theme: 'dark' as Theme,
-            };
+            const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
+                color: fake((fakeData) => fakeData.commerce.color()),
+                emphasis: oneOf(...Object.values(Emphasises)),
+                size: oneOf(...Object.values(Sizes)),
+                theme: oneOf(...Object.values(Themes)),
+            });
 
+            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            if (modifiedProps.emphasis !== Emphasises.high) {
+                delete modifiedProps.theme;
+            }
             const { button }: ISetup = setup(modifiedProps);
 
             Object.keys(modifiedProps).forEach((prop: string) => {
@@ -207,12 +211,12 @@ describe(`<${LxIconButton.displayName}>`, () => {
             ).toThrowErrorMatchingSnapshot();
         });
 
-        it('should warn the user when rendering a <LxIconButton> with a `variant`', (): void => {
+        it(`should warn the user when rendering a <${LxIconButton.displayName}> with a \`variant\``, (): void => {
             global.console.warn = jest.fn();
 
             // We know that a <LxIconButton> cannot receive a `variant`, but for the purpose of the test we ignore this.
             // @ts-ignore
-            setup({ variant: 'icon' });
+            setup({ variant: Variants.icon });
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
@@ -220,7 +224,7 @@ describe(`<${LxIconButton.displayName}>`, () => {
 
             // We know that a <LxIconButton> cannot receive a `variant`, but for the purpose of the test we ignore this.
             // @ts-ignore
-            setup({ variant: 'button' });
+            setup({ variant: Variants.button });
             expect(global.console.warn).toHaveBeenCalled();
         });
     });
