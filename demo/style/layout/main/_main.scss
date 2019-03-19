@@ -4,15 +4,61 @@
 
 .main {
     overflow: auto;
-    padding: $lx-spacing-unit * 10;
-    padding-top: $lx-spacing-unit * 6;
-    margin-left: $main-nav-width + $sub-nav-width;
+    flex: 1;
+    justify-content: center;
+    padding: $lx-spacing-unit * 6;
+    padding-top: $lx-spacing-unit * 3;
 
-    &__block {
-        margin-bottom: $lx-spacing-unit * 6;
+    &__wrapper {
+        max-width: 650px;
+        margin: 0 auto;
+    }
+}
 
-        &:last-child {
-            margin-bottom: 0;
+/* Main header
+   ========================================================================== */
+
+/* Main block
+   ========================================================================== */
+
+.main-block {
+    &__title {
+        @include lx-typography(headline);
+
+        margin-bottom: $lx-spacing-unit * 2;
+    }
+
+    &__description {
+        margin-bottom: $lx-spacing-unit * 2;
+    }
+
+    &__demo {
+        border: 1px solid lx-theme-color-variant(dark, L4);
+        border-radius: $lx-theme-border-radius;
+    }
+
+    &__toolbar {
+        display: flex;
+        align-items: center;
+        padding: $lx-spacing-unit $lx-spacing-unit * 2 $lx-spacing-unit $lx-spacing-unit;
+        border-top: 1px solid lx-theme-color-variant(dark, L4);
+    }
+
+    &__code-toggle {
+        flex: 1;
+    }
+
+    &__theme-toggle {
+        flex-shrink: 0;
+    }
+
+    &__code {
+        border-top: 1px solid lx-theme-color-variant(dark, L4);
+
+        .hljs {
+            padding: $lx-spacing-unit * 2;
+            background-color: transparent;
+            font-size: 14px;
         }
     }
 }

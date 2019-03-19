@@ -1,38 +1,128 @@
-<div class="sub-nav__wrapper">
-    <lx-select
-        lx-label="Change theme"
-        ng-model="vm.selectedTheme"
-        lx-choices="vm.THEMES"
-        lx-has-filter="false"
-        lx-is-clearable="false"
-        lx-multiple="false"
-        ng-change="vm.switchTheme()"
-    >
-        <lx-select-selected>{{ $selected.label }}</lx-select-selected>
-        <lx-select-choices>{{ $choice.label }} theme</lx-select-choices>
-    </lx-select>
+<ul class="sub-nav__wrapper ph++ pv+">
+    <li>
+        <lx-select
+            lx-choices="vm.THEMES"
+            lx-has-filter="false"
+            lx-is-clearable="false"
+            lx-label="Change theme"
+            lx-multiple="false"
+            ng-change="vm.switchTheme()"
+            ng-model="vm.selectedTheme"
+        >
+            <lx-select-selected>{{ $selected.label }}</lx-select-selected>
+            <lx-select-choices>{{ $choice.label }} theme</lx-select-choices>
+        </lx-select>
+    </li>
+</ul>
 
-    <lx-divider class="mv+"></lx-divider>
+<ul class="sub-nav__wrapper ph+ pb+">
+    <li class="sub-nav__subheader">Foundations</li>
 
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.button">Button</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.checkbox">Checkbox</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.chip">Chip</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.data-table">Data table</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.dialog">Dialog</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.dropdown">Dropdown</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.expansion-panel">Expansion panel</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.image-block">Image block</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.list">List</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.notification">Notification</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.progress">Progress</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.progress-tracker">
-        Progress tracker
-    </a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.radio-button">Radio button</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.select">Select</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.switch">Switch</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.tabs">Tabs</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.text-field">Text field</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.toolbar">Toolbar</a>
-    <a class="sub-nav__item" ui-sref-active="sub-nav__item--is-active" ui-sref="app.tooltip">Tooltip</a>
-</div>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link">
+            Colors
+        </a>
+    </li>
+
+    <li class="sub-nav__item">
+        <a class="sub-nav__link">
+            Typography
+        </a>
+    </li>
+
+    <li class="sub-nav__subheader">Components</li>
+
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.button">
+            Button
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.checkbox">
+            Checkbox
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.chip">
+            Chip
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.data-table">
+            Data table
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.dialog">
+            Dialog
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.dropdown">
+            Dropdown
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.expansion-panel">
+            Expansion panel
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.image-block">Image block</a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.list">
+            List
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.notification">
+            Notification
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.progress">
+            Progress
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.progress-tracker">
+            Progress tracker
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.radio-button">
+            Radio button
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.select">
+            Select
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.switch">
+            Switch
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.tabs">
+            Tabs
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.text-field">
+            Text field
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.toolbar">
+            Toolbar
+        </a>
+    </li>
+    <li class="sub-nav__item">
+        <a class="sub-nav__link" ui-sref-active="sub-nav__link--is-selected" ui-sref="app.tooltip">
+            Tooltip
+        </a>
+    </li>
+</ul>

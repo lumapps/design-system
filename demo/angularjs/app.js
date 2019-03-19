@@ -14,7 +14,7 @@ import { DEFAULT_THEME, THEMES } from '../constants';
  * @constant
  * @readonly
  */
-const DEPENDENCIES = [MODULE_NAME, 'ui.router'];
+const DEPENDENCIES = [MODULE_NAME, 'ui.router', 'hljs'];
 
 /////////////////////////////
 
@@ -262,6 +262,8 @@ angular
 /////////////////////////////
 
 /* eslint-disable import/no-unassigned-import */
+require('./layout/main/main-header_directive.js');
+require('./layout/main/main-block_directive.js');
 require('./layout/sub-nav/sub-nav_controller.js');
 
 require('./components/lx-button/controller.js');

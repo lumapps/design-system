@@ -13,18 +13,7 @@
     @include lx-list-item;
 
     .lx-list--is-clickable & {
-        @include lx-state-transition;
-
-        cursor: pointer;
-
-        &:hover,
-        &[data-focus-visible-added] {
-            @include lx-state(state-hover, emphasis-low, dark);
-        }
-
-        &:active {
-            @include lx-state(state-active, emphasis-low, dark);
-        }
+        @include lx-list-item-clickable;
     }
 
     &--is-selected {
