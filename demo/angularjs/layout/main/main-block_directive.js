@@ -44,7 +44,7 @@ function mainBlockController() {
      *
      * @type {boolean}
      */
-    mainBlock.isCodeOpen = true;
+    mainBlock.isCodeOpen = false;
 
     /**
      * The component theme.
