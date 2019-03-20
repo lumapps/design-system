@@ -12,11 +12,11 @@
     }
 
     &__label {
-        #{ $self }--size-m & {
+        #{$self}--size-m & {
             @include lumx-chip-label(m);
         }
 
-        #{ $self }--size-s & {
+        #{$self}--size-s & {
             @include lumx-chip-label(s);
         }
     }

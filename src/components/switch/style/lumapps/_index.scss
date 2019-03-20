@@ -26,45 +26,45 @@
     }
 
     &__input-background {
-        #{ $self }--is-unchecked & {
+        #{$self}--is-unchecked & {
             @include lumx-switch-input-background(unchecked);
         }
 
-        #{ $self }--is-checked & {
+        #{$self}--is-checked & {
             @include lumx-switch-input-background(checked);
         }
 
-        #{ $self }--theme-light#{ $self }--is-unchecked & {
+        #{$self}--theme-light#{$self}--is-unchecked & {
             @include lumx-state(state-default, emphasis-low, dark);
         }
 
-        #{ $self }--theme-dark#{ $self }--is-unchecked & {
+        #{$self}--theme-dark#{$self}--is-unchecked & {
             @include lumx-state(state-default, emphasis-low, light);
         }
 
-        #{ $self }--theme-light#{ $self }--is-checked & {
+        #{$self}--theme-light#{$self}--is-checked & {
             @include lumx-state(state-default, emphasis-high, $lumx-switch-checked-color, dark);
         }
 
-        #{ $self }--theme-dark#{ $self }--is-checked & {
+        #{$self}--theme-dark#{$self}--is-checked & {
             @include lumx-state(state-default, emphasis-high, $lumx-switch-checked-color, light);
         }
     }
 
     &__input-indicator {
-        #{ $self }--theme-light#{ $self }--is-unchecked & {
+        #{$self}--theme-light#{$self}--is-unchecked & {
             @include lumx-switch-input-indicator(unchecked, dark);
         }
 
-        #{ $self }--theme-dark#{ $self }--is-unchecked & {
+        #{$self}--theme-dark#{$self}--is-unchecked & {
             @include lumx-switch-input-indicator(unchecked, light);
         }
 
-        #{ $self }--theme-light#{ $self }--is-checked & {
+        #{$self}--theme-light#{$self}--is-checked & {
             @include lumx-switch-input-indicator(checked, dark);
         }
 
-        #{ $self }--theme-dark#{ $self }--is-checked & {
+        #{$self}--theme-dark#{$self}--is-checked & {
             @include lumx-switch-input-indicator(checked, light);
         }
     }
@@ -75,31 +75,31 @@
 
     &__label,
     &__helper {
-        #{ $self }--position-left & {
+        #{$self}--position-left & {
             padding-left: $lumx-spacing-unit;
         }
 
-        #{ $self }--position-right & {
+        #{$self}--position-right & {
             padding-right: $lumx-spacing-unit;
         }
     }
 
     &__label {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-input-label(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-input-label(light);
         }
     }
 
     &__helper {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-input-helper(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-input-helper(light);
         }
     }

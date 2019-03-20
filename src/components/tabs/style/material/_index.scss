@@ -13,11 +13,11 @@
         background-color: transparent !important;
         text-transform: uppercase;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             color: lumx-theme-color-variant(dark, L2);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             color: lumx-theme-color-variant(light, L2);
         }
     }

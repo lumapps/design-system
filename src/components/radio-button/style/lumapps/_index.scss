@@ -22,19 +22,19 @@
     &__input-background {
         @include lumx-radio-button-input-background;
 
-        #{ $self }--theme-light#{ $self }--is-unchecked & {
+        #{$self}--theme-light#{$self}--is-unchecked & {
             @include lumx-radio-button-input-background-status(unchecked, dark);
         }
 
-        #{ $self }--theme-dark#{ $self }--is-unchecked & {
+        #{$self}--theme-dark#{$self}--is-unchecked & {
             @include lumx-radio-button-input-background-status(unchecked, light);
         }
 
-        #{ $self }--theme-light#{ $self }--is-checked & {
+        #{$self}--theme-light#{$self}--is-checked & {
             @include lumx-radio-button-input-background-status(checked, dark);
         }
 
-        #{ $self }--theme-dark#{ $self }--is-checked & {
+        #{$self}--theme-dark#{$self}--is-checked & {
             @include lumx-radio-button-input-background-status(checked, light);
         }
     }
@@ -42,19 +42,19 @@
     &__input-indicator {
         @include lumx-radio-button-input-indicator;
 
-        #{ $self }--theme-light#{ $self }--is-unchecked & {
+        #{$self}--theme-light#{$self}--is-unchecked & {
             @include lumx-radio-button-input-indicator-status(unchecked, dark);
         }
 
-        #{ $self }--theme-dark#{ $self }--is-unchecked & {
+        #{$self}--theme-dark#{$self}--is-unchecked & {
             @include lumx-radio-button-input-indicator-status(unchecked, light);
         }
 
-        #{ $self }--theme-light#{ $self }--is-checked & {
+        #{$self}--theme-light#{$self}--is-checked & {
             @include lumx-radio-button-input-indicator-status(checked, dark);
         }
 
-        #{ $self }--theme-dark#{ $self }--is-checked & {
+        #{$self}--theme-dark#{$self}--is-checked & {
             @include lumx-radio-button-input-indicator-status(checked, light);
         }
     }
@@ -62,11 +62,11 @@
     &__label {
         padding-left: $lumx-spacing-unit;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-input-label(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-input-label(light);
         }
     }
@@ -74,11 +74,11 @@
     &__helper {
         padding-left: $lumx-spacing-unit;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-input-helper(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-input-helper(light);
         }
     }

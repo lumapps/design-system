@@ -6,11 +6,11 @@
     $self: &;
 
     &__links {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-tabs-links(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-tabs-links(light);
         }
     }
@@ -19,11 +19,11 @@
         @include lumx-tabs-link;
         @include lumx-state-transition;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-state(state-default, emphasis-low, dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-state(state-default, emphasis-low, light);
         }
     }

@@ -6,31 +6,31 @@
     $self: &;
 
     &__label {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-input-label(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-input-label(light);
         }
     }
 
     &__helper {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-input-helper(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-input-helper(light);
         }
     }
 
     &__input-wrapper {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-text-field-input-wrapper(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-text-field-input-wrapper(light);
         }
     }
@@ -42,11 +42,11 @@
     &__input-icon {
         flex-shrink: 0;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-text-field-input-icon(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-text-field-input-icon(light);
         }
     }
@@ -55,7 +55,7 @@
         flex: 1;
 
         input {
-            #{ $self }--theme-light & {
+            #{$self}--theme-light & {
                 @include lumx-text-field-input-native(dark);
 
                 &::placeholder {
@@ -63,7 +63,7 @@
                 }
             }
 
-            #{ $self }--theme-dark & {
+            #{$self}--theme-dark & {
                 @include lumx-text-field-input-native(light);
 
                 &::placeholder {

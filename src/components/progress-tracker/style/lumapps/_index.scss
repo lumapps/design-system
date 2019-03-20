@@ -54,12 +54,12 @@
         position: relative;
         color: lumx-theme-color-variant(dark, N);
 
-        #{ $self }--is-active &,
-        #{ $self }--is-complete & {
+        #{$self}--is-active &,
+        #{$self}--is-complete & {
             color: lumx-theme-color-variant(primary, N);
         }
 
-        #{ $self }--has-error & {
+        #{$self}--has-error & {
             color: lumx-theme-color-variant(red, N);
         }
 
@@ -82,7 +82,7 @@
         color: lumx-theme-color-variant(dark, N);
         text-align: center;
 
-        #{ $self }--has-error & {
+        #{$self}--has-error & {
             color: lumx-theme-color-variant(red, N);
         }
     }
@@ -93,7 +93,7 @@
         color: lumx-theme-color-variant(dark, L2);
         text-align: center;
 
-        #{ $self }--has-error & {
+        #{$self}--has-error & {
             color: lumx-theme-color-variant(red, N);
         }
     }

@@ -8,31 +8,31 @@
     &__input-background {
         border: none !important;
 
-        #{ $self }--theme-light#{ $self }--is-unchecked & {
+        #{$self}--theme-light#{$self}--is-unchecked & {
             background-color: lumx-theme-color-variant(dark, L3) !important;
         }
 
-        #{ $self }--theme-dark#{ $self }--is-unchecked & {
+        #{$self}--theme-dark#{$self}--is-unchecked & {
             background-color: lumx-theme-color-variant(light, L4) !important;
         }
 
-        #{ $self }--theme-light#{ $self }--is-checked & {
+        #{$self}--theme-light#{$self}--is-checked & {
             background-color: lumx-theme-color-variant($lumx-switch-checked-color, L3) !important;
         }
 
-        #{ $self }--theme-dark#{ $self }--is-checked & {
+        #{$self}--theme-dark#{$self}--is-checked & {
             background-color: lumx-theme-color-variant(light, N) !important;
         }
     }
 
     &__input-indicator {
-        #{ $self }--theme-light#{ $self }--is-unchecked &,
-        #{ $self }--theme-dark#{ $self }--is-unchecked & {
+        #{$self}--theme-light#{$self}--is-unchecked &,
+        #{$self}--theme-dark#{$self}--is-unchecked & {
             @include lumx-state(state-default, emphasis-high, $lumx-switch-checked-color, light);
         }
 
-        #{ $self }--theme-light#{ $self }--is-checked &,
-        #{ $self }--theme-dark#{ $self }--is-checked & {
+        #{$self}--theme-light#{$self}--is-checked &,
+        #{$self}--theme-dark#{$self}--is-checked & {
             @include lumx-state(state-default, emphasis-high, $lumx-switch-checked-color, dark);
         }
     }

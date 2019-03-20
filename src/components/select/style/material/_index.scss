@@ -10,16 +10,16 @@
     padding-bottom: $lumx-spacing-unit;
 
     &__label {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-text-field-material-label(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-text-field-material-label(light);
         }
 
-        #{ $self }--has-placeholder &,
-        #{ $self }--has-value & {
+        #{$self}--has-placeholder &,
+        #{$self}--has-value & {
             transform: scale(0.75) translateY(0);
         }
     }
@@ -27,21 +27,21 @@
     &__input-wrapper {
         padding-left: 0 !important;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-text-field-material-input-wrapper(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-text-field-material-input-wrapper(light);
         }
     }
 
     &__input-native {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-text-field-material-input-native(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-text-field-material-input-native(light);
         }
     }

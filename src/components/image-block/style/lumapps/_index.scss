@@ -11,21 +11,21 @@
         background-position: center;
         background-repeat: no-repeat;
 
-        #{ $self }--format-original & {
+        #{$self}--format-original & {
             background-size: contain;
         }
 
-        #{ $self }--format-crop & {
+        #{$self}--format-crop & {
             background-size: cover;
         }
     }
 
     &__wrapper {
-        #{ $self }--caption-position-below & {
+        #{$self}--caption-position-below & {
             margin-top: $lumx-spacing-unit;
         }
 
-        #{ $self }--caption-position-over & {
+        #{$self}--caption-position-over & {
             position: absolute;
             right: 0;
             bottom: 0;
@@ -33,17 +33,17 @@
             padding: $lumx-spacing-unit * 2;
         }
 
-        #{ $self }--theme-light#{ $self }--caption-position-over & {
+        #{$self}--theme-light#{$self}--caption-position-over & {
             background-color: lumx-theme-color-variant(light, L1);
         }
 
-        #{ $self }--theme-dark#{ $self }--caption-position-over & {
+        #{$self}--theme-dark#{$self}--caption-position-over & {
             background-color: lumx-theme-color-variant(dark, L1);
         }
     }
 
     &__caption {
-        #{ $self }--caption-position-over & {
+        #{$self}--caption-position-over & {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -56,21 +56,21 @@
     }
 
     &__title {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             color: lumx-theme-color-variant(dark, N);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             color: lumx-theme-color-variant(light, N);
         }
     }
 
     &__description {
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             color: lumx-theme-color-variant(dark, L2);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             color: lumx-theme-color-variant(light, L2);
         }
     }

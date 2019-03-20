@@ -32,7 +32,7 @@
         overflow: hidden;
         transition: max-height $lumx-expansion-panel-transition-duration;
 
-        #{ $self }--is-close & {
+        #{$self}--is-close & {
             max-height: 0 !important;
         }
     }

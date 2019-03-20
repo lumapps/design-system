@@ -19,19 +19,19 @@
     &--is-shown {
         opacity: 1;
 
-        &#{ $self }--position-top {
+        &#{$self}--position-top {
             transform: translateY(-8px);
         }
 
-        &#{ $self }--position-bottom {
+        &#{$self}--position-bottom {
             transform: translateY(8px);
         }
 
-        &#{ $self }--position-left {
+        &#{$self}--position-left {
             transform: translateX(-8px);
         }
 
-        &#{ $self }--position-right {
+        &#{$self}--position-right {
             transform: translateX(8px);
         }
     }
