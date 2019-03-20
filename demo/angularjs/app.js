@@ -44,7 +44,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoButtonController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-button/demo.html'),
+                    template: require('./components/button/demo.html'),
                 },
             },
         })
@@ -54,7 +54,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoCheckboxController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-checkbox/demo.html'),
+                    template: require('./components/checkbox/demo.html'),
                 },
             },
         })
@@ -64,7 +64,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoChipController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-chip/demo.html'),
+                    template: require('./components/chip/demo.html'),
                 },
             },
         })
@@ -74,7 +74,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoDataTableController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-data-table/demo.html'),
+                    template: require('./components/data-table/demo.html'),
                 },
             },
         })
@@ -84,7 +84,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoDialogController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-dialog/demo.html'),
+                    template: require('./components/dialog/demo.html'),
                 },
             },
         })
@@ -94,7 +94,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoDropdownController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-dropdown/demo.html'),
+                    template: require('./components/dropdown/demo.html'),
                 },
             },
         })
@@ -104,7 +104,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoExpansionPanelController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-expansion-panel/demo.html'),
+                    template: require('./components/expansion-panel/demo.html'),
                 },
             },
         })
@@ -112,7 +112,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
             url: 'image-block',
             views: {
                 'main@': {
-                    template: require('./components/lx-image-block/demo.html'),
+                    template: require('./components/image-block/demo.html'),
                 },
             },
         })
@@ -122,7 +122,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoListController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-list/demo.html'),
+                    template: require('./components/list/demo.html'),
                 },
             },
         })
@@ -132,7 +132,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoNotificationController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-notification/demo.html'),
+                    template: require('./components/notification/demo.html'),
                 },
             },
         })
@@ -140,7 +140,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
             url: 'progress',
             views: {
                 'main@': {
-                    template: require('./components/lx-progress/demo.html'),
+                    template: require('./components/progress/demo.html'),
                 },
             },
         })
@@ -150,7 +150,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoProgressTrackerController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-progress-tracker/demo.html'),
+                    template: require('./components/progress-tracker/demo.html'),
                 },
             },
         })
@@ -160,7 +160,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoRadioButtonController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-radio-button/demo.html'),
+                    template: require('./components/radio-button/demo.html'),
                 },
             },
         })
@@ -170,7 +170,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoSelectController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-select/demo.html'),
+                    template: require('./components/select/demo.html'),
                 },
             },
         })
@@ -180,7 +180,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoSwitchController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-switch/demo.html'),
+                    template: require('./components/switch/demo.html'),
                 },
             },
         })
@@ -190,7 +190,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoTabsController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-tabs/demo.html'),
+                    template: require('./components/tabs/demo.html'),
                 },
             },
         })
@@ -200,7 +200,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoTextFieldController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-text-field/demo.html'),
+                    template: require('./components/text-field/demo.html'),
                 },
             },
         })
@@ -210,7 +210,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 'main@': {
                     controller: 'DemoToolbarController',
                     controllerAs: 'vm',
-                    template: require('./components/lx-toolbar/demo.html'),
+                    template: require('./components/toolbar/demo.html'),
                 },
             },
         })
@@ -218,7 +218,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
             url: 'tooltip',
             views: {
                 'main@': {
-                    template: require('./components/lx-tooltip/demo.html'),
+                    template: require('./components/tooltip/demo.html'),
                 },
             },
         });
@@ -266,20 +266,20 @@ require('./layout/main/main-header_directive.js');
 require('./layout/main/main-block_directive.js');
 require('./layout/sub-nav/sub-nav_controller.js');
 
-require('./components/lx-button/controller.js');
-require('./components/lx-checkbox/controller.js');
-require('./components/lx-chip/controller.js');
-require('./components/lx-data-table/controller.js');
-require('./components/lx-dialog/controller.js');
-require('./components/lx-dropdown/controller.js');
-require('./components/lx-expansion-panel/controller.js');
-require('./components/lx-list/controller.js');
-require('./components/lx-notification/controller.js');
-require('./components/lx-progress-tracker/controller.js');
-require('./components/lx-radio-button/controller.js');
-require('./components/lx-select/controller.js');
-require('./components/lx-switch/controller.js');
-require('./components/lx-tabs/controller.js');
-require('./components/lx-text-field/controller.js');
-require('./components/lx-toolbar/controller.js');
+require('./components/button/controller.js');
+require('./components/checkbox/controller.js');
+require('./components/chip/controller.js');
+require('./components/data-table/controller.js');
+require('./components/dialog/controller.js');
+require('./components/dropdown/controller.js');
+require('./components/expansion-panel/controller.js');
+require('./components/list/controller.js');
+require('./components/notification/controller.js');
+require('./components/progress-tracker/controller.js');
+require('./components/radio-button/controller.js');
+require('./components/select/controller.js');
+require('./components/switch/controller.js');
+require('./components/tabs/controller.js');
+require('./components/text-field/controller.js');
+require('./components/toolbar/controller.js');
 /* eslint-enable import/no-unassigned-import */
