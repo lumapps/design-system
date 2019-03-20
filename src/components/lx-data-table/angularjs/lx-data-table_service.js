@@ -1,4 +1,4 @@
-import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -20,7 +20,7 @@ function LxDataTableService($rootScope) {
      * @param {Object} row         The row object to activate in the data table.
      */
     function activate(dataTableId, row) {
-        $rootScope.$broadcast('lx-data-table__activate', dataTableId, row);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__activate`, dataTableId, row);
     }
 
     /**
@@ -30,7 +30,7 @@ function LxDataTableService($rootScope) {
      * @param {Object} row         The row object to deactivate in the data table.
      */
     function deactivate(dataTableId, row) {
-        $rootScope.$broadcast('lx-data-table__deactivate', dataTableId, row);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__deactivate`, dataTableId, row);
     }
 
     /**
@@ -40,7 +40,7 @@ function LxDataTableService($rootScope) {
      * @param {Object} row         The row object to select in the data table.
      */
     function select(dataTableId, row) {
-        $rootScope.$broadcast('lx-data-table__select', dataTableId, row);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__select`, dataTableId, row);
     }
 
     /**
@@ -49,7 +49,7 @@ function LxDataTableService($rootScope) {
      * @param {string} dataTableId The data table identifier.
      */
     function selectAll(dataTableId) {
-        $rootScope.$broadcast('lx-data-table__select-all', dataTableId);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__select-all`, dataTableId);
     }
 
     /**
@@ -59,7 +59,7 @@ function LxDataTableService($rootScope) {
      * @param {Object} row         The row object to unselect in the data table.
      */
     function unselect(dataTableId, row) {
-        $rootScope.$broadcast('lx-data-table__unselect', dataTableId, row);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__unselect`, dataTableId, row);
     }
 
     /**
@@ -68,7 +68,7 @@ function LxDataTableService($rootScope) {
      * @param {string} dataTableId The data table identifier.
      */
     function unselectAll(dataTableId) {
-        $rootScope.$broadcast('lx-data-table__unselect-all', dataTableId);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__unselect-all`, dataTableId);
     }
 
     /////////////////////////////

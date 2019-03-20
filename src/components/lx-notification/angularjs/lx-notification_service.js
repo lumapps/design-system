@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/icons';
 
@@ -93,7 +93,9 @@ function LxNotificationService($compile, $rootScope, $timeout, NglxDepthService)
             class: 'lx-notification__icon',
         });
         const notificationIcon = $compile(
-            `<nglx-icon lx-path="${_notificationTypes[type].icon}" lx-size="s"></nglx-icon>`,
+            `<${COMPONENT_PREFIX}-icon lx-path="${
+                _notificationTypes[type].icon
+            }" lx-size="s"></${COMPONENT_PREFIX}-icon>`,
         )($rootScope);
 
         const notificationText = angular.element('<span/>', {
@@ -111,9 +113,9 @@ function LxNotificationService($compile, $rootScope, $timeout, NglxDepthService)
             const notificationActionWrapper = angular.element('<div/>', {
                 class: 'lx-notification__action',
             });
-            const notificationAction = $compile(`<nglx-button lx-emphasis="medium">${actionLabel}</nglx-button>`)(
-                $rootScope,
-            );
+            const notificationAction = $compile(
+                `<${COMPONENT_PREFIX}-button lx-emphasis="medium">${actionLabel}</${COMPONENT_PREFIX}-button>`,
+            )($rootScope);
 
             notificationAction.on('click', function onActionCuttonClick(evt) {
                 actionCallback();

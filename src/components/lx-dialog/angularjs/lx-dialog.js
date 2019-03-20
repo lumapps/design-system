@@ -143,7 +143,7 @@ function lxDialogController(
             return;
         }
 
-        $rootScope.$broadcast('lx-dialog__scroll-end', lxDialog.id);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__scroll-end`, lxDialog.id);
 
         _dialogContent.off('scroll', _checkScrollEnd);
 
@@ -165,7 +165,7 @@ function lxDialogController(
             _idEventScheduler = undefined;
         }
 
-        $rootScope.$broadcast('lx-dialog__close-start', lxDialog.id);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-start`, lxDialog.id);
 
         _dialog.addClass('lx-dialog--is-hidden');
         _dialogFilter.addClass('lx-dialog-filter--is-hidden');
@@ -188,7 +188,7 @@ function lxDialogController(
 
             lxDialog.isOpen = false;
 
-            $rootScope.$broadcast('lx-dialog__close-end', lxDialog.id);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-end`, lxDialog.id);
         }, _TRANSITION_DURATION);
     }
 
@@ -238,7 +238,7 @@ function lxDialogController(
             .show();
 
         $timeout(function onDialogOpenStart() {
-            $rootScope.$broadcast('lx-dialog__open-start', lxDialog.id, params);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-start`, lxDialog.id, params);
 
             lxDialog.isOpen = true;
             NglxFocusTrapService.activate(_dialog);
@@ -250,7 +250,7 @@ function lxDialogController(
         });
 
         $timeout(function onDialogOpenEnd() {
-            $rootScope.$broadcast('lx-dialog__open-end', lxDialog.id, params);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-end`, lxDialog.id, params);
         }, _TRANSITION_DURATION);
     }
 
@@ -276,7 +276,7 @@ function lxDialogController(
      * @param {string} dialogId The dialog identifier.
      * @param {Object} params   An optional object that holds extra parameters.
      */
-    $scope.$on('lx-dialog__open', (evt, dialogId, params) => {
+    $scope.$on(`${COMPONENT_PREFIX}-dialog__open`, (evt, dialogId, params) => {
         if (dialogId === lxDialog.id) {
             _open(params);
 
@@ -300,7 +300,7 @@ function lxDialogController(
      * @param {Event}  evt      The dropdown open event.
      * @param {string} dialogId The dialog identifier.
      */
-    $scope.$on('lx-dialog__close', (evt, dialogId) => {
+    $scope.$on(`${COMPONENT_PREFIX}-dialog__close`, (evt, dialogId) => {
         if (dialogId === lxDialog.id || dialogId === undefined) {
             _close();
         }

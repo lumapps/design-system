@@ -1,3 +1,5 @@
+import { COMPONENT_PREFIX } from 'LumX/angularjs/constants/common_constants';
+
 import { mdiCommentOutline, mdiDelete, mdiPencil } from 'LumX/icons';
 
 /////////////////////////////
@@ -160,18 +162,18 @@ function DemoDataTableController($filter, $scope) {
     /**
      * When a line is selected in the data table, update the list of actions available on top of the data table.
      */
-    $scope.$on('lx-data-table__selected', updateActions);
+    $scope.$on(`${COMPONENT_PREFIX}-data-table__selected`, updateActions);
 
     /**
      * When a line is unselected in the data table, update the list of actions available on top of the data table.
      */
-    $scope.$on('lx-data-table__unselected', updateActions);
+    $scope.$on(`${COMPONENT_PREFIX}-data-table__unselected`, updateActions);
 
     /**
      * When the user clicks on a column head to sort the data table, trigger the sorting of the data table according to
      * the clicked column.
      */
-    $scope.$on('lx-data-table__sorted', updateSort);
+    $scope.$on(`${COMPONENT_PREFIX}-data-table__sorted`, updateSort);
 }
 
 /////////////////////////////

@@ -61,7 +61,7 @@ function LxDialogService($compile, $rootScope, $timeout, NglxUtilsService) {
      * @param {string} dialogId The dialog identifier.
      */
     function closeDialog(dialogId) {
-        $rootScope.$broadcast('lx-dialog__close', dialogId);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close`, dialogId);
     }
 
     /**
@@ -116,7 +116,7 @@ function LxDialogService($compile, $rootScope, $timeout, NglxUtilsService) {
      * @param {Object} params   An optional object that holds extra parameters.
      */
     function openDialog(dialogId, params) {
-        $rootScope.$broadcast('lx-dialog__open', dialogId, params);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open`, dialogId, params);
     }
 
     /////////////////////////////

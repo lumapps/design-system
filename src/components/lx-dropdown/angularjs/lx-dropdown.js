@@ -360,7 +360,7 @@ function lxDropdownController(
      * @param {string} dropdownId The dropdown identifier.
      * @param {Object} params     An optional object that holds extra parameters.
      */
-    $scope.$on('lx-dropdown__open', (evt, dropdownId, params) => {
+    $scope.$on(`${COMPONENT_PREFIX}-dropdown__open`, (evt, dropdownId, params) => {
         if (dropdownId === lxDropdown.uuid && !lxDropdown.isOpen) {
             registerToggle(angular.element(params.target));
 
@@ -380,7 +380,7 @@ function lxDropdownController(
      * @param {Event}  evt        The dropdown open event.
      * @param {Object} dropdownId The dropdown identifier.
      */
-    $scope.$on('lx-dropdown__close', (evt, dropdownId) => {
+    $scope.$on(`${COMPONENT_PREFIX}-dropdown__close`, (evt, dropdownId) => {
         if (dropdownId === lxDropdown.uuid && lxDropdown.isOpen) {
             _close();
         }
@@ -389,7 +389,7 @@ function lxDropdownController(
     /**
      * Update the active dropdown position.
      */
-    $scope.$on('lx-dropdown__update', () => {
+    $scope.$on(`${COMPONENT_PREFIX}-dropdown__update`, () => {
         if (NglxDropdownService.isOpen(lxDropdown.uuid)) {
             _initHorizontalPosition();
             _initVerticalPosition();

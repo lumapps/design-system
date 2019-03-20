@@ -442,7 +442,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, Ngl
      * @param {Event}  evt        The dropdown open event.
      * @param {Object} dropdownId The dropdown identifier.
      */
-    $scope.$on('lx-dropdown__open', (evt, dropdownId) => {
+    $scope.$on(`${COMPONENT_PREFIX}-dropdown__open`, (evt, dropdownId) => {
         if (dropdownId === lxSelect.dropdownUuid) {
             lxSelect.isOpen = true;
         }
@@ -454,7 +454,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, Ngl
      * @param {Event}  evt        The dropdown open event.
      * @param {Object} dropdownId The dropdown identifier.
      */
-    $scope.$on('lx-dropdown__close', (evt, dropdownId) => {
+    $scope.$on(`${COMPONENT_PREFIX}-dropdown__close`, (evt, dropdownId) => {
         if (dropdownId === lxSelect.dropdownUuid) {
             lxSelect.isOpen = false;
         }

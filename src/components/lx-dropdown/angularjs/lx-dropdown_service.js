@@ -1,4 +1,4 @@
-import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -32,7 +32,7 @@ function LxDropdownService($rootScope) {
      * @param {string} dropdownId The dropdown identifier.
      */
     function closeDropdown(dropdownId) {
-        $rootScope.$broadcast('lx-dropdown__close', dropdownId);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dropdown__close`, dropdownId);
     }
 
     /**
@@ -61,7 +61,7 @@ function LxDropdownService($rootScope) {
      * @param {Object} params     An optional object that holds extra parameters.
      */
     function openDropdown(dropdownId, params) {
-        $rootScope.$broadcast('lx-dropdown__open', dropdownId, params);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dropdown__open`, dropdownId, params);
     }
 
     /**
@@ -84,7 +84,7 @@ function LxDropdownService($rootScope) {
      * Update the active dropdown position.
      */
     function updateActiveDropdownPosition() {
-        $rootScope.$broadcast('lx-dropdown__update');
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dropdown__update`);
     }
 
     /////////////////////////////
