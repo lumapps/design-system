@@ -1,4 +1,4 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/icons';
 
@@ -225,7 +225,7 @@ function LxNotificationService($compile, $rootScope, $timeout, NglxDepthService)
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.notification`).service('LxNotificationService', LxNotificationService);
+angular.module(`${MODULE_NAME}.notification`).service(`${SERVICE_PREFIX}NotificationService`, LxNotificationService);
 
 /////////////////////////////
 

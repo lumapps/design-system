@@ -1,6 +1,6 @@
 import { COMPONENT_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
-function DemoDialogController($scope, NglxDialogService, LxNotificationService) {
+function DemoDialogController($scope, NglxDialogService, NglxNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -102,7 +102,7 @@ function DemoDialogController($scope, NglxDialogService, LxNotificationService) 
     function alertDialog() {
         NglxDialogService.alert({
             cb: function onAnswer() {
-                LxNotificationService.info('Alert callback');
+                NglxNotificationService.info('Alert callback');
             },
             buttons: {
                 ok: 'Agree',
@@ -121,9 +121,9 @@ function DemoDialogController($scope, NglxDialogService, LxNotificationService) 
         NglxDialogService.confirm({
             cb: function onAnswer(answer) {
                 if (answer) {
-                    LxNotificationService.success('Agree');
+                    NglxNotificationService.success('Agree');
                 } else {
-                    LxNotificationService.error('Disagree');
+                    NglxNotificationService.error('Disagree');
                 }
             },
             buttons: {
