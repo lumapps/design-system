@@ -22,19 +22,19 @@
     &__input-background {
         @include lumx-checkbox-input-background;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-state(state-default, emphasis-low, dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-state(state-default, emphasis-low, light);
         }
 
-        #{ $self }--is-unchecked & {
+        #{$self}--is-unchecked & {
             @include lumx-checkbox-input-background-status(unchecked);
         }
 
-        #{ $self }--is-checked & {
+        #{$self}--is-checked & {
             @include lumx-checkbox-input-background-status(checked);
         }
     }
@@ -42,19 +42,19 @@
     &__input-indicator {
         @include lumx-checkbox-input-indicator;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-state(state-default, emphasis-high, $lumx-checkbox-color, dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-state(state-default, emphasis-high, $lumx-checkbox-color, light);
         }
 
-        #{ $self }--is-unchecked & {
+        #{$self}--is-unchecked & {
             @include lumx-checkbox-input-indicator-status(unchecked);
         }
 
-        #{ $self }--is-checked & {
+        #{$self}--is-checked & {
             @include lumx-checkbox-input-indicator-status(checked);
         }
     }
@@ -62,11 +62,11 @@
     &__label {
         padding-left: $lumx-spacing-unit;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-input-label(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-input-label(light);
         }
     }
@@ -74,11 +74,11 @@
     &__helper {
         padding-left: $lumx-spacing-unit;
 
-        #{ $self }--theme-light & {
+        #{$self}--theme-light & {
             @include lumx-input-helper(dark);
         }
 
-        #{ $self }--theme-dark & {
+        #{$self}--theme-dark & {
             @include lumx-input-helper(light);
         }
     }
