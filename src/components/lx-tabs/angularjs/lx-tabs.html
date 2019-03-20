@@ -18,7 +18,7 @@
             lx-enter-keypress="lxTabs.setActiveTab(tab)"
             tabindex="{{ tab.isDisabled ? -1 : 0 }}"
         >
-            <lx-icon lx-path="{{ tab.icon }}" lx-size="xs" ng-if="tab.icon"></lx-icon>
+            <nglx-icon lx-path="{{ tab.icon }}" lx-size="xs" ng-if="tab.icon"></nglx-icon>
             <span ng-if="tab.label">{{ tab.label }}</span>
         </a>
     </div>

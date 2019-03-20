@@ -46,7 +46,7 @@
                 ng-repeat="selected in lxSelect.viewValue"
                 ng-if="!lxSelect.isModelEmpty() && lxSelect.multiple"
             >
-                <lx-chip
+                <nglx-chip
                     lx-on-click="lxSelect.select(selected, $event)"
                     lx-size="s"
                     lx-theme="{{ lxSelect.theme === 'dark' ? 'dark' : 'light' }}"
@@ -54,17 +54,17 @@
                 >
                     <lx-chip-label ng-bind-html="lxSelect.displaySelected(selected)"></lx-chip-label>
                     <lx-chip-after
-                        ><lx-icon lx-path="{{ lxSelect.icons.mdiClose }}" lx-size="xxs"></lx-icon
+                        ><nglx-icon lx-path="{{ lxSelect.icons.mdiClose }}" lx-size="xxs"></nglx-icon
                     ></lx-chip-after>
-                </lx-chip>
+                </nglx-chip>
             </div>
         </div>
 
         <div class="lx-select__input-validity" ng-if="lxSelect.isValid || lxSelect.hasError">
-            <lx-icon
+            <nglx-icon
                 lx-path="{{ lxSelect.isValid ? lxSelect.icons.mdiCheckCircle : lxSelect.icons.mdiAlertCircle }}"
                 lx-size="xs"
-            ></lx-icon>
+            ></nglx-icon>
         </div>
 
         <div
@@ -72,15 +72,15 @@
             ng-if="lxSelect.isClearable && !lxSelect.multiple && !lxSelect.isModelEmpty()"
             ng-click="lxSelect.clearModel($event)"
         >
-            <lx-icon lx-path="{{ lxSelect.icons.mdiCloseCircle }}" lx-size="xs"></lx-icon>
+            <nglx-icon lx-path="{{ lxSelect.icons.mdiCloseCircle }}" lx-size="xs"></nglx-icon>
         </div>
 
         <div class="lx-select__input-indicator">
-            <lx-icon lx-path="{{ lxSelect.icons.mdiMenuDown }}" lx-size="s"></lx-icon>
+            <nglx-icon lx-path="{{ lxSelect.icons.mdiMenuDown }}" lx-size="s"></nglx-icon>
         </div>
     </div>
 
-    <lx-chip
+    <nglx-chip
         id="{{ lxSelect.targetUuid }}"
         lx-has-dropdown-indicator="lxSelect.isModelEmpty()"
         lx-on-click="lxSelect.openDropdown()"
@@ -106,17 +106,17 @@
         </lx-chip-label>
 
         <lx-chip-after>
-            <lx-icon
+            <nglx-icon
                 lx-path="{{ lxSelect.isModelEmpty() ? lxSelect.icons.mdiMenuDown : lxSelect.icons.mdiCloseCircle }}"
                 lx-size="xs"
-            ></lx-icon>
+            ></nglx-icon>
         </lx-chip-after>
-    </lx-chip>
+    </nglx-chip>
 
-    <lx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
+    <nglx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
         <lx-dropdown-menu>
             <div class="lx-select__filter" ng-if="::lxSelect.hasFilter">
-                <lx-icon lx-path="{{ lxSelect.icons.mdiMagnify }}" lx-size="xs"></lx-icon>
+                <nglx-icon lx-path="{{ lxSelect.icons.mdiMagnify }}" lx-size="xs"></nglx-icon>
 
                 <input
                     type="text"
@@ -124,28 +124,28 @@
                     ng-model="lxSelect.filterModel"
                     ng-model-options="{ debounce: 500 }"
                     ng-change="lxSelect.updateFilter()"
-                    lx-select-filter
+                    nglx-select-filter
                 />
             </div>
 
             <div class="lx-select__loader" ng-if="lxSelect.isLoading">
-                <lx-progress></lx-progress>
+                <nglx-progress></nglx-progress>
             </div>
 
-            <lx-list lx-focus-on-init lx-is-clickable="true" ng-if="!lxSelect.isLoading">
-                <lx-list-item
+            <nglx-list lx-focus-on-init lx-is-clickable="true" ng-if="!lxSelect.isLoading">
+                <nglx-list-item
                     lx-is-selected="lxSelect.isSelected(choice)"
                     ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
                     ng-click="lxSelect.select(choice, $event)"
                     lx-enter-keypress="lxSelect.select(choice, $event)"
                 >
                     <lx-list-item-content ng-bind-html="lxSelect.displayChoice(choice)"></lx-list-item-content>
-                </lx-list-item>
-            </lx-list>
+                </nglx-list-item>
+            </nglx-list>
 
             <span class="lx-select__helper" ng-if="lxSelect.hasHelper && !lxSelect.isLoading">
                 {{ lxSelect.helper }}
             </span>
         </lx-dropdown-menu>
-    </lx-dropdown>
+    </nglx-dropdown>
 </div>

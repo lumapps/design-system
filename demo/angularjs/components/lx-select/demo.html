@@ -1,4 +1,4 @@
-<lx-select
+<nglx-select
     ng-model="vm.selectModel.selectedPerson"
     lx-choices="vm.selectPeople"
     lx-is-clearable="true"
@@ -6,9 +6,9 @@
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
-</lx-select>
+</nglx-select>
 
-<lx-select
+<nglx-select
     ng-model="vm.selectModel.selectedPerson"
     lx-choices="vm.selectPeople"
     lx-is-clearable="true"
@@ -18,9 +18,9 @@
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
-</lx-select>
+</nglx-select>
 
-<lx-select
+<nglx-select
     ng-model="vm.selectModel.selectedPerson"
     lx-choices="vm.selectPeople"
     lx-has-error="true"
@@ -29,9 +29,9 @@
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
-</lx-select>
+</nglx-select>
 
-<lx-select
+<nglx-select
     ng-model="vm.selectModel.selectedPeople"
     lx-choices="vm.selectPeople"
     lx-label="Lorem Ipsum"
@@ -40,9 +40,9 @@
 >
     <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
     <lx-select-choices>{{ $choice.email }}</lx-select-choices>
-</lx-select>
+</nglx-select>
 
-<lx-select
+<nglx-select
     ng-change="vm.selectCallback()"
     ng-model="vm.selectAjax.selected"
     lx-choices="vm.selectAjax.list"
@@ -59,4 +59,4 @@
 >
     <lx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</lx-select-selected>
     <lx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</lx-select-choices>
-</lx-select>
+</nglx-select>

@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-image-block.html';
 
@@ -61,7 +61,7 @@ function lxImageBlockDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.image-block`).directive('lxImageBlock', lxImageBlockDirective);
+angular.module(`${MODULE_NAME}.image-block`).directive(`${COMPONENT_PREFIX}ImageBlock`, lxImageBlockDirective);
 
 /////////////////////////////
 

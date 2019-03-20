@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiChevronDown, mdiChevronUp, mdiDragVertical } from 'LumX/icons';
 
@@ -218,7 +218,9 @@ function lxExpansionPanelDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.expansion-panel`).directive('lxExpansionPanel', lxExpansionPanelDirective);
+angular
+    .module(`${MODULE_NAME}.expansion-panel`)
+    .directive(`${COMPONENT_PREFIX}ExpansionPanel`, lxExpansionPanelDirective);
 
 /////////////////////////////
 

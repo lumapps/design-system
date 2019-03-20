@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -54,7 +54,7 @@ function lxThumbnailDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.thumbnail`).directive('lxThumbnail', lxThumbnailDirective);
+angular.module(`${MODULE_NAME}.thumbnail`).directive(`${COMPONENT_PREFIX}Thumbnail`, lxThumbnailDirective);
 
 /////////////////////////////
 

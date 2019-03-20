@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-tab.html';
 
@@ -115,7 +115,7 @@ function lxTabDirective() {
         controllerAs: 'lxTab',
         link,
         replace: true,
-        require: ['lxTab', '^lxTabs'],
+        require: [`${COMPONENT_PREFIX}Tab`, `^${COMPONENT_PREFIX}Tabs`],
         restrict: 'E',
         scope: {
             icon: '@?lxIcon',
@@ -129,7 +129,7 @@ function lxTabDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.tabs`).directive('lxTab', lxTabDirective);
+angular.module(`${MODULE_NAME}.tabs`).directive(`${COMPONENT_PREFIX}Tab`, lxTabDirective);
 
 /////////////////////////////
 

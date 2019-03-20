@@ -7,31 +7,31 @@
 >
     <div class="lx-expansion-panel__header" ng-click="lxExpansionPanel.toggle()">
         <div class="lx-expansion-panel__drag-indicator" ng-if="::lxExpansionPanel.isDraggable">
-            <lx-icon
+            <nglx-icon
                 lx-path="{{ lxExpansionPanel.icons.mdiDragVertical }}"
                 lx-color="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'dark' : 'light' }}"
                 lx-size="s"
-            ></lx-icon>
+            ></nglx-icon>
         </div>
 
         <div class="lx-expansion-panel__label" ng-transclude="header"></div>
 
         <div class="lx-expansion-panel__state-indicator">
-            <lx-button
+            <nglx-button
                 lx-color="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'dark' : 'light' }}"
                 lx-emphasis="low"
                 lx-variant="icon"
                 ng-click="lxExpansionPanel.toggle($event)"
             >
-                <lx-icon
+                <nglx-icon
                     lx-path="{{
                         lxExpansionPanel.isWrapperOpen
                             ? lxExpansionPanel.icons.mdiChevronUp
                             : lxExpansionPanel.icons.mdiChevronDown
                     }}"
                 >
-                </lx-icon>
-            </lx-button>
+                </nglx-icon>
+            </nglx-button>
         </div>
     </div>
 

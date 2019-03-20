@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiArrowDown, mdiArrowUp } from 'LumX/icons';
 
@@ -275,8 +275,11 @@ function lxDataTableController($rootScope, $sce, $scope) {
     $scope.$on('lx-data-table__select', (evt, id, row) => {
         if (id === lxDataTable.id && angular.isDefined(row)) {
             if (angular.isArray(row) && row.length > 0) {
-                row = row[0];
+                _select(row[0]);
+
+                return;
             }
+
             _select(row);
         }
     });
@@ -303,8 +306,11 @@ function lxDataTableController($rootScope, $sce, $scope) {
     $scope.$on('lx-data-table__unselect', (evt, id, row) => {
         if (id === lxDataTable.id && angular.isDefined(row)) {
             if (angular.isArray(row) && row.length > 0) {
-                row = row[0];
+                _unselect(row[0]);
+
+                return;
             }
+
             _unselect(row);
         }
     });
@@ -331,8 +337,11 @@ function lxDataTableController($rootScope, $sce, $scope) {
     $scope.$on('lx-data-table__activate', (evt, id, row) => {
         if (id === lxDataTable.id && angular.isDefined(row)) {
             if (angular.isArray(row) && row.length > 0) {
-                row = row[0];
+                _activate(row[0]);
+
+                return;
             }
+
             _activate(row);
         }
     });
@@ -347,8 +356,11 @@ function lxDataTableController($rootScope, $sce, $scope) {
     $scope.$on('lx-data-table__deactivate', (evt, id, row) => {
         if (id === lxDataTable.id && angular.isDefined(row)) {
             if (angular.isArray(row) && row.length > 0) {
-                row = row[0];
+                _deactivate(row[0]);
+
+                return;
             }
+
             _deactivate(row);
         }
     });
@@ -381,7 +393,7 @@ function lxDataTableDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.data-table`).directive('lxDataTable', lxDataTableDirective);
+angular.module(`${MODULE_NAME}.data-table`).directive(`${COMPONENT_PREFIX}DataTable`, lxDataTableDirective);
 
 /////////////////////////////
 

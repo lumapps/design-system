@@ -20,79 +20,81 @@
 <strong>dismissible</strong>
 
 <div class="pv++">
-    <lx-chip lx-on-click="vm.clickCallback()">
+    <nglx-chip lx-on-click="vm.clickCallback()">
         <lx-chip-label>Dismissible</lx-chip-label>
-        <lx-chip-after><lx-icon lx-path="{{ vm.icons.mdiClose }}" lx-size="xs"></lx-icon></lx-chip-after>
-    </lx-chip>
+        <lx-chip-after><nglx-icon lx-path="{{ vm.icons.mdiClose }}" lx-size="xs"></nglx-icon></lx-chip-after>
+    </nglx-chip>
 </div>
 
 <strong>choice</strong>
 
 <div class="pv++">
-    <lx-chip lx-is-selected="vm.isSelected" lx-on-click="vm.toggleSelected()">
+    <nglx-chip lx-is-selected="vm.isSelected" lx-on-click="vm.toggleSelected()">
         <lx-chip-label>Choice</lx-chip-label>
-    </lx-chip>
+    </nglx-chip>
 </div>
 
 <strong>filter</strong>
 
 <div class="pv++">
-    <lx-chip
+    <nglx-chip
         lx-has-dropdown-indicator="!vm.isSelected"
         lx-is-selected="vm.isSelected"
         lx-on-click="vm.select()"
         lx-on-after-click="vm.unselect()"
     >
-        <lx-chip-before><lx-icon lx-path="{{ vm.icons.mdiFilterVariant }}" lx-size="xs"></lx-icon></lx-chip-before>
+        <lx-chip-before><nglx-icon lx-path="{{ vm.icons.mdiFilterVariant }}" lx-size="xs"></nglx-icon></lx-chip-before>
         <lx-chip-label>Filter</lx-chip-label>
-        <lx-chip-after><lx-icon lx-path="{{ vm.icons.mdiCloseCircle }}" lx-size="xs"></lx-icon></lx-chip-after>
-    </lx-chip>
+        <lx-chip-after><nglx-icon lx-path="{{ vm.icons.mdiCloseCircle }}" lx-size="xs"></nglx-icon></lx-chip-after>
+    </nglx-chip>
 </div>
 
 <div class="p++ lx-theme-background-dark-N">
     <strong class="lx-theme-color-light-N">default</strong>
 
     <div class="pv++">
-        <lx-chip lx-theme="dark">
+        <nglx-chip lx-theme="dark">
             <lx-chip-label>Lorem ipsum</lx-chip-label>
-        </lx-chip>
+        </nglx-chip>
 
-        <lx-chip lx-theme="dark">
-            <lx-chip-before><lx-icon lx-path="{{ vm.icons.mdiEmail }}" lx-size="xs"></lx-icon></lx-chip-before>
+        <nglx-chip lx-theme="dark">
+            <lx-chip-before><nglx-icon lx-path="{{ vm.icons.mdiEmail }}" lx-size="xs"></nglx-icon></lx-chip-before>
             <lx-chip-label>Lorem ipsum</lx-chip-label>
-        </lx-chip>
+        </nglx-chip>
     </div>
 
     <strong class="lx-theme-color-light-N">dismissible</strong>
 
     <div class="pv++">
-        <lx-chip lx-on-click="vm.clickCallback()" lx-theme="dark">
+        <nglx-chip lx-on-click="vm.clickCallback()" lx-theme="dark">
             <lx-chip-label>Dismissible</lx-chip-label>
-            <lx-chip-after><lx-icon lx-path="{{ vm.icons.mdiClose }}" lx-size="xs"></lx-icon></lx-chip-after>
-        </lx-chip>
+            <lx-chip-after><nglx-icon lx-path="{{ vm.icons.mdiClose }}" lx-size="xs"></nglx-icon></lx-chip-after>
+        </nglx-chip>
     </div>
 
     <strong class="lx-theme-color-light-N">choice</strong>
 
     <div class="pv++">
-        <lx-chip lx-is-selected="vm.isSelected" lx-on-click="vm.toggleSelected()" lx-theme="dark">
+        <nglx-chip lx-is-selected="vm.isSelected" lx-on-click="vm.toggleSelected()" lx-theme="dark">
             <lx-chip-label>Choice</lx-chip-label>
-        </lx-chip>
+        </nglx-chip>
     </div>
 
     <strong class="lx-theme-color-light-N">filter</strong>
 
     <div class="pv++">
-        <lx-chip
+        <nglx-chip
             lx-has-dropdown-indicator="!vm.isSelected"
             lx-is-selected="vm.isSelected"
             lx-on-click="vm.select()"
             lx-on-after-click="vm.unselect()"
             lx-theme="dark"
         >
-            <lx-chip-before><lx-icon lx-path="{{ vm.icons.mdiFilterVariant }}" lx-size="xs"></lx-icon></lx-chip-before>
+            <lx-chip-before>
+                <nglx-icon lx-path="{{ vm.icons.mdiFilterVariant }}" lx-size="xs"></nglx-icon>
+            </lx-chip-before>
             <lx-chip-label>Filter</lx-chip-label>
-            <lx-chip-after><lx-icon lx-path="{{ vm.icons.mdiCloseCircle }}" lx-size="xs"></lx-icon></lx-chip-after>
-        </lx-chip>
+            <lx-chip-after><nglx-icon lx-path="{{ vm.icons.mdiCloseCircle }}" lx-size="xs"></nglx-icon></lx-chip-after>
+        </nglx-chip>
     </div>
 </div>

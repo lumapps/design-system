@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-progress.html';
 
@@ -31,7 +31,7 @@ function lxProgressDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.progress`).directive('lxProgress', lxProgressDirective);
+angular.module(`${MODULE_NAME}.progress`).directive(`${COMPONENT_PREFIX}Progress`, lxProgressDirective);
 
 /////////////////////////////
 

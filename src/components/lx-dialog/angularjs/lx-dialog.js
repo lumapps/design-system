@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-dialog.html';
 
@@ -346,7 +346,7 @@ function lxDialogDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).directive('lxDialog', lxDialogDirective);
+angular.module(`${MODULE_NAME}.dialog`).directive(`${COMPONENT_PREFIX}Dialog`, lxDialogDirective);
 
 /////////////////////////////
 

@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-radio-button.html';
 
@@ -161,7 +161,7 @@ function lxRadioButtonDirective() {
         controllerAs: 'lxRadioButton',
         link,
         replace: true,
-        require: ['lxRadioButton', '?ngModel'],
+        require: [`${COMPONENT_PREFIX}RadioButton`, '?ngModel'],
         restrict: 'E',
         scope: {
             theme: '@?lxTheme',
@@ -176,7 +176,7 @@ function lxRadioButtonDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.radio-button`).directive('lxRadioButton', lxRadioButtonDirective);
+angular.module(`${MODULE_NAME}.radio-button`).directive(`${COMPONENT_PREFIX}RadioButton`, lxRadioButtonDirective);
 
 /////////////////////////////
 

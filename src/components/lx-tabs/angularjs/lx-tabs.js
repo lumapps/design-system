@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-tabs.html';
 
@@ -131,7 +131,7 @@ function lxTabsDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.tabs`).directive('lxTabs', lxTabsDirective);
+angular.module(`${MODULE_NAME}.tabs`).directive(`${COMPONENT_PREFIX}Tabs`, lxTabsDirective);
 
 /////////////////////////////
 

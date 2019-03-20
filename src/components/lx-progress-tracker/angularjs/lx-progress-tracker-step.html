@@ -6,11 +6,11 @@
                 'lx-progress-tracker-step--has-error': lxProgressTrackerStep.isActive && lxProgressTrackerStep.hasError }"
     tabindex="{{ lxProgressTrackerStep.isClickable() ? 0 : -1 }}"
 >
-    <lx-icon
+    <nglx-icon
         class="lx-progress-tracker-step__state"
         lx-path="{{ lxProgressTrackerStep.getIcon() }}"
         lx-size="s"
-    ></lx-icon>
+    ></nglx-icon>
 
     <span class="lx-progress-tracker-step__label">{{ lxProgressTrackerStep.label }}</span>
 

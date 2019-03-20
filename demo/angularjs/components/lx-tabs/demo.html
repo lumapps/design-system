@@ -1,35 +1,35 @@
-<lx-tabs lx-active-tab="vm.activeTab">
-    <lx-tab lx-label="Lorem Ipsum 1" lx-icon="{{ vm.icons.mdiPencil }}">
+<nglx-tabs lx-active-tab="vm.activeTab">
+    <nglx-tab lx-label="Lorem Ipsum 1" lx-icon="{{ vm.icons.mdiPencil }}">
         <p class="p+">Lorem Ipsum Content 1</p>
-    </lx-tab>
+    </nglx-tab>
 
-    <lx-tab lx-label="Lorem Ipsum 2" ng-disabled="vm.isTabDisabled">
+    <nglx-tab lx-label="Lorem Ipsum 2" ng-disabled="vm.isTabDisabled">
         <p class="p+">Lorem Ipsum Content 2</p>
-    </lx-tab>
+    </nglx-tab>
 
-    <lx-tab lx-label="Lorem Ipsum 3">
+    <nglx-tab lx-label="Lorem Ipsum 3">
         <p class="p+">Lorem Ipsum Content 3</p>
-    </lx-tab>
-</lx-tabs>
+    </nglx-tab>
+</nglx-tabs>
 
-<lx-button ng-click="vm.activeTab = 0">Set first tab as active tab</lx-button>
-<lx-button ng-click="vm.isTabDisabled = !vm.isTabDisabled">Toggle second tab disabled state</lx-button>
+<nglx-button ng-click="vm.activeTab = 0">Set first tab as active tab</nglx-button>
+<nglx-button ng-click="vm.isTabDisabled = !vm.isTabDisabled">Toggle second tab disabled state</nglx-button>
 
-<lx-tabs lx-layout="clustered">
-    <lx-tab lx-label="{{ tab.heading }}" ng-repeat="tab in vm.tabs">
+<nglx-tabs lx-layout="clustered">
+    <nglx-tab lx-label="{{ tab.heading }}" ng-repeat="tab in vm.tabs">
         <div class="p+">
             <p>{{ tab.content }}</p>
 
             <div class="mt+">
-                <lx-button ng-click="vm.removeTab(vm.tabs.indexOf(tab))">Remove current tab</lx-button>
+                <nglx-button ng-click="vm.removeTab(vm.tabs.indexOf(tab))">Remove current tab</nglx-button>
             </div>
         </div>
-    </lx-tab>
-</lx-tabs>
+    </nglx-tab>
+</nglx-tabs>
 
 <div class="divider divider--dark"></div>
 
 <div class="p+">
-    <lx-button ng-click="vm.addTab()">Add a tab</lx-button>
-    <lx-button ng-click="vm.removeFirstTab()">Remove first tab</lx-button>
+    <nglx-button ng-click="vm.addTab()">Add a tab</nglx-button>
+    <nglx-button ng-click="vm.removeFirstTab()">Remove first tab</nglx-button>
 </div>

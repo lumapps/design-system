@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from 'LumX/icons';
 
@@ -116,7 +116,7 @@ function lxProgressTrackerStepDirective() {
         controllerAs: 'lxProgressTrackerStep',
         link,
         replace: true,
-        require: ['lxProgressTrackerStep', '^lxProgressTracker'],
+        require: [`${COMPONENT_PREFIX}ProgressTrackerStep`, `^${COMPONENT_PREFIX}ProgressTracker`],
         restrict: 'E',
         scope: {
             hasError: '=?lxHasError',
@@ -131,7 +131,9 @@ function lxProgressTrackerStepDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.progress-tracker`).directive('lxProgressTrackerStep', lxProgressTrackerStepDirective);
+angular
+    .module(`${MODULE_NAME}.progress-tracker`)
+    .directive(`${COMPONENT_PREFIX}ProgressTrackerStep`, lxProgressTrackerStepDirective);
 
 /////////////////////////////
 

@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlertCircle, mdiCheckCircle } from 'LumX/icons';
 
@@ -133,7 +133,7 @@ function lxTextFieldDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.text-field`).directive('lxTextField', lxTextFieldDirective);
+angular.module(`${MODULE_NAME}.text-field`).directive(`${COMPONENT_PREFIX}TextField`, lxTextFieldDirective);
 
 /////////////////////////////
 

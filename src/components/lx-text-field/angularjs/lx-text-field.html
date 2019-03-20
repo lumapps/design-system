@@ -15,20 +15,20 @@
     <span class="lx-text-field__helper" ng-if="::lxTextField.helper">{{ lxTextField.helper }}</span>
 
     <div class="lx-text-field__input-wrapper">
-        <lx-icon
+        <nglx-icon
             class="lx-text-field__input-icon"
             lx-path="{{ lxTextField.icon }}"
             lx-size="xs"
             ng-if="::lxTextField.icon"
-        ></lx-icon>
+        ></nglx-icon>
 
         <div class="lx-text-field__input-native" ng-transclude></div>
 
-        <lx-icon
+        <nglx-icon
             class="lx-text-field__input-validity"
             lx-path="{{ lxTextField.isValid ? lxTextField.icons.mdiCheckCircle : lxTextField.icons.mdiAlertCircle }}"
             lx-size="xs"
             ng-if="lxTextField.isValid || lxTextField.hasError"
-        ></lx-icon>
+        ></nglx-icon>
     </div>
 </div>

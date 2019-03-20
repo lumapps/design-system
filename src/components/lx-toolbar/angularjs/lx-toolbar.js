@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-toolbar.html';
 
@@ -78,7 +78,7 @@ function lxToolbarDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.toolbar`).directive('lxToolbar', lxToolbarDirective);
+angular.module(`${MODULE_NAME}.toolbar`).directive(`${COMPONENT_PREFIX}Toolbar`, lxToolbarDirective);
 
 /////////////////////////////
 

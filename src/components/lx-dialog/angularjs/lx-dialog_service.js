@@ -25,13 +25,13 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
         alertDialogScope.cb = params.cb;
 
         const compiledAlertDialog = $compile(
-            `<lx-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
+            `<nglx-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
-                        <lx-toolbar>
+                        <nglx-toolbar>
                             <lx-toolbar-label>
                                 <span class="lx-typography-title">${params.title}</span>
                             </lx-toolbar-label>
-                        </lx-toolbar>
+                        </nglx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
                         <div class="ph++ pb+">
@@ -40,10 +40,12 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
                     </lx-dialog-content>
                     <lx-dialog-footer>
                         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
-                            <lx-button ng-click="cb()" lx-dialog-close lx-focus-on-init>${params.buttons.ok}</lx-button>
+                            <nglx-button ng-click="cb()" nglx-dialog-close lx-focus-on-init>${
+                                params.buttons.ok
+                            }</nglx-button>
                         </div>
                     </lx-dialog-footer>
-                </lx-dialog>`,
+                </nglx-dialog>`,
         )(alertDialogScope);
 
         angular.element('body').append(compiledAlertDialog);
@@ -74,13 +76,13 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
         confirmDialogScope.cb = params.cb;
 
         const compiledConfirmDialog = $compile(
-            `<lx-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
+            `<nglx-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
                     <lx-dialog-header>
-                        <lx-toolbar>
+                        <nglx-toolbar>
                             <lx-toolbar-label>
                                 <span class="lx-typography-title">${params.title}</span>
                             </lx-toolbar-label>
-                        </lx-toolbar>
+                        </nglx-toolbar>
                     </lx-dialog-header>
                     <lx-dialog-content>
                         <div class="ph++ pb+">
@@ -89,15 +91,15 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
                     </lx-dialog-content>
                     <lx-dialog-footer>
                         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
-                            <lx-button lx-emphasis="medium" ng-click="cb(false)" lx-dialog-close>
+                            <nglx-button lx-emphasis="medium" ng-click="cb(false)" nglx-dialog-close>
                                 ${params.buttons.cancel}
-                            </lx-button>
-                            <lx-button class="ml" ng-click="cb(true)" lx-dialog-close lx-focus-on-init>
+                            </nglx-button>
+                            <nglx-button class="ml" ng-click="cb(true)" nglx-dialog-close lx-focus-on-init>
                                 ${params.buttons.ok}
-                            </lx-button>
+                            </nglx-button>
                         </div>
                     </lx-dialog-footer>
-                </lx-dialog>`,
+                </nglx-dialog>`,
         )(confirmDialogScope);
 
         angular.element('body').append(compiledConfirmDialog);

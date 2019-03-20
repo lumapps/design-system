@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from 'LumX/icons';
 
@@ -506,7 +506,7 @@ function lxSelectDirective() {
         controllerAs: 'lxSelect',
         link,
         replace: true,
-        require: ['lxSelect', 'ngModel'],
+        require: [`${COMPONENT_PREFIX}Select`, 'ngModel'],
         restrict: 'E',
         scope: {
             choices: '=lxChoices',
@@ -537,7 +537,7 @@ function lxSelectDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.select`).directive('lxSelect', lxSelectDirective);
+angular.module(`${MODULE_NAME}.select`).directive(`${COMPONENT_PREFIX}Select`, lxSelectDirective);
 
 /////////////////////////////
 

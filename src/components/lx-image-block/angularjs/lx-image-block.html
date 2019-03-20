@@ -21,9 +21,9 @@
 
         <div class="lx-image-block__tags" ng-if="lxImageBlock.tags.length > 0">
             <div class="lx-image-block__tag" ng-repeat="tag in lxImageBlock.tags">
-                <lx-chip lx-size="s" lx-theme="{{ lxImageBlock.theme }}">
+                <nglx-chip lx-size="s" lx-theme="{{ lxImageBlock.theme }}">
                     <lx-chip-label>{{ tag }}</lx-chip-label>
-                </lx-chip>
+                </nglx-chip>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiMenuDown } from 'LumX/icons';
 
@@ -151,7 +151,7 @@ function lxChipDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.chip`).directive('lxChip', lxChipDirective);
+angular.module(`${MODULE_NAME}.chip`).directive(`${COMPONENT_PREFIX}Chip`, lxChipDirective);
 
 /////////////////////////////
 

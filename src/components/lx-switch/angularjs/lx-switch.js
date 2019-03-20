@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-switch.html';
 
@@ -152,7 +152,7 @@ function lxSwitchDirective() {
         controllerAs: 'lxSwitch',
         link,
         replace: true,
-        require: ['lxSwitch', '?ngModel'],
+        require: [`${COMPONENT_PREFIX}Switch`, '?ngModel'],
         restrict: 'E',
         scope: {
             position: '@?lxPosition',
@@ -168,7 +168,7 @@ function lxSwitchDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.switch`).directive('lxSwitch', lxSwitchDirective);
+angular.module(`${MODULE_NAME}.switch`).directive(`${COMPONENT_PREFIX}Switch`, lxSwitchDirective);
 
 /////////////////////////////
 

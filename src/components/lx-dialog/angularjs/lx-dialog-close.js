@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -19,7 +19,7 @@ function lxDialogCloseDirective(LxDialogService) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).directive('lxDialogClose', lxDialogCloseDirective);
+angular.module(`${MODULE_NAME}.dialog`).directive(`${COMPONENT_PREFIX}DialogClose`, lxDialogCloseDirective);
 
 /////////////////////////////
 

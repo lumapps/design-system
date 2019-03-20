@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-dropdown.html';
 
@@ -440,7 +440,7 @@ function lxDropdownDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dropdown`).directive('lxDropdown', lxDropdownDirective);
+angular.module(`${MODULE_NAME}.dropdown`).directive(`${COMPONENT_PREFIX}Dropdown`, lxDropdownDirective);
 
 /////////////////////////////
 

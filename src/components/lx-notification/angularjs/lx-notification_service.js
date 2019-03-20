@@ -92,9 +92,9 @@ function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {
         const notificationIconWrapper = angular.element('<div/>', {
             class: 'lx-notification__icon',
         });
-        const notificationIcon = $compile(`<lx-icon lx-path="${_notificationTypes[type].icon}" lx-size="s"></lx-icon>`)(
-            $rootScope,
-        );
+        const notificationIcon = $compile(
+            `<nglx-icon lx-path="${_notificationTypes[type].icon}" lx-size="s"></nglx-icon>`,
+        )($rootScope);
 
         const notificationText = angular.element('<span/>', {
             class: 'lx-notification__content',
@@ -111,7 +111,7 @@ function LxNotificationService($compile, $rootScope, $timeout, LxDepthService) {
             const notificationActionWrapper = angular.element('<div/>', {
                 class: 'lx-notification__action',
             });
-            const notificationAction = $compile(`<lx-button lx-emphasis="medium">${actionLabel}</lx-button>`)(
+            const notificationAction = $compile(`<nglx-button lx-emphasis="medium">${actionLabel}</nglx-button>`)(
                 $rootScope,
             );
 

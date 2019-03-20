@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-list-item.html';
 
@@ -78,6 +78,7 @@ function lxListItemDirective() {
         }
 
         if (angular.isDefined(ctrls[1]) && ctrls[1]) {
+            // eslint-disable-next-line prefer-destructuring
             ctrls[0].parentController = ctrls[1];
         }
     }
@@ -88,7 +89,7 @@ function lxListItemDirective() {
         controllerAs: 'lxListItem',
         link,
         replace: true,
-        require: ['lxListItem', '?^lxList'],
+        require: [`${COMPONENT_PREFIX}ListItem`, `?^${COMPONENT_PREFIX}List`],
         restrict: 'E',
         scope: {
             isSelected: '=?lxIsSelected',
@@ -104,7 +105,7 @@ function lxListItemDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.list`).directive('lxListItem', lxListItemDirective);
+angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListItem`, lxListItemDirective);
 
 /////////////////////////////
 

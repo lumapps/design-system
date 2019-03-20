@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiCheck } from 'LumX/icons';
 
@@ -163,7 +163,7 @@ function lxCheckboxDirective() {
         controllerAs: 'lxCheckbox',
         link,
         replace: true,
-        require: ['lxCheckbox', '?ngModel'],
+        require: [`${COMPONENT_PREFIX}Checkbox`, '?ngModel'],
         restrict: 'E',
         scope: {
             theme: '@?lxTheme',
@@ -178,7 +178,7 @@ function lxCheckboxDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.checkbox`).directive('lxCheckbox', lxCheckboxDirective);
+angular.module(`${MODULE_NAME}.checkbox`).directive(`${COMPONENT_PREFIX}Checkbox`, lxCheckboxDirective);
 
 /////////////////////////////
 

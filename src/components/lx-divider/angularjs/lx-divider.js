@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-divider.html';
 
@@ -29,7 +29,7 @@ function lxDividerDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.divider`).directive('lxDivider', lxDividerDirective);
+angular.module(`${MODULE_NAME}.divider`).directive(`${COMPONENT_PREFIX}Divider`, lxDividerDirective);
 
 /////////////////////////////
 

@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-progress-tracker.html';
 
@@ -76,7 +76,9 @@ function lxProgressTrackerDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.progress-tracker`).directive('lxProgressTracker', lxProgressTrackerDirective);
+angular
+    .module(`${MODULE_NAME}.progress-tracker`)
+    .directive(`${COMPONENT_PREFIX}ProgressTracker`, lxProgressTrackerDirective);
 
 /////////////////////////////
 

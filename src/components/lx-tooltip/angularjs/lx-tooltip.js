@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -169,15 +169,15 @@ function lxTooltipDirective() {
         link,
         restrict: 'A',
         scope: {
-            position: '@?lxTooltipPosition',
-            text: '@lxTooltip',
+            position: '@?nglxTooltipPosition',
+            text: '@nglxTooltip',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.tooltip`).directive('lxTooltip', lxTooltipDirective);
+angular.module(`${MODULE_NAME}.tooltip`).directive(`${COMPONENT_PREFIX}Tooltip`, lxTooltipDirective);
 
 /////////////////////////////
 

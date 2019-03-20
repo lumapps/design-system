@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -54,7 +54,7 @@ function lxIconDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.icon`).directive('lxIcon', lxIconDirective);
+angular.module(`${MODULE_NAME}.icon`).directive(`${COMPONENT_PREFIX}Icon`, lxIconDirective);
 
 /////////////////////////////
 

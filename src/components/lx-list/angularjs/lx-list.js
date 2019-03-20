@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './lx-list.html';
 
@@ -160,7 +160,7 @@ function lxListDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.list`).directive('lxList', lxListDirective);
+angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}List`, lxListDirective);
 
 /////////////////////////////
 
