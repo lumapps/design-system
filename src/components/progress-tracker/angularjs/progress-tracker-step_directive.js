@@ -119,11 +119,11 @@ function ProgressTrackerStepDirective() {
         require: [`${COMPONENT_PREFIX}ProgressTrackerStep`, `^${COMPONENT_PREFIX}ProgressTracker`],
         restrict: 'E',
         scope: {
-            hasError: '=?lxHasError',
-            helper: '@?lxHelper',
-            isActive: '=?lxIsActive',
-            isComplete: '=?lxIsComplete',
-            label: '@lxLabel',
+            hasError: '=?lumxHasError',
+            helper: '@?lumxHelper',
+            isActive: '=?lumxIsActive',
+            isComplete: '=?lumxIsComplete',
+            label: '@lumxLabel',
         },
         template,
     };

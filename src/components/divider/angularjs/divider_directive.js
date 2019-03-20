@@ -8,11 +8,11 @@ function DividerDirective() {
     'ngInject';
 
     function link(scope, el, attrs) {
-        if (!attrs.lxTheme) {
+        if (!attrs.lumxTheme) {
             el.addClass(`${COMPONENT_PREFIX}-divider--theme-light`);
         }
 
-        attrs.$observe('lxTheme', (theme) => {
+        attrs.$observe('lumxTheme', (theme) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)divider--theme-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-divider--theme-${theme}`);

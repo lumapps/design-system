@@ -423,12 +423,12 @@ function DropdownDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            closeOnClick: '=?lxCloseOnClick',
-            escapeClose: '=?lxEscapeClose',
-            offset: '@?lxOffset',
-            overToggle: '=?lxOverToggle',
-            position: '@?lxPosition',
-            width: '@?lxWidth',
+            closeOnClick: '=?lumxCloseOnClick',
+            escapeClose: '=?lumxEscapeClose',
+            offset: '@?lumxOffset',
+            overToggle: '=?lumxOverToggle',
+            position: '@?lumxPosition',
+            width: '@?lumxWidth',
         },
         template,
         transclude: {

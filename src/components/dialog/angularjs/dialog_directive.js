@@ -331,9 +331,9 @@ function DialogDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            autoClose: '=?lxAutoClose',
-            escapeClose: '=?lxEscapeClose',
-            size: '@?lxSize',
+            autoClose: '=?lumxAutoClose',
+            escapeClose: '=?lumxEscapeClose',
+            size: '@?lumxSize',
         },
         template,
         transclude: {

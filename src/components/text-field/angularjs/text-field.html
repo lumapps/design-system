@@ -17,8 +17,8 @@
     <div class="lumx-text-field__input-wrapper">
         <lumx-icon
             class="lumx-text-field__input-icon"
-            lx-path="{{ lumx.icon }}"
-            lx-size="xs"
+            lumx-path="{{ lumx.icon }}"
+            lumx-size="xs"
             ng-if="::lumx.icon"
         ></lumx-icon>
 
@@ -26,8 +26,8 @@
 
         <lumx-icon
             class="lumx-text-field__input-validity"
-            lx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
-            lx-size="xs"
+            lumx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
+            lumx-size="xs"
             ng-if="lumx.isValid || lumx.hasError"
         ></lumx-icon>
     </div>

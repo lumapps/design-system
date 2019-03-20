@@ -1,8 +1,8 @@
 <lumx-select
     ng-model="vm.selectModel.selectedPerson"
-    lx-choices="vm.selectPeople"
-    lx-is-clearable="true"
-    lx-label="Lorem Ipsum"
+    lumx-choices="vm.selectPeople"
+    lumx-is-clearable="true"
+    lumx-label="Lorem Ipsum"
 >
     <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
     <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
@@ -10,11 +10,11 @@
 
 <lumx-select
     ng-model="vm.selectModel.selectedPerson"
-    lx-choices="vm.selectPeople"
-    lx-is-clearable="true"
-    lx-is-valid="true"
-    lx-label="Lorem Ipsum"
-    lx-placeholder="Select a value"
+    lumx-choices="vm.selectPeople"
+    lumx-is-clearable="true"
+    lumx-is-valid="true"
+    lumx-label="Lorem Ipsum"
+    lumx-placeholder="Select a value"
 >
     <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
     <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
@@ -22,10 +22,10 @@
 
 <lumx-select
     ng-model="vm.selectModel.selectedPerson"
-    lx-choices="vm.selectPeople"
-    lx-has-error="true"
-    lx-label="Lorem Ipsum"
-    lx-placeholder="Select a value"
+    lumx-choices="vm.selectPeople"
+    lumx-has-error="true"
+    lumx-label="Lorem Ipsum"
+    lumx-placeholder="Select a value"
 >
     <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
     <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
@@ -33,10 +33,10 @@
 
 <lumx-select
     ng-model="vm.selectModel.selectedPeople"
-    lx-choices="vm.selectPeople"
-    lx-label="Lorem Ipsum"
-    lx-multiple="true"
-    lx-placeholder="Select values"
+    lumx-choices="vm.selectPeople"
+    lumx-label="Lorem Ipsum"
+    lumx-multiple="true"
+    lumx-placeholder="Select values"
 >
     <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
     <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
@@ -45,17 +45,17 @@
 <lumx-select
     ng-change="vm.selectCallback()"
     ng-model="vm.selectAjax.selected"
-    lx-choices="vm.selectAjax.list"
-    lx-filter="vm.selectAjax.update(newValue)"
-    lx-has-filter="true"
-    lx-has-helper="!vm.selectAjax.list.length"
-    lx-helper="No results"
-    lx-is-loading="vm.selectAjax.loading"
-    lx-label="Lorem Ipsum"
-    lx-multiple="true"
-    lx-model-to-selection="vm.selectAjax.toSelection(data, callback)"
-    lx-selection-to-model="vm.selectAjax.toModel(data, callback)"
-    lx-placeholder="Select values"
+    lumx-choices="vm.selectAjax.list"
+    lumx-filter="vm.selectAjax.update(newValue)"
+    lumx-has-filter="true"
+    lumx-has-helper="!vm.selectAjax.list.length"
+    lumx-helper="No results"
+    lumx-is-loading="vm.selectAjax.loading"
+    lumx-label="Lorem Ipsum"
+    lumx-multiple="true"
+    lumx-model-to-selection="vm.selectAjax.toSelection(data, callback)"
+    lumx-selection-to-model="vm.selectAjax.toModel(data, callback)"
+    lumx-placeholder="Select values"
 >
     <lumx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</lumx-select-selected>
     <lumx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</lumx-select-choices>

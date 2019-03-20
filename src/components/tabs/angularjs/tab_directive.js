@@ -118,9 +118,9 @@ function TabDirective() {
         require: [`${COMPONENT_PREFIX}Tab`, `^${COMPONENT_PREFIX}Tabs`],
         restrict: 'E',
         scope: {
-            icon: '@?lxIcon',
+            icon: '@?lumxIcon',
             isDisabled: '=?ngDisabled',
-            label: '@?lxLabel',
+            label: '@?lumxLabel',
         },
         template,
         transclude: true,

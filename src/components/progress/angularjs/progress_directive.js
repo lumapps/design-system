@@ -23,7 +23,7 @@ function ProgressDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            variant: '@?lxVariant',
+            variant: '@?lumxVariant',
         },
         template,
     };

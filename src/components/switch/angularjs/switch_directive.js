@@ -155,8 +155,8 @@ function SwitchDirective() {
         require: [`${COMPONENT_PREFIX}Switch`, '?ngModel'],
         restrict: 'E',
         scope: {
-            position: '@?lxPosition',
-            theme: '@?lxTheme',
+            position: '@?lumxPosition',
+            theme: '@?lumxTheme',
         },
         template,
         transclude: {

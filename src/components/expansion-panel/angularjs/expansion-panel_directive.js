@@ -200,12 +200,12 @@ function ExpansionPanelDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            closeCallback: '&?lxCloseCallback',
-            isDraggable: '=?lxIsDraggable',
-            isOpen: '=?lxIsOpen',
-            openCallback: '&?lxOpenCallback',
-            theme: '@?lxTheme',
-            toggleCallback: '&?lxToggleCallback',
+            closeCallback: '&?lumxCloseCallback',
+            isDraggable: '=?lumxIsDraggable',
+            isOpen: '=?lumxIsOpen',
+            openCallback: '&?lumxOpenCallback',
+            theme: '@?lumxTheme',
+            toggleCallback: '&?lumxToggleCallback',
         },
         template,
         transclude: {

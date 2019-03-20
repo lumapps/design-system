@@ -95,9 +95,9 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
             class: `${COMPONENT_PREFIX}-notification__icon`,
         });
         const notificationIcon = $compile(
-            `<${COMPONENT_PREFIX}-icon lx-path="${
+            `<${COMPONENT_PREFIX}-icon lumx-path="${
                 _notificationTypes[type].icon
-            }" lx-size="s"></${COMPONENT_PREFIX}-icon>`,
+            }" lumx-size="s"></${COMPONENT_PREFIX}-icon>`,
         )($rootScope);
 
         const notificationText = angular.element('<span/>', {
@@ -116,7 +116,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
                 class: `${COMPONENT_PREFIX}-notification__action`,
             });
             const notificationAction = $compile(
-                `<${COMPONENT_PREFIX}-button lx-emphasis="medium">${actionLabel}</${COMPONENT_PREFIX}-button>`,
+                `<${COMPONENT_PREFIX}-button lumx-emphasis="medium">${actionLabel}</${COMPONENT_PREFIX}-button>`,
             )($rootScope);
 
             notificationAction.on('click', function onActionCuttonClick(evt) {

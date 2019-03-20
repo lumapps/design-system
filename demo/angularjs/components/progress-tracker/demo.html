@@ -1,10 +1,10 @@
 <lumx-progress-tracker>
     <lumx-progress-tracker-step
-        lx-label="{{ step.label }}"
-        lx-has-error="step.hasError"
-        lx-helper="{{ step.helper }}"
-        lx-is-active="step.isActive"
-        lx-is-complete="step.isComplete"
+        lumx-label="{{ step.label }}"
+        lumx-has-error="step.hasError"
+        lumx-helper="{{ step.helper }}"
+        lumx-is-active="step.isActive"
+        lumx-is-complete="step.isComplete"
         lumx-enter-keypress="vm.setActiveStep($index)"
         ng-click="vm.setActiveStep($index)"
         ng-repeat="step in vm.stepper"

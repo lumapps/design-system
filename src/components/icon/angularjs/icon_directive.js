@@ -27,17 +27,17 @@ function IconDirective() {
     }
 
     function link(scope, el, attrs) {
-        attrs.$observe('lxPath', (path) => {
+        attrs.$observe('lumxPath', (path) => {
             el.find('path').attr('d', path);
         });
 
-        attrs.$observe('lxColor', (color) => {
+        attrs.$observe('lumxColor', (color) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)icon--color-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-icon--color-${color}`);
         });
 
-        attrs.$observe('lxSize', (size) => {
+        attrs.$observe('lumxSize', (size) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)icon--size-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-icon--size-${size}`);

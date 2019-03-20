@@ -92,7 +92,7 @@ function ListItemDirective() {
         require: [`${COMPONENT_PREFIX}ListItem`, `?^${COMPONENT_PREFIX}List`],
         restrict: 'E',
         scope: {
-            isSelected: '=?lxIsSelected',
+            isSelected: '=?lumxIsSelected',
         },
         template,
         transclude: {

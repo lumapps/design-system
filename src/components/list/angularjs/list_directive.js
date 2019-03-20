@@ -4,7 +4,7 @@ import template from './list.html';
 
 /////////////////////////////
 
-function lxListController($element, $scope) {
+function lumxListController($element, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this, no-unused-vars
@@ -146,12 +146,12 @@ function lxListController($element, $scope) {
 function ListDirective() {
     return {
         bindToController: true,
-        controller: lxListController,
+        controller: lumxListController,
         controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
         scope: {
-            isClickable: '=?lxIsClickable',
+            isClickable: '=?lumxIsClickable',
         },
         template,
         transclude: true,

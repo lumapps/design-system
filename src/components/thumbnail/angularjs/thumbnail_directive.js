@@ -15,11 +15,11 @@ function ThumbnailDirective() {
     function getTemplate(el, attrs) {
         let thumbnailClass = `${COMPONENT_PREFIX}-thumbnail`;
 
-        if (!attrs.lxSize) {
+        if (!attrs.lumxSize) {
             thumbnailClass += ` ${COMPONENT_PREFIX}-thumbnail--size-m`;
         }
 
-        if (!attrs.lxVariant) {
+        if (!attrs.lumxVariant) {
             thumbnailClass += ` ${COMPONENT_PREFIX}-thumbnail--variant-squared`;
         }
 
@@ -27,17 +27,17 @@ function ThumbnailDirective() {
     }
 
     function link(scope, el, attrs) {
-        attrs.$observe('lxImage', (newImage) => {
+        attrs.$observe('lumxImage', (newImage) => {
             el.css('background-image', `url(${newImage})`);
         });
 
-        attrs.$observe('lxSize', (size) => {
+        attrs.$observe('lumxSize', (size) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)thumbnail--size-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-thumbnail--size-${size}`);
         });
 
-        attrs.$observe('lxVariant', (variant) => {
+        attrs.$observe('lumxVariant', (variant) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)thumbnail--variant-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-thumbnail--variant-${variant}`);

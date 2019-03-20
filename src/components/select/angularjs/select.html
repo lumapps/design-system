@@ -47,14 +47,14 @@
                 ng-if="!lumx.isModelEmpty() && lumx.multiple"
             >
                 <lumx-chip
-                    lx-on-click="lumx.select(selected, $event)"
-                    lx-size="s"
-                    lx-theme="{{ lumx.theme === 'dark' ? 'dark' : 'light' }}"
+                    lumx-on-click="lumx.select(selected, $event)"
+                    lumx-size="s"
+                    lumx-theme="{{ lumx.theme === 'dark' ? 'dark' : 'light' }}"
                     ng-disabled="lumx.isDisabled"
                 >
                     <lumx-chip-label ng-bind-html="lumx.displaySelected(selected)"></lumx-chip-label>
                     <lumx-chip-after
-                        ><lumx-icon lx-path="{{ lumx.icons.mdiClose }}" lx-size="xxs"></lumx-icon
+                        ><lumx-icon lumx-path="{{ lumx.icons.mdiClose }}" lumx-size="xxs"></lumx-icon
                     ></lumx-chip-after>
                 </lumx-chip>
             </div>
@@ -62,8 +62,8 @@
 
         <div class="lumx-select__input-validity" ng-if="lumx.isValid || lumx.hasError">
             <lumx-icon
-                lx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
-                lx-size="xs"
+                lumx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
+                lumx-size="xs"
             ></lumx-icon>
         </div>
 
@@ -72,21 +72,21 @@
             ng-if="lumx.isClearable && !lumx.multiple && !lumx.isModelEmpty()"
             ng-click="lumx.clearModel($event)"
         >
-            <lumx-icon lx-path="{{ lumx.icons.mdiCloseCircle }}" lx-size="xs"></lumx-icon>
+            <lumx-icon lumx-path="{{ lumx.icons.mdiCloseCircle }}" lumx-size="xs"></lumx-icon>
         </div>
 
         <div class="lumx-select__input-indicator">
-            <lumx-icon lx-path="{{ lumx.icons.mdiMenuDown }}" lx-size="s"></lumx-icon>
+            <lumx-icon lumx-path="{{ lumx.icons.mdiMenuDown }}" lumx-size="s"></lumx-icon>
         </div>
     </div>
 
     <lumx-chip
         id="{{ lumx.targetUuid }}"
-        lx-has-dropdown-indicator="lumx.isModelEmpty()"
-        lx-on-click="lumx.openDropdown()"
-        lx-on-after-click="lumx.clearModel()"
-        lx-is-active="!lumx.isModelEmpty()"
-        lx-theme="{{ lumx.theme }}"
+        lumx-has-dropdown-indicator="lumx.isModelEmpty()"
+        lumx-on-click="lumx.openDropdown()"
+        lumx-on-after-click="lumx.clearModel()"
+        lumx-is-active="!lumx.isModelEmpty()"
+        lumx-theme="{{ lumx.theme }}"
         ng-focus="lumx.enableKeyEvents()"
         ng-blur="lumx.disableKeyEvents()"
         ng-if="lumx.variant === 'chip'"
@@ -104,16 +104,16 @@
 
         <lumx-chip-after>
             <lumx-icon
-                lx-path="{{ lumx.isModelEmpty() ? lumx.icons.mdiMenuDown : lumx.icons.mdiCloseCircle }}"
-                lx-size="xs"
+                lumx-path="{{ lumx.isModelEmpty() ? lumx.icons.mdiMenuDown : lumx.icons.mdiCloseCircle }}"
+                lumx-size="xs"
             ></lumx-icon>
         </lumx-chip-after>
     </lumx-chip>
 
-    <lumx-dropdown lx-position="left" lx-width="100%" id="{{ lumx.dropdownUuid }}">
+    <lumx-dropdown lumx-position="left" lumx-width="100%" id="{{ lumx.dropdownUuid }}">
         <lumx-dropdown-menu>
             <div class="lumx-select__filter" ng-if="::lumx.hasFilter">
-                <lumx-icon lx-path="{{ lumx.icons.mdiMagnify }}" lx-size="xs"></lumx-icon>
+                <lumx-icon lumx-path="{{ lumx.icons.mdiMagnify }}" lumx-size="xs"></lumx-icon>
 
                 <input
                     type="text"
@@ -129,9 +129,9 @@
                 <lumx-progress></lumx-progress>
             </div>
 
-            <lumx-list lumx-focus-on-init lx-is-clickable="true" ng-if="!lumx.isLoading">
+            <lumx-list lumx-focus-on-init lumx-is-clickable="true" ng-if="!lumx.isLoading">
                 <lumx-list-item
-                    lx-is-selected="lumx.isSelected(choice)"
+                    lumx-is-selected="lumx.isSelected(choice)"
                     ng-repeat="choice in lumx.choices | lumxSelectChoicesFilter:lumx.filter:lumx.filterModel"
                     ng-click="lumx.select(choice, $event)"
                     lumx-enter-keypress="lumx.select(choice, $event)"

@@ -28,7 +28,7 @@ function ButtonDirective() {
      * @return {string}  The button html template.
      */
     function getTemplate(el, attrs) {
-        const isDefaultEmphasis = !attrs.lxEmphasis || attrs.lxEmphasis === 'high';
+        const isDefaultEmphasis = !attrs.lumxEmphasis || attrs.lumxEmphasis === 'high';
 
         const defaultProps = {
             color: isDefaultEmphasis ? 'primary' : 'dark',
@@ -40,23 +40,23 @@ function ButtonDirective() {
 
         let buttonClass = `${COMPONENT_PREFIX}-button`;
 
-        if (!attrs.lxColor) {
+        if (!attrs.lumxColor) {
             buttonClass += ` ${COMPONENT_PREFIX}-button--color-${defaultProps.color}`;
         }
 
-        if (!attrs.lxEmphasis) {
+        if (!attrs.lumxEmphasis) {
             buttonClass += ` ${COMPONENT_PREFIX}-button--emphasis-${defaultProps.emphasis}`;
         }
 
-        if (!attrs.lxSize) {
+        if (!attrs.lumxSize) {
             buttonClass += ` ${COMPONENT_PREFIX}-button--size-${defaultProps.size}`;
         }
 
-        if (!attrs.lxTheme && isDefaultEmphasis) {
+        if (!attrs.lumxTheme && isDefaultEmphasis) {
             buttonClass += ` ${COMPONENT_PREFIX}-button--theme-${defaultProps.theme}`;
         }
 
-        if (!attrs.lxVariant) {
+        if (!attrs.lumxVariant) {
             buttonClass += ` ${COMPONENT_PREFIX}-button--variant-${defaultProps.variant}`;
         }
 
@@ -68,7 +68,7 @@ function ButtonDirective() {
     }
 
     function link(scope, el, attrs) {
-        if (!attrs.lxVariant || attrs.lxVariant === 'button') {
+        if (!attrs.lumxVariant || attrs.lumxVariant === 'button') {
             const leftIcon = el.find('i:first-child');
             const rightIcon = el.find('i:last-child');
             const label = el.find('span');
@@ -86,39 +86,39 @@ function ButtonDirective() {
             }
         }
 
-        attrs.$observe('lxColor', (color) => {
+        attrs.$observe('lumxColor', (color) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)button--color-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-button--color-${color}`);
         });
 
-        attrs.$observe('lxEmphasis', (emphasis) => {
+        attrs.$observe('lumxEmphasis', (emphasis) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)button--emphasis-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-button--emphasis-${emphasis}`);
         });
 
-        attrs.$observe('lxSize', (size) => {
+        attrs.$observe('lumxSize', (size) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)button--size-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-button--size-${size}`);
         });
 
-        attrs.$observe('lxTheme', (theme) => {
-            if (!attrs.lxEmphasis || attrs.lxEmphasis === 'high') {
+        attrs.$observe('lumxTheme', (theme) => {
+            if (!attrs.lumxEmphasis || attrs.lumxEmphasis === 'high') {
                 el.removeClass((index, className) => {
                     return (className.match(/(^|\s)button--theme-\S+/g) || []).join(' ');
                 }).addClass(`${COMPONENT_PREFIX}-button--theme-${theme}`);
             }
         });
 
-        attrs.$observe('lxVariant', (variant) => {
+        attrs.$observe('lumxVariant', (variant) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)button--variant-\S+/g) || []).join(' ');
             }).addClass(`${COMPONENT_PREFIX}-button--variant-${variant}`);
         });
 
-        scope.$watch(attrs.lxIsSelected, (isSelected) => {
+        scope.$watch(attrs.lumxIsSelected, (isSelected) => {
             if (isSelected) {
                 el.addClass(`${COMPONENT_PREFIX}-button--is-selected`);
             } else {

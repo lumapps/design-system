@@ -18,7 +18,7 @@
             lumx-enter-keypress="lumx.setActiveTab(tab)"
             tabindex="{{ tab.isDisabled ? -1 : 0 }}"
         >
-            <lumx-icon lx-path="{{ tab.icon }}" lx-size="xs" ng-if="tab.icon"></lumx-icon>
+            <lumx-icon lumx-path="{{ tab.icon }}" lumx-size="xs" ng-if="tab.icon"></lumx-icon>
             <span ng-if="tab.label">{{ tab.label }}</span>
         </a>
     </div>

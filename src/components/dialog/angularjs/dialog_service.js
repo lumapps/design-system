@@ -25,7 +25,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
         alertDialogScope.cb = params.cb;
 
         const compiledAlertDialog = $compile(
-            `<${COMPONENT_PREFIX}-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
+            `<${COMPONENT_PREFIX}-dialog id="${alertDialogId}" lumx-size="s" lumx-auto-close="false" lumx-escape-close="false">
                     <${COMPONENT_PREFIX}-dialog-header>
                         <${COMPONENT_PREFIX}-toolbar>
                             <${COMPONENT_PREFIX}-toolbar-label>
@@ -76,7 +76,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
         confirmDialogScope.cb = params.cb;
 
         const compiledConfirmDialog = $compile(
-            `<${COMPONENT_PREFIX}-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
+            `<${COMPONENT_PREFIX}-dialog id="${confirmDialogId}" lumx-size="s" lumx-auto-close="false" lumx-escape-close="false">
                     <${COMPONENT_PREFIX}-dialog-header>
                         <${COMPONENT_PREFIX}-toolbar>
                             <${COMPONENT_PREFIX}-toolbar-label>
@@ -91,7 +91,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                     </${COMPONENT_PREFIX}-dialog-content>
                     <${COMPONENT_PREFIX}-dialog-footer>
                         <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
-                            <${COMPONENT_PREFIX}-button lx-emphasis="medium" ng-click="cb(false)" ${COMPONENT_PREFIX}-dialog-close>
+                            <${COMPONENT_PREFIX}-button lumx-emphasis="medium" ng-click="cb(false)" ${COMPONENT_PREFIX}-dialog-close>
                                 ${params.buttons.cancel}
                             </${COMPONENT_PREFIX}-button>
                             <${COMPONENT_PREFIX}-button class="ml" ng-click="cb(true)" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
