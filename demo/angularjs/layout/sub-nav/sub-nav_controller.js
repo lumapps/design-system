@@ -55,10 +55,10 @@ function SubNavController(Theme, Themes) {
     }
 
     /**
-     * Convert the theme value to the theme object usable in the LxSelect.
+     * Convert the theme value to the theme object usable in the select.
      *
      * @param  {string} theme The theme to convert.
-     * @return {Object} The theme object for the LxSelect.
+     * @return {Object} The theme object for the select.
      */
     function themeToThemeObject(theme) {
         return {
