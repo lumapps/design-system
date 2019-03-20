@@ -4,7 +4,7 @@ import template from './lx-tab.html';
 
 /////////////////////////////
 
-function lxTabController($scope, LxUtilsService) {
+function lxTabController($scope, NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -64,7 +64,7 @@ function lxTabController($scope, LxUtilsService) {
             icon: lxTab.icon,
             index: tabIndex,
             label: lxTab.label,
-            uuid: LxUtilsService.generateUUID(),
+            uuid: NglxUtilsService.generateUUID(),
         };
 
         _parentController.addTab(lxTab.tab);

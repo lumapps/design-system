@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -100,7 +100,7 @@ function LxDropdownService($rootScope) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dropdown`).service('LxDropdownService', LxDropdownService);
+angular.module(`${MODULE_NAME}.dropdown`).service(`${SERVICE_PREFIX}DropdownService`, LxDropdownService);
 
 /////////////////////////////
 

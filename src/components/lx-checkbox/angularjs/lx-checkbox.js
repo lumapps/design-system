@@ -6,7 +6,7 @@ import template from './lx-checkbox.html';
 
 /////////////////////////////
 
-function lxCheckboxController(LxUtilsService) {
+function lxCheckboxController(NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -36,7 +36,7 @@ function lxCheckboxController(LxUtilsService) {
      *
      * @type {string}
      */
-    lxCheckbox.checkboxId = LxUtilsService.generateUUID();
+    lxCheckbox.checkboxId = NglxUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.

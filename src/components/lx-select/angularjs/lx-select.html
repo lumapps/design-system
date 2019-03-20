@@ -132,12 +132,12 @@
                 <nglx-progress></nglx-progress>
             </div>
 
-            <nglx-list lx-focus-on-init lx-is-clickable="true" ng-if="!lxSelect.isLoading">
+            <nglx-list nglx-focus-on-init lx-is-clickable="true" ng-if="!lxSelect.isLoading">
                 <nglx-list-item
                     lx-is-selected="lxSelect.isSelected(choice)"
                     ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
                     ng-click="lxSelect.select(choice, $event)"
-                    lx-enter-keypress="lxSelect.select(choice, $event)"
+                    nglx-enter-keypress="lxSelect.select(choice, $event)"
                 >
                     <nglx-list-item-content ng-bind-html="lxSelect.displayChoice(choice)"></nglx-list-item-content>
                 </nglx-list-item>

@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -26,7 +26,9 @@ function lxEnterKeypressDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.enter-keypress`).directive('lxEnterKeypress', lxEnterKeypressDirective);
+angular
+    .module(`${MODULE_NAME}.utils.enter-keypress`)
+    .directive(`${COMPONENT_PREFIX}EnterKeypress`, lxEnterKeypressDirective);
 
 /////////////////////////////
 

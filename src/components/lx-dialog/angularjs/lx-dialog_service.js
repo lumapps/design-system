@@ -1,8 +1,8 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
-function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
+function LxDialogService($compile, $rootScope, $timeout, NglxUtilsService) {
     'ngInject';
 
     const service = this;
@@ -19,33 +19,33 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
      * @param {Object} params An object that holds title, text, button label, callback and source parameters.
      */
     function alertDialog(params) {
-        const alertDialogId = LxUtilsService.generateUUID();
+        const alertDialogId = NglxUtilsService.generateUUID();
         const alertDialogScope = $rootScope.$new(true);
 
         alertDialogScope.cb = params.cb;
 
         const compiledAlertDialog = $compile(
-            `<nglx-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
-                    <nglx-dialog-header>
-                        <nglx-toolbar>
-                            <nglx-toolbar-label>
+            `<${COMPONENT_PREFIX}-dialog id="${alertDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
+                    <${COMPONENT_PREFIX}-dialog-header>
+                        <${COMPONENT_PREFIX}-toolbar>
+                            <${COMPONENT_PREFIX}-toolbar-label>
                                 <span class="lx-typography-title">${params.title}</span>
-                            </nglx-toolbar-label>
-                        </nglx-toolbar>
-                    </nglx-dialog-header>
-                    <nglx-dialog-content>
+                            </${COMPONENT_PREFIX}-toolbar-label>
+                        </${COMPONENT_PREFIX}-toolbar>
+                    </${COMPONENT_PREFIX}-dialog-header>
+                    <${COMPONENT_PREFIX}-dialog-content>
                         <div class="ph++ pb+">
                             <p>${params.text}</p>
                         </div>
-                    </nglx-dialog-content>
-                    <nglx-dialog-footer>
+                    </${COMPONENT_PREFIX}-dialog-content>
+                    <${COMPONENT_PREFIX}-dialog-footer>
                         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
-                            <nglx-button ng-click="cb()" nglx-dialog-close lx-focus-on-init>${
-                                params.buttons.ok
-                            }</nglx-button>
+                            <${COMPONENT_PREFIX}-button ng-click="cb()" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
+                                ${params.buttons.ok}
+                            </${COMPONENT_PREFIX}-button>
                         </div>
-                    </nglx-dialog-footer>
-                </nglx-dialog>`,
+                    </${COMPONENT_PREFIX}-dialog-footer>
+                </${COMPONENT_PREFIX}-dialog>`,
         )(alertDialogScope);
 
         angular.element('body').append(compiledAlertDialog);
@@ -70,36 +70,36 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
      * @param {Object} params An object that holds title, text, button labels, callback and source parameters.
      */
     function confirmDialog(params) {
-        const confirmDialogId = LxUtilsService.generateUUID();
+        const confirmDialogId = NglxUtilsService.generateUUID();
         const confirmDialogScope = $rootScope.$new(true);
 
         confirmDialogScope.cb = params.cb;
 
         const compiledConfirmDialog = $compile(
-            `<nglx-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
-                    <nglx-dialog-header>
-                        <nglx-toolbar>
-                            <nglx-toolbar-label>
+            `<${COMPONENT_PREFIX}-dialog id="${confirmDialogId}" lx-size="s" lx-auto-close="false" lx-escape-close="false">
+                    <${COMPONENT_PREFIX}-dialog-header>
+                        <${COMPONENT_PREFIX}-toolbar>
+                            <${COMPONENT_PREFIX}-toolbar-label>
                                 <span class="lx-typography-title">${params.title}</span>
-                            </nglx-toolbar-label>
-                        </nglx-toolbar>
-                    </nglx-dialog-header>
-                    <nglx-dialog-content>
+                            </${COMPONENT_PREFIX}-toolbar-label>
+                        </${COMPONENT_PREFIX}-toolbar>
+                    </${COMPONENT_PREFIX}-dialog-header>
+                    <${COMPONENT_PREFIX}-dialog-content>
                         <div class="ph++ pb+">
                             <p>${params.text}</p>
                         </div>
-                    </nglx-dialog-content>
-                    <nglx-dialog-footer>
+                    </${COMPONENT_PREFIX}-dialog-content>
+                    <${COMPONENT_PREFIX}-dialog-footer>
                         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
-                            <nglx-button lx-emphasis="medium" ng-click="cb(false)" nglx-dialog-close>
+                            <${COMPONENT_PREFIX}-button lx-emphasis="medium" ng-click="cb(false)" ${COMPONENT_PREFIX}-dialog-close>
                                 ${params.buttons.cancel}
-                            </nglx-button>
-                            <nglx-button class="ml" ng-click="cb(true)" nglx-dialog-close lx-focus-on-init>
+                            </${COMPONENT_PREFIX}-button>
+                            <${COMPONENT_PREFIX}-button class="ml" ng-click="cb(true)" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
                                 ${params.buttons.ok}
-                            </nglx-button>
+                            </${COMPONENT_PREFIX}-button>
                         </div>
-                    </nglx-dialog-footer>
-                </nglx-dialog>`,
+                    </${COMPONENT_PREFIX}-dialog-footer>
+                </${COMPONENT_PREFIX}-dialog>`,
         )(confirmDialogScope);
 
         angular.element('body').append(compiledConfirmDialog);
@@ -129,7 +129,7 @@ function LxDialogService($compile, $rootScope, $timeout, LxUtilsService) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).service('LxDialogService', LxDialogService);
+angular.module(`${MODULE_NAME}.dialog`).service(`${SERVICE_PREFIX}DialogService`, LxDialogService);
 
 /////////////////////////////
 

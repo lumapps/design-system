@@ -5,7 +5,7 @@
         lx-helper="{{ step.helper }}"
         lx-is-active="step.isActive"
         lx-is-complete="step.isComplete"
-        lx-enter-keypress="vm.setActiveStep($index)"
+        nglx-enter-keypress="vm.setActiveStep($index)"
         ng-click="vm.setActiveStep($index)"
         ng-repeat="step in vm.stepper"
     ></nglx-progress-tracker-step>

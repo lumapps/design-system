@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -18,7 +18,9 @@ function lxFocusOnInitDirective($timeout) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.focus-on-init`).directive('lxFocusOnInit', lxFocusOnInitDirective);
+angular
+    .module(`${MODULE_NAME}.utils.focus-on-init`)
+    .directive(`${COMPONENT_PREFIX}FocusOnInit`, lxFocusOnInitDirective);
 
 /////////////////////////////
 

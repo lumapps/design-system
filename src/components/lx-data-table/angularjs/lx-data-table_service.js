@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -83,7 +83,7 @@ function LxDataTableService($rootScope) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.data-table`).service('LxDataTableService', LxDataTableService);
+angular.module(`${MODULE_NAME}.data-table`).service(`${SERVICE_PREFIX}DataTableService`, LxDataTableService);
 
 /////////////////////////////
 

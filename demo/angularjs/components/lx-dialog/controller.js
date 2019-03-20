@@ -1,4 +1,4 @@
-function DemoDialogController($scope, LxDialogService, LxNotificationService) {
+function DemoDialogController($scope, NglxDialogService, LxNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -98,7 +98,7 @@ function DemoDialogController($scope, LxDialogService, LxNotificationService) {
      * Display an alert dialog.
      */
     function alertDialog() {
-        LxDialogService.alert({
+        NglxDialogService.alert({
             cb: function onAnswer() {
                 LxNotificationService.info('Alert callback');
             },
@@ -116,7 +116,7 @@ function DemoDialogController($scope, LxDialogService, LxNotificationService) {
      * Display a confirm dialog.
      */
     function confirmDialog() {
-        LxDialogService.confirm({
+        NglxDialogService.confirm({
             cb: function onAnswer(answer) {
                 if (answer) {
                     LxNotificationService.success('Agree');
@@ -139,7 +139,7 @@ function DemoDialogController($scope, LxDialogService, LxNotificationService) {
      * Open the default dialog.
      */
     function openDialog() {
-        LxDialogService.open(vm.dialogId, {
+        NglxDialogService.open(vm.dialogId, {
             source: '#default-dialog-source',
         });
     }

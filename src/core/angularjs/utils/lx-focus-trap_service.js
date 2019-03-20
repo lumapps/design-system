@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -43,6 +43,7 @@ function LxFocusTrapService() {
                 'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select, [tabindex]:not([tabindex="-1"])',
             );
 
+            // eslint-disable-next-line prefer-destructuring
             const firstFocusableEl = focusableEls[0];
             const lastFocusableEl = focusableEls[focusableEls.length - 1];
 
@@ -65,7 +66,7 @@ function LxFocusTrapService() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.focus-trap`).service('LxFocusTrapService', LxFocusTrapService);
+angular.module(`${MODULE_NAME}.utils.focus-trap`).service(`${SERVICE_PREFIX}FocusTrapService`, LxFocusTrapService);
 
 /////////////////////////////
 

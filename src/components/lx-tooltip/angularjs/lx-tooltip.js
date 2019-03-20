@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxTooltipController($element, $timeout, LxDepthService) {
+function lxTooltipController($element, $timeout, NglxDepthService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -132,11 +132,11 @@ function lxTooltipController($element, $timeout, LxDepthService) {
             text: lxTooltip.text,
         });
 
-        LxDepthService.increase();
+        NglxDepthService.increase();
 
         _tooltip
             .append(_tooltipLabel)
-            .css('z-index', LxDepthService.get())
+            .css('z-index', NglxDepthService.get())
             .appendTo('body');
 
         _hoverTimeout = $timeout(_setTooltipPosition, _HOVER_DELAY);

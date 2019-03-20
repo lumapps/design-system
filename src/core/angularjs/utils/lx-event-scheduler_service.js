@@ -1,8 +1,8 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
-function LxEventSchedulerService($document, LxUtilsService) {
+function LxEventSchedulerService($document, NglxUtilsService) {
     'ngInject';
 
     const service = this;
@@ -75,7 +75,7 @@ function LxEventSchedulerService($document, LxUtilsService) {
             eventName,
         };
 
-        const id = LxUtilsService.generateUUID();
+        const id = NglxUtilsService.generateUUID();
         _handlers[id] = handler;
 
         if (angular.isUndefined(_schedule[eventName])) {
@@ -127,7 +127,9 @@ function LxEventSchedulerService($document, LxUtilsService) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.event-scheduler`).service('LxEventSchedulerService', LxEventSchedulerService);
+angular
+    .module(`${MODULE_NAME}.utils.event-scheduler`)
+    .service(`${SERVICE_PREFIX}EventSchedulerService`, LxEventSchedulerService);
 
 /////////////////////////////
 

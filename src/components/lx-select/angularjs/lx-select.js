@@ -6,7 +6,7 @@ import template from './lx-select.html';
 
 /////////////////////////////
 
-function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxDropdownService, LxUtilsService) {
+function lxSelectController($document, $interpolate, $sce, $scope, $timeout, NglxDropdownService, NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -75,7 +75,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      *
      * @type {string}
      */
-    lxSelect.dropdownUuid = LxUtilsService.generateUUID();
+    lxSelect.dropdownUuid = NglxUtilsService.generateUUID();
 
     /**
      * The filter model.
@@ -103,7 +103,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      *
      * @type {string}
      */
-    lxSelect.targetUuid = LxUtilsService.generateUUID();
+    lxSelect.targetUuid = NglxUtilsService.generateUUID();
 
     /**
      * The model view value.
@@ -255,7 +255,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      * Close the dropdown menu.
      */
     function closeDropdown() {
-        LxDropdownService.close(lxSelect.dropdownUuid);
+        NglxDropdownService.close(lxSelect.dropdownUuid);
     }
 
     /**
@@ -337,7 +337,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
      * Open the dropdown menu on input wrapper click.
      */
     function openDropdown() {
-        LxDropdownService.open(lxSelect.dropdownUuid, { target: `#${lxSelect.targetUuid}` });
+        NglxDropdownService.open(lxSelect.dropdownUuid, { target: `#${lxSelect.targetUuid}` });
     }
 
     /**
@@ -386,7 +386,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, LxD
 
         if (lxSelect.multiple) {
             $timeout(() => {
-                LxDropdownService.updateActiveDropdownPosition();
+                NglxDropdownService.updateActiveDropdownPosition();
             });
         }
     }

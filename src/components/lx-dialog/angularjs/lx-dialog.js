@@ -9,9 +9,9 @@ function lxDialogController(
     $rootScope,
     $scope,
     $timeout,
-    LxDepthService,
-    LxEventSchedulerService,
-    LxFocusTrapService,
+    NglxDepthService,
+    NglxEventSchedulerService,
+    NglxFocusTrapService,
 ) {
     'ngInject';
 
@@ -161,7 +161,7 @@ function lxDialogController(
         }
 
         if (angular.isDefined(_idEventScheduler)) {
-            LxEventSchedulerService.unregister(_idEventScheduler);
+            NglxEventSchedulerService.unregister(_idEventScheduler);
             _idEventScheduler = undefined;
         }
 
@@ -215,10 +215,10 @@ function lxDialogController(
             return;
         }
 
-        LxDepthService.increase();
+        NglxDepthService.increase();
 
         _dialogFilter
-            .css('z-index', LxDepthService.get())
+            .css('z-index', NglxDepthService.get())
             .appendTo('body')
             .show();
 
@@ -229,11 +229,11 @@ function lxDialogController(
         }
 
         if (angular.isUndefined(lxDialog.escapeClose) || lxDialog.escapeClose) {
-            _idEventScheduler = LxEventSchedulerService.register('keyup', _onKeyUp);
+            _idEventScheduler = NglxEventSchedulerService.register('keyup', _onKeyUp);
         }
 
         _dialog
-            .css('z-index', LxDepthService.get() + 1)
+            .css('z-index', NglxDepthService.get() + 1)
             .appendTo('body')
             .show();
 
@@ -241,7 +241,7 @@ function lxDialogController(
             $rootScope.$broadcast('lx-dialog__open-start', lxDialog.id, params);
 
             lxDialog.isOpen = true;
-            LxFocusTrapService.activate(_dialog);
+            NglxFocusTrapService.activate(_dialog);
 
             $timeout(function onDialogContentDisplay() {
                 _dialogContent = _dialog.find('.lx-dialog__content');

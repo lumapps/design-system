@@ -9,10 +9,10 @@ function lxDropdownController(
     $scope,
     $timeout,
     $window,
-    LxDepthService,
-    LxDropdownService,
-    LxEventSchedulerService,
-    LxUtilsService,
+    NglxDepthService,
+    NglxDropdownService,
+    NglxEventSchedulerService,
+    NglxUtilsService,
 ) {
     'ngInject';
 
@@ -100,7 +100,7 @@ function lxDropdownController(
      *
      * @type {string}
      */
-    lxDropdown.uuid = LxUtilsService.generateUUID();
+    lxDropdown.uuid = NglxUtilsService.generateUUID();
 
     /////////////////////////////
     //                         //
@@ -113,7 +113,7 @@ function lxDropdownController(
      */
     function _onDocumentClick() {
         if (angular.isUndefined(lxDropdown.closeOnClick) || lxDropdown.closeOnClick) {
-            LxDropdownService.closeActiveDropdown();
+            NglxDropdownService.closeActiveDropdown();
         }
     }
 
@@ -123,15 +123,15 @@ function lxDropdownController(
     function _close() {
         lxDropdown.isOpen = false;
 
-        LxDropdownService.resetActiveDropdownId();
+        NglxDropdownService.resetActiveDropdownId();
 
-        LxUtilsService.restoreBodyScroll();
+        NglxUtilsService.restoreBodyScroll();
 
         $timeout(() => {
             _menuEl.removeAttr('style').insertAfter(_toggleEl);
 
             if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
-                LxEventSchedulerService.unregister(_idEventScheduler);
+                NglxEventSchedulerService.unregister(_idEventScheduler);
                 _idEventScheduler = undefined;
             }
 
@@ -259,7 +259,7 @@ function lxDropdownController(
      */
     function _onKeyUp(evt) {
         if (evt.keyCode === _ESCAPE_KEY_CODE) {
-            LxDropdownService.closeActiveDropdown();
+            NglxDropdownService.closeActiveDropdown();
         }
 
         evt.stopPropagation();
@@ -269,23 +269,23 @@ function lxDropdownController(
      * Open dropdown.
      */
     function _open() {
-        LxDropdownService.closeActiveDropdown();
-        LxDropdownService.registerActiveDropdownId(lxDropdown.uuid);
+        NglxDropdownService.closeActiveDropdown();
+        NglxDropdownService.registerActiveDropdownId(lxDropdown.uuid);
 
         if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
-            _idEventScheduler = LxEventSchedulerService.register('keyup', _onKeyUp);
+            _idEventScheduler = NglxEventSchedulerService.register('keyup', _onKeyUp);
         }
 
-        LxDepthService.increase();
+        NglxDepthService.increase();
 
-        _menuEl.appendTo('body').css('z-index', LxDepthService.get());
+        _menuEl.appendTo('body').css('z-index', NglxDepthService.get());
 
         $timeout(() => {
             _initHorizontalPosition();
             _initVerticalPosition();
 
             lxDropdown.isOpen = true;
-            LxUtilsService.disableBodyScroll();
+            NglxUtilsService.disableBodyScroll();
 
             $document.on('click keydown keypress', _onDocumentClick);
         });
@@ -335,7 +335,7 @@ function lxDropdownController(
         }
 
         if (lxDropdown.isOpen) {
-            LxDropdownService.closeActiveDropdown();
+            NglxDropdownService.closeActiveDropdown();
         } else {
             _open();
         }
@@ -390,7 +390,7 @@ function lxDropdownController(
      * Update the active dropdown position.
      */
     $scope.$on('lx-dropdown__update', () => {
-        if (LxDropdownService.isOpen(lxDropdown.uuid)) {
+        if (NglxDropdownService.isOpen(lxDropdown.uuid)) {
             _initHorizontalPosition();
             _initVerticalPosition();
         }
