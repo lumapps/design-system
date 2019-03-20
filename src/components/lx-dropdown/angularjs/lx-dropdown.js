@@ -17,7 +17,7 @@ function DropdownController(
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxDropdown = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -86,21 +86,21 @@ function DropdownController(
      *
      * @type {boolean}
      */
-    lxDropdown.hasToggle = false;
+    lumx.hasToggle = false;
 
     /**
      * Whether the dropdown is open or not.
      *
      * @type {boolean}
      */
-    lxDropdown.isOpen = false;
+    lumx.isOpen = false;
 
     /**
      * The dropdown uuid.
      *
      * @type {string}
      */
-    lxDropdown.uuid = NglxUtilsService.generateUUID();
+    lumx.uuid = NglxUtilsService.generateUUID();
 
     /////////////////////////////
     //                         //
@@ -112,7 +112,7 @@ function DropdownController(
      * Close dropdown on document click.
      */
     function _onDocumentClick() {
-        if (angular.isUndefined(lxDropdown.closeOnClick) || lxDropdown.closeOnClick) {
+        if (angular.isUndefined(lumx.closeOnClick) || lumx.closeOnClick) {
             NglxDropdownService.closeActiveDropdown();
         }
     }
@@ -121,7 +121,7 @@ function DropdownController(
      * Close dropdown.
      */
     function _close() {
-        lxDropdown.isOpen = false;
+        lumx.isOpen = false;
 
         NglxDropdownService.resetActiveDropdownId();
 
@@ -130,7 +130,7 @@ function DropdownController(
         $timeout(() => {
             _menuEl.removeAttr('style').insertAfter(_toggleEl);
 
-            if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
+            if (angular.isUndefined(lumx.escapeClose) || lumx.escapeClose) {
                 NglxEventSchedulerService.unregister(_idEventScheduler);
                 _idEventScheduler = undefined;
             }
@@ -158,7 +158,7 @@ function DropdownController(
             height: $window.innerHeight,
         };
 
-        if (lxDropdown.overToggle) {
+        if (lumx.overToggle) {
             availaibleHeight.above = toggleProps.top;
             availaibleHeight.below = windowProps.height - toggleProps.top;
         } else {
@@ -184,21 +184,21 @@ function DropdownController(
             width: $window.innerWidth,
         };
 
-        if (angular.isDefined(lxDropdown.width)) {
-            if (lxDropdown.width.indexOf('%') > -1) {
+        if (angular.isDefined(lumx.width)) {
+            if (lumx.width.indexOf('%') > -1) {
                 // eslint-disable-next-line no-magic-numbers
-                menuProps.minWidth = toggleProps.width * (lxDropdown.width.slice(0, -1) / 100);
+                menuProps.minWidth = toggleProps.width * (lumx.width.slice(0, -1) / 100);
             } else {
-                menuProps.width = lxDropdown.width;
+                menuProps.width = lumx.width;
             }
         } else {
             menuProps.width = 'auto';
         }
 
-        if (lxDropdown.position === 'left') {
+        if (lumx.position === 'left') {
             menuProps.left = toggleProps.left;
             menuProps.right = 'auto';
-        } else if (lxDropdown.position === 'right') {
+        } else if (lumx.position === 'right') {
             menuProps.left = 'auto';
             menuProps.right = windowProps.width - toggleProps.width - toggleProps.left;
         }
@@ -230,20 +230,20 @@ function DropdownController(
         };
 
         if (availaibleHeight.below > availaibleHeight.above) {
-            if (lxDropdown.overToggle) {
+            if (lumx.overToggle) {
                 menuProps.top = availaibleHeight.above;
                 menuProps.maxHeight = availaibleHeight.below;
             } else {
                 // eslint-disable-next-line no-bitwise
-                menuProps.top = availaibleHeight.above + _toggleEl.outerHeight() + ~~lxDropdown.offset;
+                menuProps.top = availaibleHeight.above + _toggleEl.outerHeight() + ~~lumx.offset;
                 menuProps.maxHeight = availaibleHeight.below;
             }
-        } else if (lxDropdown.overToggle) {
+        } else if (lumx.overToggle) {
             menuProps.bottom = windowProps.height - availaibleHeight.above - _toggleEl.outerHeight();
             menuProps.maxHeight = availaibleHeight.above + _toggleEl.outerHeight();
         } else {
             // eslint-disable-next-line no-bitwise
-            menuProps.bottom = windowProps.height - availaibleHeight.above + ~~lxDropdown.offset;
+            menuProps.bottom = windowProps.height - availaibleHeight.above + ~~lumx.offset;
             menuProps.maxHeight = availaibleHeight.above;
         }
 
@@ -270,9 +270,9 @@ function DropdownController(
      */
     function _open() {
         NglxDropdownService.closeActiveDropdown();
-        NglxDropdownService.registerActiveDropdownId(lxDropdown.uuid);
+        NglxDropdownService.registerActiveDropdownId(lumx.uuid);
 
-        if (angular.isUndefined(lxDropdown.escapeClose) || lxDropdown.escapeClose) {
+        if (angular.isUndefined(lumx.escapeClose) || lumx.escapeClose) {
             _idEventScheduler = NglxEventSchedulerService.register('keyup', _onKeyUp);
         }
 
@@ -284,7 +284,7 @@ function DropdownController(
             _initHorizontalPosition();
             _initVerticalPosition();
 
-            lxDropdown.isOpen = true;
+            lumx.isOpen = true;
             NglxUtilsService.disableBodyScroll();
 
             $document.on('click keydown keypress', _onDocumentClick);
@@ -334,7 +334,7 @@ function DropdownController(
             _registerSource(angular.element(evt.target));
         }
 
-        if (lxDropdown.isOpen) {
+        if (lumx.isOpen) {
             NglxDropdownService.closeActiveDropdown();
         } else {
             _open();
@@ -343,9 +343,9 @@ function DropdownController(
 
     /////////////////////////////
 
-    lxDropdown.registerMenu = registerMenu;
-    lxDropdown.registerToggle = registerToggle;
-    lxDropdown.toggle = toggle;
+    lumx.registerMenu = registerMenu;
+    lumx.registerToggle = registerToggle;
+    lumx.toggle = toggle;
 
     /////////////////////////////
     //                         //
@@ -361,7 +361,7 @@ function DropdownController(
      * @param {Object} params     An optional object that holds extra parameters.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dropdown__open`, (evt, dropdownId, params) => {
-        if (dropdownId === lxDropdown.uuid && !lxDropdown.isOpen) {
+        if (dropdownId === lumx.uuid && !lumx.isOpen) {
             registerToggle(angular.element(params.target));
 
             if (angular.isDefined(params.source)) {
@@ -381,7 +381,7 @@ function DropdownController(
      * @param {Object} dropdownId The dropdown identifier.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dropdown__close`, (evt, dropdownId) => {
-        if (dropdownId === lxDropdown.uuid && lxDropdown.isOpen) {
+        if (dropdownId === lumx.uuid && lumx.isOpen) {
             _close();
         }
     });
@@ -390,7 +390,7 @@ function DropdownController(
      * Update the active dropdown position.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dropdown__update`, () => {
-        if (NglxDropdownService.isOpen(lxDropdown.uuid)) {
+        if (NglxDropdownService.isOpen(lumx.uuid)) {
             _initHorizontalPosition();
             _initVerticalPosition();
         }
@@ -418,7 +418,7 @@ function DropdownDirective() {
     return {
         bindToController: true,
         controller: DropdownController,
-        controllerAs: 'lxDropdown',
+        controllerAs: 'lumx',
         link,
         replace: true,
         restrict: 'E',

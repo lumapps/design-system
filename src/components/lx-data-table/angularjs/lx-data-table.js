@@ -10,7 +10,7 @@ function DataTableController($rootScope, $sce, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxDataTable = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -23,14 +23,14 @@ function DataTableController($rootScope, $sce, $scope) {
      *
      * @type {boolean}
      */
-    lxDataTable.allRowsSelected = false;
+    lumx.allRowsSelected = false;
 
     /**
      * The data table icons.
      *
      * @type {Object}
      */
-    lxDataTable.icons = {
+    lumx.icons = {
         mdiArrowDown,
         mdiArrowUp,
     };
@@ -40,14 +40,14 @@ function DataTableController($rootScope, $sce, $scope) {
      *
      * @type {Array}
      */
-    lxDataTable.selectedRows = [];
+    lumx.selectedRows = [];
 
     /////////////////////////////
 
     /**
      * Services and utilities.
      */
-    lxDataTable.$sce = $sce;
+    lumx.$sce = $sce;
 
     /////////////////////////////
     //                         //
@@ -61,7 +61,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row The row to activate.
      */
     function _activate(row) {
-        lxDataTable.toggleActivation(row, true);
+        lumx.toggleActivation(row, true);
     }
 
     /**
@@ -70,7 +70,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row The row to deactivate.
      */
     function _deactivate(row) {
-        lxDataTable.toggleActivation(row, false);
+        lumx.toggleActivation(row, false);
     }
 
     /**
@@ -79,25 +79,25 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row The row to select.
      */
     function _select(row) {
-        lxDataTable.toggleSelection(row, true);
+        lumx.toggleSelection(row, true);
     }
 
     /**
      * Select all rows.
      */
     function _selectAll() {
-        lxDataTable.selectedRows.length = 0;
+        lumx.selectedRows.length = 0;
 
-        for (let i = 0, len = lxDataTable.tbody.length; i < len; i++) {
-            if (!lxDataTable.tbody[i].lxDataTableDisabled) {
-                lxDataTable.tbody[i].lxDataTableSelected = true;
-                lxDataTable.selectedRows.push(lxDataTable.tbody[i]);
+        for (let i = 0, len = lumx.tbody.length; i < len; i++) {
+            if (!lumx.tbody[i].lxDataTableDisabled) {
+                lumx.tbody[i].lxDataTableSelected = true;
+                lumx.selectedRows.push(lumx.tbody[i]);
             }
         }
 
-        lxDataTable.allRowsSelected = true;
+        lumx.allRowsSelected = true;
 
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__unselected`, lxDataTable.id, lxDataTable.selectedRows);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__unselected`, lumx.id, lumx.selectedRows);
     }
 
     /**
@@ -106,23 +106,23 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row The row to unselect.
      */
     function _unselect(row) {
-        lxDataTable.toggleSelection(row, false);
+        lumx.toggleSelection(row, false);
     }
 
     /**
      * Unselect all rows.
      */
     function _unselectAll() {
-        for (let i = 0, len = lxDataTable.tbody.length; i < len; i++) {
-            if (!lxDataTable.tbody[i].lxDataTableDisabled) {
-                lxDataTable.tbody[i].lxDataTableSelected = false;
+        for (let i = 0, len = lumx.tbody.length; i < len; i++) {
+            if (!lumx.tbody[i].lxDataTableDisabled) {
+                lumx.tbody[i].lxDataTableSelected = false;
             }
         }
 
-        lxDataTable.allRowsSelected = false;
-        lxDataTable.selectedRows.length = 0;
+        lumx.allRowsSelected = false;
+        lumx.selectedRows.length = 0;
 
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__selected`, lxDataTable.id, lxDataTable.selectedRows);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__selected`, lumx.id, lumx.selectedRows);
     }
 
     /////////////////////////////
@@ -137,16 +137,16 @@ function DataTableController($rootScope, $sce, $scope) {
     function areAllRowsSelected() {
         let displayedRows = 0;
 
-        for (let i = 0, len = lxDataTable.tbody.length; i < len; i++) {
-            if (!lxDataTable.tbody[i].lxDataTableDisabled) {
+        for (let i = 0, len = lumx.tbody.length; i < len; i++) {
+            if (!lumx.tbody[i].lxDataTableDisabled) {
                 displayedRows++;
             }
         }
 
-        if (displayedRows === lxDataTable.selectedRows.length) {
-            lxDataTable.allRowsSelected = true;
+        if (displayedRows === lumx.selectedRows.length) {
+            lumx.allRowsSelected = true;
         } else {
-            lxDataTable.allRowsSelected = false;
+            lumx.allRowsSelected = false;
         }
     }
 
@@ -160,9 +160,9 @@ function DataTableController($rootScope, $sce, $scope) {
             return;
         }
 
-        for (let i = 0, len = lxDataTable.thead.length; i < len; i++) {
-            if (lxDataTable.thead[i].sortable && lxDataTable.thead[i].name !== column.name) {
-                lxDataTable.thead[i].sort = undefined;
+        for (let i = 0, len = lumx.thead.length; i < len; i++) {
+            if (lumx.thead[i].sortable && lumx.thead[i].name !== column.name) {
+                lumx.thead[i].sort = undefined;
             }
         }
 
@@ -172,7 +172,7 @@ function DataTableController($rootScope, $sce, $scope) {
             column.sort = 'desc';
         }
 
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__sorted`, lxDataTable.id, column);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__sorted`, lumx.id, column);
     }
 
     /**
@@ -181,22 +181,22 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row The row to activate/deactivate.
      */
     function toggleActivation(row) {
-        if (row.lxDataTableDisabled || !lxDataTable.isActivable) {
+        if (row.lxDataTableDisabled || !lumx.isActivable) {
             return;
         }
 
-        for (let i = 0, len = lxDataTable.tbody.length; i < len; i++) {
-            if (lxDataTable.tbody.indexOf(row) !== i) {
-                lxDataTable.tbody[i].lxDataTableActivated = false;
+        for (let i = 0, len = lumx.tbody.length; i < len; i++) {
+            if (lumx.tbody.indexOf(row) !== i) {
+                lumx.tbody[i].lxDataTableActivated = false;
             }
         }
 
         row.lxDataTableActivated = !row.lxDataTableActivated;
 
         if (row.lxDataTableActivated) {
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__activated`, lxDataTable.id, row);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__activated`, lumx.id, row);
         } else {
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__deactivated`, lxDataTable.id, row);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__deactivated`, lumx.id, row);
         }
     }
 
@@ -204,11 +204,11 @@ function DataTableController($rootScope, $sce, $scope) {
      * Select or unselect all rows.
      */
     function toggleAllSelected() {
-        if (!lxDataTable.hasBulk) {
+        if (!lumx.hasBulk) {
             return;
         }
 
-        if (lxDataTable.allRowsSelected) {
+        if (lumx.allRowsSelected) {
             _unselectAll();
         } else {
             _selectAll();
@@ -223,7 +223,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Event}   [evt]               The checkbox click event.
      */
     function toggleSelection(row, newSelectedStatus, evt) {
-        if (row.lxDataTableDisabled || !lxDataTable.isSelectable) {
+        if (row.lxDataTableDisabled || !lumx.isSelectable) {
             return;
         }
 
@@ -235,39 +235,29 @@ function DataTableController($rootScope, $sce, $scope) {
 
         if (row.lxDataTableSelected) {
             if (
-                lxDataTable.selectedRows.length === 0 ||
-                (lxDataTable.selectedRows.length > 0 && lxDataTable.selectedRows.indexOf(row) === -1)
+                lumx.selectedRows.length === 0 ||
+                (lumx.selectedRows.length > 0 && lumx.selectedRows.indexOf(row) === -1)
             ) {
-                lxDataTable.selectedRows.push(row);
-                lxDataTable.areAllRowsSelected();
+                lumx.selectedRows.push(row);
+                lumx.areAllRowsSelected();
 
-                $rootScope.$broadcast(
-                    `${COMPONENT_PREFIX}-data-table__selected`,
-                    lxDataTable.id,
-                    lxDataTable.selectedRows,
-                    row,
-                );
+                $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__selected`, lumx.id, lumx.selectedRows, row);
             }
-        } else if (lxDataTable.selectedRows.length > 0 && lxDataTable.selectedRows.indexOf(row) > -1) {
-            lxDataTable.selectedRows.splice(lxDataTable.selectedRows.indexOf(row), 1);
-            lxDataTable.allRowsSelected = false;
+        } else if (lumx.selectedRows.length > 0 && lumx.selectedRows.indexOf(row) > -1) {
+            lumx.selectedRows.splice(lumx.selectedRows.indexOf(row), 1);
+            lumx.allRowsSelected = false;
 
-            $rootScope.$broadcast(
-                `${COMPONENT_PREFIX}-data-table__unselected`,
-                lxDataTable.id,
-                lxDataTable.selectedRows,
-                row,
-            );
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-data-table__unselected`, lumx.id, lumx.selectedRows, row);
         }
     }
 
     /////////////////////////////
 
-    lxDataTable.areAllRowsSelected = areAllRowsSelected;
-    lxDataTable.sort = sort;
-    lxDataTable.toggleActivation = toggleActivation;
-    lxDataTable.toggleAllSelected = toggleAllSelected;
-    lxDataTable.toggleSelection = toggleSelection;
+    lumx.areAllRowsSelected = areAllRowsSelected;
+    lumx.sort = sort;
+    lumx.toggleActivation = toggleActivation;
+    lumx.toggleAllSelected = toggleAllSelected;
+    lumx.toggleSelection = toggleSelection;
 
     /////////////////////////////
     //                         //
@@ -283,7 +273,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row         The row to select.
      */
     $scope.$on(`${COMPONENT_PREFIX}-data-table__select`, (evt, id, row) => {
-        if (id === lxDataTable.id && angular.isDefined(row)) {
+        if (id === lumx.id && angular.isDefined(row)) {
             if (angular.isArray(row) && row.length > 0) {
                 _select(row[0]);
 
@@ -301,7 +291,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {string} dataTableId The data table identifier.
      */
     $scope.$on(`${COMPONENT_PREFIX}-data-table__select-all`, (evt, id) => {
-        if (id === lxDataTable.id) {
+        if (id === lumx.id) {
             _selectAll();
         }
     });
@@ -314,7 +304,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row         The row to unselect.
      */
     $scope.$on(`${COMPONENT_PREFIX}-data-table__unselect`, (evt, id, row) => {
-        if (id === lxDataTable.id && angular.isDefined(row)) {
+        if (id === lumx.id && angular.isDefined(row)) {
             if (angular.isArray(row) && row.length > 0) {
                 _unselect(row[0]);
 
@@ -332,7 +322,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {string} dataTableId The data table identifier.
      */
     $scope.$on(`${COMPONENT_PREFIX}-data-table__unselect-all`, (evt, id) => {
-        if (id === lxDataTable.id) {
+        if (id === lumx.id) {
             _unselectAll();
         }
     });
@@ -345,7 +335,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row         The row to activate.
      */
     $scope.$on(`${COMPONENT_PREFIX}-data-table__activate`, (evt, id, row) => {
-        if (id === lxDataTable.id && angular.isDefined(row)) {
+        if (id === lumx.id && angular.isDefined(row)) {
             if (angular.isArray(row) && row.length > 0) {
                 _activate(row[0]);
 
@@ -364,7 +354,7 @@ function DataTableController($rootScope, $sce, $scope) {
      * @param {Object} row         The row to deactivate.
      */
     $scope.$on(`${COMPONENT_PREFIX}-data-table__deactivate`, (evt, id, row) => {
-        if (id === lxDataTable.id && angular.isDefined(row)) {
+        if (id === lumx.id && angular.isDefined(row)) {
             if (angular.isArray(row) && row.length > 0) {
                 _deactivate(row[0]);
 
@@ -384,7 +374,7 @@ function DataTableDirective() {
     return {
         bindToController: true,
         controller: DataTableController,
-        controllerAs: 'lxDataTable',
+        controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
         scope: {

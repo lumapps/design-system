@@ -8,7 +8,7 @@ function ListItemController($element) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxListItem = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -21,28 +21,28 @@ function ListItemController($element) {
      *
      * @type {boolean}
      */
-    lxListItem.hasAfter = false;
+    lumx.hasAfter = false;
 
     /**
      * Whether the directive has before slot filled or not.
      *
      * @type {boolean}
      */
-    lxListItem.hasBefore = false;
+    lumx.hasBefore = false;
 
     /**
      * Whether the directive has content slot filled or not.
      *
      * @type {boolean}
      */
-    lxListItem.hasContent = false;
+    lumx.hasContent = false;
 
     /**
      * The parent controller (list).
      *
      * @type {Object}
      */
-    lxListItem.parentController = undefined;
+    lumx.parentController = undefined;
 
     /////////////////////////////
     //                         //
@@ -51,11 +51,11 @@ function ListItemController($element) {
     /////////////////////////////
 
     $element.on('focus', () => {
-        if (angular.isUndefined(lxListItem.parentController)) {
+        if (angular.isUndefined(lumx.parentController)) {
             return;
         }
 
-        lxListItem.parentController.activeItemIndex = $element.index('.lx-list-item');
+        lumx.parentController.activeItemIndex = $element.index('.lx-list-item');
     });
 }
 
@@ -86,7 +86,7 @@ function ListItemDirective() {
     return {
         bindToController: true,
         controller: ListItemController,
-        controllerAs: 'lxListItem',
+        controllerAs: 'lumx',
         link,
         replace: true,
         require: [`${COMPONENT_PREFIX}ListItem`, `?^${COMPONENT_PREFIX}List`],

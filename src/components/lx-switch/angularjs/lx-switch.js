@@ -8,7 +8,7 @@ function SwitchController(NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxSwitch = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -34,35 +34,35 @@ function SwitchController(NglxUtilsService) {
      *
      * @type {string}
      */
-    lxSwitch.switchId = NglxUtilsService.generateUUID();
+    lumx.switchId = NglxUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.
      *
      * @type {boolean}
      */
-    lxSwitch.hasHelper = false;
+    lumx.hasHelper = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lxSwitch.hasLabel = false;
+    lumx.hasLabel = false;
 
     /**
      * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */
-    lxSwitch.hasTranscluded = false;
+    lumx.hasTranscluded = false;
 
     /**
      * The model view value.
      *
      * @type {string}
      */
-    lxSwitch.viewValue = undefined;
+    lumx.viewValue = undefined;
 
     /////////////////////////////
     //                         //
@@ -79,7 +79,7 @@ function SwitchController(NglxUtilsService) {
         _modelController = modelController;
 
         _modelController.$render = function onModelRender() {
-            lxSwitch.viewValue = _modelController.$viewValue;
+            lumx.viewValue = _modelController.$viewValue;
         };
     }
 
@@ -88,7 +88,7 @@ function SwitchController(NglxUtilsService) {
      */
     function updateViewValue() {
         if (angular.isUndefined(_modelController)) {
-            lxSwitch.viewValue = !lxSwitch.viewValue;
+            lumx.viewValue = !lumx.viewValue;
 
             return;
         }
@@ -99,8 +99,8 @@ function SwitchController(NglxUtilsService) {
 
     /////////////////////////////
 
-    lxSwitch.setModelController = setModelController;
-    lxSwitch.updateViewValue = updateViewValue;
+    lumx.setModelController = setModelController;
+    lumx.updateViewValue = updateViewValue;
 }
 
 /////////////////////////////
@@ -149,7 +149,7 @@ function SwitchDirective() {
     return {
         bindToController: true,
         controller: SwitchController,
-        controllerAs: 'lxSwitch',
+        controllerAs: 'lumx',
         link,
         replace: true,
         require: [`${COMPONENT_PREFIX}Switch`, '?ngModel'],

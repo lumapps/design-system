@@ -8,7 +8,7 @@ function RadioButtonController(NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxRadioButton = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -34,42 +34,42 @@ function RadioButtonController(NglxUtilsService) {
      *
      * @type {string}
      */
-    lxRadioButton.radioButtonId = NglxUtilsService.generateUUID();
+    lumx.radioButtonId = NglxUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.
      *
      * @type {boolean}
      */
-    lxRadioButton.hasHelper = false;
+    lumx.hasHelper = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lxRadioButton.hasLabel = false;
+    lumx.hasLabel = false;
 
     /**
      * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */
-    lxRadioButton.hasTranscluded = false;
+    lumx.hasTranscluded = false;
 
     /**
      * The radio button value.
      *
      * @type {string}
      */
-    lxRadioButton.radioButtonValue = undefined;
+    lumx.radioButtonValue = undefined;
 
     /**
      * The model view value.
      *
      * @type {string}
      */
-    lxRadioButton.viewValue = undefined;
+    lumx.viewValue = undefined;
 
     /////////////////////////////
     //                         //
@@ -86,7 +86,7 @@ function RadioButtonController(NglxUtilsService) {
         _modelController = modelController;
 
         _modelController.$render = function onModelRender() {
-            lxRadioButton.viewValue = _modelController.$viewValue;
+            lumx.viewValue = _modelController.$viewValue;
         };
     }
 
@@ -98,14 +98,14 @@ function RadioButtonController(NglxUtilsService) {
             return;
         }
 
-        _modelController.$setViewValue(lxRadioButton.radioButtonValue);
+        _modelController.$setViewValue(lumx.radioButtonValue);
         _modelController.$render();
     }
 
     /////////////////////////////
 
-    lxRadioButton.setModelController = setModelController;
-    lxRadioButton.updateViewValue = updateViewValue;
+    lumx.setModelController = setModelController;
+    lumx.updateViewValue = updateViewValue;
 }
 
 /////////////////////////////
@@ -158,7 +158,7 @@ function RadioButtonDirective() {
     return {
         bindToController: true,
         controller: RadioButtonController,
-        controllerAs: 'lxRadioButton',
+        controllerAs: 'lumx',
         link,
         replace: true,
         require: [`${COMPONENT_PREFIX}RadioButton`, '?ngModel'],

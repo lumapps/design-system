@@ -10,7 +10,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxSelect = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -61,35 +61,35 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      *
      * @type {boolean}
      */
-    lxSelect.isFocus = false;
+    lumx.isFocus = false;
 
     /**
      * Whether the dropdown is open or not.
      *
      * @type {boolean}
      */
-    lxSelect.isOpen = false;
+    lumx.isOpen = false;
 
     /**
      * The dropdown unique identifier.
      *
      * @type {string}
      */
-    lxSelect.dropdownUuid = NglxUtilsService.generateUUID();
+    lumx.dropdownUuid = NglxUtilsService.generateUUID();
 
     /**
      * The filter model.
      *
      * @type {string}
      */
-    lxSelect.filterModel = undefined;
+    lumx.filterModel = undefined;
 
     /**
      * The select icons.
      *
      * @type {Object}
      */
-    lxSelect.icons = {
+    lumx.icons = {
         mdiAlertCircle,
         mdiCheckCircle,
         mdiClose,
@@ -103,14 +103,14 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      *
      * @type {string}
      */
-    lxSelect.targetUuid = NglxUtilsService.generateUUID();
+    lumx.targetUuid = NglxUtilsService.generateUUID();
 
     /**
      * The model view value.
      *
      * @type {string}
      */
-    lxSelect.viewValue = undefined;
+    lumx.viewValue = undefined;
 
     /////////////////////////////
     //                         //
@@ -139,32 +139,32 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * Init view value.
      */
     function _initViewValue() {
-        if (angular.isDefined(lxSelect.modelToSelection)) {
-            if (lxSelect.multiple) {
-                lxSelect.viewValue = [];
+        if (angular.isDefined(lumx.modelToSelection)) {
+            if (lumx.multiple) {
+                lumx.viewValue = [];
 
                 angular.forEach(_modelController.$viewValue, (item) => {
-                    lxSelect.modelToSelection({
+                    lumx.modelToSelection({
                         // eslint-disable-next-line id-blacklist
                         callback(response) {
-                            lxSelect.viewValue.push(response);
+                            lumx.viewValue.push(response);
                         },
                         // eslint-disable-next-line id-blacklist
                         data: item,
                     });
                 });
             } else {
-                lxSelect.modelToSelection({
+                lumx.modelToSelection({
                     // eslint-disable-next-line id-blacklist
                     callback(response) {
-                        lxSelect.viewValue = response;
+                        lumx.viewValue = response;
                     },
                     // eslint-disable-next-line id-blacklist
                     data: _modelController.$viewValue,
                 });
             }
         } else {
-            lxSelect.viewValue = _modelController.$viewValue;
+            lumx.viewValue = _modelController.$viewValue;
         }
     }
 
@@ -176,7 +176,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
     function _updateModel(choice) {
         let updatedModel;
 
-        if (lxSelect.multiple) {
+        if (lumx.multiple) {
             updatedModel = angular.copy(_modelController.$viewValue);
 
             const choiceIndex = _arrayObjectIndexOf(_modelController.$viewValue, choice);
@@ -199,16 +199,16 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * @param {Object} choice The choice object.
      */
     function _updateViewValue(choice) {
-        if (lxSelect.multiple) {
-            const choiceIndex = _arrayObjectIndexOf(lxSelect.viewValue, choice);
+        if (lumx.multiple) {
+            const choiceIndex = _arrayObjectIndexOf(lumx.viewValue, choice);
 
             if (choiceIndex === -1) {
-                lxSelect.viewValue.push(choice);
+                lumx.viewValue.push(choice);
             } else {
-                lxSelect.viewValue.splice(choiceIndex, 1);
+                lumx.viewValue.splice(choiceIndex, 1);
             }
         } else {
-            lxSelect.viewValue = choice;
+            lumx.viewValue = choice;
         }
     }
 
@@ -218,8 +218,8 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * @param {Event} evt The key event.
      */
     function _onKeyPress(evt) {
-        if (evt.keyCode === _DOWN_KEY_CODE && !lxSelect.isOpen) {
-            lxSelect.openDropdown();
+        if (evt.keyCode === _DOWN_KEY_CODE && !lumx.isOpen) {
+            lumx.openDropdown();
 
             evt.preventDefault();
             evt.stopPropagation();
@@ -242,12 +242,12 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
             evt.stopPropagation();
         }
 
-        if (lxSelect.multiple) {
+        if (lumx.multiple) {
             _modelController.$setViewValue([]);
-            lxSelect.viewValue.length = 0;
+            lumx.viewValue.length = 0;
         } else {
             _modelController.$setViewValue(undefined);
-            lxSelect.viewValue = undefined;
+            lumx.viewValue = undefined;
         }
     }
 
@@ -255,14 +255,14 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * Close the dropdown menu.
      */
     function closeDropdown() {
-        NglxDropdownService.close(lxSelect.dropdownUuid);
+        NglxDropdownService.close(lumx.dropdownUuid);
     }
 
     /**
      * Disable key events on input wrapper blur.
      */
     function disableKeyEvents() {
-        lxSelect.isFocus = false;
+        lumx.isFocus = false;
         $document.off('keydown keypress', _onKeyPress);
     }
 
@@ -290,7 +290,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      */
     function displaySelected(selected) {
         const selectedScope = {
-            $selected: angular.isDefined(selected) ? selected : lxSelect.viewValue,
+            $selected: angular.isDefined(selected) ? selected : lumx.viewValue,
         };
 
         const interpolatedSelected = $interpolate(_selectedTemplate)(selectedScope);
@@ -302,7 +302,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * Enable key events on input wrapper focus.
      */
     function enableKeyEvents() {
-        lxSelect.isFocus = true;
+        lumx.isFocus = true;
         $document.on('keydown keypress', _onKeyPress);
     }
 
@@ -312,7 +312,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * @return {boolean} Whether the model is empty or not.
      */
     function isModelEmpty() {
-        if (lxSelect.multiple) {
+        if (lumx.multiple) {
             return _modelController.$viewValue.length === 0;
         }
 
@@ -326,18 +326,18 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * @return {boolean} Whether the choice is selected or not.
      */
     function isSelected(choice) {
-        if (lxSelect.multiple) {
-            return _arrayObjectIndexOf(lxSelect.viewValue, choice) !== -1;
+        if (lumx.multiple) {
+            return _arrayObjectIndexOf(lumx.viewValue, choice) !== -1;
         }
 
-        return angular.equals(choice, lxSelect.viewValue);
+        return angular.equals(choice, lumx.viewValue);
     }
 
     /**
      * Open the dropdown menu on input wrapper click.
      */
     function openDropdown() {
-        NglxDropdownService.open(lxSelect.dropdownUuid, { target: `#${lxSelect.targetUuid}` });
+        NglxDropdownService.open(lumx.dropdownUuid, { target: `#${lumx.targetUuid}` });
     }
 
     /**
@@ -365,12 +365,12 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * @param {Event}  [evt]  The event that triggered the function.
      */
     function select(choice, evt) {
-        if (angular.isDefined(evt) && lxSelect.multiple) {
+        if (angular.isDefined(evt) && lumx.multiple) {
             evt.stopPropagation();
         }
 
-        if (angular.isDefined(lxSelect.selectionToModel)) {
-            lxSelect.selectionToModel({
+        if (angular.isDefined(lumx.selectionToModel)) {
+            lumx.selectionToModel({
                 // eslint-disable-next-line id-blacklist
                 callback(response) {
                     _updateModel(response);
@@ -384,7 +384,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
             _updateViewValue(choice);
         }
 
-        if (lxSelect.multiple) {
+        if (lumx.multiple) {
             $timeout(() => {
                 NglxDropdownService.updateActiveDropdownPosition();
             });
@@ -406,29 +406,29 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * Update choices list according to filter model.
      */
     function updateFilter() {
-        if (angular.isDefined(lxSelect.filter)) {
-            lxSelect.filter({
-                newValue: lxSelect.filterModel,
+        if (angular.isDefined(lumx.filter)) {
+            lumx.filter({
+                newValue: lumx.filterModel,
             });
         }
     }
 
     /////////////////////////////
 
-    lxSelect.clearModel = clearModel;
-    lxSelect.closeDropdown = closeDropdown;
-    lxSelect.disableKeyEvents = disableKeyEvents;
-    lxSelect.displayChoice = displayChoice;
-    lxSelect.displaySelected = displaySelected;
-    lxSelect.enableKeyEvents = enableKeyEvents;
-    lxSelect.isModelEmpty = isModelEmpty;
-    lxSelect.isSelected = isSelected;
-    lxSelect.openDropdown = openDropdown;
-    lxSelect.registerChoiceTemplate = registerChoiceTemplate;
-    lxSelect.registerSelectedTemplate = registerSelectedTemplate;
-    lxSelect.select = select;
-    lxSelect.setModelController = setModelController;
-    lxSelect.updateFilter = updateFilter;
+    lumx.clearModel = clearModel;
+    lumx.closeDropdown = closeDropdown;
+    lumx.disableKeyEvents = disableKeyEvents;
+    lumx.displayChoice = displayChoice;
+    lumx.displaySelected = displaySelected;
+    lumx.enableKeyEvents = enableKeyEvents;
+    lumx.isModelEmpty = isModelEmpty;
+    lumx.isSelected = isSelected;
+    lumx.openDropdown = openDropdown;
+    lumx.registerChoiceTemplate = registerChoiceTemplate;
+    lumx.registerSelectedTemplate = registerSelectedTemplate;
+    lumx.select = select;
+    lumx.setModelController = setModelController;
+    lumx.updateFilter = updateFilter;
 
     /////////////////////////////
     //                         //
@@ -443,8 +443,8 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * @param {Object} dropdownId The dropdown identifier.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dropdown__open`, (evt, dropdownId) => {
-        if (dropdownId === lxSelect.dropdownUuid) {
-            lxSelect.isOpen = true;
+        if (dropdownId === lumx.dropdownUuid) {
+            lumx.isOpen = true;
         }
     });
 
@@ -455,8 +455,8 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxD
      * @param {Object} dropdownId The dropdown identifier.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dropdown__close`, (evt, dropdownId) => {
-        if (dropdownId === lxSelect.dropdownUuid) {
-            lxSelect.isOpen = false;
+        if (dropdownId === lumx.dropdownUuid) {
+            lumx.isOpen = false;
         }
     });
 }
@@ -503,7 +503,7 @@ function SelectDirective() {
     return {
         bindToController: true,
         controller: SelectController,
-        controllerAs: 'lxSelect',
+        controllerAs: 'lumx',
         link,
         replace: true,
         require: [`${COMPONENT_PREFIX}Select`, 'ngModel'],

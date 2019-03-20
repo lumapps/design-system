@@ -10,7 +10,7 @@ function CheckboxController(NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxCheckbox = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -36,35 +36,35 @@ function CheckboxController(NglxUtilsService) {
      *
      * @type {string}
      */
-    lxCheckbox.checkboxId = NglxUtilsService.generateUUID();
+    lumx.checkboxId = NglxUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.
      *
      * @type {boolean}
      */
-    lxCheckbox.hasHelper = false;
+    lumx.hasHelper = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lxCheckbox.hasLabel = false;
+    lumx.hasLabel = false;
 
     /**
      * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */
-    lxCheckbox.hasTranscluded = false;
+    lumx.hasTranscluded = false;
 
     /**
      * The checkbox icons.
      *
      * @type {Object}
      */
-    lxCheckbox.icons = {
+    lumx.icons = {
         mdiCheck,
     };
 
@@ -73,7 +73,7 @@ function CheckboxController(NglxUtilsService) {
      *
      * @type {string}
      */
-    lxCheckbox.viewValue = undefined;
+    lumx.viewValue = undefined;
 
     /////////////////////////////
     //                         //
@@ -90,7 +90,7 @@ function CheckboxController(NglxUtilsService) {
         _modelController = modelController;
 
         _modelController.$render = function onModelRender() {
-            lxCheckbox.viewValue = _modelController.$viewValue;
+            lumx.viewValue = _modelController.$viewValue;
         };
     }
 
@@ -99,7 +99,7 @@ function CheckboxController(NglxUtilsService) {
      */
     function updateViewValue() {
         if (angular.isUndefined(_modelController)) {
-            lxCheckbox.viewValue = !lxCheckbox.viewValue;
+            lumx.viewValue = !lumx.viewValue;
 
             return;
         }
@@ -110,8 +110,8 @@ function CheckboxController(NglxUtilsService) {
 
     /////////////////////////////
 
-    lxCheckbox.setModelController = setModelController;
-    lxCheckbox.updateViewValue = updateViewValue;
+    lumx.setModelController = setModelController;
+    lumx.updateViewValue = updateViewValue;
 }
 
 /////////////////////////////
@@ -160,7 +160,7 @@ function CheckboxDirective() {
     return {
         bindToController: true,
         controller: CheckboxController,
-        controllerAs: 'lxCheckbox',
+        controllerAs: 'lumx',
         link,
         replace: true,
         require: [`${COMPONENT_PREFIX}Checkbox`, '?ngModel'],

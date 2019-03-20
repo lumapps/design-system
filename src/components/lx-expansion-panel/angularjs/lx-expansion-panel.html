@@ -1,15 +1,15 @@
 <div
     class="lx-expansion-panel"
-    ng-class="{ 'lx-expansion-panel--is-open': lxExpansionPanel.isWrapperOpen,
-                 'lx-expansion-panel--is-close': !lxExpansionPanel.isWrapperOpen,
-                 'lx-expansion-panel--theme-light': !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light',
-                 'lx-expansion-panel--theme-dark': lxExpansionPanel.theme === 'dark' }"
+    ng-class="{ 'lx-expansion-panel--is-open': lumx.isWrapperOpen,
+                 'lx-expansion-panel--is-close': !lumx.isWrapperOpen,
+                 'lx-expansion-panel--theme-light': !lumx.theme || lumx.theme === 'light',
+                 'lx-expansion-panel--theme-dark': lumx.theme === 'dark' }"
 >
-    <div class="lx-expansion-panel__header" ng-click="lxExpansionPanel.toggle()">
-        <div class="lx-expansion-panel__drag-indicator" ng-if="::lxExpansionPanel.isDraggable">
+    <div class="lx-expansion-panel__header" ng-click="lumx.toggle()">
+        <div class="lx-expansion-panel__drag-indicator" ng-if="::lumx.isDraggable">
             <nglx-icon
-                lx-path="{{ lxExpansionPanel.icons.mdiDragVertical }}"
-                lx-color="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'dark' : 'light' }}"
+                lx-path="{{ lumx.icons.mdiDragVertical }}"
+                lx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
                 lx-size="s"
             ></nglx-icon>
         </div>
@@ -18,27 +18,21 @@
 
         <div class="lx-expansion-panel__state-indicator">
             <nglx-button
-                lx-color="{{ !lxExpansionPanel.theme || lxExpansionPanel.theme === 'light' ? 'dark' : 'light' }}"
+                lx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
                 lx-emphasis="low"
                 lx-variant="icon"
-                ng-click="lxExpansionPanel.toggle($event)"
+                ng-click="lumx.toggle($event)"
             >
-                <nglx-icon
-                    lx-path="{{
-                        lxExpansionPanel.isWrapperOpen
-                            ? lxExpansionPanel.icons.mdiChevronUp
-                            : lxExpansionPanel.icons.mdiChevronDown
-                    }}"
-                >
+                <nglx-icon lx-path="{{ lumx.isWrapperOpen ? lumx.icons.mdiChevronUp : lumx.icons.mdiChevronDown }}">
                 </nglx-icon>
             </nglx-button>
         </div>
     </div>
 
-    <div class="lx-expansion-panel__wrapper" ng-if="lxExpansionPanel.isWrapperDisplayed">
+    <div class="lx-expansion-panel__wrapper" ng-if="lumx.isWrapperDisplayed">
         <div class="lx-expansion-panel__container">
             <div class="lx-expansion-panel__content" ng-transclude="content"></div>
-            <div class="lx-expansion-panel__footer" ng-transclude="footer" ng-if="::lxExpansionPanel.hasFooter"></div>
+            <div class="lx-expansion-panel__footer" ng-transclude="footer" ng-if="::lumx.hasFooter"></div>
         </div>
     </div>
 </div>

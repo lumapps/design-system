@@ -10,7 +10,7 @@ function ProgressTrackerStepController($scope, $element) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxProgressTrackerStep = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -37,12 +37,12 @@ function ProgressTrackerStepController($scope, $element) {
      * @return {string} The icon path.
      */
     function getIcon() {
-        if (lxProgressTrackerStep.isComplete) {
+        if (lumx.isComplete) {
             return mdiCheckCircle;
         }
 
-        if (lxProgressTrackerStep.isActive) {
-            if (lxProgressTrackerStep.hasError) {
+        if (lumx.isActive) {
+            if (lumx.hasError) {
                 return mdiAlertCircle;
             }
 
@@ -58,11 +58,7 @@ function ProgressTrackerStepController($scope, $element) {
      * @return {boolean} Wheter the step is clickable or not.
      */
     function isClickable() {
-        return (
-            lxProgressTrackerStep.isActive ||
-            lxProgressTrackerStep.isComplete ||
-            $element.prev().hasClass('lx-progress-tracker-step--is-complete')
-        );
+        return lumx.isActive || lumx.isComplete || $element.prev().hasClass('lx-progress-tracker-step--is-complete');
     }
 
     /**
@@ -76,9 +72,9 @@ function ProgressTrackerStepController($scope, $element) {
 
     /////////////////////////////
 
-    lxProgressTrackerStep.getIcon = getIcon;
-    lxProgressTrackerStep.isClickable = isClickable;
-    lxProgressTrackerStep.setParentController = setParentController;
+    lumx.getIcon = getIcon;
+    lumx.isClickable = isClickable;
+    lumx.setParentController = setParentController;
 
     /////////////////////////////
     //                         //
@@ -91,7 +87,7 @@ function ProgressTrackerStepController($scope, $element) {
      *
      * @param {boolean} isActive Whether the step is active or not.
      */
-    $scope.$watch('lxProgressTrackerStep.isActive', function isActiveWatcher(isActive, wasActive) {
+    $scope.$watch('lumx.isActive', function isActiveWatcher(isActive, wasActive) {
         if (isActive !== wasActive) {
             if (isActive) {
                 _parentController.setActiveStep($element.index());
@@ -113,7 +109,7 @@ function ProgressTrackerStepDirective() {
     return {
         bindToController: true,
         controller: ProgressTrackerStepController,
-        controllerAs: 'lxProgressTrackerStep',
+        controllerAs: 'lumx',
         link,
         replace: true,
         require: [`${COMPONENT_PREFIX}ProgressTrackerStep`, `^${COMPONENT_PREFIX}ProgressTracker`],

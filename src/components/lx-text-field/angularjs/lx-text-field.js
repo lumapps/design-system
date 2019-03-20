@@ -10,7 +10,7 @@ function TextFieldController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxTextField = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -36,7 +36,7 @@ function TextFieldController() {
      *
      * @type {Object}
      */
-    lxTextField.icons = {
+    lumx.icons = {
         mdiAlertCircle,
         mdiCheckCircle,
     };
@@ -67,8 +67,8 @@ function TextFieldController() {
 
     /////////////////////////////
 
-    lxTextField.hasValue = hasValue;
-    lxTextField.setModelController = setModelController;
+    lumx.hasValue = hasValue;
+    lumx.setModelController = setModelController;
 }
 
 /////////////////////////////
@@ -114,7 +114,7 @@ function TextFieldDirective() {
     return {
         bindToController: true,
         controller: TextFieldController,
-        controllerAs: 'lxTextField',
+        controllerAs: 'lumx',
         link,
         replace: true,
         restrict: 'E',

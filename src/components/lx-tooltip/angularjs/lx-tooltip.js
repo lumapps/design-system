@@ -6,7 +6,7 @@ function TooltipController($element, $timeout, NglxDepthService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxTooltip = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -66,19 +66,19 @@ function TooltipController($element, $timeout, NglxDepthService) {
             width: _tooltip.outerWidth(),
         };
 
-        if (angular.isUndefined(lxTooltip.position) || lxTooltip.position === 'top') {
+        if (angular.isUndefined(lumx.position) || lumx.position === 'top') {
             // eslint-disable-next-line no-magic-numbers
             tooltipProps.left = sourceProps.left - tooltipProps.width / 2 + sourceProps.width / 2;
             tooltipProps.top = sourceProps.top - tooltipProps.height;
-        } else if (lxTooltip.position === 'bottom') {
+        } else if (lumx.position === 'bottom') {
             // eslint-disable-next-line no-magic-numbers
             tooltipProps.left = sourceProps.left - tooltipProps.width / 2 + sourceProps.width / 2;
             tooltipProps.top = sourceProps.top + sourceProps.height;
-        } else if (lxTooltip.position === 'left') {
+        } else if (lumx.position === 'left') {
             tooltipProps.left = sourceProps.left - tooltipProps.width;
             // eslint-disable-next-line no-magic-numbers
             tooltipProps.top = sourceProps.top + sourceProps.height / 2 - tooltipProps.height / 2;
-        } else if (lxTooltip.position === 'right') {
+        } else if (lumx.position === 'right') {
             tooltipProps.left = sourceProps.left + sourceProps.width;
             // eslint-disable-next-line no-magic-numbers
             tooltipProps.top = sourceProps.top + sourceProps.height / 2 - tooltipProps.height / 2;
@@ -120,8 +120,7 @@ function TooltipController($element, $timeout, NglxDepthService) {
             return;
         }
 
-        const tooltipPoisition =
-            angular.isDefined(lxTooltip.position) && lxTooltip.position ? lxTooltip.position : 'top';
+        const tooltipPoisition = angular.isDefined(lumx.position) && lumx.position ? lumx.position : 'top';
 
         _tooltip = angular.element('<div/>', {
             class: `lx-tooltip lx-tooltip--position-${tooltipPoisition}`,
@@ -129,7 +128,7 @@ function TooltipController($element, $timeout, NglxDepthService) {
 
         _tooltipLabel = angular.element('<span/>', {
             class: 'lx-tooltip__text',
-            text: lxTooltip.text,
+            text: lumx.text,
         });
 
         NglxDepthService.increase();
@@ -144,8 +143,8 @@ function TooltipController($element, $timeout, NglxDepthService) {
 
     /////////////////////////////
 
-    lxTooltip.hideTooltip = hideTooltip;
-    lxTooltip.showTooltip = showTooltip;
+    lumx.hideTooltip = hideTooltip;
+    lumx.showTooltip = showTooltip;
 }
 
 /////////////////////////////
@@ -165,7 +164,7 @@ function TooltipDirective() {
     return {
         bindToController: true,
         controller: TooltipController,
-        controllerAs: 'lxTooltip',
+        controllerAs: 'lumx',
         link,
         restrict: 'A',
         scope: {

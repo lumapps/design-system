@@ -8,7 +8,7 @@ function TabController($scope, NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxTab = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -34,7 +34,7 @@ function TabController($scope, NglxUtilsService) {
      *
      * @type {Object}
      */
-    lxTab.tab = {};
+    lumx.tab = {};
 
     /////////////////////////////
     //                         //
@@ -48,7 +48,7 @@ function TabController($scope, NglxUtilsService) {
      * @return {boolean} Whether the current tab is active or not.
      */
     function isTabActive() {
-        return _parentController.isTabActive(lxTab.tab.index);
+        return _parentController.isTabActive(lumx.tab.index);
     }
 
     /**
@@ -60,20 +60,20 @@ function TabController($scope, NglxUtilsService) {
     function registerTab(parentController, tabIndex) {
         _parentController = parentController;
 
-        lxTab.tab = {
-            icon: lxTab.icon,
+        lumx.tab = {
+            icon: lumx.icon,
             index: tabIndex,
-            label: lxTab.label,
+            label: lumx.label,
             uuid: NglxUtilsService.generateUUID(),
         };
 
-        _parentController.addTab(lxTab.tab);
+        _parentController.addTab(lumx.tab);
     }
 
     /////////////////////////////
 
-    lxTab.isTabActive = isTabActive;
-    lxTab.registerTab = registerTab;
+    lumx.isTabActive = isTabActive;
+    lumx.registerTab = registerTab;
 
     /////////////////////////////
     //                         //
@@ -86,17 +86,17 @@ function TabController($scope, NglxUtilsService) {
      *
      * @param {boolean} isDisabled Whether the tab is disabled or not.
      */
-    $scope.$watch('lxTab.isDisabled', function isDisableddWatcher(isDisabled) {
-        lxTab.tab.isDisabled = isDisabled;
+    $scope.$watch('lumx.isDisabled', function isDisableddWatcher(isDisabled) {
+        lumx.tab.isDisabled = isDisabled;
 
-        _parentController.updateTab(lxTab.tab);
+        _parentController.updateTab(lumx.tab);
     });
 
     /**
      * Remove the current tab on destroy.
      */
     $scope.$on('$destroy', () => {
-        _parentController.removeTab(lxTab.tab);
+        _parentController.removeTab(lumx.tab);
     });
 }
 
@@ -112,7 +112,7 @@ function TabDirective() {
     return {
         bindToController: true,
         controller: TabController,
-        controllerAs: 'lxTab',
+        controllerAs: 'lumx',
         link,
         replace: true,
         require: [`${COMPONENT_PREFIX}Tab`, `^${COMPONENT_PREFIX}Tabs`],

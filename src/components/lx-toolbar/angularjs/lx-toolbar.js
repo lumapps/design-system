@@ -8,7 +8,7 @@ function ToolbarController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxToolbar = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -21,21 +21,21 @@ function ToolbarController() {
      *
      * @type {boolean}
      */
-    lxToolbar.hasAfter = false;
+    lumx.hasAfter = false;
 
     /**
      * Whether the directive has before slot filled or not.
      *
      * @type {boolean}
      */
-    lxToolbar.hasBefore = false;
+    lumx.hasBefore = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lxToolbar.hasLabel = false;
+    lumx.hasLabel = false;
 }
 
 /////////////////////////////
@@ -63,7 +63,7 @@ function ToolbarDirective() {
     return {
         bindToController: true,
         controller: ToolbarController,
-        controllerAs: 'lxToolbar',
+        controllerAs: 'lumx',
         link,
         replace: true,
         restrict: 'E',

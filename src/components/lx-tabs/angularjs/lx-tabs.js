@@ -8,7 +8,7 @@ function TabsController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxTabs = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -21,14 +21,14 @@ function TabsController() {
      *
      * @type {number}
      */
-    lxTabs.activeTab = angular.isDefined(lxTabs.activeTab) ? lxTabs.activeTab : 0;
+    lumx.activeTab = angular.isDefined(lumx.activeTab) ? lumx.activeTab : 0;
 
     /**
      * The list of tabs.
      *
      * @type {Array}
      */
-    lxTabs.tabs = [];
+    lumx.tabs = [];
 
     /////////////////////////////
     //                         //
@@ -42,7 +42,7 @@ function TabsController() {
      * @param {Object} tabToAdd The tab to add.
      */
     function addTab(tabToAdd) {
-        lxTabs.tabs.push(tabToAdd);
+        lumx.tabs.push(tabToAdd);
     }
 
     /**
@@ -52,7 +52,7 @@ function TabsController() {
      * @return {boolean} Whether the given tab is active or not.
      */
     function isTabActive(tabIndex) {
-        return lxTabs.activeTab === tabIndex;
+        return lumx.activeTab === tabIndex;
     }
 
     /**
@@ -61,14 +61,14 @@ function TabsController() {
      * @param {Object} tabToRemove The tab to remove.
      */
     function removeTab(tabToRemove) {
-        lxTabs.tabs.splice(tabToRemove.index, 1);
+        lumx.tabs.splice(tabToRemove.index, 1);
 
-        angular.forEach(lxTabs.tabs, (tab, index) => {
+        angular.forEach(lumx.tabs, (tab, index) => {
             tab.index = index;
         });
 
-        if (lxTabs.tabs.length > 0) {
-            lxTabs.setActiveTab(lxTabs.tabs[0]);
+        if (lumx.tabs.length > 0) {
+            lumx.setActiveTab(lumx.tabs[0]);
         }
     }
 
@@ -82,7 +82,7 @@ function TabsController() {
             return;
         }
 
-        lxTabs.activeTab = tab.index;
+        lumx.activeTab = tab.index;
     }
 
     /**
@@ -91,7 +91,7 @@ function TabsController() {
      * @param {Object} updatedTab The tab to update.
      */
     function updateTab(updatedTab) {
-        angular.forEach(lxTabs.tabs, (tab) => {
+        angular.forEach(lumx.tabs, (tab) => {
             if (tab.uuid === updatedTab.uuid) {
                 tab = updatedTab;
             }
@@ -100,11 +100,11 @@ function TabsController() {
 
     /////////////////////////////
 
-    lxTabs.addTab = addTab;
-    lxTabs.isTabActive = isTabActive;
-    lxTabs.removeTab = removeTab;
-    lxTabs.setActiveTab = setActiveTab;
-    lxTabs.updateTab = updateTab;
+    lumx.addTab = addTab;
+    lumx.isTabActive = isTabActive;
+    lumx.removeTab = removeTab;
+    lumx.setActiveTab = setActiveTab;
+    lumx.updateTab = updateTab;
 }
 
 /////////////////////////////
@@ -115,7 +115,7 @@ function TabsDirective() {
     return {
         bindToController: true,
         controller: TabsController,
-        controllerAs: 'lxTabs',
+        controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
         scope: {

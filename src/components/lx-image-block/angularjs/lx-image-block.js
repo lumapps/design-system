@@ -6,7 +6,7 @@ import template from './lx-image-block.html';
 
 function ImageBlockController() {
     // eslint-disable-next-line consistent-this
-    const lxImageBlock = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -21,11 +21,11 @@ function ImageBlockController() {
      */
     function getImageStyle() {
         const imageStyle = {
-            backgroundImage: `url(${lxImageBlock.image})`,
+            backgroundImage: `url(${lumx.image})`,
         };
 
-        if (!lxImageBlock.aspectRatio || lxImageBlock.aspectRatio === 'original') {
-            imageStyle.height = lxImageBlock.imageHeight;
+        if (!lumx.aspectRatio || lumx.aspectRatio === 'original') {
+            imageStyle.height = lumx.imageHeight;
         }
 
         return imageStyle;
@@ -33,7 +33,7 @@ function ImageBlockController() {
 
     /////////////////////////////
 
-    lxImageBlock.getImageStyle = getImageStyle;
+    lumx.getImageStyle = getImageStyle;
 }
 
 /////////////////////////////
@@ -42,7 +42,7 @@ function ImageBlockDirective() {
     return {
         bindToController: true,
         controller: ImageBlockController,
-        controllerAs: 'lxImageBlock',
+        controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
         scope: {

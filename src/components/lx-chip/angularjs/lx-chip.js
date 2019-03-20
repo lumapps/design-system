@@ -10,7 +10,7 @@ function ChipController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxChip = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -23,28 +23,28 @@ function ChipController() {
      *
      * @type {boolean}
      */
-    lxChip.hasAfter = false;
+    lumx.hasAfter = false;
 
     /**
      * Whether the directive has before slot filled or not.
      *
      * @type {boolean}
      */
-    lxChip.hasBefore = false;
+    lumx.hasBefore = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lxChip.hasLabel = false;
+    lumx.hasLabel = false;
 
     /**
      * The chip icons.
      *
      * @type {Object}
      */
-    lxChip.icons = {
+    lumx.icons = {
         mdiMenuDown,
     };
 
@@ -60,13 +60,13 @@ function ChipController() {
      * @param {Event} evt The click event.
      */
     function handleOnAfterClick(evt) {
-        if (!angular.isFunction(lxChip.onAfterClick)) {
+        if (!angular.isFunction(lumx.onAfterClick)) {
             return;
         }
 
         evt.stopPropagation();
 
-        lxChip.onAfterClick();
+        lumx.onAfterClick();
     }
 
     /**
@@ -75,13 +75,13 @@ function ChipController() {
      * @param {Event} evt The click event.
      */
     function handleOnBeforeClick(evt) {
-        if (!angular.isFunction(lxChip.onBeforeClick)) {
+        if (!angular.isFunction(lumx.onBeforeClick)) {
             return;
         }
 
         evt.stopPropagation();
 
-        lxChip.onBeforeClick();
+        lumx.onBeforeClick();
     }
 
     /**
@@ -90,18 +90,18 @@ function ChipController() {
      * @param {Event} evt The click event.
      */
     function handleOnClick(evt) {
-        if (!angular.isFunction(lxChip.onClick)) {
+        if (!angular.isFunction(lumx.onClick)) {
             return;
         }
 
-        lxChip.onClick({ $event: evt });
+        lumx.onClick({ $event: evt });
     }
 
     /////////////////////////////
 
-    lxChip.handleOnAfterClick = handleOnAfterClick;
-    lxChip.handleOnBeforeClick = handleOnBeforeClick;
-    lxChip.handleOnClick = handleOnClick;
+    lumx.handleOnAfterClick = handleOnAfterClick;
+    lumx.handleOnBeforeClick = handleOnBeforeClick;
+    lumx.handleOnClick = handleOnClick;
 }
 
 /////////////////////////////
@@ -126,7 +126,7 @@ function ChipDirective() {
     return {
         bindToController: true,
         controller: ChipController,
-        controllerAs: 'lxChip',
+        controllerAs: 'lumx',
         link,
         replace: true,
         restrict: 'E',

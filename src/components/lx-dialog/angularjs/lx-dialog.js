@@ -16,7 +16,7 @@ function DialogController(
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxDialog = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -120,14 +120,14 @@ function DialogController(
      *
      * @type {string}
      */
-    lxDialog.id = undefined;
+    lumx.id = undefined;
 
     /**
      * Whether the dialog is open or not.
      *
      * @type {boolean}
      */
-    lxDialog.isOpen = false;
+    lumx.isOpen = false;
 
     /////////////////////////////
     //                         //
@@ -143,7 +143,7 @@ function DialogController(
             return;
         }
 
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__scroll-end`, lxDialog.id);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__scroll-end`, lumx.id);
 
         _dialogContent.off('scroll', _checkScrollEnd);
 
@@ -156,7 +156,7 @@ function DialogController(
      * Close the current dialog.
      */
     function _close() {
-        if (!lxDialog.isOpen) {
+        if (!lumx.isOpen) {
             return;
         }
 
@@ -165,7 +165,7 @@ function DialogController(
             _idEventScheduler = undefined;
         }
 
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-start`, lxDialog.id);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-start`, lumx.id);
 
         _dialog.addClass('lx-dialog--is-hidden');
         _dialogFilter.addClass('lx-dialog-filter--is-hidden');
@@ -186,9 +186,9 @@ function DialogController(
             _dialog.removeClass('lx-dialog--is-hidden');
             _dialogFilter.removeClass('lx-dialog-filter--is-hidden');
 
-            lxDialog.isOpen = false;
+            lumx.isOpen = false;
 
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-end`, lxDialog.id);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-end`, lumx.id);
         }, _TRANSITION_DURATION);
     }
 
@@ -211,7 +211,7 @@ function DialogController(
      * @param {Object} params An optional object that holds extra parameters.
      */
     function _open(params) {
-        if (lxDialog.isOpen) {
+        if (lumx.isOpen) {
             return;
         }
 
@@ -222,13 +222,13 @@ function DialogController(
             .appendTo('body')
             .show();
 
-        if (angular.isUndefined(lxDialog.autoClose) || lxDialog.autoClose) {
+        if (angular.isUndefined(lumx.autoClose) || lumx.autoClose) {
             _dialogFilter.on('click', () => {
                 _close();
             });
         }
 
-        if (angular.isUndefined(lxDialog.escapeClose) || lxDialog.escapeClose) {
+        if (angular.isUndefined(lumx.escapeClose) || lumx.escapeClose) {
             _idEventScheduler = NglxEventSchedulerService.register('keyup', _onKeyUp);
         }
 
@@ -238,9 +238,9 @@ function DialogController(
             .show();
 
         $timeout(function onDialogOpenStart() {
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-start`, lxDialog.id, params);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-start`, lumx.id, params);
 
-            lxDialog.isOpen = true;
+            lumx.isOpen = true;
             NglxFocusTrapService.activate(_dialog);
 
             $timeout(function onDialogContentDisplay() {
@@ -250,7 +250,7 @@ function DialogController(
         });
 
         $timeout(function onDialogOpenEnd() {
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-end`, lxDialog.id, params);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-end`, lumx.id, params);
         }, _TRANSITION_DURATION);
     }
 
@@ -277,7 +277,7 @@ function DialogController(
      * @param {Object} params   An optional object that holds extra parameters.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__open`, (evt, dialogId, params) => {
-        if (dialogId === lxDialog.id) {
+        if (dialogId === lumx.id) {
             _open(params);
 
             if (angular.isDefined(params) && angular.isDefined(params.isAlertDialog) && params.isAlertDialog) {
@@ -301,7 +301,7 @@ function DialogController(
      * @param {string} dialogId The dialog identifier.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__close`, (evt, dialogId) => {
-        if (dialogId === lxDialog.id || dialogId === undefined) {
+        if (dialogId === lumx.id || dialogId === undefined) {
             _close();
         }
     });
@@ -326,7 +326,7 @@ function DialogDirective() {
     return {
         bindToController: true,
         controller: DialogController,
-        controllerAs: 'lxDialog',
+        controllerAs: 'lumx',
         link,
         replace: true,
         restrict: 'E',

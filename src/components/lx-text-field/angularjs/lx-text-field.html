@@ -1,34 +1,34 @@
 <div
     class="lx-text-field"
-    ng-class="{ 'lx-text-field--theme-light': !lxTextField.theme || lxTextField.theme === 'light',
-                'lx-text-field--theme-dark': lxTextField.theme === 'dark',
-                'lx-text-field--has-label': lxTextField.label,
-                'lx-text-field--has-icon': lxTextField.icon,
-                'lx-text-field--has-value': lxTextField.hasValue(),
-                'lx-text-field--is-valid': lxTextField.isValid,
-                'lx-text-field--has-error': lxTextField.hasError }"
+    ng-class="{ 'lx-text-field--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lx-text-field--theme-dark': lumx.theme === 'dark',
+                'lx-text-field--has-label': lumx.label,
+                'lx-text-field--has-icon': lumx.icon,
+                'lx-text-field--has-value': lumx.hasValue(),
+                'lx-text-field--is-valid': lumx.isValid,
+                'lx-text-field--has-error': lumx.hasError }"
 >
-    <label class="lx-text-field__label" ng-if="::lxTextField.label">
-        {{ lxTextField.label }}
+    <label class="lx-text-field__label" ng-if="::lumx.label">
+        {{ lumx.label }}
     </label>
 
-    <span class="lx-text-field__helper" ng-if="::lxTextField.helper">{{ lxTextField.helper }}</span>
+    <span class="lx-text-field__helper" ng-if="::lumx.helper">{{ lumx.helper }}</span>
 
     <div class="lx-text-field__input-wrapper">
         <nglx-icon
             class="lx-text-field__input-icon"
-            lx-path="{{ lxTextField.icon }}"
+            lx-path="{{ lumx.icon }}"
             lx-size="xs"
-            ng-if="::lxTextField.icon"
+            ng-if="::lumx.icon"
         ></nglx-icon>
 
         <div class="lx-text-field__input-native" ng-transclude></div>
 
         <nglx-icon
             class="lx-text-field__input-validity"
-            lx-path="{{ lxTextField.isValid ? lxTextField.icons.mdiCheckCircle : lxTextField.icons.mdiAlertCircle }}"
+            lx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
             lx-size="xs"
-            ng-if="lxTextField.isValid || lxTextField.hasError"
+            ng-if="lumx.isValid || lumx.hasError"
         ></nglx-icon>
     </div>
 </div>

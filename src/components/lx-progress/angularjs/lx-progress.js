@@ -8,7 +8,7 @@ function ProgressController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this, no-unused-vars
-    const lxProgress = this;
+    const lumx = this;
 }
 
 /////////////////////////////
@@ -19,7 +19,7 @@ function ProgressDirective() {
     return {
         bindToController: true,
         controller: ProgressController,
-        controllerAs: 'lxProgress',
+        controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
         scope: {

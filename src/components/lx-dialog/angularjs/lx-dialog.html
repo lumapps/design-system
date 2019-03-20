@@ -1,11 +1,11 @@
 <div
     class="lx-dialog"
     role="dialog"
-    ng-class="{ 'lx-dialog--size-s': lxDialog.size === 's',
-                'lx-dialog--size-m': lxDialog.size === 'm',
-                'lx-dialog--size-l': !lxDialog.size || lxDialog.size === 'l' }"
+    ng-class="{ 'lx-dialog--size-s': lumx.size === 's',
+                'lx-dialog--size-m': lumx.size === 'm',
+                'lx-dialog--size-l': !lumx.size || lumx.size === 'l' }"
 >
-    <div class="lx-dialog__wrapper" ng-if="lxDialog.isOpen">
+    <div class="lx-dialog__wrapper" ng-if="lumx.isOpen">
         <div class="lx-dialog__header" ng-transclude="header"></div>
         <div class="lx-dialog__content" ng-transclude="content"></div>
         <div class="lx-dialog__footer" ng-transclude="footer"></div>

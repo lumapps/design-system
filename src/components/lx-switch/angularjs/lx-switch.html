@@ -1,19 +1,19 @@
 <div
     class="lx-switch"
-    ng-class="{ 'lx-switch--is-checked': lxSwitch.viewValue,
-                'lx-switch--is-unchecked': !lxSwitch.viewValue,
-                'lx-switch--position-left': !lxSwitch.position || lxSwitch.position === 'left',
-                'lx-switch--position-right': lxSwitch.position === 'right',
-                'lx-switch--theme-light': !lxSwitch.theme || lxSwitch.theme === 'light',
-                'lx-switch--theme-dark': lxSwitch.theme === 'dark' }"
+    ng-class="{ 'lx-switch--is-checked': lumx.viewValue,
+                'lx-switch--is-unchecked': !lumx.viewValue,
+                'lx-switch--position-left': !lumx.position || lumx.position === 'left',
+                'lx-switch--position-right': lumx.position === 'right',
+                'lx-switch--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lx-switch--theme-dark': lumx.theme === 'dark' }"
 >
     <div class="lx-switch__input-wrapper">
         <input
             type="checkbox"
-            id="{{ lxSwitch.switchId }}"
+            id="{{ lumx.switchId }}"
             class="lx-switch__input-native"
-            ng-checked="lxRadioButton.viewValue"
-            ng-click="lxSwitch.updateViewValue()"
+            ng-checked="lumx.viewValue"
+            ng-click="lumx.updateViewValue()"
         />
 
         <div class="lx-switch__input-placeholder">
@@ -22,12 +22,12 @@
         </div>
     </div>
 
-    <div class="lx-switch__content" ng-if="::!lxSwitch.hasLabel && !lxSwitch.hasHelper && lxSwitch.hasTranscluded">
-        <label for="{{ lxSwitch.switchId }}" class="lx-switch__label" ng-transclude></label>
+    <div class="lx-switch__content" ng-if="::!lumx.hasLabel && !lumx.hasHelper && lumx.hasTranscluded">
+        <label for="{{ lumx.switchId }}" class="lx-switch__label" ng-transclude></label>
     </div>
 
-    <div class="lx-switch__content" ng-if="::lxSwitch.hasLabel">
-        <label for="{{ lxSwitch.switchId }}" class="lx-switch__label" ng-transclude="label"></label>
-        <span class="lx-switch__helper" ng-transclude="helper" ng-if="::lxSwitch.hasHelper"></span>
+    <div class="lx-switch__content" ng-if="::lumx.hasLabel">
+        <label for="{{ lumx.switchId }}" class="lx-switch__label" ng-transclude="label"></label>
+        <span class="lx-switch__helper" ng-transclude="helper" ng-if="::lumx.hasHelper"></span>
     </div>
 </div>

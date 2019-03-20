@@ -8,7 +8,7 @@ function lxListController($element, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this, no-unused-vars
-    const lxList = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -54,7 +54,7 @@ function lxListController($element, $scope) {
      *
      * @type {number}
      */
-    lxList.activeItemIndex = -1;
+    lumx.activeItemIndex = -1;
 
     /////////////////////////////
     //                         //
@@ -66,17 +66,17 @@ function lxListController($element, $scope) {
      * Increase active choice index on key down press.
      */
     function _nextItemOnKeyDown() {
-        let nextItem = $element.find('.lx-list-item').eq(lxList.activeItemIndex + 1);
+        let nextItem = $element.find('.lx-list-item').eq(lumx.activeItemIndex + 1);
 
         if (nextItem.length === 0) {
-            lxList.activeItemIndex = 0;
+            lumx.activeItemIndex = 0;
 
             nextItem = $element
                 .find('.lx-list-item')
-                .eq(lxList.activeItemIndex)
+                .eq(lumx.activeItemIndex)
                 .focus();
         } else {
-            lxList.activeItemIndex++;
+            lumx.activeItemIndex++;
         }
 
         nextItem.focus();
@@ -86,17 +86,17 @@ function lxListController($element, $scope) {
      * Decrease active choice index on key up press.
      */
     function _previousItemOnKeyUp() {
-        let previousItem = $element.find('.lx-list-item').eq(lxList.activeItemIndex - 1);
+        let previousItem = $element.find('.lx-list-item').eq(lumx.activeItemIndex - 1);
 
         if (previousItem.length === 0) {
-            lxList.activeItemIndex = $element.find('.lx-list-item').length - 1;
+            lumx.activeItemIndex = $element.find('.lx-list-item').length - 1;
 
             previousItem = $element
                 .find('.lx-list-item')
-                .eq(lxList.activeItemIndex)
+                .eq(lumx.activeItemIndex)
                 .focus();
         } else {
-            lxList.activeItemIndex--;
+            lumx.activeItemIndex--;
         }
 
         previousItem.focus();
@@ -108,7 +108,7 @@ function lxListController($element, $scope) {
      * @param {Event} evt The key event.
      */
     function _onKeyPress(evt) {
-        if (!lxList.isClickable) {
+        if (!lumx.isClickable) {
             return;
         }
 
@@ -137,7 +137,7 @@ function lxListController($element, $scope) {
     /////////////////////////////
 
     $element.on('keydown keypress', _onKeyPress).on('focus', () => {
-        lxList.activeItemIndex = -1;
+        lumx.activeItemIndex = -1;
     });
 }
 
@@ -147,7 +147,7 @@ function ListDirective() {
     return {
         bindToController: true,
         controller: lxListController,
-        controllerAs: 'lxList',
+        controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
         scope: {

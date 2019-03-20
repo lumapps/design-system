@@ -8,7 +8,7 @@ function ProgressTrackerController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lxProgressTracker = this;
+    const lumx = this;
 
     /////////////////////////////
     //                         //
@@ -21,14 +21,14 @@ function ProgressTrackerController() {
      *
      * @type {number}
      */
-    lxProgressTracker.activeStep = 0;
+    lumx.activeStep = 0;
 
     /**
      * The number of steps.
      *
      * @type {number}
      */
-    lxProgressTracker.stepCount = 0;
+    lumx.stepCount = 0;
 
     /////////////////////////////
     //                         //
@@ -40,7 +40,7 @@ function ProgressTrackerController() {
      * Increase step count on step init.
      */
     function increaseStepCount() {
-        lxProgressTracker.stepCount++;
+        lumx.stepCount++;
     }
 
     /**
@@ -49,13 +49,13 @@ function ProgressTrackerController() {
      * @param {number} stepIndex The step index.
      */
     function setActiveStep(stepIndex) {
-        lxProgressTracker.activeStep = stepIndex;
+        lumx.activeStep = stepIndex;
     }
 
     /////////////////////////////
 
-    lxProgressTracker.increaseStepCount = increaseStepCount;
-    lxProgressTracker.setActiveStep = setActiveStep;
+    lumx.increaseStepCount = increaseStepCount;
+    lumx.setActiveStep = setActiveStep;
 }
 
 /////////////////////////////
@@ -66,7 +66,7 @@ function ProgressTrackerDirective() {
     return {
         bindToController: true,
         controller: ProgressTrackerController,
-        controllerAs: 'lxProgressTracker',
+        controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
         template,
