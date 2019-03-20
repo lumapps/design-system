@@ -135,7 +135,7 @@
             <nglx-list nglx-focus-on-init lx-is-clickable="true" ng-if="!lxSelect.isLoading">
                 <nglx-list-item
                     lx-is-selected="lxSelect.isSelected(choice)"
-                    ng-repeat="choice in lxSelect.choices | lxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
+                    ng-repeat="choice in lxSelect.choices | nglxSelectChoicesFilter:lxSelect.filter:lxSelect.filterModel"
                     ng-click="lxSelect.select(choice, $event)"
                     nglx-enter-keypress="lxSelect.select(choice, $event)"
                 >

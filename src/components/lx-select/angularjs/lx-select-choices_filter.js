@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -28,7 +28,7 @@ function lxSelectChoicesFilter($filter) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.select`).filter('lxSelectChoicesFilter', lxSelectChoicesFilter);
+angular.module(`${MODULE_NAME}.select`).filter(`${COMPONENT_PREFIX}SelectChoicesFilter`, lxSelectChoicesFilter);
 
 /////////////////////////////
 
