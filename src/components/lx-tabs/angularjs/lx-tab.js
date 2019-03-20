@@ -4,7 +4,7 @@ import template from './lx-tab.html';
 
 /////////////////////////////
 
-function TabController($scope, NglxUtilsService) {
+function TabController($scope, LumXUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -64,7 +64,7 @@ function TabController($scope, NglxUtilsService) {
             icon: lumx.icon,
             index: tabIndex,
             label: lumx.label,
-            uuid: NglxUtilsService.generateUUID(),
+            uuid: LumXUtilsService.generateUUID(),
         };
 
         _parentController.addTab(lumx.tab);

@@ -1,4 +1,4 @@
-function DemoNotificationController(NglxNotificationService) {
+function DemoNotificationController(LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -17,15 +17,15 @@ function DemoNotificationController(NglxNotificationService) {
      */
     function notify(type) {
         if (type === 'info') {
-            NglxNotificationService.info('Lorem Ipsum', 'Undo', () => {
-                NglxNotificationService.success('Callback');
+            LumXNotificationService.info('Lorem Ipsum', 'Undo', () => {
+                LumXNotificationService.success('Callback');
             });
         } else if (type === 'success') {
-            NglxNotificationService.success('Lorem Ipsum');
+            LumXNotificationService.success('Lorem Ipsum');
         } else if (type === 'warning') {
-            NglxNotificationService.warning('Lorem Ipsum');
+            LumXNotificationService.warning('Lorem Ipsum');
         } else if (type === 'error') {
-            NglxNotificationService.error('Lorem Ipsum');
+            LumXNotificationService.error('Lorem Ipsum');
         }
     }
 

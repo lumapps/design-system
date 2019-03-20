@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/co
 
 /////////////////////////////
 
-function DialogService($compile, $rootScope, $timeout, NglxUtilsService) {
+function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
     'ngInject';
 
     const service = this;
@@ -19,7 +19,7 @@ function DialogService($compile, $rootScope, $timeout, NglxUtilsService) {
      * @param {Object} params An object that holds title, text, button label, callback and source parameters.
      */
     function alertDialog(params) {
-        const alertDialogId = NglxUtilsService.generateUUID();
+        const alertDialogId = LumXUtilsService.generateUUID();
         const alertDialogScope = $rootScope.$new(true);
 
         alertDialogScope.cb = params.cb;
@@ -70,7 +70,7 @@ function DialogService($compile, $rootScope, $timeout, NglxUtilsService) {
      * @param {Object} params An object that holds title, text, button labels, callback and source parameters.
      */
     function confirmDialog(params) {
-        const confirmDialogId = NglxUtilsService.generateUUID();
+        const confirmDialogId = LumXUtilsService.generateUUID();
         const confirmDialogScope = $rootScope.$new(true);
 
         confirmDialogScope.cb = params.cb;

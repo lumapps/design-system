@@ -11,7 +11,7 @@
                 'lx-chip--theme-light': !lumx.theme || lumx.theme === 'light',
                 'lx-chip--theme-dark': lumx.theme === 'dark' }"
     ng-click="lumx.handleOnClick($event)"
-    nglx-enter-keypress="lumx.handleOnClick($event)"
+    lumx-enter-keypress="lumx.handleOnClick($event)"
     tabindex="{{ lumx.isDisabled || !lumx.onClick ? -1 : 0 }}"
 >
     <div
@@ -33,6 +33,6 @@
     ></div>
 
     <div class="lx-chip__after" ng-if="lumx.hasDropdownIndicator">
-        <nglx-icon lx-path="{{ lumx.icons.mdiMenuDown }}" lx-size="xs"></nglx-icon>
+        <lumx-icon lx-path="{{ lumx.icons.mdiMenuDown }}" lx-size="xs"></lumx-icon>
     </div>
 </a>

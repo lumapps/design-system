@@ -2,12 +2,12 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function DialogCloseDirective(NglxDialogService) {
+function DialogCloseDirective(LumXDialogService) {
     'ngInject';
 
     function link(scope, el) {
         el.on('click', function onClick() {
-            NglxDialogService.close(el.parents('.lx-dialog').attr('id'), true);
+            LumXDialogService.close(el.parents('.lx-dialog').attr('id'), true);
         });
     }
 

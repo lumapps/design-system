@@ -20,85 +20,85 @@
 <strong>dismissible</strong>
 
 <div class="pv++">
-    <nglx-chip lx-on-click="vm.clickCallback()">
-        <nglx-chip-label>Dismissible</nglx-chip-label>
-        <nglx-chip-after><nglx-icon lx-path="{{ vm.icons.mdiClose }}" lx-size="xs"></nglx-icon></nglx-chip-after>
-    </nglx-chip>
+    <lumx-chip lx-on-click="vm.clickCallback()">
+        <lumx-chip-label>Dismissible</lumx-chip-label>
+        <lumx-chip-after><lumx-icon lx-path="{{ vm.icons.mdiClose }}" lx-size="xs"></lumx-icon></lumx-chip-after>
+    </lumx-chip>
 </div>
 
 <strong>choice</strong>
 
 <div class="pv++">
-    <nglx-chip lx-is-selected="vm.isSelected" lx-on-click="vm.toggleSelected()">
-        <nglx-chip-label>Choice</nglx-chip-label>
-    </nglx-chip>
+    <lumx-chip lx-is-selected="vm.isSelected" lx-on-click="vm.toggleSelected()">
+        <lumx-chip-label>Choice</lumx-chip-label>
+    </lumx-chip>
 </div>
 
 <strong>filter</strong>
 
 <div class="pv++">
-    <nglx-chip
+    <lumx-chip
         lx-has-dropdown-indicator="!vm.isSelected"
         lx-is-selected="vm.isSelected"
         lx-on-click="vm.select()"
         lx-on-after-click="vm.unselect()"
     >
-        <nglx-chip-before
-            ><nglx-icon lx-path="{{ vm.icons.mdiFilterVariant }}" lx-size="xs"></nglx-icon
-        ></nglx-chip-before>
-        <nglx-chip-label>Filter</nglx-chip-label>
-        <nglx-chip-after><nglx-icon lx-path="{{ vm.icons.mdiCloseCircle }}" lx-size="xs"></nglx-icon></nglx-chip-after>
-    </nglx-chip>
+        <lumx-chip-before
+            ><lumx-icon lx-path="{{ vm.icons.mdiFilterVariant }}" lx-size="xs"></lumx-icon
+        ></lumx-chip-before>
+        <lumx-chip-label>Filter</lumx-chip-label>
+        <lumx-chip-after><lumx-icon lx-path="{{ vm.icons.mdiCloseCircle }}" lx-size="xs"></lumx-icon></lumx-chip-after>
+    </lumx-chip>
 </div>
 
 <div class="p++ lx-theme-background-dark-N">
     <strong class="lx-theme-color-light-N">default</strong>
 
     <div class="pv++">
-        <nglx-chip lx-theme="dark">
-            <nglx-chip-label>Lorem ipsum</nglx-chip-label>
-        </nglx-chip>
+        <lumx-chip lx-theme="dark">
+            <lumx-chip-label>Lorem ipsum</lumx-chip-label>
+        </lumx-chip>
 
-        <nglx-chip lx-theme="dark">
-            <nglx-chip-before><nglx-icon lx-path="{{ vm.icons.mdiEmail }}" lx-size="xs"></nglx-icon></nglx-chip-before>
-            <nglx-chip-label>Lorem ipsum</nglx-chip-label>
-        </nglx-chip>
+        <lumx-chip lx-theme="dark">
+            <lumx-chip-before><lumx-icon lx-path="{{ vm.icons.mdiEmail }}" lx-size="xs"></lumx-icon></lumx-chip-before>
+            <lumx-chip-label>Lorem ipsum</lumx-chip-label>
+        </lumx-chip>
     </div>
 
     <strong class="lx-theme-color-light-N">dismissible</strong>
 
     <div class="pv++">
-        <nglx-chip lx-on-click="vm.clickCallback()" lx-theme="dark">
-            <nglx-chip-label>Dismissible</nglx-chip-label>
-            <nglx-chip-after><nglx-icon lx-path="{{ vm.icons.mdiClose }}" lx-size="xs"></nglx-icon></nglx-chip-after>
-        </nglx-chip>
+        <lumx-chip lx-on-click="vm.clickCallback()" lx-theme="dark">
+            <lumx-chip-label>Dismissible</lumx-chip-label>
+            <lumx-chip-after><lumx-icon lx-path="{{ vm.icons.mdiClose }}" lx-size="xs"></lumx-icon></lumx-chip-after>
+        </lumx-chip>
     </div>
 
     <strong class="lx-theme-color-light-N">choice</strong>
 
     <div class="pv++">
-        <nglx-chip lx-is-selected="vm.isSelected" lx-on-click="vm.toggleSelected()" lx-theme="dark">
-            <nglx-chip-label>Choice</nglx-chip-label>
-        </nglx-chip>
+        <lumx-chip lx-is-selected="vm.isSelected" lx-on-click="vm.toggleSelected()" lx-theme="dark">
+            <lumx-chip-label>Choice</lumx-chip-label>
+        </lumx-chip>
     </div>
 
     <strong class="lx-theme-color-light-N">filter</strong>
 
     <div class="pv++">
-        <nglx-chip
+        <lumx-chip
             lx-has-dropdown-indicator="!vm.isSelected"
             lx-is-selected="vm.isSelected"
             lx-on-click="vm.select()"
             lx-on-after-click="vm.unselect()"
             lx-theme="dark"
         >
-            <nglx-chip-before>
-                <nglx-icon lx-path="{{ vm.icons.mdiFilterVariant }}" lx-size="xs"></nglx-icon>
-            </nglx-chip-before>
-            <nglx-chip-label>Filter</nglx-chip-label>
-            <nglx-chip-after
-                ><nglx-icon lx-path="{{ vm.icons.mdiCloseCircle }}" lx-size="xs"></nglx-icon
-            ></nglx-chip-after>
-        </nglx-chip>
+            <lumx-chip-before>
+                <lumx-icon lx-path="{{ vm.icons.mdiFilterVariant }}" lx-size="xs"></lumx-icon>
+            </lumx-chip-before>
+            <lumx-chip-label>Filter</lumx-chip-label>
+            <lumx-chip-after
+                ><lumx-icon lx-path="{{ vm.icons.mdiCloseCircle }}" lx-size="xs"></lumx-icon
+            ></lumx-chip-after>
+        </lumx-chip>
     </div>
 </div>

@@ -1,14 +1,14 @@
-<nglx-select
+<lumx-select
     ng-model="vm.selectModel.selectedPerson"
     lx-choices="vm.selectPeople"
     lx-is-clearable="true"
     lx-label="Lorem Ipsum"
 >
-    <nglx-select-selected>{{ $selected.name }} - {{ $selected.age }}</nglx-select-selected>
-    <nglx-select-choices>{{ $choice.email }}</nglx-select-choices>
-</nglx-select>
+    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
+    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
+</lumx-select>
 
-<nglx-select
+<lumx-select
     ng-model="vm.selectModel.selectedPerson"
     lx-choices="vm.selectPeople"
     lx-is-clearable="true"
@@ -16,33 +16,33 @@
     lx-label="Lorem Ipsum"
     lx-placeholder="Select a value"
 >
-    <nglx-select-selected>{{ $selected.name }} - {{ $selected.age }}</nglx-select-selected>
-    <nglx-select-choices>{{ $choice.email }}</nglx-select-choices>
-</nglx-select>
+    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
+    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
+</lumx-select>
 
-<nglx-select
+<lumx-select
     ng-model="vm.selectModel.selectedPerson"
     lx-choices="vm.selectPeople"
     lx-has-error="true"
     lx-label="Lorem Ipsum"
     lx-placeholder="Select a value"
 >
-    <nglx-select-selected>{{ $selected.name }} - {{ $selected.age }}</nglx-select-selected>
-    <nglx-select-choices>{{ $choice.email }}</nglx-select-choices>
-</nglx-select>
+    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
+    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
+</lumx-select>
 
-<nglx-select
+<lumx-select
     ng-model="vm.selectModel.selectedPeople"
     lx-choices="vm.selectPeople"
     lx-label="Lorem Ipsum"
     lx-multiple="true"
     lx-placeholder="Select values"
 >
-    <nglx-select-selected>{{ $selected.name }} - {{ $selected.age }}</nglx-select-selected>
-    <nglx-select-choices>{{ $choice.email }}</nglx-select-choices>
-</nglx-select>
+    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
+    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
+</lumx-select>
 
-<nglx-select
+<lumx-select
     ng-change="vm.selectCallback()"
     ng-model="vm.selectAjax.selected"
     lx-choices="vm.selectAjax.list"
@@ -57,6 +57,6 @@
     lx-selection-to-model="vm.selectAjax.toModel(data, callback)"
     lx-placeholder="Select values"
 >
-    <nglx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</nglx-select-selected>
-    <nglx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</nglx-select-choices>
-</nglx-select>
+    <lumx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</lumx-select-selected>
+    <lumx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</lumx-select-choices>
+</lumx-select>

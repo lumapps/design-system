@@ -3,17 +3,17 @@
         <span>{{ vm.selectedRows.length || 0 }} selected item(s)</span>
     </div>
 
-    <nglx-button lx-emphasis="low" lx-variant="icon" ng-if="vm.selectedRows.length === 1">
-        <nglx-icon lx-path="{{ vm.icons.mdiPencil }}"></nglx-icon>
-    </nglx-button>
+    <lumx-button lx-emphasis="low" lx-variant="icon" ng-if="vm.selectedRows.length === 1">
+        <lumx-icon lx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
+    </lumx-button>
 
-    <nglx-button lx-emphasis="low" lx-variant="icon" ng-if="vm.selectedRows.length >= 1">
-        <nglx-icon lx-path="{{ vm.icons.mdiDelete }}"></nglx-icon>
-    </nglx-button>
+    <lumx-button lx-emphasis="low" lx-variant="icon" ng-if="vm.selectedRows.length >= 1">
+        <lumx-icon lx-path="{{ vm.icons.mdiDelete }}"></lumx-icon>
+    </lumx-button>
 </div>
 
 <div class="lx-theme-background-blue-N">
-    <nglx-data-table
+    <lumx-data-table
         id="{{ vm.dataTableDemo }}"
         lx-has-border="true"
         lx-has-bulk="true"
@@ -22,14 +22,14 @@
         lx-thead="vm.dataTableThead"
         lx-tbody="vm.dataTableTbody"
         lx-theme="dark"
-    ></nglx-data-table>
+    ></lumx-data-table>
 </div>
 
-<nglx-data-table
+<lumx-data-table
     lx-has-border="true"
     lx-has-bulk="true"
     lx-has-thumbnail="true"
     lx-is-selectable="true"
     lx-thead="vm.advancedDataTableThead"
     lx-tbody="vm.dataTableTbody"
-></nglx-data-table>
+></lumx-data-table>

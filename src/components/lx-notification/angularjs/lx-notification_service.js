@@ -4,7 +4,7 @@ import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/
 
 /////////////////////////////
 
-function NotificationService($compile, $rootScope, $timeout, NglxDepthService) {
+function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
     'ngInject';
 
     const service = this;
@@ -130,10 +130,10 @@ function NotificationService($compile, $rootScope, $timeout, NglxDepthService) {
             _hide(notification);
         }, _HIDE_DELAY);
 
-        NglxDepthService.increase();
+        LumXDepthService.increase();
 
         notification
-            .css('z-index', NglxDepthService.get())
+            .css('z-index', LumXDepthService.get())
             .appendTo('body')
             .on('click', function onNotificationClick() {
                 _hide(notification);

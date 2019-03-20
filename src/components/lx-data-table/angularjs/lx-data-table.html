@@ -14,26 +14,26 @@
             ng-class="{ 'lx-data-table__row--is-selected': lumx.hasBulk && lumx.isSelectable && lumx.allRowsSelected }"
         >
             <th align="center" class="lx-data-table__cell lx-data-table__cell--thead" ng-if="::lumx.hasThumbnail">
-                <nglx-checkbox
+                <lumx-checkbox
                     class="lx-data-table__checkbox"
                     lx-theme="{{ lumx.theme }}"
                     ng-checked="lumx.allRowsSelected"
                     ng-click="lumx.toggleAllSelected()"
                     ng-if="::lumx.hasBulk && lumx.isSelectable"
-                ></nglx-checkbox>
+                ></lumx-checkbox>
             </th>
             <th
                 align="center"
                 class="lx-data-table__cell lx-data-table__cell--thead"
                 ng-if="::lumx.isSelectable && !lumx.hasThumbnail"
             >
-                <nglx-checkbox
+                <lumx-checkbox
                     class="lx-data-table__checkbox"
                     lx-theme="{{ lumx.theme }}"
                     ng-checked="lumx.allRowsSelected"
                     ng-click="lumx.toggleAllSelected()"
                     ng-if="lumx.hasBulk"
-                ></nglx-checkbox>
+                ></lumx-checkbox>
             </th>
             <th
                 align="left"
@@ -44,17 +44,17 @@
                 ng-repeat="th in lumx.thead track by $index"
                 ng-if="!lumx.hasThumbnail || (lumx.hasThumbnail && $index != 0)"
             >
-                <nglx-icon lx-path="{{ th.icon }}" lx-size="xxs" ng-if="th.icon && !th.sortable"></nglx-icon>
-                <nglx-icon
+                <lumx-icon lx-path="{{ th.icon }}" lx-size="xxs" ng-if="th.icon && !th.sortable"></lumx-icon>
+                <lumx-icon
                     lx-path="{{ lumx.icons.mdiArrowUp }}"
                     lx-size="xxs"
                     ng-if="th.sortable && th.sort === 'asc'"
-                ></nglx-icon>
-                <nglx-icon
+                ></lumx-icon>
+                <lumx-icon
                     lx-path="{{ lumx.icons.mdiArrowDown }}"
                     lx-size="xxs"
                     ng-if="th.sortable && th.sort === 'desc'"
-                ></nglx-icon>
+                ></lumx-icon>
                 <span>{{ th.label }}</span>
             </th>
         </tr>
@@ -72,32 +72,32 @@
         >
             <td align="center" class="lx-data-table__cell lx-data-table__cell--tbody" ng-if="::lumx.hasThumbnail">
                 <div class="lx-data-table__thumbnail">
-                    <nglx-thumbnail
+                    <lumx-thumbnail
                         lx-image="{{ tr[lumx.thead[0].name] }}"
                         lx-variant="{{ lumx.thead[0].variant }}"
-                    ></nglx-thumbnail>
+                    ></lumx-thumbnail>
                 </div>
 
-                <nglx-checkbox
+                <lumx-checkbox
                     class="lx-data-table__checkbox"
                     lx-theme="{{ lumx.theme }}"
                     ng-checked="tr.lxDataTableSelected"
                     ng-click="lumx.toggleSelection(tr, undefined, $event)"
                     ng-if="lumx.isSelectable && !tr.lxDataTableDisabled"
-                ></nglx-checkbox>
+                ></lumx-checkbox>
             </td>
             <td
                 align="center"
                 class="lx-data-table__cell lx-data-table__cell--tbody"
                 ng-if="::lumx.isSelectable && !lumx.hasThumbnail"
             >
-                <nglx-checkbox
+                <lumx-checkbox
                     class="lx-data-table__checkbox"
                     lx-theme="{{ lumx.theme }}"
                     ng-checked="tr.lxDataTableSelected"
                     ng-click="lumx.toggleSelection(tr, undefined, $event)"
                     ng-disabled="tr.lxDataTableDisabled"
-                ></nglx-checkbox>
+                ></lumx-checkbox>
             </td>
             <td
                 align="left"

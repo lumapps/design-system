@@ -1,4 +1,4 @@
-function DemoProgressTrackerController(NglxNotificationService) {
+function DemoProgressTrackerController(LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -127,7 +127,7 @@ function DemoProgressTrackerController(NglxNotificationService) {
         vm.stepper[index].isComplete = true;
 
         if (vm.activeStepIndex === vm.stepper.length - 1 && vm.isComplete()) {
-            NglxNotificationService.success('Complete');
+            LumXNotificationService.success('Complete');
         }
     }
 

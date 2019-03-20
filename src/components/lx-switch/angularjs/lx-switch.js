@@ -4,7 +4,7 @@ import template from './lx-switch.html';
 
 /////////////////////////////
 
-function SwitchController(NglxUtilsService) {
+function SwitchController(LumXUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -34,7 +34,7 @@ function SwitchController(NglxUtilsService) {
      *
      * @type {string}
      */
-    lumx.switchId = NglxUtilsService.generateUUID();
+    lumx.switchId = LumXUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.

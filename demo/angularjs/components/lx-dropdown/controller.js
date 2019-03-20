@@ -2,7 +2,7 @@ import { mdiEmail, mdiSend } from 'LumX/icons';
 
 /////////////////////////////
 
-function DemoDropdownController(NglxDropdownService) {
+function DemoDropdownController(LumXDropdownService) {
     'ngInject';
 
     const vm = this;
@@ -50,7 +50,7 @@ function DemoDropdownController(NglxDropdownService) {
     function closeDropdown(evt) {
         evt.stopPropagation();
 
-        NglxDropdownService.close(vm.dropdownId);
+        LumXDropdownService.close(vm.dropdownId);
     }
 
     /**
@@ -61,7 +61,7 @@ function DemoDropdownController(NglxDropdownService) {
     function openDropdown(evt) {
         evt.stopPropagation();
 
-        NglxDropdownService.open(vm.dropdownId, {
+        LumXDropdownService.open(vm.dropdownId, {
             target: `#${vm.dropdownTarget}`,
             source: `#${vm.dropdownSource}`,
         });

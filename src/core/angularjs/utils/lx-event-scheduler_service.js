@@ -2,7 +2,7 @@ import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_con
 
 /////////////////////////////
 
-function EventSchedulerService($document, NglxUtilsService) {
+function EventSchedulerService($document, LumXUtilsService) {
     'ngInject';
 
     const service = this;
@@ -75,7 +75,7 @@ function EventSchedulerService($document, NglxUtilsService) {
             eventName,
         };
 
-        const id = NglxUtilsService.generateUUID();
+        const id = LumXUtilsService.generateUUID();
         _handlers[id] = handler;
 
         if (angular.isUndefined(_schedule[eventName])) {

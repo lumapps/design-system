@@ -15,20 +15,20 @@
     <span class="lx-text-field__helper" ng-if="::lumx.helper">{{ lumx.helper }}</span>
 
     <div class="lx-text-field__input-wrapper">
-        <nglx-icon
+        <lumx-icon
             class="lx-text-field__input-icon"
             lx-path="{{ lumx.icon }}"
             lx-size="xs"
             ng-if="::lumx.icon"
-        ></nglx-icon>
+        ></lumx-icon>
 
         <div class="lx-text-field__input-native" ng-transclude></div>
 
-        <nglx-icon
+        <lumx-icon
             class="lx-text-field__input-validity"
             lx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
             lx-size="xs"
             ng-if="lumx.isValid || lumx.hasError"
-        ></nglx-icon>
+        ></lumx-icon>
     </div>
 </div>

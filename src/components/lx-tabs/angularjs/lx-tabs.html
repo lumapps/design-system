@@ -15,10 +15,10 @@
                         'lx-tabs__link--is-disabled': tab.isDisabled }"
             ng-repeat="tab in lumx.tabs track by tab.uuid"
             ng-click="lumx.setActiveTab(tab)"
-            nglx-enter-keypress="lumx.setActiveTab(tab)"
+            lumx-enter-keypress="lumx.setActiveTab(tab)"
             tabindex="{{ tab.isDisabled ? -1 : 0 }}"
         >
-            <nglx-icon lx-path="{{ tab.icon }}" lx-size="xs" ng-if="tab.icon"></nglx-icon>
+            <lumx-icon lx-path="{{ tab.icon }}" lx-size="xs" ng-if="tab.icon"></lumx-icon>
             <span ng-if="tab.label">{{ tab.label }}</span>
         </a>
     </div>

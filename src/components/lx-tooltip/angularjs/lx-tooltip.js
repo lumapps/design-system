@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function TooltipController($element, $timeout, NglxDepthService) {
+function TooltipController($element, $timeout, LumXDepthService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -131,11 +131,11 @@ function TooltipController($element, $timeout, NglxDepthService) {
             text: lumx.text,
         });
 
-        NglxDepthService.increase();
+        LumXDepthService.increase();
 
         _tooltip
             .append(_tooltipLabel)
-            .css('z-index', NglxDepthService.get())
+            .css('z-index', LumXDepthService.get())
             .appendTo('body');
 
         _hoverTimeout = $timeout(_setTooltipPosition, _HOVER_DELAY);
@@ -168,8 +168,8 @@ function TooltipDirective() {
         link,
         restrict: 'A',
         scope: {
-            position: '@?nglxTooltipPosition',
-            text: '@nglxTooltip',
+            position: '@?lumxTooltipPosition',
+            text: '@lumxTooltip',
         },
     };
 }

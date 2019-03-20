@@ -8,16 +8,16 @@
 
         <div class="main-block__toolbar">
             <div class="main-block__code-toggle">
-                <nglx-button lx-emphasis="low" ng-click="mainBlock.toggleCode()">
-                    <nglx-icon lx-path="{{ mainBlock.icons.mdiCodeTags }}"></nglx-icon>
+                <lumx-button lx-emphasis="low" ng-click="mainBlock.toggleCode()">
+                    <lumx-icon lx-path="{{ mainBlock.icons.mdiCodeTags }}"></lumx-icon>
                     <span>{{ mainBlock.isCodeOpen ? 'Hide code' : 'Show code' }}</span>
-                </nglx-button>
+                </lumx-button>
             </div>
 
             <div class="main-block__theme-toggle">
-                <nglx-switch lx-position="right" ng-model="mainBlock.hasDarkTheme" ng-change="mainBlock.toggleTheme()">
+                <lumx-switch lx-position="right" ng-model="mainBlock.hasDarkTheme" ng-change="mainBlock.toggleTheme()">
                     Dark Background
-                </nglx-switch>
+                </lumx-switch>
             </div>
         </div>
 

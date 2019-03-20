@@ -1,18 +1,18 @@
-<nglx-progress-tracker>
-    <nglx-progress-tracker-step
+<lumx-progress-tracker>
+    <lumx-progress-tracker-step
         lx-label="{{ step.label }}"
         lx-has-error="step.hasError"
         lx-helper="{{ step.helper }}"
         lx-is-active="step.isActive"
         lx-is-complete="step.isComplete"
-        nglx-enter-keypress="vm.setActiveStep($index)"
+        lumx-enter-keypress="vm.setActiveStep($index)"
         ng-click="vm.setActiveStep($index)"
         ng-repeat="step in vm.stepper"
-    ></nglx-progress-tracker-step>
-</nglx-progress-tracker>
+    ></lumx-progress-tracker-step>
+</lumx-progress-tracker>
 
 <div ng-repeat="step in vm.stepper" ng-if="step.isActive">
     {{ step.content }}
 </div>
 
-<nglx-button ng-click="vm.next()">Next</nglx-button>
+<lumx-button ng-click="vm.next()">Next</lumx-button>

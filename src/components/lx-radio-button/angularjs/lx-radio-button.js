@@ -4,7 +4,7 @@ import template from './lx-radio-button.html';
 
 /////////////////////////////
 
-function RadioButtonController(NglxUtilsService) {
+function RadioButtonController(LumXUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -34,7 +34,7 @@ function RadioButtonController(NglxUtilsService) {
      *
      * @type {string}
      */
-    lumx.radioButtonId = NglxUtilsService.generateUUID();
+    lumx.radioButtonId = LumXUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.

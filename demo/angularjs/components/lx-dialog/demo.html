@@ -1,38 +1,38 @@
 <div class="p+">
-    <nglx-button ng-click="vm.openDialog()" id="default-dialog-source">Open dialog</nglx-button>
-    <nglx-button ng-click="vm.alertDialog()" id="alert-dialog-source">Alert box</nglx-button>
-    <nglx-button ng-click="vm.confirmDialog()" id="confirm-dialog-source">Confirm box</nglx-button>
+    <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">Open dialog</lumx-button>
+    <lumx-button ng-click="vm.alertDialog()" id="alert-dialog-source">Alert box</lumx-button>
+    <lumx-button ng-click="vm.confirmDialog()" id="confirm-dialog-source">Confirm box</lumx-button>
 </div>
 
-<nglx-dialog id="{{ vm.dialogId }}">
-    <nglx-dialog-header>
-        <nglx-toolbar>
-            <nglx-toolbar-label>
+<lumx-dialog id="{{ vm.dialogId }}">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
                 <span class="lx-typography-title">Dialog title</span>
-            </nglx-toolbar-label>
+            </lumx-toolbar-label>
 
-            <nglx-toolbar-after>
-                <nglx-button ng-click="vm.addPerson()" nglx-focus-on-init>
+            <lumx-toolbar-after>
+                <lumx-button ng-click="vm.addPerson()" lumx-focus-on-init>
                     <span>Add</span>
-                </nglx-button>
-            </nglx-toolbar-after>
-        </nglx-toolbar>
+                </lumx-button>
+            </lumx-toolbar-after>
+        </lumx-toolbar>
 
-        <nglx-divider></nglx-divider>
-    </nglx-dialog-header>
+        <lumx-divider></lumx-divider>
+    </lumx-dialog-header>
 
-    <nglx-dialog-content>
+    <lumx-dialog-content>
         <div class="p++">
             <div ng-repeat="person in vm.people">{{ person.name }} - {{ person.email }} - {{ person.age }}</div>
         </div>
-    </nglx-dialog-content>
+    </lumx-dialog-content>
 
-    <nglx-dialog-footer>
-        <nglx-divider></nglx-divider>
+    <lumx-dialog-footer>
+        <lumx-divider></lumx-divider>
 
         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
-            <nglx-button lx-emphasis="medium" nglx-dialog-close>Cancel</nglx-button>
-            <nglx-button class="ml" nglx-dialog-close>Ok</nglx-button>
+            <lumx-button lx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Ok</lumx-button>
         </div>
-    </nglx-dialog-footer>
-</nglx-dialog>
+    </lumx-dialog-footer>
+</lumx-dialog>

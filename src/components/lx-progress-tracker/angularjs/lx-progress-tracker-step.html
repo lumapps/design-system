@@ -6,7 +6,7 @@
                 'lx-progress-tracker-step--has-error': lumx.isActive && lumx.hasError }"
     tabindex="{{ lumx.isClickable() ? 0 : -1 }}"
 >
-    <nglx-icon class="lx-progress-tracker-step__state" lx-path="{{ lumx.getIcon() }}" lx-size="s"></nglx-icon>
+    <lumx-icon class="lx-progress-tracker-step__state" lx-path="{{ lumx.getIcon() }}" lx-size="s"></lumx-icon>
 
     <span class="lx-progress-tracker-step__label">{{ lumx.label }}</span>
 
