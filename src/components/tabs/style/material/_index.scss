@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Tabs
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-tabs {
+    $self: &;
+
+    &__links::after {
+        height: 1px !important;
+    }
+
+    &__link {
+        background-color: transparent !important;
+        text-transform: uppercase;
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant(dark, L2);
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant(light, L2);
+        }
+    }
+}
+
+/* Tabs link states
+   ========================================================================== */
+
+// Hover state
+.#{$lumx-base-prefix}-tabs__link:hover {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        color: lumx-theme-color-variant(primary, N);
+    }
+
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        color: lumx-theme-color-variant(light, N);
+    }
+}
+
+/* Tabs link active
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-tabs__link--is-active {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        color: lumx-theme-color-variant(primary, N);
+    }
+
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        color: lumx-theme-color-variant(light, N);
+    }
+}

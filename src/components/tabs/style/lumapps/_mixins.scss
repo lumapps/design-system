@@ -1,0 +1,70 @@
+@mixin lumx-tabs-links($theme) {
+    position: relative;
+    display: flex;
+
+    &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        background-color: lumx-theme-color-variant($theme, L5);
+        content: '';
+    }
+}
+
+@mixin lumx-tabs-links-position($position) {
+    @if $position == left {
+        justify-content: flex-start;
+    } @else if $position == center {
+        justify-content: center;
+    } @else if $position == right {
+        justify-content: flex-end;
+    }
+}
+
+@mixin lumx-tabs-link() {
+    position: relative;
+    display: flex;
+    height: map-get($lumx-sizes, l);
+    align-items: center;
+    justify-content: center;
+    padding: 0 $lumx-spacing-unit * 3;
+    cursor: pointer;
+    outline: none;
+
+    &::after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        content: '';
+    }
+
+    i {
+        margin-right: $lumx-spacing-unit;
+    }
+
+    span {
+        @include lumx-typography(subtitle1);
+    }
+}
+
+@mixin lumx-tabs-link-layout($layout) {
+    @if $layout == fixed {
+        flex: 1;
+    }
+}
+
+@mixin lumx-tabs-link-active($theme) {
+    @if $theme == dark {
+        &::after {
+            background-color: lumx-theme-color-variant(primary, N);
+        }
+    } @else if $theme == light {
+        &::after {
+            background-color: lumx-theme-color-variant(light, N);
+        }
+    }
+}

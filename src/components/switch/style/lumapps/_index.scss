@@ -1,0 +1,225 @@
+/* ==========================================================================
+   Switch
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-switch {
+    $self: &;
+
+    display: flex;
+
+    &--position-right {
+        flex-direction: row-reverse;
+    }
+
+    &__input-wrapper {
+        @include lumx-switch-input-wrapper;
+
+        flex-shrink: 0;
+    }
+
+    &__input-native {
+        @include lumx-switch-input-native;
+    }
+
+    &__input-placeholder {
+        @include lumx-switch-placeholder;
+    }
+
+    &__input-background {
+        #{$self}--is-unchecked & {
+            @include lumx-switch-input-background(unchecked);
+        }
+
+        #{$self}--is-checked & {
+            @include lumx-switch-input-background(checked);
+        }
+
+        #{$self}--theme-light#{$self}--is-unchecked & {
+            @include lumx-state(state-default, emphasis-low, dark);
+        }
+
+        #{$self}--theme-dark#{$self}--is-unchecked & {
+            @include lumx-state(state-default, emphasis-low, light);
+        }
+
+        #{$self}--theme-light#{$self}--is-checked & {
+            @include lumx-state(state-default, emphasis-high, $lumx-switch-checked-color, dark);
+        }
+
+        #{$self}--theme-dark#{$self}--is-checked & {
+            @include lumx-state(state-default, emphasis-high, $lumx-switch-checked-color, light);
+        }
+    }
+
+    &__input-indicator {
+        #{$self}--theme-light#{$self}--is-unchecked & {
+            @include lumx-switch-input-indicator(unchecked, dark);
+        }
+
+        #{$self}--theme-dark#{$self}--is-unchecked & {
+            @include lumx-switch-input-indicator(unchecked, light);
+        }
+
+        #{$self}--theme-light#{$self}--is-checked & {
+            @include lumx-switch-input-indicator(checked, dark);
+        }
+
+        #{$self}--theme-dark#{$self}--is-checked & {
+            @include lumx-switch-input-indicator(checked, light);
+        }
+    }
+
+    &__content {
+        flex: 1;
+    }
+
+    &__label,
+    &__helper {
+        #{$self}--position-left & {
+            padding-left: $lumx-spacing-unit;
+        }
+
+        #{$self}--position-right & {
+            padding-right: $lumx-spacing-unit;
+        }
+    }
+
+    &__label {
+        #{$self}--theme-light & {
+            @include lumx-input-label(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-label(light);
+        }
+    }
+
+    &__helper {
+        #{$self}--theme-light & {
+            @include lumx-input-helper(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-helper(light);
+        }
+    }
+}
+
+/* Switch states
+   ========================================================================== */
+
+// Disabled state
+.#{$lumx-base-prefix}-switch--is-disabled {
+    .#{$lumx-base-prefix}-switch__input-native {
+        pointer-events: none;
+    }
+
+    .#{$lumx-base-prefix}-switch__input-placeholder {
+        @include lumx-state-disabled-input;
+    }
+
+    &.#{$lumx-base-prefix}-switch--theme-light {
+        .#{$lumx-base-prefix}-switch__label,
+        .#{$lumx-base-prefix}-switch__helper {
+            @include lumx-state-disabled-text(dark);
+        }
+    }
+
+    &.#{$lumx-base-prefix}-switch--theme-dark {
+        .#{$lumx-base-prefix}-switch__label,
+        .#{$lumx-base-prefix}-switch__helper {
+            @include lumx-state-disabled-text(light);
+        }
+    }
+}
+
+// Hover state
+.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-unchecked
+.#{$lumx-base-prefix}-switch__input-native:hover
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-background {
+        @include lumx-state(state-hover, emphasis-low, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-unchecked
+.#{$lumx-base-prefix}-switch__input-native:hover
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-background {
+        @include lumx-state(state-hover, emphasis-low, light);
+    }
+}
+
+.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-checked
+.#{$lumx-base-prefix}-switch__input-native:hover
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-background {
+        @include lumx-state(state-hover, emphasis-high, $lumx-switch-checked-color, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-checked
+.#{$lumx-base-prefix}-switch__input-native:hover
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-background {
+        @include lumx-state(state-hover, emphasis-high, $lumx-switch-checked-color, light);
+    }
+}
+
+// Active state
+.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-unchecked
+.#{$lumx-base-prefix}-switch__input-native:active
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-background {
+        @include lumx-state(state-active, emphasis-low, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-unchecked
+.#{$lumx-base-prefix}-switch__input-native:active
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-background {
+        @include lumx-state(state-active, emphasis-low, light);
+    }
+}
+
+.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-checked
+.#{$lumx-base-prefix}-switch__input-native:active
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-background {
+        @include lumx-state(state-active, emphasis-high, $lumx-switch-checked-color, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-checked
+.#{$lumx-base-prefix}-switch__input-native:active
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    .#{$lumx-base-prefix}-switch__input-background {
+        @include lumx-state(state-active, emphasis-high, $lumx-switch-checked-color, light);
+    }
+}
+
+// Focus state
+.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-unchecked
+.#{$lumx-base-prefix}-switch__input-native[data-focus-visible-added]
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    @include lumx-state(state-focus, emphasis-low, dark);
+}
+
+.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-unchecked
+.#{$lumx-base-prefix}-switch__input-native[data-focus-visible-added]
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    @include lumx-state(state-focus, emphasis-low, light);
+}
+
+.#{$lumx-base-prefix}-switch--theme-light.#{$lumx-base-prefix}-switch--is-checked
+.#{$lumx-base-prefix}-switch__input-native[data-focus-visible-added]
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    @include lumx-state(state-focus, emphasis-high, $lumx-switch-checked-color, dark);
+}
+
+.#{$lumx-base-prefix}-switch--theme-dark.#{$lumx-base-prefix}-switch--is-checked
+.#{$lumx-base-prefix}-switch__input-native[data-focus-visible-added]
++ .#{$lumx-base-prefix}-switch__input-placeholder {
+    @include lumx-state(state-focus, emphasis-high, $lumx-switch-checked-color, light);
+}

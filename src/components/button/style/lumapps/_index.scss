@@ -1,0 +1,193 @@
+/* ==========================================================================
+   Button
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-button {
+    @include lumx-button-base;
+    @include lumx-state-transition;
+}
+
+/* Button padding
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-high,
+.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-medium {
+    &.#{$lumx-base-prefix}-button--size-m {
+        padding: 0 $lumx-spacing-unit * 2;
+
+        &.#{$lumx-base-prefix}-button--has-left-icon {
+            padding-left: $lumx-spacing-unit * 1.5;
+        }
+
+        &.#{$lumx-base-prefix}-button--has-right-icon {
+            padding-right: $lumx-spacing-unit * 1.5;
+        }
+    }
+
+    &.#{$lumx-base-prefix}-button--size-s {
+        padding: 0 $lumx-spacing-unit * 1.5;
+
+        &.#{$lumx-base-prefix}-button--has-left-icon {
+            padding-left: $lumx-spacing-unit;
+        }
+
+        &.#{$lumx-base-prefix}-button--has-right-icon {
+            padding-right: $lumx-spacing-unit;
+        }
+    }
+}
+
+.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-low {
+    padding: 0 $lumx-spacing-unit;
+}
+
+/* Button sizes
+   ========================================================================== */
+
+@each $key, $size in $lumx-sizes {
+    @if $key == s or $key == m {
+        .#{$lumx-base-prefix}-button--size-#{$key} {
+            &.#{$lumx-base-prefix}-button--emphasis-high {
+                &.#{$lumx-base-prefix}-button--variant-button {
+                    @include lumx-button-size(emphasis-high, variant-button, $key);
+                }
+
+                &.#{$lumx-base-prefix}-button--variant-icon {
+                    @include lumx-button-size(emphasis-high, variant-icon, $key);
+                }
+            }
+
+            &.#{$lumx-base-prefix}-button--emphasis-medium {
+                &.#{$lumx-base-prefix}-button--variant-button {
+                    @include lumx-button-size(emphasis-medium, variant-button, $key);
+                }
+
+                &.#{$lumx-base-prefix}-button--variant-icon {
+                    @include lumx-button-size(emphasis-medium, variant-icon, $key);
+                }
+            }
+
+            &.#{$lumx-base-prefix}-button--emphasis-low {
+                &.#{$lumx-base-prefix}-button--variant-button {
+                    @include lumx-button-size(emphasis-low, variant-button, $key);
+                }
+
+                &.#{$lumx-base-prefix}-button--variant-icon {
+                    @include lumx-button-size(emphasis-low, variant-icon, $key);
+                }
+            }
+
+            &.#{$lumx-base-prefix}-button--variant-button {
+                i:first-child {
+                    @include lumx-button-icon(variant-button, position-left, $key);
+                }
+
+                i:last-child {
+                    @include lumx-button-icon(variant-button, position-right, $key);
+                }
+            }
+
+            &.#{$lumx-base-prefix}-button--variant-icon {
+                i:first-child {
+                    @include lumx-button-icon(variant-icon, position-left, $key);
+                }
+
+                i:last-child {
+                    @include lumx-button-icon(variant-icon, position-right, $key);
+                }
+            }
+
+            span {
+                @include lumx-button-text($key);
+            }
+        }
+    }
+}
+
+/* Button colors
+   ========================================================================== */
+
+@each $key, $color in $lumx-theme-color-palette {
+    @if $key != dark and $key != light {
+        .#{$lumx-base-prefix}-button--color-#{$key} {
+            &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-light {
+                @include lumx-button-color(emphasis-high, $key, dark);
+            }
+
+            &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-dark {
+                @include lumx-button-color(emphasis-high, $key, light);
+            }
+        }
+    }
+}
+
+@each $key, $color in $lumx-theme-color-palette {
+    .#{$lumx-base-prefix}-button--color-#{$key} {
+        &.#{$lumx-base-prefix}-button--emphasis-medium {
+            @include lumx-button-color(emphasis-medium, $key);
+        }
+
+        &.#{$lumx-base-prefix}-button--emphasis-low {
+            @include lumx-button-color(emphasis-low, $key);
+        }
+    }
+}
+
+/* Toggle button
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-button--is-selected {
+    &.#{$lumx-base-prefix}-button--color-dark {
+        @include lumx-state-as-selected(state-default, dark);
+
+        &:hover {
+            @include lumx-state-as-selected(state-hover, dark);
+        }
+
+        &:active {
+            @include lumx-state-as-selected(state-active, dark);
+        }
+
+        &[data-focus-visible-added] {
+            @include lumx-state-as-selected(state-focus, dark);
+        }
+    }
+
+    &.#{$lumx-base-prefix}-button--color-light {
+        @include lumx-state-as-selected(state-default, light);
+
+        &:hover {
+            @include lumx-state-as-selected(state-hover, light);
+        }
+
+        &:active {
+            @include lumx-state-as-selected(state-active, light);
+        }
+
+        &[data-focus-visible-added] {
+            @include lumx-state-as-selected(state-focus, light);
+        }
+    }
+}
+
+/* Button group
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-button-group {
+    display: inline-flex;
+    vertical-align: top;
+
+    .#{$lumx-base-prefix}-button {
+        margin-right: 1px;
+        border-radius: 0 !important;
+
+        &:first-child {
+            border-radius: $lumx-theme-border-radius 0 0 $lumx-theme-border-radius !important;
+        }
+
+        &:last-child {
+            margin-right: 0;
+            border-radius: 0 $lumx-theme-border-radius $lumx-theme-border-radius 0 !important;
+        }
+    }
+}

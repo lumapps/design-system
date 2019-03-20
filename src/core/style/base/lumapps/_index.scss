@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+html {
+    @include lumx-typography-base;
+
+    box-sizing: border-box;
+    color: lumx-theme-color-variant(dark, N);
+    font-size: ($lumx-typography-default-font-size / 16px) * 1em;
+    line-height: $lumx-typography-default-line-height / $lumx-typography-default-font-size;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote,
+p,
+pre,
+dl,
+dd,
+ol,
+ul,
+figure,
+hr,
+fieldset,
+legend {
+    padding: 0;
+    margin: 0;
+}
+
+li > {
+    ol,
+    ul {
+        margin-bottom: 0;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}

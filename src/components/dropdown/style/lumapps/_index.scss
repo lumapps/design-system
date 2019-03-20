@@ -1,0 +1,20 @@
+/* ==========================================================================
+   Dropdown
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-dropdown {
+    &--has-toggle {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    &__menu {
+        @include lumx-elevation(3);
+
+        position: fixed;
+        overflow: auto;
+        padding: $lumx-spacing-unit 0;
+        background-color: lumx-theme-color-variant(light, N);
+        border-radius: $lumx-theme-border-radius;
+    }
+}

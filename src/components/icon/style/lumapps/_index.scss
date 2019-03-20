@@ -1,0 +1,29 @@
+/* ==========================================================================
+   Icon
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-icon {
+    display: block;
+
+    svg {
+        display: block;
+    }
+}
+
+/* Icon sizes
+   ========================================================================== */
+
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-icon--size-#{$key} {
+        @include lumx-icon-size($key);
+    }
+}
+
+/* Button colors
+   ========================================================================== */
+
+@each $key, $color in $lumx-theme-color-palette {
+    .#{$lumx-base-prefix}-icon--color-#{$key} {
+        @include lumx-icon-color($key);
+    }
+}

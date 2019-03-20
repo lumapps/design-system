@@ -1,0 +1,32 @@
+/* ==========================================================================
+   Toolbar
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-toolbar {
+    display: flex;
+    height: $lumx-toolbar-height;
+    align-items: center;
+    padding: 0 $lumx-spacing-unit * 3;
+
+    &--has-before {
+        padding-left: $lumx-spacing-unit * 2;
+    }
+
+    &--has-after {
+        padding-right: $lumx-spacing-unit * 2;
+    }
+
+    &__before {
+        flex-shrink: 0;
+        margin-right: $lumx-spacing-unit * 2;
+    }
+
+    &__label {
+        flex: 1;
+    }
+
+    &__after {
+        flex-shrink: 0;
+        margin-left: $lumx-spacing-unit * 2;
+    }
+}

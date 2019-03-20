@@ -1,0 +1,110 @@
+<main-header category="Components" title="Chips">
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris placerat
+        enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.
+    </p>
+</main-header>
+
+<main-block
+    class="mt+++"
+    title="Default"
+    path="demo/angularjs/components/chip/partials/default.html"
+    js-path="demo/angularjs/components/chip//controller.js"
+>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris placerat
+        enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.
+    </p>
+</main-block>
+
+<strong>dismissible</strong>
+
+<div class="pv++">
+    <lumx-chip lumx-on-click="vm.clickCallback()">
+        <lumx-chip-label>Dismissible</lumx-chip-label>
+        <lumx-chip-after><lumx-icon lumx-path="{{ vm.icons.mdiClose }}" lumx-size="xs"></lumx-icon></lumx-chip-after>
+    </lumx-chip>
+</div>
+
+<strong>choice</strong>
+
+<div class="pv++">
+    <lumx-chip lumx-is-selected="vm.isSelected" lumx-on-click="vm.toggleSelected()">
+        <lumx-chip-label>Choice</lumx-chip-label>
+    </lumx-chip>
+</div>
+
+<strong>filter</strong>
+
+<div class="pv++">
+    <lumx-chip
+        lumx-has-dropdown-indicator="!vm.isSelected"
+        lumx-is-selected="vm.isSelected"
+        lumx-on-click="vm.select()"
+        lumx-on-after-click="vm.unselect()"
+    >
+        <lumx-chip-before
+            ><lumx-icon lumx-path="{{ vm.icons.mdiFilterVariant }}" lumx-size="xs"></lumx-icon
+        ></lumx-chip-before>
+        <lumx-chip-label>Filter</lumx-chip-label>
+        <lumx-chip-after
+            ><lumx-icon lumx-path="{{ vm.icons.mdiCloseCircle }}" lumx-size="xs"></lumx-icon
+        ></lumx-chip-after>
+    </lumx-chip>
+</div>
+
+<div class="p++ lumx-theme-background-dark-N">
+    <strong class="lumx-theme-color-light-N">default</strong>
+
+    <div class="pv++">
+        <lumx-chip lumx-theme="dark">
+            <lumx-chip-label>Lorem ipsum</lumx-chip-label>
+        </lumx-chip>
+
+        <lumx-chip lumx-theme="dark">
+            <lumx-chip-before
+                ><lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon
+            ></lumx-chip-before>
+            <lumx-chip-label>Lorem ipsum</lumx-chip-label>
+        </lumx-chip>
+    </div>
+
+    <strong class="lumx-theme-color-light-N">dismissible</strong>
+
+    <div class="pv++">
+        <lumx-chip lumx-on-click="vm.clickCallback()" lumx-theme="dark">
+            <lumx-chip-label>Dismissible</lumx-chip-label>
+            <lumx-chip-after
+                ><lumx-icon lumx-path="{{ vm.icons.mdiClose }}" lumx-size="xs"></lumx-icon
+            ></lumx-chip-after>
+        </lumx-chip>
+    </div>
+
+    <strong class="lumx-theme-color-light-N">choice</strong>
+
+    <div class="pv++">
+        <lumx-chip lumx-is-selected="vm.isSelected" lumx-on-click="vm.toggleSelected()" lumx-theme="dark">
+            <lumx-chip-label>Choice</lumx-chip-label>
+        </lumx-chip>
+    </div>
+
+    <strong class="lumx-theme-color-light-N">filter</strong>
+
+    <div class="pv++">
+        <lumx-chip
+            lumx-has-dropdown-indicator="!vm.isSelected"
+            lumx-is-selected="vm.isSelected"
+            lumx-on-click="vm.select()"
+            lumx-on-after-click="vm.unselect()"
+            lumx-theme="dark"
+        >
+            <lumx-chip-before>
+                <lumx-icon lumx-path="{{ vm.icons.mdiFilterVariant }}" lumx-size="xs"></lumx-icon>
+            </lumx-chip-before>
+            <lumx-chip-label>Filter</lumx-chip-label>
+            <lumx-chip-after
+                ><lumx-icon lumx-path="{{ vm.icons.mdiCloseCircle }}" lumx-size="xs"></lumx-icon
+            ></lumx-chip-after>
+        </lumx-chip>
+    </div>
+</div>

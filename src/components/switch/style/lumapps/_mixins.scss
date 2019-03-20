@@ -1,0 +1,68 @@
+@mixin lumx-switch-input-wrapper() {
+    position: relative;
+    width: $lumx-switch-wrapper-width;
+    height: $lumx-switch-wrapper-height;
+}
+
+@mixin lumx-switch-input-native() {
+    position: relative;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: $lumx-switch-wrapper-width;
+    height: $lumx-switch-wrapper-height;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+@mixin lumx-switch-placeholder() {
+    position: absolute;
+    z-index: 1;
+    top: ($lumx-switch-wrapper-height - $lumx-switch-control-height) / 2;
+    left: 0;
+    width: $lumx-switch-control-width;
+    height: $lumx-switch-control-height;
+    border-radius: $lumx-switch-control-height / 2;
+}
+
+@mixin lumx-switch-input-background($status) {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: $lumx-switch-control-height / 2;
+
+    @if $status == 'unchecked' {
+        border-width: 2px;
+        border-style: solid;
+    }
+}
+
+@mixin lumx-switch-input-indicator($status, $theme) {
+    position: absolute;
+    z-index: 3;
+    top: ($lumx-switch-control-height - $lumx-switch-indicator-size) / 2;
+    width: $lumx-switch-indicator-size;
+    height: $lumx-switch-indicator-size;
+    border-radius: $lumx-switch-indicator-size / 2;
+
+    @if $status == 'checked' {
+        right: $lumx-switch-indicator-offset;
+
+        @if $theme == 'dark' {
+            background-color: lumx-theme-color-variant(light, N);
+        } @else if $theme == 'light' {
+            background-color: lumx-theme-color-variant($lumx-switch-checked-color, N);
+        }
+    } @else if $status == 'unchecked' {
+        left: $lumx-switch-indicator-offset;
+        background-color: lumx-theme-color-variant($theme, N);
+    }
+}
+
+@mixin lumx-switch-input-indicator-disabled($theme) {
+    background-color: lumx-theme-color-variant($theme, L3);
+}

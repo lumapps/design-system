@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Dialog
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-dialog-filter {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    animation: lumx-dialog-filter-show $lumx-dialog-transition-duration;
+    background-color: lumx-theme-color-variant(dark, L1);
+    opacity: 1;
+    transition: opacity $lumx-dialog-transition-duration;
+
+    &--is-hidden {
+        opacity: 0;
+    }
+}
+
+.#{$lumx-base-prefix}-dialog {
+    position: fixed;
+    top: $lumx-dialog-offset;
+    left: 50%;
+    display: none;
+    height: calc(100% - 120px);
+    animation: lumx-dialog-show $lumx-dialog-transition-duration;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    transition: opacity $lumx-dialog-transition-duration;
+
+    &--is-hidden {
+        opacity: 0;
+    }
+
+    &__wrapper {
+        @include lumx-elevation(5);
+
+        display: flex;
+        max-height: 100%;
+        flex-direction: column;
+        background-color: #fff;
+        border-radius: $lumx-theme-border-radius;
+    }
+
+    &__header,
+    &__footer {
+        flex-shrink: 0;
+    }
+
+    &__content {
+        flex: 1;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+}
+
+@keyframes lumx-dialog-filter-show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes lumx-dialog-show {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Dialog sizes
+   ========================================================================== */
+
+@each $key, $size in $lumx-dialog-sizes {
+    .#{$lumx-base-prefix}-dialog--size-#{$key} {
+        width: $size;
+    }
+}

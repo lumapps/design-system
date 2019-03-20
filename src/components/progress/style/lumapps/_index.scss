@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Progress
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-progress {
+    &--circular {
+        width: $lumx-progress-circular-size;
+        height: $lumx-progress-circular-size;
+    }
+}
+
+/* Circular
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-progress-circular {
+    position: relative;
+    width: $lumx-progress-circular-size;
+    height: $lumx-progress-circular-size;
+
+    &__double-bounce1,
+    &__double-bounce2 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        animation: lumx-progress-bounce 2s infinite ease-in-out;
+        background-color: lumx-theme-color-variant(primary, L3);
+        border-radius: 50%;
+    }
+
+    &__double-bounce2 {
+        animation-delay: -1s;
+    }
+}
+
+@keyframes lumx-progress-bounce {
+    0%,
+    100% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+}
+
+/* Linear
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-progress-linear {
+    position: relative;
+    overflow: hidden;
+    height: $lumx-progress-linear-size;
+    border-radius: 2px;
+
+    &__line1,
+    &__line2 {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: lumx-theme-color-variant(primary, L3);
+    }
+
+    &__line2 {
+        animation: lumx-progress-expand 2s infinite ease-in-out;
+        transform: scaleX(0);
+        transform-origin: center left;
+    }
+}
+
+@keyframes lumx-progress-expand {
+    0% {
+        transform: scaleX(0);
+        transform-origin: center left;
+    }
+
+    49% {
+        transform: scaleX(1);
+        transform-origin: center left;
+    }
+
+    50% {
+        transform: scaleX(1);
+        transform-origin: center right;
+    }
+
+    99% {
+        transform: scaleX(0);
+        transform-origin: center right;
+    }
+
+    100% {
+        transform: scaleX(0);
+        transform-origin: center left;
+    }
+}

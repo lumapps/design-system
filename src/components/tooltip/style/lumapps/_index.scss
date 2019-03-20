@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Tooltip
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-tooltip {
+    $self: &;
+
+    @include lumx-elevation(3);
+
+    position: absolute;
+    padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
+    background-color: lumx-theme-color-variant(light, N);
+    border-radius: $lumx-theme-border-radius;
+    opacity: 0;
+    pointer-events: none;
+    transition-duration: $lumx-tooltip-transition-duration;
+    transition-property: opacity, transform;
+
+    &--is-shown {
+        opacity: 1;
+
+        &#{$self}--position-top {
+            transform: translateY(-8px);
+        }
+
+        &#{$self}--position-bottom {
+            transform: translateY(8px);
+        }
+
+        &#{$self}--position-left {
+            transform: translateX(-8px);
+        }
+
+        &#{$self}--position-right {
+            transform: translateX(8px);
+        }
+    }
+
+    &__text {
+        @include lumx-typography(caption);
+
+        display: block;
+    }
+}

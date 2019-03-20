@@ -1,0 +1,33 @@
+<div
+    class="lumx-switch"
+    ng-class="{ 'lumx-switch--is-checked': lumx.viewValue,
+                'lumx-switch--is-unchecked': !lumx.viewValue,
+                'lumx-switch--position-left': !lumx.position || lumx.position === 'left',
+                'lumx-switch--position-right': lumx.position === 'right',
+                'lumx-switch--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-switch--theme-dark': lumx.theme === 'dark' }"
+>
+    <div class="lumx-switch__input-wrapper">
+        <input
+            type="checkbox"
+            id="{{ lumx.switchId }}"
+            class="lumx-switch__input-native"
+            ng-checked="lumx.viewValue"
+            ng-click="lumx.updateViewValue()"
+        />
+
+        <div class="lumx-switch__input-placeholder">
+            <div class="lumx-switch__input-background"></div>
+            <div class="lumx-switch__input-indicator"></div>
+        </div>
+    </div>
+
+    <div class="lumx-switch__content" ng-if="::!lumx.hasLabel && !lumx.hasHelper && lumx.hasTranscluded">
+        <label for="{{ lumx.switchId }}" class="lumx-switch__label" ng-transclude></label>
+    </div>
+
+    <div class="lumx-switch__content" ng-if="::lumx.hasLabel">
+        <label for="{{ lumx.switchId }}" class="lumx-switch__label" ng-transclude="label"></label>
+        <span class="lumx-switch__helper" ng-transclude="helper" ng-if="::lumx.hasHelper"></span>
+    </div>
+</div>

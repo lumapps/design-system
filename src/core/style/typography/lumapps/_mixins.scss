@@ -1,0 +1,15 @@
+@mixin lumx-typography-base() {
+    font-family: $lumx-typography-font-family;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+@mixin lumx-typography($style) {
+    font-size: map-get($lumx-typography-font-size, $style);
+    font-weight: map-get($lumx-typography-font-weight, $style);
+    line-height: map-get($lumx-typography-line-height, $style);
+
+    @if $style == overline {
+        text-transform: uppercase;
+    }
+}

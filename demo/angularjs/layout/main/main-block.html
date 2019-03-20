@@ -4,20 +4,24 @@
     <div class="main-block__description" ng-if="mainBlock.hasDescription" ng-transclude></div>
 
     <div class="main-block__demo">
-        <div ng-class="{ 'lx-theme-background-dark-N': mainBlock.hasDarkTheme }" ng-include="mainBlock.path"></div>
+        <div ng-class="{ 'lumx-theme-background-dark-N': mainBlock.hasDarkTheme }" ng-include="mainBlock.path"></div>
 
         <div class="main-block__toolbar">
             <div class="main-block__code-toggle">
-                <lx-button lx-emphasis="low" ng-click="mainBlock.toggleCode()">
-                    <lx-icon lx-path="{{ mainBlock.icons.mdiCodeTags }}"></lx-icon>
+                <lumx-button lumx-emphasis="low" ng-click="mainBlock.toggleCode()">
+                    <lumx-icon lumx-path="{{ mainBlock.icons.mdiCodeTags }}"></lumx-icon>
                     <span>{{ mainBlock.isCodeOpen ? 'Hide code' : 'Show code' }}</span>
-                </lx-button>
+                </lumx-button>
             </div>
 
             <div class="main-block__theme-toggle">
-                <lx-switch lx-position="right" ng-model="mainBlock.hasDarkTheme" ng-change="mainBlock.toggleTheme()">
+                <lumx-switch
+                    lumx-position="right"
+                    ng-model="mainBlock.hasDarkTheme"
+                    ng-change="mainBlock.toggleTheme()"
+                >
                     Dark Background
-                </lx-switch>
+                </lumx-switch>
             </div>
         </div>
 

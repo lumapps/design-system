@@ -1,0 +1,48 @@
+/* ==========================================================================
+   List
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list {
+    @include lumx-list;
+}
+
+/* Item
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item {
+    @include lumx-list-item;
+
+    .#{$lumx-base-prefix}-list--is-clickable & {
+        @include lumx-list-item-clickable;
+    }
+
+    &--is-selected {
+        @include lumx-list-item-selected;
+    }
+
+    &__before {
+        @include lumx-list-item-before;
+    }
+
+    &__content {
+        @include lumx-list-item-content;
+    }
+
+    &__after {
+        @include lumx-list-item-after;
+    }
+}
+
+/* Subheader
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-subheader {
+    @include lumx-list-subheader;
+}
+
+/* Divider
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-divider {
+    @include lumx-list-divider;
+}

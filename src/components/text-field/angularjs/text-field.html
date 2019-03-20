@@ -1,0 +1,34 @@
+<div
+    class="lumx-text-field"
+    ng-class="{ 'lumx-text-field--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-text-field--theme-dark': lumx.theme === 'dark',
+                'lumx-text-field--has-label': lumx.label,
+                'lumx-text-field--has-icon': lumx.icon,
+                'lumx-text-field--has-value': lumx.hasValue(),
+                'lumx-text-field--is-valid': lumx.isValid,
+                'lumx-text-field--has-error': lumx.hasError }"
+>
+    <label class="lumx-text-field__label" ng-if="::lumx.label">
+        {{ lumx.label }}
+    </label>
+
+    <span class="lumx-text-field__helper" ng-if="::lumx.helper">{{ lumx.helper }}</span>
+
+    <div class="lumx-text-field__input-wrapper">
+        <lumx-icon
+            class="lumx-text-field__input-icon"
+            lumx-path="{{ lumx.icon }}"
+            lumx-size="xs"
+            ng-if="::lumx.icon"
+        ></lumx-icon>
+
+        <div class="lumx-text-field__input-native" ng-transclude></div>
+
+        <lumx-icon
+            class="lumx-text-field__input-validity"
+            lumx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
+            lumx-size="xs"
+            ng-if="lumx.isValid || lumx.hasError"
+        ></lumx-icon>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+@mixin lumx-chip-base() {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: top;
+}
+
+@mixin lumx-chip-size($size) {
+    height: map-get($lumx-chip-sizes, $size);
+    border-radius: (map-get($lumx-chip-sizes, $size)) / 2;
+}
+
+@mixin lumx-chip-before() {
+    flex-shrink: 0;
+    margin-right: $lumx-spacing-unit;
+}
+
+@mixin lumx-chip-label($size) {
+    flex: 1;
+    white-space: nowrap;
+
+    @if $size == m {
+        @include lumx-typography(body1);
+    } @else if $size == s {
+        @include lumx-typography(caption);
+    }
+}
+
+@mixin lumx-chip-after() {
+    flex-shrink: 0;
+    margin-left: $lumx-spacing-unit;
+}

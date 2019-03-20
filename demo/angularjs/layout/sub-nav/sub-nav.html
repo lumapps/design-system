@@ -1,17 +1,17 @@
 <ul class="sub-nav__wrapper ph++ pv+">
     <li>
-        <lx-select
-            lx-choices="vm.THEMES"
-            lx-has-filter="false"
-            lx-is-clearable="false"
-            lx-label="Change theme"
-            lx-multiple="false"
+        <lumx-select
+            lumx-choices="vm.THEMES"
+            lumx-has-filter="false"
+            lumx-is-clearable="false"
+            lumx-label="Change theme"
+            lumx-multiple="false"
             ng-change="vm.switchTheme()"
             ng-model="vm.selectedTheme"
         >
-            <lx-select-selected>{{ $selected.label }}</lx-select-selected>
-            <lx-select-choices>{{ $choice.label }} theme</lx-select-choices>
-        </lx-select>
+            <lumx-select-selected>{{ $selected.label }}</lumx-select-selected>
+            <lumx-select-choices>{{ $choice.label }} theme</lumx-select-choices>
+        </lumx-select>
     </li>
 </ul>
 

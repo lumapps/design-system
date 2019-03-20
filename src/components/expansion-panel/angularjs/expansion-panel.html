@@ -1,0 +1,38 @@
+<div
+    class="lumx-expansion-panel"
+    ng-class="{ 'lumx-expansion-panel--is-open': lumx.isWrapperOpen,
+                 'lumx-expansion-panel--is-close': !lumx.isWrapperOpen,
+                 'lumx-expansion-panel--theme-light': !lumx.theme || lumx.theme === 'light',
+                 'lumx-expansion-panel--theme-dark': lumx.theme === 'dark' }"
+>
+    <div class="lumx-expansion-panel__header" ng-click="lumx.toggle()">
+        <div class="lumx-expansion-panel__drag-indicator" ng-if="::lumx.isDraggable">
+            <lumx-icon
+                lumx-path="{{ lumx.icons.mdiDragVertical }}"
+                lumx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
+                lumx-size="s"
+            ></lumx-icon>
+        </div>
+
+        <div class="lumx-expansion-panel__label" ng-transclude="header"></div>
+
+        <div class="lumx-expansion-panel__state-indicator">
+            <lumx-button
+                lumx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
+                lumx-emphasis="low"
+                lumx-variant="icon"
+                ng-click="lumx.toggle($event)"
+            >
+                <lumx-icon lumx-path="{{ lumx.isWrapperOpen ? lumx.icons.mdiChevronUp : lumx.icons.mdiChevronDown }}">
+                </lumx-icon>
+            </lumx-button>
+        </div>
+    </div>
+
+    <div class="lumx-expansion-panel__wrapper" ng-if="lumx.isWrapperDisplayed">
+        <div class="lumx-expansion-panel__container">
+            <div class="lumx-expansion-panel__content" ng-transclude="content"></div>
+            <div class="lumx-expansion-panel__footer" ng-transclude="footer" ng-if="::lumx.hasFooter"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+@mixin lumx-input-label($theme) {
+    @include lumx-typography($lumx-input-label-typography);
+
+    display: block;
+    color: lumx-theme-color-variant($theme, N);
+}
+
+@mixin lumx-input-helper($theme) {
+    @include lumx-typography($lumx-input-helper-typography);
+
+    display: block;
+    margin-top: $lumx-spacing-unit / 2;
+    color: lumx-theme-color-variant($theme, L2);
+}

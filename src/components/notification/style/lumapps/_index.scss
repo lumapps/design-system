@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Notification
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-notification {
+    $self: &;
+
+    @include lumx-elevation(4);
+
+    position: fixed;
+    right: $lumx-spacing-unit * 3;
+    bottom: $lumx-spacing-unit * 3;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    animation: lumx-notification-show $lumx-notification-transition-duration;
+    background-color: lumx-theme-color-variant(light, N);
+    border-radius: $lumx-theme-border-radius;
+    transition: opacity $lumx-notification-transition-duration;
+
+    &--is-hidden {
+        opacity: 0;
+    }
+
+    &__icon {
+        display: flex;
+        width: $lumx-notification-height;
+        height: $lumx-notification-height;
+        align-items: center;
+        justify-content: center;
+        color: lumx-theme-color-variant(light, L3);
+    }
+
+    &__content {
+        @include lumx-typography(body1);
+
+        padding: 0 $lumx-spacing-unit * 2;
+        color: lumx-theme-color-variant(dark, N);
+    }
+
+    &__action {
+        padding-right: $lumx-spacing-unit;
+    }
+}
+
+@keyframes lumx-notification-show {
+    0% {
+        opacity: 0;
+        transform: translateY($lumx-notification-height);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Notification colors
+   ========================================================================== */
+
+@each $color in $lumx-notification-color-palette {
+    .#{$lumx-base-prefix}-notification--color-#{$color} .#{$lumx-base-prefix}-notification__icon {
+        background-color: lumx-theme-color-variant($color, N);
+    }
+}

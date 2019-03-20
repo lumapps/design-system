@@ -1,7 +1,0 @@
-@mixin lx-icon-size($size) {
-    font-size: map-get($lx-sizes, $size);
-}
-
-@mixin lx-icon-color($color) {
-    color: lx-theme-color-variant($color, N);
-}

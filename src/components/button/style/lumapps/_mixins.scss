@@ -1,0 +1,77 @@
+@mixin lumx-button-base() {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    user-select: none;
+    vertical-align: top;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+@mixin lumx-button-size($emphasis, $variant, $size) {
+    height: map-get($lumx-sizes, $size);
+
+    @if $variant == variant-button {
+        border-radius: $lumx-theme-border-radius;
+    } @else if $variant == variant-icon {
+        width: map-get($lumx-sizes, $size);
+        border-radius: 50%;
+    }
+}
+
+@mixin lumx-button-color($emphasis, $color, $theme: null) {
+    @include lumx-state(state-default, $emphasis, $color, $theme);
+
+    &:hover {
+        @include lumx-state(state-hover, $emphasis, $color, $theme);
+    }
+
+    &:active {
+        @include lumx-state(state-active, $emphasis, $color, $theme);
+    }
+
+    &[data-focus-visible-added] {
+        @include lumx-state(state-focus, $emphasis, $color, $theme);
+    }
+
+    &:disabled {
+        @include lumx-state-disabled-input;
+    }
+}
+
+@mixin lumx-button-icon($variant, $position, $size) {
+    font-size: map-get($lumx-button-icon-sizes, $size);
+    pointer-events: none;
+
+    @if $variant == variant-button {
+        @if $position == position-left {
+            @if $size == m {
+                margin-right: $lumx-spacing-unit;
+            } @else if $size == s {
+                margin-right: $lumx-spacing-unit / 2;
+            }
+        } @else if $position == position-right {
+            @if $size == m {
+                margin-left: $lumx-spacing-unit;
+            } @else if $size == s {
+                margin-left: $lumx-spacing-unit / 2;
+            }
+        }
+    }
+}
+
+@mixin lumx-button-text($size) {
+    font-size: map-get($lumx-button-text-sizes, $size);
+    font-weight: $lumx-button-text-weight;
+    line-height: map-get($lumx-sizes, $size);
+    pointer-events: none;
+    text-transform: $lumx-button-text-transform;
+}

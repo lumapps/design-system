@@ -1,0 +1,38 @@
+<div class="p+">
+    <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">Open dialog</lumx-button>
+    <lumx-button ng-click="vm.alertDialog()" id="alert-dialog-source">Alert box</lumx-button>
+    <lumx-button ng-click="vm.confirmDialog()" id="confirm-dialog-source">Confirm box</lumx-button>
+</div>
+
+<lumx-dialog id="{{ vm.dialogId }}">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Dialog title</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after>
+                <lumx-button ng-click="vm.addPerson()" lumx-focus-on-init>
+                    <span>Add</span>
+                </lumx-button>
+            </lumx-toolbar-after>
+        </lumx-toolbar>
+
+        <lumx-divider></lumx-divider>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="p++">
+            <div ng-repeat="person in vm.people">{{ person.name }} - {{ person.email }} - {{ person.age }}</div>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <lumx-divider></lumx-divider>
+
+        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
+            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Ok</lumx-button>
+        </div>
+    </lumx-dialog-footer>
+</lumx-dialog>

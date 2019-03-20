@@ -1,0 +1,172 @@
+/* ==========================================================================
+   Text field
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-text-field {
+    $self: &;
+
+    &__label {
+        #{$self}--theme-light & {
+            @include lumx-input-label(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-label(light);
+        }
+    }
+
+    &__helper {
+        #{$self}--theme-light & {
+            @include lumx-input-helper(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-helper(light);
+        }
+    }
+
+    &__input-wrapper {
+        #{$self}--theme-light & {
+            @include lumx-text-field-input-wrapper(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-input-wrapper(light);
+        }
+    }
+
+    &--has-label &__input-wrapper {
+        margin-top: $lumx-spacing-unit;
+    }
+
+    &__input-icon {
+        flex-shrink: 0;
+
+        #{$self}--theme-light & {
+            @include lumx-text-field-input-icon(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-input-icon(light);
+        }
+    }
+
+    &__input-native {
+        flex: 1;
+
+        input {
+            #{$self}--theme-light & {
+                @include lumx-text-field-input-native(dark);
+
+                &::placeholder {
+                    @include lumx-text-field-placeholder(dark);
+                }
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-text-field-input-native(light);
+
+                &::placeholder {
+                    @include lumx-text-field-placeholder(light);
+                }
+            }
+        }
+    }
+
+    &__input-validity {
+        flex-shrink: 0;
+    }
+}
+
+/* Text field states
+   ========================================================================== */
+
+// Disabled state
+.#{$lumx-base-prefix}-text-field--is-disabled {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-state-disabled-input;
+    }
+
+    &.#{$lumx-base-prefix}-text-field--theme-light {
+        .#{$lumx-base-prefix}-text-field__label,
+        .#{$lumx-base-prefix}-text-field__helper {
+            @include lumx-state-disabled-text(dark);
+        }
+    }
+
+    &.#{$lumx-base-prefix}-text-field--theme-dark {
+        .#{$lumx-base-prefix}-text-field__label,
+        .#{$lumx-base-prefix}-text-field__helper {
+            @include lumx-state-disabled-text(light);
+        }
+    }
+}
+
+// Hover state
+.#{$lumx-base-prefix}-text-field--theme-light {
+    .#{$lumx-base-prefix}-text-field__input-wrapper:hover {
+        @include lumx-text-field-input-wrapper-state(state-hover, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-text-field--theme-dark {
+    .#{$lumx-base-prefix}-text-field__input-wrapper:hover {
+        @include lumx-text-field-input-wrapper-state(state-hover, light);
+    }
+}
+
+// Focus state
+.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-focus {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-state(state-focus, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-focus {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-state(state-focus, light);
+    }
+}
+
+/* Text field validity
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-valid {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(valid, dark);
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-validity {
+        @include lumx-text-field-input-validity(valid, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--has-error {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(error, dark);
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-validity {
+        @include lumx-text-field-input-validity(error, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-valid {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(valid, light);
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-validity {
+        @include lumx-text-field-input-validity(valid, light);
+    }
+}
+
+.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--has-error {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(error, light);
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-validity {
+        @include lumx-text-field-input-validity(error, light);
+    }
+}

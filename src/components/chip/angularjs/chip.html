@@ -1,0 +1,38 @@
+<a
+    class="lumx-chip"
+    ng-class="{ 'lumx-chip--has-before': lumx.hasBefore,
+                'lumx-chip--has-after': lumx.hasAfter || lumx.hasDropdownIndicator,
+                'lumx-chip--is-unselected': !lumx.isSelected,
+                'lumx-chip--is-selected': lumx.isSelected,
+                'lumx-chip--is-clickable': lumx.onClick,
+                'lumx-chip--is-disabled': lumx.isDisabled,
+                'lumx-chip--size-m': !lumx.size || lumx.size === 'm',
+                'lumx-chip--size-s': lumx.size === 's',
+                'lumx-chip--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-chip--theme-dark': lumx.theme === 'dark' }"
+    ng-click="lumx.handleOnClick($event)"
+    lumx-enter-keypress="lumx.handleOnClick($event)"
+    tabindex="{{ lumx.isDisabled || !lumx.onClick ? -1 : 0 }}"
+>
+    <div
+        class="lumx-chip__before"
+        ng-class="{ 'lumx-chip__before--is-clickable': lumx.onBeforeClick }"
+        ng-click="lumx.handleOnBeforeClick($event)"
+        ng-transclude="before"
+        ng-if="::lumx.hasBefore"
+    ></div>
+
+    <div class="lumx-chip__label" ng-transclude="label"></div>
+
+    <div
+        class="lumx-chip__after"
+        ng-class="{ 'lumx-chip__after--is-clickable': lumx.onAfterClick }"
+        ng-click="lumx.handleOnAfterClick($event)"
+        ng-transclude="after"
+        ng-if="lumx.hasAfter && !lumx.hasDropdownIndicator"
+    ></div>
+
+    <div class="lumx-chip__after" ng-if="lumx.hasDropdownIndicator">
+        <lumx-icon lumx-path="{{ lumx.icons.mdiMenuDown }}" lumx-size="xs"></lumx-icon>
+    </div>
+</a>

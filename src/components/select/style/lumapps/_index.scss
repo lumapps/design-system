@@ -1,0 +1,212 @@
+/* ==========================================================================
+   Select
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-select {
+    $self: &;
+
+    &__label {
+        #{$self}--theme-light & {
+            @include lumx-input-label(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-label(light);
+        }
+    }
+
+    &__input-wrapper {
+        cursor: pointer;
+
+        #{$self}--theme-light#{$self}--is-empty &,
+        #{$self}--theme-light#{$self}--has-unique & {
+            @include lumx-text-field-input-wrapper(dark, true, false);
+        }
+
+        #{$self}--theme-dark#{$self}--is-empty &,
+        #{$self}--theme-dark#{$self}--has-unique & {
+            @include lumx-text-field-input-wrapper(light, true, false);
+        }
+
+        #{$self}--theme-light#{$self}--has-multiple & {
+            @include lumx-text-field-input-wrapper(dark, true, true);
+        }
+
+        #{$self}--theme-dark#{$self}--has-multiple & {
+            @include lumx-text-field-input-wrapper(light, true, true);
+        }
+    }
+
+    &--has-label &__input-wrapper {
+        margin-top: $lumx-spacing-unit;
+    }
+
+    &__input-native {
+        #{$self}--theme-light & {
+            @include lumx-text-field-input-native(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-input-native(light);
+        }
+
+        &--placeholder {
+            #{$self}--theme-light & {
+                @include lumx-text-field-placeholder(dark);
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-text-field-placeholder(light);
+            }
+        }
+    }
+
+    &__input-chips {
+        display: flex;
+        flex: 1;
+        flex-wrap: wrap;
+    }
+
+    &__input-chip {
+        @include lumx-select-input-chip;
+    }
+
+    &__input-clear {
+        flex-shrink: 0;
+
+        #{$self}--theme-light & {
+            @include lumx-select-input-clear(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-select-input-clear(dark);
+        }
+    }
+
+    &__input-validity {
+        flex-shrink: 0;
+    }
+
+    &__input-indicator {
+        flex-shrink: 0;
+
+        #{$self}--theme-light & {
+            @include lumx-select-input-indicator(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-select-input-indicator(light);
+        }
+    }
+
+    &__filter {
+        @include lumx-select-filter;
+
+        i {
+            @include lumx-text-field-input-icon(dark);
+        }
+
+        input {
+            @include lumx-text-field-input-native(dark);
+
+            &::placeholder {
+                @include lumx-text-field-placeholder(dark);
+            }
+        }
+    }
+
+    &__loader {
+        @include lumx-select-loader;
+    }
+
+    &__helper {
+        @include lumx-select-helper;
+    }
+}
+
+/* Select states
+   ========================================================================== */
+
+// Disabled state
+.#{$lumx-base-prefix}-select--is-disabled {
+    .#{$lumx-base-prefix}-select__input-wrapper {
+        @include lumx-state-disabled-input;
+    }
+
+    &.#{$lumx-base-prefix}-select--theme-light {
+        .#{$lumx-base-prefix}-select__label {
+            @include lumx-state-disabled-text(dark);
+        }
+    }
+
+    &.#{$lumx-base-prefix}-select--theme-dark {
+        .#{$lumx-base-prefix}-select__label {
+            @include lumx-state-disabled-text(light);
+        }
+    }
+}
+
+// Hover state
+.#{$lumx-base-prefix}-select--theme-light .#{$lumx-base-prefix}-select__input-wrapper:hover {
+    @include lumx-text-field-input-wrapper-state(state-hover, dark);
+}
+
+.#{$lumx-base-prefix}-select--theme-dark .#{$lumx-base-prefix}-select__input-wrapper:hover {
+    @include lumx-text-field-input-wrapper-state(state-hover, light);
+}
+
+// Focus state
+.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-open
+.#{$lumx-base-prefix}-select__input-wrapper,
+.#{$lumx-base-prefix}-select--theme-light .#{$lumx-base-prefix}-select__input-wrapper:focus {
+    @include lumx-text-field-input-wrapper-state(state-focus, dark);
+}
+
+.#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-open
+.#{$lumx-base-prefix}-select__input-wrapper,
+.#{$lumx-base-prefix}-select--theme-dark .#{$lumx-base-prefix}-select__input-wrapper:focus {
+    @include lumx-text-field-input-wrapper-state(state-focus, light);
+}
+
+/* Select validity
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-valid {
+    .#{$lumx-base-prefix}-select__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(valid, dark);
+    }
+
+    .#{$lumx-base-prefix}-select__input-validity {
+        @include lumx-text-field-input-validity(valid, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--has-error {
+    .#{$lumx-base-prefix}-select__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(error, dark);
+    }
+
+    .#{$lumx-base-prefix}-select__input-validity {
+        @include lumx-text-field-input-validity(error, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-valid {
+    .#{$lumx-base-prefix}-select__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(valid, light);
+    }
+
+    .#{$lumx-base-prefix}-select__input-validity {
+        @include lumx-text-field-input-validity(valid, light);
+    }
+}
+
+.#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--has-error {
+    .#{$lumx-base-prefix}-select__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(error, light);
+    }
+
+    .#{$lumx-base-prefix}-select__input-validity {
+        @include lumx-text-field-input-validity(error, light);
+    }
+}

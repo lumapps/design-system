@@ -1,0 +1,78 @@
+@mixin lumx-radio-button-input-wrapper() {
+    position: relative;
+    width: $lumx-radio-button-wrapper-size;
+    height: $lumx-radio-button-wrapper-size;
+}
+
+@mixin lumx-radio-button-input-native() {
+    position: relative;
+    z-index: 4;
+    top: 0;
+    left: 0;
+    width: $lumx-radio-button-wrapper-size;
+    height: $lumx-radio-button-wrapper-size;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+}
+
+@mixin lumx-radio-button-placeholder() {
+    position: absolute;
+    z-index: 1;
+    top: ($lumx-radio-button-wrapper-size - $lumx-radio-button-control-size) / 2;
+    left: ($lumx-radio-button-wrapper-size - $lumx-radio-button-control-size) / 2;
+    width: $lumx-radio-button-control-size;
+    height: $lumx-radio-button-control-size;
+    border-radius: 50%;
+}
+
+@mixin lumx-radio-button-input-background() {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+@mixin lumx-radio-button-input-background-status($status, $theme) {
+    @if $status == 'checked' {
+        @if $theme == dark {
+            color: lumx-theme-color-variant($lumx-radio-button-color, N);
+        } @else if $theme == light {
+            color: lumx-theme-color-variant(light, N);
+        }
+    } @else if $status == 'unchecked' {
+        color: lumx-theme-color-variant($theme, N);
+    }
+}
+
+@mixin lumx-radio-button-input-indicator() {
+    position: absolute;
+    z-index: 3;
+    top: ($lumx-radio-button-control-size - $lumx-radio-button-indicator-size) / 2;
+    left: ($lumx-radio-button-control-size - $lumx-radio-button-indicator-size) / 2;
+    display: flex;
+    width: $lumx-radio-button-indicator-size;
+    height: $lumx-radio-button-indicator-size;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+@mixin lumx-radio-button-input-indicator-status($status, $theme) {
+    @if $status == 'checked' {
+        opacity: 1;
+    } @else if $status == 'unchecked' {
+        opacity: 0;
+    }
+
+    @if $theme == dark {
+        background-color: lumx-theme-color-variant($lumx-radio-button-color, N);
+    } @else if $theme == light {
+        background-color: lumx-theme-color-variant(light, N);
+    }
+}

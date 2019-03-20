@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Chip
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-chip {
+    $self: &;
+
+    @include lumx-chip-base;
+
+    &__before {
+        @include lumx-chip-before;
+    }
+
+    &__label {
+        #{$self}--size-m & {
+            @include lumx-chip-label(m);
+        }
+
+        #{$self}--size-s & {
+            @include lumx-chip-label(s);
+        }
+    }
+
+    &__after {
+        @include lumx-chip-after;
+    }
+}
+
+/* Chip size
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-chip--size-m {
+    @include lumx-chip-size(m);
+
+    padding: 0 $lumx-spacing-unit * 2;
+
+    &.#{$lumx-base-prefix}-chip--has-before {
+        padding-left: $lumx-spacing-unit * 1.5;
+    }
+
+    &.#{$lumx-base-prefix}-chip--has-after {
+        padding-right: $lumx-spacing-unit * 1.5;
+    }
+}
+
+.#{$lumx-base-prefix}-chip--size-s {
+    @include lumx-chip-size(s);
+
+    padding: 0 $lumx-spacing-unit * 1.5;
+
+    &.#{$lumx-base-prefix}-chip--has-before {
+        padding-left: $lumx-spacing-unit;
+    }
+
+    &.#{$lumx-base-prefix}-chip--has-after {
+        padding-right: $lumx-spacing-unit;
+    }
+}
+
+/* Chip states
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-chip--is-clickable,
+.#{$lumx-base-prefix}-chip .#{$lumx-base-prefix}-chip__before--is-clickable,
+.#{$lumx-base-prefix}-chip .#{$lumx-base-prefix}-chip__after--is-clickable {
+    @include lumx-state-transition;
+
+    cursor: pointer;
+}
+
+.#{$lumx-base-prefix}-chip .#{$lumx-base-prefix}-chip__before--is-clickable:hover,
+.#{$lumx-base-prefix}-chip .#{$lumx-base-prefix}-chip__after--is-clickable:hover {
+    opacity: 0.8;
+}
+
+.#{$lumx-base-prefix}-chip--is-unselected {
+    &.#{$lumx-base-prefix}-chip--theme-light {
+        @include lumx-state(state-default, emphasis-medium, dark);
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:hover {
+            @include lumx-state(state-hover, emphasis-medium, dark);
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:active {
+            @include lumx-state(state-active, emphasis-medium, dark);
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
+            @include lumx-state(state-focus, emphasis-medium, dark);
+        }
+    }
+
+    &.#{$lumx-base-prefix}-chip--theme-dark {
+        @include lumx-state(state-default, emphasis-medium, light);
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:hover {
+            @include lumx-state(state-hover, emphasis-medium, light);
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:active {
+            @include lumx-state(state-active, emphasis-medium, light);
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
+            @include lumx-state(state-focus, emphasis-medium, light);
+        }
+    }
+}
+
+.#{$lumx-base-prefix}-chip--is-selected {
+    &.#{$lumx-base-prefix}-chip--theme-light {
+        @include lumx-state-as-selected(state-default, dark);
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:hover {
+            @include lumx-state-as-selected(state-hover, dark);
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:active {
+            @include lumx-state-as-selected(state-active, dark);
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
+            @include lumx-state-as-selected(state-focus, dark);
+        }
+    }
+
+    &.#{$lumx-base-prefix}-chip--theme-dark {
+        @include lumx-state-as-selected(state-default, light);
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:hover {
+            @include lumx-state-as-selected(state-hover, light);
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:active {
+            @include lumx-state-as-selected(state-active, light);
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
+            @include lumx-state-as-selected(state-focus, light);
+        }
+    }
+}
+
+.#{$lumx-base-prefix}-chip--is-disabled {
+    @include lumx-state-disabled-input;
+}

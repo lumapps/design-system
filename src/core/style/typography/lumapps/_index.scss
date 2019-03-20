@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+@each $style in $lumx-typography-styles {
+    .#{$lumx-base-prefix}-typography-#{$style} {
+        @include lumx-typography($style);
+    }
+}

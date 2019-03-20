@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Select
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-select {
+    $self: &;
+
+    position: relative;
+    padding-top: $lumx-spacing-unit * 4;
+    padding-bottom: $lumx-spacing-unit;
+
+    &__label {
+        #{$self}--theme-light & {
+            @include lumx-text-field-material-label(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-material-label(light);
+        }
+
+        #{$self}--has-placeholder &,
+        #{$self}--has-value & {
+            transform: scale(0.75) translateY(0);
+        }
+    }
+
+    &__input-wrapper {
+        padding-left: 0 !important;
+
+        #{$self}--theme-light & {
+            @include lumx-text-field-material-input-wrapper(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-material-input-wrapper(light);
+        }
+    }
+
+    &__input-native {
+        #{$self}--theme-light & {
+            @include lumx-text-field-material-input-native(dark);
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-material-input-native(light);
+        }
+    }
+
+    &__input-chip {
+        margin-right: 6px;
+        margin-left: 0;
+    }
+}
+
+/* Select states
+   ========================================================================== */
+
+// Focus state
+.#{$lumx-base-prefix}-select--is-focus,
+.#{$lumx-base-prefix}-select--is-open {
+    .#{$lumx-base-prefix}-select__input-wrapper {
+        @include lumx-text-field-material-input-wrapper-focus;
+    }
+}
+
+.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-focus,
+.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-open {
+    .#{$lumx-base-prefix}-select__label {
+        @include lumx-text-field-material-label-focus(dark);
+    }
+}
+
+.#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-focus,
+.#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-open {
+    .#{$lumx-base-prefix}-select__label {
+        @include lumx-text-field-material-label-focus(light);
+    }
+}

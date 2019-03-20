@@ -1,0 +1,180 @@
+<div style="padding: 24px;">
+    <lumx-dropdown lumx-position="left" lumx-over-toggle="false" lumx-offset="8">
+        <lumx-dropdown-toggle>
+            <lumx-button>Dropdown</lumx-button>
+        </lumx-dropdown-toggle>
+
+        <lumx-dropdown-menu>
+            <lumx-list lumx-is-clickable="true" lumx-focus-on-init>
+                <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-divider></lumx-list-divider>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+            </lumx-list>
+        </lumx-dropdown-menu>
+    </lumx-dropdown>
+</div>
+
+<div style="padding: 24px;">
+    <lumx-dropdown lumx-position="left" lumx-over-toggle="true">
+        <lumx-dropdown-toggle>
+            <lumx-button>Dropdown</lumx-button>
+        </lumx-dropdown-toggle>
+
+        <lumx-dropdown-menu>
+            <lumx-list lumx-is-clickable="true" lumx-focus-on-init>
+                <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-divider></lumx-list-divider>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+            </lumx-list>
+        </lumx-dropdown-menu>
+    </lumx-dropdown>
+</div>
+
+<div style="padding: 24px;">
+    <lumx-button ng-click="vm.openDropdown($event)" id="{{ vm.dropdownSource }}">Open dropdown</lumx-button>
+    <lumx-button ng-click="vm.closeDropdown($event)">Close dropdown</lumx-button>
+
+    <div id="{{ vm.dropdownTarget }}">Target</div>
+
+    <lumx-dropdown lumx-position="left" id="{{ vm.dropdownId }}">
+        <lumx-dropdown-menu>
+            <lumx-list lumx-is-clickable="true" lumx-focus-on-init>
+                <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-divider></lumx-list-divider>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
+                </lumx-list-item>
+            </lumx-list>
+        </lumx-dropdown-menu>
+    </lumx-dropdown>
+</div>

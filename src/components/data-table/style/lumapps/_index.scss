@@ -1,0 +1,135 @@
+/* ==========================================================================
+   Data table
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-data-table {
+    $self: &;
+
+    width: 100%;
+    margin: 0;
+    table-layout: fixed;
+
+    &__cell {
+        height: 56px;
+        padding: $lumx-spacing-unit $lumx-spacing-unit * 4 $lumx-spacing-unit 0;
+
+        #{$self}--has-thumbnail &:first-child,
+        #{$self}--is-selectable &:first-child {
+            width: 68px;
+            padding-right: 0;
+        }
+
+        &--thead {
+            #{$self}--theme-light & {
+                border-bottom: 1px solid lumx-theme-color-variant(dark, L5);
+                color: lumx-theme-color-variant(dark, L2);
+            }
+
+            #{$self}--theme-dark & {
+                border-bottom: 1px solid lumx-theme-color-variant(light, L5);
+                color: lumx-theme-color-variant(light, L2);
+            }
+
+            & > i {
+                display: inline-block;
+                margin-right: $lumx-spacing-unit / 2;
+                vertical-align: middle;
+            }
+
+            & > span {
+                @include lumx-typography(caption);
+            }
+        }
+
+        &--is-sortable {
+            cursor: pointer;
+        }
+
+        &--is-sortable:hover,
+        &--is-sorted {
+            #{$self}--theme-light & {
+                color: lumx-theme-color-variant(dark, N);
+            }
+
+            #{$self}--theme-dark & {
+                color: lumx-theme-color-variant(light, N);
+            }
+        }
+
+        &--tbody {
+            & > span {
+                @include lumx-typography(body1);
+
+                #{$self}--theme-light & {
+                    color: lumx-theme-color-variant(dark, N);
+                }
+
+                #{$self}--theme-dark & {
+                    color: lumx-theme-color-variant(light, N);
+                }
+
+                #{$self}--theme-light #{$self}__row--is-disabled & {
+                    color: lumx-theme-color-variant(dark, L3);
+                }
+
+                #{$self}--theme-dark #{$self}__row--is-disabled & {
+                    color: lumx-theme-color-variant(light, L3);
+                }
+            }
+
+            #{$self}--theme-light#{$self}--has-border & {
+                border-bottom: 1px solid lumx-theme-color-variant(dark, L5);
+            }
+
+            #{$self}--theme-dark#{$self}--has-border & {
+                border-bottom: 1px solid lumx-theme-color-variant(light, L5);
+            }
+
+            #{$self}--is-activable #{$self}__row--is-enabled & {
+                @include lumx-state-transition;
+
+                cursor: pointer;
+            }
+
+            #{$self}--theme-light#{$self}--is-activable #{$self}__row--is-enabled:hover & {
+                background-color: lumx-theme-color-variant(dark, L5);
+            }
+
+            #{$self}--theme-dark#{$self}--is-activable #{$self}__row--is-enabled:hover & {
+                background-color: lumx-theme-color-variant(light, L5);
+            }
+
+            #{$self}--theme-light#{$self}--is-activable #{$self}__row--is-activated & {
+                background-color: lumx-theme-color-variant(dark, L6);
+            }
+
+            #{$self}--theme-dark#{$self}--is-activable #{$self}__row--is-activated & {
+                background-color: lumx-theme-color-variant(light, L6);
+            }
+        }
+    }
+
+    &__checkbox {
+        display: inline-block;
+        vertical-align: middle;
+
+        #{$self}--has-thumbnail #{$self}__row--tbody & {
+            display: none;
+        }
+
+        #{$self}--has-thumbnail #{$self}__row--is-enabled:hover &,
+        #{$self}--is-selectable #{$self}__row--is-selected & {
+            display: flex;
+        }
+    }
+
+    &__thumbnail {
+        display: inline-block;
+        vertical-align: middle;
+
+        #{$self}--has-thumbnail #{$self}__row--is-enabled:hover &,
+        #{$self}--is-selectable #{$self}__row--is-selected & {
+            display: none;
+        }
+    }
+}

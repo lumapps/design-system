@@ -1,0 +1,30 @@
+/* ==========================================================================
+   Thumbnail
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-thumbnail {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Thumbnail variants
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-thumbnail--variant-squared {
+    border-radius: $lumx-theme-border-radius;
+}
+
+.#{$lumx-base-prefix}-thumbnail--variant-rounded {
+    border-radius: 50%;
+}
+
+/* Thumbnail sizes
+   ========================================================================== */
+
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-thumbnail--size-#{$key} {
+        width: $size;
+        height: $size;
+    }
+}

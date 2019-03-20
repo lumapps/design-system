@@ -1,3 +1,3 @@
 /* eslint-disable import/no-unassigned-import */
 
-import './lx-theme_constant';
+import './theme_constant';
