@@ -53,7 +53,7 @@ function DemoDataTableController($filter, $scope) {
             // eslint-disable-next-line no-magic-numbers
             id: 2,
             image: 'https://picsum.photos/72?image=832',
-            lxDataTableDisabled: true,
+            lumxDataTableDisabled: true,
         },
         {
             // eslint-disable-next-line no-magic-numbers

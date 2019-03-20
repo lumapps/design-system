@@ -63,10 +63,10 @@
     <tbody>
         <tr
             class="lumx-data-table__row lumx-data-table__row--tbody"
-            ng-class="{ 'lumx-data-table__row--is-enabled': lumx.isSelectable && !tr.lxDataTableDisabled,
-                        'lumx-data-table__row--is-disabled': lumx.isSelectable && tr.lxDataTableDisabled,
-                        'lumx-data-table__row--is-selected': lumx.isSelectable && tr.lxDataTableSelected,
-                        'lumx-data-table__row--is-activated': lumx.isActivable && tr.lxDataTableActivated }"
+            ng-class="{ 'lumx-data-table__row--is-enabled': lumx.isSelectable && !tr.lumxDataTableDisabled,
+                        'lumx-data-table__row--is-disabled': lumx.isSelectable && tr.lumxDataTableDisabled,
+                        'lumx-data-table__row--is-selected': lumx.isSelectable && tr.lumxDataTableSelected,
+                        'lumx-data-table__row--is-activated': lumx.isActivable && tr.lumxDataTableActivated }"
             ng-repeat="tr in lumx.tbody"
             ng-click="lumx.toggleActivation(tr)"
         >
@@ -81,9 +81,9 @@
                 <lumx-checkbox
                     class="lumx-data-table__checkbox"
                     lx-theme="{{ lumx.theme }}"
-                    ng-checked="tr.lxDataTableSelected"
+                    ng-checked="tr.lumxDataTableSelected"
                     ng-click="lumx.toggleSelection(tr, undefined, $event)"
-                    ng-if="lumx.isSelectable && !tr.lxDataTableDisabled"
+                    ng-if="lumx.isSelectable && !tr.lumxDataTableDisabled"
                 ></lumx-checkbox>
             </td>
             <td
@@ -94,9 +94,9 @@
                 <lumx-checkbox
                     class="lumx-data-table__checkbox"
                     lx-theme="{{ lumx.theme }}"
-                    ng-checked="tr.lxDataTableSelected"
+                    ng-checked="tr.lumxDataTableSelected"
                     ng-click="lumx.toggleSelection(tr, undefined, $event)"
-                    ng-disabled="tr.lxDataTableDisabled"
+                    ng-disabled="tr.lumxDataTableDisabled"
                 ></lumx-checkbox>
             </td>
             <td
