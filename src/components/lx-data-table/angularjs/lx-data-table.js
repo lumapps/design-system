@@ -6,7 +6,7 @@ import template from './lx-data-table.html';
 
 /////////////////////////////
 
-function lxDataTableController($rootScope, $sce, $scope) {
+function DataTableController($rootScope, $sce, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -378,12 +378,12 @@ function lxDataTableController($rootScope, $sce, $scope) {
 
 /////////////////////////////
 
-function lxDataTableDirective() {
+function DataTableDirective() {
     'ngInject';
 
     return {
         bindToController: true,
-        controller: lxDataTableController,
+        controller: DataTableController,
         controllerAs: 'lxDataTable',
         replace: true,
         restrict: 'E',
@@ -403,8 +403,8 @@ function lxDataTableDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.data-table`).directive(`${COMPONENT_PREFIX}DataTable`, lxDataTableDirective);
+angular.module(`${MODULE_NAME}.data-table`).directive(`${COMPONENT_PREFIX}DataTable`, DataTableDirective);
 
 /////////////////////////////
 
-export { lxDataTableDirective };
+export { DataTableDirective };

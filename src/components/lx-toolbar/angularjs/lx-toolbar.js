@@ -4,7 +4,7 @@ import template from './lx-toolbar.html';
 
 /////////////////////////////
 
-function lxToolbarController() {
+function ToolbarController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -40,7 +40,7 @@ function lxToolbarController() {
 
 /////////////////////////////
 
-function lxToolbarDirective() {
+function ToolbarDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
@@ -62,7 +62,7 @@ function lxToolbarDirective() {
 
     return {
         bindToController: true,
-        controller: lxToolbarController,
+        controller: ToolbarController,
         controllerAs: 'lxToolbar',
         link,
         replace: true,
@@ -78,8 +78,8 @@ function lxToolbarDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.toolbar`).directive(`${COMPONENT_PREFIX}Toolbar`, lxToolbarDirective);
+angular.module(`${MODULE_NAME}.toolbar`).directive(`${COMPONENT_PREFIX}Toolbar`, ToolbarDirective);
 
 /////////////////////////////
 
-export { lxToolbarDirective };
+export { ToolbarDirective };

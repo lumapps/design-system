@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxButtonDirective() {
+function ButtonDirective() {
     'ngInject';
 
     /**
@@ -138,8 +138,8 @@ function lxButtonDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.button`).directive(`${COMPONENT_PREFIX}Button`, lxButtonDirective);
+angular.module(`${MODULE_NAME}.button`).directive(`${COMPONENT_PREFIX}Button`, ButtonDirective);
 
 /////////////////////////////
 
-export { lxButtonDirective };
+export { ButtonDirective };

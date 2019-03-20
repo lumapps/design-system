@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/co
 
 /////////////////////////////
 
-function LxDialogService($compile, $rootScope, $timeout, NglxUtilsService) {
+function DialogService($compile, $rootScope, $timeout, NglxUtilsService) {
     'ngInject';
 
     const service = this;
@@ -129,8 +129,8 @@ function LxDialogService($compile, $rootScope, $timeout, NglxUtilsService) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).service(`${SERVICE_PREFIX}DialogService`, LxDialogService);
+angular.module(`${MODULE_NAME}.dialog`).service(`${SERVICE_PREFIX}DialogService`, DialogService);
 
 /////////////////////////////
 
-export { LxDialogService };
+export { DialogService };

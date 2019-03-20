@@ -6,7 +6,7 @@ import template from './lx-text-field.html';
 
 /////////////////////////////
 
-function lxTextFieldController() {
+function TextFieldController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -73,7 +73,7 @@ function lxTextFieldController() {
 
 /////////////////////////////
 
-function lxTextFieldDirective() {
+function TextFieldDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
@@ -113,7 +113,7 @@ function lxTextFieldDirective() {
 
     return {
         bindToController: true,
-        controller: lxTextFieldController,
+        controller: TextFieldController,
         controllerAs: 'lxTextField',
         link,
         replace: true,
@@ -133,8 +133,8 @@ function lxTextFieldDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.text-field`).directive(`${COMPONENT_PREFIX}TextField`, lxTextFieldDirective);
+angular.module(`${MODULE_NAME}.text-field`).directive(`${COMPONENT_PREFIX}TextField`, TextFieldDirective);
 
 /////////////////////////////
 
-export { lxTextFieldDirective };
+export { TextFieldDirective };

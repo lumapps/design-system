@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxThumbnailDirective() {
+function ThumbnailDirective() {
     'ngInject';
 
     /**
@@ -54,8 +54,8 @@ function lxThumbnailDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.thumbnail`).directive(`${COMPONENT_PREFIX}Thumbnail`, lxThumbnailDirective);
+angular.module(`${MODULE_NAME}.thumbnail`).directive(`${COMPONENT_PREFIX}Thumbnail`, ThumbnailDirective);
 
 /////////////////////////////
 
-export { lxThumbnailDirective };
+export { ThumbnailDirective };

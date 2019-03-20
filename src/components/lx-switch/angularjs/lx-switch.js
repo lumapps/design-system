@@ -4,7 +4,7 @@ import template from './lx-switch.html';
 
 /////////////////////////////
 
-function lxSwitchController(NglxUtilsService) {
+function SwitchController(NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -105,7 +105,7 @@ function lxSwitchController(NglxUtilsService) {
 
 /////////////////////////////
 
-function lxSwitchDirective() {
+function SwitchDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrls, transclude) {
@@ -148,7 +148,7 @@ function lxSwitchDirective() {
 
     return {
         bindToController: true,
-        controller: lxSwitchController,
+        controller: SwitchController,
         controllerAs: 'lxSwitch',
         link,
         replace: true,
@@ -168,8 +168,8 @@ function lxSwitchDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.switch`).directive(`${COMPONENT_PREFIX}Switch`, lxSwitchDirective);
+angular.module(`${MODULE_NAME}.switch`).directive(`${COMPONENT_PREFIX}Switch`, SwitchDirective);
 
 /////////////////////////////
 
-export { lxSwitchDirective };
+export { SwitchDirective };

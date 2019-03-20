@@ -4,7 +4,7 @@ import template from './lx-divider.html';
 
 /////////////////////////////
 
-function lxDividerDirective() {
+function DividerDirective() {
     'ngInject';
 
     function link(scope, el, attrs) {
@@ -29,8 +29,8 @@ function lxDividerDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.divider`).directive(`${COMPONENT_PREFIX}Divider`, lxDividerDirective);
+angular.module(`${MODULE_NAME}.divider`).directive(`${COMPONENT_PREFIX}Divider`, DividerDirective);
 
 /////////////////////////////
 
-export { lxDividerDirective };
+export { DividerDirective };

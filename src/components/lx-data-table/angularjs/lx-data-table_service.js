@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/co
 
 /////////////////////////////
 
-function LxDataTableService($rootScope) {
+function DataTableService($rootScope) {
     'ngInject';
 
     const service = this;
@@ -83,8 +83,8 @@ function LxDataTableService($rootScope) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.data-table`).service(`${SERVICE_PREFIX}DataTableService`, LxDataTableService);
+angular.module(`${MODULE_NAME}.data-table`).service(`${SERVICE_PREFIX}DataTableService`, DataTableService);
 
 /////////////////////////////
 
-export { LxDataTableService };
+export { DataTableService };

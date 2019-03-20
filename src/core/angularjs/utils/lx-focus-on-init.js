@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxFocusOnInitDirective($timeout) {
+function FocusOnInitDirective($timeout) {
     'ngInject';
 
     function link(scope, el) {
@@ -18,10 +18,8 @@ function lxFocusOnInitDirective($timeout) {
 
 /////////////////////////////
 
-angular
-    .module(`${MODULE_NAME}.utils.focus-on-init`)
-    .directive(`${COMPONENT_PREFIX}FocusOnInit`, lxFocusOnInitDirective);
+angular.module(`${MODULE_NAME}.utils.focus-on-init`).directive(`${COMPONENT_PREFIX}FocusOnInit`, FocusOnInitDirective);
 
 /////////////////////////////
 
-export { lxFocusOnInitDirective };
+export { FocusOnInitDirective };

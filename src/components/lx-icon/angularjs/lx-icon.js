@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxIconDirective() {
+function IconDirective() {
     'ngInject';
 
     /**
@@ -54,8 +54,8 @@ function lxIconDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.icon`).directive(`${COMPONENT_PREFIX}Icon`, lxIconDirective);
+angular.module(`${MODULE_NAME}.icon`).directive(`${COMPONENT_PREFIX}Icon`, IconDirective);
 
 /////////////////////////////
 
-export { lxIconDirective };
+export { IconDirective };

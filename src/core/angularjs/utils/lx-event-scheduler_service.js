@@ -2,7 +2,7 @@ import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_con
 
 /////////////////////////////
 
-function LxEventSchedulerService($document, NglxUtilsService) {
+function EventSchedulerService($document, NglxUtilsService) {
     'ngInject';
 
     const service = this;
@@ -129,8 +129,8 @@ function LxEventSchedulerService($document, NglxUtilsService) {
 
 angular
     .module(`${MODULE_NAME}.utils.event-scheduler`)
-    .service(`${SERVICE_PREFIX}EventSchedulerService`, LxEventSchedulerService);
+    .service(`${SERVICE_PREFIX}EventSchedulerService`, EventSchedulerService);
 
 /////////////////////////////
 
-export { LxEventSchedulerService };
+export { EventSchedulerService };

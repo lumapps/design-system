@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxSelectFilterDirective() {
+function SelectFilterDirective() {
     'ngInject';
 
     function link(scope, el) {
@@ -19,8 +19,8 @@ function lxSelectFilterDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.select`).directive(`${COMPONENT_PREFIX}SelectFilter`, lxSelectFilterDirective);
+angular.module(`${MODULE_NAME}.select`).directive(`${COMPONENT_PREFIX}SelectFilter`, SelectFilterDirective);
 
 /////////////////////////////
 
-export { lxSelectFilterDirective };
+export { SelectFilterDirective };

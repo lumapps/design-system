@@ -6,7 +6,7 @@ import template from './lx-select.html';
 
 /////////////////////////////
 
-function lxSelectController($document, $interpolate, $sce, $scope, $timeout, NglxDropdownService, NglxUtilsService) {
+function SelectController($document, $interpolate, $sce, $scope, $timeout, NglxDropdownService, NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -463,7 +463,7 @@ function lxSelectController($document, $interpolate, $sce, $scope, $timeout, Ngl
 
 /////////////////////////////
 
-function lxSelectDirective() {
+function SelectDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrls, transclude) {
@@ -502,7 +502,7 @@ function lxSelectDirective() {
 
     return {
         bindToController: true,
-        controller: lxSelectController,
+        controller: SelectController,
         controllerAs: 'lxSelect',
         link,
         replace: true,
@@ -537,8 +537,8 @@ function lxSelectDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.select`).directive(`${COMPONENT_PREFIX}Select`, lxSelectDirective);
+angular.module(`${MODULE_NAME}.select`).directive(`${COMPONENT_PREFIX}Select`, SelectDirective);
 
 /////////////////////////////
 
-export { lxSelectDirective };
+export { SelectDirective };

@@ -4,7 +4,7 @@ import template from './lx-radio-button.html';
 
 /////////////////////////////
 
-function lxRadioButtonController(NglxUtilsService) {
+function RadioButtonController(NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -110,7 +110,7 @@ function lxRadioButtonController(NglxUtilsService) {
 
 /////////////////////////////
 
-function lxRadioButtonDirective() {
+function RadioButtonDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrls, transclude) {
@@ -157,7 +157,7 @@ function lxRadioButtonDirective() {
 
     return {
         bindToController: true,
-        controller: lxRadioButtonController,
+        controller: RadioButtonController,
         controllerAs: 'lxRadioButton',
         link,
         replace: true,
@@ -176,8 +176,8 @@ function lxRadioButtonDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.radio-button`).directive(`${COMPONENT_PREFIX}RadioButton`, lxRadioButtonDirective);
+angular.module(`${MODULE_NAME}.radio-button`).directive(`${COMPONENT_PREFIX}RadioButton`, RadioButtonDirective);
 
 /////////////////////////////
 
-export { lxRadioButtonDirective };
+export { RadioButtonDirective };

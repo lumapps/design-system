@@ -6,7 +6,7 @@ import template from './lx-expansion-panel.html';
 
 /////////////////////////////
 
-function lxExpansionPanelController($element, $scope, $timeout) {
+function ExpansionPanelController($element, $scope, $timeout) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -181,7 +181,7 @@ function lxExpansionPanelController($element, $scope, $timeout) {
 
 /////////////////////////////
 
-function lxExpansionPanelDirective() {
+function ExpansionPanelDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
@@ -194,7 +194,7 @@ function lxExpansionPanelDirective() {
 
     return {
         bindToController: true,
-        controller: lxExpansionPanelController,
+        controller: ExpansionPanelController,
         controllerAs: 'lxExpansionPanel',
         link,
         replace: true,
@@ -220,8 +220,8 @@ function lxExpansionPanelDirective() {
 
 angular
     .module(`${MODULE_NAME}.expansion-panel`)
-    .directive(`${COMPONENT_PREFIX}ExpansionPanel`, lxExpansionPanelDirective);
+    .directive(`${COMPONENT_PREFIX}ExpansionPanel`, ExpansionPanelDirective);
 
 /////////////////////////////
 
-export { lxExpansionPanelDirective };
+export { ExpansionPanelDirective };

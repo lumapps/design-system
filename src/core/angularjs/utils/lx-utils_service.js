@@ -2,7 +2,7 @@ import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_con
 
 /////////////////////////////
 
-function LxUtilsService() {
+function UtilsService() {
     'ngInject';
 
     const service = this;
@@ -58,8 +58,8 @@ function LxUtilsService() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.utils`).service(`${SERVICE_PREFIX}UtilsService`, LxUtilsService);
+angular.module(`${MODULE_NAME}.utils.utils`).service(`${SERVICE_PREFIX}UtilsService`, UtilsService);
 
 /////////////////////////////
 
-export { LxUtilsService };
+export { UtilsService };

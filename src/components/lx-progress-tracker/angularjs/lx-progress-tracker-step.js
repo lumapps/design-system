@@ -6,7 +6,7 @@ import template from './lx-progress-tracker-step.html';
 
 /////////////////////////////
 
-function lxProgressTrackerStepController($scope, $element) {
+function ProgressTrackerStepController($scope, $element) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -102,7 +102,7 @@ function lxProgressTrackerStepController($scope, $element) {
 
 /////////////////////////////
 
-function lxProgressTrackerStepDirective() {
+function ProgressTrackerStepDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrls) {
@@ -112,7 +112,7 @@ function lxProgressTrackerStepDirective() {
 
     return {
         bindToController: true,
-        controller: lxProgressTrackerStepController,
+        controller: ProgressTrackerStepController,
         controllerAs: 'lxProgressTrackerStep',
         link,
         replace: true,
@@ -133,8 +133,8 @@ function lxProgressTrackerStepDirective() {
 
 angular
     .module(`${MODULE_NAME}.progress-tracker`)
-    .directive(`${COMPONENT_PREFIX}ProgressTrackerStep`, lxProgressTrackerStepDirective);
+    .directive(`${COMPONENT_PREFIX}ProgressTrackerStep`, ProgressTrackerStepDirective);
 
 /////////////////////////////
 
-export { lxProgressTrackerStepDirective };
+export { ProgressTrackerStepDirective };

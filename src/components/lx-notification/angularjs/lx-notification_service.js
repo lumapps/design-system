@@ -4,7 +4,7 @@ import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/
 
 /////////////////////////////
 
-function LxNotificationService($compile, $rootScope, $timeout, NglxDepthService) {
+function NotificationService($compile, $rootScope, $timeout, NglxDepthService) {
     'ngInject';
 
     const service = this;
@@ -225,8 +225,8 @@ function LxNotificationService($compile, $rootScope, $timeout, NglxDepthService)
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.notification`).service(`${SERVICE_PREFIX}NotificationService`, LxNotificationService);
+angular.module(`${MODULE_NAME}.notification`).service(`${SERVICE_PREFIX}NotificationService`, NotificationService);
 
 /////////////////////////////
 
-export { LxNotificationService };
+export { NotificationService };

@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxTooltipController($element, $timeout, NglxDepthService) {
+function TooltipController($element, $timeout, NglxDepthService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -150,7 +150,7 @@ function lxTooltipController($element, $timeout, NglxDepthService) {
 
 /////////////////////////////
 
-function lxTooltipDirective() {
+function TooltipDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
@@ -164,7 +164,7 @@ function lxTooltipDirective() {
 
     return {
         bindToController: true,
-        controller: lxTooltipController,
+        controller: TooltipController,
         controllerAs: 'lxTooltip',
         link,
         restrict: 'A',
@@ -177,8 +177,8 @@ function lxTooltipDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.tooltip`).directive(`${COMPONENT_PREFIX}Tooltip`, lxTooltipDirective);
+angular.module(`${MODULE_NAME}.tooltip`).directive(`${COMPONENT_PREFIX}Tooltip`, TooltipDirective);
 
 /////////////////////////////
 
-export { lxTooltipDirective };
+export { TooltipDirective };

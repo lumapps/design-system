@@ -143,7 +143,7 @@ function lxListController($element, $scope) {
 
 /////////////////////////////
 
-function lxListDirective() {
+function ListDirective() {
     return {
         bindToController: true,
         controller: lxListController,
@@ -160,8 +160,8 @@ function lxListDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}List`, lxListDirective);
+angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}List`, ListDirective);
 
 /////////////////////////////
 
-export { lxListDirective };
+export { ListDirective };

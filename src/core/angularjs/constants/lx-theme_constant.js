@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -9,12 +9,12 @@ import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
  * @constant
  * @readonly
  */
-const LxThemeConstant = ['primary', 'secondary', 'blue', 'yellow', 'red', 'green'];
+const ThemeConstant = ['primary', 'secondary', 'blue', 'yellow', 'red', 'green'];
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.theme`).constant('LxThemeConstant', LxThemeConstant);
+angular.module(`${MODULE_NAME}.theme`).constant(`${SERVICE_PREFIX}ThemeConstant`, ThemeConstant);
 
 /////////////////////////////
 
-export { LxThemeConstant };
+export { ThemeConstant };

@@ -4,7 +4,7 @@ import template from './lx-dialog.html';
 
 /////////////////////////////
 
-function lxDialogController(
+function DialogController(
     $element,
     $rootScope,
     $scope,
@@ -316,7 +316,7 @@ function lxDialogController(
 
 /////////////////////////////
 
-function lxDialogDirective() {
+function DialogDirective() {
     function link(scope, el, attrs, ctrl) {
         attrs.$observe('id', (newId) => {
             ctrl.id = newId;
@@ -325,7 +325,7 @@ function lxDialogDirective() {
 
     return {
         bindToController: true,
-        controller: lxDialogController,
+        controller: DialogController,
         controllerAs: 'lxDialog',
         link,
         replace: true,
@@ -346,8 +346,8 @@ function lxDialogDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).directive(`${COMPONENT_PREFIX}Dialog`, lxDialogDirective);
+angular.module(`${MODULE_NAME}.dialog`).directive(`${COMPONENT_PREFIX}Dialog`, DialogDirective);
 
 /////////////////////////////
 
-export { lxDialogDirective };
+export { DialogDirective };

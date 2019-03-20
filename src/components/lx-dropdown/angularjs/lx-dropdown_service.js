@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/co
 
 /////////////////////////////
 
-function LxDropdownService($rootScope) {
+function DropdownService($rootScope) {
     'ngInject';
 
     const service = this;
@@ -100,8 +100,8 @@ function LxDropdownService($rootScope) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dropdown`).service(`${SERVICE_PREFIX}DropdownService`, LxDropdownService);
+angular.module(`${MODULE_NAME}.dropdown`).service(`${SERVICE_PREFIX}DropdownService`, DropdownService);
 
 /////////////////////////////
 
-export { LxDropdownService };
+export { DropdownService };

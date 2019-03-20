@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxListSubheaderDirective() {
+function ListSubheaderDirective() {
     'ngInject';
 
     return {
@@ -15,8 +15,8 @@ function lxListSubheaderDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListSubheader`, lxListSubheaderDirective);
+angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListSubheader`, ListSubheaderDirective);
 
 /////////////////////////////
 
-export { lxListSubheaderDirective };
+export { ListSubheaderDirective };

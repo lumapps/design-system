@@ -2,7 +2,7 @@ import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_con
 
 /////////////////////////////
 
-function LxDepthService() {
+function DepthService() {
     'ngInject';
 
     const service = this;
@@ -51,8 +51,8 @@ function LxDepthService() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.depth`).service(`${SERVICE_PREFIX}DepthService`, LxDepthService);
+angular.module(`${MODULE_NAME}.utils.depth`).service(`${SERVICE_PREFIX}DepthService`, DepthService);
 
 /////////////////////////////
 
-export { LxDepthService };
+export { DepthService };

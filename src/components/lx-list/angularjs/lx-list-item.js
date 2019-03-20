@@ -4,7 +4,7 @@ import template from './lx-list-item.html';
 
 /////////////////////////////
 
-function lxListItemController($element) {
+function ListItemController($element) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -61,7 +61,7 @@ function lxListItemController($element) {
 
 /////////////////////////////
 
-function lxListItemDirective() {
+function ListItemDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrls, transclude) {
@@ -85,7 +85,7 @@ function lxListItemDirective() {
 
     return {
         bindToController: true,
-        controller: lxListItemController,
+        controller: ListItemController,
         controllerAs: 'lxListItem',
         link,
         replace: true,
@@ -105,8 +105,8 @@ function lxListItemDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListItem`, lxListItemDirective);
+angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListItem`, ListItemDirective);
 
 /////////////////////////////
 
-export { lxListItemDirective };
+export { ListItemDirective };

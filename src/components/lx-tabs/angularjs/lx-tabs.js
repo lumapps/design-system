@@ -4,7 +4,7 @@ import template from './lx-tabs.html';
 
 /////////////////////////////
 
-function lxTabsController() {
+function TabsController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -109,12 +109,12 @@ function lxTabsController() {
 
 /////////////////////////////
 
-function lxTabsDirective() {
+function TabsDirective() {
     'ngInject';
 
     return {
         bindToController: true,
-        controller: lxTabsController,
+        controller: TabsController,
         controllerAs: 'lxTabs',
         replace: true,
         restrict: 'E',
@@ -131,8 +131,8 @@ function lxTabsDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.tabs`).directive(`${COMPONENT_PREFIX}Tabs`, lxTabsDirective);
+angular.module(`${MODULE_NAME}.tabs`).directive(`${COMPONENT_PREFIX}Tabs`, TabsDirective);
 
 /////////////////////////////
 
-export { lxTabsDirective };
+export { TabsDirective };

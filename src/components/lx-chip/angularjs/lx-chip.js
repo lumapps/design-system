@@ -6,7 +6,7 @@ import template from './lx-chip.html';
 
 /////////////////////////////
 
-function lxChipController() {
+function ChipController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -106,7 +106,7 @@ function lxChipController() {
 
 /////////////////////////////
 
-function lxChipDirective() {
+function ChipDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
@@ -125,7 +125,7 @@ function lxChipDirective() {
 
     return {
         bindToController: true,
-        controller: lxChipController,
+        controller: ChipController,
         controllerAs: 'lxChip',
         link,
         replace: true,
@@ -151,8 +151,8 @@ function lxChipDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.chip`).directive(`${COMPONENT_PREFIX}Chip`, lxChipDirective);
+angular.module(`${MODULE_NAME}.chip`).directive(`${COMPONENT_PREFIX}Chip`, ChipDirective);
 
 /////////////////////////////
 
-export { lxChipDirective };
+export { ChipDirective };

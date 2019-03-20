@@ -2,7 +2,7 @@ import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_con
 
 /////////////////////////////
 
-function LxFocusTrapService() {
+function FocusTrapService() {
     'ngInject';
 
     const service = this;
@@ -66,8 +66,8 @@ function LxFocusTrapService() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.focus-trap`).service(`${SERVICE_PREFIX}FocusTrapService`, LxFocusTrapService);
+angular.module(`${MODULE_NAME}.utils.focus-trap`).service(`${SERVICE_PREFIX}FocusTrapService`, FocusTrapService);
 
 /////////////////////////////
 
-export { LxFocusTrapService };
+export { FocusTrapService };

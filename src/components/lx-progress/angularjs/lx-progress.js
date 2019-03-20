@@ -4,7 +4,7 @@ import template from './lx-progress.html';
 
 /////////////////////////////
 
-function lxProgressController() {
+function ProgressController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this, no-unused-vars
@@ -13,12 +13,12 @@ function lxProgressController() {
 
 /////////////////////////////
 
-function lxProgressDirective() {
+function ProgressDirective() {
     'ngInject';
 
     return {
         bindToController: true,
-        controller: lxProgressController,
+        controller: ProgressController,
         controllerAs: 'lxProgress',
         replace: true,
         restrict: 'E',
@@ -31,8 +31,8 @@ function lxProgressDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.progress`).directive(`${COMPONENT_PREFIX}Progress`, lxProgressDirective);
+angular.module(`${MODULE_NAME}.progress`).directive(`${COMPONENT_PREFIX}Progress`, ProgressDirective);
 
 /////////////////////////////
 
-export { lxProgressDirective };
+export { ProgressDirective };

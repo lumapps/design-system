@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxEnterKeypressDirective() {
+function EnterKeypressDirective() {
     'ngInject';
 
     function link(scope, el, attrs) {
@@ -28,8 +28,8 @@ function lxEnterKeypressDirective() {
 
 angular
     .module(`${MODULE_NAME}.utils.enter-keypress`)
-    .directive(`${COMPONENT_PREFIX}EnterKeypress`, lxEnterKeypressDirective);
+    .directive(`${COMPONENT_PREFIX}EnterKeypress`, EnterKeypressDirective);
 
 /////////////////////////////
 
-export { lxEnterKeypressDirective };
+export { EnterKeypressDirective };

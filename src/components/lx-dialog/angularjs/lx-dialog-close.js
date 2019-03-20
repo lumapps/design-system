@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxDialogCloseDirective(NglxDialogService) {
+function DialogCloseDirective(NglxDialogService) {
     'ngInject';
 
     function link(scope, el) {
@@ -19,8 +19,8 @@ function lxDialogCloseDirective(NglxDialogService) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).directive(`${COMPONENT_PREFIX}DialogClose`, lxDialogCloseDirective);
+angular.module(`${MODULE_NAME}.dialog`).directive(`${COMPONENT_PREFIX}DialogClose`, DialogCloseDirective);
 
 /////////////////////////////
 
-export { lxDialogCloseDirective };
+export { DialogCloseDirective };

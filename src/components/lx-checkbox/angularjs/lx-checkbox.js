@@ -6,7 +6,7 @@ import template from './lx-checkbox.html';
 
 /////////////////////////////
 
-function lxCheckboxController(NglxUtilsService) {
+function CheckboxController(NglxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -116,7 +116,7 @@ function lxCheckboxController(NglxUtilsService) {
 
 /////////////////////////////
 
-function lxCheckboxDirective() {
+function CheckboxDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrls, transclude) {
@@ -159,7 +159,7 @@ function lxCheckboxDirective() {
 
     return {
         bindToController: true,
-        controller: lxCheckboxController,
+        controller: CheckboxController,
         controllerAs: 'lxCheckbox',
         link,
         replace: true,
@@ -178,8 +178,8 @@ function lxCheckboxDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.checkbox`).directive(`${COMPONENT_PREFIX}Checkbox`, lxCheckboxDirective);
+angular.module(`${MODULE_NAME}.checkbox`).directive(`${COMPONENT_PREFIX}Checkbox`, CheckboxDirective);
 
 /////////////////////////////
 
-export { lxCheckboxDirective };
+export { CheckboxDirective };

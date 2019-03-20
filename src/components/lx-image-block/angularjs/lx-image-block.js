@@ -4,7 +4,7 @@ import template from './lx-image-block.html';
 
 /////////////////////////////
 
-function lxImageBlockController() {
+function ImageBlockController() {
     // eslint-disable-next-line consistent-this
     const lxImageBlock = this;
 
@@ -38,10 +38,10 @@ function lxImageBlockController() {
 
 /////////////////////////////
 
-function lxImageBlockDirective() {
+function ImageBlockDirective() {
     return {
         bindToController: true,
-        controller: lxImageBlockController,
+        controller: ImageBlockController,
         controllerAs: 'lxImageBlock',
         replace: true,
         restrict: 'E',
@@ -61,8 +61,8 @@ function lxImageBlockDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.image-block`).directive(`${COMPONENT_PREFIX}ImageBlock`, lxImageBlockDirective);
+angular.module(`${MODULE_NAME}.image-block`).directive(`${COMPONENT_PREFIX}ImageBlock`, ImageBlockDirective);
 
 /////////////////////////////
 
-export { lxImageBlockDirective };
+export { ImageBlockDirective };

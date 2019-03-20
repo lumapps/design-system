@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxListDividerDirective() {
+function ListDividerDirective() {
     'ngInject';
 
     return {
@@ -14,8 +14,8 @@ function lxListDividerDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListDivider`, lxListDividerDirective);
+angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListDivider`, ListDividerDirective);
 
 /////////////////////////////
 
-export { lxListDividerDirective };
+export { ListDividerDirective };

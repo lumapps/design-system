@@ -4,7 +4,7 @@ import template from './lx-dropdown.html';
 
 /////////////////////////////
 
-function lxDropdownController(
+function DropdownController(
     $document,
     $scope,
     $timeout,
@@ -399,7 +399,7 @@ function lxDropdownController(
 
 /////////////////////////////
 
-function lxDropdownDirective() {
+function DropdownDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
@@ -417,7 +417,7 @@ function lxDropdownDirective() {
 
     return {
         bindToController: true,
-        controller: lxDropdownController,
+        controller: DropdownController,
         controllerAs: 'lxDropdown',
         link,
         replace: true,
@@ -440,8 +440,8 @@ function lxDropdownDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dropdown`).directive(`${COMPONENT_PREFIX}Dropdown`, lxDropdownDirective);
+angular.module(`${MODULE_NAME}.dropdown`).directive(`${COMPONENT_PREFIX}Dropdown`, DropdownDirective);
 
 /////////////////////////////
 
-export { lxDropdownDirective };
+export { DropdownDirective };

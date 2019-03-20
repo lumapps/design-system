@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
-function lxSelectChoicesFilter($filter) {
+function SelectChoicesFilter($filter) {
     'ngInject';
 
     return function filteredChoices(choices, externalFilter, textFilter) {
@@ -28,8 +28,8 @@ function lxSelectChoicesFilter($filter) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.select`).filter(`${COMPONENT_PREFIX}SelectChoicesFilter`, lxSelectChoicesFilter);
+angular.module(`${MODULE_NAME}.select`).filter(`${COMPONENT_PREFIX}SelectChoicesFilter`, SelectChoicesFilter);
 
 /////////////////////////////
 
-export { lxSelectChoicesFilter };
+export { SelectChoicesFilter };
