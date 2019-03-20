@@ -160,8 +160,8 @@ function lxSwitchDirective() {
         },
         template,
         transclude: {
-            helper: '?lxSwitchHelper',
-            label: '?lxSwitchLabel',
+            helper: `?${COMPONENT_PREFIX}SwitchHelper`,
+            label: `?${COMPONENT_PREFIX}SwitchLabel`,
         },
     };
 }

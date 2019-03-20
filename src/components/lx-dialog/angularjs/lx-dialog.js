@@ -337,9 +337,9 @@ function lxDialogDirective() {
         },
         template,
         transclude: {
-            content: 'lxDialogContent',
-            footer: '?lxDialogFooter',
-            header: '?lxDialogHeader',
+            content: `${COMPONENT_PREFIX}DialogContent`,
+            footer: `?${COMPONENT_PREFIX}DialogFooter`,
+            header: `?${COMPONENT_PREFIX}DialogHeader`,
         },
     };
 }

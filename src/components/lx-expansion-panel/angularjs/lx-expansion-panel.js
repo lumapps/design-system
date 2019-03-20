@@ -209,9 +209,9 @@ function lxExpansionPanelDirective() {
         },
         template,
         transclude: {
-            content: 'lxExpansionPanelContent',
-            footer: '?lxExpansionPanelFooter',
-            header: 'lxExpansionPanelHeader',
+            content: `${COMPONENT_PREFIX}ExpansionPanelContent`,
+            footer: `?${COMPONENT_PREFIX}ExpansionPanelFooter`,
+            header: `${COMPONENT_PREFIX}ExpansionPanelHeader`,
         },
     };
 }

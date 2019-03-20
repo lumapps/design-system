@@ -142,9 +142,9 @@ function lxChipDirective() {
         },
         template,
         transclude: {
-            after: '?lxChipAfter',
-            before: '?lxChipBefore',
-            label: 'lxChipLabel',
+            after: `?${COMPONENT_PREFIX}ChipAfter`,
+            before: `?${COMPONENT_PREFIX}ChipBefore`,
+            label: `${COMPONENT_PREFIX}ChipLabel`,
         },
     };
 }

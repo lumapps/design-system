@@ -432,8 +432,8 @@ function lxDropdownDirective() {
         },
         template,
         transclude: {
-            menu: 'lxDropdownMenu',
-            toggle: '?lxDropdownToggle',
+            menu: `${COMPONENT_PREFIX}DropdownMenu`,
+            toggle: `?${COMPONENT_PREFIX}DropdownToggle`,
         },
     };
 }

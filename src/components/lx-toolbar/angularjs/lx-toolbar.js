@@ -69,9 +69,9 @@ function lxToolbarDirective() {
         restrict: 'E',
         template,
         transclude: {
-            after: '?lxToolbarAfter',
-            before: '?lxToolbarBefore',
-            label: '?lxToolbarLabel',
+            after: `?${COMPONENT_PREFIX}ToolbarAfter`,
+            before: `?${COMPONENT_PREFIX}ToolbarBefore`,
+            label: `?${COMPONENT_PREFIX}ToolbarLabel`,
         },
     };
 }

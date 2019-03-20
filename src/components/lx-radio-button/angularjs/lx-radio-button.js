@@ -168,8 +168,8 @@ function lxRadioButtonDirective() {
         },
         template,
         transclude: {
-            helper: '?lxRadioButtonHelper',
-            label: '?lxRadioButtonLabel',
+            helper: `?${COMPONENT_PREFIX}RadioButtonHelper`,
+            label: `?${COMPONENT_PREFIX}RadioButtonLabel`,
         },
     };
 }

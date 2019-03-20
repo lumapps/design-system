@@ -5,34 +5,34 @@
 </div>
 
 <nglx-dialog id="{{ vm.dialogId }}">
-    <lx-dialog-header>
+    <nglx-dialog-header>
         <nglx-toolbar>
-            <lx-toolbar-label>
+            <nglx-toolbar-label>
                 <span class="lx-typography-title">Dialog title</span>
-            </lx-toolbar-label>
+            </nglx-toolbar-label>
 
-            <lx-toolbar-after>
+            <nglx-toolbar-after>
                 <nglx-button ng-click="vm.addPerson()" lx-focus-on-init>
                     <span>Add</span>
                 </nglx-button>
-            </lx-toolbar-after>
+            </nglx-toolbar-after>
         </nglx-toolbar>
 
         <nglx-divider></nglx-divider>
-    </lx-dialog-header>
+    </nglx-dialog-header>
 
-    <lx-dialog-content>
+    <nglx-dialog-content>
         <div class="p++">
             <div ng-repeat="person in vm.people">{{ person.name }} - {{ person.email }} - {{ person.age }}</div>
         </div>
-    </lx-dialog-content>
+    </nglx-dialog-content>
 
-    <lx-dialog-footer>
+    <nglx-dialog-footer>
         <nglx-divider></nglx-divider>
 
         <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
             <nglx-button lx-emphasis="medium" nglx-dialog-close>Cancel</nglx-button>
             <nglx-button class="ml" nglx-dialog-close>Ok</nglx-button>
         </div>
-    </lx-dialog-footer>
+    </nglx-dialog-footer>
 </nglx-dialog>

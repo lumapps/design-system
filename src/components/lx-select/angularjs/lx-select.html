@@ -52,10 +52,10 @@
                     lx-theme="{{ lxSelect.theme === 'dark' ? 'dark' : 'light' }}"
                     ng-disabled="lxSelect.isDisabled"
                 >
-                    <lx-chip-label ng-bind-html="lxSelect.displaySelected(selected)"></lx-chip-label>
-                    <lx-chip-after
+                    <nglx-chip-label ng-bind-html="lxSelect.displaySelected(selected)"></nglx-chip-label>
+                    <nglx-chip-after
                         ><nglx-icon lx-path="{{ lxSelect.icons.mdiClose }}" lx-size="xxs"></nglx-icon
-                    ></lx-chip-after>
+                    ></nglx-chip-after>
                 </nglx-chip>
             </div>
         </div>
@@ -91,7 +91,7 @@
         ng-blur="lxSelect.disableKeyEvents()"
         ng-if="lxSelect.variant === 'chip'"
     >
-        <lx-chip-label>
+        <nglx-chip-label>
             <span ng-if="lxSelect.isModelEmpty()">{{ lxSelect.label }}</span>
 
             <span
@@ -103,18 +103,18 @@
                 <span ng-bind-html="lxSelect.displaySelected(lxSelect.viewValue[0])"></span>
                 <span ng-if="lxSelect.viewValue.length > 1">+{{ lxSelect.viewValue.length - 1 }}</span>
             </span>
-        </lx-chip-label>
+        </nglx-chip-label>
 
-        <lx-chip-after>
+        <nglx-chip-after>
             <nglx-icon
                 lx-path="{{ lxSelect.isModelEmpty() ? lxSelect.icons.mdiMenuDown : lxSelect.icons.mdiCloseCircle }}"
                 lx-size="xs"
             ></nglx-icon>
-        </lx-chip-after>
+        </nglx-chip-after>
     </nglx-chip>
 
     <nglx-dropdown lx-position="left" lx-width="100%" id="{{ lxSelect.dropdownUuid }}">
-        <lx-dropdown-menu>
+        <nglx-dropdown-menu>
             <div class="lx-select__filter" ng-if="::lxSelect.hasFilter">
                 <nglx-icon lx-path="{{ lxSelect.icons.mdiMagnify }}" lx-size="xs"></nglx-icon>
 
@@ -139,13 +139,13 @@
                     ng-click="lxSelect.select(choice, $event)"
                     lx-enter-keypress="lxSelect.select(choice, $event)"
                 >
-                    <lx-list-item-content ng-bind-html="lxSelect.displayChoice(choice)"></lx-list-item-content>
+                    <nglx-list-item-content ng-bind-html="lxSelect.displayChoice(choice)"></nglx-list-item-content>
                 </nglx-list-item>
             </nglx-list>
 
             <span class="lx-select__helper" ng-if="lxSelect.hasHelper && !lxSelect.isLoading">
                 {{ lxSelect.helper }}
             </span>
-        </lx-dropdown-menu>
+        </nglx-dropdown-menu>
     </nglx-dropdown>
 </div>

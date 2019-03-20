@@ -529,8 +529,8 @@ function lxSelectDirective() {
         },
         template,
         transclude: {
-            choices: 'lxSelectChoices',
-            selected: 'lxSelectSelected',
+            choices: `${COMPONENT_PREFIX}SelectChoices`,
+            selected: `${COMPONENT_PREFIX}SelectSelected`,
         },
     };
 }

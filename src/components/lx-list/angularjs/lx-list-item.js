@@ -96,9 +96,9 @@ function lxListItemDirective() {
         },
         template,
         transclude: {
-            after: '?lxListItemAfter',
-            before: '?lxListItemBefore',
-            content: '?lxListItemContent',
+            after: `?${COMPONENT_PREFIX}ListItemAfter`,
+            before: `?${COMPONENT_PREFIX}ListItemBefore`,
+            content: `?${COMPONENT_PREFIX}ListItemContent`,
         },
     };
 }

@@ -170,8 +170,8 @@ function lxCheckboxDirective() {
         },
         template,
         transclude: {
-            helper: '?lxCheckboxHelper',
-            label: '?lxCheckboxLabel',
+            helper: `?${COMPONENT_PREFIX}CheckboxHelper`,
+            label: `?${COMPONENT_PREFIX}CheckboxLabel`,
         },
     };
 }
