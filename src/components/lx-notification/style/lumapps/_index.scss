@@ -2,21 +2,21 @@
    Notification
    ========================================================================== */
 
-.lx-notification {
+.#{$lumx-base-prefix}-notification {
     $self: &;
 
-    @include lx-elevation(4);
+    @include lumx-elevation(4);
 
     position: fixed;
-    right: $lx-spacing-unit * 3;
-    bottom: $lx-spacing-unit * 3;
+    right: $lumx-spacing-unit * 3;
+    bottom: $lumx-spacing-unit * 3;
     display: flex;
     overflow: hidden;
     align-items: center;
-    animation: lx-notification-show $lx-notification-transition-duration;
-    background-color: lx-theme-color-variant(light, N);
-    border-radius: $lx-theme-border-radius;
-    transition: opacity $lx-notification-transition-duration;
+    animation: lumx-notification-show $lumx-notification-transition-duration;
+    background-color: lumx-theme-color-variant(light, N);
+    border-radius: $lumx-theme-border-radius;
+    transition: opacity $lumx-notification-transition-duration;
 
     &--is-hidden {
         opacity: 0;
@@ -24,29 +24,29 @@
 
     &__icon {
         display: flex;
-        width: $lx-notification-height;
-        height: $lx-notification-height;
+        width: $lumx-notification-height;
+        height: $lumx-notification-height;
         align-items: center;
         justify-content: center;
-        color: lx-theme-color-variant(light, L3);
+        color: lumx-theme-color-variant(light, L3);
     }
 
     &__content {
-        @include lx-typography(body1);
+        @include lumx-typography(body1);
 
-        padding: 0 $lx-spacing-unit * 2;
-        color: lx-theme-color-variant(dark, N);
+        padding: 0 $lumx-spacing-unit * 2;
+        color: lumx-theme-color-variant(dark, N);
     }
 
     &__action {
-        padding-right: $lx-spacing-unit;
+        padding-right: $lumx-spacing-unit;
     }
 }
 
-@keyframes lx-notification-show {
+@keyframes lumx-notification-show {
     0% {
         opacity: 0;
-        transform: translateY($lx-notification-height);
+        transform: translateY($lumx-notification-height);
     }
 
     100% {
@@ -58,8 +58,8 @@
 /* Notification colors
    ========================================================================== */
 
-@each $color in $lx-notification-color-palette {
-    .lx-notification--color-#{$color} .lx-notification__icon {
-        background-color: lx-theme-color-variant($color, N);
+@each $color in $lumx-notification-color-palette {
+    .#{$lumx-base-prefix}-notification--color-#{$color} .#{$lumx-base-prefix}-notification__icon {
+        background-color: lumx-theme-color-variant($color, N);
     }
 }

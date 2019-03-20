@@ -1,4 +1,4 @@
-@mixin lx-chip-base() {
+@mixin lumx-chip-base() {
     display: inline-flex;
     align-items: center;
     padding: 0;
@@ -10,28 +10,28 @@
     vertical-align: top;
 }
 
-@mixin lx-chip-size($size) {
-    height: map-get($lx-chip-sizes, $size);
-    border-radius: (map-get($lx-chip-sizes, $size)) / 2;
+@mixin lumx-chip-size($size) {
+    height: map-get($lumx-chip-sizes, $size);
+    border-radius: (map-get($lumx-chip-sizes, $size)) / 2;
 }
 
-@mixin lx-chip-before() {
+@mixin lumx-chip-before() {
     flex-shrink: 0;
-    margin-right: $lx-spacing-unit;
+    margin-right: $lumx-spacing-unit;
 }
 
-@mixin lx-chip-label($size) {
+@mixin lumx-chip-label($size) {
     flex: 1;
     white-space: nowrap;
 
     @if $size == m {
-        @include lx-typography(body1);
+        @include lumx-typography(body1);
     } @else if $size == s {
-        @include lx-typography(caption);
+        @include lumx-typography(caption);
     }
 }
 
-@mixin lx-chip-after() {
+@mixin lumx-chip-after() {
     flex-shrink: 0;
-    margin-left: $lx-spacing-unit;
+    margin-left: $lumx-spacing-unit;
 }

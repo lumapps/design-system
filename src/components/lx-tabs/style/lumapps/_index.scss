@@ -2,29 +2,29 @@
    Tabs
    ========================================================================== */
 
-.lx-tabs {
+.#{$lumx-base-prefix}-tabs {
     $self: &;
 
     &__links {
         #{ $self }--theme-light & {
-            @include lx-tabs-links(dark);
+            @include lumx-tabs-links(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-tabs-links(light);
+            @include lumx-tabs-links(light);
         }
     }
 
     &__link {
-        @include lx-tabs-link;
-        @include lx-state-transition;
+        @include lumx-tabs-link;
+        @include lumx-state-transition;
 
         #{ $self }--theme-light & {
-            @include lx-state(state-default, emphasis-low, dark);
+            @include lumx-state(state-default, emphasis-low, dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-state(state-default, emphasis-low, light);
+            @include lumx-state(state-default, emphasis-low, light);
         }
     }
 }
@@ -32,30 +32,30 @@
 /* Tabs layout
    ========================================================================== */
 
-.lx-tabs--layout-fixed {
-    .lx-tabs__link {
-        @include lx-tabs-link-layout(fixed);
+.#{$lumx-base-prefix}-tabs--layout-fixed {
+    .#{$lumx-base-prefix}-tabs__link {
+        @include lumx-tabs-link-layout(fixed);
     }
 }
 
 /* Tabs position
    ========================================================================== */
 
-.lx-tabs--layout-clustered.lx-tabs--position-left {
-    .lx-tabs__links {
-        @include lx-tabs-links-position(left);
+.#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-left {
+    .#{$lumx-base-prefix}-tabs__links {
+        @include lumx-tabs-links-position(left);
     }
 }
 
-.lx-tabs--layout-clustered.lx-tabs--position-center {
-    .lx-tabs__links {
-        @include lx-tabs-links-position(center);
+.#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-center {
+    .#{$lumx-base-prefix}-tabs__links {
+        @include lumx-tabs-links-position(center);
     }
 }
 
-.lx-tabs--layout-clustered.lx-tabs--position-right {
-    .lx-tabs__links {
-        @include lx-tabs-links-position(right);
+.#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-right {
+    .#{$lumx-base-prefix}-tabs__links {
+        @include lumx-tabs-links-position(right);
     }
 }
 
@@ -63,59 +63,59 @@
    ========================================================================== */
 
 // Hover state
-.lx-tabs__link:hover {
-    .lx-tabs--theme-light & {
-        @include lx-state(state-hover, emphasis-low, dark);
+.#{$lumx-base-prefix}-tabs__link:hover {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        @include lumx-state(state-hover, emphasis-low, dark);
     }
 
-    .lx-tabs--theme-dark & {
-        @include lx-state(state-hover, emphasis-low, light);
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        @include lumx-state(state-hover, emphasis-low, light);
     }
 }
 
 // Active state
 /* stylelint-disable-next-line no-descending-specificity */
-.lx-tabs__link:active {
-    .lx-tabs--theme-light & {
-        @include lx-state(state-active, emphasis-low, dark);
+.#{$lumx-base-prefix}-tabs__link:active {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        @include lumx-state(state-active, emphasis-low, dark);
     }
 
-    .lx-tabs--theme-dark & {
-        @include lx-state(state-active, emphasis-low, light);
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        @include lumx-state(state-active, emphasis-low, light);
     }
 }
 
 // Focus state
-.lx-tabs__link[data-focus-visible-added] {
-    .lx-tabs--theme-light & {
-        @include lx-state(state-focus, emphasis-low, dark, null, true);
+.#{$lumx-base-prefix}-tabs__link[data-focus-visible-added] {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        @include lumx-state(state-focus, emphasis-low, dark, null, true);
     }
 
-    .lx-tabs--theme-dark & {
-        @include lx-state(state-focus, emphasis-low, light, null, true);
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        @include lumx-state(state-focus, emphasis-low, light, null, true);
     }
 }
 
 // Disabled state
-.lx-tabs__link--is-disabled {
-    .lx-tabs--theme-light & {
-        @include lx-state-disabled-text(dark);
+.#{$lumx-base-prefix}-tabs__link--is-disabled {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        @include lumx-state-disabled-text(dark);
     }
 
-    .lx-tabs--theme-dark & {
-        @include lx-state-disabled-text(light);
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        @include lumx-state-disabled-text(light);
     }
 }
 
 /* Tabs link active
    ========================================================================== */
 
-.lx-tabs__link--is-active {
-    .lx-tabs--theme-light & {
-        @include lx-tabs-link-active(dark);
+.#{$lumx-base-prefix}-tabs__link--is-active {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        @include lumx-tabs-link-active(dark);
     }
 
-    .lx-tabs--theme-dark & {
-        @include lx-tabs-link-active(light);
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        @include lumx-tabs-link-active(light);
     }
 }

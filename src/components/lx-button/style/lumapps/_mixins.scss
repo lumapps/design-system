@@ -1,4 +1,4 @@
-@mixin lx-button-base() {
+@mixin lumx-button-base() {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -16,62 +16,62 @@
     }
 }
 
-@mixin lx-button-size($emphasis, $variant, $size) {
-    height: map-get($lx-sizes, $size);
+@mixin lumx-button-size($emphasis, $variant, $size) {
+    height: map-get($lumx-sizes, $size);
 
     @if $variant == variant-button {
-        border-radius: $lx-theme-border-radius;
+        border-radius: $lumx-theme-border-radius;
     } @else if $variant == variant-icon {
-        width: map-get($lx-sizes, $size);
+        width: map-get($lumx-sizes, $size);
         border-radius: 50%;
     }
 }
 
-@mixin lx-button-color($emphasis, $color, $theme: null) {
-    @include lx-state(state-default, $emphasis, $color, $theme);
+@mixin lumx-button-color($emphasis, $color, $theme: null) {
+    @include lumx-state(state-default, $emphasis, $color, $theme);
 
     &:hover {
-        @include lx-state(state-hover, $emphasis, $color, $theme);
+        @include lumx-state(state-hover, $emphasis, $color, $theme);
     }
 
     &:active {
-        @include lx-state(state-active, $emphasis, $color, $theme);
+        @include lumx-state(state-active, $emphasis, $color, $theme);
     }
 
     &[data-focus-visible-added] {
-        @include lx-state(state-focus, $emphasis, $color, $theme);
+        @include lumx-state(state-focus, $emphasis, $color, $theme);
     }
 
     &:disabled {
-        @include lx-state-disabled-input;
+        @include lumx-state-disabled-input;
     }
 }
 
-@mixin lx-button-icon($variant, $position, $size) {
-    font-size: map-get($lx-button-icon-sizes, $size);
+@mixin lumx-button-icon($variant, $position, $size) {
+    font-size: map-get($lumx-button-icon-sizes, $size);
     pointer-events: none;
 
     @if $variant == variant-button {
         @if $position == position-left {
             @if $size == m {
-                margin-right: $lx-spacing-unit;
+                margin-right: $lumx-spacing-unit;
             } @else if $size == s {
-                margin-right: $lx-spacing-unit / 2;
+                margin-right: $lumx-spacing-unit / 2;
             }
         } @else if $position == position-right {
             @if $size == m {
-                margin-left: $lx-spacing-unit;
+                margin-left: $lumx-spacing-unit;
             } @else if $size == s {
-                margin-left: $lx-spacing-unit / 2;
+                margin-left: $lumx-spacing-unit / 2;
             }
         }
     }
 }
 
-@mixin lx-button-text($size) {
-    font-size: map-get($lx-button-text-sizes, $size);
-    font-weight: $lx-button-text-weight;
-    line-height: map-get($lx-sizes, $size);
+@mixin lumx-button-text($size) {
+    font-size: map-get($lumx-button-text-sizes, $size);
+    font-weight: $lumx-button-text-weight;
+    line-height: map-get($lumx-sizes, $size);
     pointer-events: none;
-    text-transform: $lx-button-text-transform;
+    text-transform: $lumx-button-text-transform;
 }

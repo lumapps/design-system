@@ -11,7 +11,7 @@ function EnterKeypressDirective() {
         el.bind('keydown keypress', function onKeyPress(evt) {
             if (evt.which === _ENTER_KEY_CODE) {
                 scope.$apply(function evalExpression() {
-                    scope.$eval(attrs.lxEnterKeypress, { $event: evt });
+                    scope.$eval(attrs.lumxEnterKeypress, { $event: evt });
                 });
 
                 evt.preventDefault();

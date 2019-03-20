@@ -8,7 +8,7 @@ function ListDividerDirective() {
     return {
         replace: true,
         restrict: 'E',
-        template: '<li class="lx-list-divider"></li>',
+        template: `<li class="${COMPONENT_PREFIX}-list-divider"></li>`,
     };
 }
 

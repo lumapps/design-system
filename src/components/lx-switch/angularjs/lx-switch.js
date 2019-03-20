@@ -133,9 +133,9 @@ function SwitchDirective() {
             el.find('input').attr('disabled', isDisabled);
 
             if (isDisabled) {
-                el.addClass('lx-switch--is-disabled');
+                el.addClass(`${COMPONENT_PREFIX}-switch--is-disabled`);
             } else {
-                el.removeClass('lx-switch--is-disabled');
+                el.removeClass(`${COMPONENT_PREFIX}-switch--is-disabled`);
             }
         });
 

@@ -58,7 +58,11 @@ function ProgressTrackerStepController($scope, $element) {
      * @return {boolean} Wheter the step is clickable or not.
      */
     function isClickable() {
-        return lumx.isActive || lumx.isComplete || $element.prev().hasClass('lx-progress-tracker-step--is-complete');
+        return (
+            lumx.isActive ||
+            lumx.isComplete ||
+            $element.prev().hasClass(`${COMPONENT_PREFIX}-progress-tracker-step--is-complete`)
+        );
     }
 
     /**

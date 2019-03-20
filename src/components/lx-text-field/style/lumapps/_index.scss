@@ -2,52 +2,52 @@
    Text field
    ========================================================================== */
 
-.lx-text-field {
+.#{$lumx-base-prefix}-text-field {
     $self: &;
 
     &__label {
         #{ $self }--theme-light & {
-            @include lx-input-label(dark);
+            @include lumx-input-label(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-input-label(light);
+            @include lumx-input-label(light);
         }
     }
 
     &__helper {
         #{ $self }--theme-light & {
-            @include lx-input-helper(dark);
+            @include lumx-input-helper(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-input-helper(light);
+            @include lumx-input-helper(light);
         }
     }
 
     &__input-wrapper {
         #{ $self }--theme-light & {
-            @include lx-text-field-input-wrapper(dark);
+            @include lumx-text-field-input-wrapper(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-text-field-input-wrapper(light);
+            @include lumx-text-field-input-wrapper(light);
         }
     }
 
     &--has-label &__input-wrapper {
-        margin-top: $lx-spacing-unit;
+        margin-top: $lumx-spacing-unit;
     }
 
     &__input-icon {
         flex-shrink: 0;
 
         #{ $self }--theme-light & {
-            @include lx-text-field-input-icon(dark);
+            @include lumx-text-field-input-icon(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-text-field-input-icon(light);
+            @include lumx-text-field-input-icon(light);
         }
     }
 
@@ -56,18 +56,18 @@
 
         input {
             #{ $self }--theme-light & {
-                @include lx-text-field-input-native(dark);
+                @include lumx-text-field-input-native(dark);
 
                 &::placeholder {
-                    @include lx-text-field-placeholder(dark);
+                    @include lumx-text-field-placeholder(dark);
                 }
             }
 
             #{ $self }--theme-dark & {
-                @include lx-text-field-input-native(light);
+                @include lumx-text-field-input-native(light);
 
                 &::placeholder {
-                    @include lx-text-field-placeholder(light);
+                    @include lumx-text-field-placeholder(light);
                 }
             }
         }
@@ -82,91 +82,91 @@
    ========================================================================== */
 
 // Disabled state
-.lx-text-field--is-disabled {
-    .lx-text-field__input-wrapper {
-        @include lx-state-disabled-input;
+.#{$lumx-base-prefix}-text-field--is-disabled {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-state-disabled-input;
     }
 
-    &.lx-text-field--theme-light {
-        .lx-text-field__label,
-        .lx-text-field__helper {
-            @include lx-state-disabled-text(dark);
+    &.#{$lumx-base-prefix}-text-field--theme-light {
+        .#{$lumx-base-prefix}-text-field__label,
+        .#{$lumx-base-prefix}-text-field__helper {
+            @include lumx-state-disabled-text(dark);
         }
     }
 
-    &.lx-text-field--theme-dark {
-        .lx-text-field__label,
-        .lx-text-field__helper {
-            @include lx-state-disabled-text(light);
+    &.#{$lumx-base-prefix}-text-field--theme-dark {
+        .#{$lumx-base-prefix}-text-field__label,
+        .#{$lumx-base-prefix}-text-field__helper {
+            @include lumx-state-disabled-text(light);
         }
     }
 }
 
 // Hover state
-.lx-text-field--theme-light {
-    .lx-text-field__input-wrapper:hover {
-        @include lx-text-field-input-wrapper-state(state-hover, dark);
+.#{$lumx-base-prefix}-text-field--theme-light {
+    .#{$lumx-base-prefix}-text-field__input-wrapper:hover {
+        @include lumx-text-field-input-wrapper-state(state-hover, dark);
     }
 }
 
-.lx-text-field--theme-dark {
-    .lx-text-field__input-wrapper:hover {
-        @include lx-text-field-input-wrapper-state(state-hover, light);
+.#{$lumx-base-prefix}-text-field--theme-dark {
+    .#{$lumx-base-prefix}-text-field__input-wrapper:hover {
+        @include lumx-text-field-input-wrapper-state(state-hover, light);
     }
 }
 
 // Focus state
-.lx-text-field--theme-light.lx-text-field--is-focus {
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(state-focus, dark);
+.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-focus {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-state(state-focus, dark);
     }
 }
 
-.lx-text-field--theme-dark.lx-text-field--is-focus {
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-state(state-focus, light);
+.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-focus {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-state(state-focus, light);
     }
 }
 
 /* Text field validity
    ========================================================================== */
 
-.lx-text-field--theme-light.lx-text-field--is-valid {
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-validity(valid, dark);
+.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-valid {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(valid, dark);
     }
 
-    .lx-text-field__input-validity {
-        @include lx-text-field-input-validity(valid, dark);
-    }
-}
-
-.lx-text-field--theme-light.lx-text-field--has-error {
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-validity(error, dark);
-    }
-
-    .lx-text-field__input-validity {
-        @include lx-text-field-input-validity(error, dark);
+    .#{$lumx-base-prefix}-text-field__input-validity {
+        @include lumx-text-field-input-validity(valid, dark);
     }
 }
 
-.lx-text-field--theme-dark.lx-text-field--is-valid {
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-validity(valid, light);
+.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--has-error {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(error, dark);
     }
 
-    .lx-text-field__input-validity {
-        @include lx-text-field-input-validity(valid, light);
+    .#{$lumx-base-prefix}-text-field__input-validity {
+        @include lumx-text-field-input-validity(error, dark);
     }
 }
 
-.lx-text-field--theme-dark.lx-text-field--has-error {
-    .lx-text-field__input-wrapper {
-        @include lx-text-field-input-wrapper-validity(error, light);
+.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-valid {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(valid, light);
     }
 
-    .lx-text-field__input-validity {
-        @include lx-text-field-input-validity(error, light);
+    .#{$lumx-base-prefix}-text-field__input-validity {
+        @include lumx-text-field-input-validity(valid, light);
+    }
+}
+
+.#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--has-error {
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-input-wrapper-validity(error, light);
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-validity {
+        @include lumx-text-field-input-validity(error, light);
     }
 }

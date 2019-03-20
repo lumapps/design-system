@@ -1,7 +1,7 @@
-<div class="lx-dropdown" ng-class="{ 'lx-dropdown--has-toggle': lumx.hasToggle }">
-    <div class="lx-dropdown__toggle" ng-click="lumx.toggle($event)" ng-transclude="toggle"></div>
+<div class="lumx-dropdown" ng-class="{ 'lumx-dropdown--has-toggle': lumx.hasToggle }">
+    <div class="lumx-dropdown__toggle" ng-click="lumx.toggle($event)" ng-transclude="toggle"></div>
 
-    <div class="lx-dropdown__menu">
-        <div class="lx-dropdown__content" ng-transclude="menu" ng-if="lumx.isOpen"></div>
+    <div class="lumx-dropdown__menu">
+        <div class="lumx-dropdown__content" ng-transclude="menu" ng-if="lumx.isOpen"></div>
     </div>
 </div>

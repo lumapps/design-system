@@ -1,68 +1,68 @@
-@mixin lx-switch-input-wrapper() {
+@mixin lumx-switch-input-wrapper() {
     position: relative;
-    width: $lx-switch-wrapper-width;
-    height: $lx-switch-wrapper-height;
+    width: $lumx-switch-wrapper-width;
+    height: $lumx-switch-wrapper-height;
 }
 
-@mixin lx-switch-input-native() {
+@mixin lumx-switch-input-native() {
     position: relative;
     z-index: 4;
     top: 0;
     left: 0;
-    width: $lx-switch-wrapper-width;
-    height: $lx-switch-wrapper-height;
+    width: $lumx-switch-wrapper-width;
+    height: $lumx-switch-wrapper-height;
     padding: 0;
     margin: 0;
     opacity: 0;
 }
 
-@mixin lx-switch-placeholder() {
+@mixin lumx-switch-placeholder() {
     position: absolute;
     z-index: 1;
-    top: ($lx-switch-wrapper-height - $lx-switch-control-height) / 2;
+    top: ($lumx-switch-wrapper-height - $lumx-switch-control-height) / 2;
     left: 0;
-    width: $lx-switch-control-width;
-    height: $lx-switch-control-height;
-    border-radius: $lx-switch-control-height / 2;
+    width: $lumx-switch-control-width;
+    height: $lumx-switch-control-height;
+    border-radius: $lumx-switch-control-height / 2;
 }
 
-@mixin lx-switch-input-background($status) {
+@mixin lumx-switch-input-background($status) {
     position: absolute;
     z-index: 2;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    border-radius: $lx-switch-control-height / 2;
+    border-radius: $lumx-switch-control-height / 2;
 
     @if $status == 'unchecked' {
-        border-style: solid;
         border-width: 2px;
+        border-style: solid;
     }
 }
 
-@mixin lx-switch-input-indicator($status, $theme) {
+@mixin lumx-switch-input-indicator($status, $theme) {
     position: absolute;
     z-index: 3;
-    top: ($lx-switch-control-height - $lx-switch-indicator-size) / 2;
-    width: $lx-switch-indicator-size;
-    height: $lx-switch-indicator-size;
-    border-radius: $lx-switch-indicator-size / 2;
+    top: ($lumx-switch-control-height - $lumx-switch-indicator-size) / 2;
+    width: $lumx-switch-indicator-size;
+    height: $lumx-switch-indicator-size;
+    border-radius: $lumx-switch-indicator-size / 2;
 
     @if $status == 'checked' {
-        right: $lx-switch-indicator-offset;
+        right: $lumx-switch-indicator-offset;
 
         @if $theme == 'dark' {
-            background-color: lx-theme-color-variant(light, N);
+            background-color: lumx-theme-color-variant(light, N);
         } @else if $theme == 'light' {
-            background-color: lx-theme-color-variant($lx-switch-checked-color, N);
+            background-color: lumx-theme-color-variant($lumx-switch-checked-color, N);
         }
     } @else if $status == 'unchecked' {
-        left: $lx-switch-indicator-offset;
-        background-color: lx-theme-color-variant($theme, N);
+        left: $lumx-switch-indicator-offset;
+        background-color: lumx-theme-color-variant($theme, N);
     }
 }
 
-@mixin lx-switch-input-indicator-disabled($theme) {
-    background-color: lx-theme-color-variant($theme, L3);
+@mixin lumx-switch-input-indicator-disabled($theme) {
+    background-color: lumx-theme-color-variant($theme, L3);
 }

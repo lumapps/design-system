@@ -1,31 +1,31 @@
 <div
-    class="lx-text-field"
-    ng-class="{ 'lx-text-field--theme-light': !lumx.theme || lumx.theme === 'light',
-                'lx-text-field--theme-dark': lumx.theme === 'dark',
-                'lx-text-field--has-label': lumx.label,
-                'lx-text-field--has-icon': lumx.icon,
-                'lx-text-field--has-value': lumx.hasValue(),
-                'lx-text-field--is-valid': lumx.isValid,
-                'lx-text-field--has-error': lumx.hasError }"
+    class="lumx-text-field"
+    ng-class="{ 'lumx-text-field--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-text-field--theme-dark': lumx.theme === 'dark',
+                'lumx-text-field--has-label': lumx.label,
+                'lumx-text-field--has-icon': lumx.icon,
+                'lumx-text-field--has-value': lumx.hasValue(),
+                'lumx-text-field--is-valid': lumx.isValid,
+                'lumx-text-field--has-error': lumx.hasError }"
 >
-    <label class="lx-text-field__label" ng-if="::lumx.label">
+    <label class="lumx-text-field__label" ng-if="::lumx.label">
         {{ lumx.label }}
     </label>
 
-    <span class="lx-text-field__helper" ng-if="::lumx.helper">{{ lumx.helper }}</span>
+    <span class="lumx-text-field__helper" ng-if="::lumx.helper">{{ lumx.helper }}</span>
 
-    <div class="lx-text-field__input-wrapper">
+    <div class="lumx-text-field__input-wrapper">
         <lumx-icon
-            class="lx-text-field__input-icon"
+            class="lumx-text-field__input-icon"
             lx-path="{{ lumx.icon }}"
             lx-size="xs"
             ng-if="::lumx.icon"
         ></lumx-icon>
 
-        <div class="lx-text-field__input-native" ng-transclude></div>
+        <div class="lumx-text-field__input-native" ng-transclude></div>
 
         <lumx-icon
-            class="lx-text-field__input-validity"
+            class="lumx-text-field__input-validity"
             lx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
             lx-size="xs"
             ng-if="lumx.isValid || lumx.hasError"

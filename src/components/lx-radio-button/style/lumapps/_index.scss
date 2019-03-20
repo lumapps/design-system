@@ -2,84 +2,84 @@
    Radio button
    ========================================================================== */
 
-.lx-radio-button {
+.#{$lumx-base-prefix}-radio-button {
     $self: &;
 
     display: flex;
 
     &__input-wrapper {
-        @include lx-radio-button-input-wrapper;
+        @include lumx-radio-button-input-wrapper;
     }
 
     &__input-native {
-        @include lx-radio-button-input-native;
+        @include lumx-radio-button-input-native;
     }
 
     &__input-placeholder {
-        @include lx-radio-button-placeholder;
+        @include lumx-radio-button-placeholder;
     }
 
     &__input-background {
-        @include lx-radio-button-input-background;
+        @include lumx-radio-button-input-background;
 
         #{ $self }--theme-light#{ $self }--is-unchecked & {
-            @include lx-radio-button-input-background-status(unchecked, dark);
+            @include lumx-radio-button-input-background-status(unchecked, dark);
         }
 
         #{ $self }--theme-dark#{ $self }--is-unchecked & {
-            @include lx-radio-button-input-background-status(unchecked, light);
+            @include lumx-radio-button-input-background-status(unchecked, light);
         }
 
         #{ $self }--theme-light#{ $self }--is-checked & {
-            @include lx-radio-button-input-background-status(checked, dark);
+            @include lumx-radio-button-input-background-status(checked, dark);
         }
 
         #{ $self }--theme-dark#{ $self }--is-checked & {
-            @include lx-radio-button-input-background-status(checked, light);
+            @include lumx-radio-button-input-background-status(checked, light);
         }
     }
 
     &__input-indicator {
-        @include lx-radio-button-input-indicator;
+        @include lumx-radio-button-input-indicator;
 
         #{ $self }--theme-light#{ $self }--is-unchecked & {
-            @include lx-radio-button-input-indicator-status(unchecked, dark);
+            @include lumx-radio-button-input-indicator-status(unchecked, dark);
         }
 
         #{ $self }--theme-dark#{ $self }--is-unchecked & {
-            @include lx-radio-button-input-indicator-status(unchecked, light);
+            @include lumx-radio-button-input-indicator-status(unchecked, light);
         }
 
         #{ $self }--theme-light#{ $self }--is-checked & {
-            @include lx-radio-button-input-indicator-status(checked, dark);
+            @include lumx-radio-button-input-indicator-status(checked, dark);
         }
 
         #{ $self }--theme-dark#{ $self }--is-checked & {
-            @include lx-radio-button-input-indicator-status(checked, light);
+            @include lumx-radio-button-input-indicator-status(checked, light);
         }
     }
 
     &__label {
-        padding-left: $lx-spacing-unit;
+        padding-left: $lumx-spacing-unit;
 
         #{ $self }--theme-light & {
-            @include lx-input-label(dark);
+            @include lumx-input-label(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-input-label(light);
+            @include lumx-input-label(light);
         }
     }
 
     &__helper {
-        padding-left: $lx-spacing-unit;
+        padding-left: $lumx-spacing-unit;
 
         #{ $self }--theme-light & {
-            @include lx-input-helper(dark);
+            @include lumx-input-helper(dark);
         }
 
         #{ $self }--theme-dark & {
-            @include lx-input-helper(light);
+            @include lumx-input-helper(light);
         }
     }
 }
@@ -88,85 +88,85 @@
    ========================================================================== */
 
 // Disabled state
-.lx-radio-button--is-disabled {
-    .lx-radio-button__input-native {
+.#{$lumx-base-prefix}-radio-button--is-disabled {
+    .#{$lumx-base-prefix}-radio-button__input-native {
         pointer-events: none;
     }
 
-    .lx-radio-button__input-placeholder {
-        @include lx-state-disabled-input;
+    .#{$lumx-base-prefix}-radio-button__input-placeholder {
+        @include lumx-state-disabled-input;
     }
 
-    &.lx-radio-button--theme-light {
-        .lx-radio-button__label,
-        .lx-radio-button__helper {
-            @include lx-state-disabled-text(dark);
+    &.#{$lumx-base-prefix}-radio-button--theme-light {
+        .#{$lumx-base-prefix}-radio-button__label,
+        .#{$lumx-base-prefix}-radio-button__helper {
+            @include lumx-state-disabled-text(dark);
         }
     }
 
-    &.lx-radio-button--theme-dark {
-        .lx-radio-button__label,
-        .lx-radio-button__helper {
-            @include lx-state-disabled-text(light);
+    &.#{$lumx-base-prefix}-radio-button--theme-dark {
+        .#{$lumx-base-prefix}-radio-button__label,
+        .#{$lumx-base-prefix}-radio-button__helper {
+            @include lumx-state-disabled-text(light);
         }
     }
 }
 
 // Hover state
-.lx-radio-button--theme-light.lx-radio-button--is-unchecked
-.lx-radio-button__input-native:hover
-+ .lx-radio-button__input-placeholder {
-    .lx-radio-button__input-background {
-        @include lx-state(state-hover, emphasis-low, dark);
+.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
+.#{$lumx-base-prefix}-radio-button__input-native:hover
++ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    .#{$lumx-base-prefix}-radio-button__input-background {
+        @include lumx-state(state-hover, emphasis-low, dark);
     }
 }
 
-.lx-radio-button--theme-dark.lx-radio-button--is-unchecked
-.lx-radio-button__input-native:hover
-+ .lx-radio-button__input-placeholder {
-    .lx-radio-button__input-background {
-        @include lx-state(state-hover, emphasis-low, light);
+.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
+.#{$lumx-base-prefix}-radio-button__input-native:hover
++ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    .#{$lumx-base-prefix}-radio-button__input-background {
+        @include lumx-state(state-hover, emphasis-low, light);
     }
 }
 
 // Active state
-.lx-radio-button--theme-light.lx-radio-button--is-unchecked
-.lx-radio-button__input-native:active
-+ .lx-radio-button__input-placeholder {
-    .lx-radio-button__input-background {
-        @include lx-state(state-active, emphasis-low, dark);
+.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
+.#{$lumx-base-prefix}-radio-button__input-native:active
++ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    .#{$lumx-base-prefix}-radio-button__input-background {
+        @include lumx-state(state-active, emphasis-low, dark);
     }
 }
 
-.lx-radio-button--theme-dark.lx-radio-button--is-unchecked
-.lx-radio-button__input-native:active
-+ .lx-radio-button__input-placeholder {
-    .lx-radio-button__input-background {
-        @include lx-state(state-active, emphasis-low, light);
+.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
+.#{$lumx-base-prefix}-radio-button__input-native:active
++ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    .#{$lumx-base-prefix}-radio-button__input-background {
+        @include lumx-state(state-active, emphasis-low, light);
     }
 }
 
 // Focus state
-.lx-radio-button--theme-light.lx-radio-button--is-unchecked
-.lx-radio-button__input-native[data-focus-visible-added]
-+ .lx-radio-button__input-placeholder {
-    @include lx-state(state-focus, emphasis-low, dark);
+.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
+.#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
++ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    @include lumx-state(state-focus, emphasis-low, dark);
 }
 
-.lx-radio-button--theme-dark.lx-radio-button--is-unchecked
-.lx-radio-button__input-native[data-focus-visible-added]
-+ .lx-radio-button__input-placeholder {
-    @include lx-state(state-focus, emphasis-low, light);
+.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
+.#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
++ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    @include lumx-state(state-focus, emphasis-low, light);
 }
 
-.lx-radio-button--theme-light.lx-radio-button--is-checked
-.lx-radio-button__input-native[data-focus-visible-added]
-+ .lx-radio-button__input-placeholder {
-    @include lx-state(state-focus, emphasis-high, primary, dark);
+.#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-checked
+.#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
++ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    @include lumx-state(state-focus, emphasis-high, primary, dark);
 }
 
-.lx-radio-button--theme-dark.lx-radio-button--is-checked
-.lx-radio-button__input-native[data-focus-visible-added]
-+ .lx-radio-button__input-placeholder {
-    @include lx-state(state-focus, emphasis-high, primary, light);
+.#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-checked
+.#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
++ .#{$lumx-base-prefix}-radio-button__input-placeholder {
+    @include lumx-state(state-focus, emphasis-high, primary, light);
 }

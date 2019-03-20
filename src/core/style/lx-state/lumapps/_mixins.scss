@@ -1,122 +1,122 @@
-@mixin lx-state-high($state, $color, $theme) {
+@mixin lumx-state-high($state, $color, $theme) {
     @if $state == state-default {
         @if $theme == dark {
-            background-color: lx-theme-color-variant($color, N);
-            color: lx-theme-color-variant(light, N);
+            background-color: lumx-theme-color-variant($color, N);
+            color: lumx-theme-color-variant(light, N);
         } @else if $theme == light {
-            background-color: lx-theme-color-variant($theme, N);
-            color: lx-theme-color-variant($color, N);
+            background-color: lumx-theme-color-variant($theme, N);
+            color: lumx-theme-color-variant($color, N);
         }
     } @else if $state == state-hover {
         @if $theme == dark {
-            background-color: lx-theme-color-variant($color, D1);
+            background-color: lumx-theme-color-variant($color, D1);
         } @else if $theme == light {
-            background-color: lx-theme-color-variant($theme, L1);
+            background-color: lumx-theme-color-variant($theme, L1);
         }
     } @else if $state == state-active {
         @if $theme == dark {
-            background-color: lx-theme-color-variant($color, D2);
+            background-color: lumx-theme-color-variant($color, D2);
         } @else if $theme == light {
-            background-color: lx-theme-color-variant($theme, L2);
+            background-color: lumx-theme-color-variant($theme, L2);
         }
     } @else if $state == state-focus {
         @if $theme == dark {
-            box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
+            box-shadow: 0 0 0 2px lumx-theme-color-variant($color, L3);
         } @else if $theme == light {
-            box-shadow: 0 0 0 2px lx-theme-color-variant($theme, L3);
+            box-shadow: 0 0 0 2px lumx-theme-color-variant($theme, L3);
         }
     }
 }
 
-@mixin lx-state-medium($state, $color, $has-focus-inset: false) {
+@mixin lumx-state-medium($state, $color, $has-focus-inset: false) {
     @if $state == state-default {
-        background-color: lx-theme-color-variant($color, L5);
-        color: lx-theme-color-variant($color, N);
+        background-color: lumx-theme-color-variant($color, L5);
+        color: lumx-theme-color-variant($color, N);
     } @else if $state == state-hover {
-        background-color: lx-theme-color-variant($color, L4);
+        background-color: lumx-theme-color-variant($color, L4);
     } @else if $state == state-active {
-        background-color: lx-theme-color-variant($color, L3);
+        background-color: lumx-theme-color-variant($color, L3);
     } @else if $state == state-focus {
         @if $has-focus-inset == true {
-            box-shadow: inset 0 0 0 2px lx-theme-color-variant($color, L3);
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant($color, L3);
         } @else {
-            box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
+            box-shadow: 0 0 0 2px lumx-theme-color-variant($color, L3);
         }
     }
 }
 
-@mixin lx-state-as-selected($state, $theme, $has-focus-inset: false) {
+@mixin lumx-state-as-selected($state, $theme, $has-focus-inset: false) {
     @if $theme == dark {
         @if $state == state-default {
-            background-color: lx-theme-color-variant(primary, L4);
-            color: lx-theme-color-variant(primary, D2);
+            background-color: lumx-theme-color-variant(primary, L4);
+            color: lumx-theme-color-variant(primary, D2);
         } @else if $state == state-hover {
-            background-color: lx-theme-color-variant(primary, L3);
+            background-color: lumx-theme-color-variant(primary, L3);
         } @else if $state == state-active {
-            background-color: lx-theme-color-variant(primary, L2);
+            background-color: lumx-theme-color-variant(primary, L2);
         } @else if $state == state-focus {
             @if $has-focus-inset == true {
-                box-shadow: inset 0 0 0 2px lx-theme-color-variant(primary, L3);
+                box-shadow: inset 0 0 0 2px lumx-theme-color-variant(primary, L3);
             } @else {
-                box-shadow: 0 0 0 2px lx-theme-color-variant(primary, L3);
+                box-shadow: 0 0 0 2px lumx-theme-color-variant(primary, L3);
             }
         }
     } @else if $theme == light {
         @if $state == state-default {
-            background-color: lx-theme-color-variant(light, L2);
-            color: lx-theme-color-variant(dark, N);
+            background-color: lumx-theme-color-variant(light, L2);
+            color: lumx-theme-color-variant(dark, N);
         } @else if $state == state-hover {
-            background-color: lx-theme-color-variant(light, L3);
+            background-color: lumx-theme-color-variant(light, L3);
         } @else if $state == state-active {
-            background-color: lx-theme-color-variant(light, L4);
+            background-color: lumx-theme-color-variant(light, L4);
         } @else if $state == state-focus {
             @if $has-focus-inset == true {
-                box-shadow: inset 0 0 0 2px lx-theme-color-variant(light, L3);
+                box-shadow: inset 0 0 0 2px lumx-theme-color-variant(light, L3);
             } @else {
-                box-shadow: 0 0 0 2px lx-theme-color-variant(light, L3);
+                box-shadow: 0 0 0 2px lumx-theme-color-variant(light, L3);
             }
         }
     }
 }
 
-@mixin lx-state-low($state, $color, $has-focus-inset: false) {
+@mixin lumx-state-low($state, $color, $has-focus-inset: false) {
     @if $state == state-default {
         background-color: transparent;
-        color: lx-theme-color-variant($color, N);
+        color: lumx-theme-color-variant($color, N);
     } @else if $state == state-hover {
-        background-color: lx-theme-color-variant($color, L5);
+        background-color: lumx-theme-color-variant($color, L5);
     } @else if $state == state-active {
-        background-color: lx-theme-color-variant($color, L4);
+        background-color: lumx-theme-color-variant($color, L4);
     } @else if $state == state-focus {
         @if $has-focus-inset == true {
-            box-shadow: inset 0 0 0 2px lx-theme-color-variant($color, L3);
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant($color, L3);
         } @else {
-            box-shadow: 0 0 0 2px lx-theme-color-variant($color, L3);
+            box-shadow: 0 0 0 2px lumx-theme-color-variant($color, L3);
         }
     }
 }
 
-@mixin lx-state-disabled-text($theme) {
-    color: lx-theme-color-variant($theme, L3);
+@mixin lumx-state-disabled-text($theme) {
+    color: lumx-theme-color-variant($theme, L3);
     pointer-events: none;
 }
 
-@mixin lx-state-disabled-input() {
+@mixin lumx-state-disabled-input() {
     opacity: 0.5;
     pointer-events: none;
 }
 
-@mixin lx-state($state, $emphasis, $color, $theme: null, $has-focus-inset: false) {
+@mixin lumx-state($state, $emphasis, $color, $theme: null, $has-focus-inset: false) {
     @if $emphasis == emphasis-high {
-        @include lx-state-high($state, $color, $theme);
+        @include lumx-state-high($state, $color, $theme);
     } @else if $emphasis == emphasis-medium {
-        @include lx-state-medium($state, $color, $has-focus-inset);
+        @include lumx-state-medium($state, $color, $has-focus-inset);
     } @else if $emphasis == emphasis-low {
-        @include lx-state-low($state, $color, $has-focus-inset);
+        @include lumx-state-low($state, $color, $has-focus-inset);
     }
 }
 
-@mixin lx-state-transition() {
-    transition-duration: $lx-state-transition-duration;
+@mixin lumx-state-transition() {
+    transition-duration: $lumx-state-transition-duration;
     transition-property: background-color, box-shadow;
 }

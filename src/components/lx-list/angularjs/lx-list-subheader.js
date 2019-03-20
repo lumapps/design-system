@@ -8,7 +8,7 @@ function ListSubheaderDirective() {
     return {
         replace: true,
         restrict: 'E',
-        template: '<li class="lx-list-subheader" ng-transclude></li>',
+        template: `<li class="${COMPONENT_PREFIX}-list-subheader" ng-transclude></li>`,
         transclude: true,
     };
 }

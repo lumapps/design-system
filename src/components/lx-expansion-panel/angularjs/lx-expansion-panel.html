@@ -1,12 +1,12 @@
 <div
-    class="lx-expansion-panel"
-    ng-class="{ 'lx-expansion-panel--is-open': lumx.isWrapperOpen,
-                 'lx-expansion-panel--is-close': !lumx.isWrapperOpen,
-                 'lx-expansion-panel--theme-light': !lumx.theme || lumx.theme === 'light',
-                 'lx-expansion-panel--theme-dark': lumx.theme === 'dark' }"
+    class="lumx-expansion-panel"
+    ng-class="{ 'lumx-expansion-panel--is-open': lumx.isWrapperOpen,
+                 'lumx-expansion-panel--is-close': !lumx.isWrapperOpen,
+                 'lumx-expansion-panel--theme-light': !lumx.theme || lumx.theme === 'light',
+                 'lumx-expansion-panel--theme-dark': lumx.theme === 'dark' }"
 >
-    <div class="lx-expansion-panel__header" ng-click="lumx.toggle()">
-        <div class="lx-expansion-panel__drag-indicator" ng-if="::lumx.isDraggable">
+    <div class="lumx-expansion-panel__header" ng-click="lumx.toggle()">
+        <div class="lumx-expansion-panel__drag-indicator" ng-if="::lumx.isDraggable">
             <lumx-icon
                 lx-path="{{ lumx.icons.mdiDragVertical }}"
                 lx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
@@ -14,9 +14,9 @@
             ></lumx-icon>
         </div>
 
-        <div class="lx-expansion-panel__label" ng-transclude="header"></div>
+        <div class="lumx-expansion-panel__label" ng-transclude="header"></div>
 
-        <div class="lx-expansion-panel__state-indicator">
+        <div class="lumx-expansion-panel__state-indicator">
             <lumx-button
                 lx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
                 lx-emphasis="low"
@@ -29,10 +29,10 @@
         </div>
     </div>
 
-    <div class="lx-expansion-panel__wrapper" ng-if="lumx.isWrapperDisplayed">
-        <div class="lx-expansion-panel__container">
-            <div class="lx-expansion-panel__content" ng-transclude="content"></div>
-            <div class="lx-expansion-panel__footer" ng-transclude="footer" ng-if="::lumx.hasFooter"></div>
+    <div class="lumx-expansion-panel__wrapper" ng-if="lumx.isWrapperDisplayed">
+        <div class="lumx-expansion-panel__container">
+            <div class="lumx-expansion-panel__content" ng-transclude="content"></div>
+            <div class="lumx-expansion-panel__footer" ng-transclude="footer" ng-if="::lumx.hasFooter"></div>
         </div>
     </div>
 </div>

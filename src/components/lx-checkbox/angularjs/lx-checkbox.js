@@ -144,9 +144,9 @@ function CheckboxDirective() {
             el.find('input').attr('disabled', isDisabled);
 
             if (isDisabled) {
-                el.addClass('lx-checkbox--is-disabled');
+                el.addClass(`${COMPONENT_PREFIX}-checkbox--is-disabled`);
             } else {
-                el.removeClass('lx-checkbox--is-disabled');
+                el.removeClass(`${COMPONENT_PREFIX}-checkbox--is-disabled`);
             }
         });
 

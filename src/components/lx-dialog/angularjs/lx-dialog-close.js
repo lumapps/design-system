@@ -7,7 +7,7 @@ function DialogCloseDirective(LumXDialogService) {
 
     function link(scope, el) {
         el.on('click', function onClick() {
-            LumXDialogService.close(el.parents('.lx-dialog').attr('id'), true);
+            LumXDialogService.close(el.parents(`.${COMPONENT_PREFIX}-dialog`).attr('id'), true);
         });
     }
 

@@ -12,7 +12,7 @@ function IconDirective() {
      */
     function getTemplate() {
         return `
-            <i class="lx-icon">
+            <i class="${COMPONENT_PREFIX}-icon">
                 <svg
                     aria-hidden="true"
                     height="1em"
@@ -33,14 +33,14 @@ function IconDirective() {
 
         attrs.$observe('lxColor', (color) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-icon--color-\S+/g) || []).join(' ');
-            }).addClass(`lx-icon--color-${color}`);
+                return (className.match(/(^|\s)icon--color-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-icon--color-${color}`);
         });
 
         attrs.$observe('lxSize', (size) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-icon--size-\S+/g) || []).join(' ');
-            }).addClass(`lx-icon--size-${size}`);
+                return (className.match(/(^|\s)icon--size-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-icon--size-${size}`);
         });
     }
 

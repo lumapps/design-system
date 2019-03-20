@@ -1,7 +1,7 @@
-@mixin lx-elevation($elevation) {
+@mixin lumx-elevation($elevation) {
     @if $elevation == 0 {
         box-shadow: none;
     } @else {
-        box-shadow: map-get($lx-elevation-shadows, $elevation) lx-theme-color-variant(dark, L4);
+        box-shadow: map-get($lumx-elevation-shadows, $elevation) lumx-theme-color-variant(dark, L4);
     }
 }

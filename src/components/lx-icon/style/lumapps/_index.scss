@@ -2,7 +2,7 @@
    Icon
    ========================================================================== */
 
-.lx-icon {
+.#{$lumx-base-prefix}-icon {
     display: block;
 
     svg {
@@ -13,17 +13,17 @@
 /* Icon sizes
    ========================================================================== */
 
-@each $key, $size in $lx-sizes {
-    .lx-icon--size-#{$key} {
-        @include lx-icon-size($key);
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-icon--size-#{$key} {
+        @include lumx-icon-size($key);
     }
 }
 
 /* Button colors
    ========================================================================== */
 
-@each $key, $color in $lx-theme-color-palette {
-    .lx-icon--color-#{$key} {
-        @include lx-icon-color($key);
+@each $key, $color in $lumx-theme-color-palette {
+    .#{$lumx-base-prefix}-icon--color-#{$key} {
+        @include lumx-icon-color($key);
     }
 }

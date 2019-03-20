@@ -2,20 +2,20 @@
    Expansion panel
    ========================================================================== */
 
-.lx-expansion-panel {
+.#{$lumx-base-prefix}-expansion-panel {
     $self: &;
 
-    border-radius: $lx-expansion-panel-radius;
+    border-radius: $lumx-expansion-panel-radius;
 
     &__header {
         display: flex;
-        height: $lx-expansion-panel-header-height;
+        height: $lumx-expansion-panel-header-height;
         align-items: center;
     }
 
     &__drag-indicator {
         flex-shrink: 0;
-        margin: 0 $lx-spacing-unit;
+        margin: 0 $lumx-spacing-unit;
         cursor: move;
     }
 
@@ -25,12 +25,12 @@
 
     &__state-indicator {
         flex-shrink: 0;
-        margin: 0 $lx-spacing-unit;
+        margin: 0 $lumx-spacing-unit;
     }
 
     &__wrapper {
         overflow: hidden;
-        transition: max-height $lx-expansion-panel-transition-duration;
+        transition: max-height $lumx-expansion-panel-transition-duration;
 
         #{ $self }--is-close & {
             max-height: 0 !important;

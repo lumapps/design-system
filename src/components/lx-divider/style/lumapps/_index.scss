@@ -2,7 +2,7 @@
    Divider
    ========================================================================== */
 
-.lx-divider {
+.#{$lumx-base-prefix}-divider {
     &--theme-light {
         @include divider(dark);
     }

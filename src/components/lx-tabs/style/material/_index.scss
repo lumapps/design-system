@@ -2,7 +2,7 @@
    Tabs
    ========================================================================== */
 
-.lx-tabs {
+.#{$lumx-base-prefix}-tabs {
     $self: &;
 
     &__links::after {
@@ -14,11 +14,11 @@
         text-transform: uppercase;
 
         #{ $self }--theme-light & {
-            color: lx-theme-color-variant(dark, L2);
+            color: lumx-theme-color-variant(dark, L2);
         }
 
         #{ $self }--theme-dark & {
-            color: lx-theme-color-variant(light, L2);
+            color: lumx-theme-color-variant(light, L2);
         }
     }
 }
@@ -27,25 +27,25 @@
    ========================================================================== */
 
 // Hover state
-.lx-tabs__link:hover {
-    .lx-tabs--theme-light & {
-        color: lx-theme-color-variant(primary, N);
+.#{$lumx-base-prefix}-tabs__link:hover {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        color: lumx-theme-color-variant(primary, N);
     }
 
-    .lx-tabs--theme-dark & {
-        color: lx-theme-color-variant(light, N);
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        color: lumx-theme-color-variant(light, N);
     }
 }
 
 /* Tabs link active
    ========================================================================== */
 
-.lx-tabs__link--is-active {
-    .lx-tabs--theme-light & {
-        color: lx-theme-color-variant(primary, N);
+.#{$lumx-base-prefix}-tabs__link--is-active {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        color: lumx-theme-color-variant(primary, N);
     }
 
-    .lx-tabs--theme-dark & {
-        color: lx-theme-color-variant(light, N);
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        color: lumx-theme-color-variant(light, N);
     }
 }

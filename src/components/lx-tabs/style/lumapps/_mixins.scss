@@ -1,4 +1,4 @@
-@mixin lx-tabs-links($theme) {
+@mixin lumx-tabs-links($theme) {
     position: relative;
     display: flex;
 
@@ -8,12 +8,12 @@
         bottom: 0;
         left: 0;
         height: 2px;
-        background-color: lx-theme-color-variant($theme, L5);
+        background-color: lumx-theme-color-variant($theme, L5);
         content: '';
     }
 }
 
-@mixin lx-tabs-links-position($position) {
+@mixin lumx-tabs-links-position($position) {
     @if $position == left {
         justify-content: flex-start;
     } @else if $position == center {
@@ -23,13 +23,13 @@
     }
 }
 
-@mixin lx-tabs-link() {
+@mixin lumx-tabs-link() {
     position: relative;
     display: flex;
-    height: map-get($lx-sizes, l);
+    height: map-get($lumx-sizes, l);
     align-items: center;
     justify-content: center;
-    padding: 0 $lx-spacing-unit * 3;
+    padding: 0 $lumx-spacing-unit * 3;
     cursor: pointer;
     outline: none;
 
@@ -43,28 +43,28 @@
     }
 
     i {
-        margin-right: $lx-spacing-unit;
+        margin-right: $lumx-spacing-unit;
     }
 
     span {
-        @include lx-typography(subtitle1);
+        @include lumx-typography(subtitle1);
     }
 }
 
-@mixin lx-tabs-link-layout($layout) {
+@mixin lumx-tabs-link-layout($layout) {
     @if $layout == fixed {
         flex: 1;
     }
 }
 
-@mixin lx-tabs-link-active($theme) {
+@mixin lumx-tabs-link-active($theme) {
     @if $theme == dark {
         &::after {
-            background-color: lx-theme-color-variant(primary, N);
+            background-color: lumx-theme-color-variant(primary, N);
         }
     } @else if $theme == light {
         &::after {
-            background-color: lx-theme-color-variant(light, N);
+            background-color: lumx-theme-color-variant(light, N);
         }
     }
 }

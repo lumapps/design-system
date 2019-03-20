@@ -89,7 +89,7 @@ function TooltipController($element, $timeout, LumXDepthService) {
                 left: tooltipProps.left,
                 top: tooltipProps.top,
             })
-            .addClass('lx-tooltip--is-shown');
+            .addClass(`${COMPONENT_PREFIX}-tooltip--is-shown`);
     }
 
     /////////////////////////////
@@ -123,11 +123,11 @@ function TooltipController($element, $timeout, LumXDepthService) {
         const tooltipPoisition = angular.isDefined(lumx.position) && lumx.position ? lumx.position : 'top';
 
         _tooltip = angular.element('<div/>', {
-            class: `lx-tooltip lx-tooltip--position-${tooltipPoisition}`,
+            class: `${COMPONENT_PREFIX}-tooltip ${COMPONENT_PREFIX}-tooltip--position-${tooltipPoisition}`,
         });
 
         _tooltipLabel = angular.element('<span/>', {
-            class: 'lx-tooltip__text',
+            class: `${COMPONENT_PREFIX}-tooltip__text`,
             text: lumx.text,
         });
 

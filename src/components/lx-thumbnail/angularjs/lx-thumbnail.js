@@ -13,14 +13,14 @@ function ThumbnailDirective() {
      * @return {string}  The thumbnail html template.
      */
     function getTemplate(el, attrs) {
-        let thumbnailClass = 'lx-thumbnail';
+        let thumbnailClass = `${COMPONENT_PREFIX}-thumbnail`;
 
         if (!attrs.lxSize) {
-            thumbnailClass += ' lx-thumbnail--size-m';
+            thumbnailClass += ` ${COMPONENT_PREFIX}-thumbnail--size-m`;
         }
 
         if (!attrs.lxVariant) {
-            thumbnailClass += ' lx-thumbnail--variant-squared';
+            thumbnailClass += ` ${COMPONENT_PREFIX}-thumbnail--variant-squared`;
         }
 
         return `<div class="${thumbnailClass}"></div>`;
@@ -33,14 +33,14 @@ function ThumbnailDirective() {
 
         attrs.$observe('lxSize', (size) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-thumbnail--size-\S+/g) || []).join(' ');
-            }).addClass(`lx-thumbnail--size-${size}`);
+                return (className.match(/(^|\s)thumbnail--size-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-thumbnail--size-${size}`);
         });
 
         attrs.$observe('lxVariant', (variant) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-thumbnail--variant-\S+/g) || []).join(' ');
-            }).addClass(`lx-thumbnail--variant-${variant}`);
+                return (className.match(/(^|\s)thumbnail--variant-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-thumbnail--variant-${variant}`);
         });
     }
 

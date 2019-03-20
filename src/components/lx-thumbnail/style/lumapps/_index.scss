@@ -2,7 +2,7 @@
    Thumbnail
    ========================================================================== */
 
-.lx-thumbnail {
+.#{$lumx-base-prefix}-thumbnail {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -11,19 +11,19 @@
 /* Thumbnail variants
    ========================================================================== */
 
-.lx-thumbnail--variant-squared {
-    border-radius: $lx-theme-border-radius;
+.#{$lumx-base-prefix}-thumbnail--variant-squared {
+    border-radius: $lumx-theme-border-radius;
 }
 
-.lx-thumbnail--variant-rounded {
+.#{$lumx-base-prefix}-thumbnail--variant-rounded {
     border-radius: 50%;
 }
 
 /* Thumbnail sizes
    ========================================================================== */
 
-@each $key, $size in $lx-sizes {
-    .lx-thumbnail--size-#{$key} {
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-thumbnail--size-#{$key} {
         width: $size;
         height: $size;
     }

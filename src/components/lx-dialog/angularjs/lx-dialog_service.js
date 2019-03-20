@@ -29,7 +29,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                     <${COMPONENT_PREFIX}-dialog-header>
                         <${COMPONENT_PREFIX}-toolbar>
                             <${COMPONENT_PREFIX}-toolbar-label>
-                                <span class="lx-typography-title">${params.title}</span>
+                                <span class="lumx-typography-title">${params.title}</span>
                             </${COMPONENT_PREFIX}-toolbar-label>
                         </${COMPONENT_PREFIX}-toolbar>
                     </${COMPONENT_PREFIX}-dialog-header>
@@ -39,7 +39,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                         </div>
                     </${COMPONENT_PREFIX}-dialog-content>
                     <${COMPONENT_PREFIX}-dialog-footer>
-                        <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
+                        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
                             <${COMPONENT_PREFIX}-button ng-click="cb()" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
                                 ${params.buttons.ok}
                             </${COMPONENT_PREFIX}-button>
@@ -80,7 +80,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                     <${COMPONENT_PREFIX}-dialog-header>
                         <${COMPONENT_PREFIX}-toolbar>
                             <${COMPONENT_PREFIX}-toolbar-label>
-                                <span class="lx-typography-title">${params.title}</span>
+                                <span class="lumx-typography-title">${params.title}</span>
                             </${COMPONENT_PREFIX}-toolbar-label>
                         </${COMPONENT_PREFIX}-toolbar>
                     </${COMPONENT_PREFIX}-dialog-header>
@@ -90,7 +90,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                         </div>
                     </${COMPONENT_PREFIX}-dialog-content>
                     <${COMPONENT_PREFIX}-dialog-footer>
-                        <div class="p+" lx-grid-container="row" lx-grid-h-align="center" lx-grid-v-align="right">
+                        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
                             <${COMPONENT_PREFIX}-button lx-emphasis="medium" ng-click="cb(false)" ${COMPONENT_PREFIX}-dialog-close>
                                 ${params.buttons.cancel}
                             </${COMPONENT_PREFIX}-button>

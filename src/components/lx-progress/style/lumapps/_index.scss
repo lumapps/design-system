@@ -2,20 +2,20 @@
    Progress
    ========================================================================== */
 
-.lx-progress {
+.#{$lumx-base-prefix}-progress {
     &--circular {
-        width: $lx-progress-circular-size;
-        height: $lx-progress-circular-size;
+        width: $lumx-progress-circular-size;
+        height: $lumx-progress-circular-size;
     }
 }
 
 /* Circular
    ========================================================================== */
 
-.lx-progress-circular {
+.#{$lumx-base-prefix}-progress-circular {
     position: relative;
-    width: $lx-progress-circular-size;
-    height: $lx-progress-circular-size;
+    width: $lumx-progress-circular-size;
+    height: $lumx-progress-circular-size;
 
     &__double-bounce1,
     &__double-bounce2 {
@@ -24,8 +24,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        animation: lx-progress-bounce 2s infinite ease-in-out;
-        background-color: lx-theme-color-variant(primary, L3);
+        animation: lumx-progress-bounce 2s infinite ease-in-out;
+        background-color: lumx-theme-color-variant(primary, L3);
         border-radius: 50%;
     }
 
@@ -34,7 +34,7 @@
     }
 }
 
-@keyframes lx-progress-bounce {
+@keyframes lumx-progress-bounce {
     0%,
     100% {
         transform: scale(0);
@@ -48,10 +48,10 @@
 /* Linear
    ========================================================================== */
 
-.lx-progress-linear {
+.#{$lumx-base-prefix}-progress-linear {
     position: relative;
     overflow: hidden;
-    height: $lx-progress-linear-size;
+    height: $lumx-progress-linear-size;
     border-radius: 2px;
 
     &__line1,
@@ -61,17 +61,17 @@
         right: 0;
         bottom: 0;
         left: 0;
-        background-color: lx-theme-color-variant(primary, L3);
+        background-color: lumx-theme-color-variant(primary, L3);
     }
 
     &__line2 {
-        animation: lx-progress-expand 2s infinite ease-in-out;
+        animation: lumx-progress-expand 2s infinite ease-in-out;
         transform: scaleX(0);
         transform-origin: center left;
     }
 }
 
-@keyframes lx-progress-expand {
+@keyframes lumx-progress-expand {
     0% {
         transform: scaleX(0);
         transform-origin: center left;

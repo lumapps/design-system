@@ -75,8 +75,8 @@ function ExpansionPanelController($element, $scope, $timeout) {
      * Set the expansion panel wrapper max height.
      */
     function _setWrapperMaxHeight() {
-        const expansionPanelWrapper = $element.find('.lx-expansion-panel__wrapper');
-        const expansionPanelContainer = $element.find('.lx-expansion-panel__container');
+        const expansionPanelWrapper = $element.find(`.${COMPONENT_PREFIX}-expansion-panel__wrapper`);
+        const expansionPanelContainer = $element.find(`.${COMPONENT_PREFIX}-expansion-panel__container`);
 
         expansionPanelWrapper.css('max-height', expansionPanelContainer.outerHeight());
     }

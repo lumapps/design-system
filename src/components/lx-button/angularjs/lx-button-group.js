@@ -8,7 +8,7 @@ function ButtonGroupDirective() {
     return {
         replace: true,
         restrict: 'E',
-        template: '<div class="lx-button-group" ng-transclude></div>',
+        template: `<div class="${COMPONENT_PREFIX}-button-group" ng-transclude></div>`,
         transclude: true,
     };
 }

@@ -1,42 +1,42 @@
-@mixin lx-select-input-chip() {
-    height: map-get($lx-chip-sizes, s);
+@mixin lumx-select-input-chip() {
+    height: map-get($lumx-chip-sizes, s);
     margin: 3px;
 }
 
-@mixin lx-select-input-clear($theme) {
-    margin-left: $lx-spacing-unit;
-    color: lx-theme-color-variant($theme, N);
+@mixin lumx-select-input-clear($theme) {
+    margin-left: $lumx-spacing-unit;
+    color: lumx-theme-color-variant($theme, N);
 
     &:hover {
         opacity: 0.8;
     }
 }
 
-@mixin lx-select-input-indicator($theme) {
-    margin-left: $lx-spacing-unit;
-    color: lx-theme-color-variant($theme, N);
+@mixin lumx-select-input-indicator($theme) {
+    margin-left: $lumx-spacing-unit;
+    color: lumx-theme-color-variant($theme, N);
 }
 
-@mixin lx-select-filter() {
+@mixin lumx-select-filter() {
     display: flex;
     align-items: center;
-    padding: 0 $lx-spacing-unit * 2 $lx-spacing-unit;
-    border-bottom: 1px solid lx-theme-color-variant(dark, L5);
-    margin-bottom: $lx-spacing-unit;
+    padding: 0 $lumx-spacing-unit * 2 $lumx-spacing-unit;
+    margin-bottom: $lumx-spacing-unit;
+    border-bottom: 1px solid lumx-theme-color-variant(dark, L5);
 }
 
-@mixin lx-select-loader() {
+@mixin lumx-select-loader() {
     display: flex;
     justify-content: center;
-    padding: $lx-spacing-unit * 2 0;
+    padding: $lumx-spacing-unit * 2 0;
 }
 
-@mixin lx-select-helper() {
-    @include lx-typography(body1);
+@mixin lumx-select-helper() {
+    @include lumx-typography(body1);
 
     display: flex;
-    height: $lx-list-item-height;
+    height: $lumx-list-item-height;
     align-items: center;
     justify-content: center;
-    color: lx-theme-color-variant(dark, L3);
+    color: lumx-theme-color-variant(dark, L3);
 }

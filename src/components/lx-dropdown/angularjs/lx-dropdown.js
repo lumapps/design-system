@@ -403,8 +403,8 @@ function DropdownDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
-        ctrl.registerToggle(el.find('.lx-dropdown__toggle'));
-        ctrl.registerMenu(el.find('.lx-dropdown__menu'));
+        ctrl.registerToggle(el.find(`.${COMPONENT_PREFIX}-dropdown__toggle`));
+        ctrl.registerMenu(el.find(`.${COMPONENT_PREFIX}-dropdown__menu`));
 
         if (transclude.isSlotFilled('toggle')) {
             ctrl.hasToggle = true;

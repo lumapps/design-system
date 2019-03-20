@@ -1,17 +1,17 @@
-$lx-theme-primary: $lx-theme-blue !default;
-$lx-theme-secondary: $lx-theme-yellow !default;
+$lumx-theme-primary: $lumx-theme-blue !default;
+$lumx-theme-secondary: $lumx-theme-yellow !default;
 
-$lx-theme-color-palette: (
-    primary: $lx-theme-primary,
-    secondary: $lx-theme-secondary,
-    dark: $lx-theme-dark,
-    light: $lx-theme-light,
-    blue: $lx-theme-blue,
-    yellow: $lx-theme-yellow,
-    red: $lx-theme-red,
-    green: $lx-theme-green
+$lumx-theme-color-palette: (
+    primary: $lumx-theme-primary,
+    secondary: $lumx-theme-secondary,
+    dark: $lumx-theme-dark,
+    light: $lumx-theme-light,
+    blue: $lumx-theme-blue,
+    yellow: $lumx-theme-yellow,
+    red: $lumx-theme-red,
+    green: $lumx-theme-green
 ) !default;
 
-$lx-theme-color-variants: (N, L1, L2, L3, L4, L5, L6);
+$lumx-theme-color-variants: (N, L1, L2, L3, L4, L5, L6);
 
-$lx-theme-border-radius: 4px !default;
+$lumx-theme-border-radius: 4px !default;

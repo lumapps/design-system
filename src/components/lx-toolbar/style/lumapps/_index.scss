@@ -2,23 +2,23 @@
    Toolbar
    ========================================================================== */
 
-.lx-toolbar {
+.#{$lumx-base-prefix}-toolbar {
     display: flex;
-    height: $lx-toolbar-height;
+    height: $lumx-toolbar-height;
     align-items: center;
-    padding: 0 $lx-spacing-unit * 3;
+    padding: 0 $lumx-spacing-unit * 3;
 
     &--has-before {
-        padding-left: $lx-spacing-unit * 2;
+        padding-left: $lumx-spacing-unit * 2;
     }
 
     &--has-after {
-        padding-right: $lx-spacing-unit * 2;
+        padding-right: $lumx-spacing-unit * 2;
     }
 
     &__before {
         flex-shrink: 0;
-        margin-right: $lx-spacing-unit * 2;
+        margin-right: $lumx-spacing-unit * 2;
     }
 
     &__label {
@@ -27,6 +27,6 @@
 
     &__after {
         flex-shrink: 0;
-        margin-left: $lx-spacing-unit * 2;
+        margin-left: $lumx-spacing-unit * 2;
     }
 }

@@ -5,11 +5,11 @@
 /* Chip size
    ========================================================================== */
 
-.lx-chip--size-m {
-    padding: 0 $lx-spacing-unit * 1.5;
+.#{$lumx-base-prefix}-chip--size-m {
+    padding: 0 $lumx-spacing-unit * 1.5;
 }
 
-.lx-chip--size-s {
-    padding: 0 $lx-spacing-unit;
+.#{$lumx-base-prefix}-chip--size-s {
+    padding: 0 $lumx-spacing-unit;
     border-radius: 2px;
 }

@@ -2,7 +2,7 @@
    Progress tracker
    ========================================================================== */
 
-.lx-progress-tracker {
+.#{$lumx-base-prefix}-progress-tracker {
     position: relative;
 
     &__steps {
@@ -16,51 +16,51 @@
         position: absolute;
         z-index: 0;
         top: 19px;
-        height: $lx-progress-tracker-bar-height;
+        height: $lumx-progress-tracker-bar-height;
     }
 
     &__background-bar {
-        background-color: lx-theme-color-variant(dark, L5);
+        background-color: lumx-theme-color-variant(dark, L5);
     }
 
     &__foreground-bar {
-        background-color: lx-theme-color-variant(primary, N);
+        background-color: lumx-theme-color-variant(primary, N);
         transform-origin: left;
-        transition: transform $lx-progress-tracker-transition-duration;
+        transition: transform $lumx-progress-tracker-transition-duration;
     }
 }
 
 /* Step
    ========================================================================== */
 
-.lx-progress-tracker-step {
+.#{$lumx-base-prefix}-progress-tracker-step {
     $self: &;
 
     display: flex;
     flex: 1;
     flex-direction: column;
     align-items: center;
-    padding: $lx-spacing-unit 0;
-    border-radius: $lx-theme-border-radius;
+    padding: $lumx-spacing-unit 0;
+    border-radius: $lumx-theme-border-radius;
     outline: none;
 
     &--is-clickable {
-        @include lx-state-transition;
+        @include lumx-state-transition;
 
         cursor: pointer;
     }
 
     &__state {
         position: relative;
-        color: lx-theme-color-variant(dark, N);
+        color: lumx-theme-color-variant(dark, N);
 
         #{ $self }--is-active &,
         #{ $self }--is-complete & {
-            color: lx-theme-color-variant(primary, N);
+            color: lumx-theme-color-variant(primary, N);
         }
 
         #{ $self }--has-error & {
-            color: lx-theme-color-variant(red, N);
+            color: lumx-theme-color-variant(red, N);
         }
 
         &::before {
@@ -70,31 +70,31 @@
             left: 2px;
             width: 20px;
             height: 20px;
-            background-color: lx-theme-color-variant(light, N);
+            background-color: lumx-theme-color-variant(light, N);
             content: '';
         }
     }
 
     &__label {
-        @include lx-typography(body1);
+        @include lumx-typography(body1);
 
-        margin-top: $lx-spacing-unit;
-        color: lx-theme-color-variant(dark, N);
+        margin-top: $lumx-spacing-unit;
+        color: lumx-theme-color-variant(dark, N);
         text-align: center;
 
         #{ $self }--has-error & {
-            color: lx-theme-color-variant(red, N);
+            color: lumx-theme-color-variant(red, N);
         }
     }
 
     &__helper {
-        @include lx-typography(caption);
+        @include lumx-typography(caption);
 
-        color: lx-theme-color-variant(dark, L2);
+        color: lumx-theme-color-variant(dark, L2);
         text-align: center;
 
         #{ $self }--has-error & {
-            color: lx-theme-color-variant(red, N);
+            color: lumx-theme-color-variant(red, N);
         }
     }
 }
@@ -103,16 +103,16 @@
    ========================================================================== */
 
 // Hover state
-.lx-progress-tracker-step--is-clickable:hover {
-    @include lx-state(state-hover, emphasis-low, dark);
+.#{$lumx-base-prefix}-progress-tracker-step--is-clickable:hover {
+    @include lumx-state(state-hover, emphasis-low, dark);
 }
 
 // Active state
-.lx-progress-tracker-step--is-clickable:active {
-    @include lx-state(state-active, emphasis-low, dark);
+.#{$lumx-base-prefix}-progress-tracker-step--is-clickable:active {
+    @include lumx-state(state-active, emphasis-low, dark);
 }
 
 // Focus state
-.lx-progress-tracker-step--is-clickable[data-focus-visible-added] {
-    @include lx-state(state-focus, emphasis-low, dark);
+.#{$lumx-base-prefix}-progress-tracker-step--is-clickable[data-focus-visible-added] {
+    @include lumx-state(state-focus, emphasis-low, dark);
 }

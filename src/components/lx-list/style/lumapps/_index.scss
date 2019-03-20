@@ -2,47 +2,47 @@
    List
    ========================================================================== */
 
-.lx-list {
-    @include lx-list;
+.#{$lumx-base-prefix}-list {
+    @include lumx-list;
 }
 
 /* Item
    ========================================================================== */
 
-.lx-list-item {
-    @include lx-list-item;
+.#{$lumx-base-prefix}-list-item {
+    @include lumx-list-item;
 
-    .lx-list--is-clickable & {
-        @include lx-list-item-clickable;
+    .#{$lumx-base-prefix}-list--is-clickable & {
+        @include lumx-list-item-clickable;
     }
 
     &--is-selected {
-        @include lx-list-item-selected;
+        @include lumx-list-item-selected;
     }
 
     &__before {
-        @include lx-list-item-before;
+        @include lumx-list-item-before;
     }
 
     &__content {
-        @include lx-list-item-content;
+        @include lumx-list-item-content;
     }
 
     &__after {
-        @include lx-list-item-after;
+        @include lumx-list-item-after;
     }
 }
 
 /* Subheader
    ========================================================================== */
 
-.lx-list-subheader {
-    @include lx-list-subheader;
+.#{$lumx-base-prefix}-list-subheader {
+    @include lumx-list-subheader;
 }
 
 /* Divider
    ========================================================================== */
 
-.lx-list-divider {
-    @include lx-list-divider;
+.#{$lumx-base-prefix}-list-divider {
+    @include lumx-list-divider;
 }

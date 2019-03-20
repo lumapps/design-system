@@ -9,13 +9,13 @@ function DividerDirective() {
 
     function link(scope, el, attrs) {
         if (!attrs.lxTheme) {
-            el.addClass('lx-divider--theme-light');
+            el.addClass(`${COMPONENT_PREFIX}-divider--theme-light`);
         }
 
         attrs.$observe('lxTheme', (theme) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-divider--theme-\S+/g) || []).join(' ');
-            }).addClass(`lx-divider--theme-${theme}`);
+                return (className.match(/(^|\s)divider--theme-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-divider--theme-${theme}`);
         });
     }
 

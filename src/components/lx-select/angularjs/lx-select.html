@@ -1,27 +1,27 @@
 <div
-    class="lx-select"
-    ng-class="{ 'lx-select--has-value': !lumx.isModelEmpty(),
-                'lx-select--is-empty': lumx.isModelEmpty(),
-                'lx-select--unique': !lumx.multiple,
-                'lx-select--has-unique': !lumx.isModelEmpty() && !lumx.multiple,
-                'lx-select--multiple': lumx.multiple,
-                'lx-select--has-multiple': !lumx.isModelEmpty() && lumx.multiple,
-                'lx-select--is-open': lumx.isOpen,
-                'lx-select--theme-light': !lumx.theme || lumx.theme === 'light',
-                'lx-select--theme-dark': lumx.theme === 'dark',
-                'lx-select--has-label': lumx.label,
-                'lx-select--is-disabled': lumx.isDisabled,
-                'lx-select--is-valid': lumx.isValid,
-                'lx-select--has-error': lumx.hasError,
-                'lx-select--has-placeholder': lumx.placeholder,
-                'lx-select--is-focus': lumx.isFocus }"
+    class="lumx-select"
+    ng-class="{ 'lumx-select--has-value': !lumx.isModelEmpty(),
+                'lumx-select--is-empty': lumx.isModelEmpty(),
+                'lumx-select--unique': !lumx.multiple,
+                'lumx-select--has-unique': !lumx.isModelEmpty() && !lumx.multiple,
+                'lumx-select--multiple': lumx.multiple,
+                'lumx-select--has-multiple': !lumx.isModelEmpty() && lumx.multiple,
+                'lumx-select--is-open': lumx.isOpen,
+                'lumx-select--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-select--theme-dark': lumx.theme === 'dark',
+                'lumx-select--has-label': lumx.label,
+                'lumx-select--is-disabled': lumx.isDisabled,
+                'lumx-select--is-valid': lumx.isValid,
+                'lumx-select--has-error': lumx.hasError,
+                'lumx-select--has-placeholder': lumx.placeholder,
+                'lumx-select--is-focus': lumx.isFocus }"
 >
-    <span class="lx-select__label" ng-if="::lumx.label && (!lumx.variant || lumx.variant === 'input')">
+    <span class="lumx-select__label" ng-if="::lumx.label && (!lumx.variant || lumx.variant === 'input')">
         {{ lumx.label }}
     </span>
 
     <div
-        class="lx-select__input-wrapper"
+        class="lumx-select__input-wrapper"
         id="{{ lumx.targetUuid }}"
         tabindex="0"
         ng-click="lumx.openDropdown()"
@@ -30,19 +30,19 @@
         ng-if="!lumx.variant || lumx.variant === 'input'"
     >
         <div
-            class="lx-select__input-native lx-select__input-native--placeholder"
+            class="lumx-select__input-native lumx-select__input-native--placeholder"
             ng-if="lumx.isModelEmpty() && lumx.placeholder"
         >
             <span>{{ lumx.placeholder }}</span>
         </div>
 
-        <div class="lx-select__input-native" ng-if="!lumx.isModelEmpty() && !lumx.multiple">
+        <div class="lumx-select__input-native" ng-if="!lumx.isModelEmpty() && !lumx.multiple">
             <span ng-bind-html="lumx.displaySelected()"></span>
         </div>
 
-        <div class="lx-select__input-chips">
+        <div class="lumx-select__input-chips">
             <div
-                class="lx-select__input-chip"
+                class="lumx-select__input-chip"
                 ng-repeat="selected in lumx.viewValue"
                 ng-if="!lumx.isModelEmpty() && lumx.multiple"
             >
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="lx-select__input-validity" ng-if="lumx.isValid || lumx.hasError">
+        <div class="lumx-select__input-validity" ng-if="lumx.isValid || lumx.hasError">
             <lumx-icon
                 lx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
                 lx-size="xs"
@@ -68,14 +68,14 @@
         </div>
 
         <div
-            class="lx-select__input-clear"
+            class="lumx-select__input-clear"
             ng-if="lumx.isClearable && !lumx.multiple && !lumx.isModelEmpty()"
             ng-click="lumx.clearModel($event)"
         >
             <lumx-icon lx-path="{{ lumx.icons.mdiCloseCircle }}" lx-size="xs"></lumx-icon>
         </div>
 
-        <div class="lx-select__input-indicator">
+        <div class="lumx-select__input-indicator">
             <lumx-icon lx-path="{{ lumx.icons.mdiMenuDown }}" lx-size="s"></lumx-icon>
         </div>
     </div>
@@ -112,7 +112,7 @@
 
     <lumx-dropdown lx-position="left" lx-width="100%" id="{{ lumx.dropdownUuid }}">
         <lumx-dropdown-menu>
-            <div class="lx-select__filter" ng-if="::lumx.hasFilter">
+            <div class="lumx-select__filter" ng-if="::lumx.hasFilter">
                 <lumx-icon lx-path="{{ lumx.icons.mdiMagnify }}" lx-size="xs"></lumx-icon>
 
                 <input
@@ -125,7 +125,7 @@
                 />
             </div>
 
-            <div class="lx-select__loader" ng-if="lumx.isLoading">
+            <div class="lumx-select__loader" ng-if="lumx.isLoading">
                 <lumx-progress></lumx-progress>
             </div>
 
@@ -140,7 +140,7 @@
                 </lumx-list-item>
             </lumx-list>
 
-            <span class="lx-select__helper" ng-if="lumx.hasHelper && !lumx.isLoading">
+            <span class="lumx-select__helper" ng-if="lumx.hasHelper && !lumx.isLoading">
                 {{ lumx.helper }}
             </span>
         </lumx-dropdown-menu>

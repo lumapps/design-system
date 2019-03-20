@@ -2,19 +2,19 @@
    Dropdown
    ========================================================================== */
 
-.lx-dropdown {
+.#{$lumx-base-prefix}-dropdown {
     &--has-toggle {
         display: inline-block;
         vertical-align: top;
     }
 
     &__menu {
-        @include lx-elevation(3);
+        @include lumx-elevation(3);
 
         position: fixed;
         overflow: auto;
-        padding: $lx-spacing-unit 0;
-        background-color: lx-theme-color-variant(light, N);
-        border-radius: $lx-theme-border-radius;
+        padding: $lumx-spacing-unit 0;
+        background-color: lumx-theme-color-variant(light, N);
+        border-radius: $lumx-theme-border-radius;
     }
 }

@@ -3,12 +3,12 @@
    ========================================================================== */
 
 html {
-    @include lx-typography-base;
+    @include lumx-typography-base;
 
     box-sizing: border-box;
-    color: lx-theme-color-variant(dark, N);
-    font-size: ($lx-typography-default-font-size / 16px) * 1em;
-    line-height: $lx-typography-default-line-height / $lx-typography-default-font-size;
+    color: lumx-theme-color-variant(dark, N);
+    font-size: ($lumx-typography-default-font-size / 16px) * 1em;
+    line-height: $lumx-typography-default-line-height / $lumx-typography-default-font-size;
 }
 
 *,

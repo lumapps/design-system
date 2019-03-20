@@ -55,7 +55,7 @@ function ListItemController($element) {
             return;
         }
 
-        lumx.parentController.activeItemIndex = $element.index('.lx-list-item');
+        lumx.parentController.activeItemIndex = $element.index(`.${COMPONENT_PREFIX}-list-item`);
     });
 }
 

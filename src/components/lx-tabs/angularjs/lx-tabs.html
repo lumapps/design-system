@@ -1,18 +1,18 @@
 <div
-    class="lx-tabs"
-    ng-class="{ 'lx-tabs--theme-light': !lumx.theme || lumx.theme === 'light',
-                'lx-tabs--theme-dark': lumx.theme === 'dark',
-                'lx-tabs--layout-fixed': !lumx.layout || lumx.layout === 'fixed',
-                'lx-tabs--layout-clustered': lumx.layout === 'clustered',
-                'lx-tabs--position-left': !lumx.position || lumx.position === 'left',
-                'lx-tabs--position-center': lumx.position === 'center',
-                'lx-tabs--position-right': lumx.position === 'right' }"
+    class="lumx-tabs"
+    ng-class="{ 'lumx-tabs--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-tabs--theme-dark': lumx.theme === 'dark',
+                'lumx-tabs--layout-fixed': !lumx.layout || lumx.layout === 'fixed',
+                'lumx-tabs--layout-clustered': lumx.layout === 'clustered',
+                'lumx-tabs--position-left': !lumx.position || lumx.position === 'left',
+                'lumx-tabs--position-center': lumx.position === 'center',
+                'lumx-tabs--position-right': lumx.position === 'right' }"
 >
-    <div class="lx-tabs__links">
+    <div class="lumx-tabs__links">
         <a
-            class="lx-tabs__link"
-            ng-class="{ 'lx-tabs__link--is-active': lumx.isTabActive(tab.index),
-                        'lx-tabs__link--is-disabled': tab.isDisabled }"
+            class="lumx-tabs__link"
+            ng-class="{ 'lumx-tabs__link--is-active': lumx.isTabActive(tab.index),
+                        'lumx-tabs__link--is-disabled': tab.isDisabled }"
             ng-repeat="tab in lumx.tabs track by tab.uuid"
             ng-click="lumx.setActiveTab(tab)"
             lumx-enter-keypress="lumx.setActiveTab(tab)"
@@ -23,5 +23,5 @@
         </a>
     </div>
 
-    <div class="lx-tabs__panes" ng-transclude></div>
+    <div class="lumx-tabs__panes" ng-transclude></div>
 </div>

@@ -1,14 +1,14 @@
-@mixin lx-input-label($theme) {
-    @include lx-typography($lx-input-label-typography);
+@mixin lumx-input-label($theme) {
+    @include lumx-typography($lumx-input-label-typography);
 
     display: block;
-    color: lx-theme-color-variant($theme, N);
+    color: lumx-theme-color-variant($theme, N);
 }
 
-@mixin lx-input-helper($theme) {
-    @include lx-typography($lx-input-helper-typography);
+@mixin lumx-input-helper($theme) {
+    @include lumx-typography($lumx-input-helper-typography);
 
     display: block;
-    margin-top: $lx-spacing-unit / 2;
-    color: lx-theme-color-variant($theme, L2);
+    margin-top: $lumx-spacing-unit / 2;
+    color: lumx-theme-color-variant($theme, L2);
 }

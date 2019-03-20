@@ -2,8 +2,8 @@
    Typography
    ========================================================================== */
 
-@each $style in $lx-typography-styles {
-    .lx-typography-#{$style} {
-        @include lx-typography($style);
+@each $style in $lumx-typography-styles {
+    .#{$lumx-base-prefix}-typography-#{$style} {
+        @include lumx-typography($style);
     }
 }

@@ -2,18 +2,18 @@
    Tooltip
    ========================================================================== */
 
-.lx-tooltip {
+.#{$lumx-base-prefix}-tooltip {
     $self: &;
 
-    @include lx-elevation(3);
+    @include lumx-elevation(3);
 
     position: absolute;
-    padding: $lx-spacing-unit / 2 $lx-spacing-unit;
-    background-color: lx-theme-color-variant(light, N);
-    border-radius: $lx-theme-border-radius;
+    padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
+    background-color: lumx-theme-color-variant(light, N);
+    border-radius: $lumx-theme-border-radius;
     opacity: 0;
     pointer-events: none;
-    transition-duration: $lx-tooltip-transition-duration;
+    transition-duration: $lumx-tooltip-transition-duration;
     transition-property: opacity, transform;
 
     &--is-shown {
@@ -37,7 +37,7 @@
     }
 
     &__text {
-        @include lx-typography(caption);
+        @include lumx-typography(caption);
 
         display: block;
     }

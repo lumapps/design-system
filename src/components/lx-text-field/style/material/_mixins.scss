@@ -1,25 +1,25 @@
-@mixin lx-text-field-material-label($theme) {
+@mixin lumx-text-field-material-label($theme) {
     position: absolute;
-    top: $lx-spacing-unit;
+    top: $lumx-spacing-unit;
     left: 0;
-    height: $lx-text-field-height;
-    color: lx-theme-color-variant($theme, L2);
-    line-height: $lx-text-field-height;
-    transform: translateY($lx-spacing-unit * 3);
+    height: $lumx-text-field-height;
+    color: lumx-theme-color-variant($theme, L2);
+    line-height: $lumx-text-field-height;
+    transform: translateY($lumx-spacing-unit * 3);
     transform-origin: bottom left;
     transition-duration: 200ms;
     transition-property: color, transform;
 }
 
-@mixin lx-text-field-material-label-focus($theme) {
+@mixin lumx-text-field-material-label-focus($theme) {
     @if $theme == dark {
-        color: lx-theme-color-variant(primary, N);
+        color: lumx-theme-color-variant(primary, N);
     } @else if $theme == light {
-        color: lx-theme-color-variant(light, N);
+        color: lumx-theme-color-variant(light, N);
     }
 }
 
-@mixin lx-text-field-material-input-wrapper($theme) {
+@mixin lumx-text-field-material-input-wrapper($theme) {
     position: relative;
     margin-top: 0;
     background-color: transparent !important;
@@ -32,7 +32,7 @@
         bottom: 0;
         left: 0;
         height: 1px;
-        background-color: lx-theme-color-variant($theme, L5);
+        background-color: lumx-theme-color-variant($theme, L5);
         content: '';
         pointer-events: none;
     }
@@ -49,21 +49,21 @@
         transition: transform 200ms;
 
         @if $theme == dark {
-            background-color: lx-theme-color-variant(primary, N);
+            background-color: lumx-theme-color-variant(primary, N);
         } @else if $theme == light {
-            background-color: lx-theme-color-variant(light, N);
+            background-color: lumx-theme-color-variant(light, N);
         }
     }
 }
 
-@mixin lx-text-field-material-input-wrapper-focus() {
+@mixin lumx-text-field-material-input-wrapper-focus() {
     &::after {
         transform: scaleX(1);
     }
 }
 
-@mixin lx-text-field-material-input-native($theme) {
-    @include lx-typography(body2);
+@mixin lumx-text-field-material-input-native($theme) {
+    @include lumx-typography(body2);
 
-    line-height: $lx-text-field-height;
+    line-height: $lumx-text-field-height;
 }

@@ -1,14 +1,14 @@
-<div class="lx-progress-tracker">
-    <div class="lx-progress-tracker__steps" ng-transclude></div>
+<div class="lumx-progress-tracker">
+    <div class="lumx-progress-tracker__steps" ng-transclude></div>
 
     <div
-        class="lx-progress-tracker__background-bar"
+        class="lumx-progress-tracker__background-bar"
         ng-style="{ 'left': 100/(lumx.stepCount * 2) + '%',
                     'right': 100/(lumx.stepCount * 2) + '%'}"
     ></div>
 
     <div
-        class="lx-progress-tracker__foreground-bar"
+        class="lumx-progress-tracker__foreground-bar"
         ng-style="{ 'left': 100/(lumx.stepCount * 2) + '%',
                     'right': 100/(lumx.stepCount * 2) + '%',
                     'transform': 'scaleX(' + (100 / (lumx.stepCount - 1) * lumx.activeStep) / 100 + ')' }"

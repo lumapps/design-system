@@ -1,86 +1,86 @@
-@mixin lx-text-field-input-wrapper($theme, $has-indicator: false, $is-multiple: false) {
+@mixin lumx-text-field-input-wrapper($theme, $has-indicator: false, $is-multiple: false) {
     position: relative;
     display: flex;
     align-items: center;
-    background-color: lx-theme-color-variant($theme, L6);
-    border-radius: $lx-theme-border-radius;
-    box-shadow: inset 0 0 0 1px lx-theme-color-variant($theme, L4);
+    background-color: lumx-theme-color-variant($theme, L6);
+    border-radius: $lumx-theme-border-radius;
+    box-shadow: inset 0 0 0 1px lumx-theme-color-variant($theme, L4);
     outline: none;
-    transition-duration: $lx-text-field-transition-duration;
+    transition-duration: $lumx-text-field-transition-duration;
     transition-property: background-color, box-shadow;
 
     @if $is-multiple {
-        min-height: $lx-text-field-height;
+        min-height: $lumx-text-field-height;
         padding: 3px;
     } @else {
-        height: $lx-text-field-height;
-        padding: 0 $lx-text-field-horizontal-padding;
+        height: $lumx-text-field-height;
+        padding: 0 $lumx-text-field-horizontal-padding;
     }
 
     @if $has-indicator {
-        padding-right: $lx-spacing-unit * 1.5;
+        padding-right: $lumx-spacing-unit * 1.5;
     }
 }
 
-@mixin lx-text-field-input-icon($theme) {
-    margin-right: $lx-spacing-unit;
-    color: lx-theme-color-variant($theme, N);
+@mixin lumx-text-field-input-icon($theme) {
+    margin-right: $lumx-spacing-unit;
+    color: lumx-theme-color-variant($theme, N);
 }
 
-@mixin lx-text-field-input-native($theme) {
-    @include lx-typography(body1);
+@mixin lumx-text-field-input-native($theme) {
+    @include lumx-typography(body1);
 
     width: 100%;
-    height: $lx-text-field-height;
+    height: $lumx-text-field-height;
     padding: 0;
     margin: 0;
     border: none;
     background-color: transparent;
-    color: lx-theme-color-variant($theme, N);
-    line-height: $lx-text-field-height;
+    color: lumx-theme-color-variant($theme, N);
+    line-height: $lumx-text-field-height;
     outline: none;
 }
 
-@mixin lx-text-field-input-validity($validity, $theme) {
-    margin-left: $lx-spacing-unit;
+@mixin lumx-text-field-input-validity($validity, $theme) {
+    margin-left: $lumx-spacing-unit;
 
     @if $theme == dark {
         @if $validity == valid {
-            color: lx-theme-color-variant(green, N);
+            color: lumx-theme-color-variant(green, N);
         } @else if $validity == error {
-            color: lx-theme-color-variant(red, N);
+            color: lumx-theme-color-variant(red, N);
         }
     } @else if $theme == light {
-        color: lx-theme-color-variant(light, N);
+        color: lumx-theme-color-variant(light, N);
     }
 }
 
-@mixin lx-text-field-placeholder($theme) {
-    color: lx-theme-color-variant($theme, L2);
+@mixin lumx-text-field-placeholder($theme) {
+    color: lumx-theme-color-variant($theme, L2);
 }
 
-@mixin lx-text-field-input-wrapper-state($state, $theme) {
+@mixin lumx-text-field-input-wrapper-state($state, $theme) {
     @if $state == state-hover {
-        background-color: lx-theme-color-variant($theme, L5);
+        background-color: lumx-theme-color-variant($theme, L5);
     } @else if $state == state-focus {
         @if $theme == dark {
-            background-color: lx-theme-color-variant(light, N);
-            box-shadow: inset 0 0 0 2px lx-theme-color-variant(primary, L2);
+            background-color: lumx-theme-color-variant(light, N);
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant(primary, L2);
         } @else if $theme == light {
             background-color: transparent;
-            box-shadow: inset 0 0 0 2px lx-theme-color-variant(light, L2);
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant(light, L2);
         }
     }
 }
 
-@mixin lx-text-field-input-wrapper-validity($validity, $theme) {
+@mixin lumx-text-field-input-wrapper-validity($validity, $theme) {
     @if $theme == dark {
         @if $validity == valid {
-            box-shadow: inset 0 0 0 2px lx-theme-color-variant(green, N);
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant(green, N);
         } @else if $validity == error {
-            box-shadow: inset 0 0 0 2px lx-theme-color-variant(red, N);
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant(red, N);
         }
     } @else if $theme == light {
-        box-shadow: inset 0 0 0 2px lx-theme-color-variant(light, N);
+        box-shadow: inset 0 0 0 2px lumx-theme-color-variant(light, N);
     }
 }

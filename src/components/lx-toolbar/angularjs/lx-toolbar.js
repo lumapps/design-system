@@ -46,17 +46,17 @@ function ToolbarDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
         if (transclude.isSlotFilled('before')) {
             ctrl.hasBefore = true;
-            el.addClass('lx-toolbar--has-before');
+            el.addClass(`${COMPONENT_PREFIX}-toolbar--has-before`);
         }
 
         if (transclude.isSlotFilled('label')) {
             ctrl.hasLabel = true;
-            el.addClass('lx-toolbar--has-label');
+            el.addClass(`${COMPONENT_PREFIX}-toolbar--has-label`);
         }
 
         if (transclude.isSlotFilled('after')) {
             ctrl.hasAfter = true;
-            el.addClass('lx-toolbar--has-after');
+            el.addClass(`${COMPONENT_PREFIX}-toolbar--has-after`);
         }
     }
 

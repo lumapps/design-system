@@ -138,9 +138,9 @@ function RadioButtonDirective() {
             el.find('input').attr('disabled', isDisabled);
 
             if (isDisabled) {
-                el.addClass('lx-radio-button--is-disabled');
+                el.addClass(`${COMPONENT_PREFIX}-radio-button--is-disabled`);
             } else {
-                el.removeClass('lx-radio-button--is-disabled');
+                el.removeClass(`${COMPONENT_PREFIX}-radio-button--is-disabled`);
             }
         });
 

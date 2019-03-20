@@ -38,26 +38,26 @@ function ButtonDirective() {
             variant: 'button',
         };
 
-        let buttonClass = 'lx-button';
+        let buttonClass = `${COMPONENT_PREFIX}-button`;
 
         if (!attrs.lxColor) {
-            buttonClass += ` lx-button--color-${defaultProps.color}`;
+            buttonClass += ` ${COMPONENT_PREFIX}-button--color-${defaultProps.color}`;
         }
 
         if (!attrs.lxEmphasis) {
-            buttonClass += ` lx-button--emphasis-${defaultProps.emphasis}`;
+            buttonClass += ` ${COMPONENT_PREFIX}-button--emphasis-${defaultProps.emphasis}`;
         }
 
         if (!attrs.lxSize) {
-            buttonClass += ` lx-button--size-${defaultProps.size}`;
+            buttonClass += ` ${COMPONENT_PREFIX}-button--size-${defaultProps.size}`;
         }
 
         if (!attrs.lxTheme && isDefaultEmphasis) {
-            buttonClass += ` lx-button--theme-${defaultProps.theme}`;
+            buttonClass += ` ${COMPONENT_PREFIX}-button--theme-${defaultProps.theme}`;
         }
 
         if (!attrs.lxVariant) {
-            buttonClass += ` lx-button--variant-${defaultProps.variant}`;
+            buttonClass += ` ${COMPONENT_PREFIX}-button--variant-${defaultProps.variant}`;
         }
 
         if (isAnchor(attrs)) {
@@ -74,11 +74,11 @@ function ButtonDirective() {
             const label = el.find('span');
 
             if (leftIcon.length > 0) {
-                el.addClass('lx-button--has-left-icon');
+                el.addClass(`${COMPONENT_PREFIX}-button--has-left-icon`);
             }
 
             if (rightIcon.length > 0) {
-                el.addClass('lx-button--has-right-icon');
+                el.addClass(`${COMPONENT_PREFIX}-button--has-right-icon`);
             }
 
             if (label.length === 0) {
@@ -88,41 +88,41 @@ function ButtonDirective() {
 
         attrs.$observe('lxColor', (color) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-button--color-\S+/g) || []).join(' ');
-            }).addClass(`lx-button--color-${color}`);
+                return (className.match(/(^|\s)button--color-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-button--color-${color}`);
         });
 
         attrs.$observe('lxEmphasis', (emphasis) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-button--emphasis-\S+/g) || []).join(' ');
-            }).addClass(`lx-button--emphasis-${emphasis}`);
+                return (className.match(/(^|\s)button--emphasis-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-button--emphasis-${emphasis}`);
         });
 
         attrs.$observe('lxSize', (size) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-button--size-\S+/g) || []).join(' ');
-            }).addClass(`lx-button--size-${size}`);
+                return (className.match(/(^|\s)button--size-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-button--size-${size}`);
         });
 
         attrs.$observe('lxTheme', (theme) => {
             if (!attrs.lxEmphasis || attrs.lxEmphasis === 'high') {
                 el.removeClass((index, className) => {
-                    return (className.match(/(^|\s)lx-button--theme-\S+/g) || []).join(' ');
-                }).addClass(`lx-button--theme-${theme}`);
+                    return (className.match(/(^|\s)button--theme-\S+/g) || []).join(' ');
+                }).addClass(`${COMPONENT_PREFIX}-button--theme-${theme}`);
             }
         });
 
         attrs.$observe('lxVariant', (variant) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)lx-button--variant-\S+/g) || []).join(' ');
-            }).addClass(`lx-button--variant-${variant}`);
+                return (className.match(/(^|\s)button--variant-\S+/g) || []).join(' ');
+            }).addClass(`${COMPONENT_PREFIX}-button--variant-${variant}`);
         });
 
         scope.$watch(attrs.lxIsSelected, (isSelected) => {
             if (isSelected) {
-                el.addClass('lx-button--is-selected');
+                el.addClass(`${COMPONENT_PREFIX}-button--is-selected`);
             } else {
-                el.removeClass('lx-button--is-selected');
+                el.removeClass(`${COMPONENT_PREFIX}-button--is-selected`);
             }
         });
     }

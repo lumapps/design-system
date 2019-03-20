@@ -66,13 +66,13 @@ function lxListController($element, $scope) {
      * Increase active choice index on key down press.
      */
     function _nextItemOnKeyDown() {
-        let nextItem = $element.find('.lx-list-item').eq(lumx.activeItemIndex + 1);
+        let nextItem = $element.find(`.${COMPONENT_PREFIX}-list-item`).eq(lumx.activeItemIndex + 1);
 
         if (nextItem.length === 0) {
             lumx.activeItemIndex = 0;
 
             nextItem = $element
-                .find('.lx-list-item')
+                .find(`.${COMPONENT_PREFIX}-list-item`)
                 .eq(lumx.activeItemIndex)
                 .focus();
         } else {
@@ -86,13 +86,13 @@ function lxListController($element, $scope) {
      * Decrease active choice index on key up press.
      */
     function _previousItemOnKeyUp() {
-        let previousItem = $element.find('.lx-list-item').eq(lumx.activeItemIndex - 1);
+        let previousItem = $element.find(`.${COMPONENT_PREFIX}-list-item`).eq(lumx.activeItemIndex - 1);
 
         if (previousItem.length === 0) {
-            lumx.activeItemIndex = $element.find('.lx-list-item').length - 1;
+            lumx.activeItemIndex = $element.find(`.${COMPONENT_PREFIX}-list-item`).length - 1;
 
             previousItem = $element
-                .find('.lx-list-item')
+                .find(`.${COMPONENT_PREFIX}-list-item`)
                 .eq(lumx.activeItemIndex)
                 .focus();
         } else {
