@@ -15,7 +15,7 @@ export {
     Themes as LxButtonThemes,
     Variant as LxButtonVariant,
     Variants as LxButtonVariants,
-} from './components/lx-button/react/LxButton';
+} from './components/button/react/LxButton';
 export {
     CLASSNAME as LxIconButtonClassName,
     LxIconButton,
@@ -30,7 +30,7 @@ export {
     Themes as LxIconButtonThemes,
     Variant as LxIconButtonVariant,
     Variants as LxIconButtonVariants,
-} from './components/lx-button/react/LxIconButton';
+} from './components/button/react/LxIconButton';
 export {
     CLASSNAME as LxDropdownButtonClassName,
     Color as LxDropdownButtonColor,
@@ -43,7 +43,7 @@ export {
     Sizes as LxDropdownButtonSizes,
     Theme as LxDropdownButtonTheme,
     Themes as LxDropdownButtonThemes,
-} from './components/lx-button/react/LxDropdownButton';
+} from './components/button/react/LxDropdownButton';
 
 export {
     CLASSNAME as LxButtonGroupClassName,
@@ -55,7 +55,7 @@ export {
     Sizes as LxButtonGroupSizes,
     Theme as LxButtonGroupTheme,
     Themes as LxButtonGroupThemes,
-} from './components/lx-button/react/LxButtonGroup';
+} from './components/button/react/LxButtonGroup';
 
 export {
     CLASSNAME as LxDividerClassName,
@@ -63,13 +63,9 @@ export {
     LxDividerProps,
     Theme as LxDividerTheme,
     Themes as LxDividerThemes,
-} from './components/lx-divider/react/LxDivider';
+} from './components/divider/react/LxDivider';
 
-export {
-    CLASSNAME as LxDropdownClassName,
-    LxDropdown,
-    LxDropdownProps,
-} from './components/lx-dropdown/react/LxDropdown';
+export { CLASSNAME as LxDropdownClassName, LxDropdown, LxDropdownProps } from './components/dropdown/react/LxDropdown';
 
 export {
     CLASSNAME as LxIconClassName,
@@ -79,4 +75,4 @@ export {
     Colors as LxIconColors,
     Size as LxIconSize,
     Sizes as LxIconSizes,
-} from './components/lx-icon/react/LxIcon';
+} from './components/icon/react/LxIcon';

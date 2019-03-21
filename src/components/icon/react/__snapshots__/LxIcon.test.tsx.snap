@@ -4,7 +4,7 @@ exports[`<LxIcon> Conditions should fail when no \`icon\` is given 1`] = `"Your 
 
 exports[`<LxIcon> Snapshots and structure should render correctly 1`] = `
 <i
-  className="lx-icon"
+  className="lumx-icon"
 >
   <svg
     aria-hidden="true"

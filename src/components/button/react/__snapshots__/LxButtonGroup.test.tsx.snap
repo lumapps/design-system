@@ -22,7 +22,7 @@ exports[`<LxButtonGroup> Conditions should fail when no child is given 1`] = `"<
 
 exports[`<LxButtonGroup> Snapshots and structure should render correctly a group button 1`] = `
 <div
-  className="lx-button-group"
+  className="lumx-button-group"
 >
   <LxButton>
     Label

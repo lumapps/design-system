@@ -9,6 +9,7 @@ import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -23,12 +24,12 @@ interface IProps extends IGenericProps {
     icon: string;
 
     /**
-     * The icon color which must be defined by `lx-icon--${color}` CSS class.
+     * The icon color.
      */
     color?: Color;
 
     /**
-     * The icon size which must be defined by `lx-icon--${size}` CSS class.
+     * The icon size.
      */
     size?: Size;
 }
@@ -54,7 +55,7 @@ interface ILxIconDefaultPropsType extends Partial<LxIconProps> {}
  * @constant
  * @readonly
  */
-const CLASSNAME: string = 'lx-icon';
+const CLASSNAME: string = `${CSS_PREFIX}-icon`;
 
 /**
  * The display name of the component.

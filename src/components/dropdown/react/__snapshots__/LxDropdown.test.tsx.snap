@@ -2,7 +2,7 @@
 
 exports[`<LxDropdown> Snapshots and structure should render correctly 1`] = `
 <div
-  className="lx-dropdown"
+  className="lumx-dropdown"
 >
   This is the content of the dropdown
 </div>

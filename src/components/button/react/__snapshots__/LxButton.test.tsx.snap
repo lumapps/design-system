@@ -20,7 +20,7 @@ exports[`<LxButton> Conditions should fail when there are 2 or more <LxIcon> in 
 
 exports[`<LxButton> Snapshots and structure should render correctly a <span> label 1`] = `
 <LxButtonRoot
-  className="lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span
     key=".0"
@@ -32,7 +32,7 @@ exports[`<LxButton> Snapshots and structure should render correctly a <span> lab
 
 exports[`<LxButton> Snapshots and structure should render correctly a <span> label and an icon 1`] = `
 <LxButtonRoot
-  className="lx-button--has-right-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span
     key=".0"
@@ -48,7 +48,7 @@ exports[`<LxButton> Snapshots and structure should render correctly a <span> lab
 
 exports[`<LxButton> Snapshots and structure should render correctly a text label 1`] = `
 <LxButtonRoot
-  className="lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span
     key=".0"
@@ -60,7 +60,7 @@ exports[`<LxButton> Snapshots and structure should render correctly a text label
 
 exports[`<LxButton> Snapshots and structure should render correctly a text label and an icon 1`] = `
 <LxButtonRoot
-  className="lx-button--has-right-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span
     key=".0"
@@ -76,7 +76,7 @@ exports[`<LxButton> Snapshots and structure should render correctly a text label
 
 exports[`<LxButton> Snapshots and structure should render correctly an icon and a <span> label 1`] = `
 <LxButtonRoot
-  className="lx-button--has-left-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <LxIcon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
@@ -92,7 +92,7 @@ exports[`<LxButton> Snapshots and structure should render correctly an icon and 
 
 exports[`<LxButton> Snapshots and structure should render correctly an icon and a text label 1`] = `
 <LxButtonRoot
-  className="lx-button--has-left-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <LxIcon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
@@ -108,7 +108,7 @@ exports[`<LxButton> Snapshots and structure should render correctly an icon and 
 
 exports[`<LxButton> Snapshots and structure should render correctly an icon button with the 'button' \`variant\` 1`] = `
 <LxButtonRoot
-  className="lx-button--has-left-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <LxIcon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
@@ -119,7 +119,7 @@ exports[`<LxButton> Snapshots and structure should render correctly an icon butt
 
 exports[`<LxButton> Snapshots and structure should render correctly an icon button with the 'icon' \`variant\` 1`] = `
 <LxButtonRoot
-  className="lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-icon"
+  className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
 >
   <LxIcon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
@@ -129,7 +129,7 @@ exports[`<LxButton> Snapshots and structure should render correctly an icon butt
 
 exports[`<LxButton> Snapshots and structure should render correctly two icons and a <span> label 1`] = `
 <LxButtonRoot
-  className="lx-button--has-left-icon lx-button--has-right-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <LxIcon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
@@ -149,7 +149,7 @@ exports[`<LxButton> Snapshots and structure should render correctly two icons an
 
 exports[`<LxButton> Snapshots and structure should render correctly two icons and a text label 1`] = `
 <LxButtonRoot
-  className="lx-button--has-left-icon lx-button--has-right-icon lx-button lx-button--color-primary lx-button--emphasis-high lx-button--size-m lx-button--theme-light lx-button--variant-button"
+  className="lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <LxIcon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"

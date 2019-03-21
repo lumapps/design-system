@@ -10,6 +10,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -19,7 +20,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
  */
 interface ILxDividerProps extends IGenericProps {
     /**
-     * The divider theme which must be defined by `lx-divider--${theme}` CSS class.
+     * The divider theme.
      */
     theme?: Theme;
 }
@@ -56,7 +57,7 @@ const DEFAULT_PROPS: ILxDividerDefaultPropsType = {
  * @constant
  * @readonly
  */
-const CLASSNAME: string = 'lx-divider';
+const CLASSNAME: string = `${CSS_PREFIX}-divider`;
 
 /**
  * The display name of the component.

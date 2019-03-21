@@ -11,9 +11,11 @@ import {
     Sizes,
     Themes,
 } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
+
 import { mdiCheck, mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
 
-import {} from 'LumX/components/lx-button/react/LxButton';
+import {} from 'LumX/components/button/react/LxButton';
 
 /////////////////////////////
 
@@ -24,7 +26,7 @@ import {} from 'LumX/components/lx-button/react/LxButton';
 const LxButtonDemo = () => (
     <Fragment>
         {/* Theme light (m) */}
-        <div className="p++ lx-theme-background-dark-L6">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-L6`}>
             <LxButton>Default</LxButton>
 
             <LxButton disabled={true}>Disabled</LxButton>
@@ -61,7 +63,7 @@ const LxButtonDemo = () => (
             </LxIconButton>
         </div>
 
-        <div className="p++ lx-theme-background-dark-L6">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-L6`}>
             <LxButton emphasis={LxButtonEmphasises.medium}>Default</LxButton>
 
             <LxButton emphasis={LxButtonEmphasises.medium} disabled={true}>
@@ -95,7 +97,7 @@ const LxButtonDemo = () => (
             </LxIconButton>
         </div>
 
-        <div className="p++ lx-theme-background-dark-L6">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-L6`}>
             <LxButton emphasis={LxButtonEmphasises.low}>Default</LxButton>
 
             <LxButton emphasis={LxButtonEmphasises.low} disabled={true}>
@@ -129,7 +131,7 @@ const LxButtonDemo = () => (
             </LxIconButton>
         </div>
 
-        <div className="p++ lx-theme-background-dark-L6">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-L6`}>
             <LxButton size={Sizes.s}>Default</LxButton>
 
             <LxButton size={Sizes.s} disabled={true}>
@@ -164,7 +166,7 @@ const LxButtonDemo = () => (
         </div>
 
         {/* Theme light (s) */}
-        <div className="p++ lx-theme-background-dark-L6">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-L6`}>
             <LxButton emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 Default
             </LxButton>
@@ -202,7 +204,7 @@ const LxButtonDemo = () => (
             </LxIconButton>
         </div>
 
-        <div className="p++ lx-theme-background-dark-L6">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-L6`}>
             <LxButton emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 Default
             </LxButton>
@@ -241,7 +243,7 @@ const LxButtonDemo = () => (
         </div>
 
         {/* Theme dark (m) */}
-        <div className="p++ lx-theme-background-dark-N">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-N`}>
             <LxButton theme={Themes.dark}>Default</LxButton>
 
             <LxButton theme={Themes.dark} disabled={true}>
@@ -275,7 +277,7 @@ const LxButtonDemo = () => (
             </LxIconButton>
         </div>
 
-        <div className="p++ lx-theme-background-dark-N">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-N`}>
             <LxButton color="light" emphasis={LxButtonEmphasises.medium}>
                 Default
             </LxButton>
@@ -313,7 +315,7 @@ const LxButtonDemo = () => (
             </LxIconButton>
         </div>
 
-        <div className="p++ lx-theme-background-dark-N">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-N`}>
             <LxButton color="light" emphasis={LxButtonEmphasises.low}>
                 Default
             </LxButton>
@@ -352,7 +354,7 @@ const LxButtonDemo = () => (
         </div>
 
         {/* Theme dark (s) */}
-        <div className="p++ lx-theme-background-dark-N">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-N`}>
             <LxButton size={Sizes.s} theme={Themes.dark}>
                 Default
             </LxButton>
@@ -390,7 +392,7 @@ const LxButtonDemo = () => (
             </LxIconButton>
         </div>
 
-        <div className="p++ lx-theme-background-dark-N">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-N`}>
             <LxButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 Default
             </LxButton>
@@ -428,7 +430,7 @@ const LxButtonDemo = () => (
             </LxIconButton>
         </div>
 
-        <div className="p++ lx-theme-background-dark-N">
+        <div className={`p++ ${CSS_PREFIX}-theme-background-dark-N`}>
             <LxButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 Default
             </LxButton>

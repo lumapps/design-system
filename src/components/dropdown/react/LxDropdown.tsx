@@ -6,6 +6,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -36,7 +37,7 @@ interface ILxDropdownDefaultPropsType extends Partial<LxDropdownProps> {}
  * @constant
  * @readonly
  */
-const CLASSNAME: string = 'lx-dropdown';
+const CLASSNAME: string = `${CSS_PREFIX}-dropdown`;
 
 /**
  * The display name of the component.

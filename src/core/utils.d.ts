@@ -1,4 +1,4 @@
-import { Color, Emphasis, Size, Theme, Variant } from 'LumX/components';
+import { Color, Size, Theme } from 'LumX/components';
 
 /////////////////////////////
 
@@ -13,10 +13,10 @@ declare function handleBasicClasses({
     variant,
 }: {
     color?: Color;
-    emphasis?: Emphasis;
+    emphasis?: string;
     size?: Size;
     theme?: Theme;
-    variant?: Variant;
+    variant?: string;
     prefix: string;
 }): string;
 

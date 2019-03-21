@@ -44,7 +44,7 @@ function _loadComponent(componentFolderName: IProps['activeComponent']): Promise
 
     const componentName: string = upperFirst(camelCase(componentFolderName));
 
-    return import(`../components/lx-${componentFolderName}/Lx${componentName}Demo`);
+    return import(`../components/${componentFolderName}/Lx${componentName}Demo`);
 }
 
 /////////////////////////////

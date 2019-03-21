@@ -10,6 +10,7 @@ import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 
 import { LxIcon, LxIconButton } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import {
     ChildTransformParameters,
     ChildValidateParameters,
@@ -50,27 +51,27 @@ type Variant = Variants;
  */
 interface IProps {
     /**
-     * The button color which must be defined by `lx-button--${color}` CSS class.
+     * The button color.
      */
     color?: Color;
 
     /**
-     * The emphasis of the button which must be defined by `lx-button-emphasis--${emphasis}` CSS class.
+     * The emphasis of the button.
      */
     emphasis?: Emphasis;
 
     /**
-     * The button size which must be defined by `lx-button--${size}` CSS class.
+     * The button size.
      */
     size?: Size;
 
     /**
-     * The button theme which must be defined by `lx-button--${theme}` CSS class.
+     * The button theme.
      */
     theme?: Theme;
 
     /**
-     * The button variant which must be defined by `lx-type--${variant}` CSS class.
+     * The button variant.
      */
     variant?: Variant;
 }
@@ -98,7 +99,7 @@ interface ILxButtonDefaultPropsType extends Partial<Omit<LxButtonProps, 'color'>
  * @constant
  * @readonly
  */
-const CLASSNAME: string = 'lx-button';
+const CLASSNAME: string = `${CSS_PREFIX}-button`;
 
 /**
  * The display name of the component.
