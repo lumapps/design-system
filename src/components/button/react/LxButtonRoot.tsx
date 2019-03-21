@@ -27,8 +27,39 @@ type LxButtonRootProps = IProps;
 /////////////////////////////
 
 /**
+ * Define the types of the default props.
+ */
+interface ILxButtonRootDefaultPropsType extends Partial<LxButtonRootProps> {}
+
+/////////////////////////////
+//                         //
+//    Public attributes    //
+//                         //
+/////////////////////////////
+
+/**
+ * The display name of the component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const COMPONENT_NAME: string = 'LxButtonRoot';
+
+/**
+ * The default value of props.
+ *
+ * @type {ILxButtonRootDefaultPropsType}
+ * @constant
+ * @readonly
+ */
+const DEFAULT_PROPS: ILxButtonRootDefaultPropsType = {};
+
+/////////////////////////////
+
+/**
  * The root of the <LxButton> component.
- * Conditionnaly adds a `<a>` or a `<button>` HTML tag whether there is an `href` attribute or not.
+ * Conditionally adds a `<a>` or a `<button>` HTML tag whether there is an `href` attribute or not.
  *
  * @return {JSX.Element} The <LxButton> root component.
  */
@@ -53,8 +84,8 @@ const LxButtonRoot: React.FC<LxButtonRootProps> = ({
         </a>
     );
 };
-LxButtonRoot.displayName = 'LxButtonRoot';
+LxButtonRoot.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { LxButtonRoot, LxButtonRootProps };
+export { DEFAULT_PROPS, LxButtonRoot, LxButtonRootProps };

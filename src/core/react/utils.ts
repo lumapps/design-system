@@ -1,16 +1,38 @@
 import React, { Children } from 'react';
 
 import get from 'lodash/get';
-import has from 'lodash/has';
 import isEmpty from 'lodash/isEmpty';
+import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
+import noop from 'lodash/noop';
 
+/////////////////////////////
+//                         //
+//    Private attributes   //
+//                         //
+/////////////////////////////
+
+/**
+ * The properties of a component to use to determine it's name.
+ * In the order of preference.
+ *
+ * @type {Array<string>}
+ * @constant
+ * @readonly
+ */
+const NAME_PROPERTIES: string[] = ['displayName', 'name', 'type', 'type.name', '_reactInternalFiber.elementType.name'];
+
+/////////////////////////////
+//                         //
+//    Public attributes    //
+//                         //
 /////////////////////////////
 
 /**
  * Defines a generic component type.
  */
-type Component = string | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
+type ComponentType = JSX.Element | Element | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 /**
  * Define a generic props types.
@@ -23,31 +45,81 @@ interface IGenericProps {
     [propName: string]: any;
 }
 
+interface IChildrenManipulationParameters {
+    child: React.ReactElement;
+    children: React.ReactNode;
+    childrenCount: number;
+    index: number;
+    props: IGenericProps;
+}
+type ChildTransformParameters = IChildrenManipulationParameters;
+type ChildValidateParameters = IChildrenManipulationParameters;
+
+/**
+ * Defines the parameters of the pre/post validate callback of the `validateComponent` function below.
+ */
+interface IValidateParameters {
+    children: React.ReactNode;
+    childrenCount: number;
+    props: IGenericProps;
+}
+type ValidateParameters = IValidateParameters;
+
 /////////////////////////////
+//                         //
+//     Public functions    //
+//                         //
+/////////////////////////////
+
+/**
+ * Get the name of the given type.
+ * The type can either be a string (LxButton, text, ...) or a component whose name will be computed from its
+ * `displayName`, its React internal name (`_reactInternalFiber.elementType.name`) or its `name`.
+ *
+ * @param  {string|ComponentType} type The type to get the name of.
+ * @return {string|ComponentType} The name of the type.
+ */
+function getTypeName(type: string | ComponentType): string | ComponentType {
+    if (isString(type)) {
+        return type;
+    }
+
+    for (const nameProperty of NAME_PROPERTIES) {
+        const typeName = get(type, nameProperty);
+
+        if (isString(typeName) && !isEmpty(typeName)) {
+            return typeName;
+        }
+    }
+
+    return type;
+}
 
 /**
  * Check if a ReactElement is of the given type.
  *
- * @param  {React.ReactElement} el   The ReactElement we want to check the type of.
- * @param  {string|Component}   type The type we want to check if the ReactElement is of.
- * @return {boolean}            If the ReactElement is of the given type or not.
+ * @param  {React.ReactElement}   el   The ReactElement we want to check the type of.
+ * @param  {string|ComponentType} type The type we want to check if the ReactElement is of.
+ * @return {boolean}              If the ReactElement is of the given type or not.
  */
-function isElementOfType(el: React.ReactElement, type: Component): boolean {
-    if (!isString(type) && has(type, 'displayName')) {
-        type = get(type, 'displayName', get(type, '_reactInternalFiber.elementType.name', 'Component'));
-    }
+function isElementOfType(el: React.ReactElement, type: string | ComponentType): boolean {
+    const typeName: string | ComponentType = getTypeName(type);
 
-    if (isEmpty(type) && !isString(type)) {
+    if (!isString(typeName) || isEmpty(typeName)) {
+        console.debug('Un-computable type', type, '\nResulted in', typeName);
         throw new Error(
-            `The type you want to check is not valid. Waiting a component or a string, got ${type.toString()}`,
+            `The type you want to check is not valid. Waiting a JSX element, a component or a string (got \`${type.toString()}\`)`,
         );
     }
 
-    if (type === 'text') {
-        return isString(el) || el.type === 'span';
-    }
+    for (const nameProperty of NAME_PROPERTIES) {
+        const elementTypeName = get(el, nameProperty);
 
-    return get(el.type, 'name') === type;
+        if (isString(elementTypeName) && !isEmpty(elementTypeName) && elementTypeName === typeName) {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**
@@ -58,7 +130,7 @@ function isElementOfType(el: React.ReactElement, type: Component): boolean {
  * @return {boolean}            If the ReactElement is a text or not.
  */
 function isElementText(el: React.ReactElement): boolean {
-    return isElementOfType(el, 'text');
+    return isString(el);
 }
 
 /**
@@ -82,6 +154,149 @@ function unwrapFragment(children: React.ReactNode): React.ReactNode {
     return newChildren;
 }
 
+/**
+ * Validate the component props and children.
+ * Also, sanitize, cleanup and format the children and return the processed ones.
+ *
+ * @param  {string}                      componentName    The name of the component being validated.
+ * @param  {Array<string|ComponentType>} [allowedTypes]   The allowed types of children.
+ * @param  {number}                      [maxChildren]    The maximum expected number of children.
+ * @param  {number}                      [minChildren=0]  The minimum expected number of children.
+ * @param  {Function}                    [postValidate]   A function to run after all the transformation and validation
+ *                                                        of the component.
+ * @param  {Function}                    [preValidate]    A function to run before global validation of the component.
+ * @param  {IGenericProps}               props            The children and props of the component.
+ * @param  {Function}                    [transformChild] A function to transform a child to another child.
+ * @param  {Function}                    [validateChild]  A function to check if a child is valid after that its type
+ *                                                        has been validated (if `allowedTypes` is provided).
+ * @return {React.ReactNode}             The processed children of the component.
+ */
+function validateComponent(
+    componentName: string,
+    {
+        allowedTypes = [],
+        maxChildren,
+        minChildren = 0,
+        props,
+        postValidate = noop,
+        preValidate = noop,
+        transformChild,
+        validateChild,
+    }: {
+        allowedTypes?: Array<string | ComponentType>;
+        maxChildren?: number;
+        minChildren?: number;
+        props: IGenericProps;
+        postValidate?(params: ValidateParameters): void;
+        preValidate?(params: ValidateParameters): void;
+        transformChild?(params: ChildTransformParameters): React.ReactElement;
+        validateChild?(params: ChildValidateParameters): void;
+    },
+): React.ReactNode | undefined {
+    let newChildren: React.ReactNode = !isEmpty(props.children) ? unwrapFragment(props.children) : undefined;
+    const childrenCount: number = Children.count(newChildren);
+
+    preValidate({ children: newChildren, childrenCount, props });
+
+    if (minChildren !== 0) {
+        if (maxChildren === minChildren && childrenCount !== minChildren) {
+            throw new Error(
+                `<${componentName}> must have exactly ${minChildren} ${
+                    minChildren === 1 ? 'child' : 'children'
+                } (got ${childrenCount})!`,
+            );
+        }
+
+        if (childrenCount < minChildren) {
+            throw new Error(
+                `<${componentName}> must have at least ${minChildren} ${
+                    minChildren <= 1 ? 'child' : 'children'
+                } (got ${childrenCount})!`,
+            );
+        }
+    } else if (maxChildren === minChildren && childrenCount > minChildren) {
+        throw new Error(`<${componentName}> shouldn't have any child (got ${childrenCount})!`);
+    }
+
+    if (maxChildren !== undefined && maxChildren !== minChildren && childrenCount > maxChildren) {
+        throw new Error(
+            `<${componentName}> cannot have more than ${maxChildren} ${
+                maxChildren === 1 ? 'child' : 'children'
+            } (got ${childrenCount})!`,
+        );
+    }
+
+    if (isFunction(transformChild) || isFunction(validateChild) || !isEmpty(allowedTypes)) {
+        const childrenFunctionName: string = isFunction(transformChild) ? 'map' : 'forEach';
+
+        if (!isFunction(transformChild)) {
+            transformChild = ({ child }: ChildTransformParameters): React.ReactElement => child;
+        }
+        validateChild = validateChild || noop;
+
+        let index: number = -1;
+        const transformedChildren = Children[childrenFunctionName](
+            newChildren,
+            (child: any): React.ReactElement => {
+                index++;
+
+                const newChild: any = transformChild!({ children: newChildren, child, index, childrenCount, props });
+
+                if (!isEmpty(allowedTypes)) {
+                    const isOfOneAllowedType: boolean = allowedTypes.some((allowedType: string | ComponentType) =>
+                        isElementOfType(newChild, allowedType),
+                    );
+
+                    if (!isOfOneAllowedType) {
+                        let allowedTypesString: string = '';
+                        allowedTypes.forEach((allowedType: string | ComponentType, idx: number) => {
+                            if (!isEmpty(allowedTypesString)) {
+                                allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
+                            }
+
+                            const typeName: string | ComponentType = getTypeName(allowedType);
+                            allowedTypesString +=
+                                (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
+                                '<Unknown component type>';
+                        });
+
+                        console.debug('Non matching type', newChild, '\nResulted in', getTypeName(newChild));
+                        throw new Error(
+                            `You can only have ${allowedTypesString} children in <${componentName}> (got ${
+                                isString(newChild) ? `'${newChild}'` : `<${getTypeName(newChild)}>`
+                            })!`,
+                        );
+                    }
+                }
+
+                validateChild!({ children: newChildren, child: newChild, index, childrenCount, props });
+
+                return newChild;
+            },
+        );
+
+        if (childrenFunctionName === 'map') {
+            newChildren = transformedChildren;
+        }
+    }
+
+    postValidate({ children: newChildren, childrenCount, props });
+
+    return newChildren;
+}
+
 /////////////////////////////
 
-export { Component, IGenericProps, isElementOfType, isElementText, unwrapFragment };
+export {
+    ChildTransformParameters,
+    ChildValidateParameters,
+    ComponentType,
+    IGenericProps,
+    Omit,
+    ValidateParameters,
+    getTypeName,
+    isElementOfType,
+    isElementText,
+    unwrapFragment,
+    validateComponent,
+};

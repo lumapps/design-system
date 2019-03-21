@@ -61,8 +61,8 @@ describe(`<${LxDivider.displayName}>`, (): void => {
             const { hr, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
-            expect(hr.exists()).toEqual(true);
-            expect(hr.prop('className')).toContain(CLASSNAME);
+            expect(hr).toExist();
+            expect(hr).toHaveClassName(CLASSNAME);
         });
     });
 
@@ -75,9 +75,9 @@ describe(`<${LxDivider.displayName}>`, (): void => {
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
-                    expect(
-                        hr.hasClass(getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] })),
-                    ).toEqual(true);
+                    expect(hr).toHaveClassName(
+                        getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
+                    );
                 },
             );
         });
@@ -90,24 +90,23 @@ describe(`<${LxDivider.displayName}>`, (): void => {
 
             const { hr }: ISetup = setup(modifiedProps);
 
-            expect(
-                hr.hasClass(getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] })),
-            ).toEqual(true);
-            expect(
-                hr.hasClass(getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] })),
-            ).toEqual(false);
+            expect(hr).toHaveClassName(
+                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),
+            );
+            expect(hr).not.toHaveClassName(
+                getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
+            );
         });
 
         it('should forward any CSS class', (): void => {
-            const testedProp: string = 'className';
             const modifiedProps: ISetupProps = {
-                [testedProp]: 'component component--is-tested',
+                className: 'component component--is-tested',
             };
 
             const { hr }: ISetup = setup(modifiedProps);
 
-            expect(hr.prop(testedProp)).toContain(CLASSNAME);
-            expect(hr.prop(testedProp)).toContain(modifiedProps[testedProp]);
+            expect(hr).toHaveClassName(CLASSNAME);
+            expect(hr).toHaveClassName(modifiedProps.className);
         });
 
         it('should forward any other prop', (): void => {
@@ -118,7 +117,7 @@ describe(`<${LxDivider.displayName}>`, (): void => {
 
             const { hr }: ISetup = setup(modifiedProps);
 
-            expect(hr.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(hr).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
     });
 

@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 1`] = `"You can only have <LxButton>s or <LxIconButton children in a <LxButtonGroup> (got 'LxIcon')!"`;
+exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 1`] = `"You can only have <LxIconButton> or <LxButton> children in <LxButtonGroup> (got <LxIcon>)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 2`] = `"You can only have <LxButton>s or <LxIconButton children in a <LxButtonGroup> (got 'span')!"`;
+exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 2`] = `"You can only have <LxIconButton> or <LxButton> children in <LxButtonGroup> (got <span>)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 3`] = `"You can only have <LxButton>s or <LxIconButton children in a <LxButtonGroup> (got 'span')!"`;
+exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 3`] = `"You can only have <LxIconButton> or <LxButton> children in <LxButtonGroup> (got <span>)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 4`] = `"You can only have <LxButton>s or <LxIconButton children in a <LxButtonGroup> (got 'LxIcon')!"`;
+exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 4`] = `"You can only have <LxIconButton> or <LxButton> children in <LxButtonGroup> (got <LxIcon>)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 5`] = `"Your <LxButtonGroup> must have exactly 2 children for the main button and the secondary button (got 3)!"`;
+exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 5`] = `"<LxButtonGroup> must have exactly 2 children (got 3)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 6`] = `"You can only have <LxButton>s or <LxIconButton children in a <LxButtonGroup> (got 'LxIcon')!"`;
+exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 6`] = `"You can only have <LxIconButton> or <LxButton> children in <LxButtonGroup> (got <LxIcon>)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 7`] = `"Your <LxButtonGroup> must have exactly 2 children for the main button and the secondary button (got 3)!"`;
+exports[`<LxButtonGroup> Conditions should fail when anything else than <LxButton>s or <LxIconButton> is passed as children 7`] = `"<LxButtonGroup> must have exactly 2 children (got 3)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when less than 2 children are given 1`] = `"Your <LxButtonGroup> must have exactly 2 children for the main button and the secondary button (got 1)!"`;
+exports[`<LxButtonGroup> Conditions should fail when less than 2 children are given 1`] = `"<LxButtonGroup> must have exactly 2 children (got 1)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when more than 2 children are given 1`] = `"Your <LxButtonGroup> must have exactly 2 children for the main button and the secondary button (got 3)!"`;
+exports[`<LxButtonGroup> Conditions should fail when more than 2 children are given 1`] = `"<LxButtonGroup> must have exactly 2 children (got 3)!"`;
 
-exports[`<LxButtonGroup> Conditions should fail when no child is given 1`] = `"Your <LxButtonGroup> must have exactly 2 children for the main button and the secondary button (got 0)!"`;
+exports[`<LxButtonGroup> Conditions should fail when no child is given 1`] = `"<LxButtonGroup> must have exactly 2 children (got 0)!"`;
 
 exports[`<LxButtonGroup> Snapshots and structure should render correctly a group button 1`] = `
 <div

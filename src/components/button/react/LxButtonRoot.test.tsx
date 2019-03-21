@@ -76,16 +76,16 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
             const { a, button, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
-            expect(a.exists()).toEqual(false);
-            expect(button.exists()).toEqual(true);
+            expect(a).not.toExist();
+            expect(button).toExist();
         });
 
         it('should render correctly as a link', (): void => {
             const { a, button, wrapper }: ISetup = setup({ href: TEST_URL });
             expect(wrapper).toMatchSnapshot();
 
-            expect(a.exists()).toEqual(true);
-            expect(button.exists()).toEqual(false);
+            expect(a).toExist();
+            expect(button).not.toExist();
         });
     });
 
@@ -94,14 +94,13 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('can be disabled', (): void => {
-            const testedProp: string = 'disabled';
             const modifiedProps: ISetupProps = {
-                [testedProp]: 'true',
+                disabled: 'true',
             };
 
             const { button }: ISetup = setup(modifiedProps);
 
-            expect(button.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(button).toBeDisabled();
 
             /////////////////////////////
 
@@ -109,7 +108,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
 
             const { a }: ISetup = setup(modifiedProps);
 
-            expect(a.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(a).toBeDisabled();
         });
 
         it('should use the given `href`', (): void => {
@@ -120,7 +119,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
 
             const { a }: ISetup = setup(modifiedProps);
 
-            expect(a.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
 
         it('should use the given `target`', (): void => {
@@ -132,18 +131,17 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
 
             const { a }: ISetup = setup(modifiedProps);
 
-            expect(a.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
 
         it('should forward any CSS class', (): void => {
-            const testedProp: string = 'className';
             const modifiedProps: ISetupProps = {
-                [testedProp]: 'component component--is-tested',
+                className: 'component component--is-tested',
             };
 
             const { button }: ISetup = setup(modifiedProps);
 
-            expect(button.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(button).toHaveClassName(modifiedProps.className);
 
             /////////////////////////////
 
@@ -151,7 +149,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
 
             const { a }: ISetup = setup(modifiedProps);
 
-            expect(a.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(a).toHaveClassName(modifiedProps.className);
         });
 
         it('should forward any other prop', (): void => {
@@ -162,7 +160,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
 
             const { button }: ISetup = setup(modifiedProps);
 
-            expect(button.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
 
             /////////////////////////////
 
@@ -170,7 +168,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
 
             const { a }: ISetup = setup(modifiedProps);
 
-            expect(a.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
     });
 
@@ -189,6 +187,8 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
             expect(onClick).toHaveBeenCalled();
 
             /////////////////////////////
+
+            onClick.mockClear();
 
             const { a } = setup({
                 href: TEST_URL,

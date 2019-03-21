@@ -1,18 +1,29 @@
 import React, { Fragment } from 'react';
 
-import { LxButton, LxButtonGroup, LxIcon, LxIconButton } from 'LumX';
+import {
+    LxButton,
+    LxButtonEmphasises,
+    LxButtonGroup,
+    LxButtonVariants,
+    LxDropdownButton,
+    LxIcon,
+    LxIconButton,
+    Sizes,
+    Themes,
+} from 'LumX';
 import { mdiCheck, mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
+
+import {} from 'LumX/components/lx-button/react/LxButton';
 
 /////////////////////////////
 
 /**
- * The <LxButton> demo component.
- * This component will display a demo of all possible configuration of the <LxButton>.
+ * The <LxIconButton> demo component.
+ * This component will display a demo of all possible configuration of the <LxIconButton>.
  */
 const LxButtonDemo = () => (
     <Fragment>
         {/* Theme light (m) */}
-
         <div className="p++ lx-theme-background-dark-L6">
             <LxButton>Default</LxButton>
 
@@ -24,18 +35,24 @@ const LxButtonDemo = () => (
             </LxButton>
 
             <LxButton>
-                <span>Dropdown</span>
+                <span>Handmade dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
+            <LxDropdownButton dropdown={<span>This is a dropdown</span>}>Dropdown button</LxDropdownButton>
+
             <LxButtonGroup>
-                <LxButton>Split</LxButton>
-                <LxButton variant="icon">
+                <LxButton>handmade splitted dropdown</LxButton>
+                <LxIconButton>
                     <LxIcon icon={mdiMenuDown} />
-                </LxButton>
+                </LxIconButton>
             </LxButtonGroup>
 
-            <LxButton variant="icon">
+            <LxDropdownButton isSplitted={true} dropdown={<span>This is a dropdown</span>}>
+                Splitted dropdown button
+            </LxDropdownButton>
+
+            <LxButton variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
@@ -45,371 +62,406 @@ const LxButtonDemo = () => (
         </div>
 
         <div className="p++ lx-theme-background-dark-L6">
-            <LxButton emphasis="medium">Default</LxButton>
+            <LxButton emphasis={LxButtonEmphasises.medium}>Default</LxButton>
 
-            <LxButton emphasis="medium" disabled={true}>
+            <LxButton emphasis={LxButtonEmphasises.medium} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton emphasis="medium">
+            <LxButton emphasis={LxButtonEmphasises.medium}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton emphasis="medium">
+            <LxButton emphasis={LxButtonEmphasises.medium}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
             <LxButtonGroup>
-                <LxButton emphasis="medium">Split</LxButton>
+                <LxButton emphasis={LxButtonEmphasises.medium}>Split</LxButton>
 
-                <LxButton emphasis="medium" variant="icon">
+                <LxIconButton emphasis={LxButtonEmphasises.medium}>
                     <LxIcon icon={mdiMenuDown} />
-                </LxButton>
+                </LxIconButton>
             </LxButtonGroup>
 
-            <LxButton emphasis="medium" variant="icon">
+            <LxButton emphasis={LxButtonEmphasises.medium} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton emphasis="medium">
+            <LxIconButton emphasis={LxButtonEmphasises.medium}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-L6">
-            <LxButton emphasis="low">Default</LxButton>
+            <LxButton emphasis={LxButtonEmphasises.low}>Default</LxButton>
 
-            <LxButton emphasis="low" disabled={true}>
+            <LxButton emphasis={LxButtonEmphasises.low} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton emphasis="low">
+            <LxButton emphasis={LxButtonEmphasises.low}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton emphasis="low">
-                <span>Dropdown</span>
-                <LxIcon icon={mdiMenuDown} />
-            </LxButton>
-
-            <LxButton emphasis="low" variant="icon">
-                <LxIcon icon={mdiPlus} />
-            </LxButton>
-
-            <LxIconButton emphasis="low">
-                <LxIcon icon={mdiCheck} />
-            </LxIconButton>
-        </div>
-
-        <div className="p++ lx-theme-background-dark-L6">
-            <LxButton size="s">Default</LxButton>
-
-            <LxButton size="s" disabled={true}>
-                Disabled
-            </LxButton>
-
-            <LxButton size="s">
-                <LxIcon icon={mdiPencil} />
-                <span>With Icon</span>
-            </LxButton>
-
-            <LxButton size="s">
+            <LxButton emphasis={LxButtonEmphasises.low}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
             <LxButtonGroup>
-                <LxButton size="s">Split</LxButton>
+                <LxButton emphasis={LxButtonEmphasises.low}>Split</LxButton>
 
-                <LxButton size="s" variant="icon">
+                <LxIconButton emphasis={LxButtonEmphasises.low}>
                     <LxIcon icon={mdiMenuDown} />
-                </LxButton>
+                </LxIconButton>
             </LxButtonGroup>
 
-            <LxButton size="s" variant="icon">
+            <LxButton emphasis={LxButtonEmphasises.low} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton size="s">
+            <LxIconButton emphasis={LxButtonEmphasises.low}>
+                <LxIcon icon={mdiCheck} />
+            </LxIconButton>
+        </div>
+
+        <div className="p++ lx-theme-background-dark-L6">
+            <LxButton size={Sizes.s}>Default</LxButton>
+
+            <LxButton size={Sizes.s} disabled={true}>
+                Disabled
+            </LxButton>
+
+            <LxButton size={Sizes.s}>
+                <LxIcon icon={mdiPencil} />
+                <span>With Icon</span>
+            </LxButton>
+
+            <LxButton size={Sizes.s}>
+                <span>Dropdown</span>
+                <LxIcon icon={mdiMenuDown} />
+            </LxButton>
+
+            <LxButtonGroup>
+                <LxButton size={Sizes.s}>Split</LxButton>
+
+                <LxIconButton size={Sizes.s}>
+                    <LxIcon icon={mdiMenuDown} />
+                </LxIconButton>
+            </LxButtonGroup>
+
+            <LxButton size={Sizes.s} variant={LxButtonVariants.icon}>
+                <LxIcon icon={mdiPlus} />
+            </LxButton>
+
+            <LxIconButton size={Sizes.s}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         {/* Theme light (s) */}
-
         <div className="p++ lx-theme-background-dark-L6">
-            <LxButton emphasis="medium" size="s">
+            <LxButton emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 Default
             </LxButton>
 
-            <LxButton emphasis="medium" size="s" disabled={true}>
+            <LxButton emphasis={LxButtonEmphasises.medium} size={Sizes.s} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton emphasis="medium" size="s">
+            <LxButton emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton emphasis="medium" size="s">
+            <LxButton emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
             <LxButtonGroup>
-                <LxButton emphasis="medium" size="s">
+                <LxButton emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                     Split
                 </LxButton>
 
-                <LxButton emphasis="medium" size="s" variant="icon">
+                <LxIconButton emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                     <LxIcon icon={mdiMenuDown} />
-                </LxButton>
+                </LxIconButton>
             </LxButtonGroup>
 
-            <LxButton emphasis="medium" size="s" variant="icon">
+            <LxButton emphasis={LxButtonEmphasises.medium} size={Sizes.s} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton emphasis="medium" size="s">
+            <LxIconButton emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-L6">
-            <LxButton emphasis="low" size="s">
+            <LxButton emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 Default
             </LxButton>
 
-            <LxButton emphasis="low" size="s" disabled={true}>
+            <LxButton emphasis={LxButtonEmphasises.low} size={Sizes.s} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton emphasis="low" size="s">
+            <LxButton emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton emphasis="low" size="s">
+            <LxButton emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            <LxButton emphasis="low" size="s" variant="icon">
+            <LxButtonGroup>
+                <LxButton emphasis={LxButtonEmphasises.low} size={Sizes.s}>
+                    Split
+                </LxButton>
+
+                <LxIconButton emphasis={LxButtonEmphasises.low} size={Sizes.s}>
+                    <LxIcon icon={mdiMenuDown} />
+                </LxIconButton>
+            </LxButtonGroup>
+
+            <LxButton emphasis={LxButtonEmphasises.low} size={Sizes.s} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton emphasis="low" size="s">
+            <LxIconButton emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         {/* Theme dark (m) */}
-
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton theme="dark">Default</LxButton>
+            <LxButton theme={Themes.dark}>Default</LxButton>
 
-            <LxButton theme="dark" disabled={true}>
+            <LxButton theme={Themes.dark} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton theme="dark">
+            <LxButton theme={Themes.dark}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton theme="dark">
+            <LxButton theme={Themes.dark}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
             <LxButtonGroup>
-                <LxButton theme="dark">Split</LxButton>
+                <LxButton theme={Themes.dark}>Split</LxButton>
 
-                <LxButton theme="dark" variant="icon">
+                <LxIconButton theme={Themes.dark}>
                     <LxIcon icon={mdiMenuDown} />
-                </LxButton>
+                </LxIconButton>
             </LxButtonGroup>
 
-            <LxButton theme="dark" variant="icon">
+            <LxButton theme={Themes.dark} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton theme="dark">
+            <LxIconButton theme={Themes.dark}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton color="light" emphasis="medium">
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium}>
                 Default
             </LxButton>
 
-            <LxButton color="light" emphasis="medium" disabled={true}>
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton color="light" emphasis="medium">
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton color="light" emphasis="medium">
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
             <LxButtonGroup>
-                <LxButton color="light" emphasis="medium">
+                <LxButton color="light" emphasis={LxButtonEmphasises.medium}>
                     Split
                 </LxButton>
 
-                <LxButton color="light" emphasis="medium" variant="icon">
+                <LxIconButton color="light" emphasis={LxButtonEmphasises.medium}>
                     <LxIcon icon={mdiMenuDown} />
-                </LxButton>
+                </LxIconButton>
             </LxButtonGroup>
 
-            <LxButton color="light" emphasis="medium" variant="icon">
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton color="light" emphasis="medium">
+            <LxIconButton color="light" emphasis={LxButtonEmphasises.medium}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton color="light" emphasis="low">
+            <LxButton color="light" emphasis={LxButtonEmphasises.low}>
                 Default
             </LxButton>
 
-            <LxButton color="light" emphasis="low" disabled={true}>
+            <LxButton color="light" emphasis={LxButtonEmphasises.low} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton color="light" emphasis="low">
+            <LxButton color="light" emphasis={LxButtonEmphasises.low}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton color="light" emphasis="low">
+            <LxButton color="light" emphasis={LxButtonEmphasises.low}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            <LxButton color="light" emphasis="low" variant="icon">
+            <LxButtonGroup>
+                <LxButton color="light" emphasis={LxButtonEmphasises.low}>
+                    Split
+                </LxButton>
+
+                <LxIconButton color="light" emphasis={LxButtonEmphasises.low}>
+                    <LxIcon icon={mdiMenuDown} />
+                </LxIconButton>
+            </LxButtonGroup>
+
+            <LxButton color="light" emphasis={LxButtonEmphasises.low} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton color="light" emphasis="low">
+            <LxIconButton color="light" emphasis={LxButtonEmphasises.low}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         {/* Theme dark (s) */}
-
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton size="s" theme="dark">
+            <LxButton size={Sizes.s} theme={Themes.dark}>
                 Default
             </LxButton>
 
-            <LxButton size="s" theme="dark" disabled={true}>
+            <LxButton size={Sizes.s} theme={Themes.dark} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton size="s" theme="dark">
+            <LxButton size={Sizes.s} theme={Themes.dark}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton size="s" theme="dark">
+            <LxButton size={Sizes.s} theme={Themes.dark}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
             <LxButtonGroup>
-                <LxButton size="s" theme="dark">
+                <LxButton size={Sizes.s} theme={Themes.dark}>
                     Split
                 </LxButton>
 
-                <LxButton size="s" theme="dark" variant="icon">
+                <LxIconButton size={Sizes.s} theme={Themes.dark}>
                     <LxIcon icon={mdiMenuDown} />
-                </LxButton>
+                </LxIconButton>
             </LxButtonGroup>
 
-            <LxButton size="s" theme="dark" variant="icon">
+            <LxButton size={Sizes.s} theme={Themes.dark} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton size="s" theme="dark">
+            <LxIconButton size={Sizes.s} theme={Themes.dark}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton color="light" emphasis="medium" size="s">
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 Default
             </LxButton>
 
-            <LxButton color="light" emphasis="medium" size="s" disabled={true}>
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton color="light" emphasis="medium" size="s">
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton color="light" emphasis="medium" size="s">
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
             <LxButtonGroup>
-                <LxButton color="light" emphasis="medium" size="s">
+                <LxButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                     Split
                 </LxButton>
 
-                <LxButton color="light" emphasis="medium" size="s" variant="icon">
+                <LxIconButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                     <LxIcon icon={mdiMenuDown} />
-                </LxButton>
+                </LxIconButton>
             </LxButtonGroup>
 
-            <LxButton color="light" emphasis="medium" size="s" variant="icon">
+            <LxButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton color="light" emphasis="medium" size="s">
+            <LxIconButton color="light" emphasis={LxButtonEmphasises.medium} size={Sizes.s}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>
 
         <div className="p++ lx-theme-background-dark-N">
-            <LxButton color="light" emphasis="low" size="s">
+            <LxButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 Default
             </LxButton>
 
-            <LxButton color="light" emphasis="low" size="s" disabled={true}>
+            <LxButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s} disabled={true}>
                 Disabled
             </LxButton>
 
-            <LxButton color="light" emphasis="low" size="s">
+            <LxButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 <LxIcon icon={mdiPencil} />
                 <span>With Icon</span>
             </LxButton>
 
-            <LxButton color="light" emphasis="low" size="s">
+            <LxButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 <span>Dropdown</span>
                 <LxIcon icon={mdiMenuDown} />
             </LxButton>
 
-            <LxButton color="light" emphasis="low" size="s" variant="icon">
+            <LxButtonGroup>
+                <LxButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s}>
+                    Split
+                </LxButton>
+
+                <LxIconButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s}>
+                    <LxIcon icon={mdiMenuDown} />
+                </LxIconButton>
+            </LxButtonGroup>
+
+            <LxButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s} variant={LxButtonVariants.icon}>
                 <LxIcon icon={mdiPlus} />
             </LxButton>
 
-            <LxIconButton color="light" emphasis="low" size="s">
+            <LxIconButton color="light" emphasis={LxButtonEmphasises.low} size={Sizes.s}>
                 <LxIcon icon={mdiCheck} />
             </LxIconButton>
         </div>

@@ -1,15 +1,12 @@
-import { IGenericProps, unwrapFragment } from 'LumX/react/utils';
+import { IGenericProps, validateComponent } from 'LumX/react/utils';
 
 /////////////////////////////
 
-import React, { Children } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import get from 'lodash/get';
-
 import { LxIconButton } from 'LumX';
-import { isElementOfType } from 'LumX/core/react/utils';
 
 import { CLASSNAME as LXBUTTON_CLASSNAME, Color, Colors, LxButton, Size, Sizes, Theme, Themes } from './LxButton';
 
@@ -19,6 +16,13 @@ import { CLASSNAME as LXBUTTON_CLASSNAME, Color, Colors, LxButton, Size, Sizes, 
  */
 interface IProps extends IGenericProps {}
 type LxButtonGroupProps = IProps;
+
+/////////////////////////////
+
+/**
+ * Define the types of the default props.
+ */
+interface ILxButtonGroupDefaultPropsType extends Partial<LxButtonGroupProps> {}
 
 /////////////////////////////
 //                         //
@@ -35,6 +39,24 @@ type LxButtonGroupProps = IProps;
  */
 const CLASSNAME: string = `${LXBUTTON_CLASSNAME}-group`;
 
+/**
+ * The display name of the component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const COMPONENT_NAME: string = 'LxButtonGroup';
+
+/**
+ * The default value of props.
+ *
+ * @type {ILxButtonGroupDefaultPropsType}
+ * @constant
+ * @readonly
+ */
+const DEFAULT_PROPS: ILxButtonGroupDefaultPropsType = {};
+
 /////////////////////////////
 //                         //
 //    Private functions    //
@@ -45,37 +67,16 @@ const CLASSNAME: string = `${LXBUTTON_CLASSNAME}-group`;
  * Validate the <LxButtonGroup> component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {IProps}  props The children and props of the <LxButtonGroup> component.
- * @return {React.ReactNode} The processed children of the component.
+ * @param  {LxButtonGroupProps} props The children and props of the <LxButtonGroup> component.
+ * @return {React.ReactNode}    The processed children of the component.
  */
-function _validate({ children }: IProps): React.ReactNode {
-    let newChildren: React.ReactNode = children;
-
-    newChildren = unwrapFragment(newChildren);
-
-    const childrenCount = Children.count(newChildren);
-    if (childrenCount !== 2) {
-        throw new Error(
-            `Your <LxButtonGroup> must have exactly 2 children for the main button and the secondary button (got ${childrenCount})!`,
-        );
-    }
-
-    Children.forEach(
-        newChildren,
-        (child: any): void => {
-            if (isElementOfType(child, LxButton) || isElementOfType(child, LxIconButton)) {
-                return;
-            }
-
-            throw new Error(
-                `You can only have <${LxButton.displayName}>s or <${
-                    LxIconButton.displayName
-                } children in a <LxButtonGroup> (got '${get(child.type, 'name', child.type) || `'${child}'`}')!`,
-            );
-        },
-    );
-
-    return newChildren;
+function _validate(props: LxButtonGroupProps): React.ReactNode {
+    return validateComponent(COMPONENT_NAME, {
+        allowedTypes: [LxIconButton, LxButton],
+        maxChildren: 2,
+        minChildren: 2,
+        props,
+    });
 }
 
 /////////////////////////////
@@ -87,7 +88,11 @@ function _validate({ children }: IProps): React.ReactNode {
  *
  * @return {JSX.Element} The <LxButtonGroup> component.
  */
-const LxButtonGroup: React.FC<IProps> = ({ children, className = '', ...props }: IProps): JSX.Element => {
+const LxButtonGroup: React.FC<LxButtonGroupProps> = ({
+    children,
+    className = '',
+    ...props
+}: LxButtonGroupProps): JSX.Element => {
     const newChildren = _validate({ children });
 
     return (
@@ -96,8 +101,8 @@ const LxButtonGroup: React.FC<IProps> = ({ children, className = '', ...props }:
         </div>
     );
 };
-LxButtonGroup.displayName = 'LxButtonGroup';
+LxButtonGroup.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, Color, Colors, LxButtonGroup, LxButtonGroupProps, Size, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Color, Colors, LxButtonGroup, LxButtonGroupProps, Size, Sizes, Theme, Themes };

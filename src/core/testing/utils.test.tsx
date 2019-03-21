@@ -1,8 +1,13 @@
-import { ShallowWrapper } from 'enzyme';
+import { ReactWrapper, ShallowWrapper } from 'enzyme';
 
 import { IGenericProps } from 'LumX/react/utils';
 
 /////////////////////////////
+
+/**
+ * The type of a wrapper that can be
+ */
+type Wrapper = ShallowWrapper | ReactWrapper;
 
 /**
  * Defines what is always returned by the setup function.
@@ -17,9 +22,9 @@ interface ICommonSetup {
     /**
      * The Enzyme wrapper around of the tested component.
      */
-    wrapper: ShallowWrapper;
+    wrapper: Wrapper;
 }
 
 /////////////////////////////
 
-export { ICommonSetup };
+export { ICommonSetup, Wrapper };

@@ -6,12 +6,18 @@ import React, { Children } from 'react';
 
 import classNames from 'classnames';
 
-import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 
-import { LxIcon } from 'LumX';
-import { isElementOfType, isElementText, unwrapFragment } from 'LumX/core/react/utils';
+import { LxIcon, LxIconButton } from 'LumX';
+import {
+    ChildTransformParameters,
+    ChildValidateParameters,
+    isElementOfType,
+    isElementText,
+    Omit,
+    validateComponent,
+} from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 import { LxButtonRoot, LxButtonRootProps } from './LxButtonRoot';
@@ -29,7 +35,7 @@ enum Emphasises {
 type Emphasis = Emphasises;
 
 /**
- * The authorized values for the `vairant` prop.
+ * The authorized values for the `variant` prop.
  */
 enum Variants {
     button = 'button',
@@ -71,6 +77,15 @@ interface IProps {
 type LxButtonProps = IProps & LxButtonRootProps;
 
 /////////////////////////////
+
+/**
+ * Define the types of the default props.
+ */
+interface ILxButtonDefaultPropsType extends Partial<Omit<LxButtonProps, 'color'>> {
+    color: ComplexPropDefault<Color>;
+}
+
+/////////////////////////////
 //                         //
 //    Public attributes    //
 //                         //
@@ -85,127 +100,14 @@ type LxButtonProps = IProps & LxButtonRootProps;
  */
 const CLASSNAME: string = 'lx-button';
 
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
 /**
- * Validate the <LxButton> component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
+ * The display name of the component.
  *
- * @param  {LxButtonProps}   props The children and props of the <LxButton> component.
- * @return {React.ReactNode} The processed children of the component.
+ * @type {string}
+ * @constant
+ * @readonly
  */
-function _validate({ children, variant }: LxButtonProps): React.ReactNode {
-    let newChildren: React.ReactNode = children;
-
-    let childrenCount: number = Children.count(newChildren);
-    if (childrenCount === 0) {
-        throw new Error('Your <LxButton> must have at least 1 child for the label or the icon (got 0)!');
-    }
-
-    newChildren = unwrapFragment(newChildren);
-    childrenCount = Children.count(newChildren);
-
-    if (variant === Variants.button) {
-        if (childrenCount > 3) {
-            throw new Error(
-                `You cannot have more than 3 children (an icon, a label, another icon) in a 'button' \`variant\` of <LxButton> (got ${childrenCount})!`,
-            );
-        }
-
-        let index: number = -1;
-        const childrenTypes: string[] = [];
-        newChildren = Children.map(
-            newChildren,
-            (child: any): React.ReactElement => {
-                index++;
-
-                let newChild: React.ReactElement = child;
-                if (isString(child)) {
-                    newChild = <span>{child}</span>;
-                }
-
-                const isChildText: boolean = isElementText(newChild);
-                const isChildIcon: boolean = isElementOfType(newChild, LxIcon);
-
-                if (!isChildText && !isChildIcon) {
-                    throw new Error(
-                        `The children of a <LxButton> must be either of type text, <span> or <LxIcon> (got '${get(
-                            newChild.type,
-                            'name',
-                            newChild.type,
-                        ) || `'${child}'`}}')!`,
-                    );
-                }
-
-                childrenTypes[index] = isChildText ? 'text' : 'icon';
-
-                if (isChildText && index > 0 && childrenTypes[index - 1] === 'text') {
-                    throw new Error(
-                        `You cannot have more than 1 text or <span> child (for the label) in a 'button' \`variant\` of <LxButton> (got at least 2)!`,
-                    );
-                }
-
-                if (isChildIcon) {
-                    if (childrenCount === 1) {
-                        console.warn(
-                            "If you want to display an icon button, you should use the 'icon' `variant` of the <LxButton> instead of the 'button' `variant`\nYou should even consider using the <LxIconButton> component instead.",
-                        );
-                    }
-
-                    if (index > 0 && childrenTypes[index - 1] === 'icon') {
-                        throw new Error(
-                            `You cannot have 2 icons children following in a 'button' \`variant\` of <LxButton>, there must be 1 text or <span> children (for the label) between them!`,
-                        );
-                    }
-                }
-
-                return newChild;
-            },
-        );
-    } else if (variant === Variants.icon) {
-        if (childrenCount > 1) {
-            throw new Error(
-                `You cannot have more than 1 child in an 'icon' \`variant\` of <LxButton> (got ${childrenCount})!`,
-            );
-        }
-
-        Children.forEach(
-            newChildren,
-            (child: any): void => {
-                if (isElementOfType(child, LxIcon)) {
-                    return;
-                }
-
-                throw new Error(
-                    `You can only have a <LxIcon> child in an 'icon' \`variant\` of <LxButton> (got ${get(
-                        child.type,
-                        'name',
-                        child.type,
-                    ) || `'${child}'`})!`,
-                );
-            },
-        );
-    }
-
-    return newChildren;
-}
-
-/////////////////////////////
-
-/**
- * Define the types of the default props.
- */
-interface ILxButtonDefaultPropsType {
-    color: ComplexPropDefault<Color>;
-    emphasis: Emphasis;
-    size: Size;
-    theme: Theme;
-    variant: Variant;
-}
+const COMPONENT_NAME: string = 'LxButton';
 
 /**
  * The default value of props.
@@ -224,6 +126,97 @@ const DEFAULT_PROPS: ILxButtonDefaultPropsType = {
     theme: Themes.light,
     variant: Variants.button,
 };
+
+/////////////////////////////
+//                         //
+//    Private functions    //
+//                         //
+/////////////////////////////
+
+/**
+ * Transform the text children to <span>s when validating the children of the <LxButton> component.
+ *
+ * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
+ * @return {React.ReactElement}       The transformed children (or the original one if there is no transformation to
+ *                                    do).
+ */
+function _transformChild({ child }: ChildTransformParameters): React.ReactElement {
+    if (isString(child)) {
+        return <span>{child}</span>;
+    }
+
+    return child;
+}
+
+/**
+ * Returns a closure for the function to validate the children of the <LxButton> component.
+ * This closure will help remembering the types of the previous children. This list will help to determine if there is
+ * no excess children of a given type.
+ *
+ * @param  {Array<string>} childrenTypes The list of types of the previously validated children.
+ * @return {Function}      The closured function to validate the children of the <LxButton> component.
+ */
+function _validateChild(childrenTypes: string[]): (params: ChildValidateParameters) => void {
+    /**
+     * Validate the children of the <LxButton> component
+     *
+     * @param {ChildValidateParameters} params The parameters received from the `validateComponent` function.
+     */
+    return ({ child, childrenCount, index }: ChildValidateParameters): void => {
+        const isChildText: boolean = isElementText(child) || isElementOfType(child, <span />);
+        const isChildIcon: boolean = isElementOfType(child, LxIcon);
+
+        const alreadyHasSomeText: boolean = index === 0 ? false : childrenTypes.some((type: string) => type === 'text');
+        childrenTypes[index] = isChildText ? 'text' : 'icon';
+
+        if (isChildText && alreadyHasSomeText) {
+            throw new Error(
+                `You cannot have more than 1 label in a 'button' \`variant\` of <${COMPONENT_NAME}> (got at least 2)!`,
+            );
+        }
+
+        if (!isChildIcon) {
+            return;
+        }
+
+        if (childrenCount === 1) {
+            console.warn(
+                `If you want to display an icon button, you should use the 'icon' \`variant\` of the <${COMPONENT_NAME}> instead of the 'button' \`variant\`\nYou should even consider using the <${
+                    LxIconButton.displayName
+                }> component instead.`,
+            );
+        }
+
+        const isPreviousChildIcon: boolean = childrenTypes[index - 1] === 'icon';
+        if (index > 0 && isPreviousChildIcon) {
+            throw new Error(
+                `You cannot have 2 following icons children in a 'button' \`variant\` of <${COMPONENT_NAME}>, there must be a label between them!`,
+            );
+        }
+    };
+}
+
+/**
+ * Validate the <LxButton> component props and children.
+ * Also, sanitize, cleanup and format the children and return the processed ones.
+ *
+ * @param  {LxButtonProps}   props The children and props of the <LxButton> component.
+ * @return {React.ReactNode} The processed children of the component.
+ */
+function _validate(props: LxButtonProps): React.ReactNode {
+    const childrenTypes: string[] = [];
+
+    return validateComponent(COMPONENT_NAME, {
+        allowedTypes: props.variant === Variants.icon ? [LxIcon] : ['text', <span />, LxIcon],
+        maxChildren: props.variant === Variants.icon ? 1 : 3,
+        minChildren: 1,
+        props,
+        transformChild: props.variant === Variants.button ? _transformChild : undefined,
+        validateChild: props.variant === Variants.button ? _validateChild(childrenTypes) : undefined,
+    });
+}
+
+/////////////////////////////
 
 /**
  * Displays a button.
@@ -281,7 +274,7 @@ const LxButton: React.FC<LxButtonProps> = ({
         </LxButtonRoot>
     );
 };
-LxButton.displayName = 'LxButton';
+LxButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 

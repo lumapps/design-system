@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 
 import { shallow, ShallowWrapper } from 'enzyme';
+import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { LxIcon } from 'LumX';
+import { LxButton, LxButtonVariants, LxIcon } from 'LumX';
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
-import { LxButton, Variants } from './LxButton';
 import { CLASSNAME, Emphasises, LxIconButton, LxIconButtonProps, Sizes, Themes } from './LxIconButton';
 
 /////////////////////////////
@@ -71,10 +71,12 @@ describe(`<${LxIconButton.displayName}>`, () => {
             const { button, icon, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
-            expect(button.exists()).toEqual(true);
-            expect(icon.exists()).toEqual(true);
+            expect(button).toExist();
+
+            expect(icon).toExist();
+            expect(icon).toHaveClassName(CLASSNAME);
+
             expect(icon.length).toEqual(1);
-            expect(icon.prop('className')).toContain(CLASSNAME);
         });
     });
 
@@ -85,32 +87,31 @@ describe(`<${LxIconButton.displayName}>`, () => {
         it('should use default props', (): void => {
             const { button }: ISetup = setup();
 
-            expect(button.prop('variant')).toEqual(Variants.icon);
+            expect(button).toHaveProp('variant', LxButtonVariants.icon);
         });
 
-        it("should user 'icon' `variant` whatever the given prop is", (): void => {
-            // Disable the display of the warn message in the console.
-            global.console.warn = jest.fn();
+        it("should use 'icon' `variant` whatever the given `variant` prop is", (): void => {
+            mockConsole();
 
-            const testedProp: string = 'variant';
             const modifiedProps: ISetupProps = {
-                [testedProp]: Variants.icon,
+                // We known that <LxIconButton> could not have a `variant` prop.
+                // @ts-ignore
+                variant: LxButtonVariants.icon,
             };
 
             let { button }: ISetup = setup(modifiedProps);
 
-            expect(button.prop(testedProp)).toEqual(Variants.icon);
+            expect(button).toHaveProp('variant', LxButtonVariants.icon);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = Variants.button;
+            // We known that <LxIconButton> could not have a `variant` prop.
+            // @ts-ignore
+            modifiedProps.variant = LxButtonVariants.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button.prop(testedProp)).toEqual(Variants.icon);
-
-            // @ts-ignore
-            global.console.warn.mockRestore();
+            expect(button).toHaveProp('variant', LxButtonVariants.icon);
         });
 
         it(`should forward any <${LxButton.displayName}> prop (except \`variant\`)`, (): void => {
@@ -122,25 +123,23 @@ describe(`<${LxIconButton.displayName}>`, () => {
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
-            if (modifiedProps.emphasis !== Emphasises.high) {
-                delete modifiedProps.theme;
-            }
+
             const { button }: ISetup = setup(modifiedProps);
 
             Object.keys(modifiedProps).forEach((prop: string) => {
-                expect(button.prop(prop)).toEqual(modifiedProps[prop]);
+                expect(button).toHaveProp(prop, modifiedProps[prop]);
             });
         });
 
         it('should forward any CSS class', (): void => {
-            const testedProp: string = 'className';
             const modifiedProps: ISetupProps = {
-                [testedProp]: 'component component--is-tested',
+                className: 'component component--is-tested',
             };
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button, icon }: ISetup = setup(modifiedProps);
 
-            expect(button.prop(testedProp)).toContain(modifiedProps[testedProp]);
+            expect(icon).toHaveClassName(CLASSNAME);
+            expect(button).toHaveClassName(modifiedProps.className);
         });
 
         it('should forward any other props', (): void => {
@@ -151,7 +150,7 @@ describe(`<${LxIconButton.displayName}>`, () => {
 
             const { button }: ISetup = setup(modifiedProps);
 
-            expect(button.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
     });
 
@@ -202,6 +201,8 @@ describe(`<${LxIconButton.displayName}>`, () => {
         });
 
         it(`should fail when anything else than <${LxIcon.displayName}> is given as child`, (): void => {
+            mockConsole('debug');
+
             const children: React.ReactNode = <div>toto</div>;
 
             expect(
@@ -214,17 +215,17 @@ describe(`<${LxIconButton.displayName}>`, () => {
         it(`should warn the user when rendering a <${LxIconButton.displayName}> with a \`variant\``, (): void => {
             global.console.warn = jest.fn();
 
-            // We know that a <LxIconButton> cannot receive a `variant`, but for the purpose of the test we ignore this.
+            // We know that a <LxIconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: Variants.icon });
+            setup({ variant: LxButtonVariants.icon });
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
             global.console.warn.mockClear();
 
-            // We know that a <LxIconButton> cannot receive a `variant`, but for the purpose of the test we ignore this.
+            // We know that a <LxIconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: Variants.button });
+            setup({ variant: LxButtonVariants.button });
             expect(global.console.warn).toHaveBeenCalled();
         });
     });

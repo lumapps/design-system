@@ -1,5 +1,5 @@
 import { Color, Colors, Size, Sizes } from 'LumX/components';
-import { IGenericProps } from 'LumX/core/react/utils';
+import { IGenericProps, validateComponent, ValidateParameters } from 'LumX/core/react/utils';
 
 /////////////////////////////
 
@@ -35,6 +35,13 @@ interface IProps extends IGenericProps {
 type LxIconProps = IProps;
 
 /////////////////////////////
+
+/**
+ * Define the types of the default props.
+ */
+interface ILxIconDefaultPropsType extends Partial<LxIconProps> {}
+
+/////////////////////////////
 //                         //
 //    Public attributes    //
 //                         //
@@ -49,32 +56,14 @@ type LxIconProps = IProps;
  */
 const CLASSNAME: string = 'lx-icon';
 
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
 /**
- * Validate the <LxIcon> component props.
+ * The display name of the component.
  *
- * @param  {LxIconProps}   props The props of the <LxIcon> component.
+ * @type {string}
+ * @constant
+ * @readonly
  */
-function _validate({ icon }: LxIconProps): void {
-    if (isEmpty(icon)) {
-        throw new Error('Your <LxIcon> must have an `icon` prop!');
-    }
-}
-
-/////////////////////////////
-
-/**
- * Define the types of the default props.
- */
-interface ILxIconDefaultPropsType {
-    color: Color;
-    size: Size;
-}
+const COMPONENT_NAME: string = 'LxIcon';
 
 /**
  * The default value of props.
@@ -83,23 +72,48 @@ interface ILxIconDefaultPropsType {
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxIconDefaultPropsType = {
-    color: Colors.dark,
-    size: Sizes.m,
-};
+const DEFAULT_PROPS: ILxIconDefaultPropsType = {};
+
+/////////////////////////////
+//                         //
+//    Private functions    //
+//                         //
+/////////////////////////////
+
+/**
+ * Globally validate the <LxDropdownButton> component before validating the children.
+ *
+ * @param {ValidateParameters} props The properties of the component.
+ */
+function _preValidate({ props }: ValidateParameters): void {
+    if (!isEmpty(props.icon)) {
+        return;
+    }
+
+    throw new Error('Your <LxIcon> must have an `icon` prop!');
+}
+
+/**
+ * Validate the <LxIcon> component props.
+ *
+ * @param  {LxIconProps}     props The props of the <LxIcon> component.
+ * @return {React.ReactNode} The processed children of the component.
+ */
+function _validate(props: LxIconProps): React.ReactNode {
+    return validateComponent(COMPONENT_NAME, {
+        preValidate: _preValidate,
+        props,
+    });
+}
+
+/////////////////////////////
 
 /**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
  *
  * @return {JSX.Element} The <LxIcon> component
  */
-const LxIcon: React.FC<LxIconProps> = ({
-    className,
-    color = DEFAULT_PROPS.color,
-    icon,
-    size = DEFAULT_PROPS.size,
-    ...props
-}: LxIconProps): JSX.Element => {
+const LxIcon: React.FC<LxIconProps> = ({ className, color, icon, size, ...props }: LxIconProps): JSX.Element => {
     _validate({ color, icon, size, ...props });
 
     return (
@@ -117,7 +131,7 @@ const LxIcon: React.FC<LxIconProps> = ({
         </i>
     );
 };
-LxIcon.displayName = 'LxIcon';
+LxIcon.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 

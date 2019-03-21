@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { shallow, ShallowWrapper } from 'enzyme';
+import mockConsole from 'jest-mock-console';
 
 import { LxButton, LxIcon, LxIconButton } from 'LumX';
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
@@ -69,9 +70,10 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
             const { group, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
-            expect(group.exists()).toEqual(true);
+            expect(group).toExist();
+            expect(group).toHaveClassName(CLASSNAME);
+
             expect(group.children().length).toEqual(2);
-            expect(group.prop('className')).toContain(CLASSNAME);
         });
     });
 
@@ -80,14 +82,14 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should forward any CSS class', (): void => {
-            const testedProp: string = 'className';
             const modifiedProps: ISetupProps = {
-                [testedProp]: 'component component--is-tested',
+                className: 'component component--is-tested',
             };
 
             const { group }: ISetup = setup(modifiedProps);
 
-            expect(group.prop(testedProp)).toContain(modifiedProps[testedProp]);
+            expect(group).toHaveClassName(CLASSNAME);
+            expect(group).toHaveClassName(modifiedProps.className);
         });
 
         it('should forward any props', (): void => {
@@ -98,7 +100,7 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
 
             const { group }: ISetup = setup(modifiedProps);
 
-            expect(group.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(group).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
     });
 
@@ -146,6 +148,8 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
         it(`should fail when anything else than <${LxButton.displayName}>s or <${
             LxIconButton.displayName
         }> is passed as children`, (): void => {
+            mockConsole('debug');
+
             let children: React.ReactNode = (
                 <Fragment>
                     <LxIcon icon={mdiPlus} />

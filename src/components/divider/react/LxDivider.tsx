@@ -15,17 +15,6 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /////////////////////////////
 
 /**
- * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
- */
-const CLASSNAME: string = 'lx-divider';
-
-/////////////////////////////
-
-/**
  * Defines the props of the <LxDivider> component.
  */
 interface ILxDividerProps extends IGenericProps {
@@ -41,9 +30,13 @@ type LxDividerProps = ILxDividerProps;
 /**
  * Define the types of the default props.
  */
-interface ILxDividerDefaultPropsType {
-    theme: Theme;
-}
+interface ILxDividerDefaultPropsType extends Partial<LxDividerProps> {}
+
+/////////////////////////////
+//                         //
+//    Public attributes    //
+//                         //
+/////////////////////////////
 
 /**
  * The default value of props.
@@ -55,6 +48,27 @@ interface ILxDividerDefaultPropsType {
 const DEFAULT_PROPS: ILxDividerDefaultPropsType = {
     theme: Themes.light,
 };
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = 'lx-divider';
+
+/**
+ * The display name of the component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const COMPONENT_NAME: string = 'LxDivider';
+
+/////////////////////////////
+
 /**
  * Displays a divider.
  * This simply wraps a <hr> element.
@@ -68,7 +82,7 @@ const LxDivider: React.FC<LxDividerProps> = ({
 }: LxDividerProps): JSX.Element => {
     return <hr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props} />;
 };
-LxDivider.displayName = 'LxDivider';
+LxDivider.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 

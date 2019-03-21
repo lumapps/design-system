@@ -10,7 +10,7 @@ import { build, fake, oneOf } from 'test-data-bot';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, DEFAULT_PROPS, LxIcon, LxIconProps, Sizes } from './LxIcon';
+import { CLASSNAME, LxIcon, LxIconProps, Sizes } from './LxIcon';
 
 /////////////////////////////
 
@@ -75,11 +75,11 @@ describe(`<${LxIcon.displayName}>`, (): void => {
             const { i, path, svg, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
-            expect(i.exists()).toEqual(true);
-            expect(i.prop('className')).toContain(CLASSNAME);
+            expect(i).toExist();
+            expect(i).toHaveClassName(CLASSNAME);
 
-            expect(svg.exists()).toEqual(true);
-            expect(path.exists()).toEqual(true);
+            expect(svg).toExist();
+            expect(path).toExist();
         });
     });
 
@@ -87,14 +87,12 @@ describe(`<${LxIcon.displayName}>`, (): void => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
-        it('should use default props', (): void => {
+        it("shouldn't use any default props", (): void => {
             const { i }: ISetup = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach(
+            ['color', 'size'].forEach(
                 (prop: string): void => {
-                    expect(
-                        i.hasClass(getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] })),
-                    ).toEqual(true);
+                    expect(i).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: '' }));
                 },
             );
         });
@@ -113,26 +111,25 @@ describe(`<${LxIcon.displayName}>`, (): void => {
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
                     if (prop === 'icon') {
-                        expect(path.prop('d')).toEqual(modifiedProps[prop]);
+                        expect(path).toHaveProp('d', modifiedProps[prop]);
                     } else {
-                        expect(
-                            i.hasClass(getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] })),
-                        ).toEqual(true);
+                        expect(i).toHaveClassName(
+                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                        );
                     }
                 },
             );
         });
 
         it('should forward any CSS class', (): void => {
-            const testedProp: string = 'className';
             const modifiedProps: ISetupProps = {
-                [testedProp]: 'component component--is-tested',
+                className: 'component component--is-tested',
             };
 
             const { i }: ISetup = setup(modifiedProps);
 
-            expect(i.prop(testedProp)).toContain(CLASSNAME);
-            expect(i.prop(testedProp)).toContain(modifiedProps[testedProp]);
+            expect(i).toHaveClassName(CLASSNAME);
+            expect(i).toHaveClassName(modifiedProps.className);
         });
 
         it('should forward any other prop', (): void => {
@@ -143,7 +140,7 @@ describe(`<${LxIcon.displayName}>`, (): void => {
 
             const { i }: ISetup = setup(modifiedProps);
 
-            expect(i.prop(testedProp)).toEqual(modifiedProps[testedProp]);
+            expect(i).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
     });
 
@@ -157,7 +154,15 @@ describe(`<${LxIcon.displayName}>`, (): void => {
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', (): void => {
-        // Nothing to do here.
+        it('should fail when no `icon` is given', (): void => {
+            expect(
+                (): void => {
+                    // We know that icon must be given to <LxIcon>, but for the test, ignore it.
+                    // @ts-ignore
+                    setup({ icon: null });
+                },
+            ).toThrowErrorMatchingSnapshot();
+        });
     });
 
     /////////////////////////////

@@ -1,4 +1,4 @@
-import React, { Children, cloneElement, Fragment } from 'react';
+import React, { Children, cloneElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,7 +6,7 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 import { LxIcon } from 'LumX';
-import { isElementOfType, unwrapFragment } from 'LumX/core/react/utils';
+import { validateComponent, ValidateParameters } from 'LumX/core/react/utils';
 
 import {
     CLASSNAME as LXBUTTON_CLASSNAME,
@@ -43,6 +43,13 @@ interface IProps extends LxButtonProps {
 type LxIconButtonProps = IProps;
 
 /////////////////////////////
+
+/**
+ * Define the types of the default props.
+ */
+interface ILxIconButtonDefaultPropsType extends Partial<LxIconButtonProps> {}
+
+/////////////////////////////
 //                         //
 //    Public attributes    //
 //                         //
@@ -57,6 +64,24 @@ type LxIconButtonProps = IProps;
  */
 const CLASSNAME: string = `${LXBUTTON_CLASSNAME}__icon`;
 
+/**
+ * The display name of the component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const COMPONENT_NAME: string = 'LxIconButton';
+
+/**
+ * The default value of props.
+ *
+ * @type {ILxIconButtonDefaultPropsType}
+ * @constant
+ * @readonly
+ */
+const DEFAULT_PROPS: ILxIconButtonDefaultPropsType = {};
+
 /////////////////////////////
 //                         //
 //    Private functions    //
@@ -64,45 +89,37 @@ const CLASSNAME: string = `${LXBUTTON_CLASSNAME}__icon`;
 /////////////////////////////
 
 /**
+ * Globally validate the <LxDropdownButton> component before validating the children.
+ *
+ * @param {ValidateParameters} props The properties of the component.
+ */
+function _preValidate({ props }: ValidateParameters): void {
+    if (isEmpty(props.variant)) {
+        return;
+    }
+
+    console.warn(
+        `You shouldn't pass the \`variant\` prop in a <${COMPONENT_NAME}> as it's forced to 'icon' (got '${
+            props.variant
+        }')!`,
+    );
+}
+
+/**
  * Validate the <LxIconButton> component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {LxIconButtonProps}  props The children and props of the <LxButton> component.
- * @return {React.ReactNode} The processed children of the component.
+ * @param  {LxIconButtonProps} props The children and props of the <LxButton> component.
+ * @return {React.ReactNode}   The processed children of the component.
  */
-function _validate({ children, variant }: LxIconButtonProps): React.ReactNode {
-    const newChildren: React.ReactNode = unwrapFragment(children);
-
-    const childrenCount: number = Children.count(newChildren);
-    if (childrenCount === 0) {
-        throw new Error('Your <LxIconButton> must have at least 1 child for the icon (got 0)!');
-    }
-
-    if (childrenCount > 1) {
-        throw new Error(`You cannot have more than 1 child in a <LxIconButton> (got ${childrenCount})!`);
-    }
-
-    Children.forEach(
-        newChildren,
-        (child: any): void => {
-            if (isElementOfType(child, LxIcon)) {
-                return;
-            }
-
-            throw new Error(
-                `You can only have a <LxIcon> child in a <LxIconButton> (got '${get(child.type, 'name', child.type) ||
-                    `'${child}'`}')!`,
-            );
-        },
-    );
-
-    if (!isEmpty(variant)) {
-        console.warn(
-            `You shouldn't pass the 'variant' prop in a <LxIconButton> as it's forced to 'icon' (got '${variant}')!`,
-        );
-    }
-
-    return newChildren;
+function _validate(props: LxIconButtonProps): React.ReactNode {
+    return validateComponent(COMPONENT_NAME, {
+        allowedTypes: [LxIcon],
+        maxChildren: 1,
+        minChildren: 1,
+        preValidate: _preValidate,
+        props,
+    });
 }
 
 /////////////////////////////
@@ -124,10 +141,6 @@ const LxIconButton: React.FC<LxIconButtonProps> = ({ children, ...props }: LxIco
         <LxButton {...props} variant={Variants.icon}>
             {/* [XXX] Clement: Type of `child` should be React.ReactElement<LxIconProps>, but I didn't managed to make it work. */}
             {Children.map(children, (child: any) => {
-                if (get(child.type, 'name') !== LxIcon.displayName) {
-                    return <Fragment />;
-                }
-
                 return cloneElement(child, {
                     className: classNames(get(child.props, 'className', ''), CLASSNAME),
                 });
@@ -135,12 +148,13 @@ const LxIconButton: React.FC<LxIconButtonProps> = ({ children, ...props }: LxIco
         </LxButton>
     );
 };
-LxIconButton.displayName = 'LxIconButton';
+LxIconButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
 export {
     CLASSNAME,
+    DEFAULT_PROPS,
     Color,
     Colors,
     Emphasis,
