@@ -29,6 +29,8 @@ function babelSetup({ plugins = [], presets = [], options = {} } = {}) {
             [
                 '@babel/preset-env',
                 {
+                    // eslint-disable-next-line no-magic-numbers
+                    corejs: '3',
                     loose: true,
                     targets: ['last 2 versions', 'ie >= 11'],
                     useBuiltIns: 'usage',
