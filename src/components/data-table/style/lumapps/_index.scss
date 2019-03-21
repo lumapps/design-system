@@ -119,7 +119,7 @@
 
         #{$self}--has-thumbnail #{$self}__row--is-enabled:hover &,
         #{$self}--is-selectable #{$self}__row--is-selected & {
-            display: flex;
+            display: inline-block;
         }
     }
 
