@@ -1,12 +1,10 @@
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
-
-/////////////////////////////
-
 import React from 'react';
 
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 
-import { LxButtonRoot, LxButtonRootProps } from './ButtonRoot';
+import { ICommonSetup } from 'LumX/core/testing/utils.test';
+
+import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
 
 /////////////////////////////
 
@@ -24,7 +22,7 @@ const TEST_URL: string = 'https://www.lumapps.com';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LxButtonRootProps>;
+type ISetupProps = Partial<ButtonRootProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -33,12 +31,12 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <a> element when the <LxButton> receives a `href` prop.
+     * The <a> element when the <Button> receives a `href` prop.
      */
     a: ShallowWrapper;
 
     /**
-     * The <button> element when the <LxButton> does not receives a `href` prop.
+     * The <button> element when the <Button> does not receives a `href` prop.
      */
     button: ShallowWrapper;
 }
@@ -52,13 +50,13 @@ interface ISetup extends ICommonSetup {
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
-    const props: LxButtonRootProps = {
+const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+    const props: ButtonRootProps = {
         children: 'Label',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<LxButtonRoot {...props} />);
+    const wrapper: ShallowWrapper = shallow(<ButtonRoot {...props} />);
 
     return {
         a: wrapper.find('a'),
@@ -69,7 +67,7 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
     };
 };
 
-describe(`<${LxButtonRoot.displayName}>`, (): void => {
+describe(`<${ButtonRoot.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly as a button', (): void => {
@@ -176,7 +174,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
 
     // 3. Test events.
     describe('Events', (): void => {
-        const onClick = jest.fn();
+        const onClick: jest.Mock = jest.fn();
 
         it('should trigger `onClick` when the button is clicked', () => {
             const { button }: ISetup = setup({
@@ -190,7 +188,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
 
             onClick.mockClear();
 
-            const { a } = setup({
+            const { a }: ISetup = setup({
                 href: TEST_URL,
                 onClick,
             });
@@ -206,6 +204,7 @@ describe(`<${LxButtonRoot.displayName}>`, (): void => {
         it('should fail when no child is given', (): void => {
             expect(
                 (): void => {
+                    // tslint:disable-next-line: no-null-keyword
                     setup({ children: null });
                 },
             ).toThrowErrorMatchingSnapshot();

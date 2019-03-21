@@ -1,18 +1,14 @@
-import { Theme } from '../constants';
-
-/////////////////////////////
-
 import React, { Fragment, useEffect, useState } from 'react';
 
 import last from 'lodash/last';
+
+import { DEFAULT_THEME, Theme } from '../constants';
+import { changeTheme as _changeTheme } from '../utils';
 
 import { ErrorBoundary } from './ErrorBoundary';
 import { Main } from './layout/Main';
 import { MainNav } from './layout/MainNav';
 import { SubNav } from './layout/SubNav';
-
-import { DEFAULT_THEME } from '../constants';
-import { changeTheme as _changeTheme } from '../utils';
 
 /////////////////////////////
 
@@ -32,7 +28,12 @@ const App: React.FC = (): JSX.Element => {
     const [themeLoaded, setThemeLoaded]: [boolean, (isThemeLoaded: boolean) => void] = useState(false);
 
     useEffect((): void => {
-        _changeTheme(theme).then(() => setThemeLoaded(true));
+        // tslint:disable-next-line: no-floating-promises
+        _changeTheme(theme).then(
+            (): void => {
+                setThemeLoaded(true);
+            },
+        );
     }, [theme]);
 
     useEffect((): void => {

@@ -5,17 +5,18 @@ import classNames from 'classnames';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
-import { LxIcon } from 'LumX';
-import { validateComponent, ValidateParameters } from 'LumX/core/react/utils';
+import { Icon } from 'LumX';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { ValidateParameters, validateComponent } from 'LumX/core/react/utils';
 
 import {
-    CLASSNAME as LXBUTTON_CLASSNAME,
+    Button,
+    ButtonProps,
+    CLASSNAME as BUTTON_CLASSNAME,
     Color,
     Colors,
     Emphasis,
     Emphasises,
-    LxButton,
-    LxButtonProps,
     Size,
     Sizes,
     Theme,
@@ -34,20 +35,20 @@ type Variant = Variants;
 /**
  * Defines the props of the component.
  */
-interface IProps extends LxButtonProps {
+interface IProps extends ButtonProps {
     /**
-     * The <LxIconButton> should never have the `variant` prop as this prop is forced to 'icon' in the <LxButton>.
+     * The <IconButton> should never have the `variant` prop as this prop is forced to 'icon' in the <Button>.
      */
     variant?: never;
 }
-type LxIconButtonProps = IProps;
+type IconButtonProps = IProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface ILxIconButtonDefaultPropsType extends Partial<LxIconButtonProps> {}
+interface IIconButtonDefaultPropsType extends Partial<IconButtonProps> {}
 
 /////////////////////////////
 //                         //
@@ -56,31 +57,31 @@ interface ILxIconButtonDefaultPropsType extends Partial<LxIconButtonProps> {}
 /////////////////////////////
 
 /**
- * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
- */
-const CLASSNAME: string = `${LXBUTTON_CLASSNAME}__icon`;
-
-/**
  * The display name of the component.
  *
  * @type {string}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = 'LxIconButton';
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}IconButton`;
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = `${BUTTON_CLASSNAME}__icon`;
 
 /**
  * The default value of props.
  *
- * @type {ILxIconButtonDefaultPropsType}
+ * @type {IIconButtonDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxIconButtonDefaultPropsType = {};
+const DEFAULT_PROPS: IIconButtonDefaultPropsType = {};
 
 /////////////////////////////
 //                         //
@@ -89,7 +90,7 @@ const DEFAULT_PROPS: ILxIconButtonDefaultPropsType = {};
 /////////////////////////////
 
 /**
- * Globally validate the <LxDropdownButton> component before validating the children.
+ * Globally validate the component before validating the children.
  *
  * @param {ValidateParameters} props The properties of the component.
  */
@@ -106,15 +107,15 @@ function _preValidate({ props }: ValidateParameters): void {
 }
 
 /**
- * Validate the <LxIconButton> component props and children.
+ * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {LxIconButtonProps} props The children and props of the <LxButton> component.
- * @return {React.ReactNode}   The processed children of the component.
+ * @param  {IconButtonProps} props The children and props of the component.
+ * @return {React.ReactNode} The processed children of the component.
  */
-function _validate(props: LxIconButtonProps): React.ReactNode {
+function _validate(props: IconButtonProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
-        allowedTypes: [LxIcon],
+        allowedTypes: [Icon],
         maxChildren: 1,
         minChildren: 1,
         preValidate: _preValidate,
@@ -126,29 +127,30 @@ function _validate(props: LxIconButtonProps): React.ReactNode {
 
 /**
  * Displays an icon button.
- * It's like a <LxButton> but displays an icon instead of a label in the body of the button.
+ * It's like a <Button> but only displays an icon instead of a label in the body of the button.
  *
  * Note that you cannot use the `variant` prop in this component.
  *
- * @see {@link LxButton} for more information on <LxButton>.
+ * @see {@link Button} for more information on <Button>.
  *
- * @return {JSX.Element} The <LxIconButton> component.
+ * @return {JSX.Element} The component.
  */
-const LxIconButton: React.FC<LxIconButtonProps> = ({ children, ...props }: LxIconButtonProps): JSX.Element => {
-    children = _validate({ children, ...props });
+const IconButton: React.FC<IconButtonProps> = ({ children, ...props }: IconButtonProps): JSX.Element => {
+    const newChildren: React.ReactNode = _validate({ children, ...props });
 
     return (
-        <LxButton {...props} variant={Variants.icon}>
-            {/* [XXX] Clement: Type of `child` should be React.ReactElement<LxIconProps>, but I didn't managed to make it work. */}
-            {Children.map(children, (child: any) => {
+        <Button {...props} variant={Variants.icon}>
+            {/*
+             // @ts-ignore */}
+            {Children.map(newChildren, (child: React.ReactElement) => {
                 return cloneElement(child, {
                     className: classNames(get(child.props, 'className', ''), CLASSNAME),
                 });
             })}
-        </LxButton>
+        </Button>
     );
 };
-LxIconButton.displayName = COMPONENT_NAME;
+IconButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
@@ -159,8 +161,8 @@ export {
     Colors,
     Emphasis,
     Emphasises,
-    LxIconButton,
-    LxIconButtonProps,
+    IconButton,
+    IconButtonProps,
     Size,
     Sizes,
     Theme,

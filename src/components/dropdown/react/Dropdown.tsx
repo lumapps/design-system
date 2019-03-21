@@ -1,28 +1,25 @@
-import { IGenericProps } from 'LumX/react/utils';
-
-/////////////////////////////
-
 import React from 'react';
 
 import classNames from 'classnames';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
+import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
 /////////////////////////////
 
 /**
- * Defines the props of the <LxDropdown> component.
+ * Defines the props of the component.
  */
-interface ILxDropdownProps extends IGenericProps {}
-type LxDropdownProps = ILxDropdownProps;
+interface IDropdownProps extends IGenericProps {}
+type DropdownProps = IDropdownProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface ILxDropdownDefaultPropsType extends Partial<LxDropdownProps> {}
+interface IDropdownDefaultPropsType extends Partial<DropdownProps> {}
 
 /////////////////////////////
 //                         //
@@ -31,52 +28,46 @@ interface ILxDropdownDefaultPropsType extends Partial<LxDropdownProps> {}
 /////////////////////////////
 
 /**
- * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
- */
-const CLASSNAME: string = `${CSS_PREFIX}-dropdown`;
-
-/**
  * The display name of the component.
  *
  * @type {string}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = 'LxDropdown';
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Dropdown`;
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  *
- * @type {ILxDropdownDefaultPropsType}
+ * @type {IDropdownDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxDropdownDefaultPropsType = {};
+const DEFAULT_PROPS: IDropdownDefaultPropsType = {};
 
 /////////////////////////////
 
 /**
  * Displays a dropdown.
  *
- * @return {JSX.Element} The <LxDropdown> root component.
+ * @return {JSX.Element} The component.
  */
-const LxDropdown: React.FC<LxDropdownProps> = ({
-    children,
-    className = '',
-    ...props
-}: LxDropdownProps): JSX.Element => {
-    return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
-            {children}
-        </div>
-    );
-};
-LxDropdown.displayName = COMPONENT_NAME;
+const Dropdown: React.FC<DropdownProps> = ({ children, className = '', ...props }: DropdownProps): JSX.Element => (
+    <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
+        {children}
+    </div>
+);
+Dropdown.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, LxDropdown, LxDropdownProps };
+export { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps };

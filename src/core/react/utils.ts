@@ -5,6 +5,12 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
 import noop from 'lodash/noop';
+import snakeCase from 'lodash/snakeCase';
+import trimStart from 'lodash/trimStart';
+
+import { CSS_PREFIX } from '../constants';
+
+import { COMPONENT_PREFIX } from './constants';
 
 /////////////////////////////
 //                         //
@@ -29,12 +35,6 @@ const NAME_PROPERTIES: string[] = ['displayName', 'name', 'type', 'type.name', '
 /////////////////////////////
 
 /**
- * Defines a generic component type.
- */
-type ComponentType = JSX.Element | Element | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
-/**
  * Define a generic props types.
  */
 interface IGenericProps {
@@ -42,8 +42,16 @@ interface IGenericProps {
      * Any prop (particularly any supported prop for a HTML element).
      * E.g. classNames, onClick, disabled, ...
      */
+    // tslint:disable-next-line: no-any
     [propName: string]: any;
 }
+
+/**
+ * Defines a generic component type.
+ */
+// tslint:disable-next-line: no-any
+type ComponentType = JSX.Element | Element | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 interface IChildrenManipulationParameters {
     child: React.ReactElement;
@@ -72,8 +80,20 @@ type ValidateParameters = IValidateParameters;
 /////////////////////////////
 
 /**
+ * Get the name of the root CSS class of a component based on its name.
+ *
+ * @param {string} componentName The name of the component. This name should contains the component prefix and be
+ *                               written in PascalCase.
+ * @return {string} The name of the root CSS class. This classname include the CSS classname prefix and is written in
+ *                  lower-snake-case.
+ */
+function getRootClassName(componentName: string): string {
+    return `${CSS_PREFIX}-${snakeCase(trimStart(componentName, COMPONENT_PREFIX))}`;
+}
+
+/**
  * Get the name of the given type.
- * The type can either be a string (LxButton, text, ...) or a component whose name will be computed from its
+ * The type can either be a string ('Button', 'span', ...) or a component whose name will be computed from its
  * `displayName`, its React internal name (`_reactInternalFiber.elementType.name`) or its `name`.
  *
  * @param  {string|ComponentType} type The type to get the name of.
@@ -85,9 +105,9 @@ function getTypeName(type: string | ComponentType): string | ComponentType {
     }
 
     for (const nameProperty of NAME_PROPERTIES) {
-        const typeName = get(type, nameProperty);
+        const typeName: string | undefined = get(type, nameProperty);
 
-        if (isString(typeName) && !isEmpty(typeName)) {
+        if (typeName !== undefined && isString(typeName) && !isEmpty(typeName)) {
             return typeName;
         }
     }
@@ -113,9 +133,14 @@ function isElementOfType(el: React.ReactElement, type: string | ComponentType): 
     }
 
     for (const nameProperty of NAME_PROPERTIES) {
-        const elementTypeName = get(el, nameProperty);
+        const elementTypeName: string | undefined = get(el, nameProperty);
 
-        if (isString(elementTypeName) && !isEmpty(elementTypeName) && elementTypeName === typeName) {
+        if (
+            elementTypeName !== undefined &&
+            isString(elementTypeName) &&
+            !isEmpty(elementTypeName) &&
+            elementTypeName === typeName
+        ) {
             return true;
         }
     }
@@ -235,12 +260,19 @@ function validateComponent(
         validateChild = validateChild || noop;
 
         let index: number = -1;
-        const transformedChildren = Children[childrenFunctionName](
+        const transformedChildren: React.ReactNode = Children[childrenFunctionName](
             newChildren,
-            (child: any): React.ReactElement => {
+            (child: React.ReactElement): React.ReactElement => {
                 index++;
 
-                const newChild: any = transformChild!({ children: newChildren, child, index, childrenCount, props });
+                // tslint:disable-next-line: no-non-null-assertion
+                const newChild: React.ReactElement = transformChild!({
+                    child,
+                    children: newChildren,
+                    childrenCount,
+                    index,
+                    props,
+                });
 
                 if (!isEmpty(allowedTypes)) {
                     const isOfOneAllowedType: boolean = allowedTypes.some((allowedType: string | ComponentType) =>
@@ -269,6 +301,7 @@ function validateComponent(
                     }
                 }
 
+                // tslint:disable-next-line: no-non-null-assertion
                 validateChild!({ children: newChildren, child: newChild, index, childrenCount, props });
 
                 return newChild;
@@ -294,6 +327,7 @@ export {
     IGenericProps,
     Omit,
     ValidateParameters,
+    getRootClassName,
     getTypeName,
     isElementOfType,
     isElementText,

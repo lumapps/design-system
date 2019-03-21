@@ -6,7 +6,10 @@
         "exclude": ["**/node_modules/**", "**/src/icons/node_modules/**", "**/*.d.ts"]
     },
     "rules": {
-        "no-empty-interface": false,
+        "await-promise": true,
+        "deprecation": true,
+        "no-any": true,
+        "no-boolean-literal-compare": true,
         "no-console": [
             true,
             "assert",
@@ -19,6 +22,61 @@
             "profileEnd",
             "table"
         ],
+        "no-empty-interface": false,
+        "no-floating-promises": true,
+        "no-for-in-array": true,
+        "no-inferrable-types": false,
+        "no-inferred-empty-object-type": true,
+        "no-non-null-assertion": {
+            "severity": "warning"
+        },
+        "no-null-keyword": true,
+        "no-object-literal-type-assertion": true,
+        "no-return-await": true,
+        "no-unbound-method": [true, { "ignore-static": true, "allow-delete": true, "allow-typeof": true }],
+        "no-unsafe-any": false,
+        "no-void-expression": {
+            "severity": "warning"
+        },
+        "ordered-imports": [
+            true,
+            {
+                "import-sources-order": "lowercase-last",
+                "named-imports-order": "lowercase-last",
+                "module-source-path": "full"
+            }
+        ],
+        "prefer-method-signature": true,
+        "prefer-object-spread": true,
+        "prefer-readonly": true,
+        "prefer-while": true,
+        "promise-function-async": true,
+        "restrict-plus-operands": {
+            "severity": "warning"
+        },
+        "return-undefined": true,
+        "static-this": {
+            "severity": "warning"
+        },
+        "strict-type-predicates": true,
+        "typedef": {
+            "options": [
+                "array-destructuring",
+                "arrow-call-signature",
+                "arrow-parameter",
+                "call-signature",
+                "member-variable-declaration",
+                "object-destructuring",
+                "parameter",
+                "property-declaration",
+                "variable-declaration"
+            ],
+            "severity": "warning"
+        },
+        "type-literal-delimiter": true,
+        "unnecessary-bind": {
+            "severity": "warning"
+        },
 
         "prettier": true,
 
@@ -116,8 +174,7 @@
         "no-unnecessary-else": true,
         "no-unused": true,
         "no-var-before-return": [true, "allow-destructuring"],
-        "prefer-const-enum": true,
-        "prefer-while": true
+        "prefer-const-enum": true
     },
     "rulesDirectory": ["tslint-consistent-codestyle", "tslint-plugin-prettier"]
 }

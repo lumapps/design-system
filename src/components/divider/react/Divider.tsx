@@ -1,37 +1,31 @@
-import { Theme, Themes } from 'LumX/components';
-
-/////////////////////////////
-
-import { IGenericProps } from 'LumX/react/utils';
-
-/////////////////////////////
-
 import React from 'react';
 
 import classNames from 'classnames';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
+import { Theme, Themes } from 'LumX/components';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
+import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
 /////////////////////////////
 
 /**
- * Defines the props of the <LxDivider> component.
+ * Defines the props of the component.
  */
-interface ILxDividerProps extends IGenericProps {
+interface IDividerProps extends IGenericProps {
     /**
      * The divider theme.
      */
     theme?: Theme;
 }
-type LxDividerProps = ILxDividerProps;
+type DividerProps = IDividerProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface ILxDividerDefaultPropsType extends Partial<LxDividerProps> {}
+interface IDividerDefaultPropsType extends Partial<DividerProps> {}
 
 /////////////////////////////
 //                         //
@@ -40,15 +34,13 @@ interface ILxDividerDefaultPropsType extends Partial<LxDividerProps> {}
 /////////////////////////////
 
 /**
- * The default value of props.
+ * The display name of the component.
  *
- * @type {ILxDividerDefaultPropsType}
+ * @type {string}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxDividerDefaultPropsType = {
-    theme: Themes.light,
-};
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Divider`;
 
 /**
  * The default class name and classes prefix for this component.
@@ -57,16 +49,18 @@ const DEFAULT_PROPS: ILxDividerDefaultPropsType = {
  * @constant
  * @readonly
  */
-const CLASSNAME: string = `${CSS_PREFIX}-divider`;
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
- * The display name of the component.
+ * The default value of props.
  *
- * @type {string}
+ * @type {IDividerDefaultPropsType}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = 'LxDivider';
+const DEFAULT_PROPS: IDividerDefaultPropsType = {
+    theme: Themes.light,
+};
 
 /////////////////////////////
 
@@ -74,17 +68,17 @@ const COMPONENT_NAME: string = 'LxDivider';
  * Displays a divider.
  * This simply wraps a <hr> element.
  *
- * @return {JSX.Element} The <LxDivider> root component.
+ * @return {JSX.Element} The component.
  */
-const LxDivider: React.FC<LxDividerProps> = ({
+const Divider: React.FC<DividerProps> = ({
     className = '',
     theme = DEFAULT_PROPS.theme,
     ...props
-}: LxDividerProps): JSX.Element => {
+}: DividerProps): JSX.Element => {
     return <hr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props} />;
 };
-LxDivider.displayName = COMPONENT_NAME;
+Divider.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, LxDivider, LxDividerProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps, Theme, Themes };

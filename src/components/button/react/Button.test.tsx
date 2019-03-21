@@ -1,28 +1,25 @@
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
-
-/////////////////////////////
-
 import React, { Fragment } from 'react';
 
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
 import get from 'lodash/get';
 import without from 'lodash/without';
 
-import { LxIcon } from 'LumX';
+import { Icon } from 'LumX';
+import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, DEFAULT_PROPS, Emphasises, LxButton, LxButtonProps, Sizes, Themes, Variants } from './Button';
+import { Button, ButtonProps, CLASSNAME, DEFAULT_PROPS, Emphasises, Sizes, Themes, Variants } from './Button';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LxButtonProps>;
+type ISetupProps = Partial<ButtonProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -31,17 +28,17 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <LxButtonRoot> element that is used as a wrapper for the children of the <LxButton>.
+     * The <ButtonRoot> element that is used as a wrapper for the children of the <Button>.
      */
     buttonRoot: ShallowWrapper;
 
     /**
-     * The <LxIcon> icon(s) of the <LxButton> (can have 0, 1 or 2).
+     * The <Icon> icon(s) of the <Button> (can have 0, 1 or 2).
      */
     icon: ShallowWrapper;
 
     /**
-     * The <span> element of label of the <LxButton> (can have 0 or 1).
+     * The <span> element of label of the <Button> (can have 0 or 1).
      */
     label: ShallowWrapper;
 }
@@ -53,11 +50,11 @@ interface ISetup extends ICommonSetup {
 /////////////////////////////
 
 /**
- * Get the default value of the given prop of a <LxButton>, depending on the effective props of the component (some
+ * Get the default value of the given prop of a <Button>, depending on the effective props of the component (some
  * default value depends on the value of another prop).
  *
  * @param {string}      prop  The name of the prop you want the default value of.
- * @param {ISetupProps} props The current props of the <LxButton>.
+ * @param {ISetupProps} props The current props of the <Button>.
  */
 function _getDefaultPropValue({ prop, props }: { prop: string; props?: ISetupProps }): string {
     return prop === 'color'
@@ -75,18 +72,18 @@ function _getDefaultPropValue({ prop, props }: { prop: string; props?: ISetupPro
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
-    const props: LxButtonProps = {
+const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+    const props: ButtonProps = {
         children: 'Label',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<LxButton {...props} />);
+    const wrapper: ShallowWrapper = shallow(<Button {...props} />);
 
     return {
-        buttonRoot: wrapper.find('LxButtonRoot'),
+        buttonRoot: wrapper.find('ButtonRoot'),
 
-        icon: wrapper.find('LxIcon'),
+        icon: wrapper.find('Icon'),
         label: wrapper.find('span'),
 
         props,
@@ -94,7 +91,7 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
     };
 };
 
-describe(`<${LxButton.displayName}>`, (): void => {
+describe(`<${Button.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a text label', (): void => {
@@ -124,7 +121,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it('should render correctly an icon and a text label', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     Label
                 </Fragment>
             );
@@ -143,7 +140,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it('should render correctly an icon and a <span> label', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     <span>Label</span>
                 </Fragment>
             );
@@ -163,7 +160,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     Label
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -182,7 +179,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     <span>Label</span>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -200,9 +197,9 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it('should render correctly two icons and a text label', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     Label
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -220,9 +217,9 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it('should render correctly two icons and a <span> label', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     <span>Label</span>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -240,7 +237,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it("should render correctly an icon button with the 'button' `variant`", (): void => {
             mockConsole();
 
-            const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
+            const children: React.ReactNode = <Icon icon={mdiPlus} />;
 
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
@@ -254,7 +251,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         });
 
         it("should render correctly an icon button with the 'icon' `variant`", (): void => {
-            const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
+            const children: React.ReactNode = <Icon icon={mdiPlus} />;
 
             const { buttonRoot, icon, label, wrapper }: ISetup = setup({ children, variant: Variants.icon });
             expect(wrapper).toMatchSnapshot();
@@ -286,7 +283,8 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
         it('should use the given props', (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
-                color: fake((fakeData) => fakeData.commerce.color()),
+                // tslint:disable-next-line: no-any
+                color: fake((fakeData: any) => fakeData.commerce.color()),
                 emphasis: oneOf(...without(Object.values(Emphasises), Emphasises.high)),
                 size: oneOf(...Object.values(Sizes)),
                 theme: oneOf(...Object.values(Themes)),
@@ -295,7 +293,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            let { buttonRoot }: ISetup = setup({ children: <LxIcon icon="mdiPlus" />, ...modifiedProps });
+            let { buttonRoot }: ISetup = setup({ children: <Icon icon="mdiPlus" />, ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -330,7 +328,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it("should not have any `theme` in 'low' or 'medium' `emphasis` but one in 'high'", (): void => {
             let { buttonRoot }: ISetup = setup({ emphasis: Emphasises.high });
 
-            expect(buttonRoot.prop('className')).toContain(
+            expect(buttonRoot.prop('className') as string).toContain(
                 getBasicClass({ prefix: CLASSNAME, type: 'theme', value: '' }),
             );
 
@@ -338,7 +336,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             ({ buttonRoot } = setup({ emphasis: Emphasises.medium }));
 
-            expect(buttonRoot.prop('className')).not.toContain(
+            expect(buttonRoot.prop('className') as string).not.toContain(
                 getBasicClass({ prefix: CLASSNAME, type: 'theme', value: '' }),
             );
 
@@ -346,7 +344,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
 
             ({ buttonRoot } = setup({ emphasis: Emphasises.low }));
 
-            expect(buttonRoot.prop('className')).not.toContain(
+            expect(buttonRoot.prop('className') as string).not.toContain(
                 getBasicClass({ prefix: CLASSNAME, type: 'theme', value: '' }),
             );
         });
@@ -400,6 +398,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it('should fail when no child is given', (): void => {
             expect(
                 (): void => {
+                    // tslint:disable-next-line: no-null-keyword
                     setup({ children: null });
                 },
             ).toThrowErrorMatchingSnapshot();
@@ -408,10 +407,10 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it("should fail when more than 3 children are given in the 'button' `variant`", (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     <span>Label</span>
                     <span>Label 2</span>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -423,7 +422,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         });
 
         it(`should fail when anything else than a text, <span> or <${
-            LxIcon.displayName
+            Icon.displayName
         }> is given as child in the 'button' \`variant\``, (): void => {
             mockConsole('debug');
 
@@ -482,12 +481,12 @@ describe(`<${LxButton.displayName}>`, (): void => {
         });
 
         it(`should fail when there are 2 or more <${
-            LxIcon.displayName
+            Icon.displayName
         }> in a row in the 'button' \`variant\``, (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -501,8 +500,8 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it("should fail when more than 1 child is given in the 'icon' `variant`", (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -514,7 +513,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         });
 
         it(`should fail when anything else than a <${
-            LxIcon.displayName
+            Icon.displayName
         }> is given as child in the 'icon' \`variant\``, (): void => {
             mockConsole('debug');
 
@@ -528,18 +527,20 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it("should warn the user when rendering an icon button with the 'button' `variant`", (): void => {
             global.console.warn = jest.fn();
 
-            const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
+            const children: React.ReactNode = <Icon icon={mdiPlus} />;
 
             setup({ children });
+            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
         });
 
         it("should not warn the user when rendering an icon button with the 'icon' `variant`", (): void => {
             global.console.warn = jest.fn();
 
-            const children: React.ReactNode = <LxIcon icon={mdiPlus} />;
+            const children: React.ReactNode = <Icon icon={mdiPlus} />;
 
             setup({ children, variant: Variants.icon });
+            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).not.toHaveBeenCalled();
         });
 
@@ -579,7 +580,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it('should only have the "left-icon" CSS class when an icon is passed as first child of a \'button\' `variant`', () => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     Label
                 </Fragment>
             );
@@ -593,7 +594,7 @@ describe(`<${LxButton.displayName}>`, (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     Label
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -605,9 +606,9 @@ describe(`<${LxButton.displayName}>`, (): void => {
         it('should have both "left-icon" and "right-icon" CSS classes when icons are passed as first and last children of a \'button\' `variant`', () => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     Label
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 

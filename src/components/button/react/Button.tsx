@@ -1,7 +1,3 @@
-import { Color, Colors, ComplexPropDefault, Size, Sizes, Theme, Themes } from 'LumX/components';
-
-/////////////////////////////
-
 import React, { Children } from 'react';
 
 import classNames from 'classnames';
@@ -9,19 +5,21 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 
-import { LxIcon, LxIconButton } from 'LumX';
-import { CSS_PREFIX } from 'LumX/core/constants';
+import { Icon, IconButton } from 'LumX';
+import { Color, Colors, ComplexPropDefault, Size, Sizes, Theme, Themes } from 'LumX/components';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import {
     ChildTransformParameters,
     ChildValidateParameters,
+    Omit,
+    getRootClassName,
     isElementOfType,
     isElementText,
-    Omit,
     validateComponent,
 } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
-import { LxButtonRoot, LxButtonRootProps } from './ButtonRoot';
+import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
 
 /////////////////////////////
 
@@ -47,7 +45,7 @@ type Variant = Variants;
 /////////////////////////////
 
 /**
- * Defines the props of the <LxButton> component.
+ * Defines the props of the component.
  */
 interface IProps {
     /**
@@ -75,14 +73,14 @@ interface IProps {
      */
     variant?: Variant;
 }
-type LxButtonProps = IProps & LxButtonRootProps;
+type ButtonProps = IProps & ButtonRootProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface ILxButtonDefaultPropsType extends Partial<Omit<LxButtonProps, 'color'>> {
+interface IButtonDefaultPropsType extends Partial<Omit<ButtonProps, 'color'>> {
     color: ComplexPropDefault<Color>;
 }
 
@@ -93,31 +91,31 @@ interface ILxButtonDefaultPropsType extends Partial<Omit<LxButtonProps, 'color'>
 /////////////////////////////
 
 /**
- * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
- */
-const CLASSNAME: string = `${CSS_PREFIX}-button`;
-
-/**
  * The display name of the component.
  *
  * @type {string}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = 'LxButton';
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Button`;
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  *
- * @type {ILxButtonDefaultPropsType}
+ * @type {IButtonDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxButtonDefaultPropsType = {
+const DEFAULT_PROPS: IButtonDefaultPropsType = {
     color: {
         default: Colors.dark,
         [`emphasis-${Emphasises.high}`]: Colors.primary,
@@ -135,7 +133,7 @@ const DEFAULT_PROPS: ILxButtonDefaultPropsType = {
 /////////////////////////////
 
 /**
- * Transform the text children to <span>s when validating the children of the <LxButton> component.
+ * Transform the text children to <span>s when validating the children of the component.
  *
  * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
  * @return {React.ReactElement}       The transformed children (or the original one if there is no transformation to
@@ -150,22 +148,22 @@ function _transformChild({ child }: ChildTransformParameters): React.ReactElemen
 }
 
 /**
- * Returns a closure for the function to validate the children of the <LxButton> component.
+ * Returns a closure for the function to validate the children of the component.
  * This closure will help remembering the types of the previous children. This list will help to determine if there is
  * no excess children of a given type.
  *
  * @param  {Array<string>} childrenTypes The list of types of the previously validated children.
- * @return {Function}      The closured function to validate the children of the <LxButton> component.
+ * @return {Function}      The closured function to validate the children of the component.
  */
 function _validateChild(childrenTypes: string[]): (params: ChildValidateParameters) => void {
     /**
-     * Validate the children of the <LxButton> component
+     * Validate the children of the component
      *
      * @param {ChildValidateParameters} params The parameters received from the `validateComponent` function.
      */
     return ({ child, childrenCount, index }: ChildValidateParameters): void => {
         const isChildText: boolean = isElementText(child) || isElementOfType(child, <span />);
-        const isChildIcon: boolean = isElementOfType(child, LxIcon);
+        const isChildIcon: boolean = isElementOfType(child, Icon);
 
         const alreadyHasSomeText: boolean = index === 0 ? false : childrenTypes.some((type: string) => type === 'text');
         childrenTypes[index] = isChildText ? 'text' : 'icon';
@@ -183,7 +181,7 @@ function _validateChild(childrenTypes: string[]): (params: ChildValidateParamete
         if (childrenCount === 1) {
             console.warn(
                 `If you want to display an icon button, you should use the 'icon' \`variant\` of the <${COMPONENT_NAME}> instead of the 'button' \`variant\`\nYou should even consider using the <${
-                    LxIconButton.displayName
+                    IconButton.displayName
                 }> component instead.`,
             );
         }
@@ -198,17 +196,17 @@ function _validateChild(childrenTypes: string[]): (params: ChildValidateParamete
 }
 
 /**
- * Validate the <LxButton> component props and children.
+ * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {LxButtonProps}   props The children and props of the <LxButton> component.
+ * @param  {ButtonProps}     props The children and props of the component.
  * @return {React.ReactNode} The processed children of the component.
  */
-function _validate(props: LxButtonProps): React.ReactNode {
+function _validate(props: ButtonProps): React.ReactNode {
     const childrenTypes: string[] = [];
 
     return validateComponent(COMPONENT_NAME, {
-        allowedTypes: props.variant === Variants.icon ? [LxIcon] : ['text', <span />, LxIcon],
+        allowedTypes: props.variant === Variants.icon ? [Icon] : ['text', <span />, Icon],
         maxChildren: props.variant === Variants.icon ? 1 : 3,
         minChildren: 1,
         props,
@@ -223,9 +221,9 @@ function _validate(props: LxButtonProps): React.ReactNode {
  * Displays a button.
  * If the `href` property is set, it will display a `<a>` HTML tag. If not, it will use a `<button>` HTML tag instead.
  *
- * @return {JSX.Element} The <LxButton> component.
+ * @return {JSX.Element} The component.
  */
-const LxButton: React.FC<LxButtonProps> = ({
+const Button: React.FC<ButtonProps> = ({
     children,
     className = '',
     color,
@@ -234,17 +232,18 @@ const LxButton: React.FC<LxButtonProps> = ({
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: LxButtonProps): JSX.Element => {
-    const newChildren = _validate({ children, color, emphasis, size, theme, variant, ...props });
+}: ButtonProps): JSX.Element => {
+    const newChildren: React.ReactNode = _validate({ children, color, emphasis, size, theme, variant, ...props });
 
     if (variant === Variants.button) {
-        let index = -1;
+        let index: number = -1;
         Children.forEach(
+            // @ts-ignore
             newChildren,
-            (child: any): void => {
+            (child: React.ReactElement): void => {
                 index++;
 
-                if (isElementOfType(child, LxIcon)) {
+                if (isElementOfType(child, Icon)) {
                     className += isEmpty(className) ? '' : ' ';
                     className += `${CLASSNAME}--has-${index === 0 ? 'left' : 'right'}-icon`;
                 }
@@ -257,7 +256,7 @@ const LxButton: React.FC<LxButtonProps> = ({
     }
 
     return (
-        <LxButtonRoot
+        <ButtonRoot
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -272,10 +271,10 @@ const LxButton: React.FC<LxButtonProps> = ({
             {...props}
         >
             {newChildren}
-        </LxButtonRoot>
+        </ButtonRoot>
     );
 };
-LxButton.displayName = COMPONENT_NAME;
+Button.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
@@ -286,8 +285,8 @@ export {
     Colors,
     Emphasis,
     Emphasises,
-    LxButton,
-    LxButtonProps,
+    Button,
+    ButtonProps,
     Size,
     Sizes,
     Theme,

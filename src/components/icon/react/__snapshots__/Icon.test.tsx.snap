@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LxIcon> Conditions should fail when no \`icon\` is given 1`] = `"Your <LxIcon> must have an \`icon\` prop!"`;
+exports[`<Icon> Conditions should fail when no \`icon\` is given 1`] = `"<Icon> must have an \`icon\` prop!"`;
 
-exports[`<LxIcon> Snapshots and structure should render correctly 1`] = `
+exports[`<Icon> Snapshots and structure should render correctly 1`] = `
 <i
   className="lumx-icon"
 >

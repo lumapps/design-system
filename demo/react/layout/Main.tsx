@@ -23,7 +23,7 @@ interface IESModule {
     /**
      * The default export of our fake ESModule loaded by the dynamic component loader.
      */
-    default?: () => JSX.Element;
+    default?(): JSX.Element;
 }
 
 /////////////////////////////
@@ -37,14 +37,14 @@ interface IESModule {
  *
  * @return {Promise<IESModule>} The promise of the dynamic load of the component.
  */
-function _loadComponent(componentFolderName: IProps['activeComponent']): Promise<IESModule> {
+async function _loadComponent(componentFolderName: IProps['activeComponent']): Promise<IESModule> {
     if (!componentFolderName) {
         return Promise.reject('No component to load');
     }
 
     const componentName: string = upperFirst(camelCase(componentFolderName));
 
-    return import(`../components/${componentFolderName}/Lx${componentName}Demo`);
+    return import(`../components/${componentFolderName}/${componentName}Demo`);
 }
 
 /////////////////////////////
@@ -56,20 +56,24 @@ function _loadComponent(componentFolderName: IProps['activeComponent']): Promise
  * name.
  */
 const Main: React.FC<IProps> = ({ activeComponent }: IProps): JSX.Element => {
-    const [demoComponent, setDemoComponent]: [IESModule['default'], any] = useState();
+    const [demoComponent, setDemoComponent]: [
+        IESModule['default'],
+        (demoComponent: IESModule['default']) => void
+    ] = useState();
 
     useEffect((): void => {
-        const loadComponent = async () => {
+        const loadComponent: () => Promise<void> = async (): Promise<void> => {
             try {
                 const { default: newDemoComponent }: IESModule = await _loadComponent(activeComponent);
                 setDemoComponent(newDemoComponent);
             } catch (exception) {
-                setDemoComponent();
+                setDemoComponent(undefined);
 
                 console.error(exception);
             }
         };
 
+        // tslint:disable-next-line: no-floating-promises
         loadComponent();
     }, [activeComponent]);
 

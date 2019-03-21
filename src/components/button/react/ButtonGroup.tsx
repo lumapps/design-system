@@ -1,28 +1,26 @@
-import { IGenericProps, validateComponent } from 'LumX/react/utils';
-
-/////////////////////////////
-
 import React from 'react';
 
 import classNames from 'classnames';
 
-import { LxIconButton } from 'LumX';
+import { IconButton } from 'LumX';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { IGenericProps, getRootClassName, validateComponent } from 'LumX/react/utils';
 
-import { CLASSNAME as LXBUTTON_CLASSNAME, Color, Colors, LxButton, Size, Sizes, Theme, Themes } from './Button';
+import { Button, Color, Colors, Size, Sizes, Theme, Themes } from './Button';
 
 /////////////////////////////
 /**
  * Defines the props of the component
  */
 interface IProps extends IGenericProps {}
-type LxButtonGroupProps = IProps;
+type ButtonGroupProps = IProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface ILxButtonGroupDefaultPropsType extends Partial<LxButtonGroupProps> {}
+interface IButtonGroupDefaultPropsType extends Partial<ButtonGroupProps> {}
 
 /////////////////////////////
 //                         //
@@ -31,31 +29,31 @@ interface ILxButtonGroupDefaultPropsType extends Partial<LxButtonGroupProps> {}
 /////////////////////////////
 
 /**
- * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
- */
-const CLASSNAME: string = `${LXBUTTON_CLASSNAME}-group`;
-
-/**
  * The display name of the component.
  *
  * @type {string}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = 'LxButtonGroup';
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ButtonGroup`;
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  *
- * @type {ILxButtonGroupDefaultPropsType}
+ * @type {IButtonGroupDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxButtonGroupDefaultPropsType = {};
+const DEFAULT_PROPS: IButtonGroupDefaultPropsType = {};
 
 /////////////////////////////
 //                         //
@@ -64,15 +62,15 @@ const DEFAULT_PROPS: ILxButtonGroupDefaultPropsType = {};
 /////////////////////////////
 
 /**
- * Validate the <LxButtonGroup> component props and children.
+ * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {LxButtonGroupProps} props The children and props of the <LxButtonGroup> component.
+ * @param  {ButtonGroupProps} props The children and props of the component.
  * @return {React.ReactNode}    The processed children of the component.
  */
-function _validate(props: LxButtonGroupProps): React.ReactNode {
+function _validate(props: ButtonGroupProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
-        allowedTypes: [LxIconButton, LxButton],
+        allowedTypes: [IconButton, Button],
         maxChildren: 2,
         minChildren: 2,
         props,
@@ -82,18 +80,18 @@ function _validate(props: LxButtonGroupProps): React.ReactNode {
 /////////////////////////////
 
 /**
- * Displays a group of <LxButton>s.
+ * Displays a group of <Button>s.
  *
- * @see {@link LxButton} for more information on <LxButton>.
+ * @see {@link Button} for more information on <Button>.
  *
- * @return {JSX.Element} The <LxButtonGroup> component.
+ * @return {JSX.Element} The component.
  */
-const LxButtonGroup: React.FC<LxButtonGroupProps> = ({
+const ButtonGroup: React.FC<ButtonGroupProps> = ({
     children,
     className = '',
     ...props
-}: LxButtonGroupProps): JSX.Element => {
-    const newChildren = _validate({ children });
+}: ButtonGroupProps): JSX.Element => {
+    const newChildren: React.ReactNode = _validate({ children });
 
     return (
         <div className={classNames(className, CLASSNAME)} {...props}>
@@ -101,8 +99,8 @@ const LxButtonGroup: React.FC<LxButtonGroupProps> = ({
         </div>
     );
 };
-LxButtonGroup.displayName = COMPONENT_NAME;
+ButtonGroup.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Color, Colors, LxButtonGroup, LxButtonGroupProps, Size, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Color, Colors, ButtonGroup, ButtonGroupProps, Size, Sizes, Theme, Themes };

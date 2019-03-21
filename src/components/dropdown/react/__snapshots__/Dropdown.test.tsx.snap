@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LxDropdown> Snapshots and structure should render correctly 1`] = `
+exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
 <div
   className="lumx-dropdown"
 >

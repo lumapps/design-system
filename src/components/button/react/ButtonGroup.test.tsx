@@ -1,20 +1,20 @@
 import React, { Fragment } from 'react';
 
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 
-import { LxButton, LxIcon, LxIconButton } from 'LumX';
+import { Button, Icon, IconButton } from 'LumX';
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, LxButtonGroup, LxButtonGroupProps } from './ButtonGroup';
+import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LxButtonGroupProps>;
+type ISetupProps = Partial<ButtonGroupProps>;
 
 /**
  * Defines what is returned by the setup function.
@@ -26,7 +26,7 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <div> element that is used as a wrapper for the buttons inside of the <LxButtonGroup>.
+     * The <div> element that is used as a wrapper for the buttons inside of the <ButtonGroup>.
      */
     group: ShallowWrapper;
 }
@@ -40,20 +40,20 @@ interface ISetup extends ICommonSetup {
  * @return {ISetup}            An object with the props, the component wrapper and some shortcut to some element inside of
  *                             the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
-    const props: LxButtonGroupProps = {
+const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+    const props: ButtonGroupProps = {
         children: (
             <Fragment>
-                <LxButton>Label</LxButton>
-                <LxIconButton>
-                    <LxIcon icon={mdiPlus} />
-                </LxIconButton>
+                <Button>Label</Button>
+                <IconButton>
+                    <Icon icon={mdiPlus} />
+                </IconButton>
             </Fragment>
         ),
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<LxButtonGroup {...props} />);
+    const wrapper: ShallowWrapper = shallow(<ButtonGroup {...props} />);
 
     return {
         group: wrapper.find(`.${CLASSNAME}`),
@@ -63,7 +63,7 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
     };
 };
 
-describe(`<${LxButtonGroup.displayName}>`, () => {
+describe(`<${ButtonGroup.displayName}>`, () => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a group button', (): void => {
@@ -130,13 +130,14 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
         it('should fail when no child is given', (): void => {
             expect(
                 (): void => {
+                    // tslint:disable-next-line: no-null-keyword
                     setup({ children: null });
                 },
             ).toThrowErrorMatchingSnapshot();
         });
 
         it('should fail when less than 2 children are given', (): void => {
-            const children: React.ReactNode = <LxButton>Label</LxButton>;
+            const children: React.ReactNode = <Button>Label</Button>;
 
             expect(
                 (): void => {
@@ -145,15 +146,15 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
             ).toThrowErrorMatchingSnapshot();
         });
 
-        it(`should fail when anything else than <${LxButton.displayName}>s or <${
-            LxIconButton.displayName
+        it(`should fail when anything else than <${Button.displayName}>s or <${
+            IconButton.displayName
         }> is passed as children`, (): void => {
             mockConsole('debug');
 
             let children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -168,7 +169,7 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
             children = (
                 <Fragment>
                     <span>Label</span>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -197,8 +198,8 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
 
             children = (
                 <Fragment>
-                    <LxButton>Label</LxButton>
-                    <LxIcon icon={mdiPlus} />
+                    <Button>Label</Button>
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -212,7 +213,7 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
 
             children = (
                 <Fragment>
-                    <LxButton>Label</LxButton>
+                    <Button>Label</Button>
                     <span>Label</span>>
                 </Fragment>
             );
@@ -227,8 +228,8 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
 
             children = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
-                    <LxButton>Label</LxButton>
+                    <Icon icon={mdiPlus} />
+                    <Button>Label</Button>
                 </Fragment>
             );
 
@@ -242,7 +243,7 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
 
             children = (
                 <Fragment>
-                    <span>Label</span>><LxButton>Label</LxButton>
+                    <span>Label</span>><Button>Label</Button>
                 </Fragment>
             );
 
@@ -256,9 +257,9 @@ describe(`<${LxButtonGroup.displayName}>`, () => {
         it('should fail when more than 2 children are given', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxButton>Label</LxButton>
-                    <LxButton>Label 2</LxButton>
-                    <LxButton>Label 3</LxButton>
+                    <Button>Label</Button>
+                    <Button>Label 2</Button>
+                    <Button>Label 3</Button>
                 </Fragment>
             );
 

@@ -1,6 +1,10 @@
 import classNames from 'classnames';
 
 /////////////////////////////
+//                         //
+//     Public functions    //
+//                         //
+/////////////////////////////
 
 /**
  * Get the basic CSS class for the given type.

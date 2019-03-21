@@ -3,6 +3,8 @@ import React from 'react';
 import classNames from 'classnames';
 import slugify from 'slugify';
 
+import isEmpty from 'lodash/isEmpty';
+
 /////////////////////////////
 
 /**
@@ -22,7 +24,7 @@ interface IProps {
 
     /**
      * The name of the component this sub navigation item will activate when clicked.
-     * If no name is given, then the name will be computed from the label of the sub naigation item. The label will be
+     * If no name is given, then the name will be computed from the label of the sub navigation item. The label will be
      * slugified (i.e. lowercased and all special character and spaces replaced by a '-').
      */
     component?: string;
@@ -31,7 +33,7 @@ interface IProps {
      * The function to handle the click on a sub navigation item.
      * This function will activate the component corresponding to the current sub navigation item
      */
-    handleClick: (component: string) => void;
+    handleClick(component: string): void;
 }
 
 /////////////////////////////
@@ -48,8 +50,10 @@ const SubNavItem: React.FC<IProps> = ({ children, component, handleClick, active
         lower: true,
     });
 
-    const onClick: () => void = () => {
-        handleClick(component!);
+    const onClick: () => void = (): void => {
+        if (component !== undefined && !isEmpty(component)) {
+            handleClick(component);
+        }
     };
 
     return (

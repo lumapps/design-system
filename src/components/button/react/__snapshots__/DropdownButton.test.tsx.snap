@@ -1,87 +1,87 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LxDropdownButton> Conditions should fail when more than 2 children are given 1`] = `"<LxDropdownButton> cannot have more than 2 children (got 3)!"`;
+exports[`<DropdownButton> Conditions should fail when more than 2 children are given 1`] = `"<DropdownButton> cannot have more than 2 children (got 3)!"`;
 
-exports[`<LxDropdownButton> Conditions should fail when more than 2 children are given 2`] = `"<LxDropdownButton> cannot have more than 2 children (got 3)!"`;
+exports[`<DropdownButton> Conditions should fail when more than 2 children are given 2`] = `"<DropdownButton> cannot have more than 2 children (got 3)!"`;
 
-exports[`<LxDropdownButton> Conditions should fail when more than 2 children are given 3`] = `"<LxDropdownButton> cannot have more than 2 children (got 3)!"`;
+exports[`<DropdownButton> Conditions should fail when more than 2 children are given 3`] = `"<DropdownButton> cannot have more than 2 children (got 3)!"`;
 
-exports[`<LxDropdownButton> Conditions should fail when more than 2 children are given 4`] = `"<LxDropdownButton> cannot have more than 2 children (got 3)!"`;
+exports[`<DropdownButton> Conditions should fail when more than 2 children are given 4`] = `"<DropdownButton> cannot have more than 2 children (got 3)!"`;
 
-exports[`<LxDropdownButton> Snapshots and structure should render correctly a non-splitted dropdown button 1`] = `
+exports[`<DropdownButton> Snapshots and structure should render correctly a non-splitted dropdown button 1`] = `
 <Fragment>
-  <LxButton
+  <Button
     className="lumx-button__dropdown"
     onClick={[Function]}
     variant="button"
   >
     Label
-    <LxIcon
+    <Icon
       icon="M7,10L12,15L17,10H7Z"
     />
-  </LxButton>
+  </Button>
 </Fragment>
 `;
 
-exports[`<LxDropdownButton> Snapshots and structure should render correctly a non-splitted dropdown button with a preceding icon 1`] = `
+exports[`<DropdownButton> Snapshots and structure should render correctly a non-splitted dropdown button with a preceding icon 1`] = `
 <Fragment>
-  <LxButton
+  <Button
     className="lumx-button__dropdown"
     onClick={[Function]}
     variant="button"
   >
-    <LxIcon
+    <Icon
       icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     />
     Label
-    <LxIcon
+    <Icon
       icon="M7,10L12,15L17,10H7Z"
     />
-  </LxButton>
+  </Button>
 </Fragment>
 `;
 
-exports[`<LxDropdownButton> Snapshots and structure should render correctly a splitted dropdown button 1`] = `
+exports[`<DropdownButton> Snapshots and structure should render correctly a splitted dropdown button 1`] = `
 <Fragment>
-  <LxButtonGroup
+  <ButtonGroup
     className="lumx-button__dropdown lumx-button__dropdown--is-splitted"
   >
-    <LxButton
+    <Button
       variant="button"
     >
       Label
-    </LxButton>
-    <LxIconButton
+    </Button>
+    <IconButton
       onClick={[Function]}
     >
-      <LxIcon
+      <Icon
         icon="M7,10L12,15L17,10H7Z"
       />
-    </LxIconButton>
-  </LxButtonGroup>
+    </IconButton>
+  </ButtonGroup>
 </Fragment>
 `;
 
-exports[`<LxDropdownButton> Snapshots and structure should render correctly a splitted dropdown button with a preceding icon 1`] = `
+exports[`<DropdownButton> Snapshots and structure should render correctly a splitted dropdown button with a preceding icon 1`] = `
 <Fragment>
-  <LxButtonGroup
+  <ButtonGroup
     className="lumx-button__dropdown lumx-button__dropdown--is-splitted"
   >
-    <LxButton
+    <Button
       variant="button"
     >
-      <LxIcon
+      <Icon
         icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
       />
       Label
-    </LxButton>
-    <LxIconButton
+    </Button>
+    <IconButton
       onClick={[Function]}
     >
-      <LxIcon
+      <Icon
         icon="M7,10L12,15L17,10H7Z"
       />
-    </LxIconButton>
-  </LxButtonGroup>
+    </IconButton>
+  </ButtonGroup>
 </Fragment>
 `;

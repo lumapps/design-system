@@ -53,19 +53,19 @@
 
                                 &lt;script type="text/babel"&gt;
                                     const { Fragment, PureComponent } = React;
-                                    const { LxButton } = LumX;
+                                    const { Button } = LumX;
 
                                     class MyButton extends PureComponent {
                                         render() {
                                             return (
-                                                &lt;LxButton color={this.props.color}&gt;{this.props.children}&lt;/LxButton&gt;
+                                                &lt;Button color={this.props.color}&gt;{this.props.children}&lt;/Button&gt;
                                             );
                                         }
                                     }
 
-                                    const MyFunctionnalButton = (props) => {
+                                    const MyFunctionalButton = (props) => {
                                         return (
-                                            &lt;LxButton color={props.color}&gt;{props.children}&lt;/LxButton&gt;
+                                            &lt;Button color={props.color}&gt;{props.children}&lt;/Button&gt;
                                         );
                                     };
 
@@ -73,7 +73,7 @@
                                         &lt;Fragment&gt;
                                         &lt;div class="lumx-typography-title"&gt;This is a basic example&lt;/div&gt;
                                         &lt;MyButton&gt;Nice!&lt;/MyButton&gt;
-                                        &lt;MyFunctionnalButton color="green"&gt;Even nicer!&lt;/MyFunctionnalButton&gt;
+                                        &lt;MyFunctionalButton color="green"&gt;Even nicer!&lt;/MyFunctionalButton&gt;
                                         &lt;/Fragment&gt;,
                                         document.getElementById('root')
                                     );
@@ -89,8 +89,8 @@
                     <strong>CommonJS[2]</strong>: All you have to do is import
                     <span class="code">lumx-theme-&lt;lumapps|material&gt;[.min].css</span> in your page's
                     <span class="code">head</span> and the components you want to use in your own React components. All
-                    components comes packaged with their own CSS, so you don't need to import any additionnal CSS in
-                    your application.
+                    components comes packaged with their own CSS, so you don't need to import any additional CSS in your
+                    application.
                 </p>
 
                 <div class="mv+++">
@@ -121,19 +121,19 @@
 
                                 &lt;script type="text/javascript"&gt;
                                     const { Fragment, PureComponent } = React;
-                                    const { LxButton } = require('@lumx/react');
+                                    const { Button } = require('@lumx/react');
 
                                     class MyButton extends PureComponent {
                                         render() {
                                             return (
-                                                &lt;LxButton color={this.props.color}&gt;{this.props.children}&lt;/LxButton&gt;
+                                                &lt;Button color={this.props.color}&gt;{this.props.children}&lt;/Button&gt;
                                             );
                                         }
                                     }
 
-                                    const MyFunctionnalButton = (props) => {
+                                    const MyFunctionalButton = (props) => {
                                         return (
-                                            &lt;LxButton color={props.color}&gt;{props.children}&lt;/LxButton&gt;
+                                            &lt;Button color={props.color}&gt;{props.children}&lt;/Button&gt;
                                         );
                                     };
 
@@ -141,7 +141,7 @@
                                         &lt;Fragment&gt;
                                         &lt;div class="lumx-typography-title"&gt;This is a basic example&lt;/div&gt;
                                         &lt;MyButton&gt;Nice!&lt;/MyButton&gt;
-                                        &lt;MyFunctionnalButton color="green"&gt;Even nicer!&lt;/MyFunctionnalButton&gt;
+                                        &lt;MyFunctionalButton color="green"&gt;Even nicer!&lt;/MyFunctionalButton&gt;
                                         &lt;/Fragment&gt;,
                                         document.getElementById('root')
                                     );
@@ -157,8 +157,8 @@
                     <strong>AMD</strong>: All you have to do is import
                     <span class="code">lumx-theme-&lt;lumapps|material&gt;[.min].css</span> in your page's
                     <span class="code">head</span> and the components you want to use in your own React components. All
-                    components comes packaged with their own CSS, so you don't need to import any additionnal CSS in
-                    your application.
+                    components comes packaged with their own CSS, so you don't need to import any additional CSS in your
+                    application.
                 </p>
 
                 <div class="mv+++">
@@ -190,19 +190,19 @@
                                 &lt;script type="text/javascript"&gt;
                                     require(['@lumx/react'], (LumX) => {
                                         const { Fragment, PureComponent } = React;
-                                        const { LxButton } = LumX;
+                                        const { Button } = LumX;
 
                                         class MyButton extends PureComponent {
                                             render() {
                                                 return (
-                                                    &lt;LxButton color={this.props.color}&gt;{this.props.children}&lt;/LxButton&gt;
+                                                    &lt;Button color={this.props.color}&gt;{this.props.children}&lt;/Button&gt;
                                                 );
                                             }
                                         }
 
-                                        const MyFunctionnalButton = (props) => {
+                                        const MyFunctionalButton = (props) => {
                                             return (
-                                                &lt;LxButton color={props.color}&gt;{props.children}&lt;/LxButton&gt;
+                                                &lt;Button color={props.color}&gt;{props.children}&lt;/Button&gt;
                                             );
                                         };
 
@@ -210,7 +210,7 @@
                                             &lt;Fragment&gt;
                                             &lt;div class="lumx-typography-title"&gt;This is a basic example&lt;/div&gt;
                                             &lt;MyButton&gt;Nice!&lt;/MyButton&gt;
-                                            &lt;MyFunctionnalButton color="green"&gt;Even nicer!&lt;/MyFunctionnalButton&gt;
+                                            &lt;MyFunctionalButton color="green"&gt;Even nicer!&lt;/MyFunctionalButton&gt;
                                             &lt;/Fragment&gt;,
                                             document.getElementById('root')
                                         );
@@ -227,8 +227,8 @@
                     <strong>ES6 Modules</strong>: All you have to do is import
                     <span class="code">lumx-theme-&lt;lumapps|material&gt;[.min].css</span> in your page's
                     <span class="code">head</span> and the components you want to use in your own React components. All
-                    components comes packaged with their own CSS, so you don't need to import any additionnal CSS in
-                    your application.
+                    components comes packaged with their own CSS, so you don't need to import any additional CSS in your
+                    application.
                 </p>
 
                 <div class="mv+++">
@@ -259,19 +259,19 @@
 
                                 &lt;script type="text/javascript"&gt;
                                     import { Fragment, PureComponent } from 'react';
-                                    import { LxButton } from '@lumx/react';
+                                    import { Button } from '@lumx/react';
 
                                     class MyButton extends PureComponent {
                                         render() {
                                             return (
-                                                &lt;LxButton color={this.props.color}&gt;{this.props.children}&lt;/LxButton&gt;
+                                                &lt;Button color={this.props.color}&gt;{this.props.children}&lt;/Button&gt;
                                             );
                                         }
                                     }
 
-                                    const MyFunctionnalButton = (props) => {
+                                    const MyFunctionalButton = (props) => {
                                         return (
-                                            &lt;LxButton color={props.color}&gt;{props.children}&lt;/LxButton&gt;
+                                            &lt;Button color={props.color}&gt;{props.children}&lt;/Button&gt;
                                         );
                                     };
 
@@ -279,7 +279,7 @@
                                         &lt;Fragment&gt;
                                         &lt;div class="lumx-typography-title"&gt;This is a basic example&lt;/div&gt;
                                         &lt;MyButton&gt;Nice!&lt;/MyButton&gt;
-                                        &lt;MyFunctionnalButton color="green"&gt;Even nicer!&lt;/MyFunctionnalButton&gt;
+                                        &lt;MyFunctionalButton color="green"&gt;Even nicer!&lt;/MyFunctionalButton&gt;
                                         &lt;/Fragment&gt;,
                                         document.getElementById('root')
                                     );
@@ -300,25 +300,25 @@
         <script src="../lumx.react.min.js" type="text/javascript"></script>
         <script data-presets="es2015,react" type="text/babel">
             const { Fragment, PureComponent } = React;
-            const { LxButton, LxButtonRoot } = LumX;
+            const { Button } = LumX;
 
             class Nice extends PureComponent {
                 render() {
                     const { children, color, ...props } = this.props;
 
                     return (
-                        <LxButton color={color} {...props}>
+                        <Button color={color} {...props}>
                             {children}
-                        </LxButton>
+                        </Button>
                     );
                 }
             }
 
             const GotItButton = ({ children, color, ...props }) => {
                 return (
-                    <LxButton color={color} {...props}>
+                    <Button color={color} {...props}>
                         {children}
-                    </LxButton>
+                    </Button>
                 );
             };
 

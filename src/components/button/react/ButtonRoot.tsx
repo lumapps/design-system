@@ -1,15 +1,14 @@
-import { IGenericProps } from 'LumX/react/utils';
-
-/////////////////////////////
-
-import React, { Children } from 'react';
+import React from 'react';
 
 import isEmpty from 'lodash/isEmpty';
+
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { IGenericProps, validateComponent } from 'LumX/react/utils';
 
 /////////////////////////////
 
 /**
- * Defines the props of the <LxButtonRoot> component.
+ * Defines the props of the component.
  */
 interface IProps extends IGenericProps {
     /**
@@ -22,14 +21,14 @@ interface IProps extends IGenericProps {
      */
     target?: string;
 }
-type LxButtonRootProps = IProps;
+type ButtonRootProps = IProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface ILxButtonRootDefaultPropsType extends Partial<LxButtonRootProps> {}
+interface IButtonRootDefaultPropsType extends Partial<ButtonRootProps> {}
 
 /////////////////////////////
 //                         //
@@ -44,48 +43,60 @@ interface ILxButtonRootDefaultPropsType extends Partial<LxButtonRootProps> {}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = 'LxButtonRoot';
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ButtonRoot`;
 
 /**
  * The default value of props.
  *
- * @type {ILxButtonRootDefaultPropsType}
+ * @type {IButtonRootDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxButtonRootDefaultPropsType = {};
+const DEFAULT_PROPS: IButtonRootDefaultPropsType = {};
+
+/////////////////////////////
+//                         //
+//    Private functions    //
+//                         //
+/////////////////////////////
+
+/**
+ * Validate the component props and children.
+ * Also, sanitize, cleanup and format the children and return the processed ones.
+ *
+ * @param  {ButtonRootProps} props The children and props of the component.
+ * @return {React.ReactNode} The processed children of the component.
+ */
+function _validate(props: ButtonRootProps): React.ReactNode {
+    return validateComponent(COMPONENT_NAME, {
+        minChildren: 1,
+        props,
+    });
+}
 
 /////////////////////////////
 
 /**
- * The root of the <LxButton> component.
+ * The root of the <Button> component.
  * Conditionally adds a `<a>` or a `<button>` HTML tag whether there is an `href` attribute or not.
  *
- * @return {JSX.Element} The <LxButton> root component.
+ * @return {JSX.Element} The component.
  */
-const LxButtonRoot: React.FC<LxButtonRootProps> = ({
-    children,
-    href,
-    target,
-    ...props
-}: LxButtonRootProps): JSX.Element => {
-    const childrenCount: number = Children.count(children);
-    if (childrenCount === 0) {
-        throw new Error('<LxButtonRoot> must have at least 1 child (got 0)!');
-    }
+const ButtonRoot: React.FC<ButtonRootProps> = ({ children, href, target, ...props }: ButtonRootProps): JSX.Element => {
+    const newChildren: React.ReactNode = _validate({ children, ...props });
 
     if (isEmpty(href)) {
-        return <button {...props}>{children}</button>;
+        return <button {...props}>{newChildren}</button>;
     }
 
     return (
         <a href={href} target={target} {...props}>
-            {children}
+            {newChildren}
         </a>
     );
 };
-LxButtonRoot.displayName = COMPONENT_NAME;
+ButtonRoot.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { DEFAULT_PROPS, LxButtonRoot, LxButtonRootProps };
+export { DEFAULT_PROPS, ButtonRoot, ButtonRootProps };

@@ -1,25 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<LxButton> Conditions should fail when anything else than a <LxIcon> is given as child in the 'icon' \`variant\` 1`] = `"You can only have <LxIcon> children in <LxButton> (got 'Label')!"`;
+exports[`<Button> Conditions should fail when anything else than a <Icon> is given as child in the 'icon' \`variant\` 1`] = `"You can only have <Icon> children in <Button> (got 'Label')!"`;
 
-exports[`<LxButton> Conditions should fail when anything else than a text, <span> or <LxIcon> is given as child in the 'button' \`variant\` 1`] = `"You can only have text, <span> or <LxIcon> children in <LxButton> (got <div>)!"`;
+exports[`<Button> Conditions should fail when anything else than a text, <span> or <Icon> is given as child in the 'button' \`variant\` 1`] = `"You can only have text, <span> or <Icon> children in <Button> (got <div>)!"`;
 
-exports[`<LxButton> Conditions should fail when more than 1 child is given in the 'icon' \`variant\` 1`] = `"<LxButton> must have exactly 1 child (got 2)!"`;
+exports[`<Button> Conditions should fail when more than 1 child is given in the 'icon' \`variant\` 1`] = `"<Button> must have exactly 1 child (got 2)!"`;
 
-exports[`<LxButton> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 1`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <LxButton> (got at least 2)!"`;
+exports[`<Button> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 1`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <Button> (got at least 2)!"`;
 
-exports[`<LxButton> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 2`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <LxButton> (got at least 2)!"`;
+exports[`<Button> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 2`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <Button> (got at least 2)!"`;
 
-exports[`<LxButton> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 3`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <LxButton> (got at least 2)!"`;
+exports[`<Button> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 3`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <Button> (got at least 2)!"`;
 
-exports[`<LxButton> Conditions should fail when more than 3 children are given in the 'button' \`variant\` 1`] = `"<LxButton> cannot have more than 3 children (got 4)!"`;
+exports[`<Button> Conditions should fail when more than 3 children are given in the 'button' \`variant\` 1`] = `"<Button> cannot have more than 3 children (got 4)!"`;
 
-exports[`<LxButton> Conditions should fail when no child is given 1`] = `"<LxButton> must have at least 1 child (got 0)!"`;
+exports[`<Button> Conditions should fail when no child is given 1`] = `"<Button> must have at least 1 child (got 0)!"`;
 
-exports[`<LxButton> Conditions should fail when there are 2 or more <LxIcon> in a row in the 'button' \`variant\` 1`] = `"You cannot have 2 following icons children in a 'button' \`variant\` of <LxButton>, there must be a label between them!"`;
+exports[`<Button> Conditions should fail when there are 2 or more <Icon> in a row in the 'button' \`variant\` 1`] = `"You cannot have 2 following icons children in a 'button' \`variant\` of <Button>, there must be a label between them!"`;
 
-exports[`<LxButton> Snapshots and structure should render correctly a <span> label 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly a <span> label 1`] = `
+<ButtonRoot
   className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span
@@ -27,11 +27,11 @@ exports[`<LxButton> Snapshots and structure should render correctly a <span> lab
   >
     Label
   </span>
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly a <span> label and an icon 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly a <span> label and an icon 1`] = `
+<ButtonRoot
   className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span
@@ -39,15 +39,15 @@ exports[`<LxButton> Snapshots and structure should render correctly a <span> lab
   >
     Label
   </span>
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".1"
   />
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly a text label 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly a text label 1`] = `
+<ButtonRoot
   className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span
@@ -55,11 +55,11 @@ exports[`<LxButton> Snapshots and structure should render correctly a text label
   >
     Label
   </span>
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly a text label and an icon 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly a text label and an icon 1`] = `
+<ButtonRoot
   className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span
@@ -67,18 +67,18 @@ exports[`<LxButton> Snapshots and structure should render correctly a text label
   >
     Label
   </span>
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".1"
   />
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly an icon and a <span> label 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly an icon and a <span> label 1`] = `
+<ButtonRoot
   className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".0"
   />
@@ -87,14 +87,14 @@ exports[`<LxButton> Snapshots and structure should render correctly an icon and 
   >
     Label
   </span>
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly an icon and a text label 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly an icon and a text label 1`] = `
+<ButtonRoot
   className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".0"
   />
@@ -103,35 +103,35 @@ exports[`<LxButton> Snapshots and structure should render correctly an icon and 
   >
     Label
   </span>
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly an icon button with the 'button' \`variant\` 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly an icon button with the 'button' \`variant\` 1`] = `
+<ButtonRoot
   className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".0"
   />
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly an icon button with the 'icon' \`variant\` 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly an icon button with the 'icon' \`variant\` 1`] = `
+<ButtonRoot
   className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
 >
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
   />
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly two icons and a <span> label 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly two icons and a <span> label 1`] = `
+<ButtonRoot
   className="lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".0"
   />
@@ -140,18 +140,18 @@ exports[`<LxButton> Snapshots and structure should render correctly two icons an
   >
     Label
   </span>
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".2"
   />
-</LxButtonRoot>
+</ButtonRoot>
 `;
 
-exports[`<LxButton> Snapshots and structure should render correctly two icons and a text label 1`] = `
-<LxButtonRoot
+exports[`<Button> Snapshots and structure should render correctly two icons and a text label 1`] = `
+<ButtonRoot
   className="lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".0"
   />
@@ -160,9 +160,9 @@ exports[`<LxButton> Snapshots and structure should render correctly two icons an
   >
     Label
   </span>
-  <LxIcon
+  <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
     key=".2"
   />
-</LxButtonRoot>
+</ButtonRoot>
 `;

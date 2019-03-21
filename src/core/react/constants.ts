@@ -1,3 +1,9 @@
+/////////////////////////////
+//                         //
+//    Public attributes    //
+//                         //
+/////////////////////////////
+
 /**
  * The prefix to use to name the React component.
  *

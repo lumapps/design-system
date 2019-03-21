@@ -5,24 +5,25 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
-import { LxDropdown, LxIcon, LxIconButton } from 'LumX';
-import { IGenericProps, validateComponent, ValidateParameters } from 'LumX/core/react/utils';
+import { Dropdown, Icon, IconButton } from 'LumX';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { IGenericProps, ValidateParameters, validateComponent } from 'LumX/core/react/utils';
 import { mdiMenuDown } from 'LumX/icons';
 
 import {
-    CLASSNAME as LXBUTTON_CLASSNAME,
+    Button,
+    ButtonProps,
+    CLASSNAME as BUTTON_CLASSNAME,
     Color,
     Colors,
     Emphasis,
     Emphasises,
-    LxButton,
-    LxButtonProps,
     Size,
     Sizes,
     Theme,
     Themes,
 } from './Button';
-import { LxButtonGroup, LxButtonGroupProps } from './ButtonGroup';
+import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
 
 /////////////////////////////
 
@@ -43,23 +44,23 @@ interface IProps extends IGenericProps {
     dropdown?: JSX.Element;
 
     /**
-     * Indicates if the label <LxButton> and the icon <LxDropdownButton> buttons are separated in the <LxButtonGroup>
+     * Indicates if the label <Button> and the icon <IconButton> buttons are separated in the <ButtonGroup>
      */
     isSplitted?: boolean;
 
     /**
-     * The <LxDropdownButton> should never have the `variant` prop as this prop is forced to 'button' in the <LxButton>.
+     * The <DropdownButton> should never have the `variant` prop as this prop is forced to 'button' in the <Button>.
      */
     variant?: never;
 }
-type LxDropdownButtonProps = IProps & LxButtonProps & LxButtonGroupProps;
+type DropdownButtonProps = IProps & ButtonProps & ButtonGroupProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface ILxDropdownButtonDefaultPropsType extends Partial<LxDropdownButtonProps> {}
+interface IDropdownButtonDefaultPropsType extends Partial<DropdownButtonProps> {}
 
 /////////////////////////////
 //                         //
@@ -68,31 +69,31 @@ interface ILxDropdownButtonDefaultPropsType extends Partial<LxDropdownButtonProp
 /////////////////////////////
 
 /**
- * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
- */
-const CLASSNAME: string = `${LXBUTTON_CLASSNAME}__dropdown`;
-
-/**
  * The display name of the component.
  *
  * @type {string}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = 'LxDropdownButton';
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}DropdownButton`;
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = `${BUTTON_CLASSNAME}__dropdown`;
 
 /**
  * The default value of props.
  *
- * @type {ILxDropdownButtonDefaultPropsType}
+ * @type {IDropdownButtonDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxDropdownButtonDefaultPropsType = {
+const DEFAULT_PROPS: IDropdownButtonDefaultPropsType = {
     isSplitted: false,
 };
 
@@ -103,7 +104,7 @@ const DEFAULT_PROPS: ILxDropdownButtonDefaultPropsType = {
 /////////////////////////////
 
 /**
- * Globally validate the <LxDropdownButton> component before validating the children.
+ * Globally validate the component before validating the children.
  *
  * @param {ValidateParameters} props The properties of the component.
  */
@@ -126,13 +127,13 @@ function _preValidate({ props }: ValidateParameters): void {
 }
 
 /**
- * Validate the <LxDropdownButton> component props and children.
+ * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {LxDropdownButtonProps} props The children and props of the <LxButton> component.
- * @return {React.ReactNode}       The processed children of the component.
+ * @param  {DropdownButtonProps} props The children and props of the component.
+ * @return {React.ReactNode}     The processed children of the component.
  */
-function _validate(props: LxDropdownButtonProps): React.ReactNode {
+function _validate(props: DropdownButtonProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: 2,
         preValidate: _preValidate,
@@ -143,23 +144,27 @@ function _validate(props: LxDropdownButtonProps): React.ReactNode {
 /////////////////////////////
 
 /**
- * Displays an icon button.
- * It's like a <LxButton> but displays an icon instead of a label in the body of the button.
+ * Displays an dropdown button.
+ * It's either a <Button> with an automatic right icon representing a "down caret". A click the button displays the
+ * dropdown (non-splitted mode), or a <ButtonGroup> with a first <Button> for the label and a second <IconButton>
+ * representing a "down caret". A click on the <IconButton> displays the dropdown (splitted mode).
  *
- * @see {@link LxButton} for more information on <LxButton>.
+ * @see {@link Button} for more information on <Button>.
+ * @see {@link IconButton} for more information on <IconButton>.
+ * @see {@link ButtonGroup} for more information on <ButtonGroup>.
  *
- * @return {JSX.Element} The <LxDropdownButton> component.
+ * @return {JSX.Element} The component.
  */
-const LxDropdownButton: React.FC<LxDropdownButtonProps> = ({
+const DropdownButton: React.FC<DropdownButtonProps> = ({
     children,
     className = '',
     dropdown,
     isSplitted = DEFAULT_PROPS.isSplitted,
     ...props
-}: LxDropdownButtonProps): JSX.Element => {
+}: DropdownButtonProps): JSX.Element => {
     const [isDropdownOpened, setIsDropdownOpened]: [boolean, (isDropdownOpened: boolean) => void] = useState(false);
 
-    const newChildren = _validate({ children, dropdown, isSplitted, ...props });
+    const newChildren: React.ReactNode = _validate({ children, dropdown, isSplitted, ...props });
 
     const openDropdown: (evt: React.MouseEvent<HTMLElement>) => boolean | void = (
         evt: React.MouseEvent<HTMLElement>,
@@ -176,22 +181,22 @@ const LxDropdownButton: React.FC<LxDropdownButtonProps> = ({
 
     if (isSplitted) {
         rootElement = (
-            <LxButtonGroup className={extendedClassNames}>
-                <LxButton {...props} variant={Variants.button}>
+            <ButtonGroup className={extendedClassNames}>
+                <Button {...props} variant={Variants.button}>
                     {newChildren}
-                </LxButton>
+                </Button>
 
-                <LxIconButton {...props} onClick={openDropdown}>
-                    <LxIcon icon={mdiMenuDown} />
-                </LxIconButton>
-            </LxButtonGroup>
+                <IconButton {...props} onClick={openDropdown}>
+                    <Icon icon={mdiMenuDown} />
+                </IconButton>
+            </ButtonGroup>
         );
     } else {
         rootElement = (
-            <LxButton className={extendedClassNames} {...props} variant={Variants.button} onClick={openDropdown}>
+            <Button className={extendedClassNames} {...props} variant={Variants.button} onClick={openDropdown}>
                 {newChildren}
-                <LxIcon icon={mdiMenuDown} />
-            </LxButton>
+                <Icon icon={mdiMenuDown} />
+            </Button>
         );
     }
 
@@ -199,11 +204,11 @@ const LxDropdownButton: React.FC<LxDropdownButtonProps> = ({
         <Fragment>
             {rootElement}
 
-            {isDropdownOpened ? <LxDropdown>{dropdown}</LxDropdown> : null}
+            {isDropdownOpened ? <Dropdown>{dropdown}</Dropdown> : undefined}
         </Fragment>
     );
 };
-LxDropdownButton.displayName = COMPONENT_NAME;
+DropdownButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
@@ -214,8 +219,8 @@ export {
     Colors,
     Emphasis,
     Emphasises,
-    LxDropdownButton,
-    LxDropdownButtonProps,
+    DropdownButton,
+    DropdownButtonProps,
     Size,
     Sizes,
     Theme,

@@ -1,3 +1,9 @@
+/////////////////////////////
+//                         //
+//    Public attributes    //
+//                         //
+/////////////////////////////
+
 /**
  * Defines the type of a complex default prop (which depends on the value of another prop).
  */

@@ -1,10 +1,8 @@
-import { Theme } from '../../constants';
-
-/////////////////////////////
-
 import React from 'react';
 
-import { LxDivider } from 'LumX';
+import { Divider } from 'LumX';
+
+import { Theme } from '../../constants';
 
 import { SubNavItem } from './SubNavItem';
 import { ThemeSelector } from './ThemeSelector';
@@ -25,13 +23,13 @@ interface IProps {
      * The function to change the theme.
      * When the theme selector is used, this function is called to update the current theme.
      */
-    changeTheme: (theme: Theme) => void;
+    changeTheme(theme: Theme): void;
 
     /**
      * The function to handle the change of the active component.
      * When a sub navigation item is clicked, this function is called to change the active component.
      */
-    handleNavigate: (component: string) => void;
+    handleNavigate(component: string): void;
 }
 
 /////////////////////////////
@@ -80,7 +78,7 @@ const SubNav: React.FC<IProps> = ({ activeComponent, changeTheme, handleNavigate
         <div className="sub-nav__wrapper">
             <ThemeSelector changeTheme={changeTheme} />
 
-            <LxDivider className="mv+" />
+            <Divider className="mv+" />
 
             {NAV_ITEMS.map(
                 (navItemLabel: string): JSX.Element => (

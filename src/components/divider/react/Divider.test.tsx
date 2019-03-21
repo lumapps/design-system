@@ -1,21 +1,18 @@
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
-
-/////////////////////////////
-
 import React from 'react';
 
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 
+import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, LxDivider, LxDividerProps, Themes } from './Divider';
+import { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps, Themes } from './Divider';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LxDividerProps>;
+type ISetupProps = Partial<DividerProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -38,13 +35,13 @@ interface ISetup extends ICommonSetup {
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
-    const props: LxDividerProps = {
+const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+    const props: DividerProps = {
         children: 'Label',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<LxDivider {...props} />);
+    const wrapper: ShallowWrapper = shallow(<Divider {...props} />);
 
     return {
         hr: wrapper.find('hr'),
@@ -54,7 +51,7 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
     };
 };
 
-describe(`<${LxDivider.displayName}>`, (): void => {
+describe(`<${Divider.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {

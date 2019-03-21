@@ -1,21 +1,18 @@
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
-
-/////////////////////////////
-
 import React from 'react';
 
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 
+import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, LxDropdown, LxDropdownProps } from './Dropdown';
+import { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps } from './Dropdown';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LxDropdownProps>;
+type ISetupProps = Partial<DropdownProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -38,13 +35,13 @@ interface ISetup extends ICommonSetup {
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
-    const props: LxDropdownProps = {
+const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+    const props: DropdownProps = {
         children: 'This is the content of the dropdown',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<LxDropdown {...props} />);
+    const wrapper: ShallowWrapper = shallow(<Dropdown {...props} />);
 
     return {
         dropdown: wrapper.find('div').first(),
@@ -54,7 +51,7 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
     };
 };
 
-describe(`<${LxDropdown.displayName}>`, (): void => {
+describe(`<${Dropdown.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {

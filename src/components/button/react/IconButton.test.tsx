@@ -1,21 +1,21 @@
 import React, { Fragment } from 'react';
 
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { LxButton, LxButtonVariants, LxIcon } from 'LumX';
+import { Button, ButtonVariants, Icon } from 'LumX';
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, Emphasises, LxIconButton, LxIconButtonProps, Sizes, Themes } from './IconButton';
+import { CLASSNAME, Emphasises, IconButton, IconButtonProps, Sizes, Themes } from './IconButton';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LxIconButtonProps>;
+type ISetupProps = Partial<IconButtonProps>;
 
 /**
  * Defines what is returned by the setup function.
@@ -27,12 +27,12 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <LxButton> element that is used as a wrapper for the children of the <LxIconButton>.
+     * The <Button> element that is used as a wrapper for the children of the <IconButton>.
      */
     button: ShallowWrapper;
 
     /**
-     * The <LxIcon> icon(s) of the <LxIconButton>.
+     * The <Icon> icon(s) of the <IconButton>.
      */
     icon: ShallowWrapper;
 }
@@ -46,25 +46,25 @@ interface ISetup extends ICommonSetup {
  * @return {ISetup}            An object with the props, the component wrapper and some shortcut to some element inside of
  *                             the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
-    const props: LxIconButtonProps = {
-        children: <LxIcon icon={mdiPlus} />,
+const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+    const props: IconButtonProps = {
+        children: <Icon icon={mdiPlus} />,
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<LxIconButton {...props} />);
+    const wrapper: ShallowWrapper = shallow(<IconButton {...props} />);
 
     return {
-        button: wrapper.find('LxButton'),
+        button: wrapper.find('Button'),
 
-        icon: wrapper.find('LxIcon'),
+        icon: wrapper.find('Icon'),
 
         props,
         wrapper,
     };
 };
 
-describe(`<${LxIconButton.displayName}>`, () => {
+describe(`<${IconButton.displayName}>`, () => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly an icon button', (): void => {
@@ -87,36 +87,37 @@ describe(`<${LxIconButton.displayName}>`, () => {
         it('should use default props', (): void => {
             const { button }: ISetup = setup();
 
-            expect(button).toHaveProp('variant', LxButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariants.icon);
         });
 
         it("should use 'icon' `variant` whatever the given `variant` prop is", (): void => {
             mockConsole();
 
             const modifiedProps: ISetupProps = {
-                // We known that <LxIconButton> could not have a `variant` prop.
+                // We known that <IconButton> could not have a `variant` prop.
                 // @ts-ignore
-                variant: LxButtonVariants.icon,
+                variant: ButtonVariants.icon,
             };
 
             let { button }: ISetup = setup(modifiedProps);
 
-            expect(button).toHaveProp('variant', LxButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariants.icon);
 
             /////////////////////////////
 
-            // We known that <LxIconButton> could not have a `variant` prop.
+            // We known that <IconButton> could not have a `variant` prop.
             // @ts-ignore
-            modifiedProps.variant = LxButtonVariants.button;
+            modifiedProps.variant = ButtonVariants.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp('variant', LxButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariants.icon);
         });
 
-        it(`should forward any <${LxButton.displayName}> prop (except \`variant\`)`, (): void => {
+        it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
-                color: fake((fakeData) => fakeData.commerce.color()),
+                // tslint:disable-next-line: no-any
+                color: fake((fakeData: any) => fakeData.commerce.color()),
                 emphasis: oneOf(...Object.values(Emphasises)),
                 size: oneOf(...Object.values(Sizes)),
                 theme: oneOf(...Object.values(Themes)),
@@ -180,6 +181,7 @@ describe(`<${LxIconButton.displayName}>`, () => {
         it('should fail when no child is given', (): void => {
             expect(
                 (): void => {
+                    // tslint:disable-next-line: no-null-keyword
                     setup({ children: null });
                 },
             ).toThrowErrorMatchingSnapshot();
@@ -188,8 +190,8 @@ describe(`<${LxIconButton.displayName}>`, () => {
         it('should fail when more than 1 children are given', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                 </Fragment>
             );
 
@@ -200,7 +202,7 @@ describe(`<${LxIconButton.displayName}>`, () => {
             ).toThrowErrorMatchingSnapshot();
         });
 
-        it(`should fail when anything else than <${LxIcon.displayName}> is given as child`, (): void => {
+        it(`should fail when anything else than <${Icon.displayName}> is given as child`, (): void => {
             mockConsole('debug');
 
             const children: React.ReactNode = <div>toto</div>;
@@ -212,20 +214,22 @@ describe(`<${LxIconButton.displayName}>`, () => {
             ).toThrowErrorMatchingSnapshot();
         });
 
-        it(`should warn the user when rendering a <${LxIconButton.displayName}> with a \`variant\``, (): void => {
+        it(`should warn the user when rendering a <${IconButton.displayName}> with a \`variant\``, (): void => {
             global.console.warn = jest.fn();
 
-            // We know that a <LxIconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
+            // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: LxButtonVariants.icon });
+            setup({ variant: ButtonVariants.icon });
+            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
             global.console.warn.mockClear();
 
-            // We know that a <LxIconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
+            // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: LxButtonVariants.button });
+            setup({ variant: ButtonVariants.button });
+            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
         });
     });

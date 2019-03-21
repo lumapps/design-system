@@ -1,15 +1,12 @@
-import { Color, Colors, Size, Sizes } from 'LumX/components';
-import { IGenericProps, validateComponent, ValidateParameters } from 'LumX/core/react/utils';
-
-/////////////////////////////
-
 import React from 'react';
 
 import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
+import { Color, Colors, Size, Sizes } from 'LumX/components';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -33,14 +30,14 @@ interface IProps extends IGenericProps {
      */
     size?: Size;
 }
-type LxIconProps = IProps;
+type IconProps = IProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface ILxIconDefaultPropsType extends Partial<LxIconProps> {}
+interface IIconDefaultPropsType extends Partial<IconProps> {}
 
 /////////////////////////////
 //                         //
@@ -49,31 +46,31 @@ interface ILxIconDefaultPropsType extends Partial<LxIconProps> {}
 /////////////////////////////
 
 /**
- * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
- */
-const CLASSNAME: string = `${CSS_PREFIX}-icon`;
-
-/**
  * The display name of the component.
  *
  * @type {string}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = 'LxIcon';
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Icon`;
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  *
- * @type {ILxIconDefaultPropsType}
+ * @type {IIconDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: ILxIconDefaultPropsType = {};
+const DEFAULT_PROPS: IIconDefaultPropsType = {};
 
 /////////////////////////////
 //                         //
@@ -82,7 +79,7 @@ const DEFAULT_PROPS: ILxIconDefaultPropsType = {};
 /////////////////////////////
 
 /**
- * Globally validate the <LxDropdownButton> component before validating the children.
+ * Globally validate the component before validating the children.
  *
  * @param {ValidateParameters} props The properties of the component.
  */
@@ -91,16 +88,16 @@ function _preValidate({ props }: ValidateParameters): void {
         return;
     }
 
-    throw new Error('Your <LxIcon> must have an `icon` prop!');
+    throw new Error(`<${COMPONENT_NAME}> must have an \`icon\` prop!`);
 }
 
 /**
- * Validate the <LxIcon> component props.
+ * Validate the component props.
  *
- * @param  {LxIconProps}     props The props of the <LxIcon> component.
+ * @param  {IconProps}       props The props of the component.
  * @return {React.ReactNode} The processed children of the component.
  */
-function _validate(props: LxIconProps): React.ReactNode {
+function _validate(props: IconProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
         preValidate: _preValidate,
         props,
@@ -112,9 +109,9 @@ function _validate(props: LxIconProps): React.ReactNode {
 /**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
  *
- * @return {JSX.Element} The <LxIcon> component
+ * @return {JSX.Element} The component
  */
-const LxIcon: React.FC<LxIconProps> = ({ className, color, icon, size, ...props }: LxIconProps): JSX.Element => {
+const Icon: React.FC<IconProps> = ({ className, color, icon, size, ...props }: IconProps): JSX.Element => {
     _validate({ color, icon, size, ...props });
 
     return (
@@ -132,8 +129,8 @@ const LxIcon: React.FC<LxIconProps> = ({ className, color, icon, size, ...props 
         </i>
     );
 };
-LxIcon.displayName = COMPONENT_NAME;
+Icon.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, LxIcon, LxIconProps, Color, Colors, Size, Sizes };
+export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, Color, Colors, Size, Sizes };

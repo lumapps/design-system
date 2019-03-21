@@ -1,23 +1,20 @@
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
-
-/////////////////////////////
-
 import React from 'react';
 
-import { shallow, ShallowWrapper } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
+import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, LxIcon, LxIconProps, Sizes } from './Icon';
+import { CLASSNAME, Icon, IconProps, Sizes } from './Icon';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LxIconProps>;
+type ISetupProps = Partial<IconProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -50,13 +47,13 @@ interface ISetup extends ICommonSetup {
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
-    const props: LxIconProps = {
+const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+    const props: IconProps = {
         icon: 'mdiPlus',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<LxIcon {...props} />);
+    const wrapper: ShallowWrapper = shallow(<Icon {...props} />);
 
     return {
         i: wrapper.find('i'),
@@ -68,7 +65,7 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
     };
 };
 
-describe(`<${LxIcon.displayName}>`, (): void => {
+describe(`<${Icon.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
@@ -99,7 +96,8 @@ describe(`<${LxIcon.displayName}>`, (): void => {
 
         it('should use the given props', (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
-                color: fake((fakeData) => fakeData.commerce.color()),
+                // tslint:disable-next-line: no-any
+                color: fake((fakeData: any) => fakeData.commerce.color()),
                 icon: oneOf(mdiPlus, mdiCheck),
                 size: oneOf(...Object.values(Sizes)),
             });
@@ -157,8 +155,9 @@ describe(`<${LxIcon.displayName}>`, (): void => {
         it('should fail when no `icon` is given', (): void => {
             expect(
                 (): void => {
-                    // We know that icon must be given to <LxIcon>, but for the test, ignore it.
+                    // We know that icon must be given to <Icon>, but for the test, ignore it.
                     // @ts-ignore
+                    // tslint:disable-next-line: no-null-keyword
                     setup({ icon: null });
                 },
             ).toThrowErrorMatchingSnapshot();

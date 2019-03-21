@@ -3,6 +3,10 @@ import { ReactWrapper, ShallowWrapper } from 'enzyme';
 import { IGenericProps } from 'LumX/react/utils';
 
 /////////////////////////////
+//                         //
+//    Public attributes    //
+//                         //
+/////////////////////////////
 
 /**
  * The type of a wrapper that can be

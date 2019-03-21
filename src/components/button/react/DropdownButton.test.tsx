@@ -4,18 +4,18 @@ import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { LxButton, LxButtonGroup, LxButtonVariants, LxIcon } from 'LumX';
+import { Button, ButtonGroup, ButtonVariants, Icon } from 'LumX';
 import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, Emphasises, LxDropdownButton, LxDropdownButtonProps, Sizes, Themes } from './DropdownButton';
+import { CLASSNAME, DropdownButton, DropdownButtonProps, Emphasises, Sizes, Themes } from './DropdownButton';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LxDropdownButtonProps>;
+type ISetupProps = Partial<DropdownButtonProps>;
 
 /**
  * Defines what is returned by the setup function.
@@ -27,34 +27,34 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <LxButton> element that is used as a wrapper for the children of the <LxDropdownButton>.
+     * The <Button> element that is used as a wrapper for the children of the <DropdownButton>.
      */
     button: Wrapper;
 
     /**
-     * The <LxDropdown> element that holds the dropdown toggled by the <LxDropdownButton>.
+     * The <Dropdown> element that holds the dropdown toggled by the <DropdownButton>.
      */
     dropdown: Wrapper;
 
     /**
-     * The <LxButtonGroup> element that is used as a wrapper for the buttons inside of the <LxDropdownButton> when
+     * The <ButtonGroup> element that is used as a wrapper for the buttons inside of the <DropdownButton> when
      * splitted.
      */
     group: Wrapper;
 
     /**
-     * The <LxIcon>(s) that holds either the preceding icon (the one before the label) or the dropdown toggle icon.
+     * The <Icon>(s) that holds either the preceding icon (the one before the label) or the dropdown toggle icon.
      */
     icon: Wrapper;
 
     /**
-     * The <LxIconButton> that hold the dropdown toggle icon button.
+     * The <IconButton> that hold the dropdown toggle icon button.
      */
     iconButton: Wrapper;
 
     /**
-     * The roo element of the <LxDropdownButton> component.
-     * Either <LxButtonGroup> if `isSplitted` or <LxButton> if not `isSplitted`.
+     * The roo element of the <DropdownButton> component.
+     * Either <ButtonGroup> if `isSplitted` or <Button> if not `isSplitted`.
      */
     root: Wrapper;
 }
@@ -69,8 +69,11 @@ interface ISetup extends ICommonSetup {
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of
  *                       the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
-    const props: LxDropdownButtonProps = {
+const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
+    { ...propsOverrides }: ISetupProps = {},
+    shallowRendering: boolean = true,
+): ISetup => {
+    const props: DropdownButtonProps = {
         children: 'Label',
         dropdown: <span>Dropdown content</span>,
         ...propsOverrides,
@@ -78,32 +81,33 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
 
     const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
 
-    const wrapper: Wrapper = renderer(<LxDropdownButton {...props} />);
+    const wrapper: Wrapper = renderer(<DropdownButton {...props} />);
 
     return {
-        root: props.isSplitted ? wrapper.find('LxButtonGroup') : wrapper.find('LxButton'),
+        root: props.isSplitted ? wrapper.find('ButtonGroup') : wrapper.find('Button'),
 
-        group: wrapper.find('LxButtonGroup'),
+        group: wrapper.find('ButtonGroup'),
 
-        button: wrapper.find('LxButton'),
-        icon: wrapper.find('LxIcon'),
-        iconButton: wrapper.find('LxIconButton'),
+        button: wrapper.find('Button'),
+        icon: wrapper.find('Icon'),
+        iconButton: wrapper.find('IconButton'),
 
-        dropdown: wrapper.find('LxDropdown'),
+        dropdown: wrapper.find('Dropdown'),
 
         props,
         wrapper,
     };
 };
 
-describe(`<${LxDropdownButton.displayName}>`, () => {
+describe(`<${DropdownButton.displayName}>`, () => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a non-splitted dropdown button', (): void => {
             const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
-            expect(root).toHaveDisplayName(LxButton.displayName!);
+            // tslint:disable-next-line: no-non-null-assertion
+            expect(root).toHaveDisplayName(Button.displayName!);
 
             expect(group).not.toExist();
 
@@ -121,7 +125,7 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
         it('should render correctly a non-splitted dropdown button with a preceding icon', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     Label
                 </Fragment>
             );
@@ -129,7 +133,8 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
             const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
-            expect(root).toHaveDisplayName(LxButton.displayName!);
+            // tslint:disable-next-line: no-non-null-assertion
+            expect(root).toHaveDisplayName(Button.displayName!);
 
             expect(group).not.toExist();
 
@@ -148,7 +153,8 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
             const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup({ isSplitted: true });
             expect(wrapper).toMatchSnapshot();
 
-            expect(root).toHaveDisplayName(LxButtonGroup.displayName!);
+            // tslint:disable-next-line: no-non-null-assertion
+            expect(root).toHaveDisplayName(ButtonGroup.displayName!);
 
             expect(group).toExist();
             expect(group).toHaveClassName(CLASSNAME);
@@ -164,7 +170,7 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
         it('should render correctly a splitted dropdown button with a preceding icon', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     Label
                 </Fragment>
             );
@@ -175,7 +181,8 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
             });
             expect(wrapper).toMatchSnapshot();
 
-            expect(root).toHaveDisplayName(LxButtonGroup.displayName!);
+            // tslint:disable-next-line: no-non-null-assertion
+            expect(root).toHaveDisplayName(ButtonGroup.displayName!);
 
             expect(group).toExist();
             expect(group).toHaveClassName(CLASSNAME);
@@ -196,7 +203,8 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
         it('should use default props', (): void => {
             const { root }: ISetup = setup();
 
-            expect(root).toHaveDisplayName(LxButton.displayName!);
+            // tslint:disable-next-line: no-non-null-assertion
+            expect(root).toHaveDisplayName(Button.displayName!);
         });
 
         it("should use 'button' `variant` whatever the given `variant` prop is", (): void => {
@@ -204,40 +212,41 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
 
             const testedProp: string = 'variant';
             const modifiedProps: ISetupProps = {
-                [testedProp]: LxButtonVariants.button,
+                [testedProp]: ButtonVariants.button,
             };
 
             let { button }: ISetup = setup(modifiedProps);
-            expect(button).toHaveProp(testedProp, LxButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariants.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = LxButtonVariants.button;
+            modifiedProps[testedProp] = ButtonVariants.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp(testedProp, LxButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariants.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = LxButtonVariants.icon;
+            modifiedProps[testedProp] = ButtonVariants.icon;
 
             ({ button } = setup({ ...modifiedProps, isSplitted: true }));
 
-            expect(button).toHaveProp(testedProp, LxButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariants.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = LxButtonVariants.button;
+            modifiedProps[testedProp] = ButtonVariants.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp(testedProp, LxButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariants.button);
         });
 
-        it(`should forward any <${LxButton.displayName}> prop (except \`variant\`)`, (): void => {
+        it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
-                color: fake((fakeData) => fakeData.commerce.color()),
+                // tslint:disable-next-line: no-any
+                color: fake((fakeData: any) => fakeData.commerce.color()),
                 emphasis: oneOf(...Object.values(Emphasises)),
                 size: oneOf(...Object.values(Sizes)),
                 theme: oneOf(...Object.values(Themes)),
@@ -294,7 +303,7 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', (): void => {
-        const onClick = jest.fn();
+        const onClick: jest.Mock = jest.fn();
 
         beforeEach(
             (): void => {
@@ -315,10 +324,10 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
             expect(dropdown).not.toExist();
 
             button.simulate('click');
-            dropdown = wrapper.find('LxDropdown');
+            dropdown = wrapper.find('Dropdown');
 
             expect(onClick).toHaveBeenCalled();
-            expect(wrapper.find('LxDropdown')).toExist();
+            expect(wrapper.find('Dropdown')).toExist();
         });
 
         it('should only trigger `onClick` when the label button is clicked in splitted mode', () => {
@@ -335,10 +344,10 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
             expect(dropdown).not.toExist();
 
             button.first().simulate('click');
-            dropdown = wrapper.find('LxDropdown');
+            dropdown = wrapper.find('Dropdown');
 
             expect(onClick).toHaveBeenCalled();
-            expect(wrapper.find('LxDropdown')).not.toExist();
+            expect(wrapper.find('Dropdown')).not.toExist();
         });
 
         it('should only toggle the dropdown when the dropdown (icon) button is clicked in splitted mode', () => {
@@ -355,10 +364,10 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
             expect(dropdown).not.toExist();
 
             iconButton.simulate('click');
-            dropdown = wrapper.find('LxDropdown');
+            dropdown = wrapper.find('Dropdown');
 
             expect(onClick).not.toHaveBeenCalled();
-            expect(wrapper.find('LxDropdown')).toExist();
+            expect(wrapper.find('Dropdown')).toExist();
         });
     });
 
@@ -381,8 +390,8 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
         it('should fail when more than 2 children are given', (): void => {
             let children: React.ReactNode = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     <span>Label</span>
                 </Fragment>
             );
@@ -397,8 +406,8 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
 
             children = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     <span>Label</span>
                 </Fragment>
             );
@@ -413,7 +422,7 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
 
             children = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     <span>Label</span>
                     <span>Label 2</span>
                 </Fragment>
@@ -429,7 +438,7 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
 
             children = (
                 <Fragment>
-                    <LxIcon icon={mdiPlus} />
+                    <Icon icon={mdiPlus} />
                     <span>Label</span>
                     <span>Label 2</span>
                 </Fragment>
@@ -442,39 +451,43 @@ describe(`<${LxDropdownButton.displayName}>`, () => {
             ).toThrowErrorMatchingSnapshot();
         });
 
-        it(`should warn the user when rendering a <${LxDropdownButton.displayName}> with a \`variant\``, (): void => {
+        it(`should warn the user when rendering a <${DropdownButton.displayName}> with a \`variant\``, (): void => {
             global.console.warn = jest.fn();
 
-            // We know that a <LxDropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
+            // We know that a <DropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: LxButtonVariants.icon });
+            setup({ variant: ButtonVariants.icon });
+            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
             global.console.warn.mockClear();
 
-            // We know that a <LxDropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
+            // We know that a <DropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: LxButtonVariants.button });
+            setup({ variant: ButtonVariants.button });
+            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
         });
 
-        it(`should warn the user when rendering a <${
-            LxDropdownButton.displayName
-        }> without a \`dropdown\``, (): void => {
+        it(`should warn the user when rendering a <${DropdownButton.displayName}> without a \`dropdown\``, (): void => {
             global.console.warn = jest.fn();
 
-            // We know that a <LxDropdownButton> must receive a `dropdown`, but for the purpose of the test ignore it.
+            // We know that a <DropdownButton> must receive a `dropdown`, but for the purpose of the test ignore it.
             // @ts-ignore
+            // tslint:disable-next-line: no-null-keyword
             setup({ dropdown: null });
+            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
             global.console.warn.mockClear();
 
-            // We know that a <LxDropdownButton> must receive a `dropdown`, but for the purpose of the test ignore it.
+            // We know that a <DropdownButton> must receive a `dropdown`, but for the purpose of the test ignore it.
             // @ts-ignore
+            // tslint:disable-next-line: no-null-keyword
             setup({ dropdown: null });
+            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
         });
     });
