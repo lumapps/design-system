@@ -1,0 +1,15 @@
+diff --git a/node_modules/@types/jest/index.d.ts b/node_modules/@types/jest/index.d.ts
+index 86a627c..f63c4d0 100644
+--- a/node_modules/@types/jest/index.d.ts
++++ b/node_modules/@types/jest/index.d.ts
+@@ -492,7 +492,9 @@ declare namespace jest {
+          *
+          * @param actual The value to apply matchers against.
+          */
+-        <T = any>(actual: T): Matchers<T>;
++        // Patched declaration to support jest-expect-message.
++        // TODO [Clement]: monitor https://github.com/mattphillips/jest-expect-message/issues/1 for an actual solution.
++        <T = any>(actual: T, message?: string): Matchers<T>;
+         /**
+          * Matches anything but null or undefined. You can use it inside `toEqual` or `toBeCalledWith` instead
+          * of a literal value. For example, if you want to check that a mock function is called with a
