@@ -93,7 +93,7 @@
         "jsx-boolean-value": [true, "always"],
         "jsx-curly-spacing": false,
         "jsx-equals-spacing": false,
-        "jsx-key": true,
+        "jsx-key": false,
         "jsx-no-bind": true,
         "jsx-no-lambda": true,
         "jsx-no-multiline-js": false,
