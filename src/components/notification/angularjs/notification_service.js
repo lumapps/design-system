@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/icons';
@@ -69,7 +70,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      * @param {Element} notification The notification html element.
      */
     function _hide(notification) {
-        notification.addClass(`${COMPONENT_PREFIX}-notification--is-hidden`);
+        notification.addClass(`${CSS_PREFIX}-notification--is-hidden`);
 
         $timeout(function waitBeforeDeleting() {
             notification.remove();
@@ -86,13 +87,11 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      */
     function _build(content, type, actionLabel, actionCallback) {
         const notification = angular.element('<div/>', {
-            class: `${COMPONENT_PREFIX}-notification ${COMPONENT_PREFIX}-notification--color-${
-                _notificationTypes[type].color
-            }`,
+            class: `${CSS_PREFIX}-notification ${CSS_PREFIX}-notification--color-${_notificationTypes[type].color}`,
         });
 
         const notificationIconWrapper = angular.element('<div/>', {
-            class: `${COMPONENT_PREFIX}-notification__icon`,
+            class: `${CSS_PREFIX}-notification__icon`,
         });
         const notificationIcon = $compile(
             `<${COMPONENT_PREFIX}-icon lumx-path="${
@@ -101,7 +100,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
         )($rootScope);
 
         const notificationText = angular.element('<span/>', {
-            class: `${COMPONENT_PREFIX}-notification__content`,
+            class: `${CSS_PREFIX}-notification__content`,
             html: content,
         });
 
@@ -110,10 +109,10 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
         notification.append(notificationIconWrapper).append(notificationText);
 
         if (angular.isDefined(actionLabel)) {
-            notification.addClass(`${COMPONENT_PREFIX}-notification--has-action`);
+            notification.addClass(`${CSS_PREFIX}-notification--has-action`);
 
             const notificationActionWrapper = angular.element('<div/>', {
-                class: `${COMPONENT_PREFIX}-notification__action`,
+                class: `${CSS_PREFIX}-notification__action`,
             });
             const notificationAction = $compile(
                 `<${COMPONENT_PREFIX}-button lumx-emphasis="medium">${actionLabel}</${COMPONENT_PREFIX}-button>`,
@@ -153,7 +152,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      * @param {Function} [actionCallback] The action button callback function called on action button click.
      */
     function _notify(content, type, actionLabel, actionCallback) {
-        const activeNotification = angular.element(`.${COMPONENT_PREFIX}-notification`);
+        const activeNotification = angular.element(`.${CSS_PREFIX}-notification`);
 
         if (activeNotification.length > 0) {
             _hide(activeNotification);

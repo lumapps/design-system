@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './dialog.html';
@@ -71,7 +72,7 @@ function DialogController(
      * @type {Element}
      */
     const _dialogFilter = angular.element('<div/>', {
-        class: `${COMPONENT_PREFIX}-dialog-filter`,
+        class: `${CSS_PREFIX}-dialog-filter`,
     });
 
     /**
@@ -167,8 +168,8 @@ function DialogController(
 
         $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-start`, lumx.id);
 
-        _dialog.addClass(`${COMPONENT_PREFIX}-dialog--is-hidden`);
-        _dialogFilter.addClass(`${COMPONENT_PREFIX}-dialog-filter--is-hidden`);
+        _dialog.addClass(`${CSS_PREFIX}-dialog--is-hidden`);
+        _dialogFilter.addClass(`${CSS_PREFIX}-dialog-filter--is-hidden`);
 
         if (angular.isDefined(_sourceEl)) {
             _sourceEl.focus();
@@ -183,8 +184,8 @@ function DialogController(
 
             _dialogFilter.remove();
 
-            _dialog.removeClass(`${COMPONENT_PREFIX}-dialog--is-hidden`);
-            _dialogFilter.removeClass(`${COMPONENT_PREFIX}-dialog-filter--is-hidden`);
+            _dialog.removeClass(`${CSS_PREFIX}-dialog--is-hidden`);
+            _dialogFilter.removeClass(`${CSS_PREFIX}-dialog-filter--is-hidden`);
 
             lumx.isOpen = false;
 
@@ -244,7 +245,7 @@ function DialogController(
             LumXFocusTrapService.activate(_dialog);
 
             $timeout(function onDialogContentDisplay() {
-                _dialogContent = _dialog.find(`.${COMPONENT_PREFIX}-dialog__content`);
+                _dialogContent = _dialog.find(`.${CSS_PREFIX}-dialog__content`);
                 _dialogContent.on('scroll', _checkScrollEnd);
             });
         });

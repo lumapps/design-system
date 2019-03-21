@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './dropdown.html';
@@ -403,8 +404,8 @@ function DropdownDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
-        ctrl.registerToggle(el.find(`.${COMPONENT_PREFIX}-dropdown__toggle`));
-        ctrl.registerMenu(el.find(`.${COMPONENT_PREFIX}-dropdown__menu`));
+        ctrl.registerToggle(el.find(`.${CSS_PREFIX}-dropdown__toggle`));
+        ctrl.registerMenu(el.find(`.${CSS_PREFIX}-dropdown__menu`));
 
         if (transclude.isSlotFilled('toggle')) {
             ctrl.hasToggle = true;

@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
@@ -13,14 +14,14 @@ function ThumbnailDirective() {
      * @return {string}  The thumbnail html template.
      */
     function getTemplate(el, attrs) {
-        let thumbnailClass = `${COMPONENT_PREFIX}-thumbnail`;
+        let thumbnailClass = `${CSS_PREFIX}-thumbnail`;
 
         if (!attrs.lumxSize) {
-            thumbnailClass += ` ${COMPONENT_PREFIX}-thumbnail--size-m`;
+            thumbnailClass += ` ${CSS_PREFIX}-thumbnail--size-m`;
         }
 
         if (!attrs.lumxVariant) {
-            thumbnailClass += ` ${COMPONENT_PREFIX}-thumbnail--variant-squared`;
+            thumbnailClass += ` ${CSS_PREFIX}-thumbnail--variant-squared`;
         }
 
         return `<div class="${thumbnailClass}"></div>`;
@@ -34,13 +35,13 @@ function ThumbnailDirective() {
         attrs.$observe('lumxSize', (size) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)thumbnail--size-\S+/g) || []).join(' ');
-            }).addClass(`${COMPONENT_PREFIX}-thumbnail--size-${size}`);
+            }).addClass(`${CSS_PREFIX}-thumbnail--size-${size}`);
         });
 
         attrs.$observe('lumxVariant', (variant) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)thumbnail--variant-\S+/g) || []).join(' ');
-            }).addClass(`${COMPONENT_PREFIX}-thumbnail--variant-${variant}`);
+            }).addClass(`${CSS_PREFIX}-thumbnail--variant-${variant}`);
         });
     }
 

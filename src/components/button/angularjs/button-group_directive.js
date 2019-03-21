@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
@@ -8,7 +9,7 @@ function ButtonGroupDirective() {
     return {
         replace: true,
         restrict: 'E',
-        template: `<div class="${COMPONENT_PREFIX}-button-group" ng-transclude></div>`,
+        template: `<div class="${CSS_PREFIX}-button-group" ng-transclude></div>`,
         transclude: true,
     };
 }

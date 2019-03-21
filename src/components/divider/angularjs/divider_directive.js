@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './divider.html';
@@ -9,13 +10,13 @@ function DividerDirective() {
 
     function link(scope, el, attrs) {
         if (!attrs.lumxTheme) {
-            el.addClass(`${COMPONENT_PREFIX}-divider--theme-light`);
+            el.addClass(`${CSS_PREFIX}-divider--theme-light`);
         }
 
         attrs.$observe('lumxTheme', (theme) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)divider--theme-\S+/g) || []).join(' ');
-            }).addClass(`${COMPONENT_PREFIX}-divider--theme-${theme}`);
+            }).addClass(`${CSS_PREFIX}-divider--theme-${theme}`);
         });
     }
 

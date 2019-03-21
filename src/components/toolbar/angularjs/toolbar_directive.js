@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './toolbar.html';
@@ -46,17 +47,17 @@ function ToolbarDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
         if (transclude.isSlotFilled('before')) {
             ctrl.hasBefore = true;
-            el.addClass(`${COMPONENT_PREFIX}-toolbar--has-before`);
+            el.addClass(`${CSS_PREFIX}-toolbar--has-before`);
         }
 
         if (transclude.isSlotFilled('label')) {
             ctrl.hasLabel = true;
-            el.addClass(`${COMPONENT_PREFIX}-toolbar--has-label`);
+            el.addClass(`${CSS_PREFIX}-toolbar--has-label`);
         }
 
         if (transclude.isSlotFilled('after')) {
             ctrl.hasAfter = true;
-            el.addClass(`${COMPONENT_PREFIX}-toolbar--has-after`);
+            el.addClass(`${CSS_PREFIX}-toolbar--has-after`);
         }
     }
 

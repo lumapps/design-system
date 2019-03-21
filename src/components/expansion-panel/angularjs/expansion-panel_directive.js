@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiChevronDown, mdiChevronUp, mdiDragVertical } from 'LumX/icons';
@@ -75,8 +76,8 @@ function ExpansionPanelController($element, $scope, $timeout) {
      * Set the expansion panel wrapper max height.
      */
     function _setWrapperMaxHeight() {
-        const expansionPanelWrapper = $element.find(`.${COMPONENT_PREFIX}-expansion-panel__wrapper`);
-        const expansionPanelContainer = $element.find(`.${COMPONENT_PREFIX}-expansion-panel__container`);
+        const expansionPanelWrapper = $element.find(`.${CSS_PREFIX}-expansion-panel__wrapper`);
+        const expansionPanelContainer = $element.find(`.${CSS_PREFIX}-expansion-panel__container`);
 
         expansionPanelWrapper.css('max-height', expansionPanelContainer.outerHeight());
     }

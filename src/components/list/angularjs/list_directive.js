@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './list.html';
@@ -66,13 +67,13 @@ function lumxListController($element, $scope) {
      * Increase active choice index on key down press.
      */
     function _nextItemOnKeyDown() {
-        let nextItem = $element.find(`.${COMPONENT_PREFIX}-list-item`).eq(lumx.activeItemIndex + 1);
+        let nextItem = $element.find(`.${CSS_PREFIX}-list-item`).eq(lumx.activeItemIndex + 1);
 
         if (nextItem.length === 0) {
             lumx.activeItemIndex = 0;
 
             nextItem = $element
-                .find(`.${COMPONENT_PREFIX}-list-item`)
+                .find(`.${CSS_PREFIX}-list-item`)
                 .eq(lumx.activeItemIndex)
                 .focus();
         } else {
@@ -86,13 +87,13 @@ function lumxListController($element, $scope) {
      * Decrease active choice index on key up press.
      */
     function _previousItemOnKeyUp() {
-        let previousItem = $element.find(`.${COMPONENT_PREFIX}-list-item`).eq(lumx.activeItemIndex - 1);
+        let previousItem = $element.find(`.${CSS_PREFIX}-list-item`).eq(lumx.activeItemIndex - 1);
 
         if (previousItem.length === 0) {
-            lumx.activeItemIndex = $element.find(`.${COMPONENT_PREFIX}-list-item`).length - 1;
+            lumx.activeItemIndex = $element.find(`.${CSS_PREFIX}-list-item`).length - 1;
 
             previousItem = $element
-                .find(`.${COMPONENT_PREFIX}-list-item`)
+                .find(`.${CSS_PREFIX}-list-item`)
                 .eq(lumx.activeItemIndex)
                 .focus();
         } else {

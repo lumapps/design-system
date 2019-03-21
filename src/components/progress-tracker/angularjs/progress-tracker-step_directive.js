@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from 'LumX/icons';
@@ -61,7 +62,7 @@ function ProgressTrackerStepController($scope, $element) {
         return (
             lumx.isActive ||
             lumx.isComplete ||
-            $element.prev().hasClass(`${COMPONENT_PREFIX}-progress-tracker-step--is-complete`)
+            $element.prev().hasClass(`${CSS_PREFIX}-progress-tracker-step--is-complete`)
         );
     }
 

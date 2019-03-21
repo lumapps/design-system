@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
@@ -12,7 +13,7 @@ function IconDirective() {
      */
     function getTemplate() {
         return `
-            <i class="${COMPONENT_PREFIX}-icon">
+            <i class="${CSS_PREFIX}-icon">
                 <svg
                     aria-hidden="true"
                     height="1em"
@@ -34,13 +35,13 @@ function IconDirective() {
         attrs.$observe('lumxColor', (color) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)icon--color-\S+/g) || []).join(' ');
-            }).addClass(`${COMPONENT_PREFIX}-icon--color-${color}`);
+            }).addClass(`${CSS_PREFIX}-icon--color-${color}`);
         });
 
         attrs.$observe('lumxSize', (size) => {
             el.removeClass((index, className) => {
                 return (className.match(/(^|\s)icon--size-\S+/g) || []).join(' ');
-            }).addClass(`${COMPONENT_PREFIX}-icon--size-${size}`);
+            }).addClass(`${CSS_PREFIX}-icon--size-${size}`);
         });
     }
 

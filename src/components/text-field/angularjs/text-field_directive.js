@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiAlertCircle, mdiCheckCircle } from 'LumX/icons';
@@ -84,25 +85,25 @@ function TextFieldDirective() {
 
         input
             .on('focus', function onFocus() {
-                el.addClass(`${COMPONENT_PREFIX}-text-field--is-focus`);
+                el.addClass(`${CSS_PREFIX}-text-field--is-focus`);
             })
             .on('blur', function onBlur() {
-                el.removeClass(`${COMPONENT_PREFIX}-text-field--is-focus`);
+                el.removeClass(`${CSS_PREFIX}-text-field--is-focus`);
             });
 
         modelController.$$attr.$observe('disabled', (isDisabled) => {
             if (isDisabled) {
-                el.addClass(`${COMPONENT_PREFIX}-text-field--is-disabled`);
+                el.addClass(`${CSS_PREFIX}-text-field--is-disabled`);
             } else {
-                el.removeClass(`${COMPONENT_PREFIX}-text-field--is-disabled`);
+                el.removeClass(`${CSS_PREFIX}-text-field--is-disabled`);
             }
         });
 
         modelController.$$attr.$observe('placeholder', (placeholder) => {
             if (placeholder.length > 0) {
-                el.addClass(`${COMPONENT_PREFIX}-text-field--has-placeholder`);
+                el.addClass(`${CSS_PREFIX}-text-field--has-placeholder`);
             } else {
-                el.removeClass(`${COMPONENT_PREFIX}-text-field--has-placeholder`);
+                el.removeClass(`${CSS_PREFIX}-text-field--has-placeholder`);
             }
         });
 

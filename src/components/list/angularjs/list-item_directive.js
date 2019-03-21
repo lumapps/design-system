@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './list-item.html';
@@ -55,7 +56,7 @@ function ListItemController($element) {
             return;
         }
 
-        lumx.parentController.activeItemIndex = $element.index(`.${COMPONENT_PREFIX}-list-item`);
+        lumx.parentController.activeItemIndex = $element.index(`.${CSS_PREFIX}-list-item`);
     });
 }
 

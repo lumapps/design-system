@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './radio-button.html';
@@ -138,9 +139,9 @@ function RadioButtonDirective() {
             el.find('input').attr('disabled', isDisabled);
 
             if (isDisabled) {
-                el.addClass(`${COMPONENT_PREFIX}-radio-button--is-disabled`);
+                el.addClass(`${CSS_PREFIX}-radio-button--is-disabled`);
             } else {
-                el.removeClass(`${COMPONENT_PREFIX}-radio-button--is-disabled`);
+                el.removeClass(`${CSS_PREFIX}-radio-button--is-disabled`);
             }
         });
 

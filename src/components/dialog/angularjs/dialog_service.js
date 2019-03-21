@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
@@ -29,7 +30,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                     <${COMPONENT_PREFIX}-dialog-header>
                         <${COMPONENT_PREFIX}-toolbar>
                             <${COMPONENT_PREFIX}-toolbar-label>
-                                <span class="lumx-typography-title">${params.title}</span>
+                                <span class="${CSS_PREFIX}-typography-title">${params.title}</span>
                             </${COMPONENT_PREFIX}-toolbar-label>
                         </${COMPONENT_PREFIX}-toolbar>
                     </${COMPONENT_PREFIX}-dialog-header>
@@ -80,7 +81,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                     <${COMPONENT_PREFIX}-dialog-header>
                         <${COMPONENT_PREFIX}-toolbar>
                             <${COMPONENT_PREFIX}-toolbar-label>
-                                <span class="lumx-typography-title">${params.title}</span>
+                                <span class="${CSS_PREFIX}-typography-title">${params.title}</span>
                             </${COMPONENT_PREFIX}-toolbar-label>
                         </${COMPONENT_PREFIX}-toolbar>
                     </${COMPONENT_PREFIX}-dialog-header>

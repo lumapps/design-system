@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
@@ -8,7 +9,7 @@ function ListDividerDirective() {
     return {
         replace: true,
         restrict: 'E',
-        template: `<li class="${COMPONENT_PREFIX}-list-divider"></li>`,
+        template: `<li class="${CSS_PREFIX}-list-divider"></li>`,
     };
 }
 

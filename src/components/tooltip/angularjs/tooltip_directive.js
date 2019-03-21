@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
@@ -89,7 +90,7 @@ function TooltipController($element, $timeout, LumXDepthService) {
                 left: tooltipProps.left,
                 top: tooltipProps.top,
             })
-            .addClass(`${COMPONENT_PREFIX}-tooltip--is-shown`);
+            .addClass(`${CSS_PREFIX}-tooltip--is-shown`);
     }
 
     /////////////////////////////
@@ -123,11 +124,11 @@ function TooltipController($element, $timeout, LumXDepthService) {
         const tooltipPoisition = angular.isDefined(lumx.position) && lumx.position ? lumx.position : 'top';
 
         _tooltip = angular.element('<div/>', {
-            class: `${COMPONENT_PREFIX}-tooltip ${COMPONENT_PREFIX}-tooltip--position-${tooltipPoisition}`,
+            class: `${CSS_PREFIX}-tooltip ${CSS_PREFIX}-tooltip--position-${tooltipPoisition}`,
         });
 
         _tooltipLabel = angular.element('<span/>', {
-            class: `${COMPONENT_PREFIX}-tooltip__text`,
+            class: `${CSS_PREFIX}-tooltip__text`,
             text: lumx.text,
         });
 

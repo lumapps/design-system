@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './switch.html';
@@ -133,9 +134,9 @@ function SwitchDirective() {
             el.find('input').attr('disabled', isDisabled);
 
             if (isDisabled) {
-                el.addClass(`${COMPONENT_PREFIX}-switch--is-disabled`);
+                el.addClass(`${CSS_PREFIX}-switch--is-disabled`);
             } else {
-                el.removeClass(`${COMPONENT_PREFIX}-switch--is-disabled`);
+                el.removeClass(`${CSS_PREFIX}-switch--is-disabled`);
             }
         });
 
