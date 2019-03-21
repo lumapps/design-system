@@ -6,7 +6,7 @@ import React from 'react';
 
 import { shallow, ShallowWrapper } from 'enzyme';
 
-import { LxButtonRoot, LxButtonRootProps } from './LxButtonRoot';
+import { LxButtonRoot, LxButtonRootProps } from './ButtonRoot';
 
 /////////////////////////////
 

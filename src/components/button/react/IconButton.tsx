@@ -20,7 +20,7 @@ import {
     Sizes,
     Theme,
     Themes,
-} from './LxButton';
+} from './Button';
 
 /////////////////////////////
 

@@ -8,7 +8,7 @@ import { LxButton, LxButtonVariants, LxIcon } from 'LumX';
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, Emphasises, LxIconButton, LxIconButtonProps, Sizes, Themes } from './LxIconButton';
+import { CLASSNAME, Emphasises, LxIconButton, LxIconButtonProps, Sizes, Themes } from './IconButton';
 
 /////////////////////////////
 

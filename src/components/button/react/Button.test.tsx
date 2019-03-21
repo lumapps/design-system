@@ -15,7 +15,7 @@ import { LxIcon } from 'LumX';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, DEFAULT_PROPS, Emphasises, LxButton, LxButtonProps, Sizes, Themes, Variants } from './LxButton';
+import { CLASSNAME, DEFAULT_PROPS, Emphasises, LxButton, LxButtonProps, Sizes, Themes, Variants } from './Button';
 
 /////////////////////////////
 

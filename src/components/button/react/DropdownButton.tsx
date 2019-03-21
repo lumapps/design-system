@@ -21,8 +21,8 @@ import {
     Sizes,
     Theme,
     Themes,
-} from './LxButton';
-import { LxButtonGroup, LxButtonGroupProps } from './LxButtonGroup';
+} from './Button';
+import { LxButtonGroup, LxButtonGroupProps } from './ButtonGroup';
 
 /////////////////////////////
 

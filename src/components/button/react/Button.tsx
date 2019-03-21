@@ -21,7 +21,7 @@ import {
 } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
-import { LxButtonRoot, LxButtonRootProps } from './LxButtonRoot';
+import { LxButtonRoot, LxButtonRootProps } from './ButtonRoot';
 
 /////////////////////////////
 

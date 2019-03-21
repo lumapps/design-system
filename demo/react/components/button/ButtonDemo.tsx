@@ -15,7 +15,7 @@ import { CSS_PREFIX } from 'LumX/core/constants';
 
 import { mdiCheck, mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
 
-import {} from 'LumX/components/button/react/LxButton';
+import {} from 'LumX/components/button/react/Button';
 
 /////////////////////////////
 

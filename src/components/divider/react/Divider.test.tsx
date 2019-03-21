@@ -8,7 +8,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, LxDivider, LxDividerProps, Themes } from './LxDivider';
+import { CLASSNAME, DEFAULT_PROPS, LxDivider, LxDividerProps, Themes } from './Divider';
 
 /////////////////////////////
 

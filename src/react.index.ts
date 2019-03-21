@@ -1,6 +1,7 @@
 import './core/react';
 
 export { Color, Colors, Size, Sizes, Theme, Themes } from './components';
+
 export {
     CLASSNAME as LxButtonClassName,
     LxButton,
@@ -15,7 +16,7 @@ export {
     Themes as LxButtonThemes,
     Variant as LxButtonVariant,
     Variants as LxButtonVariants,
-} from './components/button/react/LxButton';
+} from './components/button/react/Button';
 export {
     CLASSNAME as LxIconButtonClassName,
     LxIconButton,
@@ -30,7 +31,7 @@ export {
     Themes as LxIconButtonThemes,
     Variant as LxIconButtonVariant,
     Variants as LxIconButtonVariants,
-} from './components/button/react/LxIconButton';
+} from './components/button/react/IconButton';
 export {
     CLASSNAME as LxDropdownButtonClassName,
     Color as LxDropdownButtonColor,
@@ -43,7 +44,7 @@ export {
     Sizes as LxDropdownButtonSizes,
     Theme as LxDropdownButtonTheme,
     Themes as LxDropdownButtonThemes,
-} from './components/button/react/LxDropdownButton';
+} from './components/button/react/DropdownButton';
 
 export {
     CLASSNAME as LxButtonGroupClassName,
@@ -55,7 +56,7 @@ export {
     Sizes as LxButtonGroupSizes,
     Theme as LxButtonGroupTheme,
     Themes as LxButtonGroupThemes,
-} from './components/button/react/LxButtonGroup';
+} from './components/button/react/ButtonGroup';
 
 export {
     CLASSNAME as LxDividerClassName,
@@ -63,9 +64,9 @@ export {
     LxDividerProps,
     Theme as LxDividerTheme,
     Themes as LxDividerThemes,
-} from './components/divider/react/LxDivider';
+} from './components/divider/react/Divider';
 
-export { CLASSNAME as LxDropdownClassName, LxDropdown, LxDropdownProps } from './components/dropdown/react/LxDropdown';
+export { CLASSNAME as LxDropdownClassName, LxDropdown, LxDropdownProps } from './components/dropdown/react/Dropdown';
 
 export {
     CLASSNAME as LxIconClassName,
@@ -75,4 +76,4 @@ export {
     Colors as LxIconColors,
     Size as LxIconSize,
     Sizes as LxIconSizes,
-} from './components/icon/react/LxIcon';
+} from './components/icon/react/Icon';

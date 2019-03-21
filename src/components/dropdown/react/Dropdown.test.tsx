@@ -8,7 +8,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, LxDropdown, LxDropdownProps } from './LxDropdown';
+import { CLASSNAME, DEFAULT_PROPS, LxDropdown, LxDropdownProps } from './Dropdown';
 
 /////////////////////////////
 

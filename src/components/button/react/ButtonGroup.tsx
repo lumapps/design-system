@@ -8,7 +8,7 @@ import classNames from 'classnames';
 
 import { LxIconButton } from 'LumX';
 
-import { CLASSNAME as LXBUTTON_CLASSNAME, Color, Colors, LxButton, Size, Sizes, Theme, Themes } from './LxButton';
+import { CLASSNAME as LXBUTTON_CLASSNAME, Color, Colors, LxButton, Size, Sizes, Theme, Themes } from './Button';
 
 /////////////////////////////
 /**

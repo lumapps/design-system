@@ -8,7 +8,7 @@ import { LxButton, LxButtonGroup, LxButtonVariants, LxIcon } from 'LumX';
 import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, Emphasises, LxDropdownButton, LxDropdownButtonProps, Sizes, Themes } from './LxDropdownButton';
+import { CLASSNAME, Emphasises, LxDropdownButton, LxDropdownButtonProps, Sizes, Themes } from './DropdownButton';
 
 /////////////////////////////
 

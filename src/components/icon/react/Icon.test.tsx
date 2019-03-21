@@ -10,7 +10,7 @@ import { build, fake, oneOf } from 'test-data-bot';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, LxIcon, LxIconProps, Sizes } from './LxIcon';
+import { CLASSNAME, LxIcon, LxIconProps, Sizes } from './Icon';
 
 /////////////////////////////
 
