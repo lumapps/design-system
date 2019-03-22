@@ -1,8 +1,8 @@
-import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
-function UtilsService() {
+function UtilsService($rootScope) {
     'ngInject';
 
     const service = this;
@@ -17,18 +17,14 @@ function UtilsService() {
      * Disable body scroll.
      */
     function disableBodyScroll() {
-        angular.element('body').css({
-            overflow: 'hidden',
-        });
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-scroll__disable`);
     }
 
     /**
      * Restore body scroll.
      */
     function restoreBodyScroll() {
-        angular.element('body').css({
-            overflow: 'visible',
-        });
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-scroll__restore`);
     }
 
     /**

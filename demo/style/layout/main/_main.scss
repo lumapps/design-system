@@ -9,6 +9,10 @@
     padding: $lumx-spacing-unit * 6;
     padding-top: $lumx-spacing-unit * 3;
 
+    .app--scroll-disabled & {
+        overflow: hidden;
+    }
+
     &__wrapper {
         max-width: 650px;
         margin: 0 auto;

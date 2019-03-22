@@ -226,9 +226,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
 
 AppDefaultConfig.$inject = ['$locationProvider', '$stateProvider'];
 
-function AppDefaultRun($rootScope, $http, $templateCache, Theme) {
-    const templatesToCache = [];
-
+function AppDefaultRun($rootScope, Theme) {
     $rootScope.Theme = Theme;
     _changeTheme(Theme.theme).then(() => {
         $rootScope.$apply(() => {
@@ -236,16 +234,16 @@ function AppDefaultRun($rootScope, $http, $templateCache, Theme) {
         });
     });
 
-    angular.forEach(templatesToCache, function cacheTemplates(templatePath) {
-        $http.get(templatePath).then(function cacheTemplatesSuccess(template) {
-            if (angular.isDefinedAndFilled(template)) {
-                $templateCache.put(templatePath, template.data);
-            }
-        });
+    $rootScope.$on('lumx-scroll__disable', () => {
+        angular.element('.app').addClass('app--scroll-disabled');
+    });
+
+    $rootScope.$on('lumx-scroll__restore', () => {
+        angular.element('.app').removeClass('app--scroll-disabled');
     });
 }
 
-AppDefaultRun.$inject = ['$rootScope', '$http', '$templateCache', 'Theme'];
+AppDefaultRun.$inject = ['$rootScope', 'Theme'];
 
 /////////////////////////////
 
