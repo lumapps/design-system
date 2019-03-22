@@ -124,6 +124,7 @@
         "prettier-stylelint": "^0.4.2",
         "prettier-tslint": "^0.4.2",
         "read-pkg": "^5.0.0",
+        "replace-in-file-webpack-plugin": "^1.0.6",
         "sass-loader": "^7.1.0",
         "sass-mq": "^5.0.0",
         "source-map-loader": "^0.2.4",
