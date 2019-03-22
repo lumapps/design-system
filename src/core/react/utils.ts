@@ -1,6 +1,7 @@
 import React, { Children } from 'react';
 
 import get from 'lodash/get';
+import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
@@ -188,12 +189,29 @@ function unwrapFragment(children: React.ReactNode): React.ReactNode {
  * @param  {number}                      [maxChildren]    The maximum expected number of children.
  * @param  {number}                      [minChildren=0]  The minimum expected number of children.
  * @param  {Function}                    [postValidate]   A function to run after all the transformation and validation
- *                                                        of the component.
- * @param  {Function}                    [preValidate]    A function to run before global validation of the component.
- * @param  {IGenericProps}               props            The children and props of the component.
- * @param  {Function}                    [transformChild] A function to transform a child to another child.
+ *                                                        of the children and the props.
+ *                                                        This function can return a string (the error message), a
+ *                                                        boolean (`true` for a successful validation, `false` for a bad
+ *                                                        validation which will lead to throw a basic error message) or
+ *                                                        nothing if there is no special problem (i.e. a successful
+ *                                                        validation).
+ * @param  {Function}                    [preValidate]    A function to run before global validation of the props and
+ *                                                        any transformation or validation of the children.
+ *                                                        This function can return a string (the error message), a
+ *                                                        boolean (`true` for a successful validation, `false` for a bad
+ *                                                        validation which will lead to throw a basic error message) or
+ *                                                        nothing if there is no special problem (i.e. a successful
+ *                                                        validation).
+ * @param  {IGenericProps}               props            The props of the component (should contain a `children` prop).
+ * @param  {Function}                    [transformChild] A function to transform a child to something else.
  * @param  {Function}                    [validateChild]  A function to check if a child is valid after that its type
- *                                                        has been validated (if `allowedTypes` is provided).
+ *                                                        has been validated (if `allowedTypes` is provided) and after
+ *                                                        it has been transformed..
+ *                                                        This function can return a string (the error message), a
+ *                                                        boolean (`true` for a successful validation, `false` for a bad
+ *                                                        validation which will lead to throw a basic error message) or
+ *                                                        nothing if there is nothing special (i.e. a successful
+ *                                                        validation).
  * @return {React.ReactNode}             The processed children of the component.
  */
 function validateComponent(
@@ -212,16 +230,21 @@ function validateComponent(
         maxChildren?: number;
         minChildren?: number;
         props: IGenericProps;
-        postValidate?(params: ValidateParameters): void;
-        preValidate?(params: ValidateParameters): void;
+        postValidate?(params: ValidateParameters): string | boolean | void;
+        preValidate?(params: ValidateParameters): string | boolean | void;
         transformChild?(params: ChildTransformParameters): React.ReactElement;
-        validateChild?(params: ChildValidateParameters): void;
+        validateChild?(params: ChildValidateParameters): string | boolean | void;
     },
 ): React.ReactNode | undefined {
     let newChildren: React.ReactNode = !isEmpty(props.children) ? unwrapFragment(props.children) : undefined;
     const childrenCount: number = Children.count(newChildren);
 
-    preValidate({ children: newChildren, childrenCount, props });
+    const preValidation: string | boolean | void = preValidate({ children: newChildren, childrenCount, props });
+    if (isString(preValidation) || (isBoolean(preValidation) && !preValidation)) {
+        throw new Error(
+            `Pre-validation of <${componentName}> failed${isString(preValidation) ? `: '${preValidation}'` : ''}'.`,
+        );
+    }
 
     if (minChildren !== 0) {
         if (maxChildren === minChildren && childrenCount !== minChildren) {
@@ -273,6 +296,7 @@ function validateComponent(
                     index,
                     props,
                 });
+                const childDisplayName: string = isString(newChild) ? `'${newChild}'` : `<${getTypeName(newChild)}>`;
 
                 if (!isEmpty(allowedTypes)) {
                     const isOfOneAllowedType: boolean = allowedTypes.some((allowedType: string | ComponentType) =>
@@ -294,15 +318,26 @@ function validateComponent(
 
                         console.debug('Non matching type', newChild, '\nResulted in', getTypeName(newChild));
                         throw new Error(
-                            `You can only have ${allowedTypesString} children in <${componentName}> (got ${
-                                isString(newChild) ? `'${newChild}'` : `<${getTypeName(newChild)}>`
-                            })!`,
+                            `You can only have ${allowedTypesString} children in <${componentName}> (got ${childDisplayName})!`,
                         );
                     }
                 }
 
                 // tslint:disable-next-line: no-non-null-assertion
-                validateChild!({ children: newChildren, child: newChild, index, childrenCount, props });
+                const childValidation: string | boolean | void = validateChild!({
+                    child: newChild,
+                    children: newChildren,
+                    childrenCount,
+                    index,
+                    props,
+                });
+                if (isString(childValidation) || (isBoolean(childValidation) && !childValidation)) {
+                    throw new Error(
+                        `Child validation of ${childDisplayName} in ${componentName} failed${
+                            isString(childValidation) ? `: ${childValidation}` : ''
+                        }'.`,
+                    );
+                }
 
                 return newChild;
             },
@@ -313,7 +348,12 @@ function validateComponent(
         }
     }
 
-    postValidate({ children: newChildren, childrenCount, props });
+    const postValidation: string | boolean | void = postValidate({ children: newChildren, childrenCount, props });
+    if (isString(postValidation) || (isBoolean(postValidation) && !postValidation)) {
+        throw new Error(
+            `Post-validation of ${componentName} failed${isString(postValidation) ? `: ${postValidation}` : ''}'.`,
+        );
+    }
 
     return newChildren;
 }
