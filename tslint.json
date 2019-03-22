@@ -58,7 +58,7 @@
         "static-this": {
             "severity": "warning"
         },
-        "strict-type-predicates": true,
+        "strict-type-predicates": false,
         "typedef": {
             "options": [
                 "array-destructuring",

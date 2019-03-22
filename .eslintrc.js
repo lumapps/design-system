@@ -40,7 +40,6 @@ module.exports = {
         'require-jsdoc-except',
         'unicorn',
         'you-dont-need-lodash-underscore',
-        'you-dont-need-lodash-underscore',
         'jsx-a11y',
         'react',
     ],
