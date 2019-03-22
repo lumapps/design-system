@@ -17,7 +17,9 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 
 const { getStyleLoader } = require('./utils');
 const {
+    COMPONENTS_PATH,
     CONFIGS,
+    CORE_PATH,
     DIST_PATH,
     EXAMPLES_PATH,
     ROOT_PATH,
@@ -167,7 +169,7 @@ function getBuildConfig({ config, tech, moduleType }) {
         plugins.push(
             new CopyWebpackPlugin([
                 {
-                    from: `${EXAMPLES_PATH}/${tech}`,
+                    from: `${EXAMPLES_PATH}/${tech}/`,
                     to: `${distTechPath}/examples/`,
                 },
                 {
@@ -181,6 +183,16 @@ function getBuildConfig({ config, tech, moduleType }) {
                 {
                     from: `${ROOT_PATH}/LICENSE.md`,
                     to: `${distTechPath}/`,
+                },
+                {
+                    from: `${CORE_PATH}/style/`,
+                    to: `${distTechPath}/scss/core`,
+                },
+                {
+                    context: `${COMPONENTS_PATH}`,
+                    from: `${COMPONENTS_PATH}/**/style/**/*`,
+                    to: `${distTechPath}/scss/components`,
+                    transformPath: (targetPath) => targetPath.replace('/style/', '/'),
                 },
             ]),
         );
