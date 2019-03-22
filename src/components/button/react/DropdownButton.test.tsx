@@ -312,12 +312,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
         );
 
         it('should both trigger `onClick` and toggle the dropdown when the button is clicked in non-splitted mode', () => {
-            const setupReturn: ISetup = setup(
-                {
-                    onClick,
-                },
-                false,
-            );
+            const setupReturn: ISetup = setup({ onClick }, false);
             const { button, wrapper }: ISetup = setupReturn;
             let { dropdown }: ISetup = setupReturn;
 
@@ -331,13 +326,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
         });
 
         it('should only trigger `onClick` when the label button is clicked in splitted mode', () => {
-            const setupReturn: ISetup = setup(
-                {
-                    isSplitted: true,
-                    onClick,
-                },
-                false,
-            );
+            const setupReturn: ISetup = setup({ isSplitted: true, onClick }, false);
             const { button, wrapper }: ISetup = setupReturn;
             let { dropdown }: ISetup = setupReturn;
 
@@ -351,13 +340,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
         });
 
         it('should only toggle the dropdown when the dropdown (icon) button is clicked in splitted mode', () => {
-            const setupReturn: ISetup = setup(
-                {
-                    isSplitted: true,
-                    onClick,
-                },
-                false,
-            );
+            const setupReturn: ISetup = setup({ isSplitted: true, onClick }, false);
             const { iconButton, wrapper }: ISetup = setupReturn;
             let { dropdown }: ISetup = setupReturn;
 

@@ -183,9 +183,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         const onClick: jest.Mock = jest.fn();
 
         it('should trigger `onClick` when the button is clicked', () => {
-            const { button }: ISetup = setup({
-                onClick,
-            });
+            const { button }: ISetup = setup({ onClick });
 
             button.simulate('click');
             expect(onClick).toHaveBeenCalled();
@@ -194,10 +192,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             onClick.mockClear();
 
-            const { a }: ISetup = setup({
-                href: TEST_URL,
-                onClick,
-            });
+            const { a }: ISetup = setup({ href: TEST_URL, onClick });
 
             a.simulate('click');
             expect(onClick).toHaveBeenCalled();

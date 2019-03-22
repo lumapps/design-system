@@ -211,7 +211,7 @@ describe(`<${IconButton.displayName}>`, () => {
         it(`should fail when anything else than <${Icon.displayName}> is given as child`, (): void => {
             mockConsole('debug');
 
-            const children: React.ReactNode = <div>toto</div>;
+            const children: React.ReactNode = <div>Label</div>;
 
             expect(
                 (): void => {

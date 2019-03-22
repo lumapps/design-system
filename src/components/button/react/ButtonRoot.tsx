@@ -28,7 +28,7 @@ type ButtonRootProps = IProps;
 /**
  * Define the types of the default props.
  */
-interface IButtonRootDefaultPropsType extends Partial<ButtonRootProps> {}
+interface IDefaultPropsType extends Partial<ButtonRootProps> {}
 
 /////////////////////////////
 //                         //
@@ -48,11 +48,11 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ButtonRoot`;
 /**
  * The default value of props.
  *
- * @type {IButtonRootDefaultPropsType}
+ * @type {IDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IButtonRootDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {};
 
 /////////////////////////////
 //                         //

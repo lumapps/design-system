@@ -48,7 +48,7 @@ type IconButtonProps = IProps;
 /**
  * Define the types of the default props.
  */
-interface IIconButtonDefaultPropsType extends Partial<IconButtonProps> {}
+interface IDefaultPropsType extends Partial<IconButtonProps> {}
 
 /////////////////////////////
 //                         //
@@ -77,11 +77,11 @@ const CLASSNAME: string = `${BUTTON_CLASSNAME}__icon`;
 /**
  * The default value of props.
  *
- * @type {IIconButtonDefaultPropsType}
+ * @type {IDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IIconButtonDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {};
 
 /////////////////////////////
 //                         //
@@ -92,7 +92,7 @@ const DEFAULT_PROPS: IIconButtonDefaultPropsType = {};
 /**
  * Globally validate the component before validating the children.
  *
- * @param {ValidateParameters} props The properties of the component.
+ * @param {ValidateParameters} params The children, their number and the props of the component.
  */
 function _preValidate({ props }: ValidateParameters): void {
     if (isEmpty(props.variant)) {

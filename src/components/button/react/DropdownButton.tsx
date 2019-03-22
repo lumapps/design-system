@@ -60,7 +60,7 @@ type DropdownButtonProps = IProps & ButtonProps & ButtonGroupProps;
 /**
  * Define the types of the default props.
  */
-interface IDropdownButtonDefaultPropsType extends Partial<DropdownButtonProps> {}
+interface IDefaultPropsType extends Partial<DropdownButtonProps> {}
 
 /////////////////////////////
 //                         //
@@ -89,11 +89,11 @@ const CLASSNAME: string = `${BUTTON_CLASSNAME}__dropdown`;
 /**
  * The default value of props.
  *
- * @type {IDropdownButtonDefaultPropsType}
+ * @type {IDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IDropdownButtonDefaultPropsType = {
+const DEFAULT_PROPS: IDefaultPropsType = {
     isSplitted: false,
 };
 

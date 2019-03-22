@@ -19,7 +19,7 @@ type DropdownProps = IDropdownProps;
 /**
  * Define the types of the default props.
  */
-interface IDropdownDefaultPropsType extends Partial<DropdownProps> {}
+interface IDefaultPropsType extends Partial<DropdownProps> {}
 
 /////////////////////////////
 //                         //
@@ -48,11 +48,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  *
- * @type {IDropdownDefaultPropsType}
+ * @type {IDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IDropdownDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {};
 
 /////////////////////////////
 

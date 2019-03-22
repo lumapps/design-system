@@ -37,7 +37,7 @@ type IconProps = IProps;
 /**
  * Define the types of the default props.
  */
-interface IIconDefaultPropsType extends Partial<IconProps> {}
+interface IDefaultPropsType extends Partial<IconProps> {}
 
 /////////////////////////////
 //                         //
@@ -66,11 +66,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  *
- * @type {IIconDefaultPropsType}
+ * @type {IDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IIconDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {};
 
 /////////////////////////////
 //                         //

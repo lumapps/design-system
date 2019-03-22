@@ -20,7 +20,7 @@ type ButtonGroupProps = IProps;
 /**
  * Define the types of the default props.
  */
-interface IButtonGroupDefaultPropsType extends Partial<ButtonGroupProps> {}
+interface IDefaultPropsType extends Partial<ButtonGroupProps> {}
 
 /////////////////////////////
 //                         //
@@ -49,11 +49,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  *
- * @type {IButtonGroupDefaultPropsType}
+ * @type {IDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IButtonGroupDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {};
 
 /////////////////////////////
 //                         //

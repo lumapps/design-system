@@ -25,7 +25,7 @@ type DividerProps = IDividerProps;
 /**
  * Define the types of the default props.
  */
-interface IDividerDefaultPropsType extends Partial<DividerProps> {}
+interface IDefaultPropsType extends Partial<DividerProps> {}
 
 /////////////////////////////
 //                         //
@@ -54,11 +54,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  *
- * @type {IDividerDefaultPropsType}
+ * @type {IDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IDividerDefaultPropsType = {
+const DEFAULT_PROPS: IDefaultPropsType = {
     theme: Themes.light,
 };
 

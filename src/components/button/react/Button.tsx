@@ -11,6 +11,7 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import {
     ChildTransformParameters,
     ChildValidateParameters,
+    IGenericProps,
     Omit,
     getRootClassName,
     isElementOfType,
@@ -47,7 +48,7 @@ type Variant = Variants;
 /**
  * Defines the props of the component.
  */
-interface IProps {
+interface IButtonProps extends IGenericProps {
     /**
      * The button color.
      */
@@ -73,14 +74,14 @@ interface IProps {
      */
     variant?: Variant;
 }
-type ButtonProps = IProps & ButtonRootProps;
+type ButtonProps = IButtonProps & ButtonRootProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IButtonDefaultPropsType extends Partial<Omit<ButtonProps, 'color'>> {
+interface IDefaultPropsType extends Partial<Omit<ButtonProps, 'color'>> {
     color: ComplexPropDefault<Color>;
 }
 
@@ -111,11 +112,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  *
- * @type {IButtonDefaultPropsType}
+ * @type {IDefaultPropsType}
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IButtonDefaultPropsType = {
+const DEFAULT_PROPS: IDefaultPropsType = {
     color: {
         default: Colors.dark,
         [`emphasis-${Emphasises.high}`]: Colors.primary,
@@ -133,11 +134,10 @@ const DEFAULT_PROPS: IButtonDefaultPropsType = {
 /////////////////////////////
 
 /**
- * Transform the text children to <span>s when validating the children of the component.
+ * Transform a text child to <span>.
  *
  * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
- * @return {React.ReactElement}       The transformed children (or the original one if there is no transformation to
- *                                    do).
+ * @return {React.ReactElement}       The transformed child (or the original one if there is no transformation to do).
  */
 function _transformChild({ child }: ChildTransformParameters): React.ReactElement {
     if (isString(child)) {
@@ -148,16 +148,16 @@ function _transformChild({ child }: ChildTransformParameters): React.ReactElemen
 }
 
 /**
- * Returns a closure for the function to validate the children of the component.
+ * Returns a closure for the function to validate a child of the component.
  * This closure will help remembering the types of the previous children. This list will help to determine if there is
  * no excess children of a given type.
  *
  * @param  {Array<string>} childrenTypes The list of types of the previously validated children.
- * @return {Function}      The closured function to validate the children of the component.
+ * @return {Function}      The closured function to validate a child of the component.
  */
 function _validateChild(childrenTypes: string[]): (params: ChildValidateParameters) => void {
     /**
-     * Validate the children of the component
+     * Validate a of the component
      *
      * @param {ChildValidateParameters} params The parameters received from the `validateComponent` function.
      */
