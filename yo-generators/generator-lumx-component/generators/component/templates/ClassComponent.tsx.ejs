@@ -1,0 +1,223 @@
+import React from 'react';
+
+import classNames from 'classnames';
+
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+<% if (validateComponent) { -%>
+import {
+    <%_ if (transformChild) { -%>
+    ChildTransformParameters,
+    <%_ } -%>
+    <%_ if (validateChild) { -%>
+    ChildValidateParameters,
+    <%_ } -%>
+    IGenericProps,
+    <%_ if (preValidate || postValidate) { -%>
+    ValidateParameters,
+    <%_ } -%>
+    getRootClassName,
+    <%_ if (checkChildrenTypes) { -%>
+    isElementOfType,
+    isElementText,
+    <%_ } -%>
+    validateComponent,
+} from 'LumX/core/react/utils';
+<% } else { %>
+import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+<% } -%>
+import { handleBasicClasses } from 'LumX/core/utils';
+
+/////////////////////////////
+
+/**
+ * Defines the props of the component.
+ */
+interface I<%= componentName %>Props extends IGenericProps {}
+type <%= componentName %>Props = I<%= componentName %>Props;
+
+/**
+ * Defines the state of the component.
+ */
+interface IState {}
+
+/////////////////////////////
+
+/**
+ * Define the types of the default props.
+ */
+interface IDefaultPropsType extends Partial<<%= componentName %>Props> {}
+
+/////////////////////////////
+//                         //
+//    Public attributes    //
+//                         //
+/////////////////////////////
+
+/**
+ * The display name of the component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}<%= componentName %>`;
+
+/**
+ * The default class name and classes prefix for this component.
+ *
+ * @type {string}
+ * @constant
+ * @readonly
+ */
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+
+/**
+ * The default value of props.
+ *
+ * @type {IDefaultPropsType}
+ * @constant
+ * @readonly
+ */
+const DEFAULT_PROPS: IDefaultPropsType = {};
+
+/////////////////////////////
+
+/**
+ * [Enter the description of the component here].
+ */
+class <%= componentName %> extends React.<%= componentType %>Component<<%= componentName %>Props, IState> {
+    public static displayName: string = COMPONENT_NAME;
+
+    public state: IState = {};
+
+    public render(): JSX.Element {
+        <%_ if (validateComponent) { -%>
+        const newChildren: React.ReactNode = this.validate({ ...this.props });
+
+        const { className, ...props }: <%= componentName %>Props = this.props;
+        <%_ } else { -%>
+        const { children, className, ...props }: <%= componentName %>Props = this.props;
+        <%_ } -%>
+
+        return (
+            <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
+                {<% if (validateComponent) { %>newChildren<% } else { %>children<% } %>}
+            </div>
+        );
+    }
+    <%_ if (validateComponent) { -%>
+    <%_ if (postValidate) { -%>
+    /**
+     * Globally validate the component after transforming and/or validating the children.
+     *
+     * @param  {ValidateParameters} params The children, their number and the props of the component.
+     * @return {string|boolean}     If a string, the error message.
+     *                              If a boolean, `true` means a successful validation, `false` a bad validation (which
+     *                              will lead to throw a basic error message).
+     *                              You can also return nothing if there is no special problem (i.e. a successful
+     *                              validation).
+     */
+    private postValidate({ children, childrenCount }: ValidateParameters): string | boolean | void {
+        // Do your post-validation here.
+
+        return true;
+    }
+    <%_ } -%>
+    <%_ if (preValidate) { -%>
+
+    /**
+     * Globally validate the component before transforming and/or validating the children.
+     *
+     * @param  {ValidateParameters} params The children, their number and the props of the component.
+     * @return {string|boolean}     If a string, the error message.
+     *                              If a boolean, `true` means a successful validation, `false` a bad validation (which
+     *                              will lead to throw a basic error message).
+     *                              You can also return nothing if there is no special problem (i.e. a successful
+     *                              validation).
+     */
+    private preValidate({ children, childrenCount }: ValidateParameters): string | boolean | void {
+        // Do your pre-validation here.
+
+        return true;
+    }
+    <%_ } -%>
+    <%_ if (transformChild) { -%>
+
+    /**
+     * Transform a child of the component.
+     *
+     * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
+     * @return {React.ReactElement}       The transformed child (or the original one if there is no transformation to
+     *                                    do).
+     */
+    private transformChild({ child, children, childrenCount, index }: ChildTransformParameters): React.ReactElement {
+        // Do your transformation here. Here is an example:
+        if (typeof child === 'string') {
+            return <span>{child}</span>;
+        }
+
+        return child;
+    }
+    <%_ } -%>
+    <%_ if (validateChild) { -%>
+
+    /**
+     * Validate a child of the component after its transformation.
+     *
+     * @param  {ChildValidateParameters} params The parameters received from the `validateComponent` function.
+     * @return {string|boolean}     If a string, the error message.
+     *                              If a boolean, `true` means a successful validation, `false` a bad validation (which
+     *                              will lead to throw a basic error message).
+     *                              You can also return nothing if there is no special problem (i.e. a successful
+     *                              validation).
+     */
+    private validateChild({ child, children, childrenCount, index }: ChildValidateParameters): string | boolean | void {
+        // Do your validation here.
+
+        return true;
+    }
+    <%_ } -%>
+
+    /**
+     * Validate the component props and children.
+     * Also, sanitize, cleanup and format the children and return the processed ones.
+     *
+     * @param  {<%= componentName %>Props} props The children and props of the component.
+     * @return {React.ReactNode}    The processed children of the component.
+     */
+    private validate(props: <%= componentName %>Props): React.ReactNode {
+        return validateComponent(COMPONENT_NAME, {
+            <%_ if (checkChildrenTypes) { -%>
+            allowedTypes: [
+                'p',
+                'span',
+                /* Enter the allowed types here */
+            ],
+            <%_ } -%>
+            <%_ if (checkChildrenNumber) { -%>
+            maxChildren: 2 /* Enter the maximum number of children here. Here is an example with maximum 2 children? */,
+            <%_ } -%>
+            <%_ if (checkChildrenNumber) { -%>
+            minChildren: 1 /* Enter the minimum number of children here. Here is an example with at least 1 child. */,
+            <%_ } -%>
+            <%_ if (postValidate) { -%>
+            postValidate: this.postValidate.bind(this),
+            <%_ } -%>
+            <%_ if (preValidate) { -%>
+            preValidate: this.preValidate.bind(this),
+            <%_ } -%>
+            props,
+            <%_ if (transformChild) { -%>
+            transformChild: this.transformChild.bind(this),
+            <%_ } -%>
+            <%_ if (validateChild) { -%>
+            validateChild: this.validateChild.bind(this),
+            <%_ } -%>
+        });
+    }
+    <%_ } -%>
+}
+
+/////////////////////////////
+
+export { CLASSNAME, DEFAULT_PROPS, <%= componentName %>, <%= componentName %>Props };

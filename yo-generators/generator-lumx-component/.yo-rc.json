@@ -1,0 +1,8 @@
+{
+    "generator-node": {
+        "promptValues": {
+            "authorName": "LumApps",
+            "authorUrl": "https://www.lumapps.com"
+        }
+    }
+}
