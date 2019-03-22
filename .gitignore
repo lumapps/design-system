@@ -12,3 +12,4 @@ yarn-error.log
 jsconfig.json
 .awcache
 jest/reports/
+coverage
