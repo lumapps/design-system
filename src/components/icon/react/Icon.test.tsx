@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ShallowWrapper, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiPlus } from 'LumX/icons';
 
@@ -25,17 +25,17 @@ interface ISetup extends ICommonSetup {
     /**
      * The <i> element that wraps the <svg> element.
      */
-    i: ShallowWrapper;
+    i: Wrapper;
 
     /**
      * The <path> element that holds the icon path.
      */
-    path: ShallowWrapper;
+    path: Wrapper;
 
     /**
      * The <svg> element that holds the SVG <path> of the icon.
      */
-    svg: ShallowWrapper;
+    svg: Wrapper;
 }
 
 /////////////////////////////
@@ -44,16 +44,22 @@ interface ISetup extends ICommonSetup {
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
  * @param  {ISetupProps} props  The props to use to override the default props of the component.
+ * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
+    { ...propsOverrides }: ISetupProps = {},
+    shallowRendering: boolean = true,
+): ISetup => {
     const props: IconProps = {
         icon: 'mdiPlus',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<Icon {...props} />);
+    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+
+    const wrapper: Wrapper = renderer(<Icon {...props} />);
 
     return {
         i: wrapper.find('i'),

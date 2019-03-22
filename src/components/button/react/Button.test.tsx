@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { ShallowWrapper, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
@@ -8,7 +8,7 @@ import get from 'lodash/get';
 import without from 'lodash/without';
 
 import { Icon } from 'LumX';
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiPlus } from 'LumX/icons';
 
@@ -30,17 +30,17 @@ interface ISetup extends ICommonSetup {
     /**
      * The <ButtonRoot> element that is used as a wrapper for the children of the <Button>.
      */
-    buttonRoot: ShallowWrapper;
+    buttonRoot: Wrapper;
 
     /**
      * The <Icon> icon(s) of the <Button> (can have 0, 1 or 2).
      */
-    icon: ShallowWrapper;
+    icon: Wrapper;
 
     /**
      * The <span> element of label of the <Button> (can have 0 or 1).
      */
-    label: ShallowWrapper;
+    label: Wrapper;
 }
 
 /////////////////////////////
@@ -69,16 +69,22 @@ function _getDefaultPropValue({ prop, props }: { prop: string; props?: ISetupPro
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
  * @param  {ISetupProps} props  The props to use to override the default props of the component.
+ * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
+    { ...propsOverrides }: ISetupProps = {},
+    shallowRendering: boolean = true,
+): ISetup => {
     const props: ButtonProps = {
         children: 'Label',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<Button {...props} />);
+    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+
+    const wrapper: Wrapper = renderer(<Button {...props} />);
 
     return {
         buttonRoot: wrapper.find('ButtonRoot'),

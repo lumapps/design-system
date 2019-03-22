@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 
-import { ShallowWrapper, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
 import { Button, ButtonVariants, Icon } from 'LumX';
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
 import { CLASSNAME, Emphasises, IconButton, IconButtonProps, Sizes, Themes } from './IconButton';
@@ -29,12 +29,12 @@ interface ISetup extends ICommonSetup {
     /**
      * The <Button> element that is used as a wrapper for the children of the <IconButton>.
      */
-    button: ShallowWrapper;
+    button: Wrapper;
 
     /**
      * The <Icon> icon(s) of the <IconButton>.
      */
-    icon: ShallowWrapper;
+    icon: Wrapper;
 }
 
 /////////////////////////////
@@ -43,16 +43,22 @@ interface ISetup extends ICommonSetup {
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
  * @param  {ISetupProps} props The props to use to override the default props of the component.
- * @return {ISetup}            An object with the props, the component wrapper and some shortcut to some element inside of
- *                             the component.
+ * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of
+ *                       the component.
  */
-const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
+    { ...propsOverrides }: ISetupProps = {},
+    shallowRendering: boolean = true,
+): ISetup => {
     const props: IconButtonProps = {
         children: <Icon icon={mdiPlus} />,
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<IconButton {...props} />);
+    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+
+    const wrapper: Wrapper = renderer(<IconButton {...props} />);
 
     return {
         button: wrapper.find('Button'),

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ShallowWrapper, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 
 import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
 
@@ -33,12 +33,12 @@ interface ISetup extends ICommonSetup {
     /**
      * The <a> element when the <Button> receives a `href` prop.
      */
-    a: ShallowWrapper;
+    a: Wrapper;
 
     /**
      * The <button> element when the <Button> does not receives a `href` prop.
      */
-    button: ShallowWrapper;
+    button: Wrapper;
 }
 
 /////////////////////////////
@@ -47,16 +47,22 @@ interface ISetup extends ICommonSetup {
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
  * @param  {ISetupProps} props  The props to use to override the default props of the component.
+ * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
+    { ...propsOverrides }: ISetupProps = {},
+    shallowRendering: boolean = true,
+): ISetup => {
     const props: ButtonRootProps = {
         children: 'Label',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<ButtonRoot {...props} />);
+    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+
+    const wrapper: Wrapper = renderer(<ButtonRoot {...props} />);
 
     return {
         a: wrapper.find('a'),

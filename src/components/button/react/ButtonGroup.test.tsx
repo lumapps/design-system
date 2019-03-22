@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 
-import { ShallowWrapper, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 
 import { Button, Icon, IconButton } from 'LumX';
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
 import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
@@ -28,7 +28,7 @@ interface ISetup extends ICommonSetup {
     /**
      * The <div> element that is used as a wrapper for the buttons inside of the <ButtonGroup>.
      */
-    group: ShallowWrapper;
+    group: Wrapper;
 }
 
 /////////////////////////////
@@ -37,10 +37,14 @@ interface ISetup extends ICommonSetup {
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
  * @param  {ISetupProps} props The props to use to override the default props of the component.
- * @return {ISetup}            An object with the props, the component wrapper and some shortcut to some element inside of
- *                             the component.
+ * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of
+ *                       the component.
  */
-const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
+    { ...propsOverrides }: ISetupProps = {},
+    shallowRendering: boolean = true,
+): ISetup => {
     const props: ButtonGroupProps = {
         children: (
             <Fragment>
@@ -53,7 +57,9 @@ const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupPro
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<ButtonGroup {...props} />);
+    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+
+    const wrapper: Wrapper = renderer(<ButtonGroup {...props} />);
 
     return {
         group: wrapper.find(`.${CLASSNAME}`),

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ShallowWrapper, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
 import { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps } from './Dropdown';
@@ -23,7 +23,7 @@ interface ISetup extends ICommonSetup {
     /**
      * The <div> element that holds the dropdown content.
      */
-    dropdown: ShallowWrapper;
+    dropdown: Wrapper;
 }
 
 /////////////////////////////
@@ -32,16 +32,22 @@ interface ISetup extends ICommonSetup {
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
  * @param  {ISetupProps} props  The props to use to override the default props of the component.
+ * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps) => ISetup = ({ ...propsOverrides }: ISetupProps = {}): ISetup => {
+const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
+    { ...propsOverrides }: ISetupProps = {},
+    shallowRendering: boolean = true,
+): ISetup => {
     const props: DropdownProps = {
         children: 'This is the content of the dropdown',
         ...propsOverrides,
     };
 
-    const wrapper: ShallowWrapper = shallow(<Dropdown {...props} />);
+    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+
+    const wrapper: Wrapper = renderer(<Dropdown {...props} />);
 
     return {
         dropdown: wrapper.find('div').first(),
