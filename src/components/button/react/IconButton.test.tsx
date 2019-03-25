@@ -5,7 +5,7 @@ import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
 import { Button, ButtonVariants, Icon } from 'LumX';
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
 import { CLASSNAME, Emphasises, IconButton, IconButtonProps, Sizes, Themes } from './IconButton';
@@ -137,28 +137,6 @@ describe(`<${IconButton.displayName}>`, () => {
                 expect(button).toHaveProp(prop, modifiedProps[prop]);
             });
         });
-
-        it('should forward any CSS class', (): void => {
-            const modifiedProps: ISetupProps = {
-                className: 'component component--is-tested',
-            };
-
-            const { button, icon }: ISetup = setup(modifiedProps);
-
-            expect(icon).toHaveClassName(CLASSNAME);
-            expect(button).toHaveClassName(modifiedProps.className);
-        });
-
-        it('should forward any other props', (): void => {
-            const testedProp: string = 'winter';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'is coming',
-            };
-
-            const { button }: ISetup = setup(modifiedProps);
-
-            expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
-        });
     });
 
     /////////////////////////////
@@ -246,4 +224,9 @@ describe(`<${IconButton.displayName}>`, () => {
     describe('State', (): void => {
         // Nothing to do here.
     });
+
+    /////////////////////////////
+
+    // Common tests suite.
+    commonTestsSuite(setup, { className: ['icon', 'button'], prop: 'button' }, { className: CLASSNAME });
 });

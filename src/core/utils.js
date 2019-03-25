@@ -32,7 +32,7 @@ function getBasicClass({ prefix, type, value }) {
  * @return {string} All LumX basic CSS classes.
  */
 function handleBasicClasses({ prefix, ...props }) {
-    const otherClasses: { [prop: string]: boolean } = {};
+    const otherClasses = {};
     if (!isEmpty(props)) {
         Object.keys(props).forEach((prop) => {
             otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] = !isEmpty(props[prop]);

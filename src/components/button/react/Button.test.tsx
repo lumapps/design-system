@@ -8,7 +8,7 @@ import get from 'lodash/get';
 import without from 'lodash/without';
 
 import { Icon } from 'LumX';
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiPlus } from 'LumX/icons';
 
@@ -354,28 +354,6 @@ describe(`<${Button.displayName}>`, (): void => {
                 getBasicClass({ prefix: CLASSNAME, type: 'theme', value: '' }),
             );
         });
-
-        it('should forward any CSS class', (): void => {
-            const modifiedProps: ISetupProps = {
-                className: 'component component--is-tested',
-            };
-
-            const { buttonRoot }: ISetup = setup(modifiedProps);
-
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-            expect(buttonRoot).toHaveClassName(modifiedProps.className);
-        });
-
-        it('should forward any other prop', (): void => {
-            const testedProp: string = 'winter';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'is coming',
-            };
-
-            const { buttonRoot }: ISetup = setup(modifiedProps);
-
-            expect(buttonRoot).toHaveProp(testedProp, modifiedProps[testedProp]);
-        });
     });
 
     /////////////////////////////
@@ -630,4 +608,9 @@ describe(`<${Button.displayName}>`, (): void => {
     describe('State', (): void => {
         // Nothing to do here.
     });
+
+    /////////////////////////////
+
+    // Common tests suite.
+    commonTestsSuite(setup, { className: 'buttonRoot', prop: 'buttonRoot' }, { className: CLASSNAME });
 });

@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 
 import { Button, Icon, IconButton } from 'LumX';
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
 import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
@@ -87,27 +87,7 @@ describe(`<${ButtonGroup.displayName}>`, () => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
-        it('should forward any CSS class', (): void => {
-            const modifiedProps: ISetupProps = {
-                className: 'component component--is-tested',
-            };
-
-            const { group }: ISetup = setup(modifiedProps);
-
-            expect(group).toHaveClassName(CLASSNAME);
-            expect(group).toHaveClassName(modifiedProps.className);
-        });
-
-        it('should forward any props', (): void => {
-            const testedProp: string = 'winter';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'is coming',
-            };
-
-            const { group }: ISetup = setup(modifiedProps);
-
-            expect(group).toHaveProp(testedProp, modifiedProps[testedProp]);
-        });
+        // Nothing to do here.
     });
 
     /////////////////////////////
@@ -283,4 +263,9 @@ describe(`<${ButtonGroup.displayName}>`, () => {
     describe('State', (): void => {
         // Nothing to do here.
     });
+
+    /////////////////////////////
+
+    // Common tests suite.
+    commonTestsSuite(setup, { className: 'group', prop: 'group' }, { className: CLASSNAME });
 });

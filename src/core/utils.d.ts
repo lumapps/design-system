@@ -23,13 +23,7 @@ declare function getBasicClass({ prefix, type, value }: { prefix: string; type: 
  *                         be used in the classname to represent the value of the given prop.
  * @return {string} All LumX basic CSS classes.
  */
-declare function handleBasicClasses({
-    prefix,
-    ...props
-}: {
-    prefix?: string;
-    props?: { [prop: string]: string };
-}): string;
+declare function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string;
 
 /////////////////////////////
 

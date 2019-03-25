@@ -3,7 +3,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiPlus } from 'LumX/icons';
 
@@ -124,28 +124,6 @@ describe(`<${Icon.displayName}>`, (): void => {
                 },
             );
         });
-
-        it('should forward any CSS class', (): void => {
-            const modifiedProps: ISetupProps = {
-                className: 'component component--is-tested',
-            };
-
-            const { i }: ISetup = setup(modifiedProps);
-
-            expect(i).toHaveClassName(CLASSNAME);
-            expect(i).toHaveClassName(modifiedProps.className);
-        });
-
-        it('should forward any other prop', (): void => {
-            const testedProp: string = 'winter';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'is coming',
-            };
-
-            const { i }: ISetup = setup(modifiedProps);
-
-            expect(i).toHaveProp(testedProp, modifiedProps[testedProp]);
-        });
     });
 
     /////////////////////////////
@@ -176,4 +154,9 @@ describe(`<${Icon.displayName}>`, (): void => {
     describe('State', (): void => {
         // Nothing to do here.
     });
+
+    /////////////////////////////
+
+    // Common tests suite.
+    commonTestsSuite(setup, { className: 'i', prop: 'i' }, { className: CLASSNAME });
 });

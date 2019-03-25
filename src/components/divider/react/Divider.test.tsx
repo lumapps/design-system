@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount, shallow } from 'enzyme';
 
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
 import { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps, Themes } from './Divider';
@@ -100,28 +100,6 @@ describe(`<${Divider.displayName}>`, (): void => {
                 getBasicClass({ prefix: CLASSNAME, type: testedProp, value: DEFAULT_PROPS[testedProp] }),
             );
         });
-
-        it('should forward any CSS class', (): void => {
-            const modifiedProps: ISetupProps = {
-                className: 'component component--is-tested',
-            };
-
-            const { hr }: ISetup = setup(modifiedProps);
-
-            expect(hr).toHaveClassName(CLASSNAME);
-            expect(hr).toHaveClassName(modifiedProps.className);
-        });
-
-        it('should forward any other prop', (): void => {
-            const testedProp: string = 'winter';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'is coming',
-            };
-
-            const { hr }: ISetup = setup(modifiedProps);
-
-            expect(hr).toHaveProp(testedProp, modifiedProps[testedProp]);
-        });
     });
 
     /////////////////////////////
@@ -143,4 +121,9 @@ describe(`<${Divider.displayName}>`, (): void => {
     describe('State', (): void => {
         // Nothing to do here.
     });
+
+    /////////////////////////////
+
+    // Common tests suite.
+    commonTestsSuite(setup, { className: 'hr', prop: 'hr' }, { className: CLASSNAME });
 });

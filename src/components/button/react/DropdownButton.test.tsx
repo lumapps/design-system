@@ -5,7 +5,7 @@ import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
 import { Button, ButtonGroup, ButtonVariants, Icon } from 'LumX';
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
 import { CLASSNAME, DropdownButton, DropdownButtonProps, Emphasises, Sizes, Themes } from './DropdownButton';
@@ -269,17 +269,6 @@ describe(`<${DropdownButton.displayName}>`, () => {
             });
         });
 
-        it('should forward any CSS class', (): void => {
-            const modifiedProps: ISetupProps = {
-                className: 'component component--is-tested',
-            };
-
-            const { root }: ISetup = setup(modifiedProps);
-
-            expect(root).toHaveClassName(CLASSNAME);
-            expect(root).toHaveClassName(modifiedProps.className);
-        });
-
         it('should forward any other props', (): void => {
             const testedProp: string = 'winter';
             const modifiedProps: ISetupProps = {
@@ -481,4 +470,9 @@ describe(`<${DropdownButton.displayName}>`, () => {
     describe('State', (): void => {
         // Nothing to do here.
     });
+
+    /////////////////////////////
+
+    // Common tests suite.
+    commonTestsSuite(setup, { className: 'root' }, { className: CLASSNAME });
 });
