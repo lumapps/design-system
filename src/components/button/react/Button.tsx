@@ -260,9 +260,10 @@ const Button: React.FC<ButtonProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({
+                    prefix: CLASSNAME,
+
                     color,
                     emphasis,
-                    prefix: CLASSNAME,
                     size,
                     theme: emphasis === Emphasises.high ? theme : undefined,
                     variant,

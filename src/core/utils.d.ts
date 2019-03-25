@@ -17,28 +17,18 @@ declare function getBasicClass({ prefix, type, value }: { prefix: string; type: 
  *
  * @see {@link /src/components/index.d.ts} for the possible values of each parameter.
  *
- * @param  {string}   prefix   The class name prefix for the generated CSS class.
- * @param  {Color}    color    The color of the component.
- * @param  {Emphasis} emphasis The emphasis of the component.
- * @param  {Size}     size     The size of the component.
- * @param  {Theme}    theme    The theme of the component.
- * @param  {Variant}  variant  The variant of the component.
- * @return {string}   All LumX basic CSS classes.
+ * @param  {string} prefix The class name prefix for the generated CSS class.
+ * @param  {Object} props  All the other props you want to generate a class.
+ *                         The rule of thumb: the key is the name of the prop in the class, the value a string that will
+ *                         be used in the classname to represent the value of the given prop.
+ * @return {string} All LumX basic CSS classes.
  */
 declare function handleBasicClasses({
     prefix,
-    color,
-    emphasis,
-    size,
-    theme,
-    variant,
+    ...props
 }: {
-    color?: Color;
-    emphasis?: string;
-    size?: Size;
-    theme?: Theme;
-    variant?: string;
-    prefix: string;
+    prefix?: string;
+    props?: { [prop: string]: string };
 }): string;
 
 /////////////////////////////

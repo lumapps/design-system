@@ -115,7 +115,7 @@ const Icon: React.FC<IconProps> = ({ className, color, icon, size, ...props }: I
     _validate({ color, icon, size, ...props });
 
     return (
-        <i className={classNames(className, handleBasicClasses({ color, prefix: CLASSNAME, size }))} {...props}>
+        <i className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, size }))} {...props}>
             <svg
                 aria-hidden="true"
                 height="1em"
