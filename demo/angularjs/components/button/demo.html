@@ -1,312 +1,61 @@
-<!-- Theme light (m) -->
-
-<div class="p++ lumx-theme-background-dark-L6">
-    <lumx-button>Default</lumx-button>
-    <lumx-button ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button>
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button>
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button-group>
-        <lumx-button>Split</lumx-button>
-
-        <lumx-button lumx-variant="icon">
-            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-        </lumx-button>
-    </lumx-button-group>
-
-    <lumx-button lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div class="p++ lumx-theme-background-dark-L6">
-    <lumx-button lumx-emphasis="medium">Default</lumx-button>
-    <lumx-button lumx-emphasis="medium" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-emphasis="medium">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-emphasis="medium">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button-group>
-        <lumx-button lumx-emphasis="medium">Split</lumx-button>
-
-        <lumx-button lumx-emphasis="medium" lumx-variant="icon">
-            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-        </lumx-button>
-    </lumx-button-group>
-
-    <lumx-button lumx-emphasis="medium" lumx-is-selected="vm.isSelected" ng-click="vm.toggleSelected()"
-        >Toggle</lumx-button
-    >
-
-    <lumx-button lumx-emphasis="medium" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div class="p++ lumx-theme-background-dark-L6">
-    <lumx-button lumx-emphasis="low">Default</lumx-button>
-    <lumx-button lumx-emphasis="low" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-emphasis="low">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-emphasis="low">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button lumx-emphasis="low" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div class="p++ lumx-theme-background-dark-L6">
-    <lumx-button lumx-size="s">Default</lumx-button>
-    <lumx-button lumx-size="s" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-size="s">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-size="s">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button-group>
-        <lumx-button lumx-size="s">Split</lumx-button>
-
-        <lumx-button lumx-size="s" lumx-variant="icon">
-            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-        </lumx-button>
-    </lumx-button-group>
-
-    <lumx-button lumx-size="s" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<!-- Theme light (s) -->
-
-<div class="p++ lumx-theme-background-dark-L6">
-    <lumx-button lumx-emphasis="medium" lumx-size="s">Default</lumx-button>
-    <lumx-button lumx-emphasis="medium" lumx-size="s" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-emphasis="medium" lumx-size="s">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-emphasis="medium" lumx-size="s">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button-group>
-        <lumx-button lumx-emphasis="medium" lumx-size="s">Split</lumx-button>
-
-        <lumx-button lumx-emphasis="medium" lumx-size="s" lumx-variant="icon">
-            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-        </lumx-button>
-    </lumx-button-group>
-
-    <lumx-button lumx-emphasis="medium" lumx-size="s" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div class="p++ lumx-theme-background-dark-L6">
-    <lumx-button lumx-emphasis="low" lumx-size="s">Default</lumx-button>
-    <lumx-button lumx-emphasis="low" lumx-size="s" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-emphasis="low" lumx-size="s">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-emphasis="low" lumx-size="s">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button lumx-emphasis="low" lumx-size="s" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<!-- Theme dark (m) -->
-
-<div class="p++ lumx-theme-background-dark-N">
-    <lumx-button lumx-theme="dark">Default</lumx-button>
-    <lumx-button lumx-theme="dark" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-theme="dark">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-theme="dark">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button-group>
-        <lumx-button lumx-theme="dark">Split</lumx-button>
-
-        <lumx-button lumx-theme="dark" lumx-variant="icon">
-            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-        </lumx-button>
-    </lumx-button-group>
-
-    <lumx-button lumx-theme="dark" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div class="p++ lumx-theme-background-dark-N">
-    <lumx-button lumx-color="light" lumx-emphasis="medium">Default</lumx-button>
-    <lumx-button lumx-color="light" lumx-emphasis="medium" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="medium">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="medium">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button-group>
-        <lumx-button lumx-color="light" lumx-emphasis="medium">Split</lumx-button>
-
-        <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-variant="icon">
-            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-        </lumx-button>
-    </lumx-button-group>
-
-    <lumx-button
-        lumx-color="light"
-        lumx-emphasis="medium"
-        lumx-is-selected="vm.isSelected"
-        ng-click="vm.toggleSelected()"
-    >
-        Toggle
-    </lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div class="p++ lumx-theme-background-dark-N">
-    <lumx-button lumx-color="light" lumx-emphasis="low">Default</lumx-button>
-    <lumx-button lumx-color="light" lumx-emphasis="low" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="low">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="low">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="low" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<!-- Theme dark (s) -->
-
-<div class="p++ lumx-theme-background-dark-N">
-    <lumx-button lumx-size="s" lumx-theme="dark">Default</lumx-button>
-    <lumx-button lumx-size="s" lumx-theme="dark" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-size="s" lumx-theme="dark">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-size="s" lumx-theme="dark">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button-group>
-        <lumx-button lumx-size="s" lumx-theme="dark">Split</lumx-button>
-
-        <lumx-button lumx-size="s" lumx-theme="dark" lumx-variant="icon">
-            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-        </lumx-button>
-    </lumx-button-group>
-
-    <lumx-button lumx-size="s" lumx-theme="dark" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div class="p++ lumx-theme-background-dark-N">
-    <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-size="s">Default</lumx-button>
-    <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-size="s" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-size="s">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-size="s">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button-group>
-        <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-size="s">Split</lumx-button>
-
-        <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-size="s" lumx-variant="icon">
-            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-        </lumx-button>
-    </lumx-button-group>
-
-    <lumx-button lumx-color="light" lumx-emphasis="medium" lumx-size="s" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div class="p++ lumx-theme-background-dark-N">
-    <lumx-button lumx-color="light" lumx-emphasis="low" lumx-size="s">Default</lumx-button>
-    <lumx-button lumx-color="light" lumx-emphasis="low" lumx-size="s" ng-disabled="true">Disabled</lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="low" lumx-size="s">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-        <span>With Icon</span>
-    </lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="low" lumx-size="s">
-        <span>Dropdown</span>
-        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button lumx-color="light" lumx-emphasis="low" lumx-size="s" lumx-variant="icon">
-        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
-    </lumx-button>
-</div>
+<main-header category="Components" title="Button">
+    <p>
+        Buttons are used to signal an action.
+    </p>
+</main-header>
+
+<main-block
+    class="mt+++"
+    title="Primary"
+    path="demo/angularjs/components/button/partials/medium-primary.html"
+    js-path="demo/angularjs/components/button/controller.js"
+>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Secondary"
+    path="demo/angularjs/components/button/partials/medium-secondary.html"
+    js-path="demo/angularjs/components/button/controller.js"
+>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Tertiary"
+    path="demo/angularjs/components/button/partials/medium-tertiary.html"
+    js-path="demo/angularjs/components/button/controller.js"
+>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Small primary button"
+    path="demo/angularjs/components/button/partials/small-primary.html"
+    js-path="demo/angularjs/components/button/controller.js"
+>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Small primary button"
+    path="demo/angularjs/components/button/partials/small-secondary.html"
+    js-path="demo/angularjs/components/button/controller.js"
+>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Small primary button"
+    path="demo/angularjs/components/button/partials/small-tertiary.html"
+    js-path="demo/angularjs/components/button/controller.js"
+>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Danger"
+    path="demo/angularjs/components/button/partials/medium-danger.html"
+    js-path="demo/angularjs/components/button/controller.js"
+>
+</main-block>
