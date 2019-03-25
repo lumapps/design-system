@@ -1,7 +1,8 @@
 <main-header category="Components" title="Chips">
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris placerat
-        enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.
+        Use chips to display distinct input, attribute or action. Use chips to allow users to make choices, enter
+        information or filter content. Chips should always appear as the same action in the same general area. There is
+        three chips types: choice, filter and input.
     </p>
 </main-header>
 
@@ -12,99 +13,62 @@
     js-path="demo/angularjs/components/chip//controller.js"
 >
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris placerat
-        enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.
+        Display distinct attributes such as tags on a blog post.
     </p>
 </main-block>
 
-<strong>dismissible</strong>
+<main-block
+    class="mt+++"
+    title="Dismissible"
+    path="demo/angularjs/components/chip/partials/dismissible.html"
+    js-path="demo/angularjs/components/chip//controller.js"
+>
+    <p>
+        Allow user to dismiss the chip (to remove an item).
+    </p>
+</main-block>
 
-<div class="pv++">
-    <lumx-chip lumx-on-click="vm.clickCallback()">
-        <lumx-chip-label>Dismissible</lumx-chip-label>
-        <lumx-chip-after><lumx-icon lumx-path="{{ vm.icons.mdiClose }}" lumx-size="xs"></lumx-icon></lumx-chip-after>
-    </lumx-chip>
-</div>
+<main-block
+    class="mt+++"
+    title="Choice"
+    path="demo/angularjs/components/chip/partials/choice.html"
+    js-path="demo/angularjs/components/chip//controller.js"
+>
+    <p>
+        Use choice chips to allow user to make a unique choice between several values. This chips type should replace a
+        common select component if the space is not a constrained.
+    </p>
+</main-block>
 
-<strong>choice</strong>
+<main-block
+    class="mt+++"
+    title="Choice multiple"
+    path="demo/angularjs/components/chip/partials/choice-multiple.html"
+    js-path="demo/angularjs/components/chip//controller.js"
+>
+    <p>
+        Use choice chips to allow user to make a unique choice between several values. This chips type should replace a
+        common select component if the space is not a constrained.
+    </p>
+</main-block>
 
-<div class="pv++">
-    <lumx-chip lumx-is-selected="vm.isSelected" lumx-on-click="vm.toggleSelected()">
-        <lumx-chip-label>Choice</lumx-chip-label>
-    </lumx-chip>
-</div>
+<main-block
+    class="mt+++"
+    title="Filter"
+    path="demo/angularjs/components/chip/partials/filter.html"
+    js-path="demo/angularjs/components/chip//controller.js"
+>
+    <p>
+        Fitler chip serves as an entry point to one or several choices. It can have an optional dismiss button when
+        active.
+    </p>
+</main-block>
 
-<strong>filter</strong>
-
-<div class="pv++">
-    <lumx-chip
-        lumx-has-dropdown-indicator="!vm.isSelected"
-        lumx-is-selected="vm.isSelected"
-        lumx-on-click="vm.select()"
-        lumx-on-after-click="vm.unselect()"
-    >
-        <lumx-chip-before
-            ><lumx-icon lumx-path="{{ vm.icons.mdiFilterVariant }}" lumx-size="xs"></lumx-icon
-        ></lumx-chip-before>
-        <lumx-chip-label>Filter</lumx-chip-label>
-        <lumx-chip-after
-            ><lumx-icon lumx-path="{{ vm.icons.mdiCloseCircle }}" lumx-size="xs"></lumx-icon
-        ></lumx-chip-after>
-    </lumx-chip>
-</div>
-
-<div class="p++ lumx-theme-background-dark-N">
-    <strong class="lumx-theme-color-light-N">default</strong>
-
-    <div class="pv++">
-        <lumx-chip lumx-theme="dark">
-            <lumx-chip-label>Lorem ipsum</lumx-chip-label>
-        </lumx-chip>
-
-        <lumx-chip lumx-theme="dark">
-            <lumx-chip-before
-                ><lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon
-            ></lumx-chip-before>
-            <lumx-chip-label>Lorem ipsum</lumx-chip-label>
-        </lumx-chip>
-    </div>
-
-    <strong class="lumx-theme-color-light-N">dismissible</strong>
-
-    <div class="pv++">
-        <lumx-chip lumx-on-click="vm.clickCallback()" lumx-theme="dark">
-            <lumx-chip-label>Dismissible</lumx-chip-label>
-            <lumx-chip-after
-                ><lumx-icon lumx-path="{{ vm.icons.mdiClose }}" lumx-size="xs"></lumx-icon
-            ></lumx-chip-after>
-        </lumx-chip>
-    </div>
-
-    <strong class="lumx-theme-color-light-N">choice</strong>
-
-    <div class="pv++">
-        <lumx-chip lumx-is-selected="vm.isSelected" lumx-on-click="vm.toggleSelected()" lumx-theme="dark">
-            <lumx-chip-label>Choice</lumx-chip-label>
-        </lumx-chip>
-    </div>
-
-    <strong class="lumx-theme-color-light-N">filter</strong>
-
-    <div class="pv++">
-        <lumx-chip
-            lumx-has-dropdown-indicator="!vm.isSelected"
-            lumx-is-selected="vm.isSelected"
-            lumx-on-click="vm.select()"
-            lumx-on-after-click="vm.unselect()"
-            lumx-theme="dark"
-        >
-            <lumx-chip-before>
-                <lumx-icon lumx-path="{{ vm.icons.mdiFilterVariant }}" lumx-size="xs"></lumx-icon>
-            </lumx-chip-before>
-            <lumx-chip-label>Filter</lumx-chip-label>
-            <lumx-chip-after
-                ><lumx-icon lumx-path="{{ vm.icons.mdiCloseCircle }}" lumx-size="xs"></lumx-icon
-            ></lumx-chip-after>
-        </lumx-chip>
-    </div>
-</div>
+<main-block
+    class="mt+++ mb+++"
+    title="Small"
+    path="demo/angularjs/components/chip/partials/small.html"
+    js-path="demo/angularjs/components/chip//controller.js"
+>
+    <p>For small areas like text fields, selects, dropdown menus and metadatas</p>
+</main-block>
