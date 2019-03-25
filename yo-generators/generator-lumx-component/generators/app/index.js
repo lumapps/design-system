@@ -3,14 +3,20 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
+/////////////////////////////
+
 module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
 
-        this.option('name', { description: 'The name of the component to create', type: String });
+        if (opts.namespace === 'lumx-component:app') {
+            this.isMainGenerator = true;
 
-        this.option('with-tests', { description: 'Generate the associated tests file', type: Boolean });
-        this.option('without-tests', { description: 'Do not generate the associated tests file', type: Boolean });
+            this.option('with-tests', { description: 'Generate the associated tests file', type: Boolean });
+            this.option('without-tests', { description: 'Do not generate the associated tests file', type: Boolean });
+        }
+
+        this.option('name', { description: 'The name of the component to create', type: String });
 
         this.option('with-validation', { description: 'Enable component validation helpers', type: Boolean });
         this.option('without-validation', { description: 'Skip the component validation', type: Boolean });
@@ -21,25 +27,16 @@ module.exports = class extends Generator {
         this.option('transform-child', { description: 'Transform each child', type: Boolean });
         this.option('validate-child', { description: 'Validate each child', type: Boolean });
         this.option('post-validate', { description: 'Post-validate the component', type: Boolean });
-    }
 
-    prompting() {
-        this.log(yosay(`Welcome to the ${chalk.red('LumX React component')} generator!`));
+        /////////////////////////////
 
-        const prompts = [
+        this.prompts = [
             {
                 message: 'What is the component name?',
                 name: 'name',
                 type: 'input',
                 validate: (inputtedName) => /^[A-Z][a-z]+[A-Z]?[a-z]*$/.test(inputtedName),
                 when: this.options.name === undefined || this.options.name.length === 0,
-            },
-            {
-                default: true,
-                message: 'Do you want to create the associated tests file?',
-                name: 'test',
-                type: 'confirm',
-                when: this.options['with-tests'] === undefined && this.options['without-tests'] === undefined,
             },
             {
                 default: false,
@@ -66,12 +63,28 @@ module.exports = class extends Generator {
             },
         ];
 
-        return this.prompt(prompts).then((answers) => {
+        if (opts.namespace === 'lumx-component:app') {
+            this.prompts.push({
+                default: true,
+                message: 'Do you want to create the associated tests file?',
+                name: 'test',
+                type: 'confirm',
+                when: this.options['with-tests'] === undefined && this.options['without-tests'] === undefined,
+            });
+        }
+    }
+
+    prompting(sayHi = true) {
+        if (sayHi) {
+            this.log(yosay(`Welcome to the ${chalk.red('LumX React component')} generator!`));
+        }
+
+        return this.prompt(this.prompts).then((answers) => {
             this.answers = answers;
         });
     }
 
-    composing() {
+    _getValidations() {
         const isValidationEnabled =
             (this.options['with-validation'] || this.answers.validation) && !this.options['without-validation'];
 
@@ -87,12 +100,19 @@ module.exports = class extends Generator {
             'post-validate': this.options['post-validate'] || answeredValidations.indexOf('post') > -1,
         };
 
+        return { isValidationEnabled, validations };
+    }
+
+    composing() {
+        const { isValidationEnabled, validations } = this._getValidations();
+
         this.composeWith(require.resolve('../component'), {
             ...this.options,
             name: this.options.name || this.answers.name,
 
             'validation-given': isValidationEnabled,
             'with-validation': isValidationEnabled,
+            'say-hi': false,
 
             ...validations,
         });
@@ -104,6 +124,7 @@ module.exports = class extends Generator {
 
                 'validation-given': isValidationEnabled,
                 'with-validation': isValidationEnabled,
+                'say-hi': false,
 
                 ...validations,
             });

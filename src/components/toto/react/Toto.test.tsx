@@ -1,21 +1,18 @@
-import React<% if (validateComponent && checkChildrenNumber) {%>, { Fragment }<% } %> from 'react';
+import React from 'react';
 
 import { mount, shallow } from 'enzyme';
-<%_ if (validateComponent && checkChildrenTypes) { -%>
-import mockConsole from 'jest-mock-console';
-<% } -%>
 
 import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, <%= componentName %>, <%= componentName %>Props } from './<%= componentName %>';
+import { CLASSNAME, DEFAULT_PROPS, Toto, TotoProps } from './Toto';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<<%= componentName %>Props>;
+type ISetupProps = Partial<TotoProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -44,14 +41,14 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
     { ...propsOverrides }: ISetupProps = {},
     shallowRendering: boolean = true,
 ): ISetup => {
-    const props: <%= componentName %>Props = {
-        children: <% if (validateComponent && transformChild) { %>'<%= componentName %> Component'<% } else { %><span><%= componentName %> Component</span><% } %>,
+    const props: TotoProps = {
+        children: <span>Toto Component</span>,
         ...propsOverrides,
     };
 
     const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
 
-    const wrapper: Wrapper = renderer(<<%= componentName %> {...props} />);
+    const wrapper: Wrapper = renderer(<Toto {...props} />);
 
     return {
         root: wrapper.find('div' /* [Enter the selector here] */),
@@ -61,7 +58,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
     };
 };
 
-describe(`<${<%= componentName %>.displayName}>`, (): void => {
+describe(`<${Toto.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         // Here is an example of a basic rendering check, with snapshot.
@@ -142,52 +139,7 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', (): void => {
-        <%_ if (validateComponent) { -%>
-        <%_ if (checkChildrenNumber) {-%>
-        // Here are some examples of children number check.
-
-        it('should fail when no child is given', (): void => {
-            expect(
-                (): void => {
-                    // tslint:disable-next-line: no-null-keyword
-                    setup({ children: null });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it('should fail when more than 2 children are given', (): void => {
-            const children: React.ReactNode = (
-                <Fragment>
-                    <span>Label</span>
-                    <span>Label 2</span>
-                    <span>Label 3</span>
-                </Fragment>
-            );
-
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-        <%_ } -%>
-        <%_ if (checkChildrenTypes) -%>
-        // Here is an example of children types check.
-
-        it(`should fail when anything else than text, <span> or <p> is given as child`, (): void => {
-            mockConsole('debug');
-
-            const children: React.ReactNode = <div>Label</div>;
-
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-        <%_ } else { -%>
         // Nothing to do here.
-        <%_ } -%>
     });
 
     /////////////////////////////
