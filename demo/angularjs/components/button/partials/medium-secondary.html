@@ -1,21 +1,23 @@
 <div class="p++" lumx-grid-v-align="left">
-    <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium">Default</lumx-button>
-    <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium" ng-disabled="true">Disabled</lumx-button>
+    <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium" class="mb+">Default</lumx-button>
+    <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium" ng-disabled="true" class="mb+"
+        >Disabled</lumx-button
+    >
 
-    <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium">
+    <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium" class="mb+">
         <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
         <span>With Icon</span>
     </lumx-button>
 
-    <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium">
+    <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium" class="mb+">
         <span>Dropdown</span>
         <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
     </lumx-button>
 
     <lumx-button-group>
-        <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium">Split</lumx-button>
+        <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium" class="mb+">Split</lumx-button>
 
-        <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium" lumx-variant="icon">
+        <lumx-button lumx-theme="{{ mainBlock.theme }}" lumx-emphasis="medium" lumx-variant="icon" class="mb+">
             <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
         </lumx-button>
     </lumx-button-group>
