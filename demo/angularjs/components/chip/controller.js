@@ -1,4 +1,12 @@
-import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant, mdiMenuDown } from 'LumX/icons';
+import {
+    mdiCheck,
+    mdiClose,
+    mdiCloseCircle,
+    mdiEmail,
+    mdiFilterVariant,
+    mdiMenuDown,
+    mdiCircleSmall,
+} from 'LumX/icons';
 
 /////////////////////////////
 
@@ -27,6 +35,7 @@ function DemoChipController(LumXNotificationService) {
         mdiEmail,
         mdiFilterVariant,
         mdiMenuDown,
+        mdiCircleSmall,
     };
 
     /**
