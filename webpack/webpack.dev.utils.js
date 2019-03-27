@@ -85,7 +85,7 @@ function getDevConfig({ config, tech, devServerPort: port }) {
             'demo-theme-material': `${DEMO_PATH}/style/material.scss`,
         },
         module: {
-            rules: [getStyleLoader({ mode: 'dev' })],
+            rules: getStyleLoader({ mode: 'dev' }),
         },
         plugins,
     });

@@ -266,7 +266,7 @@ function getBuildConfig({ config, tech, moduleType }) {
         name: `${tech}-${moduleType}${minify ? '-minified' : ''}`,
 
         module: {
-            rules: [getStyleLoader({ mode: 'prod' })],
+            rules: getStyleLoader({ mode: 'prod' }),
         },
 
         output: {

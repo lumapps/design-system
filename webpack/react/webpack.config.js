@@ -1,3 +1,5 @@
+const path = require('path');
+
 const merge = require('webpack-merge');
 
 const { SRC_PATH, TECH_PREFIX } = require('../constants');
@@ -8,10 +10,17 @@ const reactConfig = {
     entry: {
         'lumx.react': `${SRC_PATH}/${TECH_PREFIX.react}.index.ts`,
     },
+
+    resolve: {
+        alias: {
+            LumX: path.resolve(__dirname, `${SRC_PATH}/react.index.ts`),
+        },
+    },
 };
 
 module.exports = merge.smartStrategy({
     entry: 'append',
     'module.rules': 'append',
     plugins: 'replace',
+    'resolve.alias': 'append',
 })(baseConfig, reactConfig);

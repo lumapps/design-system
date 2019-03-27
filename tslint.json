@@ -23,17 +23,14 @@
             "table"
         ],
         "no-empty-interface": false,
-        "no-floating-promises": true,
         "no-for-in-array": true,
         "no-inferrable-types": false,
         "no-inferred-empty-object-type": true,
         "no-non-null-assertion": {
             "severity": "warning"
         },
-        "no-null-keyword": true,
         "no-object-literal-type-assertion": true,
         "no-return-await": true,
-        "no-unbound-method": [true, { "ignore-static": true, "allow-delete": true, "allow-typeof": true }],
         "no-unsafe-any": false,
         "no-void-expression": {
             "severity": "warning"
@@ -148,7 +145,7 @@
         "jsx-alignment": true,
         "jsx-ban-elements": [true, []],
         "jsx-ban-props": [true, []],
-        "jsx-boolean-value": [true, "always"],
+        "jsx-boolean-value": false,
         "jsx-curly-spacing": false,
         "jsx-equals-spacing": false,
         "jsx-key": false,

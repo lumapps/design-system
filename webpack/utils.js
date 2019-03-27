@@ -20,9 +20,10 @@ function babelSetup({ plugins = [], presets = [], options = {} } = {}) {
         plugins: [
             ...plugins,
             '@babel/plugin-proposal-class-properties',
+            '@babel/plugin-proposal-export-default-from',
             '@babel/plugin-proposal-object-rest-spread',
-            '@babel/plugin-syntax-dynamic-import',
             '@babel/plugin-proposal-optional-chaining',
+            '@babel/plugin-syntax-dynamic-import',
         ],
         presets: [
             ...presets,
@@ -64,56 +65,96 @@ function getComponents({ prefix, extension }) {
 /**
  * Get the appropriate loader for the SCSS styles depending wether we are in dev mode or building the production bundle.
  *
- * @param {string} [mode='dev'] The mode of the build.
- *                              Possible values are: 'dev' or 'prod'.
- * @return {Object} The loader for the SCSS styles.
+ * @param  {string}        [mode='dev'] The mode of the build.
+ *                                      Possible values are: 'dev' or 'prod'.
+ * @return {Array<Object>} The loaders for the SCSS and CSS styles.
  */
 function getStyleLoader({ mode = 'dev' }) {
-    return {
-        exclude: /node_modules/u,
-        test: /\.scss$/u,
-        use: [
-            mode === 'dev'
-                ? {
-                      loader: 'style-loader',
-                      options: {
-                          hmr: true,
-                          sourceMap: true,
+    return [
+        {
+            exclude: /node_modules/u,
+            test: /\.scss$/u,
+            use: [
+                mode === 'dev'
+                    ? {
+                          loader: 'style-loader',
+                          options: {
+                              hmr: true,
+                              sourceMap: true,
+                          },
+                      }
+                    : {
+                          loader: ExtractCssChunks.loader,
+                          options: {
+                              hot: false,
+                              reloadAll: false,
+                          },
                       },
-                  }
-                : {
-                      loader: ExtractCssChunks.loader,
-                      options: {
-                          hot: false,
-                          reloadAll: false,
-                      },
-                  },
-            {
-                loader: 'css-loader',
-                options: {
-                    // eslint-disable-next-line no-magic-numbers
-                    importLoaders: 2,
-                    sourceMap: false,
-                },
-            },
-            {
-                loader: 'postcss-loader',
-                options: {
-                    config: {
-                        path: `${CORE_PATH}/style/postcss.config.js`,
+                {
+                    loader: 'css-loader',
+                    options: {
+                        // eslint-disable-next-line no-magic-numbers
+                        importLoaders: 2,
+                        sourceMap: false,
                     },
-                    sourceMap: false,
                 },
-            },
-            {
-                loader: 'sass-loader',
-                options: {
-                    includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
-                    sourceMap: false,
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        config: {
+                            path: `${CORE_PATH}/style/postcss.config.js`,
+                        },
+                        sourceMap: false,
+                    },
                 },
-            },
-        ],
-    };
+                {
+                    loader: 'sass-loader',
+                    options: {
+                        includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
+                        sourceMap: false,
+                    },
+                },
+            ],
+        },
+        {
+            exclude: /node_modules/u,
+            test: /\.css$/u,
+            use: [
+                mode === 'dev'
+                    ? {
+                          loader: 'style-loader',
+                          options: {
+                              hmr: true,
+                              sourceMap: true,
+                          },
+                      }
+                    : {
+                          loader: ExtractCssChunks.loader,
+                          options: {
+                              hot: false,
+                              reloadAll: false,
+                          },
+                      },
+                {
+                    loader: 'css-loader',
+                    options: {
+                        // eslint-disable-next-line no-magic-numbers
+                        importLoaders: 2,
+                        sourceMap: false,
+                    },
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        config: {
+                            path: `${CORE_PATH}/style/postcss.config.js`,
+                        },
+                        sourceMap: false,
+                    },
+                },
+            ],
+        },
+    ];
 }
 
 module.exports = {

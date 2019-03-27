@@ -7,18 +7,18 @@
         "Clement Prevot <clement@lumapps.com> (https://github.com/clementprevot)"
     ],
     "dependencies": {
-        "chalk": "^2.1.0",
+        "chalk": "^2.4.2",
         "lodash": "^4.17.11",
-        "yeoman-generator": "^2.0.1",
-        "yosay": "^2.0.1"
+        "yeoman-generator": "^3.2.0",
+        "yosay": "^2.0.2"
     },
     "description": "A Yeoman generator to generate a LumX React component (either functional or class) with the associated test file.",
     "devDependencies": {
-        "eslint": "^5.9.0",
-        "jest": "^23.5.0",
-        "prettier": "^1.15.2",
-        "yeoman-assert": "^3.1.0",
-        "yeoman-test": "^1.7.0"
+        "eslint": "^5.15.3",
+        "jest": "^24.5.0",
+        "prettier": "^1.16.4",
+        "yeoman-assert": "^3.1.1",
+        "yeoman-test": "^1.9.1"
     },
     "engines": {
         "node": ">= 10.0.0",

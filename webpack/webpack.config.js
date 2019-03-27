@@ -69,6 +69,13 @@ const baseConfig = {
                     useCache: true,
                 },
             },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name]-[hash:8].[ext]',
+                },
+            },
         ],
     },
 
