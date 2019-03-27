@@ -22,8 +22,8 @@ module.exports = class extends MainGenerator {
         this.prompts = this.prompts.concat([
             {
                 choices: [
-                    { name: 'Class component', value: 'class', short: 'Class' },
                     { name: 'Functional component', value: 'functional', short: 'Functional' },
+                    { name: 'Class component', value: 'class', short: 'Class' },
                 ],
                 default: 0,
                 message: 'Would you like to create a Class or a Functional component?',
@@ -45,7 +45,7 @@ module.exports = class extends MainGenerator {
     }
 
     prompting() {
-        return super.prompting(Boolean(this.options['say-hi'], this.options['validations-given']));
+        return super.prompting(Boolean(this.options['say-hi']));
     }
 
     writing() {

@@ -151,7 +151,7 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         <%_ if (checkChildrenTypes) -%>
         // Here is an example of children types check.
 
-        it(`should fail when anything else than text, <span> or <p> is given as child`, (): void => {
+        it('should fail when anything else than text, <span> or <p> is given as child', (): void => {
             mockConsole('debug');
 
             const children: React.ReactNode = <div>Label</div>;

@@ -14,6 +14,9 @@ module.exports = class extends Generator {
 
             this.option('with-tests', { description: 'Generate the associated tests file', type: Boolean });
             this.option('without-tests', { description: 'Do not generate the associated tests file', type: Boolean });
+
+            this.option('with-demo', { description: 'Generate the associated demo file', type: Boolean });
+            this.option('without-demo', { description: 'Do not generate the associated demo file', type: Boolean });
         }
 
         this.option('name', { description: 'The name of the component to create', type: String });
@@ -81,6 +84,14 @@ module.exports = class extends Generator {
                 name: 'test',
                 type: 'confirm',
                 when: this.options['with-tests'] === undefined && this.options['without-tests'] === undefined,
+            });
+
+            this.prompts.push({
+                default: true,
+                message: 'Do you want to create the associated demo file?',
+                name: 'demo',
+                type: 'confirm',
+                when: this.options['with-demo'] === undefined && this.options['without-demo'] === undefined,
             });
         }
     }
@@ -152,6 +163,14 @@ module.exports = class extends Generator {
                 'say-hi': false,
 
                 ...validations,
+            });
+        }
+
+        if ((this.options['with-demo'] || this.answers.demo) && !this.options['without-demo']) {
+            this.composeWith(require.resolve('../demo'), {
+                ...this.options,
+                name: this.options.name || this.answers.name,
+                'say-hi': false,
             });
         }
     }
