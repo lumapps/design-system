@@ -174,6 +174,16 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 },
             },
         })
+        .state('app.stepper-indicator', {
+            url: 'stepper-indicator',
+            views: {
+                'main@': {
+                    controller: 'DemoStepperIndicatorController',
+                    controllerAs: 'vm',
+                    template: require('./components/stepper-indicator/demo.html'),
+                },
+            },
+        })
         .state('app.switch', {
             url: 'switch',
             views: {
@@ -276,6 +286,7 @@ require('./components/notification/controller.js');
 require('./components/progress-tracker/controller.js');
 require('./components/radio-button/controller.js');
 require('./components/select/controller.js');
+require('./components/stepper-indicator/controller.js');
 require('./components/switch/controller.js');
 require('./components/tabs/controller.js');
 require('./components/text-field/controller.js');
