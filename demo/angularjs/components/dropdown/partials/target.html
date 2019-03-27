@@ -1,61 +1,36 @@
 <div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
-        <lumx-button ng-click="vm.openDropdown($event)" id="{{ vm.dropdownSource }}">Open dropdown</lumx-button>
-        <lumx-button ng-click="vm.closeDropdown($event)">Close dropdown</lumx-button>
-    
-        <div id="{{ vm.dropdownTarget }}">Target</div>
-    
-        <lumx-dropdown lumx-position="left" id="{{ vm.dropdownId }}">
-            <lumx-dropdown-menu>
-                <lumx-list lumx-is-clickable="true" lumx-focus-on-init>
-                    <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
-    
-                    <lumx-list-item>
-                        <lumx-list-item-before>
-                            <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
-                        </lumx-list-item-before>
-                        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-                    </lumx-list-item>
-    
-                    <lumx-list-item>
-                        <lumx-list-item-before>
-                            <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
-                        </lumx-list-item-before>
-                        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-                    </lumx-list-item>
-    
-                    <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
-    
-                    <lumx-list-item>
-                        <lumx-list-item-before>
-                            <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
-                        </lumx-list-item-before>
-                        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-                    </lumx-list-item>
-    
-                    <lumx-list-item>
-                        <lumx-list-item-before>
-                            <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
-                        </lumx-list-item-before>
-                        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-                    </lumx-list-item>
-    
-                    <lumx-list-divider></lumx-list-divider>
-    
-                    <lumx-list-item>
-                        <lumx-list-item-before>
-                            <lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon>
-                        </lumx-list-item-before>
-                        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-                    </lumx-list-item>
-    
-                    <lumx-list-item>
-                        <lumx-list-item-before>
-                            <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}" lumx-size="xs"></lumx-icon>
-                        </lumx-list-item-before>
-                        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-                    </lumx-list-item>
-                </lumx-list>
-            </lumx-dropdown-menu>
-        </lumx-dropdown>
-    </div>
-    
+    <div id="{{ vm.dropdownTarget }}">Target</div>
+</div>
+
+<div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
+    <lumx-button
+        class="mr++"
+        ng-click="vm.openDropdown($event)"
+        id="{{ vm.dropdownSource }}"
+        lumx-theme="{{ mainBlock.theme }}"
+        >Open dropdown</lumx-button
+    >
+    <lumx-button ng-click="vm.closeDropdown($event)" lumx-theme="{{ mainBlock.theme }}">Close dropdown</lumx-button>
+
+    <lumx-dropdown lumx-position="left" id="{{ vm.dropdownId }}">
+        <lumx-dropdown-menu>
+            <lumx-list lumx-is-clickable="true" lumx-focus-on-init>
+                <lumx-list-item>
+                    <lumx-list-item-content>Los Angeles</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-content>Monterrey</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-content>Georgetown</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-content>Cali</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-content>Trondheim</lumx-list-item-content>
+                </lumx-list-item>
+            </lumx-list>
+        </lumx-dropdown-menu>
+    </lumx-dropdown>
+</div>
