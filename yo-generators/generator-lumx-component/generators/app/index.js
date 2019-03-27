@@ -32,10 +32,16 @@ module.exports = class extends Generator {
 
         this.prompts = [
             {
-                message: 'What is the component name?',
+                message: 'What is the component name (in PascalCase)?',
                 name: 'name',
                 type: 'input',
-                validate: (inputtedName) => /^[A-Z][a-z]+[A-Z]?[a-z]*$/.test(inputtedName),
+                validate: (inputtedName) => {
+                    if (!/^[A-Z][a-z]+[A-Z]?[a-z]*$/.test(inputtedName)) {
+                        return 'Your component name should be writter in PascalCase (i.e. starting with an uppercase letter)';
+                    }
+
+                    return true;
+                },
                 when: this.options.name === undefined || this.options.name.length === 0,
             },
             {
@@ -43,7 +49,10 @@ module.exports = class extends Generator {
                 message: 'Do you want to have any children or props validation?',
                 name: 'validation',
                 type: 'confirm',
-                when: this.options['with-validation'] === undefined && this.options['without-validation'] === undefined,
+                when:
+                    this.options['with-validation'] === undefined &&
+                    this.options['without-validation'] === undefined &&
+                    !this.options['validations-given'],
             },
             {
                 choices: [
@@ -59,7 +68,9 @@ module.exports = class extends Generator {
                 name: 'validations',
                 type: 'checkbox',
                 when: (answers) =>
-                    (this.options['with-validation'] || answers.validation) && !this.options['without-validation'],
+                    (this.options['with-validation'] || answers.validation) &&
+                    !this.options['without-validation'] &&
+                    !this.options['validations-given'],
             },
         ];
 
@@ -103,6 +114,20 @@ module.exports = class extends Generator {
         return { isValidationEnabled, validations };
     }
 
+    _getValidationsOptions() {
+        const { isValidationEnabled, validations } = this._getValidations();
+
+        return {
+            validateComponent: isValidationEnabled,
+            preValidate: isValidationEnabled && validations['pre-validate'],
+            checkChildrenNumber: isValidationEnabled && validations['validate-children-number'],
+            checkChildrenTypes: isValidationEnabled && validations['validate-children-types'],
+            transformChild: isValidationEnabled && validations['transform-child'],
+            validateChild: isValidationEnabled && validations['validate-child'],
+            postValidate: isValidationEnabled && validations['post-validate'],
+        };
+    }
+
     composing() {
         const { isValidationEnabled, validations } = this._getValidations();
 
@@ -110,7 +135,7 @@ module.exports = class extends Generator {
             ...this.options,
             name: this.options.name || this.answers.name,
 
-            'validation-given': isValidationEnabled,
+            'validations-given': isValidationEnabled,
             'with-validation': isValidationEnabled,
             'say-hi': false,
 
@@ -122,7 +147,7 @@ module.exports = class extends Generator {
                 ...this.options,
                 name: this.options.name || this.answers.name,
 
-                'validation-given': isValidationEnabled,
+                'validations-given': isValidationEnabled,
                 'with-validation': isValidationEnabled,
                 'say-hi': false,
 
