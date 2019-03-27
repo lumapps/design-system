@@ -18,9 +18,9 @@ import { SubNav } from './layout/SubNav';
  * It also handle the changes of the theme and the changes of the active component demo page (which will be displayed
  * in the main display component).
  *
- * @return {JSX.Element} The main application component.
+ * @return {React.ReactNode} The main application component.
  */
-const App: React.FC = (): JSX.Element => {
+const App: React.FC = (): React.ReactNode => {
     const [activeComponent, setActiveComponent]: [string, (activeComponent: string) => void] = useState(
         last(window.location.pathname.split('/')) || '',
     );
@@ -28,7 +28,6 @@ const App: React.FC = (): JSX.Element => {
     const [themeLoaded, setThemeLoaded]: [boolean, (isThemeLoaded: boolean) => void] = useState(false);
 
     useEffect((): void => {
-        // tslint:disable-next-line: no-floating-promises
         _changeTheme(theme).then(
             (): void => {
                 setThemeLoaded(true);

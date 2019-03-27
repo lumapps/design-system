@@ -1,15 +1,31 @@
 import React from 'react';
 
+import { LumXLogo } from '../../assets/images';
+
 /////////////////////////////
 
 /**
  * The main navigation component.
  * This component will display the main navigation bar.
- * It doesn't show anything for the moment.
  *
- * @return {JSX.Element} The main navigation component.
+ * @return {React.ReactElement} The main navigation component.
  */
-const MainNav: React.FC = (): JSX.Element => <div className="main-nav" />;
+const MainNav: React.FC = (): React.ReactElement => (
+    <div className="main-nav">
+        <ul className="main-nav__wrapper">
+            <li className="main-nav__logo">
+                <img src={LumXLogo} alt="LumX" />
+            </li>
+
+            <li className="main-nav__item">
+                <a className="main-nav__link main-nav__link--is-selected">Pr</a>
+            </li>
+            <li className="main-nav__item">
+                <a className="main-nav__link">Ma</a>
+            </li>
+        </ul>
+    </div>
+);
 
 /////////////////////////////
 

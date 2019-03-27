@@ -35,7 +35,7 @@ class ErrorBoundary extends React.Component<{}, IState> {
         // Nothing to do here, the error is already logged in the console and in the fallback display.
     }
 
-    public render(): JSX.Element {
+    public render(): React.ReactNode {
         const { error, hasError }: IState = this.state;
 
         if (hasError) {

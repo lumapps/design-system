@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
+import classNames from 'classnames';
+
 import camelCase from 'lodash/camelCase';
 import isEmpty from 'lodash/isEmpty';
 import upperFirst from 'lodash/upperFirst';
+
+import { Category, DemoObject } from 'LumX/demo/react/constants';
+
+import { DemoBlock } from './DemoBlock';
+import { DemoHeader } from './DemoHeader';
 
 /////////////////////////////
 
@@ -21,9 +28,28 @@ interface IProps {
  */
 interface IESModule {
     /**
-     * The default export of our fake ESModule loaded by the dynamic component loader.
+     * The `category` export of our fake ESModule loaded by the dynamic component loader.
+     * This export contains the category of the demo.
      */
-    default?(): JSX.Element;
+    category?: Category;
+
+    /**
+     * The `description` export of our fake ESModule loaded by the dynamic component loader.
+     * This export contains the description of the demo.
+     */
+    description?: React.ReactNode;
+
+    /**
+     * The `title` export of our fake ESModule loaded by the dynamic component loader.
+     * This export contains the title of the demo.
+     */
+    title: string;
+
+    /**
+     * Any other export of our fake ESModule loaded by the dynamic component loader.
+     * These exports contains each a title, a description of the demo and the path to the file containing the demo.
+     */
+    demos: { [demoName: string]: DemoObject };
 }
 
 /////////////////////////////
@@ -35,10 +61,11 @@ interface IESModule {
 /**
  * Load the demo component corresponding to the currently active component.
  *
+ * @param  {string}             componentFolderName The name of the component to load.
  * @return {Promise<IESModule>} The promise of the dynamic load of the component.
  */
 async function _loadComponent(componentFolderName: IProps['activeComponent']): Promise<IESModule> {
-    if (!componentFolderName) {
+    if (isEmpty(componentFolderName)) {
         return Promise.reject('No component to load');
     }
 
@@ -54,38 +81,71 @@ async function _loadComponent(componentFolderName: IProps['activeComponent']): P
  * This component is in charge of displaying the active component demo page.
  * To do so, it will receive the name of the active component and will dynamically load the demo component from this
  * name.
+ *
+ * @return {React.ReactElement} The main component.
  */
-const Main: React.FC<IProps> = ({ activeComponent }: IProps): JSX.Element => {
-    const [demoComponent, setDemoComponent]: [
-        IESModule['default'],
-        (demoComponent: IESModule['default']) => void
-    ] = useState();
+const Main: React.FC<IProps> = ({ activeComponent }: IProps): React.ReactElement => {
+    const [demo, setDemo]: [IESModule | undefined, (demo: IESModule | undefined) => void] = useState();
 
     useEffect((): void => {
         const loadComponent: () => Promise<void> = async (): Promise<void> => {
             try {
-                const { default: newDemoComponent }: IESModule = await _loadComponent(activeComponent);
-                setDemoComponent(newDemoComponent);
+                const loadedDemo: IESModule = await _loadComponent(activeComponent);
+                setDemo(loadedDemo);
             } catch (exception) {
-                setDemoComponent(undefined);
+                setDemo(undefined);
 
                 console.error(exception);
             }
         };
 
-        // tslint:disable-next-line: no-floating-promises
         loadComponent();
     }, [activeComponent]);
 
-    if (!activeComponent) {
-        return <div />;
+    if (demo === undefined || isEmpty(demo)) {
+        return (
+            <div className="main">
+                <div className="main__wrapper">
+                    {!isEmpty(activeComponent) && <span>Loading demo for {activeComponent}...</span>}
+                </div>
+            </div>
+        );
     }
 
-    if (!isEmpty(demoComponent)) {
-        return <div className="main">{demoComponent}</div>;
-    }
+    const demoHeader: React.ReactNode = !isEmpty(demo.title) ? (
+        <DemoHeader category={demo.category} demoTitle={demo.title}>
+            {demo.description}
+        </DemoHeader>
+    ) : null;
 
-    return <div className="main">Loading demo for {activeComponent}...</div>;
+    return (
+        <div className="main">
+            <div className="main__wrapper">
+                {demoHeader}
+
+                <div className="mt++">
+                    {Object.keys(demo.demos).map(
+                        (key: string, index: number): React.ReactNode => {
+                            const { description, files, title }: DemoObject = demo.demos[key];
+
+                            return (
+                                <DemoBlock
+                                    key={key}
+                                    className={classNames({ 'mt+++': index > 0 })}
+                                    blockTitle={title}
+                                    demoName={key}
+                                    demoPath={activeComponent}
+                                    files={files}
+                                >
+                                    {description}
+                                </DemoBlock>
+                            );
+                        },
+                    )}
+                </div>
+            </div>
+        </div>
+    );
 };
 
 /////////////////////////////

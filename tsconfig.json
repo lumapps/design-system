@@ -26,6 +26,8 @@
             "LumX/components/*": ["./components/*"],
             "LumX/core": ["./core"],
             "LumX/core/*": ["./core/*"],
+            "LumX/demo": ["../demo"],
+            "LumX/demo/*": ["../demo/*"],
             "LumX/icons": ["./icons"],
             "LumX/icons/*": ["./icons/*"],
             "LumX/react": ["./core/react"],

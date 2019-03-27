@@ -5,7 +5,7 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const WebpackBar = require('webpackbar');
 
 const { babelSetup } = require('./utils');
-const { COMPONENTS_PATH, CORE_PATH, ICONS_PATH } = require('./constants');
+const { COMPONENTS_PATH, CORE_PATH, DEMO_PATH, ICONS_PATH } = require('./constants');
 
 const plugins = [new WebpackBar(), new FriendlyErrorsWebpackPlugin()];
 
@@ -105,6 +105,7 @@ const baseConfig = {
             'LumX/angularjs': path.resolve(__dirname, `${CORE_PATH}/angularjs`),
             'LumX/components': path.resolve(__dirname, COMPONENTS_PATH),
             'LumX/core': path.resolve(__dirname, CORE_PATH),
+            'LumX/demo': path.resolve(__dirname, DEMO_PATH),
             'LumX/icons': path.resolve(__dirname, `${ICONS_PATH}/index.js`),
             'LumX/react': path.resolve(__dirname, `${CORE_PATH}/react`),
         },

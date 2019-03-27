@@ -14,7 +14,7 @@
     }
 
     &__wrapper {
-        max-width: 650px;
+        max-width: 800px;
         margin: 0 auto;
     }
 }
@@ -59,10 +59,15 @@
     &__code {
         border-top: 1px solid lumx-theme-color-variant(dark, L4);
 
-        .hljs {
+        .hljs,
+        pre {
             padding: $lumx-spacing-unit * 2;
             background-color: transparent;
             font-size: 14px;
         }
+    }
+
+    &__filename {
+        padding-left: $lumx-spacing-unit * 2;
     }
 }

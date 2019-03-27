@@ -1,4 +1,4 @@
-const { COMPONENTS_PATH, CORE_PATH, ICONS_PATH, SRC_PATH } = require('../../webpack/constants');
+const { COMPONENTS_PATH, CORE_PATH, DEMO_PATH, ICONS_PATH, SRC_PATH } = require('../../webpack/constants');
 
 module.exports = {
     collectCoverageFrom: ['**/src/components/**/*.{ts,tsx}', '!**/node_modules/**'],
@@ -12,6 +12,7 @@ module.exports = {
         '^LumX/components$': `${COMPONENTS_PATH}/index.ts`,
         '^LumX/components(.*)$': `${COMPONENTS_PATH}$1`,
         '^LumX/core(.*)$': `${CORE_PATH}$1`,
+        '^LumX/demo(.*)$': `${DEMO_PATH}$1`,
         '^LumX/icons(.*)$': `${ICONS_PATH}$1`,
         '^LumX/react(.*)$': `${CORE_PATH}/react$1`,
     },

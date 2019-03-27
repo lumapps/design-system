@@ -20,7 +20,7 @@ interface IProps {
     /**
      * The label of the sub navigation item.
      */
-    children: JSX.Element | string;
+    children: React.ReactNode;
 
     /**
      * The name of the component this sub navigation item will activate when clicked.
@@ -43,10 +43,16 @@ interface IProps {
  * This component will display a link with the name of the component it will activate upon click.
  * It will also highlight if it's component matche the activated one.
  *
- * @return {JSX.Element} The sub navigation item component.
+ * @return {React.ReactElement} The sub navigation item component.
  */
-const SubNavItem: React.FC<IProps> = ({ children, component, handleClick, activeComponent }: IProps): JSX.Element => {
-    component = slugify(component || children.toString(), {
+const SubNavItem: React.FC<IProps> = ({
+    children,
+    component,
+    handleClick,
+    activeComponent,
+}: IProps): React.ReactElement => {
+    // tslint:disable-next-line: no-non-null-assertion
+    component = slugify(component || children!.toString(), {
         lower: true,
     });
 
@@ -57,12 +63,14 @@ const SubNavItem: React.FC<IProps> = ({ children, component, handleClick, active
     };
 
     return (
-        <a
-            className={classNames('sub-nav__item', { 'sub-nav__item--is-active': activeComponent === component })}
-            onClick={onClick}
-        >
-            {children}
-        </a>
+        <li className="sub-nav__item">
+            <a
+                className={classNames('sub-nav__link', { 'sub-nav__link--is-selected': activeComponent === component })}
+                onClick={onClick}
+            >
+                {children}
+            </a>
+        </li>
     );
 };
 

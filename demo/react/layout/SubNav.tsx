@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Divider } from 'LumX';
-
-import { Theme } from '../../constants';
+import { Theme } from 'LumX/demo/constants';
 
 import { SubNavItem } from './SubNavItem';
 import { ThemeSelector } from './ThemeSelector';
@@ -71,23 +69,36 @@ const NAV_ITEMS: string[] = [
  * This component will display the navigation bar for selecting the component the user wants the demo of.
  * It will also display the theme selector to switch the theme of both the demo site and the components in the demo.
  *
- * @return {JSX.Element} The sub navigation component.
+ * @return {React.ReactElement} The sub navigation component.
  */
-const SubNav: React.FC<IProps> = ({ activeComponent, changeTheme, handleNavigate }: IProps): JSX.Element => (
+const SubNav: React.FC<IProps> = ({ activeComponent, changeTheme, handleNavigate }: IProps): React.ReactElement => (
     <div className="sub-nav">
-        <div className="sub-nav__wrapper">
-            <ThemeSelector changeTheme={changeTheme} />
+        <ul className="sub-nav__wrapper ph++ pv+">
+            <li>
+                <ThemeSelector changeTheme={changeTheme} />
+            </li>
+        </ul>
 
-            <Divider className="mv+" />
+        <ul className="sub-nav__wrapper ph+ pb+">
+            <li className="sub-nav__subheader">Foundations</li>
+
+            <li className="sub-nav__item">
+                <a className="sub-nav__link">Colors</a>
+            </li>
+            <li className="sub-nav__item">
+                <a className="sub-nav__link">Typography</a>
+            </li>
+
+            <li className="sub-nav__subheader">Components</li>
 
             {NAV_ITEMS.map(
-                (navItemLabel: string): JSX.Element => (
+                (navItemLabel: string): React.ReactNode => (
                     <SubNavItem key={navItemLabel} handleClick={handleNavigate} activeComponent={activeComponent}>
                         {navItemLabel}
                     </SubNavItem>
                 ),
             )}
-        </div>
+        </ul>
     </div>
 );
 

@@ -79,7 +79,7 @@ function SubNavController(Theme, Themes) {
      * Initialize the controller.
      */
     function init() {
-        vm.THEMES = Themes.map(vm.themeToThemeObject);
+        vm.THEMES = Object.values(Themes).map(vm.themeToThemeObject);
         vm.selectedTheme = vm.themeToThemeObject(Theme.theme);
     }
 

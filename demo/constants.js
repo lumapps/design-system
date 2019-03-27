@@ -7,11 +7,14 @@
 /**
  * The available themes in the demo site.
  *
- * @type {Array<string>}
+ * @type {Object}
  * @constant
  * @readonly
  */
-const THEMES = ['lumapps', 'material'];
+const THEMES = {
+    lumapps: 'lumapps',
+    material: 'material',
+};
 
 /**
  * The default theme to use in the demo site at startup.
@@ -20,7 +23,7 @@ const THEMES = ['lumapps', 'material'];
  * @constant
  * @readonly
  */
-const [DEFAULT_THEME] = THEMES;
+const DEFAULT_THEME = THEMES[Object.keys(THEMES)[0]];
 
 /////////////////////////////
 
