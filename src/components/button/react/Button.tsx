@@ -146,9 +146,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Transform a text child to <span>.
  *
  * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
- * @return {React.ReactElement}       The transformed child (or the original one if there is no transformation to do).
+ * @return {React.ReactNode}          The transformed child (or the original one if there is no transformation to do).
  */
-function _transformChild({ child }: ChildTransformParameters): React.ReactElement {
+function _transformChild({ child }: ChildTransformParameters): React.ReactNode {
     if (isString(child)) {
         return <span>{child}</span>;
     }
@@ -174,7 +174,8 @@ function _validateChild(childrenTypes: string[]): (params: ChildValidateParamete
         const isChildText: boolean = isElementText(child) || isElementOfType(child, <span />);
         const isChildIcon: boolean = isElementOfType(child, Icon);
 
-        const alreadyHasSomeText: boolean = index === 0 ? false : childrenTypes.some((type: string) => type === 'text');
+        const alreadyHasSomeText: boolean =
+            index === 0 ? false : childrenTypes.some((type: string): boolean => type === 'text');
         childrenTypes[index] = isChildText ? 'text' : 'icon';
 
         if (isChildText && alreadyHasSomeText) {
@@ -230,7 +231,7 @@ function _validate(props: ButtonProps): React.ReactNode {
  * Displays a button.
  * If the `href` property is set, it will display a `<a>` HTML tag. If not, it will use a `<button>` HTML tag instead.
  *
- * @return {JSX.Element} The component.
+ * @return {React.ReactElement} The component.
  */
 const Button: React.FC<ButtonProps> = ({
     children,
@@ -241,7 +242,7 @@ const Button: React.FC<ButtonProps> = ({
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: ButtonProps): JSX.Element => {
+}: ButtonProps): React.ReactElement => {
     const newChildren: React.ReactNode = _validate({ children, color, emphasis, size, theme, variant, ...props });
 
     if (variant === Variants.button) {
@@ -249,7 +250,7 @@ const Button: React.FC<ButtonProps> = ({
         Children.forEach(
             // @ts-ignore
             newChildren,
-            (child: React.ReactElement): void => {
+            (child: React.ReactNode): void => {
                 index++;
 
                 if (isElementOfType(child, Icon)) {

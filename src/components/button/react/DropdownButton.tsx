@@ -41,7 +41,7 @@ interface IProps extends IGenericProps {
     /**
      * Contains the dropdown element to display when the icon is clicked.
      */
-    dropdown?: JSX.Element;
+    dropdown?: React.ReactNode;
 
     /**
      * Indicates if the label <Button> and the icon <IconButton> buttons are separated in the <ButtonGroup>
@@ -153,7 +153,7 @@ function _validate(props: DropdownButtonProps): React.ReactNode {
  * @see {@link IconButton} for more information on <IconButton>.
  * @see {@link ButtonGroup} for more information on <ButtonGroup>.
  *
- * @return {JSX.Element} The component.
+ * @return {React.ReactElement} The component.
  */
 const DropdownButton: React.FC<DropdownButtonProps> = ({
     children,
@@ -161,7 +161,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     dropdown,
     isSplitted = DEFAULT_PROPS.isSplitted,
     ...props
-}: DropdownButtonProps): JSX.Element => {
+}: DropdownButtonProps): React.ReactElement => {
     const [isDropdownOpened, setIsDropdownOpened]: [boolean, (isDropdownOpened: boolean) => void] = useState(false);
 
     const newChildren: React.ReactNode = _validate({ children, dropdown, isSplitted, ...props });
@@ -176,7 +176,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
         }
     };
 
-    let rootElement: JSX.Element;
+    let rootElement: React.ReactNode;
     const extendedClassNames: string = classNames(className, CLASSNAME, { [`${CLASSNAME}--is-splitted`]: isSplitted });
 
     if (isSplitted) {

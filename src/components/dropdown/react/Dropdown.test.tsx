@@ -45,7 +45,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Dropdown {...props} />);
 

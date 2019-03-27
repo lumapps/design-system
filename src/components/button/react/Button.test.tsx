@@ -82,7 +82,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Button {...props} />);
 
@@ -290,7 +290,7 @@ describe(`<${Button.displayName}>`, (): void => {
         it('should use the given props', (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 // tslint:disable-next-line: no-any
-                color: fake((fakeData: any) => fakeData.commerce.color()),
+                color: fake((fakeData: any): string => fakeData.commerce.color()),
                 emphasis: oneOf(...without(Object.values(Emphasises), Emphasises.high)),
                 size: oneOf(...Object.values(Sizes)),
                 theme: oneOf(...Object.values(Themes)),
@@ -388,7 +388,6 @@ describe(`<${Button.displayName}>`, (): void => {
         it('should fail when no child is given', (): void => {
             expect(
                 (): void => {
-                    // tslint:disable-next-line: no-null-keyword
                     setup({ children: null });
                 },
             ).toThrowErrorMatchingSnapshot();

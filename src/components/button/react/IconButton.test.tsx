@@ -57,7 +57,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<IconButton {...props} />);
 
@@ -71,7 +71,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
     };
 };
 
-describe(`<${IconButton.displayName}>`, () => {
+describe(`<${IconButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly an icon button', (): void => {
@@ -125,7 +125,7 @@ describe(`<${IconButton.displayName}>`, () => {
         it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 // tslint:disable-next-line: no-any
-                color: fake((fakeData: any) => fakeData.commerce.color()),
+                color: fake((fakeData: any): string => fakeData.commerce.color()),
                 emphasis: oneOf(...Object.values(Emphasises)),
                 size: oneOf(...Object.values(Sizes)),
                 theme: oneOf(...Object.values(Themes)),
@@ -135,9 +135,11 @@ describe(`<${IconButton.displayName}>`, () => {
 
             const { button }: ISetup = setup(modifiedProps);
 
-            Object.keys(modifiedProps).forEach((prop: string) => {
-                expect(button).toHaveProp(prop, modifiedProps[prop]);
-            });
+            Object.keys(modifiedProps).forEach(
+                (prop: string): void => {
+                    expect(button).toHaveProp(prop, modifiedProps[prop]);
+                },
+            );
         });
     });
 
@@ -167,7 +169,6 @@ describe(`<${IconButton.displayName}>`, () => {
         it('should fail when no child is given', (): void => {
             expect(
                 (): void => {
-                    // tslint:disable-next-line: no-null-keyword
                     setup({ children: null });
                 },
             ).toThrowErrorMatchingSnapshot();
@@ -206,7 +207,6 @@ describe(`<${IconButton.displayName}>`, () => {
             // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
             setup({ variant: ButtonVariants.icon });
-            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
@@ -215,7 +215,6 @@ describe(`<${IconButton.displayName}>`, () => {
             // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
             setup({ variant: ButtonVariants.button });
-            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
         });
     });

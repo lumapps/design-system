@@ -84,13 +84,13 @@ function _validate(props: ButtonGroupProps): React.ReactNode {
  *
  * @see {@link Button} for more information on <Button>.
  *
- * @return {JSX.Element} The component.
+ * @return {React.ReactElement} The component.
  */
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
     children,
     className = '',
     ...props
-}: ButtonGroupProps): JSX.Element => {
+}: ButtonGroupProps): React.ReactElement => {
     const newChildren: React.ReactNode = _validate({ children });
 
     return (

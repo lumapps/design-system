@@ -109,9 +109,9 @@ function _validate(props: IconProps): React.ReactNode {
 /**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
  *
- * @return {JSX.Element} The component
+ * @return {React.ReactElement} The component
  */
-const Icon: React.FC<IconProps> = ({ className, color, icon, size, ...props }: IconProps): JSX.Element => {
+const Icon: React.FC<IconProps> = ({ className, color, icon, size, ...props }: IconProps): React.ReactElement => {
     _validate({ color, icon, size, ...props });
 
     return (

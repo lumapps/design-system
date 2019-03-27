@@ -51,11 +51,11 @@ interface IGenericProps {
  * Defines a generic component type.
  */
 // tslint:disable-next-line: no-any
-type ComponentType = JSX.Element | Element | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
+type ComponentType = React.ReactNode | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 interface IChildrenManipulationParameters {
-    child: React.ReactElement;
+    child: React.ReactNode;
     children: React.ReactNode;
     childrenCount: number;
     index: number;
@@ -119,17 +119,18 @@ function getTypeName(type: string | ComponentType): string | ComponentType {
 /**
  * Check if a ReactElement is of the given type.
  *
- * @param  {React.ReactElement}   el   The ReactElement we want to check the type of.
+ * @param  {React.ReactNode}   el   The ReactElement we want to check the type of.
  * @param  {string|ComponentType} type The type we want to check if the ReactElement is of.
  * @return {boolean}              If the ReactElement is of the given type or not.
  */
-function isElementOfType(el: React.ReactElement, type: string | ComponentType): boolean {
+function isElementOfType(el: React.ReactNode, type: string | ComponentType): boolean {
     const typeName: string | ComponentType = getTypeName(type);
 
     if (!isString(typeName) || isEmpty(typeName)) {
         console.debug('Un-computable type', type, '\nResulted in', typeName);
         throw new Error(
-            `The type you want to check is not valid. Waiting a JSX element, a component or a string (got \`${type.toString()}\`)`,
+            // tslint:disable-next-line: no-non-null-assertion
+            `The type you want to check is not valid. Waiting a JSX element, a component or a string (got \`${type!.toString()}\`)`,
         );
     }
 
@@ -152,10 +153,10 @@ function isElementOfType(el: React.ReactElement, type: string | ComponentType): 
  * Check if a ReactElement is a text (i.e. either a pure text node or a <span>).
  * Simply check if the ReactElement is a string or if its type is 'span'.
  *
- * @param  {React.ReactElement} el The ReactElement to check if it's a text.
+ * @param  {React.ReactNode} el The ReactElement to check if it's a text.
  * @return {boolean}            If the ReactElement is a text or not.
  */
-function isElementText(el: React.ReactElement): boolean {
+function isElementText(el: React.ReactNode): boolean {
     return isString(el);
 }
 
@@ -232,7 +233,7 @@ function validateComponent(
         props: IGenericProps;
         postValidate?(params: ValidateParameters): string | boolean | void;
         preValidate?(params: ValidateParameters): string | boolean | void;
-        transformChild?(params: ChildTransformParameters): React.ReactElement;
+        transformChild?(params: ChildTransformParameters): React.ReactNode;
         validateChild?(params: ChildValidateParameters): string | boolean | void;
     },
 ): React.ReactNode | undefined {
@@ -278,18 +279,18 @@ function validateComponent(
         const childrenFunctionName: string = isFunction(transformChild) ? 'map' : 'forEach';
 
         if (!isFunction(transformChild)) {
-            transformChild = ({ child }: ChildTransformParameters): React.ReactElement => child;
+            transformChild = ({ child }: ChildTransformParameters): React.ReactNode => child;
         }
         validateChild = validateChild || noop;
 
         let index: number = -1;
         const transformedChildren: React.ReactNode = Children[childrenFunctionName](
             newChildren,
-            (child: React.ReactElement): React.ReactElement => {
+            (child: React.ReactNode): React.ReactNode => {
                 index++;
 
                 // tslint:disable-next-line: no-non-null-assertion
-                const newChild: React.ReactElement = transformChild!({
+                const newChild: React.ReactNode = transformChild!({
                     child,
                     children: newChildren,
                     childrenCount,
@@ -299,22 +300,25 @@ function validateComponent(
                 const childDisplayName: string = isString(newChild) ? `'${newChild}'` : `<${getTypeName(newChild)}>`;
 
                 if (!isEmpty(allowedTypes)) {
-                    const isOfOneAllowedType: boolean = allowedTypes.some((allowedType: string | ComponentType) =>
-                        isElementOfType(newChild, allowedType),
+                    const isOfOneAllowedType: boolean = allowedTypes.some(
+                        (allowedType: string | ComponentType) =>
+                            isElementOfType(newChild, allowedType) || isEmpty(newChild),
                     );
 
                     if (!isOfOneAllowedType) {
                         let allowedTypesString: string = '';
-                        allowedTypes.forEach((allowedType: string | ComponentType, idx: number) => {
-                            if (!isEmpty(allowedTypesString)) {
-                                allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
-                            }
+                        allowedTypes.forEach(
+                            (allowedType: string | ComponentType, idx: number): void => {
+                                if (!isEmpty(allowedTypesString)) {
+                                    allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
+                                }
 
-                            const typeName: string | ComponentType = getTypeName(allowedType);
-                            allowedTypesString +=
-                                (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
-                                '<Unknown component type>';
-                        });
+                                const typeName: string | ComponentType = getTypeName(allowedType);
+                                allowedTypesString +=
+                                    (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
+                                    '<Unknown component type>';
+                            },
+                        );
 
                         console.debug('Non matching type', newChild, '\nResulted in', getTypeName(newChild));
                         throw new Error(

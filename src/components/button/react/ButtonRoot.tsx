@@ -80,7 +80,7 @@ function _validate(props: ButtonRootProps): React.ReactNode {
  * The root of the <Button> component.
  * Conditionally adds a `<a>` or a `<button>` HTML tag whether there is an `href` attribute or not.
  *
- * @return {JSX.Element} The component.
+ * @return {React.ReactElement} The component.
  */
 const ButtonRoot: React.FC<ButtonRootProps> = ({
     children,
@@ -88,7 +88,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = ({
     href,
     target,
     ...props
-}: ButtonRootProps): JSX.Element => {
+}: ButtonRootProps): React.ReactElement => {
     const newChildren: React.ReactNode = _validate({ children, ...props });
 
     if (isEmpty(href)) {

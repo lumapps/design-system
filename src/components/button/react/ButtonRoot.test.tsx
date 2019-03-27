@@ -60,7 +60,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<ButtonRoot {...props} />);
 
@@ -182,7 +182,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
     describe('Events', (): void => {
         const onClick: jest.Mock = jest.fn();
 
-        it('should trigger `onClick` when the button is clicked', () => {
+        it('should trigger `onClick` when the button is clicked', (): void => {
             const { button }: ISetup = setup({ onClick });
 
             button.simulate('click');
@@ -205,7 +205,6 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         it('should fail when no child is given', (): void => {
             expect(
                 (): void => {
-                    // tslint:disable-next-line: no-null-keyword
                     setup({ children: null });
                 },
             ).toThrowErrorMatchingSnapshot();

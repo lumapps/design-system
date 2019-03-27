@@ -57,7 +57,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Icon {...props} />);
 
@@ -141,7 +141,6 @@ describe(`<${Icon.displayName}>`, (): void => {
                 (): void => {
                     // We know that icon must be given to <Icon>, but for the test, ignore it.
                     // @ts-ignore
-                    // tslint:disable-next-line: no-null-keyword
                     setup({ icon: null });
                 },
             ).toThrowErrorMatchingSnapshot();

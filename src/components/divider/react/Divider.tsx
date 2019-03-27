@@ -68,13 +68,13 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Displays a divider.
  * This simply wraps a <hr> element.
  *
- * @return {JSX.Element} The component.
+ * @return {React.ReactElement} The component.
  */
 const Divider: React.FC<DividerProps> = ({
     className = '',
     theme = DEFAULT_PROPS.theme,
     ...props
-}: DividerProps): JSX.Element => {
+}: DividerProps): React.ReactElement => {
     return <hr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props} />;
 };
 Divider.displayName = COMPONENT_NAME;

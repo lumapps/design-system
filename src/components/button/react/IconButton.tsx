@@ -133,13 +133,13 @@ function _validate(props: IconButtonProps): React.ReactNode {
  *
  * @see {@link Button} for more information on <Button>.
  *
- * @return {JSX.Element} The component.
+ * @return {React.ReactElement} The component.
  */
 const IconButton: React.FC<IconButtonProps> = ({
     children,
     className = '',
     ...props
-}: IconButtonProps): JSX.Element => {
+}: IconButtonProps): React.ReactElement => {
     const newChildren: React.ReactNode = _validate({ children, ...props });
 
     return (

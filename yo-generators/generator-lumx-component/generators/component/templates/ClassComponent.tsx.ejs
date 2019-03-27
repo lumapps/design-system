@@ -90,7 +90,7 @@ class <%= componentName %> extends React.<%= componentType %>Component<<%= compo
 
     public state: IState = {};
 
-    public render(): JSX.Element {
+    public render(): React.ReactNode {
         <%_ if (validateComponent) { -%>
         const newChildren: React.ReactNode = this.validate({ ...this.props });
 
@@ -147,10 +147,10 @@ class <%= componentName %> extends React.<%= componentType %>Component<<%= compo
      * Transform a child of the component.
      *
      * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
-     * @return {React.ReactElement}       The transformed child (or the original one if there is no transformation to
+     * @return {React.ReactNode}          The transformed child (or the original one if there is no transformation to
      *                                    do).
      */
-    private transformChild({ child, children, childrenCount, index }: ChildTransformParameters): React.ReactElement {
+    private transformChild({ child, children, childrenCount, index }: ChildTransformParameters): React.ReactNode {
         // Do your transformation here. Here is an example:
         if (typeof child === 'string') {
             return <span>{child}</span>;

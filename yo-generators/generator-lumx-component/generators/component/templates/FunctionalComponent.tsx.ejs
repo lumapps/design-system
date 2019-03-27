@@ -123,7 +123,7 @@ function _preValidate({ children, childrenCount, props }: ValidateParameters): s
  * Transform a child of the component.
  *
  * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
- * @return {React.ReactElement}       The transformed child (or the original one if there is no transformation to do).
+ * @return {React.ReactNode}          The transformed child (or the original one if there is no transformation to do).
  */
 function _transformChild({
     child,
@@ -131,7 +131,7 @@ function _transformChild({
     childrenCount,
     index,
     props,
-}: ChildTransformParameters): React.ReactElement {
+}: ChildTransformParameters): React.ReactNode {
     // Do your transformation here. Here is an example:
     if (typeof child === 'string') {
         return <span>{child}</span>;
@@ -209,9 +209,9 @@ function _validate(props: <%= componentName %>Props): React.ReactNode {
 /**
  * [Enter the description of the component here].
  *
- * @return {JSX.Element} The component.
+ * @return {React.ReactElement} The component.
  */
-const <%= componentName %>: React.FC<<%= componentName %>Props> = ({ children, className = '', ...props }: <%= componentName %>Props): JSX.Element => {
+const <%= componentName %>: React.FC<<%= componentName %>Props> = ({ children, className = '', ...props }: <%= componentName %>Props): React.ReactElement => {
     <%_ if (validateComponent) { -%>
     const newChildren: React.ReactNode = _validate({ children, ...props });
 

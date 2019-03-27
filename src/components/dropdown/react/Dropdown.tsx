@@ -59,9 +59,13 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * Displays a dropdown.
  *
- * @return {JSX.Element} The component.
+ * @return {React.ReactElement} The component.
  */
-const Dropdown: React.FC<DropdownProps> = ({ children, className = '', ...props }: DropdownProps): JSX.Element => (
+const Dropdown: React.FC<DropdownProps> = ({
+    children,
+    className = '',
+    ...props
+}: DropdownProps): React.ReactElement => (
     <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {children}
     </div>

@@ -79,7 +79,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: JSX.Element) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<DropdownButton {...props} />);
 
@@ -99,7 +99,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
     };
 };
 
-describe(`<${DropdownButton.displayName}>`, () => {
+describe(`<${DropdownButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a non-splitted dropdown button', (): void => {
@@ -246,7 +246,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
         it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 // tslint:disable-next-line: no-any
-                color: fake((fakeData: any) => fakeData.commerce.color()),
+                color: fake((fakeData: any): string => fakeData.commerce.color()),
                 emphasis: oneOf(...Object.values(Emphasises)),
                 size: oneOf(...Object.values(Sizes)),
                 theme: oneOf(...Object.values(Themes)),
@@ -256,17 +256,21 @@ describe(`<${DropdownButton.displayName}>`, () => {
 
             let { button }: ISetup = setup(modifiedProps);
 
-            Object.keys(modifiedProps).forEach((prop: string) => {
-                expect(button).toHaveProp(prop, modifiedProps[prop]);
-            });
+            Object.keys(modifiedProps).forEach(
+                (prop: string): void => {
+                    expect(button).toHaveProp(prop, modifiedProps[prop]);
+                },
+            );
 
             /////////////////////////////
 
             ({ button } = setup({ ...modifiedProps, isSplitted: true }));
 
-            Object.keys(modifiedProps).forEach((prop: string) => {
-                expect(button).toHaveProp(prop, modifiedProps[prop]);
-            });
+            Object.keys(modifiedProps).forEach(
+                (prop: string): void => {
+                    expect(button).toHaveProp(prop, modifiedProps[prop]);
+                },
+            );
         });
 
         it('should forward any other props', (): void => {
@@ -300,7 +304,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
             },
         );
 
-        it('should both trigger `onClick` and toggle the dropdown when the button is clicked in non-splitted mode', () => {
+        it('should both trigger `onClick` and toggle the dropdown when the button is clicked in non-splitted mode', (): void => {
             const setupReturn: ISetup = setup({ onClick }, false);
             const { button, wrapper }: ISetup = setupReturn;
             let { dropdown }: ISetup = setupReturn;
@@ -314,7 +318,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
             expect(wrapper.find('Dropdown')).toExist();
         });
 
-        it('should only trigger `onClick` when the label button is clicked in splitted mode', () => {
+        it('should only trigger `onClick` when the label button is clicked in splitted mode', (): void => {
             const setupReturn: ISetup = setup({ isSplitted: true, onClick }, false);
             const { button, wrapper }: ISetup = setupReturn;
             let { dropdown }: ISetup = setupReturn;
@@ -328,7 +332,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
             expect(wrapper.find('Dropdown')).not.toExist();
         });
 
-        it('should only toggle the dropdown when the dropdown (icon) button is clicked in splitted mode', () => {
+        it('should only toggle the dropdown when the dropdown (icon) button is clicked in splitted mode', (): void => {
             const setupReturn: ISetup = setup({ isSplitted: true, onClick }, false);
             const { iconButton, wrapper }: ISetup = setupReturn;
             let { dropdown }: ISetup = setupReturn;
@@ -429,7 +433,6 @@ describe(`<${DropdownButton.displayName}>`, () => {
             // We know that a <DropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
             setup({ variant: ButtonVariants.icon });
-            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
@@ -438,7 +441,6 @@ describe(`<${DropdownButton.displayName}>`, () => {
             // We know that a <DropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
             setup({ variant: ButtonVariants.button });
-            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
         });
 
@@ -447,9 +449,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
 
             // We know that a <DropdownButton> must receive a `dropdown`, but for the purpose of the test ignore it.
             // @ts-ignore
-            // tslint:disable-next-line: no-null-keyword
             setup({ dropdown: null });
-            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
@@ -457,9 +457,7 @@ describe(`<${DropdownButton.displayName}>`, () => {
 
             // We know that a <DropdownButton> must receive a `dropdown`, but for the purpose of the test ignore it.
             // @ts-ignore
-            // tslint:disable-next-line: no-null-keyword
             setup({ dropdown: null });
-            // tslint:disable-next-line: no-unbound-method
             expect(global.console.warn).toHaveBeenCalled();
         });
     });
