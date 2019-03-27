@@ -8,6 +8,7 @@ import { Button, ButtonVariants, Icon } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { mdiPlus } from 'LumX/icons';
 
+import { CLASSNAME as BUTTON_CLASSNAME } from './Button';
 import { CLASSNAME, Emphasises, IconButton, IconButtonProps, Sizes, Themes } from './IconButton';
 
 /////////////////////////////
@@ -78,9 +79,10 @@ describe(`<${IconButton.displayName}>`, () => {
             expect(wrapper).toMatchSnapshot();
 
             expect(button).toExist();
+            expect(button).toHaveClassName(CLASSNAME);
 
             expect(icon).toExist();
-            expect(icon).toHaveClassName(CLASSNAME);
+            expect(icon).toHaveClassName(`${BUTTON_CLASSNAME}__icon`);
 
             expect(icon.length).toEqual(1);
         });
@@ -228,5 +230,5 @@ describe(`<${IconButton.displayName}>`, () => {
     /////////////////////////////
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: ['icon', 'button'], prop: 'button' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'button', prop: 'button' }, { className: CLASSNAME });
 });

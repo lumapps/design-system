@@ -22,7 +22,7 @@ exports[`<ButtonGroup> Conditions should fail when no child is given 1`] = `"<Bu
 
 exports[`<ButtonGroup> Snapshots and structure should render correctly a group button 1`] = `
 <div
-  className="lumx-button_group"
+  className="lumx-button-group"
 >
   <Button>
     Label

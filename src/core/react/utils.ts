@@ -5,8 +5,8 @@ import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import isString from 'lodash/isString';
+import kebabCase from 'lodash/kebabCase';
 import noop from 'lodash/noop';
-import snakeCase from 'lodash/snakeCase';
 import trimStart from 'lodash/trimStart';
 
 import { CSS_PREFIX } from '../constants';
@@ -89,7 +89,7 @@ type ValidateParameters = IValidateParameters;
  *                  lower-snake-case.
  */
 function getRootClassName(componentName: string): string {
-    return `${CSS_PREFIX}-${snakeCase(trimStart(componentName, COMPONENT_PREFIX))}`;
+    return `${CSS_PREFIX}-${kebabCase(trimStart(componentName, COMPONENT_PREFIX))}`;
 }
 
 /**

@@ -95,11 +95,11 @@ const baseConfig = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
         modules: ['node_modules'],
         alias: {
-            'LumX/icons': path.resolve(__dirname, `${ICONS_PATH}/index.js`),
             'LumX/angularjs': path.resolve(__dirname, `${CORE_PATH}/angularjs`),
-            'LumX/react': path.resolve(__dirname, `${CORE_PATH}/react`),
-            'LumX/core': path.resolve(__dirname, CORE_PATH),
             'LumX/components': path.resolve(__dirname, COMPONENTS_PATH),
+            'LumX/core': path.resolve(__dirname, CORE_PATH),
+            'LumX/icons': path.resolve(__dirname, `${ICONS_PATH}/index.js`),
+            'LumX/react': path.resolve(__dirname, `${CORE_PATH}/react`),
         },
     },
 

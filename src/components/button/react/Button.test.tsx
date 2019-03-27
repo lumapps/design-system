@@ -370,9 +370,15 @@ describe(`<${Button.displayName}>`, (): void => {
         beforeEach(
             (): void => {
                 try {
-                    // If `console.warn` has been mocked at least one, this exists. So disable TS here.
+                    /*
+                     * If `console.warn` or `console.info` has been mocked at least one, this exists. So disable TS
+                     * here.
+                     */
+
                     // @ts-ignore
                     global.console.warn.mockRestore();
+                    // @ts-ignore
+                    global.console.info.mockRestore();
                 } catch (exception) {
                     // Nothing to do here.
                 }
@@ -508,24 +514,22 @@ describe(`<${Button.displayName}>`, (): void => {
             ).toThrowErrorMatchingSnapshot();
         });
 
-        it("should warn the user when rendering an icon button with the 'button' `variant`", (): void => {
-            global.console.warn = jest.fn();
+        it("should inform the user when rendering an icon button with the 'button' `variant`", (): void => {
+            global.console.info = jest.fn();
 
             const children: React.ReactNode = <Icon icon={mdiPlus} />;
 
             setup({ children });
-            // tslint:disable-next-line: no-unbound-method
-            expect(global.console.warn).toHaveBeenCalled();
+            expect(global.console.info).toHaveBeenCalled();
         });
 
-        it("should not warn the user when rendering an icon button with the 'icon' `variant`", (): void => {
-            global.console.warn = jest.fn();
+        it("should not inform the user when rendering an icon button with the 'icon' `variant`", (): void => {
+            global.console.info = jest.fn();
 
             const children: React.ReactNode = <Icon icon={mdiPlus} />;
 
             setup({ children, variant: Variants.icon });
-            // tslint:disable-next-line: no-unbound-method
-            expect(global.console.warn).not.toHaveBeenCalled();
+            expect(global.console.info).not.toHaveBeenCalled();
         });
 
         it("should have no `theme` in any other `emphasis` than 'high'", (): void => {
@@ -561,7 +565,7 @@ describe(`<${Button.displayName}>`, (): void => {
             );
         });
 
-        it('should only have the "left-icon" CSS class when an icon is passed as first child of a \'button\' `variant`', () => {
+        it('should only have the "left-icon" CSS class when an icon is passed as first child of a \'button\' `variant`', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     <Icon icon={mdiPlus} />
@@ -574,7 +578,7 @@ describe(`<${Button.displayName}>`, (): void => {
             expect(buttonRoot).not.toHaveClassName(`${CLASSNAME}--has-right-icon`);
         });
 
-        it('should only have the "right-icon" CSS class when an icon is passed as last child of a \'button\' `variant`', () => {
+        it('should only have the "right-icon" CSS class when an icon is passed as last child of a \'button\' `variant`', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     Label
@@ -587,7 +591,7 @@ describe(`<${Button.displayName}>`, (): void => {
             expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-right-icon`);
         });
 
-        it('should have both "left-icon" and "right-icon" CSS classes when icons are passed as first and last children of a \'button\' `variant`', () => {
+        it('should have both "left-icon" and "right-icon" CSS classes when icons are passed as first and last children of a \'button\' `variant`', (): void => {
             const children: React.ReactNode = (
                 <Fragment>
                     <Icon icon={mdiPlus} />

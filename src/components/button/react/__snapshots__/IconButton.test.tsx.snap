@@ -8,6 +8,7 @@ exports[`<IconButton> Conditions should fail when no child is given 1`] = `"<Ico
 
 exports[`<IconButton> Snapshots and structure should render correctly an icon button 1`] = `
 <Button
+  className="lumx-icon-button"
   variant="icon"
 >
   <Icon

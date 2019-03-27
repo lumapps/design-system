@@ -7,7 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Icon } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { ValidateParameters, validateComponent } from 'LumX/core/react/utils';
+import { ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 
 import {
     Button,
@@ -72,7 +72,7 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}IconButton`;
  * @constant
  * @readonly
  */
-const CLASSNAME: string = `${BUTTON_CLASSNAME}__icon`;
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -135,18 +135,24 @@ function _validate(props: IconButtonProps): React.ReactNode {
  *
  * @return {JSX.Element} The component.
  */
-const IconButton: React.FC<IconButtonProps> = ({ children, ...props }: IconButtonProps): JSX.Element => {
+const IconButton: React.FC<IconButtonProps> = ({
+    children,
+    className = '',
+    ...props
+}: IconButtonProps): JSX.Element => {
     const newChildren: React.ReactNode = _validate({ children, ...props });
 
     return (
-        <Button {...props} variant={Variants.icon}>
-            {/*
-             // @ts-ignore */}
-            {Children.map(newChildren, (child: React.ReactElement) => {
-                return cloneElement(child, {
-                    className: classNames(get(child.props, 'className', ''), CLASSNAME),
-                });
-            })}
+        <Button className={classNames(className, CLASSNAME)} {...props} variant={Variants.icon}>
+            {Children.map(
+                newChildren,
+                // tslint:disable-next-line: no-any
+                (child: any): React.ReactNode => {
+                    return cloneElement(child, {
+                        className: classNames(get(child.props, 'className', ''), `${BUTTON_CLASSNAME}__icon`),
+                    });
+                },
+            )}
         </Button>
     );
 };

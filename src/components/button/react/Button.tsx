@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 
 import { Icon, IconButton } from 'LumX';
-import { Color, Colors, ComplexPropDefault, Size, Sizes, Theme, Themes } from 'LumX/components';
+import { Color, Colors, ComplexPropDefault, Theme, Themes } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import {
     ChildTransformParameters,
@@ -33,6 +33,15 @@ enum Emphasises {
     high = 'high',
 }
 type Emphasis = Emphasises;
+
+/**
+ * The authorized values for the `size` prop.
+ */
+enum Sizes {
+    s = 's',
+    m = 'm',
+}
+type Size = Sizes;
 
 /**
  * The authorized values for the `variant` prop.
@@ -179,7 +188,7 @@ function _validateChild(childrenTypes: string[]): (params: ChildValidateParamete
         }
 
         if (childrenCount === 1) {
-            console.warn(
+            console.info(
                 `If you want to display an icon button, you should use the 'icon' \`variant\` of the <${COMPONENT_NAME}> instead of the 'button' \`variant\`\nYou should even consider using the <${
                     IconButton.displayName
                 }> component instead.`,

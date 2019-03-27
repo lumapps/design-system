@@ -19,11 +19,11 @@ export {
 } from './components/button/react/Button';
 export {
     CLASSNAME as IconButtonClassName,
-    IconButton,
     Color as IconButtonColor,
     Colors as IconButtonColors,
     Emphasis as IconButtonEmphasis,
     Emphasises as IconButtonEmphasises,
+    IconButton,
     IconButtonProps,
     Size as IconButtonSize,
     Sizes as IconButtonSizes,
@@ -36,8 +36,8 @@ export {
     CLASSNAME as DropdownButtonClassName,
     Color as DropdownButtonColor,
     Colors as DropdownButtonColors,
-    Emphasis,
-    Emphasises,
+    Emphasis as DropdownButtonEmphasis,
+    Emphasises as DropdownButtonEmphasises,
     DropdownButton,
     DropdownButtonProps,
     Size as DropdownButtonSize,
@@ -49,9 +49,9 @@ export {
 export {
     CLASSNAME as ButtonGroupClassName,
     ButtonGroup,
+    ButtonGroupProps,
     Color as ButtonGroupColor,
     Colors as ButtonGroupColors,
-    ButtonGroupProps,
     Size as ButtonGroupSize,
     Sizes as ButtonGroupSizes,
     Theme as ButtonGroupTheme,
@@ -70,10 +70,10 @@ export { CLASSNAME as DropdownClassName, Dropdown, DropdownProps } from './compo
 
 export {
     CLASSNAME as IconClassName,
-    Icon,
-    IconProps,
     Color as IconColor,
     Colors as IconColors,
+    Icon,
+    IconProps,
     Size as IconSize,
     Sizes as IconSizes,
 } from './components/icon/react/Icon';

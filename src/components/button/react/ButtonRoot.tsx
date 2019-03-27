@@ -82,15 +82,25 @@ function _validate(props: ButtonRootProps): React.ReactNode {
  *
  * @return {JSX.Element} The component.
  */
-const ButtonRoot: React.FC<ButtonRootProps> = ({ children, href, target, ...props }: ButtonRootProps): JSX.Element => {
+const ButtonRoot: React.FC<ButtonRootProps> = ({
+    children,
+    className,
+    href,
+    target,
+    ...props
+}: ButtonRootProps): JSX.Element => {
     const newChildren: React.ReactNode = _validate({ children, ...props });
 
     if (isEmpty(href)) {
-        return <button {...props}>{newChildren}</button>;
+        return (
+            <button className={className} {...props}>
+                {newChildren}
+            </button>
+        );
     }
 
     return (
-        <a href={href} target={target} {...props}>
+        <a className={className} href={href} target={target} {...props}>
             {newChildren}
         </a>
     );

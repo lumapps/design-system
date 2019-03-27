@@ -11,7 +11,7 @@ exports[`<DropdownButton> Conditions should fail when more than 2 children are g
 exports[`<DropdownButton> Snapshots and structure should render correctly a non-splitted dropdown button 1`] = `
 <Fragment>
   <Button
-    className="lumx-button__dropdown"
+    className="lumx-dropdown-button"
     onClick={[Function]}
     variant="button"
   >
@@ -26,7 +26,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
 exports[`<DropdownButton> Snapshots and structure should render correctly a non-splitted dropdown button with a preceding icon 1`] = `
 <Fragment>
   <Button
-    className="lumx-button__dropdown"
+    className="lumx-dropdown-button"
     onClick={[Function]}
     variant="button"
   >
@@ -44,7 +44,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
 exports[`<DropdownButton> Snapshots and structure should render correctly a splitted dropdown button 1`] = `
 <Fragment>
   <ButtonGroup
-    className="lumx-button__dropdown lumx-button__dropdown--is-splitted"
+    className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
   >
     <Button
       variant="button"
@@ -65,7 +65,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
 exports[`<DropdownButton> Snapshots and structure should render correctly a splitted dropdown button with a preceding icon 1`] = `
 <Fragment>
   <ButtonGroup
-    className="lumx-button__dropdown lumx-button__dropdown--is-splitted"
+    className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
   >
     <Button
       variant="button"

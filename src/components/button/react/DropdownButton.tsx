@@ -7,13 +7,12 @@ import isFunction from 'lodash/isFunction';
 
 import { Dropdown, Icon, IconButton } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, ValidateParameters, validateComponent } from 'LumX/core/react/utils';
+import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { mdiMenuDown } from 'LumX/icons';
 
 import {
     Button,
     ButtonProps,
-    CLASSNAME as BUTTON_CLASSNAME,
     Color,
     Colors,
     Emphasis,
@@ -22,6 +21,7 @@ import {
     Sizes,
     Theme,
     Themes,
+    Variants as ButtonVariants,
 } from './Button';
 import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
 
@@ -84,7 +84,7 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}DropdownButton`;
  * @constant
  * @readonly
  */
-const CLASSNAME: string = `${BUTTON_CLASSNAME}__dropdown`;
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
@@ -182,7 +182,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     if (isSplitted) {
         rootElement = (
             <ButtonGroup className={extendedClassNames}>
-                <Button {...props} variant={Variants.button}>
+                <Button {...props} variant={ButtonVariants.button}>
                     {newChildren}
                 </Button>
 
@@ -193,7 +193,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
         );
     } else {
         rootElement = (
-            <Button className={extendedClassNames} {...props} variant={Variants.button} onClick={openDropdown}>
+            <Button className={extendedClassNames} {...props} variant={ButtonVariants.button} onClick={openDropdown}>
                 {newChildren}
                 <Icon icon={mdiMenuDown} />
             </Button>
