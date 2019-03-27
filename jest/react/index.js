@@ -9,11 +9,11 @@ module.exports = {
     moduleNameMapper: {
         '^.*\\.scss$': '<rootDir>jest/react/__mocks__/styleMock.js',
         '^LumX$': `${SRC_PATH}/react.index.ts`,
-        '^LumX/icons(.*)$': `${ICONS_PATH}$1`,
-        '^LumX/react(.*)$': `${CORE_PATH}/react$1`,
-        '^LumX/core(.*)$': `${CORE_PATH}$1`,
         '^LumX/components$': `${COMPONENTS_PATH}/index.ts`,
         '^LumX/components(.*)$': `${COMPONENTS_PATH}$1`,
+        '^LumX/core(.*)$': `${CORE_PATH}$1`,
+        '^LumX/icons(.*)$': `${ICONS_PATH}$1`,
+        '^LumX/react(.*)$': `${CORE_PATH}/react$1`,
     },
     preset: 'ts-jest',
     reporters: [
