@@ -1,0 +1,83 @@
+<div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
+    <lumx-dropdown class="mr++" lumx-position="left" lumx-over-toggle="false" lumx-offset="8">
+        <lumx-dropdown-toggle>
+            <lumx-button lumx-theme="{{ mainBlock.theme }}">Simple menu</lumx-button>
+        </lumx-dropdown-toggle>
+
+        <lumx-dropdown-menu>
+            <lumx-list lumx-is-clickable="true" lumx-focus-on-init>
+                <lumx-list-item>
+                    <lumx-list-item-content>Los Angeles</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-content>Monterrey</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-content>Georgetown</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-content>Cali</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-content>Trondheim</lumx-list-item-content>
+                </lumx-list-item>
+            </lumx-list>
+        </lumx-dropdown-menu>
+    </lumx-dropdown>
+
+    <lumx-dropdown lumx-position="left" lumx-over-toggle="false" lumx-offset="8">
+        <lumx-dropdown-toggle>
+            <lumx-button>Complex menu</lumx-button>
+        </lumx-dropdown-toggle>
+
+        <lumx-dropdown-menu>
+            <lumx-list lumx-is-clickable="true" lumx-focus-on-init>
+                <lumx-list-subheader>Contribution</lumx-list-subheader>
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiFileDocumentBox }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Pages</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiNewspaper }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>News articles</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiClipboardAccount }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Job offers</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-divider></lumx-list-divider>
+                <lumx-list-subheader>Directories</lumx-list-subheader>
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiArchive }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Projects</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiStar }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Useful links</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiHelpCircle }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Support links</lumx-list-item-content>
+                </lumx-list-item>
+                <lumx-list-item>
+                    <lumx-list-item-before>
+                        <lumx-icon lumx-path="{{ vm.icons.mdiWrench }}" lumx-size="xs"></lumx-icon>
+                    </lumx-list-item-before>
+                    <lumx-list-item-content>Engineering</lumx-list-item-content>
+                </lumx-list-item>
+            </lumx-list>
+        </lumx-dropdown-menu>
+    </lumx-dropdown>
+</div>
