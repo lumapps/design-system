@@ -227,11 +227,13 @@ const DemoBlock: React.FC<IProps> = ({
                             {demoSources.map(
                                 (demoSource: string, index: number): React.ReactNode => {
                                     return (
-                                        <div className={classNames({ 'mt+': index > 0 })}>
+                                        <div
+                                            key={sourceFilesToLoad[index]}
+                                            className={classNames({ 'mt+': index > 0 })}
+                                        >
                                             <code className="main-block__filename">{sourceFilesToLoad[index]}</code>
 
                                             <SyntaxHighlighter
-                                                key={sourceFilesToLoad[index]}
                                                 language="tsx"
                                                 style={syntaxHighlighterStyle}
                                                 customStyle={{ margin: 0 }}
