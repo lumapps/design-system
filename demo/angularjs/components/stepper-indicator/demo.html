@@ -1,6 +1,6 @@
 <main-header category="Components" title="Stepper indicator">
     <p>
-        An area that convey user progress through a linear sequence of steps.
+        Stepper indicator convey user progress through a linear sequence of steps.
     </p>
 </main-header>
 
@@ -19,7 +19,7 @@
 >
     <p>
         There are four types: <i>Current state,</i> <i>Future state,</i> <i>Completed state</i> and <i>Error state</i>.
-        All types of states can be completed by a helper text.
+        A step can be completed by a helper text.
     </p>
     <div class="mt+++">
         <strong>Current</strong>
@@ -44,17 +44,17 @@
 
 <main-block
     class="mt+++"
-    path="demo/angularjs/components/stepper-indicator/partials/error.html"
-    js-path="demo/angularjs/components/stepper-indicator/controller.js"
->
-    <strong>Error </strong>
-    <p class="mt+">⚠️ <i>Always come with an error message which replaces the helper text, if used.</i></p>
-</main-block>
-
-<main-block
-    class="mt+++"
     path="demo/angularjs/components/stepper-indicator/partials/helper.html"
     js-path="demo/angularjs/components/stepper-indicator/controller.js"
 >
     <strong>Future with helper</strong>
+</main-block>
+
+<main-block
+    class="mt+++"
+    path="demo/angularjs/components/stepper-indicator/partials/error.html"
+    js-path="demo/angularjs/components/stepper-indicator/controller.js"
+>
+    <strong>Error </strong>
+    <p class="mt">Error message replaces the helper text, if used.</p>
 </main-block>
