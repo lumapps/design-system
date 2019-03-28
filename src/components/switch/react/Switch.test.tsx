@@ -206,20 +206,19 @@ describe(`<${Switch.displayName}>`, (): void => {
 
     // 3. Test events.
     describe('Events', (): void => {
-        const onClick: jest.Mock = jest.fn();
+        const onToggle: jest.Mock = jest.fn();
 
         beforeEach(
             (): void => {
-                onClick.mockClear();
+                onToggle.mockClear();
             },
         );
 
-        it('should trigger `onClick` when clicked', (): void => {
-            const { root }: ISetup = setup({ onClick }, false);
+        it('should trigger `onToggle` when toggled', (): void => {
+            const { input }: ISetup = setup({ onToggle }, false);
 
-            root.simulate('click');
-
-            expect(onClick).toHaveBeenCalled();
+            input.simulate('click');
+            expect(onToggle).toHaveBeenCalled();
         });
     });
     /////////////////////////////
