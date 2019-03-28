@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
-import camelCase from 'lodash/camelCase';
 import isEmpty from 'lodash/isEmpty';
-import upperFirst from 'lodash/upperFirst';
 
 import { Category, DemoObject } from 'LumX/demo/react/constants';
 
@@ -69,9 +67,7 @@ async function _loadComponent(componentFolderName: IProps['activeComponent']): P
         return Promise.reject('No component to load');
     }
 
-    const componentName: string = upperFirst(camelCase(componentFolderName));
-
-    return import(`../components/${componentFolderName}/${componentName}Demo`);
+    return import(`../components/${componentFolderName}`);
 }
 
 /////////////////////////////

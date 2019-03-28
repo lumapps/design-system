@@ -106,7 +106,6 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
-            // tslint:disable-next-line: no-non-null-assertion
             expect(root).toHaveDisplayName(Button.displayName!);
 
             expect(group).not.toExist();
@@ -133,7 +132,6 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
-            // tslint:disable-next-line: no-non-null-assertion
             expect(root).toHaveDisplayName(Button.displayName!);
 
             expect(group).not.toExist();
@@ -153,7 +151,6 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup({ isSplitted: true });
             expect(wrapper).toMatchSnapshot();
 
-            // tslint:disable-next-line: no-non-null-assertion
             expect(root).toHaveDisplayName(ButtonGroup.displayName!);
 
             expect(group).toExist();
@@ -181,7 +178,6 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             });
             expect(wrapper).toMatchSnapshot();
 
-            // tslint:disable-next-line: no-non-null-assertion
             expect(root).toHaveDisplayName(ButtonGroup.displayName!);
 
             expect(group).toExist();
@@ -203,7 +199,6 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         it('should use default props', (): void => {
             const { root }: ISetup = setup();
 
-            // tslint:disable-next-line: no-non-null-assertion
             expect(root).toHaveDisplayName(Button.displayName!);
         });
 

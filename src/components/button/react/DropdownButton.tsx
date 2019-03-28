@@ -46,7 +46,7 @@ interface IProps extends IGenericProps {
     /**
      * Indicates if the label <Button> and the icon <IconButton> buttons are separated in the <ButtonGroup>
      */
-    isSplitted?: boolean;
+    splitted?: boolean;
 
     /**
      * The <DropdownButton> should never have the `variant` prop as this prop is forced to 'button' in the <Button>.
@@ -94,7 +94,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    isSplitted: false,
+    splitted: false,
 };
 
 /////////////////////////////
@@ -159,27 +159,33 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     children,
     className = '',
     dropdown,
-    isSplitted = DEFAULT_PROPS.isSplitted,
+    splitted = DEFAULT_PROPS.splitted,
     ...props
 }: DropdownButtonProps): React.ReactElement => {
     const [isDropdownOpened, setIsDropdownOpened]: [boolean, (isDropdownOpened: boolean) => void] = useState(false);
 
-    const newChildren: React.ReactNode = _validate({ children, dropdown, isSplitted, ...props });
+    const newChildren: React.ReactNode = _validate({ children, dropdown, splitted, ...props });
 
+    /**
+     * Open the dropdown contained in the dropdown button.
+     *
+     * @param  {Event}   evt The click event.
+     * @return {boolean} If we should propagate the event or not.
+     */
     const openDropdown: (evt: React.MouseEvent<HTMLElement>) => boolean | void = (
         evt: React.MouseEvent<HTMLElement>,
     ): boolean | void => {
         setIsDropdownOpened(!isDropdownOpened);
 
-        if (!isSplitted && isFunction(props.onClick)) {
-            props.onClick(evt);
+        if (!splitted && isFunction(props.onClick)) {
+            return props.onClick(evt);
         }
     };
 
     let rootElement: React.ReactNode;
-    const extendedClassNames: string = classNames(className, CLASSNAME, { [`${CLASSNAME}--is-splitted`]: isSplitted });
+    const extendedClassNames: string = classNames(className, CLASSNAME, { [`${CLASSNAME}--is-splitted`]: splitted });
 
-    if (isSplitted) {
+    if (splitted) {
         rootElement = (
             <ButtonGroup className={extendedClassNames}>
                 <Button {...props} variant={ButtonVariants.button}>

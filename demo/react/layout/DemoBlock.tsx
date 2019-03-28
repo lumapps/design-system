@@ -149,7 +149,21 @@ const DemoBlock: React.FC<IProps> = ({
     files = [],
 }: IProps): React.ReactElement => {
     const [theme, setTheme]: [Theme, (theme: Theme) => void] = useState(Themes.light);
+    /**
+     * Switch between the light and dark theme.
+     */
+    const switchTheme: () => void = (): void => {
+        setTheme(theme === Themes.light ? Themes.dark : Themes.light);
+    };
+
     const [shouldDisplayCode, setDisplayCode]: [boolean, (shouldDisplayCode: boolean) => void] = useState(false);
+    /**
+     * Toggle the display of the code in the demo block.
+     */
+    const toggleDisplayCode: () => void = (): void => {
+        setDisplayCode(!shouldDisplayCode);
+    };
+
     const [demoComponent, setDemoComponent]: [
         IESModule['default'] | undefined,
         (demoComponent: IESModule['default'] | undefined) => void
@@ -158,24 +172,9 @@ const DemoBlock: React.FC<IProps> = ({
         'No source code for this demo...',
     ]);
 
-    /**
-     * Switch between the light and dark theme.
-     */
-    const switchTheme: () => void = (): void => {
-        setTheme(theme === Themes.light ? Themes.dark : Themes.light);
-    };
-
-    /**
-     * Toggle the display of the code in the demo block.
-     */
-    const toggleDisplayCode: () => void = (): void => {
-        setDisplayCode(!shouldDisplayCode);
-    };
-
     const isThemeDark: boolean = theme === Themes.dark;
 
     const sourceFilesToLoad: string[] = [`${demoName}.tsx`].concat(files);
-
     useEffect((): void => {
         _load(_loadDemoComponent, demoPath, demoName, setDemoComponent);
 

@@ -26,15 +26,9 @@
         "no-for-in-array": true,
         "no-inferrable-types": false,
         "no-inferred-empty-object-type": true,
-        "no-non-null-assertion": {
-            "severity": "warning"
-        },
         "no-object-literal-type-assertion": true,
         "no-return-await": true,
         "no-unsafe-any": false,
-        "no-void-expression": {
-            "severity": "warning"
-        },
         "ordered-imports": [
             true,
             {

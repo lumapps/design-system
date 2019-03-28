@@ -129,7 +129,6 @@ function isElementOfType(el: React.ReactNode, type: string | ComponentType): boo
     if (!isString(typeName) || isEmpty(typeName)) {
         console.debug('Un-computable type', type, '\nResulted in', typeName);
         throw new Error(
-            // tslint:disable-next-line: no-non-null-assertion
             `The type you want to check is not valid. Waiting a JSX element, a component or a string (got \`${type!.toString()}\`)`,
         );
     }
@@ -243,7 +242,7 @@ function validateComponent(
     const preValidation: string | boolean | void = preValidate({ children: newChildren, childrenCount, props });
     if (isString(preValidation) || (isBoolean(preValidation) && !preValidation)) {
         throw new Error(
-            `Pre-validation of <${componentName}> failed${isString(preValidation) ? `: '${preValidation}'` : ''}'.`,
+            `Pre-validation of <${componentName}> failed${isString(preValidation) ? `: '${preValidation}'` : ''}.`,
         );
     }
 
@@ -289,7 +288,6 @@ function validateComponent(
             (child: React.ReactNode): React.ReactNode => {
                 index++;
 
-                // tslint:disable-next-line: no-non-null-assertion
                 const newChild: React.ReactNode = transformChild!({
                     child,
                     children: newChildren,
@@ -327,7 +325,6 @@ function validateComponent(
                     }
                 }
 
-                // tslint:disable-next-line: no-non-null-assertion
                 const childValidation: string | boolean | void = validateChild!({
                     child: newChild,
                     children: newChildren,
@@ -355,7 +352,7 @@ function validateComponent(
     const postValidation: string | boolean | void = postValidate({ children: newChildren, childrenCount, props });
     if (isString(postValidation) || (isBoolean(postValidation) && !postValidation)) {
         throw new Error(
-            `Post-validation of ${componentName} failed${isString(postValidation) ? `: ${postValidation}` : ''}'.`,
+            `Post-validation of ${componentName} failed${isString(postValidation) ? `: ${postValidation}` : ''}.`,
         );
     }
 

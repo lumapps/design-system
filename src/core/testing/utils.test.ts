@@ -66,10 +66,8 @@ function commonTestsSuite(
                 const wrappers: ICommonSetup = setup(modifiedProps);
 
                 const wrappersToTest: string[] = isArray(tests.className)
-                    ? // tslint:disable-next-line: no-non-null-assertion
-                      tests.className!
-                    : // tslint:disable-next-line: no-non-null-assertion
-                      [tests.className!, tests.className!];
+                    ? tests.className!
+                    : [tests.className!, tests.className!];
                 expect(wrappers[wrappersToTest[0]]).toHaveClassName(params.className);
                 expect(wrappers[wrappersToTest[1]]).toHaveClassName(modifiedProps.className);
             });
@@ -85,7 +83,6 @@ function commonTestsSuite(
 
                 const wrappers: ICommonSetup = setup(modifiedProps);
 
-                // tslint:disable-next-line: no-non-null-assertion
                 const wrappersToTest: string[] = isArray(tests.prop) ? tests.prop! : [tests.prop!];
                 wrappersToTest.forEach(
                     (wrapper: string): void => {

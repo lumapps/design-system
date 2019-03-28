@@ -241,7 +241,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it("should render correctly an icon button with the 'button' `variant`", (): void => {
-            mockConsole();
+            mockConsole('info');
 
             const children: React.ReactNode = <Icon icon={mdiPlus} />;
 
@@ -291,9 +291,9 @@ describe(`<${Button.displayName}>`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 // tslint:disable-next-line: no-any
                 color: fake((fakeData: any): string => fakeData.commerce.color()),
-                emphasis: oneOf(...without(Object.values(Emphasises), Emphasises.high)),
-                size: oneOf(...Object.values(Sizes)),
-                theme: oneOf(...Object.values(Themes)),
+                emphasis: oneOf(...without(Object.values(Emphasises), DEFAULT_PROPS.emphasis)),
+                size: oneOf(...without(Object.values(Sizes), DEFAULT_PROPS.size)),
+                theme: oneOf(...without(Object.values(Themes), DEFAULT_PROPS.theme)),
                 variant: Variants.icon,
             });
 

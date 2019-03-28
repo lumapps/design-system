@@ -51,7 +51,6 @@ const SubNavItem: React.FC<IProps> = ({
     handleClick,
     activeComponent,
 }: IProps): React.ReactElement => {
-    // tslint:disable-next-line: no-non-null-assertion
     component = slugify(component || children!.toString(), {
         lower: true,
     });

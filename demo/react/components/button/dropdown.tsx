@@ -16,7 +16,7 @@ interface IProps {
 /**
  * The demo for the <DropdownButton>s.
  *
- * @return {React.ReactElement} The component.
+ * @return {React.ReactElement} The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     const onClick: (splitted: boolean) => void = (splitted: boolean = false): (() => void) => {
@@ -68,7 +68,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 <DropdownButton
                     className="mr"
                     dropdown={<span>Content of the Dropdown</span>}
-                    isSplitted={true}
+                    splitted={true}
                     emphasis={ButtonEmphasises.low}
                     color={theme === ButtonThemes.dark ? 'light' : undefined}
                     theme={theme}
@@ -80,7 +80,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 <DropdownButton
                     className="mr"
                     dropdown={<span>Content of the Dropdown</span>}
-                    isSplitted={true}
+                    splitted={true}
                     emphasis={ButtonEmphasises.medium}
                     color={theme === ButtonThemes.dark ? 'light' : undefined}
                     theme={theme}
@@ -91,7 +91,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
                 <DropdownButton
                     dropdown={<span>Content of the Dropdown</span>}
-                    isSplitted={true}
+                    splitted={true}
                     theme={theme}
                     onClick={onClick(true)}
                 >

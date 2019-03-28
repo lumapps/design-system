@@ -14,7 +14,7 @@ import { IGenericProps, getRootClassName } from 'LumX/react/utils';
  */
 interface IDividerProps extends IGenericProps {
     /**
-     * The divider theme.
+     * The <Divider> theme.
      */
     theme?: Theme;
 }

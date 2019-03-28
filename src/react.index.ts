@@ -77,3 +77,13 @@ export {
     Size as IconSize,
     Sizes as IconSizes,
 } from './components/icon/react/Icon';
+
+export {
+    CLASSNAME as SwitchClassName,
+    Position as SwitchPosition,
+    Positions as SwitchPositions,
+    Switch,
+    SwitchProps,
+    Theme as SwitchTheme,
+    Themes as SwitchThemes,
+} from './components/switch/react/Switch';

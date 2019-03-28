@@ -59,27 +59,27 @@ type Variant = Variants;
  */
 interface IButtonProps extends IGenericProps {
     /**
-     * The button color.
+     * The color.
      */
     color?: Color;
 
     /**
-     * The emphasis of the button.
+     * The emphasis.
      */
     emphasis?: Emphasis;
 
     /**
-     * The button size.
+     * The size.
      */
     size?: Size;
 
     /**
-     * The button theme.
+     * The theme.
      */
     theme?: Theme;
 
     /**
-     * The button variant.
+     * The variant.
      */
     variant?: Variant;
 }

@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 
+import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
 
 /////////////////////////////
@@ -11,12 +12,16 @@ import isEmpty from 'lodash/isEmpty';
 /**
  * Get the basic CSS class for the given type.
  *
- * @param  {string} prefix The class name prefix for the generated CSS class.
- * @param  {string} type   The type of CSS class we want to generate (e.g.: 'color', 'variant', ...).
- * @param  {string} value  The value of the type of the CSS class (e.g.: 'primary', 'button', ...).
- * @return {string} The basic CSS class.
+ * @param  {string}         prefix The class name prefix for the generated CSS class.
+ * @param  {string}         type   The type of CSS class we want to generate (e.g.: 'color', 'variant', ...).
+ * @param  {string|boolean} value  The value of the type of the CSS class (e.g.: 'primary', 'button', ...).
+ * @return {string}         The basic CSS class.
  */
 function getBasicClass({ prefix, type, value }) {
+    if (isBoolean(value)) {
+        return `${prefix}--is-${type}`;
+    }
+
     return `${prefix}--${type}-${value}`;
 }
 
@@ -35,7 +40,9 @@ function handleBasicClasses({ prefix, ...props }) {
     const otherClasses = {};
     if (!isEmpty(props)) {
         Object.keys(props).forEach((prop) => {
-            otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] = !isEmpty(props[prop]);
+            otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] = isBoolean(props[prop])
+                ? props[prop]
+                : !isEmpty(props[prop]);
         });
     }
 

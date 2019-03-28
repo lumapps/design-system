@@ -16,7 +16,7 @@ interface IProps {
 /**
  * The demo for the disabled <Button>s.
  *
- * @return {React.ReactElement} The component.
+ * @return {React.ReactElement} The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>
