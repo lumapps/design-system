@@ -108,6 +108,16 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 },
             },
         })
+        .state('app.file-bloc', {
+            url: 'file-bloc',
+            views: {
+                'main@': {
+                    controller: 'DemoFileBlocController',
+                    controllerAs: 'vm',
+                    template: require('./components/file-bloc/demo.html'),
+                },
+            },
+        })
         .state('app.image-block', {
             url: 'image-block',
             views: {
@@ -271,6 +281,7 @@ require('./components/data-table/controller.js');
 require('./components/dialog/controller.js');
 require('./components/dropdown/controller.js');
 require('./components/expansion-panel/controller.js');
+require('./components/file-bloc/controller.js');
 require('./components/list/controller.js');
 require('./components/notification/controller.js');
 require('./components/progress-tracker/controller.js');
