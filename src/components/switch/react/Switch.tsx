@@ -54,6 +54,12 @@ interface ISwitchProps extends IGenericProps {
      * The <Switch> theme.
      */
     theme?: Theme;
+
+    /**
+     * The function to execute when the <Switch> is toggled.
+     * This function will receive the state of the <Switch>
+     */
+    onToggle?(enabled: boolean): void;
 }
 type SwitchProps = ISwitchProps;
 
@@ -133,6 +139,7 @@ const Switch: React.FC<SwitchProps> = ({
     checked = DEFAULT_PROPS.checked,
     helper,
     label,
+    onToggle,
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
     ...props
@@ -148,8 +155,8 @@ const Switch: React.FC<SwitchProps> = ({
     const toggleIsChecked: (evt: React.MouseEvent<HTMLElement>) => void = (): void => {
         setIsChecked(!isChecked);
 
-        if (isFunction(props.onClick)) {
-            return props.onClick(!isChecked);
+        if (isFunction(onToggle)) {
+            onToggle(!isChecked);
         }
     };
 
