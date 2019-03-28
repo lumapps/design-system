@@ -10,9 +10,9 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-import { Button, ButtonEmphasises, ButtonThemes, Icon, Theme, Themes } from 'LumX';
+import { Button, ButtonEmphasises, Icon, Switch, SwitchPositions, Theme, Themes } from 'LumX';
 import { IGenericProps } from 'LumX/core/react/utils';
-import { mdiCodeTags, mdiCompare } from 'LumX/icons';
+import { mdiCodeTags } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -150,10 +150,13 @@ const DemoBlock: React.FC<IProps> = ({
 }: IProps): React.ReactElement => {
     const [theme, setTheme]: [Theme, (theme: Theme) => void] = useState(Themes.light);
     /**
-     * Switch between the light and dark theme.
+     * Enable/disable the dark theme.
+     * This is the callback function of the `onClick` event of the theme <Switch>.
+     *
+     * @param {boolean} enabled Indicates if the dark theme should be enabled or not.
      */
-    const switchTheme: () => void = (): void => {
-        setTheme(theme === Themes.light ? Themes.dark : Themes.light);
+    const setDarkTheme: (enabled: boolean) => void = (enabled: boolean): void => {
+        setTheme(enabled ? Themes.dark : Themes.light);
     };
 
     const [shouldDisplayCode, setDisplayCode]: [boolean, (shouldDisplayCode: boolean) => void] = useState(false);
@@ -214,10 +217,7 @@ const DemoBlock: React.FC<IProps> = ({
                         </div>
 
                         <div className="main-block__theme-toggle">
-                            <Button emphasis={ButtonEmphasises.low} onClick={switchTheme}>
-                                <Icon icon={mdiCompare} />
-                                <span>Switch to {theme === ButtonThemes.light ? 'dark' : 'light'} theme</span>
-                            </Button>
+                            <Switch position={SwitchPositions.right} label="Dark background" onToggle={setDarkTheme} />
                         </div>
                     </div>
 
