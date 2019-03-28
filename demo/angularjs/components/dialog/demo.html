@@ -1,8 +1,54 @@
-<div class="p+">
-    <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">Open dialog</lumx-button>
-    <lumx-button ng-click="vm.alertDialog()" id="alert-dialog-source">Alert box</lumx-button>
-    <lumx-button ng-click="vm.confirmDialog()" id="confirm-dialog-source">Confirm box</lumx-button>
-</div>
+<main-header category="Components" title="Dialogs">
+    <p>
+        Dialogs inform users about a task and can contain critical information, require decisions, or involve multiple
+        tasks.
+    </p>
+</main-header>
+
+<main-block
+    class="mt+++"
+    title="Simple dialog"
+    path="demo/angularjs/components/dialog/partials/simple.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p>
+        Simple dialogs display a list of items that take immediate effect when selected.
+    </p>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Alert dialog"
+    path="demo/angularjs/components/dialog/partials/alert.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p>
+        Alert dialogs interrupt users with urgent information, details, or actions.
+    </p>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Confirm dialog"
+    path="demo/angularjs/components/dialog/partials/confirm.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p>
+        Confirmation dialogs require users to confirm a choice before the dialog is dismissed.
+    </p>
+</main-block>
+
+<main-block
+    class="mt+++"
+    title="Scrollable dialog"
+    path="demo/angularjs/components/dialog/partials/scrollable.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p>
+        Most dialog content should avoid scrolling. When scrolling is required, the dialog title is pinned at the top,
+        with buttons pinned at the bottom.
+    </p>
+</main-block>
 
 <lumx-dialog id="{{ vm.dialogId }}">
     <lumx-dialog-header>
