@@ -1,28 +1,4 @@
-<div class="p++" lumx-grid-container="row" lumx-grid-h-align="center">
-    <div lumx-theme="{{ mainBlock.theme }}" lumx-grid-item>
-        <span>{{ vm.selectedRows.length || 0 }} selected item(s)</span>
-    </div>
-
-    <lumx-button
-        lumx-theme="{{ mainBlock.theme }}"
-        lumx-emphasis="low"
-        lumx-variant="icon"
-        ng-if="vm.selectedRows.length === 1"
-    >
-        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-    </lumx-button>
-
-    <lumx-button
-        lumx-theme="{{ mainBlock.theme }}"
-        lumx-emphasis="low"
-        lumx-variant="icon"
-        ng-if="vm.selectedRows.length >= 1"
-    >
-        <lumx-icon lumx-path="{{ vm.icons.mdiDelete }}"></lumx-icon>
-    </lumx-button>
-</div>
-
-<div lumx-grid-container="row" lumx-grid-h-align="center">
+<div class="p+" lumx-grid-container="row" lumx-grid-h-align="center">
     <lumx-data-table
         lumx-theme="{{ mainBlock.theme }}"
         id="{{ vm.dataTableDemo }}"
