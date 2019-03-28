@@ -42,10 +42,4 @@ const demos: { [demoName: string]: DemoObject } = {
 
 /////////////////////////////
 
-/*
- * Important Note: for the dynamic loading of the demo component in the Main component, you have to assign your demo
- * JSX to the `Component` export.
- * You must also have a `title` export.
- * You should also have `category`, `description` exports.
- */
 export { category, description, title, demos };

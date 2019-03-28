@@ -1,0 +1,140 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Switch> Conditions should fail when any child is given 1`] = `"<Switch> shouldn't have any child (got 1)!"`;
+
+exports[`<Switch> Conditions should not display the \`helper\` if no \`label\` is given 1`] = `
+<div
+  className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"
+>
+  <div
+    className="lumx-switch__input-wrapper"
+  >
+    <input
+      className="lumx-switch__input-native"
+      id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      onClick={[Function]}
+      type="checkbox"
+      value="false"
+    />
+    <div
+      className="lumx-switch__input-placeholder"
+    >
+      <div
+        className="lumx-switch__input-background"
+      />
+      <div
+        className="lumx-switch__input-indicator"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Switch> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"
+>
+  <div
+    className="lumx-switch__input-wrapper"
+  >
+    <input
+      className="lumx-switch__input-native"
+      id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      onClick={[Function]}
+      type="checkbox"
+      value="false"
+    />
+    <div
+      className="lumx-switch__input-placeholder"
+    >
+      <div
+        className="lumx-switch__input-background"
+      />
+      <div
+        className="lumx-switch__input-indicator"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Switch> Snapshots and structure should render correctly with a \`label\` 1`] = `
+<div
+  className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"
+>
+  <div
+    className="lumx-switch__input-wrapper"
+  >
+    <input
+      className="lumx-switch__input-native"
+      id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      onClick={[Function]}
+      type="checkbox"
+      value="false"
+    />
+    <div
+      className="lumx-switch__input-placeholder"
+    >
+      <div
+        className="lumx-switch__input-background"
+      />
+      <div
+        className="lumx-switch__input-indicator"
+      />
+    </div>
+  </div>
+  <div
+    className="lumx-switch__content"
+  >
+    <label
+      className="lumx-switch__label"
+      htmlFor="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+    >
+      Label
+    </label>
+  </div>
+</div>
+`;
+
+exports[`<Switch> Snapshots and structure should render correctly with a \`label\` and a \`helper\` 1`] = `
+<div
+  className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"
+>
+  <div
+    className="lumx-switch__input-wrapper"
+  >
+    <input
+      className="lumx-switch__input-native"
+      id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      onClick={[Function]}
+      type="checkbox"
+      value="false"
+    />
+    <div
+      className="lumx-switch__input-placeholder"
+    >
+      <div
+        className="lumx-switch__input-background"
+      />
+      <div
+        className="lumx-switch__input-indicator"
+      />
+    </div>
+  </div>
+  <div
+    className="lumx-switch__content"
+  >
+    <label
+      className="lumx-switch__label"
+      htmlFor="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+    >
+      Label
+    </label>
+    <span
+      className="lumx-switch__helper"
+    >
+      Helper
+    </span>
+  </div>
+</div>
+`;
