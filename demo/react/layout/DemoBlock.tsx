@@ -10,7 +10,7 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-import { Button, ButtonEmphasises, Icon, Switch, SwitchPositions, Theme, Themes } from 'LumX';
+import { Button, ButtonEmphasises, Switch, SwitchPositions, Theme, Themes } from 'LumX';
 import { IGenericProps } from 'LumX/core/react/utils';
 import { mdiCodeTags } from 'LumX/icons';
 
@@ -210,9 +210,8 @@ const DemoBlock: React.FC<IProps> = ({
 
                     <div className="main-block__toolbar">
                         <div className="main-block__code-toggle">
-                            <Button emphasis={ButtonEmphasises.low} onClick={toggleDisplayCode}>
-                                <Icon icon={mdiCodeTags} />
-                                <span>{shouldDisplayCode ? 'Hide code' : 'Show code'}</span>
+                            <Button leftIcon={mdiCodeTags} emphasis={ButtonEmphasises.low} onClick={toggleDisplayCode}>
+                                {shouldDisplayCode ? 'Hide code' : 'Show code'}
                             </Button>
                         </div>
 

@@ -1,27 +1,13 @@
-import React, { Children, cloneElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
-import { Icon } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 
-import {
-    Button,
-    ButtonProps,
-    CLASSNAME as BUTTON_CLASSNAME,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-} from './Button';
+import { Button, ButtonProps, Color, Colors, Emphasis, Emphasises, Size, Sizes, Theme, Themes } from './Button';
 
 /////////////////////////////
 
@@ -36,6 +22,17 @@ type Variant = Variants;
  * Defines the props of the component.
  */
 interface IProps extends ButtonProps {
+    /**
+     * The icon.
+     */
+    icon: string;
+
+    /**
+     * Don't allow usage of `leftIcon` or `rightIcon` and use `icon` instead.
+     */
+    leftIcon?: never;
+    rightIcon?: never;
+
     /**
      * The <IconButton> should never have the `variant` prop as this prop is forced to 'icon' in the <Button>.
      */
@@ -90,20 +87,49 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /////////////////////////////
 
 /**
- * Globally validate the component before validating the children.
+ * Globally validate the component after transforming and/or validating the children.
  *
- * @param {ValidateParameters} params The children, their number and the props of the component.
+ * @param  {ValidateParameters} params The children, their number and the props of the component.
+ * @return {string|boolean}     If a string, the error message.
+ *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
+ *                              lead to throw a basic error message).
+ *                              You can also return nothing if there is no special problem (i.e. a successful
+ *                              validation).
  */
-function _preValidate({ props }: ValidateParameters): void {
-    if (isEmpty(props.variant)) {
-        return;
+function _postValidate({ props }: ValidateParameters): string | boolean | void {
+    if (!isEmpty(props.variant)) {
+        console.warn(
+            `You shouldn't pass the \`variant\` prop in a <${COMPONENT_NAME}> as it's forced to 'icon' (got '${
+                props.variant
+            }')!`,
+        );
     }
 
-    console.warn(
-        `You shouldn't pass the \`variant\` prop in a <${COMPONENT_NAME}> as it's forced to 'icon' (got '${
-            props.variant
-        }')!`,
-    );
+    return true;
+}
+
+/**
+ * Globally validate the component before transforming and/or validating the children.
+ *
+ * @param  {ValidateParameters} params The children, their number and the props of the component.
+ * @return {string|boolean}     If a string, the error message.
+ *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
+ *                              lead to throw a basic error message).
+ *                              You can also return nothing if there is no special problem (i.e. a successful
+ *                              validation).
+ */
+function _preValidate({ props }: ValidateParameters): string | boolean | void {
+    if (!isEmpty(props.leftIcon)) {
+        return `You must use the \`icon\` prop of <${COMPONENT_NAME}> instead of \`leftIcon\`!`;
+    }
+
+    if (!isEmpty(props.rightIcon)) {
+        return `You must use the \`icon\` prop of <${COMPONENT_NAME}> instead of \`rightIcon\`!`;
+    }
+
+    if (isEmpty(props.icon)) {
+        return `You must have an \`icon\` in a <${COMPONENT_NAME}>!`;
+    }
 }
 
 /**
@@ -115,9 +141,8 @@ function _preValidate({ props }: ValidateParameters): void {
  */
 function _validate(props: IconButtonProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
-        allowedTypes: [Icon],
-        maxChildren: 1,
-        minChildren: 1,
+        maxChildren: 0,
+        postValidate: _postValidate,
         preValidate: _preValidate,
         props,
     });
@@ -138,23 +163,16 @@ function _validate(props: IconButtonProps): React.ReactNode {
 const IconButton: React.FC<IconButtonProps> = ({
     children,
     className = '',
+    icon,
+    // @ts-ignore
+    leftIcon = '',
+    // @ts-ignore
+    rightIcon = '',
     ...props
 }: IconButtonProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+    _validate({ children, icon, leftIcon, rightIcon, ...props });
 
-    return (
-        <Button className={classNames(className, CLASSNAME)} {...props} variant={Variants.icon}>
-            {Children.map(
-                newChildren,
-                // tslint:disable-next-line: no-any
-                (child: any): React.ReactNode => {
-                    return cloneElement(child, {
-                        className: classNames(get(child.props, 'className', ''), `${BUTTON_CLASSNAME}__icon`),
-                    });
-                },
-            )}
-        </Button>
-    );
+    return <Button className={classNames(className, CLASSNAME)} {...props} leftIcon={icon} variant={Variants.icon} />;
 };
 IconButton.displayName = COMPONENT_NAME;
 

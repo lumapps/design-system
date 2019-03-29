@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount, shallow } from 'enzyme';
 
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
 import { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps } from './Dropdown';
@@ -84,28 +84,6 @@ describe(`<${Dropdown.displayName}>`, (): void => {
                 },
             );
         });
-
-        it('should forward any CSS class', (): void => {
-            const modifiedProps: ISetupProps = {
-                className: 'component component--is-tested',
-            };
-
-            const { dropdown }: ISetup = setup(modifiedProps);
-
-            expect(dropdown).toHaveClassName(CLASSNAME);
-            expect(dropdown).toHaveClassName(modifiedProps.className);
-        });
-
-        it('should forward any other prop', (): void => {
-            const testedProp: string = 'winter';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'is coming',
-            };
-
-            const { dropdown }: ISetup = setup(modifiedProps);
-
-            expect(dropdown).toHaveProp(testedProp, modifiedProps[testedProp]);
-        });
     });
 
     /////////////////////////////
@@ -127,4 +105,9 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     describe('State', (): void => {
         // Nothing to do here.
     });
+
+    /////////////////////////////
+
+    // Common tests suite.
+    commonTestsSuite(setup, { className: 'dropdown', prop: 'dropdown' }, { className: CLASSNAME });
 });

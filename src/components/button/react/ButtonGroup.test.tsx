@@ -49,9 +49,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         children: (
             <Fragment>
                 <Button>Label</Button>
-                <IconButton>
-                    <Icon icon={mdiPlus} />
-                </IconButton>
+                <IconButton icon={mdiPlus} />
             </Fragment>
         ),
         ...propsOverrides,

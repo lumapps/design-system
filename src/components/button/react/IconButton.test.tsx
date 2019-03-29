@@ -1,14 +1,13 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { Button, ButtonVariants, Icon } from 'LumX';
+import { Button, ButtonVariants } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { mdiPlus } from 'LumX/icons';
+import { mdiChevronDown, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME as BUTTON_CLASSNAME } from './Button';
 import { CLASSNAME, Emphasises, IconButton, IconButtonProps, Sizes, Themes } from './IconButton';
 
 /////////////////////////////
@@ -31,11 +30,6 @@ interface ISetup extends ICommonSetup {
      * The <Button> element that is used as a wrapper for the children of the <IconButton>.
      */
     button: Wrapper;
-
-    /**
-     * The <Icon> icon(s) of the <IconButton>.
-     */
-    icon: Wrapper;
 }
 
 /////////////////////////////
@@ -53,7 +47,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
     shallowRendering: boolean = true,
 ): ISetup => {
     const props: IconButtonProps = {
-        children: <Icon icon={mdiPlus} />,
+        icon: mdiPlus,
         ...propsOverrides,
     };
 
@@ -64,8 +58,6 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
     return {
         button: wrapper.find('Button'),
 
-        icon: wrapper.find('Icon'),
-
         props,
         wrapper,
     };
@@ -75,16 +67,13 @@ describe(`<${IconButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly an icon button', (): void => {
-            const { button, icon, wrapper }: ISetup = setup();
+            const { button, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(button).toExist();
             expect(button).toHaveClassName(CLASSNAME);
 
-            expect(icon).toExist();
-            expect(icon).toHaveClassName(`${BUTTON_CLASSNAME}__icon`);
-
-            expect(icon.length).toEqual(1);
+            expect(button).toHaveProp('leftIcon');
         });
     });
 
@@ -93,8 +82,9 @@ describe(`<${IconButton.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { button }: ISetup = setup();
+            const { button, props }: ISetup = setup();
 
+            expect(button).toHaveProp('leftIcon', props.icon);
             expect(button).toHaveProp('variant', ButtonVariants.icon);
         });
 
@@ -127,6 +117,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
                 // tslint:disable-next-line: no-any
                 color: fake((fakeData: any): string => fakeData.commerce.color()),
                 emphasis: oneOf(...Object.values(Emphasises)),
+                icon: oneOf(mdiPlus, mdiChevronDown),
                 size: oneOf(...Object.values(Sizes)),
                 theme: oneOf(...Object.values(Themes)),
             });
@@ -137,6 +128,10 @@ describe(`<${IconButton.displayName}>`, (): void => {
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
+                    if (prop === 'icon') {
+                        return;
+                    }
+
                     expect(button).toHaveProp(prop, modifiedProps[prop]);
                 },
             );
@@ -166,37 +161,36 @@ describe(`<${IconButton.displayName}>`, (): void => {
             },
         );
 
-        it('should fail when no child is given', (): void => {
+        it('should fail when any child is given', (): void => {
             expect(
                 (): void => {
-                    setup({ children: null });
+                    setup({ children: 'Label', icon: mdiPlus });
                 },
             ).toThrowErrorMatchingSnapshot();
         });
 
-        it('should fail when more than 1 children are given', (): void => {
-            const children: React.ReactNode = (
-                <Fragment>
-                    <Icon icon={mdiPlus} />
-                    <Icon icon={mdiPlus} />
-                </Fragment>
-            );
-
+        it('should fail when no `icon` are given', (): void => {
             expect(
                 (): void => {
-                    setup({ children });
+                    setup({ icon: undefined });
                 },
             ).toThrowErrorMatchingSnapshot();
         });
 
-        it(`should fail when anything else than <${Icon.displayName}> is given as child`, (): void => {
-            mockConsole('debug');
-
-            const children: React.ReactNode = <div>Label</div>;
-
+        it('should fail when using `leftIcon` instead of `icon`', (): void => {
             expect(
                 (): void => {
-                    setup({ children });
+                    // @ts-ignore
+                    setup({ leftIcon: mdiPlus });
+                },
+            ).toThrowErrorMatchingSnapshot();
+        });
+
+        it('should fail when using `rightIcon` instead of `icon`', (): void => {
+            expect(
+                (): void => {
+                    // @ts-ignore
+                    setup({ rightIcon: mdiPlus });
                 },
             ).toThrowErrorMatchingSnapshot();
         });

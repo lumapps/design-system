@@ -1,48 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Button> Conditions should fail when anything else than a <Icon> is given as child in the 'icon' \`variant\` 1`] = `"You can only have <Icon> children in <Button> (got 'Label')!"`;
+exports[`<Button> Conditions should fail when 2 icons are given without a label in the 'button' \`variant\` 1`] = `"Pre-validation of <Button> failed: 'You cannot have only 2 icons in a 'button' \`variant\` of <Button>, you must also provide a label!'."`;
 
-exports[`<Button> Conditions should fail when anything else than a text, <span> or <Icon> is given as child in the 'button' \`variant\` 1`] = `"You can only have text, <span> or <Icon> children in <Button> (got <div>)!"`;
+exports[`<Button> Conditions should fail when a label is given in the 'icon' \`variant\` 1`] = `"<Button> shouldn't have any child (got 1)!"`;
 
-exports[`<Button> Conditions should fail when more than 1 child is given in the 'icon' \`variant\` 1`] = `"<Button> must have exactly 1 child (got 2)!"`;
+exports[`<Button> Conditions should fail when more than 1 icon is given in the 'icon' \`variant\` 1`] = `"Pre-validation of <Button> failed: 'You cannot have 2 icons in a 'icon' \`variant\` of <Button>, You can only have one icon!'."`;
 
-exports[`<Button> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 1`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <Button> (got at least 2)!"`;
-
-exports[`<Button> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 2`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <Button> (got at least 2)!"`;
-
-exports[`<Button> Conditions should fail when more than 1 text or <span> child is given in the 'button' \`variant\` 3`] = `"You cannot have more than 1 label in a 'button' \`variant\` of <Button> (got at least 2)!"`;
-
-exports[`<Button> Conditions should fail when more than 3 children are given in the 'button' \`variant\` 1`] = `"<Button> cannot have more than 3 children (got 4)!"`;
-
-exports[`<Button> Conditions should fail when no child is given 1`] = `"<Button> must have at least 1 child (got 0)!"`;
-
-exports[`<Button> Conditions should fail when there are 2 or more <Icon> in a row in the 'button' \`variant\` 1`] = `"You cannot have 2 following icons children in a 'button' \`variant\` of <Button>, there must be a label between them!"`;
+exports[`<Button> Conditions should fail when no child nor icons is given in the 'button' \`variant\` 1`] = `"Pre-validation of <Button> failed: 'You should have at least a text or <span> label or an icon in a 'button' \`variant\` of <Button>\\";'."`;
 
 exports[`<Button> Snapshots and structure should render correctly a <span> label 1`] = `
 <ButtonRoot
   className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <span
-    key=".0"
-  >
+  <span>
     Label
   </span>
 </ButtonRoot>
 `;
 
-exports[`<Button> Snapshots and structure should render correctly a <span> label and an icon 1`] = `
+exports[`<Button> Snapshots and structure should render correctly a <span> label and a right icon 1`] = `
 <ButtonRoot
   className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <span
-    key=".0"
-  >
+  <span>
     Label
   </span>
   <Icon
-    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".1"
+    icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
   />
+</ButtonRoot>
+`;
+
+exports[`<Button> Snapshots and structure should render correctly a left icon and a <span> label 1`] = `
+<ButtonRoot
+  className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+>
+  <Icon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+  />
+  <span>
+    Label
+  </span>
+</ButtonRoot>
+`;
+
+exports[`<Button> Snapshots and structure should render correctly a left icon and a text label 1`] = `
+<ButtonRoot
+  className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+>
+  <Icon
+    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+  />
+  Label
 </ButtonRoot>
 `;
 
@@ -50,59 +59,18 @@ exports[`<Button> Snapshots and structure should render correctly a text label 1
 <ButtonRoot
   className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <span
-    key=".0"
-  >
-    Label
-  </span>
+  Label
 </ButtonRoot>
 `;
 
-exports[`<Button> Snapshots and structure should render correctly a text label and an icon 1`] = `
+exports[`<Button> Snapshots and structure should render correctly a text label and a right icon 1`] = `
 <ButtonRoot
   className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  <span
-    key=".0"
-  >
-    Label
-  </span>
+  Label
   <Icon
-    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".1"
+    icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
   />
-</ButtonRoot>
-`;
-
-exports[`<Button> Snapshots and structure should render correctly an icon and a <span> label 1`] = `
-<ButtonRoot
-  className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
->
-  <Icon
-    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".0"
-  />
-  <span
-    key=".1"
-  >
-    Label
-  </span>
-</ButtonRoot>
-`;
-
-exports[`<Button> Snapshots and structure should render correctly an icon and a text label 1`] = `
-<ButtonRoot
-  className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
->
-  <Icon
-    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".0"
-  />
-  <span
-    key=".1"
-  >
-    Label
-  </span>
 </ButtonRoot>
 `;
 
@@ -112,7 +80,16 @@ exports[`<Button> Snapshots and structure should render correctly an icon button
 >
   <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".0"
+  />
+</ButtonRoot>
+`;
+
+exports[`<Button> Snapshots and structure should render correctly an icon button with the 'button' \`variant\` 2`] = `
+<ButtonRoot
+  className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+>
+  <Icon
+    icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
   />
 </ButtonRoot>
 `;
@@ -127,22 +104,28 @@ exports[`<Button> Snapshots and structure should render correctly an icon button
 </ButtonRoot>
 `;
 
+exports[`<Button> Snapshots and structure should render correctly an icon button with the 'icon' \`variant\` 2`] = `
+<ButtonRoot
+  className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+>
+  <Icon
+    icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+  />
+</ButtonRoot>
+`;
+
 exports[`<Button> Snapshots and structure should render correctly two icons and a <span> label 1`] = `
 <ButtonRoot
   className="lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".0"
   />
-  <span
-    key=".1"
-  >
+  <span>
     Label
   </span>
   <Icon
-    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".2"
+    icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
   />
 </ButtonRoot>
 `;
@@ -153,16 +136,10 @@ exports[`<Button> Snapshots and structure should render correctly two icons and 
 >
   <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".0"
   />
-  <span
-    key=".1"
-  >
-    Label
-  </span>
+  Label
   <Icon
-    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".2"
+    icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
   />
 </ButtonRoot>
 `;

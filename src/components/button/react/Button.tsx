@@ -1,23 +1,13 @@
-import React, { Children } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
-import isString from 'lodash/isString';
 
 import { Icon, IconButton } from 'LumX';
 import { Color, Colors, ComplexPropDefault, Theme, Themes } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import {
-    ChildTransformParameters,
-    ChildValidateParameters,
-    IGenericProps,
-    Omit,
-    getRootClassName,
-    isElementOfType,
-    isElementText,
-    validateComponent,
-} from 'LumX/core/react/utils';
+import { IGenericProps, Omit, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
@@ -59,6 +49,11 @@ type Variant = Variants;
  */
 interface IButtonProps extends IGenericProps {
     /**
+     * The label.
+     */
+    children?: React.ReactNode;
+
+    /**
      * The color.
      */
     color?: Color;
@@ -67,6 +62,16 @@ interface IButtonProps extends IGenericProps {
      * The emphasis.
      */
     emphasis?: Emphasis;
+
+    /**
+     * The icon that comes before the label.
+     */
+    leftIcon?: string;
+
+    /**
+     * The icon that comes after the label.
+     */
+    rightIcon?: string;
 
     /**
      * The size.
@@ -143,66 +148,56 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /////////////////////////////
 
 /**
- * Transform a text child to <span>.
+ * Globally validate the component after transforming and/or validating the children.
  *
- * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
- * @return {React.ReactNode}          The transformed child (or the original one if there is no transformation to do).
+ * @param  {ValidateParameters} params The children, their number and the props of the component.
+ * @return {string|boolean}     If a string, the error message.
+ *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
+ *                              lead to throw a basic error message).
+ *                              You can also return nothing if there is no special problem (i.e. a successful
+ *                              validation).
  */
-function _transformChild({ child }: ChildTransformParameters): React.ReactNode {
-    if (isString(child)) {
-        return <span>{child}</span>;
+function _postValidate({ childrenCount, props }: ValidateParameters): string | boolean | void {
+    if (
+        props.variant === Variants.button &&
+        (!isEmpty(props.leftIcon) || !isEmpty(props.rightIcon)) &&
+        childrenCount === 0
+    ) {
+        console.info(
+            `If you want to display an icon button, maybe you should use the 'icon' \`variant\` of the <${COMPONENT_NAME}> instead of the 'button' \`variant\`\nYou should even consider using the <${
+                IconButton.displayName
+            }> component instead.`,
+        );
     }
 
-    return child;
+    return true;
 }
-
 /**
- * Returns a closure for the function to validate a child of the component.
- * This closure will help remembering the types of the previous children. This list will help to determine if there is
- * no excess children of a given type.
+ * Globally validate the component before transforming and/or validating the children.
  *
- * @param  {Array<string>} childrenTypes The list of types of the previously validated children.
- * @return {Function}      The closured function to validate a child of the component.
+ * @param  {ValidateParameters} params The children, their number and the props of the component.
+ * @return {string|boolean}     If a string, the error message.
+ *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
+ *                              lead to throw a basic error message).
+ *                              You can also return nothing if there is no special problem (i.e. a successful
+ *                              validation).
  */
-function _validateChild(childrenTypes: string[]): (params: ChildValidateParameters) => void {
-    /**
-     * Validate a of the component
-     *
-     * @param {ChildValidateParameters} params The parameters received from the `validateComponent` function.
-     */
-    return ({ child, childrenCount, index }: ChildValidateParameters): void => {
-        const isChildText: boolean = isElementText(child) || isElementOfType(child, <span />);
-        const isChildIcon: boolean = isElementOfType(child, Icon);
-
-        const alreadyHasSomeText: boolean =
-            index === 0 ? false : childrenTypes.some((type: string): boolean => type === 'text');
-        childrenTypes[index] = isChildText ? 'text' : 'icon';
-
-        if (isChildText && alreadyHasSomeText) {
-            throw new Error(
-                `You cannot have more than 1 label in a 'button' \`variant\` of <${COMPONENT_NAME}> (got at least 2)!`,
-            );
+function _preValidate({ childrenCount, props }: ValidateParameters): string | boolean | void {
+    if (!isEmpty(props.leftIcon) && !isEmpty(props.rightIcon)) {
+        if (props.variant === Variants.icon) {
+            return `You cannot have 2 icons in a 'icon' \`variant\` of <${COMPONENT_NAME}>, You can only have one icon!`;
         }
 
-        if (!isChildIcon) {
-            return;
+        if (childrenCount === 0) {
+            return `You cannot have only 2 icons in a 'button' \`variant\` of <${COMPONENT_NAME}>, you must also provide a label!`;
         }
+    }
 
-        if (childrenCount === 1) {
-            console.info(
-                `If you want to display an icon button, you should use the 'icon' \`variant\` of the <${COMPONENT_NAME}> instead of the 'button' \`variant\`\nYou should even consider using the <${
-                    IconButton.displayName
-                }> component instead.`,
-            );
-        }
+    if (isEmpty(props.leftIcon) && isEmpty(props.rightIcon) && childrenCount === 0) {
+        return `You should have at least a text or <span> label or an icon in a 'button' \`variant\` of <${COMPONENT_NAME}>";`;
+    }
 
-        const isPreviousChildIcon: boolean = childrenTypes[index - 1] === 'icon';
-        if (index > 0 && isPreviousChildIcon) {
-            throw new Error(
-                `You cannot have 2 following icons children in a 'button' \`variant\` of <${COMPONENT_NAME}>, there must be a label between them!`,
-            );
-        }
-    };
+    return true;
 }
 
 /**
@@ -213,15 +208,11 @@ function _validateChild(childrenTypes: string[]): (params: ChildValidateParamete
  * @return {React.ReactNode} The processed children of the component.
  */
 function _validate(props: ButtonProps): React.ReactNode {
-    const childrenTypes: string[] = [];
-
     return validateComponent(COMPONENT_NAME, {
-        allowedTypes: props.variant === Variants.icon ? [Icon] : ['text', <span />, Icon],
-        maxChildren: props.variant === Variants.icon ? 1 : 3,
-        minChildren: 1,
+        maxChildren: props.variant === Variants.icon ? 0 : undefined,
+        postValidate: _postValidate,
+        preValidate: _preValidate,
         props,
-        transformChild: props.variant === Variants.button ? _transformChild : undefined,
-        validateChild: props.variant === Variants.button ? _validateChild(childrenTypes) : undefined,
     });
 }
 
@@ -238,27 +229,35 @@ const Button: React.FC<ButtonProps> = ({
     className = '',
     color,
     emphasis = DEFAULT_PROPS.emphasis,
+    leftIcon,
+    rightIcon,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     ...props
 }: ButtonProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, color, emphasis, size, theme, variant, ...props });
+    const newChildren: React.ReactNode = _validate({
+        children,
+        color,
+        emphasis,
+        leftIcon,
+        rightIcon,
+        size,
+        theme,
+        variant,
+        ...props,
+    });
 
     if (variant === Variants.button) {
-        let index: number = -1;
-        Children.forEach(
-            // @ts-ignore
-            newChildren,
-            (child: React.ReactNode): void => {
-                index++;
+        if (!isEmpty(leftIcon)) {
+            className += isEmpty(className) ? '' : ' ';
+            className += `${CLASSNAME}--has-left-icon`;
+        }
 
-                if (isElementOfType(child, Icon)) {
-                    className += isEmpty(className) ? '' : ' ';
-                    className += `${CLASSNAME}--has-${index === 0 ? 'left' : 'right'}-icon`;
-                }
-            },
-        );
+        if (!isEmpty(rightIcon)) {
+            className += isEmpty(className) ? '' : ' ';
+            className += `${CLASSNAME}--has-right-icon`;
+        }
     }
 
     if (isEmpty(color)) {
@@ -281,7 +280,9 @@ const Button: React.FC<ButtonProps> = ({
             )}
             {...props}
         >
+            {leftIcon !== undefined && !isEmpty(leftIcon) && <Icon icon={leftIcon} />}
             {newChildren}
+            {rightIcon !== undefined && !isEmpty(rightIcon) && <Icon icon={rightIcon} />}
         </ButtonRoot>
     );
 };

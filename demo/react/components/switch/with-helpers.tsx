@@ -20,14 +20,13 @@ interface IProps {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>
-        <Switch className="mb+" helper="Click on the switch to check it" label="With label" theme={theme} />
+        <Switch className="mb+" helper="Click on the switch to check it" theme={theme}>
+            Label
+        </Switch>
 
-        <Switch
-            helper="Click on the switch to uncheck it"
-            checked={true}
-            label="Checked by default with label"
-            theme={theme}
-        />
+        <Switch helper="Click on the switch to uncheck it" checked={true} theme={theme}>
+            Checked by default
+        </Switch>
     </Fragment>
 );
 

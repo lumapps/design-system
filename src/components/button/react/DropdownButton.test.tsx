@@ -6,7 +6,7 @@ import { build, fake, oneOf } from 'test-data-bot';
 
 import { Button, ButtonGroup, ButtonVariants, Icon } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { mdiPlus } from 'LumX/icons';
+import { mdiMenuDown, mdiPlus } from 'LumX/icons';
 
 import { CLASSNAME, DropdownButton, DropdownButtonProps, Emphasises, Sizes, Themes } from './DropdownButton';
 
@@ -43,18 +43,13 @@ interface ISetup extends ICommonSetup {
     group: Wrapper;
 
     /**
-     * The <Icon>(s) that holds either the preceding icon (the one before the label) or the dropdown toggle icon.
-     */
-    icon: Wrapper;
-
-    /**
      * The <IconButton> that hold the dropdown toggle icon button.
      */
     iconButton: Wrapper;
 
     /**
      * The roo element of the <DropdownButton> component.
-     * Either <ButtonGroup> if `isSplitted` or <Button> if not `isSplitted`.
+     * Either <ButtonGroup> if `splitted` or <Button> if not `splitted`.
      */
     root: Wrapper;
 }
@@ -84,12 +79,11 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
     const wrapper: Wrapper = renderer(<DropdownButton {...props} />);
 
     return {
-        root: props.isSplitted ? wrapper.find('ButtonGroup') : wrapper.find('Button'),
+        root: props.splitted ? wrapper.find('ButtonGroup') : wrapper.find('Button'),
 
         group: wrapper.find('ButtonGroup'),
 
         button: wrapper.find('Button'),
-        icon: wrapper.find('Icon'),
         iconButton: wrapper.find('IconButton'),
 
         dropdown: wrapper.find('Dropdown'),
@@ -103,7 +97,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a non-splitted dropdown button', (): void => {
-            const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup();
+            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(Button.displayName!);
@@ -112,24 +106,15 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             expect(button).toExist();
             expect(button).toHaveClassName(CLASSNAME);
+            expect(button).toHaveProp('rightIcon', mdiMenuDown);
 
             expect(iconButton).not.toExist();
-
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
 
             expect(dropdown).not.toExist();
         });
 
         it('should render correctly a non-splitted dropdown button with a preceding icon', (): void => {
-            const children: React.ReactNode = (
-                <Fragment>
-                    <Icon icon={mdiPlus} />
-                    Label
-                </Fragment>
-            );
-
-            const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup({ children });
+            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({ icon: mdiPlus });
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(Button.displayName!);
@@ -139,16 +124,16 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             expect(button).toExist();
             expect(button).toHaveClassName(CLASSNAME);
 
-            expect(iconButton).not.toExist();
+            expect(button).toHaveProp('leftIcon', mdiPlus);
+            expect(button).toHaveProp('rightIcon', mdiMenuDown);
 
-            expect(icon).toExist();
-            expect(icon.length).toEqual(2);
+            expect(iconButton).not.toExist();
 
             expect(dropdown).not.toExist();
         });
 
         it('should render correctly a splitted dropdown button', (): void => {
-            const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup({ isSplitted: true });
+            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({ splitted: true });
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(ButtonGroup.displayName!);
@@ -157,24 +142,17 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             expect(group).toHaveClassName(CLASSNAME);
 
             expect(button).toExist();
+
             expect(iconButton).toExist();
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
+            expect(iconButton).toHaveProp('icon', mdiMenuDown);
 
             expect(dropdown).not.toExist();
         });
 
         it('should render correctly a splitted dropdown button with a preceding icon', (): void => {
-            const children: React.ReactNode = (
-                <Fragment>
-                    <Icon icon={mdiPlus} />
-                    Label
-                </Fragment>
-            );
-
-            const { button, dropdown, group, icon, iconButton, root, wrapper }: ISetup = setup({
-                children,
-                isSplitted: true,
+            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({
+                icon: mdiPlus,
+                splitted: true,
             });
             expect(wrapper).toMatchSnapshot();
 
@@ -184,9 +162,10 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             expect(group).toHaveClassName(CLASSNAME);
 
             expect(button).toExist();
+            expect(button).toHaveProp('leftIcon', mdiPlus);
+
             expect(iconButton).toExist();
-            expect(icon).toExist();
-            expect(icon.length).toEqual(2);
+            expect(iconButton).toHaveProp('icon', mdiMenuDown);
 
             expect(dropdown).not.toExist();
         });
@@ -225,7 +204,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             modifiedProps[testedProp] = ButtonVariants.icon;
 
-            ({ button } = setup({ ...modifiedProps, isSplitted: true }));
+            ({ button } = setup({ ...modifiedProps, splitted: true }));
 
             expect(button).toHaveProp(testedProp, ButtonVariants.button);
 
@@ -259,7 +238,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             /////////////////////////////
 
-            ({ button } = setup({ ...modifiedProps, isSplitted: true }));
+            ({ button } = setup({ ...modifiedProps, splitted: true }));
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -280,7 +259,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             /////////////////////////////
 
-            ({ button, iconButton } = setup({ ...modifiedProps, isSplitted: true }));
+            ({ button, iconButton } = setup({ ...modifiedProps, splitted: true }));
 
             expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
             expect(iconButton).toHaveProp(testedProp, modifiedProps[testedProp]);
@@ -314,7 +293,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         });
 
         it('should only trigger `onClick` when the label button is clicked in splitted mode', (): void => {
-            const setupReturn: ISetup = setup({ isSplitted: true, onClick }, false);
+            const setupReturn: ISetup = setup({ splitted: true, onClick }, false);
             const { button, wrapper }: ISetup = setupReturn;
             let { dropdown }: ISetup = setupReturn;
 
@@ -328,7 +307,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         });
 
         it('should only toggle the dropdown when the dropdown (icon) button is clicked in splitted mode', (): void => {
-            const setupReturn: ISetup = setup({ isSplitted: true, onClick }, false);
+            const setupReturn: ISetup = setup({ splitted: true, onClick }, false);
             const { iconButton, wrapper }: ISetup = setupReturn;
             let { dropdown }: ISetup = setupReturn;
 
@@ -385,7 +364,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             expect(
                 (): void => {
-                    setup({ children, isSplitted: true });
+                    setup({ children, splitted: true });
                 },
             ).toThrowErrorMatchingSnapshot();
 
@@ -417,9 +396,26 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             expect(
                 (): void => {
-                    setup({ children, isSplitted: true });
+                    setup({ children, splitted: true });
                 },
             ).toThrowErrorMatchingSnapshot();
+        });
+
+        it('should fail when using `leftIcon` instead of `icon`', (): void => {
+            expect(
+                (): void => {
+                    // @ts-ignore
+                    setup({ leftIcon: mdiPlus });
+                },
+            ).toThrowErrorMatchingSnapshot();
+        });
+
+        it(`should warn the user when rendering a <${DropdownButton.displayName}> with a \`rightIcon\``, (): void => {
+            global.console.warn = jest.fn();
+
+            // @ts-ignore
+            setup({ rightIcon: mdiPlus });
+            expect(global.console.warn).toHaveBeenCalled();
         });
 
         it(`should warn the user when rendering a <${DropdownButton.displayName}> with a \`variant\``, (): void => {

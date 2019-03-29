@@ -28,9 +28,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
                 theme={theme}
             >
-                <span>
+                <div>
                     Small - <code>s</code>
-                </span>
+                </div>
             </Button>
 
             <Button
@@ -40,15 +40,15 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
                 theme={theme}
             >
-                <span>
+                <div>
                     Small - <code>s</code>
-                </span>
+                </div>
             </Button>
 
             <Button size={ButtonSizes.s} theme={theme}>
-                <span>
+                <div>
                     Small - <code>s</code>
-                </span>
+                </div>
             </Button>
         </div>
 
@@ -60,9 +60,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
                 theme={theme}
             >
-                <span>
+                <div>
                     Medium - <code>m</code> (default)
-                </span>
+                </div>
             </Button>
 
             <Button
@@ -72,15 +72,15 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
                 theme={theme}
             >
-                <span>
+                <div>
                     Medium - <code>m</code> (default)
-                </span>
+                </div>
             </Button>
 
             <Button size={ButtonSizes.m} theme={theme}>
-                <span>
+                <div>
                     Medium - <code>m</code> (default)
-                </span>
+                </div>
             </Button>
         </div>
     </Fragment>

@@ -22,9 +22,15 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     <Fragment>
         <Switch className="mb+" theme={theme} />
 
-        <Switch className="mb+" label="With label" theme={theme} />
+        <Switch className="mb+" theme={theme}>
+            Label
+        </Switch>
 
-        <Switch checked={true} label="Checked by default with label" theme={theme} />
+        <Switch className="mb+" checked={true} theme={theme} />
+
+        <Switch checked={true} theme={theme}>
+            Checked by default
+        </Switch>
     </Fragment>
 );
 

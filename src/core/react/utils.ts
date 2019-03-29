@@ -300,7 +300,10 @@ function validateComponent(
                 if (!isEmpty(allowedTypes)) {
                     const isOfOneAllowedType: boolean = allowedTypes.some(
                         (allowedType: string | ComponentType) =>
-                            isElementOfType(newChild, allowedType) || isEmpty(newChild),
+                            isEmpty(newChild) ||
+                            (allowedType === 'text'
+                                ? isElementText(newChild)
+                                : isElementOfType(newChild, allowedType) || isEmpty(newChild)),
                     );
 
                     if (!isOfOneAllowedType) {

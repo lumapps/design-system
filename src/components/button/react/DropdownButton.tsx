@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
-import { Dropdown, Icon, IconButton } from 'LumX';
+import { Dropdown, IconButton } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { mdiMenuDown } from 'LumX/icons';
@@ -42,6 +42,17 @@ interface IProps extends IGenericProps {
      * Contains the dropdown element to display when the icon is clicked.
      */
     dropdown?: React.ReactNode;
+
+    /**
+     * The left icon.
+     */
+    icon?: string;
+
+    /**
+     * Don't allow usage of `leftIcon` or `rightIcon` and use `icon` instead.
+     */
+    leftIcon?: never;
+    rightIcon?: never;
 
     /**
      * Indicates if the label <Button> and the icon <IconButton> buttons are separated in the <ButtonGroup>
@@ -104,26 +115,51 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /////////////////////////////
 
 /**
- * Globally validate the component before validating the children.
+ * Globally validate the component after transforming and/or validating the children.
  *
- * @param {ValidateParameters} props The properties of the component.
+ * @param  {ValidateParameters} params The children, their number and the props of the component.
+ * @return {string|boolean}     If a string, the error message.
+ *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
+ *                              lead to throw a basic error message).
+ *                              You can also return nothing if there is no special problem (i.e. a successful
+ *                              validation).
  */
-function _preValidate({ props }: ValidateParameters): void {
+function _postValidate({ props }: ValidateParameters): string | boolean | void {
     if (isEmpty(props.dropdown)) {
         console.warn(
             `You haven't specified any dropdown for you <${COMPONENT_NAME}>. The dropdown toggle will not work until you provide one.`,
         );
     }
 
-    if (isEmpty(props.variant)) {
-        return;
+    if (!isEmpty(props.variant)) {
+        console.warn(
+            `You shouldn't pass the \`variant\` prop in a <${COMPONENT_NAME}> as it's forced to 'button' (got '${
+                props.variant
+            }')!`,
+        );
     }
 
-    console.warn(
-        `You shouldn't pass the \`variant\` prop in a <${COMPONENT_NAME}> as it's forced to 'button' (got '${
-            props.variant
-        }')!`,
-    );
+    if (!isEmpty(props.rightIcon)) {
+        console.warn(`You shouldn't pass the \`rightIcon\` prop in a <${COMPONENT_NAME}> (got '${props.variant}')!`);
+    }
+
+    return true;
+}
+
+/**
+ * Globally validate the component before transforming and/or validating the children.
+ *
+ * @param  {ValidateParameters} params The children, their number and the props of the component.
+ * @return {string|boolean}     If a string, the error message.
+ *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
+ *                              lead to throw a basic error message).
+ *                              You can also return nothing if there is no special problem (i.e. a successful
+ *                              validation).
+ */
+function _preValidate({ props }: ValidateParameters): string | boolean | void {
+    if (!isEmpty(props.leftIcon)) {
+        return `You must use the \`icon\` prop of <${COMPONENT_NAME}> instead of \`leftIcon\`!`;
+    }
 }
 
 /**
@@ -136,6 +172,7 @@ function _preValidate({ props }: ValidateParameters): void {
 function _validate(props: DropdownButtonProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: 2,
+        postValidate: _postValidate,
         preValidate: _preValidate,
         props,
     });
@@ -159,12 +196,25 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     children,
     className = '',
     dropdown,
+    icon,
+    // @ts-ignore
+    leftIcon = '',
+    // @ts-ignore
+    rightIcon = '',
     splitted = DEFAULT_PROPS.splitted,
     ...props
 }: DropdownButtonProps): React.ReactElement => {
     const [isDropdownOpened, setIsDropdownOpened]: [boolean, (isDropdownOpened: boolean) => void] = useState(false);
 
-    const newChildren: React.ReactNode = _validate({ children, dropdown, splitted, ...props });
+    const newChildren: React.ReactNode = _validate({
+        children,
+        dropdown,
+        icon,
+        leftIcon,
+        rightIcon,
+        splitted,
+        ...props,
+    });
 
     /**
      * Open the dropdown contained in the dropdown button.
@@ -188,20 +238,24 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     if (splitted) {
         rootElement = (
             <ButtonGroup className={extendedClassNames}>
-                <Button {...props} variant={ButtonVariants.button}>
+                <Button {...props} leftIcon={icon} variant={ButtonVariants.button}>
                     {newChildren}
                 </Button>
 
-                <IconButton {...props} onClick={openDropdown}>
-                    <Icon icon={mdiMenuDown} />
-                </IconButton>
+                <IconButton {...props} icon={mdiMenuDown} onClick={openDropdown} />
             </ButtonGroup>
         );
     } else {
         rootElement = (
-            <Button className={extendedClassNames} {...props} variant={ButtonVariants.button} onClick={openDropdown}>
+            <Button
+                className={extendedClassNames}
+                {...props}
+                leftIcon={icon}
+                rightIcon={mdiMenuDown}
+                variant={ButtonVariants.button}
+                onClick={openDropdown}
+            >
                 {newChildren}
-                <Icon icon={mdiMenuDown} />
             </Button>
         );
     }

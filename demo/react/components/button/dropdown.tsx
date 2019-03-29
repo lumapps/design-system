@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 
 import { ButtonEmphasises, ButtonTheme, ButtonThemes, DropdownButton } from 'LumX';
+import { mdiPencil } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -64,7 +65,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 </DropdownButton>
             </div>
 
-            <div>
+            <div className="mb+">
                 <DropdownButton
                     className="mr"
                     dropdown={<span>Content of the Dropdown</span>}
@@ -96,6 +97,28 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     onClick={onClick(true)}
                 >
                     Splitted Dropdown button
+                </DropdownButton>
+            </div>
+
+            <div>
+                <DropdownButton
+                    className="mr"
+                    dropdown={<span>Content of the Dropdown</span>}
+                    icon={mdiPencil}
+                    theme={theme}
+                    onClick={onClick(false)}
+                >
+                    Dropdown button with left icon
+                </DropdownButton>
+
+                <DropdownButton
+                    dropdown={<span>Content of the Dropdown</span>}
+                    splitted={true}
+                    icon={mdiPencil}
+                    theme={theme}
+                    onClick={onClick(true)}
+                >
+                    Splitted Dropdown button with left icon
                 </DropdownButton>
             </div>
         </Fragment>

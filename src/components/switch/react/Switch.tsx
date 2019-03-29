@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Children, useState } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
@@ -26,38 +26,28 @@ type Position = Positions;
  */
 interface ISwitchProps extends IGenericProps {
     /**
-     * Indicates if the <Switch> is toggled on or not by default.
+     * Indicates if it is toggled on or not by default.
      */
     checked?: boolean;
 
     /**
-     * <Switch> doesn't accept any child.
-     */
-    children?: never;
-
-    /**
-     * A small help to display below the <Switch>.
+     * A small help to display below.
      */
     helper?: string;
 
     /**
-     * The label of the <Switch>.
-     */
-    label?: string;
-
-    /**
-     * The position of the label regarding the <Switch> toggle.
+     * The position of the toggle regarding the label.
      */
     position?: Position;
 
     /**
-     * The <Switch> theme.
+     * The theme.
      */
     theme?: Theme;
 
     /**
-     * The function to execute when the <Switch> is toggled.
-     * This function will receive the state of the <Switch>
+     * The function to execute when toggled.
+     * This function will receive the new state.
      */
     onToggle?(enabled: boolean): void;
 }
@@ -122,7 +112,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  */
 function _validate(props: SwitchProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
-        maxChildren: 0,
+        allowedTypes: ['text', <span />],
+        maxChildren: 1,
+        minChildren: 0,
         props,
     });
 }
@@ -136,9 +128,9 @@ function _validate(props: SwitchProps): React.ReactNode {
  */
 const Switch: React.FC<SwitchProps> = ({
     className = '',
+    children,
     checked = DEFAULT_PROPS.checked,
     helper,
-    label,
     onToggle,
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
@@ -146,7 +138,7 @@ const Switch: React.FC<SwitchProps> = ({
 }: SwitchProps): React.ReactElement => {
     const switchId: string = uuid();
 
-    _validate({ checked, helper, label, position, theme, ...props });
+    const newChildren: React.ReactNode = _validate({ children, checked, helper, position, theme, ...props });
 
     const [isChecked, setIsChecked]: [boolean, (isChecked: boolean) => void] = useState(Boolean(checked));
     /**
@@ -191,10 +183,10 @@ const Switch: React.FC<SwitchProps> = ({
                 </div>
             </div>
 
-            {!isEmpty(label) && (
+            {Children.count(newChildren) > 0 && (
                 <div className={`${CLASSNAME}__content`}>
                     <label htmlFor={switchId} className={`${CLASSNAME}__label`}>
-                        {label}
+                        {newChildren}
                     </label>
                     {!isEmpty(helper) && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
                 </div>

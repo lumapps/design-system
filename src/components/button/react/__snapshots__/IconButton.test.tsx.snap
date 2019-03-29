@@ -1,20 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<IconButton> Conditions should fail when anything else than <Icon> is given as child 1`] = `"You can only have <Icon> children in <IconButton> (got <div>)!"`;
+exports[`<IconButton> Conditions should fail when any child is given 1`] = `"<IconButton> shouldn't have any child (got 1)!"`;
 
-exports[`<IconButton> Conditions should fail when more than 1 children are given 1`] = `"<IconButton> must have exactly 1 child (got 2)!"`;
+exports[`<IconButton> Conditions should fail when no \`icon\` are given 1`] = `"Pre-validation of <IconButton> failed: 'You must have an \`icon\` in a <IconButton>!'."`;
 
-exports[`<IconButton> Conditions should fail when no child is given 1`] = `"<IconButton> must have exactly 1 child (got 0)!"`;
+exports[`<IconButton> Conditions should fail when using \`leftIcon\` instead of \`icon\` 1`] = `"Pre-validation of <IconButton> failed: 'You must use the \`icon\` prop of <IconButton> instead of \`leftIcon\`!'."`;
+
+exports[`<IconButton> Conditions should fail when using \`rightIcon\` instead of \`icon\` 1`] = `"Pre-validation of <IconButton> failed: 'You must use the \`icon\` prop of <IconButton> instead of \`rightIcon\`!'."`;
 
 exports[`<IconButton> Snapshots and structure should render correctly an icon button 1`] = `
 <Button
   className="lumx-icon-button"
+  leftIcon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
   variant="icon"
->
-  <Icon
-    className="lumx-button__icon"
-    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-    key=".0"
-  />
-</Button>
+/>
 `;

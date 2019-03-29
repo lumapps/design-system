@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import mockConsole from 'jest-mock-console';
 import { build, oneOf } from 'test-data-bot';
 
 import without from 'lodash/without';
@@ -95,7 +96,7 @@ jest.mock('uuid/v4', (): (() => string) => (): string => 'a7b5d992-fe30-4d58-967
 describe(`<${Switch.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
+        it('should render correctly without any label', (): void => {
             const { root, inputWrapper, input, content, wrapper }: ISetup = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -108,8 +109,8 @@ describe(`<${Switch.displayName}>`, (): void => {
             expect(content).not.toExist();
         });
 
-        it('should render correctly with a `label`', (): void => {
-            const props: ISetupProps = { label: 'Label' };
+        it('should render correctly with only a `label`', (): void => {
+            const props: ISetupProps = { children: 'Label' };
             const { root, inputWrapper, input, content, helper, label, wrapper }: ISetup = setup(props);
             expect(wrapper).toMatchSnapshot();
 
@@ -123,11 +124,11 @@ describe(`<${Switch.displayName}>`, (): void => {
             expect(label).toExist();
             expect(helper).not.toExist();
 
-            expect(label).toHaveText(props.label!);
+            expect(label).toHaveText(props.children!);
         });
 
         it('should render correctly with a `label` and a `helper`', (): void => {
-            const props: ISetupProps = { label: 'Label', helper: 'Helper' };
+            const props: ISetupProps = { children: 'Label', helper: 'Helper' };
             const { root, inputWrapper, input, content, helper, label, wrapper }: ISetup = setup(props);
             expect(wrapper).toMatchSnapshot();
 
@@ -141,7 +142,7 @@ describe(`<${Switch.displayName}>`, (): void => {
             expect(label).toExist();
             expect(helper).toExist();
 
-            expect(label).toHaveText(props.label!);
+            expect(label).toHaveText(props.children!);
             expect(helper).toHaveText(props.helper!);
         });
     });
@@ -225,12 +226,29 @@ describe(`<${Switch.displayName}>`, (): void => {
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', (): void => {
-        it('should fail when any child is given', (): void => {
+        it('should fail when more than one child is given', (): void => {
+            const children: React.ReactNode = (
+                <Fragment>
+                    Label
+                    <span>Label 2</span>
+                </Fragment>
+            );
+
             expect(
                 (): void => {
-                    // We known that there shouldn't be any children, but for the test, ignore it.
-                    // @ts-ignore
-                    setup({ children: 'Label' });
+                    setup({ children });
+                },
+            ).toThrowErrorMatchingSnapshot();
+        });
+
+        it('should fail when anything else than a text or a <span> is given', (): void => {
+            mockConsole('debug');
+
+            const children: React.ReactNode = <div>Label</div>;
+
+            expect(
+                (): void => {
+                    setup({ children });
                 },
             ).toThrowErrorMatchingSnapshot();
         });

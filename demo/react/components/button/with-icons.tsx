@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import { Button, ButtonEmphasises, ButtonTheme, ButtonThemes, Icon, IconButton } from 'LumX';
+import { Button, ButtonEmphasises, ButtonTheme, ButtonThemes, IconButton } from 'LumX';
 import { mdiCheck, mdiPencil } from 'LumX/icons';
 
 /////////////////////////////
@@ -26,9 +26,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 className="mr"
                 emphasis={ButtonEmphasises.low}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                leftIcon={mdiPencil}
                 theme={theme}
             >
-                <Icon icon={mdiPencil} />
                 Left icon
             </Button>
 
@@ -36,14 +36,13 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 className="mr"
                 emphasis={ButtonEmphasises.medium}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                leftIcon={mdiPencil}
                 theme={theme}
             >
-                <Icon icon={mdiPencil} />
                 Left icon
             </Button>
 
-            <Button theme={theme}>
-                <Icon icon={mdiPencil} />
+            <Button leftIcon={mdiPencil} theme={theme}>
                 Left icon
             </Button>
         </div>
@@ -53,25 +52,24 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 className="mr"
                 emphasis={ButtonEmphasises.low}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                rightIcon={mdiCheck}
                 theme={theme}
             >
                 Right icon
-                <Icon icon={mdiCheck} />
             </Button>
 
             <Button
                 className="mr"
                 emphasis={ButtonEmphasises.medium}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                rightIcon={mdiCheck}
                 theme={theme}
             >
                 Right icon
-                <Icon icon={mdiCheck} />
             </Button>
 
-            <Button theme={theme}>
+            <Button rightIcon={mdiCheck} theme={theme}>
                 Right icon
-                <Icon icon={mdiCheck} />
             </Button>
         </div>
 
@@ -80,28 +78,26 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 className="mr"
                 emphasis={ButtonEmphasises.low}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                leftIcon={mdiPencil}
+                rightIcon={mdiCheck}
                 theme={theme}
             >
-                <Icon icon={mdiPencil} />
                 Both icons
-                <Icon icon={mdiCheck} />
             </Button>
 
             <Button
                 className="mr"
                 emphasis={ButtonEmphasises.medium}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                leftIcon={mdiPencil}
+                rightIcon={mdiCheck}
                 theme={theme}
             >
-                <Icon icon={mdiPencil} />
                 Both icons
-                <Icon icon={mdiCheck} />
             </Button>
 
-            <Button theme={theme}>
-                <Icon icon={mdiPencil} />
+            <Button leftIcon={mdiPencil} rightIcon={mdiCheck} theme={theme}>
                 Both icons
-                <Icon icon={mdiCheck} />
             </Button>
         </div>
 
@@ -110,23 +106,19 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 className="mr"
                 emphasis={ButtonEmphasises.low}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                leftIcon={mdiPencil}
                 theme={theme}
-            >
-                <Icon icon={mdiPencil} />
-            </Button>
+            />
 
             <Button
                 className="mr"
                 emphasis={ButtonEmphasises.medium}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                leftIcon={mdiPencil}
                 theme={theme}
-            >
-                <Icon icon={mdiPencil} />
-            </Button>
+            />
 
-            <Button theme={theme}>
-                <Icon icon={mdiPencil} />
-            </Button>
+            <Button leftIcon={mdiPencil} theme={theme} />
         </div>
 
         <div>
@@ -134,23 +126,19 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 className="mr"
                 emphasis={ButtonEmphasises.low}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                icon={mdiPencil}
                 theme={theme}
-            >
-                <Icon icon={mdiPencil} />
-            </IconButton>
+            />
 
             <IconButton
                 className="mr"
                 emphasis={ButtonEmphasises.medium}
                 color={theme === ButtonThemes.dark ? 'light' : undefined}
+                icon={mdiPencil}
                 theme={theme}
-            >
-                <Icon icon={mdiPencil} />
-            </IconButton>
+            />
 
-            <IconButton theme={theme}>
-                <Icon icon={mdiPencil} />
-            </IconButton>
+            <IconButton icon={mdiPencil} theme={theme} />
         </div>
     </Fragment>
 );
