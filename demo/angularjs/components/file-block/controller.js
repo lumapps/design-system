@@ -1,4 +1,4 @@
-function DemoFileBlocController() {
+function DemoFileBlockController() {
     'ngInject';
 
     const vm = this;
@@ -12,8 +12,8 @@ function DemoFileBlocController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoFileBlocController', DemoFileBlocController);
+angular.module('design-system').controller('DemoFileBlockController', DemoFileBlockController);
 
 /////////////////////////////
 
-export { DemoFileBlocController };
+export { DemoFileBlockController };
