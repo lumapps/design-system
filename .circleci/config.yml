@@ -16,6 +16,7 @@ commands:
                       # Find a cache corresponding to the specific yarn.lock checksum
                       # when this files is changed, this key will fail
                       - yarn-packages-{{ checksum "yarn.lock" }}
+                      - yarn-packages-
 
             - run:
                   name: Install Dependencies
@@ -35,7 +36,7 @@ commands:
             - run:
                   name: Run unit tests
                   command: |
-                      npm run test:react:ci
+                      yarn test:react:ci
                   when: always
 
 jobs:
