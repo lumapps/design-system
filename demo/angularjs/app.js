@@ -212,6 +212,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.stepper-dialog', {
+            url: 'stepper-dialog',
+            views: {
+                'main@': {
+                    controller: 'DemoStepperDialogController',
+                    controllerAs: 'vm',
+                    template: require('./components/stepper-dialog/demo.html'),
+                },
+            },
+        })
         .state('app.switch', {
             url: 'switch',
             views: {
@@ -348,6 +358,7 @@ require('./components/progress-tracker/controller.js');
 require('./components/radio-button/controller.js');
 require('./components/select/controller.js');
 require('./components/slideshow/controller.js');
+require('./components/stepper-dialog/controller.js');
 require('./components/switch/controller.js');
 require('./components/table/controller.js');
 require('./components/tabs/controller.js');
