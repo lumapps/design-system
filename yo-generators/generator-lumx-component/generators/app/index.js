@@ -59,15 +59,15 @@ module.exports = class extends Generator {
             },
             {
                 choices: [
-                    { name: 'Pre-validation', value: 'pre', checked: true },
-                    { name: 'Number of children', value: 'number', checked: true },
-                    { name: 'Children types', value: 'types', checked: true },
+                    { name: 'Pre-validation', value: 'pre', checked: false },
+                    { name: 'Number of children', value: 'number', checked: false },
+                    { name: 'Children types', value: 'types', checked: false },
                     { name: 'Child transformation', value: 'transform', checked: false },
-                    { name: 'Child validation', value: 'child', checked: true },
+                    { name: 'Child validation', value: 'child', checked: false },
                     { name: 'Post-validation', value: 'post', checked: false },
                 ],
-                default: ['pre', 'number', 'types', 'child'],
-                message: 'What sorts of validation do you want to have toto?',
+                default: [],
+                message: 'What sorts of validation do you want to have ?',
                 name: 'validations',
                 type: 'checkbox',
                 when: (answers) =>

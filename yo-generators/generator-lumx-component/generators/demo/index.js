@@ -1,4 +1,4 @@
-const snakeCase = require('lodash/snakeCase');
+const kebabCase = require('lodash/kebabCase');
 
 const MainGenerator = require('../app');
 
@@ -16,7 +16,7 @@ module.exports = class extends MainGenerator {
     }
 
     writing() {
-        const path = `demo/react/components/${snakeCase(this.options.name || this.answers.name)}`;
+        const path = `demo/react/components/${kebabCase(this.options.name || this.answers.name)}`;
 
         this.fs.copyTpl(this.templatePath('index.tsx.ejs'), this.destinationPath(`${path}/index.tsx`), {
             componentName: this.options.name || this.answers.name,

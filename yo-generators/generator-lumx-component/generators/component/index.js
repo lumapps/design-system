@@ -1,4 +1,4 @@
-const snakeCase = require('lodash/snakeCase');
+const kebabCase = require('lodash/kebabCase');
 
 const MainGenerator = require('../app');
 
@@ -49,7 +49,7 @@ module.exports = class extends MainGenerator {
     }
 
     writing() {
-        const path = `src/components/${snakeCase(this.options.name || this.answers.name)}/react`;
+        const path = `src/components/${kebabCase(this.options.name || this.answers.name)}/react`;
 
         this.fs.copyTpl(
             this.templatePath(
