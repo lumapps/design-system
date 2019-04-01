@@ -1,74 +1,79 @@
 <div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
     <lumx-chip
         class="m-"
+        lumx-is-selected="vm.isSelected.multiple[0]"
+        lumx-on-click="vm.toggleSelected('multiple', 0)"
         lumx-theme="{{ mainBlock.theme }}"
-        lumx-is-selected="vm.isSelected"
-        lumx-on-click="vm.toggleSelected()"
     >
         <lumx-chip-before>
-            <lumx-icon lumx-path="{{ vm.isSelected ? vm.icons.mdiCheck : vm.icons.mdiCircleSmall }}" lumx-size="xs">
-            </lumx-icon>
+            <lumx-icon lumx-path="{{ vm.icons.mdiCheck }}" lumx-size="xs" ng-if="vm.isSelected.multiple[0]"></lumx-icon>
         </lumx-chip-before>
+
         <lumx-chip-label>Am</lumx-chip-label>
     </lumx-chip>
+
     <lumx-chip
         class="m-"
+        lumx-is-selected="vm.isSelected.multiple[1]"
+        lumx-on-click="vm.toggleSelected('multiple', 1)"
         lumx-theme="{{ mainBlock.theme }}"
-        lumx-is-selected="vm.isSelected"
-        lumx-on-click="vm.toggleSelected()"
     >
         <lumx-chip-before>
-            <lumx-icon lumx-path="{{ vm.isSelected ? vm.icons.mdiCheck : vm.icons.mdiCircleSmall }}" lumx-size="xs">
-            </lumx-icon>
+            <lumx-icon lumx-path="{{ vm.icons.mdiCheck }}" lumx-size="xs" ng-if="vm.isSelected.multiple[1]"></lumx-icon>
         </lumx-chip-before>
+
         <lumx-chip-label>Stram</lumx-chip-label>
     </lumx-chip>
+
     <lumx-chip
         class="m-"
+        lumx-is-selected="vm.isSelected.multiple[2]"
+        lumx-on-click="vm.toggleSelected('multiple', 2)"
         lumx-theme="{{ mainBlock.theme }}"
-        lumx-is-selected="vm.isSelected"
-        lumx-on-click="vm.toggleSelected()"
     >
         <lumx-chip-before>
-            <lumx-icon lumx-path="{{ vm.isSelected ? vm.icons.mdiCheck : vm.icons.mdiCircleSmall }}" lumx-size="xs">
-            </lumx-icon>
+            <lumx-icon lumx-path="{{ vm.icons.mdiCheck }}" lumx-size="xs" ng-if="vm.isSelected.multiple[2]"></lumx-icon>
         </lumx-chip-before>
+
         <lumx-chip-label>Gram</lumx-chip-label>
     </lumx-chip>
+
     <lumx-chip
         class="m-"
+        lumx-is-selected="vm.isSelected.multiple[3]"
+        lumx-on-click="vm.toggleSelected('multiple', 3)"
         lumx-theme="{{ mainBlock.theme }}"
-        lumx-is-selected="vm.isSelected"
-        lumx-on-click="vm.toggleSelected()"
     >
         <lumx-chip-before>
-            <lumx-icon lumx-path="{{ vm.isSelected ? vm.icons.mdiCheck : vm.icons.mdiCircleSmall }}" lumx-size="xs">
-            </lumx-icon>
+            <lumx-icon lumx-path="{{ vm.icons.mdiCheck }}" lumx-size="xs" ng-if="vm.isSelected.multiple[3]"></lumx-icon>
         </lumx-chip-before>
+
         <lumx-chip-label>Pic</lumx-chip-label>
     </lumx-chip>
+
     <lumx-chip
         class="m-"
+        lumx-is-selected="vm.isSelected.multiple[4]"
+        lumx-on-click="vm.toggleSelected('multiple', 4)"
         lumx-theme="{{ mainBlock.theme }}"
-        lumx-is-selected="vm.isSelected"
-        lumx-on-click="vm.toggleSelected()"
     >
         <lumx-chip-before>
-            <lumx-icon lumx-path="{{ vm.isSelected ? vm.icons.mdiCheck : vm.icons.mdiCircleSmall }}" lumx-size="xs">
-            </lumx-icon>
+            <lumx-icon lumx-path="{{ vm.icons.mdiCheck }}" lumx-size="xs" ng-if="vm.isSelected.multiple[4]"></lumx-icon>
         </lumx-chip-before>
+
         <lumx-chip-label>Pic</lumx-chip-label>
     </lumx-chip>
+
     <lumx-chip
         class="m-"
+        lumx-is-selected="vm.isSelected.multiple[5]"
+        lumx-on-click="vm.toggleSelected('multiple', 5)"
         lumx-theme="{{ mainBlock.theme }}"
-        lumx-is-selected="vm.isSelected"
-        lumx-on-click="vm.toggleSelected()"
     >
         <lumx-chip-before>
-            <lumx-icon lumx-path="{{ vm.isSelected ? vm.icons.mdiCheck : vm.icons.mdiCircleSmall }}" lumx-size="xs">
-            </lumx-icon>
+            <lumx-icon lumx-path="{{ vm.icons.mdiCheck }}" lumx-size="xs" ng-if="vm.isSelected.multiple[5]"></lumx-icon>
         </lumx-chip-before>
+
         <lumx-chip-label>Colegram</lumx-chip-label>
     </lumx-chip>
 </div>

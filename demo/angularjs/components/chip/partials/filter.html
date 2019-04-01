@@ -1,15 +1,17 @@
 <div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
     <lumx-chip
         lumx-theme="{{ mainBlock.theme }}"
-        lumx-has-dropdown-indicator="!vm.isSelected"
-        lumx-is-selected="vm.isSelected"
-        lumx-on-click="vm.select()"
-        lumx-on-after-click="vm.unselect()"
+        lumx-has-dropdown-indicator="!vm.isSelected.filter[0]"
+        lumx-is-selected="vm.isSelected.filter[0]"
+        lumx-on-click="vm.select('filter', 0)"
+        lumx-on-after-click="vm.unselect('filter', 0)"
     >
         <lumx-chip-before>
             <lumx-icon lumx-path="{{ vm.icons.mdiFilterVariant }}" lumx-size="xs"></lumx-icon>
         </lumx-chip-before>
+
         <lumx-chip-label>Filter</lumx-chip-label>
+
         <lumx-chip-after>
             <lumx-icon lumx-path="{{ vm.icons.mdiCloseCircle }}" lumx-size="xs"></lumx-icon>
         </lumx-chip-after>
