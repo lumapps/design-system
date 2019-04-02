@@ -34,13 +34,13 @@ function IconDirective() {
 
         attrs.$observe('lumxColor', (color) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)icon--color-\S+/g) || []).join(' ');
+                return (className.match(/(?:\S|-)*icon--color-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-icon--color-${color}`);
         });
 
         attrs.$observe('lumxSize', (size) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)icon--size-\S+/g) || []).join(' ');
+                return (className.match(/(?:\S|-)*icon--size-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-icon--size-${size}`);
         });
     }
