@@ -35,15 +35,6 @@ function DialogController(
     const _ESCAPE_KEY_CODE = 27;
 
     /**
-     * The duration before checking scroll end again.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _SCROLL_CHECK_TIMEOUT = 500;
-
-    /**
      * The dialog open/close transition duration.
      *
      * @type {number}
@@ -58,13 +49,6 @@ function DialogController(
      * @type {Element}
      */
     const _dialog = $element;
-
-    /**
-     * The dialog content.
-     *
-     * @type {Element}
-     */
-    let _dialogContent;
 
     /**
      * The dialog black filter.
@@ -137,23 +121,6 @@ function DialogController(
     /////////////////////////////
 
     /**
-     * Check if user srcolls to the ind of the dialog content.
-     */
-    function _checkScrollEnd() {
-        if (_dialogContent.scrollTop() + _dialogContent.innerHeight() < _dialogContent[0].scrollHeight) {
-            return;
-        }
-
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__scroll-end`, lumx.id);
-
-        _dialogContent.off('scroll', _checkScrollEnd);
-
-        $timeout(function waitBeforeCheckingScrollAgain() {
-            _dialogContent.on('scroll', _checkScrollEnd);
-        }, _SCROLL_CHECK_TIMEOUT);
-    }
-
-    /**
      * Close the current dialog.
      */
     function _close() {
@@ -191,6 +158,40 @@ function DialogController(
 
             $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-end`, lumx.id);
         }, _TRANSITION_DURATION);
+    }
+
+    /**
+     * Create dialog content observer.
+     */
+    function _createObserver() {
+        const dialogHeader = _dialog.find(`.${CSS_PREFIX}-dialog__header`);
+        const dialogFooter = _dialog.find(`.${CSS_PREFIX}-dialog__footer`);
+        const sentinels = document.querySelectorAll(`.${CSS_PREFIX}-dialog__sentinel`);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--top`)) {
+                    if (entry.isIntersecting) {
+                        dialogHeader.removeClass(`${CSS_PREFIX}-dialog__header--has-divider`);
+                    } else {
+                        dialogHeader.addClass(`${CSS_PREFIX}-dialog__header--has-divider`);
+                    }
+                }
+
+                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--bottom`)) {
+                    if (entry.isIntersecting) {
+                        dialogFooter.removeClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
+                        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__scroll-end`, lumx.id);
+                    } else {
+                        dialogFooter.addClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
+                    }
+                }
+            });
+        });
+
+        sentinels.forEach((sentinel) => {
+            observer.observe(sentinel);
+        });
     }
 
     /**
@@ -244,10 +245,7 @@ function DialogController(
             lumx.isOpen = true;
             LumXFocusTrapService.activate(_dialog);
 
-            $timeout(function onDialogContentDisplay() {
-                _dialogContent = _dialog.find(`.${CSS_PREFIX}-dialog__content`);
-                _dialogContent.on('scroll', _checkScrollEnd);
-            });
+            $timeout(_createObserver);
         });
 
         $timeout(function onDialogOpenEnd() {
