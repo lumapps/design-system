@@ -34,13 +34,13 @@ function ThumbnailDirective() {
 
         attrs.$observe('lumxSize', (size) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)thumbnail--size-\S+/g) || []).join(' ');
+                return (className.match(/(?:\S|-)*thumbnail--size-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-thumbnail--size-${size}`);
         });
 
         attrs.$observe('lumxVariant', (variant) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)thumbnail--variant-\S+/g) || []).join(' ');
+                return (className.match(/(?:\S|-)*thumbnail--variant-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-thumbnail--variant-${variant}`);
         });
     }

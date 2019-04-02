@@ -8,7 +8,7 @@
         "esModuleInterop": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
-        "jsx": "React",
+        "jsx": "react",
         "lib": ["es6", "dom"],
         "locale": "en",
         "module": "ESNext",

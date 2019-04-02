@@ -1,0 +1,31 @@
+<div class="p++">
+    <lumx-button lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}" lumx-emphasis="low">
+        Default
+    </lumx-button>
+
+    <lumx-button
+        lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}"
+        lumx-emphasis="low"
+        ng-disabled="true"
+    >
+        Disabled
+    </lumx-button>
+
+    <lumx-button lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}" lumx-emphasis="low">
+        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
+        <span>With Icon</span>
+    </lumx-button>
+
+    <lumx-button lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}" lumx-emphasis="low">
+        <span>Dropdown</span>
+        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
+    </lumx-button>
+
+    <lumx-button
+        lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}"
+        lumx-emphasis="low"
+        lumx-variant="icon"
+    >
+        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
+    </lumx-button>
+</div>

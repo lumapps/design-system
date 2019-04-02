@@ -89,33 +89,33 @@ function ButtonDirective() {
 
         attrs.$observe('lumxColor', (color) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)button--color-\S+/g) || []).join(' ');
+                return (className.match(/(?:\S|-)*button--color-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-button--color-${color}`);
         });
 
         attrs.$observe('lumxEmphasis', (emphasis) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)button--emphasis-\S+/g) || []).join(' ');
+                return (className.match(/(?:\S|-)*button--emphasis-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-button--emphasis-${emphasis}`);
         });
 
         attrs.$observe('lumxSize', (size) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)button--size-\S+/g) || []).join(' ');
+                return (className.match(/(?:\S|-)*button--size-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-button--size-${size}`);
         });
 
         attrs.$observe('lumxTheme', (theme) => {
             if (!attrs.lumxEmphasis || attrs.lumxEmphasis === 'high') {
                 el.removeClass((index, className) => {
-                    return (className.match(/(^|\s)button--theme-\S+/g) || []).join(' ');
+                    return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
                 }).addClass(`${CSS_PREFIX}-button--theme-${theme}`);
             }
         });
 
         attrs.$observe('lumxVariant', (variant) => {
             el.removeClass((index, className) => {
-                return (className.match(/(^|\s)button--variant-\S+/g) || []).join(' ');
+                return (className.match(/(?:\S|-)*button--variant-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-button--variant-${variant}`);
         });
 

@@ -1,0 +1,54 @@
+<div class="p++">
+    <lumx-button lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}" lumx-emphasis="medium">
+        Default
+    </lumx-button>
+
+    <lumx-button
+        lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}"
+        lumx-emphasis="medium"
+        ng-disabled="true"
+    >
+        Disabled
+    </lumx-button>
+
+    <lumx-button lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}" lumx-emphasis="medium">
+        <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
+        <span>With Icon</span>
+    </lumx-button>
+
+    <lumx-button lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}" lumx-emphasis="medium">
+        <span>Dropdown</span>
+        <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
+    </lumx-button>
+
+    <lumx-button-group>
+        <lumx-button lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}" lumx-emphasis="medium">
+            Split
+        </lumx-button>
+
+        <lumx-button
+            lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}"
+            lumx-emphasis="medium"
+            lumx-variant="icon"
+        >
+            <lumx-icon lumx-path="{{ vm.icons.mdiMenuDown }}"></lumx-icon>
+        </lumx-button>
+    </lumx-button-group>
+
+    <lumx-button
+        lumx-emphasis="medium"
+        lumx-is-selected="vm.isSelected"
+        lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}"
+        ng-click="vm.toggleSelected()"
+    >
+        Toggle
+    </lumx-button>
+
+    <lumx-button
+        lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}"
+        lumx-emphasis="medium"
+        lumx-variant="icon"
+    >
+        <lumx-icon lumx-path="{{ vm.icons.mdiPlus }}"></lumx-icon>
+    </lumx-button>
+</div>
