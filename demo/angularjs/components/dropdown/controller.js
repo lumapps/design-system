@@ -1,4 +1,12 @@
-import { mdiEmail, mdiSend } from 'LumX/icons';
+import {
+    mdiFileDocumentBox,
+    mdiNewspaper,
+    mdiClipboardAccount,
+    mdiArchive,
+    mdiStar,
+    mdiHelpCircle,
+    mdiWrench,
+} from 'LumX/icons';
 
 /////////////////////////////
 
@@ -32,8 +40,13 @@ function DemoDropdownController(LumXDropdownService) {
      * @readonly
      */
     vm.icons = {
-        mdiEmail,
-        mdiSend,
+        mdiFileDocumentBox,
+        mdiNewspaper,
+        mdiClipboardAccount,
+        mdiArchive,
+        mdiStar,
+        mdiHelpCircle,
+        mdiWrench,
     };
 
     /////////////////////////////
