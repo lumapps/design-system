@@ -1,22 +1,24 @@
-<div class="p++" lumx-grid-container="column" lumx-grid-v-align="left">
-    <lumx-checkbox ng-model="vm.checkboxes.model.checked" lumx-theme="{{ mainBlock.theme }}">
+<div class="p++">
+    <lumx-checkbox lumx-theme="{{ mainBlock.theme }}" ng-model="vm.checkboxes.model.checked">
         <lumx-checkbox-label>Checkbox</lumx-checkbox-label>
     </lumx-checkbox>
 
-    <lumx-checkbox class="mt+" ng-model="vm.checkboxes.model.unchecked" lumx-theme="{{ mainBlock.theme }}">
+    <lumx-checkbox class="mt++" lumx-theme="{{ mainBlock.theme }}" ng-model="vm.checkboxes.model.unchecked">
         <lumx-checkbox-label>Checkbox with help</lumx-checkbox-label>
+
         <lumx-checkbox-helper>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
         </lumx-checkbox-helper>
     </lumx-checkbox>
 
     <lumx-checkbox
-        class="mt+"
-        ng-model="vm.checkboxes.model.unchecked"
-        ng-disabled="vm.checkboxes.states.disabled"
+        class="mt++"
         lumx-theme="{{ mainBlock.theme }}"
+        ng-disabled="vm.checkboxes.states.disabled"
+        ng-model="vm.checkboxes.model.unchecked"
     >
         <lumx-checkbox-label>Disable checkbox with help</lumx-checkbox-label>
+
         <lumx-checkbox-helper>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
         </lumx-checkbox-helper>
