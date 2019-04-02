@@ -85,6 +85,10 @@
                 border-bottom: 1px solid lumx-theme-color-variant(light, L5);
             }
 
+            #{$self}__row:last-child & {
+                border-bottom: none;
+            }
+
             #{$self}--is-activable #{$self}__row--is-enabled & {
                 @include lumx-state-transition;
 
