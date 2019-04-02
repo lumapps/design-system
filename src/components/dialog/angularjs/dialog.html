@@ -7,7 +7,11 @@
 >
     <div class="lumx-dialog__wrapper" ng-if="lumx.isOpen">
         <div class="lumx-dialog__header" ng-transclude="header"></div>
-        <div class="lumx-dialog__content" ng-transclude="content"></div>
+        <div class="lumx-dialog__content">
+            <div class="lumx-dialog__sentinel lumx-dialog__sentinel--top"></div>
+            <div ng-transclude="content"></div>
+            <div class="lumx-dialog__sentinel lumx-dialog__sentinel--bottom"></div>
+        </div>
         <div class="lumx-dialog__footer" ng-transclude="footer"></div>
     </div>
 </div>
