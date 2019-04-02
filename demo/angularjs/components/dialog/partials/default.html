@@ -1,7 +1,7 @@
 <div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
     <div class="p+">
-        <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">Open dialog</lumx-button>
-        <lumx-button ng-click="vm.alertDialog()" id="alert-dialog-source">Alert box</lumx-button>
-        <lumx-button ng-click="vm.confirmDialog()" id="confirm-dialog-source">Confirm box</lumx-button>
+        <lumx-button ng-click="vm.openDialog(vm.dialogIds[0], vm.sourceIds[0])" id="{{ vm.sourceIds[0] }}"
+            >Open dialog</lumx-button
+        >
     </div>
 </div>

@@ -1,8 +1,16 @@
 <div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
     <div class="p+">
-        <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">tiny</lumx-button>
-        <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">regular</lumx-button>
-        <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">big</lumx-button>
-        <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">huge</lumx-button>
+        <lumx-button ng-click="vm.openDialog(vm.dialogIds[1], vm.sourceIds[1])" id="{{ vm.sourceIds[1] }}"
+            >tiny</lumx-button
+        >
+        <lumx-button ng-click="vm.openDialog(vm.dialogIds[2], vm.sourceIds[2])" id="{{ vm.sourceIds[2] }}"
+            >regular</lumx-button
+        >
+        <lumx-button ng-click="vm.openDialog(vm.dialogIds[3], vm.sourceIds[3])" id="{{ vm.sourceIds[3] }}"
+            >big</lumx-button
+        >
+        <lumx-button ng-click="vm.openDialog(vm.dialogIds[4], vm.sourceIds[4])" id="{{ vm.sourceIds[4] }}"
+            >huge</lumx-button
+        >
     </div>
 </div>

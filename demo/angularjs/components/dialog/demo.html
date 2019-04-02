@@ -6,18 +6,35 @@
 </main-header>
 
 <main-block
-    class="mt+++"
-    title="Simple dialog"
-    path="demo/angularjs/components/dialog/partials/simple.html"
+    title="Default"
+    path="demo/angularjs/components/dialog/partials/default.html"
     js-path="demo/angularjs/components/dialog/controller.js"
 >
+</main-block>
+
+<main-block
+    title=""
+    path="demo/angularjs/components/dialog/partials/scrollable.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p class="lumx-typography-subtitle2">With scrollbar</p>
     <p>
-        Simple dialogs display a list of items that take immediate effect when selected.
+        When scrolling is required, the dialog title is pinned at the top, with buttons pinned at the bottom.
     </p>
 </main-block>
 
 <main-block
-    class="mt+++"
+    title=""
+    path="demo/angularjs/components/dialog/partials/action.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p class="lumx-typography-subtitle2">With header action</p>
+    <p>
+        There can be actions in dialog header.
+    </p>
+</main-block>
+
+<main-block
     title="Alert dialog"
     path="demo/angularjs/components/dialog/partials/alert.html"
     js-path="demo/angularjs/components/dialog/controller.js"
@@ -28,7 +45,6 @@
 </main-block>
 
 <main-block
-    class="mt+++"
     title="Confirm dialog"
     path="demo/angularjs/components/dialog/partials/confirm.html"
     js-path="demo/angularjs/components/dialog/controller.js"
@@ -39,19 +55,6 @@
 </main-block>
 
 <main-block
-    class="mt+++"
-    title="Scrollable dialog"
-    path="demo/angularjs/components/dialog/partials/scrollable.html"
-    js-path="demo/angularjs/components/dialog/controller.js"
->
-    <p>
-        Most dialog content should avoid scrolling. When scrolling is required, the dialog title is pinned at the top,
-        with buttons pinned at the bottom.
-    </p>
-</main-block>
-
-<main-block
-    class="mt+++"
     title="Sizes"
     path="demo/angularjs/components/dialog/partials/sizes.html"
     js-path="demo/angularjs/components/dialog/controller.js"
@@ -62,15 +65,294 @@
     </p>
 </main-block>
 
-<lumx-dialog id="{{ vm.dialogId }}">
+<lumx-dialog id="{{ vm.dialogIds[0] }}">
     <lumx-dialog-header>
         <lumx-toolbar>
             <lumx-toolbar-label>
-                <span class="lumx-typography-title">Dialog title</span>
+                <span class="lumx-typography-title">Default dialog</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after> </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="ph++">
+            <p>
+                Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros Afros.
+                Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus. Praeterea
+                iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Inmensae
+                subtilitatis, obscuris et malesuada fames. Me non paenitet nullum festiviorem excogitasse ad hoc. Cum
+                ceteris in veneratione tui montes, nascetur mus. Etiam habebis sem dicantur magna mollis euismod. Quis
+                aute iure reprehenderit in voluptate velit esse. Phasellus laoreet lorem vel dolor tempus vehicula.
+                Ambitioni dedisse scripsisse iudicaretur. Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab
+                illo tempore, ab est sed immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute,
+                fili mi, nihil timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras
+                mattis iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+                Quisque ut dolor gravida, placerat libero vel, euismod.
+            </p>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
+            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Save</lumx-button>
+        </div>
+    </lumx-dialog-footer>
+</lumx-dialog>
+
+<lumx-dialog id="{{ vm.dialogIds[1] }}" lumx-size="s">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Tiny dialog</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after> </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="pl++ pr++">
+            <p>
+                Quisque placerat facilisis egestas cillum dolore. Prima luce, cum quibus mons aliud consensu ab eo. Quid
+                securi etiam tamquam eu fugiat nulla pariatur.
+            </p>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
+            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Save</lumx-button>
+        </div>
+    </lumx-dialog-footer>
+</lumx-dialog>
+
+<lumx-dialog id="{{ vm.dialogIds[1] }}" lumx-size="s">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Tiny dialog</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after> </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="ph++">
+            <p>
+                Quisque placerat facilisis egestas cillum dolore. Prima luce, cum quibus mons aliud consensu ab eo. Quid
+                securi etiam tamquam eu fugiat nulla pariatur.
+            </p>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
+            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Save</lumx-button>
+        </div>
+    </lumx-dialog-footer>
+</lumx-dialog>
+
+<lumx-dialog id="{{ vm.dialogIds[2] }}" lumx-size="m">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Regular dialog</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after> </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="ph++">
+            <p>
+                Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros Afros.
+                Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus. Praeterea
+                iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Inmensae
+                subtilitatis, obscuris et malesuada fames. Me non paenitet nullum festiviorem excogitasse ad hoc. Cum
+                ceteris in veneratione tui montes, nascetur mus. Etiam habebis sem dicantur magna mollis euismod. Quis
+                aute iure reprehenderit in voluptate velit esse. Phasellus laoreet lorem vel dolor tempus vehicula.
+                Ambitioni dedisse scripsisse iudicaretur. Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab
+                illo tempore, ab est sed immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute,
+                fili mi, nihil timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras
+                mattis iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+                Quisque ut dolor gravida, placerat libero vel, euismod.
+            </p>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
+            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Save</lumx-button>
+        </div>
+    </lumx-dialog-footer>
+</lumx-dialog>
+
+<lumx-dialog id="{{ vm.dialogIds[3] }}" lumx-size="l">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Big dialog</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after> </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="ph++">
+            <p>
+                Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros Afros.
+                Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus. Praeterea
+                iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Inmensae
+                subtilitatis, obscuris et malesuada fames. Me non paenitet nullum festiviorem excogitasse ad hoc. Cum
+                ceteris in veneratione tui montes, nascetur mus. Etiam habebis sem dicantur magna mollis euismod. Quis
+                aute iure reprehenderit in voluptate velit esse. Phasellus laoreet lorem vel dolor tempus vehicula.
+                Ambitioni dedisse scripsisse iudicaretur. Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab
+                illo tempore, ab est sed immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute,
+                fili mi, nihil timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras
+                mattis iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+                Quisque ut dolor gravida, placerat libero vel, euismod.
+            </p>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
+            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Save</lumx-button>
+        </div>
+    </lumx-dialog-footer>
+</lumx-dialog>
+
+<lumx-dialog id="{{ vm.dialogIds[4] }}" lumx-size="xl">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Huge dialog</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after> </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="ph++">
+            <p>
+                Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros Afros.
+                Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus. Praeterea
+                iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Inmensae
+                subtilitatis, obscuris et malesuada fames. Me non paenitet nullum festiviorem excogitasse ad hoc. Cum
+                ceteris in veneratione tui montes, nascetur mus. Etiam habebis sem dicantur magna mollis euismod. Quis
+                aute iure reprehenderit in voluptate velit esse. Phasellus laoreet lorem vel dolor tempus vehicula.
+                Ambitioni dedisse scripsisse iudicaretur. Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab
+                illo tempore, ab est sed immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute,
+                fili mi, nihil timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras
+                mattis iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+                Quisque ut dolor gravida, placerat libero vel, euismod.
+            </p>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
+            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Save</lumx-button>
+        </div>
+    </lumx-dialog-footer>
+</lumx-dialog>
+
+<lumx-dialog id="{{ vm.dialogIds[5] }}">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Dialog with scroll</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after> </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="ph++">
+            <p>
+                Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros Afros.
+                Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus. Praeterea
+                iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Inmensae
+                subtilitatis, obscuris et malesuada fames. Me non paenitet nullum festiviorem excogitasse ad hoc. Cum
+                ceteris in veneratione tui montes, nascetur mus. Etiam habebis sem dicantur magna mollis euismod. Quis
+                aute iure reprehenderit in voluptate velit esse. Phasellus laoreet lorem vel dolor tempus vehicula.
+                Ambitioni dedisse scripsisse iudicaretur. Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab
+                illo tempore, ab est sed immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute,
+                fili mi, nihil timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras
+                mattis iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+                Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani, tertiam.
+                Cras mattis iudicium purus sit amet fermentum. Prima luce, cum quibus mons aliud consensu ab eo. Vivamus
+                sagittis lacus vel augue laoreet rutrum faucibus. Petierunt uti sibi concilium totius Galliae in diem
+                certam indicere. Etiam habebis sem dicantur magna mollis euismod. A communi observantia non est
+                recedendum. Ut enim ad minim veniam, quis nostrud exercitation. Paullum deliquit, ponderibus modulisque
+                suis ratio utitur. Hi omnes lingua, institutis, legibus inter se differunt. Magna pars studiorum,
+                prodita quaerimus. Quisque ut dolor gravida, placerat libero vel, euismod. Tityre, tu patulae recubans
+                sub tegmine fagi dolor. Excepteur sint obcaecat cupiditat non proident culpa. Plura mihi bona sunt,
+                inclinet, amari petere vellent. Quae vero auctorem tractata ab fiducia dicuntur. Inmensae subtilitatis,
+                obscuris et malesuada fames. Quo usque tandem abutere, Catilina, patientia nostra? Nihilne te nocturnum
+                praesidium Palati, nihil urbis vigiliae. Curabitur blandit tempus ardua ridiculus sed magna. Tu quoque,
+                Brute, fili mi, nihil timor populi, nihil! Nihil hic munitissimus habendi senatus locus, nihil horum?Tu
+                quoque, Brute, fili mi, nihil timor populi, nihil! Tityre, tu patulae recubans sub tegmine fagi dolor.
+                Plura mihi bona sunt, inclinet, amari petere vellent. Ullamco laboris nisi ut aliquid ex ea commodi
+                consequat. Pellentesque habitant morbi tristique senectus et netus. Salutantibus vitae elit libero, a
+                pharetra augue. Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut
+                labore et dolore magna aliqua. Petierunt uti sibi concilium totius Galliae in diem certam indicere.
+                Contra legem facit qui id facit quod lex prohibet. Integer legentibus erat a ante historiarum dapibus.
+                Petierunt uti sibi concilium totius Galliae in diem certam indicere. Ab illo tempore, ab est sed
+                immemorabili. Nihil hic munitissimus habendi senatus locus, nihil horum? Quisque ut dolor gravida,
+                placerat libero vel, euismod. Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor
+                incidunt ut labore et dolore magna aliqua. Nec dubitamus multa iter quae et nos invenerat. Quam temere
+                in vitiis, legem sancimus haerentia. Donec sed odio operae, eu vulputate felis rhoncus. Idque Caesaris
+                facere voluntate liceret: sese habere. Paullum deliquit, ponderibus modulisque suis ratio utitur. Quae
+                vero auctorem tractata ab fiducia dicuntur. Gallia est omnis divisa in partes tres, quarum. Etiam
+                habebis sem dicantur magna mollis euismod. Fabio vel iudice vincam, sunt in culpa qui officia. Lorem
+                ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna
+                aliqua. Tu quoque, Brute, fili mi, nihil timor populi, nihil! Integer legentibus erat a ante historiarum
+                dapibus. Tityre, tu patulae recubans sub tegmine fagi dolor. Ullamco laboris nisi ut aliquid ex ea
+                commodi consequat. Idque Caesaris facere voluntate liceret: sese habere. Quid securi etiam tamquam eu
+                fugiat nulla pariatur. Pellentesque habitant morbi tristique senectus et netus. Ut enim ad minim veniam,
+                quis nostrud exercitation. Petierunt uti sibi concilium totius Galliae in diem certam indicere.
+                Curabitur est gravida et libero vitae dictum. Qui ipsorum lingua Celtae, nostra Galli appellantur. Quam
+                temere in vitiis, legem sancimus haerentia. Phasellus laoreet lorem vel dolor tempus vehicula. Ab illo
+                tempore, ab est sed immemorabili. Praeterea iter est quasdam res quas ex communi. Quo usque tandem
+                abutere, Catilina, patientia nostra? Non equidem invideo, miror magis posuere velit aliquet. Excepteur
+                sint obcaecat cupiditat non proident culpa. Curabitur blandit tempus ardua ridiculus sed magna. Plura
+                mihi bona sunt, inclinet, amari petere vellent. Quae vero auctorem tractata ab fiducia dicuntur. Me non
+                paenitet nullum festiviorem excogitasse ad hoc. Unam incolunt Belgae, aliam Aquitani, tertiam.
+            </p>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
+            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+            <lumx-button class="ml" lumx-dialog-close>Save</lumx-button>
+        </div>
+    </lumx-dialog-footer>
+</lumx-dialog>
+
+<lumx-dialog id="{{ vm.dialogIds[6] }}">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Dialog with action</span>
             </lumx-toolbar-label>
 
             <lumx-toolbar-after>
-                <lumx-button ng-click="vm.addPerson()" lumx-focus-on-init>
+                <lumx-button lumx-emphasis="low" ng-click="vm.addPerson()" lumx-focus-on-init>
                     <span>Add</span>
                 </lumx-button>
             </lumx-toolbar-after>
