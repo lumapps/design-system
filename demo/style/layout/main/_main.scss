@@ -22,10 +22,20 @@
 /* Main header
    ========================================================================== */
 
+.main-header {
+    margin-bottom: $lumx-spacing-unit * 4;
+}
+
 /* Main block
    ========================================================================== */
 
 .main-block {
+    margin-bottom: $lumx-spacing-unit * 4;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
     &__title {
         @include lumx-typography(headline);
 
@@ -59,8 +69,7 @@
     &__code {
         border-top: 1px solid lumx-theme-color-variant(dark, L4);
 
-        .hljs,
-        pre {
+        .hljs {
             padding: $lumx-spacing-unit * 2;
             background-color: transparent;
             font-size: 14px;

@@ -1,4 +1,4 @@
-import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant, mdiMenuDown } from 'LumX/icons';
+import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -26,15 +26,18 @@ function DemoChipController(LumXNotificationService) {
         mdiCloseCircle,
         mdiEmail,
         mdiFilterVariant,
-        mdiMenuDown,
     };
 
     /**
      * Indicates if the chip is active or not.
      *
-     * @type {boolean}
+     * @type {Object}
      */
-    vm.isSelected = false;
+    vm.isSelected = {
+        filter: [false],
+        multiple: [false, false, false, false, false, false],
+        unique: [false, false, false, false, false, false],
+    };
 
     /////////////////////////////
     //                         //
@@ -51,31 +54,48 @@ function DemoChipController(LumXNotificationService) {
 
     /**
      * Toggle chip selected state.
+     *
+     * @param {string} kind  The chip kind.
+     * @param {number} index The chip index.
      */
-    function toggleSelected() {
-        vm.isSelected = !vm.isSelected;
+    function toggleSelected(kind, index) {
+        vm.isSelected[kind][index] = !vm.isSelected[kind][index];
+
+        if (kind === 'unique') {
+            for (let i = 0, len = vm.isSelected.unique.length; i < len; i++) {
+                if (i !== index) {
+                    vm.isSelected.unique[i] = false;
+                }
+            }
+        }
     }
 
     /**
      * Select chip.
+     *
+     * @param {string} kind  The chip kind.
+     * @param {number} index The chip index.
      */
-    function select() {
-        if (vm.isSelected) {
+    function select(kind, index) {
+        if (vm.isSelected[kind][index]) {
             return;
         }
 
-        vm.isSelected = true;
+        vm.isSelected[kind][index] = true;
     }
 
     /**
      * Unselect chip.
+     *
+     * @param {string} kind  The chip kind.
+     * @param {number} index The chip index.
      */
-    function unselect() {
-        if (!vm.isSelected) {
+    function unselect(kind, index) {
+        if (!vm.isSelected[kind][index]) {
             return;
         }
 
-        vm.isSelected = false;
+        vm.isSelected[kind][index] = false;
     }
 
     /////////////////////////////
