@@ -31,6 +31,13 @@ function mainBlockController() {
     mainBlock.hasDescription = false;
 
     /**
+     * Wheter the block displays a theme switcher or not.
+     *
+     * @type {boolean}
+     */
+    mainBlock.hasThemeSwitcher = true;
+
+    /**
      * The main block icons.
      *
      * @type {Object}
@@ -105,6 +112,10 @@ function mainBlockDirective() {
 
         attrs.$observe('path', (path) => {
             ctrl.path = path;
+        });
+
+        attrs.$observe('hasThemeSwitcher', (hasThemeSwitcher) => {
+            ctrl.hasThemeSwitcher = scope.$eval(hasThemeSwitcher);
         });
 
         attrs.$observe('title', (title) => {

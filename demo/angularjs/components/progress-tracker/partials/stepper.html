@@ -1,0 +1,14 @@
+<div class="p++">
+    <lumx-progress-tracker>
+        <lumx-progress-tracker-step
+            lumx-has-error="step.hasError"
+            lumx-helper="{{ step.helper }}"
+            lumx-label="{{ step.label }}"
+            lumx-is-active="step.isActive"
+            lumx-is-complete="step.isComplete"
+            lumx-enter-keypress="vm.setActiveStep($index)"
+            ng-click="vm.setActiveStep($index)"
+            ng-repeat="step in vm.stepper"
+        ></lumx-progress-tracker-step>
+    </lumx-progress-tracker>
+</div>

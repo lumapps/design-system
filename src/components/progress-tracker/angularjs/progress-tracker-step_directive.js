@@ -92,11 +92,9 @@ function ProgressTrackerStepController($scope, $element) {
      *
      * @param {boolean} isActive Whether the step is active or not.
      */
-    $scope.$watch('lumx.isActive', function isActiveWatcher(isActive, wasActive) {
-        if (isActive !== wasActive) {
-            if (isActive) {
-                _parentController.setActiveStep($element.index());
-            }
+    $scope.$watch('lumx.isActive', function isActiveWatcher(isActive) {
+        if (isActive) {
+            _parentController.setActiveStep($element.index());
         }
     });
 }

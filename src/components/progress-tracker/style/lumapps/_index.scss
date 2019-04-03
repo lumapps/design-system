@@ -52,7 +52,7 @@
 
     &__state {
         position: relative;
-        color: lumx-theme-color-variant(dark, N);
+        color: lumx-theme-color-variant(dark, L5);
 
         #{$self}--is-active &,
         #{$self}--is-complete & {
