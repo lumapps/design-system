@@ -17,16 +17,8 @@ function DemoRadioButtonController() {
      * @readonly
      */
     vm.radioButtons = {
-        basic: {
-            test1: '',
-            test2: '',
-        },
-        colors: {
-            test4: 'lorem',
-        },
-        states: {
-            test3: 'dolor',
-        },
+        test1: 'lorem',
+        test2: 'ipsum',
     };
 }
 
