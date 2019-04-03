@@ -1,38 +1,64 @@
-<div class="p+">
-    <lumx-button ng-click="vm.openDialog()" id="default-dialog-source">Open dialog</lumx-button>
-    <lumx-button ng-click="vm.alertDialog()" id="alert-dialog-source">Alert box</lumx-button>
-    <lumx-button ng-click="vm.confirmDialog()" id="confirm-dialog-source">Confirm box</lumx-button>
-</div>
+<main-header category="Components" title="Dialogs">
+    <p>
+        Dialogs inform users about a task and can contain critical information, require decisions, or involve multiple
+        tasks.
+    </p>
+</main-header>
 
-<lumx-dialog id="{{ vm.dialogId }}">
-    <lumx-dialog-header>
-        <lumx-toolbar>
-            <lumx-toolbar-label>
-                <span class="lumx-typography-title">Dialog title</span>
-            </lumx-toolbar-label>
+<main-block
+    title="Default"
+    path="demo/angularjs/components/dialog/partials/default.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+</main-block>
 
-            <lumx-toolbar-after>
-                <lumx-button ng-click="vm.addPerson()" lumx-focus-on-init>
-                    <span>Add</span>
-                </lumx-button>
-            </lumx-toolbar-after>
-        </lumx-toolbar>
+<main-block
+    path="demo/angularjs/components/dialog/partials/scrollable.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p class="lumx-typography-subtitle2">With scrollbar</p>
+    <p>
+        When scrolling is required, the dialog title is pinned at the top, with buttons pinned at the bottom.
+    </p>
+</main-block>
 
-        <lumx-divider></lumx-divider>
-    </lumx-dialog-header>
+<main-block
+    path="demo/angularjs/components/dialog/partials/action.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p class="lumx-typography-subtitle2">With header action</p>
+    <p>
+        There can be actions in dialog header.
+    </p>
+</main-block>
 
-    <lumx-dialog-content>
-        <div class="p++">
-            <div ng-repeat="person in vm.people">{{ person.name }} - {{ person.email }} - {{ person.age }}</div>
-        </div>
-    </lumx-dialog-content>
+<main-block
+    title="Alert dialog"
+    path="demo/angularjs/components/dialog/partials/alert.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p>
+        Alert dialogs interrupt users with urgent information, details, or actions.
+    </p>
+</main-block>
 
-    <lumx-dialog-footer>
-        <lumx-divider></lumx-divider>
+<main-block
+    title="Confirm dialog"
+    path="demo/angularjs/components/dialog/partials/confirm.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p>
+        Confirmation dialogs require users to confirm a choice before the dialog is dismissed.
+    </p>
+</main-block>
 
-        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
-            <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
-            <lumx-button class="ml" lumx-dialog-close>Ok</lumx-button>
-        </div>
-    </lumx-dialog-footer>
-</lumx-dialog>
+<main-block
+    title="Sizes"
+    path="demo/angularjs/components/dialog/partials/sizes.html"
+    js-path="demo/angularjs/components/dialog/controller.js"
+>
+    <p>
+        Dialogs comes in four optional sizes: <i>tiny</i> (400dp), <i>regular</i> (600dp), <i>big</i> (800dp), and
+        <i>huge</i> (full screen).
+    </p>
+</main-block>

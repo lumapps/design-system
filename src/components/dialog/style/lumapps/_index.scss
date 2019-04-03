@@ -20,14 +20,13 @@
 }
 
 .#{$lumx-base-prefix}-dialog {
+    $self: &;
+
     position: fixed;
     top: $lumx-dialog-offset;
-    left: 50%;
     display: none;
     height: calc(100% - 120px);
-    animation: lumx-dialog-show $lumx-dialog-transition-duration;
     opacity: 1;
-    transform: translateX(-50%) translateY(0);
     transition: opacity $lumx-dialog-transition-duration;
 
     &--is-hidden {
@@ -42,6 +41,10 @@
         flex-direction: column;
         background-color: #fff;
         border-radius: $lumx-theme-border-radius;
+
+        #{$self}--size-huge & {
+            height: 100%;
+        }
     }
 
     &__header,
@@ -86,11 +89,34 @@
     }
 }
 
+@keyframes lumx-dialog-huge-show {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Dialog sizes
    ========================================================================== */
 
 @each $key, $size in $lumx-dialog-sizes {
     .#{$lumx-base-prefix}-dialog--size-#{$key} {
+        left: 50%;
         width: $size;
+        animation: lumx-dialog-show $lumx-dialog-transition-duration;
+        transform: translateX(-50%) translateY(0);
     }
+}
+
+.#{$lumx-base-prefix}-dialog--size-huge {
+    right: $lumx-dialog-offset;
+    bottom: $lumx-dialog-offset;
+    left: $lumx-dialog-offset;
+    animation: lumx-dialog-huge-show $lumx-dialog-transition-duration;
+    transform: translateY(0);
 }

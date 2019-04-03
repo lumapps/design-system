@@ -12,13 +12,38 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
     /////////////////////////////
 
     /**
-     * The id of the default dialog.
+     * The ids of the dialogs.
      *
-     * @type {string}
+     * @type {Array}
      * @constant
      * @readonly
      */
-    vm.dialogId = 'dialog-test';
+    vm.dialogIds = [
+        'default-dialog',
+        'tiny-dialog',
+        'regular-dialog',
+        'big-dialog',
+        'huge-dialog',
+        'scroll-dialog',
+        'action-dialog',
+    ];
+
+    /**
+     * The ids of the source buttons.
+     *
+     * @type {Array}
+     * @constant
+     * @readonly
+     */
+    vm.sourceIds = [
+        'default-dialog-source',
+        'tiny-dialog-source',
+        'regular-dialog-source',
+        'big-dialog-source',
+        'huge-dialog-source',
+        'scroll-dialog-source',
+        'action-dialog-source',
+    ];
 
     /**
      * The list of people to display in the dialog.
@@ -138,11 +163,14 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
     }
 
     /**
-     * Open the default dialog.
+     * Open the dialog.
+     *
+     * @param {string} id     The id of the dialog.
+     * @param {string} source The id of the button.
      */
-    function openDialog() {
-        LumXDialogService.open(vm.dialogId, {
-            source: '#default-dialog-source',
+    function openDialog(id, source) {
+        LumXDialogService.open(id, {
+            source: `#${source}`,
         });
     }
 
@@ -166,7 +194,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that is starting to open.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__open-start`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Open start');
         }
@@ -179,7 +207,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that has opened.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__open-end`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Open end');
         }
@@ -192,7 +220,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that is starting to close.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__close-start`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Close start');
         }
@@ -205,7 +233,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that has closed.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__close-end`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Close end');
         }
@@ -218,7 +246,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that has been scrolled to the end.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__scroll-end`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Scroll end');
         }
