@@ -1,0 +1,35 @@
+<div class="p++">
+    <lumx-select
+        class="pb+"
+        lumx-theme="{{ mainBlock.theme }}"
+        ng-model="vm.selectModel.selectedPeople"
+        lumx-choices="vm.selectPeople"
+        lumx-label="Simple"
+        lumx-multiple="true"
+        lumx-placeholder="Select values"
+    >
+        <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
+        <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
+    </lumx-select>
+
+    <lumx-select
+        class="pb+"
+        lumx-theme="{{ mainBlock.theme }}"
+        ng-change="vm.selectCallback()"
+        ng-model="vm.selectAjax.selected"
+        lumx-choices="vm.selectAjax.list"
+        lumx-filter="vm.selectAjax.update(newValue)"
+        lumx-has-filter="true"
+        lumx-has-helper="!vm.selectAjax.list.length"
+        lumx-helper="No results"
+        lumx-is-loading="vm.selectAjax.loading"
+        lumx-label="Search list"
+        lumx-multiple="true"
+        lumx-model-to-selection="vm.selectAjax.toSelection(data, callback)"
+        lumx-selection-to-model="vm.selectAjax.toModel(data, callback)"
+        lumx-placeholder="Select values"
+    >
+        <lumx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</lumx-select-selected>
+        <lumx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</lumx-select-choices>
+    </lumx-select>
+</div>

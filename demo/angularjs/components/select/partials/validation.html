@@ -1,0 +1,28 @@
+<div class="p++">
+    <lumx-select
+        class="pb+"
+        lumx-theme="{{ mainBlock.theme }}"
+        ng-model="vm.selectModel.selectedPerson"
+        lumx-choices="vm.selectPeople"
+        lumx-is-clearable="true"
+        lumx-is-valid="true"
+        lumx-label="Confirm indicator"
+        lumx-placeholder="Select a value"
+    >
+        <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
+        <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
+    </lumx-select>
+
+    <lumx-select
+        class="pb+"
+        lumx-theme="{{ mainBlock.theme }}"
+        ng-model="vm.selectModel.selectedPerson"
+        lumx-choices="vm.selectPeople"
+        lumx-has-error="true"
+        lumx-label="Error indicator"
+        lumx-placeholder="Select a value"
+    >
+        <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
+        <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
+    </lumx-select>
+</div>
