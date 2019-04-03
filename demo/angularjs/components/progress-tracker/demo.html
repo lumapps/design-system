@@ -1,18 +1,60 @@
-<lumx-progress-tracker>
-    <lumx-progress-tracker-step
-        lumx-label="{{ step.label }}"
-        lumx-has-error="step.hasError"
-        lumx-helper="{{ step.helper }}"
-        lumx-is-active="step.isActive"
-        lumx-is-complete="step.isComplete"
-        lumx-enter-keypress="vm.setActiveStep($index)"
-        ng-click="vm.setActiveStep($index)"
-        ng-repeat="step in vm.stepper"
-    ></lumx-progress-tracker-step>
-</lumx-progress-tracker>
+<main-header category="Components" title="Progress tracker">
+    <p>
+        Progress tracker convey user progress through a linear sequence of steps.
+    </p>
+</main-header>
 
-<div ng-repeat="step in vm.stepper" ng-if="step.isActive">
-    {{ step.content }}
-</div>
+<main-block
+    class="mt+++"
+    path="demo/angularjs/components/progress-tracker/partials/stepper.html"
+    js-path="demo/angularjs/components/progress-tracker/controller.js"
+>
+</main-block>
 
-<lumx-button ng-click="vm.next()">Next</lumx-button>
+<main-block
+    class="mt+++"
+    title="Step states"
+    path="demo/angularjs/components/progress-tracker/partials/current.html"
+    js-path="demo/angularjs/components/progress-tracker/controller.js"
+>
+    <p>
+        There are four types: <i>Current state,</i> <i>Future state,</i> <i>Completed state</i> and <i>Error state</i>.
+        A step can be completed by a helper text.
+    </p>
+    <div class="mt+++">
+        <strong>Current</strong>
+    </div>
+</main-block>
+
+<main-block
+    class="mt+++"
+    path="demo/angularjs/components/progress-tracker/partials/future.html"
+    js-path="demo/angularjs/components/progress-tracker/controller.js"
+>
+    <strong>Future</strong>
+</main-block>
+
+<main-block
+    class="mt+++"
+    path="demo/angularjs/components/progress-tracker/partials/completed.html"
+    js-path="demo/angularjs/components/progress-tracker/controller.js"
+>
+    <strong>Completed</strong>
+</main-block>
+
+<main-block
+    class="mt+++"
+    path="demo/angularjs/components/progress-tracker/partials/helper.html"
+    js-path="demo/angularjs/components/progress-tracker/controller.js"
+>
+    <strong>Future with helper</strong>
+</main-block>
+
+<main-block
+    class="mt+++"
+    path="demo/angularjs/components/progress-tracker/partials/error.html"
+    js-path="demo/angularjs/components/progress-tracker/controller.js"
+>
+    <strong>Error </strong>
+    <p class="mt">Error message replaces the helper text, if used.</p>
+</main-block>
