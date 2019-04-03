@@ -18,7 +18,7 @@ function DemoRadioButtonController() {
      */
     vm.radioButtons = {
         test1: 'lorem',
-        test2: 'ipsum',
+        test2: 'lorem',
     };
 }
 
