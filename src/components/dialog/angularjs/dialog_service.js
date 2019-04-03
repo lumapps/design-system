@@ -26,7 +26,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
         alertDialogScope.cb = params.cb;
 
         const compiledAlertDialog = $compile(
-            `<${COMPONENT_PREFIX}-dialog id="${alertDialogId}" lumx-size="s" lumx-auto-close="false" lumx-escape-close="false">
+            `<${COMPONENT_PREFIX}-dialog id="${alertDialogId}" lumx-size="tiny" lumx-auto-close="false" lumx-escape-close="false">
                     <${COMPONENT_PREFIX}-dialog-header>
                         <${COMPONENT_PREFIX}-toolbar>
                             <${COMPONENT_PREFIX}-toolbar-label>
@@ -77,7 +77,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
         confirmDialogScope.cb = params.cb;
 
         const compiledConfirmDialog = $compile(
-            `<${COMPONENT_PREFIX}-dialog id="${confirmDialogId}" lumx-size="s" lumx-auto-close="false" lumx-escape-close="false">
+            `<${COMPONENT_PREFIX}-dialog id="${confirmDialogId}" lumx-size="tiny" lumx-auto-close="false" lumx-escape-close="false">
                     <${COMPONENT_PREFIX}-dialog-header>
                         <${COMPONENT_PREFIX}-toolbar>
                             <${COMPONENT_PREFIX}-toolbar-label>
