@@ -194,7 +194,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that is starting to open.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__open-start`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Open start');
         }
@@ -207,7 +207,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that has opened.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__open-end`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Open end');
         }
@@ -220,7 +220,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that is starting to close.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__close-start`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Close start');
         }
@@ -233,7 +233,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that has closed.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__close-end`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Close end');
         }
@@ -246,7 +246,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      * @param {string} dialogId The id of the dialog that has been scrolled to the end.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__scroll-end`, (evt, dialogId) => {
-        if (vm.dialogId === dialogId) {
+        if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Scroll end');
         }
