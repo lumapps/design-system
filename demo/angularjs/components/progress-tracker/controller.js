@@ -14,7 +14,7 @@ function DemoProgressTrackerController(LumXNotificationService) {
      *
      * @type {number}
      */
-    vm.activeStepIndex = 3;
+    vm.activeStepIndex = 2;
 
     /**
      * The configuration of the stepper.
@@ -26,28 +26,24 @@ function DemoProgressTrackerController(LumXNotificationService) {
     vm.stepper = [
         {
             content: 'lorem ipsum 1',
-            hasError: false,
             isActive: false,
             isComplete: true,
             label: 'Step 1',
         },
         {
             content: 'lorem ipsum 2',
-            hasError: false,
             isActive: false,
             isComplete: true,
             label: 'Step 2',
         },
         {
             content: 'lorem ipsum 3',
-            hasError: false,
             isActive: true,
             isComplete: false,
             label: 'Step 3',
         },
         {
             content: 'lorem ipsum 4',
-            hasError: false,
             isActive: false,
             isComplete: false,
             label: 'Step 4',
