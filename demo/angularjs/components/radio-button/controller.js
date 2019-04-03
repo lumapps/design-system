@@ -18,8 +18,8 @@ function DemoRadioButtonController() {
      */
     vm.radioButtons = {
         basic: {
-            test1: 'ipsum',
-            test2: 'lorem',
+            test1: '',
+            test2: '',
         },
         colors: {
             test4: 'lorem',
