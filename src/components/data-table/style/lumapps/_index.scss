@@ -21,12 +21,12 @@
 
         &--thead {
             #{$self}--theme-light & {
-                border-bottom: 1px solid lumx-theme-color-variant(dark, L5);
+                border-bottom: 1px solid lumx-theme-color-variant(dark, $lumx-divider-color-variant);
                 color: lumx-theme-color-variant(dark, L2);
             }
 
             #{$self}--theme-dark & {
-                border-bottom: 1px solid lumx-theme-color-variant(light, L5);
+                border-bottom: 1px solid lumx-theme-color-variant(light, $lumx-divider-color-variant);
                 color: lumx-theme-color-variant(light, L2);
             }
 
@@ -78,11 +78,11 @@
             }
 
             #{$self}--theme-light#{$self}--has-border & {
-                border-bottom: 1px solid lumx-theme-color-variant(dark, L5);
+                border-bottom: 1px solid lumx-theme-color-variant(dark, $lumx-divider-color-variant);
             }
 
             #{$self}--theme-dark#{$self}--has-border & {
-                border-bottom: 1px solid lumx-theme-color-variant(light, L5);
+                border-bottom: 1px solid lumx-theme-color-variant(light, $lumx-divider-color-variant);
             }
 
             #{$self}__row:last-child & {

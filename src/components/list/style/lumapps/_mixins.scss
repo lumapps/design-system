@@ -69,5 +69,5 @@
 @mixin lumx-list-divider() {
     height: 1px;
     margin: $lumx-spacing-unit 0;
-    background-color: lumx-theme-color-variant(dark, L5);
+    background-color: lumx-theme-color-variant(dark, $lumx-divider-color-variant);
 }
