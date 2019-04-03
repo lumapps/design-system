@@ -170,7 +170,7 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
      */
     function openDialog(id, source) {
         LumXDialogService.open(id, {
-            source,
+            source: `#${source}`,
         });
     }
 
