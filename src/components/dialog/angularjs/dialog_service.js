@@ -40,11 +40,13 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                         </div>
                     </${COMPONENT_PREFIX}-dialog-content>
                     <${COMPONENT_PREFIX}-dialog-footer>
-                        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
-                            <${COMPONENT_PREFIX}-button ng-click="cb()" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
-                                ${params.buttons.ok}
-                            </${COMPONENT_PREFIX}-button>
-                        </div>
+                        <${COMPONENT_PREFIX}-toolbar>
+                            <${COMPONENT_PREFIX}-toolbar-after>
+                                <${COMPONENT_PREFIX}-button ng-click="cb()" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
+                                    ${params.buttons.ok}
+                                </${COMPONENT_PREFIX}-button>
+                            </${COMPONENT_PREFIX}-toolbar-after>
+                        </${COMPONENT_PREFIX}-toolbar>
                     </${COMPONENT_PREFIX}-dialog-footer>
                 </${COMPONENT_PREFIX}-dialog>`,
         )(alertDialogScope);
@@ -91,14 +93,16 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                         </div>
                     </${COMPONENT_PREFIX}-dialog-content>
                     <${COMPONENT_PREFIX}-dialog-footer>
-                        <div class="p+" lumx-grid-container="row" lumx-grid-h-align="center" lumx-grid-v-align="right">
-                            <${COMPONENT_PREFIX}-button lumx-emphasis="medium" ng-click="cb(false)" ${COMPONENT_PREFIX}-dialog-close>
-                                ${params.buttons.cancel}
-                            </${COMPONENT_PREFIX}-button>
-                            <${COMPONENT_PREFIX}-button class="ml" ng-click="cb(true)" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
-                                ${params.buttons.ok}
-                            </${COMPONENT_PREFIX}-button>
-                        </div>
+                        <${COMPONENT_PREFIX}-toolbar>
+                            <${COMPONENT_PREFIX}-toolbar-after>
+                                <${COMPONENT_PREFIX}-button lumx-emphasis="medium" ng-click="cb(false)" ${COMPONENT_PREFIX}-dialog-close>
+                                    ${params.buttons.cancel}
+                                </${COMPONENT_PREFIX}-button>
+                                <${COMPONENT_PREFIX}-button class="ml" ng-click="cb(true)" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
+                                    ${params.buttons.ok}
+                                </${COMPONENT_PREFIX}-button>
+                            </${COMPONENT_PREFIX}-toolbar-after>
+                        </${COMPONENT_PREFIX}-toolbar>
                     </${COMPONENT_PREFIX}-dialog-footer>
                 </${COMPONENT_PREFIX}-dialog>`,
         )(confirmDialogScope);

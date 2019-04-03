@@ -17,16 +17,10 @@
     }
 
     &__before {
-        flex-shrink: 0;
         margin-right: $lumx-spacing-unit * 2;
     }
 
-    &__label {
-        flex: 1;
-    }
-
     &__after {
-        flex-shrink: 0;
-        margin-left: $lumx-spacing-unit * 2;
+        margin-left: auto;
     }
 }
