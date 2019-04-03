@@ -1,32 +1,18 @@
-<div>
-    <lumx-radio-button name="test1" value="lorem" ng-model="vm.radioButtons.basic.test1">
-        Radio Button 1 (lorem)
-    </lumx-radio-button>
-    <lumx-radio-button name="test1" value="ipsum" ng-model="vm.radioButtons.basic.test1">
-        Radio Button 2 (ipsum)
-    </lumx-radio-button>
-    <lumx-radio-button name="test1" value="dolor" ng-model="vm.radioButtons.basic.test1">
-        Radio Button 3 (dolor)
-    </lumx-radio-button>
+<main-header category="Components" title="Radio button">
+    <p>
+        Radio buttons are used to display multiple and exclusive options, meaning the user must select only one option.
+    </p>
+</main-header>
 
-    <lumx-radio-button name="test2" value="lorem" ng-model="vm.radioButtons.basic.test2">
-        <lumx-radio-button-label>Radio Button with help 1</lumx-radio-button-label>
-        <lumx-radio-button-helper>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
-        </lumx-radio-button-helper>
-    </lumx-radio-button>
-
-    <lumx-radio-button name="test2" value="ipsum" ng-model="vm.radioButtons.basic.test2" ng-disabled="true">
-        <lumx-radio-button-label>Radio Button with help 2</lumx-radio-button-label>
-        <lumx-radio-button-helper>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
-        </lumx-radio-button-helper>
-    </lumx-radio-button>
-
-    <lumx-radio-button name="test2" value="dolor" ng-model="vm.radioButtons.basic.test2">
-        <lumx-radio-button-label>Radio Button with help 3</lumx-radio-button-label>
-        <lumx-radio-button-helper>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
-        </lumx-radio-button-helper>
-    </lumx-radio-button>
-</div>
+<main-block
+    title="Default"
+    path="demo/angularjs/components/radio-button/partials/default.html"
+    js-path="demo/angularjs/components/radio-button/controller.js"
+>
+</main-block>
+<main-block
+    title="With helper"
+    path="demo/angularjs/components/radio-button/partials/helper.html"
+    js-path="demo/angularjs/components/radio-button/controller.js"
+>
+</main-block>
