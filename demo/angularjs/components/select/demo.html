@@ -1,62 +1,41 @@
-<lumx-select
-    ng-model="vm.selectModel.selectedPerson"
-    lumx-choices="vm.selectPeople"
-    lumx-is-clearable="true"
-    lumx-label="Lorem Ipsum"
->
-    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
-    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
-</lumx-select>
+<main-header category="Components" title="Select">
+    <p>
+        Selects allow the user to make one or multiple choices.
+    </p>
+</main-header>
 
-<lumx-select
-    ng-model="vm.selectModel.selectedPerson"
-    lumx-choices="vm.selectPeople"
-    lumx-is-clearable="true"
-    lumx-is-valid="true"
-    lumx-label="Lorem Ipsum"
-    lumx-placeholder="Select a value"
->
-    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
-    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
-</lumx-select>
+<main-block
+    title="Single selection"
+    path="demo/angularjs/components/select/partials/single-select.html"
+    js-path="demo/angularjs/components/select/controller.js"
+></main-block>
 
-<lumx-select
-    ng-model="vm.selectModel.selectedPerson"
-    lumx-choices="vm.selectPeople"
-    lumx-has-error="true"
-    lumx-label="Lorem Ipsum"
-    lumx-placeholder="Select a value"
->
-    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
-    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
-</lumx-select>
+<main-block
+    title="Multi selection"
+    path="demo/angularjs/components/select/partials/multi-select.html"
+    js-path="demo/angularjs/components/select/controller.js"
+></main-block>
 
-<lumx-select
-    ng-model="vm.selectModel.selectedPeople"
-    lumx-choices="vm.selectPeople"
-    lumx-label="Lorem Ipsum"
-    lumx-multiple="true"
-    lumx-placeholder="Select values"
+<main-block
+    title=""
+    path="demo/angularjs/components/select/partials/multi-select-search.html"
+    js-path="demo/angularjs/components/select/controller.js"
 >
-    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
-    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
-</lumx-select>
+    <p class="lumx-typography-subtitle2">Multi selection with search</p>
+</main-block>
 
-<lumx-select
-    ng-change="vm.selectCallback()"
-    ng-model="vm.selectAjax.selected"
-    lumx-choices="vm.selectAjax.list"
-    lumx-filter="vm.selectAjax.update(newValue)"
-    lumx-has-filter="true"
-    lumx-has-helper="!vm.selectAjax.list.length"
-    lumx-helper="No results"
-    lumx-is-loading="vm.selectAjax.loading"
-    lumx-label="Lorem Ipsum"
-    lumx-multiple="true"
-    lumx-model-to-selection="vm.selectAjax.toSelection(data, callback)"
-    lumx-selection-to-model="vm.selectAjax.toModel(data, callback)"
-    lumx-placeholder="Select values"
+<main-block
+    title="Validation"
+    path="demo/angularjs/components/select/partials/validation-valid.html"
+    js-path="demo/angularjs/components/select/controller.js"
 >
-    <lumx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</lumx-select-selected>
-    <lumx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</lumx-select-choices>
-</lumx-select>
+    <p class="lumx-typography-subtitle2">Select valid</p>
+</main-block>
+
+<main-block
+    title=""
+    path="demo/angularjs/components/select/partials/validation-invalid.html"
+    js-path="demo/angularjs/components/select/controller.js"
+>
+    <p class="lumx-typography-subtitle2">Select invalid</p>
+</main-block>
