@@ -3,15 +3,11 @@
    ========================================================================== */
 
 .main {
-    overflow: auto;
     flex: 1;
     justify-content: center;
     padding: $lumx-spacing-unit * 6;
     padding-top: $lumx-spacing-unit * 3;
-
-    .app--scroll-disabled & {
-        overflow: hidden;
-    }
+    overflow-y: scroll;
 
     &__wrapper {
         max-width: 800px;

@@ -6,14 +6,10 @@ $sub-nav-width: 228px;
 
 .sub-nav {
     display: flex;
-    overflow: auto;
     width: $sub-nav-width;
     flex-direction: column;
     background-color: lumx-theme-color-variant(dark, L6);
-
-    .app--scroll-disabled & {
-        overflow: hidden;
-    }
+    overflow-y: scroll;
 
     &__wrapper {
         @include lumx-list;
