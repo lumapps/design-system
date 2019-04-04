@@ -12,14 +12,45 @@
 
 <main-block
     title="States"
-    path="demo/angularjs/components/text-field/partials/default.html"
+    path="demo/angularjs/components/text-field/partials/disabled.html"
     js-path="demo/angularjs/components/text-field/controller.js"
 >
-    <p>sfdggdf</p>
+    <p>There are three states: <i>disabled,</i> <i>valid</i> and <i>invalid.</i></p>
+    <div class="pt++"><strong>Disabled</strong></div>
+</main-block>
+
+<main-block
+    path="demo/angularjs/components/text-field/partials/valid.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+>
+    <div class="pt"><strong>Valid</strong></div>
+</main-block>
+
+<main-block
+    path="demo/angularjs/components/text-field/partials/error.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+>
+    <div class="pt"><strong>Invalid</strong></div>
+</main-block>
+
+<main-block
+    title="Options"
+    path="demo/angularjs/components/text-field/partials/helper.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+>
+    <p>There are two options: <i>helper text,</i> and <i>placeholder.</i></p>
+    <div class="pt++"><strong>Helper text</strong></div>
+</main-block>
+
+<main-block
+    path="demo/angularjs/components/text-field/partials/placeholder.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+>
+    <div class="pt"><strong>Placeholder</strong></div>
 </main-block>
 
 <div class="main__block">
-    <div class="lumx-theme-background-dark-L6" style="padding: 24px;">
+    <!-- <div class="lumx-theme-background-dark-L6" style="padding: 24px;">
         <div style="margin-bottom: 24px;"></div>
 
         <div style="margin-bottom: 24px;">
@@ -44,12 +75,17 @@
             </lumx-text-field>
         </div>
 
-        <lumx-text-field lumx-label="Name" lumx-icon="{{ vm.icons.mdiMagnify }}" lumx-helper="Optional helper text">
+        <lumx-text-field 
+            lumx-label="Name" 
+            lumx-icon="{{ vm.icons.mdiMagnify }}" 
+            lumx-helper="Optional helper text"
+        >
             <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" ng-disabled="true" />
         </lumx-text-field>
+
     </div>
 
-    <!-- <div style="padding: 24px;" class="lumx-theme-background-blue-N">
+    <div style="padding: 24px;" class="lumx-theme-background-blue-N">
         <div style="margin-bottom: 24px;">
             <lumx-text-field
                 lumx-label="Name"

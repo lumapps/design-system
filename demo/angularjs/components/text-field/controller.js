@@ -31,7 +31,8 @@ function DemoTextFieldController() {
      */
     vm.textFields = {
         model: {
-            name: 'Matthias Manoukian',
+            name: 'Input text',
+            empty: '',
         },
     };
 }
