@@ -31,7 +31,9 @@ function DemoTextFieldController() {
      */
     vm.textFields = {
         model: {
-            name: 'Input text',
+            value: 'Value',
+            validValue: 'Valid value',
+            invalidValue: 'Invalid value',
             empty: '',
         },
     };

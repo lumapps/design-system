@@ -38,7 +38,7 @@
     path="demo/angularjs/components/text-field/partials/helper.html"
     js-path="demo/angularjs/components/text-field/controller.js"
 >
-    <p>There are two options: <i>helper text,</i> and <i>placeholder.</i></p>
+    <p>There are three options: <i>helper text,</i> <i>placeholder,</i> and <i>icon.</i></p>
     <div class="pt++"><strong>Helper text</strong></div>
 </main-block>
 
@@ -47,6 +47,13 @@
     js-path="demo/angularjs/components/text-field/controller.js"
 >
     <div class="pt"><strong>Placeholder</strong></div>
+</main-block>
+
+<main-block
+    path="demo/angularjs/components/text-field/partials/icon.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+>
+    <div class="pt"><strong>Icon</strong></div>
 </main-block>
 
 <div class="main__block">
@@ -75,9 +82,9 @@
             </lumx-text-field>
         </div>
 
-        <lumx-text-field 
-            lumx-label="Name" 
-            lumx-icon="{{ vm.icons.mdiMagnify }}" 
+        <lumx-text-field
+            lumx-label="Name"
+            lumx-icon="{{ vm.icons.mdiMagnify }}"
             lumx-helper="Optional helper text"
         >
             <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" ng-disabled="true" />
