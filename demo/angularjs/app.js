@@ -234,12 +234,21 @@ function AppDefaultRun($rootScope, Theme) {
         });
     });
 
+    /**
+     * Prevent scroll on main areas of the app.
+     *
+     * @param {Event} evt The scroll event.
+     */
+    function scrollHandler(evt) {
+        evt.preventDefault();
+    }
+
     $rootScope.$on('lumx-scroll__disable', () => {
-        angular.element('.app').addClass('app--scroll-disabled');
+        angular.element('.sub-nav, .main').on('mousewheel touchmove', scrollHandler);
     });
 
     $rootScope.$on('lumx-scroll__restore', () => {
-        angular.element('.app').removeClass('app--scroll-disabled');
+        angular.element('.sub-nav, .main').off('mousewheel touchmove', scrollHandler);
     });
 }
 
