@@ -1,0 +1,7 @@
+<div class="lumx-slideshow-controls">
+    <lumx-button ng-click="lumx.previousSlide()">Previous</lumx-button>
+    <lumx-button ng-click="lumx.goToSlide($index)" ng-repeat="i in lumx.getSlidesRange() track by $index">
+        Bullet
+    </lumx-button>
+    <lumx-button ng-click="lumx.nextSlide()">Next</lumx-button>
+</div>
