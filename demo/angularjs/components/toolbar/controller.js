@@ -1,4 +1,4 @@
-import { mdiChevronLeft, mdiDotsVertical, mdiMagnify } from 'LumX/icons';
+import { mdiChevronLeft, mdiDotsVertical, mdiMagnify, mdiMenuDown, mdiTranslate, mdiViewGrid } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -24,6 +24,9 @@ function DemoToolbarController() {
         mdiChevronLeft,
         mdiDotsVertical,
         mdiMagnify,
+        mdiMenuDown,
+        mdiTranslate,
+        mdiViewGrid,
     };
 }
 

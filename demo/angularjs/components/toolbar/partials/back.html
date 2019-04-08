@@ -1,0 +1,31 @@
+<div>
+    <lumx-toolbar>
+        <lumx-toolbar-before>
+            <lumx-button
+                lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}"
+                lumx-emphasis="low"
+                lumx-variant="icon"
+            >
+                <lumx-icon lumx-path="{{ vm.icons.mdiChevronLeft }}"></lumx-icon>
+            </lumx-button>
+        </lumx-toolbar-before>
+
+        <lumx-toolbar-label>
+            <span class="lumx-typography-title">Toolbar title</span>
+            <span>(Ajouter un champ de recherche ici)</span>
+        </lumx-toolbar-label>
+
+        <lumx-toolbar-after>
+            <lumx-button
+                class="mr"
+                lumx-color="{{ mainBlock.theme === 'dark' ? 'light' : 'dark' }}"
+                lumx-emphasis="low"
+                lumx-variant="icon"
+            >
+                <lumx-icon lumx-path="{{ vm.icons.mdiViewGrid }}"></lumx-icon>
+            </lumx-button>
+
+            <lumx-button lumx-theme="{{ mainBlock.theme }}">Action</lumx-button>
+        </lumx-toolbar-after>
+    </lumx-toolbar>
+</div>
