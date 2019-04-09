@@ -27,7 +27,7 @@ function SlideshowController($interval, $scope) {
     const _AUTOPLAY_DEFAULT_INTERVAL = 5000;
 
     /**
-     * The down key code.
+     * The full width size in percent.
      *
      * @type {number}
      * @constant

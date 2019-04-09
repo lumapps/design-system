@@ -133,10 +133,9 @@ function SlideshowControlsController($element, $scope) {
             }
         }
 
-        lumx.paginationItemsVisibleRange[0] = minRange;
-        lumx.paginationItemsVisibleRange[1] = maxRange;
+        lumx.paginationItemsVisibleRange = [minRange, maxRange];
 
-        _curentTransformOffset += _PAGINATION_ITEM_SIZE * lumx.paginationItemsVisibleRange[0];
+        _curentTransformOffset += _PAGINATION_ITEM_SIZE * minRange;
 
         _movePaginationWrapper();
     }
@@ -158,21 +157,28 @@ function SlideshowControlsController($element, $scope) {
      * Update pagination items state on slide change.
      */
     function _updatePaginationItemsState() {
+        const firstSlideIndex = 0;
+        const lastSlideIndex = lumx.slidesCount - 1;
+
+        let [minRange, maxRange] = lumx.paginationItemsVisibleRange;
+
         if (lumx.activeIndex > _curentIndex) {
-            if (lumx.activeIndex === lumx.paginationItemsVisibleRange[1] && lumx.activeIndex !== lumx.slidesCount - 1) {
-                lumx.paginationItemsVisibleRange[0]++;
-                lumx.paginationItemsVisibleRange[1]++;
+            if (lumx.activeIndex === maxRange && lumx.activeIndex !== lastSlideIndex) {
+                minRange++;
+                maxRange++;
 
                 _curentTransformOffset += _PAGINATION_ITEM_SIZE;
             }
         } else if (lumx.activeIndex < _curentIndex) {
-            if (lumx.activeIndex === lumx.paginationItemsVisibleRange[0] && lumx.activeIndex !== 0) {
-                lumx.paginationItemsVisibleRange[0]--;
-                lumx.paginationItemsVisibleRange[1]--;
+            if (lumx.activeIndex === minRange && lumx.activeIndex !== firstSlideIndex) {
+                minRange--;
+                maxRange--;
 
                 _curentTransformOffset -= _PAGINATION_ITEM_SIZE;
             }
         }
+
+        lumx.paginationItemsVisibleRange = [minRange, maxRange];
 
         _movePaginationWrapper();
     }
@@ -266,19 +272,21 @@ function SlideshowControlsController($element, $scope) {
      * @param {number} newIndex The new slide index.
      */
     $scope.$watch('lumx.activeIndex', (newIndex, oldIndex) => {
-        if (angular.isDefined(newIndex)) {
-            _setPaginationItemsRange();
+        if (angular.isUndefined(newIndex)) {
+            return;
+        }
 
-            if (lumx.slidesCount > lumx.paginationItemsMax) {
-                if (newIndex === oldIndex) {
-                    _initPaginationItemsState();
-                }
+        _setPaginationItemsRange();
 
-                _updatePaginationItemsState();
+        if (lumx.slidesCount > lumx.paginationItemsMax) {
+            if (newIndex === oldIndex) {
+                _initPaginationItemsState();
             }
 
-            _curentIndex = lumx.activeIndex;
+            _updatePaginationItemsState();
         }
+
+        _curentIndex = lumx.activeIndex;
     });
 }
 
