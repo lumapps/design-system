@@ -20,3 +20,58 @@
         flex: 0 0 #{100 / $i + '%'};
     }
 }
+
+/* Slideshow controls
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-slideshow-controls {
+    $self: &;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__pagination {
+        overflow: hidden;
+        max-width: 60px;
+        align-items: center;
+        margin: 0 $lumx-spacing-unit;
+    }
+
+    &__pagination-items {
+        display: flex;
+        align-items: center;
+        transition: transform $lumx-slideshow-transition-duration;
+    }
+
+    &__pagination-item {
+        width: 8px;
+        height: 8px;
+        flex-shrink: 0;
+        padding: 0;
+        margin: 0;
+        margin: 0 2px;
+        border: none;
+        background-color: lumx-theme-color-variant(dark, L5);
+        border-radius: 50%;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+        transform: scale(1);
+        transition: transform $lumx-slideshow-transition-duration;
+        user-select: none;
+
+        &:hover,
+        &--is-active {
+            background-color: lumx-theme-color-variant(primary, N);
+        }
+
+        #{$self}--has-infinite-pagination &--is-on-edge {
+            transform: scale(0.5);
+        }
+
+        #{$self}--has-infinite-pagination &--is-out-range {
+            transform: scale(0);
+        }
+    }
+}

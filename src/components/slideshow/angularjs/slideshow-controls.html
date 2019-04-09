@@ -1,7 +1,35 @@
-<div class="lumx-slideshow-controls">
-    <lumx-button ng-click="lumx.previousSlide()">Previous</lumx-button>
-    <lumx-button ng-click="lumx.goToSlide($index)" ng-repeat="i in lumx.getSlidesRange() track by $index">
-        Bullet
+<div
+    class="lumx-slideshow-controls"
+    ng-class="{ 'lumx-slideshow-controls--has-infinite-pagination': lumx.slidesCount > lumx.paginationItemsMax }"
+>
+    <lumx-button
+        class="lumx-slideshow-controls__navigation"
+        lumx-emphasis="low"
+        lumx-variant="icon"
+        ng-click="lumx.previousSlide()"
+    >
+        <lumx-icon lumx-path="{{ lumx.icons.mdiChevronLeft }}"></lumx-icon>
     </lumx-button>
-    <lumx-button ng-click="lumx.nextSlide()">Next</lumx-button>
+
+    <div class="lumx-slideshow-controls__pagination">
+        <div class="lumx-slideshow-controls__pagination-items">
+            <button
+                class="lumx-slideshow-controls__pagination-item"
+                ng-class="{ 'lumx-slideshow-controls__pagination-item--is-active': lumx.activeIndex === i,
+                            'lumx-slideshow-controls__pagination-item--is-on-edge': lumx.isPaginationItemOnEdge(i),
+                            'lumx-slideshow-controls__pagination-item--is-out-range': lumx.isPaginationItemOutVisibleRange(i) }"
+                ng-click="lumx.goToSlide($index)"
+                ng-repeat="i in lumx.paginationItemsRange track by $index"
+            ></button>
+        </div>
+    </div>
+
+    <lumx-button
+        class="lumx-slideshow-controls__navigation"
+        lumx-emphasis="low"
+        lumx-variant="icon"
+        ng-click="lumx.nextSlide()"
+    >
+        <lumx-icon lumx-path="{{ lumx.icons.mdiChevronRight }}"></lumx-icon>
+    </lumx-button>
 </div>

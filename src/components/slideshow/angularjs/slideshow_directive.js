@@ -112,7 +112,7 @@ function SlideshowController($interval, $scope) {
 
         _curentIndex = newIndex;
 
-        lumx.wrapperStyle.transform = `translate3d(${_curentTransformOffset}%, 0, 0)`;
+        lumx.wrapperStyle.transform = `translateX(${_curentTransformOffset}%)`;
     }
 
     /////////////////////////////
@@ -131,8 +131,6 @@ function SlideshowController($interval, $scope) {
 
         _autoPlayInterval = $interval(() => {
             if (lumx.activeIndex + 1 === lumx.slidesCount) {
-                lumx.activeIndex = 0;
-
                 return;
             }
 
