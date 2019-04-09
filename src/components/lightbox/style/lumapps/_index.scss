@@ -1,0 +1,48 @@
+/* ==========================================================================
+   Lightbox
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-lightbox {
+    $self: &;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: none;
+    overflow: auto;
+    animation: lumx-lightbox-show $lumx-lightbox-transition-duration;
+    background-color: lumx-theme-color-variant(dark, L1);
+    opacity: 1;
+    transition: opacity $lumx-lightbox-transition-duration;
+
+    &--is-hidden {
+        opacity: 0;
+    }
+
+    &__close {
+        position: fixed;
+        top: $lumx-spacing-unit * 3;
+        right: $lumx-spacing-unit * 3;
+    }
+
+    &__wrapper {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 80%;
+        max-height: 80%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+@keyframes lumx-lightbox-show {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

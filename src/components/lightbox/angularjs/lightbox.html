@@ -1,0 +1,9 @@
+<div class="lumx-lightbox">
+    <div class="lumx-lightbox__close">
+        <lumx-button lumx-color="light" lumx-emphasis="low" lumx-variant="icon" ng-click="lumx.closeLightbox()">
+            <lumx-icon lumx-path="{{ lumx.icons.mdiClose }}"></lumx-icon>
+        </lumx-button>
+    </div>
+
+    <div class="lumx-lightbox__wrapper" ng-if="lumx.isOpen" ng-transclude></div>
+</div>

@@ -17,6 +17,8 @@ import './components/dropdown/angularjs/dropdown_service';
 import './components/expansion-panel/angularjs/expansion-panel_directive';
 import './components/icon/angularjs/icon_directive';
 import './components/image-block/angularjs/image-block_directive';
+import './components/lightbox/angularjs/lightbox_directive';
+import './components/lightbox/angularjs/lightbox_service';
 import './components/list/angularjs/list_directive';
 import './components/list/angularjs/list-divider_directive';
 import './components/list/angularjs/list-item_directive';
