@@ -52,7 +52,6 @@
         margin: 0;
         margin: 0 2px;
         border: none;
-        background-color: lumx-theme-color-variant(dark, L5);
         border-radius: 50%;
         cursor: pointer;
         outline: none;
@@ -61,9 +60,22 @@
         transition: transform $lumx-slideshow-transition-duration;
         user-select: none;
 
-        &:hover,
-        &--is-active {
-            background-color: lumx-theme-color-variant(primary, N);
+        #{$self}--theme-light & {
+            background-color: lumx-theme-color-variant(dark, L4);
+
+            &:hover,
+            &--is-active {
+                background-color: lumx-theme-color-variant(primary, N);
+            }
+        }
+
+        #{$self}--theme-dark & {
+            background-color: lumx-theme-color-variant(light, L4);
+
+            &:hover,
+            &--is-active {
+                background-color: lumx-theme-color-variant(light, N);
+            }
         }
 
         #{$self}--has-infinite-pagination &--is-on-edge {

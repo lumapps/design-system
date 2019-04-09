@@ -1,9 +1,12 @@
 <div
     class="lumx-slideshow-controls"
-    ng-class="{ 'lumx-slideshow-controls--has-infinite-pagination': lumx.slidesCount > lumx.paginationItemsMax }"
+    ng-class="{ 'lumx-slideshow-controls--has-infinite-pagination': lumx.slidesCount > lumx.paginationItemsMax,
+                'lumx-slideshow-controls--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-slideshow-controls--theme-dark': lumx.theme === 'dark' }"
 >
     <lumx-button
         class="lumx-slideshow-controls__navigation"
+        lumx-color="{{ lumx.theme === 'dark' ? 'light' : 'dark' }}"
         lumx-emphasis="low"
         lumx-variant="icon"
         ng-click="lumx.previousSlide()"
@@ -26,6 +29,7 @@
 
     <lumx-button
         class="lumx-slideshow-controls__navigation"
+        lumx-color="{{ lumx.theme === 'dark' ? 'light' : 'dark' }}"
         lumx-emphasis="low"
         lumx-variant="icon"
         ng-click="lumx.nextSlide()"
