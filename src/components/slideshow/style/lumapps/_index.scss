@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Slideshow
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-slideshow {
+    overflow: hidden;
+
+    &__wrapper {
+        display: flex;
+        transition: transform $lumx-slideshow-transition-duration;
+    }
+}
+
+/* Slideshow item
+   ========================================================================== */
+
+@for $i from 1 through 12 {
+    .#{$lumx-base-prefix}-slideshow--group-by-#{$i} .#{$lumx-base-prefix}-slideshow-item {
+        max-width: #{100 / $i + '%'};
+        flex: 0 0 #{100 / $i + '%'};
+    }
+}
+
+/* Slideshow controls
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-slideshow-controls {
+    $self: &;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__pagination {
+        overflow: hidden;
+        max-width: 60px;
+        align-items: center;
+        margin: 0 $lumx-spacing-unit / 2;
+    }
+
+    &__pagination-items {
+        display: flex;
+        align-items: center;
+        transition: transform $lumx-slideshow-transition-duration;
+    }
+
+    &__pagination-item {
+        width: 8px;
+        height: 8px;
+        flex-shrink: 0;
+        padding: 0;
+        margin: 0;
+        margin: 0 2px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+        transform: scale(1);
+        transition: transform $lumx-slideshow-transition-duration;
+        user-select: none;
+
+        #{$self}--theme-light & {
+            background-color: lumx-theme-color-variant(dark, L4);
+
+            &:hover,
+            &--is-active {
+                background-color: lumx-theme-color-variant(primary, N);
+            }
+        }
+
+        #{$self}--theme-dark & {
+            background-color: lumx-theme-color-variant(light, L4);
+
+            &:hover,
+            &--is-active {
+                background-color: lumx-theme-color-variant(light, N);
+            }
+        }
+
+        #{$self}--has-infinite-pagination &--is-on-edge {
+            transform: scale(0.5);
+        }
+
+        #{$self}--has-infinite-pagination &--is-out-range {
+            transform: scale(0);
+        }
+    }
+}

@@ -1,0 +1,39 @@
+<div
+    class="lumx-slideshow-controls"
+    ng-class="{ 'lumx-slideshow-controls--has-infinite-pagination': lumx.slidesCount > lumx.paginationItemsMax,
+                'lumx-slideshow-controls--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-slideshow-controls--theme-dark': lumx.theme === 'dark' }"
+>
+    <lumx-button
+        class="lumx-slideshow-controls__navigation"
+        lumx-color="{{ lumx.theme === 'dark' ? 'light' : 'dark' }}"
+        lumx-emphasis="low"
+        lumx-variant="icon"
+        ng-click="lumx.previousSlide()"
+    >
+        <lumx-icon lumx-path="{{ lumx.icons.mdiChevronLeft }}"></lumx-icon>
+    </lumx-button>
+
+    <div class="lumx-slideshow-controls__pagination">
+        <div class="lumx-slideshow-controls__pagination-items">
+            <button
+                class="lumx-slideshow-controls__pagination-item"
+                ng-class="{ 'lumx-slideshow-controls__pagination-item--is-active': lumx.activeIndex === i,
+                            'lumx-slideshow-controls__pagination-item--is-on-edge': lumx.isPaginationItemOnEdge(i),
+                            'lumx-slideshow-controls__pagination-item--is-out-range': lumx.isPaginationItemOutVisibleRange(i) }"
+                ng-click="lumx.goToSlide($index)"
+                ng-repeat="i in lumx.paginationItemsRange track by $index"
+            ></button>
+        </div>
+    </div>
+
+    <lumx-button
+        class="lumx-slideshow-controls__navigation"
+        lumx-color="{{ lumx.theme === 'dark' ? 'light' : 'dark' }}"
+        lumx-emphasis="low"
+        lumx-variant="icon"
+        ng-click="lumx.nextSlide()"
+    >
+        <lumx-icon lumx-path="{{ lumx.icons.mdiChevronRight }}"></lumx-icon>
+    </lumx-button>
+</div>
