@@ -190,6 +190,10 @@ function SlideshowControlsController($element, $scope) {
      */
     function goToSlide(newIndex) {
         lumx.activeIndex = newIndex;
+
+        if (angular.isFunction(lumx.OnPaginationClick)) {
+            lumx.OnPaginationClick();
+        }
     }
 
     /**
@@ -221,6 +225,10 @@ function SlideshowControlsController($element, $scope) {
         }
 
         lumx.activeIndex++;
+
+        if (angular.isFunction(lumx.onNextClick)) {
+            lumx.onNextClick();
+        }
     }
 
     /**
@@ -232,6 +240,10 @@ function SlideshowControlsController($element, $scope) {
         }
 
         lumx.activeIndex--;
+
+        if (angular.isFunction(lumx.onPreviousClick)) {
+            lumx.onPreviousClick();
+        }
     }
 
     /////////////////////////////
