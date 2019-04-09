@@ -218,7 +218,17 @@ function SlideshowController($element, $interval, $scope) {
     //                         //
     /////////////////////////////
 
+    /**
+     * Navigate through slides on left and right arrow key press.
+     */
     $element.on('keydown keypress', _onKeyPress);
+
+    /**
+     * Unbind event listener on destroy.
+     */
+    $scope.$on('$destroy', () => {
+        $element.off('keydown keypress', _onKeyPress);
+    });
 
     /////////////////////////////
     //                         //
