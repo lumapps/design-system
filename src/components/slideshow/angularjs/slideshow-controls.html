@@ -10,6 +10,7 @@
         lumx-emphasis="low"
         lumx-variant="icon"
         ng-click="lumx.previousSlide()"
+        tabindex="-1"
     >
         <lumx-icon lumx-path="{{ lumx.icons.mdiChevronLeft }}"></lumx-icon>
     </lumx-button>
@@ -23,6 +24,7 @@
                             'lumx-slideshow-controls__pagination-item--is-out-range': lumx.isPaginationItemOutVisibleRange(i) }"
                 ng-click="lumx.goToSlide($index)"
                 ng-repeat="i in lumx.paginationItemsRange track by $index"
+                tabindex="-1"
             ></button>
         </div>
     </div>
@@ -33,6 +35,7 @@
         lumx-emphasis="low"
         lumx-variant="icon"
         ng-click="lumx.nextSlide()"
+        tabindex="-1"
     >
         <lumx-icon lumx-path="{{ lumx.icons.mdiChevronRight }}"></lumx-icon>
     </lumx-button>

@@ -5,7 +5,7 @@ import template from './slideshow.html';
 
 /////////////////////////////
 
-function SlideshowController($interval, $scope) {
+function SlideshowController($element, $interval, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -34,6 +34,24 @@ function SlideshowController($interval, $scope) {
      * @readonly
      */
     const _FULL_WIDTH_PERCENT = 100;
+
+    /**
+     * The left key code.
+     *
+     * @type {number}
+     * @constant
+     * @readonly
+     */
+    const _LEFT_KEY_CODE = 37;
+
+    /**
+     * The right key code.
+     *
+     * @type {number}
+     * @constant
+     * @readonly
+     */
+    const _RIGHT_KEY_CODE = 39;
 
     /**
      * The current slide index.
@@ -115,6 +133,37 @@ function SlideshowController($interval, $scope) {
         lumx.wrapperStyle.transform = `translateX(${_curentTransformOffset}%)`;
     }
 
+    /**
+     * Handle key events on slideshow focus.
+     *
+     * @param {Event} evt The key event.
+     */
+    function _onKeyPress(evt) {
+        if (evt.keyCode === _LEFT_KEY_CODE) {
+            if (lumx.activeIndex === 0) {
+                return;
+            }
+
+            lumx.activeIndex--;
+
+            $scope.$apply();
+
+            evt.preventDefault();
+            evt.stopPropagation();
+        } else if (evt.keyCode === _RIGHT_KEY_CODE) {
+            if (lumx.activeIndex + 1 === lumx.slidesCount) {
+                return;
+            }
+
+            lumx.activeIndex++;
+
+            $scope.$apply();
+
+            evt.preventDefault();
+            evt.stopPropagation();
+        }
+    }
+
     /////////////////////////////
     //                         //
     //     Public functions    //
@@ -162,6 +211,14 @@ function SlideshowController($interval, $scope) {
     lumx.startAutoPlay = startAutoPlay;
     lumx.stopAutoPlay = stopAutoPlay;
     lumx.updateSlidesCount = updateSlidesCount;
+
+    /////////////////////////////
+    //                         //
+    //          Events         //
+    //                         //
+    /////////////////////////////
+
+    $element.on('keydown keypress', _onKeyPress);
 
     /////////////////////////////
     //                         //
