@@ -3,10 +3,10 @@
         List displays related content grouped together and organized vertically.
     </p>
 </main-header>
-
+<!-- SINGLE LINE -->
 <main-block
     title="Single line"
-    path="demo/angularjs/components/list/partials/tiny.html"
+    path="demo/angularjs/components/list/partials/single-tiny.html"
     js-path="demo/angularjs/components/list/controller.js"
     has-theme-switcher="false"
 >
@@ -15,59 +15,44 @@
 
 <main-block
     title=""
-    path="demo/angularjs/components/list/partials/regular.html"
+    path="demo/angularjs/components/list/partials/single-regular.html"
     js-path="demo/angularjs/components/list/controller.js"
     has-theme-switcher="false"
 >
     <p class="lumx-typography-subtitle2">Regular</p>
 </main-block>
 
-<lumx-list>
-    <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
+<main-block
+    title=""
+    path="demo/angularjs/components/list/partials/single-big.html"
+    js-path="demo/angularjs/components/list/controller.js"
+    has-theme-switcher="false"
+>
+    <p class="lumx-typography-subtitle2">Big</p>
+</main-block>
+<!-- TWO-LINES -->
+<main-block
+    title="Two lines"
+    path="demo/angularjs/components/list/partials/two-regular.html"
+    js-path="demo/angularjs/components/list/controller.js"
+    has-theme-switcher="false"
+>
+    <p class="lumx-typography-subtitle2">Regular</p>
+</main-block>
 
-    <lumx-list-item>
-        <lumx-list-item-before
-            ><lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon
-        ></lumx-list-item-before>
-        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-    </lumx-list-item>
-
-    <lumx-list-item>
-        <lumx-list-item-before
-            ><lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon
-        ></lumx-list-item-before>
-        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-    </lumx-list-item>
-
-    <lumx-list-subheader>Lorem ipsum</lumx-list-subheader>
-
-    <lumx-list-item>
-        <lumx-list-item-before
-            ><lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon
-        ></lumx-list-item-before>
-        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-    </lumx-list-item>
-
-    <lumx-list-item>
-        <lumx-list-item-before
-            ><lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon
-        ></lumx-list-item-before>
-        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-    </lumx-list-item>
-
-    <lumx-list-divider></lumx-list-divider>
-
-    <lumx-list-item>
-        <lumx-list-item-before
-            ><lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon
-        ></lumx-list-item-before>
-        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-    </lumx-list-item>
-
-    <lumx-list-item>
-        <lumx-list-item-before
-            ><lumx-icon lumx-path="{{ vm.icons.mdiSend }}" lumx-size="xs"></lumx-icon
-        ></lumx-list-item-before>
-        <lumx-list-item-content>Lorem ipsum</lumx-list-item-content>
-    </lumx-list-item>
-</lumx-list>
+<main-block
+    title=""
+    path="demo/angularjs/components/list/partials/two-big.html"
+    js-path="demo/angularjs/components/list/controller.js"
+    has-theme-switcher="false"
+>
+    <p class="lumx-typography-subtitle2">Big</p>
+</main-block>
+<!-- MULTILINE -->
+<main-block
+    title="Multi-line"
+    path="demo/angularjs/components/list/partials/multi-line.html"
+    js-path="demo/angularjs/components/list/controller.js"
+    has-theme-switcher="false"
+>
+</main-block>
