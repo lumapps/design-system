@@ -3,7 +3,11 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-slideshow {
-    overflow: hidden;
+    outline: none;
+
+    &__slides {
+        overflow: hidden;
+    }
 
     &__wrapper {
         display: flex;
