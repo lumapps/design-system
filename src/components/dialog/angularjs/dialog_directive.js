@@ -143,7 +143,7 @@ function DialogController(
         }
 
         $timeout(() => {
-            _dialogOverlay.remove();
+            _dialogOverlay.off('click', _close).remove();
 
             if (_isAlertDialog || _isConfirmDialog) {
                 _dialog.remove();
@@ -225,9 +225,7 @@ function DialogController(
             .show();
 
         if (angular.isUndefined(lumx.autoClose) || lumx.autoClose) {
-            _dialogOverlay.on('click', () => {
-                _close();
-            });
+            _dialogOverlay.on('click', _close);
         }
 
         if (angular.isUndefined(lumx.escapeClose) || lumx.escapeClose) {
@@ -308,9 +306,7 @@ function DialogController(
     /**
      * Close the current dialog on destroy.
      */
-    $scope.$on('$destroy', () => {
-        _close();
-    });
+    $scope.$on('$destroy', _close);
 }
 
 /////////////////////////////
