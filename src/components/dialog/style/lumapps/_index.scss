@@ -2,14 +2,14 @@
    Dialog
    ========================================================================== */
 
-.#{$lumx-base-prefix}-dialog-filter {
+.#{$lumx-base-prefix}-dialog-overlay {
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     display: none;
-    animation: lumx-dialog-filter-show $lumx-dialog-transition-duration;
+    animation: lumx-dialog-overlay-show $lumx-dialog-transition-duration;
     background-color: lumx-theme-color-variant(dark, L1);
     opacity: 1;
     transition: opacity $lumx-dialog-transition-duration;
@@ -67,7 +67,7 @@
     }
 }
 
-@keyframes lumx-dialog-filter-show {
+@keyframes lumx-dialog-overlay-show {
     0% {
         opacity: 0;
     }

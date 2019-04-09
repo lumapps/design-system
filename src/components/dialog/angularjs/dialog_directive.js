@@ -51,12 +51,12 @@ function DialogController(
     const _dialog = $element;
 
     /**
-     * The dialog black filter.
+     * The dialog overlay.
      *
      * @type {Element}
      */
-    const _dialogFilter = angular.element('<div/>', {
-        class: `${CSS_PREFIX}-dialog-filter`,
+    const _dialogOverlay = angular.element('<div/>', {
+        class: `${CSS_PREFIX}-dialog-overlay`,
     });
 
     /**
@@ -135,24 +135,24 @@ function DialogController(
 
         $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-start`, lumx.id);
 
+        _dialogOverlay.addClass(`${CSS_PREFIX}-dialog-overlay--is-hidden`);
         _dialog.addClass(`${CSS_PREFIX}-dialog--is-hidden`);
-        _dialogFilter.addClass(`${CSS_PREFIX}-dialog-filter--is-hidden`);
 
         if (angular.isDefined(_sourceEl)) {
             _sourceEl.focus();
         }
 
-        $timeout(function onDialogCloseEnd() {
+        $timeout(() => {
+            _dialogOverlay.remove();
+
             if (_isAlertDialog || _isConfirmDialog) {
                 _dialog.remove();
             } else {
-                _dialog.hide().appendTo(_parentElement);
+                _dialog
+                    .hide()
+                    .removeClass(`${CSS_PREFIX}-dialog--is-hidden`)
+                    .appendTo(_parentElement);
             }
-
-            _dialogFilter.remove();
-
-            _dialog.removeClass(`${CSS_PREFIX}-dialog--is-hidden`);
-            _dialogFilter.removeClass(`${CSS_PREFIX}-dialog-filter--is-hidden`);
 
             lumx.isOpen = false;
 
@@ -195,7 +195,7 @@ function DialogController(
     }
 
     /**
-     * Close dialog on echap key up.
+     * Close dialog on escape key up.
      *
      * @param {Event} evt The key up event.
      */
@@ -219,13 +219,13 @@ function DialogController(
 
         LumXDepthService.increase();
 
-        _dialogFilter
+        _dialogOverlay
             .css('z-index', LumXDepthService.get())
             .appendTo('body')
             .show();
 
         if (angular.isUndefined(lumx.autoClose) || lumx.autoClose) {
-            _dialogFilter.on('click', () => {
+            _dialogOverlay.on('click', () => {
                 _close();
             });
         }
@@ -239,7 +239,7 @@ function DialogController(
             .appendTo('body')
             .show();
 
-        $timeout(function onDialogOpenStart() {
+        $timeout(() => {
             $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-start`, lumx.id, params);
 
             lumx.isOpen = true;
@@ -248,7 +248,7 @@ function DialogController(
             $timeout(_createObserver);
         });
 
-        $timeout(function onDialogOpenEnd() {
+        $timeout(() => {
             $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-end`, lumx.id, params);
         }, _TRANSITION_DURATION);
     }
@@ -271,7 +271,7 @@ function DialogController(
     /**
      * Open a given dialog.
      *
-     * @param {Event}  evt      The dropdown open event.
+     * @param {Event}  evt      The dialog open event.
      * @param {string} dialogId The dialog identifier.
      * @param {Object} params   An optional object that holds extra parameters.
      */
@@ -296,7 +296,7 @@ function DialogController(
     /**
      * Close a given dialog.
      *
-     * @param {Event}  evt      The dropdown open event.
+     * @param {Event}  evt      The dialog open event.
      * @param {string} dialogId The dialog identifier.
      */
     $scope.$on(`${COMPONENT_PREFIX}-dialog__close`, (evt, dialogId) => {
