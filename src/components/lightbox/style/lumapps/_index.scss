@@ -11,6 +11,7 @@
     bottom: 0;
     left: 0;
     display: none;
+    overflow: auto;
     animation: lumx-lightbox-show $lumx-lightbox-transition-duration;
     background-color: lumx-theme-color-variant(dark, L1);
     opacity: 1;
@@ -21,7 +22,7 @@
     }
 
     &__close {
-        position: absolute;
+        position: fixed;
         top: $lumx-spacing-unit * 3;
         right: $lumx-spacing-unit * 3;
     }
@@ -30,6 +31,8 @@
         position: absolute;
         top: 50%;
         left: 50%;
+        max-width: 80%;
+        max-height: 80%;
         transform: translateX(-50%) translateY(-50%);
     }
 }
