@@ -1,0 +1,18 @@
+<div class="p++">
+    <lumx-tabs lumx-layout="clustered" lumx-theme="{{ mainBlock.theme }}">
+        <lumx-tab lumx-label="{{ tab.heading }}" ng-repeat="tab in vm.tabs">
+            <div class="p+">
+                <p>{{ tab.content }}</p>
+                <div class="mt+">
+                    <lumx-button lumx-theme="{{ mainBlock.theme }}" ng-click="vm.addTab()">Add a tab</lumx-button>
+                    <lumx-button lumx-theme="{{ mainBlock.theme }}" ng-click="vm.removeTab(vm.tabs.indexOf(tab))"
+                        >Remove current tab</lumx-button
+                    >
+                    <lumx-button lumx-theme="{{ mainBlock.theme }}" ng-click="vm.removeFirstTab()"
+                        >Remove first tab</lumx-button
+                    >
+                </div>
+            </div>
+        </lumx-tab>
+    </lumx-tabs>
+</div>
