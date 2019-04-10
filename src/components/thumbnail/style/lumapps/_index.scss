@@ -3,6 +3,7 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-thumbnail {
+    position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,5 +27,44 @@
     .#{$lumx-base-prefix}-thumbnail--size-#{$key} {
         width: $size;
         height: $size;
+    }
+}
+
+/* Thumbnail states
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+    cursor: pointer;
+    outline: none;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 50%;
+        content: '';
+        pointer-events: none;
+    }
+
+    &:hover::after {
+        @include lumx-state(state-hover, emphasis-low, dark);
+    }
+
+    &:active::after {
+        @include lumx-state(state-active, emphasis-low, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-thumbnail--theme-light.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+    &[data-focus-visible-added]::after {
+        @include lumx-state(state-focus, emphasis-low, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+    &[data-focus-visible-added]::after {
+        @include lumx-state(state-focus, emphasis-low, light);
     }
 }

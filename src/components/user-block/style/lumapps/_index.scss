@@ -49,6 +49,16 @@
         #{$self}--theme-dark & {
             color: lumx-theme-color-variant(light, N);
         }
+
+        &[tabindex='0'] {
+            #{$self}--theme-light & {
+                @include lumx-link(dark);
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-link(light);
+            }
+        }
     }
 
     &__fields {

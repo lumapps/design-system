@@ -2,7 +2,7 @@ import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from 'L
 
 /////////////////////////////
 
-function DemoUserBlockController() {
+function DemoUserBlockController(LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -32,6 +32,39 @@ function DemoUserBlockController() {
         mdiPhone,
         mdiSlack,
     };
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Callback on user block click.
+     */
+    function onClick() {
+        LumXNotificationService.success('Click callback');
+    }
+
+    /**
+     * Callback on user block mouse enter.
+     */
+    function onMouseEnter() {
+        LumXNotificationService.success('Mouse enter callback');
+    }
+
+    /**
+     * Callback on user block mouse leave.
+     */
+    function onMouseLeave() {
+        LumXNotificationService.success('Mouse leave callback');
+    }
+
+    /////////////////////////////
+
+    vm.onClick = onClick;
+    vm.onMouseEnter = onMouseEnter;
+    vm.onMouseLeave = onMouseLeave;
 }
 
 /////////////////////////////

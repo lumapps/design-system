@@ -16,12 +16,18 @@ function ThumbnailDirective() {
     }
 
     function link(scope, el, attrs) {
+        const defaultProps = {
+            size: 'm',
+            theme: 'light',
+            variant: 'squared',
+        };
+
         attrs.$observe('lumxImage', (newImage) => {
             el.css('background-image', `url(${newImage})`);
         });
 
         if (!attrs.lumxSize) {
-            el.addClass(`${CSS_PREFIX}-thumbnail--size-m`);
+            el.addClass(`${CSS_PREFIX}-thumbnail--size-${defaultProps.size}`);
         }
 
         attrs.$observe('lumxSize', (size) => {
@@ -34,8 +40,22 @@ function ThumbnailDirective() {
             }).addClass(`${CSS_PREFIX}-thumbnail--size-${size}`);
         });
 
+        if (!attrs.lumxTheme) {
+            el.addClass(`${CSS_PREFIX}-thumbnail--theme-${defaultProps.theme}`);
+        }
+
+        attrs.$observe('lumxTheme', (theme) => {
+            if (!theme) {
+                return;
+            }
+
+            el.removeClass((index, className) => {
+                return (className.match(/(?:\S|-)*thumbnail--theme-\S+/g) || []).join(' ');
+            }).addClass(`${CSS_PREFIX}-thumbnail--theme-${theme}`);
+        });
+
         if (!attrs.lumxVariant) {
-            el.addClass(` ${CSS_PREFIX}-thumbnail--variant-squared`);
+            el.addClass(` ${CSS_PREFIX}-thumbnail--variant-${defaultProps.variant}`);
         }
 
         attrs.$observe('lumxVariant', (variant) => {
