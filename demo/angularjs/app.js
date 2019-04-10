@@ -241,6 +241,16 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                     template: require('./components/tooltip/demo.html'),
                 },
             },
+        })
+        .state('app.user-block', {
+            url: 'user-block',
+            views: {
+                'main@': {
+                    controller: 'DemoUserBlockController',
+                    controllerAs: 'vm',
+                    template: require('./components/user-block/demo.html'),
+                },
+            },
         });
 }
 
@@ -311,4 +321,5 @@ require('./components/switch/controller.js');
 require('./components/tabs/controller.js');
 require('./components/text-field/controller.js');
 require('./components/toolbar/controller.js');
+require('./components/user-block/controller.js');
 /* eslint-enable import/no-unassigned-import */
