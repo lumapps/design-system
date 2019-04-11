@@ -29,43 +29,11 @@ function ButtonDirective() {
      * @return {string}  The button html template.
      */
     function getTemplate(el, attrs) {
-        const isDefaultEmphasis = !attrs.lumxEmphasis || attrs.lumxEmphasis === 'high';
-
-        const defaultProps = {
-            color: isDefaultEmphasis ? 'primary' : 'dark',
-            emphasis: 'high',
-            size: 'm',
-            theme: 'light',
-            variant: 'button',
-        };
-
-        let buttonClass = `${CSS_PREFIX}-button`;
-
-        if (!attrs.lumxColor) {
-            buttonClass += ` ${CSS_PREFIX}-button--color-${defaultProps.color}`;
-        }
-
-        if (!attrs.lumxEmphasis) {
-            buttonClass += ` ${CSS_PREFIX}-button--emphasis-${defaultProps.emphasis}`;
-        }
-
-        if (!attrs.lumxSize) {
-            buttonClass += ` ${CSS_PREFIX}-button--size-${defaultProps.size}`;
-        }
-
-        if (!attrs.lumxTheme && isDefaultEmphasis) {
-            buttonClass += ` ${CSS_PREFIX}-button--theme-${defaultProps.theme}`;
-        }
-
-        if (!attrs.lumxVariant) {
-            buttonClass += ` ${CSS_PREFIX}-button--variant-${defaultProps.variant}`;
-        }
-
         if (isAnchor(attrs)) {
-            return `<a class="${buttonClass}" ng-transclude></a>`;
+            return `<a class="${CSS_PREFIX}-button" ng-transclude></a>`;
         }
 
-        return `<button class="${buttonClass}" ng-transclude></button>`;
+        return `<button class="${CSS_PREFIX}-button" ng-transclude></button>`;
     }
 
     function link(scope, el, attrs) {
@@ -87,33 +55,83 @@ function ButtonDirective() {
             }
         }
 
+        const isDefaultEmphasis = !attrs.lumxEmphasis || attrs.lumxEmphasis === 'high';
+
+        const defaultProps = {
+            color: isDefaultEmphasis ? 'primary' : 'dark',
+            emphasis: 'high',
+            size: 'm',
+            theme: 'light',
+            variant: 'button',
+        };
+
+        if (!attrs.lumxColor) {
+            el.addClass(`${CSS_PREFIX}-button--color-${defaultProps.color}`);
+        }
+
         attrs.$observe('lumxColor', (color) => {
+            if (!color) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*button--color-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-button--color-${color}`);
         });
 
+        if (!attrs.lumxEmphasis) {
+            el.addClass(`${CSS_PREFIX}-button--emphasis-${defaultProps.emphasis}`);
+        }
+
         attrs.$observe('lumxEmphasis', (emphasis) => {
+            if (!emphasis) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*button--emphasis-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-button--emphasis-${emphasis}`);
         });
 
+        if (!attrs.lumxSize) {
+            el.addClass(`${CSS_PREFIX}-button--size-${defaultProps.size}`);
+        }
+
         attrs.$observe('lumxSize', (size) => {
+            if (!size) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*button--size-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-button--size-${size}`);
         });
 
+        if (!attrs.lumxTheme && isDefaultEmphasis) {
+            el.addClass(`${CSS_PREFIX}-button--theme-${defaultProps.theme}`);
+        }
+
         attrs.$observe('lumxTheme', (theme) => {
-            if (!attrs.lumxEmphasis || attrs.lumxEmphasis === 'high') {
+            if (!theme) {
+                return;
+            }
+
+            if (isDefaultEmphasis) {
                 el.removeClass((index, className) => {
                     return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
                 }).addClass(`${CSS_PREFIX}-button--theme-${theme}`);
             }
         });
 
+        if (!attrs.lumxVariant) {
+            el.addClass(`${CSS_PREFIX}-button--variant-${defaultProps.variant}`);
+        }
+
         attrs.$observe('lumxVariant', (variant) => {
+            if (!variant) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*button--variant-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-button--variant-${variant}`);
