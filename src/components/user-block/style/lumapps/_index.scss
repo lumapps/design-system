@@ -1,0 +1,118 @@
+/* ==========================================================================
+   User block
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-user-block {
+    $self: &;
+
+    display: flex;
+    align-items: center;
+
+    &--orientation-vertical {
+        flex-direction: column;
+    }
+
+    &__avatar {
+        #{$self}--orientation-horizontal#{$self}--size-s & {
+            margin-right: $lumx-spacing-unit;
+        }
+
+        #{$self}--orientation-horizontal#{$self}--size-m &,
+        #{$self}--orientation-horizontal#{$self}--size-l & {
+            margin-right: $lumx-spacing-unit * 2;
+        }
+
+        #{$self}--orientation-vertical & {
+            margin-bottom: $lumx-spacing-unit * 1.5;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+
+        #{$self}--orientation-vertical & {
+            align-items: center;
+        }
+    }
+
+    &__name {
+        #{$self}--size-s & {
+            @include lumx-typography(caption);
+        }
+
+        #{$self}--size-m &,
+        #{$self}--size-l & {
+            @include lumx-typography(body1);
+        }
+
+        #{$self}--orientation-vertical & {
+            text-align: center;
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant(light, N);
+        }
+
+        &[tabindex='0'] {
+            #{$self}--theme-light & {
+                @include lumx-link(dark);
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-link(light);
+            }
+        }
+    }
+
+    &__fields {
+        #{$self}--size-s & {
+            display: none;
+        }
+
+        #{$self}--size-m & {
+            display: flex;
+        }
+
+        #{$self}--size-l & {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #{$self}--orientation-vertical & {
+            align-items: center;
+        }
+    }
+
+    &__field {
+        @include lumx-typography(caption);
+
+        #{$self}--size-m & {
+            &::after {
+                margin: 0 $lumx-spacing-unit / 2;
+                content: '•';
+            }
+
+            &:last-child::after {
+                display: none;
+            }
+        }
+
+        #{$self}--orientation-vertical & {
+            text-align: center;
+        }
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant(dark, L2);
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant(light, L2);
+        }
+    }
+
+    &__action,
+    &__actions {
+        margin-top: $lumx-spacing-unit * 2;
+    }
+}

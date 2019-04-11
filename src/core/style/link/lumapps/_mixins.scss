@@ -1,0 +1,20 @@
+@mixin lumx-link($theme) {
+    color: lumx-theme-color-variant($theme, N);
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+
+    &:hover {
+        color: lumx-theme-color-variant($theme, L1);
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: lumx-theme-color-variant($theme, L2);
+        text-decoration: underline;
+    }
+
+    &[data-focus-visible-added] {
+        text-decoration: underline;
+    }
+}

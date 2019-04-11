@@ -1,0 +1,36 @@
+<div class="lumx-user-block">
+    <div class="lumx-user-block__avatar" ng-if="lumx.avatar">
+        <lumx-thumbnail
+            lumx-image="{{ lumx.avatar }}"
+            lumx-size="{{ lumx.size }}"
+            lumx-theme="{{ lumx.theme }}"
+            lumx-variant="rounded"
+            lumx-enter-keypress="lumx.onClick()"
+            ng-click="lumx.onClick()"
+            ng-mouseenter="lumx.onMouseEnter()"
+            ng-mouseleave="lumx.onMouseLeave()"
+            tabindex="{{ lumx.onClick ? 0 : -1 }}"
+        ></lumx-thumbnail>
+    </div>
+
+    <div class="lumx-user-block__wrapper" ng-if="lumx.name || lumx.fields">
+        <span
+            class="lumx-user-block__name"
+            lumx-enter-keypress="lumx.onClick()"
+            ng-click="lumx.onClick()"
+            ng-if="lumx.name"
+            ng-mouseenter="lumx.onMouseEnter()"
+            ng-mouseleave="lumx.onMouseLeave()"
+            tabindex="{{ lumx.onClick ? 0 : -1 }}"
+        >
+            {{ lumx.name }}
+        </span>
+
+        <div class="lumx-user-block__fields" ng-if="lumx.fields">
+            <span class="lumx-user-block__field" ng-repeat="field in lumx.fields">{{ field }}</span>
+        </div>
+    </div>
+
+    <div class="lumx-user-block__action" ng-transclude="action" ng-if="lumx.hasAction"></div>
+    <div class="lumx-user-block__actions" ng-transclude="actions" ng-if="lumx.hasActions"></div>
+</div>

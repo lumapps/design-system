@@ -41,3 +41,4 @@ import './components/text-field/angularjs/text-field_directive';
 import './components/thumbnail/angularjs/thumbnail_directive';
 import './components/toolbar/angularjs/toolbar_directive';
 import './components/tooltip/angularjs/tooltip_directive';
+import './components/user-block/angularjs/user-block_directive';

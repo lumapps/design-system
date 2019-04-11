@@ -41,6 +41,7 @@ angular.module(`${MODULE_NAME}.theme`, []);
 angular.module(`${MODULE_NAME}.thumbnail`, []);
 angular.module(`${MODULE_NAME}.toolbar`, []);
 angular.module(`${MODULE_NAME}.tooltip`, []);
+angular.module(`${MODULE_NAME}.user-block`, []);
 
 angular.module(MODULE_NAME, [
     `${MODULE_NAME}.button`,
@@ -69,4 +70,5 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.thumbnail`,
     `${MODULE_NAME}.toolbar`,
     `${MODULE_NAME}.tooltip`,
+    `${MODULE_NAME}.user-block`,
 ]);

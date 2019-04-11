@@ -26,7 +26,7 @@
 @mixin lumx-tabs-link() {
     position: relative;
     display: flex;
-    height: map-get($lumx-sizes, l);
+    height: map-get($lumx-sizes, m);
     align-items: center;
     justify-content: center;
     padding: 0 $lumx-spacing-unit * 3;
