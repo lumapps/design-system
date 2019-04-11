@@ -46,7 +46,7 @@ function FocusTrapService() {
         }
 
         const focusableEls = _activeElement.find(
-            'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select, [tabindex]:not([tabindex="-1"])',
+            'a[href]:not([tabindex="-1"]), button:not([tabindex="-1"]), textarea:not([tabindex="-1"]), input[type="text"]:not([tabindex="-1"]), input[type="radio"]:not([tabindex="-1"]), input[type="checkbox"]:not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])',
         );
 
         // eslint-disable-next-line prefer-destructuring
