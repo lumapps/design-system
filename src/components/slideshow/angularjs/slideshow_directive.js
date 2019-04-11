@@ -264,6 +264,10 @@ function SlideshowDirective() {
         }
 
         attrs.$observe('lumxGroupBy', (groupBy) => {
+            if (!groupBy) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*slideshow--group-by-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-slideshow--group-by-${groupBy}`);
@@ -274,6 +278,10 @@ function SlideshowDirective() {
         }
 
         attrs.$observe('lumxTheme', (theme) => {
+            if (!theme) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*slideshow--theme-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-slideshow--theme-${theme}`);
