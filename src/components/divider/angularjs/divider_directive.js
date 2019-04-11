@@ -14,6 +14,10 @@ function DividerDirective() {
         }
 
         attrs.$observe('lumxTheme', (theme) => {
+            if (!theme) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*divider--theme-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-divider--theme-${theme}`);
