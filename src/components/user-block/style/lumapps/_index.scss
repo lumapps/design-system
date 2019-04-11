@@ -46,6 +46,10 @@
             @include lumx-typography(body1);
         }
 
+        #{$self}--orientation-vertical & {
+            text-align: center;
+        }
+
         #{$self}--theme-dark & {
             color: lumx-theme-color-variant(light, N);
         }
@@ -83,14 +87,6 @@
     &__field {
         @include lumx-typography(caption);
 
-        #{$self}--theme-light & {
-            color: lumx-theme-color-variant(dark, L2);
-        }
-
-        #{$self}--theme-dark & {
-            color: lumx-theme-color-variant(light, L2);
-        }
-
         #{$self}--size-m & {
             &::after {
                 margin: 0 $lumx-spacing-unit / 2;
@@ -100,6 +96,18 @@
             &:last-child::after {
                 display: none;
             }
+        }
+
+        #{$self}--orientation-vertical & {
+            text-align: center;
+        }
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant(dark, L2);
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant(light, L2);
         }
     }
 
