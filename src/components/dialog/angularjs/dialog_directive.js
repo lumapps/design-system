@@ -143,7 +143,10 @@ function DialogController(
         }
 
         $timeout(() => {
-            _dialogOverlay.off('click', _close).remove();
+            _dialogOverlay
+                .off('click', _close)
+                .removeClass(`${CSS_PREFIX}-dialog-overlay--is-hidden`)
+                .remove();
 
             if (_isAlertDialog || _isConfirmDialog) {
                 _dialog.remove();
