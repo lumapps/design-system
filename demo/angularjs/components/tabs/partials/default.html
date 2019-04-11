@@ -1,15 +1,15 @@
 <div class="p++">
     <lumx-tabs lumx-active-tab="vm.activeTab" lumx-theme="{{ mainBlock.theme }}">
-        <lumx-tab lumx-label="Lorem Ipsum 1">
-            <p class="p+">Lorem Ipsum Content 1</p>
+        <lumx-tab lumx-label="Active">
+            <p class="p+">Active</p>
         </lumx-tab>
 
-        <lumx-tab lumx-label="Lorem Ipsum 2" lumx-theme="{{ mainBlock.theme }}" ng-disabled="vm.isTabDisabled">
-            <p class="p+">Lorem Ipsum Content 2</p>
+        <lumx-tab lumx-label="Disable" lumx-theme="{{ mainBlock.theme }}" ng-disabled="vm.isTabDisabled">
+            <p class="p+">Disable</p>
         </lumx-tab>
 
-        <lumx-tab lumx-label="Lorem Ipsum 3" lumx-theme="{{ mainBlock.theme }}">
-            <p class="p+">Lorem Ipsum Content 3</p>
+        <lumx-tab lumx-label="Active" lumx-theme="{{ mainBlock.theme }}">
+            <p class="p+">Active</p>
         </lumx-tab>
     </lumx-tabs>
     <lumx-button ng-click="vm.activeTab = 0">Set first tab as active tab</lumx-button>
