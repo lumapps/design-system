@@ -1,0 +1,37 @@
+<div class="p+">
+    <lumx-table lumx-has-dividers="true" lumx-theme="{{ mainBlock.theme }}">
+        <lumx-table-head>
+            <lumx-table-row>
+                <lumx-table-cell
+                    lumx-icon="{{ cel.icon }}"
+                    lumx-is-sortable="cell.isSortable"
+                    lumx-sort-order="{{ cell.sortOrder }}"
+                    ng-click="vm.updateSort(cell)"
+                    ng-repeat="cell in vm.tableHead"
+                >
+                    {{ cell.label }}
+                </lumx-table-cell>
+            </lumx-table-row>
+        </lumx-table-head>
+
+        <lumx-table-body>
+            <lumx-table-row ng-repeat="cell in vm.tableBody">
+                <lumx-table-cell>
+                    {{ cell.dessert }}
+                </lumx-table-cell>
+
+                <lumx-table-cell>
+                    {{ cell.calories }}
+                </lumx-table-cell>
+
+                <lumx-table-cell>
+                    {{ cell.fat }}
+                </lumx-table-cell>
+
+                <lumx-table-cell>
+                    {{ cell.comments }}
+                </lumx-table-cell>
+            </lumx-table-row>
+        </lumx-table-body>
+    </lumx-table>
+</div>

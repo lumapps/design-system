@@ -68,16 +68,6 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 },
             },
         })
-        .state('app.data-table', {
-            url: 'data-table',
-            views: {
-                'main@': {
-                    controller: 'DemoDataTableController',
-                    controllerAs: 'vm',
-                    template: require('./components/data-table/demo.html'),
-                },
-            },
-        })
         .state('app.dialog', {
             url: 'dialog',
             views: {
@@ -204,6 +194,16 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
                 },
             },
         })
+        .state('app.table', {
+            url: 'table',
+            views: {
+                'main@': {
+                    controller: 'DemoTableController',
+                    controllerAs: 'vm',
+                    template: require('./components/table/demo.html'),
+                },
+            },
+        })
         .state('app.tabs', {
             url: 'tabs',
             views: {
@@ -306,7 +306,6 @@ require('./layout/sub-nav/sub-nav_controller.js');
 require('./components/button/controller.js');
 require('./components/checkbox/controller.js');
 require('./components/chip/controller.js');
-require('./components/data-table/controller.js');
 require('./components/dialog/controller.js');
 require('./components/dropdown/controller.js');
 require('./components/expansion-panel/controller.js');
@@ -318,6 +317,7 @@ require('./components/radio-button/controller.js');
 require('./components/select/controller.js');
 require('./components/slideshow/controller.js');
 require('./components/switch/controller.js');
+require('./components/table/controller.js');
 require('./components/tabs/controller.js');
 require('./components/text-field/controller.js');
 require('./components/toolbar/controller.js');

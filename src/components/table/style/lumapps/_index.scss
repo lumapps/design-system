@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Data table
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-table {
+    $self: &;
+
+    width: 100%;
+    margin: 0;
+    table-layout: fixed;
+
+    &__cell {
+        height: 56px;
+        padding: $lumx-spacing-unit $lumx-spacing-unit * 4 $lumx-spacing-unit 0;
+
+        thead & {
+            #{$self}--theme-light & {
+                border-bottom: 1px solid lumx-theme-color-variant(dark, $lumx-divider-color-variant);
+                color: lumx-theme-color-variant(dark, L2);
+            }
+
+            #{$self}--theme-dark & {
+                border-bottom: 1px solid lumx-theme-color-variant(light, $lumx-divider-color-variant);
+                color: lumx-theme-color-variant(light, L2);
+            }
+
+            &--is-sortable {
+                cursor: pointer;
+            }
+
+            &--is-sortable:hover,
+            &--is-sorted {
+                #{$self}--theme-light & {
+                    color: lumx-theme-color-variant(dark, N);
+                }
+
+                #{$self}--theme-dark & {
+                    color: lumx-theme-color-variant(light, N);
+                }
+            }
+        }
+
+        tbody & {
+            #{$self}--theme-light#{$self}--has-dividers & {
+                border-bottom: 1px solid lumx-theme-color-variant(dark, $lumx-divider-color-variant);
+            }
+
+            #{$self}--theme-dark#{$self}--has-dividers & {
+                border-bottom: 1px solid lumx-theme-color-variant(light, $lumx-divider-color-variant);
+            }
+        }
+
+        tbody #{$self}__row:last-child & {
+            border-bottom: none;
+        }
+    }
+
+    &__cell-icon {
+        thead & {
+            display: inline-block;
+            margin-right: $lumx-spacing-unit / 2;
+            vertical-align: middle;
+        }
+    }
+
+    &__cell-content {
+        thead & {
+            @include lumx-typography(caption);
+
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        tbody & {
+            @include lumx-typography(body1);
+
+            #{$self}--theme-light & {
+                color: lumx-theme-color-variant(dark, N);
+            }
+
+            #{$self}--theme-dark & {
+                color: lumx-theme-color-variant(light, N);
+            }
+        }
+    }
+}
