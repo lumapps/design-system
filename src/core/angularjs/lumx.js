@@ -19,7 +19,6 @@ angular.module(`${MODULE_NAME}.utils`, [
 angular.module(`${MODULE_NAME}.button`, []);
 angular.module(`${MODULE_NAME}.checkbox`, []);
 angular.module(`${MODULE_NAME}.chip`, []);
-angular.module(`${MODULE_NAME}.data-table`, []);
 angular.module(`${MODULE_NAME}.dialog`, []);
 angular.module(`${MODULE_NAME}.divider`, []);
 angular.module(`${MODULE_NAME}.dropdown`, []);
@@ -35,6 +34,7 @@ angular.module(`${MODULE_NAME}.radio-button`, []);
 angular.module(`${MODULE_NAME}.select`, []);
 angular.module(`${MODULE_NAME}.slideshow`, []);
 angular.module(`${MODULE_NAME}.switch`, []);
+angular.module(`${MODULE_NAME}.table`, []);
 angular.module(`${MODULE_NAME}.tabs`, []);
 angular.module(`${MODULE_NAME}.text-field`, []);
 angular.module(`${MODULE_NAME}.theme`, []);
@@ -46,7 +46,6 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.button`,
     `${MODULE_NAME}.checkbox`,
     `${MODULE_NAME}.chip`,
-    `${MODULE_NAME}.data-table`,
     `${MODULE_NAME}.dialog`,
     `${MODULE_NAME}.divider`,
     `${MODULE_NAME}.dropdown`,
@@ -63,6 +62,7 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.slideshow`,
     `${MODULE_NAME}.switch`,
     `${MODULE_NAME}.tabs`,
+    `${MODULE_NAME}.table`,
     `${MODULE_NAME}.text-field`,
     `${MODULE_NAME}.theme`,
     `${MODULE_NAME}.utils`,
