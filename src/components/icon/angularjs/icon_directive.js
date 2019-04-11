@@ -33,12 +33,20 @@ function IconDirective() {
         });
 
         attrs.$observe('lumxColor', (color) => {
+            if (!color) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*icon--color-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-icon--color-${color}`);
         });
 
         attrs.$observe('lumxSize', (size) => {
+            if (!size) {
+                return;
+            }
+
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*icon--size-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-icon--size-${size}`);
