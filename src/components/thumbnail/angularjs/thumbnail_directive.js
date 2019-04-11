@@ -55,7 +55,7 @@ function ThumbnailDirective() {
         });
 
         if (!attrs.lumxVariant) {
-            el.addClass(` ${CSS_PREFIX}-thumbnail--variant-${defaultProps.variant}`);
+            el.addClass(`${CSS_PREFIX}-thumbnail--variant-${defaultProps.variant}`);
         }
 
         attrs.$observe('lumxVariant', (variant) => {
