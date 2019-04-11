@@ -155,6 +155,7 @@ function DialogController(
             }
 
             lumx.isOpen = false;
+            LumXFocusTrapService.disable();
 
             $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-end`, lumx.id);
         }, _TRANSITION_DURATION);

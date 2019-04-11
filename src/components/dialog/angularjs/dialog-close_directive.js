@@ -7,8 +7,12 @@ function DialogCloseDirective(LumXDialogService) {
     'ngInject';
 
     function link(scope, el) {
-        el.on('click', function onClick() {
+        el.on('click', () => {
             LumXDialogService.close(el.parents(`.${CSS_PREFIX}-dialog`).attr('id'), true);
+        });
+
+        scope.$on('$destroy', () => {
+            el.off();
         });
     }
 

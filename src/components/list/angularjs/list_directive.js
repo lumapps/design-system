@@ -131,14 +131,29 @@ function lumxListController($element, $scope) {
         }
     }
 
+    /**
+     * Reset active item index.
+     */
+    function _resetActiveItemIndex() {
+        lumx.activeItemIndex = -1;
+    }
+
     /////////////////////////////
     //                         //
     //          Events         //
     //                         //
     /////////////////////////////
 
-    $element.on('keydown keypress', _onKeyPress).on('focus', () => {
-        lumx.activeItemIndex = -1;
+    /**
+     * Navigate through items on up and down arrow key press.
+     */
+    $element.on('keydown keypress', _onKeyPress).on('focus', _resetActiveItemIndex);
+
+    /**
+     * Unbind event listeners on destroy.
+     */
+    $scope.$on('$destroy', () => {
+        $element.off('keydown keypress', _onKeyPress).off('focus', _resetActiveItemIndex);
     });
 }
 

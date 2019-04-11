@@ -67,7 +67,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
     /**
      * Hide the given notification.
      *
-     * @param {Element} notification The notification html element.
+     * @param {element} notification The notification html element.
      */
     function _hide(notification) {
         notification.addClass(`${CSS_PREFIX}-notification--is-hidden`);

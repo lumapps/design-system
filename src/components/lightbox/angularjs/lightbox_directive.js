@@ -183,6 +183,8 @@ function LightboxController(
                 .appendTo(_parentElement);
 
             lumx.isOpen = false;
+
+            LumXFocusTrapService.disable();
         }, _TRANSITION_DURATION);
     }
 

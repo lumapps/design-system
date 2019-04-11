@@ -5,7 +5,7 @@ import template from './list-item.html';
 
 /////////////////////////////
 
-function ListItemController($element) {
+function ListItemController($element, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -47,16 +47,37 @@ function ListItemController($element) {
 
     /////////////////////////////
     //                         //
-    //          Events         //
+    //    Private functions    //
     //                         //
     /////////////////////////////
 
-    $element.on('focus', () => {
+    /**
+     * Register item index as active index to the list.
+     */
+    function _registerIndex() {
         if (angular.isUndefined(lumx.parentController)) {
             return;
         }
 
         lumx.parentController.activeItemIndex = $element.index(`.${CSS_PREFIX}-list-item`);
+    }
+
+    /////////////////////////////
+    //                         //
+    //          Events         //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Register item index as active index to the list on focus.
+     */
+    $element.on('focus', _registerIndex);
+
+    /**
+     * Unbind event listener on destroy.
+     */
+    $scope.$on('$destroy', () => {
+        $element.off('focus', _registerIndex);
     });
 }
 

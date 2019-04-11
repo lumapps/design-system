@@ -107,7 +107,7 @@ function TextFieldDirective() {
             }
         });
 
-        scope.$on('$destroy', function onDestroy() {
+        scope.$on('$destroy', () => {
             input.off();
         });
     }
