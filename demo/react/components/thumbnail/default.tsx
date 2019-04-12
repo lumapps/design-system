@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 import { Thumbnail, ThumbnailSizes, ThumbnailTheme } from 'LumX';
 
@@ -12,7 +12,13 @@ interface IProps {
 }
 
 /////////////////////////////
-
+const componentHolder: CSSProperties = {
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    fontSize: 11,
+    margin: 8,
+};
 /**
  * The demo for the default <Thumbnail>s.
  *
@@ -21,12 +27,27 @@ interface IProps {
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <div style={{ display: 'flex' }}>
-            <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xxs} />
-            <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xs} />
-            <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.s} />
-            <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.m} />
-            <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.l} />
-            <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xl} />
+            <div style={componentHolder}>
+                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xxs} />
+                xxs
+            </div>
+            <div style={componentHolder}>
+                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xs} />
+                xs
+            </div>
+            <div style={componentHolder}>
+                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.s} />s
+            </div>
+            <div style={componentHolder}>
+                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.m} />m
+            </div>
+            <div style={componentHolder}>
+                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.l} />l
+            </div>
+            <div style={componentHolder}>
+                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xl} />
+                xl
+            </div>
         </div>
     </div>
 );
