@@ -1,0 +1,17 @@
+<lumx-toolbar>
+    <lumx-toolbar-label>
+        <span
+            class="lumx-typography-title"
+            ng-class="{ 'lumx-theme-color-dark-N': demoBlock.theme === 'light',
+                        'lumx-theme-color-light-N': demoBlock.theme === 'dark' }"
+        >
+            Toolbar title
+        </span>
+    </lumx-toolbar-label>
+
+    <lumx-toolbar-after>
+        <lumx-button lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+            <lumx-icon lumx-path="{{ vm.icons.mdiMagnify }}"></lumx-icon>
+        </lumx-button>
+    </lumx-toolbar-after>
+</lumx-toolbar>

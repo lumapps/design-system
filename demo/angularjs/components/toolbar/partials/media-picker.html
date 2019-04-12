@@ -1,0 +1,25 @@
+<lumx-toolbar>
+    <lumx-toolbar-label>
+        <div lumx-grid-container="row" lumx-grid-h-align="center">
+            <span
+                class="lumx-typography-title"
+                ng-class="{ 'lumx-theme-color-dark-N': demoBlock.theme === 'light',
+                            'lumx-theme-color-light-N': demoBlock.theme === 'dark' }"
+            >
+                Toolbar title
+            </span>
+
+            <lumx-text-field class="ml+" lumx-icon="{{ vm.icons.mdiMagnify }}" lumx-theme="{{ demoBlock.theme }}">
+                <input type="text" ng-model="vm.searchFieldModel" placeholder="Search" />
+            </lumx-text-field>
+        </div>
+    </lumx-toolbar-label>
+
+    <lumx-toolbar-after>
+        <lumx-button class="mr" lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+            <lumx-icon lumx-path="{{ vm.icons.mdiViewGrid }}"></lumx-icon>
+        </lumx-button>
+
+        <lumx-button lumx-theme="{{ demoBlock.theme }}">Action</lumx-button>
+    </lumx-toolbar-after>
+</lumx-toolbar>

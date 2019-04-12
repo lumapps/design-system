@@ -1,4 +1,4 @@
-import { mdiChevronLeft, mdiDotsVertical, mdiMagnify } from 'LumX/icons';
+import { mdiChevronLeft, mdiDotsVertical, mdiMagnify, mdiMenuDown, mdiTranslate, mdiViewGrid } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -17,14 +17,22 @@ function DemoToolbarController() {
      * The icons to use in the template.
      *
      * @type {Object}
-     * @constant
-     * @readonly
      */
     vm.icons = {
         mdiChevronLeft,
         mdiDotsVertical,
         mdiMagnify,
+        mdiMenuDown,
+        mdiTranslate,
+        mdiViewGrid,
     };
+
+    /**
+     * The search field model.
+     *
+     * @type {string}
+     */
+    vm.searchFieldModel = '';
 }
 
 /////////////////////////////
