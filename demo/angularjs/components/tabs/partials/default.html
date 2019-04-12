@@ -1,17 +1,19 @@
-<div class="p++">
-    <lumx-tabs lumx-active-tab="vm.activeTab" lumx-theme="{{ mainBlock.theme }}">
-        <lumx-tab lumx-label="Active">
-            <p class="p+">Active</p>
-        </lumx-tab>
+<lumx-tabs lumx-theme="{{ demoBlock.theme }}">
+    <lumx-tab lumx-label="Active">
+        <div class="pv+">
+            <p>Active</p>
+        </div>
+    </lumx-tab>
 
-        <lumx-tab lumx-label="Disable" lumx-theme="{{ mainBlock.theme }}" ng-disabled="vm.isTabDisabled">
-            <p class="p+">Disable</p>
-        </lumx-tab>
+    <lumx-tab lumx-label="Disable" ng-disabled="true">
+        <div class="pv+">
+            <p>Disable</p>
+        </div>
+    </lumx-tab>
 
-        <lumx-tab lumx-label="Active" lumx-theme="{{ mainBlock.theme }}">
-            <p class="p+">Active</p>
-        </lumx-tab>
-    </lumx-tabs>
-    <lumx-button ng-click="vm.activeTab = 0">Set first tab as active tab</lumx-button>
-    <lumx-button ng-click="vm.isTabDisabled = !vm.isTabDisabled">Toggle second tab disabled state</lumx-button>
-</div>
+    <lumx-tab lumx-label="Active">
+        <div class="pv+">
+            <p>Active</p>
+        </div>
+    </lumx-tab>
+</lumx-tabs>
