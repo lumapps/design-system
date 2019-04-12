@@ -6,23 +6,6 @@
     @include lumx-list;
 }
 
-/* Item
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-list-item {
-    &--is-clickable {
-        @include lumx-list-item-clickable;
-    }
-
-    &--is-selected {
-        @include lumx-list-item-selected;
-    }
-
-    &__content {
-        @include lumx-list-item-content;
-    }
-}
-
 /* Item sizes
    ========================================================================== */
 
@@ -37,6 +20,26 @@
         .#{$lumx-base-prefix}-list-item__after {
             @include lumx-list-item-after($key);
         }
+    }
+}
+
+/* Item content
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item__content {
+    @include lumx-list-item-content;
+}
+
+/* Item states
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item {
+    &--is-clickable {
+        @include lumx-list-item-clickable;
+    }
+
+    &--is-selected {
+        @include lumx-list-item-selected;
     }
 }
 
