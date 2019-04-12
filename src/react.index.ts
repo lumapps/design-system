@@ -87,3 +87,13 @@ export {
     Theme as SwitchTheme,
     Themes as SwitchThemes,
 } from './components/switch/react/Switch';
+
+export {
+    CLASSNAME as ThumbnailClassName,
+    Thumbnail,
+    ThumbnailProps,
+    Theme as ThumbnailTheme,
+    Themes as ThumbnailThemes,
+    Sizes as ThumbnailSizes,
+    Variants as ThumbnailVariants,
+} from './components/thumbnail/react/Thumbnail';

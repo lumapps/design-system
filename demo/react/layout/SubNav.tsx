@@ -60,6 +60,7 @@ const NAV_ITEMS: string[] = [
     'Text field',
     'Toolbar',
     'Tooltip',
+    'Thumbnail',
 ];
 
 /////////////////////////////
