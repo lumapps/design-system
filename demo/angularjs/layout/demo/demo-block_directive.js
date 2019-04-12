@@ -1,14 +1,14 @@
 import { mdiCodeTags } from 'LumX/icons';
 
-import template from './main-block.html';
+import template from './demo-block.html';
 
 /////////////////////////////
 
-function mainBlockController() {
+function demoBlockController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const mainBlock = this;
+    const demoBlock = this;
 
     /////////////////////////////
     //                         //
@@ -21,28 +21,28 @@ function mainBlockController() {
      *
      * @type {boolean}
      */
-    mainBlock.hasDarkTheme = false;
+    demoBlock.hasDarkTheme = false;
 
     /**
      * Wheter the block has a description or not.
      *
      * @type {boolean}
      */
-    mainBlock.hasDescription = false;
+    demoBlock.hasDescription = false;
 
     /**
      * Wheter the block displays a theme switcher or not.
      *
      * @type {boolean}
      */
-    mainBlock.hasThemeSwitcher = true;
+    demoBlock.hasThemeSwitcher = true;
 
     /**
      * The main block icons.
      *
      * @type {Object}
      */
-    mainBlock.icons = {
+    demoBlock.icons = {
         mdiCodeTags,
     };
 
@@ -51,14 +51,14 @@ function mainBlockController() {
      *
      * @type {boolean}
      */
-    mainBlock.isCodeOpen = false;
+    demoBlock.isCodeOpen = false;
 
     /**
      * The component theme.
      *
      * @type {string}
      */
-    mainBlock.theme = 'light';
+    demoBlock.theme = 'light';
 
     /////////////////////////////
     //                         //
@@ -70,29 +70,29 @@ function mainBlockController() {
      * Toggle code visibility.
      */
     function toggleCode() {
-        mainBlock.isCodeOpen = !mainBlock.isCodeOpen;
+        demoBlock.isCodeOpen = !demoBlock.isCodeOpen;
     }
 
     /**
      * Toggle component theme from light to dark and so on.
      */
     function toggleTheme() {
-        if (mainBlock.hasDarkTheme) {
-            mainBlock.theme = 'dark';
+        if (demoBlock.hasDarkTheme) {
+            demoBlock.theme = 'dark';
         } else {
-            mainBlock.theme = 'light';
+            demoBlock.theme = 'light';
         }
     }
 
     /////////////////////////////
 
-    mainBlock.toggleCode = toggleCode;
-    mainBlock.toggleTheme = toggleTheme;
+    demoBlock.toggleCode = toggleCode;
+    demoBlock.toggleTheme = toggleTheme;
 }
 
 /////////////////////////////
 
-function mainBlockDirective() {
+function demoBlockDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
@@ -125,8 +125,8 @@ function mainBlockDirective() {
 
     return {
         bindToController: true,
-        controller: mainBlockController,
-        controllerAs: 'mainBlock',
+        controller: demoBlockController,
+        controllerAs: 'demoBlock',
         link,
         replace: true,
         restrict: 'E',
@@ -138,8 +138,8 @@ function mainBlockDirective() {
 
 /////////////////////////////
 
-angular.module('design-system').directive('mainBlock', mainBlockDirective);
+angular.module('design-system').directive('demoBlock', demoBlockDirective);
 
 /////////////////////////////
 
-export { mainBlockDirective };
+export { demoBlockDirective };

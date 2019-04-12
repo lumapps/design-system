@@ -299,8 +299,9 @@ angular
 /////////////////////////////
 
 /* eslint-disable import/no-unassigned-import */
+require('./layout/demo/demo-block_directive.js');
+require('./layout/demo/demo-grid_directive.js');
 require('./layout/main/main-header_directive.js');
-require('./layout/main/main-block_directive.js');
 require('./layout/sub-nav/sub-nav_controller.js');
 
 require('./components/button/controller.js');
