@@ -58,6 +58,7 @@ const NAV_ITEMS: string[] = [
     'Switch',
     'Tabs',
     'Text field',
+    'Thumbnail',
     'Toolbar',
     'Tooltip',
 ];
