@@ -94,7 +94,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /////////////////////////////
 
 /**
- * [Enter the description of the component here].
+ * Simple component used to display image with square or round shape.
+ * Convenient to display image previews or user avatar.
  *
  * @return {React.ReactElement} The component.
  */
