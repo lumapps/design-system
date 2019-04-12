@@ -17,8 +17,6 @@ function DemoToolbarController() {
      * The icons to use in the template.
      *
      * @type {Object}
-     * @constant
-     * @readonly
      */
     vm.icons = {
         mdiChevronLeft,
@@ -28,6 +26,13 @@ function DemoToolbarController() {
         mdiTranslate,
         mdiViewGrid,
     };
+
+    /**
+     * The search field model.
+     *
+     * @type {string}
+     */
+    vm.searchFieldModel = '';
 }
 
 /////////////////////////////
