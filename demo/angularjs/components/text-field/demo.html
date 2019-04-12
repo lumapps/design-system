@@ -1,97 +1,54 @@
-<div class="main__block">
-    <h1>Buttons</h1>
-    <p class="lumx-typography-body1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis suscipit velit, non porttitor sapien
-        condimentum quis. Vestibulum rhoncus, magna non tincidunt aliquam, odio eros consequat libero, non malesuada
-        elit lorem sit amet sem. Etiam eleifend vestibulum imperdiet.
+<main-header category="Components" title="Text field">
+    <p>
+        Text fields let users enter and edit text.
     </p>
-</div>
+</main-header>
 
-<div class="main__block">
-    <h2>Primary</h2>
-    <p class="lumx-typography-body2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam iaculis suscipit velit, non porttitor sapien
-        condimentum quis. Vestibulum rhoncus, magna non tincidunt aliquam, odio eros consequat libero, non malesuada
-        elit lorem sit amet sem. Etiam eleifend vestibulum imperdiet.
-    </p>
+<demo-block
+    path="demo/angularjs/components/text-field/partials/default.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+></demo-block>
 
-    <div class="lumx-theme-background-dark-L6" style="padding: 24px;">
-        <div style="margin-bottom: 24px;">
-            <lumx-text-field lumx-label="Name" lumx-helper="Optional helper text">
-                <input type="text" ng-model="vm.textFields.model.name" />
-            </lumx-text-field>
-        </div>
+<demo-block title="States">
+    <p>There are three states: <i>disabled,</i> <i>valid</i> and <i>invalid.</i></p>
+</demo-block>
 
-        <div style="margin-bottom: 24px;">
-            <lumx-text-field
-                lumx-label="Name"
-                lumx-icon="{{ vm.icons.mdiMagnify }}"
-                lumx-helper="Optional helper text"
-                lumx-is-valid="true"
-            >
-                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
-            </lumx-text-field>
-        </div>
+<demo-block
+    subtitle="Disabled"
+    path="demo/angularjs/components/text-field/partials/disabled.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+></demo-block>
 
-        <div style="margin-bottom: 24px;">
-            <lumx-text-field
-                lumx-label="Name"
-                lumx-icon="{{ vm.icons.mdiMagnify }}"
-                lumx-helper="Optional helper text"
-                lumx-has-error="true"
-            >
-                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
-            </lumx-text-field>
-        </div>
+<demo-block
+    subtitle="Valid"
+    path="demo/angularjs/components/text-field/partials/valid.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+></demo-block>
 
-        <lumx-text-field lumx-label="Name" lumx-icon="{{ vm.icons.mdiMagnify }}" lumx-helper="Optional helper text">
-            <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" ng-disabled="true" />
-        </lumx-text-field>
-    </div>
+<demo-block
+    subtitle="Invalid"
+    path="demo/angularjs/components/text-field/partials/error.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+></demo-block>
 
-    <div style="padding: 24px;" class="lumx-theme-background-blue-N">
-        <div style="margin-bottom: 24px;">
-            <lumx-text-field
-                lumx-label="Name"
-                lumx-icon="{{ vm.icons.mdiMagnify }}"
-                lumx-helper="Optional helper text"
-                lumx-theme="dark"
-            >
-                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
-            </lumx-text-field>
-        </div>
+<demo-block title="Options">
+    <p>There are three options: <i>helper text,</i> <i>placeholder,</i> and <i>icon.</i></p>
+</demo-block>
 
-        <div style="margin-bottom: 24px;">
-            <lumx-text-field
-                lumx-label="Name"
-                lumx-icon="{{ vm.icons.mdiMagnify }}"
-                lumx-helper="Optional helper text"
-                lumx-theme="dark"
-                lumx-is-valid="true"
-            >
-                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
-            </lumx-text-field>
-        </div>
+<demo-block
+    subtitle="Helper text"
+    path="demo/angularjs/components/text-field/partials/helper.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+></demo-block>
 
-        <div style="margin-bottom: 24px;">
-            <lumx-text-field
-                lumx-label="Name"
-                lumx-icon="{{ vm.icons.mdiMagnify }}"
-                lumx-helper="Optional helper text"
-                lumx-theme="dark"
-                lumx-has-error="true"
-            >
-                <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" />
-            </lumx-text-field>
-        </div>
+<demo-block
+    subtitle="Placeholder"
+    path="demo/angularjs/components/text-field/partials/placeholder.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+></demo-block>
 
-        <lumx-text-field
-            lumx-label="Name"
-            lumx-icon="{{ vm.icons.mdiMagnify }}"
-            lumx-helper="Optional helper text"
-            lumx-theme="dark"
-        >
-            <input type="text" ng-model="vm.textFields.model.name" placeholder="Placeholder" ng-disabled="true" />
-        </lumx-text-field>
-    </div>
-</div>
+<demo-block
+    subtitle="Icon"
+    path="demo/angularjs/components/text-field/partials/icon.html"
+    js-path="demo/angularjs/components/text-field/controller.js"
+></demo-block>

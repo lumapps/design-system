@@ -31,7 +31,10 @@ function DemoTextFieldController() {
      */
     vm.textFields = {
         model: {
-            name: 'Matthias Manoukian',
+            value: 'Value',
+            validValue: 'Valid value',
+            invalidValue: 'Invalid value',
+            empty: '',
         },
     };
 }
