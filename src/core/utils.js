@@ -2,6 +2,7 @@ import classNames from 'classnames';
 
 import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
+import kebabCase from 'lodash/kebabCase';
 
 /////////////////////////////
 //                         //
@@ -19,10 +20,10 @@ import isEmpty from 'lodash/isEmpty';
  */
 function getBasicClass({ prefix, type, value }) {
     if (isBoolean(value)) {
-        return `${prefix}--is-${type}`;
+        return `${prefix}--is-${kebabCase(type)}`;
     }
 
-    return `${prefix}--${type}-${value}`;
+    return `${prefix}--${kebabCase(type)}-${value}`;
 }
 
 /**
