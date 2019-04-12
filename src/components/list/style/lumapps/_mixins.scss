@@ -51,23 +51,19 @@
 @mixin lumx-list-item-edge($size) {
     display: flex;
     flex-shrink: 0;
-    align-items: center;
     justify-content: center;
-    margin-right: $lumx-spacing-unit;
-
-    @if $size == tiny {
-        width: map-get($lumx-sizes, s);
-        height: map-get($lumx-sizes, s);
-    } @else {
-        width: map-get($lumx-sizes, m);
-        height: map-get($lumx-sizes, m);
-    }
 }
 
 @mixin lumx-list-item-before($size) {
     @include lumx-list-item-edge($size);
 
-    margin-right: $lumx-spacing-unit;
+    @if $size == tiny {
+        width: map-get($lumx-sizes, s);
+        margin-right: $lumx-spacing-unit;
+    } @else {
+        width: map-get($lumx-sizes, m);
+        margin-right: $lumx-spacing-unit * 2;
+    }
 }
 
 @mixin lumx-list-item-content() {
@@ -79,7 +75,11 @@
 @mixin lumx-list-item-after($size) {
     @include lumx-list-item-edge($size);
 
-    margin-left: $lumx-spacing-unit;
+    @if $size == tiny {
+        margin-left: $lumx-spacing-unit;
+    } @else {
+        margin-left: $lumx-spacing-unit * 2;
+    }
 }
 
 @mixin lumx-list-subheader() {
