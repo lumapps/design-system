@@ -1,17 +1,12 @@
-<div class="p++">
-    <lumx-radio-button
-        class="pb"
-        lumx-theme="{{ mainBlock.theme }}"
-        name="test1"
-        value="lorem"
-        ng-model="vm.radioButtons.test1"
-    >
+<div class="mb">
+    <lumx-radio-button lumx-theme="{{ demoBlock.theme }}" name="test1" value="lorem" ng-model="vm.radioButtons.test1">
         Radio Button 1
     </lumx-radio-button>
+</div>
 
+<div class="mb">
     <lumx-radio-button
-        class="pb"
-        lumx-theme="{{ mainBlock.theme }}"
+        lumx-theme="{{ demoBlock.theme }}"
         name="test1"
         ng-disabled="true"
         ng-model="vm.radioButtons.test1"
@@ -19,14 +14,8 @@
     >
         Radio Button 2
     </lumx-radio-button>
-
-    <lumx-radio-button
-        class="pb"
-        lumx-theme="{{ mainBlock.theme }}"
-        name="test1"
-        ng-model="vm.radioButtons.test1"
-        value="dolor"
-    >
-        Radio Button 3
-    </lumx-radio-button>
 </div>
+
+<lumx-radio-button lumx-theme="{{ demoBlock.theme }}" name="test1" ng-model="vm.radioButtons.test1" value="dolor">
+    Radio Button 3
+</lumx-radio-button>

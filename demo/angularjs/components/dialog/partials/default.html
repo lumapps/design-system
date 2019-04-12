@@ -1,12 +1,8 @@
-<div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
-    <lumx-button
-        lumx-theme="{{ mainBlock.theme }}"
-        ng-click="vm.openDialog(vm.dialogIds[0], vm.sourceIds[0])"
-        id="{{ vm.sourceIds[0] }}"
-    >
+<demo-grid>
+    <lumx-button ng-click="vm.openDialog(vm.dialogIds[0], vm.sourceIds[0])" id="{{ vm.sourceIds[0] }}">
         Open dialog
     </lumx-button>
-</div>
+</demo-grid>
 
 <lumx-dialog id="{{ vm.dialogIds[0] }}">
     <lumx-dialog-header>

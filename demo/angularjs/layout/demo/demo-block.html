@@ -1,9 +1,10 @@
 <div class="demo-block">
     <h2 class="demo-block__title" ng-if="demoBlock.title">{{ demoBlock.title }}</h2>
+    <h3 class="demo-block__subtitle" ng-if="demoBlock.subtitle">{{ demoBlock.subtitle }}</h3>
 
     <div class="demo-block__description" ng-if="demoBlock.hasDescription" ng-transclude></div>
 
-    <div class="demo-block__demo">
+    <div class="demo-block__demo" ng-if="demoBlock.path">
         <div
             class="demo-block__content"
             ng-class="{ 'lumx-theme-background-dark-N': demoBlock.hasDarkTheme }"

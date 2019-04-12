@@ -1,14 +1,11 @@
-<div class="p++">
-    <lumx-select
-        class="pb+"
-        ng-model="vm.selectModel.selectedPerson"
-        lumx-choices="vm.selectPeople"
-        lumx-is-clearable="true"
-        lumx-label="Select label"
-        lumx-placeholder="Select a value"
-        lumx-theme="{{ mainBlock.theme }}"
-    >
-        <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
-        <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
-    </lumx-select>
-</div>
+<lumx-select
+    ng-model="vm.selectModel.selectedPerson"
+    lumx-choices="vm.selectPeople"
+    lumx-is-clearable="true"
+    lumx-label="Select label"
+    lumx-placeholder="Select a value"
+    lumx-theme="{{ demoBlock.theme }}"
+>
+    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
+    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
+</lumx-select>

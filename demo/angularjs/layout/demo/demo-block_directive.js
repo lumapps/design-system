@@ -121,6 +121,10 @@ function demoBlockDirective() {
         attrs.$observe('title', (title) => {
             ctrl.title = title;
         });
+
+        attrs.$observe('subtitle', (subtitle) => {
+            ctrl.subtitle = subtitle;
+        });
     }
 
     return {

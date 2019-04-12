@@ -4,15 +4,9 @@
     </p>
 </main-header>
 
-<main-block
-    path="demo/angularjs/components/progress-tracker/partials/stepper.html"
-    js-path="demo/angularjs/components/progress-tracker/controller.js"
-    has-theme-switcher="false"
-></main-block>
-
-<main-block
+<demo-block
     title="Step states"
-    path="demo/angularjs/components/progress-tracker/partials/current.html"
+    path="demo/angularjs/components/progress-tracker/partials/stepper.html"
     js-path="demo/angularjs/components/progress-tracker/controller.js"
     has-theme-switcher="false"
 >
@@ -20,41 +14,41 @@
         There are four types: <i>Current state,</i> <i>Future state,</i> <i>Completed state</i> and <i>Error state</i>.
         A step can be completed by a helper text.
     </p>
+</demo-block>
 
-    <p class="mt+++">
-        <strong>Current</strong>
-    </p>
-</main-block>
+<demo-block
+    subtitle="Current"
+    path="demo/angularjs/components/progress-tracker/partials/current.html"
+    js-path="demo/angularjs/components/progress-tracker/controller.js"
+    has-theme-switcher="false"
+></demo-block>
 
-<main-block
+<demo-block
+    subtitle="Future"
     path="demo/angularjs/components/progress-tracker/partials/future.html"
     js-path="demo/angularjs/components/progress-tracker/controller.js"
     has-theme-switcher="false"
->
-    <strong>Future</strong>
-</main-block>
+></demo-block>
 
-<main-block
+<demo-block
+    subtitle="Completed"
     path="demo/angularjs/components/progress-tracker/partials/completed.html"
     js-path="demo/angularjs/components/progress-tracker/controller.js"
     has-theme-switcher="false"
->
-    <strong>Completed</strong>
-</main-block>
+></demo-block>
 
-<main-block
+<demo-block
+    subtitle="Future with helper"
     path="demo/angularjs/components/progress-tracker/partials/helper.html"
     js-path="demo/angularjs/components/progress-tracker/controller.js"
     has-theme-switcher="false"
->
-    <strong>Future with helper</strong>
-</main-block>
+></demo-block>
 
-<main-block
+<demo-block
+    subtitle="Error"
     path="demo/angularjs/components/progress-tracker/partials/error.html"
     js-path="demo/angularjs/components/progress-tracker/controller.js"
     has-theme-switcher="false"
 >
-    <strong>Error </strong>
-    <p class="mt">Error message replaces the helper text, if used.</p>
-</main-block>
+    <p>Error message replaces the helper text, if used.</p>
+</demo-block>
