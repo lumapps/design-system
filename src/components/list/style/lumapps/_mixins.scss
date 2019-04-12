@@ -7,7 +7,6 @@
 
 @mixin lumx-list-item($size) {
     display: flex;
-    align-items: center;
     padding-right: $lumx-list-item-padding;
     padding-left: $lumx-list-item-padding;
     color: lumx-theme-color-variant(dark, N);
@@ -15,10 +14,12 @@
     text-decoration: none;
 
     @if $size == huge {
+        align-items: flex-start;
         padding-top: $lumx-list-item-padding;
         padding-bottom: $lumx-list-item-padding;
     } @else {
         height: map-get($lumx-list-item-sizes, $size);
+        align-items: center;
     }
 }
 
