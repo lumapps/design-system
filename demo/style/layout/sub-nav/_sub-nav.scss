@@ -30,9 +30,9 @@ $sub-nav-width: 228px;
     }
 
     &__link {
-        @include lumx-list-item;
+        @include lumx-list-item(tiny);
         @include lumx-list-item-clickable;
-        @include lumx-list-item-content;
+        @include lumx-list-item-content();
 
         border-radius: $lumx-theme-border-radius;
 

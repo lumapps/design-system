@@ -115,6 +115,7 @@ function ListItemDirective() {
         restrict: 'E',
         scope: {
             isSelected: '=?lumxIsSelected',
+            size: '@?lumxSize',
         },
         template,
         transclude: {
