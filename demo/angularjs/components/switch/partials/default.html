@@ -1,21 +1,25 @@
-<div class="p++">
-    <lumx-switch lumx-theme="{{ mainBlock.theme }}" ng-model="vm.switches.model.unchecked">
+<div class="mb+">
+    <lumx-switch lumx-theme="{{ demoBlock.theme }}" ng-model="vm.switches.model.unchecked">
         <lumx-switch-label>Default</lumx-switch-label>
     </lumx-switch>
+</div>
 
-    <lumx-switch class="mt++" lumx-theme="{{ mainBlock.theme }}" ng-model="vm.switches.model.unchecked">
-        <lumx-switch-label>With helper</lumx-switch-label>
+<div class="mb+">
+    <lumx-switch lumx-theme="{{ demoBlock.theme }}" ng-model="vm.switches.model.unchecked">
+        <lumx-switch-label>
+            With helper
+        </lumx-switch-label>
+
         <lumx-switch-helper>
             Helper text
         </lumx-switch-helper>
     </lumx-switch>
-
-    <lumx-switch
-        class="mt++"
-        lumx-theme="{{ mainBlock.theme }}"
-        ng-model="vm.switches.model.unchecked"
-        ng-disabled="vm.switches.states.disabled"
-    >
-        <lumx-switch-label>Disabled</lumx-switch-label>
-    </lumx-switch>
 </div>
+
+<lumx-switch
+    lumx-theme="{{ demoBlock.theme }}"
+    ng-model="vm.switches.model.unchecked"
+    ng-disabled="vm.switches.states.disabled"
+>
+    <lumx-switch-label>Disabled</lumx-switch-label>
+</lumx-switch>
