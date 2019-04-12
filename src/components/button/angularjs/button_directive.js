@@ -116,11 +116,9 @@ function ButtonDirective() {
                 return;
             }
 
-            if (isDefaultEmphasis) {
-                el.removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
-                }).addClass(`${CSS_PREFIX}-button--theme-${theme}`);
-            }
+            el.removeClass((index, className) => {
+                return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
+            }).addClass(`${CSS_PREFIX}-button--theme-${theme}`);
         });
 
         if (!attrs.lumxVariant) {

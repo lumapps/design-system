@@ -133,6 +133,22 @@
     }
 }
 
+.#{$lumx-base-prefix}-button--emphasis-medium.#{$lumx-base-prefix}-button--theme-light {
+    @include lumx-button-color(emphasis-medium, dark);
+}
+
+.#{$lumx-base-prefix}-button--emphasis-medium.#{$lumx-base-prefix}-button--theme-dark {
+    @include lumx-button-color(emphasis-medium, light);
+}
+
+.#{$lumx-base-prefix}-button--emphasis-low.#{$lumx-base-prefix}-button--theme-light {
+    @include lumx-button-color(emphasis-low, dark);
+}
+
+.#{$lumx-base-prefix}-button--emphasis-low.#{$lumx-base-prefix}-button--theme-dark {
+    @include lumx-button-color(emphasis-low, light);
+}
+
 /* Toggle button
    ========================================================================== */
 
