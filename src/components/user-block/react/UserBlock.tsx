@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Theme, Themes } from 'LumX/components';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX, ORIENTATIONS } from 'LumX/core/react/constants';
 
 import { ThumbnailVariants } from 'LumX';
 import { Thumbnail } from 'LumX/components/thumbnail/react/Thumbnail';
@@ -20,15 +20,6 @@ enum Sizes {
     l = 'l',
 }
 type Size = Sizes;
-
-/**
- * Authorized Orientations.
- */
-enum Orientations {
-    horizontal = 'horizontal',
-    vertical = 'vertical',
-}
-type Orientation = Orientations;
 
 /////////////////////////////
 
@@ -47,7 +38,7 @@ interface IUserBlockProps extends IGenericProps {
     /* User name. */
     name?: string;
     /* Orientation. */
-    orientation?: Orientation;
+    orientation?: ORIENTATIONS;
     /* Size. */
     size?: Size;
     /* Theme. */
@@ -100,7 +91,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    orientation: Orientations.horizontal,
+    orientation: ORIENTATIONS.horizontal,
     size: Sizes.m,
     theme: Themes.light,
 };
@@ -111,9 +102,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return {React.ReactElement} The component.
  */
-const UserBlock: React.FC<UserBlockProps> = ({
+const UserBlock: React.FC<IUserBlockProps> = ({
     avatar,
-    size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     orientation = DEFAULT_PROPS.orientation,
     fields,
@@ -124,15 +114,18 @@ const UserBlock: React.FC<UserBlockProps> = ({
     className = '',
     simpleAction,
     multipleActions,
-}: UserBlockProps): React.ReactElement => {
+    size = DEFAULT_PROPS.size,
+}: IUserBlockProps): React.ReactElement => {
+    let componentSize: Sizes | undefined = size;
+
     // Special case - When using vertical orientation force the size to be Sizes.l.
-    if (orientation === Orientations.vertical) {
-        size = Sizes.l;
+    if (orientation === ORIENTATIONS.vertical) {
+        componentSize = Sizes.l;
     }
 
-    const showActions: boolean = orientation === Orientations.vertical;
+    const shouldDisplayActions: boolean = orientation === ORIENTATIONS.vertical;
 
-    const nameBlock: React.ReactNode = name ? (
+    const nameBlock: React.ReactNode = name && (
         <span
             className={`${CLASSNAME}__name`}
             onMouseEnter={onMouseEnter}
@@ -142,30 +135,30 @@ const UserBlock: React.FC<UserBlockProps> = ({
         >
             {name}
         </span>
-    ) : (
-        undefined
     );
 
-    const fieldsBlock: React.ReactNode =
-        fields && size !== Sizes.s ? (
-            <div className={`${CLASSNAME}__fields`}>
-                {fields.map((aField: string, idx: number) => (
-                    <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>
-                        {aField}
-                    </span>
-                ))}
-            </div>
-        ) : (
-            undefined
-        );
+    const fieldsBlock: React.ReactNode = fields && componentSize !== Sizes.s && (
+        <div className={`${CLASSNAME}__fields`}>
+            {fields.map((aField: string, idx: number) => (
+                <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>
+                    {aField}
+                </span>
+            ))}
+        </div>
+    );
 
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, size, theme }))}>
+        <div
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme }),
+            )}
+        >
             {avatar && (
                 <div className={`${CLASSNAME}__avatar`}>
                     <Thumbnail
                         image={avatar}
-                        size={size}
+                        size={componentSize}
                         variant={ThumbnailVariants.rounded}
                         onMouseLeave={onMouseLeave}
                         onMouseEnter={onMouseEnter}
@@ -181,8 +174,10 @@ const UserBlock: React.FC<UserBlockProps> = ({
                     {fieldsBlock}
                 </div>
             )}
-            {showActions && simpleAction && <div className={`${CLASSNAME}__action`}>{simpleAction}</div>}
-            {showActions && multipleActions && <div className={`${CLASSNAME}__actions`}>{multipleActions}</div>}
+            {shouldDisplayActions && simpleAction && <div className={`${CLASSNAME}__action`}>{simpleAction}</div>}
+            {shouldDisplayActions && multipleActions && (
+                <div className={`${CLASSNAME}__actions`}>{multipleActions}</div>
+            )}
         </div>
     );
 };
@@ -190,4 +185,4 @@ UserBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, Sizes, Theme, Themes, Orientations };
+export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, Sizes, Theme, Themes };
