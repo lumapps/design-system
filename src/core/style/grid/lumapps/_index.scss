@@ -131,11 +131,13 @@
 @for $i from 1 through 12 {
     [#{$lumx-base-prefix}-grid-container='row'] > [#{$lumx-base-prefix}-grid-item='#{$i}'] {
         max-width: #{(100 / 12) * $i + '%'};
-        flex: unquote('0 0 #{(100 / 12) * $i + ' % '}');
+        // prettier-ignore
+        flex: unquote('0 0 #{(100 / 12) * $i + '%'}');
     }
 
     [#{$lumx-base-prefix}-grid-container='column'] > [#{$lumx-base-prefix}-grid-item='#{$i}'] {
         max-height: #{(100 / 12) * $i + '%'};
-        flex: unquote('0 0 #{(100 / 12) * $i + ' % '}');
+        // prettier-ignore
+        flex: unquote('0 0 #{(100 / 12) * $i + '%'}');
     }
 }
