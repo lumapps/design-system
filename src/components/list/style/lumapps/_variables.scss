@@ -1,3 +1,8 @@
-$lumx-list-item-height: 36px;
-$lumx-list-item-horizontal-padding: $lumx-spacing-unit * 2;
+$lumx-list-item-padding: $lumx-spacing-unit * 2;
 $lumx-list-item-selected-color: primary;
+$lumx-list-item-sizes: (
+    tiny: 36px,
+    regular: 52px,
+    big: 72px,
+    huge: auto
+);

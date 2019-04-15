@@ -6,30 +6,40 @@
     @include lumx-list;
 }
 
-/* Item
+/* Item sizes
+   ========================================================================== */
+
+@each $key, $size in $lumx-list-item-sizes {
+    .#{$lumx-base-prefix}-list-item--size-#{$key} {
+        @include lumx-list-item($key);
+
+        .#{$lumx-base-prefix}-list-item__before {
+            @include lumx-list-item-before($key);
+        }
+
+        .#{$lumx-base-prefix}-list-item__after {
+            @include lumx-list-item-after($key);
+        }
+    }
+}
+
+/* Item content
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item__content {
+    @include lumx-list-item-content;
+}
+
+/* Item states
    ========================================================================== */
 
 .#{$lumx-base-prefix}-list-item {
-    @include lumx-list-item;
-
-    .#{$lumx-base-prefix}-list--is-clickable & {
+    &--is-clickable {
         @include lumx-list-item-clickable;
     }
 
     &--is-selected {
         @include lumx-list-item-selected;
-    }
-
-    &__before {
-        @include lumx-list-item-before;
-    }
-
-    &__content {
-        @include lumx-list-item-content;
-    }
-
-    &__after {
-        @include lumx-list-item-after;
     }
 }
 

@@ -1,6 +1,11 @@
 <li
     class="lumx-list-item"
-    ng-class="{ 'lumx-list-item--is-selected': lumx.isSelected }"
+    ng-class="{ 'lumx-list-item--is-clickable': lumx.parentController.isClickable,
+                'lumx-list-item--is-selected': lumx.isSelected,
+                'lumx-list-item--size-tiny': lumx.size === 'tiny',
+                'lumx-list-item--size-regular': !lumx.size || lumx.size === 'regular',
+                'lumx-list-item--size-big': lumx.size === 'big',
+                'lumx-list-item--size-huge': lumx.size === 'huge' }"
     tabindex="{{ lumx.parentController.isClickable ? 0 : -1 }}"
 >
     <div
