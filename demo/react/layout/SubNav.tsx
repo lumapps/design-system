@@ -61,6 +61,7 @@ const NAV_ITEMS: string[] = [
     'Thumbnail',
     'Toolbar',
     'Tooltip',
+    'User Block',
 ];
 
 /////////////////////////////
