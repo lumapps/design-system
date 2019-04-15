@@ -102,7 +102,6 @@ export {
     CLASSNAME as UserBlockClassName,
     UserBlock,
     UserBlockProps,
-    Orientations as UserBlockOrientations,
     Sizes as UserBlockSize,
     Theme as UserBlockTheme,
     Themes as UserBlockThemes,

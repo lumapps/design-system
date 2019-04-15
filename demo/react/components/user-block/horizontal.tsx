@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { UserBlock, UserBlockOrientations, UserBlockSize, UserBlockTheme } from 'LumX';
+import { Button, ButtonEmphasises, ButtonSizes, ButtonThemes, UserBlock, UserBlockSize, UserBlockTheme } from 'LumX';
+import { ORIENTATIONS } from 'LumX/core/react/constants';
 
 /////////////////////////////
 
@@ -22,6 +23,25 @@ const fakeUsers: IFakeUser[] = [
     { name: 'Nicole G. Haider', fields: ['Lens grinder', 'Poznań'] },
 ];
 
+/**
+ * This action button should not be rendered in horizontal layout.
+ *
+ * @param {ButtonThemes} theme Theme to be used
+ * @return {React.ReactElement} an action button
+ */
+const createSimpleAction: React.FC<ButtonThemes> = (
+    theme: ButtonThemes,
+): any => ( // tslint:disable-line
+    <Button
+        emphasis={ButtonEmphasises.medium}
+        color={theme === ButtonThemes.dark ? 'light' : undefined}
+        size={ButtonSizes.s}
+        theme={theme}
+    >
+        Follow
+    </Button>
+);
+
 /////////////////////////////
 
 /**
@@ -40,8 +60,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         name={aUser.name}
                         fields={aUser.fields}
                         avatar={`http://i.pravatar.cc/13${idx}`}
-                        orientation={UserBlockOrientations.horizontal}
+                        orientation={ORIENTATIONS.horizontal}
                         size={UserBlockSize.s}
+                        simpleAction={createSimpleAction(theme)}
                     />
                 </div>
             ))}
@@ -55,7 +76,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         name={aUser.name}
                         fields={aUser.fields}
                         avatar={`http://i.pravatar.cc/13${idx}`}
-                        orientation={UserBlockOrientations.horizontal}
+                        orientation={ORIENTATIONS.horizontal}
                         size={UserBlockSize.m}
                     />
                 </div>
@@ -70,7 +91,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         name={aUser.name}
                         fields={aUser.fields}
                         avatar={`http://i.pravatar.cc/13${idx}`}
-                        orientation={UserBlockOrientations.horizontal}
+                        orientation={ORIENTATIONS.horizontal}
                         size={UserBlockSize.l}
                     />
                 </div>

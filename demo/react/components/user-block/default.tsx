@@ -1,15 +1,8 @@
 import React, { Fragment } from 'react';
 
-import {
-    Button,
-    ButtonEmphasises,
-    ButtonSizes,
-    ButtonThemes,
-    IconButton,
-    UserBlock,
-    UserBlockOrientations,
-    UserBlockTheme,
-} from 'LumX';
+import { ORIENTATIONS } from 'LumX/core/react/constants';
+
+import { Button, ButtonEmphasises, ButtonSizes, ButtonThemes, IconButton, UserBlock, UserBlockTheme } from 'LumX';
 
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from 'LumX/icons';
 
@@ -72,7 +65,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             name="Emmitt O. Lum"
             fields={demoFields}
             avatar="http://i.pravatar.cc/128"
-            orientation={UserBlockOrientations.vertical}
+            orientation={ORIENTATIONS.vertical}
             onMouseEnter={(): void => console.log('Mouse entered')}
             onMouseLeave={(): void => console.log('Mouse left')}
             onClick={(): void => console.log('UserBlock clicked')}
