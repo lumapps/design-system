@@ -30,6 +30,13 @@ const TECH_PREFIX = {
     angularjs: 'angularjs',
     react: 'react',
 };
+const COMMON_DEPENDENCIES = ['focus-visible', 'lodash', 'sass-mq'];
+
+const TECH_DEPENDENCIES = {
+    [TECH_PREFIX.angularjs]: ['angular', 'jquery', ...COMMON_DEPENDENCIES],
+    [TECH_PREFIX.react]: ['classnames', 'react', 'react-dom', 'uuid', ...COMMON_DEPENDENCIES],
+};
+
 const TECH_DESCRIPTIONS = {
     angularjs: 'The official LumApps Design System (LumX) for AngularJS applications',
     default: 'The official LumApps Design System (LumX)',
@@ -226,6 +233,7 @@ module.exports = {
     ROOT_PATH,
     SRC_PATH,
     STYLES_PATH,
+    TECH_DEPENDENCIES,
     TECH_DESCRIPTIONS,
     TECH_KEYWORDS,
     TECH_NAMES,
