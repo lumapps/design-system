@@ -1,0 +1,41 @@
+<demo-grid>
+    <lumx-user-block
+        lumx-avatar="http://i.pravatar.cc/128"
+        lumx-name="Matthias Manoukian"
+        lumx-fields="vm.fields"
+        lumx-on-click="vm.onClick()"
+        lumx-on-mouse-enter="vm.onMouseEnter()"
+        lumx-on-mouse-leave="vm.onMouseLeave()"
+        lumx-orientation="vertical"
+        lumx-size="l"
+        lumx-theme="{{ demoBlock.theme }}"
+    >
+        <lumx-user-block-action>
+            <lumx-button lumx-emphasis="medium" lumx-size="s" lumx-theme="{{ demoBlock.theme }}">Follow</lumx-button>
+        </lumx-user-block-action>
+
+        <lumx-user-block-actions>
+            <div lumx-grid-container="row" lumx-grid-v-align="center" lumx-grid-wrap>
+                <lumx-button lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+                    <lumx-icon lumx-path="{{ vm.icons.mdiPhone }}"></lumx-icon>
+                </lumx-button>
+
+                <lumx-button lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+                    <lumx-icon lumx-path="{{ vm.icons.mdiCellphone }}"></lumx-icon>
+                </lumx-button>
+
+                <lumx-button lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+                    <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}"></lumx-icon>
+                </lumx-button>
+
+                <lumx-button lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+                    <lumx-icon lumx-path="{{ vm.icons.mdiGoogleHangouts }}"></lumx-icon>
+                </lumx-button>
+
+                <lumx-button lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+                    <lumx-icon lumx-path="{{ vm.icons.mdiSlack }}"></lumx-icon>
+                </lumx-button>
+            </div>
+        </lumx-user-block-actions>
+    </lumx-user-block>
+</demo-grid>
