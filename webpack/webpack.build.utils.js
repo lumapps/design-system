@@ -228,7 +228,7 @@ function getBuildConfig({ config, tech, moduleType }) {
                     dir: `${distTechPath}/scss`,
                     rules: [
                         {
-                            search: /'\.\/(base|elevation|grid|input|size|spacing|state|theme|typography)/g,
+                            search: /'\.\/(base|elevation|grid|input|link|size|spacing|state|theme|typography)/g,
                             replace: "'./core/$1",
                         },
                         {
