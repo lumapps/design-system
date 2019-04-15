@@ -4,6 +4,7 @@ const fs = require('fs');
 const readPkg = require('read-pkg');
 
 const has = require('lodash/has');
+const pick = require('lodash/pick');
 
 const merge = require('webpack-merge');
 
@@ -24,6 +25,7 @@ const {
     DIST_PATH,
     EXAMPLES_PATH,
     ROOT_PATH,
+    TECH_DEPENDENCIES,
     TECH_DESCRIPTIONS,
     TECH_KEYWORDS,
     TECH_NAMES,
@@ -42,12 +44,15 @@ function getPackageJson({ tech }) {
         throw new Error(`Unknown tech "${tech}" for generating package.json file`);
     }
 
-    const { author, bugs, contributors, engines, homepage, license, repository, version } = readPkg.sync(ROOT_PATH);
+    const { author, bugs, dependencies, contributors, engines, homepage, license, repository, version } = readPkg.sync(
+        ROOT_PATH,
+    );
 
     const packageJson = {
         author,
         bugs,
         contributors,
+        dependencies: pick(dependencies, TECH_DEPENDENCIES[tech]),
         description: has(TECH_DESCRIPTIONS, tech) ? TECH_DESCRIPTIONS[tech] : TECH_DESCRIPTIONS.default,
         devDependencies: { 'http-server': 'latest' },
         engines,
