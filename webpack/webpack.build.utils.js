@@ -59,6 +59,7 @@ function getPackageJson({ tech }) {
         homepage,
         keywords: TECH_KEYWORDS.default.concat(has(TECH_KEYWORDS, tech) ? TECH_KEYWORDS[tech] : []),
         license,
+        main: `lumx.${tech}.js`,
         name: `@lumx/${tech}`,
         private: false,
         repository,
