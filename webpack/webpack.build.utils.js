@@ -235,6 +235,10 @@ function getBuildConfig({ config, tech, moduleType }) {
                             search: /'\.\.\/\.\.\/components/g,
                             replace: "'./components",
                         },
+                        {
+                            search: /\/style/g,
+                            replace: '',
+                        },
                     ],
                 },
             ]),
