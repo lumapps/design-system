@@ -2,7 +2,7 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { Orientations, Theme, Themes } from 'LumX/components';
+import { Orientation, Orientations, Theme, Themes } from 'LumX/components';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
@@ -38,7 +38,7 @@ interface IUserBlockProps extends IGenericProps {
     /* User name. */
     name?: string;
     /* Orientation. */
-    orientation?: Orientations;
+    orientation?: Orientation;
     /* Size. */
     size?: Size;
     /* Theme. */
