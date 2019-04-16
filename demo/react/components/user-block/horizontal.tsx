@@ -1,7 +1,8 @@
 import React from 'react';
 
+import { Orientations } from 'LumX/components';
+
 import { Button, ButtonEmphasises, ButtonSizes, ButtonThemes, UserBlock, UserBlockSize, UserBlockTheme } from 'LumX';
-import { ORIENTATIONS } from 'LumX/core/react/constants';
 
 /////////////////////////////
 
@@ -60,7 +61,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         name={aUser.name}
                         fields={aUser.fields}
                         avatar={`http://i.pravatar.cc/13${idx}`}
-                        orientation={ORIENTATIONS.horizontal}
+                        orientation={Orientations.horizontal}
                         size={UserBlockSize.s}
                         simpleAction={createSimpleAction(theme)}
                     />
@@ -76,7 +77,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         name={aUser.name}
                         fields={aUser.fields}
                         avatar={`http://i.pravatar.cc/13${idx}`}
-                        orientation={ORIENTATIONS.horizontal}
+                        orientation={Orientations.horizontal}
                         size={UserBlockSize.m}
                     />
                 </div>
@@ -91,7 +92,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         name={aUser.name}
                         fields={aUser.fields}
                         avatar={`http://i.pravatar.cc/13${idx}`}
-                        orientation={ORIENTATIONS.horizontal}
+                        orientation={Orientations.horizontal}
                         size={UserBlockSize.l}
                     />
                 </div>
