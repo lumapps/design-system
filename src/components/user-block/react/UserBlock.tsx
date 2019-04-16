@@ -2,9 +2,9 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX/components';
+import { Orientations, Theme, Themes } from 'LumX/components';
 
-import { COMPONENT_PREFIX, ORIENTATIONS } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { ThumbnailVariants } from 'LumX';
 import { Thumbnail } from 'LumX/components/thumbnail/react/Thumbnail';
@@ -38,7 +38,7 @@ interface IUserBlockProps extends IGenericProps {
     /* User name. */
     name?: string;
     /* Orientation. */
-    orientation?: ORIENTATIONS;
+    orientation?: Orientations;
     /* Size. */
     size?: Size;
     /* Theme. */
@@ -91,7 +91,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    orientation: ORIENTATIONS.horizontal,
+    orientation: Orientations.horizontal,
     size: Sizes.m,
     theme: Themes.light,
 };
@@ -119,11 +119,11 @@ const UserBlock: React.FC<IUserBlockProps> = ({
     let componentSize: Sizes | undefined = size;
 
     // Special case - When using vertical orientation force the size to be Sizes.l.
-    if (orientation === ORIENTATIONS.vertical) {
+    if (orientation === Orientations.vertical) {
         componentSize = Sizes.l;
     }
 
-    const shouldDisplayActions: boolean = orientation === ORIENTATIONS.vertical;
+    const shouldDisplayActions: boolean = orientation === Orientations.vertical;
 
     const nameBlock: React.ReactNode = name && (
         <span

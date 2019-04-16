@@ -13,14 +13,6 @@
  */
 const COMPONENT_PREFIX: string = '';
 
-/**
- * Defined some convenient orientation constants
- */
-const enum ORIENTATIONS {
-    horizontal = 'horizontal',
-    vertical = 'vertical',
-}
-
 /////////////////////////////
 
-export { COMPONENT_PREFIX, ORIENTATIONS };
+export { COMPONENT_PREFIX };
