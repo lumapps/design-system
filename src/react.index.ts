@@ -18,6 +18,15 @@ export {
     Variants as ButtonVariants,
 } from './components/button/react/Button';
 export {
+    CLASSNAME as ChipClassName,
+    Chip,
+    ChipProps,
+    Size as ChipSize,
+    Sizes as ChipSizes,
+    Theme as ChipTheme,
+    Themes as ChipThemes,
+} from './components/chip/react/Chip';
+export {
     CLASSNAME as IconButtonClassName,
     Color as IconButtonColor,
     Colors as IconButtonColors,
