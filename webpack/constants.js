@@ -19,6 +19,7 @@ const EXAMPLES_PATH = `${ROOT_PATH}/examples`;
 const NODE_MODULES_PATH = `${ROOT_PATH}/node_modules`;
 const SRC_PATH = `${ROOT_PATH}/src`;
 
+const FOUNDATIONS_PATH = `${SRC_PATH}/foundations`;
 const COMPONENTS_PATH = `${SRC_PATH}/components`;
 const CORE_PATH = `${SRC_PATH}/core`;
 const ICONS_PATH = `${SRC_PATH}/icons`;
@@ -228,6 +229,7 @@ module.exports = {
     DEMO_PATH,
     DIST_PATH,
     EXAMPLES_PATH,
+    FOUNDATIONS_PATH,
     ICONS_PATH,
     NODE_MODULES_PATH,
     ROOT_PATH,
