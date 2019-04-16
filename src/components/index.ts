@@ -40,6 +40,12 @@ enum Sizes {
 }
 type Size = Sizes;
 
+const enum Orientations {
+    horizontal = 'horizontal',
+    vertical = 'vertical',
+}
+type Orientation = Orientations;
+
 /////////////////////////////
 
-export { ComplexPropDefault, Color, Colors, Theme, Themes, Size, Sizes };
+export { ComplexPropDefault, Color, Colors, Theme, Themes, Size, Sizes, Orientations, Orientation };

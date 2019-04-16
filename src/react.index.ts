@@ -106,3 +106,12 @@ export {
     Sizes as ThumbnailSizes,
     Variants as ThumbnailVariants,
 } from './components/thumbnail/react/Thumbnail';
+
+export {
+    CLASSNAME as UserBlockClassName,
+    UserBlock,
+    UserBlockProps,
+    Sizes as UserBlockSize,
+    Theme as UserBlockTheme,
+    Themes as UserBlockThemes,
+} from './components/user-block/react/UserBlock';
