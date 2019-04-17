@@ -1,17 +1,8 @@
-<div class="main-header">
-    <div lumx-grid-container="row">
-        <div lumx-grid-item>
-            <span class="lumx-typography-overline lumx-theme-color-dark-L3">{{ mainHeader.category }}</span>
-        </div>
+<div class="main-header" lumx-grid-container="row" lumx-grid-h-align="center">
+    <span class="lumx-typography-overline lumx-theme-color-dark-L3" lumx-grid-item>{{ mainHeader.category }}</span>
 
-        <div>
-            <lumx-button lumx-emphasis="low" lumx-size="s">
-                <lumx-icon lumx-path="{{ mainHeader.icons.mdiReact }}"></lumx-icon>
-                <span>View React version</span>
-            </lumx-button>
-        </div>
-    </div>
-
-    <h1 class="lumx-typography-display1 mt+">{{ mainHeader.title }}</h1>
-    <div class="lumx-typography-subtitle2 mt+" ng-transclude></div>
+    <lumx-button lumx-emphasis="low" lumx-size="s">
+        <lumx-icon lumx-path="{{ mainHeader.icons.mdiReact }}"></lumx-icon>
+        <span>View React version</span>
+    </lumx-button>
 </div>

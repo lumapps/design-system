@@ -17,18 +17,18 @@ function demoBlockController() {
     /////////////////////////////
 
     /**
+     * The component name.
+     *
+     * @type {string}
+     */
+    demoBlock.component = '';
+
+    /**
      * Wether to display the component in dark theme or not.
      *
      * @type {boolean}
      */
     demoBlock.hasDarkTheme = false;
-
-    /**
-     * Wheter the block has a description or not.
-     *
-     * @type {boolean}
-     */
-    demoBlock.hasDescription = false;
 
     /**
      * Wheter the block displays a theme switcher or not.
@@ -52,6 +52,13 @@ function demoBlockController() {
      * @type {boolean}
      */
     demoBlock.isCodeOpen = false;
+
+    /**
+     * The component partial to display.
+     *
+     * @type {string}
+     */
+    demoBlock.partial = '';
 
     /**
      * The component theme.
@@ -95,35 +102,17 @@ function demoBlockController() {
 function demoBlockDirective() {
     'ngInject';
 
-    function link(scope, el, attrs, ctrl, transclude) {
-        transclude((clone) => {
-            if (clone.length > 0) {
-                ctrl.hasDescription = true;
-            }
+    function link(scope, el, attrs, ctrl) {
+        attrs.$observe('component', (component) => {
+            ctrl.component = component;
         });
 
-        attrs.$observe('jsPath', (jsPath) => {
-            ctrl.jsPath = jsPath;
-        });
-
-        attrs.$observe('language', (language) => {
-            ctrl.language = language;
-        });
-
-        attrs.$observe('path', (path) => {
-            ctrl.path = path;
+        attrs.$observe('partial', (partial) => {
+            ctrl.partial = partial;
         });
 
         attrs.$observe('hasThemeSwitcher', (hasThemeSwitcher) => {
             ctrl.hasThemeSwitcher = scope.$eval(hasThemeSwitcher);
-        });
-
-        attrs.$observe('title', (title) => {
-            ctrl.title = title;
-        });
-
-        attrs.$observe('subtitle', (subtitle) => {
-            ctrl.subtitle = subtitle;
         });
     }
 
