@@ -20,15 +20,13 @@ function ImageBlockController() {
      * @return {Object} The image style properties.
      */
     function getImageStyle() {
-        const imageStyle = {
-            backgroundImage: `url(${lumx.image})`,
-        };
-
-        if (!lumx.aspectRatio || lumx.aspectRatio === 'original') {
-            imageStyle.height = lumx.imageHeight;
+        if (angular.isUndefined(lumx.aspectRatio) || lumx.aspectRatio === 'original') {
+            return {};
         }
 
-        return imageStyle;
+        return {
+            backgroundImage: `url(${lumx.image})`,
+        };
     }
 
     /////////////////////////////
@@ -48,9 +46,9 @@ function ImageBlockDirective() {
         scope: {
             aspectRatio: '@?lumxAspectRatio',
             captionPosition: '@?lumxCaptionPosition',
+            captionStyle: '=?lumxCaptionStyle',
             description: '@?lumxDescription',
             image: '@lumxImage',
-            imageHeight: '@?lumxImageHeight',
             tags: '=?lumxTags',
             theme: '@?lumxTheme',
             title: '@?lumxTitle',
