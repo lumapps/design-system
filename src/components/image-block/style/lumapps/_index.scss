@@ -8,21 +8,24 @@
     position: relative;
 
     &__image {
-        background-position: center;
-        background-repeat: no-repeat;
-
         #{$self}--format-original & {
-            background-size: contain;
+            img {
+                display: block;
+                max-width: 100%;
+                max-height: 100%;
+            }
         }
 
         #{$self}--format-crop & {
+            background-position: center;
+            background-repeat: no-repeat;
             background-size: cover;
         }
     }
 
     &__wrapper {
         #{$self}--caption-position-below & {
-            margin-top: $lumx-spacing-unit;
+            padding-top: $lumx-spacing-unit * 2;
         }
 
         #{$self}--caption-position-over & {

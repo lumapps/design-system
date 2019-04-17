@@ -9,9 +9,11 @@
                 'lumx-image-block--theme-light': !lumx.theme || lumx.theme === 'light',
                 'lumx-image-block--theme-dark': lumx.theme === 'dark' }"
 >
-    <div class="lumx-image-block__image" ng-style="lumx.getImageStyle()"></div>
+    <div class="lumx-image-block__image" ng-style="lumx.getImageStyle()">
+        <img ng-src="{{ lumx.image }}" ng-if="!lumx.aspectRatio || lumx.aspectRatio === 'original'" />
+    </div>
 
-    <div class="lumx-image-block__wrapper">
+    <div class="lumx-image-block__wrapper" ng-style="lumx.captionStyle">
         <div class="lumx-image-block__caption" ng-if="lumx.title || lumx.description">
             <span class="lumx-image-block__title" ng-if="lumx.title">{{ lumx.title }}</span>
             <span class="lumx-image-block__description" ng-if="lumx.description">
