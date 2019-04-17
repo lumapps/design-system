@@ -39,10 +39,8 @@ function mainHeaderDirective() {
         restrict: 'E',
         scope: {
             category: '@',
-            title: '@',
         },
         template,
-        transclude: true,
     };
 }
 
