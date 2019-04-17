@@ -14,14 +14,16 @@ import { DEFAULT_THEME, THEMES } from '../constants';
  * @constant
  * @readonly
  */
-const DEPENDENCIES = [MODULE_NAME, 'ui.router', 'hljs'];
+const DEPENDENCIES = [MODULE_NAME, 'ui.router', 'hljs', 'hc.marked'];
 
 /////////////////////////////
 
-function AppDefaultConfig($locationProvider, $stateProvider) {
+function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
     $locationProvider.html5Mode({
         enabled: true,
     });
+
+    markedProvider.setOptions({ breaks: true, gfm: true });
 
     $stateProvider
         .state({
@@ -262,7 +264,7 @@ function AppDefaultConfig($locationProvider, $stateProvider) {
         });
 }
 
-AppDefaultConfig.$inject = ['$locationProvider', '$stateProvider'];
+AppDefaultConfig.$inject = ['$locationProvider', '$stateProvider', 'markedProvider'];
 
 function AppDefaultRun($rootScope, Theme) {
     $rootScope.Theme = Theme;
@@ -310,6 +312,7 @@ angular
 require('./layout/demo/demo-block_directive.js');
 require('./layout/demo/demo-grid_directive.js');
 require('./layout/main/main-header_directive.js');
+require('./layout/main/main-content_directive.js');
 require('./layout/sub-nav/sub-nav_controller.js');
 
 require('./components/button/controller.js');

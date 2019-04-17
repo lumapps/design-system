@@ -1569,6 +1569,13 @@ angular-highlightjs@^0.7.1:
     angular "^1.0.1"
     highlight.js ">7.0.0"
 
+angular-marked@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/angular-marked/-/angular-marked-1.2.2.tgz#031f81015dad5fb01adf8d48922c52feb3588de5"
+  integrity sha1-Ax+BAV2tX7Aa341IkixS/rNYjeU=
+  dependencies:
+    marked "^0.3.3"
+
 angular@^1.0.1, angular@^1.7.8:
   version "1.7.8"
   resolved "https://registry.yarnpkg.com/angular/-/angular-1.7.8.tgz#b77ede272ce1b261e3be30c1451a0b346905a3c9"
@@ -8254,6 +8261,11 @@ markdown-table@^1.1.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/markdown-table/-/markdown-table-1.1.2.tgz#c78db948fa879903a41bce522e3b96f801c63786"
   integrity sha512-NcWuJFHDA8V3wkDgR/j4+gZx+YQwstPgfQDV8ndUeWWzta3dnDTBxpVzqS9lkmJAuV5YX35lmyojl6HO5JXAgw==
+
+marked@^0.3.3:
+  version "0.3.19"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-0.3.19.tgz#5d47f709c4c9fc3c216b6d46127280f40b39d790"
+  integrity sha512-ea2eGWOqNxPcXv8dyERdSr/6FmzvWwzjMxpfGB/sbMccXoct+xY+YukPD+QTUZwyvK7BZwcr4m21WBOW41pAkg==
 
 matcher@^1.0.0:
   version "1.1.1"

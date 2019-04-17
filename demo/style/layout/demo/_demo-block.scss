@@ -3,27 +3,8 @@
    ========================================================================== */
 
 .demo-block {
-    margin-bottom: $lumx-spacing-unit * 4;
-
-    &:last-child {
-        margin-bottom: 0;
-    }
-
-    &__title {
-        @include lumx-typography(headline);
-
-        margin-bottom: $lumx-spacing-unit * 2;
-    }
-
-    &__subtitle {
-        @include lumx-typography(subtitle2);
-    }
-
-    &__demo {
-        margin-top: $lumx-spacing-unit * 2;
-        border: 1px solid lumx-theme-color-variant(dark, L4);
-        border-radius: $lumx-theme-border-radius;
-    }
+    border: 1px solid lumx-theme-color-variant(dark, L4);
+    border-radius: $lumx-theme-border-radius;
 
     &__content {
         padding: $lumx-spacing-unit * 3;
