@@ -2,6 +2,9 @@ import React, { CSSProperties } from 'react';
 
 import classNames from 'classnames';
 
+import isObject from 'lodash/isObject';
+
+import { Chip, ChipSizes } from 'LumX';
 import { Theme, Themes } from 'LumX/components';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
@@ -36,12 +39,22 @@ interface IImageBlockProps extends IGenericProps {
     aspectRatio?: AspectRatio;
     /** Caption position. */
     captionPosition?: CaptionPosition;
-    /* Theme. */
-    theme?: Theme;
+    /** The style to apply to the caption section. */
+    captionStyle?: CSSProperties;
+    /** The image description. Can be either a string, or sanitized html. */
+    description?:
+        | string
+        | {
+              __html: string;
+          };
     /* Image url. */
     image: string;
-    /** The height of the image to set. */
-    imageHeight?: number | string;
+    /** A list of tags, those tags will be displayed in a chip component. */
+    tags?: string[];
+    /* Theme. */
+    theme?: Theme;
+    /** The image title to display in the caption. */
+    title?: string;
 }
 type ImageBlockProps = IImageBlockProps;
 
@@ -84,10 +97,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    aspectRatio: AspectRatios.horizontal,
+    aspectRatio: AspectRatios.original,
     captionPosition: CaptionPositions.below,
-    imageHeight: 'auto',
+    captionStyle: {},
+    description: undefined,
+    tags: undefined,
     theme: Themes.light,
+    title: undefined,
 };
 
 /////////////////////////////
@@ -101,14 +117,16 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     className = '',
     captionPosition = DEFAULT_PROPS.captionPosition,
+    captionStyle = DEFAULT_PROPS.captionStyle,
+    description = DEFAULT_PROPS.description,
     image,
-    imageHeight = DEFAULT_PROPS.imageHeight,
+    tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
+    title = DEFAULT_PROPS.title,
     ...props
 }: ImageBlockProps): React.ReactElement => {
     const style: CSSProperties = {
-        backgroundImage: `url(${image})`,
-        height: aspectRatio === 'original' ? imageHeight : undefined,
+        backgroundImage: aspectRatio === AspectRatios.original ? undefined : `url(${image})`,
     };
 
     return (
@@ -123,7 +141,34 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
             )}
             {...props}
         >
-            <div className={`${CLASSNAME}__image`} style={style} />
+            <div className={`${CLASSNAME}__image`} style={style}>
+                {aspectRatio === AspectRatios.original && <img src={image} alt={title} />}
+            </div>
+            {(title || description || tags) && (
+                <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
+                    {(title || description) && (
+                        <div className={`${CLASSNAME}__caption`}>
+                            {title && <span className={`${CLASSNAME}__title`}>{title}</span>}
+                            {isObject(description) && description.__html ? (
+                                <span dangerouslySetInnerHTML={description} className={`${CLASSNAME}__description`} />
+                            ) : (
+                                <span className={`${CLASSNAME}__description`}>{description}</span>
+                            )}
+                        </div>
+                    )}
+                    {tags && tags.length > 0 && (
+                        <div className={`${CLASSNAME}__tags`}>
+                            {tags.map(
+                                (tag: string, index: number): JSX.Element => (
+                                    <div key={index} className={`${CLASSNAME}__tag`}>
+                                        <Chip LabelComponent={tag} size={ChipSizes.s} theme={theme} />
+                                    </div>
+                                ),
+                            )}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 };
