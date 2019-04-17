@@ -1,4 +1,10 @@
-<div class="lumx-slideshow" tabindex="0">
+<div
+    class="lumx-slideshow"
+    ng-class="{ 'lumx-slideshow--fill-height': lumx.fillHeight,
+                'lumx-slideshow--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-slideshow--theme-dark': lumx.theme === 'dark' }"
+    tabindex="0"
+>
     <div class="lumx-slideshow__slides">
         <div class="lumx-slideshow__wrapper" ng-style="lumx.wrapperStyle" ng-transclude></div>
     </div>

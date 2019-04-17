@@ -7,6 +7,12 @@
 
     position: relative;
 
+    &--fill-height {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
+
     &__image {
         #{$self}--format-original & {
             img {
@@ -21,9 +27,36 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
+        #{$self}--fill-height & {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
     }
 
     &__wrapper {
+        display: flex;
+        flex-direction: column;
+
+        #{$self}--fill-height & {
+            flex-shrink: 0;
+        }
+
+        #{$self}--caption-align-left & {
+            align-items: flex-start;
+        }
+
+        #{$self}--caption-align-center & {
+            align-items: center;
+        }
+
+        #{$self}--caption-align-right & {
+            align-items: flex-end;
+        }
+
         #{$self}--caption-position-below & {
             padding-top: $lumx-spacing-unit * 2;
         }

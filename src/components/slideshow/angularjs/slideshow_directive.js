@@ -273,20 +273,6 @@ function SlideshowDirective() {
             }).addClass(`${CSS_PREFIX}-slideshow--group-by-${groupBy}`);
         });
 
-        if (!attrs.lumxTheme) {
-            el.addClass(`${CSS_PREFIX}-slideshow--theme-${defaultProps.theme}`);
-        }
-
-        attrs.$observe('lumxTheme', (theme) => {
-            if (!theme) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*slideshow--theme-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-slideshow--theme-${theme}`);
-        });
-
         attrs.$observe('lumxAutoPlay', (autoPlay) => {
             if (scope.$eval(autoPlay)) {
                 ctrl.startAutoPlay();
@@ -307,6 +293,7 @@ function SlideshowDirective() {
             activeIndex: '=?lumxActiveIndex',
             autoPlay: '=?lumxAutoPlay',
             autoPlayInterval: '@?lumxAutoPlayInterval',
+            fillHeight: '=?lumxFillHeight',
             groupBy: '=?lumxGroupBy',
             hasControls: '=?lumxHasControls',
             theme: '@?lumxTheme',

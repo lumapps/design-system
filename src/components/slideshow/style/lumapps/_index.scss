@@ -3,20 +3,53 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-slideshow {
+    $self: &;
+
     outline: none;
+
+    &--fill-height {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+    }
 
     &__slides {
         overflow: hidden;
+
+        #{$self}--fill-height & {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+        }
     }
 
     &__wrapper {
         display: flex;
         transition: transform $lumx-slideshow-transition-duration;
+
+        #{$self}--fill-height & {
+            min-height: 0;
+            flex: 1;
+        }
+    }
+
+    &__controls {
+        margin-top: $lumx-spacing-unit * 2;
+
+        #{$self}--fill-height & {
+            flex-shrink: 0;
+        }
     }
 }
 
 /* Slideshow item
    ========================================================================== */
+
+.#{$lumx-base-prefix}-slideshow-item {
+    .#{$lumx-base-prefix}-slideshow--fill-height & {
+        display: flex;
+    }
+}
 
 @for $i from 1 through 12 {
     .#{$lumx-base-prefix}-slideshow--group-by-#{$i} .#{$lumx-base-prefix}-slideshow-item {

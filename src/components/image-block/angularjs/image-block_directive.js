@@ -45,9 +45,11 @@ function ImageBlockDirective() {
         restrict: 'E',
         scope: {
             aspectRatio: '@?lumxAspectRatio',
+            captionAlign: '@?lumxCaptionAlign',
             captionPosition: '@?lumxCaptionPosition',
             captionStyle: '=?lumxCaptionStyle',
             description: '@?lumxDescription',
+            fillHeight: '=?lumxFillHeight',
             image: '@lumxImage',
             tags: '=?lumxTags',
             theme: '@?lumxTheme',
