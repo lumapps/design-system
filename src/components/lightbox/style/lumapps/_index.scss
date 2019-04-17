@@ -3,8 +3,6 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-lightbox {
-    $self: &;
-
     position: fixed;
     top: 0;
     right: 0;
@@ -29,11 +27,12 @@
 
     &__wrapper {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        max-width: 80%;
-        max-height: 80%;
-        transform: translateX(-50%) translateY(-50%);
+        top: map-get($lumx-sizes, l);
+        right: map-get($lumx-sizes, l);
+        bottom: map-get($lumx-sizes, l);
+        left: map-get($lumx-sizes, l);
+        display: flex;
+        flex-direction: column;
     }
 }
 
