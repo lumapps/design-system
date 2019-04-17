@@ -26,6 +26,16 @@ type AspectRatio = AspectRatios;
 /**
  * Authorized variants.
  */
+const enum CaptionAlignments {
+    center = 'center',
+    left = 'left',
+    right = 'right',
+}
+type CaptionAlignment = CaptionAlignments;
+
+/**
+ * Authorized variants.
+ */
 enum CaptionPositions {
     below = 'below',
     over = 'over',
@@ -37,6 +47,8 @@ type CaptionPosition = CaptionPositions;
  */
 interface IImageBlockProps extends IGenericProps {
     aspectRatio?: AspectRatio;
+    /** The caption wrapper alignment. */
+    captionAlign?: CaptionAlignment;
     /** Caption position. */
     captionPosition?: CaptionPosition;
     /** The style to apply to the caption section. */
@@ -47,6 +59,8 @@ interface IImageBlockProps extends IGenericProps {
         | {
               __html: string;
           };
+    /* Whether the image has to fill its container's height. */
+    hasFilledHeight?: boolean;
     /* Image url. */
     image: string;
     /** A list of tags, those tags will be displayed in a chip component. */
@@ -98,9 +112,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     aspectRatio: AspectRatios.original,
+    captionAlign: CaptionAlignments.left,
     captionPosition: CaptionPositions.below,
     captionStyle: {},
     description: undefined,
+    hasFilledHeight: false,
     tags: undefined,
     theme: Themes.light,
     title: undefined,
@@ -116,9 +132,11 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const ImageBlock: React.FC<ImageBlockProps> = ({
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     className = '',
+    captionAlign = DEFAULT_PROPS.captionAlign,
     captionPosition = DEFAULT_PROPS.captionPosition,
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,
+    hasFilledHeight = DEFAULT_PROPS.hasFilledHeight,
     image,
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
@@ -133,8 +151,15 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
         <div
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, aspectRatio, captionPosition, theme }),
+                handleBasicClasses({
+                    aspectRatio,
+                    captionAlign,
+                    captionPosition,
+                    prefix: CLASSNAME,
+                    theme,
+                }),
                 {
+                    [`${CLASSNAME}--fill-height`]: hasFilledHeight,
                     [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== 'original',
                     [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === 'original',
                 },
@@ -149,6 +174,8 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                     {(title || description) && (
                         <div className={`${CLASSNAME}__caption`}>
                             {title && <span className={`${CLASSNAME}__title`}>{title}</span>}
+                            {/* Add an `&nbsp;` when there is description and title. */}
+                            {title && description && '\u00A0'}
                             {isObject(description) && description.__html ? (
                                 <span dangerouslySetInnerHTML={description} className={`${CLASSNAME}__description`} />
                             ) : (
@@ -176,4 +203,14 @@ ImageBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, AspectRatios, CaptionPositions, ImageBlock, ImageBlockProps, Theme, Themes };
+export {
+    CLASSNAME,
+    DEFAULT_PROPS,
+    AspectRatios,
+    CaptionAlignments,
+    CaptionPositions,
+    ImageBlock,
+    ImageBlockProps,
+    Theme,
+    Themes,
+};
