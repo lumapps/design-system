@@ -12,6 +12,9 @@
     <div class="lumx-slideshow__controls" ng-if="lumx.hasControls">
         <lumx-slideshow-controls
             lumx-active-index="lumx.activeIndex"
+            lumx-on-next-click="lumx.stopAutoPlay()"
+            lumx-on-pagination-click="lumx.stopAutoPlay()"
+            lumx-on-previous-click="lumx.stopAutoPlay()"
             lumx-slides-count="lumx.slidesCount"
             lumx-theme="{{ lumx.theme }}"
         ></lumx-slideshow-controls>
