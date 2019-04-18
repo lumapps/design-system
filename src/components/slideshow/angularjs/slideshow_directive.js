@@ -164,12 +164,16 @@ function SlideshowController($element, $interval, $scope) {
         if (evt.keyCode === _LEFT_KEY_CODE) {
             _previousSlide();
 
+            lumx.stopAutoPlay();
+
             $scope.$apply();
 
             evt.preventDefault();
             evt.stopPropagation();
         } else if (evt.keyCode === _RIGHT_KEY_CODE) {
             _nextSlide();
+
+            lumx.stopAutoPlay();
 
             $scope.$apply();
 
@@ -199,6 +203,10 @@ function SlideshowController($element, $interval, $scope) {
      * Stop auto play.
      */
     function stopAutoPlay() {
+        if (angular.isUndefined(_autoPlayInterval)) {
+            return;
+        }
+
         $interval.cancel(_autoPlayInterval);
         _autoPlayInterval = undefined;
     }
