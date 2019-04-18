@@ -135,7 +135,7 @@ function SlideshowControlsController($element, $scope) {
 
         lumx.paginationItemsVisibleRange = [minRange, maxRange];
 
-        _curentTransformOffset += _PAGINATION_ITEM_SIZE * minRange;
+        _curentTransformOffset = _PAGINATION_ITEM_SIZE * minRange;
 
         _movePaginationWrapper();
     }
@@ -227,10 +227,10 @@ function SlideshowControlsController($element, $scope) {
      */
     function nextSlide() {
         if (lumx.activeIndex + 1 === lumx.slidesCount) {
-            return;
+            lumx.activeIndex = 0;
+        } else {
+            lumx.activeIndex++;
         }
-
-        lumx.activeIndex++;
 
         if (angular.isFunction(lumx.onNextClick)) {
             lumx.onNextClick();
@@ -242,10 +242,10 @@ function SlideshowControlsController($element, $scope) {
      */
     function previousSlide() {
         if (lumx.activeIndex === 0) {
-            return;
+            lumx.activeIndex = lumx.slidesCount - 1;
+        } else {
+            lumx.activeIndex--;
         }
-
-        lumx.activeIndex--;
 
         if (angular.isFunction(lumx.onPreviousClick)) {
             lumx.onPreviousClick();
@@ -279,11 +279,18 @@ function SlideshowControlsController($element, $scope) {
         _setPaginationItemsRange();
 
         if (lumx.slidesCount > lumx.paginationItemsMax) {
-            if (newIndex === oldIndex) {
-                _initPaginationItemsState();
-            }
+            const firstSlideIndex = 0;
+            const lastSlideIndex = lumx.slidesCount - 1;
 
-            _updatePaginationItemsState();
+            if (
+                newIndex === oldIndex ||
+                (oldIndex === firstSlideIndex && newIndex === lastSlideIndex) ||
+                (oldIndex === lastSlideIndex && newIndex === firstSlideIndex)
+            ) {
+                _initPaginationItemsState();
+            } else {
+                _updatePaginationItemsState();
+            }
         }
 
         _curentIndex = lumx.activeIndex;
