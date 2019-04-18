@@ -134,28 +134,42 @@ function SlideshowController($element, $interval, $scope) {
     }
 
     /**
+     * Go to next slide.
+     */
+    function _nextSlide() {
+        if (lumx.activeIndex + 1 === lumx.slidesCount) {
+            lumx.activeIndex = 0;
+        } else {
+            lumx.activeIndex++;
+        }
+    }
+
+    /**
+     * Go to previous slide.
+     */
+    function _previousSlide() {
+        if (lumx.activeIndex === 0) {
+            lumx.activeIndex = lumx.slidesCount - 1;
+        } else {
+            lumx.activeIndex--;
+        }
+    }
+
+    /**
      * Handle key events on slideshow focus.
      *
      * @param {Event} evt The key event.
      */
     function _onKeyPress(evt) {
         if (evt.keyCode === _LEFT_KEY_CODE) {
-            if (lumx.activeIndex === 0) {
-                return;
-            }
-
-            lumx.activeIndex--;
+            _previousSlide();
 
             $scope.$apply();
 
             evt.preventDefault();
             evt.stopPropagation();
         } else if (evt.keyCode === _RIGHT_KEY_CODE) {
-            if (lumx.activeIndex + 1 === lumx.slidesCount) {
-                return;
-            }
-
-            lumx.activeIndex++;
+            _nextSlide();
 
             $scope.$apply();
 
@@ -178,13 +192,7 @@ function SlideshowController($element, $interval, $scope) {
             lumx.autoPlayInterval = _AUTOPLAY_DEFAULT_INTERVAL;
         }
 
-        _autoPlayInterval = $interval(() => {
-            if (lumx.activeIndex + 1 === lumx.slidesCount) {
-                return;
-            }
-
-            lumx.activeIndex++;
-        }, lumx.autoPlayInterval);
+        _autoPlayInterval = $interval(_nextSlide, lumx.autoPlayInterval);
     }
 
     /**
