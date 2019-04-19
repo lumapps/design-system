@@ -1,0 +1,30 @@
+<style>
+    .default-link-style {
+        color: #2493ff; /* blue-N */
+        text-decoration: none;
+    }
+    .default-link-style:hover {
+        color: #2885f6; /* blue-D1 */
+        text-decoration: underline;
+    }
+    .default-link-style:active {
+        color: #2972e2; /* blue-D2 */
+    }
+</style>
+<div lumx-grid-container="row" style="justify-content:space-evenly; align-items: center;">
+    <a href="#" class="default-link-style">Link</a>
+
+    <a
+        href="#"
+        class="default-link-style"
+        style="    display: inline-flex;
+    align-items: center;"
+        ><lumx-icon
+            lumx-size="xs"
+            lumx-path="{{ vm.icons.mdiHelpCircle }}"
+            style="display:inline-block; margin-right:4px"
+        ></lumx-icon>
+        Link with icon</a
+    >
+    <a href="#" class="default-link-style"><h2 style="margin:0;">Link</h2></a>
+</div>
