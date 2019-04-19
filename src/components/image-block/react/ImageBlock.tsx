@@ -24,7 +24,7 @@ enum AspectRatios {
 type AspectRatio = AspectRatios;
 
 /**
- * Authorized variants.
+ * Authorized caption alignments.
  */
 const enum CaptionAlignments {
     center = 'center',
@@ -61,11 +61,11 @@ interface IImageBlockProps extends IGenericProps {
           };
     /* Whether the image has to fill its container's height. */
     hasFilledHeight?: boolean;
-    /* Image url. */
+    /* The url of the image we want to display in the image-block. */
     image: string;
     /** A list of tags, those tags will be displayed in a chip component. */
     tags?: string[];
-    /* Theme. */
+    /* The theme to use to display the image-block. */
     theme?: Theme;
     /** The image title to display in the caption. */
     title?: string;
