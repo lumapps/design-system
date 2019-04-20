@@ -2,13 +2,20 @@ import { Button } from 'LumX';
 import { Theme, Themes } from 'LumX/components';
 import { Emphasises } from 'LumX/components/button/react/Button';
 import { Variants } from 'LumX/components/button/react/DropdownButton';
-import { LEFT_KEY_CODE, PAGINATION_ITEMS_MAX, RIGHT_KEY_CODE } from 'LumX/components/slideshow/constants';
+import {
+    EDGE_FROM_ACTIVE_INDEX,
+    LEFT_KEY_CODE,
+    PAGINATION_ITEMS_MAX,
+    PAGINATION_ITEM_SIZE,
+    RIGHT_KEY_CODE,
+} from 'LumX/components/slideshow/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 import { mdiChevronLeft, mdiChevronRight } from 'LumX/icons';
 import classNames from 'classnames';
-import React, { useEffect } from 'react';
+import isFunction from 'lodash/isFunction';
+import React, { RefObject, useCallback, useEffect } from 'react';
 
 /////////////////////////////
 
@@ -17,13 +24,23 @@ import React, { useEffect } from 'react';
  */
 interface ISlideshowControlsProps extends IGenericProps {
     activeIndex?: number;
-    slidesCount?: number;
+    parentRef?: RefObject<HTMLDivElement>;
+    slidesCount: number;
     theme?: Theme;
     onPaginationClick?(index: number): void;
     onNextClick?(): void;
     onPreviousClick?(): void;
 }
 type SlideshowControlsProps = ISlideshowControlsProps;
+
+/**
+ * Defines the visible range of navigation items.
+ */
+interface IPaginationRange {
+    minRange: number;
+    maxRange: number;
+}
+type PaginationRange = IPaginationRange;
 
 /////////////////////////////
 
@@ -65,7 +82,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeIndex: 0,
-    slidesCount: 0,
     theme: Themes.light,
 };
 
@@ -77,40 +93,30 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param {SlideshowControlsProps} {
  *     activeIndex = DEFAULT_PROPS.activeIndex,
  *     className = '',
- *     slidesCount = DEFAULT_PROPS.slidesCount,
- *     onPaginationClick = DEFAULT_PROPS.onPaginationClick,
- *     onNextClick = DEFAULT_PROPS.onNextClick,
- *     onPreviousClick = DEFAULT_PROPS.onPreviousClick,
+ *     parentRef,
+ *     slidesCount,
+ *     onPaginationClick,
+ *     onNextClick,
+ *     onPreviousClick,
  *     theme = DEFAULT_PROPS.theme,
  *     ...props
  * }
  * @return {(React.ReactElement | null)}
  */
 const SlideshowControls: React.FC<SlideshowControlsProps> = ({
-    // activeIndex = DEFAULT_PROPS.activeIndex,
+    activeIndex = DEFAULT_PROPS.activeIndex,
     className = '',
-    slidesCount = DEFAULT_PROPS.slidesCount,
-    onPaginationClick = DEFAULT_PROPS.onPaginationClick,
-    onNextClick = DEFAULT_PROPS.onNextClick,
-    onPreviousClick = DEFAULT_PROPS.onPreviousClick,
+    parentRef,
+    slidesCount,
+    onPaginationClick,
+    onNextClick,
+    onPreviousClick,
     theme = DEFAULT_PROPS.theme,
     ...props
 }: SlideshowControlsProps): React.ReactElement | null => {
-    if (
-        typeof onNextClick === 'undefined' ||
-        typeof onPreviousClick === 'undefined' ||
-        typeof onPaginationClick === 'undefined'
-    ) {
+    if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
         return null;
     }
-
-    useEffect(() => {
-        document.addEventListener('keydown', handleKeyPressed);
-
-        return (): void => {
-            document.removeEventListener('keydown', handleKeyPressed);
-        };
-    });
 
     /**
      * Handle keyboard shortcuts to navigate through slideshow.
@@ -119,9 +125,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      */
     const handleKeyPressed: (evt: KeyboardEvent) => void = (evt: KeyboardEvent): void => {
         if (evt.keyCode === LEFT_KEY_CODE) {
-            onPreviousClick();
+            handlePreviousClick();
         } else if (evt.keyCode === RIGHT_KEY_CODE) {
-            onNextClick();
+            handleNextClick();
         }
 
         evt.preventDefault();
@@ -129,25 +135,141 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     };
 
     /**
-     * Build an array of bullet elements.
+     * Build an array of navigation elements.
+     *
+     * @param {number} index Index used to determinate position in slides.
+     * @return {PaginationRange} Min and max for pagiation position.
      */
-    // const buildBullets: () => void = useCallback(() => {
-    //     // Nothing
-    // }, []);
+    const getVisibleRange: (index: number) => PaginationRange = (index: number): PaginationRange => {
+        const deltaItems: number = PAGINATION_ITEMS_MAX - 1;
+        let min: number = 0;
+        let max: number = 0;
+
+        if (index > lastSlide - deltaItems) {
+            min = lastSlide - deltaItems;
+            max = lastSlide;
+        } else if (index < deltaItems) {
+            max = deltaItems;
+        } else {
+            min = index - EDGE_FROM_ACTIVE_INDEX;
+            max = index + EDGE_FROM_ACTIVE_INDEX;
+        }
+
+        return { minRange: min, maxRange: max };
+    };
 
     /**
-     * Handle click on a bullet to go to a specific slide.
+     * Build an array of navigation items (bullets for example).
+     *
+     * @param {number} lastIndex Index of last item.
+     * @return {JSX.Element[]} Array of nabiagtion items.
      */
-    // const handleBulletClick = useCallback((index: number) => {
-    //     onPaginationClick(index);
-    // }, []);
+    const buildItemsArray: (lastIndex: number) => JSX.Element[] = (lastIndex: number): JSX.Element[] => {
+        const items: JSX.Element[] = [];
 
-    const bullets: React.ReactNode = '';
+        for (let i: number = 0; i <= lastIndex; i++) {
+            items.push(
+                <button
+                    className={classNames({
+                        [`${CLASSNAME}__pagination-item`]: true,
+                        [`${CLASSNAME}__pagination-item--is-active`]: activeIndex === i,
+                        [`${CLASSNAME}__pagination-item--is-on-edge`]: isPaginationItemOnEdge(i),
+                        [`${CLASSNAME}__pagination-item--is-out-range`]: isPaginationItemOutVisibleRange(i),
+                    })}
+                    key={i}
+                    // tslint:disable-next-line: jsx-no-lambda
+                    onClick={(): void => handleItemClick(i)}
+                    tabIndex={-1}
+                />,
+            );
+        }
+
+        return items;
+    };
+
+    /**
+     * Handle click on an item to go to a specific slide.
+     *
+     * @param {number} index Index of the slide to go to.
+     */
+    const handleItemClick: (index: number) => void = useCallback(
+        (index: number) => {
+            if (isFunction(onPaginationClick)) {
+                onPaginationClick(index);
+            }
+        },
+        [onPaginationClick],
+    );
+
+    /**
+     * Handle click to go to next slide.
+     */
+    const handleNextClick: () => void = useCallback(() => {
+        if (isFunction(onNextClick)) {
+            onNextClick();
+        }
+    }, [onNextClick]);
+
+    /**
+     * Handle click to go to previous slide.
+     */
+    const handlePreviousClick: () => void = useCallback(() => {
+        if (isFunction(onPreviousClick)) {
+            onPreviousClick();
+        }
+    }, [onPreviousClick]);
+
+    /**
+     * Determine if a navigation item is visible.
+     *
+     * @param {number} index Index of navigation item.
+     * @return {boolean} Whether navigation item is visble or not.
+     */
+    const isPaginationItemOutVisibleRange: (index: number) => boolean = (index: number): boolean => {
+        return index < visibleRange.minRange || index > visibleRange.maxRange;
+    };
+
+    /**
+     * Check if the pagination item is on edge, indicating other slides after or before.
+     *
+     * @param  {number}  index The index of the pagination item to check.
+     * @return {boolean} Whether the pagination item is on edge or not.
+     */
+    const isPaginationItemOnEdge: (index: number) => boolean = (index: number): boolean => {
+        return (
+            index !== 0 && index !== lastSlide && (index === visibleRange.minRange || index === visibleRange.maxRange)
+        );
+    };
+
+    //////////////////////
+
+    const lastSlide: number = slidesCount - 1;
+    const visibleRange: PaginationRange = getVisibleRange(activeIndex);
+    const paginationItems: JSX.Element[] = buildItemsArray(lastSlide);
+
+    /**
+     * Inline style of wrapper element.
+     */
+    const wrapperStyle: {} = {
+        transform: `translateX(-${PAGINATION_ITEM_SIZE * visibleRange.minRange}px)`,
+    };
+
+    useEffect(() => {
+        if (parentRef && parentRef.current) {
+            parentRef.current.addEventListener('keydown', handleKeyPressed);
+        }
+
+        return (): void => {
+            if (parentRef && parentRef.current) {
+                parentRef.current.removeEventListener('keydown', handleKeyPressed);
+            }
+        };
+    });
 
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), {
-                [`${CLASSNAME}--has-infinite-pagination`]: slidesCount! > PAGINATION_ITEMS_MAX,
+                [`${CLASSNAME}--has-infinite-pagination`]: slidesCount > PAGINATION_ITEMS_MAX,
                 [`${CLASSNAME}--theme-dark`]: theme === Themes.dark,
                 [`${CLASSNAME}--theme-light`]: theme === Themes.light,
             })}
@@ -159,34 +281,22 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
                 color={theme === Themes.dark ? 'light' : 'dark'}
                 emphasis={Emphasises.low}
                 variant={Variants.icon}
-                onClick={onPreviousClick}
-                tabIndex="-1"
+                onClick={handlePreviousClick}
+                tabIndex={-1}
             />
-            {bullets}
-            {/* <div className={`${CLASSNAME}__pagination`}>
-                    <div className={`${CLASSNAME}__pagination-items`}>
-                        <Button
-                            className={classNames({
-                                [`${CLASSNAME}__pagination-item`}: true,
-                                [`${CLASSNAME}__pagination-item--is-active`}: activeIndex === i,
-                                [`${CLASSNAME}__pagination-item--is-on-edge`}: isPaginationItemOnEdge(i),
-                                [`${CLASSNAME}__pagination-item--is-out-range`}: isPaginationItemOutVisibleRange(
-                                    i,
-                                ),
-                            })}
-                            onClick={() => handleBulletClick(i)}
-                            tabindex="-1"
-                        />
-                    </div>
-                </div> */}
+            <div className={`${CLASSNAME}__pagination`}>
+                <div className={`${CLASSNAME}__pagination-items`} style={wrapperStyle}>
+                    {paginationItems}
+                </div>
+            </div>
             <Button
                 leftIcon={mdiChevronRight}
                 className={`${CLASSNAME}__navigation`}
                 color={theme === Themes.dark ? 'light' : 'dark'}
                 emphasis={Emphasises.low}
                 variant={Variants.icon}
-                onClick={onNextClick}
-                tabIndex="-1"
+                onClick={handleNextClick}
+                tabIndex={-1}
             />
         </div>
     );

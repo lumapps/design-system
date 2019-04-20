@@ -141,7 +141,7 @@ function _validate(props: SlideshowProps): React.ReactNode {
  *     theme = DEFAULT_PROPS.theme,
  *     ...props
  * }
- * @returns {(React.ReactElement | null)}
+ * @return {(React.ReactElement | null)}
  */
 const Slideshow: React.FC<SlideshowProps> = ({
     activeIndex = DEFAULT_PROPS.activeIndex,
@@ -154,13 +154,14 @@ const Slideshow: React.FC<SlideshowProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: SlideshowProps): React.ReactElement | null => {
-    if (typeof activeIndex === 'undefined' || typeof autoPlay === 'undefined' || typeof interval === 'undefined') {
+    if (typeof activeIndex === 'undefined' || typeof groupBy === 'undefined' || typeof interval === 'undefined') {
         return null;
     }
 
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+    const newChildren: React.ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
     const [currentIndex, setCurrentIndex]: [number, Dispatch<SetStateAction<number>>] = useState(activeIndex);
-    const [isAutoPlaying, setIsAutoPlaying]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(autoPlay);
+    const [isAutoPlaying, setIsAutoPlaying]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(Boolean(autoPlay));
+    const parentRef: React.MutableRefObject<null> = useRef(null);
 
     /**
      * The number of slideshow items.
@@ -172,7 +173,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Number of slides when using groupBy prop.
      */
-    // const slidesCount: number = itemsCount / groupBy!;
+    const slidesCount: number = Math.ceil(itemsCount / groupBy);
 
     /**
      * Inline style of wrapper element.
@@ -180,6 +181,12 @@ const Slideshow: React.FC<SlideshowProps> = ({
     const wrapperSyle: {} = {
         transform: `translateX(-${FULL_WIDTH_PERCENT * currentIndex}%)`,
     };
+
+    useEffect(() => {
+        if (currentIndex > slidesCount - 1) {
+            setCurrentIndex(DEFAULT_PROPS.activeIndex!);
+        }
+    }, [currentIndex]);
 
     /**
      * Start automatic rotation of slideshow.
@@ -198,11 +205,11 @@ const Slideshow: React.FC<SlideshowProps> = ({
         (index: number) => {
             stopAutoPlay();
 
-            if (currentIndex >= 0 && currentIndex < itemsCount) {
-                setCurrentIndex(index);
+            if (currentIndex >= 0 && currentIndex < slidesCount) {
+                setCurrentIndex(() => index);
             }
         },
-        [currentIndex, isAutoPlaying, itemsCount, setCurrentIndex, setIsAutoPlaying],
+        [currentIndex, isAutoPlaying, slidesCount, setCurrentIndex, setIsAutoPlaying],
     );
 
     /**
@@ -225,23 +232,23 @@ const Slideshow: React.FC<SlideshowProps> = ({
      * Change current index to display next slide.
      */
     const nextSlide: () => void = useCallback(() => {
-        if (currentIndex === itemsCount - 1) {
+        if (currentIndex === slidesCount - 1) {
             setCurrentIndex(() => 0);
-        } else if (currentIndex < itemsCount - 1) {
+        } else if (currentIndex < slidesCount - 1) {
             setCurrentIndex((index: number): number => index + 1);
         }
-    }, [currentIndex, itemsCount, setCurrentIndex]);
+    }, [currentIndex, slidesCount, setCurrentIndex]);
 
     /**
      * Change current index to display previous slide.
      */
     const previousSlide: () => void = useCallback(() => {
         if (currentIndex === 0) {
-            setCurrentIndex(() => itemsCount - 1);
+            setCurrentIndex(() => slidesCount - 1);
         } else if (currentIndex > 0) {
             setCurrentIndex((index: number): number => index - 1);
         }
-    }, [currentIndex, itemsCount, setCurrentIndex]);
+    }, [currentIndex, slidesCount, setCurrentIndex]);
 
     /**
      * Stop slideshow auto rotating.
@@ -260,6 +267,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
             })}
             {...props}
             tabIndex={0}
+            ref={parentRef}
         >
             <div className={`${CLASSNAME}__slides`}>
                 <div className={`${CLASSNAME}__wrapper`} style={wrapperSyle}>
@@ -267,13 +275,15 @@ const Slideshow: React.FC<SlideshowProps> = ({
                 </div>
             </div>
 
-            {hasControls && (
+            {hasControls && slidesCount > 1 && (
                 <div className={`${CLASSNAME}__controls`}>
                     <SlideshowControls
                         activeIndex={currentIndex}
                         onPaginationClick={handleControlGotToSlide}
                         onNextClick={handleControlNextSlide}
                         onPreviousClick={handleControlPreviousSlide}
+                        slidesCount={slidesCount}
+                        parentRef={parentRef}
                         theme={theme}
                     />
                 </div>
