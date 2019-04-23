@@ -294,6 +294,14 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.thumbnail', {
+            url: 'thumbnail',
+            views: {
+                'main@': {
+                    template: require('./components/thumbnail/demo.html'),
+                },
+            },
+        })
         .state('app.toolbar', {
             url: 'toolbar',
             views: {
