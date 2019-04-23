@@ -32,7 +32,7 @@
         "popper.js": "^1.15.0",
         "react": "^16.8.5",
         "react-dom": "^16.8.5",
-        "react-popover": "^0.5.10",
+        "react-popper": "^1.3.3",
         "sass-mq": "^5.0.0",
         "slugify": "^1.3.4",
         "uuid": "^3.3.2"

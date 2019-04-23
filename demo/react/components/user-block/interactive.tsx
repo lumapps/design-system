@@ -1,5 +1,5 @@
-// tslint:disable
-import React, { Fragment, useState } from 'react';
+// Tslint:disable.
+import React, { Fragment, useRef, useState } from 'react';
 
 import { Orientations } from 'LumX/components';
 
@@ -8,7 +8,10 @@ import {
     ButtonEmphasises,
     ButtonSizes,
     ButtonThemes,
+    IPopperOffsets,
     IconButton,
+    Placements,
+    Popover,
     UserBlock,
     UserBlockSize,
     UserBlockTheme,
@@ -16,7 +19,7 @@ import {
 
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from 'LumX/icons';
 
-import { Popover } from 'react-popover';
+import { Manager, Popper, Reference } from 'react-popper';
 
 /////////////////////////////
 
@@ -31,7 +34,7 @@ const demoFields: string[] = ['Creative developer', 'Denpasar'];
 
 const createSimpleAction: React.FC<ButtonThemes> = (
     theme: ButtonThemes,
-): any => ( // tslint:disable-line
+): any => ( // Tslint:disable-line.
     <Button
         emphasis={ButtonEmphasises.medium}
         color={theme === ButtonThemes.dark ? 'light' : undefined}
@@ -45,7 +48,7 @@ const createSimpleAction: React.FC<ButtonThemes> = (
 const demoActions: string[] = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
 const createMultipleActions: React.FC<ButtonThemes> = (
-    theme: any, // tslint:disable-line
+    theme: any, // Tslint:disable-line.
 ) => (
     <Fragment>
         {demoActions.map(
@@ -64,7 +67,7 @@ const createMultipleActions: React.FC<ButtonThemes> = (
 
 /////////////////////////////
 
-// tslint:disable
+// Tslint:disable.
 /**
  * The demo for the default <UserBlock>s.
  *
@@ -72,28 +75,70 @@ const createMultipleActions: React.FC<ButtonThemes> = (
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     const [isCardDisplayed, setCardDisplayed] = useState(false);
+    const delayer = useRef(null);
 
-    const popoverProps = {
-        isOpen: isCardDisplayed,
-        onOuterAction: () => setCardDisplayed(false),
-        body: () => <div>hey</div>,
+    const toggleCardDisplay = (newVisibleState) => {
+        if (newVisibleState) {
+            if (delayer.current) {
+                clearTimeout(delayer.current);
+                delayer.current = null;
+            }
+            setCardDisplayed(true);
+        } else {
+            delayer.current = setTimeout(() => setCardDisplayed(false), 200);
+        }
     };
 
-    const target = (
+    const anchor = (
         <UserBlock
             theme={theme}
             name="Guillaume Nachury"
             fields={['Bidouilleur', 'Meyzieu']}
-            avatar={`http://i.pravatar.cc/139`}
+            avatar={'http://i.pravatar.cc/139'}
             orientation={Orientations.horizontal}
-            onMouseEnter={() => setCardDisplayed(true)}
+            onMouseEnter={(): void => toggleCardDisplay(true)}
+            onMouseLeave={(): void => toggleCardDisplay(false)}
             size={UserBlockSize.m}
         />
     );
 
-    return <Fragment />;
+    const popper = (
+        <div
+            style={{
+                backgroundColor: `white`,
+                borderRadius: 2,
+                boxShadow: '0 1px 2px 0 rgba(0,0,0,0.12)',
+                display: 'flex',
+                flex: 'auto',
+                justifyContent: 'center',
+                paddingBottom: 16,
+                paddingTop: 25,
+                width: 213,
+            }}
+            onMouseEnter={(): void => toggleCardDisplay(true)}
+            onMouseLeave={(): void => toggleCardDisplay(false)}
+        >
+            <UserBlock
+                theme={theme}
+                name="Guillaume Nachury"
+                fields={['Bidouilleur', 'Meyzieu']}
+                avatar={'http://i.pravatar.cc/139'}
+                orientation={Orientations.vertical}
+                onClick={(): void => console.log('UserBlock clicked')}
+                simpleAction={createSimpleAction(theme)}
+                multipleActions={createMultipleActions(theme)}
+            />
+        </div>
+    );
+
+    const offsets: IPopperOffsets = { top: 20, left: 50 };
+    return (
+        <Fragment>
+            <Popover anchorElement={anchor} popperElement={popper} popperPlacement={Placements.RIGHT} useTooltipMode />
+        </Fragment>
+    );
 };
-/* tslint:enable. */
+/* Tslint:enable. */
 /////////////////////////////
 
 export default {
@@ -113,6 +158,5 @@ export default {
             simpleAction={createSimpleAction(theme)}
             multipleActions={createMultipleActions(theme)}
         />
-
 
 */

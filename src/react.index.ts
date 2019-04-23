@@ -154,3 +154,12 @@ export {
     ProgressProps,
     Variants,
 } from './components/progress/react/Progress';
+
+export {
+    CLASSNAME as PopoverClassName,
+    Popover,
+    PopoverProps,
+    Placements,
+    PopperPositions,
+    IPopperOffsets,
+} from './components/popover/react/Popover';
