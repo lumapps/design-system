@@ -1,3 +1,5 @@
+import React, { RefObject, useCallback, useEffect } from 'react';
+
 import { Button } from 'LumX';
 import { Theme, Themes } from 'LumX/components';
 import { Emphasises } from 'LumX/components/button/react/Button';
@@ -13,9 +15,11 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 import { mdiChevronLeft, mdiChevronRight } from 'LumX/icons';
+
 import classNames from 'classnames';
+
 import isFunction from 'lodash/isFunction';
-import React, { RefObject, useCallback, useEffect } from 'react';
+import noop from 'lodash/noop';
 
 /////////////////////////////
 
@@ -82,6 +86,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeIndex: 0,
+    onNextClick: noop,
+    onPaginationClick: noop,
+    onPreviousClick: noop,
+    parentRef: undefined,
     theme: Themes.light,
 };
 
@@ -90,27 +98,25 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Controls for the slideshow component.
  *
- * @param {SlideshowControlsProps} {
- *     activeIndex = DEFAULT_PROPS.activeIndex,
- *     className = '',
- *     parentRef,
- *     slidesCount,
- *     onPaginationClick,
- *     onNextClick,
- *     onPreviousClick,
- *     theme = DEFAULT_PROPS.theme,
- *     ...props
- * }
+ * @param {SlideshowControlsProps} props
  * @return {(React.ReactElement | null)}
  */
 const SlideshowControls: React.FC<SlideshowControlsProps> = ({
+    /** Index of the current slide */
     activeIndex = DEFAULT_PROPS.activeIndex,
+    /** Css class */
     className = '',
-    parentRef,
+    /** Reference of parent element */
+    parentRef = DEFAULT_PROPS.parentRef,
+    /** Number of slides */
     slidesCount,
-    onPaginationClick,
-    onNextClick,
-    onPreviousClick,
+    /** Callback for the click on a navigation item */
+    onPaginationClick = DEFAULT_PROPS.onPaginationClick,
+    /** Callback for the click on the "next" arrow */
+    onNextClick = DEFAULT_PROPS.onNextClick,
+    /** Callback for the click on the "previous" arrow */
+    onPreviousClick = DEFAULT_PROPS.onPreviousClick,
+    /** Theme */
     theme = DEFAULT_PROPS.theme,
     ...props
 }: SlideshowControlsProps): React.ReactElement | null => {
@@ -264,14 +270,12 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
                 parentRef.current.removeEventListener('keydown', handleKeyPressed);
             }
         };
-    });
+    }, [parentRef]);
 
     return (
         <div
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), {
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--has-infinite-pagination`]: slidesCount > PAGINATION_ITEMS_MAX,
-                [`${CLASSNAME}--theme-dark`]: theme === Themes.dark,
-                [`${CLASSNAME}--theme-light`]: theme === Themes.light,
             })}
             {...props}
         >

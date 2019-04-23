@@ -3,7 +3,6 @@
  *
  * @type {number}
  * @constant
- * @readonly
  */
 const AUTOPLAY_DEFAULT_INTERVAL: number = 5000;
 
@@ -12,7 +11,6 @@ const AUTOPLAY_DEFAULT_INTERVAL: number = 5000;
  *
  * @type {number}
  * @constant
- * @readonly
  */
 const FULL_WIDTH_PERCENT: number = 100;
 
@@ -21,7 +19,6 @@ const FULL_WIDTH_PERCENT: number = 100;
  *
  * @type {number}
  * @constant
- * @readonly
  */
 const LEFT_KEY_CODE: number = 37;
 
@@ -30,7 +27,6 @@ const LEFT_KEY_CODE: number = 37;
  *
  * @type {number}
  * @constant
- * @readonly
  */
 const RIGHT_KEY_CODE: number = 39;
 
@@ -39,7 +35,6 @@ const RIGHT_KEY_CODE: number = 39;
  *
  * @type {number}
  * @constant
- * @readonly
  */
 const EDGE_FROM_ACTIVE_INDEX: number = 2;
 
@@ -48,7 +43,6 @@ const EDGE_FROM_ACTIVE_INDEX: number = 2;
  *
  * @type {number}
  * @constant
- * @readonly
  */
 const PAGINATION_ITEMS_MAX: number = 5;
 
@@ -57,7 +51,6 @@ const PAGINATION_ITEMS_MAX: number = 5;
  *
  * @type {number}
  * @constant
- * @readonly
  */
 const PAGINATION_ITEM_SIZE: number = 12;
 

@@ -1,11 +1,14 @@
+import React, { CSSProperties, Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+
 import { Theme, Themes } from 'LumX/components';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from 'LumX/components/slideshow/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-import classNames from 'classnames';
+
 import isFunction from 'lodash/isFunction';
-import React, { Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+
+import classNames from 'classnames';
 
 import { SlideshowControls } from './SlideshowControls';
 
@@ -15,11 +18,17 @@ import { SlideshowControls } from './SlideshowControls';
  * Defines the props of the component.
  */
 interface ISlideshowProps extends IGenericProps {
+    /** Index of the current slide */
     activeIndex?: number;
+    /** Enable/disable automatic rotation of slideshow */
     autoPlay?: boolean;
+    /** Enable grouping of slides */
     groupBy?: number;
+    /** Enable/disable controls for slideshow */
     hasControls?: boolean;
+    /** Interval between each slide when automatic rotation is enabled */
     interval?: number;
+    /** Theme */
     theme?: Theme;
 }
 type SlideshowProps = ISlideshowProps;
@@ -130,17 +139,7 @@ function _validate(props: SlideshowProps): React.ReactNode {
 /**
  * Displays a slideshow.
  *
- * @param {SlideshowProps} {
- *     activeIndex = DEFAULT_PROPS.activeIndex,
- *     autoPlay = DEFAULT_PROPS.autoPlay,
- *     children,
- *     className = '',
- *     groupBy = DEFAULT_PROPS.groupBy,
- *     hasControls = DEFAULT_PROPS.hasControls,
- *     interval = DEFAULT_PROPS.interval,
- *     theme = DEFAULT_PROPS.theme,
- *     ...props
- * }
+ * @param {SlideshowProps} props
  * @return {(React.ReactElement | null)}
  */
 const Slideshow: React.FC<SlideshowProps> = ({
@@ -178,7 +177,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Inline style of wrapper element.
      */
-    const wrapperSyle: {} = {
+    const wrapperSyle: CSSProperties = {
         transform: `translateX(-${FULL_WIDTH_PERCENT * currentIndex}%)`,
     };
 
@@ -193,9 +192,9 @@ const Slideshow: React.FC<SlideshowProps> = ({
      */
     useInterval(
         () => {
-            nextSlide();
+            goToNextSlide();
         },
-        isAutoPlaying ? interval : null,
+        isAutoPlaying && slidesCount > 1 ? interval : null,
     );
 
     /**
@@ -217,7 +216,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
      */
     const handleControlNextSlide: () => void = (): void => {
         stopAutoPlay();
-        nextSlide();
+        goToNextSlide();
     };
 
     /**
@@ -225,13 +224,13 @@ const Slideshow: React.FC<SlideshowProps> = ({
      */
     const handleControlPreviousSlide: () => void = (): void => {
         stopAutoPlay();
-        previousSlide();
+        goToPreviousSlide();
     };
 
     /**
      * Change current index to display next slide.
      */
-    const nextSlide: () => void = useCallback(() => {
+    const goToNextSlide: () => void = useCallback(() => {
         if (currentIndex === slidesCount - 1) {
             setCurrentIndex(() => 0);
         } else if (currentIndex < slidesCount - 1) {
@@ -242,7 +241,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Change current index to display previous slide.
      */
-    const previousSlide: () => void = useCallback(() => {
+    const goToPreviousSlide: () => void = useCallback(() => {
         if (currentIndex === 0) {
             setCurrentIndex(() => slidesCount - 1);
         } else if (currentIndex > 0) {
@@ -254,16 +253,13 @@ const Slideshow: React.FC<SlideshowProps> = ({
      * Stop slideshow auto rotating.
      */
     const stopAutoPlay: () => void = (): void => {
-        if (isAutoPlaying) {
-            setIsAutoPlaying((state: boolean) => !state);
-        }
+        setIsAutoPlaying(false);
     };
 
     return (
         <div
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), {
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
-                [`${CLASSNAME}--theme-${theme}`]: Boolean(theme),
             })}
             {...props}
             tabIndex={0}
