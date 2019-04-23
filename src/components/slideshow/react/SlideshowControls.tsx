@@ -28,7 +28,7 @@ import noop from 'lodash/noop';
  */
 interface ISlideshowControlsProps extends IGenericProps {
     activeIndex?: number;
-    parentRef?: RefObject<HTMLDivElement>;
+    parentRef: RefObject<HTMLDivElement>;
     slidesCount: number;
     theme?: Theme;
     onPaginationClick?(index: number): void;
@@ -89,7 +89,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     onNextClick: noop,
     onPaginationClick: noop,
     onPreviousClick: noop,
-    parentRef: undefined,
     theme: Themes.light,
 };
 
@@ -107,7 +106,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Css class */
     className = '',
     /** Reference of parent element */
-    parentRef = DEFAULT_PROPS.parentRef,
+    parentRef,
     /** Number of slides */
     slidesCount,
     /** Callback for the click on a navigation item */
