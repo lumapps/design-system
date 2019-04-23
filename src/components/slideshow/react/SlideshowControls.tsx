@@ -1,5 +1,7 @@
 import React, { RefObject, useCallback, useEffect } from 'react';
 
+import classNames from 'classnames';
+
 import { Button } from 'LumX';
 import { Theme, Themes } from 'LumX/components';
 import { Emphasises } from 'LumX/components/button/react/Button';
@@ -15,8 +17,6 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 import { mdiChevronLeft, mdiChevronRight } from 'LumX/icons';
-
-import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';

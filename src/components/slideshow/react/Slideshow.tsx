@@ -1,5 +1,7 @@
 import React, { CSSProperties, Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
 
+import classNames from 'classnames';
+
 import { Theme, Themes } from 'LumX/components';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from 'LumX/components/slideshow/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
@@ -7,8 +9,6 @@ import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/re
 import { handleBasicClasses } from 'LumX/core/utils';
 
 import isFunction from 'lodash/isFunction';
-
-import classNames from 'classnames';
 
 import { SlideshowControls } from './SlideshowControls';
 
