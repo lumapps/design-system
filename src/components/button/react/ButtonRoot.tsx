@@ -12,6 +12,12 @@ import { IGenericProps, validateComponent } from 'LumX/react/utils';
  */
 interface IProps extends IGenericProps {
     /**
+     * Button reference to handle focus, ...
+     */
+    // tslint:disable-next-line: no-any
+    buttonRef?: React.RefObject<any>;
+
+    /**
      * The `href` to reach if there is one.
      */
     href?: string;
@@ -52,7 +58,9 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ButtonRoot`;
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {
+    buttonRef: undefined,
+};
 
 /////////////////////////////
 //                         //
@@ -83,6 +91,7 @@ function _validate(props: ButtonRootProps): React.ReactNode {
  * @return {React.ReactElement} The component.
  */
 const ButtonRoot: React.FC<ButtonRootProps> = ({
+    buttonRef = DEFAULT_PROPS.buttonRef,
     children,
     className,
     href,
@@ -93,14 +102,14 @@ const ButtonRoot: React.FC<ButtonRootProps> = ({
 
     if (isEmpty(href)) {
         return (
-            <button className={className} {...props}>
+            <button ref={buttonRef} className={className} {...props}>
                 {newChildren}
             </button>
         );
     }
 
     return (
-        <a className={className} href={href} target={target} {...props}>
+        <a ref={buttonRef} className={className} href={href} target={target} {...props}>
             {newChildren}
         </a>
     );

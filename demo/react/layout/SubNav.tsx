@@ -49,7 +49,7 @@ const NAV_ITEMS: string[] = [
     'Dropdown',
     'Expansion panel',
     'Image block',
-    'LightBox',
+    'Lightbox',
     'List',
     'Notification',
     'Progress',
