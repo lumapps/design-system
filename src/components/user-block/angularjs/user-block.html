@@ -1,16 +1,15 @@
 <div class="lumx-user-block">
     <div class="lumx-user-block__avatar" ng-if="lumx.avatar">
-        <lumx-thumbnail
+        <lumx-avatar
             lumx-image="{{ lumx.avatar }}"
             lumx-size="{{ lumx.size }}"
             lumx-theme="{{ lumx.theme }}"
-            lumx-variant="rounded"
             lumx-enter-keypress="lumx.onClick()"
             ng-click="lumx.onClick()"
             ng-mouseenter="lumx.onMouseEnter()"
             ng-mouseleave="lumx.onMouseLeave()"
             tabindex="{{ lumx.onClick ? 0 : -1 }}"
-        ></lumx-thumbnail>
+        ></lumx-avatar>
     </div>
 
     <div class="lumx-user-block__wrapper" ng-if="lumx.name || lumx.fields">
