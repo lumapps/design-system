@@ -1,0 +1,60 @@
+/* ==========================================================================
+   Avatar
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-avatar {
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+/* Avatar sizes
+   ========================================================================== */
+
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-avatar--size-#{$key} {
+        width: $size;
+        height: $size;
+    }
+}
+
+/* Avatar states
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-avatar[tabindex='0'] {
+    cursor: pointer;
+    outline: none;
+
+    &::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 50%;
+        content: '';
+        pointer-events: none;
+    }
+
+    &:hover::after {
+        @include lumx-state(state-hover, emphasis-low, dark);
+    }
+
+    &:active::after {
+        @include lumx-state(state-active, emphasis-low, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-avatar--theme-light.#{$lumx-base-prefix}-avatar[tabindex='0'] {
+    &[data-focus-visible-added]::after {
+        @include lumx-state(state-focus, emphasis-low, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-avatar--theme-dark.#{$lumx-base-prefix}-avatar[tabindex='0'] {
+    &[data-focus-visible-added]::after {
+        @include lumx-state(state-focus, emphasis-low, light);
+    }
+}

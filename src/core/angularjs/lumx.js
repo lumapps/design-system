@@ -16,6 +16,7 @@ angular.module(`${MODULE_NAME}.utils`, [
     `${MODULE_NAME}.utils.utils`,
 ]);
 
+angular.module(`${MODULE_NAME}.avatar`, []);
 angular.module(`${MODULE_NAME}.button`, []);
 angular.module(`${MODULE_NAME}.checkbox`, []);
 angular.module(`${MODULE_NAME}.chip`, []);
@@ -44,6 +45,7 @@ angular.module(`${MODULE_NAME}.tooltip`, []);
 angular.module(`${MODULE_NAME}.user-block`, []);
 
 angular.module(MODULE_NAME, [
+    `${MODULE_NAME}.avatar`,
     `${MODULE_NAME}.button`,
     `${MODULE_NAME}.checkbox`,
     `${MODULE_NAME}.chip`,
