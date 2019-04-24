@@ -14,20 +14,6 @@
     }
 
     &__image {
-        #{$self}--format-original & {
-            img {
-                display: block;
-                max-width: 100%;
-                max-height: 100%;
-            }
-        }
-
-        #{$self}--format-crop & {
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-
         #{$self}--fill-height & {
             display: flex;
             flex: 1;
@@ -124,14 +110,5 @@
         &:last-child {
             margin-right: 0;
         }
-    }
-}
-
-/* Image block aspect ratio
-   ========================================================================== */
-
-@each $key, $aspect-ratio in $lumx-image-block-aspect-ratio {
-    .#{$lumx-base-prefix}-image-block--aspect-ratio-#{$key} .#{$lumx-base-prefix}-image-block__image {
-        padding-top: $aspect-ratio;
     }
 }

@@ -3,21 +3,29 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-thumbnail {
-    position: relative;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    &--aspect-ratio-original {
+        img {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+
+    &--aspect-ratio-horizontal,
+    &--aspect-ratio-vertical {
+        position: relative;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
 
 /* Thumbnail variants
    ========================================================================== */
 
-.#{$lumx-base-prefix}-thumbnail--variant-squared {
-    border-radius: $lumx-theme-border-radius;
-}
-
 .#{$lumx-base-prefix}-thumbnail--variant-rounded {
-    border-radius: 50%;
+    overflow: hidden;
+    border-radius: $lumx-theme-border-radius;
 }
 
 /* Thumbnail sizes
@@ -26,7 +34,15 @@
 @each $key, $size in $lumx-sizes {
     .#{$lumx-base-prefix}-thumbnail--size-#{$key} {
         width: $size;
-        height: $size;
+    }
+}
+
+/* Thumbnail aspect ratio
+   ========================================================================== */
+
+@each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
+    .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key} {
+        padding-top: $aspect-ratio;
     }
 }
 
