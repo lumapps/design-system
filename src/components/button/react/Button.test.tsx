@@ -286,6 +286,10 @@ describe(`<${Button.displayName}>`, (): void => {
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
+                    if (prop === 'buttonRef') {
+                        return;
+                    }
+
                     expect(buttonRoot).toHaveClassName(
                         getBasicClass({ prefix: CLASSNAME, type: prop, value: _getDefaultPropValue({ prop }) }),
                     );
