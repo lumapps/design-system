@@ -257,5 +257,5 @@
         "webpack": "webpack-dev-server --config webpack/webpack.dev.js",
         "webpack-defaults": "webpack-defaults"
     },
-    "version": "0.2.2"
+    "version": "0.2.3"
 }
