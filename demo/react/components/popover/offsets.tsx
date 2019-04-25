@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Placements, Popover } from 'LumX';
+import { Placements, Popover, PopperOffsets } from 'LumX';
 
 /////////////////////////////
 
@@ -24,6 +24,7 @@ const demoPopperStyle: React.CSSProperties = {
     color: 'white',
     fontSize: '10px',
     padding: '5px',
+    width: '130px',
 };
 
 const demoRandomElementStyle: React.CSSProperties = {
@@ -43,10 +44,12 @@ function createDemoAnchor(): React.ReactNode {
 }
 
 function createPopper(): React.ReactNode {
-    return <span style={demoPopperStyle}>{`This element is the popper and is flying above the UI.`}</span>;
+    return <div style={demoPopperStyle}>{`This popper is placed using a 'vertical' and a 'horizontal' offset`}</div>;
 }
 
 /////////////////////////////
+
+const offsets: PopperOffsets = { horizontal: -60, vertical: 30 };
 
 /**
  * The demo for the default <Popover>s.
@@ -63,6 +66,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                 anchorElement={createDemoAnchor()}
                 popperElement={createPopper()}
                 popperPlacement={Placements.RIGHT}
+                popperOffset={offsets}
                 showPopper
             />
             <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Random element`}</div>

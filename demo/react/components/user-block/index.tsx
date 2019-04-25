@@ -25,9 +25,6 @@ const demos: { [demoName: string]: DemoObject } = {
     horizontal: {
         title: 'Horizontal layout',
     },
-    interactive: {
-        title: 'Interactive block',
-    },
     /* tslint:enable: object-literal-sort-keys */
 };
 

@@ -162,4 +162,5 @@ export {
     Placements,
     PopperPositions,
     IPopperOffsets,
+    PopperOffsets,
 } from './components/popover/react/Popover';

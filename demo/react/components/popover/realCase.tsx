@@ -1,5 +1,5 @@
-// Tslint:disable.
-import React, { Fragment, useRef, useState } from 'react';
+// tslint:disable: jsx-no-lambda
+import React, { Fragment, useState } from 'react';
 
 import { Orientations } from 'LumX/components';
 
@@ -8,18 +8,16 @@ import {
     ButtonEmphasises,
     ButtonSizes,
     ButtonThemes,
-    IPopperOffsets,
     IconButton,
     Placements,
     Popover,
+    PopperOffsets,
     UserBlock,
     UserBlockSize,
     UserBlockTheme,
 } from 'LumX';
 
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from 'LumX/icons';
-
-import { Manager, Popper, Reference } from 'react-popper';
 
 /////////////////////////////
 
@@ -30,11 +28,8 @@ interface IProps {
     theme: UserBlockTheme;
 }
 
-const demoFields: string[] = ['Creative developer', 'Denpasar'];
-
-const createSimpleAction: React.FC<ButtonThemes> = (
-    theme: ButtonThemes,
-): any => ( // Tslint:disable-line.
+// tslint:disable-next-line: no-any
+const createSimpleAction: React.FC<ButtonThemes> = (theme: ButtonThemes): any => (
     <Button
         emphasis={ButtonEmphasises.medium}
         color={theme === ButtonThemes.dark ? 'light' : undefined}
@@ -47,9 +42,8 @@ const createSimpleAction: React.FC<ButtonThemes> = (
 
 const demoActions: string[] = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
-const createMultipleActions: React.FC<ButtonThemes> = (
-    theme: any, // Tslint:disable-line.
-) => (
+// tslint:disable-next-line: no-any
+const createMultipleActions: React.FC<ButtonThemes> = (theme: any): any => (
     <Fragment>
         {demoActions.map(
             (demoAction: string, idx: number): IconButton => (
@@ -74,23 +68,29 @@ const createMultipleActions: React.FC<ButtonThemes> = (
  * @return {React.ReactElement} The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+    // tslint:disable-next-line: typedef
     const [isCardDisplayed, setCardDisplayed] = useState(false);
-    const delayer = useRef(null);
+    // tslint:disable-next-line: typedef
+    let delayer: NodeJS.Timeout | null;
+    // tslint:disable-next-line: typedef
+    const anchorRef = React.createRef();
 
-    const toggleCardDisplay = (newVisibleState) => {
-        if (newVisibleState) {
-            if (delayer.current) {
-                clearTimeout(delayer.current);
-                delayer.current = null;
-            }
-            setCardDisplayed(true);
+    function toggleCardDisplay(newVisibleState: boolean): void {
+        // tslint:disable-next-line: early-exit
+        if (!newVisibleState) {
+            delayer = setTimeout(() => setCardDisplayed(false), 500);
         } else {
-            delayer.current = setTimeout(() => setCardDisplayed(false), 200);
+            if (delayer) {
+                clearTimeout(delayer);
+                delayer = null;
+            }
+            delayer = setTimeout(() => setCardDisplayed(true), 500);
         }
-    };
+    }
 
-    const anchor = (
+    const anchor: React.ReactNode = (
         <UserBlock
+            ref={anchorRef}
             theme={theme}
             name="Guillaume Nachury"
             fields={['Bidouilleur', 'Meyzieu']}
@@ -102,12 +102,12 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         />
     );
 
-    const popper = (
+    const popper: React.ReactNode = (
         <div
             style={{
                 backgroundColor: `white`,
                 borderRadius: 2,
-                boxShadow: '0 1px 2px 0 rgba(0,0,0,0.12)',
+                boxShadow: '0 1px 2px 0 rgba(0,0,0,0.42)',
                 display: 'flex',
                 flex: 'auto',
                 justifyContent: 'center',
@@ -124,39 +124,27 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 fields={['Bidouilleur', 'Meyzieu']}
                 avatar={'http://i.pravatar.cc/139'}
                 orientation={Orientations.vertical}
-                onClick={(): void => console.log('UserBlock clicked')}
                 simpleAction={createSimpleAction(theme)}
                 multipleActions={createMultipleActions(theme)}
             />
         </div>
     );
 
-    const offsets: IPopperOffsets = { top: 20, left: 50 };
+    const offsets: PopperOffsets = { vertical: 20 };
     return (
-        <Fragment>
-            <Popover anchorElement={anchor} popperElement={popper} popperPlacement={Placements.RIGHT} useTooltipMode />
-        </Fragment>
+        <div style={{ display: 'flex', justifyContent: 'center', height: 250, paddingTop: 100 }}>
+            <Popover
+                anchorElement={anchor}
+                popperOffset={offsets}
+                showPopper={isCardDisplayed}
+                popperElement={popper}
+                popperPlacement={Placements.TOP_START}
+            />
+        </div>
     );
 };
-/* Tslint:enable. */
 /////////////////////////////
 
 export default {
     view: DemoComponent,
 };
-/*
-
-<UserBlock
-            theme={theme}
-            name="Emmitt O. Lum"
-            fields={demoFields}
-            avatar="http://i.pravatar.cc/128"
-            orientation={Orientations.vertical}
-            onMouseEnter={(): void => console.log('Mouse entered')}
-            onMouseLeave={(): void => console.log('Mouse left')}
-            onClick={(): void => console.log('UserBlock clicked')}
-            simpleAction={createSimpleAction(theme)}
-            multipleActions={createMultipleActions(theme)}
-        />
-
-*/

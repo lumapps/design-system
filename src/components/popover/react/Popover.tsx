@@ -6,9 +6,13 @@ import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 
 import { Manager, Popper, PopperChildrenProps, Reference, ReferenceChildrenProps } from 'react-popper';
 
-import noop from 'lodash/noop';
-
 const SHOW_HIDE_DELAY: number = 500;
+
+// Margin applied when using the fillWidth / fillHeight props
+const SAFE_ZONE: number = 8;
+
+// Reference to the anchor element
+let anchorRef: HTMLDivElement | null;
 
 const enum Placements {
     AUTO = 'auto',
@@ -34,9 +38,22 @@ const enum Placements {
 type PopperPositions = Placements;
 
 interface IPopperOffsets {
+    vertical?: number;
+    horizontal?: number;
+}
+type PopperOffsets = IPopperOffsets;
+
+interface IPosition {
     top?: number;
     left?: number;
 }
+type Position = IPosition;
+
+interface ISize {
+    height?: number | string;
+    width?: number | string;
+}
+type Size = ISize;
 
 /////////////////////////////
 
@@ -45,12 +62,16 @@ interface IPopperOffsets {
  */
 interface IPopoverProps extends IGenericProps {
     anchorElement: React.ReactNode;
-    popperOffset?: IPopperOffsets;
+    popperOffset?: PopperOffsets;
     popperElement?: React.ReactNode;
     showPopper?: boolean | (() => boolean);
-    popperPlacement?: PopperPositions;
+    popperPlacement?: PopperPositions | string;
     useTooltipMode?: boolean | (() => boolean);
     tooltipShowHideDelay?: number | undefined;
+    matchAnchorWidth?: boolean;
+    fillwidth?: boolean;
+    fillHeight?: boolean;
+    lockFlip?: boolean;
 }
 type PopoverProps = IPopoverProps;
 
@@ -93,6 +114,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    lockFlip: false,
     tooltipShowHideDelay: SHOW_HIDE_DELAY,
     useTooltipMode: false,
 };
@@ -102,8 +124,77 @@ function unwrap(inputValue: boolean | string | (() => boolean) | undefined): boo
     return typeof inputValue === 'function' ? inputValue() : Boolean(inputValue);
 }
 
+function computeOffsets(
+    placement: string,
+    // tslint:disable-next-line: no-shadowed-variable
+    popperPlacement: Placements | undefined,
+    // tslint:disable-next-line: no-shadowed-variable
+    popperOffset: PopperOffsets | undefined = { vertical: 0, horizontal: 0 },
+): Position {
+    const computedOffs: Position = {
+        left: popperOffset.horizontal || 0,
+        top: popperOffset.vertical || 0,
+    };
+    const offsetDir: number = placement !== popperPlacement ? -1 : 1;
+    if ((popperPlacement as string).startsWith('auto')) {
+        return computedOffs;
+    }
+    if (
+        ((popperPlacement as string).startsWith('top') || (popperPlacement as string).startsWith('bottom')) &&
+        popperOffset &&
+        popperOffset.vertical
+    ) {
+        computedOffs.top = popperOffset.vertical * offsetDir;
+    }
+    if (
+        ((popperPlacement as string).startsWith('left') || (popperPlacement as string).startsWith('right')) &&
+        popperOffset &&
+        popperOffset.horizontal
+    ) {
+        computedOffs.left = popperOffset.horizontal * offsetDir;
+    }
+    return computedOffs;
+}
+
+// tslint:disable: no-shadowed-variable
+function computeSize(
+    fillHeight: boolean | undefined,
+    fillwidth: boolean | undefined,
+    transform: string | undefined,
+    matchAnchorWidth: boolean | undefined,
+): Size {
+    const popperHolderSize: Size = {};
+    // extract the x and y traslation values
+    // tslint:disable-next-line: variable-name
+    const _transform: string = transform || '';
+    const [tx, ty]: number[] = _transform
+        .substring(_transform.indexOf('(') + 1, _transform.indexOf(')'))
+        .split(',')
+        .map((trsl: string) => Number(trsl.replace('px', '')));
+
+    const viewportWidth: number = window.innerWidth;
+    const viewportHeight: number = window.innerHeight;
+
+    // force the popper to match the width of the anchor element
+    if (matchAnchorWidth && anchorRef) {
+        // tslint:disable-next-line: no-bitwise
+        popperHolderSize.width = `${anchorRef.getBoundingClientRect().width >> 0}px`;
+    } else {
+        if (fillHeight) {
+            popperHolderSize.height = viewportHeight - (ty + SAFE_ZONE);
+        }
+        if (fillwidth) {
+            popperHolderSize.width = viewportWidth - (tx + SAFE_ZONE);
+        }
+    }
+
+    return popperHolderSize;
+}
+
 /**
- * [Enter the description of the component here].
+ * This component manage the positionning of hovering / poping out components.
+ * Basically it binds an anchor element and a popper element and regarding the space available on the screen
+ * + the selected placement the popper elem. will be displayed.
  *
  * @return {React.ReactElement} The component.
  */
@@ -115,11 +206,14 @@ const Popover: React.FC<PopoverProps> = ({
     useTooltipMode = DEFAULT_PROPS.useTooltipMode,
     tooltipShowHideDelay,
     showPopper,
+    fillwidth,
+    fillHeight,
+    matchAnchorWidth,
+    lockFlip,
 }: PopoverProps): React.ReactElement => {
     const [autoShowPopper, setAutoShowPopper]: [boolean, (autoShowPopper: boolean) => void] = useState(Boolean(false));
 
-    // tslint:disable-next-line: typedef
-    const autoShowDelayer = useRef();
+    const autoShowDelayer: React.MutableRefObject<number> = useRef(0);
 
     function onMouseEnteredReference(): void {
         toggleAutoShowPopper(true);
@@ -136,12 +230,20 @@ const Popover: React.FC<PopoverProps> = ({
         }
     }
 
+    // tslint:disable-next-line: no-any
+    const modifiers: any | undefined = {
+        flip: { enabled: !lockFlip },
+    };
+
     return (
         <Manager>
             <Reference>
                 {({ ref }: ReferenceChildrenProps): React.ReactNode => (
                     <div
-                        ref={ref}
+                        ref={(elm: HTMLDivElement | null): void => {
+                            anchorRef = elm;
+                            ref(elm);
+                        }}
                         style={{ width: 'fit-content', height: 'fit-content' }}
                         onMouseEnter={onMouseEnteredReference}
                         onMouseLeave={onMouseLeftReference}
@@ -151,10 +253,19 @@ const Popover: React.FC<PopoverProps> = ({
                 )}
             </Reference>
             {(unwrap(showPopper) || (unwrap(useTooltipMode) && autoShowPopper)) && (
-                <Popper placement={popperPlacement}>
-                    {({ ref, style }: PopperChildrenProps): React.ReactNode => {
+                <Popper placement={popperPlacement as Placements} modifiers={modifiers}>
+                    {({ ref, style, ...others }: PopperChildrenProps): React.ReactNode => {
+                        const computedOffsets: Position = popperPlacement
+                            ? computeOffsets(others.placement, popperPlacement as Placements, popperOffset)
+                            : {};
+                        const computedSizes: Size = computeSize(
+                            fillHeight,
+                            fillwidth,
+                            style.transform,
+                            matchAnchorWidth,
+                        );
                         return (
-                            <div ref={ref} style={{ ...style, ...popperOffset }}>
+                            <div ref={ref} style={{ ...style, ...computedOffsets, ...computedSizes }}>
                                 {popperElement}
                             </div>
                         );
@@ -176,5 +287,6 @@ export {
     PopperPositions,
     Placements,
     IPopperOffsets,
+    PopperOffsets,
     SHOW_HIDE_DELAY,
 };
