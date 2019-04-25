@@ -89,7 +89,6 @@ export {
 
 export {
     CLASSNAME as ImageBlockClassName,
-    AspectRatios as ImageBlockAspectRatios,
     CaptionPositions as ImageBlockCaptionPositions,
     ImageBlock,
     ImageBlockProps,

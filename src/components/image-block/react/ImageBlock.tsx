@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Chip, ChipSizes } from 'LumX';
+import { Chip, ChipSizes, Thumbnail, ThumbnailAspectRatio, ThumbnailAspectRatios } from 'LumX';
 import { Theme, Themes } from 'LumX/components';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
@@ -12,16 +12,6 @@ import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
-
-/**
- * All available aspect ratios.
- */
-enum AspectRatios {
-    original = 'original',
-    horizontal = 'horizontal',
-    vertical = 'vertical',
-}
-type AspectRatio = AspectRatios;
 
 /**
  * Authorized caption alignments.
@@ -46,7 +36,7 @@ type CaptionPosition = CaptionPositions;
  * Defines the props of the component.
  */
 interface IImageBlockProps extends IGenericProps {
-    aspectRatio?: AspectRatio;
+    aspectRatio?: ThumbnailAspectRatio;
     /** The caption wrapper alignment. */
     captionAlign?: CaptionAlignment;
     /** Caption position. */
@@ -111,7 +101,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    aspectRatio: AspectRatios.original,
+    aspectRatio: ThumbnailAspectRatios.original,
     captionAlign: CaptionAlignments.left,
     captionPosition: CaptionPositions.below,
     captionStyle: {},
@@ -143,10 +133,6 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     title = DEFAULT_PROPS.title,
     ...props
 }: ImageBlockProps): React.ReactElement => {
-    const style: CSSProperties = {
-        backgroundImage: aspectRatio === AspectRatios.original ? undefined : `url(${image})`,
-    };
-
     return (
         <div
             className={classNames(
@@ -166,9 +152,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
             )}
             {...props}
         >
-            <div className={`${CLASSNAME}__image`} style={style}>
-                {aspectRatio === AspectRatios.original && <img src={image} alt={title} />}
-            </div>
+            <Thumbnail aspectRatio={aspectRatio} image={image} theme={theme} />
             {(title || description || tags) && (
                 <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
                     {(title || description) && (
@@ -203,14 +187,4 @@ ImageBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    AspectRatios,
-    CaptionAlignments,
-    CaptionPositions,
-    ImageBlock,
-    ImageBlockProps,
-    Theme,
-    Themes,
-};
+export { CLASSNAME, DEFAULT_PROPS, CaptionAlignments, CaptionPositions, ImageBlock, ImageBlockProps, Theme, Themes };

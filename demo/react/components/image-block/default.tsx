@@ -1,6 +1,6 @@
 import React, { CSSProperties, Fragment } from 'react';
 
-import { ImageBlock, ImageBlockAspectRatios, ImageBlockCaptionPositions, ImageBlockProps, ImageBlockTheme } from 'LumX';
+import { ImageBlock, ImageBlockCaptionPositions, ImageBlockProps, ImageBlockTheme, ThumbnailAspectRatios } from 'LumX';
 
 /////////////////////////////
 
@@ -34,32 +34,32 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     <Fragment>
         <ImageBlock theme={theme} image="https://picsum.photos/640/480/?random" style={imageBlockDemoStyle} />
         <ImageBlock
-            aspectRatio={ImageBlockAspectRatios.vertical}
+            aspectRatio={ThumbnailAspectRatios.vertical}
             theme={theme}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
         />
         <ImageBlock
-            aspectRatio={ImageBlockAspectRatios.horizontal}
+            aspectRatio={ThumbnailAspectRatios.horizontal}
             theme={theme}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
         />
         <ImageBlock
-            theme={theme}
-            image="https://picsum.photos/640/480/?random"
-            style={imageBlockDemoStyle}
-            {...imageBlockDemoProps}
-        />
-        <ImageBlock
-            aspectRatio={ImageBlockAspectRatios.vertical}
             theme={theme}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            aspectRatio={ImageBlockAspectRatios.horizontal}
+            aspectRatio={ThumbnailAspectRatios.vertical}
+            theme={theme}
+            image="https://picsum.photos/640/480/?random"
+            style={imageBlockDemoStyle}
+            {...imageBlockDemoProps}
+        />
+        <ImageBlock
+            aspectRatio={ThumbnailAspectRatios.horizontal}
             theme={theme}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
@@ -73,7 +73,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            aspectRatio={ImageBlockAspectRatios.vertical}
+            aspectRatio={ThumbnailAspectRatios.vertical}
             captionPosition={ImageBlockCaptionPositions.over}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
@@ -81,7 +81,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            aspectRatio={ImageBlockAspectRatios.horizontal}
+            aspectRatio={ThumbnailAspectRatios.horizontal}
             captionPosition={ImageBlockCaptionPositions.over}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
