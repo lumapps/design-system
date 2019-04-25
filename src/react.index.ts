@@ -98,13 +98,13 @@ export {
 } from './components/switch/react/Switch';
 
 export {
+    AspectRatios as ThumbnailAspectRatios,
+    AspectRatio as ThumbnailAspectRatio,
     CLASSNAME as ThumbnailClassName,
     Thumbnail,
     ThumbnailProps,
     Theme as ThumbnailTheme,
     Themes as ThumbnailThemes,
-    Sizes as ThumbnailSizes,
-    Variants as ThumbnailVariants,
 } from './components/thumbnail/react/Thumbnail';
 
 export {

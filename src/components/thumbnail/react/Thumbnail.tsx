@@ -10,26 +10,14 @@ import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /**
- * Authorized size values.
+ * All available aspect ratios.
  */
-enum Sizes {
-    xxs = 'xxs',
-    xs = 'xs',
-    s = 's',
-    m = 'm',
-    l = 'l',
-    xl = 'xl',
+const enum AspectRatios {
+    original = 'original',
+    horizontal = 'horizontal',
+    vertical = 'vertical',
 }
-type Size = Sizes;
-
-/**
- * Authorized variants.
- */
-enum Variants {
-    squared = 'squared',
-    rounded = 'rounded',
-}
-type Variant = Variants;
+type AspectRatio = AspectRatios;
 
 /////////////////////////////
 
@@ -37,10 +25,8 @@ type Variant = Variants;
  * Defines the props of the component.
  */
 interface IThumbnailProps extends IGenericProps {
-    /* Size. */
-    size?: Size;
-    /* Variant. */
-    variant?: Variant;
+    /* The image aspect ratio. */
+    aspectRatio?: AspectRatio;
     /* Theme. */
     theme?: Theme;
     /* Avatar image */
@@ -87,9 +73,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    size: Sizes.m,
+    aspectRatio: AspectRatios.original,
     theme: Themes.light,
-    variant: Variants.squared,
 };
 /////////////////////////////
 
@@ -101,25 +86,29 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  */
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',
-    size = DEFAULT_PROPS.size,
+    aspectRatio = DEFAULT_PROPS.aspectRatio,
     theme = DEFAULT_PROPS.theme,
-    variant = DEFAULT_PROPS.variant,
     image,
     ...props
 }: ThumbnailProps): React.ReactElement => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
+
+    const { alt = 'Thumbnail' }: IDefaultPropsType = props;
+
     return (
         <div
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, variant, theme }))}
+            className={classNames(className, handleBasicClasses({ aspectRatio, prefix: CLASSNAME, theme }))}
+            style={aspectRatio === AspectRatios.original ? {} : style}
             {...props}
-            style={style}
-        />
+        >
+            {aspectRatio === AspectRatios.original && <img src={image} alt={alt} />}
+        </div>
     );
 };
 Thumbnail.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Thumbnail, ThumbnailProps, Theme, Themes, Sizes, Variants };
+export { CLASSNAME, DEFAULT_PROPS, AspectRatio, AspectRatios, Thumbnail, ThumbnailProps, Theme, Themes };

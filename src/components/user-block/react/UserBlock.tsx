@@ -6,7 +6,6 @@ import { Orientation, Orientations, Theme, Themes } from 'LumX/components';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { ThumbnailVariants } from 'LumX';
 import { Thumbnail } from 'LumX/components/thumbnail/react/Thumbnail';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -159,7 +158,6 @@ const UserBlock: React.FC<IUserBlockProps> = ({
                     <Thumbnail
                         image={avatar}
                         size={componentSize}
-                        variant={ThumbnailVariants.rounded}
                         onMouseLeave={onMouseLeave}
                         onMouseEnter={onMouseEnter}
                         onClick={onClick}

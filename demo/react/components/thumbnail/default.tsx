@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 
-import { Thumbnail, ThumbnailSizes, ThumbnailTheme } from 'LumX';
+import { Thumbnail, ThumbnailAspectRatios, ThumbnailTheme } from 'LumX';
 
 /////////////////////////////
 
@@ -13,11 +13,9 @@ interface IProps {
 
 /////////////////////////////
 const componentHolder: CSSProperties = {
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
     fontSize: 11,
     margin: 8,
+    width: 200,
 };
 /**
  * The demo for the default <Thumbnail>s.
@@ -28,25 +26,21 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <div style={{ display: 'flex' }}>
             <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xxs} />
-                xxs
+                <Thumbnail theme={theme} image="http://i.pravatar.cc/200" />
             </div>
             <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xs} />
-                xs
+                <Thumbnail
+                    aspectRatio={ThumbnailAspectRatios.horizontal}
+                    image="http://i.pravatar.cc/200"
+                    theme={theme}
+                />
             </div>
             <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.s} />s
-            </div>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.m} />m
-            </div>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.l} />l
-            </div>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xl} />
-                xl
+                <Thumbnail
+                    aspectRatio={ThumbnailAspectRatios.vertical}
+                    image="http://i.pravatar.cc/200"
+                    theme={theme}
+                />
             </div>
         </div>
     </div>
