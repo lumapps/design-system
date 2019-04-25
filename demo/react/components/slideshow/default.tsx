@@ -21,7 +21,7 @@ interface IProps {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>
-        <Slideshow activeIndex={1} hasControls={true} theme={theme} autoPlay={true} groupBy={3}>
+        <Slideshow activeIndex={1} hasControls={true} theme={theme} autoPlay={true} groupBy={2}>
             <SlideshowItem>
                 <img src="https://picsum.photos/640/480/?image=24" alt="Pic Sum" />
             </SlideshowItem>

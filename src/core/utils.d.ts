@@ -33,6 +33,17 @@ declare function getBasicClass({
  */
 declare function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string;
 
+/**
+ * Detects swipe direction.
+ * Credits: http://javascriptkit.com/javatutors/touchevents2.shtml.
+ *
+ * @param {Element} el Element that will hold touch events.
+ * @param {(swipeDirection: SwipeDirection) => void} cb Callback function.
+ */
+declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) => void): void;
+
+declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
+
 /////////////////////////////
 
-export { getBasicClass, handleBasicClasses };
+export { getBasicClass, handleBasicClasses, detectSwipe, SwipeDirection };

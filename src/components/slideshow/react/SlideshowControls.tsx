@@ -15,7 +15,7 @@ import {
 } from 'LumX/components/slideshow/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { SwipeDirection, detectSwipe, handleBasicClasses } from 'LumX/core/utils';
 import { mdiChevronLeft, mdiChevronRight } from 'LumX/icons';
 
 import isFunction from 'lodash/isFunction';
@@ -262,6 +262,19 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     useEffect(() => {
         if (parentRef && parentRef.current) {
             parentRef.current.addEventListener('keydown', handleKeyPressed);
+
+            detectSwipe(
+                parentRef.current,
+                (swipeDirection: SwipeDirection): void => {
+                    if (swipeDirection === 'right') {
+                        handlePreviousClick();
+                    }
+
+                    if (swipeDirection === 'left') {
+                        handleNextClick();
+                    }
+                },
+            );
         }
 
         return (): void => {
