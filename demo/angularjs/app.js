@@ -48,6 +48,14 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.colors', {
+            url: 'colors',
+            views: {
+                'main@': {
+                    template: require('./foundations/colors/demo.html'),
+                },
+            },
+        })
         .state('app.button', {
             url: 'button',
             views: {
