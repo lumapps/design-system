@@ -1,4 +1,4 @@
-import React, { RefObject, useCallback, useEffect } from 'react';
+import React, { RefObject, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -143,21 +143,20 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      * Build an array of navigation elements.
      *
      * @param {number} index Index used to determinate position in slides.
+     * @param {number} previousIndex Previous active index.
      * @return {PaginationRange} Min and max for pagiation position.
      */
-    const getVisibleRange: (index: number) => PaginationRange = (index: number): PaginationRange => {
+    const initVisibleRange: (index: number) => PaginationRange = (index: number): PaginationRange => {
         const deltaItems: number = PAGINATION_ITEMS_MAX - 1;
-        let min: number = 0;
-        let max: number = 0;
+        let min: number = index - EDGE_FROM_ACTIVE_INDEX;
+        let max: number = index + EDGE_FROM_ACTIVE_INDEX;
 
-        if (index > lastSlide - deltaItems) {
+        if (index > lastSlide - EDGE_FROM_ACTIVE_INDEX) {
             min = lastSlide - deltaItems;
             max = lastSlide;
         } else if (index < deltaItems) {
+            min = 0;
             max = deltaItems;
-        } else {
-            min = index - EDGE_FROM_ACTIVE_INDEX;
-            max = index + EDGE_FROM_ACTIVE_INDEX;
         }
 
         return { minRange: min, maxRange: max };
@@ -248,9 +247,20 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
 
     //////////////////////
 
+    const [visibleRange, setVisibleRange]: [
+        PaginationRange,
+        React.Dispatch<React.SetStateAction<PaginationRange>>
+    ] = useState(initVisibleRange(activeIndex));
     const lastSlide: number = slidesCount - 1;
-    const visibleRange: PaginationRange = getVisibleRange(activeIndex);
     const paginationItems: JSX.Element[] = buildItemsArray(lastSlide);
+
+    if (activeIndex === visibleRange.maxRange && activeIndex < lastSlide) {
+        setVisibleRange(() => ({ minRange: visibleRange.minRange + 1, maxRange: visibleRange.maxRange + 1 }));
+    } else if (activeIndex === visibleRange.minRange && activeIndex > 0) {
+        setVisibleRange(() => ({ minRange: visibleRange.minRange - 1, maxRange: visibleRange.maxRange - 1 }));
+    } else if (activeIndex < visibleRange.minRange || activeIndex > visibleRange.maxRange) {
+        setVisibleRange(() => initVisibleRange(activeIndex));
+    }
 
     /**
      * Inline style of wrapper element.
