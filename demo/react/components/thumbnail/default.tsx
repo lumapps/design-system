@@ -1,6 +1,6 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, Fragment } from 'react';
 
-import { Thumbnail, ThumbnailSizes, ThumbnailTheme } from 'LumX';
+import { Thumbnail, ThumbnailAspectRatios, ThumbnailSizes, ThumbnailTheme } from 'LumX';
 
 /////////////////////////////
 
@@ -25,31 +25,152 @@ const componentHolder: CSSProperties = {
  * @return {React.ReactElement} The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-        <div style={{ display: 'flex' }}>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xxs} />
-                xxs
-            </div>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xs} />
-                xs
-            </div>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.s} />s
-            </div>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.m} />m
-            </div>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.l} />l
-            </div>
-            <div style={componentHolder}>
-                <Thumbnail theme={theme} image="http://i.pravatar.cc/128" size={ThumbnailSizes.xl} />
-                xl
+    <Fragment>
+        <h2>Aspect-ratio : original</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div style={{ display: 'flex' }}>
+                <div style={componentHolder}>
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xxs} />
+                    xxs
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xs} />
+                    xs
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.s} />s
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.m} />m
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.l} />l
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xl} />
+                    xl
+                </div>
             </div>
         </div>
-    </div>
+        <h2>Aspect-ratio : horizontal</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div style={{ display: 'flex' }}>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xxs}
+                    />
+                    xxs
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xs}
+                    />
+                    xs
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.s}
+                    />
+                    s
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.m}
+                    />
+                    m
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.l}
+                    />
+                    l
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xl}
+                    />
+                    xl
+                </div>
+            </div>
+        </div>
+        <h2>Aspect-ratio : vertical</h2>
+        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div style={{ display: 'flex' }}>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xxs}
+                    />
+                    xxs
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xs}
+                    />
+                    xs
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.s}
+                    />
+                    s
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.m}
+                    />
+                    m
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.l}
+                    />
+                    l
+                </div>
+                <div style={componentHolder}>
+                    <Thumbnail
+                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xl}
+                    />
+                    xl
+                </div>
+            </div>
+        </div>
+    </Fragment>
 );
 
 /////////////////////////////

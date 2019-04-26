@@ -1,34 +1,65 @@
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
+import template from './thumbnail.html';
+
+/////////////////////////////
+
+function ThumbnailController() {
+    // eslint-disable-next-line consistent-this
+    const lumx = this;
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get image style according to image url.
+     *
+     * @return {Object} The image style properties.
+     */
+    function getImageStyle() {
+        if (angular.isUndefined(lumx.aspectRatio) || lumx.aspectRatio === 'original') {
+            return {};
+        }
+
+        return {
+            backgroundImage: `url(${lumx.image})`,
+        };
+    }
+
+    /////////////////////////////
+
+    lumx.getImageStyle = getImageStyle;
+}
+
 /////////////////////////////
 
 function ThumbnailDirective() {
     'ngInject';
 
-    /**
-     * Get thumbnail template according to variant.
-     *
-     * @return {string} The thumbnail html template.
-     */
-    function getTemplate() {
-        return `<div class="${CSS_PREFIX}-thumbnail"></div>`;
-    }
-
     function link(scope, el, attrs) {
         const defaultProps = {
-            size: 'm',
+            aspectRatio: 'original',
             theme: 'light',
             variant: 'squared',
         };
 
-        attrs.$observe('lumxImage', (newImage) => {
-            el.css('background-image', `url(${newImage})`);
-        });
-
-        if (!attrs.lumxSize) {
-            el.addClass(`${CSS_PREFIX}-thumbnail--size-${defaultProps.size}`);
+        if (!attrs.lumxAspectRatio) {
+            el.addClass(`${CSS_PREFIX}-thumbnail--aspect-ratio-${defaultProps.aspectRatio}`);
         }
+
+        attrs.$observe('lumxAspectRatio', (aspectRatio) => {
+            if (!aspectRatio) {
+                return;
+            }
+
+            el.removeClass((index, className) => {
+                return (className.match(/(?:\S|-)*thumbnail--aspect-ratio-\S+/g) || []).join(' ');
+            }).addClass(`${CSS_PREFIX}-thumbnail--aspect-ratio-${aspectRatio}`);
+        });
 
         attrs.$observe('lumxSize', (size) => {
             if (!size) {
@@ -70,10 +101,17 @@ function ThumbnailDirective() {
     }
 
     return {
+        bindToController: true,
+        controller: ThumbnailController,
+        controllerAs: 'lumx',
         link,
         replace: true,
         restrict: 'E',
-        template: getTemplate,
+        scope: {
+            aspectRatio: '@?lumxAspectRatio',
+            image: '@lumxImage',
+        },
+        template,
     };
 }
 

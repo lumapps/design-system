@@ -5,33 +5,8 @@ import template from './image-block.html';
 /////////////////////////////
 
 function ImageBlockController() {
-    // eslint-disable-next-line consistent-this
+    // eslint-disable-next-line consistent-this, no-unused-vars
     const lumx = this;
-
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
-    /**
-     * Get image style according to image url and image height.
-     *
-     * @return {Object} The image style properties.
-     */
-    function getImageStyle() {
-        if (angular.isUndefined(lumx.aspectRatio) || lumx.aspectRatio === 'original') {
-            return {};
-        }
-
-        return {
-            backgroundImage: `url(${lumx.image})`,
-        };
-    }
-
-    /////////////////////////////
-
-    lumx.getImageStyle = getImageStyle;
 }
 
 /////////////////////////////

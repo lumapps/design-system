@@ -13,9 +13,12 @@
                 'lumx-image-block--theme-light': !lumx.theme || lumx.theme === 'light',
                 'lumx-image-block--theme-dark': lumx.theme === 'dark' }"
 >
-    <div class="lumx-image-block__image" ng-style="lumx.getImageStyle()">
-        <img ng-src="{{ lumx.image }}" ng-if="!lumx.aspectRatio || lumx.aspectRatio === 'original'" />
-    </div>
+    <lumx-thumbnail
+        class="lumx-image-block__image"
+        lumx-aspect-ratio="{{ lumx.aspectRatio }}"
+        lumx-image="{{ lumx.image }}"
+        lumx-theme="{{ lumx.theme }}"
+    ></lumx-thumbnail>
 
     <div
         class="lumx-image-block__wrapper"

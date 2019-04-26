@@ -2,6 +2,7 @@
 
 import './core/angularjs';
 
+import './components/avatar/angularjs/avatar_directive';
 import './components/button/angularjs/button_directive';
 import './components/button/angularjs/button-group_directive';
 import './components/checkbox/angularjs/checkbox_directive';
