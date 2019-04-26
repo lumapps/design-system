@@ -1,6 +1,16 @@
 import React, { Fragment, useCallback, useRef, useState } from 'react';
 
-import { Button, Lightbox, LightboxTheme } from 'LumX';
+import {
+    Button,
+    ImageBlock,
+    ImageBlockCaptionAlignments,
+    ImageBlockProps,
+    Lightbox,
+    LightboxTheme,
+    Slideshow,
+    Themes,
+} from 'LumX';
+import { SlideshowItem } from 'LumX/components/slideshow/react/SlideshowItem';
 
 /////////////////////////////
 
@@ -12,6 +22,15 @@ interface IProps {
 }
 
 /////////////////////////////
+
+const imageBlockDemoProps: Partial<ImageBlockProps> = {
+    captionAlign: ImageBlockCaptionAlignments.center,
+    description: 'What an image',
+    hasFilledHeight: true,
+    tags: ['#tag1', '#tag2', '#tag3'],
+    theme: Themes.dark,
+    title: 'Nice Image',
+};
 
 /**
  * The demo for the default <Lightbox>s.
@@ -56,12 +75,32 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 onOpen={onOpenModal}
                 theme={theme}
             >
-                <div style={{ backgroundColor: 'white', height: '400px', overflow: 'auto', width: '500px' }}>
-                    <b>Hello World</b>
-                    <br />
-                    <input type="text" />
-                    <br />
-                </div>
+                <Slideshow hasControls={true} autoPlay={true}>
+                    <SlideshowItem>
+                        <ImageBlock image="https://picsum.photos/640/480/?image=24" {...imageBlockDemoProps} />
+                    </SlideshowItem>
+                    <SlideshowItem>
+                        <ImageBlock image="https://picsum.photos/640/480/?image=25" {...imageBlockDemoProps} />
+                    </SlideshowItem>
+                    <SlideshowItem>
+                        <ImageBlock image="https://picsum.photos/640/480/?image=26" {...imageBlockDemoProps} />
+                    </SlideshowItem>
+                    <SlideshowItem>
+                        <ImageBlock image="https://picsum.photos/640/480/?image=27" {...imageBlockDemoProps} />
+                    </SlideshowItem>
+                    <SlideshowItem>
+                        <ImageBlock image="https://picsum.photos/640/480/?image=28" {...imageBlockDemoProps} />
+                    </SlideshowItem>
+                    <SlideshowItem>
+                        <ImageBlock image="https://picsum.photos/640/480/?image=29" {...imageBlockDemoProps} />
+                    </SlideshowItem>
+                    <SlideshowItem>
+                        <ImageBlock image="https://picsum.photos/640/480/?image=30" {...imageBlockDemoProps} />
+                    </SlideshowItem>
+                    <SlideshowItem>
+                        <ImageBlock image="https://picsum.photos/640/480/?image=31" {...imageBlockDemoProps} />
+                    </SlideshowItem>
+                </Slideshow>
             </Lightbox>
         </Fragment>
     );

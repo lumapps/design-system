@@ -152,7 +152,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
             )}
             {...props}
         >
-            <Thumbnail aspectRatio={aspectRatio} image={image} theme={theme} />
+            <Thumbnail className={`${CLASSNAME}__image`} aspectRatio={aspectRatio} image={image} theme={theme} />
             {(title || description || tags) && (
                 <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
                     {(title || description) && (
