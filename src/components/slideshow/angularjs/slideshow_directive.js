@@ -1,5 +1,11 @@
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import {
+    AUTOPLAY_DEFAULT_INTERVAL,
+    FULL_WIDTH_PERCENT,
+    LEFT_KEY_CODE,
+    RIGHT_KEY_CODE,
+} from 'LumX/components/slideshow/constants';
 
 import template from './slideshow.html';
 
@@ -16,42 +22,6 @@ function SlideshowController($element, $interval, $scope) {
     //    Private attributes   //
     //                         //
     /////////////////////////////
-
-    /**
-     * The autoplay default interval in ms.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _AUTOPLAY_DEFAULT_INTERVAL = 5000;
-
-    /**
-     * The full width size in percent.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _FULL_WIDTH_PERCENT = 100;
-
-    /**
-     * The left key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _LEFT_KEY_CODE = 37;
-
-    /**
-     * The right key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _RIGHT_KEY_CODE = 39;
 
     /**
      * The current slide index.
@@ -123,9 +93,9 @@ function SlideshowController($element, $interval, $scope) {
      */
     function _goToSlide(newIndex) {
         if (newIndex > _curentIndex) {
-            _curentTransformOffset -= _FULL_WIDTH_PERCENT * (newIndex - _curentIndex);
+            _curentTransformOffset -= FULL_WIDTH_PERCENT * (newIndex - _curentIndex);
         } else {
-            _curentTransformOffset += _FULL_WIDTH_PERCENT * (_curentIndex - newIndex);
+            _curentTransformOffset += FULL_WIDTH_PERCENT * (_curentIndex - newIndex);
         }
 
         _curentIndex = newIndex;
@@ -161,7 +131,7 @@ function SlideshowController($element, $interval, $scope) {
      * @param {Event} evt The key event.
      */
     function _onKeyPress(evt) {
-        if (evt.keyCode === _LEFT_KEY_CODE) {
+        if (evt.keyCode === LEFT_KEY_CODE) {
             _previousSlide();
 
             lumx.stopAutoPlay();
@@ -170,7 +140,7 @@ function SlideshowController($element, $interval, $scope) {
 
             evt.preventDefault();
             evt.stopPropagation();
-        } else if (evt.keyCode === _RIGHT_KEY_CODE) {
+        } else if (evt.keyCode === RIGHT_KEY_CODE) {
             _nextSlide();
 
             lumx.stopAutoPlay();
@@ -193,7 +163,7 @@ function SlideshowController($element, $interval, $scope) {
      */
     function startAutoPlay() {
         if (angular.isUndefined(lumx.autoPlayInterval)) {
-            lumx.autoPlayInterval = _AUTOPLAY_DEFAULT_INTERVAL;
+            lumx.autoPlayInterval = AUTOPLAY_DEFAULT_INTERVAL;
         }
 
         _autoPlayInterval = $interval(_nextSlide, lumx.autoPlayInterval);

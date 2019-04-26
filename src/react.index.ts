@@ -17,6 +17,7 @@ export {
     Variant as ButtonVariant,
     Variants as ButtonVariants,
 } from './components/button/react/Button';
+
 export {
     CLASSNAME as ChipClassName,
     Chip,
@@ -26,6 +27,7 @@ export {
     Theme as ChipTheme,
     Themes as ChipThemes,
 } from './components/chip/react/Chip';
+
 export {
     CLASSNAME as IconButtonClassName,
     Color as IconButtonColor,
@@ -41,6 +43,7 @@ export {
     Variant as IconButtonVariant,
     Variants as IconButtonVariants,
 } from './components/button/react/IconButton';
+
 export {
     CLASSNAME as DropdownButtonClassName,
     Color as DropdownButtonColor,
@@ -95,6 +98,14 @@ export {
     Theme as ImageBlockTheme,
     Themes as ImageBlockThemes,
 } from './components/image-block/react/ImageBlock';
+
+export {
+    CLASSNAME as SlideshowClassName,
+    Slideshow,
+    SlideshowProps,
+    Theme as SlideshowTheme,
+    Themes as SlideshowThemes,
+} from './components/slideshow/react/Slideshow';
 
 export {
     CLASSNAME as SwitchClassName,

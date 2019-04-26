@@ -29,6 +29,7 @@ import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
 
 enum Variants {
     button = 'button',
+    icon = 'icon',
 }
 type Variant = Variants;
 

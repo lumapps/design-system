@@ -3,6 +3,12 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 import { mdiChevronLeft, mdiChevronRight } from 'LumX/icons';
 
+import {
+    EDGE_FROM_ACTIVE_INDEX,
+    PAGINATION_ITEMS_MAX,
+    PAGINATION_ITEM_SIZE,
+} from 'LumX/components/slideshow/constants';
+
 import template from './slideshow-controls.html';
 
 /////////////////////////////
@@ -20,38 +26,11 @@ function SlideshowControlsController($element, $scope) {
     /////////////////////////////
 
     /**
-     * The edge from the active index.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _EDGE_FROM_ACTIVE_INDEX = 2;
-
-    /**
-     * The max number of pagination items.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _PAGINATION_ITEMS_MAX = 5;
-
-    /**
-     * The size of a pagination item. Used to translate wrapper.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _PAGINATION_ITEM_SIZE = 12;
-
-    /**
      * The current slide index.
      *
      * @type {number}
      */
-    let _curentIndex = 0;
+    let _currentIndex = 0;
 
     /**
      * The current transform offset.
@@ -81,7 +60,7 @@ function SlideshowControlsController($element, $scope) {
      *
      * @type {number}
      */
-    lumx.paginationItemsMax = _PAGINATION_ITEMS_MAX;
+    lumx.paginationItemsMax = PAGINATION_ITEMS_MAX;
 
     /**
      * The pagination items range.
@@ -118,8 +97,8 @@ function SlideshowControlsController($element, $scope) {
      * Initialize pagination items state.
      */
     function _initPaginationItemsState() {
-        let minRange = lumx.activeIndex - _EDGE_FROM_ACTIVE_INDEX;
-        let maxRange = lumx.activeIndex + _EDGE_FROM_ACTIVE_INDEX;
+        let minRange = lumx.activeIndex - EDGE_FROM_ACTIVE_INDEX;
+        let maxRange = lumx.activeIndex + EDGE_FROM_ACTIVE_INDEX;
 
         if (minRange < 0) {
             for (let i = minRange; i < 0; i++) {
@@ -135,7 +114,7 @@ function SlideshowControlsController($element, $scope) {
 
         lumx.paginationItemsVisibleRange = [minRange, maxRange];
 
-        _curentTransformOffset = _PAGINATION_ITEM_SIZE * minRange;
+        _curentTransformOffset = PAGINATION_ITEM_SIZE * minRange;
 
         _movePaginationWrapper();
     }
@@ -162,19 +141,19 @@ function SlideshowControlsController($element, $scope) {
 
         let [minRange, maxRange] = lumx.paginationItemsVisibleRange;
 
-        if (lumx.activeIndex > _curentIndex) {
+        if (lumx.activeIndex > _currentIndex) {
             if (lumx.activeIndex === maxRange && lumx.activeIndex !== lastSlideIndex) {
                 minRange++;
                 maxRange++;
 
-                _curentTransformOffset += _PAGINATION_ITEM_SIZE;
+                _curentTransformOffset += PAGINATION_ITEM_SIZE;
             }
-        } else if (lumx.activeIndex < _curentIndex) {
+        } else if (lumx.activeIndex < _currentIndex) {
             if (lumx.activeIndex === minRange && lumx.activeIndex !== firstSlideIndex) {
                 minRange--;
                 maxRange--;
 
-                _curentTransformOffset -= _PAGINATION_ITEM_SIZE;
+                _curentTransformOffset -= PAGINATION_ITEM_SIZE;
             }
         }
 
@@ -197,8 +176,8 @@ function SlideshowControlsController($element, $scope) {
     function goToSlide(newIndex) {
         lumx.activeIndex = newIndex;
 
-        if (angular.isFunction(lumx.OnPaginationClick)) {
-            lumx.OnPaginationClick();
+        if (angular.isFunction(lumx.onPaginationClick)) {
+            lumx.onPaginationClick();
         }
     }
 
@@ -293,7 +272,7 @@ function SlideshowControlsController($element, $scope) {
             }
         }
 
-        _curentIndex = lumx.activeIndex;
+        _currentIndex = lumx.activeIndex;
     });
 }
 
@@ -311,7 +290,7 @@ function SlideshowControlsDirective() {
         scope: {
             activeIndex: '=?lumxActiveIndex',
             onNextClick: '&?lumxOnNextClick',
-            OnPaginationClick: '&?lumxOnPaginationClick',
+            onPaginationClick: '&?lumxOnPaginationClick',
             onPreviousClick: '&?lumxOnPreviousClick',
             slidesCount: '=lumxSlidesCount',
             theme: '@?lumxTheme',
