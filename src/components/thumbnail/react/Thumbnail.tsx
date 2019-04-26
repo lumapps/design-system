@@ -100,7 +100,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     aspectRatio: AspectRatios.original,
-    size: Sizes.m,
+    size: undefined,
     theme: Themes.light,
     variant: Variants.squared,
 };
