@@ -53,11 +53,9 @@
 
 @for $i from 1 through 12 {
     .#{$lumx-base-prefix}-slideshow--group-by-#{$i} .#{$lumx-base-prefix}-slideshow-item {
-        display: flex;
         overflow: hidden;
         max-width: #{100 / $i + '%'};
         flex: 0 0 #{100 / $i + '%'};
-        justify-content: center;
     }
 }
 
