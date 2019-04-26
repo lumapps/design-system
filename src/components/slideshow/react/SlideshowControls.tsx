@@ -140,11 +140,10 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     };
 
     /**
-     * Build an array of navigation elements.
+     * Determines initial state of the visible range of pagination.
      *
      * @param {number} index Index used to determinate position in slides.
-     * @param {number} previousIndex Previous active index.
-     * @return {PaginationRange} Min and max for pagiation position.
+     * @return {PaginationRange} Min and max for pagination position.
      */
     const initVisibleRange: (index: number) => PaginationRange = (index: number): PaginationRange => {
         const deltaItems: number = PAGINATION_ITEMS_MAX - 1;
@@ -160,6 +159,21 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         }
 
         return { minRange: min, maxRange: max };
+    };
+
+    /**
+     * Updates state of the visible range of pagination.
+     *
+     * @param {number} index Index used to determinate position in slides.
+     */
+    const updateVisibleRange: (index: number) => void = (index: number): void => {
+        if (index === visibleRange.maxRange && index < lastSlide) {
+            setVisibleRange(() => ({ minRange: visibleRange.minRange + 1, maxRange: visibleRange.maxRange + 1 }));
+        } else if (index === visibleRange.minRange && index > 0) {
+            setVisibleRange(() => ({ minRange: visibleRange.minRange - 1, maxRange: visibleRange.maxRange - 1 }));
+        } else if (index < visibleRange.minRange || index > visibleRange.maxRange) {
+            setVisibleRange(() => initVisibleRange(index));
+        }
     };
 
     /**
@@ -254,13 +268,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     const lastSlide: number = slidesCount - 1;
     const paginationItems: JSX.Element[] = buildItemsArray(lastSlide);
 
-    if (activeIndex === visibleRange.maxRange && activeIndex < lastSlide) {
-        setVisibleRange(() => ({ minRange: visibleRange.minRange + 1, maxRange: visibleRange.maxRange + 1 }));
-    } else if (activeIndex === visibleRange.minRange && activeIndex > 0) {
-        setVisibleRange(() => ({ minRange: visibleRange.minRange - 1, maxRange: visibleRange.maxRange - 1 }));
-    } else if (activeIndex < visibleRange.minRange || activeIndex > visibleRange.maxRange) {
-        setVisibleRange(() => initVisibleRange(activeIndex));
-    }
+    updateVisibleRange(activeIndex);
 
     /**
      * Inline style of wrapper element.
@@ -292,7 +300,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
                 parentRef.current.removeEventListener('keydown', handleKeyPressed);
             }
         };
-    }, [parentRef]);
+    }, [activeIndex, parentRef]);
 
     return (
         <div
