@@ -88,6 +88,15 @@ export {
 } from './components/icon/react/Icon';
 
 export {
+    CLASSNAME as ImageBlockClassName,
+    CaptionPositions as ImageBlockCaptionPositions,
+    ImageBlock,
+    ImageBlockProps,
+    Theme as ImageBlockTheme,
+    Themes as ImageBlockThemes,
+} from './components/image-block/react/ImageBlock';
+
+export {
     CLASSNAME as SwitchClassName,
     Position as SwitchPosition,
     Positions as SwitchPositions,
