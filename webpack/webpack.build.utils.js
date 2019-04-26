@@ -272,6 +272,20 @@ function getBuildConfig({ config, tech, moduleType }) {
     })(config, {
         bail: true,
         devtool: minify ? 'source-map' : '',
+        externals: {
+            react: {
+                amd: 'react',
+                commonjs: 'react',
+                commonjs2: 'react',
+                root: 'React',
+            },
+            'react-dom': {
+                amd: 'react-dom',
+                commonjs: 'react-dom',
+                commonjs2: 'react-dom',
+                root: 'ReactDOM',
+            },
+        },
         mode: 'production',
         name: `${tech}-${moduleType}${minify ? '-minified' : ''}`,
 
