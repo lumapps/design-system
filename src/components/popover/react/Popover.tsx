@@ -61,16 +61,27 @@ type Size = ISize;
  * Defines the props of the component.
  */
 interface IPopoverProps extends IGenericProps {
+    /* The reference element that will be used as the anchor */
     anchorElement: React.ReactNode;
-    popperOffset?: PopperOffsets;
+    /* The element that will be displayed flying above the UI */
     popperElement?: React.ReactNode;
+    /* vertical and/or horizontal offsets that will be applied to the popper position */
+    popperOffset?: PopperOffsets;
+    /* Should the popper be displayed ? */
     showPopper?: boolean | (() => boolean);
+    /* The prefered popper location against the anchor */
     popperPlacement?: PopperPositions | string;
+    /* Use the popover as a tooltip engine => auto show/hide the popper when hovering the anchor */
     useTooltipMode?: boolean | (() => boolean);
+    /* Customize the delay when showing / hiding the popper */
     tooltipShowHideDelay?: number | undefined;
+    /* Force the popper width to match the anchor's */
     matchAnchorWidth?: boolean;
+    /* Force the popper wrapper to fill the width */
     fillwidth?: boolean;
+    /* Force the popper wrapper to fill the height */
     fillHeight?: boolean;
+    /* Prevent the popper to be fliped i.e. stays at its reference placement  */
     lockFlip?: boolean;
 }
 type PopoverProps = IPopoverProps;
@@ -181,10 +192,10 @@ function computeSize(
         popperHolderSize.width = `${anchorRef.getBoundingClientRect().width >> 0}px`;
     } else {
         if (fillHeight) {
-            popperHolderSize.height = viewportHeight - (ty + SAFE_ZONE);
+            popperHolderSize.height = `${viewportHeight - (ty + SAFE_ZONE)}px`;
         }
         if (fillwidth) {
-            popperHolderSize.width = viewportWidth - (tx + SAFE_ZONE);
+            popperHolderSize.width = `${viewportWidth - (tx + SAFE_ZONE)}px`;
         }
     }
 

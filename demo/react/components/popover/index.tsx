@@ -15,7 +15,8 @@ const category: Category = Categories.components;
 /**
  * The description of the component.
  */
-const description: string = '';
+const description: string =
+    'Popovers can be used as a component to position floating elements over the UI but also as a based element to build advanced behavior like tooltips, dropdown selectors, on hover details ... Etc.';
 
 const demos: { [demoName: string]: DemoObject } = {
     /* tslint:disable: object-literal-sort-keys */
@@ -42,7 +43,7 @@ const demos: { [demoName: string]: DemoObject } = {
     },
     matchParentWidth: {
         description: 'You can force the width of the popper to match the anchor width.',
-        title: 'Popover match the anchor width',
+        title: 'Popover matches the anchor width',
     },
     realCase: {
         description: '',
