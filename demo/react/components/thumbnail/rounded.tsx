@@ -1,6 +1,6 @@
 import React, { CSSProperties, Fragment } from 'react';
 
-import { Thumbnail, ThumbnailAspectRatios, ThumbnailSizes, ThumbnailTheme } from 'LumX';
+import { Thumbnail, ThumbnailAspectRatios, ThumbnailSizes, ThumbnailTheme, ThumbnailVariants } from 'LumX';
 
 /////////////////////////////
 
@@ -30,24 +30,57 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div style={{ display: 'flex' }}>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xxs} />
+                    <Thumbnail
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xxs}
+                        variant={ThumbnailVariants.rounded}
+                    />
                     xxs
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xs} />
+                    <Thumbnail
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xs}
+                        variant={ThumbnailVariants.rounded}
+                    />
                     xs
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.s} />s
+                    <Thumbnail
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.s}
+                        variant={ThumbnailVariants.rounded}
+                    />
+                    s
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.m} />m
+                    <Thumbnail
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.m}
+                        variant={ThumbnailVariants.rounded}
+                    />
+                    m
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.l} />l
+                    <Thumbnail
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.l}
+                        variant={ThumbnailVariants.rounded}
+                    />
+                    l
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xl} />
+                    <Thumbnail
+                        theme={theme}
+                        image="http://i.pravatar.cc/200"
+                        size={ThumbnailSizes.xl}
+                        variant={ThumbnailVariants.rounded}
+                    />
                     xl
                 </div>
             </div>
@@ -61,6 +94,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.xxs}
+                        variant={ThumbnailVariants.rounded}
                     />
                     xxs
                 </div>
@@ -70,6 +104,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.xs}
+                        variant={ThumbnailVariants.rounded}
                     />
                     xs
                 </div>
@@ -79,6 +114,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.s}
+                        variant={ThumbnailVariants.rounded}
                     />
                     s
                 </div>
@@ -88,6 +124,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.m}
+                        variant={ThumbnailVariants.rounded}
                     />
                     m
                 </div>
@@ -97,6 +134,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.l}
+                        variant={ThumbnailVariants.rounded}
                     />
                     l
                 </div>
@@ -106,6 +144,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.xl}
+                        variant={ThumbnailVariants.rounded}
                     />
                     xl
                 </div>
@@ -120,6 +159,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.xxs}
+                        variant={ThumbnailVariants.rounded}
                     />
                     xxs
                 </div>
@@ -129,6 +169,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.xs}
+                        variant={ThumbnailVariants.rounded}
                     />
                     xs
                 </div>
@@ -138,6 +179,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.s}
+                        variant={ThumbnailVariants.rounded}
                     />
                     s
                 </div>
@@ -147,6 +189,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.m}
+                        variant={ThumbnailVariants.rounded}
                     />
                     m
                 </div>
@@ -156,6 +199,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.l}
+                        variant={ThumbnailVariants.rounded}
                     />
                     l
                 </div>
@@ -165,6 +209,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         theme={theme}
                         image="http://i.pravatar.cc/200"
                         size={ThumbnailSizes.xl}
+                        variant={ThumbnailVariants.rounded}
                     />
                     xl
                 </div>

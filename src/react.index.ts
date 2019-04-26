@@ -101,10 +101,12 @@ export {
     AspectRatios as ThumbnailAspectRatios,
     AspectRatio as ThumbnailAspectRatio,
     CLASSNAME as ThumbnailClassName,
+    Sizes as ThumbnailSizes,
     Thumbnail,
     ThumbnailProps,
     Theme as ThumbnailTheme,
     Themes as ThumbnailThemes,
+    Variants as ThumbnailVariants,
 } from './components/thumbnail/react/Thumbnail';
 
 export {

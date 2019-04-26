@@ -6,7 +6,7 @@ import { Orientation, Orientations, Theme, Themes } from 'LumX/components';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { Thumbnail } from 'LumX/components/thumbnail/react/Thumbnail';
+import { Thumbnail, ThumbnailVariants } from 'LumX';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -163,6 +163,7 @@ const UserBlock: React.FC<IUserBlockProps> = ({
                         onClick={onClick}
                         tabIndex={onClick ? 0 : -1}
                         theme={theme}
+                        variant={ThumbnailVariants.rounded}
                     />
                 </div>
             )}

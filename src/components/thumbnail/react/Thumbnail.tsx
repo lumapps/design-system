@@ -19,6 +19,28 @@ const enum AspectRatios {
 }
 type AspectRatio = AspectRatios;
 
+/**
+ *  Authorized size values.
+ */
+enum Sizes {
+    xxs = 'xxs',
+    xs = 'xs',
+    s = 's',
+    m = 'm',
+    l = 'l',
+    xl = 'xl',
+}
+type Size = Sizes;
+
+/**
+ * Authorized variants.
+ */
+enum Variants {
+    squared = 'squared',
+    rounded = 'rounded',
+}
+type Variant = Variants;
+
 /////////////////////////////
 
 /**
@@ -27,10 +49,14 @@ type AspectRatio = AspectRatios;
 interface IThumbnailProps extends IGenericProps {
     /* The image aspect ratio. */
     aspectRatio?: AspectRatio;
-    /* Theme. */
-    theme?: Theme;
     /* Avatar image */
     image: string;
+    /* Size. */
+    size?: Size;
+    /* Theme. */
+    theme?: Theme;
+    /* Variant. */
+    variant?: Variant;
 }
 type ThumbnailProps = IThumbnailProps;
 
@@ -74,7 +100,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     aspectRatio: AspectRatios.original,
+    size: Sizes.m,
     theme: Themes.light,
+    variant: Variants.squared,
 };
 /////////////////////////////
 
@@ -87,7 +115,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',
     aspectRatio = DEFAULT_PROPS.aspectRatio,
+    size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
+    variant = DEFAULT_PROPS.variant,
     image,
     ...props
 }: ThumbnailProps): React.ReactElement => {
@@ -99,7 +129,10 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 
     return (
         <div
-            className={classNames(className, handleBasicClasses({ aspectRatio, prefix: CLASSNAME, theme }))}
+            className={classNames(
+                className,
+                handleBasicClasses({ aspectRatio, prefix: CLASSNAME, size, theme, variant }),
+            )}
             style={aspectRatio === AspectRatios.original ? {} : style}
             {...props}
         >
@@ -111,4 +144,15 @@ Thumbnail.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, AspectRatio, AspectRatios, Thumbnail, ThumbnailProps, Theme, Themes };
+export {
+    CLASSNAME,
+    DEFAULT_PROPS,
+    AspectRatio,
+    AspectRatios,
+    Sizes,
+    Thumbnail,
+    ThumbnailProps,
+    Theme,
+    Themes,
+    Variants,
+};

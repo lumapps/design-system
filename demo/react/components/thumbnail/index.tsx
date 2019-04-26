@@ -25,6 +25,9 @@ const demos: { [demoName: string]: DemoObject } = {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris placerat enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.',
         title: 'Default',
     },
+    rounded: {
+        title: 'Rounded',
+    },
     /* tslint:enable: object-literal-sort-keys */
 };
 
