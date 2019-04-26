@@ -39,8 +39,9 @@ declare function handleBasicClasses({ prefix, ...props }: { prefix: string; [pro
  *
  * @param {Element} el Element that will hold touch events.
  * @param {(swipeDirection: SwipeDirection) => void} cb Callback function.
+ * @return {() => void)} Function to remove listeners.
  */
-declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) => void): void;
+declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) => void): () => void;
 
 declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
 

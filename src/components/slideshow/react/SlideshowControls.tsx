@@ -278,10 +278,12 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     };
 
     useEffect(() => {
+        let swipeListeners: () => void;
+
         if (parentRef && parentRef.current) {
             parentRef.current.addEventListener('keydown', handleKeyPressed);
 
-            detectSwipe(
+            swipeListeners = detectSwipe(
                 parentRef.current,
                 (swipeDirection: SwipeDirection): void => {
                     if (swipeDirection === 'right') {
@@ -298,6 +300,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         return (): void => {
             if (parentRef && parentRef.current) {
                 parentRef.current.removeEventListener('keydown', handleKeyPressed);
+                swipeListeners();
             }
         };
     }, [activeIndex, parentRef]);
