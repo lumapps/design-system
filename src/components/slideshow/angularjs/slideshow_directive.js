@@ -1,11 +1,6 @@
-import { CSS_PREFIX } from 'LumX/core/constants';
+import { CSS_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
-import {
-    AUTOPLAY_DEFAULT_INTERVAL,
-    FULL_WIDTH_PERCENT,
-    LEFT_KEY_CODE,
-    RIGHT_KEY_CODE,
-} from 'LumX/components/slideshow/constants';
+import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from 'LumX/components/slideshow/constants';
 
 import template from './slideshow.html';
 

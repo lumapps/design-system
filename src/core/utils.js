@@ -5,6 +5,8 @@ import isEmpty from 'lodash/isEmpty';
 import kebabCase from 'lodash/kebabCase';
 import { noop } from 'lodash/noop';
 
+import { ENTER_KEY_CODE } from './constants';
+
 /////////////////////////////
 //                         //
 //     Public functions    //
@@ -122,6 +124,22 @@ function detectSwipe(el, cb = noop) {
     };
 }
 
+/**
+ * Make sure the pressed key is the enter key before calling the callbac.
+ *
+ * @param  {Function} cb The callback to call on enter/return press.
+ * @return {Function} The decorated function.
+ */
+function onEnterPressed(cb) {
+    return (evt) => {
+        if (evt.keyCode !== ENTER_KEY_CODE) {
+            return;
+        }
+
+        cb();
+    };
+}
+
 /////////////////////////////
 
-export { getBasicClass, handleBasicClasses, detectSwipe };
+export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed };

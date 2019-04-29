@@ -8,11 +8,10 @@ import { Emphasises } from 'LumX/components/button/react/Button';
 import { Variants } from 'LumX/components/button/react/DropdownButton';
 import {
     EDGE_FROM_ACTIVE_INDEX,
-    LEFT_KEY_CODE,
     PAGINATION_ITEMS_MAX,
     PAGINATION_ITEM_SIZE,
-    RIGHT_KEY_CODE,
 } from 'LumX/components/slideshow/constants';
+import { LEFT_KEY_CODE, RIGHT_KEY_CODE } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { SwipeDirection, detectSwipe, handleBasicClasses } from 'LumX/core/utils';

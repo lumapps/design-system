@@ -6,8 +6,10 @@ import { Theme, Themes } from 'LumX/components';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
+import isFunction from 'lodash/isFunction';
+
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
 /**
  * All available aspect ratios.
@@ -125,7 +127,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         backgroundImage: `url(${image})`,
     };
 
-    const { alt = 'Thumbnail' }: IDefaultPropsType = props;
+    const { alt = 'Thumbnail', onClick = null, ...restProps }: IDefaultPropsType = props;
 
     return (
         <div
@@ -134,7 +136,10 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                 handleBasicClasses({ aspectRatio, prefix: CLASSNAME, size, theme, variant }),
             )}
             style={aspectRatio === AspectRatios.original ? {} : style}
-            {...props}
+            tabIndex={isFunction(onClick) ? 0 : -1}
+            onClick={onClick}
+            onKeyDown={onEnterPressed(onClick)}
+            {...restProps}
         >
             {aspectRatio === AspectRatios.original && <img src={image} alt={alt} />}
         </div>

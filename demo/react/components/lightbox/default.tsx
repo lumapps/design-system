@@ -26,7 +26,7 @@ interface IProps {
 const imageBlockDemoProps: Partial<ImageBlockProps> = {
     captionAlign: ImageBlockCaptionAlignments.center,
     description: 'What an image',
-    hasFilledHeight: true,
+    fillHeight: true,
     tags: ['#tag1', '#tag2', '#tag3'],
     theme: Themes.dark,
     title: 'Nice Image',
@@ -75,7 +75,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 onOpen={onOpenModal}
                 theme={theme}
             >
-                <Slideshow hasControls={true} autoPlay={true} theme={Themes.dark}>
+                <Slideshow hasControls={true} autoPlay={true} fillHeight={true} theme={Themes.dark}>
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=24" {...imageBlockDemoProps} />
                     </SlideshowItem>

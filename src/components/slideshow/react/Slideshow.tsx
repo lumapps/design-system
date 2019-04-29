@@ -22,6 +22,8 @@ interface ISlideshowProps extends IGenericProps {
     activeIndex?: number;
     /** Enable/disable automatic rotation of slideshow */
     autoPlay?: boolean;
+    /* Whether the image has to fill its container's height. */
+    fillHeight?: boolean;
     /** Enable grouping of slides */
     groupBy?: number;
     /** Enable/disable controls for slideshow */
@@ -74,6 +76,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeIndex: 0,
     autoPlay: false,
+    fillHeight: false,
     groupBy: 1,
     hasControls: false,
     interval: AUTOPLAY_DEFAULT_INTERVAL,
@@ -147,6 +150,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     autoPlay = DEFAULT_PROPS.autoPlay,
     children,
     className = '',
+    fillHeight = DEFAULT_PROPS.fillHeight,
     groupBy = DEFAULT_PROPS.groupBy,
     hasControls = DEFAULT_PROPS.hasControls,
     interval = DEFAULT_PROPS.interval,
@@ -259,6 +263,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
+                [`${CLASSNAME}--fill-height`]: fillHeight,
                 [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
             })}
             {...props}

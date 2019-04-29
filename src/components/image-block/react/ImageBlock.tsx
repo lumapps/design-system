@@ -50,7 +50,7 @@ interface IImageBlockProps extends IGenericProps {
               __html: string;
           };
     /* Whether the image has to fill its container's height. */
-    hasFilledHeight?: boolean;
+    fillHeight?: boolean;
     /* The url of the image we want to display in the image-block. */
     image: string;
     /** A list of tags, those tags will be displayed in a chip component. */
@@ -106,7 +106,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     captionPosition: CaptionPositions.below,
     captionStyle: {},
     description: undefined,
-    hasFilledHeight: false,
+    fillHeight: false,
     tags: undefined,
     theme: Themes.light,
     title: undefined,
@@ -126,13 +126,15 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     captionPosition = DEFAULT_PROPS.captionPosition,
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,
-    hasFilledHeight = DEFAULT_PROPS.hasFilledHeight,
+    fillHeight = DEFAULT_PROPS.fillHeight,
     image,
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
     ...props
 }: ImageBlockProps): React.ReactElement => {
+    const { onClick = null, ...restProps }: IDefaultPropsType = props;
+
     return (
         <div
             className={classNames(
@@ -145,14 +147,20 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                     theme,
                 }),
                 {
-                    [`${CLASSNAME}--fill-height`]: hasFilledHeight,
+                    [`${CLASSNAME}--fill-height`]: fillHeight,
                     [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== 'original',
                     [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === 'original',
                 },
             )}
-            {...props}
+            {...restProps}
         >
-            <Thumbnail className={`${CLASSNAME}__image`} aspectRatio={aspectRatio} image={image} theme={theme} />
+            <Thumbnail
+                className={`${CLASSNAME}__image`}
+                aspectRatio={aspectRatio}
+                image={image}
+                onClick={onClick}
+                theme={theme}
+            />
             {(title || description || tags) && (
                 <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
                     {(title || description) && (

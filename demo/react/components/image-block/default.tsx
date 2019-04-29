@@ -21,6 +21,10 @@ const imageBlockDemoStyle: CSSProperties = {
 
 const imageBlockDemoProps: Partial<ImageBlockProps> = {
     description: 'What an image',
+    onClick: (): void => {
+        // tslint:disable-next-line: no-console
+        console.log('Thumbnail clicked');
+    },
     tags: ['#tag1', '#tag2', '#tag3'],
     title: 'Nice Image',
 };

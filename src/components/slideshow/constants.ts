@@ -15,22 +15,6 @@ const AUTOPLAY_DEFAULT_INTERVAL: number = 5000;
 const FULL_WIDTH_PERCENT: number = 100;
 
 /**
- * The left key code.
- *
- * @type {number}
- * @constant
- */
-const LEFT_KEY_CODE: number = 37;
-
-/**
- * The right key code.
- *
- * @type {number}
- * @constant
- */
-const RIGHT_KEY_CODE: number = 39;
-
-/**
  * The edge from the active index.
  *
  * @type {number}
@@ -58,8 +42,6 @@ export {
     AUTOPLAY_DEFAULT_INTERVAL,
     EDGE_FROM_ACTIVE_INDEX,
     FULL_WIDTH_PERCENT,
-    LEFT_KEY_CODE,
     PAGINATION_ITEMS_MAX,
     PAGINATION_ITEM_SIZE,
-    RIGHT_KEY_CODE,
 };

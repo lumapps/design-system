@@ -45,6 +45,14 @@ declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) =
 
 declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
 
+/**
+ * Make sure the pressed key is the enter key before calling the callbac.
+ *
+ * @param  {Function}   cb The callback to call on enter/return press.
+ * @return {() => void} The decorated function.
+ */
+declare function onEnterPressed(cb: () => void);
+
 /////////////////////////////
 
-export { getBasicClass, handleBasicClasses, detectSwipe, SwipeDirection };
+export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, SwipeDirection };
