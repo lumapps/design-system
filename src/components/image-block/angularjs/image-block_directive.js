@@ -26,6 +26,7 @@ function ImageBlockDirective() {
             description: '@?lumxDescription',
             fillHeight: '=?lumxFillHeight',
             image: '@lumxImage',
+            onClick: '&?lumxOnClick',
             tags: '=?lumxTags',
             theme: '@?lumxTheme',
             title: '@?lumxTitle',

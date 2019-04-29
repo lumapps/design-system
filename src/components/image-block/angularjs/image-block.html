@@ -18,6 +18,8 @@
         lumx-aspect-ratio="{{ lumx.aspectRatio }}"
         lumx-image="{{ lumx.image }}"
         lumx-theme="{{ lumx.theme }}"
+        ng-click="lumx.onClick()"
+        tabindex="{{ lumx.onClick ? 0 : -1 }}"
     ></lumx-thumbnail>
 
     <div
