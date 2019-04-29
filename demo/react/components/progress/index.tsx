@@ -5,7 +5,7 @@ import { Categories, Category, DemoObject } from 'LumX/demo/react/constants';
 /**
  * The title of the demo.
  */
-const title: string = 'Progresss';
+const title: string = 'Progress';
 
 /**
  * The category of the demo.
@@ -15,15 +15,15 @@ const category: Category = Categories.components;
 /**
  * The description of the component.
  */
-const description: string =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris placerat enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.';
+const description: string = '';
 
 const demos: { [demoName: string]: DemoObject } = {
     /* tslint:disable: object-literal-sort-keys */
     default: {
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris placerat enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.',
-        title: 'Default',
+        title: 'Default (Circular)',
+    },
+    linear: {
+        title: 'Linear',
     },
     /* tslint:enable: object-literal-sort-keys */
 };

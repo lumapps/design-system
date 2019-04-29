@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 import classNames from 'classnames';
 
@@ -86,8 +86,18 @@ const Progress: React.FC<ProgressProps> = ({
             {...props}
         >
             <div className={classNames(`${CLASSNAME}-${variant}`)}>
-                <div className="lumx-progress-circular__double-bounce1" />
-                <div className="lumx-progress-circular__double-bounce2" />
+                {variant === Variants.circular && (
+                    <Fragment>
+                        <div className="lumx-progress-circular__double-bounce1" />
+                        <div className="lumx-progress-circular__double-bounce2" />
+                    </Fragment>
+                )}
+                {variant === Variants.linear && (
+                    <Fragment>
+                        <div className="lumx-progress-linear__line1" />
+                        <div className="lumx-progress-linear__line2" />
+                    </Fragment>
+                )}
             </div>
         </div>
     );
