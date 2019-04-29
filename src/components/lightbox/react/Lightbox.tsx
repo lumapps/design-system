@@ -109,6 +109,8 @@ const Lightbox: React.FC<LightboxProps> = ({
 }: LightboxProps): React.ReactElement => {
     // tslint:disable-next-line: no-any
     const buttonRef: React.RefObject<any> = useRef(null);
+    // tslint:disable-next-line: no-any
+    const childrenRef: React.RefObject<any> = useRef(null);
     const [isTrapActive, setTrapActive]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(
         false,
     );
@@ -132,9 +134,9 @@ const Lightbox: React.FC<LightboxProps> = ({
      * Callback on activation of focus trap.
      */
     const handleFocusActivation: () => void = (): void => {
-        if (buttonRef && buttonRef.current) {
+        if (childrenRef && childrenRef.current && childrenRef.current.firstChild) {
             // Set focus inside lightbox.
-            buttonRef.current.focus();
+            childrenRef.current.firstChild.focus();
         }
 
         if (isFunction(onOpen)) {
@@ -217,7 +219,12 @@ const Lightbox: React.FC<LightboxProps> = ({
                                 variant={Variants.icon}
                                 onClick={handleClose}
                             />
-                            <div className={`${CLASSNAME}__wrapper`} role="presentation" onClick={preventClick}>
+                            <div
+                                ref={childrenRef}
+                                className={`${CLASSNAME}__wrapper`}
+                                role="presentation"
+                                onClick={preventClick}
+                            >
                                 {children}
                             </div>
                         </div>
