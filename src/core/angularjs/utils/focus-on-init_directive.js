@@ -5,7 +5,11 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 function FocusOnInitDirective($timeout) {
     'ngInject';
 
-    function link(scope, el) {
+    function link(scope, el, attrs) {
+        if (angular.isDefined(attrs.lumxFocusOnInit) && attrs.lumxFocusOnInit && !scope.$eval(attrs.lumxFocusOnInit)) {
+            return;
+        }
+
         $timeout(() => {
             el.focus();
         });
