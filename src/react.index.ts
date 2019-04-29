@@ -148,3 +148,9 @@ export {
     Theme as UserBlockTheme,
     Themes as UserBlockThemes,
 } from './components/user-block/react/UserBlock';
+export {
+    CLASSNAME as ProgressClassName,
+    Progress,
+    ProgressProps,
+    Variants,
+} from './components/progress/react/Progress';
