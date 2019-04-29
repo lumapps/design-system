@@ -8,9 +8,9 @@ import {
     Lightbox,
     LightboxTheme,
     Slideshow,
+    SlideshowItem,
     Themes,
 } from 'LumX';
-import { SlideshowItem } from 'LumX/components/slideshow/react/SlideshowItem';
 
 /////////////////////////////
 

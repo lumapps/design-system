@@ -116,6 +116,8 @@ export {
     Themes as SlideshowThemes,
 } from './components/slideshow/react/Slideshow';
 
+export { CLASSNAME as SlideshowItemClassName, SlideshowItem } from './components/slideshow/react/SlideshowItem';
+
 export {
     CLASSNAME as SwitchClassName,
     Position as SwitchPosition,
