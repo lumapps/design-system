@@ -28,6 +28,15 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LumXD
     const _DOWN_KEY_CODE = 40;
 
     /**
+     * The enter key code.
+     *
+     * @type {number}
+     * @constant
+     * @readonly
+     */
+    const _ENTER_KEY_CODE = 13;
+
+    /**
      * The choice template.
      *
      * @type {string}
@@ -218,7 +227,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LumXD
      * @param {Event} evt The key event.
      */
     function _onKeyPress(evt) {
-        if (evt.keyCode === _DOWN_KEY_CODE && !lumx.isOpen) {
+        if ((evt.keyCode === _DOWN_KEY_CODE || evt.keyCode === _ENTER_KEY_CODE) && !lumx.isOpen) {
             lumx.openDropdown();
 
             evt.preventDefault();
