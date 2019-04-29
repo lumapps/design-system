@@ -118,5 +118,5 @@
 
 @mixin lumx-state-transition() {
     transition-duration: $lumx-state-transition-duration;
-    transition-property: background-color, box-shadow;
+    transition-property: background-color, box-shadow, color;
 }
