@@ -7,6 +7,20 @@ import { noop } from 'lodash/noop';
 
 import { ENTER_KEY_CODE } from './constants';
 
+/**
+ * Enhance isEmpty method to also works with numbers.
+ *
+ * @param  {any}     value The value to check
+ * @return {boolean} Weither if the input value is empty or != 0.
+ */
+const _isEmpty = (value) => {
+    if (typeof value === 'number') {
+        return value === 0;
+    }
+
+    return isEmpty(value);
+};
+
 /////////////////////////////
 //                         //
 //     Public functions    //
@@ -46,7 +60,7 @@ function handleBasicClasses({ prefix, ...props }) {
         Object.keys(props).forEach((prop) => {
             otherClasses[getBasicClass({ prefix, type: prop, value: props[prop] })] = isBoolean(props[prop])
                 ? props[prop]
-                : !isEmpty(props[prop]);
+                : !_isEmpty(props[prop]);
         });
     }
 

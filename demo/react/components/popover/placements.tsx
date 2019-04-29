@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, ReactNode, useState } from 'react';
 
 import { Placements, Popover } from 'LumX';
 
@@ -9,7 +9,7 @@ interface IProps {
      * The theme to use to display this demo.
      */
 }
-const demoAnchorStyle: React.CSSProperties = {
+const demoAnchorStyle: CSSProperties = {
     border: '1px solid grey',
     cursor: 'default',
     fontSize: '12px',
@@ -18,7 +18,7 @@ const demoAnchorStyle: React.CSSProperties = {
     width: '100px',
 };
 
-const demoPopperStyle: React.CSSProperties = {
+const demoPopperStyle: CSSProperties = {
     backgroundColor: 'black',
     borderRadius: '3px',
     color: 'white',
@@ -27,17 +27,17 @@ const demoPopperStyle: React.CSSProperties = {
     width: '266px',
 };
 
-function createDemoAnchor(): React.ReactNode {
+const createDemoAnchor: () => ReactNode = (): ReactNode => {
     return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
-}
+};
 
-function createPopper(): React.ReactNode {
+const createPopper: () => ReactNode = (): ReactNode => {
     return (
         <div style={demoPopperStyle}>
             {`Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. `}
         </div>
     );
-}
+};
 
 /**
  * The demo for the default <Popover>s.

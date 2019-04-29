@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, ReactNode, useState } from 'react';
 
 import { Placements, Popover } from 'LumX';
 
@@ -9,7 +9,7 @@ interface IProps {
      * The theme to use to display this demo.
      */
 }
-const demoAnchorStyle: React.CSSProperties = {
+const demoAnchorStyle: CSSProperties = {
     border: '1px solid grey',
     cursor: 'default',
     fontSize: '12px',
@@ -18,7 +18,7 @@ const demoAnchorStyle: React.CSSProperties = {
     width: '100px',
 };
 
-const demoPopperStyle: React.CSSProperties = {
+const demoPopperStyle: CSSProperties = {
     backgroundColor: 'black',
     borderRadius: '3px',
     color: 'white',
@@ -27,11 +27,18 @@ const demoPopperStyle: React.CSSProperties = {
     width: '100%',
 };
 
-function createDemoAnchor(width: number): React.ReactNode {
-    return <div style={{ ...demoAnchorStyle, width }}>{'This element will act as the anchor'}</div>;
-}
+const demoPopoverHolderStyle: CSSProperties = {
+    alignItems: 'center',
+    display: 'flex',
+    height: 200,
+    justifyContent: 'space-around',
+};
 
-function createPopper(): React.ReactNode {
+const createDemoAnchor: (width: number) => ReactNode = (width: number): ReactNode => {
+    return <div style={{ ...demoAnchorStyle, width }}>{'This element will act as the anchor'}</div>;
+};
+
+const createPopper: () => ReactNode = (): ReactNode => {
     return (
         <div style={demoPopperStyle}>
             {
@@ -39,7 +46,7 @@ function createPopper(): React.ReactNode {
             }
         </div>
     );
-}
+};
 
 /////////////////////////////
 
@@ -53,13 +60,17 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
     // tslint:disable-next-line: typedef
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
 
-    function toggleTooltipDisplay(newVisibleState: boolean): void {
+    /**
+     * Switch tooltip visibility
+     * @param {boolean} newVisibleState Tooltip visibility
+     */
+    const toggleTooltipDisplay: (newVisibleState: boolean) => void = (newVisibleState: boolean): void => {
         setTooltipDisplayed(newVisibleState);
-    }
+    };
 
     return (
         <div onMouseOver={(): void => toggleTooltipDisplay(true)} onMouseOut={(): void => toggleTooltipDisplay(false)}>
-            <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+            <div style={demoPopoverHolderStyle}>
                 <Popover
                     anchorElement={createDemoAnchor(230)}
                     popperElement={createPopper()}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 
 import { Placements, Popover } from 'LumX';
 
@@ -9,7 +9,7 @@ interface IProps {
      * The theme to use to display this demo.
      */
 }
-const demoAnchorStyle: React.CSSProperties = {
+const demoAnchorStyle: CSSProperties = {
     border: '1px solid grey',
     cursor: 'default',
     fontSize: '12px',
@@ -18,21 +18,18 @@ const demoAnchorStyle: React.CSSProperties = {
     width: '100px',
 };
 
-const demoPopperStyle: React.CSSProperties = {
-    backgroundColor: 'black',
-    borderRadius: '3px',
-    color: 'white',
+const demoPopperStyle: CSSProperties = {
     fontSize: '10px',
     padding: '5px',
 };
 
-function createDemoAnchor(placement: string): React.ReactNode {
+const createDemoAnchor: (placement: string) => ReactNode = (placement: string): ReactNode => {
     return <div style={demoAnchorStyle}>{`Hovering will show a tooltip using placement : ${placement}`}</div>;
-}
+};
 
-function createPopper(): React.ReactNode {
-    return <span style={demoPopperStyle}>{`Tooltip`}</span>;
-}
+const createPopper: () => ReactNode = (): ReactNode => {
+    return <div style={demoPopperStyle}>{`Tooltip`}</div>;
+};
 
 /////////////////////////////
 

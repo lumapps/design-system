@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 
 import { Placements, Popover, PopperOffsets } from 'LumX';
 
@@ -9,7 +9,7 @@ interface IProps {
      * The theme to use to display this demo.
      */
 }
-const demoAnchorStyle: React.CSSProperties = {
+const demoAnchorStyle: CSSProperties = {
     border: '1px solid grey',
     cursor: 'default',
     fontSize: '12px',
@@ -18,7 +18,7 @@ const demoAnchorStyle: React.CSSProperties = {
     width: '100px',
 };
 
-const demoPopperStyle: React.CSSProperties = {
+const demoPopperStyle: CSSProperties = {
     backgroundColor: 'black',
     borderRadius: '3px',
     color: 'white',
@@ -27,7 +27,7 @@ const demoPopperStyle: React.CSSProperties = {
     width: '130px',
 };
 
-const demoRandomElementStyle: React.CSSProperties = {
+const demoRandomElementStyle: CSSProperties = {
     background: `repeating-linear-gradient(
         45deg,
         #CFCFCF,
@@ -39,13 +39,20 @@ const demoRandomElementStyle: React.CSSProperties = {
     marginRight: '3px',
 };
 
-function createDemoAnchor(): React.ReactNode {
-    return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
-}
+const demoPopoverHolderStyle: CSSProperties = {
+    alignItems: 'center',
+    display: 'flex',
+    height: 200,
+    justifyContent: 'center',
+};
 
-function createPopper(): React.ReactNode {
+const createDemoAnchor: () => ReactNode = (): ReactNode => {
+    return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
+};
+
+const createPopper: () => ReactNode = (): ReactNode => {
     return <div style={demoPopperStyle}>{`This popper is placed using a 'vertical' and a 'horizontal' offset`}</div>;
-}
+};
 
 /////////////////////////////
 
@@ -59,7 +66,7 @@ const offsets: PopperOffsets = { horizontal: -60, vertical: 30 };
 // tslint:disable-next-line: typedef
 const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
     return (
-        <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={demoPopoverHolderStyle}>
             <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Ramdom element`}</div>
             <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Ramdom element`}</div>
             <Popover

@@ -1,8 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
+
+import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+
+import { handleBasicClasses } from 'LumX/core/utils';
 
 import { Manager, Popper, PopperChildrenProps, Reference, ReferenceChildrenProps } from 'react-popper';
 
@@ -62,9 +66,11 @@ type Size = ISize;
  */
 interface IPopoverProps extends IGenericProps {
     /* The reference element that will be used as the anchor */
-    anchorElement: React.ReactNode;
+    anchorElement: ReactNode;
+    /* How high the component is flying */
+    elevation?: number;
     /* The element that will be displayed flying above the UI */
-    popperElement?: React.ReactNode;
+    popperElement?: ReactNode;
     /* vertical and/or horizontal offsets that will be applied to the popper position */
     popperOffset?: PopperOffsets;
     /* Should the popper be displayed ? */
@@ -125,16 +131,30 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    elevation: 3,
     lockFlip: false,
     tooltipShowHideDelay: SHOW_HIDE_DELAY,
     useTooltipMode: false,
 };
 /////////////////////////////
 
-function unwrap(inputValue: boolean | string | (() => boolean) | undefined): boolean {
+/**
+ * Helper method that returns a simple boolean value from different source format.
+ * @param {any} inputValue The input to extract the boolean value from
+ */
+const unwrap: (inputValue: boolean | string | (() => boolean) | undefined) => boolean = (
+    inputValue: boolean | string | (() => boolean) | undefined,
+): boolean => {
     return typeof inputValue === 'function' ? inputValue() : Boolean(inputValue);
-}
+};
 
+/**
+ * Get the popover offset base on its placement.
+ * @param {string}          placement       The prefered placement
+ * @param {Placements}      popperPlacement The actual platform
+ * @param {PopperOffsets}   popperOffset    An offset to be applied on the popper
+ * @return {Position}                       The css position.
+ */
 function computeOffsets(
     placement: string,
     // tslint:disable-next-line: no-shadowed-variable
@@ -167,6 +187,14 @@ function computeOffsets(
     return computedOffs;
 }
 
+/**
+ * Get the size for the popper holder
+ * @param {boolean} fillHeight          Should the holder use full available height
+ * @param {boolean} fillwidth           Should the holder use full available width
+ * @param {string}  transform           The computed CSS transform
+ * @param {boolean} matchAnchorWidth    Should the popper match the anchor width
+ * @return {Size}                       The size of the popper holder
+ */
 // tslint:disable: no-shadowed-variable
 function computeSize(
     fillHeight: boolean | undefined,
@@ -211,16 +239,17 @@ function computeSize(
  */
 const Popover: React.FC<PopoverProps> = ({
     anchorElement,
+    elevation = DEFAULT_PROPS.elevation,
+    fillHeight,
+    fillwidth,
+    lockFlip,
+    matchAnchorWidth,
     popperElement,
     popperOffset,
     popperPlacement,
-    useTooltipMode = DEFAULT_PROPS.useTooltipMode,
-    tooltipShowHideDelay,
     showPopper,
-    fillwidth,
-    fillHeight,
-    matchAnchorWidth,
-    lockFlip,
+    tooltipShowHideDelay,
+    useTooltipMode = DEFAULT_PROPS.useTooltipMode,
 }: PopoverProps): React.ReactElement => {
     const [autoShowPopper, setAutoShowPopper]: [boolean, (autoShowPopper: boolean) => void] = useState(Boolean(false));
 
@@ -249,7 +278,7 @@ const Popover: React.FC<PopoverProps> = ({
     return (
         <Manager>
             <Reference>
-                {({ ref }: ReferenceChildrenProps): React.ReactNode => (
+                {({ ref }: ReferenceChildrenProps): ReactNode => (
                     <div
                         ref={(elm: HTMLDivElement | null): void => {
                             anchorRef = elm;
@@ -265,7 +294,7 @@ const Popover: React.FC<PopoverProps> = ({
             </Reference>
             {(unwrap(showPopper) || (unwrap(useTooltipMode) && autoShowPopper)) && (
                 <Popper placement={popperPlacement as Placements} modifiers={modifiers}>
-                    {({ ref, style, ...others }: PopperChildrenProps): React.ReactNode => {
+                    {({ ref, style, ...others }: PopperChildrenProps): ReactNode => {
                         const computedOffsets: Position = popperPlacement
                             ? computeOffsets(others.placement, popperPlacement as Placements, popperOffset)
                             : {};
@@ -276,7 +305,16 @@ const Popover: React.FC<PopoverProps> = ({
                             matchAnchorWidth,
                         );
                         return (
-                            <div ref={ref} style={{ ...style, ...computedOffsets, ...computedSizes }}>
+                            <div
+                                ref={ref}
+                                style={{ ...style, ...computedOffsets, ...computedSizes }}
+                                className={classNames(
+                                    handleBasicClasses({
+                                        elevation: elevation && elevation > 5 ? 5 : elevation,
+                                        prefix: CLASSNAME,
+                                    }),
+                                )}
+                            >
                                 {popperElement}
                             </div>
                         );

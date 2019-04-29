@@ -1,5 +1,5 @@
 // tslint:disable: jsx-no-lambda
-import React, { Fragment, useState } from 'react';
+import React, { CSSProperties, Fragment, ReactNode, useState } from 'react';
 
 import { Orientations } from 'LumX/components';
 
@@ -27,6 +27,13 @@ interface IProps {
      */
     theme: UserBlockTheme;
 }
+
+const demoPopoverHolderStyle: CSSProperties = {
+    display: 'flex',
+    height: 250,
+    justifyContent: 'center',
+    paddingTop: 100,
+};
 
 // tslint:disable-next-line: no-any
 const createSimpleAction: React.FC<ButtonThemes> = (theme: ButtonThemes): any => (
@@ -61,7 +68,6 @@ const createMultipleActions: React.FC<ButtonThemes> = (theme: any): any => (
 
 /////////////////////////////
 
-// Tslint:disable.
 /**
  * The demo for the default <UserBlock>s.
  *
@@ -75,7 +81,11 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     // tslint:disable-next-line: typedef
     const anchorRef = React.createRef();
 
-    function toggleCardDisplay(newVisibleState: boolean): void {
+    /**
+     * Switch tooltip visibility
+     * @param {boolean} newVisibleState Tooltip visibility
+     */
+    const toggleCardDisplay: (newVisibleState: boolean) => void = (newVisibleState: boolean): void => {
         // tslint:disable-next-line: early-exit
         if (!newVisibleState) {
             delayer = setTimeout(() => setCardDisplayed(false), 500);
@@ -86,9 +96,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             }
             delayer = setTimeout(() => setCardDisplayed(true), 500);
         }
-    }
+    };
 
-    const anchor: React.ReactNode = (
+    const anchor: ReactNode = (
         <UserBlock
             ref={anchorRef}
             theme={theme}
@@ -102,12 +112,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         />
     );
 
-    const popper: React.ReactNode = (
+    const popper: ReactNode = (
         <div
             style={{
-                backgroundColor: `white`,
-                borderRadius: 2,
-                boxShadow: '0 1px 2px 0 rgba(0,0,0,0.42)',
                 display: 'flex',
                 flex: 'auto',
                 justifyContent: 'center',
@@ -132,13 +139,14 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
     const offsets: PopperOffsets = { vertical: 20 };
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', height: 250, paddingTop: 100 }}>
+        <div style={demoPopoverHolderStyle}>
             <Popover
                 anchorElement={anchor}
                 popperOffset={offsets}
                 showPopper={isCardDisplayed}
                 popperElement={popper}
                 popperPlacement={Placements.TOP_START}
+                elevation={5}
             />
         </div>
     );
