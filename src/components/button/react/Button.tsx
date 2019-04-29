@@ -49,6 +49,12 @@ type Variant = Variants;
  */
 interface IButtonProps extends IGenericProps {
     /**
+     * Button reference to handle focus, ...
+     */
+    // tslint:disable-next-line: no-any
+    buttonRef?: React.RefObject<any>;
+
+    /**
      * The label.
      */
     children?: React.ReactNode;
@@ -131,6 +137,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    buttonRef: undefined,
     color: {
         default: Colors.dark,
         [`emphasis-${Emphasises.high}`]: Colors.primary,
@@ -225,6 +232,7 @@ function _validate(props: ButtonProps): React.ReactNode {
  * @return {React.ReactElement} The component.
  */
 const Button: React.FC<ButtonProps> = ({
+    buttonRef = DEFAULT_PROPS.buttonRef,
     children,
     className = '',
     color,
@@ -266,13 +274,13 @@ const Button: React.FC<ButtonProps> = ({
 
     return (
         <ButtonRoot
+            buttonRef={buttonRef}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    prefix: CLASSNAME,
-
                     color,
                     emphasis,
+                    prefix: CLASSNAME,
                     size,
                     theme: emphasis === Emphasises.high ? theme : undefined,
                     variant,

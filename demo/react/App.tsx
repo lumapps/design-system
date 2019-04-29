@@ -25,7 +25,7 @@ const App: React.FC = (): React.ReactNode => {
         last(window.location.pathname.split('/')) || '',
     );
     const [theme, changeTheme]: [Theme, (theme: Theme) => void] = useState(DEFAULT_THEME);
-    const [themeLoaded, setThemeLoaded]: [boolean, (isThemeLoaded: boolean) => void] = useState(false);
+    const [themeLoaded, setThemeLoaded]: [boolean, (isThemeLoaded: boolean) => void] = useState<boolean>(false);
 
     useEffect((): void => {
         _changeTheme(theme).then(
