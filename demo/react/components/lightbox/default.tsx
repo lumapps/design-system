@@ -75,7 +75,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 onOpen={onOpenModal}
                 theme={theme}
             >
-                <Slideshow hasControls={true} autoPlay={true}>
+                <Slideshow hasControls={true} autoPlay={true} theme={Themes.dark}>
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=24" {...imageBlockDemoProps} />
                     </SlideshowItem>
