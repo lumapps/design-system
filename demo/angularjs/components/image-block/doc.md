@@ -12,7 +12,7 @@ Image block supports thumbnail's differents formats (see [thumbnail](/thumbnail)
 
 Image block can take a custom padding
 
-<demo-block component="image-block" partial="grid-padding"></demo-block>
+<demo-block component="image-block" partial="grid-padding" has-theme-switcher="false"></demo-block>
 
 ## Desciption over
 
