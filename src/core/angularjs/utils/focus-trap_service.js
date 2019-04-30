@@ -1,3 +1,4 @@
+import { TAB_KEY_CODE } from 'LumX/core/constants';
 import { MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
@@ -12,15 +13,6 @@ function FocusTrapService() {
     //    Private attributes   //
     //                         //
     /////////////////////////////
-
-    /**
-     * The tab key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _TAB_KEY_CODE = 9;
 
     /**
      * The active element where to trap the focus.
@@ -41,7 +33,7 @@ function FocusTrapService() {
      * @param {Event} evt The key event.
      */
     function _onKeyPress(evt) {
-        if (evt.keyCode !== _TAB_KEY_CODE) {
+        if (evt.keyCode !== TAB_KEY_CODE) {
             return;
         }
 

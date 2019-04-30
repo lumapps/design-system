@@ -1,4 +1,4 @@
-import { CSS_PREFIX } from 'LumX/core/constants';
+import { CSS_PREFIX, ESCAPE_KEY_CODE } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './dialog.html';
@@ -24,15 +24,6 @@ function DialogController(
     //    Private attributes   //
     //                         //
     /////////////////////////////
-
-    /**
-     * The escape key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _ESCAPE_KEY_CODE = 27;
 
     /**
      * The dialog open/close transition duration.
@@ -204,7 +195,7 @@ function DialogController(
      * @param {Event} evt The key up event.
      */
     function _onKeyUp(evt) {
-        if (evt.keyCode === _ESCAPE_KEY_CODE) {
+        if (evt.keyCode === ESCAPE_KEY_CODE) {
             _close();
         }
 

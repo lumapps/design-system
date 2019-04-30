@@ -1,3 +1,4 @@
+import { ENTER_KEY_CODE } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
@@ -6,10 +7,8 @@ function EnterKeypressDirective() {
     'ngInject';
 
     function link(scope, el, attrs) {
-        const _ENTER_KEY_CODE = 13;
-
         el.bind('keydown keypress', function onKeyPress(evt) {
-            if (evt.which === _ENTER_KEY_CODE) {
+            if (evt.which === ENTER_KEY_CODE) {
                 scope.$apply(function evalExpression() {
                     scope.$eval(attrs.lumxEnterKeypress, { $event: evt });
                 });

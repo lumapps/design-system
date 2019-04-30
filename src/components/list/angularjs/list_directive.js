@@ -1,4 +1,4 @@
-import { CSS_PREFIX } from 'LumX/core/constants';
+import { CSS_PREFIX, DOWN_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import template from './list.html';
@@ -10,39 +10,6 @@ function lumxListController($element, $scope) {
 
     // eslint-disable-next-line consistent-this, no-unused-vars
     const lumx = this;
-
-    /////////////////////////////
-    //                         //
-    //    Private attributes   //
-    //                         //
-    /////////////////////////////
-
-    /**
-     * The down key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _DOWN_KEY_CODE = 40;
-
-    /**
-     * The tab key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _TAB_KEY_CODE = 9;
-
-    /**
-     * The up key code.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _UP_KEY_CODE = 38;
 
     /////////////////////////////
     //                         //
@@ -113,19 +80,19 @@ function lumxListController($element, $scope) {
             return;
         }
 
-        if (evt.keyCode === _DOWN_KEY_CODE) {
+        if (evt.keyCode === DOWN_KEY_CODE) {
             _nextItemOnKeyDown();
             $scope.$apply();
 
             evt.preventDefault();
             evt.stopPropagation();
-        } else if (evt.keyCode === _UP_KEY_CODE) {
+        } else if (evt.keyCode === UP_KEY_CODE) {
             _previousItemOnKeyUp();
             $scope.$apply();
 
             evt.preventDefault();
             evt.stopPropagation();
-        } else if (evt.keyCode === _TAB_KEY_CODE) {
+        } else if (evt.keyCode === TAB_KEY_CODE) {
             evt.preventDefault();
             evt.stopPropagation();
         }
