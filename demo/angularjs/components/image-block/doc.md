@@ -4,18 +4,24 @@
 
 ## Default
 
-Image block supports thumbnail's differents formats (see [thumbnail](/thumbnail))
+Image block supports thumbnail's different formats (see [thumbnail](/thumbnail)).
 
-<demo-block component="image-block" partial="grid"></demo-block>
+<demo-block component="image-block" partial="image-block"></demo-block>
 
 ## Custom padding
 
-Image block can take a custom padding
+Image block can take a custom padding.
 
-<demo-block component="image-block" partial="grid-padding" has-theme-switcher="false"></demo-block>
+<demo-block component="image-block" partial="image-block-padding" has-theme-switcher="false"></demo-block>
 
-## Desciption over
+## Info over
 
-Image block can have the description over the image
+Info can be placed over the image.
 
-<demo-block component="image-block" partial="grid-over"></demo-block>
+<demo-block component="image-block" partial="image-block-over"></demo-block>
+
+## Info alignment
+
+Info alignment can be changed to ether: left, center or right.
+
+<demo-block component="image-block" partial="image-block-alignment"></demo-block>
