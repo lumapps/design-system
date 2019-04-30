@@ -7,36 +7,76 @@
 
     @include lumx-elevation(3);
 
-    position: absolute;
     padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
     background-color: lumx-theme-color-variant(light, N);
     border-radius: $lumx-theme-border-radius;
-    opacity: 0;
-    pointer-events: none;
-    transition-duration: $lumx-tooltip-transition-duration;
-    transition-property: opacity, transform;
 
-    &--is-shown {
-        opacity: 1;
+    &[x-placement^='top'] {
+        margin-bottom: $lumx-spacing-unit;
+    }
 
-        &#{$self}--position-top {
-            transform: translateY(-8px);
+    &[x-placement^='bottom'] {
+        margin-top: $lumx-spacing-unit;
+    }
+
+    &[x-placement^='left'] {
+        margin-right: $lumx-spacing-unit;
+    }
+
+    &[x-placement^='right'] {
+        margin-left: $lumx-spacing-unit;
+    }
+
+    &__arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        margin: $lumx-tooltip-arrow-size;
+        border-style: solid;
+        border-color: lumx-theme-color-variant(light, N);
+
+        #{$self}[x-placement^='top'] & {
+            bottom: -$lumx-tooltip-arrow-size;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-width: $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size 0 $lumx-tooltip-arrow-size;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
         }
 
-        &#{$self}--position-bottom {
-            transform: translateY(8px);
+        #{$self}[x-placement^='bottom'] & {
+            top: -$lumx-tooltip-arrow-size;
+            margin-top: 0;
+            margin-bottom: 0;
+            border-width: 0 $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-left-color: transparent;
         }
 
-        &#{$self}--position-left {
-            transform: translateX(-8px);
+        #{$self}[x-placement^='left'] & {
+            right: -$lumx-tooltip-arrow-size;
+            margin-right: 0;
+            margin-left: 0;
+            border-width: $lumx-tooltip-arrow-size 0 $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
         }
 
-        &#{$self}--position-right {
-            transform: translateX(8px);
+        #{$self}[x-placement^='right'] & {
+            left: -$lumx-tooltip-arrow-size;
+            margin-right: 0;
+            margin-left: 0;
+            border-width: $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size 0;
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
         }
     }
 
-    &__text {
+    &__inner {
         @include lumx-typography(caption);
 
         display: block;

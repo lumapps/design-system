@@ -1,3 +1,5 @@
+import PopperJs from 'popper.js';
+
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
@@ -38,13 +40,22 @@ function TooltipController($element, $timeout, LumXDepthService) {
      */
     // eslint-disable-next-line one-var
     let _tooltip;
+
     /**
      * The source element mouse enter timeout.
      *
-     * @type {Object}
+     * @type {element}
      */
     // eslint-disable-next-line one-var
-    let _tooltipLabel;
+    let _tooltipArrow;
+
+    /**
+     * The source element mouse enter timeout.
+     *
+     * @type {element}
+     */
+    // eslint-disable-next-line one-var
+    let _tooltipInner;
 
     /////////////////////////////
     //                         //
@@ -56,41 +67,17 @@ function TooltipController($element, $timeout, LumXDepthService) {
      * Set the tooltip position according to the position parameter.
      */
     function _setTooltipPosition() {
-        const sourceProps = {
-            height: $element.outerHeight(),
-            left: $element.offset().left,
-            top: $element.offset().top,
-            width: $element.outerWidth(),
-        };
-        const tooltipProps = {
-            height: _tooltip.outerHeight(),
-            width: _tooltip.outerWidth(),
-        };
-
-        if (angular.isUndefined(lumx.position) || lumx.position === 'top') {
-            // eslint-disable-next-line no-magic-numbers
-            tooltipProps.left = sourceProps.left - tooltipProps.width / 2 + sourceProps.width / 2;
-            tooltipProps.top = sourceProps.top - tooltipProps.height;
-        } else if (lumx.position === 'bottom') {
-            // eslint-disable-next-line no-magic-numbers
-            tooltipProps.left = sourceProps.left - tooltipProps.width / 2 + sourceProps.width / 2;
-            tooltipProps.top = sourceProps.top + sourceProps.height;
-        } else if (lumx.position === 'left') {
-            tooltipProps.left = sourceProps.left - tooltipProps.width;
-            // eslint-disable-next-line no-magic-numbers
-            tooltipProps.top = sourceProps.top + sourceProps.height / 2 - tooltipProps.height / 2;
-        } else if (lumx.position === 'right') {
-            tooltipProps.left = sourceProps.left + sourceProps.width;
-            // eslint-disable-next-line no-magic-numbers
-            tooltipProps.top = sourceProps.top + sourceProps.height / 2 - tooltipProps.height / 2;
-        }
-
-        _tooltip
-            .css({
-                left: tooltipProps.left,
-                top: tooltipProps.top,
-            })
-            .addClass(`${CSS_PREFIX}-tooltip--is-shown`);
+        // eslint-disable-next-line no-new
+        new PopperJs($element, _tooltip, {
+            placement: lumx.position || 'top',
+            modifiers: {
+                arrow: {
+                    // eslint-disable-next-line id-blacklist
+                    element: `.${CSS_PREFIX}-tooltip__arrow`,
+                    enabled: true,
+                },
+            },
+        });
     }
 
     /////////////////////////////
@@ -121,21 +108,24 @@ function TooltipController($element, $timeout, LumXDepthService) {
             return;
         }
 
-        const tooltipPoisition = angular.isDefined(lumx.position) && lumx.position ? lumx.position : 'top';
-
         _tooltip = angular.element('<div/>', {
-            class: `${CSS_PREFIX}-tooltip ${CSS_PREFIX}-tooltip--position-${tooltipPoisition}`,
+            class: `${CSS_PREFIX}-tooltip`,
         });
 
-        _tooltipLabel = angular.element('<span/>', {
-            class: `${CSS_PREFIX}-tooltip__text`,
+        _tooltipArrow = angular.element('<div/>', {
+            class: `${CSS_PREFIX}-tooltip__arrow`,
+        });
+
+        _tooltipInner = angular.element('<span/>', {
+            class: `${CSS_PREFIX}-tooltip__inner`,
             text: lumx.text,
         });
 
         LumXDepthService.increase();
 
         _tooltip
-            .append(_tooltipLabel)
+            .append(_tooltipArrow)
+            .append(_tooltipInner)
             .css('z-index', LumXDepthService.get())
             .appendTo('body');
 
