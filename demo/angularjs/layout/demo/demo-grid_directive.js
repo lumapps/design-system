@@ -2,7 +2,7 @@ import template from './demo-grid.html';
 
 /////////////////////////////
 
-function demoGridDirective() {
+function DemoGridDirective() {
     'ngInject';
 
     return {
@@ -15,8 +15,8 @@ function demoGridDirective() {
 
 /////////////////////////////
 
-angular.module('design-system').directive('demoGrid', demoGridDirective);
+angular.module('design-system').directive('demoGrid', DemoGridDirective);
 
 /////////////////////////////
 
-export { demoGridDirective };
+export { DemoGridDirective };
