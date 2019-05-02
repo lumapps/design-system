@@ -2,7 +2,7 @@
     <div
         class="demo-block__content"
         ng-class="{ 'lumx-theme-background-dark-N': demoBlock.hasDarkTheme }"
-        ng-include="'demo/angularjs/components/' + demoBlock.component + '/partials/' + demoBlock.partial + '.html'"
+        ng-include="'demo/angularjs/' + demoBlock.category + '/' + demoBlock.component + '/partials/' + demoBlock.partial + '.html'"
     ></div>
 
     <div class="demo-block__toolbar">
@@ -25,6 +25,6 @@
         ng-if="demoBlock.isCodeOpen"
         hljs
         hljs-language="html"
-        include="'demo/angularjs/components/' + demoBlock.component + '/partials/' + demoBlock.partial + '.html'"
+        include="'demo/angularjs/' + demoBlock.category + '/' + demoBlock.component + '/partials/' + demoBlock.partial + '.html'"
     ></div>
 </div>

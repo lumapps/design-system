@@ -29,7 +29,8 @@ function mainContentDirective() {
 
     function link(scope, el, attrs, ctrl) {
         attrs.$observe('component', (component) => {
-            ctrl.src = `demo/angularjs/components/${component}/doc.md`;
+            const category = angular.isDefined(attrs.category) ? attrs.category : 'components';
+            ctrl.src = `demo/angularjs/${category}/${component}/doc.md`;
         });
     }
 

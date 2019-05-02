@@ -40,6 +40,14 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.typography', {
+            url: 'typography',
+            views: {
+                'main@': {
+                    template: require('./foundations/typography/demo.html'),
+                },
+            },
+        })
         .state('app.button', {
             url: 'button',
             views: {

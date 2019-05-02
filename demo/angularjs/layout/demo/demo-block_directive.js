@@ -17,6 +17,13 @@ function demoBlockController() {
     /////////////////////////////
 
     /**
+     * The component category.
+     *
+     * @type {string}
+     */
+    demoBlock.category = 'components';
+
+    /**
      * The component name.
      *
      * @type {string}
@@ -103,6 +110,10 @@ function demoBlockDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
+        attrs.$observe('category', (category) => {
+            ctrl.category = category;
+        });
+
         attrs.$observe('component', (component) => {
             ctrl.component = component;
         });
