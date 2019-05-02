@@ -58,6 +58,14 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.avatar', {
+            url: 'avatar',
+            views: {
+                'main@': {
+                    template: require('./components/avatar/demo.html'),
+                },
+            },
+        })
         .state('app.button', {
             url: 'button',
             views: {
