@@ -40,6 +40,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.colors', {
+            url: 'colors',
+            views: {
+                'main@': {
+                    controller: 'DemoColorsController',
+                    controllerAs: 'vm',
+                    template: require('./foundations/colors/demo.html'),
+                },
+            },
+        })
         .state('app.typography', {
             url: 'typography',
             views: {
@@ -310,11 +320,13 @@ angular
 
 /* eslint-disable import/no-unassigned-import */
 require('./layout/demo/demo-block_directive.js');
+require('./layout/demo/demo-colors_directive.js');
 require('./layout/demo/demo-grid_directive.js');
 require('./layout/main/main-header_directive.js');
 require('./layout/main/main-content_directive.js');
 require('./layout/sub-nav/sub-nav_controller.js');
 
+require('./foundations/colors/controller.js');
 require('./components/button/controller.js');
 require('./components/checkbox/controller.js');
 require('./components/chip/controller.js');

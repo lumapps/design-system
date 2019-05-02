@@ -4,7 +4,7 @@ import template from './demo-block.html';
 
 /////////////////////////////
 
-function demoBlockController() {
+function DemoBlockController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -28,7 +28,7 @@ function demoBlockController() {
      *
      * @type {string}
      */
-    demoBlock.component = '';
+    demoBlock.component = undefined;
 
     /**
      * Wether to display the component in dark theme or not.
@@ -65,7 +65,7 @@ function demoBlockController() {
      *
      * @type {string}
      */
-    demoBlock.partial = '';
+    demoBlock.partial = undefined;
 
     /**
      * The component theme.
@@ -106,7 +106,7 @@ function demoBlockController() {
 
 /////////////////////////////
 
-function demoBlockDirective() {
+function DemoBlockDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
@@ -129,7 +129,7 @@ function demoBlockDirective() {
 
     return {
         bindToController: true,
-        controller: demoBlockController,
+        controller: DemoBlockController,
         controllerAs: 'demoBlock',
         link,
         replace: true,
@@ -142,8 +142,8 @@ function demoBlockDirective() {
 
 /////////////////////////////
 
-angular.module('design-system').directive('demoBlock', demoBlockDirective);
+angular.module('design-system').directive('demoBlock', DemoBlockDirective);
 
 /////////////////////////////
 
-export { demoBlockDirective };
+export { DemoBlockDirective };

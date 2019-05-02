@@ -3,10 +3,11 @@
 @import 'mq';
 @import '../../src/core/style/core-lumapps';
 @import '../../src/core/style/components-lumapps';
-@import './layout/base/base';
+@import './base/base';
+@import './demo/demo-block';
+@import './demo/demo-colors';
+@import './demo/demo-grid';
 @import './layout/app/app';
 @import './layout/main-nav/main-nav';
 @import './layout/sub-nav/sub-nav';
 @import './layout/main/main';
-@import './layout/demo/demo-block';
-@import './layout/demo/demo-grid';
