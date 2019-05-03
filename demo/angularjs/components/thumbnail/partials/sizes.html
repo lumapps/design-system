@@ -1,6 +1,56 @@
-<lumx-thumbnail
-    lumx-aspect-ratio="square"
-    lumx-size="l"
-    lumx-image="http://placecorgi.com/640/480"
-    lumx-theme="{{ demoBlock.theme }}"
-></lumx-thumbnail>
+<div class="p++" lumx-grid-container="row" lumx-grid-v-align="space-around">
+    <style>
+        .thumb-no-flex-shrink {
+            flex-shrink: 0;
+        }
+    </style>
+    <lumx-thumbnail
+        lumx-aspect-ratio="original"
+        lumx-image="http://placecorgi.com/28/28"
+        lumx-size="xxs"
+        lumx-theme="{{ demoBlock.theme }}"
+        class="thumb-no-flex-shrink mr++"
+    ></lumx-thumbnail>
+    <lumx-thumbnail
+        lumx-aspect-ratio="original"
+        lumx-image="http://placecorgi.com/40/40"
+        lumx-size="xs"
+        lumx-theme="{{ demoBlock.theme }}"
+        class="thumb-no-flex-shrink mr++"
+    ></lumx-thumbnail>
+    <lumx-thumbnail
+        lumx-aspect-ratio="original"
+        lumx-image="http://placecorgi.com/48/48"
+        lumx-size="s"
+        lumx-theme="{{ demoBlock.theme }}"
+        class="thumb-no-flex-shrink mr++"
+    ></lumx-thumbnail>
+    <lumx-thumbnail
+        lumx-aspect-ratio="original"
+        lumx-image="http://placecorgi.com/72/72"
+        lumx-size="m"
+        lumx-theme="{{ demoBlock.theme }}"
+        class="thumb-no-flex-shrink mr++"
+    ></lumx-thumbnail>
+    <lumx-thumbnail
+        lumx-aspect-ratio="original"
+        lumx-image="http://placecorgi.com/128/128"
+        lumx-size="l"
+        lumx-theme="{{ demoBlock.theme }}"
+        class="thumb-no-flex-shrink mr++"
+    ></lumx-thumbnail>
+    <lumx-thumbnail
+        lumx-aspect-ratio="original"
+        lumx-image="http://placecorgi.com/256/256"
+        lumx-size="xl"
+        lumx-theme="{{ demoBlock.theme }}"
+        class="thumb-no-flex-shrink mr++"
+    ></lumx-thumbnail>
+    <div style="width:300px">
+        <lumx-thumbnail
+            lumx-aspect-ratio="square"
+            lumx-image="http://placecorgi.com/400/400"
+            lumx-theme="{{ demoBlock.theme }}"
+        ></lumx-thumbnail>
+    </div>
+</div>

@@ -6,18 +6,24 @@
 
 ### Sizes
 
-Comes in 7 sizes: xxs, xs, s, m, l, xl, unset.
+Thumbnail comes in 7 sizes: xxs, xs, s, m, l, xl, unset.
 
 <demo-block component="thumbnail" partial="sizes"></demo-block>
 
 ### Ratios
 
-Comes in 4 ratios: square, original, 2:3, 3:2.
+Thumbnail comes in 4 ratios: square, original, vertical, horizontal.
 
 <demo-block component="thumbnail" partial="ratios"></demo-block>
 
-### Sizes & ratios combined
+### Variants
 
-Sizes and ratios combine.
+Thumbnail comes in two variant: squared or rounded
+
+<demo-block component="thumbnail" partial="variants"></demo-block>
+
+### Sizes, ratios & variants combined
+
+Sizes, ratios and variants combine.
 
 <demo-block component="thumbnail" partial="combined"></demo-block>

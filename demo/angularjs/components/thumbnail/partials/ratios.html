@@ -1,6 +1,32 @@
-<div class="p++" lumx-grid-container="row" lumx-grid-v-align="center">
-    <img class="mr++" src="demo/angularjs/components/thumbnail/partials/square.png" height="126" />
-    <img class="mr++" src="demo/angularjs/components/thumbnail/partials/original.png" height="63" />
-    <img class="mr++" src="demo/angularjs/components/thumbnail/partials/2:3.png" height="189" />
-    <img class="mr++" src="demo/angularjs/components/thumbnail/partials/3:2.png" height="84" />
+<div class="p++" lumx-grid-container="row" lumx-grid-v-align="space-around">
+    <div style="width:126px" class="mr++">
+        <lumx-thumbnail
+            lumx-aspect-ratio="square"
+            lumx-image="http://placecorgi.com/126/126"
+            lumx-theme="{{ demoBlock.theme }}"
+        ></lumx-thumbnail>
+    </div>
+
+    <lumx-thumbnail
+        lumx-aspect-ratio="original"
+        lumx-image="http://placecorgi.com/126/63"
+        lumx-theme="{{ demoBlock.theme }}"
+        class="mr++"
+    ></lumx-thumbnail>
+    <div style="width:126px" class="mr++">
+        <lumx-thumbnail
+            lumx-aspect-ratio="vertical"
+            lumx-image="http://placecorgi.com/126/189"
+            lumx-theme="{{ demoBlock.theme }}"
+            class="mr++"
+        ></lumx-thumbnail>
+    </div>
+    <div style="width:126px" class="mr++">
+        <lumx-thumbnail
+            lumx-aspect-ratio="horizontal"
+            lumx-image="http://placecorgi.com/126/84"
+            lumx-theme="{{ demoBlock.theme }}"
+            class="mr++"
+        ></lumx-thumbnail>
+    </div>
 </div>
