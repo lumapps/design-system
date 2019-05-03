@@ -4,14 +4,20 @@
 
 ## Default
 
-### Fixed sizes
+### Sizes
 
-Comes in 5 sizes: xs, s, m, l, xl.
+Comes in 7 sizes: xxs, xs, s, m, l, xl, unset.
 
-<demo-block component="thumbnail" partial="default-fixed"></demo-block>
+<demo-block component="thumbnail" partial="sizes"></demo-block>
 
-### Fluid sizes
+### Ratios
 
 Comes in 4 ratios: square, original, 2:3, 3:2.
 
-<demo-block component="thumbnail" partial="default-fluid"></demo-block>
+<demo-block component="thumbnail" partial="ratios"></demo-block>
+
+### Sizes & ratios combined
+
+Sizes and ratios combine.
+
+<demo-block component="thumbnail" partial="combined"></demo-block>
