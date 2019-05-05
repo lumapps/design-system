@@ -4,7 +4,7 @@
 
 ## High emphasis
 
-Use high emphasis to allow users to quickly identify the main action of the current screen.
+Use high emphasis to help users to identify the main action.
 There should not be more than one high emphasis button in a view.
 
 <demo-block component="button" partial="emphasis-high"></demo-block>
