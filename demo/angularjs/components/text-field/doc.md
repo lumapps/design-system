@@ -1,12 +1,12 @@
 # Text field
 
-**Text fields let users enter and edit text.**
+**Text fields are simple text inputs.**
 
 <demo-block component="text-field" partial="default"></demo-block>
 
 ## States
 
-There are three states: _disabled_, _valid_ and _invalid_.
+There are three states: _disabled_, _valid_, and _invalid_.
 
 ### Disabled
 

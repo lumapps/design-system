@@ -1,5 +1,5 @@
 # Checkbox
 
-**Checkboxes allow users to select multiple options, including all or none.**
+**Checkboxes allow users to select none, one, or more items.**
 
 <demo-block component="checkbox" partial="default"></demo-block>

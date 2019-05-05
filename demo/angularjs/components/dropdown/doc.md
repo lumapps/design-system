@@ -1,15 +1,12 @@
 # Dropdown
 
-**Use dropdown to present multiple actions in a small area. Dropdown are common used for contextual menus and in form selects.**
+**Dropdowns present multiple actions in a small area.**
+Dropdowns are commonly used for contextual menus and in form selects. They can contain dividers, icons, a user picture and a thumbnail.
 
-## Dropdown for menu
-
-Trigger a dropdown with a button. Dropdown can have divider, icons, user picture and thumbnail.
+## Open dropdown with a button
 
 <demo-block component="dropdown" partial="default" has-theme-switcher="false"></demo-block>
 
 ## Open dropdown on target
-
-Dropdown can be triggered on a target item.
 
 <demo-block component="dropdown" partial="target" has-theme-switcher="false"></demo-block>

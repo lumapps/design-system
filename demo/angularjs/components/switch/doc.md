@@ -1,5 +1,5 @@
 # Switch
 
-**Switches allow users to toggle a single option on or off.**
+**Switches are on/off toggles for a single option.**
 
 <demo-block component="switch" partial="default"></demo-block>

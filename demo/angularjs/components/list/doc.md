@@ -1,6 +1,6 @@
 # List
 
-**List displays related content grouped together and organized vertically.**
+**Lists group items vertically.**
 
 ## Tiny
 

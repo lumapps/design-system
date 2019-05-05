@@ -1,10 +1,10 @@
 # Toolbar
 
-**The toolbar displays informations and actions relating to its current context.**
+**Toolbars display information and actions related to the context.**
 
 <demo-block component="toolbar" partial="default"></demo-block>
 
-The toolbar is divided in three section.<br />The title is placed to the left, while contextual actions are placed to the right.
+A toolbar has in three sections. An optional contextual icon button and a title on the left, contextual actions on the right.
 
 ## Examples
 
@@ -18,6 +18,6 @@ The toolbar is divided in three section.<br />The title is placed to the left, w
 
 ### With contextual icon button
 
-A contextual icon button can be placed to the left.
+A contextual icon button can be added.
 
 <demo-block component="toolbar" partial="back"></demo-block>
