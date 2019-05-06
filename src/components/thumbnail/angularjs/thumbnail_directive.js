@@ -16,11 +16,11 @@ function ThumbnailController() {
     /////////////////////////////
 
     /**
-     * Get image style according to image url.
+     * Get background image according to image url.
      *
      * @return {Object} The image style properties.
      */
-    function getImageStyle() {
+    function getBackgroundImage() {
         if (angular.isUndefined(lumx.aspectRatio) || lumx.aspectRatio === 'original') {
             return {};
         }
@@ -32,7 +32,7 @@ function ThumbnailController() {
 
     /////////////////////////////
 
-    lumx.getImageStyle = getImageStyle;
+    lumx.getBackgroundImage = getBackgroundImage;
 }
 
 /////////////////////////////
