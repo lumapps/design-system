@@ -41,6 +41,7 @@ interface IProps {
  * @readonly
  */
 const NAV_ITEMS: string[] = [
+    'Avatar',
     'Button',
     'Checkbox',
     'Chip',
