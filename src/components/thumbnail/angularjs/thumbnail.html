@@ -1,5 +1,9 @@
 <div class="lumx-thumbnail">
-    <div class="lumx-thumbnail__background" ng-style="lumx.getBackgroundImage()" ng-if="lumx.aspectRatio"></div>
+    <div
+        class="lumx-thumbnail__background"
+        ng-style="lumx.getBackgroundImage()"
+        ng-if="lumx.aspectRatio !== 'original'"
+    ></div>
 
     <img
         class="lumx-thumbnail__image"
