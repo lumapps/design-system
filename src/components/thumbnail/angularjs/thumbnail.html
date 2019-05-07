@@ -1,8 +1,13 @@
-<div class="lumx-thumbnail">
+<div
+    class="lumx-thumbnail"
+    ng-class="{ 'lumx-thumbnail--fill-height': lumx.fillHeight,
+                'lumx-thumbnail--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-thumbnail--theme-dark': lumx.theme === 'dark' }"
+>
     <div
         class="lumx-thumbnail__background"
         ng-style="lumx.getBackgroundImage()"
-        ng-if="lumx.aspectRatio !== 'original'"
+        ng-if="lumx.aspectRatio && lumx.aspectRatio !== 'original'"
     ></div>
 
     <img

@@ -51,7 +51,9 @@ type Variant = Variants;
 interface IThumbnailProps extends IGenericProps {
     /* The image aspect ratio. */
     aspectRatio?: AspectRatio;
-    /* Avatar image */
+    /* Whether the image has to fill its container's height. */
+    fillHeight?: boolean;
+    /* Avatar image. */
     image: string;
     /* Size. */
     size?: Size;
@@ -102,6 +104,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     aspectRatio: AspectRatios.original,
+    fillHeight: false,
     size: undefined,
     theme: Themes.light,
     variant: Variants.squared,
@@ -117,6 +120,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',
     aspectRatio = DEFAULT_PROPS.aspectRatio,
+    fillHeight = DEFAULT_PROPS.fillHeight,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
@@ -134,6 +138,9 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({ aspectRatio, prefix: CLASSNAME, size, theme, variant }),
+                {
+                    [`${CLASSNAME}--fill-height`]: fillHeight,
+                },
             )}
             tabIndex={isFunction(onClick) ? 0 : -1}
             onClick={onClick}
@@ -141,7 +148,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...restProps}
         >
             {aspectRatio === AspectRatios.original ? (
-                <img src={image} alt={alt} />
+                <img className="lumx-thumbnail__image" src={image} alt={alt} />
             ) : (
                 <div className="lumx-thumbnail__background" style={style} />
             )}
