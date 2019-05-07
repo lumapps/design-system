@@ -39,7 +39,7 @@ module.exports = class extends Generator {
                 name: 'name',
                 type: 'input',
                 validate: (inputtedName) => {
-                    if (!/^[A-Z][a-z]+[A-Z]?[a-z]*$/.test(inputtedName)) {
+                    if (!/^[A-Z][a-z]*([A-Z]?[a-z]*)/.test(inputtedName)) {
                         return 'Your component name should be writter in PascalCase (i.e. starting with an uppercase letter)';
                     }
 
