@@ -43,7 +43,6 @@ function ThumbnailDirective() {
     function link(scope, el, attrs) {
         const defaultProps = {
             aspectRatio: 'original',
-            theme: 'light',
             variant: 'squared',
         };
 
@@ -71,20 +70,6 @@ function ThumbnailDirective() {
             }).addClass(`${CSS_PREFIX}-thumbnail--size-${size}`);
         });
 
-        if (!attrs.lumxTheme) {
-            el.addClass(`${CSS_PREFIX}-thumbnail--theme-${defaultProps.theme}`);
-        }
-
-        attrs.$observe('lumxTheme', (theme) => {
-            if (!theme) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*thumbnail--theme-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-thumbnail--theme-${theme}`);
-        });
-
         if (!attrs.lumxVariant) {
             el.addClass(`${CSS_PREFIX}-thumbnail--variant-${defaultProps.variant}`);
         }
@@ -109,7 +94,9 @@ function ThumbnailDirective() {
         restrict: 'E',
         scope: {
             aspectRatio: '@?lumxAspectRatio',
+            fillHeight: '=?lumxFillHeight',
             image: '@lumxImage',
+            theme: '@?lumxTheme',
         },
         template,
     };

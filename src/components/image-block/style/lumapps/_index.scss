@@ -13,17 +13,6 @@
         flex-direction: column;
     }
 
-    &__image {
-        #{$self}--fill-height & {
-            display: flex;
-            min-height: 0;
-            flex: 1;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-    }
-
     &__wrapper {
         display: flex;
         flex-direction: column;

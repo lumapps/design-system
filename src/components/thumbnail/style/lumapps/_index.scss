@@ -7,12 +7,25 @@
 
     outline: none;
 
+    &--fill-height {
+        display: flex;
+        min-height: 0;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
     &__background {
         position: relative;
         width: 100%;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+
+        #{$self}--fill-height & {
+            flex: 1;
+        }
     }
 
     &__image {
@@ -43,7 +56,8 @@
    ========================================================================== */
 
 @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
-    .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key} .#{$lumx-base-prefix}-thumbnail__background {
+    .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key}:not(.#{$lumx-base-prefix}-thumbnail--fill-height)
+    .#{$lumx-base-prefix}-thumbnail__background {
         padding-top: $aspect-ratio;
     }
 }

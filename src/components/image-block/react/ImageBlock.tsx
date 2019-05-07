@@ -157,6 +157,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
             <Thumbnail
                 className={`${CLASSNAME}__image`}
                 aspectRatio={aspectRatio}
+                fillHeight={fillHeight}
                 image={image}
                 onClick={onClick}
                 theme={theme}
