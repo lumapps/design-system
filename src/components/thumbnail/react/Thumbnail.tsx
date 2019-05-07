@@ -135,13 +135,16 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                 className,
                 handleBasicClasses({ aspectRatio, prefix: CLASSNAME, size, theme, variant }),
             )}
-            style={aspectRatio === AspectRatios.original ? {} : style}
             tabIndex={isFunction(onClick) ? 0 : -1}
             onClick={onClick}
             onKeyDown={onEnterPressed(onClick)}
             {...restProps}
         >
-            {aspectRatio === AspectRatios.original && <img src={image} alt={alt} />}
+            {aspectRatio === AspectRatios.original ? (
+                <img src={image} alt={alt} />
+            ) : (
+                <div className="lumx-thumbnail__background" style={style} />
+            )}
         </div>
     );
 };

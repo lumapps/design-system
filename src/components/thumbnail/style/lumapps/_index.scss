@@ -3,31 +3,23 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-thumbnail {
-    &--aspect-ratio-original {
-        img {
-            display: block;
-            max-width: 100%;
-            max-height: 100%;
-        }
-    }
+    $self: &;
 
-    &--aspect-ratio-horizontal,
-    &--aspect-ratio-square,
-    &--aspect-ratio-vertical {
+    outline: none;
+
+    &__background {
         position: relative;
         width: 100%;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
     }
-}
 
-/* Thumbnail variants
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-thumbnail--variant-rounded {
-    overflow: hidden;
-    border-radius: $lumx-theme-border-radius;
+    &__image {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+    }
 }
 
 /* Thumbnail sizes
@@ -39,11 +31,19 @@
     }
 }
 
+/* Thumbnail variants
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-thumbnail--variant-rounded {
+    overflow: hidden;
+    border-radius: $lumx-theme-border-radius;
+}
+
 /* Thumbnail aspect ratio
    ========================================================================== */
 
 @each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
-    .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key} {
+    .#{$lumx-base-prefix}-thumbnail--aspect-ratio-#{$key} .#{$lumx-base-prefix}-thumbnail__background {
         padding-top: $aspect-ratio;
     }
 }
@@ -53,7 +53,6 @@
 
 .#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     cursor: pointer;
-    outline: none;
 
     &::after {
         position: absolute;

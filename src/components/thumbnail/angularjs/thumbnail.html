@@ -1,3 +1,13 @@
-<div class="lumx-thumbnail" ng-style="lumx.getImageStyle()">
-    <img ng-src="{{ lumx.image }}" ng-if="!lumx.aspectRatio || lumx.aspectRatio === 'original'" />
+<div class="lumx-thumbnail">
+    <div
+        class="lumx-thumbnail__background"
+        ng-style="lumx.getBackgroundImage()"
+        ng-if="lumx.aspectRatio !== 'original'"
+    ></div>
+
+    <img
+        class="lumx-thumbnail__image"
+        ng-src="{{ lumx.image }}"
+        ng-if="!lumx.aspectRatio || lumx.aspectRatio === 'original'"
+    />
 </div>
