@@ -1,6 +1,6 @@
 # User block
 
-**User block display user info.**
+**User blocks display user info.**
 
 ## Sizes
 
