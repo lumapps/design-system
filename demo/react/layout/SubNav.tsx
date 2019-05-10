@@ -52,6 +52,7 @@ const NAV_ITEMS: string[] = [
     'Lightbox',
     'List',
     'Notification',
+    'Popover',
     'Progress',
     'Progress tracker',
     'Radio button',

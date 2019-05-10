@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Popover
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-popover {
+    background-color: lumx-theme-color-variant(light, N);
+    border-radius: $lumx-theme-border-radius;
+}
+
+/* Elevations
+   ========================================================================== */
+
+@each $depth, $shadow in $lumx-elevation-shadows {
+    .#{$lumx-base-prefix}-popover--elevation-#{$depth} {
+        @include lumx-elevation($depth);
+    }
+}
