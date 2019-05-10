@@ -1,6 +1,6 @@
 # Dialog
 
-**Dialogs inform users and require an action.**
+**Dialogs interrupts users, gives information and require an action.**
 Use dialogs to convey critical information or to request actions or decisions.
 
 ## Default
