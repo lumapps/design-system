@@ -1,6 +1,6 @@
 # Select
 
-**Selects display options in a dropdown list and present the users choice in the list box. Use it when users need to select one or more options.**
+**Selects display options in a list and present the users choice in the list box. Use it when users need to select one or more options.**
 
 ## Single selection
 
