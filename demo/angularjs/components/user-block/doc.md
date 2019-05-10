@@ -24,7 +24,7 @@ There are two alternative layouts: _vertical_ and _extended_.
 
 ### Vertical
 
-A large user block can be displayed vertically.
+A _large_ size user block can be displayed vertically.
 
 <demo-block component="user-block" partial="vertical"></demo-block>
 
