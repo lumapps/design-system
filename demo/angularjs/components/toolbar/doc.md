@@ -4,7 +4,7 @@
 
 <demo-block component="toolbar" partial="default"></demo-block>
 
-A toolbar has in three sections. An optional contextual icon button and a title on the left, contextual actions on the right.
+A toolbar has three sections. An optional contextual icon button and a title on the left, contextual actions on the right.
 
 ## Examples
 
