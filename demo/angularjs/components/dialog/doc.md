@@ -11,7 +11,7 @@ Dialogs have a title, a body, and at least one or more buttons.
 
 ### With scrollbar
 
-When a dialog require scrolling, the title stays at the top while the buttons stay at the bottom.
+When a dialog requires scrolling, the title stays at the top while the buttons stay at the bottom.
 
 <demo-block component="dialog" partial="scrollable" has-theme-switcher="false"></demo-block>
 
