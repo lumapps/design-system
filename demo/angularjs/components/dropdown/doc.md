@@ -6,6 +6,5 @@ Dropdowns are commonly used for contextual menus and in form selects. They can c
 
 <demo-block component="dropdown" partial="default" has-theme-switcher="false"></demo-block>
 
-## Open dropdown on target
 
 <demo-block component="dropdown" partial="target" has-theme-switcher="false"></demo-block>
