@@ -27,6 +27,6 @@ There are four states: _Current_, _Future_, _Completed_, and _Error_.
 
 ### Error
 
-When an error occurs, the error message can replace the helper text. If there is no helper text, the error message is not displayed.
+When an error occurs, the error message can replace the helper text.
 
 <demo-block component="progress-tracker" partial="error" has-theme-switcher="false"></demo-block>
