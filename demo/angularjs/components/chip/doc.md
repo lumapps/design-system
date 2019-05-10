@@ -1,7 +1,7 @@
 # Chip
 
 **Chips display distinct inputs, attributes, or actions.**
-Use chips to display choices, as inputs or to filter content. All chips in the same area should represent the same action.
+Use chips to display choices, as inputs or to filter content.
 
 ## Default
 
