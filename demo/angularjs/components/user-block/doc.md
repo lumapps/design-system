@@ -28,7 +28,7 @@ A _large_ size user block can be displayed vertically.
 
 <demo-block component="user-block" partial="vertical"></demo-block>
 
-## Extended
+### Extended
 
 The extended layout displays additional contact actions and a follow button.
 
