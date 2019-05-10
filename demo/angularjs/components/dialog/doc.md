@@ -5,7 +5,7 @@ Use dialogs to convey critical information or to request actions or decisions.
 
 ## Default
 
-Dialogs have a title, a body, and at least one ore more buttons.
+Dialogs have a title, a body, and at least one or more buttons.
 
 <demo-block component="dialog" partial="default" has-theme-switcher="false"></demo-block>
 
