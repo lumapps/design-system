@@ -1,29 +1,29 @@
 # Thumbnail
 
-**Enables user to quickly identify content.**
+**Thumbnails display formatted images**
 
 ## Default
 
 ### Sizes
 
-Thumbnail comes in 7 sizes: xxs, xs, s, m, l, xl, unset.
+Thumbnails come in 7 sizes: _xxsmall_, _xsmall_, _small_, _medium_, _large_, _xlarge_, and _unset_.
 
 <demo-block component="thumbnail" partial="sizes"></demo-block>
 
 ### Ratios
 
-Thumbnail comes in 4 ratios: square, original, vertical, horizontal.
+Thumbnails come in 4 ratios: _square_, _original_, _vertical_, and _horizontal_.
 
 <demo-block component="thumbnail" partial="ratios"></demo-block>
 
 ### Variants
 
-Thumbnail comes in two variant: squared or rounded
+Thumbnails come in two variants: _squared_ and _rounded_
 
 <demo-block component="thumbnail" partial="variants"></demo-block>
 
-### Sizes, ratios & variants combined
+### Sizes, ratios, and variants combined
 
-Sizes, ratios and variants combine.
+Sizes, ratios, and variants combine.
 
 <demo-block component="thumbnail" partial="combined"></demo-block>
