@@ -181,7 +181,8 @@ const List: React.FC<ListProps> = ({
                 // tslint:disable-next-line: no-any
                 const elemProps: any = {
                     isClickable,
-                    isselected: idx === activeItemIndex,
+                    isSelected: idx === activeItemIndex,
+                    key: `listEntry-${idx}`,
                 };
                 if (isClickable && elm.type.name === 'ListItem') {
                     // tslint:disable-next-line: no-string-literal, typedef

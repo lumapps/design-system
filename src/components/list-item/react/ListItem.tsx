@@ -27,7 +27,7 @@ type Size = Sizes;
  */
 interface IListItemProps extends IGenericProps {
     /* Whether the list item is selected or not */
-    isselected?: boolean;
+    isSelected?: boolean;
     /* Whether the list item can be clicked */
     isClickable?: boolean;
     /* Component size*/
@@ -79,7 +79,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isClickable: false,
-    isselected: false,
+    isSelected: false,
     size: Sizes.regular,
 };
 /////////////////////////////
@@ -93,8 +93,8 @@ const ListItem: React.FC<ListItemProps> = ({
     after,
     children,
     className = '',
-    isselected = DEFAULT_PROPS.isselected,
-    isClickable = DEFAULT_PROPS.isselected,
+    isSelected = DEFAULT_PROPS.isSelected,
+    isClickable = DEFAULT_PROPS.isSelected,
     size = DEFAULT_PROPS.size,
     before,
     ...props
@@ -103,7 +103,7 @@ const ListItem: React.FC<ListItemProps> = ({
         <li
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, selected: isselected, clickable: isClickable, size }),
+                handleBasicClasses({ prefix: CLASSNAME, selected: isSelected, clickable: isClickable, size }),
             )}
             {...props}
         >
