@@ -153,7 +153,8 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-button--is-selected {
-    &.#{$lumx-base-prefix}-button--color-dark {
+    &.#{$lumx-base-prefix}-button--color-dark,
+    &.#{$lumx-base-prefix}-button--theme-light {
         @include lumx-state-as-selected(state-default, dark);
 
         &:hover {
@@ -169,7 +170,8 @@
         }
     }
 
-    &.#{$lumx-base-prefix}-button--color-light {
+    &.#{$lumx-base-prefix}-button--color-light,
+    &.#{$lumx-base-prefix}-button--theme-dark {
         @include lumx-state-as-selected(state-default, light);
 
         &:hover {
