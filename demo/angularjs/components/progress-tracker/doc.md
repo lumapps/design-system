@@ -1,11 +1,11 @@
 # Progress tracker
 
-**Progress tracker convey user progress through a linear sequence of steps.**
-
-## Step states
-
-There are four types: _Current state_, _Future state_, _Completed state_ and _Error state_.
+**Progress tracker convey user progress through a sequence of steps.**
 A step can be completed by a helper text.
+
+## States
+
+There are four states: _Current_, _Future_, _Completed_, and _Error_.
 
 <demo-block component="progress-tracker" partial="stepper" has-theme-switcher="false"></demo-block>
 
@@ -27,6 +27,6 @@ A step can be completed by a helper text.
 
 ### Error
 
-Error message replaces the helper text, if used.
+When an error occurs, the error message can replace the helper text.
 
 <demo-block component="progress-tracker" partial="error" has-theme-switcher="false"></demo-block>

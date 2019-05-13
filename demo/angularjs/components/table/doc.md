@@ -1,6 +1,6 @@
 # Table
 
-**Use table to show tabular information that are easy comparable and scannable, such a statistical data.**
+**Tables display tabular information to make it easier to scan and to compare.**
 
 ## Basic usage
 

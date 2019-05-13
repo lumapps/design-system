@@ -1,28 +1,29 @@
 # Button
 
-**Buttons allow to trigger actions with a single click.**
+**Buttons trigger actions with a single click.**
 
 ## High emphasis
 
-Allow users to quickly identify the main action of the current screen.
-We should limit one high emphasis button per view.
+Use high emphasis to help users to identify the main action.
+There should not be more than one high emphasis button in a view.
 
 <demo-block component="button" partial="emphasis-high"></demo-block>
 
 ## Medium emphasis
 
-Medium emphasis action should be used according to the high emphasis button (e.g. cancel button).
+Use medium emphasis for secondary actions.
 
 <demo-block component="button" partial="emphasis-medium"></demo-block>
 
 ## Low emphasis
 
-We can use the low emphasis button as a text link to accentuate the hierarchy between other buttons, or use when they have same level actions.
+When the view contains a primary and a medium button, use low emphasis for lower priority actions.
+Alternatively, use low emphasis when there is only one level of priority.
 
 <demo-block component="button" partial="emphasis-low"></demo-block>
 
 ## Small size
 
-Useful for smaller interfaces like a follow button in a user block.
+Use small size when space is a constraint.
 
 <demo-block component="button" partial="small"></demo-block>

@@ -1,6 +1,6 @@
 # Radio button
 
-**Radio buttons are used to display multiple and exclusive options, meaning the user must select only one option.**
+**Radio buttons display exclusive options to chose from.**
 
 ## Default
 
