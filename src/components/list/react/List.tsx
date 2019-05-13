@@ -2,6 +2,8 @@ import React, { cloneElement, useState } from 'react';
 
 import classNames from 'classnames';
 
+import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
+
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { ListItem } from 'LumX/components/list-item/react/ListItem';
@@ -23,6 +25,8 @@ interface IListProps extends IGenericProps {
      * The theme.
      */
     theme?: Theme;
+    /* Callback used to retrieved the select entry*/
+    onListItemSelected?(entry: ListItem): void;
 }
 type ListProps = IListProps;
 
@@ -76,10 +80,13 @@ const List: React.FC<ListProps> = ({
     children,
     className = '',
     isClickable,
+    onListItemSelected,
     ...props
 }: ListProps): React.ReactElement => {
     // tslint:disable-next-line: typedef
-    const [activeItemIndex, setActiveItemIndex] = useState(isClickable ? 0 : -1);
+    const [activeItemIndex, setActiveItemIndex] = useState(-1);
+    // tslint:disable-next-line: typedef
+    const [hasItemSelected, setHasItemSelected] = useState(false);
 
     /**
      * Override the mouse down event - forward the event if needed
@@ -95,16 +102,88 @@ const List: React.FC<ListProps> = ({
         }
     };
 
+    /**
+     * Handle keyboard interactions
+     * @param {KeyboardEvent}  evt Keybord input event
+     */
+    // tslint:disable-next-line: typedef
+    const onKeyInteraction = (evt: React.KeyboardEvent<HTMLUListElement>) => {
+        if (!isClickable) {
+            return;
+        }
+        if (evt.keyCode === DOWN_KEY_CODE) {
+            setActiveItemIndex(selectItemOnKeyDown(false));
+            evt.nativeEvent.preventDefault();
+            evt.nativeEvent.stopPropagation();
+        } else if (evt.keyCode === UP_KEY_CODE) {
+            setActiveItemIndex(selectItemOnKeyDown(true));
+            evt.nativeEvent.preventDefault();
+            evt.nativeEvent.stopPropagation();
+        } else if (evt.keyCode === TAB_KEY_CODE) {
+            evt.nativeEvent.preventDefault();
+            evt.nativeEvent.stopPropagation();
+        } else if (evt.keyCode === ENTER_KEY_CODE && onListItemSelected) {
+            evt.nativeEvent.preventDefault();
+            evt.nativeEvent.stopPropagation();
+            onListItemSelected(children[activeItemIndex]);
+        }
+    };
+
+    /**
+     * Find and select next or previous available list item.
+     * @param  {boolean}  previous Should the we look for previous item
+     * @return {number}            Idx of the nex t element.
+     */
+    // tslint:disable-next-line: typedef
+    const selectItemOnKeyDown = (previous: boolean): number => {
+        const lookupTable: Array<ListItem | ListSubheader> = children
+            .slice(activeItemIndex + 1)
+            .concat(children.slice(0, activeItemIndex + 1));
+
+        if (previous) {
+            lookupTable.reverse();
+            const first: ListItem | ListSubheader = lookupTable.shift();
+            lookupTable.push(first);
+        }
+
+        let nextIdx: number = activeItemIndex;
+
+        for (const child of lookupTable) {
+            nextIdx = previous ? nextIdx - 1 : nextIdx + 1;
+            if (nextIdx > children.length - 1) {
+                nextIdx = 0;
+            }
+            if (nextIdx < 0) {
+                nextIdx = lookupTable.length - 1;
+            }
+            if (child.type.name === 'ListItem') {
+                break;
+            }
+        }
+        return nextIdx;
+    };
+
+    // Let's init the active item with the first list item in the list.
+    if (isClickable && !hasItemSelected) {
+        setActiveItemIndex(selectItemOnKeyDown(false));
+        setHasItemSelected(true);
+    }
+
     return (
         <ul
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, clickable: isClickable }))}
             tabIndex={isClickable ? 0 : -1}
+            onKeyDown={onKeyInteraction}
+            onKeyPress={onKeyInteraction}
             {...props}
         >
             {children.map((elm: ListItem | ListSubheader, idx: number) => {
                 // tslint:disable-next-line: no-any
-                const elemProps: any = { isSelected: idx === activeItemIndex, isClickable };
-                if (isClickable) {
+                const elemProps: any = {
+                    isClickable,
+                    isselected: idx === activeItemIndex,
+                };
+                if (isClickable && elm.type.name === 'ListItem') {
                     // tslint:disable-next-line: no-string-literal, typedef
                     elemProps.onMouseDown = (evt) => mouseDownHandler(evt, idx, elm.props);
                 }

@@ -28,6 +28,11 @@ interface IProps {
 
 /////////////////////////////
 
+const onItemSelectedHandler: (selectedEntry: ListItem) => void = (selectedEntry: ListItem): void => {
+    // tslint:disable-next-line: no-console
+    console.log(selectedEntry);
+};
+
 /**
  * The demo for the default <List>s.
  *
@@ -35,14 +40,14 @@ interface IProps {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>
-        <List theme={theme}>
+        <List theme={theme} isClickable onListItemSelected={onItemSelectedHandler}>
             <ListSubheader>text only</ListSubheader>
-            <ListItem size={ListItemSizes.tiny}>Single-line item</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Single-line item</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Single-line item</ListItem>
+            <ListItem size={ListItemSizes.tiny}>Single-line item 1</ListItem>
+            <ListItem size={ListItemSizes.tiny}>Single-line item 2</ListItem>
+            <ListItem size={ListItemSizes.tiny}>Single-line item 3</ListItem>
             <ListSubheader>rich</ListSubheader>
             <ListItem size={ListItemSizes.tiny} before={<Icon icon={mdiSend} />}>
-                Single-line item
+                Single-line item 4
             </ListItem>
             <ListItem
                 size={ListItemSizes.tiny}
@@ -55,14 +60,14 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     />
                 }
             >
-                Single-line item
+                Single-line item 5
             </ListItem>
             <ListItem
                 size={ListItemSizes.tiny}
                 before={<Icon icon={mdiSend} />}
                 after={<Button emphasis={ButtonEmphasises.low}>Button</Button>}
             >
-                Single-line item
+                Single-line item 6
             </ListItem>
         </List>
     </Fragment>
