@@ -2,7 +2,7 @@
 
 **Loadings notify user that an action is being completed.**
 
-Loadings come in two styles: circular, and linear.
+Loadings come in two styles: _circular_ and _linear_.
 
 ## Circular
 
