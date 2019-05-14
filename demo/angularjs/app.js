@@ -164,11 +164,11 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.progress', {
-            url: 'progress',
+        .state('app.loading', {
+            url: 'loading',
             views: {
                 'main@': {
-                    template: require('./components/progress/demo.html'),
+                    template: require('./components/loading/demo.html'),
                 },
             },
         })
