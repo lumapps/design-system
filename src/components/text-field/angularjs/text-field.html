@@ -8,7 +8,7 @@
                 'lumx-text-field--is-valid': lumx.isValid,
                 'lumx-text-field--has-error': lumx.hasError }"
 >
-    <label class="lumx-text-field__label" ng-if="::lumx.label">
+    <label for="{{ lumx.inputId }}" class="lumx-text-field__label" ng-if="::lumx.label">
         {{ lumx.label }}
     </label>
 

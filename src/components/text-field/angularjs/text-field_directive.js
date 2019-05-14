@@ -7,7 +7,7 @@ import template from './text-field.html';
 
 /////////////////////////////
 
-function TextFieldController() {
+function TextFieldController(LumXUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -41,6 +41,13 @@ function TextFieldController() {
         mdiAlertCircle,
         mdiCheckCircle,
     };
+
+    /**
+     * The input id.
+     *
+     * @type {string}
+     */
+    lumx.inputId = LumXUtilsService.generateUUID();
 
     /////////////////////////////
     //                         //
@@ -84,6 +91,7 @@ function TextFieldDirective() {
         ctrl.setModelController(modelController);
 
         input
+            .attr('id', ctrl.inputId)
             .on('focus', function onFocus() {
                 el.addClass(`${CSS_PREFIX}-text-field--is-focus`);
             })
