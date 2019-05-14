@@ -1,7 +1,8 @@
-<td
+<th
     class="lumx-table__cell"
     ng-class="{ 'lumx-table__cell--is-sortable': lumx.isSortable,
                 'lumx-table__cell--is-sorted': lumx.isSortable && lumx.sortOrder }"
+    scope="{{ lumx.scope }}"
 >
     <lumx-icon
         class="lumx-table__cell-icon"
@@ -25,4 +26,4 @@
     ></lumx-icon>
 
     <div class="lumx-table__cell-content" ng-transclude></div>
-</td>
+</th>

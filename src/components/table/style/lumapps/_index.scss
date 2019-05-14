@@ -14,6 +14,8 @@
         padding: $lumx-spacing-unit $lumx-spacing-unit * 4 $lumx-spacing-unit 0;
 
         thead & {
+            text-align: left;
+
             #{$self}--theme-light & {
                 border-bottom: 1px solid lumx-theme-color-variant(dark, $lumx-divider-color-variant);
                 color: lumx-theme-color-variant(dark, L2);

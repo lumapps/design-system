@@ -4,7 +4,9 @@
             <lumx-table-cell
                 lumx-icon="{{ cel.icon }}"
                 lumx-is-sortable="cell.isSortable"
+                lumx-scope="col"
                 lumx-sort-order="{{ cell.sortOrder }}"
+                lumx-variant="head"
                 ng-click="vm.updateSort(cell)"
                 ng-repeat="cell in vm.tableHead"
             >

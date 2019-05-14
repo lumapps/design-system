@@ -2,8 +2,6 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 import { mdiArrowDown, mdiArrowUp } from 'LumX/icons';
 
-import template from './table-cell.html';
-
 /////////////////////////////
 
 function TableCellController() {
@@ -34,6 +32,19 @@ function TableCellController() {
 function TableCellDirective() {
     'ngInject';
 
+    /**
+     * Get template url according to variant parameter.
+     *
+     * @param  {element} el    The directive root element.
+     * @param  {Object}  attrs The directive attributes.
+     * @return {string}  The template url.
+     */
+    function getTemplateUrl(el, attrs) {
+        return !attrs.lumxVariant || attrs.lumxVariant === 'body'
+            ? 'src/components/table/angularjs/table-cell-body.html'
+            : 'src/components/table/angularjs/table-cell-head.html';
+    }
+
     return {
         bindToController: true,
         controller: TableCellController,
@@ -43,9 +54,11 @@ function TableCellDirective() {
         scope: {
             icon: '@?lumxIcon',
             isSortable: '=?lumxIsSortable',
+            scope: '@?lumxScope',
             sortOrder: '@?lumxSortOrder',
+            variant: '@?lumxVariant',
         },
-        template,
+        templateUrl: getTemplateUrl,
         transclude: true,
     };
 }
