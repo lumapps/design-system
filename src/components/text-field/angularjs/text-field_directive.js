@@ -90,8 +90,13 @@ function TextFieldDirective() {
 
         ctrl.setModelController(modelController);
 
+        if (input.attr('id')) {
+            ctrl.inputId = input.attr('id');
+        } else {
+            input.attr('id', ctrl.inputId);
+        }
+
         input
-            .attr('id', ctrl.inputId)
             .on('focus', function onFocus() {
                 el.addClass(`${CSS_PREFIX}-text-field--is-focus`);
             })
