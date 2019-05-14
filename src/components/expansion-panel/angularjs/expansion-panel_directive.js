@@ -42,6 +42,13 @@ function ExpansionPanelController($element, $scope, $timeout) {
     lumx.hasFooter = false;
 
     /**
+     * Whether the directive has header slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lumx.hasHeader = false;
+
+    /**
      * The expansion panel icons.
      *
      * @type {Object}
@@ -51,6 +58,13 @@ function ExpansionPanelController($element, $scope, $timeout) {
         mdiChevronUp,
         mdiDragVertical,
     };
+
+    /**
+     * Whether the directive has drag handle slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lumx.isDraggable = false;
 
     /**
      * Whether the expansion panel wrapper is displayed or not.
@@ -188,6 +202,14 @@ function ExpansionPanelDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
         ctrl.initWrapperMaxHeight();
 
+        if (transclude.isSlotFilled('dragHandle')) {
+            ctrl.isDraggable = true;
+        }
+
+        if (transclude.isSlotFilled('header')) {
+            ctrl.hasHeader = true;
+        }
+
         if (transclude.isSlotFilled('footer')) {
             ctrl.hasFooter = true;
         }
@@ -202,17 +224,19 @@ function ExpansionPanelDirective() {
         restrict: 'E',
         scope: {
             closeCallback: '&?lumxCloseCallback',
-            isDraggable: '=?lumxIsDraggable',
             isOpen: '=?lumxIsOpen',
+            label: '@?lumxLabel',
             openCallback: '&?lumxOpenCallback',
             theme: '@?lumxTheme',
             toggleCallback: '&?lumxToggleCallback',
+            variant: '@?lumxVariant',
         },
         template,
         transclude: {
             content: `${COMPONENT_PREFIX}ExpansionPanelContent`,
+            dragHandle: `?${COMPONENT_PREFIX}ExpansionPanelDragHandle`,
             footer: `?${COMPONENT_PREFIX}ExpansionPanelFooter`,
-            header: `${COMPONENT_PREFIX}ExpansionPanelHeader`,
+            header: `?${COMPONENT_PREFIX}ExpansionPanelHeader`,
         },
     };
 }

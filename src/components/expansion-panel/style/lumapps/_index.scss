@@ -9,23 +9,35 @@
 
     &__header {
         display: flex;
-        height: $lumx-expansion-panel-header-height;
         align-items: center;
+
+        #{$self}--variant-boxed & {
+            padding: $lumx-spacing-unit;
+        }
     }
 
-    &__drag-indicator {
+    &__header-drag {
         flex-shrink: 0;
-        margin: 0 $lumx-spacing-unit;
-        cursor: move;
+    }
+
+    &__header-content {
+        flex: 1;
+        margin-right: $lumx-spacing-unit * 2;
+
+        #{$self}--variant-boxed &,
+        #{$self}--is-draggable & {
+            margin-left: $lumx-spacing-unit;
+        }
     }
 
     &__label {
-        flex: 1;
+        @include lumx-typography(body1);
+
+        display: block;
     }
 
-    &__state-indicator {
+    &__header-toggle {
         flex-shrink: 0;
-        margin: 0 $lumx-spacing-unit;
     }
 
     &__wrapper {

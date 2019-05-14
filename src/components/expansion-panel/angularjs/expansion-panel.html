@@ -1,22 +1,23 @@
 <div
     class="lumx-expansion-panel"
     ng-class="{ 'lumx-expansion-panel--is-open': lumx.isWrapperOpen,
-                 'lumx-expansion-panel--is-close': !lumx.isWrapperOpen,
-                 'lumx-expansion-panel--theme-light': !lumx.theme || lumx.theme === 'light',
-                 'lumx-expansion-panel--theme-dark': lumx.theme === 'dark' }"
+                'lumx-expansion-panel--is-close': !lumx.isWrapperOpen,
+                'lumx-expansion-panel--is-draggable': lumx.isDraggable,
+                'lumx-expansion-panel--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-expansion-panel--theme-dark': lumx.theme === 'dark',
+                'lumx-expansion-panel--variant-boxed': !lumx.variant || lumx.variant === 'boxed',
+                'lumx-expansion-panel--variant-trimmed': lumx.variant === 'trimmed', }"
 >
     <div class="lumx-expansion-panel__header" ng-click="lumx.toggle()">
-        <div class="lumx-expansion-panel__drag-indicator" ng-if="::lumx.isDraggable">
-            <lumx-icon
-                lumx-path="{{ lumx.icons.mdiDragVertical }}"
-                lumx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
-                lumx-size="s"
-            ></lumx-icon>
+        <div class="lumx-expansion-panel__header-drag" ng-transclude="dragHandle" ng-if="::lumx.isDraggable"></div>
+
+        <div class="lumx-expansion-panel__header-content">
+            <span class="lumx-expansion-panel__label" ng-if="::lumx.label && !lumx.hasHeader">{{ lumx.label }}</span>
         </div>
 
-        <div class="lumx-expansion-panel__label" ng-transclude="header"></div>
+        <div class="lumx-expansion-panel__header-content" ng-transclude="header" ng-if="::lumx.hasHeader"></div>
 
-        <div class="lumx-expansion-panel__state-indicator">
+        <div class="lumx-expansion-panel__header-toggle">
             <lumx-button
                 lumx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
                 lumx-emphasis="low"
