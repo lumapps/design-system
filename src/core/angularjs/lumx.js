@@ -22,6 +22,7 @@ angular.module(`${MODULE_NAME}.checkbox`, []);
 angular.module(`${MODULE_NAME}.chip`, []);
 angular.module(`${MODULE_NAME}.dialog`, []);
 angular.module(`${MODULE_NAME}.divider`, []);
+angular.module(`${MODULE_NAME}.drag-handle`, []);
 angular.module(`${MODULE_NAME}.dropdown`, []);
 angular.module(`${MODULE_NAME}.expansion-panel`, []);
 angular.module(`${MODULE_NAME}.icon`, []);
@@ -51,6 +52,7 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.chip`,
     `${MODULE_NAME}.dialog`,
     `${MODULE_NAME}.divider`,
+    `${MODULE_NAME}.drag-handle`,
     `${MODULE_NAME}.dropdown`,
     `${MODULE_NAME}.expansion-panel`,
     `${MODULE_NAME}.icon`,

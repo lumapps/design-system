@@ -11,6 +11,7 @@ import './components/dialog/angularjs/dialog_directive';
 import './components/dialog/angularjs/dialog_service';
 import './components/dialog/angularjs/dialog-close_directive';
 import './components/divider/angularjs/divider_directive';
+import './components/drag-handle/angularjs/drag-handle_directive';
 import './components/dropdown/angularjs/dropdown_directive';
 import './components/dropdown/angularjs/dropdown_service';
 import './components/expansion-panel/angularjs/expansion-panel_directive';
