@@ -154,6 +154,14 @@ export {
     ProgressProps,
     Variants,
 } from './components/progress/react/Progress';
+export {
+    CLASSNAME as AvatarClassName,
+    Avatar,
+    AvatarProps,
+    Sizes as AvatarSize,
+    Theme as AvatarTheme,
+    Themes as AvatarThemes,
+} from './components/avatar/react/Avatar';
 
 export {
     CLASSNAME as PopoverClassName,
