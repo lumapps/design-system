@@ -507,7 +507,7 @@ function SelectDirective() {
             hasFilter: '=?lumxHasFilter',
             hasHelper: '=?lumxHasHelper',
             helper: '@?lumxHelper',
-            isClearable: '=lumxIsClearable',
+            isClearable: '=?lumxIsClearable',
             isDisabled: '=?ngDisabled',
             isLoading: '=?lumxIsLoading',
             isValid: '=?lumxIsValid',
