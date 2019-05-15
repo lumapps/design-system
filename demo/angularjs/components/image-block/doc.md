@@ -1,16 +1,16 @@
 # Image-block
 
-**Image block displays an image with its related info.**
+**Image blocks display an image with related info.**
 
 ## Default
 
-Image block supports thumbnail's different formats (see [thumbnail](/thumbnail)).
+Image blocks support thumbnail's different formats (see [thumbnail](/thumbnail)).
 
 <demo-block component="image-block" partial="image-block"></demo-block>
 
 ## Custom padding
 
-Image block can take a custom padding.
+A custom padding can be added.
 
 <demo-block component="image-block" partial="image-block-padding" has-theme-switcher="false"></demo-block>
 
@@ -22,6 +22,6 @@ Info can be placed over the image.
 
 ## Info alignment
 
-Info alignment can be changed to ether: left, center or right.
+There are three alignments: _left_, _center_ and, _right_.
 
 <demo-block component="image-block" partial="image-block-alignment"></demo-block>

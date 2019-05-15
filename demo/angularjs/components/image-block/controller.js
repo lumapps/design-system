@@ -16,7 +16,7 @@ function DemoImageBlockController() {
      *
      * @type {Array}
      */
-    vm.tags = ['Kawaii', 'Puppey'];
+    vm.tags = ['Tag 1', 'Tag 2'];
 }
 
 /////////////////////////////
