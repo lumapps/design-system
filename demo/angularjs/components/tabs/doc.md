@@ -1,15 +1,15 @@
 # Tabs
 
-**Tabs allow users to navigate between groups of content on the same page.**
+**A Tab is a sub-navigation that show content selected.**
 
-## Full width tabs
+## Full width
 
 <demo-block component="tabs" partial="default"></demo-block>
 
-## Justify left tabs
+## Justify left
 
 <demo-block component="tabs" partial="left-tabs"></demo-block>
 
-## Icon tabs
+## Icon
 
 <demo-block component="tabs" partial="icon-tabs"></demo-block>
