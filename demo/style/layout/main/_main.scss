@@ -23,32 +23,32 @@
         display: flex;
         flex-direction: column;
 
-        h1 {
+        & > h1 {
             @include lumx-typography(display1);
         }
 
-        h2 {
+        & > h2 {
             @include lumx-typography(headline);
         }
 
-        h3 {
+        & > h3 {
             @include lumx-typography(title);
         }
 
-        strong {
+        & > p > strong {
             @include lumx-typography(subtitle2);
         }
 
-        h1,
-        h2,
-        h3 {
+        & > h1,
+        & > h2,
+        & > h3 {
             margin-top: $lumx-spacing-unit * 2;
         }
 
-        h1,
-        h2,
-        h3,
-        p {
+        & > h1,
+        & > h2,
+        & > h3,
+        & > p {
             margin-bottom: $lumx-spacing-unit * 2;
 
             &:last-child {
