@@ -11,8 +11,8 @@
     <div class="lumx-expansion-panel__header" ng-click="lumx.toggle()">
         <div class="lumx-expansion-panel__header-drag" ng-transclude="dragHandle" ng-if="::lumx.isDraggable"></div>
 
-        <div class="lumx-expansion-panel__header-content">
-            <span class="lumx-expansion-panel__label" ng-if="::lumx.label && !lumx.hasHeader">{{ lumx.label }}</span>
+        <div class="lumx-expansion-panel__header-content" ng-if="::lumx.label && !lumx.hasHeader">
+            <span class="lumx-expansion-panel__label">{{ lumx.label }}</span>
         </div>
 
         <div class="lumx-expansion-panel__header-content" ng-transclude="header" ng-if="::lumx.hasHeader"></div>

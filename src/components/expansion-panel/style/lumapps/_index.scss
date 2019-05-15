@@ -22,7 +22,7 @@
 
     &__header-content {
         flex: 1;
-        margin-right: $lumx-spacing-unit * 2;
+        margin-right: $lumx-spacing-unit;
 
         #{$self}--variant-boxed &,
         #{$self}--is-draggable & {
@@ -34,6 +34,10 @@
         @include lumx-typography(body1);
 
         display: block;
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant(light, N);
+        }
     }
 
     &__header-toggle {
