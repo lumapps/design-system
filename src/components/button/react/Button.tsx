@@ -289,7 +289,7 @@ const Button: React.FC<ButtonProps> = ({
             {...props}
         >
             {leftIcon !== undefined && !isEmpty(leftIcon) && <Icon icon={leftIcon} />}
-            {newChildren}
+            {newChildren && <span>{newChildren}</span>}
             {rightIcon !== undefined && !isEmpty(rightIcon) && <Icon icon={rightIcon} />}
         </ButtonRoot>
     );

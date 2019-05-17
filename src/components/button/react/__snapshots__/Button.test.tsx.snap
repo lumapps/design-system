@@ -13,7 +13,9 @@ exports[`<Button> Snapshots and structure should render correctly a <span> label
   className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span>
-    Label
+    <span>
+      Label
+    </span>
   </span>
 </ButtonRoot>
 `;
@@ -23,7 +25,9 @@ exports[`<Button> Snapshots and structure should render correctly a <span> label
   className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
   <span>
-    Label
+    <span>
+      Label
+    </span>
   </span>
   <Icon
     icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
@@ -39,7 +43,9 @@ exports[`<Button> Snapshots and structure should render correctly a left icon an
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
   />
   <span>
-    Label
+    <span>
+      Label
+    </span>
   </span>
 </ButtonRoot>
 `;
@@ -51,7 +57,9 @@ exports[`<Button> Snapshots and structure should render correctly a left icon an
   <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
   />
-  Label
+  <span>
+    Label
+  </span>
 </ButtonRoot>
 `;
 
@@ -59,7 +67,9 @@ exports[`<Button> Snapshots and structure should render correctly a text label 1
 <ButtonRoot
   className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  Label
+  <span>
+    Label
+  </span>
 </ButtonRoot>
 `;
 
@@ -67,7 +77,9 @@ exports[`<Button> Snapshots and structure should render correctly a text label a
 <ButtonRoot
   className="lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
 >
-  Label
+  <span>
+    Label
+  </span>
   <Icon
     icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
   />
@@ -122,7 +134,9 @@ exports[`<Button> Snapshots and structure should render correctly two icons and 
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
   />
   <span>
-    Label
+    <span>
+      Label
+    </span>
   </span>
   <Icon
     icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
@@ -137,7 +151,9 @@ exports[`<Button> Snapshots and structure should render correctly two icons and 
   <Icon
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
   />
-  Label
+  <span>
+    Label
+  </span>
   <Icon
     icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
   />
