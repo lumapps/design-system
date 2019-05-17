@@ -66,6 +66,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.badge', {
+            url: 'badge',
+            views: {
+                'main@': {
+                    controller: 'DemoButtonController',
+                    controllerAs: 'vm',
+                    template: require('./components/badge/demo.html'),
+                },
+            },
+        })
         .state('app.button', {
             url: 'button',
             views: {
