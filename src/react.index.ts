@@ -194,3 +194,8 @@ export {
     IPopperOffsets,
     PopperOffsets,
 } from './components/popover/react/Popover';
+export {
+    CLASSNAME as ListDividerClassName,
+    ListDivider,
+    ListDividerProps,
+} from './components/list-divider/react/ListDivider';

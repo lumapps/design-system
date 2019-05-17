@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -36,6 +36,10 @@ interface IListItemProps extends IGenericProps {
     before?: ReactElement;
     /* after element */
     after?: ReactElement;
+    /* Is this element active */
+    isActive?: boolean;
+    /* theme */
+    theme?: Theme;
 }
 type ListItemProps = IListItemProps;
 
@@ -78,9 +82,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    isActive: false,
     isClickable: false,
     isSelected: false,
     size: Sizes.regular,
+    theme: Themes.light,
 };
 /////////////////////////////
 
@@ -95,16 +101,27 @@ const ListItem: React.FC<ListItemProps> = ({
     className = '',
     isSelected = DEFAULT_PROPS.isSelected,
     isClickable = DEFAULT_PROPS.isSelected,
+    isActive = DEFAULT_PROPS.isActive,
     size = DEFAULT_PROPS.size,
+    theme = DEFAULT_PROPS.theme,
     before,
     ...props
 }: ListItemProps): React.ReactElement => {
+    const element: React.MutableRefObject<HTMLLIElement | null> = useRef(null);
+
+    useEffect(() => {
+        if (element && element.current && isActive) {
+            element.current.focus();
+        }
+    }, [isActive]);
     return (
         <li
+            ref={element}
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, selected: isSelected, clickable: isClickable, size }),
+                handleBasicClasses({ prefix: CLASSNAME, theme, selected: isSelected, clickable: isClickable, size }),
             )}
+            tabIndex={isClickable ? 0 : -1}
             {...props}
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}

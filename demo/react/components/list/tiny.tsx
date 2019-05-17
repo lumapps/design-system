@@ -50,6 +50,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 Single-line item 4
             </ListItem>
             <ListItem
+                isSelected
                 size={ListItemSizes.tiny}
                 before={
                     <Thumbnail

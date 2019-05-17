@@ -5,25 +5,22 @@ import classNames from 'classnames';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-
 import { handleBasicClasses } from 'LumX/core/utils';
-
-import { Theme, Themes } from 'LumX/components';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IListSubheaderProps extends IGenericProps {}
-type ListSubheaderProps = IListSubheaderProps;
+interface IListDividerProps extends IGenericProps {}
+type ListDividerProps = IListDividerProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ListSubheaderProps> {}
+interface IDefaultPropsType extends Partial<ListDividerProps> {}
 
 /////////////////////////////
 //                         //
@@ -38,7 +35,7 @@ interface IDefaultPropsType extends Partial<ListSubheaderProps> {}
  * @constant
  * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ListSubheader`;
+const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ListDivider`;
 
 /**
  * The default class name and classes prefix for this component.
@@ -60,24 +57,18 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /////////////////////////////
 
 /**
- * Component used in List to display some separator / title section.
+ * Renders a thin line that will acts as a divider in List
  *
  * @return {React.ReactElement} The component.
  */
-// tslint:disable: no-unused
-const ListSubheader: React.FC<ListSubheaderProps> = ({
-    children,
+const ListDivider: React.FC<ListDividerProps> = ({
     className = '',
     ...props
-}: ListSubheaderProps): React.ReactElement => {
-    return (
-        <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
-            {children}
-        </li>
-    );
+}: ListDividerProps): React.ReactElement => {
+    return <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props} />;
 };
-ListSubheader.displayName = COMPONENT_NAME;
+ListDivider.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ListSubheader, ListSubheaderProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, ListDivider, ListDividerProps };

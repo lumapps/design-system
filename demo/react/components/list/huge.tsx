@@ -5,6 +5,7 @@ import {
     ButtonEmphasises,
     Icon,
     List,
+    ListDivider,
     ListItem,
     ListItemSizes,
     ListSubheader,
@@ -48,6 +49,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     </p>
                 </div>
             </ListItem>
+            <ListDivider />
             <ListSubheader>rich</ListSubheader>
             <ListItem
                 size={ListItemSizes.huge}
