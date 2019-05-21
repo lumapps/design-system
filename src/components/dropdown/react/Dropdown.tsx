@@ -1,6 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
+import FocusTrap from 'focus-trap-react';
 
 import { IPopperOffsets, Popover, PopperPositions } from 'LumX/components/popover/react/Popover';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
@@ -93,9 +94,22 @@ const Dropdown: React.FC<DropdownProps> = ({
                 }
                 showPopper={isOpen}
                 popperElement={
-                    <div className={`${CLASSNAME}__menu`}>
-                        <div className={`${CLASSNAME}__content`}>{children}</div>
-                    </div>
+                    isOpen && (
+                        <FocusTrap
+                            focusTrapOptions={{
+                                clickOutsideDeactivates: true,
+                                escapeDeactivates: true,
+                                fallbackFocus: `.${CLASSNAME}`,
+                                onActivate: setIsOpen.bind(null, true),
+                                onDeactivate: setIsOpen.bind(null, false),
+                                returnFocusOnDeactivate: true,
+                            }}
+                        >
+                            <div className={`${CLASSNAME}__menu`}>
+                                <div className={`${CLASSNAME}__content`}>{children}</div>
+                            </div>
+                        </FocusTrap>
+                    )
                 }
                 popperOffset={offset}
                 popperPlacement={position}
