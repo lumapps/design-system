@@ -37,6 +37,12 @@ const _isEmpty = (value) => {
  */
 function getBasicClass({ prefix, type, value }) {
     if (isBoolean(value)) {
+        const booleanPrefixes = ['has', 'is'];
+
+        if (booleanPrefixes.some((booleanPrefix) => type.toString().startsWith(booleanPrefix))) {
+            return `${prefix}--${kebabCase(type)}`;
+        }
+
         return `${prefix}--is-${kebabCase(type)}`;
     }
 
