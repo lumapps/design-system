@@ -67,8 +67,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 const Dropdown: React.FC<DropdownProps> = ({
     children,
     className = '',
-    // closeOnClick = true,
-    // escapeClose = true,
+    closeOnClick = true,
+    escapeClose = true,
     offset,
     // overToggle = false,
     position,
@@ -97,8 +97,8 @@ const Dropdown: React.FC<DropdownProps> = ({
                     isOpen && (
                         <FocusTrap
                             focusTrapOptions={{
-                                clickOutsideDeactivates: true,
-                                escapeDeactivates: true,
+                                clickOutsideDeactivates: closeOnClick,
+                                escapeDeactivates: escapeClose,
                                 fallbackFocus: `.${CLASSNAME}`,
                                 onActivate: setIsOpen.bind(null, true),
                                 onDeactivate: setIsOpen.bind(null, false),
