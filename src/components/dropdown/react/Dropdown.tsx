@@ -70,7 +70,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     position,
     toggleElement,
 }: DropdownProps): React.ReactElement => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState(Boolean(false));
 
     function toggleDropdown(): void {
         setIsOpen(!isOpen);
