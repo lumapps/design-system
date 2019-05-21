@@ -1,3 +1,5 @@
+import 'focus-visible';
+
 import './core/react';
 
 export { Color, Colors, Size, Sizes, Theme, Themes } from './components';
@@ -107,6 +109,18 @@ export {
     Theme as LightboxTheme,
     Themes as LightboxThemes,
 } from './components/lightbox/react/Lightbox';
+
+export {
+    CLASSNAME as ProgressTrackerClassName,
+    ProgressTracker,
+    ProgressTrackerProps,
+} from './components/progress-tracker/react/ProgressTracker';
+
+export {
+    CLASSNAME as ProgressTrackerStepClassName,
+    ProgressTrackerStep,
+    ProgressTrackerStepProps,
+} from './components/progress-tracker/react/ProgressTrackerStep';
 
 export {
     CLASSNAME as SlideshowClassName,
