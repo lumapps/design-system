@@ -117,16 +117,21 @@ const TextField: React.FC<TextFieldProps> = ({
 
     return (
         <div
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
-                [`${CLASSNAME}--has-error`]: !isValid && hasError,
-                [`${CLASSNAME}--has-icon`]: icon,
-                [`${CLASSNAME}--has-label`]: label,
-                [`${CLASSNAME}--has-placeholder`]: placeholder,
-                [`${CLASSNAME}--has-value`]: hasValue,
-                [`${CLASSNAME}--is-disabled`]: isDisabled,
-                [`${CLASSNAME}--is-focus`]: hasFocus,
-                [`${CLASSNAME}--is-valid`]: isValid,
-            })}
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    hasError: !isValid && hasError,
+                    hasIcon: Boolean(icon),
+                    hasLabel: Boolean(label),
+                    hasPlaceholder: Boolean(placeholder),
+                    hasValue,
+                    isDisabled,
+                    isFocus: hasFocus,
+                    isValid,
+                    prefix: CLASSNAME,
+                    theme,
+                }),
+            )}
         >
             {label && (
                 <label htmlFor={id} className={`${CLASSNAME}__label`}>
@@ -163,7 +168,7 @@ const TextField: React.FC<TextFieldProps> = ({
 
                 {(isValid || hasError) && (
                     <Icon
-                        className={'__input-validity"'}
+                        className={`${CLASSNAME}__input-validity`}
                         color={theme === Themes.dark ? 'light' : undefined}
                         icon={isValid ? mdiCheckCircle : mdiAlertCircle}
                         size={Sizes.xs}
