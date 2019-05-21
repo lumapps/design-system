@@ -10,9 +10,8 @@ import {
     ThScope,
 } from 'LumX';
 
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
 
-import cloneDeep from 'lodash/cloneDeep';
 import orderBy from 'lodash/orderBy';
 
 import { mdiCommentOutline } from 'LumX/icons';
@@ -53,7 +52,7 @@ interface IHead {
  *
  * @type {Object}
  */
-let tableBody: IBody[] = [
+const tableBody: IBody[] = [
     {
         calories: 159,
         comments: 'Lorem ipsum',
@@ -131,30 +130,31 @@ const tableHead: IHead[] = [
  * @return {React.ReactElement} The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const [dataTable, setTable]: [IBody[], Dispatch<SetStateAction<IBody[]>>] = useState(tableBody);
+    const [dataTableBody, setTable]: [IBody[], Dispatch<SetStateAction<IBody[]>>] = useState(tableBody);
 
     /**
      * Update the sorting of the table.
      *
-     * @param  {Object} headSource The head cell to sort the table by.
-     * @return {Array}  The ordered table.
+     * @param {Object} headSource The head cell to sort the table by.
      */
-    const updateSort = (headSource: IHead) => () => {
-        tableHead.map((head: IHead) => {
-            if (head !== headSource) {
-                head.sortOrder = undefined;
+    const handleSort: (headSource: IHead) => void = useCallback(
+        (headSource: IHead) => {
+            tableHead.map((head: IHead) => {
+                if (head !== headSource) {
+                    head.sortOrder = undefined;
+                }
+            });
+
+            if (headSource.sortOrder === ThOrder.asc) {
+                headSource.sortOrder = ThOrder.desc;
+            } else {
+                headSource.sortOrder = ThOrder.asc;
             }
-        });
 
-        if (headSource.sortOrder === ThOrder.asc) {
-            headSource.sortOrder = ThOrder.desc;
-        } else {
-            headSource.sortOrder = ThOrder.asc;
-        }
-
-        tableBody = cloneDeep(tableBody);
-        setTable(orderBy(tableBody, headSource.name, headSource.sortOrder));
-    };
+            setTable(orderBy(tableBody, headSource.name, headSource.sortOrder));
+        },
+        [dataTableBody],
+    );
 
     return (
         <Table hasDividers theme={theme}>
@@ -168,7 +168,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                                 scope={head.scope}
                                 sortOrder={head.sortOrder}
                                 variant={head.variant}
-                                onClick={updateSort(head)}
+                                // tslint:disable-next-line: jsx-no-lambda
+                                onHeaderClick={(): void => handleSort(head)}
                             >
                                 {head.label}
                             </TableCell>
@@ -178,7 +179,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             </TableHeader>
 
             <TableBody>
-                {dataTable.map((body: IBody, key: number) => {
+                {dataTableBody.map((body: IBody, key: number) => {
                     return (
                         <TableRow key={`tr-${key}`}>
                             <TableCell>{body.dessert}</TableCell>

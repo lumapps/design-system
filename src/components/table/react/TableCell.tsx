@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -10,6 +10,9 @@ import { Icon } from 'LumX/components/icon/react/Icon';
 
 import { IconSizes } from 'LumX';
 import { mdiArrowDown, mdiArrowUp } from 'LumX/icons';
+
+import isFunction from 'lodash/isFunction';
+import noop from 'lodash/noop';
 
 /////////////////////////////
 
@@ -70,6 +73,11 @@ interface ITableCellProps extends IGenericProps {
      * The variant of the cell, possible values: body/head.
      */
     variant?: Variant;
+
+    /**
+     * The function to call when we click on an order button.
+     */
+    onHeaderClick?(): void;
 }
 type TableCellProps = ITableCellProps;
 
@@ -114,6 +122,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    onHeaderClick: noop,
     scope: undefined,
     sortOrder: Orders.asc,
     variant: Variants.body,
@@ -150,11 +159,21 @@ const TableCell: React.FC<TableCellProps> = ({
     className = '',
     icon,
     isSortable,
+    onHeaderClick = DEFAULT_PROPS.onHeaderClick,
     sortOrder = DEFAULT_PROPS.sortOrder,
     variant = DEFAULT_PROPS.variant,
     ...props
 }: TableCellProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, variant, ...props });
+    const newChildren: React.ReactNode = _validate({ children, onHeaderClick, variant, ...props });
+
+    /**
+     * Handle click on the ordered thead.
+     */
+    const handleOnHeaderClick: () => void = useCallback(() => {
+        if (isFunction(onHeaderClick)) {
+            onHeaderClick();
+        }
+    }, [onHeaderClick]);
 
     return (
         <Fragment>
@@ -169,6 +188,8 @@ const TableCell: React.FC<TableCellProps> = ({
                         className,
                         handleBasicClasses({ prefix: CLASSNAME }),
                     )}
+                    tabIndex={isSortable && isFunction(onHeaderClick) ? 1 : 0}
+                    onClick={handleOnHeaderClick}
                     {...props}
                 >
                     {icon && !isSortable && <Icon className="lumx-table__cell-icon" icon={icon} size={IconSizes.xxs} />}
