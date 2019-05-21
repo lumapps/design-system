@@ -19,6 +19,8 @@ interface IDropdownProps extends IGenericProps {
     escapeClose?: boolean;
     /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
     offset?: IPopperOffsets;
+    /** Whether the dropdown is displayed on top of the toggle itself or sits next to it. */
+    overToggle?: boolean;
     /** The preferred Dropdown location against the toggle element. */
     position?: PopperPositions | string;
     /** The reference element that will be used as the toggle of the Dropdown. */
@@ -67,6 +69,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     // closeOnClick = true,
     // escapeClose = true,
     offset,
+    // overToggle = false,
     position,
     toggleElement,
 }: DropdownProps): React.ReactElement => {
