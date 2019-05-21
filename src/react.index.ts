@@ -142,6 +142,23 @@ export {
     Themes as SwitchThemes,
 } from './components/switch/react/Switch';
 
+export { CLASSNAME as TableClassName, Table, TableProps, Theme as TableTheme } from './components/table/react/Table';
+
+export { CLASSNAME as TableBodyClassName, TableBody, TableBodyProps } from './components/table/react/TableBody';
+
+export {
+    CLASSNAME as TableCellClassName,
+    TableCell,
+    TableCellProps,
+    Orders as ThOrder,
+    Scopes as ThScope,
+    Variants as TableCellVariant,
+} from './components/table/react/TableCell';
+
+export { CLASSNAME as TableHeaderClassName, TableHeader, TableHeaderProps } from './components/table/react/TableHeader';
+
+export { CLASSNAME as TableRowClassName, TableRow, TableRowProps } from './components/table/react/TableRow';
+
 export {
     CLASSNAME as TextFieldClassName,
     TextField,
