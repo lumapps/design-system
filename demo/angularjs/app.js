@@ -194,6 +194,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.search', {
+            url: 'search',
+            views: {
+                'main@': {
+                    controller: 'DemoSearchController',
+                    controllerAs: 'vm',
+                    template: require('./components/search/demo.html'),
+                },
+            },
+        })
         .state('app.select', {
             url: 'select',
             views: {
@@ -349,6 +359,7 @@ require('./components/list/controller.js');
 require('./components/notification/controller.js');
 require('./components/progress-tracker/controller.js');
 require('./components/radio-button/controller.js');
+require('./components/search/controller.js');
 require('./components/select/controller.js');
 require('./components/slideshow/controller.js');
 require('./components/switch/controller.js');
