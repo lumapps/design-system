@@ -5,10 +5,9 @@ import classNames from 'classnames';
 import { Theme, Themes } from 'LumX/components';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from 'LumX/components/slideshow/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { useInterval } from 'LumX/core/react/hooks';
 import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-
-import isFunction from 'lodash/isFunction';
 
 import { SlideshowControls } from './SlideshowControls';
 
@@ -82,41 +81,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     interval: AUTOPLAY_DEFAULT_INTERVAL,
     theme: Themes.light,
 };
-
-/////////////////////////////
-//                         //
-//      Custom hooks       //
-//                         //
-/////////////////////////////
-
-/**
- * Making setInterval Declarative with React Hooks.
- * Credits: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
- *
- * @param {() => void} callback Function called by setInterval.
- * @param {number}     delay    Delay for setInterval.
- */
-function useInterval(callback: () => void, delay: number | null): void {
-    const savedCallback: React.MutableRefObject<(() => void) | undefined> = useRef();
-
-    useEffect(() => {
-        savedCallback.current = callback;
-    });
-
-    useEffect((): void | (() => void) => {
-        function tick(): void {
-            if (isFunction(savedCallback.current)) {
-                savedCallback.current();
-            }
-        }
-
-        if (delay !== null) {
-            const id: NodeJS.Timeout = setInterval(tick, delay);
-
-            return (): void => clearInterval(id);
-        }
-    }, [delay]);
-}
 
 /////////////////////////////
 //                         //
