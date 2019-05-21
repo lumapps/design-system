@@ -154,6 +154,14 @@ export {
 } from './components/list/react/ListSubheader';
 
 export {
+    CLASSNAME as NotificationClassName,
+    Notification,
+    NotificationProps,
+    Theme as NotificationTheme,
+    Themes as NotificationThemes,
+} from './components/notification/react/Notification';
+
+export {
     CLASSNAME as PopoverClassName,
     Popover,
     PopoverProps,
