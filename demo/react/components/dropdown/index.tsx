@@ -21,12 +21,8 @@ const description: string = 'Dropdowns present multiple actions in a small area.
 
 const demos: { [demoName: string]: DemoObject } = {
     /* tslint:disable: object-literal-sort-keys */
-    default: {
-        description: 'default',
-    },
-    target: {
-        description: 'target',
-    },
+    default: {},
+    target: {},
     /* tslint:enable: object-literal-sort-keys */
 };
 

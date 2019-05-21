@@ -1,6 +1,6 @@
-import React, { CSSProperties, Fragment } from 'react';
+import React, { CSSProperties, Fragment, ReactNode } from 'react';
 
-import { Dropdown, Placements } from 'LumX';
+import { Button, Dropdown, Placements } from 'LumX';
 
 const demoContainerStyle: CSSProperties = {
     display: 'flex',
@@ -16,10 +16,14 @@ interface IProps {
     // theme: DropdownTheme;
 }
 
+const createToggleElement: (text?: string) => ReactNode = (text: string = 'Button'): ReactNode => {
+    return <Button>{text}</Button>;
+};
+
 /////////////////////////////
 
 /**
- * The demo for the default <Avatar>s.
+ * The demo for the default <Dropdown>s.
  *
  * @return {React.ReactElement} The demo component.
  */
@@ -29,12 +33,23 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => (
             <Dropdown
                 closeOnClick={true}
                 escapeClose={true}
-                offset={{ horizontal: 10, vertical: 10 }}
+                offset={{ horizontal: 1, vertical: 1 }}
                 overToggle={true}
-                position={Placements.RIGHT}
-                toggleElement={<button type="button">Yolo</button>}
+                position={Placements.BOTTOM_START}
+                toggleElement={createToggleElement('Simple Menu')}
             >
-                <h1>I'm in the popover</h1>
+                <h1>Todo simple menu</h1>
+            </Dropdown>
+
+            <Dropdown
+                closeOnClick={true}
+                escapeClose={true}
+                offset={{ horizontal: 1, vertical: 1 }}
+                overToggle={true}
+                position={Placements.BOTTOM_START}
+                toggleElement={createToggleElement('Complex Menu')}
+            >
+                <h1>Todo complex menu</h1>
             </Dropdown>
         </div>
     </Fragment>
