@@ -80,6 +80,30 @@ const Dropdown: React.FC<DropdownProps> = ({
         setIsOpen(!isOpen);
     }
 
+    const anchorElement: ReactNode = (
+        <div className={`${CLASSNAME}__toggle`} onClick={toggleDropdown}>
+            {toggleElement}
+        </div>
+    );
+
+    const popperElement: ReactNode = isOpen && (
+        <FocusTrap
+            focusTrapOptions={{
+                clickOutsideDeactivates: closeOnClick,
+                escapeDeactivates: escapeClose,
+                fallbackFocus: `.${CLASSNAME}`,
+                onDeactivate: (): void => {
+                    setIsOpen(false);
+                },
+                returnFocusOnDeactivate: true,
+            }}
+        >
+            <div className={`${CLASSNAME}__menu`}>
+                <div className={`${CLASSNAME}__content`}>{children}</div>
+            </div>
+        </FocusTrap>
+    );
+
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), {
@@ -87,30 +111,9 @@ const Dropdown: React.FC<DropdownProps> = ({
             })}
         >
             <Popover
-                anchorElement={
-                    <div className={`${CLASSNAME}__toggle`} onClick={toggleDropdown}>
-                        {toggleElement}
-                    </div>
-                }
+                anchorElement={anchorElement}
                 showPopper={isOpen}
-                popperElement={
-                    isOpen && (
-                        <FocusTrap
-                            focusTrapOptions={{
-                                clickOutsideDeactivates: closeOnClick,
-                                escapeDeactivates: escapeClose,
-                                fallbackFocus: `.${CLASSNAME}`,
-                                onActivate: setIsOpen.bind(null, true),
-                                onDeactivate: setIsOpen.bind(null, false),
-                                returnFocusOnDeactivate: true,
-                            }}
-                        >
-                            <div className={`${CLASSNAME}__menu`}>
-                                <div className={`${CLASSNAME}__content`}>{children}</div>
-                            </div>
-                        </FocusTrap>
-                    )
-                }
+                popperElement={popperElement}
                 popperOffset={offset}
                 popperPlacement={position}
             />
