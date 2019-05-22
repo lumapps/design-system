@@ -129,6 +129,14 @@ export {
 } from './components/switch/react/Switch';
 
 export {
+    CLASSNAME as TextFieldClassName,
+    TextField,
+    TextFieldProps,
+    Theme as TextFieldTheme,
+    Themes as TextFieldThemes,
+} from './components/text-field/react/TextField';
+
+export {
     AspectRatios as ThumbnailAspectRatios,
     AspectRatio as ThumbnailAspectRatio,
     CLASSNAME as ThumbnailClassName,
@@ -148,12 +156,14 @@ export {
     Theme as UserBlockTheme,
     Themes as UserBlockThemes,
 } from './components/user-block/react/UserBlock';
+
 export {
     CLASSNAME as ProgressClassName,
     Progress,
     ProgressProps,
     Variants,
 } from './components/progress/react/Progress';
+
 export {
     CLASSNAME as ListClassName,
     List,
