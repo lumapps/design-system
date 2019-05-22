@@ -102,7 +102,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             }}
         >
             <div className={`${CLASSNAME}__menu`} style={{ width }}>
-                <div className={`${CLASSNAME}__content`}>{children}</div>
+                <div className={`${CLASSNAME}__content`}>{children(setIsOpen)}</div>
             </div>
         </FocusTrap>
     );
