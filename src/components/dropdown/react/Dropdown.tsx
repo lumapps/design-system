@@ -26,6 +26,8 @@ interface IDropdownProps extends IGenericProps {
     position?: PopperPositions | string;
     /** The reference element that will be used as the toggle of the Dropdown. */
     toggleElement: ReactNode;
+    /** The width of the dropdown container. */
+    width?: number;
 }
 type DropdownProps = IDropdownProps;
 
@@ -73,6 +75,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     // overToggle = false,
     position,
     toggleElement,
+    width,
 }: DropdownProps): React.ReactElement => {
     const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState(Boolean(false));
 
@@ -98,7 +101,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 returnFocusOnDeactivate: true,
             }}
         >
-            <div className={`${CLASSNAME}__menu`}>
+            <div className={`${CLASSNAME}__menu`} style={{ width }}>
                 <div className={`${CLASSNAME}__content`}>{children}</div>
             </div>
         </FocusTrap>
