@@ -1,17 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Chip /> Snapshot should render correctly Chip component 1`] = `
-<div
+<a
+  LabelComponent="Hello World!"
   className="lumx-chip lumx-chip--size-m lumx-chip--theme-light lumx-chip--is-unselected"
   onClick={[Function]}
-  onKeyPress={null}
+  onKeyDown={[Function]}
   role="button"
   tabIndex={-1}
 >
   <div
     className="lumx-chip__label"
-  >
-    Hello World!
-  </div>
-</div>
+  />
+</a>
 `;
