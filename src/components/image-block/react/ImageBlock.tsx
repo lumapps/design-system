@@ -181,7 +181,9 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                             {tags.map(
                                 (tag: string, index: number): JSX.Element => (
                                     <div key={index} className={`${CLASSNAME}__tag`}>
-                                        <Chip LabelComponent={tag} size={ChipSizes.s} theme={theme} />
+                                        <Chip size={ChipSizes.s} theme={theme}>
+                                            {tag}
+                                        </Chip>
                                     </div>
                                 ),
                             )}
