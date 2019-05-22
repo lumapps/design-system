@@ -93,7 +93,6 @@ const tableHead: IHead[] = [
         label: 'Dessert',
         name: 'dessert',
         scope: ThScope.col,
-        sortOrder: ThOrder.asc,
         variant: TableCellVariant.head,
     },
     {
@@ -101,7 +100,6 @@ const tableHead: IHead[] = [
         label: 'Calories',
         name: 'calories',
         scope: ThScope.col,
-        sortOrder: ThOrder.asc,
         variant: TableCellVariant.head,
     },
     {
@@ -109,7 +107,6 @@ const tableHead: IHead[] = [
         label: 'Fat (g)',
         name: 'fat',
         scope: ThScope.col,
-        sortOrder: ThOrder.asc,
         variant: TableCellVariant.head,
     },
     {
@@ -164,6 +161,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         return (
                             <TableCell
                                 key={`th-${key}`}
+                                icon={head.icon}
                                 isSortable={head.isSortable}
                                 scope={head.scope}
                                 sortOrder={head.sortOrder}

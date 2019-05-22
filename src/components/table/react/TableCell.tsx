@@ -123,8 +123,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     onHeaderClick: noop,
-    scope: undefined,
-    sortOrder: Orders.asc,
     variant: Variants.body,
 };
 
@@ -160,7 +158,7 @@ const TableCell: React.FC<TableCellProps> = ({
     icon,
     isSortable,
     onHeaderClick = DEFAULT_PROPS.onHeaderClick,
-    sortOrder = DEFAULT_PROPS.sortOrder,
+    sortOrder,
     variant = DEFAULT_PROPS.variant,
     ...props
 }: TableCellProps): React.ReactElement => {
