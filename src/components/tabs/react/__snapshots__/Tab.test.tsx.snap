@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tab> Props should use the given props 1`] = `
+<a
+  className="lumx-tabs__link"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  tabIndex={0}
+>
+  <Icon
+    icon="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+    size="xs"
+  />
+  <span>
+    Test Tab Label
+  </span>
+</a>
+`;
+
+exports[`<Tab> Snapshots and structure should render correctly 1`] = `
+<a
+  className="lumx-tabs__link"
+  onClick={[Function]}
+  onKeyPress={[Function]}
+  tabIndex={0}
+/>
+`;
