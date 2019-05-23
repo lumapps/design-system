@@ -57,7 +57,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {
+    closeOnClick: true,
+    escapeClose: true,
+    overToggle: false,
+};
 
 /////////////////////////////
 
@@ -69,10 +73,10 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 const Dropdown: React.FC<DropdownProps> = ({
     children,
     className = '',
-    closeOnClick = true,
-    // escapeClose = true,
+    closeOnClick = DEFAULT_PROPS.closeOnClick,
+    // escapeClose = DEFAULT_PROPS.escapeClose,
     offset,
-    // overToggle = false,
+    // overToggle = DEFAULT_PROPS.overToggle,
     position,
     toggleElement,
     width,
