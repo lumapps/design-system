@@ -114,6 +114,18 @@ const ListItem: React.FC<ListItemProps> = ({
             element.current.focus();
         }
     }, [isActive]);
+
+    /**
+     * Prevent the focus event to be trigger on the parent.
+     *
+     * @param {FocusEvent} evt Focus event
+     */
+    // tslint:disable-next-line: typedef
+    const preventParentFocus = (evt: React.FocusEvent<HTMLLIElement>): void => {
+        evt.preventDefault();
+        evt.stopPropagation();
+    };
+
     return (
         <li
             ref={element}
@@ -122,6 +134,7 @@ const ListItem: React.FC<ListItemProps> = ({
                 handleBasicClasses({ prefix: CLASSNAME, theme, selected: isSelected, clickable: isClickable, size }),
             )}
             tabIndex={isClickable ? 0 : -1}
+            onFocusCapture={preventParentFocus}
             {...props}
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}

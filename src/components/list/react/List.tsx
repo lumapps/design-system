@@ -1,4 +1,4 @@
-import React, { cloneElement, useState } from 'react';
+import React, { cloneElement, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -19,6 +19,7 @@ import { ListSubheader } from 'LumX/components/list-subheader/react/ListSubheade
  * Defines the props of the component.
  */
 interface IListProps extends IGenericProps {
+    children: ListItem[];
     /* Whether the list items are clickable */
     isClickable?: boolean;
     /**
@@ -91,6 +92,8 @@ const List: React.FC<ListProps> = ({
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     // tslint:disable-next-line: typedef
     const [hasItemSelected, setHasItemSelected] = useState(false);
+    // tslint:disable-next-line: typedef
+    const preventResetOnBlurOrFocus = useRef(false);
 
     /**
      * Override the mouse down event - forward the event if needed
@@ -107,6 +110,39 @@ const List: React.FC<ListProps> = ({
     };
 
     /**
+     * Handle the blur event on the list -> we should reset the selection
+     * @param {FocusEvent}  evt Focus event
+     */
+    // tslint:disable-next-line: typedef no-unused
+    const onListBlured = (evt: React.FocusEvent<HTMLUListElement>) => {
+        resetActiveIndex(true);
+    };
+
+    /**
+     * Handle the focus event on the list -> we should reset the selection
+     * @param {KeyboardEvent}  evt Focus input event
+     */
+    // tslint:disable-next-line: typedef no-unused
+    const onListFocused = (evt: React.FocusEvent<HTMLUListElement>) => {
+        resetActiveIndex(false);
+    };
+
+    /**
+     * Reset the active element
+     * @param {boolean} fromBlur Is request from blur event
+     */
+    const resetActiveIndex: (fromBlur: boolean) => void = (fromBlur: boolean): void => {
+        if (!isClickable || preventResetOnBlurOrFocus.current) {
+            if (fromBlur) {
+                preventResetOnBlurOrFocus.current = false;
+            }
+            return;
+        }
+        preventResetOnBlurOrFocus.current = false;
+        setActiveItemIndex(-1);
+    };
+
+    /**
      * Handle keyboard interactions
      * @param {KeyboardEvent}  evt Keybord input event
      */
@@ -115,6 +151,7 @@ const List: React.FC<ListProps> = ({
         if (!isClickable) {
             return;
         }
+        preventResetOnBlurOrFocus.current = true;
         if (evt.keyCode === DOWN_KEY_CODE) {
             setActiveItemIndex(selectItemOnKeyDown(false));
             evt.nativeEvent.preventDefault();
@@ -180,6 +217,8 @@ const List: React.FC<ListProps> = ({
             tabIndex={isClickable ? 0 : -1}
             onKeyDown={onKeyInteraction}
             onKeyPress={onKeyInteraction}
+            onBlur={onListBlured}
+            onFocus={onListFocused}
             {...props}
         >
             {children.map((elm: ListItem | ListSubheader, idx: number) => {
