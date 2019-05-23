@@ -21,15 +21,15 @@
             flex-shrink: 0;
         }
 
-        #{$self}--caption-align-left & {
+        #{$self}--align-left & {
             align-items: flex-start;
         }
 
-        #{$self}--caption-align-center & {
+        #{$self}--align-center & {
             align-items: center;
         }
 
-        #{$self}--caption-align-right & {
+        #{$self}--align-right & {
             align-items: flex-end;
         }
 

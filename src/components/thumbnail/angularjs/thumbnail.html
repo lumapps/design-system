@@ -1,6 +1,9 @@
 <div
     class="lumx-thumbnail"
-    ng-class="{ 'lumx-thumbnail--fill-height': lumx.fillHeight,
+    ng-class="{ 'lumx-thumbnail--align-left': !lumx.align || lumx.align === 'left',
+                'lumx-thumbnail--align-center': lumx.align === 'center',
+                'lumx-thumbnail--align-right': lumx.align === 'right',
+                'lumx-thumbnail--fill-height': lumx.fillHeight,
                 'lumx-thumbnail--theme-light': !lumx.theme || lumx.theme === 'light',
                 'lumx-thumbnail--theme-dark': lumx.theme === 'dark' }"
 >
