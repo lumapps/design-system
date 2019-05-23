@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { IPopperOffsets, Popover, PopperPositions } from 'LumX/components/popover/react/Popover';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { useClickAway } from 'LumX/core/react/hooks';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { handleBasicClasses, onEscapePressed } from 'LumX/core/utils';
 import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
 /////////////////////////////
@@ -74,7 +74,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     children,
     className = '',
     closeOnClick = DEFAULT_PROPS.closeOnClick,
-    // escapeClose = DEFAULT_PROPS.escapeClose,
+    escapeClose = DEFAULT_PROPS.escapeClose,
     offset,
     // overToggle = DEFAULT_PROPS.overToggle,
     position,
@@ -83,6 +83,10 @@ const Dropdown: React.FC<DropdownProps> = ({
 }: DropdownProps): React.ReactElement => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState(Boolean(false));
+
+    function closeDropdown(): void {
+        setIsOpen(false);
+    }
 
     function toggleDropdown(): void {
         setIsOpen(!isOpen);
@@ -100,11 +104,12 @@ const Dropdown: React.FC<DropdownProps> = ({
         </div>
     );
 
+    // Any click away from the dropdown container will close it.
     useClickAway(wrapperRef, () => {
         if (!closeOnClick) {
             return;
         }
-        setIsOpen(false);
+        closeDropdown();
     });
 
     return (
@@ -113,6 +118,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 [`${CLASSNAME}--has-toggle`]: toggleElement,
             })}
             ref={wrapperRef}
+            onKeyDown={escapeClose ? onEscapePressed(closeDropdown) : null}
         >
             <Popover
                 anchorElement={anchorElement}
