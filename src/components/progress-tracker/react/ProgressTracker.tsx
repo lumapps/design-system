@@ -86,17 +86,15 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
 
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props}>
-            <div className="lumx-progress-tracker__steps" ng-transclude>
-                {children}
-            </div>
+            <div className={`${CLASSNAME}__steps`}>{children}</div>
 
             <div
-                className="lumx-progress-tracker__background-bar"
+                className={`${CLASSNAME}__background-bar`}
                 style={{ left: `${backgroundPosition}%`, right: `${backgroundPosition}%` }}
             />
 
             <div
-                className="lumx-progress-tracker__foreground-bar"
+                className={`${CLASSNAME}__foreground-bar`}
                 style={{
                     left: `${backgroundPosition}%`,
                     right: `${backgroundPosition}%`,

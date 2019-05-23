@@ -145,11 +145,11 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
             onKeyDown={onEnterPressed(onClick)}
             {...restProps}
         >
-            <Icon className="lumx-progress-tracker-step__state" icon={getIcon()} size={Sizes.s} />
+            <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Sizes.s} />
 
-            <span className="lumx-progress-tracker-step__label">{label}</span>
+            <span className={`${CLASSNAME}__label`}>{label}</span>
 
-            {helper && <span className="lumx-progress-tracker-step__helper">{helper}</span>}
+            {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
         </a>
     );
 };
