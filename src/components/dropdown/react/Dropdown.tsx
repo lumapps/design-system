@@ -1,10 +1,10 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import FocusTrap from 'focus-trap-react';
 
 import { IPopperOffsets, Popover, PopperPositions } from 'LumX/components/popover/react/Popover';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { useClickAway } from 'LumX/core/react/hooks';
 import { handleBasicClasses } from 'LumX/core/utils';
 import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
@@ -25,7 +25,7 @@ interface IDropdownProps extends IGenericProps {
     /** The preferred Dropdown location against the toggle element. */
     position?: PopperPositions | string;
     /** The reference element that will be used as the toggle of the Dropdown. */
-    toggleElement: ReactNode;
+    toggleElement: React.ReactNode;
     /** The width of the dropdown container. */
     width?: number;
 }
@@ -70,48 +70,45 @@ const Dropdown: React.FC<DropdownProps> = ({
     children,
     className = '',
     closeOnClick = true,
-    escapeClose = true,
+    // escapeClose = true,
     offset,
     // overToggle = false,
     position,
     toggleElement,
     width,
 }: DropdownProps): React.ReactElement => {
+    const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState(Boolean(false));
 
     function toggleDropdown(): void {
         setIsOpen(!isOpen);
     }
 
-    const anchorElement: ReactNode = (
+    const anchorElement: React.ReactNode = (
         <div className={`${CLASSNAME}__toggle`} onClick={toggleDropdown}>
             {toggleElement}
         </div>
     );
 
-    const popperElement: ReactNode = isOpen && (
-        <FocusTrap
-            focusTrapOptions={{
-                clickOutsideDeactivates: closeOnClick,
-                escapeDeactivates: escapeClose,
-                fallbackFocus: `.${CLASSNAME}`,
-                onDeactivate: (): void => {
-                    setIsOpen(false);
-                },
-                returnFocusOnDeactivate: true,
-            }}
-        >
-            <div className={`${CLASSNAME}__menu`} style={{ width }}>
-                <div className={`${CLASSNAME}__content`}>{children(setIsOpen)}</div>
-            </div>
-        </FocusTrap>
+    const popperElement: React.ReactNode = isOpen && (
+        <div className={`${CLASSNAME}__menu`} style={{ width }}>
+            <div className={`${CLASSNAME}__content`}>{children(setIsOpen)}</div>
+        </div>
     );
+
+    useClickAway(wrapperRef, () => {
+        if (!closeOnClick) {
+            return;
+        }
+        setIsOpen(false);
+    });
 
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), {
                 [`${CLASSNAME}--has-toggle`]: toggleElement,
             })}
+            ref={wrapperRef}
         >
             <Popover
                 anchorElement={anchorElement}
