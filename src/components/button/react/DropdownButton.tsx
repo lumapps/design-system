@@ -205,7 +205,9 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     splitted = DEFAULT_PROPS.splitted,
     ...props
 }: DropdownButtonProps): React.ReactElement => {
-    const [isDropdownOpened, setIsDropdownOpened]: [boolean, (isDropdownOpened: boolean) => void] = useState(false);
+    const [isDropdownOpened, setIsDropdownOpened]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<
+        boolean
+    >(false);
 
     const newChildren: React.ReactNode = _validate({
         children,
