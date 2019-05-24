@@ -248,7 +248,7 @@ const Popover: React.FC<PopoverProps> = ({
     popperOffset,
     popperPlacement,
     showPopper,
-    tooltipShowHideDelay,
+    tooltipShowHideDelay = DEFAULT_PROPS.tooltipShowHideDelay,
     useTooltipMode = DEFAULT_PROPS.useTooltipMode,
 }: PopoverProps): React.ReactElement => {
     const [autoShowPopper, setAutoShowPopper]: [boolean, (autoShowPopper: boolean) => void] = useState(Boolean(false));
@@ -263,15 +263,29 @@ const Popover: React.FC<PopoverProps> = ({
         toggleAutoShowPopper(false);
     }
 
+    /**
+     * Drives the visibility of the popper/tooltip element.
+     * @param {boolean} visibility Whether the tooltip show be visible or not
+     */
     function toggleAutoShowPopper(visibility: boolean): void {
         clearTimeout(autoShowDelayer.current);
+        // tslint:disable-next-line: early-exit
         if (unwrap(useTooltipMode)) {
-            autoShowDelayer.current = setTimeout((): void => setAutoShowPopper(visibility), tooltipShowHideDelay);
+            if (!visibility) {
+                setAutoShowPopper(visibility);
+            } else {
+                autoShowDelayer.current = setTimeout((): void => setAutoShowPopper(visibility), tooltipShowHideDelay);
+            }
         }
     }
 
     // tslint:disable-next-line: no-any
     const modifiers: any | undefined = {
+        arrow: {
+            // eslint-disable-next-line id-blacklist
+            element: `.lumx-tooltip__arrow`,
+            enabled: true,
+        },
         flip: { enabled: !lockFlip },
     };
 
@@ -294,7 +308,7 @@ const Popover: React.FC<PopoverProps> = ({
             </Reference>
             {(unwrap(showPopper) || (unwrap(useTooltipMode) && autoShowPopper)) && (
                 <Popper placement={popperPlacement as Placements} modifiers={modifiers}>
-                    {({ ref, style, ...others }: PopperChildrenProps): ReactNode => {
+                    {({ ref, style, arrowProps, ...others }: PopperChildrenProps): ReactNode => {
                         const computedOffsets: Position = popperPlacement
                             ? computeOffsets(others.placement, popperPlacement as Placements, popperOffset)
                             : {};
@@ -311,11 +325,19 @@ const Popover: React.FC<PopoverProps> = ({
                                 className={classNames(
                                     handleBasicClasses({
                                         elevation: elevation && elevation > 5 ? 5 : elevation,
-                                        prefix: CLASSNAME,
+                                        prefix: useTooltipMode ? 'lumx-tooltip' : CLASSNAME,
                                     }),
                                 )}
+                                x-placement={popperPlacement}
                             >
                                 {popperElement}
+                                {useTooltipMode && (
+                                    <div
+                                        ref={arrowProps.ref}
+                                        style={arrowProps.style}
+                                        className="lumx-tooltip__arrow"
+                                    />
+                                )}
                             </div>
                         );
                     }}
