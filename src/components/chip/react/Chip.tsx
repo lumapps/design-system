@@ -3,13 +3,12 @@ import React, { SyntheticEvent } from 'react';
 import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
-import noop from 'lodash/noop';
 
 import { Theme, Themes } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
 /////////////////////////////
 
@@ -27,23 +26,21 @@ type Size = Sizes;
  */
 interface IChipProps extends IGenericProps {
     /** A component to be rendered after the main label area. */
-    AfterComponent?: HTMLElement | React.ReactNode;
+    after?: HTMLElement | React.ReactNode;
     /** A component to be rendered before the main label area. */
-    BeforeComponent?: HTMLElement | React.ReactNode;
-    /** A component to be rendered within the label area. Displays the placeholder or selected value(s). */
-    LabelComponent: HTMLElement | React.ReactNode;
+    before?: HTMLElement | React.ReactNode;
     /** Indicates if the chip is currently in an active state or not. */
-    isActive?: boolean;
+    isSelected?: boolean;
     /** Indicates if the chip is currently disabled or not. */
     isDisabled?: boolean;
-    /** A function to be executed when the after element is clicked. */
-    onAfterClick?: void | null;
-    /** A function to be executed when the before element is clicked. */
-    onBeforeClick?: void | null;
     /** The size of the chip. */
     size?: Size;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** A function to be executed when the after element is clicked. */
+    onAfterClick?(evt: SyntheticEvent): void;
+    /** A function to be executed when the before element is clicked. */
+    onBeforeClick?(evt: SyntheticEvent): void;
 }
 type ChipProps = IChipProps;
 
@@ -86,12 +83,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    AfterComponent: null,
-    BeforeComponent: null,
-    isActive: false,
+    after: null,
+    before: null,
     isDisabled: false,
-    onAfterClick: null,
-    onBeforeClick: null,
+    isSelected: false,
     size: Sizes.m,
     theme: Themes.light,
 };
@@ -104,17 +99,18 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return {Component} The Chip component.
  */
 const Chip: React.FC<IChipProps> = ({
-    AfterComponent = DEFAULT_PROPS.AfterComponent,
-    BeforeComponent = DEFAULT_PROPS.BeforeComponent,
+    after = DEFAULT_PROPS.after,
+    before = DEFAULT_PROPS.before,
     className = '',
-    LabelComponent,
-    isActive = DEFAULT_PROPS.isActive,
+    children,
+    isSelected = DEFAULT_PROPS.isSelected,
     isDisabled = DEFAULT_PROPS.isDisabled,
-    onAfterClick = DEFAULT_PROPS.onAfterClick,
-    onBeforeClick = DEFAULT_PROPS.onBeforeClick,
+    onAfterClick,
+    onBeforeClick,
     onClick = null,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
+    ...props
 }: ChipProps): React.ReactElement => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
     const hasBeforeClick: boolean = isFunction(onBeforeClick);
@@ -155,52 +151,51 @@ const Chip: React.FC<IChipProps> = ({
     };
 
     return (
-        <div
+        <a
             className={classNames(
                 className,
                 handleBasicClasses({
-                    active: Boolean(isActive),
                     clickable: Boolean(hasOnClick),
                     disabled: Boolean(isDisabled),
                     hasAfter: Boolean(hasAfterClick),
                     hasBefore: Boolean(hasBeforeClick),
                     prefix: CLASSNAME,
+                    selected: Boolean(isSelected),
                     size,
                     theme,
-                    unselected: Boolean(!isActive),
+                    unselected: Boolean(!isSelected),
                 }),
             )}
             role="button"
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
-            onClick={onClick || noop}
-            onKeyPress={onClick}
+            onClick={onClick ? onClick : null}
+            onKeyDown={onClick ? onEnterPressed(onClick) : null}
+            {...props}
         >
-            {BeforeComponent && (
-                <button
+            {before && (
+                <div
                     className={classNames(`${CLASSNAME}__before`, {
                         [`${CLASSNAME}__before--is-clickable`]: hasBeforeClick,
                     })}
-                    type="button"
                     onClick={handleOnBeforeClick}
                 >
-                    {BeforeComponent}
-                </button>
+                    {before}
+                </div>
             )}
 
-            <div className={`${CLASSNAME}__label`}>{LabelComponent}</div>
+            <div className={`${CLASSNAME}__label`}>{children}</div>
 
-            {AfterComponent && (
-                <button
+            {after && (
+                <div
                     className={classNames(`${CLASSNAME}__after`, {
                         [`${CLASSNAME}__after--is-clickable`]: hasAfterClick,
                     })}
-                    type="button"
                     onClick={handleOnAfterClick}
                 >
-                    {AfterComponent}
-                </button>
+                    {after}
+                </div>
             )}
-        </div>
+        </a>
     );
 };
 
