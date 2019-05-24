@@ -110,9 +110,10 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     return (
         <div
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), {
-                [`${CLASSNAME}--has-toggle`]: toggleElement,
-            })}
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: CLASSNAME, hasToggle: toggleElement !== null }),
+            )}
             ref={wrapperRef}
             onKeyDown={escapeClose ? onEscapePressed(closeDropdown) : null}
         >
