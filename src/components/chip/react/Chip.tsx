@@ -3,7 +3,6 @@ import React, { SyntheticEvent } from 'react';
 import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
-import noop from 'lodash/noop';
 
 import { Theme, Themes } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
@@ -169,8 +168,8 @@ const Chip: React.FC<IChipProps> = ({
             )}
             role="button"
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
-            onClick={onClick || noop}
-            onKeyDown={onEnterPressed(onClick || noop)}
+            onClick={onClick ? onClick : null}
+            onKeyDown={onClick ? onEnterPressed(onClick) : null}
             {...props}
         >
             {before && (
