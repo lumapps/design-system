@@ -1,7 +1,7 @@
+import { HIDE_DELAY, NOTIFICATION_CONFIGURATION, TRANSITION_DURATION } from 'LumX/components/notification/constants';
+
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
-
-import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -9,54 +9,6 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
     'ngInject';
 
     const service = this;
-
-    /////////////////////////////
-    //                         //
-    //    Private attributes   //
-    //                         //
-    /////////////////////////////
-
-    /**
-     * The notification delay before hiding.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _HIDE_DELAY = 6000;
-
-    /**
-     * The notification open transition duration.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _TRANSITION_DURATION = 200;
-
-    /**
-     * The notification icon and colors according to their type.
-     *
-     * @type {string}
-     */
-    const _notificationTypes = {
-        errorNotification: {
-            color: 'red',
-            icon: mdiAlert,
-        },
-        infoNotification: {
-            color: 'dark',
-            icon: mdiInformation,
-        },
-        successNotification: {
-            color: 'green',
-            icon: mdiCheck,
-        },
-        warningNotification: {
-            color: 'yellow',
-            icon: mdiAlertCircleOutline,
-        },
-    };
 
     /////////////////////////////
     //                         //
@@ -74,7 +26,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
 
         $timeout(function waitBeforeDeleting() {
             notification.remove();
-        }, _TRANSITION_DURATION);
+        }, TRANSITION_DURATION);
     }
 
     /**
@@ -87,7 +39,9 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      */
     function _build(content, type, actionLabel, actionCallback) {
         const notification = angular.element('<div/>', {
-            class: `${CSS_PREFIX}-notification ${CSS_PREFIX}-notification--color-${_notificationTypes[type].color}`,
+            class: `${CSS_PREFIX}-notification ${CSS_PREFIX}-notification--color-${
+                NOTIFICATION_CONFIGURATION[type].color
+            }`,
         });
 
         const notificationIconWrapper = angular.element('<div/>', {
@@ -95,7 +49,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
         });
         const notificationIcon = $compile(
             `<${COMPONENT_PREFIX}-icon lumx-path="${
-                _notificationTypes[type].icon
+                NOTIFICATION_CONFIGURATION[type].icon
             }" lumx-size="s"></${COMPONENT_PREFIX}-icon>`,
         )($rootScope);
 
@@ -129,7 +83,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
 
         const notificationHideTimeout = $timeout(function waitBeforeHiding() {
             _hide(notification);
-        }, _HIDE_DELAY);
+        }, HIDE_DELAY);
 
         LumXDepthService.increase();
 
@@ -159,7 +113,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
 
             $timeout(function waitBeforeShowingNext() {
                 _build(content, type, actionLabel, actionCallback);
-            }, _TRANSITION_DURATION);
+            }, TRANSITION_DURATION);
         } else {
             _build(content, type, actionLabel, actionCallback);
         }
@@ -179,7 +133,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      * @param {Function} [actionCallback] The action button callback function called on action button click.
      */
     function errorNotification(content, actionLabel, actionCallback) {
-        _notify(content, 'errorNotification', actionLabel, actionCallback);
+        _notify(content, 'error', actionLabel, actionCallback);
     }
 
     /**
@@ -190,7 +144,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      * @param {Function} [actionCallback] The action button callback function called on action button click.
      */
     function infoNotification(content, actionLabel, actionCallback) {
-        _notify(content, 'infoNotification', actionLabel, actionCallback);
+        _notify(content, 'info', actionLabel, actionCallback);
     }
 
     /**
@@ -201,7 +155,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      * @param {Function} [actionCallback] The action button callback function called on action button click.
      */
     function successNotification(content, actionLabel, actionCallback) {
-        _notify(content, 'successNotification', actionLabel, actionCallback);
+        _notify(content, 'success', actionLabel, actionCallback);
     }
 
     /**
@@ -212,7 +166,7 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      * @param {Function} [actionCallback] The action button callback function called on action button click.
      */
     function warningNotification(content, actionLabel, actionCallback) {
-        _notify(content, 'warningNotification', actionLabel, actionCallback);
+        _notify(content, 'warning', actionLabel, actionCallback);
     }
 
     /////////////////////////////
