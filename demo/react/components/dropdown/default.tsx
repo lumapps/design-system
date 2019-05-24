@@ -9,12 +9,7 @@ const demoContainerStyle: CSSProperties = {
 
 /////////////////////////////
 
-interface IProps {
-    /**
-     * The theme to use to display this demo.
-     */
-    // theme: DropdownTheme;
-}
+interface IProps {}
 
 const createToggleElement: (text?: string) => ReactNode = (text: string = 'Button'): ReactNode => {
     return <Button>{text}</Button>;
