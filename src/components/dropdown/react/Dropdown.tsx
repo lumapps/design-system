@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -22,6 +22,8 @@ interface IDropdownProps extends IGenericProps {
     offset?: IPopperOffsets;
     /** The preferred Dropdown location against the toggle element. */
     position?: PopperPositions | string;
+    /** Whether the dropdown should be displayed or not. Useful to control the Dropdown from outside the component. */
+    showDropdown?: boolean | undefined;
     /** The reference element that will be used as the toggle of the Dropdown. */
     toggleElement: React.ReactNode;
     /** The width of the dropdown container. */
@@ -58,6 +60,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     closeOnClick: true,
     escapeClose: true,
+    showDropdown: undefined,
 };
 
 /////////////////////////////
@@ -74,11 +77,12 @@ const Dropdown: React.FC<DropdownProps> = ({
     escapeClose = DEFAULT_PROPS.escapeClose,
     offset,
     position,
+    showDropdown = DEFAULT_PROPS.showDropdown,
     toggleElement,
     width,
 }: DropdownProps): React.ReactElement => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
-    const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(false);
+    const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(showDropdown || false);
 
     function closeDropdown(): void {
         setIsOpen(false);
@@ -94,17 +98,27 @@ const Dropdown: React.FC<DropdownProps> = ({
         </div>
     );
 
-    const popperElement: React.ReactNode = isOpen && (
+    const popperElement: React.ReactNode = (
         <div className={`${CLASSNAME}__menu`} style={{ width }}>
             <div className={`${CLASSNAME}__content`}>{children(setIsOpen)}</div>
         </div>
     );
+
+    // Control the dropdown from the outside via the showDropdown prop.
+    useEffect((): void => {
+        if (showDropdown === undefined) {
+            return;
+        }
+
+        setIsOpen(showDropdown);
+    }, [showDropdown]);
 
     // Any click away from the dropdown container will close it.
     useClickAway(wrapperRef, () => {
         if (!closeOnClick) {
             return;
         }
+
         closeDropdown();
     });
 
@@ -120,7 +134,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             <Popover
                 anchorElement={anchorElement}
                 showPopper={isOpen}
-                popperElement={popperElement}
+                popperElement={isOpen && popperElement}
                 popperOffset={offset}
                 popperPlacement={position}
             />
