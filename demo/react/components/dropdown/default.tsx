@@ -18,8 +18,9 @@ const createToggleElement: (text?: string) => ReactNode = (text: string = 'Butto
 const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode = (
     setIsOpen: (isOpen: boolean) => void,
 ): ReactNode => {
-    // tslint:disable-next-line no-unused
     const onItemSelectedHandler: (item: ListItem) => void = (item: ListItem): void => {
+        // tslint:disable-next-line no-console
+        console.log('selected item', item);
         setIsOpen(false);
     };
 
