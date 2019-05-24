@@ -78,7 +78,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     width,
 }: DropdownProps): React.ReactElement => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
-    const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState(Boolean(false));
+    const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(false);
 
     function closeDropdown(): void {
         setIsOpen(false);
