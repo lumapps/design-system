@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
 import { Theme, Themes } from 'LumX/components';
 
@@ -40,6 +40,9 @@ interface IListItemProps extends IGenericProps {
     isActive?: boolean;
     /* theme */
     theme?: Theme;
+    /* Callback used to retrieved the selected entry*/
+    // tslint:disable-next-line: typedef
+    onItemSelected?;
 }
 type ListItemProps = IListItemProps;
 
@@ -104,6 +107,7 @@ const ListItem: React.FC<ListItemProps> = ({
     isActive = DEFAULT_PROPS.isActive,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
+    onItemSelected,
     before,
     ...props
 }: ListItemProps): React.ReactElement => {
@@ -114,6 +118,30 @@ const ListItem: React.FC<ListItemProps> = ({
             element.current.focus();
         }
     }, [isActive]);
+
+    /**
+     * Prevent the focus event to be trigger on the parent.
+     *
+     * @param {FocusEvent} evt Focus event
+     */
+    // tslint:disable-next-line: typedef
+    const preventParentFocus = (evt: React.FocusEvent<HTMLLIElement>): void => {
+        evt.preventDefault();
+        evt.stopPropagation();
+    };
+
+    /**
+     * Currying the on entre press behavior.
+     * @return {Object} Returns either undefined or a callback
+     */
+    // tslint:disable-next-line: typedef
+    const onKeyDown = () => {
+        if (isClickable && onItemSelected) {
+            return onEnterPressed(onItemSelected);
+        }
+        return;
+    };
+
     return (
         <li
             ref={element}
@@ -122,6 +150,9 @@ const ListItem: React.FC<ListItemProps> = ({
                 handleBasicClasses({ prefix: CLASSNAME, theme, selected: isSelected, clickable: isClickable, size }),
             )}
             tabIndex={isClickable ? 0 : -1}
+            onFocusCapture={preventParentFocus}
+            onClick={onItemSelected}
+            onKeyDown={onKeyDown()}
             {...props}
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}

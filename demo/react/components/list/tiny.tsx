@@ -28,9 +28,15 @@ interface IProps {
 
 /////////////////////////////
 
-const onItemSelectedHandler: (selectedEntry: ListItem) => void = (selectedEntry: ListItem): void => {
+const onListItemSelectedHandler: (selectedEntry: ListItem) => void = (selectedEntry: ListItem): void => {
     // tslint:disable-next-line: no-console
     console.log(selectedEntry);
+};
+
+// tslint:disable-next-line: no-any
+const onItemSelectedHandler: (data: any) => void = (data: any): void => {
+    // tslint:disable-next-line: no-console
+    console.log(data);
 };
 
 /**
@@ -38,11 +44,14 @@ const onItemSelectedHandler: (selectedEntry: ListItem) => void = (selectedEntry:
  *
  * @return {React.ReactElement} The demo component.
  */
+// tslint:disable: jsx-no-lambda typedef
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>
-        <List theme={theme} isClickable onListItemSelected={onItemSelectedHandler}>
+        <List theme={theme} isClickable onListItemSelected={onListItemSelectedHandler}>
             <ListSubheader>text only</ListSubheader>
-            <ListItem size={ListItemSizes.tiny}>Single-line item 1</ListItem>
+            <ListItem size={ListItemSizes.tiny} onItemSelected={() => onItemSelectedHandler('Some data')}>
+                Single-line item 1
+            </ListItem>
             <ListItem size={ListItemSizes.tiny}>Single-line item 2</ListItem>
             <ListItem size={ListItemSizes.tiny}>Single-line item 3</ListItem>
             <ListSubheader>rich</ListSubheader>
