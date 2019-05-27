@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { Fragment, useContext } from 'react';
 
 import { Button, NotificationTheme } from 'LumX';
 import {
@@ -24,25 +24,25 @@ interface IProps {
  * @return {React.ReactElement} The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <>
+    <Fragment>
         <NotificationProvider>
             <NotificationClient theme={theme} />
         </NotificationProvider>
-    </>
+    </Fragment>
 );
 
 const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     const { close, error, info, success, warning }: NotificationState = useContext(notificationContext);
 
     return (
-        <>
+        <Fragment>
             <Button
                 type="button"
                 theme={theme}
                 // tslint:disable-next-line: jsx-no-lambda
-                onClick={(event: React.MouseEvent<HTMLButtonElement>): void =>
+                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
                     info({
-                        content: event.currentTarget.value,
+                        content: evt.currentTarget.value,
                         handleClick: close,
                     })
                 }
@@ -54,9 +54,9 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
                 type="button"
                 theme={theme}
                 // tslint:disable-next-line: jsx-no-lambda
-                onClick={(event: React.MouseEvent<HTMLButtonElement>): void =>
+                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
                     success({
-                        content: event.currentTarget.value,
+                        content: evt.currentTarget.value,
                     })
                 }
                 value="Success"
@@ -67,9 +67,9 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
                 type="button"
                 theme={theme}
                 // tslint:disable-next-line: jsx-no-lambda
-                onClick={(event: React.MouseEvent<HTMLButtonElement>): void =>
+                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
                     warning({
-                        content: event.currentTarget.value,
+                        content: evt.currentTarget.value,
                     })
                 }
                 value="Warning"
@@ -80,9 +80,9 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
                 type="button"
                 theme={theme}
                 // tslint:disable-next-line: jsx-no-lambda
-                onClick={(event: React.MouseEvent<HTMLButtonElement>): void =>
+                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
                     error({
-                        content: event.currentTarget.value,
+                        content: evt.currentTarget.value,
                     })
                 }
                 value="Error"
@@ -93,14 +93,14 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
                 type="button"
                 theme={theme}
                 // tslint:disable-next-line: jsx-no-lambda
-                onClick={(event: React.MouseEvent<HTMLButtonElement>): void =>
+                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
                     info({
                         actionCallback: (): void =>
                             success({
                                 content: 'Callback',
                             }),
                         actionLabel: 'Coucou',
-                        content: event.currentTarget.value,
+                        content: evt.currentTarget.value,
                         handleClick: close,
                     })
                 }
@@ -108,7 +108,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
             >
                 Info with callback
             </Button>{' '}
-        </>
+        </Fragment>
     );
 };
 

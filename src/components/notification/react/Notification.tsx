@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
+
+import isFunction from 'lodash/isFunction';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
@@ -30,12 +32,25 @@ type NotificationType = NotificationTypes;
  * Defines the props of the component.
  */
 interface INotificationProps extends IGenericProps {
+    /** Label for action button. */
     actionLabel?: string;
+
+    /** Content of notification. */
     content: React.ReactNode;
+
+    /** Whether notification is open or not. */
     isOpen?: boolean;
+
+    /** Theme */
     theme?: Theme;
+
+    /** Type of notification (info, success, warning, error). */
     type?: NotificationType;
+
+    /** Callback function for action button. */
     actionCallback?(): void;
+
+    /** Function to handle click on the notification. */
     handleClick?(): void;
 }
 type NotificationProps = INotificationProps;
@@ -101,18 +116,16 @@ const Notification: React.FC<NotificationProps> = ({
 }: NotificationProps): React.ReactElement => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
-    const handleCallback: (event: React.MouseEvent<HTMLElement>) => void = (
-        event: React.MouseEvent<HTMLElement>,
-    ): void => {
-        if (actionCallback) {
+    const handleCallback: (evt: React.MouseEvent<HTMLElement>) => void = (evt: React.MouseEvent<HTMLElement>): void => {
+        if (isFunction(actionCallback)) {
             actionCallback();
         }
 
-        event.stopPropagation();
+        evt.stopPropagation();
     };
 
     return (
-        <>
+        <Fragment>
             {type &&
                 createPortal(
                     <div
@@ -148,7 +161,7 @@ const Notification: React.FC<NotificationProps> = ({
                     </div>,
                     document.body,
                 )}
-        </>
+        </Fragment>
     );
 };
 Notification.displayName = COMPONENT_NAME;

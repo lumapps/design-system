@@ -44,7 +44,7 @@ const NotificationHandler: React.FC<NotificationHandlerProps> = (): React.ReactE
         }
 
         return (): void => timer && clearTimeout(timer);
-    }, [props]);
+    }, [rest.content]);
 
     return <Notification isOpen={isOpen} {...rest} />;
 };
