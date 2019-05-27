@@ -1,7 +1,6 @@
 import React, { CSSProperties, Fragment, ReactNode, useRef, useState } from 'react';
 
 import { Button, Dropdown, List, ListItem, ListItemSizes, Placements } from 'LumX';
-import { useClickAway } from 'LumX/core/react/hooks';
 
 const demoContainerStyle: CSSProperties = {
     display: 'flex',
@@ -62,7 +61,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                     showDropdown={isDropdownOpen}
                     toggleElement={createToggleElement('My target')}
                 >
-                    {(setIsOpen: (isOpen: boolean) => void): ReactNode => createSimpleMenuList(setIsOpen)}
+                    {(setIsOpen: (isOpen: boolean) => void): React.ReactNode => createSimpleMenuList(setIsOpen)}
                 </Dropdown>
             </div>
             {/* tslint:disable-next-line jsx-no-lambda */}

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -130,7 +130,6 @@ function _preValidate({ props }: ValidateParameters): string | boolean | void {
         return `You must use the \`icon\` prop of <${COMPONENT_NAME}> instead of \`leftIcon\`!`;
     }
 }
-
 /**
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
@@ -230,11 +229,9 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     }
 
     return (
-        <>
-            {rootElement}
-
-            {isDropdownOpened ? <Dropdown>{dropdown}</Dropdown> : undefined}
-        </>
+        <Dropdown showDropdown={isDropdownOpened} toggleElement={rootElement}>
+            {(): React.ReactNode => dropdown}
+        </Dropdown>
     );
 };
 DropdownButton.displayName = COMPONENT_NAME;

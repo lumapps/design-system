@@ -28,6 +28,8 @@ interface IDropdownProps extends IGenericProps {
     toggleElement: React.ReactNode;
     /** The width of the dropdown container. */
     width?: number;
+    /** A render prop that return the content of the Dropdown. */
+    children(setIsOpen: (isOpen: boolean) => void): React.ReactNode;
 }
 type DropdownProps = IDropdownProps;
 
