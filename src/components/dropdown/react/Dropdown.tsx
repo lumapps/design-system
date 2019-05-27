@@ -28,7 +28,7 @@ interface IDropdownProps extends IGenericProps {
     toggleElement: React.ReactNode;
     /** The width of the dropdown container. */
     width?: number;
-    /** A render prop that return the content of the Dropdown. */
+    /** A render prop that returns the content of the Dropdown. */
     children(setIsOpen: (isOpen: boolean) => void): React.ReactNode;
 }
 type DropdownProps = IDropdownProps;
@@ -82,6 +82,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     showDropdown = DEFAULT_PROPS.showDropdown,
     toggleElement,
     width,
+    ...props
 }: DropdownProps): React.ReactElement => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(showDropdown || false);
@@ -132,6 +133,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             )}
             ref={wrapperRef}
             onKeyDown={escapeClose ? onEscapePressed(closeDropdown) : null}
+            {...props}
         >
             <Popover
                 anchorElement={anchorElement}
