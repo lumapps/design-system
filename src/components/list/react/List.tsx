@@ -1,4 +1,4 @@
-import React, { cloneElement, useRef, useState } from 'react';
+import React, { cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -91,9 +91,9 @@ const List: React.FC<ListProps> = ({
     // tslint:disable-next-line: typedef
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     // tslint:disable-next-line: typedef
-    const [hasItemSelected, setHasItemSelected] = useState(false);
-    // tslint:disable-next-line: typedef
     const preventResetOnBlurOrFocus = useRef(false);
+    // tslint:disable-next-line: typedef no-any
+    const listElementRef: any = useRef();
 
     /**
      * Override the mouse down event - forward the event if needed
@@ -205,11 +205,12 @@ const List: React.FC<ListProps> = ({
         return nextIdx;
     };
 
-    // Let's init the active item with the first list item in the list.
-    if (isClickable && !hasItemSelected) {
-        setActiveItemIndex(selectItemOnKeyDown(false));
-        setHasItemSelected(true);
-    }
+    // Let's place the focus on the list so we can navigate with the keyboard.
+    useEffect(() => {
+        if (isClickable && !hasItemSelected) {
+            listElementRef.current.focus();
+        }
+    }, []);
 
     return (
         <ul
@@ -219,6 +220,7 @@ const List: React.FC<ListProps> = ({
             onKeyPress={onKeyInteraction}
             onBlur={onListBlured}
             onFocus={onListFocused}
+            ref={listElementRef}
             {...props}
         >
             {children.map((elm: ListItem | ListSubheader, idx: number) => {
