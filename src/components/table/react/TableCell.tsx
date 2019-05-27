@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
 import { Icon } from 'LumX/components/icon/react/Icon';
 
@@ -165,6 +165,7 @@ const TableCell: React.FC<TableCellProps> = ({
                     )}
                     tabIndex={isSortable && isFunction(onHeaderClick) ? 1 : 0}
                     onClick={handleOnHeaderClick}
+                    onKeyDown={onEnterPressed(handleOnHeaderClick)}
                     {...props}
                 >
                     {icon && !isSortable && <Icon className={`${CLASSNAME}-icon`} icon={icon} size={IconSizes.xxs} />}
