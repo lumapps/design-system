@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Theme, Themes } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
+import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -14,7 +14,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
  */
 interface ITableProps extends IGenericProps {
     /**
-     * Wether the table has dividers
+     * Whether the table has dividers
      */
     hasDividers?: boolean;
     /**
@@ -42,7 +42,6 @@ interface IDefaultPropsType extends Partial<TableProps> {}
  *
  * @type {string}
  * @constant
- * @readonly
  */
 const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Table`;
 
@@ -51,7 +50,6 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Table`;
  *
  * @type {string}
  * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
@@ -60,31 +58,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  * @type {IDefaultPropsType}
  * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     hasDividers: false,
     theme: Themes.light,
 };
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param  {TableProps}      props The children and props of the component.
- * @return {React.ReactNode} The processed children of the component.
- */
-function _validate(props: TableProps): React.ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        props,
-    });
-}
 
 /////////////////////////////
 
@@ -99,22 +77,14 @@ const Table: React.FC<TableProps> = ({
     hasDividers,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: TableProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, hasDividers, ...props });
+}: TableProps): React.ReactElement => (
+    <table className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasDividers, theme }))} {...props}>
+        {children}
+    </table>
+);
 
-    return (
-        <table
-            className={classNames(
-                className,
-                { 'lumx-table--has-dividers': hasDividers },
-                handleBasicClasses({ prefix: CLASSNAME, theme }),
-            )}
-            {...props}
-        >
-            {newChildren}
-        </table>
-    );
-};
+/////////////////////////////
+
 Table.displayName = COMPONENT_NAME;
 
 /////////////////////////////
