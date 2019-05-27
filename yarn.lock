@@ -1050,30 +1050,6 @@
     "@types/istanbul-lib-coverage" "^1.1.0"
     "@types/yargs" "^12.0.9"
 
-"@lumx/angularjs@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@lumx/angularjs/-/angularjs-0.3.0.tgz#c71aed17dbe3a22c8842c106c39be232c8987c22"
-  integrity sha512-9+03FAdZfyPrxINw7L6naRY04woilnXY/xepYcM+rgEF14Z57Ym/nwMZPFG+kmCe9ZAhsb06DVfnrOHPxdvpuw==
-  dependencies:
-    angular "^1.7.8"
-    focus-visible "^4.1.5"
-    jquery "^3.3.1"
-    lodash "^4.17.11"
-    sass-mq "^5.0.0"
-
-"@lumx/react@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@lumx/react/-/react-0.3.0.tgz#424ee57d1aa4a7dab1fbf745947645caf8d57e93"
-  integrity sha512-T4d+Y+soG1RFU4L8/Xa1I0FGiQ24XpRKsc1PG3MiS1neTbP1LfYhAyEHH0D+hkzU5kXPieSYJvb0r8cxgYdVsQ==
-  dependencies:
-    classnames "^2.2.6"
-    focus-visible "^4.1.5"
-    lodash "^4.17.11"
-    react "^16.8.5"
-    react-dom "^16.8.5"
-    sass-mq "^5.0.0"
-    uuid "^3.3.2"
-
 "@marionebl/sander@^0.6.0":
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/@marionebl/sander/-/sander-0.6.1.tgz#1958965874f24bc51be48875feb50d642fc41f7b"

@@ -22,8 +22,6 @@
         "Matthias Manoukian <matthias@lumapps.com> (https://github.com/matmkian)"
     ],
     "dependencies": {
-        "@lumx/angularjs": "^0.3.0",
-        "@lumx/react": "^0.3.0",
         "angular": "^1.7.8",
         "body-scroll-lock": "^2.6.1",
         "classnames": "^2.2.6",
