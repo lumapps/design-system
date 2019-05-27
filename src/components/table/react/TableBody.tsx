@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
+import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -32,7 +32,6 @@ interface IDefaultPropsType extends Partial<TableBodyProps> {}
  *
  * @type {string}
  * @constant
- * @readonly
  */
 const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableBody`;
 
@@ -41,7 +40,6 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableBody`;
  *
  * @type {string}
  * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
@@ -50,28 +48,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  * @type {IDefaultPropsType}
  * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param  {TableBodyProps}  props The children and props of the component.
- * @return {React.ReactNode} The processed children of the component.
- */
-function _validate(props: TableBodyProps): React.ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        props,
-    });
-}
 
 /////////////////////////////
 
@@ -84,15 +62,14 @@ const TableBody: React.FC<TableBodyProps> = ({
     children,
     className = '',
     ...props
-}: TableBodyProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+}: TableBodyProps): React.ReactElement => (
+    <tbody className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
+        {children}
+    </tbody>
+);
 
-    return (
-        <tbody className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
-            {newChildren}
-        </tbody>
-    );
-};
+/////////////////////////////
+
 TableBody.displayName = COMPONENT_NAME;
 
 /////////////////////////////
