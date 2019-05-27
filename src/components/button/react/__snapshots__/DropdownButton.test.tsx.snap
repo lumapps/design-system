@@ -8,8 +8,6 @@ exports[`<DropdownButton> Conditions should fail when more than 2 children are g
 
 exports[`<DropdownButton> Conditions should fail when more than 2 children are given 4`] = `"<DropdownButton> cannot have more than 2 children (got 3)!"`;
 
-exports[`<DropdownButton> Conditions should fail when using \`leftIcon\` instead of \`icon\` 1`] = `"Pre-validation of <DropdownButton> failed: 'You must use the \`icon\` prop of <DropdownButton> instead of \`leftIcon\`!'."`;
-
 exports[`<DropdownButton> Snapshots and structure should render correctly a non-splitted dropdown button 1`] = `
 <DropdownButton
   dropdown={
