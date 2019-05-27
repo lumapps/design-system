@@ -143,6 +143,14 @@ export {
 } from './components/switch/react/Switch';
 
 export {
+    CLASSNAME as TabsClassName,
+    Tabs,
+    TabsProps,
+    Theme as TabsTheme,
+    Themes as TabsThemes,
+} from './components/tabs/react/Tabs';
+
+export {
     CLASSNAME as TextFieldClassName,
     TextField,
     TextFieldProps,
@@ -185,6 +193,7 @@ export {
     Theme as ListTheme,
     Themes as ListThemes,
 } from './components/list/react/List';
+
 export {
     CLASSNAME as ListItemClassName,
     ListItem,
@@ -193,6 +202,7 @@ export {
     Theme as ListItemTheme,
     Themes as ListItemThemes,
 } from './components/list-item/react/ListItem';
+
 export {
     CLASSNAME as ListSubheaderClassName,
     ListSubheader,
@@ -200,6 +210,7 @@ export {
     Theme as ListSubheaderTheme,
     Themes as ListSubheaderThemes,
 } from './components/list-subheader/react/ListSubheader';
+
 export {
     CLASSNAME as AvatarClassName,
     Avatar,
@@ -218,6 +229,7 @@ export {
     IPopperOffsets,
     PopperOffsets,
 } from './components/popover/react/Popover';
+
 export {
     CLASSNAME as ListDividerClassName,
     ListDivider,
