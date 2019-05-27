@@ -41,7 +41,7 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableBody`;
  * @type {string}
  * @constant
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
