@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
+import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -43,7 +43,7 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableRow`;
  * @constant
  * @readonly
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
@@ -53,25 +53,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param  {TableRowProps}  props The children and props of the component.
- * @return {React.ReactNode} The processed children of the component.
- */
-function _validate(props: TableRowProps): React.ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        props,
-    });
-}
 
 /////////////////////////////
 
@@ -84,15 +65,13 @@ const TableRow: React.FC<TableRowProps> = ({
     children,
     className = '',
     ...props
-}: TableRowProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+}: TableRowProps): React.ReactElement => (
+    <tr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
+        {children}
+    </tr>
+);
 
-    return (
-        <tr className={classNames('lumx-table__row', className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
-            {newChildren}
-        </tr>
-    );
-};
+/////////////////////////////
 
 TableRow.displayName = COMPONENT_NAME;
 

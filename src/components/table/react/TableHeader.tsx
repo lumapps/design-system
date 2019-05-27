@@ -3,7 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
+import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -32,7 +32,6 @@ interface IDefaultPropsType extends Partial<TableHeaderProps> {}
  *
  * @type {string}
  * @constant
- * @readonly
  */
 const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableHeader`;
 
@@ -41,9 +40,8 @@ const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableHeader`;
  *
  * @type {string}
  * @constant
- * @readonly
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
@@ -53,25 +51,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param  {TableHeaderProps}  props The children and props of the component.
- * @return {React.ReactNode} The processed children of the component.
- */
-function _validate(props: TableHeaderProps): React.ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        props,
-    });
-}
 
 /////////////////////////////
 
@@ -84,15 +63,14 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     children,
     className = '',
     ...props
-}: TableHeaderProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+}: TableHeaderProps): React.ReactElement => (
+    <thead className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
+        {children}
+    </thead>
+);
 
-    return (
-        <thead className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
-            {newChildren}
-        </thead>
-    );
-};
+/////////////////////////////
+
 TableHeader.displayName = COMPONENT_NAME;
 
 /////////////////////////////
