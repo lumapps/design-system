@@ -157,9 +157,17 @@ export {
     CLASSNAME as NotificationClassName,
     Notification,
     NotificationProps,
+    NotificationType,
+    NotificationTypes,
     Theme as NotificationTheme,
     Themes as NotificationThemes,
 } from './components/notification/react/Notification';
+
+export {
+    NotificationState,
+    notificationContext,
+    NotificationProvider,
+} from './components/notification/react/NotificationProvider';
 
 export {
     CLASSNAME as PopoverClassName,

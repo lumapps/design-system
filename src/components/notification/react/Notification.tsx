@@ -10,7 +10,19 @@ import { Emphasises } from 'LumX/components/button/react/Button';
 import { NOTIFICATION_CONFIGURATION } from 'LumX/components/notification/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-import { NotificationType, NotificationTypes } from './types';
+
+/////////////////////////////
+
+/**
+ * Different types of notification.
+ */
+const enum NotificationTypes {
+    info = 'info',
+    success = 'success',
+    warning = 'warning',
+    error = 'error',
+}
+type NotificationType = NotificationTypes;
 
 /////////////////////////////
 
@@ -20,9 +32,11 @@ import { NotificationType, NotificationTypes } from './types';
 interface INotificationProps extends IGenericProps {
     actionLabel?: string;
     content: React.ReactNode;
+    isOpen?: boolean;
     theme?: Theme;
     type?: NotificationType;
     actionCallback?(): void;
+    handleClick?(): void;
 }
 type NotificationProps = INotificationProps;
 
@@ -66,12 +80,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     theme: Themes.light,
-    type: NotificationTypes.info,
 };
 /////////////////////////////
 
 /**
- * Notification
+ * Notification.
  *
  * @return {React.ReactElement} The component.
  */
@@ -80,46 +93,61 @@ const Notification: React.FC<NotificationProps> = ({
     actionLabel,
     content,
     className = '',
+    handleClick,
+    isOpen = false,
     theme = DEFAULT_PROPS.theme,
-    type = DEFAULT_PROPS.type,
+    type,
     ...props
 }: NotificationProps): React.ReactElement => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
+    const handleCallback: (event: React.MouseEvent<HTMLElement>) => void = (
+        event: React.MouseEvent<HTMLElement>,
+    ): void => {
+        if (actionCallback) {
+            actionCallback();
+        }
+
+        event.stopPropagation();
+    };
+
     return (
         <>
-            {createPortal(
-                <div
-                    className={classNames(
-                        className,
-                        handleBasicClasses({
-                            color: `${NOTIFICATION_CONFIGURATION[type!].color}`,
-                            hasAction,
-                            prefix: CLASSNAME,
-                        }),
-                    )}
-                    {...props}
-                    style={{ zIndex: 9999 }}
-                >
-                    <div className={`${CLASSNAME}__icon`}>
-                        <Icon icon={NOTIFICATION_CONFIGURATION[type!].icon} size={Sizes.s} />
-                    </div>
-                    <span className={`${CLASSNAME}__content`}>{content}</span>
-                    {hasAction && (
-                        <div className={`${CLASSNAME}__action`}>
-                            <Button
-                                color={theme === ButtonThemes.dark ? 'light' : undefined}
-                                emphasis={Emphasises.medium}
-                                theme={theme}
-                                onClick={actionCallback}
-                            >
-                                <span>{actionLabel}</span>
-                            </Button>
+            {type &&
+                createPortal(
+                    <div
+                        className={classNames(
+                            className,
+                            handleBasicClasses({
+                                color: `${NOTIFICATION_CONFIGURATION[type].color}`,
+                                hasAction,
+                                isHidden: !isOpen,
+                                prefix: CLASSNAME,
+                            }),
+                        )}
+                        {...props}
+                        onClick={handleClick}
+                        style={{ zIndex: 9999 }}
+                    >
+                        <div className={`${CLASSNAME}__icon`}>
+                            <Icon icon={NOTIFICATION_CONFIGURATION[type].icon} size={Sizes.s} />
                         </div>
-                    )}
-                </div>,
-                document.body,
-            )}
+                        <span className={`${CLASSNAME}__content`}>{content}</span>
+                        {hasAction && (
+                            <div className={`${CLASSNAME}__action`}>
+                                <Button
+                                    color={theme === ButtonThemes.dark ? 'light' : undefined}
+                                    emphasis={Emphasises.medium}
+                                    theme={theme}
+                                    onClick={handleCallback}
+                                >
+                                    <span>{actionLabel}</span>
+                                </Button>
+                            </div>
+                        )}
+                    </div>,
+                    document.body,
+                )}
         </>
     );
 };
@@ -127,4 +155,13 @@ Notification.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Notification, NotificationProps, NotificationType, Theme, Themes };
+export {
+    CLASSNAME,
+    DEFAULT_PROPS,
+    Notification,
+    NotificationProps,
+    NotificationType,
+    NotificationTypes,
+    Theme,
+    Themes,
+};

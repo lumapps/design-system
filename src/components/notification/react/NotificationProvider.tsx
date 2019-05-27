@@ -2,9 +2,30 @@ import React, { useState } from 'react';
 
 import { IGenericProps } from 'LumX/core/react/utils';
 
-import { NotificationProps } from './Notification';
-import { NotificationHandler } from './NotificationHandler';
-import { INITIAL_STATE, NotificationState, NotificationTypes, notificationContext } from './types';
+import { INITIAL_STATE } from 'LumX/components/notification/constants';
+import { NotificationProps, NotificationTypes } from 'LumX/components/notification/react/Notification';
+import { NotificationHandler } from 'LumX/components/notification/react/NotificationHandler';
+
+/////////////////////////////
+
+/**
+ * State of notification.
+ */
+interface INotificationState {
+    props: NotificationProps;
+    close(): void;
+    open(props: NotificationProps): void;
+    error(props: NotificationProps): void;
+    info(props: NotificationProps): void;
+    success(props: NotificationProps): void;
+    warning(props: NotificationProps): void;
+}
+type NotificationState = INotificationState;
+
+/**
+ * React context of notification.
+ */
+const notificationContext: React.Context<INotificationState> = React.createContext(INITIAL_STATE);
 
 /////////////////////////////
 
@@ -17,11 +38,11 @@ type NotificationProviderProps = INotificationProviderProps;
 /////////////////////////////
 
 /**
- * Notification context provider
+ * Notification context provider.
  *
- * @return {React.ReactElement} The component
+ * @return {React.ReactElement} The component.
  */
-export const NotificationProvider: React.FC<NotificationProviderProps> = ({
+const NotificationProvider: React.FC<NotificationProviderProps> = ({
     children,
 }: NotificationProviderProps): React.ReactElement => {
     const [notificationState, setNotificationState]: [
@@ -29,29 +50,37 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({
         React.Dispatch<React.SetStateAction<NotificationState>>
     ] = useState<NotificationState>({
         ...INITIAL_STATE,
-        error: (update: NotificationProps): void => updateNotificationState(update, NotificationTypes.error),
-        info: (update: NotificationProps): void => updateNotificationState(update, NotificationTypes.info),
-        open: (update: NotificationProps): void => updateNotificationState(update),
-        success: (update: NotificationProps): void => updateNotificationState(update, NotificationTypes.success),
-        warning: (update: NotificationProps): void => updateNotificationState(update, NotificationTypes.warning),
+        close: (): void =>
+            setNotificationState((notification: NotificationState) => ({
+                ...notification,
+                props: { ...notification.props, isOpen: false },
+            })),
+        error: (update: NotificationProps): void =>
+            setNotificationState((notification: NotificationState) => ({
+                ...notification,
+                props: { ...update, isOpen: true, type: NotificationTypes.error },
+            })),
+        info: (update: NotificationProps): void =>
+            setNotificationState((notification: NotificationState) => ({
+                ...notification,
+                props: { ...update, isOpen: true, type: NotificationTypes.info },
+            })),
+        open: (update: NotificationProps): void =>
+            setNotificationState((notification: NotificationState) => ({
+                ...notification,
+                props: { ...update, isOpen: true },
+            })),
+        success: (update: NotificationProps): void =>
+            setNotificationState((notification: NotificationState) => ({
+                ...notification,
+                props: { ...update, isOpen: true, type: NotificationTypes.success },
+            })),
+        warning: (update: NotificationProps): void =>
+            setNotificationState((notification: NotificationState) => ({
+                ...notification,
+                props: { ...update, isOpen: true, type: NotificationTypes.warning },
+            })),
     });
-
-    /**
-     * Update the notification state.
-     *
-     * @param {NotificationProps} update Properties to update.
-     * @param {NotificationTypes} [type] Type of the notification.
-     */
-    const updateNotificationState: (update: NotificationProps, type?: NotificationTypes) => void = (
-        update: NotificationProps,
-        type?: NotificationTypes,
-    ): void => {
-        setNotificationState((notification: NotificationState) => ({
-            ...notification,
-            isOpen: true,
-            props: type !== undefined ? { ...update, type } : { ...update },
-        }));
-    };
 
     return (
         <notificationContext.Provider value={notificationState}>
@@ -60,3 +89,7 @@ export const NotificationProvider: React.FC<NotificationProviderProps> = ({
         </notificationContext.Provider>
     );
 };
+
+/////////////////////////////
+
+export { NotificationState, notificationContext, NotificationProvider };

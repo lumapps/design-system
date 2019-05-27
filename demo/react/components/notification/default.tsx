@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 
 import { Button, NotificationTheme } from 'LumX';
-import { NotificationProvider } from 'LumX/components/notification/react/NotificationProvider';
-import { NotificationState, notificationContext } from 'LumX/components/notification/react/types';
+import {
+    NotificationProvider,
+    NotificationState,
+    notificationContext,
+} from 'LumX/components/notification/react/NotificationProvider';
 
 /////////////////////////////
 
@@ -29,7 +32,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 );
 
 const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const { error, info, success, warning }: NotificationState = useContext(notificationContext);
+    const { close, error, info, success, warning }: NotificationState = useContext(notificationContext);
 
     return (
         <>
@@ -40,6 +43,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
                 onClick={(event: React.MouseEvent<HTMLButtonElement>): void =>
                     info({
                         content: event.currentTarget.value,
+                        handleClick: close,
                     })
                 }
                 value="Info"
@@ -91,12 +95,16 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
                 // tslint:disable-next-line: jsx-no-lambda
                 onClick={(event: React.MouseEvent<HTMLButtonElement>): void =>
                     info({
-                        actionCallback: (): void => alert('Coucou'),
+                        actionCallback: (): void =>
+                            success({
+                                content: 'Callback',
+                            }),
                         actionLabel: 'Coucou',
                         content: event.currentTarget.value,
+                        handleClick: close,
                     })
                 }
-                value="info with callback"
+                value="Info with callback"
             >
                 Info with callback
             </Button>{' '}
