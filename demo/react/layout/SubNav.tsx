@@ -61,6 +61,7 @@ const NAV_ITEMS: string[] = [
     'Slideshow',
     'Switch',
     'Tabs',
+    'Table',
     'Text field',
     'Thumbnail',
     'Toolbar',

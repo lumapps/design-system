@@ -12,6 +12,7 @@
     &__cell {
         height: 56px;
         padding: $lumx-spacing-unit $lumx-spacing-unit * 4 $lumx-spacing-unit 0;
+        text-align: left;
 
         thead & {
             text-align: left;
@@ -66,6 +67,9 @@
     }
 
     &__cell-content {
+        hyphens: auto;
+        word-break: break-all;
+
         thead & {
             @include lumx-typography(caption);
 

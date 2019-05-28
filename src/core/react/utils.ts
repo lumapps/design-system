@@ -83,13 +83,24 @@ type ValidateParameters = IValidateParameters;
 /**
  * Get the name of the root CSS class of a component based on its name.
  *
- * @param {string} componentName The name of the component. This name should contains the component prefix and be
+ * @param {string}  componentName The name of the component. This name should contains the component prefix and be
  *                               written in PascalCase.
+ * @param {boolean} subComponent Whether the current component is a sub component, if true, define the class according
+ *                               to BEM standards.
  * @return {string} The name of the root CSS class. This classname include the CSS classname prefix and is written in
  *                  lower-snake-case.
  */
-function getRootClassName(componentName: string): string {
-    return `${CSS_PREFIX}-${kebabCase(trimStart(componentName, COMPONENT_PREFIX))}`;
+function getRootClassName(componentName: string, subComponent?: boolean): string {
+    const formattedClassName: string = `${CSS_PREFIX}-${kebabCase(trimStart(componentName, COMPONENT_PREFIX))}`;
+
+    if (subComponent) {
+        // See https://regex101.com/r/YjS1uI/3
+        const lastPieceOfClassNameRegExp: RegExp = /^(.*)-(.+)$/gi;
+
+        return formattedClassName.replace(lastPieceOfClassNameRegExp, '$1__$2');
+    }
+
+    return formattedClassName;
 }
 
 /**
