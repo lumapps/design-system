@@ -164,9 +164,10 @@ export {
 } from './components/notification/react/Notification';
 
 export {
-    NotificationState,
-    notificationContext,
+    NotificationAction,
     NotificationProvider,
+    useNotification,
+    useNotificationState,
 } from './components/notification/react/NotificationProvider';
 
 export {

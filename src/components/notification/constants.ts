@@ -1,6 +1,5 @@
+import { NotificationProps } from 'LumX/components/notification/react/Notification';
 import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/icons';
-
-import { NotificationState } from 'LumX/components/notification/react/NotificationProvider';
 
 /**
  * The notification delay before hiding.
@@ -14,32 +13,12 @@ const HIDE_DELAY: number = 6000;
 /**
  * Initial state of notification.
  */
-const INITIAL_STATE: NotificationState = {
-    props: {
-        actionCallback: undefined,
-        actionLabel: undefined,
-        content: '',
-        isOpen: false,
-        type: undefined,
-    },
-    close(): void {
-        // Not empty.
-    },
-    open(): void {
-        // Not empty.
-    },
-    error(): void {
-        // Not empty.
-    },
-    info(): void {
-        // Not empty.
-    },
-    success(): void {
-        // Not empty.
-    },
-    warning(): void {
-        // Not empty.
-    },
+const INITIAL_STATE: NotificationProps = {
+    actionCallback: undefined,
+    actionLabel: undefined,
+    content: '',
+    isOpen: false,
+    type: undefined,
 };
 
 /**

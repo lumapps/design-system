@@ -1,10 +1,10 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useCallback } from 'react';
 
 import { Button, NotificationTheme } from 'LumX';
 import {
+    NotificationAction,
     NotificationProvider,
-    NotificationState,
-    notificationContext,
+    useNotification,
 } from 'LumX/components/notification/react/NotificationProvider';
 
 /////////////////////////////
@@ -32,80 +32,89 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 );
 
 const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const { close, error, info, success, warning }: NotificationState = useContext(notificationContext);
+    const dispatch: React.Dispatch<NotificationAction> = useNotification();
+
+    const info: (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void = useCallback(
+        (evt: React.MouseEvent<HTMLButtonElement>): void =>
+            dispatch({
+                payload: {
+                    content: evt.currentTarget.value,
+                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                },
+                type: 'info',
+            }),
+        [],
+    );
+
+    const success: (evt: React.MouseEvent<HTMLButtonElement>) => void = useCallback(
+        (evt: React.MouseEvent<HTMLButtonElement>): void =>
+            dispatch({
+                payload: {
+                    content: evt.currentTarget.value,
+                },
+                type: 'success',
+            }),
+        [],
+    );
+
+    const warning: (evt: React.MouseEvent<HTMLButtonElement>) => void = useCallback(
+        (evt: React.MouseEvent<HTMLButtonElement>): void =>
+            dispatch({
+                payload: {
+                    content: evt.currentTarget.value,
+                },
+                type: 'warning',
+            }),
+        [],
+    );
+
+    const error: (evt: React.MouseEvent<HTMLButtonElement>) => void = useCallback(
+        (evt: React.MouseEvent<HTMLButtonElement>): void =>
+            dispatch({
+                payload: {
+                    content: evt.currentTarget.value,
+                },
+                type: 'error',
+            }),
+        [],
+    );
+
+    const infoWithCallback: (evt: React.MouseEvent<HTMLButtonElement>) => void = useCallback(
+        (evt: React.MouseEvent<HTMLButtonElement>): void =>
+            dispatch({
+                payload: {
+                    actionCallback: (): void =>
+                        dispatch({
+                            payload: {
+                                content: 'Callback',
+                                handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                            },
+                            type: 'success',
+                        }),
+                    actionLabel: 'Undo',
+                    content: evt.currentTarget.value,
+                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                },
+                type: 'info',
+            }),
+        [],
+    );
 
     return (
         <Fragment>
-            <Button
-                type="button"
-                theme={theme}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
-                    info({
-                        content: evt.currentTarget.value,
-                        handleClick: close,
-                    })
-                }
-                value="Info"
-            >
+            <Button type="button" theme={theme} onClick={info} value="Info">
                 Info
             </Button>{' '}
-            <Button
-                type="button"
-                theme={theme}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
-                    success({
-                        content: evt.currentTarget.value,
-                    })
-                }
-                value="Success"
-            >
+            <Button type="button" theme={theme} onClick={success} value="Success">
                 Success
             </Button>{' '}
-            <Button
-                type="button"
-                theme={theme}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
-                    warning({
-                        content: evt.currentTarget.value,
-                    })
-                }
-                value="Warning"
-            >
+            <Button type="button" theme={theme} onClick={warning} value="Warning">
                 Warning
             </Button>{' '}
-            <Button
-                type="button"
-                theme={theme}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
-                    error({
-                        content: evt.currentTarget.value,
-                    })
-                }
-                value="Error"
-            >
+            <Button type="button" theme={theme} onClick={error} value="Error">
                 Error
             </Button>{' '}
-            <Button
-                type="button"
-                theme={theme}
-                // tslint:disable-next-line: jsx-no-lambda
-                onClick={(evt: React.MouseEvent<HTMLButtonElement>): void =>
-                    info({
-                        actionCallback: (): void =>
-                            success({
-                                content: 'Callback',
-                            }),
-                        actionLabel: 'Coucou',
-                        content: evt.currentTarget.value,
-                        handleClick: close,
-                    })
-                }
-                value="Info with callback"
-            >
+            <Button type="button" theme={theme} onClick={infoWithCallback} value="Info with callback">
                 Info with callback
             </Button>{' '}
         </Fragment>

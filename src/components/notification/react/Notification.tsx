@@ -36,7 +36,7 @@ interface INotificationProps extends IGenericProps {
     actionLabel?: string;
 
     /** Content of notification. */
-    content: React.ReactNode;
+    content?: React.ReactNode;
 
     /** Whether notification is open or not. */
     isOpen?: boolean;
@@ -94,6 +94,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    content: '',
     theme: Themes.light,
 };
 /////////////////////////////
@@ -106,7 +107,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const Notification: React.FC<NotificationProps> = ({
     actionCallback,
     actionLabel,
-    content,
+    content = DEFAULT_PROPS.content,
     className = '',
     handleClick,
     isOpen = false,

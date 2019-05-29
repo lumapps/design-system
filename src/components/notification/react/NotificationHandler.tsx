@@ -1,11 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { IGenericProps } from 'LumX/core/react/utils';
 
 import { HIDE_DELAY } from 'LumX/components/notification/constants';
 
 import { Notification, NotificationProps } from 'LumX/components/notification/react/Notification';
-import { NotificationState, notificationContext } from 'LumX/components/notification/react/NotificationProvider';
+import {
+    NotificationAction,
+    useNotification,
+    useNotificationState,
+} from 'LumX/components/notification/react/NotificationProvider';
 
 /////////////////////////////
 
@@ -23,8 +27,8 @@ type NotificationHandlerProps = INotificationHandlerProps;
  * @return {React.ReactElement} The component.
  */
 const NotificationHandler: React.FC<NotificationHandlerProps> = (): React.ReactElement => {
-    const { close, props }: NotificationState = useContext(notificationContext);
-    const { isOpen, ...rest }: NotificationProps = props;
+    const { isOpen, ...props }: NotificationProps = useNotificationState();
+    const dispatch: React.Dispatch<NotificationAction> = useNotification();
     const [timer, setTimer]: [
         NodeJS.Timeout | undefined,
         React.Dispatch<React.SetStateAction<NodeJS.Timeout | undefined>>
@@ -38,15 +42,15 @@ const NotificationHandler: React.FC<NotificationHandlerProps> = (): React.ReactE
 
             setTimer(() =>
                 setTimeout(() => {
-                    close();
+                    dispatch({ payload: {}, type: 'close' });
                 }, HIDE_DELAY),
             );
         }
 
         return (): void => timer && clearTimeout(timer);
-    }, [rest.content]);
+    }, [props.content]);
 
-    return <Notification isOpen={isOpen} {...rest} />;
+    return <Notification isOpen={isOpen} {...props} />;
 };
 /////////////////////////////
 
