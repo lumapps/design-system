@@ -207,7 +207,7 @@ const List: React.FC<ListProps> = ({
 
     // Let's place the focus on the list so we can navigate with the keyboard.
     useEffect(() => {
-        if (isClickable && !hasItemSelected) {
+        if (isClickable) {
             listElementRef.current.focus();
         }
     }, []);
