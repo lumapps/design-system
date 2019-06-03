@@ -19,7 +19,7 @@ const demoAnchorStyle: CSSProperties = {
 };
 
 const demoPopperStyle: CSSProperties = {
-    fontSize: '10px',
+    fontSize: '12px',
     padding: '5px',
 };
 
