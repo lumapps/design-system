@@ -33,6 +33,14 @@ export {
 } from './components/button/react/ButtonGroup';
 
 export {
+    CLASSNAME as CheckboxClassName,
+    Checkbox,
+    CheckboxProps,
+    Theme as CheckboxTheme,
+    Themes as CheckboxThemes,
+} from './components/checkbox/react/Checkbox';
+
+export {
     CLASSNAME as ChipClassName,
     Chip,
     ChipProps,
