@@ -2,7 +2,7 @@ import { mdiMagnify } from 'LumX/icons';
 
 /////////////////////////////
 
-function DemoSearchController() {
+function DemoSearchFieldController() {
     'ngInject';
 
     const vm = this;
@@ -41,8 +41,8 @@ function DemoSearchController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoSearchController', DemoSearchController);
+angular.module('design-system').controller('DemoSearchFieldController', DemoSearchFieldController);
 
 /////////////////////////////
 
-export { DemoSearchController };
+export { DemoSearchFieldController };
