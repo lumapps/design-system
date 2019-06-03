@@ -1,6 +1,6 @@
 # Search
 
-**Search allow users to specify a word or a phrase to find particular relevant pieces of content.**
+**Search allow users to specify a word or a phrase to find relevant content.**
 
 ## Search
 
@@ -12,6 +12,6 @@
 
 ## Growing search
 
-Use growing search when space is constraint or when you don't want a prominent search.
+Use growing search when space is a constraint or search does not have to be prominent.
 
 <demo-block component="search" partial="growing"></demo-block>
