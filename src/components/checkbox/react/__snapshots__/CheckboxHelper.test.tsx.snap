@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CheckboxHelper> Props should use the given props 1`] = `
+<span
+  className="lumx-checkbox__helper"
+>
+  Test helper
+</span>
+`;
+
+exports[`<CheckboxHelper> Snapshots and structure should render correctly 1`] = `
+<span
+  className="lumx-checkbox__helper"
+/>
+`;
