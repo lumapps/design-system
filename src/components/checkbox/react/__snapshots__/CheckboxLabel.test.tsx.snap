@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CheckboxLabel> Props should use the given props 1`] = `
+<label
+  className="lumx-checkbox__label"
+  htmlFor="test-checkbox-id"
+>
+  Test Label
+</label>
+`;
+
+exports[`<CheckboxLabel> Snapshots and structure should render correctly 1`] = `
+<label
+  className="lumx-checkbox__label"
+  htmlFor="test-checkbox-id"
+/>
+`;
