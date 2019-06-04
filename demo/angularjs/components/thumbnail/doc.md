@@ -1,6 +1,6 @@
 # Thumbnail
 
-**Thumbnails display formatted images**
+**Thumbnails display formatted images.**
 
 ## Default
 
