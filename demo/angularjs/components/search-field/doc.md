@@ -1,6 +1,6 @@
 # Search field
 
-**Search field allow users to specify a word or a phrase to find relevant content.**
+**Search fields allow users to specify a word or a phrase to find relevant content.**
 
 ## Default
 
@@ -12,6 +12,6 @@
 
 ## Growing search field
 
-Use growing search field when space is a constraint or search does not have to be prominent.
+Use Growing search fields when space is a constraint or search does not have to be prominent.
 
 <demo-block component="search-field" partial="growing"></demo-block>

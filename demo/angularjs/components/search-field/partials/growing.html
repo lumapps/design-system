@@ -9,6 +9,11 @@
     }
 </style>
 
-<lumx-text-field class="growing-search" lumx-icon="{{ vm.icons.mdiMagnify }}" lumx-theme="{{ demoBlock.theme }}">
-    <input type="text" ng-model="vm.search.model.empty" placeholder="Search" />
+<lumx-text-field
+    class="growing-search"
+    lumx-icon="{{ vm.icons.mdiMagnify }}"
+    lumx-is-clearable="true"
+    lumx-theme="{{ demoBlock.theme }}"
+>
+    <input type="text" ng-model="vm.search.model2.empty" placeholder="Search" />
 </lumx-text-field>

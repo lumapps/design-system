@@ -30,7 +30,13 @@ function DemoSearchFieldController() {
      * @type {Object}
      */
     vm.search = {
-        model: {
+        model1: {
+            value: 'Value',
+            validValue: 'Valid value',
+            invalidValue: 'Invalid value',
+            empty: '',
+        },
+        model2: {
             value: 'Value',
             validValue: 'Valid value',
             invalidValue: 'Invalid value',
