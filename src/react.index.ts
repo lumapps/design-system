@@ -226,7 +226,7 @@ export {
     Sizes as ListItemSizes,
     Theme as ListItemTheme,
     Themes as ListItemThemes,
-} from './components/list-item/react/ListItem';
+} from './components/list/react/ListItem';
 
 export {
     CLASSNAME as ListSubheaderClassName,
@@ -234,7 +234,7 @@ export {
     ListSubheaderProps,
     Theme as ListSubheaderTheme,
     Themes as ListSubheaderThemes,
-} from './components/list-subheader/react/ListSubheader';
+} from './components/list/react/ListSubheader';
 
 export {
     CLASSNAME as AvatarClassName,
@@ -255,8 +255,4 @@ export {
     PopperOffsets,
 } from './components/popover/react/Popover';
 
-export {
-    CLASSNAME as ListDividerClassName,
-    ListDivider,
-    ListDividerProps,
-} from './components/list-divider/react/ListDivider';
+export { CLASSNAME as ListDividerClassName, ListDivider, ListDividerProps } from './components/list/react/ListDivider';

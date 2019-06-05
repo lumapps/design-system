@@ -6,12 +6,12 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { ListItem } from 'LumX/components/list-item/react/ListItem';
+import { ListItem } from 'LumX/components/list/react/ListItem';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 import { Theme, Themes } from 'LumX/components';
-import { ListSubheader } from 'LumX/components/list-subheader/react/ListSubheader';
+import { ListSubheader } from 'LumX/components/list/react/ListSubheader';
 
 /////////////////////////////
 
