@@ -5,6 +5,10 @@
 .#{$lumx-base-prefix}-popover {
     background-color: lumx-theme-color-variant(light, N);
     border-radius: $lumx-theme-border-radius;
+
+    &__wrapper {
+        position: relative;
+    }
 }
 
 /* Elevations

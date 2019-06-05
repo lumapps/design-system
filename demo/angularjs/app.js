@@ -174,6 +174,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.popover', {
+            url: 'popover',
+            views: {
+                'main@': {
+                    controller: 'DemoPopoverController',
+                    controllerAs: 'vm',
+                    template: require('./components/popover/demo.html'),
+                },
+            },
+        })
         .state('app.progress-tracker', {
             url: 'progress-tracker',
             views: {
@@ -347,6 +357,7 @@ require('./components/image-block/controller.js');
 require('./components/lightbox/controller.js');
 require('./components/list/controller.js');
 require('./components/notification/controller.js');
+require('./components/popover/controller.js');
 require('./components/progress-tracker/controller.js');
 require('./components/radio-button/controller.js');
 require('./components/select/controller.js');

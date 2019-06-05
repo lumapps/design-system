@@ -30,6 +30,7 @@ angular.module(`${MODULE_NAME}.image-block`, []);
 angular.module(`${MODULE_NAME}.lightbox`, []);
 angular.module(`${MODULE_NAME}.list`, []);
 angular.module(`${MODULE_NAME}.notification`, []);
+angular.module(`${MODULE_NAME}.popover`, []);
 angular.module(`${MODULE_NAME}.progress`, []);
 angular.module(`${MODULE_NAME}.progress-tracker`, []);
 angular.module(`${MODULE_NAME}.radio-button`, []);
@@ -60,6 +61,7 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.lightbox`,
     `${MODULE_NAME}.list`,
     `${MODULE_NAME}.notification`,
+    `${MODULE_NAME}.popover`,
     `${MODULE_NAME}.progress`,
     `${MODULE_NAME}.progress-tracker`,
     `${MODULE_NAME}.radio-button`,

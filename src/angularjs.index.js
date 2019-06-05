@@ -24,6 +24,8 @@ import './components/list/angularjs/list-divider_directive';
 import './components/list/angularjs/list-item_directive';
 import './components/list/angularjs/list-subheader_directive';
 import './components/notification/angularjs/notification_service';
+import './components/popover/angularjs/popover_service';
+import './components/popover/angularjs/popover_directive';
 import './components/progress/angularjs/progress_directive';
 import './components/progress-tracker/angularjs/progress-tracker_directive';
 import './components/progress-tracker/angularjs/progress-tracker-step_directive';
