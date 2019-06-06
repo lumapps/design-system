@@ -35,6 +35,7 @@ angular.module(`${MODULE_NAME}.progress`, []);
 angular.module(`${MODULE_NAME}.progress-tracker`, []);
 angular.module(`${MODULE_NAME}.radio-button`, []);
 angular.module(`${MODULE_NAME}.select`, []);
+angular.module(`${MODULE_NAME}.side-navigation`, []);
 angular.module(`${MODULE_NAME}.slideshow`, []);
 angular.module(`${MODULE_NAME}.switch`, []);
 angular.module(`${MODULE_NAME}.table`, []);
@@ -66,6 +67,7 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.progress-tracker`,
     `${MODULE_NAME}.radio-button`,
     `${MODULE_NAME}.select`,
+    `${MODULE_NAME}.side-navigation`,
     `${MODULE_NAME}.slideshow`,
     `${MODULE_NAME}.switch`,
     `${MODULE_NAME}.tabs`,

@@ -46,6 +46,10 @@
     &[data-focus-visible-added] {
         background-color: lumx-theme-color-variant($lumx-list-item-selected-color, L4) !important;
     }
+
+    &:active {
+        background-color: lumx-theme-color-variant($lumx-list-item-selected-color, L3) !important;
+    }
 }
 
 @mixin lumx-list-item-edge($size) {

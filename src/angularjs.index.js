@@ -33,6 +33,8 @@ import './components/radio-button/angularjs/radio-button_directive';
 import './components/select/angularjs/select_directive';
 import './components/select/angularjs/select-choices_filter';
 import './components/select/angularjs/select-filter_directive';
+import './components/side-navigation/angularjs/side-navigation_directive';
+import './components/side-navigation/angularjs/side-navigation-item_directive';
 import './components/slideshow/angularjs/slideshow_directive';
 import './components/slideshow/angularjs/slideshow-controls_directive';
 import './components/slideshow/angularjs/slideshow-item_directive';

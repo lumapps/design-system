@@ -1,0 +1,66 @@
+/* ==========================================================================
+   Side navigation
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-side-navigation {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+/* Item
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-side-navigation-item {
+    padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
+
+    .#{$lumx-base-prefix}-side-navigation-item__children &:first-child {
+        padding-top: $lumx-spacing-unit;
+    }
+
+    &__link {
+        display: flex;
+        min-height: $side-navigation-link-height;
+        flex-direction: row;
+        align-items: center;
+        padding: $lumx-spacing-unit;
+        border-radius: $lumx-theme-border-radius;
+        text-decoration: none;
+
+        & > i {
+            flex-shrink: 0;
+
+            &:first-child {
+                margin-right: $lumx-spacing-unit * 2;
+            }
+        }
+
+        & > span {
+            @include lumx-typography(subtitle1);
+
+            flex: 1;
+        }
+
+        .#{$lumx-base-prefix}-side-navigation-item__children & {
+            padding-left: 48px;
+        }
+    }
+
+    &__children {
+        padding: 0;
+        margin: 0;
+        margin: 0 $lumx-spacing-unit * -1;
+        list-style: none;
+    }
+}
+
+/* Item link states
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-side-navigation-item .#{$lumx-base-prefix}-side-navigation-item__link {
+    @include lumx-list-item-clickable;
+}
+
+.#{$lumx-base-prefix}-side-navigation-item--is-selected .#{$lumx-base-prefix}-side-navigation-item__link {
+    @include lumx-list-item-selected;
+}
