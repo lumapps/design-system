@@ -20,7 +20,7 @@
     </lumx-dialog-header>
 
     <lumx-dialog-content>
-        <div class="ph++">
+        <div class="lumx-spacing-padding-horizontal-huge">
             <div ng-repeat="person in vm.people">{{ person.name }} - {{ person.email }} - {{ person.age }}</div>
         </div>
     </lumx-dialog-content>
@@ -29,7 +29,7 @@
         <lumx-toolbar>
             <lumx-toolbar-after>
                 <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
-                <lumx-button class="ml" lumx-dialog-close>Save</lumx-button>
+                <lumx-button class="lumx-spacing-margin-left-regular" lumx-dialog-close>Save</lumx-button>
             </lumx-toolbar-after>
         </lumx-toolbar>
     </lumx-dialog-footer>

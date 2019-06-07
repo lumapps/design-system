@@ -1,14 +1,14 @@
 <lumx-tabs lumx-active-tab="vm.activeTab">
     <lumx-tab lumx-label="Lorem Ipsum 1" lumx-icon="{{ vm.icons.mdiPencil }}">
-        <p class="p+">Lorem Ipsum Content 1</p>
+        <p class="lumx-spacing-padding-big">Lorem Ipsum Content 1</p>
     </lumx-tab>
 
     <lumx-tab lumx-label="Lorem Ipsum 2" ng-disabled="vm.isTabDisabled">
-        <p class="p+">Lorem Ipsum Content 2</p>
+        <p class="lumx-spacing-padding-big">Lorem Ipsum Content 2</p>
     </lumx-tab>
 
     <lumx-tab lumx-label="Lorem Ipsum 3">
-        <p class="p+">Lorem Ipsum Content 3</p>
+        <p class="lumx-spacing-padding-big">Lorem Ipsum Content 3</p>
     </lumx-tab>
 </lumx-tabs>
 
@@ -17,19 +17,12 @@
 
 <lumx-tabs lumx-layout="clustered">
     <lumx-tab lumx-label="{{ tab.heading }}" ng-repeat="tab in vm.tabs">
-        <div class="p+">
+        <div class="lumx-spacing-padding-big">
             <p>{{ tab.content }}</p>
-
-            <div class="mt+">
-                <lumx-button ng-click="vm.removeTab(vm.tabs.indexOf(tab))">Remove current tab</lumx-button>
-            </div>
+            <lumx-button ng-click="vm.removeTab(vm.tabs.indexOf(tab))">Remove current tab</lumx-button>
         </div>
     </lumx-tab>
 </lumx-tabs>
 
-<div class="divider divider--dark"></div>
-
-<div class="p+">
-    <lumx-button ng-click="vm.addTab()">Add a tab</lumx-button>
-    <lumx-button ng-click="vm.removeFirstTab()">Remove first tab</lumx-button>
-</div>
+<lumx-button ng-click="vm.addTab()">Add a tab</lumx-button>
+<lumx-button ng-click="vm.removeFirstTab()">Remove first tab</lumx-button>

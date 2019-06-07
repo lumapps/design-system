@@ -16,14 +16,23 @@
                     Toolbar title
                 </span>
 
-                <lumx-text-field class="ml+" lumx-icon="{{ vm.icons.mdiMagnify }}" lumx-theme="{{ demoBlock.theme }}">
+                <lumx-text-field
+                    class="lumx-spacing-margin-left-big"
+                    lumx-icon="{{ vm.icons.mdiMagnify }}"
+                    lumx-theme="{{ demoBlock.theme }}"
+                >
                     <input type="text" ng-model="vm.searchFieldModel" placeholder="Search" />
                 </lumx-text-field>
             </div>
         </lumx-toolbar-label>
 
         <lumx-toolbar-after>
-            <lumx-button class="mr" lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+            <lumx-button
+                class="lumx-spacing-margin-right-regular"
+                lumx-emphasis="low"
+                lumx-theme="{{ demoBlock.theme }}"
+                lumx-variant="icon"
+            >
                 <lumx-icon lumx-path="{{ vm.icons.mdiViewGrid }}"></lumx-icon>
             </lumx-button>
 

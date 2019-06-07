@@ -35,7 +35,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                         </${COMPONENT_PREFIX}-toolbar>
                     </${COMPONENT_PREFIX}-dialog-header>
                     <${COMPONENT_PREFIX}-dialog-content>
-                        <div class="ph++ pb+">
+                        <div class="${CSS_PREFIX}-spacing-padding-horizontal-huge ${CSS_PREFIX}-spacing-padding-bottom-big">
                             <p>${params.text}</p>
                         </div>
                     </${COMPONENT_PREFIX}-dialog-content>
@@ -88,7 +88,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                         </${COMPONENT_PREFIX}-toolbar>
                     </${COMPONENT_PREFIX}-dialog-header>
                     <${COMPONENT_PREFIX}-dialog-content>
-                        <div class="ph++ pb+">
+                        <div class="${CSS_PREFIX}-spacing-padding-horizontal-huge ${CSS_PREFIX}-spacing-padding-bottom-big">
                             <p>${params.text}</p>
                         </div>
                     </${COMPONENT_PREFIX}-dialog-content>
@@ -98,7 +98,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
                                 <${COMPONENT_PREFIX}-button lumx-emphasis="medium" ng-click="cb(false)" ${COMPONENT_PREFIX}-dialog-close>
                                     ${params.buttons.cancel}
                                 </${COMPONENT_PREFIX}-button>
-                                <${COMPONENT_PREFIX}-button class="ml" ng-click="cb(true)" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
+                                <${COMPONENT_PREFIX}-button class="${CSS_PREFIX}-spacing-margin-left-regular" ng-click="cb(true)" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
                                     ${params.buttons.ok}
                                 </${COMPONENT_PREFIX}-button>
                             </${COMPONENT_PREFIX}-toolbar-after>
