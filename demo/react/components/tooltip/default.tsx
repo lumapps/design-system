@@ -40,7 +40,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 Left
             </Button>{' '}
             <Button buttonRef={anchorRefDelay} theme={theme}>
-                With delay
+                With 2s delay
             </Button>
             <Tooltip anchorRef={anchorRefTop} placement="top" theme={theme}>
                 Top Tooltip
@@ -54,7 +54,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             <Tooltip anchorRef={anchorRefLeft} placement="left" theme={theme}>
                 Left Tooltip
             </Tooltip>
-            <Tooltip anchorRef={anchorRefDelay} delay={1000} placement="bottom" theme={theme}>
+            <Tooltip anchorRef={anchorRefDelay} delay={2000} placement="bottom" theme={theme}>
                 Tooltip with delay
             </Tooltip>
         </Fragment>

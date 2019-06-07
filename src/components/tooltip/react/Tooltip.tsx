@@ -64,7 +64,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     delay: 0,
-    placement: 'left',
+    placement: 'bottom',
 };
 
 /** Position of the tooltip relative to the anchor element. */
@@ -105,36 +105,38 @@ const useTooltipPosition: (
         y: 0,
     });
 
-    useEffect(() => {
-        if (anchorRef && anchorRef.current && tooltipRef && tooltipRef.current) {
-            const { top, left, width, height }: ClientRect | DOMRect = anchorRef.current!.getBoundingClientRect();
-            const {
-                width: widthTooltip,
-                height: heightTooltip,
-            }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
-            switch (placement) {
-                case 'top':
-                    setPosition({ x: left + (width - widthTooltip) / 2, y: top - height });
+    useEffect((): void => {
+        if (!anchorRef || !anchorRef.current || !tooltipRef || !tooltipRef.current) {
+            return;
+        }
 
-                    break;
-                case 'right':
-                    setPosition({ x: left + width, y: top + (height - heightTooltip) / 2 });
+        const { top, left, width, height }: ClientRect | DOMRect = anchorRef.current!.getBoundingClientRect();
+        const {
+            width: widthTooltip,
+            height: heightTooltip,
+        }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
+        switch (placement) {
+            case 'top':
+                setPosition({ x: left + (width - widthTooltip) / 2, y: top - height });
 
-                    break;
-                case 'bottom':
-                    setPosition({ x: left + (width - widthTooltip) / 2, y: top + height });
+                break;
+            case 'right':
+                setPosition({ x: left + width, y: top + (height - heightTooltip) / 2 });
 
-                    break;
-                case 'left':
-                    setPosition({ x: left - widthTooltip - 8, y: top + (height - heightTooltip) / 2 });
+                break;
+            case 'bottom':
+                setPosition({ x: left + (width - widthTooltip) / 2, y: top + height });
 
-                    break;
+                break;
+            case 'left':
+                setPosition({ x: left - widthTooltip - 8, y: top + (height - heightTooltip) / 2 });
 
-                default:
-                    setPosition({ x: 0, y: 0 });
+                break;
 
-                    break;
-            }
+            default:
+                setPosition({ x: 0, y: 0 });
+
+                break;
         }
     }, [placement, anchorRef, tooltipRef]);
 
@@ -157,33 +159,35 @@ const useArrowPosition: (placement: TooltipPlacement, tooltipRef: React.RefObjec
         y: 0,
     });
 
-    useEffect(() => {
-        if (tooltipRef && tooltipRef.current) {
-            const {
-                width: widthTooltip,
-                height: heightTooltip,
-            }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
-            const arrowHeight: number = 5;
-            const arrowBorder: number = 5;
-            const arrowWidth: number = 10;
+    useEffect((): void => {
+        if (!tooltipRef || !tooltipRef.current) {
+            return;
+        }
 
-            switch (placement) {
-                case 'top':
-                case 'bottom':
-                    setPosition({ x: widthTooltip / 2 - arrowWidth, y: 0 });
+        const {
+            width: widthTooltip,
+            height: heightTooltip,
+        }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
+        const arrowHeight: number = 5;
+        const arrowBorder: number = 5;
+        const arrowWidth: number = 10;
 
-                    break;
-                case 'right':
-                case 'left':
-                    setPosition({ x: 0, y: heightTooltip / 2 - arrowHeight - arrowBorder });
+        switch (placement) {
+            case 'top':
+            case 'bottom':
+                setPosition({ x: widthTooltip / 2 - arrowWidth, y: 0 });
 
-                    break;
+                break;
+            case 'right':
+            case 'left':
+                setPosition({ x: 0, y: heightTooltip / 2 - arrowHeight - arrowBorder });
 
-                default:
-                    setPosition({ x: 0, y: 0 });
+                break;
 
-                    break;
-            }
+            default:
+                setPosition({ x: 0, y: 0 });
+
+                break;
         }
     }, [placement, tooltipRef]);
 
@@ -211,8 +215,7 @@ const Tooltip: React.FC<TooltipProps> = ({
      * Handle mouse over anchor element.
      */
     const handleMouseOver: () => void = (): void => {
-        console.log(timer);
-        if (Boolean(timer)) {
+        if (timer) {
             clearTimeout(timer);
             setTimer(0);
         }
@@ -225,9 +228,9 @@ const Tooltip: React.FC<TooltipProps> = ({
      */
     const handleMouseOut: () => void = (): void => {
         const id: number = setTimeout(() => {
-            console.log(timer);
             setIsOpen(false);
         }, delay);
+
         setTimer(id);
     };
 
@@ -247,7 +250,7 @@ const Tooltip: React.FC<TooltipProps> = ({
                 clearTimeout(timer);
             }
         };
-    }, [anchorRef, tooltipRef]);
+    }, [anchorRef, tooltipRef, timer]);
 
     const tooltipPosition: Position = useTooltipPosition(placement!, anchorRef, tooltipRef);
     const cssTooltip: CSSProperties = {
