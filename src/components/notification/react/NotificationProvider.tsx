@@ -13,9 +13,11 @@ import { NotificationAction, notificationReducer } from './NotificationReducer';
 /**
  * React context of notification.
  */
-// Const notificationContext: React.Context<INotificationState> = React.createContext(INITIAL_STATE);
-
 const stateCtx: React.Context<NotificationProps> = createContext(INITIAL_STATE);
+
+/**
+ * State dispatcher.
+ */
 const dispatchCtx: React.Context<React.Dispatch<NotificationAction>> = createContext((() => 0) as React.Dispatch<
     NotificationAction
 >);
