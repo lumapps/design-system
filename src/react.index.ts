@@ -5,6 +5,15 @@ import './core/react';
 export { Color, Colors, Size, Sizes, Theme, Themes } from './components';
 
 export {
+    CLASSNAME as AvatarClassName,
+    Avatar,
+    AvatarProps,
+    Sizes as AvatarSize,
+    Theme as AvatarTheme,
+    Themes as AvatarThemes,
+} from './components/avatar/react/Avatar';
+
+export {
     CLASSNAME as ButtonClassName,
     Button,
     ButtonProps,
@@ -119,6 +128,50 @@ export {
 } from './components/lightbox/react/Lightbox';
 
 export {
+    CLASSNAME as ListClassName,
+    List,
+    ListProps,
+    Theme as ListTheme,
+    Themes as ListThemes,
+} from './components/list/react/List';
+
+export { CLASSNAME as ListDividerClassName, ListDivider, ListDividerProps } from './components/list/react/ListDivider';
+
+export {
+    CLASSNAME as ListItemClassName,
+    ListItem,
+    ListItemProps,
+    Sizes as ListItemSizes,
+    Theme as ListItemTheme,
+    Themes as ListItemThemes,
+} from './components/list/react/ListItem';
+
+export {
+    CLASSNAME as ListSubheaderClassName,
+    ListSubheader,
+    ListSubheaderProps,
+    Theme as ListSubheaderTheme,
+    Themes as ListSubheaderThemes,
+} from './components/list/react/ListSubheader';
+
+export {
+    CLASSNAME as PopoverClassName,
+    Popover,
+    PopoverProps,
+    Placements,
+    PopperPositions,
+    IPopperOffsets,
+    PopperOffsets,
+} from './components/popover/react/Popover';
+
+export {
+    CLASSNAME as ProgressClassName,
+    Progress,
+    ProgressProps,
+    Variants,
+} from './components/progress/react/Progress';
+
+export {
     CLASSNAME as ProgressTrackerClassName,
     ProgressTracker,
     ProgressTrackerProps,
@@ -196,6 +249,13 @@ export {
 } from './components/thumbnail/react/Thumbnail';
 
 export {
+    CLASSNAME as TooltipClassName,
+    Tooltip,
+    TooltipPlacement,
+    TooltipProps,
+} from './components/tooltip/react/Tooltip';
+
+export {
     CLASSNAME as UserBlockClassName,
     UserBlock,
     UserBlockProps,
@@ -203,56 +263,3 @@ export {
     Theme as UserBlockTheme,
     Themes as UserBlockThemes,
 } from './components/user-block/react/UserBlock';
-
-export {
-    CLASSNAME as ProgressClassName,
-    Progress,
-    ProgressProps,
-    Variants,
-} from './components/progress/react/Progress';
-
-export {
-    CLASSNAME as ListClassName,
-    List,
-    ListProps,
-    Theme as ListTheme,
-    Themes as ListThemes,
-} from './components/list/react/List';
-
-export {
-    CLASSNAME as ListItemClassName,
-    ListItem,
-    ListItemProps,
-    Sizes as ListItemSizes,
-    Theme as ListItemTheme,
-    Themes as ListItemThemes,
-} from './components/list/react/ListItem';
-
-export {
-    CLASSNAME as ListSubheaderClassName,
-    ListSubheader,
-    ListSubheaderProps,
-    Theme as ListSubheaderTheme,
-    Themes as ListSubheaderThemes,
-} from './components/list/react/ListSubheader';
-
-export {
-    CLASSNAME as AvatarClassName,
-    Avatar,
-    AvatarProps,
-    Sizes as AvatarSize,
-    Theme as AvatarTheme,
-    Themes as AvatarThemes,
-} from './components/avatar/react/Avatar';
-
-export {
-    CLASSNAME as PopoverClassName,
-    Popover,
-    PopoverProps,
-    Placements,
-    PopperPositions,
-    IPopperOffsets,
-    PopperOffsets,
-} from './components/popover/react/Popover';
-
-export { CLASSNAME as ListDividerClassName, ListDivider, ListDividerProps } from './components/list/react/ListDivider';
