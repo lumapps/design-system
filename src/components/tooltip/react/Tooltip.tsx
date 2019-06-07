@@ -1,5 +1,5 @@
 import React, { CSSProperties, RefObject, useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
@@ -272,7 +272,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         top: arrowPosition.y > 0 ? `${arrowPosition.y}px` : undefined,
     };
 
-    return ReactDOM.createPortal(
+    return createPortal(
         <div
             ref={tooltipRef}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
