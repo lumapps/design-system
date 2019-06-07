@@ -1,10 +1,15 @@
 <li class="lumx-side-navigation-item" ng-class="{ 'lumx-side-navigation-item--is-selected': lumx.isSelected }">
-    <a class="lumx-side-navigation-item__link" ng-click="lumx.handleClick()">
-        <lumx-icon lumx-path="{{ lumx.icon }}" lumx-size="s" ng-if="lumx.icon"></lumx-icon>
+    <a
+        class="lumx-side-navigation-item__link"
+        ng-click="lumx.handleClick()"
+        lumx-enter-keypress="lumx.handleClick()"
+        tabindex="0"
+    >
+        <lumx-icon lumx-path="{{ lumx.icon }}" lumx-size="xs" ng-if="lumx.icon"></lumx-icon>
         <span>{{ lumx.label }}</span>
         <lumx-icon
             lumx-path="{{ lumx.isOpen ? lumx.icons.mdiChevronUp : lumx.icons.mdiChevronDown }}"
-            lumx-size="s"
+            lumx-size="xs"
             ng-if="lumx.hasChildren"
         ></lumx-icon>
     </a>

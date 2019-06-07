@@ -12,19 +12,20 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-side-navigation-item {
-    padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
+    margin-bottom: $lumx-spacing-unit / 2;
 
-    .#{$lumx-base-prefix}-side-navigation-item__children &:first-child {
-        padding-top: $lumx-spacing-unit;
+    &:last-child {
+        margin-bottom: 0;
     }
 
     &__link {
         display: flex;
-        min-height: $side-navigation-link-height;
+        min-height: map-get($lumx-sizes, m);
         flex-direction: row;
         align-items: center;
-        padding: $lumx-spacing-unit;
+        padding: 0 $lumx-spacing-unit;
         border-radius: $lumx-theme-border-radius;
+        outline: 0;
         text-decoration: none;
 
         & > i {
@@ -42,14 +43,14 @@
         }
 
         .#{$lumx-base-prefix}-side-navigation-item__children & {
-            padding-left: 48px;
+            padding-left: 44px;
         }
     }
 
     &__children {
         padding: 0;
         margin: 0;
-        margin: 0 $lumx-spacing-unit * -1;
+        margin-top: $lumx-spacing-unit / 2;
         list-style: none;
     }
 }
