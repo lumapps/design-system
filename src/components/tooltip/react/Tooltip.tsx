@@ -10,6 +10,22 @@ import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
 
+/** Position of the tooltip relative to the anchor element. */
+type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
+
+/**
+ * Position for arrow or tooltip.
+ *
+ * @interface IPosition.
+ */
+interface IPosition {
+    x: number;
+    y: number;
+}
+type Position = IPosition;
+
+/////////////////////////////
+
 /**
  * Defines the props of the component.
  */
@@ -67,20 +83,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     delay: 0,
     placement: 'bottom',
 };
-
-/** Position of the tooltip relative to the anchor element. */
-type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
-
-/**
- * Position for arrow or tooltip.
- *
- * @interface IPosition.
- */
-interface IPosition {
-    x: number;
-    y: number;
-}
-type Position = IPosition;
 
 /////////////////////////////
 
