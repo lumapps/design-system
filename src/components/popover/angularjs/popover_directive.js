@@ -121,9 +121,12 @@ function PopoverController($element, $scope, $timeout) {
      * @param {Object} params    An optional object that holds extra parameters.
      */
     $scope.$on(`${COMPONENT_PREFIX}-popover__open`, (evt, popoverId, params) => {
-        if (popoverId === lumx.uuid && !lumx.isOpen) {
+        if (popoverId === lumx.uuid) {
             _registerTarget(angular.element(params.target));
-            _registerSource(angular.element(params.source));
+
+            if (angular.isDefined(params.source)) {
+                _registerSource(angular.element(params.source));
+            }
 
             _open();
         }
