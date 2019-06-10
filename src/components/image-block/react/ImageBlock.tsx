@@ -5,23 +5,13 @@ import classNames from 'classnames';
 import isObject from 'lodash/isObject';
 
 import { Chip, ChipSizes, Thumbnail, ThumbnailAspectRatio, ThumbnailAspectRatios } from 'LumX';
-import { Theme, Themes } from 'LumX/components';
+import { Alignment, Alignments, Theme, Themes } from 'LumX/components';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
-
-/**
- * Authorized caption alignments.
- */
-const enum CaptionAlignments {
-    center = 'center',
-    left = 'left',
-    right = 'right',
-}
-type CaptionAlignment = CaptionAlignments;
 
 /**
  * Authorized variants.
@@ -36,9 +26,10 @@ type CaptionPosition = CaptionPositions;
  * Defines the props of the component.
  */
 interface IImageBlockProps extends IGenericProps {
-    aspectRatio?: ThumbnailAspectRatio;
     /** The caption wrapper alignment. */
-    captionAlign?: CaptionAlignment;
+    align?: Alignment;
+    /** The aspect ratio the image will get. */
+    aspectRatio?: ThumbnailAspectRatio;
     /** Caption position. */
     captionPosition?: CaptionPosition;
     /** The style to apply to the caption section. */
@@ -101,8 +92,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    align: Alignments.left,
     aspectRatio: ThumbnailAspectRatios.original,
-    captionAlign: CaptionAlignments.left,
     captionPosition: CaptionPositions.below,
     captionStyle: {},
     description: undefined,
@@ -120,9 +111,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return {React.ReactElement} The component.
  */
 const ImageBlock: React.FC<ImageBlockProps> = ({
+    align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     className = '',
-    captionAlign = DEFAULT_PROPS.captionAlign,
     captionPosition = DEFAULT_PROPS.captionPosition,
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,
@@ -140,8 +131,8 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({
+                    align,
                     aspectRatio,
-                    captionAlign,
                     captionPosition,
                     prefix: CLASSNAME,
                     theme,
@@ -155,6 +146,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
             {...restProps}
         >
             <Thumbnail
+                align={align}
                 className={`${CLASSNAME}__image`}
                 aspectRatio={aspectRatio}
                 fillHeight={fillHeight}
@@ -198,4 +190,4 @@ ImageBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, CaptionAlignments, CaptionPositions, ImageBlock, ImageBlockProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, CaptionPositions, ImageBlock, ImageBlockProps, Theme, Themes };
