@@ -2,7 +2,7 @@
 
 import React, { Fragment } from 'react';
 
-import { Chip, ChipSizes, ChipTheme, Icon } from 'LumX';
+import { Chip, ChipSizes, ChipTheme, Colors, Icon } from 'LumX';
 import { mdiClose, mdiEmail } from 'LumX/icons';
 
 /////////////////////////////
@@ -26,7 +26,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <Chip theme={theme} LabelComponent="Medium">
             Label
         </Chip>
-        <Chip theme={theme} size={ChipSizes.s} LabelComponent="Small">
+        <Chip color={Colors.red} theme={theme} size={ChipSizes.s} LabelComponent="Small">
             Label
         </Chip>
         <Chip
@@ -40,6 +40,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <Chip
             after={<Icon icon={mdiClose} />}
             before={<Icon icon={mdiEmail} />}
+            color={Colors.green}
             theme={theme}
             LabelComponent="Rich"
             onAfterClick={(): void => console.log('After component triggered.')}

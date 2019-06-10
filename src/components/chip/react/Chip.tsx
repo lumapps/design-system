@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 
-import { Theme, Themes } from 'LumX/components';
+import { Color, Colors, Theme, Themes } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -29,6 +29,8 @@ interface IChipProps extends IGenericProps {
     after?: HTMLElement | React.ReactNode;
     /** A component to be rendered before the main label area. */
     before?: HTMLElement | React.ReactNode;
+    /** The component color variant. */
+    color?: Color;
     /** Indicates if the chip is currently in an active state or not. */
     isSelected?: boolean;
     /** Indicates if the chip is currently disabled or not. */
@@ -85,10 +87,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     after: null,
     before: null,
+    color: Colors.dark,
     isDisabled: false,
     isSelected: false,
     size: Sizes.m,
-    theme: Themes.light,
+    theme: undefined,
 };
 /////////////////////////////
 
@@ -103,6 +106,7 @@ const Chip: React.FC<IChipProps> = ({
     before = DEFAULT_PROPS.before,
     className = '',
     children,
+    color = DEFAULT_PROPS.color,
     isSelected = DEFAULT_PROPS.isSelected,
     isDisabled = DEFAULT_PROPS.isDisabled,
     onAfterClick,
@@ -156,6 +160,7 @@ const Chip: React.FC<IChipProps> = ({
                 className,
                 handleBasicClasses({
                     clickable: Boolean(hasOnClick),
+                    color,
                     disabled: Boolean(isDisabled),
                     hasAfter: Boolean(hasAfterClick),
                     hasBefore: Boolean(hasBeforeClick),
