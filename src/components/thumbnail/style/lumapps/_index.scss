@@ -26,6 +26,10 @@
         #{$self}--fill-height & {
             flex: 1;
         }
+
+        #{$self}--variant-rounded & {
+            border-radius: $lumx-theme-border-radius;
+        }
     }
 
     &__image {
@@ -34,6 +38,10 @@
         /* IE11 hack related to a bug with IE flexbox implementation (cf. https://stackoverflow.com/a/54054592) */
         min-height: 1px;
         max-height: 100%;
+
+        #{$self}--variant-rounded & {
+            border-radius: $lumx-theme-border-radius;
+        }
     }
 }
 
@@ -44,14 +52,6 @@
     .#{$lumx-base-prefix}-thumbnail--size-#{$key} {
         width: $size;
     }
-}
-
-/* Thumbnail variants
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-thumbnail--variant-rounded {
-    overflow: hidden;
-    border-radius: $lumx-theme-border-radius;
 }
 
 /* Thumbnail aspect ratio
@@ -68,6 +68,7 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+    position: relative;
     cursor: pointer;
 
     &::after {
@@ -86,6 +87,12 @@
 
     &:active::after {
         @include lumx-state(state-active, emphasis-low, dark);
+    }
+}
+
+.#{$lumx-base-prefix}-thumbnail--variant-rounded.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
+    &[data-focus-visible-added]::after {
+        border-radius: $lumx-theme-border-radius;
     }
 }
 

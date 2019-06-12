@@ -186,6 +186,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.post-block', {
+            url: 'post-block',
+            views: {
+                'main@': {
+                    controller: 'DemoPostBlockController',
+                    controllerAs: 'vm',
+                    template: require('./components/post-block/demo.html'),
+                },
+            },
+        })
         .state('app.progress', {
             url: 'progress',
             views: {
@@ -379,6 +389,7 @@ require('./components/lightbox/controller.js');
 require('./components/list/controller.js');
 require('./components/notification/controller.js');
 require('./components/popover/controller.js');
+require('./components/post-block/controller.js');
 require('./components/progress-tracker/controller.js');
 require('./components/radio-button/controller.js');
 require('./components/select/controller.js');

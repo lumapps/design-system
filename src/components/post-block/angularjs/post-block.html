@@ -1,0 +1,27 @@
+<div class="lumx-post-block">
+    <div class="lumx-post-block__thumbnail" ng-if="lumx.thumbnail">
+        <lumx-thumbnail
+            lumx-aspect-ratio="{{ lumx.thumbnail.aspectRatio }}"
+            lumx-image="{{ lumx.thumbnail.image }}"
+            lumx-theme="{{ lumx.theme }}"
+            lumx-variant="rounded"
+            ng-click="lumx.onClick()"
+            tabindex="0"
+        ></lumx-thumbnail>
+    </div>
+
+    <div class="lumx-post-block__wrapper">
+        <div class="lumx-post-block__author" ng-transclude="author" ng-if="lumx.hasAuthor"></div>
+
+        <a class="lumx-post-block__title" ng-click="lumx.onClick()" ng-if="lumx.title" tabindex="0">{{ lumx.title }}</a>
+
+        <span class="lumx-post-block__meta" ng-if="lumx.meta">{{ lumx.meta }}</span>
+
+        <p class="lumx-post-block__text">{{ lumx.text }}</p>
+
+        <div class="lumx-post-block__toolbar">
+            <div class="lumx-post-block__tags" ng-transclude="tags" ng-if="lumx.hasTags"></div>
+            <div class="lumx-post-block__actions" ng-transclude="actions" ng-if="lumx.hasActions"></div>
+        </div>
+    </div>
+</div>
