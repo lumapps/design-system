@@ -92,16 +92,21 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param {TooltipPlacement} placement Placement of tooltip.
  * @param {React.RefObject<HTMLElement>} anchorRef Ref of anchor element.
  * @param {React.RefObject<HTMLDivElement>} tooltipRef Ref of tooltip.
+ * @param {any[]} [dependencies=[placement, anchorRef, tooltipRef]] Dependencies of hook.
  * @return {Position} Position of the arrow on the tooltip.
  */
 const useTooltipPosition: (
     placement: TooltipPlacement,
     anchorRef: React.RefObject<HTMLElement>,
     tooltipRef: React.RefObject<HTMLDivElement>,
+    // tslint:disable-next-line: no-any
+    dependencies?: any[],
 ) => Position = (
     placement: TooltipPlacement,
     anchorRef: React.RefObject<HTMLElement>,
     tooltipRef: React.RefObject<HTMLDivElement>,
+    // tslint:disable-next-line: no-any
+    dependencies: any[] = [placement, anchorRef, tooltipRef],
 ): Position => {
     const [position, setPosition]: [Position, React.Dispatch<React.SetStateAction<Position>>] = useState<Position>({
         x: 0,
@@ -141,7 +146,7 @@ const useTooltipPosition: (
 
                 break;
         }
-    }, [placement, anchorRef, tooltipRef]);
+    }, dependencies);
 
     return position;
 };
@@ -151,11 +156,19 @@ const useTooltipPosition: (
  *
  * @param {TooltipPlacement} placement Placement of tooltip.
  * @param {React.RefObject<HTMLDivElement>} tooltipRef Ref of tooltip.
+ * @param {any[]} [dependencies=[placement, tooltipRef]] Dependencies of hook.
  * @return {Position} Position of the arrow on the tooltip.
  */
-const useArrowPosition: (placement: TooltipPlacement, tooltipRef: React.RefObject<HTMLDivElement>) => Position = (
+const useArrowPosition: (
     placement: TooltipPlacement,
     tooltipRef: React.RefObject<HTMLDivElement>,
+    // tslint:disable-next-line: no-any
+    dependencies?: any[],
+) => Position = (
+    placement: TooltipPlacement,
+    tooltipRef: React.RefObject<HTMLDivElement>,
+    // tslint:disable-next-line: no-any
+    dependencies: any[] = [placement, tooltipRef],
 ): Position => {
     const [position, setPosition]: [Position, React.Dispatch<React.SetStateAction<Position>>] = useState<Position>({
         x: 0,
@@ -192,7 +205,7 @@ const useArrowPosition: (placement: TooltipPlacement, tooltipRef: React.RefObjec
 
                 break;
         }
-    }, [placement, tooltipRef]);
+    }, dependencies);
 
     return position;
 };
@@ -255,7 +268,12 @@ const Tooltip: React.FC<TooltipProps> = ({
         };
     }, [anchorRef, tooltipRef, timer]);
 
-    const tooltipPosition: Position = useTooltipPosition(placement!, anchorRef, tooltipRef);
+    const tooltipPosition: Position = useTooltipPosition(placement!, anchorRef, tooltipRef, [
+        placement,
+        anchorRef,
+        tooltipRef,
+        isOpen,
+    ]);
     const cssTooltip: CSSProperties = {
         left: 0,
         position: 'absolute',
@@ -266,7 +284,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         zIndex: 9999,
     };
 
-    const arrowPosition: Position = useArrowPosition(placement!, tooltipRef);
+    const arrowPosition: Position = useArrowPosition(placement!, tooltipRef, [placement, tooltipRef, isOpen]);
     const cssArrow: CSSProperties = {
         left: arrowPosition.x > 0 ? `${arrowPosition.x}px` : undefined,
         top: arrowPosition.y > 0 ? `${arrowPosition.y}px` : undefined,
