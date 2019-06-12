@@ -252,14 +252,14 @@ const Tooltip: React.FC<TooltipProps> = ({
 
     useEffect(() => {
         if (anchorRef && anchorRef.current && tooltipRef && tooltipRef.current) {
-            anchorRef.current.addEventListener('mouseover', handleMouseOver);
-            anchorRef.current.addEventListener('mouseout', handleMouseOut);
+            anchorRef.current.addEventListener('mouseenter', handleMouseOver);
+            anchorRef.current.addEventListener('mouseleave', handleMouseOut);
         }
 
         return (): void => {
             if (anchorRef && anchorRef.current) {
-                anchorRef.current.removeEventListener('mouseover', handleMouseOver);
-                anchorRef.current.removeEventListener('mouseout', handleMouseOut);
+                anchorRef.current.removeEventListener('mouseenter', handleMouseOver);
+                anchorRef.current.removeEventListener('mouseleave', handleMouseOut);
             }
 
             if (timer) {
