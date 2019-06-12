@@ -276,7 +276,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     ]);
     const cssTooltip: CSSProperties = {
         left: 0,
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         transform: `translate3d(${tooltipPosition.x}px, ${tooltipPosition.y}px, 0px)`,
         visibility: isOpen ? 'visible' : 'hidden',
