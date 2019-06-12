@@ -96,6 +96,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.comment-block', {
+            url: 'comment-block',
+            views: {
+                'main@': {
+                    controller: 'DemoCommentBlockController',
+                    controllerAs: 'vm',
+                    template: require('./components/comment-block/demo.html'),
+                },
+            },
+        })
         .state('app.dialog', {
             url: 'dialog',
             views: {
@@ -166,14 +176,6 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.loading', {
-            url: 'loading',
-            views: {
-                'main@': {
-                    template: require('./components/loading/demo.html'),
-                },
-            },
-        })
         .state('app.popover', {
             url: 'popover',
             views: {
@@ -181,6 +183,14 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                     controller: 'DemoPopoverController',
                     controllerAs: 'vm',
                     template: require('./components/popover/demo.html'),
+                },
+            },
+        })
+        .state('app.progress', {
+            url: 'progress',
+            views: {
+                'main@': {
+                    template: require('./components/progress/demo.html'),
                 },
             },
         })
@@ -360,6 +370,7 @@ require('./foundations/colors/controller.js');
 require('./components/button/controller.js');
 require('./components/checkbox/controller.js');
 require('./components/chip/controller.js');
+require('./components/comment-block/controller.js');
 require('./components/dialog/controller.js');
 require('./components/dropdown/controller.js');
 require('./components/expansion-panel/controller.js');

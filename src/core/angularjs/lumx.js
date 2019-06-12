@@ -20,6 +20,7 @@ angular.module(`${MODULE_NAME}.avatar`, []);
 angular.module(`${MODULE_NAME}.button`, []);
 angular.module(`${MODULE_NAME}.checkbox`, []);
 angular.module(`${MODULE_NAME}.chip`, []);
+angular.module(`${MODULE_NAME}.comment-block`, []);
 angular.module(`${MODULE_NAME}.dialog`, []);
 angular.module(`${MODULE_NAME}.divider`, []);
 angular.module(`${MODULE_NAME}.drag-handle`, []);
@@ -52,6 +53,7 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.button`,
     `${MODULE_NAME}.checkbox`,
     `${MODULE_NAME}.chip`,
+    `${MODULE_NAME}.comment-block`,
     `${MODULE_NAME}.dialog`,
     `${MODULE_NAME}.divider`,
     `${MODULE_NAME}.drag-handle`,

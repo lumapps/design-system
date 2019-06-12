@@ -1,0 +1,22 @@
+<div class="lumx-comment-block" ng-class="{ 'lumx-comment-block--has-children': lumx.hasChildren && lumx.isOpen }">
+    <div class="lumx-comment-block__wrapper">
+        <div class="lumx-comment-block__avatar">
+            <lumx-avatar lumx-image="{{ lumx.avatar }}" lumx-size="m" lumx-theme="{{ lumx.theme }}"></lumx-avatar>
+        </div>
+
+        <div class="lumx-comment-block__content">
+            <div class="lumx-comment-block__meta">
+                <span class="lumx-comment-block__name">{{ lumx.name }}</span>
+                <span class="lumx-comment-block__date" ng-if="lumx.date">{{ lumx.date }}</span>
+            </div>
+
+            <p class="lumx-comment-block__text">
+                {{ lumx.text }}
+            </p>
+
+            <div class="lumx-comment-block__actions" ng-transclude="actions" ng-if="lumx.hasActions"></div>
+        </div>
+    </div>
+
+    <div class="lumx-comment-block__children" ng-transclude="children" ng-if="lumx.hasChildren && lumx.isOpen"></div>
+</div>
