@@ -4,10 +4,10 @@
 
 .#{$lumx-base-prefix}-divider {
     &--theme-light {
-        @include divider(dark);
+        @include lumx-divider(dark);
     }
 
     &--theme-dark {
-        @include divider(light);
+        @include lumx-divider(light);
     }
 }
