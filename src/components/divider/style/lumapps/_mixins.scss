@@ -4,3 +4,7 @@
     border: none;
     background-color: lumx-theme-color-variant($theme, $lumx-divider-color-variant);
 }
+
+@mixin has-divider($theme) {
+    border-bottom: 1px solid lumx-theme-color-variant($theme, $lumx-divider-color-variant);
+}
