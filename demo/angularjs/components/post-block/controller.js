@@ -33,10 +33,8 @@ function DemoPostBlockController() {
         tags: ['tag1', 'tag2', 'tag3'],
         text:
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus libero aliquet pharetra luctus. Fusce nisl turpis, posuere ac tellus at, euismod vulputate libero...',
-        thumbnail: {
-            aspectRatio: 'horizontal',
-            image: 'https://picsum.photos/800/600/?random',
-        },
+        thumbnail: 'https://picsum.photos/800/600/?random',
+        thumbnailAspectRatio: 'horizontal',
         title: 'Annual Bonus Payments',
     };
 }
