@@ -1,8 +1,12 @@
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+/**
+ * Authorized alignments.
+ */
+const enum Alignments {
+    center = 'center',
+    left = 'left',
+    right = 'right',
+}
+type Alignment = Alignments;
 
 /**
  * Defines the type of a complex default prop (which depends on the value of another prop).
@@ -48,4 +52,16 @@ type Orientation = Orientations;
 
 /////////////////////////////
 
-export { ComplexPropDefault, Color, Colors, Theme, Themes, Size, Sizes, Orientations, Orientation };
+export {
+    Alignment,
+    Alignments,
+    ComplexPropDefault,
+    Color,
+    Colors,
+    Theme,
+    Themes,
+    Size,
+    Sizes,
+    Orientations,
+    Orientation,
+};

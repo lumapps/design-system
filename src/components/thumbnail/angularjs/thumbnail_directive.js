@@ -93,6 +93,7 @@ function ThumbnailDirective() {
         replace: true,
         restrict: 'E',
         scope: {
+            align: '@?lumxAlign',
             aspectRatio: '@?lumxAspectRatio',
             fillHeight: '=?lumxFillHeight',
             image: '@lumxImage',

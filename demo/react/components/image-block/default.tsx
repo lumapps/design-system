@@ -1,6 +1,7 @@
 import React, { CSSProperties, Fragment } from 'react';
 
 import { ImageBlock, ImageBlockCaptionPositions, ImageBlockProps, ImageBlockTheme, ThumbnailAspectRatios } from 'LumX';
+import { Alignments } from 'LumX/components';
 
 /////////////////////////////
 
@@ -89,6 +90,24 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             captionPosition={ImageBlockCaptionPositions.over}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
+            theme={theme}
+            {...imageBlockDemoProps}
+        />
+        <ImageBlock
+            align={Alignments.center}
+            aspectRatio={ThumbnailAspectRatios.horizontal}
+            captionPosition={ImageBlockCaptionPositions.over}
+            image="https://picsum.photos/640/480/?random"
+            style={{ ...imageBlockDemoStyle, width: '95%' }}
+            theme={theme}
+            {...imageBlockDemoProps}
+        />
+        <ImageBlock
+            align={Alignments.right}
+            aspectRatio={ThumbnailAspectRatios.horizontal}
+            captionPosition={ImageBlockCaptionPositions.over}
+            image="https://picsum.photos/640/480/?random"
+            style={{ ...imageBlockDemoStyle, width: '95%' }}
             theme={theme}
             {...imageBlockDemoProps}
         />
