@@ -8,6 +8,7 @@
                 lumx-sort-order="{{ cell.sortOrder }}"
                 lumx-variant="head"
                 ng-click="vm.updateSort(cell)"
+                lumx-enter-keypress="vm.updateSort(cell)"
                 ng-repeat="cell in vm.tableHead"
             >
                 {{ cell.label }}

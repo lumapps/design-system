@@ -3,6 +3,7 @@
     ng-class="{ 'lumx-table__cell--is-sortable': lumx.isSortable,
                 'lumx-table__cell--is-sorted': lumx.isSortable && lumx.sortOrder }"
     scope="{{ lumx.scope }}"
+    tabindex="{{ lumx.isSortable ? 0 : -1 }}"
 >
     <lumx-icon
         class="lumx-table__cell-icon"

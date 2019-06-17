@@ -15,6 +15,7 @@
         text-align: left;
 
         thead & {
+            outline: none;
             text-align: left;
 
             #{$self}--theme-light & {
