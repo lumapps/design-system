@@ -8,6 +8,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
+    outline: none;
 }
 
 /* Avatar sizes
@@ -25,7 +26,6 @@
 
 .#{$lumx-base-prefix}-avatar[tabindex='0'] {
     cursor: pointer;
-    outline: none;
 
     &::after {
         position: absolute;
