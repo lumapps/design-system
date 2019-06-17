@@ -37,6 +37,8 @@
     }
 
     &__name {
+        outline: none;
+
         #{$self}--size-s & {
             @include lumx-typography(caption);
         }
