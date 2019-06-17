@@ -1,3 +1,4 @@
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 import { mdiMenuDown } from 'LumX/icons';
@@ -121,6 +122,24 @@ function ChipDirective() {
         if (transclude.isSlotFilled('label')) {
             ctrl.hasLabel = true;
         }
+
+        const defaultProps = {
+            color: 'dark',
+        };
+
+        if (!attrs.lumxColor) {
+            el.addClass(`${CSS_PREFIX}-chip--color-${defaultProps.color}`);
+        }
+
+        attrs.$observe('lumxColor', (color) => {
+            if (!color) {
+                return;
+            }
+
+            el.removeClass((index, className) => {
+                return (className.match(/(?:\S|-)*chip--color-\S+/g) || []).join(' ');
+            }).addClass(`${CSS_PREFIX}-chip--color-${color}`);
+        });
     }
 
     return {
@@ -131,6 +150,7 @@ function ChipDirective() {
         replace: true,
         restrict: 'E',
         scope: {
+            color: '@?lumxColor',
             hasDropdownIndicator: '=?lumxHasDropdownIndicator',
             isDisabled: '=?ngDisabled',
             isSelected: '=?lumxIsSelected',

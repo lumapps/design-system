@@ -3,7 +3,7 @@
 exports[`<Chip /> Snapshot should render correctly Chip component 1`] = `
 <a
   LabelComponent="Hello World!"
-  className="lumx-chip lumx-chip--size-m lumx-chip--theme-light lumx-chip--is-unselected"
+  className="lumx-chip lumx-chip--color-dark lumx-chip--size-m lumx-chip--is-unselected"
   onClick={null}
   onKeyDown={null}
   role="button"
