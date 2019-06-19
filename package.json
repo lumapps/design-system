@@ -17,9 +17,26 @@
         }
     },
     "contributors": [
-        "Clement Prevot <clement@lumapps.com> (https://github.com/clementprevot)",
-        "Marc-Olivier Castagnetti. <marc-olivier@lumapps.com> (https://github.com/mcastagnetti)",
-        "Matthias Manoukian <matthias@lumapps.com> (https://github.com/matmkian)"
+        {
+            "name": "Clement Prevot",
+            "email": "clement@lumapps.com",
+            "url": "https://github.com/clementprevot"
+        },
+        {
+            "name": "Marc-Olivier Castagnetti.",
+            "email": "marc-olivier@lumapps.com",
+            "url": "https://github.com/mcastagnetti"
+        },
+        {
+            "name": "Matthias Manoukian",
+            "email": "matthias@lumapps.com",
+            "url": "https://github.com/matmkian"
+        },
+        {
+            "name": "Pierre Dupuis",
+            "email": "pierre@lumapps.com",
+            "url": "https://github.com/pidupuis"
+        }
     ],
     "dependencies": {
         "angular": "^1.7.8",
@@ -201,6 +218,9 @@
         "build:react": "webpack --config webpack/react/webpack.umd.js && MINIFY=true GENERATE_PACKAGE=true webpack --config webpack/react/webpack.umd.js",
         "postbuild:react": "rm -f ./dist/react/*-theme-*.js*",
         "rcb": "npm run build:react",
+        "prebuild:core": "rm -Rf ./dist/core/*",
+        "build:core": "webpack --config webpack/core/webpack.umd.js && MINIFY=true GENERATE_PACKAGE=true webpack --config webpack/core/webpack.umd.js",
+        "postbuild:core": "rm -f ./dist/core/*-theme-*.js*",
         "prebump:major": "cd src/icons && npm --no-git-tag-version version major && git add package.json && cd -",
         "bump:major": "npm version --force --message 'chore(release): release new major version %s' major",
         "prebump:minor": "cd src/icons && npm --no-git-tag-version version minor && git add package.json && cd -",

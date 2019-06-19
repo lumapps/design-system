@@ -106,7 +106,7 @@ yarn serve
 npm run serve
 ```
 
-Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for AngularJS example or [http://localhost:8081](http://localhost:8081) for React example.
+Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for React example or [http://localhost:8081](http://localhost:8081) for AngularJS example.
 Then, click on the `examples` directory in the showing listing and you should land on the example page.
 
 ## Copyright and license

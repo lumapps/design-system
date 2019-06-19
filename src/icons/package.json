@@ -4,7 +4,16 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "contributors": [
-        "Marc-Olivier Castagnetti. <marc-olivier@lumapps.com> (https://github.com/mcastagnetti)"
+        {
+            "name": "Marc-Olivier Castagnetti.",
+            "email": "marc-olivier@lumapps.com",
+            "url": "https://github.com/mcastagnetti"
+        },
+        {
+            "name": "Pierre Dupuis",
+            "email": "pierre@lumapps.com",
+            "url": "https://github.com/pidupuis"
+        }
     ],
     "dependencies": {
         "@mdi/font": "^3.7.95",

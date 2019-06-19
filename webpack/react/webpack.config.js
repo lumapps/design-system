@@ -2,13 +2,13 @@ const path = require('path');
 
 const merge = require('webpack-merge');
 
-const { SRC_PATH, TECH_PREFIX } = require('../constants');
+const { SRC_PATH } = require('../constants');
 
 const baseConfig = require('../webpack.config');
 
 const reactConfig = {
     entry: {
-        'lumx.react': `${SRC_PATH}/${TECH_PREFIX.react}.index.ts`,
+        'lumx.react': `${SRC_PATH}/react.index.ts`,
     },
 
     resolve: {
