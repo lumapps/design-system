@@ -163,22 +163,26 @@ const TableCell: React.FC<TableCellProps> = ({
                             [`${CLASSNAME}--is-sorted`]: isSortable && sortOrder,
                         },
                     )}
-                    tabIndex={isSortable && isFunction(onHeaderClick) ? 1 : 0}
+                    tabIndex={isSortable && isFunction(onHeaderClick) ? 1 : undefined}
                     onClick={handleOnHeaderClick}
                     onKeyDown={onEnterPressed(handleOnHeaderClick)}
                     {...props}
                 >
-                    {icon && !isSortable && <Icon className={`${CLASSNAME}-icon`} icon={icon} size={IconSizes.xxs} />}
+                    <div className={`${CLASSNAME}-content`}>
+                        {icon && !isSortable && (
+                            <Icon className={`${CLASSNAME}-icon`} icon={icon} size={IconSizes.xxs} />
+                        )}
 
-                    {isSortable && sortOrder === Orders.asc && (
-                        <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowUp} size={IconSizes.xxs} />
-                    )}
+                        {isSortable && sortOrder === Orders.asc && (
+                            <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowUp} size={IconSizes.xxs} />
+                        )}
 
-                    {isSortable && sortOrder === Orders.desc && (
-                        <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowDown} size={IconSizes.xxs} />
-                    )}
+                        {isSortable && sortOrder === Orders.desc && (
+                            <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowDown} size={IconSizes.xxs} />
+                        )}
 
-                    <div className={`${CLASSNAME}-content`}>{children}</div>
+                        {children}
+                    </div>
                 </th>
             )}
 
