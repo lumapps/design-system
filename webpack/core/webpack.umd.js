@@ -6,11 +6,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const HtmlMinifierPlugin = require('html-minifier-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const { getStyleLoader } = require('../utils');
-const { CONFIGS, CORE_PATH, DIST_PATH, ROOT_PATH } = require('../constants');
+const { COMPONENTS_PATH, CONFIGS, CORE_PATH, DIST_PATH, ROOT_PATH } = require('../constants');
 
 const coreConfig = require('./webpack.config');
 
@@ -60,7 +61,34 @@ if (generatePackage) {
             {
                 context: `${CORE_PATH}/style/`,
                 from: { glob: `${CORE_PATH}/style/**/*.scss`, ignore: [`${CORE_PATH}/style/*`] },
-                to: `${DIST_PATH}/core/scss`,
+                to: `${DIST_PATH}/core/scss/core`,
+            },
+            {
+                context: `${COMPONENTS_PATH}/`,
+                from: `${COMPONENTS_PATH}/**/style/**/*.scss`,
+                to: `${DIST_PATH}/core/scss/components`,
+                transformPath: (targetPath) => targetPath.replace('/style/', '/'),
+            },
+        ]),
+    );
+    plugins.push(
+        new ReplaceInFileWebpackPlugin([
+            {
+                dir: `${DIST_PATH}/core/scss`,
+                rules: [
+                    {
+                        search: /'\.\/(base|elevation|grid|input|link|size|spacing|state|theme|typography)/g,
+                        replace: "'./core/$1",
+                    },
+                    {
+                        search: /'\.\.\/\.\.\/components/g,
+                        replace: "'./components",
+                    },
+                    {
+                        search: /\/style/g,
+                        replace: '',
+                    },
+                ],
             },
         ]),
     );
