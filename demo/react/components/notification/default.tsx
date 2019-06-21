@@ -51,6 +51,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
             dispatch({
                 payload: {
                     content: evt.currentTarget.value,
+                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
                 },
                 type: 'success',
             }),
@@ -62,6 +63,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
             dispatch({
                 payload: {
                     content: evt.currentTarget.value,
+                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
                 },
                 type: 'warning',
             }),
@@ -73,6 +75,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
             dispatch({
                 payload: {
                     content: evt.currentTarget.value,
+                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
                 },
                 type: 'error',
             }),
