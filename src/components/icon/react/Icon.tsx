@@ -21,6 +21,12 @@ interface IProps extends IGenericProps {
     icon: string;
 
     /**
+     * Icon reference
+     */
+    // tslint:disable-next-line: no-any
+    iconRef?: React.RefObject<any>;
+
+    /**
      * The icon color.
      */
     color?: Color;
@@ -70,7 +76,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @constant
  * @readonly
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {
+    iconRef: undefined,
+};
 
 /////////////////////////////
 //                         //
@@ -111,11 +119,22 @@ function _validate(props: IconProps): React.ReactNode {
  *
  * @return {React.ReactElement} The component
  */
-const Icon: React.FC<IconProps> = ({ className, color, icon, size, ...props }: IconProps): React.ReactElement => {
+const Icon: React.FC<IconProps> = ({
+    className,
+    color,
+    icon,
+    iconRef = DEFAULT_PROPS.iconRef,
+    size,
+    ...props
+}: IconProps): React.ReactElement => {
     _validate({ color, icon, size, ...props });
 
     return (
-        <i className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, size }))} {...props}>
+        <i
+            ref={iconRef}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, size }))}
+            {...props}
+        >
             <svg
                 aria-hidden="true"
                 height="1em"
