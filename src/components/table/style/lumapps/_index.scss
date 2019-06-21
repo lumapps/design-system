@@ -74,12 +74,10 @@
     }
 
     &__cell-content {
-        hyphens: auto;
-        word-break: break-all;
+        word-break: break-word;
 
         thead & {
             @include lumx-typography(caption);
-
             display: inline-block;
             vertical-align: middle;
         }
