@@ -78,6 +78,7 @@
 
         thead & {
             @include lumx-typography(caption);
+
             display: inline-block;
             vertical-align: middle;
         }
