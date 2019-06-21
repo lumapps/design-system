@@ -1,7 +1,7 @@
 <lumx-table lumx-has-dividers="true" lumx-theme="{{ demoBlock.theme }}">
     <lumx-table-head>
         <lumx-table-row>
-            <lumx-table-cell
+            <lumx-table-cell-head
                 lumx-icon="{{ cell.icon }}"
                 lumx-is-sortable="cell.isSortable"
                 lumx-scope="col"
@@ -12,27 +12,27 @@
                 ng-repeat="cell in vm.tableHead"
             >
                 {{ cell.label }}
-            </lumx-table-cell>
+            </lumx-table-cell-head>
         </lumx-table-row>
     </lumx-table-head>
 
     <lumx-table-body>
         <lumx-table-row ng-repeat="cell in vm.tableBody">
-            <lumx-table-cell>
+            <lumx-table-cell-body>
                 {{ cell.dessert }}
-            </lumx-table-cell>
+            </lumx-table-cell-body>
 
-            <lumx-table-cell>
+            <lumx-table-cell-body>
                 {{ cell.calories }}
-            </lumx-table-cell>
+            </lumx-table-cell-body>
 
-            <lumx-table-cell>
+            <lumx-table-cell-body>
                 {{ cell.fat }}
-            </lumx-table-cell>
+            </lumx-table-cell-body>
 
-            <lumx-table-cell>
+            <lumx-table-cell-body>
                 {{ cell.comments }}
-            </lumx-table-cell>
+            </lumx-table-cell-body>
         </lumx-table-row>
     </lumx-table-body>
 </lumx-table>

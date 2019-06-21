@@ -2,9 +2,11 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 import { mdiArrowDown, mdiArrowUp } from 'LumX/icons';
 
+import template from './table-cell-head.html';
+
 /////////////////////////////
 
-function TableCellController() {
+function TableCellHeadController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -29,25 +31,12 @@ function TableCellController() {
 
 /////////////////////////////
 
-function TableCellDirective() {
+function TableCellHeadDirective() {
     'ngInject';
-
-    /**
-     * Get template url according to variant parameter.
-     *
-     * @param  {element} el    The directive root element.
-     * @param  {Object}  attrs The directive attributes.
-     * @return {string}  The template url.
-     */
-    function getTemplateUrl(el, attrs) {
-        return !attrs.lumxVariant || attrs.lumxVariant === 'body'
-            ? 'src/components/table/angularjs/table-cell-body.html'
-            : 'src/components/table/angularjs/table-cell-head.html';
-    }
 
     return {
         bindToController: true,
-        controller: TableCellController,
+        controller: TableCellHeadController,
         controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
@@ -56,17 +45,16 @@ function TableCellDirective() {
             isSortable: '=?lumxIsSortable',
             scope: '@?lumxScope',
             sortOrder: '@?lumxSortOrder',
-            variant: '@?lumxVariant',
         },
-        templateUrl: getTemplateUrl,
+        template,
         transclude: true,
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.table`).directive(`${COMPONENT_PREFIX}TableCell`, TableCellDirective);
+angular.module(`${MODULE_NAME}.table`).directive(`${COMPONENT_PREFIX}TableCellHead`, TableCellHeadDirective);
 
 /////////////////////////////
 
-export { TableCellDirective };
+export { TableCellHeadDirective };
