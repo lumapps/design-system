@@ -1,16 +1,7 @@
 import React, { Fragment, useCallback, useRef, useState } from 'react';
 
-import {
-    Button,
-    ImageBlock,
-    ImageBlockCaptionAlignments,
-    ImageBlockProps,
-    Lightbox,
-    LightboxTheme,
-    Slideshow,
-    SlideshowItem,
-    Themes,
-} from 'LumX';
+import { Button, ImageBlock, ImageBlockProps, Lightbox, LightboxTheme, Slideshow, SlideshowItem, Themes } from 'LumX';
+import { Alignments } from 'LumX/components';
 
 /////////////////////////////
 
@@ -24,7 +15,7 @@ interface IProps {
 /////////////////////////////
 
 const imageBlockDemoProps: Partial<ImageBlockProps> = {
-    captionAlign: ImageBlockCaptionAlignments.center,
+    align: Alignments.center,
     description: 'What an image',
     fillHeight: true,
     tags: ['#tag1', '#tag2', '#tag3'],
