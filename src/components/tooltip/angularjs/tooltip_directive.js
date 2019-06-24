@@ -67,6 +67,8 @@ function TooltipController($element, $timeout, LumXDepthService) {
      * Set the tooltip position according to the position parameter.
      */
     function _setTooltipPosition() {
+        _tooltip.appendTo('body');
+
         // eslint-disable-next-line no-new
         new PopperJs($element, _tooltip, {
             placement: lumx.position || 'top',
@@ -126,8 +128,7 @@ function TooltipController($element, $timeout, LumXDepthService) {
         _tooltip
             .append(_tooltipArrow)
             .append(_tooltipInner)
-            .css('z-index', LumXDepthService.get())
-            .appendTo('body');
+            .css('z-index', LumXDepthService.get());
 
         _hoverTimeout = $timeout(_setTooltipPosition, _HOVER_DELAY);
     }
