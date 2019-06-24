@@ -10,9 +10,7 @@
     table-layout: fixed;
 
     &__row {
-        &--is-clickable {
-            outline: none;
-        }
+        outline: none;
 
         #{$self}--theme-light &--is-clickable {
             &:hover #{$self}__cell {
