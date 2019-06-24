@@ -1,45 +1,33 @@
-import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+
+import template from './table.html';
+
+/////////////////////////////
+
+function TableController() {
+    'ngInject';
+
+    // eslint-disable-next-line consistent-this, no-unused-vars
+    const lumx = this;
+}
 
 /////////////////////////////
 
 function TableDirective() {
     'ngInject';
 
-    function link(scope, el, attrs) {
-        const defaultProps = {
-            hasDividers: false,
-            theme: 'light',
-        };
-
-        attrs.$observe('lumxHasDividers', (hasDividers) => {
-            if (scope.$eval(hasDividers)) {
-                el.addClass(`${CSS_PREFIX}-table--has-dividers`);
-            } else {
-                el.removeClass(`${CSS_PREFIX}-table--has-dividers`);
-            }
-        });
-
-        if (!attrs.lumxTheme) {
-            el.addClass(`${CSS_PREFIX}-table--theme-${defaultProps.theme}`);
-        }
-
-        attrs.$observe('lumxTheme', (theme) => {
-            if (!theme) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*table--theme-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-table--theme-${theme}`);
-        });
-    }
-
     return {
-        link,
+        bindToController: true,
+        controller: TableController,
+        controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
-        template: `<table class="${CSS_PREFIX}-table" ng-transclude></table>`,
+        scope: {
+            hasDividers: '=?lumxHasDividers',
+            isClickable: '=?lumxIsClickable',
+            theme: '@?lumxTheme',
+        },
+        template,
         transclude: true,
     };
 }

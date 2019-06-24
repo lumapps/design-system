@@ -1,4 +1,4 @@
-<lumx-table lumx-has-dividers="true" lumx-theme="{{ demoBlock.theme }}">
+<lumx-table lumx-has-dividers="true" lumx-is-clickable="true" lumx-theme="{{ demoBlock.theme }}">
     <lumx-table-head>
         <lumx-table-row>
             <lumx-table-cell-head
@@ -17,21 +17,26 @@
     </lumx-table-head>
 
     <lumx-table-body>
-        <lumx-table-row ng-repeat="cell in vm.tableBody">
+        <lumx-table-row
+            lumx-is-selected="row.isSelected"
+            ng-repeat="row in vm.tableBody"
+            ng-click="vm.selectRow(row)"
+            lumx-enter-keypress="vm.selectRow(row)"
+        >
             <lumx-table-cell-body>
-                {{ cell.dessert }}
+                {{ row.dessert }}
             </lumx-table-cell-body>
 
             <lumx-table-cell-body>
-                {{ cell.calories }}
+                {{ row.calories }}
             </lumx-table-cell-body>
 
             <lumx-table-cell-body>
-                {{ cell.fat }}
+                {{ row.fat }}
             </lumx-table-cell-body>
 
             <lumx-table-cell-body>
-                {{ cell.comments }}
+                {{ row.comments }}
             </lumx-table-cell-body>
         </lumx-table-row>
     </lumx-table-body>

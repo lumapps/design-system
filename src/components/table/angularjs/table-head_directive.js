@@ -2,12 +2,25 @@ import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_c
 
 /////////////////////////////
 
+function TableHeadController() {
+    'ngInject';
+
+    // eslint-disable-next-line consistent-this, no-unused-vars
+    const lumx = this;
+}
+
+/////////////////////////////
+
 function TableHeadDirective() {
     'ngInject';
 
     return {
+        bindToController: true,
+        controller: TableHeadController,
+        controllerAs: 'lumx',
         replace: true,
         restrict: 'E',
+        scope: {},
         template: '<thead ng-transclude></thead>',
         transclude: true,
     };

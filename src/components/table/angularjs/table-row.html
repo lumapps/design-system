@@ -1,1 +1,7 @@
-<tr class="lumx-table__row" ng-transclude></tr>
+<tr
+    class="lumx-table__row"
+    ng-class="{ 'lumx-table__row--is-clickable': lumx.parentController.isClickable,
+                'lumx-table__row--is-selected': lumx.isSelected }"
+    ng-transclude
+    tabindex="{{ lumx.parentController.isClickable ? 0 : -1 }}"
+></tr>

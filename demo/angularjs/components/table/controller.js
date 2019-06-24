@@ -93,28 +93,52 @@ function DemoTableController($filter) {
     /////////////////////////////
 
     /**
+     * Select a row in the table.
+     *
+     * @param {Object} rowToSelect The row to select.
+     */
+    function selectRow(rowToSelect) {
+        if (rowToSelect.isSelected) {
+            rowToSelect.isSelected = false;
+
+            return;
+        }
+
+        angular.forEach(vm.tableBody, (row) => {
+            row.isSelected = false;
+        });
+
+        rowToSelect.isSelected = true;
+    }
+
+    /**
      * Update the sorting of the table.
      *
-     * @param {Object} cell The cell to sort the table by.
+     * @param {Object} cellToSort The cell to sort the table by.
      */
-    function updateSort(cell) {
-        angular.forEach(vm.tableHead, (head) => {
-            if (head !== cell) {
-                head.sortOrder = undefined;
+    function updateSort(cellToSort) {
+        if (!cellToSort.isSortable) {
+            return;
+        }
+
+        angular.forEach(vm.tableHead, (cell) => {
+            if (cell !== cellToSort) {
+                cell.sortOrder = undefined;
             }
         });
 
-        if (cell.sortOrder === 'asc') {
-            cell.sortOrder = 'desc';
+        if (cellToSort.sortOrder === 'asc') {
+            cellToSort.sortOrder = 'desc';
         } else {
-            cell.sortOrder = 'asc';
+            cellToSort.sortOrder = 'asc';
         }
 
-        vm.tableBody = $filter('orderBy')(vm.tableBody, cell.name, cell.sortOrder === 'desc');
+        vm.tableBody = $filter('orderBy')(vm.tableBody, cellToSort.name, cellToSort.sortOrder === 'desc');
     }
 
     /////////////////////////////
 
+    vm.selectRow = selectRow;
     vm.updateSort = updateSort;
 }
 
