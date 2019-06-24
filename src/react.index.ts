@@ -155,13 +155,13 @@ export {
 
 export {
     CLASSNAME as NotificationClassName,
-    Notification,
-    NotificationProps,
+    NotificationBar,
+    NotificationBarProps,
     NotificationType,
     NotificationTypes,
     Theme as NotificationTheme,
     Themes as NotificationThemes,
-} from './components/notification/react/Notification';
+} from './components/notification/react/NotificationBar';
 
 export {
     NotificationAction,

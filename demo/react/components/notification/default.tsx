@@ -39,7 +39,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
             dispatch({
                 payload: {
                     content: evt.currentTarget.value,
-                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                    handleClick: (): void => dispatch({ type: 'close' }),
                 },
                 type: 'info',
             }),
@@ -51,7 +51,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
             dispatch({
                 payload: {
                     content: evt.currentTarget.value,
-                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                    handleClick: (): void => dispatch({ type: 'close' }),
                 },
                 type: 'success',
             }),
@@ -63,7 +63,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
             dispatch({
                 payload: {
                     content: evt.currentTarget.value,
-                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                    handleClick: (): void => dispatch({ type: 'close' }),
                 },
                 type: 'warning',
             }),
@@ -75,7 +75,7 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
             dispatch({
                 payload: {
                     content: evt.currentTarget.value,
-                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                    handleClick: (): void => dispatch({ type: 'close' }),
                 },
                 type: 'error',
             }),
@@ -90,13 +90,13 @@ const NotificationClient: React.FC<IProps> = ({ theme }: IProps): React.ReactEle
                         dispatch({
                             payload: {
                                 content: 'Callback',
-                                handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                                handleClick: (): void => dispatch({ type: 'close' }),
                             },
                             type: 'success',
                         }),
                     actionLabel: 'Undo',
                     content: evt.currentTarget.value,
-                    handleClick: (): void => dispatch({ payload: {}, type: 'close' }),
+                    handleClick: (): void => dispatch({ type: 'close' }),
                 },
                 type: 'info',
             }),

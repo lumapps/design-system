@@ -31,7 +31,7 @@ type NotificationType = NotificationTypes;
 /**
  * Defines the props of the component.
  */
-interface INotificationProps extends IGenericProps {
+interface INotificationBarProps extends IGenericProps {
     /** Label for action button. */
     actionLabel?: string;
 
@@ -53,14 +53,14 @@ interface INotificationProps extends IGenericProps {
     /** Function to handle click on the notification. */
     handleClick?(): void;
 }
-type NotificationProps = INotificationProps;
+type NotificationBarProps = INotificationBarProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<NotificationProps> {}
+interface IDefaultPropsType extends Partial<NotificationBarProps> {}
 
 /////////////////////////////
 //                         //
@@ -104,7 +104,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return {React.ReactElement} The component.
  */
-const Notification: React.FC<NotificationProps> = ({
+const NotificationBar: React.FC<NotificationBarProps> = ({
     actionCallback,
     actionLabel,
     content = DEFAULT_PROPS.content,
@@ -114,7 +114,7 @@ const Notification: React.FC<NotificationProps> = ({
     theme = DEFAULT_PROPS.theme,
     type,
     ...props
-}: NotificationProps): React.ReactElement => {
+}: NotificationBarProps): React.ReactElement => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
     const handleCallback: (evt: React.MouseEvent<HTMLElement>) => void = (evt: React.MouseEvent<HTMLElement>): void => {
@@ -165,15 +165,15 @@ const Notification: React.FC<NotificationProps> = ({
         </Fragment>
     );
 };
-Notification.displayName = COMPONENT_NAME;
+NotificationBar.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
 export {
     CLASSNAME,
     DEFAULT_PROPS,
-    Notification,
-    NotificationProps,
+    NotificationBar,
+    NotificationBarProps,
     NotificationType,
     NotificationTypes,
     Theme,

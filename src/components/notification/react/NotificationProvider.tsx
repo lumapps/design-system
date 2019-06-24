@@ -3,24 +3,26 @@ import React, { createContext, useContext, useReducer } from 'react';
 import { IGenericProps } from 'LumX/core/react/utils';
 
 import { INITIAL_STATE } from 'LumX/components/notification/constants';
-import { NotificationProps } from 'LumX/components/notification/react/Notification';
 import { NotificationHandler } from 'LumX/components/notification/react/NotificationHandler';
 
-import { NotificationAction, notificationReducer } from './NotificationReducer';
+import {
+    NotificationAction,
+    NotificationState,
+    notificationReducer,
+} from 'LumX/components/notification/react/NotificationReducer';
 
 /////////////////////////////
 
 /**
  * React context of notification.
  */
-const stateCtx: React.Context<NotificationProps> = createContext(INITIAL_STATE);
+const stateCtx: React.Context<NotificationState> = createContext(INITIAL_STATE);
 
 /**
  * State dispatcher.
  */
-const dispatchCtx: React.Context<React.Dispatch<NotificationAction>> = createContext((() => 0) as React.Dispatch<
-    NotificationAction
->);
+const dispatchCtx: React.Context<React.Dispatch<NotificationAction>> = createContext(((): number =>
+    0) as React.Dispatch<NotificationAction>);
 
 /////////////////////////////
 
@@ -40,7 +42,7 @@ type NotificationProviderProps = INotificationProviderProps;
 const NotificationProvider: React.FC<NotificationProviderProps> = ({
     children,
 }: NotificationProviderProps): React.ReactElement => {
-    const [state, dispatch]: [NotificationProps, React.Dispatch<NotificationAction>] = useReducer(
+    const [state, dispatch]: [NotificationState, React.Dispatch<NotificationAction>] = useReducer(
         notificationReducer,
         INITIAL_STATE,
     );
@@ -58,9 +60,9 @@ const NotificationProvider: React.FC<NotificationProviderProps> = ({
 /**
  * Custom hook to get the current state of the notification.
  *
- * @return {NotificationProps} Properties of current notification's state.
+ * @return {NotificationState} Properties of current notification's state.
  */
-const useNotificationState: () => NotificationProps = (): NotificationProps => {
+const useNotificationState: () => NotificationState = (): NotificationState => {
     return useContext(stateCtx);
 };
 
