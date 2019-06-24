@@ -1,6 +1,6 @@
 # Tabs
 
-**A Tab is a sub-navigation that show content selected.**
+**Tabs are navigation elements that regroup related sections of content for users to navigate.**
 
 ## Full width
 
