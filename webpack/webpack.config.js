@@ -70,7 +70,7 @@ const baseConfig = {
                 },
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|svg|jpg|gif|woff(2)?|ttf|eot|svg)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name]-[hash:8].[ext]',

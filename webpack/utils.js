@@ -4,7 +4,7 @@ const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 const { shouldPrintComment } = require('babel-plugin-smart-webpack-import');
 
-const { COMPONENTS_PATH, CORE_PATH, NODE_MODULES_PATH } = require('./constants');
+const { COMPONENTS_PATH, CORE_PATH, ICONS_PATH, NODE_MODULES_PATH } = require('./constants');
 
 /**
  * Setup Babel transpiler.
@@ -110,7 +110,7 @@ function getStyleLoader({ mode = 'dev' }) {
                 {
                     loader: 'sass-loader',
                     options: {
-                        includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
+                        includePaths: [`${ICONS_PATH}/node_modules/@mdi/font/scss/`, `${NODE_MODULES_PATH}/sass-mq`],
                         sourceMap: false,
                     },
                 },

@@ -7,7 +7,8 @@
         "Marc-Olivier Castagnetti. <marc-olivier@lumapps.com> (https://github.com/mcastagnetti)"
     ],
     "dependencies": {
-        "@mdi/js": "^3.5.95"
+        "@mdi/font": "^3.7.95",
+        "@mdi/js": "^3.7.95"
     },
     "description": "LumX icons",
     "engines": {

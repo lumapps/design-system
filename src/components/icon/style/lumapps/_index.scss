@@ -5,7 +5,11 @@
 .#{$lumx-base-prefix}-icon {
     display: block;
 
-    svg {
+    &--font svg {
+        display: none;
+    }
+
+    &--path svg {
         display: block;
     }
 }
