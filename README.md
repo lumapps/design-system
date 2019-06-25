@@ -111,6 +111,12 @@ Then, click on the `examples` directory in the showing listing and you should la
 
 ## How to publish packages
 
+First, be sure to be logged in NPM:
+
+```bash
+npm login
+```
+
 To publish the `@lumx/<core|react|angularjs|icons>` package:
 
 ```bash
@@ -122,6 +128,8 @@ To publish these four packages:
 ```bash
 npm run release:<major|minor|patch>
 ```
+
+These commands will build the packages, increment the version number and publish to NPM.
 
 ## Copyright and license
 
