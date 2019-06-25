@@ -109,6 +109,20 @@ npm run serve
 Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for React example or [http://localhost:8081](http://localhost:8081) for AngularJS example.
 Then, click on the `examples` directory in the showing listing and you should land on the example page.
 
+## How to publish packages
+
+To publish the `@lumx/<core|react|angularjs|icons>` package:
+
+```bash
+npm run release:<core|react|angularjs|icons>:<major|minor|patch>
+```
+
+To publish these four packages:
+
+```bash
+npm run release:<major|minor|patch>
+```
+
 ## Copyright and license
 
 Code and documentation copyright 2019 LumApps. Code released under the [MIT license](LICENSE.md).
