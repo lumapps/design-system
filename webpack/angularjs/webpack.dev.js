@@ -7,19 +7,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const { getStyleLoader } = require('../utils');
-const { APP_PATH, DEFAULT_HOST, DEMO_PATH, SRC_PATH } = require('../constants');
+const { APP_PATH, DEFAULT_HOST, DEMO_PATH } = require('../constants');
 
 const angularJsConfig = require('./webpack.config');
 
 const devConfig = {
     entry: {
-        'demo-site': `${DEMO_PATH}/angularjs/index.tsx`,
-    },
-
-    resolve: {
-        alias: {
-            LumX: `${SRC_PATH}/angularjs.index.ts`,
-        },
+        'demo-site': `${DEMO_PATH}/angularjs/app.js`,
     },
 };
 
@@ -48,8 +42,6 @@ module.exports = merge.smartStrategy({
     entry: 'append',
     'module.rules': 'append',
     plugins: 'replace',
-    'resolve.alias': 'append',
-    output: 'replace',
 })(angularJsConfig, devConfig, {
     devServer: {
         compress: true,

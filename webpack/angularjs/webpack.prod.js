@@ -129,7 +129,6 @@ module.exports = merge.smartStrategy({
     entry: 'append',
     'module.rules': 'append',
     plugins: 'replace',
-    output: 'replace',
 })(angularJsConfig, {
     bail: true,
     devtool: minify ? 'source-map' : '',
