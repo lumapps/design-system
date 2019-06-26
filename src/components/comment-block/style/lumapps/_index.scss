@@ -3,20 +3,30 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-comment-block {
-    position: relative;
+    $self: &;
 
-    &--has-children::before {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 16px;
-        width: 4px;
-        background-color: lumx-theme-color-variant(dark, L5);
-        content: '';
+    #{$self}__children & {
+        margin-top: $lumx-spacing-unit * 2;
     }
 
     &__wrapper {
+        position: relative;
         display: flex;
+        align-items: flex-start;
+
+        #{$self}--has-children &::before {
+            position: absolute;
+            top: 44px;
+            bottom: -8px;
+            left: 16px;
+            width: 4px;
+            background-color: lumx-theme-color-variant(dark, L5);
+            content: '';
+        }
+
+        #{$self}__children #{$self}:last-child &::before {
+            display: none;
+        }
     }
 
     &__avatar {
@@ -24,22 +34,43 @@
         margin-right: $lumx-spacing-unit * 2;
     }
 
-    &__content {
+    &__container {
         flex: 1;
+    }
+
+    &__content {
+        position: relative;
+        overflow: hidden;
+        padding: $lumx-spacing-unit * 1.5;
+        padding-top: $lumx-spacing-unit;
+        background-color: lumx-theme-color-variant(dark, L6);
+        border-radius: $lumx-theme-border-radius;
+
+        #{$self}--is-relevant > #{$self}__wrapper &::before {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            width: 4px;
+            background-color: lumx-theme-color-variant(green, N);
+            content: '';
+        }
     }
 
     &__meta {
         display: flex;
+        flex-wrap: wrap;
     }
 
     &__name {
         @include lumx-typography(subtitle1);
+
+        margin-right: $lumx-spacing-unit;
     }
 
     &__date {
         @include lumx-typography(body1);
 
-        margin-left: $lumx-spacing-unit;
         color: lumx-theme-color-variant(dark, L2);
     }
 
@@ -48,6 +79,6 @@
     }
 
     &__actions {
-        margin-top: $lumx-spacing-unit;
+        margin-top: $lumx-spacing-unit / 2;
     }
 }

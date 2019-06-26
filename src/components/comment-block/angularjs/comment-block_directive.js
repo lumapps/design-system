@@ -53,6 +53,7 @@ function CommentBlockDirective() {
             avatar: '@lumxAvatar',
             date: '@?lumxDate',
             isOpen: '=?lumxIsOpen',
+            isRelevant: '=?lumxIsRelevant',
             name: '@lumxName',
             text: '@lumxText',
             theme: '@?lumxTheme',
