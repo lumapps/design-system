@@ -168,7 +168,7 @@ const TableCell: React.FC<TableCellProps> = ({
                     onKeyDown={onEnterPressed(handleOnHeaderClick)}
                     {...props}
                 >
-                    <div className={`${CLASSNAME}-content`}>
+                    <div className={`${CLASSNAME}-wrapper`}>
                         {icon && !isSortable && (
                             <Icon className={`${CLASSNAME}-icon`} icon={icon} size={IconSizes.xxs} />
                         )}
@@ -181,7 +181,7 @@ const TableCell: React.FC<TableCellProps> = ({
                             <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowDown} size={IconSizes.xxs} />
                         )}
 
-                        {children}
+                        <div className={`${CLASSNAME}-content`}>{children}</div>
                     </div>
                 </th>
             )}
