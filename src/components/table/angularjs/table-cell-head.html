@@ -5,7 +5,7 @@
     scope="{{ lumx.scope }}"
     tabindex="{{ lumx.isSortable ? 0 : -1 }}"
 >
-    <div class="lumx-table__cell-content">
+    <div class="lumx-table__cell-wrapper">
         <lumx-icon
             class="lumx-table__cell-icon"
             lumx-path="{{ lumx.icon }}"
@@ -27,6 +27,6 @@
             ng-if="lumx.isSortable && lumx.sortOrder === 'desc'"
         ></lumx-icon>
 
-        <ng-transclude></ng-transclude>
+        <div class="lumx-table__cell-content" ng-transclude></div>
     </div>
 </th>
