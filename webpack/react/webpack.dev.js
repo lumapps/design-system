@@ -49,7 +49,6 @@ module.exports = merge.smartStrategy({
     'module.rules': 'append',
     plugins: 'replace',
     'resolve.alias': 'append',
-    output: 'replace',
 })(reactConfig, devConfig, {
     devServer: {
         compress: true,
