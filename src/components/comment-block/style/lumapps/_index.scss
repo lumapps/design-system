@@ -66,6 +66,11 @@
         @include lumx-typography(subtitle1);
 
         margin-right: $lumx-spacing-unit;
+        outline: none;
+
+        &[tabindex='0'] {
+            @include lumx-link(dark);
+        }
     }
 
     &__date {
