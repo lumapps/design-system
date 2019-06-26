@@ -5,24 +5,24 @@
 .#{$lumx-base-prefix}-post-block {
     $self: &;
 
-    &--variant-list {
+    &--orientation-horizontal {
         display: flex;
     }
 
     &__thumbnail {
-        #{$self}--variant-list & {
+        #{$self}--orientation-horizontal & {
             width: 33.33%;
             flex-shrink: 0;
             margin-right: $lumx-spacing-unit * 3;
         }
 
-        #{$self}--variant-grid & {
+        #{$self}--orientation-vertical & {
             margin-bottom: $lumx-spacing-unit * 3;
         }
     }
 
     &__wrapper {
-        #{$self}--variant-list & {
+        #{$self}--orientation-horizontal & {
             flex: 1;
         }
     }

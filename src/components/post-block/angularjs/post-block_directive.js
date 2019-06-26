@@ -42,9 +42,23 @@ function PostBlockController() {
 function PostBlockDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
         const defaultProps = {
+            orientation: 'horizontal',
             theme: 'light',
-            variant: 'list',
         };
+
+        if (!attrs.lumxOrientation) {
+            el.addClass(`${CSS_PREFIX}-post-block--orientation-${defaultProps.orientation}`);
+        }
+
+        attrs.$observe('lumxOrientation', (orientation) => {
+            if (!orientation) {
+                return;
+            }
+
+            el.removeClass((index, className) => {
+                return (className.match(/(?:\S|-)*post-block--orientation-\S+/g) || []).join(' ');
+            }).addClass(`${CSS_PREFIX}-post-block--orientation-${orientation}`);
+        });
 
         if (!attrs.lumxTheme) {
             el.addClass(`${CSS_PREFIX}-post-block--theme-${defaultProps.theme}`);
@@ -58,20 +72,6 @@ function PostBlockDirective() {
             el.removeClass((index, className) => {
                 return (className.match(/(?:\S|-)*post-block--theme-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-post-block--theme-${theme}`);
-        });
-
-        if (!attrs.lumxVariant) {
-            el.addClass(`${CSS_PREFIX}-post-block--variant-${defaultProps.variant}`);
-        }
-
-        attrs.$observe('lumxVariant', (variant) => {
-            if (!variant) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*post-block--variant-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-post-block--variant-${variant}`);
         });
 
         if (transclude.isSlotFilled('actions')) {
@@ -97,12 +97,12 @@ function PostBlockDirective() {
         scope: {
             meta: '@?lumxMeta',
             onClick: '&?lumxOnClick',
+            orientation: '@?lumxOrientation',
             text: '@?lumxText',
             thumbnail: '@?lumxThumbnail',
             thumbnailAspectRatio: '@?lumxThumbnailAspectRatio',
             title: '@?lumxTitle',
             theme: '@?lumxTheme',
-            variant: '@?lumxVariant',
         },
         template,
         transclude: {
