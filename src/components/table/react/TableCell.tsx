@@ -163,7 +163,7 @@ const TableCell: React.FC<TableCellProps> = ({
                             [`${CLASSNAME}--is-sorted`]: isSortable && sortOrder,
                         },
                     )}
-                    tabIndex={isSortable && isFunction(onHeaderClick) ? 1 : undefined}
+                    tabIndex={isSortable && isFunction(onHeaderClick) ? 0 : -1}
                     onClick={handleOnHeaderClick}
                     onKeyDown={onEnterPressed(handleOnHeaderClick)}
                     {...props}
