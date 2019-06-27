@@ -47,7 +47,7 @@
 
     &__cell {
         height: 56px;
-        padding: $lumx-spacing-unit $lumx-spacing-unit * 4 $lumx-spacing-unit 0;
+        padding: $lumx-spacing-unit $lumx-spacing-unit * 3 $lumx-spacing-unit 0;
         text-align: left;
 
         thead & {
@@ -101,23 +101,26 @@
         }
     }
 
+    &__cell-wrapper {
+        thead & {
+            display: flex;
+            align-items: flex-start;
+        }
+    }
+
     &__cell-icon {
         thead & {
-            display: inline-block;
+            margin-top: 1px;
             margin-right: $lumx-spacing-unit / 2;
-            vertical-align: middle;
         }
     }
 
     &__cell-content {
         hyphens: auto;
-        word-break: break-all;
+        word-break: break-word;
 
         thead & {
             @include lumx-typography(caption);
-
-            display: inline-block;
-            vertical-align: middle;
         }
 
         tbody & {
