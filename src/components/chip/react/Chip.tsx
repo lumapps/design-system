@@ -99,7 +99,7 @@ const Chip: React.FC<IChipProps> = ({
     isDisabled = DEFAULT_PROPS.isDisabled,
     onAfterClick,
     onBeforeClick,
-    onClick = null,
+    onClick,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     ...props
@@ -161,8 +161,8 @@ const Chip: React.FC<IChipProps> = ({
             )}
             role="button"
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
-            onClick={onClick ? onClick : null}
-            onKeyDown={onClick ? onEnterPressed(onClick) : null}
+            onClick={hasOnClick ? onClick : undefined}
+            onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
             {...props}
         >
             {before && (
