@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React, { Children, ReactNode } from 'react';
 
 import get from 'lodash/get';
 import isBoolean from 'lodash/isBoolean';
@@ -47,12 +47,12 @@ interface IGenericProps {
  * Defines a generic component type.
  */
 // tslint:disable-next-line: no-any
-type ComponentType = React.ReactNode | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
+type ComponentType = ReactNode | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 interface IChildrenManipulationParameters {
-    child: React.ReactNode;
-    children: React.ReactNode;
+    child: ReactNode;
+    children: ReactNode;
     childrenCount: number;
     index: number;
     props: IGenericProps;
@@ -64,7 +64,7 @@ type ChildValidateParameters = IChildrenManipulationParameters;
  * Defines the parameters of the pre/post validate callback of the `validateComponent` function below.
  */
 interface IValidateParameters {
-    children: React.ReactNode;
+    children: ReactNode;
     childrenCount: number;
     props: IGenericProps;
 }
@@ -130,7 +130,7 @@ function getTypeName(type: string | ComponentType): string | ComponentType {
  * @param type The type we want to check if the ReactElement is of.
  * @return     If the ReactElement is of the given type or not.
  */
-function isElementOfType(el: React.ReactNode, type: string | ComponentType): boolean {
+function isElementOfType(el: ReactNode, type: string | ComponentType): boolean {
     const typeName: string | ComponentType = getTypeName(type);
 
     if (!isString(typeName) || isEmpty(typeName)) {
@@ -162,7 +162,7 @@ function isElementOfType(el: React.ReactNode, type: string | ComponentType): boo
  * @param el The ReactElement to check if it's a text.
  * @return   If the ReactElement is a text or not.
  */
-function isElementText(el: React.ReactNode): boolean {
+function isElementText(el: ReactNode): boolean {
     return isString(el);
 }
 
@@ -172,12 +172,12 @@ function isElementText(el: React.ReactNode): boolean {
  * @param children The children to unwrap (there should be only 1 child of React.Fragment type).
  * @return The unwrapped children (or the origin children if it wasn't a fragment).
  */
-function unwrapFragment(children: React.ReactNode): React.ReactNode {
-    let newChildren: React.ReactNode = children;
+function unwrapFragment(children: ReactNode): ReactNode {
+    let newChildren: ReactNode = children;
 
     const childrenCount: number = Children.count(children);
     if (childrenCount === 1) {
-        const firstChild: React.ReactNode = Children.toArray(children)[0];
+        const firstChild: ReactNode = Children.toArray(children)[0];
 
         if (get(firstChild, 'type') === React.Fragment) {
             newChildren = get(firstChild, 'props.children', []);
@@ -239,11 +239,11 @@ function validateComponent(
         props: IGenericProps;
         postValidate?(params: ValidateParameters): string | boolean | void;
         preValidate?(params: ValidateParameters): string | boolean | void;
-        transformChild?(params: ChildTransformParameters): React.ReactNode;
+        transformChild?(params: ChildTransformParameters): ReactNode;
         validateChild?(params: ChildValidateParameters): string | boolean | void;
     },
-): React.ReactNode | undefined {
-    let newChildren: React.ReactNode = !isEmpty(props.children) ? unwrapFragment(props.children) : undefined;
+): ReactNode | undefined {
+    let newChildren: ReactNode = !isEmpty(props.children) ? unwrapFragment(props.children) : undefined;
     const childrenCount: number = Children.count(newChildren);
 
     const preValidation: string | boolean | void = preValidate({ children: newChildren, childrenCount, props });
@@ -285,17 +285,17 @@ function validateComponent(
         const childrenFunctionName: string = isFunction(transformChild) ? 'map' : 'forEach';
 
         if (!isFunction(transformChild)) {
-            transformChild = ({ child }: ChildTransformParameters): React.ReactNode => child;
+            transformChild = ({ child }: ChildTransformParameters): ReactNode => child;
         }
         validateChild = validateChild || noop;
 
         let index = -1;
-        const transformedChildren: React.ReactNode = Children[childrenFunctionName](
+        const transformedChildren: ReactNode = Children[childrenFunctionName](
             newChildren,
-            (child: React.ReactNode): React.ReactNode => {
+            (child: ReactNode): ReactNode => {
                 index++;
 
-                const newChild: React.ReactNode = transformChild!({
+                const newChild: ReactNode = transformChild!({
                     child,
                     children: newChildren,
                     childrenCount,

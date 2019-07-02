@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
 import { Progress } from 'LumX';
 
@@ -13,7 +13,7 @@ interface IProps {}
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => (
+const DemoComponent: React.FC<IProps> = (): ReactElement => (
     <Fragment>
         <Progress />
     </Fragment>

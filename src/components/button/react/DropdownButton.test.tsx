@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
@@ -74,7 +74,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<DropdownButton {...props} />);
 
@@ -338,7 +338,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         );
 
         it('should fail when more than 2 children are given', (): void => {
-            let children: React.ReactNode = (
+            let children: ReactNode = (
                 <Fragment>
                     <Icon icon={mdiPlus} />
                     <Icon icon={mdiPlus} />

@@ -1,4 +1,4 @@
-import React, { Fragment, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { Fragment, ReactElement, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import classNames from 'classnames';
@@ -94,7 +94,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     parentElement,
     role = DEFAULT_PROPS.role,
     theme = DEFAULT_PROPS.theme,
-}: LightboxProps): React.ReactElement => {
+}: LightboxProps): ReactElement => {
     // tslint:disable-next-line: no-any
     const buttonRef: React.RefObject<any> = useRef(null);
     // tslint:disable-next-line: no-any

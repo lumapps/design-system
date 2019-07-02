@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -93,7 +93,7 @@ function _preValidate({ props }: ValidateParameters): void {
  * @param       props The props of the component.
  * @return The processed children of the component.
  */
-function _validate(props: IconProps): React.ReactNode {
+function _validate(props: IconProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         preValidate: _preValidate,
         props,
@@ -114,7 +114,7 @@ const Icon: React.FC<IconProps> = ({
     iconRef = DEFAULT_PROPS.iconRef,
     size,
     ...props
-}: IconProps): React.ReactElement => {
+}: IconProps): ReactElement => {
     _validate({ color, icon, size, ...props });
 
     return (

@@ -1,5 +1,5 @@
 // tslint:disable: jsx-no-lambda
-import React, { CSSProperties, Fragment, ReactNode, useState } from 'react';
+import React, { CSSProperties, Fragment, ReactElement, useState } from 'react';
 
 import { Orientations } from 'LumX/components';
 
@@ -73,7 +73,7 @@ const createMultipleActions: React.FC<ButtonThemes> = (theme: any): any => (
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     // tslint:disable-next-line: typedef
     const [isCardDisplayed, setCardDisplayed] = useState(false);
     // tslint:disable-next-line: typedef
@@ -98,7 +98,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         }
     };
 
-    const anchor: ReactNode = (
+    const anchor: ReactElement = (
         <UserBlock
             ref={anchorRef}
             theme={theme}
@@ -112,7 +112,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         />
     );
 
-    const popper: ReactNode = (
+    const popper: ReactElement = (
         <div
             style={{
                 display: 'flex',

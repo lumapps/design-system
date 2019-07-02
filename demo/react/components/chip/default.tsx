@@ -1,6 +1,6 @@
 // tslint:disable: jsx-no-lambda no-console
 
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
 import { Chip, ChipSizes, ChipTheme, Colors, Icon } from 'LumX';
 import { mdiClose, mdiEmail } from 'LumX/icons';
@@ -21,7 +21,7 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <Fragment>
         <Chip theme={theme} LabelComponent="Medium">
             Label

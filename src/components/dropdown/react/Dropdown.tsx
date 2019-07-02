@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -49,11 +49,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
  *
  * @return The component.
  */
-const Dropdown: React.FC<DropdownProps> = ({
-    children,
-    className = '',
-    ...props
-}: DropdownProps): React.ReactElement => (
+const Dropdown: React.FC<DropdownProps> = ({ children, className = '', ...props }: DropdownProps): ReactElement => (
     <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {children}
     </div>

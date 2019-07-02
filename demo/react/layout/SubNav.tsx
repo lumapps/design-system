@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { Theme } from 'LumX/demo/constants';
 
@@ -74,7 +74,7 @@ const NAV_ITEMS: string[] = [
  *
  * @return The sub navigation component.
  */
-const SubNav: React.FC<IProps> = ({ activeComponent, changeTheme, handleNavigate }: IProps): React.ReactElement => (
+const SubNav: React.FC<IProps> = ({ activeComponent, changeTheme, handleNavigate }: IProps): ReactElement => (
     <div className="sub-nav">
         <ul className="sub-nav__wrapper ph++ pv+">
             <li>
@@ -95,7 +95,7 @@ const SubNav: React.FC<IProps> = ({ activeComponent, changeTheme, handleNavigate
             <li className="sub-nav__subheader">Components</li>
 
             {NAV_ITEMS.map(
-                (navItemLabel: string): React.ReactNode => (
+                (navItemLabel: string): ReactElement => (
                     <SubNavItem key={navItemLabel} handleClick={handleNavigate} activeComponent={activeComponent}>
                         {navItemLabel}
                     </SubNavItem>

@@ -1,4 +1,14 @@
-import React, { CSSProperties, Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+    CSSProperties,
+    Dispatch,
+    ReactElement,
+    ReactNode,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 
 import classNames from 'classnames';
 
@@ -83,7 +93,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param props The children and props of the component.
  * @return    The processed children of the component.
  */
-function _validate(props: SlideshowProps): React.ReactNode {
+function _validate(props: SlideshowProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         props,
     });
@@ -105,12 +115,12 @@ const Slideshow: React.FC<SlideshowProps> = ({
     interval = DEFAULT_PROPS.interval,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SlideshowProps): React.ReactElement | null => {
+}: SlideshowProps): ReactElement | null => {
     if (typeof activeIndex === 'undefined' || typeof groupBy === 'undefined' || typeof interval === 'undefined') {
         return null;
     }
 
-    const newChildren: React.ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
+    const newChildren: ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
     const [currentIndex, setCurrentIndex]: [number, Dispatch<SetStateAction<number>>] = useState(activeIndex);
     const [isAutoPlaying, setIsAutoPlaying]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(Boolean(autoPlay));
     const parentRef: React.MutableRefObject<null> = useRef(null);

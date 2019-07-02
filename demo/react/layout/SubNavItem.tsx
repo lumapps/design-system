@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import slugify from 'slugify';
@@ -20,7 +20,7 @@ interface IProps {
     /**
      * The label of the sub navigation item.
      */
-    children: React.ReactNode;
+    children: ReactNode;
 
     /**
      * The name of the component this sub navigation item will activate when clicked.
@@ -45,12 +45,7 @@ interface IProps {
  *
  * @return The sub navigation item component.
  */
-const SubNavItem: React.FC<IProps> = ({
-    children,
-    component,
-    handleClick,
-    activeComponent,
-}: IProps): React.ReactElement => {
+const SubNavItem: React.FC<IProps> = ({ children, component, handleClick, activeComponent }: IProps): ReactElement => {
     component = slugify(component || children!.toString(), {
         lower: true,
     });

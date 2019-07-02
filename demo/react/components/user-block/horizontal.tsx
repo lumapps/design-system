@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { Orientations } from 'LumX/components';
 
@@ -50,7 +50,7 @@ const createSimpleAction: React.FC<ButtonThemes> = (
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <div>
             <pre>size: s</pre>

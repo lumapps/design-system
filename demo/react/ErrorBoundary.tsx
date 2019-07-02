@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
 /////////////////////////////
 
@@ -35,7 +35,7 @@ class ErrorBoundary extends React.Component<{}, IState> {
         // Nothing to do here, the error is already logged in the console and in the fallback display.
     }
 
-    public render(): React.ReactNode {
+    public render(): ReactElement {
         const { error, hasError }: IState = this.state;
 
         if (hasError) {

@@ -1,4 +1,4 @@
-import React, { Fragment, useRef } from 'react';
+import React, { Fragment, ReactElement, useRef } from 'react';
 
 import { Button, ButtonTheme, Tooltip } from 'LumX';
 
@@ -18,7 +18,7 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const anchorRefTop: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
     const anchorRefRight: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
     const anchorRefBottom: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);

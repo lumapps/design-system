@@ -10,7 +10,7 @@ import {
     ThScope,
 } from 'LumX';
 
-import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import React, { Dispatch, ReactElement, SetStateAction, useCallback, useState } from 'react';
 
 import orderBy from 'lodash/orderBy';
 
@@ -120,7 +120,7 @@ const tableHead: IHead[] = [
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [dataTableBody, setTable]: [IBody[], Dispatch<SetStateAction<IBody[]>>] = useState(tableBody);
 
     /**

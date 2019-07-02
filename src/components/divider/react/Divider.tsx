@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -62,7 +62,7 @@ const Divider: React.FC<DividerProps> = ({
     className = '',
     theme = DEFAULT_PROPS.theme,
     ...props
-}: DividerProps): React.ReactElement => {
+}: DividerProps): ReactElement => {
     return <hr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props} />;
 };
 Divider.displayName = COMPONENT_NAME;

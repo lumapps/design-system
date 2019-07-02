@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
@@ -90,7 +90,7 @@ const TextField: React.FC<TextFieldProps> = ({
     placeholder,
     theme = Themes.light,
     ...props
-}: TextFieldProps): React.ReactElement => {
+}: TextFieldProps): ReactElement => {
     const [hasFocus, setHasFocus]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
     const [hasValue, setHasValue]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
 

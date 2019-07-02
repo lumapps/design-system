@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import { Placements, Popover } from 'LumX';
 
@@ -23,11 +23,11 @@ const demoPopperStyle: CSSProperties = {
     padding: '5px',
 };
 
-const createDemoAnchor: (placement: string) => ReactNode = (placement: string): ReactNode => {
+const createDemoAnchor = (placement: string): ReactElement => {
     return <div style={demoAnchorStyle}>{`Hovering will show a tooltip using placement : ${placement}`}</div>;
 };
 
-const createPopper: () => ReactNode = (): ReactNode => {
+const createPopper = (): ReactElement => {
     return <div style={demoPopperStyle}>{`Tooltip`}</div>;
 };
 
@@ -39,13 +39,13 @@ const createPopper: () => ReactNode = (): ReactNode => {
  * @return The demo component.
  */
 // tslint:disable-next-line: typedef
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const placementDemo: string[] = [Placements.LEFT, Placements.TOP, Placements.RIGHT, Placements.BOTTOM];
 
     return (
         <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'space-around ' }}>
             {placementDemo.map(
-                (placement: string): React.ReactNode => (
+                (placement: string): ReactElement => (
                     <Popover
                         anchorElement={createDemoAnchor(placement)}
                         popperElement={createPopper()}

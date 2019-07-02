@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
 import { Switch, SwitchTheme } from 'LumX';
 
@@ -18,7 +18,7 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <Fragment>
         <Switch className="mb+" helper="Click on the switch to check it" theme={theme}>
             Label

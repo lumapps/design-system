@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -68,7 +68,7 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     className = '',
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ProgressTrackerProps): React.ReactElement => {
+}: ProgressTrackerProps): ReactElement => {
     const backgroundPosition: number = 100 / (children.length * 2);
     const trackPosition: number = ((100 / (children.length - 1)) * activeStep) / 100;
 

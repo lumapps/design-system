@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -57,7 +57,7 @@ interface IButtonProps extends IGenericProps {
     /**
      * The label.
      */
-    children?: React.ReactNode;
+    children?: ReactNode;
 
     /**
      * The color.
@@ -202,7 +202,7 @@ function _preValidate({ childrenCount, props }: ValidateParameters): string | bo
  * @param     props The children and props of the component.
  * @return The processed children of the component.
  */
-function _validate(props: ButtonProps): React.ReactNode {
+function _validate(props: ButtonProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: props.variant === Variants.icon ? 0 : undefined,
         postValidate: _postValidate,
@@ -231,8 +231,8 @@ const Button: React.FC<ButtonProps> = ({
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: ButtonProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({
+}: ButtonProps): ReactElement => {
+    const newChildren: ReactNode = _validate({
         children,
         color,
         emphasis,

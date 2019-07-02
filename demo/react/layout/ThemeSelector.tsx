@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, ReactElement } from 'react';
 
 import { Theme } from '../../constants';
 
@@ -24,7 +24,7 @@ interface IProps {
  *
  * @return The theme selector component.
  */
-const ThemeSelector: React.FC<IProps> = ({ changeTheme }: IProps): React.ReactElement => {
+const ThemeSelector: React.FC<IProps> = ({ changeTheme }: IProps): ReactElement => {
     /**
      * When the select is changed, call the function to change the theme.
      *

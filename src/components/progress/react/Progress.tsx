@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -67,7 +67,7 @@ const Progress: React.FC<ProgressProps> = ({
     className = '',
     variant = DEFAULT_PROPS.variant,
     ...props
-}: ProgressProps): React.ReactElement => {
+}: ProgressProps): ReactElement => {
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), `${CLASSNAME}--${variant}`)}

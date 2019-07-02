@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { LumXLogo } from '../../assets/images';
 
@@ -10,7 +10,7 @@ import { LumXLogo } from '../../assets/images';
  *
  * @return The main navigation component.
  */
-const MainNav: React.FC = (): React.ReactElement => (
+const MainNav: React.FC = (): ReactElement => (
     <div className="main-nav">
         <ul className="main-nav__wrapper">
             <li className="main-nav__logo">

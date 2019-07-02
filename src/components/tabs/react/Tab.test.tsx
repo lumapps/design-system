@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import { build } from 'test-data-bot';
@@ -46,7 +46,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     // noinspection RequiredAttributes
     const wrapper: Wrapper = renderer(<Tab {...props} />);

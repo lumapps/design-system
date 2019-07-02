@@ -1,4 +1,4 @@
-import React, { SyntheticEvent } from 'react';
+import React, { ReactElement, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -26,9 +26,9 @@ type Size = Sizes;
  */
 interface IChipProps extends IGenericProps {
     /** A component to be rendered after the main label area. */
-    after?: HTMLElement | React.ReactNode;
+    after?: HTMLElement | ReactNode;
     /** A component to be rendered before the main label area. */
-    before?: HTMLElement | React.ReactNode;
+    before?: HTMLElement | ReactNode;
     /** The component color variant. */
     color?: Color;
     /** Indicates if the chip is currently in an active state or not. */
@@ -103,7 +103,7 @@ const Chip: React.FC<IChipProps> = ({
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ChipProps): React.ReactElement => {
+}: ChipProps): ReactElement => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
     const hasBeforeClick: boolean = isFunction(onBeforeClick);
     const hasOnClick: boolean = isFunction(onClick);

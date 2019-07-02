@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode, useState } from 'react';
+import React, { CSSProperties, ReactElement, useState } from 'react';
 
 import { Placements, Popover } from 'LumX';
 
@@ -34,11 +34,11 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'space-around',
 };
 
-const createDemoAnchor: (width: number) => ReactNode = (width: number): ReactNode => {
+const createDemoAnchor = (width: number): ReactElement => {
     return <div style={{ ...demoAnchorStyle, width }}>{'This element will act as the anchor'}</div>;
 };
 
-const createPopper: () => ReactNode = (): ReactNode => {
+const createPopper = (): ReactElement => {
     return (
         <div style={demoPopperStyle}>
             {
@@ -56,7 +56,7 @@ const createPopper: () => ReactNode = (): ReactNode => {
  * @return The demo component.
  */
 // tslint:disable: jsx-no-lambda
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = (): ReactElement => {
     // tslint:disable-next-line: typedef
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
 

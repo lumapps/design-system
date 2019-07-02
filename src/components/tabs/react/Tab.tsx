@@ -1,4 +1,11 @@
-import React, { AnchorHTMLAttributes, KeyboardEvent, KeyboardEventHandler, MouseEvent, MouseEventHandler } from 'react';
+import React, {
+    AnchorHTMLAttributes,
+    KeyboardEvent,
+    KeyboardEventHandler,
+    MouseEvent,
+    MouseEventHandler,
+    ReactElement,
+} from 'react';
 
 import noop from 'lodash/noop';
 
@@ -82,7 +89,7 @@ const Tab: React.FC<TabProps> = ({
     label = DEFAULT_PROPS.label,
     onTabClick = DEFAULT_PROPS.onTabClick,
     ...props
-}: TabProps): React.ReactElement => {
+}: TabProps): ReactElement => {
     const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
 
     const handleTabClick: MouseEventHandler = (event: MouseEvent<HTMLElement>): void => {

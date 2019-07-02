@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -57,7 +57,7 @@ const ListSubheader: React.FC<ListSubheaderProps> = ({
     children,
     className = '',
     ...props
-}: ListSubheaderProps): React.ReactElement => {
+}: ListSubheaderProps): ReactElement => {
     return (
         <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
             {children}

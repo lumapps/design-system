@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, ReactElement, useState } from 'react';
 
 import { Checkbox, CheckboxTheme } from 'LumX';
 import { CheckboxHelper } from 'LumX/components/checkbox/react/CheckboxHelper';
@@ -20,7 +20,7 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [checkboxes, setCheckboxes]: [boolean[], React.Dispatch<React.SetStateAction<boolean[]>>] = useState([
         true,
         false,

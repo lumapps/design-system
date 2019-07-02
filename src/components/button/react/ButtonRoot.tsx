@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -67,7 +67,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param props The children and props of the component.
  * @return The processed children of the component.
  */
-function _validate(props: ButtonRootProps): React.ReactNode {
+function _validate(props: ButtonRootProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         minChildren: 1,
         props,
@@ -89,8 +89,8 @@ const ButtonRoot: React.FC<ButtonRootProps> = ({
     href,
     target,
     ...props
-}: ButtonRootProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+}: ButtonRootProps): ReactElement => {
+    const newChildren: ReactNode = _validate({ children, ...props });
 
     if (isEmpty(href)) {
         return (

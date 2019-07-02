@@ -98,7 +98,7 @@ const ListItem: React.FC<ListItemProps> = ({
     onItemSelected,
     before,
     ...props
-}: ListItemProps): React.ReactElement => {
+}: ListItemProps): ReactElement => {
     const element: React.MutableRefObject<HTMLLIElement | null> = useRef(null);
 
     useEffect(() => {

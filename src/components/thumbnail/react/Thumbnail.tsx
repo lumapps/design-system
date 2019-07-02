@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -118,7 +118,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     variant = DEFAULT_PROPS.variant,
     image,
     ...props
-}: ThumbnailProps): React.ReactElement => {
+}: ThumbnailProps): ReactElement => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };

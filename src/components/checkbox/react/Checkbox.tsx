@@ -1,4 +1,4 @@
-import React, { Children, cloneElement } from 'react';
+import React, { Children, ReactElement, cloneElement } from 'react';
 
 import noop from 'lodash/noop';
 
@@ -83,7 +83,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     onChange = DEFAULT_PROPS.onChange,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: CheckboxProps): React.ReactElement => {
+}: CheckboxProps): ReactElement => {
     const checkboxId: string = uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange: () => void = (): void => {
         onChange!({ checked: !checked });

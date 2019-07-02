@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement, ReactNode } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -21,7 +21,7 @@ interface IProps extends IGenericProps {
     /**
      * The description of the demo.
      */
-    children?: React.ReactNode;
+    children?: ReactNode;
 
     /**
      * The title of the demo.
@@ -38,11 +38,7 @@ interface IProps extends IGenericProps {
  *
  * @return The demo header component.
  */
-const DemoHeader: React.FC<IProps> = ({
-    category,
-    children: description,
-    demoTitle: title,
-}: IProps): React.ReactElement => (
+const DemoHeader: React.FC<IProps> = ({ category, children: description, demoTitle: title }: IProps): ReactElement => (
     <Fragment>
         <div lumx-grid-container="row">
             {!isEmpty(category) && (

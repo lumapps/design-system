@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -79,7 +79,7 @@ const Avatar: React.FC<AvatarProps> = ({
     theme = DEFAULT_PROPS.theme,
     image,
     ...props
-}: AvatarProps): React.ReactElement => {
+}: AvatarProps): ReactElement => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
@@ -87,7 +87,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Button {...props} />);
 
@@ -117,7 +117,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it('should render correctly a <span> label', (): void => {
-            const children: React.ReactNode = <span>{DEFAULT_LABEL}</span>;
+            const children: ReactNode = <span>{DEFAULT_LABEL}</span>;
 
             const { buttonRoot, icon, wrapper }: ISetup = setup({ children });
             expect(wrapper).toMatchSnapshot();

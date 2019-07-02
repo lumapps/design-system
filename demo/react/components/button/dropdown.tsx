@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
 import { ButtonEmphasises, ButtonTheme, ButtonThemes, DropdownButton } from 'LumX';
 import { mdiPencil } from 'LumX/icons';
@@ -19,7 +19,7 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const onClick: (splitted: boolean) => void = (splitted: boolean = false): (() => void) => {
         return (): void => {
             console.info(`You click on a ${splitted ? 'splitted' : 'non-splitted'} dropdown button`);

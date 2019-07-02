@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -68,7 +68,7 @@ const Table: React.FC<TableProps> = ({
     hasDividers,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: TableProps): React.ReactElement => (
+}: TableProps): ReactElement => (
     <table className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasDividers, theme }))} {...props}>
         {children}
     </table>

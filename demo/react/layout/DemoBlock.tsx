@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, ReactElement, ReactNode, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -31,7 +31,7 @@ interface IProps extends IGenericProps {
     /**
      * The description of the demo block.
      */
-    children?: React.ReactNode;
+    children?: ReactNode;
 
     /**
      * The full name of the demo. When adding the '.tsx' extension, this will give the name of the file to load to
@@ -147,7 +147,7 @@ const DemoBlock: React.FC<IProps> = ({
     demoName,
     demoPath,
     files = [],
-}: IProps): React.ReactElement => {
+}: IProps): ReactElement => {
     const [theme, setTheme]: [Theme, (theme: Theme) => void] = useState(Themes.light);
     /**
      * Enable/disable the dark theme.
@@ -223,7 +223,7 @@ const DemoBlock: React.FC<IProps> = ({
                     {shouldDisplayCode && (
                         <div className="main-block__code">
                             {demoSources.map(
-                                (demoSource: string, index: number): React.ReactNode => {
+                                (demoSource: string, index: number): ReactElement => {
                                     return (
                                         <div
                                             key={sourceFilesToLoad[index]}

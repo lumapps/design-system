@@ -1,4 +1,4 @@
-import React<% if (validateComponent && checkChildrenNumber) {%>, { Fragment }<% } %> from 'react';
+import React<% if (validateComponent && checkChildrenNumber) {%>, { Fragment, ReactNode, ReactElement }<% } %> from 'react';
 
 import { mount, shallow } from 'enzyme';
 <%_ if (validateComponent && checkChildrenTypes) { -%>
@@ -49,7 +49,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<<%= componentName %> {...props} />);
 
@@ -133,7 +133,7 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         });
 
         it('should fail when more than 2 children are given', (): void => {
-            const children: React.ReactNode = (
+            const children: ReactNode = (
                 <Fragment>
                     <span>Label</span>
                     <span>Label 2</span>
@@ -154,7 +154,7 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         it('should fail when anything else than text, <span> or <p> is given as child', (): void => {
             mockConsole('debug');
 
-            const children: React.ReactNode = <div>Label</div>;
+            const children: ReactNode = <div>Label</div>;
 
             expect(
                 (): void => {

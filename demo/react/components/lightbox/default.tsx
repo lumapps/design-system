@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useRef, useState } from 'react';
+import React, { Fragment, ReactElement, useCallback, useRef, useState } from 'react';
 
 import { Button, ImageBlock, ImageBlockProps, Lightbox, LightboxTheme, Slideshow, SlideshowItem, Themes } from 'LumX';
 import { Alignments } from 'LumX/components';
@@ -28,7 +28,7 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [isOpened, setIsOpened]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
 
     // tslint:disable-next-line: no-any

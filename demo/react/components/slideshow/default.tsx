@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import { ImageBlock, ImageBlockCaptionPositions, ImageBlockProps, Slideshow, Theme, ThumbnailAspectRatios } from 'LumX';
 import { SlideshowItem } from 'LumX/components/slideshow/react/SlideshowItem';
@@ -34,7 +34,7 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <div style={slideshowWrapperStyle}>
         <Slideshow activeIndex={3} hasControls={true} theme={theme} autoPlay={true} groupBy={1} style={slideshowStyle}>
             <SlideshowItem>

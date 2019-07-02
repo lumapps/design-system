@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -49,11 +49,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
  *
  * @return The component.
  */
-const TableRow: React.FC<TableRowProps> = ({
-    children,
-    className = '',
-    ...props
-}: TableRowProps): React.ReactElement => (
+const TableRow: React.FC<TableRowProps> = ({ children, className = '', ...props }: TableRowProps): ReactElement => (
     <tr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {children}
     </tr>

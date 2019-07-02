@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, ReactElement, ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -42,7 +42,7 @@ interface IProps extends IGenericProps {
     /**
      * Contains the dropdown element to display when the icon is clicked.
      */
-    dropdown?: React.ReactNode;
+    dropdown?: ReactNode;
 
     /**
      * The left icon.
@@ -158,7 +158,7 @@ function _preValidate({ props }: ValidateParameters): string | boolean | void {
  * @param props The children and props of the component.
  * @return     The processed children of the component.
  */
-function _validate(props: DropdownButtonProps): React.ReactNode {
+function _validate(props: DropdownButtonProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: 2,
         postValidate: _postValidate,
@@ -192,12 +192,12 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     rightIcon = '',
     splitted = DEFAULT_PROPS.splitted,
     ...props
-}: DropdownButtonProps): React.ReactElement => {
+}: DropdownButtonProps): ReactElement => {
     const [isDropdownOpened, setIsDropdownOpened]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<
         boolean
     >(false);
 
-    const newChildren: React.ReactNode = _validate({
+    const newChildren: ReactNode = _validate({
         children,
         dropdown,
         icon,
@@ -223,7 +223,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
         }
     };
 
-    let rootElement: React.ReactNode;
+    let rootElement: ReactElement;
     const extendedClassNames: string = classNames(className, CLASSNAME, { [`${CLASSNAME}--is-splitted`]: splitted });
 
     if (splitted) {

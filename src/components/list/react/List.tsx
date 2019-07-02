@@ -1,4 +1,4 @@
-import React, { cloneElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -75,7 +75,7 @@ const List: React.FC<ListProps> = ({
     onListItemSelected,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ListProps): React.ReactElement => {
+}: ListProps): ReactElement => {
     // tslint:disable-next-line: typedef
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     // tslint:disable-next-line: typedef

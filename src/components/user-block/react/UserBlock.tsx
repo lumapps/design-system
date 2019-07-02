@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -30,9 +30,9 @@ interface IUserBlockProps extends IGenericProps {
     /* Avatar image. */
     avatar?: string;
     /* Simple Action block. */
-    simpleAction?: React.ReactNode;
+    simpleAction?: ReactNode;
     /* Multiple Actions block. */
-    multipleActions?: React.ReactNode;
+    multipleActions?: ReactNode;
     /* Additionnal fields used to describe the use. */
     fields?: string[];
     /* User name. */
@@ -103,7 +103,7 @@ const UserBlock: React.FC<IUserBlockProps> = ({
     simpleAction,
     multipleActions,
     size = DEFAULT_PROPS.size,
-}: IUserBlockProps): React.ReactElement => {
+}: IUserBlockProps): ReactElement => {
     let componentSize: Sizes | undefined = size;
 
     // Special case - When using vertical orientation force the size to be Sizes.l.
@@ -113,7 +113,7 @@ const UserBlock: React.FC<IUserBlockProps> = ({
 
     const shouldDisplayActions: boolean = orientation === Orientations.vertical;
 
-    const nameBlock: React.ReactNode = name && (
+    const nameBlock: ReactNode = name && (
         <span
             className={`${CLASSNAME}__name`}
             onMouseEnter={onMouseEnter}
@@ -125,7 +125,7 @@ const UserBlock: React.FC<IUserBlockProps> = ({
         </span>
     );
 
-    const fieldsBlock: React.ReactNode = fields && componentSize !== Sizes.s && (
+    const fieldsBlock: ReactNode = fields && componentSize !== Sizes.s && (
         <div className={`${CLASSNAME}__fields`}>
             {fields.map((aField: string, idx: number) => (
                 <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>

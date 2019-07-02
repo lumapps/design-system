@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
@@ -98,7 +98,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param props The children and props of the component.
  * @return    The processed children of the component.
  */
-function _validate(props: SwitchProps): React.ReactNode {
+function _validate(props: SwitchProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         allowedTypes: ['text', <span />],
         maxChildren: 1,
@@ -123,10 +123,10 @@ const Switch: React.FC<SwitchProps> = ({
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SwitchProps): React.ReactElement => {
+}: SwitchProps): ReactElement => {
     const switchId: string = uuid();
 
-    const newChildren: React.ReactNode = _validate({ children, checked, helper, position, theme, ...props });
+    const newChildren: ReactNode = _validate({ children, checked, helper, position, theme, ...props });
 
     const [isChecked, setIsChecked]: [boolean, (isChecked: boolean) => void] = useState(Boolean(checked));
     /**

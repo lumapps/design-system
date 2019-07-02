@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import { Placements, Popover, PopperOffsets } from 'LumX';
 
@@ -46,11 +46,11 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'center',
 };
 
-const createDemoAnchor: () => ReactNode = (): ReactNode => {
+const createDemoAnchor = (): ReactElement => {
     return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
 };
 
-const createPopper: () => ReactNode = (): ReactNode => {
+const createPopper = (): ReactElement => {
     return <div style={demoPopperStyle}>{`This popper is placed using a 'vertical' and a 'horizontal' offset`}</div>;
 };
 
@@ -64,7 +64,7 @@ const offsets: PopperOffsets = { horizontal: -60, vertical: 30 };
  * @return The demo component.
  */
 // tslint:disable-next-line: typedef
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = (): ReactElement => {
     return (
         <div style={demoPopoverHolderStyle}>
             <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Ramdom element`}</div>

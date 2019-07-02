@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 /////////////////////////////
 //                         //
 //    Public attributes    //
@@ -13,7 +15,7 @@ interface IDemoObject {
     /**
      * The description of the demo.
      */
-    description?: React.ReactNode;
+    description?: ReactNode;
 
     /**
      * A list of complementary files to load when displaying the source code.

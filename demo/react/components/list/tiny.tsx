@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
 import {
     Button,
@@ -45,7 +45,7 @@ const onItemSelectedHandler: (data: any) => void = (data: any): void => {
  * @return The demo component.
  */
 // tslint:disable: jsx-no-lambda typedef
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <Fragment>
         <List theme={theme} isClickable onListItemSelected={onListItemSelectedHandler}>
             <ListSubheader>text only</ListSubheader>

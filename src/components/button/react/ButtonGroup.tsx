@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -56,7 +56,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
  * @param props The children and props of the component.
  * @return    The processed children of the component.
  */
-function _validate(props: ButtonGroupProps): React.ReactNode {
+function _validate(props: ButtonGroupProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         allowedTypes: [IconButton, Button],
         maxChildren: 2,
@@ -78,8 +78,8 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({
     children,
     className = '',
     ...props
-}: ButtonGroupProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children });
+}: ButtonGroupProps): ReactElement => {
+    const newChildren: ReactNode = _validate({ children });
 
     return (
         <div className={classNames(className, CLASSNAME)} {...props}>

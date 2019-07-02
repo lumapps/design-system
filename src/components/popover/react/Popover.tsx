@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { ReactElement, ReactNode, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -238,7 +238,7 @@ const Popover: React.FC<PopoverProps> = ({
     showPopper,
     tooltipShowHideDelay = DEFAULT_PROPS.tooltipShowHideDelay,
     useTooltipMode = DEFAULT_PROPS.useTooltipMode,
-}: PopoverProps): React.ReactElement => {
+}: PopoverProps): ReactElement => {
     const [autoShowPopper, setAutoShowPopper]: [boolean, (autoShowPopper: boolean) => void] = useState(Boolean(false));
 
     const autoShowDelayer: React.MutableRefObject<number> = useRef(0);
@@ -280,7 +280,7 @@ const Popover: React.FC<PopoverProps> = ({
     return (
         <Manager>
             <Reference>
-                {({ ref }: ReferenceChildrenProps): ReactNode => (
+                {({ ref }: ReferenceChildrenProps): ReactElement => (
                     <div
                         ref={(elm: HTMLDivElement | null): void => {
                             anchorRef = elm;
@@ -296,7 +296,7 @@ const Popover: React.FC<PopoverProps> = ({
             </Reference>
             {(unwrap(showPopper) || (unwrap(useTooltipMode) && autoShowPopper)) && (
                 <Popper placement={popperPlacement as Placements} modifiers={modifiers}>
-                    {({ ref, style, arrowProps, ...others }: PopperChildrenProps): ReactNode => {
+                    {({ ref, style, arrowProps, ...others }: PopperChildrenProps): ReactElement => {
                         const computedOffsets: Position = popperPlacement
                             ? computeOffsets(others.placement, popperPlacement as Placements, popperOffset)
                             : {};

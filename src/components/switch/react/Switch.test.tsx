@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
@@ -73,7 +73,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Switch {...props} />);
 
@@ -227,7 +227,7 @@ describe(`<${Switch.displayName}>`, (): void => {
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', (): void => {
         it('should fail when more than one child is given', (): void => {
-            const children: React.ReactNode = (
+            const children: ReactNode = (
                 <Fragment>
                     Label
                     <span>Label 2</span>
@@ -244,7 +244,7 @@ describe(`<${Switch.displayName}>`, (): void => {
         it('should fail when anything else than a text or a <span> is given', (): void => {
             mockConsole('debug');
 
-            const children: React.ReactNode = <div>Label</div>;
+            const children: ReactNode = <div>Label</div>;
 
             expect(
                 (): void => {

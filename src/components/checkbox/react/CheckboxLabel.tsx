@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react';
+import React, { ReactChild, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -61,7 +61,7 @@ const CheckboxLabel: React.FC<CheckboxLabelProps> = ({
     children = DEFAULT_PROPS.children,
     className = '',
     ...props
-}: CheckboxLabelProps): React.ReactElement => {
+}: CheckboxLabelProps): ReactElement => {
     return (
         <label
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}

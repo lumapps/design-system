@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, ReactElement } from 'react';
 
 import { Orientations } from 'LumX/components';
 
@@ -58,7 +58,7 @@ const createMultipleActions: React.FC<ButtonThemes> = (
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <Fragment>
         <UserBlock
             theme={theme}

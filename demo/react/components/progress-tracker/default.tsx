@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, ReactElement, useState } from 'react';
 
 import { ProgressTracker, ProgressTrackerStep, Theme } from 'LumX';
 
@@ -18,7 +18,7 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     // tslint:disable-next-line: typedef
     const [activeIndex, setActiveIndex] = useState(2);
 
