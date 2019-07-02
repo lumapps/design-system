@@ -67,7 +67,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly an icon button', (): void => {
-            const { button, wrapper }: ISetup = setup();
+            const { button, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(button).toExist();
@@ -82,7 +82,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { button, props }: ISetup = setup();
+            const { button, props } = setup();
 
             expect(button).toHaveProp('leftIcon', props.icon);
             expect(button).toHaveProp('variant', ButtonVariants.icon);
@@ -97,7 +97,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
                 variant: ButtonVariants.icon,
             };
 
-            let { button }: ISetup = setup(modifiedProps);
+            let { button } = setup(modifiedProps);
 
             expect(button).toHaveProp('variant', ButtonVariants.icon);
 
@@ -124,7 +124,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button } = setup(modifiedProps);
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {

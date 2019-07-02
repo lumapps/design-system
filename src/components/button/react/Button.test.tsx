@@ -105,7 +105,7 @@ describe(`<${Button.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a text label', (): void => {
-            const { buttonRoot, icon, wrapper }: ISetup = setup();
+            const { buttonRoot, icon, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
@@ -119,7 +119,7 @@ describe(`<${Button.displayName}>`, (): void => {
         it('should render correctly a <span> label', (): void => {
             const children: ReactNode = <span>{DEFAULT_LABEL}</span>;
 
-            const { buttonRoot, icon, wrapper }: ISetup = setup({ children });
+            const { buttonRoot, icon, wrapper } = setup({ children });
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
@@ -131,7 +131,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it('should render correctly a left icon and a text label', (): void => {
-            const { buttonRoot, icon, wrapper }: ISetup = setup({ leftIcon: mdiPlus });
+            const { buttonRoot, icon, wrapper } = setup({ leftIcon: mdiPlus });
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
@@ -144,7 +144,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it('should render correctly a left icon and a <span> label', (): void => {
-            const { buttonRoot, icon, wrapper }: ISetup = setup({
+            const { buttonRoot, icon, wrapper } = setup({
                 children: <span>{DEFAULT_LABEL}</span>,
                 leftIcon: mdiPlus,
             });
@@ -160,7 +160,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it('should render correctly a text label and a right icon', (): void => {
-            const { buttonRoot, icon, wrapper }: ISetup = setup({ rightIcon: mdiChevronDown });
+            const { buttonRoot, icon, wrapper } = setup({ rightIcon: mdiChevronDown });
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
@@ -173,7 +173,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it('should render correctly a <span> label and a right icon', (): void => {
-            const { buttonRoot, icon, wrapper }: ISetup = setup({
+            const { buttonRoot, icon, wrapper } = setup({
                 children: <span>{DEFAULT_LABEL}</span>,
                 rightIcon: mdiChevronDown,
             });
@@ -189,7 +189,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it('should render correctly two icons and a text label', (): void => {
-            const { buttonRoot, icon, wrapper }: ISetup = setup({ leftIcon: mdiPlus, rightIcon: mdiChevronDown });
+            const { buttonRoot, icon, wrapper } = setup({ leftIcon: mdiPlus, rightIcon: mdiChevronDown });
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
@@ -202,7 +202,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it('should render correctly two icons and a <span> label', (): void => {
-            const { buttonRoot, icon, wrapper }: ISetup = setup({
+            const { buttonRoot, icon, wrapper } = setup({
                 children: <span>{DEFAULT_LABEL}</span>,
                 leftIcon: mdiPlus,
                 rightIcon: mdiChevronDown,
@@ -221,7 +221,7 @@ describe(`<${Button.displayName}>`, (): void => {
         it("should render correctly an icon button with the 'button' `variant`", (): void => {
             mockConsole('info');
 
-            let { buttonRoot, icon, wrapper }: ISetup = setup({ children: null, leftIcon: mdiPlus });
+            let { buttonRoot, icon, wrapper } = setup({ children: null, leftIcon: mdiPlus });
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
@@ -243,7 +243,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it("should render correctly an icon button with the 'icon' `variant`", (): void => {
-            let { buttonRoot, icon, wrapper }: ISetup = setup({
+            let { buttonRoot, icon, wrapper } = setup({
                 children: null,
                 leftIcon: mdiPlus,
                 variant: Variants.icon,
@@ -278,7 +278,7 @@ describe(`<${Button.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { buttonRoot }: ISetup = setup();
+            const { buttonRoot } = setup();
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
@@ -306,7 +306,7 @@ describe(`<${Button.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            let { buttonRoot }: ISetup = setup({ children: null, ...modifiedProps });
+            let { buttonRoot } = setup({ children: null, ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -409,7 +409,7 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it("should not have any `theme` in 'low' or 'medium' `emphasis` but one in 'high'", (): void => {
-            let { buttonRoot }: ISetup = setup({ emphasis: Emphasises.high });
+            let { buttonRoot } = setup({ emphasis: Emphasises.high });
 
             expect(buttonRoot.prop('className') as string).toContain(
                 getBasicClass({ prefix: CLASSNAME, type: 'theme', value: '' }),
@@ -437,7 +437,7 @@ describe(`<${Button.displayName}>`, (): void => {
                 className: 'component component--is-tested',
             };
 
-            let { buttonRoot }: ISetup = setup({ leftIcon: mdiPlus, ...modifiedProps });
+            let { buttonRoot } = setup({ leftIcon: mdiPlus, ...modifiedProps });
 
             expect(buttonRoot).toHaveClassName(modifiedProps.className);
 
@@ -551,7 +551,7 @@ describe(`<${Button.displayName}>`, (): void => {
                 emphasis: Emphasises.high,
             };
 
-            let { buttonRoot }: ISetup = setup(modifiedProps);
+            let { buttonRoot } = setup(modifiedProps);
             expect(buttonRoot).toHaveClassName(
                 getBasicClass({ prefix: CLASSNAME, type: 'theme', value: DEFAULT_PROPS.theme }),
             );
@@ -580,19 +580,19 @@ describe(`<${Button.displayName}>`, (): void => {
         });
 
         it('should only have the "left-icon" CSS class when a left icon is passed in a \'button\' `variant`', (): void => {
-            const { buttonRoot }: ISetup = setup({ leftIcon: mdiPlus });
+            const { buttonRoot } = setup({ leftIcon: mdiPlus });
             expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-left-icon`);
             expect(buttonRoot).not.toHaveClassName(`${CLASSNAME}--has-right-icon`);
         });
 
         it('should only have the "right-icon" CSS class when a right icon is passed in a \'button\' `variant`', (): void => {
-            const { buttonRoot }: ISetup = setup({ rightIcon: mdiChevronDown });
+            const { buttonRoot } = setup({ rightIcon: mdiChevronDown });
             expect(buttonRoot).not.toHaveClassName(`${CLASSNAME}--has-left-icon`);
             expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-right-icon`);
         });
 
         it('should have both "left-icon" and "right-icon" CSS classes when both left and right icons are passed in a \'button\' `variant`', (): void => {
-            const { buttonRoot }: ISetup = setup({ leftIcon: mdiPlus, rightIcon: mdiChevronDown });
+            const { buttonRoot } = setup({ leftIcon: mdiPlus, rightIcon: mdiChevronDown });
             expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-left-icon`);
             expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-right-icon`);
         });

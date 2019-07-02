@@ -94,7 +94,7 @@ const useTooltipPosition: (
     // tslint:disable-next-line: no-any
     dependencies: any[] = [placement, anchorRef, tooltipRef],
 ): Position => {
-    const [position, setPosition]: [Position, React.Dispatch<React.SetStateAction<Position>>] = useState<Position>({
+    const [position, setPosition] = useState<Position>({
         x: 0,
         y: 0,
     });
@@ -104,7 +104,7 @@ const useTooltipPosition: (
             return;
         }
 
-        const { top, left, width, height }: ClientRect | DOMRect = anchorRef.current!.getBoundingClientRect();
+        const { top, left, width, height } = anchorRef.current!.getBoundingClientRect();
         const {
             width: widthTooltip,
             height: heightTooltip,
@@ -156,7 +156,7 @@ const useArrowPosition: (
     // tslint:disable-next-line: no-any
     dependencies: any[] = [placement, tooltipRef],
 ): Position => {
-    const [position, setPosition]: [Position, React.Dispatch<React.SetStateAction<Position>>] = useState<Position>({
+    const [position, setPosition] = useState<Position>({
         x: 0,
         y: 0,
     });
@@ -209,9 +209,9 @@ const Tooltip: React.FC<TooltipProps> = ({
     placement = DEFAULT_PROPS.placement,
     ...props
 }: TooltipProps): ReactElement => {
-    const [timer, setTimer]: [number, React.Dispatch<React.SetStateAction<number>>] = useState<number>(0);
+    const [timer, setTimer] = useState(0);
     const tooltipRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-    const [isOpen, setIsOpen]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     /**
      * Handle mouse over anchor element.

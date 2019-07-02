@@ -239,7 +239,7 @@ const Popover: React.FC<PopoverProps> = ({
     tooltipShowHideDelay = DEFAULT_PROPS.tooltipShowHideDelay,
     useTooltipMode = DEFAULT_PROPS.useTooltipMode,
 }: PopoverProps): ReactElement => {
-    const [autoShowPopper, setAutoShowPopper]: [boolean, (autoShowPopper: boolean) => void] = useState(Boolean(false));
+    const [autoShowPopper, setAutoShowPopper] = useState(false);
 
     const autoShowDelayer: React.MutableRefObject<number> = useRef(0);
 

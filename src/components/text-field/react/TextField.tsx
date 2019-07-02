@@ -91,8 +91,8 @@ const TextField: React.FC<TextFieldProps> = ({
     theme = Themes.light,
     ...props
 }: TextFieldProps): ReactElement => {
-    const [hasFocus, setHasFocus]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
-    const [hasValue, setHasValue]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+    const [hasFocus, setHasFocus] = useState(false);
+    const [hasValue, setHasValue] = useState(false);
 
     /**
      * Handle change event on input.

@@ -2,7 +2,7 @@ import React, { Fragment, ReactElement, useEffect, useState } from 'react';
 
 import last from 'lodash/last';
 
-import { DEFAULT_THEME, Theme } from '../constants';
+import { DEFAULT_THEME } from '../constants';
 import { changeTheme as _changeTheme } from '../utils';
 
 import { ErrorBoundary } from './ErrorBoundary';
@@ -21,11 +21,9 @@ import { SubNav } from './layout/SubNav';
  * @return The main application component.
  */
 const App: React.FC = (): ReactElement => {
-    const [activeComponent, setActiveComponent]: [string, (activeComponent: string) => void] = useState(
-        last(window.location.pathname.split('/')) || '',
-    );
-    const [theme, changeTheme]: [Theme, (theme: Theme) => void] = useState(DEFAULT_THEME);
-    const [themeLoaded, setThemeLoaded]: [boolean, (isThemeLoaded: boolean) => void] = useState<boolean>(false);
+    const [activeComponent, setActiveComponent] = useState(last(window.location.pathname.split('/')) || '');
+    const [theme, changeTheme] = useState(DEFAULT_THEME);
+    const [themeLoaded, setThemeLoaded] = useState(false);
 
     useEffect((): void => {
         _changeTheme(theme).then(

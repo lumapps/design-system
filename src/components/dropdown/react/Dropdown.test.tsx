@@ -61,7 +61,7 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { dropdown, wrapper }: ISetup = setup();
+            const { dropdown, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(dropdown).toExist();
@@ -74,7 +74,7 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { dropdown }: ISetup = setup();
+            const { dropdown } = setup();
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {

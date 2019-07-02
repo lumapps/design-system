@@ -99,9 +99,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     const buttonRef: React.RefObject<any> = useRef(null);
     // tslint:disable-next-line: no-any
     const childrenRef: React.RefObject<any> = useRef(null);
-    const [isTrapActive, setTrapActive]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(
-        false,
-    );
+    const [isTrapActive, setTrapActive] = useState(false);
     const modalElement: Element | null = document.querySelector(`.${CLASSNAME}`);
 
     useEffect(() => {

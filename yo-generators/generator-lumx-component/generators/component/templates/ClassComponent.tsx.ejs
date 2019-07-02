@@ -77,9 +77,9 @@ class <%= componentName %> extends React.<%= componentType %>Component<<%= compo
         <%_ if (validateComponent) { -%>
         const newChildren: ReactNode = this.validate({ ...this.props });
 
-        const { className, ...props }: <%= componentName %>Props = this.props;
+        const { className, ...props } = this.props;
         <%_ } else { -%>
-        const { children, className, ...props }: <%= componentName %>Props = this.props;
+        const { children, className, ...props } = this.props;
         <%_ } -%>
 
         return (

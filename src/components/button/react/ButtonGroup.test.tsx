@@ -71,7 +71,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a group button', (): void => {
-            const { group, wrapper }: ISetup = setup();
+            const { group, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(group).toExist();

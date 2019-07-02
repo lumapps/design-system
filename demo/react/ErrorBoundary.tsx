@@ -36,7 +36,7 @@ class ErrorBoundary extends React.Component<{}, IState> {
     }
 
     public render(): ReactElement {
-        const { error, hasError }: IState = this.state;
+        const { error, hasError } = this.state;
 
         if (hasError) {
             return (

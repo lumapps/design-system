@@ -97,7 +97,7 @@ describe(`<${Switch.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly without any label', (): void => {
-            const { root, inputWrapper, input, content, wrapper }: ISetup = setup();
+            const { root, inputWrapper, input, content, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toExist();
@@ -111,7 +111,7 @@ describe(`<${Switch.displayName}>`, (): void => {
 
         it('should render correctly with only a `label`', (): void => {
             const props: ISetupProps = { children: 'Label' };
-            const { root, inputWrapper, input, content, helper, label, wrapper }: ISetup = setup(props);
+            const { root, inputWrapper, input, content, helper, label, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toExist();
@@ -129,7 +129,7 @@ describe(`<${Switch.displayName}>`, (): void => {
 
         it('should render correctly with a `label` and a `helper`', (): void => {
             const props: ISetupProps = { children: 'Label', helper: 'Helper' };
-            const { root, inputWrapper, input, content, helper, label, wrapper }: ISetup = setup(props);
+            const { root, inputWrapper, input, content, helper, label, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toExist();
@@ -152,7 +152,7 @@ describe(`<${Switch.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { root }: ISetup = setup();
+            const { root } = setup();
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
@@ -179,7 +179,7 @@ describe(`<${Switch.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { root }: ISetup = setup({ ...modifiedProps });
+            const { root } = setup({ ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -216,7 +216,7 @@ describe(`<${Switch.displayName}>`, (): void => {
         );
 
         it('should trigger `onToggle` when toggled', (): void => {
-            const { input }: ISetup = setup({ onToggle }, false);
+            const { input } = setup({ onToggle }, false);
 
             input.simulate('click');
             expect(onToggle).toHaveBeenCalled();
@@ -255,7 +255,7 @@ describe(`<${Switch.displayName}>`, (): void => {
 
         it('should not display the `helper` if no `label` is given', (): void => {
             const props: ISetupProps = { helper: 'Helper' };
-            const { content, wrapper }: ISetup = setup(props);
+            const { content, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
             expect(content).not.toExist();

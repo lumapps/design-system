@@ -59,7 +59,7 @@ describe(`<${CheckboxHelper.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { wrapper }: ISetup = setup();
+            const { wrapper } = setup();
 
             expect(wrapper).toMatchSnapshot();
             expect(wrapper).toExist();
@@ -78,7 +78,7 @@ describe(`<${CheckboxHelper.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
             expect(wrapper).toMatchSnapshot();
         });
     });

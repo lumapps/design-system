@@ -66,7 +66,7 @@ describe(`<${Tabs.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { wrapper }: ISetup = setup();
+            const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
@@ -93,7 +93,7 @@ describe(`<${Tabs.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -118,7 +118,7 @@ describe(`<${Tabs.displayName}>`, (): void => {
         );
 
         it('should trigger `onTabClick` when a child tab is clicked', (): void => {
-            const { wrapper }: ISetup = setup({ onTabClick }, false);
+            const { wrapper } = setup({ onTabClick }, false);
             const firstTab: Tab = wrapper.find('Tab[index=1]');
 
             firstTab.simulate('click');

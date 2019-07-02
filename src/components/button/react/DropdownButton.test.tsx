@@ -97,7 +97,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a non-splitted dropdown button', (): void => {
-            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup();
+            const { button, dropdown, group, iconButton, root, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(Button.displayName!);
@@ -114,7 +114,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         });
 
         it('should render correctly a non-splitted dropdown button with a preceding icon', (): void => {
-            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({ icon: mdiPlus });
+            const { button, dropdown, group, iconButton, root, wrapper } = setup({ icon: mdiPlus });
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(Button.displayName!);
@@ -133,7 +133,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         });
 
         it('should render correctly a splitted dropdown button', (): void => {
-            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({ splitted: true });
+            const { button, dropdown, group, iconButton, root, wrapper } = setup({ splitted: true });
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(ButtonGroup.displayName!);
@@ -150,7 +150,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         });
 
         it('should render correctly a splitted dropdown button with a preceding icon', (): void => {
-            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({
+            const { button, dropdown, group, iconButton, root, wrapper } = setup({
                 icon: mdiPlus,
                 splitted: true,
             });
@@ -176,7 +176,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { root }: ISetup = setup();
+            const { root } = setup();
 
             expect(root).toHaveDisplayName(Button.displayName!);
         });
@@ -189,7 +189,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
                 [testedProp]: ButtonVariants.button,
             };
 
-            let { button }: ISetup = setup(modifiedProps);
+            let { button } = setup(modifiedProps);
             expect(button).toHaveProp(testedProp, ButtonVariants.button);
 
             /////////////////////////////
@@ -228,7 +228,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            let { button }: ISetup = setup(modifiedProps);
+            let { button } = setup(modifiedProps);
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -253,7 +253,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
                 [testedProp]: 'is coming',
             };
 
-            let { button, iconButton }: ISetup = setup(modifiedProps);
+            let { button, iconButton } = setup(modifiedProps);
 
             expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
 
@@ -280,8 +280,8 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
         it('should both trigger `onClick` and toggle the dropdown when the button is clicked in non-splitted mode', (): void => {
             const setupReturn: ISetup = setup({ onClick }, false);
-            const { button, wrapper }: ISetup = setupReturn;
-            let { dropdown }: ISetup = setupReturn;
+            const { button, wrapper } = setupReturn;
+            let { dropdown } = setupReturn;
 
             expect(dropdown).not.toExist();
 
@@ -294,8 +294,8 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
         it('should only trigger `onClick` when the label button is clicked in splitted mode', (): void => {
             const setupReturn: ISetup = setup({ splitted: true, onClick }, false);
-            const { button, wrapper }: ISetup = setupReturn;
-            let { dropdown }: ISetup = setupReturn;
+            const { button, wrapper } = setupReturn;
+            let { dropdown } = setupReturn;
 
             expect(dropdown).not.toExist();
 
@@ -308,8 +308,8 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
         it('should only toggle the dropdown when the dropdown (icon) button is clicked in splitted mode', (): void => {
             const setupReturn: ISetup = setup({ splitted: true, onClick }, false);
-            const { iconButton, wrapper }: ISetup = setupReturn;
-            let { dropdown }: ISetup = setupReturn;
+            const { iconButton, wrapper } = setupReturn;
+            let { dropdown } = setupReturn;
 
             expect(dropdown).not.toExist();
 

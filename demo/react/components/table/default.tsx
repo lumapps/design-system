@@ -10,7 +10,7 @@ import {
     ThScope,
 } from 'LumX';
 
-import React, { Dispatch, ReactElement, SetStateAction, useCallback, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 
 import orderBy from 'lodash/orderBy';
 
@@ -121,7 +121,7 @@ const tableHead: IHead[] = [
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    const [dataTableBody, setTable]: [IBody[], Dispatch<SetStateAction<IBody[]>>] = useState(tableBody);
+    const [dataTableBody, setTable] = useState(tableBody);
 
     /**
      * Update the sorting of the table.

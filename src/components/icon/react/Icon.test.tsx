@@ -75,7 +75,7 @@ describe(`<${Icon.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { i, path, svg, wrapper }: ISetup = setup();
+            const { i, path, svg, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(i).toExist();
@@ -91,7 +91,7 @@ describe(`<${Icon.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it("shouldn't use any default props", (): void => {
-            const { i }: ISetup = setup();
+            const { i } = setup();
 
             ['color', 'size'].forEach(
                 (prop: string): void => {
@@ -110,7 +110,7 @@ describe(`<${Icon.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { i, path }: ISetup = setup({ ...modifiedProps });
+            const { i, path } = setup({ ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {

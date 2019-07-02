@@ -61,7 +61,7 @@ describe(`<${Divider.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { hr, wrapper }: ISetup = setup();
+            const { hr, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(hr).toExist();
@@ -74,7 +74,7 @@ describe(`<${Divider.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { hr }: ISetup = setup();
+            const { hr } = setup();
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
@@ -91,7 +91,7 @@ describe(`<${Divider.displayName}>`, (): void => {
                 [testedProp]: Themes.dark,
             };
 
-            const { hr }: ISetup = setup(modifiedProps);
+            const { hr } = setup(modifiedProps);
 
             expect(hr).toHaveClassName(
                 getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),

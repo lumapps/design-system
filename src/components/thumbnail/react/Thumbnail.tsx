@@ -123,7 +123,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         backgroundImage: `url(${image})`,
     };
 
-    const { alt = 'Thumbnail', onClick = null, ...restProps }: IDefaultPropsType = props;
+    const { alt = 'Thumbnail', onClick = null, ...restProps } = props;
 
     return (
         <div

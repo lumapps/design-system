@@ -61,7 +61,7 @@ describe(`<${Tab.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { wrapper }: ISetup = setup();
+            const { wrapper } = setup();
 
             expect(wrapper).toMatchSnapshot();
             expect(wrapper).toExist();
@@ -82,7 +82,7 @@ describe(`<${Tab.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
             expect(wrapper).toMatchSnapshot();
         });
 
@@ -94,7 +94,7 @@ describe(`<${Tab.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -119,21 +119,21 @@ describe(`<${Tab.displayName}>`, (): void => {
         );
 
         it('should trigger `onTabClick` when clicked', (): void => {
-            const { wrapper }: ISetup = setup({ index: 7, onTabClick }, false);
+            const { wrapper } = setup({ index: 7, onTabClick }, false);
 
             wrapper.simulate('click');
             expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 7 });
         });
 
         it('should trigger `onTabClick` when pressing `enter` key', (): void => {
-            const { wrapper }: ISetup = setup({ index: 9, onTabClick }, false);
+            const { wrapper } = setup({ index: 9, onTabClick }, false);
 
             wrapper.simulate('keypress', { keyCode: 13 });
             expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 9 });
         });
 
         it('should not trigger `onTabClick` when pressing any other key', (): void => {
-            const { wrapper }: ISetup = setup({ index: 10, onTabClick }, false);
+            const { wrapper } = setup({ index: 10, onTabClick }, false);
 
             wrapper.simulate('keypress', { keyCode: 12 });
             expect(onTabClick).not.toHaveBeenCalled();

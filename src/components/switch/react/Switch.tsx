@@ -128,7 +128,7 @@ const Switch: React.FC<SwitchProps> = ({
 
     const newChildren: ReactNode = _validate({ children, checked, helper, position, theme, ...props });
 
-    const [isChecked, setIsChecked]: [boolean, (isChecked: boolean) => void] = useState(Boolean(checked));
+    const [isChecked, setIsChecked] = useState(Boolean(checked));
     /**
      * Toggle the state of the <Switch> inner checkbox.
      */

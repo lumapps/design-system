@@ -81,7 +81,7 @@ async function _loadComponent(componentFolderName: IProps['activeComponent']): P
  * @return The main component.
  */
 const Main: React.FC<IProps> = ({ activeComponent }: IProps): ReactElement => {
-    const [demo, setDemo]: [IESModule | undefined, (demo: IESModule | undefined) => void] = useState();
+    const [demo, setDemo] = useState<IESModule>();
 
     useEffect((): void => {
         const loadComponent: () => Promise<void> = async (): Promise<void> => {
@@ -122,7 +122,7 @@ const Main: React.FC<IProps> = ({ activeComponent }: IProps): ReactElement => {
                 <div className="mt++">
                     {Object.keys(demo.demos).map(
                         (key: string, index: number): ReactElement => {
-                            const { description, files, title }: DemoObject = demo.demos[key];
+                            const { description, files, title } = demo.demos[key];
 
                             return (
                                 <DemoBlock

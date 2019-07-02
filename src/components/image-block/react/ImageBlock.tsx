@@ -112,7 +112,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     title = DEFAULT_PROPS.title,
     ...props
 }: ImageBlockProps): ReactElement => {
-    const { onClick = null, ...restProps }: IDefaultPropsType = props;
+    const { onClick = null, ...restProps } = props;
 
     return (
         <div

@@ -1,6 +1,6 @@
 import React, { Fragment, ReactElement, useState } from 'react';
 
-import { Button, Tabs, TabsProps, TabsTheme } from 'LumX';
+import { Button, Tabs, TabsTheme } from 'LumX';
 import { Tab } from 'LumX/components/tabs/react/Tab';
 import { mdiBowl, mdiBreadSliceOutline } from 'LumX/icons';
 
@@ -21,9 +21,7 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    const [activeTab, setActiveTab]: [TabsProps['activeTab'], React.Dispatch<React.SetStateAction<number>>] = useState(
-        0,
-    );
+    const [activeTab, setActiveTab] = useState(0);
 
     const handleTabClick: CallableFunction = ({ index }: { index: number }): void => {
         setActiveTab(index);

@@ -73,7 +73,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly as a button', (): void => {
-            const { a, button, wrapper }: ISetup = setup();
+            const { a, button, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(a).not.toExist();
@@ -81,7 +81,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         });
 
         it('should render correctly as a link', (): void => {
-            const { a, button, wrapper }: ISetup = setup({ href: TEST_URL });
+            const { a, button, wrapper } = setup({ href: TEST_URL });
             expect(wrapper).toMatchSnapshot();
 
             expect(a).toExist();
@@ -98,7 +98,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
                 disabled: 'true',
             };
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button } = setup(modifiedProps);
 
             expect(button).toBeDisabled();
 
@@ -106,7 +106,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             modifiedProps.href = TEST_URL;
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toBeDisabled();
         });
@@ -117,7 +117,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
                 [testedProp]: TEST_URL,
             };
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
@@ -129,7 +129,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
                 href: TEST_URL,
             };
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
@@ -139,7 +139,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
                 className: 'component component--is-tested',
             };
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button } = setup(modifiedProps);
 
             expect(button).toHaveClassName(modifiedProps.className);
 
@@ -147,7 +147,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             modifiedProps.href = TEST_URL;
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toHaveClassName(modifiedProps.className);
         });
@@ -158,7 +158,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
                 [testedProp]: 'is coming',
             };
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button } = setup(modifiedProps);
 
             expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
 
@@ -166,7 +166,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             modifiedProps.href = TEST_URL;
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
@@ -179,7 +179,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         const onClick: jest.Mock = jest.fn();
 
         it('should trigger `onClick` when the button is clicked', (): void => {
-            const { button }: ISetup = setup({ onClick });
+            const { button } = setup({ onClick });
 
             button.simulate('click');
             expect(onClick).toHaveBeenCalled();
@@ -188,7 +188,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             onClick.mockClear();
 
-            const { a }: ISetup = setup({ href: TEST_URL, onClick });
+            const { a } = setup({ href: TEST_URL, onClick });
 
             a.simulate('click');
             expect(onClick).toHaveBeenCalled();

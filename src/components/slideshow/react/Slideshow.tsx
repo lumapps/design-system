@@ -1,14 +1,4 @@
-import React, {
-    CSSProperties,
-    Dispatch,
-    ReactElement,
-    ReactNode,
-    SetStateAction,
-    useCallback,
-    useEffect,
-    useRef,
-    useState,
-} from 'react';
+import React, { CSSProperties, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -121,8 +111,8 @@ const Slideshow: React.FC<SlideshowProps> = ({
     }
 
     const newChildren: ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
-    const [currentIndex, setCurrentIndex]: [number, Dispatch<SetStateAction<number>>] = useState(activeIndex);
-    const [isAutoPlaying, setIsAutoPlaying]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(Boolean(autoPlay));
+    const [currentIndex, setCurrentIndex] = useState(activeIndex);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
     const parentRef: React.MutableRefObject<null> = useRef(null);
 
     /**

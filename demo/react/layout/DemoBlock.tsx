@@ -10,7 +10,7 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-import { Button, ButtonEmphasises, Switch, SwitchPositions, Theme, Themes } from 'LumX';
+import { Button, ButtonEmphasises, Switch, SwitchPositions, Themes } from 'LumX';
 import { IGenericProps } from 'LumX/core/react/utils';
 import { mdiCodeTags } from 'LumX/icons';
 
@@ -148,7 +148,7 @@ const DemoBlock: React.FC<IProps> = ({
     demoPath,
     files = [],
 }: IProps): ReactElement => {
-    const [theme, setTheme]: [Theme, (theme: Theme) => void] = useState(Themes.light);
+    const [theme, setTheme] = useState(Themes.light);
     /**
      * Enable/disable the dark theme.
      * This is the callback function of the `onClick` event of the theme <Switch>.
@@ -159,7 +159,7 @@ const DemoBlock: React.FC<IProps> = ({
         setTheme(enabled ? Themes.dark : Themes.light);
     };
 
-    const [shouldDisplayCode, setDisplayCode]: [boolean, (shouldDisplayCode: boolean) => void] = useState(false);
+    const [shouldDisplayCode, setDisplayCode] = useState(false);
     /**
      * Toggle the display of the code in the demo block.
      */
@@ -171,9 +171,7 @@ const DemoBlock: React.FC<IProps> = ({
         IESModule['default'] | undefined,
         (demoComponent: IESModule['default'] | undefined) => void
     ] = useState();
-    const [demoSources, setDemoSources]: [string[], (demoSources: string[]) => void] = useState([
-        'No source code for this demo...',
-    ]);
+    const [demoSources, setDemoSources] = useState(['No source code for this demo...']);
 
     const isThemeDark: boolean = theme === Themes.dark;
 

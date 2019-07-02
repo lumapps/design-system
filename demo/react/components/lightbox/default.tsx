@@ -29,7 +29,7 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    const [isOpened, setIsOpened]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+    const [isOpened, setIsOpened] = useState<boolean>(false);
 
     // tslint:disable-next-line: no-any
     const triggerElement: React.RefObject<any> = useRef(null);
