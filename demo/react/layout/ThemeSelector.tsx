@@ -22,13 +22,13 @@ interface IProps {
  * Display a select with the list of all available themes.
  * When a theme is selected, update the theme throughout the demo site and the components being demoed.
  *
- * @return {React.ReactElement} The theme selector component.
+ * @return The theme selector component.
  */
 const ThemeSelector: React.FC<IProps> = ({ changeTheme }: IProps): React.ReactElement => {
     /**
      * When the select is changed, call the function to change the theme.
      *
-     * @param {ChangeEvent<HTMLSelectElement>} evt The change event of the select element.
+     * @param evt The change event of the select element.
      */
     const handleChange: (evt: React.ChangeEvent<HTMLSelectElement>) => void = (
         evt: ChangeEvent<HTMLSelectElement>,

@@ -58,28 +58,16 @@ interface IDefaultPropsType extends Partial<ProgressTrackerStepProps> {
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ProgressTrackerStep`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStep`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     hasError: false,
@@ -94,7 +82,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Defines a step for the `ProgressTracker` element.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     className = '',
@@ -113,7 +101,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     /**
      * Provides correct icon depending on step's current status.
      *
-     * @return {string} The correct svg path.
+     * @return The correct svg path.
      */
     const getIcon: () => string = (): string => {
         if (isComplete) {

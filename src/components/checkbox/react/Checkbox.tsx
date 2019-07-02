@@ -51,28 +51,16 @@ interface IDefaultPropsType extends Partial<CheckboxProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Checkbox`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Checkbox`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     checked: false,
@@ -85,7 +73,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Defines a checkbox.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Checkbox: React.FC<CheckboxProps> = ({
     checked = DEFAULT_PROPS.checked,

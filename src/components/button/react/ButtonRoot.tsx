@@ -44,19 +44,11 @@ interface IDefaultPropsType extends Partial<ButtonRootProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ButtonRoot`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     buttonRef: undefined,
@@ -72,8 +64,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {ButtonRootProps} props The children and props of the component.
- * @return {React.ReactNode} The processed children of the component.
+ * @param props The children and props of the component.
+ * @return The processed children of the component.
  */
 function _validate(props: ButtonRootProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
@@ -88,7 +80,7 @@ function _validate(props: ButtonRootProps): React.ReactNode {
  * The root of the <Button> component.
  * Conditionally adds a `<a>` or a `<button>` HTML tag whether there is an `href` attribute or not.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ButtonRoot: React.FC<ButtonRootProps> = ({
     buttonRef = DEFAULT_PROPS.buttonRef,

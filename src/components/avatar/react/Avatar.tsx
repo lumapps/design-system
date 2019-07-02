@@ -51,28 +51,16 @@ interface IDefaultPropsType extends Partial<AvatarProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Avatar`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Avatar`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     size: Sizes.m,
@@ -83,7 +71,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Simple component used to identify user.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Avatar: React.FC<AvatarProps> = ({
     className = '',

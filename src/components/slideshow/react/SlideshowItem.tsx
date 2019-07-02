@@ -14,19 +14,11 @@ import { handleBasicClasses } from 'LumX/core/utils';
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}SlideshowItem`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowItem`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
@@ -40,8 +32,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {IGenericProps} props The children and props of the component.
- * @return {React.ReactNode}    The processed children of the component.
+ * @param props The children and props of the component.
+ * @return    The processed children of the component.
  */
 function _validate(props: IGenericProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
@@ -56,7 +48,7 @@ function _validate(props: IGenericProps): React.ReactNode {
 /**
  * Item of slideshow.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const SlideshowItem: React.FC<IGenericProps> = ({
     className = '',

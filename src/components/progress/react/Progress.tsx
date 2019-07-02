@@ -42,28 +42,16 @@ interface IDefaultPropsType extends Partial<ProgressProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Progress`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Progress`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     variant: Variants.circular,
@@ -73,7 +61,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Simple Progress component that can be displayed as a linear or circular element
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Progress: React.FC<ProgressProps> = ({
     className = '',

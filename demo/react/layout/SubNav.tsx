@@ -35,10 +35,6 @@ interface IProps {
 /**
  * The list of all sub nav items displayed in the sub navigation.
  * Each item correspond to a component.
- *
- * @type {Array<string>}
- * @constant
- * @readonly
  */
 const NAV_ITEMS: string[] = [
     'Avatar',
@@ -76,7 +72,7 @@ const NAV_ITEMS: string[] = [
  * This component will display the navigation bar for selecting the component the user wants the demo of.
  * It will also display the theme selector to switch the theme of both the demo site and the components in the demo.
  *
- * @return {React.ReactElement} The sub navigation component.
+ * @return The sub navigation component.
  */
 const SubNav: React.FC<IProps> = ({ activeComponent, changeTheme, handleNavigate }: IProps): React.ReactElement => (
     <div className="sub-nav">

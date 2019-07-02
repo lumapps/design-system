@@ -71,7 +71,7 @@ const createMultipleActions: React.FC<ButtonThemes> = (theme: any): any => (
 /**
  * The demo for the default <UserBlock>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     // tslint:disable-next-line: typedef
@@ -83,7 +83,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
     /**
      * Switch tooltip visibility
-     * @param {boolean} newVisibleState Tooltip visibility
+     * @param newVisibleState Tooltip visibility
      */
     const toggleCardDisplay: (newVisibleState: boolean) => void = (newVisibleState: boolean): void => {
         // tslint:disable-next-line: early-exit

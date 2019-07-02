@@ -22,10 +22,6 @@ import { COMPONENT_PREFIX } from './constants';
 /**
  * The properties of a component to use to determine it's name.
  * In the order of preference.
- *
- * @type {Array<string>}
- * @constant
- * @readonly
  */
 const NAME_PROPERTIES: string[] = ['displayName', 'name', 'type', 'type.name', '_reactInternalFiber.elementType.name'];
 
@@ -83,15 +79,15 @@ type ValidateParameters = IValidateParameters;
 /**
  * Get the name of the root CSS class of a component based on its name.
  *
- * @param {string}  componentName The name of the component. This name should contains the component prefix and be
+ * @param componentName The name of the component. This name should contains the component prefix and be
  *                               written in PascalCase.
- * @param {boolean} subComponent Whether the current component is a sub component, if true, define the class according
+ * @param subComponent Whether the current component is a sub component, if true, define the class according
  *                               to BEM standards.
- * @return {string} The name of the root CSS class. This classname include the CSS classname prefix and is written in
+ * @return The name of the root CSS class. This classname include the CSS classname prefix and is written in
  *                  lower-snake-case.
  */
 function getRootClassName(componentName: string, subComponent?: boolean): string {
-    const formattedClassName: string = `${CSS_PREFIX}-${kebabCase(trimStart(componentName, COMPONENT_PREFIX))}`;
+    const formattedClassName = `${CSS_PREFIX}-${kebabCase(trimStart(componentName, COMPONENT_PREFIX))}`;
 
     if (subComponent) {
         // See https://regex101.com/r/YjS1uI/3
@@ -108,8 +104,8 @@ function getRootClassName(componentName: string, subComponent?: boolean): string
  * The type can either be a string ('Button', 'span', ...) or a component whose name will be computed from its
  * `displayName`, its React internal name (`_reactInternalFiber.elementType.name`) or its `name`.
  *
- * @param  {string|ComponentType} type The type to get the name of.
- * @return {string|ComponentType} The name of the type.
+ * @param type The type to get the name of.
+ * @return The name of the type.
  */
 function getTypeName(type: string | ComponentType): string | ComponentType {
     if (isString(type)) {
@@ -130,9 +126,9 @@ function getTypeName(type: string | ComponentType): string | ComponentType {
 /**
  * Check if a ReactElement is of the given type.
  *
- * @param  {React.ReactNode}   el   The ReactElement we want to check the type of.
- * @param  {string|ComponentType} type The type we want to check if the ReactElement is of.
- * @return {boolean}              If the ReactElement is of the given type or not.
+ * @param el   The ReactElement we want to check the type of.
+ * @param type The type we want to check if the ReactElement is of.
+ * @return     If the ReactElement is of the given type or not.
  */
 function isElementOfType(el: React.ReactNode, type: string | ComponentType): boolean {
     const typeName: string | ComponentType = getTypeName(type);
@@ -163,8 +159,8 @@ function isElementOfType(el: React.ReactNode, type: string | ComponentType): boo
  * Check if a ReactElement is a text (i.e. either a pure text node or a <span>).
  * Simply check if the ReactElement is a string or if its type is 'span'.
  *
- * @param  {React.ReactNode} el The ReactElement to check if it's a text.
- * @return {boolean}            If the ReactElement is a text or not.
+ * @param el The ReactElement to check if it's a text.
+ * @return   If the ReactElement is a text or not.
  */
 function isElementText(el: React.ReactNode): boolean {
     return isString(el);
@@ -173,8 +169,8 @@ function isElementText(el: React.ReactNode): boolean {
 /**
  * Unwrap the children contained in a fragment.
  *
- * @param  {React.ReactNode} children The children to unwrap (there should be only 1 child of React.Fragment type).
- * @return {React.reactNode} The unwrapped children (or the origin children if it wasn't a fragment).
+ * @param children The children to unwrap (there should be only 1 child of React.Fragment type).
+ * @return The unwrapped children (or the origin children if it wasn't a fragment).
  */
 function unwrapFragment(children: React.ReactNode): React.ReactNode {
     let newChildren: React.ReactNode = children;
@@ -195,27 +191,27 @@ function unwrapFragment(children: React.ReactNode): React.ReactNode {
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {string}                      componentName    The name of the component being validated.
- * @param  {Array<string|ComponentType>} [allowedTypes]   The allowed types of children.
- * @param  {number}                      [maxChildren]    The maximum expected number of children.
- * @param  {number}                      [minChildren=0]  The minimum expected number of children.
- * @param  {Function}                    [postValidate]   A function to run after all the transformation and validation
+ * @param componentName    The name of the component being validated.
+ * @param [allowedTypes]   The allowed types of children.
+ * @param [maxChildren]    The maximum expected number of children.
+ * @param [minChildren=0]  The minimum expected number of children.
+ * @param [postValidate]   A function to run after all the transformation and validation
  *                                                        of the children and the props.
  *                                                        This function can return a string (the error message), a
  *                                                        boolean (`true` for a successful validation, `false` for a bad
  *                                                        validation which will lead to throw a basic error message) or
  *                                                        nothing if there is no special problem (i.e. a successful
  *                                                        validation).
- * @param  {Function}                    [preValidate]    A function to run before global validation of the props and
+ * @param [preValidate]    A function to run before global validation of the props and
  *                                                        any transformation or validation of the children.
  *                                                        This function can return a string (the error message), a
  *                                                        boolean (`true` for a successful validation, `false` for a bad
  *                                                        validation which will lead to throw a basic error message) or
  *                                                        nothing if there is no special problem (i.e. a successful
  *                                                        validation).
- * @param  {IGenericProps}               props            The props of the component (should contain a `children` prop).
- * @param  {Function}                    [transformChild] A function to transform a child to something else.
- * @param  {Function}                    [validateChild]  A function to check if a child is valid after that its type
+ * @param props            The props of the component (should contain a `children` prop).
+ * @param [transformChild] A function to transform a child to something else.
+ * @param [validateChild]  A function to check if a child is valid after that its type
  *                                                        has been validated (if `allowedTypes` is provided) and after
  *                                                        it has been transformed..
  *                                                        This function can return a string (the error message), a
@@ -223,7 +219,7 @@ function unwrapFragment(children: React.ReactNode): React.ReactNode {
  *                                                        validation which will lead to throw a basic error message) or
  *                                                        nothing if there is nothing special (i.e. a successful
  *                                                        validation).
- * @return {React.ReactNode}             The processed children of the component.
+ * @return                 The processed children of the component.
  */
 function validateComponent(
     componentName: string,
@@ -293,7 +289,7 @@ function validateComponent(
         }
         validateChild = validateChild || noop;
 
-        let index: number = -1;
+        let index = -1;
         const transformedChildren: React.ReactNode = Children[childrenFunctionName](
             newChildren,
             (child: React.ReactNode): React.ReactNode => {
@@ -318,7 +314,7 @@ function validateComponent(
                     );
 
                     if (!isOfOneAllowedType) {
-                        let allowedTypesString: string = '';
+                        let allowedTypesString = '';
                         allowedTypes.forEach(
                             (allowedType: string | ComponentType, idx: number): void => {
                                 if (!isEmpty(allowedTypesString)) {

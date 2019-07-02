@@ -49,8 +49,6 @@ interface IHead {
 /**
  * The body of the table.
  * This represents the data to display in the table.
- *
- * @type {Object}
  */
 const tableBody: IBody[] = [
     {
@@ -82,10 +80,6 @@ const tableBody: IBody[] = [
 /**
  * The head of the table.
  * This represents the cells of the table.
- *
- * @type {Array}
- * @constant
- * @readonly
  */
 const tableHead: IHead[] = [
     {
@@ -124,7 +118,7 @@ const tableHead: IHead[] = [
 /**
  * The demo for the default <Table>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     const [dataTableBody, setTable]: [IBody[], Dispatch<SetStateAction<IBody[]>>] = useState(tableBody);
@@ -132,7 +126,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     /**
      * Update the sorting of the table.
      *
-     * @param {Object} headSource The head cell to sort the table by.
+     * @param headSource The head cell to sort the table by.
      */
     const handleSort: (headSource: IHead) => void = useCallback(
         (headSource: IHead) => {

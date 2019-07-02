@@ -31,9 +31,9 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {ISetupProps} props  The props to use to override the default props of the component.
- * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
+ * @param props  The props to use to override the default props of the component.
+ * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
 const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
@@ -86,7 +86,7 @@ describe(`<${Divider.displayName}>`, (): void => {
         });
 
         it('should use the given `theme`', (): void => {
-            const testedProp: string = 'theme';
+            const testedProp = 'theme';
             const modifiedProps: ISetupProps = {
                 [testedProp]: Themes.dark,
             };

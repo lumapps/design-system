@@ -19,8 +19,8 @@ class ErrorBoundary extends React.Component<{}, IState> {
     /**
      * When an error occurred, save the error in the state so that we can display it in the fallback display.
      *
-     * @param  {Error}  error The error that occurred.
-     * @return {IState} The new state of the component.
+     * @param  error The error that occurred.
+     * @return The new state of the component.
      */
     public static getDerivedStateFromError(error: Error): IState {
         return { error, hasError: true };

@@ -61,7 +61,7 @@ const offsets: PopperOffsets = { horizontal: -60, vertical: 30 };
 /**
  * The demo for the default <Popover>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 // tslint:disable-next-line: typedef
 const DemoComponent: React.FC<IProps> = (): React.ReactElement => {

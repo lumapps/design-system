@@ -61,28 +61,16 @@ interface IDefaultPropsType extends Partial<ListItemProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ListItem`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isActive: false,
@@ -96,7 +84,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Component used in List element.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ListItem: React.FC<ListItemProps> = ({
     after,
@@ -122,7 +110,7 @@ const ListItem: React.FC<ListItemProps> = ({
     /**
      * Prevent the focus event to be trigger on the parent.
      *
-     * @param {FocusEvent} evt Focus event
+     * @param evt Focus event
      */
     // tslint:disable-next-line: typedef
     const preventParentFocus = (evt: React.FocusEvent<HTMLLIElement>): void => {
@@ -132,7 +120,7 @@ const ListItem: React.FC<ListItemProps> = ({
 
     /**
      * Currying the on entre press behavior.
-     * @return {Object} Returns either undefined or a callback
+     * @return Returns either undefined or a callback
      */
     // tslint:disable-next-line: typedef
     const onKeyDown = () => {

@@ -11,7 +11,7 @@ interface IProps {}
 /**
  * The demo for the default <Progress>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): React.ReactElement => (
     <Fragment>

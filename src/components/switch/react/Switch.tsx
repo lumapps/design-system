@@ -68,28 +68,16 @@ interface IDefaultPropsType extends Partial<SwitchProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Switch`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Switch`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     checked: false,
@@ -107,8 +95,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {SwitchProps} props The children and props of the component.
- * @return {React.ReactNode}    The processed children of the component.
+ * @param props The children and props of the component.
+ * @return    The processed children of the component.
  */
 function _validate(props: SwitchProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
@@ -124,7 +112,7 @@ function _validate(props: SwitchProps): React.ReactNode {
 /**
  * [Enter the description of the component here].
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Switch: React.FC<SwitchProps> = ({
     className = '',

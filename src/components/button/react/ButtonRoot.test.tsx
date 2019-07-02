@@ -10,12 +10,8 @@ import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
 
 /**
  * The URL to use as test URL.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const TEST_URL: string = 'https://www.lumapps.com';
+const TEST_URL = 'https://www.lumapps.com';
 
 /////////////////////////////
 
@@ -46,9 +42,9 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {ISetupProps} props  The props to use to override the default props of the component.
- * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
+ * @param props  The props to use to override the default props of the component.
+ * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
 const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
@@ -116,7 +112,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         });
 
         it('should use the given `href`', (): void => {
-            const testedProp: string = 'href';
+            const testedProp = 'href';
             const modifiedProps: ISetupProps = {
                 [testedProp]: TEST_URL,
             };
@@ -127,7 +123,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         });
 
         it('should use the given `target`', (): void => {
-            const testedProp: string = 'href';
+            const testedProp = 'target';
             const modifiedProps: ISetupProps = {
                 [testedProp]: '_blank',
                 href: TEST_URL,
@@ -157,7 +153,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         });
 
         it('should forward any other prop', (): void => {
-            const testedProp: string = 'winter';
+            const testedProp = 'winter';
             const modifiedProps: ISetupProps = {
                 [testedProp]: 'is coming',
             };

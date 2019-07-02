@@ -15,19 +15,11 @@ declare type Theme = Themes;
 
 /**
  * The available themes in the demo site.
- *
- * @type {Object}
- * @constant
- * @readonly
  */
-declare const THEMES: { [key: Theme]: Theme };
+declare const THEMES: { [key in Themes]: Theme };
 
 /**
  * The default theme to use in the demo site at startup.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 declare const DEFAULT_THEME: Theme;
 

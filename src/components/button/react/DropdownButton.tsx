@@ -82,28 +82,16 @@ interface IDefaultPropsType extends Partial<DropdownButtonProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}DropdownButton`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}DropdownButton`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     splitted: false,
@@ -118,8 +106,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Globally validate the component after transforming and/or validating the children.
  *
- * @param  {ValidateParameters} params The children, their number and the props of the component.
- * @return {string|boolean}     If a string, the error message.
+ * @param params The children, their number and the props of the component.
+ * @return     If a string, the error message.
  *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
  *                              lead to throw a basic error message).
  *                              You can also return nothing if there is no special problem (i.e. a successful
@@ -150,8 +138,8 @@ function _postValidate({ props }: ValidateParameters): string | boolean | void {
 /**
  * Globally validate the component before transforming and/or validating the children.
  *
- * @param  {ValidateParameters} params The children, their number and the props of the component.
- * @return {string|boolean}     If a string, the error message.
+ * @param params The children, their number and the props of the component.
+ * @return     If a string, the error message.
  *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
  *                              lead to throw a basic error message).
  *                              You can also return nothing if there is no special problem (i.e. a successful
@@ -167,8 +155,8 @@ function _preValidate({ props }: ValidateParameters): string | boolean | void {
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {DropdownButtonProps} props The children and props of the component.
- * @return {React.ReactNode}     The processed children of the component.
+ * @param props The children and props of the component.
+ * @return     The processed children of the component.
  */
 function _validate(props: DropdownButtonProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
@@ -191,7 +179,7 @@ function _validate(props: DropdownButtonProps): React.ReactNode {
  * @see {@link IconButton} for more information on <IconButton>.
  * @see {@link ButtonGroup} for more information on <ButtonGroup>.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const DropdownButton: React.FC<DropdownButtonProps> = ({
     children,
@@ -222,8 +210,8 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     /**
      * Open the dropdown contained in the dropdown button.
      *
-     * @param  {Event}   evt The click event.
-     * @return {boolean} If we should propagate the event or not.
+     * @param   evt The click event.
+     * @return If we should propagate the event or not.
      */
     const openDropdown: (evt: React.MouseEvent<HTMLElement>) => boolean | void = (
         evt: React.MouseEvent<HTMLElement>,

@@ -10,10 +10,10 @@ import { handleBasicClasses } from 'LumX/core/utils';
 
 import { Manager, Popper, PopperChildrenProps, Reference, ReferenceChildrenProps } from 'react-popper';
 
-const SHOW_HIDE_DELAY: number = 500;
+const SHOW_HIDE_DELAY = 500;
 
 // Margin applied when using the fillWidth / fillHeight props
-const SAFE_ZONE: number = 8;
+const SAFE_ZONE = 8;
 
 // Reference to the anchor element
 let anchorRef: HTMLDivElement | null;
@@ -107,28 +107,16 @@ interface IDefaultPropsType extends Partial<PopoverProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Popover`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Popover`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     elevation: 3,
@@ -140,7 +128,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 
 /**
  * Helper method that returns a simple boolean value from different source format.
- * @param {any} inputValue The input to extract the boolean value from
+ * @param inputValue The input to extract the boolean value from
  */
 const unwrap: (inputValue: boolean | string | (() => boolean) | undefined) => boolean = (
     inputValue: boolean | string | (() => boolean) | undefined,
@@ -150,10 +138,10 @@ const unwrap: (inputValue: boolean | string | (() => boolean) | undefined) => bo
 
 /**
  * Get the popover offset base on its placement.
- * @param {string}          placement       The prefered placement
- * @param {Placements}      popperPlacement The actual platform
- * @param {PopperOffsets}   popperOffset    An offset to be applied on the popper
- * @return {Position}                       The css position.
+ * @param          placement       The prefered placement
+ * @param      popperPlacement The actual platform
+ * @param   popperOffset    An offset to be applied on the popper
+ * @return                       The css position.
  */
 function computeOffsets(
     placement: string,
@@ -189,11 +177,11 @@ function computeOffsets(
 
 /**
  * Get the size for the popper holder
- * @param {boolean} fillHeight          Should the holder use full available height
- * @param {boolean} fillwidth           Should the holder use full available width
- * @param {string}  transform           The computed CSS transform
- * @param {boolean} matchAnchorWidth    Should the popper match the anchor width
- * @return {Size}                       The size of the popper holder
+ * @param fillHeight          Should the holder use full available height
+ * @param fillwidth           Should the holder use full available width
+ * @param  transform           The computed CSS transform
+ * @param matchAnchorWidth    Should the popper match the anchor width
+ * @return                       The size of the popper holder
  */
 // tslint:disable: no-shadowed-variable
 function computeSize(
@@ -235,7 +223,7 @@ function computeSize(
  * Basically it binds an anchor element and a popper element and regarding the space available on the screen
  * + the selected placement the popper elem. will be displayed.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Popover: React.FC<PopoverProps> = ({
     anchorElement,
@@ -265,7 +253,7 @@ const Popover: React.FC<PopoverProps> = ({
 
     /**
      * Drives the visibility of the popper/tooltip element.
-     * @param {boolean} visibility Whether the tooltip show be visible or not
+     * @param visibility Whether the tooltip show be visible or not
      */
     function toggleAutoShowPopper(visibility: boolean): void {
         clearTimeout(autoShowDelayer.current);

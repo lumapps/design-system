@@ -36,7 +36,7 @@ interface IProps extends IGenericProps {
  * This component will display the header with information like the category of the demo, the title of the page and a
  * description of the demo.
  *
- * @return {React.ReactElement} The demo header component.
+ * @return The demo header component.
  */
 const DemoHeader: React.FC<IProps> = ({
     category,

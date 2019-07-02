@@ -56,7 +56,7 @@ const createMultipleActions: React.FC<ButtonThemes> = (
 /**
  * The demo for the default <UserBlock>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>

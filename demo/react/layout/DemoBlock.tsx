@@ -70,9 +70,9 @@ interface IESModule {
 /**
  * Load the demo component corresponding to the given demo name.
  *
- * @param  {string}             demoPath The path to the demo folder.
- * @param  {string}             demoName The name of the demo to load the component of.
- * @return {Promise<IESModule>} The promise of the load of the demo component.
+ * @param             demoPath The path to the demo folder.
+ * @param             demoName The name of the demo to load the component of.
+ * @return The promise of the load of the demo component.
  */
 async function _loadDemoComponent(demoPath: string, demoName: string): Promise<IESModule> {
     if (isEmpty(demoPath) || isEmpty(demoName)) {
@@ -85,9 +85,9 @@ async function _loadDemoComponent(demoPath: string, demoName: string): Promise<I
 /**
  * Load the source code of the demo component corresponding to the given demo name.
  *
- * @param  {string}             demoPath The path to the demo folder.
- * @param  {string}             file     The name of the demo to load the source code of.
- * @return {Promise<IESModule>} The promise of the load of the source code of the demo.
+ * @param             demoPath The path to the demo folder.
+ * @param             file     The name of the demo to load the source code of.
+ * @return The promise of the load of the source code of the demo.
  */
 async function _loadSourceCode(demoPath: string, file: string): Promise<IESModule> {
     if (isEmpty(demoPath) || isEmpty(file)) {
@@ -100,12 +100,12 @@ async function _loadSourceCode(demoPath: string, file: string): Promise<IESModul
 /**
  * Wrap a dynamic loading in a promise to be used in the component.
  *
- * @param  {Function} load           The loading function to wrap.
- * @param  {string}   path           The path to the demo folder.
- * @param  {string}   file           The name of the file to load.
- * @param  {Function} setState       The set state function to use with the response of the load.
- * @param  {string}   [defaultValue] The default value to set when an error occurred.
- * @return {Promise} The promise of the load that will resolve with the loaded value (or the default one in case of
+ * @param load           The loading function to wrap.
+ * @param   path           The path to the demo folder.
+ * @param   file           The name of the file to load.
+ * @param setState       The set state function to use with the response of the load.
+ * @param   [defaultValue] The default value to set when an error occurred.
+ * @return The promise of the load that will resolve with the loaded value (or the default one in case of
  *                   error).
  */
 async function _load(
@@ -138,7 +138,7 @@ async function _load(
  * This component will display an interactive demo but also allow to display the source code of this demo.
  * You only have to provide the path to the wanted file (a valid path for the serving server of the demo site).
  *
- * @return {React.ReactElement} The demo block component.
+ * @return The demo block component.
  */
 const DemoBlock: React.FC<IProps> = ({
     blockTitle: title,
@@ -153,7 +153,7 @@ const DemoBlock: React.FC<IProps> = ({
      * Enable/disable the dark theme.
      * This is the callback function of the `onClick` event of the theme <Switch>.
      *
-     * @param {boolean} enabled Indicates if the dark theme should be enabled or not.
+     * @param enabled Indicates if the dark theme should be enabled or not.
      */
     const setDarkTheme: (enabled: boolean) => void = (enabled: boolean): void => {
         setTheme(enabled ? Themes.dark : Themes.light);

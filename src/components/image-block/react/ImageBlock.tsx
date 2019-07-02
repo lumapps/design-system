@@ -68,28 +68,16 @@ interface IDefaultPropsType extends Partial<ImageBlockProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ImageBlock`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     align: Alignments.left,
@@ -108,7 +96,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Displays an properly structured image block.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ImageBlock: React.FC<ImageBlockProps> = ({
     align = DEFAULT_PROPS.align,

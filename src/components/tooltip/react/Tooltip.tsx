@@ -15,8 +15,6 @@ type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
 
 /**
  * Position for arrow or tooltip.
- *
- * @interface IPosition.
  */
 interface IPosition {
     x: number;
@@ -56,28 +54,16 @@ interface IDefaultPropsType extends Partial<TooltipProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Tooltip`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Tooltip`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     delay: 0,
@@ -89,11 +75,11 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Calculate the position of the tooltip relative to the anchor element.
  *
- * @param {TooltipPlacement} placement Placement of tooltip.
- * @param {React.RefObject<HTMLElement>} anchorRef Ref of anchor element.
- * @param {React.RefObject<HTMLDivElement>} tooltipRef Ref of tooltip.
- * @param {any[]} [dependencies=[placement, anchorRef, tooltipRef]] Dependencies of hook.
- * @return {Position} Position of the arrow on the tooltip.
+ * @param placement Placement of tooltip.
+ * @param anchorRef Ref of anchor element.
+ * @param tooltipRef Ref of tooltip.
+ * @param [dependencies=[placement, anchorRef, tooltipRef]] Dependencies of hook.
+ * @return Position of the arrow on the tooltip.
  */
 const useTooltipPosition: (
     placement: TooltipPlacement,
@@ -154,10 +140,10 @@ const useTooltipPosition: (
 /**
  * Calculate arrow position on the tooltip.
  *
- * @param {TooltipPlacement} placement Placement of tooltip.
- * @param {React.RefObject<HTMLDivElement>} tooltipRef Ref of tooltip.
- * @param {any[]} [dependencies=[placement, tooltipRef]] Dependencies of hook.
- * @return {Position} Position of the arrow on the tooltip.
+ * @param placement Placement of tooltip.
+ * @param tooltipRef Ref of tooltip.
+ * @param [dependencies=[placement, tooltipRef]] Dependencies of hook.
+ * @return Position of the arrow on the tooltip.
  */
 const useArrowPosition: (
     placement: TooltipPlacement,
@@ -184,9 +170,9 @@ const useArrowPosition: (
             width: widthTooltip,
             height: heightTooltip,
         }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
-        const arrowHeight: number = 5;
-        const arrowBorder: number = 5;
-        const arrowWidth: number = 10;
+        const arrowHeight = 5;
+        const arrowBorder = 5;
+        const arrowWidth = 10;
 
         switch (placement) {
             case 'top':
@@ -213,7 +199,7 @@ const useArrowPosition: (
 /**
  * Tooltip.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Tooltip: React.FC<TooltipProps> = ({
     anchorRef,

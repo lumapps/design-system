@@ -5,7 +5,7 @@ import { Categories, Category, DemoObject } from 'LumX/demo/react/constants';
 /**
  * The title of the demo.
  */
-const title: string = 'Switchs';
+const title = 'Switchs';
 
 /**
  * The category of the demo.
@@ -15,7 +15,7 @@ const category: Category = Categories.components;
 /**
  * The description of the component.
  */
-const description: string =
+const description =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris placerat enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.';
 
 const demos: { [demoName: string]: DemoObject } = {

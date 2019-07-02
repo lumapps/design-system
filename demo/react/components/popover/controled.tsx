@@ -47,7 +47,7 @@ const createPopper: () => ReactNode = (): ReactNode => {
 /**
  * The demo for the default <Popover>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 // tslint:disable: jsx-no-lambda
 const DemoComponent: React.FC<IProps> = (): React.ReactElement => {

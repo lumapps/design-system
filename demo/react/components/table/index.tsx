@@ -5,7 +5,7 @@ import { Categories, Category, DemoObject } from 'LumX/demo/react/constants';
 /**
  * The title of the demo.
  */
-const title: string = 'Tables';
+const title = 'Tables';
 
 /**
  * The category of the demo.
@@ -15,7 +15,7 @@ const category: Category = Categories.components;
 /**
  * The description of the component.
  */
-const description: string =
+const description =
     'Use table to show tabular information that are easy comparable and scannable, such a statistical data.';
 
 const demos: { [demoName: string]: DemoObject } = {

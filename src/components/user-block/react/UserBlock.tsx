@@ -67,28 +67,16 @@ interface IDefaultPropsType extends Partial<UserBlockProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}UserBlock`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     orientation: Orientations.horizontal,
@@ -100,7 +88,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Render a user information as a card if orientation is vertical or no action user info block if horizontal.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const UserBlock: React.FC<IUserBlockProps> = ({
     avatar,

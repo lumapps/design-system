@@ -5,7 +5,7 @@ import { Categories, Category, DemoObject } from 'LumX/demo/react/constants';
 /**
  * The title of the demo.
  */
-const title: string = 'Popovers';
+const title = 'Popovers';
 
 /**
  * The category of the demo.
@@ -15,7 +15,7 @@ const category: Category = Categories.components;
 /**
  * The description of the component.
  */
-const description: string =
+const description =
     'Popovers can be used as a component to position floating elements over the UI but also as a based element to build advanced behavior like tooltips, dropdown selectors, on hover details ... Etc.';
 
 const demos: { [demoName: string]: DemoObject } = {

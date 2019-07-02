@@ -59,8 +59,8 @@ interface IESModule {
 /**
  * Load the demo component corresponding to the currently active component.
  *
- * @param  {string}             componentFolderName The name of the component to load.
- * @return {Promise<IESModule>} The promise of the dynamic load of the component.
+ * @param             componentFolderName The name of the component to load.
+ * @return The promise of the dynamic load of the component.
  */
 async function _loadComponent(componentFolderName: IProps['activeComponent']): Promise<IESModule> {
     if (isEmpty(componentFolderName)) {
@@ -78,7 +78,7 @@ async function _loadComponent(componentFolderName: IProps['activeComponent']): P
  * To do so, it will receive the name of the active component and will dynamically load the demo component from this
  * name.
  *
- * @return {React.ReactElement} The main component.
+ * @return The main component.
  */
 const Main: React.FC<IProps> = ({ activeComponent }: IProps): React.ReactElement => {
     const [demo, setDemo]: [IESModule | undefined, (demo: IESModule | undefined) => void] = useState();

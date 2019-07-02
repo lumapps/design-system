@@ -61,28 +61,16 @@ interface IDefaultPropsType extends Partial<ChipProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Chip`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     after: null,
@@ -99,7 +87,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Displays information or allow an action on a compact element.
  * This is the base component for all variations of the chips see https://material.io/design/components/chips.html.
  *
- * @return {Component} The Chip component.
+ * @return The Chip component.
  */
 const Chip: React.FC<IChipProps> = ({
     after = DEFAULT_PROPS.after,
@@ -111,7 +99,7 @@ const Chip: React.FC<IChipProps> = ({
     isDisabled = DEFAULT_PROPS.isDisabled,
     onAfterClick,
     onBeforeClick,
-    onClick = null,
+    onClick,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     ...props
@@ -123,7 +111,7 @@ const Chip: React.FC<IChipProps> = ({
     /**
      * Execute the onBeforeClick method passed as a prop but stop propagation to avoid triggering the onClick method.
      *
-     * @param {SyntheticEvent} evt The click event on the before element that triggers this method.
+     * @param evt The click event on the before element that triggers this method.
      */
     const handleOnBeforeClick: (evt: SyntheticEvent) => void = (evt: SyntheticEvent): void => {
         if (!evt) {
@@ -140,7 +128,7 @@ const Chip: React.FC<IChipProps> = ({
     /**
      * Execute the onAfterClick method passed as a prop but stop propagation to avoid triggering the onClick method.
      *
-     * @param {SyntheticEvent} evt The click event on the after element that triggers this method.
+     * @param evt The click event on the after element that triggers this method.
      */
     const handleOnAfterClick: (evt: SyntheticEvent) => void = (evt: SyntheticEvent): void => {
         if (!evt) {
@@ -173,8 +161,8 @@ const Chip: React.FC<IChipProps> = ({
             )}
             role="button"
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
-            onClick={onClick ? onClick : null}
-            onKeyDown={onClick ? onEnterPressed(onClick) : null}
+            onClick={hasOnClick ? onClick : undefined}
+            onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
             {...props}
         >
             {before && (
