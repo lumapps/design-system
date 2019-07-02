@@ -24,7 +24,7 @@
         ],
         "no-empty-interface": false,
         "no-for-in-array": true,
-        "no-inferrable-types": false,
+        "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
         "no-inferred-empty-object-type": true,
         "no-object-literal-type-assertion": true,
         "no-return-await": true,
@@ -52,15 +52,12 @@
         "strict-type-predicates": false,
         "typedef": {
             "options": [
-                "array-destructuring",
                 "arrow-call-signature",
                 "arrow-parameter",
                 "call-signature",
                 "member-variable-declaration",
-                "object-destructuring",
                 "parameter",
-                "property-declaration",
-                "variable-declaration"
+                "property-declaration"
             ],
             "severity": "warning"
         },
@@ -101,6 +98,8 @@
                 "allowUnboundThis": true
             }
         ],
+
+        "no-redundant-jsdoc": true,
         "valid-jsdoc": [
             true,
             {
@@ -114,24 +113,11 @@
                     "returns": "return",
                     "throw": "throws"
                 },
-                "preferType": {
-                    "array": "Array",
-                    "Boolean": "boolean",
-                    "date": "Date",
-                    "Float": "number",
-                    "float": "number",
-                    "function": "Function",
-                    "integer": "number",
-                    "Integer": "number",
-                    "Number": "number",
-                    "object": "Object",
-                    "String": "string"
-                },
                 "requireParamDescription": true,
-                "requireParamType": true,
+                "requireParamType": false,
                 "requireReturn": false,
                 "requireReturnDescription": true,
-                "requireReturnType": true
+                "requireReturnType": false
             }
         ],
         "valid-typeof": true,
