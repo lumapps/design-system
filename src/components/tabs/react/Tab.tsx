@@ -48,28 +48,16 @@ interface IDefaultPropsType extends Partial<TabProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Tab`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const CLASSNAME: string = `${CSS_PREFIX}-tabs__link`;
+const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     icon: undefined,
@@ -83,7 +71,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Define a single Tab for Tabs component.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Tab: React.FC<TabProps> = ({
     className = '',

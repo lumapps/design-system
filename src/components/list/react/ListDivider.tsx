@@ -30,28 +30,16 @@ interface IDefaultPropsType extends Partial<ListDividerProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ListDivider`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ListDivider`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
 /////////////////////////////
@@ -59,7 +47,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * Renders a thin line that will acts as a divider in List
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ListDivider: React.FC<ListDividerProps> = ({
     className = '',

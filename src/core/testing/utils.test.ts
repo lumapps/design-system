@@ -41,11 +41,11 @@ interface ICommonSetup {
 /**
  * Run the common tests suite: CSS class forwarding, prop forwarding, ...
  *
- * @param {Function} setup  The setup function.
- * @param {Object}   tests  The tests to enable.
+ * @param setup  The setup function.
+ * @param   tests  The tests to enable.
  *                          The key is the name of the test, the value is the name of the wrapper in the object returned
  *                          by the `setup` function.
- * @param {Object}   params The params that can be used by the tests.
+ * @param   params The params that can be used by the tests.
  */
 function commonTestsSuite(
     setup: (props?: IGenericProps, shallowRendering?: boolean) => ICommonSetup,

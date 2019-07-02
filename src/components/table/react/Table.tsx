@@ -39,25 +39,16 @@ interface IDefaultPropsType extends Partial<TableProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Table`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Table`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     hasDividers: false,
@@ -69,7 +60,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * The Table component displays an HTML table, composed by a Table-head and a Table-body with Table-cells in Table Rows.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Table: React.FC<TableProps> = ({
     children,

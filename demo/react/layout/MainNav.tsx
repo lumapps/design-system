@@ -8,7 +8,7 @@ import { LumXLogo } from '../../assets/images';
  * The main navigation component.
  * This component will display the main navigation bar.
  *
- * @return {React.ReactElement} The main navigation component.
+ * @return The main navigation component.
  */
 const MainNav: React.FC = (): React.ReactElement => (
     <div className="main-nav">

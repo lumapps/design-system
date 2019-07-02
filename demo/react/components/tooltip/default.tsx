@@ -16,7 +16,7 @@ interface IProps {
 /**
  * The demo for the default <Tooltip>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     const anchorRefTop: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);

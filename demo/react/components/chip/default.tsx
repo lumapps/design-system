@@ -19,7 +19,7 @@ interface IProps {
 /**
  * The demo for the default <Chip>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>

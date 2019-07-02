@@ -81,28 +81,16 @@ interface IDefaultPropsType extends Partial<ThumbnailProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Thumbnail`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Thumbnail`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     align: Alignments.left,
@@ -118,7 +106,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Simple component used to display image with square or round shape.
  * Convenient to display image previews or user avatar.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',

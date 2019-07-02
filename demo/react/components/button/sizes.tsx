@@ -16,7 +16,7 @@ interface IProps {
 /**
  * The demo for the all the <Button>s sizes.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>

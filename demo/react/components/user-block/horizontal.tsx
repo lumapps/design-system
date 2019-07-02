@@ -27,8 +27,8 @@ const fakeUsers: IFakeUser[] = [
 /**
  * This action button should not be rendered in horizontal layout.
  *
- * @param {ButtonThemes} theme Theme to be used
- * @return {React.ReactElement} an action button
+ * @param theme Theme to be used
+ * @return an action button
  */
 const createSimpleAction: React.FC<ButtonThemes> = (
     theme: ButtonThemes,
@@ -48,7 +48,7 @@ const createSimpleAction: React.FC<ButtonThemes> = (
 /**
  * The demo for the default <UserBlock>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <div style={{ display: 'flex', justifyContent: 'space-around' }}>

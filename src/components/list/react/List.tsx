@@ -46,28 +46,16 @@ interface IDefaultPropsType extends Partial<ListProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}List`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isClickable: false,
@@ -78,7 +66,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * List component - Use vertical layout to display elements
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const List: React.FC<ListProps> = ({
     children,
@@ -97,9 +85,9 @@ const List: React.FC<ListProps> = ({
 
     /**
      * Override the mouse down event - forward the event if needed
-     * @param {MouseEvent}  evt       Mouse event
-     * @param {number}      idx       Index of the target in the list
-     * @param {object}      itemProps Base props
+     * @param  evt       Mouse event
+     * @param      idx       Index of the target in the list
+     * @param      itemProps Base props
      */
     // tslint:disable-next-line: typedef
     const mouseDownHandler = (evt, idx, itemProps) => {
@@ -111,7 +99,7 @@ const List: React.FC<ListProps> = ({
 
     /**
      * Handle the blur event on the list -> we should reset the selection
-     * @param {FocusEvent}  evt Focus event
+     * @param  evt Focus event
      */
     // tslint:disable-next-line: typedef no-unused
     const onListBlured = (evt: React.FocusEvent<HTMLUListElement>) => {
@@ -120,7 +108,7 @@ const List: React.FC<ListProps> = ({
 
     /**
      * Handle the focus event on the list -> we should reset the selection
-     * @param {KeyboardEvent}  evt Focus input event
+     * @param  evt Focus input event
      */
     // tslint:disable-next-line: typedef no-unused
     const onListFocused = (evt: React.FocusEvent<HTMLUListElement>) => {
@@ -129,7 +117,7 @@ const List: React.FC<ListProps> = ({
 
     /**
      * Reset the active element
-     * @param {boolean} fromBlur Is request from blur event
+     * @param fromBlur Is request from blur event
      */
     const resetActiveIndex: (fromBlur: boolean) => void = (fromBlur: boolean): void => {
         if (!isClickable || preventResetOnBlurOrFocus.current) {
@@ -144,7 +132,7 @@ const List: React.FC<ListProps> = ({
 
     /**
      * Handle keyboard interactions
-     * @param {KeyboardEvent}  evt Keybord input event
+     * @param  evt Keybord input event
      */
     // tslint:disable-next-line: typedef
     const onKeyInteraction = (evt: React.KeyboardEvent<HTMLUListElement>) => {
@@ -173,8 +161,8 @@ const List: React.FC<ListProps> = ({
     /**
      * Returns the index of the list item to activate. By default we search for the next
      * available element.
-     * @param  {boolean}  previous Flag which indicates if we should search for the previous list item
-     * @return {number}            Index of the element to activate.
+     * @param  previous Flag which indicates if we should search for the previous list item
+     * @return            Index of the element to activate.
      */
     // tslint:disable-next-line: typedef
     const selectItemOnKeyDown = (previous: boolean): number => {

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, ReactElement, useEffect, useState } from 'react';
 
 import last from 'lodash/last';
 
@@ -18,9 +18,9 @@ import { SubNav } from './layout/SubNav';
  * It also handle the changes of the theme and the changes of the active component demo page (which will be displayed
  * in the main display component).
  *
- * @return {React.ReactNode} The main application component.
+ * @return The main application component.
  */
-const App: React.FC = (): React.ReactNode => {
+const App: React.FC = (): ReactElement => {
     const [activeComponent, setActiveComponent]: [string, (activeComponent: string) => void] = useState(
         last(window.location.pathname.split('/')) || '',
     );

@@ -53,28 +53,16 @@ interface IDefaultPropsType extends Partial<IconProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Icon`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Icon`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     iconRef: undefined,
@@ -89,7 +77,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Globally validate the component before validating the children.
  *
- * @param {ValidateParameters} props The properties of the component.
+ * @param props The properties of the component.
  */
 function _preValidate({ props }: ValidateParameters): void {
     if (!isEmpty(props.icon)) {
@@ -102,8 +90,8 @@ function _preValidate({ props }: ValidateParameters): void {
 /**
  * Validate the component props.
  *
- * @param  {IconProps}       props The props of the component.
- * @return {React.ReactNode} The processed children of the component.
+ * @param       props The props of the component.
+ * @return The processed children of the component.
  */
 function _validate(props: IconProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
@@ -117,7 +105,7 @@ function _validate(props: IconProps): React.ReactNode {
 /**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
  *
- * @return {React.ReactElement} The component
+ * @return The component
  */
 const Icon: React.FC<IconProps> = ({
     className,

@@ -13,8 +13,8 @@ import { Theme } from './constants';
  *
  * @see {@link /demo/constants.d.ts} for the possible value for the theme.
  *
- * @param  {Theme}          theme The theme to enable.
- * @return {Promise<Theme>} The promise of the change.
+ * @param          theme The theme to enable.
+ * @return The promise of the change.
  */
 declare function changeTheme(theme: Theme): Promise<Theme>;
 

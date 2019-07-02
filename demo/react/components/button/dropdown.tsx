@@ -17,7 +17,7 @@ interface IProps {
 /**
  * The demo for the <DropdownButton>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     const onClick: (splitted: boolean) => void = (splitted: boolean = false): (() => void) => {

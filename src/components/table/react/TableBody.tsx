@@ -29,25 +29,16 @@ interface IDefaultPropsType extends Partial<TableBodyProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableBody`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}TableBody`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
 
@@ -56,7 +47,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * The TableBody component displays an HTML Table Body, composed TableBody-cells in TableBody Rows.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const TableBody: React.FC<TableBodyProps> = ({
     children,

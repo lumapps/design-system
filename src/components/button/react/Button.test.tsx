@@ -45,12 +45,8 @@ interface ISetup extends ICommonSetup {
 
 /**
  * The default label to use for the tests.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const DEFAULT_LABEL: string = 'Label';
+const DEFAULT_LABEL = 'Label';
 
 /////////////////////////////
 //                         //
@@ -62,8 +58,8 @@ const DEFAULT_LABEL: string = 'Label';
  * Get the default value of the given prop of a <Button>, depending on the effective props of the component (some
  * default value depends on the value of another prop).
  *
- * @param {string}      prop  The name of the prop you want the default value of.
- * @param {ISetupProps} props The current props of the <Button>.
+ * @param      prop  The name of the prop you want the default value of.
+ * @param props The current props of the <Button>.
  */
 function _getDefaultPropValue({ prop, props }: { prop: string; props?: ISetupProps }): string {
     return prop === 'color'
@@ -77,9 +73,9 @@ function _getDefaultPropValue({ prop, props }: { prop: string; props?: ISetupPro
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {ISetupProps} props  The props to use to override the default props of the component.
- * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
+ * @param props  The props to use to override the default props of the component.
+ * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
 const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (

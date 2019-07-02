@@ -42,7 +42,7 @@ const onItemSelectedHandler: (data: any) => void = (data: any): void => {
 /**
  * The demo for the default <List>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 // tslint:disable: jsx-no-lambda typedef
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (

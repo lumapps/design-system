@@ -33,7 +33,7 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
 /**
  * The demo for the default <ImageBlock>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Fragment>

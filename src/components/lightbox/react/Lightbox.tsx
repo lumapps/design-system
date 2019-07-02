@@ -58,28 +58,16 @@ interface IDefaultPropsType extends Partial<LightboxProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Lightbox`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     ariaLabel: 'Lightbox',
@@ -94,7 +82,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Displays content within a modal.
  *
- * @return {JSX.Element | null} Lightbox.
+ * @return Lightbox.
  */
 const Lightbox: React.FC<LightboxProps> = ({
     ariaLabel = DEFAULT_PROPS.ariaLabel,
@@ -161,7 +149,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Desactivate trap and modal.
      *
-     * @param {React.MouseEvent<HTMLDivElement, MouseEvent>} evt Click event.
+     * @param evt Click event.
      */
     const handleClose: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void = useCallback(
         (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -174,7 +162,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Prevent click bubbling to parent.
      *
-     * @param {React.MouseEvent<HTMLDivElement, MouseEvent>} evt Click event.
+     * @param evt Click event.
      */
     const preventClick: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void = (
         evt: React.MouseEvent<HTMLDivElement, MouseEvent>,

@@ -43,7 +43,7 @@ interface IProps {
  * This component will display a link with the name of the component it will activate upon click.
  * It will also highlight if it's component matche the activated one.
  *
- * @return {React.ReactElement} The sub navigation item component.
+ * @return The sub navigation item component.
  */
 const SubNavItem: React.FC<IProps> = ({
     children,

@@ -33,28 +33,16 @@ interface IDefaultPropsType extends Partial<ListSubheaderProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ListSubheader`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ListSubheader`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
 /////////////////////////////
@@ -62,7 +50,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * Component used in List to display some separator / title section.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 // tslint:disable: no-unused
 const ListSubheader: React.FC<ListSubheaderProps> = ({

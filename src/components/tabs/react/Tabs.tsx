@@ -62,28 +62,16 @@ interface IDefaultPropsType extends Partial<TabsProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Tabs`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Tabs`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeTab: 0,
@@ -98,7 +86,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Defines a Tabs component.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Tabs: React.FC<TabsProps> = ({
     activeTab = DEFAULT_PROPS.activeTab,

@@ -49,28 +49,16 @@ interface IDefaultPropsType extends Partial<SlideshowProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Slideshow`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Slideshow`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeIndex: 0,
@@ -92,8 +80,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {SlideshowProps} props The children and props of the component.
- * @return {React.ReactNode}    The processed children of the component.
+ * @param props The children and props of the component.
+ * @return    The processed children of the component.
  */
 function _validate(props: SlideshowProps): React.ReactNode {
     return validateComponent(COMPONENT_NAME, {
@@ -105,9 +93,6 @@ function _validate(props: SlideshowProps): React.ReactNode {
 
 /**
  * Displays a slideshow.
- *
- * @param {SlideshowProps} props
- * @return {(React.ReactElement | null)}
  */
 const Slideshow: React.FC<SlideshowProps> = ({
     activeIndex = DEFAULT_PROPS.activeIndex,
@@ -133,7 +118,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * The number of slideshow items.
      *
-     * @type {number}
      */
     const itemsCount: number = React.Children.count(newChildren);
 

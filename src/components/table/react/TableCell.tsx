@@ -97,28 +97,16 @@ interface IDefaultPropsType extends Partial<TableCellProps> {
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableCell`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}TableCell`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     onHeaderClick: undefined,
@@ -130,7 +118,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * The TableCell component displays an HTML Table Header Cell.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const TableCell: React.FC<TableCellProps> = ({
     children,

@@ -53,7 +53,7 @@ const createPopper: () => ReactNode = (): ReactNode => {
 /**
  * The demo for the default <Popover>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 // tslint:disable: jsx-no-lambda
 const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
@@ -62,7 +62,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
 
     /**
      * Switch tooltip visibility
-     * @param {boolean} newVisibleState Tooltip visibility
+     * @param newVisibleState Tooltip visibility
      */
     const toggleTooltipDisplay: (newVisibleState: boolean) => void = (newVisibleState: boolean): void => {
         setTooltipDisplayed(newVisibleState);

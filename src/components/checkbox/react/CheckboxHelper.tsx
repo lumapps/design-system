@@ -31,28 +31,16 @@ interface IDefaultPropsType extends Partial<CheckboxHelperProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}CheckboxHelper`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}CheckboxHelper`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const CLASSNAME: string = `${CSS_PREFIX}-checkbox__helper`;
+const CLASSNAME = `${CSS_PREFIX}-checkbox__helper`;
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
 
@@ -61,7 +49,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * Define a checkbox helper component.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const CheckboxHelper: React.FC<CheckboxHelperProps> = ({
     children,

@@ -8,8 +8,8 @@ import isFunction from 'lodash/isFunction';
  * Making setInterval Declarative with React Hooks.
  * Credits: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
  *
- * @param {() => void} callback Function called by setInterval.
- * @param {number}     delay    Delay for setInterval.
+ * @param callback Function called by setInterval.
+ * @param     delay    Delay for setInterval.
  */
 function useInterval(callback: () => void, delay: number | null): void {
     const savedCallback: React.MutableRefObject<(() => void) | undefined> = useRef();

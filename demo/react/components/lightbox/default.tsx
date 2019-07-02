@@ -26,7 +26,7 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
 /**
  * The demo for the default <Lightbox>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     const [isOpened, setIsOpened]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);

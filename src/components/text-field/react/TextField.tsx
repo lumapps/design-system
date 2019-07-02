@@ -59,28 +59,16 @@ interface IDefaultPropsType extends Partial<TextFieldProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TextField`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}TextField`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
 /////////////////////////////
@@ -88,7 +76,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * Text field
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const TextField: React.FC<TextFieldProps> = ({
     className = '',
@@ -109,7 +97,7 @@ const TextField: React.FC<TextFieldProps> = ({
     /**
      * Handle change event on input.
      *
-     * @param {React.ChangeEvent<HTMLInputElement>} event Event of HTML Element
+     * @param event Event of HTML Element
      */
     const handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (
         event: React.ChangeEvent<HTMLInputElement>,
