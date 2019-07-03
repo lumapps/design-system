@@ -31,8 +31,7 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [isOpened, setIsOpened] = useState<boolean>(false);
 
-    // tslint:disable-next-line: no-any
-    const triggerElement: React.RefObject<any> = useRef(null);
+    const triggerElement = useRef<Button>(null);
 
     const onOpenModal = useCallback(() => {
         // Do something.

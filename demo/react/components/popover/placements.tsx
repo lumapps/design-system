@@ -44,11 +44,8 @@ const createPopper = (): ReactElement => {
  *
  * @return The demo component.
  */
-// tslint:disable: jsx-no-lambda
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
-    // tslint:disable-next-line: typedef
     const [selectedPlacement, setSelectedPlacement] = useState(Placements.AUTO);
-    // tslint:disable-next-line: typedef
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
     const availablePlacements: string[] = [
         Placements.AUTO,

@@ -63,7 +63,6 @@ const offsets: PopperOffsets = { horizontal: -60, vertical: 30 };
  *
  * @return The demo component.
  */
-// tslint:disable-next-line: typedef
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     return (
         <div style={demoPopoverHolderStyle}>

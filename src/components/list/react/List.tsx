@@ -1,4 +1,4 @@
-import React, { ReactElement, cloneElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,7 +6,7 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { ListItem } from 'LumX/components/list/react/ListItem';
+import { ListItem, ListItemProps } from 'LumX/components/list/react/ListItem';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -76,21 +76,17 @@ const List: React.FC<ListProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ListProps): ReactElement => {
-    // tslint:disable-next-line: typedef
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
-    // tslint:disable-next-line: typedef
     const preventResetOnBlurOrFocus = useRef(false);
-    // tslint:disable-next-line: typedef no-any
-    const listElementRef: any = useRef();
+    const listElementRef = useRef() as RefObject<HTMLUListElement>;
 
     /**
      * Override the mouse down event - forward the event if needed
      * @param  evt       Mouse event
-     * @param      idx       Index of the target in the list
-     * @param      itemProps Base props
+     * @param  idx       Index of the target in the list
+     * @param  itemProps Base props
      */
-    // tslint:disable-next-line: typedef
-    const mouseDownHandler = (evt, idx, itemProps) => {
+    const mouseDownHandler = (evt: React.MouseEvent, idx: number, itemProps: ListItemProps): void => {
         setActiveItemIndex(idx);
         if (itemProps.onMouseDown) {
             itemProps.onMouseDown(evt);
@@ -98,20 +94,16 @@ const List: React.FC<ListProps> = ({
     };
 
     /**
-     * Handle the blur event on the list -> we should reset the selection
-     * @param  evt Focus event
+     * Handle the blur event on the list -> we should reset the selection.
      */
-    // tslint:disable-next-line: typedef no-unused
-    const onListBlured = (evt: React.FocusEvent<HTMLUListElement>) => {
+    const onListBlured = (): void => {
         resetActiveIndex(true);
     };
 
     /**
      * Handle the focus event on the list -> we should reset the selection
-     * @param  evt Focus input event
      */
-    // tslint:disable-next-line: typedef no-unused
-    const onListFocused = (evt: React.FocusEvent<HTMLUListElement>) => {
+    const onListFocused = (): void => {
         resetActiveIndex(false);
     };
 
@@ -134,8 +126,7 @@ const List: React.FC<ListProps> = ({
      * Handle keyboard interactions
      * @param  evt Keybord input event
      */
-    // tslint:disable-next-line: typedef
-    const onKeyInteraction = (evt: React.KeyboardEvent<HTMLUListElement>) => {
+    const onKeyInteraction = (evt: React.KeyboardEvent<HTMLUListElement>): void => {
         if (!isClickable) {
             return;
         }
@@ -162,9 +153,8 @@ const List: React.FC<ListProps> = ({
      * Returns the index of the list item to activate. By default we search for the next
      * available element.
      * @param  previous Flag which indicates if we should search for the previous list item
-     * @return            Index of the element to activate.
+     * @return Index of the element to activate.
      */
-    // tslint:disable-next-line: typedef
     const selectItemOnKeyDown = (previous: boolean): number => {
         const lookupTable: Array<ListItem | ListSubheader> = children
             .slice(activeItemIndex + 1)
@@ -195,7 +185,7 @@ const List: React.FC<ListProps> = ({
 
     // Let's place the focus on the list so we can navigate with the keyboard.
     useEffect(() => {
-        if (isClickable) {
+        if (isClickable && listElementRef && listElementRef.current) {
             listElementRef.current.focus();
         }
     }, []);
@@ -212,13 +202,11 @@ const List: React.FC<ListProps> = ({
             {...props}
         >
             {children.map((elm: ListItem | ListSubheader, idx: number) => {
-                // tslint:disable-next-line: no-any
-                const elemProps: any = {
+                const elemProps: ListItemProps = {
                     key: `listEntry-${idx}`,
                 };
                 if (isClickable && elm.type.name === 'ListItem') {
-                    // tslint:disable-next-line: no-string-literal, typedef
-                    elemProps.onMouseDown = (evt) => mouseDownHandler(evt, idx, elm.props);
+                    elemProps.onMouseDown = (evt: React.MouseEvent): void => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
                     elemProps.isClickable = isClickable;
                 }

@@ -17,9 +17,7 @@ interface IProps {
 
 const demoFields: string[] = ['Creative developer', 'Denpasar'];
 
-const createSimpleAction: React.FC<ButtonThemes> = (
-    theme: ButtonThemes,
-): any => ( // tslint:disable-line
+const createSimpleAction = (theme: ButtonThemes): ReactElement => (
     <Button
         emphasis={ButtonEmphasises.medium}
         color={theme === ButtonThemes.dark ? 'light' : undefined}
@@ -32,9 +30,7 @@ const createSimpleAction: React.FC<ButtonThemes> = (
 
 const demoActions: string[] = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
-const createMultipleActions: React.FC<ButtonThemes> = (
-    theme: any, // tslint:disable-line
-) => (
+const createMultipleActions = (theme: ButtonThemes): ReactElement => (
     <Fragment>
         {demoActions.map(
             (demoAction: string, idx: number): IconButton => (
@@ -52,7 +48,6 @@ const createMultipleActions: React.FC<ButtonThemes> = (
 
 /////////////////////////////
 
-// tslint:disable
 /**
  * The demo for the default <UserBlock>s.
  *
@@ -74,7 +69,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
         />
     </Fragment>
 );
-/* tslint:enable. */
+
 /////////////////////////////
 
 export default {

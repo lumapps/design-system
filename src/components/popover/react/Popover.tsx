@@ -136,17 +136,15 @@ const unwrap = (inputValue: boolean | string | (() => boolean) | undefined): boo
 
 /**
  * Get the popover offset base on its placement.
- * @param          placement       The prefered placement
- * @param      popperPlacement The actual platform
+ * @param   placement       The prefered placement
+ * @param   popperPlacement The actual platform
  * @param   popperOffset    An offset to be applied on the popper
- * @return                       The css position.
+ * @return  The css position.
  */
 function computeOffsets(
     placement: string,
-    // tslint:disable-next-line: no-shadowed-variable
-    popperPlacement: Placements | undefined,
-    // tslint:disable-next-line: no-shadowed-variable
-    popperOffset: PopperOffsets | undefined = { vertical: 0, horizontal: 0 },
+    popperPlacement?: Placements,
+    popperOffset: PopperOffsets = { vertical: 0, horizontal: 0 },
 ): Position {
     const computedOffs: Position = {
         left: popperOffset.horizontal || 0,
@@ -181,7 +179,6 @@ function computeOffsets(
  * @param matchAnchorWidth    Should the popper match the anchor width
  * @return                       The size of the popper holder
  */
-// tslint:disable: no-shadowed-variable
 function computeSize(
     fillHeight: boolean | undefined,
     fillwidth: boolean | undefined,
@@ -265,8 +262,7 @@ const Popover: React.FC<PopoverProps> = ({
         }
     }
 
-    // tslint:disable-next-line: no-any
-    const modifiers: any | undefined = {
+    const modifiers = {
         arrow: {
             // eslint-disable-next-line id-blacklist
             element: `.lumx-tooltip__arrow`,

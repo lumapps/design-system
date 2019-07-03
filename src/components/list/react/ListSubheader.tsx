@@ -52,7 +52,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
  *
  * @return The component.
  */
-// tslint:disable: no-unused
 const ListSubheader: React.FC<ListSubheaderProps> = ({
     children,
     className = '',

@@ -1,5 +1,3 @@
-// tslint:disable: jsx-no-lambda no-console
-
 import React, { Fragment, ReactElement } from 'react';
 
 import { Chip, ChipSizes, ChipTheme, Colors, Icon } from 'LumX';

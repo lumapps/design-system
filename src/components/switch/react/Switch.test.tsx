@@ -168,7 +168,6 @@ describe(`<${Switch.displayName}>`, (): void => {
 
         it('should use the given props', (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
-                // tslint:disable-next-line: no-any
                 checked: true,
                 position: oneOf(...without(Object.values(Positions), DEFAULT_PROPS.position)),
                 theme: oneOf(...without(Object.values(Themes), DEFAULT_PROPS.theme)),

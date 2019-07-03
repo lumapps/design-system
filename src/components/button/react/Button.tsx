@@ -51,8 +51,7 @@ interface IButtonProps extends IGenericProps {
     /**
      * Button reference to handle focus, ...
      */
-    // tslint:disable-next-line: no-any
-    buttonRef?: React.RefObject<any>;
+    buttonRef?: React.RefObject<ButtonRoot>;
 
     /**
      * The label.

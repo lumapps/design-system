@@ -160,7 +160,6 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                                 scope={head.scope}
                                 sortOrder={head.sortOrder}
                                 variant={head.variant}
-                                // tslint:disable-next-line: jsx-no-lambda
                                 onHeaderClick={(): void => handleSort(head)}
                             >
                                 {head.label}

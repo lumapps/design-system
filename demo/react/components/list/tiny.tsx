@@ -29,13 +29,10 @@ interface IProps {
 /////////////////////////////
 
 const onListItemSelectedHandler = (selectedEntry: ListItem): void => {
-    // tslint:disable-next-line: no-console
     console.log(selectedEntry);
 };
 
-// tslint:disable-next-line: no-any
-const onItemSelectedHandler = (data: any): void => {
-    // tslint:disable-next-line: no-console
+const onItemSelectedHandler = (data: string): void => {
     console.log(data);
 };
 
@@ -44,12 +41,11 @@ const onItemSelectedHandler = (data: any): void => {
  *
  * @return The demo component.
  */
-// tslint:disable: jsx-no-lambda typedef
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <Fragment>
         <List theme={theme} isClickable onListItemSelected={onListItemSelectedHandler}>
             <ListSubheader>text only</ListSubheader>
-            <ListItem size={ListItemSizes.tiny} onItemSelected={() => onItemSelectedHandler('Some data')}>
+            <ListItem size={ListItemSizes.tiny} onItemSelected={(): void => onItemSelectedHandler('Some data')}>
                 Single-line item 1
             </ListItem>
             <ListItem size={ListItemSizes.tiny}>Single-line item 2</ListItem>

@@ -1,6 +1,6 @@
 import React, { Fragment, ReactElement, useState } from 'react';
 
-import { ProgressTracker, ProgressTrackerStep, Theme } from 'LumX';
+import { ProgressTracker, ProgressTrackerStep, ProgressTrackerStepProps, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -19,10 +19,9 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    // tslint:disable-next-line: typedef
     const [activeIndex, setActiveIndex] = useState(2);
 
-    const stepProps = [
+    const stepProps: ProgressTrackerStepProps[] = [
         { isComplete: true },
         { isComplete: true },
         { hasError: true },
@@ -34,7 +33,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
         <Fragment>
             Default ProgressTracker
             <ProgressTracker activeStep={activeIndex} theme={theme}>
-                {stepProps.map((step, index: number) => (
+                {stepProps.map((step: ProgressTrackerStepProps, index: number) => (
                     <ProgressTrackerStep
                         isActive={activeIndex === index}
                         theme={theme}

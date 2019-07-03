@@ -23,8 +23,7 @@ interface IProps extends IGenericProps {
     /**
      * Icon reference
      */
-    // tslint:disable-next-line: no-any
-    iconRef?: React.RefObject<any>;
+    iconRef?: React.RefObject<HTMLElement>;
 
     /**
      * The icon color.

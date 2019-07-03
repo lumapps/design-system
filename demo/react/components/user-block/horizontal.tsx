@@ -30,9 +30,7 @@ const fakeUsers: IFakeUser[] = [
  * @param theme Theme to be used
  * @return an action button
  */
-const createSimpleAction: React.FC<ButtonThemes> = (
-    theme: ButtonThemes,
-): any => ( // tslint:disable-line
+const createSimpleAction = (theme: ButtonThemes): Button => (
     <Button
         emphasis={ButtonEmphasises.medium}
         color={theme === ButtonThemes.dark ? 'light' : undefined}

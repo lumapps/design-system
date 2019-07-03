@@ -38,7 +38,6 @@ const createPopper = (): ReactElement => {
  *
  * @return The demo component.
  */
-// tslint:disable-next-line: typedef
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const placementDemo: string[] = [Placements.LEFT, Placements.TOP, Placements.RIGHT, Placements.BOTTOM];
 

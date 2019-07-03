@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -14,8 +14,7 @@ interface IProps extends IGenericProps {
     /**
      * Button reference to handle focus, ...
      */
-    // tslint:disable-next-line: no-any
-    buttonRef?: React.RefObject<any>;
+    buttonRef?: RefObject<HTMLElement>;
 
     /**
      * The `href` to reach if there is one.
@@ -94,14 +93,14 @@ const ButtonRoot: React.FC<ButtonRootProps> = ({
 
     if (isEmpty(href)) {
         return (
-            <button ref={buttonRef} className={className} {...props}>
+            <button ref={buttonRef as RefObject<HTMLButtonElement>} className={className} {...props}>
                 {newChildren}
             </button>
         );
     }
 
     return (
-        <a ref={buttonRef} className={className} href={href} target={target} {...props}>
+        <a ref={buttonRef as RefObject<HTMLAnchorElement>} className={className} href={href} target={target} {...props}>
             {newChildren}
         </a>
     );

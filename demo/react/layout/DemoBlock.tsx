@@ -57,8 +57,7 @@ interface IESModule {
     /**
      * The component of the demo.
      */
-    // tslint:disable-next-line: no-any
-    default: { view(props: { [prop: string]: any }): JSX.Element };
+    default: { view(props: IGenericProps): JSX.Element };
 }
 
 /////////////////////////////

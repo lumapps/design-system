@@ -1,4 +1,3 @@
-// tslint:disable: jsx-no-lambda
 import React, { CSSProperties, Fragment, ReactElement, useState } from 'react';
 
 import { Orientations } from 'LumX/components';
@@ -35,8 +34,7 @@ const demoPopoverHolderStyle: CSSProperties = {
     paddingTop: 100,
 };
 
-// tslint:disable-next-line: no-any
-const createSimpleAction: React.FC<ButtonThemes> = (theme: ButtonThemes): any => (
+const createSimpleAction = (theme: ButtonThemes): ReactElement => (
     <Button
         emphasis={ButtonEmphasises.medium}
         color={theme === ButtonThemes.dark ? 'light' : undefined}
@@ -49,8 +47,7 @@ const createSimpleAction: React.FC<ButtonThemes> = (theme: ButtonThemes): any =>
 
 const demoActions: string[] = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
-// tslint:disable-next-line: no-any
-const createMultipleActions: React.FC<ButtonThemes> = (theme: any): any => (
+const createMultipleActions = (theme: ButtonThemes): ReactElement => (
     <Fragment>
         {demoActions.map(
             (demoAction: string, idx: number): IconButton => (
@@ -74,11 +71,8 @@ const createMultipleActions: React.FC<ButtonThemes> = (theme: any): any => (
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    // tslint:disable-next-line: typedef
     const [isCardDisplayed, setCardDisplayed] = useState(false);
-    // tslint:disable-next-line: typedef
     let delayer: NodeJS.Timeout | null;
-    // tslint:disable-next-line: typedef
     const anchorRef = React.createRef();
 
     /**

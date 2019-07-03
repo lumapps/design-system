@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+import { Callback, IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
 import { Theme, Themes } from 'LumX/components';
@@ -41,8 +41,7 @@ interface IListItemProps extends IGenericProps {
     /* theme */
     theme?: Theme;
     /* Callback used to retrieved the selected entry*/
-    // tslint:disable-next-line: typedef
-    onItemSelected?;
+    onItemSelected?(): void;
 }
 type ListItemProps = IListItemProps;
 
@@ -99,7 +98,7 @@ const ListItem: React.FC<ListItemProps> = ({
     before,
     ...props
 }: ListItemProps): ReactElement => {
-    const element: React.MutableRefObject<HTMLLIElement | null> = useRef(null);
+    const element = useRef<HTMLLIElement | null>(null);
 
     useEffect(() => {
         if (element && element.current && isActive) {
@@ -112,8 +111,7 @@ const ListItem: React.FC<ListItemProps> = ({
      *
      * @param evt Focus event
      */
-    // tslint:disable-next-line: typedef
-    const preventParentFocus = (evt: React.FocusEvent<HTMLLIElement>): void => {
+    const preventParentFocus = (evt: React.FocusEvent): void => {
         evt.preventDefault();
         evt.stopPropagation();
     };
@@ -122,12 +120,11 @@ const ListItem: React.FC<ListItemProps> = ({
      * Currying the on entre press behavior.
      * @return Returns either undefined or a callback
      */
-    // tslint:disable-next-line: typedef
-    const onKeyDown = () => {
+    const onKeyDown = (): Callback | undefined => {
         if (isClickable && onItemSelected) {
             return onEnterPressed(onItemSelected);
         }
-        return;
+        return undefined;
     };
 
     return (
