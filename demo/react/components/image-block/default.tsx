@@ -1,4 +1,4 @@
-import React, { CSSProperties, Fragment, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import { ImageBlock, ImageBlockCaptionPositions, ImageBlockProps, ImageBlockTheme, ThumbnailAspectRatios } from 'LumX';
 import { Alignments } from 'LumX/components';
@@ -36,7 +36,7 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <ImageBlock theme={theme} image="https://picsum.photos/640/480/?random" style={imageBlockDemoStyle} />
         <ImageBlock
             aspectRatio={ThumbnailAspectRatios.vertical}
@@ -111,7 +111,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             theme={theme}
             {...imageBlockDemoProps}
         />
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 import last from 'lodash/last';
 
@@ -39,7 +39,7 @@ const App: React.FC = (): ReactElement => {
 
     if (themeLoaded) {
         return (
-            <Fragment>
+            <>
                 <MainNav />
                 <SubNav
                     handleNavigate={setActiveComponent}
@@ -50,7 +50,7 @@ const App: React.FC = (): ReactElement => {
                 <ErrorBoundary>
                     <Main activeComponent={activeComponent} />
                 </ErrorBoundary>
-            </Fragment>
+            </>
         );
     }
 

@@ -1,4 +1,4 @@
-import React, { CSSProperties, Fragment, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import { Avatar, AvatarSize, AvatarTheme } from 'LumX';
 
@@ -24,7 +24,7 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <div style={demoContainerStyle}>
             <Avatar theme={theme} image="http://i.pravatar.cc/40" size={AvatarSize.xs} />
             <Avatar theme={theme} image="http://i.pravatar.cc/48" size={AvatarSize.s} />
@@ -32,7 +32,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             <Avatar theme={theme} image="http://i.pravatar.cc/128" size={AvatarSize.l} />
             <Avatar theme={theme} image="http://i.pravatar.cc/256" size={AvatarSize.xl} />
         </div>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

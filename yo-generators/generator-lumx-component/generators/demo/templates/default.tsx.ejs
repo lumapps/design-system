@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { <%= componentName %>, <%= componentName %>Theme, <%= componentName %>Themes } from 'LumX';
 
@@ -19,9 +19,9 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <<%= componentName %> theme={theme}>Default <%= componentName %></<%= componentName %>>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

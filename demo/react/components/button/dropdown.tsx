@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { ButtonEmphasises, ButtonTheme, ButtonThemes, DropdownButton } from 'LumX';
 import { Callback } from 'LumX/core/react/utils';
@@ -37,7 +37,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     };
 
     return (
-        <Fragment>
+        <>
             <div className="mb+">
                 <DropdownButton
                     className="mr"
@@ -122,7 +122,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                     Splitted Dropdown button with left icon
                 </DropdownButton>
             </div>
-        </Fragment>
+        </>
     );
 };
 

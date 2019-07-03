@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useCallback, useRef, useState } from 'react';
+import React, { ReactElement, useCallback, useRef, useState } from 'react';
 
 import { Button, ImageBlock, ImageBlockProps, Lightbox, LightboxTheme, Slideshow, SlideshowItem, Themes } from 'LumX';
 import { Alignments } from 'LumX/components';
@@ -47,7 +47,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     }, [isOpened]);
 
     return (
-        <Fragment>
+        <>
             <Button
                 buttonRef={triggerElement}
                 aria-label="Close Modal"
@@ -92,7 +92,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                     </SlideshowItem>
                 </Slideshow>
             </Lightbox>
-        </Fragment>
+        </>
     );
 };
 

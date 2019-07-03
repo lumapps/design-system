@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { Checkbox, CheckboxTheme } from 'LumX';
 import { CheckboxHelper } from 'LumX/components/checkbox/react/CheckboxHelper';
@@ -34,7 +34,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     };
 
     return (
-        <Fragment>
+        <>
             <div className="mb+">
                 <Checkbox checked={checkboxes[0]} onChange={handleChange(0)} theme={theme}>
                     <CheckboxLabel>Checkbox</CheckboxLabel>
@@ -58,7 +58,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                     </CheckboxHelper>
                 </Checkbox>
             </div>
-        </Fragment>
+        </>
     );
 };
 

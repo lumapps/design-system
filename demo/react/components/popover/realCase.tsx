@@ -1,4 +1,4 @@
-import React, { CSSProperties, Fragment, ReactElement, useState } from 'react';
+import React, { CSSProperties, ReactElement, useState } from 'react';
 
 import { Orientations } from 'LumX/components';
 
@@ -48,7 +48,7 @@ const createSimpleAction = (theme: ButtonThemes): ReactElement => (
 const demoActions: string[] = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
 const createMultipleActions = (theme: ButtonThemes): ReactElement => (
-    <Fragment>
+    <>
         {demoActions.map(
             (demoAction: string, idx: number): IconButton => (
                 <IconButton
@@ -60,7 +60,7 @@ const createMultipleActions = (theme: ButtonThemes): ReactElement => (
                 />
             ),
         )}
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

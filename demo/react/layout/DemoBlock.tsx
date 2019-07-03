@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, ReactNode, useEffect, useState } from 'react';
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -192,7 +192,7 @@ const DemoBlock: React.FC<IProps> = ({
     }, [demoPath, demoName]);
 
     return (
-        <Fragment>
+        <>
             <div className={classNames('main-block', className)}>
                 {!isEmpty(title) && <h2 className="main-block__title">{title}</h2>}
 
@@ -244,7 +244,7 @@ const DemoBlock: React.FC<IProps> = ({
                     )}
                 </div>
             </div>
-        </Fragment>
+        </>
     );
 };
 

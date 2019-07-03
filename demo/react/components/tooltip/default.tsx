@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useRef } from 'react';
+import React, { ReactElement, useRef } from 'react';
 
 import { Button, ButtonTheme, Tooltip } from 'LumX';
 
@@ -26,7 +26,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const anchorRefDelay: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
 
     return (
-        <Fragment>
+        <>
             <Button buttonRef={anchorRefTop} theme={theme}>
                 Top
             </Button>{' '}
@@ -57,7 +57,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
             <Tooltip anchorRef={anchorRefDelay} delay={2000} placement="bottom" theme={theme}>
                 Tooltip with delay
             </Tooltip>
-        </Fragment>
+        </>
     );
 };
 

@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import classNames from 'classnames';
@@ -164,7 +164,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     };
 
     return (
-        <Fragment>
+        <>
             {isTrapActive &&
                 createPortal(
                     <FocusTrap
@@ -212,7 +212,7 @@ const Lightbox: React.FC<LightboxProps> = ({
                     </FocusTrap>,
                     document.body,
                 )}
-        </Fragment>
+        </>
     );
 };
 Lightbox.displayName = COMPONENT_NAME;

@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useCallback } from 'react';
+import React, { ReactElement, useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -140,7 +140,7 @@ const TableCell: React.FC<TableCellProps> = ({
     }, [onHeaderClick]);
 
     return (
-        <Fragment>
+        <>
             {variant === Variants.head && (
                 <th
                     className={classNames(
@@ -182,7 +182,7 @@ const TableCell: React.FC<TableCellProps> = ({
                     <div className={`${CLASSNAME}-content`}>{children}</div>
                 </td>
             )}
-        </Fragment>
+        </>
     );
 };
 TableCell.displayName = COMPONENT_NAME;

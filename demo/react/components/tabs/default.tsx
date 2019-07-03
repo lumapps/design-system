@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { Button, Tabs, TabsTheme } from 'LumX';
 import { Tab } from 'LumX/components/tabs/react/Tab';
@@ -32,7 +32,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     };
 
     return (
-        <Fragment>
+        <>
             <Tabs theme={theme} activeTab={activeTab} onTabClick={handleTabClick}>
                 <Tab label="First Tab" icon={mdiBreadSliceOutline}>
                     <p className="p+">Bread</p>
@@ -48,7 +48,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
             </Tabs>
 
             <Button onClick={setFirstTabActive}>Set first tab as active tab</Button>
-        </Fragment>
+        </>
     );
 };
 

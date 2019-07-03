@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import {
     Button,
@@ -33,7 +33,7 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <List theme={theme}>
             <ListSubheader>text only</ListSubheader>
             <ListItem>Single-line item</ListItem>
@@ -57,7 +57,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                 Single-line item
             </ListItem>
         </List>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

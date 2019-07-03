@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 /////////////////////////////
 
@@ -48,7 +48,7 @@ class ErrorBoundary extends React.Component<{}, IState> {
             );
         }
 
-        return <Fragment>{this.props.children}</Fragment>;
+        return <>{this.props.children}</>;
     }
 }
 

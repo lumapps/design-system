@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { ProgressTracker, ProgressTrackerStep, ProgressTrackerStepProps, Theme } from 'LumX';
 
@@ -30,7 +30,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     ];
 
     return (
-        <Fragment>
+        <>
             Default ProgressTracker
             <ProgressTracker activeStep={activeIndex} theme={theme}>
                 {stepProps.map((step: ProgressTrackerStepProps, index: number) => (
@@ -44,7 +44,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                     />
                 ))}
             </ProgressTracker>
-        </Fragment>
+        </>
     );
 };
 

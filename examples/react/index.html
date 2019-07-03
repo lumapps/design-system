@@ -52,7 +52,7 @@
                                 &lt;script src="node_modules/@lumx/dist/lumx.react.min.js" type="text/javascript"&gt;&lt;/script&gt;
 
                                 &lt;script type="text/babel"&gt;
-                                    const { Fragment, PureComponent } = React;
+                                    const { PureComponent } = React;
                                     const { Button } = LumX;
 
                                     class MyButton extends PureComponent {
@@ -120,7 +120,7 @@
                                 &lt;script src="node_modules/@lumx/dist/lumx.react.min.js" type="text/javascript"&gt;&lt;/script&gt;
 
                                 &lt;script type="text/javascript"&gt;
-                                    const { Fragment, PureComponent } = React;
+                                    const { PureComponent } = React;
                                     const { Button } = require('@lumx/react');
 
                                     class MyButton extends PureComponent {
@@ -189,7 +189,7 @@
 
                                 &lt;script type="text/javascript"&gt;
                                     require(['@lumx/react'], (LumX) => {
-                                        const { Fragment, PureComponent } = React;
+                                        const { PureComponent } = React;
                                         const { Button } = LumX;
 
                                         class MyButton extends PureComponent {
@@ -258,7 +258,7 @@
                                 &lt;script src="node_modules/@lumx/dist/lumx.react.min.js" type="text/javascript"&gt;&lt;/script&gt;
 
                                 &lt;script type="text/javascript"&gt;
-                                    import { Fragment, PureComponent } from 'react';
+                                    import { PureComponent } from 'react';
                                     import { Button } from '@lumx/react';
 
                                     class MyButton extends PureComponent {
@@ -299,7 +299,7 @@
 
         <script src="../lumx.react.min.js" type="text/javascript"></script>
         <script data-presets="es2015,react" type="text/babel">
-            const { Fragment, PureComponent } = React;
+            const { PureComponent } = React;
             const { Button } = LumX;
 
             class Nice extends PureComponent {
@@ -323,7 +323,7 @@
             };
 
             ReactDOM.render(
-                <Fragment>
+                <>
                     {' '}
                     <div class="lumx-typography-title mb+++">This is a basic example</div>
                     {''}
@@ -332,7 +332,7 @@
                     <GotItButton color="green" onClick={() => console.info('Glad you got it!')}>
                         I got it!
                     </GotItButton>
-                </Fragment>,
+                </>,
                 document.getElementById('root'),
                 () => {
                     const message = 'LumX Example React Application successfully started!';

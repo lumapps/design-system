@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import {
     Button,
@@ -42,7 +42,7 @@ const onItemSelectedHandler = (data: string): void => {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <List theme={theme} isClickable onListItemSelected={onListItemSelectedHandler}>
             <ListSubheader>text only</ListSubheader>
             <ListItem size={ListItemSizes.tiny} onItemSelected={(): void => onItemSelectedHandler('Some data')}>
@@ -76,7 +76,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                 Single-line item 6
             </ListItem>
         </List>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

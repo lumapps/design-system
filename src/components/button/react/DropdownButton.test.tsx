@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
@@ -336,11 +336,11 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
         it('should fail when more than 2 children are given', (): void => {
             let children: ReactNode = (
-                <Fragment>
+                <>
                     <Icon icon={mdiPlus} />
                     <Icon icon={mdiPlus} />
                     <span>Label</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -352,11 +352,11 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Icon icon={mdiPlus} />
                     <Icon icon={mdiPlus} />
                     <span>Label</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -368,11 +368,11 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Icon icon={mdiPlus} />
                     <span>Label</span>
                     <span>Label 2</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -384,11 +384,11 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Icon icon={mdiPlus} />
                     <span>Label</span>
                     <span>Label 2</span>
-                </Fragment>
+                </>
             );
 
             expect(

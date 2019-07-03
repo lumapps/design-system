@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { Button, ButtonEmphasises, ButtonTheme, ButtonThemes, IconButton } from 'LumX';
 import { mdiCheck, mdiPencil } from 'LumX/icons';
@@ -20,7 +20,7 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <div className="mb+">
             <Button
                 className="mr"
@@ -140,7 +140,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
 
             <IconButton icon={mdiPencil} theme={theme} />
         </div>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

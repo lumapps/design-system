@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
@@ -224,10 +224,10 @@ describe(`<${Switch.displayName}>`, (): void => {
     describe('Conditions', (): void => {
         it('should fail when more than one child is given', (): void => {
             const children: ReactNode = (
-                <Fragment>
+                <>
                     Label
                     <span>Label 2</span>
-                </Fragment>
+                </>
             );
 
             expect(

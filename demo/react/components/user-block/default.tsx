@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { Orientations } from 'LumX/components';
 
@@ -31,7 +31,7 @@ const createSimpleAction = (theme: ButtonThemes): ReactElement => (
 const demoActions: string[] = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
 const createMultipleActions = (theme: ButtonThemes): ReactElement => (
-    <Fragment>
+    <>
         {demoActions.map(
             (demoAction: string, idx: number): IconButton => (
                 <IconButton
@@ -43,7 +43,7 @@ const createMultipleActions = (theme: ButtonThemes): ReactElement => (
                 />
             ),
         )}
-    </Fragment>
+    </>
 );
 
 /////////////////////////////
@@ -54,7 +54,7 @@ const createMultipleActions = (theme: ButtonThemes): ReactElement => (
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <UserBlock
             theme={theme}
             name="Emmitt O. Lum"
@@ -67,7 +67,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             simpleAction={createSimpleAction(theme)}
             multipleActions={createMultipleActions(theme)}
         />
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

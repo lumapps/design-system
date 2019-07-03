@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import { Button, ButtonEmphasises, ButtonTheme, ButtonThemes } from 'LumX';
 
@@ -19,7 +19,7 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <Button
             className="mr"
             disabled={true}
@@ -43,7 +43,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
         <Button disabled={true} theme={theme}>
             High emphasis (default)
         </Button>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

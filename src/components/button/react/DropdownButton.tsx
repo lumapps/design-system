@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, ReactNode, useState } from 'react';
+import React, { ReactElement, ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -250,11 +250,11 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     }
 
     return (
-        <Fragment>
+        <>
             {rootElement}
 
             {isDropdownOpened ? <Dropdown>{dropdown}</Dropdown> : undefined}
-        </Fragment>
+        </>
     );
 };
 DropdownButton.displayName = COMPONENT_NAME;

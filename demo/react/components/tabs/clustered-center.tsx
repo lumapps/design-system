@@ -1,4 +1,4 @@
-import React, { Fragment, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { mdiBowl, mdiBreadSliceOutline } from '@mdi/js';
 import { Tabs, TabsTheme } from 'LumX';
@@ -29,7 +29,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     };
 
     return (
-        <Fragment>
+        <>
             <Tabs
                 theme={theme}
                 layout={Layouts.clustered}
@@ -49,7 +49,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                     <p className="p+">Bowl</p>
                 </Tab>
             </Tabs>
-        </Fragment>
+        </>
     );
 };
 

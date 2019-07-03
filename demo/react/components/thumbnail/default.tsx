@@ -1,4 +1,4 @@
-import React, { CSSProperties, Fragment, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import { Thumbnail, ThumbnailAspectRatios, ThumbnailSizes, ThumbnailTheme } from 'LumX';
 
@@ -25,7 +25,7 @@ const componentHolder: CSSProperties = {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <Fragment>
+    <>
         <h2>Aspect-ratio : original</h2>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div style={{ display: 'flex' }}>
@@ -170,7 +170,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                 </div>
             </div>
         </div>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////
