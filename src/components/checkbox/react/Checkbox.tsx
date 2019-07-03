@@ -85,7 +85,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     ...props
 }: CheckboxProps): ReactElement => {
     const checkboxId: string = uniqueId(`${CLASSNAME.toLowerCase()}-`);
-    const handleChange: () => void = (): void => {
+    const handleChange = (): void => {
         onChange!({ checked: !checked });
     };
 

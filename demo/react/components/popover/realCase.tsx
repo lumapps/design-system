@@ -85,7 +85,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
      * Switch tooltip visibility
      * @param newVisibleState Tooltip visibility
      */
-    const toggleCardDisplay: (newVisibleState: boolean) => void = (newVisibleState: boolean): void => {
+    const toggleCardDisplay = (newVisibleState: boolean): void => {
         // tslint:disable-next-line: early-exit
         if (!newVisibleState) {
             delayer = setTimeout(() => setCardDisplayed(false), 500);

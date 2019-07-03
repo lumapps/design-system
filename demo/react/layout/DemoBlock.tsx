@@ -155,7 +155,7 @@ const DemoBlock: React.FC<IProps> = ({
      *
      * @param enabled Indicates if the dark theme should be enabled or not.
      */
-    const setDarkTheme: (enabled: boolean) => void = (enabled: boolean): void => {
+    const setDarkTheme = (enabled: boolean): void => {
         setTheme(enabled ? Themes.dark : Themes.light);
     };
 
@@ -163,7 +163,7 @@ const DemoBlock: React.FC<IProps> = ({
     /**
      * Toggle the display of the code in the demo block.
      */
-    const toggleDisplayCode: () => void = (): void => {
+    const toggleDisplayCode = (): void => {
         setDisplayCode(!shouldDisplayCode);
     };
 

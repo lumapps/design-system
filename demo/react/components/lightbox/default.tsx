@@ -34,16 +34,16 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     // tslint:disable-next-line: no-any
     const triggerElement: React.RefObject<any> = useRef(null);
 
-    const onOpenModal: () => void = useCallback(() => {
+    const onOpenModal = useCallback(() => {
         // Do something.
     }, []);
 
-    const onCloseModal: () => void = useCallback(() => {
+    const onCloseModal = useCallback(() => {
         // Do something.
         setIsOpened(false);
     }, []);
 
-    const handleClick: () => void = useCallback(() => {
+    const handleClick = useCallback(() => {
         setIsOpened(!isOpened);
     }, [isOpened]);
 

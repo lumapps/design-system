@@ -133,7 +133,7 @@ const TableCell: React.FC<TableCellProps> = ({
     /**
      * Handle click on the ordered thead.
      */
-    const handleOnHeaderClick: () => void = useCallback(() => {
+    const handleOnHeaderClick = useCallback(() => {
         if (isFunction(onHeaderClick)) {
             onHeaderClick();
         }

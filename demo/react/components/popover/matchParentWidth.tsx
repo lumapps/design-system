@@ -64,7 +64,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
      * Switch tooltip visibility
      * @param newVisibleState Tooltip visibility
      */
-    const toggleTooltipDisplay: (newVisibleState: boolean) => void = (newVisibleState: boolean): void => {
+    const toggleTooltipDisplay = (newVisibleState: boolean): void => {
         setTooltipDisplayed(newVisibleState);
     };
 

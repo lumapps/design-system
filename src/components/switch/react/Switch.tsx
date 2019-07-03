@@ -132,7 +132,7 @@ const Switch: React.FC<SwitchProps> = ({
     /**
      * Toggle the state of the <Switch> inner checkbox.
      */
-    const toggleIsChecked: (evt: React.MouseEvent<HTMLElement>) => void = (): void => {
+    const toggleIsChecked = (): void => {
         setIsChecked(!isChecked);
 
         if (isFunction(onToggle)) {

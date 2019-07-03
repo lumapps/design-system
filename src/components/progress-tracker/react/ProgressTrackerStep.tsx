@@ -103,7 +103,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
      *
      * @return The correct svg path.
      */
-    const getIcon: () => string = (): string => {
+    const getIcon = (): string => {
         if (isComplete) {
             return mdiCheckCircle;
         }

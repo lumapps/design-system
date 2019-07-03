@@ -152,7 +152,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Handle click on a bullet to go to a specific slide.
      */
-    const handleControlGotToSlide: (index: number) => void = useCallback(
+    const handleControlGotToSlide = useCallback(
         (index: number) => {
             stopAutoPlay();
 
@@ -166,7 +166,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Handle click or keyboard event to go to next slide.
      */
-    const handleControlNextSlide: () => void = (): void => {
+    const handleControlNextSlide = (): void => {
         stopAutoPlay();
         goToNextSlide();
     };
@@ -174,7 +174,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Handle click or keyboard event to go to previous slide.
      */
-    const handleControlPreviousSlide: () => void = (): void => {
+    const handleControlPreviousSlide = (): void => {
         stopAutoPlay();
         goToPreviousSlide();
     };
@@ -182,7 +182,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Change current index to display next slide.
      */
-    const goToNextSlide: () => void = useCallback(() => {
+    const goToNextSlide = useCallback(() => {
         if (currentIndex === slidesCount - 1) {
             setCurrentIndex(() => 0);
         } else if (currentIndex < slidesCount - 1) {
@@ -193,7 +193,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Change current index to display previous slide.
      */
-    const goToPreviousSlide: () => void = useCallback(() => {
+    const goToPreviousSlide = useCallback(() => {
         if (currentIndex === 0) {
             setCurrentIndex(() => slidesCount - 1);
         } else if (currentIndex > 0) {
@@ -204,7 +204,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Stop slideshow auto rotating.
      */
-    const stopAutoPlay: () => void = (): void => {
+    const stopAutoPlay = (): void => {
         setIsAutoPlaying(false);
     };
 

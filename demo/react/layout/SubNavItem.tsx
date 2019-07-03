@@ -50,7 +50,7 @@ const SubNavItem: React.FC<IProps> = ({ children, component, handleClick, active
         lower: true,
     });
 
-    const onClick: () => void = (): void => {
+    const onClick = (): void => {
         if (component !== undefined && !isEmpty(component)) {
             handleClick(component);
         }

@@ -112,7 +112,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      *
      * @param evt Keyboard event.
      */
-    const handleKeyPressed: (evt: KeyboardEvent) => void = (evt: KeyboardEvent): void => {
+    const handleKeyPressed = (evt: KeyboardEvent): void => {
         if (evt.keyCode === LEFT_KEY_CODE) {
             handlePreviousClick();
         } else if (evt.keyCode === RIGHT_KEY_CODE) {
@@ -129,7 +129,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      * @param index Index used to determinate position in slides.
      * @return Min and max for pagination position.
      */
-    const initVisibleRange: (index: number) => PaginationRange = (index: number): PaginationRange => {
+    const initVisibleRange = (index: number): PaginationRange => {
         const deltaItems: number = PAGINATION_ITEMS_MAX - 1;
         let min: number = index - EDGE_FROM_ACTIVE_INDEX;
         let max: number = index + EDGE_FROM_ACTIVE_INDEX;
@@ -150,7 +150,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      *
      * @param index Index used to determinate position in slides.
      */
-    const updateVisibleRange: (index: number) => void = (index: number): void => {
+    const updateVisibleRange = (index: number): void => {
         if (index === visibleRange.maxRange && index < lastSlide) {
             setVisibleRange(() => ({ minRange: visibleRange.minRange + 1, maxRange: visibleRange.maxRange + 1 }));
         } else if (index === visibleRange.minRange && index > 0) {
@@ -166,7 +166,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      * @param lastIndex Index of last item.
      * @return Array of nabiagtion items.
      */
-    const buildItemsArray: (lastIndex: number) => JSX.Element[] = (lastIndex: number): JSX.Element[] => {
+    const buildItemsArray = (lastIndex: number): JSX.Element[] => {
         const items: JSX.Element[] = [];
 
         for (let i = 0; i <= lastIndex; i++) {
@@ -194,7 +194,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      *
      * @param index Index of the slide to go to.
      */
-    const handleItemClick: (index: number) => void = useCallback(
+    const handleItemClick = useCallback(
         (index: number) => {
             if (isFunction(onPaginationClick)) {
                 onPaginationClick(index);
@@ -206,7 +206,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Handle click to go to next slide.
      */
-    const handleNextClick: () => void = useCallback(() => {
+    const handleNextClick = useCallback(() => {
         if (isFunction(onNextClick)) {
             onNextClick();
         }
@@ -215,7 +215,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Handle click to go to previous slide.
      */
-    const handlePreviousClick: () => void = useCallback(() => {
+    const handlePreviousClick = useCallback(() => {
         if (isFunction(onPreviousClick)) {
             onPreviousClick();
         }
@@ -227,7 +227,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      * @param index Index of navigation item.
      * @return Whether navigation item is visble or not.
      */
-    const isPaginationItemOutVisibleRange: (index: number) => boolean = (index: number): boolean => {
+    const isPaginationItemOutVisibleRange = (index: number): boolean => {
         return index < visibleRange.minRange || index > visibleRange.maxRange;
     };
 
@@ -237,7 +237,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      * @param  index The index of the pagination item to check.
      * @return Whether the pagination item is on edge or not.
      */
-    const isPaginationItemOnEdge: (index: number) => boolean = (index: number): boolean => {
+    const isPaginationItemOnEdge = (index: number): boolean => {
         return (
             index !== 0 && index !== lastSlide && (index === visibleRange.minRange || index === visibleRange.maxRange)
         );

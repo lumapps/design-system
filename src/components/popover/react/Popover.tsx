@@ -130,9 +130,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Helper method that returns a simple boolean value from different source format.
  * @param inputValue The input to extract the boolean value from
  */
-const unwrap: (inputValue: boolean | string | (() => boolean) | undefined) => boolean = (
-    inputValue: boolean | string | (() => boolean) | undefined,
-): boolean => {
+const unwrap = (inputValue: boolean | string | (() => boolean) | undefined): boolean => {
     return typeof inputValue === 'function' ? inputValue() : Boolean(inputValue);
 };
 

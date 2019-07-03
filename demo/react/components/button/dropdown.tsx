@@ -20,7 +20,7 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    const onClick: (splitted: boolean) => void = (splitted: boolean = false): (() => void) => {
+    const onClick = (splitted: boolean = false): (() => void) => {
         return (): void => {
             console.info(`You click on a ${splitted ? 'splitted' : 'non-splitted'} dropdown button`);
             if (splitted) {

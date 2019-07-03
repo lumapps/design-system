@@ -119,7 +119,7 @@ const List: React.FC<ListProps> = ({
      * Reset the active element
      * @param fromBlur Is request from blur event
      */
-    const resetActiveIndex: (fromBlur: boolean) => void = (fromBlur: boolean): void => {
+    const resetActiveIndex = (fromBlur: boolean): void => {
         if (!isClickable || preventResetOnBlurOrFocus.current) {
             if (fromBlur) {
                 preventResetOnBlurOrFocus.current = false;

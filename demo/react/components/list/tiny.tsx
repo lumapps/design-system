@@ -28,13 +28,13 @@ interface IProps {
 
 /////////////////////////////
 
-const onListItemSelectedHandler: (selectedEntry: ListItem) => void = (selectedEntry: ListItem): void => {
+const onListItemSelectedHandler = (selectedEntry: ListItem): void => {
     // tslint:disable-next-line: no-console
     console.log(selectedEntry);
 };
 
 // tslint:disable-next-line: no-any
-const onItemSelectedHandler: (data: any) => void = (data: any): void => {
+const onItemSelectedHandler = (data: any): void => {
     // tslint:disable-next-line: no-console
     console.log(data);
 };

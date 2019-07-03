@@ -119,7 +119,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Callback on activation of focus trap.
      */
-    const handleFocusActivation: () => void = (): void => {
+    const handleFocusActivation = (): void => {
         if (childrenRef && childrenRef.current && childrenRef.current.firstChild) {
             // Set focus inside lightbox.
             childrenRef.current.firstChild.focus();
@@ -133,7 +133,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Callback on deactivation of focus trap.
      */
-    const handleFocusDeactivation: () => void = (): void => {
+    const handleFocusDeactivation = (): void => {
         if (parentElement && parentElement.current) {
             // Set focus back on parent element.
             parentElement.current.focus();
@@ -149,22 +149,17 @@ const Lightbox: React.FC<LightboxProps> = ({
      *
      * @param evt Click event.
      */
-    const handleClose: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void = useCallback(
-        (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-            setTrapActive(false);
-            evt.stopPropagation();
-        },
-        [],
-    );
+    const handleClose = useCallback((evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        setTrapActive(false);
+        evt.stopPropagation();
+    }, []);
 
     /**
      * Prevent click bubbling to parent.
      *
      * @param evt Click event.
      */
-    const preventClick: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void = (
-        evt: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ): void => {
+    const preventClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
         evt.stopPropagation();
     };
 

@@ -84,7 +84,7 @@ const Main: React.FC<IProps> = ({ activeComponent }: IProps): ReactElement => {
     const [demo, setDemo] = useState<IESModule>();
 
     useEffect((): void => {
-        const loadComponent: () => Promise<void> = async (): Promise<void> => {
+        const loadComponent = async (): Promise<void> => {
             try {
                 const loadedDemo: IESModule = await _loadComponent(activeComponent);
                 setDemo(loadedDemo);

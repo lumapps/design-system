@@ -57,7 +57,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
     /**
      * Switch tooltip visibility
      */
-    const toggleTooltipDisplay: (evt?: React.MouseEvent<HTMLElement>) => void = (): void => {
+    const toggleTooltipDisplay = (): void => {
         setTooltipDisplayed(!isTooltipDisplayed);
     };
 

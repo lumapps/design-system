@@ -99,9 +99,7 @@ const TextField: React.FC<TextFieldProps> = ({
      *
      * @param event Event of HTML Element
      */
-    const handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setHasValue(Boolean(event.target.value));
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => setHasValue(Boolean(event.target.value));
 
     return (
         <div

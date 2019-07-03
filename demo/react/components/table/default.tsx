@@ -128,7 +128,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
      *
      * @param headSource The head cell to sort the table by.
      */
-    const handleSort: (headSource: IHead) => void = useCallback(
+    const handleSort = useCallback(
         (headSource: IHead) => {
             tableHead.map((head: IHead) => {
                 if (head !== headSource) {
