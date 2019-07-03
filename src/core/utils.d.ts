@@ -1,4 +1,5 @@
 import { Color, Size, Theme } from 'LumX/components';
+import { Callback } from './react/utils';
 
 /////////////////////////////
 
@@ -41,7 +42,7 @@ declare function handleBasicClasses({ prefix, ...props }: { prefix: string; [pro
  * @param cb Callback function.
  * @return Function to remove listeners.
  */
-declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) => void): () => void;
+declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) => void): Callback;
 
 declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
 
@@ -51,7 +52,7 @@ declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
  * @param  cb The callback to call on enter/return press.
  * @return The decorated function.
  */
-declare function onEnterPressed(cb: () => void): () => void;
+declare function onEnterPressed(cb: Callback): Callback;
 
 /////////////////////////////
 

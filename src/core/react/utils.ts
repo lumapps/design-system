@@ -369,6 +369,11 @@ function validateComponent(
     return newChildren;
 }
 
+/**
+ * Callback function type alias (use for readability)
+ */
+type Callback = () => void;
+
 /////////////////////////////
 
 export {
@@ -384,4 +389,5 @@ export {
     isElementText,
     unwrapFragment,
     validateComponent,
+    Callback,
 };
