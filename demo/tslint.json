@@ -1,0 +1,7 @@
+{
+    "extends": "../tslint.json",
+    "rules": {
+        "jsx-no-lambda": false,
+        "no-console": false
+    }
+}

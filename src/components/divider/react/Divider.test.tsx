@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps, Themes } from './Divider';
+import { Theme } from 'LumX';
+import { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps } from './Divider';
 
 /////////////////////////////
 
@@ -36,16 +37,13 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: DividerProps = {
         children: 'Label',
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Divider {...props} />);
 
@@ -61,7 +59,7 @@ describe(`<${Divider.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { hr, wrapper }: ISetup = setup();
+            const { hr, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(hr).toExist();
@@ -74,7 +72,7 @@ describe(`<${Divider.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { hr }: ISetup = setup();
+            const { hr } = setup();
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
@@ -88,10 +86,10 @@ describe(`<${Divider.displayName}>`, (): void => {
         it('should use the given `theme`', (): void => {
             const testedProp = 'theme';
             const modifiedProps: ISetupProps = {
-                [testedProp]: Themes.dark,
+                [testedProp]: Theme.dark,
             };
 
-            const { hr }: ISetup = setup(modifiedProps);
+            const { hr } = setup(modifiedProps);
 
             expect(hr).toHaveClassName(
                 getBasicClass({ prefix: CLASSNAME, type: testedProp, value: modifiedProps[testedProp] }),

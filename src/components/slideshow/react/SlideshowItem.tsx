@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -35,7 +35,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @param props The children and props of the component.
  * @return    The processed children of the component.
  */
-function _validate(props: IGenericProps): React.ReactNode {
+function _validate(props: IGenericProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: 1,
         minChildren: 1,
@@ -54,8 +54,8 @@ const SlideshowItem: React.FC<IGenericProps> = ({
     className = '',
     children,
     ...props
-}: IGenericProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+}: IGenericProps): ReactElement => {
+    const newChildren: ReactNode = _validate({ children, ...props });
 
     return (
         <div

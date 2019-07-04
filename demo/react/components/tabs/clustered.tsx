@@ -1,9 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { mdiBowl, mdiBreadSliceOutline } from '@mdi/js';
-import { Tabs, TabsProps, TabsTheme } from 'LumX';
-import { Tab } from 'LumX/components/tabs/react/Tab';
-import { Layouts } from 'LumX/components/tabs/react/Tabs';
+import { Tab, Tabs, TabsLayout, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -11,7 +9,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: TabsTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -21,18 +19,16 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const [activeTab, setActiveTab]: [TabsProps['activeTab'], React.Dispatch<React.SetStateAction<number>>] = useState(
-        0,
-    );
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const [activeTab, setActiveTab] = useState(0);
 
     const handleTabClick: CallableFunction = ({ index }: { index: number }): void => {
         setActiveTab(index);
     };
 
     return (
-        <Fragment>
-            <Tabs theme={theme} layout={Layouts.clustered} activeTab={activeTab} onTabClick={handleTabClick}>
+        <>
+            <Tabs theme={theme} layout={TabsLayout.clustered} activeTab={activeTab} onTabClick={handleTabClick}>
                 <Tab label="First Tab" icon={mdiBreadSliceOutline}>
                     <p className="p+">Bread</p>
                 </Tab>
@@ -45,7 +41,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     <p className="p+">Bowl</p>
                 </Tab>
             </Tabs>
-        </Fragment>
+        </>
     );
 };
 

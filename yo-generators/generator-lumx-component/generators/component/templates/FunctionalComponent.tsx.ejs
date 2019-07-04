@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -112,7 +112,7 @@ function _transformChild({
     childrenCount,
     index,
     props,
-}: ChildTransformParameters): React.ReactNode {
+}: ChildTransformParameters): ReactNode {
     // Do your transformation here. Here is an example:
     if (typeof child === 'string') {
         return <span>{child}</span>;
@@ -152,7 +152,7 @@ function _validateChild({
  * @param  props The children and props of the component.
  * @return The processed children of the component.
  */
-function _validate(props: <%= componentName %>Props): React.ReactNode {
+function _validate(props: <%= componentName %>Props): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         <%_ if (checkChildrenTypes) { -%>
         allowedTypes: [
@@ -191,9 +191,9 @@ function _validate(props: <%= componentName %>Props): React.ReactNode {
  *
  * @return The component.
  */
-const <%= componentName %>: React.FC<<%= componentName %>Props> = ({ children, className = '', ...props }: <%= componentName %>Props): React.ReactElement => {
+const <%= componentName %>: React.FC<<%= componentName %>Props> = ({ children, className = '', ...props }: <%= componentName %>Props): ReactElement => {
     <%_ if (validateComponent) { -%>
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+    const newChildren: ReactNode = _validate({ children, ...props });
 
     <%_ } -%>
     return (

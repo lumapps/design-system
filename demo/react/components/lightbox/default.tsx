@@ -1,7 +1,6 @@
-import React, { Fragment, useCallback, useRef, useState } from 'react';
+import React, { ReactElement, useCallback, useRef, useState } from 'react';
 
-import { Button, ImageBlock, ImageBlockProps, Lightbox, LightboxTheme, Slideshow, SlideshowItem, Themes } from 'LumX';
-import { Alignments } from 'LumX/components';
+import { Alignment, Button, ImageBlock, ImageBlockProps, Lightbox, Slideshow, SlideshowItem, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -9,17 +8,17 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: LightboxTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
 
 const imageBlockDemoProps: Partial<ImageBlockProps> = {
-    align: Alignments.center,
+    align: Alignment.center,
     description: 'What an image',
     fillHeight: true,
     tags: ['#tag1', '#tag2', '#tag3'],
-    theme: Themes.dark,
+    theme: Theme.dark,
     title: 'Nice Image',
 };
 
@@ -28,27 +27,26 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const [isOpened, setIsOpened]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const [isOpened, setIsOpened] = useState(false);
 
-    // tslint:disable-next-line: no-any
-    const triggerElement: React.RefObject<any> = useRef(null);
+    const triggerElement = useRef<Button>(null);
 
-    const onOpenModal: () => void = useCallback(() => {
+    const onOpenModal = useCallback(() => {
         // Do something.
     }, []);
 
-    const onCloseModal: () => void = useCallback(() => {
+    const onCloseModal = useCallback(() => {
         // Do something.
         setIsOpened(false);
     }, []);
 
-    const handleClick: () => void = useCallback(() => {
+    const handleClick = useCallback(() => {
         setIsOpened(!isOpened);
     }, [isOpened]);
 
     return (
-        <Fragment>
+        <>
             <Button
                 buttonRef={triggerElement}
                 aria-label="Close Modal"
@@ -66,7 +64,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 onOpen={onOpenModal}
                 theme={theme}
             >
-                <Slideshow hasControls={true} autoPlay={true} fillHeight={true} theme={Themes.dark}>
+                <Slideshow hasControls={true} autoPlay={true} fillHeight={true} theme={Theme.dark}>
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=24" {...imageBlockDemoProps} />
                     </SlideshowItem>
@@ -93,7 +91,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     </SlideshowItem>
                 </Slideshow>
             </Lightbox>
-        </Fragment>
+        </>
     );
 };
 

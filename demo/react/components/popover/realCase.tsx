@@ -1,20 +1,16 @@
-// tslint:disable: jsx-no-lambda
-import React, { CSSProperties, Fragment, ReactNode, useState } from 'react';
-
-import { Orientations } from 'LumX/components';
+import React, { CSSProperties, ReactElement, useState } from 'react';
 
 import {
     Button,
-    ButtonEmphasises,
-    ButtonSizes,
-    ButtonThemes,
+    ButtonEmphasis,
     IconButton,
-    Placements,
+    Orientation,
     Popover,
     PopperOffsets,
+    PopperPlacement,
+    Size,
+    Theme,
     UserBlock,
-    UserBlockSize,
-    UserBlockTheme,
 } from 'LumX';
 
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from 'LumX/icons';
@@ -25,7 +21,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: UserBlockTheme;
+    theme: Theme;
 }
 
 const demoPopoverHolderStyle: CSSProperties = {
@@ -35,12 +31,11 @@ const demoPopoverHolderStyle: CSSProperties = {
     paddingTop: 100,
 };
 
-// tslint:disable-next-line: no-any
-const createSimpleAction: React.FC<ButtonThemes> = (theme: ButtonThemes): any => (
+const createSimpleAction = (theme: Theme): ReactElement => (
     <Button
-        emphasis={ButtonEmphasises.medium}
-        color={theme === ButtonThemes.dark ? 'light' : undefined}
-        size={ButtonSizes.s}
+        emphasis={ButtonEmphasis.medium}
+        color={theme === Theme.dark ? 'light' : undefined}
+        size={Size.s}
         theme={theme}
     >
         Follow
@@ -49,21 +44,20 @@ const createSimpleAction: React.FC<ButtonThemes> = (theme: ButtonThemes): any =>
 
 const demoActions: string[] = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
-// tslint:disable-next-line: no-any
-const createMultipleActions: React.FC<ButtonThemes> = (theme: any): any => (
-    <Fragment>
+const createMultipleActions = (theme: Theme): ReactElement => (
+    <>
         {demoActions.map(
             (demoAction: string, idx: number): IconButton => (
                 <IconButton
                     key={`ubAction${idx}`}
-                    emphasis={ButtonEmphasises.low}
-                    color={theme === ButtonThemes.dark ? 'light' : undefined}
+                    emphasis={ButtonEmphasis.low}
+                    color={theme === Theme.dark ? 'light' : undefined}
                     icon={demoAction}
                     theme={theme}
                 />
             ),
         )}
-    </Fragment>
+    </>
 );
 
 /////////////////////////////
@@ -73,19 +67,16 @@ const createMultipleActions: React.FC<ButtonThemes> = (theme: any): any => (
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    // tslint:disable-next-line: typedef
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [isCardDisplayed, setCardDisplayed] = useState(false);
-    // tslint:disable-next-line: typedef
     let delayer: NodeJS.Timeout | null;
-    // tslint:disable-next-line: typedef
     const anchorRef = React.createRef();
 
     /**
      * Switch tooltip visibility
      * @param newVisibleState Tooltip visibility
      */
-    const toggleCardDisplay: (newVisibleState: boolean) => void = (newVisibleState: boolean): void => {
+    const toggleCardDisplay = (newVisibleState: boolean): void => {
         // tslint:disable-next-line: early-exit
         if (!newVisibleState) {
             delayer = setTimeout(() => setCardDisplayed(false), 500);
@@ -98,21 +89,21 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         }
     };
 
-    const anchor: ReactNode = (
+    const anchor: ReactElement = (
         <UserBlock
             ref={anchorRef}
             theme={theme}
             name="Guillaume Nachury"
             fields={['Bidouilleur', 'Meyzieu']}
             avatar={'http://i.pravatar.cc/139'}
-            orientation={Orientations.horizontal}
+            orientation={Orientation.horizontal}
             onMouseEnter={(): void => toggleCardDisplay(true)}
             onMouseLeave={(): void => toggleCardDisplay(false)}
-            size={UserBlockSize.m}
+            size={Size.m}
         />
     );
 
-    const popper: ReactNode = (
+    const popper: ReactElement = (
         <div
             style={{
                 display: 'flex',
@@ -130,7 +121,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 name="Guillaume Nachury"
                 fields={['Bidouilleur', 'Meyzieu']}
                 avatar={'http://i.pravatar.cc/139'}
-                orientation={Orientations.vertical}
+                orientation={Orientation.vertical}
                 simpleAction={createSimpleAction(theme)}
                 multipleActions={createMultipleActions(theme)}
             />
@@ -145,7 +136,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 popperOffset={offsets}
                 showPopper={isCardDisplayed}
                 popperElement={popper}
-                popperPlacement={Placements.TOP_START}
+                popperPlacement={PopperPlacement.TOP_START}
                 elevation={5}
             />
         </div>

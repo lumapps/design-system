@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactNode, useState } from 'react';
+import React, { CSSProperties, ReactElement, useState } from 'react';
 
-import { Button, ButtonEmphasises, ButtonSizes, Placements, Popover } from 'LumX';
+import { Button, ButtonEmphasis, Popover, PopperPlacement, Size } from 'LumX';
 
 /////////////////////////////
 
@@ -32,11 +32,11 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'center',
 };
 
-const createDemoAnchor: () => ReactNode = (): ReactNode => {
+const createDemoAnchor = (): ReactElement => {
     return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
 };
 
-const createPopper: () => ReactNode = (): ReactNode => {
+const createPopper = (): ReactElement => {
     return (
         <div style={demoPopperStyle}>
             {`Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. `}
@@ -49,28 +49,26 @@ const createPopper: () => ReactNode = (): ReactNode => {
  *
  * @return The demo component.
  */
-// tslint:disable: jsx-no-lambda
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
-    // tslint:disable-next-line: typedef
+const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
 
     /**
      * Switch tooltip visibility
      */
-    const toggleTooltipDisplay: (evt?: React.MouseEvent<HTMLElement>) => void = (): void => {
+    const toggleTooltipDisplay = (): void => {
         setTooltipDisplayed(!isTooltipDisplayed);
     };
 
     return (
         <div>
-            <Button size={ButtonSizes.s} emphasis={ButtonEmphasises.medium} onClick={toggleTooltipDisplay}>
+            <Button size={Size.s} emphasis={ButtonEmphasis.medium} onClick={toggleTooltipDisplay}>
                 Toggle visibility
             </Button>
             <div style={demoPopoverHolderStyle}>
                 <Popover
                     anchorElement={createDemoAnchor()}
                     popperElement={createPopper()}
-                    popperPlacement={Placements.AUTO}
+                    popperPlacement={PopperPlacement.AUTO}
                     showPopper={isTooltipDisplayed}
                 />
             </div>

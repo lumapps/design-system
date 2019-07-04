@@ -1,4 +1,4 @@
-import React<% if (validateComponent && checkChildrenNumber) {%>, { Fragment }<% } %> from 'react';
+import React<% if (validateComponent && checkChildrenNumber) {%>, { ReactNode, ReactElement }<% } %> from 'react';
 
 import { mount, shallow } from 'enzyme';
 <%_ if (validateComponent && checkChildrenTypes) { -%>
@@ -35,12 +35,11 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {ISetupProps} props  The props to use to override the default props of the component.
- * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
+ * @param  props  The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
+const setup = (
     { ...propsOverrides }: ISetupProps = {},
     shallowRendering: boolean = true,
 ): ISetup => {
@@ -49,7 +48,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<<%= componentName %> {...props} />);
 
@@ -67,7 +66,7 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         // Here is an example of a basic rendering check, with snapshot.
 
         it('should render correctly', (): void => {
-            const { root, wrapper }: ISetup = setup();
+            const { root, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toExist();
@@ -82,7 +81,7 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         // Here are some examples of basic props check.
 
         it('should use default props', (): void => {
-            const { root }: ISetup = setup();
+            const { root } = setup();
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {
@@ -109,7 +108,7 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         );
 
         it('should trigger `onClick` when clicked', (): void => {
-            const { root }: ISetup = setup({ onClick }, false);
+            const { root } = setup({ onClick }, false);
 
             root.simulate('click');
 
@@ -133,12 +132,12 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         });
 
         it('should fail when more than 2 children are given', (): void => {
-            const children: React.ReactNode = (
-                <Fragment>
+            const children: ReactNode = (
+                <>
                     <span>Label</span>
                     <span>Label 2</span>
                     <span>Label 3</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -154,7 +153,7 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         it('should fail when anything else than text, <span> or <p> is given as child', (): void => {
             mockConsole('debug');
 
-            const children: React.ReactNode = <div>Label</div>;
+            const children: ReactNode = <div>Label</div>;
 
             expect(
                 (): void => {

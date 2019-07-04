@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement } from 'react';
 
-import { Switch, SwitchTheme } from 'LumX';
+import { Switch, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: SwitchTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -18,8 +18,8 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
+    <>
         <Switch className="mb+" theme={theme} />
 
         <Switch className="mb+" theme={theme}>
@@ -31,7 +31,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <Switch checked={true} theme={theme}>
             Checked by default
         </Switch>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement } from 'react';
 
-import { Progress, Variants } from 'LumX';
+import { Progress, ProgressVariant } from 'LumX';
 
 /////////////////////////////
 
@@ -13,10 +13,10 @@ interface IProps {}
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => (
-    <Fragment>
-        <Progress variant={Variants.linear} />
-    </Fragment>
+const DemoComponent: React.FC<IProps> = (): ReactElement => (
+    <>
+        <Progress variant={ProgressVariant.linear} />
+    </>
 );
 
 /////////////////////////////

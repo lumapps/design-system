@@ -1,21 +1,20 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement } from 'react';
 
 import {
     Button,
-    ButtonEmphasises,
+    ButtonEmphasis,
     Icon,
     List,
     ListItem,
-    ListItemSizes,
+    ListItemSize,
     ListSubheader,
-    ListTheme,
+    Size,
+    Theme,
     Thumbnail,
-    ThumbnailSizes,
+    ThumbnailVariant,
 } from 'LumX';
 
 import { mdiSend } from 'LumX/icons';
-
-import { Variants } from 'LumX/components/thumbnail/react/Thumbnail';
 
 /////////////////////////////
 
@@ -23,7 +22,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ListTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -33,11 +32,11 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
+    <>
         <List theme={theme}>
             <ListSubheader>text only</ListSubheader>
-            <ListItem size={ListItemSizes.big}>
+            <ListItem size={ListItemSize.big}>
                 <div>
                     <span>Two-line item</span>
                 </div>
@@ -47,13 +46,13 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             </ListItem>
             <ListSubheader>rich</ListSubheader>
             <ListItem
-                size={ListItemSizes.big}
+                size={ListItemSize.big}
                 before={
                     <Thumbnail
                         theme={theme}
-                        variant={Variants.rounded}
+                        variant={ThumbnailVariant.rounded}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.m}
+                        size={Size.m}
                     />
                 }
             >
@@ -65,9 +64,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 </div>
             </ListItem>
             <ListItem
-                size={ListItemSizes.big}
+                size={ListItemSize.big}
                 before={<Icon icon={mdiSend} />}
-                after={<Button emphasis={ButtonEmphasises.low}>Button</Button>}
+                after={<Button emphasis={ButtonEmphasis.low}>Button</Button>}
             >
                 <div>
                     <span>Two-line item</span>
@@ -77,7 +76,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 </div>
             </ListItem>
         </List>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

@@ -1,8 +1,8 @@
-import React, { CSSProperties, Dispatch, SetStateAction, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX/components';
+import { Theme } from 'LumX';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from 'LumX/components/slideshow/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { useInterval } from 'LumX/core/react/hooks';
@@ -67,7 +67,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     groupBy: 1,
     hasControls: false,
     interval: AUTOPLAY_DEFAULT_INTERVAL,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -83,7 +83,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param props The children and props of the component.
  * @return    The processed children of the component.
  */
-function _validate(props: SlideshowProps): React.ReactNode {
+function _validate(props: SlideshowProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         props,
     });
@@ -105,14 +105,14 @@ const Slideshow: React.FC<SlideshowProps> = ({
     interval = DEFAULT_PROPS.interval,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SlideshowProps): React.ReactElement | null => {
+}: SlideshowProps): ReactElement | null => {
     if (typeof activeIndex === 'undefined' || typeof groupBy === 'undefined' || typeof interval === 'undefined') {
         return null;
     }
 
-    const newChildren: React.ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
-    const [currentIndex, setCurrentIndex]: [number, Dispatch<SetStateAction<number>>] = useState(activeIndex);
-    const [isAutoPlaying, setIsAutoPlaying]: [boolean, Dispatch<SetStateAction<boolean>>] = useState(Boolean(autoPlay));
+    const newChildren: ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
+    const [currentIndex, setCurrentIndex] = useState(activeIndex);
+    const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
     const parentRef: React.MutableRefObject<null> = useRef(null);
 
     /**
@@ -152,7 +152,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Handle click on a bullet to go to a specific slide.
      */
-    const handleControlGotToSlide: (index: number) => void = useCallback(
+    const handleControlGotToSlide = useCallback(
         (index: number) => {
             stopAutoPlay();
 
@@ -166,7 +166,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Handle click or keyboard event to go to next slide.
      */
-    const handleControlNextSlide: () => void = (): void => {
+    const handleControlNextSlide = (): void => {
         stopAutoPlay();
         goToNextSlide();
     };
@@ -174,7 +174,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Handle click or keyboard event to go to previous slide.
      */
-    const handleControlPreviousSlide: () => void = (): void => {
+    const handleControlPreviousSlide = (): void => {
         stopAutoPlay();
         goToPreviousSlide();
     };
@@ -182,7 +182,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Change current index to display next slide.
      */
-    const goToNextSlide: () => void = useCallback(() => {
+    const goToNextSlide = useCallback(() => {
         if (currentIndex === slidesCount - 1) {
             setCurrentIndex(() => 0);
         } else if (currentIndex < slidesCount - 1) {
@@ -193,7 +193,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Change current index to display previous slide.
      */
-    const goToPreviousSlide: () => void = useCallback(() => {
+    const goToPreviousSlide = useCallback(() => {
         if (currentIndex === 0) {
             setCurrentIndex(() => slidesCount - 1);
         } else if (currentIndex > 0) {
@@ -204,7 +204,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Stop slideshow auto rotating.
      */
-    const stopAutoPlay: () => void = (): void => {
+    const stopAutoPlay = (): void => {
         setIsAutoPlaying(false);
     };
 
@@ -244,4 +244,4 @@ Slideshow.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Slideshow, SlideshowProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Slideshow, SlideshowProps };

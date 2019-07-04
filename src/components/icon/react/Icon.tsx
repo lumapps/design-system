@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Color, Colors, Size, Sizes } from 'LumX/components';
+import { Color, Size } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -23,8 +23,7 @@ interface IProps extends IGenericProps {
     /**
      * Icon reference
      */
-    // tslint:disable-next-line: no-any
-    iconRef?: React.RefObject<any>;
+    iconRef?: React.RefObject<HTMLElement>;
 
     /**
      * The icon color.
@@ -93,7 +92,7 @@ function _preValidate({ props }: ValidateParameters): void {
  * @param       props The props of the component.
  * @return The processed children of the component.
  */
-function _validate(props: IconProps): React.ReactNode {
+function _validate(props: IconProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         preValidate: _preValidate,
         props,
@@ -114,7 +113,7 @@ const Icon: React.FC<IconProps> = ({
     iconRef = DEFAULT_PROPS.iconRef,
     size,
     ...props
-}: IconProps): React.ReactElement => {
+}: IconProps): ReactElement => {
     _validate({ color, icon, size, ...props });
 
     return (
@@ -140,4 +139,4 @@ Icon.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, Color, Colors, Size, Sizes };
+export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps };

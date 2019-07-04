@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,8 +7,6 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 
 import { handleBasicClasses } from 'LumX/core/utils';
-
-import { Theme, Themes } from 'LumX/components';
 
 /////////////////////////////
 
@@ -52,12 +50,11 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
  *
  * @return The component.
  */
-// tslint:disable: no-unused
 const ListSubheader: React.FC<ListSubheaderProps> = ({
     children,
     className = '',
     ...props
-}: ListSubheaderProps): React.ReactElement => {
+}: ListSubheaderProps): ReactElement => {
     return (
         <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
             {children}
@@ -68,4 +65,4 @@ ListSubheader.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ListSubheader, ListSubheaderProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, ListSubheader, ListSubheaderProps };

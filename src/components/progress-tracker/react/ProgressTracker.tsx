@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX';
+import { Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -49,7 +49,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeStep: 0,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -68,7 +68,7 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     className = '',
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ProgressTrackerProps): React.ReactElement => {
+}: ProgressTrackerProps): ReactElement => {
     const backgroundPosition: number = 100 / (children.length * 2);
     const trackPosition: number = ((100 / (children.length - 1)) * activeStep) / 100;
 

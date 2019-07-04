@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -35,7 +35,7 @@ interface IESModule {
      * The `description` export of our fake ESModule loaded by the dynamic component loader.
      * This export contains the description of the demo.
      */
-    description?: React.ReactNode;
+    description?: ReactElement;
 
     /**
      * The `title` export of our fake ESModule loaded by the dynamic component loader.
@@ -80,11 +80,11 @@ async function _loadComponent(componentFolderName: IProps['activeComponent']): P
  *
  * @return The main component.
  */
-const Main: React.FC<IProps> = ({ activeComponent }: IProps): React.ReactElement => {
-    const [demo, setDemo]: [IESModule | undefined, (demo: IESModule | undefined) => void] = useState();
+const Main: React.FC<IProps> = ({ activeComponent }: IProps): ReactElement => {
+    const [demo, setDemo] = useState<IESModule>();
 
     useEffect((): void => {
-        const loadComponent: () => Promise<void> = async (): Promise<void> => {
+        const loadComponent = async (): Promise<void> => {
             try {
                 const loadedDemo: IESModule = await _loadComponent(activeComponent);
                 setDemo(loadedDemo);
@@ -108,7 +108,7 @@ const Main: React.FC<IProps> = ({ activeComponent }: IProps): React.ReactElement
         );
     }
 
-    const demoHeader: React.ReactNode = !isEmpty(demo.title) ? (
+    const demoHeader: ReactElement | null = !isEmpty(demo.title) ? (
         <DemoHeader category={demo.category} demoTitle={demo.title}>
             {demo.description}
         </DemoHeader>
@@ -121,8 +121,8 @@ const Main: React.FC<IProps> = ({ activeComponent }: IProps): React.ReactElement
 
                 <div className="mt++">
                     {Object.keys(demo.demos).map(
-                        (key: string, index: number): React.ReactNode => {
-                            const { description, files, title }: DemoObject = demo.demos[key];
+                        (key: string, index: number): ReactElement => {
+                            const { description, files, title } = demo.demos[key];
 
                             return (
                                 <DemoBlock

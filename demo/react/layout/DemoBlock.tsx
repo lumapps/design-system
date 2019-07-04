@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -10,7 +10,7 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-import { Button, ButtonEmphasises, Switch, SwitchPositions, Theme, Themes } from 'LumX';
+import { Button, ButtonEmphasis, Switch, SwitchPosition, Theme } from 'LumX';
 import { IGenericProps } from 'LumX/core/react/utils';
 import { mdiCodeTags } from 'LumX/icons';
 
@@ -31,7 +31,7 @@ interface IProps extends IGenericProps {
     /**
      * The description of the demo block.
      */
-    children?: React.ReactNode;
+    children?: ReactNode;
 
     /**
      * The full name of the demo. When adding the '.tsx' extension, this will give the name of the file to load to
@@ -57,8 +57,7 @@ interface IESModule {
     /**
      * The component of the demo.
      */
-    // tslint:disable-next-line: no-any
-    default: { view(props: { [prop: string]: any }): JSX.Element };
+    default: { view(props: IGenericProps): JSX.Element };
 }
 
 /////////////////////////////
@@ -147,23 +146,23 @@ const DemoBlock: React.FC<IProps> = ({
     demoName,
     demoPath,
     files = [],
-}: IProps): React.ReactElement => {
-    const [theme, setTheme]: [Theme, (theme: Theme) => void] = useState(Themes.light);
+}: IProps): ReactElement => {
+    const [theme, setTheme] = useState(Theme.light);
     /**
      * Enable/disable the dark theme.
      * This is the callback function of the `onClick` event of the theme <Switch>.
      *
      * @param enabled Indicates if the dark theme should be enabled or not.
      */
-    const setDarkTheme: (enabled: boolean) => void = (enabled: boolean): void => {
-        setTheme(enabled ? Themes.dark : Themes.light);
+    const setDarkTheme = (enabled: boolean): void => {
+        setTheme(enabled ? Theme.dark : Theme.light);
     };
 
-    const [shouldDisplayCode, setDisplayCode]: [boolean, (shouldDisplayCode: boolean) => void] = useState(false);
+    const [shouldDisplayCode, setDisplayCode] = useState(false);
     /**
      * Toggle the display of the code in the demo block.
      */
-    const toggleDisplayCode: () => void = (): void => {
+    const toggleDisplayCode = (): void => {
         setDisplayCode(!shouldDisplayCode);
     };
 
@@ -171,11 +170,9 @@ const DemoBlock: React.FC<IProps> = ({
         IESModule['default'] | undefined,
         (demoComponent: IESModule['default'] | undefined) => void
     ] = useState();
-    const [demoSources, setDemoSources]: [string[], (demoSources: string[]) => void] = useState([
-        'No source code for this demo...',
-    ]);
+    const [demoSources, setDemoSources] = useState(['No source code for this demo...']);
 
-    const isThemeDark: boolean = theme === Themes.dark;
+    const isThemeDark: boolean = theme === Theme.dark;
 
     const sourceFilesToLoad: string[] = [`${demoName}.tsx`].concat(files);
     useEffect((): void => {
@@ -195,7 +192,7 @@ const DemoBlock: React.FC<IProps> = ({
     }, [demoPath, demoName]);
 
     return (
-        <Fragment>
+        <>
             <div className={classNames('main-block', className)}>
                 {!isEmpty(title) && <h2 className="main-block__title">{title}</h2>}
 
@@ -210,20 +207,20 @@ const DemoBlock: React.FC<IProps> = ({
 
                     <div className="main-block__toolbar">
                         <div className="main-block__code-toggle">
-                            <Button leftIcon={mdiCodeTags} emphasis={ButtonEmphasises.low} onClick={toggleDisplayCode}>
+                            <Button leftIcon={mdiCodeTags} emphasis={ButtonEmphasis.low} onClick={toggleDisplayCode}>
                                 {shouldDisplayCode ? 'Hide code' : 'Show code'}
                             </Button>
                         </div>
 
                         <div className="main-block__theme-toggle">
-                            <Switch position={SwitchPositions.right} label="Dark background" onToggle={setDarkTheme} />
+                            <Switch position={SwitchPosition.right} label="Dark background" onToggle={setDarkTheme} />
                         </div>
                     </div>
 
                     {shouldDisplayCode && (
                         <div className="main-block__code">
                             {demoSources.map(
-                                (demoSource: string, index: number): React.ReactNode => {
+                                (demoSource: string, index: number): ReactElement => {
                                     return (
                                         <div
                                             key={sourceFilesToLoad[index]}
@@ -247,7 +244,7 @@ const DemoBlock: React.FC<IProps> = ({
                     )}
                 </div>
             </div>
-        </Fragment>
+        </>
     );
 };
 

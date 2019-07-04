@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
@@ -41,21 +41,18 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of
  *                       the component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: ButtonGroupProps = {
         children: (
-            <Fragment>
+            <>
                 <Button>Label</Button>
                 <IconButton icon={mdiPlus} />
-            </Fragment>
+            </>
         ),
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<ButtonGroup {...props} />);
 
@@ -71,7 +68,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a group button', (): void => {
-            const { group, wrapper }: ISetup = setup();
+            const { group, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(group).toExist();
@@ -120,7 +117,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
         });
 
         it('should fail when less than 2 children are given', (): void => {
-            const children: React.ReactNode = <Button>Label</Button>;
+            const children: ReactNode = <Button>Label</Button>;
 
             expect(
                 (): void => {
@@ -134,11 +131,11 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
         }> is passed as children`, (): void => {
             mockConsole('debug');
 
-            let children: React.ReactNode = (
-                <Fragment>
+            let children: ReactNode = (
+                <>
                     <Icon icon={mdiPlus} />
                     <Icon icon={mdiPlus} />
-                </Fragment>
+                </>
             );
 
             expect(
@@ -150,10 +147,10 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <span>Label</span>
                     <Icon icon={mdiPlus} />
-                </Fragment>
+                </>
             );
 
             expect(
@@ -165,10 +162,10 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <span>Label</span>
                     <span>Label 2</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -180,10 +177,10 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Button>Label</Button>
                     <Icon icon={mdiPlus} />
-                </Fragment>
+                </>
             );
 
             expect(
@@ -195,10 +192,10 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Button>Label</Button>
                     <span>Label</span>>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -210,10 +207,10 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Icon icon={mdiPlus} />
                     <Button>Label</Button>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -225,9 +222,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <span>Label</span>><Button>Label</Button>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -238,12 +235,12 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
         });
 
         it('should fail when more than 2 children are given', (): void => {
-            const children: React.ReactNode = (
-                <Fragment>
+            const children: ReactNode = (
+                <>
                     <Button>Label</Button>
                     <Button>Label 2</Button>
                     <Button>Label 3</Button>
-                </Fragment>
+                </>
             );
 
             expect(

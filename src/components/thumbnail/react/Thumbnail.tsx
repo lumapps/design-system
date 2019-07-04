@@ -1,8 +1,8 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Alignment, Alignments, Theme, Themes } from 'LumX/components';
+import { Alignment, Size, Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
@@ -14,34 +14,24 @@ import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 /**
  * All available aspect ratios.
  */
-const enum AspectRatios {
+const enum ThumbnailAspectRatio {
     original = 'original',
     horizontal = 'horizontal',
     vertical = 'vertical',
 }
-type AspectRatio = AspectRatios;
 
 /**
  *  Authorized size values.
  */
-enum Sizes {
-    xxs = 'xxs',
-    xs = 'xs',
-    s = 's',
-    m = 'm',
-    l = 'l',
-    xl = 'xl',
-}
-type Size = Sizes;
+type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl;
 
 /**
  * Authorized variants.
  */
-enum Variants {
+enum ThumbnailVariant {
     squared = 'squared',
     rounded = 'rounded',
 }
-type Variant = Variants;
 
 /////////////////////////////
 
@@ -52,17 +42,17 @@ interface IThumbnailProps extends IGenericProps {
     /* The thumbnail alignment. */
     align?: Alignment;
     /* The image aspect ratio. */
-    aspectRatio?: AspectRatio;
+    aspectRatio?: ThumbnailAspectRatio;
     /* Whether the image has to fill its container's height. */
     fillHeight?: boolean;
     /* Avatar image. */
     image: string;
     /* Size. */
-    size?: Size;
+    size?: ThumbnailSize;
     /* Theme. */
     theme?: Theme;
     /* Variant. */
-    variant?: Variant;
+    variant?: ThumbnailVariant;
 }
 type ThumbnailProps = IThumbnailProps;
 
@@ -93,12 +83,12 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    align: Alignments.left,
-    aspectRatio: AspectRatios.original,
+    align: Alignment.left,
+    aspectRatio: ThumbnailAspectRatio.original,
     fillHeight: false,
     size: undefined,
-    theme: Themes.light,
-    variant: Variants.squared,
+    theme: Theme.light,
+    variant: ThumbnailVariant.squared,
 };
 /////////////////////////////
 
@@ -118,12 +108,12 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     variant = DEFAULT_PROPS.variant,
     image,
     ...props
-}: ThumbnailProps): React.ReactElement => {
+}: ThumbnailProps): ReactElement => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
 
-    const { alt = 'Thumbnail', onClick = null, ...restProps }: IDefaultPropsType = props;
+    const { alt = 'Thumbnail', onClick = null, ...restProps } = props;
 
     return (
         <div
@@ -139,7 +129,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             onKeyDown={onEnterPressed(onClick)}
             {...restProps}
         >
-            {aspectRatio === AspectRatios.original ? (
+            {aspectRatio === ThumbnailAspectRatio.original ? (
                 <img className="lumx-thumbnail__image" src={image} alt={alt} />
             ) : (
                 <div className="lumx-thumbnail__background" style={style} />
@@ -151,15 +141,4 @@ Thumbnail.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    AspectRatio,
-    AspectRatios,
-    Sizes,
-    Thumbnail,
-    ThumbnailProps,
-    Theme,
-    Themes,
-    Variants,
-};
+export { CLASSNAME, DEFAULT_PROPS, Thumbnail, ThumbnailProps, ThumbnailAspectRatio, ThumbnailSize, ThumbnailVariant };

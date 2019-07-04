@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { ReactElement, ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -10,28 +10,8 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { mdiMenuDown } from 'LumX/icons';
 
-import {
-    Button,
-    ButtonProps,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variants as ButtonVariants,
-} from './Button';
+import { Button, ButtonProps, ButtonVariant } from './Button';
 import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
-
-/////////////////////////////
-
-enum Variants {
-    button = 'button',
-    icon = 'icon',
-}
-type Variant = Variants;
 
 /////////////////////////////
 
@@ -42,7 +22,7 @@ interface IProps extends IGenericProps {
     /**
      * Contains the dropdown element to display when the icon is clicked.
      */
-    dropdown?: React.ReactNode;
+    dropdown?: ReactNode;
 
     /**
      * The left icon.
@@ -158,7 +138,7 @@ function _preValidate({ props }: ValidateParameters): string | boolean | void {
  * @param props The children and props of the component.
  * @return     The processed children of the component.
  */
-function _validate(props: DropdownButtonProps): React.ReactNode {
+function _validate(props: DropdownButtonProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: 2,
         postValidate: _postValidate,
@@ -192,12 +172,10 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     rightIcon = '',
     splitted = DEFAULT_PROPS.splitted,
     ...props
-}: DropdownButtonProps): React.ReactElement => {
-    const [isDropdownOpened, setIsDropdownOpened]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<
-        boolean
-    >(false);
+}: DropdownButtonProps): ReactElement => {
+    const [isDropdownOpened, setIsDropdownOpened] = useState(false);
 
-    const newChildren: React.ReactNode = _validate({
+    const newChildren: ReactNode = _validate({
         children,
         dropdown,
         icon,
@@ -223,13 +201,13 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
         }
     };
 
-    let rootElement: React.ReactNode;
+    let rootElement: ReactElement;
     const extendedClassNames: string = classNames(className, CLASSNAME, { [`${CLASSNAME}--is-splitted`]: splitted });
 
     if (splitted) {
         rootElement = (
             <ButtonGroup className={extendedClassNames}>
-                <Button {...props} leftIcon={icon} variant={ButtonVariants.button}>
+                <Button {...props} leftIcon={icon} variant={ButtonVariant.button}>
                     {newChildren}
                 </Button>
 
@@ -243,7 +221,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
                 {...props}
                 leftIcon={icon}
                 rightIcon={mdiMenuDown}
-                variant={ButtonVariants.button}
+                variant={ButtonVariant.button}
                 onClick={openDropdown}
             >
                 {newChildren}
@@ -252,30 +230,15 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     }
 
     return (
-        <Fragment>
+        <>
             {rootElement}
 
             {isDropdownOpened ? <Dropdown>{dropdown}</Dropdown> : undefined}
-        </Fragment>
+        </>
     );
 };
 DropdownButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    DropdownButton,
-    DropdownButtonProps,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variant,
-    Variants,
-};
+export { CLASSNAME, DEFAULT_PROPS, DropdownButton, DropdownButtonProps };

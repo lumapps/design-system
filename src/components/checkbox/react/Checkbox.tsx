@@ -1,4 +1,4 @@
-import React, { Children, cloneElement } from 'react';
+import React, { Children, ReactElement, cloneElement } from 'react';
 
 import noop from 'lodash/noop';
 
@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import { mdiCheck } from '@mdi/js';
 
-import { Icon, Theme, Themes } from 'LumX';
+import { Icon, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { CheckboxHelper } from './CheckboxHelper';
@@ -66,7 +66,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     checked: false,
     disabled: false,
     onChange: noop,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 /////////////////////////////
 
@@ -83,9 +83,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
     onChange = DEFAULT_PROPS.onChange,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: CheckboxProps): React.ReactElement => {
+}: CheckboxProps): ReactElement => {
     const checkboxId: string = uniqueId(`${CLASSNAME.toLowerCase()}-`);
-    const handleChange: () => void = (): void => {
+    const handleChange = (): void => {
         onChange!({ checked: !checked });
     };
 
@@ -141,4 +141,4 @@ Checkbox.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps };

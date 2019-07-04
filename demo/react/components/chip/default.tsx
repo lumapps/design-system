@@ -1,8 +1,6 @@
-// tslint:disable: jsx-no-lambda no-console
+import React, { ReactElement } from 'react';
 
-import React, { Fragment } from 'react';
-
-import { Chip, ChipSizes, ChipTheme, Colors, Icon } from 'LumX';
+import { Chip, ColorPalette, Icon, Size, Theme } from 'LumX';
 import { mdiClose, mdiEmail } from 'LumX/icons';
 
 /////////////////////////////
@@ -11,7 +9,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ChipTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -21,12 +19,12 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
+    <>
         <Chip theme={theme} LabelComponent="Medium">
             Label
         </Chip>
-        <Chip color={Colors.red} theme={theme} size={ChipSizes.s} LabelComponent="Small">
+        <Chip color={ColorPalette.red} theme={theme} size={Size.s} LabelComponent="Small">
             Label
         </Chip>
         <Chip
@@ -40,7 +38,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <Chip
             after={<Icon icon={mdiClose} />}
             before={<Icon icon={mdiEmail} />}
-            color={Colors.green}
+            color={ColorPalette.green}
             theme={theme}
             LabelComponent="Rich"
             onAfterClick={(): void => console.log('After component triggered.')}
@@ -61,7 +59,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         >
             Label
         </Chip>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

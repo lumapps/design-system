@@ -1,14 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { Button, ButtonGroup, ButtonVariants, Icon } from 'LumX';
+import { Button, ButtonEmphasis, ButtonGroup, ButtonVariant, Icon, Size, Theme } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { mdiMenuDown, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, DropdownButton, DropdownButtonProps, Emphasises, Sizes, Themes } from './DropdownButton';
+import { CLASSNAME, DropdownButton, DropdownButtonProps } from './DropdownButton';
 
 /////////////////////////////
 
@@ -64,17 +64,14 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of
  *                       the component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: DropdownButtonProps = {
         children: 'Label',
         dropdown: <span>Dropdown content</span>,
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<DropdownButton {...props} />);
 
@@ -97,7 +94,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly a non-splitted dropdown button', (): void => {
-            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup();
+            const { button, dropdown, group, iconButton, root, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(Button.displayName!);
@@ -114,7 +111,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         });
 
         it('should render correctly a non-splitted dropdown button with a preceding icon', (): void => {
-            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({ icon: mdiPlus });
+            const { button, dropdown, group, iconButton, root, wrapper } = setup({ icon: mdiPlus });
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(Button.displayName!);
@@ -133,7 +130,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         });
 
         it('should render correctly a splitted dropdown button', (): void => {
-            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({ splitted: true });
+            const { button, dropdown, group, iconButton, root, wrapper } = setup({ splitted: true });
             expect(wrapper).toMatchSnapshot();
 
             expect(root).toHaveDisplayName(ButtonGroup.displayName!);
@@ -150,7 +147,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         });
 
         it('should render correctly a splitted dropdown button with a preceding icon', (): void => {
-            const { button, dropdown, group, iconButton, root, wrapper }: ISetup = setup({
+            const { button, dropdown, group, iconButton, root, wrapper } = setup({
                 icon: mdiPlus,
                 splitted: true,
             });
@@ -176,7 +173,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { root }: ISetup = setup();
+            const { root } = setup();
 
             expect(root).toHaveDisplayName(Button.displayName!);
         });
@@ -186,49 +183,49 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             const testedProp = 'variant' as string;
             const modifiedProps: ISetupProps = {
-                [testedProp]: ButtonVariants.button,
+                [testedProp]: ButtonVariant.button,
             };
 
-            let { button }: ISetup = setup(modifiedProps);
-            expect(button).toHaveProp(testedProp, ButtonVariants.button);
+            let { button } = setup(modifiedProps);
+            expect(button).toHaveProp(testedProp, ButtonVariant.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = ButtonVariants.button;
+            modifiedProps[testedProp] = ButtonVariant.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp(testedProp, ButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariant.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = ButtonVariants.icon;
+            modifiedProps[testedProp] = ButtonVariant.icon;
 
             ({ button } = setup({ ...modifiedProps, splitted: true }));
 
-            expect(button).toHaveProp(testedProp, ButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariant.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = ButtonVariants.button;
+            modifiedProps[testedProp] = ButtonVariant.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp(testedProp, ButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariant.button);
         });
 
         it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 // tslint:disable-next-line: no-any
                 color: fake((fakeData: any): string => fakeData.commerce.color()),
-                emphasis: oneOf(...Object.values(Emphasises)),
-                size: oneOf(...Object.values(Sizes)),
-                theme: oneOf(...Object.values(Themes)),
+                emphasis: oneOf(...Object.values(ButtonEmphasis)),
+                size: oneOf(...Object.values(Size)),
+                theme: oneOf(...Object.values(Theme)),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            let { button }: ISetup = setup(modifiedProps);
+            let { button } = setup(modifiedProps);
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -253,7 +250,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
                 [testedProp]: 'is coming',
             };
 
-            let { button, iconButton }: ISetup = setup(modifiedProps);
+            let { button, iconButton } = setup(modifiedProps);
 
             expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
 
@@ -280,8 +277,8 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
         it('should both trigger `onClick` and toggle the dropdown when the button is clicked in non-splitted mode', (): void => {
             const setupReturn: ISetup = setup({ onClick }, false);
-            const { button, wrapper }: ISetup = setupReturn;
-            let { dropdown }: ISetup = setupReturn;
+            const { button, wrapper } = setupReturn;
+            let { dropdown } = setupReturn;
 
             expect(dropdown).not.toExist();
 
@@ -294,8 +291,8 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
         it('should only trigger `onClick` when the label button is clicked in splitted mode', (): void => {
             const setupReturn: ISetup = setup({ splitted: true, onClick }, false);
-            const { button, wrapper }: ISetup = setupReturn;
-            let { dropdown }: ISetup = setupReturn;
+            const { button, wrapper } = setupReturn;
+            let { dropdown } = setupReturn;
 
             expect(dropdown).not.toExist();
 
@@ -308,8 +305,8 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
         it('should only toggle the dropdown when the dropdown (icon) button is clicked in splitted mode', (): void => {
             const setupReturn: ISetup = setup({ splitted: true, onClick }, false);
-            const { iconButton, wrapper }: ISetup = setupReturn;
-            let { dropdown }: ISetup = setupReturn;
+            const { iconButton, wrapper } = setupReturn;
+            let { dropdown } = setupReturn;
 
             expect(dropdown).not.toExist();
 
@@ -338,12 +335,12 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
         );
 
         it('should fail when more than 2 children are given', (): void => {
-            let children: React.ReactNode = (
-                <Fragment>
+            let children: ReactNode = (
+                <>
                     <Icon icon={mdiPlus} />
                     <Icon icon={mdiPlus} />
                     <span>Label</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -355,11 +352,11 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Icon icon={mdiPlus} />
                     <Icon icon={mdiPlus} />
                     <span>Label</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -371,11 +368,11 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Icon icon={mdiPlus} />
                     <span>Label</span>
                     <span>Label 2</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -387,11 +384,11 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             /////////////////////////////
 
             children = (
-                <Fragment>
+                <>
                     <Icon icon={mdiPlus} />
                     <span>Label</span>
                     <span>Label 2</span>
-                </Fragment>
+                </>
             );
 
             expect(
@@ -423,7 +420,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             // We know that a <DropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: ButtonVariants.icon });
+            setup({ variant: ButtonVariant.icon });
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
@@ -431,7 +428,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             // We know that a <DropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: ButtonVariants.button });
+            setup({ variant: ButtonVariant.button });
             expect(global.console.warn).toHaveBeenCalled();
         });
 

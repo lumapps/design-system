@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Button, ButtonEmphasises, ButtonSizes } from 'LumX';
+import { Button, ButtonEmphasis, Size } from 'LumX';
 import { IGenericProps } from 'LumX/core/react/utils';
 import { mdiAngular } from 'LumX/icons';
 
@@ -21,7 +21,7 @@ interface IProps extends IGenericProps {
     /**
      * The description of the demo.
      */
-    children?: React.ReactNode;
+    children?: ReactNode;
 
     /**
      * The title of the demo.
@@ -38,12 +38,8 @@ interface IProps extends IGenericProps {
  *
  * @return The demo header component.
  */
-const DemoHeader: React.FC<IProps> = ({
-    category,
-    children: description,
-    demoTitle: title,
-}: IProps): React.ReactElement => (
-    <Fragment>
+const DemoHeader: React.FC<IProps> = ({ category, children: description, demoTitle: title }: IProps): ReactElement => (
+    <>
         <div lumx-grid-container="row">
             {!isEmpty(category) && (
                 <div lumx-grid-item="true">
@@ -52,7 +48,7 @@ const DemoHeader: React.FC<IProps> = ({
             )}
 
             <div>
-                <Button leftIcon={mdiAngular} emphasis={ButtonEmphasises.low} size={ButtonSizes.s}>
+                <Button leftIcon={mdiAngular} emphasis={ButtonEmphasis.low} size={Size.s}>
                     View AngularJS version
                 </Button>
             </div>
@@ -61,7 +57,7 @@ const DemoHeader: React.FC<IProps> = ({
         <h1 className="lumx-typography-display1 mt+">{title}</h1>
 
         {!isEmpty(description) && <div className="lumx-typography-subtitle2 mt+">{description}</div>}
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

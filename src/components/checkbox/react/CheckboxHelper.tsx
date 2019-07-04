@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -55,7 +55,7 @@ const CheckboxHelper: React.FC<CheckboxHelperProps> = ({
     children,
     className = '',
     ...props
-}: CheckboxHelperProps): React.ReactElement => {
+}: CheckboxHelperProps): ReactElement => {
     return (
         <span className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
             {children}

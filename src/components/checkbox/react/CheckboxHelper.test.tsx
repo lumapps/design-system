@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import { build } from 'test-data-bot';
@@ -36,15 +36,12 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: CheckboxHelperProps = {
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     // noinspection RequiredAttributes
     const wrapper: Wrapper = renderer(<CheckboxHelper {...props} />);
@@ -59,7 +56,7 @@ describe(`<${CheckboxHelper.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { wrapper }: ISetup = setup();
+            const { wrapper } = setup();
 
             expect(wrapper).toMatchSnapshot();
             expect(wrapper).toExist();
@@ -78,7 +75,7 @@ describe(`<${CheckboxHelper.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
             expect(wrapper).toMatchSnapshot();
         });
     });

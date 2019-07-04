@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
+import { Size } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, Icon, IconProps, Sizes } from './Icon';
+import { CLASSNAME, Icon, IconProps } from './Icon';
 
 /////////////////////////////
 
@@ -48,16 +49,13 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: IconProps = {
         icon: 'mdiPlus',
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Icon {...props} />);
 
@@ -75,7 +73,7 @@ describe(`<${Icon.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { i, path, svg, wrapper }: ISetup = setup();
+            const { i, path, svg, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(i).toExist();
@@ -91,7 +89,7 @@ describe(`<${Icon.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it("shouldn't use any default props", (): void => {
-            const { i }: ISetup = setup();
+            const { i } = setup();
 
             ['color', 'size'].forEach(
                 (prop: string): void => {
@@ -105,12 +103,12 @@ describe(`<${Icon.displayName}>`, (): void => {
                 // tslint:disable-next-line: no-any
                 color: fake((fakeData: any) => fakeData.commerce.color()),
                 icon: oneOf(mdiPlus, mdiCheck),
-                size: oneOf(...Object.values(Sizes)),
+                size: oneOf(...Object.values(Size)),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { i, path }: ISetup = setup({ ...modifiedProps });
+            const { i, path } = setup({ ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {

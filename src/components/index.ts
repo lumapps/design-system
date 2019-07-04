@@ -1,12 +1,11 @@
 /**
  * Authorized alignments.
  */
-const enum Alignments {
+enum Alignment {
     center = 'center',
     left = 'left',
     right = 'right',
 }
-type Alignment = Alignments;
 
 /**
  * Defines the type of a complex default prop (which depends on the value of another prop).
@@ -17,7 +16,7 @@ interface IComplexPropDefault<T> {
 }
 type ComplexPropDefault<T> = IComplexPropDefault<T>;
 
-enum Colors {
+enum ColorPalette {
     primary = 'primary',
     blue = 'blue',
     dark = 'dark',
@@ -25,15 +24,14 @@ enum Colors {
     yellow = 'yellow',
     red = 'red',
 }
-type Color = Colors | string;
+type Color = ColorPalette | string;
 
-enum Themes {
+enum Theme {
     light = 'light',
     dark = 'dark',
 }
-type Theme = Themes;
 
-enum Sizes {
+enum Size {
     xxs = 'xxs',
     xs = 'xs',
     s = 's',
@@ -42,26 +40,12 @@ enum Sizes {
     xl = 'xl',
     xxl = 'xxl',
 }
-type Size = Sizes;
 
-const enum Orientations {
+enum Orientation {
     horizontal = 'horizontal',
     vertical = 'vertical',
 }
-type Orientation = Orientations;
 
 /////////////////////////////
 
-export {
-    Alignment,
-    Alignments,
-    ComplexPropDefault,
-    Color,
-    Colors,
-    Theme,
-    Themes,
-    Size,
-    Sizes,
-    Orientations,
-    Orientation,
-};
+export { Alignment, ComplexPropDefault, Color, ColorPalette, Theme, Size, Orientation };

@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactNode, useState } from 'react';
+import React, { CSSProperties, ReactElement, useState } from 'react';
 
-import { Placements, Popover } from 'LumX';
+import { Popover, PopperPlacement } from 'LumX';
 
 /////////////////////////////
 
@@ -34,11 +34,11 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'space-around',
 };
 
-const createDemoAnchor: (width: number) => ReactNode = (width: number): ReactNode => {
+const createDemoAnchor = (width: number): ReactElement => {
     return <div style={{ ...demoAnchorStyle, width }}>{'This element will act as the anchor'}</div>;
 };
 
-const createPopper: () => ReactNode = (): ReactNode => {
+const createPopper = (): ReactElement => {
     return (
         <div style={demoPopperStyle}>
             {
@@ -55,16 +55,14 @@ const createPopper: () => ReactNode = (): ReactNode => {
  *
  * @return The demo component.
  */
-// tslint:disable: jsx-no-lambda
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
-    // tslint:disable-next-line: typedef
+const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
 
     /**
      * Switch tooltip visibility
      * @param newVisibleState Tooltip visibility
      */
-    const toggleTooltipDisplay: (newVisibleState: boolean) => void = (newVisibleState: boolean): void => {
+    const toggleTooltipDisplay = (newVisibleState: boolean): void => {
         setTooltipDisplayed(newVisibleState);
     };
 
@@ -74,7 +72,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                 <Popover
                     anchorElement={createDemoAnchor(230)}
                     popperElement={createPopper()}
-                    popperPlacement={Placements.BOTTOM}
+                    popperPlacement={PopperPlacement.BOTTOM}
                     showPopper={isTooltipDisplayed}
                     lockFlip
                     matchAnchorWidth

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,14 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 
-import { Button, ButtonProps, Color, Colors, Emphasis, Emphasises, Size, Sizes, Theme, Themes } from './Button';
-
-/////////////////////////////
-
-enum Variants {
-    icon = 'icon',
-}
-type Variant = Variants;
+import { Button, ButtonProps, ButtonVariant } from './Button';
 
 /////////////////////////////
 
@@ -127,7 +120,7 @@ function _preValidate({ props }: ValidateParameters): string | boolean | void {
  * @param props The children and props of the component.
  * @return The processed children of the component.
  */
-function _validate(props: IconButtonProps): React.ReactNode {
+function _validate(props: IconButtonProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: 0,
         postValidate: _postValidate,
@@ -157,28 +150,15 @@ const IconButton: React.FC<IconButtonProps> = ({
     // @ts-ignore
     rightIcon = '',
     ...props
-}: IconButtonProps): React.ReactElement => {
+}: IconButtonProps): ReactElement => {
     _validate({ children, icon, leftIcon, rightIcon, ...props });
 
-    return <Button className={classNames(className, CLASSNAME)} {...props} leftIcon={icon} variant={Variants.icon} />;
+    return (
+        <Button className={classNames(className, CLASSNAME)} {...props} leftIcon={icon} variant={ButtonVariant.icon} />
+    );
 };
 IconButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    IconButton,
-    IconButtonProps,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variant,
-    Variants,
-};
+export { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps };

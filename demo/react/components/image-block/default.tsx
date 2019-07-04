@@ -1,7 +1,6 @@
-import React, { CSSProperties, Fragment } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
-import { ImageBlock, ImageBlockCaptionPositions, ImageBlockProps, ImageBlockTheme, ThumbnailAspectRatios } from 'LumX';
-import { Alignments } from 'LumX/components';
+import { Alignment, ImageBlock, ImageBlockCaptionPosition, ImageBlockProps, Theme, ThumbnailAspectRatio } from 'LumX';
 
 /////////////////////////////
 
@@ -9,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ImageBlockTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -35,83 +34,83 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
+    <>
         <ImageBlock theme={theme} image="https://picsum.photos/640/480/?random" style={imageBlockDemoStyle} />
         <ImageBlock
-            aspectRatio={ThumbnailAspectRatios.vertical}
+            aspectRatio={ThumbnailAspectRatio.vertical}
             theme={theme}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
         />
         <ImageBlock
-            aspectRatio={ThumbnailAspectRatios.horizontal}
+            aspectRatio={ThumbnailAspectRatio.horizontal}
             theme={theme}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
         />
         <ImageBlock
-            theme={theme}
-            image="https://picsum.photos/640/480/?random"
-            style={imageBlockDemoStyle}
-            {...imageBlockDemoProps}
-        />
-        <ImageBlock
-            aspectRatio={ThumbnailAspectRatios.vertical}
             theme={theme}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            aspectRatio={ThumbnailAspectRatios.horizontal}
+            aspectRatio={ThumbnailAspectRatio.vertical}
             theme={theme}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            captionPosition={ImageBlockCaptionPositions.over}
+            aspectRatio={ThumbnailAspectRatio.horizontal}
+            theme={theme}
+            image="https://picsum.photos/640/480/?random"
+            style={imageBlockDemoStyle}
+            {...imageBlockDemoProps}
+        />
+        <ImageBlock
+            captionPosition={ImageBlockCaptionPosition.over}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
             theme={theme}
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            aspectRatio={ThumbnailAspectRatios.vertical}
-            captionPosition={ImageBlockCaptionPositions.over}
+            aspectRatio={ThumbnailAspectRatio.vertical}
+            captionPosition={ImageBlockCaptionPosition.over}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
             theme={theme}
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            aspectRatio={ThumbnailAspectRatios.horizontal}
-            captionPosition={ImageBlockCaptionPositions.over}
+            aspectRatio={ThumbnailAspectRatio.horizontal}
+            captionPosition={ImageBlockCaptionPosition.over}
             image="https://picsum.photos/640/480/?random"
             style={imageBlockDemoStyle}
             theme={theme}
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            align={Alignments.center}
-            aspectRatio={ThumbnailAspectRatios.horizontal}
-            captionPosition={ImageBlockCaptionPositions.over}
+            align={Alignment.center}
+            aspectRatio={ThumbnailAspectRatio.horizontal}
+            captionPosition={ImageBlockCaptionPosition.over}
             image="https://picsum.photos/640/480/?random"
             style={{ ...imageBlockDemoStyle, width: '95%' }}
             theme={theme}
             {...imageBlockDemoProps}
         />
         <ImageBlock
-            align={Alignments.right}
-            aspectRatio={ThumbnailAspectRatios.horizontal}
-            captionPosition={ImageBlockCaptionPositions.over}
+            align={Alignment.right}
+            aspectRatio={ThumbnailAspectRatio.horizontal}
+            captionPosition={ImageBlockCaptionPosition.over}
             image="https://picsum.photos/640/480/?random"
             style={{ ...imageBlockDemoStyle, width: '95%' }}
             theme={theme}
             {...imageBlockDemoProps}
         />
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

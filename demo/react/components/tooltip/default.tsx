@@ -1,6 +1,6 @@
-import React, { Fragment, useRef } from 'react';
+import React, { ReactElement, useRef } from 'react';
 
-import { Button, ButtonTheme, Tooltip } from 'LumX';
+import { Button, Theme, Tooltip } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ButtonTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -18,15 +18,15 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const anchorRefTop: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
-    const anchorRefRight: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
-    const anchorRefBottom: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
-    const anchorRefLeft: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
-    const anchorRefDelay: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const anchorRefTop: React.RefObject<HTMLElement> = useRef(null);
+    const anchorRefRight: React.RefObject<HTMLElement> = useRef(null);
+    const anchorRefBottom: React.RefObject<HTMLElement> = useRef(null);
+    const anchorRefLeft: React.RefObject<HTMLElement> = useRef(null);
+    const anchorRefDelay: React.RefObject<HTMLElement> = useRef(null);
 
     return (
-        <Fragment>
+        <>
             <Button buttonRef={anchorRefTop} theme={theme}>
                 Top
             </Button>{' '}
@@ -57,7 +57,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             <Tooltip anchorRef={anchorRefDelay} delay={2000} placement="bottom" theme={theme}>
                 Tooltip with delay
             </Tooltip>
-        </Fragment>
+        </>
     );
 };
 

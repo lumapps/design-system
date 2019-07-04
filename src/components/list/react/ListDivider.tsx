@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -49,10 +49,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
  *
  * @return The component.
  */
-const ListDivider: React.FC<ListDividerProps> = ({
-    className = '',
-    ...props
-}: ListDividerProps): React.ReactElement => {
+const ListDivider: React.FC<ListDividerProps> = ({ className = '', ...props }: ListDividerProps): ReactElement => {
     return <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props} />;
 };
 ListDivider.displayName = COMPONENT_NAME;

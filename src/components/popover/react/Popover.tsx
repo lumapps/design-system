@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { ReactElement, ReactNode, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -18,7 +18,7 @@ const SAFE_ZONE = 8;
 // Reference to the anchor element
 let anchorRef: HTMLDivElement | null;
 
-const enum Placements {
+enum PopperPlacement {
     AUTO = 'auto',
     AUTO_END = 'auto-end',
     AUTO_START = 'auto-start',
@@ -39,7 +39,6 @@ const enum Placements {
     LEFT_END = 'left-end',
     LEFT_START = 'left-start',
 }
-type PopperPositions = Placements;
 
 interface IPopperOffsets {
     vertical?: number;
@@ -76,7 +75,7 @@ interface IPopoverProps extends IGenericProps {
     /* Should the popper be displayed ? */
     showPopper?: boolean | (() => boolean);
     /* The prefered popper location against the anchor */
-    popperPlacement?: PopperPositions | string;
+    popperPlacement?: PopperPlacement | string;
     /* Use the popover as a tooltip engine => auto show/hide the popper when hovering the anchor */
     useTooltipMode?: boolean | (() => boolean);
     /* Customize the delay when showing / hiding the popper */
@@ -130,25 +129,21 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Helper method that returns a simple boolean value from different source format.
  * @param inputValue The input to extract the boolean value from
  */
-const unwrap: (inputValue: boolean | string | (() => boolean) | undefined) => boolean = (
-    inputValue: boolean | string | (() => boolean) | undefined,
-): boolean => {
+const unwrap = (inputValue: boolean | string | (() => boolean) | undefined): boolean => {
     return typeof inputValue === 'function' ? inputValue() : Boolean(inputValue);
 };
 
 /**
  * Get the popover offset base on its placement.
- * @param          placement       The prefered placement
- * @param      popperPlacement The actual platform
+ * @param   placement       The prefered placement
+ * @param   popperPlacement The actual platform
  * @param   popperOffset    An offset to be applied on the popper
- * @return                       The css position.
+ * @return  The css position.
  */
 function computeOffsets(
     placement: string,
-    // tslint:disable-next-line: no-shadowed-variable
-    popperPlacement: Placements | undefined,
-    // tslint:disable-next-line: no-shadowed-variable
-    popperOffset: PopperOffsets | undefined = { vertical: 0, horizontal: 0 },
+    popperPlacement?: PopperPlacement,
+    popperOffset: PopperOffsets = { vertical: 0, horizontal: 0 },
 ): Position {
     const computedOffs: Position = {
         left: popperOffset.horizontal || 0,
@@ -183,7 +178,6 @@ function computeOffsets(
  * @param matchAnchorWidth    Should the popper match the anchor width
  * @return                       The size of the popper holder
  */
-// tslint:disable: no-shadowed-variable
 function computeSize(
     fillHeight: boolean | undefined,
     fillwidth: boolean | undefined,
@@ -238,8 +232,8 @@ const Popover: React.FC<PopoverProps> = ({
     showPopper,
     tooltipShowHideDelay = DEFAULT_PROPS.tooltipShowHideDelay,
     useTooltipMode = DEFAULT_PROPS.useTooltipMode,
-}: PopoverProps): React.ReactElement => {
-    const [autoShowPopper, setAutoShowPopper]: [boolean, (autoShowPopper: boolean) => void] = useState(Boolean(false));
+}: PopoverProps): ReactElement => {
+    const [autoShowPopper, setAutoShowPopper] = useState(false);
 
     const autoShowDelayer: React.MutableRefObject<number> = useRef(0);
 
@@ -267,8 +261,7 @@ const Popover: React.FC<PopoverProps> = ({
         }
     }
 
-    // tslint:disable-next-line: no-any
-    const modifiers: any | undefined = {
+    const modifiers = {
         arrow: {
             // eslint-disable-next-line id-blacklist
             element: `.lumx-tooltip__arrow`,
@@ -280,7 +273,7 @@ const Popover: React.FC<PopoverProps> = ({
     return (
         <Manager>
             <Reference>
-                {({ ref }: ReferenceChildrenProps): ReactNode => (
+                {({ ref }: ReferenceChildrenProps): ReactElement => (
                     <div
                         ref={(elm: HTMLDivElement | null): void => {
                             anchorRef = elm;
@@ -295,10 +288,10 @@ const Popover: React.FC<PopoverProps> = ({
                 )}
             </Reference>
             {(unwrap(showPopper) || (unwrap(useTooltipMode) && autoShowPopper)) && (
-                <Popper placement={popperPlacement as Placements} modifiers={modifiers}>
-                    {({ ref, style, arrowProps, ...others }: PopperChildrenProps): ReactNode => {
+                <Popper placement={popperPlacement as PopperPlacement} modifiers={modifiers}>
+                    {({ ref, style, arrowProps, ...others }: PopperChildrenProps): ReactElement => {
                         const computedOffsets: Position = popperPlacement
-                            ? computeOffsets(others.placement, popperPlacement as Placements, popperOffset)
+                            ? computeOffsets(others.placement, popperPlacement as PopperPlacement, popperOffset)
                             : {};
                         const computedSizes: Size = computeSize(
                             fillHeight,
@@ -338,14 +331,4 @@ Popover.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Popover,
-    PopoverProps,
-    PopperPositions,
-    Placements,
-    IPopperOffsets,
-    PopperOffsets,
-    SHOW_HIDE_DELAY,
-};
+export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, PopperPlacement, PopperOffsets };

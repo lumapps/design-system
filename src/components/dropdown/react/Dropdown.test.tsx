@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
@@ -36,16 +36,13 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: DropdownProps = {
         children: 'This is the content of the dropdown',
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Dropdown {...props} />);
 
@@ -61,7 +58,7 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { dropdown, wrapper }: ISetup = setup();
+            const { dropdown, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(dropdown).toExist();
@@ -74,7 +71,7 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { dropdown }: ISetup = setup();
+            const { dropdown } = setup();
 
             Object.keys(DEFAULT_PROPS).forEach(
                 (prop: string): void => {

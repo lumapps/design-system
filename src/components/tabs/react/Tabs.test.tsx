@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import noop from 'lodash/noop';
 
@@ -8,8 +8,8 @@ import { build, oneOf } from 'test-data-bot';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { Tab } from 'LumX/components/tabs/react/Tab';
-import { CLASSNAME, Layouts, Positions, Tabs, TabsProps } from './Tabs';
+import { Tab } from 'LumX';
+import { CLASSNAME, Tabs, TabsLayout, TabsPosition, TabsProps } from './Tabs';
 
 /////////////////////////////
 
@@ -40,10 +40,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const tabs: Tabs[] = [<Tab>Tab 0</Tab>, <Tab>Tab 1</Tab>];
     const props: TabsProps = {
         children: tabs,
@@ -51,7 +48,7 @@ const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     // noinspection RequiredAttributes
     const wrapper: Wrapper = renderer(<Tabs {...props} />);
@@ -66,7 +63,7 @@ describe(`<${Tabs.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { wrapper }: ISetup = setup();
+            const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
@@ -87,13 +84,13 @@ describe(`<${Tabs.displayName}>`, (): void => {
         it('should use the given props', (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
                 // tslint:disable-next-line: no-any
-                layout: Layouts.clustered,
-                position: oneOf(Positions.center, Positions.right),
+                layout: TabsLayout.clustered,
+                position: oneOf(TabsPosition.center, TabsPosition.right),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -118,7 +115,7 @@ describe(`<${Tabs.displayName}>`, (): void => {
         );
 
         it('should trigger `onTabClick` when a child tab is clicked', (): void => {
-            const { wrapper }: ISetup = setup({ onTabClick }, false);
+            const { wrapper } = setup({ onTabClick }, false);
             const firstTab: Tab = wrapper.find('Tab[index=1]');
 
             firstTab.simulate('click');

@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement } from 'react';
 
-import { ButtonEmphasises, ButtonTheme, ButtonThemes, DropdownButton } from 'LumX';
+import { ButtonEmphasis, DropdownButton, Theme } from 'LumX';
+import { Callback } from 'LumX/core/react/utils';
 import { mdiPencil } from 'LumX/icons';
 
 /////////////////////////////
@@ -9,7 +10,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ButtonTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -19,8 +20,8 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const onClick: (splitted: boolean) => void = (splitted: boolean = false): (() => void) => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const onClick = (splitted: boolean = false): Callback => {
         return (): void => {
             console.info(`You click on a ${splitted ? 'splitted' : 'non-splitted'} dropdown button`);
             if (splitted) {
@@ -36,13 +37,13 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     };
 
     return (
-        <Fragment>
+        <>
             <div className="mb+">
                 <DropdownButton
                     className="mr"
                     dropdown={<span>Content of the Dropdown</span>}
-                    emphasis={ButtonEmphasises.low}
-                    color={theme === ButtonThemes.dark ? 'light' : undefined}
+                    emphasis={ButtonEmphasis.low}
+                    color={theme === Theme.dark ? 'light' : undefined}
                     theme={theme}
                     onClick={onClick(false)}
                 >
@@ -52,8 +53,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 <DropdownButton
                     className="mr"
                     dropdown={<span>Content of the Dropdown</span>}
-                    emphasis={ButtonEmphasises.medium}
-                    color={theme === ButtonThemes.dark ? 'light' : undefined}
+                    emphasis={ButtonEmphasis.medium}
+                    color={theme === Theme.dark ? 'light' : undefined}
                     theme={theme}
                     onClick={onClick(false)}
                 >
@@ -70,8 +71,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     className="mr"
                     dropdown={<span>Content of the Dropdown</span>}
                     splitted={true}
-                    emphasis={ButtonEmphasises.low}
-                    color={theme === ButtonThemes.dark ? 'light' : undefined}
+                    emphasis={ButtonEmphasis.low}
+                    color={theme === Theme.dark ? 'light' : undefined}
                     theme={theme}
                     onClick={onClick(true)}
                 >
@@ -82,8 +83,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     className="mr"
                     dropdown={<span>Content of the Dropdown</span>}
                     splitted={true}
-                    emphasis={ButtonEmphasises.medium}
-                    color={theme === ButtonThemes.dark ? 'light' : undefined}
+                    emphasis={ButtonEmphasis.medium}
+                    color={theme === Theme.dark ? 'light' : undefined}
                     theme={theme}
                     onClick={onClick(true)}
                 >
@@ -121,7 +122,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     Splitted Dropdown button with left icon
                 </DropdownButton>
             </div>
-        </Fragment>
+        </>
     );
 };
 

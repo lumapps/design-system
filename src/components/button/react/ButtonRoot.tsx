@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -14,8 +14,7 @@ interface IProps extends IGenericProps {
     /**
      * Button reference to handle focus, ...
      */
-    // tslint:disable-next-line: no-any
-    buttonRef?: React.RefObject<any>;
+    buttonRef?: RefObject<HTMLElement>;
 
     /**
      * The `href` to reach if there is one.
@@ -67,7 +66,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param props The children and props of the component.
  * @return The processed children of the component.
  */
-function _validate(props: ButtonRootProps): React.ReactNode {
+function _validate(props: ButtonRootProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         minChildren: 1,
         props,
@@ -89,19 +88,19 @@ const ButtonRoot: React.FC<ButtonRootProps> = ({
     href,
     target,
     ...props
-}: ButtonRootProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+}: ButtonRootProps): ReactElement => {
+    const newChildren: ReactNode = _validate({ children, ...props });
 
     if (isEmpty(href)) {
         return (
-            <button ref={buttonRef} className={className} {...props}>
+            <button ref={buttonRef as RefObject<HTMLButtonElement>} className={className} {...props}>
                 {newChildren}
             </button>
         );
     }
 
     return (
-        <a ref={buttonRef} className={className} href={href} target={target} {...props}>
+        <a ref={buttonRef as RefObject<HTMLAnchorElement>} className={className} href={href} target={target} {...props}>
             {newChildren}
         </a>
     );

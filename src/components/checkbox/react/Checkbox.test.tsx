@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import { build } from 'test-data-bot';
@@ -40,16 +40,13 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: CheckboxProps = {
         children: <CheckboxLabel>Default Test label</CheckboxLabel>,
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     // noinspection RequiredAttributes
     const wrapper: Wrapper = renderer(<Checkbox {...props} />);
@@ -64,7 +61,7 @@ describe(`<${Checkbox.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { wrapper }: ISetup = setup();
+            const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
@@ -86,7 +83,7 @@ describe(`<${Checkbox.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -109,7 +106,7 @@ describe(`<${Checkbox.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
 
             expect(wrapper).toMatchSnapshot();
         });
@@ -128,7 +125,7 @@ describe(`<${Checkbox.displayName}>`, (): void => {
         );
 
         it('should trigger `onChange` when checkbox is clicked', (): void => {
-            const { wrapper }: ISetup = setup({ checked: false, onChange }, false);
+            const { wrapper } = setup({ checked: false, onChange }, false);
             const checkbox = wrapper.find('input');
 
             checkbox.simulate('change', { target: { checked: false } });

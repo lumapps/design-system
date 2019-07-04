@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement } from 'react';
 
-import { Button, ButtonEmphasises, ButtonTheme, ButtonThemes } from 'LumX';
+import { Button, ButtonEmphasis, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ButtonTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -18,12 +18,12 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
+    <>
         <Button
             className="mr"
-            emphasis={ButtonEmphasises.low}
-            color={theme === ButtonThemes.dark ? 'light' : undefined}
+            emphasis={ButtonEmphasis.low}
+            color={theme === Theme.dark ? 'light' : undefined}
             theme={theme}
         >
             Low emphasis
@@ -31,15 +31,15 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
         <Button
             className="mr"
-            emphasis={ButtonEmphasises.medium}
-            color={theme === ButtonThemes.dark ? 'light' : undefined}
+            emphasis={ButtonEmphasis.medium}
+            color={theme === Theme.dark ? 'light' : undefined}
             theme={theme}
         >
             Medium emphasis
         </Button>
 
         <Button theme={theme}>High emphasis (default)</Button>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -53,7 +53,7 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     children,
     className = '',
     ...props
-}: TableHeaderProps): React.ReactElement => (
+}: TableHeaderProps): ReactElement => (
     <thead className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {children}
     </thead>

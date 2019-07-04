@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
 
-import { Icon, Sizes, Theme, Themes } from 'LumX';
+import { Icon, Size, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -88,20 +88,18 @@ const TextField: React.FC<TextFieldProps> = ({
     isValid,
     label,
     placeholder,
-    theme = Themes.light,
+    theme = Theme.light,
     ...props
-}: TextFieldProps): React.ReactElement => {
-    const [hasFocus, setHasFocus]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
-    const [hasValue, setHasValue]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+}: TextFieldProps): ReactElement => {
+    const [hasFocus, setHasFocus] = useState(false);
+    const [hasValue, setHasValue] = useState(false);
 
     /**
      * Handle change event on input.
      *
      * @param event Event of HTML Element
      */
-    const handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setHasValue(Boolean(event.target.value));
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => setHasValue(Boolean(event.target.value));
 
     return (
         <div
@@ -133,9 +131,9 @@ const TextField: React.FC<TextFieldProps> = ({
                 {icon && (
                     <Icon
                         className={`${CLASSNAME}__input-icon`}
-                        color={theme === Themes.dark ? 'light' : undefined}
+                        color={theme === Theme.dark ? 'light' : undefined}
                         icon={icon}
-                        size={Sizes.xs}
+                        size={Size.xs}
                     />
                 )}
 
@@ -157,9 +155,9 @@ const TextField: React.FC<TextFieldProps> = ({
                 {(isValid || hasError) && (
                     <Icon
                         className={`${CLASSNAME}__input-validity`}
-                        color={theme === Themes.dark ? 'light' : undefined}
+                        color={theme === Theme.dark ? 'light' : undefined}
                         icon={isValid ? mdiCheckCircle : mdiAlertCircle}
-                        size={Sizes.xs}
+                        size={Size.xs}
                     />
                 )}
             </div>
@@ -170,4 +168,4 @@ TextField.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps };

@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
-import { Placements, Popover } from 'LumX';
+import { Popover, PopperPlacement } from 'LumX';
 
 /////////////////////////////
 
@@ -42,11 +42,11 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'center',
 };
 
-const createDemoAnchor: () => ReactNode = (): ReactNode => {
+const createDemoAnchor = (): ReactElement => {
     return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
 };
 
-const createPopper: () => ReactNode = (): ReactNode => {
+const createPopper = (): ReactElement => {
     return <div style={demoPopperStyle}>{`This element is the popper and is flying above the UI.`}</div>;
 };
 
@@ -57,8 +57,7 @@ const createPopper: () => ReactNode = (): ReactNode => {
  *
  * @return The demo component.
  */
-// tslint:disable-next-line: typedef
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = (): ReactElement => {
     return (
         <div style={demoPopoverHolderStyle}>
             <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Ramdom element`}</div>
@@ -66,7 +65,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
             <Popover
                 anchorElement={createDemoAnchor()}
                 popperElement={createPopper()}
-                popperPlacement={Placements.RIGHT}
+                popperPlacement={PopperPlacement.RIGHT}
                 showPopper
             />
             <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Random element`}</div>

@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
@@ -6,18 +6,17 @@ import uuid from 'uuid/v4';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
-import { Theme, Themes } from 'LumX/components';
+import { Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
 
-enum Positions {
+enum SwitchPosition {
     left = 'left',
     right = 'right',
 }
-type Position = Positions;
 
 /////////////////////////////
 
@@ -38,7 +37,7 @@ interface ISwitchProps extends IGenericProps {
     /**
      * The position of the toggle regarding the label.
      */
-    position?: Position;
+    position?: SwitchPosition;
 
     /**
      * The theme.
@@ -81,8 +80,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     checked: false,
-    position: Positions.left,
-    theme: Themes.light,
+    position: SwitchPosition.left,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -98,7 +97,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param props The children and props of the component.
  * @return    The processed children of the component.
  */
-function _validate(props: SwitchProps): React.ReactNode {
+function _validate(props: SwitchProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         allowedTypes: ['text', <span />],
         maxChildren: 1,
@@ -123,16 +122,16 @@ const Switch: React.FC<SwitchProps> = ({
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SwitchProps): React.ReactElement => {
+}: SwitchProps): ReactElement => {
     const switchId: string = uuid();
 
-    const newChildren: React.ReactNode = _validate({ children, checked, helper, position, theme, ...props });
+    const newChildren: ReactNode = _validate({ children, checked, helper, position, theme, ...props });
 
-    const [isChecked, setIsChecked]: [boolean, (isChecked: boolean) => void] = useState(Boolean(checked));
+    const [isChecked, setIsChecked] = useState(Boolean(checked));
     /**
      * Toggle the state of the <Switch> inner checkbox.
      */
-    const toggleIsChecked: (evt: React.MouseEvent<HTMLElement>) => void = (): void => {
+    const toggleIsChecked = (): void => {
         setIsChecked(!isChecked);
 
         if (isFunction(onToggle)) {
@@ -186,4 +185,4 @@ Switch.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Position, Positions, Switch, SwitchProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Switch, SwitchProps, SwitchPosition };
