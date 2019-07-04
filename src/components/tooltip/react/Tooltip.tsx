@@ -210,7 +210,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     ...props
 }: TooltipProps): ReactElement => {
     const [timer, setTimer] = useState(0);
-    const tooltipRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
+    const tooltipRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
 
     /**

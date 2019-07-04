@@ -28,7 +28,7 @@ const imageBlockDemoProps: Partial<ImageBlockProps> = {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    const [isOpened, setIsOpened] = useState<boolean>(false);
+    const [isOpened, setIsOpened] = useState(false);
 
     const triggerElement = useRef<Button>(null);
 

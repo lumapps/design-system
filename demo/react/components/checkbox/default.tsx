@@ -19,7 +19,7 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    const [checkboxes, setCheckboxes] = useState<boolean[]>([true, false]);
+    const [checkboxes, setCheckboxes] = useState([true, false]);
     const handleChange: CallableFunction = (index: number): CallableFunction => ({
         checked,
     }: {

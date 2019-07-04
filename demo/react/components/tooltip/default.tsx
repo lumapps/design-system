@@ -19,11 +19,11 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    const anchorRefTop: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
-    const anchorRefRight: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
-    const anchorRefBottom: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
-    const anchorRefLeft: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
-    const anchorRefDelay: React.RefObject<HTMLElement> = useRef<HTMLElement>(null);
+    const anchorRefTop: React.RefObject<HTMLElement> = useRef(null);
+    const anchorRefRight: React.RefObject<HTMLElement> = useRef(null);
+    const anchorRefBottom: React.RefObject<HTMLElement> = useRef(null);
+    const anchorRefLeft: React.RefObject<HTMLElement> = useRef(null);
+    const anchorRefDelay: React.RefObject<HTMLElement> = useRef(null);
 
     return (
         <>
