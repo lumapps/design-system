@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement } from 'react';
 
-import { Placements, Popover } from 'LumX';
+import { Popover, PopperPlacement } from 'LumX';
 
 /////////////////////////////
 
@@ -39,7 +39,12 @@ const createPopper = (): ReactElement => {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
-    const placementDemo: string[] = [Placements.LEFT, Placements.TOP, Placements.RIGHT, Placements.BOTTOM];
+    const placementDemo: string[] = [
+        PopperPlacement.LEFT,
+        PopperPlacement.TOP,
+        PopperPlacement.RIGHT,
+        PopperPlacement.BOTTOM,
+    ];
 
     return (
         <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'space-around ' }}>

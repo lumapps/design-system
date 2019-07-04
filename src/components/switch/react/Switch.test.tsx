@@ -9,7 +9,8 @@ import without from 'lodash/without';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, Positions, Switch, SwitchProps, Themes } from './Switch';
+import { Theme } from 'LumX';
+import { CLASSNAME, DEFAULT_PROPS, Switch, SwitchPosition, SwitchProps } from './Switch';
 
 /////////////////////////////
 
@@ -169,8 +170,8 @@ describe(`<${Switch.displayName}>`, (): void => {
         it('should use the given props', (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 checked: true,
-                position: oneOf(...without(Object.values(Positions), DEFAULT_PROPS.position)),
-                theme: oneOf(...without(Object.values(Themes), DEFAULT_PROPS.theme)),
+                position: oneOf(...without(Object.values(SwitchPosition), DEFAULT_PROPS.position)),
+                theme: oneOf(...without(Object.values(Theme), DEFAULT_PROPS.theme)),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();

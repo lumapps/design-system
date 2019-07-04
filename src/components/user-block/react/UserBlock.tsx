@@ -2,11 +2,9 @@ import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Orientation, Orientations, Theme, Themes } from 'LumX/components';
+import { Avatar, Orientation, Size, Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-
-import { Avatar } from 'LumX/components/avatar/react/Avatar';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -14,12 +12,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Authorized size values.
  */
-enum Sizes {
-    s = 's',
-    m = 'm',
-    l = 'l',
-}
-type Size = Sizes;
+type UserBlockSize = Size.s | Size.m | Size.l;
 
 /////////////////////////////
 
@@ -40,7 +33,7 @@ interface IUserBlockProps extends IGenericProps {
     /* Orientation. */
     orientation?: Orientation;
     /* Size. */
-    size?: Size;
+    size?: UserBlockSize;
     /* Theme. */
     theme?: Theme;
     /* Callback for the click event. */
@@ -79,9 +72,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    orientation: Orientations.horizontal,
-    size: Sizes.m,
-    theme: Themes.light,
+    orientation: Orientation.horizontal,
+    size: Size.m,
+    theme: Theme.light,
 };
 /////////////////////////////
 
@@ -104,14 +97,14 @@ const UserBlock: React.FC<IUserBlockProps> = ({
     multipleActions,
     size = DEFAULT_PROPS.size,
 }: IUserBlockProps): ReactElement => {
-    let componentSize: Sizes | undefined = size;
+    let componentSize = size;
 
     // Special case - When using vertical orientation force the size to be Sizes.l.
-    if (orientation === Orientations.vertical) {
-        componentSize = Sizes.l;
+    if (orientation === Orientation.vertical) {
+        componentSize = Size.l;
     }
 
-    const shouldDisplayActions: boolean = orientation === Orientations.vertical;
+    const shouldDisplayActions: boolean = orientation === Orientation.vertical;
 
     const nameBlock: ReactNode = name && (
         <span
@@ -125,7 +118,7 @@ const UserBlock: React.FC<IUserBlockProps> = ({
         </span>
     );
 
-    const fieldsBlock: ReactNode = fields && componentSize !== Sizes.s && (
+    const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
             {fields.map((aField: string, idx: number) => (
                 <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>
@@ -172,4 +165,4 @@ UserBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, UserBlockSize };

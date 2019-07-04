@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement, useState } from 'react';
 
-import { Button, ButtonEmphasises, ButtonSizes, Placements, Popover } from 'LumX';
+import { Button, ButtonEmphasis, Popover, PopperPlacement, Size } from 'LumX';
 
 /////////////////////////////
 
@@ -61,14 +61,14 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
 
     return (
         <div>
-            <Button size={ButtonSizes.s} emphasis={ButtonEmphasises.medium} onClick={toggleTooltipDisplay}>
+            <Button size={Size.s} emphasis={ButtonEmphasis.medium} onClick={toggleTooltipDisplay}>
                 Toggle visibility
             </Button>
             <div style={demoPopoverHolderStyle}>
                 <Popover
                     anchorElement={createDemoAnchor()}
                     popperElement={createPopper()}
-                    popperPlacement={Placements.AUTO}
+                    popperPlacement={PopperPlacement.AUTO}
                     showPopper={isTooltipDisplayed}
                 />
             </div>

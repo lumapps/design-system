@@ -1,4 +1,4 @@
-import { Color, Size, Theme } from 'LumX/components';
+import { Color, Size, Theme } from 'LumX';
 import { Callback } from './react/utils';
 
 /////////////////////////////

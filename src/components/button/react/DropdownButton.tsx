@@ -10,28 +10,8 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { mdiMenuDown } from 'LumX/icons';
 
-import {
-    Button,
-    ButtonProps,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variants as ButtonVariants,
-} from './Button';
+import { Button, ButtonProps, ButtonVariant } from './Button';
 import { ButtonGroup, ButtonGroupProps } from './ButtonGroup';
-
-/////////////////////////////
-
-enum Variants {
-    button = 'button',
-    icon = 'icon',
-}
-type Variant = Variants;
 
 /////////////////////////////
 
@@ -227,7 +207,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     if (splitted) {
         rootElement = (
             <ButtonGroup className={extendedClassNames}>
-                <Button {...props} leftIcon={icon} variant={ButtonVariants.button}>
+                <Button {...props} leftIcon={icon} variant={ButtonVariant.button}>
                     {newChildren}
                 </Button>
 
@@ -241,7 +221,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
                 {...props}
                 leftIcon={icon}
                 rightIcon={mdiMenuDown}
-                variant={ButtonVariants.button}
+                variant={ButtonVariant.button}
                 onClick={openDropdown}
             >
                 {newChildren}
@@ -261,19 +241,4 @@ DropdownButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    DropdownButton,
-    DropdownButtonProps,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variant,
-    Variants,
-};
+export { CLASSNAME, DEFAULT_PROPS, DropdownButton, DropdownButtonProps };

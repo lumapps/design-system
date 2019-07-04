@@ -11,13 +11,11 @@ import noop from 'lodash/noop';
 
 import classNames from 'classnames';
 
+import { Icon, IconProps, Size } from 'LumX';
 import { CSS_PREFIX, ENTER_KEY_CODE } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/react/constants';
-
 import { handleBasicClasses } from 'LumX/core/utils';
+import { COMPONENT_PREFIX } from 'LumX/react/constants';
 import { IGenericProps } from 'LumX/react/utils';
-
-import { Icon, IconProps, Sizes } from 'LumX/components/icon/react/Icon';
 
 /////////////////////////////
 
@@ -114,7 +112,7 @@ const Tab: React.FC<TabProps> = ({
             onKeyPress={handleKeyPress}
             {...props}
         >
-            {icon && <Icon icon={icon} size={Sizes.xs} />}
+            {icon && <Icon icon={icon} size={Size.xs} />}
             {label && <span>{label}</span>}
         </a>
     );

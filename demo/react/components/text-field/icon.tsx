@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { TextField, TextFieldTheme } from 'LumX';
+import { TextField, Theme } from 'LumX';
 import { mdiMagnify } from 'LumX/icons';
 
 /////////////////////////////
@@ -9,7 +9,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: TextFieldTheme;
+    theme: Theme;
 }
 
 /////////////////////////////

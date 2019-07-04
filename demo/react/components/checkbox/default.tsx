@@ -1,8 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import { Checkbox, CheckboxTheme } from 'LumX';
-import { CheckboxHelper } from 'LumX/components/checkbox/react/CheckboxHelper';
-import { CheckboxLabel } from 'LumX/components/checkbox/react/CheckboxLabel';
+import { Checkbox, CheckboxHelper, CheckboxLabel, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -10,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: CheckboxTheme;
+    theme: Theme;
 }
 
 /////////////////////////////

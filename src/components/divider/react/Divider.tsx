@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX/components';
+import { Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
 import { IGenericProps, getRootClassName } from 'LumX/react/utils';
@@ -47,7 +47,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    theme: Themes.light,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -69,4 +69,4 @@ Divider.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps };

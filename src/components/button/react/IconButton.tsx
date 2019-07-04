@@ -7,14 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 
-import { Button, ButtonProps, Color, Colors, Emphasis, Emphasises, Size, Sizes, Theme, Themes } from './Button';
-
-/////////////////////////////
-
-enum Variants {
-    icon = 'icon',
-}
-type Variant = Variants;
+import { Button, ButtonProps, ButtonVariant } from './Button';
 
 /////////////////////////////
 
@@ -160,25 +153,12 @@ const IconButton: React.FC<IconButtonProps> = ({
 }: IconButtonProps): ReactElement => {
     _validate({ children, icon, leftIcon, rightIcon, ...props });
 
-    return <Button className={classNames(className, CLASSNAME)} {...props} leftIcon={icon} variant={Variants.icon} />;
+    return (
+        <Button className={classNames(className, CLASSNAME)} {...props} leftIcon={icon} variant={ButtonVariant.icon} />
+    );
 };
 IconButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    IconButton,
-    IconButtonProps,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variant,
-    Variants,
-};
+export { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps };

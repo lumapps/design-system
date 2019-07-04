@@ -8,8 +8,8 @@ import { build, oneOf } from 'test-data-bot';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { Tab } from 'LumX/components/tabs/react/Tab';
-import { CLASSNAME, Layouts, Positions, Tabs, TabsProps } from './Tabs';
+import { Tab } from 'LumX';
+import { CLASSNAME, Tabs, TabsLayout, TabsPosition, TabsProps } from './Tabs';
 
 /////////////////////////////
 
@@ -84,8 +84,8 @@ describe(`<${Tabs.displayName}>`, (): void => {
         it('should use the given props', (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
                 // tslint:disable-next-line: no-any
-                layout: Layouts.clustered,
-                position: oneOf(Positions.center, Positions.right),
+                layout: TabsLayout.clustered,
+                position: oneOf(TabsPosition.center, TabsPosition.right),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();

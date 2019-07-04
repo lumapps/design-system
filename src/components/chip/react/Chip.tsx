@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 
-import { Color, Colors, Theme, Themes } from 'LumX/components';
+import { Color, ColorPalette, Size, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -15,11 +15,7 @@ import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 /**
  * Authorized size values.
  */
-enum Sizes {
-    s = 's',
-    m = 'm',
-}
-type Size = Sizes;
+type ChipSize = Size.s | Size.m;
 
 /**
  * Defines the props of the component.
@@ -36,7 +32,7 @@ interface IChipProps extends IGenericProps {
     /** Indicates if the chip is currently disabled or not. */
     isDisabled?: boolean;
     /** The size of the chip. */
-    size?: Size;
+    size?: ChipSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** A function to be executed when the after element is clicked. */
@@ -75,10 +71,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     after: null,
     before: null,
-    color: Colors.dark,
+    color: ColorPalette.dark,
     isDisabled: false,
     isSelected: false,
-    size: Sizes.m,
+    size: Size.m,
     theme: undefined,
 };
 /////////////////////////////
@@ -196,4 +192,4 @@ Chip.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps, Size, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps };

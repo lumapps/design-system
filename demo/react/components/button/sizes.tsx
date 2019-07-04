@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Button, ButtonEmphasises, ButtonSizes, ButtonTheme, ButtonThemes } from 'LumX';
+import { Button, ButtonEmphasis, Size, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ButtonTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -23,9 +23,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
         <div className="mb+">
             <Button
                 className="mr"
-                size={ButtonSizes.s}
-                emphasis={ButtonEmphasises.low}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                size={Size.s}
+                emphasis={ButtonEmphasis.low}
+                color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
             >
                 <div>
@@ -35,9 +35,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
 
             <Button
                 className="mr"
-                size={ButtonSizes.s}
-                emphasis={ButtonEmphasises.medium}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                size={Size.s}
+                emphasis={ButtonEmphasis.medium}
+                color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
             >
                 <div>
@@ -45,7 +45,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                 </div>
             </Button>
 
-            <Button size={ButtonSizes.s} theme={theme}>
+            <Button size={Size.s} theme={theme}>
                 <div>
                     Small - <code>s</code>
                 </div>
@@ -55,9 +55,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
         <div className="mb+">
             <Button
                 className="mr"
-                size={ButtonSizes.m}
-                emphasis={ButtonEmphasises.low}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                size={Size.m}
+                emphasis={ButtonEmphasis.low}
+                color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
             >
                 <div>
@@ -67,9 +67,9 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
 
             <Button
                 className="mr"
-                size={ButtonSizes.m}
-                emphasis={ButtonEmphasises.medium}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                size={Size.m}
+                emphasis={ButtonEmphasis.medium}
+                color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
             >
                 <div>
@@ -77,7 +77,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                 </div>
             </Button>
 
-            <Button size={ButtonSizes.m} theme={theme}>
+            <Button size={Size.m} theme={theme}>
                 <div>
                     Medium - <code>m</code> (default)
                 </div>

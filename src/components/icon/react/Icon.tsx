@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Color, Colors, Size, Sizes } from 'LumX/components';
+import { Color, Size } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -139,4 +139,4 @@ Icon.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, Color, Colors, Size, Sizes };
+export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps };

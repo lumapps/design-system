@@ -5,9 +5,7 @@ import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import { createPortal } from 'react-dom';
 
-import { Button } from 'LumX';
-import { Theme, Themes } from 'LumX/components';
-import { Emphasises, Variants } from 'LumX/components/button/react/Button';
+import { Button, ButtonEmphasis, ButtonVariant, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -75,7 +73,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     onClose: noop,
     onOpen: noop,
     role: 'dialog',
-    theme: Themes.light,
+    theme: Theme.light,
 };
 /////////////////////////////
 
@@ -193,11 +191,11 @@ const Lightbox: React.FC<LightboxProps> = ({
                                 buttonRef={buttonRef}
                                 className={`${CLASSNAME}__close`}
                                 color="light"
-                                emphasis={Emphasises.low}
+                                emphasis={ButtonEmphasis.low}
                                 leftIcon={mdiClose}
                                 theme={theme}
                                 type="button"
-                                variant={Variants.icon}
+                                variant={ButtonVariant.icon}
                                 onClick={handleClose}
                             />
                             <div
@@ -219,4 +217,4 @@ Lightbox.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps };

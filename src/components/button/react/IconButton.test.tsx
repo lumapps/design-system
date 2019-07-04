@@ -4,11 +4,11 @@ import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { Button, ButtonVariants } from 'LumX';
+import { Button, ButtonEmphasis, ButtonVariant, Size, Theme } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { mdiChevronDown, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, Emphasises, IconButton, IconButtonProps, Sizes, Themes } from './IconButton';
+import { CLASSNAME, IconButton, IconButtonProps } from './IconButton';
 
 /////////////////////////////
 
@@ -82,7 +82,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
             const { button, props } = setup();
 
             expect(button).toHaveProp('leftIcon', props.icon);
-            expect(button).toHaveProp('variant', ButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariant.icon);
         });
 
         it("should use 'icon' `variant` whatever the given `variant` prop is", (): void => {
@@ -91,32 +91,32 @@ describe(`<${IconButton.displayName}>`, (): void => {
             const modifiedProps: ISetupProps = {
                 // We known that <IconButton> could not have a `variant` prop.
                 // @ts-ignore
-                variant: ButtonVariants.icon,
+                variant: ButtonVariant.icon,
             };
 
             let { button } = setup(modifiedProps);
 
-            expect(button).toHaveProp('variant', ButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariant.icon);
 
             /////////////////////////////
 
             // We known that <IconButton> could not have a `variant` prop.
             // @ts-ignore
-            modifiedProps.variant = ButtonVariants.button;
+            modifiedProps.variant = ButtonVariant.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp('variant', ButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariant.icon);
         });
 
         it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 // tslint:disable-next-line: no-any
                 color: fake((fakeData: any): string => fakeData.commerce.color()),
-                emphasis: oneOf(...Object.values(Emphasises)),
+                emphasis: oneOf(...Object.values(ButtonEmphasis)),
                 icon: oneOf(mdiPlus, mdiChevronDown),
-                size: oneOf(...Object.values(Sizes)),
-                theme: oneOf(...Object.values(Themes)),
+                size: oneOf(...Object.values(Size)),
+                theme: oneOf(...Object.values(Theme)),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
@@ -197,7 +197,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
 
             // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: ButtonVariants.icon });
+            setup({ variant: ButtonVariant.icon });
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
@@ -205,7 +205,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
 
             // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: ButtonVariants.button });
+            setup({ variant: ButtonVariant.button });
             expect(global.console.warn).toHaveBeenCalled();
         });
     });

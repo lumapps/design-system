@@ -6,18 +6,17 @@ import uuid from 'uuid/v4';
 import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
-import { Theme, Themes } from 'LumX/components';
+import { Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
 
-enum Positions {
+enum SwitchPosition {
     left = 'left',
     right = 'right',
 }
-type Position = Positions;
 
 /////////////////////////////
 
@@ -38,7 +37,7 @@ interface ISwitchProps extends IGenericProps {
     /**
      * The position of the toggle regarding the label.
      */
-    position?: Position;
+    position?: SwitchPosition;
 
     /**
      * The theme.
@@ -81,8 +80,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     checked: false,
-    position: Positions.left,
-    theme: Themes.light,
+    position: SwitchPosition.left,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -186,4 +185,4 @@ Switch.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Position, Positions, Switch, SwitchProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Switch, SwitchProps, SwitchPosition };

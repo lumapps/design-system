@@ -4,16 +4,10 @@ import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 
-import { Theme, Themes } from 'LumX';
-
-import { Sizes } from 'LumX/components';
-
+import { Icon, Size, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
-
-import { Icon } from 'LumX/components/icon/react/Icon';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from 'LumX/icons';
 
@@ -75,7 +69,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isActive: false,
     isComplete: false,
     label: null,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 /////////////////////////////
 
@@ -133,7 +127,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
             onKeyDown={onEnterPressed(onClick)}
             {...restProps}
         >
-            <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Sizes.s} />
+            <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Size.s} />
 
             <span className={`${CLASSNAME}__label`}>{label}</span>
 

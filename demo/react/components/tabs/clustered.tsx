@@ -1,9 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 
 import { mdiBowl, mdiBreadSliceOutline } from '@mdi/js';
-import { Tabs, TabsTheme } from 'LumX';
-import { Tab } from 'LumX/components/tabs/react/Tab';
-import { Layouts } from 'LumX/components/tabs/react/Tabs';
+import { Tab, Tabs, TabsLayout, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -11,7 +9,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: TabsTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -30,7 +28,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
 
     return (
         <>
-            <Tabs theme={theme} layout={Layouts.clustered} activeTab={activeTab} onTabClick={handleTabClick}>
+            <Tabs theme={theme} layout={TabsLayout.clustered} activeTab={activeTab} onTabClick={handleTabClick}>
                 <Tab label="First Tab" icon={mdiBreadSliceOutline}>
                     <p className="p+">Bread</p>
                 </Tab>

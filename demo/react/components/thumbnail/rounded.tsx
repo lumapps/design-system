@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement } from 'react';
 
-import { Thumbnail, ThumbnailAspectRatios, ThumbnailSizes, ThumbnailTheme, ThumbnailVariants } from 'LumX';
+import { Size, Theme, Thumbnail, ThumbnailAspectRatio, ThumbnailVariant } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ThumbnailTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -33,8 +33,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                     <Thumbnail
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xxs}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xxs}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xxs
                 </div>
@@ -42,8 +42,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                     <Thumbnail
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xs}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xs}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xs
                 </div>
@@ -51,8 +51,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                     <Thumbnail
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.s}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.s}
+                        variant={ThumbnailVariant.rounded}
                     />
                     s
                 </div>
@@ -60,8 +60,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                     <Thumbnail
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.m}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.m}
+                        variant={ThumbnailVariant.rounded}
                     />
                     m
                 </div>
@@ -69,8 +69,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                     <Thumbnail
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.l}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.l}
+                        variant={ThumbnailVariant.rounded}
                     />
                     l
                 </div>
@@ -78,8 +78,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
                     <Thumbnail
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xl}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xl}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xl
                 </div>
@@ -90,61 +90,61 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             <div style={{ display: 'flex' }}>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xxs}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xxs}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xxs
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xs}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xs}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xs
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.s}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.s}
+                        variant={ThumbnailVariant.rounded}
                     />
                     s
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.m}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.m}
+                        variant={ThumbnailVariant.rounded}
                     />
                     m
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.l}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.l}
+                        variant={ThumbnailVariant.rounded}
                     />
                     l
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xl}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xl}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xl
                 </div>
@@ -155,61 +155,61 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             <div style={{ display: 'flex' }}>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xxs}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xxs}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xxs
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xs}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xs}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xs
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.s}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.s}
+                        variant={ThumbnailVariant.rounded}
                     />
                     s
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.m}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.m}
+                        variant={ThumbnailVariant.rounded}
                     />
                     m
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.l}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.l}
+                        variant={ThumbnailVariant.rounded}
                     />
                     l
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xl}
-                        variant={ThumbnailVariants.rounded}
+                        size={Size.xl}
+                        variant={ThumbnailVariant.rounded}
                     />
                     xl
                 </div>

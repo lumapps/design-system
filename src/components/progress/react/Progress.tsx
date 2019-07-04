@@ -10,11 +10,10 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Authorized variants.
  */
-const enum Variants {
+enum ProgressVariant {
     linear = 'linear',
     circular = 'circular',
 }
-type Variant = Variants;
 
 /////////////////////////////
 
@@ -23,7 +22,7 @@ type Variant = Variants;
  */
 interface IProgressProps extends IGenericProps {
     /* Type of progress */
-    variant?: Variant;
+    variant?: ProgressVariant;
 }
 type ProgressProps = IProgressProps;
 
@@ -54,7 +53,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    variant: Variants.circular,
+    variant: ProgressVariant.circular,
 };
 /////////////////////////////
 
@@ -74,13 +73,13 @@ const Progress: React.FC<ProgressProps> = ({
             {...props}
         >
             <div className={classNames(`${CLASSNAME}-${variant}`)}>
-                {variant === Variants.circular && (
+                {variant === ProgressVariant.circular && (
                     <>
                         <div className="lumx-progress-circular__double-bounce1" />
                         <div className="lumx-progress-circular__double-bounce2" />
                     </>
                 )}
-                {variant === Variants.linear && (
+                {variant === ProgressVariant.linear && (
                     <>
                         <div className="lumx-progress-linear__line1" />
                         <div className="lumx-progress-linear__line2" />
@@ -94,4 +93,4 @@ Progress.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Progress, ProgressProps, Variants };
+export { CLASSNAME, DEFAULT_PROPS, Progress, ProgressProps, ProgressVariant };

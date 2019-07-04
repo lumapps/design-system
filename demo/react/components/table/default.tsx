@@ -1,14 +1,4 @@
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableCellVariant,
-    TableHeader,
-    TableRow,
-    TableTheme,
-    ThOrder,
-    ThScope,
-} from 'LumX';
+import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow, ThOrder, ThScope, Theme } from 'LumX';
 
 import React, { ReactElement, useCallback, useState } from 'react';
 
@@ -22,7 +12,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: TableTheme;
+    theme: Theme;
 }
 
 interface IBody {

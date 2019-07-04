@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Progress, Variants } from 'LumX';
+import { Progress, ProgressVariant } from 'LumX';
 
 /////////////////////////////
 
@@ -15,7 +15,7 @@ interface IProps {}
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => (
     <>
-        <Progress variant={Variants.linear} />
+        <Progress variant={ProgressVariant.linear} />
     </>
 );
 

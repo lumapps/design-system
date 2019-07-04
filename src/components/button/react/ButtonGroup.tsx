@@ -6,7 +6,7 @@ import { IconButton } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName, validateComponent } from 'LumX/react/utils';
 
-import { Button, Color, Colors, Size, Sizes, Theme, Themes } from './Button';
+import { Button } from './Button';
 
 /////////////////////////////
 /**
@@ -91,4 +91,4 @@ ButtonGroup.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Color, Colors, ButtonGroup, ButtonGroupProps, Size, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, ButtonGroup, ButtonGroupProps };

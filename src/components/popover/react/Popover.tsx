@@ -18,7 +18,7 @@ const SAFE_ZONE = 8;
 // Reference to the anchor element
 let anchorRef: HTMLDivElement | null;
 
-const enum Placements {
+enum PopperPlacement {
     AUTO = 'auto',
     AUTO_END = 'auto-end',
     AUTO_START = 'auto-start',
@@ -39,7 +39,6 @@ const enum Placements {
     LEFT_END = 'left-end',
     LEFT_START = 'left-start',
 }
-type PopperPositions = Placements;
 
 interface IPopperOffsets {
     vertical?: number;
@@ -76,7 +75,7 @@ interface IPopoverProps extends IGenericProps {
     /* Should the popper be displayed ? */
     showPopper?: boolean | (() => boolean);
     /* The prefered popper location against the anchor */
-    popperPlacement?: PopperPositions | string;
+    popperPlacement?: PopperPlacement | string;
     /* Use the popover as a tooltip engine => auto show/hide the popper when hovering the anchor */
     useTooltipMode?: boolean | (() => boolean);
     /* Customize the delay when showing / hiding the popper */
@@ -143,7 +142,7 @@ const unwrap = (inputValue: boolean | string | (() => boolean) | undefined): boo
  */
 function computeOffsets(
     placement: string,
-    popperPlacement?: Placements,
+    popperPlacement?: PopperPlacement,
     popperOffset: PopperOffsets = { vertical: 0, horizontal: 0 },
 ): Position {
     const computedOffs: Position = {
@@ -289,10 +288,10 @@ const Popover: React.FC<PopoverProps> = ({
                 )}
             </Reference>
             {(unwrap(showPopper) || (unwrap(useTooltipMode) && autoShowPopper)) && (
-                <Popper placement={popperPlacement as Placements} modifiers={modifiers}>
+                <Popper placement={popperPlacement as PopperPlacement} modifiers={modifiers}>
                     {({ ref, style, arrowProps, ...others }: PopperChildrenProps): ReactElement => {
                         const computedOffsets: Position = popperPlacement
-                            ? computeOffsets(others.placement, popperPlacement as Placements, popperOffset)
+                            ? computeOffsets(others.placement, popperPlacement as PopperPlacement, popperOffset)
                             : {};
                         const computedSizes: Size = computeSize(
                             fillHeight,
@@ -332,14 +331,4 @@ Popover.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Popover,
-    PopoverProps,
-    PopperPositions,
-    Placements,
-    IPopperOffsets,
-    PopperOffsets,
-    SHOW_HIDE_DELAY,
-};
+export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, PopperPlacement, PopperOffsets };

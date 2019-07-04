@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement, useState } from 'react';
 
-import { Placements, Popover } from 'LumX';
+import { Popover, PopperPlacement } from 'LumX';
 
 /////////////////////////////
 
@@ -72,7 +72,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
                 <Popover
                     anchorElement={createDemoAnchor(230)}
                     popperElement={createPopper()}
-                    popperPlacement={Placements.BOTTOM}
+                    popperPlacement={PopperPlacement.BOTTOM}
                     showPopper={isTooltipDisplayed}
                     lockFlip
                     matchAnchorWidth

@@ -2,7 +2,7 @@ import React, { CSSProperties, ReactElement, ReactNode, useCallback, useEffect, 
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX/components';
+import { Theme } from 'LumX';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from 'LumX/components/slideshow/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { useInterval } from 'LumX/core/react/hooks';
@@ -67,7 +67,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     groupBy: 1,
     hasControls: false,
     interval: AUTOPLAY_DEFAULT_INTERVAL,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -244,4 +244,4 @@ Slideshow.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Slideshow, SlideshowProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Slideshow, SlideshowProps };

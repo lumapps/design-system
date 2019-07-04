@@ -4,11 +4,11 @@ import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { Button, ButtonGroup, ButtonVariants, Icon } from 'LumX';
+import { Button, ButtonEmphasis, ButtonGroup, ButtonVariant, Icon, Size, Theme } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { mdiMenuDown, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, DropdownButton, DropdownButtonProps, Emphasises, Sizes, Themes } from './DropdownButton';
+import { CLASSNAME, DropdownButton, DropdownButtonProps } from './DropdownButton';
 
 /////////////////////////////
 
@@ -183,44 +183,44 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             const testedProp = 'variant' as string;
             const modifiedProps: ISetupProps = {
-                [testedProp]: ButtonVariants.button,
+                [testedProp]: ButtonVariant.button,
             };
 
             let { button } = setup(modifiedProps);
-            expect(button).toHaveProp(testedProp, ButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariant.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = ButtonVariants.button;
+            modifiedProps[testedProp] = ButtonVariant.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp(testedProp, ButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariant.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = ButtonVariants.icon;
+            modifiedProps[testedProp] = ButtonVariant.icon;
 
             ({ button } = setup({ ...modifiedProps, splitted: true }));
 
-            expect(button).toHaveProp(testedProp, ButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariant.button);
 
             /////////////////////////////
 
-            modifiedProps[testedProp] = ButtonVariants.button;
+            modifiedProps[testedProp] = ButtonVariant.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp(testedProp, ButtonVariants.button);
+            expect(button).toHaveProp(testedProp, ButtonVariant.button);
         });
 
         it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 // tslint:disable-next-line: no-any
                 color: fake((fakeData: any): string => fakeData.commerce.color()),
-                emphasis: oneOf(...Object.values(Emphasises)),
-                size: oneOf(...Object.values(Sizes)),
-                theme: oneOf(...Object.values(Themes)),
+                emphasis: oneOf(...Object.values(ButtonEmphasis)),
+                size: oneOf(...Object.values(Size)),
+                theme: oneOf(...Object.values(Theme)),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
@@ -420,7 +420,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             // We know that a <DropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: ButtonVariants.icon });
+            setup({ variant: ButtonVariant.icon });
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
@@ -428,7 +428,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
 
             // We know that a <DropdownButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: ButtonVariants.button });
+            setup({ variant: ButtonVariant.button });
             expect(global.console.warn).toHaveBeenCalled();
         });
 

@@ -2,10 +2,7 @@ import React, { ReactElement, RefObject, useCallback, useEffect, useState } from
 
 import classNames from 'classnames';
 
-import { Button } from 'LumX';
-import { Theme, Themes } from 'LumX/components';
-import { Emphasises } from 'LumX/components/button/react/Button';
-import { Variants } from 'LumX/components/button/react/DropdownButton';
+import { Button, ButtonEmphasis, ButtonVariant, Theme } from 'LumX';
 import {
     EDGE_FROM_ACTIVE_INDEX,
     PAGINATION_ITEMS_MAX,
@@ -76,7 +73,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     onNextClick: noop,
     onPaginationClick: noop,
     onPreviousClick: noop,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -299,9 +296,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
             <Button
                 leftIcon={mdiChevronLeft}
                 className={`${CLASSNAME}__navigation`}
-                color={theme === Themes.dark ? 'light' : 'dark'}
-                emphasis={Emphasises.low}
-                variant={Variants.icon}
+                color={theme === Theme.dark ? 'light' : 'dark'}
+                emphasis={ButtonEmphasis.low}
+                variant={ButtonVariant.icon}
                 onClick={handlePreviousClick}
                 tabIndex={-1}
             />
@@ -313,9 +310,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
             <Button
                 leftIcon={mdiChevronRight}
                 className={`${CLASSNAME}__navigation`}
-                color={theme === Themes.dark ? 'light' : 'dark'}
-                emphasis={Emphasises.low}
-                variant={Variants.icon}
+                color={theme === Theme.dark ? 'light' : 'dark'}
+                emphasis={ButtonEmphasis.low}
+                variant={ButtonVariant.icon}
                 onClick={handleNextClick}
                 tabIndex={-1}
             />

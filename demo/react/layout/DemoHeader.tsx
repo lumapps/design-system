@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Button, ButtonEmphasises, ButtonSizes } from 'LumX';
+import { Button, ButtonEmphasis, Size } from 'LumX';
 import { IGenericProps } from 'LumX/core/react/utils';
 import { mdiAngular } from 'LumX/icons';
 
@@ -48,7 +48,7 @@ const DemoHeader: React.FC<IProps> = ({ category, children: description, demoTit
             )}
 
             <div>
-                <Button leftIcon={mdiAngular} emphasis={ButtonEmphasises.low} size={ButtonSizes.s}>
+                <Button leftIcon={mdiAngular} emphasis={ButtonEmphasis.low} size={Size.s}>
                     View AngularJS version
                 </Button>
             </div>

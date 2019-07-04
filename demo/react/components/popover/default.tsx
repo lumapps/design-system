@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement } from 'react';
 
-import { Placements, Popover } from 'LumX';
+import { Popover, PopperPlacement } from 'LumX';
 
 /////////////////////////////
 
@@ -65,7 +65,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
             <Popover
                 anchorElement={createDemoAnchor()}
                 popperElement={createPopper()}
-                popperPlacement={Placements.RIGHT}
+                popperPlacement={PopperPlacement.RIGHT}
                 showPopper
             />
             <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Random element`}</div>

@@ -6,12 +6,9 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { ListItem, ListItemProps } from 'LumX/components/list/react/ListItem';
+import { ListItem, ListItemProps, ListSubheader, Theme } from 'LumX';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-
-import { Theme, Themes } from 'LumX/components';
-import { ListSubheader } from 'LumX/components/list/react/ListSubheader';
 
 /////////////////////////////
 
@@ -59,7 +56,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isClickable: false,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 /////////////////////////////
 
@@ -220,4 +217,4 @@ List.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, List, ListProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, List, ListProps };

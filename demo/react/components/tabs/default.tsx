@@ -1,7 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 
-import { Button, Tabs, TabsTheme } from 'LumX';
-import { Tab } from 'LumX/components/tabs/react/Tab';
+import { Button, Tab, Tabs, Theme } from 'LumX';
 import { mdiBowl, mdiBreadSliceOutline } from 'LumX/icons';
 
 /////////////////////////////
@@ -10,7 +9,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: TabsTheme;
+    theme: Theme;
 }
 
 /////////////////////////////

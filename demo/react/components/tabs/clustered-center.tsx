@@ -1,9 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 
 import { mdiBowl, mdiBreadSliceOutline } from '@mdi/js';
-import { Tabs, TabsTheme } from 'LumX';
-import { Tab } from 'LumX/components/tabs/react/Tab';
-import { Layouts, Positions } from 'LumX/components/tabs/react/Tabs';
+import { Tab, Tabs, TabsLayout, TabsPosition, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -11,7 +9,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: TabsTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -32,8 +30,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
         <>
             <Tabs
                 theme={theme}
-                layout={Layouts.clustered}
-                position={Positions.center}
+                layout={TabsLayout.clustered}
+                position={TabsPosition.center}
                 activeTab={activeTab}
                 onTabClick={handleTabClick}
             >

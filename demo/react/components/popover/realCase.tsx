@@ -1,19 +1,16 @@
 import React, { CSSProperties, ReactElement, useState } from 'react';
 
-import { Orientations } from 'LumX/components';
-
 import {
     Button,
-    ButtonEmphasises,
-    ButtonSizes,
-    ButtonThemes,
+    ButtonEmphasis,
     IconButton,
-    Placements,
+    Orientation,
     Popover,
     PopperOffsets,
+    PopperPlacement,
+    Size,
+    Theme,
     UserBlock,
-    UserBlockSize,
-    UserBlockTheme,
 } from 'LumX';
 
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from 'LumX/icons';
@@ -24,7 +21,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: UserBlockTheme;
+    theme: Theme;
 }
 
 const demoPopoverHolderStyle: CSSProperties = {
@@ -34,11 +31,11 @@ const demoPopoverHolderStyle: CSSProperties = {
     paddingTop: 100,
 };
 
-const createSimpleAction = (theme: ButtonThemes): ReactElement => (
+const createSimpleAction = (theme: Theme): ReactElement => (
     <Button
-        emphasis={ButtonEmphasises.medium}
-        color={theme === ButtonThemes.dark ? 'light' : undefined}
-        size={ButtonSizes.s}
+        emphasis={ButtonEmphasis.medium}
+        color={theme === Theme.dark ? 'light' : undefined}
+        size={Size.s}
         theme={theme}
     >
         Follow
@@ -47,14 +44,14 @@ const createSimpleAction = (theme: ButtonThemes): ReactElement => (
 
 const demoActions: string[] = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
-const createMultipleActions = (theme: ButtonThemes): ReactElement => (
+const createMultipleActions = (theme: Theme): ReactElement => (
     <>
         {demoActions.map(
             (demoAction: string, idx: number): IconButton => (
                 <IconButton
                     key={`ubAction${idx}`}
-                    emphasis={ButtonEmphasises.low}
-                    color={theme === ButtonThemes.dark ? 'light' : undefined}
+                    emphasis={ButtonEmphasis.low}
+                    color={theme === Theme.dark ? 'light' : undefined}
                     icon={demoAction}
                     theme={theme}
                 />
@@ -99,10 +96,10 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
             name="Guillaume Nachury"
             fields={['Bidouilleur', 'Meyzieu']}
             avatar={'http://i.pravatar.cc/139'}
-            orientation={Orientations.horizontal}
+            orientation={Orientation.horizontal}
             onMouseEnter={(): void => toggleCardDisplay(true)}
             onMouseLeave={(): void => toggleCardDisplay(false)}
-            size={UserBlockSize.m}
+            size={Size.m}
         />
     );
 
@@ -124,7 +121,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                 name="Guillaume Nachury"
                 fields={['Bidouilleur', 'Meyzieu']}
                 avatar={'http://i.pravatar.cc/139'}
-                orientation={Orientations.vertical}
+                orientation={Orientation.vertical}
                 simpleAction={createSimpleAction(theme)}
                 multipleActions={createMultipleActions(theme)}
             />
@@ -139,7 +136,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                 popperOffset={offsets}
                 showPopper={isCardDisplayed}
                 popperElement={popper}
-                popperPlacement={Placements.TOP_START}
+                popperPlacement={PopperPlacement.TOP_START}
                 elevation={5}
             />
         </div>

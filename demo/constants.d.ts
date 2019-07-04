@@ -7,16 +7,15 @@
 /**
  * Defines the allowed themes.
  */
-declare enum Themes {
+declare enum Theme {
     lumapps = 'lumapps',
     material = 'material',
 }
-declare type Theme = Themes;
 
 /**
  * The available themes in the demo site.
  */
-declare const THEMES: { [key in Themes]: Theme };
+declare const THEMES: { [key in Theme]: Theme };
 
 /**
  * The default theme to use in the demo site at startup.
@@ -25,4 +24,4 @@ declare const DEFAULT_THEME: Theme;
 
 /////////////////////////////
 
-export { THEMES, DEFAULT_THEME, Theme, Themes };
+export { THEMES, DEFAULT_THEME, Theme };

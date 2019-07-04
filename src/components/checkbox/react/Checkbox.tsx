@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import { mdiCheck } from '@mdi/js';
 
-import { Icon, Theme, Themes } from 'LumX';
+import { Icon, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { CheckboxHelper } from './CheckboxHelper';
@@ -66,7 +66,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     checked: false,
     disabled: false,
     onChange: noop,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 /////////////////////////////
 
@@ -141,4 +141,4 @@ Checkbox.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps };

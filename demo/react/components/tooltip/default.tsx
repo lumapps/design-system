@@ -1,6 +1,6 @@
 import React, { ReactElement, useRef } from 'react';
 
-import { Button, ButtonTheme, Tooltip } from 'LumX';
+import { Button, Theme, Tooltip } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ButtonTheme;
+    theme: Theme;
 }
 
 /////////////////////////////

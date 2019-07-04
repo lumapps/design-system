@@ -3,11 +3,12 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
+import { Size } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, Icon, IconProps, Sizes } from './Icon';
+import { CLASSNAME, Icon, IconProps } from './Icon';
 
 /////////////////////////////
 
@@ -102,7 +103,7 @@ describe(`<${Icon.displayName}>`, (): void => {
                 // tslint:disable-next-line: no-any
                 color: fake((fakeData: any) => fakeData.commerce.color()),
                 icon: oneOf(mdiPlus, mdiCheck),
-                size: oneOf(...Object.values(Sizes)),
+                size: oneOf(...Object.values(Size)),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();

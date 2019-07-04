@@ -5,7 +5,8 @@ import { mount, shallow } from 'enzyme';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps, Themes } from './Divider';
+import { Theme } from 'LumX';
+import { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps } from './Divider';
 
 /////////////////////////////
 
@@ -85,7 +86,7 @@ describe(`<${Divider.displayName}>`, (): void => {
         it('should use the given `theme`', (): void => {
             const testedProp = 'theme';
             const modifiedProps: ISetupProps = {
-                [testedProp]: Themes.dark,
+                [testedProp]: Theme.dark,
             };
 
             const { hr } = setup(modifiedProps);

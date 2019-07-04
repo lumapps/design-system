@@ -4,21 +4,19 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
+import { Theme } from 'LumX';
 import { Callback, IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
-
-import { Theme, Themes } from 'LumX/components';
 
 /**
  *  Authorized size values.
  */
-const enum Sizes {
+enum ListItemSize {
     tiny = 'tiny',
     regular = 'regular',
     big = 'big',
     huge = 'huge',
 }
-type Size = Sizes;
 
 /////////////////////////////
 
@@ -31,7 +29,7 @@ interface IListItemProps extends IGenericProps {
     /* Whether the list item can be clicked */
     isClickable?: boolean;
     /* Component size*/
-    size?: Size;
+    size?: ListItemSize;
     /* before element */
     before?: ReactElement;
     /* after element */
@@ -75,8 +73,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isActive: false,
     isClickable: false,
     isSelected: false,
-    size: Sizes.regular,
-    theme: Themes.light,
+    size: ListItemSize.regular,
+    theme: Theme.light,
 };
 /////////////////////////////
 
@@ -150,4 +148,4 @@ ListItem.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize };

@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement, useState } from 'react';
 
-import { Placements, Popover } from 'LumX';
+import { Popover, PopperPlacement } from 'LumX';
 
 /////////////////////////////
 
@@ -45,24 +45,24 @@ const createPopper = (): ReactElement => {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
-    const [selectedPlacement, setSelectedPlacement] = useState(Placements.AUTO);
+    const [selectedPlacement, setSelectedPlacement] = useState(PopperPlacement.AUTO);
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
-    const availablePlacements: string[] = [
-        Placements.AUTO,
-        Placements.AUTO_END,
-        Placements.AUTO_START,
-        Placements.BOTTOM,
-        Placements.BOTTOM_END,
-        Placements.BOTTOM_START,
-        Placements.LEFT,
-        Placements.LEFT_END,
-        Placements.LEFT_START,
-        Placements.RIGHT,
-        Placements.RIGHT_END,
-        Placements.RIGHT_START,
-        Placements.TOP,
-        Placements.TOP_END,
-        Placements.TOP_START,
+    const availablePopperPlacement: string[] = [
+        PopperPlacement.AUTO,
+        PopperPlacement.AUTO_END,
+        PopperPlacement.AUTO_START,
+        PopperPlacement.BOTTOM,
+        PopperPlacement.BOTTOM_END,
+        PopperPlacement.BOTTOM_START,
+        PopperPlacement.LEFT,
+        PopperPlacement.LEFT_END,
+        PopperPlacement.LEFT_START,
+        PopperPlacement.RIGHT,
+        PopperPlacement.RIGHT_END,
+        PopperPlacement.RIGHT_START,
+        PopperPlacement.TOP,
+        PopperPlacement.TOP_END,
+        PopperPlacement.TOP_START,
     ];
 
     function toggleTooltipDisplay(newVisibleState: boolean): void {
@@ -73,10 +73,10 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
         <div onMouseOver={(): void => toggleTooltipDisplay(true)} onMouseOut={(): void => toggleTooltipDisplay(false)}>
             <select
                 onChange={(evt: React.ChangeEvent<HTMLSelectElement>): void =>
-                    setSelectedPlacement(evt.target.value as Placements)
+                    setSelectedPlacement(evt.target.value as PopperPlacement)
                 }
             >
-                {availablePlacements.map((pos: string) => (
+                {availablePopperPlacement.map((pos: string) => (
                     <option>{pos}</option>
                 ))}
             </select>

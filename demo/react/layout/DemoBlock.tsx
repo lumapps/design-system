@@ -10,7 +10,7 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-import { Button, ButtonEmphasises, Switch, SwitchPositions, Themes } from 'LumX';
+import { Button, ButtonEmphasis, Switch, SwitchPosition, Theme } from 'LumX';
 import { IGenericProps } from 'LumX/core/react/utils';
 import { mdiCodeTags } from 'LumX/icons';
 
@@ -147,7 +147,7 @@ const DemoBlock: React.FC<IProps> = ({
     demoPath,
     files = [],
 }: IProps): ReactElement => {
-    const [theme, setTheme] = useState(Themes.light);
+    const [theme, setTheme] = useState(Theme.light);
     /**
      * Enable/disable the dark theme.
      * This is the callback function of the `onClick` event of the theme <Switch>.
@@ -155,7 +155,7 @@ const DemoBlock: React.FC<IProps> = ({
      * @param enabled Indicates if the dark theme should be enabled or not.
      */
     const setDarkTheme = (enabled: boolean): void => {
-        setTheme(enabled ? Themes.dark : Themes.light);
+        setTheme(enabled ? Theme.dark : Theme.light);
     };
 
     const [shouldDisplayCode, setDisplayCode] = useState(false);
@@ -172,7 +172,7 @@ const DemoBlock: React.FC<IProps> = ({
     ] = useState();
     const [demoSources, setDemoSources] = useState(['No source code for this demo...']);
 
-    const isThemeDark: boolean = theme === Themes.dark;
+    const isThemeDark: boolean = theme === Theme.dark;
 
     const sourceFilesToLoad: string[] = [`${demoName}.tsx`].concat(files);
     useEffect((): void => {
@@ -207,13 +207,13 @@ const DemoBlock: React.FC<IProps> = ({
 
                     <div className="main-block__toolbar">
                         <div className="main-block__code-toggle">
-                            <Button leftIcon={mdiCodeTags} emphasis={ButtonEmphasises.low} onClick={toggleDisplayCode}>
+                            <Button leftIcon={mdiCodeTags} emphasis={ButtonEmphasis.low} onClick={toggleDisplayCode}>
                                 {shouldDisplayCode ? 'Hide code' : 'Show code'}
                             </Button>
                         </div>
 
                         <div className="main-block__theme-toggle">
-                            <Switch position={SwitchPositions.right} label="Dark background" onToggle={setDarkTheme} />
+                            <Switch position={SwitchPosition.right} label="Dark background" onToggle={setDarkTheme} />
                         </div>
                     </div>
 

@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Icon, IconButton } from 'LumX';
-import { Color, Colors, ComplexPropDefault, Theme, Themes } from 'LumX/components';
+import { Color, ColorPalette, Icon, IconButton, Size, Theme } from 'LumX';
+import { ComplexPropDefault } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, Omit, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -17,30 +17,24 @@ import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
 /**
  * The authorized values for the `emphasis` prop.
  */
-enum Emphasises {
+enum ButtonEmphasis {
     low = 'low',
     medium = 'medium',
     high = 'high',
 }
-type Emphasis = Emphasises;
 
 /**
  * The authorized values for the `size` prop.
  */
-enum Sizes {
-    s = 's',
-    m = 'm',
-}
-type Size = Sizes;
+type ButtonSize = Size.s | Size.m;
 
 /**
  * The authorized values for the `variant` prop.
  */
-enum Variants {
+enum ButtonVariant {
     button = 'button',
     icon = 'icon',
 }
-type Variant = Variants;
 
 /////////////////////////////
 
@@ -66,7 +60,7 @@ interface IButtonProps extends IGenericProps {
     /**
      * The emphasis.
      */
-    emphasis?: Emphasis;
+    emphasis?: ButtonEmphasis;
 
     /**
      * The icon that comes before the label.
@@ -81,7 +75,7 @@ interface IButtonProps extends IGenericProps {
     /**
      * The size.
      */
-    size?: Size;
+    size?: ButtonSize;
 
     /**
      * The theme.
@@ -91,7 +85,7 @@ interface IButtonProps extends IGenericProps {
     /**
      * The variant.
      */
-    variant?: Variant;
+    variant?: ButtonVariant;
 }
 type ButtonProps = IButtonProps & ButtonRootProps;
 
@@ -126,13 +120,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     buttonRef: undefined,
     color: {
-        default: Colors.dark,
-        [`emphasis-${Emphasises.high}`]: Colors.primary,
+        default: ColorPalette.dark,
+        [`emphasis-${ButtonEmphasis.high}`]: ColorPalette.primary,
     },
-    emphasis: Emphasises.high,
-    size: Sizes.m,
-    theme: Themes.light,
-    variant: Variants.button,
+    emphasis: ButtonEmphasis.high,
+    size: Size.m,
+    theme: Theme.light,
+    variant: ButtonVariant.button,
 };
 
 /////////////////////////////
@@ -153,7 +147,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  */
 function _postValidate({ childrenCount, props }: ValidateParameters): string | boolean | void {
     if (
-        props.variant === Variants.button &&
+        props.variant === ButtonVariant.button &&
         (!isEmpty(props.leftIcon) || !isEmpty(props.rightIcon)) &&
         childrenCount === 0
     ) {
@@ -178,7 +172,7 @@ function _postValidate({ childrenCount, props }: ValidateParameters): string | b
  */
 function _preValidate({ childrenCount, props }: ValidateParameters): string | boolean | void {
     if (!isEmpty(props.leftIcon) && !isEmpty(props.rightIcon)) {
-        if (props.variant === Variants.icon) {
+        if (props.variant === ButtonVariant.icon) {
             return `You cannot have 2 icons in a 'icon' \`variant\` of <${COMPONENT_NAME}>, You can only have one icon!`;
         }
 
@@ -203,7 +197,7 @@ function _preValidate({ childrenCount, props }: ValidateParameters): string | bo
  */
 function _validate(props: ButtonProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
-        maxChildren: props.variant === Variants.icon ? 0 : undefined,
+        maxChildren: props.variant === ButtonVariant.icon ? 0 : undefined,
         postValidate: _postValidate,
         preValidate: _preValidate,
         props,
@@ -243,7 +237,7 @@ const Button: React.FC<ButtonProps> = ({
         ...props,
     });
 
-    if (variant === Variants.button) {
+    if (variant === ButtonVariant.button) {
         if (!isEmpty(leftIcon)) {
             className += isEmpty(className) ? '' : ' ';
             className += `${CLASSNAME}--has-left-icon`;
@@ -269,7 +263,7 @@ const Button: React.FC<ButtonProps> = ({
                     emphasis,
                     prefix: CLASSNAME,
                     size,
-                    theme: emphasis === Emphasises.high ? theme : undefined,
+                    theme: emphasis === ButtonEmphasis.high ? theme : undefined,
                     variant,
                 }),
             )}
@@ -285,19 +279,4 @@ Button.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    Button,
-    ButtonProps,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variant,
-    Variants,
-};
+export { CLASSNAME, DEFAULT_PROPS, ButtonEmphasis, Button, ButtonProps, ButtonVariant };

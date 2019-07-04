@@ -8,8 +8,6 @@ import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 
 import { handleBasicClasses } from 'LumX/core/utils';
 
-import { Theme, Themes } from 'LumX/components';
-
 /////////////////////////////
 
 /**
@@ -67,4 +65,4 @@ ListSubheader.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ListSubheader, ListSubheaderProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, ListSubheader, ListSubheaderProps };

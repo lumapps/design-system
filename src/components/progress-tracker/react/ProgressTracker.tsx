@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX';
+import { Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -49,7 +49,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeStep: 0,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 
 /////////////////////////////

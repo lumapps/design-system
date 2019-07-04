@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Switch, SwitchTheme } from 'LumX';
+import { Switch, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: SwitchTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
