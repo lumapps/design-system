@@ -1,6 +1,7 @@
 import React, { CSSProperties, Fragment, ReactNode, useRef, useState } from 'react';
 
 import { Button, Dropdown, List, ListItem, ListItemSizes, Placements } from 'LumX';
+import { useClickAway } from 'LumX/core/react/hooks';
 
 const demoContainerStyle: CSSProperties = {
     display: 'flex',
