@@ -79,3 +79,5 @@ export {
 export { Tooltip, TooltipProps, TooltipPlacement } from './components/tooltip/react/Tooltip';
 
 export { UserBlock, UserBlockProps } from './components/user-block/react/UserBlock';
+
+export { Toolbar } from './components/toolbar/react/Toolbar';
