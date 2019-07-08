@@ -81,3 +81,5 @@ export { Tooltip, TooltipProps, TooltipPlacement } from './components/tooltip/re
 export { UserBlock, UserBlockProps } from './components/user-block/react/UserBlock';
 
 export { CommentBlock, CommentBlockProps } from './components/comment-block/react/CommentBlock';
+
+export { Toolbar } from './components/toolbar/react/Toolbar';
