@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { KeyboardEvent, KeyboardEventHandler, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -79,6 +79,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isRelevant: false,
     theme: Theme.light,
 };
+
 /////////////////////////////
 
 /**
@@ -102,8 +103,8 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     text,
     theme = DEFAULT_PROPS.theme,
 }: CommentBlockProps): React.ReactElement => {
-    const enterKeyPress = (evt: KeyboardEvent): void => {
-        if (evt.keyCode === ENTER_KEY_CODE && isFunction(onClick)) {
+    const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>): void => {
+        if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
             onClick();
         }
     };
@@ -121,7 +122,13 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
         >
             <div className="lumx-comment-block__wrapper">
                 <div className="lumx-comment-block__avatar">
-                    <Avatar image={avatar} size={Size.m} />
+                    <Avatar
+                        image={avatar}
+                        size={Size.m}
+                        tabIndex={onClick ? 0 : -1}
+                        onClick={onClick}
+                        onKeyPress={enterKeyPress}
+                    />
                 </div>
 
                 <div className="lumx-comment-block__container">

@@ -26,10 +26,11 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <Fragment>
             <CommentBlock
                 actions={[
-                    <Button emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                    <Button key="button0" emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiHeart}>
                         24 likes
                     </Button>,
                     <Button
+                        key="button1"
                         emphasis={ButtonEmphasis.low}
                         size={Size.s}
                         leftIcon={mdiReply}
@@ -46,8 +47,12 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 date="4 hours ago"
                 name="Matthias Manoukian"
                 hasChildren={true}
+                onMouseEnter={(): void => console.log('Mouse entered')}
+                onMouseLeave={(): void => console.log('Mouse left')}
+                onClick={(): void => console.log('CommentBlock clicked')}
                 children={[
                     <CommentBlock
+                        key="commentBlock0"
                         actions={
                             <Button emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiHeart}>
                                 24 likes
@@ -55,7 +60,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         }
                         onMouseEnter={(): void => console.log('Mouse entered')}
                         onMouseLeave={(): void => console.log('Mouse left')}
-                        onMouseClick={(): void => console.log('CommentBlock clicked')}
+                        onClick={(): void => console.log('CommentBlock clicked')}
                         hasActions={true}
                         avatar="http://i.pravatar.cc/128"
                         date="3 hours ago"
@@ -64,6 +69,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         text="Here, I focus on a range of items and features that we use in life without giving them."
                     />,
                     <CommentBlock
+                        key="commentBlock1"
                         actions={
                             <Button emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiHeart}>
                                 16 likes
@@ -74,10 +80,13 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         date="2 hours ago"
                         name="Hettie Powell"
                         theme={theme}
+                        onMouseEnter={(): void => console.log('Mouse entered')}
+                        onMouseLeave={(): void => console.log('Mouse left')}
+                        onClick={(): void => console.log('CommentBlock clicked')}
                         text="Differentiate and you stand out in a crowded marketplace."
                     />,
                 ]}
-                text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth g"
+                text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."
             />
         </Fragment>
     );
