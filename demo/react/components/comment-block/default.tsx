@@ -33,10 +33,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         emphasis={ButtonEmphasis.low}
                         size={Size.s}
                         leftIcon={mdiReply}
-                        onClick={(): void => {
-                            console.log(isOpen);
-                            setIsOpen(!isOpen);
-                        }}
+                        onClick={(): void => setIsOpen(!isOpen)}
                     >
                         16 replies
                     </Button>,
