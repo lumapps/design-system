@@ -2,12 +2,6 @@
    Main
    ========================================================================== */
 
-input:focus,
-a:focus,
-button:focus {
-   outline: 5px solid lightblue;
-}
-
 .main {
     flex: 1;
     justify-content: center;

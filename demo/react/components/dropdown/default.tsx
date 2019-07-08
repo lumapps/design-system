@@ -1,6 +1,6 @@
 import React, { CSSProperties, Fragment, ReactNode } from 'react';
 
-import { Button, Dropdown, List, ListItem, ListItemSizes, ListSubheader, Placements } from 'LumX';
+import { Button, Dropdown, List, ListItem, ListItemSize, ListSubheader, PopperPlacement } from 'LumX';
 
 const demoContainerStyle: CSSProperties = {
     display: 'flex',
@@ -26,11 +26,11 @@ const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode 
 
     return (
         <List isClickable onListItemSelected={onItemSelectedHandler}>
-            <ListItem size={ListItemSizes.tiny}>Los Angeles</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Monterrey</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Georgetown</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Cali</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Trondheim</ListItem>
+            <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+            <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+            <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+            <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+            <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
         </List>
     );
 };
@@ -46,14 +46,14 @@ const createComplexMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode
     return (
         <List isClickable onListItemSelected={onItemSelectedHandler}>
             <ListSubheader>Contribution</ListSubheader>
-            <ListItem size={ListItemSizes.tiny}>Pages</ListItem>
-            <ListItem size={ListItemSizes.tiny}>News Articles</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Job Offers</ListItem>
+            <ListItem size={ListItemSize.tiny}>Pages</ListItem>
+            <ListItem size={ListItemSize.tiny}>News Articles</ListItem>
+            <ListItem size={ListItemSize.tiny}>Job Offers</ListItem>
             <ListSubheader>Directories</ListSubheader>
-            <ListItem size={ListItemSizes.tiny}>Projects</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Useful links</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Support links</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Engineering</ListItem>
+            <ListItem size={ListItemSize.tiny}>Projects</ListItem>
+            <ListItem size={ListItemSize.tiny}>Useful links</ListItem>
+            <ListItem size={ListItemSize.tiny}>Support links</ListItem>
+            <ListItem size={ListItemSize.tiny}>Engineering</ListItem>
         </List>
     );
 };
@@ -63,7 +63,7 @@ const createComplexMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode
 /**
  * The demo for the default <Dropdown>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
     return (
@@ -73,7 +73,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                 <Dropdown
                     closeOnClick={true}
                     escapeClose={true}
-                    position={Placements.BOTTOM_START}
+                    position={PopperPlacement.BOTTOM_START}
                     toggleElement={createToggleElement('Simple Menu')}
                 >
                     {(setIsOpen: (isOpen: boolean) => void): ReactNode => createSimpleMenuList(setIsOpen)}
@@ -84,8 +84,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                     closeOnClick={false}
                     escapeClose={false}
                     offset={{ vertical: 8 }}
-                    overToggle={true}
-                    position={Placements.BOTTOM_START}
+                    position={PopperPlacement.BOTTOM_START}
                     toggleElement={createToggleElement('Complex Menu')}
                 >
                     {(setIsOpen: (isOpen: boolean) => void): ReactNode => createComplexMenuList(setIsOpen)}

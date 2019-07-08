@@ -1,6 +1,6 @@
 import React, { CSSProperties, Fragment, ReactNode, useRef, useState } from 'react';
 
-import { Button, Dropdown, List, ListItem, ListItemSizes, Placements } from 'LumX';
+import { Button, Dropdown, List, ListItem, ListItemSize, PopperPlacement } from 'LumX';
 import { useClickAway } from 'LumX/core/react/hooks';
 
 const demoContainerStyle: CSSProperties = {
@@ -27,11 +27,11 @@ const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode 
 
     return (
         <List isClickable onListItemSelected={onItemSelectedHandler}>
-            <ListItem size={ListItemSizes.tiny}>Los Angeles</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Monterrey</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Georgetown</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Cali</ListItem>
-            <ListItem size={ListItemSizes.tiny}>Trondheim</ListItem>
+            <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+            <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+            <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+            <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+            <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
         </List>
     );
 };
@@ -41,7 +41,7 @@ const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode 
 /**
  * The demo for the default <Dropdown>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
     const [isDropdownOpen, setIsDropdownOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(true);
@@ -58,7 +58,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                 <Dropdown
                     closeOnClick={true}
                     escapeClose={true}
-                    position={Placements.BOTTOM_START}
+                    position={PopperPlacement.BOTTOM_START}
                     showDropdown={isDropdownOpen}
                     toggleElement={createToggleElement('My target')}
                 >
