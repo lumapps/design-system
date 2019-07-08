@@ -79,3 +79,5 @@ export {
 export { Tooltip, TooltipProps, TooltipPlacement } from './components/tooltip/react/Tooltip';
 
 export { UserBlock, UserBlockProps } from './components/user-block/react/UserBlock';
+
+export { CommentBlock, CommentBlockProps } from './components/comment-block/react/CommentBlock';
