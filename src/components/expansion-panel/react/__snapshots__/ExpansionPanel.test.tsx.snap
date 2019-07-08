@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ExpansionPanel> Snapshots and structure should render correctly 1`] = `
+<section
+  className="lumx-theme-background-light-L6 lumx-expansion-panel lumx-expansion-panel--variant-boxed"
+>
+  <header
+    className="lumx-expansion-panel__header"
+    onClick={[Function]}
+  >
+    <div
+      className="lumx-expansion-panel__header-content"
+    >
+      <span
+        className="lumx-expansion-panel__label"
+      />
+    </div>
+    <div
+      className="lumx-expansion-panel__header-toggle"
+    >
+      <Button
+        color="light"
+        emphasis="low"
+        leftIcon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+        variant="icon"
+      />
+    </div>
+  </header>
+</section>
+`;

@@ -23,6 +23,7 @@ enum ColorPalette {
     green = 'green',
     yellow = 'yellow',
     red = 'red',
+    light = 'light',
 }
 type Color = ColorPalette | string;
 

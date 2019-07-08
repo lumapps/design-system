@@ -84,3 +84,11 @@ export { UserBlock, UserBlockProps } from './components/user-block/react/UserBlo
 export { CommentBlock, CommentBlockProps } from './components/comment-block/react/CommentBlock';
 
 export { Toolbar } from './components/toolbar/react/Toolbar';
+
+export { DragHandle, DragHandleProps } from 'LumX/components/drag-handle/react/DragHandle';
+
+export {
+    ExpansionPanel,
+    ExpansionPanelProps,
+    ExpansionPanelVariant,
+} from 'LumX/components/expansion-panel/react/ExpansionPanel';
