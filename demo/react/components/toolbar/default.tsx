@@ -1,11 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement } from 'react';
 
-import { ButtonEmphasis, IconButton, TextField, Toolbar } from 'LumX';
+import { ButtonEmphasis, IconButton, TextField, Theme, Toolbar } from 'LumX';
 
 import { mdiEyeSettingsOutline, mdiFolderEdit, mdiMagnify } from '@mdi/js';
 import classNames from 'classnames';
-
-import { Theme } from 'LumX/demo/constants';
 
 /////////////////////////////
 
@@ -24,8 +22,7 @@ const toolbarGridDemoStyle = {
 
 /////////////////////////////
 
-// tslint:disable-next-line: typedef
-const getToolbarLabel = (theme) => (
+const getToolbarLabel = (theme: Theme): ReactElement => (
     <div style={toolbarGridDemoStyle}>
         <span
             className={classNames(
@@ -40,8 +37,7 @@ const getToolbarLabel = (theme) => (
     </div>
 );
 
-// tslint:disable-next-line: typedef
-const getToolbarAfterButton = (theme) => (
+const getToolbarAfterButton = (theme: Theme): ReactElement => (
     <IconButton
         emphasis={ButtonEmphasis.low}
         theme={theme}
@@ -50,8 +46,7 @@ const getToolbarAfterButton = (theme) => (
     />
 );
 
-// tslint:disable-next-line: typedef
-const getToolbarBeforeButton = (theme) => (
+const getToolbarBeforeButton = (theme: Theme): ReactElement => (
     <IconButton
         emphasis={ButtonEmphasis.low}
         theme={theme}
@@ -66,15 +61,15 @@ const getToolbarBeforeButton = (theme) => (
  * @param props Component props.
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = (props: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = (props: IProps): ReactElement => (
+    <>
         <Toolbar
             label={getToolbarLabel(props.theme)}
             after={getToolbarAfterButton(props.theme)}
             before={getToolbarBeforeButton(props.theme)}
             theme={props.theme}
         />
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -62,7 +62,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
     className = '',
     label,
     ...props
-}: ToolbarProps): React.ReactElement => {
+}: ToolbarProps): ReactElement => {
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
