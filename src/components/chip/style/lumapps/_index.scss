@@ -60,17 +60,10 @@
 /* Chip states
    ========================================================================== */
 
-.#{$lumx-base-prefix}-chip--is-clickable,
-.#{$lumx-base-prefix}-chip .#{$lumx-base-prefix}-chip__before--is-clickable,
-.#{$lumx-base-prefix}-chip .#{$lumx-base-prefix}-chip__after--is-clickable {
+.#{$lumx-base-prefix}-chip--is-clickable {
     @include lumx-state-transition;
 
     cursor: pointer;
-}
-
-.#{$lumx-base-prefix}-chip .#{$lumx-base-prefix}-chip__before--is-clickable:hover,
-.#{$lumx-base-prefix}-chip .#{$lumx-base-prefix}-chip__after--is-clickable:hover {
-    opacity: 0.8;
 }
 
 .#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--theme-light {
@@ -124,20 +117,18 @@
 }
 
 .#{$lumx-base-prefix}-chip--is-selected {
-    &.#{$lumx-base-prefix}-chip--theme-light {
-        @include lumx-state-as-selected(state-default, dark);
+    @include lumx-state-as-selected(state-default, dark);
 
-        &.#{$lumx-base-prefix}-chip--is-clickable:hover {
-            @include lumx-state-as-selected(state-hover, dark);
-        }
+    &.#{$lumx-base-prefix}-chip--is-clickable:hover {
+        @include lumx-state-as-selected(state-hover, dark);
+    }
 
-        &.#{$lumx-base-prefix}-chip--is-clickable:active {
-            @include lumx-state-as-selected(state-active, dark);
-        }
+    &.#{$lumx-base-prefix}-chip--is-clickable:active {
+        @include lumx-state-as-selected(state-active, dark);
+    }
 
-        &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
-            @include lumx-state-as-selected(state-focus, dark);
-        }
+    &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
+        @include lumx-state-as-selected(state-focus, dark);
     }
 
     &.#{$lumx-base-prefix}-chip--theme-dark {
