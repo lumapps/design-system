@@ -307,7 +307,7 @@
         "test:angularjs:ci": "",
         "test:react": "jest --config jest/react/index.js --coverage --notify --passWithNoTests",
         "test:react:changed": "jest --config jest/react/index.js --coverage --notify --passWithNoTests --onlyChanged",
-        "test:react:ci": "jest --config jest/react/index.js --coverage --ci",
+        "test:react:ci": "jest --config jest/react/index.js --coverage --ci -w 1",
         "test:react:watch": "jest --config jest/react/index.js --watch --notify --passWithNoTests",
         "test:react:watch:changed": "jest --config jest/react/index.js --watch --notify --passWithNoTests --onlyChanged",
         "webpack": "webpack-dev-server --config webpack/webpack.dev.js",
