@@ -5,7 +5,7 @@ import { mount, shallow } from 'enzyme';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps } from './Dropdown';
+import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
 
 /////////////////////////////
 
@@ -38,7 +38,9 @@ interface ISetup extends ICommonSetup {
  */
 const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: DropdownProps = {
-        children: 'This is the content of the dropdown',
+        // tslint:disable-next-line no-unused
+        children: (setIsOpen: (isOpen: boolean) => void): React.ReactNode => 'This is the content of the dropdown',
+        toggleElement: 'Toggle',
         ...propsOverrides,
     };
 
@@ -71,15 +73,10 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { dropdown } = setup();
+            const { wrapper }: ISetup = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach(
-                (prop: string): void => {
-                    expect(dropdown).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                    );
-                },
-            );
+            expect(wrapper).toHaveClassName(CLASSNAME);
+            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasToggle', value: true }));
         });
     });
 

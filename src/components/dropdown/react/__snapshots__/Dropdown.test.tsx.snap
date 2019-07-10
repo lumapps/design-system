@@ -2,8 +2,20 @@
 
 exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
 <div
-  className="lumx-dropdown"
+  className="lumx-dropdown lumx-dropdown--has-toggle"
+  onKeyDown={[Function]}
 >
-  This is the content of the dropdown
+  <Popover
+    anchorElement={
+      <div
+        className="lumx-dropdown__toggle"
+        onClick={[Function]}
+      >
+        Toggle
+      </div>
+    }
+    popperElement={false}
+    showPopper={false}
+  />
 </div>
 `;
