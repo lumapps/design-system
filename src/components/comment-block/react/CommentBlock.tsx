@@ -120,8 +120,8 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
                 }),
             )}
         >
-            <div className="lumx-comment-block__wrapper">
-                <div className="lumx-comment-block__avatar">
+            <div className={`${CLASSNAME}__wrapper`}>
+                <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
                         image={avatar}
                         size={Size.m}
@@ -131,11 +131,11 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
                     />
                 </div>
 
-                <div className="lumx-comment-block__container">
-                    <div className="lumx-comment-block__content">
-                        <div className="lumx-comment-block__meta">
+                <div className={`${CLASSNAME}__container`}>
+                    <div className={`${CLASSNAME}_content`}>
+                        <div className={`${CLASSNAME}__meta`}>
                             <span
-                                className="lumx-comment-block__name"
+                                className={`${CLASSNAME}_name`}
                                 onClick={onClick}
                                 onKeyPress={enterKeyPress}
                                 onMouseEnter={onMouseEnter}
@@ -145,16 +145,16 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
                             >
                                 {name}
                             </span>
-                            {date && <span className="lumx-comment-block__date">{date}</span>}
+                            {date && <span className={`${CLASSNAME}__date`}>{date}</span>}
                         </div>
 
-                        <div className="lumx-comment-block__text">{text}</div>
+                        <div className={`${CLASSNAME}__text`}>{text}</div>
                     </div>
-                    {hasActions && <div className="lumx-comment-block__actions">{actions}</div>}
+                    {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
                 </div>
             </div>
 
-            {hasChildren && isOpen && <div className="lumx-comment-block__children">{children}</div>}
+            {hasChildren && isOpen && <div className={`${CLASSNAME}_children`}>{children}</div>}
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Button, ButtonEmphasis, CommentBlock, Size, Theme } from 'LumX';
 import { mdiHeart, mdiReply } from 'LumX/icons';
@@ -23,7 +23,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <Fragment>
+        <>
             <CommentBlock
                 actions={[
                     <Button key="button0" emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiHeart}>
@@ -88,7 +88,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 ]}
                 text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."
             />
-        </Fragment>
+        </>
     );
 };
 
