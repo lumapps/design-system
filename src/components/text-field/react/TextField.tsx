@@ -21,11 +21,14 @@ interface ITextFieldProps extends IGenericProps {
     /** The text field helper message */
     helper?: string;
 
+    /** The text field icon from the mdi svg path */
+    icon?: string;
+
     /** Id that will be passed to input element */
     id?: string;
 
-    /** The text field icon from the mdi svg path */
-    icon?: string;
+    /** Inital value that textfield will display */
+    initialValue?: string;
 
     /** Whether the text field is disabled or not */
     isDisabled?: boolean;
@@ -41,6 +44,9 @@ interface ITextFieldProps extends IGenericProps {
 
     /** Theme */
     theme?: string;
+
+    /** Event triggered on value change */
+    onChange?(value: string): void;
 }
 type TextFieldProps = ITextFieldProps;
 
@@ -70,7 +76,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {
+    initialValue: '',
+};
+
 /////////////////////////////
 
 /**
@@ -82,24 +91,34 @@ const TextField: React.FC<TextFieldProps> = ({
     className = '',
     hasError,
     helper,
-    id = uuid(),
     icon,
+    id = uuid(),
+    initialValue = DEFAULT_PROPS.initialValue,
     isDisabled,
     isValid,
     label,
+    onChange,
     placeholder,
     theme = Theme.light,
     ...props
 }: TextFieldProps): ReactElement => {
+    const [value, setValue] = useState(initialValue);
     const [hasFocus, setHasFocus] = useState(false);
-    const [hasValue, setHasValue] = useState(false);
+    const hasValue = Boolean(value);
 
     /**
      * Handle change event on input.
      *
      * @param event Event of HTML Element
      */
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => setHasValue(Boolean(event.target.value));
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        const inputValue = event.target.value;
+        setValue(inputValue);
+
+        if (typeof onChange === 'function') {
+            onChange(inputValue);
+        }
+    };
 
     return (
         <div
@@ -143,6 +162,7 @@ const TextField: React.FC<TextFieldProps> = ({
                         disabled={isDisabled}
                         type="text"
                         placeholder={placeholder}
+                        value={value}
                         // tslint:disable-next-line: jsx-no-lambda
                         onFocus={(): void => setHasFocus(true)}
                         // tslint:disable-next-line: jsx-no-lambda
