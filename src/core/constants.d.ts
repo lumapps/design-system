@@ -15,6 +15,14 @@ declare const CSS_PREFIX: string;
 declare const ENTER_KEY_CODE: number;
 
 /**
+ * The escape key code.
+ *
+ * @type {number}
+ * @constant
+ */
+declare const ESCAPE_KEY_CODE: number;
+
+/**
  * The left key code.
  */
 declare const LEFT_KEY_CODE: number;
@@ -41,4 +49,13 @@ declare const TAB_KEY_CODE: number;
 
 /////////////////////////////
 
-export { CSS_PREFIX, ENTER_KEY_CODE, LEFT_KEY_CODE, RIGHT_KEY_CODE, UP_KEY_CODE, DOWN_KEY_CODE, TAB_KEY_CODE };
+export {
+    CSS_PREFIX,
+    ENTER_KEY_CODE,
+    ESCAPE_KEY_CODE,
+    LEFT_KEY_CODE,
+    RIGHT_KEY_CODE,
+    UP_KEY_CODE,
+    DOWN_KEY_CODE,
+    TAB_KEY_CODE,
+};
