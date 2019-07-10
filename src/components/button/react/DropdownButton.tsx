@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -230,7 +230,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 
     return (
         <Dropdown showDropdown={isDropdownOpened} toggleElement={rootElement}>
-            {(): React.ReactNode => dropdown}
+            {(): ReactNode => dropdown}
         </Dropdown>
     );
 };
