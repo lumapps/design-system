@@ -132,10 +132,10 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
                 </div>
 
                 <div className={`${CLASSNAME}__container`}>
-                    <div className={`${CLASSNAME}_content`}>
+                    <div className={`${CLASSNAME}__content`}>
                         <div className={`${CLASSNAME}__meta`}>
                             <span
-                                className={`${CLASSNAME}_name`}
+                                className={`${CLASSNAME}__name`}
                                 onClick={onClick}
                                 onKeyPress={enterKeyPress}
                                 onMouseEnter={onMouseEnter}
@@ -154,7 +154,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
                 </div>
             </div>
 
-            {hasChildren && isOpen && <div className={`${CLASSNAME}_children`}>{children}</div>}
+            {hasChildren && isOpen && <div className={`${CLASSNAME}__children`}>{children}</div>}
         </div>
     );
 };
