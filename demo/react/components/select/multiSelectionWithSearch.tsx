@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Select, Theme } from 'LumX';
 
+import { CHOICES, LABEL, PLACEHOLDER } from './constants';
+
 /////////////////////////////
 
 interface IProps {
@@ -12,8 +14,6 @@ interface IProps {
 }
 
 /////////////////////////////
-
-const choices = [];
 
 const filter = (): void => {
     // Empty.
@@ -27,15 +27,15 @@ const filter = (): void => {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Select
-        choices={choices}
-        label="Select label"
+        choices={CHOICES}
+        label={LABEL}
         filter={filter}
-        has-filter={true}
-        hasHelper={!choices.length}
+        hasFilter={true}
+        hasHelper={!CHOICES.length}
         helper={'No results'}
         isLoading={true}
         multiple={true}
-        placeholder="Select values"
+        placeholder={PLACEHOLDER}
         theme={theme}
     />
 );

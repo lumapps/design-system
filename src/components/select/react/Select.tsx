@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,7 +6,7 @@ import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown }
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { Chip, Icon, Size, Theme } from 'LumX';
+import { Chip, Dropdown, Icon, List, ListItem, PopperPlacement, Size, Theme } from 'LumX';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -28,8 +28,7 @@ interface ISelectProps extends IGenericProps {
     /**
      * The list of choices.
      */
-    // tslint:disable-next-line: no-any
-    choices: any;
+    choices: string[];
 
     /**
      * Whether the select (input variant) is displayed with error style or not.
@@ -92,7 +91,7 @@ interface ISelectProps extends IGenericProps {
     /**
      * The selected choices area style.
      */
-    variant?: string;
+    variant?: Variants;
 
     /**
      * The callback function called on integrated search field change (500ms debounce).
@@ -136,7 +135,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isValid: false,
     multiple: false,
     theme: Theme.light,
-    variant: 'input',
+    variant: Variants.input,
 };
 /////////////////////////////
 
@@ -146,38 +145,169 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const Select: React.FC<SelectProps> = ({
-    children,
     className = '',
     hasError = DEFAULT_PROPS.hasError,
+    // tslint:disable-next-line: no-unused
     hasFilter = DEFAULT_PROPS.hasFilter,
+    // tslint:disable-next-line: no-unused
     hasHelper = DEFAULT_PROPS.hasHelper,
     isClearable = DEFAULT_PROPS.isClearable,
+    // tslint:disable-next-line: no-unused
     isLoading = DEFAULT_PROPS.isLoading,
     isValid = DEFAULT_PROPS.isValid,
     multiple = DEFAULT_PROPS.multiple,
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     choices,
+    // tslint:disable-next-line: no-unused
     helper,
     isDisabled,
     label,
     placeholder,
+    // tslint:disable-next-line: no-unused
     filter,
     ...props
 }: SelectProps): React.ReactElement => {
     const [isOpen, setIsOpen] = useState(false);
+    // tslint:disable-next-line: no-unused
     const [isFocus, setIsFocus] = useState(false);
-    const [value, setValue] = useState(null);
-    const isEmpty = value === null;
-    const viewValue = [];
+    const [selectedValues, setSelectedValues] = useState<string>([]);
+    const isEmpty = selectedValues.length === 0;
     const targetUuid = 'uuid';
 
     const openDropdown = (): void => {
         setIsOpen(true);
     };
 
-    const clearModel = (): void => {
-        // Empty.
+    const clearSelectedvalues = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value?: string): void => {
+        event.stopPropagation();
+        setSelectedValues(Boolean(value) ? selectedValues.filter((val: string) => val !== value) : []);
+    };
+
+    const createParentElement: () => ReactNode = (): ReactNode => {
+        return (
+            <>
+                {variant === Variants.input && (
+                    <>
+                        {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
+                        <div
+                            className={`${CLASSNAME}__input-wrapper`}
+                            id={targetUuid}
+                            tabIndex={0}
+                            onClick={openDropdown}
+                        >
+                            {isEmpty && placeholder && (
+                                <div
+                                    className={classNames([
+                                        `${CLASSNAME}__input-native`,
+                                        `${CLASSNAME}__input-native--placeholder`,
+                                    ])}
+                                >
+                                    <span>{placeholder}</span>
+                                </div>
+                            )}
+
+                            {!isEmpty && !multiple && (
+                                <div className={`${CLASSNAME}__input-native`}>
+                                    <span>{selectedValues[0]}</span>
+                                </div>
+                            )}
+
+                            <div className={`${CLASSNAME}__input-chips`}>
+                                {!isEmpty && multiple && (
+                                    <div className={`${CLASSNAME}__input-chip`}>
+                                        {selectedValues.map((value: string, index: number) => (
+                                            <Chip
+                                                key={index}
+                                                after={<Icon icon={mdiClose} size={Size.xxs} />}
+                                                isDisabled={isDisabled}
+                                                size={Size.s}
+                                                // tslint:disable-next-line: jsx-no-lambda
+                                                onAfterClick={(
+                                                    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+                                                ): void => clearSelectedvalues(event, value)}
+                                            >
+                                                {value}
+                                            </Chip>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            {(isValid || hasError) && (
+                                <div className={`${CLASSNAME}__input-validity`}>
+                                    <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xs} />
+                                </div>
+                            )}
+
+                            {isClearable && !multiple && !isEmpty && (
+                                <div className={`${CLASSNAME}__input-clear`} onClick={clearSelectedvalues}>
+                                    <Icon icon={mdiCloseCircle} size={Size.xs} />
+                                </div>
+                            )}
+
+                            <div className={`${CLASSNAME}__input-indicator`}>
+                                <Icon icon={mdiMenuDown} size={Size.s} />
+                            </div>
+                        </div>
+                    </>
+                )}
+
+                {variant === Variants.chip && (
+                    <Chip
+                        id={targetUuid}
+                        isSelected={!isEmpty}
+                        after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
+                        onAfterClick={clearSelectedvalues}
+                        onClick={openDropdown}
+                        theme={theme}
+                    >
+                        {isEmpty && <span>{label}</span>}
+
+                        {!isEmpty && !multiple && <span>{selectedValues[0]}</span>}
+
+                        {!isEmpty && multiple && (
+                            <span>
+                                <span>{selectedValues[0]}</span>
+
+                                {selectedValues.length > 1 && <span>+{selectedValues.length - 1}</span>}
+                            </span>
+                        )}
+                    </Chip>
+                )}
+            </>
+        );
+    };
+
+    const createList: (setOpenStatus: (isOpen: boolean) => void) => ReactNode = (
+        setOpenStatus: (isOpen: boolean) => void,
+    ): ReactNode => {
+        const onItemSelectedHandler: (item?: string) => void = (item?: string): void => {
+            setOpenStatus(false);
+
+            if (selectedValues.includes(item)) {
+                return;
+            }
+
+            if (multiple) {
+                setSelectedValues([...selectedValues, item]);
+            } else {
+                setSelectedValues([item]);
+            }
+        };
+
+        return (
+            <List isClickable={true}>
+                {choices.length > 0
+                    ? choices.map((choice: string, index: number) => (
+                          // tslint:disable-next-line: jsx-no-lambda
+                          <ListItem key={index} onItemSelected={(): void => onItemSelectedHandler(choice)}>
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [<ListItem key={0}>No data</ListItem>]}
+            </List>
+        );
     };
 
     return (
@@ -186,9 +316,9 @@ const Select: React.FC<SelectProps> = ({
                 className,
                 handleBasicClasses({
                     hasError,
-                    hasLabel: label,
+                    hasLabel: Boolean(label),
                     hasMultiple: !isEmpty && multiple,
-                    hasPlaceholder: placeholder,
+                    hasPlaceholder: Boolean(placeholder),
                     hasUnique: !isEmpty && !multiple,
                     hasValue: !isEmpty,
                     isDisabled,
@@ -196,96 +326,20 @@ const Select: React.FC<SelectProps> = ({
                     isFocus,
                     isOpen,
                     isValid,
-                    multiple,
                     prefix: CLASSNAME,
-                    themeDark: theme === Theme.dark,
-                    themeLight: theme === Theme.light,
-                    unique: !multiple,
+                    theme: theme === Theme.light ? Theme.light : Theme.dark,
                 }),
             )}
             {...props}
         >
-            {label && variant === Variants.input && <span className={`${CLASSNAME}__label`}>{label}</span>}
-
-            {variant === Variants.input && (
-                <div
-                    className={`${CLASSNAME}__input-wrapper`}
-                    id={targetUuid}
-                    tabIndex={0}
-                    onClick={openDropdown}
-                    // Ng-focus="lumx.enableKeyEvents()".
-                    // Ng-blur="lumx.disableKeyEvents()".
-                >
-                    {isEmpty && placeholder && (
-                        <div className={`${CLASSNAME}__input-native lumx-select__input-native--placeholder`}>
-                            <span>{placeholder}</span>
-                        </div>
-                    )}
-
-                    {!isEmpty && !multiple && (
-                        <div className={`${CLASSNAME}__input-native`}>
-                            <span ng-bind-html="lumx.displaySelected()" />
-                        </div>
-                    )}
-
-                    <div className={`${CLASSNAME}__input-chips`}>
-                        {!isEmpty && multiple && (
-                            <div className={`${CLASSNAME}__input-chip`} ng-repeat="selected in lumx.viewValue">
-                                <Chip
-                                    after={<Icon icon={mdiClose} size={Size.xxs} />}
-                                    isDisabled={isDisabled}
-                                    size={Size.s}
-                                    onClick={}
-                                />
-                            </div>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            {(isValid || hasError) && (
-                <div className={`${CLASSNAME}__input-validity`}>
-                    <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xs} />
-                </div>
-            )}
-
-            {isClearable && !multiple && !isEmpty && (
-                <div className={`${CLASSNAME}__input-clear`} onClick={clearModel}>
-                    <Icon icon={mdiCloseCircle} size={Size.xs} />
-                </div>
-            )}
-
-            <div className={`${CLASSNAME}__input-indicator`}>
-                <Icon icon={mdiMenuDown} size={Size.s} />
-            </div>
-
-            {/* {hasHelper && !isLoading && <span className={`${CLASSNAME}__helper`}>{helper}</span>} */}
-
-            {variant === Variants.chip && (
-                <Chip
-                    id={targetUuid}
-                    isSelected={!isEmpty}
-                    after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
-                    LabelComponent="Rich"
-                    onAfterClick={clearModel}
-                    onClick={openDropdown}
-                    theme={theme}
-                >
-                    {isEmpty && <span>{label}</span>}
-
-                    {!isEmpty && !multiple && <span ng-bind-html="lumx.displaySelected()" />}
-
-                    {!isEmpty && multiple && (
-                        <span>
-                            <span ng-bind-html="lumx.displaySelected(lumx.viewValue[0])" />
-
-                            {viewValue.length > 1 && <span ng-if="viewValue.length > 1">+{viewValue.length - 1}</span>}
-                        </span>
-                    )}
-                </Chip>
-            )}
-
-            {children}
+            <Dropdown
+                closeOnClick={true}
+                escapeClose={true}
+                position={PopperPlacement.BOTTOM_START}
+                toggleElement={createParentElement()}
+            >
+                {(setOpenStatus: (isOpen: boolean) => void): ReactNode => createList(setOpenStatus)}
+            </Dropdown>
         </div>
     );
 };

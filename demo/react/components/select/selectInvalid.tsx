@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Select, Theme } from 'LumX';
 
+import { CHOICES, LABEL, PLACEHOLDER } from './constants';
+
 /////////////////////////////
 
 interface IProps {
@@ -13,8 +15,6 @@ interface IProps {
 
 /////////////////////////////
 
-const choices = [];
-
 /**
  * The demo for the default <Select>s.
  *
@@ -23,11 +23,11 @@ const choices = [];
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
     <Select
-        choices={choices}
+        choices={CHOICES}
         isClearable={true}
         hasError={true}
-        label="Select label"
-        placeholder="Select a value"
+        label={LABEL}
+        placeholder={PLACEHOLDER}
         theme={theme}
     />
 );
