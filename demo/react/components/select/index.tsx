@@ -40,6 +40,14 @@ const demos: { [demoName: string]: DemoObject } = {
         description: '',
         title: 'Select invalid',
     },
+    chipSelection: {
+        description: '',
+        title: 'Chip selection',
+    },
+    mutiChipSelection: {
+        description: '',
+        title: 'Multi Chip selection',
+    },
     /* tslint:enable: object-literal-sort-keys */
 };
 

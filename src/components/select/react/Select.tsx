@@ -15,11 +15,10 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * The authorized variants.
  */
-const enum Variants {
+const enum SelectVariant {
     input = 'input',
     chip = 'chip',
 }
-type Variant = Variants;
 
 /**
  * Defines the props of the component.
@@ -91,7 +90,7 @@ interface ISelectProps extends IGenericProps {
     /**
      * The selected choices area style.
      */
-    variant?: Variants;
+    variant?: SelectVariant;
 
     /**
      * The callback function called on integrated search field change (500ms debounce).
@@ -135,7 +134,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isValid: false,
     multiple: false,
     theme: Theme.light,
-    variant: Variants.input,
+    variant: SelectVariant.input,
 };
 /////////////////////////////
 
@@ -168,34 +167,30 @@ const Select: React.FC<SelectProps> = ({
     filter,
     ...props
 }: SelectProps): React.ReactElement => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     // tslint:disable-next-line: no-unused
     const [isFocus, setIsFocus] = useState(false);
-    const [selectedValues, setSelectedValues] = useState<string>([]);
+    const [selectedValues, setSelectedValues] = useState<string[]>([]);
     const isEmpty = selectedValues.length === 0;
     const targetUuid = 'uuid';
 
-    const openDropdown = (): void => {
-        setIsOpen(true);
+    const toggleDropdown = (): void => {
+        setIsOpen(!isOpen);
     };
 
     const clearSelectedvalues = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value?: string): void => {
         event.stopPropagation();
-        setSelectedValues(Boolean(value) ? selectedValues.filter((val: string) => val !== value) : []);
+        setSelectedValues(value ? selectedValues.filter((val: string) => val !== value) : []);
     };
 
     const createParentElement: () => ReactNode = (): ReactNode => {
         return (
             <>
-                {variant === Variants.input && (
+                {variant === SelectVariant.input && (
                     <>
                         {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
-                        <div
-                            className={`${CLASSNAME}__input-wrapper`}
-                            id={targetUuid}
-                            tabIndex={0}
-                            onClick={openDropdown}
-                        >
+
+                        <div className={`${CLASSNAME}__input-wrapper`} id={targetUuid} tabIndex={0}>
                             {isEmpty && placeholder && (
                                 <div
                                     className={classNames([
@@ -226,6 +221,10 @@ const Select: React.FC<SelectProps> = ({
                                                 onAfterClick={(
                                                     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
                                                 ): void => clearSelectedvalues(event, value)}
+                                                // tslint:disable-next-line: jsx-no-lambda
+                                                onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
+                                                    clearSelectedvalues(event, value)
+                                                }
                                             >
                                                 {value}
                                             </Chip>
@@ -253,13 +252,14 @@ const Select: React.FC<SelectProps> = ({
                     </>
                 )}
 
-                {variant === Variants.chip && (
+                {variant === SelectVariant.chip && (
                     <Chip
                         id={targetUuid}
                         isSelected={!isEmpty}
                         after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
-                        onAfterClick={clearSelectedvalues}
-                        onClick={openDropdown}
+                        // tslint:disable-next-line: jsx-no-lambda
+                        onAfterClick={isEmpty ? toggleDropdown : clearSelectedvalues}
+                        onClick={toggleDropdown}
                         theme={theme}
                     >
                         {isEmpty && <span>{label}</span>}
@@ -270,7 +270,7 @@ const Select: React.FC<SelectProps> = ({
                             <span>
                                 <span>{selectedValues[0]}</span>
 
-                                {selectedValues.length > 1 && <span>+{selectedValues.length - 1}</span>}
+                                {selectedValues.length > 1 && <span>&nbsp;+{selectedValues.length - 1}</span>}
                             </span>
                         )}
                     </Chip>
@@ -336,6 +336,7 @@ const Select: React.FC<SelectProps> = ({
                 closeOnClick={true}
                 escapeClose={true}
                 position={PopperPlacement.BOTTOM_START}
+                showDropdown={isOpen}
                 toggleElement={createParentElement()}
             >
                 {(setOpenStatus: (isOpen: boolean) => void): ReactNode => createList(setOpenStatus)}
@@ -347,4 +348,4 @@ Select.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, Variant as SelectVariant };
+export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant };
