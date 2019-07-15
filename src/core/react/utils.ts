@@ -11,6 +11,7 @@ import trimStart from 'lodash/trimStart';
 
 import { CSS_PREFIX } from '../constants';
 
+import { concat, dropRight, last, partition, reduce } from 'lodash';
 import { COMPONENT_PREFIX } from './constants';
 
 /////////////////////////////
@@ -374,6 +375,30 @@ function validateComponent(
  */
 type Callback = () => void;
 
+type Predicate<T> = (t: T) => boolean;
+
+/**
+ * Similar to lodash `partition` function but working with multiple predicates.
+ *
+ * @example
+ * const isString = (s) => typeof s === 'string'
+ * const isNumber = (s) => typeof s === 'number'
+ * const [strings, numbers, others] = partitionMulti(['a', 1, 'b', false], [isString, isNumber])
+ * //=> [['a', 'b'], [1], [false]]
+ *
+ * @param  elements array of elements
+ * @param  predicates array of predicates to apply on elements
+ * @return partitioned elements by the given predicates
+ */
+function partitionMulti<T>(elements: T[], predicates: Array<Predicate<T>>): T[][] {
+    return reduce(
+        predicates,
+        (partitioned: T[][], predicate: Predicate<T>) =>
+            concat(dropRight(partitioned), partition(last(partitioned), predicate)),
+        [elements],
+    );
+}
+
 /////////////////////////////
 
 export {
@@ -390,4 +415,5 @@ export {
     unwrapFragment,
     validateComponent,
     Callback,
+    partitionMulti,
 };
