@@ -92,3 +92,7 @@ export {
     ExpansionPanelProps,
     ExpansionPanelVariant,
 } from 'LumX/components/expansion-panel/react/ExpansionPanel';
+
+export { Grid } from 'LumX/components/grid/react/Grid';
+
+export { GridItem } from 'LumX/components/grid-item/react/GridItem';

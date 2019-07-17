@@ -46,6 +46,7 @@ const NAV_ITEMS: string[] = [
     'Dialog',
     'Dropdown',
     'Expansion panel',
+    'Grid',
     'Image block',
     'Lightbox',
     'List',
