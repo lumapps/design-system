@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RadioButtonHelper> Props should use the given props 1`] = `
+<span
+  className="lumx-radio-button__helper"
+>
+  Test helper
+</span>
+`;
+
+exports[`<RadioButtonHelper> Snapshots and structure should render correctly 1`] = `
+<span
+  className="lumx-radio-button__helper"
+/>
+`;
