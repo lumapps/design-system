@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement } from 'react';
 
 import { Alignment, Grid, GridItem, Orientation, Theme } from 'LumX';
 
@@ -20,8 +20,8 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
+    <>
         <pre>No gutter</pre>
         <Grid theme={theme} wrap orientation={Orientation.horizontal} vAlign={Alignment.center} hAlign={Alignment.top}>
             <GridItem width="3">
@@ -78,7 +78,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 <div className="demo-grid-itemC">width=6</div>
             </GridItem>
         </Grid>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

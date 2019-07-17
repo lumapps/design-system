@@ -1,4 +1,4 @@
-import { Categories, Category, DemoObject } from 'LumX/demo/react/constants';
+import { Categories, DemoObject } from 'LumX/demo/react/constants';
 
 /////////////////////////////
 
@@ -10,7 +10,7 @@ const title = 'Grids';
 /**
  * The category of the demo.
  */
-const category: Category = Categories.components;
+const category = Categories.components;
 
 /**
  * The description of the component.
