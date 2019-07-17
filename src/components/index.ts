@@ -2,9 +2,13 @@
  * Authorized alignments.
  */
 enum Alignment {
+    bottom = 'bottom',
     center = 'center',
+    end = 'end',
     left = 'left',
     right = 'right',
+    start = 'start',
+    top = 'top',
 }
 
 /**
