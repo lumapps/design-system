@@ -28,10 +28,10 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 <div className="demo-grid-itemA">width=3</div>
             </GridItem>
             <GridItem width="3">
-                <div className="demo-grid-itemB">width=5</div>
+                <div className="demo-grid-itemB">width=3</div>
             </GridItem>
             <GridItem width="6">
-                <div className="demo-grid-itemC">width=4</div>
+                <div className="demo-grid-itemC">width=6</div>
             </GridItem>
         </Grid>
         <p>
