@@ -2,7 +2,7 @@
 
 exports[`<ExpansionPanel> Snapshots and structure should render correctly 1`] = `
 <section
-  className="lumx-theme-background-light-L6 lumx-expansion-panel lumx-expansion-panel--variant-boxed"
+  className="lumx-theme-background-dark-L6 lumx-theme-color-dark-N lumx-expansion-panel lumx-expansion-panel--theme-light lumx-expansion-panel--variant-boxed"
 >
   <header
     className="lumx-expansion-panel__header"
@@ -19,7 +19,7 @@ exports[`<ExpansionPanel> Snapshots and structure should render correctly 1`] = 
       className="lumx-expansion-panel__header-toggle"
     >
       <Button
-        color="light"
+        color="dark"
         emphasis="low"
         leftIcon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
         variant="icon"

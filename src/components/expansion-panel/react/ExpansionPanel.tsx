@@ -59,6 +59,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
+    theme: Theme.light,
     variant: ExpansionPanelVariant.boxed,
 };
 
@@ -71,7 +72,7 @@ const isFooter = (n: ReactNode): boolean => get(n, 'type') === 'footer';
 const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProps): ReactElement => {
     const {
         label,
-        theme,
+        theme = DEFAULT_PROPS.theme,
         variant = DEFAULT_PROPS.variant,
         isOpen,
         className,
@@ -115,15 +116,14 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
         setShowWrapper(shouldOpen);
     };
 
-    const color = theme === Theme.light ? ColorPalette.dark : ColorPalette.light;
+    const color = theme === Theme.dark ? ColorPalette.light : ColorPalette.dark;
 
     const rootClassName = classNames(
         className,
         // Background color
         variant === ExpansionPanelVariant.boxed && `lumx-theme-background-${color}-L6`,
         // Text color
-        theme === Theme.dark && 'lumx-theme-color-light-N',
-        theme === Theme.light && 'lumx-theme-color-dark-N',
+        theme === Theme.dark ? 'lumx-theme-color-light-N' : 'lumx-theme-color-dark-N',
         // Others
         handleBasicClasses({
             isDraggable: !!dragHandle,

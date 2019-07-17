@@ -6,6 +6,7 @@ import { mount, shallow } from 'enzyme';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
+import { Theme } from 'LumX';
 import { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps } from './ExpansionPanel';
 
 /////////////////////////////
@@ -83,6 +84,15 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
                 );
             }
+        });
+
+        it('should ignore incorrect theme', (): void => {
+            const { root } = setup({ theme: 'not_a_valid_theme' as Theme });
+
+            // Correct classes are applied
+            root.hasClass('lumx-theme-background-dark-L6');
+            root.hasClass('lumx-expansion-panel--theme-light');
+            root.hasClass('lumx-theme-color-dark-N');
         });
     });
 
