@@ -1,0 +1,101 @@
+/* ==========================================================================
+   Slider
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-slider {
+    $self: &;
+    position: relative;
+    display: flex;
+    height: 20px;
+    align-items: center;
+    margin-top: 8px;
+    margin-bottom: 8px;
+
+    &__label {
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant(dark, N);
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant(light, N);
+        }
+        display: flex;
+
+        width: 24px;
+        font-size: 10px;
+        font-stretch: normal;
+        font-style: normal;
+        font-weight: 600;
+        letter-spacing: normal;
+        line-height: 2px;
+    }
+
+    &__label:last-child {
+        justify-content: flex-end;
+    }
+
+    &__container {
+        position: relative;
+        display: flex;
+        flex: auto;
+    }
+    &__track {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        height: 2px;
+        border-radius: 1.5px;
+
+        #{$self}--theme-light & {
+            background-color: lumx-theme-color-variant(dark, L5);
+        }
+        #{$self}--theme-dark & {
+            background-color: lumx-theme-color-variant(light, L5);
+        }
+    }
+
+    &__active-track {
+        position: absolute;
+        width: 60%;
+        height: 2px;
+        border-radius: 1.5px;
+        #{$self}--theme-light & {
+            background-color: lumx-theme-color-variant(primary, N);
+        }
+        #{$self}--theme-dark & {
+            background-color: lumx-theme-color-variant(light, N);
+        }
+    }
+
+    &__handle {
+        position: absolute;
+        display: flex;
+        width: 12px;
+        height: 12px;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: center;
+        margin-top: -5px;
+        margin-left: -6px;
+        border-radius: 50%;
+        cursor: pointer;
+        outline: none;
+        transition: box-shadow $lumx-dialog-transition-duration;
+
+        #{$self}--theme-light & {
+            background-color: lumx-theme-color-variant(primary, N);
+        }
+        #{$self}--theme-dark & {
+            background-color: lumx-theme-color-variant(light, N);
+        }
+    }
+
+    &__handle:hover {
+        #{$self}--theme-light & {
+            box-shadow: 0px 0px 0px 4px lumx-theme-color-variant(primary, L4);
+        }
+        #{$self}--theme-dark & {
+            box-shadow: 0px 0px 0px 4px lumx-theme-color-variant(light, L4);
+        }
+    }
+}
