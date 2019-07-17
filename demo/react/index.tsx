@@ -1,8 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-
-import { App } from './App';
+import { AppWithMarkdown } from './AppWithMarkdown';
 
 /////////////////////////////
 
-render(<App />, document.getElementById('root'));
+render(<AppWithMarkdown />, document.getElementById('root'));
