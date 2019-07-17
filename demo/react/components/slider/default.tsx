@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import { Slider, Theme } from 'LumX';
 
@@ -17,11 +17,22 @@ interface IProps {
  * The demo for the default <Slider>s.
  *
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
-        <Slider theme={theme}>Default Slider</Slider>
-    </Fragment>
-);
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+    const [value, setValue] = useState(0);
+    return (
+        <Fragment>
+            <Slider
+                max={20}
+                min={2}
+                precision={2}
+                theme={theme}
+                onChange={(val) => {
+                    setValue(val);
+                }}
+            />
+        </Fragment>
+    );
+};
 
 /////////////////////////////
 
