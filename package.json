@@ -69,6 +69,8 @@
         "@commitlint/cli": "^7.5.2",
         "@commitlint/config-conventional": "^7.5.0",
         "@mdi/js": "^3.7.95",
+        "@mdx-js/loader": "^1.1.0",
+        "@mdx-js/mdx": "^1.1.0",
         "@types/classnames": "^2.2.7",
         "@types/color": "^3.0.0",
         "@types/enzyme": "^3.9.1",

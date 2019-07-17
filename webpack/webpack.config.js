@@ -76,6 +76,18 @@ const baseConfig = {
                     name: '[path][name]-[hash:8].[ext]',
                 },
             },
+            {
+                test: /\.mdx?$/,
+                use: [
+                    {
+                        loader: 'babel-loader?cacheDirectory=true',
+                        options: babelSetup({
+                            presets: ['@babel/preset-react'],
+                        }),
+                    },
+                    '@mdx-js/loader',
+                ],
+            },
         ],
     },
 
