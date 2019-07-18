@@ -6,7 +6,6 @@
     flex: 1;
     justify-content: center;
     padding: $lumx-spacing-unit * 6;
-    padding-top: $lumx-spacing-unit * 3;
     overflow-y: scroll;
 
     &__wrapper {
@@ -19,6 +18,8 @@
    ========================================================================== */
 
 .main-content {
+    margin-top: $lumx-spacing-unit * 6;
+
     &__wrapper {
         display: flex;
         flex-direction: column;
@@ -39,7 +40,6 @@
             @include lumx-typography(subtitle2);
         }
 
-        & > h1,
         & > h2,
         & > h3 {
             margin-top: $lumx-spacing-unit * 2;
