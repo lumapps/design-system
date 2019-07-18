@@ -78,6 +78,7 @@ function SideNavigationItemDirective() {
         replace: true,
         restrict: 'E',
         scope: {
+            emphasis: '@?lumxEmphasis',
             icon: '@?lumxIcon',
             isOpen: '=?lumxIsOpen',
             isSelected: '=?lumxIsSelected',
