@@ -2,55 +2,25 @@
    Main nav
    ========================================================================== */
 
-$main-nav-width: 56px;
+$main-nav-width: 300px;
 
 .main-nav {
-    overflow: auto;
     width: $main-nav-width;
-    flex-direction: column;
-    padding: $lumx-spacing-unit * 2 0;
-    background-color: lumx-theme-color-variant(blue, N);
+    background-color: lumx-theme-color-variant(dark, L6);
+    overflow-y: scroll;
 
     &__wrapper {
-        @include lumx-list;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        padding: $lumx-spacing-unit * 6 $lumx-spacing-unit * 4;
     }
 
     &__logo {
-        margin-bottom: $lumx-spacing-unit * 3;
+        display: flex;
+        align-items: center;
+        margin-bottom: $lumx-spacing-unit * 4;
 
         img {
-            display: block;
-        }
-    }
-
-    &__item {
-        margin-bottom: $lumx-spacing-unit * 2;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    &__link {
-        @include lumx-typography(subtitle2);
-
-        display: flex;
-        width: map-get($lumx-sizes, m);
-        height: map-get($lumx-sizes, m);
-        align-items: center;
-        justify-content: center;
-        border-radius: 2px;
-        color: lumx-theme-color-variant(light, N);
-        cursor: pointer;
-
-        &:hover,
-        &--is-selected {
-            background-color: lumx-theme-color-variant(light, N);
-            color: lumx-theme-color-variant(dark, N);
+            height: map-get($lumx-sizes, s);
+            margin-right: $lumx-spacing-unit * 1.5;
         }
     }
 }
