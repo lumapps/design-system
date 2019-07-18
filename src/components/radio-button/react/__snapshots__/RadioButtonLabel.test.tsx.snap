@@ -2,8 +2,8 @@
 
 exports[`<RadioButtonLabel> Props should use the given props 1`] = `
 <label
-  checkboxId="test-checkbox-id"
   className="lumx-radio-button__label"
+  htmlFor="test-radio-button-id"
 >
   Test Label
 </label>
@@ -11,7 +11,7 @@ exports[`<RadioButtonLabel> Props should use the given props 1`] = `
 
 exports[`<RadioButtonLabel> Snapshots and structure should render correctly 1`] = `
 <label
-  checkboxId="test-checkbox-id"
   className="lumx-radio-button__label"
+  htmlFor="test-radio-button-id"
 />
 `;
