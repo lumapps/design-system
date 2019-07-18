@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { Button, ButtonEmphasis, CommentBlock, Size, Theme } from 'LumX';
 import { mdiHeart, mdiReply } from 'LumX/icons';
@@ -19,7 +19,7 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: FC<IProps> = ({ theme }: IProps): ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
