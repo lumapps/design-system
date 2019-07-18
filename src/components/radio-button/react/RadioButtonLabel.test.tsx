@@ -38,7 +38,7 @@ interface ISetup extends ICommonSetup {
  */
 const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: RadioButtonLabelProps = {
-        checkboxId: 'test-checkbox-id',
+        radioButtonId: 'test-radio-button-id',
         ...propsOverrides,
     };
 

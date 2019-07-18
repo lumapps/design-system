@@ -25,7 +25,7 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <div> element that wraps checkbox and children elements.
+     * The <div> element that wraps radio button and children elements.
      */
     wrapper: Wrapper;
 }
