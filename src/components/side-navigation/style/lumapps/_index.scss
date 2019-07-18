@@ -12,6 +12,8 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-side-navigation-item {
+    $self: &;
+
     margin-bottom: $lumx-spacing-unit / 2;
 
     &:last-child {
@@ -37,13 +39,19 @@
         }
 
         & > span {
-            @include lumx-typography(subtitle1);
+            #{$self}--emphasis-high & {
+                @include lumx-typography(title);
+            }
+
+            #{$self}--emphasis-medium & {
+                @include lumx-typography(subtitle1);
+            }
+
+            #{$self}--emphasis-low & {
+                @include lumx-typography(body1);
+            }
 
             flex: 1;
-        }
-
-        .#{$lumx-base-prefix}-side-navigation-item__children & {
-            padding-left: 44px;
         }
     }
 
