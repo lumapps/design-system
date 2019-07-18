@@ -99,4 +99,19 @@
             box-shadow: 0px 0px 0px 4px lumx-theme-color-variant(light, L4);
         }
     }
+
+    &__tick {
+        position: absolute;
+        top: 4px;
+        width: 2px;
+        height: 4px;
+        border-radius: 1px;
+
+        #{$self}--theme-light & {
+            background-color: lumx-theme-color-variant(dark, L5);
+        }
+        #{$self}--theme-dark & {
+            background-color: lumx-theme-color-variant(light, L5);
+        }
+    }
 }

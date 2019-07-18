@@ -1,0 +1,9 @@
+.demo-slider-row-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+}
+.demo-slider-half-width {
+    width: 50%;
+}

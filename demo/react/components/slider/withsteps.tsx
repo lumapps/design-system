@@ -21,12 +21,13 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     const [value, setValue] = useState(0);
     return (
         <>
-            <pre>{`Adjust threshold : ${value}`}</pre>
+            <pre>{`Change temperature : ${value}°C`}</pre>
             <Slider
-                max={10}
-                min={0}
+                max={180}
+                min={30}
+                steps={5}
                 theme={theme}
-                defaultValue={4}
+                defaultValue={40}
                 onChange={(val: number): void => {
                     setValue(val);
                 }}

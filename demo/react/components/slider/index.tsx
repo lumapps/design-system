@@ -22,6 +22,15 @@ const demos: { [demoName: string]: DemoObject } = {
     default: {
         title: 'Default',
     },
+    nolabel: {
+        title: 'Hidden labels',
+    },
+    withsteps: {
+        title: 'With steps',
+    },
+    precision: {
+        title: 'Custom precision',
+    },
     /* tslint:enable: object-literal-sort-keys */
 };
 

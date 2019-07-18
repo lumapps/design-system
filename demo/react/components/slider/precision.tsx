@@ -19,16 +19,30 @@ interface IProps {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     const [value, setValue] = useState(0);
+    const [value2, setValue2] = useState(0);
     return (
         <>
-            <pre>{`Adjust threshold : ${value}`}</pre>
+            <pre>{`Rocket science precision : ${value}`}</pre>
             <Slider
                 max={10}
                 min={0}
                 theme={theme}
-                defaultValue={4}
+                precision={5}
+                defaultValue={4.23765}
                 onChange={(val: number): void => {
                     setValue(val);
+                }}
+            />
+            <br />
+            <pre>{`Change price : $${value2}`}</pre>
+            <Slider
+                max={120}
+                min={0}
+                theme={theme}
+                precision={2}
+                defaultValue={42.99}
+                onChange={(val: number): void => {
+                    setValue2(val);
                 }}
             />
         </>
