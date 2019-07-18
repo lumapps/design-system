@@ -41,7 +41,7 @@ const NAV_ITEMS: string[] = [
     'Button',
     'Checkbox',
     'Chip',
-    'Comment Block',
+    'Comment block',
     'Data table',
     'Dialog',
     'Dropdown',
