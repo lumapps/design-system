@@ -48,6 +48,12 @@ export { ProgressTracker, ProgressTrackerProps } from './components/progress-tra
 
 export { ProgressTrackerStep, ProgressTrackerStepProps } from './components/progress-tracker/react/ProgressTrackerStep';
 
+export { RadioButton, RadioButtonProps } from './components/radio-button/react/RadioButton';
+
+export { RadioButtonHelper } from './components/radio-button/react/RadioButtonHelper';
+
+export { RadioButtonLabel } from './components/radio-button/react/RadioButtonLabel';
+
 export { Slideshow, SlideshowProps } from './components/slideshow/react/Slideshow';
 
 export { SlideshowItem } from './components/slideshow/react/SlideshowItem';
