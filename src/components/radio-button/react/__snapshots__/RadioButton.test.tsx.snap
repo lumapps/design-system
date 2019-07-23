@@ -10,6 +10,7 @@ exports[`<RadioButton> Props should use the given props 1`] = `
     <input
       checked={false}
       className="lumx-radio-button__input-native"
+      disabled={false}
       id="lumx-radio-button-3"
       name="test"
       onChange={[Function]}
@@ -51,6 +52,7 @@ exports[`<RadioButton> Snapshots and structure should render correctly 1`] = `
     <input
       checked={false}
       className="lumx-radio-button__input-native"
+      disabled={false}
       id="lumx-radio-button-1"
       name="test"
       onChange={[Function]}

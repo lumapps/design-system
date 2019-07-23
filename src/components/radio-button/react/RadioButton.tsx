@@ -126,6 +126,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
                     tabIndex={disabled ? -1 : 0}
                     name={name}
                     checked={checked}
+                    disabled={disabled}
                     value={value}
                     onChange={handleChange}
                 />
