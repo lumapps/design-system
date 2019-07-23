@@ -1,4 +1,4 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { MODULE_NAME } from './constants/common_constants';
 
 angular.module(`${MODULE_NAME}.utils.depth`, []);
 angular.module(`${MODULE_NAME}.utils.enter-keypress`, []);

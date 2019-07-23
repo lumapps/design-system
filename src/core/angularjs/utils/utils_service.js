@@ -1,4 +1,4 @@
-import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from '../constants/common_constants';
 
 /////////////////////////////
 
