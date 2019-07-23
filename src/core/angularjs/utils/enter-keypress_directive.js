@@ -1,5 +1,5 @@
-import { ENTER_KEY_CODE } from 'LumX/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { ENTER_KEY_CODE } from '../../constants';
+import { COMPONENT_PREFIX, MODULE_NAME } from '../constants/common_constants';
 
 /////////////////////////////
 
