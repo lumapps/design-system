@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Grid
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-grid {
+    display: flex;
+
+    &--orientation-horizontal {
+        flex-direction: row;
+    }
+
+    &--orientation-vertical {
+        flex-direction: column;
+    }
+}
+
+/* Grid wrap
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-grid--wrap-nowrap {
+    flex-wrap: nowrap;
+}
+
+.#{$lumx-base-prefix}-grid--wrap-wrap {
+    flex-wrap: wrap;
+}
+
+.#{$lumx-base-prefix}-grid--wrap-wrap-reverse {
+    flex-wrap: wrap-reverse;
+}
+
+/* Grid alignment
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--h-align-top,
+.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--v-align-left {
+    align-items: flex-start;
+}
+
+.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--h-align-center,
+.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--v-align-center {
+    align-items: center;
+}
+
+.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--h-align-bottom,
+.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--v-align-right {
+    align-items: flex-end;
+}
+
+.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-left,
+.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-top {
+    justify-content: flex-start;
+}
+
+.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-center,
+.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-center {
+    justify-content: center;
+}
+
+.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-right,
+.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-bottom {
+    justify-content: flex-end;
+}
+
+.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-space-around,
+.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-space-around {
+    justify-content: space-around;
+}
+
+.#{$lumx-base-prefix}-grid--orientation-horizontal.#{$lumx-base-prefix}-grid--v-align-space-between,
+.#{$lumx-base-prefix}-grid--orientation-vertical.#{$lumx-base-prefix}-grid--h-align-space-between {
+    justify-content: space-between;
+}
+
+/* Grid item
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-grid-item {
+    position: relative;
+    flex: 1;
+
+    &--align-start {
+        align-self: flex-start;
+    }
+
+    &--align-center {
+        align-self: center;
+    }
+
+    &--align-end {
+        align-self: end;
+    }
+}
+
+/* Grid item order
+   ========================================================================== */
+
+@for $i from 1 through 12 {
+    .#{$lumx-base-prefix}-grid-item--order-#{$i} {
+        order: $i;
+    }
+}
+
+/* Grid spacings
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-grid--gutter-regular {
+    margin: 0 (($lumx-spacing-unit / 2) * -1);
+
+    & > .#{$lumx-base-prefix}-grid-item {
+        padding: 0 $lumx-spacing-unit / 2;
+    }
+}
+
+.#{$lumx-base-prefix}-grid--gutter-big {
+    margin: 0 ($lumx-spacing-unit * -1);
+
+    & > .#{$lumx-base-prefix}-grid-item {
+        padding: 0 $lumx-spacing-unit;
+    }
+}
+
+.#{$lumx-base-prefix}-grid--gutter-huge {
+    margin: 0 ($lumx-spacing-unit * 1.5) * -1;
+
+    & > .#{$lumx-base-prefix}-grid-item {
+        padding: 0 $lumx-spacing-unit * 1.5;
+    }
+}
+
+/* Grid widths
+   ========================================================================== */
+
+@for $i from 1 through 12 {
+    .#{$lumx-base-prefix}-grid--orientation-horizontal > .#{$lumx-base-prefix}-grid-item--width-#{$i} {
+        max-width: #{(100 / 12) * $i + '%'};
+        // prettier-ignore
+        flex: unquote('0 0 #{(100 / 12) * $i + '%'}');
+    }
+
+    .#{$lumx-base-prefix}-grid--orientation-vertical > .#{$lumx-base-prefix}-grid-item--width-#{$i} {
+        max-height: #{(100 / 12) * $i + '%'};
+        // prettier-ignore
+        flex: unquote('0 0 #{(100 / 12) * $i + '%'}');
+    }
+}

@@ -26,6 +26,7 @@ angular.module(`${MODULE_NAME}.divider`, []);
 angular.module(`${MODULE_NAME}.drag-handle`, []);
 angular.module(`${MODULE_NAME}.dropdown`, []);
 angular.module(`${MODULE_NAME}.expansion-panel`, []);
+angular.module(`${MODULE_NAME}.grid`, []);
 angular.module(`${MODULE_NAME}.icon`, []);
 angular.module(`${MODULE_NAME}.image-block`, []);
 angular.module(`${MODULE_NAME}.lightbox`, []);
@@ -60,6 +61,7 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.drag-handle`,
     `${MODULE_NAME}.dropdown`,
     `${MODULE_NAME}.expansion-panel`,
+    `${MODULE_NAME}.grid`,
     `${MODULE_NAME}.icon`,
     `${MODULE_NAME}.image-block`,
     `${MODULE_NAME}.lightbox`,
