@@ -92,6 +92,8 @@ describe(`<${RadioButton.displayName}>`, (): void => {
                     expect(wrapper).toHaveClassName(
                         getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
                     );
+
+                    expect(wrapper.find('[disabled=true]')).toHaveLength(1);
                 },
             );
         });
