@@ -101,4 +101,4 @@ export {
 
 export { Grid } from 'LumX/components/grid/react/Grid';
 
-export { GridItem } from 'LumX/components/grid-item/react/GridItem';
+export { GridItem } from 'LumX/components/grid/react/GridItem';

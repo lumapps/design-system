@@ -136,6 +136,14 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.grid', {
+            url: 'grid',
+            views: {
+                'main@': {
+                    template: require('./components/grid/demo.html'),
+                },
+            },
+        })
         .state('app.image-block', {
             url: 'image-block',
             views: {
