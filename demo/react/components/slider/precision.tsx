@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { Slider, Theme } from 'LumX';
 
@@ -17,12 +17,12 @@ interface IProps {
  * The demo for the default <Slider>s.
  *
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [value, setValue] = useState(0);
     const [value2, setValue2] = useState(0);
     return (
         <>
-            <pre>{`Rocket science precision : ${value}`}</pre>
+            <pre>{`Rocket science precision: ${value}`}</pre>
             <Slider
                 max={10}
                 min={0}
@@ -34,7 +34,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                 }}
             />
             <br />
-            <pre>{`Change price : $${value2}`}</pre>
+            <pre>{`Change price: $${value2}`}</pre>
             <Slider
                 max={120}
                 min={0}

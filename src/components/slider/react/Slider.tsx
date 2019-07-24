@@ -15,7 +15,6 @@ import useEventCallback from 'LumX/core/react/hooks/useEventCallback';
 /**
  * Defines the props of the component.
  */
-// tslint:disable: no-any
 interface ISliderProps extends IGenericProps {
     disabled?: boolean;
     max: number;
@@ -24,7 +23,7 @@ interface ISliderProps extends IGenericProps {
     steps?: number;
     hideMinMaxlabel?: boolean;
     onChange?(value: number): void;
-    onMouseDown?(event: any): void;
+    onMouseDown?(event: React.SyntheticEvent): void;
 }
 type SliderProps = ISliderProps;
 
@@ -91,8 +90,7 @@ const Slider: React.FC<SliderProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: SliderProps): ReactElement => {
-    const sliderRef = useRef(null);
-    const handleRef = useRef<HTMLDivElement>(null);
+    const sliderRef = useRef<HTMLDivElement>(null);
     const [value, setValue] = useState(0);
     const avaibleSteps: number[] = [];
 
@@ -140,7 +138,7 @@ const Slider: React.FC<SliderProps> = ({
      * @param slider the slider element
      * @return The computed percent value
      */
-    const getPercentValue = (event: any, slider: HTMLElement): number => {
+    const getPercentValue = (event: React.MouseEvent, slider: HTMLDivElement): number => {
         const { width, left } = slider.getBoundingClientRect();
         let percent = (event.pageX - left - window.pageXOffset) / width;
         percent = clamp(0, 1, percent);
@@ -161,10 +159,9 @@ const Slider: React.FC<SliderProps> = ({
     /**
      * Register a handler for the mouse move event.
      */
-    // tslint:disable-next-line: typedef
-    const handleMove = useEventCallback((event) => {
+    const handleMove = useEventCallback((event: React.MouseEvent) => {
         const { current: slider } = sliderRef;
-        const newValue = getPercentValue(event, slider! as HTMLElement);
+        const newValue = getPercentValue(event, slider!);
 
         if (onChange) {
             onChange(computeNewValue(newValue));
@@ -186,8 +183,7 @@ const Slider: React.FC<SliderProps> = ({
     /**
      * Register a handler for the mouseDown event.
      */
-    // tslint:disable-next-line: typedef
-    const handleMouseDown = useEventCallback((event) => {
+    const handleMouseDown = useEventCallback((event: React.MouseEvent) => {
         if (onMouseDown) {
             onMouseDown(event);
         }
@@ -195,7 +191,7 @@ const Slider: React.FC<SliderProps> = ({
             return;
         }
         const { current: slider } = sliderRef;
-        const newValue = getPercentValue(event, slider! as HTMLElement);
+        const newValue = getPercentValue(event, slider!);
         if (onChange) {
             onChange(computeNewValue(newValue));
         }
@@ -230,7 +226,7 @@ const Slider: React.FC<SliderProps> = ({
                     avaibleSteps.map((step: number) => {
                         return <div className={`${CLASSNAME}__tick`} style={{ left: `${step * 100}%` }} />;
                     })}
-                <div className={`${CLASSNAME}__handle`} style={{ left: `${value * 100}%` }} ref={handleRef} />
+                <div className={`${CLASSNAME}__handle`} style={{ left: `${value * 100}%` }} />
             </div>
             {!hideMinMaxlabel && <span className={`${CLASSNAME}__label`}>{max}</span>}
         </div>

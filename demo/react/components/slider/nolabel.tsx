@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { ButtonEmphasis, IconButton, Size, Slider, Theme } from 'LumX';
 
-import { mdiSpeaker, mdiSpeakerOff } from '@mdi/js';
+import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
 
 import './style.css';
 
@@ -21,11 +21,11 @@ interface IProps {
  * The demo for the default <Slider>s.
  *
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [value, setValue] = useState(0);
     return (
         <>
-            <pre>{`Change volume : ${value}%`}</pre>
+            <pre>{`Change volume: ${value}%`}</pre>
             <div className="demo-slider-row-container">
                 <IconButton
                     emphasis={ButtonEmphasis.low}
