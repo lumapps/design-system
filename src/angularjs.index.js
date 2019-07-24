@@ -15,6 +15,7 @@ import './components/divider/angularjs/divider_directive';
 import './components/drag-handle/angularjs/drag-handle_directive';
 import './components/dropdown/angularjs/dropdown_directive';
 import './components/dropdown/angularjs/dropdown_service';
+import './components/editable-media/angularjs/editable-media_directive';
 import './components/expansion-panel/angularjs/expansion-panel_directive';
 import './components/grid/angularjs/grid_directive';
 import './components/grid/angularjs/grid-item_directive';

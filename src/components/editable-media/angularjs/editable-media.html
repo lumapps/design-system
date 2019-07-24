@@ -1,0 +1,58 @@
+<div
+    class="lumx-editable-media"
+    ng-class="{ 'lumx-editable-media--has-image': lumx.image,
+                'lumx-editable-media--has-label': lumx.label,
+                'lumx-editable-media--size-xl': lumx.size === 'xl',
+                'lumx-editable-media--size-xxl': lumx.size === 'xxl',
+                'lumx-editable-media--variant-thumbnail': lumx.variant === 'thumbnail',
+                'lumx-editable-media--variant-avatar': lumx.variant === 'avatar' }"
+>
+    <span class="lumx-editable-media__label" ng-if="::lumx.label">{{ lumx.label }}</span>
+    <span class="lumx-editable-media__helper" ng-if="::lumx.helper">{{ lumx.helper }}</span>
+
+    <div class="lumx-editable-media__wrapper">
+        <div
+            class="lumx-editable-media__cta"
+            lumx-enter-keypress="lumx.onClick()"
+            ng-click="lumx.onClick()"
+            ng-if="!lumx.image"
+            tabindex="0"
+        >
+            <div class="lumx-editable-media__cta-content">
+                <lumx-icon
+                    class="lumx-editable-media__cta-icon"
+                    lumx-path="{{ lumx.icons.mdiImagePlus }}"
+                    lumx-size="s"
+                ></lumx-icon>
+
+                <span class="lumx-editable-media__cta-placeholder" ng-if="::lumx.placeholder">
+                    {{ lumx.placeholder }}
+                </span>
+            </div>
+        </div>
+
+        <div class="lumx-editable-media__thumbnail" ng-if="lumx.image && lumx.variant === 'thumbnail'">
+            <lumx-thumbnail
+                lumx-aspect-ratio="horizontal"
+                lumx-image="{{ lumx.image }}"
+                lumx-size="{{ lumx.size }}"
+                lumx-variant="rounded"
+                lumx-enter-keypress="lumx.onClick()"
+                ng-click="lumx.onClick()"
+                tabindex="0"
+            ></lumx-thumbnail>
+        </div>
+
+        <div class="lumx-editable-media__avatar" ng-if="lumx.image && lumx.variant === 'avatar'">
+            <lumx-avatar
+                lumx-image="{{ lumx.image }}"
+                lumx-size="{{ lumx.size }}"
+                lumx-enter-keypress="lumx.onClick()"
+                ng-click="lumx.onClick()"
+                tabindex="0"
+            ></lumx-avatar>
+        </div>
+
+        <div class="lumx-editable-media__actions" ng-transclude ng-if="lumx.image"></div>
+    </div>
+</div>
