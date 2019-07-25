@@ -7,7 +7,7 @@ function EnterKeypressDirective() {
     'ngInject';
 
     function link(scope, el, attrs) {
-        el.bind('keydown keypress', function onKeyPress(evt) {
+        el.on('keydown keypress', (evt) => {
             if (evt.which === ENTER_KEY_CODE) {
                 scope.$apply(function evalExpression() {
                     scope.$eval(attrs.lumxEnterKeypress, { $event: evt });

@@ -5,6 +5,7 @@ angular.module(`${MODULE_NAME}.utils.enter-keypress`, []);
 angular.module(`${MODULE_NAME}.utils.event-scheduler`, []);
 angular.module(`${MODULE_NAME}.utils.focus-on-init`, []);
 angular.module(`${MODULE_NAME}.utils.focus-trap`, []);
+angular.module(`${MODULE_NAME}.utils.stop-propagation`, []);
 angular.module(`${MODULE_NAME}.utils.utils`, []);
 
 angular.module(`${MODULE_NAME}.utils`, [
@@ -13,6 +14,7 @@ angular.module(`${MODULE_NAME}.utils`, [
     `${MODULE_NAME}.utils.event-scheduler`,
     `${MODULE_NAME}.utils.focus-on-init`,
     `${MODULE_NAME}.utils.focus-trap`,
+    `${MODULE_NAME}.utils.stop-propagation`,
     `${MODULE_NAME}.utils.utils`,
 ]);
 
