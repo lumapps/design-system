@@ -149,6 +149,7 @@ function TooltipDirective() {
         el.on('mouseleave', ctrl.hideTooltip);
 
         scope.$on('$destroy', () => {
+            ctrl.hideTooltip();
             el.off();
         });
     }
