@@ -4,112 +4,108 @@
 
 .#{$lumx-base-prefix}-slider {
     $self: &;
-    position: relative;
+
     display: flex;
-    height: 24px;
     align-items: center;
-    margin-top: 8px;
-    margin-bottom: 8px;
     user-select: none;
 
     &__label {
+        font-size: 10px;
+
         #{$self}--theme-light & {
-            color: lumx-theme-color-variant(dark, N);
+            color: lumx-theme-color-variant(dark, L2);
         }
 
         #{$self}--theme-dark & {
-            color: lumx-theme-color-variant(light, N);
+            color: lumx-theme-color-variant(light, L2);
         }
-        display: flex;
 
-        width: 24px;
-        font-size: 10px;
-        font-stretch: normal;
-        font-style: normal;
-        font-weight: 600;
-        letter-spacing: normal;
-        line-height: 2px;
+        &--min {
+            padding-right: $lumx-spacing-unit * 2;
+        }
+
+        &--max {
+            padding-left: $lumx-spacing-unit * 2;
+        }
     }
 
-    &__label:last-child {
-        justify-content: flex-end;
-    }
-
-    &__container {
+    &__wrapper {
         position: relative;
-        display: flex;
-        flex: auto;
+        height: map-get($lumx-sizes, s);
+        flex: 1;
         cursor: pointer;
     }
+
     &__track {
         position: absolute;
-        display: flex;
-        width: 100%;
+        top: 50%;
+        right: 0;
+        left: 0;
         height: 2px;
-        border-radius: 1.5px;
+        transform: translateY(-50%);
 
-        #{$self}--theme-light & {
-            background-color: lumx-theme-color-variant(dark, L5);
-        }
-        #{$self}--theme-dark & {
-            background-color: lumx-theme-color-variant(light, L5);
-        }
-    }
+        &--background {
+            #{$self}--theme-light & {
+                background-color: lumx-theme-color-variant(dark, L5);
+            }
 
-    &__active-track {
-        position: absolute;
-        height: 2px;
-        border-radius: 1.5px;
-        #{$self}--theme-light & {
-            background-color: lumx-theme-color-variant(primary, N);
+            #{$self}--theme-dark & {
+                background-color: lumx-theme-color-variant(light, L5);
+            }
         }
-        #{$self}--theme-dark & {
-            background-color: lumx-theme-color-variant(light, N);
+
+        &--active {
+            #{$self}--theme-light & {
+                background-color: lumx-theme-color-variant(primary, N);
+            }
+
+            #{$self}--theme-dark & {
+                background-color: lumx-theme-color-variant(light, N);
+            }
         }
     }
 
     &__handle {
         position: absolute;
-        display: flex;
+        top: 50%;
         width: 12px;
         height: 12px;
-        box-sizing: border-box;
-        align-items: center;
-        justify-content: center;
-        margin-top: -5px;
-        margin-left: -6px;
         border-radius: 50%;
         cursor: pointer;
-        outline: none;
-        transition: box-shadow $lumx-dialog-transition-duration;
+        transform: translateX(-50%) translateY(-50%);
 
         #{$self}--theme-light & {
             background-color: lumx-theme-color-variant(primary, N);
         }
+
         #{$self}--theme-dark & {
             background-color: lumx-theme-color-variant(light, N);
         }
     }
 
-    &__handle:hover {
-        #{$self}--theme-light & {
-            box-shadow: 0px 0px 0px 4px lumx-theme-color-variant(primary, L4);
-        }
-        #{$self}--theme-dark & {
-            box-shadow: 0px 0px 0px 4px lumx-theme-color-variant(light, L4);
-        }
+    &__ticks {
+        position: absolute;
+        top: (map-get($lumx-sizes, s) / 2) + 2;
+        right: 0;
+        left: 0;
     }
 
     &__tick {
         position: absolute;
-        top: 4px;
+        top: 0;
         width: 2px;
         height: 4px;
-        border-radius: 1px;
+        transform: translateX(-50%);
+
+        &:first-child,
+        &:last-child {
+            display: none;
+        }
 
         #{$self}--theme-light & {
             background-color: lumx-theme-color-variant(dark, L5);
         }
+
         #{$self}--theme-dark & {
             background-color: lumx-theme-color-variant(light, L5);
         }

@@ -107,7 +107,6 @@ const Slider: React.FC<SliderProps> = ({
                 break;
             }
         }
-        avaibleSteps.push(1);
     }
 
     /**
@@ -218,17 +217,23 @@ const Slider: React.FC<SliderProps> = ({
             {...props}
             onMouseDown={handleMouseDown}
         >
-            {!hideMinMaxlabel && <span className={`${CLASSNAME}__label`}>{min}</span>}
-            <div className={`${CLASSNAME}__container`} ref={sliderRef}>
-                <span className={`${CLASSNAME}__track`} />
-                <span className={`${CLASSNAME}__active-track`} style={{ width: `${value * 100}%` }} />
-                {steps &&
-                    avaibleSteps.map((step: number) => {
-                        return <div className={`${CLASSNAME}__tick`} style={{ left: `${step * 100}%` }} />;
-                    })}
+            {!hideMinMaxlabel && <span className={`${CLASSNAME}__label ${CLASSNAME}__label--min`}>{min}</span>}
+            <div className={`${CLASSNAME}__wrapper`} ref={sliderRef}>
+                <div className={`${CLASSNAME}__track ${CLASSNAME}__track--background`} />
+                <div
+                    className={`${CLASSNAME}__track ${CLASSNAME}__track--active`}
+                    style={{ width: `${value * 100}%` }}
+                />
+                {steps && (
+                    <div className={`${CLASSNAME}__ticks`}>
+                        {avaibleSteps.map((step: number) => {
+                            return <div className={`${CLASSNAME}__tick`} style={{ left: `${step * 100}%` }} />;
+                        })}
+                    </div>
+                )}
                 <div className={`${CLASSNAME}__handle`} style={{ left: `${value * 100}%` }} />
             </div>
-            {!hideMinMaxlabel && <span className={`${CLASSNAME}__label`}>{max}</span>}
+            {!hideMinMaxlabel && <span className={`${CLASSNAME}__label ${CLASSNAME}__label--max`}>{max}</span>}
         </div>
     );
 };
