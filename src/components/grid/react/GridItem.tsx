@@ -69,14 +69,11 @@ const GridItem: React.FC<GridItemProps> = ({
     order,
     ...props
 }: GridItemProps): React.ReactElement => {
-    const attributes = {
-        [`${CLASSNAME}`]: width || 'true',
-        [`${CLASSNAME}-align`]: align,
-        [`${CLASSNAME}-order`]: order,
-    };
-
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props} {...attributes}>
+        <div
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, width, order, align }))}
+            {...props}
+        >
             {children}
         </div>
     );

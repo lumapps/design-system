@@ -7,6 +7,8 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { Alignment, Orientation } from 'LumX/components';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 
+import { handleBasicClasses } from 'LumX/core/utils';
+
 /////////////////////////////
 
 /**
@@ -15,7 +17,7 @@ import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 interface IGridProps extends IGenericProps {
     orientation?: Orientation;
     /* Should children wrap */
-    wrap?: boolean;
+    wrap?: string;
     /* How we should vertically align the children */
     vAlign?: Alignment;
     /* How we should horizontally align the children */
@@ -54,7 +56,10 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {
+    orientation: Orientation.horizontal,
+    wrap: 'nowrap',
+};
 /////////////////////////////
 
 /**
@@ -67,20 +72,22 @@ const Grid: React.FC<GridProps> = ({
     className = '',
     gutter,
     hAlign,
-    orientation,
+    orientation = DEFAULT_PROPS.orientation,
     vAlign,
-    wrap,
+    wrap = DEFAULT_PROPS.wrap,
     ...props
 }: GridProps): React.ReactElement => {
-    const attributes = {
-        [`${CLASSNAME}-container`]: orientation === Orientation.horizontal ? 'row' : 'column',
-        [`${CLASSNAME}-wrap`]: wrap ? 'true' : false,
-        [`${CLASSNAME}-h-align`]: hAlign,
-        [`${CLASSNAME}-v-align`]: vAlign,
-        [`${CLASSNAME}-gutter`]: gutter,
-    };
     return (
-        <div className={classNames(className, `${CLASSNAME}-container`)} {...props} {...attributes}>
+        <div
+            className={classNames(
+                className,
+                `${CLASSNAME}-container`,
+                { [`${CLASSNAME}--h-align-${hAlign}`]: hAlign },
+                { [`${CLASSNAME}--v-align-${vAlign}`]: vAlign },
+                handleBasicClasses({ prefix: CLASSNAME, orientation, wrap, gutter }),
+            )}
+            {...props}
+        >
             {children}
         </div>
     );
