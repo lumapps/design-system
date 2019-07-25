@@ -2,6 +2,6 @@
     font-size: map-get($lumx-sizes, $size);
 }
 
-@mixin lumx-icon-color($color) {
-    color: lumx-theme-color-variant($color, N);
+@mixin lumx-icon-color($color, $color-variant) {
+    color: lumx-theme-color-variant($color, $color-variant);
 }
