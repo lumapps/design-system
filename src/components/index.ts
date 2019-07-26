@@ -20,8 +20,12 @@ interface IComplexPropDefault<T> {
 }
 type ComplexPropDefault<T> = IComplexPropDefault<T>;
 
+/**
+ * See SCSS variable $lumx-theme-color-palette
+ */
 enum ColorPalette {
     primary = 'primary',
+    secondary = 'secondary',
     blue = 'blue',
     dark = 'dark',
     green = 'green',
@@ -30,6 +34,21 @@ enum ColorPalette {
     light = 'light',
 }
 type Color = ColorPalette | string;
+
+/**
+ * See SCSS variable $lumx-theme-color-variants
+ */
+enum ColorVariant {
+    D1 = 'D1',
+    D2 = 'D2',
+    L1 = 'L1',
+    L2 = 'L2',
+    L3 = 'L3',
+    L4 = 'L4',
+    L5 = 'L5',
+    L6 = 'L6',
+    N = 'N',
+}
 
 enum Theme {
     light = 'light',
@@ -62,4 +81,4 @@ enum Emphasis {
 
 /////////////////////////////
 
-export { Alignment, ComplexPropDefault, Color, ColorPalette, Theme, Size, Orientation, Emphasis };
+export { Alignment, ComplexPropDefault, Color, ColorPalette, ColorVariant, Theme, Size, Orientation, Emphasis };

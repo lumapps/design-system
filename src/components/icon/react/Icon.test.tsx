@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { Size } from 'LumX';
+import { ColorPalette, ColorVariant, Size } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiPlus } from 'LumX/icons';
@@ -81,6 +81,11 @@ describe(`<${Icon.displayName}>`, (): void => {
 
             expect(svg).toExist();
             expect(path).toExist();
+        });
+
+        it('should render color & color variant', (): void => {
+            const { wrapper } = setup({ color: ColorPalette.primary, colorVariant: ColorVariant.D1 });
+            expect(wrapper).toMatchSnapshot();
         });
     });
 

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Color, Size } from 'LumX';
+import { Color, ColorVariant, Size } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -29,6 +29,11 @@ interface IProps extends IGenericProps {
      * The icon color.
      */
     color?: Color;
+
+    /**
+     * The icon color variant.
+     */
+    colorVariant?: ColorVariant;
 
     /**
      * The icon size.
@@ -109,6 +114,7 @@ function _validate(props: IconProps): ReactNode {
 const Icon: React.FC<IconProps> = ({
     className,
     color,
+    colorVariant,
     icon,
     iconRef = DEFAULT_PROPS.iconRef,
     size,
@@ -119,7 +125,7 @@ const Icon: React.FC<IconProps> = ({
     return (
         <i
             ref={iconRef}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, size }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant, size }))}
             {...props}
         >
             <svg
