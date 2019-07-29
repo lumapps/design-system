@@ -1,4 +1,4 @@
-import React, { CSSProperties, Fragment, ReactNode } from 'react';
+import React, { CSSProperties, Fragment, ReactNode, useRef, useState } from 'react';
 
 import { Button, Dropdown, List, ListItem, ListItemSize, ListSubheader, Placement } from 'LumX';
 
@@ -11,16 +11,10 @@ const demoContainerStyle: CSSProperties = {
 
 interface IProps {}
 
-const createToggleElement: (text?: string) => ReactNode = (text: string = 'Button'): ReactNode => {
-    return <Button>{text}</Button>;
-};
-
-const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode = (
-    setIsOpen: (isOpen: boolean) => void,
-): ReactNode => {
+const createSimpleMenuList: (closeSimpleMenu: () => void) => ReactNode = (closeSimpleMenu: () => void): ReactNode => {
     const onItemSelectedHandler: (item: ListItem) => void = (item: ListItem): void => {
         console.log('selected item', item);
-        setIsOpen(false);
+        closeSimpleMenu();
     };
 
     return (
@@ -34,12 +28,12 @@ const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode 
     );
 };
 
-const createComplexMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode = (
-    setIsOpen: (isOpen: boolean) => void,
+const createComplexMenuList: (closeComplexMenu: () => void) => ReactNode = (
+    closeComplexMenu: () => void,
 ): ReactNode => {
     // tslint:disable-next-line: no-unused
     const onItemSelectedHandler: (item: ListItem) => void = (item: ListItem): void => {
-        setIsOpen(false);
+        closeComplexMenu();
     };
 
     return (
@@ -65,28 +59,59 @@ const createComplexMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
+    const anchorSimpleRef: React.RefObject<HTMLDivElement> = useRef(null);
+    const [isSimpleOpen, setSimpleIsOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(false);
+
+    const anchorComplexRef: React.RefObject<HTMLDivElement> = useRef(null);
+    const [isComplexOpen, setComplexIsOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(false);
+
+    function toggleSimpleMenu(): void {
+        setSimpleIsOpen(!isSimpleOpen);
+    }
+
+    function closeSimpleMenu(): void {
+        setSimpleIsOpen(false);
+    }
+
+    function toggleComplexMenu(): void {
+        setComplexIsOpen(!isComplexOpen);
+    }
+
+    function closeComplexMenu(): void {
+        setComplexIsOpen(false);
+    }
+
     return (
         <Fragment>
             <div style={demoContainerStyle}>
                 {/* Simple menu */}
+                <Button buttonRef={anchorSimpleRef} onClick={toggleSimpleMenu}>
+                    Simple Menu
+                </Button>
                 <Dropdown
+                    showDropdown={isSimpleOpen}
                     closeOnClick={true}
                     escapeClose={true}
+                    onClose={closeSimpleMenu}
                     position={Placement.BOTTOM_START}
-                    toggleElement={createToggleElement('Simple Menu')}
+                    anchorRef={anchorSimpleRef}
                 >
-                    {(setIsOpen: (isOpen: boolean) => void): ReactNode => createSimpleMenuList(setIsOpen)}
+                    {createSimpleMenuList(closeSimpleMenu)}
                 </Dropdown>
 
                 {/* Complex menu */}
+                <Button buttonRef={anchorComplexRef} onClick={toggleComplexMenu}>
+                    Complex Menu
+                </Button>
                 <Dropdown
+                    showDropdown={isComplexOpen}
                     closeOnClick={false}
                     escapeClose={false}
                     offset={{ vertical: 8 }}
                     position={Placement.BOTTOM_START}
-                    toggleElement={createToggleElement('Complex Menu')}
+                    anchorRef={anchorComplexRef}
                 >
-                    {(setIsOpen: (isOpen: boolean) => void): ReactNode => createComplexMenuList(setIsOpen)}
+                    {createComplexMenuList(closeComplexMenu)}
                 </Dropdown>
             </div>
         </Fragment>

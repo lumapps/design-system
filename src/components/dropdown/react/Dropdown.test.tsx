@@ -3,7 +3,6 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
 
 import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
 
@@ -37,10 +36,11 @@ interface ISetup extends ICommonSetup {
  *                       component.
  */
 const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+    const anchorRef = React.createRef<HTMLButtonElement>();
     const props: DropdownProps = {
         // tslint:disable-next-line no-unused
-        children: (setIsOpen: (isOpen: boolean) => void): React.ReactNode => 'This is the content of the dropdown',
-        toggleElement: 'Toggle',
+        anchorRef,
+        children: <div>This is the content of the dropdown</div>,
         ...propsOverrides,
     };
 
@@ -73,10 +73,9 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { dropdown }: ISetup = setup();
+            const { wrapper }: ISetup = setup();
 
-            expect(dropdown).toHaveClassName(CLASSNAME);
-            expect(dropdown).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasToggle', value: true }));
+            expect(wrapper).toHaveClassName(CLASSNAME);
         });
     });
 
@@ -85,6 +84,34 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 3. Test events.
     describe('Events', (): void => {
         // Nothing to do here.
+        const onClose: jest.Mock = jest.fn();
+
+        beforeEach(
+            (): void => {
+                onClose.mockClear();
+            },
+        );
+
+        it('should trigger `onClose` when pressing `escape` key', (): void => {
+            const { wrapper } = setup({ showDropdown: true, onClose, escapeClose: true }, false);
+
+            wrapper.simulate('keydown', { keyCode: 27 });
+            expect(onClose).toHaveBeenCalled();
+        });
+
+        it('should not trigger `onClose` when pressing any other key', (): void => {
+            const { wrapper } = setup({ showDropdown: true, onClose, escapeClose: true }, false);
+
+            wrapper.simulate('keydown', { keyCode: 26 });
+            expect(onClose).not.toHaveBeenCalled();
+        });
+
+        it('should not trigger `onClose` when pressing `escape` key with `escapeClose` set to `false`', (): void => {
+            const { wrapper } = setup({ showDropdown: true, onClose, escapeClose: false }, false);
+
+            wrapper.simulate('keydown', { keyCode: 27 });
+            expect(onClose).not.toHaveBeenCalled();
+        });
     });
     /////////////////////////////
 
