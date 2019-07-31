@@ -138,12 +138,16 @@ const generateNav = (parentPath: string, navItems: INavItem[]): ReactElement => 
     return (
         <ul>
             {navItems.map(
-                (navItem: INavItem): ReactElement => (
-                    <li key={navItem.label}>
-                        <Link to={`${parentPath}/${navItem.label.toLocaleLowerCase()}`}>{navItem.label}</Link>
-                        {navItem.children &&
-                            navItem.children.length > 0 &&
-                            generateNav(`${parentPath}/${navItem.label.toLocaleLowerCase()}`, navItem.children)}
+                ({ label, children }: INavItem): ReactElement => (
+                    <li key={label}>
+                        {children && children.length > 0 ? (
+                            <>
+                                {label}
+                                {generateNav(`${parentPath}/${label.toLocaleLowerCase()}`, children)}
+                            </>
+                        ) : (
+                            <Link to={`${parentPath}/${label.toLocaleLowerCase()}`}>{label}</Link>
+                        )}
                     </li>
                 ),
             )}

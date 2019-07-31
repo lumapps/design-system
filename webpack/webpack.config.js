@@ -111,7 +111,7 @@ const baseConfig = {
     profile: false,
 
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json', '.md', '.mdx'],
         modules: ['node_modules'],
         alias: {
             'LumX/angularjs': path.resolve(__dirname, `${CORE_PATH}/angularjs`),
