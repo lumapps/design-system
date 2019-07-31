@@ -4,6 +4,8 @@ import { capitalize, last } from 'lodash';
 import isEmpty from 'lodash/isEmpty';
 
 import { PropTable } from 'LumX/demo/react/layout/PropTable';
+
+// @ts-ignore
 import { propsByComponent } from 'propsMetadata';
 
 /**
@@ -50,7 +52,7 @@ const MainContent = ({ path }: { path: string }): ReactElement => {
     return (
         <>
             {demo}
-            <h1>Properties</h1>
+            <h1 className="lumx-spacing-margin-top-huge">Properties</h1>
             <PropTable propertyList={propsByComponent[componentName]} />
         </>
     );
