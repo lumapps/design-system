@@ -1,24 +1,24 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-
-import classNames from 'classnames';
+import { Route, RouteComponentProps } from 'react-router-dom';
 
 import isEmpty from 'lodash/isEmpty';
 
+import { Theme } from 'LumX/demo/constants';
 import { Category, DemoObject } from 'LumX/demo/react/constants';
 
-import { DemoBlock } from './DemoBlock';
-import { DemoHeader } from './DemoHeader';
+import { IGenericProps } from 'LumX/core/react/utils';
 
-/////////////////////////////
+import { ThemeSelector } from './ThemeSelector';
 
 /**
  * Defines the props of the component.
  */
-interface IProps {
+interface IProps extends IGenericProps {
     /**
-     * The active component to load the demo of.
+     * The function to change the theme.
+     * When the theme selector is used, this function is called to update the current theme.
      */
-    activeComponent: string;
+    changeTheme(theme: Theme): void;
 }
 
 /**
@@ -50,19 +50,13 @@ interface IESModule {
     demos: { [demoName: string]: DemoObject };
 }
 
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
 /**
  * Load the demo component corresponding to the currently active component.
  *
  * @param             componentFolderName The name of the component to load.
  * @return The promise of the dynamic load of the component.
  */
-async function _loadComponent(componentFolderName: IProps['activeComponent']): Promise<IESModule> {
+async function _loadComponent(componentFolderName: string): Promise<IESModule> {
     if (isEmpty(componentFolderName)) {
         return Promise.reject('No component to load');
     }
@@ -70,23 +64,15 @@ async function _loadComponent(componentFolderName: IProps['activeComponent']): P
     return import(`../components/${componentFolderName}`);
 }
 
-/////////////////////////////
+const Content = ({ activeComponent }: { activeComponent: string }): ReactElement => {
+    console.log(activeComponent);
 
-/**
- * The main display component.
- * This component is in charge of displaying the active component demo page.
- * To do so, it will receive the name of the active component and will dynamically load the demo component from this
- * name.
- *
- * @return The main component.
- */
-const Main: React.FC<IProps> = ({ activeComponent }: IProps): ReactElement => {
     const [demo, setDemo] = useState<IESModule>();
 
     useEffect((): void => {
         const loadComponent = async (): Promise<void> => {
             try {
-                const loadedDemo: IESModule = await _loadComponent(activeComponent);
+                const loadedDemo: IESModule = await _loadComponent(activeComponent.replace(' ', '-'));
                 setDemo(loadedDemo);
             } catch (exception) {
                 setDemo(undefined);
@@ -107,43 +93,35 @@ const Main: React.FC<IProps> = ({ activeComponent }: IProps): ReactElement => {
             </div>
         );
     }
+    return <h1>{activeComponent.replace(/^\w/, (c: string) => c.toLocaleUpperCase())}</h1>;
+};
 
-    const demoHeader: ReactElement | null = !isEmpty(demo.title) ? (
-        <DemoHeader category={demo.category} demoTitle={demo.title}>
-            {demo.description}
-        </DemoHeader>
-    ) : null;
-
+/**
+ * The main component.
+ *
+ * @return The main component.
+ */
+const Main: React.FC<IProps> = ({ changeTheme }: IProps): ReactElement => {
     return (
         <div className="main">
-            <div className="main__wrapper">
-                {demoHeader}
+            <div className="main-wrapper">
+                <div className="main-header">
+                    <ThemeSelector changeTheme={changeTheme} />
+                </div>
 
-                <div className="mt++">
-                    {Object.keys(demo.demos).map(
-                        (key: string, index: number): ReactElement => {
-                            const { description, files, title } = demo.demos[key];
-
-                            return (
-                                <DemoBlock
-                                    key={key}
-                                    className={classNames({ 'mt+++': index > 0 })}
-                                    blockTitle={title}
-                                    demoName={key}
-                                    demoPath={activeComponent}
-                                    files={files}
-                                >
-                                    {description}
-                                </DemoBlock>
-                            );
-                        },
-                    )}
+                <div className="main-content">
+                    <div className="main-content__wrapper">
+                        <Route
+                            path="/product/components/:component"
+                            render={({ match }: RouteComponentProps): ReactElement => (
+                                <Content activeComponent={match.params.component} />
+                            )}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
-
-/////////////////////////////
 
 export { Main };
