@@ -1,27 +1,19 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-
-import last from 'lodash/last';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { DEFAULT_THEME } from '../constants';
 import { changeTheme as _changeTheme } from '../utils';
 
-import { ErrorBoundary } from './ErrorBoundary';
+import { ErrorBoundary } from './layout/ErrorBoundary';
 import { Main } from './layout/Main';
 import { MainNav } from './layout/MainNav';
-import { SubNav } from './layout/SubNav';
-
-/////////////////////////////
 
 /**
  * The main application component.
- * This component define the structure of the page (main navigation, sub navigation and main display).
- * It also handle the changes of the theme and the changes of the active component demo page (which will be displayed
- * in the main display component).
  *
  * @return The main application component.
  */
 const App: React.FC = (): ReactElement => {
-    const [activeComponent, setActiveComponent] = useState(last(window.location.pathname.split('/')) || '');
     const [theme, changeTheme] = useState(DEFAULT_THEME);
     const [themeLoaded, setThemeLoaded] = useState(false);
 
@@ -33,30 +25,19 @@ const App: React.FC = (): ReactElement => {
         );
     }, [theme]);
 
-    useEffect((): void => {
-        window.history.pushState(activeComponent, 'Design System', `/${activeComponent}`);
-    }, [activeComponent]);
-
     if (themeLoaded) {
         return (
-            <>
+            <Router>
                 <MainNav />
-                <SubNav
-                    handleNavigate={setActiveComponent}
-                    changeTheme={changeTheme}
-                    activeComponent={activeComponent}
-                />
 
                 <ErrorBoundary>
-                    <Main activeComponent={activeComponent} />
+                    <Main changeTheme={changeTheme} />
                 </ErrorBoundary>
-            </>
+            </Router>
         );
     }
 
     return <div />;
 };
-
-/////////////////////////////
 
 export { App };

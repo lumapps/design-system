@@ -38,8 +38,8 @@ const ThemeSelector: React.FC<IProps> = ({ changeTheme }: IProps): ReactElement 
 
     return (
         <select onChange={handleChange}>
-            <option value="lumapps">LumApps theme</option>
-            <option value="material">Material theme</option>
+            <option value="lumapps">LumApps</option>
+            <option value="material">Material</option>
         </select>
     );
 };
