@@ -31,7 +31,7 @@ const App: React.FC = (): ReactElement => {
                 <MainNav />
 
                 <ErrorBoundary>
-                    <Main changeTheme={changeTheme} />
+                    <Main changeTheme={changeTheme} theme={theme} />
                 </ErrorBoundary>
             </Router>
         );

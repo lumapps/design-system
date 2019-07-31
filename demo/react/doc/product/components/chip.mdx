@@ -1,10 +1,25 @@
-import { Chip, ColorPalette, Icon, Size, Theme } from 'LumX';
+import { Chip, Icon, Size, Theme } from 'LumX';
+import { mdiEmail } from 'LumX/icons';
 
 # Chip
 
-<Chip theme={Theme.light}>
-    Label
-</Chip>
-<Chip color={ColorPalette.red} theme={Theme.light} size={Size.s}>
-    Label
-</Chip>
+**Chips display distinct inputs, attributes, or actions.**
+
+Use chips to display choices, as inputs or to filter content.
+
+## Default
+
+Use default to display distinct attributes such as tags on a blog post.
+
+<div className="demo-block">
+    <div className="demo-block__content">
+        <div className="demo-grid">
+            <Chip theme={Theme.light} size={Size.m}>
+                Default
+            </Chip>
+            <Chip before={<Icon icon={mdiEmail} />} theme={Theme.light}>
+                Rich
+            </Chip>
+        </div>
+    </div>
+</div>
