@@ -175,6 +175,7 @@
         "tslint-eslint-rules": "^5.4.0",
         "tslint-plugin-prettier": "^2.0.1",
         "tslint-react": "^3.6.0",
+        "typedoc": "^0.15.0",
         "typescript": "^3.4.5",
         "webpack": "^4.29.6",
         "webpack-cli": "^3.3.0",
