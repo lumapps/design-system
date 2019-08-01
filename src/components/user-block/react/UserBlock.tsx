@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
 
@@ -83,84 +83,84 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The component.
  */
-const UserBlock: React.FC<IUserBlockProps> = ({
-    avatar,
-    theme = DEFAULT_PROPS.theme,
-    orientation = DEFAULT_PROPS.orientation,
-    fields,
-    name,
-    onClick,
-    onMouseEnter,
-    onMouseLeave,
-    className = '',
-    simpleAction,
-    multipleActions,
-    size = DEFAULT_PROPS.size,
-}: IUserBlockProps): ReactElement => {
-    let componentSize = size;
+const UserBlock = React.forwardRef(
+    (
+        {
+            avatar,
+            theme = DEFAULT_PROPS.theme,
+            orientation = DEFAULT_PROPS.orientation,
+            fields,
+            name,
+            onClick,
+            onMouseEnter,
+            onMouseLeave,
+            className = '',
+            simpleAction,
+            multipleActions,
+            size = DEFAULT_PROPS.size,
+        }: IUserBlockProps,
+        ref?: Ref<HTMLDivElement>,
+    ): ReactElement => {
+        let componentSize = size;
 
-    // Special case - When using vertical orientation force the size to be Sizes.l.
-    if (orientation === Orientation.vertical) {
-        componentSize = Size.l;
-    }
+        // Special case - When using vertical orientation force the size to be Sizes.l.
+        if (orientation === Orientation.vertical) {
+            componentSize = Size.l;
+        }
 
-    const shouldDisplayActions: boolean = orientation === Orientation.vertical;
+        const shouldDisplayActions: boolean = orientation === Orientation.vertical;
 
-    const nameBlock: ReactNode = name && (
-        <span
-            className={`${CLASSNAME}__name`}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onClick={onClick}
-            tabIndex={onClick ? 0 : -1}
-        >
-            {name}
-        </span>
-    );
+        const nameBlock: ReactNode = name && (
+            <span className={`${CLASSNAME}__name`} onClick={onClick} tabIndex={onClick ? 0 : -1}>
+                {name}
+            </span>
+        );
 
-    const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
-        <div className={`${CLASSNAME}__fields`}>
-            {fields.map((aField: string, idx: number) => (
-                <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>
-                    {aField}
-                </span>
-            ))}
-        </div>
-    );
+        const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
+            <div className={`${CLASSNAME}__fields`}>
+                {fields.map((aField: string, idx: number) => (
+                    <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>
+                        {aField}
+                    </span>
+                ))}
+            </div>
+        );
 
-    return (
-        <div
-            className={classNames(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme }),
-            )}
-        >
-            {avatar && (
-                <div className={`${CLASSNAME}__avatar`}>
-                    <Avatar
-                        image={avatar}
-                        size={componentSize}
-                        onMouseLeave={onMouseLeave}
-                        onMouseEnter={onMouseEnter}
-                        onClick={onClick}
-                        tabIndex={onClick ? 0 : -1}
-                        theme={theme}
-                    />
-                </div>
-            )}
-            {(fields || name) && (
-                <div className={`${CLASSNAME}__wrapper`}>
-                    {nameBlock}
-                    {fieldsBlock}
-                </div>
-            )}
-            {shouldDisplayActions && simpleAction && <div className={`${CLASSNAME}__action`}>{simpleAction}</div>}
-            {shouldDisplayActions && multipleActions && (
-                <div className={`${CLASSNAME}__actions`}>{multipleActions}</div>
-            )}
-        </div>
-    );
-};
+        return (
+            <div
+                ref={ref}
+                className={classNames(
+                    className,
+                    handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme }),
+                )}
+                onMouseLeave={onMouseLeave}
+                onMouseEnter={onMouseEnter}
+            >
+                {avatar && (
+                    <div className={`${CLASSNAME}__avatar`}>
+                        <Avatar
+                            image={avatar}
+                            size={componentSize}
+                            onClick={onClick}
+                            tabIndex={onClick ? 0 : -1}
+                            theme={theme}
+                        />
+                    </div>
+                )}
+                {(fields || name) && (
+                    <div className={`${CLASSNAME}__wrapper`}>
+                        {nameBlock}
+                        {fieldsBlock}
+                    </div>
+                )}
+                {shouldDisplayActions && simpleAction && <div className={`${CLASSNAME}__action`}>{simpleAction}</div>}
+                {shouldDisplayActions && multipleActions && (
+                    <div className={`${CLASSNAME}__actions`}>{multipleActions}</div>
+                )}
+            </div>
+        );
+    },
+);
 UserBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////

@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactElement, useState } from 'react';
+import React, { CSSProperties, ReactElement, useRef, useState } from 'react';
 
-import { Popover, PopperPlacement } from 'LumX';
+import { Placement, Popover } from 'LumX';
 
 /////////////////////////////
 
@@ -34,20 +34,6 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'space-around',
 };
 
-const createDemoAnchor = (width: number): ReactElement => {
-    return <div style={{ ...demoAnchorStyle, width }}>{'This element will act as the anchor'}</div>;
-};
-
-const createPopper = (): ReactElement => {
-    return (
-        <div style={demoPopperStyle}>
-            {
-                'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '
-            }
-        </div>
-    );
-};
-
 /////////////////////////////
 
 /**
@@ -57,7 +43,7 @@ const createPopper = (): ReactElement => {
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
-
+    const anchorRef = useRef(null);
     /**
      * Switch tooltip visibility
      * @param newVisibleState Tooltip visibility
@@ -67,18 +53,27 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
     };
 
     return (
-        <div onMouseOver={(): void => toggleTooltipDisplay(true)} onMouseOut={(): void => toggleTooltipDisplay(false)}>
-            <div style={demoPopoverHolderStyle}>
-                <Popover
-                    anchorElement={createDemoAnchor(230)}
-                    popperElement={createPopper()}
-                    popperPlacement={PopperPlacement.BOTTOM}
-                    showPopper={isTooltipDisplayed}
-                    lockFlip
-                    matchAnchorWidth
-                />
+        <>
+            <div>
+                <div style={demoPopoverHolderStyle}>
+                    <div
+                        ref={anchorRef}
+                        style={{ ...demoAnchorStyle, width: 230 }}
+                        onMouseOver={(): void => toggleTooltipDisplay(true)}
+                        onMouseOut={(): void => toggleTooltipDisplay(false)}
+                    >
+                        {'This element will act as the anchor'}
+                    </div>
+                </div>
             </div>
-        </div>
+            <Popover anchorRef={anchorRef} hasParentWidth isVisible={isTooltipDisplayed} placement={Placement.BOTTOM}>
+                <div style={demoPopperStyle}>
+                    {
+                        'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '
+                    }
+                </div>
+            </Popover>
+        </>
     );
 };
 

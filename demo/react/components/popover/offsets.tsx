@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement, useRef } from 'react';
 
-import { Popover, PopperOffsets, PopperPlacement } from 'LumX';
+import { Offsets, Placement, Popover } from 'LumX';
 
 /////////////////////////////
 
@@ -46,17 +46,9 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'center',
 };
 
-const createDemoAnchor = (): ReactElement => {
-    return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
-};
-
-const createPopper = (): ReactElement => {
-    return <div style={demoPopperStyle}>{`This popper is placed using a 'vertical' and a 'horizontal' offset`}</div>;
-};
-
 /////////////////////////////
 
-const offsets: PopperOffsets = { horizontal: -60, vertical: 30 };
+const offsets: Offsets = { horizontal: -60, vertical: 30 };
 
 /**
  * The demo for the default <Popover>s.
@@ -64,20 +56,25 @@ const offsets: PopperOffsets = { horizontal: -60, vertical: 30 };
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
+    const anchorRef = useRef(null);
+
     return (
-        <div style={demoPopoverHolderStyle}>
-            <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Ramdom element`}</div>
-            <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Ramdom element`}</div>
-            <Popover
-                anchorElement={createDemoAnchor()}
-                popperElement={createPopper()}
-                popperPlacement={PopperPlacement.RIGHT}
-                popperOffset={offsets}
-                showPopper
-            />
-            <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Random element`}</div>
-            <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Random element`}</div>
-        </div>
+        <>
+            <div style={demoPopoverHolderStyle}>
+                <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Ramdom element'}</div>
+                <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Ramdom element'}</div>
+                <div ref={anchorRef} style={demoAnchorStyle}>
+                    {'This element will act as the anchor'}
+                </div>
+                <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
+                <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
+            </div>
+            <Popover anchorRef={anchorRef} placement={Placement.RIGHT} offset={offsets} isVisible>
+                <div style={demoPopperStyle}>
+                    {"This popper is placed using a 'vertical' and a 'horizontal' offset"}
+                </div>
+            </Popover>
+        </>
     );
 };
 
