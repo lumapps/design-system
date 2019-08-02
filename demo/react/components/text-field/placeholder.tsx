@@ -20,7 +20,7 @@ interface IProps {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <>
-        <TextField label="Texfield label" placeholder="Placeholder label" theme={theme} />
+        <TextField label="Textfield label" placeholder="Placeholder label" theme={theme} />
     </>
 );
 

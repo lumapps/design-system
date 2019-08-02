@@ -20,7 +20,7 @@ interface IProps {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <>
-        <TextField hasError={true} label="Texfield label" theme={theme} />
+        <TextField hasError={true} label="Textfield label" theme={theme} />
     </>
 );
 

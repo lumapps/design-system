@@ -20,7 +20,7 @@ interface IProps {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <>
-        <TextField isDisabled={true} label="Texfield label" theme={theme} />
+        <TextField isDisabled={true} label="Textfield label" theme={theme} />
     </>
 );
 
