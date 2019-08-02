@@ -21,11 +21,7 @@ interface IProps {
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [value, setValue] = useState('');
 
-    return (
-        <>
-            <TextField isValid={true} label="Textfield label" theme={theme} value={value} onChange={setValue} />
-        </>
-    );
+    return <TextField isValid={true} label="Textfield label" theme={theme} value={value} onChange={setValue} />;
 };
 
 /////////////////////////////

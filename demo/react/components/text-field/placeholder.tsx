@@ -22,15 +22,13 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [value, setValue] = useState('');
 
     return (
-        <>
-            <TextField
-                label="Textfield label"
-                placeholder="Placeholder label"
-                theme={theme}
-                value={value}
-                onChange={setValue}
-            />
-        </>
+        <TextField
+            label="Textfield label"
+            placeholder="Placeholder label"
+            theme={theme}
+            value={value}
+            onChange={setValue}
+        />
     );
 };
 

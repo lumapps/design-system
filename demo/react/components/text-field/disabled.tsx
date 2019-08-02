@@ -21,11 +21,7 @@ interface IProps {
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [value, setValue] = useState('I am disabled');
 
-    return (
-        <>
-            <TextField isDisabled={true} label="Textfield label" theme={theme} value={value} onChange={setValue} />
-        </>
-    );
+    return <TextField isDisabled label="Textfield label" theme={theme} value={value} onChange={setValue} />;
 };
 
 /////////////////////////////

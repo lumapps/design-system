@@ -22,11 +22,7 @@ interface IProps {
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [value, setValue] = useState('');
 
-    return (
-        <>
-            <TextField icon={mdiMagnify} theme={theme} value={value} onChange={setValue} />
-        </>
-    );
+    return <TextField icon={mdiMagnify} theme={theme} value={value} onChange={setValue} />;
 };
 
 /////////////////////////////
