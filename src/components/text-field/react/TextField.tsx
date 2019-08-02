@@ -27,9 +27,6 @@ interface ITextFieldProps extends IGenericProps {
     /** Id that will be passed to input element */
     id?: string;
 
-    /** Inital value that textfield will display */
-    initialValue?: string;
-
     /** Whether the text field is disabled or not */
     isDisabled?: boolean;
 
@@ -45,8 +42,11 @@ interface ITextFieldProps extends IGenericProps {
     /** Theme */
     theme?: string;
 
+    /** Value that text field will display */
+    value: string;
+
     /** Event triggered on value change */
-    onChange?(value: string): void;
+    onChange(value: string): void;
 }
 type TextFieldProps = ITextFieldProps;
 
@@ -76,9 +76,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
-    initialValue: '',
-};
+const DEFAULT_PROPS: IDefaultPropsType = {};
 
 /////////////////////////////
 
@@ -93,16 +91,15 @@ const TextField: React.FC<TextFieldProps> = ({
     helper,
     icon,
     id = uuid(),
-    initialValue = DEFAULT_PROPS.initialValue,
     isDisabled,
     isValid,
     label,
     onChange,
     placeholder,
     theme = Theme.light,
+    value,
     ...props
 }: TextFieldProps): ReactElement => {
-    const [value, setValue] = useState(initialValue);
     const [hasFocus, setHasFocus] = useState(false);
     const hasValue = Boolean(value);
 
@@ -113,11 +110,8 @@ const TextField: React.FC<TextFieldProps> = ({
      */
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
         const inputValue = event.target.value;
-        setValue(inputValue);
 
-        if (typeof onChange === 'function') {
-            onChange(inputValue);
-        }
+        onChange(inputValue);
     };
 
     return (

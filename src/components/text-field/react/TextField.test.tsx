@@ -39,6 +39,8 @@ interface ISetup extends ICommonSetup {
  */
 const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: TextFieldProps = {
+        onChange: jest.fn(),
+        value: 'Test value',
         ...propsOverrides,
     };
 
@@ -138,12 +140,12 @@ describe(`<${TextField.displayName}>`, (): void => {
             },
         );
 
-        it('should trigger `onChange` when textfield is changed', (): void => {
+        it('should trigger `onChange` when text field is changed', (): void => {
             const onChangeMock = jest.fn();
             const event = {
                 target: { value: 'my value' },
             };
-            const component = shallow(<TextField onChange={onChangeMock} />);
+            const component = shallow(<TextField value="" onChange={onChangeMock} />);
             component.find('input').simulate('change', event);
             expect(onChangeMock).toBeCalledWith('my value');
         });
