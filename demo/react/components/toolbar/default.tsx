@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { ButtonEmphasis, IconButton, TextField, Theme, Toolbar } from 'LumX';
 
@@ -22,20 +22,31 @@ const toolbarGridDemoStyle = {
 
 /////////////////////////////
 
-const getToolbarLabel = (theme: Theme): ReactElement => (
-    <div style={toolbarGridDemoStyle}>
-        <span
-            className={classNames(
-                'lumx-typography-title',
-                { 'lumx-theme-color-light-N': theme === 'dark' },
-                { 'lumx-theme-color-dark-N': theme === 'light' },
-            )}
-        >
-            Toolbar title
-        </span>
-        <TextField icon={mdiMagnify} theme={theme} className="lumx-spacing-margin-left-big" />
-    </div>
-);
+const getToolbarLabel = (theme: Theme): ReactElement => {
+    const [value, setValue] = useState('');
+
+    return (
+        <div style={toolbarGridDemoStyle}>
+            <span
+                className={classNames(
+                    'lumx-typography-title',
+                    { 'lumx-theme-color-light-N': theme === 'dark' },
+                    { 'lumx-theme-color-dark-N': theme === 'light' },
+                )}
+            >
+                Toolbar title
+            </span>
+
+            <TextField
+                icon={mdiMagnify}
+                theme={theme}
+                className="lumx-spacing-margin-left-big"
+                value={value}
+                onChange={setValue}
+            />
+        </div>
+    );
+};
 
 const getToolbarAfterButton = (theme: Theme): ReactElement => (
     <IconButton
