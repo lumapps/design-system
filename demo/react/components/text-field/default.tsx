@@ -19,7 +19,7 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState('My initial value');
 
     /**
      * Function called on value change.
@@ -32,7 +32,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
 
     return (
         <>
-            <TextField label="Texfield label" initialValue="My inital value" onChange={onChange} theme={theme} />
+            <TextField label="TextField label" value={value} onChange={onChange} theme={theme} />
             <p>Value: {value}</p>
         </>
     );

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import { TextField, Theme } from 'LumX';
 
@@ -18,11 +18,19 @@ interface IProps {
  *
  * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <>
-        <TextField label="Texfield label" placeholder="Placeholder label" theme={theme} />
-    </>
-);
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const [value, setValue] = useState('');
+
+    return (
+        <TextField
+            label="Textfield label"
+            placeholder="Placeholder label"
+            theme={theme}
+            value={value}
+            onChange={setValue}
+        />
+    );
+};
 
 /////////////////////////////
 

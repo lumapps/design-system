@@ -2,7 +2,7 @@
 
 exports[`<TextField> Snapshots and structure should render correctly 1`] = `
 <div
-  className="lumx-text-field lumx-text-field--theme-light"
+  className="lumx-text-field lumx-text-field--has-value lumx-text-field--theme-light"
 >
   <div
     className="lumx-text-field__input-wrapper"
@@ -16,7 +16,7 @@ exports[`<TextField> Snapshots and structure should render correctly 1`] = `
         onChange={[Function]}
         onFocus={[Function]}
         type="text"
-        value=""
+        value="Test value"
       />
     </div>
   </div>
