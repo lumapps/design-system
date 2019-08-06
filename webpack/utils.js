@@ -95,7 +95,7 @@ function getStyleLoader({ mode = 'dev' }) {
             ],
         },
         {
-            exclude: /node_modules/u,
+            // Exclude: /node_modules/u,
             test: /\.css$/u,
             use: [
                 mode === 'dev'

@@ -1,4 +1,5 @@
-import { Chip, Icon, Size, Theme } from 'LumX';
+import { DemoBlock } from 'LumX/demo/react/layout/DemoBlock';
+import { Chip, Icon, Size } from 'LumX';
 import { mdiEmail } from 'LumX/icons';
 
 # Chip
@@ -11,15 +12,15 @@ Use chips to display choices, as inputs or to filter content.
 
 Use default to display distinct attributes such as tags on a blog post.
 
-<div className="demo-block">
-    <div className="demo-block__content">
-        <div className="demo-grid">
-            <Chip theme={Theme.light} size={Size.m}>
+<DemoBlock>
+    {(theme) => (
+        <>
+            <Chip theme={theme} size={Size.m}>
                 Default
             </Chip>
-            <Chip before={<Icon icon={mdiEmail} />} theme={Theme.light}>
+            <Chip before={<Icon icon={mdiEmail} />} theme={theme}>
                 Rich
             </Chip>
-        </div>
-    </div>
-</div>
+        </>
+    )}
+</DemoBlock>
