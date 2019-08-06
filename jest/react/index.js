@@ -41,7 +41,7 @@ module.exports = {
     testEnvironmentOptions: {
         enzymeAdapter: 'react16',
     },
-    testMatch: ['<rootDir>src/components/**/?(*.)(test|spec)?(s).(j|t)s?(x)'],
+    testMatch: ['<rootDir>(src/components|webpack)/**/?(*.)(test|spec)?(s).(j|t)s?(x)'],
     transform: {
         '^.+\\.(js|jsx)?$': '<rootDir>jest/react/transform.js',
         '^.+\\.(ts|tsx)?$': 'ts-jest',
