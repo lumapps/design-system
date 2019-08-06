@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import { PropTable } from 'LumX/demo/react/layout/PropTable';
 
 // @ts-ignore
-import { propsByComponent } from 'propsMetadata';
+import { propsByComponent } from 'props-loader!';
 
 /**
  * Convert content path to component name in capitalized camel case.

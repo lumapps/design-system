@@ -6,8 +6,6 @@ const { SRC_PATH } = require('../constants');
 
 const baseConfig = require('../webpack.config');
 
-const PropsExtractPlugin = require('./PropsExtractPlugin');
-
 const reactConfig = {
     entry: {
         'lumx.react': `${SRC_PATH}/react.index.ts`,
@@ -19,12 +17,16 @@ const reactConfig = {
         },
     },
 
-    plugins: [new PropsExtractPlugin()],
+    resolveLoader: {
+        alias: {
+            'props-loader': path.resolve(__dirname, 'props-loader'),
+        }
+    },
 };
 
 module.exports = merge.smartStrategy({
     entry: 'append',
     'module.rules': 'append',
-    plugins: 'append',
     'resolve.alias': 'append',
+    'resolveLoader.alias': 'append',
 })(baseConfig, reactConfig);
