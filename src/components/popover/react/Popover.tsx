@@ -1,14 +1,14 @@
 import React, { CSSProperties, ReactChild, ReactElement, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
+import { useComputePosition } from 'LumX/core/react/hooks';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-
+import { isInViewPort } from 'LumX/core/react/utils/isInViewPort';
 import { handleBasicClasses } from 'LumX/core/utils';
-
-import { createPortal } from 'react-dom';
 
 /**
  * Different possible placements for the popover.
@@ -47,13 +47,13 @@ type Offsets = IOffsets;
 /**
  * Position for arrow or tooltip.
  */
-interface IPosition {
+interface IElementPosition {
     x: number;
     y: number;
     width?: number;
     height?: number;
 }
-type Position = IPosition;
+type ElementPosition = IElementPosition;
 
 /////////////////////////////
 
@@ -111,180 +111,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 
 /////////////////////////////
 
-type ViewPortVisibility = 'full' | 'partial';
-
-const isInViewPort = (bounding: ClientRect | DOMRect, visibility: ViewPortVisibility): boolean => {
-    if (visibility === 'partial') {
-        return (
-            bounding.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-            bounding.left <= (window.innerWidth || document.documentElement.clientWidth) &&
-            bounding.right >= 0 &&
-            bounding.bottom >= 0
-        );
-    }
-
-    return (
-        bounding.top >= 0 &&
-        bounding.left >= 0 &&
-        bounding.right <= (window.innerWidth || document.documentElement.clientWidth) &&
-        bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-    );
-};
-
-/**
- * Calculate the position of the popover relative to the anchor element.
- *
- * @param placement Placement of tooltip.
- * @param anchorRef Ref of anchor element.
- * @param popoverRef Ref of tooltip.
- * @param [offset] Ref of tooltip.
- * @param [hasParentWidth] Whether component has to match parent width.
- * @param [hasParentHeight] Whether component has to match parent height.
- * @param [dependencies] Dependencies of hook.
- * @return Position of the popover relative to the anchor element.
- */
-const useComputePosition: (
-    placement: Placement,
-    anchorRef: React.RefObject<HTMLElement>,
-    popoverRef: React.RefObject<HTMLDivElement>,
-    offset?: Offsets,
-    hasParentWidth?: boolean,
-    hasParentHeight?: boolean,
-    // tslint:disable-next-line: no-any
-    dependencies?: any[],
-) => Position = (
-    placement: Placement,
-    anchorRef: React.RefObject<HTMLElement>,
-    popoverRef: React.RefObject<HTMLDivElement>,
-    offset: Offsets = { horizontal: 0, vertical: 0 },
-    hasParentWidth?: boolean,
-    hasParentHeight?: boolean,
-    // tslint:disable-next-line: no-any
-    dependencies: any[] = [placement, anchorRef, popoverRef],
-): Position => {
-    const [position, setPosition] = useState<Position>({
-        height: 0,
-        width: 0,
-        x: 0,
-        y: 0,
-    });
-
-    useEffect((): void => {
-        if (!anchorRef || !anchorRef.current || !popoverRef || !popoverRef.current) {
-            return;
-        }
-
-        const { top, left, width: widthAnchor, height: heightAnchor } = anchorRef.current!.getBoundingClientRect();
-        const {
-            width: widthPopover,
-            height: heightPopover,
-        }: ClientRect | DOMRect = popoverRef.current!.getBoundingClientRect();
-
-        const splittedPlacement = placement.split('-');
-        const verticalPlacement = splittedPlacement[0];
-        const horizontalPlacement = splittedPlacement[1];
-
-        const { horizontal = 0, vertical = 0 } = offset;
-
-        const newPosition: Position = {
-            height: hasParentHeight ? heightAnchor : heightPopover,
-            width: hasParentWidth ? widthAnchor : widthPopover,
-            x: horizontal,
-            y: vertical,
-        };
-
-        switch (verticalPlacement) {
-            case 'top':
-                newPosition.y += top - heightPopover;
-
-                switch (horizontalPlacement) {
-                    case 'start':
-                        newPosition.x += left;
-
-                        break;
-                    case 'end':
-                        newPosition.x += left + widthAnchor - widthPopover;
-
-                        break;
-
-                    default:
-                        newPosition.x += left + (widthAnchor - widthPopover) / 2;
-
-                        break;
-                }
-
-                break;
-            case 'right':
-                newPosition.x += left + widthAnchor;
-
-                switch (horizontalPlacement) {
-                    case 'start':
-                        newPosition.y += top;
-
-                        break;
-                    case 'end':
-                        newPosition.y += top + heightAnchor - heightPopover;
-
-                        break;
-
-                    default:
-                        newPosition.y += top + (heightAnchor - heightPopover) / 2;
-
-                        break;
-                }
-
-                break;
-            case 'bottom':
-                newPosition.y += top + heightAnchor;
-
-                switch (horizontalPlacement) {
-                    case 'start':
-                        newPosition.x += left;
-
-                        break;
-                    case 'end':
-                        newPosition.x += left + widthAnchor - widthPopover;
-
-                        break;
-
-                    default:
-                        newPosition.x += left + (widthAnchor - widthPopover) / 2;
-
-                        break;
-                }
-
-                break;
-            case 'left':
-                newPosition.x += left - widthPopover;
-
-                switch (horizontalPlacement) {
-                    case 'start':
-                        newPosition.y += top;
-
-                        break;
-                    case 'end':
-                        newPosition.y += top + heightAnchor - heightPopover;
-
-                        break;
-
-                    default:
-                        newPosition.y += top + (heightAnchor - heightPopover) / 2;
-
-                        break;
-                }
-
-                break;
-
-            default:
-                break;
-        }
-
-        setPosition(newPosition);
-    }, dependencies);
-
-    return position;
-};
-
 /**
  * Popover.
  *
@@ -305,9 +131,6 @@ const Popover: React.FC<PopoverProps> = ({
         return null;
     }
 
-    // Fake state to force re-rendering.
-    const [value, set] = useState(true);
-
     // Handle mouse over the popover to prevent it from closing from outside (infinite mouse event bug).
     const [isMouseEntered, setIsMouseEntered] = useState(false);
 
@@ -315,14 +138,14 @@ const Popover: React.FC<PopoverProps> = ({
 
     const popoverRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
-    const { height, width, x, y }: Position = useComputePosition(
+    const { height, width, x, y }: ElementPosition = useComputePosition(
         placement!,
         anchorRef,
         popoverRef,
         offset,
         hasParentWidth,
         false,
-        [placement, anchorRef, popoverRef, isVisible, isMouseEntered, value],
+        [placement, anchorRef, popoverRef, isVisible, isMouseEntered],
     );
 
     const cssPopover: CSSProperties = {
@@ -334,13 +157,6 @@ const Popover: React.FC<PopoverProps> = ({
         transform: `translate(${x}px, ${y}px)`,
         width: width ? `${width}px` : 'auto',
         zIndex: 9999,
-    };
-
-    /**
-     * Handle window scroll event to force the component to rerender.
-     */
-    const handleScroll = (): void => {
-        set(!value);
     };
 
     /**
@@ -359,19 +175,15 @@ const Popover: React.FC<PopoverProps> = ({
 
     useEffect(() => {
         if (isVisible || isMouseEntered) {
-            window.addEventListener('scroll', handleScroll, true);
-            window.addEventListener('resize', handleScroll);
             popoverRef.current!.addEventListener('mouseenter', handleMouseEnter);
             popoverRef.current!.addEventListener('mouseleave', handleMouseLeave);
         }
 
         return (): void => {
-            window.removeEventListener('scroll', handleScroll, true);
-            window.removeEventListener('resize', handleScroll);
             popoverRef.current!.removeEventListener('mouseenter', handleMouseEnter);
             popoverRef.current!.removeEventListener('mouseleave', handleMouseLeave);
         };
-    }, [isAnchorInViewport, isVisible, isMouseEntered, handleScroll, handleMouseEnter, handleMouseLeave]);
+    }, [isAnchorInViewport, isVisible, isMouseEntered, handleMouseEnter, handleMouseLeave]);
 
     return createPortal(
         <div
@@ -393,4 +205,4 @@ Popover.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, Offsets };
+export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, ElementPosition, Offsets };

@@ -1,6 +1,7 @@
 import React, { CSSProperties, ReactElement, useRef } from 'react';
 
 import { Placement, Popover } from 'LumX';
+import { useComputePosition } from 'LumX/core/react/hooks';
 
 /////////////////////////////
 
@@ -51,6 +52,9 @@ const demoPopoverHolderStyle: CSSProperties = {
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const anchorRef = useRef(null);
+
+    // Pass a function to update the position state.
+    useComputePosition();
 
     return (
         <>
