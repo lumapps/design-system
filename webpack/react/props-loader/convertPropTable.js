@@ -5,17 +5,14 @@ const lodash = require('lodash');
  * Module definitions are filtered out.
  */
 function indexDefinitionById(typeDocDef) {
-    function flattenDoc({ children, ...definition }, parentId) {
-        const res = lodash.flatMap(children || [], (child) => flattenDoc(child, definition.id));
-        if (definition.kind > 1) {
-            // Keeps only non module definitions
-            res.push({ ...definition, parentId, children: children && children.map((child) => child.id) });
-        }
-
-        return res;
+    function flattenDefinitions({children, ...definition}, parentId) {
+        return [
+            {...definition, parentId, children: children && children.map((child) => child.id)},
+            ...lodash.flatMap(children || [], (child) => flattenDefinitions(child, definition.id))
+        ];
     }
 
-    return lodash.keyBy(flattenDoc(typeDocDef, null), 'id');
+    return lodash.keyBy(flattenDefinitions(typeDocDef, null), 'id');
 }
 
 /**
@@ -26,11 +23,12 @@ function findComponentsAndProps(definitionById) {
         .chain(definitionById)
         .values()
         .map((def) => {
-            const { kindString, signatures, name, sources, children } = def;
+            const {id, kindString, signatures, name, sources, children} = def;
             // Component => Something that returns a react element
             if (signatures && signatures.every((s) => s.type.name && s.type.name.endsWith('ReactElement'))) {
                 return {
                     name,
+                    id,
                     type: 'Component',
                     fileName: sources[0].fileName,
                 };
@@ -42,7 +40,7 @@ function findComponentsAndProps(definitionById) {
                     name,
                     type: 'Props',
                     fileName: sources[0].fileName,
-                    children: children && children.map((id) => definitionById[id]),
+                    children: (children || []).map((id) => definitionById[id]),
                 };
             }
         })
@@ -58,14 +56,16 @@ function getPropsByComponents(definitionById) {
             if (component && props) {
                 return {
                     component: component.name,
-                    props: props.children,
+                    props: props.children.map(child => ({
+                        ...child, componentId: component.id
+                    })),
                 };
             }
         })
         .values()
         .filter(Boolean)
         .keyBy('component')
-        .mapValues(({ props }) => props || [])
+        .mapValues(({props}) => props || [])
         .value();
 }
 
@@ -76,34 +76,42 @@ function formatDefinition(definitionById, definition) {
     if (!definition) {
         return '';
     }
+
+    // Enumeration.
+    if (definition.kindString === 'Enumeration member') {
+        const parent = definitionById[definition.parentId];
+        return `${parent.name}.${definition.name}`;
+    }
     if (definition.kindString === 'Enumeration') {
         return (definition.children || [])
             .map((child) => definitionById[child])
-            .map(({ name }) => `${definition.name}.${name}`)
+            .map(({name}) => `${definition.name}.${name}`)
             .join(' | ');
     }
+    // Function signature.
     if (definition.signatures) {
-        // Function signature.
         return definition.signatures
             .map((signature) => {
                 const params = (signature.parameters || [])
-                    .map(({ name, type }) => `${name}: ${formatType(definitionById, type)}`)
+                    .map(({name, type}) => `${name}: ${formatType(definitionById, type)}`)
                     .join(', ');
 
                 return `(${params}) => ${formatType(definitionById, signature.type)}`;
             })
             .join(' ');
     }
-    if (definition.kindString === 'Type literal' && definition.children) {
-        // Type literal.
+    // Type literal & Interface.
+    if ((definition.kindString === 'Type literal' || definition.kindString === 'Interface') && definition.children) {
+        const name = definition.kindString === 'Interface' ? `${definition.name} ` : '';
         const children = (definition.children || [])
+            .map((child) => typeof child === 'number' ? definitionById[child] : child)
             .map((child) => `'${child.name}': ${formatType(definitionById, child.type)}`)
             .join('; ');
 
-        return `{${children}}`;
+        return `${name}{${children}}`;
     }
+    // Render type
     if (definition.type) {
-        // Render type
         return formatType(definitionById, definition.type);
     }
 
@@ -123,10 +131,10 @@ function formatType(definitionById, typeDef) {
         case 'intrinsic':
             return typeDef.name;
         case 'reference':
-            const { name, typeArguments, id } = typeDef;
+            const {name, typeArguments, id} = typeDef;
             if (id) {
                 const definition = definitionById[id];
-                if (definition.kindString === 'Enumeration') {
+                if (definition.kindString !== 'Function') {
                     return formatDefinition(definitionById, definition);
                 }
             }
@@ -134,7 +142,7 @@ function formatType(definitionById, typeDef) {
 
             return `${name}${tArgs}`;
         case 'stringLiteral':
-            return typeDef.value;
+            return `'${typeDef.value}'`;
         case 'array':
             return `${convertChild(typeDef.elementType)}[]`;
         case 'intersection':
@@ -165,33 +173,45 @@ function formatDescription(definition) {
 }
 
 /**
+ * Convert a typedoc definition of a component prop into a simple prop description.
+ */
+function convertToSimpleProp(definitionById, prop) {
+    let component = definitionById[prop.componentId];
+    let defaults = lodash.chain(lodash.get(component, 'signatures.0.parameters'))
+        .flatMap(p => p.type.declaration)
+        .filter(Boolean)
+        .flatMap('children')
+        .filter('defaultValue')
+        .map(p => [p.name, p.defaultValue])
+        .value();
+    //console.debug('defaults', JSON.stringify(defaults, null, 2));
+
+    let type = formatDefinition(definitionById, prop);
+    if (!type) return;
+    let required = !lodash.get(prop, 'flags.isOptional', false);
+
+    if (type.includes('undefined')) {
+        required = false;
+        type = type.replace(/(\s+\|?\s+)?undefined(\s+\|?\s+)?/, '');
+    }
+    type = type.replace('false | true', 'boolean');
+
+    return {
+        id: prop.id,
+        name: prop.name,
+        required,
+        type,
+        description: formatDescription(prop),
+    };
+}
+
+/**
  * Format typedoc prop definition into a simple prop
  */
-function convertToSimpleProp(definitionById, propsByComponents) {
-    return lodash.mapValues(propsByComponents, (props) =>
-        props
-            .map((prop) => {
-                let type = formatDefinition(definitionById, prop);
-                if (!type) {
-                    return;
-                }
-                let required = !lodash.get(prop, 'flags.isOptional', false);
-
-                if (type.includes('undefined')) {
-                    required = false;
-                    type = type.replace(/(\s+\|?\s+)?undefined(\s+\|?\s+)?/, '');
-                }
-                type = type.replace('false | true', 'boolean');
-
-                return {
-                    id: prop.id,
-                    name: prop.name,
-                    required,
-                    type,
-                    description: formatDescription(prop),
-                };
-            })
-            .filter(Boolean),
+function convertToSimpleProps(definitionById, propsByComponents) {
+    return lodash.mapValues(
+        propsByComponents,
+        props => props.map(prop => convertToSimpleProp(definitionById, prop)).filter(Boolean)
     );
 }
 
@@ -202,7 +222,7 @@ function convertToSimplePropsByComponent(typeDocDef) {
     const definitionById = indexDefinitionById(typeDocDef);
     const propsByComponents = getPropsByComponents(definitionById);
 
-    return convertToSimpleProp(definitionById, propsByComponents);
+    return convertToSimpleProps(definitionById, propsByComponents);
 }
 
-module.exports = { convertToSimplePropsByComponent };
+module.exports = {convertToSimplePropsByComponent, indexDefinitionById, findComponentsAndProps, convertToSimpleProp};
