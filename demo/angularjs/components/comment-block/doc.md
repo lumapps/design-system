@@ -15,6 +15,6 @@ Use relevant comment block for validated messages as an accepted answer to a que
 
 ## Threaded
 
-Use threaded comment block to show relation between several messages.
+Use threaded comment block to show relation between several messages as replies.
 
 <demo-block component="comment-block" partial="threaded"></demo-block>
