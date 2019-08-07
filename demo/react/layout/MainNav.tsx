@@ -1,12 +1,14 @@
-import React, { ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import React, { ReactElement, ReactNode, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 
+import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from 'LumX';
+import { isEmpty } from 'lodash';
 import { LumXLogo } from '../../assets/images';
 
 /**
  * Defines the type of a navigation item.
  */
-interface INavItem {
+interface Item {
     /**
      * The label of the navigation item.
      */
@@ -14,13 +16,13 @@ interface INavItem {
     /**
      * The optional subnavigation items.
      */
-    children?: INavItem[];
+    children?: Item[];
 }
 
 /**
  * The navigation item tree.
  */
-const NAV_ITEMS: INavItem[] = [
+const ITEMS: Item[] = [
     {
         label: 'Product',
         children: [
@@ -134,46 +136,73 @@ const NAV_ITEMS: INavItem[] = [
     },
 ];
 
-const generateNav = (parentPath: string, navItems: INavItem[]): ReactElement => {
-    return (
-        <ul>
-            {navItems.map(
-                ({ label, children }: INavItem): ReactElement => (
-                    <li key={label}>
-                        {children && children.length > 0 ? (
-                            <>
-                                {label}
-                                {generateNav(`${parentPath}/${label.toLocaleLowerCase()}`, children)}
-                            </>
-                        ) : (
-                            <Link to={`${parentPath}/${label.toLocaleLowerCase()}`}>{label}</Link>
-                        )}
-                    </li>
-                ),
-            )}
-        </ul>
-    );
+const EMPHASIS_BY_LEVEL = {
+    '0': Emphasis.high,
+    '1': Emphasis.medium,
+    '2': Emphasis.low,
 };
+
+const generateNav = (goTo: (path: string) => void, location: string, items: Item[]): ReactElement => {
+    const generateNavItem = (parent: string[], { label, children }: Item): ReactNode => {
+        const path = [...parent, label.toLocaleLowerCase().replace(/ /g, '-')];
+        const slug = '/' + path.join('/');
+
+        const [isOpen, setOpen] = useState(() => location.startsWith(slug));
+
+        const props: Partial<SideNavigationItemProps> = {
+            emphasis: EMPHASIS_BY_LEVEL[parent.length],
+            isSelected: location === slug,
+            isOpen,
+        };
+
+        if (isEmpty(children)) {
+            props.onClick = (): void => goTo(slug);
+        } else {
+            props.onClick = (): void => setOpen(!isOpen);
+        }
+
+        return (
+            <SideNavigationItem key={slug} label={label} {...props}>
+                {(children || []).map((item: Item) => generateNavItem(path, item))}
+            </SideNavigationItem>
+        );
+    };
+
+    return <SideNavigation>{items.map((item: Item) => generateNavItem([], item))}</SideNavigation>;
+};
+
+interface IWithRouterProps {
+    location: any;
+    match: any;
+    history: any;
+}
 
 /**
  * The main navigation component.
  *
  * @return The main navigation component.
  */
-const MainNav: React.FC = (): ReactElement => (
-    <div className="main-nav">
-        <div className="main-nav__wrapper">
-            <div className="main-nav__logo">
-                <img src={LumXLogo} alt="LumX" />
-                <span>
-                    <strong>{'LumApps'}</strong>
-                    {' design system'}
-                </span>
-            </div>
+const MainNav: React.FC<IWithRouterProps> = withRouter(
+    (props: IWithRouterProps): ReactElement => {
+        const { location, history } = props;
+        const goTo = (path: string): void => history.push(path);
 
-            {generateNav('', NAV_ITEMS)}
-        </div>
-    </div>
+        return (
+            <div className="main-nav">
+                <div className="main-nav__wrapper">
+                    <div className="main-nav__logo">
+                        <img src={LumXLogo} alt="LumX" />
+                        <span>
+                            <strong>{'LumApps'}</strong>
+                            {' design system'}
+                        </span>
+                    </div>
+
+                    {generateNav(goTo, location.pathname, ITEMS)}
+                </div>
+            </div>
+        );
+    },
 );
 
 export { MainNav };
