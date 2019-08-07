@@ -1,43 +1,57 @@
-const visit = require('unist-util-visit');
+const { get, partition } = require('lodash');
 
 /**
  * Combine import statements and jsx code into a formatted sample code for documentation.
  */
-const getSourceCode = (importStatement, node) => {
-    const code = `${importStatement}\nconst App = () => (\n${node.value}\n);`;
-
-    return code
+const getSourceCode = (importStatement, code) => {
+    return `${importStatement}\n\nconst App = ${code.trim()};`
         .trim()
-        .replace(/\n/g, '\\n')
-        .replace(/"/g, '\\"');
+        .replace(/\n/g, '\\n');
 };
 
 /**
- * RegExp used to detect and replace demo block tags.
+ * Transform <pre> element with JSX code into a demo block jsx element.
  */
-const RE_DEMO_BLOCK = /<(DemoBlock)(.*?)>/;
+function transformJSXCodeToJSXNode(importStatement, node) {
+    const codeNode = node.children[0];
+    const withThemeSwitcher = Boolean(codeNode.properties.withThemeSwitcher);
+    const code = codeNode.children[0].value;
+    const sourceCode = getSourceCode(importStatement, code);
 
-const insertSourceCode = (sourceCode) => (...[_, tag, props]) => {
-    return `<${tag} ${props.trim()} sourceCode="${sourceCode}">`;
-};
+    node.type = 'jsx';
+    delete node.tagName;
+    delete node.children;
+    node.value = `<DemoBlock withThemeSwitcher={${withThemeSwitcher}} sourceCode={\`${sourceCode}\`}>{${code}}</DemoBlock>`;
+}
+
+const isJSXImport = (node) => node.type === 'import';
+const isPreImport = (node) => node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'import']);
+const isImport = (node) => isJSXImport(node) || isPreImport(node);
+
+const isPreJSXDemo = (node) => node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'jsx']);
+const DEMO_BLOCK_IMPORT = 'import { DemoBlock } from \'LumX/demo/react/layout/DemoBlock\';\n';
 
 /**
  * MDX plugin to extract and insert source code from demo block in MDX documents.
  */
 module.exports = () => {
     return (tree) => {
+        const [importNodes, others] = partition(tree.children, isImport);
         // Accumulate import statements.
         let importStatement = '';
-        visit(tree, 'import', (node) => (importStatement += node.value));
+        importNodes.forEach(node => {
+            const importCode = isJSXImport(node) ? node.value : get(node, ['children', 0, 'children', 0, 'value']);
+            importStatement += importCode;
+        });
+        tree.children = [
+            // Group all imports at the top with demo block import.
+            {type: 'import', value: DEMO_BLOCK_IMPORT + importStatement},
+            ...others
+        ];
 
-        // Extract & Insert source code from demo blocks
-        visit(tree, 'jsx', (node) => {
-            if (node.value.match(RE_DEMO_BLOCK)) {
-                const sourceCode = getSourceCode(importStatement, node);
-
-                // Replace demo block tag to insert the source code in a its props
-                node.value = node.value.replace(RE_DEMO_BLOCK, insertSourceCode(sourceCode));
-            }
+        // Transform JSX <pre> code demo in demo blocks.
+        tree.children.filter(isPreJSXDemo).forEach(node => {
+            transformJSXCodeToJSXNode(importStatement, node);
         });
     };
 };
