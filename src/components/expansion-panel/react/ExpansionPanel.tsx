@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { Button, ButtonEmphasis, ButtonVariant, ColorPalette, DragHandle, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { Callback, IGenericProps, getRootClassName, partitionMulti } from 'LumX/core/react/utils';
+import { Callback, IGenericProps, getRootClassName, isComponent, partitionMulti } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 import { castArray, get, isEmpty } from 'lodash';
 
@@ -62,9 +62,9 @@ const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
     variant: ExpansionPanelVariant.boxed,
 };
 
-const isDragHandle = (n: ReactNode): boolean => get(n, 'type.displayName') === DragHandle.displayName;
-const isHeader = (n: ReactNode): boolean => get(n, 'type') === 'header';
-const isFooter = (n: ReactNode): boolean => get(n, 'type') === 'footer';
+const isDragHandle = isComponent(DragHandle);
+const isHeader = isComponent('header');
+const isFooter = isComponent('footer');
 
 /////////////////////////////
 

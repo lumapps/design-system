@@ -51,6 +51,12 @@ enum Orientation {
     vertical = 'vertical',
 }
 
+enum Emphasis {
+    low = 'low',
+    medium = 'medium',
+    high = 'high',
+}
+
 /////////////////////////////
 
-export { Alignment, ComplexPropDefault, Color, ColorPalette, Theme, Size, Orientation };
+export { Alignment, ComplexPropDefault, Color, ColorPalette, Theme, Size, Orientation, Emphasis };

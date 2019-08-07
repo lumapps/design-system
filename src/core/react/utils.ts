@@ -399,6 +399,22 @@ function partitionMulti<T>(elements: T[], predicates: Array<Predicate<T>>): T[][
     );
 }
 
+/**
+ * Create a predicate function that checks if a ReactNode is a react element from the given component.
+ *
+ * @param  component React function component or the component name
+ * @return predicate returning true if value is instance of the component
+ */
+const isComponent = <C>(component: React.FC<C> | string): Predicate<ReactNode> => (instance: ReactNode): boolean => {
+    const instanceTypes = ['type', 'type.displayName', 'props.mdxType'];
+    const componentName = typeof component === 'string' ? component : component.displayName;
+
+    return (
+        get(instance, '$$typeof') === Symbol.for('react.element') &&
+        instanceTypes.some((type: string): boolean => get(instance, type) === componentName)
+    );
+};
+
 /////////////////////////////
 
 export {
@@ -416,4 +432,6 @@ export {
     validateComponent,
     Callback,
     partitionMulti,
+    Predicate,
+    isComponent,
 };

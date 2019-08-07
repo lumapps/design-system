@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { Color, ColorPalette, Icon, IconButton, Size, Theme } from 'LumX';
-import { ComplexPropDefault } from 'LumX/components';
+import { ComplexPropDefault, Emphasis } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, Omit, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -17,11 +17,7 @@ import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
 /**
  * The authorized values for the `emphasis` prop.
  */
-enum ButtonEmphasis {
-    low = 'low',
-    medium = 'medium',
-    high = 'high',
-}
+const ButtonEmphasis = Emphasis;
 
 /**
  * The authorized values for the `size` prop.
@@ -60,7 +56,7 @@ interface IButtonProps extends IGenericProps {
     /**
      * The emphasis.
      */
-    emphasis?: ButtonEmphasis;
+    emphasis?: Emphasis;
 
     /**
      * The icon that comes before the label.

@@ -2,7 +2,7 @@ import 'focus-visible';
 
 import './core/react';
 
-export { Alignment, Orientation, Color, ColorPalette, Size, Theme } from './components';
+export * from './components';
 
 export { Avatar, AvatarProps } from './components/avatar/react/Avatar';
 
@@ -96,3 +96,7 @@ export {
 export { Grid } from 'LumX/components/grid/react/Grid';
 
 export { GridItem } from 'LumX/components/grid-item/react/GridItem';
+
+export { SideNavigation, SideNavigationProps } from 'LumX/components/side-navigation/react/SideNavigation';
+
+export { SideNavigationItem, SideNavigationItemProps } from 'LumX/components/side-navigation/react/SideNavigationItem';
