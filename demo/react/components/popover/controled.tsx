@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement, useRef, useState } from 'react';
 
-import { Button, ButtonEmphasis, Popover, Size } from 'LumX';
+import { Button, ButtonEmphasis, Placement, Popover, Size } from 'LumX';
 
 /////////////////////////////
 
@@ -43,6 +43,7 @@ const demoPopoverHolderStyle: CSSProperties = {
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
     const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
 
     /**
      * Switch tooltip visibility.
@@ -50,6 +51,13 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const toggleTooltipDisplay = (): void => {
         setTooltipDisplayed(!isTooltipDisplayed);
     };
+
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        Placement.RIGHT_END,
+        anchorRef,
+        popoverRef,
+        isTooltipDisplayed,
+    );
 
     return (
         <>
@@ -63,7 +71,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
                     </div>
                 </div>
             </div>
-            <Popover anchorRef={anchorRef} isVisible={isTooltipDisplayed}>
+            <Popover popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
                 <div style={demoPopperStyle}>
                     {
                         'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '

@@ -71,6 +71,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [isCardDisplayed, setCardDisplayed] = useState(false);
     let delayer: NodeJS.Timeout | null;
     const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
 
     /**
      * Switch tooltip visibility
@@ -83,13 +84,21 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
         }
 
         if (!newVisibleState) {
-            delayer = setTimeout(() => setCardDisplayed(false), 500);
+            delayer = setTimeout(() => setCardDisplayed(false), 0);
         } else {
             setCardDisplayed(true);
         }
     };
 
     const offsets: Offsets = { vertical: 20 };
+
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        Placement.TOP_START,
+        anchorRef,
+        popoverRef,
+        isCardDisplayed,
+        offsets,
+    );
 
     return (
         <>
@@ -106,7 +115,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                     size={Size.m}
                 />
             </div>
-            <Popover anchorRef={anchorRef} isVisible={isCardDisplayed} offset={offsets} placement={Placement.TOP_START}>
+            <Popover popoverRef={popoverRef} isVisible={isVisible} popoverRect={computedPosition}>
                 <div
                     style={{
                         display: 'flex',

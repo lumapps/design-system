@@ -1,7 +1,6 @@
 import React, { CSSProperties, ReactElement, useRef } from 'react';
 
 import { Placement, Popover } from 'LumX';
-import { useComputePosition } from 'LumX/core/react/hooks';
 
 /////////////////////////////
 
@@ -52,9 +51,9 @@ const demoPopoverHolderStyle: CSSProperties = {
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const anchorRef = useRef(null);
-
+    const popoverRef = useRef(null);
     // Pass a function to update the position state.
-    useComputePosition();
+    const { computedPosition, isVisible } = Popover.useComputePosition(Placement.AUTO, anchorRef, popoverRef, true);
 
     return (
         <>
@@ -67,7 +66,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
             </div>
-            <Popover anchorRef={anchorRef} isVisible={true} placement={Placement.RIGHT}>
+            <Popover popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
                 <div style={demoPopperStyle}>{'This element is the popper and is flying above the UI.'}</div>
             </Popover>
         </>

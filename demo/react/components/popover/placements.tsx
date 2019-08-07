@@ -34,6 +34,7 @@ const demoPopperStyle: CSSProperties = {
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
 
     const [selectedPlacement, setSelectedPlacement] = useState(Placement.AUTO);
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
@@ -55,12 +56,22 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
         Placement.TOP_START,
     ];
 
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        selectedPlacement,
+        anchorRef,
+        popoverRef,
+        isTooltipDisplayed,
+    );
+
     function toggleTooltipDisplay(newVisibleState: boolean): void {
         setTooltipDisplayed(newVisibleState);
     }
 
     return (
-        <div onMouseOver={(): void => toggleTooltipDisplay(true)} onMouseOut={(): void => toggleTooltipDisplay(false)}>
+        <div
+            onMouseEnter={(): void => toggleTooltipDisplay(true)}
+            onMouseLeave={(): void => toggleTooltipDisplay(false)}
+        >
             <select
                 onChange={(evt: React.ChangeEvent<HTMLSelectElement>): void =>
                     setSelectedPlacement(evt.target.value as Placement)
@@ -75,7 +86,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
                     {'This element will act as the anchor'}
                 </div>
 
-                <Popover anchorRef={anchorRef} isVisible={isTooltipDisplayed} placement={selectedPlacement}>
+                <Popover popoverRect={computedPosition} isVisible={isVisible} popoverRef={popoverRef}>
                     <div style={demoPopperStyle}>
                         {
                             'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '

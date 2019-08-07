@@ -44,6 +44,17 @@ const demoPopoverHolderStyle: CSSProperties = {
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
     const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
+
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        Placement.BOTTOM_END,
+        anchorRef,
+        popoverRef,
+        isTooltipDisplayed,
+        { horizontal: 0, vertical: 0 },
+        true,
+    );
+
     /**
      * Switch tooltip visibility
      * @param newVisibleState Tooltip visibility
@@ -58,15 +69,15 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
                 <div style={demoPopoverHolderStyle}>
                     <div
                         ref={anchorRef}
-                        style={{ ...demoAnchorStyle, width: 230 }}
-                        onMouseOver={(): void => toggleTooltipDisplay(true)}
-                        onMouseOut={(): void => toggleTooltipDisplay(false)}
+                        style={{ ...demoAnchorStyle, width: 150 }}
+                        onMouseEnter={(): void => toggleTooltipDisplay(true)}
+                        onMouseLeave={(): void => toggleTooltipDisplay(false)}
                     >
                         {'This element will act as the anchor'}
                     </div>
                 </div>
             </div>
-            <Popover anchorRef={anchorRef} hasParentWidth isVisible={isTooltipDisplayed} placement={Placement.BOTTOM}>
+            <Popover popoverRef={popoverRef} isVisible={isVisible} popoverRect={computedPosition}>
                 <div style={demoPopperStyle}>
                     {
                         'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '

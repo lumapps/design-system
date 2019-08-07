@@ -57,6 +57,14 @@ const offsets: Offsets = { horizontal: -60, vertical: 30 };
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        Placement.RIGHT,
+        anchorRef,
+        popoverRef,
+        true,
+        offsets,
+    );
 
     return (
         <>
@@ -69,7 +77,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
             </div>
-            <Popover anchorRef={anchorRef} placement={Placement.RIGHT} offset={offsets} isVisible>
+            <Popover popoverRef={popoverRef} popoverRect={computedPosition} isVisible={isVisible}>
                 <div style={demoPopperStyle}>
                     {"This popper is placed using a 'vertical' and a 'horizontal' offset"}
                 </div>
