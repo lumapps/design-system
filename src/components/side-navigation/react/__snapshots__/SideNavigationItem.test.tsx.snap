@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SideNavigationItem> Snapshots and structure should render correctly 1`] = `
+<li
+  className="lumx-side-navigation-item lumx-side-navigation-item--emphasis-high"
+>
+  <a
+    className="lumx-side-navigation-item__link"
+    tabIndex={0}
+  >
+    <span />
+  </a>
+</li>
+`;
