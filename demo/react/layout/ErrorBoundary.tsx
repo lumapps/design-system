@@ -41,7 +41,7 @@ class ErrorBoundary extends React.Component<{}, IState> {
         if (hasError) {
             return (
                 <div className="main">
-                    <h1 className="mb++">Something went wrong with this demo</h1>
+                    <h1 className="mb++">Something went wrong with this page</h1>
 
                     {error && <pre style={{ color: 'red' }}>{error.toString()}</pre>}
                 </div>

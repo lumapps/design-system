@@ -1,17 +1,17 @@
 import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow } from 'LumX';
 import React, { ReactElement } from 'react';
 
-export const PropTable: React.FC<IPropTableProps> = ({ propertyList }: IPropTableProps): ReactElement => {
+const PropTable: React.FC<IPropTableProps> = ({ propertyList }: IPropTableProps): ReactElement => {
     return (
         <Table>
             <TableHeader>
                 <TableRow>
                     <TableCell variant={TableCellVariant.head}>Name</TableCell>
-                    <TableCell variant={TableCellVariant.head} width="100px">
+                    <TableCell variant={TableCellVariant.head} width="80px">
                         Required
                     </TableCell>
                     <TableCell variant={TableCellVariant.head}>Type</TableCell>
-                    <TableCell variant={TableCellVariant.head} width="40%">
+                    <TableCell variant={TableCellVariant.head}>
                         Description
                     </TableCell>
                 </TableRow>
@@ -45,3 +45,5 @@ interface IProperty {
 interface IPropTableProps {
     propertyList: IProperty[];
 }
+
+export { PropTable, IProperty }

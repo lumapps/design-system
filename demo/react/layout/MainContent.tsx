@@ -1,7 +1,7 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactChild, ReactElement, ReactNode, useEffect, useState } from 'react';
 
-import { capitalize, last } from 'lodash';
-import isEmpty from 'lodash/isEmpty';
+import { MDXProvider } from '@mdx-js/react';
+import { capitalize } from 'lodash';
 
 import { PropTable } from 'LumX/demo/react/layout/PropTable';
 
@@ -13,16 +13,67 @@ import { propsByComponent } from 'props-loader!';
  * @param path the content path.
  * @return the component name.
  */
-function toComponentName(path: string): string | undefined {
-    const comp = last(path.split('/'));
-    if (comp) {
-        return comp
-            .split(' ')
+function getComponentName(path: string): string | undefined {
+    const RE_COMPONENT_PATH = /components\/(.*)/;
+    const matches = path.match(RE_COMPONENT_PATH);
+    if (matches) {
+        const [, component] = matches;
+        return component
+            .split('-')
             .map(capitalize)
-            .join();
+            .join('');
     }
     return undefined;
 }
+
+const mdxComponents = {
+    // This prevents MDX from wrapping components in <MDXComponent>.
+    wrapper: (elem: { children: ReactChild }): ReactNode => {
+        return elem.children;
+    },
+};
+
+const renderDemo = (path: string, demo: ReactElement | null | undefined): ReactElement => {
+    return !demo ? (
+        demo === undefined ? (
+            <span>
+                Loading content for <code>{path}</code>...
+            </span>
+        ) : (
+            <span>
+                Could not load content for <code>{path}</code>
+            </span>
+        )
+    ) : (
+        <MDXProvider components={mdxComponents}>{demo}</MDXProvider>
+    );
+};
+
+const renderComponentProperties = (componentName: string): ReactElement => {
+    const properties = propsByComponent[componentName];
+    return properties ? (
+        <PropTable propertyList={properties} />
+    ) : (
+        <span>Could not load properties for component {componentName}</span>
+    );
+};
+
+const useLoadContent = (path: string): ReactElement | null | undefined => {
+    const [content, setContent] = useState<ReactElement | null>();
+
+    useEffect((): void => {
+        (async (): Promise<void> => {
+            try {
+                const loadedContent = await import(/* webpackMode: "eager" */ `../doc/${path.replace(' ', '-')}`);
+                setContent(React.createElement(loadedContent.default, {}, null));
+            } catch (exception) {
+                setContent(null);
+            }
+        })();
+    }, [path]);
+
+    return content;
+};
 
 /**
  * The main content component.
@@ -30,30 +81,20 @@ function toComponentName(path: string): string | undefined {
  * @return The main content component.
  */
 const MainContent = ({ path }: { path: string }): ReactElement => {
-    const [demo, setDemo] = useState<ReactElement>();
+    const demo = useLoadContent(path);
 
-    useEffect((): void => {
-        (async (): Promise<void> => {
-            try {
-                const loadedDemo = await import(/* webpackMode: "eager" */ `../doc/${path.replace(' ', '-')}`);
-                setDemo(React.createElement(loadedDemo.default, {}, null));
-            } catch (exception) {
-                setDemo(undefined);
-            }
-        })();
-    }, [path]);
-
-    if (demo === undefined || isEmpty(demo)) {
-        return <span>Loading demo for {path}...</span>;
-    }
-
-    const componentName = toComponentName(path);
+    const componentName = getComponentName(path);
 
     return (
         <>
-            {demo}
-            <h1 className="lumx-spacing-margin-top-huge">Properties</h1>
-            <PropTable propertyList={propsByComponent[componentName]} />
+            {renderDemo(path, demo)}
+
+            {componentName && (
+                <>
+                    <h1 className="lumx-spacing-margin-top-huge">Properties</h1>
+                    {renderComponentProperties(componentName)}
+                </>
+            )}
         </>
     );
 };
