@@ -1,0 +1,25 @@
+```javascript import
+import { SideNavigationItem, SideNavigation, Emphasis } from 'LumX';
+import { mdiEmail } from 'LumX/icons';
+```
+
+# Side navigation
+
+## Default
+
+```javascript jsx
+() => <>
+    <SideNavigation>
+           <SideNavigationItem label="Level 0"/>
+           <SideNavigationItem label="Level 0 (open)" isOpen>
+               <SideNavigationItem label="Level 1 (open)" emphasis={Emphasis.medium} isOpen>
+                   <SideNavigationItem label="Level 2 (selected & with icon)" icon={mdiEmail} emphasis={Emphasis.low} isSelected/>
+                   <SideNavigationItem label="Level 2 (with icon)" icon={mdiEmail} emphasis={Emphasis.low}/>
+               </SideNavigationItem>
+               <SideNavigationItem label="Level 1 (closed)" emphasis={Emphasis.medium}>
+                   <SideNavigationItem label="Level 2" emphasis={Emphasis.low}/>
+               </SideNavigationItem>
+           </SideNavigationItem>
+    </SideNavigation>
+</>
+```
