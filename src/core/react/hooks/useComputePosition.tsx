@@ -5,6 +5,38 @@ import { ElementPosition, Offsets, Placement } from 'LumX/components/popover/rea
 import { calculatePopoverPlacement } from '../utils/calculatePopoverPlacement';
 import { isInViewPort } from '../utils/isInViewPort';
 
+const MATCHING_PLACEMENT = {
+    [Placement.AUTO]: {
+        bottom: Placement.BOTTOM,
+        top: Placement.TOP,
+    },
+    [Placement.AUTO_START]: {
+        bottom: Placement.BOTTOM_START,
+        top: Placement.TOP_START,
+    },
+    [Placement.AUTO_END]: {
+        bottom: Placement.BOTTOM_END,
+        top: Placement.TOP_END,
+    },
+};
+
+type useComputePositionType = (
+    placement: Placement,
+    anchorRef: React.RefObject<HTMLElement>,
+    popoverRef: React.RefObject<HTMLDivElement>,
+    isVisible: boolean,
+    offset?: Offsets,
+    hasParentWidth?: boolean,
+    hasParentHeight?: boolean,
+    // tslint:disable-next-line: no-any
+    dependencies?: any[],
+    callback?: (position: ElementPosition) => void,
+) => {
+    computedPosition: ElementPosition;
+    isVisible: boolean;
+};
+
+// tslint:disable-next-line: valid-jsdoc
 /**
  * Calculate the position of the popover relative to the anchor element.
  *
@@ -17,36 +49,48 @@ import { isInViewPort } from '../utils/isInViewPort';
  * @param [dependencies] Dependencies of hook.
  * @return Position of the popover relative to the anchor element.
  */
-const useComputePosition: (
-    callback: (position: ElementPosition) => void,
+const useComputePosition: useComputePositionType = (
     placement: Placement,
     anchorRef: React.RefObject<HTMLElement>,
     popoverRef: React.RefObject<HTMLDivElement>,
-    offset?: Offsets,
-    hasParentWidth?: boolean,
-    hasParentHeight?: boolean,
-    // Tslint:disable-next-line: no-any.
-    dependencies?: any[],
-) => ElementPosition = (
-    callback: (position: ElementPosition) => void,
-    placement: Placement,
-    anchorRef: React.RefObject<HTMLElement>,
-    popoverRef: React.RefObject<HTMLDivElement>,
+    isVisible: boolean,
     offset: Offsets = { horizontal: 0, vertical: 0 },
     hasParentWidth?: boolean,
     hasParentHeight?: boolean,
-    // Tslint:disable-next-line: no-any.
+    // tslint:disable-next-line: no-any
     dependencies: any[] = [placement, anchorRef, popoverRef],
-): void => {
+    callback?: (position: ElementPosition) => void,
+): {
+    computedPosition: ElementPosition;
+    isVisible: boolean;
+} => {
+    // Handle mouse over the popover to prevent it from closing from outside (infinite mouse event bug).
+    const [isMouseEntered, setIsMouseEntered] = useState(false);
+    const [isAnchorInViewport, setIsAnchorInViewport] = useState(false);
+    const defaultPosition = {
+        x: 0,
+        y: 0,
+    };
+
+    const [computedPosition, setComputedPosition] = useState(defaultPosition);
+
     const computePosition = (): void => {
-        if (!anchorRef || !anchorRef.current || !popoverRef || !popoverRef.current) {
+        const newIsAnchorInViewPort = !!(
+            anchorRef &&
+            anchorRef.current &&
+            isInViewPort(anchorRef.current.getBoundingClientRect(), 'partial')
+        );
+        setIsAnchorInViewport(newIsAnchorInViewPort);
+
+        if (!anchorRef || !anchorRef.current || !popoverRef || !popoverRef.current || !newIsAnchorInViewPort) {
+            setComputedPosition(defaultPosition);
             return;
         }
 
-        const boundingAnchor = anchorRef.current!.getBoundingClientRect();
-        const boundingPopover = popoverRef.current!.getBoundingClientRect();
+        const boundingAnchor = anchorRef.current.getBoundingClientRect();
+        const boundingPopover = popoverRef.current.getBoundingClientRect();
         const { horizontal = 0, vertical = 0 } = offset;
-        const newPosition: ElementPosition = {
+        let newPosition: ElementPosition = {
             height: hasParentHeight ? boundingAnchor.height : boundingPopover.height,
             width: hasParentWidth ? boundingAnchor.width : boundingPopover.width,
             x: horizontal,
@@ -55,25 +99,81 @@ const useComputePosition: (
 
         if (placement === Placement.AUTO || placement === Placement.AUTO_END || placement === Placement.AUTO_START) {
             // Try TOP placement.
-            const { x, y } = calculatePopoverPlacement(Placement.TOP, boundingAnchor, boundingPopover);
 
-            console.log(
-                isInViewPort(
-                    {
-                        width: newPosition.width!,
-                        height: newPosition.height!,
-                        x: newPosition.x + x,
-                        y: newPosition.y + y,
-                    },
-                    'full',
-                ),
+            const { x: bottomX, y: bottomY } = calculatePopoverPlacement(
+                MATCHING_PLACEMENT[placement].bottom,
+                boundingAnchor,
+                boundingPopover,
             );
+
+            const bottomPosition = {
+                ...newPosition,
+                bottom: newPosition.y + bottomY + Number(newPosition.height),
+                left: newPosition.x + bottomX,
+                right: newPosition.x + bottomX + Number(newPosition.width),
+                top: newPosition.y + bottomY,
+                x: newPosition.x + bottomX,
+                y: newPosition.y + bottomY,
+            };
+
+            const canBeBottom = isInViewPort(
+                {
+                    ...boundingPopover,
+                    ...bottomPosition,
+                },
+                'full',
+            );
+
+            if (canBeBottom) {
+                newPosition = bottomPosition;
+            } else {
+                const { x: topX, y: topY } = calculatePopoverPlacement(
+                    MATCHING_PLACEMENT[placement].top,
+                    boundingAnchor,
+                    boundingPopover,
+                );
+                const topPosition = { ...newPosition, x: newPosition.x + topX, y: newPosition.y + topY };
+                newPosition = topPosition;
+            }
         } else {
             const { x, y } = calculatePopoverPlacement(placement, boundingAnchor, boundingPopover);
 
-            callback({ ...newPosition, x: newPosition.x + x, y: newPosition.y + y });
+            newPosition = { ...newPosition, x: newPosition.x + x, y: newPosition.y + y };
         }
+        if (callback) {
+            callback(newPosition);
+        }
+
+        setComputedPosition(newPosition);
     };
+
+    /**
+     * Handle mouse entering the popover.
+     */
+    const handleMouseEnter = (): void => {
+        setIsMouseEntered(true);
+    };
+
+    /**
+     * Handle mouse leaving the popover.
+     */
+    const handleMouseLeave = (): void => {
+        setIsMouseEntered(false);
+    };
+
+    useEffect(() => {
+        if (popoverRef && popoverRef.current && (isVisible || isMouseEntered)) {
+            popoverRef.current!.addEventListener('mouseenter', handleMouseEnter);
+            popoverRef.current!.addEventListener('mouseleave', handleMouseLeave);
+        }
+
+        return (): void => {
+            if (popoverRef && popoverRef.current) {
+                popoverRef.current!.removeEventListener('mouseenter', handleMouseEnter);
+                popoverRef.current!.removeEventListener('mouseleave', handleMouseLeave);
+            }
+        };
+    }, [isAnchorInViewport, isVisible, isMouseEntered, handleMouseEnter, handleMouseLeave, popoverRef]);
 
     useEffect(() => {
         window.addEventListener('scroll', computePosition, true);
@@ -85,7 +185,9 @@ const useComputePosition: (
             window.removeEventListener('scroll', computePosition, true);
             window.removeEventListener('resize', computePosition);
         };
-    }, [computePosition]);
+    }, [...dependencies, isAnchorInViewport, isVisible]);
+
+    return { computedPosition, isVisible: (isVisible && isAnchorInViewport) || isMouseEntered };
 };
 
-export { useComputePosition };
+export { useComputePosition, useComputePositionType };

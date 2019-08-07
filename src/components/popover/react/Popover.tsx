@@ -1,13 +1,12 @@
-import React, { CSSProperties, ReactChild, ReactElement, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, ReactChild, ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { useComputePosition } from 'LumX/core/react/hooks';
+import { useComputePosition, useComputePositionType } from 'LumX/core/react/hooks';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { isInViewPort } from 'LumX/core/react/utils/isInViewPort';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /**
@@ -61,16 +60,10 @@ type ElementPosition = IElementPosition;
  * Defines the props of the component.
  */
 interface IPopoverProps extends IGenericProps {
-    /* The reference element that will be used as the anchor. */
-    anchorRef: React.RefObject<HTMLElement>;
     /* Children element displayed inside popover. */
     children: ReactChild;
     /* How high the component is flying */
     elevation?: number;
-    /* Force the popper width to match the anchor's. */
-    hasParentWidth?: boolean;
-    /* Vertical and/or horizontal offsets that will be applied to the popper position. */
-    offset?: Offsets;
     /* Should the popper be displayed ? */
     isVisible?: boolean | (() => boolean);
     /* The prefered popover location against the anchor. */
@@ -110,80 +103,37 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 };
 
 /////////////////////////////
-
+interface IPopover {
+    useComputePosition: useComputePositionType;
+}
 /**
  * Popover.
  *
  * @return The component.
  */
-const Popover: React.FC<PopoverProps> = ({
-    anchorRef,
+const Popover: React.FC<PopoverProps> & IPopover = ({
+    popoverRect = {},
+    popoverRef,
     children,
     className = '',
     elevation = DEFAULT_PROPS.elevation,
     isVisible,
-    hasParentWidth,
-    offset,
-    placement = DEFAULT_PROPS.placement,
     ...props
 }: PopoverProps): ReactElement | null => {
-    if (!anchorRef || !anchorRef.current) {
+    if (!isVisible && popoverRef && popoverRef.current) {
         return null;
     }
 
-    // Handle mouse over the popover to prevent it from closing from outside (infinite mouse event bug).
-    const [isMouseEntered, setIsMouseEntered] = useState(false);
-
-    const isAnchorInViewport = isInViewPort(anchorRef.current.getBoundingClientRect(), 'partial');
-
-    const popoverRef: React.RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
-
-    const { height, width, x, y }: ElementPosition = useComputePosition(
-        placement!,
-        anchorRef,
-        popoverRef,
-        offset,
-        hasParentWidth,
-        false,
-        [placement, anchorRef, popoverRef, isVisible, isMouseEntered],
-    );
-
     const cssPopover: CSSProperties = {
-        display: isAnchorInViewport && (isVisible || isMouseEntered) ? 'block' : 'none',
-        height: height ? `${height}px` : 'auto',
+        display: isVisible ? 'block' : 'none',
+        height: popoverRect.height ? `${popoverRect.height}px` : 'auto',
         left: 0,
         position: 'absolute',
         top: 0,
-        transform: `translate(${x}px, ${y}px)`,
-        width: width ? `${width}px` : 'auto',
+        transform: `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
+        width: popoverRect.width ? `${popoverRect.width}px` : 'auto',
         zIndex: 9999,
     };
-
-    /**
-     * Handle mouse entering the popover.
-     */
-    const handleMouseEnter = (): void => {
-        setIsMouseEntered(true);
-    };
-
-    /**
-     * Handle mouse leaving the popover.
-     */
-    const handleMouseLeave = (): void => {
-        setIsMouseEntered(false);
-    };
-
-    useEffect(() => {
-        if (isVisible || isMouseEntered) {
-            popoverRef.current!.addEventListener('mouseenter', handleMouseEnter);
-            popoverRef.current!.addEventListener('mouseleave', handleMouseLeave);
-        }
-
-        return (): void => {
-            popoverRef.current!.removeEventListener('mouseenter', handleMouseEnter);
-            popoverRef.current!.removeEventListener('mouseleave', handleMouseLeave);
-        };
-    }, [isAnchorInViewport, isVisible, isMouseEntered, handleMouseEnter, handleMouseLeave]);
 
     return createPortal(
         <div
@@ -194,7 +144,6 @@ const Popover: React.FC<PopoverProps> = ({
             )}
             {...props}
             style={cssPopover}
-            x-placement={placement}
         >
             <div className={`${CLASSNAME}__wrapper`}>{children}</div>
         </div>,
@@ -202,6 +151,7 @@ const Popover: React.FC<PopoverProps> = ({
     );
 };
 Popover.displayName = COMPONENT_NAME;
+Popover.useComputePosition = useComputePosition;
 
 /////////////////////////////
 

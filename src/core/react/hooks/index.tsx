@@ -1,5 +1,5 @@
 export { useClickAway } from './useClickAway';
 
-export { useComputePosition } from './useComputePosition';
+export { useComputePosition, useComputePositionType } from './useComputePosition';
 
 export { useInterval } from './useInterval';

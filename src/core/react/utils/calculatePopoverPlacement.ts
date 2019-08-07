@@ -8,7 +8,6 @@ const calculatePopoverPlacement = (placement: Placement, anchor: ClientRect, pop
     const { width: widthPopover, height: heightPopover }: ClientRect | DOMRect = popover;
     let x = 0;
     let y = 0;
-
     switch (verticalPlacement) {
         case 'top':
             y += top - heightPopover;
@@ -20,7 +19,6 @@ const calculatePopoverPlacement = (placement: Placement, anchor: ClientRect, pop
                     break;
                 case 'end':
                     x += left + widthAnchor - widthPopover;
-
                     break;
 
                 default:
