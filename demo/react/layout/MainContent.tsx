@@ -15,6 +15,9 @@ import { propsByComponent } from 'props-loader!';
  */
 function getComponentName(path: string): string | undefined {
     const RE_COMPONENT_PATH = /components\/(.*)/;
+    if (!path) {
+        return undefined;
+    }
     const matches = path.match(RE_COMPONENT_PATH);
     if (matches) {
         const [, component] = matches;
