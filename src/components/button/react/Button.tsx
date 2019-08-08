@@ -39,7 +39,7 @@ enum ButtonVariant {
  */
 interface IButtonProps extends IGenericProps {
     /**
-     * Button reference to handle focus, ...
+     * Button reference to handle focus.
      */
     buttonRef?: React.RefObject<ButtonRoot>;
 

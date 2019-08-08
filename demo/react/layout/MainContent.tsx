@@ -64,7 +64,7 @@ const useLoadContent = (path: string): ReactElement | null | undefined => {
     useEffect((): void => {
         (async (): Promise<void> => {
             try {
-                const loadedContent = await import(/* webpackMode: "eager" */ `../doc/${path.replace(' ', '-')}`);
+                const loadedContent = await import(/* webpackMode: "eager" */ `../doc/${path}`);
                 setContent(React.createElement(loadedContent.default, {}, null));
             } catch (exception) {
                 setContent(null);
