@@ -106,6 +106,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.datepicker', {
+            url: 'datepicker',
+            views: {
+                'main@': {
+                    controller: 'DemoDatepickerController',
+                    controllerAs: 'vm',
+                    template: require('./components/datepicker/demo.html'),
+                },
+            },
+        })
         .state('app.dialog', {
             url: 'dialog',
             views: {
@@ -397,6 +407,7 @@ require('./components/button/controller.js');
 require('./components/checkbox/controller.js');
 require('./components/chip/controller.js');
 require('./components/comment-block/controller.js');
+require('./components/datepicker/controller.js');
 require('./components/dialog/controller.js');
 require('./components/dropdown/controller.js');
 require('./components/expansion-panel/controller.js');
