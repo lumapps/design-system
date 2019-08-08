@@ -4,7 +4,7 @@ const { get, partition } = require('lodash');
  * Combine import statements and jsx code into a formatted sample code for documentation.
  */
 const getSourceCode = (importStatement, code) => {
-    return `${importStatement}\nconst App = ${code.trim()};`.trim().replace(/\n/g, '\\n');
+    return `${importStatement}\nconst App = ${code.trim()}`.trim().replace(/\n/g, '\\n');
 };
 
 /**
@@ -20,7 +20,7 @@ function transformJSXCodeToJSXNode(importStatement, node) {
     node.type = 'jsx';
     delete node.tagName;
     delete node.children;
-    node.value = `<DemoBlock withThemeSwitcher={${withThemeSwitcher}} disableGrid={${disableGrid}} sourceCode={\`${sourceCode}\`}>{${code}}</DemoBlock>`;
+    node.value = `<DemoBlock withThemeSwitcher={${withThemeSwitcher}} disableGrid={${disableGrid}} sourceCode={\`${sourceCode}\`}>{${code.trim().replace(/;$/, '')}}</DemoBlock>`;
 }
 
 const isJSXImport = (node) => node.type === 'import';
