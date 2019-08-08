@@ -11,12 +11,14 @@ type ThemeConsumer = (theme: Theme) => ReactChild;
 
 interface IDemoBlockProps {
     children: ThemeConsumer;
+    disableGrid: boolean;
     withThemeSwitcher: boolean;
     sourceCode: string;
 }
 
 const DemoBlock: React.FC<IDemoBlockProps> = ({
     children,
+    disableGrid = false,
     withThemeSwitcher = false,
     sourceCode,
 }: IDemoBlockProps): ReactElement => {
@@ -30,7 +32,7 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
     return (
         <div className="demo-block">
             <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-theme-background-dark-N')}>
-                <div className="demo-grid">{content}</div>
+                <div className={disableGrid ? '' : 'demo-grid'}>{content}</div>
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">
@@ -50,7 +52,7 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
 
             {showCode && sourceCode && (
                 <div className="demo-block__code">
-                    <Highlight className="javsascript jsx">{sourceCode.replace(/\\n/g, '\n')}</Highlight>
+                    <Highlight className="javascript jsx">{sourceCode.replace(/\\n/g, '\n')}</Highlight>
                 </div>
             )}
         </div>

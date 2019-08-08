@@ -1,23 +1,33 @@
+import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from 'LumX';
+import { LumXLogo } from 'LumX/demo/assets/images';
+import { castArray, isEmpty } from 'lodash';
 import React, { ReactElement, ReactNode, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-
-import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from 'LumX';
-import { isEmpty } from 'lodash';
-import { LumXLogo } from '../../assets/images';
 
 /**
  * Defines the type of a navigation item.
  */
-interface Item {
-    /**
-     * The label of the navigation item.
-     */
-    label: string;
-    /**
-     * The optional subnavigation items.
-     */
-    children?: Item[];
-}
+type Item =
+    | {
+          /**
+           * The label of the navigation item.
+           */
+          label: string;
+          /**
+           * The optional subnavigation items.
+           */
+          children?: Item[];
+      }
+    | string;
+
+/**
+ * Transform space separated string to a slug.
+ * @param  s a string
+ * @return slug string
+ */
+const spaceToSlug = (s: string): string => {
+    return s.toLocaleLowerCase().replace(' ', '-');
+};
 
 /**
  * The navigation item tree.
@@ -28,102 +38,39 @@ const ITEMS: Item[] = [
         children: [
             {
                 label: 'Foundations',
-                children: [
-                    {
-                        label: 'Colors',
-                    },
-                    {
-                        label: 'Typography',
-                    },
-                ],
+                children: ['Colors', 'Typography'],
             },
             {
                 label: 'Components',
                 children: [
-                    {
-                        label: 'Avatar',
-                    },
-                    {
-                        label: 'Button',
-                    },
-                    {
-                        label: 'Checkbox',
-                    },
-                    {
-                        label: 'Chip',
-                    },
-                    {
-                        label: 'Comment block',
-                    },
-                    {
-                        label: 'Dialog',
-                    },
-                    {
-                        label: 'Dropdown',
-                    },
-                    {
-                        label: 'Expansion panel',
-                    },
-                    {
-                        label: 'Image block',
-                    },
-                    {
-                        label: 'Lightbox',
-                    },
-                    {
-                        label: 'List',
-                    },
-                    {
-                        label: 'Notification',
-                    },
-                    {
-                        label: 'Popover',
-                    },
-                    {
-                        label: 'Post block',
-                    },
-                    {
-                        label: 'Progress',
-                    },
-                    {
-                        label: 'Progress tracker',
-                    },
-                    {
-                        label: 'Radio button',
-                    },
-                    {
-                        label: 'Select',
-                    },
-                    {
-                        label: 'Side navigation',
-                    },
-                    {
-                        label: 'Slideshow',
-                    },
-                    {
-                        label: 'Switch',
-                    },
-                    {
-                        label: 'Table',
-                    },
-                    {
-                        label: 'Tabs',
-                    },
-                    {
-                        label: 'Text field',
-                    },
-                    {
-                        label: 'Thumbnail',
-                    },
-                    {
-                        label: 'Toolbar',
-                    },
-                    {
-                        label: 'Tooltip',
-                    },
-                    {
-                        label: 'User block',
-                    },
+                    'Avatar',
+                    'Button',
+                    'Checkbox',
+                    'Chip',
+                    'Comment block',
+                    'Dialog',
+                    'Dropdown',
+                    'Expansion panel',
+                    'Image block',
+                    'Lightbox',
+                    'List',
+                    'Notification',
+                    'Popover',
+                    'Post block',
+                    'Progress',
+                    'Progress tracker',
+                    'Radio button',
+                    'Select',
+                    'Side navigation',
+                    'Slideshow',
+                    'Switch',
+                    'Table',
+                    'Tabs',
+                    'Text field',
+                    'Thumbnail',
+                    'Toolbar',
+                    'Tooltip',
+                    'User block',
                 ],
             },
         ],
@@ -143,8 +90,13 @@ const EMPHASIS_BY_LEVEL = {
 };
 
 const generateNav = (goTo: (path: string) => void, location: string, items: Item[]): ReactElement => {
-    const generateNavItem = (parent: string[], { label, children }: Item): ReactNode => {
-        const path = [...parent, label.toLocaleLowerCase().replace(/ /g, '-')];
+    const generateNavItem = (parent: string[], item?: Item | Item[]): ReactNode => {
+        if (!item || Array.isArray(item)) {
+            return castArray(item).map((child: Item) => generateNavItem(parent, child));
+        }
+        const label = typeof item === 'string' ? item : item.label;
+        const children = typeof item !== 'string' && item.children;
+        const path = [...parent, spaceToSlug(label)];
         const slug = '/' + path.join('/');
 
         const [isOpen, setOpen] = useState(() => location.startsWith(slug));
@@ -163,46 +115,46 @@ const generateNav = (goTo: (path: string) => void, location: string, items: Item
 
         return (
             <SideNavigationItem key={slug} label={label} {...props}>
-                {(children || []).map((item: Item) => generateNavItem(path, item))}
+                {generateNavItem(path, children || [])}
             </SideNavigationItem>
         );
     };
 
-    return <SideNavigation>{items.map((item: Item) => generateNavItem([], item))}</SideNavigation>;
+    return <SideNavigation>{generateNavItem([], items)}</SideNavigation>;
 };
 
 interface IWithRouterProps {
-    location: any;
-    match: any;
-    history: any;
+    location: { pathname: string };
+    history: { push(path: string): void };
 }
 
 /**
  * The main navigation component.
  *
+ * @param  props nav props
  * @return The main navigation component.
  */
-const MainNav: React.FC<IWithRouterProps> = withRouter(
-    (props: IWithRouterProps): ReactElement => {
-        const { location, history } = props;
-        const goTo = (path: string): void => history.push(path);
+const MainNav: React.FC<IWithRouterProps> = (props: IWithRouterProps): ReactElement => {
+    const { location, history } = props;
+    const goTo = (path: string): void => history.push(path);
 
-        return (
-            <div className="main-nav">
-                <div className="main-nav__wrapper">
-                    <div className="main-nav__logo">
-                        <img src={LumXLogo} alt="LumX" />
-                        <span>
-                            <strong>{'LumApps'}</strong>
-                            {' design system'}
-                        </span>
-                    </div>
-
-                    {generateNav(goTo, location.pathname, ITEMS)}
+    return (
+        <div className="main-nav">
+            <div className="main-nav__wrapper">
+                <div className="main-nav__logo">
+                    <img src={LumXLogo} alt="LumX" />
+                    <span>
+                        <strong>{'LumApps'}</strong>
+                        {' design system'}
+                    </span>
                 </div>
-            </div>
-        );
-    },
-);
 
-export { MainNav };
+                {generateNav(goTo, location.pathname, ITEMS)}
+            </div>
+        </div>
+    );
+};
+
+const MainNavWithRouter = withRouter(MainNav);
+
+export { MainNavWithRouter as MainNav };

@@ -1,0 +1,17 @@
+```javascript import
+import { ExpansionPanel, Icon } from 'LumX';
+import { mdiEmail } from 'LumX/icons';
+```
+
+# Expansion panel
+
+## Default
+
+```javascript jsx withThemeSwitcher
+(theme) => <>
+    <ExpansionPanel theme={theme}>
+        <header><Icon icon={mdiEmail} /> Header with icon</header>
+        Content
+    </ExpansionPanel>
+</>
+```

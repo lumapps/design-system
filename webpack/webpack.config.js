@@ -72,14 +72,14 @@ const baseConfig = {
                 },
             },
             {
-                test: /\.(png|svg|jpg|gif|woff(2)?|ttf|eot|svg)$/,
+                test: /\.(png|jpg|gif|woff(2)?|ttf|eot|svg)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name]-[hash:8].[ext]',
                 },
             },
             {
-                test: /\.mdx?$/,
+                test: /\.(mdx|md)?$/,
                 use: [
                     {
                         loader: 'babel-loader?cacheDirectory=true',
