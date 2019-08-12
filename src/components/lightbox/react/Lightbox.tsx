@@ -22,6 +22,8 @@ import noop from 'lodash/noop';
 interface ILightboxProps extends IGenericProps {
     /** Label for accessibility assistive devices. */
     ariaLabel?: string;
+    /** should the close button be visible - default true */
+    isCloseButtonVisible?: boolean;
     /** Status of lightbox. */
     isOpen?: boolean;
     /** Ref of element that triggered modal opening to set focus on. */
@@ -69,6 +71,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     ariaLabel: 'Lightbox',
+    isCloseButtonVisible: true,
     isOpen: false,
     onClose: noop,
     onOpen: noop,
@@ -86,6 +89,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     ariaLabel = DEFAULT_PROPS.ariaLabel,
     children,
     className = '',
+    isCloseButtonVisible = DEFAULT_PROPS.isCloseButtonVisible,
     isOpen = DEFAULT_PROPS.isOpen,
     onClose = DEFAULT_PROPS.onClose,
     onOpen = DEFAULT_PROPS.onOpen,
