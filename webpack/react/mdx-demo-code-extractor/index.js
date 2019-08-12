@@ -20,7 +20,11 @@ function transformJSXCodeToJSXNode(importStatement, node) {
     node.type = 'jsx';
     delete node.tagName;
     delete node.children;
-    node.value = `<DemoBlock withThemeSwitcher={${withThemeSwitcher}} disableGrid={${disableGrid}} sourceCode={\`${sourceCode}\`}>{${code.trim().replace(/;$/, '')}}</DemoBlock>`;
+    node.value = `<p>
+        <DemoBlock withThemeSwitcher={${withThemeSwitcher}} disableGrid={${disableGrid}} sourceCode={\`${sourceCode}\`}>
+            {${code.trim().replace(/;$/, '')}}
+        </DemoBlock>
+    </p>`;
 }
 
 const isJSXImport = (node) => node.type === 'import';

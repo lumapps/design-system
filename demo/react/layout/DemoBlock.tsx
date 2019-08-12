@@ -36,7 +36,7 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">
-                    <Button emphasis={ButtonEmphasis.low} rightIcon={mdiCodeTags} onClick={toggleShowCode}>
+                    <Button emphasis={ButtonEmphasis.low} leftIcon={mdiCodeTags} onClick={toggleShowCode}>
                         {showCode ? 'Hide code' : 'Show code'}
                     </Button>
                 </div>
