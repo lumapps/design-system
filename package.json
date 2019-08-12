@@ -179,7 +179,6 @@
         "tslint-react": "^3.6.0",
         "typedoc": "^0.15.0",
         "typescript": "^3.4.5",
-        "unist-util-visit": "^2.0.0",
         "webpack": "^4.29.6",
         "webpack-cli": "^3.3.0",
         "webpack-dev-server": "^3.2.1",
