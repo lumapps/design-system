@@ -1,4 +1,4 @@
-import { mdiFileDocumentBoxOutline, mdiMenu } from 'LumX/icons';
+import { mdiArrowTopRightThick, mdiEmail } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -21,8 +21,8 @@ function DemoSideNavigationController() {
      * @readonly
      */
     vm.icons = {
-        mdiFileDocumentBoxOutline,
-        mdiMenu,
+        mdiArrowTopRightThick,
+        mdiEmail,
     };
 }
 
