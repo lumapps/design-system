@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { Alignment, Grid, GridItem, Orientation, Theme } from 'LumX';
+import { Alignment, Grid, GridItem, Orientation, Size, Theme } from 'LumX';
 
 import './style.css';
 
@@ -23,59 +23,78 @@ interface IProps {
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <>
         <pre>No gutter</pre>
-        <Grid theme={theme} wrap orientation={Orientation.horizontal} vAlign={Alignment.center} hAlign={Alignment.top}>
+        <Grid theme={theme} orientation={Orientation.horizontal} vAlign={Alignment.center} hAlign={Alignment.top}>
             <GridItem width="3">
-                <div className="demo-grid-itemA">width=3</div>
+                <div className="lumx-spacing-padding lumx-theme-background-red-N">width=3</div>
             </GridItem>
             <GridItem width="3">
-                <div className="demo-grid-itemB">width=3</div>
+                <div className="lumx-spacing-padding lumx-theme-background-blue-N">width=3</div>
             </GridItem>
             <GridItem width="6">
-                <div className="demo-grid-itemC">width=6</div>
+                <div className="lumx-spacing-padding lumx-theme-background-green-N">width=6</div>
             </GridItem>
         </Grid>
         <p>
             <br />
         </p>
-        <pre>Gutter = 8</pre>
+        <pre>Gutter Size.regular</pre>
         <Grid
             theme={theme}
-            wrap
             orientation={Orientation.horizontal}
             vAlign={Alignment.center}
             hAlign={Alignment.top}
-            gutter="8"
+            gutter={Size.regular}
         >
-            <GridItem width="2">
-                <div className="demo-grid-itemA">width=2</div>
+            <GridItem width="3">
+                <div className="lumx-spacing-padding lumx-theme-background-red-N">width=3</div>
             </GridItem>
-            <GridItem width="8">
-                <div className="demo-grid-itemB">width=8</div>
+            <GridItem width="3">
+                <div className="lumx-spacing-padding lumx-theme-background-blue-N">width=3</div>
             </GridItem>
-            <GridItem width="2">
-                <div className="demo-grid-itemC">width=2</div>
+            <GridItem width="6">
+                <div className="lumx-spacing-padding lumx-theme-background-green-N">width=6</div>
             </GridItem>
         </Grid>
         <p>
             <br />
         </p>
-        <pre>Gutter = 24</pre>
+        <pre>Gutter Size.big</pre>
         <Grid
             theme={theme}
-            wrap
             orientation={Orientation.horizontal}
             vAlign={Alignment.center}
             hAlign={Alignment.top}
-            gutter="24"
+            gutter={Size.big}
         >
             <GridItem width="3">
-                <div className="demo-grid-itemA">width=3</div>
+                <div className="lumx-spacing-padding lumx-theme-background-red-N">width=3</div>
             </GridItem>
             <GridItem width="3">
-                <div className="demo-grid-itemB">width=3</div>
+                <div className="lumx-spacing-padding lumx-theme-background-blue-N">width=3</div>
             </GridItem>
             <GridItem width="6">
-                <div className="demo-grid-itemC">width=6</div>
+                <div className="lumx-spacing-padding lumx-theme-background-green-N">width=6</div>
+            </GridItem>
+        </Grid>
+        <p>
+            <br />
+        </p>
+        <pre>Gutter Size.huge</pre>
+        <Grid
+            theme={theme}
+            orientation={Orientation.horizontal}
+            vAlign={Alignment.center}
+            hAlign={Alignment.top}
+            gutter={Size.huge}
+        >
+            <GridItem width="3">
+                <div className="lumx-spacing-padding lumx-theme-background-red-N">width=3</div>
+            </GridItem>
+            <GridItem width="3">
+                <div className="lumx-spacing-padding lumx-theme-background-blue-N">width=3</div>
+            </GridItem>
+            <GridItem width="6">
+                <div className="lumx-spacing-padding lumx-theme-background-green-N">width=6</div>
             </GridItem>
         </Grid>
     </>

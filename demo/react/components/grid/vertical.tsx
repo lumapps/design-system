@@ -22,15 +22,15 @@ interface IProps {
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
     <>
-        <Grid theme={theme} wrap orientation={Orientation.vertical} hAlign={Alignment.center}>
+        <Grid theme={theme} orientation={Orientation.vertical} hAlign={Alignment.center}>
             <GridItem order="1">
-                <div className="demo-grid-itemA">ItemA with order=1</div>
+                <div className="lumx-spacing-padding lumx-theme-background-red-N">ItemA with order=1</div>
             </GridItem>
             <GridItem order="3">
-                <div className="demo-grid-itemB">ItemB with order=3</div>
+                <div className="lumx-spacing-padding lumx-theme-background-green-N">ItemB with order=3</div>
             </GridItem>
             <GridItem order="2">
-                <div className="demo-grid-itemC">ItemC with order=2</div>
+                <div className="lumx-spacing-padding lumx-theme-background-blue-N">ItemC with order=2</div>
             </GridItem>
         </Grid>
     </>

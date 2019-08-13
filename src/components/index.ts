@@ -44,6 +44,9 @@ enum Size {
     l = 'l',
     xl = 'xl',
     xxl = 'xxl',
+    regular = 'regular',
+    big = 'big',
+    huge = 'huge',
 }
 
 enum Orientation {
