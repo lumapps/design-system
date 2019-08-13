@@ -7,7 +7,7 @@
 /**
  * Defines the allowed themes.
  */
-import { ColorPalette } from "LumX";
+import { ColorPalette } from 'LumX';
 
 declare enum Theme {
     lumapps = 'lumapps',
@@ -33,7 +33,7 @@ interface IColorVariantDetail {
     fontColor: string;
 }
 
-type IColorPaletteWithVariants = { [key in ColorPalette]: { [key in string]: IColorVariantDetail}};
+type IColorPaletteWithVariants = { [key in ColorPalette]: { [key in string]: IColorVariantDetail } };
 
 /**
  * Color palette with variants.

@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Route, RouteComponentProps } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 
 import { Alignment, Button, ButtonEmphasis, Grid, GridItem, Orientation, Size } from 'LumX';
 import { mdiAngularjs } from 'LumX/icons';
@@ -41,7 +41,12 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
                             <span className="lumx-typography-overline lumx-spacing-margin-right-regular">Theme</span>
                             <ThemeSelector changeTheme={changeTheme} theme={theme} />
                         </GridItem>
-                        <Button emphasis={ButtonEmphasis.low} leftIcon={mdiAngularjs} size={Size.s}>
+                        <Button
+                            emphasis={ButtonEmphasis.low}
+                            leftIcon={mdiAngularjs}
+                            onClick={(): Window | null => window.open('http://ui.lumapps.com/')}
+                            size={Size.s}
+                        >
                             View Angularjs version
                         </Button>
                     </Grid>
@@ -49,6 +54,7 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
 
                 <div className="main-content">
                     <div className="main-content__wrapper">
+                        <Redirect from="/" to="/product/foundations/colors" />
                         <Route
                             path="/:path*"
                             render={({ match }: RouteComponentProps): ReactElement => (
