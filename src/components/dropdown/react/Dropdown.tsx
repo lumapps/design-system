@@ -78,13 +78,13 @@ const Dropdown: React.FC<DropdownProps> = ({
     closeOnClick = DEFAULT_PROPS.closeOnClick,
     escapeClose = DEFAULT_PROPS.escapeClose,
     offset,
-    position,
     showDropdown = DEFAULT_PROPS.showDropdown,
     toggleElement,
     width,
     ...props
 }: DropdownProps): React.ReactElement => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
+    const popoverRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(showDropdown || false);
 
     function closeDropdown(): void {
@@ -126,23 +126,27 @@ const Dropdown: React.FC<DropdownProps> = ({
     });
 
     return (
-        <div
-            className={classNames(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME, hasToggle: toggleElement !== null }),
-            )}
-            ref={wrapperRef}
-            onKeyDown={escapeClose ? onEscapePressed(closeDropdown) : null}
-            {...props}
-        >
+        <>
+            <div
+                className={classNames(
+                    className,
+                    handleBasicClasses({ prefix: CLASSNAME, hasToggle: toggleElement !== null }),
+                )}
+                ref={wrapperRef}
+                onKeyDown={escapeClose ? onEscapePressed(closeDropdown) : null}
+                {...props}
+            >
+                {anchorElement}
+            </div>
             <Popover
-                anchorElement={anchorElement}
+                popoverRect={{ x: 0, y: 0, height: 0, width: 0 }}
                 isVisible={isOpen}
-                popperElement={isOpen && popperElement}
+                popoverRef={popoverRef}
                 offset={offset}
-                placement={position}
-            />
-        </div>
+            >
+                <div>{popperElement}</div>
+            </Popover>
+        </>
     );
 };
 Dropdown.displayName = COMPONENT_NAME;

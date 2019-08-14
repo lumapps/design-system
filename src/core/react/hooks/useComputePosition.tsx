@@ -5,21 +5,6 @@ import { ElementPosition, Offsets, Placement } from 'LumX/components/popover/rea
 import { calculatePopoverPlacement } from '../utils/calculatePopoverPlacement';
 import { isInViewPort } from '../utils/isInViewPort';
 
-const MATCHING_PLACEMENT = {
-    [Placement.AUTO]: {
-        bottom: Placement.BOTTOM,
-        top: Placement.TOP,
-    },
-    [Placement.AUTO_START]: {
-        bottom: Placement.BOTTOM_START,
-        top: Placement.TOP_START,
-    },
-    [Placement.AUTO_END]: {
-        bottom: Placement.BOTTOM_END,
-        top: Placement.TOP_END,
-    },
-};
-
 type useComputePositionType = (
     placement: Placement,
     anchorRef: React.RefObject<HTMLElement>,
@@ -64,6 +49,20 @@ const useComputePosition: useComputePositionType = (
     computedPosition: ElementPosition;
     isVisible: boolean;
 } => {
+    const MATCHING_PLACEMENT = Placement && {
+        [Placement.AUTO]: {
+            bottom: Placement.BOTTOM,
+            top: Placement.TOP,
+        },
+        [Placement.AUTO_START]: {
+            bottom: Placement.BOTTOM_START,
+            top: Placement.TOP_START,
+        },
+        [Placement.AUTO_END]: {
+            bottom: Placement.BOTTOM_END,
+            top: Placement.TOP_END,
+        },
+    };
     // Handle mouse over the popover to prevent it from closing from outside (infinite mouse event bug).
     const [isMouseEntered, setIsMouseEntered] = useState(false);
     const [isAnchorInViewport, setIsAnchorInViewport] = useState(false);
@@ -98,7 +97,7 @@ const useComputePosition: useComputePositionType = (
         };
 
         if (placement === Placement.AUTO || placement === Placement.AUTO_END || placement === Placement.AUTO_START) {
-            // Try TOP placement.
+            // Try BOTTOM placement.
 
             const { x: bottomX, y: bottomY } = calculatePopoverPlacement(
                 MATCHING_PLACEMENT[placement].bottom,

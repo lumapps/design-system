@@ -60,14 +60,18 @@ type ElementPosition = IElementPosition;
  * Defines the props of the component.
  */
 interface IPopoverProps extends IGenericProps {
+    /* The position the popover should be bounded to. */
+    popoverRect: ElementPosition;
+    /* Should the popper be displayed ? */
+    isVisible: boolean;
+    /* The reference forwarded to the popover container. */
+    popoverRef: React.RefObject<HTMLDivElement>;
     /* Children element displayed inside popover. */
     children: ReactChild;
     /* How high the component is flying */
     elevation?: number;
-    /* Should the popper be displayed ? */
-    isVisible?: boolean | (() => boolean);
-    /* The prefered popover location against the anchor. */
-    placement?: Placement;
+    /* The classname to apply to the Popover wrapper */
+    className?: string;
 }
 type PopoverProps = IPopoverProps;
 
@@ -98,6 +102,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    className: '',
     elevation: 3,
     placement: Placement.TOP,
 };
@@ -112,25 +117,21 @@ interface IPopover {
  * @return The component.
  */
 const Popover: React.FC<PopoverProps> & IPopover = ({
-    popoverRect = {},
+    popoverRect,
     popoverRef,
     children,
-    className = '',
+    className = DEFAULT_PROPS.className,
     elevation = DEFAULT_PROPS.elevation,
     isVisible,
     ...props
 }: PopoverProps): ReactElement | null => {
-    if (!isVisible && popoverRef && popoverRef.current) {
-        return null;
-    }
-
     const cssPopover: CSSProperties = {
-        display: isVisible ? 'block' : 'none',
         height: popoverRect.height ? `${popoverRect.height}px` : 'auto',
         left: 0,
-        position: 'absolute',
+        position: 'fixed',
         top: 0,
         transform: `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
+        visibility: isVisible ? 'visible' : 'hidden',
         width: popoverRect.width ? `${popoverRect.width}px` : 'auto',
         zIndex: 9999,
     };
