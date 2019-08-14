@@ -73,10 +73,10 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { wrapper }: ISetup = setup();
+            const { dropdown }: ISetup = setup();
 
-            expect(wrapper).toHaveClassName(CLASSNAME);
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasToggle', value: true }));
+            expect(dropdown).toHaveClassName(CLASSNAME);
+            expect(dropdown).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasToggle', value: true }));
         });
     });
 

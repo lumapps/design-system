@@ -33,96 +33,164 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
       className="lumx-dropdown lumx-dropdown--has-toggle"
       onKeyDown={[Function]}
     >
-      <Popover
-        anchorElement={
-          <div
-            className="lumx-dropdown__toggle"
+      <div
+        className="lumx-dropdown__toggle"
+        onClick={[Function]}
+      >
+        <Button
+          className="lumx-dropdown-button"
+          onClick={[Function]}
+          rightIcon="M7,10L12,15L17,10H7Z"
+          variant="button"
+        >
+          <ButtonRoot
+            className="lumx-dropdown-button lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
             onClick={[Function]}
           >
-            <Button
-              className="lumx-dropdown-button"
+            <button
+              className="lumx-dropdown-button lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
               onClick={[Function]}
-              rightIcon="M7,10L12,15L17,10H7Z"
-              variant="button"
             >
-              Label
-            </Button>
-          </div>
+              <span>
+                Label
+              </span>
+              <Icon
+                icon="M7,10L12,15L17,10H7Z"
+              >
+                <i
+                  className="lumx-icon"
+                >
+                  <svg
+                    aria-hidden="true"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    style={
+                      Object {
+                        "verticalAlign": "-0.125em",
+                      }
+                    }
+                    viewBox="0 0 24 24"
+                    width="1em"
+                  >
+                    <path
+                      d="M7,10L12,15L17,10H7Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </i>
+              </Icon>
+            </button>
+          </ButtonRoot>
+        </Button>
+      </div>
+    </div>
+    <Popover
+      isVisible={false}
+      popoverRect={
+        Object {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0,
         }
-        popperElement={false}
-        showPopper={false}
-      >
-        <Manager>
-          <Reference>
-            <InnerReference
-              setReferenceNode={[Function]}
+      }
+      popoverRef={
+        Object {
+          "current": <div
+            class="lumx-popover lumx-popover--elevation-3"
+            style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+          >
+            <div
+              class="lumx-popover__wrapper"
+            >
+              <div>
+                <div
+                  class="lumx-dropdown__menu"
+                >
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>,
+        }
+      }
+    >
+      <Portal
+        containerInfo={
+          <body
+            class="js-focus-visible"
+          >
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
             >
               <div
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        }
+      >
+        <div
+          className="lumx-popover lumx-popover--elevation-3"
+          style={
+            Object {
+              "height": "auto",
+              "left": 0,
+              "position": "fixed",
+              "top": 0,
+              "transform": "translate(0px, 0px)",
+              "visibility": "hidden",
+              "width": "auto",
+              "zIndex": 9999,
+            }
+          }
+        >
+          <div
+            className="lumx-popover__wrapper"
+          >
+            <div>
+              <div
+                className="lumx-dropdown__menu"
                 style={
                   Object {
-                    "height": "fit-content",
-                    "width": "fit-content",
+                    "width": undefined,
                   }
                 }
               >
                 <div
-                  className="lumx-dropdown__toggle"
-                  onClick={[Function]}
+                  className="lumx-dropdown__content"
                 >
-                  <Button
-                    className="lumx-dropdown-button"
-                    onClick={[Function]}
-                    rightIcon="M7,10L12,15L17,10H7Z"
-                    variant="button"
-                  >
-                    <ButtonRoot
-                      className="lumx-dropdown-button lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
-                      onClick={[Function]}
-                    >
-                      <button
-                        className="lumx-dropdown-button lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
-                        onClick={[Function]}
-                      >
-                        <span>
-                          Label
-                        </span>
-                        <Icon
-                          icon="M7,10L12,15L17,10H7Z"
-                        >
-                          <i
-                            className="lumx-icon"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              height="1em"
-                              preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "verticalAlign": "-0.125em",
-                                }
-                              }
-                              viewBox="0 0 24 24"
-                              width="1em"
-                            >
-                              <path
-                                d="M7,10L12,15L17,10H7Z"
-                                fill="currentColor"
-                              />
-                            </svg>
-                          </i>
-                        </Icon>
-                      </button>
-                    </ButtonRoot>
-                  </Button>
+                  <span>
+                    Dropdown content
+                  </span>
                 </div>
               </div>
-            </InnerReference>
-          </Reference>
-        </Manager>
-      </Popover>
-    </div>
+            </div>
+          </div>
+        </div>
+      </Portal>
+    </Popover>
   </Dropdown>
 </DropdownButton>
 `;
@@ -154,123 +222,212 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
       className="lumx-dropdown lumx-dropdown--has-toggle"
       onKeyDown={[Function]}
     >
-      <Popover
-        anchorElement={
-          <div
-            className="lumx-dropdown__toggle"
+      <div
+        className="lumx-dropdown__toggle"
+        onClick={[Function]}
+      >
+        <Button
+          className="lumx-dropdown-button"
+          leftIcon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+          onClick={[Function]}
+          rightIcon="M7,10L12,15L17,10H7Z"
+          variant="button"
+        >
+          <ButtonRoot
+            className="lumx-dropdown-button lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
             onClick={[Function]}
           >
-            <Button
-              className="lumx-dropdown-button"
-              leftIcon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+            <button
+              className="lumx-dropdown-button lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
               onClick={[Function]}
-              rightIcon="M7,10L12,15L17,10H7Z"
-              variant="button"
             >
-              Label
-            </Button>
-          </div>
+              <Icon
+                icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+              >
+                <i
+                  className="lumx-icon"
+                >
+                  <svg
+                    aria-hidden="true"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    style={
+                      Object {
+                        "verticalAlign": "-0.125em",
+                      }
+                    }
+                    viewBox="0 0 24 24"
+                    width="1em"
+                  >
+                    <path
+                      d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </i>
+              </Icon>
+              <span>
+                Label
+              </span>
+              <Icon
+                icon="M7,10L12,15L17,10H7Z"
+              >
+                <i
+                  className="lumx-icon"
+                >
+                  <svg
+                    aria-hidden="true"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    style={
+                      Object {
+                        "verticalAlign": "-0.125em",
+                      }
+                    }
+                    viewBox="0 0 24 24"
+                    width="1em"
+                  >
+                    <path
+                      d="M7,10L12,15L17,10H7Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </i>
+              </Icon>
+            </button>
+          </ButtonRoot>
+        </Button>
+      </div>
+    </div>
+    <Popover
+      isVisible={false}
+      popoverRect={
+        Object {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0,
         }
-        popperElement={false}
-        showPopper={false}
-      >
-        <Manager>
-          <Reference>
-            <InnerReference
-              setReferenceNode={[Function]}
+      }
+      popoverRef={
+        Object {
+          "current": <div
+            class="lumx-popover lumx-popover--elevation-3"
+            style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+          >
+            <div
+              class="lumx-popover__wrapper"
+            >
+              <div>
+                <div
+                  class="lumx-dropdown__menu"
+                >
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>,
+        }
+      }
+    >
+      <Portal
+        containerInfo={
+          <body
+            class="js-focus-visible"
+          >
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
             >
               <div
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        }
+      >
+        <div
+          className="lumx-popover lumx-popover--elevation-3"
+          style={
+            Object {
+              "height": "auto",
+              "left": 0,
+              "position": "fixed",
+              "top": 0,
+              "transform": "translate(0px, 0px)",
+              "visibility": "hidden",
+              "width": "auto",
+              "zIndex": 9999,
+            }
+          }
+        >
+          <div
+            className="lumx-popover__wrapper"
+          >
+            <div>
+              <div
+                className="lumx-dropdown__menu"
                 style={
                   Object {
-                    "height": "fit-content",
-                    "width": "fit-content",
+                    "width": undefined,
                   }
                 }
               >
                 <div
-                  className="lumx-dropdown__toggle"
-                  onClick={[Function]}
+                  className="lumx-dropdown__content"
                 >
-                  <Button
-                    className="lumx-dropdown-button"
-                    leftIcon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                    onClick={[Function]}
-                    rightIcon="M7,10L12,15L17,10H7Z"
-                    variant="button"
-                  >
-                    <ButtonRoot
-                      className="lumx-dropdown-button lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
-                      onClick={[Function]}
-                    >
-                      <button
-                        className="lumx-dropdown-button lumx-button--has-left-icon lumx-button--has-right-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
-                        onClick={[Function]}
-                      >
-                        <Icon
-                          icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                        >
-                          <i
-                            className="lumx-icon"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              height="1em"
-                              preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "verticalAlign": "-0.125em",
-                                }
-                              }
-                              viewBox="0 0 24 24"
-                              width="1em"
-                            >
-                              <path
-                                d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                                fill="currentColor"
-                              />
-                            </svg>
-                          </i>
-                        </Icon>
-                        <span>
-                          Label
-                        </span>
-                        <Icon
-                          icon="M7,10L12,15L17,10H7Z"
-                        >
-                          <i
-                            className="lumx-icon"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              height="1em"
-                              preserveAspectRatio="xMidYMid meet"
-                              style={
-                                Object {
-                                  "verticalAlign": "-0.125em",
-                                }
-                              }
-                              viewBox="0 0 24 24"
-                              width="1em"
-                            >
-                              <path
-                                d="M7,10L12,15L17,10H7Z"
-                                fill="currentColor"
-                              />
-                            </svg>
-                          </i>
-                        </Icon>
-                      </button>
-                    </ButtonRoot>
-                  </Button>
+                  <span>
+                    Dropdown content
+                  </span>
                 </div>
               </div>
-            </InnerReference>
-          </Reference>
-        </Manager>
-      </Popover>
-    </div>
+            </div>
+          </div>
+        </div>
+      </Portal>
+    </Popover>
   </Dropdown>
 </DropdownButton>
 `;
@@ -306,126 +463,233 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
       className="lumx-dropdown lumx-dropdown--has-toggle"
       onKeyDown={[Function]}
     >
-      <Popover
-        anchorElement={
+      <div
+        className="lumx-dropdown__toggle"
+        onClick={[Function]}
+      >
+        <ButtonGroup
+          className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
+        >
           <div
-            className="lumx-dropdown__toggle"
-            onClick={[Function]}
+            className="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
           >
-            <ButtonGroup
-              className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
+            <Button
+              variant="button"
+            >
+              <ButtonRoot
+                className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+              >
+                <button
+                  className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+                >
+                  <span>
+                    Label
+                  </span>
+                </button>
+              </ButtonRoot>
+            </Button>
+            <IconButton
+              icon="M7,10L12,15L17,10H7Z"
+              onClick={[Function]}
             >
               <Button
-                variant="button"
-              >
-                Label
-              </Button>
-              <IconButton
-                icon="M7,10L12,15L17,10H7Z"
+                className="lumx-icon-button"
+                leftIcon="M7,10L12,15L17,10H7Z"
                 onClick={[Function]}
-              />
-            </ButtonGroup>
+                variant="icon"
+              >
+                <ButtonRoot
+                  className="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+                  onClick={[Function]}
+                >
+                  <button
+                    className="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+                    onClick={[Function]}
+                  >
+                    <Icon
+                      icon="M7,10L12,15L17,10H7Z"
+                    >
+                      <i
+                        className="lumx-icon"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          style={
+                            Object {
+                              "verticalAlign": "-0.125em",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          width="1em"
+                        >
+                          <path
+                            d="M7,10L12,15L17,10H7Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </i>
+                    </Icon>
+                  </button>
+                </ButtonRoot>
+              </Button>
+            </IconButton>
           </div>
+        </ButtonGroup>
+      </div>
+    </div>
+    <Popover
+      isVisible={false}
+      popoverRect={
+        Object {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0,
         }
-        popperElement={false}
-        showPopper={false}
-      >
-        <Manager>
-          <Reference>
-            <InnerReference
-              setReferenceNode={[Function]}
+      }
+      popoverRef={
+        Object {
+          "current": <div
+            class="lumx-popover lumx-popover--elevation-3"
+            style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+          >
+            <div
+              class="lumx-popover__wrapper"
+            >
+              <div>
+                <div
+                  class="lumx-dropdown__menu"
+                >
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>,
+        }
+      }
+    >
+      <Portal
+        containerInfo={
+          <body
+            class="js-focus-visible"
+          >
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
             >
               <div
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        }
+      >
+        <div
+          className="lumx-popover lumx-popover--elevation-3"
+          style={
+            Object {
+              "height": "auto",
+              "left": 0,
+              "position": "fixed",
+              "top": 0,
+              "transform": "translate(0px, 0px)",
+              "visibility": "hidden",
+              "width": "auto",
+              "zIndex": 9999,
+            }
+          }
+        >
+          <div
+            className="lumx-popover__wrapper"
+          >
+            <div>
+              <div
+                className="lumx-dropdown__menu"
                 style={
                   Object {
-                    "height": "fit-content",
-                    "width": "fit-content",
+                    "width": undefined,
                   }
                 }
               >
                 <div
-                  className="lumx-dropdown__toggle"
-                  onClick={[Function]}
+                  className="lumx-dropdown__content"
                 >
-                  <ButtonGroup
-                    className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
-                  >
-                    <div
-                      className="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
-                    >
-                      <Button
-                        variant="button"
-                      >
-                        <ButtonRoot
-                          className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
-                        >
-                          <button
-                            className="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
-                          >
-                            <span>
-                              Label
-                            </span>
-                          </button>
-                        </ButtonRoot>
-                      </Button>
-                      <IconButton
-                        icon="M7,10L12,15L17,10H7Z"
-                        onClick={[Function]}
-                      >
-                        <Button
-                          className="lumx-icon-button"
-                          leftIcon="M7,10L12,15L17,10H7Z"
-                          onClick={[Function]}
-                          variant="icon"
-                        >
-                          <ButtonRoot
-                            className="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
-                            onClick={[Function]}
-                          >
-                            <button
-                              className="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
-                              onClick={[Function]}
-                            >
-                              <Icon
-                                icon="M7,10L12,15L17,10H7Z"
-                              >
-                                <i
-                                  className="lumx-icon"
-                                >
-                                  <svg
-                                    aria-hidden="true"
-                                    height="1em"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    style={
-                                      Object {
-                                        "verticalAlign": "-0.125em",
-                                      }
-                                    }
-                                    viewBox="0 0 24 24"
-                                    width="1em"
-                                  >
-                                    <path
-                                      d="M7,10L12,15L17,10H7Z"
-                                      fill="currentColor"
-                                    />
-                                  </svg>
-                                </i>
-                              </Icon>
-                            </button>
-                          </ButtonRoot>
-                        </Button>
-                      </IconButton>
-                    </div>
-                  </ButtonGroup>
+                  <span>
+                    Dropdown content
+                  </span>
                 </div>
               </div>
-            </InnerReference>
-          </Reference>
-        </Manager>
-      </Popover>
-    </div>
+            </div>
+          </div>
+        </div>
+      </Portal>
+    </Popover>
   </Dropdown>
 </DropdownButton>
 `;
@@ -463,153 +727,281 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
       className="lumx-dropdown lumx-dropdown--has-toggle"
       onKeyDown={[Function]}
     >
-      <Popover
-        anchorElement={
+      <div
+        className="lumx-dropdown__toggle"
+        onClick={[Function]}
+      >
+        <ButtonGroup
+          className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
+        >
           <div
-            className="lumx-dropdown__toggle"
-            onClick={[Function]}
+            className="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
           >
-            <ButtonGroup
-              className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
+            <Button
+              leftIcon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+              variant="button"
+            >
+              <ButtonRoot
+                className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+              >
+                <button
+                  className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+                >
+                  <Icon
+                    icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                  >
+                    <i
+                      className="lumx-icon"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        height="1em"
+                        preserveAspectRatio="xMidYMid meet"
+                        style={
+                          Object {
+                            "verticalAlign": "-0.125em",
+                          }
+                        }
+                        viewBox="0 0 24 24"
+                        width="1em"
+                      >
+                        <path
+                          d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                          fill="currentColor"
+                        />
+                      </svg>
+                    </i>
+                  </Icon>
+                  <span>
+                    Label
+                  </span>
+                </button>
+              </ButtonRoot>
+            </Button>
+            <IconButton
+              icon="M7,10L12,15L17,10H7Z"
+              onClick={[Function]}
             >
               <Button
-                leftIcon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                variant="button"
-              >
-                Label
-              </Button>
-              <IconButton
-                icon="M7,10L12,15L17,10H7Z"
+                className="lumx-icon-button"
+                leftIcon="M7,10L12,15L17,10H7Z"
                 onClick={[Function]}
-              />
-            </ButtonGroup>
+                variant="icon"
+              >
+                <ButtonRoot
+                  className="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+                  onClick={[Function]}
+                >
+                  <button
+                    className="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+                    onClick={[Function]}
+                  >
+                    <Icon
+                      icon="M7,10L12,15L17,10H7Z"
+                    >
+                      <i
+                        className="lumx-icon"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          height="1em"
+                          preserveAspectRatio="xMidYMid meet"
+                          style={
+                            Object {
+                              "verticalAlign": "-0.125em",
+                            }
+                          }
+                          viewBox="0 0 24 24"
+                          width="1em"
+                        >
+                          <path
+                            d="M7,10L12,15L17,10H7Z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </i>
+                    </Icon>
+                  </button>
+                </ButtonRoot>
+              </Button>
+            </IconButton>
           </div>
+        </ButtonGroup>
+      </div>
+    </div>
+    <Popover
+      isVisible={false}
+      popoverRect={
+        Object {
+          "height": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0,
         }
-        popperElement={false}
-        showPopper={false}
-      >
-        <Manager>
-          <Reference>
-            <InnerReference
-              setReferenceNode={[Function]}
+      }
+      popoverRef={
+        Object {
+          "current": <div
+            class="lumx-popover lumx-popover--elevation-3"
+            style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+          >
+            <div
+              class="lumx-popover__wrapper"
+            >
+              <div>
+                <div
+                  class="lumx-dropdown__menu"
+                >
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>,
+        }
+      }
+    >
+      <Portal
+        containerInfo={
+          <body
+            class="js-focus-visible"
+          >
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
             >
               <div
-                onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              style="height: auto; left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; width: auto; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div>
+                  <div
+                    class="lumx-dropdown__menu"
+                  >
+                    <div
+                      class="lumx-dropdown__content"
+                    >
+                      <span>
+                        Dropdown content
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        }
+      >
+        <div
+          className="lumx-popover lumx-popover--elevation-3"
+          style={
+            Object {
+              "height": "auto",
+              "left": 0,
+              "position": "fixed",
+              "top": 0,
+              "transform": "translate(0px, 0px)",
+              "visibility": "hidden",
+              "width": "auto",
+              "zIndex": 9999,
+            }
+          }
+        >
+          <div
+            className="lumx-popover__wrapper"
+          >
+            <div>
+              <div
+                className="lumx-dropdown__menu"
                 style={
                   Object {
-                    "height": "fit-content",
-                    "width": "fit-content",
+                    "width": undefined,
                   }
                 }
               >
                 <div
-                  className="lumx-dropdown__toggle"
-                  onClick={[Function]}
+                  className="lumx-dropdown__content"
                 >
-                  <ButtonGroup
-                    className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
-                  >
-                    <div
-                      className="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
-                    >
-                      <Button
-                        leftIcon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                        variant="button"
-                      >
-                        <ButtonRoot
-                          className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
-                        >
-                          <button
-                            className="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
-                          >
-                            <Icon
-                              icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                            >
-                              <i
-                                className="lumx-icon"
-                              >
-                                <svg
-                                  aria-hidden="true"
-                                  height="1em"
-                                  preserveAspectRatio="xMidYMid meet"
-                                  style={
-                                    Object {
-                                      "verticalAlign": "-0.125em",
-                                    }
-                                  }
-                                  viewBox="0 0 24 24"
-                                  width="1em"
-                                >
-                                  <path
-                                    d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
-                                    fill="currentColor"
-                                  />
-                                </svg>
-                              </i>
-                            </Icon>
-                            <span>
-                              Label
-                            </span>
-                          </button>
-                        </ButtonRoot>
-                      </Button>
-                      <IconButton
-                        icon="M7,10L12,15L17,10H7Z"
-                        onClick={[Function]}
-                      >
-                        <Button
-                          className="lumx-icon-button"
-                          leftIcon="M7,10L12,15L17,10H7Z"
-                          onClick={[Function]}
-                          variant="icon"
-                        >
-                          <ButtonRoot
-                            className="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
-                            onClick={[Function]}
-                          >
-                            <button
-                              className="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
-                              onClick={[Function]}
-                            >
-                              <Icon
-                                icon="M7,10L12,15L17,10H7Z"
-                              >
-                                <i
-                                  className="lumx-icon"
-                                >
-                                  <svg
-                                    aria-hidden="true"
-                                    height="1em"
-                                    preserveAspectRatio="xMidYMid meet"
-                                    style={
-                                      Object {
-                                        "verticalAlign": "-0.125em",
-                                      }
-                                    }
-                                    viewBox="0 0 24 24"
-                                    width="1em"
-                                  >
-                                    <path
-                                      d="M7,10L12,15L17,10H7Z"
-                                      fill="currentColor"
-                                    />
-                                  </svg>
-                                </i>
-                              </Icon>
-                            </button>
-                          </ButtonRoot>
-                        </Button>
-                      </IconButton>
-                    </div>
-                  </ButtonGroup>
+                  <span>
+                    Dropdown content
+                  </span>
                 </div>
               </div>
-            </InnerReference>
-          </Reference>
-        </Manager>
-      </Popover>
-    </div>
+            </div>
+          </div>
+        </div>
+      </Portal>
+    </Popover>
   </Dropdown>
 </DropdownButton>
 `;

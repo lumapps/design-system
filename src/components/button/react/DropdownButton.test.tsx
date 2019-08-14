@@ -117,7 +117,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             expect(iconButton).not.toExist();
 
             expect(popover).toExist();
-            expect(popover.prop('showPopper')).toBe(false);
+            expect(popover.prop('isVisible')).toBe(false);
         });
 
         it('should render correctly a non-splitted dropdown button with a preceding icon', (): void => {
@@ -137,7 +137,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             expect(iconButton).not.toExist();
 
             expect(popover).toExist();
-            expect(popover.prop('showPopper')).toBe(false);
+            expect(popover.prop('isVisible')).toBe(false);
         });
 
         it('should render correctly a splitted dropdown button', (): void => {
@@ -155,7 +155,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             expect(iconButton).toHaveProp('icon', mdiMenuDown);
 
             expect(popover).toExist();
-            expect(popover.prop('showPopper')).toBe(false);
+            expect(popover.prop('isVisible')).toBe(false);
         });
 
         it('should render correctly a splitted dropdown button with a preceding icon', (): void => {
@@ -178,7 +178,7 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             expect(iconButton).toHaveProp('icon', mdiMenuDown);
 
             expect(popover).toExist();
-            expect(popover.prop('showPopper')).toBe(false);
+            expect(popover.prop('isVisible')).toBe(false);
         });
     });
 
@@ -294,13 +294,13 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             const { button, wrapper }: ISetup = setupReturn;
             let { popover }: ISetup = setupReturn;
 
-            expect(popover.prop('showPopper')).toBe(false);
+            expect(popover.prop('isVisible')).toBe(false);
 
             button.simulate('click');
             popover = wrapper.find('Popover');
 
             expect(onClick).toHaveBeenCalled();
-            expect(popover.prop('showPopper')).toBe(true);
+            expect(popover.prop('isVisible')).toBe(true);
         });
 
         it('should only trigger `onClick` when the label button is clicked in splitted mode', (): void => {
@@ -308,13 +308,13 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             const { button, wrapper }: ISetup = setupReturn;
             let { popover }: ISetup = setupReturn;
 
-            expect(popover.prop('showPopper')).toBe(false);
+            expect(popover.prop('isVisible')).toBe(false);
 
             button.simulate('click');
             popover = wrapper.find('Popover');
 
             expect(onClick).toHaveBeenCalled();
-            // expect(popover.prop('showPopper')).toBe(false);
+            expect(popover.prop('isVisible')).toBe(false);
         });
 
         it('should only toggle the dropdown when the dropdown (icon) button is clicked in splitted mode', (): void => {
@@ -322,13 +322,13 @@ describe(`<${DropdownButton.displayName}>`, (): void => {
             const { iconButton, wrapper }: ISetup = setupReturn;
             let { popover }: ISetup = setupReturn;
 
-            expect(popover.prop('showPopper')).toBe(false);
+            expect(popover.prop('isVisible')).toBe(false);
 
             iconButton.simulate('click');
             popover = wrapper.find('Popover');
 
             expect(onClick).not.toHaveBeenCalled();
-            expect(popover.prop('showPopper')).toBe(true);
+            expect(popover.prop('isVisible')).toBe(true);
         });
     });
 

@@ -1,21 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
-<div
-  className="lumx-dropdown lumx-dropdown--has-toggle"
-  onKeyDown={[Function]}
->
+<Fragment>
+  <div
+    className="lumx-dropdown lumx-dropdown--has-toggle"
+    onKeyDown={[Function]}
+  >
+    <div
+      className="lumx-dropdown__toggle"
+      onClick={[Function]}
+    >
+      Toggle
+    </div>
+  </div>
   <Popover
-    anchorElement={
-      <div
-        className="lumx-dropdown__toggle"
-        onClick={[Function]}
-      >
-        Toggle
-      </div>
+    isVisible={false}
+    popoverRect={
+      Object {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0,
+      }
     }
-    popperElement={false}
-    showPopper={false}
-  />
-</div>
+    popoverRef={
+      Object {
+        "current": null,
+      }
+    }
+  >
+    <div>
+      <div
+        className="lumx-dropdown__menu"
+        style={
+          Object {
+            "width": undefined,
+          }
+        }
+      >
+        <div
+          className="lumx-dropdown__content"
+        >
+          This is the content of the dropdown
+        </div>
+      </div>
+    </div>
+  </Popover>
+</Fragment>
 `;
