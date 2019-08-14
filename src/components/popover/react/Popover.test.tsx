@@ -113,14 +113,21 @@ describe(`<${Popover.displayName}>`, (): void => {
         });
 
         it('should be placed correctly by the popoverRect prop', (): void => {
-            const popoverRect = { x: 300, y: 300, width: 500 };
+            const popoverRect = { x: 300, y: 300, width: 500, height: 200 };
             const { popover } = setup({ popoverRect });
 
             expect(popover.prop('style')).toHaveProperty(
                 'transform',
                 `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
             );
+            expect(popover.prop('style')).toHaveProperty('height', `${popoverRect.height}px`);
             expect(popover.prop('style')).toHaveProperty('width', `${popoverRect.width}px`);
+        });
+
+        it('should be placed correctly by the popoverRect prop', (): void => {
+            const { popover } = setup({ elevation: 7 });
+
+            expect(popover).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'elevation', value: 5 }));
         });
     });
 
