@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, Ref, forwardRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -74,19 +74,17 @@ function _validate(props: ButtonGroupProps): ReactNode {
  *
  * @return The component.
  */
-const ButtonGroup: React.FC<ButtonGroupProps> = ({
-    children,
-    className = '',
-    ...props
-}: ButtonGroupProps): ReactElement => {
-    const newChildren: ReactNode = _validate({ children });
+const ButtonGroup: React.FC<ButtonGroupProps> = forwardRef(
+    ({ children, className = '', ...props }: ButtonGroupProps, ref: Ref<HTMLDivElement>): ReactElement => {
+        const newChildren: ReactNode = _validate({ children });
 
-    return (
-        <div className={classNames(className, CLASSNAME)} {...props}>
-            {newChildren}
-        </div>
-    );
-};
+        return (
+            <div className={classNames(className, CLASSNAME)} ref={ref} {...props}>
+                {newChildren}
+            </div>
+        );
+    },
+);
 ButtonGroup.displayName = COMPONENT_NAME;
 
 /////////////////////////////
