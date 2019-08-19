@@ -93,7 +93,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                     closeOnClick={true}
                     escapeClose={true}
                     onClose={closeSimpleMenu}
-                    position={Placement.BOTTOM_START}
+                    placement={Placement.BOTTOM_START}
                     anchorRef={anchorSimpleRef}
                 >
                     {createSimpleMenuList(closeSimpleMenu)}
@@ -108,7 +108,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                     closeOnClick={false}
                     escapeClose={false}
                     offset={{ vertical: 8 }}
-                    position={Placement.BOTTOM_START}
+                    placement={Placement.BOTTOM_START}
                     anchorRef={anchorComplexRef}
                 >
                     {createComplexMenuList(closeComplexMenu)}
