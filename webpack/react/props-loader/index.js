@@ -13,7 +13,7 @@ const typeDocOptions = {
     excludeExternals: false,
 };
 
-module.exports = function() {
+module.exports = function propsLoader() {
     const doc = new typedoc.Application(typeDocOptions);
 
     // List .tsx files
@@ -23,6 +23,7 @@ module.exports = function() {
 
     // Extract doc as JS objects
     const stdout = process.stdout.write;
+    // eslint-disable-next-line no-empty-function
     process.stdout.write = () => {};
     const project = doc.convert(src);
     process.stdout.write = stdout;
@@ -30,7 +31,6 @@ module.exports = function() {
 
     // Convert to simple props description
     const propsByComponent = convertToSimplePropsByComponent(typeDocDef);
-    const module = { propsByComponent };
 
-    return `module.exports = ${JSON.stringify(module)}`;
+    return `module.exports = ${JSON.stringify({ propsByComponent })}`;
 };

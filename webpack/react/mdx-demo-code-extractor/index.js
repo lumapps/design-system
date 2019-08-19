@@ -2,6 +2,9 @@ const { get, partition } = require('lodash');
 
 /**
  * Combine import statements and jsx code into a formatted sample code for documentation.
+ * @param  {string} importStatement Import statements.
+ * @param  {string} code JSX code.
+ * @return {string} The formatted sample code.
  */
 const getSourceCode = (importStatement, code) => {
     return `${importStatement}\nconst App = ${code.trim()}`.trim().replace(/\n/g, '\\n');
@@ -9,6 +12,8 @@ const getSourceCode = (importStatement, code) => {
 
 /**
  * Transform <pre> element with JSX code into a demo block jsx element.
+ * @param  {string} importStatement Import statements.
+ * @param  {string} node JSX node.
  */
 function transformJSXCodeToJSXNode(importStatement, node) {
     const codeNode = node.children[0];
@@ -38,6 +43,7 @@ const DEMO_BLOCK_IMPORT = "import { DemoBlock } from 'LumX/demo/react/layout/Dem
 
 /**
  * MDX plugin to extract and insert source code from demo block in MDX documents.
+ * @return{Function} The code extractor function.
  */
 module.exports = () => {
     return (tree) => {

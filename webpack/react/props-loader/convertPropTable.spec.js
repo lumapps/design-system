@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 const { indexDefinitionById, findComponentsAndProps, convertToSimpleProp } = require('./convertPropTable');
 
 describe('indexDefinitionById', () => {

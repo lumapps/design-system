@@ -54,7 +54,7 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
 
                 <div className="main-content">
                     <div className="main-content__wrapper">
-                        <Redirect from="/" to="/product/foundations/colors" />
+                        <Redirect push from="/" to="/product/foundations/colors" />
                         <Route
                             path="/:path*"
                             render={({ match }: RouteComponentProps): ReactElement => (

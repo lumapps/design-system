@@ -18,6 +18,7 @@ const DemoColor = ({ theme, color, colorVariants }: IDemoColorProps): ReactEleme
                     `lumx-theme-background-${color}-${key}`,
                     `lumx-theme-color-${hue.fontColor}-N`,
                 )}
+                key={key}
             >
                 <span className="demo-colors__key">{key}</span>
 
