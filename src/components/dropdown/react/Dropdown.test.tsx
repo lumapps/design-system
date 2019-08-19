@@ -4,6 +4,7 @@ import { mount, shallow } from 'enzyme';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 
+import { ValueOf } from 'global';
 import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
 
 /////////////////////////////
@@ -41,13 +42,13 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
         // tslint:disable-next-line no-unused
         anchorRef,
         children: <div>This is the content of the dropdown</div>,
+        showDropdown: true,
         ...propsOverrides,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Dropdown {...props} />);
-
     return {
         dropdown: wrapper.find('div').first(),
 
@@ -83,33 +84,52 @@ describe(`<${Dropdown.displayName}>`, (): void => {
 
     // 3. Test events.
     describe('Events', (): void => {
-        // Nothing to do here.
         const onClose: jest.Mock = jest.fn();
+        type WindowEvents = keyof WindowEventMap;
+        let windowEventListeners: Partial<
+            { [key in WindowEvents]: (evt: Partial<ValueOf<WindowEventMap>>) => void }
+        > = {};
+
+        const addEventListener = (event: WindowEvents, cb: (evt: Partial<ValueOf<WindowEventMap>>) => void): void => {
+            windowEventListeners[event] = cb;
+        };
 
         beforeEach(
             (): void => {
+                window.addEventListener = jest.fn(addEventListener);
+                document.addEventListener = jest.fn(addEventListener);
+                windowEventListeners = {};
                 onClose.mockClear();
             },
         );
 
         it('should trigger `onClose` when pressing `escape` key', (): void => {
-            const { wrapper } = setup({ showDropdown: true, onClose, escapeClose: true }, false);
+            setup(
+                {
+                    escapeClose: true,
+                    onClose,
+                    showDropdown: true,
+                },
+                false,
+            );
 
-            wrapper.simulate('keydown', { keyCode: 27 });
+            windowEventListeners.keydown!({ keyCode: 27 });
             expect(onClose).toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing any other key', (): void => {
-            const { wrapper } = setup({ showDropdown: true, onClose, escapeClose: true }, false);
+            setup({ showDropdown: true, onClose, escapeClose: true }, false);
 
-            wrapper.simulate('keydown', { keyCode: 26 });
+            windowEventListeners.keydown!({ keyCode: 26 });
             expect(onClose).not.toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing `escape` key with `escapeClose` set to `false`', (): void => {
-            const { wrapper } = setup({ showDropdown: true, onClose, escapeClose: false }, false);
+            setup({ showDropdown: true, onClose, escapeClose: false }, false);
 
-            wrapper.simulate('keydown', { keyCode: 27 });
+            if (windowEventListeners.keydown) {
+                windowEventListeners.keydown({ keyCode: 27 });
+            }
             expect(onClose).not.toHaveBeenCalled();
         });
     });
