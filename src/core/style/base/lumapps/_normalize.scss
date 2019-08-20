@@ -62,7 +62,8 @@ hr {
    */
 
 pre {
-    font-family: monospace; /* 1 */
+    /* stylelint-disable-next-line font-family-no-duplicate-names */
+    font-family: monospace, monospace; /* 1 */
     font-size: 1em; /* 2 */
 }
 
@@ -105,7 +106,8 @@ strong {
 code,
 kbd,
 samp {
-    font-family: monospace; /* 1 */
+    /* stylelint-disable-next-line font-family-no-duplicate-names */
+    font-family: monospace, monospace; /* 1 */
     font-size: 1em; /* 2 */
 }
 
