@@ -53,6 +53,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
         isTooltipDisplayed,
         { horizontal: 0, vertical: 0 },
         true,
+        true,
     );
 
     /**

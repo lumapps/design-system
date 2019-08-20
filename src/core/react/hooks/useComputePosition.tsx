@@ -11,6 +11,7 @@ type useComputePositionType = (
     popoverRef: React.RefObject<HTMLDivElement>,
     isVisible: boolean,
     offset?: Offset,
+    staysOpenOnHover?: boolean,
     hasParentWidth?: boolean,
     hasParentHeight?: boolean,
     // tslint:disable-next-line: no-any
@@ -40,6 +41,7 @@ const useComputePosition: useComputePositionType = (
     popoverRef: React.RefObject<HTMLDivElement>,
     isVisible: boolean,
     offset: Offset = { horizontal: 0, vertical: 0 },
+    staysOpenOnHover: boolean = true,
     hasParentWidth?: boolean,
     hasParentHeight?: boolean,
     // tslint:disable-next-line: no-any
@@ -64,7 +66,7 @@ const useComputePosition: useComputePositionType = (
         },
     };
     // Handle mouse over the popover to prevent it from closing from outside (infinite mouse event bug).
-    const [isMouseEntered, setIsMouseEntered] = useState(false);
+    const [isMouseEntered, setIsMouseEntered] = useState<boolean>(false);
     const [isAnchorInViewport, setIsAnchorInViewport] = useState(false);
     const defaultPosition = {
         x: 0,
@@ -186,7 +188,7 @@ const useComputePosition: useComputePositionType = (
         };
     }, [...dependencies, isAnchorInViewport, isVisible]);
 
-    return { computedPosition, isVisible: (isVisible && isAnchorInViewport) || isMouseEntered };
+    return { computedPosition, isVisible: (isVisible && isAnchorInViewport) || (staysOpenOnHover && isMouseEntered) };
 };
 
 export { useComputePosition, useComputePositionType };
