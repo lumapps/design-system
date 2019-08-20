@@ -316,16 +316,18 @@ function validateComponent(
 
                     if (!isOfOneAllowedType) {
                         let allowedTypesString = '';
-                        allowedTypes.forEach((allowedType: string | ComponentType, idx: number): void => {
-                            if (!isEmpty(allowedTypesString)) {
-                                allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
-                            }
+                        allowedTypes.forEach(
+                            (allowedType: string | ComponentType, idx: number): void => {
+                                if (!isEmpty(allowedTypesString)) {
+                                    allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
+                                }
 
-                            const typeName: string | ComponentType = getTypeName(allowedType);
-                            allowedTypesString +=
-                                (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
-                                '<Unknown component type>';
-                        });
+                                const typeName: string | ComponentType = getTypeName(allowedType);
+                                allowedTypesString +=
+                                    (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
+                                    '<Unknown component type>';
+                            },
+                        );
 
                         console.debug('Non matching type', newChild, '\nResulted in', getTypeName(newChild));
                         throw new Error(
@@ -413,6 +415,20 @@ const isComponent = <C>(component: React.FC<C> | string): Predicate<ReactNode> =
     );
 };
 
+/**
+ * Flatten an array recursively.
+ *
+ * @param  array The array to flatten.
+ * @return The flattened array.
+ */
+function flattenArray<T>(array: Array<T | T[]>): T[] {
+    return array.reduce(
+        (returnValue: T[], item: T | T[]) =>
+            Array.isArray(item) ? [...returnValue, ...flattenArray(item)] : [...returnValue, item],
+        [],
+    );
+}
+
 /////////////////////////////
 
 export {
@@ -422,6 +438,7 @@ export {
     IGenericProps,
     Omit,
     ValidateParameters,
+    flattenArray,
     getRootClassName,
     getTypeName,
     isElementOfType,

@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,7 +6,8 @@ import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown }
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { Chip, Dropdown, Icon, List, ListItem, PopperPlacement, Size, Theme } from 'LumX';
+import { Chip, Dropdown, Icon, Placement, Size, Theme } from 'LumX';
+
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -25,9 +26,9 @@ const enum SelectVariant {
  */
 interface ISelectProps extends IGenericProps {
     /**
-     * The list of choices.
+     * The list of selected values.
      */
-    choices: string[];
+    selectedValues: string[];
 
     /**
      * Whether the select (input variant) is displayed with error style or not.
@@ -35,29 +36,19 @@ interface ISelectProps extends IGenericProps {
     hasError?: boolean;
 
     /**
-     * Whether to display a search field in the popover or not.
-     */
-    hasFilter?: boolean;
-
-    /**
-     * Whether to display a helper within the popover (last position) or not.
-     */
-    hasHelper?: boolean;
-
-    /**
      * The helper to display within the popover (last position).
      */
     helper?: string;
 
     /**
-     * Whether to display a clear button in the select (input variant/unique mode) or not.
-     */
-    isClearable?: boolean;
-
-    /**
      * Whether the select is disabled or not.
      */
     isDisabled?: boolean;
+
+    /**
+     * Whether the select is opened or not.
+     */
+    isOpen?: boolean;
 
     /**
      * Whether to display a circular progress within the popover instead of the choices list or not.
@@ -93,9 +84,29 @@ interface ISelectProps extends IGenericProps {
     variant?: SelectVariant;
 
     /**
+     * The callback function called when the clear button is clicked. NB: if not specified, clear buttons won't be displayed.
+     */
+    onClear?(event: React.MouseEvent<HTMLDivElement, MouseEvent>, value?: string): void;
+
+    /**
      * The callback function called on integrated search field change (500ms debounce).
      */
-    filter?(): void;
+    onFilter?(): void;
+
+    /**
+     * The callback function called when the select input is clicked, can be used for dropdown toggle.
+     */
+    onInputClick?(): void;
+
+    /**
+     * The callback function called when the dropdown is closed.
+     */
+    onDropdownClose?(): void;
+
+    /**
+     * The function called to render a selected value. NB: For Select multiple, it will be rendered inside of a Chip.
+     */
+    selectedValueRender?(choice: string): ReactNode | string;
 }
 type SelectProps = ISelectProps;
 
@@ -127,12 +138,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     hasError: false,
-    hasFilter: false,
-    hasHelper: false,
-    isClearable: false,
     isLoading: false,
+    isOpen: false,
     isValid: false,
     multiple: false,
+    selectedValueRender: (choice: string): ReactNode | string => <div>{choice}</div>,
     theme: Theme.light,
     variant: SelectVariant.input,
 };
@@ -146,42 +156,30 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const Select: React.FC<SelectProps> = ({
     className = '',
     hasError = DEFAULT_PROPS.hasError,
-    // tslint:disable-next-line: no-unused
-    hasFilter = DEFAULT_PROPS.hasFilter,
-    // tslint:disable-next-line: no-unused
-    hasHelper = DEFAULT_PROPS.hasHelper,
-    isClearable = DEFAULT_PROPS.isClearable,
+    onClear,
     // tslint:disable-next-line: no-unused
     isLoading = DEFAULT_PROPS.isLoading,
     isValid = DEFAULT_PROPS.isValid,
     multiple = DEFAULT_PROPS.multiple,
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
-    choices,
-    // tslint:disable-next-line: no-unused
+    selectedValues = [],
     helper,
     isDisabled,
+    isOpen = DEFAULT_PROPS.isOpen,
+    onInputClick,
+    onDropdownClose,
     label,
     placeholder,
-    // tslint:disable-next-line: no-unused
-    filter,
+    selectedValueRender = DEFAULT_PROPS.selectedValueRender,
+    children,
     ...props
 }: SelectProps): React.ReactElement => {
-    const [isOpen, setIsOpen] = useState<boolean>(false);
     // tslint:disable-next-line: no-unused
     const [isFocus, setIsFocus] = useState(false);
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
     const isEmpty = selectedValues.length === 0;
     const targetUuid = 'uuid';
-
-    const toggleDropdown = (): void => {
-        setIsOpen(!isOpen);
-    };
-
-    const clearSelectedvalues = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value?: string): void => {
-        event.stopPropagation();
-        setSelectedValues(value ? selectedValues.filter((val: string) => val !== value) : []);
-    };
+    const anchorRef = useRef(null);
 
     const createParentElement: () => ReactNode = (): ReactNode => {
         return (
@@ -189,8 +187,15 @@ const Select: React.FC<SelectProps> = ({
                 {variant === SelectVariant.input && (
                     <>
                         {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
+                        {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
-                        <div className={`${CLASSNAME}__input-wrapper`} id={targetUuid} tabIndex={0}>
+                        <div
+                            onClick={onInputClick}
+                            ref={anchorRef}
+                            className={`${CLASSNAME}__input-wrapper`}
+                            id={targetUuid}
+                            tabIndex={0}
+                        >
                             {isEmpty && placeholder && (
                                 <div
                                     className={classNames([
@@ -204,7 +209,7 @@ const Select: React.FC<SelectProps> = ({
 
                             {!isEmpty && !multiple && (
                                 <div className={`${CLASSNAME}__input-native`}>
-                                    <span>{selectedValues[0]}</span>
+                                    <span>{selectedValueRender!(selectedValues[0])}</span>
                                 </div>
                             )}
 
@@ -214,19 +219,19 @@ const Select: React.FC<SelectProps> = ({
                                         {selectedValues.map((value: string, index: number) => (
                                             <Chip
                                                 key={index}
-                                                after={<Icon icon={mdiClose} size={Size.xxs} />}
+                                                after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
                                                 isDisabled={isDisabled}
                                                 size={Size.s}
                                                 // tslint:disable-next-line: jsx-no-lambda
                                                 onAfterClick={(
                                                     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-                                                ): void => clearSelectedvalues(event, value)}
+                                                ): void => onClear && onClear(event, value)}
                                                 // tslint:disable-next-line: jsx-no-lambda
                                                 onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
-                                                    clearSelectedvalues(event, value)
+                                                    onClear && onClear(event, value)
                                                 }
                                             >
-                                                {value}
+                                                {selectedValueRender!(value)}
                                             </Chip>
                                         ))}
                                     </div>
@@ -239,8 +244,8 @@ const Select: React.FC<SelectProps> = ({
                                 </div>
                             )}
 
-                            {isClearable && !multiple && !isEmpty && (
-                                <div className={`${CLASSNAME}__input-clear`} onClick={clearSelectedvalues}>
+                            {onClear && !multiple && !isEmpty && (
+                                <div className={`${CLASSNAME}__input-clear`} onClick={onClear}>
                                     <Icon icon={mdiCloseCircle} size={Size.xs} />
                                 </div>
                             )}
@@ -258,17 +263,18 @@ const Select: React.FC<SelectProps> = ({
                         isSelected={!isEmpty}
                         after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
                         // tslint:disable-next-line: jsx-no-lambda
-                        onAfterClick={isEmpty ? toggleDropdown : clearSelectedvalues}
-                        onClick={toggleDropdown}
+                        onAfterClick={isEmpty ? onInputClick : onClear}
+                        onClick={onInputClick}
+                        ref={anchorRef}
                         theme={theme}
                     >
                         {isEmpty && <span>{label}</span>}
 
-                        {!isEmpty && !multiple && <span>{selectedValues[0]}</span>}
+                        {!isEmpty && !multiple && <span>{selectedValueRender!(selectedValues[0])}</span>}
 
                         {!isEmpty && multiple && (
                             <span>
-                                <span>{selectedValues[0]}</span>
+                                <span>{selectedValueRender!(selectedValues[0])}</span>
 
                                 {selectedValues.length > 1 && <span>&nbsp;+{selectedValues.length - 1}</span>}
                             </span>
@@ -276,37 +282,6 @@ const Select: React.FC<SelectProps> = ({
                     </Chip>
                 )}
             </>
-        );
-    };
-
-    const createList: (setOpenStatus: (isOpen: boolean) => void) => ReactNode = (
-        setOpenStatus: (isOpen: boolean) => void,
-    ): ReactNode => {
-        const onItemSelectedHandler: (item?: string) => void = (item?: string): void => {
-            setOpenStatus(false);
-
-            if (selectedValues.includes(item)) {
-                return;
-            }
-
-            if (multiple) {
-                setSelectedValues([...selectedValues, item]);
-            } else {
-                setSelectedValues([item]);
-            }
-        };
-
-        return (
-            <List isClickable={true}>
-                {choices.length > 0
-                    ? choices.map((choice: string, index: number) => (
-                          // tslint:disable-next-line: jsx-no-lambda
-                          <ListItem key={index} onItemSelected={(): void => onItemSelectedHandler(choice)}>
-                              {choice}
-                          </ListItem>
-                      ))
-                    : [<ListItem key={0}>No data</ListItem>]}
-            </List>
         );
     };
 
@@ -332,14 +307,16 @@ const Select: React.FC<SelectProps> = ({
             )}
             {...props}
         >
+            {createParentElement()}
             <Dropdown
                 closeOnClick={true}
                 escapeClose={true}
-                position={PopperPlacement.BOTTOM_START}
-                showDropdown={isOpen}
-                toggleElement={createParentElement()}
+                placement={Placement.AUTO_START}
+                showDropdown={isOpen!}
+                anchorRef={anchorRef}
+                onClose={onDropdownClose}
             >
-                {(setOpenStatus: (isOpen: boolean) => void): ReactNode => createList(setOpenStatus)}
+                {children}
             </Dropdown>
         </div>
     );
