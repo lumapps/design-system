@@ -7,7 +7,7 @@ import { Button, ButtonEmphasis, ButtonVariant, ColorPalette, DragHandle, Theme 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { Callback, IGenericProps, getRootClassName, isComponent, partitionMulti } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-import { castArray, get, isEmpty } from 'lodash';
+import { castArray, get, isEmpty, isFunction } from 'lodash';
 
 /////////////////////////////
 
@@ -39,7 +39,7 @@ interface IExpansionPanelProps extends IGenericProps {
     closeCallback?: Callback;
 
     /** The function called on open or close */
-    toggleCallback?: Callback;
+    toggleCallback?(shouldOpen: boolean): void;
 }
 type ExpansionPanelProps = IExpansionPanelProps;
 
@@ -95,25 +95,17 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
         <span className={`${CLASSNAME}__label`}>{label}</span>
     );
 
-    const [showWrapper, setShowWrapper] = useState(isOpen);
-    useEffect(() => {
-        if (isOpen !== undefined) {
-            setShowWrapper(isOpen);
-        }
-    }, [isOpen]);
-
     const toggleOpen = (): void => {
-        const shouldOpen = !showWrapper;
-        if (openCallback && shouldOpen) {
+        const shouldOpen = !isOpen;
+        if (isFunction(openCallback) && shouldOpen) {
             openCallback();
         }
-        if (closeCallback && !shouldOpen) {
+        if (isFunction(closeCallback) && !shouldOpen) {
             closeCallback();
         }
-        if (toggleCallback) {
-            toggleCallback();
+        if (isFunction(toggleCallback)) {
+            toggleCallback(shouldOpen);
         }
-        setShowWrapper(shouldOpen);
     };
 
     const color = theme === Theme.dark ? ColorPalette.light : ColorPalette.dark;
@@ -134,17 +126,14 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
     );
 
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const isContentVisible = (): boolean => get(wrapperRef, 'current.clientHeight') > 0;
+    const isContentVisible = (): boolean => get(wrapperRef.current, 'clientHeight', 0) > 0;
 
-    // Switch max height on/off to activate the CSS transition
+    // Switch max height on/off to activate the CSS transition (updates when children changes).
     const [maxHeight, setMaxHeight] = useState('0');
     useEffect(() => {
-        if (showWrapper && wrapperRef.current) {
-            setMaxHeight(wrapperRef.current.offsetHeight + 'px');
-        } else {
-            setMaxHeight('0');
-        }
-    }, [showWrapper, wrapperRef.current]);
+        const height = isOpen ? get(wrapperRef.current, 'offsetHeight', 0) : 0;
+        setMaxHeight(height + 'px');
+    }, [children, isOpen, wrapperRef.current]);
 
     return (
         <section className={rootClassName} {...otherProps}>
@@ -160,12 +149,12 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
                         color={color}
                         emphasis={ButtonEmphasis.low}
                         variant={ButtonVariant.icon}
-                        leftIcon={showWrapper ? mdiChevronUp : mdiChevronDown}
+                        leftIcon={isOpen ? mdiChevronUp : mdiChevronDown}
                     />
                 </div>
             </header>
 
-            {(showWrapper || isContentVisible()) && (
+            {(isOpen || isContentVisible()) && (
                 <div className={`${CLASSNAME}__wrapper`} style={{ maxHeight }}>
                     <div className={`${CLASSNAME}__container`} ref={wrapperRef}>
                         <div className={`${CLASSNAME}__content`}>{content}</div>
