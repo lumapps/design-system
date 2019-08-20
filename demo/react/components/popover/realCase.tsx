@@ -104,7 +104,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
         <>
             <div style={demoPopoverHolderStyle}>
                 <UserBlock
-                    ref={anchorRef}
+                    userBlockRef={anchorRef}
                     theme={theme}
                     name="Guillaume Nachury"
                     fields={['Bidouilleur', 'Meyzieu']}
@@ -127,6 +127,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                     }}
                 >
                     <UserBlock
+                        userBlockRef={anchorRef}
                         theme={theme}
                         name="Guillaume Nachury"
                         fields={['Bidouilleur', 'Meyzieu']}
