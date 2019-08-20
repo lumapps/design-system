@@ -29,7 +29,8 @@ type useComputePositionType = (
  * @param placement Placement of tooltip.
  * @param anchorRef Ref of anchor element.
  * @param popoverRef Ref of tooltip.
- * @param [offset] Ref of tooltip.
+ * @param [offset] Offset between the anchor and the popover.
+ * @param [staysOpenOnHover] Whether the popover has to be displayed when hovered.
  * @param [hasParentWidth] Whether component has to match parent width.
  * @param [hasParentHeight] Whether component has to match parent height.
  * @param [dependencies] Dependencies of hook.
@@ -133,14 +134,22 @@ const useComputePosition: useComputePositionType = (
                     boundingAnchor,
                     boundingPopover,
                 );
-                const topPosition = { ...newPosition, x: newPosition.x + topX, y: newPosition.y + topY };
+                const topPosition = { x: newPosition.x + topX, y: newPosition.y + topY };
                 newPosition = topPosition;
             }
         } else {
             const { x, y } = calculatePopoverPlacement(placement, boundingAnchor, boundingPopover);
-
-            newPosition = { ...newPosition, x: newPosition.x + x, y: newPosition.y + y };
+            newPosition = { x: newPosition.x + x, y: newPosition.y + y };
         }
+
+        if (hasParentWidth) {
+            newPosition.width = boundingAnchor.width;
+        }
+
+        if (hasParentHeight) {
+            newPosition.height = boundingAnchor.height;
+        }
+
         if (callback) {
             callback(newPosition);
         }
