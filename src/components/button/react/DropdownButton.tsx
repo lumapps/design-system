@@ -205,7 +205,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 
     if (splitted) {
         rootElement = (
-            <ButtonGroup className={extendedClassNames} ref={buttonRef}>
+            <ButtonGroup className={extendedClassNames} buttonGroupRef={buttonRef}>
                 <Button {...props} leftIcon={icon} variant={ButtonVariant.button}>
                     {newChildren}
                 </Button>
