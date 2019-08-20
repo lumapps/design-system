@@ -40,7 +40,7 @@ export { ListItem, ListItemProps, ListItemSize } from './components/list/react/L
 
 export { ListSubheader, ListSubheaderProps } from './components/list/react/ListSubheader';
 
-export { ElementPosition, Popover, PopoverProps, Placement, Offsets } from './components/popover/react/Popover';
+export { ElementPosition, Popover, PopoverProps, Placement, Offset } from './components/popover/react/Popover';
 
 export { Progress, ProgressProps, ProgressVariant } from './components/progress/react/Progress';
 

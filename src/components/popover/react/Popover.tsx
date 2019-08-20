@@ -37,11 +37,11 @@ enum Placement {
 /**
  * Vertical and horizontal offset of the popover.
  */
-interface IOffsets {
+interface IOffset {
     vertical?: number;
     horizontal?: number;
 }
-type Offsets = IOffsets;
+type Offset = IOffset;
 
 /**
  * Position for arrow or tooltip.
@@ -156,4 +156,4 @@ Popover.useComputePosition = useComputePosition;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, ElementPosition, Offsets };
+export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, ElementPosition, Offset };

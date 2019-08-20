@@ -4,7 +4,7 @@ import {
     Button,
     ButtonEmphasis,
     IconButton,
-    Offsets,
+    Offset,
     Orientation,
     Placement,
     Popover,
@@ -90,7 +90,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
         }
     };
 
-    const offsets: Offsets = { vertical: 20 };
+    const offsets: Offset = { vertical: 20 };
 
     const { computedPosition, isVisible } = Popover.useComputePosition(
         Placement.TOP_START,

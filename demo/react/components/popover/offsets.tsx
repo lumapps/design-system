@@ -1,6 +1,6 @@
 import React, { CSSProperties, ReactElement, useRef } from 'react';
 
-import { Offsets, Placement, Popover } from 'LumX';
+import { Offset, Placement, Popover } from 'LumX';
 
 /////////////////////////////
 
@@ -48,7 +48,7 @@ const demoPopoverHolderStyle: CSSProperties = {
 
 /////////////////////////////
 
-const offsets: Offsets = { horizontal: -60, vertical: 30 };
+const offsets: Offset = { horizontal: -60, vertical: 30 };
 
 /**
  * The demo for the default <Popover>s.

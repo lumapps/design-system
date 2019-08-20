@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ElementPosition, Offsets, Placement } from 'LumX/components/popover/react/Popover';
+import { ElementPosition, Offset, Placement } from 'LumX/components/popover/react/Popover';
 
 import { calculatePopoverPlacement } from '../utils/calculatePopoverPlacement';
 import { isInViewPort } from '../utils/isInViewPort';
@@ -10,7 +10,7 @@ type useComputePositionType = (
     anchorRef: React.RefObject<HTMLElement>,
     popoverRef: React.RefObject<HTMLDivElement>,
     isVisible: boolean,
-    offset?: Offsets,
+    offset?: Offset,
     hasParentWidth?: boolean,
     hasParentHeight?: boolean,
     // tslint:disable-next-line: no-any
@@ -39,7 +39,7 @@ const useComputePosition: useComputePositionType = (
     anchorRef: React.RefObject<HTMLElement>,
     popoverRef: React.RefObject<HTMLDivElement>,
     isVisible: boolean,
-    offset: Offsets = { horizontal: 0, vertical: 0 },
+    offset: Offset = { horizontal: 0, vertical: 0 },
     hasParentWidth?: boolean,
     hasParentHeight?: boolean,
     // tslint:disable-next-line: no-any
