@@ -24,7 +24,9 @@ const PropTable: React.FC<IPropTableProps> = ({ propertyList }: IPropTableProps)
                             <TableCell>
                                 <code>{property.type}</code>
                             </TableCell>
-                            <TableCell>{property.defaultValue}</TableCell>
+                            <TableCell>
+                                <code>{property.defaultValue}</code>
+                            </TableCell>
                             <TableCell>{property.description}</TableCell>
                         </TableRow>
                     );

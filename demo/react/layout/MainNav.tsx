@@ -141,7 +141,13 @@ const MainNav: React.FC<IWithRouterProps> = (props: IWithRouterProps): ReactElem
     return (
         <div className="main-nav">
             <div className="main-nav__wrapper">
-                <div className="main-nav__logo">
+                <div
+                    className="main-nav__logo"
+                    role="button"
+                    tabIndex={0}
+                    onClick={(): void => goTo('/')}
+                    onKeyPress={(): void => goTo('/')}
+                >
                     <img src={LumXLogo} alt="LumX" />
                     <span>
                         <strong>{'LumApps'}</strong>
