@@ -26,6 +26,8 @@ interface IDropdownProps extends IGenericProps {
     placement?: Placement;
     /** Whether the dropdown should be displayed or not. Useful to control the Dropdown from outside the component. */
     showDropdown: boolean;
+    /** Whether the dropdown should fit to the anchor width */
+    hasAnchorWidth?: boolean;
     /** Children of the Dropdown. */
     children: React.ReactNode;
     /** The function to be called when the user clicks away or Escape is pressed */
@@ -62,6 +64,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     closeOnClick: true,
     closeOnEscape: true,
+    hasAnchorWidth: true,
     placement: Placement.BOTTOM_START,
     showDropdown: undefined,
 };
@@ -83,6 +86,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     showDropdown,
     anchorRef,
     placement = DEFAULT_PROPS.placement,
+    hasAnchorWidth = DEFAULT_PROPS.hasAnchorWidth,
     ...props
 }: DropdownProps): React.ReactElement => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
@@ -94,7 +98,8 @@ const Dropdown: React.FC<DropdownProps> = ({
         popoverRef,
         showDropdown,
         offset,
-        true,
+        false,
+        hasAnchorWidth,
     );
 
     const popperElement: React.ReactElement = (
