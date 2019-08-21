@@ -231,13 +231,21 @@ function convertToSimpleProp(definitionById, prop) {
     }
     type = type.replace('false | true', 'boolean');
 
+    let formattedDefaultValue = prop.defaultValue;
+    if (lodash.isString(prop.defaultValue)) {
+        formattedDefaultValue = prop.defaultValue.trim();
+        if (formattedDefaultValue === 'undefined' || formattedDefaultValue === 'null') {
+            formattedDefaultValue = undefined;
+        }
+    }
+
     return {
         id: prop.id,
         name: prop.name,
         required,
         type,
         description: formatDescription(prop),
-        defaultValue: prop.defaultValue,
+        defaultValue: formattedDefaultValue,
     };
 }
 
