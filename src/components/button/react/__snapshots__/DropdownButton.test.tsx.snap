@@ -232,8 +232,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
         placement="bottom-start"
         popoverRect={
           Object {
-            "height": 0,
-            "width": 0,
             "x": 0,
             "y": 0,
           }
@@ -250,7 +248,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
               >
                 <div
                   class="lumx-dropdown__menu"
-                  style="width: 0px;"
                 >
                   <div
                     class="lumx-dropdown__content"
@@ -280,7 +277,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -318,7 +314,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                 className="lumx-dropdown__menu"
                 style={
                   Object {
-                    "width": 0,
+                    "width": undefined,
                   }
                 }
               >
@@ -677,8 +673,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
         placement="bottom-start"
         popoverRect={
           Object {
-            "height": 0,
-            "width": 0,
             "x": 0,
             "y": 0,
           }
@@ -695,7 +689,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
               >
                 <div
                   class="lumx-dropdown__menu"
-                  style="width: 0px;"
                 >
                   <div
                     class="lumx-dropdown__content"
@@ -725,7 +718,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -747,7 +739,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -785,7 +776,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                 className="lumx-dropdown__menu"
                 style={
                   Object {
-                    "width": 0,
+                    "width": undefined,
                   }
                 }
               >
@@ -816,6 +807,42 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
   splitted={true}
 >
   <ButtonGroup
+    buttonGroupRef={
+      Object {
+        "current": <div
+          class="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
+        >
+          <button
+            class="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+          >
+            <span>
+              Label
+            </span>
+          </button>
+          <button
+            class="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+          >
+            <i
+              class="lumx-icon"
+            >
+              <svg
+                aria-hidden="true"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M7,10L12,15L17,10H7Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </i>
+          </button>
+        </div>,
+      }
+    }
     className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
   >
     <div
@@ -924,7 +951,43 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
     }
     showDropdown={false}
     toggleElement={
-      <ForwardRef
+      <ButtonGroup
+        buttonGroupRef={
+          Object {
+            "current": <div
+              class="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
+            >
+              <button
+                class="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+              >
+                <span>
+                  Label
+                </span>
+              </button>
+              <button
+                class="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+              >
+                <i
+                  class="lumx-icon"
+                >
+                  <svg
+                    aria-hidden="true"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                  >
+                    <path
+                      d="M7,10L12,15L17,10H7Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </i>
+              </button>
+            </div>,
+          }
+        }
         className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
       >
         <Button
@@ -936,13 +999,49 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
           icon="M7,10L12,15L17,10H7Z"
           onClick={[Function]}
         />
-      </ForwardRef>
+      </ButtonGroup>
     }
   >
     <div
       className="lumx-dropdown"
       toggleElement={
-        <ForwardRef
+        <ButtonGroup
+          buttonGroupRef={
+            Object {
+              "current": <div
+                class="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
+              >
+                <button
+                  class="lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+                >
+                  <span>
+                    Label
+                  </span>
+                </button>
+                <button
+                  class="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+                >
+                  <i
+                    class="lumx-icon"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                    >
+                      <path
+                        d="M7,10L12,15L17,10H7Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </i>
+                </button>
+              </div>,
+            }
+          }
           className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
         >
           <Button
@@ -954,7 +1053,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
             icon="M7,10L12,15L17,10H7Z"
             onClick={[Function]}
           />
-        </ForwardRef>
+        </ButtonGroup>
       }
     >
       <Popover
@@ -962,8 +1061,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
         placement="bottom-start"
         popoverRect={
           Object {
-            "height": 0,
-            "width": 0,
             "x": 0,
             "y": 0,
           }
@@ -980,7 +1077,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
               >
                 <div
                   class="lumx-dropdown__menu"
-                  style="width: 0px;"
                 >
                   <div
                     class="lumx-dropdown__content"
@@ -1010,7 +1106,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -1032,7 +1127,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -1054,7 +1148,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -1092,7 +1185,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 className="lumx-dropdown__menu"
                 style={
                   Object {
-                    "width": 0,
+                    "width": undefined,
                   }
                 }
               >
@@ -1124,6 +1217,59 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
   splitted={true}
 >
   <ButtonGroup
+    buttonGroupRef={
+      Object {
+        "current": <div
+          class="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
+        >
+          <button
+            class="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+          >
+            <i
+              class="lumx-icon"
+            >
+              <svg
+                aria-hidden="true"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </i>
+            <span>
+              Label
+            </span>
+          </button>
+          <button
+            class="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+          >
+            <i
+              class="lumx-icon"
+            >
+              <svg
+                aria-hidden="true"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 24 24"
+                width="1em"
+              >
+                <path
+                  d="M7,10L12,15L17,10H7Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </i>
+          </button>
+        </div>,
+      }
+    }
     className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
   >
     <div
@@ -1275,7 +1421,60 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
     }
     showDropdown={false}
     toggleElement={
-      <ForwardRef
+      <ButtonGroup
+        buttonGroupRef={
+          Object {
+            "current": <div
+              class="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
+            >
+              <button
+                class="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+              >
+                <i
+                  class="lumx-icon"
+                >
+                  <svg
+                    aria-hidden="true"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                  >
+                    <path
+                      d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </i>
+                <span>
+                  Label
+                </span>
+              </button>
+              <button
+                class="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+              >
+                <i
+                  class="lumx-icon"
+                >
+                  <svg
+                    aria-hidden="true"
+                    height="1em"
+                    preserveAspectRatio="xMidYMid meet"
+                    style="vertical-align: -0.125em;"
+                    viewBox="0 0 24 24"
+                    width="1em"
+                  >
+                    <path
+                      d="M7,10L12,15L17,10H7Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </i>
+              </button>
+            </div>,
+          }
+        }
         className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
       >
         <Button
@@ -1288,13 +1487,66 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
           icon="M7,10L12,15L17,10H7Z"
           onClick={[Function]}
         />
-      </ForwardRef>
+      </ButtonGroup>
     }
   >
     <div
       className="lumx-dropdown"
       toggleElement={
-        <ForwardRef
+        <ButtonGroup
+          buttonGroupRef={
+            Object {
+              "current": <div
+                class="lumx-dropdown-button lumx-dropdown-button--is-splitted lumx-button-group"
+              >
+                <button
+                  class="lumx-button--has-left-icon lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-button"
+                >
+                  <i
+                    class="lumx-icon"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                    >
+                      <path
+                        d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </i>
+                  <span>
+                    Label
+                  </span>
+                </button>
+                <button
+                  class="lumx-icon-button lumx-button lumx-button--color-primary lumx-button--emphasis-high lumx-button--size-m lumx-button--theme-light lumx-button--variant-icon"
+                >
+                  <i
+                    class="lumx-icon"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      height="1em"
+                      preserveAspectRatio="xMidYMid meet"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 24 24"
+                      width="1em"
+                    >
+                      <path
+                        d="M7,10L12,15L17,10H7Z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </i>
+                </button>
+              </div>,
+            }
+          }
           className="lumx-dropdown-button lumx-dropdown-button--is-splitted"
         >
           <Button
@@ -1307,7 +1559,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
             icon="M7,10L12,15L17,10H7Z"
             onClick={[Function]}
           />
-        </ForwardRef>
+        </ButtonGroup>
       }
     >
       <Popover
@@ -1315,8 +1567,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
         placement="bottom-start"
         popoverRect={
           Object {
-            "height": 0,
-            "width": 0,
             "x": 0,
             "y": 0,
           }
@@ -1333,7 +1583,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
               >
                 <div
                   class="lumx-dropdown__menu"
-                  style="width: 0px;"
                 >
                   <div
                     class="lumx-dropdown__content"
@@ -1363,7 +1612,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -1385,7 +1633,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -1407,7 +1654,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -1429,7 +1675,6 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 >
                   <div
                     class="lumx-dropdown__menu"
-                    style="width: 0px;"
                   >
                     <div
                       class="lumx-dropdown__content"
@@ -1467,7 +1712,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 className="lumx-dropdown__menu"
                 style={
                   Object {
-                    "width": 0,
+                    "width": undefined,
                   }
                 }
               >
