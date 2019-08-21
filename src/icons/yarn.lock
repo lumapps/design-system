@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@mdi/font@^3.7.95":
+"@mdi/font@3.7.95":
   version "3.7.95"
   resolved "https://registry.yarnpkg.com/@mdi/font/-/font-3.7.95.tgz#86f783bdef3d985e14ce1345433477cade15fd6d"
   integrity sha512-JFQSv1GwhilTN6mj2SHu+YH+jZAIPn6sir/gGYoMSgyEM94nzlLGc7Ew21mnDEr0+W3LhFaInu8dqZFvNUx1bA==
 
-"@mdi/js@^3.7.95":
+"@mdi/js@3.7.95":
   version "3.7.95"
   resolved "https://registry.yarnpkg.com/@mdi/js/-/js-3.7.95.tgz#65a15b766db6873447ab88142e452f0b20b3b524"
   integrity sha512-R0Xt8JCOxPurdAv1nCLg3mazRKT1W8uyNVCJHF6JjbfgZyTm/Ct+G/4Vu+NhdXfpr/me/1kZkyDNq3Lh/vKgkg==

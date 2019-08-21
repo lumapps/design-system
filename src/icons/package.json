@@ -16,8 +16,8 @@
         }
     ],
     "dependencies": {
-        "@mdi/font": "^3.7.95",
-        "@mdi/js": "^3.7.95"
+        "@mdi/font": "3.7.95",
+        "@mdi/js": "3.7.95"
     },
     "description": "LumX icons",
     "engines": {
