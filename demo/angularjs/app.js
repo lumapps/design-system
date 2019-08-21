@@ -126,6 +126,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.editable-media', {
+            url: 'editable-media',
+            views: {
+                'main@': {
+                    controller: 'DemoEditableMediaController',
+                    controllerAs: 'vm',
+                    template: require('./components/editable-media/demo.html'),
+                },
+            },
+        })
         .state('app.expansion-panel', {
             url: 'expansion-panel',
             views: {
@@ -399,6 +409,7 @@ require('./components/chip/controller.js');
 require('./components/comment-block/controller.js');
 require('./components/dialog/controller.js');
 require('./components/dropdown/controller.js');
+require('./components/editable-media/controller.js');
 require('./components/expansion-panel/controller.js');
 require('./components/image-block/controller.js');
 require('./components/lightbox/controller.js');

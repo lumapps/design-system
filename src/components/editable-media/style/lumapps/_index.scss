@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Editable-media
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-editable-media {
+    $self: &;
+
+    &__label {
+        @include lumx-input-label(dark);
+    }
+
+    &__helper {
+        @include lumx-input-helper(dark);
+    }
+
+    &__wrapper {
+        position: relative;
+
+        #{$self}--has-label & {
+            margin-top: $lumx-spacing-unit;
+        }
+
+        #{$self}--size-xl & {
+            width: map-get($lumx-sizes, xl);
+        }
+
+        #{$self}--size-xxl & {
+            width: map-get($lumx-sizes, xxl);
+        }
+    }
+
+    &__cta {
+        @include lumx-state-transition;
+
+        position: relative;
+        background-color: lumx-theme-color-variant(dark, L5);
+        cursor: pointer;
+        outline: none;
+
+        #{$self}--variant-thumbnail & {
+            padding-top: map-get($lumx-thumbnail-aspect-ratio, horizontal);
+            border-radius: $lumx-theme-border-radius;
+        }
+
+        #{$self}--variant-avatar & {
+            padding-top: map-get($lumx-thumbnail-aspect-ratio, square);
+            border-radius: 50%;
+        }
+
+        &:hover {
+            @include lumx-state(state-hover, emphasis-medium, dark);
+        }
+
+        &:active {
+            @include lumx-state(state-active, emphasis-medium, dark);
+        }
+
+        &[data-focus-visible-added] {
+            @include lumx-state(state-focus, emphasis-medium, dark);
+        }
+    }
+
+    &__cta-content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    &__cta-placeholder {
+        @include lumx-typography(subtitle1);
+
+        margin-top: $lumx-spacing-unit;
+        text-align: center;
+    }
+
+    &__actions {
+        position: absolute;
+
+        #{$self}--variant-thumbnail & {
+            top: $lumx-spacing-unit * 1.5;
+            right: $lumx-spacing-unit * 1.5;
+        }
+
+        #{$self}--variant-avatar & {
+            top: 50%;
+            right: 0;
+            left: 0;
+            transform: translateY(-50%);
+        }
+    }
+}
