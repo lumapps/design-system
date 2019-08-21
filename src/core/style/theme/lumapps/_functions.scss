@@ -1,5 +1,9 @@
 @function lumx-theme-color-variant($color, $variant) {
-    @return map-get(map-get($lumx-theme-color-palette, $color), $variant);
+    @if map-has-key($lumx-theme-color-palette, $color) {
+        @return map-get(map-get($lumx-theme-color-palette, $color), $variant);
+    } @else {
+        @return map-get(map-get($lumx-theme-color-palette, dark), $variant);
+    }
 }
 
 @function lumx-theme-best-color(
