@@ -51,11 +51,6 @@ interface ISelectProps extends IGenericProps {
     isOpen?: boolean;
 
     /**
-     * Whether to display a circular progress within the popover instead of the choices list or not.
-     */
-    isLoading?: boolean;
-
-    /**
      * Whether the select (input variant) is displayed with valid style or not.
      */
     isValid?: boolean;
@@ -138,7 +133,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     hasError: false,
-    isLoading: false,
     isOpen: false,
     isValid: false,
     multiple: false,
@@ -157,8 +151,6 @@ const Select: React.FC<SelectProps> = ({
     className = '',
     hasError = DEFAULT_PROPS.hasError,
     onClear,
-    // tslint:disable-next-line: no-unused
-    isLoading = DEFAULT_PROPS.isLoading,
     isValid = DEFAULT_PROPS.isValid,
     multiple = DEFAULT_PROPS.multiple,
     theme = DEFAULT_PROPS.theme,
