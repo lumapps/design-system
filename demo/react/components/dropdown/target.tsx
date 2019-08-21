@@ -50,7 +50,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
             </div>
             <Dropdown
                 closeOnClick={true}
-                escapeClose={true}
+                closeOnEscape={true}
                 onClose={(): void => setIsDropdownOpen(false)}
                 placement={Placement.BOTTOM_START}
                 showDropdown={isDropdownOpen}

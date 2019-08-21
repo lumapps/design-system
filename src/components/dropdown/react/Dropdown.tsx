@@ -19,7 +19,7 @@ interface IDropdownProps extends IGenericProps {
     /** Whether a click anywhere out of the Dropdown would close it. */
     closeOnClick?: boolean;
     /** Whether an escape key press would close the Dropdown. */
-    escapeClose?: boolean;
+    closeOnEscape?: boolean;
     /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
     offset?: Offset;
     /** The preferred Dropdown location against the anchor element. */
@@ -61,7 +61,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     closeOnClick: true,
-    escapeClose: true,
+    closeOnEscape: true,
     placement: Placement.BOTTOM_START,
     showDropdown: undefined,
 };
@@ -78,7 +78,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     className = '',
     onClose,
     closeOnClick = DEFAULT_PROPS.closeOnClick,
-    escapeClose = DEFAULT_PROPS.escapeClose,
+    closeOnEscape = DEFAULT_PROPS.closeOnEscape,
     offset,
     showDropdown,
     anchorRef,
@@ -104,7 +104,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     );
 
     useEffect(() => {
-        if (escapeClose && showDropdown && wrapperRef.current) {
+        if (closeOnEscape && showDropdown && wrapperRef.current) {
             window.addEventListener('keydown', onEscapePressed(onClose!));
         } else {
             window.removeEventListener('keydown', onEscapePressed(onClose!));
@@ -112,7 +112,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         return (): void => {
             window.removeEventListener('keydown', onEscapePressed(onClose!));
         };
-    }, [showDropdown, escapeClose]);
+    }, [showDropdown, closeOnEscape]);
 
     // Any click away from the dropdown container will close it.
     useClickAway(

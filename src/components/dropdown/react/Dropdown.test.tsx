@@ -106,7 +106,7 @@ describe(`<${Dropdown.displayName}>`, (): void => {
         it('should trigger `onClose` when pressing `escape` key', (): void => {
             setup(
                 {
-                    escapeClose: true,
+                    closeOnEscape: true,
                     onClose,
                     showDropdown: true,
                 },
@@ -118,14 +118,14 @@ describe(`<${Dropdown.displayName}>`, (): void => {
         });
 
         it('should not trigger `onClose` when pressing any other key', (): void => {
-            setup({ showDropdown: true, onClose, escapeClose: true }, false);
+            setup({ showDropdown: true, onClose, closeOnEscape: true }, false);
 
             windowEventListeners.keydown!({ keyCode: 26 });
             expect(onClose).not.toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing `escape` key with `escapeClose` set to `false`', (): void => {
-            setup({ showDropdown: true, onClose, escapeClose: false }, false);
+        it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', (): void => {
+            setup({ showDropdown: true, onClose, closeOnEscape: false }, false);
 
             if (windowEventListeners.keydown) {
                 windowEventListeners.keydown({ keyCode: 27 });
