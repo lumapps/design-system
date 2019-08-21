@@ -57,6 +57,7 @@ const NAV_ITEMS: string[] = [
     'Radio button',
     'Select',
     'Slideshow',
+    'Side navigation',
     'Switch',
     'Tabs',
     'Table',

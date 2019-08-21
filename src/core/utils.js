@@ -37,6 +37,10 @@ const _isEmpty = (value) => {
  */
 function getBasicClass({ prefix, type, value }) {
     if (isBoolean(value)) {
+        if (!value) {
+            // False value should not return a class.
+            return '';
+        }
         const booleanPrefixes = ['has', 'is'];
 
         if (booleanPrefixes.some((booleanPrefix) => type.toString().startsWith(booleanPrefix))) {
