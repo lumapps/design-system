@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
+import { Route, RouteComponentProps } from 'react-router-dom';
 
 import { Alignment, Button, ButtonEmphasis, Grid, GridItem, Orientation, Size } from 'LumX';
 import { mdiAngularjs } from 'LumX/icons';
@@ -10,6 +10,9 @@ import { IGenericProps } from 'LumX/core/react/utils';
 
 import { MainContent } from './MainContent';
 import { ThemeSelector } from './ThemeSelector';
+
+// @ts-ignore
+import HomePage from '../doc/main';
 
 /**
  * Defines the props of the component.
@@ -36,7 +39,7 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
         <div className="main">
             <div className="main__wrapper">
                 <div className="main-header">
-                    <Grid wrap orientation={Orientation.horizontal} vAlign={Alignment.center} hAlign={Alignment.top}>
+                    <Grid orientation={Orientation.horizontal} vAlign={Alignment.center} hAlign={Alignment.top}>
                         <GridItem>
                             <span className="lumx-typography-overline lumx-spacing-margin-right-regular">Theme</span>
                             <ThemeSelector changeTheme={changeTheme} theme={theme} />
@@ -54,11 +57,12 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
 
                 <div className="main-content">
                     <div className="main-content__wrapper">
+                        <Route exact path="/" render={(): ReactElement => <HomePage />} />
                         <Route
                             path="/:path*"
-                            render={({ match }: RouteComponentProps): ReactElement => (
-                                <MainContent path={match.params.path} />
-                            )}
+                            render={({ match }: RouteComponentProps): ReactElement | null =>
+                                match.params.path ? <MainContent path={match.params.path} /> : null
+                            }
                         />
                     </div>
                 </div>
