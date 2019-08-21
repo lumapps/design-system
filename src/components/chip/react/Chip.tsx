@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, SyntheticEvent } from 'react';
+import React, { ReactElement, ReactNode, Ref, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -37,6 +37,8 @@ interface IChipProps extends IGenericProps {
     size?: ChipSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** A function to be executed when the before element is clicked. */
+    chipRef?: Ref<HTMLAnchorElement>;
     /** A function to be executed when the after element is clicked. */
     onAfterClick?(evt: SyntheticEvent): void;
     /** A function to be executed when the before element is clicked. */
@@ -102,6 +104,7 @@ const Chip: React.FC<IChipProps> = ({
     onClick,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
+    chipRef,
     ...props
 }: ChipProps): ReactElement => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
@@ -144,14 +147,15 @@ const Chip: React.FC<IChipProps> = ({
 
     return (
         <a
+            ref={chipRef}
             className={classNames(
                 className,
                 handleBasicClasses({
                     clickable: Boolean(hasOnClick) || isClickable,
                     color,
                     disabled: Boolean(isDisabled),
-                    hasAfter: Boolean(after),
-                    hasBefore: Boolean(before),
+                    hasAfter: Boolean(hasAfterClick),
+                    hasBefore: Boolean(hasBeforeClick),
                     prefix: CLASSNAME,
                     selected: Boolean(isSelected),
                     size,

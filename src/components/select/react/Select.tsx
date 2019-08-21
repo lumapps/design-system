@@ -257,7 +257,7 @@ const Select: React.FC<SelectProps> = ({
                         // tslint:disable-next-line: jsx-no-lambda
                         onAfterClick={isEmpty ? onInputClick : onClear}
                         onClick={onInputClick}
-                        ref={anchorRef}
+                        chipRef={anchorRef}
                         theme={theme}
                     >
                         {isEmpty && <span>{label}</span>}
@@ -302,7 +302,7 @@ const Select: React.FC<SelectProps> = ({
             {createParentElement()}
             <Dropdown
                 closeOnClick={true}
-                escapeClose={true}
+                closeOnEscape={true}
                 placement={Placement.AUTO_START}
                 showDropdown={isOpen!}
                 anchorRef={anchorRef}
