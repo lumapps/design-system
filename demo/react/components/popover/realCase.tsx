@@ -127,7 +127,6 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                     }}
                 >
                     <UserBlock
-                        userBlockRef={anchorRef}
                         theme={theme}
                         name="Guillaume Nachury"
                         fields={['Bidouilleur', 'Meyzieu']}
