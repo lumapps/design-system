@@ -51,6 +51,21 @@ function findComponentsAndProps(definitionById) {
                 };
             }
 
+            // Default props => Object literal ending with 'DEFAULT_PROPS'
+            if (
+                kindString === 'Variable' &&
+                def.parentId &&
+                definitionById[def.parentId] &&
+                definitionById[def.parentId].name === 'DEFAULT_PROPS'
+            ) {
+                return {
+                    name,
+                    type: 'DefaultProps',
+                    fileName: sources[0].fileName,
+                    value: def.defaultValue,
+                };
+            }
+
             return undefined;
         })
         .filter(Boolean);
@@ -69,6 +84,9 @@ function getPropsByComponents(definitionById) {
                     props: props.children.map((child) => ({
                         ...child,
                         componentId: component.id,
+                        defaultValue: (
+                            elements.find((el) => el.type === 'DefaultProps' && el.name === child.name) || {}
+                        ).value,
                     })),
                 };
             }
@@ -201,17 +219,6 @@ function formatDescription(definition) {
  * @return {Object} The simple prop description.
  */
 function convertToSimpleProp(definitionById, prop) {
-    const component = definitionById[prop.componentId];
-    const defaults = lodash
-        .chain(lodash.get(component, 'signatures.0.parameters'))
-        .flatMap((param) => param.type.declaration)
-        .filter(Boolean)
-        .flatMap('children')
-        .filter('defaultValue')
-        .map((param) => [param.name, param.defaultValue])
-        .value();
-    // Console.debug('defaults', JSON.stringify(defaults, null, 2));
-
     let type = formatDefinition(definitionById, prop);
     if (!type) {
         return undefined;
@@ -230,6 +237,7 @@ function convertToSimpleProp(definitionById, prop) {
         required,
         type,
         description: formatDescription(prop),
+        defaultValue: prop.defaultValue,
     };
 }
 

@@ -11,9 +11,8 @@ const PropTable: React.FC<IPropTableProps> = ({ propertyList }: IPropTableProps)
                         Required
                     </TableCell>
                     <TableCell variant={TableCellVariant.head}>Type</TableCell>
-                    <TableCell variant={TableCellVariant.head}>
-                        Description
-                    </TableCell>
+                    <TableCell variant={TableCellVariant.head}>Default value</TableCell>
+                    <TableCell variant={TableCellVariant.head}>Description</TableCell>
                 </TableRow>
             </TableHeader>
             <TableBody>
@@ -25,6 +24,7 @@ const PropTable: React.FC<IPropTableProps> = ({ propertyList }: IPropTableProps)
                             <TableCell>
                                 <code>{property.type}</code>
                             </TableCell>
+                            <TableCell>{property.defaultValue}</TableCell>
                             <TableCell>{property.description}</TableCell>
                         </TableRow>
                     );
@@ -40,10 +40,11 @@ interface IProperty {
     required: boolean;
     type: string;
     description: string;
+    defaultValue: string | undefined;
 }
 
 interface IPropTableProps {
     propertyList: IProperty[];
 }
 
-export { PropTable, IProperty }
+export { PropTable, IProperty };
