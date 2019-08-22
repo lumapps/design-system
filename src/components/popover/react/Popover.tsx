@@ -51,6 +51,12 @@ interface IElementPosition {
     y: number;
     width?: number;
     height?: number;
+    maxHeight?: number;
+    maxWidth?: number;
+    minHeight?: number;
+    minWidth?: number;
+    anchorHeight?: number;
+    anchorWidth?: number;
 }
 type ElementPosition = IElementPosition;
 

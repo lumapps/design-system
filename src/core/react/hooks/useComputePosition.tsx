@@ -52,6 +52,7 @@ const useComputePosition: useComputePositionType = (
     computedPosition: ElementPosition;
     isVisible: boolean;
 } => {
+    const WINDOW_BOUNDING_OFFSET = 8;
     const MATCHING_PLACEMENT = Placement && {
         [Placement.AUTO]: {
             bottom: Placement.BOTTOM,
@@ -80,7 +81,7 @@ const useComputePosition: useComputePositionType = (
         const newIsAnchorInViewPort = !!(
             anchorRef &&
             anchorRef.current &&
-            isInViewPort(anchorRef.current.getBoundingClientRect(), 'partial')
+            isInViewPort(anchorRef.current.getBoundingClientRect(), 'full')
         );
         setIsAnchorInViewport(newIsAnchorInViewPort);
 
@@ -93,25 +94,26 @@ const useComputePosition: useComputePositionType = (
         const boundingPopover = popoverRef.current.getBoundingClientRect();
         const { horizontal = 0, vertical = 0 } = offset;
         let newPosition: ElementPosition = {
-            height: hasParentHeight ? boundingAnchor.height : boundingPopover.height,
-            width: hasParentWidth ? boundingAnchor.width : boundingPopover.width,
+            anchorHeight: boundingAnchor.height,
+            anchorWidth: boundingAnchor.width,
+            height: boundingPopover.height,
+            width: boundingPopover.width,
             x: horizontal,
             y: vertical,
         };
 
         if (placement === Placement.AUTO || placement === Placement.AUTO_END || placement === Placement.AUTO_START) {
             // Try BOTTOM placement.
-
             const { x: bottomX, y: bottomY } = calculatePopoverPlacement(
                 MATCHING_PLACEMENT[placement].bottom,
                 boundingAnchor,
                 boundingPopover,
             );
-
             const bottomPosition = {
                 ...newPosition,
                 bottom: newPosition.y + bottomY + Number(newPosition.height),
                 left: newPosition.x + bottomX,
+                maxHeight: window.innerHeight - (newPosition.y + bottomY) - WINDOW_BOUNDING_OFFSET,
                 right: newPosition.x + bottomX + Number(newPosition.width),
                 top: newPosition.y + bottomY,
                 x: newPosition.x + bottomX,
@@ -126,7 +128,8 @@ const useComputePosition: useComputePositionType = (
                 'full',
             );
 
-            if (canBeBottom) {
+            // Priority to bottom placement if possible, if not take the most available place;
+            if (canBeBottom || boundingAnchor.top < window.innerHeight - boundingAnchor.bottom) {
                 newPosition = bottomPosition;
             } else {
                 const { x: topX, y: topY } = calculatePopoverPlacement(
@@ -134,21 +137,32 @@ const useComputePosition: useComputePositionType = (
                     boundingAnchor,
                     boundingPopover,
                 );
-                const topPosition = { x: newPosition.x + topX, y: newPosition.y + topY };
+                const y = Math.max(WINDOW_BOUNDING_OFFSET, newPosition.y + topY);
+                const topPosition = {
+                    ...newPosition,
+                    maxHeight: boundingAnchor.top,
+                    x: newPosition.x + topX,
+                    y,
+                };
                 newPosition = topPosition;
             }
         } else {
             const { x, y } = calculatePopoverPlacement(placement, boundingAnchor, boundingPopover);
-            newPosition = { x: newPosition.x + x, y: newPosition.y + y };
+            const newY = Math.max(WINDOW_BOUNDING_OFFSET + newPosition.y, newPosition.y + y);
+            const maxHeight =
+                placement === Placement.TOP || placement === Placement.TOP_END || placement === Placement.TOP_START
+                    ? boundingAnchor.top
+                    : window.innerHeight - newY - WINDOW_BOUNDING_OFFSET;
+            newPosition = {
+                ...newPosition,
+                maxHeight,
+                x: newPosition.x + x,
+                y: newY,
+            };
         }
 
-        if (hasParentWidth) {
-            newPosition.width = boundingAnchor.width;
-        }
-
-        if (hasParentHeight) {
-            newPosition.height = boundingAnchor.height;
-        }
+        newPosition.width = hasParentWidth ? boundingAnchor.width : 0;
+        newPosition.height = hasParentHeight ? boundingAnchor.height : 0;
 
         if (callback) {
             callback(newPosition);
