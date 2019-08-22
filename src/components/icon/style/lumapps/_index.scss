@@ -17,17 +17,23 @@
 /* Icon sizes
    ========================================================================== */
 
-@each $key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-icon--size-#{$key} {
-        @include lumx-icon-size($key);
+@each $size-key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-icon--size-#{$size-key} {
+        @include lumx-icon-size($size-key);
     }
 }
 
 /* Button colors
    ========================================================================== */
 
-@each $key, $color in $lumx-theme-color-palette {
-    .#{$lumx-base-prefix}-icon--color-#{$key} {
-        @include lumx-icon-color($key);
+@each $color-key, $color in $lumx-theme-color-palette {
+    .#{$lumx-base-prefix}-icon--color-#{$color-key} {
+        @include lumx-icon-color($color-key, N);
+    }
+
+    @each $color-variant in $lumx-theme-color-variants {
+        .#{$lumx-base-prefix}-icon--color-#{$color-key}.#{$lumx-base-prefix}-icon--color-variant-#{$color-variant} {
+            @include lumx-icon-color($color-key, $color-variant);
+        }
     }
 }

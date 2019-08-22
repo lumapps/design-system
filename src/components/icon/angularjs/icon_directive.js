@@ -35,6 +35,16 @@ function IconDirective() {
             }).addClass(`${CSS_PREFIX}-icon--color-${color}`);
         });
 
+        attrs.$observe('lumxColorVariant', (colorVariant) => {
+            if (!colorVariant) {
+                return;
+            }
+
+            el.removeClass((index, className) => {
+                return (className.match(/(?:\S|-)*icon--color-variant-\S+/g) || []).join(' ');
+            }).addClass(`${CSS_PREFIX}-icon--color-variant-${colorVariant}`);
+        });
+
         attrs.$observe('lumxSize', (size) => {
             if (!size) {
                 return;
