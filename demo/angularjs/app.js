@@ -132,7 +132,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.editable-media', {
+        .state('app.product.components.editable-media', {
             url: 'editable-media',
             views: {
                 'main@': {

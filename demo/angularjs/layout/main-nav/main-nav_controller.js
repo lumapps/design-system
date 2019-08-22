@@ -70,6 +70,10 @@ function MainNavController($state) {
                             state: 'app.product.components.dropdown',
                         },
                         {
+                            label: 'Editable media',
+                            state: 'app.product.components.editable-media',
+                        },
+                        {
                             label: 'Expansion panel',
                             state: 'app.product.components.expansion-panel',
                         },
