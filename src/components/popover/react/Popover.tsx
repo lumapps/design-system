@@ -132,13 +132,11 @@ const Popover: React.FC<PopoverProps> & IPopover = ({
     ...props
 }: PopoverProps): ReactElement => {
     const cssPopover: CSSProperties = {
-        height: popoverRect.height ? `${popoverRect.height}px` : 'auto',
         left: 0,
         position: 'fixed',
         top: 0,
         transform: `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
         visibility: isVisible ? 'visible' : 'hidden',
-        width: popoverRect.width ? `${popoverRect.width}px` : 'auto',
         zIndex: 9999,
     };
 

@@ -53,7 +53,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const anchorRef = useRef(null);
     const popoverRef = useRef(null);
     // Pass a function to update the position state.
-    const { computedPosition, isVisible } = Popover.useComputePosition(Placement.AUTO, anchorRef, popoverRef, true);
+    const { computedPosition, isVisible } = Popover.useComputePosition(Placement.BOTTOM, anchorRef, popoverRef, true);
 
     return (
         <>

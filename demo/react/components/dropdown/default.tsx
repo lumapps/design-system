@@ -93,7 +93,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                     closeOnClick={true}
                     closeOnEscape={true}
                     onClose={closeSimpleMenu}
-                    placement={Placement.BOTTOM_START}
+                    placement={Placement.AUTO_START}
                     anchorRef={anchorSimpleRef}
                 >
                     {createSimpleMenuList(closeSimpleMenu)}
@@ -107,8 +107,8 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                     showDropdown={isComplexOpen}
                     closeOnClick={false}
                     closeOnEscape={false}
-                    offset={{ vertical: 8 }}
-                    placement={Placement.BOTTOM_START}
+                    offset={{ vertical: 20 }}
+                    placement={Placement.AUTO_START}
                     anchorRef={anchorComplexRef}
                 >
                     {createComplexMenuList(closeComplexMenu)}
