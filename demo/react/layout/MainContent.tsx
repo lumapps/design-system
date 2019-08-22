@@ -94,7 +94,7 @@ const MainContent = ({ path }: { path: string }): ReactElement => {
 
             {componentName && (
                 <>
-                    <h1 className="lumx-spacing-margin-top-huge">Properties</h1>
+                    <h2>Properties</h2>
                     {renderComponentProperties(componentName)}
                 </>
             )}

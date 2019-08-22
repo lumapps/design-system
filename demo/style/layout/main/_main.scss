@@ -48,7 +48,8 @@
         & > h1,
         & > h2,
         & > h3,
-        & > p {
+        & > p,
+        & > div {
             margin-bottom: $lumx-spacing-unit * 2;
 
             &:last-child {

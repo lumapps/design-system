@@ -35,7 +35,7 @@ const PropTable: React.FC<IPropTableProps> = ({ propertyList }: IPropTableProps)
     };
 
     return (
-        <Table>
+        <Table hasDividers>
             <TableHeader>
                 <TableRow>
                     <TableCell variant={TableCellVariant.head}>Name</TableCell>
