@@ -200,6 +200,10 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
         }
     };
 
+    const closeDropdown: () => void = (): void => {
+        setIsDropdownOpened(false);
+    };
+
     let rootElement: ReactElement;
     const extendedClassNames: string = classNames(className, CLASSNAME, { [`${CLASSNAME}--is-splitted`]: splitted });
 
@@ -232,7 +236,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     return (
         <>
             {rootElement}
-            <Dropdown anchorRef={buttonRef} showDropdown={isDropdownOpened} toggleElement={rootElement}>
+            <Dropdown onClose={closeDropdown} anchorRef={buttonRef} showDropdown={isDropdownOpened}>
                 {dropdown}
             </Dropdown>
         </>

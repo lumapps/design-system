@@ -6,7 +6,7 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
 >
   <Popover
     isVisible={false}
-    placement="bottom-start"
+    placement="auto-start"
     popoverRect={
       Object {
         "x": 0,
@@ -23,7 +23,8 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
       className="lumx-dropdown__menu"
       style={
         Object {
-          "width": undefined,
+          "maxHeight": undefined,
+          "minWidth": undefined,
         }
       }
     >
