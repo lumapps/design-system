@@ -1,149 +1,74 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement } from 'react';
+import { Route, RouteComponentProps } from 'react-router-dom';
 
-import classNames from 'classnames';
+import { Alignment, Button, ButtonEmphasis, Grid, GridItem, Orientation, Size } from 'LumX';
+import { mdiAngularjs } from 'LumX/icons';
 
-import isEmpty from 'lodash/isEmpty';
+import { Theme } from 'LumX/demo/constants';
 
-import { Category, DemoObject } from 'LumX/demo/react/constants';
+import { IGenericProps } from 'LumX/core/react/utils';
 
-import { DemoBlock } from './DemoBlock';
-import { DemoHeader } from './DemoHeader';
+import { MainContent } from './MainContent';
+import { ThemeSelector } from './ThemeSelector';
 
-/////////////////////////////
+// @ts-ignore
+import HomePage from '../doc/main';
 
 /**
  * Defines the props of the component.
  */
-interface IProps {
+interface IProps extends IGenericProps {
     /**
-     * The active component to load the demo of.
+     * The current selected theme.
      */
-    activeComponent: string;
+    theme: Theme;
+    /**
+     * The function to change the theme.
+     * When the theme selector is used, this function is called to update the current theme.
+     */
+    changeTheme(theme: Theme): void;
 }
 
 /**
- * Defines an ESModule as it will be loaded by the dynamic component loader.
- */
-interface IESModule {
-    /**
-     * The `category` export of our fake ESModule loaded by the dynamic component loader.
-     * This export contains the category of the demo.
-     */
-    category?: Category;
-
-    /**
-     * The `description` export of our fake ESModule loaded by the dynamic component loader.
-     * This export contains the description of the demo.
-     */
-    description?: ReactElement;
-
-    /**
-     * The `title` export of our fake ESModule loaded by the dynamic component loader.
-     * This export contains the title of the demo.
-     */
-    title: string;
-
-    /**
-     * Any other export of our fake ESModule loaded by the dynamic component loader.
-     * These exports contains each a title, a description of the demo and the path to the file containing the demo.
-     */
-    demos: { [demoName: string]: DemoObject };
-}
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Load the demo component corresponding to the currently active component.
- *
- * @param             componentFolderName The name of the component to load.
- * @return The promise of the dynamic load of the component.
- */
-async function _loadComponent(componentFolderName: IProps['activeComponent']): Promise<IESModule> {
-    if (isEmpty(componentFolderName)) {
-        return Promise.reject('No component to load');
-    }
-
-    return import(`../components/${componentFolderName}`);
-}
-
-/////////////////////////////
-
-/**
- * The main display component.
- * This component is in charge of displaying the active component demo page.
- * To do so, it will receive the name of the active component and will dynamically load the demo component from this
- * name.
+ * The main component.
  *
  * @return The main component.
  */
-const Main: React.FC<IProps> = ({ activeComponent }: IProps): ReactElement => {
-    const [demo, setDemo] = useState<IESModule>();
-
-    useEffect((): void => {
-        const loadComponent = async (): Promise<void> => {
-            try {
-                const loadedDemo: IESModule = await _loadComponent(activeComponent);
-                setDemo(loadedDemo);
-            } catch (exception) {
-                setDemo(undefined);
-
-                console.error(exception);
-            }
-        };
-
-        loadComponent();
-    }, [activeComponent]);
-
-    if (demo === undefined || isEmpty(demo)) {
-        return (
-            <div className="main">
-                <div className="main__wrapper">
-                    {!isEmpty(activeComponent) && <span>Loading demo for {activeComponent}...</span>}
-                </div>
-            </div>
-        );
-    }
-
-    const demoHeader: ReactElement | null = !isEmpty(demo.title) ? (
-        <DemoHeader category={demo.category} demoTitle={demo.title}>
-            {demo.description}
-        </DemoHeader>
-    ) : null;
-
+const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement => {
     return (
         <div className="main">
             <div className="main__wrapper">
-                {demoHeader}
+                <div className="main-header">
+                    <Grid orientation={Orientation.horizontal} vAlign={Alignment.center} hAlign={Alignment.top}>
+                        <GridItem>
+                            <span className="lumx-typography-overline lumx-spacing-margin-right-regular">Theme</span>
+                            <ThemeSelector changeTheme={changeTheme} theme={theme} />
+                        </GridItem>
+                        <Button
+                            emphasis={ButtonEmphasis.low}
+                            leftIcon={mdiAngularjs}
+                            onClick={(): Window | null => window.open('http://ui.lumapps.com/')}
+                            size={Size.s}
+                        >
+                            View Angularjs version
+                        </Button>
+                    </Grid>
+                </div>
 
-                <div className="mt++">
-                    {Object.keys(demo.demos).map(
-                        (key: string, index: number): ReactElement => {
-                            const { description, files, title } = demo.demos[key];
-
-                            return (
-                                <DemoBlock
-                                    key={key}
-                                    className={classNames({ 'mt+++': index > 0 })}
-                                    blockTitle={title}
-                                    demoName={key}
-                                    demoPath={activeComponent}
-                                    files={files}
-                                >
-                                    {description}
-                                </DemoBlock>
-                            );
-                        },
-                    )}
+                <div className="main-content">
+                    <div className="main-content__wrapper">
+                        <Route exact path="/" render={(): ReactElement => <HomePage />} />
+                        <Route
+                            path="/:path*"
+                            render={({ match }: RouteComponentProps): ReactElement | null =>
+                                match.params.path ? <MainContent path={match.params.path} /> : null
+                            }
+                        />
+                    </div>
                 </div>
             </div>
         </div>
     );
 };
-
-/////////////////////////////
 
 export { Main };

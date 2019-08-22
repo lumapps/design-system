@@ -1,0 +1,89 @@
+```javascript import
+import { SideNavigationItem, SideNavigation, Emphasis } from 'LumX';
+import { mdiEmail, mdiArrowTopRightThick } from 'LumX/icons';
+```
+
+# Side navigation
+
+**Side navigation regroup navigation items that leads to sections of content for users to navigate.**
+
+## Default
+
+```javascript jsx
+() => (
+    <>
+        <SideNavigation>
+            <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
+            <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
+            <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
+            <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
+            <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
+        </SideNavigation>
+    </>
+);
+```
+
+## With icon
+
+Side navigation items can have leading icons.
+
+```javascript jsx
+() => (
+    <>
+        <SideNavigation>
+            <SideNavigationItem label="With leading icon" icon={mdiEmail} emphasis={Emphasis.low} />
+        </SideNavigation>
+    </>
+);
+```
+
+## States
+
+Side navigation items have two states: _resting_, and _selected_.
+
+```javascript jsx
+() => (
+    <>
+        <SideNavigation>
+            <SideNavigationItem label="Resting" icon={mdiEmail} emphasis={Emphasis.low} />
+            <SideNavigationItem label="Selected" icon={mdiEmail} emphasis={Emphasis.low} isSelected />
+        </SideNavigation>
+    </>
+);
+```
+
+## Nested items
+
+Side navigation items can be nested. Parent items have two states: _closed_, and _open_.
+
+```javascript jsx
+() => (
+    <>
+        <SideNavigation>
+            <SideNavigationItem label="Level 0 (closed)">
+                <SideNavigationItem label="Level 1" emphasis={Emphasis.medium} />
+            </SideNavigationItem>
+            <SideNavigationItem label="Level 0 (open)" isOpen>
+                <SideNavigationItem label="Level 1" emphasis={Emphasis.medium} />
+                <SideNavigationItem label="Level 1" emphasis={Emphasis.medium} />
+            </SideNavigationItem>
+        </SideNavigation>
+    </>
+);
+```
+
+## Emphasis
+
+Side navigation items have three emphasises: _low_, _medium_, and _high_. Default is _high_.
+
+```javascript jsx
+() => (
+    <>
+        <SideNavigation>
+            <SideNavigationItem label="Low" icon={mdiArrowTopRightThick} emphasis={Emphasis.low} />
+            <SideNavigationItem label="Medium" icon={mdiArrowTopRightThick} emphasis={Emphasis.medium} />
+            <SideNavigationItem label="High" icon={mdiArrowTopRightThick} emphasis={Emphasis.high} />
+        </SideNavigation>
+    </>
+);
+```

@@ -16,11 +16,17 @@ const reactConfig = {
             LumX: path.resolve(__dirname, `${SRC_PATH}/react.index.ts`),
         },
     },
+
+    resolveLoader: {
+        alias: {
+            'props-loader': path.resolve(__dirname, 'props-loader'),
+        }
+    },
 };
 
 module.exports = merge.smartStrategy({
     entry: 'append',
     'module.rules': 'append',
-    plugins: 'replace',
     'resolve.alias': 'append',
+    'resolveLoader.alias': 'append',
 })(baseConfig, reactConfig);

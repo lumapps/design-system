@@ -1,0 +1,7 @@
+*:not(.focus-visible) {
+    outline: none;
+}
+
+.main-nav__logo {
+    cursor: pointer;
+}

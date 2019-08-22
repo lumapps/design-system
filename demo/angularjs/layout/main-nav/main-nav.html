@@ -1,12 +1,30 @@
-<ul class="main-nav__wrapper">
-    <li class="main-nav__logo">
+<div class="main-nav__wrapper">
+    <div class="main-nav__logo">
         <img src="../../../assets/images/logo.svg" alt="LumX" />
-    </li>
+        <span><strong>LumApps</strong> design system</span>
+    </div>
 
-    <li class="main-nav__item">
-        <a class="main-nav__link main-nav__link--is-selected">Pr</a>
-    </li>
-    <li class="main-nav__item">
-        <a class="main-nav__link">Ma</a>
-    </li>
-</ul>
+    <lumx-side-navigation>
+        <lumx-side-navigation-item
+            lumx-emphasis="high"
+            lumx-is-open="section.isOpen"
+            lumx-label="{{ section.label }}"
+            ng-repeat="section in vm.STATES"
+        >
+            <lumx-side-navigation-item
+                lumx-emphasis="medium"
+                lumx-is-open="subSection.isOpen"
+                lumx-label="{{ subSection.label }}"
+                ng-repeat="subSection in section.children"
+            >
+                <lumx-side-navigation-item
+                    lumx-emphasis="low"
+                    lumx-is-selected="vm.isCurrent(item.state)"
+                    lumx-label="{{ item.label }}"
+                    lumx-on-click="vm.goTo(item.state)"
+                    ng-repeat="item in subSection.children"
+                ></lumx-side-navigation-item>
+            </lumx-side-navigation-item>
+        </lumx-side-navigation-item>
+    </lumx-side-navigation>
+</div>

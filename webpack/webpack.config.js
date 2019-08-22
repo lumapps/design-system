@@ -7,6 +7,8 @@ const WebpackBar = require('webpackbar');
 const { babelSetup } = require('./utils');
 const { COMPONENTS_PATH, CORE_PATH, DEMO_PATH, ICONS_PATH } = require('./constants');
 
+const mdxDemoCodeExtractor = require('./react/mdx-demo-code-extractor');
+
 const plugins = [new WebpackBar(), new FriendlyErrorsWebpackPlugin()];
 
 const baseConfig = {
@@ -70,11 +72,28 @@ const baseConfig = {
                 },
             },
             {
-                test: /\.(png|svg|jpg|gif|woff(2)?|ttf|eot|svg)$/,
+                test: /\.(png|jpg|gif|woff(2)?|ttf|eot|svg)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name]-[hash:8].[ext]',
                 },
+            },
+            {
+                test: /\.(mdx|md)?$/,
+                use: [
+                    {
+                        loader: 'babel-loader?cacheDirectory=true',
+                        options: babelSetup({
+                            presets: ['@babel/preset-react'],
+                        }),
+                    },
+                    {
+                        loader: '@mdx-js/loader',
+                        options: {
+                            rehypePlugins: [mdxDemoCodeExtractor],
+                        },
+                    },
+                ],
             },
         ],
     },
@@ -99,7 +118,7 @@ const baseConfig = {
     profile: false,
 
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json', '.md', '.mdx'],
         modules: ['node_modules'],
         alias: {
             'LumX/angularjs': path.resolve(__dirname, `${CORE_PATH}/angularjs`),
