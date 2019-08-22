@@ -39,10 +39,14 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
         <div className="main">
             <div className="main__wrapper">
                 <div className="main-header">
-                    <Grid orientation={Orientation.horizontal} vAlign={Alignment.center} hAlign={Alignment.top}>
+                    <Grid orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <GridItem>
-                            <span className="lumx-typography-overline lumx-spacing-margin-right-regular">Theme</span>
-                            <ThemeSelector changeTheme={changeTheme} theme={theme} />
+                            <Grid orientation={Orientation.horizontal} hAlign={Alignment.center}>
+                                <span className="lumx-typography-overline lumx-spacing-margin-right-regular">
+                                    Theme
+                                </span>
+                                <ThemeSelector changeTheme={changeTheme} theme={theme} />
+                            </Grid>
                         </GridItem>
                         <Button
                             emphasis={ButtonEmphasis.low}
