@@ -78,6 +78,10 @@ function MainNavController($state) {
                             state: 'app.product.components.expansion-panel',
                         },
                         {
+                            label: 'Grid',
+                            state: 'app.product.components.grid',
+                        },
+                        {
                             label: 'Image block',
                             state: 'app.product.components.image-block',
                         },

@@ -152,7 +152,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.grid', {
+        .state('app.product.components.grid', {
             url: 'grid',
             views: {
                 'main@': {
