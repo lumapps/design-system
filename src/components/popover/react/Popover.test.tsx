@@ -120,8 +120,6 @@ describe(`<${Popover.displayName}>`, (): void => {
                 'transform',
                 `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
             );
-            expect(popover.prop('style')).toHaveProperty('height', `${popoverRect.height}px`);
-            expect(popover.prop('style')).toHaveProperty('width', `${popoverRect.width}px`);
         });
 
         it('should be placed correctly by the popoverRect prop', (): void => {
