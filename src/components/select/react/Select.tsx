@@ -136,7 +136,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isOpen: false,
     isValid: false,
     multiple: false,
-    selectedValueRender: (choice: string): ReactNode | string => <div>{choice}</div>,
+    selectedValueRender: (choice: string): ReactNode | string => choice,
     theme: Theme.light,
     variant: SelectVariant.input,
 };

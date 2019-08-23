@@ -59,6 +59,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     ? CHOICES.map((choice: string, index: number) => (
                           // tslint:disable-next-line: jsx-no-lambda
                           <ListItem
+                              isClickable
                               isSelected={selectedValues.includes(choice)}
                               key={index}
                               onItemSelected={(): void => onItemSelectedHandler(choice)}
