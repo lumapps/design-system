@@ -104,9 +104,19 @@ interface ISelectProps extends IGenericProps {
     onInfiniteScroll?(): void;
 
     /**
-     * The function called to render a selected value. NB: For Select multiple, it will be rendered inside of a Chip.
+     * The function called to render the selected value. Default: Renders the value as a string.
      */
     selectedValueRender?(choice: string): ReactNode | string;
+
+    /**
+     * The function called to render a selected value when `multiple` is true. Default: Renders the value inside of a Chip
+     */
+    selectedChipRender?(
+        choice: string,
+        index: number,
+        onClear: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
+        isDisabled: boolean,
+    ): ReactNode | string;
 }
 type SelectProps = ISelectProps;
 
@@ -141,6 +151,27 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isOpen: false,
     isValid: false,
     multiple: false,
+    selectedChipRender: (
+        choice: string,
+        index: number,
+        onClear: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
+        isDisabled: boolean,
+    ): ReactNode | string => (
+        <Chip
+            key={index}
+            after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
+            isDisabled={isDisabled}
+            size={Size.s}
+            // tslint:disable-next-line: jsx-no-lambda
+            onAfterClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
+                onClear && onClear(event, choice)
+            }
+            // tslint:disable-next-line: jsx-no-lambda
+            onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => onClear && onClear(event, choice)}
+        >
+            {choice}
+        </Chip>
+    ),
     selectedValueRender: (choice: string): ReactNode | string => choice,
     theme: Theme.light,
     variant: SelectVariant.input,
@@ -169,6 +200,7 @@ const Select: React.FC<SelectProps> = ({
     label,
     placeholder,
     selectedValueRender = DEFAULT_PROPS.selectedValueRender,
+    selectedChipRender = DEFAULT_PROPS.selectedChipRender,
     children,
     onInfiniteScroll,
     ...props
@@ -214,24 +246,9 @@ const Select: React.FC<SelectProps> = ({
                             <div className={`${CLASSNAME}__input-chips`}>
                                 {!isEmpty && multiple && (
                                     <div className={`${CLASSNAME}__input-chip`}>
-                                        {selectedValues.map((value: string, index: number) => (
-                                            <Chip
-                                                key={index}
-                                                after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
-                                                isDisabled={isDisabled}
-                                                size={Size.s}
-                                                // tslint:disable-next-line: jsx-no-lambda
-                                                onAfterClick={(
-                                                    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-                                                ): void => onClear && onClear(event, value)}
-                                                // tslint:disable-next-line: jsx-no-lambda
-                                                onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
-                                                    onClear && onClear(event, value)
-                                                }
-                                            >
-                                                {selectedValueRender!(value)}
-                                            </Chip>
-                                        ))}
+                                        {selectedValues.map((value: string, index: number) =>
+                                            selectedChipRender(value, index, onClear, isDisabled),
+                                        )}
                                     </div>
                                 )}
                             </div>
