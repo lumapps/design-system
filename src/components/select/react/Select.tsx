@@ -99,6 +99,11 @@ interface ISelectProps extends IGenericProps {
     onDropdownClose?(): void;
 
     /**
+     * The callback function called when the bottom of the dropdown is reached.
+     */
+    onInfiniteScroll?(): void;
+
+    /**
      * The function called to render a selected value. NB: For Select multiple, it will be rendered inside of a Chip.
      */
     selectedValueRender?(choice: string): ReactNode | string;
@@ -165,6 +170,7 @@ const Select: React.FC<SelectProps> = ({
     placeholder,
     selectedValueRender = DEFAULT_PROPS.selectedValueRender,
     children,
+    onInfiniteScroll,
     ...props
 }: SelectProps): React.ReactElement => {
     // tslint:disable-next-line: no-unused
@@ -307,6 +313,7 @@ const Select: React.FC<SelectProps> = ({
                 showDropdown={isOpen!}
                 anchorRef={anchorRef}
                 onClose={onDropdownClose}
+                onInfiniteScroll={onInfiniteScroll}
             >
                 {children}
             </Dropdown>

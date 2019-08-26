@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Offset, Placement, Popover } from 'LumX/components/popover/react/Popover';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { useClickAway } from 'LumX/core/react/hooks';
+import { useClickAway, useInfiniteScroll } from 'LumX/core/react/hooks';
 import { handleBasicClasses, onEscapePressed } from 'LumX/core/utils';
 import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
@@ -32,6 +32,10 @@ interface IDropdownProps extends IGenericProps {
     children: React.ReactNode;
     /** The function to be called when the user clicks away or Escape is pressed */
     onClose?: VoidFunction;
+    /**
+     * The callback function called when the bottom of the dropdown is reached.
+     */
+    onInfinite?: VoidFunction;
 }
 type DropdownProps = IDropdownProps;
 
@@ -87,6 +91,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     anchorRef,
     placement = DEFAULT_PROPS.placement,
     fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
+    onInfiniteScroll,
     ...props
 }: DropdownProps): React.ReactElement => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
@@ -101,6 +106,10 @@ const Dropdown: React.FC<DropdownProps> = ({
         false,
         fitToAnchorWidth,
     );
+
+    if (onInfiniteScroll) {
+        useInfiniteScroll(wrapperRef, onInfiniteScroll);
+    }
 
     const popperElement: React.ReactElement = (
         <div
