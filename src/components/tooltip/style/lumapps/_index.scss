@@ -33,7 +33,7 @@
         height: 0;
         margin: $lumx-tooltip-arrow-size;
         border-style: solid;
-        border-color: lumx-theme-color-variant(light, N);
+        border-color: lumx-theme-color-variant('light', 'N');
 
         #{$self}[x-placement^='top'] & {
             bottom: -$lumx-tooltip-arrow-size;

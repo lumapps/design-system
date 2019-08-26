@@ -100,20 +100,20 @@
         user-select: none;
 
         #{$self}--theme-light & {
-            background-color: lumx-theme-color-variant(dark, L4);
+            background-color: lumx-theme-color-variant('dark', 'L4');
 
             &:hover,
             &--is-active {
-                background-color: lumx-theme-color-variant($lumx-slideshow-pagination-item-color, N);
+                background-color: lumx-theme-color-variant($lumx-slideshow-pagination-item-color, 'N');
             }
         }
 
         #{$self}--theme-dark & {
-            background-color: lumx-theme-color-variant(light, L4);
+            background-color: lumx-theme-color-variant('light', 'L4');
 
             &:hover,
             &--is-active {
-                background-color: lumx-theme-color-variant(light, N);
+                background-color: lumx-theme-color-variant('light', 'N');
             }
         }
 

@@ -1,8 +1,8 @@
 $lumx-list-item-padding: $lumx-spacing-unit * 2;
-$lumx-list-item-selected-color: primary;
+$lumx-list-item-selected-color: 'primary';
 $lumx-list-item-sizes: (
-    tiny: 36px,
-    regular: 52px,
-    big: 72px,
-    huge: auto
+    'tiny': 36px,
+    'regular': 52px,
+    'big': 72px,
+    'huge': auto
 );

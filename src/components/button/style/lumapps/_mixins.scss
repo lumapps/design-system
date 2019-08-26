@@ -19,27 +19,27 @@
 @mixin lumx-button-size($emphasis, $variant, $size) {
     height: map-get($lumx-sizes, $size);
 
-    @if $variant == variant-button {
+    @if $variant == 'variant-button' {
         border-radius: $lumx-theme-border-radius;
-    } @else if $variant == variant-icon {
+    } @else if $variant == 'variant-icon' {
         width: map-get($lumx-sizes, $size);
         border-radius: 50%;
     }
 }
 
 @mixin lumx-button-color($emphasis, $color, $theme: null) {
-    @include lumx-state(state-default, $emphasis, $color, $theme);
+    @include lumx-state('state-default', $emphasis, $color, $theme);
 
     &:hover {
-        @include lumx-state(state-hover, $emphasis, $color, $theme);
+        @include lumx-state('state-hover', $emphasis, $color, $theme);
     }
 
     &:active {
-        @include lumx-state(state-active, $emphasis, $color, $theme);
+        @include lumx-state('state-active', $emphasis, $color, $theme);
     }
 
     &[data-focus-visible-added] {
-        @include lumx-state(state-focus, $emphasis, $color, $theme);
+        @include lumx-state('state-focus', $emphasis, $color, $theme);
     }
 
     &:disabled {
@@ -51,17 +51,17 @@
     font-size: map-get($lumx-button-icon-sizes, $size);
     pointer-events: none;
 
-    @if $variant == variant-button {
-        @if $position == position-left {
-            @if $size == m {
+    @if $variant == 'variant-button' {
+        @if $position == 'position-left' {
+            @if $size == 'm' {
                 margin-right: $lumx-spacing-unit;
-            } @else if $size == s {
+            } @else if $size == 's' {
                 margin-right: $lumx-spacing-unit / 2;
             }
-        } @else if $position == position-right {
-            @if $size == m {
+        } @else if $position == 'position-right' {
+            @if $size == 'm' {
                 margin-left: $lumx-spacing-unit;
-            } @else if $size == s {
+            } @else if $size == 's' {
                 margin-left: $lumx-spacing-unit / 2;
             }
         }

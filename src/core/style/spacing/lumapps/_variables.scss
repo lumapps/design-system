@@ -5,25 +5,25 @@ $lumx-spacing-unit-big: $lumx-spacing-unit * 2;
 $lumx-spacing-unit-huge: $lumx-spacing-unit * 3;
 
 $lumx-spacing-directions: (
-    null: null,
-    -top: '-top',
-    -right: '-right',
-    -bottom: '-bottom',
-    -left: '-left',
-    -horizontal: '-left' '-right',
-    -vertical: '-top' '-bottom'
+    'null': null,
+    '-top': '-top',
+    '-right': '-right',
+    '-bottom': '-bottom',
+    '-left': '-left',
+    '-horizontal': '-left' '-right',
+    '-vertical': '-top' '-bottom'
 );
 
 $lumx-spacing-properties: (
-    padding: 'padding',
-    margin: 'margin'
+    'padding': 'padding',
+    'margin': 'margin'
 );
 
 $lumx-spacing-sizes: (
-    null: $lumx-spacing-unit-regular,
-    -tiny: $lumx-spacing-unit-tiny,
-    -regular: $lumx-spacing-unit-regular,
-    -big: $lumx-spacing-unit-big,
-    -huge: $lumx-spacing-unit-huge,
-    -none: 0
+    'null': $lumx-spacing-unit-regular,
+    '-tiny': $lumx-spacing-unit-tiny,
+    '-regular': $lumx-spacing-unit-regular,
+    '-big': $lumx-spacing-unit-big,
+    '-huge': $lumx-spacing-unit-huge,
+    '-none': 0
 );

@@ -14,33 +14,33 @@
 
         #{$self}--theme-light &--is-clickable {
             &:hover #{$self}__cell {
-                background-color: lumx-theme-color-variant(dark, L6);
+                background-color: lumx-theme-color-variant('dark', 'L6');
             }
 
             &[data-focus-visible-added] {
-                @include lumx-state(state-focus, emphasis-low, dark, null, true);
+                @include lumx-state('state-focus', 'emphasis-low', 'dark', null, true);
             }
         }
 
         #{$self}--theme-light &--is-selected {
             #{$self}__cell {
-                background-color: lumx-theme-color-variant(dark, L5) !important;
+                background-color: lumx-theme-color-variant('dark', 'L5') !important;
             }
         }
 
         #{$self}--theme-dark &--is-clickable {
             &:hover #{$self}__cell {
-                background-color: lumx-theme-color-variant(light, L6);
+                background-color: lumx-theme-color-variant('light', 'L6');
             }
 
             &[data-focus-visible-added] {
-                @include lumx-state(state-focus, emphasis-low, light, null, true);
+                @include lumx-state('state-focus', 'emphasis-low', 'light', null, true);
             }
         }
 
         #{$self}--theme-dark &--is-selected {
             #{$self}__cell {
-                background-color: lumx-theme-color-variant(light, L5) !important;
+                background-color: lumx-theme-color-variant('light', 'L5') !important;
             }
         }
     }
@@ -55,15 +55,15 @@
             text-align: left;
 
             #{$self}--theme-light & {
-                @include lumx-has-divider(dark);
+                @include lumx-has-divider('dark');
 
-                color: lumx-theme-color-variant(dark, L2);
+                color: lumx-theme-color-variant('dark', 'L2');
             }
 
             #{$self}--theme-dark & {
-                @include lumx-has-divider(light);
+                @include lumx-has-divider('light');
 
-                color: lumx-theme-color-variant(light, L2);
+                color: lumx-theme-color-variant('light', 'L2');
             }
 
             &--is-sortable {
@@ -77,22 +77,22 @@
 
             &--is-sorted {
                 #{$self}--theme-light & {
-                    color: lumx-theme-color-variant(dark, N);
+                    color: lumx-theme-color-variant('dark', 'N');
                 }
 
                 #{$self}--theme-dark & {
-                    color: lumx-theme-color-variant(light, N);
+                    color: lumx-theme-color-variant('light', 'N');
                 }
             }
         }
 
         tbody & {
             #{$self}--theme-light#{$self}--has-dividers & {
-                @include lumx-has-divider(dark);
+                @include lumx-has-divider('dark');
             }
 
             #{$self}--theme-dark#{$self}--has-dividers & {
-                @include lumx-has-divider(light);
+                @include lumx-has-divider('light');
             }
         }
 
@@ -120,18 +120,18 @@
         word-break: break-word;
 
         thead & {
-            @include lumx-typography(caption);
+            @include lumx-typography('caption');
         }
 
         tbody & {
-            @include lumx-typography(body1);
+            @include lumx-typography('body1');
 
             #{$self}--theme-light & {
-                color: lumx-theme-color-variant(dark, N);
+                color: lumx-theme-color-variant('dark', 'N');
             }
 
             #{$self}--theme-dark & {
-                color: lumx-theme-color-variant(light, N);
+                color: lumx-theme-color-variant('light', 'N');
             }
         }
     }

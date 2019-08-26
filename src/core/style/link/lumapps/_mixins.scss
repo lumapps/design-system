@@ -1,16 +1,16 @@
 @mixin lumx-link($theme) {
-    color: lumx-theme-color-variant($theme, N);
+    color: lumx-theme-color-variant($theme, 'N');
     cursor: pointer;
     outline: none;
     text-decoration: none;
 
     &:hover {
-        color: lumx-theme-color-variant($theme, L1);
+        color: lumx-theme-color-variant($theme, 'L1');
         text-decoration: underline;
     }
 
     &:active {
-        color: lumx-theme-color-variant($theme, L2);
+        color: lumx-theme-color-variant($theme, 'L2');
         text-decoration: underline;
     }
 

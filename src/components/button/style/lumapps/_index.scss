@@ -49,51 +49,51 @@
         .#{$lumx-base-prefix}-button--size-#{$key} {
             &.#{$lumx-base-prefix}-button--emphasis-high {
                 &.#{$lumx-base-prefix}-button--variant-button {
-                    @include lumx-button-size(emphasis-high, variant-button, $key);
+                    @include lumx-button-size('emphasis-high', 'variant-button', $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
-                    @include lumx-button-size(emphasis-high, variant-icon, $key);
+                    @include lumx-button-size('emphasis-high', 'variant-icon', $key);
                 }
             }
 
             &.#{$lumx-base-prefix}-button--emphasis-medium {
                 &.#{$lumx-base-prefix}-button--variant-button {
-                    @include lumx-button-size(emphasis-medium, variant-button, $key);
+                    @include lumx-button-size('emphasis-medium', 'variant-button', $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
-                    @include lumx-button-size(emphasis-medium, variant-icon, $key);
+                    @include lumx-button-size('emphasis-medium', 'variant-icon', $key);
                 }
             }
 
             &.#{$lumx-base-prefix}-button--emphasis-low {
                 &.#{$lumx-base-prefix}-button--variant-button {
-                    @include lumx-button-size(emphasis-low, variant-button, $key);
+                    @include lumx-button-size('emphasis-low', 'variant-button', $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
-                    @include lumx-button-size(emphasis-low, variant-icon, $key);
+                    @include lumx-button-size('emphasis-low', 'variant-icon', $key);
                 }
             }
 
             &.#{$lumx-base-prefix}-button--variant-button {
                 i:first-child {
-                    @include lumx-button-icon(variant-button, position-left, $key);
+                    @include lumx-button-icon('variant-button', 'position-left', $key);
                 }
 
                 i:last-child {
-                    @include lumx-button-icon(variant-button, position-right, $key);
+                    @include lumx-button-icon('variant-button', 'position-right', $key);
                 }
             }
 
             &.#{$lumx-base-prefix}-button--variant-icon {
                 i:first-child {
-                    @include lumx-button-icon(variant-icon, position-left, $key);
+                    @include lumx-button-icon('variant-icon', 'position-left', $key);
                 }
 
                 i:last-child {
-                    @include lumx-button-icon(variant-icon, position-right, $key);
+                    @include lumx-button-icon('variant-icon', 'position-right', $key);
                 }
             }
 
@@ -111,42 +111,42 @@
     @if $key != dark and $key != light {
         .#{$lumx-base-prefix}-button--color-#{$key} {
             &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-light {
-                @include lumx-button-color(emphasis-high, $key, dark);
+                @include lumx-button-color('emphasis-high', $key, 'dark');
             }
 
             &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-dark {
-                @include lumx-button-color(emphasis-high, $key, light);
+                @include lumx-button-color('emphasis-high', $key, 'light');
             }
         }
     }
 }
 
 .#{$lumx-base-prefix}-button--emphasis-medium.#{$lumx-base-prefix}-button--theme-light {
-    @include lumx-button-color(emphasis-medium, dark);
+    @include lumx-button-color('emphasis-medium', 'dark');
 }
 
 .#{$lumx-base-prefix}-button--emphasis-low.#{$lumx-base-prefix}-button--theme-light {
-    @include lumx-button-color(emphasis-low, dark);
+    @include lumx-button-color('emphasis-low', 'dark');
 }
 
 @each $key, $color in $lumx-theme-color-palette {
     .#{$lumx-base-prefix}-button--color-#{$key} {
         &.#{$lumx-base-prefix}-button--emphasis-medium {
-            @include lumx-button-color(emphasis-medium, $key);
+            @include lumx-button-color('emphasis-medium', $key);
         }
 
         &.#{$lumx-base-prefix}-button--emphasis-low {
-            @include lumx-button-color(emphasis-low, $key);
+            @include lumx-button-color('emphasis-low', $key);
         }
     }
 }
 
 .#{$lumx-base-prefix}-button--emphasis-medium.#{$lumx-base-prefix}-button--theme-dark {
-    @include lumx-button-color(emphasis-medium, light);
+    @include lumx-button-color('emphasis-medium', 'light');
 }
 
 .#{$lumx-base-prefix}-button--emphasis-low.#{$lumx-base-prefix}-button--theme-dark {
-    @include lumx-button-color(emphasis-low, light);
+    @include lumx-button-color('emphasis-low', 'light');
 }
 
 /* Toggle button
@@ -155,35 +155,35 @@
 .#{$lumx-base-prefix}-button--is-selected {
     &.#{$lumx-base-prefix}-button--color-dark,
     &.#{$lumx-base-prefix}-button--theme-light {
-        @include lumx-state-as-selected(state-default, dark);
+        @include lumx-state-as-selected('state-default', 'dark');
 
         &:hover {
-            @include lumx-state-as-selected(state-hover, dark);
+            @include lumx-state-as-selected('state-hover', 'dark');
         }
 
         &:active {
-            @include lumx-state-as-selected(state-active, dark);
+            @include lumx-state-as-selected('state-active', 'dark');
         }
 
         &[data-focus-visible-added] {
-            @include lumx-state-as-selected(state-focus, dark);
+            @include lumx-state-as-selected('state-focus', 'dark');
         }
     }
 
     &.#{$lumx-base-prefix}-button--color-light,
     &.#{$lumx-base-prefix}-button--theme-dark {
-        @include lumx-state-as-selected(state-default, light);
+        @include lumx-state-as-selected('state-default', 'light');
 
         &:hover {
-            @include lumx-state-as-selected(state-hover, light);
+            @include lumx-state-as-selected('state-hover', 'light');
         }
 
         &:active {
-            @include lumx-state-as-selected(state-active, light);
+            @include lumx-state-as-selected('state-active', 'light');
         }
 
         &[data-focus-visible-added] {
-            @include lumx-state-as-selected(state-focus, light);
+            @include lumx-state-as-selected('state-focus', 'light');
         }
     }
 }

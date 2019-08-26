@@ -22,24 +22,24 @@
         @include lumx-side-navigation-link;
 
         & > i:first-child {
-            @include lumx-side-navigation-link-icon(position-left);
+            @include lumx-side-navigation-link-icon('position-left');
         }
 
         & > i:last-child {
-            @include lumx-side-navigation-link-icon(position-right);
+            @include lumx-side-navigation-link-icon('position-right');
         }
 
         & > span {
             #{$self}--emphasis-high & {
-                @include lumx-side-navigation-link-label(emphasis-high);
+                @include lumx-side-navigation-link-label('emphasis-high');
             }
 
             #{$self}--emphasis-medium & {
-                @include lumx-side-navigation-link-label(emphasis-medium);
+                @include lumx-side-navigation-link-label('emphasis-medium');
             }
 
             #{$self}--emphasis-low & {
-                @include lumx-side-navigation-link-label(emphasis-low);
+                @include lumx-side-navigation-link-label('emphasis-low');
             }
         }
     }

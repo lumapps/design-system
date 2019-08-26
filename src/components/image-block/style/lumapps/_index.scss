@@ -46,11 +46,11 @@
         }
 
         #{$self}--theme-light#{$self}--caption-position-over & {
-            background-color: lumx-theme-color-variant(light, L1);
+            background-color: lumx-theme-color-variant('light', 'L1');
         }
 
         #{$self}--theme-dark#{$self}--caption-position-over & {
-            background-color: lumx-theme-color-variant(dark, L1);
+            background-color: lumx-theme-color-variant('dark', 'L1');
         }
     }
 
@@ -65,26 +65,26 @@
 
     &__title,
     &__description {
-        @include lumx-typography(body1);
+        @include lumx-typography('body1');
     }
 
     &__title {
         #{$self}--theme-light & {
-            color: lumx-theme-color-variant(dark, N);
+            color: lumx-theme-color-variant('dark', 'N');
         }
 
         #{$self}--theme-dark & {
-            color: lumx-theme-color-variant(light, N);
+            color: lumx-theme-color-variant('light', 'N');
         }
     }
 
     &__description {
         #{$self}--theme-light & {
-            color: lumx-theme-color-variant(dark, L2);
+            color: lumx-theme-color-variant('dark', 'L2');
         }
 
         #{$self}--theme-dark & {
-            color: lumx-theme-color-variant(light, L2);
+            color: lumx-theme-color-variant('light', 'L2');
         }
     }
 

@@ -28,7 +28,7 @@
 
 @each $color-key, $color in $lumx-theme-color-palette {
     .#{$lumx-base-prefix}-icon--color-#{$color-key} {
-        @include lumx-icon-color($color-key, N);
+        @include lumx-icon-color($color-key, 'N');
     }
 
     @each $color-variant in $lumx-theme-color-variants {

@@ -11,7 +11,7 @@
     left: 0;
     display: none;
     animation: lumx-dialog-overlay-show $lumx-dialog-transition-duration;
-    background-color: lumx-theme-color-variant(dark, L1);
+    background-color: lumx-theme-color-variant('dark', 'L1');
     opacity: 1;
     transition: opacity $lumx-dialog-transition-duration;
 
@@ -54,11 +54,11 @@
     }
 
     &__header--has-divider {
-        @include lumx-has-divider(dark, bottom);
+        @include lumx-has-divider('dark', 'bottom');
     }
 
     &__footer--has-divider {
-        @include lumx-has-divider(dark, top);
+        @include lumx-has-divider('dark', 'top');
     }
 
     &__content {

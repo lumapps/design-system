@@ -2,9 +2,9 @@
     position: relative;
     display: flex;
     align-items: center;
-    background-color: lumx-theme-color-variant($theme, L6);
+    background-color: lumx-theme-color-variant($theme, 'L6');
     border-radius: $lumx-theme-border-radius;
-    box-shadow: inset 0 0 0 1px lumx-theme-color-variant($theme, L4);
+    box-shadow: inset 0 0 0 1px lumx-theme-color-variant($theme, 'L4');
     outline: none;
     transition-duration: $lumx-text-field-transition-duration;
     transition-property: background-color, box-shadow;
@@ -24,11 +24,11 @@
 
 @mixin lumx-text-field-input-icon($theme) {
     margin-right: $lumx-spacing-unit;
-    color: lumx-theme-color-variant($theme, N);
+    color: lumx-theme-color-variant($theme, 'N');
 }
 
 @mixin lumx-text-field-input-native($theme) {
-    @include lumx-typography(body1);
+    @include lumx-typography('body1');
 
     width: 100%;
     height: $lumx-text-field-height;
@@ -36,7 +36,7 @@
     margin: 0;
     border: none;
     background-color: transparent;
-    color: lumx-theme-color-variant($theme, N);
+    color: lumx-theme-color-variant($theme, 'N');
     line-height: $lumx-text-field-height;
     outline: none;
 }
@@ -44,43 +44,43 @@
 @mixin lumx-text-field-input-validity($validity, $theme) {
     margin-left: $lumx-spacing-unit;
 
-    @if $theme == dark {
-        @if $validity == valid {
-            color: lumx-theme-color-variant(green, N);
-        } @else if $validity == error {
-            color: lumx-theme-color-variant(red, N);
+    @if $theme == 'dark' {
+        @if $validity == 'valid' {
+            color: lumx-theme-color-variant('green', 'N');
+        } @else if $validity == 'error' {
+            color: lumx-theme-color-variant('red', 'N');
         }
-    } @else if $theme == light {
-        color: lumx-theme-color-variant(light, N);
+    } @else if $theme == 'light' {
+        color: lumx-theme-color-variant('light', 'N');
     }
 }
 
 @mixin lumx-text-field-placeholder($theme) {
-    color: lumx-theme-color-variant($theme, L2);
+    color: lumx-theme-color-variant($theme, 'L2');
 }
 
 @mixin lumx-text-field-input-wrapper-state($state, $theme) {
-    @if $state == state-hover {
-        background-color: lumx-theme-color-variant($theme, L5);
-    } @else if $state == state-focus {
-        @if $theme == dark {
-            background-color: lumx-theme-color-variant(light, N);
-            box-shadow: inset 0 0 0 2px lumx-theme-color-variant(primary, L2);
-        } @else if $theme == light {
+    @if $state == 'state-hover' {
+        background-color: lumx-theme-color-variant($theme, 'L5');
+    } @else if $state == 'state-focus' {
+        @if $theme == 'dark' {
+            background-color: lumx-theme-color-variant('light', 'N');
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant('primary', 'L2');
+        } @else if $theme == 'light' {
             background-color: transparent;
-            box-shadow: inset 0 0 0 2px lumx-theme-color-variant(light, L2);
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant('light', 'L2');
         }
     }
 }
 
 @mixin lumx-text-field-input-wrapper-validity($validity, $theme) {
-    @if $theme == dark {
-        @if $validity == valid {
-            box-shadow: inset 0 0 0 2px lumx-theme-color-variant(green, N);
-        } @else if $validity == error {
-            box-shadow: inset 0 0 0 2px lumx-theme-color-variant(red, N);
+    @if $theme == 'dark' {
+        @if $validity == 'valid' {
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant('green', 'N');
+        } @else if $validity == 'error' {
+            box-shadow: inset 0 0 0 2px lumx-theme-color-variant('red', 'N');
         }
-    } @else if $theme == light {
-        box-shadow: inset 0 0 0 2px lumx-theme-color-variant(light, N);
+    } @else if $theme == 'light' {
+        box-shadow: inset 0 0 0 2px lumx-theme-color-variant('light', 'N');
     }
 }

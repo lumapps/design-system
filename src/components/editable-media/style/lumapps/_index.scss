@@ -6,11 +6,11 @@
     $self: &;
 
     &__label {
-        @include lumx-input-label(dark);
+        @include lumx-input-label('dark');
     }
 
     &__helper {
-        @include lumx-input-helper(dark);
+        @include lumx-input-helper('dark');
     }
 
     &__wrapper {
@@ -21,11 +21,11 @@
         }
 
         #{$self}--size-xl & {
-            width: map-get($lumx-sizes, xl);
+            width: map-get($lumx-sizes, 'xl');
         }
 
         #{$self}--size-xxl & {
-            width: map-get($lumx-sizes, xxl);
+            width: map-get($lumx-sizes, 'xxl');
         }
     }
 
@@ -33,30 +33,30 @@
         @include lumx-state-transition;
 
         position: relative;
-        background-color: lumx-theme-color-variant(dark, L5);
+        background-color: lumx-theme-color-variant('dark', 'L5');
         cursor: pointer;
         outline: none;
 
         #{$self}--variant-thumbnail & {
-            padding-top: map-get($lumx-thumbnail-aspect-ratio, horizontal);
+            padding-top: map-get($lumx-thumbnail-aspect-ratio, 'horizontal');
             border-radius: $lumx-theme-border-radius;
         }
 
         #{$self}--variant-avatar & {
-            padding-top: map-get($lumx-thumbnail-aspect-ratio, square);
+            padding-top: map-get($lumx-thumbnail-aspect-ratio, 'square');
             border-radius: 50%;
         }
 
         &:hover {
-            @include lumx-state(state-hover, emphasis-medium, dark);
+            @include lumx-state('state-hover', 'emphasis-medium', 'dark');
         }
 
         &:active {
-            @include lumx-state(state-active, emphasis-medium, dark);
+            @include lumx-state('state-active', 'emphasis-medium', 'dark');
         }
 
         &[data-focus-visible-added] {
-            @include lumx-state(state-focus, emphasis-medium, dark);
+            @include lumx-state('state-focus', 'emphasis-medium', 'dark');
         }
     }
 
@@ -75,7 +75,7 @@
     }
 
     &__cta-placeholder {
-        @include lumx-typography(subtitle1);
+        @include lumx-typography('subtitle1');
 
         margin-top: $lumx-spacing-unit;
         text-align: center;

@@ -39,16 +39,16 @@
 }
 
 @mixin lumx-list-item-selected() {
-    background-color: lumx-theme-color-variant($lumx-list-item-selected-color, L5);
-    color: lumx-theme-color-variant($lumx-list-item-selected-color, N);
+    background-color: lumx-theme-color-variant($lumx-list-item-selected-color, 'L5');
+    color: lumx-theme-color-variant($lumx-list-item-selected-color, 'N');
 
     &:hover,
     &[data-focus-visible-added] {
-        background-color: lumx-theme-color-variant($lumx-list-item-selected-color, L4) !important;
+        background-color: lumx-theme-color-variant($lumx-list-item-selected-color, 'L4') !important;
     }
 
     &:active {
-        background-color: lumx-theme-color-variant($lumx-list-item-selected-color, L3) !important;
+        background-color: lumx-theme-color-variant($lumx-list-item-selected-color, 'L3') !important;
     }
 }
 
@@ -61,17 +61,17 @@
 @mixin lumx-list-item-before($size) {
     @include lumx-list-item-edge($size);
 
-    @if $size == tiny {
-        width: map-get($lumx-sizes, s);
+    @if $size == 'tiny' {
+        width: map-get($lumx-sizes, 's');
         margin-right: $lumx-spacing-unit;
     } @else {
-        width: map-get($lumx-sizes, m);
+        width: map-get($lumx-sizes, 'm');
         margin-right: $lumx-spacing-unit * 2;
     }
 }
 
 @mixin lumx-list-item-content() {
-    @include lumx-typography(body1);
+    @include lumx-typography('body1');
 
     flex: 1;
 }
@@ -79,7 +79,7 @@
 @mixin lumx-list-item-after($size) {
     @include lumx-list-item-edge($size);
 
-    @if $size == tiny {
+    @if $size == 'tiny' {
         margin-left: $lumx-spacing-unit;
     } @else {
         margin-left: $lumx-spacing-unit * 2;
@@ -87,17 +87,17 @@
 }
 
 @mixin lumx-list-subheader() {
-    @include lumx-typography(overline);
+    @include lumx-typography('overline');
 
     display: flex;
-    height: map-get($lumx-list-item-sizes, tiny);
+    height: map-get($lumx-list-item-sizes, 'tiny');
     align-items: center;
     padding: 0 $lumx-list-item-padding;
-    color: lumx-theme-color-variant(dark, L3);
+    color: lumx-theme-color-variant('dark', 'L3');
 }
 
 @mixin lumx-list-divider() {
     height: 1px;
     margin: $lumx-spacing-unit 0;
-    background-color: lumx-theme-color-variant(dark, $lumx-divider-color-variant);
+    background-color: lumx-theme-color-variant('dark', $lumx-divider-color-variant);
 }

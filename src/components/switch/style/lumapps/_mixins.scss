@@ -53,16 +53,16 @@
         right: $lumx-switch-indicator-offset;
 
         @if $theme == 'dark' {
-            background-color: lumx-theme-color-variant(light, N);
+            background-color: lumx-theme-color-variant('light', 'N');
         } @else if $theme == 'light' {
-            background-color: lumx-theme-color-variant($lumx-switch-checked-color, N);
+            background-color: lumx-theme-color-variant($lumx-switch-checked-color, 'N');
         }
     } @else if $status == 'unchecked' {
         left: $lumx-switch-indicator-offset;
-        background-color: lumx-theme-color-variant($theme, N);
+        background-color: lumx-theme-color-variant($theme, 'N');
     }
 }
 
 @mixin lumx-switch-input-indicator-disabled($theme) {
-    background-color: lumx-theme-color-variant($theme, L3);
+    background-color: lumx-theme-color-variant($theme, 'L3');
 }

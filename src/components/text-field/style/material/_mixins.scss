@@ -3,7 +3,7 @@
     top: $lumx-spacing-unit;
     left: 0;
     height: $lumx-text-field-height;
-    color: lumx-theme-color-variant($theme, L2);
+    color: lumx-theme-color-variant($theme, 'L2');
     line-height: $lumx-text-field-height;
     transform: translateY($lumx-spacing-unit * 3);
     transform-origin: bottom left;
@@ -12,10 +12,10 @@
 }
 
 @mixin lumx-text-field-material-label-focus($theme) {
-    @if $theme == dark {
-        color: lumx-theme-color-variant(primary, N);
-    } @else if $theme == light {
-        color: lumx-theme-color-variant(light, N);
+    @if $theme == 'dark' {
+        color: lumx-theme-color-variant('primary', 'N');
+    } @else if $theme == 'light' {
+        color: lumx-theme-color-variant('light', 'N');
     }
 }
 
@@ -48,10 +48,10 @@
         transform: scaleX(0);
         transition: transform 200ms;
 
-        @if $theme == dark {
-            background-color: lumx-theme-color-variant(primary, N);
-        } @else if $theme == light {
-            background-color: lumx-theme-color-variant(light, N);
+        @if $theme == 'dark' {
+            background-color: lumx-theme-color-variant('primary', 'N');
+        } @else if $theme == 'light' {
+            background-color: lumx-theme-color-variant('light', 'N');
         }
     }
 }
@@ -63,7 +63,7 @@
 }
 
 @mixin lumx-text-field-material-input-native($theme) {
-    @include lumx-typography(body2);
+    @include lumx-typography('body2');
 
     line-height: $lumx-text-field-height;
 }

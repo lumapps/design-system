@@ -7,11 +7,11 @@
 
     &__links {
         #{$self}--theme-light & {
-            @include lumx-tabs-links(dark);
+            @include lumx-tabs-links('dark');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-tabs-links(light);
+            @include lumx-tabs-links('light');
         }
     }
 
@@ -20,11 +20,11 @@
         @include lumx-state-transition;
 
         #{$self}--theme-light & {
-            @include lumx-state(state-default, emphasis-low, dark);
+            @include lumx-state('state-default', 'emphasis-low', 'dark');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-state(state-default, emphasis-low, light);
+            @include lumx-state('state-default', 'emphasis-low', 'light');
         }
     }
 }
@@ -34,7 +34,7 @@
 
 .#{$lumx-base-prefix}-tabs--layout-fixed {
     .#{$lumx-base-prefix}-tabs__link {
-        @include lumx-tabs-link-layout(fixed);
+        @include lumx-tabs-link-layout('fixed');
     }
 }
 
@@ -43,19 +43,19 @@
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-left {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position(left);
+        @include lumx-tabs-links-position('position-left');
     }
 }
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-center {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position(center);
+        @include lumx-tabs-links-position('position-center');
     }
 }
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-right {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position(right);
+        @include lumx-tabs-links-position('position-right');
     }
 }
 
@@ -65,11 +65,11 @@
 // Hover state
 .#{$lumx-base-prefix}-tabs__link:hover {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state(state-hover, emphasis-low, dark);
+        @include lumx-state('state-hover', 'emphasis-low', 'dark');
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state(state-hover, emphasis-low, light);
+        @include lumx-state('state-hover', 'emphasis-low', 'light');
     }
 }
 
@@ -77,33 +77,33 @@
 /* stylelint-disable-next-line no-descending-specificity */
 .#{$lumx-base-prefix}-tabs__link:active {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state(state-active, emphasis-low, dark);
+        @include lumx-state('state-active', 'emphasis-low', 'dark');
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state(state-active, emphasis-low, light);
+        @include lumx-state('state-active', 'emphasis-low', 'light');
     }
 }
 
 // Focus state
 .#{$lumx-base-prefix}-tabs__link[data-focus-visible-added] {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state(state-focus, emphasis-low, dark, null, true);
+        @include lumx-state('state-focus', 'emphasis-low', 'dark', null, true);
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state(state-focus, emphasis-low, light, null, true);
+        @include lumx-state('state-focus', 'emphasis-low', 'light', null, true);
     }
 }
 
 // Disabled state
 .#{$lumx-base-prefix}-tabs__link--is-disabled {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state-disabled-text(dark);
+        @include lumx-state-disabled-text('dark');
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state-disabled-text(light);
+        @include lumx-state-disabled-text('light');
     }
 }
 
@@ -112,10 +112,10 @@
 
 .#{$lumx-base-prefix}-tabs__link--is-active {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-tabs-link-active(dark);
+        @include lumx-tabs-link-active('dark');
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-tabs-link-active(light);
+        @include lumx-tabs-link-active('light');
     }
 }
