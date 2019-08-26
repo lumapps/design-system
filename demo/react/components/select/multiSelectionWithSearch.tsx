@@ -32,6 +32,10 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
     const [selectedValues, setSelectedValues] = useState<string[]>([]);
 
+    const onInfiniteScroll = (): void => {
+        console.log('You have reached the bottom of the select dropdown.');
+    };
+
     const clearSelectedvalues = (event: React.MouseEvent<HTMLDivElement, MouseEvent> | null, value?: string): void => {
         // tslint:disable-next-line: no-unused-expression
         event && event.stopPropagation();
@@ -40,11 +44,12 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
     const onItemSelectedHandler: (item: string) => void = (item: string): void => {
         if (selectedValues.includes(item)) {
+            setSelectedValues(selectedValues.filter((val: string) => item !== val));
             return;
         }
-        closeSelect();
-        setSelectedValues([item]);
+        setSelectedValues([...selectedValues, item]);
     };
+
     const [filterValue, setFilterValue] = useState('');
     const filteredChoices = CHOICES.filter((choice: string) =>
         choice
@@ -52,8 +57,10 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             .toLowerCase()
             .includes(filterValue.replace(' ', '').toLowerCase()),
     );
+
     return (
         <Select
+            multiple
             isOpen={isOpen}
             selectedValues={selectedValues}
             label={LABEL}
@@ -62,6 +69,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             onClear={clearSelectedvalues}
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
+            onInfinite={onInfiniteScroll}
         >
             <List>
                 <TextField initialValue={filterValue} onChange={setFilterValue} icon={mdiMagnify} />
