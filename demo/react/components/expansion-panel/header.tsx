@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement, useState } from 'react';
 
 import { mdiInformation } from '@mdi/js';
 import { ExpansionPanel, Icon, Size, Theme } from 'LumX';
@@ -18,9 +18,11 @@ const headerStyle: CSSProperties = {
     display: 'flex',
 };
 
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
-    <>
-        <ExpansionPanel theme={theme}>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+        <ExpansionPanel theme={theme} isOpen={isOpen} toggleCallback={setIsOpen}>
             <header style={headerStyle}>
                 <span>Header text</span>
                 <Icon size={Size.s} icon={mdiInformation} />
@@ -28,8 +30,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu sem et mauris convallis tempor. Mauris
             placerat enim eget ligula fermentum, in aliquam lorem congue. Vivamus lacinia consectetur mollis.
         </ExpansionPanel>
-    </>
-);
+    );
+};
 
 /////////////////////////////
 

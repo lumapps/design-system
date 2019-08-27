@@ -35,7 +35,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
 
     return (
         <>
-            <ExpansionPanel theme={theme} label="Lorem ipsum" isOpen={isOpen}>
+            <ExpansionPanel theme={theme} label="Lorem ipsum" isOpen={isOpen} toggleCallback={toggleOpen}>
                 <DragHandle />
 
                 <List>
