@@ -40,6 +40,7 @@ const isImport = (node) => isJSXImport(node) || isPreImport(node);
 const isPreJSXDemo = (node) =>
     node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'jsx']);
 const DEMO_BLOCK_IMPORT = "import { DemoBlock } from 'LumX/demo/react/layout/DemoBlock';\n";
+const ELEMENT_WITH_REF_IMPORT = "import { ElementWithRef } from 'LumX/demo/react/layout/ElementWithRef';\n";
 
 /**
  * MDX plugin to extract and insert source code from demo block in MDX documents.
@@ -56,7 +57,7 @@ module.exports = () => {
         });
         tree.children = [
             // Group all imports at the top with demo block import.
-            { type: 'import', value: DEMO_BLOCK_IMPORT + importStatement },
+            { type: 'import', value: DEMO_BLOCK_IMPORT + ELEMENT_WITH_REF_IMPORT + importStatement },
             ...others,
         ];
 

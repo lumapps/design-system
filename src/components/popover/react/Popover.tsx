@@ -68,7 +68,7 @@ type ElementPosition = IElementPosition;
 interface IPopoverProps extends IGenericProps {
     /* The position the popover should be bounded to. */
     popoverRect: ElementPosition;
-    /* Should the popper be displayed ? */
+    /* Should the popper be displayed. */
     isVisible: boolean;
     /* The reference forwarded to the popover container. */
     popoverRef: React.RefObject<HTMLDivElement>;
