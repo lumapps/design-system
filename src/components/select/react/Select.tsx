@@ -114,8 +114,8 @@ interface ISelectProps extends IGenericProps {
     selectedChipRender?(
         choice: string,
         index: number,
-        onClear: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
-        isDisabled: boolean,
+        onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
+        isDisabled?: boolean,
     ): ReactNode | string;
 }
 type SelectProps = ISelectProps;
@@ -154,8 +154,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     selectedChipRender: (
         choice: string,
         index: number,
-        onClear: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
-        isDisabled: boolean,
+        onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
+        isDisabled?: boolean,
     ): ReactNode | string => (
         <Chip
             key={index}
@@ -247,7 +247,7 @@ const Select: React.FC<SelectProps> = ({
                                 {!isEmpty && multiple && (
                                     <div className={`${CLASSNAME}__input-chip`}>
                                         {selectedValues.map((value: string, index: number) =>
-                                            selectedChipRender(value, index, onClear, isDisabled),
+                                            selectedChipRender!(value, index, onClear, isDisabled),
                                         )}
                                     </div>
                                 )}
