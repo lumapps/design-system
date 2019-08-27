@@ -104,12 +104,13 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     const popperElement: React.ReactElement = (
         <div
+            className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
             ref={wrapperRef}
-            className={`${CLASSNAME}__menu`}
             style={{
                 maxHeight: computedPosition.maxHeight,
                 minWidth: computedPosition.anchorWidth,
             }}
+            {...props}
         >
             <div className={`${CLASSNAME}__content`}>{children}</div>
         </div>
@@ -143,17 +144,15 @@ const Dropdown: React.FC<DropdownProps> = ({
     );
 
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
-            <Popover
-                popoverRect={computedPosition}
-                popoverRef={popoverRef}
-                isVisible={isVisible}
-                offset={offset}
-                placement={placement}
-            >
-                {popperElement}
-            </Popover>
-        </div>
+        <Popover
+            popoverRect={computedPosition}
+            popoverRef={popoverRef}
+            isVisible={isVisible}
+            offset={offset}
+            placement={placement}
+        >
+            {popperElement}
+        </Popover>
     );
 };
 Dropdown.displayName = COMPONENT_NAME;
