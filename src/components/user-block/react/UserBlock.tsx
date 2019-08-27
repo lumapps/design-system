@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
 
@@ -36,6 +36,8 @@ interface IUserBlockProps extends IGenericProps {
     size?: UserBlockSize;
     /* Theme. */
     theme?: Theme;
+    /* Reference passed to the wrapper. */
+    userBlockRef?: Ref<HTMLDivElement>;
     /* Callback for the click event. */
     onClick?(): void;
     /* Callback for the mouseEnter event. */
@@ -83,7 +85,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The component.
  */
-const UserBlock: React.FC<IUserBlockProps> = ({
+const UserBlock = ({
     avatar,
     theme = DEFAULT_PROPS.theme,
     orientation = DEFAULT_PROPS.orientation,
@@ -96,6 +98,7 @@ const UserBlock: React.FC<IUserBlockProps> = ({
     simpleAction,
     multipleActions,
     size = DEFAULT_PROPS.size,
+    userBlockRef,
 }: IUserBlockProps): ReactElement => {
     let componentSize = size;
 
@@ -107,13 +110,7 @@ const UserBlock: React.FC<IUserBlockProps> = ({
     const shouldDisplayActions: boolean = orientation === Orientation.vertical;
 
     const nameBlock: ReactNode = name && (
-        <span
-            className={`${CLASSNAME}__name`}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onClick={onClick}
-            tabIndex={onClick ? 0 : -1}
-        >
+        <span className={`${CLASSNAME}__name`} onClick={onClick} tabIndex={onClick ? 0 : -1}>
             {name}
         </span>
     );
@@ -130,18 +127,19 @@ const UserBlock: React.FC<IUserBlockProps> = ({
 
     return (
         <div
+            ref={userBlockRef}
             className={classNames(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme }),
             )}
+            onMouseLeave={onMouseLeave}
+            onMouseEnter={onMouseEnter}
         >
             {avatar && (
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
                         image={avatar}
                         size={componentSize}
-                        onMouseLeave={onMouseLeave}
-                        onMouseEnter={onMouseEnter}
                         onClick={onClick}
                         tabIndex={onClick ? 0 : -1}
                         theme={theme}

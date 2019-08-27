@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactElement, useState } from 'react';
+import React, { CSSProperties, ReactElement, useRef, useState } from 'react';
 
-import { Popover, PopperPlacement } from 'LumX';
+import { Placement, Popover } from 'LumX';
 
 /////////////////////////////
 
@@ -27,67 +27,72 @@ const demoPopperStyle: CSSProperties = {
     width: '266px',
 };
 
-const createDemoAnchor = (): ReactElement => {
-    return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
-};
-
-const createPopper = (): ReactElement => {
-    return (
-        <div style={demoPopperStyle}>
-            {`Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. `}
-        </div>
-    );
-};
-
 /**
  * The demo for the default <Popover>s.
  *
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
-    const [selectedPlacement, setSelectedPlacement] = useState(PopperPlacement.AUTO);
+    const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
+
+    const [selectedPlacement, setSelectedPlacement] = useState(Placement.AUTO);
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
-    const availablePopperPlacement: string[] = [
-        PopperPlacement.AUTO,
-        PopperPlacement.AUTO_END,
-        PopperPlacement.AUTO_START,
-        PopperPlacement.BOTTOM,
-        PopperPlacement.BOTTOM_END,
-        PopperPlacement.BOTTOM_START,
-        PopperPlacement.LEFT,
-        PopperPlacement.LEFT_END,
-        PopperPlacement.LEFT_START,
-        PopperPlacement.RIGHT,
-        PopperPlacement.RIGHT_END,
-        PopperPlacement.RIGHT_START,
-        PopperPlacement.TOP,
-        PopperPlacement.TOP_END,
-        PopperPlacement.TOP_START,
+    const availablePlacement: string[] = [
+        Placement.AUTO,
+        Placement.AUTO_END,
+        Placement.AUTO_START,
+        Placement.BOTTOM,
+        Placement.BOTTOM_END,
+        Placement.BOTTOM_START,
+        Placement.LEFT,
+        Placement.LEFT_END,
+        Placement.LEFT_START,
+        Placement.RIGHT,
+        Placement.RIGHT_END,
+        Placement.RIGHT_START,
+        Placement.TOP,
+        Placement.TOP_END,
+        Placement.TOP_START,
     ];
+
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        selectedPlacement,
+        anchorRef,
+        popoverRef,
+        isTooltipDisplayed,
+    );
 
     function toggleTooltipDisplay(newVisibleState: boolean): void {
         setTooltipDisplayed(newVisibleState);
     }
 
     return (
-        <div onMouseOver={(): void => toggleTooltipDisplay(true)} onMouseOut={(): void => toggleTooltipDisplay(false)}>
+        <div
+            onMouseEnter={(): void => toggleTooltipDisplay(true)}
+            onMouseLeave={(): void => toggleTooltipDisplay(false)}
+        >
             <select
                 onChange={(evt: React.ChangeEvent<HTMLSelectElement>): void =>
-                    setSelectedPlacement(evt.target.value as PopperPlacement)
+                    setSelectedPlacement(evt.target.value as Placement)
                 }
             >
-                {availablePopperPlacement.map((pos: string) => (
-                    <option>{pos}</option>
+                {availablePlacement.map((pos: string, index: number) => (
+                    <option key={index}>{pos}</option>
                 ))}
             </select>
             <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Popover
-                    anchorElement={createDemoAnchor()}
-                    popperElement={createPopper()}
-                    popperPlacement={selectedPlacement}
-                    showPopper={isTooltipDisplayed}
-                    lockFlip
-                />
+                <div ref={anchorRef} style={demoAnchorStyle}>
+                    {'This element will act as the anchor'}
+                </div>
+
+                <Popover popoverRect={computedPosition} isVisible={isVisible} popoverRef={popoverRef}>
+                    <div style={demoPopperStyle}>
+                        {
+                            'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '
+                        }
+                    </div>
+                </Popover>
             </div>
         </div>
     );

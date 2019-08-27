@@ -1,13 +1,13 @@
-import React, { CSSProperties, ReactElement, useState } from 'react';
+import React, { CSSProperties, ReactElement, useRef, useState } from 'react';
 
 import {
     Button,
     ButtonEmphasis,
     IconButton,
+    Offset,
     Orientation,
+    Placement,
     Popover,
-    PopperOffsets,
-    PopperPlacement,
     Size,
     Theme,
     UserBlock,
@@ -70,76 +70,74 @@ const createMultipleActions = (theme: Theme): ReactElement => (
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
     const [isCardDisplayed, setCardDisplayed] = useState(false);
     let delayer: NodeJS.Timeout | null;
-    const anchorRef = React.createRef();
+    const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
 
     /**
      * Switch tooltip visibility
      * @param newVisibleState Tooltip visibility
      */
     const toggleCardDisplay = (newVisibleState: boolean): void => {
-        // tslint:disable-next-line: early-exit
+        if (delayer) {
+            clearTimeout(delayer);
+            delayer = null;
+        }
+
         if (!newVisibleState) {
-            delayer = setTimeout(() => setCardDisplayed(false), 500);
+            delayer = setTimeout(() => setCardDisplayed(false), 0);
         } else {
-            if (delayer) {
-                clearTimeout(delayer);
-                delayer = null;
-            }
-            delayer = setTimeout(() => setCardDisplayed(true), 500);
+            setCardDisplayed(true);
         }
     };
 
-    const anchor: ReactElement = (
-        <UserBlock
-            ref={anchorRef}
-            theme={theme}
-            name="Guillaume Nachury"
-            fields={['Bidouilleur', 'Meyzieu']}
-            avatar={'http://i.pravatar.cc/139'}
-            orientation={Orientation.horizontal}
-            onMouseEnter={(): void => toggleCardDisplay(true)}
-            onMouseLeave={(): void => toggleCardDisplay(false)}
-            size={Size.m}
-        />
+    const offsets: Offset = { vertical: 20 };
+
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        Placement.TOP_START,
+        anchorRef,
+        popoverRef,
+        isCardDisplayed,
+        offsets,
     );
 
-    const popper: ReactElement = (
-        <div
-            style={{
-                display: 'flex',
-                flex: 'auto',
-                justifyContent: 'center',
-                paddingBottom: 16,
-                paddingTop: 25,
-                width: 213,
-            }}
-            onMouseEnter={(): void => toggleCardDisplay(true)}
-            onMouseLeave={(): void => toggleCardDisplay(false)}
-        >
-            <UserBlock
-                theme={theme}
-                name="Guillaume Nachury"
-                fields={['Bidouilleur', 'Meyzieu']}
-                avatar={'http://i.pravatar.cc/139'}
-                orientation={Orientation.vertical}
-                simpleAction={createSimpleAction(theme)}
-                multipleActions={createMultipleActions(theme)}
-            />
-        </div>
-    );
-
-    const offsets: PopperOffsets = { vertical: 20 };
     return (
-        <div style={demoPopoverHolderStyle}>
-            <Popover
-                anchorElement={anchor}
-                popperOffset={offsets}
-                showPopper={isCardDisplayed}
-                popperElement={popper}
-                popperPlacement={PopperPlacement.TOP_START}
-                elevation={5}
-            />
-        </div>
+        <>
+            <div style={demoPopoverHolderStyle}>
+                <UserBlock
+                    userBlockRef={anchorRef}
+                    theme={theme}
+                    name="Guillaume Nachury"
+                    fields={['Bidouilleur', 'Meyzieu']}
+                    avatar={'http://i.pravatar.cc/139'}
+                    orientation={Orientation.horizontal}
+                    onMouseEnter={(): void => toggleCardDisplay(true)}
+                    onMouseLeave={(): void => toggleCardDisplay(false)}
+                    size={Size.m}
+                />
+            </div>
+            <Popover popoverRef={popoverRef} isVisible={isVisible} popoverRect={computedPosition}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flex: 'auto',
+                        justifyContent: 'center',
+                        paddingBottom: 16,
+                        paddingTop: 25,
+                        width: 213,
+                    }}
+                >
+                    <UserBlock
+                        theme={theme}
+                        name="Guillaume Nachury"
+                        fields={['Bidouilleur', 'Meyzieu']}
+                        avatar={'http://i.pravatar.cc/139'}
+                        orientation={Orientation.vertical}
+                        simpleAction={createSimpleAction(theme)}
+                        multipleActions={createMultipleActions(theme)}
+                    />
+                </div>
+            </Popover>
+        </>
     );
 };
 /////////////////////////////

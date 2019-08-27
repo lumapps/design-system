@@ -18,7 +18,7 @@ declare function getBasicClass({
 }: {
     prefix: string;
     type: string;
-    value: string | boolean | undefined;
+    value: string | number | boolean | undefined;
 }): string;
 
 /**

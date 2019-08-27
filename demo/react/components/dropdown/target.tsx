@@ -1,6 +1,6 @@
 import React, { CSSProperties, Fragment, ReactNode, useRef, useState } from 'react';
 
-import { Button, Dropdown, List, ListItem, ListItemSize, PopperPlacement } from 'LumX';
+import { Button, Dropdown, List, ListItem, ListItemSize, Placement } from 'LumX';
 import { useClickAway } from 'LumX/core/react/hooks';
 
 const demoContainerStyle: CSSProperties = {
@@ -58,7 +58,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                 <Dropdown
                     closeOnClick={true}
                     escapeClose={true}
-                    position={PopperPlacement.BOTTOM_START}
+                    position={Placement.BOTTOM_START}
                     showDropdown={isDropdownOpen}
                     toggleElement={createToggleElement('My target')}
                 >

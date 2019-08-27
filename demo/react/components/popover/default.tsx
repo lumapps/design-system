@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement, useRef } from 'react';
 
-import { Popover, PopperPlacement } from 'LumX';
+import { Placement, Popover } from 'LumX';
 
 /////////////////////////////
 
@@ -42,14 +42,6 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'center',
 };
 
-const createDemoAnchor = (): ReactElement => {
-    return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
-};
-
-const createPopper = (): ReactElement => {
-    return <div style={demoPopperStyle}>{`This element is the popper and is flying above the UI.`}</div>;
-};
-
 /////////////////////////////
 
 /**
@@ -58,19 +50,26 @@ const createPopper = (): ReactElement => {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = (): ReactElement => {
+    const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
+    // Pass a function to update the position state.
+    const { computedPosition, isVisible } = Popover.useComputePosition(Placement.AUTO, anchorRef, popoverRef, true);
+
     return (
-        <div style={demoPopoverHolderStyle}>
-            <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Ramdom element`}</div>
-            <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Ramdom element`}</div>
-            <Popover
-                anchorElement={createDemoAnchor()}
-                popperElement={createPopper()}
-                popperPlacement={PopperPlacement.RIGHT}
-                showPopper
-            />
-            <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Random element`}</div>
-            <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{`Random element`}</div>
-        </div>
+        <>
+            <div style={demoPopoverHolderStyle}>
+                <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Ramdom element'}</div>
+                <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Ramdom element'}</div>
+                <div ref={anchorRef} style={demoAnchorStyle}>
+                    {'This element will act as the anchor'}
+                </div>
+                <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
+                <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
+            </div>
+            <Popover popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
+                <div style={demoPopperStyle}>{'This element is the popper and is flying above the UI.'}</div>
+            </Popover>
+        </>
     );
 };
 

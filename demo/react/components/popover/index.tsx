@@ -28,11 +28,6 @@ const demos: { [demoName: string]: DemoObject } = {
         description: 'Popover can be offseted from its anchor point.',
         title: 'Using offsets',
     },
-    tooltip: {
-        description:
-            'Popover can be used to create a tootltip behavior i.e. On hovering a target pop a component anchored to the target. When the mouse exists the target the poped element is hidden.',
-        title: 'Popover with tooltip behavior',
-    },
     controled: {
         description: '',
         title: 'Control the popper visibility',

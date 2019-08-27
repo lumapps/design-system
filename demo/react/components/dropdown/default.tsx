@@ -1,6 +1,6 @@
 import React, { CSSProperties, Fragment, ReactNode } from 'react';
 
-import { Button, Dropdown, List, ListItem, ListItemSize, ListSubheader, PopperPlacement } from 'LumX';
+import { Button, Dropdown, List, ListItem, ListItemSize, ListSubheader, Placement } from 'LumX';
 
 const demoContainerStyle: CSSProperties = {
     display: 'flex',
@@ -19,7 +19,6 @@ const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode 
     setIsOpen: (isOpen: boolean) => void,
 ): ReactNode => {
     const onItemSelectedHandler: (item: ListItem) => void = (item: ListItem): void => {
-        // tslint:disable-next-line no-console
         console.log('selected item', item);
         setIsOpen(false);
     };
@@ -38,7 +37,7 @@ const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode 
 const createComplexMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode = (
     setIsOpen: (isOpen: boolean) => void,
 ): ReactNode => {
-    // tslint:disable-next-line no-unused
+    // tslint:disable-next-line: no-unused
     const onItemSelectedHandler: (item: ListItem) => void = (item: ListItem): void => {
         setIsOpen(false);
     };
@@ -73,7 +72,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                 <Dropdown
                     closeOnClick={true}
                     escapeClose={true}
-                    position={PopperPlacement.BOTTOM_START}
+                    position={Placement.BOTTOM_START}
                     toggleElement={createToggleElement('Simple Menu')}
                 >
                     {(setIsOpen: (isOpen: boolean) => void): ReactNode => createSimpleMenuList(setIsOpen)}
@@ -84,7 +83,7 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
                     closeOnClick={false}
                     escapeClose={false}
                     offset={{ vertical: 8 }}
-                    position={PopperPlacement.BOTTOM_START}
+                    position={Placement.BOTTOM_START}
                     toggleElement={createToggleElement('Complex Menu')}
                 >
                     {(setIsOpen: (isOpen: boolean) => void): ReactNode => createComplexMenuList(setIsOpen)}
