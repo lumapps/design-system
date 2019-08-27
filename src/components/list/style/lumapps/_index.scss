@@ -48,6 +48,10 @@
 
 .#{$lumx-base-prefix}-list-subheader {
     @include lumx-list-subheader;
+
+    i {
+        @include lumx-list-subheader-icon;
+    }
 }
 
 /* Divider

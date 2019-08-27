@@ -96,6 +96,12 @@
     color: lumx-theme-color-variant('dark', 'L3');
 }
 
+@mixin lumx-list-subheader-icon {
+    @include lumx-icon-size('xxs');
+
+    margin-right: $lumx-spacing-unit;
+}
+
 @mixin lumx-list-divider() {
     height: 1px;
     margin: $lumx-spacing-unit 0;
