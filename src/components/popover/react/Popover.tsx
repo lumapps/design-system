@@ -130,7 +130,7 @@ const Popover: React.FC<PopoverProps> & IPopover = ({
     elevation = DEFAULT_PROPS.elevation,
     isVisible,
     ...props
-}: PopoverProps): ReactElement | null => {
+}: PopoverProps): ReactElement => {
     const cssPopover: CSSProperties = {
         height: popoverRect.height ? `${popoverRect.height}px` : 'auto',
         left: 0,
