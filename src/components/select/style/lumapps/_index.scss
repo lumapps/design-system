@@ -79,7 +79,7 @@
         }
 
         #{$self}--theme-dark & {
-            @include lumx-select-input-clear('dark');
+            @include lumx-select-input-clear('light');
         }
     }
 
