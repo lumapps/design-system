@@ -185,7 +185,7 @@ const List: React.FC<ListProps> = ({
         if (isClickable && listElementRef && listElementRef.current) {
             listElementRef.current.focus();
         }
-    }, []);
+    }, [isClickable]);
 
     return (
         <ul

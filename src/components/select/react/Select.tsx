@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { KeyboardEvent, KeyboardEventHandler, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,6 +8,7 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { Chip, Dropdown, Icon, Placement, Size, Theme } from 'LumX';
 
+import { ENTER_KEY_CODE, SPACE_KEY_CODE } from 'LumX/core/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -205,11 +206,30 @@ const Select: React.FC<SelectProps> = ({
     onInfiniteScroll,
     ...props
 }: SelectProps): React.ReactElement => {
-    // tslint:disable-next-line: no-unused
     const [isFocus, setIsFocus] = useState(false);
     const isEmpty = selectedValues.length === 0;
     const targetUuid = 'uuid';
-    const anchorRef = useRef(null);
+    const anchorRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        // Re-focus the button when the select is closed.
+        if (!isOpen && anchorRef.current) {
+            anchorRef.current.focus();
+        }
+    }, [isOpen, anchorRef.current]);
+
+    useEffect(() => {
+        if (anchorRef.current) {
+            anchorRef.current.addEventListener('focus', () => setIsFocus(true));
+            anchorRef.current.addEventListener('blur', () => setIsFocus(false));
+        }
+    }, [anchorRef.current]);
+
+    const handleKeyboardNav: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>): void => {
+        if ((evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE) && onInputClick) {
+            onInputClick();
+        }
+    };
 
     const createParentElement: () => ReactNode = (): ReactNode => {
         return (
@@ -220,10 +240,11 @@ const Select: React.FC<SelectProps> = ({
                         {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
                         <div
-                            onClick={onInputClick}
-                            ref={anchorRef}
-                            className={`${CLASSNAME}__input-wrapper`}
+                            ref={anchorRef as RefObject<HTMLDivElement>}
                             id={targetUuid}
+                            className={`${CLASSNAME}__input-wrapper`}
+                            onClick={onInputClick}
+                            onKeyPress={handleKeyboardNav}
                             tabIndex={0}
                         >
                             {isEmpty && placeholder && (
@@ -279,7 +300,7 @@ const Select: React.FC<SelectProps> = ({
                         after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
                         onAfterClick={isEmpty ? onInputClick : onClear}
                         onClick={onInputClick}
-                        chipRef={anchorRef}
+                        chipRef={anchorRef as RefObject<HTMLAnchorElement>}
                         theme={theme}
                     >
                         {isEmpty && <span>{label}</span>}

@@ -30,6 +30,14 @@ const DOWN_KEY_CODE = 40;
 const ENTER_KEY_CODE = 13;
 
 /**
+ * The space key code.
+ *
+ * @type {number}
+ * @constant
+ */
+const SPACE_KEY_CODE = 32;
+
+/**
  * The escape key code.
  *
  * @type {number}
@@ -75,6 +83,7 @@ export {
     CSS_PREFIX,
     DOWN_KEY_CODE,
     ENTER_KEY_CODE,
+    SPACE_KEY_CODE,
     ESCAPE_KEY_CODE,
     LEFT_KEY_CODE,
     RIGHT_KEY_CODE,

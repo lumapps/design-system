@@ -51,7 +51,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List>
+            <List isClickable={true}>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice: string, index: number) => (
                           // tslint:disable-next-line: jsx-no-lambda
