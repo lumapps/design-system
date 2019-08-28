@@ -64,7 +64,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
     return (
         <Select
-            multiple
+            isMultiple
             isOpen={isOpen}
             selectedValues={selectedValues}
             label={LABEL}
@@ -73,7 +73,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             onClear={clearSelectedvalues}
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
-            onInfinite={onInfiniteScroll}
+            onInfiniteScroll={onInfiniteScroll}
             selectedChipRender={(
                 choice: string,
                 index: number,

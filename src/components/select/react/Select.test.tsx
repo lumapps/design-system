@@ -151,8 +151,8 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
 
-        it('should use the given `multiple`', (): void => {
-            const testedProp = 'multiple';
+        it('should use the given `isMultiple`', (): void => {
+            const testedProp = 'isMultiple';
             const modifiedProps: ISetupProps = {
                 [testedProp]: true,
                 selectedValues: ['', ''],
@@ -231,7 +231,7 @@ describe(`<${Select.displayName}>`, (): void => {
 
             const onClear: jest.Mock = jest.fn();
             const { input } = setup({
-                multiple: true,
+                isMultiple: true,
                 onClear,
                 selectedValues: [value1, value2],
             });
@@ -250,7 +250,7 @@ describe(`<${Select.displayName}>`, (): void => {
             const onClear: jest.Mock = jest.fn();
 
             const { input } = setup({
-                multiple: true,
+                isMultiple: true,
                 onClear,
                 selectedValues: [value1, value2],
                 variant: SelectVariant.chip,
@@ -297,7 +297,7 @@ describe(`<${Select.displayName}>`, (): void => {
                 const value2 = 'Value2';
                 const value3 = 'Value3';
                 const hasMultipleValues: Partial<ISetupProps> = {
-                    multiple: true,
+                    isMultiple: true,
                     selectedValues: [value1, value2, value3],
                     variant: SelectVariant.input,
                 };
@@ -376,12 +376,12 @@ describe(`<${Select.displayName}>`, (): void => {
                     expect(input.childAt(0).text()).toEqual(value);
                 });
 
-                it('should render the value even if multiple is true', (): void => {
+                it('should render the value even if isMultiple is true', (): void => {
                     const label = 'The label';
                     const { input } = setup({
                         ...hasValueProps,
+                        isMultiple: true,
                         label,
-                        multiple: true,
                     });
 
                     expect(input.childAt(0).text()).toEqual(value);
@@ -404,7 +404,7 @@ describe(`<${Select.displayName}>`, (): void => {
                 const value2 = 'Value2';
                 const value3 = 'Value3';
                 const hasMultipleValues: Partial<ISetupProps> = {
-                    multiple: true,
+                    isMultiple: true,
                     selectedValues: [value1, value2, value3],
                     variant: SelectVariant.chip,
                 };

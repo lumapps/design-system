@@ -63,7 +63,7 @@ interface ISelectProps extends IGenericProps {
     /**
      * Wether to let user select multiple values in the choices list or not.
      */
-    multiple?: boolean;
+    isMultiple?: boolean;
 
     /**
      * The select placeholder (input variant).
@@ -109,7 +109,7 @@ interface ISelectProps extends IGenericProps {
     selectedValueRender?(choice: string): ReactNode | string;
 
     /**
-     * The function called to render a selected value when `multiple` is true. Default: Renders the value inside of a Chip
+     * The function called to render a selected value when `isMultiple` is true. Default: Renders the value inside of a Chip
      */
     selectedChipRender?(
         choice: string,
@@ -148,9 +148,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     hasError: false,
+    isMultiple: false,
     isOpen: false,
     isValid: false,
-    multiple: false,
     selectedChipRender: (
         choice: string,
         index: number,
@@ -188,7 +188,7 @@ const Select: React.FC<SelectProps> = ({
     hasError = DEFAULT_PROPS.hasError,
     onClear,
     isValid = DEFAULT_PROPS.isValid,
-    multiple = DEFAULT_PROPS.multiple,
+    isMultiple = DEFAULT_PROPS.isMultiple,
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     selectedValues = [],
@@ -237,14 +237,14 @@ const Select: React.FC<SelectProps> = ({
                                 </div>
                             )}
 
-                            {!isEmpty && !multiple && (
+                            {!isEmpty && !isMultiple && (
                                 <div className={`${CLASSNAME}__input-native`}>
                                     <span>{selectedValueRender!(selectedValues[0])}</span>
                                 </div>
                             )}
 
                             <div className={`${CLASSNAME}__input-chips`}>
-                                {!isEmpty && multiple && (
+                                {!isEmpty && isMultiple && (
                                     <div className={`${CLASSNAME}__input-chip`}>
                                         {selectedValues.map((value: string, index: number) =>
                                             selectedChipRender!(value, index, onClear, isDisabled),
@@ -259,7 +259,7 @@ const Select: React.FC<SelectProps> = ({
                                 </div>
                             )}
 
-                            {onClear && !multiple && !isEmpty && (
+                            {onClear && !isMultiple && !isEmpty && (
                                 <div className={`${CLASSNAME}__input-clear`} onClick={onClear}>
                                     <Icon icon={mdiCloseCircle} size={Size.xs} />
                                 </div>
@@ -277,7 +277,6 @@ const Select: React.FC<SelectProps> = ({
                         id={targetUuid}
                         isSelected={!isEmpty}
                         after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
-                        // tslint:disable-next-line: jsx-no-lambda
                         onAfterClick={isEmpty ? onInputClick : onClear}
                         onClick={onInputClick}
                         chipRef={anchorRef}
@@ -285,9 +284,9 @@ const Select: React.FC<SelectProps> = ({
                     >
                         {isEmpty && <span>{label}</span>}
 
-                        {!isEmpty && !multiple && <span>{selectedValueRender!(selectedValues[0])}</span>}
+                        {!isEmpty && !isMultiple && <span>{selectedValueRender!(selectedValues[0])}</span>}
 
-                        {!isEmpty && multiple && (
+                        {!isEmpty && isMultiple && (
                             <span>
                                 <span>{selectedValueRender!(selectedValues[0])}</span>
 
@@ -307,9 +306,9 @@ const Select: React.FC<SelectProps> = ({
                 handleBasicClasses({
                     hasError,
                     hasLabel: Boolean(label),
-                    hasMultiple: !isEmpty && multiple,
+                    hasMultiple: !isEmpty && isMultiple,
                     hasPlaceholder: Boolean(placeholder),
-                    hasUnique: !isEmpty && !multiple,
+                    hasUnique: !isEmpty && !isMultiple,
                     hasValue: !isEmpty,
                     isDisabled,
                     isEmpty,
