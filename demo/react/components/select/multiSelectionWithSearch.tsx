@@ -118,7 +118,12 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         >
             <List>
                 <div>
-                    <TextField initialValue={filterValue} onChange={setFilterValue} icon={mdiMagnify} />
+                    <TextField
+                        value={filterValue}
+                        initialValue={filterValue}
+                        onChange={setFilterValue}
+                        icon={mdiMagnify}
+                    />
                     <ListDivider />
                 </div>
                 <div>

@@ -37,7 +37,7 @@ interface IChipProps extends IGenericProps {
     size?: ChipSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** A function to be executed when the before element is clicked. */
+    /** A ref that will be passed to the wrapper element. */
     chipRef?: Ref<HTMLAnchorElement>;
     /** A function to be executed when the after element is clicked. */
     onAfterClick?(evt: SyntheticEvent): void;
