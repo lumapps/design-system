@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -14,22 +14,24 @@ import { IGenericProps, getRootClassName } from 'LumX/react/utils';
  * Defines the props of the component.
  */
 interface IDropdownProps extends IGenericProps {
+    /** The reference of the DOM element used to set the position of the Dropdown. */
+    anchorRef: React.RefObject<HTMLElement>;
     /** Whether a click anywhere out of the Dropdown would close it. */
     closeOnClick?: boolean;
     /** Whether an escape key press would close the Dropdown. */
-    escapeClose?: boolean;
+    closeOnEscape?: boolean;
     /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
     offset?: Offset;
-    /** The preferred Dropdown location against the toggle element. */
-    position?: Placement | string;
+    /** The preferred Dropdown location against the anchor element. */
+    placement?: Placement;
     /** Whether the dropdown should be displayed or not. Useful to control the Dropdown from outside the component. */
-    showDropdown?: boolean | undefined;
-    /** The reference element that will be used as the toggle of the Dropdown. */
-    toggleElement: React.ReactNode;
-    /** The width of the dropdown container. */
-    width?: number;
-    /** A render prop that returns the content of the Dropdown. */
-    children(setIsOpen: (isOpen: boolean) => void): React.ReactNode;
+    showDropdown: boolean;
+    /** Whether the dropdown should fit to the anchor width */
+    fitToAnchorWidth?: boolean;
+    /** Children of the Dropdown. */
+    children: React.ReactNode;
+    /** The function to be called when the user clicks away or Escape is pressed */
+    onClose?: VoidFunction;
 }
 type DropdownProps = IDropdownProps;
 
@@ -61,7 +63,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     closeOnClick: true,
-    escapeClose: true,
+    closeOnEscape: true,
+    fitToAnchorWidth: true,
+    placement: Placement.AUTO_START,
     showDropdown: undefined,
 };
 
@@ -75,78 +79,80 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const Dropdown: React.FC<DropdownProps> = ({
     children,
     className = '',
+    onClose,
     closeOnClick = DEFAULT_PROPS.closeOnClick,
-    escapeClose = DEFAULT_PROPS.escapeClose,
+    closeOnEscape = DEFAULT_PROPS.closeOnEscape,
     offset,
-    showDropdown = DEFAULT_PROPS.showDropdown,
-    toggleElement,
-    width,
+    showDropdown,
+    anchorRef,
+    placement = DEFAULT_PROPS.placement,
+    fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
     ...props
 }: DropdownProps): React.ReactElement => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
     const popoverRef: React.RefObject<HTMLDivElement> = useRef(null);
-    const [isOpen, setIsOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(showDropdown || false);
 
-    function closeDropdown(): void {
-        setIsOpen(false);
-    }
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        placement!,
+        anchorRef,
+        popoverRef,
+        showDropdown,
+        offset,
+        false,
+        fitToAnchorWidth,
+    );
 
-    function toggleDropdown(): void {
-        setIsOpen(!isOpen);
-    }
-
-    const anchorElement: React.ReactNode = (
-        <div className={`${CLASSNAME}__toggle`} onClick={toggleDropdown}>
-            {toggleElement}
+    const popperElement: React.ReactElement = (
+        <div
+            className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
+            ref={wrapperRef}
+            style={{
+                maxHeight: computedPosition.maxHeight,
+                minWidth: computedPosition.anchorWidth,
+            }}
+            {...props}
+        >
+            <div className={`${CLASSNAME}__content`}>{children}</div>
         </div>
     );
 
-    const popperElement: React.ReactNode = (
-        <div className={`${CLASSNAME}__menu`} style={{ width }}>
-            <div className={`${CLASSNAME}__content`}>{children(setIsOpen)}</div>
-        </div>
-    );
-
-    // Control the dropdown from the outside via the showDropdown prop.
-    useEffect((): void => {
-        if (showDropdown === undefined) {
-            return;
+    useEffect(() => {
+        if (!onClose) {
+            return undefined;
         }
-
-        setIsOpen(showDropdown);
-    }, [showDropdown]);
+        if (closeOnEscape && showDropdown && wrapperRef.current) {
+            window.addEventListener('keydown', onEscapePressed(onClose));
+        } else {
+            window.removeEventListener('keydown', onEscapePressed(onClose));
+        }
+        return (): void => {
+            window.removeEventListener('keydown', onEscapePressed(onClose));
+        };
+    }, [showDropdown, closeOnEscape, onClose]);
 
     // Any click away from the dropdown container will close it.
-    useClickAway(wrapperRef, () => {
-        if (!closeOnClick) {
-            return;
-        }
+    useClickAway(
+        wrapperRef,
+        () => {
+            if (!closeOnClick || !onClose) {
+                return;
+            }
 
-        closeDropdown();
-    });
+            onClose();
+        },
+        [anchorRef!],
+    );
 
     return (
-        <>
-            <div
-                className={classNames(
-                    className,
-                    handleBasicClasses({ prefix: CLASSNAME, hasToggle: toggleElement !== null }),
-                )}
-                ref={wrapperRef}
-                onKeyDown={escapeClose ? onEscapePressed(closeDropdown) : null}
-                {...props}
-            >
-                {anchorElement}
-            </div>
-            <Popover
-                popoverRect={{ x: 0, y: 0, height: 0, width: 0 }}
-                isVisible={isOpen}
-                popoverRef={popoverRef}
-                offset={offset}
-            >
-                <div>{popperElement}</div>
-            </Popover>
-        </>
+        <Popover
+            popoverRect={computedPosition}
+            popoverRef={popoverRef}
+            isVisible={isVisible}
+            offset={offset}
+            placement={placement}
+        >
+            {popperElement}
+        </Popover>
     );
 };
 Dropdown.displayName = COMPONENT_NAME;

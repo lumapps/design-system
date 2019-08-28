@@ -1,7 +1,6 @@
 import React, { CSSProperties, Fragment, ReactNode, useRef, useState } from 'react';
 
 import { Button, Dropdown, List, ListItem, ListItemSize, Placement } from 'LumX';
-import { useClickAway } from 'LumX/core/react/hooks';
 
 const demoContainerStyle: CSSProperties = {
     display: 'flex',
@@ -12,17 +11,11 @@ const demoContainerStyle: CSSProperties = {
 
 interface IProps {}
 
-const createToggleElement: (text?: string) => ReactNode = (text: string = 'Button'): ReactNode => {
-    return <Button>{text}</Button>;
-};
-
-const createSimpleMenuList: (setIsOpen: (isOpen: boolean) => void) => ReactNode = (
-    setIsOpen: (isOpen: boolean) => void,
-): ReactNode => {
+const createSimpleMenuList: (onClose: () => void) => ReactNode = (onClose: () => void): ReactNode => {
     const onItemSelectedHandler: (item: ListItem) => void = (item: ListItem): void => {
         // tslint:disable-next-line no-console
         console.log('selected item', item);
-        setIsOpen(false);
+        onClose();
     };
 
     return (
@@ -47,24 +40,24 @@ const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
     const [isDropdownOpen, setIsDropdownOpen]: [boolean, (isOpen: boolean) => void] = useState<boolean>(true);
     const ddRef: React.RefObject<HTMLDivElement> = useRef(null);
 
-    useClickAway(ddRef, () => {
-        setIsDropdownOpen(false);
-    });
-
     return (
         <Fragment>
-            <div ref={ddRef} style={demoContainerStyle}>
-                {/* Target */}
-                <Dropdown
-                    closeOnClick={true}
-                    escapeClose={true}
-                    position={Placement.BOTTOM_START}
-                    showDropdown={isDropdownOpen}
-                    toggleElement={createToggleElement('My target')}
-                >
-                    {(setIsOpen: (isOpen: boolean) => void): React.ReactNode => createSimpleMenuList(setIsOpen)}
-                </Dropdown>
+            <div style={demoContainerStyle}>
+                <Button buttonRef={ddRef}>
+                    I am the anchor
+                    {/* Target */}
+                </Button>
             </div>
+            <Dropdown
+                closeOnClick={true}
+                closeOnEscape={true}
+                onClose={(): void => setIsDropdownOpen(false)}
+                placement={Placement.BOTTOM_START}
+                showDropdown={isDropdownOpen}
+                anchorRef={ddRef}
+            >
+                {createSimpleMenuList(() => setIsDropdownOpen(false))}
+            </Dropdown>
             {/* tslint:disable-next-line jsx-no-lambda */}
             <Button onClick={(): void => setIsDropdownOpen(true)}>Open dropdown</Button>
             {/* tslint:disable-next-line jsx-no-lambda */}

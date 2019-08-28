@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement, ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
 
@@ -12,7 +12,10 @@ import { Button } from './Button';
 /**
  * Defines the props of the component
  */
-interface IProps extends IGenericProps {}
+interface IProps extends IGenericProps {
+    /* Ref passed to the wrapper. */
+    buttonGroupRef?: Ref<HTMLDivElement>;
+}
 type ButtonGroupProps = IProps;
 
 /////////////////////////////
@@ -77,12 +80,13 @@ function _validate(props: ButtonGroupProps): ReactNode {
 const ButtonGroup: React.FC<ButtonGroupProps> = ({
     children,
     className = '',
+    buttonGroupRef,
     ...props
 }: ButtonGroupProps): ReactElement => {
     const newChildren: ReactNode = _validate({ children });
 
     return (
-        <div className={classNames(className, CLASSNAME)} {...props}>
+        <div className={classNames(className, CLASSNAME)} ref={buttonGroupRef} {...props}>
             {newChildren}
         </div>
     );

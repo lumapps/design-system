@@ -8,13 +8,11 @@ exports[`<Popover> Snapshots and structure should render correctly 1`] = `
     className="lumx-popover lumx-popover--elevation-3"
     style={
       Object {
-        "height": "auto",
         "left": 0,
         "position": "fixed",
         "top": 0,
         "transform": "translate(0px, 0px)",
         "visibility": "visible",
-        "width": "auto",
         "zIndex": 9999,
       }
     }

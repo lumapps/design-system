@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, useState } from 'react';
+import React, { ReactElement, ReactNode, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -173,7 +173,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     ...props
 }: DropdownButtonProps): ReactElement => {
     const [isDropdownOpened, setIsDropdownOpened] = useState(false);
-
+    const buttonRef = useRef(null);
     const newChildren: ReactNode = _validate({
         children,
         dropdown,
@@ -200,12 +200,16 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
         }
     };
 
+    const closeDropdown: () => void = (): void => {
+        setIsDropdownOpened(false);
+    };
+
     let rootElement: ReactElement;
     const extendedClassNames: string = classNames(className, CLASSNAME, { [`${CLASSNAME}--is-splitted`]: splitted });
 
     if (splitted) {
         rootElement = (
-            <ButtonGroup className={extendedClassNames}>
+            <ButtonGroup className={extendedClassNames} buttonGroupRef={buttonRef}>
                 <Button {...props} leftIcon={icon} variant={ButtonVariant.button}>
                     {newChildren}
                 </Button>
@@ -222,6 +226,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
                 rightIcon={mdiMenuDown}
                 variant={ButtonVariant.button}
                 onClick={openDropdown}
+                buttonRef={buttonRef}
             >
                 {newChildren}
             </Button>
@@ -229,9 +234,12 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
     }
 
     return (
-        <Dropdown showDropdown={isDropdownOpened} toggleElement={rootElement}>
-            {(): ReactNode => dropdown}
-        </Dropdown>
+        <>
+            {rootElement}
+            <Dropdown onClose={closeDropdown} anchorRef={buttonRef} showDropdown={isDropdownOpened}>
+                {dropdown}
+            </Dropdown>
+        </>
     );
 };
 DropdownButton.displayName = COMPONENT_NAME;

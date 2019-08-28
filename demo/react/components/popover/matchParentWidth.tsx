@@ -79,7 +79,7 @@ const DemoComponent: React.FC<IProps> = (): ReactElement => {
                 </div>
             </div>
             <Popover popoverRef={popoverRef} isVisible={isVisible} popoverRect={computedPosition}>
-                <div style={demoPopperStyle}>
+                <div style={{ ...demoPopperStyle, width: computedPosition.anchorWidth }}>
                     {
                         'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '
                     }

@@ -260,6 +260,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         tooltipRef,
         isOpen,
     ]);
+
     const cssTooltip: CSSProperties = {
         left: 0,
         position: 'fixed',

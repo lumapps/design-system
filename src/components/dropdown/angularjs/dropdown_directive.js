@@ -120,7 +120,10 @@ function DropdownController(
         LumXUtilsService.restoreBodyScroll();
 
         $timeout(() => {
-            _menuEl.removeAttr('style').insertAfter(_toggleEl);
+            _menuEl
+                .removeAttr('style')
+                .hide()
+                .insertAfter(_toggleEl);
 
             if (angular.isUndefined(lumx.escapeClose) || lumx.escapeClose) {
                 LumXEventSchedulerService.unregister(_idEventScheduler);
@@ -270,7 +273,10 @@ function DropdownController(
 
         LumXDepthService.increase();
 
-        _menuEl.appendTo('body').css('z-index', LumXDepthService.get());
+        _menuEl
+            .appendTo('body')
+            .show()
+            .css({ position: 'fixed', zIndex: LumXDepthService.get() });
 
         $timeout(() => {
             _initHorizontalPosition();
@@ -305,6 +311,7 @@ function DropdownController(
      */
     function registerMenu(menuEl) {
         _menuEl = menuEl;
+        _menuEl.hide();
     }
 
     /**

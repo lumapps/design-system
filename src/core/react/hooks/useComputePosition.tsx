@@ -78,10 +78,11 @@ const useComputePosition: useComputePositionType = (
     const [computedPosition, setComputedPosition] = useState(defaultPosition);
 
     const computePosition = (): void => {
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
         const newIsAnchorInViewPort = !!(
             anchorRef &&
             anchorRef.current &&
-            isInViewPort(anchorRef.current.getBoundingClientRect(), 'full')
+            isInViewPort(anchorRef.current.getBoundingClientRect(), 'partial')
         );
         setIsAnchorInViewport(newIsAnchorInViewPort);
 
@@ -109,38 +110,43 @@ const useComputePosition: useComputePositionType = (
                 boundingAnchor,
                 boundingPopover,
             );
+
             const bottomPosition = {
                 ...newPosition,
-                bottom: newPosition.y + bottomY + Number(newPosition.height),
+                bottom: vertical + bottomY + Number(newPosition.height),
                 left: newPosition.x + bottomX,
-                maxHeight: window.innerHeight - (newPosition.y + bottomY) - WINDOW_BOUNDING_OFFSET,
+                maxHeight: windowHeight - (vertical + bottomY) - WINDOW_BOUNDING_OFFSET,
                 right: newPosition.x + bottomX + Number(newPosition.width),
-                top: newPosition.y + bottomY,
+                top: vertical + bottomY,
                 x: newPosition.x + bottomX,
-                y: newPosition.y + bottomY,
+                y: vertical + bottomY,
             };
 
             const canBeBottom = isInViewPort(
                 {
                     ...boundingPopover,
                     ...bottomPosition,
+                    bottom: boundingPopover.height + bottomY + WINDOW_BOUNDING_OFFSET + vertical,
                 },
                 'full',
             );
 
             // Priority to bottom placement if possible, if not take the most available place;
-            if (canBeBottom || boundingAnchor.top < window.innerHeight - boundingAnchor.bottom) {
-                newPosition = bottomPosition;
+            if (canBeBottom || boundingAnchor.top <= windowHeight - boundingAnchor.bottom) {
+                newPosition = {
+                    ...bottomPosition,
+                    maxHeight: windowHeight - (newPosition.y + bottomY) - WINDOW_BOUNDING_OFFSET,
+                };
             } else {
                 const { x: topX, y: topY } = calculatePopoverPlacement(
                     MATCHING_PLACEMENT[placement].top,
                     boundingAnchor,
                     boundingPopover,
                 );
-                const y = Math.max(WINDOW_BOUNDING_OFFSET, newPosition.y + topY);
+                const y = Math.max(WINDOW_BOUNDING_OFFSET, topY - newPosition.y);
                 const topPosition = {
                     ...newPosition,
-                    maxHeight: boundingAnchor.top,
+                    maxHeight: boundingAnchor.top + vertical,
                     x: newPosition.x + topX,
                     y,
                 };
@@ -148,11 +154,11 @@ const useComputePosition: useComputePositionType = (
             }
         } else {
             const { x, y } = calculatePopoverPlacement(placement, boundingAnchor, boundingPopover);
-            const newY = Math.max(WINDOW_BOUNDING_OFFSET + newPosition.y, newPosition.y + y);
+            const newY = Math.max(WINDOW_BOUNDING_OFFSET, newPosition.y + y);
             const maxHeight =
                 placement === Placement.TOP || placement === Placement.TOP_END || placement === Placement.TOP_START
-                    ? boundingAnchor.top
-                    : window.innerHeight - newY - WINDOW_BOUNDING_OFFSET;
+                    ? boundingAnchor.top + vertical
+                    : windowHeight - newY - WINDOW_BOUNDING_OFFSET;
             newPosition = {
                 ...newPosition,
                 maxHeight,
