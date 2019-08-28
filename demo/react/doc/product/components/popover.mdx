@@ -46,9 +46,9 @@ Popover can be used to display elements above the rest of the UI.
             <div style={demoPopoverHolderStyle}>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
-                <ElementWithRef type="div" elementRef={anchorRef} style={demoAnchorStyle}>
+                <div ref={anchorRef} style={demoAnchorStyle}>
                     {'This element will act as the anchor'}
-                </ElementWithRef>
+                </div
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
             </div>
@@ -105,9 +105,9 @@ Popover can be offseted from its anchor point.
             <div style={demoPopoverHolderStyle}>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
-                <ElementWithRef type="div" elementRef={anchorRef} style={demoAnchorStyle}>
+                <div ref={anchorRef} style={demoAnchorStyle}>
                     {'This element will act as the anchor'}
-                </ElementWithRef>
+                </div
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
             </div>
@@ -173,9 +173,9 @@ Popover can be offseted from its anchor point.
                     Toggle visibility
                 </Button>
                 <div style={demoPopoverHolderStyle}>
-                    <ElementWithRef type="div" elementRef={anchorRef} style={demoAnchorStyle}>
+                    <div ref={anchorRef} style={demoAnchorStyle}>
                         {'This element will act as the anchor'}
-                    </ElementWithRef>
+                    </div
                 </div>
             </div>
             <Popover popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
@@ -261,9 +261,9 @@ Popover can be placed using one of 15 anchor points.
                 ))}
             </select>
             <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <ElementWithRef elementRef={anchorRef} style={demoAnchorStyle}>
+                <div ref={anchorRef} style={demoAnchorStyle}>
                     {'This element will act as the anchor'}
-                </ElementWithRef>
+                </div>
 
                 <Popover popoverRect={computedPosition} isVisible={isVisible} popoverRef={popoverRef}>
                     <div style={demoPopperStyle}>
@@ -333,14 +333,14 @@ You can force the width of the popper to match the anchor width.
         <>
             <div>
                 <div style={demoPopoverHolderStyle}>
-                    <ElementWithRef
-                        elementRef={anchorRef}
+                    <div
+                        ref={anchorRef}
                         style={{ ...demoAnchorStyle, width: 150 }}
                         onMouseEnter={() => toggleTooltipDisplay(true)}
                         onMouseLeave={() => toggleTooltipDisplay(false)}
                     >
                         {'This element will act as the anchor'}
-                    </ElementWithRef>
+                    </div
                 </div>
             </div>
             <Popover popoverRef={popoverRef} isVisible={isVisible} popoverRect={computedPosition}>

@@ -1,5 +1,6 @@
 const { convertToSimplePropsByComponent } = require('./convertPropTable');
 
+const lodash = require('lodash');
 const typedoc = require('typedoc');
 
 const inputFiles = ['./src'];
@@ -21,10 +22,9 @@ module.exports = function propsLoader() {
     // Add then to the dependency for this loader
     src.forEach((file) => this.addDependency(file));
 
-    // Extract doc as JS objects
+    // Extract doc as JS objects (temporarily redirecting stdout to prevent the console being spammed)
     const stdout = process.stdout.write;
-    // eslint-disable-next-line no-empty-function
-    process.stdout.write = () => {};
+    process.stdout.write = lodash.noop;
     const project = doc.convert(src);
     process.stdout.write = stdout;
     const typeDocDef = doc.serializer.projectToObject(project);
