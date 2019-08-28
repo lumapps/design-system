@@ -149,30 +149,57 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
     onClose={[Function]}
     showDropdown={false}
   >
-    <div
-      className="lumx-dropdown"
-    >
-      <Popover
-        isVisible={false}
-        placement="auto-start"
-        popoverRect={
-          Object {
-            "anchorHeight": 0,
-            "anchorWidth": 0,
-            "bottom": 0,
-            "height": 0,
-            "left": 0,
-            "maxHeight": 760,
-            "right": 0,
-            "top": 0,
-            "width": 0,
-            "x": 0,
-            "y": 0,
-          }
+    <Popover
+      isVisible={false}
+      placement="auto-start"
+      popoverRect={
+        Object {
+          "anchorHeight": 0,
+          "anchorWidth": 0,
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "maxHeight": 760,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0,
         }
-        popoverRef={
-          Object {
-            "current": <div
+      }
+      popoverRef={
+        Object {
+          "current": <div
+            class="lumx-popover lumx-popover--elevation-3"
+            placement="auto-start"
+            style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
+          >
+            <div
+              class="lumx-popover__wrapper"
+            >
+              <div
+                class="lumx-dropdown__menu lumx-dropdown"
+                style="max-height: 760px; min-width: 0;"
+              >
+                <div
+                  class="lumx-dropdown__content"
+                >
+                  <span>
+                    Dropdown content
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>,
+        }
+      }
+    >
+      <Portal
+        containerInfo={
+          <body
+            class="js-focus-visible"
+          >
+            <div
               class="lumx-popover lumx-popover--elevation-3"
               placement="auto-start"
               style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
@@ -181,7 +208,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                 class="lumx-popover__wrapper"
               >
                 <div
-                  class="lumx-dropdown__menu"
+                  class="lumx-dropdown__menu lumx-dropdown"
                   style="max-height: 760px; min-width: 0;"
                 >
                   <div
@@ -193,79 +220,48 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                   </div>
                 </div>
               </div>
-            </div>,
-          }
+            </div>
+          </body>
         }
       >
-        <Portal
-          containerInfo={
-            <body
-              class="js-focus-visible"
-            >
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </body>
+        <div
+          className="lumx-popover lumx-popover--elevation-3"
+          placement="auto-start"
+          style={
+            Object {
+              "left": 0,
+              "position": "fixed",
+              "top": 0,
+              "transform": "translate(0px, 0px)",
+              "visibility": "hidden",
+              "zIndex": 9999,
+            }
           }
         >
           <div
-            className="lumx-popover lumx-popover--elevation-3"
-            placement="auto-start"
-            style={
-              Object {
-                "left": 0,
-                "position": "fixed",
-                "top": 0,
-                "transform": "translate(0px, 0px)",
-                "visibility": "hidden",
-                "zIndex": 9999,
-              }
-            }
+            className="lumx-popover__wrapper"
           >
             <div
-              className="lumx-popover__wrapper"
+              className="lumx-dropdown__menu lumx-dropdown"
+              style={
+                Object {
+                  "maxHeight": 760,
+                  "minWidth": 0,
+                }
+              }
             >
               <div
-                className="lumx-dropdown__menu"
-                style={
-                  Object {
-                    "maxHeight": 760,
-                    "minWidth": 0,
-                  }
-                }
+                className="lumx-dropdown__content"
               >
-                <div
-                  className="lumx-dropdown__content"
-                >
-                  <span>
-                    Dropdown content
-                  </span>
-                </div>
+                <span>
+                  Dropdown content
+                </span>
               </div>
             </div>
           </div>
-        </Portal>
-      </Popover>
-    </div>
+        </div>
+      </Portal>
+    </Popover>
   </Dropdown>
 </DropdownButton>
 `;
@@ -489,30 +485,57 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
     onClose={[Function]}
     showDropdown={false}
   >
-    <div
-      className="lumx-dropdown"
-    >
-      <Popover
-        isVisible={false}
-        placement="auto-start"
-        popoverRect={
-          Object {
-            "anchorHeight": 0,
-            "anchorWidth": 0,
-            "bottom": 0,
-            "height": 0,
-            "left": 0,
-            "maxHeight": 760,
-            "right": 0,
-            "top": 0,
-            "width": 0,
-            "x": 0,
-            "y": 0,
-          }
+    <Popover
+      isVisible={false}
+      placement="auto-start"
+      popoverRect={
+        Object {
+          "anchorHeight": 0,
+          "anchorWidth": 0,
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "maxHeight": 760,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0,
         }
-        popoverRef={
-          Object {
-            "current": <div
+      }
+      popoverRef={
+        Object {
+          "current": <div
+            class="lumx-popover lumx-popover--elevation-3"
+            placement="auto-start"
+            style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
+          >
+            <div
+              class="lumx-popover__wrapper"
+            >
+              <div
+                class="lumx-dropdown__menu lumx-dropdown"
+                style="max-height: 760px; min-width: 0;"
+              >
+                <div
+                  class="lumx-dropdown__content"
+                >
+                  <span>
+                    Dropdown content
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>,
+        }
+      }
+    >
+      <Portal
+        containerInfo={
+          <body
+            class="js-focus-visible"
+          >
+            <div
               class="lumx-popover lumx-popover--elevation-3"
               placement="auto-start"
               style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
@@ -521,7 +544,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                 class="lumx-popover__wrapper"
               >
                 <div
-                  class="lumx-dropdown__menu"
+                  class="lumx-dropdown__menu lumx-dropdown"
                   style="max-height: 760px; min-width: 0;"
                 >
                   <div
@@ -533,101 +556,70 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a non-
                   </div>
                 </div>
               </div>
-            </div>,
-          }
-        }
-      >
-        <Portal
-          containerInfo={
-            <body
-              class="js-focus-visible"
-            >
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </body>
-          }
-        >
-          <div
-            className="lumx-popover lumx-popover--elevation-3"
-            placement="auto-start"
-            style={
-              Object {
-                "left": 0,
-                "position": "fixed",
-                "top": 0,
-                "transform": "translate(0px, 0px)",
-                "visibility": "hidden",
-                "zIndex": 9999,
-              }
-            }
-          >
+            </div>
             <div
-              className="lumx-popover__wrapper"
+              class="lumx-popover lumx-popover--elevation-3"
+              placement="auto-start"
+              style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
             >
               <div
-                className="lumx-dropdown__menu"
-                style={
-                  Object {
-                    "maxHeight": 760,
-                    "minWidth": 0,
-                  }
-                }
+                class="lumx-popover__wrapper"
               >
                 <div
-                  className="lumx-dropdown__content"
+                  class="lumx-dropdown__menu lumx-dropdown"
+                  style="max-height: 760px; min-width: 0;"
                 >
-                  <span>
-                    Dropdown content
-                  </span>
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+          </body>
+        }
+      >
+        <div
+          className="lumx-popover lumx-popover--elevation-3"
+          placement="auto-start"
+          style={
+            Object {
+              "left": 0,
+              "position": "fixed",
+              "top": 0,
+              "transform": "translate(0px, 0px)",
+              "visibility": "hidden",
+              "zIndex": 9999,
+            }
+          }
+        >
+          <div
+            className="lumx-popover__wrapper"
+          >
+            <div
+              className="lumx-dropdown__menu lumx-dropdown"
+              style={
+                Object {
+                  "maxHeight": 760,
+                  "minWidth": 0,
+                }
+              }
+            >
+              <div
+                className="lumx-dropdown__content"
+              >
+                <span>
+                  Dropdown content
+                </span>
+              </div>
+            </div>
           </div>
-        </Portal>
-      </Popover>
-    </div>
+        </div>
+      </Portal>
+    </Popover>
   </Dropdown>
 </DropdownButton>
 `;
@@ -787,30 +779,57 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
     onClose={[Function]}
     showDropdown={false}
   >
-    <div
-      className="lumx-dropdown"
-    >
-      <Popover
-        isVisible={false}
-        placement="auto-start"
-        popoverRect={
-          Object {
-            "anchorHeight": 0,
-            "anchorWidth": 0,
-            "bottom": 0,
-            "height": 0,
-            "left": 0,
-            "maxHeight": 760,
-            "right": 0,
-            "top": 0,
-            "width": 0,
-            "x": 0,
-            "y": 0,
-          }
+    <Popover
+      isVisible={false}
+      placement="auto-start"
+      popoverRect={
+        Object {
+          "anchorHeight": 0,
+          "anchorWidth": 0,
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "maxHeight": 760,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0,
         }
-        popoverRef={
-          Object {
-            "current": <div
+      }
+      popoverRef={
+        Object {
+          "current": <div
+            class="lumx-popover lumx-popover--elevation-3"
+            placement="auto-start"
+            style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
+          >
+            <div
+              class="lumx-popover__wrapper"
+            >
+              <div
+                class="lumx-dropdown__menu lumx-dropdown"
+                style="max-height: 760px; min-width: 0;"
+              >
+                <div
+                  class="lumx-dropdown__content"
+                >
+                  <span>
+                    Dropdown content
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>,
+        }
+      }
+    >
+      <Portal
+        containerInfo={
+          <body
+            class="js-focus-visible"
+          >
+            <div
               class="lumx-popover lumx-popover--elevation-3"
               placement="auto-start"
               style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
@@ -819,7 +838,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 class="lumx-popover__wrapper"
               >
                 <div
-                  class="lumx-dropdown__menu"
+                  class="lumx-dropdown__menu lumx-dropdown"
                   style="max-height: 760px; min-width: 0;"
                 >
                   <div
@@ -831,123 +850,92 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                   </div>
                 </div>
               </div>
-            </div>,
-          }
-        }
-      >
-        <Portal
-          containerInfo={
-            <body
-              class="js-focus-visible"
-            >
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </body>
-          }
-        >
-          <div
-            className="lumx-popover lumx-popover--elevation-3"
-            placement="auto-start"
-            style={
-              Object {
-                "left": 0,
-                "position": "fixed",
-                "top": 0,
-                "transform": "translate(0px, 0px)",
-                "visibility": "hidden",
-                "zIndex": 9999,
-              }
-            }
-          >
+            </div>
             <div
-              className="lumx-popover__wrapper"
+              class="lumx-popover lumx-popover--elevation-3"
+              placement="auto-start"
+              style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
             >
               <div
-                className="lumx-dropdown__menu"
-                style={
-                  Object {
-                    "maxHeight": 760,
-                    "minWidth": 0,
-                  }
-                }
+                class="lumx-popover__wrapper"
               >
                 <div
-                  className="lumx-dropdown__content"
+                  class="lumx-dropdown__menu lumx-dropdown"
+                  style="max-height: 760px; min-width: 0;"
                 >
-                  <span>
-                    Dropdown content
-                  </span>
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              placement="auto-start"
+              style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div
+                  class="lumx-dropdown__menu lumx-dropdown"
+                  style="max-height: 760px; min-width: 0;"
+                >
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        }
+      >
+        <div
+          className="lumx-popover lumx-popover--elevation-3"
+          placement="auto-start"
+          style={
+            Object {
+              "left": 0,
+              "position": "fixed",
+              "top": 0,
+              "transform": "translate(0px, 0px)",
+              "visibility": "hidden",
+              "zIndex": 9999,
+            }
+          }
+        >
+          <div
+            className="lumx-popover__wrapper"
+          >
+            <div
+              className="lumx-dropdown__menu lumx-dropdown"
+              style={
+                Object {
+                  "maxHeight": 760,
+                  "minWidth": 0,
+                }
+              }
+            >
+              <div
+                className="lumx-dropdown__content"
+              >
+                <span>
+                  Dropdown content
+                </span>
+              </div>
+            </div>
           </div>
-        </Portal>
-      </Popover>
-    </div>
+        </div>
+      </Portal>
+    </Popover>
   </Dropdown>
 </DropdownButton>
 `;
@@ -1168,30 +1156,57 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
     onClose={[Function]}
     showDropdown={false}
   >
-    <div
-      className="lumx-dropdown"
-    >
-      <Popover
-        isVisible={false}
-        placement="auto-start"
-        popoverRect={
-          Object {
-            "anchorHeight": 0,
-            "anchorWidth": 0,
-            "bottom": 0,
-            "height": 0,
-            "left": 0,
-            "maxHeight": 760,
-            "right": 0,
-            "top": 0,
-            "width": 0,
-            "x": 0,
-            "y": 0,
-          }
+    <Popover
+      isVisible={false}
+      placement="auto-start"
+      popoverRect={
+        Object {
+          "anchorHeight": 0,
+          "anchorWidth": 0,
+          "bottom": 0,
+          "height": 0,
+          "left": 0,
+          "maxHeight": 760,
+          "right": 0,
+          "top": 0,
+          "width": 0,
+          "x": 0,
+          "y": 0,
         }
-        popoverRef={
-          Object {
-            "current": <div
+      }
+      popoverRef={
+        Object {
+          "current": <div
+            class="lumx-popover lumx-popover--elevation-3"
+            placement="auto-start"
+            style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
+          >
+            <div
+              class="lumx-popover__wrapper"
+            >
+              <div
+                class="lumx-dropdown__menu lumx-dropdown"
+                style="max-height: 760px; min-width: 0;"
+              >
+                <div
+                  class="lumx-dropdown__content"
+                >
+                  <span>
+                    Dropdown content
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>,
+        }
+      }
+    >
+      <Portal
+        containerInfo={
+          <body
+            class="js-focus-visible"
+          >
+            <div
               class="lumx-popover lumx-popover--elevation-3"
               placement="auto-start"
               style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
@@ -1200,7 +1215,7 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                 class="lumx-popover__wrapper"
               >
                 <div
-                  class="lumx-dropdown__menu"
+                  class="lumx-dropdown__menu lumx-dropdown"
                   style="max-height: 760px; min-width: 0;"
                 >
                   <div
@@ -1212,145 +1227,114 @@ exports[`<DropdownButton> Snapshots and structure should render correctly a spli
                   </div>
                 </div>
               </div>
-            </div>,
-          }
-        }
-      >
-        <Portal
-          containerInfo={
-            <body
-              class="js-focus-visible"
-            >
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="lumx-popover lumx-popover--elevation-3"
-                placement="auto-start"
-                style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
-              >
-                <div
-                  class="lumx-popover__wrapper"
-                >
-                  <div
-                    class="lumx-dropdown__menu"
-                    style="max-height: 760px; min-width: 0;"
-                  >
-                    <div
-                      class="lumx-dropdown__content"
-                    >
-                      <span>
-                        Dropdown content
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </body>
-          }
-        >
-          <div
-            className="lumx-popover lumx-popover--elevation-3"
-            placement="auto-start"
-            style={
-              Object {
-                "left": 0,
-                "position": "fixed",
-                "top": 0,
-                "transform": "translate(0px, 0px)",
-                "visibility": "hidden",
-                "zIndex": 9999,
-              }
-            }
-          >
+            </div>
             <div
-              className="lumx-popover__wrapper"
+              class="lumx-popover lumx-popover--elevation-3"
+              placement="auto-start"
+              style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
             >
               <div
-                className="lumx-dropdown__menu"
-                style={
-                  Object {
-                    "maxHeight": 760,
-                    "minWidth": 0,
-                  }
-                }
+                class="lumx-popover__wrapper"
               >
                 <div
-                  className="lumx-dropdown__content"
+                  class="lumx-dropdown__menu lumx-dropdown"
+                  style="max-height: 760px; min-width: 0;"
                 >
-                  <span>
-                    Dropdown content
-                  </span>
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              placement="auto-start"
+              style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div
+                  class="lumx-dropdown__menu lumx-dropdown"
+                  style="max-height: 760px; min-width: 0;"
+                >
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="lumx-popover lumx-popover--elevation-3"
+              placement="auto-start"
+              style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
+            >
+              <div
+                class="lumx-popover__wrapper"
+              >
+                <div
+                  class="lumx-dropdown__menu lumx-dropdown"
+                  style="max-height: 760px; min-width: 0;"
+                >
+                  <div
+                    class="lumx-dropdown__content"
+                  >
+                    <span>
+                      Dropdown content
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </body>
+        }
+      >
+        <div
+          className="lumx-popover lumx-popover--elevation-3"
+          placement="auto-start"
+          style={
+            Object {
+              "left": 0,
+              "position": "fixed",
+              "top": 0,
+              "transform": "translate(0px, 0px)",
+              "visibility": "hidden",
+              "zIndex": 9999,
+            }
+          }
+        >
+          <div
+            className="lumx-popover__wrapper"
+          >
+            <div
+              className="lumx-dropdown__menu lumx-dropdown"
+              style={
+                Object {
+                  "maxHeight": 760,
+                  "minWidth": 0,
+                }
+              }
+            >
+              <div
+                className="lumx-dropdown__content"
+              >
+                <span>
+                  Dropdown content
+                </span>
+              </div>
+            </div>
           </div>
-        </Portal>
-      </Popover>
-    </div>
+        </div>
+      </Portal>
+    </Popover>
   </Dropdown>
 </DropdownButton>
 `;
