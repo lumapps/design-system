@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, SyntheticEvent } from 'react';
+import React, { ReactElement, ReactNode, Ref, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -27,6 +27,8 @@ interface IChipProps extends IGenericProps {
     before?: HTMLElement | ReactNode;
     /** The component color variant. */
     color?: Color;
+    /* Whether the chip has pointer on hover. */
+    isClickable?: boolean;
     /** Indicates if the chip is currently in an active state or not. */
     isSelected?: boolean;
     /** Indicates if the chip is currently disabled or not. */
@@ -35,6 +37,8 @@ interface IChipProps extends IGenericProps {
     size?: ChipSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** A ref that will be passed to the wrapper element. */
+    chipRef?: Ref<HTMLAnchorElement>;
     /** A function to be executed when the after element is clicked. */
     onAfterClick?(evt: SyntheticEvent): void;
     /** A function to be executed when the before element is clicked. */
@@ -72,6 +76,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     after: null,
     before: null,
     color: ColorPalette.dark,
+    isClickable: false,
     isDisabled: false,
     isSelected: false,
     size: Size.m,
@@ -91,6 +96,7 @@ const Chip: React.FC<IChipProps> = ({
     className = '',
     children,
     color = DEFAULT_PROPS.color,
+    isClickable = DEFAULT_PROPS.isClickable,
     isSelected = DEFAULT_PROPS.isSelected,
     isDisabled = DEFAULT_PROPS.isDisabled,
     onAfterClick,
@@ -98,6 +104,7 @@ const Chip: React.FC<IChipProps> = ({
     onClick,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
+    chipRef,
     ...props
 }: ChipProps): ReactElement => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
@@ -140,14 +147,15 @@ const Chip: React.FC<IChipProps> = ({
 
     return (
         <a
+            ref={chipRef}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    clickable: Boolean(hasOnClick),
+                    clickable: Boolean(hasOnClick) || isClickable,
                     color,
                     disabled: Boolean(isDisabled),
-                    hasAfter: Boolean(after),
-                    hasBefore: Boolean(before),
+                    hasAfter: Boolean(hasAfterClick),
+                    hasBefore: Boolean(hasBeforeClick),
                     prefix: CLASSNAME,
                     selected: Boolean(isSelected),
                     size,

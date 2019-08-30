@@ -1,0 +1,478 @@
+```javascript import
+import { Select, List, ListItem, ListItemSize, Size, TextField, Chip, ListDivider, Icon } from 'LumX';
+import { useBooleanState } from 'LumX/core/react/hooks';
+import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from '@mdi/js';
+```
+
+# Select
+
+## Single selection
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [values, setValues] = React.useState([]);
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+
+    const clearSelectedvalues = (event, value) => {
+        event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const onItemSelectedHandler = (item) => {
+        if (values.includes(item)) {
+            return;
+        }
+        closeSelect();
+        setValues([item]);
+    };
+
+    return (
+        <Select
+            style={{width: '100%'}}
+            isOpen={isOpen}
+            value={values}
+            onClear={clearSelectedvalues}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onInputClick={toggleSelect}
+            onDropdownClose={closeSelect}
+        >
+            <List isClickable={isOpen}>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isClickable
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={() => onItemSelectedHandler(choice)}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [<ListItem key={0}>No data</ListItem>]}
+            </List>
+        </Select>
+    );
+}
+```
+
+## Multi selection
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [values, setValues] = React.useState([]);
+
+    const clearSelectedvalues = (event, value) => {
+        event && event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const onItemSelectedHandler = (item) => {
+        if (values.includes(item)) {
+            clearSelectedvalues(null, item);
+            return;
+        }
+        setValues([...values, item]);
+    };
+
+    return (
+        <Select
+            style={{width: '100%'}}
+            helper="Optional helper"
+            value={values}
+            isOpen={isOpen}
+            onDropdownClose={closeSelect}
+            onInputClick={toggleSelect}
+            label={LABEL}
+            isMultiple={true}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onClear={clearSelectedvalues}
+        >
+            <List isClickable={isOpen}>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isClickable
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={() => onItemSelectedHandler(choice)}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [<ListItem key={0}>No data</ListItem>]}
+            </List>
+        </Select>
+    );
+}
+```
+
+## Multi selection with search
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const CHOICES_WITH_ICONS = [
+        {
+            label: 'First item',
+            icon: mdiAccessPoint,
+        },
+        {
+            label: 'Second item',
+            icon: mdiAccountBadge,
+        },
+        {
+            label: 'Third item',
+            icon: mdiAlphaF,
+        },
+    ];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+    const getChoiceByValue = (value) =>
+        CHOICES_WITH_ICONS.find((ch) => ch.label === value);
+
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [values, setValues] = React.useState([]);
+
+    const onInfiniteScroll = () => {
+        console.log('You have reached the bottom of the select dropdown.');
+    };
+
+    const clearSelectedvalues = (event, value) => {
+        event && event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const onItemSelectedHandler = (item) => {
+        if (values.includes(item)) {
+            setValues(values.filter((val) => item !== val));
+            return;
+        }
+        setValues([...values, item]);
+    };
+
+    const [filterValue, setFilterValue] = React.useState('');
+    const filteredChoices = CHOICES_WITH_ICONS.filter((choice) =>
+        choice.label
+            .replace(' ', '')
+            .toLowerCase()
+            .includes(filterValue.replace(' ', '').toLowerCase()),
+    );
+
+    return (
+        <Select
+            style={{ width: '100%' }}
+            isMultiple
+            isOpen={isOpen}
+            value={values}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onClear={clearSelectedvalues}
+            onDropdownClose={closeSelect}
+            onInputClick={toggleSelect}
+            onInfiniteScroll={onInfiniteScroll}
+            selectedChipRender={(
+                choice,
+                index,
+                onClear,
+                isDisabled,
+            ) => {
+                const matchedChoice = getChoiceByValue(choice);
+
+                return (
+                    <Chip
+                        key={index}
+                        after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
+                        before={<Icon size={Size.xs} icon={(matchedChoice && matchedChoice.icon) || ''} />}
+                        isDisabled={isDisabled}
+                        size={Size.s}
+                        onAfterClick={(event) =>
+                            onClear && onClear(event, choice)
+                        }
+                        onClick={(event) =>
+                            onClear && onClear(event, choice)
+                        }
+                    >
+                        {choice}
+                    </Chip>
+                );
+            }}
+            selectedValueRender={(choice) => {
+                const matchedChoice = getChoiceByValue(choice);
+                return (
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Icon
+                            size={Size.xs}
+                            icon={(matchedChoice && matchedChoice.icon) || ''}
+                            style={{ marginRight: 5 }}
+                        />
+                        {matchedChoice && matchedChoice.label}
+                    </div>
+                );
+            }}
+        >
+            <List isClickable={isOpen}>
+                <div>
+                    <TextField
+                        value={filterValue}
+                        initialValue={filterValue}
+                        onChange={setFilterValue}
+                        icon={mdiMagnify}
+                    />
+                    <ListDivider />
+                </div>
+                <div>
+                    {filteredChoices.length > 0
+                        ? filteredChoices.map((choice, index) => (
+                              <ListItem
+                                  size={ListItemSize.tiny}
+                                  isClickable
+                                  isSelected={values.includes(choice.label)}
+                                  key={index}
+                                  onItemSelected={() => onItemSelectedHandler(choice.label)}
+                                  before={<Icon size={Size.xs} icon={choice.icon} />}
+                              >
+                                  <div>{choice.label}</div>
+                              </ListItem>
+                          ))
+                        : [<ListItem key={0}>No data</ListItem>]}
+                </div>
+            </List>
+        </Select>
+    );
+}
+```
+
+## Select valid
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [values, setValues] = React.useState([]);
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+
+    const clearSelectedvalues = (event, value) => {
+        event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const onItemSelectedHandler = (item) => {
+        if (values.includes(item)) {
+            return;
+        }
+        closeSelect();
+        setValues([item]);
+    };
+
+    return (
+        <Select
+            style={{ width: '100%' }}
+            isOpen={isOpen}
+            isValid={true}
+            value={values}
+            onClear={clearSelectedvalues}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onInputClick={toggleSelect}
+            onDropdownClose={closeSelect}
+        >
+            <List isClickable={isOpen}>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isClickable
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={() => onItemSelectedHandler(choice)}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [<ListItem key={0}>No data</ListItem>]}
+            </List>
+        </Select>
+    );
+}
+```
+
+## Select invalid
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [values, setValues] = React.useState([]);
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+
+    const clearSelectedvalues = (event, value) => {
+        event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const onItemSelectedHandler = (item) => {
+        if (values.includes(item)) {
+            return;
+        }
+        closeSelect();
+        setValues([item]);
+    };
+
+    return (
+        <Select
+            style={{ width: '100%' }}
+            isOpen={isOpen}
+            hasError={true}
+            value={values}
+            onClear={clearSelectedvalues}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onInputClick={toggleSelect}
+            onDropdownClose={closeSelect}
+        >
+            <List isClickable={isOpen}>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isClickable
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={() => onItemSelectedHandler(choice)}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [<ListItem key={0}>No data</ListItem>]}
+            </List>
+        </Select>
+    );
+}
+```
+
+## Chip selection
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [values, setValues] = React.useState([]);
+
+    const clearSelectedvalues = (event, value) => {
+        event && event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const onItemSelectedHandler = (item) => {
+        if (values.includes(item)) {
+            return;
+        }
+        closeSelect();
+        setValues([item]);
+    };
+
+    return (
+        <Select
+            isOpen={isOpen}
+            value={values}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            variant={'chip'}
+            onClear={clearSelectedvalues}
+            onDropdownClose={closeSelect}
+            onInputClick={toggleSelect}
+        >
+            <List isClickable={isOpen}>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isClickable
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={() => onItemSelectedHandler(choice)}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [<ListItem key={0}>No data</ListItem>]}
+            </List>
+        </Select>
+    );
+}
+```
+
+## Multi Chip selection
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const CHOICES = ['First item', 'Second item', 'Third item'];
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [values, setValues] = React.useState([]);
+
+    const clearSelectedvalues = (event, value) => {
+        event && event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const onItemSelectedHandler= (item) => {
+        if (values.includes(item)) {
+            clearSelectedvalues(null, item);
+            return;
+        }
+        setValues([...values, item]);
+    };
+
+    return (
+        <Select
+            isMultiple
+            isOpen={isOpen}
+            value={values}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            variant={'chip'}
+            onClear={clearSelectedvalues}
+            onDropdownClose={closeSelect}
+            onInputClick={toggleSelect}
+        >
+            <List isClickable={isOpen}>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isClickable
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={() => onItemSelectedHandler(choice)}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [<ListItem key={0}>No data</ListItem>]}
+            </List>
+        </Select>
+    );
+}
+```

@@ -7,7 +7,7 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { ListItem, ListItemProps, ListSubheader, Theme } from 'LumX';
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+import { IGenericProps, flattenArray, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -185,7 +185,7 @@ const List: React.FC<ListProps> = ({
         if (isClickable && listElementRef && listElementRef.current) {
             listElementRef.current.focus();
         }
-    }, []);
+    }, [isClickable]);
 
     return (
         <ul
@@ -198,11 +198,11 @@ const List: React.FC<ListProps> = ({
             ref={listElementRef}
             {...props}
         >
-            {children.map((elm: ListItem | ListSubheader, idx: number) => {
+            {flattenArray(children).map((elm: ListItem | ListSubheader, idx: number) => {
                 const elemProps: ListItemProps = {
                     key: `listEntry-${idx}`,
                 };
-                if (isClickable && elm.type.name === 'ListItem') {
+                if (isClickable && elm.type && elm.type.name === 'ListItem') {
                     elemProps.onMouseDown = (evt: React.MouseEvent): void => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
                     elemProps.isClickable = isClickable;

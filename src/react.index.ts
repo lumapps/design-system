@@ -54,6 +54,8 @@ export { RadioButtonHelper } from './components/radio-button/react/RadioButtonHe
 
 export { RadioButtonLabel } from './components/radio-button/react/RadioButtonLabel';
 
+export { Select, SelectProps, SelectVariant } from './components/select/react/Select';
+
 export { Slideshow, SlideshowProps } from './components/slideshow/react/Slideshow';
 
 export { SlideshowItem } from './components/slideshow/react/SlideshowItem';

@@ -124,6 +124,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
                         paddingBottom: 16,
                         paddingTop: 25,
                         width: 213,
+                        maxHeight: computedPosition.maxHeight,
+                        overflow: 'auto',
                     }}
                 >
                     <UserBlock
