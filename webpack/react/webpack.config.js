@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 
 const { SRC_PATH } = require('../constants');
 
+const { babelSetup } = require('../utils');
 const baseConfig = require('../webpack.config');
 
 const reactConfig = {
@@ -20,7 +21,27 @@ const reactConfig = {
     resolveLoader: {
         alias: {
             'props-loader': path.resolve(__dirname, 'props-loader'),
-        }
+            'mdx-loader': path.resolve(__dirname, 'mdx-loader'),
+        },
+    },
+
+    module: {
+        rules: [
+            {
+                test: /\.(mdx|md)?$/,
+                use: [
+                    {
+                        loader: 'babel-loader?cacheDirectory=true',
+                        options: babelSetup({
+                            presets: ['@babel/preset-react'],
+                        }),
+                    },
+                    {
+                        loader: 'mdx-loader',
+                    },
+                ],
+            },
+        ],
     },
 };
 

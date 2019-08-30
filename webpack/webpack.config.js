@@ -7,8 +7,6 @@ const WebpackBar = require('webpackbar');
 const { babelSetup } = require('./utils');
 const { COMPONENTS_PATH, CORE_PATH, DEMO_PATH, ICONS_PATH } = require('./constants');
 
-const mdxDemoCodeExtractor = require('./react/mdx-demo-code-extractor');
-
 const plugins = [new WebpackBar(), new FriendlyErrorsWebpackPlugin()];
 
 const baseConfig = {
@@ -77,23 +75,6 @@ const baseConfig = {
                 options: {
                     name: '[path][name]-[hash:8].[ext]',
                 },
-            },
-            {
-                test: /\.(mdx|md)?$/,
-                use: [
-                    {
-                        loader: 'babel-loader?cacheDirectory=true',
-                        options: babelSetup({
-                            presets: ['@babel/preset-react'],
-                        }),
-                    },
-                    {
-                        loader: '@mdx-js/loader',
-                        options: {
-                            rehypePlugins: [mdxDemoCodeExtractor],
-                        },
-                    },
-                ],
             },
         ],
     },

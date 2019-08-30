@@ -1,64 +1,21 @@
-import React, { ReactChild, ReactElement, ReactNode, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
-import { MDXProvider } from '@mdx-js/react';
-import { capitalize } from 'lodash';
-
-import { PropTable } from 'LumX/demo/react/layout/PropTable';
-
-// @ts-ignore
-import { propsByComponent } from 'props-loader!';
-
-/**
- * Convert content path to component name in capitalized camel case.
- * @param path the content path.
- * @return the component name.
- */
-function getComponentName(path: string): string | undefined {
-    const RE_COMPONENT_PATH = /components\/(.*)/;
-    if (!path) {
-        return undefined;
-    }
-    const matches = path.match(RE_COMPONENT_PATH);
-    if (matches) {
-        const [, component] = matches;
-        return component
-            .split('-')
-            .map(capitalize)
-            .join('');
-    }
-    return undefined;
-}
-
-const mdxComponents = {
-    // This prevents MDX from wrapping components in <MDXComponent>.
-    wrapper: (elem: { children: ReactChild }): ReactNode => {
-        return elem.children;
-    },
-};
-
-const renderDemo = (path: string, demo: ReactElement | null | undefined): ReactElement => {
-    return !demo ? (
-        demo === undefined ? (
+const renderContent = (path: string, demo: ReactElement | null | undefined): ReactElement => {
+    if (demo === undefined) {
+        return (
             <span>
                 Loading content for <code>{path}</code>...
             </span>
-        ) : (
+        );
+    }
+    if (demo === null) {
+        return (
             <span>
                 Could not load content for <code>{path}</code>
             </span>
-        )
-    ) : (
-        <MDXProvider components={mdxComponents}>{demo}</MDXProvider>
-    );
-};
-
-const renderComponentProperties = (componentName: string): ReactElement => {
-    const properties = propsByComponent[componentName];
-    return properties ? (
-        <PropTable propertyList={properties} />
-    ) : (
-        <span>Could not load properties for component {componentName}</span>
-    );
+        );
+    }
+    return demo;
 };
 
 const useLoadContent = (path: string): ReactElement | null | undefined => {
@@ -84,22 +41,8 @@ const useLoadContent = (path: string): ReactElement | null | undefined => {
  * @return The main content component.
  */
 const MainContent = ({ path }: { path: string }): ReactElement => {
-    const demo = useLoadContent(path);
-
-    const componentName = getComponentName(path);
-
-    return (
-        <>
-            {renderDemo(path, demo)}
-
-            {componentName && (
-                <>
-                    <h2>Properties</h2>
-                    {renderComponentProperties(componentName)}
-                </>
-            )}
-        </>
-    );
+    const content = useLoadContent(path);
+    return renderContent(path, content);
 };
 
 export { MainContent };
