@@ -34,7 +34,7 @@ const getChoiceByValue = (value: string): IChoice | undefined =>
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
     // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
+    const [values, setValues] = useState<string[]>([]);
 
     const onInfiniteScroll = (): void => {
         console.log('You have reached the bottom of the select dropdown.');
@@ -43,15 +43,15 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     const clearSelectedvalues = (event: React.MouseEvent<HTMLDivElement, MouseEvent> | null, value?: string): void => {
         // tslint:disable-next-line: no-unused-expression
         event && event.stopPropagation();
-        setSelectedValues(value ? selectedValues.filter((val: string) => val !== value) : []);
+        setValues(value ? values.filter((val: string) => val !== value) : []);
     };
 
     const onItemSelectedHandler: (item: string) => void = (item: string): void => {
-        if (selectedValues.includes(item)) {
-            setSelectedValues(selectedValues.filter((val: string) => item !== val));
+        if (values.includes(item)) {
+            setValues(values.filter((val: string) => item !== val));
             return;
         }
-        setSelectedValues([...selectedValues, item]);
+        setValues([...values, item]);
     };
 
     const [filterValue, setFilterValue] = useState('');
@@ -66,7 +66,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <Select
             isMultiple
             isOpen={isOpen}
-            selectedValues={selectedValues}
+            value={values}
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
@@ -133,7 +133,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                               <ListItem
                                   size={ListItemSize.tiny}
                                   isClickable
-                                  isSelected={selectedValues.includes(choice.label)}
+                                  isSelected={values.includes(choice.label)}
                                   key={index}
                                   onItemSelected={(): void => onItemSelectedHandler(choice.label)}
                                   before={<Icon size={Size.xs} icon={choice.icon} />}

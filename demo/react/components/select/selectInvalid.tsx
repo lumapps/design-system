@@ -23,28 +23,28 @@ interface IProps {
  * @return The demo component.
  */
 const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const [selectedValues, setSelectedValues] = useState<string[]>([]);
+    const [values, setValues] = useState<string[]>([]);
     // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     const clearSelectedvalues = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, value?: string): void => {
         event.stopPropagation();
-        setSelectedValues(value ? selectedValues.filter((val: string) => val !== value) : []);
+        setValues(value ? values.filter((val: string) => val !== value) : []);
     };
 
     const onItemSelectedHandler: (item: string) => void = (item: string): void => {
-        if (selectedValues.includes(item)) {
+        if (values.includes(item)) {
             return;
         }
         closeSelect();
-        setSelectedValues([item]);
+        setValues([item]);
     };
 
     return (
         <Select
             isOpen={isOpen}
             hasError={true}
-            selectedValues={selectedValues}
+            value={values}
             onClear={clearSelectedvalues}
             label={LABEL}
             placeholder={PLACEHOLDER}
@@ -58,7 +58,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                           // tslint:disable-next-line: jsx-no-lambda
                           <ListItem
                               isClickable
-                              isSelected={selectedValues.includes(choice)}
+                              isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={(): void => onItemSelectedHandler(choice)}
                           >

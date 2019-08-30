@@ -29,7 +29,7 @@ interface ISelectProps extends IGenericProps {
     /**
      * The list of selected values.
      */
-    selectedValues: string[];
+    value: string[];
 
     /**
      * Whether the select (input variant) is displayed with error style or not.
@@ -192,7 +192,7 @@ const Select: React.FC<SelectProps> = ({
     isMultiple = DEFAULT_PROPS.isMultiple,
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
-    selectedValues = [],
+    value = [],
     helper,
     isDisabled,
     isOpen = DEFAULT_PROPS.isOpen,
@@ -207,7 +207,7 @@ const Select: React.FC<SelectProps> = ({
     ...props
 }: SelectProps): React.ReactElement => {
     const [isFocus, setIsFocus] = useState(false);
-    const isEmpty = selectedValues.length === 0;
+    const isEmpty = value.length === 0;
     const targetUuid = 'uuid';
     const anchorRef = useRef<HTMLElement>(null);
 
@@ -260,15 +260,15 @@ const Select: React.FC<SelectProps> = ({
 
                             {!isEmpty && !isMultiple && (
                                 <div className={`${CLASSNAME}__input-native`}>
-                                    <span>{selectedValueRender!(selectedValues[0])}</span>
+                                    <span>{selectedValueRender!(value[0])}</span>
                                 </div>
                             )}
 
                             <div className={`${CLASSNAME}__input-chips`}>
                                 {!isEmpty && isMultiple && (
                                     <div className={`${CLASSNAME}__input-chip`}>
-                                        {selectedValues.map((value: string, index: number) =>
-                                            selectedChipRender!(value, index, onClear, isDisabled),
+                                        {value.map((val: string, index: number) =>
+                                            selectedChipRender!(val, index, onClear, isDisabled),
                                         )}
                                     </div>
                                 )}
@@ -305,13 +305,13 @@ const Select: React.FC<SelectProps> = ({
                     >
                         {isEmpty && <span>{label}</span>}
 
-                        {!isEmpty && !isMultiple && <span>{selectedValueRender!(selectedValues[0])}</span>}
+                        {!isEmpty && !isMultiple && <span>{selectedValueRender!(value[0])}</span>}
 
                         {!isEmpty && isMultiple && (
                             <span>
-                                <span>{selectedValueRender!(selectedValues[0])}</span>
+                                <span>{selectedValueRender!(value[0])}</span>
 
-                                {selectedValues.length > 1 && <span>&nbsp;+{selectedValues.length - 1}</span>}
+                                {value.length > 1 && <span>&nbsp;+{value.length - 1}</span>}
                             </span>
                         )}
                     </Chip>

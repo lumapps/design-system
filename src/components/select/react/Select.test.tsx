@@ -45,7 +45,7 @@ interface ISetup extends ICommonSetup {
 const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: SelectProps = {
         children: <span>Select Component</span>,
-        selectedValues: [],
+        value: [],
         ...propsOverrides,
     };
 
@@ -135,8 +135,8 @@ describe(`<${Select.displayName}>`, (): void => {
             );
         });
 
-        it('should use the given `selectedValues`', (): void => {
-            const testedProp = 'selectedValues';
+        it('should use the given `value`', (): void => {
+            const testedProp = 'value';
             const modifiedProps: ISetupProps = {
                 [testedProp]: [''],
             };
@@ -155,7 +155,7 @@ describe(`<${Select.displayName}>`, (): void => {
             const testedProp = 'isMultiple';
             const modifiedProps: ISetupProps = {
                 [testedProp]: true,
-                selectedValues: ['', ''],
+                value: ['', ''],
             };
 
             const { container } = setup(modifiedProps);
@@ -216,7 +216,7 @@ describe(`<${Select.displayName}>`, (): void => {
         it('should call onClear when clear icon is clicked in select input', (): void => {
             const value = 'Value';
             const onClear: jest.Mock = jest.fn();
-            const { input } = setup({ selectedValues: [value], onClear });
+            const { input } = setup({ value: [value], onClear });
 
             input
                 .find(`.${CLASSNAME}__input-clear`)
@@ -233,7 +233,7 @@ describe(`<${Select.displayName}>`, (): void => {
             const { input } = setup({
                 isMultiple: true,
                 onClear,
-                selectedValues: [value1, value2],
+                value: [value1, value2],
             });
 
             const fakeEvent = new Event('click');
@@ -252,7 +252,7 @@ describe(`<${Select.displayName}>`, (): void => {
             const { input } = setup({
                 isMultiple: true,
                 onClear,
-                selectedValues: [value1, value2],
+                value: [value1, value2],
                 variant: SelectVariant.chip,
             });
 
@@ -276,7 +276,7 @@ describe(`<${Select.displayName}>`, (): void => {
             describe('Has value', (): void => {
                 const value = 'Value';
                 const hasValueProps: Partial<ISetupProps> = {
-                    selectedValues: [value],
+                    value: [value],
                     variant: SelectVariant.input,
                 };
 
@@ -298,35 +298,35 @@ describe(`<${Select.displayName}>`, (): void => {
                 const value3 = 'Value3';
                 const hasMultipleValues: Partial<ISetupProps> = {
                     isMultiple: true,
-                    selectedValues: [value1, value2, value3],
+                    value: [value1, value2, value3],
                     variant: SelectVariant.input,
                 };
 
                 it('should render the values selected in Chips if multiple ', (): void => {
                     const { input, props } = setup({ ...hasMultipleValues });
 
-                    expect(input.find(Chip).length).toBe(props.selectedValues!.length);
+                    expect(input.find(Chip).length).toBe(props.value!.length);
                     expect(
                         input
                             .find(Chip)
                             .at(0)
                             .children()
                             .text(),
-                    ).toBe(props.selectedValues![0]);
+                    ).toBe(props.value![0]);
                     expect(
                         input
                             .find(Chip)
                             .at(1)
                             .children()
                             .text(),
-                    ).toBe(props.selectedValues![1]);
+                    ).toBe(props.value![1]);
                     expect(
                         input
                             .find(Chip)
                             .at(2)
                             .children()
                             .text(),
-                    ).toBe(props.selectedValues![2]);
+                    ).toBe(props.value![2]);
                 });
             });
 
@@ -334,7 +334,7 @@ describe(`<${Select.displayName}>`, (): void => {
                 const placeholder = 'My placeholder';
                 const hasNoValueProps: Partial<ISetupProps> = {
                     placeholder,
-                    selectedValues: [],
+                    value: [],
                     variant: SelectVariant.input,
                 };
 
@@ -362,7 +362,7 @@ describe(`<${Select.displayName}>`, (): void => {
             describe('Has value', (): void => {
                 const value = 'Value';
                 const hasValueProps: Partial<ISetupProps> = {
-                    selectedValues: [value],
+                    value: [value],
                     variant: SelectVariant.chip,
                 };
 
@@ -405,7 +405,7 @@ describe(`<${Select.displayName}>`, (): void => {
                 const value3 = 'Value3';
                 const hasMultipleValues: Partial<ISetupProps> = {
                     isMultiple: true,
-                    selectedValues: [value1, value2, value3],
+                    value: [value1, value2, value3],
                     variant: SelectVariant.chip,
                 };
 
@@ -416,15 +416,13 @@ describe(`<${Select.displayName}>`, (): void => {
                         label,
                     });
 
-                    expect(input.childAt(0).text()).toEqual(
-                        `${props.selectedValues![0]}\u00A0+${props.selectedValues!.length - 1}`,
-                    );
+                    expect(input.childAt(0).text()).toEqual(`${props.value![0]}\u00A0+${props.value!.length - 1}`);
                 });
             });
 
             describe('No value', (): void => {
                 const hasNoValue: Partial<ISetupProps> = {
-                    selectedValues: [],
+                    value: [],
                     variant: SelectVariant.chip,
                 };
 
