@@ -42,7 +42,7 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List isClickable={true}>
+            <List isClickable={isOpen}>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
@@ -99,7 +99,7 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
             theme={theme}
             onClear={clearSelectedvalues}
         >
-            <List>
+            <List isClickable={isOpen}>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
@@ -222,7 +222,7 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
                 );
             }}
         >
-            <List>
+            <List isClickable={isOpen}>
                 <div>
                     <TextField
                         value={filterValue}
@@ -291,7 +291,7 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List>
+            <List isClickable={isOpen}>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
@@ -347,7 +347,7 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List>
+            <List isClickable={isOpen}>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
@@ -402,7 +402,7 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
         >
-            <List>
+            <List isClickable={isOpen}>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
@@ -458,7 +458,7 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
         >
-            <List>
+            <List isClickable={isOpen}>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
