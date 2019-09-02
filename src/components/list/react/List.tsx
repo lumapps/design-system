@@ -16,7 +16,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
  * Defines the props of the component.
  */
 interface IListProps extends IGenericProps {
-    children: ListItem[];
+    children: ListItem[] | ListItem;
     /* Whether the list items are clickable */
     isClickable?: boolean;
     /**
@@ -73,6 +73,7 @@ const List: React.FC<ListProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ListProps): ReactElement => {
+    const childrenAsAnArray = Array.isArray(children) ? children : [children];
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
     const listElementRef = useRef() as RefObject<HTMLUListElement>;
@@ -142,7 +143,7 @@ const List: React.FC<ListProps> = ({
         } else if (evt.keyCode === ENTER_KEY_CODE && onListItemSelected) {
             evt.nativeEvent.preventDefault();
             evt.nativeEvent.stopPropagation();
-            onListItemSelected(children[activeItemIndex]);
+            onListItemSelected(childrenAsAnArray[activeItemIndex]);
         }
     };
 
@@ -153,9 +154,9 @@ const List: React.FC<ListProps> = ({
      * @return Index of the element to activate.
      */
     const selectItemOnKeyDown = (previous: boolean): number => {
-        const lookupTable: Array<ListItem | ListSubheader> = children
+        const lookupTable: Array<ListItem | ListSubheader> = childrenAsAnArray
             .slice(activeItemIndex + 1)
-            .concat(children.slice(0, activeItemIndex + 1));
+            .concat(childrenAsAnArray.slice(0, activeItemIndex + 1));
 
         if (previous) {
             lookupTable.reverse();
@@ -167,7 +168,7 @@ const List: React.FC<ListProps> = ({
 
         for (const child of lookupTable) {
             nextIdx = previous ? nextIdx - 1 : nextIdx + 1;
-            if (nextIdx > children.length - 1) {
+            if (nextIdx > childrenAsAnArray.length - 1) {
                 nextIdx = 0;
             }
             if (nextIdx < 0) {
@@ -198,7 +199,7 @@ const List: React.FC<ListProps> = ({
             ref={listElementRef}
             {...props}
         >
-            {flattenArray(children).map((elm: ListItem | ListSubheader, idx: number) => {
+            {flattenArray(childrenAsAnArray).map((elm: ListItem | ListSubheader, idx: number) => {
                 const elemProps: ListItemProps = {
                     key: `listEntry-${idx}`,
                 };
