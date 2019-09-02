@@ -13,6 +13,7 @@ function removeMDX(jsx) {
     return jsx
         .replace(/<(\/?)MDXLayout[^>]*>/g, '<$1Fragment>')
         .replace(/mdxType="[^"]*"/g, '')
+        .replace(/parentName="[^"]*"/g, '')
         .replace('/* @jsx mdx */', '');
 }
 
