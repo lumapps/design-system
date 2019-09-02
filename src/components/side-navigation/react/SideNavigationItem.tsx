@@ -1,3 +1,5 @@
+import React, { Children, ReactElement } from 'react';
+
 import { Icon, Size } from 'LumX';
 import { Emphasis } from 'LumX/components/index';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
@@ -5,8 +7,7 @@ import { mdiChevronDown, mdiChevronUp } from 'LumX/icons';
 import { COMPONENT_PREFIX } from 'LumX/react/constants';
 import { Callback, IGenericProps, getRootClassName, isComponent } from 'LumX/react/utils';
 import classNames from 'classnames';
-import { castArray, isEmpty } from 'lodash';
-import React, { ReactElement } from 'react';
+import { isEmpty } from 'lodash';
 
 /**
  * Defines the props of the component.
@@ -75,7 +76,7 @@ const SideNavigationItem: React.FC<ISideNavigationItemProps> = (props: ISideNavi
         ...otherProps
     } = props;
 
-    const content = castArray(children).filter(isComponent(SideNavigationItem));
+    const content = Children.toArray(children).filter(isComponent(SideNavigationItem));
     return (
         <li
             className={classNames(

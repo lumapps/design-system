@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
+import React, { Children, ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,7 +7,7 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { ListItem, ListItemProps, ListSubheader, Theme } from 'LumX';
-import { IGenericProps, flattenArray, getRootClassName } from 'LumX/core/react/utils';
+import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
@@ -73,7 +73,7 @@ const List: React.FC<ListProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ListProps): ReactElement => {
-    const childrenAsAnArray = Array.isArray(children) ? children : [children];
+    const childrenAsAnArray = Children.toArray(children);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
     const listElementRef = useRef() as RefObject<HTMLUListElement>;
@@ -199,7 +199,7 @@ const List: React.FC<ListProps> = ({
             ref={listElementRef}
             {...props}
         >
-            {flattenArray(childrenAsAnArray).map((elm: ListItem | ListSubheader, idx: number) => {
+            {childrenAsAnArray.map((elm: ListItem | ListSubheader, idx: number) => {
                 const elemProps: ListItemProps = {
                     key: `listEntry-${idx}`,
                 };
