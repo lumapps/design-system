@@ -1,4 +1,4 @@
-import React, { Children, ReactChild, ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
+import React, { Children, ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -16,7 +16,8 @@ type ListChild = ListItem | ListDivider | ListSubheader;
  * Defines the props of the component.
  */
 interface IListProps extends IGenericProps {
-    children: ListChild[] | ListChild;
+    // tslint:disable-next-line: array-type
+    children: Array<ListChild> | ListChild;
     /* Whether the list items are clickable */
     isClickable?: boolean;
     /**
@@ -72,10 +73,7 @@ const List: React.FC<ListProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ListProps): ReactElement => {
-    const isValidChild = (elm: ReactChild): boolean => {
-        return isComponent(ListItem)(elm) || isComponent(ListDivider)(elm) || isComponent(ListSubheader)(elm);
-    };
-    const children = Children.toArray(props.children).filter(isValidChild);
+    const children = Children.toArray(props.children);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
     const listElementRef = useRef() as RefObject<HTMLUListElement>;
@@ -202,21 +200,16 @@ const List: React.FC<ListProps> = ({
             {...props}
         >
             {children.map((elm: ListChild, idx: number) => {
-                if (!elm) {
-                    return undefined;
-                }
-
-                const elemProps: ListItemProps = {
-                    key: `listEntry-${idx}`,
-                };
-
-                if (isClickable && elm.type && elm.type.name === 'ListItem') {
+                if (isClickable && isComponent(ListItem)(elm)) {
+                    const elemProps: ListItemProps = {};
                     elemProps.onMouseDown = (evt: React.MouseEvent): void => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
                     elemProps.isClickable = isClickable;
+
+                    return cloneElement(elm, { ...elemProps });
                 }
 
-                return cloneElement(elm, { ...elemProps });
+                return elm;
             })}
         </ul>
     );
