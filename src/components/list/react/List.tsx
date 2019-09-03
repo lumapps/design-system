@@ -156,13 +156,13 @@ const List: React.FC<ListProps> = ({
      * @return Index of the element to activate.
      */
     const selectItemOnKeyDown = (previous: boolean): number => {
-        const lookupTable: Array<ListItem | ListSubheader> = children
+        const lookupTable: ListChild[] = children
             .slice(activeItemIndex + 1)
             .concat(children.slice(0, activeItemIndex + 1));
 
         if (previous) {
             lookupTable.reverse();
-            const first: ListItem | ListSubheader = lookupTable.shift();
+            const first: ListChild = lookupTable.shift();
             lookupTable.push(first);
         }
 
