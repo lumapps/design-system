@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
+import React, { Children, ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,17 +6,18 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { ListItem, ListItemProps, ListSubheader, Theme } from 'LumX';
-import { IGenericProps, flattenArray, getRootClassName } from 'LumX/core/react/utils';
+import { ListDivider, ListItem, ListItemProps, ListSubheader, Theme } from 'LumX';
+import { IGenericProps, getRootClassName, isComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
-
+type ListChild = ListItem | ListDivider | ListSubheader;
 /**
  * Defines the props of the component.
  */
 interface IListProps extends IGenericProps {
-    children: ListItem[];
+    // tslint:disable-next-line: array-type
+    children: Array<ListChild> | ListChild;
     /* Whether the list items are clickable */
     isClickable?: boolean;
     /**
@@ -66,13 +67,13 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const List: React.FC<ListProps> = ({
-    children,
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
     onListItemSelected,
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ListProps): ReactElement => {
+    const children = Children.toArray(props.children);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
     const listElementRef = useRef() as RefObject<HTMLUListElement>;
@@ -153,13 +154,13 @@ const List: React.FC<ListProps> = ({
      * @return Index of the element to activate.
      */
     const selectItemOnKeyDown = (previous: boolean): number => {
-        const lookupTable: Array<ListItem | ListSubheader> = children
+        const lookupTable: ListChild[] = children
             .slice(activeItemIndex + 1)
             .concat(children.slice(0, activeItemIndex + 1));
 
         if (previous) {
             lookupTable.reverse();
-            const first: ListItem | ListSubheader = lookupTable.shift();
+            const first: ListChild = lookupTable.shift();
             lookupTable.push(first);
         }
 
@@ -198,17 +199,17 @@ const List: React.FC<ListProps> = ({
             ref={listElementRef}
             {...props}
         >
-            {flattenArray(children).map((elm: ListItem | ListSubheader, idx: number) => {
-                const elemProps: ListItemProps = {
-                    key: `listEntry-${idx}`,
-                };
-                if (isClickable && elm.type && elm.type.name === 'ListItem') {
+            {children.map((elm: ListChild, idx: number) => {
+                if (isClickable && isComponent(ListItem)(elm)) {
+                    const elemProps: ListItemProps = {};
                     elemProps.onMouseDown = (evt: React.MouseEvent): void => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
                     elemProps.isClickable = isClickable;
+
+                    return cloneElement(elm, { ...elemProps });
                 }
 
-                return cloneElement(elm, { ...elemProps });
+                return elm;
             })}
         </ul>
     );

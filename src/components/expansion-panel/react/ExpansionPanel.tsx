@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Children, PropsWithChildren, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,7 +7,7 @@ import { Button, ButtonEmphasis, ButtonVariant, ColorPalette, DragHandle, Theme 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { Callback, IGenericProps, getRootClassName, isComponent, partitionMulti } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-import { castArray, get, isEmpty, isFunction } from 'lodash';
+import { get, isEmpty, isFunction } from 'lodash';
 
 /////////////////////////////
 
@@ -82,7 +82,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
         ...otherProps
     } = props;
 
-    const children: ReactNode[] = castArray(props.children);
+    const children: ReactNode[] = Children.toArray(props.children);
 
     // partition children by types
     const [[dragHandle], [header], [footer], content] = partitionMulti(children, [isDragHandle, isHeader, isFooter]);

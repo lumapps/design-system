@@ -1,10 +1,10 @@
+import React, { Children, ReactElement } from 'react';
+
 import { SideNavigationItem, Theme } from 'LumX';
 import { handleBasicClasses } from 'LumX/core/utils';
 import { COMPONENT_PREFIX } from 'LumX/react/constants';
 import { IGenericProps, getRootClassName, isComponent } from 'LumX/react/utils';
 import classNames from 'classnames';
-import { castArray } from 'lodash';
-import React, { ReactElement } from 'react';
 
 /**
  * Defines the props of the component.
@@ -39,7 +39,7 @@ const DEFAULT_PROPS: Partial<SideNavigationProps> = {};
 const SideNavigation: React.FC<ISideNavigationProps> = (props: ISideNavigationProps): ReactElement => {
     const { className, theme, children, ...otherProps } = props;
 
-    const content = castArray(children).filter(isComponent(SideNavigationItem));
+    const content = Children.toArray(children).filter(isComponent(SideNavigationItem));
     return (
         <ul
             className={classNames(

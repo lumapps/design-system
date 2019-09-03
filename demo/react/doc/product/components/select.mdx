@@ -1,5 +1,5 @@
 ```javascript import
-import { Select, List, ListItem, ListItemSize, Size, TextField, Chip, ListDivider, Icon } from 'LumX';
+import { Select, List, ListItem, ListItemSize, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from 'LumX';
 import { useBooleanState } from 'LumX/core/react/hooks';
 import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from '@mdi/js';
 ```
@@ -223,31 +223,29 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
             }}
         >
             <List isClickable={isOpen}>
-                <div>
+                <ListSubheader>
                     <TextField
+                        style={{ width: '100%', padding: 0 }}
                         value={filterValue}
-                        initialValue={filterValue}
                         onChange={setFilterValue}
                         icon={mdiMagnify}
                     />
-                    <ListDivider />
-                </div>
-                <div>
-                    {filteredChoices.length > 0
-                        ? filteredChoices.map((choice, index) => (
-                              <ListItem
-                                  size={ListItemSize.tiny}
-                                  isClickable
-                                  isSelected={values.includes(choice.label)}
-                                  key={index}
-                                  onItemSelected={() => onItemSelectedHandler(choice.label)}
-                                  before={<Icon size={Size.xs} icon={choice.icon} />}
-                              >
-                                  <div>{choice.label}</div>
-                              </ListItem>
-                          ))
-                        : [<ListItem key={0}>No data</ListItem>]}
-                </div>
+                </ListSubheader>
+                <ListDivider />
+                {filteredChoices.length > 0
+                    ? filteredChoices.map((choice, index) => (
+                            <ListItem
+                                size={ListItemSize.tiny}
+                                isClickable
+                                isSelected={values.includes(choice.label)}
+                                key={index}
+                                onItemSelected={() => onItemSelectedHandler(choice.label)}
+                                before={<Icon size={Size.xs} icon={choice.icon} />}
+                            >
+                                <div>{choice.label}</div>
+                            </ListItem>
+                        ))
+                    : [<ListItem key={0}>No data</ListItem>]}
             </List>
         </Select>
     );
