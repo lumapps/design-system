@@ -66,7 +66,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const List: React.FC<ListProps> = ({
-    children,
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
     onListItemSelected,
@@ -76,7 +75,7 @@ const List: React.FC<ListProps> = ({
     const isValidChild = (elm: ReactChild): boolean => {
         return isComponent(ListItem)(elm) || isComponent(ListDivider)(elm) || isComponent(ListSubheader)(elm);
     };
-    const childrenAsAnArray = Children.toArray(children).filter(isValidChild);
+    const children = Children.toArray(props.children).filter(isValidChild);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
     const listElementRef = useRef() as RefObject<HTMLUListElement>;
@@ -146,7 +145,7 @@ const List: React.FC<ListProps> = ({
         } else if (evt.keyCode === ENTER_KEY_CODE && onListItemSelected) {
             evt.nativeEvent.preventDefault();
             evt.nativeEvent.stopPropagation();
-            onListItemSelected(childrenAsAnArray[activeItemIndex]);
+            onListItemSelected(children[activeItemIndex]);
         }
     };
 
@@ -157,9 +156,9 @@ const List: React.FC<ListProps> = ({
      * @return Index of the element to activate.
      */
     const selectItemOnKeyDown = (previous: boolean): number => {
-        const lookupTable: Array<ListItem | ListSubheader> = childrenAsAnArray
+        const lookupTable: Array<ListItem | ListSubheader> = children
             .slice(activeItemIndex + 1)
-            .concat(childrenAsAnArray.slice(0, activeItemIndex + 1));
+            .concat(children.slice(0, activeItemIndex + 1));
 
         if (previous) {
             lookupTable.reverse();
@@ -171,7 +170,7 @@ const List: React.FC<ListProps> = ({
 
         for (const child of lookupTable) {
             nextIdx = previous ? nextIdx - 1 : nextIdx + 1;
-            if (nextIdx > childrenAsAnArray.length - 1) {
+            if (nextIdx > children.length - 1) {
                 nextIdx = 0;
             }
             if (nextIdx < 0) {
@@ -202,7 +201,7 @@ const List: React.FC<ListProps> = ({
             ref={listElementRef}
             {...props}
         >
-            {childrenAsAnArray.map((elm: ListItem | ListSubheader, idx: number) => {
+            {children.map((elm: ListChild, idx: number) => {
                 if (!elm) {
                     return undefined;
                 }
