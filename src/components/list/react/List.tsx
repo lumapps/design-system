@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
+import React, { Children, ReactChild, ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,17 +6,17 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { ListItem, ListItemProps, ListSubheader, Theme } from 'LumX';
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+import { ListDivider, ListItem, ListItemProps, ListSubheader, Theme } from 'LumX';
+import { IGenericProps, getRootClassName, isComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
-
+type ListChild = ListItem | ListDivider | ListSubheader;
 /**
  * Defines the props of the component.
  */
 interface IListProps extends IGenericProps {
-    children: ListItem[] | ListItem;
+    children: ListChild[] | ListChild;
     /* Whether the list items are clickable */
     isClickable?: boolean;
     /**
@@ -73,7 +73,10 @@ const List: React.FC<ListProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ListProps): ReactElement => {
-    const childrenAsAnArray = Children.toArray(children);
+    const isValidChild = (elm: ReactChild): boolean => {
+        return isComponent(ListItem)(elm) || isComponent(ListDivider)(elm) || isComponent(ListSubheader)(elm);
+    };
+    const childrenAsAnArray = Children.toArray(children).filter(isValidChild);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
     const listElementRef = useRef() as RefObject<HTMLUListElement>;
@@ -200,9 +203,14 @@ const List: React.FC<ListProps> = ({
             {...props}
         >
             {childrenAsAnArray.map((elm: ListItem | ListSubheader, idx: number) => {
+                if (!elm) {
+                    return undefined;
+                }
+
                 const elemProps: ListItemProps = {
                     key: `listEntry-${idx}`,
                 };
+
                 if (isClickable && elm.type && elm.type.name === 'ListItem') {
                     elemProps.onMouseDown = (evt: React.MouseEvent): void => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
