@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, KeyboardEventHandler, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -180,6 +180,45 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /////////////////////////////
 
 /**
+ * Listen on element focus to store the focus status.
+ *
+ * @param element    Element to focus.
+ * @param setIsFocus Setter used to store the focus status of the element.
+ */
+function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: boolean) => void): void {
+    useEffect((): VoidFunction | void => {
+        if (!element) {
+            return;
+        }
+
+        const setFocus = (): void => setIsFocus(true);
+        const setBlur = (): void => setIsFocus(false);
+        element.addEventListener('focus', setFocus);
+        element.addEventListener('blur', setBlur);
+
+        return (): void => {
+            element.removeEventListener('focus', setFocus);
+            element.removeEventListener('blur', setBlur);
+        };
+    }, [element]);
+}
+
+/**
+ * Re-focus the element when the select is closed.
+ *
+ * @param element Element to focus.
+ * @param isOpen  Whether or not the select is open.
+ */
+function useFocusOnClose(element: HTMLElement | null, isOpen: boolean | undefined): void {
+    useEffect(() => {
+        if (!isOpen && element) {
+            // Re-focus the button when the select is closed.
+            element.focus();
+        }
+    }, [isOpen]);
+}
+
+/**
  * Select component.
  *
  * @return The component.
@@ -211,21 +250,10 @@ const Select: React.FC<SelectProps> = ({
     const targetUuid = 'uuid';
     const anchorRef = useRef<HTMLElement>(null);
 
-    useEffect(() => {
-        // Re-focus the button when the select is closed.
-        if (!isOpen && anchorRef.current) {
-            anchorRef.current.focus();
-        }
-    }, [isOpen, anchorRef.current]);
+    useFocusOnClose(anchorRef.current, isOpen);
+    useHandleElementFocus(anchorRef.current, setIsFocus);
 
-    useEffect(() => {
-        if (anchorRef.current) {
-            anchorRef.current.addEventListener('focus', () => setIsFocus(true));
-            anchorRef.current.addEventListener('blur', () => setIsFocus(false));
-        }
-    }, [anchorRef.current]);
-
-    const handleKeyboardNav: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>): void => {
+    const handleKeyboardNav = (evt: React.KeyboardEvent<HTMLElement>): void => {
         if ((evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE) && onInputClick) {
             onInputClick();
         }
