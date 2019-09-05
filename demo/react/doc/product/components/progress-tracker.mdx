@@ -12,11 +12,11 @@ A step can be completed by a helper text.
 
 There are four states: _Current_, _Future_, _Completed_, and _Error_.
 
-<!-- ```javascript jsx disableGrid
-() => {
+```javascript jsx disableGrid
+(theme) => {
     const [activeIndex, setActiveIndex] = useState(2);
 
-    const stepProps: ProgressTrackerStepProps[] = [
+    const stepProps = [
         { isComplete: true },
         { isComplete: true },
         { hasError: true },
@@ -28,12 +28,12 @@ There are four states: _Current_, _Future_, _Completed_, and _Error_.
         <>
             Default ProgressTracker
             <ProgressTracker activeStep={activeIndex} theme={theme}>
-                {stepProps.map((step: ProgressTrackerStepProps, index: number) => (
+                {stepProps.map((step, index) => (
                     <ProgressTrackerStep
                         isActive={activeIndex === index}
-                        onClick={index < 3 ? (): void => setActiveIndex(index) : null}
-                        label={`Label ${index}`}
-                        helper={`Helper ${index}`}
+                        onClick={index < 3 ? () => setActiveIndex(index) : null}
+                        label={'Label ' + (index + 1)}
+                        helper={'Helper ' + (index + 1)}
                         {...step}
                     />
                 ))}
@@ -41,7 +41,7 @@ There are four states: _Current_, _Future_, _Completed_, and _Error_.
         </>
     );
 };
-``` -->
+```
 
 ### Current
 
