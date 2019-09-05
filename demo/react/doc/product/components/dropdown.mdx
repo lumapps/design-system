@@ -1,10 +1,16 @@
 ```javascript import
-import { Dropdown, List, ListItem, ListItemSize, Button, ListSubheader, Placement } from 'LumX';
+import { Dropdown, List, ListItem, ListItemSize, Chip, Button, ListSubheader, Placement } from 'LumX';
 ```
 
 # Dropdown
 
-## Default behavior
+**Dropdowns present multiple actions in a small area.**
+Dropdowns are commonly used for contextual menus and in form selects. They can contain dividers, icons, a user picture and a thumbnail.
+
+## Default
+
+By default, dropdowns open right next to the trigger.
+
 ```javascript jsx withThemeSwitcher
 (theme) => {
     const demoContainerStyle = {
@@ -12,7 +18,7 @@ import { Dropdown, List, ListItem, ListItemSize, Button, ListSubheader, Placemen
         justifyContent: 'space-around',
         width: '100%',
     };
-    
+
     const anchorSimpleRef = React.useRef(null);
     const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
 
@@ -55,19 +61,34 @@ import { Dropdown, List, ListItem, ListItemSize, Button, ListSubheader, Placemen
                 anchorRef={anchorSimpleRef}
             >
                 <List isClickable>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('losangeles', closeSimpleMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('losangeles', closeSimpleMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Los Angeles
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('monterrey', closeSimpleMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('monterrey', closeSimpleMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Monterrey
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('georgetown', closeSimpleMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('georgetown', closeSimpleMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Georgetown
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('cali', closeSimpleMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('cali', closeSimpleMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Cali
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('trondheim', closeSimpleMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('trondheim', closeSimpleMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Trondheim
                     </ListItem>
                 </List>
@@ -85,39 +106,62 @@ import { Dropdown, List, ListItem, ListItemSize, Button, ListSubheader, Placemen
                 placement={Placement.AUTO_START}
                 anchorRef={anchorComplexRef}
             >
-                 <List isClickable>
+                <List isClickable>
                     <ListSubheader>Contribution</ListSubheader>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('pages', closeComplexMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('pages', closeComplexMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Pages
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('news', closeComplexMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('news', closeComplexMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         News Articles with a longer name
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('jobs', closeComplexMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('jobs', closeComplexMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Job Offers
                     </ListItem>
                     <ListSubheader>Directories</ListSubheader>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('projects', closeComplexMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('projects', closeComplexMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Projects
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('useful', closeComplexMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('useful', closeComplexMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Useful links
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('support', closeComplexMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('support', closeComplexMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Support links
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('engineering', closeComplexMenu)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('engineering', closeComplexMenu)}
+                        size={ListItemSize.tiny}
+                    >
                         Engineering
                     </ListItem>
                 </List>
             </Dropdown>
         </div>
     );
-}
+};
 ```
 
-## Controled from outside
-You can control the dropdown opening from outside easily.
+## Programmatically controlled
+
+Dropdowns can be controlled from external events.
+
 ```javascript jsx withThemeSwitcher
 (theme) => {
     const demoContainerStyle = {
@@ -133,10 +177,10 @@ You can control the dropdown opening from outside easily.
     return (
         <>
             <div style={demoContainerStyle}>
-                <Button buttonRef={ddRef}>
+                <Chip theme={theme} chipRef={ddRef}>
                     I am the anchor
                     {/* Target */}
-                </Button>
+                </Chip>
             </div>
             <Dropdown
                 closeOnClick={false}
@@ -147,19 +191,34 @@ You can control the dropdown opening from outside easily.
                 anchorRef={ddRef}
             >
                 <List isClickable>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('losangeles', closeDropdown)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('losangeles', closeDropdown)}
+                        size={ListItemSize.tiny}
+                    >
                         Los Angeles
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('monterrey', closeDropdown)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('monterrey', closeDropdown)}
+                        size={ListItemSize.tiny}
+                    >
                         Monterrey
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('georgetown', closeDropdown)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('georgetown', closeDropdown)}
+                        size={ListItemSize.tiny}
+                    >
                         Georgetown
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('cali', closeDropdown)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('cali', closeDropdown)}
+                        size={ListItemSize.tiny}
+                    >
                         Cali
                     </ListItem>
-                    <ListItem onItemSelected={() => onItemSelectedHandler('trondheim', closeDropdown)} size={ListItemSize.tiny}>
+                    <ListItem
+                        onItemSelected={() => onItemSelectedHandler('trondheim', closeDropdown)}
+                        size={ListItemSize.tiny}
+                    >
                         Trondheim
                     </ListItem>
                 </List>
@@ -170,9 +229,9 @@ You can control the dropdown opening from outside easily.
             <Button onClick={closeDropdown}>Close dropdown</Button>
         </>
     );
-}
+};
 ```
 
-# Properties
+### Properties
 
 <PropTable component="Dropdown" />
