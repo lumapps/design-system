@@ -1,0 +1,33 @@
+```javascript import
+import { Checkbox, CheckboxHelper, CheckboxLabel } from 'LumX';
+```
+
+# Checkbox
+
+**Checkboxes allow users to select none, one, or more items.**
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => (
+    <>
+        <div className="lumx-spacing-margin-bottom-big">
+            <Checkbox checked={true} theme={theme}>
+                <CheckboxLabel>Checkbox</CheckboxLabel>
+            </Checkbox>
+        </div>
+        <div className="lumx-spacing-margin-bottom-big">
+            <Checkbox checked={false} theme={theme}>
+                <CheckboxLabel>Checkbox with help</CheckboxLabel>
+                <CheckboxHelper>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
+                </CheckboxHelper>
+            </Checkbox>
+        </div>
+        <Checkbox checked={false} theme={theme} disabled>
+            <CheckboxLabel>Disable checkbox with help</CheckboxLabel>
+            <CheckboxHelper>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
+            </CheckboxHelper>
+        </Checkbox>
+    </>
+);
+```
