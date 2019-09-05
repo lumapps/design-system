@@ -46,36 +46,8 @@ const isPreJSXDemo = (node) =>
     node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'jsx']);
 const ADDITIONAL_IMPORT = `
 import { DemoBlock } from 'LumX/demo/react/layout/DemoBlock';
-import { propsByComponent } from 'props-loader!';
 import { PropTable } from 'LumX/demo/react/layout/PropTable';
 `;
-
-/**
- * Create prop table section for each imported component.
- *
- * @param  {Array}  lumxImports list of LumX imported elements.
- * @return {Object} The JSX node for the prop table section.
- */
-function createPropSection(lumxImports) {
-    return {
-        type: 'jsx',
-        value: `
-            <h2>Properties</h2>
-            ${lumxImports
-                .map(
-                    (component) => `
-                {('${component}' in propsByComponent) && (
-                    <>
-                        <h3>${component}</h3>
-                        <PropTable propertyList={propsByComponent['${component}']} />
-                    </>
-                )}
-            `,
-                )
-                .join('')}
-        `,
-    };
-}
 
 /**
  * Recursively browse a node to replace '\n' in text node by '</br>' elements.
@@ -127,18 +99,11 @@ function replaceNewLineWithBreakLine(node) {
 module.exports = () => {
     return (tree) => {
         const [importNodes, others] = partition(tree.children, isImport);
-        const lumxImports = [];
 
         // Accumulate import statements.
         let importStatement = '';
         importNodes.forEach((node) => {
             const importCode = isJSXImport(node) ? node.value : get(node, ['children', 0, 'children', 0, 'value']);
-
-            const matches = importCode.match(/import { (.*) } from 'LumX'/);
-            if (matches) {
-                lumxImports.push(...matches[1].split(/,\s*/).filter(Boolean));
-            }
-
             importStatement += importCode;
         });
 
@@ -163,9 +128,5 @@ module.exports = () => {
                 return node;
             }),
         ];
-
-        if (lumxImports.length > 0) {
-            tree.children.push(createPropSection(lumxImports));
-        }
     };
 };
