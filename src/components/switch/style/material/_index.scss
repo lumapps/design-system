@@ -26,6 +26,8 @@
     }
 
     &__input-indicator {
+        @include lumx-elevation(2);
+
         #{$self}--theme-light#{$self}--is-unchecked &,
         #{$self}--theme-dark#{$self}--is-unchecked & {
             @include lumx-state('state-default', 'emphasis-high', $lumx-switch-checked-color, 'light');
