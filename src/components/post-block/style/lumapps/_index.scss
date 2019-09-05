@@ -65,11 +65,17 @@
         align-items: center;
     }
 
+    &__attachments {
+        margin-bottom: $lumx-spacing-unit * 2;
+    }
+
     &__tags {
         flex: 1;
+        float: left;
     }
 
     &__actions {
         flex-shrink: 0;
+        float: right;
     }
 }
