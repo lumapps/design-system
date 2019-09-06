@@ -1,12 +1,14 @@
-import React, { ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
+import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { Orientation, Theme, Thumbnail, ThumbnailAspectRatio, ThumbnailVariant } from 'LumX';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+
+import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
 
@@ -57,7 +59,7 @@ interface IDefaultPropsType extends Partial<PostBlockProps> {}
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Progress`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}PostBlock`;
 
 /**
  * The default class name and classes prefix for this component.
@@ -75,7 +77,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /////////////////////////////
 
 /**
- * Simple Progress component that can be displayed as a linear or circular element
+ * PostBlock Element that display a Lumapps post
  *
  * @return The component.
  */
@@ -83,6 +85,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
     actions,
     attachments,
     author,
+    className = '',
     meta,
     onClick,
     orientation = DEFAULT_PROPS.orientation,
@@ -93,77 +96,15 @@ const PostBlock: React.FC<PostBlockProps> = ({
     title,
     theme = DEFAULT_PROPS.theme,
 }: PostBlockProps): ReactElement => {
-    const [hasActions, setHasActions] = useState(false);
-    const [hasAttachments, setHasAttachments] = useState(false);
-    const [hasAuthor, setHasAuthor] = useState(false);
-    const [hasTags, setHasTags] = useState(false);
-
-    const el = useRef<HTMLDivElement>(null);
-
-    const deleteElementClasses = (classRegex: RegExp): void => {
-        if (!el || !el.current) {
-            return;
-        }
-
-        const classesToDelete: string[] = el.current.classList.value
-            .split(' ')
-            .filter((value: string) => value.match(classRegex));
-
-        for (const classItem of classesToDelete) {
-            el.current.classList.remove(classItem);
-        }
-    };
-
-    useEffect((): void => {
-        if (actions) {
-            setHasActions(true);
-        }
-
-        if (author) {
-            setHasAuthor(true);
-        }
-
-        if (attachments) {
-            setHasAttachments(true);
-        }
-
-        if (tags) {
-            setHasTags(true);
-        }
-    }, [actions, author, tags]);
-
-    useEffect((): void => {
-        if (!el || !el.current) {
-            return;
-        }
-
-        if (!theme) {
-            el.current.classList.add(`${CSS_PREFIX}-post-block--theme-${DEFAULT_PROPS.theme}`);
-        }
-
-        deleteElementClasses(/(?:\S|-)*post-block--orientation-\S+/g);
-
-        el.current.classList.add(`${CSS_PREFIX}-post-block--orientation-${orientation}`);
-    }, [el, theme]);
-
-    useEffect((): void => {
-        if (!el || !el.current) {
-            return;
-        }
-
-        if (!orientation) {
-            el.current.classList.add(`${CSS_PREFIX}-post-block--orientation-${DEFAULT_PROPS.orientation}`);
-        }
-
-        deleteElementClasses(/(?:\S|-)*post-block--orientation-\S+/g);
-
-        el.current.classList.add(`${CSS_PREFIX}-post-block--orientation-${orientation}`);
-    }, [el, orientation]);
+    const hasActions = Boolean(actions);
+    const hasAttachments = Boolean(attachments);
+    const hasAuthor = Boolean(author);
+    const hasTags = Boolean(tags);
 
     return (
-        <div ref={el} className="lumx-post-block">
+        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
             {thumbnail && (
-                <div className="lumx-post-block__thumbnail">
+                <div className={`${CLASSNAME}__thumbnail`}>
                     <Thumbnail
                         aspectRatio={thumbnailAspectRatio}
                         image={thumbnail}
@@ -175,25 +116,24 @@ const PostBlock: React.FC<PostBlockProps> = ({
                 </div>
             )}
 
-            <div className="lumx-post-block__wrapper">
-                {hasAuthor && <div className="lumx-post-block__author">{author}</div>}
+            <div className={`${CLASSNAME}__wrapper`}>
+                {hasAuthor && <div className={`${CLASSNAME}__author`}>{author}</div>}
 
                 {title && (
-                    <a className="lumx-post-block__title" onClick={onClick}>
+                    <a className={`${CLASSNAME}__title`} onClick={onClick}>
                         {title}
                     </a>
                 )}
 
-                {meta && <span className="lumx-post-block__meta">{meta}</span>}
+                {meta && <span className={`${CLASSNAME}__meta`}>{meta}</span>}
 
-                <p className="lumx-post-block__text">{text}</p>
+                <p className={`${CLASSNAME}__text`}>{text}</p>
 
-                {hasAttachments && <div className="lumx-post-block__attachments">{attachments}</div>}
-
+                {hasAttachments && <div className={`${CLASSNAME}__attachments`}>{attachments}</div>}
                 {(hasTags || hasActions) && (
-                    <div className="lumx-post-block__toolbar">
-                        {hasTags && <div className="lumx-post-block__tags">{tags}</div>}
-                        {hasActions && <div className="lumx-post-block__actions">{actions}</div>}
+                    <div className={`${CLASSNAME}__toolbar`}>
+                        {hasTags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
+                        {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
                     </div>
                 )}
             </div>
