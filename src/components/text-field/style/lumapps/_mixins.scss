@@ -1,4 +1,4 @@
-@mixin lumx-text-field-input-wrapper($theme, $has-indicator: false, $is-multiple: false) {
+@mixin lumx-text-field-input-wrapper($theme, $has-indicator: false, $is-multiple: false, $type: 'input') {
     position: relative;
     display: flex;
     align-items: center;
@@ -9,12 +9,16 @@
     transition-duration: $lumx-text-field-transition-duration;
     transition-property: background-color, box-shadow;
 
-    @if $is-multiple {
-        min-height: $lumx-text-field-height;
-        padding: 3px;
+    @if $type == 'input' {
+        @if $is-multiple {
+            min-height: $lumx-text-field-height;
+            padding: 3px;
+        } @else {
+            height: $lumx-text-field-height;
+            padding: 0 $lumx-text-field-horizontal-padding;
+        }
     } @else {
-        height: $lumx-text-field-height;
-        padding: 0 $lumx-text-field-horizontal-padding;
+        padding: $lumx-text-field-vertical-padding $lumx-text-field-horizontal-padding;
     }
 
     @if $has-indicator {
@@ -27,18 +31,21 @@
     color: lumx-theme-color-variant($theme, 'N');
 }
 
-@mixin lumx-text-field-input-native($theme) {
+@mixin lumx-text-field-input-native($theme, $type: 'input') {
     @include lumx-typography('body1');
 
     width: 100%;
-    height: $lumx-text-field-height;
     padding: 0;
     margin: 0;
     border: none;
     background-color: transparent;
     color: lumx-theme-color-variant($theme, 'N');
-    line-height: $lumx-text-field-height;
     outline: none;
+
+    @if $type == 'input' {
+        height: $lumx-text-field-height;
+        line-height: $lumx-text-field-height;
+    }
 }
 
 @mixin lumx-text-field-input-validity($validity, $theme) {
