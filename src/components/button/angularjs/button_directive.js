@@ -31,27 +31,39 @@ function ButtonDirective() {
     function getTemplate(el, attrs) {
         if (isAnchor(attrs)) {
             return `<a class="${CSS_PREFIX}-button" ng-transclude></a>`;
+        } else if (attrs.lumxHasBackground) {
+            return `
+                <div class="${CSS_PREFIX}-button-wrapper">
+                    <button class="${CSS_PREFIX}-button" ng-transclude></button>
+                </div>
+            `;
         }
 
         return `<button class="${CSS_PREFIX}-button" ng-transclude></button>`;
     }
 
     function link(scope, el, attrs) {
+        let buttonEl = el;
+
+        if (attrs.lumxHasBackground) {
+            buttonEl = el.find('button');
+        }
+
         if (!attrs.lumxVariant || attrs.lumxVariant === 'button') {
-            const leftIcon = el.find('i:first-child');
-            const rightIcon = el.find('i:last-child');
-            const label = el.find('span');
+            const leftIcon = buttonEl.find('i:first-child');
+            const rightIcon = buttonEl.find('i:last-child');
+            const label = buttonEl.find('span');
 
             if (leftIcon.length > 0) {
-                el.addClass(`${CSS_PREFIX}-button--has-left-icon`);
+                buttonEl.addClass(`${CSS_PREFIX}-button--has-left-icon`);
             }
 
             if (rightIcon.length > 0) {
-                el.addClass(`${CSS_PREFIX}-button--has-right-icon`);
+                buttonEl.addClass(`${CSS_PREFIX}-button--has-right-icon`);
             }
 
             if (label.length === 0) {
-                el.wrapInner('<span></span>');
+                buttonEl.wrapInner('<span></span>');
             }
         }
 
@@ -66,7 +78,13 @@ function ButtonDirective() {
         };
 
         if (!attrs.lumxColor) {
-            el.addClass(`${CSS_PREFIX}-button--color-${defaultProps.color}`);
+            buttonEl.addClass(`${CSS_PREFIX}-button--color-${defaultProps.color}`);
+
+            if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
+                el.removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button-wrapper--color-\S+/g) || []).join(' ');
+                }).addClass(`${CSS_PREFIX}-button-wrapper--color-light`);
+            }
         }
 
         attrs.$observe('lumxColor', (color) => {
@@ -74,13 +92,27 @@ function ButtonDirective() {
                 return;
             }
 
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*button--color-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-button--color-${color}`);
+            buttonEl
+                .removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button--color-\S+/g) || []).join(' ');
+                })
+                .addClass(`${CSS_PREFIX}-button--color-${color}`);
+
+            if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
+                let wrapperColor = 'light';
+
+                if (color === 'light') {
+                    wrapperColor = 'dark';
+                }
+
+                el.removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button-wrapper--color-\S+/g) || []).join(' ');
+                }).addClass(`${CSS_PREFIX}-button-wrapper--color-${wrapperColor}`);
+            }
         });
 
         if (!attrs.lumxEmphasis) {
-            el.addClass(`${CSS_PREFIX}-button--emphasis-${defaultProps.emphasis}`);
+            buttonEl.addClass(`${CSS_PREFIX}-button--emphasis-${defaultProps.emphasis}`);
         }
 
         attrs.$observe('lumxEmphasis', (emphasis) => {
@@ -88,13 +120,15 @@ function ButtonDirective() {
                 return;
             }
 
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*button--emphasis-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-button--emphasis-${emphasis}`);
+            buttonEl
+                .removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button--emphasis-\S+/g) || []).join(' ');
+                })
+                .addClass(`${CSS_PREFIX}-button--emphasis-${emphasis}`);
         });
 
         if (!attrs.lumxSize) {
-            el.addClass(`${CSS_PREFIX}-button--size-${defaultProps.size}`);
+            buttonEl.addClass(`${CSS_PREFIX}-button--size-${defaultProps.size}`);
         }
 
         attrs.$observe('lumxSize', (size) => {
@@ -102,13 +136,15 @@ function ButtonDirective() {
                 return;
             }
 
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*button--size-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-button--size-${size}`);
+            buttonEl
+                .removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button--size-\S+/g) || []).join(' ');
+                })
+                .addClass(`${CSS_PREFIX}-button--size-${size}`);
         });
 
         if (!attrs.lumxTheme && isDefaultEmphasis) {
-            el.addClass(`${CSS_PREFIX}-button--theme-${defaultProps.theme}`);
+            buttonEl.addClass(`${CSS_PREFIX}-button--theme-${defaultProps.theme}`);
         }
 
         attrs.$observe('lumxTheme', (theme) => {
@@ -116,13 +152,21 @@ function ButtonDirective() {
                 return;
             }
 
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-button--theme-${theme}`);
+            buttonEl
+                .removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
+                })
+                .addClass(`${CSS_PREFIX}-button--theme-${theme}`);
+
+            if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
+                el.removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button-wrapper--color-\S+/g) || []).join(' ');
+                }).addClass(`${CSS_PREFIX}-button-wrapper--color-${theme}`);
+            }
         });
 
         if (!attrs.lumxVariant) {
-            el.addClass(`${CSS_PREFIX}-button--variant-${defaultProps.variant}`);
+            buttonEl.addClass(`${CSS_PREFIX}-button--variant-${defaultProps.variant}`);
         }
 
         attrs.$observe('lumxVariant', (variant) => {
@@ -130,16 +174,24 @@ function ButtonDirective() {
                 return;
             }
 
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*button--variant-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-button--variant-${variant}`);
+            buttonEl
+                .removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button--variant-\S+/g) || []).join(' ');
+                })
+                .addClass(`${CSS_PREFIX}-button--variant-${variant}`);
+
+            if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
+                el.removeClass((index, className) => {
+                    return (className.match(/(?:\S|-)*button-wrapper--variant-\S+/g) || []).join(' ');
+                }).addClass(`${CSS_PREFIX}-button-wrapper--variant-${variant}`);
+            }
         });
 
         scope.$watch(attrs.lumxIsSelected, (isSelected) => {
             if (isSelected) {
-                el.addClass(`${CSS_PREFIX}-button--is-selected`);
+                buttonEl.addClass(`${CSS_PREFIX}-button--is-selected`);
             } else {
-                el.removeClass(`${CSS_PREFIX}-button--is-selected`);
+                buttonEl.removeClass(`${CSS_PREFIX}-button--is-selected`);
             }
         });
     }
