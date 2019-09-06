@@ -13,13 +13,12 @@ import { Button, Chip, Emphasis, Grid, Orientation, PostBlock, Size, Theme, User
     <PostBlock
         actions={
             <Grid>
-                {[{icon: mdiComment, value: 16}, {icon: mdiHeart, value: 8}].map((action, index) => {
-                    return (
-                        <Button key={index} emphasis={Emphasis.low} size={Size.s} leftIcon={action.icon}>
-                            <span>{action.value}</span>
-                        </Button>
-                    );
-                })}
+                <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiComment}>
+                    <span>16</span>
+                </Button>
+                <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                    <span>8</span>
+                </Button>
             </Grid>
         }
         attachments={
@@ -37,13 +36,15 @@ import { Button, Chip, Emphasis, Grid, Orientation, PostBlock, Size, Theme, User
         }
         tags={
             <Grid>
-                {['tag1', 'tag2', 'tag3'].map((tag, index) => {
-                    return (
-                        <Chip key={index} className="lumx-spacing-margin-right-tiny" size={Size.s} theme={theme} >
-                            {tag}
-                        </Chip>
-                    );
-                })}
+                <Chip className="lumx-spacing-margin-right-tiny" size={Size.s} theme={theme} >
+                    tag1
+                </Chip>
+                <Chip className="lumx-spacing-margin-right-tiny" size={Size.s} theme={theme} >
+                    tag2
+                </Chip>
+                <Chip className="lumx-spacing-margin-right-tiny" size={Size.s} theme={theme} >
+                    tag3
+                </Chip>
             </Grid>
         }
         meta="1 day ago in community's name"
