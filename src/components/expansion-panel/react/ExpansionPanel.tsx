@@ -11,7 +11,7 @@ import { get, isEmpty, isFunction } from 'lodash';
 
 /////////////////////////////
 
-const enum ExpansionPanelVariant {
+enum ExpansionPanelVariant {
     boxed = 'boxed',
     trimmed = 'trimmed',
 }

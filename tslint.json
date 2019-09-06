@@ -151,7 +151,7 @@
         "no-unnecessary-else": true,
         "no-unused": true,
         "no-var-before-return": [true, "allow-destructuring"],
-        "prefer-const-enum": true
+        "prefer-const-enum": false
     },
     "rulesDirectory": ["tslint-consistent-codestyle", "tslint-plugin-prettier"]
 }

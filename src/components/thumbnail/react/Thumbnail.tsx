@@ -14,7 +14,7 @@ import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 /**
  * All available aspect ratios.
  */
-const enum ThumbnailAspectRatio {
+enum ThumbnailAspectRatio {
     original = 'original',
     horizontal = 'horizontal',
     vertical = 'vertical',
