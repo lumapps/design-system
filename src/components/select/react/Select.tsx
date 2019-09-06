@@ -296,7 +296,7 @@ const Select: React.FC<SelectProps> = ({
                                 {!isEmpty &&
                                     isMultiple &&
                                     value.map((val: string, index: number) => (
-                                        <div className={`${CLASSNAME}__input-chip`}>
+                                        <div key={index} className={`${CLASSNAME}__input-chip`}>
                                             {selectedChipRender!(val, index, onClear, isDisabled)}
                                         </div>
                                     ))}
