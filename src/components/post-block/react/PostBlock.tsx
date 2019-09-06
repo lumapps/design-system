@@ -96,11 +96,6 @@ const PostBlock: React.FC<PostBlockProps> = ({
     title,
     theme = DEFAULT_PROPS.theme,
 }: PostBlockProps): ReactElement => {
-    const hasActions = Boolean(actions);
-    const hasAttachments = Boolean(attachments);
-    const hasAuthor = Boolean(author);
-    const hasTags = Boolean(tags);
-
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
             {thumbnail && (
@@ -117,7 +112,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
             )}
 
             <div className={`${CLASSNAME}__wrapper`}>
-                {hasAuthor && <div className={`${CLASSNAME}__author`}>{author}</div>}
+                {author && <div className={`${CLASSNAME}__author`}>{author}</div>}
 
                 {title && (
                     <a className={`${CLASSNAME}__title`} onClick={onClick}>
@@ -129,11 +124,11 @@ const PostBlock: React.FC<PostBlockProps> = ({
 
                 <p className={`${CLASSNAME}__text`}>{text}</p>
 
-                {hasAttachments && <div className={`${CLASSNAME}__attachments`}>{attachments}</div>}
-                {(hasTags || hasActions) && (
+                {attachments && <div className={`${CLASSNAME}__attachments`}>{attachments}</div>}
+                {(tags || actions) && (
                     <div className={`${CLASSNAME}__toolbar`}>
-                        {hasTags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
-                        {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+                        {tags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
+                        {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
                     </div>
                 )}
             </div>
