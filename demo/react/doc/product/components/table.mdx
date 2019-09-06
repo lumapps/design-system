@@ -1,0 +1,129 @@
+```javascript import
+import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow, ThOrder, ThScope, Theme } from 'LumX';
+import { mdiCommentOutline } from 'LumX/icons';
+```
+
+# Table
+
+**Tables display tabular information to make it easier to scan and to compare.**
+
+## Basic usage
+
+<!-- ```javascript jsx withThemeSwitcher
+(theme) =>  {
+const tableBody = [
+    {
+        calories: 159,
+        comments: 'Lorem ipsum',
+        dessert: 'Frozen yogurt',
+        fat: 6.0,
+        id: 1,
+        variant: TableCellVariant.body,
+    },
+    {
+        calories: 237,
+        comments: 'Lorem ipsum',
+        dessert: 'Ice cream sandwich',
+        fat: 9.0,
+        id: 2,
+        variant: TableCellVariant.body,
+    },
+    {
+        calories: 262,
+        comments: 'Lorem ipsum',
+        dessert: 'Eclair',
+        fat: 16.0,
+        id: 3,
+        variant: TableCellVariant.body,
+    },
+];
+const tableHead = [
+    {
+        isSortable: true,
+        label: 'Dessert',
+        name: 'dessert',
+        scope: ThScope.col,
+        variant: TableCellVariant.head,
+    },
+    {
+        isSortable: true,
+        label: 'Calories',
+        name: 'calories',
+        scope: ThScope.col,
+        variant: TableCellVariant.head,
+    },
+    {
+        isSortable: true,
+        label: 'Fat (g)',
+        name: 'fat',
+        scope: ThScope.col,
+        variant: TableCellVariant.head,
+    },
+    {
+        icon: mdiCommentOutline,
+        isSortable: false,
+        label: 'Comments',
+        name: 'comments',
+        scope: ThScope.col,
+        variant: TableCellVariant.head,
+    },
+];
+const handleSort = useCallback(
+        (headSource) => {
+            tableHead.map((head) => {
+                if (head !== headSource) {
+                    head.sortOrder = undefined;
+                }
+            });
+
+            if (headSource.sortOrder === ThOrder.asc) {
+                headSource.sortOrder = ThOrder.desc;
+            } else {
+                headSource.sortOrder = ThOrder.asc;
+            }
+
+            setTable(orderBy(tableBody, headSource.name, headSource.sortOrder));
+        },
+        [dataTableBody],
+    );
+
+return (
+<>
+        <Table hasDividers theme={theme}>
+            <TableHeader>
+                <TableRow>
+                    {tableHead.map((head, key) => {
+                        return (
+                            <TableCell
+                                key={`th-${key}`}
+                                icon={head.icon}
+                                isSortable={head.isSortable}
+                                scope={head.scope}
+                                sortOrder={head.sortOrder}
+                                variant={head.variant}
+                                onHeaderClick={(): void => handleSort(head)}
+                            >
+                                {head.label}
+                            </TableCell>
+                        );
+                    })}
+                </TableRow>
+            </TableHeader>
+
+            <TableBody>
+                {dataTableBody.map((body, key) => {
+                    return (
+                        <TableRow key={`tr-${key}`}>
+                            <TableCell>{body.dessert}</TableCell>
+                            <TableCell>{String(body.calories)}</TableCell>
+                            <TableCell>{String(body.fat)}</TableCell>
+                            <TableCell>{body.comments}</TableCell>
+                        </TableRow>
+                    );
+                })}
+            </TableBody>
+        </Table>
+</>;
+);
+};
+``` -->
