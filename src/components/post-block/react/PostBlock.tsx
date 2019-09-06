@@ -189,8 +189,13 @@ const PostBlock: React.FC<PostBlockProps> = ({
                 <p className="lumx-post-block__text">{text}</p>
 
                 {hasAttachments && <div className="lumx-post-block__attachments">{attachments}</div>}
-                {hasTags && <div className="lumx-post-block__tags">{tags}</div>}
-                {hasActions && <div className="lumx-post-block__actions">{actions}</div>}
+
+                {(hasTags || hasActions) && (
+                    <div className="lumx-post-block__toolbar">
+                        {hasTags && <div className="lumx-post-block__tags">{tags}</div>}
+                        {hasActions && <div className="lumx-post-block__actions">{actions}</div>}
+                    </div>
+                )}
             </div>
         </div>
     );

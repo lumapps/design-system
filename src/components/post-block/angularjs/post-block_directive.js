@@ -23,6 +23,13 @@ function PostBlockController() {
     lumx.hasActions = false;
 
     /**
+     * Whether the directive has attachments slot filled or not.
+     *
+     * @type {boolean}
+     */
+    lumx.hasAttachments = false;
+
+    /**
      * Whether the directive has author slot filled or not.
      *
      * @type {boolean}
@@ -78,6 +85,10 @@ function PostBlockDirective() {
             ctrl.hasActions = true;
         }
 
+        if (transclude.isSlotFilled('attachments')) {
+            ctrl.hasAttachments = true;
+        }
+
         if (transclude.isSlotFilled('author')) {
             ctrl.hasAuthor = true;
         }
@@ -107,6 +118,7 @@ function PostBlockDirective() {
         template,
         transclude: {
             actions: `?${COMPONENT_PREFIX}PostBlockActions`,
+            attachments: `?${COMPONENT_PREFIX}PostBlockAttachments`,
             author: `?${COMPONENT_PREFIX}PostBlockAuthor`,
             tags: `?${COMPONENT_PREFIX}PostBlockTags`,
         },

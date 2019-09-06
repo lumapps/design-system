@@ -22,6 +22,9 @@
     }
 
     &__wrapper {
+        display: flex;
+        flex-direction: column;
+
         #{$self}--orientation-horizontal & {
             flex: 1;
         }
@@ -57,25 +60,27 @@
     &__text {
         @include lumx-typography('body1');
 
-        margin-bottom: $lumx-spacing-unit * 2;
+        margin-bottom: $lumx-spacing-unit;
     }
 
     &__toolbar {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
     }
 
     &__attachments {
-        margin-bottom: $lumx-spacing-unit * 2;
+        margin-top: $lumx-spacing-unit;
+        margin-bottom: $lumx-spacing-unit;
     }
 
     &__tags {
         flex: 1;
-        float: left;
+        margin-top: $lumx-spacing-unit;
     }
 
     &__actions {
         flex-shrink: 0;
-        float: right;
+        margin-top: $lumx-spacing-unit;
     }
 }
