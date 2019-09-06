@@ -26,12 +26,20 @@
     }
 
     &__input-wrapper {
-        #{$self}--theme-light & {
-            @include lumx-text-field-input-wrapper('dark');
+        #{$self}--has-input#{$self}--theme-light & {
+            @include lumx-text-field-input-wrapper('dark', false, false, 'input');
         }
 
-        #{$self}--theme-dark & {
-            @include lumx-text-field-input-wrapper('light');
+        #{$self}--has-input#{$self}--theme-dark & {
+            @include lumx-text-field-input-wrapper('light', false, false, 'input');
+        }
+
+        #{$self}--has-textarea#{$self}--theme-light & {
+            @include lumx-text-field-input-wrapper('dark', false, false, 'textarea');
+        }
+
+        #{$self}--has-textarea#{$self}--theme-dark & {
+            @include lumx-text-field-input-wrapper('light', false, false, 'textarea');
         }
     }
 
@@ -54,21 +62,34 @@
     &__input-native {
         flex: 1;
 
+        input,
+        textarea {
+            #{$self}--theme-light &::placeholder {
+                @include lumx-text-field-placeholder('dark');
+            }
+
+            #{$self}--theme-dark &::placeholder {
+                @include lumx-text-field-placeholder('light');
+            }
+        }
+
         input {
             #{$self}--theme-light & {
-                @include lumx-text-field-input-native('dark');
-
-                &::placeholder {
-                    @include lumx-text-field-placeholder('dark');
-                }
+                @include lumx-text-field-input-native('dark', 'input');
             }
 
             #{$self}--theme-dark & {
-                @include lumx-text-field-input-native('light');
+                @include lumx-text-field-input-native('light', 'input');
+            }
+        }
 
-                &::placeholder {
-                    @include lumx-text-field-placeholder('light');
-                }
+        textarea {
+            #{$self}--theme-light & {
+                @include lumx-text-field-input-native('dark', 'textarea');
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-text-field-input-native('light', 'textarea');
             }
         }
     }
