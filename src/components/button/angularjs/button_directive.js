@@ -29,24 +29,37 @@ function ButtonDirective() {
      * @return {string}  The button html template.
      */
     function getTemplate(el, attrs) {
+        let buttonContent;
+
         if (isAnchor(attrs)) {
-            return `<a class="${CSS_PREFIX}-button" ng-transclude></a>`;
-        } else if (attrs.lumxHasBackground) {
+            buttonContent = `<a class="${CSS_PREFIX}-button" ng-transclude></a>`;
+        } else {
+            buttonContent = `<button class="${CSS_PREFIX}-button" ng-transclude></button>`;
+        }
+
+        if (attrs.lumxHasBackground) {
+            // Wrap button.
             return `
                 <div class="${CSS_PREFIX}-button-wrapper">
-                    <button class="${CSS_PREFIX}-button" ng-transclude></button>
+                    ${buttonContent}
                 </div>
             `;
         }
 
-        return `<button class="${CSS_PREFIX}-button" ng-transclude></button>`;
+        return buttonContent;
     }
 
     function link(scope, el, attrs) {
         let buttonEl = el;
 
         if (attrs.lumxHasBackground) {
-            buttonEl = el.find('button');
+            if (isAnchor(attrs)) {
+                buttonEl = el.find('a');
+            } else {
+                buttonEl = el.find('button');
+            }
+            // Forward disabled attr to the button element.
+            buttonEl.attr('disabled', attrs.ngDisabled || attrs.disabled);
         }
 
         if (!attrs.lumxVariant || attrs.lumxVariant === 'button') {
