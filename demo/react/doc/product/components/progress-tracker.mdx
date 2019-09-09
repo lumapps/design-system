@@ -26,14 +26,13 @@ There are four states: _Current_, _Future_, _Completed_, and _Error_.
 
     return (
         <>
-            Default ProgressTracker
             <ProgressTracker activeStep={activeIndex} theme={theme}>
                 {stepProps.map((step, index) => (
                     <ProgressTrackerStep
                         isActive={activeIndex === index}
                         onClick={index < 3 ? () => setActiveIndex(index) : null}
-                        label={'Label ' + (index + 1)}
-                        helper={'Helper ' + (index + 1)}
+                        label={'Step ' + (index + 1)}
+                        helper={index == 2 ? 'Error message' : 'Helper text' + (index + 1)}
                         {...step}
                     />
                 ))}
