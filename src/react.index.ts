@@ -42,6 +42,8 @@ export { ListSubheader, ListSubheaderProps } from './components/list/react/ListS
 
 export { ElementPosition, Popover, PopoverProps, Placement, Offset } from './components/popover/react/Popover';
 
+export { PostBlock, PostBlockProps } from './components/post-block/react/PostBlock';
+
 export { Progress, ProgressProps, ProgressVariant } from './components/progress/react/Progress';
 
 export { ProgressTracker, ProgressTrackerProps } from './components/progress-tracker/react/ProgressTracker';

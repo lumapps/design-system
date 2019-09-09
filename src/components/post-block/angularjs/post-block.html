@@ -19,7 +19,9 @@
 
         <p class="lumx-post-block__text">{{ lumx.text }}</p>
 
-        <div class="lumx-post-block__toolbar">
+        <div class="lumx-post-block__attachments" ng-transclude="attachments" ng-if="lumx.hasAttachments"></div>
+
+        <div class="lumx-post-block__toolbar" ng-if="lumx.hasTags || lumx.hasActions">
             <div class="lumx-post-block__tags" ng-transclude="tags" ng-if="lumx.hasTags"></div>
             <div class="lumx-post-block__actions" ng-transclude="actions" ng-if="lumx.hasActions"></div>
         </div>

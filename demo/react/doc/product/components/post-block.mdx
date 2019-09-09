@@ -1,0 +1,56 @@
+```javascript import
+import { mdiComment, mdiHeart } from 'LumX/icons';
+
+import { Button, Chip, Emphasis, Grid, Orientation, PostBlock, Size, Theme, UserBlock } from 'LumX';
+```
+
+# Post Block
+
+## Default
+
+```javascript jsx withThemeSwitcher
+(theme) => <>
+    <PostBlock
+        actions={
+            <Grid>
+                <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiComment}>
+                    <span>16</span>
+                </Button>
+                <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                    <span>8</span>
+                </Button>
+            </Grid>
+        }
+        attachments={
+             <UserBlock
+                avatar="http://i.pravatar.cc/128"
+                name="Matthias Manoukian"
+                fields={['Head of Design', 'Lyon']}
+                orientation={Orientation.vertical}
+                size={Size.l}
+                theme={theme}
+            />
+        }
+        author={
+            <UserBlock avatar="http://i.pravatar.cc/128" name="Matthias Manoukian" size={Size.s} theme={theme} />
+        }
+        tags={
+            <Grid>
+                <Chip className="lumx-spacing-margin-right-tiny" size={Size.s} theme={theme} >
+                    tag1
+                </Chip>
+                <Chip className="lumx-spacing-margin-right-tiny" size={Size.s} theme={theme} >
+                    tag2
+                </Chip>
+                <Chip className="lumx-spacing-margin-right-tiny" size={Size.s} theme={theme} >
+                    tag3
+                </Chip>
+            </Grid>
+        }
+        meta="1 day ago in community's name"
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus libero aliquet pharetra luctus. Fusce nisl turpis, posuere ac tellus at, euismod vulputate libero..."
+        thumbnail="https://picsum.photos/800/600/?random"
+        title="Annual Bonus Payments"
+    />
+</>
+```
