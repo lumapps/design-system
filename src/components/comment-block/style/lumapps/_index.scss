@@ -123,6 +123,8 @@
         #{$self}--theme-dark > #{$self}__wrapper & {
             color: lumx-theme-color-variant('light', 'N');
         }
+
+        word-break: break-word;
     }
 
     &__actions {
