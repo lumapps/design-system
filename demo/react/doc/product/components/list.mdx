@@ -1,3 +1,195 @@
 ```javascript import
-import { List } from 'LumX';
+import {
+    Avatar,
+    Button,
+    ButtonEmphasis,
+    Icon,
+    IconButton,
+    List,
+    ListItem,
+    ListItemSize,
+    ListSubheader,
+    Size,
+    Thumbnail,
+    ThumbnailVariant,
+} from 'LumX';
+
+import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
+```
+
+# List
+
+**Lists group items vertically.**
+
+## Tiny
+
+```javascript jsx  disableGrid
+() => (
+    <>
+        <List>
+            <ListSubheader>text only</ListSubheader>
+            <ListItem size={ListItemSize.tiny}>Single-line item</ListItem>
+            <ListItem size={ListItemSize.tiny}>Single-line item</ListItem>
+            <ListItem size={ListItemSize.tiny}>Single-line item</ListItem>
+            <ListSubheader>rich</ListSubheader>
+            <ListItem size={ListItemSize.tiny} before={<Icon icon={mdiSend} size={Size.xs} />}>
+                Single-line item
+            </ListItem>
+            <ListItem
+                size={ListItemSize.tiny}
+                before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/48" size={Size.s} />}
+            >
+                Single-line item
+            </ListItem>
+            <ListItem size={ListItemSize.tiny} before={<Avatar image="http://i.pravatar.cc/48" size={Size.s} />}>
+                Single-line item
+            </ListItem>
+        </List>
+    </>
+);
+```
+
+## Regular
+
+```javascript jsx disableGrid
+() => (
+    <>
+        <List>
+            <ListSubheader>text only</ListSubheader>
+            <ListItem>Single-line item</ListItem>
+            <ListSubheader>rich</ListSubheader>
+            <ListItem before={<Icon icon={mdiSend} size={Size.xs} />}>Single-line item</ListItem>
+            <ListItem
+                before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
+                after={<IconButton emphasis={ButtonEmphasis.low} icon={mdiDotsHorizontal} />}
+            >
+                Single-line item
+            </ListItem>
+            <ListItem
+                before={<Avatar image="http://i.pravatar.cc/72" size={Size.m} />}
+                after={<Button emphasis={ButtonEmphasis.low}>Button</Button>}
+            >
+                Single-line item
+            </ListItem>
+        </List>
+    </>
+);
+```
+
+## Big
+
+```javascript jsx disableGrid
+() => (
+    <>
+        <List>
+            <ListSubheader>text only</ListSubheader>
+            <ListItem size={ListItemSize.big}>
+                <div>
+                    <span>Two-line item</span>
+                </div>
+                <div>
+                    <span className="lumx-theme-color-dark-L2">Secondary text</span>
+                </div>
+            </ListItem>
+            <ListSubheader>rich</ListSubheader>
+            <ListItem size={ListItemSize.big} before={<Icon icon={mdiSend} size={Size.xs} />}>
+                <div>
+                    <span>Two-line item</span>
+                </div>
+                <div>
+                    <span className="lumx-theme-color-dark-L2">Secondary text</span>
+                </div>
+            </ListItem>
+            <ListItem
+                size={ListItemSize.big}
+                before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
+                after={<IconButton emphasis={ButtonEmphasis.low} icon={mdiDotsHorizontal} />}
+            >
+                <div>
+                    <span>Two-line item</span>
+                </div>
+                <div>
+                    <span className="lumx-theme-color-dark-L2">Secondary text</span>
+                </div>
+            </ListItem>
+            <ListItem
+                size={ListItemSize.big}
+                before={<Avatar image="http://i.pravatar.cc/72" size={Size.m} />}
+                after={<Button emphasis={ButtonEmphasis.low}>Button</Button>}
+            >
+                <div>
+                    <span>Two-line item</span>
+                </div>
+                <div>
+                    <span className="lumx-theme-color-dark-L2">Secondary text</span>
+                </div>
+            </ListItem>
+        </List>
+    </>
+);
+```
+
+## Huge
+
+```javascript jsx disableGrid
+() => (
+    <>
+        <List>
+            <ListSubheader>text only</ListSubheader>
+            <ListItem size={ListItemSize.huge}>
+                <div>
+                    <span>Multi-line item</span>
+                </div>
+                <div>
+                    <span className="lumx-theme-color-dark-L2">
+                        Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
+                        inter se differunt. Idque Caesaris facere voluntate liceret: sese habere
+                    </span>
+                </div>
+            </ListItem>
+            <ListSubheader>rich</ListSubheader>
+            <ListItem size={ListItemSize.huge} before={<Icon icon={mdiSend} size={Size.xs} />}>
+                <div>
+                    <span>Multi-line item</span>
+                </div>
+                <div>
+                    <span className="lumx-theme-color-dark-L2">
+                        Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
+                        inter se differunt. Idque Caesaris facere voluntate liceret: sese habere
+                    </span>
+                </div>
+            </ListItem>
+            <ListItem
+                size={ListItemSize.huge}
+                before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
+                after={<IconButton emphasis={ButtonEmphasis.low} icon={mdiDotsHorizontal} />}
+            >
+                <div>
+                    <span>Multi-line item</span>
+                </div>
+                <div>
+                    <span className="lumx-theme-color-dark-L2">
+                        Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
+                        inter se differunt. Idque Caesaris facere voluntate liceret: sese habere
+                    </span>
+                </div>
+            </ListItem>
+            <ListItem
+                size={ListItemSize.huge}
+                before={<Avatar image="http://i.pravatar.cc/72" size={Size.m} />}
+                after={<Button emphasis={ButtonEmphasis.low}>Button</Button>}
+            >
+                <div>
+                    <span>Multi-line item</span>
+                </div>
+                <div>
+                    <span className="lumx-theme-color-dark-L2">
+                        Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
+                        inter se differunt. Idque Caesaris facere voluntate liceret: sese habere
+                    </span>
+                </div>
+            </ListItem>
+        </List>
+    </>
+);
 ```
