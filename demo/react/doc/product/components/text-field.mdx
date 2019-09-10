@@ -1,0 +1,175 @@
+```javascript import
+import { ReactElement, useState } from 'react';
+import { TextField, Theme } from 'LumX';
+import { mdiMagnify } from 'LumX/icons';
+```
+
+# Text field
+
+**Text fields are simple text inputs.**
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('');
+
+    /**
+     * Function called on value change.
+     *
+     * @param inputValue Value from input.
+     */
+    const onChange = (inputValue) => {
+        setValue(inputValue);
+    };
+
+    return (
+        <>
+            <TextField label="Textfield label" value={value} onChange={onChange} theme={theme} />
+        </>
+    );
+};
+```
+
+## States
+
+There are three states: _disabled_, _valid_, and _invalid_.
+
+### Disabled
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    return (
+        <>
+            <TextField label="Textfield label" isDisabled={true} theme={theme} />
+        </>
+    );
+};
+```
+
+### Valid
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('Valid value');
+
+    /**
+     * Function called on value change.
+     *
+     * @param inputValue Value from input.
+     */
+    const onChange = (inputValue) => {
+        setValue(inputValue);
+    };
+
+    return (
+        <>
+            <TextField label="Textfield label" value={value} onChange={onChange} isValid={true} theme={theme} />
+        </>
+    );
+};
+```
+
+### Invalid
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('Invalid value');
+
+    /**
+     * Function called on value change.
+     *
+     * @param inputValue Value from input.
+     */
+    const onChange = (inputValue) => {
+        setValue(inputValue);
+    };
+
+    return (
+        <>
+            <TextField label="Textfield label" value={value} onChange={onChange} hasError={true} theme={theme} />
+        </>
+    );
+};
+```
+
+## Options
+
+There are three options: _helper text_, _placeholder_ and _icon_.
+
+### Helper text
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('');
+
+    /**
+     * Function called on value change.
+     *
+     * @param inputValue Value from input.
+     */
+    const onChange = (inputValue) => {
+        setValue(inputValue);
+    };
+
+    return (
+        <>
+            <TextField label="Textfield label" value={value} onChange={onChange} helper={'Helper text'} theme={theme} />
+        </>
+    );
+};
+```
+
+### Placeholder
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('');
+
+    /**
+     * Function called on value change.
+     *
+     * @param inputValue Value from input.
+     */
+    const onChange = (inputValue) => {
+        setValue(inputValue);
+    };
+
+    return (
+        <>
+            <TextField
+                label="Textfield label"
+                value={value}
+                onChange={onChange}
+                placeholder={'Placeholder text'}
+                theme={theme}
+            />
+        </>
+    );
+};
+```
+
+### Icon
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('');
+
+    /**
+     * Function called on value change.
+     *
+     * @param inputValue Value from input.
+     */
+    const onChange = (inputValue) => {
+        setValue(inputValue);
+    };
+
+    return (
+        <>
+            <TextField label="Textfield label" value={value} onChange={onChange} icon={mdiMagnify} theme={theme} />
+        </>
+    );
+};
+```
+
+### Properties
+
+<PropTable component="TextField" />
