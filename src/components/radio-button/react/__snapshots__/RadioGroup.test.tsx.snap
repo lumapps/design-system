@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RadioGroup> Snapshots and structure should render defaults 1`] = `
+<div
+  className="lumx-radio-group"
+/>
+`;
+
+exports[`<RadioGroup> Snapshots and structure should render with radio button children 1`] = `
+<div
+  className="lumx-radio-group"
+>
+  <RadioButton
+    key="0"
+    name="radiobutton1"
+    value="radiobutton1"
+  >
+    <RadioButtonLabel>
+      Label 1
+    </RadioButtonLabel>
+  </RadioButton>
+  <RadioButton
+    key="1"
+    name="radiobutton2"
+    value="radiobutton2"
+  >
+    <RadioButtonLabel>
+      Label 2
+    </RadioButtonLabel>
+  </RadioButton>
+</div>
+`;
