@@ -1,18 +1,11 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
-import mockConsole from 'jest-mock-console';
-import { build, fake, oneOf } from 'test-data-bot';
-
-import get from 'lodash/get';
-import without from 'lodash/without';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 import { mdiCheck, mdiChevronDown, mdiPlus } from 'LumX/icons';
-
-import { Size, Theme } from 'LumX';
-import { Button, ButtonEmphasis, ButtonProps, ButtonVariant, CLASSNAME, DEFAULT_PROPS } from './Button';
+import { Button, ButtonProps, CLASSNAME, DEFAULT_PROPS } from './Button';
 
 /////////////////////////////
 
@@ -28,588 +21,163 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <ButtonRoot> element that is used as a wrapper for the label.
+     * ButtonRoot element.
      */
     buttonRoot: Wrapper;
 
     /**
-     * The <Icon> icon(s) (can have 0, 1 or 2).
+     * Button icons.
      */
     icon: Wrapper;
 }
 
-/////////////////////////////
-//                         //
-//    Private attributes   //
-//                         //
-/////////////////////////////
-
-/**
- * The default label to use for the tests.
- */
-const DEFAULT_LABEL = 'Label';
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Get the default value of the given prop of a <Button>, depending on the effective props of the component (some
- * default value depends on the value of another prop).
- *
- * @param      prop  The name of the prop you want the default value of.
- * @param props The current props of the <Button>.
- */
-function _getDefaultPropValue({ prop, props }: { prop: string; props?: ISetupProps }): string {
-    return prop === 'color'
-        ? DEFAULT_PROPS[prop][`emphasis-${get(props, 'emphasis', DEFAULT_PROPS.emphasis)}`] ||
-              DEFAULT_PROPS[prop].default
-        : DEFAULT_PROPS[prop];
-}
-
-/////////////////////////////
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
+ * @param  props                   The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
-    const props: ButtonProps = {
-        children: DEFAULT_LABEL,
-        ...propsOverrides,
-    };
-
+const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
+    // @ts-ignore
     const wrapper: Wrapper = renderer(<Button {...props} />);
 
     return {
         buttonRoot: wrapper.find('ButtonRoot'),
-
         icon: wrapper.find('Icon'),
-
         props,
         wrapper,
     };
 };
 
-describe(`<${Button.displayName}>`, (): void => {
+describe(`<${Button.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly a text label', (): void => {
-            const { buttonRoot, icon, wrapper } = setup();
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).not.toExist();
-
-            expect(buttonRoot.contains(DEFAULT_LABEL)).toBeTrue();
-        });
-
-        it('should render correctly a <span> label', (): void => {
-            const children: ReactNode = <span>{DEFAULT_LABEL}</span>;
-
-            const { buttonRoot, icon, wrapper } = setup({ children });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).not.toExist();
-
-            expect(buttonRoot.contains(DEFAULT_LABEL)).toBeTrue();
-        });
-
-        it('should render correctly a left icon and a text label', (): void => {
-            const { buttonRoot, icon, wrapper } = setup({ leftIcon: mdiPlus });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
-
-            expect(buttonRoot.contains(DEFAULT_LABEL)).toBeTrue();
-        });
-
-        it('should render correctly a left icon and a <span> label', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render button with label', () => {
+            const label = 'Label';
             const { buttonRoot, icon, wrapper } = setup({
-                children: <span>{DEFAULT_LABEL}</span>,
-                leftIcon: mdiPlus,
+                children: label,
             });
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
 
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
+            expect(icon).not.toExist();
 
-            expect(buttonRoot.contains(DEFAULT_LABEL)).toBeTrue();
+            expect(buttonRoot.contains(label)).toBeTrue();
         });
 
-        it('should render correctly a text label and a right icon', (): void => {
-            const { buttonRoot, icon, wrapper } = setup({ rightIcon: mdiChevronDown });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
-
-            expect(buttonRoot.contains(DEFAULT_LABEL)).toBeTrue();
-        });
-
-        it('should render correctly a <span> label and a right icon', (): void => {
+        it('should render button with label and right icon', () => {
+            const label = 'Label';
             const { buttonRoot, icon, wrapper } = setup({
-                children: <span>{DEFAULT_LABEL}</span>,
+                children: label,
                 rightIcon: mdiChevronDown,
             });
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
 
             expect(icon).toExist();
             expect(icon.length).toEqual(1);
 
-            expect(buttonRoot.contains(DEFAULT_LABEL)).toBeTrue();
+            expect(buttonRoot.contains(label)).toBeTrue();
         });
 
-        it('should render correctly two icons and a text label', (): void => {
-            const { buttonRoot, icon, wrapper } = setup({ leftIcon: mdiPlus, rightIcon: mdiChevronDown });
+        it('should render button with label and left icon', () => {
+            const label = 'Label';
+            const { buttonRoot, icon, wrapper } = setup({
+                children: label,
+                leftIcon: mdiChevronDown,
+            });
             expect(wrapper).toMatchSnapshot();
 
             expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
+
+            expect(icon).toExist();
+            expect(icon.length).toEqual(1);
+
+            expect(buttonRoot.contains(label)).toBeTrue();
+        });
+
+        it('should render button with label and icons', () => {
+            const label = 'Label';
+            const { buttonRoot, icon, wrapper } = setup({
+                children: label,
+                leftIcon: mdiCheck,
+                rightIcon: mdiChevronDown,
+            });
+            expect(wrapper).toMatchSnapshot();
+
+            expect(buttonRoot).toExist();
 
             expect(icon).toExist();
             expect(icon.length).toEqual(2);
 
-            expect(buttonRoot.contains(DEFAULT_LABEL)).toBeTrue();
-        });
-
-        it('should render correctly two icons and a <span> label', (): void => {
-            const { buttonRoot, icon, wrapper } = setup({
-                children: <span>{DEFAULT_LABEL}</span>,
-                leftIcon: mdiPlus,
-                rightIcon: mdiChevronDown,
-            });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).toExist();
-            expect(icon.length).toEqual(2);
-
-            expect(buttonRoot.contains(DEFAULT_LABEL)).toBeTrue();
-        });
-
-        it("should render correctly an icon button with the 'button' `variant`", (): void => {
-            mockConsole('info');
-
-            let { buttonRoot, icon, wrapper } = setup({ children: null, leftIcon: mdiPlus });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
-
-            /////////////////////////////
-
-            ({ buttonRoot, icon, wrapper } = setup({ children: null, rightIcon: mdiChevronDown }));
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
-        });
-
-        it("should render correctly an icon button with the 'icon' `variant`", (): void => {
-            let { buttonRoot, icon, wrapper } = setup({
-                children: null,
-                leftIcon: mdiPlus,
-                variant: ButtonVariant.icon,
-            });
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
-
-            /////////////////////////////
-
-            ({ buttonRoot, icon, wrapper } = setup({
-                children: null,
-                rightIcon: mdiChevronDown,
-                variant: ButtonVariant.icon,
-            }));
-            expect(wrapper).toMatchSnapshot();
-
-            expect(buttonRoot).toExist();
-            expect(buttonRoot).toHaveClassName(CLASSNAME);
-
-            expect(icon).toExist();
-            expect(icon.length).toEqual(1);
+            expect(buttonRoot.contains(label)).toBeTrue();
         });
     });
 
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use default props', (): void => {
+    describe('Props', () => {
+        it('should use default props', () => {
             const { buttonRoot } = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach(
-                (prop: string): void => {
-                    if (prop === 'buttonRef') {
-                        return;
-                    }
-
-                    expect(buttonRoot).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: _getDefaultPropValue({ prop }) }),
-                    );
-                },
-            );
+            const actualProps = buttonRoot.props() as ButtonProps;
+            expect(actualProps.variant).toEqual('button');
+            for (const [propName, propValue] of Object.entries(DEFAULT_PROPS)) {
+                expect(actualProps[propName]).toEqual(propValue);
+            }
         });
 
-        it('should use the given props', (): void => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
-                // tslint:disable-next-line: no-any
-                color: fake((fakeData: any): string => fakeData.commerce.color()),
-                emphasis: oneOf(...without(Object.values(ButtonEmphasis), DEFAULT_PROPS.emphasis)),
-                leftIcon: oneOf(mdiPlus, mdiCheck),
-                size: oneOf(...without(Object.values(Size), DEFAULT_PROPS.size)),
-                theme: oneOf(...without(Object.values(Theme), DEFAULT_PROPS.theme)),
-                variant: ButtonVariant.icon,
-            });
-
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
-
-            let { buttonRoot } = setup({ children: null, ...modifiedProps });
-
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    if (prop === 'leftIcon' || prop === 'rightIcon') {
-                        return;
-                    }
-
-                    if (prop === 'theme') {
-                        expect(buttonRoot).not.toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] as string }),
-                        );
-                    } else {
-                        expect(buttonRoot).toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                        );
-                    }
-                },
-            );
-
-            /////////////////////////////
-
-            delete modifiedProps.leftIcon;
-            modifiedProps.rightIcon = mdiChevronDown;
-
-            ({ buttonRoot } = setup({ children: null, ...modifiedProps }));
-
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    if (prop === 'leftIcon' || prop === 'rightIcon') {
-                        return;
-                    }
-
-                    if (prop === 'theme') {
-                        expect(buttonRoot).not.toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] as string }),
-                        );
-                    } else {
-                        expect(buttonRoot).toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                        );
-                    }
-                },
-            );
-
-            /////////////////////////////
-
-            modifiedProps.emphasis = ButtonEmphasis.high;
-            modifiedProps.variant = ButtonVariant.button;
-
-            ({ buttonRoot } = setup({ ...modifiedProps }));
-
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    if (prop === 'leftIcon' || prop === 'rightIcon') {
-                        return;
-                    }
-
-                    expect(buttonRoot).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                },
-            );
-
-            /////////////////////////////
-
-            delete modifiedProps.rightIcon;
-
-            ({ buttonRoot } = setup({ ...modifiedProps }));
-
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    if (prop === 'leftIcon' || prop === 'rightIcon') {
-                        return;
-                    }
-
-                    expect(buttonRoot).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                },
-            );
-
-            /////////////////////////////
-
-            delete modifiedProps.leftIcon;
-            modifiedProps.rightIcon = mdiChevronDown;
-
-            ({ buttonRoot } = setup({ ...modifiedProps }));
-
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    if (prop === 'leftIcon' || prop === 'rightIcon') {
-                        return;
-                    }
-
-                    expect(buttonRoot).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                },
-            );
-        });
-
-        it("should not have any `theme` in 'low' or 'medium' `emphasis` but one in 'high'", (): void => {
-            let { buttonRoot } = setup({ emphasis: ButtonEmphasis.high });
-
-            expect(buttonRoot.prop('className') as string).toContain(
-                getBasicClass({ prefix: CLASSNAME, type: 'theme', value: '' }),
-            );
-
-            /////////////////////////////
-
-            ({ buttonRoot } = setup({ emphasis: ButtonEmphasis.medium }));
-
-            expect(buttonRoot.prop('className') as string).not.toContain(
-                getBasicClass({ prefix: CLASSNAME, type: 'theme', value: '' }),
-            );
-
-            /////////////////////////////
-
-            ({ buttonRoot } = setup({ emphasis: ButtonEmphasis.low }));
-
-            expect(buttonRoot.prop('className') as string).not.toContain(
-                getBasicClass({ prefix: CLASSNAME, type: 'theme', value: '' }),
-            );
-        });
-
-        it('should forward any CSS class with icon(s)', (): void => {
-            const modifiedProps: ISetupProps = {
+        it('should forward any CSS class', (): void => {
+            const props: Partial<ButtonProps> = {
                 className: 'component component--is-tested',
             };
+            const { wrapper, buttonRoot } = setup(props);
+            expect(wrapper).toMatchSnapshot();
 
-            let { buttonRoot } = setup({ leftIcon: mdiPlus, ...modifiedProps });
+            expect(buttonRoot).toHaveClassName(props.className);
+        });
 
-            expect(buttonRoot).toHaveClassName(modifiedProps.className);
+        it('should use the given props for class names', () => {
+            const props: Partial<ButtonProps> = {
+                leftIcon: mdiChevronDown,
+                rightIcon: mdiPlus,
+            };
+            const { wrapper, buttonRoot } = setup(props);
+            expect(wrapper).toMatchSnapshot();
 
-            /////////////////////////////
-
-            ({ buttonRoot } = setup({ rightIcon: mdiChevronDown, ...modifiedProps }));
-
-            expect(buttonRoot).toHaveClassName(modifiedProps.className);
-
-            /////////////////////////////
-
-            ({ buttonRoot } = setup({ leftIcon: mdiPlus, rightIcon: mdiChevronDown, ...modifiedProps }));
-
-            expect(buttonRoot).toHaveClassName(modifiedProps.className);
+            expect(buttonRoot).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasLeftIcon', value: true }));
+            expect(buttonRoot).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: true }));
         });
     });
 
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        beforeEach(
-            (): void => {
-                try {
-                    /*
-                     * If `console.warn` or `console.info` has been mocked at least one, this exists. So disable TS
-                     * here.
-                     */
-
-                    // @ts-ignore
-                    global.console.warn.mockRestore();
-                    // @ts-ignore
-                    global.console.info.mockRestore();
-                } catch (exception) {
-                    // Nothing to do here.
-                }
-            },
-        );
-
-        it("should fail when no child nor icons is given in the 'button' `variant`", (): void => {
-            expect(
-                (): void => {
-                    setup({ children: null });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it("should fail when 2 icons are given without a label in the 'button' `variant`", (): void => {
-            expect(
-                (): void => {
-                    setup({ children: null, leftIcon: mdiPlus, rightIcon: mdiChevronDown });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it("should fail when a label is given in the 'icon' `variant`", (): void => {
-            expect(
-                (): void => {
-                    setup({ leftIcon: mdiPlus, variant: ButtonVariant.icon });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it("should fail when more than 1 icon is given in the 'icon' `variant`", (): void => {
-            expect(
-                (): void => {
-                    setup({
-                        children: null,
-                        leftIcon: mdiPlus,
-                        rightIcon: mdiChevronDown,
-                        variant: ButtonVariant.icon,
-                    });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it("should inform the user when rendering an icon button with the 'button' `variant`", (): void => {
-            global.console.info = jest.fn();
-
-            setup({ children: null, leftIcon: mdiPlus });
-            expect(global.console.info).toHaveBeenCalled();
-
-            /////////////////////////////
-
-            // @ts-ignore
-            global.console.info.mockClear();
-
-            setup({ children: null, rightIcon: mdiChevronDown });
-            expect(global.console.info).toHaveBeenCalled();
-        });
-
-        it("should not inform the user when rendering an icon button with the 'icon' `variant`", (): void => {
-            global.console.info = jest.fn();
-
-            setup({ children: null, leftIcon: mdiPlus, variant: ButtonVariant.icon });
-            expect(global.console.info).not.toHaveBeenCalled();
-
-            /////////////////////////////
-
-            // @ts-ignore
-            global.console.info.mockClear();
-
-            setup({ children: null, rightIcon: mdiChevronDown, variant: ButtonVariant.icon });
-            expect(global.console.info).not.toHaveBeenCalled();
-        });
-
-        it("should have no `theme` in any other `emphasis` than 'high'", (): void => {
-            let modifiedProps: ISetupProps = {
-                emphasis: ButtonEmphasis.high,
-            };
-
-            let { buttonRoot } = setup(modifiedProps);
-            expect(buttonRoot).toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: 'theme', value: DEFAULT_PROPS.theme }),
-            );
-
-            /////////////////////////////
-
-            modifiedProps = {
-                emphasis: ButtonEmphasis.medium,
-            };
-
-            ({ buttonRoot } = setup(modifiedProps));
-            expect(buttonRoot).not.toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: 'theme', value: DEFAULT_PROPS.theme }),
-            );
-
-            /////////////////////////////
-
-            modifiedProps = {
-                emphasis: ButtonEmphasis.low,
-            };
-
-            ({ buttonRoot } = setup(modifiedProps));
-            expect(buttonRoot).not.toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: 'theme', value: DEFAULT_PROPS.theme }),
-            );
-        });
-
-        it('should only have the "left-icon" CSS class when a left icon is passed in a \'button\' `variant`', (): void => {
-            const { buttonRoot } = setup({ leftIcon: mdiPlus });
-            expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-left-icon`);
-            expect(buttonRoot).not.toHaveClassName(`${CLASSNAME}--has-right-icon`);
-        });
-
-        it('should only have the "right-icon" CSS class when a right icon is passed in a \'button\' `variant`', (): void => {
-            const { buttonRoot } = setup({ rightIcon: mdiChevronDown });
-            expect(buttonRoot).not.toHaveClassName(`${CLASSNAME}--has-left-icon`);
-            expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-right-icon`);
-        });
-
-        it('should have both "left-icon" and "right-icon" CSS classes when both left and right icons are passed in a \'button\' `variant`', (): void => {
-            const { buttonRoot } = setup({ leftIcon: mdiPlus, rightIcon: mdiChevronDown });
-            expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-left-icon`);
-            expect(buttonRoot).toHaveClassName(`${CLASSNAME}--has-right-icon`);
-        });
+    describe('Conditions', () => {
+        // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'buttonRoot', prop: 'buttonRoot' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { prop: 'buttonRoot' }, { className: CLASSNAME });
 });

@@ -1,35 +1,21 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
-import classNames from 'classnames';
-
-import isEmpty from 'lodash/isEmpty';
-
+import { Emphasis, Icon, Size, Theme } from 'LumX';
+import { BaseButtonProps, ButtonRoot } from 'LumX/components/button/react/ButtonRoot';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
-
-import { Button, ButtonProps, ButtonVariant } from './Button';
+import { getRootClassName } from 'LumX/core/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IProps extends ButtonProps {
+interface IProps extends BaseButtonProps {
     /**
-     * The icon.
+     * The icon used as the button label.
+     * @see {@link IconProps#icon}
      */
     icon: string;
-
-    /**
-     * Don't allow usage of `leftIcon` or `rightIcon` and use `icon` instead.
-     */
-    leftIcon?: never;
-    rightIcon?: never;
-
-    /**
-     * The <IconButton> should never have the `variant` prop as this prop is forced to 'icon' in the <Button>.
-     */
-    variant?: never;
 }
 type IconButtonProps = IProps;
 
@@ -59,102 +45,32 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Globally validate the component after transforming and/or validating the children.
- *
- * @param params The children, their number and the props of the component.
- * @return     If a string, the error message.
- *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
- *                              lead to throw a basic error message).
- *                              You can also return nothing if there is no special problem (i.e. a successful
- *                              validation).
- */
-function _postValidate({ props }: ValidateParameters): string | boolean | void {
-    if (!isEmpty(props.variant)) {
-        console.warn(
-            `You shouldn't pass the \`variant\` prop in a <${COMPONENT_NAME}> as it's forced to 'icon' (got '${
-                props.variant
-            }')!`,
-        );
-    }
-
-    return true;
-}
-
-/**
- * Globally validate the component before transforming and/or validating the children.
- *
- * @param params The children, their number and the props of the component.
- * @return     If a string, the error message.
- *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
- *                              lead to throw a basic error message).
- *                              You can also return nothing if there is no special problem (i.e. a successful
- *                              validation).
- */
-function _preValidate({ props }: ValidateParameters): string | boolean | void {
-    if (!isEmpty(props.leftIcon)) {
-        return `You must use the \`icon\` prop of <${COMPONENT_NAME}> instead of \`leftIcon\`!`;
-    }
-
-    if (!isEmpty(props.rightIcon)) {
-        return `You must use the \`icon\` prop of <${COMPONENT_NAME}> instead of \`rightIcon\`!`;
-    }
-
-    if (isEmpty(props.icon)) {
-        return `You must have an \`icon\` in a <${COMPONENT_NAME}>!`;
-    }
-}
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param props The children and props of the component.
- * @return The processed children of the component.
- */
-function _validate(props: IconButtonProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        maxChildren: 0,
-        postValidate: _postValidate,
-        preValidate: _preValidate,
-        props,
-    });
-}
+const DEFAULT_PROPS: IDefaultPropsType = {
+    emphasis: Emphasis.high,
+    size: Size.m,
+    theme: Theme.light,
+};
 
 /////////////////////////////
 
 /**
  * Displays an icon button.
- * It's like a <Button> but only displays an icon instead of a label in the body of the button.
- *
- * Note that you cannot use the `variant` prop in this component.
- *
- * @see {@link Button} for more information on <Button>.
  *
  * @return The component.
  */
-const IconButton: React.FC<IconButtonProps> = ({
-    children,
-    className = '',
-    icon,
-    // @ts-ignore
-    leftIcon = '',
-    // @ts-ignore
-    rightIcon = '',
-    ...props
-}: IconButtonProps): ReactElement => {
-    _validate({ children, icon, leftIcon, rightIcon, ...props });
+const IconButton: React.FC<IconButtonProps> = (props: IconButtonProps): ReactElement => {
+    const {
+        emphasis = DEFAULT_PROPS.emphasis,
+        icon,
+        size = DEFAULT_PROPS.size,
+        theme = DEFAULT_PROPS.theme,
+        ...forwardedProps
+    } = props;
 
     return (
-        <Button className={classNames(className, CLASSNAME)} {...props} leftIcon={icon} variant={ButtonVariant.icon} />
+        <ButtonRoot {...{ emphasis, size, theme, ...forwardedProps }} variant="icon">
+            <Icon icon={icon} />
+        </ButtonRoot>
     );
 };
 IconButton.displayName = COMPONENT_NAME;

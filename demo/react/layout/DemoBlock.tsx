@@ -1,4 +1,4 @@
-import { Button, ButtonEmphasis, Switch, SwitchPosition, Theme } from 'LumX';
+import { Button, Emphasis, Switch, SwitchPosition, Theme } from 'LumX';
 import { mdiCodeTags } from 'LumX/icons';
 import classNames from 'classnames';
 import React, { ReactChild, ReactElement, useState } from 'react';
@@ -36,7 +36,7 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">
-                    <Button emphasis={ButtonEmphasis.low} leftIcon={mdiCodeTags} onClick={toggleShowCode}>
+                    <Button emphasis={Emphasis.low} leftIcon={mdiCodeTags} onClick={toggleShowCode}>
                         {showCode ? 'Hide code' : 'Show code'}
                     </Button>
                 </div>

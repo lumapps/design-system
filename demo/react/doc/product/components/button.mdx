@@ -1,13 +1,16 @@
 ```javascript import
 import {
+    Alignment,
     Button,
-    ButtonEmphasis,
+    ButtonGroup,
     ColorPalette,
-    DropdownButton,
+    Emphasis,
+    Grid,
     IconButton,
     List,
     ListItem,
     ListItemSize,
+    Orientation,
     Size,
     Theme,
 } from 'LumX';
@@ -27,41 +30,24 @@ There should not be more than one high emphasis button in a view.
 (theme) => (
     <>
         <Button theme={theme}>Default</Button>
-        <Button disabled={true} theme={theme}>
+
+        <Button disabled theme={theme}>
             Disabled
         </Button>
+
         <Button leftIcon={mdiPencil} theme={theme}>
             With Icon
         </Button>
-        <DropdownButton
-            dropdown={
-                <List isClickable>
-                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                </List>
-            }
-            theme={theme}
-        >
+
+        <Button rightIcon={mdiMenuDown} theme={theme}>
             Dropdown
-        </DropdownButton>
-        <DropdownButton
-            dropdown={
-                <List isClickable>
-                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                </List>
-            }
-            splitted={true}
-            theme={theme}
-        >
-            Split
-        </DropdownButton>
+        </Button>
+
+        <ButtonGroup>
+            <Button theme={theme}>Split</Button>
+            <IconButton icon={mdiMenuDown} theme={theme}/>
+        </ButtonGroup>
+
         <IconButton icon={mdiPlus} theme={theme} />
     </>
 );
@@ -74,59 +60,38 @@ Use medium emphasis for secondary actions.
 ```javascript jsx withThemeSwitcher
 (theme) => (
     <>
-        <Button emphasis={ButtonEmphasis.medium} color={theme === Theme.dark ? 'light' : undefined} theme={theme}>
+        <Button emphasis={Emphasis.medium} color={theme === Theme.dark ? 'light' : undefined} theme={theme}>
             Default
         </Button>
+
         <Button
-            disabled={true}
-            emphasis={ButtonEmphasis.medium}
+            disabled
+            emphasis={Emphasis.medium}
             color={theme === Theme.dark ? 'light' : undefined}
             theme={theme}
         >
             Disabled
         </Button>
+
         <Button
             leftIcon={mdiPencil}
-            emphasis={ButtonEmphasis.medium}
+            emphasis={Emphasis.medium}
             color={theme === Theme.dark ? 'light' : undefined}
             theme={theme}
         >
             With Icon
         </Button>
-        <DropdownButton
-            dropdown={
-                <List isClickable>
-                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                </List>
-            }
-            emphasis={ButtonEmphasis.medium}
-            color={theme === Theme.dark ? 'light' : undefined}
-            theme={theme}
-        >
+
+        <Button rightIcon={mdiMenuDown} emphasis={Emphasis.medium} theme={theme}>
             Dropdown
-        </DropdownButton>
-        <DropdownButton
-            dropdown={
-                <List isClickable>
-                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                </List>
-            }
-            emphasis={ButtonEmphasis.medium}
-            splitted={true}
-            color={theme === Theme.dark ? 'light' : undefined}
-            theme={theme}
-        >
-            Split
-        </DropdownButton>
-        <IconButton emphasis={ButtonEmphasis.medium} icon={mdiPlus} theme={theme} />
+        </Button>
+
+        <ButtonGroup>
+            <Button emphasis={Emphasis.medium} theme={theme}>Split</Button>
+            <IconButton emphasis={Emphasis.medium} icon={mdiMenuDown} theme={theme}/>
+        </ButtonGroup>
+
+        <IconButton emphasis={Emphasis.medium} icon={mdiPlus} theme={theme} />
     </>
 );
 ```
@@ -139,42 +104,33 @@ Alternatively, use low emphasis when there is only one level of priority.
 ```javascript jsx withThemeSwitcher
 (theme) => (
     <>
-        <Button emphasis={ButtonEmphasis.low} color={theme === Theme.dark ? 'light' : undefined} theme={theme}>
+        <Button emphasis={Emphasis.low} color={theme === Theme.dark ? 'light' : undefined} theme={theme}>
             Default
         </Button>
+
         <Button
-            disabled={true}
-            emphasis={ButtonEmphasis.low}
+            disabled
+            emphasis={Emphasis.low}
             color={theme === Theme.dark ? 'light' : undefined}
             theme={theme}
         >
             Disabled
         </Button>
+
         <Button
             leftIcon={mdiPencil}
-            emphasis={ButtonEmphasis.low}
+            emphasis={Emphasis.low}
             color={theme === Theme.dark ? 'light' : undefined}
             theme={theme}
         >
             With Icon
         </Button>
-        <DropdownButton
-            dropdown={
-                <List isClickable>
-                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                </List>
-            }
-            emphasis={ButtonEmphasis.low}
-            color={theme === Theme.dark ? 'light' : undefined}
-            theme={theme}
-        >
+
+        <Button rightIcon={mdiMenuDown} emphasis={Emphasis.low} theme={theme}>
             Dropdown
-        </DropdownButton>
-        <IconButton emphasis={ButtonEmphasis.low} icon={mdiPlus} theme={theme} />
+        </Button>
+
+        <IconButton emphasis={Emphasis.low} icon={mdiPlus} theme={theme} />
     </>
 );
 ```
@@ -190,57 +146,40 @@ Use small size when space is a constraint.
             <Button size={Size.s} theme={theme}>
                 Default
             </Button>
-            <Button disabled={true} size={Size.s} theme={theme}>
+
+            <Button disabled size={Size.s} theme={theme}>
                 Disabled
             </Button>
+
             <Button leftIcon={mdiPencil} size={Size.s} theme={theme}>
                 With Icon
             </Button>
-            <DropdownButton
-                dropdown={
-                    <List isClickable>
-                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                    </List>
-                }
-                size={Size.s}
-                theme={theme}
-            >
+
+            <Button rightIcon={mdiMenuDown} size={Size.s} theme={theme}>
                 Dropdown
-            </DropdownButton>
-            <DropdownButton
-                dropdown={
-                    <List isClickable>
-                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                    </List>
-                }
-                size={Size.s}
-                splitted={true}
-                theme={theme}
-            >
-                Split
-            </DropdownButton>
+            </Button>
+
+            <ButtonGroup>
+                <Button size={Size.s} theme={theme}>Split</Button>
+                <IconButton size={Size.s} icon={mdiMenuDown} theme={theme}/>
+            </ButtonGroup>
+
             <IconButton icon={mdiPlus} size={Size.s} theme={theme} />
         </div>
+
         <div className="demo-grid lumx-spacing-margin-bottom-big">
             <Button
-                emphasis={ButtonEmphasis.medium}
+                emphasis={Emphasis.medium}
                 size={Size.s}
                 color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
             >
                 Default
             </Button>
+
             <Button
-                disabled={true}
-                emphasis={ButtonEmphasis.medium}
+                disabled
+                emphasis={Emphasis.medium}
                 size={Size.s}
                 color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
@@ -248,7 +187,7 @@ Use small size when space is a constraint.
                 Disabled
             </Button>
             <Button
-                emphasis={ButtonEmphasis.medium}
+                emphasis={Emphasis.medium}
                 leftIcon={mdiPencil}
                 size={Size.s}
                 color={theme === Theme.dark ? 'light' : undefined}
@@ -256,69 +195,47 @@ Use small size when space is a constraint.
             >
                 With Icon
             </Button>
-            <DropdownButton
-                dropdown={
-                    <List isClickable>
-                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                    </List>
-                }
-                emphasis={ButtonEmphasis.medium}
-                size={Size.s}
-                color={theme === Theme.dark ? 'light' : undefined}
-                theme={theme}
-            >
+
+            <Button emphasis={Emphasis.medium} rightIcon={mdiMenuDown} size={Size.s} theme={theme}>
                 Dropdown
-            </DropdownButton>
-            <DropdownButton
-                dropdown={
-                    <List isClickable>
-                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                    </List>
-                }
-                emphasis={ButtonEmphasis.medium}
-                size={Size.s}
-                splitted={true}
-                color={theme === Theme.dark ? 'light' : undefined}
-                theme={theme}
-            >
-                Split
-            </DropdownButton>
+            </Button>
+
+            <ButtonGroup>
+                <Button emphasis={Emphasis.medium} size={Size.s} theme={theme}>Split</Button>
+                <IconButton emphasis={Emphasis.medium} icon={mdiMenuDown} size={Size.s} theme={theme}/>
+            </ButtonGroup>
+
             <IconButton
                 icon={mdiPlus}
-                emphasis={ButtonEmphasis.medium}
+                emphasis={Emphasis.medium}
                 size={Size.s}
                 color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
             />
         </div>
+
         <div className="demo-grid">
             <Button
-                emphasis={ButtonEmphasis.low}
+                emphasis={Emphasis.low}
                 size={Size.s}
                 color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
             >
                 Default
             </Button>
+
             <Button
-                disabled={true}
-                emphasis={ButtonEmphasis.low}
+                disabled
+                emphasis={Emphasis.low}
                 size={Size.s}
                 color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
             >
                 Disabled
             </Button>
+
             <Button
-                emphasis={ButtonEmphasis.low}
+                emphasis={Emphasis.low}
                 leftIcon={mdiPencil}
                 size={Size.s}
                 color={theme === Theme.dark ? 'light' : undefined}
@@ -326,26 +243,14 @@ Use small size when space is a constraint.
             >
                 With Icon
             </Button>
-            <DropdownButton
-                dropdown={
-                    <List isClickable>
-                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
-                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
-                    </List>
-                }
-                emphasis={ButtonEmphasis.low}
-                size={Size.s}
-                color={theme === Theme.dark ? 'light' : undefined}
-                theme={theme}
-            >
+
+            <Button emphasis={Emphasis.low} rightIcon={mdiMenuDown} size={Size.s} theme={theme}>
                 Dropdown
-            </DropdownButton>
+            </Button>
+
             <IconButton
                 icon={mdiPlus}
-                emphasis={ButtonEmphasis.low}
+                emphasis={Emphasis.low}
                 size={Size.s}
                 color={theme === Theme.dark ? 'light' : undefined}
                 theme={theme}
@@ -354,3 +259,8 @@ Use small size when space is a constraint.
     </>
 );
 ```
+
+
+### Properties
+
+<PropTable component="Button" />

@@ -1,17 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<IconButton> Conditions should fail when any child is given 1`] = `"<IconButton> shouldn't have any child (got 1)!"`;
-
-exports[`<IconButton> Conditions should fail when no \`icon\` are given 1`] = `"Pre-validation of <IconButton> failed: 'You must have an \`icon\` in a <IconButton>!'."`;
-
-exports[`<IconButton> Conditions should fail when using \`leftIcon\` instead of \`icon\` 1`] = `"Pre-validation of <IconButton> failed: 'You must use the \`icon\` prop of <IconButton> instead of \`leftIcon\`!'."`;
-
-exports[`<IconButton> Conditions should fail when using \`rightIcon\` instead of \`icon\` 1`] = `"Pre-validation of <IconButton> failed: 'You must use the \`icon\` prop of <IconButton> instead of \`rightIcon\`!'."`;
-
-exports[`<IconButton> Snapshots and structure should render correctly an icon button 1`] = `
-<Button
-  className="lumx-icon-button"
-  leftIcon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+exports[`<IconButton> Props should forward any CSS class 1`] = `
+<ButtonRoot
+  className="component component--is-tested"
+  emphasis="high"
+  size="m"
+  theme="light"
   variant="icon"
-/>
+>
+  <Icon />
+</ButtonRoot>
+`;
+
+exports[`<IconButton> Props should use default props 1`] = `
+<ButtonRoot
+  emphasis="high"
+  size="m"
+  theme="light"
+  variant="icon"
+>
+  <Icon />
+</ButtonRoot>
+`;
+
+exports[`<IconButton> Snapshots and structure should render icon button 1`] = `
+<ButtonRoot
+  emphasis="high"
+  size="m"
+  theme="light"
+  variant="icon"
+>
+  <Icon />
+</ButtonRoot>
 `;

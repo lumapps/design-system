@@ -3,7 +3,7 @@ import React, { Children, PropsWithChildren, ReactElement, ReactNode, useEffect,
 import classNames from 'classnames';
 
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
-import { Button, ButtonEmphasis, ButtonVariant, ColorPalette, DragHandle, Theme } from 'LumX';
+import { ColorPalette, DragHandle, Emphasis, IconButton, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { Callback, IGenericProps, getRootClassName, isComponent, partitionMulti } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -145,12 +145,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
                 </div>
 
                 <div className={`${CLASSNAME}__header-toggle`}>
-                    <Button
-                        color={color}
-                        emphasis={ButtonEmphasis.low}
-                        variant={ButtonVariant.icon}
-                        leftIcon={isOpen ? mdiChevronUp : mdiChevronDown}
-                    />
+                    <IconButton color={color} emphasis={Emphasis.low} icon={isOpen ? mdiChevronUp : mdiChevronDown} />
                 </div>
             </header>
 

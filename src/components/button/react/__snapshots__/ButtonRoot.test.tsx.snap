@@ -1,17 +1,116 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ButtonRoot> Conditions should fail when no child is given 1`] = `"<ButtonRoot> must have at least 1 child (got 0)!"`;
-
-exports[`<ButtonRoot> Snapshots and structure should render correctly as a button 1`] = `
-<button>
-  Label
-</button>
+exports[`<ButtonRoot> Props should not have default color in low or medium emphasis 1`] = `
+<ButtonRoot
+  emphasis="low"
+>
+  <button
+    className="lumx-button lumx-button--color-dark lumx-button--emphasis-low"
+  />
+</ButtonRoot>
 `;
 
-exports[`<ButtonRoot> Snapshots and structure should render correctly as a link 1`] = `
-<a
-  href="https://www.lumapps.com"
+exports[`<ButtonRoot> Props should use given props 1`] = `
+<ButtonRoot
+  color="red"
+  hasBackground={true}
+  size="s"
+  theme="dark"
+  variant="icon"
 >
-  Label
-</a>
+  <div
+    className="lumx-button-wrapper lumx-button-wrapper--color-red lumx-button-wrapper--variant-icon"
+  >
+    <ButtonRoot
+      color="red"
+      hasBackground={false}
+      size="s"
+      theme="dark"
+      variant="icon"
+    >
+      <button
+        className="lumx-button lumx-button--color-red lumx-button--size-s lumx-button--theme-dark lumx-button--variant-icon"
+      />
+    </ButtonRoot>
+  </div>
+</ButtonRoot>
+`;
+
+exports[`<ButtonRoot> Props should use primary color as default 1`] = `
+<ButtonRoot>
+  <button
+    className="lumx-button lumx-button--color-primary"
+  />
+</ButtonRoot>
+`;
+
+exports[`<ButtonRoot> Snapshots and structure should render anchor button with label 1`] = `
+<ButtonRoot
+  href="example.com"
+  target="_blank"
+>
+  <a
+    className="lumx-button lumx-button--color-primary"
+    href="example.com"
+    target="_blank"
+  >
+    Label
+  </a>
+</ButtonRoot>
+`;
+
+exports[`<ButtonRoot> Snapshots and structure should render anchor button with wrapper and label 1`] = `
+<ButtonRoot
+  hasBackground={true}
+  href="example.com"
+  target="_blank"
+>
+  <div
+    className="lumx-button-wrapper"
+  >
+    <ButtonRoot
+      hasBackground={false}
+      href="example.com"
+      target="_blank"
+    >
+      <a
+        className="lumx-button lumx-button--color-primary"
+        href="example.com"
+        target="_blank"
+      >
+        Label
+      </a>
+    </ButtonRoot>
+  </div>
+</ButtonRoot>
+`;
+
+exports[`<ButtonRoot> Snapshots and structure should render button with label 1`] = `
+<ButtonRoot>
+  <button
+    className="lumx-button lumx-button--color-primary"
+  >
+    Label
+  </button>
+</ButtonRoot>
+`;
+
+exports[`<ButtonRoot> Snapshots and structure should render button with wrapper and label 1`] = `
+<ButtonRoot
+  hasBackground={true}
+>
+  <div
+    className="lumx-button-wrapper"
+  >
+    <ButtonRoot
+      hasBackground={false}
+    >
+      <button
+        className="lumx-button lumx-button--color-primary"
+      >
+        Label
+      </button>
+    </ButtonRoot>
+  </div>
+</ButtonRoot>
 `;

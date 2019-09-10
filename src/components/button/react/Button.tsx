@@ -1,98 +1,52 @@
 import React, { ReactElement, ReactNode } from 'react';
 
-import classNames from 'classnames';
-
-import isEmpty from 'lodash/isEmpty';
-
-import { Color, ColorPalette, Icon, IconButton, Size, Theme } from 'LumX';
-import { ComplexPropDefault, Emphasis } from 'LumX/components';
+import { Emphasis, Icon, Size, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, Omit, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
-
-import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
+import { getRootClassName } from 'LumX/core/react/utils';
+import { getBasicClass } from 'LumX/core/utils';
+import classNames from 'classnames';
+import isEmpty from 'lodash/isEmpty';
+import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /////////////////////////////
 
 /**
  * The authorized values for the `emphasis` prop.
+ * @deprecated Use Emphasis instead.
  */
 const ButtonEmphasis = Emphasis;
-
-/**
- * The authorized values for the `size` prop.
- */
-type ButtonSize = Size.s | Size.m;
-
-/**
- * The authorized values for the `variant` prop.
- */
-enum ButtonVariant {
-    button = 'button',
-    icon = 'icon',
-}
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IButtonProps extends IGenericProps {
+interface IProps extends BaseButtonProps {
     /**
-     * Button reference to handle focus.
+     * Button content.
      */
-    buttonRef?: React.RefObject<ButtonRoot>;
+    children: ReactNode;
 
     /**
-     * The label.
-     */
-    children?: ReactNode;
-
-    /**
-     * The color.
-     */
-    color?: Color;
-
-    /**
-     * The emphasis.
-     */
-    emphasis?: Emphasis;
-
-    /**
-     * The icon that comes before the label.
+     * Adds an icon to the left of the button label.
+     * @see {@link IconProps#icon}
      */
     leftIcon?: string;
 
     /**
-     * The icon that comes after the label.
+     * Adds an icon to the right of the button label.
+     * @see {@link IconProps#icon}
      */
     rightIcon?: string;
-
-    /**
-     * The size.
-     */
-    size?: ButtonSize;
-
-    /**
-     * The theme.
-     */
-    theme?: Theme;
-
-    /**
-     * The variant.
-     */
-    variant?: ButtonVariant;
 }
-type ButtonProps = IButtonProps & ButtonRootProps;
+type ButtonProps = IProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<Omit<ButtonProps, 'color'>> {
-    color: ComplexPropDefault<Color>;
-}
+interface IDefaultPropsType extends Partial<ButtonProps> {}
 
 /////////////////////////////
 //                         //
@@ -114,89 +68,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    buttonRef: undefined,
-    color: {
-        default: ColorPalette.dark,
-        [`emphasis-${ButtonEmphasis.high}`]: ColorPalette.primary,
-    },
-    emphasis: ButtonEmphasis.high,
+    emphasis: Emphasis.high,
     size: Size.m,
     theme: Theme.light,
-    variant: ButtonVariant.button,
 };
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Globally validate the component after transforming and/or validating the children.
- *
- * @param params The children, their number and the props of the component.
- * @return     If a string, the error message.
- *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
- *                              lead to throw a basic error message).
- *                              You can also return nothing if there is no special problem (i.e. a successful
- *                              validation).
- */
-function _postValidate({ childrenCount, props }: ValidateParameters): string | boolean | void {
-    if (
-        props.variant === ButtonVariant.button &&
-        (!isEmpty(props.leftIcon) || !isEmpty(props.rightIcon)) &&
-        childrenCount === 0
-    ) {
-        console.info(
-            `If you want to display an icon button, maybe you should use the 'icon' \`variant\` of the <${COMPONENT_NAME}> instead of the 'button' \`variant\`\nYou should even consider using the <${IconButton.displayName}> component instead.`,
-        );
-    }
-
-    return true;
-}
-/**
- * Globally validate the component before transforming and/or validating the children.
- *
- * @param params The children, their number and the props of the component.
- * @return     If a string, the error message.
- *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
- *                              lead to throw a basic error message).
- *                              You can also return nothing if there is no special problem (i.e. a successful
- *                              validation).
- */
-function _preValidate({ childrenCount, props }: ValidateParameters): string | boolean | void {
-    if (!isEmpty(props.leftIcon) && !isEmpty(props.rightIcon)) {
-        if (props.variant === ButtonVariant.icon) {
-            return `You cannot have 2 icons in a 'icon' \`variant\` of <${COMPONENT_NAME}>, You can only have one icon!`;
-        }
-
-        if (childrenCount === 0) {
-            return `You cannot have only 2 icons in a 'button' \`variant\` of <${COMPONENT_NAME}>, you must also provide a label!`;
-        }
-    }
-
-    if (isEmpty(props.leftIcon) && isEmpty(props.rightIcon) && childrenCount === 0) {
-        return `You should have at least a text or <span> label or an icon in a 'button' \`variant\` of <${COMPONENT_NAME}>";`;
-    }
-
-    return true;
-}
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param     props The children and props of the component.
- * @return The processed children of the component.
- */
-function _validate(props: ButtonProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        maxChildren: props.variant === ButtonVariant.icon ? 0 : undefined,
-        postValidate: _postValidate,
-        preValidate: _preValidate,
-        props,
-    });
-}
 
 /////////////////////////////
 
@@ -206,66 +81,29 @@ function _validate(props: ButtonProps): ReactNode {
  *
  * @return The component.
  */
-const Button: React.FC<ButtonProps> = ({
-    buttonRef = DEFAULT_PROPS.buttonRef,
-    children,
-    className = '',
-    color,
-    emphasis = DEFAULT_PROPS.emphasis,
-    leftIcon,
-    rightIcon,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
-    variant = DEFAULT_PROPS.variant,
-    ...props
-}: ButtonProps): ReactElement => {
-    const newChildren: ReactNode = _validate({
+const Button: React.FC<ButtonProps> = (props: ButtonProps): ReactElement => {
+    const {
+        className,
         children,
-        color,
-        emphasis,
+        emphasis = DEFAULT_PROPS.emphasis,
         leftIcon,
         rightIcon,
-        size,
-        theme,
-        variant,
-        ...props,
-    });
+        size = DEFAULT_PROPS.size,
+        theme = DEFAULT_PROPS.theme,
+        ...forwardedProps
+    } = props;
 
-    if (variant === ButtonVariant.button) {
-        if (!isEmpty(leftIcon)) {
-            className += isEmpty(className) ? '' : ' ';
-            className += `${CLASSNAME}--has-left-icon`;
-        }
-
-        if (!isEmpty(rightIcon)) {
-            className += isEmpty(className) ? '' : ' ';
-            className += `${CLASSNAME}--has-right-icon`;
-        }
-    }
-
-    if (isEmpty(color)) {
-        color = DEFAULT_PROPS.color[`emphasis-${emphasis}`] || DEFAULT_PROPS.color.default;
-    }
+    const buttonClassName = classNames(
+        className,
+        getBasicClass({ prefix: CLASSNAME, type: 'hasLeftIcon', value: !isEmpty(leftIcon) }),
+        getBasicClass({ prefix: CLASSNAME, type: 'hasRightIcon', value: !isEmpty(rightIcon) }),
+    );
 
     return (
-        <ButtonRoot
-            buttonRef={buttonRef}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    color,
-                    emphasis,
-                    prefix: CLASSNAME,
-                    size,
-                    theme: emphasis === ButtonEmphasis.high ? theme : undefined,
-                    variant,
-                }),
-            )}
-            {...props}
-        >
-            {leftIcon !== undefined && !isEmpty(leftIcon) && <Icon icon={leftIcon} />}
-            {newChildren && <span>{newChildren}</span>}
-            {rightIcon !== undefined && !isEmpty(rightIcon) && <Icon icon={rightIcon} />}
+        <ButtonRoot {...{ emphasis, size, theme, ...forwardedProps }} className={buttonClassName} variant="button">
+            {leftIcon && !isEmpty(leftIcon) && <Icon icon={leftIcon} />}
+            {children && <span>{children}</span>}
+            {rightIcon && !isEmpty(rightIcon) && <Icon icon={rightIcon} />}
         </ButtonRoot>
     );
 };
@@ -273,4 +111,4 @@ Button.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ButtonEmphasis, Button, ButtonProps, ButtonVariant };
+export { CLASSNAME, DEFAULT_PROPS, ButtonEmphasis, Button, ButtonProps };

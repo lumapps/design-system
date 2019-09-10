@@ -6,7 +6,7 @@ export * from './components';
 
 export { Avatar, AvatarProps } from './components/avatar/react/Avatar';
 
-export { Button, ButtonProps, ButtonEmphasis, ButtonVariant } from './components/button/react/Button';
+export { Button, ButtonEmphasis, ButtonProps } from './components/button/react/Button';
 
 export { ButtonGroup, ButtonGroupProps } from './components/button/react/ButtonGroup';
 
@@ -21,8 +21,6 @@ export { Chip, ChipProps } from './components/chip/react/Chip';
 export { Divider, DividerProps } from './components/divider/react/Divider';
 
 export { Dropdown, DropdownProps } from './components/dropdown/react/Dropdown';
-
-export { DropdownButton, DropdownButtonProps } from './components/button/react/DropdownButton';
 
 export { Icon, IconProps } from './components/icon/react/Icon';
 
