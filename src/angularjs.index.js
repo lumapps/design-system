@@ -35,6 +35,7 @@ import './components/progress/angularjs/progress_directive';
 import './components/progress-tracker/angularjs/progress-tracker_directive';
 import './components/progress-tracker/angularjs/progress-tracker-step_directive';
 import './components/radio-button/angularjs/radio-button_directive';
+import './components/radio-button/angularjs/radio-group_directive';
 import './components/select/angularjs/select_directive';
 import './components/select/angularjs/select-choices_filter';
 import './components/select/angularjs/select-filter_directive';
