@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 
-import { RadioButton, RadioButtonLabel } from 'LumX';
+import { RadioButton } from 'LumX';
 import { CLASSNAME, RadioGroup, RadioGroupProps } from './RadioGroup';
 
 /////////////////////////////
@@ -66,12 +66,8 @@ describe(`<${RadioGroup.displayName}>`, () => {
         it('should render with radio button children', () => {
             const { wrapper, radioButtons } = setup({
                 children: [
-                    <RadioButton key={0} name="radiobutton1" value="radiobutton1">
-                        <RadioButtonLabel>Label 1</RadioButtonLabel>
-                    </RadioButton>,
-                    <RadioButton key={1} name="radiobutton2" value="radiobutton2">
-                        <RadioButtonLabel>Label 2</RadioButtonLabel>
-                    </RadioButton>,
+                    <RadioButton key={0} checked={true} label="Label 1" />,
+                    <RadioButton key={1} checked={false} label="Label 2" />,
                 ],
             });
             expect(wrapper).toMatchSnapshot();

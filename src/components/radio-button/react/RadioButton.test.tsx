@@ -1,14 +1,11 @@
-import React, { ReactElement } from 'react';
+import React, { InputHTMLAttributes, LabelHTMLAttributes, ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
-import { build } from 'test-data-bot';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { RadioButtonHelper } from './RadioButtonHelper';
-import { RadioButtonLabel } from './RadioButtonLabel';
-
+import { Theme } from 'LumX';
 import { CLASSNAME, RadioButton, RadioButtonProps } from './RadioButton';
 
 /////////////////////////////
@@ -25,9 +22,24 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <div> element that wraps radio button and children elements.
+     * The <div> element that wraps radio button
      */
     wrapper: Wrapper;
+
+    /**
+     * Radio button label element.
+     */
+    label: Wrapper;
+
+    /**
+     * Radio button helper element.
+     */
+    helper: Wrapper;
+
+    /**
+     * Radio button input element.
+     */
+    input: Wrapper;
 }
 
 /////////////////////////////
@@ -35,25 +47,19 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props The props to use to override the default props of the component.
- * @param       [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *              component.
+ * @param  props                   The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
-    const props: RadioButtonProps = {
-        children: <RadioButtonLabel>Default Test label</RadioButtonLabel>,
-        name: 'test',
-        value: 'test-value',
-        ...propsOverrides,
-    };
-
+const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // noinspection RequiredAttributes
+    // @ts-ignore
     const wrapper: Wrapper = renderer(<RadioButton {...props} />);
 
     return {
+        helper: wrapper.find(`.${CLASSNAME}__helper`),
+        input: wrapper.find(`input`),
+        label: wrapper.find(`label`),
         props,
         wrapper,
     };
@@ -62,14 +68,55 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
 describe(`<${RadioButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
-            const { wrapper } = setup();
+        it('should render defaults', (): void => {
+            const { wrapper, input, helper } = setup({});
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
-            expect(wrapper).toHaveClassName(CLASSNAME);
-            expect(wrapper).not.toHaveClassName('lumx-radio-button--is-disabled');
-            expect(wrapper).toHaveClassName('lumx-radio-button--is-unchecked');
+
+            expect(input).toExist();
+            const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
+            expect(inputProps.checked).toBeFalse();
+            expect(inputProps.disabled).toBeFalse();
+
+            expect(helper).not.toExist();
+        });
+
+        it('should render checked, disabled & id', (): void => {
+            const props = {
+                checked: true,
+                disabled: true,
+                id: 'inputID',
+            };
+            const { wrapper, input } = setup(props);
+            expect(wrapper).toMatchSnapshot();
+
+            const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
+            expect(inputProps.checked).toBeTrue();
+            expect(inputProps.disabled).toBeTrue();
+            expect(inputProps.id).toEqual(props.id);
+        });
+
+        it('should render label & helper', (): void => {
+            const props = {
+                helper: 'Helper',
+                label: 'Label',
+            };
+            const { wrapper, label, helper, input } = setup(props as Partial<RadioButtonProps>);
+            expect(wrapper).toMatchSnapshot();
+
+            expect(input).toExist();
+            const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
+            expect(inputProps.checked).toBeFalse();
+            expect(inputProps.disabled).toBeFalse();
+
+            expect(label).toExist();
+            expect(label.contains(props.label)).toBeTrue();
+            const labelProps: LabelHTMLAttributes<HTMLLabelElement> = label.props();
+            expect(labelProps.htmlFor).toEqual(inputProps.id);
+
+            expect(helper).toExist();
+            expect(helper.contains(props.helper)).toBeTrue();
         });
     });
 
@@ -77,42 +124,19 @@ describe(`<${RadioButton.displayName}>`, (): void => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
-        it('should add a "disabled" and "checked" class names', (): void => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
+        it('should use props for classes', () => {
+            const props = {
                 checked: true,
                 disabled: true,
-            });
+                theme: Theme.dark,
+            };
+            const { wrapper } = setup(props as RadioButtonProps);
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
-
-            const { wrapper } = setup({ ...modifiedProps });
-
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    expect(wrapper).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-
-                    expect(wrapper.find('[disabled=true]')).toHaveLength(1);
-                },
-            );
-        });
-
-        it('should use the given props', (): void => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
-                children: (
-                    <>
-                        <RadioButtonLabel>Test label</RadioButtonLabel>
-                        <RadioButtonHelper>Test Helper</RadioButtonHelper>
-                    </>
-                ),
-            });
-
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
-
-            const { wrapper } = setup({ ...modifiedProps });
-
-            expect(wrapper).toMatchSnapshot();
+            expect(wrapper).toHaveClassName(CLASSNAME);
+            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isDisabled', value: true }));
+            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isChecked', value: true }));
+            expect(wrapper).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isUnchecked', value: true }));
+            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'theme', value: props.theme }));
         });
     });
 
@@ -120,7 +144,7 @@ describe(`<${RadioButton.displayName}>`, (): void => {
 
     // 3. Test events.
     describe('Events', (): void => {
-        // Nothing to do here
+        // Nothing to do here.
     });
 
     /////////////////////////////
@@ -140,5 +164,5 @@ describe(`<${RadioButton.displayName}>`, (): void => {
     /////////////////////////////
 
     // Common tests suite.
-    commonTestsSuite(setup, {}, { className: CLASSNAME });
+    commonTestsSuite(setup, { prop: 'input', className: 'wrapper' }, { className: CLASSNAME });
 });
