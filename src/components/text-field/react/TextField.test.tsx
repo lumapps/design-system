@@ -6,7 +6,7 @@ import { build } from 'test-data-bot';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, TextField, TextFieldProps } from './TextField';
+import { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps, TextFieldType } from './TextField';
 
 /////////////////////////////
 
@@ -25,6 +25,11 @@ interface ISetup extends ICommonSetup {
      * The <div> element that wraps checkbox and children elements.
      */
     wrapper: Wrapper;
+
+    /**
+     * The <input> or <textarea> element.
+     */
+    inputNative: Wrapper;
 }
 
 /////////////////////////////
@@ -32,56 +37,64 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
+ * @param  props                   The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
-    const props: TextFieldProps = {
-        onChange: jest.fn(),
-        value: 'Test value',
-        ...propsOverrides,
-    };
-
+const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // Noinspection RequiredAttributes.
+    // @ts-ignore
     const wrapper: Wrapper = renderer(<TextField {...props} />);
 
+    const textarea = wrapper.find('textarea');
+    const input = wrapper.find('input');
     return {
+        inputNative: textarea.length ? textarea : input,
         props,
         wrapper,
     };
 };
 
-describe(`<${TextField.displayName}>`, (): void => {
+describe(`<${TextField.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
-            const { wrapper } = setup({ id: 'fixedId' });
+    describe('Snapshots and structure', () => {
+        it('should render defaults', () => {
+            const { wrapper, inputNative } = setup({ id: 'fixedId' });
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
 
             expect(wrapper).toHaveClassName(CLASSNAME);
-            expect(wrapper).not.toHaveClassName('lumx-text-field--is-valid');
-            expect(wrapper).not.toHaveClassName('lumx-text-field--has-error');
-            expect(wrapper).not.toHaveClassName('lumx-text-field--has-label');
-            expect(wrapper).not.toHaveClassName('lumx-text-field--is-disabled');
-            expect(wrapper).not.toHaveClassName('lumx-text-field--has-placeholder');
-            expect(wrapper).not.toHaveClassName('lumx-text-field--is-focus');
-            expect(wrapper).not.toHaveClassName('lumx-text-field--has-icon');
+            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--is-valid`);
+            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--has-error`);
+            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--has-label`);
+            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--is-disabled`);
+            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--has-placeholder`);
+            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--is-focus`);
+            expect(wrapper).not.toHaveClassName(`${CLASSNAME}--has-icon`);
 
-            expect(wrapper).toHaveClassName('lumx-text-field--theme-light');
+            expect(wrapper).toHaveClassName(`${CLASSNAME}--theme-light`);
+
+            expect(inputNative).toExist();
+            expect(inputNative.type()).toEqual(DEFAULT_PROPS.type);
+        });
+
+        it('should render textarea', () => {
+            const { wrapper, inputNative } = setup({ id: 'fixedId', type: TextFieldType.textarea });
+            expect(wrapper).toMatchSnapshot();
+
+            expect(wrapper).toExist();
+
+            expect(inputNative).toExist();
+            expect(inputNative.type()).toEqual(TextFieldType.textarea);
         });
     });
 
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should add all class names (except has-error)', (): void => {
+    describe('Props', () => {
+        it('should add all class names (except has-error)', () => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
                 icon: 'icon',
                 isDisabled: true,
@@ -109,7 +122,7 @@ describe(`<${TextField.displayName}>`, (): void => {
             );
         });
 
-        it('should add "has-error" class name', (): void => {
+        it('should add "has-error" class name', () => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
                 hasError: true,
             });
@@ -131,16 +144,12 @@ describe(`<${TextField.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         const onChange: jest.Mock = jest.fn();
 
-        beforeEach(
-            (): void => {
-                onChange.mockClear();
-            },
-        );
+        beforeEach(onChange.mockClear);
 
-        it('should trigger `onChange` when text field is changed', (): void => {
+        it('should trigger `onChange` when text field is changed', () => {
             const onChangeMock = jest.fn();
             const event = {
                 target: { value: 'my value' },
@@ -154,19 +163,19 @@ describe(`<${TextField.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // Common tests suite.
-    commonTestsSuite(setup, {}, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper', prop: 'inputNative' }, { className: CLASSNAME });
 });
