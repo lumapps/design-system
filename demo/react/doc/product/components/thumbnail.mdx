@@ -1,0 +1,81 @@
+```javascript import
+import { Size, Theme, Thumbnail, ThumbnailAspectRatio, ThumbnailVariant } from 'LumX';
+```
+
+# Thumbnail
+
+**Thumbnails display formatted images.**
+
+## Sizes
+
+Thumbnails come in 7 sizes: _xxsmall_, _xsmall_, _small_, _medium_, _large_, _xlarge_, and _unset_.
+
+```javascript jsx
+(theme) => (
+    <>
+        <Thumbnail theme={theme} image="https://picsum.photos/28" size={Size.xxs} />
+        <Thumbnail theme={theme} image="https://picsum.photos/40" size={Size.xs} />
+        <Thumbnail theme={theme} image="https://picsum.photos/48" size={Size.s} />
+        <Thumbnail theme={theme} image="https://picsum.photos/72" size={Size.m} />
+        <Thumbnail theme={theme} image="https://picsum.photos/128" size={Size.l} />
+        <Thumbnail theme={theme} image="https://picsum.photos/256" size={Size.xl} />
+        <div style={{ width: '300' + 'px' }}>
+            <Thumbnail theme={theme} image="https://picsum.photos/400" size={Size.unset} />
+        </div>
+    </>
+);
+```
+
+## Ratios
+
+Thumbnails come in 4 ratios: _square_, _original_, _vertical_, and _horizontal_.
+
+```javascript jsx
+(theme) => (
+    <>
+        <Thumbnail theme={theme} image="https://picsum.photos/150" />
+        <Thumbnail theme={theme} image="https://picsum.photos/150/80/" />
+        <Thumbnail theme={theme} image="https://picsum.photos/150/150" />
+        <Thumbnail theme={theme} image="https://picsum.photos/150/150" />
+    </>
+);
+```
+
+## Variants
+
+Thumbnails come in two variants: _squared_ and _rounded_
+
+```javascript jsx
+(theme) => (
+    <>
+        <Thumbnail theme={theme} variant={ThumbnailVariant.squared} image="https://picsum.photos/150" />
+        <Thumbnail theme={theme} variant={ThumbnailVariant.rounded} image="https://picsum.photos/150" />
+    </>
+);
+```
+
+## Sizes, ratios, and variants combined
+
+```javascript jsx
+(theme) => (
+    <>
+        <Thumbnail
+            theme={theme}
+            variant={ThumbnailVariant.rounded}
+            image="https://picsum.photos/320/240"
+            size={Size.l}
+        />
+        <Thumbnail
+            theme={theme}
+            variant={ThumbnailVariant.rounded}
+            image="https://picsum.photos/240/320"
+            size={Size.m}
+        />
+        <Thumbnail theme={theme} variant={ThumbnailVariant.rounded} image="https://picsum.photos/128" size={Size.xl} />
+    </>
+);
+```
+
+### Properties
+
+<PropTable component="Thumbnail" />
