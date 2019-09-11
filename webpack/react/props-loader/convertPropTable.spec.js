@@ -90,12 +90,13 @@ describe('findComponentsAndProps', () => {
     it('should list components and props from definitions index by id', () => {
         const definitionsById = {
             '0': {
+                name: 'Comp0',
                 signatures: [
                     {
                         type: { name: 'ReactElement' },
                     },
                 ],
-                sources: [{ fileName: 'file1' }],
+                sources: [{ fileName: 'Comp0.tsx' }],
             },
             '1': {
                 name: 'Comp1',
@@ -104,7 +105,7 @@ describe('findComponentsAndProps', () => {
                         type: { name: 'React.ReactElement' },
                     },
                 ],
-                sources: [{ fileName: 'file2' }],
+                sources: [{ fileName: 'Comp1.tsx' }],
             },
             '2': {
                 signatures: [
@@ -136,11 +137,12 @@ describe('findComponentsAndProps', () => {
         const propsAndComp = findComponentsAndProps(definitionsById);
         expect(propsAndComp.value()).toEqual([
             {
-                fileName: 'file1',
+                fileName: 'Comp0.tsx',
+                name: 'Comp0',
                 type: 'Component',
             },
             {
-                fileName: 'file2',
+                fileName: 'Comp1.tsx',
                 name: 'Comp1',
                 type: 'Component',
             },
