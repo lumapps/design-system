@@ -14,7 +14,7 @@ Image blocks support thumbnail's different formats (see [thumbnail](/thumbnail))
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => (
     <ImageBlock
-        //aspectRatio={ThumbnailAspectRatio.vertical}
+        aspectRatio={ThumbnailAspectRatio.horizontal}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={['Tag 1', 'Tag 2']}
         theme={theme}
@@ -31,7 +31,7 @@ A custom padding can be added.
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => (
     <ImageBlock
-        //aspectRatio={ThumbnailAspectRatio.horizontal}
+        aspectRatio={ThumbnailAspectRatio.horizontal}
         captionStyle={{ padding: 32 }}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={['Tag 1', 'Tag 2']}
@@ -49,7 +49,7 @@ Info can be placed over the image.
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => (
     <ImageBlock
-        //aspectRatio={ThumbnailAspectRatio.horizontal}
+        aspectRatio={ThumbnailAspectRatio.horizontal}
         captionPosition={ImageBlockCaptionPosition.over}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={['Tag 1', 'Tag 2']}
@@ -68,7 +68,7 @@ There are three alignments: _left_, _center_ and, _right_.
 (theme) => (
     <ImageBlock
         align={Alignment.center}
-        //aspectRatio={ThumbnailAspectRatio.original}
+        aspectRatio={ThumbnailAspectRatio.original}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={['Tag 1', 'Tag 2']}
         theme={theme}
