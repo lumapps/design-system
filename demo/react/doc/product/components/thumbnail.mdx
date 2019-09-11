@@ -13,14 +13,14 @@ Thumbnails come in 7 sizes: _xxsmall_, _xsmall_, _small_, _medium_, _large_, _xl
 ```javascript jsx
 (theme) => (
     <>
-        <Thumbnail theme={theme} image="https://picsum.photos/28" size={Size.xxs} />
-        <Thumbnail theme={theme} image="https://picsum.photos/40" size={Size.xs} />
-        <Thumbnail theme={theme} image="https://picsum.photos/48" size={Size.s} />
-        <Thumbnail theme={theme} image="https://picsum.photos/72" size={Size.m} />
-        <Thumbnail theme={theme} image="https://picsum.photos/128" size={Size.l} />
-        <Thumbnail theme={theme} image="https://picsum.photos/256" size={Size.xl} />
+        <Thumbnail image="https://picsum.photos/28" size={Size.xxs} theme={theme} />
+        <Thumbnail image="https://picsum.photos/40" size={Size.xs} theme={theme} />
+        <Thumbnail image="https://picsum.photos/48" size={Size.s} theme={theme} />
+        <Thumbnail image="https://picsum.photos/72" size={Size.m} theme={theme} />
+        <Thumbnail image="https://picsum.photos/128" size={Size.l} theme={theme} />
+        <Thumbnail image="https://picsum.photos/256" size={Size.xl} theme={theme} />
         <div style={{ width: '300' + 'px' }}>
-            <Thumbnail theme={theme} image="https://picsum.photos/400" size={Size.unset} />
+            <Thumbnail image="https://picsum.photos/400" size={Size.unset} theme={theme} />
         </div>
     </>
 );
@@ -33,10 +33,10 @@ Thumbnails come in 4 ratios: _square_, _original_, _vertical_, and _horizontal_.
 ```javascript jsx
 (theme) => (
     <>
-        <Thumbnail theme={theme} image="https://picsum.photos/150" />
-        <Thumbnail theme={theme} image="https://picsum.photos/150/80/" />
-        <Thumbnail theme={theme} image="https://picsum.photos/150/150" />
-        <Thumbnail theme={theme} image="https://picsum.photos/150/150" />
+        <Thumbnail aspectRatio={ThumbnailAspectRatio.square} image="https://picsum.photos/150" theme={theme} />
+        <Thumbnail aspectRatio={ThumbnailAspectRatio.original} image="https://picsum.photos/150/80/" theme={theme} />
+        <Thumbnail aspectRatio={ThumbnailAspectRatio.vertical} image="https://picsum.photos/150/150" theme={theme} />
+        <Thumbnail aspectRatio={ThumbnailAspectRatio.horizontal} image="https://picsum.photos/150/150" theme={theme} />
     </>
 );
 ```
@@ -48,8 +48,8 @@ Thumbnails come in two variants: _squared_ and _rounded_
 ```javascript jsx
 (theme) => (
     <>
-        <Thumbnail theme={theme} variant={ThumbnailVariant.squared} image="https://picsum.photos/150" />
-        <Thumbnail theme={theme} variant={ThumbnailVariant.rounded} image="https://picsum.photos/150" />
+        <Thumbnail image="https://picsum.photos/150" theme={theme} variant={ThumbnailVariant.squared} />
+        <Thumbnail image="https://picsum.photos/150" theme={theme} variant={ThumbnailVariant.rounded} />
     </>
 );
 ```
@@ -60,18 +60,26 @@ Thumbnails come in two variants: _squared_ and _rounded_
 (theme) => (
     <>
         <Thumbnail
-            theme={theme}
-            variant={ThumbnailVariant.rounded}
+            aspectRatio={ThumbnailAspectRatio.original}
             image="https://picsum.photos/320/240"
             size={Size.l}
-        />
-        <Thumbnail
             theme={theme}
             variant={ThumbnailVariant.rounded}
+        />
+        <Thumbnail
+            aspectRatio={ThumbnailAspectRatio.vertical}
             image="https://picsum.photos/240/320"
             size={Size.m}
+            theme={theme}
+            variant={ThumbnailVariant.rounded}
         />
-        <Thumbnail theme={theme} variant={ThumbnailVariant.rounded} image="https://picsum.photos/128" size={Size.xl} />
+        <Thumbnail
+            aspectRatio={ThumbnailAspectRatio.square}
+            image="https://picsum.photos/128"
+            size={Size.xl}
+            theme={theme}
+            variant={ThumbnailVariant.rounded}
+        />
     </>
 );
 ```
