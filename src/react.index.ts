@@ -28,6 +28,13 @@ export { Icon, IconProps } from './components/icon/react/Icon';
 
 export { IconButton, IconButtonProps } from './components/button/react/IconButton';
 
+export {
+    Thumbnail,
+    ThumbnailProps,
+    ThumbnailVariant,
+    ThumbnailAspectRatio,
+} from './components/thumbnail/react/Thumbnail';
+
 export { ImageBlock, ImageBlockProps, ImageBlockCaptionPosition } from './components/image-block/react/ImageBlock';
 
 export { Lightbox, LightboxProps } from './components/lightbox/react/Lightbox';
@@ -79,13 +86,6 @@ export { Tabs, TabsProps, TabsLayout, TabsPosition } from './components/tabs/rea
 export { Tab, TabProps } from './components/tabs/react/Tab';
 
 export { TextField, TextFieldProps } from './components/text-field/react/TextField';
-
-export {
-    Thumbnail,
-    ThumbnailProps,
-    ThumbnailVariant,
-    ThumbnailAspectRatio,
-} from './components/thumbnail/react/Thumbnail';
 
 export { Tooltip, TooltipProps, TooltipPlacement } from './components/tooltip/react/Tooltip';
 

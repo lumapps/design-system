@@ -17,7 +17,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * The authorized variants.
  */
-const enum SelectVariant {
+enum SelectVariant {
     input = 'input',
     chip = 'chip',
 }
