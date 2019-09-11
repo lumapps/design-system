@@ -293,13 +293,13 @@ const Select: React.FC<SelectProps> = ({
                             )}
 
                             <div className={`${CLASSNAME}__input-chips`}>
-                                {!isEmpty && isMultiple && (
-                                    <div className={`${CLASSNAME}__input-chip`}>
-                                        {value.map((val: string, index: number) =>
-                                            selectedChipRender!(val, index, onClear, isDisabled),
-                                        )}
-                                    </div>
-                                )}
+                                {!isEmpty &&
+                                    isMultiple &&
+                                    value.map((val: string, index: number) => (
+                                        <div key={index} className={`${CLASSNAME}__input-chip`}>
+                                            {selectedChipRender!(val, index, onClear, isDisabled)}
+                                        </div>
+                                    ))}
                             </div>
 
                             {(isValid || hasError) && (
