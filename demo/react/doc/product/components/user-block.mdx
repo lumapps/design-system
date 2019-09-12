@@ -1,0 +1,144 @@
+```javascript import
+import { ReactElement } from 'react';
+import { Button, ButtonEmphasis, IconButton, Orientation, Size, Theme, UserBlock } from 'LumX';
+import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from 'LumX/icons';
+```
+
+# User block
+
+**User blocks display user info.**
+
+## Sizes
+
+User blocks come in three sizes: _small_, _medium_, and _large_.
+
+### Small
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        fields={['Creative developer', 'Denpasar']}
+        avatar="http://i.pravatar.cc/40"
+        size={Size.s}
+        onMouseEnter={() => console.log('Mouse entered')}
+        onMouseLeave={() => console.log('Mouse left')}
+        onClick={() => console.log('UserBlock clicked')}
+    />
+);
+```
+
+### Medium
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        fields={['Creative developer', 'Denpasar']}
+        avatar="http://i.pravatar.cc/72"
+        size={Size.m}
+        onMouseEnter={() => console.log('Mouse entered')}
+        onMouseLeave={() => console.log('Mouse left')}
+        onClick={() => console.log('UserBlock clicked')}
+    />
+);
+```
+
+### Large
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        fields={['Creative developer', 'Denpasar']}
+        avatar="http://i.pravatar.cc/128"
+        size={Size.l}
+        onMouseEnter={() => console.log('Mouse entered')}
+        onMouseLeave={() => console.log('Mouse left')}
+        onClick={() => console.log('UserBlock clicked')}
+    />
+);
+```
+
+## Layouts
+
+There are two alternative layouts: _vertical_ and _extended_.
+
+### Vertical
+
+A _large_ size user block can be displayed vertically.
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <UserBlock
+        theme={theme}
+        name="Emmitt O. Lum"
+        fields={['Creative developer', 'Denpasar']}
+        avatar="http://i.pravatar.cc/128"
+        size={Size.l}
+        orientation={Orientation.vertical}
+        onMouseEnter={() => console.log('Mouse entered')}
+        onMouseLeave={() => console.log('Mouse left')}
+        onClick={() => console.log('UserBlock clicked')}
+    />
+);
+```
+
+### Extended
+
+The extended layout displays additional contact actions and a follow button.
+When there are more than five contact actions, the fifth is replaced with an overflow menu presenting remaining actions.
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const createSimpleAction = (theme) => (
+        <Button
+            emphasis={ButtonEmphasis.medium}
+            color={theme === Theme.dark ? 'light' : undefined}
+            size={Size.s}
+            theme={theme}
+        >
+            Follow
+        </Button>
+    );
+
+    const demoActions = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
+
+    const createMultipleActions = (theme) => (
+        <>
+            {demoActions.map((demoAction, idx) => (
+                <IconButton
+                    key={idx}
+                    emphasis={ButtonEmphasis.low}
+                    color={theme === Theme.dark ? 'light' : undefined}
+                    icon={demoAction}
+                    theme={theme}
+                />
+            ))}
+        </>
+    );
+
+    return (
+        <UserBlock
+            theme={theme}
+            name="Emmitt O. Lum"
+            fields={['Creative developer', 'Denpasar']}
+            avatar="http://i.pravatar.cc/128"
+            size={Size.l}
+            orientation={Orientation.vertical}
+            onMouseEnter={() => console.log('Mouse entered')}
+            onMouseLeave={() => console.log('Mouse left')}
+            onClick={() => console.log('UserBlock clicked')}
+            simpleAction={createSimpleAction(theme)}
+            multipleActions={createMultipleActions(theme)}
+        />
+    );
+};
+```
+
+### Properties
+
+<PropTable component="UserBlock" />
