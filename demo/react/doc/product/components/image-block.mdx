@@ -1,0 +1,83 @@
+```javascript import
+import { CSSProperties, ReactElement } from 'react';
+import { Alignment, ImageBlock, ImageBlockCaptionPosition, ImageBlockProps, Theme, ThumbnailAspectRatio } from 'LumX';
+```
+
+# Image-block
+
+**Image blocks display an image with related info.**
+
+## Default
+
+Image blocks support thumbnail's different formats (see [thumbnail](/thumbnail)).
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => (
+    <ImageBlock
+        aspectRatio={ThumbnailAspectRatio.horizontal}
+        description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        tags={['Tag 1', 'Tag 2']}
+        theme={theme}
+        title="Lorem ipsum"
+        image="https://picsum.photos/800/600/?random"
+    />
+);
+```
+
+## Custom padding
+
+A custom padding can be added.
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => (
+    <ImageBlock
+        aspectRatio={ThumbnailAspectRatio.horizontal}
+        captionStyle={{ padding: 32 }}
+        description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        tags={['Tag 1', 'Tag 2']}
+        theme={theme}
+        title="Lorem ipsum"
+        image="https://picsum.photos/800/600/?random"
+    />
+);
+```
+
+## Info over
+
+Info can be placed over the image.
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => (
+    <ImageBlock
+        aspectRatio={ThumbnailAspectRatio.horizontal}
+        captionPosition={ImageBlockCaptionPosition.over}
+        description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        tags={['Tag 1', 'Tag 2']}
+        theme={theme}
+        title="Lorem ipsum"
+        image="https://picsum.photos/800/600/?random"
+    />
+);
+```
+
+## Info alignment
+
+There are three alignments: _left_, _center_ and, _right_.
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => (
+    <ImageBlock
+        align={Alignment.center}
+        aspectRatio={ThumbnailAspectRatio.original}
+        description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        tags={['Tag 1', 'Tag 2']}
+        theme={theme}
+        title="Lorem ipsum"
+        image="https://picsum.photos/320/240/?random"
+    />
+);
+```
+
+### Properties
+
+<PropTable component="ImageBlock" />
