@@ -18,6 +18,10 @@
             @include lumx-text-field-material-label('light');
         }
 
+        #{$self}--has-icon & {
+            transform: translateY($lumx-spacing-unit * 3) translateX(28px);
+        }
+
         #{$self}--has-placeholder &,
         #{$self}--has-value &,
         #{$self}--is-focus & {
