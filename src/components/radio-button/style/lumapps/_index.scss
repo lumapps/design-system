@@ -170,3 +170,14 @@
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
     @include lumx-state('state-focus', 'emphasis-high', 'primary', 'light');
 }
+
+/* Radio group
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-radio-group > .#{$lumx-base-prefix}-radio-button {
+    margin-bottom: $lumx-spacing-unit * 1.5;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
