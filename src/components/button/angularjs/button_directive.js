@@ -165,11 +165,21 @@ function ButtonDirective() {
                 return;
             }
 
-            buttonEl
-                .removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
-                })
-                .addClass(`${CSS_PREFIX}-button--theme-${theme}`);
+            if (isDefaultEmphasis) {
+                buttonEl
+                    .removeClass((index, className) => {
+                        return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
+                    })
+                    .addClass(`${CSS_PREFIX}-button--theme-${theme}`);
+            } else {
+                const buttonColor = theme === 'light' ? 'dark' : 'light';
+
+                buttonEl
+                    .removeClass((index, className) => {
+                        return (className.match(/(?:\S|-)*button--color-\S+/g) || []).join(' ');
+                    })
+                    .addClass(`${CSS_PREFIX}-button--color-${buttonColor}`);
+            }
 
             if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
                 el.removeClass((index, className) => {
