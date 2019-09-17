@@ -135,14 +135,14 @@ describe(`<${ButtonRoot.displayName}>`, () => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        it('should use primary color as default', () => {
+        it('should use default color', () => {
             const props: Partial<ButtonRootProps> = {};
             const { button, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
             expect(button).toExist();
             expect(button).toHaveClassName(
-                getBasicClass({ prefix: BUTTON_CLASSNAME, type: 'color', value: ColorPalette.primary }),
+                getBasicClass({ prefix: BUTTON_CLASSNAME, type: 'color', value: ColorPalette.dark }),
             );
         });
 

@@ -10,6 +10,14 @@ exports[`<ButtonRoot> Props should not have default color in low or medium empha
 </ButtonRoot>
 `;
 
+exports[`<ButtonRoot> Props should use default color 1`] = `
+<ButtonRoot>
+  <button
+    className="lumx-button lumx-button--color-dark"
+  />
+</ButtonRoot>
+`;
+
 exports[`<ButtonRoot> Props should use given props 1`] = `
 <ButtonRoot
   color="red"
@@ -35,14 +43,6 @@ exports[`<ButtonRoot> Props should use given props 1`] = `
       />
     </ButtonRoot>
   </div>
-</ButtonRoot>
-`;
-
-exports[`<ButtonRoot> Props should use primary color as default 1`] = `
-<ButtonRoot>
-  <button
-    className="lumx-button lumx-button--color-dark"
-  />
 </ButtonRoot>
 `;
 
