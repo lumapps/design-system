@@ -18,6 +18,7 @@ enum ThumbnailAspectRatio {
     original = 'original',
     horizontal = 'horizontal',
     vertical = 'vertical',
+    square = 'square',
 }
 
 /**
