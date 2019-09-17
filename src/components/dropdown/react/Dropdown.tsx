@@ -125,21 +125,19 @@ const Dropdown: React.FC<DropdownProps> = ({
         </div>
     );
 
-    const onEscapeHandler = onClose ? onEscapePressed(onClose) : undefined;
+    const onEscapeHandler = closeOnEscape && onClose && showDropdown && onEscapePressed(onClose);
 
     useEffect(() => {
-        if (!onEscapeHandler) {
+        if (!onEscapeHandler || !wrapperRef.current) {
             return undefined;
         }
         if (closeOnEscape && showDropdown && wrapperRef.current) {
             window.addEventListener('keydown', onEscapeHandler);
-        } else {
-            window.removeEventListener('keydown', onEscapeHandler);
         }
         return (): void => {
             window.removeEventListener('keydown', onEscapeHandler);
         };
-    }, [onEscapeHandler, closeOnEscape, onClose]);
+    }, [showDropdown, closeOnEscape, onClose]);
 
     // Any click away from the dropdown container will close it.
     useClickAway(
