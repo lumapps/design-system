@@ -35,6 +35,11 @@ interface IBaseButtonProps extends IGenericProps {
     href?: string;
 
     /**
+     * Button selected state.
+     */
+    isSelected?: boolean;
+
+    /**
      * Use this property if you specified a URL in the `href` property and you want to customize the link button target property.
      */
     target?: '_self' | '_blank' | '_parent' | '_top';
@@ -80,11 +85,14 @@ const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
  * Render a button wrapper with the ButtonRoot inside.
  */
 const renderButtonWrapper = (props: IButtonRootProps): ReactElement => {
-    const { color, className, variant } = props;
+    const { color, emphasis, variant } = props;
+
+    const adaptedColor =
+        emphasis === Emphasis.low && (color === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
+
     const wrapperClassName = classNames(
-        className,
         handleBasicClasses({
-            color,
+            color: adaptedColor,
             prefix: BUTTON_WRAPPER_CLASSNAME,
             variant,
         }),
@@ -112,6 +120,7 @@ const ButtonRoot = (props: ButtonRootProps): ReactElement => {
     const {
         buttonRef,
         emphasis,
+        isSelected,
         size,
         color,
         className,
@@ -122,19 +131,25 @@ const ButtonRoot = (props: ButtonRootProps): ReactElement => {
         ...forwardedProps
     } = props;
 
+    const adaptedColor =
+        color ||
+        (emphasis !== Emphasis.high && theme === Theme.dark && ColorPalette.light) ||
+        (emphasis === Emphasis.high && ColorPalette.primary) ||
+        ColorPalette.dark;
+
     if (hasBackground) {
-        return renderButtonWrapper(props);
+        return renderButtonWrapper({ ...props, color: adaptedColor });
     }
 
-    const adaptedColor = color || (!emphasis || emphasis === Emphasis.high ? ColorPalette.primary : ColorPalette.dark);
     const buttonClassName = classNames(
         className,
         handleBasicClasses({
             color: adaptedColor,
             emphasis,
+            isSelected,
             prefix: BUTTON_CLASSNAME,
             size,
-            theme,
+            theme: emphasis === Emphasis.high && theme,
             variant,
         }),
     );

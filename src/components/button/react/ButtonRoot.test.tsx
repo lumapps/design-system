@@ -162,13 +162,13 @@ describe(`<${ButtonRoot.displayName}>`, () => {
             // Props used for the button.
             const buttonProps: Partial<ButtonRootProps> = {
                 color: ColorPalette.red,
+                emphasis: Emphasis.high,
                 size: Size.s,
                 theme: Theme.dark,
                 variant: 'icon',
             };
             // Props used for the button wrapper.
             const buttonWrapperProps: Partial<ButtonRootProps> = {
-                color: buttonProps.color,
                 variant: buttonProps.variant,
             };
             const { button, buttonWrapper, wrapper } = setup({

@@ -13,23 +13,25 @@ exports[`<ButtonRoot> Props should not have default color in low or medium empha
 exports[`<ButtonRoot> Props should use given props 1`] = `
 <ButtonRoot
   color="red"
+  emphasis="high"
   hasBackground={true}
   size="s"
   theme="dark"
   variant="icon"
 >
   <div
-    className="lumx-button-wrapper lumx-button-wrapper--color-red lumx-button-wrapper--variant-icon"
+    className="lumx-button-wrapper lumx-button-wrapper--variant-icon"
   >
     <ButtonRoot
       color="red"
+      emphasis="high"
       hasBackground={false}
       size="s"
       theme="dark"
       variant="icon"
     >
       <button
-        className="lumx-button lumx-button--color-red lumx-button--size-s lumx-button--theme-dark lumx-button--variant-icon"
+        className="lumx-button lumx-button--color-red lumx-button--emphasis-high lumx-button--size-s lumx-button--theme-dark lumx-button--variant-icon"
       />
     </ButtonRoot>
   </div>
@@ -39,7 +41,7 @@ exports[`<ButtonRoot> Props should use given props 1`] = `
 exports[`<ButtonRoot> Props should use primary color as default 1`] = `
 <ButtonRoot>
   <button
-    className="lumx-button lumx-button--color-primary"
+    className="lumx-button lumx-button--color-dark"
   />
 </ButtonRoot>
 `;
@@ -50,7 +52,7 @@ exports[`<ButtonRoot> Snapshots and structure should render anchor button with l
   target="_blank"
 >
   <a
-    className="lumx-button lumx-button--color-primary"
+    className="lumx-button lumx-button--color-dark"
     href="example.com"
     target="_blank"
   >
@@ -69,12 +71,13 @@ exports[`<ButtonRoot> Snapshots and structure should render anchor button with w
     className="lumx-button-wrapper"
   >
     <ButtonRoot
+      color="dark"
       hasBackground={false}
       href="example.com"
       target="_blank"
     >
       <a
-        className="lumx-button lumx-button--color-primary"
+        className="lumx-button lumx-button--color-dark"
         href="example.com"
         target="_blank"
       >
@@ -88,7 +91,7 @@ exports[`<ButtonRoot> Snapshots and structure should render anchor button with w
 exports[`<ButtonRoot> Snapshots and structure should render button with label 1`] = `
 <ButtonRoot>
   <button
-    className="lumx-button lumx-button--color-primary"
+    className="lumx-button lumx-button--color-dark"
   >
     Label
   </button>
@@ -103,10 +106,11 @@ exports[`<ButtonRoot> Snapshots and structure should render button with wrapper 
     className="lumx-button-wrapper"
   >
     <ButtonRoot
+      color="dark"
       hasBackground={false}
     >
       <button
-        className="lumx-button lumx-button--color-primary"
+        className="lumx-button lumx-button--color-dark"
       >
         Label
       </button>
