@@ -1,5 +1,5 @@
 ```javascript import
-import { RadioButton, RadioButtonHelper, RadioButtonLabel, Theme } from 'LumX';
+import { RadioButton, RadioGroup, RadioButtonHelper, RadioButtonLabel, Theme } from 'LumX';
 ```
 
 # Radio button
@@ -11,21 +11,17 @@ import { RadioButton, RadioButtonHelper, RadioButtonLabel, Theme } from 'LumX';
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => (
     <>
-        <div className="lumx-spacing-margin-bottom-regular">
+        <RadioGroup>
             <RadioButton theme={theme} value="lorem" name="test1" checked={true}>
                 <RadioButtonLabel>Radio button 1</RadioButtonLabel>
             </RadioButton>
-        </div>
-        <div className="lumx-spacing-margin-bottom-regular">
             <RadioButton disabled theme={theme} value="ipsum" name="test1" checked={false}>
                 <RadioButtonLabel>Radio button 2</RadioButtonLabel>
             </RadioButton>
-        </div>
-        <div>
             <RadioButton theme={theme} value="dolor" name="test1" checked={false}>
                 <RadioButtonLabel>Radio button 3</RadioButtonLabel>
             </RadioButton>
-        </div>
+        </RadioGroup>
     </>
 );
 ```
@@ -35,30 +31,26 @@ import { RadioButton, RadioButtonHelper, RadioButtonLabel, Theme } from 'LumX';
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => (
     <>
-        <div className="lumx-spacing-margin-bottom-big">
+        <RadioGroup>
             <RadioButton theme={theme} value="lorem" name="test1" checked={true}>
                 <RadioButtonLabel>Radio button with helper 1</RadioButtonLabel>
                 <RadioButtonHelper>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.{' '}
                 </RadioButtonHelper>
             </RadioButton>
-        </div>
-        <div className="lumx-spacing-margin-bottom-big">
             <RadioButton disabled theme={theme} value="ipsum" name="test1" checked={false}>
                 <RadioButtonLabel>Radio button with helper 2</RadioButtonLabel>
                 <RadioButtonHelper>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.{' '}
                 </RadioButtonHelper>
             </RadioButton>
-        </div>
-        <div>
             <RadioButton theme={theme} value="dolor" name="test1" checked={false}>
                 <RadioButtonLabel>Radio button with helper 3</RadioButtonLabel>
                 <RadioButtonHelper>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.{' '}
                 </RadioButtonHelper>
             </RadioButton>
-        </div>
+        </RadioGroup>
     </>
 );
 ```
