@@ -59,6 +59,8 @@ export { ProgressTrackerStep, ProgressTrackerStepProps } from './components/prog
 
 export { RadioButton, RadioButtonProps } from './components/radio-button/react/RadioButton';
 
+export { RadioGroup, RadioGroupProps } from './components/radio-button/react/RadioGroup';
+
 export { RadioButtonHelper } from './components/radio-button/react/RadioButtonHelper';
 
 export { RadioButtonLabel } from './components/radio-button/react/RadioButtonLabel';
