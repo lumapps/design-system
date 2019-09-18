@@ -1,15 +1,18 @@
 ```javascript import
 import { ReactElement, useCallback, useMemo, useRef, useState } from 'react';
-import { Dialog, Theme, Button, Toolbar, ButtonEmphasis } from 'LumX';
+import { Alignment, Dialog, Grid, Theme, Button, Toolbar, ButtonEmphasis, Size, Orientation } from 'LumX';
 ```
 
 # Dialog 
 
+## Default
+
+Dialogs have a title, a body, and at least one or more buttons.
 ```javascript jsx withThemeSwitcher
 (theme) => {
     const [isOpened, setIsOpened] = useState(false);
 
-    const triggerElement = useRef<Button>(null);
+    const triggerElement = useRef(null);
 
     const onOpenModal = useCallback(() => {
         // Do something.
@@ -42,7 +45,7 @@ import { Dialog, Theme, Button, Toolbar, ButtonEmphasis } from 'LumX';
         <>
             <Button
                 buttonRef={triggerElement}
-                aria-label="Close Modal"
+                aria-label="Modal"
                 type="button"
                 onClick={handleClick}
                 theme={theme}
@@ -57,6 +60,84 @@ import { Dialog, Theme, Button, Toolbar, ButtonEmphasis } from 'LumX';
                 onClose={onCloseModal}
                 onOpen={onOpenModal}
                 header={<Toolbar label={<span className="lumx-typography-title">Default dialog</span>} />}
+                footer={<Toolbar after={footerBtns} />}
+            >
+                <div className="lumx-spacing-padding-horizontal-huge">
+                <p>
+                Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros Afros.
+                Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus. Praeterea
+                iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Inmensae
+                subtilitatis, obscuris et malesuada fames. Me non paenitet nullum festiviorem excogitasse ad hoc. Cum
+                ceteris in veneratione tui montes, nascetur mus. Etiam habebis sem dicantur magna mollis euismod. Quis
+                aute iure reprehenderit in voluptate velit esse. Phasellus laoreet lorem vel dolor tempus vehicula.
+                Ambitioni dedisse scripsisse iudicaretur. Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab
+                illo tempore, ab est sed immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute,
+                fili mi, nihil timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras
+                mattis iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+                Quisque ut dolor gravida, placerat libero vel, euismod.
+            </p>
+                </div>
+            </Dialog>
+        </>
+    );
+}
+```
+
+## With scrollbar
+When a dialog requires scrolling, the title stays at the top while the buttons stay at the bottom.
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const [isOpened, setIsOpened] = useState(false);
+
+    const triggerElement = useRef(null);
+
+    const onOpenModal = useCallback(() => {
+        // Do something.
+    }, []);
+
+    const onCloseModal = useCallback(() => {
+        // Do something.
+        setIsOpened(false);
+    }, []);
+
+    const handleClick = useCallback(() => {
+        setIsOpened(!isOpened);
+    }, [isOpened]);
+
+    const footerBtns = useMemo(
+        () => (
+            <>
+                <Button emphasis={ButtonEmphasis.medium} onClick={onCloseModal}>
+                    Cancel
+                </Button>
+                <Button className="lumx-spacing-margin-left-regular" onClick={onCloseModal}>
+                    Save
+                </Button>
+            </>
+        ),
+        [],
+    );
+
+    return (
+        <>
+            <Button
+                buttonRef={triggerElement}
+                aria-label="Modal"
+                type="button"
+                onClick={handleClick}
+                theme={theme}
+            >
+                Open dialog
+            </Button>
+
+            <Dialog
+                theme={theme}
+                isOpen={isOpened}
+                parentElement={triggerElement}
+                onClose={onCloseModal}
+                onOpen={onOpenModal}
+                header={<Toolbar label={<span className="lumx-typography-title">Dialog with scroll</span>} />}
                 footer={<Toolbar after={footerBtns} />}
             >
                 <div className="lumx-spacing-padding-horizontal-huge">
@@ -110,6 +191,128 @@ import { Dialog, Theme, Button, Toolbar, ButtonEmphasis } from 'LumX';
                 sint obcaecat cupiditat non proident culpa. Curabitur blandit tempus ardua ridiculus sed magna. Plura
                 mihi bona sunt, inclinet, amari petere vellent. Quae vero auctorem tractata ab fiducia dicuntur. Me non
                 paenitet nullum festiviorem excogitasse ad hoc. Unam incolunt Belgae, aliam Aquitani, tertiam.
+            </p>
+                </div>
+            </Dialog>
+        </>
+    );
+}
+```
+
+## Sizes
+Dialogs come in four sizes: tiny (400dp), regular (600dp), big (800dp), and huge (full screen).
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const [isOpened, setIsOpened] = useState(false);
+    const [selectedSize, setSelectedSize] = useState();
+
+    const triggerElement = useRef(null);
+
+    const onOpenModal = useCallback(() => {
+        // Do something.
+    }, []);
+
+    const onCloseModal = useCallback(() => {
+        // Do something.
+        setIsOpened(false);
+    }, []);
+
+    const handleClick = useCallback(() => {
+        setIsOpened(!isOpened);
+    }, [isOpened]);
+
+    const footerBtns = useMemo(
+        () => (
+            <>
+                <Button emphasis={ButtonEmphasis.medium} onClick={onCloseModal}>
+                    Cancel
+                </Button>
+                <Button className="lumx-spacing-margin-left-regular" onClick={onCloseModal}>
+                    Save
+                </Button>
+            </>
+        ),
+        [],
+    );
+
+    return (
+        <>
+        <Grid
+            theme={theme}
+                orientation={Orientation.horizontal}
+                vAlign={Alignment.center}
+                hAlign={Alignment.top}
+                gutter={Size.regular}
+            >
+            <GridItem style={{margin:'0 4px'}}>
+                <Button
+                    buttonRef={triggerElement}
+                    aria-label="tiny Modal"
+                    type="button"
+                    onClick={() => {setSelectedSize(Size.tiny); setIsOpened(!isOpened);}}
+                    theme={theme}
+                >
+                    tiny
+                </Button>
+            </GridItem>
+            <GridItem style={{margin:'0 4px'}}>
+                <Button
+                    buttonRef={triggerElement}
+                    aria-label="regular Modal"
+                    type="button"
+                    onClick={() => {setSelectedSize(Size.regular); setIsOpened(!isOpened);}}
+                    theme={theme}
+                >
+                    regular
+                </Button>
+            </GridItem>
+            <GridItem style={{margin:'0 4px'}}>
+                <Button
+                    buttonRef={triggerElement}
+                    aria-label="big Modal"
+                    type="button"
+                    onClick={() => {setSelectedSize(Size.big); setIsOpened(!isOpened);}}
+                    theme={theme}
+                >
+                    big
+                </Button>
+            </GridItem>
+            <GridItem style={{margin:'0 4px'}}>
+                <Button
+                    buttonRef={triggerElement}
+                    aria-label="huge Modal"
+                    type="button"
+                    onClick={() => {setSelectedSize(Size.huge); setIsOpened(!isOpened);}}
+                    theme={theme}
+                >
+                    huge
+                </Button>
+            </GridItem>
+
+        </Grid>
+            <Dialog
+                theme={theme}
+                isOpen={isOpened}
+                parentElement={triggerElement}
+                onClose={onCloseModal}
+                onOpen={onOpenModal}
+                header={<Toolbar label={<span className="lumx-typography-title">Dialog</span>} />}
+                footer={<Toolbar after={footerBtns} />}
+                size={selectedSize}
+            >
+                <div className="lumx-spacing-padding-horizontal-huge">
+                <p>
+                Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros Afros.
+                Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus. Praeterea
+                iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi consequat. Inmensae
+                subtilitatis, obscuris et malesuada fames. Me non paenitet nullum festiviorem excogitasse ad hoc. Cum
+                ceteris in veneratione tui montes, nascetur mus. Etiam habebis sem dicantur magna mollis euismod. Quis
+                aute iure reprehenderit in voluptate velit esse. Phasellus laoreet lorem vel dolor tempus vehicula.
+                Ambitioni dedisse scripsisse iudicaretur. Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab
+                illo tempore, ab est sed immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute,
+                fili mi, nihil timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras
+                mattis iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
+                Quisque ut dolor gravida, placerat libero vel, euismod.
             </p>
                 </div>
             </Dialog>

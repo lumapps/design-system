@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, RefObject } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,7 +7,7 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
-import { Size } from 'LumX/components';
+import { Size, Theme } from 'LumX/components';
 import { Lightbox } from 'LumX/components/lightbox/react/Lightbox';
 import useIntersectionObserver from 'LumX/core/react/hooks/useIntersectionObserver';
 
@@ -16,7 +16,23 @@ import useIntersectionObserver from 'LumX/core/react/hooks/useIntersectionObserv
 /**
  * Defines the props of the component.
  */
-interface IDialogProps extends IGenericProps {}
+interface IDialogProps extends IGenericProps {
+    /** Element(s) to display in the footer part */
+    footer: ReactElement;
+    /** Element(s) to display in the header part */
+    header: ReactElement;
+    /** Status of the dialog. */
+    isOpen?: boolean;
+    /** Ref of element that triggered modal opening to set focus on. */
+    // tslint:disable-next-line: no-any
+    parentElement: RefObject<any>;
+    /** Theme. */
+    theme?: Theme;
+    /** Callback called when lightbox is closing. */
+    onClose?(): void;
+    /** Callback called when lightbox is opening. */
+    onOpen?(): void;
+}
 type DialogProps = IDialogProps;
 
 type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
@@ -42,7 +58,9 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<DialogProps> = {};
+const DEFAULT_PROPS: Partial<DialogProps> = {
+    size: Size.big,
+};
 /////////////////////////////
 
 /**
@@ -59,17 +77,11 @@ const Dialog: React.FC<DialogProps> = ({
     onOpen,
     onClose,
     parentElement,
-    ...props
+    size = DEFAULT_PROPS.size,
+    theme,
 }: DialogProps): ReactElement => {
     const [sentinel1, sentinel1Intersec] = useIntersectionObserver({ rootMargin: '0px', threshold: [0.0, 1.0] });
     const [sentinel2, sentinel2Intersec] = useIntersectionObserver({ rootMargin: '0px', threshold: [0.0, 1.0] });
-
-
-    if(sentinel1Intersec)
-        console.log("sentinel1Intersec", sentinel1Intersec.intersectionRatio);
-    if(sentinel2Intersec)
-        console.log("sentinel2Intersec", sentinel2Intersec.intersectionRatio);
-     
 
     return (
         <Lightbox
@@ -79,16 +91,36 @@ const Dialog: React.FC<DialogProps> = ({
             parentElement={parentElement}
             isCloseButtonVisible={false}
         >
-            <div role="dialog" className="lumx-dialog lumx-dialog--size-regular" style={{ display: 'block' }}>
+            <div
+                role="dialog"
+                className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
+                style={{ display: 'block' }}
+            >
                 {isOpen && (
-                    <div className="lumx-dialog__wrapper">
-                        <div className="lumx-dialog__header">{header}</div>
-                        <div className="lumx-dialog__content">
-                            <div className="lumx-dialog__sentinel lumx-dialog__sentinel--top" ref={sentinel1} />
-                            <div>{children}</div>
-                            <div className="lumx-dialog__sentinel lumx-dialog__sentinel--bottom" ref={sentinel2} />
+                    <div className={`${CLASSNAME}__wrapper`}>
+                        <div
+                            className={`${CLASSNAME}__header ${
+                                sentinel1Intersec && sentinel1Intersec.intersectionRatio !== 1
+                                    ? CLASSNAME + '__header--has-divider'
+                                    : ''
+                            }`}
+                        >
+                            {header}
                         </div>
-                        <div className="lumx-dialog__footer">{footer}</div>
+                        <div className={`${CLASSNAME}__content`}>
+                            <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`} ref={sentinel1} />
+                            <div>{children}</div>
+                            <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`} ref={sentinel2} />
+                        </div>
+                        <div
+                            className={`${CLASSNAME}__footer ${
+                                sentinel2Intersec && sentinel2Intersec.intersectionRatio !== 1
+                                    ? CLASSNAME + '__footer--has-divider'
+                                    : ''
+                            }`}
+                        >
+                            {footer}
+                        </div>
                     </div>
                 )}
             </div>

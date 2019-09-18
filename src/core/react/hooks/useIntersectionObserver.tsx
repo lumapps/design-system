@@ -1,12 +1,16 @@
-//https://medium.com/the-non-traditional-developer/how-to-use-an-intersectionobserver-in-a-react-hook-9fb061ac6cb5
+/**
+ * Convenient hook to create interaction observers
+ */
+// tslint:disable: no-any typedef
+
 import { useEffect, useRef, useState } from 'react';
 
-export default ({ root = null, rootMargin, threshold = [0] }) => {
-    const [entry, updateEntry] = useState<any>();
+export default ({ root = null, rootMargin = '0 px', threshold = [0] }: any): [any, IntersectionObserverEntry] => {
+    const [currentEntry, updateCurrentEntry] = useState<any>();
     const [node, setNode] = useState(null);
 
     const observer = useRef(
-        new IntersectionObserver(([entry]) => updateEntry(entry), {
+        new IntersectionObserver(([entry]) => updateCurrentEntry(entry), {
             root,
             rootMargin,
             threshold,
@@ -24,5 +28,5 @@ export default ({ root = null, rootMargin, threshold = [0] }) => {
         return () => currentObserver.disconnect();
     }, [node]);
 
-    return [setNode, entry];
+    return [setNode, currentEntry];
 };
