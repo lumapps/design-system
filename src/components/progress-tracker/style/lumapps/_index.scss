@@ -20,11 +20,11 @@
     }
 
     &__background-bar {
-        background-color: lumx-theme-color-variant(dark, $lumx-divider-color-variant);
+        background-color: lumx-theme-color-variant('dark', $lumx-divider-color-variant);
     }
 
     &__foreground-bar {
-        background-color: lumx-theme-color-variant(primary, N);
+        background-color: lumx-theme-color-variant('primary', 'N');
         transform-origin: left;
         transition: transform $lumx-progress-tracker-transition-duration;
     }
@@ -52,15 +52,15 @@
 
     &__state {
         position: relative;
-        color: lumx-theme-color-variant(dark, L5);
+        color: lumx-theme-color-variant('dark', 'L5');
 
         #{$self}--is-active &,
         #{$self}--is-complete & {
-            color: lumx-theme-color-variant(primary, N);
+            color: lumx-theme-color-variant('primary', 'N');
         }
 
         #{$self}--has-error & {
-            color: lumx-theme-color-variant(red, N);
+            color: lumx-theme-color-variant('red', 'N');
         }
 
         &::before {
@@ -70,31 +70,31 @@
             left: 2px;
             width: 20px;
             height: 20px;
-            background-color: lumx-theme-color-variant(light, N);
+            background-color: lumx-theme-color-variant('light', 'N');
             content: '';
         }
     }
 
     &__label {
-        @include lumx-typography(body1);
+        @include lumx-typography('body1');
 
         margin-top: $lumx-spacing-unit;
-        color: lumx-theme-color-variant(dark, N);
+        color: lumx-theme-color-variant('dark', 'N');
         text-align: center;
 
         #{$self}--has-error & {
-            color: lumx-theme-color-variant(red, N);
+            color: lumx-theme-color-variant('red', 'N');
         }
     }
 
     &__helper {
-        @include lumx-typography(caption);
+        @include lumx-typography('caption');
 
-        color: lumx-theme-color-variant(dark, L2);
+        color: lumx-theme-color-variant('dark', 'L2');
         text-align: center;
 
         #{$self}--has-error & {
-            color: lumx-theme-color-variant(red, N);
+            color: lumx-theme-color-variant('red', 'N');
         }
     }
 }
@@ -104,15 +104,15 @@
 
 // Hover state
 .#{$lumx-base-prefix}-progress-tracker-step--is-clickable:hover {
-    @include lumx-state(state-hover, emphasis-low, dark);
+    @include lumx-state('state-hover', 'emphasis-low', 'dark');
 }
 
 // Active state
 .#{$lumx-base-prefix}-progress-tracker-step--is-clickable:active {
-    @include lumx-state(state-active, emphasis-low, dark);
+    @include lumx-state('state-active', 'emphasis-low', 'dark');
 }
 
 // Focus state
 .#{$lumx-base-prefix}-progress-tracker-step--is-clickable[data-focus-visible-added] {
-    @include lumx-state(state-focus, emphasis-low, dark);
+    @include lumx-state('state-focus', 'emphasis-low', 'dark');
 }

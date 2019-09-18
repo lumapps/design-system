@@ -70,7 +70,7 @@ const baseConfig = {
                 },
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|jpg|gif|woff(2)?|ttf|eot|svg)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name]-[hash:8].[ext]',
@@ -99,7 +99,7 @@ const baseConfig = {
     profile: false,
 
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json', '.md', '.mdx'],
         modules: ['node_modules'],
         alias: {
             'LumX/angularjs': path.resolve(__dirname, `${CORE_PATH}/angularjs`),

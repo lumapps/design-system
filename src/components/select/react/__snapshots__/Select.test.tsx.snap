@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Select> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-select lumx-select--is-empty lumx-select--theme-light"
+>
+  <div
+    className="lumx-select__input-wrapper"
+    id="uuid"
+    onKeyPress={[Function]}
+    tabIndex={0}
+  >
+    <div
+      className="lumx-select__input-chips"
+    />
+    <div
+      className="lumx-select__input-indicator"
+    >
+      <Icon
+        icon="M7,10L12,15L17,10H7Z"
+        size="s"
+      />
+    </div>
+  </div>
+  <Dropdown
+    anchorRef={
+      Object {
+        "current": null,
+      }
+    }
+    closeOnClick={true}
+    closeOnEscape={true}
+    placement="auto-start"
+    showDropdown={false}
+  >
+    <span>
+      Select Component
+    </span>
+  </Dropdown>
+</div>
+`;

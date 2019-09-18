@@ -31,16 +31,19 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
             url: '/',
             views: {
                 'main-nav': {
-                    template: require('./layout/main-nav/main-nav.html'),
-                },
-                'sub-nav': {
-                    controller: 'SubNavController',
+                    controller: 'MainNavController',
                     controllerAs: 'vm',
-                    template: require('./layout/sub-nav/sub-nav.html'),
+                    template: require('./layout/main-nav/main-nav.html'),
                 },
             },
         })
-        .state('app.colors', {
+        .state('app.product', {
+            abstract: true,
+        })
+        .state('app.product.foundations', {
+            abstract: true,
+        })
+        .state('app.product.foundations.colors', {
             url: 'colors',
             views: {
                 'main@': {
@@ -50,7 +53,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.typography', {
+        .state('app.product.foundations.typography', {
             url: 'typography',
             views: {
                 'main@': {
@@ -58,7 +61,10 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.avatar', {
+        .state('app.product.components', {
+            abstract: true,
+        })
+        .state('app.product.components.avatar', {
             url: 'avatar',
             views: {
                 'main@': {
@@ -66,7 +72,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.button', {
+        .state('app.product.components.button', {
             url: 'button',
             views: {
                 'main@': {
@@ -76,7 +82,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.checkbox', {
+        .state('app.product.components.checkbox', {
             url: 'checkbox',
             views: {
                 'main@': {
@@ -86,7 +92,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.chip', {
+        .state('app.product.components.chip', {
             url: 'chip',
             views: {
                 'main@': {
@@ -96,7 +102,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.comment-block', {
+        .state('app.product.components.comment-block', {
             url: 'comment-block',
             views: {
                 'main@': {
@@ -106,7 +112,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.dialog', {
+        .state('app.product.components.dialog', {
             url: 'dialog',
             views: {
                 'main@': {
@@ -116,7 +122,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.dropdown', {
+        .state('app.product.components.dropdown', {
             url: 'dropdown',
             views: {
                 'main@': {
@@ -126,7 +132,17 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.expansion-panel', {
+        .state('app.product.components.editable-media', {
+            url: 'editable-media',
+            views: {
+                'main@': {
+                    controller: 'DemoEditableMediaController',
+                    controllerAs: 'vm',
+                    template: require('./components/editable-media/demo.html'),
+                },
+            },
+        })
+        .state('app.product.components.expansion-panel', {
             url: 'expansion-panel',
             views: {
                 'main@': {
@@ -136,7 +152,15 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.image-block', {
+        .state('app.product.components.grid', {
+            url: 'grid',
+            views: {
+                'main@': {
+                    template: require('./components/grid/demo.html'),
+                },
+            },
+        })
+        .state('app.product.components.image-block', {
             url: 'image-block',
             views: {
                 'main@': {
@@ -146,7 +170,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.lightbox', {
+        .state('app.product.components.lightbox', {
             url: 'lightbox',
             views: {
                 'main@': {
@@ -156,7 +180,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.list', {
+        .state('app.product.components.list', {
             url: 'list',
             views: {
                 'main@': {
@@ -166,7 +190,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.notification', {
+        .state('app.product.components.notification', {
             url: 'notification',
             views: {
                 'main@': {
@@ -176,7 +200,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.popover', {
+        .state('app.product.components.popover', {
             url: 'popover',
             views: {
                 'main@': {
@@ -186,7 +210,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.post-block', {
+        .state('app.product.components.post-block', {
             url: 'post-block',
             views: {
                 'main@': {
@@ -196,7 +220,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.progress', {
+        .state('app.product.components.progress', {
             url: 'progress',
             views: {
                 'main@': {
@@ -204,7 +228,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.progress-tracker', {
+        .state('app.product.components.progress-tracker', {
             url: 'progress-tracker',
             views: {
                 'main@': {
@@ -214,7 +238,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.radio-button', {
+        .state('app.product.components.radio-button', {
             url: 'radio-button',
             views: {
                 'main@': {
@@ -224,7 +248,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.select', {
+        .state('app.product.components.select', {
             url: 'select',
             views: {
                 'main@': {
@@ -234,7 +258,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.side-navigation', {
+        .state('app.product.components.side-navigation', {
             url: 'side-navigation',
             views: {
                 'main@': {
@@ -244,7 +268,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.slideshow', {
+        .state('app.product.components.slideshow', {
             url: 'slideshow',
             views: {
                 'main@': {
@@ -254,7 +278,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.switch', {
+        .state('app.product.components.switch', {
             url: 'switch',
             views: {
                 'main@': {
@@ -264,7 +288,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.table', {
+        .state('app.product.components.table', {
             url: 'table',
             views: {
                 'main@': {
@@ -274,7 +298,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.tabs', {
+        .state('app.product.components.tabs', {
             url: 'tabs',
             views: {
                 'main@': {
@@ -284,7 +308,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.text-field', {
+        .state('app.product.components.text-field', {
             url: 'text-field',
             views: {
                 'main@': {
@@ -294,7 +318,15 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.toolbar', {
+        .state('app.product.components.thumbnail', {
+            url: 'thumbnail',
+            views: {
+                'main@': {
+                    template: require('./components/thumbnail/demo.html'),
+                },
+            },
+        })
+        .state('app.product.components.toolbar', {
             url: 'toolbar',
             views: {
                 'main@': {
@@ -304,7 +336,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.tooltip', {
+        .state('app.product.components.tooltip', {
             url: 'tooltip',
             views: {
                 'main@': {
@@ -312,7 +344,7 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
-        .state('app.user-block', {
+        .state('app.product.components.user-block', {
             url: 'user-block',
             views: {
                 'main@': {
@@ -344,11 +376,11 @@ function AppDefaultRun($rootScope, Theme) {
     }
 
     $rootScope.$on('lumx-scroll__disable', () => {
-        angular.element('.sub-nav, .main').on('mousewheel touchmove', scrollHandler);
+        angular.element('.main-nav, .main').on('mousewheel touchmove', scrollHandler);
     });
 
     $rootScope.$on('lumx-scroll__restore', () => {
-        angular.element('.sub-nav, .main').off('mousewheel touchmove', scrollHandler);
+        angular.element('.main-nav, .main').off('mousewheel touchmove', scrollHandler);
     });
 }
 
@@ -374,7 +406,7 @@ require('./layout/demo/demo-colors_directive.js');
 require('./layout/demo/demo-grid_directive.js');
 require('./layout/main/main-header_directive.js');
 require('./layout/main/main-content_directive.js');
-require('./layout/sub-nav/sub-nav_controller.js');
+require('./layout/main-nav/main-nav_controller.js');
 
 require('./foundations/colors/controller.js');
 require('./components/button/controller.js');
@@ -383,6 +415,7 @@ require('./components/chip/controller.js');
 require('./components/comment-block/controller.js');
 require('./components/dialog/controller.js');
 require('./components/dropdown/controller.js');
+require('./components/editable-media/controller.js');
 require('./components/expansion-panel/controller.js');
 require('./components/image-block/controller.js');
 require('./components/lightbox/controller.js');

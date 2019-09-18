@@ -12,7 +12,7 @@
     display: none;
     overflow: auto;
     animation: lumx-lightbox-show $lumx-lightbox-transition-duration;
-    background-color: lumx-theme-color-variant(dark, L1);
+    background-color: lumx-theme-color-variant('dark', 'L1');
     opacity: 1;
     transition: opacity $lumx-lightbox-transition-duration;
 
@@ -28,10 +28,10 @@
 
     &__wrapper {
         position: absolute;
-        top: map-get($lumx-sizes, l);
-        right: map-get($lumx-sizes, l);
-        bottom: map-get($lumx-sizes, l);
-        left: map-get($lumx-sizes, l);
+        top: map-get($lumx-sizes, 'l');
+        right: map-get($lumx-sizes, 'l');
+        bottom: map-get($lumx-sizes, 'l');
+        left: map-get($lumx-sizes, 'l');
         display: flex;
         flex-direction: column;
     }

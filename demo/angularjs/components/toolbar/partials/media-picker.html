@@ -1,6 +1,6 @@
 <lumx-toolbar>
     <lumx-toolbar-label>
-        <div lumx-grid-container="row" lumx-grid-h-align="center">
+        <lumx-grid lumx-orientation="horizontal" lumx-h-align="center">
             <span
                 class="lumx-typography-title"
                 ng-class="{ 'lumx-theme-color-dark-N': demoBlock.theme === 'light',
@@ -16,7 +16,7 @@
             >
                 <input type="text" ng-model="vm.searchFieldModel" placeholder="Search" />
             </lumx-text-field>
-        </div>
+        </lumx-grid>
     </lumx-toolbar-label>
 
     <lumx-toolbar-after>

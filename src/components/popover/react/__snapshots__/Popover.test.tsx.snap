@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Popover> Snapshots and structure should render correctly 1`] = `
+<Portal
+  containerInfo={<body />}
+>
+  <div
+    className="lumx-popover lumx-popover--elevation-3"
+    style={
+      Object {
+        "left": 0,
+        "position": "fixed",
+        "top": 0,
+        "transform": "translate(0px, 0px)",
+        "visibility": "visible",
+        "zIndex": 9999,
+      }
+    }
+  >
+    <div
+      className="lumx-popover__wrapper"
+    >
+      This is the content of the popover
+    </div>
+  </div>
+</Portal>
+`;

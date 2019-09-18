@@ -1,15 +1,22 @@
-import { shallow } from 'enzyme';
+import { ShallowWrapper, shallow } from 'enzyme';
 import React from 'react';
 
-import { Chip } from './Chip';
+import { ICommonSetup } from 'LumX/core/testing/utils.test';
+
+import { Chip, ChipProps } from './Chip';
+
+interface ISetup extends ICommonSetup {
+    after: ShallowWrapper;
+    before: ShallowWrapper;
+}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {Object} propOverrides An object that will extend the default properties.
- * @return {Object} An object with some shortcuts to elements or data required in tests.
+ * @param propOverrides An object that will extend the default properties.
+ * @return An object with some shortcuts to elements or data required in tests.
  */
-const setup = (propOverrides = {}) => {
+const setup = (propOverrides: Partial<ChipProps> = {}): ISetup => {
     const props = {
         LabelComponent: 'Hello World!',
         ...propOverrides,
@@ -42,10 +49,13 @@ describe('<Chip />', () => {
         const mockOnAfterClick = jest.fn();
         const mockOnBeforeClick = jest.fn();
         const mockClickEvent = {
-            stopPropagation: () => true,
+            stopPropagation: (): boolean => true,
         };
-        const clearClickMocks = () => {
-            [mockOnClick, mockOnAfterClick, mockOnBeforeClick].forEach((func) => func.mockClear());
+        const clearClickMocks = (): void => {
+            // tslint:disable-next-line: no-any
+            [mockOnClick, mockOnAfterClick, mockOnBeforeClick].forEach((func: jest.MockInstance<any, any>) =>
+                func.mockClear(),
+            );
         };
 
         beforeEach(() => clearClickMocks);
@@ -127,7 +137,7 @@ describe('<Chip />', () => {
             expect(before).toHaveLength(1);
             expect(before.hasClass('lumx-chip__before--is-clickable')).toEqual(false);
 
-            ({ before } = setup({ before: 'before 2', onBeforeClick: () => true }));
+            ({ before } = setup({ before: 'before 2', onBeforeClick: (): boolean => true }));
             expect(before).toHaveLength(1);
             expect(before.hasClass('lumx-chip__before--is-clickable')).toEqual(true);
         });
@@ -137,7 +147,7 @@ describe('<Chip />', () => {
             expect(after).toHaveLength(1);
             expect(after.hasClass('lumx-chip__after--is-clickable')).toEqual(false);
 
-            ({ after } = setup({ after: 'after 2', onAfterClick: () => true }));
+            ({ after } = setup({ after: 'after 2', onAfterClick: (): boolean => true }));
             expect(after).toHaveLength(1);
             expect(after.hasClass('lumx-chip__after--is-clickable')).toEqual(true);
         });

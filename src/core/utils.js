@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
 import kebabCase from 'lodash/kebabCase';
-import { noop } from 'lodash/noop';
+import noop from 'lodash/noop';
 
-import { ENTER_KEY_CODE } from './constants';
+import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from './constants';
 
 /**
  * Enhance isEmpty method to also works with numbers.
@@ -37,6 +37,10 @@ const _isEmpty = (value) => {
  */
 function getBasicClass({ prefix, type, value }) {
     if (isBoolean(value)) {
+        if (!value) {
+            // False value should not return a class.
+            return '';
+        }
         const booleanPrefixes = ['has', 'is'];
 
         if (booleanPrefixes.some((booleanPrefix) => type.toString().startsWith(booleanPrefix))) {
@@ -145,7 +149,7 @@ function detectSwipe(el, cb = noop) {
 }
 
 /**
- * Make sure the pressed key is the enter key before calling the callbac.
+ * Make sure the pressed key is the enter key before calling the callback.
  *
  * @param  {Function} cb The callback to call on enter/return press.
  * @return {Function} The decorated function.
@@ -160,6 +164,22 @@ function onEnterPressed(cb) {
     };
 }
 
+/**
+ * Make sure the pressed key is the escape key before calling the callback.
+ *
+ * @param  {Function} cb The callback to call on escape press.
+ * @return {Function} The decorated function.
+ */
+function onEscapePressed(cb) {
+    return (evt) => {
+        if (evt.keyCode !== ESCAPE_KEY_CODE) {
+            return;
+        }
+
+        cb();
+    };
+}
+
 /////////////////////////////
 
-export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed };
+export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed };

@@ -8,7 +8,7 @@ function DialogCloseDirective(LumXDialogService) {
 
     function link(scope, el) {
         el.on('click', () => {
-            LumXDialogService.close(el.parents(`.${CSS_PREFIX}-dialog`).attr('id'), true);
+            LumXDialogService.close(el.parents(`.${CSS_PREFIX}-dialog`).attr('id'));
         });
 
         scope.$on('$destroy', () => {

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Color, Colors, Size, Sizes } from 'LumX/components';
+import { Color, ColorVariant, Size } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -23,13 +23,17 @@ interface IProps extends IGenericProps {
     /**
      * Icon reference
      */
-    // tslint:disable-next-line: no-any
-    iconRef?: React.RefObject<any>;
+    iconRef?: React.RefObject<HTMLElement>;
 
     /**
      * The icon color.
      */
     color?: Color;
+
+    /**
+     * The icon color variant.
+     */
+    colorVariant?: ColorVariant;
 
     /**
      * The icon size.
@@ -53,28 +57,16 @@ interface IDefaultPropsType extends Partial<IconProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Icon`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Icon`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     iconRef: undefined,
@@ -89,7 +81,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Globally validate the component before validating the children.
  *
- * @param {ValidateParameters} props The properties of the component.
+ * @param props The properties of the component.
  */
 function _preValidate({ props }: ValidateParameters): void {
     if (!isEmpty(props.icon)) {
@@ -102,10 +94,10 @@ function _preValidate({ props }: ValidateParameters): void {
 /**
  * Validate the component props.
  *
- * @param  {IconProps}       props The props of the component.
- * @return {React.ReactNode} The processed children of the component.
+ * @param       props The props of the component.
+ * @return The processed children of the component.
  */
-function _validate(props: IconProps): React.ReactNode {
+function _validate(props: IconProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         preValidate: _preValidate,
         props,
@@ -117,22 +109,23 @@ function _validate(props: IconProps): React.ReactNode {
 /**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
  *
- * @return {React.ReactElement} The component
+ * @return The component
  */
 const Icon: React.FC<IconProps> = ({
     className,
     color,
+    colorVariant,
     icon,
     iconRef = DEFAULT_PROPS.iconRef,
     size,
     ...props
-}: IconProps): React.ReactElement => {
+}: IconProps): ReactElement => {
     _validate({ color, icon, size, ...props });
 
     return (
         <i
             ref={iconRef}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, size }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant, size }))}
             {...props}
         >
             <svg
@@ -152,4 +145,4 @@ Icon.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, Color, Colors, Size, Sizes };
+export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps };

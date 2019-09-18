@@ -1,10 +1,8 @@
-const glob = require('glob');
-
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 const { shouldPrintComment } = require('babel-plugin-smart-webpack-import');
 
-const { COMPONENTS_PATH, CORE_PATH, NODE_MODULES_PATH } = require('./constants');
+const { CORE_PATH, ICONS_PATH, NODE_MODULES_PATH } = require('./constants');
 
 /**
  * Setup Babel transpiler.
@@ -40,26 +38,6 @@ function babelSetup({ plugins = [], presets = [], options = {} } = {}) {
         ],
         shouldPrintComment,
     };
-}
-
-/**
- * Returns all entry point for a given technology and prefix.
- *
- * @param  {string} prefix    The tech name (react|angularjs) to match correct path.
- * @param  {string} extension The file extension to match.
- * @return {Object} An object of all formatted matches to use in webpack config entry option with filename
- *                  as key and path as value.
- */
-function getComponents({ prefix, extension }) {
-    const files = {};
-    const matches = glob.sync(`${COMPONENTS_PATH}/**/${prefix}/**/*.${extension}`);
-    const fileNameRegexp = `(?:.*)/(.*).${extension}`;
-
-    matches.forEach((match) => {
-        files[match.match(fileNameRegexp)[1]] = match;
-    });
-
-    return files;
 }
 
 /**
@@ -110,14 +88,14 @@ function getStyleLoader({ mode = 'dev' }) {
                 {
                     loader: 'sass-loader',
                     options: {
-                        includePaths: [`${NODE_MODULES_PATH}/sass-mq`],
+                        includePaths: [`${ICONS_PATH}/node_modules/@mdi/font/scss/`, `${NODE_MODULES_PATH}/sass-mq`],
                         sourceMap: false,
                     },
                 },
             ],
         },
         {
-            exclude: /node_modules/u,
+            // Exclude: /node_modules/u,
             test: /\.css$/u,
             use: [
                 mode === 'dev'
@@ -159,6 +137,5 @@ function getStyleLoader({ mode = 'dev' }) {
 
 module.exports = {
     babelSetup,
-    getComponents,
     getStyleLoader,
 };

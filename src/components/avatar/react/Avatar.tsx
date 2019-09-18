@@ -1,8 +1,8 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX/components';
+import { Size, Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
@@ -12,14 +12,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Authorized size values.
  */
-enum Sizes {
-    xs = 'xs',
-    s = 's',
-    m = 'm',
-    l = 'l',
-    xl = 'xl',
-}
-type Size = Sizes;
+type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl;
 
 /////////////////////////////
 
@@ -28,7 +21,7 @@ type Size = Sizes;
  */
 interface IAvatarProps extends IGenericProps {
     /* Size. */
-    size?: Size;
+    size?: AvatarSize;
     /* Theme. */
     theme?: Theme;
     /* Avatar image */
@@ -51,39 +44,27 @@ interface IDefaultPropsType extends Partial<AvatarProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Avatar`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Avatar`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    size: Sizes.m,
-    theme: Themes.light,
+    size: Size.m,
+    theme: Theme.light,
 };
 /////////////////////////////
 
 /**
  * Simple component used to identify user.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Avatar: React.FC<AvatarProps> = ({
     className = '',
@@ -91,7 +72,7 @@ const Avatar: React.FC<AvatarProps> = ({
     theme = DEFAULT_PROPS.theme,
     image,
     ...props
-}: AvatarProps): React.ReactElement => {
+}: AvatarProps): ReactElement => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
@@ -110,4 +91,4 @@ Avatar.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps, Theme, Themes, Sizes };
+export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps };

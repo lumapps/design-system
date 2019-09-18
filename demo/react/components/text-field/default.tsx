@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement, useState } from 'react';
 
-import { TextField, TextFieldTheme } from 'LumX';
+import { TextField, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: TextFieldTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -16,13 +16,27 @@ interface IProps {
 /**
  * The demo for the default <TextField>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
-        <TextField label="Texfield label" theme={theme} />
-    </Fragment>
-);
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const [value, setValue] = useState('My initial value');
+
+    /**
+     * Function called on value change.
+     *
+     * @param inputValue Value from input.
+     */
+    const onChange = (inputValue: string): void => {
+        setValue(inputValue);
+    };
+
+    return (
+        <>
+            <TextField label="TextField label" value={value} onChange={onChange} theme={theme} />
+            <p>Value: {value}</p>
+        </>
+    );
+};
 
 /////////////////////////////
 

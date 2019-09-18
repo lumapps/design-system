@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -29,28 +29,16 @@ interface IDefaultPropsType extends Partial<TableRowProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableRow`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}TableRow`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
 
@@ -59,13 +47,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * The TableRow component displays an HTML Table Row, which contains table cells.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
-const TableRow: React.FC<TableRowProps> = ({
-    children,
-    className = '',
-    ...props
-}: TableRowProps): React.ReactElement => (
+const TableRow: React.FC<TableRowProps> = ({ children, className = '', ...props }: TableRowProps): ReactElement => (
     <tr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {children}
     </tr>

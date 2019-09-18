@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { ReactElement } from 'react';
 
-import { Button, ButtonEmphasises, ButtonTheme, ButtonThemes, IconButton } from 'LumX';
+import { Button, ButtonEmphasis, IconButton, Theme } from 'LumX';
 import { mdiCheck, mdiPencil } from 'LumX/icons';
 
 /////////////////////////////
@@ -9,7 +9,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ButtonTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -17,15 +17,15 @@ interface IProps {
 /**
  * The demo for the <Button>s with icons and <IconButton>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
+    <>
         <div className="mb+">
             <Button
                 className="mr"
-                emphasis={ButtonEmphasises.low}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.low}
+                color={theme === Theme.dark ? 'light' : undefined}
                 leftIcon={mdiPencil}
                 theme={theme}
             >
@@ -34,8 +34,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
             <Button
                 className="mr"
-                emphasis={ButtonEmphasises.medium}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.medium}
+                color={theme === Theme.dark ? 'light' : undefined}
                 leftIcon={mdiPencil}
                 theme={theme}
             >
@@ -50,8 +50,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <div className="mb+">
             <Button
                 className="mr"
-                emphasis={ButtonEmphasises.low}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.low}
+                color={theme === Theme.dark ? 'light' : undefined}
                 rightIcon={mdiCheck}
                 theme={theme}
             >
@@ -60,8 +60,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
             <Button
                 className="mr"
-                emphasis={ButtonEmphasises.medium}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.medium}
+                color={theme === Theme.dark ? 'light' : undefined}
                 rightIcon={mdiCheck}
                 theme={theme}
             >
@@ -76,8 +76,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <div className="mb+">
             <Button
                 className="mr"
-                emphasis={ButtonEmphasises.low}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.low}
+                color={theme === Theme.dark ? 'light' : undefined}
                 leftIcon={mdiPencil}
                 rightIcon={mdiCheck}
                 theme={theme}
@@ -87,8 +87,8 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
 
             <Button
                 className="mr"
-                emphasis={ButtonEmphasises.medium}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.medium}
+                color={theme === Theme.dark ? 'light' : undefined}
                 leftIcon={mdiPencil}
                 rightIcon={mdiCheck}
                 theme={theme}
@@ -104,16 +104,16 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <div className="mb+">
             <Button
                 className="mr"
-                emphasis={ButtonEmphasises.low}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.low}
+                color={theme === Theme.dark ? 'light' : undefined}
                 leftIcon={mdiPencil}
                 theme={theme}
             />
 
             <Button
                 className="mr"
-                emphasis={ButtonEmphasises.medium}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.medium}
+                color={theme === Theme.dark ? 'light' : undefined}
                 leftIcon={mdiPencil}
                 theme={theme}
             />
@@ -124,23 +124,23 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
         <div>
             <IconButton
                 className="mr"
-                emphasis={ButtonEmphasises.low}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.low}
+                color={theme === Theme.dark ? 'light' : undefined}
                 icon={mdiPencil}
                 theme={theme}
             />
 
             <IconButton
                 className="mr"
-                emphasis={ButtonEmphasises.medium}
-                color={theme === ButtonThemes.dark ? 'light' : undefined}
+                emphasis={ButtonEmphasis.medium}
+                color={theme === Theme.dark ? 'light' : undefined}
                 icon={mdiPencil}
                 theme={theme}
             />
 
             <IconButton icon={mdiPencil} theme={theme} />
         </div>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextField> Snapshots and structure should render defaults 1`] = `
+<div
+  className="lumx-text-field lumx-text-field--has-input lumx-text-field--theme-light"
+>
+  <div
+    className="lumx-text-field__input-wrapper"
+  >
+    <div
+      className="lumx-text-field__input-native"
+    >
+      <input
+        id="fixedId"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        type="text"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<TextField> Snapshots and structure should render textarea 1`] = `
+<div
+  className="lumx-text-field lumx-text-field--has-textarea lumx-text-field--theme-light"
+>
+  <div
+    className="lumx-text-field__input-wrapper"
+  >
+    <div
+      className="lumx-text-field__input-native"
+    >
+      <textarea
+        id="fixedId"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+      />
+    </div>
+  </div>
+</div>
+`;

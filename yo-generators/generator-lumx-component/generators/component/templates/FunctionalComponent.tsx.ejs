@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement<% if (validateComponent || transformChild) { -%>, ReactNode<% } -%> } from 'react';
 
 import classNames from 'classnames';
 
@@ -37,11 +37,6 @@ type <%= componentName %>Props = I<%= componentName %>Props;
 
 /////////////////////////////
 
-/**
- * Define the types of the default props.
- */
-interface IDefaultPropsType extends Partial<<%= componentName %>Props> {}
-
 /////////////////////////////
 //                         //
 //    Public attributes    //
@@ -50,30 +45,18 @@ interface IDefaultPropsType extends Partial<<%= componentName %>Props> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}<%= componentName %>`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}<%= componentName %>`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: Partial<<%= componentName %>Props> = {};
 <% if (validateComponent) { -%>
 
 /////////////////////////////
@@ -86,12 +69,11 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * Globally validate the component after transforming and/or validating the children.
  *
- * @param  {ValidateParameters} params The children, their number and the props of the component.
- * @return {string|boolean}     If a string, the error message.
- *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
- *                              lead to throw a basic error message).
- *                              You can also return nothing if there is no special problem (i.e. a successful
- *                              validation).
+ * @param   params The children, their number and the props of the component.
+ * @return  If a string, the error message.
+ *          If a boolean, `true` means a successful validation, `false` a bad validation (which will
+ *          lead to throw a basic error message).
+ *          You can also return nothing if there is no special problem (i.e. a successful validation).
  */
 function _postValidate({ children, childrenCount, props }: ValidateParameters): string | boolean | void {
     // Do your post-validation here.
@@ -104,12 +86,11 @@ function _postValidate({ children, childrenCount, props }: ValidateParameters): 
 /**
  * Globally validate the component before transforming and/or validating the children.
  *
- * @param  {ValidateParameters} params The children, their number and the props of the component.
- * @return {string|boolean}     If a string, the error message.
- *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
- *                              lead to throw a basic error message).
- *                              You can also return nothing if there is no special problem (i.e. a successful
- *                              validation).
+ * @param   params The children, their number and the props of the component.
+ * @return  If a string, the error message.
+ *          If a boolean, `true` means a successful validation, `false` a bad validation (which will
+ *          lead to throw a basic error message).
+ *          You can also return nothing if there is no special problem (i.e. a successful validation).
  */
 function _preValidate({ children, childrenCount, props }: ValidateParameters): string | boolean | void {
     // Do your pre-validation here.
@@ -122,8 +103,8 @@ function _preValidate({ children, childrenCount, props }: ValidateParameters): s
 /**
  * Transform a child of the component.
  *
- * @param  {ChildTransformParameters} params The parameters received from the `validateComponent` function.
- * @return {React.ReactNode}          The transformed child (or the original one if there is no transformation to do).
+ * @param  params The parameters received from the `validateComponent` function.
+ * @return The transformed child (or the original one if there is no transformation to do).
  */
 function _transformChild({
     child,
@@ -131,7 +112,7 @@ function _transformChild({
     childrenCount,
     index,
     props,
-}: ChildTransformParameters): React.ReactNode {
+}: ChildTransformParameters): ReactNode {
     // Do your transformation here. Here is an example:
     if (typeof child === 'string') {
         return <span>{child}</span>;
@@ -145,12 +126,11 @@ function _transformChild({
 /**
  * Validate a child of the component after its transformation.
  *
- * @param  {ChildValidateParameters} params The parameters received from the `validateComponent` function.
- * @return {string|boolean}          If a string, the error message.
- *                                   If a boolean, `true` means a successful validation, `false` a bad validation (which
- *                                   will lead to throw a basic error message).
- *                                   You can also return nothing if there is no special problem (i.e. a successful
- *                                   validation).
+ * @param  params The parameters received from the `validateComponent` function.
+ * @return If a string, the error message.
+ *         If a boolean, `true` means a successful validation, `false` a bad validation (which
+ *         will lead to throw a basic error message).
+ *         You can also return nothing if there is no special problem (i.e. a successful validation).
  */
 function _validateChild({
     child,
@@ -169,10 +149,10 @@ function _validateChild({
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {<%= componentName %>Props} props The children and props of the component.
- * @return {React.ReactNode}    The processed children of the component.
+ * @param  props The children and props of the component.
+ * @return The processed children of the component.
  */
-function _validate(props: <%= componentName %>Props): React.ReactNode {
+function _validate(props: <%= componentName %>Props): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         <%_ if (checkChildrenTypes) { -%>
         allowedTypes: [
@@ -209,11 +189,11 @@ function _validate(props: <%= componentName %>Props): React.ReactNode {
 /**
  * [Enter the description of the component here].
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
-const <%= componentName %>: React.FC<<%= componentName %>Props> = ({ children, className = '', ...props }: <%= componentName %>Props): React.ReactElement => {
+const <%= componentName %>: React.FC<<%= componentName %>Props> = ({ children, className = '', ...props }: <%= componentName %>Props): ReactElement => {
     <%_ if (validateComponent) { -%>
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+    const newChildren: ReactNode = _validate({ children, ...props });
 
     <%_ } -%>
     return (

@@ -31,12 +31,12 @@
     }
 
     &__label {
-        @include lumx-typography(body1);
+        @include lumx-typography('body1');
 
         display: block;
 
         #{$self}--theme-dark & {
-            color: lumx-theme-color-variant(light, N);
+            color: lumx-theme-color-variant('light', 'N');
         }
     }
 

@@ -1,6 +1,6 @@
-import React, { CSSProperties, Fragment } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
-import { Thumbnail, ThumbnailAspectRatios, ThumbnailSizes, ThumbnailTheme } from 'LumX';
+import { Size, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
 
 /////////////////////////////
 
@@ -8,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: ThumbnailTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -22,32 +22,32 @@ const componentHolder: CSSProperties = {
 /**
  * The demo for the default <Thumbnail>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => (
-    <Fragment>
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
+    <>
         <h2>Aspect-ratio : original</h2>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div style={{ display: 'flex' }}>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xxs} />
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={Size.xxs} />
                     xxs
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xs} />
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={Size.xs} />
                     xs
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.s} />s
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={Size.s} />s
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.m} />m
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={Size.m} />m
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.l} />l
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={Size.l} />l
                 </div>
                 <div style={componentHolder}>
-                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={ThumbnailSizes.xl} />
+                    <Thumbnail theme={theme} image="http://i.pravatar.cc/200" size={Size.xl} />
                     xl
                 </div>
             </div>
@@ -57,55 +57,55 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             <div style={{ display: 'flex' }}>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xxs}
+                        size={Size.xxs}
                     />
                     xxs
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xs}
+                        size={Size.xs}
                     />
                     xs
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.s}
+                        size={Size.s}
                     />
                     s
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.m}
+                        size={Size.m}
                     />
                     m
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.l}
+                        size={Size.l}
                     />
                     l
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.horizontal}
+                        aspectRatio={ThumbnailAspectRatio.horizontal}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xl}
+                        size={Size.xl}
                     />
                     xl
                 </div>
@@ -116,61 +116,61 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
             <div style={{ display: 'flex' }}>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xxs}
+                        size={Size.xxs}
                     />
                     xxs
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xs}
+                        size={Size.xs}
                     />
                     xs
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.s}
+                        size={Size.s}
                     />
                     s
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.m}
+                        size={Size.m}
                     />
                     m
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.l}
+                        size={Size.l}
                     />
                     l
                 </div>
                 <div style={componentHolder}>
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatios.vertical}
+                        aspectRatio={ThumbnailAspectRatio.vertical}
                         theme={theme}
                         image="http://i.pravatar.cc/200"
-                        size={ThumbnailSizes.xl}
+                        size={Size.xl}
                     />
                     xl
                 </div>
             </div>
         </div>
-    </Fragment>
+    </>
 );
 
 /////////////////////////////

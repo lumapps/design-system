@@ -1,11 +1,8 @@
-import React, { RefObject, useCallback, useEffect, useState } from 'react';
+import React, { ReactElement, RefObject, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
-import { Button } from 'LumX';
-import { Theme, Themes } from 'LumX/components';
-import { Emphasises } from 'LumX/components/button/react/Button';
-import { Variants } from 'LumX/components/button/react/DropdownButton';
+import { Button, ButtonEmphasis, ButtonVariant, Theme } from 'LumX';
 import {
     EDGE_FROM_ACTIVE_INDEX,
     PAGINATION_ITEMS_MAX,
@@ -60,44 +57,29 @@ interface IDefaultPropsType extends Partial<SlideshowControlsProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}SlideshowControls`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowControls`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeIndex: 0,
     onNextClick: noop,
     onPaginationClick: noop,
     onPreviousClick: noop,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 
 /////////////////////////////
 
 /**
  * Controls for the slideshow component.
- *
- * @param {SlideshowControlsProps} props
- * @return {(React.ReactElement | null)}
  */
 const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Index of the current slide */
@@ -117,7 +99,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Theme */
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SlideshowControlsProps): React.ReactElement | null => {
+}: SlideshowControlsProps): ReactElement | null => {
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
         return null;
     }
@@ -125,9 +107,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Handle keyboard shortcuts to navigate through slideshow.
      *
-     * @param {KeyboardEvent} evt Keyboard event.
+     * @param evt Keyboard event.
      */
-    const handleKeyPressed: (evt: KeyboardEvent) => void = (evt: KeyboardEvent): void => {
+    const handleKeyPressed = (evt: KeyboardEvent): void => {
         if (evt.keyCode === LEFT_KEY_CODE) {
             handlePreviousClick();
         } else if (evt.keyCode === RIGHT_KEY_CODE) {
@@ -141,10 +123,10 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Determines initial state of the visible range of pagination.
      *
-     * @param {number} index Index used to determinate position in slides.
-     * @return {PaginationRange} Min and max for pagination position.
+     * @param index Index used to determinate position in slides.
+     * @return Min and max for pagination position.
      */
-    const initVisibleRange: (index: number) => PaginationRange = (index: number): PaginationRange => {
+    const initVisibleRange = (index: number): PaginationRange => {
         const deltaItems: number = PAGINATION_ITEMS_MAX - 1;
         let min: number = index - EDGE_FROM_ACTIVE_INDEX;
         let max: number = index + EDGE_FROM_ACTIVE_INDEX;
@@ -163,9 +145,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Updates state of the visible range of pagination.
      *
-     * @param {number} index Index used to determinate position in slides.
+     * @param index Index used to determinate position in slides.
      */
-    const updateVisibleRange: (index: number) => void = (index: number): void => {
+    const updateVisibleRange = (index: number): void => {
         if (index === visibleRange.maxRange && index < lastSlide) {
             setVisibleRange(() => ({ minRange: visibleRange.minRange + 1, maxRange: visibleRange.maxRange + 1 }));
         } else if (index === visibleRange.minRange && index > 0) {
@@ -178,13 +160,13 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Build an array of navigation items (bullets for example).
      *
-     * @param {number} lastIndex Index of last item.
-     * @return {JSX.Element[]} Array of nabiagtion items.
+     * @param lastIndex Index of last item.
+     * @return Array of nabiagtion items.
      */
-    const buildItemsArray: (lastIndex: number) => JSX.Element[] = (lastIndex: number): JSX.Element[] => {
+    const buildItemsArray = (lastIndex: number): JSX.Element[] => {
         const items: JSX.Element[] = [];
 
-        for (let i: number = 0; i <= lastIndex; i++) {
+        for (let i = 0; i <= lastIndex; i++) {
             items.push(
                 <button
                     className={classNames({
@@ -207,9 +189,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Handle click on an item to go to a specific slide.
      *
-     * @param {number} index Index of the slide to go to.
+     * @param index Index of the slide to go to.
      */
-    const handleItemClick: (index: number) => void = useCallback(
+    const handleItemClick = useCallback(
         (index: number) => {
             if (isFunction(onPaginationClick)) {
                 onPaginationClick(index);
@@ -221,7 +203,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Handle click to go to next slide.
      */
-    const handleNextClick: () => void = useCallback(() => {
+    const handleNextClick = useCallback(() => {
         if (isFunction(onNextClick)) {
             onNextClick();
         }
@@ -230,7 +212,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Handle click to go to previous slide.
      */
-    const handlePreviousClick: () => void = useCallback(() => {
+    const handlePreviousClick = useCallback(() => {
         if (isFunction(onPreviousClick)) {
             onPreviousClick();
         }
@@ -239,20 +221,20 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /**
      * Determine if a navigation item is visible.
      *
-     * @param {number} index Index of navigation item.
-     * @return {boolean} Whether navigation item is visble or not.
+     * @param index Index of navigation item.
+     * @return Whether navigation item is visble or not.
      */
-    const isPaginationItemOutVisibleRange: (index: number) => boolean = (index: number): boolean => {
+    const isPaginationItemOutVisibleRange = (index: number): boolean => {
         return index < visibleRange.minRange || index > visibleRange.maxRange;
     };
 
     /**
      * Check if the pagination item is on edge, indicating other slides after or before.
      *
-     * @param  {number}  index The index of the pagination item to check.
-     * @return {boolean} Whether the pagination item is on edge or not.
+     * @param  index The index of the pagination item to check.
+     * @return Whether the pagination item is on edge or not.
      */
-    const isPaginationItemOnEdge: (index: number) => boolean = (index: number): boolean => {
+    const isPaginationItemOnEdge = (index: number): boolean => {
         return (
             index !== 0 && index !== lastSlide && (index === visibleRange.minRange || index === visibleRange.maxRange)
         );
@@ -314,9 +296,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
             <Button
                 leftIcon={mdiChevronLeft}
                 className={`${CLASSNAME}__navigation`}
-                color={theme === Themes.dark ? 'light' : 'dark'}
-                emphasis={Emphasises.low}
-                variant={Variants.icon}
+                color={theme === Theme.dark ? 'light' : 'dark'}
+                emphasis={ButtonEmphasis.low}
+                variant={ButtonVariant.icon}
                 onClick={handlePreviousClick}
                 tabIndex={-1}
             />
@@ -328,9 +310,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
             <Button
                 leftIcon={mdiChevronRight}
                 className={`${CLASSNAME}__navigation`}
-                color={theme === Themes.dark ? 'light' : 'dark'}
-                emphasis={Emphasises.low}
-                variant={Variants.icon}
+                color={theme === Theme.dark ? 'light' : 'dark'}
+                emphasis={ButtonEmphasis.low}
+                variant={ButtonVariant.icon}
                 onClick={handleNextClick}
                 tabIndex={-1}
             />

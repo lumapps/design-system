@@ -1,0 +1,38 @@
+```javascript import
+import { Switch, Theme } from 'LumX';
+```
+
+# Switch
+
+**Switches are on/off toggles for a single option.**
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    return (
+        <>
+            <div className="lumx-spacing-margin-bottom-big">
+                <Switch checked={false} theme={theme}>
+                    Default
+                </Switch>
+            </div>
+            <div className="lumx-spacing-margin-bottom-big">
+                <Switch checked={false} theme={theme} helper={'Helper text'}>
+                    With helper
+                </Switch>
+            </div>
+            <div className="lumx-spacing-margin-bottom-big">
+                <Switch checked={false} disabled={true} theme={theme}>
+                    Disabled
+                </Switch>
+            </div>
+            <Switch checked={true} disabled={true} theme={theme}>
+                Disabled checked
+            </Switch>
+        </>
+    );
+};
+```
+
+### Properties
+
+<PropTable component="Switch" />

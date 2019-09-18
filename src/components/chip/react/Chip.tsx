@@ -1,10 +1,10 @@
-import React, { SyntheticEvent } from 'react';
+import React, { ReactElement, ReactNode, Ref, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 
-import { Color, Colors, Theme, Themes } from 'LumX/components';
+import { Color, ColorPalette, Size, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -15,30 +15,30 @@ import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 /**
  * Authorized size values.
  */
-enum Sizes {
-    s = 's',
-    m = 'm',
-}
-type Size = Sizes;
+type ChipSize = Size.s | Size.m;
 
 /**
  * Defines the props of the component.
  */
 interface IChipProps extends IGenericProps {
     /** A component to be rendered after the main label area. */
-    after?: HTMLElement | React.ReactNode;
+    after?: HTMLElement | ReactNode;
     /** A component to be rendered before the main label area. */
-    before?: HTMLElement | React.ReactNode;
+    before?: HTMLElement | ReactNode;
     /** The component color variant. */
     color?: Color;
+    /* Whether the chip has pointer on hover. */
+    isClickable?: boolean;
     /** Indicates if the chip is currently in an active state or not. */
     isSelected?: boolean;
     /** Indicates if the chip is currently disabled or not. */
     isDisabled?: boolean;
     /** The size of the chip. */
-    size?: Size;
+    size?: ChipSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** A ref that will be passed to the wrapper element. */
+    chipRef?: Ref<HTMLAnchorElement>;
     /** A function to be executed when the after element is clicked. */
     onAfterClick?(evt: SyntheticEvent): void;
     /** A function to be executed when the before element is clicked. */
@@ -61,36 +61,25 @@ interface IDefaultPropsType extends Partial<ChipProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Chip`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     after: null,
     before: null,
-    color: Colors.dark,
+    color: ColorPalette.dark,
+    isClickable: false,
     isDisabled: false,
     isSelected: false,
-    size: Sizes.m,
+    size: Size.m,
     theme: undefined,
 };
 /////////////////////////////
@@ -99,7 +88,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Displays information or allow an action on a compact element.
  * This is the base component for all variations of the chips see https://material.io/design/components/chips.html.
  *
- * @return {Component} The Chip component.
+ * @return The Chip component.
  */
 const Chip: React.FC<IChipProps> = ({
     after = DEFAULT_PROPS.after,
@@ -107,15 +96,17 @@ const Chip: React.FC<IChipProps> = ({
     className = '',
     children,
     color = DEFAULT_PROPS.color,
+    isClickable = DEFAULT_PROPS.isClickable,
     isSelected = DEFAULT_PROPS.isSelected,
     isDisabled = DEFAULT_PROPS.isDisabled,
     onAfterClick,
     onBeforeClick,
-    onClick = null,
+    onClick,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
+    chipRef,
     ...props
-}: ChipProps): React.ReactElement => {
+}: ChipProps): ReactElement => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
     const hasBeforeClick: boolean = isFunction(onBeforeClick);
     const hasOnClick: boolean = isFunction(onClick);
@@ -123,9 +114,9 @@ const Chip: React.FC<IChipProps> = ({
     /**
      * Execute the onBeforeClick method passed as a prop but stop propagation to avoid triggering the onClick method.
      *
-     * @param {SyntheticEvent} evt The click event on the before element that triggers this method.
+     * @param evt The click event on the before element that triggers this method.
      */
-    const handleOnBeforeClick: (evt: SyntheticEvent) => void = (evt: SyntheticEvent): void => {
+    const handleOnBeforeClick = (evt: SyntheticEvent): void => {
         if (!evt) {
             return;
         }
@@ -140,9 +131,9 @@ const Chip: React.FC<IChipProps> = ({
     /**
      * Execute the onAfterClick method passed as a prop but stop propagation to avoid triggering the onClick method.
      *
-     * @param {SyntheticEvent} evt The click event on the after element that triggers this method.
+     * @param evt The click event on the after element that triggers this method.
      */
-    const handleOnAfterClick: (evt: SyntheticEvent) => void = (evt: SyntheticEvent): void => {
+    const handleOnAfterClick = (evt: SyntheticEvent): void => {
         if (!evt) {
             return;
         }
@@ -156,10 +147,11 @@ const Chip: React.FC<IChipProps> = ({
 
     return (
         <a
+            ref={chipRef}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    clickable: Boolean(hasOnClick),
+                    clickable: Boolean(hasOnClick) || isClickable,
                     color,
                     disabled: Boolean(isDisabled),
                     hasAfter: Boolean(hasAfterClick),
@@ -173,8 +165,8 @@ const Chip: React.FC<IChipProps> = ({
             )}
             role="button"
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
-            onClick={onClick ? onClick : null}
-            onKeyDown={onClick ? onEnterPressed(onClick) : null}
+            onClick={hasOnClick ? onClick : undefined}
+            onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
             {...props}
         >
             {before && (
@@ -208,4 +200,4 @@ Chip.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps, Size, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps };

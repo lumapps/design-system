@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactNode, useState } from 'react';
+import React, { CSSProperties, ReactElement, useRef, useState } from 'react';
 
-import { Placements, Popover } from 'LumX';
+import { Placement, Popover } from 'LumX';
 
 /////////////////////////////
 
@@ -27,70 +27,72 @@ const demoPopperStyle: CSSProperties = {
     width: '266px',
 };
 
-const createDemoAnchor: () => ReactNode = (): ReactNode => {
-    return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
-};
-
-const createPopper: () => ReactNode = (): ReactNode => {
-    return (
-        <div style={demoPopperStyle}>
-            {`Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. `}
-        </div>
-    );
-};
-
 /**
  * The demo for the default <Popover>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
-// tslint:disable: jsx-no-lambda
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
-    // tslint:disable-next-line: typedef
-    const [selectedPlacement, setSelectedPlacement] = useState(Placements.AUTO);
-    // tslint:disable-next-line: typedef
+const DemoComponent: React.FC<IProps> = (): ReactElement => {
+    const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
+
+    const [selectedPlacement, setSelectedPlacement] = useState(Placement.AUTO);
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
-    const availablePlacements: string[] = [
-        Placements.AUTO,
-        Placements.AUTO_END,
-        Placements.AUTO_START,
-        Placements.BOTTOM,
-        Placements.BOTTOM_END,
-        Placements.BOTTOM_START,
-        Placements.LEFT,
-        Placements.LEFT_END,
-        Placements.LEFT_START,
-        Placements.RIGHT,
-        Placements.RIGHT_END,
-        Placements.RIGHT_START,
-        Placements.TOP,
-        Placements.TOP_END,
-        Placements.TOP_START,
+    const availablePlacement: string[] = [
+        Placement.AUTO,
+        Placement.AUTO_END,
+        Placement.AUTO_START,
+        Placement.BOTTOM,
+        Placement.BOTTOM_END,
+        Placement.BOTTOM_START,
+        Placement.LEFT,
+        Placement.LEFT_END,
+        Placement.LEFT_START,
+        Placement.RIGHT,
+        Placement.RIGHT_END,
+        Placement.RIGHT_START,
+        Placement.TOP,
+        Placement.TOP_END,
+        Placement.TOP_START,
     ];
+
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        selectedPlacement,
+        anchorRef,
+        popoverRef,
+        isTooltipDisplayed,
+    );
 
     function toggleTooltipDisplay(newVisibleState: boolean): void {
         setTooltipDisplayed(newVisibleState);
     }
 
     return (
-        <div onMouseOver={(): void => toggleTooltipDisplay(true)} onMouseOut={(): void => toggleTooltipDisplay(false)}>
+        <div
+            onMouseEnter={(): void => toggleTooltipDisplay(true)}
+            onMouseLeave={(): void => toggleTooltipDisplay(false)}
+        >
             <select
                 onChange={(evt: React.ChangeEvent<HTMLSelectElement>): void =>
-                    setSelectedPlacement(evt.target.value as Placements)
+                    setSelectedPlacement(evt.target.value as Placement)
                 }
             >
-                {availablePlacements.map((pos: string) => (
-                    <option>{pos}</option>
+                {availablePlacement.map((pos: string, index: number) => (
+                    <option key={index}>{pos}</option>
                 ))}
             </select>
             <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Popover
-                    anchorElement={createDemoAnchor()}
-                    popperElement={createPopper()}
-                    popperPlacement={selectedPlacement}
-                    showPopper={isTooltipDisplayed}
-                    lockFlip
-                />
+                <div ref={anchorRef} style={demoAnchorStyle}>
+                    {'This element will act as the anchor'}
+                </div>
+
+                <Popover popoverRect={computedPosition} isVisible={isVisible} popoverRef={popoverRef}>
+                    <div style={demoPopperStyle}>
+                        {
+                            'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '
+                        }
+                    </div>
+                </Popover>
             </div>
         </div>
     );

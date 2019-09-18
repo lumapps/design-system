@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -14,8 +14,7 @@ interface IProps extends IGenericProps {
     /**
      * Button reference to handle focus, ...
      */
-    // tslint:disable-next-line: no-any
-    buttonRef?: React.RefObject<any>;
+    buttonRef?: RefObject<HTMLElement>;
 
     /**
      * The `href` to reach if there is one.
@@ -44,19 +43,11 @@ interface IDefaultPropsType extends Partial<ButtonRootProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ButtonRoot`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     buttonRef: undefined,
@@ -72,10 +63,10 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {ButtonRootProps} props The children and props of the component.
- * @return {React.ReactNode} The processed children of the component.
+ * @param props The children and props of the component.
+ * @return The processed children of the component.
  */
-function _validate(props: ButtonRootProps): React.ReactNode {
+function _validate(props: ButtonRootProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         minChildren: 1,
         props,
@@ -88,7 +79,7 @@ function _validate(props: ButtonRootProps): React.ReactNode {
  * The root of the <Button> component.
  * Conditionally adds a `<a>` or a `<button>` HTML tag whether there is an `href` attribute or not.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ButtonRoot: React.FC<ButtonRootProps> = ({
     buttonRef = DEFAULT_PROPS.buttonRef,
@@ -97,19 +88,19 @@ const ButtonRoot: React.FC<ButtonRootProps> = ({
     href,
     target,
     ...props
-}: ButtonRootProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({ children, ...props });
+}: ButtonRootProps): ReactElement => {
+    const newChildren: ReactNode = _validate({ children, ...props });
 
     if (isEmpty(href)) {
         return (
-            <button ref={buttonRef} className={className} {...props}>
+            <button ref={buttonRef as RefObject<HTMLButtonElement>} className={className} {...props}>
                 {newChildren}
             </button>
         );
     }
 
     return (
-        <a ref={buttonRef} className={className} href={href} target={target} {...props}>
+        <a ref={buttonRef as RefObject<HTMLAnchorElement>} className={className} href={href} target={target} {...props}>
             {newChildren}
         </a>
     );

@@ -5,4 +5,5 @@ import './enter-keypress_directive';
 import './event-scheduler_service';
 import './focus-on-init_directive';
 import './focus-trap_service';
+import './stop-propagation_directive';
 import './utils_service';

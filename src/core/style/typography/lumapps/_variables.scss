@@ -5,39 +5,40 @@ $lumx-typography-default-font-size: 16px !default;
 $lumx-typography-default-line-height: 24px !default;
 
 $lumx-typography-font-size: (
-    display1: 34px,
-    headline: 24px,
-    title: 20px,
-    subtitle2: 16px,
-    subtitle1: 14px,
-    body2: 16px,
-    body1: 14px,
-    caption: 12px,
-    overline: 10px
+    'display1': 34px,
+    'headline': 24px,
+    'title': 20px,
+    'subtitle2': 16px,
+    'subtitle1': 14px,
+    'body2': 16px,
+    'body1': 14px,
+    'caption': 12px,
+    'overline': 10px
 ) !default;
 
 $lumx-typography-font-weight: (
-    display1: 700,
-    headline: 700,
-    title: 700,
-    subtitle2: 700,
-    subtitle1: 700,
-    body2: 400,
-    body1: 400,
-    caption: 400,
-    overline: 700
+    'display1': 700,
+    'headline': 700,
+    'title': 700,
+    'subtitle2': 700,
+    'subtitle1': 700,
+    'body2': 400,
+    'body1': 400,
+    'caption': 400,
+    'overline': 700
 ) !default;
 
 $lumx-typography-line-height: (
-    display1: 40px,
-    headline: 32px,
-    title: 30px,
-    subtitle2: 24px,
-    subtitle1: 20px,
-    body2: 24px,
-    body1: 20px,
-    caption: 16px,
-    overline: 12px
+    'display1': 40px,
+    'headline': 32px,
+    'title': 30px,
+    'subtitle2': 24px,
+    'subtitle1': 20px,
+    'body2': 24px,
+    'body1': 20px,
+    'caption': 16px,
+    'overline': 12px
 ) !default;
 
-$lumx-typography-styles: overline, caption, body1, body2, subtitle1, subtitle2, title, headline, display1;
+$lumx-typography-styles: 'overline', 'caption', 'body1', 'body2', 'subtitle1', 'subtitle2', 'title', 'headline',
+    'display1';

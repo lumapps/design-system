@@ -1,0 +1,95 @@
+```javascript import
+import { useState } from 'react';
+import { ProgressTracker, ProgressTrackerStep, ProgressTrackerStepProps } from 'LumX';
+```
+
+# Progress tracker
+
+**Progress tracker convey user progress through a sequence of steps.**
+A step can be completed by a helper text.
+
+## States
+
+There are four states: _Current_, _Future_, _Completed_, and _Error_.
+
+```javascript jsx disableGrid
+(theme) => {
+    const [activeIndex, setActiveIndex] = useState(2);
+
+    const stepProps = [
+        { isComplete: true },
+        { isComplete: true },
+        { hasError: true },
+        { isComplete: false },
+        { isComplete: false },
+    ];
+
+    return (
+        <>
+            <ProgressTracker activeStep={activeIndex} theme={theme}>
+                {stepProps.map((step, index) => (
+                    <ProgressTrackerStep
+                        isActive={activeIndex === index}
+                        onClick={index < 3 ? () => setActiveIndex(index) : null}
+                        label={'Step ' + (index + 1)}
+                        helper={index == 2 ? 'Error message' : 'Helper text ' + (index + 1)}
+                        {...step}
+                    />
+                ))}
+            </ProgressTracker>
+        </>
+    );
+};
+```
+
+### Current
+
+```javascript jsx disableGrid
+() => (
+    <>
+        <ProgressTrackerStep isActive={true} label={'Step'} />
+    </>
+);
+```
+
+### Future
+
+```javascript jsx disableGrid
+() => (
+    <>
+        <ProgressTrackerStep isActive={false} label={'Step'} />
+    </>
+);
+```
+
+### Completed
+
+```javascript jsx disableGrid
+() => (
+    <>
+        <ProgressTrackerStep isComplete={true} label={'Step'} />
+    </>
+);
+```
+
+### Future with helper
+
+```javascript jsx disableGrid
+() => (
+    <>
+        <ProgressTrackerStep isActive={false} label={'Step'} helper={'Helper text'} />
+    </>
+);
+```
+
+### Error
+
+When an error occurs, the error message can replace the helper text.
+
+```javascript jsx disableGrid
+() => (
+    <>
+        <ProgressTrackerStep hasError={true} label={'Step'} helper={'Error message'} />
+    </>
+);
+```

@@ -1,18 +1,45 @@
-<div class="lumx-comment-block" ng-class="{ 'lumx-comment-block--has-children': lumx.hasChildren && lumx.isOpen }">
+<div
+    class="lumx-comment-block"
+    ng-class="{ 'lumx-comment-block--has-children': lumx.hasChildren && lumx.isOpen,
+                'lumx-comment-block--is-relevant': lumx.isRelevant,
+                'lumx-comment-block--theme-light': !lumx.theme || lumx.theme === 'light',
+                'lumx-comment-block--theme-dark': lumx.theme === 'dark' }"
+>
     <div class="lumx-comment-block__wrapper">
         <div class="lumx-comment-block__avatar">
-            <lumx-avatar lumx-image="{{ lumx.avatar }}" lumx-size="m" lumx-theme="{{ lumx.theme }}"></lumx-avatar>
+            <lumx-avatar
+                lumx-image="{{ lumx.avatar }}"
+                lumx-size="m"
+                lumx-theme="{{ lumx.theme }}"
+                lumx-enter-keypress="lumx.onClick()"
+                ng-click="lumx.onClick()"
+                ng-mouseenter="lumx.onMouseEnter()"
+                ng-mouseleave="lumx.onMouseLeave()"
+                tabindex="{{ lumx.onClick ? 0 : -1 }}"
+            ></lumx-avatar>
         </div>
 
-        <div class="lumx-comment-block__content">
-            <div class="lumx-comment-block__meta">
-                <span class="lumx-comment-block__name">{{ lumx.name }}</span>
-                <span class="lumx-comment-block__date" ng-if="lumx.date">{{ lumx.date }}</span>
-            </div>
+        <div class="lumx-comment-block__container">
+            <div class="lumx-comment-block__content">
+                <div class="lumx-comment-block__meta">
+                    <span
+                        class="lumx-comment-block__name"
+                        lumx-enter-keypress="lumx.onClick()"
+                        ng-click="lumx.onClick()"
+                        ng-mouseenter="lumx.onMouseEnter()"
+                        ng-mouseleave="lumx.onMouseLeave()"
+                        tabindex="{{ lumx.onClick ? 0 : -1 }}"
+                    >
+                        {{ lumx.name }}
+                    </span>
 
-            <p class="lumx-comment-block__text">
-                {{ lumx.text }}
-            </p>
+                    <span class="lumx-comment-block__date" ng-if="lumx.date">{{ lumx.date }}</span>
+                </div>
+
+                <p class="lumx-comment-block__text">
+                    {{ lumx.text }}
+                </p>
+            </div>
 
             <div class="lumx-comment-block__actions" ng-transclude="actions" ng-if="lumx.hasActions"></div>
         </div>

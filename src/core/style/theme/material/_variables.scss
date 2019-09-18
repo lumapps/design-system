@@ -2,14 +2,16 @@ $lumx-theme-primary: $lumx-theme-blue;
 $lumx-theme-secondary: $lumx-theme-green;
 
 $lumx-theme-color-palette: (
-    primary: $lumx-theme-primary,
-    secondary: $lumx-theme-secondary,
-    dark: $lumx-theme-dark,
-    light: $lumx-theme-light,
-    blue: $lumx-theme-blue,
-    yellow: $lumx-theme-yellow,
-    red: $lumx-theme-red,
-    green: $lumx-theme-green
+    'primary': $lumx-theme-primary,
+    'secondary': $lumx-theme-secondary,
+    'dark': $lumx-theme-dark,
+    'light': $lumx-theme-light,
+    'blue': $lumx-theme-blue,
+    'yellow': $lumx-theme-yellow,
+    'red': $lumx-theme-red,
+    'green': $lumx-theme-green,
+    'white': $lumx-theme-light,
+    'grey': $lumx-theme-grey
 );
 
 $lumx-theme-border-radius: 2px;

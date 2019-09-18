@@ -1,13 +1,21 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, ReactElement } from 'react';
 
-import { Theme } from '../../constants';
+import { Chip, Size } from 'LumX';
+
+import { Theme } from 'LumX/demo/constants';
+
+import { IGenericProps } from 'LumX/core/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IProps {
+interface IProps extends IGenericProps {
+    /**
+     * The current selected theme.
+     */
+    theme: Theme;
     /**
      * The function to change the theme.
      * When the theme selector is used, this function is called to update the current theme.
@@ -22,25 +30,39 @@ interface IProps {
  * Display a select with the list of all available themes.
  * When a theme is selected, update the theme throughout the demo site and the components being demoed.
  *
- * @return {React.ReactElement} The theme selector component.
+ * @return The theme selector component.
  */
-const ThemeSelector: React.FC<IProps> = ({ changeTheme }: IProps): React.ReactElement => {
+const ThemeSelector: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement => {
     /**
      * When the select is changed, call the function to change the theme.
      *
-     * @param {ChangeEvent<HTMLSelectElement>} evt The change event of the select element.
+     * @param evt The change event of the select element.
      */
     const handleChange: (evt: React.ChangeEvent<HTMLSelectElement>) => void = (
         evt: ChangeEvent<HTMLSelectElement>,
     ): void => {
-        changeTheme(evt.target.value as Theme);
+        changeTheme((evt.target.textContent || '').toLocaleLowerCase() as Theme);
     };
 
     return (
-        <select onChange={handleChange}>
-            <option value="lumapps">LumApps theme</option>
-            <option value="material">Material theme</option>
-        </select>
+        <>
+            <Chip
+                className="lumx-spacing-margin-right-tiny"
+                isSelected={theme === 'lumapps'}
+                size={Size.s}
+                onClick={handleChange}
+            >
+                LumApps
+            </Chip>
+            <Chip
+                className="lumx-spacing-margin-right-tiny"
+                isSelected={theme === 'material'}
+                size={Size.s}
+                onClick={handleChange}
+            >
+                Material
+            </Chip>
+        </>
     );
 };
 

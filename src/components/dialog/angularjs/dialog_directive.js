@@ -113,8 +113,10 @@ function DialogController(
 
     /**
      * Close the current dialog.
+     *
+     * @param {Object} params An optional object that holds extra parameters.
      */
-    function _close() {
+    function _close(params) {
         if (!lumx.isOpen) {
             return;
         }
@@ -124,7 +126,7 @@ function DialogController(
             _idEventScheduler = undefined;
         }
 
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-start`, lumx.id);
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-start`, lumx.id, params);
 
         _dialogOverlay.addClass(`${CSS_PREFIX}-dialog-overlay--is-hidden`);
         _dialog.addClass(`${CSS_PREFIX}-dialog--is-hidden`);
@@ -151,7 +153,7 @@ function DialogController(
             lumx.isOpen = false;
             LumXFocusTrapService.disable();
 
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-end`, lumx.id);
+            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-end`, lumx.id, params);
         }, _TRANSITION_DURATION);
     }
 
@@ -291,10 +293,11 @@ function DialogController(
      *
      * @param {Event}  evt      The dialog open event.
      * @param {string} dialogId The dialog identifier.
+     * @param {Object} params   An optional object that holds extra parameters.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dialog__close`, (evt, dialogId) => {
+    $scope.$on(`${COMPONENT_PREFIX}-dialog__close`, (evt, dialogId, params) => {
         if (dialogId === lumx.id || dialogId === undefined) {
-            _close();
+            _close(params);
         }
     });
 

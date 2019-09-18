@@ -5,26 +5,28 @@
     scope="{{ lumx.scope }}"
     tabindex="{{ lumx.isSortable ? 0 : -1 }}"
 >
-    <lumx-icon
-        class="lumx-table__cell-icon"
-        lumx-path="{{ lumx.icon }}"
-        lumx-size="xxs"
-        ng-if="lumx.icon && !lumx.isSortable"
-    ></lumx-icon>
+    <div class="lumx-table__cell-wrapper">
+        <lumx-icon
+            class="lumx-table__cell-icon"
+            lumx-path="{{ lumx.icon }}"
+            lumx-size="xxs"
+            ng-if="lumx.icon && !lumx.isSortable"
+        ></lumx-icon>
 
-    <lumx-icon
-        class="lumx-table__cell-icon"
-        lumx-path="{{ lumx.icons.mdiArrowUp }}"
-        lumx-size="xxs"
-        ng-if="lumx.isSortable && lumx.sortOrder === 'asc'"
-    ></lumx-icon>
+        <lumx-icon
+            class="lumx-table__cell-icon"
+            lumx-path="{{ lumx.icons.mdiArrowUp }}"
+            lumx-size="xxs"
+            ng-if="lumx.isSortable && lumx.sortOrder === 'asc'"
+        ></lumx-icon>
 
-    <lumx-icon
-        class="lumx-table__cell-icon"
-        lumx-path="{{ lumx.icons.mdiArrowDown }}"
-        lumx-size="xxs"
-        ng-if="lumx.isSortable && lumx.sortOrder === 'desc'"
-    ></lumx-icon>
+        <lumx-icon
+            class="lumx-table__cell-icon"
+            lumx-path="{{ lumx.icons.mdiArrowDown }}"
+            lumx-size="xxs"
+            ng-if="lumx.isSortable && lumx.sortOrder === 'desc'"
+        ></lumx-icon>
 
-    <div class="lumx-table__cell-content" ng-transclude></div>
+        <div class="lumx-table__cell-content" ng-transclude></div>
+    </div>
 </th>

@@ -1,16 +1,6 @@
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableCellVariant,
-    TableHeader,
-    TableRow,
-    TableTheme,
-    ThOrder,
-    ThScope,
-} from 'LumX';
+import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow, ThOrder, ThScope, Theme } from 'LumX';
 
-import React, { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 
 import orderBy from 'lodash/orderBy';
 
@@ -22,7 +12,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: TableTheme;
+    theme: Theme;
 }
 
 interface IBody {
@@ -49,8 +39,6 @@ interface IHead {
 /**
  * The body of the table.
  * This represents the data to display in the table.
- *
- * @type {Object}
  */
 const tableBody: IBody[] = [
     {
@@ -82,10 +70,6 @@ const tableBody: IBody[] = [
 /**
  * The head of the table.
  * This represents the cells of the table.
- *
- * @type {Array}
- * @constant
- * @readonly
  */
 const tableHead: IHead[] = [
     {
@@ -124,17 +108,17 @@ const tableHead: IHead[] = [
 /**
  * The demo for the default <Table>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const [dataTableBody, setTable]: [IBody[], Dispatch<SetStateAction<IBody[]>>] = useState(tableBody);
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const [dataTableBody, setTable] = useState(tableBody);
 
     /**
      * Update the sorting of the table.
      *
-     * @param {Object} headSource The head cell to sort the table by.
+     * @param headSource The head cell to sort the table by.
      */
-    const handleSort: (headSource: IHead) => void = useCallback(
+    const handleSort = useCallback(
         (headSource: IHead) => {
             tableHead.map((head: IHead) => {
                 if (head !== headSource) {
@@ -166,7 +150,6 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                                 scope={head.scope}
                                 sortOrder={head.sortOrder}
                                 variant={head.variant}
-                                // tslint:disable-next-line: jsx-no-lambda
                                 onHeaderClick={(): void => handleSort(head)}
                             >
                                 {head.label}

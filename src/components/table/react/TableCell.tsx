@@ -1,14 +1,12 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { ReactElement, useCallback } from 'react';
 
 import classNames from 'classnames';
 
+import { Icon, Size } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
-import { Icon } from 'LumX/components/icon/react/Icon';
-
-import { IconSizes } from 'LumX';
 import { mdiArrowDown, mdiArrowUp } from 'LumX/icons';
 
 import isFunction from 'lodash/isFunction';
@@ -18,29 +16,26 @@ import isFunction from 'lodash/isFunction';
 /**
  * The authorized values for the `sortOrder` prop.
  */
-enum Orders {
+enum ThOrder {
     asc = 'asc',
     desc = 'desc',
 }
-type Order = Orders;
 
 /**
  * The authorized values for the `scope` prop.
  */
-enum Scopes {
+enum ThScope {
     col = 'col',
     row = 'row',
 }
-type Scope = Scopes;
 
 /**
  * The authorized variants.
  */
-enum Variants {
+enum TableCellVariant {
     body = 'body',
     head = 'head',
 }
-type Variant = Variants;
 
 /////////////////////////////
 
@@ -61,17 +56,17 @@ interface ITableCellProps extends IGenericProps {
     /**
      * The scope of the thead.
      */
-    scope?: Scope;
+    scope?: ThScope;
 
     /**
      * The initial sort order (sortable thead only).
      */
-    sortOrder?: Order;
+    sortOrder?: ThOrder;
 
     /**
      * The variant of the cell.
      */
-    variant?: Variant;
+    variant?: TableCellVariant;
 
     /**
      * The function to call when we click on an order button.
@@ -86,7 +81,7 @@ type TableCellProps = ITableCellProps;
  * Define the types of the default props.
  */
 interface IDefaultPropsType extends Partial<TableCellProps> {
-    variant: Variant;
+    variant: TableCellVariant;
 }
 
 /////////////////////////////
@@ -97,32 +92,20 @@ interface IDefaultPropsType extends Partial<TableCellProps> {
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TableCell`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}TableCell`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     onHeaderClick: undefined,
-    variant: Variants.body,
+    variant: TableCellVariant.body,
 };
 
 /////////////////////////////
@@ -130,7 +113,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * The TableCell component displays an HTML Table Header Cell.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const TableCell: React.FC<TableCellProps> = ({
     children,
@@ -141,19 +124,19 @@ const TableCell: React.FC<TableCellProps> = ({
     sortOrder,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: TableCellProps): React.ReactElement => {
+}: TableCellProps): ReactElement => {
     /**
      * Handle click on the ordered thead.
      */
-    const handleOnHeaderClick: () => void = useCallback(() => {
+    const handleOnHeaderClick = useCallback(() => {
         if (isFunction(onHeaderClick)) {
             onHeaderClick();
         }
     }, [onHeaderClick]);
 
     return (
-        <Fragment>
-            {variant === Variants.head && (
+        <>
+            {variant === TableCellVariant.head && (
                 <th
                     className={classNames(
                         handleBasicClasses({ prefix: CLASSNAME, isSortable }),
@@ -163,26 +146,28 @@ const TableCell: React.FC<TableCellProps> = ({
                             [`${CLASSNAME}--is-sorted`]: isSortable && sortOrder,
                         },
                     )}
-                    tabIndex={isSortable && isFunction(onHeaderClick) ? 1 : 0}
+                    tabIndex={isSortable && isFunction(onHeaderClick) ? 0 : -1}
                     onClick={handleOnHeaderClick}
                     onKeyDown={onEnterPressed(handleOnHeaderClick)}
                     {...props}
                 >
-                    {icon && !isSortable && <Icon className={`${CLASSNAME}-icon`} icon={icon} size={IconSizes.xxs} />}
+                    <div className={`${CLASSNAME}-wrapper`}>
+                        {icon && !isSortable && <Icon className={`${CLASSNAME}-icon`} icon={icon} size={Size.xxs} />}
 
-                    {isSortable && sortOrder === Orders.asc && (
-                        <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowUp} size={IconSizes.xxs} />
-                    )}
+                        {isSortable && sortOrder === ThOrder.asc && (
+                            <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowUp} size={Size.xxs} />
+                        )}
 
-                    {isSortable && sortOrder === Orders.desc && (
-                        <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowDown} size={IconSizes.xxs} />
-                    )}
+                        {isSortable && sortOrder === ThOrder.desc && (
+                            <Icon className={`${CLASSNAME}-icon`} icon={mdiArrowDown} size={Size.xxs} />
+                        )}
 
-                    <div className={`${CLASSNAME}-content`}>{children}</div>
+                        <div className={`${CLASSNAME}-content`}>{children}</div>
+                    </div>
                 </th>
             )}
 
-            {variant === Variants.body && (
+            {variant === TableCellVariant.body && (
                 <td
                     className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), `${CLASSNAME}--body`)}
                     {...props}
@@ -190,11 +175,11 @@ const TableCell: React.FC<TableCellProps> = ({
                     <div className={`${CLASSNAME}-content`}>{children}</div>
                 </td>
             )}
-        </Fragment>
+        </>
     );
 };
 TableCell.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Order, Orders, Scope, Scopes, TableCell, TableCellProps, Variant, Variants };
+export { CLASSNAME, DEFAULT_PROPS, TableCell, TableCellProps, TableCellVariant, ThOrder, ThScope };

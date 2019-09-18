@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX';
+import { Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -36,32 +36,20 @@ interface IDefaultPropsType extends Partial<ProgressTrackerProps> {
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ProgressTracker`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTracker`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeStep: 0,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -72,7 +60,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * Each step can have multiple attributes defining their current state to keep the user
  * aware of it's position in the process.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     activeStep = DEFAULT_PROPS.activeStep,
@@ -80,7 +68,7 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     className = '',
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ProgressTrackerProps): React.ReactElement => {
+}: ProgressTrackerProps): ReactElement => {
     const backgroundPosition: number = 100 / (children.length * 2);
     const trackPosition: number = ((100 / (children.length - 1)) * activeStep) / 100;
 

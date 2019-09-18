@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Icon, IconButton } from 'LumX';
-import { Color, Colors, ComplexPropDefault, Theme, Themes } from 'LumX/components';
+import { Color, ColorPalette, Icon, IconButton, Size, Theme } from 'LumX';
+import { ComplexPropDefault, Emphasis } from 'LumX/components';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, Omit, ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -17,30 +17,20 @@ import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
 /**
  * The authorized values for the `emphasis` prop.
  */
-enum Emphasises {
-    low = 'low',
-    medium = 'medium',
-    high = 'high',
-}
-type Emphasis = Emphasises;
+const ButtonEmphasis = Emphasis;
 
 /**
  * The authorized values for the `size` prop.
  */
-enum Sizes {
-    s = 's',
-    m = 'm',
-}
-type Size = Sizes;
+type ButtonSize = Size.s | Size.m;
 
 /**
  * The authorized values for the `variant` prop.
  */
-enum Variants {
+enum ButtonVariant {
     button = 'button',
     icon = 'icon',
 }
-type Variant = Variants;
 
 /////////////////////////////
 
@@ -49,15 +39,14 @@ type Variant = Variants;
  */
 interface IButtonProps extends IGenericProps {
     /**
-     * Button reference to handle focus, ...
+     * Button reference to handle focus.
      */
-    // tslint:disable-next-line: no-any
-    buttonRef?: React.RefObject<any>;
+    buttonRef?: React.RefObject<ButtonRoot>;
 
     /**
      * The label.
      */
-    children?: React.ReactNode;
+    children?: ReactNode;
 
     /**
      * The color.
@@ -82,7 +71,7 @@ interface IButtonProps extends IGenericProps {
     /**
      * The size.
      */
-    size?: Size;
+    size?: ButtonSize;
 
     /**
      * The theme.
@@ -92,7 +81,7 @@ interface IButtonProps extends IGenericProps {
     /**
      * The variant.
      */
-    variant?: Variant;
+    variant?: ButtonVariant;
 }
 type ButtonProps = IButtonProps & ButtonRootProps;
 
@@ -113,39 +102,27 @@ interface IDefaultPropsType extends Partial<Omit<ButtonProps, 'color'>> {
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Button`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Button`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     buttonRef: undefined,
     color: {
-        default: Colors.dark,
-        [`emphasis-${Emphasises.high}`]: Colors.primary,
+        default: ColorPalette.dark,
+        [`emphasis-${ButtonEmphasis.high}`]: ColorPalette.primary,
     },
-    emphasis: Emphasises.high,
-    size: Sizes.m,
-    theme: Themes.light,
-    variant: Variants.button,
+    emphasis: ButtonEmphasis.high,
+    size: Size.m,
+    theme: Theme.light,
+    variant: ButtonVariant.button,
 };
 
 /////////////////////////////
@@ -157,8 +134,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Globally validate the component after transforming and/or validating the children.
  *
- * @param  {ValidateParameters} params The children, their number and the props of the component.
- * @return {string|boolean}     If a string, the error message.
+ * @param params The children, their number and the props of the component.
+ * @return     If a string, the error message.
  *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
  *                              lead to throw a basic error message).
  *                              You can also return nothing if there is no special problem (i.e. a successful
@@ -166,7 +143,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  */
 function _postValidate({ childrenCount, props }: ValidateParameters): string | boolean | void {
     if (
-        props.variant === Variants.button &&
+        props.variant === ButtonVariant.button &&
         (!isEmpty(props.leftIcon) || !isEmpty(props.rightIcon)) &&
         childrenCount === 0
     ) {
@@ -182,8 +159,8 @@ function _postValidate({ childrenCount, props }: ValidateParameters): string | b
 /**
  * Globally validate the component before transforming and/or validating the children.
  *
- * @param  {ValidateParameters} params The children, their number and the props of the component.
- * @return {string|boolean}     If a string, the error message.
+ * @param params The children, their number and the props of the component.
+ * @return     If a string, the error message.
  *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
  *                              lead to throw a basic error message).
  *                              You can also return nothing if there is no special problem (i.e. a successful
@@ -191,7 +168,7 @@ function _postValidate({ childrenCount, props }: ValidateParameters): string | b
  */
 function _preValidate({ childrenCount, props }: ValidateParameters): string | boolean | void {
     if (!isEmpty(props.leftIcon) && !isEmpty(props.rightIcon)) {
-        if (props.variant === Variants.icon) {
+        if (props.variant === ButtonVariant.icon) {
             return `You cannot have 2 icons in a 'icon' \`variant\` of <${COMPONENT_NAME}>, You can only have one icon!`;
         }
 
@@ -211,12 +188,12 @@ function _preValidate({ childrenCount, props }: ValidateParameters): string | bo
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {ButtonProps}     props The children and props of the component.
- * @return {React.ReactNode} The processed children of the component.
+ * @param     props The children and props of the component.
+ * @return The processed children of the component.
  */
-function _validate(props: ButtonProps): React.ReactNode {
+function _validate(props: ButtonProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
-        maxChildren: props.variant === Variants.icon ? 0 : undefined,
+        maxChildren: props.variant === ButtonVariant.icon ? 0 : undefined,
         postValidate: _postValidate,
         preValidate: _preValidate,
         props,
@@ -229,7 +206,7 @@ function _validate(props: ButtonProps): React.ReactNode {
  * Displays a button.
  * If the `href` property is set, it will display a `<a>` HTML tag. If not, it will use a `<button>` HTML tag instead.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Button: React.FC<ButtonProps> = ({
     buttonRef = DEFAULT_PROPS.buttonRef,
@@ -243,8 +220,8 @@ const Button: React.FC<ButtonProps> = ({
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: ButtonProps): React.ReactElement => {
-    const newChildren: React.ReactNode = _validate({
+}: ButtonProps): ReactElement => {
+    const newChildren: ReactNode = _validate({
         children,
         color,
         emphasis,
@@ -256,7 +233,7 @@ const Button: React.FC<ButtonProps> = ({
         ...props,
     });
 
-    if (variant === Variants.button) {
+    if (variant === ButtonVariant.button) {
         if (!isEmpty(leftIcon)) {
             className += isEmpty(className) ? '' : ' ';
             className += `${CLASSNAME}--has-left-icon`;
@@ -282,7 +259,7 @@ const Button: React.FC<ButtonProps> = ({
                     emphasis,
                     prefix: CLASSNAME,
                     size,
-                    theme: emphasis === Emphasises.high ? theme : undefined,
+                    theme: emphasis === ButtonEmphasis.high ? theme : undefined,
                     variant,
                 }),
             )}
@@ -298,19 +275,4 @@ Button.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    Button,
-    ButtonProps,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variant,
-    Variants,
-};
+export { CLASSNAME, DEFAULT_PROPS, ButtonEmphasis, Button, ButtonProps, ButtonVariant };

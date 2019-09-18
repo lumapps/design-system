@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactNode, useState } from 'react';
+import React, { CSSProperties, ReactElement, useRef, useState } from 'react';
 
-import { Button, ButtonEmphasises, ButtonSizes, Placements, Popover } from 'LumX';
+import { Button, ButtonEmphasis, Placement, Popover, Size } from 'LumX';
 
 /////////////////////////////
 
@@ -20,9 +20,12 @@ const demoAnchorStyle: CSSProperties = {
 };
 
 const demoPopperStyle: CSSProperties = {
+    backgroundColor: 'black',
+    borderRadius: '3px',
+    color: 'white',
     fontSize: '10px',
     padding: '5px',
-    width: '123px',
+    width: '266px',
 };
 
 const demoPopoverHolderStyle: CSSProperties = {
@@ -32,49 +35,50 @@ const demoPopoverHolderStyle: CSSProperties = {
     justifyContent: 'center',
 };
 
-const createDemoAnchor: () => ReactNode = (): ReactNode => {
-    return <div style={demoAnchorStyle}>{`This element will act as the anchor`}</div>;
-};
-
-const createPopper: () => ReactNode = (): ReactNode => {
-    return (
-        <div style={demoPopperStyle}>
-            {`Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. `}
-        </div>
-    );
-};
-
 /**
  * The demo for the default <Popover>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
-// tslint:disable: jsx-no-lambda
-const DemoComponent: React.FC<IProps> = (): React.ReactElement => {
-    // tslint:disable-next-line: typedef
+const DemoComponent: React.FC<IProps> = (): ReactElement => {
     const [isTooltipDisplayed, setTooltipDisplayed] = useState(false);
+    const anchorRef = useRef(null);
+    const popoverRef = useRef(null);
 
     /**
-     * Switch tooltip visibility
+     * Switch tooltip visibility.
      */
-    const toggleTooltipDisplay: (evt?: React.MouseEvent<HTMLElement>) => void = (): void => {
+    const toggleTooltipDisplay = (): void => {
         setTooltipDisplayed(!isTooltipDisplayed);
     };
 
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        Placement.RIGHT_END,
+        anchorRef,
+        popoverRef,
+        isTooltipDisplayed,
+    );
+
     return (
-        <div>
-            <Button size={ButtonSizes.s} emphasis={ButtonEmphasises.medium} onClick={toggleTooltipDisplay}>
-                Toggle visibility
-            </Button>
-            <div style={demoPopoverHolderStyle}>
-                <Popover
-                    anchorElement={createDemoAnchor()}
-                    popperElement={createPopper()}
-                    popperPlacement={Placements.AUTO}
-                    showPopper={isTooltipDisplayed}
-                />
+        <>
+            <div>
+                <Button size={Size.s} emphasis={ButtonEmphasis.medium} onClick={toggleTooltipDisplay}>
+                    Toggle visibility
+                </Button>
+                <div style={demoPopoverHolderStyle}>
+                    <div ref={anchorRef} style={demoAnchorStyle}>
+                        {'This element will act as the anchor'}
+                    </div>
+                </div>
             </div>
-        </div>
+            <Popover popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
+                <div style={demoPopperStyle}>
+                    {
+                        'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,consequat. '
+                    }
+                </div>
+            </Popover>
+        </>
     );
 };
 

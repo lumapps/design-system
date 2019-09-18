@@ -1,13 +1,11 @@
-import React, { Fragment, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import { createPortal } from 'react-dom';
 
-import { Button } from 'LumX';
-import { Theme, Themes } from 'LumX/components';
-import { Emphasises, Variants } from 'LumX/components/button/react/Button';
+import { Button, ButtonEmphasis, ButtonVariant, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -58,28 +56,16 @@ interface IDefaultPropsType extends Partial<LightboxProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Lightbox`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     ariaLabel: 'Lightbox',
@@ -87,14 +73,14 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     onClose: noop,
     onOpen: noop,
     role: 'dialog',
-    theme: Themes.light,
+    theme: Theme.light,
 };
 /////////////////////////////
 
 /**
  * Displays content within a modal.
  *
- * @return {JSX.Element | null} Lightbox.
+ * @return Lightbox.
  */
 const Lightbox: React.FC<LightboxProps> = ({
     ariaLabel = DEFAULT_PROPS.ariaLabel,
@@ -106,14 +92,12 @@ const Lightbox: React.FC<LightboxProps> = ({
     parentElement,
     role = DEFAULT_PROPS.role,
     theme = DEFAULT_PROPS.theme,
-}: LightboxProps): React.ReactElement => {
+}: LightboxProps): ReactElement => {
     // tslint:disable-next-line: no-any
     const buttonRef: React.RefObject<any> = useRef(null);
     // tslint:disable-next-line: no-any
     const childrenRef: React.RefObject<any> = useRef(null);
-    const [isTrapActive, setTrapActive]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(
-        false,
-    );
+    const [isTrapActive, setTrapActive] = useState(false);
     const modalElement: Element | null = document.querySelector(`.${CLASSNAME}`);
 
     useEffect(() => {
@@ -133,7 +117,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Callback on activation of focus trap.
      */
-    const handleFocusActivation: () => void = (): void => {
+    const handleFocusActivation = (): void => {
         if (childrenRef && childrenRef.current && childrenRef.current.firstChild) {
             // Set focus inside lightbox.
             childrenRef.current.firstChild.focus();
@@ -147,7 +131,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Callback on deactivation of focus trap.
      */
-    const handleFocusDeactivation: () => void = (): void => {
+    const handleFocusDeactivation = (): void => {
         if (parentElement && parentElement.current) {
             // Set focus back on parent element.
             parentElement.current.focus();
@@ -161,29 +145,24 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Desactivate trap and modal.
      *
-     * @param {React.MouseEvent<HTMLDivElement, MouseEvent>} evt Click event.
+     * @param evt Click event.
      */
-    const handleClose: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void = useCallback(
-        (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-            setTrapActive(false);
-            evt.stopPropagation();
-        },
-        [],
-    );
+    const handleClose = useCallback((evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        setTrapActive(false);
+        evt.stopPropagation();
+    }, []);
 
     /**
      * Prevent click bubbling to parent.
      *
-     * @param {React.MouseEvent<HTMLDivElement, MouseEvent>} evt Click event.
+     * @param evt Click event.
      */
-    const preventClick: (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => void = (
-        evt: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ): void => {
+    const preventClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
         evt.stopPropagation();
     };
 
     return (
-        <Fragment>
+        <>
             {isTrapActive &&
                 createPortal(
                     <FocusTrap
@@ -212,11 +191,11 @@ const Lightbox: React.FC<LightboxProps> = ({
                                 buttonRef={buttonRef}
                                 className={`${CLASSNAME}__close`}
                                 color="light"
-                                emphasis={Emphasises.low}
+                                emphasis={ButtonEmphasis.low}
                                 leftIcon={mdiClose}
                                 theme={theme}
                                 type="button"
-                                variant={Variants.icon}
+                                variant={ButtonVariant.icon}
                                 onClick={handleClose}
                             />
                             <div
@@ -231,11 +210,11 @@ const Lightbox: React.FC<LightboxProps> = ({
                     </FocusTrap>,
                     document.body,
                 )}
-        </Fragment>
+        </>
     );
 };
 Lightbox.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps };

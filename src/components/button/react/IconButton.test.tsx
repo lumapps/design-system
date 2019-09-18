@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, fake, oneOf } from 'test-data-bot';
 
-import { Button, ButtonVariants } from 'LumX';
+import { Button, ButtonEmphasis, ButtonVariant, Size, Theme } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { mdiChevronDown, mdiPlus } from 'LumX/icons';
 
-import { CLASSNAME, Emphasises, IconButton, IconButtonProps, Sizes, Themes } from './IconButton';
+import { CLASSNAME, IconButton, IconButtonProps } from './IconButton';
 
 /////////////////////////////
 
@@ -37,21 +37,18 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {ISetupProps} props The props to use to override the default props of the component.
- * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of
+ * @param props The props to use to override the default props of the component.
+ * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return      An object with the props, the component wrapper and some shortcut to some element inside of
  *                       the component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: IconButtonProps = {
         icon: mdiPlus,
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<IconButton {...props} />);
 
@@ -67,7 +64,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly an icon button', (): void => {
-            const { button, wrapper }: ISetup = setup();
+            const { button, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(button).toExist();
@@ -82,10 +79,10 @@ describe(`<${IconButton.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should use default props', (): void => {
-            const { button, props }: ISetup = setup();
+            const { button, props } = setup();
 
             expect(button).toHaveProp('leftIcon', props.icon);
-            expect(button).toHaveProp('variant', ButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariant.icon);
         });
 
         it("should use 'icon' `variant` whatever the given `variant` prop is", (): void => {
@@ -94,37 +91,37 @@ describe(`<${IconButton.displayName}>`, (): void => {
             const modifiedProps: ISetupProps = {
                 // We known that <IconButton> could not have a `variant` prop.
                 // @ts-ignore
-                variant: ButtonVariants.icon,
+                variant: ButtonVariant.icon,
             };
 
-            let { button }: ISetup = setup(modifiedProps);
+            let { button } = setup(modifiedProps);
 
-            expect(button).toHaveProp('variant', ButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariant.icon);
 
             /////////////////////////////
 
             // We known that <IconButton> could not have a `variant` prop.
             // @ts-ignore
-            modifiedProps.variant = ButtonVariants.button;
+            modifiedProps.variant = ButtonVariant.button;
 
             ({ button } = setup(modifiedProps));
 
-            expect(button).toHaveProp('variant', ButtonVariants.icon);
+            expect(button).toHaveProp('variant', ButtonVariant.icon);
         });
 
         it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 // tslint:disable-next-line: no-any
                 color: fake((fakeData: any): string => fakeData.commerce.color()),
-                emphasis: oneOf(...Object.values(Emphasises)),
+                emphasis: oneOf(...Object.values(ButtonEmphasis)),
                 icon: oneOf(mdiPlus, mdiChevronDown),
-                size: oneOf(...Object.values(Sizes)),
-                theme: oneOf(...Object.values(Themes)),
+                size: oneOf(...Object.values(Size)),
+                theme: oneOf(...Object.values(Theme)),
             });
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button } = setup(modifiedProps);
 
             Object.keys(modifiedProps).forEach(
                 (prop: string): void => {
@@ -200,7 +197,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
 
             // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: ButtonVariants.icon });
+            setup({ variant: ButtonVariant.icon });
             expect(global.console.warn).toHaveBeenCalled();
 
             // @ts-ignore
@@ -208,7 +205,7 @@ describe(`<${IconButton.displayName}>`, (): void => {
 
             // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
             // @ts-ignore
-            setup({ variant: ButtonVariants.button });
+            setup({ variant: ButtonVariant.button });
             expect(global.console.warn).toHaveBeenCalled();
         });
     });

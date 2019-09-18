@@ -2,29 +2,23 @@ import React, { Children, ReactElement, cloneElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme, Themes } from 'LumX/components';
-
+import { Tab, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
-import { Tab } from 'LumX/components/tabs/react/Tab';
-
 /////////////////////////////
 
-const enum Layouts {
+enum TabsLayout {
     clustered = 'clustered',
     fixed = 'fixed',
 }
-type Layout = Layouts;
 
-const enum Positions {
+enum TabsPosition {
     center = 'center',
     left = 'left',
     right = 'right',
 }
-type Position = Positions;
 
 /////////////////////////////
 
@@ -37,11 +31,11 @@ interface ITabsProps extends IGenericProps {
     /* Component tabs */
     children: Tab[];
     /* Tabs Layout */
-    layout?: Layout;
+    layout?: TabsLayout;
     /* Function to trigger on tab click */
     onTabClick: CallableFunction;
     /* Tabs Position */
-    position?: Position;
+    position?: TabsPosition;
     /* Component theme */
     theme?: Theme;
 }
@@ -62,35 +56,23 @@ interface IDefaultPropsType extends Partial<TabsProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Tabs`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Tabs`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     activeTab: 0,
     children: [],
-    layout: Layouts.fixed,
-    position: Positions.left,
-    theme: Themes.light,
+    layout: TabsLayout.fixed,
+    position: TabsPosition.left,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -98,7 +80,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Defines a Tabs component.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Tabs: React.FC<TabsProps> = ({
     activeTab = DEFAULT_PROPS.activeTab,
@@ -129,4 +111,4 @@ Tabs.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Layouts, Positions, Tabs, TabsProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Tabs, TabsProps, TabsLayout, TabsPosition };

@@ -62,9 +62,10 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
      * Close a given dialog.
      *
      * @param {string} dialogId The dialog identifier.
+     * @param {Object} params   An optional object that holds extra parameters.
      */
-    function closeDialog(dialogId) {
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close`, dialogId);
+    function closeDialog(dialogId, params) {
+        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close`, dialogId, params);
     }
 
     /**

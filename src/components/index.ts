@@ -1,12 +1,15 @@
 /**
  * Authorized alignments.
  */
-const enum Alignments {
+enum Alignment {
+    bottom = 'bottom',
     center = 'center',
+    end = 'end',
     left = 'left',
     right = 'right',
+    start = 'start',
+    top = 'top',
 }
-type Alignment = Alignments;
 
 /**
  * Defines the type of a complex default prop (which depends on the value of another prop).
@@ -17,23 +20,42 @@ interface IComplexPropDefault<T> {
 }
 type ComplexPropDefault<T> = IComplexPropDefault<T>;
 
-enum Colors {
+/**
+ * See SCSS variable $lumx-theme-color-palette
+ */
+enum ColorPalette {
     primary = 'primary',
+    secondary = 'secondary',
     blue = 'blue',
     dark = 'dark',
     green = 'green',
     yellow = 'yellow',
     red = 'red',
+    light = 'light',
 }
-type Color = Colors | string;
+type Color = ColorPalette | string;
 
-enum Themes {
+/**
+ * See SCSS variable $lumx-theme-color-variants
+ */
+enum ColorVariant {
+    D1 = 'D1',
+    D2 = 'D2',
+    L1 = 'L1',
+    L2 = 'L2',
+    L3 = 'L3',
+    L4 = 'L4',
+    L5 = 'L5',
+    L6 = 'L6',
+    N = 'N',
+}
+
+enum Theme {
     light = 'light',
     dark = 'dark',
 }
-type Theme = Themes;
 
-enum Sizes {
+enum Size {
     xxs = 'xxs',
     xs = 'xs',
     s = 's',
@@ -41,27 +63,22 @@ enum Sizes {
     l = 'l',
     xl = 'xl',
     xxl = 'xxl',
+    regular = 'regular',
+    big = 'big',
+    huge = 'huge',
 }
-type Size = Sizes;
 
-const enum Orientations {
+enum Orientation {
     horizontal = 'horizontal',
     vertical = 'vertical',
 }
-type Orientation = Orientations;
+
+enum Emphasis {
+    low = 'low',
+    medium = 'medium',
+    high = 'high',
+}
 
 /////////////////////////////
 
-export {
-    Alignment,
-    Alignments,
-    ComplexPropDefault,
-    Color,
-    Colors,
-    Theme,
-    Themes,
-    Size,
-    Sizes,
-    Orientations,
-    Orientation,
-};
+export { Alignment, ComplexPropDefault, Color, ColorPalette, ColorVariant, Theme, Size, Orientation, Emphasis };

@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react';
+import React, { ReactChild, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -34,28 +34,16 @@ interface IDefaultPropsType extends Partial<CheckboxLabelProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}CheckboxLabel`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}CheckboxLabel`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const CLASSNAME: string = `${CSS_PREFIX}-checkbox__label`;
+const CLASSNAME = `${CSS_PREFIX}-checkbox__label`;
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     children: '',
@@ -66,14 +54,14 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Define a checkbox label component.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const CheckboxLabel: React.FC<CheckboxLabelProps> = ({
     checkboxId,
     children = DEFAULT_PROPS.children,
     className = '',
     ...props
-}: CheckboxLabelProps): React.ReactElement => {
+}: CheckboxLabelProps): ReactElement => {
     return (
         <label
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}

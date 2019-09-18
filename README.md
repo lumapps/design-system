@@ -106,8 +106,30 @@ yarn serve
 npm run serve
 ```
 
-Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for AngularJS example or [http://localhost:8081](http://localhost:8081) for React example.
+Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for React example or [http://localhost:8081](http://localhost:8081) for AngularJS example.
 Then, click on the `examples` directory in the showing listing and you should land on the example page.
+
+## How to publish packages
+
+First, be sure to be logged in NPM:
+
+```bash
+npm login
+```
+
+To publish the `@lumx/<core|react|angularjs|icons>` package:
+
+```bash
+npm run release:<core|react|angularjs|icons>:<major|minor|patch>
+```
+
+To publish these four packages:
+
+```bash
+npm run release:<major|minor|patch>
+```
+
+These commands will build the packages, increment the version number and publish to NPM.
 
 ## Copyright and license
 

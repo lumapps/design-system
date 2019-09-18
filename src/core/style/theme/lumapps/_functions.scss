@@ -1,10 +1,14 @@
 @function lumx-theme-color-variant($color, $variant) {
-    @return map-get(map-get($lumx-theme-color-palette, $color), $variant);
+    @if map-has-key($lumx-theme-color-palette, $color) {
+        @return map-get(map-get($lumx-theme-color-palette, $color), $variant);
+    } @else {
+        @return map-get(map-get($lumx-theme-color-palette, 'dark'), $variant);
+    }
 }
 
 @function lumx-theme-best-color(
     $base,
-    $colors: (lumx-theme-color-variant(light, N), lumx-theme-color-variant(dark, N))
+    $colors: (lumx-theme-color-variant('light', 'N'), lumx-theme-color-variant('dark', 'N'))
 ) {
     $color-brightness: round((red($base) * 299) + (green($base) * 587) + (blue($base) * 114) / 1000);
     $light-color: round((red(#fff) * 299) + (green(#fff) * 587) + (blue(#fff) * 114) / 1000);

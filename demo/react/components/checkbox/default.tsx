@@ -1,8 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
-import { Checkbox, CheckboxTheme } from 'LumX';
-import { CheckboxHelper } from 'LumX/components/checkbox/react/CheckboxHelper';
-import { CheckboxLabel } from 'LumX/components/checkbox/react/CheckboxLabel';
+import { Checkbox, CheckboxHelper, CheckboxLabel, Theme } from 'LumX';
 
 /////////////////////////////
 
@@ -10,7 +8,7 @@ interface IProps {
     /**
      * The theme to use to display this demo.
      */
-    theme: CheckboxTheme;
+    theme: Theme;
 }
 
 /////////////////////////////
@@ -18,13 +16,10 @@ interface IProps {
 /**
  * The demo for the default <Checkbox>s.
  *
- * @return {React.ReactElement} The demo component.
+ * @return The demo component.
  */
-const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement => {
-    const [checkboxes, setCheckboxes]: [boolean[], React.Dispatch<React.SetStateAction<boolean[]>>] = useState([
-        true,
-        false,
-    ]);
+const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
+    const [checkboxes, setCheckboxes] = useState([true, false]);
     const handleChange: CallableFunction = (index: number): CallableFunction => ({
         checked,
     }: {
@@ -37,7 +32,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
     };
 
     return (
-        <Fragment>
+        <>
             <div className="mb+">
                 <Checkbox checked={checkboxes[0]} onChange={handleChange(0)} theme={theme}>
                     <CheckboxLabel>Checkbox</CheckboxLabel>
@@ -61,7 +56,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                     </CheckboxHelper>
                 </Checkbox>
             </div>
-        </Fragment>
+        </>
     );
 };
 

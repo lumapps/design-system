@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RadioButtonLabel> Props should use the given props 1`] = `
+<label
+  className="lumx-radio-button__label"
+  htmlFor="test-radio-button-id"
+>
+  Test Label
+</label>
+`;
+
+exports[`<RadioButtonLabel> Snapshots and structure should render correctly 1`] = `
+<label
+  className="lumx-radio-button__label"
+  htmlFor="test-radio-button-id"
+/>
+`;

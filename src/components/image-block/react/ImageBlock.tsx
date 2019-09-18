@@ -1,11 +1,10 @@
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Chip, ChipSizes, Thumbnail, ThumbnailAspectRatio, ThumbnailAspectRatios } from 'LumX';
-import { Alignment, Alignments, Theme, Themes } from 'LumX/components';
+import { Alignment, Chip, Size, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -16,11 +15,10 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Authorized variants.
  */
-enum CaptionPositions {
+enum ImageBlockCaptionPosition {
     below = 'below',
     over = 'over',
 }
-type CaptionPosition = CaptionPositions;
 
 /**
  * Defines the props of the component.
@@ -31,7 +29,7 @@ interface IImageBlockProps extends IGenericProps {
     /** The aspect ratio the image will get. */
     aspectRatio?: ThumbnailAspectRatio;
     /** Caption position. */
-    captionPosition?: CaptionPosition;
+    captionPosition?: ImageBlockCaptionPosition;
     /** The style to apply to the caption section. */
     captionStyle?: CSSProperties;
     /** The image description. Can be either a string, or sanitized html. */
@@ -68,38 +66,26 @@ interface IDefaultPropsType extends Partial<ImageBlockProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ImageBlock`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    align: Alignments.left,
-    aspectRatio: ThumbnailAspectRatios.original,
-    captionPosition: CaptionPositions.below,
+    align: Alignment.left,
+    aspectRatio: ThumbnailAspectRatio.original,
+    captionPosition: ImageBlockCaptionPosition.below,
     captionStyle: {},
     description: undefined,
     fillHeight: false,
     tags: undefined,
-    theme: Themes.light,
+    theme: Theme.light,
     title: undefined,
 };
 
@@ -108,7 +94,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * Displays an properly structured image block.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ImageBlock: React.FC<ImageBlockProps> = ({
     align = DEFAULT_PROPS.align,
@@ -123,8 +109,8 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
     ...props
-}: ImageBlockProps): React.ReactElement => {
-    const { onClick = null, ...restProps }: IDefaultPropsType = props;
+}: ImageBlockProps): ReactElement => {
+    const { onClick = null, ...restProps } = props;
 
     return (
         <div
@@ -139,8 +125,8 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                 }),
                 {
                     [`${CLASSNAME}--fill-height`]: fillHeight,
-                    [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== 'original',
-                    [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === 'original',
+                    [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== ThumbnailAspectRatio.original,
+                    [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === ThumbnailAspectRatio.original,
                 },
             )}
             {...restProps}
@@ -173,7 +159,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                             {tags.map(
                                 (tag: string, index: number): JSX.Element => (
                                     <div key={index} className={`${CLASSNAME}__tag`}>
-                                        <Chip size={ChipSizes.s} theme={theme}>
+                                        <Chip size={Size.s} theme={theme}>
                                             {tag}
                                         </Chip>
                                     </div>
@@ -190,4 +176,4 @@ ImageBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, CaptionPositions, ImageBlock, ImageBlockProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };

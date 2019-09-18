@@ -1,0 +1,356 @@
+```javascript import
+import {
+    Button,
+    ButtonEmphasis,
+    ColorPalette,
+    DropdownButton,
+    IconButton,
+    List,
+    ListItem,
+    ListItemSize,
+    Size,
+    Theme,
+} from 'LumX';
+import { mdiMenuDown, mdiPencil, mdiPlus } from 'LumX/icons';
+```
+
+# Button
+
+**Buttons trigger actions with a single click.**
+
+## High emphasis
+
+Use high emphasis to help users to identify the main action.
+There should not be more than one high emphasis button in a view.
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <>
+        <Button theme={theme}>Default</Button>
+        <Button disabled={true} theme={theme}>
+            Disabled
+        </Button>
+        <Button leftIcon={mdiPencil} theme={theme}>
+            With Icon
+        </Button>
+        <DropdownButton
+            dropdown={
+                <List isClickable>
+                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                </List>
+            }
+            theme={theme}
+        >
+            Dropdown
+        </DropdownButton>
+        <DropdownButton
+            dropdown={
+                <List isClickable>
+                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                </List>
+            }
+            splitted={true}
+            theme={theme}
+        >
+            Split
+        </DropdownButton>
+        <IconButton icon={mdiPlus} theme={theme} />
+    </>
+);
+```
+
+## Medium emphasis
+
+Use medium emphasis for secondary actions.
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <>
+        <Button emphasis={ButtonEmphasis.medium} color={theme === Theme.dark ? 'light' : undefined} theme={theme}>
+            Default
+        </Button>
+        <Button
+            disabled={true}
+            emphasis={ButtonEmphasis.medium}
+            color={theme === Theme.dark ? 'light' : undefined}
+            theme={theme}
+        >
+            Disabled
+        </Button>
+        <Button
+            leftIcon={mdiPencil}
+            emphasis={ButtonEmphasis.medium}
+            color={theme === Theme.dark ? 'light' : undefined}
+            theme={theme}
+        >
+            With Icon
+        </Button>
+        <DropdownButton
+            dropdown={
+                <List isClickable>
+                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                </List>
+            }
+            emphasis={ButtonEmphasis.medium}
+            color={theme === Theme.dark ? 'light' : undefined}
+            theme={theme}
+        >
+            Dropdown
+        </DropdownButton>
+        <DropdownButton
+            dropdown={
+                <List isClickable>
+                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                </List>
+            }
+            emphasis={ButtonEmphasis.medium}
+            splitted={true}
+            color={theme === Theme.dark ? 'light' : undefined}
+            theme={theme}
+        >
+            Split
+        </DropdownButton>
+        <IconButton emphasis={ButtonEmphasis.medium} icon={mdiPlus} theme={theme} />
+    </>
+);
+```
+
+## Low emphasis
+
+When the view contains a primary and a medium button, use low emphasis for lower priority actions.
+Alternatively, use low emphasis when there is only one level of priority.
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <>
+        <Button emphasis={ButtonEmphasis.low} color={theme === Theme.dark ? 'light' : undefined} theme={theme}>
+            Default
+        </Button>
+        <Button
+            disabled={true}
+            emphasis={ButtonEmphasis.low}
+            color={theme === Theme.dark ? 'light' : undefined}
+            theme={theme}
+        >
+            Disabled
+        </Button>
+        <Button
+            leftIcon={mdiPencil}
+            emphasis={ButtonEmphasis.low}
+            color={theme === Theme.dark ? 'light' : undefined}
+            theme={theme}
+        >
+            With Icon
+        </Button>
+        <DropdownButton
+            dropdown={
+                <List isClickable>
+                    <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                    <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                </List>
+            }
+            emphasis={ButtonEmphasis.low}
+            color={theme === Theme.dark ? 'light' : undefined}
+            theme={theme}
+        >
+            Dropdown
+        </DropdownButton>
+        <IconButton emphasis={ButtonEmphasis.low} icon={mdiPlus} theme={theme} />
+    </>
+);
+```
+
+## Small size
+
+Use small size when space is a constraint.
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => (
+    <>
+        <div className="demo-grid lumx-spacing-margin-bottom-big">
+            <Button size={Size.s} theme={theme}>
+                Default
+            </Button>
+            <Button disabled={true} size={Size.s} theme={theme}>
+                Disabled
+            </Button>
+            <Button leftIcon={mdiPencil} size={Size.s} theme={theme}>
+                With Icon
+            </Button>
+            <DropdownButton
+                dropdown={
+                    <List isClickable>
+                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                    </List>
+                }
+                size={Size.s}
+                theme={theme}
+            >
+                Dropdown
+            </DropdownButton>
+            <DropdownButton
+                dropdown={
+                    <List isClickable>
+                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                    </List>
+                }
+                size={Size.s}
+                splitted={true}
+                theme={theme}
+            >
+                Split
+            </DropdownButton>
+            <IconButton icon={mdiPlus} size={Size.s} theme={theme} />
+        </div>
+        <div className="demo-grid lumx-spacing-margin-bottom-big">
+            <Button
+                emphasis={ButtonEmphasis.medium}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                Default
+            </Button>
+            <Button
+                disabled={true}
+                emphasis={ButtonEmphasis.medium}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                Disabled
+            </Button>
+            <Button
+                emphasis={ButtonEmphasis.medium}
+                leftIcon={mdiPencil}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                With Icon
+            </Button>
+            <DropdownButton
+                dropdown={
+                    <List isClickable>
+                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                    </List>
+                }
+                emphasis={ButtonEmphasis.medium}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                Dropdown
+            </DropdownButton>
+            <DropdownButton
+                dropdown={
+                    <List isClickable>
+                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                    </List>
+                }
+                emphasis={ButtonEmphasis.medium}
+                size={Size.s}
+                splitted={true}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                Split
+            </DropdownButton>
+            <IconButton
+                icon={mdiPlus}
+                emphasis={ButtonEmphasis.medium}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            />
+        </div>
+        <div className="demo-grid">
+            <Button
+                emphasis={ButtonEmphasis.low}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                Default
+            </Button>
+            <Button
+                disabled={true}
+                emphasis={ButtonEmphasis.low}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                Disabled
+            </Button>
+            <Button
+                emphasis={ButtonEmphasis.low}
+                leftIcon={mdiPencil}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                With Icon
+            </Button>
+            <DropdownButton
+                dropdown={
+                    <List isClickable>
+                        <ListItem size={ListItemSize.tiny}>Los Angeles</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Monterrey</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Georgetown</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Cali</ListItem>
+                        <ListItem size={ListItemSize.tiny}>Trondheim</ListItem>
+                    </List>
+                }
+                emphasis={ButtonEmphasis.low}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            >
+                Dropdown
+            </DropdownButton>
+            <IconButton
+                icon={mdiPlus}
+                emphasis={ButtonEmphasis.low}
+                size={Size.s}
+                color={theme === Theme.dark ? 'light' : undefined}
+                theme={theme}
+            />
+        </div>
+    </>
+);
+```

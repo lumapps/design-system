@@ -1,4 +1,4 @@
-import React, { Children, cloneElement } from 'react';
+import React, { Children, ReactElement, cloneElement } from 'react';
 
 import noop from 'lodash/noop';
 
@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import { mdiCheck } from '@mdi/js';
 
-import { Icon, Theme, Themes } from 'LumX';
+import { Icon, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { CheckboxHelper } from './CheckboxHelper';
@@ -51,41 +51,29 @@ interface IDefaultPropsType extends Partial<CheckboxProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Checkbox`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Checkbox`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     checked: false,
     disabled: false,
     onChange: noop,
-    theme: Themes.light,
+    theme: Theme.light,
 };
 /////////////////////////////
 
 /**
  * Defines a checkbox.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const Checkbox: React.FC<CheckboxProps> = ({
     checked = DEFAULT_PROPS.checked,
@@ -95,9 +83,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
     onChange = DEFAULT_PROPS.onChange,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: CheckboxProps): React.ReactElement => {
+}: CheckboxProps): ReactElement => {
     const checkboxId: string = uniqueId(`${CLASSNAME.toLowerCase()}-`);
-    const handleChange: () => void = (): void => {
+    const handleChange = (): void => {
         onChange!({ checked: !checked });
     };
 
@@ -153,4 +141,4 @@ Checkbox.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps };

@@ -24,10 +24,10 @@
     flex: 1;
     white-space: nowrap;
 
-    @if $size == m {
-        @include lumx-typography(body1);
-    } @else if $size == s {
-        @include lumx-typography(caption);
+    @if $size == 'm' {
+        @include lumx-typography('body1');
+    } @else if $size == 's' {
+        @include lumx-typography('caption');
     }
 }
 

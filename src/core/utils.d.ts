@@ -1,14 +1,15 @@
-import { Color, Size, Theme } from 'LumX/components';
+import { Color, Size, Theme } from 'LumX';
+import { Callback } from './react/utils';
 
 /////////////////////////////
 
 /**
  * Get the basic CSS class for the given type.
  *
- * @param  {string}         prefix The class name prefix for the generated CSS class.
- * @param  {string}         type   The type of CSS class we want to generate (e.g.: 'color', 'variant', ...).
- * @param  {string|boolean} value  The value of the type of the CSS class (e.g.: 'primary', 'button', ...).
- * @return {string}         The basic CSS class.
+ * @param         prefix The class name prefix for the generated CSS class.
+ * @param         type   The type of CSS class we want to generate (e.g.: 'color', 'variant', ...).
+ * @param value   The value of the type of the CSS class (e.g.: 'primary', 'button', ...).
+ * @return        The basic CSS class.
  */
 declare function getBasicClass({
     prefix,
@@ -17,7 +18,7 @@ declare function getBasicClass({
 }: {
     prefix: string;
     type: string;
-    value: string | boolean;
+    value: string | number | boolean | undefined;
 }): string;
 
 /**
@@ -25,11 +26,11 @@ declare function getBasicClass({
  *
  * @see {@link /src/components/index.d.ts} for the possible values of each parameter.
  *
- * @param  {string} prefix The class name prefix for the generated CSS class.
- * @param  {Object} props  All the other props you want to generate a class.
+ * @param prefix The class name prefix for the generated CSS class.
+ * @param props  All the other props you want to generate a class.
  *                         The rule of thumb: the key is the name of the prop in the class, the value a string that will
  *                         be used in the classname to represent the value of the given prop.
- * @return {string} All LumX basic CSS classes.
+ * @return All LumX basic CSS classes.
  */
 declare function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string;
 
@@ -37,22 +38,30 @@ declare function handleBasicClasses({ prefix, ...props }: { prefix: string; [pro
  * Detects swipe direction.
  * Credits: http://javascriptkit.com/javatutors/touchevents2.shtml.
  *
- * @param {Element} el Element that will hold touch events.
- * @param {(swipeDirection: SwipeDirection) => void} cb Callback function.
- * @return {() => void)} Function to remove listeners.
+ * @param el Element that will hold touch events.
+ * @param cb Callback function.
+ * @return Function to remove listeners.
  */
-declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) => void): () => void;
+declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) => void): Callback;
 
 declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
 
 /**
- * Make sure the pressed key is the enter key before calling the callbac.
+ * Make sure the pressed key is the enter key before calling the callback.
  *
- * @param  {Function}   cb The callback to call on enter/return press.
+ * @param  cb The callback to call on enter/return press.
+ * @return The decorated function.
+ */
+declare function onEnterPressed(cb: Callback): Callback;
+
+/**
+ * Make sure the pressed key is the escape key before calling the callback.
+ *
+ * @param  {Function}   cb The callback to call on escape press.
  * @return {() => void} The decorated function.
  */
-declare function onEnterPressed(cb: () => void);
+declare function onEscapePressed(cb: () => void);
 
 /////////////////////////////
 
-export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, SwipeDirection };
+export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed, SwipeDirection };

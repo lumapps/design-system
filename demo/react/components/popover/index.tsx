@@ -5,7 +5,7 @@ import { Categories, Category, DemoObject } from 'LumX/demo/react/constants';
 /**
  * The title of the demo.
  */
-const title: string = 'Popovers';
+const title = 'Popovers';
 
 /**
  * The category of the demo.
@@ -15,7 +15,7 @@ const category: Category = Categories.components;
 /**
  * The description of the component.
  */
-const description: string =
+const description =
     'Popovers can be used as a component to position floating elements over the UI but also as a based element to build advanced behavior like tooltips, dropdown selectors, on hover details ... Etc.';
 
 const demos: { [demoName: string]: DemoObject } = {
@@ -27,11 +27,6 @@ const demos: { [demoName: string]: DemoObject } = {
     offsets: {
         description: 'Popover can be offseted from its anchor point.',
         title: 'Using offsets',
-    },
-    tooltip: {
-        description:
-            'Popover can be used to create a tootltip behavior i.e. On hovering a target pop a component anchored to the target. When the mouse exists the target the poped element is hidden.',
-        title: 'Popover with tooltip behavior',
     },
     controled: {
         description: '',

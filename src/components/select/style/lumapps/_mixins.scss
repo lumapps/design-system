@@ -1,11 +1,11 @@
 @mixin lumx-select-input-chip() {
-    height: map-get($lumx-chip-sizes, s);
+    height: map-get($lumx-chip-sizes, 's');
     margin: 3px;
 }
 
 @mixin lumx-select-input-clear($theme) {
     margin-left: $lumx-spacing-unit;
-    color: lumx-theme-color-variant($theme, N);
+    color: lumx-theme-color-variant($theme, 'N');
 
     &:hover {
         opacity: 0.8;
@@ -14,7 +14,7 @@
 
 @mixin lumx-select-input-indicator($theme) {
     margin-left: $lumx-spacing-unit;
-    color: lumx-theme-color-variant($theme, N);
+    color: lumx-theme-color-variant($theme, 'N');
 }
 
 @mixin lumx-select-filter() {
@@ -33,11 +33,10 @@
 }
 
 @mixin lumx-select-helper() {
-    @include lumx-typography(body1);
+    @include lumx-typography('body1');
 
     display: flex;
     align-items: center;
-    justify-content: center;
     padding: $lumx-spacing-unit 0;
-    color: lumx-theme-color-variant(dark, L3);
+    color: lumx-theme-color-variant('dark', 'L3');
 }

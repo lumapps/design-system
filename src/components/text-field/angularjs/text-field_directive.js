@@ -61,6 +61,10 @@ function TextFieldController(LumXUtilsService) {
      * @return {boolean} Wether the model controller has a value or not.
      */
     function hasValue() {
+        if (angular.isUndefined(_modelController.$viewValue)) {
+            return false;
+        }
+
         return _modelController.$viewValue.length;
     }
 
@@ -85,7 +89,16 @@ function TextFieldDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
-        const input = el.find('input');
+        let input = el.find('input');
+
+        if (input.length === 1) {
+            el.addClass(`${CSS_PREFIX}-text-field--has-input`);
+        } else {
+            input = el.find('textarea');
+
+            el.addClass(`${CSS_PREFIX}-text-field--has-textarea`);
+        }
+
         const modelController = input.data('$ngModelController');
 
         ctrl.setModelController(modelController);

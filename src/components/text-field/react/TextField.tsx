@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 
 import classNames from 'classnames';
+import get from 'lodash/get';
 import uuid from 'uuid/v4';
 
-import { Icon, Sizes, Theme, Themes } from 'LumX';
+import { Icon, Size, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -11,45 +12,54 @@ import { mdiAlertCircle, mdiCheckCircle } from 'LumX/icons';
 
 /////////////////////////////
 
+enum TextFieldType {
+    input = 'input',
+    textarea = 'textarea',
+}
+
 /**
  * Defines the props of the component.
  */
 interface ITextFieldProps extends IGenericProps {
-    /** Whether the text field is displayed with error style or not */
+    /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
 
-    /** The text field helper message */
+    /** Text field helper message. */
     helper?: string;
 
-    /** Id that will be passed to input element */
-    id?: string;
-
-    /** The text field icon from the mdi svg path */
+    /** Text field icon (SVG path). */
     icon?: string;
 
-    /** Whether the text field is disabled or not */
+    /** Id that will be passed to input element. An id is generated (uuid) if no id is provided. */
+    id?: string;
+
+    /** Whether the text field is disabled or not. */
     isDisabled?: boolean;
 
-    /** Whether the text field is displayed with valid style or not */
+    /** Whether the text field is displayed with valid style or not. */
     isValid?: boolean;
 
-    /** The text field label displayed in a label tag. On label click, focus the input (generate UUID) */
+    /** Text field label displayed in a label tag. */
     label?: string;
 
-    /** The text field placeholder message */
+    /** Text field placeholder message. */
     placeholder?: string;
 
-    /** Theme */
-    theme?: string;
+    /** Theme. */
+    theme?: Theme;
+
+    /** Text field value. */
+    value: string;
+
+    /** Text field type (input or textarea). */
+    type?: TextFieldType;
+
+    /** Text field value change handler. */
+    onChange(value: string): void;
 }
 type TextFieldProps = ITextFieldProps;
 
 /////////////////////////////
-
-/**
- * Define the types of the default props.
- */
-interface IDefaultPropsType extends Partial<TextFieldProps> {}
 
 /////////////////////////////
 //                         //
@@ -59,61 +69,97 @@ interface IDefaultPropsType extends Partial<TextFieldProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}TextField`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}TextField`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: Partial<TextFieldProps> = {
+    hasError: false,
+    isDisabled: false,
+    isValid: false,
+    theme: Theme.light,
+    type: TextFieldType.input,
+};
+
 /////////////////////////////
 
-/**
- * Text field
- *
- * @return {React.ReactElement} The component.
- */
-const TextField: React.FC<TextFieldProps> = ({
-    className = '',
-    hasError,
-    helper,
-    id = uuid(),
-    icon,
-    isDisabled,
-    isValid,
-    label,
-    placeholder,
-    theme = Themes.light,
-    ...props
-}: TextFieldProps): React.ReactElement => {
-    const [hasFocus, setHasFocus]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
-    const [hasValue, setHasValue]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState<boolean>(false);
+interface IInputNativeProps {
+    id?: string;
+    isDisabled?: boolean;
+    placeholder?: string;
+    type?: TextFieldType;
+    value: string;
+    setFocus(focus: boolean): void;
+    onChange(value: string): void;
+}
 
-    /**
-     * Handle change event on input.
-     *
-     * @param {React.ChangeEvent<HTMLInputElement>} event Event of HTML Element
-     */
-    const handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void = (
-        event: React.ChangeEvent<HTMLInputElement>,
-    ): void => setHasValue(Boolean(event.target.value));
+const renderInputNative = (props: IInputNativeProps): ReactElement => {
+    const { id, isDisabled, placeholder, type, value, setFocus, onChange, ...forwardedProps } = props;
+    const onFocus = (): void => setFocus(true);
+    const onBlur = (): void => setFocus(false);
+
+    const handleChange = (event: React.ChangeEvent): void => onChange(get(event, 'target.value'));
+
+    if (type === TextFieldType.textarea) {
+        return (
+            <textarea
+                id={id}
+                disabled={isDisabled}
+                placeholder={placeholder}
+                value={value}
+                onFocus={onFocus}
+                onBlur={onBlur}
+                onChange={handleChange}
+                {...forwardedProps}
+            />
+        );
+    }
+    return (
+        <input
+            id={id}
+            disabled={isDisabled}
+            type="text"
+            placeholder={placeholder}
+            value={value}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onChange={handleChange}
+            {...forwardedProps}
+        />
+    );
+};
+
+/**
+ * Text field.
+ *
+ * @param  props Text field props.
+ * @return The component.
+ */
+const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElement => {
+    const {
+        className = '',
+        hasError,
+        helper,
+        icon,
+        id = uuid(),
+        isDisabled,
+        isValid,
+        label,
+        onChange,
+        placeholder,
+        theme = DEFAULT_PROPS.theme,
+        type = DEFAULT_PROPS.type,
+        value,
+        ...forwardedProps
+    } = props;
+    const [isFocus, setFocus] = useState(false);
 
     return (
         <div
@@ -122,11 +168,13 @@ const TextField: React.FC<TextFieldProps> = ({
                 handleBasicClasses({
                     hasError: !isValid && hasError,
                     hasIcon: Boolean(icon),
+                    hasInput: type === TextFieldType.input,
                     hasLabel: Boolean(label),
                     hasPlaceholder: Boolean(placeholder),
-                    hasValue,
+                    hasTextarea: type === TextFieldType.textarea,
+                    hasValue: Boolean(value),
                     isDisabled,
-                    isFocus: hasFocus,
+                    isFocus,
                     isValid,
                     prefix: CLASSNAME,
                     theme,
@@ -145,33 +193,31 @@ const TextField: React.FC<TextFieldProps> = ({
                 {icon && (
                     <Icon
                         className={`${CLASSNAME}__input-icon`}
-                        color={theme === Themes.dark ? 'light' : undefined}
+                        color={theme === Theme.dark ? 'light' : undefined}
                         icon={icon}
-                        size={Sizes.xs}
+                        size={Size.xs}
                     />
                 )}
 
                 <div className={`${CLASSNAME}__input-native`}>
-                    <input
-                        id={id}
-                        disabled={isDisabled}
-                        type="text"
-                        placeholder={placeholder}
-                        // tslint:disable-next-line: jsx-no-lambda
-                        onFocus={(): void => setHasFocus(true)}
-                        // tslint:disable-next-line: jsx-no-lambda
-                        onBlur={(): void => setHasFocus(false)}
-                        onChange={handleChange}
-                        {...props}
-                    />
+                    {renderInputNative({
+                        id,
+                        isDisabled,
+                        onChange,
+                        placeholder,
+                        setFocus,
+                        type,
+                        value,
+                        ...forwardedProps,
+                    })}
                 </div>
 
                 {(isValid || hasError) && (
                     <Icon
                         className={`${CLASSNAME}__input-validity`}
-                        color={theme === Themes.dark ? 'light' : undefined}
+                        color={theme === Theme.dark ? 'light' : undefined}
                         icon={isValid ? mdiCheckCircle : mdiAlertCircle}
-                        size={Sizes.xs}
+                        size={Size.xs}
                     />
                 )}
             </div>
@@ -182,4 +228,4 @@ TextField.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldType, TextFieldProps };

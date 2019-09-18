@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import { build } from 'test-data-bot';
@@ -31,21 +31,18 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {ISetupProps} props  The props to use to override the default props of the component.
- * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
+ * @param props  The props to use to override the default props of the component.
+ * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: CheckboxLabelProps = {
         checkboxId: 'test-checkbox-id',
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     // noinspection RequiredAttributes
     const wrapper: Wrapper = renderer(<CheckboxLabel {...props} />);
@@ -60,7 +57,7 @@ describe(`<${CheckboxLabel.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { wrapper }: ISetup = setup();
+            const { wrapper } = setup();
 
             expect(wrapper).toMatchSnapshot();
             expect(wrapper).toExist();
@@ -79,7 +76,7 @@ describe(`<${CheckboxLabel.displayName}>`, (): void => {
 
             const modifiedProps: ISetupProps = modifiedPropsBuilder();
 
-            const { wrapper }: ISetup = setup({ ...modifiedProps });
+            const { wrapper } = setup({ ...modifiedProps });
             expect(wrapper).toMatchSnapshot();
         });
     });

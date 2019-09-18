@@ -5,24 +5,27 @@
 .#{$lumx-base-prefix}-post-block {
     $self: &;
 
-    &--variant-list {
+    &--orientation-horizontal {
         display: flex;
     }
 
     &__thumbnail {
-        #{$self}--variant-list & {
+        #{$self}--orientation-horizontal & {
             width: 33.33%;
             flex-shrink: 0;
             margin-right: $lumx-spacing-unit * 3;
         }
 
-        #{$self}--variant-grid & {
+        #{$self}--orientation-vertical & {
             margin-bottom: $lumx-spacing-unit * 3;
         }
     }
 
     &__wrapper {
-        #{$self}--variant-list & {
+        display: flex;
+        flex-direction: column;
+
+        #{$self}--orientation-horizontal & {
             flex: 1;
         }
     }
@@ -32,44 +35,52 @@
     }
 
     &__title {
-        @include lumx-typography(title);
+        @include lumx-typography('title');
 
         display: block;
         margin-bottom: $lumx-spacing-unit;
 
         #{$self}--theme-light & {
-            @include lumx-link(dark);
+            @include lumx-link('dark');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-link(light);
+            @include lumx-link('light');
         }
     }
 
     &__meta {
-        @include lumx-typography(caption);
+        @include lumx-typography('caption');
 
         display: block;
         margin-bottom: $lumx-spacing-unit;
-        color: lumx-theme-color-variant(dark, L2);
+        color: lumx-theme-color-variant('dark', 'L2');
     }
 
     &__text {
-        @include lumx-typography(body1);
+        @include lumx-typography('body1');
 
-        margin-bottom: $lumx-spacing-unit * 2;
+        margin-bottom: $lumx-spacing-unit;
     }
 
     &__toolbar {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
+    }
+
+    &__attachments {
+        margin-top: $lumx-spacing-unit;
+        margin-bottom: $lumx-spacing-unit;
     }
 
     &__tags {
         flex: 1;
+        margin-top: $lumx-spacing-unit;
     }
 
     &__actions {
         flex-shrink: 0;
+        margin-top: $lumx-spacing-unit;
     }
 }

@@ -5,7 +5,7 @@ import { Categories, Category, DemoObject } from 'LumX/demo/react/constants';
 /**
  * The title of the demo.
  */
-const title: string = 'Avatars';
+const title = 'Avatars';
 
 /**
  * The category of the demo.
@@ -15,7 +15,7 @@ const category: Category = Categories.components;
 /**
  * The description of the component.
  */
-const description: string = 'Enables user to quickly identify people.';
+const description = 'Enables user to quickly identify people.';
 
 const demos: { [demoName: string]: DemoObject } = {
     /* tslint:disable: object-literal-sort-keys */

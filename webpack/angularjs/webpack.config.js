@@ -1,12 +1,12 @@
 const merge = require('webpack-merge');
 
-const { SRC_PATH, TECH_PREFIX } = require('../constants');
+const { SRC_PATH } = require('../constants');
 
 const baseConfig = require('../webpack.config');
 
 const angularJSConfig = {
     entry: {
-        'lumx.angularjs': `${SRC_PATH}/${TECH_PREFIX.angularjs}.index.js`,
+        'lumx.angularjs': `${SRC_PATH}/angularjs.index.js`,
     },
 
     module: {

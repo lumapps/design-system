@@ -14,11 +14,11 @@
 }
 
 @mixin lumx-tabs-links-position($position) {
-    @if $position == left {
+    @if $position == 'position-left' {
         justify-content: flex-start;
-    } @else if $position == center {
+    } @else if $position == 'position-center' {
         justify-content: center;
-    } @else if $position == right {
+    } @else if $position == 'position-right' {
         justify-content: flex-end;
     }
 }
@@ -26,7 +26,7 @@
 @mixin lumx-tabs-link() {
     position: relative;
     display: flex;
-    height: map-get($lumx-sizes, m);
+    height: map-get($lumx-sizes, 'm');
     align-items: center;
     justify-content: center;
     padding: 0 $lumx-spacing-unit * 3;
@@ -47,24 +47,24 @@
     }
 
     span {
-        @include lumx-typography(subtitle1);
+        @include lumx-typography('subtitle1');
     }
 }
 
 @mixin lumx-tabs-link-layout($layout) {
-    @if $layout == fixed {
+    @if $layout == 'fixed' {
         flex: 1;
     }
 }
 
 @mixin lumx-tabs-link-active($theme) {
-    @if $theme == dark {
+    @if $theme == 'dark' {
         &::after {
-            background-color: lumx-theme-color-variant(primary, N);
+            background-color: lumx-theme-color-variant('primary', 'N');
         }
-    } @else if $theme == light {
+    } @else if $theme == 'light' {
         &::after {
-            background-color: lumx-theme-color-variant(light, N);
+            background-color: lumx-theme-color-variant('light', 'N');
         }
     }
 }

@@ -5,10 +5,10 @@
 .#{$lumx-base-prefix}-tooltip {
     $self: &;
 
-    @include lumx-elevation(3);
+    @include lumx-elevation($lumx-tooltip-elevation);
 
     padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
-    background-color: lumx-theme-color-variant(light, N);
+    background-color: $lumx-tooltip-background-color;
     border-radius: $lumx-theme-border-radius;
 
     &[x-placement^='top'] {
@@ -33,7 +33,7 @@
         height: 0;
         margin: $lumx-tooltip-arrow-size;
         border-style: solid;
-        border-color: lumx-theme-color-variant(light, N);
+        border-color: lumx-theme-color-variant('light', 'N');
 
         #{$self}[x-placement^='top'] & {
             bottom: -$lumx-tooltip-arrow-size;
@@ -77,8 +77,9 @@
     }
 
     &__inner {
-        @include lumx-typography(caption);
-
         display: block;
+        color: $lumx-tooltip-color;
+        font-size: $lumx-tooltip-font-size;
+        line-height: $lumx-tooltip-line-height;
     }
 }

@@ -4,21 +4,19 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+import { Theme } from 'LumX';
+import { Callback, IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
-
-import { Theme, Themes } from 'LumX/components';
 
 /**
  *  Authorized size values.
  */
-const enum Sizes {
+enum ListItemSize {
     tiny = 'tiny',
     regular = 'regular',
     big = 'big',
     huge = 'huge',
 }
-type Size = Sizes;
 
 /////////////////////////////
 
@@ -31,7 +29,7 @@ interface IListItemProps extends IGenericProps {
     /* Whether the list item can be clicked */
     isClickable?: boolean;
     /* Component size*/
-    size?: Size;
+    size?: ListItemSize;
     /* before element */
     before?: ReactElement;
     /* after element */
@@ -41,8 +39,7 @@ interface IListItemProps extends IGenericProps {
     /* theme */
     theme?: Theme;
     /* Callback used to retrieved the selected entry*/
-    // tslint:disable-next-line: typedef
-    onItemSelected?;
+    onItemSelected?(): void;
 }
 type ListItemProps = IListItemProps;
 
@@ -61,42 +58,30 @@ interface IDefaultPropsType extends Partial<ListItemProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}ListItem`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isActive: false,
     isClickable: false,
     isSelected: false,
-    size: Sizes.regular,
-    theme: Themes.light,
+    size: ListItemSize.regular,
+    theme: Theme.light,
 };
 /////////////////////////////
 
 /**
  * Component used in List element.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const ListItem: React.FC<ListItemProps> = ({
     after,
@@ -110,8 +95,8 @@ const ListItem: React.FC<ListItemProps> = ({
     onItemSelected,
     before,
     ...props
-}: ListItemProps): React.ReactElement => {
-    const element: React.MutableRefObject<HTMLLIElement | null> = useRef(null);
+}: ListItemProps): ReactElement => {
+    const element = useRef<HTMLLIElement | null>(null);
 
     useEffect(() => {
         if (element && element.current && isActive) {
@@ -122,24 +107,22 @@ const ListItem: React.FC<ListItemProps> = ({
     /**
      * Prevent the focus event to be trigger on the parent.
      *
-     * @param {FocusEvent} evt Focus event
+     * @param evt Focus event
      */
-    // tslint:disable-next-line: typedef
-    const preventParentFocus = (evt: React.FocusEvent<HTMLLIElement>): void => {
+    const preventParentFocus = (evt: React.FocusEvent): void => {
         evt.preventDefault();
         evt.stopPropagation();
     };
 
     /**
      * Currying the on entre press behavior.
-     * @return {Object} Returns either undefined or a callback
+     * @return Returns either undefined or a callback
      */
-    // tslint:disable-next-line: typedef
-    const onKeyDown = () => {
+    const onKeyDown = (): Callback | undefined => {
         if (isClickable && onItemSelected) {
             return onEnterPressed(onItemSelected);
         }
-        return;
+        return undefined;
     };
 
     return (
@@ -165,4 +148,4 @@ ListItem.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize };

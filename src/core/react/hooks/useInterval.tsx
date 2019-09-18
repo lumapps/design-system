@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import isFunction from 'lodash/isFunction';
+import { Callback } from '../utils';
 
 /////////////////////////////
 
@@ -8,17 +9,17 @@ import isFunction from 'lodash/isFunction';
  * Making setInterval Declarative with React Hooks.
  * Credits: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
  *
- * @param {() => void} callback Function called by setInterval.
- * @param {number}     delay    Delay for setInterval.
+ * @param callback Function called by setInterval.
+ * @param     delay    Delay for setInterval.
  */
-function useInterval(callback: () => void, delay: number | null): void {
-    const savedCallback: React.MutableRefObject<(() => void) | undefined> = useRef();
+function useInterval(callback: Callback, delay: number | null): void {
+    const savedCallback: React.MutableRefObject<Callback | void> = useRef();
 
     useEffect(() => {
         savedCallback.current = callback;
     });
 
-    useEffect((): void | (() => void) => {
+    useEffect((): Callback | void => {
         function tick(): void {
             if (isFunction(savedCallback.current)) {
                 savedCallback.current();

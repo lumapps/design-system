@@ -1,5 +1,8 @@
 /** DEMO THEME */
 
+$mdi-font-path: '../../src/icons/node_modules/@mdi/font/fonts';
+
+@import 'materialdesignicons';
 @import 'mq';
 @import '../../src/core/style/core-lumapps';
 @import '../../src/core/style/components-lumapps';
@@ -9,5 +12,4 @@
 @import './demo/demo-grid';
 @import './layout/app/app';
 @import './layout/main-nav/main-nav';
-@import './layout/sub-nav/sub-nav';
 @import './layout/main/main';

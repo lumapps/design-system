@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
@@ -10,12 +10,8 @@ import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
 
 /**
  * The URL to use as test URL.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const TEST_URL: string = 'https://www.lumapps.com';
+const TEST_URL = 'https://www.lumapps.com';
 
 /////////////////////////////
 
@@ -46,21 +42,18 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {ISetupProps} props  The props to use to override the default props of the component.
- * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
+ * @param props  The props to use to override the default props of the component.
+ * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const props: ButtonRootProps = {
         children: 'Label',
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<ButtonRoot {...props} />);
 
@@ -77,7 +70,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly as a button', (): void => {
-            const { a, button, wrapper }: ISetup = setup();
+            const { a, button, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(a).not.toExist();
@@ -85,7 +78,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         });
 
         it('should render correctly as a link', (): void => {
-            const { a, button, wrapper }: ISetup = setup({ href: TEST_URL });
+            const { a, button, wrapper } = setup({ href: TEST_URL });
             expect(wrapper).toMatchSnapshot();
 
             expect(a).toExist();
@@ -102,7 +95,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
                 disabled: 'true',
             };
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button } = setup(modifiedProps);
 
             expect(button).toBeDisabled();
 
@@ -110,30 +103,30 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             modifiedProps.href = TEST_URL;
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toBeDisabled();
         });
 
         it('should use the given `href`', (): void => {
-            const testedProp: string = 'href';
+            const testedProp = 'href';
             const modifiedProps: ISetupProps = {
                 [testedProp]: TEST_URL,
             };
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
 
         it('should use the given `target`', (): void => {
-            const testedProp: string = 'href';
+            const testedProp = 'target';
             const modifiedProps: ISetupProps = {
                 [testedProp]: '_blank',
                 href: TEST_URL,
             };
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
@@ -143,7 +136,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
                 className: 'component component--is-tested',
             };
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button } = setup(modifiedProps);
 
             expect(button).toHaveClassName(modifiedProps.className);
 
@@ -151,18 +144,18 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             modifiedProps.href = TEST_URL;
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toHaveClassName(modifiedProps.className);
         });
 
         it('should forward any other prop', (): void => {
-            const testedProp: string = 'winter';
+            const testedProp = 'winter';
             const modifiedProps: ISetupProps = {
                 [testedProp]: 'is coming',
             };
 
-            const { button }: ISetup = setup(modifiedProps);
+            const { button } = setup(modifiedProps);
 
             expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
 
@@ -170,7 +163,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             modifiedProps.href = TEST_URL;
 
-            const { a }: ISetup = setup(modifiedProps);
+            const { a } = setup(modifiedProps);
 
             expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
         });
@@ -183,7 +176,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
         const onClick: jest.Mock = jest.fn();
 
         it('should trigger `onClick` when the button is clicked', (): void => {
-            const { button }: ISetup = setup({ onClick });
+            const { button } = setup({ onClick });
 
             button.simulate('click');
             expect(onClick).toHaveBeenCalled();
@@ -192,7 +185,7 @@ describe(`<${ButtonRoot.displayName}>`, (): void => {
 
             onClick.mockClear();
 
-            const { a }: ISetup = setup({ href: TEST_URL, onClick });
+            const { a } = setup({ href: TEST_URL, onClick });
 
             a.simulate('click');
             expect(onClick).toHaveBeenCalled();

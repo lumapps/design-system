@@ -28,6 +28,8 @@
     cursor: pointer;
 
     &::after {
+        @include lumx-state-transition;
+
         position: absolute;
         top: 0;
         right: 0;
@@ -39,22 +41,22 @@
     }
 
     &:hover::after {
-        @include lumx-state(state-hover, emphasis-low, dark);
+        @include lumx-state('state-hover', 'emphasis-low', 'dark');
     }
 
     &:active::after {
-        @include lumx-state(state-active, emphasis-low, dark);
+        @include lumx-state('state-active', 'emphasis-low', 'dark');
     }
 }
 
 .#{$lumx-base-prefix}-avatar--theme-light.#{$lumx-base-prefix}-avatar[tabindex='0'] {
     &[data-focus-visible-added]::after {
-        @include lumx-state(state-focus, emphasis-low, dark);
+        @include lumx-state('state-focus', 'emphasis-low', 'dark');
     }
 }
 
 .#{$lumx-base-prefix}-avatar--theme-dark.#{$lumx-base-prefix}-avatar[tabindex='0'] {
     &[data-focus-visible-added]::after {
-        @include lumx-state(state-focus, emphasis-low, light);
+        @include lumx-state('state-focus', 'emphasis-low', 'light');
     }
 }

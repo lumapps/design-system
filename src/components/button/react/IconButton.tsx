@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,14 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { ValidateParameters, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 
-import { Button, ButtonProps, Color, Colors, Emphasis, Emphasises, Size, Sizes, Theme, Themes } from './Button';
-
-/////////////////////////////
-
-enum Variants {
-    icon = 'icon',
-}
-type Variant = Variants;
+import { Button, ButtonProps, ButtonVariant } from './Button';
 
 /////////////////////////////
 
@@ -55,28 +48,16 @@ interface IDefaultPropsType extends Partial<IconButtonProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}IconButton`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}IconButton`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {};
 
@@ -89,8 +70,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
 /**
  * Globally validate the component after transforming and/or validating the children.
  *
- * @param  {ValidateParameters} params The children, their number and the props of the component.
- * @return {string|boolean}     If a string, the error message.
+ * @param params The children, their number and the props of the component.
+ * @return     If a string, the error message.
  *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
  *                              lead to throw a basic error message).
  *                              You can also return nothing if there is no special problem (i.e. a successful
@@ -111,8 +92,8 @@ function _postValidate({ props }: ValidateParameters): string | boolean | void {
 /**
  * Globally validate the component before transforming and/or validating the children.
  *
- * @param  {ValidateParameters} params The children, their number and the props of the component.
- * @return {string|boolean}     If a string, the error message.
+ * @param params The children, their number and the props of the component.
+ * @return     If a string, the error message.
  *                              If a boolean, `true` means a successful validation, `false` a bad validation (which will
  *                              lead to throw a basic error message).
  *                              You can also return nothing if there is no special problem (i.e. a successful
@@ -136,10 +117,10 @@ function _preValidate({ props }: ValidateParameters): string | boolean | void {
  * Validate the component props and children.
  * Also, sanitize, cleanup and format the children and return the processed ones.
  *
- * @param  {IconButtonProps} props The children and props of the component.
- * @return {React.ReactNode} The processed children of the component.
+ * @param props The children and props of the component.
+ * @return The processed children of the component.
  */
-function _validate(props: IconButtonProps): React.ReactNode {
+function _validate(props: IconButtonProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: 0,
         postValidate: _postValidate,
@@ -158,7 +139,7 @@ function _validate(props: IconButtonProps): React.ReactNode {
  *
  * @see {@link Button} for more information on <Button>.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const IconButton: React.FC<IconButtonProps> = ({
     children,
@@ -169,28 +150,15 @@ const IconButton: React.FC<IconButtonProps> = ({
     // @ts-ignore
     rightIcon = '',
     ...props
-}: IconButtonProps): React.ReactElement => {
+}: IconButtonProps): ReactElement => {
     _validate({ children, icon, leftIcon, rightIcon, ...props });
 
-    return <Button className={classNames(className, CLASSNAME)} {...props} leftIcon={icon} variant={Variants.icon} />;
+    return (
+        <Button className={classNames(className, CLASSNAME)} {...props} leftIcon={icon} variant={ButtonVariant.icon} />
+    );
 };
 IconButton.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    Color,
-    Colors,
-    Emphasis,
-    Emphasises,
-    IconButton,
-    IconButtonProps,
-    Size,
-    Sizes,
-    Theme,
-    Themes,
-    Variant,
-    Variants,
-};
+export { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps };

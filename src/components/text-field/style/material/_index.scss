@@ -11,11 +11,15 @@
 
     &__label {
         #{$self}--theme-light & {
-            @include lumx-text-field-material-label(dark);
+            @include lumx-text-field-material-label('dark');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-material-label(light);
+            @include lumx-text-field-material-label('light');
+        }
+
+        #{$self}--has-icon & {
+            transform: translateY($lumx-spacing-unit * 3) translateX(28px);
         }
 
         #{$self}--has-placeholder &,
@@ -31,22 +35,32 @@
 
     &__input-wrapper {
         #{$self}--theme-light & {
-            @include lumx-text-field-material-input-wrapper(dark);
+            @include lumx-text-field-material-input-wrapper('dark');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-material-input-wrapper(light);
+            @include lumx-text-field-material-input-wrapper('light');
         }
     }
 
     &__input-native {
         input {
             #{$self}--theme-light & {
-                @include lumx-text-field-material-input-native(dark);
+                @include lumx-text-field-material-input-native('dark', 'input');
             }
 
             #{$self}--theme-dark & {
-                @include lumx-text-field-material-input-native(light);
+                @include lumx-text-field-material-input-native('light', 'input');
+            }
+        }
+
+        textarea {
+            #{$self}--theme-light & {
+                @include lumx-text-field-material-input-native('dark', 'textarea');
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-text-field-material-input-native('light', 'textarea');
             }
         }
     }
@@ -64,12 +78,12 @@
 
 .#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-focus {
     .#{$lumx-base-prefix}-text-field__label {
-        @include lumx-text-field-material-label-focus(dark);
+        @include lumx-text-field-material-label-focus('dark');
     }
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-focus {
     .#{$lumx-base-prefix}-text-field__label {
-        @include lumx-text-field-material-label-focus(light);
+        @include lumx-text-field-material-label-focus('light');
     }
 }

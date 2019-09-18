@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { ReactElement, ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
 
-import { Orientation, Orientations, Theme, Themes } from 'LumX/components';
+import { Avatar, Orientation, Size, Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-
-import { Avatar } from 'LumX/components/avatar/react/Avatar';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -14,12 +12,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Authorized size values.
  */
-enum Sizes {
-    s = 's',
-    m = 'm',
-    l = 'l',
-}
-type Size = Sizes;
+type UserBlockSize = Size.s | Size.m | Size.l;
 
 /////////////////////////////
 
@@ -30,9 +23,9 @@ interface IUserBlockProps extends IGenericProps {
     /* Avatar image. */
     avatar?: string;
     /* Simple Action block. */
-    simpleAction?: React.ReactNode;
+    simpleAction?: ReactNode;
     /* Multiple Actions block. */
-    multipleActions?: React.ReactNode;
+    multipleActions?: ReactNode;
     /* Additionnal fields used to describe the use. */
     fields?: string[];
     /* User name. */
@@ -40,9 +33,11 @@ interface IUserBlockProps extends IGenericProps {
     /* Orientation. */
     orientation?: Orientation;
     /* Size. */
-    size?: Size;
+    size?: UserBlockSize;
     /* Theme. */
     theme?: Theme;
+    /* Reference passed to the wrapper. */
+    userBlockRef?: Ref<HTMLDivElement>;
     /* Callback for the click event. */
     onClick?(): void;
     /* Callback for the mouseEnter event. */
@@ -67,42 +62,30 @@ interface IDefaultPropsType extends Partial<UserBlockProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}UserBlock`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    orientation: Orientations.horizontal,
-    size: Sizes.m,
-    theme: Themes.light,
+    orientation: Orientation.horizontal,
+    size: Size.m,
+    theme: Theme.light,
 };
 /////////////////////////////
 
 /**
  * Render a user information as a card if orientation is vertical or no action user info block if horizontal.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
-const UserBlock: React.FC<IUserBlockProps> = ({
+const UserBlock = ({
     avatar,
     theme = DEFAULT_PROPS.theme,
     orientation = DEFAULT_PROPS.orientation,
@@ -115,29 +98,24 @@ const UserBlock: React.FC<IUserBlockProps> = ({
     simpleAction,
     multipleActions,
     size = DEFAULT_PROPS.size,
-}: IUserBlockProps): React.ReactElement => {
-    let componentSize: Sizes | undefined = size;
+    userBlockRef,
+}: IUserBlockProps): ReactElement => {
+    let componentSize = size;
 
     // Special case - When using vertical orientation force the size to be Sizes.l.
-    if (orientation === Orientations.vertical) {
-        componentSize = Sizes.l;
+    if (orientation === Orientation.vertical) {
+        componentSize = Size.l;
     }
 
-    const shouldDisplayActions: boolean = orientation === Orientations.vertical;
+    const shouldDisplayActions: boolean = orientation === Orientation.vertical;
 
-    const nameBlock: React.ReactNode = name && (
-        <span
-            className={`${CLASSNAME}__name`}
-            onMouseEnter={onMouseEnter}
-            onMouseLeave={onMouseLeave}
-            onClick={onClick}
-            tabIndex={onClick ? 0 : -1}
-        >
+    const nameBlock: ReactNode = name && (
+        <span className={`${CLASSNAME}__name`} onClick={onClick} tabIndex={onClick ? 0 : -1}>
             {name}
         </span>
     );
 
-    const fieldsBlock: React.ReactNode = fields && componentSize !== Sizes.s && (
+    const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
             {fields.map((aField: string, idx: number) => (
                 <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>
@@ -149,18 +127,19 @@ const UserBlock: React.FC<IUserBlockProps> = ({
 
     return (
         <div
+            ref={userBlockRef}
             className={classNames(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, orientation, size: componentSize, theme }),
             )}
+            onMouseLeave={onMouseLeave}
+            onMouseEnter={onMouseEnter}
         >
             {avatar && (
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
                         image={avatar}
                         size={componentSize}
-                        onMouseLeave={onMouseLeave}
-                        onMouseEnter={onMouseEnter}
                         onClick={onClick}
                         tabIndex={onClick ? 0 : -1}
                         theme={theme}
@@ -184,4 +163,4 @@ UserBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, Sizes, Theme, Themes };
+export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, UserBlockSize };

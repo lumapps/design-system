@@ -1,0 +1,22 @@
+```javascript import
+import { Avatar, Size, Theme } from 'LumX';
+import { mdiEmail, mdiArrowTopRightThick } from 'LumX/icons';
+```
+
+# Avatar
+
+**Enables user to quickly identify people.**
+
+Comes in 5 sizes: xs, s, m, l, xl.
+
+```javascript jsx withThemeSwitcher
+() => (
+    <>
+            <Avatar theme={Theme} image="http://i.pravatar.cc/40" size={Size.xs} />
+            <Avatar theme={Theme} image="http://i.pravatar.cc/48" size={Size.s} />
+            <Avatar theme={Theme} image="http://i.pravatar.cc/72" size={Size.m} />
+            <Avatar theme={Theme} image="http://i.pravatar.cc/128" size={Size.l} />
+            <Avatar theme={Theme} image="http://i.pravatar.cc/256" size={Size.xl} />
+    </>
+);
+```

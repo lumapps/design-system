@@ -1,10 +1,11 @@
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { MODULE_NAME } from './constants/common_constants';
 
 angular.module(`${MODULE_NAME}.utils.depth`, []);
 angular.module(`${MODULE_NAME}.utils.enter-keypress`, []);
 angular.module(`${MODULE_NAME}.utils.event-scheduler`, []);
 angular.module(`${MODULE_NAME}.utils.focus-on-init`, []);
 angular.module(`${MODULE_NAME}.utils.focus-trap`, []);
+angular.module(`${MODULE_NAME}.utils.stop-propagation`, []);
 angular.module(`${MODULE_NAME}.utils.utils`, []);
 
 angular.module(`${MODULE_NAME}.utils`, [
@@ -13,6 +14,7 @@ angular.module(`${MODULE_NAME}.utils`, [
     `${MODULE_NAME}.utils.event-scheduler`,
     `${MODULE_NAME}.utils.focus-on-init`,
     `${MODULE_NAME}.utils.focus-trap`,
+    `${MODULE_NAME}.utils.stop-propagation`,
     `${MODULE_NAME}.utils.utils`,
 ]);
 
@@ -25,7 +27,9 @@ angular.module(`${MODULE_NAME}.dialog`, []);
 angular.module(`${MODULE_NAME}.divider`, []);
 angular.module(`${MODULE_NAME}.drag-handle`, []);
 angular.module(`${MODULE_NAME}.dropdown`, []);
+angular.module(`${MODULE_NAME}.editable-media`, []);
 angular.module(`${MODULE_NAME}.expansion-panel`, []);
+angular.module(`${MODULE_NAME}.grid`, []);
 angular.module(`${MODULE_NAME}.icon`, []);
 angular.module(`${MODULE_NAME}.image-block`, []);
 angular.module(`${MODULE_NAME}.lightbox`, []);
@@ -59,7 +63,9 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.divider`,
     `${MODULE_NAME}.drag-handle`,
     `${MODULE_NAME}.dropdown`,
+    `${MODULE_NAME}.editable-media`,
     `${MODULE_NAME}.expansion-panel`,
+    `${MODULE_NAME}.grid`,
     `${MODULE_NAME}.icon`,
     `${MODULE_NAME}.image-block`,
     `${MODULE_NAME}.lightbox`,

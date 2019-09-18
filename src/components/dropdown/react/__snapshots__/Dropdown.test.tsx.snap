@@ -1,9 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
-<div
-  className="lumx-dropdown"
+<Popover
+  isVisible={false}
+  placement="auto-start"
+  popoverRect={
+    Object {
+      "x": 0,
+      "y": 0,
+    }
+  }
+  popoverRef={
+    Object {
+      "current": null,
+    }
+  }
 >
-  This is the content of the dropdown
-</div>
+  <div
+    className="lumx-dropdown__menu lumx-dropdown"
+    style={
+      Object {
+        "maxHeight": undefined,
+        "minWidth": undefined,
+      }
+    }
+  >
+    <div
+      className="lumx-dropdown__content"
+    >
+      <div>
+        This is the content of the dropdown
+      </div>
+    </div>
+  </div>
+</Popover>
 `;

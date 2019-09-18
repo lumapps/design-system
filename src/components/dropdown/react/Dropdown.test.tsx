@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps } from './Dropdown';
+import { ValueOf } from 'global';
+import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
 
 /////////////////////////////
 
@@ -31,24 +31,24 @@ interface ISetup extends ICommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  {ISetupProps} props  The props to use to override the default props of the component.
- * @param  {boolean}     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return {ISetup}      An object with the props, the component wrapper and some shortcut to some element inside of the
+ * @param props  The props to use to override the default props of the component.
+ * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup: (props?: ISetupProps, shallowRendering?: boolean) => ISetup = (
-    { ...propsOverrides }: ISetupProps = {},
-    shallowRendering: boolean = true,
-): ISetup => {
+const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+    const anchorRef = React.createRef<HTMLButtonElement>();
     const props: DropdownProps = {
-        children: 'This is the content of the dropdown',
+        // tslint:disable-next-line no-unused
+        anchorRef,
+        children: <div>This is the content of the dropdown</div>,
+        showDropdown: true,
         ...propsOverrides,
     };
 
-    const renderer: (el: React.ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<Dropdown {...props} />);
-
     return {
         dropdown: wrapper.find('div').first(),
 
@@ -61,7 +61,7 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', (): void => {
         it('should render correctly', (): void => {
-            const { dropdown, wrapper }: ISetup = setup();
+            const { dropdown, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(dropdown).toExist();
@@ -76,13 +76,7 @@ describe(`<${Dropdown.displayName}>`, (): void => {
         it('should use default props', (): void => {
             const { dropdown }: ISetup = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach(
-                (prop: string): void => {
-                    expect(dropdown).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                    );
-                },
-            );
+            expect(dropdown).toHaveClassName(CLASSNAME);
         });
     });
 
@@ -90,7 +84,54 @@ describe(`<${Dropdown.displayName}>`, (): void => {
 
     // 3. Test events.
     describe('Events', (): void => {
-        // Nothing to do here.
+        const onClose: jest.Mock = jest.fn();
+        type WindowEvents = keyof WindowEventMap;
+        let windowEventListeners: Partial<
+            { [key in WindowEvents]: (evt: Partial<ValueOf<WindowEventMap>>) => void }
+        > = {};
+
+        const addEventListener = (event: WindowEvents, cb: (evt: Partial<ValueOf<WindowEventMap>>) => void): void => {
+            windowEventListeners[event] = cb;
+        };
+
+        beforeEach(
+            (): void => {
+                window.addEventListener = jest.fn(addEventListener);
+                document.addEventListener = jest.fn(addEventListener);
+                windowEventListeners = {};
+                onClose.mockClear();
+            },
+        );
+
+        it('should trigger `onClose` when pressing `escape` key', (): void => {
+            setup(
+                {
+                    closeOnEscape: true,
+                    onClose,
+                    showDropdown: true,
+                },
+                false,
+            );
+
+            windowEventListeners.keydown!({ keyCode: 27 });
+            expect(onClose).toHaveBeenCalled();
+        });
+
+        it('should not trigger `onClose` when pressing any other key', (): void => {
+            setup({ showDropdown: true, onClose, closeOnEscape: true }, false);
+
+            windowEventListeners.keydown!({ keyCode: 26 });
+            expect(onClose).not.toHaveBeenCalled();
+        });
+
+        it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', (): void => {
+            setup({ showDropdown: true, onClose, closeOnEscape: false }, false);
+
+            if (windowEventListeners.keydown) {
+                windowEventListeners.keydown({ keyCode: 27 });
+            }
+            expect(onClose).not.toHaveBeenCalled();
+        });
     });
     /////////////////////////////
 
