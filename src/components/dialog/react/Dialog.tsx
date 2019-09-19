@@ -28,6 +28,8 @@ interface IDialogProps extends IGenericProps {
     parentElement: RefObject<any>;
     /** Theme. */
     theme?: Theme;
+    /** Size of the dialog */
+    size?: DialogSizes;
     /** Callback called when lightbox is closing. */
     onClose?(): void;
     /** Callback called when lightbox is opening. */
