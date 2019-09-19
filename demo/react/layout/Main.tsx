@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 
-import { Alignment, Button, ButtonEmphasis, Grid, GridItem, Orientation, Size } from 'LumX';
+import { Alignment, Button, Emphasis, Grid, GridItem, Orientation, Size } from 'LumX';
 import { mdiAngularjs } from 'LumX/icons';
 
 import { Theme } from 'LumX/demo/constants';
@@ -49,7 +49,7 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
                             </Grid>
                         </GridItem>
                         <Button
-                            emphasis={ButtonEmphasis.low}
+                            emphasis={Emphasis.low}
                             leftIcon={mdiAngularjs}
                             onClick={(): Window | null => window.open('http://ui.lumapps.com/')}
                             size={Size.s}

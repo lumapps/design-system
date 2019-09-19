@@ -16,12 +16,13 @@ import { handleBasicClasses } from 'LumX/core/utils';
  */
 interface IProps extends IGenericProps {
     /**
-     * The icon path to set in the <svg> `d` property
+     * The icon SVG path draw code (`d` property of the `<path>` SVG element).
+     * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
      */
     icon: string;
 
     /**
-     * Icon reference
+     * Reference on the `<i>` icon HTML element.
      */
     iconRef?: React.RefObject<HTMLElement>;
 

@@ -2,7 +2,7 @@ import React, { ReactElement, RefObject, useCallback, useEffect, useState } from
 
 import classNames from 'classnames';
 
-import { Button, ButtonEmphasis, ButtonVariant, Theme } from 'LumX';
+import { Emphasis, IconButton, Theme } from 'LumX';
 import {
     EDGE_FROM_ACTIVE_INDEX,
     PAGINATION_ITEMS_MAX,
@@ -293,12 +293,11 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
             })}
             {...props}
         >
-            <Button
-                leftIcon={mdiChevronLeft}
+            <IconButton
+                icon={mdiChevronLeft}
                 className={`${CLASSNAME}__navigation`}
                 color={theme === Theme.dark ? 'light' : 'dark'}
-                emphasis={ButtonEmphasis.low}
-                variant={ButtonVariant.icon}
+                emphasis={Emphasis.low}
                 onClick={handlePreviousClick}
                 tabIndex={-1}
             />
@@ -307,12 +306,11 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
                     {paginationItems}
                 </div>
             </div>
-            <Button
-                leftIcon={mdiChevronRight}
+            <IconButton
+                icon={mdiChevronRight}
                 className={`${CLASSNAME}__navigation`}
                 color={theme === Theme.dark ? 'light' : 'dark'}
-                emphasis={ButtonEmphasis.low}
-                variant={ButtonVariant.icon}
+                emphasis={Emphasis.low}
                 onClick={handleNextClick}
                 tabIndex={-1}
             />

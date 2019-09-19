@@ -1,14 +1,9 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
-import mockConsole from 'jest-mock-console';
-import { build, fake, oneOf } from 'test-data-bot';
 
-import { Button, ButtonEmphasis, ButtonVariant, Size, Theme } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { mdiChevronDown, mdiPlus } from 'LumX/icons';
-
-import { CLASSNAME, IconButton, IconButtonProps } from './IconButton';
+import { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps } from './IconButton';
 
 /////////////////////////////
 
@@ -18,207 +13,102 @@ import { CLASSNAME, IconButton, IconButtonProps } from './IconButton';
 type ISetupProps = Partial<IconButtonProps>;
 
 /**
- * Defines what is returned by the setup function.
+ * Defines what the `setup` function will return.
  */
 interface ISetup extends ICommonSetup {
-    /**
-     * The properties of the tested component.
-     */
     props: ISetupProps;
 
     /**
-     * The <Button> element that is used as a wrapper for the children of the <IconButton>.
+     * ButtonRoot element.
      */
-    button: Wrapper;
-}
+    buttonRoot: Wrapper;
 
-/////////////////////////////
+    /**
+     * Button icons.
+     */
+    icon: Wrapper;
+}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of
- *                       the component.
+ * @param  props                   The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
-    const props: IconButtonProps = {
-        icon: mdiPlus,
-        ...propsOverrides,
-    };
-
+const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
+    // @ts-ignore
     const wrapper: Wrapper = renderer(<IconButton {...props} />);
 
     return {
-        button: wrapper.find('Button'),
-
+        buttonRoot: wrapper.find('ButtonRoot'),
+        icon: wrapper.find('Icon'),
         props,
         wrapper,
     };
 };
 
-describe(`<${IconButton.displayName}>`, (): void => {
-    // 1. Test render via snapshot (default state of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly an icon button', (): void => {
-            const { button, wrapper } = setup();
+describe(`<${IconButton.displayName}>`, () => {
+    // 1. Test render via snapshot (default states of component).
+    describe('Snapshots and structure', () => {
+        it('should render icon button', () => {
+            const { buttonRoot, icon, wrapper } = setup({});
             expect(wrapper).toMatchSnapshot();
-
-            expect(button).toExist();
-            expect(button).toHaveClassName(CLASSNAME);
-
-            expect(button).toHaveProp('leftIcon');
+            expect(buttonRoot).toExist();
+            expect(icon).toExist();
         });
     });
 
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use default props', (): void => {
-            const { button, props } = setup();
+    describe('Props', () => {
+        it('should use default props', () => {
+            const { wrapper, buttonRoot } = setup();
+            expect(wrapper).toMatchSnapshot();
 
-            expect(button).toHaveProp('leftIcon', props.icon);
-            expect(button).toHaveProp('variant', ButtonVariant.icon);
+            const actualProps = buttonRoot.props() as IconButtonProps;
+            expect(actualProps.variant).toEqual('icon');
+            for (const [propName, propValue] of Object.entries(DEFAULT_PROPS)) {
+                expect(actualProps[propName]).toEqual(propValue);
+            }
         });
 
-        it("should use 'icon' `variant` whatever the given `variant` prop is", (): void => {
-            mockConsole();
-
-            const modifiedProps: ISetupProps = {
-                // We known that <IconButton> could not have a `variant` prop.
-                // @ts-ignore
-                variant: ButtonVariant.icon,
+        it('should forward any CSS class', (): void => {
+            const props: Partial<IconButtonProps> = {
+                className: 'component component--is-tested',
             };
+            const { wrapper, buttonRoot } = setup(props);
+            expect(wrapper).toMatchSnapshot();
 
-            let { button } = setup(modifiedProps);
-
-            expect(button).toHaveProp('variant', ButtonVariant.icon);
-
-            /////////////////////////////
-
-            // We known that <IconButton> could not have a `variant` prop.
-            // @ts-ignore
-            modifiedProps.variant = ButtonVariant.button;
-
-            ({ button } = setup(modifiedProps));
-
-            expect(button).toHaveProp('variant', ButtonVariant.icon);
-        });
-
-        it(`should forward any <${Button.displayName}> prop (except \`variant\`)`, (): void => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
-                // tslint:disable-next-line: no-any
-                color: fake((fakeData: any): string => fakeData.commerce.color()),
-                emphasis: oneOf(...Object.values(ButtonEmphasis)),
-                icon: oneOf(mdiPlus, mdiChevronDown),
-                size: oneOf(...Object.values(Size)),
-                theme: oneOf(...Object.values(Theme)),
-            });
-
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
-
-            const { button } = setup(modifiedProps);
-
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    if (prop === 'icon') {
-                        return;
-                    }
-
-                    expect(button).toHaveProp(prop, modifiedProps[prop]);
-                },
-            );
+            expect(buttonRoot).toHaveClassName(props.className);
         });
     });
 
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        beforeEach(
-            (): void => {
-                try {
-                    // If `console.warn` has been mocked at least one, this exists. So disable TS here.
-                    // @ts-ignore
-                    global.console.warn.mockRestore();
-                } catch (exception) {
-                    // Nothing to do here.
-                }
-            },
-        );
-
-        it('should fail when any child is given', (): void => {
-            expect(
-                (): void => {
-                    setup({ children: 'Label', icon: mdiPlus });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it('should fail when no `icon` are given', (): void => {
-            expect(
-                (): void => {
-                    setup({ icon: undefined });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it('should fail when using `leftIcon` instead of `icon`', (): void => {
-            expect(
-                (): void => {
-                    // @ts-ignore
-                    setup({ leftIcon: mdiPlus });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it('should fail when using `rightIcon` instead of `icon`', (): void => {
-            expect(
-                (): void => {
-                    // @ts-ignore
-                    setup({ rightIcon: mdiPlus });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
-
-        it(`should warn the user when rendering a <${IconButton.displayName}> with a \`variant\``, (): void => {
-            global.console.warn = jest.fn();
-
-            // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
-            // @ts-ignore
-            setup({ variant: ButtonVariant.icon });
-            expect(global.console.warn).toHaveBeenCalled();
-
-            // @ts-ignore
-            global.console.warn.mockClear();
-
-            // We know that a <IconButton> cannot receive a `variant`, but for the purpose of the test ignore it.
-            // @ts-ignore
-            setup({ variant: ButtonVariant.button });
-            expect(global.console.warn).toHaveBeenCalled();
-        });
+    describe('Conditions', () => {
+        // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'button', prop: 'button' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { prop: 'buttonRoot' }, { className: CLASSNAME });
 });

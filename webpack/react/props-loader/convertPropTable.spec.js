@@ -26,7 +26,7 @@ describe('indexDefinitionById', () => {
                     children: [
                         {
                             id: 138,
-                            name: 'ButtonEmphasis',
+                            name: 'Emphasis',
                             kindString: 'Enumeration',
                             children: [
                                 {
@@ -60,7 +60,7 @@ describe('indexDefinitionById', () => {
                 children: [141],
                 id: 138,
                 kindString: 'Enumeration',
-                name: 'ButtonEmphasis',
+                name: 'Emphasis',
                 parentId: 137,
             },
             '141': {

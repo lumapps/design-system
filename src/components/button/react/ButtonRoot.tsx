@@ -1,112 +1,172 @@
-import React, { ReactElement, ReactNode, RefObject } from 'react';
+import React, { ReactElement, RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
+import classNames from 'classnames';
+
+import { Color, ColorPalette, Emphasis, Size, Theme } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, validateComponent } from 'LumX/react/utils';
+import { handleBasicClasses } from 'LumX/core/utils';
+
+import { IGenericProps } from 'LumX/react/utils';
 
 /////////////////////////////
 
 /**
- * Defines the props of the component.
+ * The authorized values for the `size` prop.
  */
-interface IProps extends IGenericProps {
+type ButtonSize = Size.s | Size.m;
+
+interface IBaseButtonProps extends IGenericProps {
     /**
-     * Button reference to handle focus, ...
+     * Reference on the `<a>` or `<button>` button HTML element.
      */
-    buttonRef?: RefObject<HTMLElement>;
+    buttonRef?: RefObject<HTMLButtonElement> | RefObject<HTMLAnchorElement>;
 
     /**
-     * The `href` to reach if there is one.
+     * Use this property to add a background color to the button in low emphasis.
+     */
+    hasBackground?: boolean;
+
+    /**
+     * Use this property to create a link button pointing to the given URL.
      */
     href?: string;
 
     /**
-     * The `target` to open the `href` into.
+     * Button selected state.
      */
-    target?: string;
+    isSelected?: boolean;
+
+    /**
+     * Use this property if you specified a URL in the `href` property and you want to customize the link button target property.
+     */
+    target?: '_self' | '_blank' | '_parent' | '_top';
+
+    /**
+     * Button color.
+     */
+    color?: Color;
+
+    /**
+     * Button emphasis.
+     */
+    emphasis?: Emphasis;
+
+    /**
+     * Button size.
+     */
+    size?: ButtonSize;
+
+    /**
+     * Theme.
+     */
+    theme?: Theme;
 }
-type ButtonRootProps = IProps;
+type BaseButtonProps = IBaseButtonProps;
 
-/////////////////////////////
-
-/**
- * Define the types of the default props.
- */
-interface IDefaultPropsType extends Partial<ButtonRootProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface IButtonRootProps extends BaseButtonProps {
+    variant: 'button' | 'icon';
+}
+type ButtonRootProps = IButtonRootProps;
 
 /**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
 
-/**
- * The default value of props.
- */
-const DEFAULT_PROPS: IDefaultPropsType = {
-    buttonRef: undefined,
-};
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param props The children and props of the component.
- * @return The processed children of the component.
- */
-function _validate(props: ButtonRootProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        minChildren: 1,
-        props,
-    });
-}
+const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
+const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 
 /////////////////////////////
 
 /**
- * The root of the <Button> component.
- * Conditionally adds a `<a>` or a `<button>` HTML tag whether there is an `href` attribute or not.
- *
- * @return The component.
+ * Render a button wrapper with the ButtonRoot inside.
  */
-const ButtonRoot: React.FC<ButtonRootProps> = ({
-    buttonRef = DEFAULT_PROPS.buttonRef,
-    children,
-    className,
-    href,
-    target,
-    ...props
-}: ButtonRootProps): ReactElement => {
-    const newChildren: ReactNode = _validate({ children, ...props });
+const renderButtonWrapper = (props: IButtonRootProps): ReactElement => {
+    const { color, emphasis, variant } = props;
 
-    if (isEmpty(href)) {
-        return (
-            <button ref={buttonRef as RefObject<HTMLButtonElement>} className={className} {...props}>
-                {newChildren}
-            </button>
-        );
-    }
+    const adaptedColor =
+        emphasis === Emphasis.low && (color === ColorPalette.light ? ColorPalette.dark : ColorPalette.light);
+
+    const wrapperClassName = classNames(
+        handleBasicClasses({
+            color: adaptedColor,
+            prefix: BUTTON_WRAPPER_CLASSNAME,
+            variant,
+        }),
+    );
+    const buttonProps = { ...props, hasBackground: false };
 
     return (
-        <a ref={buttonRef as RefObject<HTMLAnchorElement>} className={className} href={href} target={target} {...props}>
-            {newChildren}
-        </a>
+        <div className={wrapperClassName}>
+            <ButtonRoot {...buttonProps} />
+        </div>
+    );
+};
+
+/**
+ * A generic button component used to implement the Button and IconButton components.
+ * To use internally.
+ *
+ * Renders a <a> anchor if an `href` is provided or a <button> otherwise.
+ * Wraps the element in a wrapper if the `hasBackground` param is set to true.
+ *
+ * @param  props Component props.
+ * @return React element.
+ */
+const ButtonRoot = (props: ButtonRootProps): ReactElement => {
+    const {
+        buttonRef,
+        emphasis,
+        isSelected,
+        size,
+        color,
+        className,
+        hasBackground,
+        children,
+        theme,
+        variant,
+        ...forwardedProps
+    } = props;
+
+    const adaptedColor =
+        color ||
+        (emphasis !== Emphasis.high && theme === Theme.dark && ColorPalette.light) ||
+        (emphasis === Emphasis.high && ColorPalette.primary) ||
+        ColorPalette.dark;
+
+    if (hasBackground) {
+        return renderButtonWrapper({ ...props, color: adaptedColor });
+    }
+
+    const buttonClassName = classNames(
+        className,
+        handleBasicClasses({
+            color: adaptedColor,
+            emphasis,
+            isSelected,
+            prefix: BUTTON_CLASSNAME,
+            size,
+            theme: emphasis === Emphasis.high && theme,
+            variant,
+        }),
+    );
+
+    if (!isEmpty(props.href)) {
+        return (
+            <a ref={buttonRef as RefObject<HTMLAnchorElement>} className={buttonClassName} {...forwardedProps}>
+                {children}
+            </a>
+        );
+    }
+    return (
+        <button ref={buttonRef as RefObject<HTMLButtonElement>} className={buttonClassName} {...forwardedProps}>
+            {children}
+        </button>
     );
 };
 ButtonRoot.displayName = COMPONENT_NAME;
 
-/////////////////////////////
-
-export { DEFAULT_PROPS, ButtonRoot, ButtonRootProps };
+export { BUTTON_CLASSNAME, BUTTON_WRAPPER_CLASSNAME, BaseButtonProps, ButtonRootProps, ButtonRoot };
