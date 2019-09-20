@@ -190,17 +190,19 @@ const Lightbox: React.FC<LightboxProps> = ({
                             }}
                             onClick={handleClose}
                         >
-                            <IconButton
-                                aria-labelledby="close-modal"
-                                buttonRef={buttonRef}
-                                className={`${CLASSNAME}__close`}
-                                color={ColorPalette.light}
-                                emphasis={Emphasis.low}
-                                icon={mdiClose}
-                                theme={theme}
-                                type="button"
-                                onClick={handleClose}
-                            />
+                            {isCloseButtonVisible && (
+                                <IconButton
+                                    aria-labelledby="close-modal"
+                                    buttonRef={buttonRef}
+                                    className={`${CLASSNAME}__close`}
+                                    color={ColorPalette.light}
+                                    emphasis={Emphasis.low}
+                                    icon={mdiClose}
+                                    theme={theme}
+                                    type="button"
+                                    onClick={handleClose}
+                                />
+                            )}
                             <div
                                 ref={childrenRef}
                                 className={`${CLASSNAME}__wrapper`}
