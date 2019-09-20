@@ -125,17 +125,17 @@ const Dropdown: React.FC<DropdownProps> = ({
         </div>
     );
 
+    const onEscapeHandler = closeOnEscape && onClose && showDropdown && onEscapePressed(onClose);
+
     useEffect(() => {
-        if (!onClose) {
+        if (!onEscapeHandler || !wrapperRef.current) {
             return undefined;
         }
         if (closeOnEscape && showDropdown && wrapperRef.current) {
-            window.addEventListener('keydown', onEscapePressed(onClose));
-        } else {
-            window.removeEventListener('keydown', onEscapePressed(onClose));
+            window.addEventListener('keydown', onEscapeHandler);
         }
         return (): void => {
-            window.removeEventListener('keydown', onEscapePressed(onClose));
+            window.removeEventListener('keydown', onEscapeHandler);
         };
     }, [showDropdown, closeOnEscape, onClose]);
 
@@ -143,13 +143,13 @@ const Dropdown: React.FC<DropdownProps> = ({
     useClickAway(
         wrapperRef,
         () => {
-            if (!closeOnClick || !onClose) {
+            if (!closeOnClick || !onClose || !showDropdown) {
                 return;
             }
 
             onClose();
         },
-        [anchorRef!],
+        [anchorRef],
     );
 
     return (
