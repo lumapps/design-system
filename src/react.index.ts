@@ -46,9 +46,6 @@ export {
     NotificationBar,
     NotificationBarProps,
     NotificationType,
-    NotificationTypes,
-    Theme as NotificationTheme,
-    Themes as NotificationThemes,
 } from './components/notification/react/NotificationBar';
 
 export {

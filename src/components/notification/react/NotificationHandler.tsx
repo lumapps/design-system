@@ -25,7 +25,7 @@ type NotificationHandlerProps = INotificationHandlerProps;
 /**
  * Notification handler.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const NotificationHandler: React.FC<NotificationHandlerProps> = (): React.ReactElement => {
     const { notifications }: NotificationState = useNotificationState();

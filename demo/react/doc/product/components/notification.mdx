@@ -1,0 +1,91 @@
+```javascript import
+import { useState } from 'react';
+import { Button, NotificationBar, Theme } from 'LumX';
+```
+
+# Notification
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    const [notificationProps, setNotificationProps] = useState(null);
+    const [timer, setTimer] = useState(null);
+
+    const info = () => {
+        setNotificationProps({ isOpen: true, type: 'info', content: 'Info', handleClick: () => close() });
+        setupTimer();
+    };
+
+    const success = () => {
+        setNotificationProps({ isOpen: true, type: 'success', content: 'Success', handleClick: () => close() });
+        setupTimer();
+    };
+
+    const warning = () => {
+        setNotificationProps({ isOpen: true, type: 'warning', content: 'Warning', handleClick: () => close() });
+        setupTimer();
+    };
+
+    const error = () => {
+        setNotificationProps({ isOpen: true, type: 'error', content: 'Error', handleClick: () => close() });
+        setupTimer();
+    };
+
+    const infoWithCallback = () => {
+        setNotificationProps({
+            actionCallback: () => {
+                setNotificationProps({
+                    isOpen: true,
+                    content: 'Callback',
+                    handleClick: () => close(),
+                    type: 'success',
+                });
+                setupTimer();
+            },
+            actionLabel: 'Undo',
+            isOpen: true,
+            content: 'Info with callback',
+            handleClick: () => close(),
+            type: 'info',
+        });
+        setupTimer();
+    };
+
+    const close = () => {
+        setNotificationProps({ isOpen: false });
+    };
+
+    const setupTimer = () => {
+        if (timer > 0) {
+            clearTimeout(timer);
+        }
+
+        const timerId = setTimeout(() => {
+            close();
+        }, 5000);
+
+        setTimer(timerId);
+    };
+
+    return (
+        <>
+            <Button type="button" theme={theme} onClick={info}>
+                Info
+            </Button>
+            <Button type="button" theme={theme} onClick={success}>
+                Success
+            </Button>
+            <Button type="button" theme={theme} onClick={warning}>
+                Warning
+            </Button>
+            <Button type="button" theme={theme} onClick={error}>
+                Error
+            </Button>
+            <Button type="button" theme={theme} onClick={infoWithCallback}>
+                Info with callback
+            </Button>
+
+            {notificationProps !== null && <NotificationBar {...notificationProps} />}
+        </>
+    );
+};
+```

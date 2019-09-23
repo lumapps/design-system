@@ -1,4 +1,4 @@
-import { NotificationType, NotificationTypes, Theme } from 'LumX/components/notification/react/NotificationBar';
+import { NotificationType, Theme } from 'LumX';
 
 /** Action types of the notification reducer. */
 type NotificationActionType = 'open' | 'close' | 'error' | 'info' | 'success' | 'warning';
@@ -46,9 +46,9 @@ type NotificationAction = INotificationAction;
 /**
  * Notification reducer.
  *
- * @param  {NotificationState}  notificationState Notification state.
- * @param  {NotificationAction} notificationAction Notification action.
- * @return {NotificationState}  notificationState Notification state.
+ * @param  notificationState Notification state.
+ * @param  notificationAction Notification action.
+ * @return notificationState Notification state.
  */
 function notificationReducer(
     { notifications }: NotificationState,
@@ -63,11 +63,11 @@ function notificationReducer(
             };
         case 'error':
             return {
-                notifications: [...notifications, { ...payload, type: NotificationTypes.error }],
+                notifications: [...notifications, { ...payload, type: NotificationType.error }],
             };
         case 'info':
             return {
-                notifications: [...notifications, { ...payload, type: NotificationTypes.info }],
+                notifications: [...notifications, { ...payload, type: NotificationType.info }],
             };
         case 'success':
             return {

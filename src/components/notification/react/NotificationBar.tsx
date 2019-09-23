@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -7,8 +7,8 @@ import isFunction from 'lodash/isFunction';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { Button, ButtonThemes, Icon, Sizes, Theme, Themes } from 'LumX';
-import { Emphasises } from 'LumX/components/button/react/Button';
+import { Button, ButtonEmphasis, Icon, Size, Theme } from 'LumX';
+
 import { NOTIFICATION_CONFIGURATION } from 'LumX/components/notification/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -70,39 +70,27 @@ interface IDefaultPropsType extends Partial<NotificationBarProps> {}
 
 /**
  * The display name of the component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
-const COMPONENT_NAME: string = `${COMPONENT_PREFIX}Notification`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}Notification`;
 
 /**
  * The default class name and classes prefix for this component.
- *
- * @type {string}
- * @constant
- * @readonly
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
- *
- * @type {IDefaultPropsType}
- * @constant
- * @readonly
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     content: '',
-    theme: Themes.light,
+    theme: Theme.light,
 };
 /////////////////////////////
 
 /**
  * Notification.
  *
- * @return {React.ReactElement} The component.
+ * @return The notification component.
  */
 const NotificationBar: React.FC<NotificationBarProps> = ({
     actionCallback,
@@ -126,7 +114,7 @@ const NotificationBar: React.FC<NotificationBarProps> = ({
     };
 
     return (
-        <Fragment>
+        <>
             {type &&
                 createPortal(
                     <div
@@ -144,14 +132,14 @@ const NotificationBar: React.FC<NotificationBarProps> = ({
                         style={{ zIndex: 9999 }}
                     >
                         <div className={`${CLASSNAME}__icon`}>
-                            <Icon icon={NOTIFICATION_CONFIGURATION[type].icon} size={Sizes.s} />
+                            <Icon icon={NOTIFICATION_CONFIGURATION[type].icon} size={Size.s} />
                         </div>
-                        <span className={`${CLASSNAME}__content`}>{content}</span>
+                        <div className={`${CLASSNAME}__content`}>{content}</div>
                         {hasAction && (
                             <div className={`${CLASSNAME}__action`}>
                                 <Button
-                                    color={theme === ButtonThemes.dark ? 'light' : undefined}
-                                    emphasis={Emphasises.medium}
+                                    color={theme === Theme.dark ? 'light' : undefined}
+                                    emphasis={ButtonEmphasis.medium}
                                     theme={theme}
                                     onClick={handleCallback}
                                 >
@@ -162,20 +150,11 @@ const NotificationBar: React.FC<NotificationBarProps> = ({
                     </div>,
                     document.body,
                 )}
-        </Fragment>
+        </>
     );
 };
 NotificationBar.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export {
-    CLASSNAME,
-    DEFAULT_PROPS,
-    NotificationBar,
-    NotificationBarProps,
-    NotificationType,
-    NotificationTypes,
-    Theme,
-    Themes,
-};
+export { CLASSNAME, DEFAULT_PROPS, NotificationBar, NotificationBarProps, NotificationType };

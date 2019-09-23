@@ -37,7 +37,7 @@ type NotificationProviderProps = INotificationProviderProps;
 /**
  * Notification context provider.
  *
- * @return {React.ReactElement} The component.
+ * @return The component.
  */
 const NotificationProvider: React.FC<NotificationProviderProps> = ({
     children,
@@ -60,7 +60,7 @@ const NotificationProvider: React.FC<NotificationProviderProps> = ({
 /**
  * Custom hook to get the current state of the notification.
  *
- * @return {NotificationState} Properties of current notification's state.
+ * @return Properties of current notification's state.
  */
 const useNotificationState: () => NotificationState = (): NotificationState => {
     return useContext(stateCtx);
@@ -69,7 +69,7 @@ const useNotificationState: () => NotificationState = (): NotificationState => {
 /**
  * Custom hook to dispatch actions to notification's reducer.
  *
- * @return {React.Dispatch<NotificationAction>} Dispatcher.
+ * @return Dispatcher.
  */
 const useNotification: () => React.Dispatch<NotificationAction> = (): React.Dispatch<NotificationAction> => {
     return useContext(dispatchCtx);
