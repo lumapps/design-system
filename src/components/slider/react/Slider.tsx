@@ -259,7 +259,10 @@ const Slider: React.FC<SliderProps> = ({
 
     return (
         <div
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: CLASSNAME, theme, hasLabel: Boolean(label) }),
+            )}
             {...props}
             onMouseDown={handleMouseDown}
         >
