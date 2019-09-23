@@ -110,3 +110,5 @@ export { GridItem } from 'LumX/components/grid/react/GridItem';
 export { SideNavigation, SideNavigationProps } from 'LumX/components/side-navigation/react/SideNavigation';
 
 export { SideNavigationItem, SideNavigationItemProps } from 'LumX/components/side-navigation/react/SideNavigationItem';
+
+export { Slider } from 'LumX/components/slider/react/Slider';
