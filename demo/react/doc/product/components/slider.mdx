@@ -1,0 +1,34 @@
+```javascript import
+import { useState } from 'react';
+import {Slider} from 'LumX';
+```
+
+# Slider
+
+## Default
+
+```javascript jsx withThemeSwitcher disableGrid 
+(theme) => {
+    const [value, setValue] = useState(0);
+    return (
+        <>
+            <pre>{"Adjust threshold:" + value}</pre>
+            <Slider
+                max={10}
+                min={0}
+                theme={theme}
+                defaultValue={4}
+                onChange={val => {
+                    setValue(val);
+                }}
+            />
+        </>
+    )
+};
+```
+
+## Without min and max labels
+
+## Precision
+
+## Steps

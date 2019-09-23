@@ -16,12 +16,20 @@ import useEventCallback from 'LumX/core/react/hooks/useEventCallback';
  * Defines the props of the component.
  */
 interface ISliderProps extends IGenericProps {
+    /** Deactivate the component */
     disabled?: boolean;
+    /** Text field label displayed in a label tag. */
+    label?: string;
+    /** Text field helper message. */
+    helper?: string;
+    /** Should the min and max labels be hidden */
+    hideMinMaxlabel?: boolean;
+    /** Maximum value */
     max: number;
+    /** Maximum value */
     min: number;
     precision?: number;
     steps?: number;
-    hideMinMaxlabel?: boolean;
     onChange?(value: number): void;
     onMouseDown?(event: React.SyntheticEvent): void;
 }
