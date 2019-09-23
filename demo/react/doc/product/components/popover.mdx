@@ -415,7 +415,7 @@ You can force the width of the popper to match the anchor width.
             {demoActions.map(
                 (demoAction, idx) => (
                     <IconButton
-                        key={'ubAction'+idx}
+                        key={`ubAction${idx}`}
                         emphasis={Emphasis.low}
                         color={theme === Theme.dark ? 'light' : undefined}
                         icon={demoAction}
