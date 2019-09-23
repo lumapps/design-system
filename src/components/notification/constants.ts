@@ -1,27 +1,12 @@
 import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from 'LumX/icons';
 
-import { NotificationState } from 'LumX/components/notification/react/NotificationReducer';
-
 /**
  * The notification delay before hiding.
- *
- * @type {number}
- * @constant
- * @readonly
  */
-const HIDE_DELAY: number = 6000;
-
-/**
- * Initial state of notification.
- */
-const INITIAL_STATE: NotificationState = {
-    notifications: [],
-};
+const HIDE_DELAY = 6000;
 
 /**
  * The notification icon and colors according to their type.
- *
- * @type {string}
  */
 const NOTIFICATION_CONFIGURATION: {} = {
     error: {
@@ -44,11 +29,7 @@ const NOTIFICATION_CONFIGURATION: {} = {
 
 /**
  * The notification open transition duration.
- *
- * @type {number}
- * @constant
- * @readonly
  */
-const TRANSITION_DURATION: number = 200;
+const TRANSITION_DURATION = 200;
 
-export { HIDE_DELAY, INITIAL_STATE, NOTIFICATION_CONFIGURATION, TRANSITION_DURATION };
+export { HIDE_DELAY, NOTIFICATION_CONFIGURATION, TRANSITION_DURATION };
