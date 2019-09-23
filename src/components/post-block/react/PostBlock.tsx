@@ -4,6 +4,8 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
+import isObject from 'lodash/isObject';
+
 import { Orientation, Theme, Thumbnail, ThumbnailAspectRatio, ThumbnailVariant } from 'LumX';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -28,8 +30,12 @@ interface IPostBlockProps extends IGenericProps {
     orientation?: Orientation;
     /* Tags elements to be transcluded into the component */
     tags?: HTMLElement | ReactNode;
-    /* Content text */
-    text: string;
+    /* Content text. Can be either a string, or sanitized html. */
+    text?:
+        | string
+        | {
+              __html: string;
+          };
     /* Thumbnail image source */
     thumbnail: string;
     /* The image aspect ratio. */
@@ -71,6 +77,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     orientation: Orientation.horizontal,
+    text: undefined,
     theme: Theme.light,
     thumbnailAspectRatio: ThumbnailAspectRatio.horizontal,
 };
@@ -90,7 +97,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
     onClick,
     orientation = DEFAULT_PROPS.orientation,
     tags,
-    text,
+    text = DEFAULT_PROPS.text,
     thumbnail,
     thumbnailAspectRatio = DEFAULT_PROPS.thumbnailAspectRatio,
     title,
@@ -122,7 +129,11 @@ const PostBlock: React.FC<PostBlockProps> = ({
 
                 {meta && <span className={`${CLASSNAME}__meta`}>{meta}</span>}
 
-                <p className={`${CLASSNAME}__text`}>{text}</p>
+                {isObject(text) && text.__html ? (
+                    <p dangerouslySetInnerHTML={text} className={`${CLASSNAME}__text`} />
+                ) : (
+                    <p className={`${CLASSNAME}__text`}>{text}</p>
+                )}
 
                 {attachments && <div className={`${CLASSNAME}__attachments`}>{attachments}</div>}
                 {(tags || actions) && (

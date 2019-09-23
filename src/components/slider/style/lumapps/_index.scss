@@ -1,0 +1,182 @@
+/* ==========================================================================
+   Slider
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-slider {
+    $self: &;
+
+    user-select: none;
+
+    &__label {
+        #{$self}--theme-light & {
+            @include lumx-input-label('dark');
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-label('light');
+        }
+    }
+
+    &__helper {
+        #{$self}--theme-light & {
+            @include lumx-input-helper('dark');
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-helper('light');
+        }
+    }
+
+    &__value-label {
+        font-size: 10px;
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant(dark, L2);
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant(light, L2);
+        }
+
+        &--min {
+            padding-right: $lumx-spacing-unit * 2;
+        }
+
+        &--max {
+            padding-left: $lumx-spacing-unit * 2;
+        }
+    }
+
+    &__ui-wrapper {
+        display: flex;
+        align-items: center;
+
+        #{$self}--has-label & {
+            margin-top: $lumx-spacing-unit;
+        }
+    }
+
+    &__wrapper {
+        position: relative;
+        height: map-get($lumx-sizes, s);
+        flex: 1;
+        cursor: pointer;
+    }
+
+    &__track {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        left: 0;
+        height: 2px;
+        transform: translateY(-50%);
+
+        &--background {
+            #{$self}--theme-light & {
+                background-color: lumx-theme-color-variant(dark, L5);
+            }
+
+            #{$self}--theme-dark & {
+                background-color: lumx-theme-color-variant(light, L5);
+            }
+        }
+
+        &--active {
+            #{$self}--theme-light & {
+                background-color: lumx-theme-color-variant(primary, N);
+            }
+
+            #{$self}--theme-dark & {
+                background-color: lumx-theme-color-variant(light, N);
+            }
+        }
+    }
+
+    &__handle {
+        position: absolute;
+        top: 50%;
+        width: 12px;
+        height: 12px;
+        padding: 0;
+        margin: 0;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        outline: none;
+        text-decoration: none;
+        transform: translateX(-50%) translateY(-50%);
+        user-select: none;
+
+        #{$self}--theme-light & {
+            @include lumx-state('state-default', 'emphasis-high', 'primary', 'dark');
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-state('state-default', 'emphasis-high', 'primary', 'light');
+        }
+    }
+
+    &__ticks {
+        position: absolute;
+        top: (map-get($lumx-sizes, s) / 2) + 2;
+        right: 0;
+        left: 0;
+    }
+
+    &__tick {
+        position: absolute;
+        top: 0;
+        width: 2px;
+        height: 4px;
+        transform: translateX(-50%);
+
+        &:first-child,
+        &:last-child {
+            display: none;
+        }
+
+        #{$self}--theme-light & {
+            background-color: lumx-theme-color-variant(dark, L5);
+        }
+
+        #{$self}--theme-dark & {
+            background-color: lumx-theme-color-variant(light, L5);
+        }
+    }
+}
+
+/* Handle states
+   ========================================================================== */
+
+// Hover state
+.#{$lumx-base-prefix}-slider__handle:hover {
+    .#{$lumx-base-prefix}-slider--theme-light & {
+        @include lumx-state('state-hover', 'emphasis-high', 'primary', 'dark');
+    }
+
+    .#{$lumx-base-prefix}-slider--theme-dark & {
+        @include lumx-state('state-hover', 'emphasis-high', 'primary', 'light');
+    }
+}
+
+// Active state
+.#{$lumx-base-prefix}-slider__handle:active {
+    .#{$lumx-base-prefix}-slider--theme-light & {
+        @include lumx-state('state-active', 'emphasis-high', 'primary', 'dark');
+    }
+
+    .#{$lumx-base-prefix}-slider--theme-dark & {
+        @include lumx-state('state-active', 'emphasis-high', 'primary', 'light');
+    }
+}
+
+// Focus state
+.#{$lumx-base-prefix}-slider__handle[data-focus-visible-added] {
+    .#{$lumx-base-prefix}-slider--theme-light & {
+        @include lumx-state('state-focus', 'emphasis-high', 'primary', 'dark');
+    }
+
+    .#{$lumx-base-prefix}-slider--theme-dark & {
+        @include lumx-state('state-focus', 'emphasis-high', 'primary', 'light');
+    }
+}

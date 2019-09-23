@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import { createPortal } from 'react-dom';
 
-import { Button, ButtonEmphasis, ButtonVariant, Theme } from 'LumX';
+import { ColorPalette, Emphasis, IconButton, Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -186,16 +186,15 @@ const Lightbox: React.FC<LightboxProps> = ({
                             }}
                             onClick={handleClose}
                         >
-                            <Button
+                            <IconButton
                                 aria-labelledby="close-modal"
                                 buttonRef={buttonRef}
                                 className={`${CLASSNAME}__close`}
-                                color="light"
-                                emphasis={ButtonEmphasis.low}
-                                leftIcon={mdiClose}
+                                color={ColorPalette.light}
+                                emphasis={Emphasis.low}
+                                icon={mdiClose}
                                 theme={theme}
                                 type="button"
-                                variant={ButtonVariant.icon}
                                 onClick={handleClose}
                             />
                             <div

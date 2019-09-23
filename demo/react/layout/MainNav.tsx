@@ -63,6 +63,7 @@ const ITEMS: Item[] = [
                     'Select',
                     'Side navigation',
                     'Slideshow',
+                    'Slider',
                     'Switch',
                     'Table',
                     'Tabs',

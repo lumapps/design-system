@@ -1,0 +1,114 @@
+```javascript import
+import { useState } from 'react';
+import {ButtonEmphasis, IconButton, Size, Slider} from 'LumX';
+import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
+```
+
+# Slider
+
+## Default
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState(0);
+    return (
+        <>
+            <pre>{`Adjust threshold: ${value}`}</pre>
+            <br />
+            <Slider
+                label='Default'
+                helper='This is an helper text'
+                max={10}
+                min={0}
+                theme={theme}
+                defaultValue={4}
+                onChange={val => {
+                    setValue(val);
+                }}
+            />
+        </>
+    )
+};
+```
+
+## Without min and max labels
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState(0);
+    return (
+        <>
+                <Slider
+                    className="demo-slider-half-width"
+                    max={100}
+                    min={0}
+                    hideMinMaxlabel
+                    theme={theme}
+                    defaultValue={20}
+                    onChange={val => {
+                        setValue(val);
+                    }}
+                />
+        </>
+    )
+};
+```
+
+## Precision
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState(0);
+    const [value2, setValue2] = useState(0);
+    return (
+        <>
+                <pre>{`Rocket science precision: ${value}`  }</pre>
+            <Slider
+                max={10}
+                min={0}
+                theme={theme}
+                precision={5}
+                defaultValue={4.23765}
+                onChange={val => {
+                    setValue(val);
+                }}
+            />
+            <br />
+            <pre>{`Change price: $${value2}`}</pre>
+            <Slider
+                max={120}
+                min={0}
+                theme={theme}
+                precision={2}
+                defaultValue={42.99}
+                onChange={val=> {
+                    setValue2(val);
+                }}
+            />
+        </>
+    )
+};
+```
+
+## Steps
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState(0);
+    return (
+        <>
+            <pre>{`Change temperature: ${value}°C`}</pre>
+            <Slider
+                max={180}
+                min={30}
+                steps={5}
+                theme={theme}
+                defaultValue={40}
+                onChange={val => {
+                    setValue(val);
+                }}
+            />
+        </>
+    )
+};
+```
+
+# Properties 
+
+<PropTable component="Slider" />

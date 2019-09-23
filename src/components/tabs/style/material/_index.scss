@@ -37,6 +37,17 @@
     }
 }
 
+// Disabled state
+.#{$lumx-base-prefix}-tabs__link--is-disabled {
+    .#{$lumx-base-prefix}-tabs--theme-light & {
+        color: lumx-theme-color-variant('dark', 'L4');
+    }
+
+    .#{$lumx-base-prefix}-tabs--theme-dark & {
+        color: lumx-theme-color-variant('light', 'L4');
+    }
+}
+
 /* Tabs link active
    ========================================================================== */
 

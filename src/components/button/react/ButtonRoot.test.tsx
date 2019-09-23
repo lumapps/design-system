@@ -1,17 +1,17 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 
-import { ButtonRoot, ButtonRootProps } from './ButtonRoot';
-
-/////////////////////////////
-
-/**
- * The URL to use as test URL.
- */
-const TEST_URL = 'https://www.lumapps.com';
+import { ColorPalette, Emphasis, Size, Theme } from 'LumX';
+import {
+    BUTTON_CLASSNAME,
+    BUTTON_WRAPPER_CLASSNAME,
+    ButtonRoot,
+    ButtonRootProps,
+} from 'LumX/components/button/react/ButtonRoot';
+import { getBasicClass } from 'LumX/core/utils';
 
 /////////////////////////////
 
@@ -27,187 +27,191 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <a> element when the <Button> receives a `href` prop.
-     */
-    a: Wrapper;
-
-    /**
-     * The <button> element when the <Button> does not receives a `href` prop.
+     * Button element (<a> or <button> depending on the button type).
      */
     button: Wrapper;
-}
 
-/////////////////////////////
+    /**
+     * Button wrapper element (if `hasBackground` props is passed).
+     */
+    buttonWrapper: Wrapper;
+}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
+ * @param  props                   The props to use to override the default props of the component.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
-    const props: ButtonRootProps = {
-        children: 'Label',
-        ...propsOverrides,
-    };
-
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    const wrapper: Wrapper = renderer(<ButtonRoot {...props} />);
+const setup = ({ ...props }: ISetupProps = {}): ISetup => {
+    // @ts-ignore
+    const wrapper: Wrapper = mount(<ButtonRoot {...props} />);
 
     return {
-        a: wrapper.find('a'),
-        button: wrapper.find('button'),
-
+        button: wrapper.find('.' + BUTTON_CLASSNAME),
+        buttonWrapper: wrapper.find('.' + BUTTON_WRAPPER_CLASSNAME),
         props,
         wrapper,
     };
 };
 
-describe(`<${ButtonRoot.displayName}>`, (): void => {
+describe(`<${ButtonRoot.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly as a button', (): void => {
-            const { a, button, wrapper } = setup();
+    describe('Snapshots and structure', () => {
+        it('should render button with label', () => {
+            const props: Partial<ButtonRootProps> = {
+                children: 'Label',
+            };
+            const { button, buttonWrapper, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
-            expect(a).not.toExist();
+            expect(buttonWrapper).not.toExist();
+
             expect(button).toExist();
+            expect(button.type()).toEqual('button');
+
+            expect(button.contains(props.children)).toBeTrue();
         });
 
-        it('should render correctly as a link', (): void => {
-            const { a, button, wrapper } = setup({ href: TEST_URL });
+        it('should render button with wrapper and label', () => {
+            const props: Partial<ButtonRootProps> = {
+                children: 'Label',
+                hasBackground: true,
+            };
+            const { button, buttonWrapper, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
-            expect(a).toExist();
-            expect(button).not.toExist();
+            expect(buttonWrapper).toExist();
+
+            expect(button).toExist();
+            expect(button.type()).toEqual('button');
+
+            expect(button.contains(props.children)).toBeTrue();
+        });
+
+        it('should render anchor button with label', () => {
+            const props: Partial<ButtonRootProps> = {
+                children: 'Label',
+                href: 'example.com',
+                target: '_blank',
+            };
+            const { button, buttonWrapper, wrapper } = setup(props);
+            expect(wrapper).toMatchSnapshot();
+
+            expect(buttonWrapper).not.toExist();
+
+            expect(button).toExist();
+            expect(button.type()).toEqual('a');
+            expect(button.contains(props.children)).toBeTrue();
+
+            const actualProps = button.props() as Partial<ButtonRootProps>;
+            expect(actualProps.href).toEqual(props.href);
+            expect(actualProps.target).toEqual(props.target);
+        });
+
+        it('should render anchor button with wrapper and label', () => {
+            const props: Partial<ButtonRootProps> = {
+                children: 'Label',
+                hasBackground: true,
+                href: 'example.com',
+                target: '_blank',
+            };
+            const { button, buttonWrapper, wrapper } = setup(props);
+            expect(wrapper).toMatchSnapshot();
+
+            expect(buttonWrapper).toExist();
+
+            expect(button).toExist();
+            expect(button.type()).toEqual('a');
+            expect(button.contains(props.children)).toBeTrue();
+
+            const actualProps = button.props() as Partial<ButtonRootProps>;
+            expect(actualProps.href).toEqual(props.href);
+            expect(actualProps.target).toEqual(props.target);
         });
     });
 
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('can be disabled', (): void => {
-            const modifiedProps: ISetupProps = {
-                disabled: 'true',
-            };
+    describe('Props', () => {
+        it('should use default color', () => {
+            const props: Partial<ButtonRootProps> = {};
+            const { button, wrapper } = setup(props);
+            expect(wrapper).toMatchSnapshot();
 
-            const { button } = setup(modifiedProps);
-
-            expect(button).toBeDisabled();
-
-            /////////////////////////////
-
-            modifiedProps.href = TEST_URL;
-
-            const { a } = setup(modifiedProps);
-
-            expect(a).toBeDisabled();
+            expect(button).toExist();
+            expect(button).toHaveClassName(
+                getBasicClass({ prefix: BUTTON_CLASSNAME, type: 'color', value: ColorPalette.dark }),
+            );
         });
 
-        it('should use the given `href`', (): void => {
-            const testedProp = 'href';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: TEST_URL,
+        it('should not have default color in low or medium emphasis', () => {
+            const props: Partial<ButtonRootProps> = {
+                emphasis: Emphasis.low,
             };
+            const { button, wrapper } = setup(props);
+            expect(wrapper).toMatchSnapshot();
 
-            const { a } = setup(modifiedProps);
-
-            expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
+            expect(button).not.toHaveClassName(
+                getBasicClass({ prefix: BUTTON_CLASSNAME, type: 'color', value: ColorPalette.primary }),
+            );
         });
 
-        it('should use the given `target`', (): void => {
-            const testedProp = 'target';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: '_blank',
-                href: TEST_URL,
+        it('should use given props', () => {
+            // Props used for the button.
+            const buttonProps: Partial<ButtonRootProps> = {
+                color: ColorPalette.red,
+                emphasis: Emphasis.high,
+                size: Size.s,
+                theme: Theme.dark,
+                variant: 'icon',
             };
-
-            const { a } = setup(modifiedProps);
-
-            expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
-        });
-
-        it('should forward any CSS class', (): void => {
-            const modifiedProps: ISetupProps = {
-                className: 'component component--is-tested',
+            // Props used for the button wrapper.
+            const buttonWrapperProps: Partial<ButtonRootProps> = {
+                variant: buttonProps.variant,
             };
+            const { button, buttonWrapper, wrapper } = setup({
+                ...buttonProps,
+                hasBackground: true,
+            });
+            expect(wrapper).toMatchSnapshot();
 
-            const { button } = setup(modifiedProps);
+            // The button wrapper classes.
+            for (const [type, value] of Object.entries(buttonProps)) {
+                expect(button).toHaveClassName(getBasicClass({ prefix: BUTTON_CLASSNAME, type, value }));
+            }
 
-            expect(button).toHaveClassName(modifiedProps.className);
-
-            /////////////////////////////
-
-            modifiedProps.href = TEST_URL;
-
-            const { a } = setup(modifiedProps);
-
-            expect(a).toHaveClassName(modifiedProps.className);
-        });
-
-        it('should forward any other prop', (): void => {
-            const testedProp = 'winter';
-            const modifiedProps: ISetupProps = {
-                [testedProp]: 'is coming',
-            };
-
-            const { button } = setup(modifiedProps);
-
-            expect(button).toHaveProp(testedProp, modifiedProps[testedProp]);
-
-            /////////////////////////////
-
-            modifiedProps.href = TEST_URL;
-
-            const { a } = setup(modifiedProps);
-
-            expect(a).toHaveProp(testedProp, modifiedProps[testedProp]);
+            // The button wrapper classes.
+            for (const [type, value] of Object.entries(buttonWrapperProps)) {
+                expect(buttonWrapper).toHaveClassName(getBasicClass({ prefix: BUTTON_WRAPPER_CLASSNAME, type, value }));
+            }
         });
     });
 
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
-        const onClick: jest.Mock = jest.fn();
-
-        it('should trigger `onClick` when the button is clicked', (): void => {
-            const { button } = setup({ onClick });
-
-            button.simulate('click');
-            expect(onClick).toHaveBeenCalled();
-
-            /////////////////////////////
-
-            onClick.mockClear();
-
-            const { a } = setup({ href: TEST_URL, onClick });
-
-            a.simulate('click');
-            expect(onClick).toHaveBeenCalled();
-        });
+    describe('Events', () => {
+        // Nothing to do here.
     });
+
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        it('should fail when no child is given', (): void => {
-            expect(
-                (): void => {
-                    setup({ children: null });
-                },
-            ).toThrowErrorMatchingSnapshot();
-        });
+    describe('Conditions', () => {
+        // Tested in step 1.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
+
+    /////////////////////////////
+
+    // Common tests suite.
+    commonTestsSuite(setup, { className: 'button', prop: 'button' }, { className: BUTTON_CLASSNAME });
 });

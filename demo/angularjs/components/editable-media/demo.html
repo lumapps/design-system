@@ -10,8 +10,9 @@
     <lumx-grid>
         <lumx-button
             class="lumx-spacing-margin-right-regular"
-            lumx-emphasis="high"
-            lumx-theme="dark"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
             lumx-variant="icon"
         >
             <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
@@ -19,15 +20,22 @@
 
         <lumx-button
             class="lumx-spacing-margin-right-regular"
-            lumx-emphasis="high"
-            lumx-theme="dark"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
             lumx-variant="icon"
             ng-click="vm.openLightbox()"
         >
             <lumx-icon lumx-path="{{ vm.icons.mdiEye }}"></lumx-icon>
         </lumx-button>
 
-        <lumx-button lumx-emphasis="high" lumx-theme="dark" lumx-variant="icon" ng-click="vm.removeImage()">
+        <lumx-button
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
+            lumx-variant="icon"
+            ng-click="vm.removeImage()"
+        >
             <lumx-icon lumx-path="{{ vm.icons.mdiDelete }}"></lumx-icon>
         </lumx-button>
     </lumx-grid>
@@ -43,9 +51,10 @@
     <lumx-grid lumx-v-align="center">
         <lumx-button
             class="lumx-spacing-margin-right-regular"
-            lumx-emphasis="high"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
             lumx-size="s"
-            lumx-theme="dark"
             lumx-variant="icon"
         >
             <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
@@ -53,9 +62,10 @@
 
         <lumx-button
             class="lumx-spacing-margin-right-regular"
-            lumx-emphasis="high"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
             lumx-size="s"
-            lumx-theme="dark"
             lumx-variant="icon"
             ng-click="vm.openLightbox()"
         >
@@ -63,9 +73,10 @@
         </lumx-button>
 
         <lumx-button
-            lumx-emphasis="high"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
             lumx-size="s"
-            lumx-theme="dark"
             lumx-variant="icon"
             ng-click="vm.removeImage()"
         >

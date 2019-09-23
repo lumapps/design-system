@@ -24,10 +24,10 @@
     $self: &;
 
     position: fixed;
-    top: $lumx-dialog-offset;
     display: none;
-    height: calc(100% - 120px);
+    animation: lumx-dialog-show $lumx-dialog-transition-duration;
     opacity: 1;
+    transform: translateY(0);
     transition: opacity $lumx-dialog-transition-duration;
 
     &--is-hidden {
@@ -81,19 +81,7 @@
 @keyframes lumx-dialog-show {
     0% {
         opacity: 0;
-        transform: translateX(-50%) translateY(-30px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
-
-@keyframes lumx-dialog-huge-show {
-    0% {
-        opacity: 0;
-        transform: translateY(-30px);
+        transform: translateY(-24px);
     }
 
     100% {
@@ -107,17 +95,35 @@
 
 @each $key, $size in $lumx-dialog-sizes {
     .#{$lumx-base-prefix}-dialog--size-#{$key} {
-        left: 50%;
-        width: $size;
-        animation: lumx-dialog-show $lumx-dialog-transition-duration;
-        transform: translateX(-50%) translateY(0);
+        @include mq($until: desktop) {
+            top: $lumx-dialog-offset-portable;
+            right: $lumx-dialog-offset-portable;
+            left: $lumx-dialog-offset-portable;
+            height: calc(100% - 48px);
+        }
+
+        @include mq($from: desktop) {
+            top: $lumx-dialog-offset-desktop;
+            left: 50%;
+            width: $size;
+            height: calc(100% - 96px);
+            margin-left: $size / -2;
+        }
     }
 }
 
 .#{$lumx-base-prefix}-dialog--size-huge {
-    right: $lumx-dialog-offset;
-    bottom: $lumx-dialog-offset;
-    left: $lumx-dialog-offset;
-    animation: lumx-dialog-huge-show $lumx-dialog-transition-duration;
-    transform: translateY(0);
+    @include mq($until: desktop) {
+        top: $lumx-dialog-offset-portable;
+        right: $lumx-dialog-offset-portable;
+        bottom: $lumx-dialog-offset-portable;
+        left: $lumx-dialog-offset-portable;
+    }
+
+    @include mq($from: desktop) {
+        top: $lumx-dialog-offset-desktop;
+        right: $lumx-dialog-offset-desktop;
+        bottom: $lumx-dialog-offset-desktop;
+        left: $lumx-dialog-offset-desktop;
+    }
 }

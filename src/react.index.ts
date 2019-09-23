@@ -6,7 +6,7 @@ export * from './components';
 
 export { Avatar, AvatarProps } from './components/avatar/react/Avatar';
 
-export { Button, ButtonProps, ButtonEmphasis, ButtonVariant } from './components/button/react/Button';
+export { Button, ButtonEmphasis, ButtonProps } from './components/button/react/Button';
 
 export { ButtonGroup, ButtonGroupProps } from './components/button/react/ButtonGroup';
 
@@ -21,8 +21,6 @@ export { Chip, ChipProps } from './components/chip/react/Chip';
 export { Divider, DividerProps } from './components/divider/react/Divider';
 
 export { Dropdown, DropdownProps } from './components/dropdown/react/Dropdown';
-
-export { DropdownButton, DropdownButtonProps } from './components/button/react/DropdownButton';
 
 export { Icon, IconProps } from './components/icon/react/Icon';
 
@@ -60,6 +58,8 @@ export { ProgressTracker, ProgressTrackerProps } from './components/progress-tra
 export { ProgressTrackerStep, ProgressTrackerStepProps } from './components/progress-tracker/react/ProgressTrackerStep';
 
 export { RadioButton, RadioButtonProps } from './components/radio-button/react/RadioButton';
+
+export { RadioGroup, RadioGroupProps } from './components/radio-button/react/RadioGroup';
 
 export { RadioButtonHelper } from './components/radio-button/react/RadioButtonHelper';
 
@@ -112,3 +112,5 @@ export { GridItem } from 'LumX/components/grid/react/GridItem';
 export { SideNavigation, SideNavigationProps } from 'LumX/components/side-navigation/react/SideNavigation';
 
 export { SideNavigationItem, SideNavigationItemProps } from 'LumX/components/side-navigation/react/SideNavigationItem';
+
+export { Slider } from 'LumX/components/slider/react/Slider';

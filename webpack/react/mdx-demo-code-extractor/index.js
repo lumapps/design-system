@@ -7,7 +7,10 @@ const { get, partition, flatMap } = require('lodash');
  * @return {string} The formatted sample code.
  */
 const getSourceCode = (importStatement, code) => {
-    return `${importStatement}\nconst App = ${code.trim()}`.trim().replace(/\n/g, '\\n');
+    return `${importStatement}\nconst App = ${code.trim()}`
+        .trim()
+        .replace(/\n/g, '\\n')
+        .replace(/'/g, "\\'");
 };
 
 /**
@@ -29,7 +32,7 @@ function createDemoBlock(importStatement, node) {
         position: node.position,
         value: `
         <div>
-            <DemoBlock withThemeSwitcher={${withThemeSwitcher}} disableGrid={${disableGrid}} sourceCode={\`${sourceCode}\`}>
+            <DemoBlock withThemeSwitcher={${withThemeSwitcher}} disableGrid={${disableGrid}} sourceCode={'${sourceCode}'}>
                 {${code.trim().replace(/;$/, '')}}
             </DemoBlock>
         </div>

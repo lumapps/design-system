@@ -1,5 +1,5 @@
 ```javascript import
-import { Popover, Placement, Size, Button, ButtonEmphasis, Orientation, UserBlock, Theme, IconButton } from 'LumX';
+import { Popover, Placement, Size, Button, Emphasis, Orientation, UserBlock, Theme, IconButton } from 'LumX';
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from 'LumX/icons';
 ```
 
@@ -169,7 +169,7 @@ Popover can be offseted from its anchor point.
     return (
         <>
             <div>
-                <Button theme={theme} size={Size.s} emphasis={ButtonEmphasis.high} onClick={toggleTooltipDisplay}>
+                <Button theme={theme} size={Size.s} emphasis={Emphasis.high} onClick={toggleTooltipDisplay}>
                     Toggle visibility
                 </Button>
                 <div style={demoPopoverHolderStyle}>
@@ -399,7 +399,7 @@ You can force the width of the popper to match the anchor width.
 
     const createSimpleAction = (theme) => (
         <Button
-            emphasis={ButtonEmphasis.medium}
+            emphasis={Emphasis.medium}
             color={theme === Theme.dark ? 'light' : undefined}
             size={Size.s}
             theme={theme}
@@ -415,8 +415,8 @@ You can force the width of the popper to match the anchor width.
             {demoActions.map(
                 (demoAction, idx) => (
                     <IconButton
-                        key={'ubAction'+idx}
-                        emphasis={ButtonEmphasis.low}
+                        key={`ubAction${idx}`}
+                        emphasis={Emphasis.low}
                         color={theme === Theme.dark ? 'light' : undefined}
                         icon={demoAction}
                         theme={theme}
