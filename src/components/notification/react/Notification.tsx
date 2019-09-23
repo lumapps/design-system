@@ -18,20 +18,19 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Different types of notification.
  */
-const enum NotificationTypes {
+enum NotificationType {
     info = 'info',
     success = 'success',
     warning = 'warning',
     error = 'error',
 }
-type NotificationType = NotificationTypes;
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface INotificationBarProps extends IGenericProps {
+interface INotificationProps extends IGenericProps {
     /** Label for action button. */
     actionLabel?: string;
 
@@ -53,14 +52,14 @@ interface INotificationBarProps extends IGenericProps {
     /** Function to handle click on the notification. */
     handleClick?(): void;
 }
-type NotificationBarProps = INotificationBarProps;
+type NotificationProps = INotificationProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<NotificationBarProps> {}
+interface IDefaultPropsType extends Partial<NotificationProps> {}
 
 /////////////////////////////
 //                         //
@@ -92,7 +91,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The notification component.
  */
-const NotificationBar: React.FC<NotificationBarProps> = ({
+const Notification: React.FC<NotificationProps> = ({
     actionCallback,
     actionLabel,
     content = DEFAULT_PROPS.content,
@@ -102,7 +101,7 @@ const NotificationBar: React.FC<NotificationBarProps> = ({
     theme = DEFAULT_PROPS.theme,
     type,
     ...props
-}: NotificationBarProps): React.ReactElement => {
+}: NotificationProps): React.ReactElement => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
     const handleCallback: (evt: React.MouseEvent<HTMLElement>) => void = (evt: React.MouseEvent<HTMLElement>): void => {
@@ -153,8 +152,8 @@ const NotificationBar: React.FC<NotificationBarProps> = ({
         </>
     );
 };
-NotificationBar.displayName = COMPONENT_NAME;
+Notification.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, NotificationBar, NotificationBarProps, NotificationType };
+export { CLASSNAME, DEFAULT_PROPS, Notification, NotificationProps, NotificationType };

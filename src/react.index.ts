@@ -41,25 +41,13 @@ export { Lightbox, LightboxProps } from './components/lightbox/react/Lightbox';
 
 export { List, ListProps } from './components/list/react/List';
 
-export {
-    CLASSNAME as NotificationClassName,
-    NotificationBar,
-    NotificationBarProps,
-    NotificationType,
-} from './components/notification/react/NotificationBar';
-
-export {
-    NotificationAction,
-    NotificationProvider,
-    useNotification,
-    useNotificationState,
-} from './components/notification/react/NotificationProvider';
-
 export { ListDivider, ListDividerProps } from './components/list/react/ListDivider';
 
 export { ListItem, ListItemProps, ListItemSize } from './components/list/react/ListItem';
 
 export { ListSubheader, ListSubheaderProps } from './components/list/react/ListSubheader';
+
+export { Notification, NotificationProps, NotificationType } from './components/notification/react/Notification';
 
 export { ElementPosition, Popover, PopoverProps, Placement, Offset } from './components/popover/react/Popover';
 
