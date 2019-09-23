@@ -10,6 +10,8 @@ import { handleBasicClasses } from 'LumX/core/utils';
 import { Theme } from 'LumX';
 import useEventCallback from 'LumX/core/react/hooks/useEventCallback';
 
+import uuid from 'uuid/v4';
+
 /////////////////////////////
 
 /**
@@ -18,9 +20,9 @@ import useEventCallback from 'LumX/core/react/hooks/useEventCallback';
 interface ISliderProps extends IGenericProps {
     /** Deactivate the component */
     disabled?: boolean;
-    /** Text field label displayed in a label tag. */
+    /** Label */
     label?: string;
-    /** Text field helper message. */
+    /** Helper message. */
     helper?: string;
     /** Should the min and max labels be hidden */
     hideMinMaxlabel?: boolean;
@@ -28,9 +30,13 @@ interface ISliderProps extends IGenericProps {
     max: number;
     /** Maximum value */
     min: number;
+    /**  Number of figures used for the fractional part of the value */
     precision?: number;
+    /** Value between 2 steps */
     steps?: number;
+    /** Callback function invoked when the slider value changes */
     onChange?(value: number): void;
+    /** Callback function invoked when the component is clicked */
     onMouseDown?(event: React.SyntheticEvent): void;
 }
 type SliderProps = ISliderProps;
@@ -86,6 +92,9 @@ const clamp = (min: number, max: number, value: number): number => (value < min 
  */
 const Slider: React.FC<SliderProps> = ({
     className = '',
+    label,
+    helper,
+    id = uuid(),
     max,
     min,
     onMouseDown,
@@ -161,7 +170,8 @@ const Slider: React.FC<SliderProps> = ({
      * @param percent The value to convert
      * @return Value in range min - max
      */
-    const computeNewValue = (percent: number): number => Number((min + percent * (max - min)).toFixed(precision));
+    const computeNewValueFromPercent = (percent: number): number =>
+        Number((min + percent * (max - min)).toFixed(precision));
 
     /**
      * Register a handler for the mouse move event.
@@ -171,7 +181,7 @@ const Slider: React.FC<SliderProps> = ({
         const newValue = getPercentValue(event, slider!);
 
         if (onChange) {
-            onChange(computeNewValue(newValue));
+            onChange(computeNewValueFromPercent(newValue));
         }
         setValue(newValue);
     });
@@ -188,6 +198,34 @@ const Slider: React.FC<SliderProps> = ({
     });
 
     /**
+     * Move to the next or previous value (i.e. + or - 10%) or next step
+     * @param previous Should seek the previous value.
+     */
+    const hopToValue = (previous: boolean = false): void => {
+        const newVal = value + (previous ? -0.1 : 0.1);
+        let percent = clamp(0, 1, newVal);
+        if (steps) {
+            percent = value + avaibleSteps[1] * (previous ? -1 : 1);
+            percent = findClosestStep(percent);
+        }
+        if (onChange) {
+            onChange(computeNewValueFromPercent(percent));
+        }
+        setValue(percent);
+    };
+
+    /**
+     * Register a handler for keyboard interactions
+     */
+    const handleKeyDown = useEventCallback((event: React.KeyboardEvent) => {
+        if (event.key === 'ArrowRight') {
+            hopToValue();
+        } else if (event.key === 'ArrowLeft') {
+            hopToValue(true);
+        }
+    });
+
+    /**
      * Register a handler for the mouseDown event.
      */
     const handleMouseDown = useEventCallback((event: React.MouseEvent) => {
@@ -200,7 +238,7 @@ const Slider: React.FC<SliderProps> = ({
         const { current: slider } = sliderRef;
         const newValue = getPercentValue(event, slider!);
         if (onChange) {
-            onChange(computeNewValue(newValue));
+            onChange(computeNewValueFromPercent(newValue));
         }
         setValue(newValue);
 
@@ -215,7 +253,7 @@ const Slider: React.FC<SliderProps> = ({
         const newValue = clamp(0, 1, (defaultValue - min) / (max - min));
         setValue(newValue);
         if (onChange) {
-            onChange(computeNewValue(newValue));
+            onChange(computeNewValueFromPercent(newValue));
         }
     }, []);
 
@@ -225,23 +263,47 @@ const Slider: React.FC<SliderProps> = ({
             {...props}
             onMouseDown={handleMouseDown}
         >
-            {!hideMinMaxlabel && <span className={`${CLASSNAME}__label ${CLASSNAME}__label--min`}>{min}</span>}
-            <div className={`${CLASSNAME}__wrapper`} ref={sliderRef}>
-                <div className={`${CLASSNAME}__track ${CLASSNAME}__track--background`} />
-                <div
-                    className={`${CLASSNAME}__track ${CLASSNAME}__track--active`}
-                    style={{ width: `${value * 100}%` }}
-                />
-                {steps && (
-                    <div className={`${CLASSNAME}__ticks`}>
-                        {avaibleSteps.map((step: number) => {
-                            return <div className={`${CLASSNAME}__tick`} style={{ left: `${step * 100}%` }} />;
-                        })}
-                    </div>
+            {label && (
+                <label htmlFor={id} className={`${CLASSNAME}__label`}>
+                    {label}
+                </label>
+            )}
+
+            {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
+
+            <div className={`${CLASSNAME}__ui-wrapper`}>
+                {!hideMinMaxlabel && (
+                    <span className={`${CLASSNAME}__value-label ${CLASSNAME}__value-label--min`}>{min}</span>
                 )}
-                <div className={`${CLASSNAME}__handle`} style={{ left: `${value * 100}%` }} />
+                <div className={`${CLASSNAME}__wrapper`} ref={sliderRef}>
+                    <div className={`${CLASSNAME}__track ${CLASSNAME}__track--background`} />
+                    <div
+                        className={`${CLASSNAME}__track ${CLASSNAME}__track--active`}
+                        style={{ width: `${value * 100}%` }}
+                    />
+                    {steps && (
+                        <div className={`${CLASSNAME}__ticks`}>
+                            {avaibleSteps.map((step: number, idx: number) => {
+                                return (
+                                    <div
+                                        key={`tick_${idx}`}
+                                        className={`${CLASSNAME}__tick`}
+                                        style={{ left: `${step * 100}%` }}
+                                    />
+                                );
+                            })}
+                        </div>
+                    )}
+                    <button
+                        className={`${CLASSNAME}__handle`}
+                        style={{ left: `${value * 100}%` }}
+                        onKeyDown={handleKeyDown}
+                    />
+                </div>
+                {!hideMinMaxlabel && (
+                    <span className={`${CLASSNAME}__value-label ${CLASSNAME}__value-label--max`}>{max}</span>
+                )}
             </div>
-            {!hideMinMaxlabel && <span className={`${CLASSNAME}__label ${CLASSNAME}__label--max`}>{max}</span>}
         </div>
     );
 };

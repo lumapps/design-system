@@ -6,10 +6,30 @@
     $self: &;
 
     display: flex;
-    align-items: center;
+    flex-direction: column;
     user-select: none;
 
     &__label {
+        #{$self}--theme-light & {
+            @include lumx-input-label('dark');
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-label('light');
+        }
+    }
+
+    &__helper {
+        #{$self}--theme-light & {
+            @include lumx-input-helper('dark');
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-input-helper('light');
+        }
+    }
+
+    &__value-label {
         font-size: 10px;
 
         #{$self}--theme-light & {
@@ -27,6 +47,11 @@
         &--max {
             padding-left: $lumx-spacing-unit * 2;
         }
+    }
+
+    &__ui-wrapper {
+        display: flex;
+        align-items: center;
     }
 
     &__wrapper {
