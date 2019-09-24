@@ -14,6 +14,13 @@ function DemoTableController($filter) {
     /////////////////////////////
 
     /**
+     * Whether all rows are selected or not.
+     *
+     * @type {boolean}
+     */
+    vm.allSelected = false;
+
+    /**
      * The body of the table.
      * This represents the data to display in the table.
      *
@@ -98,17 +105,7 @@ function DemoTableController($filter) {
      * @param {Object} rowToSelect The row to select.
      */
     function selectRow(rowToSelect) {
-        if (rowToSelect.isSelected) {
-            rowToSelect.isSelected = false;
-
-            return;
-        }
-
-        angular.forEach(vm.tableBody, (row) => {
-            row.isSelected = false;
-        });
-
-        rowToSelect.isSelected = true;
+        rowToSelect.isSelected = !rowToSelect.isSelected;
     }
 
     /**

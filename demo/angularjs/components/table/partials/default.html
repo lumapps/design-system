@@ -1,6 +1,10 @@
-<lumx-table lumx-has-dividers="true" lumx-is-clickable="true" lumx-theme="{{ demoBlock.theme }}">
+<lumx-table lumx-has-before="true" lumx-has-dividers="true" lumx-is-clickable="true" lumx-theme="{{ demoBlock.theme }}">
     <lumx-table-head>
         <lumx-table-row>
+            <lumx-table-cell-head>
+                <lumx-checkbox lumx-theme="{{ demoBlock.theme }}" ng-model="vm.allSelected"></lumx-checkbox>
+            </lumx-table-cell-head>
+
             <lumx-table-cell-head
                 lumx-icon="{{ cell.icon }}"
                 lumx-is-sortable="cell.isSortable"
@@ -24,7 +28,25 @@
             lumx-enter-keypress="vm.selectRow(row)"
         >
             <lumx-table-cell-body>
-                {{ row.dessert }}
+                <lumx-checkbox
+                    lumx-theme="{{ demoBlock.theme }}"
+                    ng-model="row.isSelected"
+                    lumx-stop-propagation="click"
+                ></lumx-checkbox>
+            </lumx-table-cell-body>
+
+            <lumx-table-cell-body>
+                <lumx-grid lumx-h-align="center">
+                    <lumx-thumbnail
+                        class="lumx-spacing-margin-right-big"
+                        lumx-aspect-ratio="square"
+                        lumx-image="https://picsum.photos/72/72/?random"
+                        lumx-size="m"
+                        lumx-variant="rounded"
+                    ></lumx-thumbnail>
+
+                    <span>{{ row.dessert }}</span>
+                </lumx-grid>
             </lumx-table-cell-body>
 
             <lumx-table-cell-body>

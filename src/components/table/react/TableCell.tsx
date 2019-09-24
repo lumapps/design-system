@@ -141,7 +141,7 @@ const TableCell: React.FC<TableCellProps> = ({
                     className={classNames(
                         handleBasicClasses({ prefix: CLASSNAME, isSortable }),
                         className,
-                        `${CLASSNAME}--header`,
+                        `${CLASSNAME}--head`,
                         {
                             [`${CLASSNAME}--is-sorted`]: isSortable && sortOrder,
                         },
