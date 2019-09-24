@@ -47,7 +47,7 @@
         }
 
         #{$self}--theme-dark & {
-            @include lumx-state('state-default', 'emphasis-high', $lumx-checkbox-color, 'light');
+            @include lumx-state('state-default', 'emphasis-medium', 'light');
         }
 
         #{$self}--is-unchecked & {
@@ -141,7 +141,7 @@
 .#{$lumx-base-prefix}-checkbox__input-native:hover
 + .#{$lumx-base-prefix}-checkbox__input-placeholder {
     .#{$lumx-base-prefix}-checkbox__input-indicator {
-        @include lumx-state('state-hover', 'emphasis-high', $lumx-checkbox-color, 'light');
+        @include lumx-state('state-hover', 'emphasis-medium', 'light');
     }
 }
 
@@ -174,7 +174,7 @@
 .#{$lumx-base-prefix}-checkbox__input-native:active
 + .#{$lumx-base-prefix}-checkbox__input-placeholder {
     .#{$lumx-base-prefix}-checkbox__input-indicator {
-        @include lumx-state('state-active', 'emphasis-high', $lumx-checkbox-color, 'light');
+        @include lumx-state('state-active', 'emphasis-medium', 'light');
     }
 }
 
