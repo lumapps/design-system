@@ -53,6 +53,14 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.product.foundations.iconography', {
+            url: 'iconography',
+            views: {
+                'main@': {
+                    template: require('./foundations/iconography/demo.html'),
+                },
+            },
+        })
         .state('app.product.foundations.typography', {
             url: 'typography',
             views: {

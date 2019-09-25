@@ -31,6 +31,10 @@ function MainNavController($state) {
                             state: 'app.product.foundations.colors',
                         },
                         {
+                            label: 'Iconography',
+                            state: 'app.product.foundations.iconography',
+                        },
+                        {
                             label: 'Typography',
                             state: 'app.product.foundations.typography',
                         },
