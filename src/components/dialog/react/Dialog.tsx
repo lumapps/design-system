@@ -26,6 +26,8 @@ interface IDialogProps extends IGenericProps {
     /** Ref of element that triggered modal opening to set focus on. */
     // tslint:disable-next-line: no-any
     parentElement: RefObject<any>;
+    /** Prevent clickaway and escape to dismiss the lightbox */
+    preventAutoClose?: boolean;
     /** Theme. */
     theme?: Theme;
     /** Size of the dialog */
@@ -61,6 +63,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<DialogProps> = {
+    preventAutoClose: false,
     size: Size.big,
 };
 /////////////////////////////
@@ -79,6 +82,7 @@ const Dialog: React.FC<DialogProps> = ({
     onOpen,
     onClose,
     parentElement,
+    preventAutoClose = DEFAULT_PROPS.preventAutoClose,
     size = DEFAULT_PROPS.size,
     theme,
 }: DialogProps): ReactElement => {
@@ -92,39 +96,38 @@ const Dialog: React.FC<DialogProps> = ({
             onClose={onClose}
             parentElement={parentElement}
             isCloseButtonVisible={false}
+            preventAutoClose={preventAutoClose}
         >
             <div
                 role="dialog"
                 className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
                 style={{ display: 'block' }}
             >
-                {isOpen && (
-                    <div className={`${CLASSNAME}__wrapper`}>
-                        <div
-                            className={`${CLASSNAME}__header ${
-                                sentinel1Intersec && sentinel1Intersec.intersectionRatio !== 1
-                                    ? CLASSNAME + '__header--has-divider'
-                                    : ''
-                            }`}
-                        >
-                            {header}
-                        </div>
-                        <div className={`${CLASSNAME}__content`}>
-                            <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`} ref={sentinel1} />
-                            <div>{children}</div>
-                            <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`} ref={sentinel2} />
-                        </div>
-                        <div
-                            className={`${CLASSNAME}__footer ${
-                                sentinel2Intersec && sentinel2Intersec.intersectionRatio !== 1
-                                    ? CLASSNAME + '__footer--has-divider'
-                                    : ''
-                            }`}
-                        >
-                            {footer}
-                        </div>
+                <div className={`${CLASSNAME}__wrapper`}>
+                    <div
+                        className={`${CLASSNAME}__header ${
+                            sentinel1Intersec && sentinel1Intersec.intersectionRatio !== 1
+                                ? CLASSNAME + '__header--has-divider'
+                                : ''
+                        }`}
+                    >
+                        {header}
                     </div>
-                )}
+                    <div className={`${CLASSNAME}__content`}>
+                        <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`} ref={sentinel1} />
+                        <div>{children}</div>
+                        <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`} ref={sentinel2} />
+                    </div>
+                    <div
+                        className={`${CLASSNAME}__footer ${
+                            sentinel2Intersec && sentinel2Intersec.intersectionRatio !== 1
+                                ? CLASSNAME + '__footer--has-divider'
+                                : ''
+                        }`}
+                    >
+                        {footer}
+                    </div>
+                </div>
             </div>
         </Lightbox>
     );

@@ -16,6 +16,8 @@ import noop from 'lodash/noop';
 
 /////////////////////////////
 
+const _TRANSITION_DURATION = 400;
+
 /**
  * Defines the props of the component.
  */
@@ -29,6 +31,8 @@ interface ILightboxProps extends IGenericProps {
     /** Ref of element that triggered modal opening to set focus on. */
     // tslint:disable-next-line: no-any
     parentElement: RefObject<any>;
+    /** Prevent clickaway and escape to dismiss the lightbox */
+    preventAutoClose?: boolean;
     /**
      * ARIA role attribute to provide more information about the structure of a document for users
      *  of assistive technologies.
@@ -75,6 +79,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isOpen: false,
     onClose: noop,
     onOpen: noop,
+    preventAutoClose: false,
     role: 'dialog',
     theme: Theme.light,
 };
@@ -94,6 +99,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     onClose = DEFAULT_PROPS.onClose,
     onOpen = DEFAULT_PROPS.onOpen,
     parentElement,
+    preventAutoClose = DEFAULT_PROPS.preventAutoClose,
     role = DEFAULT_PROPS.role,
     theme = DEFAULT_PROPS.theme,
 }: LightboxProps): ReactElement => {
@@ -106,10 +112,13 @@ const Lightbox: React.FC<LightboxProps> = ({
 
     useEffect(() => {
         // After mount.
-        setTrapActive(isOpen && children);
-
         if (isOpen) {
+            setTrapActive(isOpen && children);
             disableBodyScroll(modalElement);
+        } else if (!isOpen) {
+            setTimeout(() => {
+                setTrapActive(false);
+            }, _TRANSITION_DURATION);
         }
 
         // Before unmount.
@@ -172,8 +181,8 @@ const Lightbox: React.FC<LightboxProps> = ({
                     <FocusTrap
                         active={isTrapActive}
                         focusTrapOptions={{
-                            clickOutsideDeactivates: true,
-                            escapeDeactivates: true,
+                            clickOutsideDeactivates: !preventAutoClose,
+                            escapeDeactivates: !preventAutoClose,
                             fallbackFocus: `.${CLASSNAME}`,
                             onActivate: handleFocusActivation,
                             onDeactivate: handleFocusDeactivation,
@@ -183,7 +192,14 @@ const Lightbox: React.FC<LightboxProps> = ({
                         <div
                             aria-label={ariaLabel}
                             aria-modal="true"
-                            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}
+                            className={classNames(
+                                className,
+                                handleBasicClasses({
+                                    hidden: !isOpen,
+                                    prefix: CLASSNAME,
+                                    theme,
+                                }),
+                            )}
                             role={role}
                             style={{
                                 display: isTrapActive ? 'block' : '',
