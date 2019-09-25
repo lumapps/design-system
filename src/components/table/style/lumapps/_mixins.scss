@@ -8,14 +8,22 @@
     outline: none;
 }
 
-@mixin lumx-table-row-is-clickable($theme) {
+@mixin lumx-table-row-is-clickable($theme, $is-selected) {
     &:hover {
         border-bottom-color: transparent !important;
 
         @if $theme == 'dark' {
-            background-color: lumx-theme-color-variant('primary', 'L6');
+            @if $is-selected == true {
+                background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L5');
+            } @else {
+                background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L6');
+            }
         } @else if $theme == 'light' {
-            background-color: lumx-theme-color-variant('light', 'L6');
+            @if $is-selected == true {
+                background-color: lumx-theme-color-variant('light', 'L5');
+            } @else {
+                background-color: lumx-theme-color-variant('light', 'L6');
+            }
         }
     }
 
@@ -28,9 +36,9 @@
     border-bottom-color: transparent !important;
 
     @if $theme == 'dark' {
-        background-color: lumx-theme-color-variant('primary', 'L5') !important;
+        background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L6');
     } @else if $theme == 'light' {
-        background-color: lumx-theme-color-variant('light', 'L5') !important;
+        background-color: lumx-theme-color-variant('light', 'L6');
     }
 }
 

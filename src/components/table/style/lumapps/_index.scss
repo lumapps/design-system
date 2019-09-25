@@ -22,16 +22,6 @@
             border-bottom: none;
         }
 
-        &--is-clickable {
-            #{$self}--theme-light & {
-                @include lumx-table-row-is-clickable('dark');
-            }
-
-            #{$self}--theme-dark & {
-                @include lumx-table-row-is-clickable('light');
-            }
-        }
-
         &--is-selected {
             #{$self}--theme-light & {
                 @include lumx-table-row-is-selected('dark');
@@ -112,5 +102,28 @@
         #{$self}__cell--is-sortable[data-focus-visible-added] & {
             text-decoration: underline;
         }
+    }
+}
+
+/* Clickable row
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-table__row--is-clickable:not(.#{$lumx-base-prefix}-table__row--is-selected) {
+    .#{$lumx-base-prefix}-table--theme-light & {
+        @include lumx-table-row-is-clickable('dark', false);
+    }
+
+    .#{$lumx-base-prefix}-table--theme-dark & {
+        @include lumx-table-row-is-clickable('light', false);
+    }
+}
+
+.#{$lumx-base-prefix}-table__row--is-clickable.#{$lumx-base-prefix}-table__row--is-selected {
+    .#{$lumx-base-prefix}-table--theme-light & {
+        @include lumx-table-row-is-clickable('dark', true);
+    }
+
+    .#{$lumx-base-prefix}-table--theme-dark & {
+        @include lumx-table-row-is-clickable('light', true);
     }
 }
