@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -22,20 +22,22 @@ interface ISliderProps extends IGenericProps {
     disabled?: boolean;
     /** Label */
     label?: string;
-    /** Helper message. */
+    /** Helper message */
     helper?: string;
     /** Should the min and max labels be hidden */
     hideMinMaxlabel?: boolean;
     /** Maximum value */
     max: number;
-    /** Maximum value */
+    /** Minimum value */
     min: number;
     /**  Number of figures used for the fractional part of the value */
     precision?: number;
     /** Value between 2 steps */
     steps?: number;
+    /** Value */
+    value: number;
     /** Callback function invoked when the slider value changes */
-    onChange?(value: number): void;
+    onChange(value: number): void;
     /** Callback function invoked when the component is clicked */
     onMouseDown?(event: React.SyntheticEvent): void;
 }
@@ -76,14 +78,46 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    defaultValue: 0,
+    disabled: false,
     hideMinMaxlabel: false,
     precision: 0,
+    steps: 0,
     theme: Theme.light,
 };
 /////////////////////////////
 
-const clamp = (min: number, max: number, value: number): number => (value < min ? min : value > max ? max : value);
+/**
+ * Clamp value in range.
+ *
+ * @param value Value to clamp.
+ * @param min   Minimum value.
+ * @param max   Maximum value.
+ * @return Clamped value.
+ */
+const clamp = (value: number, min: number, max: number): number => (value < min ? min : value > max ? max : value);
+
+/**
+ * Convert a percent value to a value in range min - max.
+ *
+ * @param percent   Value to convert.
+ * @param min       Minimum value.
+ * @param max       Maximum value.
+ * @param precision Precision.
+ * @return Value in range min - max
+ */
+const computeValueFromPercent = (percent: number, min: number, max: number, precision: number): number =>
+    Number((min + percent * (max - min)).toFixed(precision));
+
+/**
+ * Convert a value in range min - max to a percent value.
+ *
+ * @param value Value to convert.
+ * @param min   Minimum value.
+ * @param max   Maximum value.
+ * @return Value in percent
+ */
+const computePercentFromValue = (value: number, min: number, max: number): number =>
+    Number((value - min) / (max - min));
 
 /**
  * Slider component.
@@ -101,14 +135,13 @@ const Slider: React.FC<SliderProps> = ({
     onChange,
     steps,
     precision = DEFAULT_PROPS.precision,
-    defaultValue = DEFAULT_PROPS.defaultValue,
     hideMinMaxlabel = DEFAULT_PROPS.hideMinMaxlabel,
+    value = DEFAULT_PROPS.value!,
     disabled,
     theme = DEFAULT_PROPS.theme,
     ...props
 }: SliderProps): ReactElement => {
     const sliderRef = useRef<HTMLDivElement>(null);
-    const [value, setValue] = useState(0);
     const avaibleSteps: number[] = [];
 
     // build a lookup array for the steps.
@@ -157,21 +190,12 @@ const Slider: React.FC<SliderProps> = ({
     const getPercentValue = (event: React.MouseEvent, slider: HTMLDivElement): number => {
         const { width, left } = slider.getBoundingClientRect();
         let percent = (event.pageX - left - window.pageXOffset) / width;
-        percent = clamp(0, 1, percent);
+        percent = clamp(percent, 0, 1);
         if (steps) {
             percent = findClosestStep(percent);
         }
         return percent;
     };
-
-    /**
-     * Convert a percent value to a value in range min - max.
-     *
-     * @param percent The value to convert
-     * @return Value in range min - max
-     */
-    const computeNewValueFromPercent = (percent: number): number =>
-        Number((min + percent * (max - min)).toFixed(precision));
 
     /**
      * Register a handler for the mouse move event.
@@ -181,9 +205,8 @@ const Slider: React.FC<SliderProps> = ({
         const newValue = getPercentValue(event, slider!);
 
         if (onChange) {
-            onChange(computeNewValueFromPercent(newValue));
+            onChange(computeValueFromPercent(newValue, min, max, precision!));
         }
-        setValue(newValue);
     });
 
     /**
@@ -202,16 +225,15 @@ const Slider: React.FC<SliderProps> = ({
      * @param previous Should seek the previous value.
      */
     const hopToValue = (previous: boolean = false): void => {
-        const newVal = value + (previous ? -0.1 : 0.1);
-        let percent = clamp(0, 1, newVal);
+        const newValue = value + (previous ? -0.1 : 0.1);
+        let percent = clamp(newValue, 0, 1);
         if (steps) {
             percent = value + avaibleSteps[1] * (previous ? -1 : 1);
             percent = findClosestStep(percent);
         }
         if (onChange) {
-            onChange(computeNewValueFromPercent(percent));
+            onChange(computeValueFromPercent(percent, min, max, precision!));
         }
-        setValue(percent);
     };
 
     /**
@@ -238,25 +260,14 @@ const Slider: React.FC<SliderProps> = ({
         const { current: slider } = sliderRef;
         const newValue = getPercentValue(event, slider!);
         if (onChange) {
-            onChange(computeNewValueFromPercent(newValue));
+            onChange(computeValueFromPercent(newValue, min, max, precision!));
         }
-        setValue(newValue);
 
         document.body.addEventListener('mousemove', handleMove);
         document.body.addEventListener('mouseup', handleEnd);
     });
 
-    /**
-     * Simple effect that set the default value to the slider.
-     */
-    useEffect(() => {
-        const newValue = clamp(0, 1, (defaultValue - min) / (max - min));
-        setValue(newValue);
-        if (onChange) {
-            onChange(computeNewValueFromPercent(newValue));
-        }
-    }, []);
-
+    const percentString = `${computePercentFromValue(value, min, max) * 100}%`;
     return (
         <div
             className={classNames(
@@ -282,7 +293,7 @@ const Slider: React.FC<SliderProps> = ({
                     <div className={`${CLASSNAME}__track ${CLASSNAME}__track--background`} />
                     <div
                         className={`${CLASSNAME}__track ${CLASSNAME}__track--active`}
-                        style={{ width: `${value * 100}%` }}
+                        style={{ width: percentString }}
                     />
                     {steps && (
                         <div className={`${CLASSNAME}__ticks`}>
@@ -299,7 +310,7 @@ const Slider: React.FC<SliderProps> = ({
                     )}
                     <button
                         className={`${CLASSNAME}__handle`}
-                        style={{ left: `${value * 100}%` }}
+                        style={{ left: percentString }}
                         onKeyDown={handleKeyDown}
                     />
                 </div>
