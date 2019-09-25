@@ -24,8 +24,6 @@
 }
 
 @mixin lumx-list-item-clickable() {
-    @include lumx-state-transition;
-
     cursor: pointer;
 
     &:hover,
