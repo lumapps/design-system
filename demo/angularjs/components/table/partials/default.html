@@ -6,6 +6,7 @@
             </lumx-table-cell-head>
 
             <lumx-table-cell-head
+                width="{{ cell.width }}"
                 lumx-icon="{{ cell.icon }}"
                 lumx-is-sortable="cell.isSortable"
                 lumx-scope="col"
@@ -37,15 +38,31 @@
 
             <lumx-table-cell-body>
                 <lumx-grid lumx-h-align="center">
-                    <lumx-thumbnail
-                        class="lumx-spacing-margin-right-big"
-                        lumx-aspect-ratio="square"
-                        lumx-image="https://picsum.photos/72/72/?random"
-                        lumx-size="m"
-                        lumx-variant="rounded"
-                    ></lumx-thumbnail>
+                    <lumx-grid-item>
+                        <lumx-grid lumx-h-align="center">
+                            <lumx-thumbnail
+                                class="lumx-spacing-margin-right-big"
+                                lumx-aspect-ratio="square"
+                                lumx-image="https://picsum.photos/72/72/?random"
+                                lumx-size="m"
+                                lumx-variant="rounded"
+                            ></lumx-thumbnail>
 
-                    <span>{{ row.dessert }}</span>
+                            <lumx-link lumx-color="dark" lumx-stop-propagation="click">
+                                <span class="lumx-typography-subtitle1">{{ row.dessert }}</span>
+                            </lumx-link>
+                        </lumx-grid>
+                    </lumx-grid-item>
+
+                    <lumx-grid lumx-h-align="center">
+                        <lumx-button lumx-emphasis="low" lumx-variant="icon" lumx-stop-propagation="click">
+                            <lumx-icon lumx-path="{{ vm.icons.mdiInformationOutline }}"></lumx-icon>
+                        </lumx-button>
+
+                        <lumx-button lumx-emphasis="low" lumx-variant="icon" lumx-stop-propagation="click">
+                            <lumx-icon lumx-path="{{ vm.icons.mdiDotsVertical }}"></lumx-icon>
+                        </lumx-button>
+                    </lumx-grid>
                 </lumx-grid>
             </lumx-table-cell-body>
 

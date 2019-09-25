@@ -1,4 +1,4 @@
-import { mdiCommentOutline } from 'LumX/icons';
+import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -19,6 +19,16 @@ function DemoTableController($filter) {
      * @type {boolean}
      */
     vm.allSelected = false;
+
+    /**
+     * The actions icons.
+     *
+     * @type {boolean}
+     */
+    vm.icons = {
+        mdiDotsVertical,
+        mdiInformationOutline,
+    };
 
     /**
      * The body of the table.
@@ -78,18 +88,21 @@ function DemoTableController($filter) {
             isSortable: true,
             label: 'Calories',
             name: 'calories',
+            width: '100',
         },
         {
             isSortable: true,
             label: 'Fat (g)',
             name: 'fat',
             sortOrder: 'asc',
+            width: '100',
         },
         {
             icon: mdiCommentOutline,
             isSortable: false,
             label: 'Comments',
             name: 'comments',
+            width: '150',
         },
     ];
 
