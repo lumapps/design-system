@@ -33,12 +33,17 @@ exports[`<Checkbox> Props should use the given props 1`] = `
   <div
     className="lumx-checkbox__content"
   >
-    <CheckboxLabel>
+    <label
+      className="lumx-checkbox__label"
+      htmlFor="lumx-checkbox-3"
+    >
       Test label
-    </CheckboxLabel>
-    <CheckboxHelper>
-      Test Helper
-    </CheckboxHelper>
+    </label>
+    <span
+      className="lumx-checkbox__helper"
+    >
+      Test helper
+    </span>
   </div>
 </div>
 `;
@@ -75,13 +80,6 @@ exports[`<Checkbox> Snapshots and structure should render correctly 1`] = `
   </div>
   <div
     className="lumx-checkbox__content"
-  >
-    <CheckboxLabel
-      checkboxId="lumx-checkbox-1"
-      key=".0"
-    >
-      Default Test label
-    </CheckboxLabel>
-  </div>
+  />
 </div>
 `;

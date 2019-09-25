@@ -12,10 +12,6 @@ export { ButtonGroup, ButtonGroupProps } from './components/button/react/ButtonG
 
 export { Checkbox, CheckboxProps } from './components/checkbox/react/Checkbox';
 
-export { CheckboxHelper } from './components/checkbox/react/CheckboxHelper';
-
-export { CheckboxLabel } from './components/checkbox/react/CheckboxLabel';
-
 export { Chip, ChipProps } from './components/chip/react/Chip';
 
 export { Divider, DividerProps } from './components/divider/react/Divider';
