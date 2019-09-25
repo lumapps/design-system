@@ -1,0 +1,19 @@
+@mixin lumx-link-base() {
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+
+    &:hover,
+    &[data-focus-visible-added] {
+        text-decoration: underline;
+    }
+}
+
+@mixin lumx-link-color($color, $variant) {
+    color: lumx-theme-color-variant($color, $variant);
+}
+
+@mixin lumx-link($color: $lumx-link-default-color, $variant: 'N') {
+    @include lumx-link-base;
+    @include lumx-link-color($color, $variant);
+}

@@ -33,6 +33,7 @@ angular.module(`${MODULE_NAME}.grid`, []);
 angular.module(`${MODULE_NAME}.icon`, []);
 angular.module(`${MODULE_NAME}.image-block`, []);
 angular.module(`${MODULE_NAME}.lightbox`, []);
+angular.module(`${MODULE_NAME}.link`, []);
 angular.module(`${MODULE_NAME}.list`, []);
 angular.module(`${MODULE_NAME}.notification`, []);
 angular.module(`${MODULE_NAME}.popover`, []);
@@ -69,6 +70,7 @@ angular.module(MODULE_NAME, [
     `${MODULE_NAME}.icon`,
     `${MODULE_NAME}.image-block`,
     `${MODULE_NAME}.lightbox`,
+    `${MODULE_NAME}.link`,
     `${MODULE_NAME}.list`,
     `${MODULE_NAME}.notification`,
     `${MODULE_NAME}.popover`,
