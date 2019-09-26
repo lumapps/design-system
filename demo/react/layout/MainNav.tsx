@@ -48,6 +48,7 @@ const ITEMS: Item[] = [
                     'Checkbox',
                     'Chip',
                     'Comment block',
+                    'Date picker',
                     'Dialog',
                     'Dropdown',
                     'Expansion panel',
