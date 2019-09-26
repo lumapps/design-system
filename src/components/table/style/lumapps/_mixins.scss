@@ -59,6 +59,7 @@
 
 @mixin lumx-table-cell-before() {
     width: 68px;
+    padding: 0;
 }
 
 @mixin lumx-table-cell-is-sorted($theme) {
