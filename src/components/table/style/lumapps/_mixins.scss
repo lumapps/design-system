@@ -10,8 +10,6 @@
 
 @mixin lumx-table-row-is-clickable($theme, $is-selected) {
     &:hover {
-        border-bottom-color: transparent !important;
-
         @if $theme == 'dark' {
             @if $is-selected == true {
                 background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L5');
@@ -33,8 +31,6 @@
 }
 
 @mixin lumx-table-row-is-selected($theme) {
-    border-bottom-color: transparent !important;
-
     @if $theme == 'dark' {
         background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L6');
     } @else if $theme == 'light' {
