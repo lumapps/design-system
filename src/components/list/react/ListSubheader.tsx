@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -13,7 +13,10 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Defines the props of the component.
  */
-interface IListSubheaderProps extends IGenericProps {}
+interface IListSubheaderProps extends IGenericProps {
+    /** List sub header content. */
+    children: string | ReactNode;
+}
 type ListSubheaderProps = IListSubheaderProps;
 
 /////////////////////////////
