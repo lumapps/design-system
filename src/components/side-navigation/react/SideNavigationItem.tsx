@@ -13,33 +13,25 @@ import { isEmpty } from 'lodash';
  * Defines the props of the component.
  */
 interface ISideNavigationItemProps extends IGenericProps {
-    /**
-     * Side navigation item children.
-     */
-    children?: SideNavigationItem | SideNavigationItem[];
-    /**
-     * Menu item emphasis.
-     */
+    /** Side navigation item content (should use `<SideNavigationItem>`). */
+    children?: ReactElement | ReactElement[];
+
+    /** Menu item emphasis. */
     emphasis?: Emphasis;
-    /**
-     * Menu item label.
-     */
+
+    /** Menu item label. */
     label: string;
-    /**
-     * The icon path to set in the <svg> `d` property
-     */
+
+    /** Menu item icon (SVG path code). */
     icon?: string;
-    /**
-     * Whether or not the menu is open.
-     */
+
+    /** Whether or not the menu is open. */
     isOpen?: boolean;
-    /**
-     * Whether or not the menu is selected.
-     */
+
+    /** Whether or not the menu is selected. */
     isSelected?: boolean;
-    /**
-     * On click handler.
-     */
+
+    /** On click handler. */
     onClick?(evt: React.MouseEvent): void;
 }
 type SideNavigationItemProps = ISideNavigationItemProps;
@@ -76,7 +68,7 @@ const SideNavigationItem: React.FC<ISideNavigationItemProps> = (props: ISideNavi
         ...otherProps
     } = props;
 
-    const content = Children.toArray(children).filter(isComponent(SideNavigationItem));
+    const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
     return (
         <li
             className={classNames(
@@ -107,7 +99,7 @@ const SideNavigationItem: React.FC<ISideNavigationItemProps> = (props: ISideNavi
                 )}
             </a>
 
-            {content && isOpen && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
+            {!isEmpty(content) && isOpen && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
         </li>
     );
 };

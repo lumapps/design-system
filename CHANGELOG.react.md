@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   TypeScript and JSDoc cleanup for `SideNavigation` component.
+
+### Removed
+
+-   The `tsx` demo of the `SideNavigation` component has been removed
+
 ## [0.10.0][] - 2019-10-03
 
 ### Added
