@@ -1,13 +1,9 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
-import { build } from 'test-data-bot';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 import { getBasicClass } from 'LumX/core/utils';
-
-import { CheckboxHelper } from './CheckboxHelper';
-import { CheckboxLabel } from './CheckboxLabel';
 
 import { CLASSNAME, Checkbox, CheckboxProps } from './Checkbox';
 
@@ -28,6 +24,16 @@ interface ISetup extends ICommonSetup {
      * The <div> element that wraps checkbox and children elements.
      */
     wrapper: Wrapper;
+
+    /**
+     * The <div> element for the label.
+     */
+    label: Wrapper;
+
+    /**
+     * The <div> element for the helper.
+     */
+    helper: Wrapper;
 }
 
 /////////////////////////////
@@ -40,18 +46,14 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
-    const props: CheckboxProps = {
-        children: <CheckboxLabel>Default Test label</CheckboxLabel>,
-        ...propsOverrides,
-    };
-
+const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // noinspection RequiredAttributes
+    // @ts-ignore
     const wrapper: Wrapper = renderer(<Checkbox {...props} />);
 
     return {
+        helper: wrapper.find(`.${CLASSNAME}__helper`),
+        label: wrapper.find('label'),
         props,
         wrapper,
     };
@@ -76,38 +78,23 @@ describe(`<${Checkbox.displayName}>`, (): void => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
         it('should add a "disabled" and "checked" class names', (): void => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
-                checked: true,
+            const { wrapper } = setup({
                 disabled: true,
+                value: true,
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
-
-            const { wrapper } = setup({ ...modifiedProps });
-
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    expect(wrapper).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                },
-            );
+            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'disabled', value: true }));
+            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'checked', value: true }));
         });
 
         it('should use the given props', (): void => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
-                children: (
-                    <>
-                        <CheckboxLabel>Test label</CheckboxLabel>
-                        <CheckboxHelper>Test Helper</CheckboxHelper>
-                    </>
-                ),
+            const { helper, label, wrapper } = setup({
+                helper: 'Test helper',
+                label: 'Test label',
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
-
-            const { wrapper } = setup({ ...modifiedProps });
-
+            expect(helper).toExist();
+            expect(label).toExist();
             expect(wrapper).toMatchSnapshot();
         });
     });
@@ -125,11 +112,11 @@ describe(`<${Checkbox.displayName}>`, (): void => {
         );
 
         it('should trigger `onChange` when checkbox is clicked', (): void => {
-            const { wrapper } = setup({ checked: false, onChange }, false);
+            const { wrapper } = setup({ value: false, onChange }, false);
             const checkbox = wrapper.find('input');
 
-            checkbox.simulate('change', { target: { checked: false } });
-            expect(onChange).toHaveBeenCalledWith({ checked: true });
+            checkbox.simulate('change');
+            expect(onChange).toHaveBeenCalledWith(true);
         });
     });
 
@@ -150,5 +137,5 @@ describe(`<${Checkbox.displayName}>`, (): void => {
     /////////////////////////////
 
     // Common tests suite.
-    commonTestsSuite(setup, {}, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
 });
