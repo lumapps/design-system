@@ -6,26 +6,26 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { ListDivider, ListItem, ListItemProps, ListSubheader, Theme } from 'LumX';
+import { ListItem, ListItemProps, Theme } from 'LumX';
 import { IGenericProps, getRootClassName, isComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
-type ListChild = ListItem | ListDivider | ListSubheader;
 /**
  * Defines the props of the component.
  */
 interface IListProps extends IGenericProps {
-    // tslint:disable-next-line: array-type
-    children: Array<ListChild> | ListChild;
-    /* Whether the list items are clickable */
+    /** List content (should use `<ListItem>`, `<ListSubheader>` or `<ListDivider>`) */
+    children: ReactElement | ReactElement[];
+
+    /** Whether the list items are clickable */
     isClickable?: boolean;
-    /**
-     * The theme.
-     */
+
+    /** Theme */
     theme?: Theme;
-    /* Callback used to retrieved the select entry*/
-    onListItemSelected?(entry: ListItem): void;
+
+    /** Callback used to retrieved the select entry */
+    onListItemSelected?(entry: ReactElement): void;
 }
 type ListProps = IListProps;
 
@@ -94,7 +94,7 @@ const List: React.FC<ListProps> = ({
     /**
      * Handle the blur event on the list -> we should reset the selection.
      */
-    const onListBlured = (): void => {
+    const onListBlurred = (): void => {
         resetActiveIndex(true);
     };
 
@@ -122,7 +122,7 @@ const List: React.FC<ListProps> = ({
 
     /**
      * Handle keyboard interactions
-     * @param  evt Keybord input event
+     * @param evt Keyboard input event
      */
     const onKeyInteraction = (evt: React.KeyboardEvent<HTMLUListElement>): void => {
         if (!isClickable) {
@@ -154,13 +154,13 @@ const List: React.FC<ListProps> = ({
      * @return Index of the element to activate.
      */
     const selectItemOnKeyDown = (previous: boolean): number => {
-        const lookupTable: ListChild[] = children
+        const lookupTable: ReactElement[] = children
             .slice(activeItemIndex + 1)
             .concat(children.slice(0, activeItemIndex + 1));
 
         if (previous) {
             lookupTable.reverse();
-            const first: ListChild = lookupTable.shift();
+            const first = lookupTable.shift() as ReactElement;
             lookupTable.push(first);
         }
 
@@ -174,7 +174,7 @@ const List: React.FC<ListProps> = ({
             if (nextIdx < 0) {
                 nextIdx = lookupTable.length - 1;
             }
-            if (child.type.name === 'ListItem') {
+            if (isComponent(ListItem)(child)) {
                 break;
             }
         }
@@ -194,14 +194,14 @@ const List: React.FC<ListProps> = ({
             tabIndex={isClickable ? 0 : -1}
             onKeyDown={onKeyInteraction}
             onKeyPress={onKeyInteraction}
-            onBlur={onListBlured}
+            onBlur={onListBlurred}
             onFocus={onListFocused}
             ref={listElementRef}
             {...props}
         >
-            {children.map((elm: ListChild, idx: number) => {
+            {children.map((elm: ReactElement, idx: number) => {
                 if (isClickable && isComponent(ListItem)(elm)) {
-                    const elemProps: ListItemProps = {};
+                    const elemProps: Partial<ListItemProps> = {};
                     elemProps.onMouseDown = (evt: React.MouseEvent): void => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
                     elemProps.isClickable = isClickable;

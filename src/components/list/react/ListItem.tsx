@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, { ReactElement, ReactNode, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -24,21 +24,31 @@ enum ListItemSize {
  * Defines the props of the component.
  */
 interface IListItemProps extends IGenericProps {
-    /* Whether the list item is selected or not */
-    isSelected?: boolean;
-    /* Whether the list item can be clicked */
-    isClickable?: boolean;
-    /* Component size*/
-    size?: ListItemSize;
-    /* before element */
-    before?: ReactElement;
-    /* after element */
+    /** After content element */
     after?: ReactElement;
-    /* Is this element active */
+
+    /** Before content element. */
+    before?: ReactElement;
+
+    /** List item content. */
+    children: string | ReactNode;
+
+    /** Whether the list item is active. */
     isActive?: boolean;
-    /* theme */
+
+    /** Whether the list item can be clicked. */
+    isClickable?: boolean;
+
+    /** Whether the list item is selected or not. */
+    isSelected?: boolean;
+
+    /** List item size. */
+    size?: ListItemSize;
+
+    /** Theme. */
     theme?: Theme;
-    /* Callback used to retrieved the selected entry*/
+
+    /** Callback used to retrieved the selected entry. */
     onItemSelected?(): void;
 }
 type ListItemProps = IListItemProps;
@@ -115,7 +125,8 @@ const ListItem: React.FC<ListItemProps> = ({
     };
 
     /**
-     * Currying the on entre press behavior.
+     * Currying the on enter press behavior.
+     *
      * @return Returns either undefined or a callback
      */
     const onKeyDown = (): Callback | undefined => {
