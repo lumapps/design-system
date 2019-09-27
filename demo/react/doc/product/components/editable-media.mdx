@@ -1,0 +1,92 @@
+```javascript import
+import { CSSProperties, ReactElement, useState } from 'react';
+import { Alignment, EditableMedia, Grid, GridItem, IconButton, Theme, Size } from 'LumX';
+import { mdiDelete, mdiEye, mdiPencil } from 'LumX/icons';
+```
+
+# EditableMedia
+
+**Featured Image Pick or upload a picture. It will show up in the preview of this content.**
+
+## Default
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [image, setImage] = useState();
+    const handleClick = () => {
+        const newImage = image ? undefined : 'https://picsum.photos/400/400/?random';
+        setImage(newImage);
+    };
+
+    const removeImage = () => {
+        setImage();
+    };
+
+    const getControls = (size = 'm') => (
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+            <div className="lumx-spacing-margin-right-regular">
+                <IconButton
+                    color="dark"
+                    emphasis="low"
+                    hasBackground={true}
+                    icon={mdiPencil}
+                    size={size}
+                />
+            </div>
+
+            <div className="lumx-spacing-margin-right-regular">
+                <IconButton
+                    color="dark"
+                    emphasis="low"
+                    hasBackground={true}
+                    icon={mdiEye}
+                    size={size}
+                />
+            </div>
+
+            <div>
+                <IconButton
+                    color="dark"
+                    emphasis="low"
+                    hasBackground={true}
+                    onClick={removeImage}
+                    icon={mdiDelete}
+                    size={size}
+                />
+            </div>
+        </div>
+    );
+
+    return(
+        <>
+            <EditableMedia
+                helper="Pick or upload a picture. It will show up in the preview of this content."
+                label="Featured Image"
+                placeholder="Add featured image"
+                image={image}
+                theme={theme}
+                onClick={handleClick}
+                theme={theme}
+            >
+                {getControls()}
+            </EditableMedia>
+
+            <EditableMedia
+                placeholder="Add profile picture"
+                image={image}
+                theme={theme}
+                variant="avatar"
+                onClick={handleClick}
+                size={Size.xl}
+                theme={theme}
+            >
+                {getControls('s')}
+            </EditableMedia>
+        </>
+    );
+};
+```
+
+### Properties
+
+<PropTable component="EditableMedia" />
