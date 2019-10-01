@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `EditableMedia` component.
+
 ### Changed
 
 -   _[BREAKING]_ The `label` and `helper` of the `Checkbox` component are now props and not children.
