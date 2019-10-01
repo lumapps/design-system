@@ -54,6 +54,10 @@
             }
         }
 
+        &:first-child {
+            padding-left: $lumx-spacing-unit * 3;
+        }
+
         #{$self}--has-before &:first-child {
             @include lumx-table-cell-before;
         }
