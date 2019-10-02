@@ -9,7 +9,7 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
 ## Default
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(4);
     return (
         <>
             <pre>{`Adjust threshold: ${value}`}</pre>
@@ -20,10 +20,8 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
                 max={10}
                 min={0}
                 theme={theme}
-                defaultValue={4}
-                onChange={val => {
-                    setValue(val);
-                }}
+                value={value}
+                onChange={setValue}
             />
         </>
     )
@@ -33,7 +31,7 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
 ## Without min and max labels
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(20);
     return (
         <>
                 <Slider
@@ -42,10 +40,8 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
                     min={0}
                     hideMinMaxlabel
                     theme={theme}
-                    defaultValue={20}
-                    onChange={val => {
-                        setValue(val);
-                    }}
+                    value={value}
+                    onChange={setValue}
                 />
         </>
     )
@@ -55,8 +51,8 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
 ## Precision
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
-    const [value, setValue] = useState(0);
-    const [value2, setValue2] = useState(0);
+    const [value, setValue] = useState(4.23765);
+    const [value2, setValue2] = useState(42.99);
     return (
         <>
                 <pre>{`Rocket science precision: ${value}`  }</pre>
@@ -65,10 +61,8 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
                 min={0}
                 theme={theme}
                 precision={5}
-                defaultValue={4.23765}
-                onChange={val => {
-                    setValue(val);
-                }}
+                value={value}
+                onChange={setValue}
             />
             <br />
             <pre>{`Change price: $${value2}`}</pre>
@@ -77,10 +71,8 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
                 min={0}
                 theme={theme}
                 precision={2}
-                defaultValue={42.99}
-                onChange={val=> {
-                    setValue2(val);
-                }}
+                value={value2}
+                onChange={setValue2}
             />
         </>
     )
@@ -90,7 +82,7 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
 ## Steps
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState(40);
     return (
         <>
             <pre>{`Change temperature: ${value}°C`}</pre>
@@ -99,16 +91,14 @@ import { mdiSpeaker, mdiSpeakerOff } from 'LumX/icons';
                 min={30}
                 steps={5}
                 theme={theme}
-                defaultValue={40}
-                onChange={val => {
-                    setValue(val);
-                }}
+                value={value}
+                onChange={setValue}
             />
         </>
     )
 };
 ```
 
-# Properties 
+# Properties
 
 <PropTable component="Slider" />
