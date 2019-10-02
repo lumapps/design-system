@@ -12,7 +12,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Authorized size values.
  */
-type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl;
+type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /////////////////////////////
 

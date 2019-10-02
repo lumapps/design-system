@@ -1,0 +1,325 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EditableMedia> Props should forward any CSS class 1`] = `
+<div
+  className="component component--is-tested lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__cta"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="lumx-editable-media__cta-content"
+      >
+        <Icon
+          className="lumx-editable-media__cta-icon"
+          color="dark"
+          icon="M5,3C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z"
+          size="s"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should forward any other prop 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+  testProperty={Object {}}
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__cta"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="lumx-editable-media__cta-content"
+      >
+        <Icon
+          className="lumx-editable-media__cta-icon"
+          color="dark"
+          icon="M5,3C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z"
+          size="s"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should not render EditableMedia children if no image is displayed 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__cta"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="lumx-editable-media__cta-content"
+      >
+        <Icon
+          className="lumx-editable-media__cta-icon"
+          color="dark"
+          icon="M5,3C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z"
+          size="s"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should render EditableMedia children if image is displayed 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__thumbnail"
+    >
+      <Thumbnail
+        aspectRatio="horizontal"
+        image="http://localhost/fakeImage.svg"
+        onClick={[Function]}
+        size="xxl"
+        tabIndex={0}
+        theme="light"
+        variant="rounded"
+      />
+    </div>
+    <div
+      className="lumx-editable-media__actions"
+    >
+      <div>
+        I am the other test child
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should render EditableMedia with Avatar variant 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-avatar"
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__avatar"
+    >
+      <Avatar
+        image="http://localhost/fakeImg.svg"
+        onClick={[Function]}
+        onKeyPress={[Function]}
+        size="xxl"
+        tabIndex={0}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-editable-media__actions"
+    />
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should render EditableMedia with an image 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__thumbnail"
+    >
+      <Thumbnail
+        aspectRatio="horizontal"
+        image="http://localhost/fakeImg.svg"
+        onClick={[Function]}
+        size="xxl"
+        tabIndex={0}
+        theme="light"
+        variant="rounded"
+      />
+    </div>
+    <div
+      className="lumx-editable-media__actions"
+    />
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should render EditableMedia with given size 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__cta"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="lumx-editable-media__cta-content"
+      >
+        <Icon
+          className="lumx-editable-media__cta-icon"
+          color="dark"
+          icon="M5,3C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z"
+          size="s"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should render EditableMedia with helper 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <span
+    className="lumx-editable-media__helper"
+  >
+    Test Helper
+  </span>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__cta"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="lumx-editable-media__cta-content"
+      >
+        <Icon
+          className="lumx-editable-media__cta-icon"
+          color="dark"
+          icon="M5,3C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z"
+          size="s"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should render EditableMedia with label 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--has-label lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <span
+    className="lumx-editable-media__label"
+  >
+    Test Label
+  </span>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__cta"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="lumx-editable-media__cta-content"
+      >
+        <Icon
+          className="lumx-editable-media__cta-icon"
+          color="dark"
+          icon="M5,3C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z"
+          size="s"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Props should render EditableMedia with placeholder 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__cta"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="lumx-editable-media__cta-content"
+      >
+        <Icon
+          className="lumx-editable-media__cta-icon"
+          color="dark"
+          icon="M5,3C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z"
+          size="s"
+        />
+        <span
+          className="lumx-editable-media__cta-placeholder"
+        >
+          Test Placeholder
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<EditableMedia> Snapshots and structure should render EditableMedia without label or helper 1`] = `
+<div
+  className="lumx-editable-media lumx-editable-media--size-xxl lumx-editable-media--theme-light lumx-editable-media--variant-thumbnail"
+>
+  <div
+    className="lumx-editable-media__wrapper"
+  >
+    <div
+      className="lumx-editable-media__cta"
+      onClick={[Function]}
+      onKeyPress={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className="lumx-editable-media__cta-content"
+      >
+        <Icon
+          className="lumx-editable-media__cta-icon"
+          color="dark"
+          icon="M5,3C3.9,3 3,3.9 3,5V19C3,20.1 3.9,21 5,21H14.09C14.03,20.67 14,20.34 14,20C14,19.32 14.12,18.64 14.35,18H5L8.5,13.5L11,16.5L14.5,12L16.73,14.97C17.7,14.34 18.84,14 20,14C20.34,14 20.67,14.03 21,14.09V5C21,3.89 20.1,3 19,3H5M19,16V19H16V21H19V24H21V21H24V19H21V16H19Z"
+          size="s"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

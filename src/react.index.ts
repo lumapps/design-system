@@ -18,6 +18,8 @@ export { Divider, DividerProps } from './components/divider/react/Divider';
 
 export { Dropdown, DropdownProps } from './components/dropdown/react/Dropdown';
 
+export { EditableMedia, EditableMediaProps } from './components/editable-media/react/EditableMedia';
+
 export { Icon, IconProps } from './components/icon/react/Icon';
 
 export { IconButton, IconButtonProps } from './components/button/react/IconButton';

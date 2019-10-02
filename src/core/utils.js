@@ -156,7 +156,7 @@ function detectSwipe(el, cb = noop) {
  */
 function onEnterPressed(cb) {
     return (evt) => {
-        if (evt.keyCode !== ENTER_KEY_CODE) {
+        if (evt.key !== 'Enter') {
             return;
         }
 

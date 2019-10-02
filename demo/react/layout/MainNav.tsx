@@ -51,6 +51,7 @@ const ITEMS: Item[] = [
                     'Date picker',
                     'Dialog',
                     'Dropdown',
+                    'Editable media',
                     'Expansion panel',
                     'Image block',
                     'Lightbox',
