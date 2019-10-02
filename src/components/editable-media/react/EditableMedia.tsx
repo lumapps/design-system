@@ -132,7 +132,12 @@ const EditableMedia: React.FC<EditableMediaProps> = ({
                     tabIndex={0}
                 >
                     <div className="lumx-editable-media__cta-content">
-                        <Icon className="lumx-editable-media__cta-icon" icon={mdiImagePlus} size={Size.s} />
+                        <Icon
+                            className="lumx-editable-media__cta-icon"
+                            color={!theme || theme === 'light' ? 'dark' : 'light'}
+                            icon={mdiImagePlus}
+                            size={Size.s}
+                        />
 
                         {placeholder && <span className="lumx-editable-media__cta-placeholder">{placeholder}</span>}
                     </div>
@@ -145,6 +150,7 @@ const EditableMedia: React.FC<EditableMediaProps> = ({
                         aspectRatio={ThumbnailAspectRatio.horizontal}
                         image={image}
                         size={size}
+                        theme={theme}
                         variant={ThumbnailVariant.rounded}
                         onClick={onClick}
                         tabIndex={0}
@@ -157,6 +163,7 @@ const EditableMedia: React.FC<EditableMediaProps> = ({
                     <Avatar
                         image={image}
                         size={size}
+                        theme={theme}
                         onClick={onClick}
                         onKeyPress={onEnterPressed(onClick as Callback)}
                         tabIndex={0}
