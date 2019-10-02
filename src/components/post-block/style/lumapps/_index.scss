@@ -54,13 +54,28 @@
 
         display: block;
         margin-bottom: $lumx-spacing-unit;
-        color: lumx-theme-color-variant('dark', 'L2');
+
+        #{$self}--theme-light & {
+            color: lumx-link('dark', 'L2');
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-link('light', 'L2');
+        }
     }
 
     &__text {
         @include lumx-typography('body1');
 
         margin-bottom: $lumx-spacing-unit;
+
+        #{$self}--theme-light & {
+            @include lumx-link('dark');
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-link('light');
+        }
     }
 
     &__toolbar {
