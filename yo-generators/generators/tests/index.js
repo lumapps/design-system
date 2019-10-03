@@ -1,6 +1,6 @@
 const kebabCase = require('lodash/kebabCase');
 
-const MainGenerator = require('../app');
+const MainGenerator = require('../');
 
 /////////////////////////////
 
@@ -24,8 +24,6 @@ module.exports = class extends MainGenerator {
             this.destinationPath(`${path}/${this.options.name || this.answers.name}.test.tsx`),
             {
                 componentName: this.options.name || this.answers.name,
-
-                ...this._getValidationsOptions(),
             },
         );
     }

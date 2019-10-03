@@ -20,6 +20,7 @@ Here are the guidelines we'd like you to follow.
 -   [Got a question or a problem?](#got-a-question-or-a-problem-)
 -   [Found an issue?](#found-an-issue-)
 -   [Want a feature?](#want-a-feature-)
+-   [Want to create a new React Component?](#create-a-new-react-component-)
 -   [Submission guidelines](#submission-guidelines)
 -   [Coding rules](#coding-rules)
 -   [Git commit guidelines](#git-commit-guidelines)
@@ -43,6 +44,18 @@ Before opening a Pull Request, please see the Submission Guidelines below.
 
 You can request a new feature by submitting an issue to our [GitHub Repository](https://github.com/lumapps/design-system/issues).
 If you would like to implement a new feature then consider what kind of change it is, discuss it with us before hand in your issue, so that we can better coordinate our efforts, prevent duplication of work, and help you to craft the change so that it is successfully accepted into the project.
+
+## <a name="create-a-new-react-component-"></a> Want to create a new React Component?
+
+The first step to create a new React component is to run:
+
+```
+yarn scaffold
+```
+
+This script will generate a TSX file for the component code, a TSX file for the component tests and an MDX file to demo this component.
+
+To export your component into the `@lumx/react` NPM package, you also have to make sure to update the `react.index.tsx` file.
 
 ## <a name="submission-guidelines"></a> Submission guidelines
 
@@ -192,8 +205,8 @@ If the commit reverts a previous commit, it should contains the reverted commit 
 
 ### Subject
 
-A brief but meaningfull description of the change.
-Here are some recommandation for writing your subject:
+A brief but meaningful description of the change.
+Here are some recommendation for writing your subject:
 
 -   use the imperative, present tense: "change" not "changed" nor "changes"
 -   don't capitalize first letter
