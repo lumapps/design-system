@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ The `checked` props of the `Checkbox` component has been renamed `value`.
 -   _[BREAKING]_ The `onChange` callback of the `Checkbox` component now has a boolean value argument instead of the `{ checked: boolean }` object
 -   TypeScript and JSDoc cleanup for `List` component
+-   Adding dark and light theme variant for text and meta blocks for `PostBlock` component.
 
 ### Removed
 
