@@ -187,7 +187,8 @@
         "webpack-merge": "^4.2.1",
         "webpack-notifier": "^1.7.0",
         "webpackbar": "^3.1.5",
-        "yo": "^2.0.5"
+        "yeoman-generator": "^4.1.0",
+        "yo": "^3.1.0"
     },
     "engines": {
         "node": ">= 10.0.0",
@@ -300,9 +301,7 @@
         "release:major": "npm run release:core:major && npm run release:react:major && npm run release:angularjs:major && npm run release:icons:major",
         "release:minor": "npm run release:core:minor && npm run release:react:minor && npm run release:angularjs:minor && npm run release:icons:minor",
         "release:patch": "npm run release:core:patch && npm run release:react:patch && npm run release:angularjs:patch && npm run release:icons:patch",
-        "scaffold": "yarn yo ./yo-generators/generator-lumx-component/generators/app/index.js --with-tests --with-demo",
-        "scaffold:component": "yarn yo ./yo-generators/generator-lumx-component/generators/component/index.js",
-        "scaffold:tests": "yarn yo ./yo-generators/generator-lumx-component/generators/tests/index.js",
+        "scaffold": "yarn yo ./yo-generators/ --with-tests --with-demo",
         "setup": "yarn install; cd ./src/icons/; yarn install; cd -",
         "setup:git-hooks": "node node_modules/husky/bin/uninstall.js && node node_modules/husky/bin/install.js",
         "start:angularjs": "nodemon --watch webpack --ignore webpack/react --ignore webpack/.eslintrc.js node_modules/.bin/webpack-dev-server -- --config webpack/angularjs/webpack.dev.js --hot",
