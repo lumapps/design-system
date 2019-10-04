@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0][] - 2019-10-03
+
 ### Added
 
 -   Added `EditableMedia` component.
@@ -22,3 +24,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 -   The `tsx` demo of the `Checkbox` and `List` component has been removed
+
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/lumapps/design-system/tree/v0.10.0
