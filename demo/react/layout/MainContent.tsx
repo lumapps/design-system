@@ -15,6 +15,7 @@ const renderContent = (path: string, demo: ReactElement | null | undefined): Rea
             </span>
         );
     }
+
     return demo;
 };
 
@@ -42,6 +43,7 @@ const useLoadContent = (path: string): ReactElement | null | undefined => {
  */
 const MainContent = ({ path }: { path: string }): ReactElement => {
     const content = useLoadContent(path);
+
     return renderContent(path, content);
 };
 
