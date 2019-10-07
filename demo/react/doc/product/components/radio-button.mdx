@@ -1,5 +1,6 @@
 ```javascript import
-import { RadioButton, RadioGroup, RadioButtonHelper, RadioButtonLabel, Theme } from 'LumX';
+import { useState } from 'react';
+import { RadioButton, RadioGroup, Theme } from 'LumX';
 ```
 
 # Radio button
@@ -9,48 +10,78 @@ import { RadioButton, RadioGroup, RadioButtonHelper, RadioButtonLabel, Theme } f
 ## Default
 
 ```javascript jsx withThemeSwitcher disableGrid
-(theme) => (
-    <>
-        <RadioGroup>
-            <RadioButton theme={theme} value="lorem" name="test1" checked={true}>
-                <RadioButtonLabel>Radio button 1</RadioButtonLabel>
-            </RadioButton>
-            <RadioButton disabled theme={theme} value="ipsum" name="test1" checked={false}>
-                <RadioButtonLabel>Radio button 2</RadioButtonLabel>
-            </RadioButton>
-            <RadioButton theme={theme} value="dolor" name="test1" checked={false}>
-                <RadioButtonLabel>Radio button 3</RadioButtonLabel>
-            </RadioButton>
-        </RadioGroup>
-    </>
-);
+(theme) => {
+    const [value, setValue] = useState('lorem');
+
+    return (
+        <>
+            <RadioGroup>
+                <RadioButton
+                    checked={value === 'lorem'}
+                    label="Radio button 1"
+                    name="test1"
+                    theme={theme}
+                    value="lorem"
+                    onChange={setValue}
+                />
+                <RadioButton
+                    disabled
+                    label="Radio button 2"
+                    name="test1"
+                    theme={theme}
+                    value="ipsum"
+                />
+                <RadioButton
+                    checked={value === 'dolor'}
+                    name="test1"
+                    label="Radio button 3"
+                    theme={theme}
+                    value="dolor"
+                    onChange={setValue}
+                />
+            </RadioGroup>
+        </>
+    );
+};
 ```
 
 ## With optional helper text
 
 ```javascript jsx withThemeSwitcher disableGrid
-(theme) => (
-    <>
-        <RadioGroup>
-            <RadioButton theme={theme} value="lorem" name="test1" checked={true}>
-                <RadioButtonLabel>Radio button with helper 1</RadioButtonLabel>
-                <RadioButtonHelper>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.{' '}
-                </RadioButtonHelper>
-            </RadioButton>
-            <RadioButton disabled theme={theme} value="ipsum" name="test1" checked={false}>
-                <RadioButtonLabel>Radio button with helper 2</RadioButtonLabel>
-                <RadioButtonHelper>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.{' '}
-                </RadioButtonHelper>
-            </RadioButton>
-            <RadioButton theme={theme} value="dolor" name="test1" checked={false}>
-                <RadioButtonLabel>Radio button with helper 3</RadioButtonLabel>
-                <RadioButtonHelper>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.{' '}
-                </RadioButtonHelper>
-            </RadioButton>
-        </RadioGroup>
-    </>
-);
+(theme) => {
+    const [value, setValue] = useState('lorem');
+
+    return (
+        <>
+            <RadioGroup>
+                <RadioButton
+                    checked={value === 'lorem'}
+                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                    label="Radio button with help 1"
+                    name="test2"
+                    theme={theme}
+                    value="lorem"
+                    onChange={setValue}
+                />
+                <RadioButton
+                    disabled
+                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                    label="Radio button with help 2"
+                    name="test2"
+                    theme={theme}
+                    value="ipsum"
+                />
+                <RadioButton
+                    checked={value === 'dolor'}
+                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                    label="Radio button with help 3"
+                    name="test2"
+                    theme={theme}
+                    value="dolor"
+                    onChange={setValue}
+                />
+            </RadioGroup>
+        </>
+    );
+};
 ```

@@ -10,10 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   TypeScript and JSDoc cleanup for `SideNavigation` component.
+-   _[BREAKING]_ The `label` and `helper` of the `RadioButton` component are now props and not children.
+-   _[BREAKING]_ The `onChange` callback of the `RadioButton` component now provides the value directly without wrapping object.
 
 ### Removed
 
--   The `tsx` demo of the `SideNavigation` component has been removed
+-   The `tsx` demo of the `SideNavigation` and `RadioButton` component.
 
 ## [0.10.0][] - 2019-10-03
 
