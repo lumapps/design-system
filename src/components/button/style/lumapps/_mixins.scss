@@ -4,8 +4,8 @@
     align-items: center;
     justify-content: center;
     padding: 0;
-    margin: 0;
     border: none;
+    margin: 0;
     outline: none;
     text-decoration: none;
     user-select: none;
@@ -21,9 +21,35 @@
 
     @if $variant == 'variant-button' {
         border-radius: $lumx-theme-border-radius;
+
+        @if $emphasis == 'emphasis-high' or $emphasis == 'emphasis-medium' {
+            @if $size == 'm' {
+                padding: 0 $lumx-spacing-unit * 2;
+            } @else if $size == 's' {
+                padding: 0 $lumx-spacing-unit * 1.5;
+            }
+        } @else if $emphasis == 'emphasis-low' {
+            padding: 0 $lumx-spacing-unit;
+        }
     } @else if $variant == 'variant-icon' {
         width: map-get($lumx-sizes, $size);
         border-radius: 50%;
+    }
+}
+
+@mixin lumx-button-reduced-spacing($size, $icon-position) {
+    @if $size == 'm' {
+        @if $icon-position == 'left' {
+            padding-left: $lumx-spacing-unit * 1.5;
+        } @else if $icon-position == 'right' {
+            padding-right: $lumx-spacing-unit * 1.5;
+        }
+    } @else if $size == 's' {
+        @if $icon-position == 'left' {
+            padding-left: $lumx-spacing-unit;
+        } @else if $icon-position == 'right' {
+            padding-right: $lumx-spacing-unit;
+        }
     }
 }
 
@@ -47,7 +73,19 @@
     }
 }
 
-@mixin lumx-button-icon($variant, $position, $size) {
+@mixin lumx-button($emphasis, $variant, $size, $color, $theme: null, $icon-position: null) {
+    @include lumx-state-transition;
+    @include lumx-button-base;
+    @include lumx-button-size($emphasis, $variant, $size);
+
+    @if $icon-position {
+        @include lumx-button-size($size, $icon-position);
+    }
+
+    @include lumx-button-color($emphasis, $color, $theme);
+}
+
+@mixin lumx-button-icon($variant, $size, $position: null) {
     font-size: map-get($lumx-button-icon-sizes, $size);
     pointer-events: none;
 

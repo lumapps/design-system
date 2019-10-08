@@ -3,42 +3,8 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-button {
-    @include lumx-button-base;
     @include lumx-state-transition;
-}
-
-/* Button padding
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-high,
-.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-medium {
-    &.#{$lumx-base-prefix}-button--size-m {
-        padding: 0 $lumx-spacing-unit * 2;
-
-        &.#{$lumx-base-prefix}-button--has-left-icon {
-            padding-left: $lumx-spacing-unit * 1.5;
-        }
-
-        &.#{$lumx-base-prefix}-button--has-right-icon {
-            padding-right: $lumx-spacing-unit * 1.5;
-        }
-    }
-
-    &.#{$lumx-base-prefix}-button--size-s {
-        padding: 0 $lumx-spacing-unit * 1.5;
-
-        &.#{$lumx-base-prefix}-button--has-left-icon {
-            padding-left: $lumx-spacing-unit;
-        }
-
-        &.#{$lumx-base-prefix}-button--has-right-icon {
-            padding-right: $lumx-spacing-unit;
-        }
-    }
-}
-
-.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-low {
-    padding: 0 $lumx-spacing-unit;
+    @include lumx-button-base;
 }
 
 /* Button sizes
@@ -79,27 +45,49 @@
 
             &.#{$lumx-base-prefix}-button--variant-button {
                 i:first-child {
-                    @include lumx-button-icon('variant-button', 'position-left', $key);
+                    @include lumx-button-icon('variant-button', $key, 'position-left');
                 }
 
                 i:last-child {
-                    @include lumx-button-icon('variant-button', 'position-right', $key);
+                    @include lumx-button-icon('variant-button', $key, 'position-right');
                 }
             }
 
             &.#{$lumx-base-prefix}-button--variant-icon {
-                i:first-child {
-                    @include lumx-button-icon('variant-icon', 'position-left', $key);
-                }
-
-                i:last-child {
-                    @include lumx-button-icon('variant-icon', 'position-right', $key);
+                i {
+                    @include lumx-button-icon('variant-icon', $key);
                 }
             }
 
             span {
                 @include lumx-button-text($key);
             }
+        }
+    }
+}
+
+/* Button reduced spacing
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-high,
+.#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-medium {
+    &.#{$lumx-base-prefix}-button--size-m {
+        &.#{$lumx-base-prefix}-button--has-left-icon {
+            @include lumx-button-reduced-spacing('m', 'left');
+        }
+
+        &.#{$lumx-base-prefix}-button--has-right-icon {
+            @include lumx-button-reduced-spacing('m', 'right');
+        }
+    }
+
+    &.#{$lumx-base-prefix}-button--size-s {
+        &.#{$lumx-base-prefix}-button--has-left-icon {
+            @include lumx-button-reduced-spacing('s', 'left');
+        }
+
+        &.#{$lumx-base-prefix}-button--has-right-icon {
+            @include lumx-button-reduced-spacing('s', 'right');
         }
     }
 }
