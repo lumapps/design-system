@@ -127,36 +127,12 @@
 .#{$lumx-base-prefix}-button--is-selected {
     &.#{$lumx-base-prefix}-button--color-dark,
     &.#{$lumx-base-prefix}-button--theme-light {
-        @include lumx-state-as-selected('state-default', 'dark');
-
-        &:hover {
-            @include lumx-state-as-selected('state-hover', 'dark');
-        }
-
-        &:active {
-            @include lumx-state-as-selected('state-active', 'dark');
-        }
-
-        &[data-focus-visible-added] {
-            @include lumx-state-as-selected('state-focus', 'dark');
-        }
+        @include lumx-button-is-selected('dark');
     }
 
     &.#{$lumx-base-prefix}-button--color-light,
     &.#{$lumx-base-prefix}-button--theme-dark {
-        @include lumx-state-as-selected('state-default', 'light');
-
-        &:hover {
-            @include lumx-state-as-selected('state-hover', 'light');
-        }
-
-        &:active {
-            @include lumx-state-as-selected('state-active', 'light');
-        }
-
-        &[data-focus-visible-added] {
-            @include lumx-state-as-selected('state-focus', 'light');
-        }
+        @include lumx-button-is-selected('light');
     }
 }
 

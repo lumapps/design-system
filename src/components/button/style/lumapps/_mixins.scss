@@ -73,6 +73,22 @@
     }
 }
 
+@mixin lumx-button-is-selected($theme) {
+    @include lumx-state-as-selected('state-default', $theme);
+
+    &:hover {
+        @include lumx-state-as-selected('state-hover', $theme);
+    }
+
+    &:active {
+        @include lumx-state-as-selected('state-active', $theme);
+    }
+
+    &[data-focus-visible-added] {
+        @include lumx-state-as-selected('state-focus', $theme);
+    }
+}
+
 @mixin lumx-button($emphasis, $variant, $size, $color, $theme: null, $icon-position: null) {
     @include lumx-state-transition;
     @include lumx-button-base;
