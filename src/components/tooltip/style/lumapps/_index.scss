@@ -24,7 +24,7 @@
         border-style: solid;
         border-color: lumx-theme-color-variant('light', 'N');
 
-        #{$self}[x-placement^='top'] & {
+        #{$self}--position-top & {
             bottom: -$lumx-tooltip-arrow-size;
             left: 50%;
             margin-top: 0;
@@ -36,7 +36,7 @@
             border-left-color: transparent;
         }
 
-        #{$self}[x-placement^='bottom'] & {
+        #{$self}--position-bottom & {
             top: -$lumx-tooltip-arrow-size;
             left: 50%;
             margin-top: 0;
@@ -48,7 +48,7 @@
             border-left-color: transparent;
         }
 
-        #{$self}[x-placement^='left'] & {
+        #{$self}--position-left & {
             top: 50%;
             right: -$lumx-tooltip-arrow-size;
             margin-top: -$lumx-tooltip-arrow-size;
@@ -60,7 +60,7 @@
             border-bottom-color: transparent;
         }
 
-        #{$self}[x-placement^='right'] & {
+        #{$self}--position-right & {
             top: 50%;
             left: -$lumx-tooltip-arrow-size;
             margin-top: -$lumx-tooltip-arrow-size;

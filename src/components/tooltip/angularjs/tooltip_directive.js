@@ -80,29 +80,25 @@ function TooltipController($element, $timeout, $window) {
             top: $element.offset().top - angular.element($window).scrollTop(),
             width: $element.outerWidth(),
         };
+        const tooltipPosition = angular.isDefined(lumx.position) ? lumx.position : 'top';
         const tooltipProps = {};
 
-        _tooltip.css({ position: 'absolute' }).appendTo('body');
+        _tooltip
+            .addClass(`${CSS_PREFIX}-tooltip--position-${tooltipPosition}`)
+            .css({ position: 'absolute' })
+            .appendTo('body');
 
         /* eslint-disable no-magic-numbers */
-        if (!lumx.position || lumx.position === 'top') {
-            _tooltip.attr('x-placement', 'top');
-
+        if (tooltipPosition === 'top') {
             tooltipProps.x = targetProps.left - _tooltip.outerWidth() / 2 + targetProps.width / 2;
             tooltipProps.y = targetProps.top - _tooltip.outerHeight() - _OFFSET;
-        } else if (lumx.position === 'bottom') {
-            _tooltip.attr('x-placement', 'bottom');
-
+        } else if (tooltipPosition === 'bottom') {
             tooltipProps.x = targetProps.left - _tooltip.outerWidth() / 2 + targetProps.width / 2;
             tooltipProps.y = targetProps.top + targetProps.height + _OFFSET;
-        } else if (lumx.position === 'left') {
-            _tooltip.attr('x-placement', 'left');
-
+        } else if (tooltipPosition === 'left') {
             tooltipProps.x = targetProps.left - _tooltip.outerWidth() - _OFFSET;
             tooltipProps.y = targetProps.top + targetProps.height / 2 - _tooltip.outerHeight() / 2;
-        } else if (lumx.position === 'right') {
-            _tooltip.attr('x-placement', 'right');
-
+        } else if (tooltipPosition === 'right') {
             tooltipProps.x = targetProps.left + targetProps.width + _OFFSET;
             tooltipProps.y = targetProps.top + targetProps.height / 2 - _tooltip.outerHeight() / 2;
         }
