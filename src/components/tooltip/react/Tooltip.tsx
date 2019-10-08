@@ -66,7 +66,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    delay: 0,
+    delay: 500,
     placement: 'bottom',
 };
 
@@ -164,23 +164,23 @@ const Tooltip: React.FC<TooltipProps> = ({
      * Handle mouse over anchor element.
      */
     const handleMouseEnter = (): void => {
-        if (timer) {
-            clearTimeout(timer);
-            setTimer(0);
-        }
+        const id: number = setTimeout(() => {
+            setIsOpen(true);
+        }, delay);
 
-        setIsOpen(true);
+        setTimer(id);
     };
 
     /**
      * Handle mouse out anchor element.
      */
     const handleMouseLeave = (): void => {
-        const id: number = setTimeout(() => {
-            setIsOpen(false);
-        }, delay);
+        if (timer) {
+            clearTimeout(timer);
+            setTimer(0);
+        }
 
-        setTimer(id);
+        setIsOpen(false);
     };
 
     useEffect(() => {
