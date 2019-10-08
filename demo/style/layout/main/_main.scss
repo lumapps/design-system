@@ -5,7 +5,7 @@
 .main {
     flex: 1;
     justify-content: center;
-    padding: $lumx-spacing-unit * 6;
+    padding: $lumx-spacing-unit * 6 $lumx-spacing-unit * 6 0 $lumx-spacing-unit * 6;
     overflow-y: scroll;
 
     &__wrapper {
@@ -19,6 +19,7 @@
 
 .main-content {
     margin-top: $lumx-spacing-unit * 6;
+    margin-bottom: $lumx-spacing-unit * 16;
 
     &__wrapper {
         display: flex;
