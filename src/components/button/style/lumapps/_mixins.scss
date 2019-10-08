@@ -39,15 +39,15 @@
 
 @mixin lumx-button-reduced-spacing($size, $icon-position) {
     @if $size == 'm' {
-        @if $icon-position == 'left' {
+        @if $icon-position == 'position-left' {
             padding-left: $lumx-spacing-unit * 1.5;
-        } @else if $icon-position == 'right' {
+        } @else if $icon-position == 'position-right' {
             padding-right: $lumx-spacing-unit * 1.5;
         }
     } @else if $size == 's' {
-        @if $icon-position == 'left' {
+        @if $icon-position == 'position-left' {
             padding-left: $lumx-spacing-unit;
-        } @else if $icon-position == 'right' {
+        } @else if $icon-position == 'position-right' {
             padding-right: $lumx-spacing-unit;
         }
     }

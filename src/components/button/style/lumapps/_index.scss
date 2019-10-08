@@ -73,21 +73,21 @@
 .#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-medium {
     &.#{$lumx-base-prefix}-button--size-m {
         &.#{$lumx-base-prefix}-button--has-left-icon {
-            @include lumx-button-reduced-spacing('m', 'left');
+            @include lumx-button-reduced-spacing('m', 'position-left');
         }
 
         &.#{$lumx-base-prefix}-button--has-right-icon {
-            @include lumx-button-reduced-spacing('m', 'right');
+            @include lumx-button-reduced-spacing('m', 'position-right');
         }
     }
 
     &.#{$lumx-base-prefix}-button--size-s {
         &.#{$lumx-base-prefix}-button--has-left-icon {
-            @include lumx-button-reduced-spacing('s', 'left');
+            @include lumx-button-reduced-spacing('s', 'position-left');
         }
 
         &.#{$lumx-base-prefix}-button--has-right-icon {
-            @include lumx-button-reduced-spacing('s', 'right');
+            @include lumx-button-reduced-spacing('s', 'position-right');
         }
     }
 }
