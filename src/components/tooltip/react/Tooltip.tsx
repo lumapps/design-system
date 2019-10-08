@@ -70,6 +70,11 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     placement: 'bottom',
 };
 
+/**
+ * The offset from the target.
+ */
+const OFFSET = 8;
+
 /////////////////////////////
 
 /**
@@ -79,7 +84,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param anchorRef Ref of anchor element.
  * @param tooltipRef Ref of tooltip.
  * @param [dependencies=[placement, anchorRef, tooltipRef]] Dependencies of hook.
- * @return Position of the arrow on the tooltip.
+ * @return Position of the tooltip relative to the anchor element.
  */
 const useTooltipPosition: (
     placement: TooltipPlacement,
@@ -111,78 +116,19 @@ const useTooltipPosition: (
         }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
         switch (placement) {
             case 'top':
-                setPosition({ x: left + (width - widthTooltip) / 2, y: top - height });
+                setPosition({ x: left + (width - widthTooltip) / 2, y: top - height - OFFSET });
 
                 break;
             case 'right':
-                setPosition({ x: left + width, y: top + (height - heightTooltip) / 2 });
+                setPosition({ x: left + width + OFFSET, y: top + (height - heightTooltip) / 2 });
 
                 break;
             case 'bottom':
-                setPosition({ x: left + (width - widthTooltip) / 2, y: top + height });
+                setPosition({ x: left + (width - widthTooltip) / 2, y: top + height + OFFSET });
 
                 break;
             case 'left':
-                setPosition({ x: left - widthTooltip - 8, y: top + (height - heightTooltip) / 2 });
-
-                break;
-
-            default:
-                setPosition({ x: 0, y: 0 });
-
-                break;
-        }
-    }, dependencies);
-
-    return position;
-};
-
-/**
- * Calculate arrow position on the tooltip.
- *
- * @param placement Placement of tooltip.
- * @param tooltipRef Ref of tooltip.
- * @param [dependencies=[placement, tooltipRef]] Dependencies of hook.
- * @return Position of the arrow on the tooltip.
- */
-const useArrowPosition: (
-    placement: TooltipPlacement,
-    tooltipRef: React.RefObject<HTMLDivElement>,
-    // tslint:disable-next-line: no-any
-    dependencies?: any[],
-) => Position = (
-    placement: TooltipPlacement,
-    tooltipRef: React.RefObject<HTMLDivElement>,
-    // tslint:disable-next-line: no-any
-    dependencies: any[] = [placement, tooltipRef],
-): Position => {
-    const [position, setPosition] = useState<Position>({
-        x: 0,
-        y: 0,
-    });
-
-    useEffect((): void => {
-        if (!tooltipRef || !tooltipRef.current) {
-            return;
-        }
-
-        const {
-            width: widthTooltip,
-            height: heightTooltip,
-        }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
-        const arrowHeight = 5;
-        const arrowBorder = 5;
-        const arrowWidth = 10;
-
-        switch (placement) {
-            case 'top':
-            case 'bottom':
-                setPosition({ x: widthTooltip / 2 - arrowWidth, y: 0 });
-
-                break;
-            case 'right':
-            case 'left':
-                setPosition({ x: 0, y: heightTooltip / 2 - arrowHeight - arrowBorder });
+                setPosition({ x: left - widthTooltip - OFFSET, y: top + (height - heightTooltip) / 2 });
 
                 break;
 
@@ -262,30 +208,22 @@ const Tooltip: React.FC<TooltipProps> = ({
     ]);
 
     const cssTooltip: CSSProperties = {
-        left: 0,
-        position: 'fixed',
-        top: 0,
         transform: `translate3d(${tooltipPosition.x}px, ${tooltipPosition.y}px, 0px)`,
         visibility: isOpen ? 'visible' : 'hidden',
-        willChange: 'transform',
-        zIndex: 9999,
-    };
-
-    const arrowPosition: Position = useArrowPosition(placement!, tooltipRef, [placement, tooltipRef, isOpen]);
-    const cssArrow: CSSProperties = {
-        left: arrowPosition.x > 0 ? `${arrowPosition.x}px` : undefined,
-        top: arrowPosition.y > 0 ? `${arrowPosition.y}px` : undefined,
     };
 
     return createPortal(
         <div
             ref={tooltipRef}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: CLASSNAME }),
+                `${CLASSNAME}--position-${placement}`,
+            )}
             {...props}
             style={cssTooltip}
-            x-placement={placement}
         >
-            <div className={`${CLASSNAME}__arrow`} style={cssArrow} />
+            <div className={`${CLASSNAME}__arrow`} />
             <div className={`${CLASSNAME}__inner`}>{children}</div>
         </div>,
         document.body,
