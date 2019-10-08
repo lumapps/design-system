@@ -114,9 +114,10 @@ const useTooltipPosition: (
             width: widthTooltip,
             height: heightTooltip,
         }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
+
         switch (placement) {
             case 'top':
-                setPosition({ x: left + (width - widthTooltip) / 2, y: top - height - OFFSET });
+                setPosition({ x: left + (width - widthTooltip) / 2, y: top - heightTooltip - OFFSET });
 
                 break;
             case 'right':
