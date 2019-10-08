@@ -1,11 +1,11 @@
 ```javascript import
-import { ReactElement, useRef } from 'react';
+import { useRef } from 'react';
 import { Button, Tooltip } from 'LumX';
 ```
 
 # Tooltip
 
-```javascript jsx disableGrid
+```javascript jsx
 () => {
     const anchorRefTop = useRef(null);
     const anchorRefRight = useRef(null);
@@ -15,10 +15,10 @@ import { Button, Tooltip } from 'LumX';
 
     return (
         <>
-            <Button buttonRef={anchorRefTop}>Top</Button>{' '}
-            <Button buttonRef={anchorRefRight}>Right</Button>{' '}
-            <Button buttonRef={anchorRefBottom}>Bottom</Button>{' '}
-            <Button buttonRef={anchorRefLeft}>Left</Button>{' '}
+            <Button buttonRef={anchorRefTop}>Top</Button>
+            <Button buttonRef={anchorRefRight}>Right</Button>
+            <Button buttonRef={anchorRefBottom}>Bottom</Button>
+            <Button buttonRef={anchorRefLeft}>Left</Button>
             <Button buttonRef={anchorRefDelay}>With 2s delay</Button>
             <Tooltip anchorRef={anchorRefTop} placement="top">
                 Top Tooltip
@@ -39,3 +39,7 @@ import { Button, Tooltip } from 'LumX';
     );
 };
 ```
+
+### Properties
+
+<PropTable component="Tooltip" />
