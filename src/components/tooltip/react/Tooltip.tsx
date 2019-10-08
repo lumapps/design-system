@@ -69,7 +69,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     delay: 500,
-    placement: 'bottom',
+    placement: Placement.BOTTOM,
 };
 
 /**
@@ -88,16 +88,10 @@ const OFFSET = 8;
  * @param [dependencies=[placement, anchorRef, tooltipRef]] Dependencies of hook.
  * @return Position of the tooltip relative to the anchor element.
  */
-const useTooltipPosition: (
+const useTooltipPosition = (
     placement: TooltipPlacement,
-    anchorRef: React.RefObject<HTMLElement>,
-    tooltipRef: React.RefObject<HTMLDivElement>,
-    // tslint:disable-next-line: no-any
-    dependencies?: any[],
-) => Position = (
-    placement: TooltipPlacement,
-    anchorRef: React.RefObject<HTMLElement>,
-    tooltipRef: React.RefObject<HTMLDivElement>,
+    anchorRef: RefObject<HTMLElement>,
+    tooltipRef: RefObject<HTMLDivElement>,
     // tslint:disable-next-line: no-any
     dependencies: any[] = [placement, anchorRef, tooltipRef],
 ): Position => {
@@ -118,19 +112,19 @@ const useTooltipPosition: (
         }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
 
         switch (placement) {
-            case 'top':
+            case Placement.TOP:
                 setPosition({ x: left + (width - widthTooltip) / 2, y: top - heightTooltip - OFFSET });
 
                 break;
-            case 'right':
+            case Placement.RIGHT:
                 setPosition({ x: left + width + OFFSET, y: top + (height - heightTooltip) / 2 });
 
                 break;
-            case 'bottom':
+            case Placement.BOTTOM:
                 setPosition({ x: left + (width - widthTooltip) / 2, y: top + height + OFFSET });
 
                 break;
-            case 'left':
+            case Placement.LEFT:
                 setPosition({ x: left - widthTooltip - OFFSET, y: top + (height - heightTooltip) / 2 });
 
                 break;
@@ -153,7 +147,7 @@ const useTooltipPosition: (
 const Tooltip: React.FC<TooltipProps> = ({
     anchorRef,
     children,
-    className = '',
+    className,
     delay = DEFAULT_PROPS.delay,
     placement = DEFAULT_PROPS.placement,
     ...props
