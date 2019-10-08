@@ -1,11 +1,9 @@
-import PopperJs from 'popper.js';
-
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
 /////////////////////////////
 
-function TooltipController($element, $timeout, LumXDepthService) {
+function TooltipController($element, $timeout, $window) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
@@ -25,6 +23,15 @@ function TooltipController($element, $timeout, LumXDepthService) {
      * @readonly
      */
     const _HOVER_DELAY = 500;
+
+    /**
+     * The offset from the target.
+     *
+     * @type {number}
+     * @constant
+     * @readonly
+     */
+    const _OFFSET = 8;
 
     /**
      * The tooltip element.
@@ -67,19 +74,43 @@ function TooltipController($element, $timeout, LumXDepthService) {
      * Set the tooltip position according to the position parameter.
      */
     function _setTooltipPosition() {
-        _tooltip.appendTo('body');
+        const targetProps = {
+            height: $element.outerHeight(),
+            left: $element.offset().left,
+            top: $element.offset().top - angular.element($window).scrollTop(),
+            width: $element.outerWidth(),
+        };
+        const tooltipProps = {};
 
-        // eslint-disable-next-line no-new
-        new PopperJs($element, _tooltip, {
-            placement: lumx.position || 'top',
-            modifiers: {
-                arrow: {
-                    // eslint-disable-next-line id-blacklist
-                    element: `.${CSS_PREFIX}-tooltip__arrow`,
-                    enabled: true,
-                },
-            },
+        _tooltip.css({ position: 'absolute' }).appendTo('body');
+
+        /* eslint-disable no-magic-numbers */
+        if (!lumx.position || lumx.position === 'top') {
+            _tooltip.attr('x-placement', 'top');
+
+            tooltipProps.x = targetProps.left - _tooltip.outerWidth() / 2 + targetProps.width / 2;
+            tooltipProps.y = targetProps.top - _tooltip.outerHeight() - _OFFSET;
+        } else if (lumx.position === 'bottom') {
+            _tooltip.attr('x-placement', 'bottom');
+
+            tooltipProps.x = targetProps.left - _tooltip.outerWidth() / 2 + targetProps.width / 2;
+            tooltipProps.y = targetProps.top + targetProps.height + _OFFSET;
+        } else if (lumx.position === 'left') {
+            _tooltip.attr('x-placement', 'left');
+
+            tooltipProps.x = targetProps.left - _tooltip.outerWidth() - _OFFSET;
+            tooltipProps.y = targetProps.top + targetProps.height / 2 - _tooltip.outerHeight() / 2;
+        } else if (lumx.position === 'right') {
+            _tooltip.attr('x-placement', 'right');
+
+            tooltipProps.x = targetProps.left + targetProps.width + _OFFSET;
+            tooltipProps.y = targetProps.top + targetProps.height / 2 - _tooltip.outerHeight() / 2;
+        }
+
+        _tooltip.css({
+            transform: `translate3d(${tooltipProps.x}px, ${tooltipProps.y}px, 0px)`,
         });
+        /* eslint-enable no-magic-numbers */
     }
 
     /////////////////////////////
@@ -123,12 +154,7 @@ function TooltipController($element, $timeout, LumXDepthService) {
             text: lumx.text,
         });
 
-        LumXDepthService.increase();
-
-        _tooltip
-            .append(_tooltipArrow)
-            .append(_tooltipInner)
-            .css('z-index', LumXDepthService.get());
+        _tooltip.append(_tooltipArrow).append(_tooltipInner);
 
         _hoverTimeout = $timeout(_setTooltipPosition, _HOVER_DELAY);
     }
