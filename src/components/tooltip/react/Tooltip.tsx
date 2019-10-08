@@ -3,6 +3,8 @@ import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
+import { Placement } from 'LumX';
+
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -11,7 +13,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /////////////////////////////
 
 /** Position of the tooltip relative to the anchor element. */
-type TooltipPlacement = 'top' | 'right' | 'bottom' | 'left';
+type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
 
 /**
  * Position for arrow or tooltip.
