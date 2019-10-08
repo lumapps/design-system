@@ -1,6 +1,6 @@
 ```javascript import
 import { useRef } from 'react';
-import { Button, Tooltip } from 'LumX';
+import { Button, Placement, Tooltip } from 'LumX';
 ```
 
 # Tooltip
@@ -20,19 +20,19 @@ import { Button, Tooltip } from 'LumX';
             <Button buttonRef={anchorRefBottom}>Bottom</Button>
             <Button buttonRef={anchorRefLeft}>Left</Button>
             <Button buttonRef={anchorRefDelay}>With 2s delay</Button>
-            <Tooltip anchorRef={anchorRefTop} placement="top">
+            <Tooltip anchorRef={anchorRefTop} placement={Placement.TOP}>
                 Top Tooltip
             </Tooltip>
-            <Tooltip anchorRef={anchorRefRight} placement="right">
+            <Tooltip anchorRef={anchorRefRight} placement={Placement.RIGHT}>
                 Right Tooltip
             </Tooltip>
-            <Tooltip anchorRef={anchorRefBottom} placement="bottom">
+            <Tooltip anchorRef={anchorRefBottom} placement={Placement.BOTTOM}>
                 Bottom Tooltip
             </Tooltip>
-            <Tooltip anchorRef={anchorRefLeft} placement="left">
+            <Tooltip anchorRef={anchorRefLeft} placement={Placement.LEFT}>
                 Left Tooltip
             </Tooltip>
-            <Tooltip anchorRef={anchorRefDelay} delay={2000} placement="bottom">
+            <Tooltip anchorRef={anchorRefDelay} delay={2000} placement={Placement.BOTTOM}>
                 Tooltip with delay
             </Tooltip>
         </>
