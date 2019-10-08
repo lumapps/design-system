@@ -1,0 +1,63 @@
+import { AssetBlock } from 'LumX/demo/react/layout/AssetBlock';
+import { Alignment, Grid, GridItem, Orientation, Size, Thumbnail } from 'LumX';
+
+# Brand resources
+
+**Writing about LumApps, or collaborating with us on content? Here’s where you’ll find all our brand assets.**
+
+## Press kit
+
+Your one-stop-shop for the LumApps color palette, logos, product screenshots, photo set, and boilerplate language. Need something specific? Keep scrolling and download only what you need.
+
+<AssetBlock
+    downloadURL="#"
+    fileName="LumApps-press-kit.pdf"
+    thumbnailURL="demo/react/doc/brand/press-kit-thumbnail.png"
+/>
+
+## Downloads
+
+### Color palette
+
+The colors in our palette communicate the reliability of our product and the authenticity of our team’s values. They enhance the user experience, from the way customers engage with our product to the connections we forge through our content.
+
+<AssetBlock
+    downloadURL="#"
+    fileName="LumApps-logo-color.pdf"
+    thumbnailURL="demo/react/doc/brand/color-palette-thumbnail.png"
+/>
+
+### logos
+
+Each download includes all approved formats and color options.
+
+<Grid
+    orientation={Orientation.horizontal}
+    wrap={'wrap'}
+    vAlign={Alignment.center}
+    hAlign={Alignment.top}
+    gutter={Size.huge}
+>
+    <GridItem width="6" className="lumx-spacing-margin-bottom-huge">
+        <AssetBlock
+            downloadURL="#"
+            fileName="LumApps-logo-color.pdf"
+            thumbnailURL="demo/react/doc/brand/lumapps-logo-thumbnail.png"
+        />
+    </GridItem>
+    <GridItem width="6" className="lumx-spacing-margin-bottom-huge">
+        <AssetBlock
+            downloadURL="#"
+            fileName="LumApps-logo-white.pdf"
+            thumbnailURL="demo/react/doc/brand/lumapps-logo-white-thumbnail.png"
+        />
+    </GridItem>
+</Grid>
+
+### Spacing and Alignment
+
+Generally, you may use 1/3 of the width/height of the contained mark to determine the appropriate amount of space around the container. Information can be aligned to any edge of the container.
+
+!['alignement example image'](demo/react/doc/brand/example-image.png)
+
+Information may be middle aligned with the icon when the copy does not exceed the height of the container. When the information is longer than the height of the container, it may be top-aligned or stacked below and center-aligned.

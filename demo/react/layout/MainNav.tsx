@@ -80,6 +80,7 @@ const ITEMS: Item[] = [
     },
     {
         label: 'Brand',
+        children: ['Resources'],
     },
     {
         label: 'Partners',
