@@ -7,25 +7,14 @@
 
     @include lumx-elevation($lumx-tooltip-elevation);
 
+    position: absolute;
+    z-index: 9999;
+    top: 0;
+    left: 0;
     padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
     background-color: $lumx-tooltip-background-color;
     border-radius: $lumx-theme-border-radius;
-
-    &[x-placement^='top'] {
-        margin-bottom: $lumx-spacing-unit;
-    }
-
-    &[x-placement^='bottom'] {
-        margin-top: $lumx-spacing-unit;
-    }
-
-    &[x-placement^='left'] {
-        margin-right: $lumx-spacing-unit;
-    }
-
-    &[x-placement^='right'] {
-        margin-left: $lumx-spacing-unit;
-    }
+    will-change: transform;
 
     &__arrow {
         position: absolute;
@@ -35,28 +24,34 @@
         border-style: solid;
         border-color: lumx-theme-color-variant('light', 'N');
 
-        #{$self}[x-placement^='top'] & {
+        #{$self}--position-top & {
             bottom: -$lumx-tooltip-arrow-size;
+            left: 50%;
             margin-top: 0;
             margin-bottom: 0;
+            margin-left: -$lumx-tooltip-arrow-size;
             border-width: $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size 0 $lumx-tooltip-arrow-size;
             border-right-color: transparent;
             border-bottom-color: transparent;
             border-left-color: transparent;
         }
 
-        #{$self}[x-placement^='bottom'] & {
+        #{$self}--position-bottom & {
             top: -$lumx-tooltip-arrow-size;
+            left: 50%;
             margin-top: 0;
             margin-bottom: 0;
+            margin-left: -$lumx-tooltip-arrow-size;
             border-width: 0 $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size;
             border-top-color: transparent;
             border-right-color: transparent;
             border-left-color: transparent;
         }
 
-        #{$self}[x-placement^='left'] & {
+        #{$self}--position-left & {
+            top: 50%;
             right: -$lumx-tooltip-arrow-size;
+            margin-top: -$lumx-tooltip-arrow-size;
             margin-right: 0;
             margin-left: 0;
             border-width: $lumx-tooltip-arrow-size 0 $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size;
@@ -65,8 +60,10 @@
             border-bottom-color: transparent;
         }
 
-        #{$self}[x-placement^='right'] & {
+        #{$self}--position-right & {
+            top: 50%;
             left: -$lumx-tooltip-arrow-size;
+            margin-top: -$lumx-tooltip-arrow-size;
             margin-right: 0;
             margin-left: 0;
             border-width: $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size 0;
