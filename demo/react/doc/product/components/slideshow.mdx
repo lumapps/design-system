@@ -1,0 +1,295 @@
+import {
+    ImageBlock,
+    ImageBlockCaptionPosition,
+    ImageBlockProps,
+    Slideshow,
+    SlideshowItem,
+    ThumbnailAspectRatio,
+} from 'LumX';
+
+# Slideshow
+
+**Slideshows display multiple pieces of featured content on a limited allocated amount of space.**
+
+## Default
+
+```javascript jsx
+(theme) => {
+    const slideshowWrapperStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+    };
+
+    const slideshowStyle = {
+        width: '50%',
+    };
+
+    const imageBlockDemoProps = {
+        description: 'What an image',
+        tags: ['#tag1', '#tag2', '#tag3'],
+        title: 'Nice Image',
+    };
+
+    return (
+        <Slideshow activeIndex={0} hasControls={true} theme={theme} autoPlay={false} groupBy={1} style={slideshowStyle}>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=31"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=1"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=2"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=8"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=3"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=4"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=5"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=36"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=7"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+        </Slideshow>
+    );
+};
+```
+
+## Group by
+
+Slideshows can display groups of pieces of content.
+
+```javascript jsx
+(theme) => {
+    const slideshowWrapperStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+    };
+
+    const slideshowStyle = {
+        width: '100%',
+    };
+
+    const imageBlockDemoProps = {
+        description: 'What an image',
+        title: 'Nice Image',
+    };
+
+    return (
+        <Slideshow activeIndex={0} hasControls={true} theme={theme} autoPlay={false} groupBy={2} style={slideshowStyle}>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=31"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=30"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=32"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=38"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=36"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=34"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+        </Slideshow>
+    );
+};
+```
+
+## Autoplay
+
+Slideshows can play automaticaly.
+
+```javascript jsx
+(theme) => {
+    const slideshowWrapperStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+    };
+
+    const slideshowStyle = {
+        width: '50%',
+    };
+
+    const imageBlockDemoProps = {
+        description: 'What an image',
+        tags: ['#tag1', '#tag2', '#tag3'],
+        title: 'Nice Image',
+    };
+
+    return (
+        <Slideshow activeIndex={0} hasControls={true} theme={theme} autoPlay={true} groupBy={1} style={slideshowStyle}>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=31"
+                    theme={theme}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=1"
+                    theme={theme}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=2"
+                    theme={theme}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=8"
+                    theme={theme}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=3"
+                    theme={theme}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=4"
+                    theme={theme}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=5"
+                    theme={theme}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=36"
+                    theme={theme}
+                />
+            </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    image="https://picsum.photos/480/640/?image=7"
+                    theme={theme}
+                />
+            </SlideshowItem>
+        </Slideshow>
+    );
+};
+```
+
+### Properties
+
+<PropTable component="Slideshow" />
