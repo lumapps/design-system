@@ -1,14 +1,9 @@
-import React, { Children, ReactElement, cloneElement } from 'react';
-
-import noop from 'lodash/noop';
+import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { Theme } from 'LumX';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-
-import { RadioButtonHelper } from './RadioButtonHelper';
-import { RadioButtonLabel } from './RadioButtonLabel';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -21,20 +16,32 @@ import uniqueId from 'lodash/uniqueId';
  * Defines the props of the component.
  */
 interface IRadioButtonProps extends IGenericProps {
-    /* Is radio button checked */
+    /** Whether or not the radio button is checked. */
     checked?: boolean;
-    /* Component label and helpers */
-    children: RadioButtonLabel | Array<RadioButtonLabel & RadioButtonHelper>;
-    /* Is radio button disabled */
+
+    /**  Whether or not the radio button is disabled. */
     disabled?: boolean;
-    /*The name of theradio button */
-    name: string;
-    /* Function called when a change occurs */
-    onChange?: CallableFunction;
-    /* Component theme */
+
+    /** Radio button helper. */
+    helper?: string;
+
+    /** Native radio input id. */
+    id?: string;
+
+    /** Radio button label. */
+    label?: ReactNode;
+
+    /** Native radio input name. */
+    name?: string;
+
+    /** Theme. */
     theme?: Theme;
-    /* The value of the radio button */
-    value: string;
+
+    /** Native radio input value. */
+    value?: string;
+
+    /** Radio button onChange event (provides the radio input value).  */
+    onChange?(value: string): void;
 }
 type RadioButtonProps = IRadioButtonProps;
 
@@ -67,7 +74,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     checked: false,
     disabled: false,
-    onChange: noop,
     theme: Theme.light,
 };
 /////////////////////////////
@@ -77,32 +83,26 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The component.
  */
-const RadioButton: React.FC<RadioButtonProps> = ({
-    checked = DEFAULT_PROPS.checked,
-    children,
-    className = '',
-    disabled = DEFAULT_PROPS.disabled,
-    name,
-    onChange = DEFAULT_PROPS.onChange,
-    theme = DEFAULT_PROPS.theme,
-    value,
-    ...props
-}: RadioButtonProps): ReactElement => {
-    const radioButtonId: string = uniqueId(`${CLASSNAME.toLowerCase()}-`);
+const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps): ReactElement => {
+    const {
+        className,
+        checked = DEFAULT_PROPS.checked,
+        disabled = DEFAULT_PROPS.disabled,
+        helper,
+        id,
+        label,
+        name,
+        theme = DEFAULT_PROPS.theme,
+        value,
+        onChange,
+        ...forwardedProps
+    } = props;
+    const radioButtonId: string = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = (): void => {
-        onChange!({ value });
+        if (onChange && value) {
+            onChange(value);
+        }
     };
-
-    const clonedChildren: Array<RadioButtonHelper | RadioButtonLabel> = Children.map(
-        children,
-        (child: RadioButtonHelper | RadioButtonLabel) => {
-            if (child.type.name === RadioButtonLabel.name) {
-                return cloneElement(child, { radioButtonId });
-            }
-
-            return cloneElement(child);
-        },
-    );
 
     return (
         <div
@@ -116,19 +116,19 @@ const RadioButton: React.FC<RadioButtonProps> = ({
                     theme,
                 }),
             )}
-            {...props}
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
-                    type="radio"
-                    id={radioButtonId}
-                    className={`${CLASSNAME}__input-native`}
-                    tabIndex={disabled ? -1 : 0}
-                    name={name}
                     checked={checked}
+                    className={`${CLASSNAME}__input-native`}
                     disabled={disabled}
+                    name={name}
+                    id={radioButtonId}
+                    tabIndex={disabled ? -1 : 0}
+                    type="radio"
                     value={value}
                     onChange={handleChange}
+                    {...forwardedProps}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>
@@ -137,7 +137,14 @@ const RadioButton: React.FC<RadioButtonProps> = ({
                 </div>
             </div>
 
-            <div className={`${CLASSNAME}__content`}>{clonedChildren}</div>
+            <div className={`${CLASSNAME}__content`}>
+                {label && (
+                    <label htmlFor={radioButtonId} className={`${CLASSNAME}__label`}>
+                        {label}
+                    </label>
+                )}
+                {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
+            </div>
         </div>
     );
 };

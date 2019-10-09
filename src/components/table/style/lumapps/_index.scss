@@ -5,134 +5,129 @@
 .#{$lumx-base-prefix}-table {
     $self: &;
 
-    width: 100%;
-    margin: 0;
-    table-layout: fixed;
+    @include lumx-table;
 
     &__row {
-        outline: none;
+        @include lumx-table-row;
 
-        #{$self}--theme-light &--is-clickable {
-            &:hover #{$self}__cell {
-                background-color: lumx-theme-color-variant('dark', 'L6');
-            }
-
-            &[data-focus-visible-added] {
-                @include lumx-state('state-focus', 'emphasis-low', 'dark', null, true);
-            }
+        #{$self}--theme-light#{$self}--has-dividers & {
+            @include lumx-has-divider('dark');
         }
 
-        #{$self}--theme-light &--is-selected {
-            #{$self}__cell {
-                background-color: lumx-theme-color-variant('dark', 'L5') !important;
-            }
+        #{$self}--theme-dark#{$self}--has-dividers & {
+            @include lumx-has-divider('light');
         }
 
-        #{$self}--theme-dark &--is-clickable {
-            &:hover #{$self}__cell {
-                background-color: lumx-theme-color-variant('light', 'L6');
-            }
-
-            &[data-focus-visible-added] {
-                @include lumx-state('state-focus', 'emphasis-low', 'light', null, true);
-            }
+        #{$self}--has-dividers &:last-child {
+            border-bottom: none;
         }
 
-        #{$self}--theme-dark &--is-selected {
-            #{$self}__cell {
-                background-color: lumx-theme-color-variant('light', 'L5') !important;
+        &--is-selected {
+            #{$self}--theme-light & {
+                @include lumx-table-row-is-selected('dark');
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-table-row-is-selected('light');
             }
         }
     }
 
     &__cell {
-        height: 56px;
-        padding: $lumx-spacing-unit $lumx-spacing-unit * 3 $lumx-spacing-unit 0;
-        text-align: left;
-
-        thead & {
-            outline: none;
-            text-align: left;
-
+        &--head {
             #{$self}--theme-light & {
-                @include lumx-has-divider('dark');
-
-                color: lumx-theme-color-variant('dark', 'L2');
+                @include lumx-table-cell('head', 'dark');
             }
 
             #{$self}--theme-dark & {
-                @include lumx-has-divider('light');
-
-                color: lumx-theme-color-variant('light', 'L2');
-            }
-
-            &--is-sortable {
-                cursor: pointer;
-            }
-
-            &--is-sortable:hover #{$self}__cell-content,
-            &--is-sortable[data-focus-visible-added] #{$self}__cell-content {
-                text-decoration: underline;
-            }
-
-            &--is-sorted {
-                #{$self}--theme-light & {
-                    color: lumx-theme-color-variant('dark', 'N');
-                }
-
-                #{$self}--theme-dark & {
-                    color: lumx-theme-color-variant('light', 'N');
-                }
+                @include lumx-table-cell('head', 'light');
             }
         }
 
-        tbody & {
-            #{$self}--theme-light#{$self}--has-dividers & {
-                @include lumx-has-divider('dark');
+        &--body {
+            #{$self}--theme-light & {
+                @include lumx-table-cell('body', 'dark');
             }
 
-            #{$self}--theme-dark#{$self}--has-dividers & {
-                @include lumx-has-divider('light');
+            #{$self}--theme-dark & {
+                @include lumx-table-cell('body', 'light');
             }
         }
 
-        tbody #{$self}__row:last-child & {
-            border-bottom: none;
+        &:first-child {
+            padding-left: $lumx-spacing-unit * 3;
+        }
+
+        #{$self}--has-before &:first-child {
+            @include lumx-table-cell-before;
+        }
+
+        &--is-sortable {
+            cursor: pointer;
+        }
+
+        &--is-sorted {
+            #{$self}--theme-light & {
+                @include lumx-table-cell-is-sorted('dark');
+            }
+
+            #{$self}--theme-dark & {
+                @include lumx-table-cell-is-sorted('light');
+            }
         }
     }
 
     &__cell-wrapper {
-        thead & {
-            display: flex;
-            align-items: flex-start;
+        @include lumx-table-cell-wrapper;
+
+        #{$self}--has-before #{$self}__cell--head:first-child & {
+            @include lumx-table-cell-content-before;
         }
     }
 
     &__cell-icon {
-        thead & {
-            margin-top: 1px;
-            margin-right: $lumx-spacing-unit / 2;
-        }
+        @include lumx-table-cell-icon;
     }
 
     &__cell-content {
-        hyphens: auto;
-        word-break: break-word;
-
-        thead & {
-            @include lumx-typography('caption');
+        #{$self}__cell--head & {
+            @include lumx-table-cell-content('head');
         }
 
-        tbody & {
-            @include lumx-typography('body1');
-
-            #{$self}--theme-light & {
-                color: lumx-theme-color-variant('dark', 'N');
-            }
-
-            #{$self}--theme-dark & {
-                color: lumx-theme-color-variant('light', 'N');
-            }
+        #{$self}__cell--body & {
+            @include lumx-table-cell-content('body');
         }
+
+        #{$self}--has-before #{$self}__cell--body:first-child & {
+            @include lumx-table-cell-content-before;
+        }
+
+        #{$self}__cell--is-sortable:hover &,
+        #{$self}__cell--is-sortable[data-focus-visible-added] & {
+            text-decoration: underline;
+        }
+    }
+}
+
+/* Clickable row
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-table__row--is-clickable:not(.#{$lumx-base-prefix}-table__row--is-selected) {
+    .#{$lumx-base-prefix}-table--theme-light & {
+        @include lumx-table-row-is-clickable('dark', false);
+    }
+
+    .#{$lumx-base-prefix}-table--theme-dark & {
+        @include lumx-table-row-is-clickable('light', false);
+    }
+}
+
+.#{$lumx-base-prefix}-table__row--is-clickable.#{$lumx-base-prefix}-table__row--is-selected {
+    .#{$lumx-base-prefix}-table--theme-light & {
+        @include lumx-table-row-is-clickable('dark', true);
+    }
+
+    .#{$lumx-base-prefix}-table--theme-dark & {
+        @include lumx-table-row-is-clickable('light', true);
     }
 }

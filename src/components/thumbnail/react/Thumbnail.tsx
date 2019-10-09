@@ -24,7 +24,7 @@ enum ThumbnailAspectRatio {
 /**
  *  Authorized size values.
  */
-type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl;
+type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
  * Authorized variants.

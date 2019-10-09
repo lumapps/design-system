@@ -1,7 +1,7 @@
 ```javascript import
 import { mdiComment, mdiHeart } from 'LumX/icons';
 
-import { Button, Chip, Emphasis, Grid, Orientation, PostBlock, Size, Theme, UserBlock } from 'LumX';
+import { Button, Chip, ColorPalette, Emphasis, Grid, Orientation, PostBlock, Size, Theme, UserBlock } from 'LumX';
 ```
 
 # Post Block
@@ -13,10 +13,18 @@ import { Button, Chip, Emphasis, Grid, Orientation, PostBlock, Size, Theme, User
     <PostBlock
         actions={
             <Grid>
-                <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiComment}>
+                <Button
+                    color={theme === Theme.dark ? ColorPalette.light : undefined}
+                    emphasis={Emphasis.low}
+                    size={Size.s}
+                    leftIcon={mdiComment}>
                     <span>16</span>
                 </Button>
-                <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                <Button
+                    color={theme === Theme.dark ? ColorPalette.light : undefined}
+                    emphasis={Emphasis.low}
+                    size={Size.s}
+                    leftIcon={mdiHeart}>
                     <span>8</span>
                 </Button>
             </Grid>
@@ -49,6 +57,7 @@ import { Button, Chip, Emphasis, Grid, Orientation, PostBlock, Size, Theme, User
         }
         meta="1 day ago in community's name"
         text={{__html: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus libero aliquet pharetra luctus. Fusce nisl turpis, posuere ac tellus at, euismod vulputate libero..."}}
+        theme={theme}
         thumbnail="https://picsum.photos/800/600/?random"
         title="Annual Bonus Payments"
     />

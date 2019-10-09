@@ -12,15 +12,13 @@ export { ButtonGroup, ButtonGroupProps } from './components/button/react/ButtonG
 
 export { Checkbox, CheckboxProps } from './components/checkbox/react/Checkbox';
 
-export { CheckboxHelper } from './components/checkbox/react/CheckboxHelper';
-
-export { CheckboxLabel } from './components/checkbox/react/CheckboxLabel';
-
 export { Chip, ChipProps } from './components/chip/react/Chip';
 
 export { Divider, DividerProps } from './components/divider/react/Divider';
 
 export { Dropdown, DropdownProps } from './components/dropdown/react/Dropdown';
+
+export { EditableMedia, EditableMediaProps } from './components/editable-media/react/EditableMedia';
 
 export { Icon, IconProps } from './components/icon/react/Icon';
 
@@ -60,10 +58,6 @@ export { ProgressTrackerStep, ProgressTrackerStepProps } from './components/prog
 export { RadioButton, RadioButtonProps } from './components/radio-button/react/RadioButton';
 
 export { RadioGroup, RadioGroupProps } from './components/radio-button/react/RadioGroup';
-
-export { RadioButtonHelper } from './components/radio-button/react/RadioButtonHelper';
-
-export { RadioButtonLabel } from './components/radio-button/react/RadioButtonLabel';
 
 export { Select, SelectProps, SelectVariant } from './components/select/react/Select';
 

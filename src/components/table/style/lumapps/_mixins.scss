@@ -1,0 +1,89 @@
+@mixin lumx-table() {
+    width: 100%;
+    margin: 0;
+    table-layout: fixed;
+}
+
+@mixin lumx-table-row() {
+    outline: none;
+}
+
+@mixin lumx-table-row-is-clickable($theme, $is-selected) {
+    &:hover {
+        @if $theme == 'dark' {
+            @if $is-selected == true {
+                background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L5');
+            } @else {
+                background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L6');
+            }
+        } @else if $theme == 'light' {
+            @if $is-selected == true {
+                background-color: lumx-theme-color-variant('light', 'L5');
+            } @else {
+                background-color: lumx-theme-color-variant('light', 'L6');
+            }
+        }
+    }
+
+    &[data-focus-visible-added] {
+        @include lumx-state('state-focus', 'emphasis-low', $theme, null, true);
+    }
+}
+
+@mixin lumx-table-row-is-selected($theme) {
+    @if $theme == 'dark' {
+        background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L6');
+    } @else if $theme == 'light' {
+        background-color: lumx-theme-color-variant('light', 'L6');
+    }
+}
+
+@mixin lumx-table-cell($variant, $theme) {
+    height: 56px;
+    padding: $lumx-spacing-unit $lumx-spacing-unit * 3 $lumx-spacing-unit 0;
+    outline: none;
+    text-align: left;
+
+    @if $variant == 'head' {
+        @include lumx-has-divider($theme);
+
+        color: lumx-theme-color-variant($theme, 'L2');
+    } @else if $variant == 'body' {
+        color: lumx-theme-color-variant($theme, 'N');
+    }
+}
+
+@mixin lumx-table-cell-before() {
+    width: 68px;
+    padding: 0;
+}
+
+@mixin lumx-table-cell-is-sorted($theme) {
+    color: lumx-theme-color-variant($theme, 'N');
+}
+
+@mixin lumx-table-cell-wrapper() {
+    display: flex;
+    align-items: flex-start;
+}
+
+@mixin lumx-table-cell-icon() {
+    margin-top: 1px;
+    margin-right: $lumx-spacing-unit / 2;
+}
+
+@mixin lumx-table-cell-content($variant) {
+    hyphens: auto;
+    word-break: break-word;
+
+    @if $variant == 'head' {
+        @include lumx-typography('caption');
+    } @else if $variant == 'body' {
+        @include lumx-typography('body1');
+    }
+}
+
+@mixin lumx-table-cell-content-before() {
+    display: flex;
+    justify-content: center;
+}

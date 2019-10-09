@@ -1,22 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<RadioButton> Props should use the given props 1`] = `
+exports[`<RadioButton> Snapshots and structure should render checked, disabled & id 1`] = `
 <div
-  className="lumx-radio-button lumx-radio-button--is-unchecked lumx-radio-button--theme-light"
+  className="lumx-radio-button lumx-radio-button--is-checked lumx-radio-button--is-disabled lumx-radio-button--theme-light"
 >
   <div
     className="lumx-radio-button__input-wrapper"
   >
     <input
-      checked={false}
+      checked={true}
       className="lumx-radio-button__input-native"
-      disabled={false}
-      id="lumx-radio-button-3"
-      name="test"
+      disabled={true}
+      id="inputID"
       onChange={[Function]}
-      tabIndex={0}
+      tabIndex={-1}
       type="radio"
-      value="test-value"
     />
     <div
       className="lumx-radio-button__input-placeholder"
@@ -31,18 +29,11 @@ exports[`<RadioButton> Props should use the given props 1`] = `
   </div>
   <div
     className="lumx-radio-button__content"
-  >
-    <RadioButtonLabel>
-      Test label
-    </RadioButtonLabel>
-    <RadioButtonHelper>
-      Test Helper
-    </RadioButtonHelper>
-  </div>
+  />
 </div>
 `;
 
-exports[`<RadioButton> Snapshots and structure should render correctly 1`] = `
+exports[`<RadioButton> Snapshots and structure should render defaults 1`] = `
 <div
   className="lumx-radio-button lumx-radio-button--is-unchecked lumx-radio-button--theme-light"
 >
@@ -54,11 +45,42 @@ exports[`<RadioButton> Snapshots and structure should render correctly 1`] = `
       className="lumx-radio-button__input-native"
       disabled={false}
       id="lumx-radio-button-1"
-      name="test"
       onChange={[Function]}
       tabIndex={0}
       type="radio"
-      value="test-value"
+    />
+    <div
+      className="lumx-radio-button__input-placeholder"
+    >
+      <div
+        className="lumx-radio-button__input-background"
+      />
+      <div
+        className="lumx-radio-button__input-indicator"
+      />
+    </div>
+  </div>
+  <div
+    className="lumx-radio-button__content"
+  />
+</div>
+`;
+
+exports[`<RadioButton> Snapshots and structure should render label & helper 1`] = `
+<div
+  className="lumx-radio-button lumx-radio-button--is-unchecked lumx-radio-button--theme-light"
+>
+  <div
+    className="lumx-radio-button__input-wrapper"
+  >
+    <input
+      checked={false}
+      className="lumx-radio-button__input-native"
+      disabled={false}
+      id="lumx-radio-button-2"
+      onChange={[Function]}
+      tabIndex={0}
+      type="radio"
     />
     <div
       className="lumx-radio-button__input-placeholder"
@@ -74,12 +96,17 @@ exports[`<RadioButton> Snapshots and structure should render correctly 1`] = `
   <div
     className="lumx-radio-button__content"
   >
-    <RadioButtonLabel
-      key=".0"
-      radioButtonId="lumx-radio-button-1"
+    <label
+      className="lumx-radio-button__label"
+      htmlFor="lumx-radio-button-2"
     >
-      Default Test label
-    </RadioButtonLabel>
+      Label
+    </label>
+    <span
+      className="lumx-radio-button__helper"
+    >
+      Helper
+    </span>
   </div>
 </div>
 `;

@@ -46,6 +46,7 @@ function EditableMediaDirective() {
             onClick: '&?lumxOnClick',
             placeholder: '@?lumxPlaceholder',
             size: '@?lumxSize',
+            theme: '@?lumxTheme',
             variant: '@?lumxVariant',
         },
         template,

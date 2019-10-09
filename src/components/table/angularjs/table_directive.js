@@ -23,6 +23,7 @@ function TableDirective() {
         replace: true,
         restrict: 'E',
         scope: {
+            hasBefore: '=?lumxHasBefore',
             hasDividers: '=?lumxHasDividers',
             isClickable: '=?lumxIsClickable',
             theme: '@?lumxTheme',

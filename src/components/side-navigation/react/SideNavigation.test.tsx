@@ -3,9 +3,8 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, SideNavigation, SideNavigationProps } from './SideNavigation';
+import { CLASSNAME, SideNavigation, SideNavigationProps } from './SideNavigation';
 
 /////////////////////////////
 
@@ -65,20 +64,7 @@ describe(`<${SideNavigation.displayName}>`, (): void => {
 
     /////////////////////////////
 
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        // Here are some examples of basic props check.
-
-        it('should use default props', (): void => {
-            const { root } = setup();
-
-            for (const prop of Object.keys(DEFAULT_PROPS)) {
-                expect(root).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                );
-            }
-        });
-    });
+    // 2. Test defaultProps value and important props custom values. => no default props
 
     /////////////////////////////
 

@@ -5,6 +5,7 @@
 .#{$lumx-base-prefix}-thumbnail {
     $self: &;
 
+    flex-shrink: 0;
     outline: none;
 
     &--fill-height {

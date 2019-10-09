@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-tooltip lumx-tooltip--position-bottom"
+  style={
+    Object {
+      "transform": "translate3d(0px, 0px, 0px)",
+      "visibility": "hidden",
+    }
+  }
+>
+  <div
+    className="lumx-tooltip__arrow"
+  />
+  <div
+    className="lumx-tooltip__inner"
+  />
+</div>
+`;

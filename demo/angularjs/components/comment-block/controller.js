@@ -25,6 +25,15 @@ function DemoCommentBlockController(LumXNotificationService) {
             text:
                 'All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation.',
             isOpen: false,
+        },
+    ];
+    vm.commentsThreaded = [
+        {
+            date: '4 hours ago',
+            name: 'Matthias Manoukian',
+            text:
+                'All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation.',
+            isOpen: true,
             children: [
                 {
                     date: '3 hours ago',

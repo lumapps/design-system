@@ -1,0 +1,27 @@
+<lumx-comment-block
+    lumx-avatar="http://i.pravatar.cc/128"
+    lumx-date="{{ comment.date }}"
+    lumx-is-open="comment.isOpen"
+    lumx-is-relevant="false"
+    lumx-name="{{ comment.name }}"
+    lumx-on-click="vm.onClick()"
+    lumx-on-mouse-enter="vm.onMouseEnter()"
+    lumx-on-mouse-leave="vm.onMouseLeave()"
+    lumx-text="{{ comment.text }}"
+    lumx-theme="{{ demoBlock.theme }}"
+    ng-repeat="comment in vm.comments"
+>
+    <lumx-comment-block-actions>
+        <lumx-grid>
+            <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ demoBlock.theme }}">
+                <lumx-icon lumx-path="{{ vm.icons.mdiHeart }}"></lumx-icon>
+                <span>24 likes</span>
+            </lumx-button>
+
+            <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ demoBlock.theme }}">
+                <lumx-icon lumx-path="{{ vm.icons.mdiReply }}"></lumx-icon>
+                <span>Reply</span>
+            </lumx-button>
+        </lumx-grid>
+    </lumx-comment-block-actions>
+</lumx-comment-block>

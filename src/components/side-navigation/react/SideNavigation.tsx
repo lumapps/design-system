@@ -10,13 +10,10 @@ import classNames from 'classnames';
  * Defines the props of the component.
  */
 interface ISideNavigationProps extends IGenericProps {
-    /**
-     * Side navigation children.
-     */
-    children: SideNavigationItem | SideNavigationItem[];
-    /**
-     * Theme
-     */
+    /**  Side navigation content (should use `<SideNavigationItem>`). */
+    children: ReactElement | ReactElement[];
+
+    /** Theme. */
     theme?: Theme;
 }
 type SideNavigationProps = ISideNavigationProps;
@@ -30,11 +27,6 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigation`;
  * The default class name and classes prefix for this component.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
-
-/**
- * The default value of props.
- */
-const DEFAULT_PROPS: Partial<SideNavigationProps> = {};
 
 const SideNavigation: React.FC<ISideNavigationProps> = (props: ISideNavigationProps): ReactElement => {
     const { className, theme, children, ...otherProps } = props;
@@ -55,4 +47,4 @@ const SideNavigation: React.FC<ISideNavigationProps> = (props: ISideNavigationPr
 };
 SideNavigation.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, SideNavigation, SideNavigationProps };
+export { CLASSNAME, SideNavigation, SideNavigationProps };
