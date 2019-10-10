@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import classNames from 'classnames';
 
 import isBoolean from 'lodash/isBoolean';
@@ -5,12 +6,147 @@ import isEmpty from 'lodash/isEmpty';
 import kebabCase from 'lodash/kebabCase';
 import { noop } from 'lodash/noop';
 
-import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from './constants';
+import { CSS_PREFIX, ESCAPE_KEY_CODE } from './constants';
+
+/////////////////////////////
+//                         //
+//    Private functions    //
+//                         //
+/////////////////////////////
+
+/**
+ * Add a css rule in a given sheet.
+ *
+ * @param {Element} sheet    The sheet to insert the new rules in.
+ * @param {string}  selector The css rules selector.
+ * @param {string}  rules    The css rules.
+ * @param {number}  index    The css rule index.
+ */
+function _addCSSRule(sheet, selector, rules, index) {
+    if ('insertRule' in sheet) {
+        sheet.insertRule(`${selector}{${rules}}`, index);
+    } else if ('addRule' in sheet) {
+        sheet.addRule(selector, rules, index);
+    }
+}
+
+/**
+ * Get button css rules impacted by primary and secondary colors.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @param  {string} color        Whether to return primary or secondary variants.
+ * @return {Array}  The button css rules.
+ */
+function _getButtonCSSRules(colorPalette, color) {
+    return [
+        // Default state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-high.${CSS_PREFIX}-button--theme-light
+            `,
+            rule: `background-color: ${colorPalette[color].N}`,
+        },
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-medium
+            `,
+            rule: `background-color: ${colorPalette[color].L5}`,
+        },
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-high.${CSS_PREFIX}-button--theme-dark,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-medium,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-low
+            `,
+            rule: `color: ${colorPalette[color].N}`,
+        },
+        // Hover state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-high.${CSS_PREFIX}-button--theme-light:hover
+            `,
+            rule: `background-color: ${colorPalette[color].D1}`,
+        },
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-medium:hover,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-low:hover
+            `,
+            rule: `background-color: ${colorPalette[color].L4}`,
+        },
+        // Active state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-high.${CSS_PREFIX}-button--theme-light:active
+            `,
+            rule: `background-color: ${colorPalette[color].D2}`,
+        },
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-medium:active,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-low:active
+            `,
+            rule: `background-color: ${colorPalette[color].L3}`,
+        },
+        // Focus state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-high.${CSS_PREFIX}-button--theme-light[data-focus-visible-added],
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-medium[data-focus-visible-added],
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--color-${color}.${CSS_PREFIX}-button--emphasis-low[data-focus-visible-added]
+            `,
+            rule: `box-shadow: 0 0 0 2px ${colorPalette[color].L3}`,
+        },
+    ];
+}
+
+/**
+ * Get selected button css rules.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @return {Array}  The selected button css rules.
+ */
+function _getButtonSelectedCSSRules(colorPalette) {
+    return [
+        // Default state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--theme-light
+            `,
+            rule: `background-color: ${colorPalette.primary.L4}; color: ${colorPalette.primary.D2};`,
+        },
+        // Hover state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark:hover,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--theme-light:hover
+            `,
+            rule: `background-color: ${colorPalette.primary.L3}`,
+        },
+        // Active state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark:active,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--theme-light:active
+            `,
+            rule: `background-color: ${colorPalette.primary.L2}`,
+        },
+        // Focus state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark[data-focus-visible-added],
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--theme-light[data-focus-visible-added]
+            `,
+            rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
+        },
+    ];
+}
 
 /**
  * Enhance isEmpty method to also works with numbers.
  *
- * @param  {any}     value The value to check
+ * @param  {any}     value The value to check.
  * @return {boolean} Weither if the input value is empty or != 0.
  */
 const _isEmpty = (value) => {
@@ -180,6 +316,29 @@ function onEscapePressed(cb) {
     };
 }
 
+/**
+ * Set custom color palette on primary and secondary colors.
+ *
+ * @param {Element} sheet        The sheet to insert the custom rules in.
+ * @param {string}  theme        The theme to apply the custom color palete on.
+ * @param {Object}  colorPalette The custom color palette.
+ */
+function setColorPalette(sheet, theme, colorPalette) {
+    let index = 0;
+
+    let buttonRules = [];
+    buttonRules = buttonRules.concat(
+        _getButtonCSSRules(colorPalette, 'primary'),
+        _getButtonCSSRules(colorPalette, 'secondary'),
+        _getButtonSelectedCSSRules(colorPalette),
+    );
+
+    buttonRules.forEach((buttonRule) => {
+        _addCSSRule(sheet, buttonRule.selector, buttonRule.rule, index);
+        index++;
+    });
+}
+
 /////////////////////////////
 
-export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed };
+export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed, setColorPalette };

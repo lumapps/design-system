@@ -1,5 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 
+import { setColorPalette } from 'LumX/core/utils';
+
 /////////////////////////////
 //                         //
 //    Private functions    //
@@ -120,6 +122,45 @@ function changeTheme(theme) {
     });
 }
 
+/**
+ * Set custom color palette on primary and secondary colors.
+ *
+ * @param {string} theme The theme to apply the custom color palete on.
+ */
+function setCustomColorPalette(theme) {
+    const styleTag = document.createElement('style');
+    document.head.appendChild(styleTag);
+
+    const { sheet } = styleTag;
+
+    setColorPalette(sheet, theme, {
+        primary: {
+            D2: '#fea41c',
+            D1: '#ffb71f',
+            // eslint-disable-next-line id-length
+            N: '#ffc525',
+            L1: 'rgba(255, 197, 37, 0.8)',
+            L2: 'rgba(255, 197, 37, 0.6)',
+            L3: 'rgba(255, 197, 37, 0.4)',
+            L4: 'rgba(255, 197, 37, 0.2)',
+            L5: 'rgba(255, 197, 37, 0.1)',
+            L6: 'rgba(255, 197, 37, 0.05)',
+        },
+        secondary: {
+            D2: '#c2395a',
+            D1: '#d83e5e',
+            // eslint-disable-next-line id-length
+            N: '#e94361',
+            L1: 'rgba(233, 67, 97, 0.8)',
+            L2: 'rgba(233, 67, 97, 0.6)',
+            L3: 'rgba(233, 67, 97, 0.4)',
+            L4: 'rgba(233, 67, 97, 0.2)',
+            L5: 'rgba(233, 67, 97, 0.1)',
+            L6: 'rgba(233, 67, 97, 0.05)',
+        },
+    });
+}
+
 /////////////////////////////
 
-export { changeTheme };
+export { changeTheme, setCustomColorPalette };

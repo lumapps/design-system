@@ -2,7 +2,7 @@
 
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import { changeTheme as _changeTheme } from '../utils';
+import { changeTheme, setCustomColorPalette } from '../utils';
 import { DEFAULT_THEME, THEMES } from '../constants';
 
 /////////////////////////////
@@ -360,10 +360,12 @@ AppDefaultConfig.$inject = ['$locationProvider', '$stateProvider', 'markedProvid
 
 function AppDefaultRun($rootScope, Theme) {
     $rootScope.Theme = Theme;
-    _changeTheme(Theme.theme).then(() => {
+    changeTheme(Theme.theme).then(() => {
         $rootScope.$apply(() => {
             Theme.loaded = true;
         });
+
+        setCustomColorPalette(Theme.theme);
     });
 
     /**

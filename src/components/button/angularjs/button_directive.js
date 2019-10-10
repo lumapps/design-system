@@ -210,6 +210,14 @@ function ButtonDirective() {
             }
         });
 
+        scope.$watch(attrs.lumxHasCustomColors, (hasCustomColors) => {
+            if (hasCustomColors) {
+                buttonEl.addClass(`${CSS_PREFIX}-custom-colors`);
+            } else {
+                buttonEl.removeClass(`${CSS_PREFIX}-custom-colors`);
+            }
+        });
+
         scope.$watch(attrs.lumxIsSelected, (isSelected) => {
             if (isSelected) {
                 buttonEl.addClass(`${CSS_PREFIX}-button--is-selected`);
