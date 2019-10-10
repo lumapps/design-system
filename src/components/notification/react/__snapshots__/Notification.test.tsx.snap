@@ -2,11 +2,7 @@
 
 exports[`<Notification> Snapshots and structure should render defaults 1`] = `
 <Portal
-  containerInfo={
-    <body
-      class="js-focus-visible"
-    />
-  }
+  containerInfo={<body />}
 >
   <div
     className="lumx-notification lumx-notification--color-dark"
@@ -21,7 +17,7 @@ exports[`<Notification> Snapshots and structure should render defaults 1`] = `
       className="lumx-notification__icon"
     >
       <Icon
-        icon="M13,9H11V7H13M13,17H11V11H13M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2Z"
+        icon="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
         size="s"
       />
     </div>
