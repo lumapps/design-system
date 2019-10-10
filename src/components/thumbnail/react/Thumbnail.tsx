@@ -12,6 +12,18 @@ import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
 /**
+ * Loading attribute is not yet supported in typescript, so we need
+ * to add it in order to avoid a ts error.
+ * https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#adding-non-standard-attributes
+ */
+declare module 'react' {
+    // tslint:disable-next-line: interface-name
+    interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
+        loading?: 'auto' | 'eager' | 'lazy';
+    }
+}
+
+/**
  * All available aspect ratios.
  */
 enum ThumbnailAspectRatio {
