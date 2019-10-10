@@ -34,6 +34,15 @@ enum ThumbnailVariant {
     rounded = 'rounded',
 }
 
+/**
+ * Authorized types of image loading.
+ */
+enum ImageLoading {
+    auto = 'auto',
+    lazy = 'lazy',
+    eager = 'eager',
+}
+
 /////////////////////////////
 
 /**
@@ -50,6 +59,8 @@ interface IThumbnailProps extends IGenericProps {
     image: string;
     /* Size. */
     size?: ThumbnailSize;
+    /* Image Loading. */
+    loading?: ImageLoading;
     /* Theme. */
     theme?: Theme;
     /* Variant. */
@@ -87,6 +98,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     align: Alignment.left,
     aspectRatio: ThumbnailAspectRatio.original,
     fillHeight: false,
+    loading: ImageLoading.lazy,
     size: undefined,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
@@ -104,6 +116,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     fillHeight = DEFAULT_PROPS.fillHeight,
+    loading = DEFAULT_PROPS.loading,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
@@ -131,7 +144,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...restProps}
         >
             {aspectRatio === ThumbnailAspectRatio.original ? (
-                <img className="lumx-thumbnail__image" src={image} alt={alt} />
+                <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
             ) : (
                 <div className="lumx-thumbnail__background" style={style} />
             )}
