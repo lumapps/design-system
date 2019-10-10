@@ -1,6 +1,8 @@
 import { Button, Emphasis, Icon, Size } from 'LumX';
-import { mdiDownload, mdiFile } from 'LumX/icons';
+
 import React, { ReactElement } from 'react';
+
+import { mdiDownload, mdiFile } from 'LumX/icons';
 
 interface IAssetBlock {
     /**
@@ -29,8 +31,10 @@ function getFileName(url: string): string {
     const match = url.match(/\/([^\/]+$)/);
     if (match) {
         const [, fileName] = match;
+
         return fileName;
     }
+
     return url;
 }
 
@@ -38,7 +42,7 @@ function getFileName(url: string): string {
  * Component used to present an asset in the documentation site.
  *
  * @param props Components props.
- * @return ReactElement
+ * @return ReactElement.
  */
 const AssetBlock: React.FC<IAssetBlock> = (props: IAssetBlock): ReactElement => {
     const { downloadURL, fileName, thumbnailURL } = props;
@@ -47,7 +51,12 @@ const AssetBlock: React.FC<IAssetBlock> = (props: IAssetBlock): ReactElement => 
         <div className="asset-block">
             <div className="asset-block__content">
                 {thumbnailURL ? (
-                    <img alt="File download thumbnail" className="asset-block__thumbnail" src={thumbnailURL} />
+                    <img
+                        alt="File download thumbnail"
+                        className="asset-block__thumbnail"
+                        src={thumbnailURL}
+                        srcset={`${thumbnailURL} 2x`}
+                    />
                 ) : (
                     <Icon className="asset-block__thumbnail" icon={mdiFile} size={Size.xl} />
                 )}
