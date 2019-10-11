@@ -101,7 +101,7 @@ function _getButtonCSSRules(colorPalette, color) {
 }
 
 /**
- * Get selected button css rules.
+ * Get selected button css rules impacted by primary color.
  *
  * @param  {Object} colorPalette The custom color palette.
  * @return {Array}  The selected button css rules.
@@ -281,6 +281,25 @@ function _getRadioButtonCSSRules(colorPalette, color) {
                 + .${CSS_PREFIX}-radio-button__input-placeholder
             `,
             rule: `box-shadow: 0 0 0 2px ${colorPalette[color].L3}`,
+        },
+    ];
+}
+
+/**
+ * Get select css rules impacted by primary color.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @return {Array}  The select css rules.
+ */
+function _getSelectCSSRules(colorPalette) {
+    return [
+        // Focus state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open .${CSS_PREFIX}-select__input-wrapper,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light .${CSS_PREFIX}-select__input-wrapper:focus
+            `,
+            rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
         },
     ];
 }
@@ -515,6 +534,13 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     radioButtonRules.forEach((radioButtonRule) => {
         _addCSSRule(sheet, radioButtonRule.selector, radioButtonRule.rule, index);
+        index++;
+    });
+
+    const selectRules = _getSelectCSSRules(colorPalette);
+
+    selectRules.forEach((selectRule) => {
+        _addCSSRule(sheet, selectRule.selector, selectRule.rule, index);
         index++;
     });
 }
