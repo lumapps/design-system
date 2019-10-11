@@ -1,5 +1,6 @@
 ```javascript import
-import { Autocomplete } from 'LumX';
+import { Autocomplete, List, ListItem, ListItemSize, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from 'LumX';
+import { useBooleanState } from 'LumX/core/react/hooks';
 ```
 
 # Autocomplete
@@ -7,11 +8,50 @@ import { Autocomplete } from 'LumX';
 ## Default
 
 ```javascript jsx withThemeSwitcher
-(theme) => (
-    <>
-        <Autocomplete theme={theme}/>
-    </>
-);
+(theme) => {
+    const CHOICES = [
+        {
+            text: 'Los Angeles',
+            id: 'losangeles'
+        },
+        {
+            text: 'San Francisco',
+            id: 'sanfrancisco'
+        },
+        {
+            text: 'Lyon',
+            id: 'lyon'
+        },
+        {
+            text: 'Montevideo',
+            id: 'montevideo'
+        }
+    ];
+
+    const [showSuggestions, setShowSuggestions] = React.useState(true);
+    const ddRef = React.useRef(null);
+    const closeAutocomplete = () => setShowSuggestions(false);
+    const onItemSelectedHandler = (choice) => console.log(choice);
+
+    return (
+        <Autocomplete theme={theme} showSuggestions={showSuggestions} closeOnClick closeOnEscape onClose={closeAutocomplete}>
+            <List isClickable>
+                { CHOICES.map((choice, index) => (
+                        <ListItem
+                            size={ListItemSize.tiny}
+                            isClickable
+                            key={choice.id}
+                            onItemSelected={() => onItemSelectedHandler(choice)}
+                            size={ListItemSize.tiny}
+                        >
+                            <div>{choice.text}</div>
+                        </ListItem>
+                    ))
+                }
+            </List>
+        </Autocomplete>
+    );
+};
 ```
 
 ### Properties

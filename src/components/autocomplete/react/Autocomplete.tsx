@@ -1,6 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useRef } from 'react';
 
 import classNames from 'classnames';
+
+import { Dropdown, TextField } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -11,7 +13,28 @@ import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 /**
  * Defines the props of the component.
  */
-interface IAutocompleteProps extends IGenericProps {}
+interface IAutocompleteProps extends IGenericProps {
+    /** Children of the Autocomplete. */
+    children: React.ReactNode;
+
+    /**
+     * Text field value.
+     * @see {@link TextFieldProps#onChange}
+     */
+    value: string;
+
+    /**
+     * Whether the suggestions from the autocomplete should be displayed or not.
+     * Useful to control the when the suggestions are displayed from outside the component
+     */
+    showSuggestions: boolean;
+
+    /**
+     * Text field value change handler.
+     * @see {@link TextFieldProps#onChange}
+     */
+    onChange(value: string): void;
+}
 type AutocompleteProps = IAutocompleteProps;
 
 /////////////////////////////
@@ -45,7 +68,17 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {};
  * @return The component.
  */
 const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): ReactElement => {
-    const { children, className, ...forwardedProps } = props;
+    const {
+        className,
+        children,
+        value,
+        onChange,
+        showSuggestions,
+        closeOnClick,
+        closeOnEscape,
+        ...forwardedProps
+    } = props;
+    const textfieldRef = useRef(null);
 
     return (
         <div
@@ -57,7 +90,15 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
             )}
             {...forwardedProps}
         >
-            {children}
+            <TextField value={value} onChange={onChange} textFieldRef={textfieldRef} />
+            <Dropdown
+                anchorRef={textfieldRef}
+                showDropdown={showSuggestions}
+                closeOnClick={closeOnClick}
+                closeOnEscape={closeOnEscape}
+            >
+                {children}
+            </Dropdown>
         </div>
     );
 };
