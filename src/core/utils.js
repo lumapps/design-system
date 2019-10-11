@@ -186,7 +186,7 @@ function _getCheckboxCSSRules(colorPalette, color) {
                 .${CSS_PREFIX}-checkbox__input-native[data-focus-visible-added]
                 + .${CSS_PREFIX}-checkbox__input-placeholder
             `,
-            rule: `background-color: ${colorPalette[color].L3}`,
+            rule: `box-shadow: 0 0 0 2px ${colorPalette[color].L3}`,
         },
     ];
 }
@@ -226,6 +226,41 @@ function _getChipSelectedCSSRules(colorPalette) {
                 .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-chip--is-selected.${CSS_PREFIX}-chip--color-dark[data-focus-visible-added]
             `,
             rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
+        },
+    ];
+}
+
+/**
+ * Get radio button css rules impacted by primary or secondary colors.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @param  {string} color        Whether to return primary or secondary variants.
+ * @return {Array}  The radio button css rules.
+ */
+function _getRadioButtonCSSRules(colorPalette, color) {
+    return [
+        // Default state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-radio-button--theme-light.${CSS_PREFIX}-radio-button--is-checked .${CSS_PREFIX}-radio-button__input-background
+            `,
+            rule: `color: ${colorPalette[color].N}`,
+        },
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-radio-button--theme-light.${CSS_PREFIX}-radio-button--is-unchecked .${CSS_PREFIX}-radio-button__input-indicator,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-radio-button--theme-light.${CSS_PREFIX}-radio-button--is-checked .${CSS_PREFIX}-radio-button__input-indicator
+            `,
+            rule: `background-color: ${colorPalette[color].N}`,
+        },
+        // Focus state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-radio-button--theme-light.${CSS_PREFIX}-radio-button--is-checked
+                .${CSS_PREFIX}-radio-button__input-native[data-focus-visible-added]
+                + .${CSS_PREFIX}-radio-button__input-placeholder
+            `,
+            rule: `box-shadow: 0 0 0 2px ${colorPalette[color].L3}`,
         },
     ];
 }
@@ -468,6 +503,18 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     progressRules.forEach((progressRule) => {
         _addCSSRule(sheet, progressRule.selector, progressRule.rule, index);
+        index++;
+    });
+
+    let radioButtonRules;
+    if (theme === 'lumapps') {
+        radioButtonRules = _getRadioButtonCSSRules(colorPalette, 'primary');
+    } else if (theme === 'material') {
+        radioButtonRules = _getRadioButtonCSSRules(colorPalette, 'secondary');
+    }
+
+    radioButtonRules.forEach((radioButtonRule) => {
+        _addCSSRule(sheet, radioButtonRule.selector, radioButtonRule.rule, index);
         index++;
     });
 }
