@@ -6,6 +6,8 @@ export * from './components';
 
 export { Avatar, AvatarProps } from './components/avatar/react/Avatar';
 
+export { Autocomplete } from './components/autocomplete/react/Autocomplete';
+
 export { Button, ButtonEmphasis, ButtonProps } from './components/button/react/Button';
 
 export { ButtonGroup, ButtonGroupProps } from './components/button/react/ButtonGroup';

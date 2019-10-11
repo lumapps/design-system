@@ -45,6 +45,7 @@ const ITEMS: Item[] = [
             {
                 label: 'Components',
                 children: [
+                    'Autocomplete',
                     'Avatar',
                     'Button',
                     'Checkbox',
