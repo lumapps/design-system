@@ -144,6 +144,58 @@ function _getButtonSelectedCSSRules(colorPalette) {
 }
 
 /**
+ * Get checkbox css rules impacted by primary and secondary colors.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @param  {string} color        Whether to return primary or secondary variants.
+ * @return {Array}  The checkbox css rules.
+ */
+function _getCheckboxCSSRules(colorPalette, color) {
+    return [
+        // Default state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-checkbox--theme-light .${CSS_PREFIX}-checkbox__input-indicator
+            `,
+            rule: `background-color: ${colorPalette[color].N}`,
+        },
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-checkbox--theme-dark .${CSS_PREFIX}-checkbox__input-indicator
+            `,
+            rule: `color: ${colorPalette[color].N}`,
+        },
+        // Hover state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-checkbox--theme-light.${CSS_PREFIX}-checkbox--is-checked
+                .${CSS_PREFIX}-checkbox__input-native:hover
+                + .${CSS_PREFIX}-checkbox__input-placeholder .${CSS_PREFIX}-checkbox__input-indicator
+            `,
+            rule: `background-color: ${colorPalette[color].D1}`,
+        },
+        // Active state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-checkbox--theme-light.${CSS_PREFIX}-checkbox--is-checked
+                .${CSS_PREFIX}-checkbox__input-native:active
+                + .${CSS_PREFIX}-checkbox__input-placeholder .${CSS_PREFIX}-checkbox__input-indicator
+            `,
+            rule: `background-color: ${colorPalette[color].D2}`,
+        },
+        // Focus state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-checkbox--theme-light.${CSS_PREFIX}-checkbox--is-checked
+                .${CSS_PREFIX}-checkbox__input-native[data-focus-visible-added]
+                + .${CSS_PREFIX}-checkbox__input-placeholder
+            `,
+            rule: `background-color: ${colorPalette[color].L3}`,
+        },
+    ];
+}
+
+/**
  * Enhance isEmpty method to also works with numbers.
  *
  * @param  {any}     value The value to check.
@@ -335,6 +387,18 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     buttonRules.forEach((buttonRule) => {
         _addCSSRule(sheet, buttonRule.selector, buttonRule.rule, index);
+        index++;
+    });
+
+    let checkboxRules;
+    if (theme === 'lumapps') {
+        checkboxRules = _getCheckboxCSSRules(colorPalette, 'primary');
+    } else if (theme === 'material') {
+        checkboxRules = _getCheckboxCSSRules(colorPalette, 'secondary');
+    }
+
+    checkboxRules.forEach((checkboxRule) => {
+        _addCSSRule(sheet, checkboxRule.selector, checkboxRule.rule, index);
         index++;
     });
 }
