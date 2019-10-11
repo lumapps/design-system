@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, Ref, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -47,6 +47,9 @@ interface ITextFieldProps extends IGenericProps {
 
     /** Theme. */
     theme?: Theme;
+
+    /** A ref that will be passed to the wrapper element. */
+    textFieldRef?: Ref<HTMLAnchorElement>;
 
     /** Text field value. */
     value: string;
@@ -154,6 +157,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         label,
         onChange,
         placeholder,
+        textFieldRef,
         theme = DEFAULT_PROPS.theme,
         type = DEFAULT_PROPS.type,
         value,
@@ -180,6 +184,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     theme,
                 }),
             )}
+            ref={textFieldRef}
         >
             {label && (
                 <label htmlFor={id} className={`${CLASSNAME}__label`}>
