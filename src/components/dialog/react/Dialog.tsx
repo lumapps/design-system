@@ -69,6 +69,15 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
 /////////////////////////////
 
 /**
+ * Prevent click bubbling to parent.
+ *
+ * @param evt Click event.
+ */
+const preventClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    evt.stopPropagation();
+};
+
+/**
  * [Enter the description of the component here].
  *
  * @return The component.
@@ -97,11 +106,13 @@ const Dialog: React.FC<DialogProps> = ({
             parentElement={parentElement}
             isCloseButtonVisible={false}
             preventAutoClose={preventAutoClose}
+            noWrapper={true}
         >
             <div
                 role="dialog"
                 className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
                 style={{ display: 'block' }}
+                onClick={preventClick}
             >
                 <div className={`${CLASSNAME}__wrapper`}>
                     <div
