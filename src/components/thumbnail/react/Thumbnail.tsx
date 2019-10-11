@@ -12,6 +12,18 @@ import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
 /**
+ * Loading attribute is not yet supported in typescript, so we need
+ * to add it in order to avoid a ts error.
+ * https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#adding-non-standard-attributes
+ */
+declare module 'react' {
+    // tslint:disable-next-line: interface-name
+    interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
+        loading?: 'auto' | 'eager' | 'lazy';
+    }
+}
+
+/**
  * All available aspect ratios.
  */
 enum ThumbnailAspectRatio {
@@ -34,25 +46,36 @@ enum ThumbnailVariant {
     rounded = 'rounded',
 }
 
+/**
+ * Authorized types of image loading.
+ */
+enum ImageLoading {
+    auto = 'auto',
+    lazy = 'lazy',
+    eager = 'eager',
+}
+
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
 interface IThumbnailProps extends IGenericProps {
-    /* The thumbnail alignment. */
+    /** The thumbnail alignment. */
     align?: Alignment;
-    /* The image aspect ratio. */
+    /** The image aspect ratio. */
     aspectRatio?: ThumbnailAspectRatio;
-    /* Whether the image has to fill its container's height. */
+    /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
-    /* Avatar image. */
+    /** Avatar image. */
     image: string;
-    /* Size. */
+    /** Size. */
     size?: ThumbnailSize;
-    /* Theme. */
+    /** Image Loading mode */
+    loading?: ImageLoading;
+    /** Theme. */
     theme?: Theme;
-    /* Variant. */
+    /** Variant. */
     variant?: ThumbnailVariant;
 }
 type ThumbnailProps = IThumbnailProps;
@@ -87,6 +110,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     align: Alignment.left,
     aspectRatio: ThumbnailAspectRatio.original,
     fillHeight: false,
+    loading: ImageLoading.lazy,
     size: undefined,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
@@ -104,6 +128,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     fillHeight = DEFAULT_PROPS.fillHeight,
+    loading = DEFAULT_PROPS.loading,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
@@ -131,7 +156,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...restProps}
         >
             {aspectRatio === ThumbnailAspectRatio.original ? (
-                <img className="lumx-thumbnail__image" src={image} alt={alt} />
+                <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
             ) : (
                 <div className="lumx-thumbnail__background" style={style} />
             )}
