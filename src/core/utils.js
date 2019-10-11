@@ -231,6 +231,26 @@ function _getChipSelectedCSSRules(colorPalette) {
 }
 
 /**
+ * Get progress css rules impacted by primary color.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @return {Array}  The progress css rules.
+ */
+function _getProgressCSSRules(colorPalette) {
+    return [
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__double-bounce1,
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__double-bounce2,
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-linear__line1,
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-linear__line2
+            `,
+            rule: `background-color: ${colorPalette.primary.L3}`,
+        },
+    ];
+}
+
+/**
  * Get radio button css rules impacted by primary or secondary colors.
  *
  * @param  {Object} colorPalette The custom color palette.
@@ -261,26 +281,6 @@ function _getRadioButtonCSSRules(colorPalette, color) {
                 + .${CSS_PREFIX}-radio-button__input-placeholder
             `,
             rule: `box-shadow: 0 0 0 2px ${colorPalette[color].L3}`,
-        },
-    ];
-}
-
-/**
- * Get progress css rules impacted by primary color.
- *
- * @param  {Object} colorPalette The custom color palette.
- * @return {Array}  The progress css rules.
- */
-function _getProgressCSSRules(colorPalette) {
-    return [
-        {
-            selector: `
-                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__double-bounce1,
-                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__double-bounce2,
-                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-linear__line1,
-                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-linear__line2
-            `,
-            rule: `background-color: ${colorPalette.primary.L3}`,
         },
     ];
 }
