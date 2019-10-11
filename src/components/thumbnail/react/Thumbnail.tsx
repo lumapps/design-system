@@ -61,21 +61,21 @@ enum ImageLoading {
  * Defines the props of the component.
  */
 interface IThumbnailProps extends IGenericProps {
-    /* The thumbnail alignment. */
+    /** The thumbnail alignment. */
     align?: Alignment;
-    /* The image aspect ratio. */
+    /** The image aspect ratio. */
     aspectRatio?: ThumbnailAspectRatio;
-    /* Whether the image has to fill its container's height. */
+    /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
-    /* Avatar image. */
+    /** Avatar image. */
     image: string;
-    /* Size. */
+    /** Size. */
     size?: ThumbnailSize;
-    /* Image Loading. */
+    /** Image Loading mode */
     loading?: ImageLoading;
-    /* Theme. */
+    /** Theme. */
     theme?: Theme;
-    /* Variant. */
+    /** Variant. */
     variant?: ThumbnailVariant;
 }
 type ThumbnailProps = IThumbnailProps;
