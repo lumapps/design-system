@@ -210,8 +210,8 @@ function ButtonDirective() {
             }
         });
 
-        scope.$watch(attrs.lumxHasCustomColors, (hasCustomColors) => {
-            if (hasCustomColors) {
+        scope.$watch(attrs.lumxCustomColors, (customColors) => {
+            if (customColors) {
                 buttonEl.addClass(`${CSS_PREFIX}-custom-colors`);
             } else {
                 buttonEl.removeClass(`${CSS_PREFIX}-custom-colors`);
