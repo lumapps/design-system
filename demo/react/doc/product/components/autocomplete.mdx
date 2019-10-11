@@ -29,12 +29,17 @@ import { useBooleanState } from 'LumX/core/react/hooks';
     ];
 
     const [showSuggestions, setShowSuggestions] = React.useState(true);
+    const [filterValue, setFilterValue] = React.useState('');
     const ddRef = React.useRef(null);
     const closeAutocomplete = () => setShowSuggestions(false);
     const onItemSelectedHandler = (choice) => console.log(choice);
+    const onChange = (value) => {
+        setFilterValue(value);
+        console.log(value);
+    };
 
     return (
-        <Autocomplete theme={theme} showSuggestions={showSuggestions} closeOnClick closeOnEscape onClose={closeAutocomplete}>
+        <Autocomplete theme={theme} showSuggestions={showSuggestions} closeOnClick closeOnEscape onClose={closeAutocomplete} value={filterValue} onChange={onChange}>
             <List isClickable>
                 { CHOICES.map((choice, index) => (
                         <ListItem

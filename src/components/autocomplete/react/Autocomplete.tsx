@@ -96,6 +96,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 showDropdown={showSuggestions}
                 closeOnClick={closeOnClick}
                 closeOnEscape={closeOnEscape}
+                {...forwardedProps}
             >
                 {children}
             </Dropdown>
