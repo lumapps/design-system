@@ -338,6 +338,24 @@ function _getSideNavigationCSSRules(colorPalette) {
 }
 
 /**
+ * Get slideshow controls css rules impacted by primary color.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @return {Array}  The slideshow controls css rules.
+ */
+function _getSlideshowControlsCSSRules(colorPalette) {
+    return [
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-slideshow-controls--theme-light .${CSS_PREFIX}-slideshow-controls__pagination-item:hover,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-slideshow-controls--theme-light .${CSS_PREFIX}-slideshow-controls__pagination-item--is-active
+            `,
+            rule: `background-color: ${colorPalette.primary.N}`,
+        },
+    ];
+}
+
+/**
  * Enhance isEmpty method to also works with numbers.
  *
  * @param  {any}     value The value to check.
@@ -581,6 +599,13 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     sideNavigationRules.forEach((sideNavigationRule) => {
         _addCSSRule(sheet, sideNavigationRule.selector, sideNavigationRule.rule, index);
+        index++;
+    });
+
+    const slideshowControlsRules = _getSlideshowControlsCSSRules(colorPalette);
+
+    slideshowControlsRules.forEach((slideshowControlsRule) => {
+        _addCSSRule(sheet, slideshowControlsRule.selector, slideshowControlsRule.rule, index);
         index++;
     });
 }

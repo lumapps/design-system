@@ -274,6 +274,7 @@ function SlideshowDirective() {
             activeIndex: '=?lumxActiveIndex',
             autoPlay: '=?lumxAutoPlay',
             autoPlayInterval: '@?lumxAutoPlayInterval',
+            customColors: '=?lumxCustomColors',
             fillHeight: '=?lumxFillHeight',
             groupBy: '=?lumxGroupBy',
             hasControls: '=?lumxHasControls',
