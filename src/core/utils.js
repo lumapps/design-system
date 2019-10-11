@@ -140,7 +140,7 @@ function _getButtonSelectedCSSRules(colorPalette) {
 }
 
 /**
- * Get checkbox css rules impacted by primary and secondary colors.
+ * Get checkbox css rules impacted by primary or secondary colors.
  *
  * @param  {Object} colorPalette The custom color palette.
  * @param  {string} color        Whether to return primary or secondary variants.
@@ -192,7 +192,7 @@ function _getCheckboxCSSRules(colorPalette, color) {
 }
 
 /**
- * Get selected chip css rules impacted by primary and secondary colors.
+ * Get selected chip css rules impacted by primary color.
  *
  * @param  {Object} colorPalette The custom color palette.
  * @return {Array}  The selected chip css rules.
@@ -226,6 +226,26 @@ function _getChipSelectedCSSRules(colorPalette) {
                 .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-chip--is-selected.${CSS_PREFIX}-chip--color-dark[data-focus-visible-added]
             `,
             rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
+        },
+    ];
+}
+
+/**
+ * Get progress css rules impacted by primary color.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @return {Array}  The progress css rules.
+ */
+function _getProgressCSSRules(colorPalette) {
+    return [
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__double-bounce1,
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__double-bounce2,
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-linear__line1,
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-linear__line2
+            `,
+            rule: `background-color: ${colorPalette.primary.L3}`,
         },
     ];
 }
@@ -441,6 +461,13 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     chipRules.forEach((chipRule) => {
         _addCSSRule(sheet, chipRule.selector, chipRule.rule, index);
+        index++;
+    });
+
+    const progressRules = _getProgressCSSRules(colorPalette);
+
+    progressRules.forEach((progressRule) => {
+        _addCSSRule(sheet, progressRule.selector, progressRule.rule, index);
         index++;
     });
 }
