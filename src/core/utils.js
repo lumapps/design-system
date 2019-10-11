@@ -305,6 +305,39 @@ function _getSelectCSSRules(colorPalette) {
 }
 
 /**
+ * Get side navigation css rules impacted by primary color.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @return {Array}  The side navigation css rules.
+ */
+function _getSideNavigationCSSRules(colorPalette) {
+    return [
+        // Default state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-side-navigation .${CSS_PREFIX}-side-navigation-item--is-selected .${CSS_PREFIX}-side-navigation-item__link
+            `,
+            rule: `background-color: ${colorPalette.primary.L4}; color: ${colorPalette.primary.D2};`,
+        },
+        // Hover & focus state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-side-navigation .${CSS_PREFIX}-side-navigation-item--is-selected .${CSS_PREFIX}-side-navigation-item__link:hover,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-side-navigation .${CSS_PREFIX}-side-navigation-item--is-selected .${CSS_PREFIX}-side-navigation-item__link[data-focus-visible-added]
+            `,
+            rule: `background-color: ${colorPalette.primary.L3} !important`,
+        },
+        // Active state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-side-navigation .${CSS_PREFIX}-side-navigation-item--is-selected .${CSS_PREFIX}-side-navigation-item__link:active
+            `,
+            rule: `background-color: ${colorPalette.primary.L2} !important`,
+        },
+    ];
+}
+
+/**
  * Enhance isEmpty method to also works with numbers.
  *
  * @param  {any}     value The value to check.
@@ -541,6 +574,13 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     selectRules.forEach((selectRule) => {
         _addCSSRule(sheet, selectRule.selector, selectRule.rule, index);
+        index++;
+    });
+
+    const sideNavigationRules = _getSideNavigationCSSRules(colorPalette);
+
+    sideNavigationRules.forEach((sideNavigationRule) => {
+        _addCSSRule(sheet, sideNavigationRule.selector, sideNavigationRule.rule, index);
         index++;
     });
 }
