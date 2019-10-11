@@ -27,7 +27,7 @@ interface IChipProps extends IGenericProps {
     before?: HTMLElement | ReactNode;
     /** The component color variant. */
     color?: Color;
-    /* Whether the chip has pointer on hover. */
+    /** Whether the chip has pointer on hover. */
     isClickable?: boolean;
     /** Indicates if the chip is currently in an active state or not. */
     isSelected?: boolean;
@@ -73,14 +73,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    after: null,
-    before: null,
-    color: ColorPalette.dark,
     isClickable: false,
     isDisabled: false,
     isSelected: false,
     size: Size.m,
-    theme: undefined,
+    theme: Theme.light,
 };
 /////////////////////////////
 
@@ -93,9 +90,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const Chip: React.FC<IChipProps> = ({
     after = DEFAULT_PROPS.after,
     before = DEFAULT_PROPS.before,
-    className = '',
+    className,
     children,
-    color = DEFAULT_PROPS.color,
+    color,
     isClickable = DEFAULT_PROPS.isClickable,
     isSelected = DEFAULT_PROPS.isSelected,
     isDisabled = DEFAULT_PROPS.isDisabled,
@@ -111,6 +108,9 @@ const Chip: React.FC<IChipProps> = ({
     const hasBeforeClick: boolean = isFunction(onBeforeClick);
     const hasOnClick: boolean = isFunction(onClick);
 
+    // Adapt color to the theme.
+    const chipColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
+
     /**
      * Execute the onBeforeClick method passed as a prop but stop propagation to avoid triggering the onClick method.
      *
@@ -121,7 +121,7 @@ const Chip: React.FC<IChipProps> = ({
             return;
         }
 
-        if (isFunction(onBeforeClick)) {
+        if (onBeforeClick && isFunction(onBeforeClick)) {
             onBeforeClick(evt);
         }
 
@@ -138,7 +138,7 @@ const Chip: React.FC<IChipProps> = ({
             return;
         }
 
-        if (isFunction(onAfterClick)) {
+        if (onAfterClick && isFunction(onAfterClick)) {
             onAfterClick(evt);
         }
 
@@ -152,14 +152,13 @@ const Chip: React.FC<IChipProps> = ({
                 className,
                 handleBasicClasses({
                     clickable: Boolean(hasOnClick) || isClickable,
-                    color,
+                    color: chipColor,
                     disabled: Boolean(isDisabled),
                     hasAfter: Boolean(hasAfterClick),
                     hasBefore: Boolean(hasBeforeClick),
                     prefix: CLASSNAME,
                     selected: Boolean(isSelected),
                     size,
-                    theme,
                     unselected: Boolean(!isSelected),
                 }),
             )}
