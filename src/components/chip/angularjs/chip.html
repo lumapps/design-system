@@ -8,8 +8,7 @@
                 'lumx-chip--is-disabled': lumx.isDisabled,
                 'lumx-chip--size-m': !lumx.size || lumx.size === 'm',
                 'lumx-chip--size-s': lumx.size === 's',
-                'lumx-chip--theme-light': lumx.theme === 'light',
-                'lumx-chip--theme-dark': lumx.theme === 'dark' }"
+                'lumx-custom-colors': lumx.customColors }"
     ng-click="lumx.handleOnClick($event)"
     lumx-enter-keypress="lumx.handleOnClick($event)"
     tabindex="{{ lumx.isDisabled || !lumx.onClick ? -1 : 0 }}"

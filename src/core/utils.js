@@ -111,32 +111,28 @@ function _getButtonSelectedCSSRules(colorPalette) {
         // Default state.
         {
             selector: `
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark,
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--theme-light
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark
             `,
             rule: `background-color: ${colorPalette.primary.L4}; color: ${colorPalette.primary.D2};`,
         },
         // Hover state.
         {
             selector: `
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark:hover,
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--theme-light:hover
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark:hover
             `,
             rule: `background-color: ${colorPalette.primary.L3}`,
         },
         // Active state.
         {
             selector: `
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark:active,
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--theme-light:active
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark:active
             `,
             rule: `background-color: ${colorPalette.primary.L2}`,
         },
         // Focus state.
         {
             selector: `
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark[data-focus-visible-added],
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--theme-light[data-focus-visible-added]
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-button--is-selected.${CSS_PREFIX}-button--color-dark[data-focus-visible-added]
             `,
             rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
         },
@@ -191,6 +187,45 @@ function _getCheckboxCSSRules(colorPalette, color) {
                 + .${CSS_PREFIX}-checkbox__input-placeholder
             `,
             rule: `background-color: ${colorPalette[color].L3}`,
+        },
+    ];
+}
+
+/**
+ * Get selected chip css rules impacted by primary and secondary colors.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @return {Array}  The selected chip css rules.
+ */
+function _getChipSelectedCSSRules(colorPalette) {
+    return [
+        // Default state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-chip--is-selected.${CSS_PREFIX}-chip--color-dark
+            `,
+            rule: `background-color: ${colorPalette.primary.L4}; color: ${colorPalette.primary.D2};`,
+        },
+        // Hover state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-chip--is-selected.${CSS_PREFIX}-chip--color-dark:hover
+            `,
+            rule: `background-color: ${colorPalette.primary.L3}`,
+        },
+        // Active state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-chip--is-selected.${CSS_PREFIX}-chip--color-dark:active
+            `,
+            rule: `background-color: ${colorPalette.primary.L2}`,
+        },
+        // Focus state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-chip--is-selected.${CSS_PREFIX}-chip--color-dark[data-focus-visible-added]
+            `,
+            rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
         },
     ];
 }
@@ -399,6 +434,13 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     checkboxRules.forEach((checkboxRule) => {
         _addCSSRule(sheet, checkboxRule.selector, checkboxRule.rule, index);
+        index++;
+    });
+
+    const chipRules = _getChipSelectedCSSRules(colorPalette);
+
+    chipRules.forEach((chipRule) => {
+        _addCSSRule(sheet, chipRule.selector, chipRule.rule, index);
         index++;
     });
 }

@@ -140,6 +140,18 @@ function ChipDirective() {
                 return (className.match(/(?:\S|-)*chip--color-\S+/g) || []).join(' ');
             }).addClass(`${CSS_PREFIX}-chip--color-${color}`);
         });
+
+        attrs.$observe('lumxTheme', (theme) => {
+            if (!theme) {
+                return;
+            }
+
+            const chipColor = theme === 'light' ? 'dark' : 'light';
+
+            el.removeClass((index, className) => {
+                return (className.match(/(?:\S|-)*chip--color-\S+/g) || []).join(' ');
+            }).addClass(`${CSS_PREFIX}-chip--color-${chipColor}`);
+        });
     }
 
     return {
@@ -151,6 +163,7 @@ function ChipDirective() {
         restrict: 'E',
         scope: {
             color: '@?lumxColor',
+            customColors: '=?lumxCustomColors',
             hasDropdownIndicator: '=?lumxHasDropdownIndicator',
             isDisabled: '=?ngDisabled',
             isSelected: '=?lumxIsSelected',
