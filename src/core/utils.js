@@ -458,6 +458,36 @@ function _getSwitchCSSRules(colorPalette, theme) {
 }
 
 /**
+ * Get tabs css rules impacted by primary or secondary colors.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @param  {string} theme        The theme, lumapps or material.
+ * @return {Array}  The tabs css rules.
+ */
+function _getTabsCSSRules(colorPalette, theme) {
+    const tabsRules = [
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-tabs--theme-light .${CSS_PREFIX}-tabs__link--is-active::after
+            `,
+            rule: `background-color: ${colorPalette.primary.N}`,
+        },
+    ];
+
+    if (theme === 'material') {
+        tabsRules.push({
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-tabs--theme-light .${CSS_PREFIX}-tabs__link:hover,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-tabs--theme-light .${CSS_PREFIX}-tabs__link--is-active
+            `,
+            rule: `color: ${colorPalette.primary.N}`,
+        });
+    }
+
+    return tabsRules;
+}
+
+/**
  * Enhance isEmpty method to also works with numbers.
  *
  * @param  {any}     value The value to check.
@@ -715,6 +745,13 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     switchRules.forEach((switchRule) => {
         _addCSSRule(sheet, switchRule.selector, switchRule.rule, index);
+        index++;
+    });
+
+    const tabsRules = _getTabsCSSRules(colorPalette, theme);
+
+    tabsRules.forEach((tabsRule) => {
+        _addCSSRule(sheet, tabsRule.selector, tabsRule.rule, index);
         index++;
     });
 }
