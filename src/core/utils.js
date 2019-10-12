@@ -192,12 +192,12 @@ function _getCheckboxCSSRules(colorPalette, color) {
 }
 
 /**
- * Get selected chip css rules impacted by primary color.
+ * Get chip css rules impacted by primary color.
  *
  * @param  {Object} colorPalette The custom color palette.
- * @return {Array}  The selected chip css rules.
+ * @return {Array}  The chip css rules.
  */
-function _getChipSelectedCSSRules(colorPalette) {
+function _getChipCSSRules(colorPalette) {
     return [
         // Default state.
         {
@@ -226,6 +226,39 @@ function _getChipSelectedCSSRules(colorPalette) {
                 .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-chip--is-selected.${CSS_PREFIX}-chip--color-dark[data-focus-visible-added]
             `,
             rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
+        },
+    ];
+}
+
+/**
+ * Get list css rules impacted by primary color.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @return {Array}  The list css rules.
+ */
+function _getListCSSRules(colorPalette) {
+    return [
+        // Default state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-list .${CSS_PREFIX}-list-item--is-selected
+            `,
+            rule: `background-color: ${colorPalette.primary.L4}; color: ${colorPalette.primary.D2};`,
+        },
+        // Hover & focus state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-list .${CSS_PREFIX}-list-item--is-selected:hover,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-list .${CSS_PREFIX}-list-item--is-selected[data-focus-visible-added]
+            `,
+            rule: `background-color: ${colorPalette.primary.L3} !important`,
+        },
+        // Active state.
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-list .${CSS_PREFIX}-list-item--is-selected:active
+            `,
+            rule: `background-color: ${colorPalette.primary.L2} !important`,
         },
     ];
 }
@@ -755,10 +788,17 @@ function setColorPalette(sheet, theme, colorPalette) {
         index++;
     });
 
-    const chipRules = _getChipSelectedCSSRules(colorPalette);
+    const chipRules = _getChipCSSRules(colorPalette);
 
     chipRules.forEach((chipRule) => {
         _addCSSRule(sheet, chipRule.selector, chipRule.rule, index);
+        index++;
+    });
+
+    const listRules = _getListCSSRules(colorPalette);
+
+    listRules.forEach((listRule) => {
+        _addCSSRule(sheet, listRule.selector, listRule.rule, index);
         index++;
     });
 

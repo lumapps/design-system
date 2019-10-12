@@ -130,7 +130,12 @@
                 <lumx-progress></lumx-progress>
             </div>
 
-            <lumx-list lumx-focus-on-init="!lumx.hasFilter" lumx-is-clickable="true" ng-if="!lumx.isLoading">
+            <lumx-list
+                lumx-custom-colors="lumx.customColors"
+                lumx-focus-on-init="!lumx.hasFilter"
+                lumx-is-clickable="true"
+                ng-if="!lumx.isLoading"
+            >
                 <lumx-list-item
                     lumx-is-selected="lumx.isSelected(choice)"
                     lumx-size="tiny"
