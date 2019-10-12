@@ -510,6 +510,45 @@ function _getTabsCSSRules(colorPalette, theme) {
 }
 
 /**
+ * Get text field css rules impacted by primary color.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @param  {string} theme        The theme, lumapps or material.
+ * @return {Array}  The text field css rules.
+ */
+function _getTextFieldCSSRules(colorPalette, theme) {
+    let textFieldRules;
+
+    if (theme === 'lumapps') {
+        textFieldRules = [
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light.${CSS_PREFIX}-text-field--is-focus .${CSS_PREFIX}-text-field__input-wrapper
+                `,
+                rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
+            },
+        ];
+    } else if (theme === 'material') {
+        textFieldRules = [
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light.${CSS_PREFIX}-text-field--is-focus .${CSS_PREFIX}-text-field__label
+                `,
+                rule: `color: ${colorPalette.primary.N}`,
+            },
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light .${CSS_PREFIX}-text-field__input-wrapper::after
+                `,
+                rule: `background-color: ${colorPalette.primary.N}`,
+            },
+        ];
+    }
+
+    return textFieldRules;
+}
+
+/**
  * Enhance isEmpty method to also works with numbers.
  *
  * @param  {any}     value The value to check.
@@ -774,6 +813,13 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     tabsRules.forEach((tabsRule) => {
         _addCSSRule(sheet, tabsRule.selector, tabsRule.rule, index);
+        index++;
+    });
+
+    const textFieldRules = _getTextFieldCSSRules(colorPalette, theme);
+
+    textFieldRules.forEach((textFieldRule) => {
+        _addCSSRule(sheet, textFieldRule.selector, textFieldRule.rule, index);
         index++;
     });
 }

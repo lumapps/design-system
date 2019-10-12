@@ -146,6 +146,7 @@ function TextFieldDirective() {
         replace: true,
         restrict: 'E',
         scope: {
+            customColors: '=?lumxCustomColors',
             hasError: '=?lumxHasError',
             helper: '@?lumxHelper',
             icon: '@?lumxIcon',
