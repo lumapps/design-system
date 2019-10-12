@@ -356,6 +356,108 @@ function _getSlideshowControlsCSSRules(colorPalette) {
 }
 
 /**
+ * Get switch css rules impacted by primary or secondary colors.
+ *
+ * @param  {Object} colorPalette The custom color palette.
+ * @param  {string} theme        The theme, lumapps or material.
+ * @return {Array}  The switch css rules.
+ */
+function _getSwitchCSSRules(colorPalette, theme) {
+    let switchRules;
+
+    if (theme === 'lumapps') {
+        switchRules = [
+            // Default state.
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-background,
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-dark.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-indicator
+                `,
+                rule: `background-color: ${colorPalette.primary.N}`,
+            },
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-dark.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-background
+                `,
+                rule: `color: ${colorPalette.primary.N}`,
+            },
+            // Hover state.
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked
+                    .${CSS_PREFIX}-switch__input-native:hover
+                    + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-background
+                `,
+                rule: `background-color: ${colorPalette.primary.D1}`,
+            },
+            // Active state.
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked
+                    .${CSS_PREFIX}-switch__input-native:active
+                    + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-background
+                `,
+                rule: `background-color: ${colorPalette.primary.D2}`,
+            },
+            // Focus state.
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked
+                    .${CSS_PREFIX}-switch__input-native[data-focus-visible-added]
+                    + .${CSS_PREFIX}-switch__input-placeholder
+                `,
+                rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
+            },
+        ];
+    } else if (theme === 'material') {
+        switchRules = [
+            // Default state.
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-background
+                `,
+                rule: `background-color: ${colorPalette.secondary.L3} !important`,
+            },
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-indicator
+                `,
+                rule: `background-color: ${colorPalette.secondary.N} !important`,
+            },
+            // Hover state.
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--is-checked
+                    .${CSS_PREFIX}-switch__input-native:hover
+                    + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-indicator
+                `,
+                rule: `background-color: ${colorPalette.secondary.D1} !important`,
+            },
+            // Active state.
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--is-checked
+                    .${CSS_PREFIX}-switch__input-native:active
+                    + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-indicator
+                `,
+                rule: `background-color: ${colorPalette.secondary.D2} !important`,
+            },
+            // Focus state.
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--is-checked
+                    .${CSS_PREFIX}-switch__input-native[data-focus-visible-added]
+                    + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-indicator
+                `,
+                rule: `box-shadow: 0 0 0 2px ${colorPalette.secondary.L3}`,
+            },
+        ];
+    }
+
+    return switchRules;
+}
+
+/**
  * Enhance isEmpty method to also works with numbers.
  *
  * @param  {any}     value The value to check.
@@ -606,6 +708,13 @@ function setColorPalette(sheet, theme, colorPalette) {
 
     slideshowControlsRules.forEach((slideshowControlsRule) => {
         _addCSSRule(sheet, slideshowControlsRule.selector, slideshowControlsRule.rule, index);
+        index++;
+    });
+
+    const switchRules = _getSwitchCSSRules(colorPalette, theme);
+
+    switchRules.forEach((switchRule) => {
+        _addCSSRule(sheet, switchRule.selector, switchRule.rule, index);
         index++;
     });
 }
