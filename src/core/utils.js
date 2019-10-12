@@ -289,19 +289,41 @@ function _getRadioButtonCSSRules(colorPalette, color) {
  * Get select css rules impacted by primary color.
  *
  * @param  {Object} colorPalette The custom color palette.
+ * @param  {string} theme        The theme, lumapps or material.
  * @return {Array}  The select css rules.
  */
-function _getSelectCSSRules(colorPalette) {
-    return [
-        // Focus state.
-        {
-            selector: `
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open .${CSS_PREFIX}-select__input-wrapper,
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light .${CSS_PREFIX}-select__input-wrapper:focus
-            `,
-            rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
-        },
-    ];
+function _getSelectCSSRules(colorPalette, theme) {
+    let selectRules;
+
+    if (theme === 'lumapps') {
+        selectRules = [
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open .${CSS_PREFIX}-select__input-wrapper,
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light .${CSS_PREFIX}-select__input-wrapper:focus
+                `,
+                rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
+            },
+        ];
+    } else if (theme === 'material') {
+        selectRules = [
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-focus .${CSS_PREFIX}-select__label,
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open .${CSS_PREFIX}-select__label
+                `,
+                rule: `color: ${colorPalette.primary.N}`,
+            },
+            {
+                selector: `
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light .${CSS_PREFIX}-select__input-wrapper::after
+                `,
+                rule: `background-color: ${colorPalette.primary.N}`,
+            },
+        ];
+    }
+
+    return selectRules;
 }
 
 /**
@@ -720,7 +742,7 @@ function setColorPalette(sheet, theme, colorPalette) {
         index++;
     });
 
-    const selectRules = _getSelectCSSRules(colorPalette);
+    const selectRules = _getSelectCSSRules(colorPalette, theme);
 
     selectRules.forEach((selectRule) => {
         _addCSSRule(sheet, selectRule.selector, selectRule.rule, index);
