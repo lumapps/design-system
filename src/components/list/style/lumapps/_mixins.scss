@@ -28,25 +28,24 @@
 
     &:hover,
     &[data-focus-visible-added] {
-        @include lumx-state(state-hover, emphasis-low, dark);
+        @include lumx-state('state-hover', 'emphasis-low', 'dark');
     }
 
     &:active {
-        @include lumx-state(state-active, emphasis-low, dark);
+        @include lumx-state('state-active', 'emphasis-low', 'dark');
     }
 }
 
 @mixin lumx-list-item-selected() {
-    background-color: lumx-theme-color-variant($lumx-list-item-selected-color, 'L5');
-    color: lumx-theme-color-variant($lumx-list-item-selected-color, 'N');
+    @include lumx-state-as-selected('state-default', 'dark');
 
     &:hover,
     &[data-focus-visible-added] {
-        background-color: lumx-theme-color-variant($lumx-list-item-selected-color, 'L4') !important;
+        @include lumx-state-as-selected('state-hover', 'dark');
     }
 
     &:active {
-        background-color: lumx-theme-color-variant($lumx-list-item-selected-color, 'L3') !important;
+        @include lumx-state-as-selected('state-active', 'dark');
     }
 }
 

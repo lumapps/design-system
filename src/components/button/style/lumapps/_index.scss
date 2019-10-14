@@ -125,13 +125,11 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-button--is-selected {
-    &.#{$lumx-base-prefix}-button--color-dark,
-    &.#{$lumx-base-prefix}-button--theme-light {
+    &.#{$lumx-base-prefix}-button--color-dark {
         @include lumx-button-is-selected('dark');
     }
 
-    &.#{$lumx-base-prefix}-button--color-light,
-    &.#{$lumx-base-prefix}-button--theme-dark {
+    &.#{$lumx-base-prefix}-button--color-light {
         @include lumx-button-is-selected('light');
     }
 }

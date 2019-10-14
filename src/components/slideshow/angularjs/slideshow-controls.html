@@ -2,7 +2,8 @@
     class="lumx-slideshow-controls"
     ng-class="{ 'lumx-slideshow-controls--has-infinite-pagination': lumx.slidesCount > lumx.paginationItemsMax,
                 'lumx-slideshow-controls--theme-light': !lumx.theme || lumx.theme === 'light',
-                'lumx-slideshow-controls--theme-dark': lumx.theme === 'dark' }"
+                'lumx-slideshow-controls--theme-dark': lumx.theme === 'dark',
+                'lumx-custom-colors': lumx.customColors }"
 >
     <lumx-button
         class="lumx-slideshow-controls__navigation"

@@ -1,4 +1,8 @@
-<div class="lumx-progress" ng-class="{ 'lumx-progress--circular': !lumx.variant || lumx.variant === 'circular' }">
+<div
+    class="lumx-progress"
+    ng-class="{ 'lumx-progress--circular': !lumx.variant || lumx.variant === 'circular',
+                'lumx-custom-colors': lumx.customColors }"
+>
     <div class="lumx-progress-circular" ng-if="::!lumx.variant || lumx.variant === 'circular'">
         <div class="lumx-progress-circular__double-bounce1"></div>
         <div class="lumx-progress-circular__double-bounce2"></div>

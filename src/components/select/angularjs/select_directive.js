@@ -502,6 +502,7 @@ function SelectDirective() {
         restrict: 'E',
         scope: {
             choices: '=lumxChoices',
+            customColors: '=?lumxCustomColors',
             filter: '&?lumxFilter',
             hasError: '=?lumxHasError',
             hasFilter: '=?lumxHasFilter',
