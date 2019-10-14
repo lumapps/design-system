@@ -36,6 +36,9 @@ interface IListItemProps extends IGenericProps {
     /** Whether the list item is active. */
     isActive?: boolean;
 
+    /** Whether the list item should be highlighted. */
+    isHighlighted?: boolean;
+
     /** Whether the list item can be clicked. */
     isClickable?: boolean;
 
@@ -82,6 +85,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     isActive: false,
     isClickable: false,
+    isHighlighted: false,
     isSelected: false,
     size: ListItemSize.regular,
     theme: Theme.light,
