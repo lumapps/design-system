@@ -3,9 +3,8 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
 
-import { Autocomplete, AutocompleteProps, CLASSNAME, DEFAULT_PROPS } from './Autocomplete';
+import { Autocomplete, AutocompleteProps, CLASSNAME } from './Autocomplete';
 
 /////////////////////////////
 
@@ -18,6 +17,11 @@ type ISetupProps = Partial<AutocompleteProps>;
  * Defines what the `setup` function will return.
  */
 interface ISetup extends ICommonSetup {
+    /**
+     * The <div> element that holds the dropdown content.
+     */
+    dropdown: Wrapper;
+
     props: ISetupProps;
 
     /**
@@ -25,6 +29,11 @@ interface ISetup extends ICommonSetup {
      * [You should also probably change the name of the wrapper to something more meaningful].
      */
     wrapper: Wrapper;
+
+    /**
+     * The <input> element.
+     */
+    textField: Wrapper;
 }
 
 /////////////////////////////
@@ -42,8 +51,12 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
     // @ts-ignore
     const wrapper: Wrapper = renderer(<Autocomplete {...props} />);
 
+    const input = wrapper.find('input');
+
     return {
+        dropdown: wrapper.find('div').first(),
         props,
+        textField: input,
         wrapper,
     };
 };
@@ -58,6 +71,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
+
             expect(wrapper).toHaveClassName(CLASSNAME);
         });
     });
@@ -66,16 +80,10 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
-        // Here are some examples of basic props check.
-
         it('should use default props', (): void => {
-            const { wrapper } = setup();
+            const { wrapper }: ISetup = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach((prop: string): void => {
-                expect(wrapper).toHaveClassName(
-                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                );
-            });
+            expect(wrapper).toHaveClassName(CLASSNAME);
         });
     });
 
@@ -83,21 +91,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
 
     // 3. Test events.
     describe('Events', (): void => {
-        // Here is an example how to check a `onClick` event.
-
-        const onClick: jest.Mock = jest.fn();
-
-        beforeEach((): void => {
-            onClick.mockClear();
-        });
-
-        it('should trigger `onClick` when clicked', (): void => {
-            const { wrapper } = setup({ onClick }, false);
-
-            wrapper.simulate('click');
-
-            expect(onClick).toHaveBeenCalled();
-        });
+        // Nothing to do here.
     });
     /////////////////////////////
 

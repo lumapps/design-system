@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-autocomplete"
+>
+  <TextField
+    textFieldRef={
+      Object {
+        "current": null,
+      }
+    }
+  />
+  <Dropdown
+    anchorRef={
+      Object {
+        "current": null,
+      }
+    }
+  />
+</div>
+`;
