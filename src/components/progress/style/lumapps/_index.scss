@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-progress {
-    &--circular {
+    &--variant-circular {
         width: $lumx-progress-circular-size;
         height: $lumx-progress-circular-size;
     }
@@ -25,8 +25,17 @@
         width: 100%;
         height: 100%;
         animation: lumx-progress-bounce 2s infinite ease-in-out;
-        background-color: lumx-theme-color-variant('primary', 'L3');
         border-radius: 50%;
+    }
+
+    .#{$lumx-base-prefix}-progress--theme-light &__double-bounce1,
+    .#{$lumx-base-prefix}-progress--theme-light &__double-bounce2 {
+        background-color: lumx-theme-color-variant('primary', 'L3');
+    }
+
+    .#{$lumx-base-prefix}-progress--theme-dark &__double-bounce1,
+    .#{$lumx-base-prefix}-progress--theme-dark &__double-bounce2 {
+        background-color: lumx-theme-color-variant('light', 'L3');
     }
 
     &__double-bounce2 {
@@ -65,7 +74,16 @@
         right: 0;
         bottom: 0;
         left: 0;
+    }
+
+    .#{$lumx-base-prefix}-progress--theme-light &__line1,
+    .#{$lumx-base-prefix}-progress--theme-light &__line2 {
         background-color: lumx-theme-color-variant('primary', 'L3');
+    }
+
+    .#{$lumx-base-prefix}-progress--theme-dark &__line1,
+    .#{$lumx-base-prefix}-progress--theme-dark &__line2 {
+        background-color: lumx-theme-color-variant('light', 'L3');
     }
 
     &__line2 {

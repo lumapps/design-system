@@ -22,10 +22,17 @@
 
     &__path {
         animation: lumx-progress-dash 1.5s ease-in-out infinite;
-        stroke: lumx-theme-color-variant('primary', 'N');
         stroke-dasharray: 1, 200;
         stroke-dashoffset: 0;
         stroke-linecap: butt;
+    }
+
+    .#{$lumx-base-prefix}-progress--theme-light &__path {
+        stroke: lumx-theme-color-variant('primary', 'N');
+    }
+
+    .#{$lumx-base-prefix}-progress--theme-dark &__path {
+        stroke: lumx-theme-color-variant('light', 'N');
     }
 
     &__double-bounce1,

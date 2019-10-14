@@ -10,20 +10,20 @@ Progress come in two styles: _circular_ and _linear_.
 
 ## Circular
 
-```javascript jsx disableGrid
-() => (
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => (
     <>
-        <Progress />
+        <Progress theme={theme} />
     </>
 );
 ```
 
 ## Linear
 
-```javascript jsx disableGrid
-() => (
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => (
     <>
-        <Progress variant={ProgressVariant.linear} />
+        <Progress theme={theme} variant={ProgressVariant.linear} />
     </>
 );
 ```
