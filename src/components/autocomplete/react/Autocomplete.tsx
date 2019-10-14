@@ -59,13 +59,13 @@ interface IAutocompleteProps extends IGenericProps {
      * Text field focus change handler.
      * @see {@link TextFieldProps#onFocus}
      */
-    onFocus(event: React.FocusEvent): void;
+    onFocus?(event: React.FocusEvent): void;
 
     /**
      * Text field blur change handler.
      * @see {@link TextFieldProps#onBlur}
      */
-    onBlur(event: React.FocusEvent): void;
+    onBlur?(event: React.FocusEvent): void;
 }
 type AutocompleteProps = IAutocompleteProps;
 
