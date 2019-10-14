@@ -14,7 +14,10 @@ import { IGenericProps, getRootClassName } from 'LumX/react/utils';
  * Defines the props of the component.
  */
 interface IAutocompleteProps extends IGenericProps {
-    /** Children of the Autocomplete. */
+    /**
+     * Children of the Autocomplete. This should be a list of the different
+     * suggestions that
+     */
     children: React.ReactNode;
 
     /**
@@ -27,17 +30,17 @@ interface IAutocompleteProps extends IGenericProps {
      * Whether the suggestions from the autocomplete should be displayed or not.
      * Useful to control when the suggestions are displayed from outside the component
      */
-    showSuggestions: boolean;
+    isOpen: boolean;
 
     /**
      * Whether a click anywhere out of the Autocomplete would close it
-     * @see {@link TextFieldProps#closeOnClick}
+     * @see {@link DropdownProps#closeOnClick}
      */
     closeOnClick?: boolean;
 
     /**
      * Whether an escape key press would close the Autocomplete.
-     * @see {@link TextFieldProps#closeOnEscape}
+     * @see {@link DropdownProps#closeOnEscape}
      */
     closeOnEscape?: boolean;
 
@@ -78,13 +81,14 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     closeOnClick: true,
     closeOnEscape: true,
-    showSuggestions: undefined,
+    isOpen: undefined,
 };
 
 /////////////////////////////
 
 /**
- * [Enter the description of the component here].
+ * This component allows to make the connection between a Text Field and a Dropdown,
+ * displaying a list of suggestions from the text entered on the text field.
  *
  * @return The component.
  */
@@ -95,12 +99,12 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         value,
         onChange,
         onKeyDown,
-        showSuggestions,
+        isOpen,
         closeOnClick,
         closeOnEscape,
         ...forwardedProps
     } = props;
-    const textfieldRef = useRef(null);
+    const textFieldRef = useRef(null);
 
     return (
         <div
@@ -115,13 +119,13 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
             <TextField
                 value={value}
                 onChange={onChange}
-                textFieldRef={textfieldRef}
+                textFieldRef={textFieldRef}
                 onKeyDown={onKeyDown}
                 {...forwardedProps}
             />
             <Dropdown
-                anchorRef={textfieldRef}
-                showDropdown={showSuggestions}
+                anchorRef={textFieldRef}
+                showDropdown={isOpen}
                 closeOnClick={closeOnClick}
                 closeOnEscape={closeOnEscape}
                 {...forwardedProps}

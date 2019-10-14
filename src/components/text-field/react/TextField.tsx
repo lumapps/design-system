@@ -229,10 +229,10 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
                 disabled={isDisabled}
                 placeholder={placeholder}
                 value={value}
-                rows={rows}
                 onFocus={onTextFieldFocus}
                 onBlur={onTextFieldBlur}
                 onChange={handleChange}
+                rows={rows}
                 ref={inputRef as RefObject<HTMLTextAreaElement>}
                 {...forwardedProps}
             />

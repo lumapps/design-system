@@ -17,23 +17,12 @@ type ISetupProps = Partial<AutocompleteProps>;
  * Defines what the `setup` function will return.
  */
 interface ISetup extends ICommonSetup {
-    /**
-     * The <div> element that holds the dropdown content.
-     */
-    dropdown: Wrapper;
-
     props: ISetupProps;
 
     /**
-     * [Enter the description of this wrapper].
-     * [You should also probably change the name of the wrapper to something more meaningful].
+     * The <div> element that holds the popover content.
      */
     wrapper: Wrapper;
-
-    /**
-     * The <input> element.
-     */
-    textField: Wrapper;
 }
 
 /////////////////////////////
@@ -51,12 +40,8 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
     // @ts-ignore
     const wrapper: Wrapper = renderer(<Autocomplete {...props} />);
 
-    const input = wrapper.find('input');
-
     return {
-        dropdown: wrapper.find('div').first(),
         props,
-        textField: input,
         wrapper,
     };
 };
