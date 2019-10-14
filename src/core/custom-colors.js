@@ -272,6 +272,12 @@ function _getProgressCSSRules(colorPalette) {
             `,
             rule: `background-color: ${colorPalette.primary.L3}`,
         },
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__path
+            `,
+            rule: `stroke: ${colorPalette.primary.N}`,
+        },
     ];
 }
 
