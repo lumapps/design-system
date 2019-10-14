@@ -78,11 +78,15 @@ import { Button, Notification, NotificationType, Theme } from 'LumX';
     };
 
     const close = (callback) => {
-        setNotificationProps({ ...notificationPropsRef.current, isOpen: false, type: undefined });
+        setNotificationProps({ ...notificationPropsRef.current, isOpen: false });
 
-        if (isFunction(callback)) {
-            setTimeout(callback, 200);
-        }
+        setTimeout(() => {
+            setNotificationProps({ type: undefined });
+
+            if (isFunction(callback)) {
+                callback();
+            }
+        }, 200);
     };
 
     const setupTimer = () => {
