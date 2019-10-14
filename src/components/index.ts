@@ -63,6 +63,7 @@ enum Size {
     l = 'l',
     xl = 'xl',
     xxl = 'xxl',
+    tiny = 'tiny',
     regular = 'regular',
     big = 'big',
     huge = 'huge',

@@ -106,3 +106,5 @@ export { SideNavigation, SideNavigationProps } from 'LumX/components/side-naviga
 export { SideNavigationItem, SideNavigationItemProps } from 'LumX/components/side-navigation/react/SideNavigationItem';
 
 export { Slider } from 'LumX/components/slider/react/Slider';
+
+export { Dialog, DialogSizes } from 'LumX/components/dialog/react/Dialog';
