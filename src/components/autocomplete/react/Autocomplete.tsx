@@ -54,6 +54,18 @@ interface IAutocompleteProps extends IGenericProps {
      * Text field on key down handler.
      */
     onKeyDown(value: string): void;
+
+    /**
+     * Text field focus change handler.
+     * @see {@link TextFieldProps#onFocus}
+     */
+    onFocus(event: React.FocusEvent): void;
+
+    /**
+     * Text field blur change handler.
+     * @see {@link TextFieldProps#onBlur}
+     */
+    onBlur(event: React.FocusEvent): void;
 }
 type AutocompleteProps = IAutocompleteProps;
 
@@ -97,7 +109,9 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         className,
         children,
         value,
+        onBlur,
         onChange,
+        onFocus,
         onKeyDown,
         isOpen,
         closeOnClick,
@@ -121,6 +135,8 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 onChange={onChange}
                 textFieldRef={textFieldRef}
                 onKeyDown={onKeyDown}
+                onBlur={onBlur}
+                onFocus={onFocus}
                 {...forwardedProps}
             />
             <Dropdown
