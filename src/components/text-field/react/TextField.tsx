@@ -59,6 +59,12 @@ interface ITextFieldProps extends IGenericProps {
 
     /** Text field value change handler. */
     onChange(value: string): void;
+
+    /** Text field focus change handler. */
+    onFocus(event: React.FocusEvent): void;
+
+    /** Text field blur change handler. */
+    onBlur(event: React.FocusEvent): void;
 }
 type TextFieldProps = ITextFieldProps;
 
@@ -171,6 +177,8 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         isValid,
         label,
         onChange,
+        onFocus,
+        onBlur,
         placeholder,
         textFieldRef,
         theme = DEFAULT_PROPS.theme,
@@ -223,7 +231,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     {renderInputNative({
                         id,
                         isDisabled,
+                        onBlur,
                         onChange,
+                        onFocus,
                         placeholder,
                         setFocus,
                         type,
