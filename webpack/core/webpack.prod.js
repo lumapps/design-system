@@ -62,6 +62,10 @@ if (generatePackage) {
                 to: `${DIST_PATH}/core/js`,
             },
             {
+                from: `${CORE_PATH}/custom-colors.js`,
+                to: `${DIST_PATH}/core/js`,
+            },
+            {
                 context: `${CORE_PATH}/style/`,
                 from: `${CORE_PATH}/style/*.scss`,
                 to: `${DIST_PATH}/core/scss`,
