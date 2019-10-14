@@ -101,12 +101,27 @@ interface IInputNativeProps {
     value: string;
     setFocus(focus: boolean): void;
     onChange(value: string): void;
+    onFocus(value: React.FocusEvent): void;
+    onBlur(value: React.FocusEvent): void;
 }
 
 const renderInputNative = (props: IInputNativeProps): ReactElement => {
-    const { id, isDisabled, placeholder, type, value, setFocus, onChange, ...forwardedProps } = props;
-    const onFocus = (): void => setFocus(true);
-    const onBlur = (): void => setFocus(false);
+    const { id, isDisabled, placeholder, type, value, setFocus, onChange, onFocus, onBlur, ...forwardedProps } = props;
+    const onTextFieldFocus = (event: React.FocusEvent): void => {
+        if (onFocus) {
+            onFocus(event);
+        }
+
+        return setFocus(true);
+    };
+
+    const onTextFieldBlur = (event: React.FocusEvent): void => {
+        if (onBlur) {
+            onBlur(event);
+        }
+
+        return setFocus(false);
+    };
 
     const handleChange = (event: React.ChangeEvent): void => onChange(get(event, 'target.value'));
 
@@ -117,8 +132,8 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
                 disabled={isDisabled}
                 placeholder={placeholder}
                 value={value}
-                onFocus={onFocus}
-                onBlur={onBlur}
+                onFocus={onTextFieldFocus}
+                onBlur={onTextFieldBlur}
                 onChange={handleChange}
                 {...forwardedProps}
             />
@@ -131,8 +146,8 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
             type="text"
             placeholder={placeholder}
             value={value}
-            onFocus={onFocus}
-            onBlur={onBlur}
+            onFocus={onTextFieldFocus}
+            onBlur={onTextFieldBlur}
             onChange={handleChange}
             {...forwardedProps}
         />

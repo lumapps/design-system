@@ -89,16 +89,19 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
         }
     };
 
+    const onFocus = (evt) => setShowSuggestions(filterValue.length > 0);
+    const onBlur = (evt) => setShowSuggestions(false);
+
     return (
         <Autocomplete
             theme={theme}
-            showSuggestions={showSuggestions}
-            closeOnClick
-            closeOnEscape
+            isOpen={showSuggestions}
             onClose={closeAutocomplete}
             value={filterValue}
             onChange={onChange}
             onKeyDown={onKeyDown}
+            onFocus={onFocus}
+            onBlur={onBlur}
         >
             <List isClickable>
                 { filteredCities.length > 0 ? filteredCities.map((city, index) => (
