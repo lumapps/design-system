@@ -107,8 +107,8 @@ interface IInputNativeProps {
     value: string;
     setFocus(focus: boolean): void;
     onChange(value: string): void;
-    onFocus(value: React.FocusEvent): void;
-    onBlur(value: React.FocusEvent): void;
+    onFocus?(value: React.FocusEvent): void;
+    onBlur?(value: React.FocusEvent): void;
 }
 
 const renderInputNative = (props: IInputNativeProps): ReactElement => {
