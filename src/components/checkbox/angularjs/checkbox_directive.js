@@ -167,6 +167,7 @@ function CheckboxDirective() {
         require: [`${COMPONENT_PREFIX}Checkbox`, '?ngModel'],
         restrict: 'E',
         scope: {
+            customColors: '=?lumxCustomColors',
             theme: '@?lumxTheme',
         },
         template,

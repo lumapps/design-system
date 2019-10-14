@@ -1,9 +1,10 @@
 import { ShallowWrapper, shallow } from 'enzyme';
 import React from 'react';
 
+import { ColorPalette, Theme } from 'LumX';
 import { ICommonSetup } from 'LumX/core/testing/utils.test';
-
-import { Chip, ChipProps } from './Chip';
+import { getBasicClass } from 'LumX/core/utils';
+import { CLASSNAME, Chip, ChipProps } from './Chip';
 
 interface ISetup extends ICommonSetup {
     after: ShallowWrapper;
@@ -150,6 +151,34 @@ describe('<Chip />', () => {
             ({ after } = setup({ after: 'after 2', onAfterClick: (): boolean => true }));
             expect(after).toHaveLength(1);
             expect(after.hasClass('lumx-chip__after--is-clickable')).toEqual(true);
+        });
+
+        it('should have correct default color', () => {
+            const { wrapper } = setup({});
+            expect(wrapper).toHaveClassName(
+                getBasicClass({
+                    prefix: CLASSNAME,
+                    type: 'color',
+                    value: ColorPalette.dark,
+                }),
+            );
+        });
+
+        it('should switch color with theme', () => {
+            const { wrapper } = setup({ theme: Theme.dark });
+            expect(wrapper).toHaveClassName(
+                getBasicClass({
+                    prefix: CLASSNAME,
+                    type: 'color',
+                    value: ColorPalette.light,
+                }),
+            );
+        });
+
+        it('should use color over the theme', () => {
+            const color = ColorPalette.red;
+            const { wrapper } = setup({ theme: Theme.dark, color });
+            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'color', value: color }));
         });
     });
 

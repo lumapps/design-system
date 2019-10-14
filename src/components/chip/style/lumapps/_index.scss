@@ -66,22 +66,6 @@
     cursor: pointer;
 }
 
-.#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--theme-light {
-    @include lumx-state('state-default', 'emphasis-medium', 'dark');
-
-    &.#{$lumx-base-prefix}-chip--is-clickable:hover {
-        @include lumx-state('state-hover', 'emphasis-medium', 'dark');
-    }
-
-    &.#{$lumx-base-prefix}-chip--is-clickable:active {
-        @include lumx-state('state-active', 'emphasis-medium', 'dark');
-    }
-
-    &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
-        @include lumx-state('state-focus', 'emphasis-medium', 'dark');
-    }
-}
-
 @each $key, $color in $lumx-theme-color-palette {
     .#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--color-#{$key} {
         @include lumx-state('state-default', 'emphasis-medium', $key);
@@ -100,38 +84,24 @@
     }
 }
 
-.#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--theme-dark {
-    @include lumx-state('state-default', 'emphasis-medium', 'light');
-
-    &.#{$lumx-base-prefix}-chip--is-clickable:hover {
-        @include lumx-state('state-hover', 'emphasis-medium', 'light');
-    }
-
-    &.#{$lumx-base-prefix}-chip--is-clickable:active {
-        @include lumx-state('state-active', 'emphasis-medium', 'light');
-    }
-
-    &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
-        @include lumx-state('state-focus', 'emphasis-medium', 'light');
-    }
-}
-
 .#{$lumx-base-prefix}-chip--is-selected {
-    @include lumx-state-as-selected('state-default', 'dark');
+    &.#{$lumx-base-prefix}-chip--color-dark {
+        @include lumx-state-as-selected('state-default', 'dark');
 
-    &.#{$lumx-base-prefix}-chip--is-clickable:hover {
-        @include lumx-state-as-selected('state-hover', 'dark');
+        &.#{$lumx-base-prefix}-chip--is-clickable:hover {
+            @include lumx-state-as-selected('state-hover', 'dark');
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable:active {
+            @include lumx-state-as-selected('state-active', 'dark');
+        }
+
+        &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
+            @include lumx-state-as-selected('state-focus', 'dark');
+        }
     }
 
-    &.#{$lumx-base-prefix}-chip--is-clickable:active {
-        @include lumx-state-as-selected('state-active', 'dark');
-    }
-
-    &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
-        @include lumx-state-as-selected('state-focus', 'dark');
-    }
-
-    &.#{$lumx-base-prefix}-chip--theme-dark {
+    &.#{$lumx-base-prefix}-chip--color-light {
         @include lumx-state-as-selected('state-default', 'light');
 
         &.#{$lumx-base-prefix}-chip--is-clickable:hover {

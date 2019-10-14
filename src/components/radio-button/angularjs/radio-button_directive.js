@@ -165,6 +165,7 @@ function RadioButtonDirective() {
         require: [`${COMPONENT_PREFIX}RadioButton`, '?ngModel'],
         restrict: 'E',
         scope: {
+            customColors: '=?lumxCustomColors',
             theme: '@?lumxTheme',
         },
         template,

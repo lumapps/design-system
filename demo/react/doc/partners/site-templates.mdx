@@ -1,0 +1,80 @@
+import { AssetBlock } from 'LumX/demo/react/layout/AssetBlock';
+import { Alignment, Grid, GridItem, Orientation, Size, Thumbnail } from 'LumX';
+
+# Site templates
+
+**Want to customize LumApps to your Brand visual identity but don’t know where to start?
+Here are some templates to bootstrap your work.**
+
+## How to
+
+<table>
+    <tr>
+        <td>
+            <p className="lumx-spacing-margin-right-huge">
+            Our templates are made with <a href="http://www.sketch.com" target="_blank" className="lumx-theme-color-blue-N">Sketch</a>, currently one of the best UI tools. Chose the template that best suits your needs and modify it.
+            </p>
+        </td>
+        <td>
+        <img src="demo/react/doc/partners/assets/sketch-logo@2x.png" width="182" alt="sketch logo" />
+        </td>
+    </tr>
+
+</table>
+
+<Grid
+    orientation={Orientation.horizontal}
+    wrap={'wrap'}
+    vAlign={Alignment.center}
+    hAlign={Alignment.top}
+    gutter={Size.huge}
+>
+    <GridItem width="6" className="lumx-spacing-margin-bottom-huge">
+        <a href="/partners/site-templates#business-services">
+            <Thumbnail image="demo/react/doc/partners/assets/template1.png" />
+        </a>
+    </GridItem>
+    <GridItem width="6" className="lumx-spacing-margin-bottom-huge">
+        <a href="/partners/site-templates#technology">
+            <Thumbnail image="demo/react/doc/partners/assets/template2.png" />
+        </a>
+    </GridItem>
+    <GridItem width="6" className="lumx-spacing-margin-bottom-huge">
+        <a href="/partners/site-templates#editorial">
+            <Thumbnail image="demo/react/doc/partners/assets/template3.png" />
+        </a>
+    </GridItem>
+    <GridItem width="6" className="lumx-spacing-margin-bottom-huge">
+        <a href="/partners/site-templates#blue">
+            <Thumbnail image="demo/react/doc/partners/assets/template4.png" />
+        </a>
+    </GridItem>
+</Grid>
+
+## Business services <a name="business-services"/>
+
+<AssetBlock
+    downloadURL="demo/react/doc/partners/assets/lumapps-template-business-services.sketch"
+    thumbnailURL="demo/react/doc/partners/assets/business-services-thumbnail.png"
+/>
+
+## Technology <a name="technology"/>
+
+<AssetBlock
+    downloadURL="demo/react/doc/partners/assets/lumapps-template-technology.sketch"
+    thumbnailURL="demo/react/doc/partners/assets/technology-thumbnail.png"
+/>
+
+## Editorial <a name="editorial"/>
+
+<AssetBlock
+    downloadURL="demo/react/doc/partners/assets/lumapps-template-editorial.sketch"
+    thumbnailURL="demo/react/doc/partners/assets/editorial-thumbnail.png"
+/>
+
+## Blue <a name="blue"/>
+
+<AssetBlock
+    downloadURL="demo/react/doc/partners/assets/lumapps-template-blue.sketch"
+    thumbnailURL="demo/react/doc/partners/assets/blue-thumbnail.png"
+/>

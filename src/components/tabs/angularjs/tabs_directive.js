@@ -120,6 +120,7 @@ function TabsDirective() {
         restrict: 'E',
         scope: {
             activeTab: '=?lumxActiveTab',
+            customColors: '=?lumxCustomColors',
             layout: '@?lumxLayout',
             position: '@?lumxPosition',
             theme: '@?lumxTheme',

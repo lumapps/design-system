@@ -23,6 +23,7 @@ function ProgressDirective() {
         replace: true,
         restrict: 'E',
         scope: {
+            customColors: '=?lumxCustomColors',
             variant: '@?lumxVariant',
         },
         template,

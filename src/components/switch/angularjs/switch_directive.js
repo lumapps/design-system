@@ -156,6 +156,7 @@ function SwitchDirective() {
         require: [`${COMPONENT_PREFIX}Switch`, '?ngModel'],
         restrict: 'E',
         scope: {
+            customColors: '=?lumxCustomColors',
             position: '@?lumxPosition',
             theme: '@?lumxTheme',
         },

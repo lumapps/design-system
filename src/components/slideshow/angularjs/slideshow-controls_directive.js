@@ -289,6 +289,7 @@ function SlideshowControlsDirective() {
         restrict: 'E',
         scope: {
             activeIndex: '=?lumxActiveIndex',
+            customColors: '=?lumxCustomColors',
             onNextClick: '&?lumxOnNextClick',
             onPaginationClick: '&?lumxOnPaginationClick',
             onPreviousClick: '&?lumxOnPreviousClick',

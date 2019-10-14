@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import classNames from 'classnames';
 
 import isBoolean from 'lodash/isBoolean';
@@ -5,12 +6,18 @@ import isEmpty from 'lodash/isEmpty';
 import kebabCase from 'lodash/kebabCase';
 import noop from 'lodash/noop';
 
-import { ENTER_KEY_CODE, ESCAPE_KEY_CODE } from './constants';
+import { ESCAPE_KEY_CODE } from './constants';
+
+/////////////////////////////
+//                         //
+//    Private functions    //
+//                         //
+/////////////////////////////
 
 /**
  * Enhance isEmpty method to also works with numbers.
  *
- * @param  {any}     value The value to check
+ * @param  {any}     value The value to check.
  * @return {boolean} Weither if the input value is empty or != 0.
  */
 const _isEmpty = (value) => {
