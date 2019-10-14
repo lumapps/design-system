@@ -73,6 +73,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         children,
         value,
         onChange,
+        onKeyDown,
         showSuggestions,
         closeOnClick,
         closeOnEscape,
@@ -90,7 +91,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
             )}
             {...forwardedProps}
         >
-            <TextField value={value} onChange={onChange} textFieldRef={textfieldRef} />
+            <TextField value={value} onChange={onChange} textFieldRef={textfieldRef} onKeyDown={onKeyDown} />
             <Dropdown
                 anchorRef={textfieldRef}
                 showDropdown={showSuggestions}

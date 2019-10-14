@@ -97,6 +97,7 @@ const ListItem: React.FC<ListItemProps> = ({
     after,
     children,
     className = '',
+    isHighlighted,
     isSelected = DEFAULT_PROPS.isSelected,
     isClickable = DEFAULT_PROPS.isSelected,
     isActive = DEFAULT_PROPS.isActive,
@@ -147,6 +148,7 @@ const ListItem: React.FC<ListItemProps> = ({
             onFocusCapture={preventParentFocus}
             onClick={onItemSelected}
             onKeyDown={onKeyDown()}
+            data-focus-visible-added={isHighlighted || undefined}
             {...props}
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}

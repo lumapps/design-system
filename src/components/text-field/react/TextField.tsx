@@ -49,7 +49,7 @@ interface ITextFieldProps extends IGenericProps {
     theme?: Theme;
 
     /** A ref that will be passed to the wrapper element. */
-    textFieldRef?: Ref<HTMLAnchorElement>;
+    textFieldRef?: Ref<HTMLDivElement>;
 
     /** Text field value. */
     value: string;

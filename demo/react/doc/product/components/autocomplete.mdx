@@ -1,6 +1,7 @@
 ```javascript import
 import { Autocomplete, List, ListItem, ListItemSize, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from 'LumX';
 import { useBooleanState } from 'LumX/core/react/hooks';
+import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
 ```
 
 # Autocomplete
@@ -9,7 +10,7 @@ import { useBooleanState } from 'LumX/core/react/hooks';
 
 ```javascript jsx withThemeSwitcher
 (theme) => {
-    const CHOICES = [
+    const CITIES = [
         {
             text: 'Los Angeles',
             id: 'losangeles'
@@ -17,6 +18,22 @@ import { useBooleanState } from 'LumX/core/react/hooks';
         {
             text: 'San Francisco',
             id: 'sanfrancisco'
+        },
+        {
+            text: 'Paris',
+            id: 'paris'
+        },
+        {
+            text: 'Montpellier',
+            id: 'montpellier'
+        },
+        {
+            text: 'Bordeaux',
+            id: 'bordeaux'
+        },
+        {
+            text: 'Toulouse',
+            id: 'toulouse'
         },
         {
             text: 'Lyon',
@@ -28,30 +45,68 @@ import { useBooleanState } from 'LumX/core/react/hooks';
         }
     ];
 
-    const [showSuggestions, setShowSuggestions] = React.useState(true);
+    const [showSuggestions, setShowSuggestions] = React.useState(false);
+    const [activeIndex, setActiveIndex] = React.useState(-1);
     const [filterValue, setFilterValue] = React.useState('');
-    const ddRef = React.useRef(null);
+
+    const setSelectedCity = (city) => {
+        setFilterValue(city.text);
+        setShowSuggestions(false);
+        setActiveIndex(-1);
+    }
+
     const closeAutocomplete = () => setShowSuggestions(false);
-    const onItemSelectedHandler = (choice) => console.log(choice);
+
     const onChange = (value) => {
         setFilterValue(value);
-        console.log(value);
+        setShowSuggestions(value.length > 0);
+    };
+
+    const filterCity = city => city.text.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase());
+    const filteredCities = CITIES.filter(filterCity);
+
+    const calculateActiveIndex = (keyPressed) => {
+        if (keyPressed === DOWN_KEY_CODE) {
+            return activeIndex + 1 < filteredCities.length ? activeIndex + 1 : 0;
+        } else if (keyPressed === UP_KEY_CODE) {
+            return activeIndex - 1 >= 0 ? activeIndex - 1 : filteredCities.length - 1;
+        }
+    }
+
+    const onKeyDown = (evt) => {
+        if (evt.keyCode === DOWN_KEY_CODE || evt.keyCode === UP_KEY_CODE) {
+            evt.nativeEvent.preventDefault();
+            evt.nativeEvent.stopPropagation();
+            
+            const nextActiveIndex = calculateActiveIndex(evt.keyCode);
+            setActiveIndex(nextActiveIndex);
+        } else if (evt.keyCode === ENTER_KEY_CODE) {
+            evt.currentTarget.blur();
+            const selectedCity = filteredCities[activeIndex];
+            setSelectedCity(selectedCity);
+        }
     };
 
     return (
-        <Autocomplete theme={theme} showSuggestions={showSuggestions} closeOnClick closeOnEscape onClose={closeAutocomplete} value={filterValue} onChange={onChange}>
+        <Autocomplete theme={theme} showSuggestions={showSuggestions} closeOnClick closeOnEscape onClose={closeAutocomplete} value={filterValue} onChange={onChange} onKeyDown={onKeyDown}>
             <List isClickable>
-                { CHOICES.map((choice, index) => (
+                { filteredCities.length > 0 ? filteredCities.map((city, index) => (
                         <ListItem
                             size={ListItemSize.tiny}
                             isClickable
-                            key={choice.id}
-                            onItemSelected={() => onItemSelectedHandler(choice)}
+                            key={city.id}
+                            isHighlighted={index === activeIndex}
+                            onItemSelected={() => setSelectedCity(city)}
+                        >
+                            <div>{city.text}</div>
+                        </ListItem>
+                    )) : (
+                        <ListItem
                             size={ListItemSize.tiny}
                         >
-                            <div>{choice.text}</div>
+                            <div>No results</div>
                         </ListItem>
-                    ))
+                    )
                 }
             </List>
         </Autocomplete>
