@@ -1,8 +1,10 @@
 import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from 'LumX';
-import { LumXLogo } from 'LumX/demo/assets/images';
+
 import { castArray, isEmpty } from 'lodash';
 import React, { ReactElement, ReactNode, useState } from 'react';
 import { withRouter } from 'react-router-dom';
+
+import { LumXLogo } from 'LumX/demo/assets/images';
 
 /**
  * Defines the type of a navigation item.
@@ -23,7 +25,7 @@ type Item =
 /**
  * Transform space separated string to a slug.
  * @param  s a string
- * @return slug string
+ * @return slug string.
  */
 const spaceToSlug = (s: string): string => {
     return s.toLocaleLowerCase().replace(' ', '-');
@@ -83,6 +85,11 @@ const ITEMS: Item[] = [
     },
     {
         label: 'Partners',
+        children: [
+            {
+                label: 'Site templates',
+            },
+        ],
     },
 ];
 
@@ -100,7 +107,7 @@ const generateNav = (goTo: (path: string) => void, location: string, items: Item
         const label = typeof item === 'string' ? item : item.label;
         const children = typeof item !== 'string' && item.children;
         const path = [...parent, spaceToSlug(label)];
-        const slug = '/' + path.join('/');
+        const slug = `/${path.join('/')}`;
 
         const [isOpen, setOpen] = useState(() => location.startsWith(slug));
 
