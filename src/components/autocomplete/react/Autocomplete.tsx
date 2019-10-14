@@ -25,15 +25,32 @@ interface IAutocompleteProps extends IGenericProps {
 
     /**
      * Whether the suggestions from the autocomplete should be displayed or not.
-     * Useful to control the when the suggestions are displayed from outside the component
+     * Useful to control when the suggestions are displayed from outside the component
      */
     showSuggestions: boolean;
+
+    /**
+     * Whether a click anywhere out of the Autocomplete would close it
+     * @see {@link TextFieldProps#closeOnClick}
+     */
+    closeOnClick?: boolean;
+
+    /**
+     * Whether an escape key press would close the Autocomplete.
+     * @see {@link TextFieldProps#closeOnEscape}
+     */
+    closeOnEscape?: boolean;
 
     /**
      * Text field value change handler.
      * @see {@link TextFieldProps#onChange}
      */
     onChange(value: string): void;
+
+    /**
+     * Text field on key down handler.
+     */
+    onKeyDown(value: string): void;
 }
 type AutocompleteProps = IAutocompleteProps;
 
@@ -58,7 +75,11 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<AutocompleteProps> = {};
+const DEFAULT_PROPS: Partial<AutocompleteProps> = {
+    closeOnClick: true,
+    closeOnEscape: true,
+    showSuggestions: undefined,
+};
 
 /////////////////////////////
 
@@ -91,7 +112,13 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
             )}
             {...forwardedProps}
         >
-            <TextField value={value} onChange={onChange} textFieldRef={textfieldRef} onKeyDown={onKeyDown} />
+            <TextField
+                value={value}
+                onChange={onChange}
+                textFieldRef={textfieldRef}
+                onKeyDown={onKeyDown}
+                {...forwardedProps}
+            />
             <Dropdown
                 anchorRef={textfieldRef}
                 showDropdown={showSuggestions}
