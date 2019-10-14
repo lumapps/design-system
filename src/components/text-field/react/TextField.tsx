@@ -64,14 +64,14 @@ interface ITextFieldProps extends IGenericProps {
     /** A ref that will be passed to the input or text area element. */
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
 
+    /** A ref that will be passed to the wrapper element. */
+    textFieldRef?: RefObject<HTMLDivElement>;
+
     /** Text field value. */
     value: string;
 
     /** Text field type (input or textarea). */
     type?: TextFieldType;
-
-    /** A ref that will be passed to the wrapper element. */
-    textFieldRef?: RefObject<HTMLDivElement>;
 
     /** Text field value change handler. */
     onChange(value: string): void;
