@@ -61,10 +61,10 @@ interface ITextFieldProps extends IGenericProps {
     onChange(value: string): void;
 
     /** Text field focus change handler. */
-    onFocus(event: React.FocusEvent): void;
+    onFocus?(event: React.FocusEvent): void;
 
     /** Text field blur change handler. */
-    onBlur(event: React.FocusEvent): void;
+    onBlur?(event: React.FocusEvent): void;
 }
 type TextFieldProps = ITextFieldProps;
 
