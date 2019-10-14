@@ -2,7 +2,7 @@
 
 import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
 
-import { changeTheme, setCustomColorPalette } from '../utils';
+import { changeTheme, setDemoCustomColors } from '../utils';
 import { DEFAULT_THEME, THEMES } from '../constants';
 
 /////////////////////////////
@@ -365,7 +365,7 @@ function AppDefaultRun($rootScope, Theme) {
             Theme.loaded = true;
         });
 
-        setCustomColorPalette(Theme.theme);
+        setDemoCustomColors(Theme.theme);
     });
 
     /**

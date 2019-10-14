@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { setColorPalette } from 'LumX/core/utils';
+import { setCustomColors } from 'LumX/core/custom-colors';
 
 /////////////////////////////
 //                         //
@@ -123,17 +123,17 @@ function changeTheme(theme) {
 }
 
 /**
- * Set custom color palette on primary and secondary colors.
+ * Set primary and secondary custom colors.
  *
  * @param {string} theme The theme to apply the custom color palete on.
  */
-function setCustomColorPalette(theme) {
+function setDemoCustomColors(theme) {
     const styleTag = document.createElement('style');
     document.head.appendChild(styleTag);
 
     const { sheet } = styleTag;
 
-    setColorPalette(sheet, theme, {
+    setCustomColors(sheet, theme, {
         primary: {
             D2: '#fea41c',
             D1: '#ffb71f',
@@ -163,4 +163,4 @@ function setCustomColorPalette(theme) {
 
 /////////////////////////////
 
-export { changeTheme, setCustomColorPalette };
+export { changeTheme, setDemoCustomColors };
