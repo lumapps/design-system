@@ -1,0 +1,56 @@
+/* ==========================================================================
+   Progress
+   ========================================================================== */
+
+/* Circular
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-progress-circular {
+    &__svg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: block;
+        width: $lumx-progress-circular-size;
+        height: $lumx-progress-circular-size;
+        margin: auto;
+        animation: lumx-progress-rotate 2s linear infinite;
+        transform-origin: center center;
+    }
+
+    &__path {
+        animation: lumx-progress-dash 1.5s ease-in-out infinite;
+        stroke: lumx-theme-color-variant('primary', 'N');
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        stroke-linecap: butt;
+    }
+
+    &__double-bounce1,
+    &__double-bounce2 {
+        display: none;
+    }
+}
+
+@keyframes lumx-progress-rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes lumx-progress-dash {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124;
+    }
+}

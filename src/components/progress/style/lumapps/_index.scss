@@ -32,6 +32,10 @@
     &__double-bounce2 {
         animation-delay: -1s;
     }
+
+    &__svg {
+        display: none;
+    }
 }
 
 @keyframes lumx-progress-bounce {
