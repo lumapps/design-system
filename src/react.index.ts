@@ -85,7 +85,7 @@ export { Tabs, TabsProps, TabsLayout, TabsPosition } from './components/tabs/rea
 
 export { Tab, TabProps } from './components/tabs/react/Tab';
 
-export { TextField, TextFieldProps } from './components/text-field/react/TextField';
+export { TextField, TextFieldProps, TextFieldType } from './components/text-field/react/TextField';
 
 export { Tooltip, TooltipProps, TooltipPlacement } from './components/tooltip/react/Tooltip';
 
