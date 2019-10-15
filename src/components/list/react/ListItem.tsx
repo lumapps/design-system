@@ -146,13 +146,19 @@ const ListItem: React.FC<ListItemProps> = ({
             ref={element}
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, theme, selected: isSelected, clickable: isClickable, size }),
+                handleBasicClasses({
+                    clickable: isClickable,
+                    highlighted: isHighlighted,
+                    prefix: CLASSNAME,
+                    selected: isSelected,
+                    size,
+                    theme,
+                }),
             )}
             tabIndex={isClickable ? 0 : -1}
             onFocusCapture={preventParentFocus}
             onClick={onItemSelected}
             onKeyDown={onKeyDown()}
-            data-focus-visible-added={isHighlighted || undefined}
             {...props}
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}

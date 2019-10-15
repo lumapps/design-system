@@ -36,6 +36,16 @@
     }
 }
 
+@mixin lumx-list-item-highlighted() {
+    cursor: pointer;
+
+    @include lumx-state(state-hover, emphasis-low, dark);
+
+    &:active {
+        @include lumx-state(state-active, emphasis-low, dark);
+    }
+}
+
 @mixin lumx-list-item-selected() {
     background-color: lumx-theme-color-variant($lumx-list-item-selected-color, 'L5');
     color: lumx-theme-color-variant($lumx-list-item-selected-color, 'N');

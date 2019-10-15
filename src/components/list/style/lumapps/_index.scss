@@ -41,6 +41,10 @@
     &--is-selected {
         @include lumx-list-item-selected;
     }
+
+    &--is-highlighted {
+        @include lumx-list-item-highlighted;
+    }
 }
 
 /* Subheader
