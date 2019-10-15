@@ -46,15 +46,13 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
     ];
 
     const [showSuggestions, setShowSuggestions] = React.useState(false);
-    const [activeIndex, setActiveIndex] = React.useState(-1);
     const [filterValue, setFilterValue] = React.useState('');
-
+    const filteredCities = CITIES.filter(city => city.text.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase()));
     const closeAutocomplete = () => setShowSuggestions(false);
 
     const setSelectedCity = (city) => {
         setFilterValue(city.text);
         setShowSuggestions(false);
-        setActiveIndex(-1);
     }
 
     const onChange = (value) => {
@@ -62,40 +60,19 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
         setShowSuggestions(value.length > 0);
     };
 
-    const filteredCities = CITIES.filter(city => city.text.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase()));
-
-    const calculateActiveIndex = (keyPressed) => {
-        if (keyPressed === DOWN_KEY_CODE) {
-            return activeIndex + 1 < filteredCities.length ? activeIndex + 1 : 0;
-        } else if (keyPressed === UP_KEY_CODE) {
-            return activeIndex - 1 >= 0 ? activeIndex - 1 : filteredCities.length - 1;
-        }
-    }
-
-    const onKeyDown = (evt) => {
-        if (evt.keyCode === DOWN_KEY_CODE || evt.keyCode === UP_KEY_CODE) {
-            evt.nativeEvent.preventDefault();
-            evt.nativeEvent.stopPropagation();
-
-            const nextActiveIndex = calculateActiveIndex(evt.keyCode);
-            setActiveIndex(nextActiveIndex);
-        } else if (evt.keyCode === ENTER_KEY_CODE) {
-            evt.currentTarget.blur();
-
-            const selectedCity = filteredCities[activeIndex];
-            if (selectedCity) {
-                setSelectedCity(selectedCity);
-            }
-        }
-    };
+    const {
+        activeItemIndex,
+        onKeyboardNavigation,
+        setActiveItemIndex,
+        resetActiveIndex
+    } = List.useKeyboardListNavigation(
+        filteredCities,
+        setSelectedCity,
+    );
 
     const onFocus = (evt) => {
-        setActiveIndex(-1);
+        resetActiveIndex();
         return setShowSuggestions(filterValue.length > 0);
-    }
-    const onBlur = (evt) => {
-        setActiveIndex(-1);
-        return setShowSuggestions(false);
     }
 
     return (
@@ -105,9 +82,8 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
             onClose={closeAutocomplete}
             value={filterValue}
             onChange={onChange}
-            onKeyDown={onKeyDown}
+            onKeyDown={onKeyboardNavigation}
             onFocus={onFocus}
-            onBlur={onBlur}
         >
             <List isClickable>
                 { filteredCities.length > 0 ? filteredCities.map((city, index) => (
@@ -115,7 +91,7 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
                             size={ListItemSize.tiny}
                             isClickable
                             key={city.id}
-                            isHighlighted={index === activeIndex}
+                            isHighlighted={index === activeItemIndex}
                             onItemSelected={() => setSelectedCity(city)}
                         >
                             <div>{city.text}</div>

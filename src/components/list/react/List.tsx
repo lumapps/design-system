@@ -11,6 +11,8 @@ import { ListItem, ListItemProps, Theme } from 'LumX';
 import { IGenericProps, getRootClassName, isComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
+import { useKeyboardListNavigation, useKeyboardListNavigationType } from 'LumX/core/react/hooks';
+
 /////////////////////////////
 /**
  * Defines the props of the component.
@@ -65,12 +67,16 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 };
 /////////////////////////////
 
+interface IList {
+    useKeyboardListNavigation: useKeyboardListNavigationType;
+}
+
 /**
  * List component - Use vertical layout to display elements
  *
  * @return The component.
  */
-const List: React.FC<ListProps> = ({
+const List: React.FC<ListProps> & IList = ({
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
     onListItemSelected,
@@ -221,7 +227,9 @@ const List: React.FC<ListProps> = ({
         </ul>
     );
 };
+
 List.displayName = COMPONENT_NAME;
+List.useKeyboardListNavigation = useKeyboardListNavigation;
 
 /////////////////////////////
 
