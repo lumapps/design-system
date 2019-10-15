@@ -2,7 +2,7 @@ import React, { ReactElement, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, TextField } from 'LumX';
+import { Dropdown, Offset, Placement, TextField, TextFieldType, Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -14,6 +14,75 @@ import { IGenericProps, getRootClassName } from 'LumX/react/utils';
  * Defines the props of the component.
  */
 interface IAutocompleteProps extends IGenericProps {
+    /**
+     * Vertical and/or horizontal offsets that will be applied to the Dropdown position.
+     * @see {@link DropdownProps#offset}
+     */
+    offset?: Offset;
+
+    /**
+     * The preferred Dropdown location against the anchor element.
+     * @see {@link DropdownProps#placement}
+     */
+    placement?: Placement;
+
+    /**
+     * Whether the dropdown should fit to the anchor width
+     * @see {@link DropdownProps#hasError}
+     */
+    fitToAnchorWidth?: boolean;
+
+    /**
+     * Whether the text field is displayed with error style or not.
+     * @see {@link TextFieldProps#hasError}
+     */
+    hasError?: boolean;
+
+    /**
+     * Text field helper message.
+     * @see {@link TextFieldProps#helper}
+     */
+    helper?: string;
+
+    /**
+     * Text field icon (SVG path)
+     * @see {@link TextFieldProps#icon}
+     */
+    icon?: string;
+
+    /**
+     * Whether the text field is disabled or not.
+     * @see {@link TextFieldProps#isDisabled}
+     */
+    isDisabled?: boolean;
+
+    /**
+     * Whether the text field is displayed with valid style or not.
+     * @see {@link TextFieldProps#isValid}
+     */
+    isValid?: boolean;
+
+    /**
+     * Text field label displayed in a label tag.
+     * @see {@link TextFieldProps#label}
+     */
+    label?: string;
+
+    /**
+     * Text field placeholder message.
+     * @see {@link TextFieldProps#placeholder}
+     */
+    placeholder?: string;
+
+    /** Theme. */
+    theme?: Theme;
+
+    /**
+     * Text field type (input or textarea).
+     * @see {@link TextFieldProps#type}
+     */
+    type?: TextFieldType;
+
     /**
      * Children of the Autocomplete. This should be a list of the different
      * suggestions that
@@ -43,6 +112,18 @@ interface IAutocompleteProps extends IGenericProps {
      * @see {@link DropdownProps#closeOnEscape}
      */
     closeOnEscape?: boolean;
+
+    /**
+     * The function to be called when the user clicks away or Escape is pressed
+     * @see {@link DropdownProps#onClose}
+     */
+    onClose?: VoidFunction;
+
+    /**
+     * The callback function called when the bottom of the dropdown is reached.
+     * @see {@link DropdownProps#onInfinite}
+     */
+    onInfinite?: VoidFunction;
 
     /**
      * Text field value change handler.
@@ -116,6 +197,20 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         isOpen,
         closeOnClick,
         closeOnEscape,
+        hasError,
+        helper,
+        icon,
+        isDisabled,
+        isValid,
+        label,
+        placeholder,
+        theme,
+        type,
+        onClose,
+        offset,
+        placement,
+        fitToAnchorWidth,
+        onInfiniteScroll,
         ...forwardedProps
     } = props;
     const textFieldRef = useRef(null);
@@ -137,14 +232,26 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 onKeyDown={onKeyDown}
                 onBlur={onBlur}
                 onFocus={onFocus}
-                {...forwardedProps}
+                hasError={hasError}
+                helper={helper}
+                icon={icon}
+                isDisabled={isDisabled}
+                isValid={isValid}
+                label={label}
+                placeholder={placeholder}
+                theme={theme}
+                type={type}
             />
             <Dropdown
                 anchorRef={textFieldRef}
                 showDropdown={isOpen}
                 closeOnClick={closeOnClick}
                 closeOnEscape={closeOnEscape}
-                {...forwardedProps}
+                onClose={onClose}
+                offset={offset}
+                placement={placement}
+                fitToAnchorWidth={fitToAnchorWidth}
+                onInfiniteScroll={onInfiniteScroll}
             >
                 {children}
             </Dropdown>
