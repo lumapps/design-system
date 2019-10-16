@@ -5,6 +5,11 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
   className="lumx-autocomplete"
 >
   <TextField
+    inputRef={
+      Object {
+        "current": null,
+      }
+    }
     textFieldRef={
       Object {
         "current": null,
