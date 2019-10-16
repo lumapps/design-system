@@ -161,9 +161,10 @@ import { mdiClose } from '@mdi/js';
     const [selectedValues, setSelectedValues] = React.useState([]);
 
     const filteredCities = CITIES.filter((city) => {
-        const cleanCity = city.text.replace(' ', '').toLowerCase()
+        const noSpacesCity = city.text.replace(' ', '').toLowerCase();
+        const wasCityAlreadySelected = selectedValues.filter(c => c.id === city.id).length > 0;
 
-        return cleanCity.includes(filterValue.replace(' ', '').toLowerCase());
+        return !wasCityAlreadySelected && noSpacesCity.includes(filterValue.replace(' ', '').toLowerCase());
     });
     const closeAutocomplete = () => setShowSuggestions(false);
 
