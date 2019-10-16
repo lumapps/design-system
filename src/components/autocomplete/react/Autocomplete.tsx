@@ -23,7 +23,10 @@ interface IAutocompleteProps extends IGenericProps {
      */
     offset?: Offset;
 
-    /** A component to be rendered before the main label area. */
+    /**
+     * A component to be rendered before the main text input area.
+     * @see {@link TextFieldProps#before}
+     */
     before?: HTMLElement | ReactNode;
 
     /**

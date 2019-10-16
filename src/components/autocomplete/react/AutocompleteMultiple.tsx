@@ -21,7 +21,9 @@ interface IAutocompleteMultipleProps extends AutocompleteProps {
     values: object[];
 
     /**
-     * The function called to render a selected value when `isMultiple` is true. Default: Renders the value inside of a Chip
+     * This function will be executed to render the values that are already selected. By default, it will assume that
+     * the values are strings, and will render them as such. If that is not the case, this function needs to be overrided
+     * in order to reflect that.
      */
     selectedChipRender(
         choice: object,
@@ -84,8 +86,8 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
 /////////////////////////////
 
 /**
- * This component allows to make the connection between a Text Field and a Dropdown,
- * displaying a list of suggestions from the text entered on the text field.
+ * This component allows to create a multiple autocomplete, allowing the user to select multiple values from a
+ * list that can be filtered.
  *
  * @return The component.
  */
@@ -120,6 +122,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props: Autoco
         selectedChipRender = DEFAULT_PROPS.selectedChipRender,
         ...forwardedProps
     } = props;
+
     return (
         <Autocomplete
             className={classNames(
