@@ -47,6 +47,8 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 
     const [showSuggestions, setShowSuggestions] = React.useState(false);
     const [filterValue, setFilterValue] = React.useState('');
+    const inputRef = React.useRef(null);
+
     const filteredCities = CITIES.filter(city => city.text.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase()));
     const closeAutocomplete = () => setShowSuggestions(false);
 
@@ -62,17 +64,14 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
 
     const {
         activeItemIndex,
-        onKeyboardNavigation,
-        setActiveItemIndex,
-        resetActiveIndex
     } = List.useKeyboardListNavigation(
         filteredCities,
         setSelectedCity,
+        inputRef,
     );
 
     const onFocus = (evt) => {
-        resetActiveIndex();
-        return setShowSuggestions(filterValue.length > 0);
+        setShowSuggestions(filterValue.length > 0);
     }
 
     return (
@@ -82,8 +81,8 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
             onClose={closeAutocomplete}
             value={filterValue}
             onChange={onChange}
-            onKeyDown={onKeyboardNavigation}
             onFocus={onFocus}
+            inputRef={inputRef}
         >
             <List isClickable>
                 { filteredCities.length > 0 ? filteredCities.map((city, index) => (

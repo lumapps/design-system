@@ -392,6 +392,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         </div>
     );
 };
+
 TextField.displayName = COMPONENT_NAME;
 
 /////////////////////////////

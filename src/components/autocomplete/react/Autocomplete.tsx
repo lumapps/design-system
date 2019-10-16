@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { ReactElement, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -14,6 +14,9 @@ import { IGenericProps, getRootClassName } from 'LumX/react/utils';
  * Defines the props of the component.
  */
 interface IAutocompleteProps extends IGenericProps {
+    /** A ref that will be passed to the input or textarea element. */
+    inputRef?: RefObject<HTMLInputElement>;
+
     /**
      * Vertical and/or horizontal offsets that will be applied to the Dropdown position.
      * @see {@link DropdownProps#offset}
@@ -132,11 +135,6 @@ interface IAutocompleteProps extends IGenericProps {
     onChange(value: string): void;
 
     /**
-     * Text field on key down handler.
-     */
-    onKeyDown(value: string): void;
-
-    /**
      * Text field focus change handler.
      * @see {@link TextFieldProps#onFocus}
      */
@@ -193,7 +191,6 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         onBlur,
         onChange,
         onFocus,
-        onKeyDown,
         isOpen,
         closeOnClick,
         closeOnEscape,
@@ -209,10 +206,12 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         onClose,
         offset,
         placement,
+        inputRef = useRef(null),
         fitToAnchorWidth,
         onInfiniteScroll,
         ...forwardedProps
     } = props;
+
     const textFieldRef = useRef(null);
 
     return (
@@ -229,7 +228,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 value={value}
                 onChange={onChange}
                 textFieldRef={textFieldRef}
-                onKeyDown={onKeyDown}
+                inputRef={inputRef}
                 onBlur={onBlur}
                 onFocus={onFocus}
                 hasError={hasError}
@@ -243,7 +242,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 type={type}
             />
             <Dropdown
-                anchorRef={textFieldRef}
+                anchorRef={textFieldRef as React.RefObject<HTMLElement>}
                 showDropdown={isOpen}
                 closeOnClick={closeOnClick}
                 closeOnEscape={closeOnEscape}
