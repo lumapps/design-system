@@ -10,6 +10,8 @@ type useKeyboardListNavigationType = (
     items: object[],
     /** callback to be executed when the ENTER key is pressed on an item */
     onListItemSelected: (itemSelected: object) => {},
+    /** callback to be executed when the Arrow keys are pressed */
+    onListItemNavigated: (itemSelected: object) => {},
     /** callback to be executed when the ENTER key is pressed for a new item */
     onNewItemCreated: (itemSelected: object) => {},
     /** callback to be executed when the BACKSPACE key is pressed */
@@ -45,6 +47,7 @@ const INITIAL_INDEX = -1;
 const useKeyboardListNavigation: useKeyboardListNavigationType = (
     items: object[],
     onListItemSelected?: (itemSelected: object) => {},
+    onListItemNavigated?: (itemSelected: object) => {},
     onNewItemCreated?: (itemSelected: object) => {},
     onBackspacePressed?: (evt: React.KeyboardEvent) => {},
     keepFocusAfterSelection: boolean = false,
@@ -95,8 +98,14 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      */
     const onArrowPressed = (evt: React.KeyboardEvent): void => {
         const { keyCode } = evt;
-        setActiveItemIndex(calculateActiveIndex(keyCode));
+        const nextActiveIndex = calculateActiveIndex(keyCode);
+        setActiveItemIndex(nextActiveIndex);
         preventDefaultAndStopPropagation(evt);
+        if (onListItemNavigated) {
+            const selectedItem: object = items[nextActiveIndex];
+
+            onListItemNavigated(selectedItem);
+        }
     };
 
     /**

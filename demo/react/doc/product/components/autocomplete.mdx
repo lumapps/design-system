@@ -159,20 +159,22 @@ import { mdiClose } from '@mdi/js';
     const [wasBackspacePressed, setWasBackspacePressed] = React.useState(false);
     const [activeChip, setActiveChip] = React.useState(-1);
     const [filterValue, setFilterValue] = React.useState('');
+    const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(undefined);
     const [selectedValues, setSelectedValues] = React.useState([]);
 
     const filteredCities = CITIES.filter((city) => {
         const noSpacesCity = city.text.replace(' ', '').toLowerCase();
-        const wasCityAlreadySelected = selectedValues.filter(c => c.id === city.id).length > 0;
 
-        return !wasCityAlreadySelected && noSpacesCity.includes(filterValue.replace(' ', '').toLowerCase());
+        return noSpacesCity.includes(filterValue.replace(' ', '').toLowerCase());
     });
+
     const closeAutocomplete = () => setShowSuggestions(false);
 
     const setSelectedCity = (city) => {
         setSelectedValues([...selectedValues, city]);
         setFilterValue('');
         setShowSuggestions(false);
+        setNavigationSuggestionValue(undefined);
     }
 
     const onNewCityCreated = (newCity) => {
@@ -192,6 +194,12 @@ import { mdiClose } from '@mdi/js';
     const onChange = (value) => {
         setFilterValue(value);
         setShowSuggestions(value.length > 0);
+    };
+
+    const onItemNavigated = (city) => {
+        if (city) {
+            setNavigationSuggestionValue(city.text);
+        }
     };
 
     const onBackspacePressed = () => {
@@ -217,6 +225,7 @@ import { mdiClose } from '@mdi/js';
     } = List.useKeyboardListNavigation(
         filteredCities,
         setSelectedCity,
+        onItemNavigated,
         onNewCityCreated,
         onBackspacePressed,
         true,
@@ -232,7 +241,7 @@ import { mdiClose } from '@mdi/js';
             theme={theme}
             isOpen={showSuggestions}
             onClose={closeAutocomplete}
-            value={filterValue}
+            value={navigationSuggestionValue || filterValue}
             onChange={onChange}
             onKeyDown={onKeyboardNavigation}
             onFocus={onFocus}
