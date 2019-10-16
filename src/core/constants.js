@@ -77,6 +77,14 @@ const TAB_KEY_CODE = 9;
  */
 const UP_KEY_CODE = 38;
 
+/**
+ * The backspace key code.
+ *
+ * @type {number}
+ * @constant
+ */
+const BACKSPACE_KEY_CODE = 8;
+
 /////////////////////////////
 
 export {
@@ -89,4 +97,5 @@ export {
     RIGHT_KEY_CODE,
     TAB_KEY_CODE,
     UP_KEY_CODE,
+    BACKSPACE_KEY_CODE,
 };

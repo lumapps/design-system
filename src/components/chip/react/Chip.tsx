@@ -30,6 +30,8 @@ interface IChipProps extends IGenericProps {
     /* Whether the chip has pointer on hover. */
     isClickable?: boolean;
     /** Indicates if the chip is currently in an active state or not. */
+    isHighlighted?: boolean;
+    /** Indicates if the chip is currently in a highlighted state or not. */
     isSelected?: boolean;
     /** Indicates if the chip is currently disabled or not. */
     isDisabled?: boolean;
@@ -78,6 +80,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     color: ColorPalette.dark,
     isClickable: false,
     isDisabled: false,
+    isHighlighted: false,
     isSelected: false,
     size: Size.m,
     theme: undefined,
@@ -97,6 +100,7 @@ const Chip: React.FC<IChipProps> = ({
     children,
     color = DEFAULT_PROPS.color,
     isClickable = DEFAULT_PROPS.isClickable,
+    isHighlighted = DEFAULT_PROPS.isHighlighted,
     isSelected = DEFAULT_PROPS.isSelected,
     isDisabled = DEFAULT_PROPS.isDisabled,
     onAfterClick,
@@ -156,6 +160,7 @@ const Chip: React.FC<IChipProps> = ({
                     disabled: Boolean(isDisabled),
                     hasAfter: Boolean(hasAfterClick),
                     hasBefore: Boolean(hasBeforeClick),
+                    highlighted: Boolean(isHighlighted),
                     prefix: CLASSNAME,
                     selected: Boolean(isSelected),
                     size,

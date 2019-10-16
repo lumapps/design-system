@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useState } from 'react';
+import React, { ReactElement, ReactNode, RefObject, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -26,6 +26,9 @@ interface ITextFieldProps extends IGenericProps {
 
     /** Text field helper message. */
     helper?: string;
+
+    /** A component to be rendered before the main input or textarea. */
+    before?: HTMLElement | ReactNode;
 
     /** Text field icon (SVG path). */
     icon?: string;
@@ -187,6 +190,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
  */
 const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElement => {
     const {
+        before,
         className = '',
         hasError,
         helper,
@@ -246,7 +250,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                         size={Size.xs}
                     />
                 )}
-
+                {before}
                 <div className={`${CLASSNAME}__input-native`}>
                     {renderInputNative({
                         id,
