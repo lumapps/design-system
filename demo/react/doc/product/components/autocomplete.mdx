@@ -187,9 +187,8 @@ import { mdiClose } from '@mdi/js';
     };
 
     const clearSelectedValue = (event, city) => {
-        event && event.stopPropagation();
+        inputRef.current.focus();
         setSelectedValues(city ? selectedValues.filter((c) => c.id !== city.id) : []);
-        inputRef.focus();
     };
 
     const onChange = (value) => {
