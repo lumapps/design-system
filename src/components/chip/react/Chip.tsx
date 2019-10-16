@@ -29,9 +29,9 @@ interface IChipProps extends IGenericProps {
     color?: Color;
     /* Whether the chip has pointer on hover. */
     isClickable?: boolean;
-    /** Indicates if the chip is currently in an active state or not. */
-    isHighlighted?: boolean;
     /** Indicates if the chip is currently in a highlighted state or not. */
+    isHighlighted?: boolean;
+    /** Indicates if the chip is currently in a selected state or not. */
     isSelected?: boolean;
     /** Indicates if the chip is currently disabled or not. */
     isDisabled?: boolean;
