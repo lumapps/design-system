@@ -107,7 +107,6 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
         preventDefaultAndStopPropagation(evt);
         if (onListItemNavigated) {
             const selectedItem: object = items[nextActiveIndex];
-
             // tslint:disable-next-line: no-inferred-empty-object-type
             onListItemNavigated(selectedItem);
         }
