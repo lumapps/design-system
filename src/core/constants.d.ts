@@ -53,7 +53,7 @@ declare const UP_KEY_CODE: number;
 declare const TAB_KEY_CODE: number;
 
 /**
- * The TAB key code.
+ * The BACKSPACE key code.
  */
 declare const BACKSPACE_KEY_CODE: number;
 
