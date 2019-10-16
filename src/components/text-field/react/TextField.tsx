@@ -1,4 +1,4 @@
-import React, { ReactElement, Ref, useState } from 'react';
+import React, { ReactElement, RefObject, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -49,7 +49,10 @@ interface ITextFieldProps extends IGenericProps {
     theme?: Theme;
 
     /** A ref that will be passed to the wrapper element. */
-    textFieldRef?: Ref<HTMLDivElement>;
+    textFieldRef?: RefObject<HTMLDivElement>;
+
+    /** A ref that will be passed to the input or text area element. */
+    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
 
     /** Text field value. */
     value: string;
@@ -105,6 +108,7 @@ interface IInputNativeProps {
     placeholder?: string;
     type?: TextFieldType;
     value: string;
+    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     setFocus(focus: boolean): void;
     onChange(value: string): void;
     onFocus?(value: React.FocusEvent): void;
@@ -112,7 +116,20 @@ interface IInputNativeProps {
 }
 
 const renderInputNative = (props: IInputNativeProps): ReactElement => {
-    const { id, isDisabled, placeholder, type, value, setFocus, onChange, onFocus, onBlur, ...forwardedProps } = props;
+    const {
+        id,
+        isDisabled,
+        placeholder,
+        type,
+        value,
+        setFocus,
+        onChange,
+        onFocus,
+        onBlur,
+        inputRef,
+        ...forwardedProps
+    } = props;
+
     const onTextFieldFocus = (event: React.FocusEvent): void => {
         if (onFocus) {
             onFocus(event);
@@ -141,6 +158,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
                 onFocus={onTextFieldFocus}
                 onBlur={onTextFieldBlur}
                 onChange={handleChange}
+                ref={inputRef as RefObject<HTMLTextAreaElement>}
                 {...forwardedProps}
             />
         );
@@ -155,6 +173,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
             onFocus={onTextFieldFocus}
             onBlur={onTextFieldBlur}
             onChange={handleChange}
+            ref={inputRef as RefObject<HTMLInputElement>}
             {...forwardedProps}
         />
     );
@@ -181,6 +200,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         onBlur,
         placeholder,
         textFieldRef,
+        inputRef,
         theme = DEFAULT_PROPS.theme,
         type = DEFAULT_PROPS.type,
         value,
@@ -230,6 +250,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 <div className={`${CLASSNAME}__input-native`}>
                     {renderInputNative({
                         id,
+                        inputRef,
                         isDisabled,
                         onBlur,
                         onChange,
