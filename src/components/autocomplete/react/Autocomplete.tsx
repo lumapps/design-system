@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { ReactElement, ReactNode, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -19,6 +19,9 @@ interface IAutocompleteProps extends IGenericProps {
      * @see {@link DropdownProps#offset}
      */
     offset?: Offset;
+
+    /** A component to be rendered before the main label area. */
+    before?: HTMLElement | ReactNode;
 
     /**
      * The preferred Dropdown location against the anchor element.
@@ -211,6 +214,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         placement,
         fitToAnchorWidth,
         onInfiniteScroll,
+        before,
         ...forwardedProps
     } = props;
     const textFieldRef = useRef(null);
@@ -241,6 +245,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 placeholder={placeholder}
                 theme={theme}
                 type={type}
+                before={before}
             />
             <Dropdown
                 anchorRef={textFieldRef}

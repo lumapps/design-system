@@ -1,6 +1,7 @@
 import React, { SetStateAction, useState } from 'react';
 
-import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
+import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
+import get from 'lodash/get';
 
 /////////////////////////////
 
@@ -9,6 +10,12 @@ type useKeyboardListNavigationType = (
     items: object[],
     /** callback to be executed when the ENTER key is pressed on an item */
     onListItemSelected: (itemSelected: object) => {},
+    /** callback to be executed when the ENTER key is pressed for a new item */
+    onNewItemCreated: (itemSelected: object) => {},
+    /** callback to be executed when the BACKSPACE key is pressed */
+    onBackspacePressed: () => {},
+    /** determines whether after selecting an item, the focus should be maintained on the current target or not  */
+    keepFocusAfterSelection: boolean,
     /** where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0` */
     initialIndex: number,
 ) => {
@@ -38,6 +45,9 @@ const INITIAL_INDEX = -1;
 const useKeyboardListNavigation: useKeyboardListNavigationType = (
     items: object[],
     onListItemSelected?: (itemSelected: object) => {},
+    onNewItemCreated?: (itemSelected: object) => {},
+    onBackspacePressed?: (evt: React.KeyboardEvent) => {},
+    keepFocusAfterSelection: boolean = false,
     initialIndex: number = INITIAL_INDEX,
 ): {
     activeItemIndex: number;
@@ -71,6 +81,78 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     };
 
     /**
+     * Prevents the default event and stops the propagation of said event
+     * @param evt - key pressed event
+     */
+    const preventDefaultAndStopPropagation = (evt: React.KeyboardEvent): void => {
+        evt.nativeEvent.preventDefault();
+        evt.nativeEvent.stopPropagation();
+    };
+
+    /**
+     * Handles navigation with the arrows using the keyboard
+     * @param evt - key pressed event
+     */
+    const onArrowPressed = (evt: React.KeyboardEvent): void => {
+        const { keyCode } = evt;
+        setActiveItemIndex(calculateActiveIndex(keyCode));
+        preventDefaultAndStopPropagation(evt);
+    };
+
+    /**
+     * Handles the event when the backspace key is pressed
+     * @param evt - key pressed event
+     */
+    const onBackspaceKeyPressed = (evt: React.KeyboardEvent): void => {
+        if (onBackspacePressed) {
+            onBackspacePressed(evt);
+        }
+    };
+
+    /**
+     * Handles when the ENTER key is pressed
+     * @param evt - key pressed event
+     */
+    const onEnterKeyPressed = (evt: React.KeyboardEvent): void => {
+        if (!onListItemSelected) {
+            return;
+        }
+
+        preventDefaultAndStopPropagation(evt);
+
+        if (!keepFocusAfterSelection) {
+            (evt.currentTarget as HTMLElement).blur();
+        }
+
+        const selectedItem: object = items[activeItemIndex];
+
+        if (selectedItem) {
+            // tslint:disable-next-line: no-inferred-empty-object-type
+            onListItemSelected(selectedItem);
+            resetActiveIndex();
+        } else if (activeItemIndex === initialIndex && onNewItemCreated) {
+            const value = get(evt, 'target.value');
+            // tslint:disable-next-line: no-inferred-empty-object-type
+            onNewItemCreated(value);
+            resetActiveIndex();
+        }
+    };
+
+    /**
+     * In order to make it easier in the future to add new events depending on the key
+     * a map was created to add these handlers. In the future, if there is another event
+     * that we need to manage depending on a specific key, we just need to add the key code
+     * here, and as a value, the handler for said key.
+     */
+    const eventsForKeyPressed = {
+        [DOWN_KEY_CODE]: onArrowPressed,
+        [UP_KEY_CODE]: onArrowPressed,
+        [TAB_KEY_CODE]: preventDefaultAndStopPropagation,
+        [ENTER_KEY_CODE]: onEnterKeyPressed,
+        [BACKSPACE_KEY_CODE]: onBackspaceKeyPressed,
+    };
+
+    /**
      * Calculates the next active item index depending on the key pressed.
      * If the key pressed was ENTER, the function executes the callback `onListItemSelected`
      * and resets the active index, since an item was selected.
@@ -78,26 +160,10 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      */
     const onKeyboardNavigation = (evt: React.KeyboardEvent): void => {
         const { keyCode } = evt;
+        const handler = eventsForKeyPressed[keyCode];
 
-        if (keyCode === DOWN_KEY_CODE || evt.keyCode === UP_KEY_CODE) {
-            setActiveItemIndex(calculateActiveIndex(keyCode));
-            evt.nativeEvent.preventDefault();
-            evt.nativeEvent.stopPropagation();
-        } else if (keyCode === TAB_KEY_CODE) {
-            evt.nativeEvent.preventDefault();
-            evt.nativeEvent.stopPropagation();
-        } else if (keyCode === ENTER_KEY_CODE && onListItemSelected) {
-            evt.nativeEvent.preventDefault();
-            evt.nativeEvent.stopPropagation();
-            (evt.currentTarget as HTMLElement).blur();
-
-            const selectedItem: object = items[activeItemIndex];
-
-            if (selectedItem) {
-                // tslint:disable-next-line: no-inferred-empty-object-type
-                onListItemSelected(selectedItem);
-                resetActiveIndex();
-            }
+        if (handler) {
+            handler(evt);
         }
     };
 
