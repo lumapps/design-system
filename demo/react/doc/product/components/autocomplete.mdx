@@ -67,8 +67,8 @@ import { mdiClose } from '@mdi/js';
         activeItemIndex,
     } = List.useKeyboardListNavigation(
         filteredCities,
-        setSelectedCity,
         inputRef,
+        setSelectedCity,
     );
 
     const onFocus = (evt) => {
@@ -160,6 +160,7 @@ import { mdiClose } from '@mdi/js';
     const [filterValue, setFilterValue] = React.useState('');
     const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(undefined);
     const [selectedValues, setSelectedValues] = React.useState([]);
+    const inputRef = React.useRef(null);
 
     const filteredCities = CITIES.filter((city) => {
         const noSpacesCity = city.text.replace(' ', '').toLowerCase();
@@ -188,6 +189,7 @@ import { mdiClose } from '@mdi/js';
     const clearSelectedValue = (event, city) => {
         event && event.stopPropagation();
         setSelectedValues(city ? selectedValues.filter((c) => c.id !== city.id) : []);
+        inputRef.focus();
     };
 
     const onChange = (value) => {
@@ -218,11 +220,9 @@ import { mdiClose } from '@mdi/js';
 
     const {
         activeItemIndex,
-        onKeyboardNavigation,
-        setActiveItemIndex,
-        resetActiveIndex
     } = List.useKeyboardListNavigation(
         filteredCities,
+        inputRef,
         setSelectedCity,
         onItemNavigated,
         onNewCityCreated,
@@ -231,8 +231,7 @@ import { mdiClose } from '@mdi/js';
     );
 
     const onFocus = (evt) => {
-        resetActiveIndex();
-        return setShowSuggestions(filterValue.length > 0);
+        setShowSuggestions(filterValue.length > 0);
     }
 
     return (
@@ -242,9 +241,9 @@ import { mdiClose } from '@mdi/js';
             onClose={closeAutocomplete}
             value={navigationSuggestionValue || filterValue}
             onChange={onChange}
-            onKeyDown={onKeyboardNavigation}
             onFocus={onFocus}
             values={selectedValues}
+            inputRef={inputRef}
             selectedChipRender={(city, index) => (
                         <Chip
                             key={index}

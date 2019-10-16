@@ -14,8 +14,8 @@ type useKeyboardListNavigationType = (
     onListItemSelected: (itemSelected: object) => {},
     /** callback to be executed when the Arrow keys are pressed */
     onListItemNavigated: (itemSelected: object) => {},
-    /** callback to be executed when the ENTER key is pressed for a new item */
-    onNewItemCreated: (itemSelected: object) => {},
+    /** callback to be executed when the ENTER key is pressed */
+    onEnterPressed: (itemSelected: object) => {},
     /** callback to be executed when the BACKSPACE key is pressed */
     onBackspacePressed: () => {},
     /** determines whether after selecting an item, the focus should be maintained on the current target or not  */
@@ -51,7 +51,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     ref: RefObject<HTMLElement>,
     onListItemSelected?: (itemSelected: object) => {},
     onListItemNavigated?: (itemSelected: object) => {},
-    onNewItemCreated?: (itemSelected: object) => {},
+    onEnterPressed?: (itemSelected: object) => {},
     onBackspacePressed?: (evt: KeyboardEvent) => {},
     keepFocusAfterSelection: boolean = false,
     initialIndex: number = INITIAL_INDEX,
@@ -108,6 +108,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
         if (onListItemNavigated) {
             const selectedItem: object = items[nextActiveIndex];
 
+            // tslint:disable-next-line: no-inferred-empty-object-type
             onListItemNavigated(selectedItem);
         }
     };
@@ -144,10 +145,10 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
             // tslint:disable-next-line: no-inferred-empty-object-type
             onListItemSelected(selectedItem);
             resetActiveIndex();
-        } else if (activeItemIndex === initialIndex && onNewItemCreated) {
+        } else if (activeItemIndex === initialIndex && onEnterPressed) {
             const value = get(evt, 'target.value');
             // tslint:disable-next-line: no-inferred-empty-object-type
-            onNewItemCreated(value);
+            onEnterPressed(value);
             resetActiveIndex();
         }
     };
