@@ -43,6 +43,8 @@ export { ListItem, ListItemProps, ListItemSize } from './components/list/react/L
 
 export { ListSubheader, ListSubheaderProps } from './components/list/react/ListSubheader';
 
+export { Notification, NotificationProps, NotificationType } from './components/notification/react/Notification';
+
 export { ElementPosition, Popover, PopoverProps, Placement, Offset } from './components/popover/react/Popover';
 
 export { PostBlock, PostBlockProps } from './components/post-block/react/PostBlock';

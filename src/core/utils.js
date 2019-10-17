@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import isBoolean from 'lodash/isBoolean';
 import isEmpty from 'lodash/isEmpty';
 import kebabCase from 'lodash/kebabCase';
-import { noop } from 'lodash/noop';
+import noop from 'lodash/noop';
 
 import { ESCAPE_KEY_CODE } from './constants';
 

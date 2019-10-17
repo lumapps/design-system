@@ -50,10 +50,13 @@ describe('<Chip />', () => {
         const mockOnAfterClick = jest.fn();
         const mockOnBeforeClick = jest.fn();
         const mockClickEvent = {
-            stopPropagation: () => true,
+            stopPropagation: (): boolean => true,
         };
-        const clearClickMocks = () => {
-            [mockOnClick, mockOnAfterClick, mockOnBeforeClick].forEach((func) => func.mockClear());
+        const clearClickMocks = (): void => {
+            // tslint:disable-next-line: no-any
+            [mockOnClick, mockOnAfterClick, mockOnBeforeClick].forEach((func: jest.MockInstance<any, any>) =>
+                func.mockClear(),
+            );
         };
 
         beforeEach(() => clearClickMocks);
