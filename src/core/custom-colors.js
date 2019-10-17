@@ -265,12 +265,18 @@ function _getProgressCSSRules(colorPalette) {
     return [
         {
             selector: `
-                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__double-bounce1,
-                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-circular__double-bounce2,
-                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-linear__line1,
-                .${CSS_PREFIX}-custom-colors .${CSS_PREFIX}-progress-linear__line2
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-progress--theme-light .${CSS_PREFIX}-progress-circular__double-bounce1,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-progress--theme-light .${CSS_PREFIX}-progress-circular__double-bounce2,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-progress--theme-light .${CSS_PREFIX}-progress-linear__line1,
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-progress--theme-light .${CSS_PREFIX}-progress-linear__line2
             `,
             rule: `background-color: ${colorPalette.primary.L3}`,
+        },
+        {
+            selector: `
+                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-progress--theme-light .${CSS_PREFIX}-progress-circular__path
+            `,
+            rule: `stroke: ${colorPalette.primary.N}`,
         },
     ];
 }

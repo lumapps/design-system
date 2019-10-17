@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
+import { Theme } from 'LumX/components/index';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -21,6 +22,8 @@ enum ProgressVariant {
  * Defines the props of the component.
  */
 interface IProgressProps extends IGenericProps {
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
     /* Type of progress */
     variant?: ProgressVariant;
 }
@@ -53,6 +56,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    theme: Theme.light,
     variant: ProgressVariant.circular,
 };
 /////////////////////////////
@@ -64,19 +68,28 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  */
 const Progress: React.FC<ProgressProps> = ({
     className = '',
+    theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     ...props
 }: ProgressProps): ReactElement => {
     return (
-        <div
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), `${CLASSNAME}--${variant}`)}
-            {...props}
-        >
+        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }))} {...props}>
             <div className={classNames(`${CLASSNAME}-${variant}`)}>
                 {variant === ProgressVariant.circular && (
                     <>
                         <div className="lumx-progress-circular__double-bounce1" />
                         <div className="lumx-progress-circular__double-bounce2" />
+
+                        <svg className="lumx-progress-circular__svg" viewBox="25 25 50 50">
+                            <circle
+                                className="lumx-progress-circular__path"
+                                cx="50"
+                                cy="50"
+                                r="20"
+                                fill="none"
+                                stroke-width="5"
+                            />
+                        </svg>
                     </>
                 )}
                 {variant === ProgressVariant.linear && (

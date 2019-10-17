@@ -24,6 +24,7 @@ function ProgressDirective() {
         restrict: 'E',
         scope: {
             customColors: '=?lumxCustomColors',
+            theme: '@?lumxTheme',
             variant: '@?lumxVariant',
         },
         template,
