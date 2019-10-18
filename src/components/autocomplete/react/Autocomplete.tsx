@@ -27,7 +27,13 @@ interface IAutocompleteProps extends IGenericProps {
      * A component to be rendered before the main text input area.
      * @see {@link TextFieldProps#before}
      */
-    before?: HTMLElement | ReactNode;
+    beforeTextField?: HTMLElement | ReactNode;
+
+    /**
+     * A component to be rendered after the main text input area.
+     * @see {@link TextFieldProps#after}
+     */
+    afterTextField?: HTMLElement | ReactNode;
 
     /**
      * The preferred Dropdown location against the anchor element.
@@ -196,6 +202,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  */
 const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): ReactElement => {
     const {
+        afterTextField,
         className,
         children,
         value,
@@ -221,7 +228,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         inputRef = useRef(null),
         fitToAnchorWidth,
         onInfiniteScroll,
-        before,
+        beforeTextField,
         ...forwardedProps
     } = props;
 
@@ -238,6 +245,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
             {...forwardedProps}
         >
             <TextField
+                after={afterTextField}
                 value={value}
                 onChange={onChange}
                 textFieldRef={textFieldRef}
@@ -254,7 +262,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 placeholder={placeholder}
                 theme={theme}
                 type={type}
-                before={before}
+                before={beforeTextField}
             />
             <Dropdown
                 anchorRef={textFieldRef as React.RefObject<HTMLElement>}
