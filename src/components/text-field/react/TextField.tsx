@@ -30,6 +30,9 @@ interface ITextFieldProps extends IGenericProps {
     /** A component to be rendered before the main input or textarea. */
     before?: HTMLElement | ReactNode;
 
+    /** A component to be rendered after the main input or textarea. */
+    after?: HTMLElement | ReactNode;
+
     /** Text field icon (SVG path). */
     icon?: string;
 
@@ -190,6 +193,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
  */
 const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElement => {
     const {
+        after,
         before,
         className = '',
         hasError,
@@ -250,7 +254,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                         size={Size.xs}
                     />
                 )}
+
                 {before}
+
                 <div className={`${CLASSNAME}__input-native`}>
                     {renderInputNative({
                         id,
@@ -266,6 +272,8 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                         ...forwardedProps,
                     })}
                 </div>
+
+                {after}
 
                 {(isValid || hasError) && (
                     <Icon
