@@ -22,6 +22,7 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
+    showDropdown={false}
   />
 </div>
 `;
