@@ -3,6 +3,7 @@ import React, { ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { Theme } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -36,6 +37,9 @@ interface IRadioButtonProps extends IGenericProps {
 
     /** Theme. */
     theme?: Theme;
+
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
 
     /** Native radio input value. */
     value?: string;
@@ -93,6 +97,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps): React
         label,
         name,
         theme = DEFAULT_PROPS.theme,
+        useCustomColors,
         value,
         onChange,
         ...forwardedProps
@@ -115,6 +120,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps): React
                     prefix: CLASSNAME,
                     theme,
                 }),
+                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
         >
             <div className={`${CLASSNAME}__input-wrapper`}>

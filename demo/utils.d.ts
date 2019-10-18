@@ -13,11 +13,21 @@ import { Theme } from './constants';
  *
  * @see {@link /demo/constants.d.ts} for the possible value for the theme.
  *
- * @param          theme The theme to enable.
+ * @param  theme The theme to enable.
  * @return The promise of the change.
  */
 declare function changeTheme(theme: Theme): Promise<Theme>;
 
+/**
+ * Set primary and secondary custom colors.
+ *
+ * @see {@link /demo/constants.d.ts} for the possible value for the theme.
+ *
+ * @param  theme The theme to apply the custom color palete on.
+ * @return The promise of the change.
+ */
+declare function setDemoCustomColors(theme: Theme): Promise<Theme>;
+
 /////////////////////////////
 
-export { changeTheme };
+export { changeTheme, setDemoCustomColors };

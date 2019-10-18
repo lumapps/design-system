@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
 
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { ListItem, ListItemProps, Theme } from 'LumX';
@@ -20,6 +21,9 @@ interface IListProps extends IGenericProps {
 
     /** Whether the list items are clickable */
     isClickable?: boolean;
+
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
 
     /** Theme */
     theme?: Theme;
@@ -70,6 +74,7 @@ const List: React.FC<ListProps> = ({
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
     onListItemSelected,
+    useCustomColors,
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ListProps): ReactElement => {
@@ -190,7 +195,9 @@ const List: React.FC<ListProps> = ({
 
     return (
         <ul
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, clickable: isClickable }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, clickable: isClickable }), {
+                [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
+            })}
             tabIndex={isClickable ? 0 : -1}
             onKeyDown={onKeyInteraction}
             onKeyPress={onKeyInteraction}

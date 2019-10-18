@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import uuid from 'uuid/v4';
 
 import { Icon, Size, Theme } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -47,6 +48,9 @@ interface ITextFieldProps extends IGenericProps {
 
     /** Theme. */
     theme?: Theme;
+
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
 
     /** Text field value. */
     value: string;
@@ -156,6 +160,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         placeholder,
         theme = DEFAULT_PROPS.theme,
         type = DEFAULT_PROPS.type,
+        useCustomColors,
         value,
         ...forwardedProps
     } = props;
@@ -179,6 +184,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     prefix: CLASSNAME,
                     theme,
                 }),
+                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
         >
             {label && (

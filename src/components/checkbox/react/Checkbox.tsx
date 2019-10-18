@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { mdiCheck } from '@mdi/js';
 
 import { Icon, Theme } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -28,6 +29,8 @@ interface ICheckboxProps extends IGenericProps {
     label?: ReactNode;
     /** Component theme */
     theme?: Theme;
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
     /** Is checkbox checked */
     value?: boolean;
     /**
@@ -84,6 +87,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     label,
     onChange,
     theme = DEFAULT_PROPS.theme,
+    useCustomColors,
     value = DEFAULT_PROPS.value,
     ...props
 }: CheckboxProps): ReactElement => {
@@ -103,6 +107,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                     prefix: CLASSNAME,
                     theme,
                 }),
+                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
             {...props}
         >

@@ -7,6 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import isFunction from 'lodash/isFunction';
 
 import { Theme } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -43,6 +44,9 @@ interface ISwitchProps extends IGenericProps {
      * The theme.
      */
     theme?: Theme;
+
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
 
     /**
      * The function to execute when toggled.
@@ -121,6 +125,7 @@ const Switch: React.FC<SwitchProps> = ({
     onToggle,
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
+    useCustomColors,
     ...props
 }: SwitchProps): ReactElement => {
     const switchId: string = uuid();
@@ -152,6 +157,7 @@ const Switch: React.FC<SwitchProps> = ({
                     theme,
                     unchecked: !Boolean(isChecked),
                 }),
+                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
             {...props}
         >

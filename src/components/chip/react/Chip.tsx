@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
 
 import { Color, ColorPalette, Size, Theme } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -37,6 +38,8 @@ interface IChipProps extends IGenericProps {
     size?: ChipSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
     /** A ref that will be passed to the wrapper element. */
     chipRef?: Ref<HTMLAnchorElement>;
     /** A function to be executed when the after element is clicked. */
@@ -101,6 +104,7 @@ const Chip: React.FC<IChipProps> = ({
     onClick,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
+    useCustomColors,
     chipRef,
     ...props
 }: ChipProps): ReactElement => {
@@ -161,6 +165,7 @@ const Chip: React.FC<IChipProps> = ({
                     size,
                     unselected: Boolean(!isSelected),
                 }),
+                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
             role="button"
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
