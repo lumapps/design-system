@@ -9,6 +9,8 @@
 }
 
 @mixin lumx-table-row-is-clickable($theme, $is-selected) {
+    cursor: default;
+
     &:hover {
         @if $theme == 'dark' {
             @if $is-selected == true {

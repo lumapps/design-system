@@ -6,6 +6,7 @@
     $self: &;
 
     display: flex;
+    cursor: default;
 
     &__input-wrapper {
         @include lumx-checkbox-input-wrapper;

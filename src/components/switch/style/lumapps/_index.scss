@@ -6,6 +6,7 @@
     $self: &;
 
     display: flex;
+    cursor: default;
 
     &--position-right {
         flex-direction: row-reverse;
