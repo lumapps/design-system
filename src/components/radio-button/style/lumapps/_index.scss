@@ -6,7 +6,6 @@
     $self: &;
 
     display: flex;
-    cursor: default;
 
     &__input-wrapper {
         @include lumx-radio-button-input-wrapper;
