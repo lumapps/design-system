@@ -90,6 +90,16 @@ There are three options: _helper text_, _placeholder_ and _icon_.
 };
 ```
 
+### Text Area
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('');
+
+    return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} type="textarea" />;
+};
+```
+
 ### Properties
 
 <PropTable component="TextField" />

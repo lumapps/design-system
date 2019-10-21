@@ -60,7 +60,7 @@
     }
 
     &__input-native {
-        flex: 1;
+        width: 100%;
 
         input,
         textarea {
@@ -84,6 +84,9 @@
         }
 
         textarea {
+            min-width: 100%;
+            max-width: 100%;
+
             #{$self}--theme-light & {
                 @include lumx-text-field-input-native('dark', 'textarea');
             }
