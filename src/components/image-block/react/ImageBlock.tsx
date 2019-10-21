@@ -1,12 +1,11 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, Chip, Grid, Size, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
+import { Alignment, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -43,8 +42,8 @@ interface IImageBlockProps extends IGenericProps {
     fillHeight?: boolean;
     /* The url of the image we want to display in the image-block. */
     image: string;
-    /** A list of tags, those tags will be displayed in a chip component. */
-    tags?: string[];
+    /* Tags elements to be transcluded into the component */
+    tags?: HTMLElement | ReactNode;
     /* The theme to use to display the image-block. */
     theme?: Theme;
     /** The image title to display in the caption. */
@@ -158,27 +157,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                             )}
                         </div>
                     )}
-                    {tags && tags.length > 0 && (
-                        <div className={`${CLASSNAME}__tags`}>
-                            <Grid>
-                                {tags.map(
-                                    (tag: string, index: number): JSX.Element => (
-                                        <div
-                                            key={index}
-                                            className={classNames(
-                                                `${CLASSNAME}__tag`,
-                                                `${CSS_PREFIX}-spacing-margin-right-tiny`,
-                                            )}
-                                        >
-                                            <Chip size={Size.s} theme={theme}>
-                                                {tag}
-                                            </Chip>
-                                        </div>
-                                    ),
-                                )}
-                            </Grid>
-                        </div>
-                    )}
+                    {tags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
                 </div>
             )}
             {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}

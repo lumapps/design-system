@@ -4,11 +4,13 @@ import {
     Alignment,
     Button,
     ButtonEmphasis,
+    Chip,
     Grid,
     IconButton,
     ImageBlock,
     ImageBlockCaptionPosition,
     ImageBlockProps,
+    Size,
     Theme,
     ThumbnailAspectRatio
 } from 'LumX';
@@ -27,13 +29,6 @@ Image blocks support thumbnail's different formats (see [thumbnail](/thumbnail))
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => (
     <ImageBlock
-        aspectRatio={ThumbnailAspectRatio.horizontal}
-        description="Lorem ipsum dolor sit amet, consectur adipiscing "
-        tags={['Tag 1', 'Tag 2']}
-        theme={theme}
-        title="Lorem ipsum"
-        image="https://picsum.photos/800/600/?random"
-        hasActions
         actions={
             <Grid>
                 <div className="lumx-spacing-margin-right-regular">
@@ -64,6 +59,26 @@ Image blocks support thumbnail's different formats (see [thumbnail](/thumbnail))
                 </div>
             </Grid>
         }
+        aspectRatio={ThumbnailAspectRatio.horizontal}
+        description="Lorem ipsum dolor sit amet, consectur adipiscing "
+        tags={
+            <Grid>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    size={Size.s}>
+                    Tag 1
+                </Chip>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    size={Size.s}>
+                    Tag 2
+                </Chip>
+            </Grid>
+        }
+        theme={theme}
+        title="Lorem ipsum"
+        image="https://picsum.photos/800/600/?random"
+        hasActions
     />
 );
 ```
@@ -78,7 +93,20 @@ A custom padding can be added.
         aspectRatio={ThumbnailAspectRatio.horizontal}
         captionStyle={{ padding: 32 }}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
-        tags={['Tag 1', 'Tag 2']}
+        tags={
+            <Grid>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    size={Size.s}>
+                    Tag 1
+                </Chip>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    size={Size.s}>
+                    Tag 2
+                </Chip>
+            </Grid>
+        }
         theme={theme}
         title="Lorem ipsum"
         image="https://picsum.photos/800/600/?random"
@@ -96,7 +124,20 @@ Info can be placed over the image.
         aspectRatio={ThumbnailAspectRatio.horizontal}
         captionPosition={ImageBlockCaptionPosition.over}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
-        tags={['Tag 1', 'Tag 2']}
+        tags={
+            <Grid>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    size={Size.s}>
+                    Tag 1
+                </Chip>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    size={Size.s}>
+                    Tag 2
+                </Chip>
+            </Grid>
+        }
         theme={theme}
         title="Lorem ipsum"
         image="https://picsum.photos/800/600/?random"
@@ -114,7 +155,20 @@ There are three alignments: _left_, _center_ and, _right_.
         align={Alignment.center}
         aspectRatio={ThumbnailAspectRatio.original}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
-        tags={['Tag 1', 'Tag 2']}
+        tags={
+            <Grid>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    size={Size.s}>
+                    Tag 1
+                </Chip>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    size={Size.s}>
+                    Tag 2
+                </Chip>
+            </Grid>
+        }
         theme={theme}
         title="Lorem ipsum"
         image="https://picsum.photos/320/240/?random"
