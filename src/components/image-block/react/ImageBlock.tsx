@@ -38,13 +38,13 @@ interface IImageBlockProps extends IGenericProps {
         | {
               __html: string;
           };
-    /* Whether the image has to fill its container's height. */
+    /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
-    /* The url of the image we want to display in the image-block. */
+    /** The url of the image we want to display in the image-block. */
     image: string;
-    /* Tags elements to be transcluded into the component */
+    /** Tags elements to be transcluded into the component */
     tags?: HTMLElement | ReactNode;
-    /* The theme to use to display the image-block. */
+    /** The theme to use to display the image-block. */
     theme?: Theme;
     /** The image title to display in the caption. */
     title?: string;

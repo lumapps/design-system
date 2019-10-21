@@ -20,13 +20,13 @@ type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
  * Defines the props of the component.
  */
 interface IAvatarProps extends IGenericProps {
-    /* Actions elements to be transcluded into the component */
+    /** Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
-    /* Size. */
+    /** Size. */
     size?: AvatarSize;
-    /* Theme. */
+    /** Theme. */
     theme?: Theme;
-    /* Avatar image */
+    /** Avatar image */
     image: string;
 }
 type AvatarProps = IAvatarProps;
