@@ -1,10 +1,10 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, Chip, Size, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
+import { Alignment, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -38,13 +38,13 @@ interface IImageBlockProps extends IGenericProps {
         | {
               __html: string;
           };
-    /* Whether the image has to fill its container's height. */
+    /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
-    /* The url of the image we want to display in the image-block. */
+    /** The url of the image we want to display in the image-block. */
     image: string;
-    /** A list of tags, those tags will be displayed in a chip component. */
-    tags?: string[];
-    /* The theme to use to display the image-block. */
+    /** Tags elements to be transcluded into the component */
+    tags?: HTMLElement | ReactNode;
+    /** The theme to use to display the image-block. */
     theme?: Theme;
     /** The image title to display in the caption. */
     title?: string;
@@ -78,6 +78,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    actions: undefined,
     align: Alignment.left,
     aspectRatio: ThumbnailAspectRatio.original,
     captionPosition: ImageBlockCaptionPosition.below,
@@ -97,6 +98,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const ImageBlock: React.FC<ImageBlockProps> = ({
+    actions = DEFAULT_PROPS.actions,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     className = '',
@@ -154,21 +156,10 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                             )}
                         </div>
                     )}
-                    {tags && tags.length > 0 && (
-                        <div className={`${CLASSNAME}__tags`}>
-                            {tags.map(
-                                (tag: string, index: number): JSX.Element => (
-                                    <div key={index} className={`${CLASSNAME}__tag`}>
-                                        <Chip size={Size.s} theme={theme}>
-                                            {tag}
-                                        </Chip>
-                                    </div>
-                                ),
-                            )}
-                        </div>
-                    )}
+                    {tags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
                 </div>
             )}
+            {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
         </div>
     );
 };

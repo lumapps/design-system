@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   TypeScript and JSDoc cleanup for `SideNavigation` component.
 -   _[BREAKING]_ The `label` and `helper` of the `RadioButton` component are now props and not children.
 -   _[BREAKING]_ The `onChange` callback of the `RadioButton` component now provides the value directly without wrapping object.
+-   _[BREAKING]_ The `tags` prop of the `ImageBlock` must now be JSX and not an array.
 -   Minor SCSS style changes on the `Tooltip` component.
 -   Image Lazy Loading for Thumbnail Component [#190]
 

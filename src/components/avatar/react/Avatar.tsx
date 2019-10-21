@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { CSSProperties, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -20,11 +20,13 @@ type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
  * Defines the props of the component.
  */
 interface IAvatarProps extends IGenericProps {
-    /* Size. */
+    /** Actions elements to be transcluded into the component */
+    actions?: HTMLElement | ReactNode;
+    /** Size. */
     size?: AvatarSize;
-    /* Theme. */
+    /** Theme. */
     theme?: Theme;
-    /* Avatar image */
+    /** Avatar image */
     image: string;
 }
 type AvatarProps = IAvatarProps;
@@ -56,6 +58,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    actions: undefined,
     size: Size.m,
     theme: Theme.light,
 };
@@ -67,6 +70,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const Avatar: React.FC<AvatarProps> = ({
+    actions = DEFAULT_PROPS.actions,
     className = '',
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
@@ -84,7 +88,9 @@ const Avatar: React.FC<AvatarProps> = ({
             )}
             {...props}
             style={style}
-        />
+        >
+            {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+        </div>
     );
 };
 Avatar.displayName = COMPONENT_NAME;

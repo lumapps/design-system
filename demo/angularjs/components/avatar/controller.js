@@ -2,7 +2,7 @@ import { mdiDelete, mdiEye, mdiPencil } from 'LumX/icons';
 
 /////////////////////////////
 
-function DemoImageBlockController() {
+function DemoAvatarController() {
     'ngInject';
 
     const vm = this;
@@ -25,19 +25,12 @@ function DemoImageBlockController() {
         mdiEye,
         mdiPencil,
     };
-
-    /**
-     * The user fields.
-     *
-     * @type {Array}
-     */
-    vm.tags = ['Tag 1', 'Tag 2'];
 }
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoImageBlockController', DemoImageBlockController);
+angular.module('design-system').controller('DemoAvatarController', DemoAvatarController);
 
 /////////////////////////////
 
-export { DemoImageBlockController };
+export { DemoAvatarController };
