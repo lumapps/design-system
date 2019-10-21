@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useState } from 'react';
+import React, { ReactElement, ReactNode, RefObject, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -22,6 +22,12 @@ enum TextFieldType {
  * Defines the props of the component.
  */
 interface ITextFieldProps extends IGenericProps {
+    /** A component to be rendered after the main text input. */
+    after?: HTMLElement | ReactNode;
+
+    /** A component to be rendered before the main text input */
+    before?: HTMLElement | ReactNode;
+
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
 
@@ -64,8 +70,20 @@ interface ITextFieldProps extends IGenericProps {
     /** Text field type (input or textarea). */
     type?: TextFieldType;
 
+    /** A ref that will be passed to the wrapper element. */
+    textFieldRef?: RefObject<HTMLDivElement>;
+
+    /** A ref that will be passed to the input or text area element. */
+    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
+
     /** Text field value change handler. */
     onChange(value: string): void;
+
+    /** Text field focus change handler. */
+    onFocus?(event: React.FocusEvent): void;
+
+    /** Text field blur change handler. */
+    onBlur?(event: React.FocusEvent): void;
 }
 type TextFieldProps = ITextFieldProps;
 
@@ -154,6 +172,7 @@ interface IInputNativeProps {
     id?: string;
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     isDisabled?: boolean;
+    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     placeholder?: string;
     type?: TextFieldType;
     value: string;
@@ -161,6 +180,8 @@ interface IInputNativeProps {
     setFocus(focus: boolean): void;
     recomputeNumberOfRows(event: React.ChangeEvent): void;
     onChange(value: string): void;
+    onFocus?(value: React.FocusEvent): void;
+    onBlur?(value: React.FocusEvent): void;
 }
 
 const renderInputNative = (props: IInputNativeProps): ReactElement => {
@@ -172,13 +193,29 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         value,
         setFocus,
         onChange,
+        onFocus,
+        onBlur,
         inputRef,
         rows,
         recomputeNumberOfRows,
         ...forwardedProps
     } = props;
-    const onFocus = (): void => setFocus(true);
-    const onBlur = (): void => setFocus(false);
+
+    const onTextFieldFocus = (event: React.FocusEvent): void => {
+        if (onFocus) {
+            onFocus(event);
+        }
+
+        return setFocus(true);
+    };
+
+    const onTextFieldBlur = (event: React.FocusEvent): void => {
+        if (onBlur) {
+            onBlur(event);
+        }
+
+        return setFocus(false);
+    };
 
     const handleChange = (event: React.ChangeEvent): void => {
         if (type === TextFieldType.textarea) {
@@ -195,11 +232,11 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
                 disabled={isDisabled}
                 placeholder={placeholder}
                 value={value}
-                ref={inputRef as RefObject<HTMLTextAreaElement>}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onChange={handleChange}
                 rows={rows}
+                onFocus={onTextFieldFocus}
+                onBlur={onTextFieldBlur}
+                onChange={handleChange}
+                ref={inputRef as RefObject<HTMLTextAreaElement>}
                 {...forwardedProps}
             />
         );
@@ -211,9 +248,10 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
             type="text"
             placeholder={placeholder}
             value={value}
-            onFocus={onFocus}
-            onBlur={onBlur}
+            onFocus={onTextFieldFocus}
+            onBlur={onTextFieldBlur}
             onChange={handleChange}
+            ref={inputRef as RefObject<HTMLInputElement>}
             {...forwardedProps}
         />
     );
@@ -227,6 +265,8 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
  */
 const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElement => {
     const {
+        after,
+        before,
         className = '',
         hasError,
         helper,
@@ -236,12 +276,16 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         isValid,
         label,
         onChange,
+        onFocus,
+        onBlur,
         placeholder,
         minimumRows = DEFAULT_PROPS.minimumRows as number,
         inputRef = React.useRef(null),
         theme = DEFAULT_PROPS.theme,
         type = DEFAULT_PROPS.type,
         useCustomColors,
+        textFieldRef,
+        inputRef,
         value,
         ...forwardedProps
     } = props;
@@ -269,6 +313,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
+            ref={textFieldRef}
         >
             {label && (
                 <label htmlFor={id} className={`${CLASSNAME}__label`}>
@@ -279,6 +324,8 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
             {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
             <div className={`${CLASSNAME}__input-wrapper`}>
+                {before}
+
                 {icon && (
                     <Icon
                         className={`${CLASSNAME}__input-icon`}
@@ -293,7 +340,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                         id,
                         inputRef,
                         isDisabled,
+                        onBlur,
                         onChange,
+                        onFocus,
                         placeholder,
                         recomputeNumberOfRows,
                         rows,
@@ -312,6 +361,8 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                         size={Size.xs}
                     />
                 )}
+
+                {after}
             </div>
         </div>
     );

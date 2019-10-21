@@ -1,7 +1,7 @@
 ```javascript import
 import { ReactElement, useState } from 'react';
-import { TextField, Theme } from 'LumX';
-import { mdiMagnify } from 'LumX/icons';
+import { TextField, Theme, IconButton, Emphasis, Size } from 'LumX';
+import { mdiMagnify, mdiClose } from 'LumX/icons';
 ```
 
 # Text field
@@ -50,7 +50,7 @@ There are three states: _disabled_, _valid_, and _invalid_.
 
 ## Options
 
-There are three options: _helper text_, _placeholder_ and _icon_.
+There are four options: _helper text_, _placeholder_, _icon_ and _with buttons_.
 
 ### Helper text
 
@@ -92,31 +92,37 @@ There are three options: _helper text_, _placeholder_ and _icon_.
 
 ### Text Area
 
+### With Buttons
+
+#### Before button
+
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
     const [value, setValue] = useState('');
 
-    return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} type="textarea" />;
+    return (
+        <TextField
+            value={value}
+            onChange={setValue}
+            theme={theme}
+            before={<IconButton emphasis={Emphasis.low} icon={mdiMagnify} />}
+        />
+    );
 };
 ```
 
-### Valid Text Area
 
+#### After button
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
-    const [value, setValue] = useState('');
-
-    return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} type="textarea" isValid />;
-};
-```
-
-### Error Text Area
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
-    const [value, setValue] = useState('');
-
-    return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} type="textarea" hasError />;
+    return (
+        <TextField
+            after={<IconButton emphasis={Emphasis.low} icon={mdiClose} />}
+            value={value}
+            onChange={setValue}
+            theme={theme}
+        />
+    );
 };
 ```
 
