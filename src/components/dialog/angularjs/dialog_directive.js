@@ -326,6 +326,7 @@ function DialogDirective() {
         scope: {
             autoClose: '=?lumxAutoClose',
             escapeClose: '=?lumxEscapeClose',
+            isLoading: '=?lumxIsLoading',
             size: '@?lumxSize',
         },
         template,

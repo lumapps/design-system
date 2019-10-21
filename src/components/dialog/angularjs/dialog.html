@@ -1,7 +1,8 @@
 <div
     class="lumx-dialog"
     role="dialog"
-    ng-class="{ 'lumx-dialog--size-tiny': lumx.size === 'tiny',
+    ng-class="{ 'lumx-dialog--is-loading': lumx.isLoading,
+                'lumx-dialog--size-tiny': lumx.size === 'tiny',
                 'lumx-dialog--size-regular': lumx.size === 'regular',
                 'lumx-dialog--size-big': !lumx.size || lumx.size === 'big',
                 'lumx-dialog--size-huge': lumx.size === 'huge' }"
@@ -10,7 +11,13 @@
         <div class="lumx-dialog__header" ng-transclude="header"></div>
         <div class="lumx-dialog__content">
             <div class="lumx-dialog__sentinel lumx-dialog__sentinel--top"></div>
+
             <div ng-transclude="content"></div>
+
+            <div class="lumx-dialog__progress-overlay" ng-if="lumx.isLoading">
+                <lumx-progress lumx-variant="circular"></lumx-progress>
+            </div>
+
             <div class="lumx-dialog__sentinel lumx-dialog__sentinel--bottom"></div>
         </div>
         <div class="lumx-dialog__footer" ng-transclude="footer"></div>
