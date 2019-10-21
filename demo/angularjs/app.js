@@ -68,6 +68,8 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
             url: 'avatar',
             views: {
                 'main@': {
+                    controller: 'DemoAvatarController',
+                    controllerAs: 'vm',
                     template: require('./components/avatar/demo.html'),
                 },
             },
@@ -411,6 +413,7 @@ require('./layout/main/main-content_directive.js');
 require('./layout/main-nav/main-nav_controller.js');
 
 require('./foundations/colors/controller.js');
+require('./components/avatar/controller.js');
 require('./components/button/controller.js');
 require('./components/checkbox/controller.js');
 require('./components/chip/controller.js');
