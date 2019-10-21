@@ -56,6 +56,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    hasActions: false,
     size: Size.m,
     theme: Theme.light,
 };
@@ -67,7 +68,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const Avatar: React.FC<AvatarProps> = ({
+    actions,
     className = '',
+    hasActions = DEFAULT_PROPS.hasActions,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     image,
@@ -84,7 +87,9 @@ const Avatar: React.FC<AvatarProps> = ({
             )}
             {...props}
             style={style}
-        />
+        >
+            {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+        </div>
     );
 };
 Avatar.displayName = COMPONENT_NAME;
