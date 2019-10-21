@@ -126,12 +126,12 @@ const generateNav = (goTo: (path: string) => void, location: string, items: Item
 
         return (
             <SideNavigationItem key={slug} label={label} {...props}>
-                {generateNavItem(path, children || [])}
+                {generateNavItem(path, children || []) as ReactElement}
             </SideNavigationItem>
         );
     };
 
-    return <SideNavigation>{generateNavItem([], items)}</SideNavigation>;
+    return <SideNavigation>{generateNavItem([], items) as ReactElement}</SideNavigation>;
 };
 
 interface IWithRouterProps {

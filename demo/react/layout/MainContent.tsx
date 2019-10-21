@@ -24,8 +24,13 @@ const useLoadContent = (path: string): ReactElement | null | undefined => {
 
     useEffect((): void => {
         (async (): Promise<void> => {
+            setContent(undefined);
             try {
-                const loadedContent = await import(/* webpackMode: "eager" */ `../doc/${path}`);
+                const loadedContent = await import(
+                    /* webpackMode: "lazy" */
+                    /* webpackChunkName: "content/[request]" */
+                    `../doc/${path}`
+                );
                 setContent(React.createElement(loadedContent.default, {}, null));
             } catch (exception) {
                 setContent(null);
