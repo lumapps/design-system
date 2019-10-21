@@ -1,6 +1,19 @@
 ```javascript import
 import { CSSProperties, ReactElement } from 'react';
-import { Alignment, ImageBlock, ImageBlockCaptionPosition, ImageBlockProps, Theme, ThumbnailAspectRatio } from 'LumX';
+import {
+    Alignment,
+    Button,
+    ButtonEmphasis,
+    Grid,
+    IconButton,
+    ImageBlock,
+    ImageBlockCaptionPosition,
+    ImageBlockProps,
+    Theme,
+    ThumbnailAspectRatio
+} from 'LumX';
+import { mdiPencil, mdiEye, mdiDelete } from 'LumX/icons';
+
 ```
 
 # Image-block
@@ -20,6 +33,37 @@ Image blocks support thumbnail's different formats (see [thumbnail](/thumbnail))
         theme={theme}
         title="Lorem ipsum"
         image="https://picsum.photos/800/600/?random"
+        hasActions
+        actions={
+            <Grid>
+                <div className="lumx-spacing-margin-right-regular">
+                    <IconButton
+                        color="dark"
+                        emphasis={ButtonEmphasis.low}
+                        hasBackground={true}
+                        icon={mdiPencil}
+                    />
+                </div>
+
+                <div className="lumx-spacing-margin-right-regular">
+                    <IconButton
+                        color="dark"
+                        emphasis={ButtonEmphasis.low}
+                        hasBackground={true}
+                        icon={mdiEye}
+                    />
+                </div>
+
+                <div>
+                    <IconButton
+                        color="dark"
+                        emphasis={ButtonEmphasis.low}
+                        hasBackground={true}
+                        icon={mdiDelete}
+                    />
+                </div>
+            </Grid>
+        }
     />
 );
 ```

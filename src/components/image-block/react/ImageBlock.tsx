@@ -4,8 +4,9 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, Chip, Size, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
+import { Alignment, Chip, Grid, Size, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
 
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -84,6 +85,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     captionStyle: {},
     description: undefined,
     fillHeight: false,
+    hasActions: false,
     tags: undefined,
     theme: Theme.light,
     title: undefined,
@@ -97,6 +99,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const ImageBlock: React.FC<ImageBlockProps> = ({
+    actions,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     className = '',
@@ -104,6 +107,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,
     fillHeight = DEFAULT_PROPS.fillHeight,
+    hasActions = DEFAULT_PROPS.hasActions,
     image,
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
@@ -156,19 +160,28 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                     )}
                     {tags && tags.length > 0 && (
                         <div className={`${CLASSNAME}__tags`}>
-                            {tags.map(
-                                (tag: string, index: number): JSX.Element => (
-                                    <div key={index} className={`${CLASSNAME}__tag`}>
-                                        <Chip size={Size.s} theme={theme}>
-                                            {tag}
-                                        </Chip>
-                                    </div>
-                                ),
-                            )}
+                            <Grid>
+                                {tags.map(
+                                    (tag: string, index: number): JSX.Element => (
+                                        <div
+                                            key={index}
+                                            className={classNames(
+                                                `${CLASSNAME}__tag`,
+                                                `${CSS_PREFIX}-spacing-margin-right-tiny`,
+                                            )}
+                                        >
+                                            <Chip size={Size.s} theme={theme}>
+                                                {tag}
+                                            </Chip>
+                                        </div>
+                                    ),
+                                )}
+                            </Grid>
                         </div>
                     )}
                 </div>
             )}
+            {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
         </div>
     );
 };
