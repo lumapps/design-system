@@ -89,16 +89,6 @@
     }
 
     &__tags {
-        display: flex;
-        flex-wrap: wrap;
         margin-top: $lumx-spacing-unit;
-    }
-
-    &__tag {
-        margin: 2px $lumx-spacing-unit / 2 2px 0;
-
-        &:last-child {
-            margin-right: 0;
-        }
     }
 }

@@ -5,4 +5,17 @@
     lumx-tags="vm.tags"
     lumx-theme="{{ demoBlock.theme }}"
     lumx-title="Lorem ipsum"
-></lumx-image-block>
+>
+    <lumx-image-block-tags>
+        <lumx-grid>
+            <lumx-chip
+                class="lumx-spacing-margin-right-tiny"
+                lumx-size="s"
+                lumx-theme="{{ demoBlock.theme }}"
+                ng-repeat="tag in vm.tags"
+            >
+                <lumx-chip-label>{{ tag }}</lumx-chip-label>
+            </lumx-chip>
+        </lumx-grid>
+    </lumx-image-block-tags>
+</lumx-image-block>

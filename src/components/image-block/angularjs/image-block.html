@@ -27,7 +27,7 @@
     <div
         class="lumx-image-block__wrapper"
         ng-style="lumx.captionStyle"
-        ng-if="lumx.title || lumx.description || lumx.tags.length > 0"
+        ng-if="lumx.title || lumx.description || lumx.hasTags"
     >
         <div class="lumx-image-block__caption" ng-if="lumx.title || lumx.description">
             <span class="lumx-image-block__title" ng-if="lumx.title">{{ lumx.title }}</span>
@@ -36,12 +36,6 @@
             </span>
         </div>
 
-        <div class="lumx-image-block__tags" ng-if="lumx.tags.length > 0">
-            <div class="lumx-image-block__tag" ng-repeat="tag in lumx.tags">
-                <lumx-chip lumx-size="s" lumx-theme="{{ lumx.theme }}">
-                    <lumx-chip-label>{{ tag }}</lumx-chip-label>
-                </lumx-chip>
-            </div>
-        </div>
+        <div class="lumx-image-block__tags" ng-transclude="tags" ng-if="lumx.hasTags"></div>
     </div>
 </div>
