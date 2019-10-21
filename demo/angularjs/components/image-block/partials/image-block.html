@@ -18,4 +18,32 @@
             </lumx-chip>
         </lumx-grid>
     </lumx-image-block-tags>
+
+    <lumx-image-block-actions>
+        <lumx-grid>
+            <lumx-button
+                class="lumx-spacing-margin-right-regular"
+                lumx-color="dark"
+                lumx-emphasis="low"
+                lumx-has-background="true"
+                lumx-variant="icon"
+            >
+                <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
+            </lumx-button>
+
+            <lumx-button
+                class="lumx-spacing-margin-right-regular"
+                lumx-color="dark"
+                lumx-emphasis="low"
+                lumx-has-background="true"
+                lumx-variant="icon"
+            >
+                <lumx-icon lumx-path="{{ vm.icons.mdiEye }}"></lumx-icon>
+            </lumx-button>
+
+            <lumx-button lumx-color="dark" lumx-emphasis="low" lumx-has-background="true" lumx-variant="icon">
+                <lumx-icon lumx-path="{{ vm.icons.mdiDelete }}"></lumx-icon>
+            </lumx-button>
+        </lumx-grid>
+    </lumx-image-block-actions>
 </lumx-image-block>

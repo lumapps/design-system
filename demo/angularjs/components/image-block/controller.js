@@ -1,3 +1,5 @@
+import { mdiDelete, mdiEye, mdiPencil } from 'LumX/icons';
+
 /////////////////////////////
 
 function DemoImageBlockController() {
@@ -10,6 +12,19 @@ function DemoImageBlockController() {
     //    Public attributes    //
     //                         //
     /////////////////////////////
+
+    /**
+     * The icons to use in the template.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    vm.icons = {
+        mdiDelete,
+        mdiEye,
+        mdiPencil,
+    };
 
     /**
      * The user fields.

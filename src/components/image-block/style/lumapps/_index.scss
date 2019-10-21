@@ -91,4 +91,10 @@
     &__tags {
         margin-top: $lumx-spacing-unit;
     }
+
+    &__actions {
+        position: absolute;
+        top: $lumx-spacing-unit * 1.5;
+        right: $lumx-spacing-unit * 1.5;
+    }
 }
