@@ -78,13 +78,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    actions: undefined,
     align: Alignment.left,
     aspectRatio: ThumbnailAspectRatio.original,
     captionPosition: ImageBlockCaptionPosition.below,
     captionStyle: {},
     description: undefined,
     fillHeight: false,
-    hasActions: false,
     tags: undefined,
     theme: Theme.light,
     title: undefined,
@@ -98,7 +98,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const ImageBlock: React.FC<ImageBlockProps> = ({
-    actions,
+    actions = DEFAULT_PROPS.actions,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     className = '',
@@ -106,7 +106,6 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,
     fillHeight = DEFAULT_PROPS.fillHeight,
-    hasActions = DEFAULT_PROPS.hasActions,
     image,
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
@@ -160,7 +159,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                     {tags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
                 </div>
             )}
-            {hasActions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+            {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
         </div>
     );
 };
