@@ -63,6 +63,11 @@ interface IBaseButtonProps extends IGenericProps {
      * Theme.
      */
     theme?: Theme;
+
+    /**
+     * Whether custom colors are applied to this component.
+     */
+    useCustomColors?: boolean;
 }
 type BaseButtonProps = IBaseButtonProps;
 
@@ -127,6 +132,7 @@ const ButtonRoot = (props: ButtonRootProps): ReactElement => {
         hasBackground,
         children,
         theme,
+        useCustomColors,
         variant,
         ...forwardedProps
     } = props;
@@ -152,6 +158,7 @@ const ButtonRoot = (props: ButtonRootProps): ReactElement => {
             theme: emphasis === Emphasis.high && theme,
             variant,
         }),
+        { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
     );
 
     if (!isEmpty(props.href)) {

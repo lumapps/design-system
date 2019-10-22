@@ -3,6 +3,7 @@ import React, { Children, ReactElement, cloneElement } from 'react';
 import classNames from 'classnames';
 
 import { Tab, Theme } from 'LumX';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -38,6 +39,8 @@ interface ITabsProps extends IGenericProps {
     position?: TabsPosition;
     /* Component theme */
     theme?: Theme;
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
 }
 type TabsProps = ITabsProps;
 
@@ -90,6 +93,7 @@ const Tabs: React.FC<TabsProps> = ({
     onTabClick,
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
+    useCustomColors,
     ...props
 }: TabsProps): ReactElement => {
     const tabs: Tab[] = Children.map(children, (tab: Tab, index: number) => {
@@ -98,7 +102,9 @@ const Tabs: React.FC<TabsProps> = ({
 
     return (
         <div
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, layout, position, theme }))}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, layout, position, theme }), {
+                [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
+            })}
             {...props}
         >
             <div className={`${CLASSNAME}__links`}>{tabs}</div>

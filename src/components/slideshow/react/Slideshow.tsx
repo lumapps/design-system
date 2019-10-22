@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { Theme } from 'LumX';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from 'LumX/components/slideshow/constants';
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { useInterval } from 'LumX/core/react/hooks';
 import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
@@ -31,6 +32,8 @@ interface ISlideshowProps extends IGenericProps {
     interval?: number;
     /** Theme */
     theme?: Theme;
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
 }
 type SlideshowProps = ISlideshowProps;
 
@@ -104,6 +107,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     hasControls = DEFAULT_PROPS.hasControls,
     interval = DEFAULT_PROPS.interval,
     theme = DEFAULT_PROPS.theme,
+    useCustomColors,
     ...props
 }: SlideshowProps): ReactElement | null => {
     if (typeof activeIndex === 'undefined' || typeof groupBy === 'undefined' || typeof interval === 'undefined') {
@@ -213,6 +217,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--fill-height`]: fillHeight,
                 [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
+                [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
             })}
             {...props}
             tabIndex={0}

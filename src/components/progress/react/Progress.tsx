@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { Theme } from 'LumX/components/index';
@@ -24,6 +25,8 @@ enum ProgressVariant {
 interface IProgressProps extends IGenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
     /* Type of progress */
     variant?: ProgressVariant;
 }
@@ -69,11 +72,17 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const Progress: React.FC<ProgressProps> = ({
     className = '',
     theme = DEFAULT_PROPS.theme,
+    useCustomColors,
     variant = DEFAULT_PROPS.variant,
     ...props
 }: ProgressProps): ReactElement => {
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }))} {...props}>
+        <div
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }), {
+                [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
+            })}
+            {...props}
+        >
             <div className={classNames(`${CLASSNAME}-${variant}`)}>
                 {variant === ProgressVariant.circular && (
                     <>

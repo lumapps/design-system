@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { DEFAULT_THEME } from '../constants';
-import { changeTheme as _changeTheme } from '../utils';
+import { changeTheme as _changeTheme, setDemoCustomColors } from '../utils';
 
 import { ErrorBoundary } from './layout/ErrorBoundary';
 import { Main } from './layout/Main';
@@ -20,11 +20,10 @@ const App: React.FC = (): ReactElement => {
     const [themeLoaded, setThemeLoaded] = useState(false);
 
     useEffect((): void => {
-        _changeTheme(theme).then(
-            (): void => {
-                setThemeLoaded(true);
-            },
-        );
+        _changeTheme(theme).then((): void => {
+            setThemeLoaded(true);
+            setDemoCustomColors(theme);
+        });
     }, [theme]);
 
     if (themeLoaded) {

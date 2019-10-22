@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@mdi/js';
 
+import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { Chip, Dropdown, Icon, Placement, Size, Theme } from 'LumX';
@@ -73,6 +74,9 @@ interface ISelectProps extends IGenericProps {
 
     /* The theme. */
     theme?: Theme;
+
+    /** Whether custom colors are applied to this component. */
+    useCustomColors?: boolean;
 
     /**
      * The selected choices area style.
@@ -243,6 +247,7 @@ const Select: React.FC<SelectProps> = ({
     selectedChipRender = DEFAULT_PROPS.selectedChipRender,
     children,
     onInfiniteScroll,
+    useCustomColors,
     ...props
 }: SelectProps): React.ReactElement => {
     const [isFocus, setIsFocus] = useState(false);
@@ -367,6 +372,7 @@ const Select: React.FC<SelectProps> = ({
                     prefix: CLASSNAME,
                     theme: theme === Theme.light ? Theme.light : Theme.dark,
                 }),
+                { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
             {...props}
         >
