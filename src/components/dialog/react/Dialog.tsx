@@ -7,7 +7,7 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
-import { Size, Theme } from 'LumX/components';
+import { Progress, ProgressVariant, Size, Theme } from 'LumX';
 import { Lightbox } from 'LumX/components/lightbox/react/Lightbox';
 import useIntersectionObserver from 'LumX/core/react/hooks/useIntersectionObserver';
 
@@ -21,6 +21,8 @@ interface IDialogProps extends IGenericProps {
     footer: ReactElement;
     /** Element(s) to display in the header part */
     header: ReactElement;
+    /** Whether the dialog is loading. */
+    isLoading?: boolean;
     /** Status of the dialog. */
     isOpen?: boolean;
     /** Ref of element that triggered modal opening to set focus on. */
@@ -87,6 +89,7 @@ const Dialog: React.FC<DialogProps> = ({
     className = '',
     header,
     footer,
+    isLoading,
     isOpen,
     onOpen,
     onClose,
@@ -110,7 +113,9 @@ const Dialog: React.FC<DialogProps> = ({
         >
             <div
                 role="dialog"
-                className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
+                className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }), {
+                    [`${CLASSNAME}--is-loading`]: isLoading,
+                })}
                 style={{ display: 'block' }}
                 onClick={preventClick}
             >
@@ -126,7 +131,15 @@ const Dialog: React.FC<DialogProps> = ({
                     </div>
                     <div className={`${CLASSNAME}__content`}>
                         <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`} ref={sentinel1} />
+
                         <div>{children}</div>
+
+                        {isLoading && (
+                            <div className={`${CLASSNAME}__progress-overlay`}>
+                                <Progress variant={ProgressVariant.circular} />
+                            </div>
+                        )}
+
                         <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`} ref={sentinel2} />
                     </div>
                     <div
