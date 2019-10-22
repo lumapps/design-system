@@ -37,6 +37,7 @@ exports[`<TextField> Snapshots and structure should render textarea 1`] = `
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        rows={1}
       />
     </div>
   </div>
