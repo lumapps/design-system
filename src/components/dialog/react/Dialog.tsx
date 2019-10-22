@@ -113,7 +113,9 @@ const Dialog: React.FC<DialogProps> = ({
         >
             <div
                 role="dialog"
-                className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
+                className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }), {
+                    [`${CLASSNAME}--is-loading`]: isLoading,
+                })}
                 style={{ display: 'block' }}
                 onClick={preventClick}
             >
