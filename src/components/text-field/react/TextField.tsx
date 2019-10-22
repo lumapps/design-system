@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, RefObject, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -52,6 +52,12 @@ interface ITextFieldProps extends IGenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 
+    /** Line height of the input or text area element. */
+    lineHeight?: number;
+
+    /** A ref that will be passed to the input or text area element. */
+    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
+
     /** Text field value. */
     value: string;
 
@@ -82,6 +88,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TextField`;
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
+ * The line height for the Text Area. Please keep in mind that if that changes via css, the prop lineHeight needs to be changed
+ */
+const LINE_HEIGHT = 20;
+const MIN_ROWS = 1;
+
+/**
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
@@ -96,20 +108,60 @@ const DEFAULT_PROPS: Partial<TextFieldProps> = {
 
 interface IInputNativeProps {
     id?: string;
+    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     isDisabled?: boolean;
     placeholder?: string;
     type?: TextFieldType;
     value: string;
+    rows: number;
+    lineHeight: number;
     setFocus(focus: boolean): void;
+    setRows(rows: number): void;
     onChange(value: string): void;
 }
 
 const renderInputNative = (props: IInputNativeProps): ReactElement => {
-    const { id, isDisabled, placeholder, type, value, setFocus, onChange, ...forwardedProps } = props;
+    const {
+        id,
+        isDisabled,
+        lineHeight,
+        placeholder,
+        type,
+        value,
+        setFocus,
+        onChange,
+        inputRef,
+        rows,
+        setRows,
+        ...forwardedProps
+    } = props;
     const onFocus = (): void => setFocus(true);
     const onBlur = (): void => setFocus(false);
 
-    const handleChange = (event: React.ChangeEvent): void => onChange(get(event, 'target.value'));
+    const handleChange = (event: React.ChangeEvent): void => {
+        if (type === TextFieldType.textarea) {
+            /**
+             * HEAD's UP! This part is a little bit tricky. The idea here is to only
+             * display the necessary rows on the textarea. In order to dynamically adjust
+             * the height on that field, we need to:
+             * 1. Set the current amount of rows to the minimum. That will make the scroll appear.
+             * 2. With that, we will have the `scrollHeight`, meaning the height of the container adjusted to the current content
+             * 3. With the scroll height, we can figure out how many rows we need to use by dividing the scroll height
+             * by the line height.
+             * 4. With that number, we can readjust the number of rows on the text area. We need to do that here, if we leave that to
+             * the state change through React, there are some scenarios (resize, hitting ENTER or BACKSPACE which add or remove lines)
+             * when we will not see the update and the rows will be resized to the minimum.
+             * 5. In case there is any other update on the component that changes the UI, we need to keep the number of rows
+             * on the state in order to allow React to re-render. Therefore, we save them using `useState`
+             */
+            (event.target as HTMLTextAreaElement).rows = MIN_ROWS;
+            const currentRows = event.target.scrollHeight / lineHeight;
+            (event.target as HTMLTextAreaElement).rows = currentRows;
+
+            setRows(currentRows);
+        }
+        onChange(get(event, 'target.value'));
+    };
 
     if (type === TextFieldType.textarea) {
         return (
@@ -118,9 +170,11 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
                 disabled={isDisabled}
                 placeholder={placeholder}
                 value={value}
+                ref={inputRef as RefObject<HTMLTextAreaElement>}
                 onFocus={onFocus}
                 onBlur={onBlur}
                 onChange={handleChange}
+                rows={rows}
                 {...forwardedProps}
             />
         );
@@ -156,8 +210,10 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         isDisabled,
         isValid,
         label,
+        lineHeight = LINE_HEIGHT,
         onChange,
         placeholder,
+        inputRef = React.useRef(null),
         theme = DEFAULT_PROPS.theme,
         type = DEFAULT_PROPS.type,
         useCustomColors,
@@ -165,6 +221,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         ...forwardedProps
     } = props;
     const [isFocus, setFocus] = useState(false);
+    const [rows, setRows] = useState(MIN_ROWS);
 
     return (
         <div
@@ -208,10 +265,14 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 <div className={`${CLASSNAME}__input-native`}>
                     {renderInputNative({
                         id,
+                        inputRef,
                         isDisabled,
+                        lineHeight,
                         onChange,
                         placeholder,
+                        rows,
                         setFocus,
+                        setRows,
                         type,
                         value,
                         ...forwardedProps,

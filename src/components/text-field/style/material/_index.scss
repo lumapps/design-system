@@ -87,3 +87,90 @@
         @include lumx-text-field-material-label-focus('light');
     }
 }
+
+/* Text field validity
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-text-field--theme-light {
+    &.#{$lumx-base-prefix}-text-field--is-valid {
+        .#{$lumx-base-prefix}-text-field__input-wrapper {
+            @include lumx-text-field-material-input-wrapper-validity('valid', 'light');
+        }
+
+        .#{$lumx-base-prefix}-text-field__input-validity {
+            @include lumx-text-field-material-input-wrapper-validity('valid', 'light');
+        }
+
+        &.#{$lumx-base-prefix}-text-field--is-focus {
+            .#{$lumx-base-prefix}-text-field__input-wrapper {
+                @include lumx-text-field-material-input-wrapper-validity-focus('valid', 'light');
+            }
+
+            .#{$lumx-base-prefix}-text-field__input-validity {
+                @include lumx-text-field-material-input-wrapper-validity-focus('valid', 'light');
+            }
+        }
+    }
+
+    &.#{$lumx-base-prefix}-text-field--has-error {
+        .#{$lumx-base-prefix}-text-field__input-wrapper {
+            @include lumx-text-field-material-input-wrapper-validity('error', 'light');
+        }
+
+        .#{$lumx-base-prefix}-text-field__input-validity {
+            @include lumx-text-field-material-input-wrapper-validity('error', 'light');
+        }
+
+        &.#{$lumx-base-prefix}-text-field--is-focus {
+            .#{$lumx-base-prefix}-text-field__input-wrapper {
+                @include lumx-text-field-material-input-wrapper-validity-focus('error', 'light');
+            }
+
+            .#{$lumx-base-prefix}-text-field__input-validity {
+                @include lumx-text-field-material-input-wrapper-validity-focus('error', 'light');
+            }
+        }
+    }
+}
+
+.#{$lumx-base-prefix}-text-field--theme-dark {
+    &.#{$lumx-base-prefix}-text-field--is-valid {
+        .#{$lumx-base-prefix}-text-field__input-wrapper {
+            @include lumx-text-field-material-input-wrapper-validity('valid', 'dark');
+        }
+
+        .#{$lumx-base-prefix}-text-field__input-validity {
+            @include lumx-text-field-material-input-wrapper-validity('valid', 'dark');
+        }
+
+        &.#{$lumx-base-prefix}-text-field--is-focus {
+            .#{$lumx-base-prefix}-text-field__input-wrapper {
+                @include lumx-text-field-material-input-wrapper-validity-focus('valid', 'dark');
+            }
+
+            .#{$lumx-base-prefix}-text-field__input-validity {
+                @include lumx-text-field-material-input-wrapper-validity-focus('valid', 'dark');
+            }
+        }
+    }
+
+    &.#{$lumx-base-prefix}-text-field--has-error {
+        .#{$lumx-base-prefix}-text-field__input-wrapper {
+            @include lumx-text-field-material-input-wrapper-validity('error', 'dark');
+        }
+
+        .#{$lumx-base-prefix}-text-field__input-validity {
+            @include lumx-text-field-material-input-wrapper-validity('error', 'dark');
+        }
+
+        &.#{$lumx-base-prefix}-text-field--is-focus {
+            .#{$lumx-base-prefix}-text-field__input-wrapper {
+                @include lumx-text-field-material-input-wrapper-validity-focus('error', 'dark');
+            }
+
+            .#{$lumx-base-prefix}-text-field__input-validity {
+                @include lumx-text-field-material-input-wrapper-validity-focus('error', 'dark');
+            }
+        }
+    }
+}

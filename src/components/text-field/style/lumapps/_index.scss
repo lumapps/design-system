@@ -84,8 +84,12 @@
         }
 
         textarea {
+            overflow: hidden;
+
+            /* Disallow resizing on browsers that do not support `resize` */
             min-width: 100%;
             max-width: 100%;
+            resize: none;
 
             #{$self}--theme-light & {
                 @include lumx-text-field-input-native('dark', 'textarea');
