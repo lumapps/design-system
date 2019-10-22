@@ -346,6 +346,14 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.product.components.uploader', {
+            url: 'uploader',
+            views: {
+                'main@': {
+                    template: require('./components/uploader/demo.html'),
+                },
+            },
+        })
         .state('app.product.components.user-block', {
             url: 'user-block',
             views: {
