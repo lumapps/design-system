@@ -11,6 +11,14 @@
     transition-property: color, transform;
 }
 
+@mixin lumx-text-field-material-label-validity($validity) {
+    @if $validity == 'valid' {
+        color: lumx-theme-color-variant('green', 'L2');
+    } @else if $validity == 'error' {
+        color: lumx-theme-color-variant('red', 'N');
+    }
+}
+
 @mixin lumx-text-field-material-label-focus($theme) {
     @if $theme == 'dark' {
         color: lumx-theme-color-variant('primary', 'N');
@@ -56,39 +64,17 @@
     }
 }
 
-@mixin lumx-text-field-material-input-wrapper-validity($validity, $theme) {
-    &::before {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        content: '';
-        pointer-events: none;
-
-        @if $validity == 'valid' {
-            background-color: lumx-theme-color-variant('green', 'N');
-        } @else if $validity == 'error' {
-            background-color: lumx-theme-color-variant('red', 'N');
-        }
-    }
-}
-
-@mixin lumx-text-field-material-input-wrapper-validity-focus($validity, $theme) {
+@mixin lumx-text-field-material-input-wrapper-validity($validity) {
     &::after {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        height: 2px;
-        content: '';
-        pointer-events: none;
-        transform: scaleX(0);
-        transition: transform 200ms;
+        transform: scaleX(1);
+    }
 
-        @if $validity == 'valid' {
+    @if $validity == 'valid' {
+        &::after {
             background-color: lumx-theme-color-variant('green', 'N');
-        } @else if $validity == 'error' {
+        }
+    } @else if $validity == 'error' {
+        &::after {
             background-color: lumx-theme-color-variant('red', 'N');
         }
     }

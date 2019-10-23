@@ -60,7 +60,7 @@
     }
 
     &__input-native {
-        width: 100%;
+        flex: 1;
 
         input,
         textarea {
@@ -84,11 +84,6 @@
         }
 
         textarea {
-            overflow: hidden;
-
-            /* Disallow resizing on browsers that do not support `resize` */
-            min-width: 100%;
-            max-width: 100%;
             resize: none;
 
             #{$self}--theme-light & {
