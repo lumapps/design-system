@@ -53,7 +53,7 @@ interface ITextFieldProps extends IGenericProps {
     useCustomColors?: boolean;
 
     /** Minimum rows to be displayed in a text area. */
-    minimumRows: number;
+    minimumRows?: number;
 
     /** A ref that will be passed to the input or text area element. */
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
