@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.11.0][] - 2019-10-23
+
 ### Changed
 
 -   TypeScript and JSDoc cleanup for `SideNavigation` component.
@@ -40,3 +42,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.10.0...HEAD
 [0.10.0]: https://github.com/lumapps/design-system/tree/v0.10.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/lumapps/design-system/tree/v0.11.0
