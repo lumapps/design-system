@@ -86,10 +86,7 @@
     }
 }
 
-@mixin lumx-text-field-material-input-native($theme, $type: 'input') {
-    @include lumx-typography('body2');
-
-    @if $type == 'input' {
-        line-height: $lumx-text-field-height;
-    }
+@mixin lumx-text-field-material-input-native() {
+    font-size: map-get($lumx-typography-font-size, 'body2') !important;
+    line-height: $lumx-text-field-height !important;
 }

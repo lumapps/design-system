@@ -37,13 +37,7 @@
     }
 
     &__input-native {
-        #{$self}--theme-light & {
-            @include lumx-text-field-material-input-native('dark');
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-text-field-material-input-native('light');
-        }
+        @include lumx-text-field-material-input-native();
     }
 
     &__input-chip {

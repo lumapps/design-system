@@ -89,12 +89,21 @@ function TextFieldDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
+        const _LINE_HEIGHT = 20;
+        const _MIN_ROWS = 2;
+
         let input = el.find('input');
 
         if (input.length === 1) {
             el.addClass(`${CSS_PREFIX}-text-field--has-input`);
         } else {
             input = el.find('textarea');
+
+            input.on('input', (evt) => {
+                evt.target.rows = _MIN_ROWS;
+                const currentRows = evt.target.scrollHeight / _LINE_HEIGHT;
+                evt.target.rows = currentRows;
+            });
 
             el.addClass(`${CSS_PREFIX}-text-field--has-textarea`);
         }

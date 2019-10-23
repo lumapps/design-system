@@ -45,23 +45,7 @@
 
     &__input-native {
         input {
-            #{$self}--theme-light & {
-                @include lumx-text-field-material-input-native('dark', 'input');
-            }
-
-            #{$self}--theme-dark & {
-                @include lumx-text-field-material-input-native('light', 'input');
-            }
-        }
-
-        textarea {
-            #{$self}--theme-light & {
-                @include lumx-text-field-material-input-native('dark', 'textarea');
-            }
-
-            #{$self}--theme-dark & {
-                @include lumx-text-field-material-input-native('light', 'textarea');
-            }
+            @include lumx-text-field-material-input-native();
         }
     }
 }
