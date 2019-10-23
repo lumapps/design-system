@@ -52,8 +52,8 @@ interface ITextFieldProps extends IGenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 
-    /** Line height of the input or text area element. */
-    lineHeight?: number;
+    /** Minimum rows to be displayed in a text area. */
+    minimumRows?: number;
 
     /** A ref that will be passed to the input or text area element. */
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
@@ -93,12 +93,23 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const MIN_ROWS = 2;
 
 /**
+ * The default value of props.
+ */
+const DEFAULT_PROPS: Partial<TextFieldProps> = {
+    hasError: false,
+    isDisabled: false,
+    isValid: false,
+    minimumRows: MIN_ROWS,
+    theme: Theme.light,
+    type: TextFieldType.input,
+};
+/**
  * Hook that allows to calculate the number of rows needed for a text area.
  * @param minimumNumberOfRows Minimum number of rows that we want to display.
  * @return rows to be used and a callback to recalculate
  */
 const useComputeNumberOfRows = (
-    minimumNumberOfRows: number,
+    minimumNumberOfRows: number | undefined = MIN_ROWS,
 ): {
     /** number of rows to be used on the text area */
     rows: number;
@@ -137,19 +148,6 @@ const useComputeNumberOfRows = (
         rows,
     };
 };
-
-/**
- * The default value of props.
- */
-const DEFAULT_PROPS: Partial<TextFieldProps> = {
-    hasError: false,
-    isDisabled: false,
-    isValid: false,
-    minimumRows: MIN_ROWS,
-    theme: Theme.light,
-    type: TextFieldType.input,
-};
-
 /////////////////////////////
 
 interface IInputNativeProps {
@@ -247,6 +245,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         value,
         ...forwardedProps
     } = props;
+
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
 
