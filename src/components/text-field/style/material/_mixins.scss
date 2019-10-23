@@ -13,7 +13,7 @@
 
 @mixin lumx-text-field-material-label-validity($validity) {
     @if $validity == 'valid' {
-        color: lumx-theme-color-variant('green', 'L2');
+        color: lumx-theme-color-variant('green', 'N');
     } @else if $validity == 'error' {
         color: lumx-theme-color-variant('red', 'N');
     }
