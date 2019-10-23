@@ -88,10 +88,55 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TextField`;
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
- * The line height for the Text Area. Please keep in mind that if that changes via css, the prop lineHeight needs to be changed
+ * The minimum number of rows that we want to display on the text area
  */
-const LINE_HEIGHT = 20;
 const MIN_ROWS = 2;
+
+/**
+ * Hook that allows to calculate the number of rows needed for a text area.
+ * @param minimumNumberOfRows Minimum number of rows that we want to display.
+ * @return rows to be used and a callback to recalculate
+ */
+const useComputeNumberOfRows = (
+    minimumNumberOfRows: number,
+): {
+    /** number of rows to be used on the text area */
+    rows: number;
+    /**
+     * Callback in order to recalculate the number of rows due to a change on the text area
+     * @param event Change event.
+     */
+    recomputeNumberOfRows(event: React.ChangeEvent): void;
+} => {
+    const [rows, setRows] = useState(minimumNumberOfRows);
+
+    const recompute = (event: React.ChangeEvent): void => {
+        /**
+         * HEAD's UP! This part is a little bit tricky. The idea here is to only
+         * display the necessary rows on the textarea. In order to dynamically adjust
+         * the height on that field, we need to:
+         * 1. Set the current amount of rows to the minimum. That will make the scroll appear.
+         * 2. With that, we will have the `scrollHeight`, meaning the height of the container adjusted to the current content
+         * 3. With the scroll height, we can figure out how many rows we need to use by dividing the scroll height
+         * by the line height.
+         * 4. With that number, we can readjust the number of rows on the text area. We need to do that here, if we leave that to
+         * the state change through React, there are some scenarios (resize, hitting ENTER or BACKSPACE which add or remove lines)
+         * when we will not see the update and the rows will be resized to the minimum.
+         * 5. In case there is any other update on the component that changes the UI, we need to keep the number of rows
+         * on the state in order to allow React to re-render. Therefore, we save them using `useState`
+         */
+        (event.target as HTMLTextAreaElement).rows = minimumNumberOfRows;
+        const currentRows = event.target.scrollHeight / (event.target.clientHeight / minimumNumberOfRows);
+        (event.target as HTMLTextAreaElement).rows = currentRows;
+
+        setRows(currentRows);
+    };
+
+    return {
+        recomputeNumberOfRows: recompute,
+        rows,
+    };
+};
 
 /**
  * The default value of props.
@@ -100,6 +145,7 @@ const DEFAULT_PROPS: Partial<TextFieldProps> = {
     hasError: false,
     isDisabled: false,
     isValid: false,
+    minimumRows: MIN_ROWS,
     theme: Theme.light,
     type: TextFieldType.input,
 };
@@ -114,9 +160,8 @@ interface IInputNativeProps {
     type?: TextFieldType;
     value: string;
     rows: number;
-    lineHeight: number;
     setFocus(focus: boolean): void;
-    setRows(rows: number): void;
+    recomputeNumberOfRows(event: React.ChangeEvent): void;
     onChange(value: string): void;
 }
 
@@ -124,7 +169,6 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
     const {
         id,
         isDisabled,
-        lineHeight,
         placeholder,
         type,
         value,
@@ -132,7 +176,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         onChange,
         inputRef,
         rows,
-        setRows,
+        recomputeNumberOfRows,
         ...forwardedProps
     } = props;
     const onFocus = (): void => setFocus(true);
@@ -140,26 +184,9 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
 
     const handleChange = (event: React.ChangeEvent): void => {
         if (type === TextFieldType.textarea) {
-            /**
-             * HEAD's UP! This part is a little bit tricky. The idea here is to only
-             * display the necessary rows on the textarea. In order to dynamically adjust
-             * the height on that field, we need to:
-             * 1. Set the current amount of rows to the minimum. That will make the scroll appear.
-             * 2. With that, we will have the `scrollHeight`, meaning the height of the container adjusted to the current content
-             * 3. With the scroll height, we can figure out how many rows we need to use by dividing the scroll height
-             * by the line height.
-             * 4. With that number, we can readjust the number of rows on the text area. We need to do that here, if we leave that to
-             * the state change through React, there are some scenarios (resize, hitting ENTER or BACKSPACE which add or remove lines)
-             * when we will not see the update and the rows will be resized to the minimum.
-             * 5. In case there is any other update on the component that changes the UI, we need to keep the number of rows
-             * on the state in order to allow React to re-render. Therefore, we save them using `useState`
-             */
-            (event.target as HTMLTextAreaElement).rows = MIN_ROWS;
-            const currentRows = event.target.scrollHeight / lineHeight;
-            (event.target as HTMLTextAreaElement).rows = currentRows;
-
-            setRows(currentRows);
+            recomputeNumberOfRows(event);
         }
+
         onChange(get(event, 'target.value'));
     };
 
@@ -210,9 +237,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         isDisabled,
         isValid,
         label,
-        lineHeight = LINE_HEIGHT,
         onChange,
         placeholder,
+        minimumRows = DEFAULT_PROPS.minimumRows,
         inputRef = React.useRef(null),
         theme = DEFAULT_PROPS.theme,
         type = DEFAULT_PROPS.type,
@@ -221,7 +248,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         ...forwardedProps
     } = props;
     const [isFocus, setFocus] = useState(false);
-    const [rows, setRows] = useState(MIN_ROWS);
+    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
 
     return (
         <div
@@ -267,12 +294,11 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                         id,
                         inputRef,
                         isDisabled,
-                        lineHeight,
                         onChange,
                         placeholder,
+                        recomputeNumberOfRows,
                         rows,
                         setFocus,
-                        setRows,
                         type,
                         value,
                         ...forwardedProps,
