@@ -91,6 +91,15 @@ There are four options: _helper text_, _placeholder_, _icon_ and _with buttons_.
 ```
 
 ### Text Area
+### Clearable
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('');
+
+    return <TextField isClearable value={value} onChange={setValue} theme={theme} />;
+};
+```
 
 ### With Buttons
 

@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import get from 'lodash/get';
 import uuid from 'uuid/v4';
 
-import { Icon, Size, Theme } from 'LumX';
+import { Emphasis, Icon, IconButton, Size, Theme } from 'LumX';
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-import { mdiAlertCircle, mdiCheckCircle } from 'LumX/icons';
+import { mdiAlertCircle, mdiCheckCircle, mdiClose } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -45,6 +45,9 @@ interface ITextFieldProps extends IGenericProps {
 
     /** Whether the text field is displayed with valid style or not. */
     isValid?: boolean;
+
+    /** Whether the text field shows a cross to clear its content or not. */
+    isClearable?: boolean;
 
     /** Text field label displayed in a label tag. */
     label?: string;
@@ -115,6 +118,7 @@ const MIN_ROWS = 2;
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
     hasError: false,
+    isClearable: false,
     isDisabled: false,
     isValid: false,
     minimumRows: MIN_ROWS,
@@ -273,6 +277,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         icon,
         id = uuid(),
         isDisabled,
+        isClearable = DEFAULT_PROPS.isClearable,
         isValid,
         label,
         onChange,
@@ -292,6 +297,20 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
 
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
+
+    /**
+     * Function triggered when the Clear Button is clicked.
+     * The idea is to execute the `onChange` callback with an empty string
+     * and remove focus from the clear button.
+     * @param evt On clear event.
+     */
+    const onClear = (evt: React.ChangeEvent): void => {
+        evt.nativeEvent.preventDefault();
+        evt.nativeEvent.stopPropagation();
+        (evt.currentTarget as HTMLElement).blur();
+
+        onChange('');
+    };
 
     return (
         <div
@@ -352,6 +371,10 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                         ...forwardedProps,
                     })}
                 </div>
+
+                {isClearable && (
+                    <IconButton icon={mdiClose} emphasis={Emphasis.low} size={Size.s} theme={theme} onClick={onClear} />
+                )}
 
                 {(isValid || hasError) && (
                     <Icon
