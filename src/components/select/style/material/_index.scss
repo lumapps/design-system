@@ -37,7 +37,7 @@
     }
 
     &__input-native {
-        @include lumx-text-field-material-input-native();
+        @include lumx-text-field-material-input-native('input');
     }
 
     &__input-chip {

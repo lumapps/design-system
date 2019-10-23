@@ -45,7 +45,11 @@
 
     &__input-native {
         input {
-            @include lumx-text-field-material-input-native();
+            @include lumx-text-field-material-input-native('input');
+        }
+
+        textarea {
+            @include lumx-text-field-material-input-native('textarea');
         }
     }
 }

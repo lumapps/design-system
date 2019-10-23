@@ -89,7 +89,6 @@ function TextFieldDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
-        const _LINE_HEIGHT = 20;
         const _MIN_ROWS = 2;
 
         let input = el.find('input');
@@ -101,7 +100,7 @@ function TextFieldDirective() {
 
             input.on('input', (evt) => {
                 evt.target.rows = _MIN_ROWS;
-                const currentRows = evt.target.scrollHeight / _LINE_HEIGHT;
+                const currentRows = evt.target.scrollHeight / (evt.target.clientHeight / _MIN_ROWS);
                 evt.target.rows = currentRows;
             });
 
