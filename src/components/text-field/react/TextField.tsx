@@ -91,7 +91,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The line height for the Text Area. Please keep in mind that if that changes via css, the prop lineHeight needs to be changed
  */
 const LINE_HEIGHT = 20;
-const MIN_ROWS = 1;
+const MIN_ROWS = 2;
 
 /**
  * The default value of props.
