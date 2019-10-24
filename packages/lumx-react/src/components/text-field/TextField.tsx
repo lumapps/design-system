@@ -29,6 +29,9 @@ interface ITextFieldProps extends IGenericProps {
     /** Text field helper message. */
     helper?: string;
 
+    /** The max length the input accepts. If set, a character counter will be displayed. */
+    maxLength?: number;
+
     /** Text field icon (SVG path). */
     icon?: string;
 
@@ -168,6 +171,7 @@ interface IInputNativeProps {
     id?: string;
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     isDisabled?: boolean;
+    maxLength?: number;
     placeholder?: string;
     type?: TextFieldType;
     value: string;
@@ -187,6 +191,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         type,
         value,
         setFocus,
+        maxLength,
         onChange,
         onFocus,
         onBlur,
@@ -213,11 +218,14 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
     };
 
     const handleChange = (event: React.ChangeEvent): void => {
+        const currentVal = get(event, 'target.value');
+        const newVal = maxLength ? currentVal.slice(0, maxLength) : currentVal;
+
         if (type === TextFieldType.textarea) {
             recomputeNumberOfRows(event);
         }
 
-        onChange(get(event, 'target.value'));
+        onChange(newVal);
     };
 
     if (type === TextFieldType.textarea) {
@@ -270,6 +278,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         isClearable = DEFAULT_PROPS.isClearable,
         isValid,
         label,
+        maxLength,
         onChange,
         onFocus,
         onBlur,
@@ -333,6 +342,8 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 </label>
             )}
 
+            {maxLength && <span className={`${CLASSNAME}__caracter-counter`}>{`${value.length} / ${maxLength}`}</span>}
+
             {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
             <div className={`${CLASSNAME}__wrapper`}>
@@ -353,6 +364,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                             id,
                             inputRef,
                             isDisabled,
+                            maxLength,
                             onBlur,
                             onChange,
                             onFocus,
