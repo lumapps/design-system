@@ -342,7 +342,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 </label>
             )}
 
-            {maxLength && <span className={`${CLASSNAME}__caracter-counter`}>{`${value.length} / ${maxLength}`}</span>}
+            {maxLength && <span className={`${CLASSNAME}__character-counter`}>{`${value.length} / ${maxLength}`}</span>}
 
             {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
