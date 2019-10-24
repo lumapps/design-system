@@ -275,7 +275,7 @@ const Select: React.FC<SelectProps> = ({
                         <div
                             ref={anchorRef as RefObject<HTMLDivElement>}
                             id={targetUuid}
-                            className={`${CLASSNAME}__input-wrapper`}
+                            className={`${CLASSNAME}__wrapper`}
                             onClick={onInputClick}
                             onKeyPress={handleKeyboardNav}
                             tabIndex={0}
