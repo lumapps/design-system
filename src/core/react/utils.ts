@@ -24,7 +24,15 @@ import { COMPONENT_PREFIX } from './constants';
  * The properties of a component to use to determine it's name.
  * In the order of preference.
  */
-const NAME_PROPERTIES: string[] = ['displayName', 'name', 'type', 'type.name', '_reactInternalFiber.elementType.name'];
+const NAME_PROPERTIES: string[] = [
+    'type',
+    'type.displayName',
+    'displayName',
+    'name',
+    'type.name',
+    'props.mdxType',
+    '_reactInternalFiber.elementType.name',
+];
 
 /////////////////////////////
 //                         //
@@ -316,18 +324,16 @@ function validateComponent(
 
                     if (!isOfOneAllowedType) {
                         let allowedTypesString = '';
-                        allowedTypes.forEach(
-                            (allowedType: string | ComponentType, idx: number): void => {
-                                if (!isEmpty(allowedTypesString)) {
-                                    allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
-                                }
+                        allowedTypes.forEach((allowedType: string | ComponentType, idx: number): void => {
+                            if (!isEmpty(allowedTypesString)) {
+                                allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
+                            }
 
-                                const typeName: string | ComponentType = getTypeName(allowedType);
-                                allowedTypesString +=
-                                    (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
-                                    '<Unknown component type>';
-                            },
-                        );
+                            const typeName: string | ComponentType = getTypeName(allowedType);
+                            allowedTypesString +=
+                                (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
+                                '<Unknown component type>';
+                        });
 
                         console.debug('Non matching type', newChild, '\nResulted in', getTypeName(newChild));
                         throw new Error(
@@ -406,12 +412,11 @@ function partitionMulti<T>(elements: T[], predicates: Array<Predicate<T>>): T[][
  * @return predicate returning true if value is instance of the component
  */
 const isComponent = <C>(component: React.FC<C> | string): Predicate<ReactNode> => (instance: ReactNode): boolean => {
-    const instanceTypes = ['type', 'type.displayName', 'props.mdxType'];
     const componentName = typeof component === 'string' ? component : component.displayName;
 
     return (
         get(instance, '$$typeof') === Symbol.for('react.element') &&
-        instanceTypes.some((type: string): boolean => get(instance, type) === componentName)
+        NAME_PROPERTIES.some((nameProperty: string): boolean => get(instance, nameProperty) === componentName)
     );
 };
 
