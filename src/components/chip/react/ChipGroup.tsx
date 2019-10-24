@@ -54,9 +54,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /////////////////////////////
 
 /**
- * Displays information or allow an action on a compact element.
- * This is the base component for all variations of the chips see https://material.io/design/components/chips.html.
- *
+ * Displays a list of Chips in a grouped fashion.
  * @return The Chip Group component.
  */
 const ChipGroup: React.FC<IChipGroupProps> = ({
