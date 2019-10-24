@@ -22,7 +22,7 @@
     </span>
 
     <div
-        class="lumx-select__input-wrapper"
+        class="lumx-select__wrapper"
         id="{{ lumx.targetUuid }}"
         tabindex="0"
         ng-click="lumx.openDropdown()"
@@ -30,6 +30,24 @@
         ng-blur="lumx.disableKeyEvents()"
         ng-if="!lumx.variant || lumx.variant === 'input'"
     >
+        <div class="lumx-select__chips" ng-if="!lumx.isModelEmpty() && lumx.multiple">
+            <lumx-chip-group>
+                <lumx-chip
+                    lumx-on-click="lumx.select(selected, $event)"
+                    lumx-size="s"
+                    lumx-theme="{{ lumx.theme === 'dark' ? 'dark' : 'light' }}"
+                    ng-repeat="selected in lumx.viewValue"
+                    ng-disabled="lumx.isDisabled"
+                >
+                    <lumx-chip-label ng-bind-html="lumx.displaySelected(selected)"></lumx-chip-label>
+
+                    <lumx-chip-after>
+                        <lumx-icon lumx-path="{{ lumx.icons.mdiClose }}" lumx-size="xxs"></lumx-icon>
+                    </lumx-chip-after>
+                </lumx-chip>
+            </lumx-chip-group>
+        </div>
+
         <div
             class="lumx-select__input-native lumx-select__input-native--placeholder"
             ng-if="lumx.isModelEmpty() && lumx.placeholder"
@@ -41,40 +59,24 @@
             <span ng-bind-html="lumx.displaySelected()"></span>
         </div>
 
-        <div class="lumx-select__input-chips">
-            <div
-                class="lumx-select__input-chip"
-                ng-repeat="selected in lumx.viewValue"
-                ng-if="!lumx.isModelEmpty() && lumx.multiple"
-            >
-                <lumx-chip
-                    lumx-on-click="lumx.select(selected, $event)"
-                    lumx-size="s"
-                    lumx-theme="{{ lumx.theme === 'dark' ? 'dark' : 'light' }}"
-                    ng-disabled="lumx.isDisabled"
-                >
-                    <lumx-chip-label ng-bind-html="lumx.displaySelected(selected)"></lumx-chip-label>
-                    <lumx-chip-after
-                        ><lumx-icon lumx-path="{{ lumx.icons.mdiClose }}" lumx-size="xxs"></lumx-icon
-                    ></lumx-chip-after>
-                </lumx-chip>
-            </div>
-        </div>
-
         <div class="lumx-select__input-validity" ng-if="lumx.isValid || lumx.hasError">
             <lumx-icon
                 lumx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
-                lumx-size="xs"
+                lumx-size="xxs"
             ></lumx-icon>
         </div>
 
-        <div
+        <lumx-button
             class="lumx-select__input-clear"
+            lumx-emphasis="low"
+            lumx-size="s"
+            lumx-theme="{{ lumx.theme }}"
+            lumx-variant="icon"
             ng-if="lumx.isClearable && !lumx.multiple && !lumx.isModelEmpty()"
             ng-click="lumx.clearModel($event)"
         >
-            <lumx-icon lumx-path="{{ lumx.icons.mdiCloseCircle }}" lumx-size="xs"></lumx-icon>
-        </div>
+            <lumx-icon lumx-path="{{ lumx.icons.mdiCloseCircle }}"></lumx-icon>
+        </lumx-button>
 
         <div class="lumx-select__input-indicator">
             <lumx-icon lumx-path="{{ lumx.icons.mdiMenuDown }}" lumx-size="s"></lumx-icon>

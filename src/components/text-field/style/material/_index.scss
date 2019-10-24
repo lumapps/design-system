@@ -24,7 +24,8 @@
 
         #{$self}--has-placeholder &,
         #{$self}--has-value &,
-        #{$self}--is-focus & {
+        #{$self}--is-focus &,
+        #{$self}--has-chips & {
             transform: scale(0.75) translateY(0);
         }
     }
@@ -33,13 +34,17 @@
         display: none !important;
     }
 
-    &__input-wrapper {
+    &__wrapper {
         #{$self}--theme-light & {
-            @include lumx-text-field-material-input-wrapper('dark');
+            @include lumx-text-field-material-wrapper('dark');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-material-input-wrapper('light');
+            @include lumx-text-field-material-wrapper('light');
+        }
+
+        #{$self}--has-input-clear & {
+            padding-right: 0 !important;
         }
     }
 
@@ -59,8 +64,8 @@
 
 // Focus state
 .#{$lumx-base-prefix}-text-field--is-focus {
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-material-input-wrapper-focus;
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-material-wrapper-focus;
     }
 }
 

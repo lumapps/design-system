@@ -24,15 +24,15 @@
         }
     }
 
-    &__input-wrapper {
+    &__wrapper {
         padding-left: 0 !important;
 
         #{$self}--theme-light & {
-            @include lumx-text-field-material-input-wrapper('dark');
+            @include lumx-text-field-material-wrapper('dark');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-material-input-wrapper('light');
+            @include lumx-text-field-material-wrapper('light');
         }
     }
 
@@ -52,8 +52,8 @@
 // Focus state
 .#{$lumx-base-prefix}-select--is-focus,
 .#{$lumx-base-prefix}-select--is-open {
-    .#{$lumx-base-prefix}-select__input-wrapper {
-        @include lumx-text-field-material-input-wrapper-focus;
+    .#{$lumx-base-prefix}-select__wrapper {
+        @include lumx-text-field-material-wrapper-focus;
     }
 }
 

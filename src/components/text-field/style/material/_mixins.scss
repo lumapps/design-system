@@ -27,7 +27,7 @@
     }
 }
 
-@mixin lumx-text-field-material-input-wrapper($theme) {
+@mixin lumx-text-field-material-wrapper($theme) {
     position: relative;
     margin-top: 0;
     background-color: transparent !important;
@@ -80,7 +80,7 @@
     }
 }
 
-@mixin lumx-text-field-material-input-wrapper-focus() {
+@mixin lumx-text-field-material-wrapper-focus() {
     &::after {
         transform: scaleX(1);
     }

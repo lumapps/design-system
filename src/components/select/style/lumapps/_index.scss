@@ -15,30 +15,31 @@
         }
     }
 
-    &__input-wrapper {
+    &__wrapper {
+        flex-wrap: nowrap !important;
         cursor: pointer;
 
-        #{$self}--theme-light#{$self}--is-empty &,
-        #{$self}--theme-light#{$self}--has-unique & {
-            @include lumx-text-field-input-wrapper('dark', true, false);
+        #{$self}--theme-light & {
+            @include lumx-text-field-wrapper('dark');
         }
 
-        #{$self}--theme-dark#{$self}--is-empty &,
-        #{$self}--theme-dark#{$self}--has-unique & {
-            @include lumx-text-field-input-wrapper('light', true, false);
+        #{$self}--theme-dark & {
+            @include lumx-text-field-wrapper('dark');
         }
 
-        #{$self}--theme-light#{$self}--has-multiple & {
-            @include lumx-text-field-input-wrapper('dark', true, true);
+        #{$self}--has-label & {
+            @include lumx-text-field-wrapper-has-label;
         }
 
-        #{$self}--theme-dark#{$self}--has-multiple & {
-            @include lumx-text-field-input-wrapper('light', true, true);
+        #{$self}--multiple & {
+            @include lumx-text-field-wrapper-has-chips;
         }
     }
 
-    &--has-label &__input-wrapper {
-        margin-top: $lumx-spacing-unit;
+    &__chips {
+        @include lumx-text-field-chips;
+
+        flex: 1;
     }
 
     &__input-native {
@@ -61,26 +62,8 @@
         }
     }
 
-    &__input-chips {
-        display: flex;
-        flex: 1;
-        flex-wrap: wrap;
-    }
-
-    &__input-chip {
-        @include lumx-select-input-chip;
-    }
-
     &__input-clear {
-        flex-shrink: 0;
-
-        #{$self}--theme-light & {
-            @include lumx-select-input-clear('dark');
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-select-input-clear('light');
-        }
+        @include lumx-text-field-input-clear;
     }
 
     &__input-validity {
@@ -129,7 +112,7 @@
 
 // Disabled state
 .#{$lumx-base-prefix}-select--is-disabled {
-    .#{$lumx-base-prefix}-select__input-wrapper {
+    .#{$lumx-base-prefix}-select__wrapper {
         @include lumx-state-disabled-input;
     }
 
@@ -147,33 +130,31 @@
 }
 
 // Hover state
-.#{$lumx-base-prefix}-select--theme-light .#{$lumx-base-prefix}-select__input-wrapper:hover {
-    @include lumx-text-field-input-wrapper-state('state-hover', 'dark');
+.#{$lumx-base-prefix}-select--theme-light .#{$lumx-base-prefix}-select__wrapper:hover {
+    @include lumx-text-field-wrapper-state('state-hover', 'dark');
 }
 
-.#{$lumx-base-prefix}-select--theme-dark .#{$lumx-base-prefix}-select__input-wrapper:hover {
-    @include lumx-text-field-input-wrapper-state('state-hover', 'light');
+.#{$lumx-base-prefix}-select--theme-dark .#{$lumx-base-prefix}-select__wrapper:hover {
+    @include lumx-text-field-wrapper-state('state-hover', 'light');
 }
 
 // Focus state
-.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-open
-.#{$lumx-base-prefix}-select__input-wrapper,
-.#{$lumx-base-prefix}-select--theme-light .#{$lumx-base-prefix}-select__input-wrapper:focus {
-    @include lumx-text-field-input-wrapper-state('state-focus', 'dark');
+.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-open .#{$lumx-base-prefix}-select__wrapper,
+.#{$lumx-base-prefix}-select--theme-light .#{$lumx-base-prefix}-select__wrapper:focus {
+    @include lumx-text-field-wrapper-state('state-focus', 'dark');
 }
 
-.#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-open
-.#{$lumx-base-prefix}-select__input-wrapper,
-.#{$lumx-base-prefix}-select--theme-dark .#{$lumx-base-prefix}-select__input-wrapper:focus {
-    @include lumx-text-field-input-wrapper-state('state-focus', 'light');
+.#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-open .#{$lumx-base-prefix}-select__wrapper,
+.#{$lumx-base-prefix}-select--theme-dark .#{$lumx-base-prefix}-select__wrapper:focus {
+    @include lumx-text-field-wrapper-state('state-focus', 'light');
 }
 
 /* Select validity
    ========================================================================== */
 
 .#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-valid {
-    .#{$lumx-base-prefix}-select__input-wrapper {
-        @include lumx-text-field-input-wrapper-validity('valid', 'dark');
+    .#{$lumx-base-prefix}-select__wrapper {
+        @include lumx-text-field-wrapper-validity('valid', 'dark');
     }
 
     .#{$lumx-base-prefix}-select__input-validity {
@@ -182,8 +163,8 @@
 }
 
 .#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--has-error {
-    .#{$lumx-base-prefix}-select__input-wrapper {
-        @include lumx-text-field-input-wrapper-validity('error', 'dark');
+    .#{$lumx-base-prefix}-select__wrapper {
+        @include lumx-text-field-wrapper-validity('error', 'dark');
     }
 
     .#{$lumx-base-prefix}-select__input-validity {
@@ -192,8 +173,8 @@
 }
 
 .#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-valid {
-    .#{$lumx-base-prefix}-select__input-wrapper {
-        @include lumx-text-field-input-wrapper-validity('valid', 'light');
+    .#{$lumx-base-prefix}-select__wrapper {
+        @include lumx-text-field-wrapper-validity('valid', 'light');
     }
 
     .#{$lumx-base-prefix}-select__input-validity {
@@ -202,8 +183,8 @@
 }
 
 .#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--has-error {
-    .#{$lumx-base-prefix}-select__input-wrapper {
-        @include lumx-text-field-input-wrapper-validity('error', 'light');
+    .#{$lumx-base-prefix}-select__wrapper {
+        @include lumx-text-field-wrapper-validity('error', 'light');
     }
 
     .#{$lumx-base-prefix}-select__input-validity {

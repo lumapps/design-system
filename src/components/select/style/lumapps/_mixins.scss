@@ -1,19 +1,5 @@
-@mixin lumx-select-input-chip() {
-    height: map-get($lumx-chip-sizes, 's');
-    margin: 3px;
-}
-
-@mixin lumx-select-input-clear($theme) {
-    margin-left: $lumx-spacing-unit;
-    color: lumx-theme-color-variant($theme, 'N');
-
-    &:hover {
-        opacity: 0.8;
-    }
-}
-
 @mixin lumx-select-input-indicator($theme) {
-    margin-left: $lumx-spacing-unit;
+    margin-left: $lumx-spacing-unit / 2;
     color: lumx-theme-color-variant($theme, 'N');
 }
 
