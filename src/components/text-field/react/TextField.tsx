@@ -76,9 +76,6 @@ interface ITextFieldProps extends IGenericProps {
     /** A ref that will be passed to the wrapper element. */
     textFieldRef?: RefObject<HTMLDivElement>;
 
-    /** A ref that will be passed to the input or text area element. */
-    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
-
     /** Text field value change handler. */
     onChange(value: string): void;
 
@@ -176,7 +173,6 @@ interface IInputNativeProps {
     id?: string;
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     isDisabled?: boolean;
-    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     placeholder?: string;
     type?: TextFieldType;
     value: string;
@@ -290,7 +286,6 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         type = DEFAULT_PROPS.type,
         useCustomColors,
         textFieldRef,
-        inputRef,
         value,
         ...forwardedProps
     } = props;
