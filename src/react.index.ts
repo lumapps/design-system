@@ -14,6 +14,8 @@ export { Checkbox, CheckboxProps } from './components/checkbox/react/Checkbox';
 
 export { Chip, ChipProps } from './components/chip/react/Chip';
 
+export { ChipGroup, ChipGroupProps } from './components/chip/react/ChipGroup';
+
 export { Divider, DividerProps } from './components/divider/react/Divider';
 
 export { Dropdown, DropdownProps } from './components/dropdown/react/Dropdown';

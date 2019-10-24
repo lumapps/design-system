@@ -1,6 +1,6 @@
 ```javascript import
 import { useState } from 'react';
-import { Chip, Icon, Size } from 'LumX';
+import { Chip, ChipGroup, Icon, Size } from 'LumX';
 import { mdiEmail, mdiClose, mdiCloseCircle, mdiMenuDown, mdiFilterVariant } from 'LumX/icons';
 ```
 
@@ -140,6 +140,32 @@ Use small when space is a constraint, as in areas like text fields, selects, dro
 };
 ```
 
-# Properties 
+# Properties
 
 <PropTable component="Chip" />
+
+
+# Chip Group
+
+```javascript jsx withThemeSwitcher
+(theme) => {
+    return (
+        <ChipGroup>
+            <Chip theme={theme} size={Size.s}>
+                Default
+            </Chip>
+            <Chip theme={theme} size={Size.s} before={<Icon icon={mdiEmail} size={Size.xxs} />}>
+                Rich
+            </Chip>
+            <Chip theme={theme} size={Size.s} after={<Icon icon={mdiClose} size={Size.xxs} />}>
+                Dismissible
+            </Chip>
+        </ChipGroup>
+    );
+};
+```
+
+# Properties
+
+<PropTable component="ChipGroup" />
+
