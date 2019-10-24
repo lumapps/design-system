@@ -90,7 +90,6 @@ There are four options: _helper text_, _placeholder_, _icon_ and _with buttons_.
 };
 ```
 
-### Text Area
 ### Clearable
 
 ```javascript jsx withThemeSwitcher disableGrid
@@ -124,6 +123,8 @@ There are four options: _helper text_, _placeholder_, _icon_ and _with buttons_.
 #### After button
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
+    const [value, setValue] = useState('');
+
     return (
         <TextField
             after={<IconButton emphasis={Emphasis.low} icon={mdiClose} />}
@@ -132,6 +133,36 @@ There are four options: _helper text_, _placeholder_, _icon_ and _with buttons_.
             theme={theme}
         />
     );
+};
+```
+
+### Text Area
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('');
+
+    return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} type="textarea" />;
+};
+```
+
+### Valid
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('Valid value');
+
+    return <TextField label="Textfield label" value={value} onChange={setValue} isValid theme={theme} type="textarea" />;
+};
+```
+
+### Invalid
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('Invalid value');
+
+    return <TextField label="Textfield label" value={value} onChange={setValue} hasError theme={theme} type="textarea" />;
 };
 ```
 

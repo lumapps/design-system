@@ -5,7 +5,7 @@ exports[`<TextField> Snapshots and structure should render defaults 1`] = `
   className="lumx-text-field lumx-text-field--has-input lumx-text-field--theme-light"
 >
   <div
-    className="lumx-text-field__input-wrapper"
+    className="lumx-text-field__wrapper"
   >
     <div
       className="lumx-text-field__input-native"
@@ -27,7 +27,7 @@ exports[`<TextField> Snapshots and structure should render textarea 1`] = `
   className="lumx-text-field lumx-text-field--has-textarea lumx-text-field--theme-light"
 >
   <div
-    className="lumx-text-field__input-wrapper"
+    className="lumx-text-field__wrapper"
   >
     <div
       className="lumx-text-field__input-native"

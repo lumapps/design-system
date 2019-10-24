@@ -337,7 +337,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
 
             {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
-            <div className={`${CLASSNAME}__input-wrapper`}>
+            <div className={`${CLASSNAME}__wrapper`}>
                 {before}
 
                 {icon && (
