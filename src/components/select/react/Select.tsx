@@ -7,7 +7,7 @@ import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown }
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { Chip, Dropdown, Icon, Placement, Size, Theme } from 'LumX';
+import { Chip, ChipGroup, Dropdown, Icon, Placement, Size, Theme } from 'LumX';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from 'LumX/core/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -280,6 +280,16 @@ const Select: React.FC<SelectProps> = ({
                             onKeyPress={handleKeyboardNav}
                             tabIndex={0}
                         >
+                            <div className={`${CLASSNAME}__chips`}>
+                                {!isEmpty && isMultiple && (
+                                    <ChipGroup>
+                                        {value.map((val: string, index: number) =>
+                                            selectedChipRender!(val, index, onClear, isDisabled),
+                                        )}
+                                    </ChipGroup>
+                                )}
+                            </div>
+
                             {isEmpty && placeholder && (
                                 <div
                                     className={classNames([
@@ -297,25 +307,15 @@ const Select: React.FC<SelectProps> = ({
                                 </div>
                             )}
 
-                            <div className={`${CLASSNAME}__input-chips`}>
-                                {!isEmpty &&
-                                    isMultiple &&
-                                    value.map((val: string, index: number) => (
-                                        <div key={index} className={`${CLASSNAME}__input-chip`}>
-                                            {selectedChipRender!(val, index, onClear, isDisabled)}
-                                        </div>
-                                    ))}
-                            </div>
-
                             {(isValid || hasError) && (
                                 <div className={`${CLASSNAME}__input-validity`}>
-                                    <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xs} />
+                                    <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xxs} />
                                 </div>
                             )}
 
                             {onClear && !isMultiple && !isEmpty && (
                                 <div className={`${CLASSNAME}__input-clear`} onClick={onClear}>
-                                    <Icon icon={mdiCloseCircle} size={Size.xs} />
+                                    <Icon icon={mdiCloseCircle} />
                                 </div>
                             )}
 
