@@ -96,7 +96,7 @@ const Progress: React.FC<ProgressProps> = ({
                                 cy="50"
                                 r="20"
                                 fill="none"
-                                stroke-width="5"
+                                strokeWidth="5"
                             />
                         </svg>
                     </>

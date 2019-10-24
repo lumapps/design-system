@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Fix stroke-width property on react progress bar.
+
 ## [0.11.0][] - 2019-10-23
 
 ### Changed
