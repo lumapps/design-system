@@ -1,6 +1,6 @@
 ```javascript import
 import { ReactElement, useState } from 'react';
-import { TextField, Theme, IconButton, Emphasis, Size } from 'LumX';
+import { Chip, ChipGroup, TextField, Theme, IconButton, Emphasis, Size } from 'LumX';
 import { mdiMagnify, mdiClose } from 'LumX/icons';
 ```
 
@@ -100,9 +100,7 @@ There are four options: _helper text_, _placeholder_, _icon_ and _with buttons_.
 };
 ```
 
-### With Buttons
-
-#### Before button
+### With Chips
 
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
@@ -113,24 +111,19 @@ There are four options: _helper text_, _placeholder_, _icon_ and _with buttons_.
             value={value}
             onChange={setValue}
             theme={theme}
-            before={<IconButton emphasis={Emphasis.low} icon={mdiMagnify} />}
-        />
-    );
-};
-```
-
-
-#### After button
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
-    const [value, setValue] = useState('');
-
-    return (
-        <TextField
-            after={<IconButton emphasis={Emphasis.low} icon={mdiClose} />}
-            value={value}
-            onChange={setValue}
-            theme={theme}
+            chips={
+                <ChipGroup>
+                    <Chip>
+                        Default
+                    </Chip>
+                    <Chip>
+                        Rich
+                    </Chip>
+                    <Chip>
+                        Dismissible
+                    </Chip>
+                </ChipGroup>
+            }
         />
     );
 };

@@ -22,11 +22,8 @@ enum TextFieldType {
  * Defines the props of the component.
  */
 interface ITextFieldProps extends IGenericProps {
-    /** A component to be rendered after the main text input. */
-    after?: HTMLElement | ReactNode;
-
-    /** A component to be rendered before the main text input */
-    before?: HTMLElement | ReactNode;
+    /** A Chip Group to be rendered before the main text input */
+    chips?: HTMLElement | ReactNode;
 
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
@@ -265,8 +262,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
  */
 const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElement => {
     const {
-        after,
-        before,
+        chips,
         className = '',
         hasError,
         helper,
@@ -312,6 +308,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
             className={classNames(
                 className,
                 handleBasicClasses({
+                    hasChips: Boolean(chips),
                     hasError: !isValid && hasError,
                     hasIcon: Boolean(icon),
                     hasInput: type === TextFieldType.input,
@@ -319,6 +316,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     hasPlaceholder: Boolean(placeholder),
                     hasTextarea: type === TextFieldType.textarea,
                     hasValue: Boolean(value),
+                    isClearable,
                     isDisabled,
                     isFocus,
                     isValid,
@@ -338,7 +336,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
             {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
             <div className={`${CLASSNAME}__wrapper`}>
-                {before}
+                {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
 
                 {icon && (
                     <Icon
@@ -379,8 +377,6 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                         size={Size.xs}
                     />
                 )}
-
-                {after}
             </div>
         </div>
     );
