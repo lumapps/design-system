@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ The `tags` prop of the `ImageBlock` must now be JSX and not an array.
 -   Minor SCSS style changes on the `Tooltip` component.
 -   Image Lazy Loading for Thumbnail Component [#190]
+-   Fixes to Text Area related to Input resizing and `valid` and `error` states in Material
 
 ### Removed
 

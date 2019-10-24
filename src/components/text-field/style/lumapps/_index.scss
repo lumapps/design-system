@@ -84,6 +84,8 @@
         }
 
         textarea {
+            resize: none;
+
             #{$self}--theme-light & {
                 @include lumx-text-field-input-native('dark', 'textarea');
             }

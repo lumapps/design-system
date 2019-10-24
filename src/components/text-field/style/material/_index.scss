@@ -45,23 +45,11 @@
 
     &__input-native {
         input {
-            #{$self}--theme-light & {
-                @include lumx-text-field-material-input-native('dark', 'input');
-            }
-
-            #{$self}--theme-dark & {
-                @include lumx-text-field-material-input-native('light', 'input');
-            }
+            @include lumx-text-field-material-input-native('input');
         }
 
         textarea {
-            #{$self}--theme-light & {
-                @include lumx-text-field-material-input-native('dark', 'textarea');
-            }
-
-            #{$self}--theme-dark & {
-                @include lumx-text-field-material-input-native('light', 'textarea');
-            }
+            @include lumx-text-field-material-input-native('textarea');
         }
     }
 }
@@ -85,5 +73,28 @@
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-focus {
     .#{$lumx-base-prefix}-text-field__label {
         @include lumx-text-field-material-label-focus('light');
+    }
+}
+
+/* Text field validity
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-valid {
+    .#{$lumx-base-prefix}-text-field__label {
+        @include lumx-text-field-material-label-validity('valid');
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-material-input-wrapper-validity('valid');
+    }
+}
+
+.#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--has-error {
+    .#{$lumx-base-prefix}-text-field__label {
+        @include lumx-text-field-material-label-validity('error');
+    }
+
+    .#{$lumx-base-prefix}-text-field__input-wrapper {
+        @include lumx-text-field-material-input-wrapper-validity('error');
     }
 }

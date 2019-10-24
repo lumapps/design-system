@@ -11,6 +11,14 @@
     transition-property: color, transform;
 }
 
+@mixin lumx-text-field-material-label-validity($validity) {
+    @if $validity == 'valid' {
+        color: lumx-theme-color-variant('green', 'N');
+    } @else if $validity == 'error' {
+        color: lumx-theme-color-variant('red', 'N');
+    }
+}
+
 @mixin lumx-text-field-material-label-focus($theme) {
     @if $theme == 'dark' {
         color: lumx-theme-color-variant('primary', 'N');
@@ -56,16 +64,35 @@
     }
 }
 
+@mixin lumx-text-field-material-input-wrapper-validity($validity) {
+    &::after {
+        transform: scaleX(1);
+    }
+
+    @if $validity == 'valid' {
+        &::after {
+            background-color: lumx-theme-color-variant('green', 'N');
+        }
+    } @else if $validity == 'error' {
+        &::after {
+            background-color: lumx-theme-color-variant('red', 'N');
+        }
+    }
+}
+
 @mixin lumx-text-field-material-input-wrapper-focus() {
     &::after {
         transform: scaleX(1);
     }
 }
 
-@mixin lumx-text-field-material-input-native($theme, $type: 'input') {
-    @include lumx-typography('body2');
+@mixin lumx-text-field-material-input-native($type) {
+    font-size: map-get($lumx-typography-font-size, 'body2') !important;
+    font-weight: map-get($lumx-typography-font-weight, 'body2') !important;
 
     @if $type == 'input' {
-        line-height: $lumx-text-field-height;
+        line-height: $lumx-text-field-height !important;
+    } @else if $type == 'textarea' {
+        line-height: map-get($lumx-typography-line-height, 'body2') !important;
     }
 }

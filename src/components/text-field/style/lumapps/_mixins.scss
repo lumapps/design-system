@@ -34,10 +34,11 @@
 @mixin lumx-text-field-input-native($theme, $type: 'input') {
     @include lumx-typography('body1');
 
+    display: block;
     width: 100%;
     padding: 0;
-    margin: 0;
     border: none;
+    margin: 0;
     background-color: transparent;
     color: lumx-theme-color-variant($theme, 'N');
     outline: none;
