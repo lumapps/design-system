@@ -105,6 +105,16 @@ git fetch && git rebase origin/master && git push --force-with-lease
 
 That's it! Thank you for your contribution!
 
+#### React developpment check list
+
+If you are developping in React please make sure to follow this check list:
+
+-   [ ] Update the `CHANGELOG.react.md` file
+-   [ ] Create or update component tests
+-   [ ] Keep props JSDoc comment up to date and check they appear on the demo site
+-   [ ] Keep the `react.index.tsx` file up to date
+-   [ ] (if necessary) Create or update the MDX demo file for your component
+
 #### After your pull request is merged
 
 After your pull request is merged, you can safely delete your branch and pull the changes from the main (upstream) repository:
