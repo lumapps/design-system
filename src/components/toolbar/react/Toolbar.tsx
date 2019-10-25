@@ -13,11 +13,11 @@ import { handleBasicClasses } from 'LumX/core/utils';
  * Defines the props of the component.
  */
 interface IToolbarProps extends IGenericProps {
-    /* Slot for the right element */
+    /* Slot for the right element. */
     after?: ReactNode;
-    /* Slot for the left element */
+    /* Slot for the left element. */
     before?: ReactNode;
-    /* Slot fo the main title element*/
+    /* Slot fo the main title element. */
     label?: ReactNode;
 }
 type ToolbarProps = IToolbarProps;
@@ -64,7 +64,18 @@ const Toolbar: React.FC<ToolbarProps> = ({
     ...props
 }: ToolbarProps): ReactElement => {
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
+        <div
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    hasAfter: Boolean(after),
+                    hasBefore: Boolean(before),
+                    hasLabel: Boolean(label),
+                    prefix: CLASSNAME,
+                }),
+            )}
+            {...props}
+        >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
             {label && <div className={`${CLASSNAME}__label`}>{label}</div>}
             {after && <div className={`${CLASSNAME}__after`}>{after}</div>}
