@@ -1,6 +1,7 @@
 import { RefObject, SetStateAction, useEffect, useState } from 'react';
 
-import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
+import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
+
 import get from 'lodash/get';
 
 /////////////////////////////
@@ -161,7 +162,6 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     const eventsForKeyPressed = {
         [DOWN_KEY_CODE]: onArrowPressed,
         [UP_KEY_CODE]: onArrowPressed,
-        [TAB_KEY_CODE]: preventDefaultAndStopPropagation,
         [ENTER_KEY_CODE]: onEnterKeyPressed,
         [BACKSPACE_KEY_CODE]: onBackspaceKeyPressed,
     };
