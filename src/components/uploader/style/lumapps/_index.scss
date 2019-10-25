@@ -3,8 +3,45 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-uploader {
+    $self: &;
+
+    @include lumx-state-transition;
+
     position: relative;
-    background-color: lumx-theme-color-variant('dark', 'L5');
+    cursor: pointer;
+    outline: none;
+
+    &--theme-light {
+        @include lumx-state('state-default', 'emphasis-medium', 'dark');
+
+        &:hover {
+            @include lumx-state('state-hover', 'emphasis-medium', 'dark');
+        }
+
+        &:active {
+            @include lumx-state('state-active', 'emphasis-medium', 'dark');
+        }
+
+        &[data-focus-visible-added] {
+            @include lumx-state('state-focus', 'emphasis-medium', 'dark');
+        }
+    }
+
+    &--theme-dark {
+        @include lumx-state('state-default', 'emphasis-medium', 'light');
+
+        &:hover {
+            @include lumx-state('state-hover', 'emphasis-medium', 'light');
+        }
+
+        &:active {
+            @include lumx-state('state-active', 'emphasis-medium', 'light');
+        }
+
+        &[data-focus-visible-added] {
+            @include lumx-state('state-focus', 'emphasis-medium', 'light');
+        }
+    }
 
     &--variant-square {
         border-radius: 0;
@@ -28,16 +65,34 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        padding: 0 $lumx-spacing-unit * 2;
+        user-select: none;
     }
 
     &__icon {
-        margin-bottom: 2px;
+        margin-bottom: $lumx-spacing-unit;
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant('dark', 'N');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'N');
+        }
     }
 
     &__label {
         @include lumx-typography('subtitle1');
 
-        margin-bottom: $lumx-spacing-unit;
+        text-align: center;
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant('dark', 'N');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'N');
+        }
     }
 }
 
