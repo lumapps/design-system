@@ -2,3 +2,5 @@ $lumx-chip-sizes: (
     'm': map-get($lumx-sizes, 'm'),
     's': map-get($lumx-sizes, 's')
 ) !default;
+
+$lumx-chip-group-spacing: 3px;

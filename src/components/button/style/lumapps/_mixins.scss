@@ -33,7 +33,7 @@
         }
     } @else if $variant == 'variant-icon' {
         width: map-get($lumx-sizes, $size);
-        border-radius: 50%;
+        border-radius: $lumx-button-variant-icon-border-radius;
     }
 }
 

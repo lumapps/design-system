@@ -1,15 +1,15 @@
-import React, { ReactElement, RefObject, useState } from 'react';
+import React, { ReactElement, ReactNode, RefObject, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
 import uuid from 'uuid/v4';
 
-import { Icon, Size, Theme } from 'LumX';
+import { Emphasis, Icon, IconButton, Size, Theme } from 'LumX';
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-import { mdiAlertCircle, mdiCheckCircle } from 'LumX/icons';
+import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -22,6 +22,9 @@ enum TextFieldType {
  * Defines the props of the component.
  */
 interface ITextFieldProps extends IGenericProps {
+    /** A Chip Group to be rendered before the main text input */
+    chips?: HTMLElement | ReactNode;
+
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
 
@@ -39,6 +42,9 @@ interface ITextFieldProps extends IGenericProps {
 
     /** Whether the text field is displayed with valid style or not. */
     isValid?: boolean;
+
+    /** Whether the text field shows a cross to clear its content or not. */
+    isClearable?: boolean;
 
     /** Text field label displayed in a label tag. */
     label?: string;
@@ -64,8 +70,17 @@ interface ITextFieldProps extends IGenericProps {
     /** Text field type (input or textarea). */
     type?: TextFieldType;
 
+    /** A ref that will be passed to the wrapper element. */
+    textFieldRef?: RefObject<HTMLDivElement>;
+
     /** Text field value change handler. */
     onChange(value: string): void;
+
+    /** Text field focus change handler. */
+    onFocus?(event: React.FocusEvent): void;
+
+    /** Text field blur change handler. */
+    onBlur?(event: React.FocusEvent): void;
 }
 type TextFieldProps = ITextFieldProps;
 
@@ -97,6 +112,7 @@ const MIN_ROWS = 2;
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
     hasError: false,
+    isClearable: false,
     isDisabled: false,
     isValid: false,
     minimumRows: MIN_ROWS,
@@ -161,6 +177,8 @@ interface IInputNativeProps {
     setFocus(focus: boolean): void;
     recomputeNumberOfRows(event: React.ChangeEvent): void;
     onChange(value: string): void;
+    onFocus?(value: React.FocusEvent): void;
+    onBlur?(value: React.FocusEvent): void;
 }
 
 const renderInputNative = (props: IInputNativeProps): ReactElement => {
@@ -172,13 +190,29 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         value,
         setFocus,
         onChange,
+        onFocus,
+        onBlur,
         inputRef,
         rows,
         recomputeNumberOfRows,
         ...forwardedProps
     } = props;
-    const onFocus = (): void => setFocus(true);
-    const onBlur = (): void => setFocus(false);
+
+    const onTextFieldFocus = (event: React.FocusEvent): void => {
+        if (onFocus) {
+            onFocus(event);
+        }
+
+        return setFocus(true);
+    };
+
+    const onTextFieldBlur = (event: React.FocusEvent): void => {
+        if (onBlur) {
+            onBlur(event);
+        }
+
+        return setFocus(false);
+    };
 
     const handleChange = (event: React.ChangeEvent): void => {
         if (type === TextFieldType.textarea) {
@@ -195,11 +229,11 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
                 disabled={isDisabled}
                 placeholder={placeholder}
                 value={value}
-                ref={inputRef as RefObject<HTMLTextAreaElement>}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                onChange={handleChange}
                 rows={rows}
+                onFocus={onTextFieldFocus}
+                onBlur={onTextFieldBlur}
+                onChange={handleChange}
+                ref={inputRef as RefObject<HTMLTextAreaElement>}
                 {...forwardedProps}
             />
         );
@@ -211,9 +245,10 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
             type="text"
             placeholder={placeholder}
             value={value}
-            onFocus={onFocus}
-            onBlur={onBlur}
+            onFocus={onTextFieldFocus}
+            onBlur={onTextFieldBlur}
             onChange={handleChange}
+            ref={inputRef as RefObject<HTMLInputElement>}
             {...forwardedProps}
         />
     );
@@ -227,40 +262,63 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
  */
 const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElement => {
     const {
+        chips,
         className = '',
         hasError,
         helper,
         icon,
         id = uuid(),
         isDisabled,
+        isClearable = DEFAULT_PROPS.isClearable,
         isValid,
         label,
         onChange,
+        onFocus,
+        onBlur,
         placeholder,
         minimumRows = DEFAULT_PROPS.minimumRows as number,
         inputRef = React.useRef(null),
         theme = DEFAULT_PROPS.theme,
         type = DEFAULT_PROPS.type,
         useCustomColors,
+        textFieldRef,
         value,
         ...forwardedProps
     } = props;
 
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
+    const isNotEmpty = value && value.length > 0;
+
+    /**
+     * Function triggered when the Clear Button is clicked.
+     * The idea is to execute the `onChange` callback with an empty string
+     * and remove focus from the clear button.
+     * @param evt On clear event.
+     */
+    const onClear = (evt: React.ChangeEvent): void => {
+        evt.nativeEvent.preventDefault();
+        evt.nativeEvent.stopPropagation();
+        (evt.currentTarget as HTMLElement).blur();
+
+        onChange('');
+    };
 
     return (
         <div
             className={classNames(
                 className,
                 handleBasicClasses({
+                    hasChips: Boolean(chips),
                     hasError: !isValid && hasError,
                     hasIcon: Boolean(icon),
                     hasInput: type === TextFieldType.input,
+                    hasInputClear: isClearable && isNotEmpty,
                     hasLabel: Boolean(label),
                     hasPlaceholder: Boolean(placeholder),
                     hasTextarea: type === TextFieldType.textarea,
                     hasValue: Boolean(value),
+                    isClearable,
                     isDisabled,
                     isFocus,
                     isValid,
@@ -269,6 +327,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
+            ref={textFieldRef}
         >
             {label && (
                 <label htmlFor={id} className={`${CLASSNAME}__label`}>
@@ -278,7 +337,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
 
             {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
-            <div className={`${CLASSNAME}__input-wrapper`}>
+            <div className={`${CLASSNAME}__wrapper`}>
+                {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
+
                 {icon && (
                     <Icon
                         className={`${CLASSNAME}__input-icon`}
@@ -288,30 +349,45 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     />
                 )}
 
-                <div className={`${CLASSNAME}__input-native`}>
-                    {renderInputNative({
-                        id,
-                        inputRef,
-                        isDisabled,
-                        onChange,
-                        placeholder,
-                        recomputeNumberOfRows,
-                        rows,
-                        setFocus,
-                        type,
-                        value,
-                        ...forwardedProps,
-                    })}
-                </div>
+                <div className={`${CLASSNAME}__input-wrapper`}>
+                    <div className={`${CLASSNAME}__input-native`}>
+                        {renderInputNative({
+                            id,
+                            inputRef,
+                            isDisabled,
+                            onBlur,
+                            onChange,
+                            onFocus,
+                            placeholder,
+                            recomputeNumberOfRows,
+                            rows,
+                            setFocus,
+                            type,
+                            value,
+                            ...forwardedProps,
+                        })}
+                    </div>
 
-                {(isValid || hasError) && (
-                    <Icon
-                        className={`${CLASSNAME}__input-validity`}
-                        color={theme === Theme.dark ? 'light' : undefined}
-                        icon={isValid ? mdiCheckCircle : mdiAlertCircle}
-                        size={Size.xs}
-                    />
-                )}
+                    {(isValid || hasError) && (
+                        <Icon
+                            className={`${CLASSNAME}__input-validity`}
+                            color={theme === Theme.dark ? 'light' : undefined}
+                            icon={isValid ? mdiCheckCircle : mdiAlertCircle}
+                            size={Size.xxs}
+                        />
+                    )}
+
+                    {isClearable && isNotEmpty && (
+                        <IconButton
+                            className={`${CLASSNAME}__input-clear`}
+                            icon={mdiCloseCircle}
+                            emphasis={Emphasis.low}
+                            size={Size.s}
+                            theme={theme}
+                            onClick={onClear}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );

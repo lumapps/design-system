@@ -7,6 +7,7 @@ import './components/button/angularjs/button_directive';
 import './components/button/angularjs/button-group_directive';
 import './components/checkbox/angularjs/checkbox_directive';
 import './components/chip/angularjs/chip_directive';
+import './components/chip/angularjs/chip-group_directive';
 import './components/comment-block/angularjs/comment-block_directive';
 import './components/dialog/angularjs/dialog_directive';
 import './components/dialog/angularjs/dialog_service';

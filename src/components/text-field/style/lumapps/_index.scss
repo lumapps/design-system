@@ -25,26 +25,34 @@
         }
     }
 
-    &__input-wrapper {
+    &__wrapper {
         #{$self}--has-input#{$self}--theme-light & {
-            @include lumx-text-field-input-wrapper('dark', false, false, 'input');
+            @include lumx-text-field-wrapper('dark', 'input');
         }
 
         #{$self}--has-input#{$self}--theme-dark & {
-            @include lumx-text-field-input-wrapper('light', false, false, 'input');
+            @include lumx-text-field-wrapper('light', 'input');
         }
 
         #{$self}--has-textarea#{$self}--theme-light & {
-            @include lumx-text-field-input-wrapper('dark', false, false, 'textarea');
+            @include lumx-text-field-wrapper('dark', 'textarea');
         }
 
         #{$self}--has-textarea#{$self}--theme-dark & {
-            @include lumx-text-field-input-wrapper('light', false, false, 'textarea');
+            @include lumx-text-field-wrapper('light', 'textarea');
+        }
+
+        #{$self}--has-input-clear & {
+            @include lumx-text-field-wrapper-has-input-clear;
+        }
+
+        #{$self}--has-chips & {
+            @include lumx-text-field-wrapper-has-chips;
         }
     }
 
-    &--has-label &__input-wrapper {
-        margin-top: $lumx-spacing-unit;
+    &--has-label &__wrapper {
+        @include lumx-text-field-wrapper-has-label;
     }
 
     &__input-icon {
@@ -57,6 +65,10 @@
         #{$self}--theme-dark & {
             @include lumx-text-field-input-icon('light');
         }
+    }
+
+    &__input-wrapper {
+        @include lumx-text-field-input-wrapper;
     }
 
     &__input-native {
@@ -96,8 +108,12 @@
         }
     }
 
-    &__input-validity {
-        flex-shrink: 0;
+    &__input-clear {
+        @include lumx-text-field-input-clear;
+    }
+
+    &__chips {
+        @include lumx-text-field-chips;
     }
 }
 
@@ -106,7 +122,7 @@
 
 // Disabled state
 .#{$lumx-base-prefix}-text-field--is-disabled {
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
+    .#{$lumx-base-prefix}-text-field__wrapper {
         @include lumx-state-disabled-input;
     }
 
@@ -127,27 +143,27 @@
 
 // Hover state
 .#{$lumx-base-prefix}-text-field--theme-light {
-    .#{$lumx-base-prefix}-text-field__input-wrapper:hover {
-        @include lumx-text-field-input-wrapper-state('state-hover', 'dark');
+    .#{$lumx-base-prefix}-text-field__wrapper:hover {
+        @include lumx-text-field-wrapper-state('state-hover', 'dark');
     }
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark {
-    .#{$lumx-base-prefix}-text-field__input-wrapper:hover {
-        @include lumx-text-field-input-wrapper-state('state-hover', 'light');
+    .#{$lumx-base-prefix}-text-field__wrapper:hover {
+        @include lumx-text-field-wrapper-state('state-hover', 'light');
     }
 }
 
 // Focus state
 .#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-focus {
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-input-wrapper-state('state-focus', 'dark');
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-wrapper-state('state-focus', 'dark');
     }
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-focus {
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-input-wrapper-state('state-focus', 'light');
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-wrapper-state('state-focus', 'light');
     }
 }
 
@@ -155,8 +171,8 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--is-valid {
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-input-wrapper-validity('valid', 'dark');
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-wrapper-validity('valid', 'dark');
     }
 
     .#{$lumx-base-prefix}-text-field__input-validity {
@@ -165,8 +181,8 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-light.#{$lumx-base-prefix}-text-field--has-error {
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-input-wrapper-validity('error', 'dark');
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-wrapper-validity('error', 'dark');
     }
 
     .#{$lumx-base-prefix}-text-field__input-validity {
@@ -175,8 +191,8 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--is-valid {
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-input-wrapper-validity('valid', 'light');
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-wrapper-validity('valid', 'light');
     }
 
     .#{$lumx-base-prefix}-text-field__input-validity {
@@ -185,8 +201,8 @@
 }
 
 .#{$lumx-base-prefix}-text-field--theme-dark.#{$lumx-base-prefix}-text-field--has-error {
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-input-wrapper-validity('error', 'light');
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-wrapper-validity('error', 'light');
     }
 
     .#{$lumx-base-prefix}-text-field__input-validity {

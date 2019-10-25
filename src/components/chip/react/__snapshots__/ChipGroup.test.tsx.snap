@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChipGroup /> Snapshot should render correctly Chip Group component 1`] = `
+<div
+  className="lumx-chip-group lumx-chip-group--align-left"
+>
+  <Chip
+    key="1"
+  >
+    Chip 1
+  </Chip>
+  <Chip
+    key="2"
+  >
+    Chip 2
+  </Chip>
+  <Chip
+    key="3"
+  >
+    Chip 3
+  </Chip>
+</div>
+`;

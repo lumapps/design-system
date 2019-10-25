@@ -121,3 +121,28 @@
 .#{$lumx-base-prefix}-chip--is-disabled {
     @include lumx-state-disabled-input;
 }
+
+/* Chip group
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-chip-group {
+    display: flex;
+    flex-wrap: wrap;
+
+    .#{$lumx-base-prefix}-chip {
+        margin: $lumx-chip-group-spacing 0;
+    }
+
+    &--align-left .#{$lumx-base-prefix}-chip {
+        margin-right: $lumx-chip-group-spacing * 2;
+    }
+
+    &--align-center .#{$lumx-base-prefix}-chip {
+        margin-right: $lumx-chip-group-spacing;
+        margin-left: $lumx-chip-group-spacing;
+    }
+
+    &--align-right .#{$lumx-base-prefix}-chip {
+        margin-left: $lumx-chip-group-spacing * 2;
+    }
+}
