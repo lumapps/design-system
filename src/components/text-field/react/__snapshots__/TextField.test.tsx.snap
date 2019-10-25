@@ -8,15 +8,19 @@ exports[`<TextField> Snapshots and structure should render defaults 1`] = `
     className="lumx-text-field__wrapper"
   >
     <div
-      className="lumx-text-field__input-native"
+      className="lumx-text-field__input-wrapper"
     >
-      <input
-        id="fixedId"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onFocus={[Function]}
-        type="text"
-      />
+      <div
+        className="lumx-text-field__input-native"
+      >
+        <input
+          id="fixedId"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          type="text"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -30,15 +34,19 @@ exports[`<TextField> Snapshots and structure should render textarea 1`] = `
     className="lumx-text-field__wrapper"
   >
     <div
-      className="lumx-text-field__input-native"
+      className="lumx-text-field__input-wrapper"
     >
-      <textarea
-        id="fixedId"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onFocus={[Function]}
-        rows={2}
-      />
+      <div
+        className="lumx-text-field__input-native"
+      >
+        <textarea
+          id="fixedId"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          rows={2}
+        />
+      </div>
     </div>
   </div>
 </div>

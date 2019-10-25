@@ -9,7 +9,7 @@ import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-import { mdiAlertCircle, mdiCheckCircle, mdiClose } from 'LumX/icons';
+import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -288,6 +288,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
 
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
+    const isNotEmpty = value && value.length > 0;
 
     /**
      * Function triggered when the Clear Button is clicked.
@@ -312,6 +313,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     hasError: !isValid && hasError,
                     hasIcon: Boolean(icon),
                     hasInput: type === TextFieldType.input,
+                    hasInputClear: isClearable && isNotEmpty,
                     hasLabel: Boolean(label),
                     hasPlaceholder: Boolean(placeholder),
                     hasTextarea: type === TextFieldType.textarea,
@@ -347,36 +349,45 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     />
                 )}
 
-                <div className={`${CLASSNAME}__input-native`}>
-                    {renderInputNative({
-                        id,
-                        inputRef,
-                        isDisabled,
-                        onBlur,
-                        onChange,
-                        onFocus,
-                        placeholder,
-                        recomputeNumberOfRows,
-                        rows,
-                        setFocus,
-                        type,
-                        value,
-                        ...forwardedProps,
-                    })}
+                <div className={`${CLASSNAME}__input-wrapper`}>
+                    <div className={`${CLASSNAME}__input-native`}>
+                        {renderInputNative({
+                            id,
+                            inputRef,
+                            isDisabled,
+                            onBlur,
+                            onChange,
+                            onFocus,
+                            placeholder,
+                            recomputeNumberOfRows,
+                            rows,
+                            setFocus,
+                            type,
+                            value,
+                            ...forwardedProps,
+                        })}
+                    </div>
+
+                    {(isValid || hasError) && (
+                        <Icon
+                            className={`${CLASSNAME}__input-validity`}
+                            color={theme === Theme.dark ? 'light' : undefined}
+                            icon={isValid ? mdiCheckCircle : mdiAlertCircle}
+                            size={Size.xxs}
+                        />
+                    )}
+
+                    {isClearable && isNotEmpty && (
+                        <IconButton
+                            className={`${CLASSNAME}__input-clear`}
+                            icon={mdiCloseCircle}
+                            emphasis={Emphasis.low}
+                            size={Size.s}
+                            theme={theme}
+                            onClick={onClear}
+                        />
+                    )}
                 </div>
-
-                {isClearable && (
-                    <IconButton icon={mdiClose} emphasis={Emphasis.low} size={Size.s} theme={theme} onClick={onClear} />
-                )}
-
-                {(isValid || hasError) && (
-                    <Icon
-                        className={`${CLASSNAME}__input-validity`}
-                        color={theme === Theme.dark ? 'light' : undefined}
-                        icon={isValid ? mdiCheckCircle : mdiAlertCircle}
-                        size={Size.xs}
-                    />
-                )}
             </div>
         </div>
     );
