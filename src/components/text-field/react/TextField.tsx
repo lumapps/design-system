@@ -64,14 +64,14 @@ interface ITextFieldProps extends IGenericProps {
     /** A ref that will be passed to the input or text area element. */
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
 
-    /** A ref that will be passed to the wrapper element. */
-    textFieldRef?: RefObject<HTMLDivElement>;
-
     /** Text field value. */
     value: string;
 
     /** Text field type (input or textarea). */
     type?: TextFieldType;
+
+    /** A ref that will be passed to the wrapper element. */
+    textFieldRef?: RefObject<HTMLDivElement>;
 
     /** Text field value change handler. */
     onChange(value: string): void;
@@ -229,10 +229,10 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
                 disabled={isDisabled}
                 placeholder={placeholder}
                 value={value}
+                rows={rows}
                 onFocus={onTextFieldFocus}
                 onBlur={onTextFieldBlur}
                 onChange={handleChange}
-                rows={rows}
                 ref={inputRef as RefObject<HTMLTextAreaElement>}
                 {...forwardedProps}
             />
@@ -392,7 +392,6 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         </div>
     );
 };
-
 TextField.displayName = COMPONENT_NAME;
 
 /////////////////////////////
