@@ -64,7 +64,7 @@
     }
 }
 
-@mixin lumx-text-field-material-input-wrapper-validity($validity) {
+@mixin lumx-text-field-material-wrapper-validity($validity) {
     &::after {
         transform: scaleX(1);
     }

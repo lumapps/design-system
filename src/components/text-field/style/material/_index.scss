@@ -89,8 +89,8 @@
         @include lumx-text-field-material-label-validity('valid');
     }
 
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-material-input-wrapper-validity('valid');
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-material-wrapper-validity('valid');
     }
 }
 
@@ -99,7 +99,7 @@
         @include lumx-text-field-material-label-validity('error');
     }
 
-    .#{$lumx-base-prefix}-text-field__input-wrapper {
-        @include lumx-text-field-material-input-wrapper-validity('error');
+    .#{$lumx-base-prefix}-text-field__wrapper {
+        @include lumx-text-field-material-wrapper-validity('error');
     }
 }

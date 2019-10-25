@@ -70,3 +70,26 @@
         @include lumx-text-field-material-label-focus('light');
     }
 }
+
+/* Select validity
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-valid {
+    .#{$lumx-base-prefix}-select__label {
+        @include lumx-text-field-material-label-validity('valid');
+    }
+
+    .#{$lumx-base-prefix}-select__wrapper {
+        @include lumx-text-field-material-wrapper-validity('valid');
+    }
+}
+
+.#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--has-error {
+    .#{$lumx-base-prefix}-select__label {
+        @include lumx-text-field-material-label-validity('error');
+    }
+
+    .#{$lumx-base-prefix}-select__wrapper {
+        @include lumx-text-field-material-wrapper-validity('error');
+    }
+}
