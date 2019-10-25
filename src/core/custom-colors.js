@@ -330,8 +330,8 @@ function _getSelectCSSRules(colorPalette, theme) {
         selectRules = [
             {
                 selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open .${CSS_PREFIX}-select__input-wrapper,
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light .${CSS_PREFIX}-select__input-wrapper:focus
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__wrapper,
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__wrapper:focus
                 `,
                 rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
             },
@@ -340,14 +340,14 @@ function _getSelectCSSRules(colorPalette, theme) {
         selectRules = [
             {
                 selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-focus .${CSS_PREFIX}-select__label,
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open .${CSS_PREFIX}-select__label
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-focus:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__label,
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__label
                 `,
                 rule: `color: ${colorPalette.primary.N}`,
             },
             {
                 selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light .${CSS_PREFIX}-select__input-wrapper::after
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__wrapper::after
                 `,
                 rule: `background-color: ${colorPalette.primary.N}`,
             },
@@ -554,7 +554,7 @@ function _getTextFieldCSSRules(colorPalette, theme) {
         textFieldRules = [
             {
                 selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light.${CSS_PREFIX}-text-field--is-focus .${CSS_PREFIX}-text-field__input-wrapper
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light.${CSS_PREFIX}-text-field--is-focus:not(.${CSS_PREFIX}-text-field--has-error):not(.${CSS_PREFIX}-text-field--is-valid) .${CSS_PREFIX}-text-field__wrapper
                 `,
                 rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
             },
@@ -563,13 +563,13 @@ function _getTextFieldCSSRules(colorPalette, theme) {
         textFieldRules = [
             {
                 selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light.${CSS_PREFIX}-text-field--is-focus .${CSS_PREFIX}-text-field__label
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light.${CSS_PREFIX}-text-field--is-focus:not(.${CSS_PREFIX}-text-field--has-error):not(.${CSS_PREFIX}-text-field--is-valid) .${CSS_PREFIX}-text-field__label
                 `,
                 rule: `color: ${colorPalette.primary.N}`,
             },
             {
                 selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light .${CSS_PREFIX}-text-field__input-wrapper::after
+                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light:not(.${CSS_PREFIX}-text-field--has-error):not(.${CSS_PREFIX}-text-field--is-valid) .${CSS_PREFIX}-text-field__wrapper::after
                 `,
                 rule: `background-color: ${colorPalette.primary.N}`,
             },

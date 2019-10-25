@@ -24,7 +24,7 @@
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-wrapper('dark');
+            @include lumx-text-field-wrapper('light');
         }
 
         #{$self}--has-label & {
