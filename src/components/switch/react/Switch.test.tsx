@@ -152,19 +152,17 @@ describe(`<${Switch.displayName}>`, (): void => {
         it('should use default props', (): void => {
             const { root } = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach(
-                (prop: string): void => {
-                    // tslint:disable-next-line: no-any
-                    let defaultProp: any = DEFAULT_PROPS[prop];
+            Object.keys(DEFAULT_PROPS).forEach((prop: string): void => {
+                // tslint:disable-next-line: no-any
+                let defaultProp: any = DEFAULT_PROPS[prop];
 
-                    if (prop === 'checked') {
-                        prop = 'unchecked';
-                        defaultProp = true;
-                    }
+                if (prop === 'checked') {
+                    prop = 'unchecked';
+                    defaultProp = true;
+                }
 
-                    expect(root).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: defaultProp }));
-                },
-            );
+                expect(root).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: defaultProp }));
+            });
         });
 
         it('should use the given props', (): void => {
@@ -178,25 +176,23 @@ describe(`<${Switch.displayName}>`, (): void => {
 
             const { root } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    if (prop === 'checked') {
-                        if (modifiedProps[prop]) {
-                            expect(root).toHaveClassName(
-                                getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop]! }),
-                            );
-                        } else {
-                            expect(root).toHaveClassName(
-                                getBasicClass({ prefix: CLASSNAME, type: 'unchecked', value: true }),
-                            );
-                        }
+            Object.keys(modifiedProps).forEach((prop: string): void => {
+                if (prop === 'checked') {
+                    if (modifiedProps[prop]) {
+                        expect(root).toHaveClassName(
+                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop]! }),
+                        );
                     } else {
                         expect(root).toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                            getBasicClass({ prefix: CLASSNAME, type: 'unchecked', value: true }),
                         );
                     }
-                },
-            );
+                } else {
+                    expect(root).toHaveClassName(
+                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                    );
+                }
+            });
         });
     });
 
@@ -206,16 +202,14 @@ describe(`<${Switch.displayName}>`, (): void => {
     describe('Events', (): void => {
         const onToggle: jest.Mock = jest.fn();
 
-        beforeEach(
-            (): void => {
-                onToggle.mockClear();
-            },
-        );
+        beforeEach((): void => {
+            onToggle.mockClear();
+        });
 
         it('should trigger `onToggle` when toggled', (): void => {
             const { input } = setup({ onToggle }, false);
 
-            input.simulate('click');
+            input.simulate('change');
             expect(onToggle).toHaveBeenCalled();
         });
     });
@@ -231,11 +225,9 @@ describe(`<${Switch.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
         });
 
         it('should fail when anything else than a text or a <span> is given', (): void => {
@@ -243,11 +235,9 @@ describe(`<${Switch.displayName}>`, (): void => {
 
             const children: ReactNode = <div>Label</div>;
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
         });
 
         it('should not display the `helper` if no `label` is given', (): void => {
