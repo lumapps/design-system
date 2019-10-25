@@ -1,4 +1,5 @@
 ```javascript import
+import { useState } from 'react';
 import { Switch, Theme } from 'LumX';
 ```
 
@@ -8,20 +9,22 @@ import { Switch, Theme } from 'LumX';
 
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
+    const [state, setState] = useState(false);
+
     return (
         <>
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={false} theme={theme}>
+                <Switch checked={state} onToggle={setState} theme={theme}>
                     Default
                 </Switch>
             </div>
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={false} theme={theme} helper={'Helper text'}>
+                <Switch checked={state} onToggle={setState} theme={theme} helper={'Helper text'}>
                     With helper
                 </Switch>
             </div>
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={false} disabled={true} theme={theme}>
+                <Switch checked={state} onToggle={setState} disabled={true} theme={theme}>
                     Disabled
                 </Switch>
             </div>

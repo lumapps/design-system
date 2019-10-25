@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fix stroke-width property on react progress bar.
 -   Fixes to Text Area related to Input resizing and `valid` and `error` states in Material
+-   Make `Switch` a controlled component
 
 ## [0.11.0][] - 2019-10-23
 

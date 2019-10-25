@@ -1,10 +1,10 @@
-import React, { Children, ReactElement, ReactNode, useState } from 'react';
+import React, { Children, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
 
+import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
-import isFunction from 'lodash/isFunction';
 
 import { Theme } from 'LumX';
 import { CSS_PREFIX } from 'LumX/core/constants';
@@ -26,7 +26,7 @@ enum SwitchPosition {
  */
 interface ISwitchProps extends IGenericProps {
     /**
-     * Indicates if it is toggled on or not by default.
+     * Indicates if it is toggled on or not.
      */
     checked?: boolean;
 
@@ -48,10 +48,7 @@ interface ISwitchProps extends IGenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 
-    /**
-     * The function to execute when toggled.
-     * This function will receive the new state.
-     */
+    /** Switch value change handler. */
     onToggle?(enabled: boolean): void;
 }
 type SwitchProps = ISwitchProps;
@@ -132,15 +129,13 @@ const Switch: React.FC<SwitchProps> = ({
 
     const newChildren: ReactNode = _validate({ children, checked, helper, position, theme, ...props });
 
-    const [isChecked, setIsChecked] = useState(Boolean(checked));
     /**
      * Toggle the state of the <Switch> inner checkbox.
+     * @param event Change event.
      */
-    const toggleIsChecked = (): void => {
-        setIsChecked(!isChecked);
-
-        if (isFunction(onToggle)) {
-            onToggle(!isChecked);
+    const toggleIsChecked = (event: React.ChangeEvent<HTMLInputElement>): void => {
+        if (onToggle) {
+            onToggle(get(event, 'target.checked'));
         }
     };
 
@@ -151,11 +146,11 @@ const Switch: React.FC<SwitchProps> = ({
                 handleBasicClasses({
                     prefix: CLASSNAME,
 
-                    checked: Boolean(isChecked),
+                    checked: Boolean(checked),
                     disabled: props.disabled,
                     position,
                     theme,
-                    unchecked: !Boolean(isChecked),
+                    unchecked: !Boolean(checked),
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
@@ -166,8 +161,8 @@ const Switch: React.FC<SwitchProps> = ({
                     type="checkbox"
                     id={switchId}
                     className={`${CLASSNAME}__input-native`}
-                    value={String(isChecked)}
-                    onClick={toggleIsChecked}
+                    checked={checked}
+                    onChange={toggleIsChecked}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>
