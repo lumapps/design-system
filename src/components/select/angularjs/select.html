@@ -15,6 +15,7 @@
                 'lumx-select--has-error': lumx.hasError,
                 'lumx-select--has-placeholder': lumx.placeholder,
                 'lumx-select--is-focus': lumx.isFocus,
+                'lumx-select--has-input-clear': lumx.isClearable && !lumx.multiple && !lumx.isModelEmpty(),
                 'lumx-custom-colors': lumx.customColors }"
 >
     <span class="lumx-select__label" ng-if="::lumx.label && (!lumx.variant || lumx.variant === 'input')">

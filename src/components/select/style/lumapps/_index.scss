@@ -80,6 +80,10 @@
         #{$self}--theme-dark & {
             @include lumx-select-input-indicator('light');
         }
+
+        #{$self}--has-input-clear & {
+            margin-left: $lumx-spacing-unit / 2;
+        }
     }
 
     &__filter {

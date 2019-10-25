@@ -254,6 +254,7 @@ const Select: React.FC<SelectProps> = ({
     const isEmpty = value.length === 0;
     const targetUuid = 'uuid';
     const anchorRef = useRef<HTMLElement>(null);
+    const hasInputClear = onClear && !isMultiple && !isEmpty;
 
     useFocusOnClose(anchorRef.current, isOpen);
     useHandleElementFocus(anchorRef.current, setIsFocus);
@@ -313,7 +314,7 @@ const Select: React.FC<SelectProps> = ({
                                 </div>
                             )}
 
-                            {onClear && !isMultiple && !isEmpty && (
+                            {hasInputClear && (
                                 <IconButton
                                     className={`${CLASSNAME}__input-clear`}
                                     icon={mdiCloseCircle}
@@ -364,6 +365,7 @@ const Select: React.FC<SelectProps> = ({
                 className,
                 handleBasicClasses({
                     hasError,
+                    hasInputClear,
                     hasLabel: Boolean(label),
                     hasMultiple: !isEmpty && isMultiple,
                     hasPlaceholder: Boolean(placeholder),

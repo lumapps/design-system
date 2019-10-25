@@ -1,5 +1,5 @@
 @mixin lumx-select-input-indicator($theme) {
-    margin-left: $lumx-spacing-unit / 2;
+    margin-left: $lumx-spacing-unit;
     color: lumx-theme-color-variant($theme, 'N');
 }
 
