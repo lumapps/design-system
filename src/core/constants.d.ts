@@ -52,9 +52,15 @@ declare const UP_KEY_CODE: number;
  */
 declare const TAB_KEY_CODE: number;
 
+/**
+ * The TAB key code.
+ */
+declare const BACKSPACE_KEY_CODE: number;
+
 /////////////////////////////
 
 export {
+    BACKSPACE_KEY_CODE,
     CSS_PREFIX,
     ENTER_KEY_CODE,
     SPACE_KEY_CODE,

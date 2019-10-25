@@ -77,9 +77,18 @@ const TAB_KEY_CODE = 9;
  */
 const UP_KEY_CODE = 38;
 
+/**
+ * The up key code.
+ *
+ * @type {number}
+ * @constant
+ */
+const BACKSPACE_KEY_CODE = 8;
+
 /////////////////////////////
 
 export {
+    BACKSPACE_KEY_CODE,
     CSS_PREFIX,
     DOWN_KEY_CODE,
     ENTER_KEY_CODE,
