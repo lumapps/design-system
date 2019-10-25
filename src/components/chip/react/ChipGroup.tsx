@@ -2,10 +2,10 @@ import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
 
@@ -44,7 +44,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}ChipGroup`;
 
 /**
  * The default class name and classes prefix for this component.
@@ -63,14 +63,13 @@ const ChipGroup: React.FC<IChipGroupProps> = ({
     children,
     ...props
 }: ChipGroupProps): ReactElement => {
-    const chipGroupClassName = classNames(
-        `${CSS_PREFIX}-chip-group`,
-        `${CSS_PREFIX}-chip-group--align-${align}`,
-        className,
-    );
+    const chipGroupClassName = handleBasicClasses({
+        align,
+        prefix: CLASSNAME,
+    });
 
     return (
-        <div className={chipGroupClassName} {...props}>
+        <div className={classNames(className, chipGroupClassName)} {...props}>
             {children}
         </div>
     );
