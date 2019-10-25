@@ -7,7 +7,7 @@ import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown }
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
-import { Chip, ChipGroup, Dropdown, Icon, Placement, Size, Theme } from 'LumX';
+import { Chip, ChipGroup, Dropdown, Emphasis, Icon, IconButton, Placement, Size, Theme } from 'LumX';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from 'LumX/core/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -314,9 +314,14 @@ const Select: React.FC<SelectProps> = ({
                             )}
 
                             {onClear && !isMultiple && !isEmpty && (
-                                <div className={`${CLASSNAME}__input-clear`} onClick={onClear}>
-                                    <Icon icon={mdiCloseCircle} />
-                                </div>
+                                <IconButton
+                                    className={`${CLASSNAME}__input-clear`}
+                                    icon={mdiCloseCircle}
+                                    emphasis={Emphasis.low}
+                                    size={Size.s}
+                                    theme={theme}
+                                    onClick={onClear}
+                                />
                             )}
 
                             <div className={`${CLASSNAME}__input-indicator`}>
