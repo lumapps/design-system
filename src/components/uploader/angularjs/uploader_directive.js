@@ -26,6 +26,7 @@ function UploaderController() {
      */
     const _DEFAULT_PROPS = {
         aspectRatio: 'horizontal',
+        theme: 'light',
         variant: 'squared',
     };
 
@@ -49,14 +50,20 @@ function UploaderController() {
             classes.push(`${CSS_PREFIX}-uploader--aspect-ratio-${_DEFAULT_PROPS.aspectRatio}`);
         }
 
+        if (angular.isDefined(lumx.size) && lumx.size) {
+            classes.push(`${CSS_PREFIX}-uploader--size-${lumx.size}`);
+        }
+
+        if (angular.isDefined(lumx.theme) && lumx.theme) {
+            classes.push(`${CSS_PREFIX}-uploader--theme-${lumx.theme}`);
+        } else {
+            classes.push(`${CSS_PREFIX}-uploader--theme-${_DEFAULT_PROPS.theme}`);
+        }
+
         if (angular.isDefined(lumx.variant) && lumx.variant) {
             classes.push(`${CSS_PREFIX}-uploader--variant-${lumx.variant}`);
         } else {
             classes.push(`${CSS_PREFIX}-uploader--variant-${_DEFAULT_PROPS.variant}`);
-        }
-
-        if (angular.isDefined(lumx.size) && lumx.size) {
-            classes.push(`${CSS_PREFIX}-uploader--size-${lumx.size}`);
         }
 
         return classes;
@@ -83,12 +90,10 @@ function UploaderDirective() {
             icon: '@?lumxIcon',
             label: '@?lumxLabel',
             size: '@?lumxSize',
+            theme: '@?lumxTheme',
             variant: '@?lumxVariant',
         },
         template,
-        transclude: {
-            action: `${COMPONENT_PREFIX}UploaderAction`,
-        },
     };
 }
 

@@ -1,4 +1,4 @@
-import { mdiUpload } from 'LumX/icons';
+import { mdiImagePlus } from 'LumX/icons';
 
 /////////////////////////////
 
@@ -21,7 +21,7 @@ function DemoUploaderController() {
      * @readonly
      */
     vm.icons = {
-        mdiUpload,
+        mdiImagePlus,
     };
 }
 
