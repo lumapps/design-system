@@ -74,18 +74,21 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
         setShowSuggestions(filterValue.length > 0);
     }
 
+    const hasSuggestions = filteredCities.length > 0;
+
     return (
         <Autocomplete
             theme={theme}
-            isOpen={showSuggestions}
+            isOpen={showSuggestions && hasSuggestions}
             onClose={closeAutocomplete}
             value={filterValue}
             onChange={onChange}
             onFocus={onFocus}
             inputRef={inputRef}
         >
-            <List isClickable>
-                { filteredCities.length > 0 ? filteredCities.map((city, index) => (
+            { hasSuggestions && (
+                <List isClickable>
+                    {filteredCities.map((city, index) => (
                         <ListItem
                             size={ListItemSize.tiny}
                             isClickable
@@ -95,15 +98,9 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
                         >
                             <div>{city.text}</div>
                         </ListItem>
-                    )) : (
-                        <ListItem
-                            size={ListItemSize.tiny}
-                        >
-                            <div>No results</div>
-                        </ListItem>
-                    )
-                }
-            </List>
+                    ))}
+                </List>
+            )}
         </Autocomplete>
     );
 };
