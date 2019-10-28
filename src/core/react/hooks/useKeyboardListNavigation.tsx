@@ -1,6 +1,6 @@
 import { RefObject, SetStateAction, useEffect, useState } from 'react';
 
-import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
+import { DOWN_KEY_CODE, ENTER_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
 
 /////////////////////////////
 
@@ -62,9 +62,6 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
 
         if (keyCode === DOWN_KEY_CODE || keyCode === UP_KEY_CODE) {
             setActiveItemIndex(calculateActiveIndex(keyCode));
-            evt.preventDefault();
-            evt.stopPropagation();
-        } else if (keyCode === TAB_KEY_CODE) {
             evt.preventDefault();
             evt.stopPropagation();
         } else if (keyCode === ENTER_KEY_CODE && onListItemSelected) {
