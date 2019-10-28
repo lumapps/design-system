@@ -15,6 +15,7 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
+    type="input"
   />
   <Dropdown
     anchorRef={

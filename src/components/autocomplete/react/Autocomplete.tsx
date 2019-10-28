@@ -81,12 +81,6 @@ interface IAutocompleteProps extends IGenericProps {
     theme?: Theme;
 
     /**
-     * Text field type (input or textarea).
-     * @see {@link TextFieldProps#type}
-     */
-    type?: TextFieldType;
-
-    /**
      * Children of the Autocomplete. This should be a list of the different
      * suggestions that
      */
@@ -202,7 +196,6 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         label,
         placeholder,
         theme,
-        type,
         onClose,
         offset,
         placement,
@@ -239,7 +232,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 label={label}
                 placeholder={placeholder}
                 theme={theme}
-                type={type}
+                type={TextFieldType.input}
             />
             <Dropdown
                 anchorRef={textFieldRef as React.RefObject<HTMLElement>}
