@@ -64,6 +64,10 @@
     @include lumx-state-transition;
 
     cursor: pointer;
+
+    &.#{$lumx-base-prefix}-chip--is-highlighted {
+        @include lumx-state('state-focus', 'emphasis-medium', 'dark');
+    }
 }
 
 @each $key, $color in $lumx-theme-color-palette {

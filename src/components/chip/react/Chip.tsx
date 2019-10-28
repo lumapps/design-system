@@ -34,6 +34,8 @@ interface IChipProps extends IGenericProps {
     isSelected?: boolean;
     /** Indicates if the chip is currently disabled or not. */
     isDisabled?: boolean;
+    /** Indicates if the chip is currently in a highlighted state or not. */
+    isHighlighted?: boolean;
     /** The size of the chip. */
     size?: ChipSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
@@ -78,6 +80,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     isClickable: false,
     isDisabled: false,
+    isHighlighted: false,
     isSelected: false,
     size: Size.m,
     theme: Theme.light,
@@ -99,6 +102,7 @@ const Chip: React.FC<IChipProps> = ({
     isClickable = DEFAULT_PROPS.isClickable,
     isSelected = DEFAULT_PROPS.isSelected,
     isDisabled = DEFAULT_PROPS.isDisabled,
+    isHighlighted = DEFAULT_PROPS.isHighlighted,
     onAfterClick,
     onBeforeClick,
     onClick,
@@ -160,6 +164,7 @@ const Chip: React.FC<IChipProps> = ({
                     disabled: Boolean(isDisabled),
                     hasAfter: Boolean(hasAfterClick),
                     hasBefore: Boolean(hasBeforeClick),
+                    highlighted: Boolean(isHighlighted),
                     prefix: CLASSNAME,
                     selected: Boolean(isSelected),
                     size,
