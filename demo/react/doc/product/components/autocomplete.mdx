@@ -46,18 +46,43 @@ import { mdiClose } from '@mdi/js';
         }
     ];
 
+    /**
+     * Internal state and ref setup.
+     * - `showSuggestions`: allows to control when the suggestions are displayed or not.
+     * - `filterValue`: value currently displayed on the text field.
+     * - `inputRef`: reference for the text field used to search suggestions
+     */
     const [showSuggestions, setShowSuggestions] = React.useState(false);
     const [filterValue, setFilterValue] = React.useState('');
     const inputRef = React.useRef(null);
 
-    const filteredCities = CITIES.filter(city => city.text.replace(' ', '').toLowerCase().includes(filterValue.replace(' ', '').toLowerCase()));
+    const filteredCities = CITIES.filter((city) => {
+        const noSpacesCity = city.text.replace(' ', '').toLowerCase();
+        return noSpacesCity.includes(filterValue.replace(' ', '').toLowerCase());
+    });
+    /**
+     * Callback executed when the autocomplete closes.
+     * In that scenario, we need to update the internal state to `false`.
+     */
     const closeAutocomplete = () => setShowSuggestions(false);
 
+    /**
+     * Callback triggered when a city is selected from the list. In this case, we want
+     * to add the new city to set the `filterValue` to the selected city text and hide
+     * the suggestions dropdown.
+     * @param {Object} city      City selected from the list.
+     * @param {string} city.text City display text.
+     */
     const setSelectedCity = (city) => {
         setFilterValue(city.text);
         setShowSuggestions(false);
     }
 
+    /**
+     * Function triggered by the `onChange` event on the Text field. Here, we update the internal state
+     * and set the suggestions as visible depending on whether the query is valid.
+     * @param {string} value New value entered on the text field.
+     */
     const onChange = (value) => {
         setFilterValue(value);
         setShowSuggestions(value.length > 0);
@@ -71,6 +96,10 @@ import { mdiClose } from '@mdi/js';
         setSelectedCity,
     );
 
+    /**
+     * Callback triggered when the Text field is focused on. In this scenario,
+     * we want to show the suggestion list if there is some text entered.
+     */
     const onFocus = (evt) => {
         setShowSuggestions(filterValue.length > 0);
     }
@@ -150,6 +179,10 @@ import { mdiClose } from '@mdi/js';
         }
     ];
 
+    const INITIAL_STATE_ACTIVE_CHIP = -1;
+    const INITIAL_STATE_SHOW_SUGGESTIONS = false;
+    const INITIAL_STATE_NAVIGATION_SUGGESTION = undefined;
+
     /**
      * Internal state and ref setup.
      * - `showSuggestions`: allows to control when the suggestions are displayed or not.
@@ -160,11 +193,11 @@ import { mdiClose } from '@mdi/js';
      * - `selectedValues`: list of currently selected values.
      * - `inputRef`: reference for the text field used to search suggestions
      */
-    const [showSuggestions, setShowSuggestions] = React.useState(false);
+    const [showSuggestions, setShowSuggestions] = React.useState(INITIAL_STATE_SHOW_SUGGESTIONS);
     const [wasBackspacePressed, setWasBackspacePressed] = React.useState(false);
-    const [activeChip, setActiveChip] = React.useState(-1);
+    const [activeChip, setActiveChip] = React.useState(INITIAL_STATE_ACTIVE_CHIP);
     const [filterValue, setFilterValue] = React.useState('');
-    const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(undefined);
+    const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(INITIAL_STATE_NAVIGATION_SUGGESTION);
     const [selectedValues, setSelectedValues] = React.useState([]);
     const inputRef = React.useRef(null);
 
@@ -179,13 +212,18 @@ import { mdiClose } from '@mdi/js';
      * Callback executed when the autocomplete closes.
      * In that scenario, we need to update the internal state to `false`.
      */
-    const closeAutocomplete = () => setShowSuggestions(false);
+    const closeAutocomplete = () => setShowSuggestions(INITIAL_STATE_SHOW_SUGGESTIONS);
 
+    /**
+     * Callback triggered when a city is selected from the list. In this case, we want
+     * to add the new city to the `selectedValues` list, and reset the `filterValue`,
+     * `showSuggestions` and `navigationSuggestionValue` to their original state.
+     */
     const setSelectedCity = (city) => {
         setSelectedValues([...selectedValues, city]);
         setFilterValue('');
-        setShowSuggestions(false);
-        setNavigationSuggestionValue(undefined);
+        setShowSuggestions(INITIAL_STATE_SHOW_SUGGESTIONS);
+        setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
     }
 
     /**
@@ -199,7 +237,8 @@ import { mdiClose } from '@mdi/js';
                 text: newCity,
                 id: newCity.replace(' ', '').toLowerCase()
             });
-            setNavigationSuggestionValue(undefined);
+
+            setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
         }
     };
 
@@ -253,16 +292,16 @@ import { mdiClose } from '@mdi/js';
             if (wasBackspacePressed) {
                 selectedValues.pop();
                 setSelectedValues(selectedValues);
-                setActiveChip(-1);
-                setWasBackspacePressed(false);
+                setActiveChip(INITIAL_STATE_ACTIVE_CHIP);
             } else {
                 setActiveChip(selectedValues.length - 1);
-                setWasBackspacePressed(true);
             }
+
+            setWasBackspacePressed(!wasBackspacePressed);
         } else if (navigationSuggestionValue) {
             onChange(navigationSuggestionValue);
-            setNavigationSuggestionValue(undefined);
-            setActiveChip(-1);
+            setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
+            setActiveChip(INITIAL_STATE_ACTIVE_CHIP);
         }
     };
 
@@ -278,6 +317,10 @@ import { mdiClose } from '@mdi/js';
         true,
     );
 
+    /**
+     * Callback triggered when the Text field is focused on. In this scenario,
+     * we want to show the suggestion list if there is some text entered.
+     */
     const onFocus = (evt) => {
         setShowSuggestions(filterValue.length > 0);
     }

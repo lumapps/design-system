@@ -2,9 +2,12 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
+import { List, ListItem, ListItemSize } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 
 import { AutocompleteMultiple, AutocompleteMultipleProps, CLASSNAME } from './AutocompleteMultiple';
+
+import { CITIES as suggestions } from './__mockData__';
 
 /////////////////////////////
 
@@ -23,6 +26,11 @@ interface ISetup extends ICommonSetup {
      * The <div> element that holds the popover content displayed by the autocomplete
      */
     wrapper: Wrapper;
+}
+
+interface ISuggestion {
+    id: number;
+    text: string;
 }
 
 /////////////////////////////
@@ -52,7 +60,30 @@ describe(`<${AutocompleteMultiple.displayName}>`, (): void => {
         // Here is an example of a basic rendering check, with snapshot.
 
         it('should render correctly', (): void => {
-            const { wrapper } = setup();
+            const { wrapper } = setup({
+                children: (
+                    <List>
+                        {suggestions.map((suggestion: ISuggestion) => (
+                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                                <div>{suggestion.text}</div>
+                            </ListItem>
+                        ))}
+                    </List>
+                ),
+                chips: [
+                    {
+                        id: 'lyon',
+                        text: 'Lyon',
+                    },
+                    {
+                        id: 'montevideo',
+                        text: 'Montevideo',
+                    },
+                ],
+                isOpen: true,
+                onChange: jest.fn(),
+                value: '',
+            });
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
@@ -65,23 +96,7 @@ describe(`<${AutocompleteMultiple.displayName}>`, (): void => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', (): void => {
-        it('should use default props', (): void => {
-            const { wrapper }: ISetup = setup({
-                value: 'Ly',
-                values: [
-                    {
-                        id: 'lyon',
-                        text: 'Lyon',
-                    },
-                    {
-                        id: 'montevideo',
-                        text: 'Montevideo',
-                    },
-                ],
-            });
-
-            expect(wrapper).toHaveClassName(CLASSNAME);
-        });
+        // Nothing to do here.
     });
 
     /////////////////////////////

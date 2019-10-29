@@ -2,14 +2,17 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
+import { List, ListItem, ListItemSize } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 
 import { Autocomplete, AutocompleteProps, CLASSNAME } from './Autocomplete';
 
+import { CITIES as suggestions } from './__mockData__';
+
 /////////////////////////////
 
 /**
- * Define the overriding properties waited by the `setup` function.
+ * Define the overriding properties expected by the `setup` function.
  */
 type ISetupProps = Partial<AutocompleteProps>;
 
@@ -20,9 +23,24 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * The <div> element that holds the popover content.
+     * The <div> element that holds the autocomplete content.
      */
     wrapper: Wrapper;
+
+    /**
+     * Text Field component.
+     */
+    textField: Wrapper;
+
+    /**
+     * Dropdown component.
+     */
+    dropdown: Wrapper;
+}
+
+interface ISuggestion {
+    id: number;
+    text: string;
 }
 
 /////////////////////////////
@@ -40,8 +58,13 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
     // @ts-ignore
     const wrapper: Wrapper = renderer(<Autocomplete {...props} />);
 
+    const textField: Wrapper = wrapper.find('TextField');
+    const dropdown: Wrapper = wrapper.find('Dropdown');
+
     return {
+        dropdown,
         props,
+        textField,
         wrapper,
     };
 };
@@ -52,12 +75,28 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
         // Here is an example of a basic rendering check, with snapshot.
 
         it('should render correctly', (): void => {
-            const { wrapper } = setup();
+            const { wrapper, textField, dropdown } = setup({
+                children: (
+                    <List>
+                        {suggestions.map((suggestion: ISuggestion) => (
+                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                                <div>{suggestion.text}</div>
+                            </ListItem>
+                        ))}
+                    </List>
+                ),
+                isOpen: true,
+                onChange: jest.fn(),
+                value: '',
+            });
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
 
             expect(wrapper).toHaveClassName(CLASSNAME);
+
+            expect(textField).toHaveLength(1);
+            expect(dropdown).toHaveLength(1);
         });
     });
 
@@ -70,13 +109,99 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
 
             expect(wrapper).toHaveClassName(CLASSNAME);
         });
+
+        it('should render correctly when the dropdown is closed', (): void => {
+            const { wrapper } = setup({
+                children: (
+                    <List>
+                        {suggestions.map((suggestion: ISuggestion) => (
+                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                                <div>{suggestion.text}</div>
+                            </ListItem>
+                        ))}
+                    </List>
+                ),
+                isOpen: false,
+                onChange: jest.fn(),
+                value: '',
+            });
+            expect(wrapper).toMatchSnapshot();
+
+            expect(wrapper).toExist();
+
+            expect(wrapper).toHaveClassName(CLASSNAME);
+        });
     });
 
     /////////////////////////////
 
     // 3. Test events.
     describe('Events', (): void => {
-        // Nothing to do here.
+        it('should trigger the onChange callback when there is a change on the Text Field', (): void => {
+            const onChange = jest.fn();
+            const { textField } = setup({
+                children: (
+                    <List>
+                        {suggestions.map((suggestion: ISuggestion) => (
+                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                                <div>{suggestion.text}</div>
+                            </ListItem>
+                        ))}
+                    </List>
+                ),
+                isOpen: false,
+                onChange,
+                value: '',
+            });
+
+            textField.simulate('change');
+
+            expect(onChange).toHaveBeenCalled();
+        });
+
+        it('should trigger the onFocus callback when the text field is focused on', (): void => {
+            const onFocus = jest.fn();
+            const { textField } = setup({
+                children: (
+                    <List>
+                        {suggestions.map((suggestion: ISuggestion) => (
+                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                                <div>{suggestion.text}</div>
+                            </ListItem>
+                        ))}
+                    </List>
+                ),
+                isOpen: false,
+                onFocus,
+                value: '',
+            });
+
+            textField.simulate('focus');
+
+            expect(onFocus).toHaveBeenCalled();
+        });
+
+        it('should trigger the onBlur callback when the Text Field loses focus', (): void => {
+            const onBlur = jest.fn();
+            const { textField } = setup({
+                children: (
+                    <List>
+                        {suggestions.map((suggestion: ISuggestion) => (
+                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                                <div>{suggestion.text}</div>
+                            </ListItem>
+                        ))}
+                    </List>
+                ),
+                isOpen: false,
+                onBlur,
+                value: '',
+            });
+
+            textField.simulate('blur');
+
+            expect(onBlur).toHaveBeenCalled();
+        });
     });
     /////////////////////////////
 

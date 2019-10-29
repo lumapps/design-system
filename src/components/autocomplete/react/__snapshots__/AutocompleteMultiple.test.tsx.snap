@@ -2,7 +2,96 @@
 
 exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 1`] = `
 <Autocomplete
-  chips={<ChipGroup />}
+  chips={
+    Array [
+      Object {
+        "id": "lyon",
+        "text": "Lyon",
+      },
+      Object {
+        "id": "montevideo",
+        "text": "Montevideo",
+      },
+    ]
+  }
   className="lumx-autocomplete-multiple"
-/>
+  isOpen={true}
+  onChange={[MockFunction]}
+  value=""
+>
+  <List>
+    <ListItem
+      isClickable={true}
+      key="losangeles"
+      size="tiny"
+    >
+      <div>
+        Los Angeles
+      </div>
+    </ListItem>
+    <ListItem
+      isClickable={true}
+      key="sanfrancisco"
+      size="tiny"
+    >
+      <div>
+        San Francisco
+      </div>
+    </ListItem>
+    <ListItem
+      isClickable={true}
+      key="paris"
+      size="tiny"
+    >
+      <div>
+        Paris
+      </div>
+    </ListItem>
+    <ListItem
+      isClickable={true}
+      key="montpellier"
+      size="tiny"
+    >
+      <div>
+        Montpellier
+      </div>
+    </ListItem>
+    <ListItem
+      isClickable={true}
+      key="bordeaux"
+      size="tiny"
+    >
+      <div>
+        Bordeaux
+      </div>
+    </ListItem>
+    <ListItem
+      isClickable={true}
+      key="toulouse"
+      size="tiny"
+    >
+      <div>
+        Toulouse
+      </div>
+    </ListItem>
+    <ListItem
+      isClickable={true}
+      key="lyon"
+      size="tiny"
+    >
+      <div>
+        Lyon
+      </div>
+    </ListItem>
+    <ListItem
+      isClickable={true}
+      key="montevideo"
+      size="tiny"
+    >
+      <div>
+        Montevideo
+      </div>
+    </ListItem>
+  </List>
+</Autocomplete>
 `;
