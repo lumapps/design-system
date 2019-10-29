@@ -261,6 +261,9 @@ import { mdiClose } from '@mdi/js';
     const onChange = (value) => {
         setFilterValue(value);
         setShowSuggestions(value.length > 0);
+        setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
+        setActiveChip(INITIAL_STATE_ACTIVE_CHIP);
+        setWasBackspacePressed(false);
     };
 
     /**
@@ -338,7 +341,6 @@ import { mdiClose } from '@mdi/js';
             selectedChipRender={(city, index) => (
                         <Chip
                             key={index}
-                            isClickable
                             after={<Icon icon={mdiClose} size={Size.xxs} />}
                             size={Size.s}
                             onAfterClick={event => clearSelectedValue(event, city)}
