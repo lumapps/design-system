@@ -6,6 +6,8 @@ export * from './components';
 
 export { Avatar, AvatarProps } from './components/avatar/react/Avatar';
 
+export { Autocomplete } from './components/autocomplete/react/Autocomplete';
+
 export { Button, ButtonEmphasis, ButtonProps } from './components/button/react/Button';
 
 export { ButtonGroup, ButtonGroupProps } from './components/button/react/ButtonGroup';
@@ -83,7 +85,7 @@ export { Tabs, TabsProps, TabsLayout, TabsPosition } from './components/tabs/rea
 
 export { Tab, TabProps } from './components/tabs/react/Tab';
 
-export { TextField, TextFieldProps } from './components/text-field/react/TextField';
+export { TextField, TextFieldProps, TextFieldType } from './components/text-field/react/TextField';
 
 export { Tooltip, TooltipProps, TooltipPlacement } from './components/tooltip/react/Tooltip';
 

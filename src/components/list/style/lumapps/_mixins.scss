@@ -36,6 +36,16 @@
     }
 }
 
+@mixin lumx-list-item-highlighted() {
+    cursor: pointer;
+
+    @include lumx-state(state-hover, emphasis-low, dark);
+
+    &:active {
+        @include lumx-state(state-active, emphasis-low, dark);
+    }
+}
+
 @mixin lumx-list-item-selected() {
     @include lumx-state-as-selected('state-default', 'dark');
 
