@@ -4435,6 +4435,14 @@ downgrade-root@^1.0.0:
     default-uid "^1.0.0"
     is-root "^1.0.0"
 
+dts-bundle-generator@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/dts-bundle-generator/-/dts-bundle-generator-1.6.1.tgz#08b09a3b282d615d4699fe78430815fc012e519e"
+  integrity sha512-PXNbaDgYvJSCbAOKHqDxml0uojfRvrVHkKc7v/lcxe8vuGxvkZsEcijQp4KHuEvtLt1whVddhZmTrGqXCW1p7w==
+  dependencies:
+    typescript ">=2.6.1"
+    yargs "~11.0.0"
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -14333,6 +14341,14 @@ trough@^1.0.0:
   dependencies:
     glob "^7.1.2"
 
+ts-declaration-webpack-plugin@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ts-declaration-webpack-plugin/-/ts-declaration-webpack-plugin-1.2.0.tgz#865361ae5e4ca710ecd80aaec0ce7033904e3792"
+  integrity sha512-Bxt+TrqcsXDtwXy1V+uN2vgCTZFBCJljio51p5+SDy9mRxozwKF/d/OOYkYQxKYrEfKeD6rAlgm11Q0Z5naYpA==
+  dependencies:
+    dts-bundle-generator "^1.6.1"
+    loader-utils "^1.1.0"
+
 ts-jest@^24.1.0:
   version "24.1.0"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-24.1.0.tgz#2eaa813271a2987b7e6c3fefbda196301c131734"
@@ -14546,6 +14562,11 @@ typescript@3.5.x:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
   integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
+
+typescript@>=2.6.1:
+  version "3.6.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.4.tgz#b18752bb3792bc1a0281335f7f6ebf1bbfc5b91d"
+  integrity sha512-unoCll1+l+YK4i4F8f22TaNVPRHcD9PA3yCuZ8g5e0qGqlVlJ/8FSateOLLSagn+Yg5+ZwuPkL8LFUc0Jcvksg==
 
 typescript@^2.5.1:
   version "2.9.2"
@@ -14789,6 +14810,11 @@ universalify@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
+
+unminified-webpack-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/unminified-webpack-plugin/-/unminified-webpack-plugin-2.0.0.tgz#9cd9c3f420003e968d6ed5ea365085be5e72df14"
+  integrity sha512-Um2Yw2OfAhRuIXC9G3CDlR2Df1TkYRihwS4QEuQs5qe/nq+l1OEH+Getq9OjHspqtjR+e09m7rUQWi5fNfYj4g==
 
 unpartial@^0.6.1:
   version "0.6.3"
@@ -15723,6 +15749,24 @@ yargs@^7.0.0:
     which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^5.0.0"
+
+yargs@~11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-11.0.0.tgz#c052931006c5eee74610e5fc0354bedfd08a201b"
+  integrity sha512-Rjp+lMYQOWtgqojx1dEWorjCofi1YN7AoFvYV7b1gx/7dAAeuI4kN5SZiEvr0ZmsZTOpDRcCqrpI10L31tFkBw==
+  dependencies:
+    cliui "^4.0.0"
+    decamelize "^1.1.1"
+    find-up "^2.1.0"
+    get-caller-file "^1.0.1"
+    os-locale "^2.0.0"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^2.0.0"
+    which-module "^2.0.0"
+    y18n "^3.2.1"
+    yargs-parser "^9.0.2"
 
 yeoman-character@^1.0.0:
   version "1.1.0"
