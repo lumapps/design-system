@@ -21,11 +21,11 @@ const ButtonEmphasis = Emphasis;
 /**
  * Defines the props of the component.
  */
-interface IProps extends BaseButtonProps {
+interface IBaseButtonProps extends BaseButtonProps {
     /**
      * Button content.
      */
-    children: ReactNode;
+    children?: ReactNode;
 
     /**
      * Adds an icon to the left of the button label.
@@ -39,7 +39,7 @@ interface IProps extends BaseButtonProps {
      */
     rightIcon?: string;
 }
-type ButtonProps = IProps;
+type ButtonProps = IBaseButtonProps;
 
 /////////////////////////////
 

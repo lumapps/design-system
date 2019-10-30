@@ -12,11 +12,11 @@ import { Button } from './Button';
 /**
  * Defines the props of the component
  */
-interface IProps extends IGenericProps {
-    /* Ref passed to the wrapper. */
+interface IButtonGroupProps extends IGenericProps {
+    /** Ref passed to the wrapper. */
     buttonGroupRef?: Ref<HTMLDivElement>;
 }
-type ButtonGroupProps = IProps;
+type ButtonGroupProps = IButtonGroupProps;
 
 /////////////////////////////
 

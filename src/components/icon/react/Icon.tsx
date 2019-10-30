@@ -14,7 +14,7 @@ import { handleBasicClasses } from 'LumX/core/utils';
 /**
  * Defines the props of the component.
  */
-interface IProps extends IGenericProps {
+interface IIconProps extends IGenericProps {
     /**
      * The icon SVG path draw code (`d` property of the `<path>` SVG element).
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
@@ -41,7 +41,7 @@ interface IProps extends IGenericProps {
      */
     size?: Size;
 }
-type IconProps = IProps;
+type IconProps = IIconProps;
 
 /////////////////////////////
 

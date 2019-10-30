@@ -1,4 +1,4 @@
-import React, { Children, ReactElement } from 'react';
+import React, { Children, ReactElement, ReactNode } from 'react';
 
 import { SideNavigationItem, Theme } from 'LumX';
 import { handleBasicClasses } from 'LumX/core/utils';
@@ -13,7 +13,7 @@ import classNames from 'classnames';
  */
 interface ISideNavigationProps extends IGenericProps {
     /**  Side navigation content (should use `<SideNavigationItem>`). */
-    children: ReactElement | ReactElement[];
+    children: ReactNode;
 
     /** Theme. */
     theme?: Theme;

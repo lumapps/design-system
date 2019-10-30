@@ -18,7 +18,7 @@ import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
  */
 declare module 'react' {
     // tslint:disable-next-line: interface-name
-    interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
+    interface ImgHTMLAttributes<T> extends React.HTMLAttributes<T> {
         loading?: 'auto' | 'eager' | 'lazy';
     }
 }
