@@ -1,9 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import classNames from 'classnames';
 
-import { RadioButton } from 'LumX';
+import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -14,9 +13,9 @@ import { handleBasicClasses } from 'LumX/core/utils';
  */
 interface IRadioGroupProps extends IGenericProps {
     /**
-     * List of radio buttons in the group.
+     * List of radio buttons in the group (should use <RadioButton>).
      */
-    children: RadioButton[];
+    children: ReactNode;
 }
 type RadioGroupProps = IRadioGroupProps;
 

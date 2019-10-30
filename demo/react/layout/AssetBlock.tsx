@@ -4,6 +4,16 @@ import React, { ReactElement } from 'react';
 
 import { mdiDownload, mdiFile } from 'LumX/icons';
 
+/**
+ * https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#adding-non-standard-attributes
+ */
+declare module 'react' {
+    // tslint:disable-next-line: interface-name
+    interface ImgHTMLAttributes<T> extends React.HTMLAttributes<T> {
+        srcset?: string;
+    }
+}
+
 interface IAssetBlock {
     /**
      * Asset download URL.

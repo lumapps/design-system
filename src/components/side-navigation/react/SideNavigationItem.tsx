@@ -1,4 +1,4 @@
-import React, { Children, ReactElement } from 'react';
+import React, { Children, ReactElement, ReactNode } from 'react';
 
 import { Icon, Size } from 'LumX';
 import { Emphasis } from 'LumX/components/index';
@@ -14,7 +14,7 @@ import { isEmpty } from 'lodash';
  */
 interface ISideNavigationItemProps extends IGenericProps {
     /** Side navigation item content (should use `<SideNavigationItem>`). */
-    children?: ReactElement | ReactElement[];
+    children?: ReactNode;
 
     /** Menu item emphasis. */
     emphasis?: Emphasis;

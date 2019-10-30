@@ -100,7 +100,7 @@ const EMPHASIS_BY_LEVEL = {
     '2': Emphasis.low,
 };
 
-const generateNav = (goTo: (path: string) => void, location: string, items: Item[]): ReactElement => {
+const generateNav = (goTo: (path: string) => void, location: string, items: Item[]): ReactNode => {
     const generateNavItem = (parent: string[], item?: Item | Item[]): ReactNode => {
         if (!item || Array.isArray(item)) {
             return castArray(item).map((child: Item) => generateNavItem(parent, child));

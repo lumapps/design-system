@@ -10,14 +10,14 @@ import { getRootClassName } from 'LumX/core/react/utils';
 /**
  * Defines the props of the component.
  */
-interface IProps extends BaseButtonProps {
+interface IIconButtonProps extends BaseButtonProps {
     /**
      * The icon used as the button label.
      * @see {@link IconProps#icon}
      */
     icon: string;
 }
-type IconButtonProps = IProps;
+type IconButtonProps = IIconButtonProps;
 
 /////////////////////////////
 

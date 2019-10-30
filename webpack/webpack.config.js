@@ -65,7 +65,6 @@ const baseConfig = {
                 loader: 'awesome-typescript-loader',
                 options: {
                     reportFiles: ['**/*.(!test|spec).(ts|tsx)'],
-                    silent: true,
                     useCache: true,
                 },
             },

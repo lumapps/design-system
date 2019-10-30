@@ -1,8 +1,8 @@
-import React, { Children, ReactElement, cloneElement } from 'react';
+import React, { Children, ReactElement, ReactNode, cloneElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Tab, Theme } from 'LumX';
+import { Theme } from 'LumX';
 import { CSS_PREFIX } from 'LumX/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -27,17 +27,17 @@ enum TabsPosition {
  * Defines the props of the component.
  */
 interface ITabsProps extends IGenericProps {
-    /* Active tab */
+    /** Active tab */
     activeTab?: number;
-    /* Component tabs */
-    children: Tab[];
-    /* Tabs Layout */
+    /** Component tabs */
+    children: ReactNode;
+    /** Tabs Layout */
     layout?: TabsLayout;
-    /* Function to trigger on tab click */
+    /** Function to trigger on tab click */
     onTabClick: CallableFunction;
-    /* Tabs Position */
+    /** Tabs Position */
     position?: TabsPosition;
-    /* Component theme */
+    /** Component theme */
     theme?: Theme;
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
@@ -96,7 +96,7 @@ const Tabs: React.FC<TabsProps> = ({
     useCustomColors,
     ...props
 }: TabsProps): ReactElement => {
-    const tabs: Tab[] = Children.map(children, (tab: Tab, index: number) => {
+    const tabs: ReactElement[] = Children.map(children as ReactElement[], (tab: ReactElement, index: number) => {
         return cloneElement(tab, { key: index, index, isActive: activeTab === index, onTabClick });
     });
 

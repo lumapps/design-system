@@ -1,6 +1,13 @@
-import { ElementPosition, Placement } from 'LumX/components/popover/react/Popover';
+import { Placement } from 'LumX/components/popover/react/Popover';
 
-const calculatePopoverPlacement = (placement: Placement, anchor: ClientRect, popover: ClientRect): ElementPosition => {
+const calculatePopoverPlacement = (
+    placement: Placement,
+    anchor: ClientRect,
+    popover: ClientRect,
+): {
+    x: number;
+    y: number;
+} => {
     const splittedPlacement = placement.split('-');
     const verticalPlacement = splittedPlacement[0];
     const horizontalPlacement = splittedPlacement[1];
