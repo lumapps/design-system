@@ -4,7 +4,7 @@ export { useComputePosition, useComputePositionType } from './useComputePosition
 
 export { useInterval } from './useInterval';
 
-export { useKeyboardListNavigation } from './useKeyboardListNavigation';
+export { useKeyboardListNavigation, useKeyboardListNavigationType } from './useKeyboardListNavigation';
 
 export { useBooleanState } from './useBooleanState';
 
