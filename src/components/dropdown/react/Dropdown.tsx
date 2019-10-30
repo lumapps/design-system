@@ -93,7 +93,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
     onInfiniteScroll,
     ...props
-}: DropdownProps): React.ReactElement => {
+}: DropdownProps): React.ReactElement | null => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
     const popoverRef: React.RefObject<HTMLDivElement> = useRef(null);
 
@@ -152,7 +152,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         [anchorRef],
     );
 
-    return (
+    return showDropdown ? (
         <Popover
             popoverRect={computedPosition}
             popoverRef={popoverRef}
@@ -162,7 +162,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         >
             {popperElement}
         </Popover>
-    );
+    ) : null;
 };
 Dropdown.displayName = COMPONENT_NAME;
 

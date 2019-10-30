@@ -350,22 +350,19 @@ import { mdiClose } from '@mdi/js';
                         </Chip>
             )}
         >
-            <List isClickable>
-                { hasSuggestions && filteredCities.map((city, index) => (
-                    <List>
-                        {filteredCities.map((city, index) => (
-                            <ListItem
-                                size={Size.tiny}
-                                isClickable
-                                key={city.id}
-                                isHighlighted={index === activeItemIndex}
-                                onItemSelected={() => setSelectedCity(city)}
-                            >
-                                <div>{city.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
+            <List>
+                {filteredCities.map((city, index) => (
+                    <ListItem
+                        size={ListItemSize.tiny}
+                        isClickable
+                        key={city.id}
+                        isHighlighted={index === activeItemIndex}
+                        onItemSelected={() => setSelectedCity(city)}
+                    >
+                        <div>{city.text}</div>
+                    </ListItem>
                 ))}
+            </List>
         </AutocompleteMultiple>
     );
 };
@@ -373,4 +370,4 @@ import { mdiClose } from '@mdi/js';
 
 ### Properties
 
-<PropTable component="Autocomplete" />
+<PropTable component="AutocompleteMultiple" />
