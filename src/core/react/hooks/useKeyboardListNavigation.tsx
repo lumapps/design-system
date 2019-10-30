@@ -46,21 +46,16 @@ const INITIAL_INDEX = -1;
  * This custom hook provides the necessary set of functions and values to properly navigate
  * a list using the keyboard.
  */
-const useKeyboardListNavigation: useKeyboardListNavigationType = (
-    items: object[],
+function useKeyboardListNavigation<T>(
+    items: T[],
     ref: RefObject<HTMLElement>,
-    onListItemSelected?: (itemSelected: object) => {},
-    onListItemNavigated?: (itemSelected: object) => {},
-    onEnterPressed?: (itemSelected: object) => {},
-    onBackspacePressed?: (evt: KeyboardEvent) => {},
+    onListItemSelected: (itemSelected: T) => {},
+    onListItemNavigated: (itemSelected: T) => {},
+    onEnterPressed: (itemSelected: T) => {},
+    onBackspacePressed: (evt: KeyboardEvent) => {},
     keepFocusAfterSelection: boolean = false,
     initialIndex: number = INITIAL_INDEX,
-): {
-    activeItemIndex: number;
-    onKeyboardNavigation(evt: KeyboardEvent): void;
-    resetActiveIndex(): void;
-    setActiveItemIndex(value: SetStateAction<number>): void;
-} => {
+): IUseKeyboardListNavigation {
     const [activeItemIndex, setActiveItemIndex] = useState(initialIndex);
 
     /**
@@ -106,7 +101,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
         setActiveItemIndex(nextActiveIndex);
         preventDefaultAndStopPropagation(evt);
         if (onListItemNavigated) {
-            const selectedItem: object = items[nextActiveIndex];
+            const selectedItem: T = items[nextActiveIndex];
             // tslint:disable-next-line: no-inferred-empty-object-type
             onListItemNavigated(selectedItem);
         }
@@ -138,7 +133,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
             (evt.currentTarget as HTMLElement).blur();
         }
 
-        const selectedItem: object = items[activeItemIndex];
+        const selectedItem: T = items[activeItemIndex];
 
         if (selectedItem) {
             // tslint:disable-next-line: no-inferred-empty-object-type
@@ -202,6 +197,6 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
         resetActiveIndex,
         setActiveItemIndex,
     };
-};
+}
 
-export { useKeyboardListNavigation, useKeyboardListNavigationType };
+export { useKeyboardListNavigation };
