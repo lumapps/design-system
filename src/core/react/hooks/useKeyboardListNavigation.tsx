@@ -46,16 +46,21 @@ const INITIAL_INDEX = -1;
  * This custom hook provides the necessary set of functions and values to properly navigate
  * a list using the keyboard.
  */
-function useKeyboardListNavigation<T>(
-    items: T[],
+const useKeyboardListNavigation: useKeyboardListNavigationType = (
+    items: object[],
     ref: RefObject<HTMLElement>,
-    onListItemSelected: (itemSelected: T) => {},
-    onListItemNavigated: (itemSelected: T) => {},
-    onEnterPressed: (itemSelected: T) => {},
-    onBackspacePressed: (evt: KeyboardEvent) => {},
+    onListItemSelected?: (itemSelected: object) => {},
+    onListItemNavigated?: (itemSelected: object) => {},
+    onEnterPressed?: (itemSelected: object) => {},
+    onBackspacePressed?: (evt: KeyboardEvent) => {},
     keepFocusAfterSelection: boolean = false,
     initialIndex: number = INITIAL_INDEX,
-): IUseKeyboardListNavigation {
+): {
+    activeItemIndex: number;
+    onKeyboardNavigation(evt: KeyboardEvent): void;
+    resetActiveIndex(): void;
+    setActiveItemIndex(value: SetStateAction<number>): void;
+} => {
     const [activeItemIndex, setActiveItemIndex] = useState(initialIndex);
 
     /**
@@ -101,7 +106,7 @@ function useKeyboardListNavigation<T>(
         setActiveItemIndex(nextActiveIndex);
         preventDefaultAndStopPropagation(evt);
         if (onListItemNavigated) {
-            const selectedItem: T = items[nextActiveIndex];
+            const selectedItem: object = items[nextActiveIndex];
             // tslint:disable-next-line: no-inferred-empty-object-type
             onListItemNavigated(selectedItem);
         }
@@ -133,7 +138,7 @@ function useKeyboardListNavigation<T>(
             (evt.currentTarget as HTMLElement).blur();
         }
 
-        const selectedItem: T = items[activeItemIndex];
+        const selectedItem: object = items[activeItemIndex];
 
         if (selectedItem) {
             // tslint:disable-next-line: no-inferred-empty-object-type
@@ -197,6 +202,6 @@ function useKeyboardListNavigation<T>(
         resetActiveIndex,
         setActiveItemIndex,
     };
-}
+};
 
-export { useKeyboardListNavigation };
+export { useKeyboardListNavigation, useKeyboardListNavigationType };
