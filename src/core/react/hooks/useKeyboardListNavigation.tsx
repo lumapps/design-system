@@ -6,7 +6,7 @@ import get from 'lodash/get';
 
 /////////////////////////////
 
-interface IUseKeyboardListNavigation {
+interface IUseKeyboardListNavigationType {
     /** the current active index */
     activeItemIndex: number;
     /** callback to be used when a key is pressed. usually used with the native prop `onKeyDown` */
@@ -17,6 +17,25 @@ interface IUseKeyboardListNavigation {
     setActiveItemIndex(value: SetStateAction<number>): void;
 }
 
+type useKeyboardListNavigationType = (
+    /** the list of items that will be navigated using the keyboard */
+    items: object[],
+    /** A reference to the element that is controlling the navigation. */
+    ref: RefObject<HTMLElement>,
+    /** callback to be executed when the ENTER key is pressed on an item */
+    onListItemSelected: (itemSelected: object) => {},
+    /** callback to be executed when the Arrow keys are pressed */
+    onListItemNavigated: (itemSelected: object) => {},
+    /** callback to be executed when the ENTER key is pressed */
+    onEnterPressed: (itemSelected: object) => {},
+    /** callback to be executed when the BACKSPACE key is pressed */
+    onBackspacePressed: () => {},
+    /** determines whether after selecting an item, the focus should be maintained on the current target or not  */
+    keepFocusAfterSelection: boolean,
+    /** where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0` */
+    initialIndex: number,
+) => IUseKeyboardListNavigationType;
+
 /////////////////////////////
 
 const INITIAL_INDEX = -1;
@@ -26,25 +45,22 @@ const INITIAL_INDEX = -1;
 /**
  * This custom hook provides the necessary set of functions and values to properly navigate
  * a list using the keyboard.
- * @param items - the list of items that will be navigated using the keyboard
- * @param ref - A reference to the element that is controlling the navigation.
- * @param onListItemSelected - callback to be executed when the ENTER key is pressed on an item
- * @param onListItemNavigated - callback to be executed when the Arrow keys are pressed
- * @param onEnterPressed - callback to be executed when the ENTER key is pressed
- * @param onBackspacePressed - callback to be executed when the BACKSPACE key is pressed
- * @param keepFocusAfterSelection - determines whether after selecting an item, the focus should be maintained on the current target or not
- * @param initialIndex - where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0`
  */
-function useKeyboardListNavigation<T>(
-    items: T[],
+const useKeyboardListNavigation: useKeyboardListNavigationType = (
+    items: object[],
     ref: RefObject<HTMLElement>,
-    onListItemSelected: (itemSelected: T) => {},
-    onListItemNavigated: (itemSelected: T) => {},
-    onEnterPressed: (itemSelected: T) => {},
-    onBackspacePressed: (evt: KeyboardEvent) => {},
+    onListItemSelected?: (itemSelected: object) => {},
+    onListItemNavigated?: (itemSelected: object) => {},
+    onEnterPressed?: (itemSelected: object) => {},
+    onBackspacePressed?: (evt: KeyboardEvent) => {},
     keepFocusAfterSelection: boolean = false,
     initialIndex: number = INITIAL_INDEX,
-): IUseKeyboardListNavigation {
+): {
+    activeItemIndex: number;
+    onKeyboardNavigation(evt: KeyboardEvent): void;
+    resetActiveIndex(): void;
+    setActiveItemIndex(value: SetStateAction<number>): void;
+} => {
     const [activeItemIndex, setActiveItemIndex] = useState(initialIndex);
 
     /**
@@ -90,7 +106,7 @@ function useKeyboardListNavigation<T>(
         setActiveItemIndex(nextActiveIndex);
         preventDefaultAndStopPropagation(evt);
         if (onListItemNavigated) {
-            const selectedItem: T = items[nextActiveIndex];
+            const selectedItem: object = items[nextActiveIndex];
             // tslint:disable-next-line: no-inferred-empty-object-type
             onListItemNavigated(selectedItem);
         }
@@ -122,7 +138,7 @@ function useKeyboardListNavigation<T>(
             (evt.currentTarget as HTMLElement).blur();
         }
 
-        const selectedItem: T = items[activeItemIndex];
+        const selectedItem: object = items[activeItemIndex];
 
         if (selectedItem) {
             // tslint:disable-next-line: no-inferred-empty-object-type
@@ -186,6 +202,6 @@ function useKeyboardListNavigation<T>(
         resetActiveIndex,
         setActiveItemIndex,
     };
-}
+};
 
-export { useKeyboardListNavigation };
+export { useKeyboardListNavigation, useKeyboardListNavigationType };
