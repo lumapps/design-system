@@ -55,12 +55,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     onBackspacePressed?: (evt: KeyboardEvent) => {},
     keepFocusAfterSelection: boolean = false,
     initialIndex: number = INITIAL_INDEX,
-): {
-    activeItemIndex: number;
-    onKeyboardNavigation(evt: KeyboardEvent): void;
-    resetActiveIndex(): void;
-    setActiveItemIndex(value: SetStateAction<number>): void;
-} => {
+): IUseKeyboardListNavigationType => {
     const [activeItemIndex, setActiveItemIndex] = useState(initialIndex);
 
     /**
