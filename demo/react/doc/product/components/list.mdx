@@ -7,7 +7,6 @@ import {
     IconButton,
     List,
     ListItem,
-    ListItemSize,
     ListSubheader,
     Size,
     Thumbnail,
@@ -28,20 +27,20 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
     <>
         <List>
             <ListSubheader>text only</ListSubheader>
-            <ListItem size={ListItemSize.tiny}>Single-line item</ListItem>
-            <ListItem size={ListItemSize.tiny}>Single-line item</ListItem>
-            <ListItem size={ListItemSize.tiny}>Single-line item</ListItem>
+            <ListItem size={Size.tiny}>Single-line item</ListItem>
+            <ListItem size={Size.tiny}>Single-line item</ListItem>
+            <ListItem size={Size.tiny}>Single-line item</ListItem>
             <ListSubheader>rich</ListSubheader>
-            <ListItem size={ListItemSize.tiny} before={<Icon icon={mdiSend} size={Size.xs} />}>
+            <ListItem size={Size.tiny} before={<Icon icon={mdiSend} size={Size.xs} />}>
                 Single-line item
             </ListItem>
             <ListItem
-                size={ListItemSize.tiny}
+                size={Size.tiny}
                 before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/48" size={Size.s} />}
             >
                 Single-line item
             </ListItem>
-            <ListItem size={ListItemSize.tiny} before={<Avatar image="http://i.pravatar.cc/48" size={Size.s} />}>
+            <ListItem size={Size.tiny} before={<Avatar image="http://i.pravatar.cc/48" size={Size.s} />}>
                 Single-line item
             </ListItem>
         </List>
@@ -83,7 +82,7 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
     <>
         <List>
             <ListSubheader>text only</ListSubheader>
-            <ListItem size={ListItemSize.big}>
+            <ListItem size={Size.big}>
                 <div>
                     <span>Two-line item</span>
                 </div>
@@ -92,7 +91,7 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
                 </div>
             </ListItem>
             <ListSubheader>rich</ListSubheader>
-            <ListItem size={ListItemSize.big} before={<Icon icon={mdiSend} size={Size.xs} />}>
+            <ListItem size={Size.big} before={<Icon icon={mdiSend} size={Size.xs} />}>
                 <div>
                     <span>Two-line item</span>
                 </div>
@@ -101,7 +100,7 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
                 </div>
             </ListItem>
             <ListItem
-                size={ListItemSize.big}
+                size={Size.big}
                 before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
                 after={<IconButton emphasis={ButtonEmphasis.low} icon={mdiDotsHorizontal} />}
             >
@@ -113,7 +112,7 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
                 </div>
             </ListItem>
             <ListItem
-                size={ListItemSize.big}
+                size={Size.big}
                 before={<Avatar image="http://i.pravatar.cc/72" size={Size.m} />}
                 after={<Button emphasis={ButtonEmphasis.low}>Button</Button>}
             >
@@ -136,7 +135,7 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
     <>
         <List>
             <ListSubheader>text only</ListSubheader>
-            <ListItem size={ListItemSize.huge}>
+            <ListItem size={Size.huge}>
                 <div>
                     <span>Multi-line item</span>
                 </div>
@@ -148,7 +147,7 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
                 </div>
             </ListItem>
             <ListSubheader>rich</ListSubheader>
-            <ListItem size={ListItemSize.huge} before={<Icon icon={mdiSend} size={Size.xs} />}>
+            <ListItem size={Size.huge} before={<Icon icon={mdiSend} size={Size.xs} />}>
                 <div>
                     <span>Multi-line item</span>
                 </div>
@@ -160,7 +159,7 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
                 </div>
             </ListItem>
             <ListItem
-                size={ListItemSize.huge}
+                size={Size.huge}
                 before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
                 after={<IconButton emphasis={ButtonEmphasis.low} icon={mdiDotsHorizontal} />}
             >
@@ -175,7 +174,7 @@ import { mdiDotsHorizontal, mdiSend } from 'LumX/icons';
                 </div>
             </ListItem>
             <ListItem
-                size={ListItemSize.huge}
+                size={Size.huge}
                 before={<Avatar image="http://i.pravatar.cc/72" size={Size.m} />}
                 after={<Button emphasis={ButtonEmphasis.low}>Button</Button>}
             >

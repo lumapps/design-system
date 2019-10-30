@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 
-import { Chip, Icon, List, ListDivider, ListItem, ListItemSize, Select, Size, TextField, Theme } from 'LumX';
+import { Chip, Icon, List, ListDivider, ListItem, Select, Size, TextField, Theme } from 'LumX';
 
 import { mdiClose, mdiMagnify } from '@mdi/js';
 import { useBooleanState } from 'LumX/core/react/hooks';
@@ -131,7 +131,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): React.ReactElement 
                         ? filteredChoices.map((choice: IChoice, index: number) => (
                               // tslint:disable-next-line: jsx-no-lambda
                               <ListItem
-                                  size={ListItemSize.tiny}
+                                  size={Size.tiny}
                                   isClickable
                                   isSelected={values.includes(choice.label)}
                                   key={index}
