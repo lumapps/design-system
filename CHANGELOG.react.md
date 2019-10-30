@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.12.0][] - 2019-10-30
+
 ### Added
 
 -   Text field enhancements (`chips`, `onFocus`, `onBlur`, `textfieldRef`, `inputRef` props) [#199](https://github.com/lumapps/design-system/pull/199)
@@ -55,3 +57,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.10.0]: https://github.com/lumapps/design-system/tree/v0.10.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.11.0...HEAD
 [0.11.0]: https://github.com/lumapps/design-system/tree/v0.11.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.12.0...HEAD
+[0.12.0]: https://github.com/lumapps/design-system/tree/v0.12.0
