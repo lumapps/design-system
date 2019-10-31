@@ -9,7 +9,6 @@ import {
     Icon,
     List,
     ListItem,
-    ListItemSize,
     ListSubheader,
     Size,
     Theme,
@@ -40,24 +39,24 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => {
 
                 <List>
                     <ListSubheader>Lorem ipsum</ListSubheader>
-                    <ListItem size={ListItemSize.tiny} before={sendIcon}>
+                    <ListItem size={Size.tiny} before={sendIcon}>
                         Lorem ipsum
                     </ListItem>
-                    <ListItem size={ListItemSize.tiny} before={sendIcon}>
+                    <ListItem size={Size.tiny} before={sendIcon}>
                         Lorem ipsum
                     </ListItem>
                     <ListSubheader>Lorem ipsum</ListSubheader>
-                    <ListItem size={ListItemSize.tiny} before={sendIcon}>
+                    <ListItem size={Size.tiny} before={sendIcon}>
                         Lorem ipsum
                     </ListItem>
-                    <ListItem size={ListItemSize.tiny} before={sendIcon}>
+                    <ListItem size={Size.tiny} before={sendIcon}>
                         Lorem ipsum
                     </ListItem>
                     <Divider />
-                    <ListItem size={ListItemSize.tiny} before={sendIcon}>
+                    <ListItem size={Size.tiny} before={sendIcon}>
                         Lorem ipsum
                     </ListItem>
-                    <ListItem size={ListItemSize.tiny} before={sendIcon}>
+                    <ListItem size={Size.tiny} before={sendIcon}>
                         Lorem ipsum
                     </ListItem>
                 </List>

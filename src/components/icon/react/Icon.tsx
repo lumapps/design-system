@@ -11,6 +11,8 @@ import { handleBasicClasses } from 'LumX/core/utils';
 
 /////////////////////////////
 
+type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+
 /**
  * Defines the props of the component.
  */
@@ -39,7 +41,7 @@ interface IIconProps extends IGenericProps {
     /**
      * The icon size.
      */
-    size?: Size;
+    size?: IconSizes;
 }
 type IconProps = IIconProps;
 

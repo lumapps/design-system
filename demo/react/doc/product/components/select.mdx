@@ -1,5 +1,5 @@
 ```javascript import
-import { Select, List, ListItem, ListItemSize, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from 'LumX';
+import { Select, List, ListItem, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from 'LumX';
 import { useBooleanState } from 'LumX/core/react/hooks';
 import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from '@mdi/js';
 ```
@@ -52,13 +52,13 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}
-                              size={ListItemSize.tiny}
+                              size={Size.tiny}
                           >
                               {choice}
                           </ListItem>
                       ))
                     : [
-                          <ListItem key={0} size={ListItemSize.tiny}>
+                          <ListItem key={0} size={Size.tiny}>
                               No data
                           </ListItem>,
                       ]}
@@ -113,13 +113,13 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}
-                              size={ListItemSize.tiny}
+                              size={Size.tiny}
                           >
                               {choice}
                           </ListItem>
                       ))
                     : [
-                          <ListItem key={0} size={ListItemSize.tiny}>
+                          <ListItem key={0} size={Size.tiny}>
                               No data
                           </ListItem>,
                       ]}
@@ -230,26 +230,26 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
                         value={filterValue}
                         onChange={setFilterValue}
                         icon={mdiMagnify}
-                        size={ListItemSize.tiny}
+                        size={Size.tiny}
                     />
                 </ListSubheader>
                 <ListDivider />
                 {filteredChoices.length > 0
                     ? filteredChoices.map((choice, index) => (
                           <ListItem
-                              size={ListItemSize.tiny}
+                              size={Size.tiny}
                               isClickable
                               isSelected={values.includes(choice.label)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice.label)}
                               before={<Icon size={Size.xs} icon={choice.icon} />}
-                              size={ListItemSize.tiny}
+                              size={Size.tiny}
                           >
                               <div>{choice.label}</div>
                           </ListItem>
                       ))
                     : [
-                          <ListItem key={0} size={ListItemSize.tiny}>
+                          <ListItem key={0} size={Size.tiny}>
                               No data
                           </ListItem>,
                       ]}
@@ -304,13 +304,13 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}
-                              size={ListItemSize.tiny}
+                              size={Size.tiny}
                           >
                               {choice}
                           </ListItem>
                       ))
                     : [
-                          <ListItem key={0} size={ListItemSize.tiny}>
+                          <ListItem key={0} size={Size.tiny}>
                               No data
                           </ListItem>,
                       ]}
@@ -365,13 +365,13 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}
-                              size={ListItemSize.tiny}
+                              size={Size.tiny}
                           >
                               {choice}
                           </ListItem>
                       ))
                     : [
-                          <ListItem key={0} size={ListItemSize.tiny}>
+                          <ListItem key={0} size={Size.tiny}>
                               No data
                           </ListItem>,
                       ]}
@@ -425,13 +425,13 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}
-                              size={ListItemSize.tiny}
+                              size={Size.tiny}
                           >
                               {choice}
                           </ListItem>
                       ))
                     : [
-                          <ListItem key={0} size={ListItemSize.tiny}>
+                          <ListItem key={0} size={Size.tiny}>
                               No data
                           </ListItem>,
                       ]}
@@ -486,13 +486,13 @@ import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}
-                              size={ListItemSize.tiny}
+                              size={Size.tiny}
                           >
                               {choice}
                           </ListItem>
                       ))
                     : [
-                          <ListItem key={0} size={ListItemSize.tiny}>
+                          <ListItem key={0} size={Size.tiny}>
                               No data
                           </ListItem>,
                       ]}

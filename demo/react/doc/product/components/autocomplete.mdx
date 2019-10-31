@@ -1,5 +1,5 @@
 ```javascript import
-import { Autocomplete, List, ListItem, ListItemSize, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from 'LumX';
+import { Autocomplete, List, ListItem, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from 'LumX';
 import { useBooleanState } from 'LumX/core/react/hooks';
 import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
 ```
@@ -90,7 +90,7 @@ import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/c
                 <List>
                     {filteredCities.map((city, index) => (
                         <ListItem
-                            size={ListItemSize.tiny}
+                            size={Size.tiny}
                             isClickable
                             key={city.id}
                             isHighlighted={index === activeItemIndex}
