@@ -1,5 +1,5 @@
 ```javascript import
-import { Autocomplete, AutocompleteMultiple, List, ListItem, Size, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from 'LumX';
+import { Autocomplete, AutocompleteMultiple, List, ListItem, Size, Size, TextField, Chip, ListDivider, Icon, ListSubheader, ChipGroup } from 'LumX';
 import { useBooleanState } from 'LumX/core/react/hooks';
 import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
 import { mdiClose } from '@mdi/js';
@@ -179,7 +179,6 @@ import { mdiClose } from '@mdi/js';
         }
     ];
 
-    const INITIAL_STATE_ACTIVE_CHIP = -1;
     const INITIAL_STATE_SHOW_SUGGESTIONS = false;
     const INITIAL_STATE_NAVIGATION_SUGGESTION = undefined;
 
@@ -194,8 +193,6 @@ import { mdiClose } from '@mdi/js';
      * - `inputRef`: reference for the text field used to search suggestions
      */
     const [showSuggestions, setShowSuggestions] = React.useState(INITIAL_STATE_SHOW_SUGGESTIONS);
-    const [wasBackspacePressed, setWasBackspacePressed] = React.useState(false);
-    const [activeChip, setActiveChip] = React.useState(INITIAL_STATE_ACTIVE_CHIP);
     const [filterValue, setFilterValue] = React.useState('');
     const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(INITIAL_STATE_NAVIGATION_SUGGESTION);
     const [selectedValues, setSelectedValues] = React.useState([]);
@@ -207,6 +204,20 @@ import { mdiClose } from '@mdi/js';
     });
 
     const hasSuggestions = filteredCities.length > 0;
+
+    const onChipDeleted = () => {
+        selectedValues.pop();
+        setSelectedValues(selectedValues);
+    }
+
+    const {
+        activeChip,
+        onBackspacePressed: chipBackspaceNavigation,
+        resetChipNavigation,
+    } = ChipGroup.useChipGroupNavigation(
+        selectedValues,
+        onChipDeleted
+    );
 
     /**
      * Callback executed when the autocomplete closes.
@@ -262,8 +273,7 @@ import { mdiClose } from '@mdi/js';
         setFilterValue(value);
         setShowSuggestions(value.length > 0);
         setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
-        setActiveChip(INITIAL_STATE_ACTIVE_CHIP);
-        setWasBackspacePressed(false);
+        resetChipNavigation();
     };
 
     /**
@@ -291,20 +301,12 @@ import { mdiClose } from '@mdi/js';
      * text field. In that case, we trigger an `onChange` and reset the navigation suggestion.
      */
     const onBackspacePressed = () => {
-        if (isTextFieldEmpty() && selectedValues.length > 0) {
-            if (wasBackspacePressed) {
-                selectedValues.pop();
-                setSelectedValues(selectedValues);
-                setActiveChip(INITIAL_STATE_ACTIVE_CHIP);
-            } else {
-                setActiveChip(selectedValues.length - 1);
-            }
-
-            setWasBackspacePressed(!wasBackspacePressed);
+        if (isTextFieldEmpty()) {
+            chipBackspaceNavigation();
         } else if (navigationSuggestionValue) {
             onChange(navigationSuggestionValue);
             setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
-            setActiveChip(INITIAL_STATE_ACTIVE_CHIP);
+            resetChipNavigation();
         }
     };
 

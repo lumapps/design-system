@@ -7,6 +7,8 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
+import { useChipGroupNavigation, useChipGroupNavigationType } from 'LumX/core/react/hooks';
+
 /////////////////////////////
 
 /**
@@ -51,13 +53,17 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ChipGroup`;
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
+interface IChipGroup {
+    useChipGroupNavigation: useChipGroupNavigationType;
+}
+
 /////////////////////////////
 
 /**
  * Displays a list of Chips in a grouped fashion.
  * @return The Chip Group component.
  */
-const ChipGroup: React.FC<IChipGroupProps> = ({
+const ChipGroup: React.FC<IChipGroupProps> & IChipGroup = ({
     className,
     align = DEFAULT_PROPS.align,
     children,
@@ -76,6 +82,7 @@ const ChipGroup: React.FC<IChipGroupProps> = ({
 };
 
 ChipGroup.displayName = COMPONENT_NAME;
+ChipGroup.useChipGroupNavigation = useChipGroupNavigation;
 
 /////////////////////////////
 
