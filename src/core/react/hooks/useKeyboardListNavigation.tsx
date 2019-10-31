@@ -18,21 +18,13 @@ interface IUseKeyboardListNavigationType {
 }
 
 type useKeyboardListNavigationType = (
-    /** the list of items that will be navigated using the keyboard */
     items: object[],
-    /** A reference to the element that is controlling the navigation. */
     ref: RefObject<HTMLElement>,
-    /** callback to be executed when the ENTER key is pressed on an item */
     onListItemSelected: (itemSelected: object) => {},
-    /** callback to be executed when the Arrow keys are pressed */
     onListItemNavigated: (itemSelected: object) => {},
-    /** callback to be executed when the ENTER key is pressed */
     onEnterPressed: (itemSelected: object) => {},
-    /** callback to be executed when the BACKSPACE key is pressed */
     onBackspacePressed: () => {},
-    /** determines whether after selecting an item, the focus should be maintained on the current target or not  */
     keepFocusAfterSelection: boolean,
-    /** where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0` */
     initialIndex: number,
 ) => IUseKeyboardListNavigationType;
 
@@ -45,6 +37,15 @@ const INITIAL_INDEX = -1;
 /**
  * This custom hook provides the necessary set of functions and values to properly navigate
  * a list using the keyboard.
+ *
+ * @param items the list of items that will be navigated using the keyboard
+ * @param ref A reference to the element that is controlling the navigation.
+ * @param onListItemSelected callback to be executed when the ENTER key is pressed on an item
+ * @param onListItemNavigated callback to be executed when the Arrow keys are pressed
+ * @param onEnterPressed callback to be executed when the ENTER key is pressed
+ * @param onBackspacePressed callback to be executed when the BACKSPACE key is pressed
+ * @param keepFocusAfterSelection determines whether after selecting an item, the focus should be maintained on the current target or not
+ * @param initialIndex where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0`
  */
 const useKeyboardListNavigation: useKeyboardListNavigationType = (
     items: object[],
