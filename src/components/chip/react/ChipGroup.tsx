@@ -7,7 +7,7 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
-import { useChipGroupNavigation, useChipGroupNavigationType } from 'LumX/core/react/hooks';
+import { useChipGroupNavigation, useChipGroupNavigationType } from 'LumX/core/react/hooks/useChipGroupNavigation';
 
 /////////////////////////////
 
