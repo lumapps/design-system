@@ -15,6 +15,7 @@ const reactConfig = {
     resolve: {
         alias: {
             LumX: path.resolve(__dirname, `${SRC_PATH}/react.index.ts`),
+            '@lumx/react': path.resolve(__dirname, `${SRC_PATH}/react.index.ts`),
         },
     },
 

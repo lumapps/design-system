@@ -106,6 +106,7 @@ const baseConfig = {
             'LumX/core': path.resolve(__dirname, CORE_PATH),
             'LumX/demo': path.resolve(__dirname, DEMO_PATH),
             'LumX/icons': path.resolve(__dirname, `${ICONS_PATH}/index.js`),
+            '@lumx/icons': path.resolve(__dirname, `${ICONS_PATH}/index.js`),
             'LumX/react': path.resolve(__dirname, `${CORE_PATH}/react`),
         },
     },
