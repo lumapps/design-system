@@ -11,7 +11,7 @@
     transition-property: background-color, box-shadow;
 
     @if $type == 'input' {
-        height: $lumx-text-field-height;
+        min-height: $lumx-text-field-height;
         padding: 0 $lumx-text-field-horizontal-padding;
     } @else {
         padding: $lumx-text-field-vertical-padding $lumx-text-field-horizontal-padding;
@@ -26,11 +26,6 @@
     padding-right: $lumx-spacing-unit !important;
 }
 
-@mixin lumx-text-field-wrapper-has-chips() {
-    height: auto !important;
-    min-height: $lumx-text-field-height;
-}
-
 @mixin lumx-text-field-input-wrapper() {
     display: flex;
     flex: 1;
@@ -42,7 +37,7 @@
     color: lumx-theme-color-variant($theme, 'N');
 }
 
-@mixin lumx-text-field-input-native($theme, $type: 'input') {
+@mixin lumx-text-field-input-native($theme, $type) {
     @include lumx-typography('body1');
 
     display: block;

@@ -37,7 +37,12 @@
     }
 
     &__input-native {
-        @include lumx-text-field-material-input-native('input');
+        @include lumx-text-field-material-input-native('select');
+
+        span {
+            display: block;
+            margin: $lumx-spacing-unit / 2 0;
+        }
     }
 
     &__input-chip {

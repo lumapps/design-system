@@ -30,10 +30,6 @@
         #{$self}--has-label & {
             @include lumx-text-field-wrapper-has-label;
         }
-
-        #{$self}--multiple & {
-            @include lumx-text-field-wrapper-has-chips;
-        }
     }
 
     &__chips {
@@ -44,11 +40,11 @@
 
     &__input-native {
         #{$self}--theme-light & {
-            @include lumx-text-field-input-native('dark');
+            @include lumx-text-field-input-native('dark', 'select');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-input-native('light');
+            @include lumx-text-field-input-native('light', 'select');
         }
 
         &--placeholder {
@@ -59,6 +55,11 @@
             #{$self}--theme-dark & {
                 @include lumx-text-field-placeholder('light');
             }
+        }
+
+        span {
+            display: block;
+            margin: $lumx-spacing-unit 0;
         }
     }
 
@@ -94,7 +95,7 @@
         }
 
         input {
-            @include lumx-text-field-input-native('dark');
+            @include lumx-text-field-input-native('dark', 'input');
 
             &::placeholder {
                 @include lumx-text-field-placeholder('dark');

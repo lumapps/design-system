@@ -92,7 +92,7 @@
 
     @if $type == 'input' {
         line-height: $lumx-text-field-height !important;
-    } @else if $type == 'textarea' {
+    } @else if $type == 'textarea' or $type == 'select' {
         line-height: map-get($lumx-typography-line-height, 'body2') !important;
     }
 }

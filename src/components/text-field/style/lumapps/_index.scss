@@ -45,10 +45,6 @@
         #{$self}--has-input-clear & {
             @include lumx-text-field-wrapper-has-input-clear;
         }
-
-        #{$self}--has-chips & {
-            @include lumx-text-field-wrapper-has-chips;
-        }
     }
 
     &--has-label &__wrapper {
