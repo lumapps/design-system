@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Multiple Autocomplete component [#209](https://github.com/lumapps/design-system/pull/209)
+-   `isHighlighted` prop for `Chip` component [#209](https://github.com/lumapps/design-system/pull/209)
+-   Added `isClearable` and `chips` props for Autocomplete [#209](https://github.com/lumapps/design-system/pull/209)
+
 ## [0.13.0][] - 2019-11-04
 
 ### Changed
@@ -14,12 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Deprecated `ListItemSize` (use `Size` instead).
 -   _[BREAKING]_ Remove `Switch` internal state. It's value is now set by the `checked` prop and can be controlled
     with the `onToggle` prop
-
-### Added
-
--   Multiple Autocomplete component [#209](https://github.com/lumapps/design-system/pull/209)
--   `isHighlighted` prop for `Chip` component [#209](https://github.com/lumapps/design-system/pull/209)
--   Added `isClearable` and `chips` props for Autocomplete [#209](https://github.com/lumapps/design-system/pull/209)
 
 ## [0.12.0][] - 2019-10-30
 
