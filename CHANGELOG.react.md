@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   Deprecated `ListItemSize` (use `Size` instead).
+-   _[BREAKING]_ Remove `Switch` internal state. It's value is now set by the `checked` prop and can be controlled
+    with the `onToggle` prop
 
 ## [0.12.0][] - 2019-10-30
 
@@ -23,8 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fix stroke-width property on react progress bar.
 -   Fixes to Text Area related to Input resizing and `valid` and `error` states in Material
--   _[BREAKING]_ Remove `Switch` internal state. It's value is now set by the `checked` prop and can be controlled
-    with the `onToggle` prop
 
 ## [0.11.0][] - 2019-10-23
 
