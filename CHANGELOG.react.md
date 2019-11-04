@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0][] - 2019-11-04
+
 ### Changed
 
 -   Deprecated `ListItemSize` (use `Size` instead).
@@ -65,3 +67,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.11.0]: https://github.com/lumapps/design-system/tree/v0.11.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.12.0...HEAD
 [0.12.0]: https://github.com/lumapps/design-system/tree/v0.12.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.13.0...HEAD
+[0.13.0]: https://github.com/lumapps/design-system/tree/v0.13.0
