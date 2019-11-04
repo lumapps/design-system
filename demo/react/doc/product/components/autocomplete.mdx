@@ -330,6 +330,15 @@ import { mdiClose } from '@mdi/js';
         setShowSuggestions(filterValue.length > 0);
     }
 
+    /**
+     * Callback triggered when the Text field is focused on. In this scenario,
+     * we want to show the suggestion list if there is some text entered.
+     */
+    const onBlur = (evt) => {
+        setShowSuggestions(false);
+        resetChipNavigation();
+    }
+
     return (
         <AutocompleteMultiple
             theme={theme}
@@ -338,6 +347,7 @@ import { mdiClose } from '@mdi/js';
             value={navigationSuggestionValue || filterValue}
             onChange={onChange}
             onFocus={onFocus}
+            onBlur={onBlur}
             values={selectedValues}
             inputRef={inputRef}
             selectedChipRender={(city, index) => (
