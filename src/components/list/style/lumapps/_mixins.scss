@@ -18,8 +18,10 @@
         padding-top: $lumx-list-item-padding;
         padding-bottom: $lumx-list-item-padding;
     } @else {
-        height: map-get($lumx-list-item-sizes, $size);
+        min-height: map-get($lumx-list-item-sizes, $size);
         align-items: center;
+        padding-top: $lumx-spacing-unit;
+        padding-bottom: $lumx-spacing-unit;
     }
 }
 
