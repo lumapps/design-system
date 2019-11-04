@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
-import { List, ListItem, ListItemSize } from 'LumX';
+import { List, ListItem, Size } from 'LumX';
 import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
 
 import { Autocomplete, AutocompleteProps, CLASSNAME } from './Autocomplete';
@@ -79,7 +79,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                 children: (
                     <List>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
@@ -115,7 +115,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                 children: (
                     <List>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
@@ -143,7 +143,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                 children: (
                     <List>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
@@ -165,7 +165,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                 children: (
                     <List>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
@@ -187,7 +187,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                 children: (
                     <List>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={ListItemSize.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}

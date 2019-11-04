@@ -1,5 +1,5 @@
 ```javascript import
-import { Autocomplete, AutocompleteMultiple, List, ListItem, Size, Size, TextField, Chip, ListDivider, Icon, ListSubheader, ChipGroup } from 'LumX';
+import { Autocomplete, AutocompleteMultiple, List, ListItem, Size, TextField, Chip, ListDivider, Icon, ListSubheader, ChipGroup } from 'LumX';
 import { useBooleanState } from 'LumX/core/react/hooks';
 import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
 import { mdiClose } from '@mdi/js';
@@ -355,7 +355,7 @@ import { mdiClose } from '@mdi/js';
             <List>
                 {filteredCities.map((city, index) => (
                     <ListItem
-                        size={ListItemSize.tiny}
+                        size={Size.tiny}
                         isClickable
                         key={city.id}
                         isHighlighted={index === activeItemIndex}
