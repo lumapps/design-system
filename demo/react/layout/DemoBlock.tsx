@@ -43,7 +43,7 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
 
                 {withThemeSwitcher && (
                     <div className="demo-block__theme-toggle">
-                        <Switch position={SwitchPosition.right} onToggle={toggleTheme}>
+                        <Switch position={SwitchPosition.right} checked={theme === Theme.dark} onToggle={toggleTheme}>
                             Dark Background
                         </Switch>
                     </div>
