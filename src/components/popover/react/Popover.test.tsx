@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, RefObject } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
@@ -37,6 +37,8 @@ interface ISetup extends ICommonSetup {
  *                       component.
  */
 const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+    const popoverRef = React.createRef();
+
     const props: PopoverProps = {
         // tslint:disable-next-line no-unused
         children: 'This is the content of the popover',
@@ -47,9 +49,15 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
             x: 0,
             y: 0,
         },
-        popoverRef: React.createRef(),
+        popoverRef: popoverRef as RefObject<HTMLDivElement>,
         ...propsOverrides,
     };
+
+    /**
+     * Here, we are mounting the component in order to retrieve the reference,
+     * and use it to render the component.
+     */
+    mount(<Popover {...props} />);
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
