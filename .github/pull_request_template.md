@@ -8,11 +8,13 @@
 
 # Check list
 
+<!-- Add/Remove/Update the following check list depending on your submission -->
+
+-   [ ] (if has style) Add `need: review-integration` label
+-   [ ] (if has textual documentation) Add `need: review-doc` label
+-   [ ] (if has code) Add `need: review-frontend` label
 -   [ ] (if has react) Check through the [react dev check list]
--   [ ] (if has style) Request an integration review
--   [ ] (if has docs) Request a doc review
--   [ ] Request a frontend review
--   [ ] (if fix or feature) Request a test
+-   [ ] (if fix or feature) Add `need: test` label
 
 Check out the [contribution guide] for general guidelines for submissions to the design system.
 
