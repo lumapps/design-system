@@ -9,7 +9,7 @@ import { Callback, IGenericProps, getRootClassName } from 'LumX/core/react/utils
 import { Size, Theme } from 'LumX/components/index';
 import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
 
-import { Avatar, Icon, Thumbnail, ThumbnailAspectRatio, ThumbnailVariant } from 'LumX';
+import { AspectRatio, Avatar, Icon, Thumbnail, ThumbnailVariant } from 'LumX';
 import { mdiImagePlus } from 'LumX/icons';
 
 import noop from 'lodash/noop';
@@ -147,7 +147,7 @@ const EditableMedia: React.FC<EditableMediaProps> = ({
             {image && variant === 'thumbnail' && (
                 <div className="lumx-editable-media__thumbnail">
                     <Thumbnail
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         image={image}
                         size={size}
                         theme={theme}

@@ -1,13 +1,13 @@
 import React, { CSSProperties, ReactElement } from 'react';
 
 import {
+    AspectRatio,
     ImageBlock,
     ImageBlockCaptionPosition,
     ImageBlockProps,
     Slideshow,
     SlideshowItem,
     Theme,
-    ThumbnailAspectRatio,
 } from 'LumX';
 
 /////////////////////////////
@@ -49,14 +49,14 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     theme={theme}
                     image="https://picsum.photos/640/480/?image=24"
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     theme={theme}
                     image="https://picsum.photos/640/480/?image=25"
                 />
@@ -66,7 +66,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     theme={theme}
                     image="https://picsum.photos/640/480/?image=27"
                     {...imageBlockDemoProps}
@@ -74,7 +74,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     theme={theme}
                     image="https://picsum.photos/640/480/?image=28"
                     {...imageBlockDemoProps}
@@ -90,7 +90,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     captionPosition={ImageBlockCaptionPosition.over}
                     image="https://picsum.photos/640/480/?image=30"
                     theme={theme}
@@ -99,7 +99,7 @@ const DemoComponent: React.FC<IProps> = ({ theme }: IProps): ReactElement => (
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     captionPosition={ImageBlockCaptionPosition.over}
                     image="https://picsum.photos/640/480/?image=31"
                     theme={theme}
