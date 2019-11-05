@@ -8,6 +8,8 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { handleBasicClasses } from 'LumX/core/utils';
 import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
+import { useFocusOnClose } from 'LumX/core/react/hooks/useFocusOnClose';
+
 /////////////////////////////
 
 /**
@@ -219,6 +221,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
     } = props;
 
     const textFieldRef = useRef(null);
+    useFocusOnClose(inputRef.current, isOpen);
 
     return (
         <div
@@ -259,6 +262,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 placement={placement}
                 fitToAnchorWidth={fitToAnchorWidth}
                 onInfiniteScroll={onInfiniteScroll}
+                theme={theme}
             >
                 {children}
             </Dropdown>

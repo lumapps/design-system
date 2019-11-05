@@ -66,14 +66,6 @@
     cursor: pointer;
 }
 
-.#{$lumx-base-prefix}-chip--is-highlighted {
-    @include lumx-state('state-focus', 'emphasis-medium', 'dark');
-}
-
-.#{$lumx-base-prefix}-chip--is-highlighted {
-    @include lumx-state('state-focus', 'emphasis-medium', 'dark');
-}
-
 @each $key, $color in $lumx-theme-color-palette {
     .#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--color-#{$key} {
         @include lumx-state('state-default', 'emphasis-medium', $key);
@@ -86,7 +78,8 @@
             @include lumx-state('state-active', 'emphasis-medium', $key);
         }
 
-        &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
+        &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added],
+        &.#{$lumx-base-prefix}-chip--is-highlighted {
             @include lumx-state('state-focus', 'emphasis-medium', $key);
         }
     }

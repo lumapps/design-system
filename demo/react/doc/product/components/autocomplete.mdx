@@ -222,7 +222,10 @@ import { mdiClose } from '@lumx/icons';
      * Callback executed when the autocomplete closes.
      * In that scenario, we need to update the internal state to `false`.
      */
-    const closeAutocomplete = () => setShowSuggestions(INITIAL_STATE_SHOW_SUGGESTIONS);
+    const closeAutocomplete = () => {
+        setShowSuggestions(false);
+        resetChipNavigation();
+    };
 
     /**
      * Callback triggered when a city is selected from the list. In this case, we want
@@ -330,11 +333,10 @@ import { mdiClose } from '@lumx/icons';
     }
 
     /**
-     * Callback triggered when the Text field is focused on. In this scenario,
-     * we want to show the suggestion list if there is some text entered.
+     * Callback triggered when the Text field is blurred. In this scenario, we want
+     * to hide the suggestions box and reset the chip navigation
      */
     const onBlur = (evt) => {
-        setShowSuggestions(false);
         resetChipNavigation();
     }
 
@@ -346,26 +348,30 @@ import { mdiClose } from '@lumx/icons';
             value={navigationSuggestionValue || filterValue}
             onChange={onChange}
             onFocus={onFocus}
-            onBlur={onBlur}
             values={selectedValues}
             inputRef={inputRef}
+            onBlur={onBlur}
             selectedChipRender={(city, index) => (
                         <Chip
+                            theme={theme}
+                            isClickable
                             key={index}
                             after={<Icon icon={mdiClose} size={Size.xxs} />}
                             size={Size.s}
                             onAfterClick={event => clearSelectedValue(event, city)}
+                            onClick={event => clearSelectedValue(event, city)}
                             isHighlighted={index === activeChip}
                         >
                             {city.text}
                         </Chip>
             )}
         >
-            <List>
+            <List theme={theme}>
                 {filteredCities.map((city, index) => (
                     <ListItem
                         size={Size.tiny}
                         isClickable
+                        theme={theme}
                         key={city.id}
                         isHighlighted={index === activeItemIndex}
                         onItemSelected={() => setSelectedCity(city)}

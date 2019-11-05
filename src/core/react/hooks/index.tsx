@@ -11,3 +11,5 @@ export { useBooleanState } from './useBooleanState';
 export { useInfiniteScroll } from './useInfiniteScroll';
 
 export { useChipGroupNavigation, useChipGroupNavigationType } from './useChipGroupNavigation';
+
+export { useFocusOnClose } from './useFocusOnClose';
