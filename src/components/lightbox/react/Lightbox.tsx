@@ -115,21 +115,24 @@ const Lightbox: React.FC<LightboxProps> = ({
     const modalElement: Element | null = document.querySelector(`.${CLASSNAME}`);
 
     useEffect(() => {
-        // After mount.
         if (isOpen) {
-            setTrapActive(isOpen && children);
             disableBodyScroll(modalElement);
-        } else if (!isOpen) {
+        }
+
+        return (): void => {
+            enableBodyScroll(modalElement);
+        };
+    }, [isOpen, modalElement]);
+
+    useEffect(() => {
+        if (isOpen) {
+            setTrapActive(true);
+        } else {
             setTimeout(() => {
                 setTrapActive(false);
             }, _TRANSITION_DURATION);
         }
-
-        // Before unmount.
-        return (): void => {
-            enableBodyScroll(modalElement);
-        };
-    }, [isOpen, children, modalElement, parentElement]);
+    }, [isOpen]);
 
     /**
      * Callback on activation of focus trap.
