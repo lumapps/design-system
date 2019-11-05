@@ -351,10 +351,12 @@ import { mdiClose } from '@lumx/icons';
             inputRef={inputRef}
             selectedChipRender={(city, index) => (
                         <Chip
+                            isClickable
                             key={index}
                             after={<Icon icon={mdiClose} size={Size.xxs} />}
                             size={Size.s}
                             onAfterClick={event => clearSelectedValue(event, city)}
+                            onClick={event => clearSelectedValue(event, city)}
                             isHighlighted={index === activeChip}
                         >
                             {city.text}
