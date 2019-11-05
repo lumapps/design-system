@@ -259,6 +259,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 placement={placement}
                 fitToAnchorWidth={fitToAnchorWidth}
                 onInfiniteScroll={onInfiniteScroll}
+                theme={theme}
             >
                 {children}
             </Dropdown>
