@@ -26,6 +26,7 @@ function UploaderController() {
      */
     const _DEFAULT_PROPS = {
         aspectRatio: 'horizontal',
+        size: 'xl',
         theme: 'light',
         variant: 'squared',
     };
@@ -42,31 +43,20 @@ function UploaderController() {
      * @return {Array} The list of button classes.
      */
     function getClasses() {
-        const classes = [];
+        const aspectRatio = lumx.aspectRatio ? lumx.aspectRatio : _DEFAULT_PROPS.aspectRatio;
+        const size = lumx.size ? lumx.size : _DEFAULT_PROPS.size;
+        const theme = lumx.theme ? lumx.theme : _DEFAULT_PROPS.theme;
+        const variant = lumx.variant ? lumx.variant : _DEFAULT_PROPS.variant;
 
-        if (angular.isDefined(lumx.aspectRatio) && lumx.aspectRatio) {
-            classes.push(`${CSS_PREFIX}-uploader--aspect-ratio-${lumx.aspectRatio}`);
-        } else {
-            classes.push(`${CSS_PREFIX}-uploader--aspect-ratio-${_DEFAULT_PROPS.aspectRatio}`);
-        }
+        // Adjust to square aspect ratio when using circle variants.
+        const adjustedAspectRatio = variant === 'circle' ? 'square' : aspectRatio;
 
-        if (angular.isDefined(lumx.size) && lumx.size) {
-            classes.push(`${CSS_PREFIX}-uploader--size-${lumx.size}`);
-        }
-
-        if (angular.isDefined(lumx.theme) && lumx.theme) {
-            classes.push(`${CSS_PREFIX}-uploader--theme-${lumx.theme}`);
-        } else {
-            classes.push(`${CSS_PREFIX}-uploader--theme-${_DEFAULT_PROPS.theme}`);
-        }
-
-        if (angular.isDefined(lumx.variant) && lumx.variant) {
-            classes.push(`${CSS_PREFIX}-uploader--variant-${lumx.variant}`);
-        } else {
-            classes.push(`${CSS_PREFIX}-uploader--variant-${_DEFAULT_PROPS.variant}`);
-        }
-
-        return classes;
+        return [
+            `${CSS_PREFIX}-uploader--aspect-ratio-${adjustedAspectRatio}`,
+            `${CSS_PREFIX}-uploader--size-${size}`,
+            `${CSS_PREFIX}-uploader--theme-${theme}`,
+            `${CSS_PREFIX}-uploader--variant-${variant}`,
+        ];
     }
 
     /////////////////////////////
