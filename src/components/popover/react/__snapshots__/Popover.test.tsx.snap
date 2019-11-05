@@ -2,7 +2,20 @@
 
 exports[`<Popover> Snapshots and structure should render correctly 1`] = `
 <Portal
-  containerInfo={<body />}
+  containerInfo={
+    <body>
+      <div
+        class="lumx-popover lumx-popover--elevation-3"
+        style="left: 0px; position: fixed; top: 0px; transform: translate(0px, 0px); visibility: hidden; z-index: 9999;"
+      >
+        <div
+          class="lumx-popover__wrapper"
+        >
+          This is the content of the popover
+        </div>
+      </div>
+    </body>
+  }
 >
   <div
     className="lumx-popover lumx-popover--elevation-3"
