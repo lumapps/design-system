@@ -7,7 +7,7 @@ import { mdiChevronDown, mdiChevronUp } from 'LumX/icons';
 import { COMPONENT_PREFIX } from 'LumX/react/constants';
 import { Callback, IGenericProps, getRootClassName, isComponent } from 'LumX/react/utils';
 import classNames from 'classnames';
-import { isEmpty } from 'lodash';
+import isEmpty from 'lodash/isEmpty';
 
 /**
  * Defines the props of the component.

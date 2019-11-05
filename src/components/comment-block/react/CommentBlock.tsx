@@ -8,7 +8,7 @@ import { Avatar, Size, Theme } from 'LumX';
 import { ENTER_KEY_CODE } from 'LumX/core/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
-import { isFunction } from 'lodash';
+import isFunction from 'lodash/isFunction';
 
 /////////////////////////////
 

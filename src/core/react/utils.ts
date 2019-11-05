@@ -11,7 +11,11 @@ import trimStart from 'lodash/trimStart';
 
 import { CSS_PREFIX } from '../constants';
 
-import { concat, dropRight, last, partition, reduce } from 'lodash';
+import concat from 'lodash/concat';
+import dropRight from 'lodash/dropRight';
+import last from 'lodash/last';
+import partition from 'lodash/partition';
+import reduce from 'lodash/reduce';
 import { COMPONENT_PREFIX } from './constants';
 
 /////////////////////////////
@@ -316,18 +320,16 @@ function validateComponent(
 
                     if (!isOfOneAllowedType) {
                         let allowedTypesString = '';
-                        allowedTypes.forEach(
-                            (allowedType: string | ComponentType, idx: number): void => {
-                                if (!isEmpty(allowedTypesString)) {
-                                    allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
-                                }
+                        allowedTypes.forEach((allowedType: string | ComponentType, idx: number): void => {
+                            if (!isEmpty(allowedTypesString)) {
+                                allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
+                            }
 
-                                const typeName: string | ComponentType = getTypeName(allowedType);
-                                allowedTypesString +=
-                                    (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
-                                    '<Unknown component type>';
-                            },
-                        );
+                            const typeName: string | ComponentType = getTypeName(allowedType);
+                            allowedTypesString +=
+                                (isString(typeName) ? `${typeName === 'text' ? typeName : `<${typeName}>`}` : '') ||
+                                '<Unknown component type>';
+                        });
 
                         console.debug('Non matching type', newChild, '\nResulted in', getTypeName(newChild));
                         throw new Error(
