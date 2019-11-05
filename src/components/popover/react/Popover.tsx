@@ -131,12 +131,24 @@ const Popover: React.FC<PopoverProps> & IPopover = ({
     isVisible,
     ...props
 }: PopoverProps): ReactElement => {
+    /**
+     * Depending on which is assigned first, the `popoverRect` or `popoverRef`,
+     * there are scenarios where the reference to the popover is still not assigned,
+     * which makes the popover to be shown at (0,0), then it moves under the anchor.
+     * Since the position is calculated with a `useEffect`, the first time it is calculated,
+     * `popoverRef` is still not defined, and the hook defaults to a (0,0) position. Once the reference
+     * is set and the `useEffect` has the `popoverRef` as dependency, it can recalculate the position and
+     * provide the accurate one. In order to fix this border case, we simply state that, for the popover
+     * to be visible, `isVisible` needs to be true and the ref needs to be defined.
+     */
+    const isPopoverVisible = isVisible && popoverRef && popoverRef.current;
+
     const cssPopover: CSSProperties = {
         left: 0,
         position: 'fixed',
         top: 0,
         transform: `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
-        visibility: isVisible ? 'visible' : 'hidden',
+        visibility: isPopoverVisible ? 'visible' : 'hidden',
         zIndex: 9999,
     };
 
