@@ -13,6 +13,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `isHighlighted` prop for `Chip` component [#209](https://github.com/lumapps/design-system/pull/209)
 -   Added `isClearable` and `chips` props for Autocomplete [#209](https://github.com/lumapps/design-system/pull/209)
 
+### Changed
+
+-   `Popover` bug that made the content be displayed on the top left corner.
+-   Make autocomplete multiple demo remove a value upon clicking on the entire chip.
+
+### Removed
+
+-   Remove `cursor: pointer` for after-Chip icon.
+
 ## [0.13.0][] - 2019-11-04
 
 ### Changed
