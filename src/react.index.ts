@@ -116,3 +116,5 @@ export { SideNavigationItem, SideNavigationItemProps } from 'LumX/components/sid
 export { Slider } from 'LumX/components/slider/react/Slider';
 
 export { Dialog, DialogSizes } from 'LumX/components/dialog/react/Dialog';
+
+export { Uploader, UploaderProps, UploaderVariant } from 'LumX/components/uploader/react/Uploader';
