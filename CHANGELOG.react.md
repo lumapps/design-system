@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `Popover` bug that made the content be displayed on the top left corner.
 -   Make autocomplete multiple demo remove a value upon clicking on the entire chip.
+-   Deprecated `ThumbnailAspectRatio` (use `AspectRatio` instead) [#208](https://github.com/lumapps/design-system/pull/208)
 
 ### Removed
 

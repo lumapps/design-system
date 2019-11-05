@@ -6,7 +6,7 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
 import isObject from 'lodash/isObject';
 
-import { Orientation, Theme, Thumbnail, ThumbnailAspectRatio, ThumbnailVariant } from 'LumX';
+import { AspectRatio, Orientation, Theme, Thumbnail, ThumbnailVariant } from 'LumX';
 
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 
@@ -39,7 +39,7 @@ interface IPostBlockProps extends IGenericProps {
     /* Thumbnail image source */
     thumbnail: string;
     /* The image aspect ratio. */
-    thumbnailAspectRatio?: ThumbnailAspectRatio;
+    thumbnailAspectRatio?: AspectRatio;
     /* Post title */
     title: string;
     /* Theme. */
@@ -79,7 +79,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     orientation: Orientation.horizontal,
     text: undefined,
     theme: Theme.light,
-    thumbnailAspectRatio: ThumbnailAspectRatio.horizontal,
+    thumbnailAspectRatio: AspectRatio.horizontal,
 };
 /////////////////////////////
 

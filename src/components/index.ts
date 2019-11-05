@@ -80,6 +80,27 @@ enum Emphasis {
     high = 'high',
 }
 
+/**
+ * All available aspect ratios.
+ */
+enum AspectRatio {
+    original = 'original',
+    horizontal = 'horizontal',
+    vertical = 'vertical',
+    square = 'square',
+}
+
 /////////////////////////////
 
-export { Alignment, ComplexPropDefault, Color, ColorPalette, ColorVariant, Theme, Size, Orientation, Emphasis };
+export {
+    Alignment,
+    AspectRatio,
+    ComplexPropDefault,
+    Color,
+    ColorPalette,
+    ColorVariant,
+    Theme,
+    Size,
+    Orientation,
+    Emphasis,
+};
