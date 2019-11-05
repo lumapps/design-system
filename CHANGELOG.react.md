@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.14.0][] - 2019-11-05
+
 ### Added
 
 -   Multiple Autocomplete component [#209](https://github.com/lumapps/design-system/pull/209)
@@ -84,3 +86,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.12.0]: https://github.com/lumapps/design-system/tree/v0.12.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.13.0...HEAD
 [0.13.0]: https://github.com/lumapps/design-system/tree/v0.13.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.14.0...HEAD
+[0.14.0]: https://github.com/lumapps/design-system/tree/v0.14.0
