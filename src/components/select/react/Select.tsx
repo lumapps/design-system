@@ -13,6 +13,8 @@ import { ENTER_KEY_CODE, SPACE_KEY_CODE } from 'LumX/core/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
+import { useFocusOnClose } from 'LumX/core/react/hooks/useFocusOnClose';
+
 /////////////////////////////
 
 /**
@@ -205,21 +207,6 @@ function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: bool
             element.removeEventListener('blur', setBlur);
         };
     }, [element]);
-}
-
-/**
- * Re-focus the element when the select is closed.
- *
- * @param element Element to focus.
- * @param isOpen  Whether or not the select is open.
- */
-function useFocusOnClose(element: HTMLElement | null, isOpen: boolean | undefined): void {
-    useEffect(() => {
-        if (!isOpen && element) {
-            // Re-focus the button when the select is closed.
-            element.focus();
-        }
-    }, [isOpen]);
 }
 
 /**
