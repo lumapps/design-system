@@ -99,7 +99,7 @@ const Uploader: React.FC<UploaderProps> = (props: UploaderProps): ReactElement =
         ...forwardedProps
     } = props;
 
-    // Square aspect ratio for circle variants.
+    // Adjust to square aspect ratio when using circle variants.
     const adjustedAspectRatio = variant === UploaderVariant.circle ? AspectRatio.square : aspectRatio;
 
     return (
