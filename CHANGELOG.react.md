@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Multiple Autocomplete component [#209](https://github.com/lumapps/design-system/pull/209)
 -   `isHighlighted` prop for `Chip` component [#209](https://github.com/lumapps/design-system/pull/209)
 -   Added `isClearable` and `chips` props for Autocomplete [#209](https://github.com/lumapps/design-system/pull/209)
+-   Uploader component [#208](https://github.com/lumapps/design-system/pull/208)
 
 ### Changed
 
