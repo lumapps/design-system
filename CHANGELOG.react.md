@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.0][] - 2019-11-06
+
+### Added
+
+-   Uploader component [#208](https://github.com/lumapps/design-system/pull/208)
+
+### Changed
+
+-   Deprecated `ThumbnailAspectRatio` (use `AspectRatio` instead) [#208](https://github.com/lumapps/design-system/pull/208)
+
 ## [0.14.0][] - 2019-11-05
 
 ### Added
@@ -14,13 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Multiple Autocomplete component [#209](https://github.com/lumapps/design-system/pull/209)
 -   `isHighlighted` prop for `Chip` component [#209](https://github.com/lumapps/design-system/pull/209)
 -   Added `isClearable` and `chips` props for Autocomplete [#209](https://github.com/lumapps/design-system/pull/209)
--   Uploader component [#208](https://github.com/lumapps/design-system/pull/208)
 
 ### Changed
 
 -   `Popover` bug that made the content be displayed on the top left corner.
 -   Make autocomplete multiple demo remove a value upon clicking on the entire chip.
--   Deprecated `ThumbnailAspectRatio` (use `AspectRatio` instead) [#208](https://github.com/lumapps/design-system/pull/208)
 
 ### Removed
 
@@ -90,3 +98,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.13.0]: https://github.com/lumapps/design-system/tree/v0.13.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.14.0...HEAD
 [0.14.0]: https://github.com/lumapps/design-system/tree/v0.14.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.15.0...HEAD
+[0.15.0]: https://github.com/lumapps/design-system/tree/v0.15.0
