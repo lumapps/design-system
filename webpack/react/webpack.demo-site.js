@@ -16,7 +16,7 @@ const { CORE_PATH, CONFIGS, SRC_PATH, DEMO_PATH, DIST_PATH, ICONS_PATH, NODE_MOD
 const mode = process.env.MODE || 'dev';
 const isDev = mode === 'dev';
 const isProd = mode === 'prod';
-const baseConfig = require('../webpack.config');
+const reactConfig = require('./webpack.config');
 
 const filename = '[name].[hash:8]';
 const outputPath = `${DIST_PATH}/design.lumapps.com`;
@@ -26,7 +26,7 @@ const minimizer = [];
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const plugins = [
-    ...baseConfig.plugins,
+    ...reactConfig.plugins,
 
     new MiniCssExtractPlugin({
         filename: `${filename}.css`,
@@ -67,10 +67,12 @@ if (!IS_CI) {
 module.exports = merge.smartStrategy({
     entry: 'replace',
     'module.rules': 'append',
+    'resolve.alias': 'append',
+    'resolve.extensions': 'append',
     plugins: 'replace',
-    output: 'replace',
+    output: 'append',
     externals: 'replace',
-})(baseConfig, {
+})(reactConfig, {
     bail: true,
     devtool: isDev ? 'source-map' : '',
     mode: isProd ? 'production' : 'development',
@@ -179,7 +181,6 @@ module.exports = merge.smartStrategy({
     },
 
     output: {
-        ...baseConfig.output,
         filename: `${filename}.js`,
         path: outputPath,
         publicPath: '/',
