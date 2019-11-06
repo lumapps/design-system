@@ -1,0 +1,35 @@
+```javascript import
+import { Icon, Size, Theme } from 'LumX';
+import { mdiEmail } from 'LumX/icons';
+```
+
+
+# Iconography
+
+**Icons are small visual representations of common actions, objects or ideas. They help users to identify information and provide context.**
+
+## Sizes
+Comes in 5 sizes: xs, s, m, l, xl.
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <>
+        <Icon icon={mdiEmail} theme={theme} size={Size.xs}>
+            Header with icon
+        </Icon>
+        <Icon icon={mdiEmail} theme={theme} size={Size.s}>
+            Header with icon
+        </Icon>
+        <Icon icon={mdiEmail} theme={theme} size={Size.m}>
+            Header with icon
+        </Icon>
+        <Icon icon={mdiEmail} theme={theme} size={Size.l}>
+            Header with icon
+        </Icon>
+        <Icon icon={mdiEmail} theme={theme} size={Size.xl}>
+            Header with icon
+        </Icon>
+</>
+);
+```
+
+## Layouts

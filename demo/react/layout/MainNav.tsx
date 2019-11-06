@@ -38,7 +38,7 @@ const ITEMS: Item[] = [
         children: [
             {
                 label: 'Foundations',
-                children: ['Colors', 'Typography'],
+                children: ['Colors', 'Typography', 'Iconography'],
             },
             {
                 label: 'Components',
