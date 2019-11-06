@@ -346,6 +346,16 @@ function AppDefaultConfig($locationProvider, $stateProvider, markedProvider) {
                 },
             },
         })
+        .state('app.product.components.uploader', {
+            url: 'uploader',
+            views: {
+                'main@': {
+                    controller: 'DemoUploaderController',
+                    controllerAs: 'vm',
+                    template: require('./components/uploader/demo.html'),
+                },
+            },
+        })
         .state('app.product.components.user-block', {
             url: 'user-block',
             views: {
@@ -438,5 +448,6 @@ require('./components/table/controller.js');
 require('./components/tabs/controller.js');
 require('./components/text-field/controller.js');
 require('./components/toolbar/controller.js');
+require('./components/uploader/controller.js');
 require('./components/user-block/controller.js');
 /* eslint-enable import/no-unassigned-import */

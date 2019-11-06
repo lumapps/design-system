@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Uploader> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-uploader lumx-uploader--aspect-ratio-horizontal lumx-uploader--size-xl lumx-uploader--theme-light lumx-uploader--variant-square"
+>
+  <div
+    className="lumx-uploader__background"
+  />
+  <div
+    className="lumx-uploader__wrapper"
+  />
+</div>
+`;

@@ -1,0 +1,48 @@
+```javascript import
+import { Uploader, UploaderVariant } from '@lumx/react';
+import { mdiImagePlus } from '@lumx/icons';
+```
+
+# Uploader
+
+## Default
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <Uploader
+        icon={mdiImagePlus}
+        label="Add profile picture"
+        theme={theme}
+    />
+);
+```
+
+## Rounded
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <Uploader
+        icon={mdiImagePlus}
+        label="Add profile picture"
+        theme={theme}
+        variant={UploaderVariant.rounded}
+    />
+);
+```
+
+## Circle
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <Uploader
+        icon={mdiImagePlus}
+        label="Add profile picture"
+        theme={theme}
+        variant={UploaderVariant.circle}
+    />
+);
+```
+
+### Properties
+
+<PropTable component="Uploader" />

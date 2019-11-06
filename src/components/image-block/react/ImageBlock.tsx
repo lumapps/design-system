@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, Theme, Thumbnail, ThumbnailAspectRatio } from 'LumX';
+import { AspectRatio, Alignment, Theme, Thumbnail } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
@@ -27,7 +27,7 @@ interface IImageBlockProps extends IGenericProps {
     /** The caption wrapper alignment. */
     align?: Alignment;
     /** The aspect ratio the image will get. */
-    aspectRatio?: ThumbnailAspectRatio;
+    aspectRatio?: AspectRatio;
     /** Caption position. */
     captionPosition?: ImageBlockCaptionPosition;
     /** The style to apply to the caption section. */
@@ -80,7 +80,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     actions: undefined,
     align: Alignment.left,
-    aspectRatio: ThumbnailAspectRatio.original,
+    aspectRatio: AspectRatio.original,
     captionPosition: ImageBlockCaptionPosition.below,
     captionStyle: {},
     description: undefined,
@@ -127,8 +127,8 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                 }),
                 {
                     [`${CLASSNAME}--fill-height`]: fillHeight,
-                    [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== ThumbnailAspectRatio.original,
-                    [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === ThumbnailAspectRatio.original,
+                    [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== AspectRatio.original,
+                    [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === AspectRatio.original,
                 },
             )}
             {...restProps}

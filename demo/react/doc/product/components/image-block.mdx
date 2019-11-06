@@ -12,7 +12,7 @@ import {
     ImageBlockProps,
     Size,
     Theme,
-    ThumbnailAspectRatio
+    AspectRatio
 } from '@lumx/react';
 import { mdiPencil, mdiEye, mdiDelete } from '@lumx/icons';
 
@@ -59,7 +59,7 @@ Image blocks support thumbnail's different formats (see [thumbnail](/thumbnail))
                 </div>
             </Grid>
         }
-        aspectRatio={ThumbnailAspectRatio.horizontal}
+        aspectRatio={AspectRatio.horizontal}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={
             <Grid>
@@ -89,7 +89,7 @@ A custom padding can be added.
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => (
     <ImageBlock
-        aspectRatio={ThumbnailAspectRatio.horizontal}
+        aspectRatio={AspectRatio.horizontal}
         captionStyle={{ padding: 32 }}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={
@@ -120,7 +120,7 @@ Info can be placed over the image.
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => (
     <ImageBlock
-        aspectRatio={ThumbnailAspectRatio.horizontal}
+        aspectRatio={AspectRatio.horizontal}
         captionPosition={ImageBlockCaptionPosition.over}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={
@@ -152,7 +152,7 @@ There are three alignments: _left_, _center_ and, _right_.
 (theme) => (
     <ImageBlock
         align={Alignment.center}
-        aspectRatio={ThumbnailAspectRatio.original}
+        aspectRatio={AspectRatio.original}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={
             <Grid>

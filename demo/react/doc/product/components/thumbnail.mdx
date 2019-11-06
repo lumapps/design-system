@@ -1,5 +1,5 @@
 ```javascript import
-import { Size, Theme, Thumbnail, ThumbnailAspectRatio, ThumbnailVariant } from '@lumx/react';
+import { Size, Theme, Thumbnail, AspectRatio, ThumbnailVariant } from '@lumx/react';
 ```
 
 # Thumbnail
@@ -33,10 +33,10 @@ Thumbnails come in 4 ratios: _square_, _original_, _vertical_, and _horizontal_.
 ```javascript jsx
 (theme) => (
     <>
-        <Thumbnail aspectRatio={ThumbnailAspectRatio.square} image="https://picsum.photos/150" theme={theme} />
-        <Thumbnail aspectRatio={ThumbnailAspectRatio.original} image="https://picsum.photos/150/80/" theme={theme} />
-        <Thumbnail aspectRatio={ThumbnailAspectRatio.vertical} image="https://picsum.photos/150/150" theme={theme} />
-        <Thumbnail aspectRatio={ThumbnailAspectRatio.horizontal} image="https://picsum.photos/150/150" theme={theme} />
+        <Thumbnail aspectRatio={AspectRatio.square} image="https://picsum.photos/150" theme={theme} />
+        <Thumbnail aspectRatio={AspectRatio.original} image="https://picsum.photos/150/80/" theme={theme} />
+        <Thumbnail aspectRatio={AspectRatio.vertical} image="https://picsum.photos/150/150" theme={theme} />
+        <Thumbnail aspectRatio={AspectRatio.horizontal} image="https://picsum.photos/150/150" theme={theme} />
     </>
 );
 ```
@@ -60,21 +60,21 @@ Thumbnails come in two variants: _squared_ and _rounded_
 (theme) => (
     <>
         <Thumbnail
-            aspectRatio={ThumbnailAspectRatio.original}
+            aspectRatio={AspectRatio.original}
             image="https://picsum.photos/320/240"
             size={Size.l}
             theme={theme}
             variant={ThumbnailVariant.rounded}
         />
         <Thumbnail
-            aspectRatio={ThumbnailAspectRatio.vertical}
+            aspectRatio={AspectRatio.vertical}
             image="https://picsum.photos/240/320"
             size={Size.m}
             theme={theme}
             variant={ThumbnailVariant.rounded}
         />
         <Thumbnail
-            aspectRatio={ThumbnailAspectRatio.square}
+            aspectRatio={AspectRatio.square}
             image="https://picsum.photos/128"
             size={Size.xl}
             theme={theme}

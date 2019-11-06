@@ -1,0 +1,115 @@
+/* ==========================================================================
+   Uploader
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-uploader {
+    $self: &;
+
+    @include lumx-state-transition;
+
+    position: relative;
+    cursor: pointer;
+    outline: none;
+
+    &--theme-light {
+        @include lumx-state('state-default', 'emphasis-medium', 'dark');
+
+        &:hover {
+            @include lumx-state('state-hover', 'emphasis-medium', 'dark');
+        }
+
+        &:active {
+            @include lumx-state('state-active', 'emphasis-medium', 'dark');
+        }
+
+        &[data-focus-visible-added] {
+            @include lumx-state('state-focus', 'emphasis-medium', 'dark');
+        }
+    }
+
+    &--theme-dark {
+        @include lumx-state('state-default', 'emphasis-medium', 'light');
+
+        &:hover {
+            @include lumx-state('state-hover', 'emphasis-medium', 'light');
+        }
+
+        &:active {
+            @include lumx-state('state-active', 'emphasis-medium', 'light');
+        }
+
+        &[data-focus-visible-added] {
+            @include lumx-state('state-focus', 'emphasis-medium', 'light');
+        }
+    }
+
+    &--variant-square {
+        border-radius: 0;
+    }
+
+    &--variant-rounded {
+        border-radius: $lumx-theme-border-radius;
+    }
+
+    &--variant-circle {
+        border-radius: 50%;
+    }
+
+    &__wrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 $lumx-spacing-unit * 2;
+        user-select: none;
+    }
+
+    &__icon {
+        margin-bottom: $lumx-spacing-unit;
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant('dark', 'N');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'N');
+        }
+    }
+
+    &__label {
+        @include lumx-typography('subtitle1');
+
+        text-align: center;
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant('dark', 'N');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'N');
+        }
+    }
+}
+
+/* Uploader sizes
+   ========================================================================== */
+
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-uploader--size-#{$key} {
+        width: $size;
+    }
+}
+
+/* Uploader aspect ratio
+   ========================================================================== */
+
+@each $key, $aspect-ratio in $lumx-thumbnail-aspect-ratio {
+    .#{$lumx-base-prefix}-uploader--aspect-ratio-#{$key} .#{$lumx-base-prefix}-uploader__background {
+        padding-top: $aspect-ratio;
+    }
+}

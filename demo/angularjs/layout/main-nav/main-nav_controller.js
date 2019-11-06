@@ -158,6 +158,10 @@ function MainNavController($state) {
                             state: 'app.product.components.tooltip',
                         },
                         {
+                            label: 'Uploader',
+                            state: 'app.product.components.uploader',
+                        },
+                        {
                             label: 'User block',
                             state: 'app.product.components.user-block',
                         },

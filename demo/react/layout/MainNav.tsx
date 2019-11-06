@@ -76,6 +76,7 @@ const ITEMS: Item[] = [
                     'Thumbnail',
                     'Toolbar',
                     'Tooltip',
+                    'Uploader',
                     'User block',
                 ],
             },

@@ -2,7 +2,7 @@ import React, { CSSProperties, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Alignment, Size, Theme } from 'LumX';
+import { Alignment, AspectRatio, Size, Theme } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
@@ -25,13 +25,14 @@ declare module 'react' {
 
 /**
  * All available aspect ratios.
+ * @deprecated
  */
-enum ThumbnailAspectRatio {
-    original = 'original',
-    horizontal = 'horizontal',
-    vertical = 'vertical',
-    square = 'square',
-}
+const ThumbnailAspectRatio: Record<string, AspectRatio> = {
+    horizontal: AspectRatio.horizontal,
+    original: AspectRatio.original,
+    square: AspectRatio.square,
+    vertical: AspectRatio.vertical,
+};
 
 /**
  *  Authorized size values.
@@ -64,7 +65,7 @@ interface IThumbnailProps extends IGenericProps {
     /** The thumbnail alignment. */
     align?: Alignment;
     /** The image aspect ratio. */
-    aspectRatio?: ThumbnailAspectRatio;
+    aspectRatio?: AspectRatio;
     /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
     /** Avatar image. */
@@ -108,7 +109,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     align: Alignment.left,
-    aspectRatio: ThumbnailAspectRatio.original,
+    aspectRatio: AspectRatio.original,
     fillHeight: false,
     loading: ImageLoading.lazy,
     size: undefined,
@@ -155,7 +156,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             onKeyDown={onEnterPressed(onClick)}
             {...restProps}
         >
-            {aspectRatio === ThumbnailAspectRatio.original ? (
+            {aspectRatio === AspectRatio.original ? (
                 <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
             ) : (
                 <div className="lumx-thumbnail__background" style={style} />
