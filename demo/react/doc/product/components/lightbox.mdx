@@ -1,9 +1,11 @@
 ```javascript import
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Alignment, Button, ImageBlock, ImageBlockProps, Lightbox, Slideshow, SlideshowItem, Theme } from '@lumx/react';
+import { Alignment, Button, ImageBlock, ImageBlockProps, Lightbox, Slideshow, SlideshowItem, Theme, Grid,
+Chip,
+Size } from '@lumx/react';
 ```
 
-# Dialog 
+# Dialog
 
 ## Default
 
@@ -14,7 +16,20 @@ import { Alignment, Button, ImageBlock, ImageBlockProps, Lightbox, Slideshow, Sl
             align: Alignment.center,
             description: 'What an image',
             fillHeight: true,
-            tags: ['#tag1', '#tag2', '#tag3'],
+            tags: (
+                <Grid>
+                    <Chip
+                        className="lumx-spacing-margin-right-tiny"
+                        size={Size.s}>
+                        Tag 1
+                    </Chip>
+                    <Chip
+                        className="lumx-spacing-margin-right-tiny"
+                        size={Size.s}>
+                        Tag 2
+                    </Chip>
+                </Grid>
+            ),
             theme: Theme.dark,
             title: 'Nice Image',
         };
@@ -89,6 +104,6 @@ import { Alignment, Button, ImageBlock, ImageBlockProps, Lightbox, Slideshow, Sl
 
 ```
 
-# Properties 
+# Properties
 
 <PropTable component="Lightbox" />
