@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.1][] - 2019-11-07
+
 ### Changed
 
 -   Fix scrollbar re-appearing when `Dialog` re-renders
@@ -104,3 +106,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.14.0]: https://github.com/lumapps/design-system/tree/v0.14.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.15.0...HEAD
 [0.15.0]: https://github.com/lumapps/design-system/tree/v0.15.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.15.1...HEAD
+[0.15.1]: https://github.com/lumapps/design-system/tree/v0.15.1
