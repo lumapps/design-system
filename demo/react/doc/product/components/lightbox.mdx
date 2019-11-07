@@ -1,6 +1,6 @@
 ```javascript import
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Alignment, Button, ImageBlock, ImageBlockProps, Lightbox, Slideshow, SlideshowItem, Theme, Grid,
+import { Alignment, Button, ImageBlock, ImageBlockProps, Lightbox, Slideshow, SlideshowItem, Theme, ChipGroup,
 Chip,
 Size } from '@lumx/react';
 ```
@@ -17,18 +17,22 @@ Size } from '@lumx/react';
             description: 'What an image',
             fillHeight: true,
             tags: (
-                <Grid>
+                <ChipGroup align="center">
                     <Chip
                         className="lumx-spacing-margin-right-tiny"
-                        size={Size.s}>
+                        size={Size.s}
+                        theme={Theme.dark}
+                    >
                         Tag 1
                     </Chip>
                     <Chip
                         className="lumx-spacing-margin-right-tiny"
-                        size={Size.s}>
+                        size={Size.s}
+                        theme={Theme.dark}
+                    >
                         Tag 2
                     </Chip>
-                </Grid>
+                </ChipGroup>
             ),
             theme: Theme.dark,
             title: 'Nice Image',
