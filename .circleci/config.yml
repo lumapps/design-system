@@ -1,10 +1,63 @@
 version: 2.1
 executors:
+  node-executor:
+    docker:
+      - image: circleci/node:10
+    working_directory: ~/repo
+
   python:
     docker:
       - image: circleci/python:3.7-buster
 
+filters: &tag_only_anchor
+  tags:
+    # borrowed from https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+    only: /^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+  branches:
+    ignore: /.*/
+
+commands:
+  install_dep:
+    description: "Install the frontend dependencies using Yarn and cache them"
+
+    steps:
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            # Find a cache corresponding to the specific yarn.lock checksum
+            # when this files is changed, this key will fail
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages-
+
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+
+      - save_cache:
+          name: Save Yarn Package Cache
+          # Create a new cache key corresponding to this specific yarn.lock
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+  run_react_tests:
+    description: "Run unit tests"
+
+    steps:
+      - run:
+          name: Run unit tests
+          command: |
+            yarn test:react:ci
+          when: always
+
 jobs:
+  frontend-test:
+    executor: node-executor
+    steps:
+      - checkout
+      - install_dep
+      - run_react_tests
+
   release:
     executor: python
 
@@ -19,15 +72,12 @@ jobs:
       - run: make docker_build
       - run: make docker_push
 
-filters: &tag_only_anchor
-  tags:
-    # borrowed from https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
-    only: /^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
-  branches:
-    ignore: /.*/
-
 workflows:
-  version: 2
+  version: 2.1
+  tests:
+    jobs:
+      - frontend-test
+
   release:
     jobs:
       - release:
