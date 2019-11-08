@@ -18,8 +18,7 @@ DOCKER_LABELS= --label="com.lumapps.image.created=$(BUILD_DATE)" \
 --label=com.lumapps.image.authors=frontend@lumapps.com
 
 docker_build:
-	# $(DOCKER_EXEC) build $(DOCKER_LABELS) -t $(DOCKER_IMAGE_CANONICAL) -t ${DOCKER_IMAGE_HUMAN_READABLE} .
-	$(DOCKER_EXEC) build $(DOCKER_LABELS) .
+	$(DOCKER_EXEC) build $(DOCKER_LABELS) -t $(DOCKER_IMAGE_CANONICAL) -t ${DOCKER_IMAGE_HUMAN_READABLE} .
 
 docker_push:
 	$(DOCKER_EXEC) push $(DOCKER_IMAGE_CANONICAL)
