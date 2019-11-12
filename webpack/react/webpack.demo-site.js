@@ -13,9 +13,9 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 
 const { CORE_PATH, CONFIGS, SRC_PATH, DEMO_PATH, DIST_PATH, ICONS_PATH, NODE_MODULES_PATH } = require('../constants');
 
-const mode = process.env.MODE || 'dev';
-const isDev = mode === 'dev';
-const isProd = mode === 'prod';
+const mode = process.env.NODE_ENV;
+const isProd = mode === 'production';
+const isDev = !isProd;
 const reactConfig = require('./webpack.config');
 
 const filename = '[name].[hash:8]';
@@ -75,7 +75,6 @@ module.exports = merge.smartStrategy({
 })(reactConfig, {
     bail: true,
     devtool: isDev ? 'source-map' : '',
-    mode: isProd ? 'production' : 'development',
     name: 'demo-site',
     externals: [],
     entry: {

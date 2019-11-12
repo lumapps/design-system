@@ -230,7 +230,7 @@
         "build:react": "webpack --config webpack/react/webpack.prod.js",
         "postbuild:react": "rm -f ./dist/react/*-theme-*.js*",
         "prebuild:static-site": "rm -Rf ./dist/*",
-        "build:static-site": "MODE=prod webpack --config webpack/react/webpack.demo-site.js",
+        "build:static-site": "NODE_ENV=production webpack --config webpack/react/webpack.demo-site.js",
         "rcb": "npm run build:react",
         "prebuild:angularjs": "rm -Rf ./dist/angularjs/*",
         "build:angularjs": "webpack --config webpack/angularjs/webpack.prod.js && MINIFY=true GENERATE_PACKAGE=true webpack --config webpack/angularjs/webpack.prod.js",

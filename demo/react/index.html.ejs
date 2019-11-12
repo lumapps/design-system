@@ -15,9 +15,10 @@
             const href = htmlWebpackPlugin.files.css[key];
             const id = href.split('.')[0].replace(/^\//, '');
             const disabled = id === 'theme-material' ? 'disabled' : '';
-        %>
-             <link href="<%= href %>" id="<%= id %>" rel="stylesheet" <%= disabled %> />
-        <%
+
+            %>
+            <link href="<%= href %>" id="<%= id %>" rel="stylesheet" <%= disabled %> />
+            <%
         }
         %>
     </head>
@@ -28,13 +29,13 @@
         <%
         // JS chunks.
         for (const key in htmlWebpackPlugin.files.chunks) {
-        %>
-        <script
-            src="<%= htmlWebpackPlugin.files.chunks[key].entry %>"
-            type="text/javascript"
-            crossorigin="<%= webpackConfig.output.crossOriginLoading %>"
-        ></script>
-        <%
+            const entry = htmlWebpackPlugin.files.chunks[key].entry;
+            // Ignore theme chunks.
+            if (entry.includes('theme-')) continue;
+
+            %>
+            <script src="<%= entry %>" type="text/javascript" crossorigin="<%= webpackConfig.output.crossOriginLoading %>"></script>
+            <%
         }
         %>
     </body>
