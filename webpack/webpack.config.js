@@ -69,10 +69,12 @@ const baseConfig = {
                 },
             },
             {
+                exclude: /demo\/react\/doc/,
                 test: /\.(png|jpg|gif|woff(2)?|ttf|eot|svg)$/,
                 loader: 'file-loader',
                 options: {
                     name: '[path][name]-[hash:8].[ext]',
+                    context: DEMO_PATH,
                 },
             },
         ],
@@ -86,7 +88,7 @@ const baseConfig = {
         chunkFilename: '[name].js',
         crossOriginLoading: 'anonymous',
         filename: '[name].js',
-        sourceMapFilename: '[name].js.map',
+        // SourceMapFilename: '[name].js.map',
     },
 
     performance: {
@@ -98,7 +100,7 @@ const baseConfig = {
     profile: false,
 
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json', '.md', '.mdx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', 'json'],
         modules: ['node_modules'],
         alias: {
             'LumX/angularjs': path.resolve(__dirname, `${CORE_PATH}/angularjs`),

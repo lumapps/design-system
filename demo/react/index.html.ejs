@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>Design System</title>
+
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700" />
+
+        <%
+        // CSS assets.
+        for (const key in htmlWebpackPlugin.files.css) {
+            const href = htmlWebpackPlugin.files.css[key];
+            const id = href.split('.')[0].replace(/^\//, '');
+            const disabled = id === 'theme-material' ? 'disabled' : '';
+
+            %>
+            <link href="<%= href %>" id="<%= id %>" rel="stylesheet" <%= disabled %> />
+            <%
+        }
+        %>
+    </head>
+
+    <body>
+        <div class="app" id="root"></div>
+
+        <%
+        // JS chunks.
+        for (const key in htmlWebpackPlugin.files.chunks) {
+            const entry = htmlWebpackPlugin.files.chunks[key].entry;
+            // Ignore theme chunks.
+            if (entry.includes('theme-')) continue;
+
+            %>
+            <script src="<%= entry %>" type="text/javascript" crossorigin="<%= webpackConfig.output.crossOriginLoading %>"></script>
+            <%
+        }
+        %>
+    </body>
+</html>
