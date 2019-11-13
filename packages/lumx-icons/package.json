@@ -3,18 +3,6 @@
     "bugs": {
         "url": "https://github.com/lumapps/design-system/issues"
     },
-    "contributors": [
-        {
-            "name": "Marc-Olivier Castagnetti.",
-            "email": "marc-olivier@lumapps.com",
-            "url": "https://github.com/mcastagnetti"
-        },
-        {
-            "name": "Pierre Dupuis",
-            "email": "pierre@lumapps.com",
-            "url": "https://github.com/pidupuis"
-        }
-    ],
     "dependencies": {
         "@mdi/font": "4.2.95",
         "@mdi/js": "4.2.95"
@@ -28,10 +16,9 @@
     "license": "MIT",
     "main": "index.js",
     "name": "@lumx/icons",
-    "private": false,
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"
     },
-    "version": "0.8.1"
+    "version": "0.16.0"
 }
