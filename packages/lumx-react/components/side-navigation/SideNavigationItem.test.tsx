@@ -2,10 +2,10 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
+import { getBasicClass } from '@lumx/core/utils';
 
-import { mdiAccount } from 'LumX/icons';
+import { mdiAccount } from '@lumx/icons';
 
 import { CLASSNAME, DEFAULT_PROPS, SideNavigationItem, SideNavigationItemProps } from './SideNavigationItem';
 

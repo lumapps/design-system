@@ -4,12 +4,12 @@ import classNames from 'classnames';
 
 import { Alignment, AspectRatio, Size, Theme } from 'LumX';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
 import isFunction from 'lodash/isFunction';
 
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses, onEnterPressed } from '@lumx/core/utils';
 
 /**
  * Loading attribute is not yet supported in typescript, so we need

@@ -1,9 +1,9 @@
 import React, { Children, ReactElement, ReactNode } from 'react';
 
 import { SideNavigationItem, Theme } from 'LumX';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
 import { COMPONENT_PREFIX } from 'LumX/react/constants';
 import { IGenericProps, getRootClassName, isComponent } from 'LumX/react/utils';
 import classNames from 'classnames';

@@ -4,11 +4,11 @@ import classNames from 'classnames';
 
 import { Dropdown, Offset, Placement, TextField, TextFieldType, Theme } from 'LumX';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { handleBasicClasses } from '@lumx/core/utils';
 import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
-import { useFocusOnClose } from 'LumX/core/react/hooks/useFocusOnClose';
+import { useFocusOnClose } from '@lumx/core/react/hooks/useFocusOnClose';
 
 /////////////////////////////
 

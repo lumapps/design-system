@@ -1,5 +1,5 @@
 import { Button, Emphasis, Switch, SwitchPosition, Theme } from 'LumX';
-import { mdiCodeTags } from 'LumX/icons';
+import { mdiCodeTags } from '@lumx/icons';
 import classNames from 'classnames';
 import React, { ReactChild, ReactElement, useState } from 'react';
 import Highlight from 'react-highlight';

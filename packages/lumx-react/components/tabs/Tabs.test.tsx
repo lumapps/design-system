@@ -5,8 +5,8 @@ import noop from 'lodash/noop';
 import { mount, shallow } from 'enzyme';
 import { build, oneOf } from 'test-data-bot';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
+import { getBasicClass } from '@lumx/core/utils';
 
 import { Tab } from 'LumX';
 import { CLASSNAME, Tabs, TabsLayout, TabsPosition, TabsProps } from './Tabs';

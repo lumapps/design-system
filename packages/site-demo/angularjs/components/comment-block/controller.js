@@ -1,4 +1,4 @@
-import { mdiDotsVertical, mdiHeart, mdiReply } from 'LumX/icons';
+import { mdiDotsVertical, mdiHeart, mdiReply } from '@lumx/icons';
 
 /////////////////////////////
 

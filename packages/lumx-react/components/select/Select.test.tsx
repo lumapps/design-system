@@ -3,8 +3,8 @@ import React, { ReactElement, RefObject } from 'react';
 import { mount, shallow } from 'enzyme';
 
 import { Chip, Icon } from 'LumX';
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
+import { getBasicClass } from '@lumx/core/utils';
 
 import { mdiCloseCircle, mdiMenuDown } from '@mdi/js';
 import { Theme } from 'LumX/components';

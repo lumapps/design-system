@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react';
 import classNames from 'classnames';
 
 import { Theme } from 'LumX';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { handleBasicClasses } from '@lumx/core/utils';
 import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
 /////////////////////////////

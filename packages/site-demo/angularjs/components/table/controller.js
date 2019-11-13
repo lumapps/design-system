@@ -1,4 +1,4 @@
-import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from 'LumX/icons';
+import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx/icons';
 
 /////////////////////////////
 

@@ -1,4 +1,4 @@
-import { mdiCodeTags } from 'LumX/icons';
+import { mdiCodeTags } from '@lumx/icons';
 
 import template from './demo-block.html';
 

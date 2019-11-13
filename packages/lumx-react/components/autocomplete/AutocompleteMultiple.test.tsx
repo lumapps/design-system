@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 
 import { List, ListItem, Size } from 'LumX';
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
 
 import { AutocompleteMultiple, AutocompleteMultipleProps, CLASSNAME } from './AutocompleteMultiple';
 

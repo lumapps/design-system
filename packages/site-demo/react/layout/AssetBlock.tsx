@@ -2,7 +2,7 @@ import { Button, Emphasis, Icon, Size } from 'LumX';
 
 import React, { ReactElement } from 'react';
 
-import { mdiDownload, mdiFile } from 'LumX/icons';
+import { mdiDownload, mdiFile } from '@lumx/icons';
 
 /**
  * https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#adding-non-standard-attributes

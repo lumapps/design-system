@@ -2,14 +2,14 @@ import React, { ReactElement, RefObject } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
 import { Progress, ProgressVariant, Size, Theme } from 'LumX';
 import { Lightbox } from 'LumX/components/lightbox/react/Lightbox';
-import useIntersectionObserver from 'LumX/core/react/hooks/useIntersectionObserver';
+import useIntersectionObserver from '@lumx/core/react/hooks/useIntersectionObserver';
 
 /////////////////////////////
 

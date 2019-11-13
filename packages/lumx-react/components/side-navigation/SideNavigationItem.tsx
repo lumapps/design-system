@@ -2,8 +2,8 @@ import React, { Children, ReactElement, ReactNode } from 'react';
 
 import { Icon, Size } from 'LumX';
 import { Emphasis } from 'LumX/components/index';
-import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
-import { mdiChevronDown, mdiChevronUp } from 'LumX/icons';
+import { handleBasicClasses, onEnterPressed } from '@lumx/core/utils';
+import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { COMPONENT_PREFIX } from 'LumX/react/constants';
 import { Callback, IGenericProps, getRootClassName, isComponent } from 'LumX/react/utils';
 import classNames from 'classnames';

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { mount } from 'enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
 
 import { ColorPalette, Emphasis, Size, Theme } from 'LumX';
 import {
@@ -11,7 +11,7 @@ import {
     ButtonRoot,
     ButtonRootProps,
 } from 'LumX/components/button/react/ButtonRoot';
-import { getBasicClass } from 'LumX/core/utils';
+import { getBasicClass } from '@lumx/core/utils';
 
 /////////////////////////////
 

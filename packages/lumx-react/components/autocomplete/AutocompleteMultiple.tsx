@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import { mdiClose } from '@mdi/js';
 import { Autocomplete, AutocompleteProps, Chip, ChipGroup, Icon, Size } from 'LumX';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { handleBasicClasses } from '@lumx/core/utils';
 import { getRootClassName } from 'LumX/react/utils';
 
 /////////////////////////////

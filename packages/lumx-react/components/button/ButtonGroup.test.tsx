@@ -4,8 +4,8 @@ import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 
 import { Button, Icon, IconButton } from 'LumX';
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { mdiPlus } from 'LumX/icons';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
+import { mdiPlus } from '@lumx/icons';
 
 import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
 

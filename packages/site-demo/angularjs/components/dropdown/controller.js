@@ -6,7 +6,7 @@ import {
     mdiStar,
     mdiHelpCircle,
     mdiWrench,
-} from 'LumX/icons';
+} from '@lumx/icons';
 
 /////////////////////////////
 

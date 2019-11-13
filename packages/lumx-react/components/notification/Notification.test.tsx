@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 
 import noop from 'lodash/noop';
 
-import { ICommonSetup, Wrapper } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper } from '@lumx/core/testing/utils.test';
 
 import { CLASSNAME, Notification, NotificationProps, NotificationType } from './Notification';
 

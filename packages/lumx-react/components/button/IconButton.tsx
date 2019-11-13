@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 
 import { Emphasis, Icon, Size, Theme } from 'LumX';
 import { BaseButtonProps, ButtonRoot } from 'LumX/components/button/react/ButtonRoot';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { getRootClassName } from 'LumX/core/react/utils';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { getRootClassName } from '@lumx/core/react/utils';
 
 /////////////////////////////
 

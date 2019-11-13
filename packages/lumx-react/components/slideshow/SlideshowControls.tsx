@@ -8,11 +8,11 @@ import {
     PAGINATION_ITEMS_MAX,
     PAGINATION_ITEM_SIZE,
 } from 'LumX/components/slideshow/constants';
-import { LEFT_KEY_CODE, RIGHT_KEY_CODE } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { SwipeDirection, detectSwipe, handleBasicClasses } from 'LumX/core/utils';
-import { mdiChevronLeft, mdiChevronRight } from 'LumX/icons';
+import { LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/core/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { SwipeDirection, detectSwipe, handleBasicClasses } from '@lumx/core/utils';
+import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';

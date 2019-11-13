@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
-import { useChipGroupNavigation, useChipGroupNavigationType } from 'LumX/core/react/hooks/useChipGroupNavigation';
+import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/core/react/hooks/useChipGroupNavigation';
 
 /////////////////////////////
 

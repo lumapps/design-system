@@ -7,10 +7,10 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 import { Theme } from 'LumX';
-import { CSS_PREFIX } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { CSS_PREFIX } from '@lumx/core/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { IGenericProps, getRootClassName, validateComponent } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
 /////////////////////////////
 

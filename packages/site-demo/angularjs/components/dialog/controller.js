@@ -1,4 +1,4 @@
-import { COMPONENT_PREFIX } from 'LumX/angularjs/constants/common_constants';
+import { COMPONENT_PREFIX } from '@lumx/angularjs/constants/common_constants';
 
 function DemoDialogController($scope, LumXDialogService, LumXNotificationService) {
     'ngInject';

@@ -1,9 +1,9 @@
 import React, { ReactElement, ReactNode } from 'react';
 
 import { Emphasis, Icon, Size, Theme } from 'LumX';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { getRootClassName } from 'LumX/core/react/utils';
-import { getBasicClass } from 'LumX/core/utils';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { getRootClassName } from '@lumx/core/react/utils';
+import { getBasicClass } from '@lumx/core/utils';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';

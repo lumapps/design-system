@@ -4,9 +4,9 @@ import { mount, shallow } from 'enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
 import { ColorPalette, ColorVariant, Size } from 'LumX';
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
-import { mdiCheck, mdiPlus } from 'LumX/icons';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
+import { getBasicClass } from '@lumx/core/utils';
+import { mdiCheck, mdiPlus } from '@lumx/icons';
 
 import { CLASSNAME, Icon, IconProps } from './Icon';
 

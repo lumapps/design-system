@@ -1,4 +1,4 @@
-import { mdiComment, mdiHeart } from 'LumX/icons';
+import { mdiComment, mdiHeart } from '@lumx/icons';
 
 /////////////////////////////
 

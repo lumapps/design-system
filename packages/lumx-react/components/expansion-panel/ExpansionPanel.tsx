@@ -4,9 +4,9 @@ import classNames from 'classnames';
 
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { ColorPalette, DragHandle, Emphasis, IconButton, Theme } from 'LumX';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { Callback, IGenericProps, getRootClassName, isComponent, partitionMulti } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { Callback, IGenericProps, getRootClassName, isComponent, partitionMulti } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 import { get, isEmpty, isFunction } from 'lodash';
 
 /////////////////////////////

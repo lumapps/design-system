@@ -3,9 +3,9 @@ import React, { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 import { Offset, Placement, Popover } from 'LumX/components/popover/react/Popover';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { useClickAway, useInfiniteScroll } from 'LumX/core/react/hooks';
-import { handleBasicClasses, onEscapePressed } from 'LumX/core/utils';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { useClickAway, useInfiniteScroll } from '@lumx/core/react/hooks';
+import { handleBasicClasses, onEscapePressed } from '@lumx/core/utils';
 import { IGenericProps, getRootClassName } from 'LumX/react/utils';
 
 /////////////////////////////

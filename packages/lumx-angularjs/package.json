@@ -5,39 +5,16 @@
     "bugs": {
         "url": "https://github.com/lumapps/design-system/issues"
     },
-    "contributors": [
-        {
-            "name": "Clement Prevot",
-            "email": "clement@lumapps.com",
-            "url": "https://github.com/clementprevot"
-        },
-        {
-            "name": "Marc-Olivier Castagnetti.",
-            "email": "marc-olivier@lumapps.com",
-            "url": "https://github.com/mcastagnetti"
-        },
-        {
-            "name": "Matthias Manoukian",
-            "email": "matthias@lumapps.com",
-            "url": "https://github.com/matmkian"
-        },
-        {
-            "name": "Pierre Dupuis",
-            "email": "pierre@lumapps.com",
-            "url": "https://github.com/pidupuis"
-        }
-    ],
     "dependencies": {
+        "@lumx/core": "0.16.0",
+        "@lumx/icons": "0.16.0",
         "angular": "^1.7.8",
-        "jquery": "^3.3.1",
         "focus-visible": "^4.1.5",
+        "jquery": "^3.3.1",
         "lodash": "^4.17.11",
         "sass-mq": "^5.0.0"
     },
     "description": "The official LumApps Design System (LumX) for AngularJS applications",
-    "devDependencies": {
-        "http-server": "latest"
-    },
     "engines": {
         "node": ">= 10.0.0",
         "npm": ">= 4.0.0",
@@ -51,16 +28,21 @@
         "AngularJS"
     ],
     "license": "MIT",
-    "main": "lumx.angularjs.js",
+    "main": "index.js",
     "name": "@lumx/angularjs",
-    "private": false,
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"
     },
-    "scripts": {
-        "serve": "http-server -p 8081 ./ -s -o --cors -c-1",
-        "setup": "yarn install"
-    },
-    "version": "0.7.0"
+    "version": "0.16.0",
+    "devDependencies": {
+        "copy-webpack-plugin": "^5.0.5",
+        "friendly-errors-webpack-plugin": "^1.7.0",
+        "html-minifier-webpack-plugin": "^2.2.1",
+        "is-ci": "^2.0.0",
+        "unminified-webpack-plugin": "^2.0.0",
+        "webpack": "^4.41.2",
+        "webpack-notifier": "^1.8.0",
+        "webpackbar": "^4.0.0"
+    }
 }

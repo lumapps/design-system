@@ -1,4 +1,4 @@
-import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant } from 'LumX/icons';
+import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant } from '@lumx/icons';
 
 /////////////////////////////
 

@@ -1,4 +1,4 @@
-import { mdiSend } from 'LumX/icons';
+import { mdiSend } from '@lumx/icons';
 
 /////////////////////////////
 

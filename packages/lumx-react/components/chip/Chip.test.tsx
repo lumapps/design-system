@@ -2,8 +2,8 @@ import { ShallowWrapper, shallow } from 'enzyme';
 import React from 'react';
 
 import { ColorPalette, Theme } from 'LumX';
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
+import { ICommonSetup } from '@lumx/core/testing/utils.test';
+import { getBasicClass } from '@lumx/core/utils';
 import { CLASSNAME, Chip, ChipProps } from './Chip';
 
 interface ISetup extends ICommonSetup {

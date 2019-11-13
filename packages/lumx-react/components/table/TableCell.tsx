@@ -3,11 +3,11 @@ import React, { ReactElement, useCallback } from 'react';
 import classNames from 'classnames';
 
 import { Icon, Size } from 'LumX';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses, onEnterPressed } from '@lumx/core/utils';
 
-import { mdiArrowDown, mdiArrowUp } from 'LumX/icons';
+import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
 import isFunction from 'lodash/isFunction';
 

@@ -2,16 +2,16 @@ import React, { Children, ReactElement, RefObject, cloneElement, useEffect, useR
 
 import classNames from 'classnames';
 
-import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
+import { DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from '@lumx/core/constants';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
 import { ListItem, ListItemProps, Theme } from 'LumX';
-import { IGenericProps, getRootClassName, isComponent } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { IGenericProps, getRootClassName, isComponent } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
-import { useKeyboardListNavigation, useKeyboardListNavigationType } from 'LumX/core/react/hooks';
+import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/core/react/hooks';
 
 /////////////////////////////
 /**

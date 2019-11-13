@@ -2,11 +2,11 @@ import React, { ReactElement, ReactNode, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
 import { Size, Theme } from 'LumX';
-import { Callback, IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
+import { Callback, IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses, onEnterPressed } from '@lumx/core/utils';
 
 /**
  *  Authorized size values.

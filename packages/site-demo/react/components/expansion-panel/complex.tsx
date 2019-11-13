@@ -13,7 +13,7 @@ import {
     Size,
     Theme,
 } from 'LumX';
-import { mdiSend } from 'LumX/icons';
+import { mdiSend } from '@lumx/icons';
 
 /////////////////////////////
 

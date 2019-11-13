@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import { build } from 'test-data-bot';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
+import { getBasicClass } from '@lumx/core/utils';
 
 import { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps, TextFieldType } from './TextField';
 

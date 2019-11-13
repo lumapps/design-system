@@ -5,9 +5,9 @@ import isEmpty from 'lodash/isEmpty';
 import classNames from 'classnames';
 
 import { Color, ColorPalette, Emphasis, Size, Theme } from 'LumX';
-import { CSS_PREFIX } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { CSS_PREFIX } from '@lumx/core/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { handleBasicClasses } from '@lumx/core/utils';
 
 import { IGenericProps } from 'LumX/react/utils';
 

@@ -1,6 +1,6 @@
 import { RefObject, SetStateAction, useEffect, useState } from 'react';
 
-import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, UP_KEY_CODE } from 'LumX/core/constants';
+import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, UP_KEY_CODE } from '@lumx/core/constants';
 
 import get from 'lodash/get';
 

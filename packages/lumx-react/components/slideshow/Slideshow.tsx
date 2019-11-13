@@ -4,11 +4,11 @@ import classNames from 'classnames';
 
 import { Theme } from 'LumX';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from 'LumX/components/slideshow/constants';
-import { CSS_PREFIX } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { useInterval } from 'LumX/core/react/hooks';
-import { IGenericProps, getRootClassName, validateComponent } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { CSS_PREFIX } from '@lumx/core/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { useInterval } from '@lumx/core/react/hooks';
+import { IGenericProps, getRootClassName, validateComponent } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
 import { SlideshowControls } from './SlideshowControls';
 

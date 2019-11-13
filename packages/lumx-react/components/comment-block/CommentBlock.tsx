@@ -2,12 +2,12 @@ import React, { KeyboardEvent, KeyboardEventHandler, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
 import { Avatar, Size, Theme } from 'LumX';
-import { ENTER_KEY_CODE } from 'LumX/core/constants';
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { ENTER_KEY_CODE } from '@lumx/core/constants';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 import { isFunction } from 'lodash';
 
 /////////////////////////////

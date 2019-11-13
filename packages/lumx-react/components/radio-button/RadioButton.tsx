@@ -3,11 +3,11 @@ import React, { ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { Theme } from 'LumX';
-import { CSS_PREFIX } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
 import uniqueId from 'lodash/uniqueId';
 

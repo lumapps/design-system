@@ -2,15 +2,15 @@ import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
 import isObject from 'lodash/isObject';
 
 import { AspectRatio, Orientation, Theme, Thumbnail, ThumbnailVariant } from 'LumX';
 
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
 
-import { handleBasicClasses } from 'LumX/core/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
 /////////////////////////////
 

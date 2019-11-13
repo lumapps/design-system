@@ -1,7 +1,7 @@
 import { shallow } from 'enzyme';
 import React from 'react';
 
-import { ICommonSetup } from 'LumX/core/testing/utils.test';
+import { ICommonSetup } from '@lumx/core/testing/utils.test';
 import { Chip } from './Chip';
 import { ChipGroup, ChipGroupProps } from './ChipGroup';
 

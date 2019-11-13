@@ -3,7 +3,7 @@ import React, { ReactElement, ReactNode, Ref } from 'react';
 import classNames from 'classnames';
 
 import { IconButton } from 'LumX';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 import { IGenericProps, getRootClassName, validateComponent } from 'LumX/react/utils';
 
 import { Button } from './Button';

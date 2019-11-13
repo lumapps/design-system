@@ -1,15 +1,14 @@
 import React, { CSSProperties, ReactElement, RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
-import { Placement } from 'LumX';
+import { Placement } from '@lumx/react';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
-import { Offset, Popover } from 'LumX/components/popover/react/Popover';
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
-import { createPortal } from 'react-dom';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
 /////////////////////////////
 

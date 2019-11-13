@@ -1,4 +1,4 @@
-import { mdiFileDocumentBoxOutline, mdiMenu } from 'LumX/icons';
+import { mdiFileDocumentBoxOutline, mdiMenu } from '@lumx/icons';
 
 /////////////////////////////
 

@@ -1,6 +1,6 @@
 /* eslint-disable global-require, import/no-commonjs, import/max-dependencies */
 
-import { MODULE_NAME } from 'LumX/angularjs/constants/common_constants';
+import { MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import { changeTheme, setDemoCustomColors } from '../utils';
 import { DEFAULT_THEME, THEMES } from '../constants';

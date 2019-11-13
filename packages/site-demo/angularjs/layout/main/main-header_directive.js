@@ -1,4 +1,4 @@
-import { mdiReact } from 'LumX/icons';
+import { mdiReact } from '@lumx/icons';
 
 import { changeTheme as _changeTheme } from '../../../utils';
 

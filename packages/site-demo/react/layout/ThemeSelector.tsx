@@ -4,7 +4,7 @@ import { Chip, Size } from 'LumX';
 
 import { Theme } from 'LumX/demo/constants';
 
-import { IGenericProps } from 'LumX/core/react/utils';
+import { IGenericProps } from '@lumx/core/react/utils';
 
 /////////////////////////////
 

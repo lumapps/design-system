@@ -1,4 +1,4 @@
-import { mdiSend, mdiDotsHorizontal } from 'LumX/icons';
+import { mdiSend, mdiDotsHorizontal } from '@lumx/icons';
 
 /////////////////////////////
 

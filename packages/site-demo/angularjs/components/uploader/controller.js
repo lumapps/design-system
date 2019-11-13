@@ -1,4 +1,4 @@
-import { mdiImagePlus } from 'LumX/icons';
+import { mdiImagePlus } from '@lumx/icons';
 
 /////////////////////////////
 

@@ -1,4 +1,4 @@
-import { mdiDelete, mdiEye, mdiPencil } from 'LumX/icons';
+import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 
 /////////////////////////////
 

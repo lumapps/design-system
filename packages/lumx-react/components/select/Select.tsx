@@ -4,16 +4,16 @@ import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@mdi/js';
 
-import { CSS_PREFIX } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
 import { Chip, ChipGroup, Dropdown, Emphasis, Icon, IconButton, Placement, Size, Theme } from 'LumX';
 
-import { ENTER_KEY_CODE, SPACE_KEY_CODE } from 'LumX/core/constants';
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
+import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/core/constants';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
 
-import { useFocusOnClose } from 'LumX/core/react/hooks/useFocusOnClose';
+import { useFocusOnClose } from '@lumx/core/react/hooks/useFocusOnClose';
 
 /////////////////////////////
 

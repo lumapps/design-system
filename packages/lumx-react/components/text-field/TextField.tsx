@@ -5,11 +5,11 @@ import get from 'lodash/get';
 import uuid from 'uuid/v4';
 
 import { Emphasis, Icon, IconButton, Size, Theme } from 'LumX';
-import { CSS_PREFIX } from 'LumX/core/constants';
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
-import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
-import { handleBasicClasses } from 'LumX/core/utils';
-import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from 'LumX/icons';
+import { CSS_PREFIX } from '@lumx/core/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
+import { IGenericProps, getRootClassName } from '@lumx/core/react/utils';
+import { handleBasicClasses } from '@lumx/core/utils';
+import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 
 /////////////////////////////
 

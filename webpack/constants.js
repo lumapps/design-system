@@ -13,6 +13,8 @@ function getAbsolutePath(pathName) {
 // Path relative constants.
 const ROOT_PATH = getAbsolutePath('../');
 
+const EXAMPLES_PATH = `${ROOT_PATH}/examples`;
+
 // Dev-server relative constants
 const DEFAULT_HOST = '0.0.0.0';
 const DEFAULT_PORT = 4000;
@@ -182,6 +184,7 @@ const CONFIGS = {
 
 module.exports = {
     CONFIGS,
+    EXAMPLES_PATH,
     DEFAULT_HOST,
     DEFAULT_PORT,
     ROOT_PATH,

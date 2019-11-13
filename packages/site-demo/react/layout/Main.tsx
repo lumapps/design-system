@@ -2,11 +2,11 @@ import React, { ReactElement } from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 
 import { Alignment, Button, Emphasis, Grid, GridItem, Orientation, Size } from 'LumX';
-import { mdiAngularjs } from 'LumX/icons';
+import { mdiAngularjs } from '@lumx/icons';
 
 import { Theme } from 'LumX/demo/constants';
 
-import { IGenericProps } from 'LumX/core/react/utils';
+import { IGenericProps } from '@lumx/core/react/utils';
 
 import { MainContent } from './MainContent';
 import { ThemeSelector } from './ThemeSelector';

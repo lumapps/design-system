@@ -2,15 +2,15 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/core/react/constants';
 
-import { Callback, IGenericProps, getRootClassName } from 'LumX/core/react/utils';
+import { Callback, IGenericProps, getRootClassName } from '@lumx/core/react/utils';
 
 import { Size, Theme } from 'LumX/components/index';
-import { handleBasicClasses, onEnterPressed } from 'LumX/core/utils';
+import { handleBasicClasses, onEnterPressed } from '@lumx/core/utils';
 
 import { AspectRatio, Avatar, Icon, Thumbnail, ThumbnailVariant } from 'LumX';
-import { mdiImagePlus } from 'LumX/icons';
+import { mdiImagePlus } from '@lumx/icons';
 
 import noop from 'lodash/noop';
 

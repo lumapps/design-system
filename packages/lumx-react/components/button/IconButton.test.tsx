@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
 import { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps } from './IconButton';
 
 /////////////////////////////

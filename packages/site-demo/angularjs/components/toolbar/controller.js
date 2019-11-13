@@ -1,4 +1,4 @@
-import { mdiChevronLeft, mdiDotsVertical, mdiMagnify, mdiMenuDown, mdiTranslate, mdiViewGrid } from 'LumX/icons';
+import { mdiChevronLeft, mdiDotsVertical, mdiMagnify, mdiMenuDown, mdiTranslate, mdiViewGrid } from '@lumx/icons';
 
 /////////////////////////////
 

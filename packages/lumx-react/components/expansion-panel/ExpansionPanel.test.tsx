@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from 'LumX/core/testing/utils.test';
-import { getBasicClass } from 'LumX/core/utils';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils.test';
+import { getBasicClass } from '@lumx/core/utils';
 
 import { Theme } from 'LumX';
 import { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps } from './ExpansionPanel';

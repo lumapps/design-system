@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-import { setCustomColors } from 'LumX/core/custom-colors';
+import { setCustomColors } from '@lumx/core/custom-colors';
 
 /////////////////////////////
 //                         //

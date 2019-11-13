@@ -1,4 +1,4 @@
-import { mdiMagnify } from 'LumX/icons';
+import { mdiMagnify } from '@lumx/icons';
 
 /////////////////////////////
 

@@ -1,4 +1,4 @@
-import { mdiPencil } from 'LumX/icons';
+import { mdiPencil } from '@lumx/icons';
 
 /////////////////////////////
 
