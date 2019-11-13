@@ -88,7 +88,6 @@ function getStyleLoader({ mode = 'dev' }) {
                 {
                     loader: 'sass-loader',
                     options: {
-                        includePaths: [`${ICONS_PATH}/node_modules/@mdi/font/scss/`, `${NODE_MODULES_PATH}/sass-mq`],
                         sourceMap: false,
                     },
                 },

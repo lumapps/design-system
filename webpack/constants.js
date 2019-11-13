@@ -13,18 +13,6 @@ function getAbsolutePath(pathName) {
 // Path relative constants.
 const ROOT_PATH = getAbsolutePath('../');
 
-const DEMO_PATH = `${ROOT_PATH}/demo`;
-const DIST_PATH = `${ROOT_PATH}/dist`;
-const EXAMPLES_PATH = `${ROOT_PATH}/examples`;
-const NODE_MODULES_PATH = `${ROOT_PATH}/node_modules`;
-const SRC_PATH = `${ROOT_PATH}/src`;
-
-const COMPONENTS_PATH = `${SRC_PATH}/components`;
-const CORE_PATH = `${SRC_PATH}/core`;
-const ICONS_PATH = `${SRC_PATH}/icons`;
-
-const STYLES_PATH = `${CORE_PATH}/style`;
-
 // Dev-server relative constants
 const DEFAULT_HOST = '0.0.0.0';
 const DEFAULT_PORT = 4000;
@@ -193,17 +181,8 @@ const CONFIGS = {
 };
 
 module.exports = {
-    COMPONENTS_PATH,
     CONFIGS,
-    CORE_PATH,
     DEFAULT_HOST,
     DEFAULT_PORT,
-    DEMO_PATH,
-    DIST_PATH,
-    EXAMPLES_PATH,
-    ICONS_PATH,
-    NODE_MODULES_PATH,
     ROOT_PATH,
-    SRC_PATH,
-    STYLES_PATH,
 };

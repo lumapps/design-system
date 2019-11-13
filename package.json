@@ -140,6 +140,7 @@
         "jest-watch-master": "^1.0.0",
         "jest-watch-suspend": "^1.1.2",
         "jest-watch-typeahead": "^0.4.0",
+        "lerna": "^3.18.4",
         "lint-staged": "^8.2.1",
         "lumapps-conventional-changelog": "git+https://git@github.com/lumapps/lumapps-conventional-changelog#master",
         "lumapps-conventional-commit-types": "git+https://git@github.com/lumapps/lumapps-conventional-commit-types#master",
