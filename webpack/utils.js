@@ -31,6 +31,7 @@ function babelSetup({ plugins = [], presets = [], options = {} } = {}) {
                     // eslint-disable-next-line no-magic-numbers
                     corejs: '3',
                     loose: true,
+                    modules: false,
                     targets: ['last 2 versions', 'ie >= 11'],
                     useBuiltIns: 'usage',
                 },

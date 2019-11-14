@@ -5,41 +5,43 @@
     "bugs": {
         "url": "https://github.com/lumapps/design-system/issues"
     },
-    "contributors": [
-        {
-            "name": "Clement Prevot",
-            "email": "clement@lumapps.com",
-            "url": "https://github.com/clementprevot"
-        },
-        {
-            "name": "Marc-Olivier Castagnetti.",
-            "email": "marc-olivier@lumapps.com",
-            "url": "https://github.com/mcastagnetti"
-        },
-        {
-            "name": "Matthias Manoukian",
-            "email": "matthias@lumapps.com",
-            "url": "https://github.com/matmkian"
-        },
-        {
-            "name": "Pierre Dupuis",
-            "email": "pierre@lumapps.com",
-            "url": "https://github.com/pidupuis"
-        }
-    ],
     "dependencies": {
+        "@lumx/core": "0.16.0",
+        "@lumx/icons": "0.16.0",
+        "body-scroll-lock": "^2.6.4",
         "classnames": "^2.2.6",
+        "focus-trap-react": "^6.0.0",
+        "focus-visible": "^4.1.5",
+        "lodash": "^4.17.15",
         "react": "^16.8.5",
         "react-dom": "^16.8.5",
-        "uuid": "^3.3.2",
-        "focus-visible": "^4.1.5",
-        "lodash": "^4.17.11",
-        "sass-mq": "^5.0.0"
+        "uuid": "^3.3.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.7.2",
+        "@babel/plugin-proposal-class-properties": "^7.7.0",
+        "@babel/plugin-proposal-export-default-from": "^7.5.2",
+        "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+        "@babel/plugin-proposal-optional-chaining": "^7.6.0",
+        "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+        "@babel/preset-env": "^7.7.1",
+        "@babel/preset-react": "^7.7.0",
+        "awesome-typescript-loader": "^5.2.1",
+        "babel-loader": "^8.0.6",
+        "babel-plugin-smart-webpack-import": "^1.5.1",
+        "copy-webpack-plugin": "^5.0.5",
+        "friendly-errors-webpack-plugin": "^1.7.0",
+        "html-minifier-webpack-plugin": "^2.2.1",
+        "is-ci": "^2.0.0",
+        "terser-webpack-plugin": "^2.2.1",
+        "ts-declaration-webpack-plugin": "^1.2.0",
+        "unminified-webpack-plugin": "^2.0.0",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10",
+        "webpack-notifier": "^1.8.0",
+        "webpackbar": "^4.0.0"
     },
     "description": "The official LumApps Design System (LumX) for React applications",
-    "devDependencies": {
-        "http-server": "latest"
-    },
     "engines": {
         "node": ">= 10.0.0",
         "npm": ">= 4.0.0",
@@ -61,8 +63,7 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "serve": "http-server -p 8080 ./ -s -o --cors -c-1",
-        "setup": "yarn install"
+        "build": "webpack"
     },
-    "version": "0.15.3"
+    "version": "0.16.0"
 }
