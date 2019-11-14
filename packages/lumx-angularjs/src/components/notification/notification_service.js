@@ -1,4 +1,4 @@
-import { CSS_PREFIX } from '@lumx/core/src/constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from '@lumx/angularjs/constants/common_constants';
 
 import { HIDE_DELAY, NOTIFICATION_CONFIGURATION, TRANSITION_DURATION } from './constants';
@@ -39,18 +39,14 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
      */
     function _build(content, type, actionLabel, actionCallback) {
         const notification = angular.element('<div/>', {
-            class: `${CSS_PREFIX}-notification ${CSS_PREFIX}-notification--color-${
-                NOTIFICATION_CONFIGURATION[type].color
-            }`,
+            class: `${CSS_PREFIX}-notification ${CSS_PREFIX}-notification--color-${NOTIFICATION_CONFIGURATION[type].color}`,
         });
 
         const notificationIconWrapper = angular.element('<div/>', {
             class: `${CSS_PREFIX}-notification__icon`,
         });
         const notificationIcon = $compile(
-            `<${COMPONENT_PREFIX}-icon lumx-path="${
-                NOTIFICATION_CONFIGURATION[type].icon
-            }" lumx-size="s"></${COMPONENT_PREFIX}-icon>`,
+            `<${COMPONENT_PREFIX}-icon lumx-path="${NOTIFICATION_CONFIGURATION[type].icon}" lumx-size="s"></${COMPONENT_PREFIX}-icon>`,
         )($rootScope);
 
         const notificationText = angular.element('<span/>', {

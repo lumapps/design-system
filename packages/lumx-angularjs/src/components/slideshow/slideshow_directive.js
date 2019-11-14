@@ -1,4 +1,4 @@
-import { CSS_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/core/src/constants';
+import { CSS_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from './constants';

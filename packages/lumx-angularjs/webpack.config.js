@@ -17,6 +17,7 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 const { CONFIGS, EXAMPLES_PATH, ROOT_PATH } = require('../../webpack/constants');
 const { babelSetup } = require('../../webpack/utils');
 
+const LIB_NAME = '@lumx/angularjs';
 const PKG_PATH = path.resolve(__dirname, './');
 const SRC_PATH = `${PKG_PATH}/src`;
 const DIST_PATH = `${PKG_PATH}/dist`;
@@ -69,7 +70,7 @@ if (!IS_CI) {
     plugins.push(
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            title: 'LumX - Angularjs Package',
+            title: `LumX - ${LIB_NAME} Package`,
         }),
     );
 }
@@ -93,7 +94,7 @@ module.exports = {
     bail: true,
     devtool: 'source-map',
     mode: 'production',
-    name: '@lumx/angularjs',
+    name: LIB_NAME,
 
     module: {
         rules: [
@@ -119,9 +120,10 @@ module.exports = {
 
     resolve: {
         alias: {
-            '@lumx/angularjs': SRC_PATH,
+            [LIB_NAME]: SRC_PATH,
+            // Use un-compiled code.
+            '@lumx/core': '@lumx/core/src',
         },
-        modules: ['node_modules']
     },
 
     output: {
@@ -130,8 +132,8 @@ module.exports = {
         path: DIST_PATH,
         library: {
             root: 'LumX',
-            amd: '@lumx/angularjs',
-            commonjs: '@lumx/angularjs',
+            amd: LIB_NAME,
+            commonjs: LIB_NAME,
         },
         libraryTarget: 'umd',
         umdNamedDefine: true,

@@ -17,6 +17,7 @@ const WebpackNotifierPlugin = require('webpack-notifier');
 
 const { CONFIGS, ROOT_PATH } = require('../../webpack/constants');
 
+const LIB_NAME = '@lumx/core';
 const PKG_PATH = path.resolve(__dirname, './');
 const SRC_PATH = `${PKG_PATH}/src`;
 const DIST_PATH = `${PKG_PATH}/dist`;
@@ -74,7 +75,7 @@ if (!IS_CI) {
     plugins.push(
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            title: 'LumX - Core Package',
+            title: `LumX - ${LIB_NAME} Package`,
         }),
     );
 }
@@ -88,12 +89,11 @@ module.exports = {
     bail: true,
     devtool: 'source-map',
     mode: 'production',
-    name: '@lumx/core',
+    name: LIB_NAME,
 
     module: {
         rules: [
             {
-                exclude: /node_modules/u,
                 test: /\.scss$/u,
                 use: [
                     {

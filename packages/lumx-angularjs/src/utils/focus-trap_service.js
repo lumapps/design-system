@@ -1,4 +1,4 @@
-import { TAB_KEY_CODE } from '@lumx/core/src/constants';
+import { TAB_KEY_CODE } from '@lumx/core/constants';
 import { MODULE_NAME, SERVICE_PREFIX } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////

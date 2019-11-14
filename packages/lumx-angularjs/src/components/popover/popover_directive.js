@@ -1,6 +1,6 @@
 import PopperJs from 'popper.js';
 
-import { CSS_PREFIX } from '@lumx/core/src/constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './popover.html';

@@ -1,4 +1,4 @@
-import { CSS_PREFIX } from '@lumx/core/src/constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import { mdiChevronDown, mdiChevronUp, mdiDragVertical } from '@lumx/icons';

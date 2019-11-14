@@ -1,4 +1,4 @@
-import { CSS_PREFIX, DOWN_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from '@lumx/core/src/constants';
+import { CSS_PREFIX, DOWN_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './list.html';

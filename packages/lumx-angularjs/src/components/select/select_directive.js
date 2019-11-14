@@ -1,4 +1,4 @@
-import { DOWN_KEY_CODE, ENTER_KEY_CODE } from '@lumx/core/src/constants';
+import { DOWN_KEY_CODE, ENTER_KEY_CODE } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
