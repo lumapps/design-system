@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "alwaysStrict": false,
+        "baseUrl": "./src",
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "jsx": "react",
+        "lib": ["es6", "dom"],
+        "locale": "en",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "noEmit": true,
+        "noErrorTruncation": true,
+        "noFallthroughCasesInSwitch": false,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "paths": {},
+        "strict": true,
+        "strictNullChecks": true,
+        "target": "es5"
+    },
+    "exclude": ["**/dist/", "node_modules"]
+}

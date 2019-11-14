@@ -6,6 +6,7 @@
 const IS_CI = require('is-ci');
 const path = require('path');
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -15,9 +16,9 @@ const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-const { CONFIGS, ROOT_PATH } = require('../../webpack/constants');
+const CONFIGS = require('../../configs');
 
-const LIB_NAME = '@lumx/core';
+const PKG_NAME = '@lumx/core';
 const PKG_PATH = path.resolve(__dirname, './');
 const SRC_PATH = `${PKG_PATH}/src`;
 const DIST_PATH = `${PKG_PATH}/dist`;
@@ -34,6 +35,9 @@ const minimizer = [
 ];
 
 const plugins = [
+    /* Clean output */
+    new CleanWebpackPlugin(),
+
     new WebpackBar(),
     new FriendlyErrorsWebpackPlugin(),
     new ExtractCssChunks({
@@ -43,11 +47,11 @@ const plugins = [
     new UnminifiedWebpackPlugin(),
     new CopyWebpackPlugin([
         {
-            from: `${ROOT_PATH}/CONTRIBUTING.md`,
+            from: `${CONFIGS.path.ROOT_PATH}/CONTRIBUTING.md`,
             to: `${DIST_PATH}/`,
         },
         {
-            from: `${ROOT_PATH}/LICENSE.md`,
+            from: `${CONFIGS.path.ROOT_PATH}/LICENSE.md`,
             to: `${DIST_PATH}/`,
         },
         {
@@ -75,7 +79,7 @@ if (!IS_CI) {
     plugins.push(
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            title: `LumX - ${LIB_NAME} Package`,
+            title: `LumX - ${PKG_NAME} Package`,
         }),
     );
 }
@@ -89,7 +93,7 @@ module.exports = {
     bail: true,
     devtool: 'source-map',
     mode: 'production',
-    name: LIB_NAME,
+    name: PKG_NAME,
 
     module: {
         rules: [

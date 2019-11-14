@@ -35,6 +35,7 @@
     "version": "0.16.0",
     "devDependencies": {
         "autoprefixer": "^9.7.1",
+        "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^5.0.5",
         "css-loader": "^3.2.0",
         "extract-css-chunks-webpack-plugin": "^4.6.0",
@@ -45,7 +46,6 @@
         "postcss-flexbox-unboxer": "^1.0.0",
         "postcss-loader": "^3.0.0",
         "sass-loader": "8.0.0",
-        "style-loader": "^0.23.0",
         "unminified-webpack-plugin": "^2.0.0",
         "webpack": "^4.41.2",
         "webpack-notifier": "^1.8.0",

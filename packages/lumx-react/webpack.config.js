@@ -6,6 +6,7 @@
 const IS_CI = require('is-ci');
 const path = require('path');
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -14,10 +15,9 @@ const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
-const { CONFIGS, EXAMPLES_PATH, ROOT_PATH } = require('../../webpack/constants');
-const { babelSetup } = require('../../webpack/utils');
+const CONFIGS = require('../../configs');
 
-const LIB_NAME = '@lumx/react';
+const PKG_NAME = '@lumx/react';
 const PKG_PATH = path.resolve(__dirname, './');
 const SRC_PATH = `${PKG_PATH}/src`;
 const DIST_PATH = `${PKG_PATH}/dist`;
@@ -34,24 +34,26 @@ const minimizer = [
 ];
 
 const plugins = [
+    /* Clean output */
+    new CleanWebpackPlugin(),
+
     new WebpackBar(),
     new FriendlyErrorsWebpackPlugin(),
-    new UnminifiedWebpackPlugin(),
     new CopyWebpackPlugin([
         {
-            from: `${EXAMPLES_PATH}/react/`,
+            from: `${CONFIGS.path.EXAMPLES_PATH}/react/`,
             to: `${DIST_PATH}/examples/`,
         },
         {
-            from: `${EXAMPLES_PATH}/styles.css`,
+            from: `${CONFIGS.path.EXAMPLES_PATH}/styles.css`,
             to: `${DIST_PATH}/examples/`,
         },
         {
-            from: `${ROOT_PATH}/CONTRIBUTING.md`,
+            from: `${CONFIGS.path.ROOT_PATH}/CONTRIBUTING.md`,
             to: DIST_PATH,
         },
         {
-            from: `${ROOT_PATH}/LICENSE.md`,
+            from: `${CONFIGS.path.ROOT_PATH}/LICENSE.md`,
             to: DIST_PATH,
         },
         {
@@ -64,6 +66,9 @@ const plugins = [
         },
     ]),
 
+    /* Bundle non-minified versions of js/css files */
+    new UnminifiedWebpackPlugin(),
+
     /* Bundle TypeScript declaration file */
     new TsDeclarationWebpackPlugin({
         name: 'lumx.react.d.ts',
@@ -74,7 +79,7 @@ if (!IS_CI) {
     plugins.push(
         new WebpackNotifierPlugin({
             alwaysNotify: true,
-            title: `LumX - ${LIB_NAME} Package`,
+            title: `LumX - ${PKG_NAME} Package`,
         }),
     );
 }
@@ -104,7 +109,7 @@ module.exports = {
     bail: true,
     devtool: 'source-map',
     mode: 'production',
-    name: LIB_NAME,
+    name: PKG_NAME,
 
     module: {
         rules: [
@@ -114,9 +119,13 @@ module.exports = {
                 use: [
                     {
                         loader: 'babel-loader?cacheDirectory=true',
-                        options: babelSetup({
-                            presets: ['@babel/preset-react'],
-                        }),
+                        options: {
+                            ...CONFIGS.babel,
+                            presets: [
+                                '@babel/preset-react',
+                                ...CONFIGS.babel.presets
+                            ],
+                        },
                     },
                 ],
             },
@@ -135,7 +144,7 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
         alias: {
-            [LIB_NAME]: SRC_PATH,
+            [PKG_NAME]: SRC_PATH,
             // Use un-compiled code.
             '@lumx/core': '@lumx/core/src',
         },
@@ -147,8 +156,8 @@ module.exports = {
         path: DIST_PATH,
         library: {
             root: 'LumX',
-            amd: LIB_NAME,
-            commonjs: LIB_NAME,
+            amd: PKG_NAME,
+            commonjs: PKG_NAME,
         },
         libraryTarget: 'umd',
         umdNamedDefine: true,
