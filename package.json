@@ -326,5 +326,8 @@
         "version-changelog:react": "cd src/core/react && ../../../node_modules/.bin/version-changelog ../../../CHANGELOG.react.md && cd - && git add CHANGELOG.react.md",
         "webpack": "webpack-dev-server --config webpack/webpack.dev.js",
         "webpack-defaults": "webpack-defaults"
-    }
+    },
+    "workspaces": [
+        "packages/*"
+    ]
 }
