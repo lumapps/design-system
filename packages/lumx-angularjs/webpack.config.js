@@ -100,20 +100,15 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/u,
-                use: [
-                    {
-                        loader: 'babel-loader?cacheDirectory=true',
-                        options: babelSetup({ plugins: [['angularjs-annotate', { explicitOnly: true }]] }),
-                    },
-                ],
+                exclude: /node_modules/u,
+                use: {
+                    loader: 'babel-loader?cacheDirectory=true',
+                    options: babelSetup({ plugins: [['angularjs-annotate', { explicitOnly: true }]] }),
+                },
             },
             {
-                test: /\.(html)$/,
-                use: [
-                    {
-                        loader: 'html-loader',
-                    },
-                ],
+                test: /\.html$/,
+                use: 'html-loader',
             },
         ],
     },
