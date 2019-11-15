@@ -1,5 +1,5 @@
 ```javascript import
-import { Icon, Size, Theme } from 'LumX';
+import { Icon, Size, Theme, Thumbnail } from 'LumX';
 import { mdiEmail } from 'LumX/icons';
 ```
 
@@ -9,7 +9,7 @@ import { mdiEmail } from 'LumX/icons';
 **Icons are small visual representations of common actions, objects or ideas. They help users to identify information and provide context.**
 
 ## Sizes
-Comes in 5 sizes: xs, s, m, l, xl.
+Icons come in 5 sizes: xs, s, m, l, xl.
 ```javascript jsx withThemeSwitcher
 (theme) => (
     <>
@@ -32,4 +32,18 @@ Comes in 5 sizes: xs, s, m, l, xl.
 );
 ```
 
-## Layouts
+## Layout
+We use <a href="https://material.io/archive/guidelines/style/icons.html">Material Design</a> grid and proportions.
+
+```javascript jsx withThemeSwitcher
+(theme) => (
+    <>
+        <img src="demo/react/doc/product/foundations/assets/iconography-layout.png" width="128" />
+        <img src="demo/react/doc/product/foundations/assets/iconography-keylines.png" width="128" />
+</>
+);
+```
+
+## Library
+Find library on <a href="https://materialdesignicons.com/">materialdesignicons.com</a>.
+
