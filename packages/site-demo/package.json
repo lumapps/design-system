@@ -44,6 +44,7 @@
         "typescript": "^3.7.2",
         "webpack": "^4.41.2",
         "webpack-cli": "^3.3.10",
+        "webpack-dev-server": "^3.9.0",
         "webpack-notifier": "^1.8.0",
         "webpackbar": "^4.0.0"
     },
@@ -61,7 +62,8 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "build": "webpack"
+        "build": "webpack",
+        "start": "NODE_ENV=development webpack-dev-server"
     },
     "version": "0.16.0"
 }

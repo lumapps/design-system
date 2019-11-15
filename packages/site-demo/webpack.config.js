@@ -228,9 +228,6 @@ module.exports = {
 };
 
 if (isDev) {
-    const DEFAULT_HOST = '0.0.0.0';
-    const DEFAULT_PORT = 4000;
-
     module.exports.devServer = {
         disableHostCheck: true,
         headers: {
@@ -240,11 +237,13 @@ if (isDev) {
         historyApiFallback: {
             index: '/',
         },
-        host: DEFAULT_HOST,
+        host: '0.0.0.0',
         hot: true,
         open: true,
         overlay: true,
-        port: DEFAULT_PORT,
+        port: 4000,
         quiet: true,
     };
+
+    module.exports.watch = true;
 }
