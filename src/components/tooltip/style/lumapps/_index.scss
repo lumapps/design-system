@@ -16,60 +16,64 @@
     border-radius: $lumx-theme-border-radius;
     will-change: transform;
 
+    &--is-react {
+        position: relative;
+    }
+
     &__arrow {
         position: absolute;
         width: 0;
         height: 0;
-        margin: $lumx-tooltip-arrow-size;
         border-style: solid;
         border-color: lumx-theme-color-variant('light', 'N');
+        margin: $lumx-tooltip-arrow-size;
 
         #{$self}--position-top & {
             bottom: -$lumx-tooltip-arrow-size;
             left: 50%;
-            margin-top: 0;
-            margin-bottom: 0;
-            margin-left: -$lumx-tooltip-arrow-size;
             border-width: $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size 0 $lumx-tooltip-arrow-size;
             border-right-color: transparent;
             border-bottom-color: transparent;
             border-left-color: transparent;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: -$lumx-tooltip-arrow-size;
         }
 
         #{$self}--position-bottom & {
             top: -$lumx-tooltip-arrow-size;
             left: 50%;
-            margin-top: 0;
-            margin-bottom: 0;
-            margin-left: -$lumx-tooltip-arrow-size;
             border-width: 0 $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size;
             border-top-color: transparent;
             border-right-color: transparent;
             border-left-color: transparent;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: -$lumx-tooltip-arrow-size;
         }
 
         #{$self}--position-left & {
             top: 50%;
             right: -$lumx-tooltip-arrow-size;
-            margin-top: -$lumx-tooltip-arrow-size;
-            margin-right: 0;
-            margin-left: 0;
             border-width: $lumx-tooltip-arrow-size 0 $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size;
             border-top-color: transparent;
             border-right-color: transparent;
             border-bottom-color: transparent;
+            margin-top: -$lumx-tooltip-arrow-size;
+            margin-right: 0;
+            margin-left: 0;
         }
 
         #{$self}--position-right & {
             top: 50%;
             left: -$lumx-tooltip-arrow-size;
-            margin-top: -$lumx-tooltip-arrow-size;
-            margin-right: 0;
-            margin-left: 0;
             border-width: $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size $lumx-tooltip-arrow-size 0;
             border-top-color: transparent;
             border-bottom-color: transparent;
             border-left-color: transparent;
+            margin-top: -$lumx-tooltip-arrow-size;
+            margin-right: 0;
+            margin-left: 0;
         }
     }
 

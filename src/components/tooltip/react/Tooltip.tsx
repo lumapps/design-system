@@ -1,5 +1,4 @@
-import React, { CSSProperties, ReactElement, RefObject, useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+import React, { ReactElement, RefObject, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,6 +6,7 @@ import { Placement } from 'LumX';
 
 import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 
+import { Offset, Popover } from 'LumX/components/popover/react/Popover';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
 
@@ -14,15 +14,6 @@ import { handleBasicClasses } from 'LumX/core/utils';
 
 /** Position of the tooltip relative to the anchor element. */
 type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
-
-/**
- * Position for arrow or tooltip.
- */
-interface IPosition {
-    x: number;
-    y: number;
-}
-type Position = IPosition;
 
 /////////////////////////////
 
@@ -80,66 +71,6 @@ const OFFSET = 8;
 /////////////////////////////
 
 /**
- * Calculate the position of the tooltip relative to the anchor element.
- *
- * @param placement Placement of tooltip.
- * @param anchorRef Ref of anchor element.
- * @param tooltipRef Ref of tooltip.
- * @param [dependencies=[placement, anchorRef, tooltipRef]] Dependencies of hook.
- * @return Position of the tooltip relative to the anchor element.
- */
-const useTooltipPosition = (
-    placement: TooltipPlacement,
-    anchorRef: RefObject<HTMLElement>,
-    tooltipRef: RefObject<HTMLDivElement>,
-    // tslint:disable-next-line: no-any
-    dependencies: any[] = [placement, anchorRef, tooltipRef],
-): Position => {
-    const [position, setPosition] = useState<Position>({
-        x: 0,
-        y: 0,
-    });
-
-    useEffect((): void => {
-        if (!anchorRef || !anchorRef.current || !tooltipRef || !tooltipRef.current) {
-            return;
-        }
-
-        const { top, left, width, height } = anchorRef.current!.getBoundingClientRect();
-        const {
-            width: widthTooltip,
-            height: heightTooltip,
-        }: ClientRect | DOMRect = tooltipRef.current!.getBoundingClientRect();
-
-        switch (placement) {
-            case Placement.TOP:
-                setPosition({ x: left + (width - widthTooltip) / 2, y: top - heightTooltip - OFFSET });
-
-                break;
-            case Placement.RIGHT:
-                setPosition({ x: left + width + OFFSET, y: top + (height - heightTooltip) / 2 });
-
-                break;
-            case Placement.BOTTOM:
-                setPosition({ x: left + (width - widthTooltip) / 2, y: top + height + OFFSET });
-
-                break;
-            case Placement.LEFT:
-                setPosition({ x: left - widthTooltip - OFFSET, y: top + (height - heightTooltip) / 2 });
-
-                break;
-
-            default:
-                setPosition({ x: 0, y: 0 });
-
-                break;
-        }
-    }, dependencies);
-
-    return position;
-};
-
-/**
  * Tooltip.
  *
  * @return The component.
@@ -179,6 +110,40 @@ const Tooltip: React.FC<TooltipProps> = ({
         setIsOpen(false);
     };
 
+    const computeOffset = (): Offset => {
+        switch (placement) {
+            case Placement.TOP:
+                return {
+                    horizontal: 0,
+                    vertical: -OFFSET,
+                };
+
+            case Placement.BOTTOM:
+                return {
+                    horizontal: 0,
+                    vertical: OFFSET,
+                };
+
+            case Placement.LEFT:
+                return {
+                    horizontal: -OFFSET,
+                    vertical: 0,
+                };
+
+            case Placement.RIGHT:
+                return {
+                    horizontal: OFFSET,
+                    vertical: 0,
+                };
+
+            default:
+                return {
+                    horizontal: 0,
+                    vertical: 0,
+                };
+        }
+    };
+
     useEffect(() => {
         if (anchorRef && anchorRef.current && tooltipRef && tooltipRef.current) {
             anchorRef.current.addEventListener('mouseenter', handleMouseEnter);
@@ -197,33 +162,30 @@ const Tooltip: React.FC<TooltipProps> = ({
         };
     }, [anchorRef, tooltipRef, timer]);
 
-    const tooltipPosition: Position = useTooltipPosition(placement!, anchorRef, tooltipRef, [
-        placement,
+    const offsets = computeOffset();
+
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        placement!,
         anchorRef,
         tooltipRef,
         isOpen,
-    ]);
+        offsets,
+    );
 
-    const cssTooltip: CSSProperties = {
-        transform: `translate3d(${tooltipPosition.x}px, ${tooltipPosition.y}px, 0px)`,
-        visibility: isOpen ? 'visible' : 'hidden',
-    };
-
-    return createPortal(
-        <div
-            ref={tooltipRef}
-            className={classNames(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME }),
-                `${CLASSNAME}--position-${placement}`,
-            )}
-            {...props}
-            style={cssTooltip}
-        >
-            <div className={`${CLASSNAME}__arrow`} />
-            <div className={`${CLASSNAME}__inner`}>{children}</div>
-        </div>,
-        document.body,
+    return (
+        <Popover popoverRect={computedPosition} isVisible={isVisible} popoverRef={tooltipRef}>
+            <div
+                className={classNames(
+                    className,
+                    handleBasicClasses({ prefix: CLASSNAME, react: true }),
+                    `${CLASSNAME}--position-${placement}`,
+                )}
+                {...props}
+            >
+                <div className={`${CLASSNAME}__arrow`} />
+                <div className={`${CLASSNAME}__inner`}>{children}</div>
+            </div>
+        </Popover>
     );
 };
 Tooltip.displayName = COMPONENT_NAME;
