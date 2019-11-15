@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.2][] - 2019-11-15
+
+### Changed
+
+-   Use `Popover` in the `Tooltip` component
+
 ## [0.15.1][] - 2019-11-07
 
 ### Changed
@@ -108,3 +114,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.15.0]: https://github.com/lumapps/design-system/tree/v0.15.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.15.1...HEAD
 [0.15.1]: https://github.com/lumapps/design-system/tree/v0.15.1
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.15.2...HEAD
+[0.15.2]: https://github.com/lumapps/design-system/tree/v0.15.2
