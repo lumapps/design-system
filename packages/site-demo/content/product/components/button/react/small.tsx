@@ -1,135 +1,16 @@
-```javascript import
+import React from 'react';
+
 import {
     Button,
     ButtonGroup,
     Emphasis,
     IconButton,
     Size,
-    Theme,
 } from '@lumx/react';
+
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
-```
 
-# Button
-
-**Buttons trigger actions with a single click.**
-
-## High emphasis
-
-Use high emphasis to help users to identify the main action.
-There should not be more than one high emphasis button in a view.
-
-```javascript jsx withThemeSwitcher
-(theme) => (
-    <>
-        <Button theme={theme}>Default</Button>
-
-        <Button disabled theme={theme}>
-            Disabled
-        </Button>
-
-        <Button leftIcon={mdiPencil} theme={theme}>
-            With Icon
-        </Button>
-
-        <Button rightIcon={mdiMenuDown} theme={theme}>
-            Dropdown
-        </Button>
-
-        <ButtonGroup>
-            <Button theme={theme}>Split</Button>
-            <IconButton icon={mdiMenuDown} theme={theme}/>
-        </ButtonGroup>
-
-        <IconButton icon={mdiPlus} theme={theme} />
-    </>
-);
-```
-
-## Medium emphasis
-
-Use medium emphasis for secondary actions.
-
-```javascript jsx withThemeSwitcher
-(theme) => (
-    <>
-        <Button emphasis={Emphasis.medium} theme={theme}>
-            Default
-        </Button>
-
-        <Button
-            disabled
-            emphasis={Emphasis.medium}
-            theme={theme}
-        >
-            Disabled
-        </Button>
-
-        <Button
-            leftIcon={mdiPencil}
-            emphasis={Emphasis.medium}
-            theme={theme}
-        >
-            With Icon
-        </Button>
-
-        <Button rightIcon={mdiMenuDown} emphasis={Emphasis.medium} theme={theme}>
-            Dropdown
-        </Button>
-
-        <ButtonGroup>
-            <Button emphasis={Emphasis.medium} theme={theme}>Split</Button>
-            <IconButton emphasis={Emphasis.medium} icon={mdiMenuDown} theme={theme}/>
-        </ButtonGroup>
-
-        <IconButton emphasis={Emphasis.medium} icon={mdiPlus} theme={theme} />
-    </>
-);
-```
-
-## Low emphasis
-
-When the view contains a primary and a medium button, use low emphasis for lower priority actions.
-Alternatively, use low emphasis when there is only one level of priority.
-
-```javascript jsx withThemeSwitcher
-(theme) => (
-    <>
-        <Button emphasis={Emphasis.low} theme={theme}>
-            Default
-        </Button>
-
-        <Button
-            disabled
-            emphasis={Emphasis.low}
-            theme={theme}
-        >
-            Disabled
-        </Button>
-
-        <Button
-            leftIcon={mdiPencil}
-            emphasis={Emphasis.low}
-            theme={theme}
-        >
-            With Icon
-        </Button>
-
-        <Button rightIcon={mdiMenuDown} emphasis={Emphasis.low} theme={theme}>
-            Dropdown
-        </Button>
-
-        <IconButton emphasis={Emphasis.low} icon={mdiPlus} theme={theme} />
-    </>
-);
-```
-
-## Small size
-
-Use small size when space is a constraint.
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => (
+const App = (theme) => (
     <>
         <div className="demo-grid lumx-spacing-margin-bottom-big">
             <Button size={Size.s} theme={theme}>
@@ -239,9 +120,5 @@ Use small size when space is a constraint.
         </div>
     </>
 );
-```
 
-
-### Properties
-
-<PropTable component="Button" />
+export default App;
