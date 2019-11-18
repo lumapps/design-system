@@ -20,15 +20,24 @@
     }
 }
 
+/**
+ * 1. https://github.com/philipwalton/flexbugs/blob/master/README.md#flexbug-3
+ */
+
 .#{$lumx-base-prefix}-dialog {
     $self: &;
 
     position: fixed;
     display: none;
+    flex-direction: column; /* [1] */
     animation: lumx-dialog-show $lumx-dialog-transition-duration;
     opacity: 1;
     transform: translateY(0);
     transition: opacity $lumx-dialog-transition-duration;
+
+    &--is-shown {
+        display: flex; /* [1] */
+    }
 
     &--is-hidden {
         opacity: 0;
