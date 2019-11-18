@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .main {
-    flex: 1;
+    flex: 1 1 auto;
     justify-content: center;
     padding: $lumx-spacing-unit * 6;
     overflow-y: scroll;

@@ -26,7 +26,7 @@
         flex-direction: column;
 
         #{$self}--orientation-horizontal & {
-            flex: 1;
+            flex: 1 1 auto;
         }
     }
 
@@ -90,7 +90,7 @@
     }
 
     &__tags {
-        flex: 1;
+        flex: 1 1 auto;
         margin-top: $lumx-spacing-unit;
     }
 
