@@ -2,7 +2,14 @@
 
 exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
 <div
-  className="lumx-tooltip lumx-tooltip--is-react lumx-tooltip--position-bottom"
+  className="lumx-tooltip lumx-tooltip--position-bottom"
+  style={
+    Object {
+      "display": "none",
+      "position": "fixed",
+      "transform": "translate3d(0px, 0px, 0)",
+    }
+  }
 >
   <div
     className="lumx-tooltip__arrow"

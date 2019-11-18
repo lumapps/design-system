@@ -16,10 +16,6 @@
     border-radius: $lumx-theme-border-radius;
     will-change: transform;
 
-    &--is-react {
-        position: relative;
-    }
-
     &__arrow {
         position: absolute;
         width: 0;

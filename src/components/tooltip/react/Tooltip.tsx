@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, ReactElement, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,6 +9,7 @@ import { COMPONENT_PREFIX } from 'LumX/core/react/constants';
 import { Offset, Popover } from 'LumX/components/popover/react/Popover';
 import { IGenericProps, getRootClassName } from 'LumX/core/react/utils';
 import { handleBasicClasses } from 'LumX/core/utils';
+import { createPortal } from 'react-dom';
 
 /////////////////////////////
 
@@ -172,20 +173,30 @@ const Tooltip: React.FC<TooltipProps> = ({
         offsets,
     );
 
-    return (
-        <Popover popoverRect={computedPosition} isVisible={isVisible} popoverRef={tooltipRef}>
-            <div
-                className={classNames(
-                    className,
-                    handleBasicClasses({ prefix: CLASSNAME, react: true }),
-                    `${CLASSNAME}--position-${placement}`,
-                )}
-                {...props}
-            >
-                <div className={`${CLASSNAME}__arrow`} />
-                <div className={`${CLASSNAME}__inner`}>{children}</div>
-            </div>
-        </Popover>
+    const tooltipStyles: CSSProperties = useMemo(
+        () => ({
+            display: isVisible ? 'block' : 'none',
+            position: 'fixed',
+            transform: `translate3d(${computedPosition.x}px, ${computedPosition.y}px, 0)`,
+        }),
+        [isVisible, computedPosition],
+    );
+
+    return createPortal(
+        <div
+            ref={tooltipRef}
+            style={tooltipStyles}
+            className={classNames(
+                className,
+                handleBasicClasses({ prefix: CLASSNAME }),
+                `${CLASSNAME}--position-${placement}`,
+            )}
+            {...props}
+        >
+            <div className={`${CLASSNAME}__arrow`} />
+            <div className={`${CLASSNAME}__inner`}>{children}</div>
+        </div>,
+        document.body,
     );
 };
 Tooltip.displayName = COMPONENT_NAME;
