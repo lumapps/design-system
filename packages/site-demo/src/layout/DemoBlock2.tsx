@@ -24,8 +24,7 @@ const useLoadContent = (path: string): ReactElement | null | undefined => {
             setContent(undefined);
             try {
                 const loadedContent = await import(
-                    /* webpackMode: "eager" */
-                    /* webpackChunkName: "content/[request]" */
+                    /* webpackMode: "lazy" */
                     `content/${path}`
                 );
                 setContent(React.createElement(loadedContent.default, {}, null));
