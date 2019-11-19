@@ -8,11 +8,23 @@ import { mdiMagnify, mdiClose } from '@lumx/icons';
 
 **Text fields are simple text inputs.**
 
+## Text field
+
 ```javascript jsx withThemeSwitcher disableGrid
 (theme) => {
     const [value, setValue] = useState('');
 
     return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} />;
+};
+```
+
+## Text area
+
+```javascript jsx withThemeSwitcher disableGrid
+(theme) => {
+    const [value, setValue] = useState('');
+
+    return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} type="textarea" />;
 };
 ```
 
@@ -50,7 +62,7 @@ There are three states: _disabled_, _valid_, and _invalid_.
 
 ## Options
 
-There are five options: _helper text_, _placeholder_, _icon_, _is clearable_ and _with chips_.
+There are six options: _helper text_, _placeholder_, _icon_, _clearable_ _with counter_ and _with chips_.
 
 ### Helper text
 
@@ -100,6 +112,14 @@ There are five options: _helper text_, _placeholder_, _icon_, _is clearable_ and
 };
 ```
 
+### With Counter
+
+```javascript jsx withThemeSwitcher
+() => (
+    <p>Textfield avec compteur de caractère.</p>
+);
+```
+
 ### With Chips
 
 ```javascript jsx withThemeSwitcher disableGrid
@@ -126,36 +146,6 @@ There are five options: _helper text_, _placeholder_, _icon_, _is clearable_ and
             }
         />
     );
-};
-```
-
-### Text Area
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
-    const [value, setValue] = useState('');
-
-    return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} type="textarea" />;
-};
-```
-
-### Valid
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
-    const [value, setValue] = useState('Valid value');
-
-    return <TextField label="Textfield label" value={value} onChange={setValue} isValid theme={theme} type="textarea" />;
-};
-```
-
-### Invalid
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
-    const [value, setValue] = useState('Invalid value');
-
-    return <TextField label="Textfield label" value={value} onChange={setValue} hasError theme={theme} type="textarea" />;
 };
 ```
 
