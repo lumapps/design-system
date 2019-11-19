@@ -49,6 +49,24 @@ const THEMES = {
  */
 const DEFAULT_THEME = THEMES[Object.keys(THEMES)[0]];
 
+enum Engine {
+    react = 'react',
+    angularjs = 'angularjs',
+}
+
+/**
+ * The available engines in the demo site.
+ */
+const ENGINES = {
+    react: 'react',
+    angularjs: 'angularjs',
+};
+
+/**
+ * The default engine to use in the demo site at startup.
+ */
+const DEFAULT_ENGINE = ENGINES[Object.keys(ENGINES)[0]];
+
 /**
  * Color variant details
  */
@@ -322,4 +340,4 @@ const COLOR_VARIANTS = {
 
 /////////////////////////////
 
-export { DEFAULT_THEME, THEMES, COLOR_VARIANTS, Theme, IColorPaletteWithVariants, IColorVariantDetail, Categories, Category, DemoObject };
+export { DEFAULT_ENGINE, DEFAULT_THEME, ENGINES, THEMES, COLOR_VARIANTS, Engine, Theme, IColorPaletteWithVariants, IColorVariantDetail, Categories, Category, DemoObject };

@@ -1,9 +1,11 @@
 import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 import { mdiCodeTags } from '@lumx/icons';
 import classNames from 'classnames';
-import React, { ReactChild, ReactElement, useState, useEffect } from 'react';
+import React, { ReactChild, ReactElement, useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import Highlight from 'react-highlight';
+
+import angular from 'angular';
 
 // Code highlighting style
 import 'highlight.js/styles/github.css';
@@ -11,13 +13,16 @@ import 'highlight.js/styles/github.css';
 interface IDemoBlock2Props {
     demo: string,
     disableGrid: boolean;
+    engine: string;
     location: { pathname: string };
     sourceCode: string;
     withThemeSwitcher: boolean;
 }
 
+interface IHasTheme { theme: Theme };
+
 interface IDemoModule {
-    default: React.FC<{ theme: Theme }>;
+    default: React.FC<IHasTheme>;
 }
 
 
@@ -28,8 +33,36 @@ function loadReactDemo(path: string, demo: string): Promise<IDemoModule> {
     );
 }
 
-function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModule> {
-    return null;
+async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModule> {
+    import(
+        /* webpackMode: "lazy" */
+        `content/${path.replace(/^\//, '')}/angularjs/controller.js`
+    );
+    const __html = require(
+        `content/${path.replace(/^\//, '')}/angularjs/partials/${demo}.html`
+    );
+
+    return {
+        default({ theme }: IHasTheme) {
+            let container;
+
+            useEffect(() => {
+                if (!container) { return; }
+
+                const $rootScope = angular.injector(['ng', 'design-system']).get('$rootScope');
+                angular.bootstrap(container, ['design-system']);
+
+                return () => $rootScope.$destroy();
+            }, [container]);
+
+            return (
+                <div
+                    ref={c => { container = c; }}
+                    dangerouslySetInnerHTML={{ __html: __html }}
+                />
+            );
+        }
+    };
 }
 
 const useLoadDemo = (path: string, engine: string, demo: string): IDemoModule | null | undefined => {
@@ -56,6 +89,7 @@ const useLoadDemo = (path: string, engine: string, demo: string): IDemoModule | 
 const DemoBlock2: React.FC<IDemoBlock2Props> = ({
     demo,
     disableGrid = false,
+    engine = "react",
     location,
     sourceCode,
     withThemeSwitcher = false,
@@ -65,8 +99,6 @@ const DemoBlock2: React.FC<IDemoBlock2Props> = ({
 
     const [showCode, setShowCode] = useState(false);
     const toggleShowCode = (): void => setShowCode(!showCode);
-
-    const engine = 'react';
 
     const Demo = useLoadDemo(location.pathname, engine, demo);
 

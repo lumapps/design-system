@@ -1,15 +1,15 @@
 import React, { ReactElement } from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 
-import { Alignment, Button, Emphasis, Grid, GridItem, Orientation, Size } from '@lumx/react';
-import { mdiAngularjs } from '@lumx/icons';
+import { Alignment, Grid, GridItem, Orientation, Size } from '@lumx/react';
 
-import { Theme } from '@lumx/demo/constants';
+import { Engine, Theme } from '@lumx/demo/constants';
 
 import { IGenericProps } from '@lumx/react/utils';
 
 import { MainContent } from './MainContent';
 import { ThemeSelector } from './ThemeSelector';
+import { EngineSelector } from './EngineSelector';
 
 // @ts-ignore
 import HomePage from 'content';
@@ -19,9 +19,18 @@ import HomePage from 'content';
  */
 interface IProps extends IGenericProps {
     /**
+     * The current selected engine.
+     */
+    engine: Engine;
+    /**
      * The current selected theme.
      */
     theme: Theme;
+    /**
+     * The function to change the engine.
+     * When the engine selector is used, this function is called to update the current engine.
+     */
+    changeEngine(engine: Engine): void;
     /**
      * The function to change the theme.
      * When the theme selector is used, this function is called to update the current theme.
@@ -34,7 +43,7 @@ interface IProps extends IGenericProps {
  *
  * @return The main component.
  */
-const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement => {
+const Main: React.FC<IProps> = ({ changeEngine, changeTheme, engine, theme }: IProps): ReactElement => {
     return (
         <div className="main">
             <div className="main__wrapper">
@@ -48,14 +57,7 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
                                 <ThemeSelector changeTheme={changeTheme} theme={theme} />
                             </Grid>
                         </GridItem>
-                        <Button
-                            emphasis={Emphasis.low}
-                            leftIcon={mdiAngularjs}
-                            onClick={(): Window | null => window.open('http://ui.lumapps.com/')}
-                            size={Size.s}
-                        >
-                            View Angularjs version
-                        </Button>
+                        <EngineSelector changeEngine={changeEngine} engine={engine} />
                     </Grid>
                 </div>
 
@@ -65,7 +67,7 @@ const Main: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement =>
                         <Route
                             path="/:path*"
                             render={({ match }: RouteComponentProps): ReactElement | null =>
-                                match.params.path ? <MainContent path={match.params.path} /> : null
+                                match.params.path ? <MainContent engine={engine} path={match.params.path} /> : null
                             }
                         />
                     </div>
