@@ -77,7 +77,7 @@
 
 .#{$lumx-base-prefix}-grid-item {
     position: relative;
-    flex: 1;
+    flex: 1 1 auto;
 
     &--align-start {
         align-self: flex-start;

@@ -35,7 +35,7 @@
     &__chips {
         @include lumx-text-field-chips;
 
-        flex: 1;
+        flex: 1 1 auto;
     }
 
     &__input-native {

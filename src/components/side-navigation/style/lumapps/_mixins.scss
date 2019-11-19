@@ -28,7 +28,7 @@
 }
 
 @mixin lumx-side-navigation-link-label($emphasis) {
-    flex: 1;
+    flex: 1 1 auto;
 
     @if $emphasis == 'emphasis-high' {
         @include lumx-typography('title');

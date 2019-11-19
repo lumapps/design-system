@@ -11,7 +11,7 @@
     &--fill-height {
         display: flex;
         min-height: 0;
-        flex: 1;
+        flex: 1 1 auto;
         flex-direction: column;
         justify-content: center;
     }
@@ -24,7 +24,7 @@
         background-size: cover;
 
         #{$self}--fill-height & {
-            flex: 1;
+            flex: 1 1 auto;
         }
 
         #{$self}--variant-rounded & {
