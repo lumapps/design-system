@@ -16,25 +16,41 @@ interface IDemoBlock2Props {
     withThemeSwitcher: boolean;
 }
 
-const useLoadContent = (path: string): ReactElement | null | undefined => {
-    const [content, setContent] = useState<ReactElement | null>();
+interface IDemoModule {
+    default: React.FC<{ theme: Theme }>;
+}
+
+
+function loadReactDemo(path: string, demo: string): Promise<IDemoModule> {
+    return import(
+        /* webpackMode: "lazy" */
+        `content/${path.replace(/^\//, '')}/react/${demo}`
+    );
+}
+
+function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModule> {
+    return null;
+}
+
+const useLoadDemo = (path: string, engine: string, demo: string): IDemoModule | null | undefined => {
+    const [Demo, setDemo] = useState<IDemoModule | null>();
 
     useEffect((): void => {
         (async (): Promise<void> => {
-            setContent(undefined);
+            setDemo(undefined);
             try {
-                const loadedContent = await import(
-                    /* webpackMode: "lazy" */
-                    `content/${path}`
+                setDemo(
+                    engine === 'react'
+                      ? await loadReactDemo(path, demo)
+                      : await loadAngularjsDemo(path, demo)
                 );
-                setContent(React.createElement(loadedContent.default, {}, null));
             } catch (exception) {
-                setContent(null);
+                setDemo(null);
             }
         })();
-    }, [path]);
+    }, [path, engine, demo]);
 
-    return content;
+    return Demo;
 };
 
 const DemoBlock2: React.FC<IDemoBlock2Props> = ({
@@ -52,13 +68,14 @@ const DemoBlock2: React.FC<IDemoBlock2Props> = ({
 
     const engine = 'react';
 
-    const content = useLoadContent(`${location.pathname.slice(1)}/${engine}/${demo}`);
+    const Demo = useLoadDemo(location.pathname, engine, demo);
 
-    // const content = children(theme);
     return (
         <div className="demo-block">
             <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-theme-background-dark-N')}>
-                <div className={disableGrid ? '' : 'demo-grid'}>{content}</div>
+                <div className={disableGrid ? '' : 'demo-grid'}>
+                    {Demo && <Demo.default theme={theme} />}
+                </div>
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">

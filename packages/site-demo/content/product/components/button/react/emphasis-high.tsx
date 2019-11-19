@@ -8,7 +8,7 @@ import {
 
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
-const App = (theme) => (
+const App = ({ theme }) => (
     <>
         <Button theme={theme}>Default</Button>
 

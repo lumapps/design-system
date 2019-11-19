@@ -10,7 +10,7 @@ import {
 
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
-const App = (theme) => (
+const App = ({ theme }) => (
     <>
         <div className="demo-grid lumx-spacing-margin-bottom-big">
             <Button size={Size.s} theme={theme}>

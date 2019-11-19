@@ -9,7 +9,7 @@ import {
 
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
-const App = (theme) => (
+const App = ({ theme }) => (
     <>
         <Button emphasis={Emphasis.medium} theme={theme}>
             Default
