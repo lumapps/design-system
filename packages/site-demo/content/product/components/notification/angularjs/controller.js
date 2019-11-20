@@ -1,4 +1,4 @@
-function DemoNotificationController(LumXNotificationService) {
+function DemoController(LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -36,8 +36,4 @@ function DemoNotificationController(LumXNotificationService) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoNotificationController', DemoNotificationController);
-
-/////////////////////////////
-
-export { DemoNotificationController };
+export { DemoController };

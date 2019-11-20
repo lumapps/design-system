@@ -1,8 +1,8 @@
-<lumx-table lumx-has-before="true" lumx-has-dividers="true" lumx-is-clickable="true" lumx-theme="{{ demoBlock.theme }}">
+<lumx-table lumx-has-before="true" lumx-has-dividers="true" lumx-is-clickable="true" lumx-theme="{{ theme }}">
     <lumx-table-head>
         <lumx-table-row>
             <lumx-table-cell-head>
-                <lumx-checkbox lumx-theme="{{ demoBlock.theme }}" ng-model="vm.allSelected"></lumx-checkbox>
+                <lumx-checkbox lumx-theme="{{ theme }}" ng-model="vm.allSelected"></lumx-checkbox>
             </lumx-table-cell-head>
 
             <lumx-table-cell-head
@@ -30,7 +30,7 @@
         >
             <lumx-table-cell-body>
                 <lumx-checkbox
-                    lumx-theme="{{ demoBlock.theme }}"
+                    lumx-theme="{{ theme }}"
                     ng-model="row.isSelected"
                     lumx-stop-propagation="click"
                 ></lumx-checkbox>
@@ -49,7 +49,7 @@
                             ></lumx-thumbnail>
 
                             <lumx-link
-                                lumx-color="{{ demoBlock.theme === 'dark' ? 'light' : 'dark' }}"
+                                lumx-color="{{ theme === 'dark' ? 'light' : 'dark' }}"
                                 lumx-stop-propagation="click"
                             >
                                 <span class="lumx-typography-subtitle1">{{ row.dessert }}</span>
@@ -60,7 +60,7 @@
                     <lumx-grid lumx-h-align="center">
                         <lumx-button
                             lumx-emphasis="low"
-                            lumx-theme="{{ demoBlock.theme }}"
+                            lumx-theme="{{ theme }}"
                             lumx-variant="icon"
                             lumx-stop-propagation="click"
                         >
@@ -69,7 +69,7 @@
 
                         <lumx-button
                             lumx-emphasis="low"
-                            lumx-theme="{{ demoBlock.theme }}"
+                            lumx-theme="{{ theme }}"
                             lumx-variant="icon"
                             lumx-stop-propagation="click"
                         >

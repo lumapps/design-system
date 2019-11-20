@@ -2,7 +2,7 @@ import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx
 
 /////////////////////////////
 
-function DemoTableController($filter) {
+function DemoController($filter) {
     'ngInject';
 
     const vm = this;
@@ -154,8 +154,4 @@ function DemoTableController($filter) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoTableController', DemoTableController);
-
-/////////////////////////////
-
-export { DemoTableController };
+export { DemoController };

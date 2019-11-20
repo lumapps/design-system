@@ -2,7 +2,7 @@ import { mdiPencil } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoTabsController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -39,8 +39,4 @@ function DemoTabsController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoTabsController', DemoTabsController);
-
-/////////////////////////////
-
-export { DemoTabsController };
+export { DemoController };

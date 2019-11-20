@@ -2,7 +2,7 @@ import { mdiChevronLeft, mdiDotsVertical, mdiMagnify, mdiMenuDown, mdiTranslate,
 
 /////////////////////////////
 
-function DemoToolbarController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -37,8 +37,4 @@ function DemoToolbarController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoToolbarController', DemoToolbarController);
-
-/////////////////////////////
-
-export { DemoToolbarController };
+export { DemoController };

@@ -2,7 +2,7 @@ import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoEditableMediaController(LumXLightboxService) {
+function DemoController(LumXLightboxService) {
     'ngInject';
 
     const vm = this;
@@ -80,8 +80,4 @@ function DemoEditableMediaController(LumXLightboxService) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoEditableMediaController', DemoEditableMediaController);
-
-/////////////////////////////
-
-export { DemoEditableMediaController };
+export { DemoController };

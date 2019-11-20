@@ -1,4 +1,4 @@
-function DemoProgressTrackerController(LumXNotificationService) {
+function DemoController(LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -133,8 +133,4 @@ function DemoProgressTrackerController(LumXNotificationService) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoProgressTrackerController', DemoProgressTrackerController);
-
-/////////////////////////////
-
-export { DemoProgressTrackerController };
+export { DemoController };

@@ -28,8 +28,4 @@ function DemoSideNavigationController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoSideNavigationController', DemoSideNavigationController);
-
-/////////////////////////////
-
 export { DemoSideNavigationController };

@@ -2,7 +2,7 @@ import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@
 
 /////////////////////////////
 
-function DemoUserBlockController(LumXNotificationService) {
+function DemoController(LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -69,8 +69,4 @@ function DemoUserBlockController(LumXNotificationService) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoUserBlockController', DemoUserBlockController);
-
-/////////////////////////////
-
-export { DemoUserBlockController };
+export { DemoController };

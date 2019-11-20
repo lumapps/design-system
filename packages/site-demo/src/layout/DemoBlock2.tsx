@@ -34,12 +34,11 @@ function loadReactDemo(path: string, demo: string): Promise<IDemoModule> {
 }
 
 async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModule> {
-    const controllerModule = await import(
+    const { DemoController } = await import(
         /* webpackMode: "lazy" */
         `content/${path.replace(/^\//, '')}/angularjs/controller.js`
     );
-    //require('@lumx/demo/layout/demo-block_directive');
-    const template = require(
+    const { default: template } = await import(
         `content/${path.replace(/^\//, '')}/angularjs/partials/${demo}.html`
     );
     return {
@@ -57,7 +56,7 @@ async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModul
                 <AngularTemplate
                     ref={(c) => container = c}
                     template={template}
-                    controller={controllerModule.default}
+                    controller={DemoController}
                     controllerAs="vm"
                     scope={{ theme }}
                 />

@@ -2,7 +2,7 @@ import { mdiDotsVertical, mdiHeart, mdiReply } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoCommentBlockController(LumXNotificationService) {
+function DemoController(LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -96,8 +96,4 @@ function DemoCommentBlockController(LumXNotificationService) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoCommentBlockController', DemoCommentBlockController);
-
-/////////////////////////////
-
-export { DemoCommentBlockController };
+export { DemoController };

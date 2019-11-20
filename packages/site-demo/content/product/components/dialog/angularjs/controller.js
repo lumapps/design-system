@@ -1,6 +1,6 @@
 import { COMPONENT_PREFIX } from '@lumx/angularjs/constants/common_constants';
 
-function DemoDialogController($scope, LumXDialogService, LumXNotificationService) {
+function DemoController($scope, LumXDialogService, LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -255,8 +255,4 @@ function DemoDialogController($scope, LumXDialogService, LumXNotificationService
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoDialogController', DemoDialogController);
-
-/////////////////////////////
-
-export { DemoDialogController };
+export { DemoController };

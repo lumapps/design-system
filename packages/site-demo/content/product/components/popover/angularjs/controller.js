@@ -2,7 +2,7 @@ import { mdiCellphone, mdiClose, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack
 
 /////////////////////////////
 
-function DemoPopoverController(LumXPopoverService) {
+function DemoController(LumXPopoverService) {
     'ngInject';
 
     const vm = this;
@@ -76,8 +76,4 @@ function DemoPopoverController(LumXPopoverService) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoPopoverController', DemoPopoverController);
-
-/////////////////////////////
-
-export { DemoPopoverController };
+export { DemoController };

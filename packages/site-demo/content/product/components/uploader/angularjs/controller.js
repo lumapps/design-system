@@ -2,7 +2,7 @@ import { mdiImagePlus } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoUploaderController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -27,8 +27,4 @@ function DemoUploaderController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoUploaderController', DemoUploaderController);
-
-/////////////////////////////
-
-export { DemoUploaderController };
+export { DemoController };

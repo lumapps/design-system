@@ -1,4 +1,4 @@
-function DemoCheckboxController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -27,8 +27,4 @@ function DemoCheckboxController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoCheckboxController', DemoCheckboxController);
-
-/////////////////////////////
-
-export { DemoCheckboxController };
+export { DemoController };

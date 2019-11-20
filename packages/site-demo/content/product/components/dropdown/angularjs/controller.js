@@ -10,7 +10,7 @@ import {
 
 /////////////////////////////
 
-function DemoDropdownController(LumXDropdownService) {
+function DemoController(LumXDropdownService) {
     'ngInject';
 
     const vm = this;
@@ -88,8 +88,4 @@ function DemoDropdownController(LumXDropdownService) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoDropdownController', DemoDropdownController);
-
-/////////////////////////////
-
-export { DemoDropdownController };
+export { DemoController };

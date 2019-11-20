@@ -2,7 +2,7 @@ import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoImageBlockController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -36,8 +36,4 @@ function DemoImageBlockController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoImageBlockController', DemoImageBlockController);
-
-/////////////////////////////
-
-export { DemoImageBlockController };
+export { DemoController };

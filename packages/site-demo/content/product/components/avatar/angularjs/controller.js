@@ -2,7 +2,7 @@ import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoAvatarController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -29,8 +29,4 @@ function DemoAvatarController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoAvatarController', DemoAvatarController);
-
-/////////////////////////////
-
-export { DemoAvatarController };
+export { DemoController };

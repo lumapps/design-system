@@ -2,7 +2,7 @@ import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant } from '
 
 /////////////////////////////
 
-function DemoChipController(LumXNotificationService) {
+function DemoController(LumXNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -108,8 +108,4 @@ function DemoChipController(LumXNotificationService) {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoChipController', DemoChipController);
-
-/////////////////////////////
-
-export { DemoChipController };
+export { DemoController };

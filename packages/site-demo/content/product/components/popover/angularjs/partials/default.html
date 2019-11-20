@@ -1,0 +1,57 @@
+<div>
+    <lumx-chip id="{{ vm.popoverTarget }}">
+        <lumx-chip-label>Target</lumx-chip-label>
+    </lumx-chip>
+</div>
+
+<div>
+    <lumx-button id="{{ vm.popoverSource }}" ng-click="vm.openPopover()">
+        Open popover
+    </lumx-button>
+</div>
+
+<lumx-popover id="{{ vm.popoverId }}" lumx-offset="8">
+    <div style="position: absolute; top: 8px; right: 8px;">
+        <lumx-button lumx-emphasis="low" lumx-variant="icon" ng-click="vm.closePopover()">
+            <lumx-icon lumx-path="{{ vm.icons.mdiClose }}"></lumx-icon>
+        </lumx-button>
+    </div>
+
+    <div class="lumx-spacing-padding-huge">
+        <lumx-user-block
+            lumx-avatar="http://i.pravatar.cc/128"
+            lumx-name="Matthias Manoukian"
+            lumx-fields="vm.fields"
+            lumx-orientation="vertical"
+            lumx-size="l"
+        >
+            <lumx-user-block-action>
+                <lumx-button lumx-emphasis="medium" lumx-size="s">Follow</lumx-button>
+            </lumx-user-block-action>
+
+            <lumx-user-block-actions>
+                <lumx-grid lumx-orientation="horizontal" lumx-v-align="center" lumx-wrap="wrap">
+                    <lumx-button lumx-emphasis="low" lumx-variant="icon">
+                        <lumx-icon lumx-path="{{ vm.icons.mdiPhone }}"></lumx-icon>
+                    </lumx-button>
+
+                    <lumx-button lumx-emphasis="low" lumx-variant="icon">
+                        <lumx-icon lumx-path="{{ vm.icons.mdiCellphone }}"></lumx-icon>
+                    </lumx-button>
+
+                    <lumx-button lumx-emphasis="low" lumx-variant="icon">
+                        <lumx-icon lumx-path="{{ vm.icons.mdiEmail }}"></lumx-icon>
+                    </lumx-button>
+
+                    <lumx-button lumx-emphasis="low" lumx-variant="icon">
+                        <lumx-icon lumx-path="{{ vm.icons.mdiGoogleHangouts }}"></lumx-icon>
+                    </lumx-button>
+
+                    <lumx-button lumx-emphasis="low" lumx-variant="icon">
+                        <lumx-icon lumx-path="{{ vm.icons.mdiSlack }}"></lumx-icon>
+                    </lumx-button>
+                </lumx-grid>
+            </lumx-user-block-actions>
+        </lumx-user-block>
+    </div>
+</lumx-popover>

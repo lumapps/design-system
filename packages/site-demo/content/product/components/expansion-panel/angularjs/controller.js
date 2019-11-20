@@ -2,7 +2,7 @@ import { mdiSend } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoExpansionPanelController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -27,8 +27,4 @@ function DemoExpansionPanelController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoExpansionPanelController', DemoExpansionPanelController);
-
-/////////////////////////////
-
-export { DemoExpansionPanelController };
+export { DemoController };

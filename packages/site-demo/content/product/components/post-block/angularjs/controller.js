@@ -2,7 +2,7 @@ import { mdiComment, mdiHeart } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoPostBlockController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -41,8 +41,4 @@ function DemoPostBlockController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoPostBlockController', DemoPostBlockController);
-
-/////////////////////////////
-
-export { DemoPostBlockController };
+export { DemoController };

@@ -7,17 +7,17 @@
     lumx-on-mouse-enter="vm.onMouseEnter()"
     lumx-on-mouse-leave="vm.onMouseLeave()"
     lumx-text="{{ comment.text }}"
-    lumx-theme="{{ demoBlock.theme }}"
+    lumx-theme="{{ theme }}"
     ng-repeat="comment in vm.commentsThreaded"
 >
     <lumx-comment-block-actions>
         <lumx-grid>
-            <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ demoBlock.theme }}">
+            <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ theme }}">
                 <lumx-icon lumx-path="{{ vm.icons.mdiHeart }}"></lumx-icon>
                 <span>24 likes</span>
             </lumx-button>
 
-            <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ demoBlock.theme }}">
+            <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ theme }}">
                 <lumx-icon lumx-path="{{ vm.icons.mdiReply }}"></lumx-icon>
                 <span>16 replies</span>
             </lumx-button>
@@ -30,12 +30,12 @@
             lumx-date="{{ child.date }}"
             lumx-name="{{ child.name }}"
             lumx-text="{{ child.text }}"
-            lumx-theme="{{ demoBlock.theme }}"
+            lumx-theme="{{ theme }}"
             ng-repeat="child in comment.children"
         >
             <lumx-comment-block-actions>
                 <lumx-grid>
-                    <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ demoBlock.theme }}">
+                    <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ theme }}">
                         <lumx-icon lumx-path="{{ vm.icons.mdiHeart }}"></lumx-icon>
                         <span>24 likes</span>
                     </lumx-button>

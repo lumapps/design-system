@@ -1,4 +1,4 @@
-function DemoSwitchController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -27,8 +27,4 @@ function DemoSwitchController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoSwitchController', DemoSwitchController);
-
-/////////////////////////////
-
-export { DemoSwitchController };
+export { DemoController };

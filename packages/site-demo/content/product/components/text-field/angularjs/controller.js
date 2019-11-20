@@ -2,7 +2,7 @@ import { mdiMagnify } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoTextFieldController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -41,8 +41,4 @@ function DemoTextFieldController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoTextFieldController', DemoTextFieldController);
-
-/////////////////////////////
-
-export { DemoTextFieldController };
+export { DemoController };

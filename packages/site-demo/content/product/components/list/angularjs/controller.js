@@ -2,7 +2,7 @@ import { mdiSend, mdiDotsHorizontal } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoListController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -28,8 +28,4 @@ function DemoListController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoListController', DemoListController);
-
-/////////////////////////////
-
-export { DemoListController };
+export { DemoController };

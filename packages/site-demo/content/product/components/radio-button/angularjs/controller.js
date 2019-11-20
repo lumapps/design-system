@@ -1,4 +1,4 @@
-function DemoRadioButtonController() {
+function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -24,8 +24,4 @@ function DemoRadioButtonController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoRadioButtonController', DemoRadioButtonController);
-
-/////////////////////////////
-
-export { DemoRadioButtonController };
+export { DemoController };
