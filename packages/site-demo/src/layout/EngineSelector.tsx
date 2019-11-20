@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import { Button, Emphasis, Size } from '@lumx/react';
-import { mdiAngularjs } from '@lumx/icons';
+import { mdiAngularjs, mdiReact } from '@lumx/icons';
 
 import { Engine } from '@lumx/demo/constants';
 
@@ -50,7 +50,7 @@ const EngineSelector: React.FC<IProps> = ({ changeEngine, engine }: IProps): Rea
             return (
                 <Button
                     emphasis={Emphasis.low}
-                    leftIcon={mdiAngularjs}
+                    leftIcon={mdiReact}
                     onClick={() => changeEngine('react')}
                     size={Size.s}
                 >
