@@ -1,0 +1,36 @@
+<demo-grid>
+    <lumx-button ng-click="vm.openDialog(vm.dialogIds[6], vm.sourceIds[6])" id="{{ vm.sourceIds[6] }}">
+        Open dialog with actions
+    </lumx-button>
+</demo-grid>
+
+<lumx-dialog id="{{ vm.dialogIds[6] }}">
+    <lumx-dialog-header>
+        <lumx-toolbar>
+            <lumx-toolbar-label>
+                <span class="lumx-typography-title">Dialog with action</span>
+            </lumx-toolbar-label>
+
+            <lumx-toolbar-after>
+                <lumx-button lumx-emphasis="low" ng-click="vm.addPerson()" lumx-focus-on-init>
+                    <span>Add</span>
+                </lumx-button>
+            </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-header>
+
+    <lumx-dialog-content>
+        <div class="lumx-spacing-padding-horizontal-huge">
+            <div ng-repeat="person in vm.people">{{ person.name }} - {{ person.email }} - {{ person.age }}</div>
+        </div>
+    </lumx-dialog-content>
+
+    <lumx-dialog-footer>
+        <lumx-toolbar>
+            <lumx-toolbar-after>
+                <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
+                <lumx-button class="lumx-spacing-margin-left-regular" lumx-dialog-close>Save</lumx-button>
+            </lumx-toolbar-after>
+        </lumx-toolbar>
+    </lumx-dialog-footer>
+</lumx-dialog>

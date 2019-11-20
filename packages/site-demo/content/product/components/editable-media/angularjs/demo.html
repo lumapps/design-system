@@ -1,0 +1,100 @@
+<lumx-editable-media
+    lumx-helper="Pick or upload a picture. It will show up in the preview of this content."
+    lumx-image="{{ vm.image }}"
+    lumx-label="Featured Image"
+    lumx-on-click="vm.handleClick()"
+    lumx-placeholder="Add Featured Image"
+    lumx-size="xxl"
+    lumx-variant="thumbnail"
+>
+    <lumx-grid>
+        <lumx-button
+            class="lumx-spacing-margin-right-regular"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
+            lumx-variant="icon"
+        >
+            <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
+        </lumx-button>
+
+        <lumx-button
+            class="lumx-spacing-margin-right-regular"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
+            lumx-variant="icon"
+            ng-click="vm.openLightbox()"
+        >
+            <lumx-icon lumx-path="{{ vm.icons.mdiEye }}"></lumx-icon>
+        </lumx-button>
+
+        <lumx-button
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
+            lumx-variant="icon"
+            ng-click="vm.removeImage()"
+        >
+            <lumx-icon lumx-path="{{ vm.icons.mdiDelete }}"></lumx-icon>
+        </lumx-button>
+    </lumx-grid>
+</lumx-editable-media>
+
+<lumx-editable-media
+    lumx-image="{{ vm.image }}"
+    lumx-on-click="vm.handleClick()"
+    lumx-placeholder="Add Profile Picture"
+    lumx-size="xl"
+    lumx-variant="avatar"
+>
+    <lumx-grid lumx-v-align="center">
+        <lumx-button
+            class="lumx-spacing-margin-right-regular"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
+            lumx-size="s"
+            lumx-variant="icon"
+        >
+            <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
+        </lumx-button>
+
+        <lumx-button
+            class="lumx-spacing-margin-right-regular"
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
+            lumx-size="s"
+            lumx-variant="icon"
+            ng-click="vm.openLightbox()"
+        >
+            <lumx-icon lumx-path="{{ vm.icons.mdiEye }}"></lumx-icon>
+        </lumx-button>
+
+        <lumx-button
+            lumx-color="dark"
+            lumx-emphasis="low"
+            lumx-has-background="true"
+            lumx-size="s"
+            lumx-variant="icon"
+            ng-click="vm.removeImage()"
+        >
+            <lumx-icon lumx-path="{{ vm.icons.mdiDelete }}"></lumx-icon>
+        </lumx-button>
+    </lumx-grid>
+</lumx-editable-media>
+
+<lumx-lightbox id="{{ vm.lightboxId }}">
+    <lumx-slideshow lumx-fill-height="true" lumx-has-controls="false" lumx-theme="dark" lumx-focus-on-init>
+        <lumx-slideshow-item>
+            <lumx-image-block
+                lumx-align="center"
+                lumx-aspect-ratio="original"
+                lumx-fill-height="true"
+                lumx-image="{{ vm.image }}"
+                lumx-theme="dark"
+            ></lumx-image-block>
+        </lumx-slideshow-item>
+    </lumx-slideshow>
+</lumx-lightbox>

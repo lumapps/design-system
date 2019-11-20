@@ -1,0 +1,42 @@
+<div>
+    <lumx-toolbar>
+        <lumx-toolbar-before>
+            <lumx-button lumx-emphasis="low" lumx-theme="{{ demoBlock.theme }}" lumx-variant="icon">
+                <lumx-icon lumx-path="{{ vm.icons.mdiChevronLeft }}"></lumx-icon>
+            </lumx-button>
+        </lumx-toolbar-before>
+
+        <lumx-toolbar-label>
+            <lumx-grid lumx-orientation="horizontal" lumx-h-align="center">
+                <span
+                    class="lumx-typography-title"
+                    ng-class="{ 'lumx-theme-color-dark-N': demoBlock.theme === 'light',
+                                'lumx-theme-color-light-N': demoBlock.theme === 'dark' }"
+                >
+                    Toolbar title
+                </span>
+
+                <lumx-text-field
+                    class="lumx-spacing-margin-left-big"
+                    lumx-icon="{{ vm.icons.mdiMagnify }}"
+                    lumx-theme="{{ demoBlock.theme }}"
+                >
+                    <input type="text" ng-model="vm.searchFieldModel" placeholder="Search" />
+                </lumx-text-field>
+            </lumx-grid>
+        </lumx-toolbar-label>
+
+        <lumx-toolbar-after>
+            <lumx-button
+                class="lumx-spacing-margin-right-regular"
+                lumx-emphasis="low"
+                lumx-theme="{{ demoBlock.theme }}"
+                lumx-variant="icon"
+            >
+                <lumx-icon lumx-path="{{ vm.icons.mdiViewGrid }}"></lumx-icon>
+            </lumx-button>
+
+            <lumx-button lumx-theme="{{ demoBlock.theme }}">Action</lumx-button>
+        </lumx-toolbar-after>
+    </lumx-toolbar>
+</div>

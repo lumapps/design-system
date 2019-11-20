@@ -2,7 +2,7 @@ import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoButtonController() {
+export default function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -53,8 +53,7 @@ function DemoButtonController() {
 
 /////////////////////////////
 
-angular.module('design-system').controller('DemoButtonController', DemoButtonController);
+angular.module('design-system').controller('DemoController', DemoController);
 
 /////////////////////////////
 
-export { DemoButtonController };

@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import React, { ReactChild, ReactElement, useState, useEffect, useRef } from 'react';
 import { withRouter } from 'react-router-dom';
 import Highlight from 'react-highlight';
+import AngularTemplate from 'react-angular';
 
-import angular from 'angular';
 
 // Code highlighting style
 import 'highlight.js/styles/github.css';
@@ -34,14 +34,14 @@ function loadReactDemo(path: string, demo: string): Promise<IDemoModule> {
 }
 
 async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModule> {
-    import(
+    const controllerModule = await import(
         /* webpackMode: "lazy" */
         `content/${path.replace(/^\//, '')}/angularjs/controller.js`
     );
-    const __html = require(
+    //require('@lumx/demo/layout/demo-block_directive');
+    const template = require(
         `content/${path.replace(/^\//, '')}/angularjs/partials/${demo}.html`
     );
-
     return {
         default({ theme }: IHasTheme) {
             let container;
@@ -49,16 +49,17 @@ async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModul
             useEffect(() => {
                 if (!container) { return; }
 
-                const $rootScope = angular.injector(['ng', 'design-system']).get('$rootScope');
-                angular.bootstrap(container, ['design-system']);
-
-                return () => $rootScope.$destroy();
-            }, [container]);
+                container.$scope.theme = theme;
+                container.$scope.$apply();
+            }, [container, theme]);
 
             return (
-                <div
-                    ref={c => { container = c; }}
-                    dangerouslySetInnerHTML={{ __html: __html }}
+                <AngularTemplate
+                    ref={(c) => container = c}
+                    template={template}
+                    controller={controllerModule.default}
+                    controllerAs="vm"
+                    scope={{ theme }}
                 />
             );
         }
@@ -89,7 +90,7 @@ const useLoadDemo = (path: string, engine: string, demo: string): IDemoModule | 
 const DemoBlock2: React.FC<IDemoBlock2Props> = ({
     demo,
     disableGrid = false,
-    engine = "react",
+    engine,
     location,
     sourceCode,
     withThemeSwitcher = false,

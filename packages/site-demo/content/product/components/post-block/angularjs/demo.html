@@ -1,0 +1,77 @@
+<lumx-post-block
+    lumx-meta="{{ vm.postBlock.meta }}"
+    lumx-text="{{ vm.postBlock.text }}"
+    lumx-thumbnail="{{ vm.postBlock.thumbnail }}"
+    lumx-thumbnail-aspect-ratio="{{ vm.postBlock.thumbnailAspectRatio }}"
+    lumx-title="{{ vm.postBlock.title }}"
+>
+    <lumx-post-block-author>
+        <lumx-user-block
+            lumx-avatar="http://i.pravatar.cc/128"
+            lumx-name="Matthias Manoukian"
+            lumx-size="s"
+            lumx-theme="{{ demoBlock.theme }}"
+        ></lumx-user-block>
+    </lumx-post-block-author>
+
+    <lumx-post-block-attachments>
+        <lumx-list>
+            <lumx-list-item lumx-size="tiny">
+                <lumx-list-item-before>
+                    <lumx-icon lumx-path="{{ vm.icons.mdiComment }}" lumx-size="xs"></lumx-icon>
+                </lumx-list-item-before>
+
+                <lumx-list-item-content>
+                    Single-line item
+                </lumx-list-item-content>
+            </lumx-list-item>
+
+            <lumx-list-item lumx-size="tiny">
+                <lumx-list-item-before>
+                    <lumx-icon lumx-path="{{ vm.icons.mdiComment }}" lumx-size="xs"></lumx-icon>
+                </lumx-list-item-before>
+
+                <lumx-list-item-content>
+                    Single-line item
+                </lumx-list-item-content>
+            </lumx-list-item>
+
+            <lumx-list-item lumx-size="tiny">
+                <lumx-list-item-before>
+                    <lumx-icon lumx-path="{{ vm.icons.mdiComment }}" lumx-size="xs"></lumx-icon>
+                </lumx-list-item-before>
+
+                <lumx-list-item-content>
+                    Single-line item
+                </lumx-list-item-content>
+            </lumx-list-item>
+        </lumx-list>
+    </lumx-post-block-attachments>
+
+    <lumx-post-block-tags>
+        <lumx-grid>
+            <lumx-chip
+                class="lumx-spacing-margin-right-tiny"
+                lumx-size="s"
+                lumx-theme="{{ demoBlock.theme }}"
+                ng-repeat="tag in vm.postBlock.tags"
+            >
+                <lumx-chip-label>{{ tag }}</lumx-chip-label>
+            </lumx-chip>
+        </lumx-grid>
+    </lumx-post-block-tags>
+
+    <lumx-post-block-actions>
+        <lumx-grid>
+            <lumx-button lumx-emphasis="low" lumx-size="s">
+                <lumx-icon lumx-path="{{ vm.icons.mdiHeart }}"></lumx-icon>
+                <span>16</span>
+            </lumx-button>
+
+            <lumx-button lumx-emphasis="low" lumx-size="s">
+                <lumx-icon lumx-path="{{ vm.icons.mdiComment }}"></lumx-icon>
+                <span>8</span>
+            </lumx-button>
+        </lumx-grid>
+    </lumx-post-block-actions>
+</lumx-post-block>
