@@ -3,8 +3,8 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/core/testing/utils';
-import { getBasicClass } from '@lumx/core/utils';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, DEFAULT_PROPS, <%= componentName %>, <%= componentName %>Props } from './<%= componentName %>';
 
@@ -72,13 +72,11 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
         it('should use default props', (): void => {
             const { wrapper } = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach(
-                (prop: string): void => {
-                    expect(wrapper).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                    );
-                },
-            );
+            Object.keys(DEFAULT_PROPS).forEach((prop: string): void => {
+                expect(wrapper).toHaveClassName(
+                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
+                );
+            });
         });
     });
 
@@ -90,11 +88,9 @@ describe(`<${<%= componentName %>.displayName}>`, (): void => {
 
         const onClick: jest.Mock = jest.fn();
 
-        beforeEach(
-            (): void => {
-                onClick.mockClear();
-            },
-        );
+        beforeEach(() => {
+            onClick.mockClear();
+        });
 
         it('should trigger `onClick` when clicked', (): void => {
             const { wrapper } = setup({ onClick }, false);

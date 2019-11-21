@@ -28,9 +28,6 @@ const filename = '[name].[hash:8]';
 const minimizer = [];
 
 const plugins = [
-    /* Clean output. */
-    new CleanWebpackPlugin(),
-
     new WebpackBar(),
     new FriendlyErrorsWebpackPlugin(),
 
@@ -54,6 +51,9 @@ if (isProd) {
         }),
     );
     plugins.push(
+        /* Clean output. */
+        new CleanWebpackPlugin(),
+
         new HtmlMinifierPlugin(CONFIGS.htmlMinifier),
         new OptimizeCSSAssetsPlugin({
             cssProcessorOptions: CONFIGS.cssNano,

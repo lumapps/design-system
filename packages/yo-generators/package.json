@@ -10,5 +10,6 @@
         "generators"
     ],
     "main": "generators/index.js",
-    "name": "generator-lumx-component"
+    "name": "generator-lumx-component",
+    "version": "0.16.0"
 }
