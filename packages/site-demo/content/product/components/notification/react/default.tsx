@@ -1,15 +1,10 @@
-```javascript import
-import { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import isFunction from 'lodash/isFunction';
 
-import { Button, Notification, NotificationType, Theme } from '@lumx/react';
-```
+import { Button, Notification, NotificationType } from '@lumx/react';
 
-# Notification
-
-```javascript jsx withThemeSwitcher
-(theme) => {
+const App = ({ theme }) => {
     const [notificationProps, setNotificationProps] = useState(null);
     const notificationPropsRef = useRef(notificationProps);
     notificationPropsRef.current = notificationProps;
@@ -123,4 +118,5 @@ import { Button, Notification, NotificationType, Theme } from '@lumx/react';
         </>
     );
 };
-```
+
+export default App;
