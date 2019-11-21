@@ -1,14 +1,8 @@
-```javascript import
-import { useState } from 'react';
+import React, { useState } from 'react';
+
 import { Checkbox } from '@lumx/react';
-```
 
-# Checkbox
-
-**Checkboxes allow users to select none, one, or more items.**
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
+const App = ({ theme }) => {
     const [value, setValue] = useState(true);
     const [value2, setValue2] = useState(false);
     const [value3, setValue3] = useState(false);
@@ -38,4 +32,5 @@ import { Checkbox } from '@lumx/react';
         </>
     );
 }
-```
+
+export default App;
