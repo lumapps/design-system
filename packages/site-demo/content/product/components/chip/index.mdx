@@ -1,0 +1,55 @@
+```javascript import
+import { useState } from 'react';
+import { Chip, ChipGroup, Icon, Size } from '@lumx/react';
+import { mdiEmail, mdiClose, mdiCloseCircle, mdiMenuDown, mdiFilterVariant } from '@lumx/icons';
+```
+
+# Chip
+
+**Chips display distinct inputs, attributes, or actions.**
+Use chips to display choices, as inputs or to filter content.
+
+## Default
+
+Use default to display distinct attributes such as tags on a blog post.
+
+<DemoBlock2 demo="default" engine={props.engine} withThemeSwitcher />
+
+## Dismissible
+
+Use dismissible when chips can be removed by users.
+
+<DemoBlock2 demo="dismissible" engine={props.engine} withThemeSwitcher />
+
+## Choice
+
+Use choice when users makes an exclusive choice between values. When space is not a constraint, use this chip instead of a select component.
+
+<DemoBlock2 demo="choice" engine={props.engine} withThemeSwitcher />
+
+## Filter
+
+Use Filter as an entry point to one or several choices. When it is active, it can have a clear button.
+
+<DemoBlock2 demo="filter" engine={props.engine} withThemeSwitcher />
+
+## Small
+
+Use small when space is a constraint, as in areas like text fields, selects, dropdown menus and metadata.
+
+<DemoBlock2 demo="small" engine={props.engine} withThemeSwitcher />
+
+# Properties
+
+<PropTable component="Chip" />
+
+
+# Chip Group
+
+<DemoBlock2 demo="group" engine={props.engine} withThemeSwitcher />
+
+# Properties
+
+<PropTable component="ChipGroup" />
+
+<PropTable component="Chip" />
