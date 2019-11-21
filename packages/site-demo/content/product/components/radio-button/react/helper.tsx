@@ -1,54 +1,8 @@
-```javascript import
-import { useState } from 'react';
-import { RadioButton, RadioGroup, Theme } from '@lumx/react';
-```
+import React, { useState } from 'react';
 
-# Radio button
+import { RadioButton, RadioGroup } from '@lumx/react';
 
-**Radio buttons display exclusive options to chose from.**
-
-## Default
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
-    const [value, setValue] = useState('lorem');
-
-    return (
-        <>
-            <RadioGroup>
-                <RadioButton
-                    checked={value === 'lorem'}
-                    label="Radio button 1"
-                    name="test1"
-                    theme={theme}
-                    value="lorem"
-                    onChange={setValue}
-                />
-                <RadioButton
-                    disabled
-                    label="Radio button 2"
-                    name="test1"
-                    theme={theme}
-                    value="ipsum"
-                />
-                <RadioButton
-                    checked={value === 'dolor'}
-                    name="test1"
-                    label="Radio button 3"
-                    theme={theme}
-                    value="dolor"
-                    onChange={setValue}
-                />
-            </RadioGroup>
-        </>
-    );
-};
-```
-
-## With optional helper text
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
+const App = ({ theme }) => {
     const [value, setValue] = useState('lorem');
 
     return (
@@ -84,4 +38,5 @@ import { RadioButton, RadioGroup, Theme } from '@lumx/react';
         </>
     );
 };
-```
+
+export default App;
