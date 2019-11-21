@@ -1,15 +1,9 @@
-```javascript import
-import { mdiComment, mdiHeart } from '@lumx/icons';
+import React from 'react';
 
 import { Button, Chip, ColorPalette, Emphasis, Grid, Orientation, PostBlock, Size, Theme, UserBlock } from '@lumx/react';
-```
+import { mdiComment, mdiHeart } from '@lumx/icons';
 
-# Post Block
-
-## Default
-
-```javascript jsx withThemeSwitcher
-(theme) => <>
+const App = ({ theme }) => <>
     <PostBlock
         actions={
             <Grid>
@@ -30,7 +24,7 @@ import { Button, Chip, ColorPalette, Emphasis, Grid, Orientation, PostBlock, Siz
             </Grid>
         }
         attachments={
-             <UserBlock
+            <UserBlock
                 avatar="http://i.pravatar.cc/128"
                 name="Matthias Manoukian"
                 fields={['Head of Design', 'Lyon']}
@@ -62,4 +56,5 @@ import { Button, Chip, ColorPalette, Emphasis, Grid, Orientation, PostBlock, Siz
         title="Annual Bonus Payments"
     />
 </>
-```
+
+export default App;
