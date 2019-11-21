@@ -125,7 +125,6 @@ if (minify) {
 }
 
 module.exports = merge.smartStrategy({
-    entry: 'append',
     'module.rules': 'append',
     plugins: 'replace',
     output: 'replace',
@@ -134,6 +133,11 @@ module.exports = merge.smartStrategy({
     devtool: minify ? 'source-map' : '',
     mode: 'production',
     name: `core-umd${minify ? '-minified' : ''}`,
+
+    entry: {
+        'lumx-theme-lumapps': `${CORE_PATH}/style/lumx-theme-lumapps.scss`,
+        'lumx-theme-material': `${CORE_PATH}/style/lumx-theme-material.scss`,
+    },
 
     module: {
         rules: getStyleLoader({ mode: 'prod' }),

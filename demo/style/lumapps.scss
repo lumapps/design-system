@@ -1,5 +1,8 @@
-/** DEMO THEME */
+/** DEMO THEME - LUMAPPS */
 
+$mdi-font-path: '~@mdi/font/fonts';
+
+@import '~@mdi/font/scss/materialdesignicons';
 @import '~LumX/core/style/lumx-theme-lumapps';
 @import './base/base';
 @import './demo/demo-block';

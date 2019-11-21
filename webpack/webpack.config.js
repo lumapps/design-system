@@ -14,11 +14,6 @@ const baseConfig = {
 
     devtool: 'cheap-module-source-map',
 
-    entry: {
-        'lumx-theme-lumapps': `${CORE_PATH}/style/lumx-theme-lumapps.scss`,
-        'lumx-theme-material': `${CORE_PATH}/style/lumx-theme-material.scss`,
-    },
-
     externals: [
         '@uirouter/angularjs',
         'angularjs',

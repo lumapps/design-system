@@ -89,7 +89,7 @@ function changeTheme(theme) {
 
     const promises = [
         _injectScript(`demo-theme-${theme}.js`, 'demo-theme', undefined, true),
-        _injectScript(`lumx-theme-${theme}.js`, 'lumx-theme', undefined, true),
+        // _injectScript(`lumx-theme-${theme}.js`, 'lumx-theme', undefined, true),
     ];
 
     return Promise.all(promises).then(() => {
