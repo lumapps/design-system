@@ -41,6 +41,7 @@ async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModul
     const { default: template } = await import(
         `content/${path.replace(/^\//, '')}/angularjs/partials/${demo}.html`
     );
+    console.log(DemoController, template)
     return {
         default({ theme }: IHasTheme) {
             let container;
@@ -101,6 +102,21 @@ const DemoBlock2: React.FC<IDemoBlock2Props> = ({
     const toggleShowCode = (): void => setShowCode(!showCode);
 
     const Demo = useLoadDemo(location.pathname, engine, demo);
+
+    if (Demo === undefined) {
+        return (
+            <span>
+                Loading demo for <code>{engine}</code>...
+            </span>
+        );
+    }
+    if (Demo === null) {
+        return (
+            <span>
+                No demo available for <code>{engine}</code>.
+            </span>
+        );
+    }
 
     return (
         <div className="demo-block">
