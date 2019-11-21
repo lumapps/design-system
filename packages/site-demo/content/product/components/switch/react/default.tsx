@@ -1,14 +1,8 @@
-```javascript import
-import { useState } from 'react';
-import { Switch, Theme } from '@lumx/react';
-```
+import React, { useState } from 'react';
 
-# Switch
+import { Switch } from '@lumx/react';
 
-**Switches are on/off toggles for a single option.**
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
+const App = ({ theme }) => {
     const [state, setState] = useState(false);
 
     return (
@@ -34,8 +28,5 @@ import { Switch, Theme } from '@lumx/react';
         </>
     );
 };
-```
 
-### Properties
-
-<PropTable component="Switch" />
+export default App;
