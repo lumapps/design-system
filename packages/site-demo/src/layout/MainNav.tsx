@@ -1,3 +1,4 @@
+import { Callback } from '@lumx/react/utils';
 import { castArray, isEmpty } from 'lodash';
 import React, { ReactElement, ReactNode, useState } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -100,7 +101,7 @@ const EMPHASIS_BY_LEVEL = {
     '2': Emphasis.low,
 };
 
-const generateNav = (goTo: (path: string) => void, location: string, items: Item[]): ReactNode => {
+const generateNav = (goToHandler: (path: string) => Callback, location: string, items: Item[]): ReactNode => {
     const generateNavItem = (parent: string[], item?: Item | Item[]): ReactNode => {
         if (!item || Array.isArray(item)) {
             return castArray(item).map((child: Item) => generateNavItem(parent, child));
@@ -119,7 +120,7 @@ const generateNav = (goTo: (path: string) => void, location: string, items: Item
         };
 
         if (isEmpty(children)) {
-            props.onClick = (): void => goTo(slug);
+            props.onClick = goToHandler(slug);
         } else {
             props.onClick = (): void => setOpen(!isOpen);
         }
