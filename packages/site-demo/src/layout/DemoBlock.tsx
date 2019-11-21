@@ -1,26 +1,95 @@
 import { mdiCodeTags } from '@lumx/icons';
 import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 import classNames from 'classnames';
-import React, { ReactChild, ReactElement, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
+import AngularTemplate from 'react-angular';
 import Highlight from 'react-highlight';
+import { withRouter } from 'react-router-dom';
 
 // Code highlighting style
 import 'highlight.js/styles/github.css';
 
-type ThemeConsumer = (theme: Theme) => ReactChild;
-
 interface IDemoBlockProps {
-    children: ThemeConsumer;
+    demo: string;
     disableGrid: boolean;
-    withThemeSwitcher: boolean;
+    engine: string;
+    location: { pathname: string };
     sourceCode: string;
+    withThemeSwitcher: boolean;
 }
 
+interface IHasTheme {
+    theme: Theme;
+}
+
+interface IDemoModule {
+    default: React.FC<IHasTheme>;
+}
+
+function loadReactDemo(path: string, demo: string): Promise<IDemoModule> {
+    return import(
+        /* webpackMode: "lazy" */
+        `content/${path.replace(/^\//, '')}/react/${demo}`
+    );
+}
+
+async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModule> {
+    const { DemoController } = await import(
+        /* webpackMode: "lazy" */
+        `content/${path.replace(/^\//, '')}/angularjs/controller.js`
+    );
+    const { default: template } = await import(`content/${path.replace(/^\//, '')}/angularjs/partials/${demo}.html`);
+
+    return {
+        default({ theme }: IHasTheme) {
+            let container;
+
+            useEffect(() => {
+                if (!container) {
+                    return;
+                }
+
+                container.$scope.theme = theme;
+                container.$scope.$apply();
+            }, [container, theme]);
+
+            return (
+                <AngularTemplate
+                    ref={(c) => (container = c)}
+                    template={template}
+                    controller={DemoController}
+                    controllerAs="vm"
+                    scope={{ theme }}
+                />
+            );
+        },
+    };
+}
+
+const useLoadDemo = (path: string, engine: string, demo: string): IDemoModule | null | undefined => {
+    const [Demo, setDemo] = useState<IDemoModule | null>();
+
+    useEffect((): void => {
+        (async (): Promise<void> => {
+            setDemo(undefined);
+            try {
+                setDemo(engine === 'react' ? await loadReactDemo(path, demo) : await loadAngularjsDemo(path, demo));
+            } catch (exception) {
+                setDemo(null);
+            }
+        })();
+    }, [path, engine, demo]);
+
+    return Demo;
+};
+
 const DemoBlock: React.FC<IDemoBlockProps> = ({
-    children,
+    demo,
     disableGrid = false,
-    withThemeSwitcher = false,
+    engine,
+    location,
     sourceCode,
+    withThemeSwitcher = false,
 }: IDemoBlockProps): ReactElement => {
     const [theme, setTheme] = useState(Theme.light);
     const toggleTheme = (checked: boolean): void => (checked ? setTheme(Theme.dark) : setTheme(Theme.light));
@@ -28,11 +97,27 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
     const [showCode, setShowCode] = useState(false);
     const toggleShowCode = (): void => setShowCode(!showCode);
 
-    const content = children(theme);
+    const Demo = useLoadDemo(location.pathname, engine, demo);
+
+    if (Demo === undefined) {
+        return (
+            <span>
+                Loading demo for <code>{engine}</code>...
+            </span>
+        );
+    }
+    if (Demo === null) {
+        return (
+            <span>
+                No demo available for <code>{engine}</code>.
+            </span>
+        );
+    }
+
     return (
         <div className="demo-block">
             <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-theme-background-dark-N')}>
-                <div className={disableGrid ? '' : 'demo-grid'}>{content}</div>
+                <div className={disableGrid ? '' : 'demo-grid'}>{Demo && <Demo.default theme={theme} />}</div>
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">
@@ -59,4 +144,6 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
     );
 };
 
-export { DemoBlock };
+const DemoBlockWithRouter = withRouter(DemoBlock);
+
+export { DemoBlockWithRouter as DemoBlock };

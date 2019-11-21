@@ -49,7 +49,6 @@ const isPreJSXDemo = (node) =>
     node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'jsx']);
 const ADDITIONAL_IMPORT = `
 import { DemoBlock } from '@lumx/demo/layout/DemoBlock';
-import { DemoBlock2 } from '@lumx/demo/layout/DemoBlock2';
 import { PropTable } from '@lumx/demo/layout/PropTable';
 `;
 
