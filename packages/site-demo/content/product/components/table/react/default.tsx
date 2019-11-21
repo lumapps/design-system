@@ -1,19 +1,11 @@
-```javascript import
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+
 import orderBy from 'lodash/orderBy';
-import set from 'lodash/set';
-import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow, ThOrder, ThScope, Theme } from '@lumx/react';
+
+import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow, ThOrder, ThScope } from '@lumx/react';
 import { mdiCommentOutline } from '@lumx/icons';
-```
 
-# Table
-
-**Tables display tabular information to make it easier to scan and to compare.**
-
-## Basic usage
-
-```javascript jsx withThemeSwitcher
-(theme) =>  {
+const App = ({ theme }) => {
     const [tableHeader, setTableHeader] = useState([
         {
             isSortable: true,
@@ -111,4 +103,5 @@ import { mdiCommentOutline } from '@lumx/icons';
         </>
     );
 };
-```
+
+export default App;
