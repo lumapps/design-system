@@ -1,17 +1,9 @@
-```javascript import
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { Alignment, Button, ImageBlock, ImageBlockProps, Lightbox, Slideshow, SlideshowItem, Theme, ChipGroup,
-Chip,
-Size } from '@lumx/react';
-```
+import React, { useCallback, useRef, useState } from 'react';
 
-# Dialog
-
-## Default
+import { Alignment, Button, ImageBlock, Lightbox, Slideshow, SlideshowItem, Theme, ChipGroup, Chip, Size } from '@lumx/react';
 
 
-```javascript jsx withThemeSwitcher
-(theme) => {
+const App = ({ theme }) => {
     const imageBlockDemoProps = {
             align: Alignment.center,
             description: 'What an image',
@@ -106,8 +98,4 @@ Size } from '@lumx/react';
     );
 }
 
-```
-
-# Properties
-
-<PropTable component="Lightbox" />
+export default App;
