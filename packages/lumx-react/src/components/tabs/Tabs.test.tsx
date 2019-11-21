@@ -3,9 +3,10 @@ import React, { ReactElement } from 'react';
 import noop from 'lodash/noop';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 import { build, oneOf } from 'test-data-bot';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Tab } from '@lumx/react';
@@ -41,7 +42,7 @@ interface ISetup extends ICommonSetup {
  *                       component.
  */
 const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
-    const tabs: Tabs[] = [<Tab>Tab 0</Tab>, <Tab>Tab 1</Tab>];
+    const tabs = [<Tab>Tab 0</Tab>, <Tab>Tab 1</Tab>];
     const props: TabsProps = {
         children: tabs,
         onTabClick: noop,
@@ -112,7 +113,7 @@ describe(`<${Tabs.displayName}>`, (): void => {
 
         it('should trigger `onTabClick` when a child tab is clicked', (): void => {
             const { wrapper } = setup({ onTabClick }, false);
-            const firstTab: Tab = wrapper.find('Tab[index=1]');
+            const firstTab = wrapper.find('Tab[index=1]');
 
             firstTab.simulate('click');
             expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 1 });

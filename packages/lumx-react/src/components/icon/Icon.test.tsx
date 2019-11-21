@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
 import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Size } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, Icon, IconProps } from './Icon';

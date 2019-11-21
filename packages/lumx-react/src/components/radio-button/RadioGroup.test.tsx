@@ -1,8 +1,9 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { RadioButton } from '@lumx/react';
 import { CLASSNAME, RadioGroup, RadioGroupProps } from './RadioGroup';

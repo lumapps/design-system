@@ -4,7 +4,18 @@
 //                         //
 /////////////////////////////
 
-export * from '@lumx/core/constants';
+export {
+    BACKSPACE_KEY_CODE,
+    CSS_PREFIX,
+    DOWN_KEY_CODE,
+    ENTER_KEY_CODE,
+    SPACE_KEY_CODE,
+    ESCAPE_KEY_CODE,
+    LEFT_KEY_CODE,
+    RIGHT_KEY_CODE,
+    TAB_KEY_CODE,
+    UP_KEY_CODE,
+} from '@lumx/core/constants';
 
 /**
  * The prefix to use to name the React component.

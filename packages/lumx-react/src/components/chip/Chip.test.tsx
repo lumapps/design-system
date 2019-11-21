@@ -1,8 +1,9 @@
 import { ShallowWrapper, shallow } from 'enzyme';
+import 'jest-enzyme';
 import React from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
-import { ICommonSetup } from '@lumx/react/testing/utils.test';
+import { ICommonSetup } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 import { CLASSNAME, Chip, ChipProps } from './Chip';
 

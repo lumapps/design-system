@@ -10,7 +10,7 @@ import {
     PAGINATION_ITEM_SIZE,
 } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/constants';
-import { IGenericProps, SwipeDirection, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { IGenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
@@ -264,7 +264,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         if (parentRef && parentRef.current) {
             parentRef.current.addEventListener('keydown', handleKeyPressed);
 
-            swipeListeners = detectSwipe(parentRef.current, (swipeDirection: SwipeDirection): void => {
+            swipeListeners = detectSwipe(parentRef.current, (swipeDirection: string): void => {
                 if (swipeDirection === 'right') {
                     handlePreviousClick();
                 }

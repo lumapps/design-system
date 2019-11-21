@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
 import { List, ListItem, Size } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { AutocompleteMultiple, AutocompleteMultipleProps, CLASSNAME } from './AutocompleteMultiple';
 
@@ -29,7 +30,7 @@ interface ISetup extends ICommonSetup {
 }
 
 interface ISuggestion {
-    id: number;
+    id: string;
     text: string;
 }
 

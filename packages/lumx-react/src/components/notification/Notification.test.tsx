@@ -1,10 +1,11 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
 import noop from 'lodash/noop';
 
-import { ICommonSetup, Wrapper } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
 import { CLASSNAME, Notification, NotificationProps, NotificationType } from './Notification';
 

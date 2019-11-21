@@ -87,11 +87,12 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "build": "lerna run build",
+        "build": "lerna run --stream build",
         "postinstall": "lerna bootstrap",
-        "start": "lerna run start",
+        "start": "lerna run --stream start",
         "setup:git-hooks": "node node_modules/husky/bin/uninstall.js && node node_modules/husky/bin/install.js",
         "scaffold": "yarn yo ./yo-generators/ --with-tests --with-demo",
+        "test": "lerna run --stream test",
         "format": "yarn format:js && yarn format:ts && yarn format:style",
         "format:style": "prettier-stylelint --prettier-last --write packages/**/*.{css,scss}",
         "format:js": "prettier-eslint --prettier-last --write packages/**/*.{js,jsx}",

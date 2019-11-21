@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
-import { ValueOf } from 'global';
 import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
 
 /////////////////////////////
@@ -85,13 +85,12 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 3. Test events.
     describe('Events', (): void => {
         const onClose: jest.Mock = jest.fn();
-        type WindowEvents = keyof WindowEventMap;
-        let windowEventListeners: Partial<
-            { [key in WindowEvents]: (evt: Partial<ValueOf<WindowEventMap>>) => void }
-        > = {};
+        let windowEventListeners: {
+            keydown?(evt): void;
+        };
 
-        const addEventListener = (event: WindowEvents, cb: (evt: Partial<ValueOf<WindowEventMap>>) => void): void => {
-            windowEventListeners[event] = cb;
+        const addEventListener = (type: string, cb: EventListenerOrEventListenerObject): void => {
+            windowEventListeners[type] = cb;
         };
 
         beforeEach((): void => {

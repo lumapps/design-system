@@ -1,12 +1,13 @@
 import React, { ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 import mockConsole from 'jest-mock-console';
 import { build, oneOf } from 'test-data-bot';
 
 import without from 'lodash/without';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';

@@ -1,11 +1,12 @@
 import React, { ReactElement, ReactNode } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 import mockConsole from 'jest-mock-console';
 
 import { mdiPlus } from '@lumx/icons';
 import { Button, Icon, IconButton } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
 

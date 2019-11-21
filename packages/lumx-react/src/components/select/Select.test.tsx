@@ -1,9 +1,10 @@
 import React, { ReactElement, RefObject } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
 import { Chip, Icon, Theme } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';

@@ -6,7 +6,8 @@ import { Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { getRootClassName } from '../../utils/getRootClassName';
 
 /**
  * Authorized size values.

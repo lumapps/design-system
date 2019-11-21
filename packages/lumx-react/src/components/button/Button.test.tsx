@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
 import { mdiCheck, mdiChevronDown, mdiPlus } from '@lumx/icons';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 import { Button, ButtonProps, CLASSNAME, DEFAULT_PROPS } from './Button';
 
@@ -65,7 +66,7 @@ describe(`<${Button.displayName}>`, () => {
 
             expect(icon).not.toExist();
 
-            expect(buttonRoot.contains(label)).toBeTrue();
+            expect(buttonRoot.contains(label)).toBe(true);
         });
 
         it('should render button with label and right icon', () => {
@@ -81,7 +82,7 @@ describe(`<${Button.displayName}>`, () => {
             expect(icon).toExist();
             expect(icon.length).toEqual(1);
 
-            expect(buttonRoot.contains(label)).toBeTrue();
+            expect(buttonRoot.contains(label)).toBe(true);
         });
 
         it('should render button with label and left icon', () => {
@@ -97,7 +98,7 @@ describe(`<${Button.displayName}>`, () => {
             expect(icon).toExist();
             expect(icon.length).toEqual(1);
 
-            expect(buttonRoot.contains(label)).toBeTrue();
+            expect(buttonRoot.contains(label)).toBe(true);
         });
 
         it('should render button with label and icons', () => {
@@ -114,7 +115,7 @@ describe(`<${Button.displayName}>`, () => {
             expect(icon).toExist();
             expect(icon.length).toEqual(2);
 
-            expect(buttonRoot.contains(label)).toBeTrue();
+            expect(buttonRoot.contains(label)).toBe(true);
         });
     });
 

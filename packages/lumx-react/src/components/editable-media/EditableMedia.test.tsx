@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
 import { Size } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { CLASSNAME, EditableMedia, EditableMediaProps, EditableMediaVariant } from './EditableMedia';
 
 /////////////////////////////

@@ -217,7 +217,7 @@ describe('convertToSimpleProp', () => {
                 },
             },
         );
-        expect(simpleProp.required).toBeFalse();
+        expect(simpleProp.required).toBe(false);
     });
 
     it('should handle non required type via flags', () => {
@@ -232,7 +232,7 @@ describe('convertToSimpleProp', () => {
                 },
             },
         );
-        expect(simpleProp.required).toBeFalse();
+        expect(simpleProp.required).toBe(false);
     });
 
     it('should use comment as prop description', () => {

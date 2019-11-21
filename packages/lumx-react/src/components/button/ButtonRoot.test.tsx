@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { mount } from 'enzyme';
+import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import {
@@ -70,7 +71,7 @@ describe(`<${ButtonRoot.displayName}>`, () => {
             expect(button).toExist();
             expect(button.type()).toEqual('button');
 
-            expect(button.contains(props.children)).toBeTrue();
+            expect(button.contains(props.children)).toBe(true);
         });
 
         it('should render button with wrapper and label', () => {
@@ -86,7 +87,7 @@ describe(`<${ButtonRoot.displayName}>`, () => {
             expect(button).toExist();
             expect(button.type()).toEqual('button');
 
-            expect(button.contains(props.children)).toBeTrue();
+            expect(button.contains(props.children)).toBe(true);
         });
 
         it('should render anchor button with label', () => {
@@ -102,7 +103,7 @@ describe(`<${ButtonRoot.displayName}>`, () => {
 
             expect(button).toExist();
             expect(button.type()).toEqual('a');
-            expect(button.contains(props.children)).toBeTrue();
+            expect(button.contains(props.children)).toBe(true);
 
             const actualProps = button.props() as Partial<ButtonRootProps>;
             expect(actualProps.href).toEqual(props.href);
@@ -123,7 +124,7 @@ describe(`<${ButtonRoot.displayName}>`, () => {
 
             expect(button).toExist();
             expect(button.type()).toEqual('a');
-            expect(button.contains(props.children)).toBeTrue();
+            expect(button.contains(props.children)).toBe(true);
 
             const actualProps = button.props() as Partial<ButtonRootProps>;
             expect(actualProps.href).toEqual(props.href);

@@ -1,4 +1,5 @@
 import { ReactWrapper, ShallowWrapper } from 'enzyme';
+import 'jest-enzyme';
 
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';

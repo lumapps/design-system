@@ -30,25 +30,45 @@
         "@babel/preset-react": "^7.7.0",
         "@types/classnames": "^2.2.9",
         "@types/enzyme": "^3.10.3",
-        "@types/jest": "^24.0.23",
+        "@types/jest": "^24.0.18",
         "@types/lodash": "^4.14.149",
         "@types/react": "^16.9.11",
         "@types/react-dom": "^16.9.4",
+        "add": "^2.0.6",
         "awesome-typescript-loader": "^5.2.1",
+        "babel-jest": "^24.9.0",
         "babel-loader": "^8.0.6",
         "babel-plugin-smart-webpack-import": "^1.5.1",
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^5.0.5",
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-16": "^1.15.1",
+        "enzyme-to-json": "^3.4.3",
+        "expect-more-jest": "^2.4.2",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "html-minifier-webpack-plugin": "^2.2.1",
         "is-ci": "^2.0.0",
+        "jest": "^24.9.0",
+        "jest-chain": "^1.1.2",
+        "jest-environment-enzyme": "^7.1.1",
+        "jest-enzyme": "^7.1.1",
+        "jest-html-reporters": "^1.1.9",
+        "jest-mock-console": "^1.0.0",
+        "jest-validate": "^24.9.0",
+        "jest-watch-master": "^1.0.0",
+        "jest-watch-suspend": "^1.1.2",
+        "jest-watch-typeahead": "^0.4.0",
         "terser-webpack-plugin": "^2.2.1",
+        "test-data-bot": "^0.8.0",
         "ts-declaration-webpack-plugin": "^1.2.0",
+        "ts-jest": "^24.1.0",
+        "typescript": "^3.7.2",
         "unminified-webpack-plugin": "^2.0.0",
         "webpack": "^4.41.2",
         "webpack-cli": "^3.3.10",
         "webpack-notifier": "^1.8.0",
-        "webpackbar": "^4.0.0"
+        "webpackbar": "^4.0.0",
+        "yarn": "^1.19.1"
     },
     "description": "The official LumApps Design System (LumX) for React applications",
     "engines": {
@@ -72,7 +92,8 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "build": "webpack"
+        "build": "webpack",
+        "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles"
     },
     "version": "0.16.0"
 }

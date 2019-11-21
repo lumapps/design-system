@@ -1,7 +1,8 @@
 import { shallow } from 'enzyme';
+import 'jest-enzyme';
 import React from 'react';
 
-import { ICommonSetup } from '@lumx/react/testing/utils.test';
+import { ICommonSetup } from '@lumx/react/testing/utils';
 import { Chip } from './Chip';
 import { ChipGroup, ChipGroupProps } from './ChipGroup';
 

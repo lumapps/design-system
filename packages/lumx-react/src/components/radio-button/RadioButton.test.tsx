@@ -1,8 +1,9 @@
 import React, { InputHTMLAttributes, LabelHTMLAttributes, ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
@@ -76,8 +77,8 @@ describe(`<${RadioButton.displayName}>`, (): void => {
 
             expect(input).toExist();
             const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBeFalse();
-            expect(inputProps.disabled).toBeFalse();
+            expect(inputProps.checked).toBe(false);
+            expect(inputProps.disabled).toBe(false);
 
             expect(helper).not.toExist();
         });
@@ -92,8 +93,8 @@ describe(`<${RadioButton.displayName}>`, (): void => {
             expect(wrapper).toMatchSnapshot();
 
             const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBeTrue();
-            expect(inputProps.disabled).toBeTrue();
+            expect(inputProps.checked).toBe(true);
+            expect(inputProps.disabled).toBe(true);
             expect(inputProps.id).toEqual(props.id);
         });
 
@@ -107,16 +108,16 @@ describe(`<${RadioButton.displayName}>`, (): void => {
 
             expect(input).toExist();
             const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBeFalse();
-            expect(inputProps.disabled).toBeFalse();
+            expect(inputProps.checked).toBe(false);
+            expect(inputProps.disabled).toBe(false);
 
             expect(label).toExist();
-            expect(label.contains(props.label)).toBeTrue();
+            expect(label.contains(props.label)).toBe(true);
             const labelProps: LabelHTMLAttributes<HTMLLabelElement> = label.props();
             expect(labelProps.htmlFor).toEqual(inputProps.id);
 
             expect(helper).toExist();
-            expect(helper.contains(props.helper)).toBeTrue();
+            expect(helper.contains(props.helper)).toBe(true);
         });
     });
 

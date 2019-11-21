@@ -2,8 +2,9 @@
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
+import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
+import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
@@ -136,20 +137,20 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
         it('should hide content when `isOpen` == false', (): void => {
             const { content } = setup({ isOpen: false });
 
-            expect(content).toBeEmptyObject();
+            expect(content.exists()).toBe(false);
         });
 
         it('should show content when `isOpen` == true', (): void => {
             const { content } = setup({ isOpen: true });
 
-            expect(content).toBeTruthy();
+            expect(content.exists()).toBe(true);
         });
 
         it('should show label', (): void => {
             const labelText = 'Label text';
             const { header } = setup({ label: labelText });
 
-            expect(header.text()).toStartWith(labelText);
+            expect(header.text()).toContain(labelText);
         });
 
         it('should show header instead of label', (): void => {
@@ -157,7 +158,7 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
             const headerText = 'Header text';
             const { header } = setup({ label: labelText, children: [<header>{headerText}</header>] });
 
-            expect(header.text()).toStartWith(headerText);
+            expect(header.text()).toContain(headerText);
         });
     });
 
