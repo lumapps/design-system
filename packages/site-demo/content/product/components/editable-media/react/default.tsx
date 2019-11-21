@@ -1,17 +1,9 @@
-```javascript import
-import { CSSProperties, ReactElement, useState } from 'react';
-import { Alignment, EditableMedia, Grid, GridItem, IconButton, Theme, Size } from '@lumx/react';
+import React, { useState } from 'react';
+
+import { EditableMedia, IconButton, Size } from '@lumx/react';
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
-```
 
-# EditableMedia
-
-**Featured Image Pick or upload a picture. It will show up in the preview of this content.**
-
-## Default
-
-```javascript jsx withThemeSwitcher disableGrid
-(theme) => {
+const App = ({ theme }) => {
     const [image, setImage] = useState();
     const handleClick = () => {
         const newImage = image ? undefined : 'https://picsum.photos/400/400/?random';
@@ -85,8 +77,5 @@ import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
         </>
     );
 };
-```
 
-### Properties
-
-<PropTable component="EditableMedia" />
+export default App;
