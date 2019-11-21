@@ -1,12 +1,8 @@
-```javascript import
-import { useRef } from 'react';
+import React, { useRef } from 'react';
+
 import { Button, Placement, Tooltip } from '@lumx/react';
-```
 
-# Tooltip
-
-```javascript jsx
-() => {
+const App = () => {
     const anchorRefTop = useRef(null);
     const anchorRefRight = useRef(null);
     const anchorRefBottom = useRef(null);
@@ -38,8 +34,5 @@ import { Button, Placement, Tooltip } from '@lumx/react';
         </>
     );
 };
-```
 
-### Properties
-
-<PropTable component="Tooltip" />
+export default App;
