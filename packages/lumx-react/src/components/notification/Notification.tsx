@@ -5,13 +5,11 @@ import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
 import { Button, Emphasis, Icon, Size, Theme } from '@lumx/react';
 
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 

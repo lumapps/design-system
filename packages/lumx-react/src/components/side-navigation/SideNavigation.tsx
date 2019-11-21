@@ -1,12 +1,11 @@
 import React, { Children, ReactElement, ReactNode } from 'react';
 
-import { SideNavigationItem, Theme } from '@lumx/react';
-import { handleBasicClasses } from '@lumx/react/utils';
-
-import { CSS_PREFIX } from '@lumx/react/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, isComponent } from '@lumx/react/utils';
 import classNames from 'classnames';
+
+import { SideNavigationItem, Theme } from '@lumx/react';
+
+import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { IGenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.

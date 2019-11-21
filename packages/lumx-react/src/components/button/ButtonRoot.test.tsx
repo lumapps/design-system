@@ -48,8 +48,8 @@ const setup = ({ ...props }: ISetupProps = {}): ISetup => {
     const wrapper: Wrapper = mount(<ButtonRoot {...props} />);
 
     return {
-        button: wrapper.find('.' + BUTTON_CLASSNAME),
-        buttonWrapper: wrapper.find('.' + BUTTON_WRAPPER_CLASSNAME),
+        button: wrapper.find(`.${BUTTON_CLASSNAME}`),
+        buttonWrapper: wrapper.find(`.${BUTTON_WRAPPER_CLASSNAME}`),
         props,
         wrapper,
     };

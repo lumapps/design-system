@@ -3,12 +3,11 @@ import React, { CSSProperties, ReactElement, ReactNode, useCallback, useEffect, 
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
+
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
-import { CSS_PREFIX } from '@lumx/react/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
-import { IGenericProps, getRootClassName, validateComponent } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
 
 import { SlideshowControls } from './SlideshowControls';
 

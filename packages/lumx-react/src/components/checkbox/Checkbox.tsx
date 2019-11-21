@@ -5,11 +5,8 @@ import classNames from 'classnames';
 import { mdiCheck } from '@lumx/icons';
 
 import { Icon, Theme } from '@lumx/react';
-import { CSS_PREFIX } from '@lumx/react/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
+import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
 

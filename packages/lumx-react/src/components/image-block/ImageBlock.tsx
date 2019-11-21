@@ -4,11 +4,10 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { AspectRatio, Alignment, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 

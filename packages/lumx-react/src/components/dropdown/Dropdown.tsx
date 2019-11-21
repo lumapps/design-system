@@ -5,8 +5,7 @@ import classNames from 'classnames';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useClickAway, useInfiniteScroll } from '@lumx/react/hooks';
-import { handleBasicClasses, onEscapePressed } from '@lumx/react/utils';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, onEscapePressed } from '@lumx/react/utils';
 
 /////////////////////////////
 

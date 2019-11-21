@@ -5,8 +5,7 @@ import classNames from 'classnames';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { Size, Theme } from '@lumx/react';
-import { Callback, IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { Callback, IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /**
  *  Authorized size values.

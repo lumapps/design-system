@@ -1,9 +1,9 @@
+import { castArray, isEmpty } from 'lodash';
 import React, { ReactElement, ReactNode, useState } from 'react';
 import { withRouter } from 'react-router-dom';
-import { castArray, isEmpty } from 'lodash';
 
-import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
 import { LumXLogo } from '@lumx/demo/assets/images';
+import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
 
 /**
  * Defines the type of a navigation item.
@@ -35,14 +35,12 @@ const spaceToSlug = (s: string): string => {
  */
 const ITEMS: Item[] = [
     {
-        label: 'Product',
         children: [
             {
-                label: 'Foundations',
                 children: ['Colors', 'Typography'],
+                label: 'Foundations',
             },
             {
-                label: 'Components',
                 children: [
                     'Autocomplete',
                     'Avatar',
@@ -78,19 +76,21 @@ const ITEMS: Item[] = [
                     'Uploader',
                     'User block',
                 ],
+                label: 'Components',
             },
         ],
+        label: 'Product',
     },
     {
         label: 'Brand',
     },
     {
-        label: 'Partners',
         children: [
             {
                 label: 'Site templates',
             },
         ],
+        label: 'Partners',
     },
 ];
 
@@ -147,7 +147,7 @@ interface IWithRouterProps {
  */
 const MainNav: React.FC<IWithRouterProps> = (props: IWithRouterProps): ReactElement => {
     const { location, history } = props;
-    const goTo = (path: string): void => history.push(path);
+    const goToHandler = (path: string) => () => history.push(path);
 
     return (
         <div className="main-nav">
@@ -156,8 +156,8 @@ const MainNav: React.FC<IWithRouterProps> = (props: IWithRouterProps): ReactElem
                     className="main-nav__logo"
                     role="button"
                     tabIndex={0}
-                    onClick={(): void => goTo('/')}
-                    onKeyPress={(): void => goTo('/')}
+                    onClick={goToHandler('/')}
+                    onKeyPress={goToHandler('/')}
                 >
                     <img src={LumXLogo} alt="LumX" />
                     <span>
@@ -166,7 +166,7 @@ const MainNav: React.FC<IWithRouterProps> = (props: IWithRouterProps): ReactElem
                     </span>
                 </div>
 
-                {generateNav(goTo, location.pathname, ITEMS)}
+                {generateNav(goToHandler, location.pathname, ITEMS)}
             </div>
         </div>
     );

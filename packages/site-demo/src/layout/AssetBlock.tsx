@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import { Button, Emphasis, Icon, Size } from '@lumx/react';
 import { mdiDownload, mdiFile } from '@lumx/icons';
+import { Button, Emphasis, Icon, Size } from '@lumx/react';
 
 interface IAssetBlock {
     /**

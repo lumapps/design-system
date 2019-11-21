@@ -7,9 +7,9 @@ import { Engine, Theme } from '@lumx/demo/constants';
 
 import { IGenericProps } from '@lumx/react/utils';
 
+import { EngineSelector } from './EngineSelector';
 import { MainContent } from './MainContent';
 import { ThemeSelector } from './ThemeSelector';
-import { EngineSelector } from './EngineSelector';
 
 // @ts-ignore
 import HomePage from 'content';

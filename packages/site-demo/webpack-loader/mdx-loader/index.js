@@ -1,4 +1,5 @@
 const mdx = require('@mdx-js/mdx');
+
 const mdxDemoCodeExtractor = require('./mdx-demo-code-extractor');
 
 // Imports needed in generated code.
@@ -24,7 +25,7 @@ function removeMDX(jsx) {
  * - Removes the injected `mdxType`.
  *
  * @param {string}         source MDX source code.
- * @return {Promise<void>} Void promise when the MDX code transformation finished.
+ * @return {Promise<void>} Void promise when the MDX code transformation finished...........
  */
 module.exports = async function mdxLoader(source) {
     const cb = this.async();

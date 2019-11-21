@@ -3,8 +3,7 @@ import React, { ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, validateComponent } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
 
 /////////////////////////////
 //                         //

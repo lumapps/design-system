@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { mdiClose, mdiEmail } from '@lumx/icons';
 import { Chip, ChipGroup, Icon, Size } from '@lumx/react';
-import { mdiEmail, mdiClose } from '@lumx/icons';
 
 const App = ({ theme }) => {
     return (

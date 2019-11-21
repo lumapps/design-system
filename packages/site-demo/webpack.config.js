@@ -28,7 +28,7 @@ const filename = '[name].[hash:8]';
 const minimizer = [];
 
 const plugins = [
-    /* Clean output */
+    /* Clean output. */
     new CleanWebpackPlugin(),
 
     new WebpackBar(),
@@ -85,7 +85,7 @@ module.exports = {
     resolve: {
         alias: {
             [PKG_NAME]: SRC_PATH,
-            'content': CONTENT_PATH,
+            content: CONTENT_PATH,
             '@lumx/core': '@lumx/core/src',
             '@lumx/react': '@lumx/react/src',
             '@lumx/angularjs': '@lumx/angularjs/src',
@@ -175,10 +175,7 @@ module.exports = {
                         loader: 'babel-loader?cacheDirectory=true',
                         options: {
                             ...CONFIGS.babel,
-                            presets: [
-                                '@babel/preset-react',
-                                ...CONFIGS.babel.presets
-                            ],
+                            presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
                         },
                     },
                 ],
@@ -199,10 +196,7 @@ module.exports = {
                         loader: 'babel-loader?cacheDirectory=true',
                         options: {
                             ...CONFIGS.babel,
-                            presets: [
-                                '@babel/preset-react',
-                                ...CONFIGS.babel.presets
-                            ],
+                            presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
                         },
                     },
                     {

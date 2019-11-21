@@ -34,7 +34,7 @@ const minimizer = [
 ];
 
 const plugins = [
-    /* Clean output */
+    /* Clean output. */
     new CleanWebpackPlugin(),
 
     new WebpackBar(),

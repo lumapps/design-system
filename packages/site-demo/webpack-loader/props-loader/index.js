@@ -1,7 +1,7 @@
-const { convertToSimplePropsByComponent } = require('./convertPropTable');
-
 const lodash = require('lodash');
 const typedoc = require('typedoc');
+
+const { convertToSimplePropsByComponent } = require('./convertPropTable');
 
 const inputFiles = ['./src'];
 const tsconfig = require('../../tsconfig.json');
@@ -17,19 +17,19 @@ const typeDocOptions = {
 module.exports = function propsLoader() {
     const doc = new typedoc.Application(typeDocOptions);
 
-    // List .tsx files
+    // List .tsx files.
     const src = doc.expandInputFiles(inputFiles).filter((file) => file.endsWith('.tsx'));
-    // Add then to the dependency for this loader
+    // Add then to the dependency for this loader.
     src.forEach((file) => this.addDependency(file));
 
-    // Extract doc as JS objects (temporarily redirecting stdout to prevent the console being spammed)
+    // Extract doc as JS objects (temporarily redirecting stdout to prevent the console being spammed).
     const stdout = process.stdout.write;
     process.stdout.write = lodash.noop;
     const project = doc.convert(src);
     process.stdout.write = stdout;
     const typeDocDef = doc.serializer.projectToObject(project);
 
-    // Convert to simple props description
+    // Convert to simple props description.
     const propsByComponent = convertToSimplePropsByComponent(typeDocDef);
 
     return `module.exports = ${JSON.stringify({ propsByComponent })}`;

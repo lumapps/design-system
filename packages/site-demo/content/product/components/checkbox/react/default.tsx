@@ -31,6 +31,6 @@ const App = ({ theme }) => {
             />
         </>
     );
-}
+};
 
 export default App;

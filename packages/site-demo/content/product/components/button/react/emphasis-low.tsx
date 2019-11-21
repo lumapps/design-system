@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-    Button,
-    Emphasis,
-    IconButton,
-} from '@lumx/react';
+import { Button, Emphasis, IconButton } from '@lumx/react';
 
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
@@ -14,19 +10,11 @@ const App = ({ theme }) => (
             Default
         </Button>
 
-        <Button
-            disabled
-            emphasis={Emphasis.low}
-            theme={theme}
-        >
+        <Button disabled emphasis={Emphasis.low} theme={theme}>
             Disabled
         </Button>
 
-        <Button
-            leftIcon={mdiPencil}
-            emphasis={Emphasis.low}
-            theme={theme}
-        >
+        <Button leftIcon={mdiPencil} emphasis={Emphasis.low} theme={theme}>
             With Icon
         </Button>
 

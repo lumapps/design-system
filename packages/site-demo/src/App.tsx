@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { DEFAULT_ENGINE, DEFAULT_THEME, THEMES, Engine, Theme } from '@lumx/demo/constants';
+import { DEFAULT_ENGINE, DEFAULT_THEME, Engine, THEMES, Theme } from '@lumx/demo/constants';
 import { setDemoCustomColors } from '@lumx/demo/utils';
 
 import { ErrorBoundary } from './layout/ErrorBoundary';
@@ -52,7 +52,7 @@ const App: React.FC = (): ReactElement => {
     const changeTheme = (newTheme: Theme): void => {
         setTheme(newTheme);
         switchThemeStyle(newTheme);
-	    setDemoCustomColors(theme);
+        setDemoCustomColors(theme);
     };
     const changeEngine = (newEngine: Engine): void => {
         setEngine(newEngine);

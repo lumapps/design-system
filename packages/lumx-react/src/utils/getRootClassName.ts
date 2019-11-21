@@ -1,5 +1,4 @@
-
-import { CSS_PREFIX, COMPONENT_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
 import kebabCase from 'lodash/kebabCase';
 import trimStart from 'lodash/trimStart';

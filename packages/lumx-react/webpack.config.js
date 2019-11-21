@@ -34,7 +34,7 @@ const minimizer = [
 ];
 
 const plugins = [
-    /* Clean output */
+    /* Clean output. */
     new CleanWebpackPlugin(),
 
     new WebpackBar(),
@@ -66,10 +66,10 @@ const plugins = [
         },
     ]),
 
-    /* Bundle non-minified versions of js/css files */
+    /* Bundle non-minified versions of js/css files. */
     new UnminifiedWebpackPlugin(),
 
-    /* Bundle TypeScript declaration file */
+    /* Bundle TypeScript declaration file. */
     new TsDeclarationWebpackPlugin({
         name: 'lumx.react.d.ts',
     }),

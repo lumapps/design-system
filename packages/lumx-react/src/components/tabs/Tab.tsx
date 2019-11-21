@@ -12,10 +12,8 @@ import noop from 'lodash/noop';
 import classNames from 'classnames';
 
 import { Icon, IconProps, Size } from '@lumx/react';
-import { CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { handleBasicClasses } from '@lumx/react/utils';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps } from '@lumx/react/utils';
+import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
+import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 

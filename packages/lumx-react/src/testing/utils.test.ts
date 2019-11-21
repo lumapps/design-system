@@ -84,11 +84,9 @@ function commonTestsSuite(
                 const wrappers: ICommonSetup = setup(modifiedProps);
 
                 const wrappersToTest: string[] = isArray(tests.prop) ? tests.prop! : [tests.prop!];
-                wrappersToTest.forEach(
-                    (wrapper: string): void => {
-                        expect(wrappers[wrapper]).toHaveProp(testedProp, modifiedProps[testedProp]);
-                    },
-                );
+                wrappersToTest.forEach((wrapper: string): void => {
+                    expect(wrappers[wrapper]).toHaveProp(testedProp, modifiedProps[testedProp]);
+                });
             });
         }
     });

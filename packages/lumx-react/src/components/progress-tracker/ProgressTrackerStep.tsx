@@ -5,9 +5,9 @@ import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
 
 import { Icon, Size, Theme } from '@lumx/react';
+
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 

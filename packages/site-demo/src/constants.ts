@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
-
 import { ColorPalette } from '@lumx/react';
+import { ReactNode } from 'react';
 
 /////////////////////////////
 //                         //
@@ -11,6 +10,7 @@ import { ColorPalette } from '@lumx/react';
 enum Categories {
     components = 'Components',
 }
+
 type Category = Categories;
 
 interface IDemoObject {
@@ -29,6 +29,7 @@ interface IDemoObject {
      */
     title?: string;
 }
+
 type DemoObject = IDemoObject;
 
 enum Theme {
@@ -58,8 +59,8 @@ enum Engine {
  * The available engines in the demo site.
  */
 const ENGINES = {
-    react: 'react',
     angularjs: 'angularjs',
+    react: 'react',
 };
 
 /**
@@ -91,7 +92,7 @@ const COLOR_VARIANTS = {
             fontColor: 'light',
             hexCode: '#2885f6',
         },
-        // eslint-disable-next-line id-length
+
         N: {
             fontColor: 'light',
             hexCode: '#2493ff',
@@ -128,7 +129,6 @@ const COLOR_VARIANTS = {
         },
     },
     dark: {
-        // eslint-disable-next-line id-length
         N: {
             fontColor: 'light',
             hexCode: '#28336d',
@@ -165,7 +165,6 @@ const COLOR_VARIANTS = {
         },
     },
     light: {
-        // eslint-disable-next-line id-length
         N: {
             fontColor: 'dark',
             hexCode: '#fff',
@@ -210,7 +209,7 @@ const COLOR_VARIANTS = {
             fontColor: 'dark',
             hexCode: '#ffb71f',
         },
-        // eslint-disable-next-line id-length
+
         N: {
             fontColor: 'dark',
             hexCode: '#ffc525',
@@ -255,7 +254,7 @@ const COLOR_VARIANTS = {
             fontColor: 'light',
             hexCode: '#d83e5e',
         },
-        // eslint-disable-next-line id-length
+
         N: {
             fontColor: 'light',
             hexCode: '#e94361',
@@ -300,7 +299,7 @@ const COLOR_VARIANTS = {
             fontColor: 'light',
             hexCode: '#0fa15a',
         },
-        // eslint-disable-next-line id-length
+
         N: {
             fontColor: 'light',
             hexCode: '#19b065',
@@ -340,4 +339,17 @@ const COLOR_VARIANTS = {
 
 /////////////////////////////
 
-export { DEFAULT_ENGINE, DEFAULT_THEME, ENGINES, THEMES, COLOR_VARIANTS, Engine, Theme, IColorPaletteWithVariants, IColorVariantDetail, Categories, Category, DemoObject };
+export {
+    DEFAULT_ENGINE,
+    DEFAULT_THEME,
+    ENGINES,
+    THEMES,
+    COLOR_VARIANTS,
+    Engine,
+    Theme,
+    IColorPaletteWithVariants,
+    IColorVariantDetail,
+    Categories,
+    Category,
+    DemoObject,
+};

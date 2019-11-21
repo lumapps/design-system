@@ -1,42 +1,42 @@
 import React from 'react';
 
-import { AutocompleteMultiple, List, ListItem, Size, Chip, Icon, ChipGroup } from '@lumx/react';
 import { mdiClose } from '@lumx/icons';
+import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } from '@lumx/react';
 
 const App = ({ theme }) => {
     const CITIES = [
         {
             text: 'Los Angeles',
-            id: 'losangeles'
+            id: 'losangeles',
         },
         {
             text: 'San Francisco',
-            id: 'sanfrancisco'
+            id: 'sanfrancisco',
         },
         {
             text: 'Paris',
-            id: 'paris'
+            id: 'paris',
         },
         {
             text: 'Montpellier',
-            id: 'montpellier'
+            id: 'montpellier',
         },
         {
             text: 'Bordeaux',
-            id: 'bordeaux'
+            id: 'bordeaux',
         },
         {
             text: 'Toulouse',
-            id: 'toulouse'
+            id: 'toulouse',
         },
         {
             text: 'Lyon',
-            id: 'lyon'
+            id: 'lyon',
         },
         {
             text: 'Montevideo',
-            id: 'montevideo'
-        }
+            id: 'montevideo',
+        },
     ];
 
     const INITIAL_STATE_SHOW_SUGGESTIONS = false;
@@ -54,7 +54,9 @@ const App = ({ theme }) => {
      */
     const [showSuggestions, setShowSuggestions] = React.useState(INITIAL_STATE_SHOW_SUGGESTIONS);
     const [filterValue, setFilterValue] = React.useState('');
-    const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(INITIAL_STATE_NAVIGATION_SUGGESTION);
+    const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(
+        INITIAL_STATE_NAVIGATION_SUGGESTION,
+    );
     const [selectedValues, setSelectedValues] = React.useState([]);
     const inputRef = React.useRef(null);
 
@@ -68,16 +70,13 @@ const App = ({ theme }) => {
     const onChipDeleted = () => {
         selectedValues.pop();
         setSelectedValues(selectedValues);
-    }
+    };
 
     const {
         activeChip,
         onBackspacePressed: chipBackspaceNavigation,
         resetChipNavigation,
-    } = ChipGroup.useChipGroupNavigation(
-        selectedValues,
-        onChipDeleted
-    );
+    } = ChipGroup.useChipGroupNavigation(selectedValues, onChipDeleted);
 
     /**
      * Callback executed when the autocomplete closes.
@@ -98,7 +97,7 @@ const App = ({ theme }) => {
         setFilterValue('');
         setShowSuggestions(INITIAL_STATE_SHOW_SUGGESTIONS);
         setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
-    }
+    };
 
     /**
      * Function that adds the new value to the list of values and resets the autocomplete.
@@ -109,7 +108,7 @@ const App = ({ theme }) => {
         if (newCity && newCity.length > 0) {
             setSelectedCity({
                 text: newCity,
-                id: newCity.replace(' ', '').toLowerCase()
+                id: newCity.replace(' ', '').toLowerCase(),
             });
 
             setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
@@ -173,9 +172,7 @@ const App = ({ theme }) => {
         }
     };
 
-    const {
-        activeItemIndex,
-    } = List.useKeyboardListNavigation(
+    const { activeItemIndex } = List.useKeyboardListNavigation(
         filteredCities,
         inputRef,
         setSelectedCity,
@@ -191,7 +188,7 @@ const App = ({ theme }) => {
      */
     const onFocus = (evt) => {
         setShowSuggestions(filterValue.length > 0);
-    }
+    };
 
     /**
      * Callback triggered when the Text field is blurred. In this scenario, we want
@@ -199,7 +196,7 @@ const App = ({ theme }) => {
      */
     const onBlur = (evt) => {
         resetChipNavigation();
-    }
+    };
 
     return (
         <AutocompleteMultiple
@@ -213,18 +210,18 @@ const App = ({ theme }) => {
             inputRef={inputRef}
             onBlur={onBlur}
             selectedChipRender={(city, index) => (
-                        <Chip
-                            theme={theme}
-                            isClickable
-                            key={index}
-                            after={<Icon icon={mdiClose} size={Size.xxs} />}
-                            size={Size.s}
-                            onAfterClick={event => clearSelectedValue(event, city)}
-                            onClick={event => clearSelectedValue(event, city)}
-                            isHighlighted={index === activeChip}
-                        >
-                            {city.text}
-                        </Chip>
+                <Chip
+                    theme={theme}
+                    isClickable
+                    key={index}
+                    after={<Icon icon={mdiClose} size={Size.xxs} />}
+                    size={Size.s}
+                    onAfterClick={(event) => clearSelectedValue(event, city)}
+                    onClick={(event) => clearSelectedValue(event, city)}
+                    isHighlighted={index === activeChip}
+                >
+                    {city.text}
+                </Chip>
             )}
         >
             <List theme={theme}>

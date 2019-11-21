@@ -107,19 +107,15 @@ describe(`<${TextField.displayName}>`, () => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    const propType =
-                        prop === 'icon' || prop === 'label' || prop === 'placeholder'
-                            ? `has${prop.charAt(0).toUpperCase() + prop.slice(1)}`
-                            : prop;
-                    const propValue =
-                        prop === 'icon' || prop === 'label' || prop === 'placeholder' ? true : modifiedProps[prop];
-                    expect(wrapper).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: propType, value: propValue }),
-                    );
-                },
-            );
+            Object.keys(modifiedProps).forEach((prop: string): void => {
+                const propType =
+                    prop === 'icon' || prop === 'label' || prop === 'placeholder'
+                        ? `has${prop.charAt(0).toUpperCase() + prop.slice(1)}`
+                        : prop;
+                const propValue =
+                    prop === 'icon' || prop === 'label' || prop === 'placeholder' ? true : modifiedProps[prop];
+                expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: propType, value: propValue }));
+            });
         });
 
         it('should add "has-error" class name', () => {
@@ -131,13 +127,11 @@ describe(`<${TextField.displayName}>`, () => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    expect(wrapper).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                },
-            );
+            Object.keys(modifiedProps).forEach((prop: string): void => {
+                expect(wrapper).toHaveClassName(
+                    getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                );
+            });
         });
     });
 

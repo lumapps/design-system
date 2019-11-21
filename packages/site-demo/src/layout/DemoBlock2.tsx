@@ -1,17 +1,16 @@
-import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 import { mdiCodeTags } from '@lumx/icons';
+import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 import classNames from 'classnames';
-import React, { ReactChild, ReactElement, useState, useEffect, useRef } from 'react';
-import { withRouter } from 'react-router-dom';
-import Highlight from 'react-highlight';
+import React, { ReactChild, ReactElement, useEffect, useRef, useState } from 'react';
 import AngularTemplate from 'react-angular';
-
+import Highlight from 'react-highlight';
+import { withRouter } from 'react-router-dom';
 
 // Code highlighting style
 import 'highlight.js/styles/github.css';
 
 interface IDemoBlock2Props {
-    demo: string,
+    demo: string;
     disableGrid: boolean;
     engine: string;
     location: { pathname: string };
@@ -19,12 +18,13 @@ interface IDemoBlock2Props {
     withThemeSwitcher: boolean;
 }
 
-interface IHasTheme { theme: Theme };
+interface IHasTheme {
+    theme: Theme;
+}
 
 interface IDemoModule {
     default: React.FC<IHasTheme>;
 }
-
 
 function loadReactDemo(path: string, demo: string): Promise<IDemoModule> {
     return import(
@@ -38,16 +38,16 @@ async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModul
         /* webpackMode: "lazy" */
         `content/${path.replace(/^\//, '')}/angularjs/controller.js`
     );
-    const { default: template } = await import(
-        `content/${path.replace(/^\//, '')}/angularjs/partials/${demo}.html`
-    );
-    console.log(DemoController, template)
+    const { default: template } = await import(`content/${path.replace(/^\//, '')}/angularjs/partials/${demo}.html`);
+
     return {
         default({ theme }: IHasTheme) {
             let container;
 
             useEffect(() => {
-                if (!container) { return; }
+                if (!container) {
+                    return;
+                }
 
                 container.$scope.theme = theme;
                 container.$scope.$apply();
@@ -55,14 +55,14 @@ async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModul
 
             return (
                 <AngularTemplate
-                    ref={(c) => container = c}
+                    ref={(c) => (container = c)}
                     template={template}
                     controller={DemoController}
                     controllerAs="vm"
                     scope={{ theme }}
                 />
             );
-        }
+        },
     };
 }
 
@@ -73,11 +73,7 @@ const useLoadDemo = (path: string, engine: string, demo: string): IDemoModule | 
         (async (): Promise<void> => {
             setDemo(undefined);
             try {
-                setDemo(
-                    engine === 'react'
-                      ? await loadReactDemo(path, demo)
-                      : await loadAngularjsDemo(path, demo)
-                );
+                setDemo(engine === 'react' ? await loadReactDemo(path, demo) : await loadAngularjsDemo(path, demo));
             } catch (exception) {
                 setDemo(null);
             }
@@ -121,9 +117,7 @@ const DemoBlock2: React.FC<IDemoBlock2Props> = ({
     return (
         <div className="demo-block">
             <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-theme-background-dark-N')}>
-                <div className={disableGrid ? '' : 'demo-grid'}>
-                    {Demo && <Demo.default theme={theme} />}
-                </div>
+                <div className={disableGrid ? '' : 'demo-grid'}>{Demo && <Demo.default theme={theme} />}</div>
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">

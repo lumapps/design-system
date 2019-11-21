@@ -6,7 +6,7 @@ import isString from 'lodash/isString';
 
 import noop from 'lodash/noop';
 import React, { Children, ReactNode } from 'react';
-import { ComponentType, getTypeName, IGenericProps, isElementOfType, isElementText } from './type';
+import { ComponentType, IGenericProps, getTypeName, isElementOfType, isElementText } from './type';
 
 interface IChildrenManipulationParameters {
     child: ReactNode;

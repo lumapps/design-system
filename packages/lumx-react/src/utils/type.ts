@@ -1,6 +1,6 @@
 import get from 'lodash/get';
-import isString from 'lodash/isString';
 import isEmpty from 'lodash/isEmpty';
+import isString from 'lodash/isString';
 import React, { ReactNode } from 'react';
 
 /**
@@ -124,4 +124,14 @@ const isComponent = <C>(component: React.FC<C> | string): Predicate<ReactNode> =
     );
 };
 
-export { isComponent ,Predicate, Callback, isElementText, isElementOfType, getTypeName, Omit, ComponentType, IGenericProps };
+export {
+    isComponent,
+    Predicate,
+    Callback,
+    isElementText,
+    isElementOfType,
+    getTypeName,
+    Omit,
+    ComponentType,
+    IGenericProps,
+};

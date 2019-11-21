@@ -1,7 +1,7 @@
+import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
+
 import { CSS_PREFIX } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
-import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 
 import template from './text-field.html';
 

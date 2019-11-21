@@ -1,9 +1,9 @@
-import { Predicate } from './type';
-import reduce from 'lodash/reduce';
 import concat from 'lodash/concat';
 import dropRight from 'lodash/dropRight';
-import partition from 'lodash/partition';
 import last from 'lodash/last';
+import partition from 'lodash/partition';
+import reduce from 'lodash/reduce';
+import { Predicate } from './type';
 
 /**
  * Similar to lodash `partition` function but working with multiple predicates.

@@ -5,11 +5,10 @@ import classNames from 'classnames';
 import FocusTrap from 'focus-trap-react';
 import { createPortal } from 'react-dom';
 
+import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
-import { mdiClose } from '@lumx/icons';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';

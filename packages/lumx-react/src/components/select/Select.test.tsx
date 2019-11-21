@@ -188,11 +188,9 @@ describe(`<${Select.displayName}>`, (): void => {
 
         const onClick: jest.Mock = jest.fn();
 
-        beforeEach(
-            (): void => {
-                onClick.mockClear();
-            },
-        );
+        beforeEach((): void => {
+            onClick.mockClear();
+        });
 
         describe('should trigger `onInputClick` when the select button is clicked', (): void => {
             it('with input variant', (): void => {

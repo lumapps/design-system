@@ -7,7 +7,6 @@ import { App } from './App';
 // window.$ = window.jQuery = jQuery;
 import { reactAngularModule } from 'react-angular';
 
-
 import '@lumx/angularjs';
 
 import { MODULE_NAME } from '@lumx/angularjs/constants/common_constants';

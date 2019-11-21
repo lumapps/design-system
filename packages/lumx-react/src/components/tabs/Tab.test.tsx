@@ -3,9 +3,9 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import { build } from 'test-data-bot';
 
+import { mdiCheck } from '@lumx/icons';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
 import { getBasicClass } from '@lumx/react/utils';
-import { mdiCheck } from '@lumx/icons';
 
 import { CLASSNAME, Tab, TabProps } from './Tab';
 
@@ -93,13 +93,11 @@ describe(`<${Tab.displayName}>`, (): void => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    expect(wrapper).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                },
-            );
+            Object.keys(modifiedProps).forEach((prop: string): void => {
+                expect(wrapper).toHaveClassName(
+                    getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                );
+            });
         });
     });
 
@@ -109,11 +107,9 @@ describe(`<${Tab.displayName}>`, (): void => {
     describe('Events', (): void => {
         const onTabClick: jest.Mock = jest.fn();
 
-        beforeEach(
-            (): void => {
-                onTabClick.mockClear();
-            },
-        );
+        beforeEach((): void => {
+            onTabClick.mockClear();
+        });
 
         it('should trigger `onTabClick` when clicked', (): void => {
             const { wrapper } = setup({ index: 7, onTabClick }, false);

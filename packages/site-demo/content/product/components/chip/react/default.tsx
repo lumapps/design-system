@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Chip, Icon, Size } from '@lumx/react';
 import { mdiEmail } from '@lumx/icons';
+import { Chip, Icon, Size } from '@lumx/react';
 
 const App = ({ theme }) => (
     <>

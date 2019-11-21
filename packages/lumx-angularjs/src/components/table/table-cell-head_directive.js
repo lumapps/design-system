@@ -1,6 +1,6 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
+
+import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './table-cell-head.html';
 

@@ -31,7 +31,7 @@ function findComponentsAndProps(definitionById) {
         .values()
         .map((def) => {
             const { id, kindString, signatures, name, sources, children } = def;
-            // Component => Something that returns a react element
+            // Component => Something that returns a react element.
             if (
                 signatures &&
                 signatures.every((sign) => sign.type.name && sign.type.name.endsWith('ReactElement')) &&
@@ -45,7 +45,7 @@ function findComponentsAndProps(definitionById) {
                 };
             }
 
-            // Prop type => Interface ending with 'Props'
+            // Prop type => Interface ending with 'Props'.
             if (kindString === 'Interface' && name.endsWith('Props')) {
                 return {
                     name,
@@ -55,7 +55,7 @@ function findComponentsAndProps(definitionById) {
                 };
             }
 
-            // Default props => Object literal ending with 'DEFAULT_PROPS'
+            // Default props => Object literal ending with 'DEFAULT_PROPS'.
             if (
                 kindString === 'Variable' &&
                 def.parentId &&
@@ -149,7 +149,7 @@ function formatDefinition(definitionById, definition) {
 
         return `${name}{${children}}`;
     }
-    // Render type
+    // Render type.
     if (definition.type) {
         return formatType(definitionById, definition.type);
     }

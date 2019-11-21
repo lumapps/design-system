@@ -6,36 +6,36 @@ const App = ({ theme }) => {
     const CITIES = [
         {
             text: 'Los Angeles',
-            id: 'losangeles'
+            id: 'losangeles',
         },
         {
             text: 'San Francisco',
-            id: 'sanfrancisco'
+            id: 'sanfrancisco',
         },
         {
             text: 'Paris',
-            id: 'paris'
+            id: 'paris',
         },
         {
             text: 'Montpellier',
-            id: 'montpellier'
+            id: 'montpellier',
         },
         {
             text: 'Bordeaux',
-            id: 'bordeaux'
+            id: 'bordeaux',
         },
         {
             text: 'Toulouse',
-            id: 'toulouse'
+            id: 'toulouse',
         },
         {
             text: 'Lyon',
-            id: 'lyon'
+            id: 'lyon',
         },
         {
             text: 'Montevideo',
-            id: 'montevideo'
-        }
+            id: 'montevideo',
+        },
     ];
 
     /**
@@ -68,7 +68,7 @@ const App = ({ theme }) => {
     const setSelectedCity = (city) => {
         setFilterValue(city.text);
         setShowSuggestions(false);
-    }
+    };
 
     /**
      * Function triggered by the `onChange` event on the Text field. Here, we update the internal state
@@ -80,13 +80,7 @@ const App = ({ theme }) => {
         setShowSuggestions(value.length > 0);
     };
 
-    const {
-        activeItemIndex,
-    } = List.useKeyboardListNavigation(
-        filteredCities,
-        inputRef,
-        setSelectedCity,
-    );
+    const { activeItemIndex } = List.useKeyboardListNavigation(filteredCities, inputRef, setSelectedCity);
 
     /**
      * Callback triggered when the Text field is focused on. In this scenario,
@@ -94,7 +88,7 @@ const App = ({ theme }) => {
      */
     const onFocus = (evt) => {
         setShowSuggestions(filterValue.length > 0);
-    }
+    };
 
     const hasSuggestions = filteredCities.length > 0;
 
@@ -108,7 +102,7 @@ const App = ({ theme }) => {
             onFocus={onFocus}
             inputRef={inputRef}
         >
-            { hasSuggestions && (
+            {hasSuggestions && (
                 <List>
                     {filteredCities.map((city, index) => (
                         <ListItem

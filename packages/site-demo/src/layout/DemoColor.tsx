@@ -1,5 +1,5 @@
-import { ColorPalette, Theme } from '@lumx/react';
 import { IColorPaletteWithVariants, IColorVariantDetail } from '@lumx/demo/constants';
+import { ColorPalette, Theme } from '@lumx/react';
 import classNames from 'classnames';
 import React, { ReactElement } from 'react';
 

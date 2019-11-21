@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 
-import { Button, Emphasis, Size } from '@lumx/react';
 import { mdiAngularjs, mdiReact } from '@lumx/icons';
+import { Button, Emphasis, Size } from '@lumx/react';
 
 import { Engine } from '@lumx/demo/constants';
 
@@ -34,7 +34,7 @@ interface IProps extends IGenericProps {
  * @return The engine selector component.
  */
 const EngineSelector: React.FC<IProps> = ({ changeEngine, engine }: IProps): ReactElement => {
-    switch(engine) {
+    switch (engine) {
         case 'react':
             return (
                 <Button
@@ -45,18 +45,13 @@ const EngineSelector: React.FC<IProps> = ({ changeEngine, engine }: IProps): Rea
                 >
                     View Angularjs version
                 </Button>
-            )
+            );
         case 'angularjs':
             return (
-                <Button
-                    emphasis={Emphasis.low}
-                    leftIcon={mdiReact}
-                    onClick={() => changeEngine('react')}
-                    size={Size.s}
-                >
+                <Button emphasis={Emphasis.low} leftIcon={mdiReact} onClick={() => changeEngine('react')} size={Size.s}>
                     View React version
                 </Button>
-            )
+            );
         default:
             return null;
     }

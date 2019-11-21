@@ -1,7 +1,7 @@
+import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
+
 import { DOWN_KEY_CODE, ENTER_KEY_CODE } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
-import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
 
 import template from './select.html';
 
@@ -137,21 +137,17 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LumXD
 
                 angular.forEach(_modelController.$viewValue, (item) => {
                     lumx.modelToSelection({
-                        // eslint-disable-next-line id-blacklist
                         callback(response) {
                             lumx.viewValue.push(response);
                         },
-                        // eslint-disable-next-line id-blacklist
                         data: item,
                     });
                 });
             } else {
                 lumx.modelToSelection({
-                    // eslint-disable-next-line id-blacklist
                     callback(response) {
                         lumx.viewValue = response;
                     },
-                    // eslint-disable-next-line id-blacklist
                     data: _modelController.$viewValue,
                 });
             }
@@ -363,12 +359,10 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LumXD
 
         if (angular.isDefined(lumx.selectionToModel)) {
             lumx.selectionToModel({
-                // eslint-disable-next-line id-blacklist
                 callback(response) {
                     _updateModel(response);
                     _updateViewValue(choice);
                 },
-                // eslint-disable-next-line id-blacklist
                 data: choice,
             });
         } else {

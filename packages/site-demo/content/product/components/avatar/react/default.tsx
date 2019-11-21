@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 import { Avatar, ButtonEmphasis, IconButton, Size, Theme } from '@lumx/react';
-import { mdiPencil, mdiEye, mdiDelete } from '@lumx/icons';
 
 const App = ({ theme }) => (
     <>
@@ -14,7 +14,7 @@ const App = ({ theme }) => (
             image="http://i.pravatar.cc/256"
             size={Size.xl}
             actions={
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <div className="lumx-spacing-margin-right-regular">
                         <IconButton
                             color="dark"

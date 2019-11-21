@@ -94,14 +94,12 @@ describe(`<${Dropdown.displayName}>`, (): void => {
             windowEventListeners[event] = cb;
         };
 
-        beforeEach(
-            (): void => {
-                window.addEventListener = jest.fn(addEventListener);
-                document.addEventListener = jest.fn(addEventListener);
-                windowEventListeners = {};
-                onClose.mockClear();
-            },
-        );
+        beforeEach((): void => {
+            window.addEventListener = jest.fn(addEventListener);
+            document.addEventListener = jest.fn(addEventListener);
+            windowEventListeners = {};
+            onClose.mockClear();
+        });
 
         it('should trigger `onClose` when pressing `escape` key', (): void => {
             setup(

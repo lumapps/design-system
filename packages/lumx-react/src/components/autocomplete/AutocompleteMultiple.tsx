@@ -6,8 +6,7 @@ import { mdiClose } from '@lumx/icons';
 import { Autocomplete, AutocompleteProps, Chip, ChipGroup, Icon, Size } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { handleBasicClasses } from '@lumx/react/utils';
-import { getRootClassName } from '@lumx/react/utils';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 

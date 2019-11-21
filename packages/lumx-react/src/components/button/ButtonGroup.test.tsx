@@ -3,9 +3,9 @@ import React, { ReactElement, ReactNode } from 'react';
 import { mount, shallow } from 'enzyme';
 import mockConsole from 'jest-mock-console';
 
+import { mdiPlus } from '@lumx/icons';
 import { Button, Icon, IconButton } from '@lumx/react';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
-import { mdiPlus } from '@lumx/icons';
 
 import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
 
@@ -96,39 +96,31 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', (): void => {
-        beforeEach(
-            (): void => {
-                try {
-                    // If `console.warn` has been mocked at least one, this exists. So disable TS here.
-                    // @ts-ignore
-                    global.console.warn.mockRestore();
-                } catch (exception) {
-                    // Nothing to do here.
-                }
-            },
-        );
+        beforeEach((): void => {
+            try {
+                // If `console.warn` has been mocked at least one, this exists. So disable TS here.
+                // @ts-ignore
+                global.console.warn.mockRestore();
+            } catch (exception) {
+                // Nothing to do here.
+            }
+        });
 
         it('should fail when no child is given', (): void => {
-            expect(
-                (): void => {
-                    setup({ children: null });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children: null });
+            }).toThrowErrorMatchingSnapshot();
         });
 
         it('should fail when less than 2 children are given', (): void => {
             const children: ReactNode = <Button>Label</Button>;
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
         });
 
-        it(`should fail when anything else than <${Button.displayName}>s or <${
-            IconButton.displayName
-        }> is passed as children`, (): void => {
+        it(`should fail when anything else than <${Button.displayName}>s or <${IconButton.displayName}> is passed as children`, (): void => {
             mockConsole('debug');
 
             let children: ReactNode = (
@@ -138,11 +130,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
 
             /////////////////////////////
 
@@ -153,11 +143,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
 
             /////////////////////////////
 
@@ -168,11 +156,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
 
             /////////////////////////////
 
@@ -183,11 +169,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
 
             /////////////////////////////
 
@@ -198,11 +182,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
 
             /////////////////////////////
 
@@ -213,11 +195,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
 
             /////////////////////////////
 
@@ -227,11 +207,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
         });
 
         it('should fail when more than 2 children are given', (): void => {
@@ -243,11 +221,9 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect(
-                (): void => {
-                    setup({ children });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                setup({ children });
+            }).toThrowErrorMatchingSnapshot();
         });
     });
 

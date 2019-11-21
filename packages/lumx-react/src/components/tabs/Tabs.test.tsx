@@ -92,13 +92,11 @@ describe(`<${Tabs.displayName}>`, (): void => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    expect(wrapper).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                    );
-                },
-            );
+            Object.keys(modifiedProps).forEach((prop: string): void => {
+                expect(wrapper).toHaveClassName(
+                    getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                );
+            });
         });
     });
 
@@ -108,11 +106,9 @@ describe(`<${Tabs.displayName}>`, (): void => {
     describe('Events', (): void => {
         const onTabClick: jest.Mock = jest.fn();
 
-        beforeEach(
-            (): void => {
-                onTabClick.mockClear();
-            },
-        );
+        beforeEach((): void => {
+            onTabClick.mockClear();
+        });
 
         it('should trigger `onTabClick` when a child tab is clicked', (): void => {
             const { wrapper } = setup({ onTabClick }, false);
@@ -128,13 +124,11 @@ describe(`<${Tabs.displayName}>`, (): void => {
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', (): void => {
         it('should fail when no `Tab` children is given', (): void => {
-            expect(
-                (): void => {
-                    // We know that children must be given to <Tabs>, but for the test, ignore it.
-                    // @ts-ignore
-                    setup({ children: null });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                // We know that children must be given to <Tabs>, but for the test, ignore it.
+                // @ts-ignore
+                setup({ children: null });
+            }).toThrowErrorMatchingSnapshot();
         });
     });
 

@@ -4,10 +4,9 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
 import { mdiDragVertical } from '@lumx/icons';
+import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 

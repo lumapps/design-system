@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
+import { mdiCloseCircle, mdiFilterVariant, mdiMenuDown } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
-import { mdiCloseCircle, mdiMenuDown, mdiFilterVariant } from '@lumx/icons';
 
 const App = ({ theme }) => {
     const [isSelected, setSelected] = useState(false);

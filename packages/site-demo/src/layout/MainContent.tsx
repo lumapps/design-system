@@ -46,7 +46,7 @@ const useLoadContent = (engine: string, path: string): ReactElement | null | und
  *
  * @return The main content component.
  */
-const MainContent = ({ engine, path }: { engine: string, path: string }): ReactElement => {
+const MainContent = ({ engine, path }: { engine: string; path: string }): ReactElement => {
     const content = useLoadContent(engine, path);
 
     return renderContent(path, content);

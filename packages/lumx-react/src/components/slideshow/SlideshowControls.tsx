@@ -2,17 +2,15 @@ import React, { ReactElement, RefObject, useCallback, useEffect, useState } from
 
 import classNames from 'classnames';
 
+import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Emphasis, IconButton, Theme } from '@lumx/react';
 import {
     EDGE_FROM_ACTIVE_INDEX,
     PAGINATION_ITEMS_MAX,
     PAGINATION_ITEM_SIZE,
 } from '@lumx/react/components/slideshow/constants';
-import { LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { SwipeDirection, detectSwipe, handleBasicClasses } from '@lumx/react/utils';
-import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
+import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/constants';
+import { IGenericProps, SwipeDirection, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
@@ -244,7 +242,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
 
     const [visibleRange, setVisibleRange]: [
         PaginationRange,
-        React.Dispatch<React.SetStateAction<PaginationRange>>
+        React.Dispatch<React.SetStateAction<PaginationRange>>,
     ] = useState(initVisibleRange(activeIndex));
     const lastSlide: number = slidesCount - 1;
     const paginationItems: JSX.Element[] = buildItemsArray(lastSlide);
@@ -266,18 +264,15 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         if (parentRef && parentRef.current) {
             parentRef.current.addEventListener('keydown', handleKeyPressed);
 
-            swipeListeners = detectSwipe(
-                parentRef.current,
-                (swipeDirection: SwipeDirection): void => {
-                    if (swipeDirection === 'right') {
-                        handlePreviousClick();
-                    }
+            swipeListeners = detectSwipe(parentRef.current, (swipeDirection: SwipeDirection): void => {
+                if (swipeDirection === 'right') {
+                    handlePreviousClick();
+                }
 
-                    if (swipeDirection === 'left') {
-                        handleNextClick();
-                    }
-                },
-            );
+                if (swipeDirection === 'left') {
+                    handleNextClick();
+                }
+            });
         }
 
         return (): void => {

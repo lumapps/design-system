@@ -1,12 +1,21 @@
 import React, { Children, ReactElement, ReactNode } from 'react';
 
-import { Emphasis, Icon, Size } from '@lumx/react';
-import { handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
-import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { Callback, IGenericProps, getRootClassName, isComponent } from '@lumx/react/utils';
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
+
+import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
+
+import { Emphasis, Icon, Size } from '@lumx/react';
+
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import {
+    Callback,
+    IGenericProps,
+    getRootClassName,
+    handleBasicClasses,
+    isComponent,
+    onEnterPressed,
+} from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.

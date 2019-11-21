@@ -2,8 +2,8 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { AspectRatio, Avatar, Icon, Thumbnail, ThumbnailVariant, Size, Theme  } from '@lumx/react';
 import { mdiImagePlus } from '@lumx/icons';
+import { AspectRatio, Avatar, Icon, Size, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { Callback, IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 

@@ -105,11 +105,9 @@ describe(`<${Checkbox.displayName}>`, (): void => {
     describe('Events', (): void => {
         const onChange: jest.Mock = jest.fn();
 
-        beforeEach(
-            (): void => {
-                onChange.mockClear();
-            },
-        );
+        beforeEach((): void => {
+            onChange.mockClear();
+        });
 
         it('should trigger `onChange` when checkbox is clicked', (): void => {
             const { wrapper } = setup({ value: false, onChange }, false);

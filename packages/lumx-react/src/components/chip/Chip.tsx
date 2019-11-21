@@ -5,11 +5,9 @@ import classNames from 'classnames';
 import isFunction from 'lodash/isFunction';
 
 import { Color, ColorPalette, Size, Theme } from '@lumx/react';
-import { CSS_PREFIX } from '@lumx/react/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /////////////////////////////
 

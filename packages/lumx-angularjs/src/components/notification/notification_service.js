@@ -166,8 +166,6 @@ function NotificationService($compile, $rootScope, $timeout, LumXDepthService) {
     }
 
     /////////////////////////////
-
-    // eslint-disable-next-line id-blacklist
     service.error = errorNotification;
     service.info = infoNotification;
     service.success = successNotification;

@@ -6,8 +6,13 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Color, ColorVariant, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, ValidateParameters, getRootClassName, validateComponent } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
+import {
+    IGenericProps,
+    ValidateParameters,
+    getRootClassName,
+    handleBasicClasses,
+    validateComponent,
+} from '@lumx/react/utils';
 
 /////////////////////////////
 

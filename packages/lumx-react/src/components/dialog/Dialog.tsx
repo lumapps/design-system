@@ -2,12 +2,11 @@ import React, { ReactElement, RefObject } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
-
 import { Progress, ProgressVariant, Size, Theme } from '@lumx/react';
+
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
 import { Lightbox } from '@lumx/react/components/lightbox/Lightbox';
 import useIntersectionObserver from '@lumx/react/hooks/useIntersectionObserver';
 
@@ -123,7 +122,7 @@ const Dialog: React.FC<DialogProps> = ({
                     <div
                         className={`${CLASSNAME}__header ${
                             sentinel1Intersec && sentinel1Intersec.intersectionRatio !== 1
-                                ? CLASSNAME + '__header--has-divider'
+                                ? `${CLASSNAME}__header--has-divider`
                                 : ''
                         }`}
                     >
@@ -145,7 +144,7 @@ const Dialog: React.FC<DialogProps> = ({
                     <div
                         className={`${CLASSNAME}__footer ${
                             sentinel2Intersec && sentinel2Intersec.intersectionRatio !== 1
-                                ? CLASSNAME + '__footer--has-divider'
+                                ? `${CLASSNAME}__footer--has-divider`
                                 : ''
                         }`}
                     >

@@ -1,7 +1,7 @@
+import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
+
 import { CSS_PREFIX } from '@lumx/core/constants';
 import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
-import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
 import { EDGE_FROM_ACTIVE_INDEX, PAGINATION_ITEMS_MAX, PAGINATION_ITEM_SIZE } from './constants';
 

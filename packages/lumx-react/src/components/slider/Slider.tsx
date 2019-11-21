@@ -2,13 +2,11 @@ import React, { ReactElement, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
-
 import { Theme } from '@lumx/react';
+
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uuid from 'uuid/v4';
 

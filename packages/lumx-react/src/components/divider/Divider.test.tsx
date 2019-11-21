@@ -74,13 +74,11 @@ describe(`<${Divider.displayName}>`, (): void => {
         it('should use default props', (): void => {
             const { hr } = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach(
-                (prop: string): void => {
-                    expect(hr).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
-                    );
-                },
-            );
+            Object.keys(DEFAULT_PROPS).forEach((prop: string): void => {
+                expect(hr).toHaveClassName(
+                    getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
+                );
+            });
         });
 
         it('should use the given `theme`', (): void => {

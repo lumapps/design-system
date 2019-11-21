@@ -3,10 +3,10 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import { build, fake, oneOf } from 'test-data-bot';
 
+import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Size } from '@lumx/react';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
 import { getBasicClass } from '@lumx/react/utils';
-import { mdiCheck, mdiPlus } from '@lumx/icons';
 
 import { CLASSNAME, Icon, IconProps } from './Icon';
 
@@ -96,11 +96,9 @@ describe(`<${Icon.displayName}>`, (): void => {
         it("shouldn't use any default props", (): void => {
             const { i } = setup();
 
-            ['color', 'size'].forEach(
-                (prop: string): void => {
-                    expect(i).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: '' }));
-                },
-            );
+            ['color', 'size'].forEach((prop: string): void => {
+                expect(i).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: '' }));
+            });
         });
 
         it('should use the given props', (): void => {
@@ -115,17 +113,15 @@ describe(`<${Icon.displayName}>`, (): void => {
 
             const { i, path } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach(
-                (prop: string): void => {
-                    if (prop === 'icon') {
-                        expect(path).toHaveProp('d', modifiedProps[prop]);
-                    } else {
-                        expect(i).toHaveClassName(
-                            getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
-                        );
-                    }
-                },
-            );
+            Object.keys(modifiedProps).forEach((prop: string): void => {
+                if (prop === 'icon') {
+                    expect(path).toHaveProp('d', modifiedProps[prop]);
+                } else {
+                    expect(i).toHaveClassName(
+                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                    );
+                }
+            });
         });
     });
 
@@ -140,13 +136,11 @@ describe(`<${Icon.displayName}>`, (): void => {
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', (): void => {
         it('should fail when no `icon` is given', (): void => {
-            expect(
-                (): void => {
-                    // We know that icon must be given to <Icon>, but for the test, ignore it.
-                    // @ts-ignore
-                    setup({ icon: null });
-                },
-            ).toThrowErrorMatchingSnapshot();
+            expect((): void => {
+                // We know that icon must be given to <Icon>, but for the test, ignore it.
+                // @ts-ignore
+                setup({ icon: null });
+            }).toThrowErrorMatchingSnapshot();
         });
     });
 

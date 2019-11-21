@@ -8,8 +8,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import isFunction from 'lodash/isFunction';
 
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
-import { handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /**
  * Loading attribute is not yet supported in typescript, so we need

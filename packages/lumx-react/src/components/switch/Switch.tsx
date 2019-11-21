@@ -7,10 +7,9 @@ import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 import { Theme } from '@lumx/react';
-import { CSS_PREFIX } from '@lumx/react/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, validateComponent } from '@lumx/react/utils';
-import { handleBasicClasses } from '@lumx/react/utils';
+
+import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
 
 /////////////////////////////
 

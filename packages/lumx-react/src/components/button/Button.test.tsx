@@ -2,9 +2,9 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 
+import { mdiCheck, mdiChevronDown, mdiPlus } from '@lumx/icons';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils.test';
 import { getBasicClass } from '@lumx/react/utils';
-import { mdiCheck, mdiChevronDown, mdiPlus } from '@lumx/icons';
 import { Button, ButtonProps, CLASSNAME, DEFAULT_PROPS } from './Button';
 
 /////////////////////////////
