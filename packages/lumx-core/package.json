@@ -26,7 +26,8 @@
     "license": "MIT",
     "name": "@lumx/core",
     "publishConfig": {
-        "directory": "dist"
+        "directory": "dist",
+        "prepublish": "yarn build"
     },
     "repository": {
         "type": "git",

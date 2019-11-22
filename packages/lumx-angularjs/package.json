@@ -39,7 +39,8 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
-        "build": "webpack"
+        "build": "webpack",
+        "prepublish": "yarn build"
     },
     "version": "0.16.0",
     "devDependencies": {
