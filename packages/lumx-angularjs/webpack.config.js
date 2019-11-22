@@ -42,14 +42,6 @@ const plugins = [
     new UnminifiedWebpackPlugin(),
     new CopyWebpackPlugin([
         {
-            from: `${CONFIGS.path.EXAMPLES_PATH}/angularjs/`,
-            to: `${DIST_PATH}/examples/`,
-        },
-        {
-            from: `${CONFIGS.path.EXAMPLES_PATH}/styles.css`,
-            to: `${DIST_PATH}/examples/`,
-        },
-        {
             from: `${CONFIGS.path.ROOT_PATH}/CONTRIBUTING.md`,
             to: DIST_PATH,
         },
@@ -108,14 +100,8 @@ module.exports = {
                     loader: 'babel-loader?cacheDirectory=true',
                     options: {
                         ...CONFIGS.babel,
-                        plugins: [
-                            ['angularjs-annotate', { explicitOnly: true }],
-                            ...CONFIGS.babel.plugins,
-                        ],
-                        presets: [
-                            '@babel/preset-react',
-                            ...CONFIGS.babel.presets
-                        ],
+                        plugins: [['angularjs-annotate', { explicitOnly: true }], ...CONFIGS.babel.plugins],
+                        presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
                     },
                 },
             },

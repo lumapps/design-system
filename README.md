@@ -18,8 +18,6 @@ npm install @lumx/<angularjs|react>
 -   Download the latest release for [AngularJS][angularjs-release] or [React][react-release]
 -   Clone the repository: `git clone https://github.com/lumapps/design-system.git`
 
-See [examples](./dist/<angularjs|react>/examples) for more information on how to use each bundle.
-
 ## Documentation
 
 LumX's documentation is included in the "demo" directory. The demo/documentation site is built with [Webpack][webpack] and may be run locally.
@@ -67,19 +65,13 @@ This will produce the target build for @lumx/core, @lumx/angularjs, @lumx/react 
 First, be sure to be logged in NPM:
 
 ```bash
-npm login
+yarn login
 ```
 
 To publish the `@lumx/<core|react|angularjs|icons>` package:
 
 ```bash
-npm run release:<core|react|angularjs|icons>:<major|minor|patch>
-```
-
-To publish these four packages:
-
-```bash
-npm run release:<major|minor|patch>
+yarn lerna publish
 ```
 
 These commands will build the packages, increment the version number and publish to NPM.

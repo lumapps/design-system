@@ -18,8 +18,6 @@ npm install @lumx/react
 -   Download the latest release for [React][react-release]
 -   Clone the repository: `git clone https://github.com/lumapps/design-system.git`
 
-See [examples](./examples) for more information on how to use each bundle.
-
 ## Documentation
 
 You can find an online version of the demo and documentation site at https://design-system.lumapps.com.
@@ -27,29 +25,6 @@ You can find an online version of the demo and documentation site at https://des
 ## How to get help, contribute, or provide feedback
 
 Please refer to our [contributing guidelines](CONTRIBUTING.md).
-
-## How to run examples
-
-Simply run:
-
-```bash
-yarn install
-# Or
-npm install
-```
-
-This will install `http-server`, a simple HTTP server.
-
-Then run:
-
-```bash
-yarn serve
-# Or
-npm run serve
-```
-
-Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080).
-Then, click on the `examples` directory in the showing listing and you should land on the example page.
 
 ## Copyright and license
 
