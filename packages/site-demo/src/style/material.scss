@@ -1,2 +1,12 @@
-@import '~@lumx/core/core-material';
-@import './lumapps';
+/** DEMO THEME - MATERIAL */
+
+@import '~@lumx/icons/font';
+@import '~@lumx/core/lumx-theme-material';
+@import './base/base';
+@import './demo/demo-block';
+@import './demo/demo-colors';
+@import './demo/demo-grid';
+@import './layout/app/app';
+@import './layout/main-nav/main-nav';
+@import './layout/main/main';
+@import './layout/asset-block';
