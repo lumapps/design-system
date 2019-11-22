@@ -175,6 +175,10 @@ module.exports = {
                         loader: 'babel-loader?cacheDirectory=true',
                         options: {
                             ...CONFIGS.babel,
+                            plugins: [
+                                ['angularjs-annotate', { explicitOnly: true }],
+                                ...CONFIGS.babel.plugins,
+                            ],
                             presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
                         },
                     },
