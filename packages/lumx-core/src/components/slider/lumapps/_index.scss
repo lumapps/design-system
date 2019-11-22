@@ -59,7 +59,7 @@
     &__wrapper {
         position: relative;
         height: map-get($lumx-sizes, s);
-        flex: 1 1 auto;
+        flex: 1;
         cursor: pointer;
     }
 
@@ -98,8 +98,8 @@
         width: 12px;
         height: 12px;
         padding: 0;
-        border: none;
         margin: 0;
+        border: none;
         border-radius: 50%;
         cursor: pointer;
         outline: none;

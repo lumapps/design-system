@@ -21,7 +21,7 @@
     }
 
     &__header-content {
-        flex: 1 1 auto;
+        flex: 1;
         margin-right: $lumx-spacing-unit;
 
         #{$self}--variant-boxed &,

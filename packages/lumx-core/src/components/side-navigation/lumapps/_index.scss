@@ -9,15 +9,9 @@
 /* Item
    ========================================================================== */
 
-/**
- * 1. https://github.com/philipwalton/flexbugs/blob/master/README.md#flexbug-3
- */
-
 .#{$lumx-base-prefix}-side-navigation-item {
     $self: &;
 
-    display: flex; /* [1] */
-    flex-direction: column; /* [1] */
     margin-bottom: $lumx-spacing-unit / 2;
 
     &:last-child {

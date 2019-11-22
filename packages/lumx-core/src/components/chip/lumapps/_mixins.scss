@@ -21,7 +21,7 @@
 }
 
 @mixin lumx-chip-label($size) {
-    flex: 1 1 auto;
+    flex: 1;
     white-space: nowrap;
 
     @if $size == 'm' {

@@ -53,7 +53,7 @@
 
 @mixin lumx-tabs-link-layout($layout) {
     @if $layout == 'fixed' {
-        flex: 1 1 auto;
+        flex: 1;
     }
 }
 

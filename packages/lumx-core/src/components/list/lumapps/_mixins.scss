@@ -82,7 +82,7 @@
 @mixin lumx-list-item-content() {
     @include lumx-typography('body1');
 
-    flex: 1 1 auto;
+    flex: 1;
 }
 
 @mixin lumx-list-item-after($size) {
