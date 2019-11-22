@@ -72,7 +72,7 @@ if (!IS_CI) {
 
 module.exports = {
     bail: true,
-    devtool: isDev ? 'source-map' : '',
+    devtool: 'source-map',
     mode,
     name: PKG_NAME,
     externals: [],

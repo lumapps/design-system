@@ -31,6 +31,9 @@
     "license": "MIT",
     "main": "index.js",
     "name": "@lumx/angularjs",
+    "publishConfig": {
+        "directory": "dist"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"

@@ -86,7 +86,9 @@
     "license": "MIT",
     "main": "lumx.react.js",
     "name": "@lumx/react",
-    "private": false,
+    "publishConfig": {
+        "directory": "dist"
+    },
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"
