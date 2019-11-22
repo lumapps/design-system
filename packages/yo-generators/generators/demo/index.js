@@ -37,8 +37,8 @@ module.exports = class extends MainGenerator {
             { componentName, kbComponentName },
         );
         this.fs.copyTpl(
-            this.templatePath('angularjs/partials/default.html.ejs'),
-            this.destinationPath(`${path}/angularjs/partials/default.html`),
+            this.templatePath('angularjs/default.html.ejs'),
+            this.destinationPath(`${path}/angularjs/default.html`),
             { componentName, kbComponentName },
         );
 

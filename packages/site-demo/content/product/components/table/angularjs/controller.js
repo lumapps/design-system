@@ -154,4 +154,8 @@ function DemoController($filter) {
 
 /////////////////////////////
 
+angular.module('design-system').controller('DemoController', DemoController);
+
+/////////////////////////////
+
 export { DemoController };

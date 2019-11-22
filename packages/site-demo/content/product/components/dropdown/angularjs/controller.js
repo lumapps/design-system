@@ -88,4 +88,8 @@ function DemoController(LumXDropdownService) {
 
 /////////////////////////////
 
+angular.module('design-system').controller('DemoController', DemoController);
+
+/////////////////////////////
+
 export { DemoController };

@@ -33,7 +33,7 @@ interface IProps extends IGenericProps {
  *
  * @return The engine selector component.
  */
-const EngineSelector: React.FC<IProps> = ({ changeEngine, engine }: IProps): ReactElement => {
+const EngineSelector: React.FC<IProps> = ({ changeEngine, engine }: IProps): ReactElement | null => {
     switch (engine) {
         case 'react':
             return (

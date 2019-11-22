@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 
-import { Alignment, Grid, GridItem, Orientation, Size } from '@lumx/react';
+import { Alignment, Grid, GridItem, Orientation } from '@lumx/react';
 
 import { Engine, Theme } from '@lumx/demo/constants';
 

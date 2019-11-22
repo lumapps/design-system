@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { DEFAULT_ENGINE, DEFAULT_THEME, Engine, THEMES, Theme } from '@lumx/demo/constants';
+import { DEFAULT_ENGINE, DEFAULT_THEME, Engine, Theme } from '@lumx/demo/constants';
 import { setDemoCustomColors } from '@lumx/demo/utils';
 
 import { ErrorBoundary } from './layout/ErrorBoundary';
@@ -37,7 +37,7 @@ function setThemeStyleSheetDisabled(theme: string, disabled: boolean): void {
  */
 function switchThemeStyle(theme: string): void {
     setThemeStyleSheetDisabled(theme, false);
-    const otherTheme = theme === THEMES.lumapps ? THEMES.material : THEMES.lumapps;
+    const otherTheme = theme === Theme.lumapps ? Theme.material : Theme.lumapps;
     setThemeStyleSheetDisabled(otherTheme, true);
 }
 

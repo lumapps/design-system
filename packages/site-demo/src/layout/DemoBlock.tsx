@@ -38,7 +38,7 @@ async function loadAngularjsDemo(path: string, demo: string): Promise<IDemoModul
         /* webpackMode: "lazy" */
         `content/${path.replace(/^\//, '')}/angularjs/controller.js`
     );
-    const { default: template } = await import(`content/${path.replace(/^\//, '')}/angularjs/partials/${demo}.html`);
+    const { default: template } = await import(`content/${path.replace(/^\//, '')}/angularjs/${demo}.html`);
 
     return {
         default({ theme }: IHasTheme) {
