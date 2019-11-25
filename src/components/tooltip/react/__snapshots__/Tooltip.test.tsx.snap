@@ -5,8 +5,9 @@ exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
   className="lumx-tooltip lumx-tooltip--position-bottom"
   style={
     Object {
-      "transform": "translate3d(0px, 0px, 0px)",
-      "visibility": "hidden",
+      "display": "none",
+      "position": "fixed",
+      "transform": "translate3d(0px, 0px, 0)",
     }
   }
 >
