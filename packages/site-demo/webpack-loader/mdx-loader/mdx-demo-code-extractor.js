@@ -1,42 +1,75 @@
-const { get, partition, flatMap } = require('lodash');
+const { get, partition, fromPairs, camelCase } = require('lodash');
+const path = require('path');
+const fs = require('fs');
+
+const propsRX = /<DemoBlock(.*)\/>/;
+const propRX = /(\w+)(=\{([^}]+)\}|=("[^"]+"))?/g;
 
 /**
- * Combine import statements and jsx code into a formatted sample code for documentation.
- * @param  {string} importStatement Import statements.
- * @param  {string} code JSX code.
- * @return {string} The formatted sample code.
+ * Read source code to string (or return null if source code not found).
+ * @param resourceFolder Base folder.
+ * @param sourcePath     Relative path to source code.
+ * @return {string|null} Source code.
  */
-const getSourceCode = (importStatement, code) => {
-    return `${importStatement}\nconst App = ${code.trim()}`
-        .trim()
-        .replace(/\n/g, '\\n')
-        .replace(/'/g, "\\'");
-};
+function readSourceCode(resourceFolder, sourcePath) {
+    try {
+        // eslint-disable-next-line no-sync
+        const buffer = fs.readFileSync(path.resolve(resourceFolder, sourcePath));
+
+        return JSON.stringify(buffer && buffer.toString());
+    } catch (exception) {
+        return null;
+    }
+}
 
 /**
- * Transform <pre> element with JSX code into a demo block jsx element.
- * @param  {string} importStatement Import statements.
- * @param  {string} node JSX node.
- * @return {Object} JSX node containing the demo block.
+ * Update <DemoBlock/> props to import source code.
+ * @param resourceFolder Current demo folder.
+ * @param node           Current MDX node.
+ * @return {{imports: [string, string], newNode: {value: string}}} Modified demo block with imports.
  */
-function createDemoBlock(importStatement, node) {
-    const codeNode = node.children[0];
-    const withThemeSwitcher = Boolean(codeNode.properties.withThemeSwitcher);
-    const disableGrid = Boolean(codeNode.properties.disableGrid);
-    const code = codeNode.children[0].value;
-    const sourceCode = getSourceCode(importStatement, code);
+function updateDemoBlock(resourceFolder, node) {
+    const { value } = node;
+    const propsString = get(value.match(propsRX), 1);
+    const props = propsString.match(propRX);
+
+    const propsIndex = fromPairs(props.map((prop) => prop.split('=')));
+    const demoName = propsIndex.demo.replace(/"/g, '');
+
+    const reactCodePath = `./react/${demoName}.tsx`;
+    const reactCode = readSourceCode(resourceFolder, reactCodePath);
+    const reactDemoVar = `react${camelCase(demoName)}`;
+    const importReact = `import * as ${reactDemoVar} from '${reactCode ? reactCodePath : 'null-loader'}';`;
+
+    const angularCodePath = `./angularjs/${demoName}.html`;
+    const angularCode = readSourceCode(resourceFolder, angularCodePath);
+    const angularDemoVar = `angular${camelCase(demoName)}`;
+    const importAngular = `import * as ${angularDemoVar} from '${angularCode ? angularCodePath : 'null-loader'}';`;
+
+    propsIndex.code = `{{
+        react: {
+           demo: ${reactDemoVar},
+           code: ${reactCode}
+        },
+        angularjs: {
+           demo: {
+              controller: angularController,
+              template: ${angularDemoVar},
+           },
+           code: ${angularCode}
+        }
+    }}`;
+
+    propsIndex.engine = '{props.engine}';
 
     return {
-        type: 'jsx',
-        properties: node.properties,
-        position: node.position,
-        value: `
-        <div>
-            <DemoBlock withThemeSwitcher={${withThemeSwitcher}} disableGrid={${disableGrid}} sourceCode={'${sourceCode}'}>
-                {${code.trim().replace(/;$/, '')}}
-            </DemoBlock>
-        </div>
-    `,
+        newNode: {
+            ...node,
+            value: `<DemoBlock ${Object.entries(propsIndex)
+                .map(([name, value]) => (value ? `${name}=${value}` : name))
+                .join(' ')} />`,
+        },
+        imports: [importReact, importAngular],
     };
 }
 
@@ -45,61 +78,24 @@ const isPreImport = (node) =>
     node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'import']);
 const isImport = (node) => isJSXImport(node) || isPreImport(node);
 
-const isPreJSXDemo = (node) =>
-    node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'jsx']);
 const ADDITIONAL_IMPORT = `
 import { DemoBlock } from '@lumx/demo/layout/DemoBlock';
 import { PropTable } from '@lumx/demo/layout/PropTable';
 `;
 
-/**
- * Recursively browse a node to replace '\n' in text node by '</br>' elements.
- *
- * @param  {Object} node Node to transform.
- * @return {Object} New transformed node.
- */
-function replaceNewLineWithBreakLine(node) {
-    if (node.type === 'element') {
-        return {
-            ...node,
-            children: flatMap(node.children, (child) => {
-                if (child.type === 'element') {
-                    // Recurse.
-                    return replaceNewLineWithBreakLine(child);
-                }
-                if (child.type === 'text' && child.value) {
-                    // Split text by new line.
-                    const parts = child.value.split(/\n/g);
-
-                    return flatMap(parts, (part, index) => {
-                        // Creat new text node for each line.
-                        const res = [{ ...child, value: part }];
-
-                        // Interleave with `</br>` elements.
-                        if (index < parts.length - 1) {
-                            res.push({
-                                type: 'element',
-                                tagName: 'br',
-                            });
-                        }
-
-                        return res;
-                    });
-                }
-
-                return child;
-            }),
-        };
-    }
-
-    return node;
-}
+const isDemoBlock = (node) => node.type === 'jsx' && node.value.includes('<DemoBlock');
 
 /**
  * MDX plugin to extract and insert source code from demo block in MDX documents.
  * @return {Function} The code extractor function.
  */
-module.exports = () => {
+module.exports = (resourcePath) => () => {
+    const resourceFolder = path.dirname(resourcePath);
+    const controllerPath = './angularjs/controller.js';
+    // eslint-disable-next-line no-sync
+    const hasController = fs.existsSync(path.resolve(resourceFolder, controllerPath));
+    const importController = `import * as angularController from '${hasController ? controllerPath : 'null-loader'}';`;
+
     return (tree) => {
         const [importNodes, others] = partition(tree.children, isImport);
 
@@ -109,27 +105,28 @@ module.exports = () => {
             const importCode = isJSXImport(node) ? node.value : get(node, ['children', 0, 'children', 0, 'value']);
             importStatement += importCode;
         });
+        importStatement += `\n${importController}`;
+
+        /*
+         * Transforms DemoBlock to import the required code.
+         */
+        const content = others.map((node) => {
+            if (isDemoBlock(node)) {
+                const { newNode, imports } = updateDemoBlock(resourceFolder, node);
+                importStatement += `\n${imports.join('\n')}`;
+
+                return newNode;
+            }
+
+            return node;
+        });
 
         tree.children = [
             // Group all imports at the top with demo block import.
             { type: 'import', value: ADDITIONAL_IMPORT + importStatement },
 
-            /*
-             * Transform content.
-             *
-             * - Transforms JSX PRE code block into demo block.
-             * - Transforms paragraph replacing new lines with break lines.
-             */
-            ...others.map((node) => {
-                if (isPreJSXDemo(node)) {
-                    return createDemoBlock(importStatement, node);
-                }
-                if (node.tagName === 'p') {
-                    return replaceNewLineWithBreakLine(node);
-                }
-
-                return node;
-            }),
+            // Transformed content.
+            ...content,
         ];
     };
 };

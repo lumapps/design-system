@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
-import { Placement } from '@lumx/react';
+import { Offset, Placement, Popover } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 

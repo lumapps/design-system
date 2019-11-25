@@ -72,7 +72,7 @@ if (!IS_CI) {
 
 module.exports = {
     bail: true,
-    devtool: 'source-map',
+    devtool: isDev ? 'source-map' : '',
     mode,
     name: PKG_NAME,
     externals: [],
@@ -219,6 +219,10 @@ module.exports = {
         filename: `${filename}.js`,
         path: DIST_PATH,
         publicPath: '/',
+    },
+
+    node: {
+        fs: 'empty',
     },
 
     plugins,
