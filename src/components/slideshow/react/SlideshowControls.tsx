@@ -249,7 +249,9 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     const lastSlide: number = slidesCount - 1;
     const paginationItems: JSX.Element[] = buildItemsArray(lastSlide);
 
-    updateVisibleRange(activeIndex);
+    useEffect(() => {
+        updateVisibleRange(activeIndex);
+    }, [activeIndex]);
 
     /**
      * Inline style of wrapper element.
