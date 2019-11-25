@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.3][] - 2019-11-25
+
+### Changed
+
+-   Fix an infinite re-rendering case on SlideshowControls [#233](https://github.com/lumapps/design-system/pull/233)
+
 ## [0.15.2][] - 2019-11-15
 
 ### Changed
@@ -116,3 +122,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.15.1]: https://github.com/lumapps/design-system/tree/v0.15.1
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.15.2...HEAD
 [0.15.2]: https://github.com/lumapps/design-system/tree/v0.15.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.15.3...HEAD
+[0.15.3]: https://github.com/lumapps/design-system/tree/v0.15.3
