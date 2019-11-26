@@ -23,7 +23,7 @@ function readSourceCode(resourceFolder, sourcePath) {
 }
 
 /**
- * Update <DemoBlock/> props to import source code.
+ * Update <DemoBlock/> props to import source code & inject the engine.
  * @param resourceFolder Current demo folder.
  * @param node           Current MDX node.
  * @return {{imports: [string, string], newNode: {value: string}}} Modified demo block with imports.
@@ -73,6 +73,18 @@ function updateDemoBlock(resourceFolder, node) {
     };
 }
 
+/**
+ * Update <PropTable/> props to inject the engine.
+ * @param  node     Current MDX node.
+ * @return {Object} prop table.
+ */
+function updatePropTable(node) {
+    return {
+        ...node,
+        value: node.value.replace('/>', 'engine={props.engine} />'),
+    };
+}
+
 const isJSXImport = (node) => node.type === 'import';
 const isPreImport = (node) =>
     node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'import']);
@@ -84,9 +96,11 @@ import { PropTable } from '@lumx/demo/layout/PropTable';
 `;
 
 const isDemoBlock = (node) => node.type === 'jsx' && node.value.includes('<DemoBlock');
+const isPropTable = (node) => node.type === 'jsx' && node.value.includes('<PropTable');
 
 /**
  * MDX plugin to extract and insert source code from demo block in MDX documents.
+ * @param  {string}   resourcePath Currently loaded MDX path.
  * @return {Function} The code extractor function.
  */
 module.exports = (resourcePath) => () => {
@@ -116,6 +130,10 @@ module.exports = (resourcePath) => () => {
                 importStatement += `\n${imports.join('\n')}`;
 
                 return newNode;
+            }
+
+            if (isPropTable(node)) {
+                return updatePropTable(node);
             }
 
             return node;

@@ -3,7 +3,7 @@ const typedoc = require('typedoc');
 
 const { convertToSimplePropsByComponent } = require('./convertPropTable');
 
-const inputFiles = ['./src'];
+const inputFiles = ['../lumx-react'];
 const tsconfig = require('../../tsconfig.json');
 
 const typeDocOptions = {

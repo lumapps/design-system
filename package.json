@@ -104,7 +104,7 @@
         "release": "yarn lerna publish --force-publish",
         "scaffold": "yo ./packages/yo-generators --with-tests --with-demo",
         "setup:git-hooks": "node node_modules/husky/bin/uninstall.js && node node_modules/husky/bin/install.js",
-        "start": "lerna run --stream start",
+        "start": "cd packages/site-demo && yarn start && cd -",
         "test": "lerna run --stream test"
     },
     "workspaces": [

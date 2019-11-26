@@ -37,11 +37,15 @@ const renderTypeTableRow = ({ type, defaultValue }: IProperty): ReactElement => 
     );
 };
 
-const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): ReactElement => {
+const PropTable: React.FC<IPropTableProps> = ({ component, engine }: IPropTableProps): ReactElement => {
+    if (engine === 'angularjs') {
+        return <span>Could not load properties of the angular.js {component} component.</span>;
+    }
+
     const propertyList: IProperty[] = propsByComponent[component];
 
     if (!propertyList) {
-        return <span>Could not load property table for {component}.</span>;
+        return <span>Could not load properties of the react {component} component.</span>;
     }
     return (
         <Table hasDividers>
@@ -84,6 +88,7 @@ interface IProperty {
 
 interface IPropTableProps {
     component: string;
+    engine: string;
 }
 
 export { PropTable, IProperty };
