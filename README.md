@@ -50,6 +50,14 @@ yarn start
 
 You can then open your browser to [http://localhost:4000/](http://localhost:4000/) to access the demo and test site.
 
+You can also execute a Storybook to develop your components, in order to that you just need to execute:
+
+```bash
+yarn storybook:react
+```
+
+**Note**: storybook is currently configured for React components.
+
 ## Project build
 
 you can build LumX by using:
@@ -65,7 +73,7 @@ This will produce the target build for `@lumx/core`, `@lumx/angularjs`, `@lumx/r
 1. Create a release branch (ex: `release/vX.Y.Z`)
 2. Login to NPM: `yarn login`
 3. Publish the packages to NPM: `yarn release`
-(you will be asked what version bump to apply)
+   (you will be asked what version bump to apply)
 4. Create a PR for the release branch to merge into master
 
 ## Copyright and license
