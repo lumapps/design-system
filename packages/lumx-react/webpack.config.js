@@ -78,7 +78,7 @@ if (!IS_CI) {
 
 module.exports = {
     entry: {
-        'lumx.react': `${SRC_PATH}/index`,
+        'lumx.react': `${SRC_PATH}/index.ts`,
     },
 
     externals: [
