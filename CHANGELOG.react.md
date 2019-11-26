@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Whole new project architecture (with new build script and code cleanup)
+
 ## [0.15.3][] - 2019-11-25
 
 ### Changed
@@ -108,19 +112,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.10.0...HEAD
 [0.10.0]: https://github.com/lumapps/design-system/tree/v0.10.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.11.0...HEAD
 [0.11.0]: https://github.com/lumapps/design-system/tree/v0.11.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.12.0...HEAD
 [0.12.0]: https://github.com/lumapps/design-system/tree/v0.12.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.13.0...HEAD
 [0.13.0]: https://github.com/lumapps/design-system/tree/v0.13.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.14.0...HEAD
 [0.14.0]: https://github.com/lumapps/design-system/tree/v0.14.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.15.0...HEAD
 [0.15.0]: https://github.com/lumapps/design-system/tree/v0.15.0
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.15.1...HEAD
 [0.15.1]: https://github.com/lumapps/design-system/tree/v0.15.1
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.15.2...HEAD
 [0.15.2]: https://github.com/lumapps/design-system/tree/v0.15.2
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.15.3...HEAD
 [0.15.3]: https://github.com/lumapps/design-system/tree/v0.15.3

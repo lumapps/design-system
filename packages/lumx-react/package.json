@@ -64,6 +64,7 @@
         "ts-jest": "^24.1.0",
         "typescript": "^3.7.2",
         "unminified-webpack-plugin": "^2.0.0",
+        "version-changelog": "^3.1.1",
         "webpack": "^4.41.2",
         "webpack-cli": "^3.3.10",
         "webpack-notifier": "^1.8.0",
@@ -96,6 +97,7 @@
     "scripts": {
         "build": "webpack",
         "prepublish": "yarn build",
+        "preversion": "version-changelog ../../CHANGELOG.react.md && git add ../../CHANGELOG.react.md",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles"
     },
     "version": "0.16.2-alpha.0"

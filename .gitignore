@@ -8,6 +8,7 @@ package-lock.json
 .vscode/settings.json
 dist
 yarn-error.log
+lerna-debug.log
 jsconfig.json
 .awcache
 coverage
