@@ -2,9 +2,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { App } from './App';
 
-// import angular from 'angular';
+import 'intersection-observer';
 
-// window.$ = window.jQuery = jQuery;
 import { reactAngularModule } from 'react-angular';
 
 import '@lumx/angularjs';
