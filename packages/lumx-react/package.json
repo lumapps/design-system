@@ -28,6 +28,7 @@
         "@babel/plugin-syntax-dynamic-import": "^7.2.0",
         "@babel/preset-env": "^7.7.1",
         "@babel/preset-react": "^7.7.0",
+        "@storybook/react": "^5.2.6",
         "@types/classnames": "^2.2.9",
         "@types/enzyme": "^3.10.3",
         "@types/jest": "^24.0.18",
@@ -98,7 +99,8 @@
         "build": "webpack",
         "prepublish": "yarn build",
         "preversion": "version-changelog ../../CHANGELOG.react.md && git add ../../CHANGELOG.react.md",
-        "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles"
+        "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles",
+        "storybook": "start-storybook -p 9000"
     },
     "version": "0.17.0"
 }
