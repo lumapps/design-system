@@ -37,7 +37,7 @@
         "build": "webpack",
         "prepublish": "yarn build"
     },
-    "version": "0.16.4-alpha.0",
+    "version": "0.17.0",
     "devDependencies": {
         "autoprefixer": "^9.7.1",
         "clean-webpack-plugin": "^3.0.0",
