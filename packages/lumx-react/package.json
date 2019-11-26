@@ -6,8 +6,8 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@lumx/core": "^0.16.3-alpha.0",
-        "@lumx/icons": "^0.16.3-alpha.0",
+        "@lumx/core": "^0.16.4-alpha.0",
+        "@lumx/icons": "^0.16.4-alpha.0",
         "body-scroll-lock": "^2.6.4",
         "classnames": "^2.2.6",
         "core-js": "^3.4.1",
@@ -100,5 +100,5 @@
         "preversion": "version-changelog ../../CHANGELOG.react.md && git add ../../CHANGELOG.react.md",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles"
     },
-    "version": "0.16.3-alpha.0"
+    "version": "0.16.4-alpha.0"
 }
