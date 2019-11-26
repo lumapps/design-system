@@ -1,0 +1,10 @@
+@mixin lumx-divider($theme) {
+    height: 1px;
+    border: none;
+    margin: 0;
+    background-color: lumx-theme-color-variant($theme, $lumx-divider-color-variant);
+}
+
+@mixin lumx-has-divider($theme, $position: 'bottom') {
+    border-#{$position}: 1px solid lumx-theme-color-variant($theme, $lumx-divider-color-variant);
+}

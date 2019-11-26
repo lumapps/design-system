@@ -1,0 +1,16 @@
+{
+    "packages": [
+        "packages/*"
+    ],
+    "command": {
+        "publish": {
+            "message": "chore(release): publish %s"
+        },
+        "version": {
+            "message": "chore(release): release %s"
+        }
+    },
+    "version": "0.16.4-alpha.0",
+    "useWorkspaces": true,
+    "npmClient": "yarn"
+}

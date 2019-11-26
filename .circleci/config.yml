@@ -36,7 +36,7 @@ commands:
             - run:
                   name: Run unit tests
                   command: |
-                      yarn test:react:ci
+                      yarn test
                   when: always
 
 jobs:

@@ -50,17 +50,6 @@
             "severity": "warning"
         },
         "strict-type-predicates": false,
-        "typedef": {
-            "options": [
-                "arrow-call-signature",
-                "arrow-parameter",
-                "call-signature",
-                "member-variable-declaration",
-                "parameter",
-                "property-declaration"
-            ],
-            "severity": "warning"
-        },
         "type-literal-delimiter": true,
         "unnecessary-bind": {
             "severity": "warning"

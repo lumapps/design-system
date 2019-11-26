@@ -18,8 +18,6 @@ npm install @lumx/<angularjs|react>
 -   Download the latest release for [AngularJS][angularjs-release] or [React][react-release]
 -   Clone the repository: `git clone https://github.com/lumapps/design-system.git`
 
-See [examples](./dist/<angularjs|react>/examples) for more information on how to use each bundle.
-
 ## Documentation
 
 LumX's documentation is included in the "demo" directory. The demo/documentation site is built with [Webpack][webpack] and may be run locally.
@@ -36,100 +34,39 @@ You will need Yarn to execute the automatic setup script as well as for publishi
 
 ### Install project dependencies
 
-> Note that `@mdi/js` is defined as `devDependencies`. This is a way to make dev server usage easier because [`@lumx/icons`](./src/icons) needs it.
-
 For an automatic installation:
 
 ```bash
-yarn setup
-```
-
-Or, if you don't have Yarn or want to manually proceeed to the setup:
-
-```bash
-yarn install && cd ./src/icons && yarn install && cd -
-# Or
-npm install && cd ./src/icons && npm install && cd -
+yarn install
 ```
 
 ### To start development server
 
-For AngularJS development server:
+For development server:
 
 ```bash
-yarn start:angularjs
-# Or
-npm run start:angularjs
+yarn start
 ```
 
 You can then open your browser to [http://localhost:4000/](http://localhost:4000/) to access the demo and test site.
-
-For React development server:
-
-```bash
-yarn start:react
-# Or
-npm run start:react
-```
-
-You can then open your browser to [http://localhost:4001/](http://localhost:4001/) to access the demo and test site.
 
 ## Project build
 
 you can build LumX by using:
 
 ```bash
-yarn build[:<all|angularjs|react]
-# Or
-npm run build:<all|angularjs|react>
+yarn build
 ```
 
-This will produce the target build for either AngularJS or React.
-
-## How to run examples
-
-In the `dist/<angularjs|react>` directory, run:
-
-```bash
-yarn install
-# Or
-npm install
-```
-
-This will install `http-server`, a simple HTTP server.
-
-Then run:
-
-```bash
-yarn serve
-# Or
-npm run serve
-```
-
-Your browser should open automatically, otherwise, you can go to [http://localhost:8080](http://localhost:8080) for React example or [http://localhost:8081](http://localhost:8081) for AngularJS example.
-Then, click on the `examples` directory in the showing listing and you should land on the example page.
+This will produce the target build for `@lumx/core`, `@lumx/angularjs`, `@lumx/react` and the demo site.
 
 ## How to publish packages
 
-First, be sure to be logged in NPM:
-
-```bash
-npm login
-```
-
-To publish the `@lumx/<core|react|angularjs|icons>` package:
-
-```bash
-npm run release:<core|react|angularjs|icons>:<major|minor|patch>
-```
-
-To publish these four packages:
-
-```bash
-npm run release:<major|minor|patch>
-```
-
-These commands will build the packages, increment the version number and publish to NPM.
+1. Create a release branch (ex: `release/vX.Y.Z`)
+2. Login to NPM: `yarn login`
+3. Publish the packages to NPM: `yarn release`
+(you will be asked what version bump to apply)
+4. Create a PR for the release branch to merge into master
 
 ## Copyright and license
 

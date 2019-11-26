@@ -1,0 +1,31 @@
+<div class="lumx-spacing-margin-bottom-big">
+    <lumx-checkbox lumx-theme="{{ theme }}" ng-model="vm.checkboxes.model.checked">
+        <lumx-checkbox-label>Checkbox</lumx-checkbox-label>
+    </lumx-checkbox>
+</div>
+
+<div class="lumx-spacing-margin-bottom-big">
+    <lumx-checkbox lumx-theme="{{ theme }}" ng-model="vm.checkboxes.model.unchecked">
+        <lumx-checkbox-label>
+            Checkbox with help
+        </lumx-checkbox-label>
+
+        <lumx-checkbox-helper>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
+        </lumx-checkbox-helper>
+    </lumx-checkbox>
+</div>
+
+<lumx-checkbox
+    lumx-theme="{{ theme }}"
+    ng-disabled="vm.checkboxes.states.disabled"
+    ng-model="vm.checkboxes.model.unchecked"
+>
+    <lumx-checkbox-label>
+        Disable checkbox with help
+    </lumx-checkbox-label>
+
+    <lumx-checkbox-helper>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur.
+    </lumx-checkbox-helper>
+</lumx-checkbox>

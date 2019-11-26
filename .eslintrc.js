@@ -239,34 +239,6 @@ module.exports = {
         'global-require': 'warn',
         'guard-for-in': 'error',
         'handle-callback-err': 'off',
-        'id-blacklist': [
-            'error',
-            'callback',
-            'data',
-            'element',
-            'er',
-            'error',
-            'errorCallback',
-            'errCallback',
-            'ev',
-            'event',
-            'resp',
-            'tata',
-            'tete',
-            'titi',
-            'toto',
-            'tutu',
-            'tyty',
-        ],
-        'id-length': [
-            'error',
-            {
-                min: 2,
-                max: 50,
-                properties: 'always',
-                exceptions: ['_', '$', 'i', 'j', 'k', 'l', 'n', 'x', 'y', 'z'],
-            },
-        ],
         'id-match': 'off',
         'implicit-arrow-linebreak': ['off', 'beside'],
         indent: [
@@ -1100,10 +1072,10 @@ module.exports = {
                     String: 'string',
                 },
                 requireParamDescription: true,
-                requireParamType: true,
+                requireParamType: false,
                 requireReturn: false,
                 requireReturnDescription: true,
-                requireReturnType: true,
+                requireReturnType: false,
             },
         ],
         'valid-typeof': [
@@ -1222,12 +1194,7 @@ module.exports = {
         'import/no-relative-parent-imports': 'off',
         'import/no-restricted-paths': ['error'],
         'import/no-self-import': 'error',
-        'import/no-unassigned-import': [
-            'error',
-            {
-                allow: ['*.css', '**/*.scss'],
-            },
-        ],
+        'import/no-unassigned-import': 'off',
         'import/no-unresolved': [
             'off',
             {
@@ -1264,7 +1231,7 @@ module.exports = {
             },
         ],
         'lumapps/file-format': ['off'],
-        'lumapps/jsdoc-format': 'error',
+        'lumapps/jsdoc-format': 'off',
         'lumapps/ternary-condition-parens': ['error', 'never'],
         'lumapps/angular-isdefined': ['off', 'always'],
 
@@ -1874,7 +1841,7 @@ module.exports = {
                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
             },
             webpack: {
-                config: 'webpack/webpack.config.js',
+                config: 'webpack.config.js',
             },
         },
         react: {

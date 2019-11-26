@@ -1,0 +1,78 @@
+{
+    "author": {
+        "name": "LumApps"
+    },
+    "bugs": {
+        "url": "https://github.com/lumapps/design-system/issues"
+    },
+    "dependencies": {
+        "@lumx/angularjs": "^0.16.4-alpha.0",
+        "@lumx/core": "^0.16.4-alpha.0",
+        "@lumx/icons": "^0.16.4-alpha.0",
+        "@lumx/react": "^0.16.4-alpha.0",
+        "angular": "^1.7.8",
+        "classnames": "^2.2.6",
+        "highlight.js": "^9.16.2",
+        "intersection-observer": "^0.7.0",
+        "jquery": "^3.3.1",
+        "lodash": "^4.17.15",
+        "react": "^16.11.0",
+        "react-angular": "^0.4.0",
+        "react-dom": "^16.11.0",
+        "react-highlight": "^0.12.0",
+        "react-router-dom": "^5.1.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.7.2",
+        "@babel/preset-env": "^7.7.1",
+        "@babel/preset-react": "^7.7.0",
+        "autoprefixer": "^9.7.1",
+        "awesome-typescript-loader": "^5.2.1",
+        "babel-loader": "^8.0.6",
+        "babel-plugin-angularjs-annotate": "^0.10.0",
+        "clean-webpack-plugin": "^3.0.0",
+        "core-js": "^3.4.2",
+        "css-loader": "^3.2.0",
+        "expose-loader": "^0.7.5",
+        "file-loader": "^4.2.0",
+        "friendly-errors-webpack-plugin": "^1.7.0",
+        "html-loader": "^0.5.5",
+        "html-minifier-webpack-plugin": "^2.2.1",
+        "html-webpack-plugin": "^3.2.0",
+        "is-ci": "^2.0.0",
+        "mdx-loader": "^3.0.2",
+        "mini-css-extract-plugin": "^0.8.0",
+        "node-sass": "^4.13.0",
+        "null-loader": "^3.0.0",
+        "optimize-css-assets-webpack-plugin": "^5.0.3",
+        "postcss-flexbox-unboxer": "^1.0.0",
+        "postcss-loader": "^3.0.0",
+        "sass-loader": "^8.0.0",
+        "terser-webpack-plugin": "^2.2.1",
+        "typedoc": "^0.15.2",
+        "typescript": "^3.7.2",
+        "webpack": "^4.41.2",
+        "webpack-cli": "^3.3.10",
+        "webpack-dev-server": "^3.9.0",
+        "webpack-notifier": "^1.8.0",
+        "webpackbar": "^4.0.0"
+    },
+    "description": "The official LumApps Design System (LumX) demo site",
+    "engines": {
+        "node": ">= 10.0.0",
+        "npm": ">= 4.0.0",
+        "yarn": ">= 1.3.0"
+    },
+    "license": "MIT",
+    "name": "lumx-site-demo",
+    "private": true,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lumapps/design-system.git"
+    },
+    "scripts": {
+        "build": "webpack",
+        "start": "NODE_ENV=development webpack-dev-server"
+    },
+    "version": "0.16.4-alpha.0"
+}

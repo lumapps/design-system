@@ -55,7 +55,7 @@ yarn scaffold
 
 This script will generate a TSX file for the component code, a TSX file for the component tests and an MDX file to demo this component.
 
-To export your component into the `@lumx/react` NPM package, you also have to make sure to update the `react.index.tsx` file.
+To export your component into the `@lumx/react` NPM package, you also have to make sure to update the `src/index.tsx` file.
 
 ## <a name="submission-guidelines"></a> Submission guidelines
 
@@ -112,7 +112,7 @@ If you are developping in React please make sure to follow this check list:
 -   [ ] Update the `CHANGELOG.react.md` file
 -   [ ] Create or update component tests
 -   [ ] Keep props JSDoc comment up to date and check they appear on the demo site
--   [ ] Keep the `react.index.tsx` file up to date
+-   [ ] Keep the `lumx-react/src/index.tsx` file up to date
 -   [ ] (if necessary) Create or update the MDX demo file for your component
 
 #### After your pull request is merged
