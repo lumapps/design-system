@@ -58,23 +58,15 @@ you can build LumX by using:
 yarn build
 ```
 
-This will produce the target build for @lumx/core, @lumx/angularjs, @lumx/react and the demo site.
+This will produce the target build for `@lumx/core`, `@lumx/angularjs`, `@lumx/react` and the demo site.
 
 ## How to publish packages
 
-First, be sure to be logged in NPM:
-
-```bash
-yarn login
-```
-
-To publish the `@lumx/<core|react|angularjs|icons>` package:
-
-```bash
-yarn lerna publish
-```
-
-These commands will build the packages, increment the version number and publish to NPM.
+1. Create a release branch (ex: `release/vX.Y.Z`)
+2. Login to NPM: `yarn login`
+3. Publish the packages to NPM: `yarn release`
+(you will be asked what version bump to apply)
+4. Create a PR for the release branch to merge into master
 
 ## Copyright and license
 
