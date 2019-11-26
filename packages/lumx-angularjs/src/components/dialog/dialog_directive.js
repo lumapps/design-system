@@ -145,7 +145,7 @@ function DialogController(
                 _dialog.remove();
             } else {
                 _dialog
-                    .hide()
+                    .removeClass(`${CSS_PREFIX}-dialog--is-shown`)
                     .removeClass(`${CSS_PREFIX}-dialog--is-hidden`)
                     .appendTo(_parentElement);
             }
@@ -232,7 +232,7 @@ function DialogController(
         _dialog
             .css('z-index', LumXDepthService.get() + 1)
             .appendTo('body')
-            .show();
+            .addClass(`${CSS_PREFIX}-dialog--is-shown`);
 
         $timeout(() => {
             $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-start`, lumx.id, params);
