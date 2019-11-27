@@ -4,7 +4,11 @@ module.exports = async ({ config, mode }) => {
     /** SCSS Loader */
     config.module.rules.push({
         test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+        loaders: [
+            { loader: 'style-loader', options: { attrs: { id: 'injected-styles' } } },
+            'css-loader',
+            'sass-loader',
+        ],
     });
 
     config.module.rules = [...config.module.rules, ...baseWebpackConfig.module.rules];
