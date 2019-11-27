@@ -1,5 +1,5 @@
 ```javascript import
-import { Icon, Size, Theme, Thumbnail } from 'LumX';
+import { Icon, Size, Theme } from 'LumX';
 import { mdiEmail } from 'LumX/icons';
 ```
 
@@ -9,31 +9,22 @@ import { mdiEmail } from 'LumX/icons';
 **Icons are small visual representations of common actions, objects or ideas. They help users to identify information and provide context.**
 
 ## Sizes
-Icons come in 5 sizes: xs, s, m, l, xl.
+Icons come in 6 sizes: xxs, xs, s, m, l, xl.
 ```javascript jsx withThemeSwitcher
 (theme) => (
     <>
-        <Icon icon={mdiEmail} theme={theme} size={Size.xs}>
-            Header with icon
-        </Icon>
-        <Icon icon={mdiEmail} theme={theme} size={Size.s}>
-            Header with icon
-        </Icon>
-        <Icon icon={mdiEmail} theme={theme} size={Size.m}>
-            Header with icon
-        </Icon>
-        <Icon icon={mdiEmail} theme={theme} size={Size.l}>
-            Header with icon
-        </Icon>
-        <Icon icon={mdiEmail} theme={theme} size={Size.xl}>
-            Header with icon
-        </Icon>
+        <Icon icon={mdiEmail} theme={theme} size={Size.xxs} />
+        <Icon icon={mdiEmail} theme={theme} size={Size.xs} />
+        <Icon icon={mdiEmail} theme={theme} size={Size.s} />
+        <Icon icon={mdiEmail} theme={theme} size={Size.m} />
+        <Icon icon={mdiEmail} theme={theme} size={Size.l} />
+        <Icon icon={mdiEmail} theme={theme} size={Size.xl} />
 </>
 );
 ```
 
 ## Layout
-We use <a href="https://material.io/archive/guidelines/style/icons.html">Material Design</a> grid and proportions.
+We use <a href="https://material.io/archive/guidelines/style/icons.html" target="_blank">Material Design</a> grid and proportions.
 
 ```javascript jsx withThemeSwitcher
 (theme) => (
@@ -45,5 +36,5 @@ We use <a href="https://material.io/archive/guidelines/style/icons.html">Materia
 ```
 
 ## Library
-Find library on <a href="https://materialdesignicons.com/">materialdesignicons.com</a>.
+Find library on <a href="https://materialdesignicons.com/" target="_blank">materialdesignicons.com</a>.
 
