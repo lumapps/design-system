@@ -19,7 +19,7 @@ export const m = () => <Avatar image={text('Image', 'http://i.pravatar.cc/72')} 
 export const l = () => <Avatar image={text('Image', 'http://i.pravatar.cc/128')} size={Size.l} />;
 
 /**
- * Avatar storiy showing a simple avatar with different actions.
+ * Avatar story showing a simple avatar with different actions.
  * @return component with different actions.
  */
 export const avatarWithActions = () => (
