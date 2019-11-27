@@ -6,7 +6,7 @@ const styles = {
         marginBottom: '20px',
     },
     colorThemeSelector: {
-        width: '200px',
+        width: '220px',
         padding: '20px',
     },
 };
