@@ -32,7 +32,8 @@ module.exports = async function mdxLoader(source) {
     const cb = this.async();
     // MDX to JSX.
     const jsx = await mdx(source, {
-        remarkPlugins: [mdxBreakLine, mdxDemoCodeExtractor(this.resourcePath)],
+        remarkPlugins: [mdxDemoCodeExtractor(this.resourcePath)],
+        rehypePlugins: [mdxBreakLine],
         preserveNewlines: true,
     });
 

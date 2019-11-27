@@ -27,7 +27,7 @@ function replaceNewLineWithBreakLine(node) {
         });
     }
 
-    if (node.type === 'paragraph') {
+    if (node.type === 'element' && node.tagName === 'p') {
         return {
             ...node,
             children: flatMap(node.children, replaceNewLineWithBreakLine),
