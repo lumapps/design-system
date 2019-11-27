@@ -5,6 +5,10 @@ const styles = {
     selector: {
         marginBottom: '20px',
     },
+    colorThemeSelector: {
+        width: '200px',
+        padding: '20px',
+    },
 };
 
 export { styles };

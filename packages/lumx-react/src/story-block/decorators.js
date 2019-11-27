@@ -7,7 +7,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 
 import { StoryBlock } from './StoryBlock';
 
-const withStoryBlockDecorator = (storyFn) => <StoryBlock>{storyFn()}</StoryBlock>;
+const withStoryBlockDecorator = (storyFn) => <StoryBlock>{({ theme }) => storyFn({ theme })}</StoryBlock>;
 
 const decorators = [withA11y, withKnobs, withStoryBlockDecorator];
 
