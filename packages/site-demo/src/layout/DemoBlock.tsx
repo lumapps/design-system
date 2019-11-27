@@ -40,7 +40,11 @@ interface ICode {
 }
 
 async function loadReactDemo(code: ICode): Promise<IDemoModule | null> {
-    return code.react.demo;
+    const demo = await code.react.demo;
+    if (!demo || !demo.default) {
+        return null;
+    }
+    return demo;
 }
 
 async function loadAngularjsDemo(code: ICode): Promise<IDemoModule | null> {
@@ -77,7 +81,7 @@ async function loadAngularjsDemo(code: ICode): Promise<IDemoModule | null> {
 }
 
 const useLoadDemo = (code: ICode, engine: string): IDemoModule | null | undefined => {
-    const [Demo, setDemo] = useState<IDemoModule | null>();
+    const [demo, setDemo] = useState<IDemoModule | null>();
 
     useEffect((): void => {
         (async (): Promise<void> => {
@@ -90,7 +94,7 @@ const useLoadDemo = (code: ICode, engine: string): IDemoModule | null | undefine
         })();
     }, [engine]);
 
-    return Demo;
+    return demo;
 };
 
 function renderDemo(demo: IDemoModule | null | undefined, theme: Theme, engine: string) {
