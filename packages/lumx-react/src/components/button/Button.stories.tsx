@@ -6,4 +6,4 @@ import { decorators } from '@lumx/react/story-block';
 
 export default { title: 'Button', decorators };
 
-export const simpleButton = () => <Button>Simple button</Button>;
+export const simpleButton = ({ theme }) => <Button theme={theme}>Simple button</Button>;

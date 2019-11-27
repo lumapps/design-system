@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { useState, useEffect } from 'react';
 
+import classnames from 'classnames';
+
 /**
  * Please make sure that these themes are in the same order
  * as the `THEMES` constant.
@@ -8,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import '@lumx/core/lumx-theme-material.scss';
 import '@lumx/core/lumx-theme-lumapps.scss';
 
-import { Chip, Size } from '@lumx/react';
+import { Chip, Size, Switch, SwitchPosition, Theme } from '@lumx/react';
 
 import { styles } from './styles';
 
@@ -19,10 +21,20 @@ const stylesNodes = [];
 const CLASSNAME = 'story-block';
 const StoryBlock = (props) => {
     const [theme, setTheme] = useState('lumapps');
+    const [colorTheme, setColorTheme] = useState(Theme.light);
+
     const { children } = props;
 
     const changeTheme = (newTheme) => {
         setTheme(newTheme);
+    };
+
+    const toggleTheme = (checked) => {
+        if (checked) {
+            setColorTheme(Theme.dark);
+        } else {
+            setColorTheme(Theme.light);
+        }
     };
 
     useEffect(() => {
@@ -68,13 +80,18 @@ const StoryBlock = (props) => {
         }
     });
 
-    return (
-        <div className={CLASSNAME} style={styles.block}>
+    return [
+        <div
+            key="story"
+            className={classnames(CLASSNAME, { 'lumx-theme-background-dark-N': colorTheme === Theme.dark })}
+            style={styles.block}
+        >
             <div className={`${CLASSNAME}__theme-selector`} style={styles.selector}>
                 <Chip
                     className="lumx-spacing-margin-right-tiny"
                     isSelected={theme === 'lumapps'}
                     size={Size.s}
+                    theme={colorTheme}
                     onClick={() => changeTheme('lumapps')}
                 >
                     LumApps
@@ -83,14 +100,21 @@ const StoryBlock = (props) => {
                     className="lumx-spacing-margin-right-tiny"
                     isSelected={theme === 'material'}
                     size={Size.s}
+                    theme={colorTheme}
                     onClick={() => changeTheme('material')}
                 >
                     Material
                 </Chip>
             </div>
-            {children}
-        </div>
-    );
+
+            {children({ theme: colorTheme })}
+        </div>,
+        <div key="switcher" className={`${CLASSNAME}__color-theme-selector`} style={styles.colorThemeSelector}>
+            <Switch checked={colorTheme === Theme.dark} position={SwitchPosition.right} onToggle={toggleTheme}>
+                Dark Background
+            </Switch>
+        </div>,
+    ];
 };
 
 export { StoryBlock };
