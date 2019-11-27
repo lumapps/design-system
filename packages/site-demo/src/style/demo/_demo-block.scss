@@ -28,10 +28,13 @@
     &__code {
         border-top: 1px solid lumx-theme-color-variant(dark, L4);
 
-        .hljs {
+        code {
+            display: block;
             padding: $lumx-spacing-unit * 2;
             background-color: transparent;
+            color: #333;
             font-size: 14px;
+            overflow-x: auto;
         }
     }
 

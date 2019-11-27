@@ -72,7 +72,7 @@ if (!IS_CI) {
 
 module.exports = {
     bail: true,
-    devtool: isDev ? 'source-map' : '',
+    devtool: 'source-map',
     mode,
     name: PKG_NAME,
     externals: ['angular'],
@@ -175,10 +175,7 @@ module.exports = {
                         loader: 'babel-loader?cacheDirectory=true',
                         options: {
                             ...CONFIGS.babel,
-                            plugins: [
-                                ['angularjs-annotate', { explicitOnly: true }],
-                                ...CONFIGS.babel.plugins,
-                            ],
+                            plugins: [['angularjs-annotate', { explicitOnly: true }], ...CONFIGS.babel.plugins],
                             presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
                         },
                     },

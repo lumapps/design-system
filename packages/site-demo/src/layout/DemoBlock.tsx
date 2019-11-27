@@ -1,13 +1,12 @@
+import { useHighlightedCode } from '@lumx/demo/layout/utils/useHighlightedCode';
+
 import { mdiCodeTags } from '@lumx/icons';
 import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
-import classNames from 'classnames';
-import get from 'lodash/get';
-import React, { ReactElement, useEffect, useState } from 'react';
-import AngularTemplate from 'react-angular';
-import Highlight from 'react-highlight';
 
-// Code highlighting style
-import 'highlight.js/styles/github.css';
+import classNames from 'classnames';
+import React, { ReactElement, useEffect, useState } from 'react';
+
+import AngularTemplate from 'react-angular';
 
 interface IDemoBlockProps {
     demo: string;
@@ -82,8 +81,8 @@ async function loadAngularjsDemo(code: ICode): Promise<IDemoModule | null> {
 const useLoadDemo = (code: ICode, engine: string): IDemoModule | null | undefined => {
     const [demo, setDemo] = useState<IDemoModule | null>();
 
-    useEffect((): void => {
-        (async (): Promise<void> => {
+    useEffect(() => {
+        (async () => {
             setDemo(undefined);
             try {
                 setDemo(engine === 'react' ? await loadReactDemo(code) : await loadAngularjsDemo(code));
@@ -126,8 +125,8 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
     const toggleShowCode = (): void => setShowCode(!showCode);
 
     const demo = useLoadDemo(code, engine);
-    const sourceCode = get(code, [engine, 'code']);
-    const langClasses = engine === 'react' ? 'javascript jsx' : 'html';
+
+    const highlightedCode = useHighlightedCode(code[engine].code, engine === 'react' ? 'tsx' : 'html');
 
     return (
         <div className="demo-block">
@@ -137,7 +136,7 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">
                     <Button
-                        disabled={!sourceCode}
+                        disabled={!highlightedCode}
                         emphasis={Emphasis.low}
                         leftIcon={mdiCodeTags}
                         onClick={toggleShowCode}
@@ -160,9 +159,11 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
                 )}
             </div>
 
-            {showCode && sourceCode && (
+            {showCode && highlightedCode && (
                 <div className="demo-block__code">
-                    <Highlight className={langClasses}>{sourceCode.replace(/\\n/g, '\n')}</Highlight>
+                    <pre>
+                        <code dangerouslySetInnerHTML={{ __html: highlightedCode }} />
+                    </pre>
                 </div>
             )}
         </div>
