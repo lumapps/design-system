@@ -75,7 +75,7 @@ module.exports = {
     devtool: isDev ? 'source-map' : '',
     mode,
     name: PKG_NAME,
-    externals: [],
+    externals: ['angular'],
     entry: {
         main: `${SRC_PATH}/index.tsx`,
         'theme-material': `${SRC_PATH}/style/material.scss`,

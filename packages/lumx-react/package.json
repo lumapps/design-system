@@ -10,13 +10,11 @@
         "@lumx/icons": "^0.17.0",
         "body-scroll-lock": "^2.6.4",
         "classnames": "^2.2.6",
-        "core-js": "^3.4.1",
         "focus-trap-react": "^6.0.0",
         "focus-visible": "^5.0.2",
         "lodash": "^4.17.15",
         "react": "^16.8.5",
         "react-dom": "^16.8.5",
-        "typescript": "^3.7.2",
         "uuid": "^3.3.2"
     },
     "devDependencies": {
@@ -42,6 +40,7 @@
         "babel-plugin-smart-webpack-import": "^1.5.1",
         "clean-webpack-plugin": "^3.0.0",
         "copy-webpack-plugin": "^5.0.5",
+        "core-js": "^3.4.1",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "enzyme-to-json": "^3.4.3",
