@@ -1,4 +1,4 @@
-import { CSS_PREFIX, ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '@lumx/core/constants';
+import { CSS_PREFIX, ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
 
 import template from './dropdown.html';
 

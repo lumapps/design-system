@@ -1,4 +1,4 @@
-import { TAB_KEY_CODE } from '@lumx/core/constants';
+import { TAB_KEY_CODE } from '@lumx/core/js/constants';
 
 /////////////////////////////
 

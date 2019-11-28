@@ -1,6 +1,6 @@
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMagnify, mdiMenuDown } from '@lumx/icons';
 
-import { CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE } from '@lumx/core/constants';
+import { CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE } from '@lumx/core/js/constants';
 
 import template from './select.html';
 

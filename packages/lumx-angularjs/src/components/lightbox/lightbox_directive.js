@@ -1,6 +1,6 @@
 import { mdiClose } from '@lumx/icons';
 
-import { CSS_PREFIX, ESCAPE_KEY_CODE } from '@lumx/core/constants';
+import { CSS_PREFIX, ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
 
 import template from './lightbox.html';
 

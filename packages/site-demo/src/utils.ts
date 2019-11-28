@@ -1,4 +1,4 @@
-import { setCustomColors } from '@lumx/core/custom-colors';
+import { setCustomColors } from '@lumx/core/js/custom-colors';
 import { Theme } from '@lumx/demo/constants';
 
 /**

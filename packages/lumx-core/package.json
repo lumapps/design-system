@@ -34,6 +34,7 @@
     },
     "scripts": {
         "build": "webpack",
+        "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
         "prepublish": "yarn build"
     },
     "version": "0.17.0",

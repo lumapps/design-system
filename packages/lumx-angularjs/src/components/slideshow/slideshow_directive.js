@@ -1,4 +1,4 @@
-import { CSS_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/core/constants';
+import { CSS_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/core/js/constants';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from './constants';
 

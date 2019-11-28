@@ -1,6 +1,6 @@
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
-import { CSS_PREFIX } from '@lumx/core/constants';
+import { CSS_PREFIX } from '@lumx/core/js/constants';
 
 import template from './side-navigation-item.html';
 
