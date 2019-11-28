@@ -15,7 +15,7 @@ export {
     RIGHT_KEY_CODE,
     TAB_KEY_CODE,
     UP_KEY_CODE,
-} from '@lumx/core/constants';
+} from '@lumx/core/js/constants';
 
 /**
  * The prefix to use to name the React component.

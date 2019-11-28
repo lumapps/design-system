@@ -60,12 +60,12 @@ const plugins = [
         },
         {
             context: SRC_PATH,
-            from: `${SRC_PATH}/*.js`,
+            from: `${SRC_PATH}/js`,
             to: `${DIST_PATH}/js`,
         },
         {
             context: SRC_PATH,
-            from: `${SRC_PATH}/**/*.scss`,
+            from: `${SRC_PATH}/scss`,
             to: `${DIST_PATH}/scss`,
         },
     ]),
@@ -86,8 +86,8 @@ if (!IS_CI) {
 
 module.exports = {
     entry: {
-        'lumx-theme-lumapps': `${SRC_PATH}/lumx-theme-lumapps.scss`,
-        'lumx-theme-material': `${SRC_PATH}/lumx-theme-material.scss`,
+        'lumx-theme-lumapps': `${SRC_PATH}/scss/lumx-theme-lumapps.scss`,
+        'lumx-theme-material': `${SRC_PATH}/scss/lumx-theme-material.scss`,
     },
 
     bail: true,

@@ -1,4 +1,4 @@
-import { ENTER_KEY_CODE } from '@lumx/core/constants';
+import { ENTER_KEY_CODE } from '@lumx/core/js/constants';
 
 /////////////////////////////
 

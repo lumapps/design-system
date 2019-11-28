@@ -1,4 +1,4 @@
-export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed } from '@lumx/core/utils';
+export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed } from '@lumx/core/js/utils';
 
 export * from './calculatePopoverPlacement';
 
