@@ -7,8 +7,8 @@ import classnames from 'classnames';
  * Please make sure that these themes are in the same order
  * as the `THEMES` constant.
  */
-import '@lumx/core/lumx-theme-material.scss';
-import '@lumx/core/lumx-theme-lumapps.scss';
+import '@lumx/core/scss/lumx-theme-material.scss';
+import '@lumx/core/scss/lumx-theme-lumapps.scss';
 
 import { Chip, Size, Switch, SwitchPosition, Theme } from '@lumx/react';
 
