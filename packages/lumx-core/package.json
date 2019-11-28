@@ -9,6 +9,8 @@
         "classnames": "^2.2.6",
         "focus-visible": "^5.0.2",
         "lodash": "^4.17.11",
+        "moment": "^2.24.0",
+        "moment-range": "^4.0.2",
         "sass-mq": "^5.0.0"
     },
     "description": "LumX core",
