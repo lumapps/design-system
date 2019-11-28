@@ -12,14 +12,13 @@
         "@lumx/react": "^0.17.0",
         "angular": "^1.7.8",
         "classnames": "^2.2.6",
-        "highlight.js": "^9.16.2",
         "intersection-observer": "^0.7.0",
         "jquery": "^3.3.1",
         "lodash": "^4.17.15",
+        "prismjs": "^1.17.1",
         "react": "^16.11.0",
         "react-angular": "^0.4.0",
         "react-dom": "^16.11.0",
-        "react-highlight": "^0.12.0",
         "react-router-dom": "^5.1.2"
     },
     "devDependencies": {
