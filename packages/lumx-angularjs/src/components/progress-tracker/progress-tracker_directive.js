@@ -1,5 +1,3 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
 import template from './progress-tracker.html';
 
 /////////////////////////////
@@ -8,7 +6,7 @@ function ProgressTrackerController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -21,14 +19,14 @@ function ProgressTrackerController() {
      *
      * @type {number}
      */
-    lumx.activeStep = 0;
+    lx.activeStep = 0;
 
     /**
      * The number of steps.
      *
      * @type {number}
      */
-    lumx.stepCount = 0;
+    lx.stepCount = 0;
 
     /////////////////////////////
     //                         //
@@ -40,7 +38,7 @@ function ProgressTrackerController() {
      * Increase step count on step init.
      */
     function increaseStepCount() {
-        lumx.stepCount++;
+        lx.stepCount++;
     }
 
     /**
@@ -49,13 +47,13 @@ function ProgressTrackerController() {
      * @param {number} stepIndex The step index.
      */
     function setActiveStep(stepIndex) {
-        lumx.activeStep = stepIndex;
+        lx.activeStep = stepIndex;
     }
 
     /////////////////////////////
 
-    lumx.increaseStepCount = increaseStepCount;
-    lumx.setActiveStep = setActiveStep;
+    lx.increaseStepCount = increaseStepCount;
+    lx.setActiveStep = setActiveStep;
 }
 
 /////////////////////////////
@@ -66,7 +64,7 @@ function ProgressTrackerDirective() {
     return {
         bindToController: true,
         controller: ProgressTrackerController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         template,
@@ -76,9 +74,7 @@ function ProgressTrackerDirective() {
 
 /////////////////////////////
 
-angular
-    .module(`${MODULE_NAME}.progress-tracker`)
-    .directive(`${COMPONENT_PREFIX}ProgressTracker`, ProgressTrackerDirective);
+angular.module('lumx.progress-tracker').directive('lxProgressTracker', ProgressTrackerDirective);
 
 /////////////////////////////
 

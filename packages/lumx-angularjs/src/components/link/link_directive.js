@@ -1,5 +1,4 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -7,7 +6,7 @@ function LinkController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -23,12 +22,12 @@ function LinkController() {
     function getClasses() {
         const classes = [];
 
-        if (angular.isDefined(lumx.color)) {
-            classes.push(`${CSS_PREFIX}-link--color-${lumx.color}`);
+        if (lx.color) {
+            classes.push(`${CSS_PREFIX}-link--color-${lx.color}`);
         }
 
-        if (angular.isDefined(lumx.colorVariant)) {
-            classes.push(`${CSS_PREFIX}-link--color-variant-${lumx.colorVariant}`);
+        if (lx.colorVariant) {
+            classes.push(`${CSS_PREFIX}-link--color-variant-${lx.colorVariant}`);
         }
 
         return classes;
@@ -36,7 +35,7 @@ function LinkController() {
 
     /////////////////////////////
 
-    lumx.getClasses = getClasses;
+    lx.getClasses = getClasses;
 }
 
 /////////////////////////////
@@ -47,21 +46,21 @@ function LinkDirective() {
     return {
         bindToController: true,
         controller: LinkController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {
-            color: '@?lumxColor',
-            colorVariant: '@?lumxColorVariant',
+            color: '@?lxColor',
+            colorVariant: '@?lxColorVariant',
         },
-        template: `<a class="${CSS_PREFIX}-link" ng-class="lumx.getClasses()" ng-transclude></a>`,
+        template: `<a class="${CSS_PREFIX}-link" ng-class="lx.getClasses()" ng-transclude></a>`,
         transclude: true,
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.link`).directive(`${COMPONENT_PREFIX}Link`, LinkDirective);
+angular.module('lumx.link').directive('lxLink', LinkDirective);
 
 /////////////////////////////
 

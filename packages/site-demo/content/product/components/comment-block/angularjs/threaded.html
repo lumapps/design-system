@@ -1,46 +1,46 @@
-<lumx-comment-block
-    lumx-avatar="http://i.pravatar.cc/128"
-    lumx-date="{{ comment.date }}"
-    lumx-is-open="comment.isOpen"
-    lumx-name="{{ comment.name }}"
-    lumx-on-click="vm.onClick()"
-    lumx-on-mouse-enter="vm.onMouseEnter()"
-    lumx-on-mouse-leave="vm.onMouseLeave()"
-    lumx-text="{{ comment.text }}"
-    lumx-theme="{{ theme }}"
+<lx-comment-block
+    lx-avatar="http://i.pravatar.cc/128"
+    lx-date="{{ comment.date }}"
+    lx-is-open="comment.isOpen"
+    lx-name="{{ comment.name }}"
+    lx-on-click="vm.onClick()"
+    lx-on-mouse-enter="vm.onMouseEnter()"
+    lx-on-mouse-leave="vm.onMouseLeave()"
+    lx-text="{{ comment.text }}"
+    lx-theme="{{ theme }}"
     ng-repeat="comment in vm.commentsThreaded"
 >
-    <lumx-comment-block-actions>
-        <lumx-grid>
-            <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ theme }}">
-                <lumx-icon lumx-path="{{ vm.icons.mdiHeart }}"></lumx-icon>
+    <lx-comment-block-actions>
+        <lx-grid>
+            <lx-button lx-emphasis="low" lx-size="s" lx-theme="{{ theme }}">
+                <lx-icon lx-path="{{ vm.icons.mdiHeart }}"></lx-icon>
                 <span>24 likes</span>
-            </lumx-button>
+            </lx-button>
 
-            <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ theme }}">
-                <lumx-icon lumx-path="{{ vm.icons.mdiReply }}"></lumx-icon>
+            <lx-button lx-emphasis="low" lx-size="s" lx-theme="{{ theme }}">
+                <lx-icon lx-path="{{ vm.icons.mdiReply }}"></lx-icon>
                 <span>16 replies</span>
-            </lumx-button>
-        </lumx-grid>
-    </lumx-comment-block-actions>
+            </lx-button>
+        </lx-grid>
+    </lx-comment-block-actions>
 
-    <lumx-comment-block-children>
-        <lumx-comment-block
-            lumx-avatar="http://i.pravatar.cc/128"
-            lumx-date="{{ child.date }}"
-            lumx-name="{{ child.name }}"
-            lumx-text="{{ child.text }}"
-            lumx-theme="{{ theme }}"
+    <lx-comment-block-children>
+        <lx-comment-block
+            lx-avatar="http://i.pravatar.cc/128"
+            lx-date="{{ child.date }}"
+            lx-name="{{ child.name }}"
+            lx-text="{{ child.text }}"
+            lx-theme="{{ theme }}"
             ng-repeat="child in comment.children"
         >
-            <lumx-comment-block-actions>
-                <lumx-grid>
-                    <lumx-button lumx-emphasis="low" lumx-size="s" lumx-theme="{{ theme }}">
-                        <lumx-icon lumx-path="{{ vm.icons.mdiHeart }}"></lumx-icon>
+            <lx-comment-block-actions>
+                <lx-grid>
+                    <lx-button lx-emphasis="low" lx-size="s" lx-theme="{{ theme }}">
+                        <lx-icon lx-path="{{ vm.icons.mdiHeart }}"></lx-icon>
                         <span>24 likes</span>
-                    </lumx-button>
-                </lumx-grid>
-            </lumx-comment-block-actions>
-        </lumx-comment-block>
-    </lumx-comment-block-children>
-</lumx-comment-block>
+                    </lx-button>
+                </lx-grid>
+            </lx-comment-block-actions>
+        </lx-comment-block>
+    </lx-comment-block-children>
+</lx-comment-block>

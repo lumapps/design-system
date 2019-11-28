@@ -1,5 +1,4 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -16,7 +15,7 @@ function ButtonGroupDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.button`).directive(`${COMPONENT_PREFIX}ButtonGroup`, ButtonGroupDirective);
+angular.module('lumx.button').directive('lxButtonGroup', ButtonGroupDirective);
 
 /////////////////////////////
 

@@ -1,23 +1,33 @@
 import { mdiCheck } from '@lumx/icons';
 
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './checkbox.html';
 
 /////////////////////////////
 
-function CheckboxController(LumXUtilsService) {
+function CheckboxController(LxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        theme: 'light',
+    };
 
     /**
      * The model controller.
@@ -37,35 +47,35 @@ function CheckboxController(LumXUtilsService) {
      *
      * @type {string}
      */
-    lumx.checkboxId = LumXUtilsService.generateUUID();
+    lx.checkboxId = LxUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasHelper = false;
+    lx.hasHelper = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasLabel = false;
+    lx.hasLabel = false;
 
     /**
      * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */
-    lumx.hasTranscluded = false;
+    lx.hasTranscluded = false;
 
     /**
      * The checkbox icons.
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiCheck,
     };
 
@@ -74,13 +84,34 @@ function CheckboxController(LumXUtilsService) {
      *
      * @type {string}
      */
-    lumx.viewValue = undefined;
+    lx.viewValue = undefined;
 
     /////////////////////////////
     //                         //
     //     Public functions    //
     //                         //
     /////////////////////////////
+
+    /**
+     * Get checkbox classes.
+     *
+     * @return {Array} The list of checkbox classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const state = lx.viewValue ? 'checked' : 'unchecked';
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-checkbox--is-${state}`);
+        classes.push(`${CSS_PREFIX}-checkbox--theme-${theme}`);
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
+    }
 
     /**
      * Set the model controller.
@@ -91,7 +122,7 @@ function CheckboxController(LumXUtilsService) {
         _modelController = modelController;
 
         _modelController.$render = function onModelRender() {
-            lumx.viewValue = _modelController.$viewValue;
+            lx.viewValue = _modelController.$viewValue;
         };
     }
 
@@ -100,7 +131,7 @@ function CheckboxController(LumXUtilsService) {
      */
     function updateViewValue() {
         if (angular.isUndefined(_modelController)) {
-            lumx.viewValue = !lumx.viewValue;
+            lx.viewValue = !lx.viewValue;
 
             return;
         }
@@ -111,8 +142,9 @@ function CheckboxController(LumXUtilsService) {
 
     /////////////////////////////
 
-    lumx.setModelController = setModelController;
-    lumx.updateViewValue = updateViewValue;
+    lx.getClasses = getClasses;
+    lx.setModelController = setModelController;
+    lx.updateViewValue = updateViewValue;
 }
 
 /////////////////////////////
@@ -161,26 +193,26 @@ function CheckboxDirective() {
     return {
         bindToController: true,
         controller: CheckboxController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
-        require: [`${COMPONENT_PREFIX}Checkbox`, '?ngModel'],
+        require: ['lxCheckbox', '?ngModel'],
         restrict: 'E',
         scope: {
-            customColors: '=?lumxCustomColors',
-            theme: '@?lumxTheme',
+            customColors: '=?lxCustomColors',
+            theme: '@?lxTheme',
         },
         template,
         transclude: {
-            helper: `?${COMPONENT_PREFIX}CheckboxHelper`,
-            label: `?${COMPONENT_PREFIX}CheckboxLabel`,
+            helper: '?lxCheckboxHelp',
+            label: '?lxCheckboxLabel',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.checkbox`).directive(`${COMPONENT_PREFIX}Checkbox`, CheckboxDirective);
+angular.module('lumx.checkbox').directive('lxCheckbox', CheckboxDirective);
 
 /////////////////////////////
 

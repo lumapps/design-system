@@ -1,25 +1,21 @@
 <div class="lumx-spacing-margin-bottom-big">
-    <lumx-switch lumx-theme="{{ theme }}" ng-model="vm.switches.model.unchecked">
-        <lumx-switch-label>Default</lumx-switch-label>
-    </lumx-switch>
+    <lx-switch lx-theme="{{ theme }}" ng-model="vm.switches.model.unchecked">
+        <lx-switch-label>Default</lx-switch-label>
+    </lx-switch>
 </div>
 
 <div class="lumx-spacing-margin-bottom-big">
-    <lumx-switch lumx-theme="{{ theme }}" ng-model="vm.switches.model.unchecked">
-        <lumx-switch-label>
+    <lx-switch lx-theme="{{ theme }}" ng-model="vm.switches.model.unchecked">
+        <lx-switch-label>
             With helper
-        </lumx-switch-label>
+        </lx-switch-label>
 
-        <lumx-switch-helper>
+        <lx-switch-helper>
             Helper text
-        </lumx-switch-helper>
-    </lumx-switch>
+        </lx-switch-helper>
+    </lx-switch>
 </div>
 
-<lumx-switch
-    lumx-theme="{{ theme }}"
-    ng-model="vm.switches.model.unchecked"
-    ng-disabled="vm.switches.states.disabled"
->
-    <lumx-switch-label>Disabled</lumx-switch-label>
-</lumx-switch>
+<lx-switch lx-theme="{{ theme }}" ng-model="vm.switches.model.unchecked" ng-disabled="vm.switches.states.disabled">
+    <lx-switch-label>Disabled</lx-switch-label>
+</lx-switch>

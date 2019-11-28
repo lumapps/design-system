@@ -1,122 +1,187 @@
-<lumx-button id="{{ vm.sourceId }}" ng-click="vm.openLightbox()">Open lightbox</lumx-button>
+<div class="demo-grid">
+    <lx-button id="{{ vm.sourceId }}" ng-click="vm.openLightbox()">Open lightbox</lx-button>
+</div>
 
-<lumx-lightbox id="{{ vm.lightboxId }}">
-    <lumx-slideshow lumx-fill-height="true" lumx-has-controls="true" lumx-theme="dark" lumx-focus-on-init>
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/640/480/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 1"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
+<lx-lightbox id="{{ vm.lightboxId }}">
+    <lx-slideshow lx-fill-height="true" lx-has-controls="true" lx-theme="dark" lx-focus-on-init>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/640/480/?random"
+                lx-title="Lorem ipsum 1"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
 
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/480/640/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 2"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/480/640/?random"
+                lx-title="Lorem ipsum 2"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
 
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/480/480/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 3"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/480/480/?random"
+                lx-title="Lorem ipsum 3"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
 
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/640/480/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 1"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/640/480/?random"
+                lx-title="Lorem ipsum 1"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
 
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/480/640/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 2"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/480/640/?random"
+                lx-title="Lorem ipsum 2"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
 
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/480/480/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 3"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/480/480/?random"
+                lx-title="Lorem ipsum 3"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
 
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/640/480/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 1"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/640/480/?random"
+                lx-title="Lorem ipsum 1"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
 
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/480/640/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 2"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/480/640/?random"
+                lx-title="Lorem ipsum 2"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
 
-        <lumx-slideshow-item>
-            <lumx-image-block
-                lumx-align="center"
-                lumx-aspect-ratio="original"
-                lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-                lumx-fill-height="true"
-                lumx-image="https://picsum.photos/480/480/?random"
-                lumx-tags="['#tag1', '#tag2', '#tag3']"
-                lumx-title="Lorem ipsum 3"
-                lumx-theme="dark"
-            ></lumx-image-block>
-        </lumx-slideshow-item>
-    </lumx-slideshow>
-</lumx-lightbox>
+        <lx-slideshow-item>
+            <lx-image-block
+                lx-align="center"
+                lx-aspect-ratio="original"
+                lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+                lx-fill-height="true"
+                lx-image="https://picsum.photos/480/480/?random"
+                lx-title="Lorem ipsum 3"
+                lx-theme="dark"
+            >
+                <lx-image-block-tags>
+                    <lx-chip-group lx-align="center">
+                        <lx-chip lx-size="s" lx-theme="dark" ng-repeat="tag in vm.tags">
+                            <lx-chip-label>{{ tag }}</lx-chip-label>
+                        </lx-chip>
+                    </lx-chip-group>
+                </lx-image-block-tags>
+            </lx-image-block>
+        </lx-slideshow-item>
+    </lx-slideshow>
+</lx-lightbox>

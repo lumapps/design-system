@@ -1,4 +1,4 @@
-function DemoController(LumXNotificationService) {
+function DemoController(LxNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -119,7 +119,7 @@ function DemoController(LumXNotificationService) {
         vm.stepper[index].isComplete = true;
 
         if (vm.activeStepIndex === vm.stepper.length - 1 && vm.isComplete()) {
-            LumXNotificationService.success('Complete');
+            LxNotificationService.success('Complete');
         }
     }
 

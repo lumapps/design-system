@@ -1,63 +1,37 @@
 import React from 'react';
 
-import {
-    ButtonEmphasis,
-    Chip,
-    Grid,
-    IconButton,
-    ImageBlock,
-    Size,
-    AspectRatio
-} from '@lumx/react';
-import { mdiPencil, mdiEye, mdiDelete } from '@lumx/icons';
+import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
+import { AspectRatio, ButtonEmphasis, Chip, ChipGroup, Grid, IconButton, ImageBlock, Size } from '@lumx/react';
 
 const App = ({ theme }) => (
     <ImageBlock
         actions={
             <Grid>
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton
-                        color="dark"
-                        emphasis={ButtonEmphasis.low}
-                        hasBackground={true}
-                        icon={mdiPencil}
-                    />
+                    <IconButton color="dark" emphasis={ButtonEmphasis.low} hasBackground={true} icon={mdiPencil} />
                 </div>
 
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton
-                        color="dark"
-                        emphasis={ButtonEmphasis.low}
-                        hasBackground={true}
-                        icon={mdiEye}
-                    />
+                    <IconButton color="dark" emphasis={ButtonEmphasis.low} hasBackground={true} icon={mdiEye} />
                 </div>
 
                 <div>
-                    <IconButton
-                        color="dark"
-                        emphasis={ButtonEmphasis.low}
-                        hasBackground={true}
-                        icon={mdiDelete}
-                    />
+                    <IconButton color="dark" emphasis={ButtonEmphasis.low} hasBackground={true} icon={mdiDelete} />
                 </div>
             </Grid>
         }
         aspectRatio={AspectRatio.horizontal}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={
-            <Grid>
-                <Chip
-                    className="lumx-spacing-margin-right-tiny"
-                    size={Size.s}>
+            <ChipGroup>
+                <Chip size={Size.s} theme={theme}>
                     Tag 1
                 </Chip>
-                <Chip
-                    className="lumx-spacing-margin-right-tiny"
-                    size={Size.s}>
+
+                <Chip size={Size.s} theme={theme}>
                     Tag 2
                 </Chip>
-            </Grid>
+            </ChipGroup>
         }
         theme={theme}
         title="Lorem ipsum"

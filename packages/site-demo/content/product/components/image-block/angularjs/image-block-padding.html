@@ -1,24 +1,19 @@
 <div class="lumx-theme-background-dark-L5 lumx-spacing-padding-huge">
     <div class="lumx-theme-background-light-N">
-        <lumx-image-block
-            lumx-aspect-ratio="horizontal"
-            lumx-caption-style="{ padding: 16 }"
-            lumx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
-            lumx-image="https://picsum.photos/800/600/?random"
-            lumx-title="Lorem ipsum"
+        <lx-image-block
+            lx-aspect-ratio="horizontal"
+            lx-caption-style="{ padding: 16 }"
+            lx-description="Lorem ipsum dolor sit amet, consectur adipiscing"
+            lx-image="https://picsum.photos/800/600/?random"
+            lx-title="Lorem ipsum"
         >
-            <lumx-image-block-tags>
-                <lumx-grid>
-                    <lumx-chip
-                        class="lumx-spacing-margin-right-tiny"
-                        lumx-size="s"
-                        lumx-theme="{{ theme }}"
-                        ng-repeat="tag in vm.tags"
-                    >
-                        <lumx-chip-label>{{ tag }}</lumx-chip-label>
-                    </lumx-chip>
-                </lumx-grid>
-            </lumx-image-block-tags>
-        </lumx-image-block>
+            <lx-image-block-tags>
+                <lx-chip-group>
+                    <lx-chip lx-size="s" lx-theme="{{ theme }}" ng-repeat="tag in vm.tags">
+                        <lx-chip-label>{{ tag }}</lx-chip-label>
+                    </lx-chip>
+                </lx-chip-group>
+            </lx-image-block-tags>
+        </lx-image-block>
     </div>
 </div>

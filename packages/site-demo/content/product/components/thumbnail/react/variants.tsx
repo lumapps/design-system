@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { Alignment, Grid, Orientation, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
 
-const App = ({ theme }) => (
-    <>
-        <Thumbnail image="https://picsum.photos/150" theme={theme} variant={ThumbnailVariant.squared} />
-        <Thumbnail image="https://picsum.photos/150" theme={theme} variant={ThumbnailVariant.rounded} />
-    </>
+const App = () => (
+    <Grid orientation={Orientation.horizontal} vAlign={Alignment.spaceAround}>
+        <Thumbnail image="https://picsum.photos/150" size={Size.xl} variant={ThumbnailVariant.squared} />
+        <Thumbnail image="https://picsum.photos/150" size={Size.xl} variant={ThumbnailVariant.rounded} />
+    </Grid>
 );
 
 export default App;

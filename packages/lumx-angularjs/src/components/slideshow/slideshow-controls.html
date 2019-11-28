@@ -1,43 +1,37 @@
-<div
-    class="lumx-slideshow-controls"
-    ng-class="{ 'lumx-slideshow-controls--has-infinite-pagination': lumx.slidesCount > lumx.paginationItemsMax,
-                'lumx-slideshow-controls--theme-light': !lumx.theme || lumx.theme === 'light',
-                'lumx-slideshow-controls--theme-dark': lumx.theme === 'dark',
-                'lumx-custom-colors': lumx.customColors }"
->
-    <lumx-button
+<div class="lumx-slideshow-controls" ng-class="lx.getClasses()">
+    <lx-button
         class="lumx-slideshow-controls__navigation"
-        lumx-color="{{ lumx.theme === 'dark' ? 'light' : 'dark' }}"
-        lumx-emphasis="low"
-        lumx-variant="icon"
-        ng-click="lumx.previousSlide()"
+        lx-color="{{ lx.theme === 'dark' ? 'light' : 'dark' }}"
+        lx-emphasis="low"
+        lx-variant="icon"
+        ng-click="lx.previousSlide()"
         tabindex="-1"
     >
-        <lumx-icon lumx-path="{{ lumx.icons.mdiChevronLeft }}"></lumx-icon>
-    </lumx-button>
+        <lx-icon lx-path="{{ lx.icons.mdiChevronLeft }}"></lx-icon>
+    </lx-button>
 
     <div class="lumx-slideshow-controls__pagination">
         <div class="lumx-slideshow-controls__pagination-items">
             <button
                 class="lumx-slideshow-controls__pagination-item"
-                ng-class="{ 'lumx-slideshow-controls__pagination-item--is-active': lumx.activeIndex === i,
-                            'lumx-slideshow-controls__pagination-item--is-on-edge': lumx.isPaginationItemOnEdge(i),
-                            'lumx-slideshow-controls__pagination-item--is-out-range': lumx.isPaginationItemOutVisibleRange(i) }"
-                ng-click="lumx.goToSlide($index)"
-                ng-repeat="i in lumx.paginationItemsRange track by $index"
+                ng-class="{ 'lumx-slideshow-controls__pagination-item--is-active': lx.activeIndex === i,
+                            'lumx-slideshow-controls__pagination-item--is-on-edge': lx.isPaginationItemOnEdge(i),
+                            'lumx-slideshow-controls__pagination-item--is-out-range': lx.isPaginationItemOutVisibleRange(i) }"
+                ng-click="lx.goToSlide($index)"
+                ng-repeat="i in lx.paginationItemsRange track by $index"
                 tabindex="-1"
             ></button>
         </div>
     </div>
 
-    <lumx-button
+    <lx-button
         class="lumx-slideshow-controls__navigation"
-        lumx-color="{{ lumx.theme === 'dark' ? 'light' : 'dark' }}"
-        lumx-emphasis="low"
-        lumx-variant="icon"
-        ng-click="lumx.nextSlide()"
+        lx-color="{{ lx.theme === 'dark' ? 'light' : 'dark' }}"
+        lx-emphasis="low"
+        lx-variant="icon"
+        ng-click="lx.nextSlide()"
         tabindex="-1"
     >
-        <lumx-icon lumx-path="{{ lumx.icons.mdiChevronRight }}"></lumx-icon>
-    </lumx-button>
+        <lx-icon lx-path="{{ lx.icons.mdiChevronRight }}"></lx-icon>
+    </lx-button>
 </div>

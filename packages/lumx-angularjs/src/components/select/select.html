@@ -1,158 +1,162 @@
-<div
-    class="lumx-select"
-    ng-class="{ 'lumx-select--has-value': !lumx.isModelEmpty(),
-                'lumx-select--is-empty': lumx.isModelEmpty(),
-                'lumx-select--unique': !lumx.multiple,
-                'lumx-select--has-unique': !lumx.isModelEmpty() && !lumx.multiple,
-                'lumx-select--multiple': lumx.multiple,
-                'lumx-select--has-multiple': !lumx.isModelEmpty() && lumx.multiple,
-                'lumx-select--is-open': lumx.isOpen,
-                'lumx-select--theme-light': !lumx.theme || lumx.theme === 'light',
-                'lumx-select--theme-dark': lumx.theme === 'dark',
-                'lumx-select--has-label': lumx.label,
-                'lumx-select--is-disabled': lumx.isDisabled,
-                'lumx-select--is-valid': lumx.isValid,
-                'lumx-select--has-error': lumx.hasError,
-                'lumx-select--has-placeholder': lumx.placeholder,
-                'lumx-select--is-focus': lumx.isFocus,
-                'lumx-select--has-input-clear': lumx.isClearable && !lumx.multiple && !lumx.isModelEmpty(),
-                'lumx-custom-colors': lumx.customColors }"
->
-    <span class="lumx-select__label" ng-if="::lumx.label && (!lumx.variant || lumx.variant === 'input')">
-        {{ lumx.label }}
+<div class="lumx-select" ng-class="lx.getClasses()">
+    <span class="lumx-select__label" ng-if="::lx.label && (!lx.variant || lx.variant === 'input')">
+        {{ lx.label }}
     </span>
 
     <div
         class="lumx-select__wrapper"
-        id="{{ lumx.targetUuid }}"
+        id="{{ lx.targetUuid }}"
         tabindex="0"
-        ng-click="lumx.openDropdown()"
-        ng-focus="lumx.enableKeyEvents()"
-        ng-blur="lumx.disableKeyEvents()"
-        ng-if="!lumx.variant || lumx.variant === 'input'"
+        ng-click="lx.toggleDropdown($event)"
+        ng-focus="lx.enableKeyEvents()"
+        ng-blur="lx.disableKeyEvents()"
+        ng-if="!lx.variant || lx.variant === 'input'"
     >
-        <div class="lumx-select__chips" ng-if="!lumx.isModelEmpty() && lumx.multiple">
-            <lumx-chip-group>
-                <lumx-chip
-                    lumx-on-click="lumx.select(selected, $event)"
-                    lumx-size="s"
-                    lumx-theme="{{ lumx.theme === 'dark' ? 'dark' : 'light' }}"
-                    ng-repeat="selected in lumx.viewValue"
-                    ng-disabled="lumx.isDisabled"
-                >
-                    <lumx-chip-label ng-bind-html="lumx.displaySelected(selected)"></lumx-chip-label>
-
-                    <lumx-chip-after>
-                        <lumx-icon lumx-path="{{ lumx.icons.mdiClose }}" lumx-size="xxs"></lumx-icon>
-                    </lumx-chip-after>
-                </lumx-chip>
-            </lumx-chip-group>
-        </div>
-
         <div
             class="lumx-select__input-native lumx-select__input-native--placeholder"
-            ng-if="lumx.isModelEmpty() && lumx.placeholder"
+            ng-if="lx.isModelEmpty() && lx.placeholder"
         >
-            <span>{{ lumx.placeholder }}</span>
+            <span>{{ lx.placeholder }}</span>
         </div>
 
-        <div class="lumx-select__input-native" ng-if="!lumx.isModelEmpty() && !lumx.multiple">
-            <span ng-bind-html="lumx.displaySelected()"></span>
+        <div class="lumx-select__input-native" ng-if="!lx.multiple">
+            <span ng-bind-html="lx.displaySelected()" ng-if="!lx.isModelEmpty()"></span>
         </div>
 
-        <div class="lumx-select__input-validity" ng-if="lumx.isValid || lumx.hasError">
-            <lumx-icon
-                lumx-path="{{ lumx.isValid ? lumx.icons.mdiCheckCircle : lumx.icons.mdiAlertCircle }}"
-                lumx-size="xxs"
-            ></lumx-icon>
+        <div class="lumx-select__chips" ng-if="lx.multiple">
+            <lx-chip-group ng-if="!lx.isModelEmpty()">
+                <lx-chip
+                    lx-on-click="lx.select(selected, $event)"
+                    lx-size="s"
+                    lx-theme="{{ lx.theme === 'dark' ? 'dark' : 'light' }}"
+                    ng-repeat="selected in lx.viewValue"
+                    ng-disabled="lx.isDisabled"
+                >
+                    <lx-chip-label ng-bind-html="lx.displaySelected(selected)"></lx-chip-label>
+
+                    <lx-chip-after>
+                        <lx-icon lx-path="{{ lx.icons.mdiClose }}" lx-size="xxs"></lx-icon>
+                    </lx-chip-after>
+                </lx-chip>
+            </lx-chip-group>
         </div>
 
-        <lumx-button
+        <div class="lumx-select__input-validity" ng-if="lx.isValid || lx.hasError">
+            <lx-icon
+                lx-path="{{ lx.isValid ? lx.icons.mdiCheckCircle : lx.icons.mdiAlertCircle }}"
+                lx-size="xxs"
+            ></lx-icon>
+        </div>
+
+        <lx-button
+            type="button"
             class="lumx-select__input-clear"
-            lumx-emphasis="low"
-            lumx-size="s"
-            lumx-theme="{{ lumx.theme }}"
-            lumx-variant="icon"
-            ng-if="lumx.isClearable && !lumx.multiple && !lumx.isModelEmpty()"
-            ng-click="lumx.clearModel($event)"
+            lx-emphasis="low"
+            lx-size="s"
+            lx-theme="{{ lx.theme }}"
+            lx-variant="icon"
+            ng-if="lx.isClearable && !lx.multiple && !lx.isModelEmpty()"
+            ng-click="lx.clearModel($event)"
         >
-            <lumx-icon lumx-path="{{ lumx.icons.mdiCloseCircle }}"></lumx-icon>
-        </lumx-button>
+            <lx-icon lx-path="{{ lx.icons.mdiCloseCircle }}"></lx-icon>
+        </lx-button>
 
         <div class="lumx-select__input-indicator">
-            <lumx-icon lumx-path="{{ lumx.icons.mdiMenuDown }}" lumx-size="s"></lumx-icon>
+            <lx-icon lx-path="{{ lx.icons.mdiMenuDown }}" lx-size="s"></lx-icon>
         </div>
     </div>
 
-    <lumx-chip
-        id="{{ lumx.targetUuid }}"
-        lumx-has-dropdown-indicator="lumx.isModelEmpty()"
-        lumx-on-click="lumx.openDropdown()"
-        lumx-on-after-click="lumx.clearModel()"
-        lumx-is-selected="!lumx.isModelEmpty()"
-        lumx-theme="{{ lumx.theme }}"
-        ng-focus="lumx.enableKeyEvents()"
-        ng-blur="lumx.disableKeyEvents()"
-        ng-if="lumx.variant === 'chip'"
+    <lx-chip
+        id="{{ lx.targetUuid }}"
+        lx-custom-colors="lx.customColors"
+        lx-has-dropdown-indicator="lx.isModelEmpty()"
+        lx-on-click="lx.toggleDropdown($event)"
+        lx-on-after-click="lx.clearModel()"
+        lx-is-selected="!lx.isModelEmpty()"
+        lx-theme="{{ lx.theme }}"
+        ng-focus="lx.enableKeyEvents()"
+        ng-blur="lx.disableKeyEvents()"
+        ng-if="lx.variant === 'chip'"
     >
-        <lumx-chip-label>
-            <span ng-if="lumx.isModelEmpty()">{{ lumx.label }}</span>
+        <lx-chip-label>
+            <span ng-if="lx.isModelEmpty()">{{ lx.label }}</span>
 
-            <span ng-if="!lumx.isModelEmpty() && !lumx.multiple" ng-bind-html="lumx.displaySelected()"></span>
+            <span ng-if="!lx.isModelEmpty() && !lx.multiple" ng-bind-html="lx.displaySelected()"></span>
 
-            <span ng-if="!lumx.isModelEmpty() && lumx.multiple">
-                <span ng-bind-html="lumx.displaySelected(lumx.viewValue[0])"></span>
-                <span ng-if="lumx.viewValue.length > 1">+{{ lumx.viewValue.length - 1 }}</span>
+            <span ng-if="!lx.isModelEmpty() && lx.multiple">
+                <span ng-bind-html="lx.displaySelected(lx.viewValue[0])"></span>
+                <span ng-if="lx.viewValue.length > 1">+{{ lx.viewValue.length - 1 }}</span>
             </span>
-        </lumx-chip-label>
+        </lx-chip-label>
 
-        <lumx-chip-after>
-            <lumx-icon
-                lumx-path="{{ lumx.isModelEmpty() ? lumx.icons.mdiMenuDown : lumx.icons.mdiCloseCircle }}"
-                lumx-size="xs"
-            ></lumx-icon>
-        </lumx-chip-after>
-    </lumx-chip>
+        <lx-chip-after>
+            <lx-icon
+                lx-path="{{ lx.isModelEmpty() ? lx.icons.mdiMenuDown : lx.icons.mdiCloseCircle }}"
+                lx-size="xs"
+            ></lx-icon>
+        </lx-chip-after>
+    </lx-chip>
 
-    <lumx-dropdown lumx-position="left" lumx-width="100%" id="{{ lumx.dropdownUuid }}">
-        <lumx-dropdown-menu>
-            <div class="lumx-select__filter" ng-if="::lumx.hasFilter">
-                <lumx-icon lumx-path="{{ lumx.icons.mdiMagnify }}" lumx-size="xs"></lumx-icon>
+    <lx-dropdown lx-position="left" lx-width="100%" id="{{ lx.dropdownUuid }}">
+        <lx-dropdown-menu>
+            <div class="lumx-select__filter" ng-if="::lx.hasFilter">
+                <lx-icon lx-path="{{ lx.icons.mdiMagnify }}" lx-size="xs"></lx-icon>
 
                 <input
                     type="text"
                     placeholder="Search"
-                    ng-model="lumx.filterModel"
+                    ng-model="lx.filterModel"
                     ng-model-options="{ debounce: 500 }"
-                    ng-change="lumx.updateFilter()"
-                    lumx-select-filter
+                    ng-change="lx.updateFilter()"
+                    lx-select-filter
                 />
             </div>
 
-            <div class="lumx-select__loader" ng-if="lumx.isLoading">
-                <lumx-progress></lumx-progress>
-            </div>
-
-            <lumx-list
-                lumx-custom-colors="lumx.customColors"
-                lumx-focus-on-init="!lumx.hasFilter"
-                lumx-is-clickable="true"
-                ng-if="!lumx.isLoading"
+            <lx-list
+                lx-custom-colors="lx.customColors"
+                lx-focus-on-init="!lx.hasFilter"
+                lx-is-clickable="true"
+                ng-if="!lx.isLoading"
             >
-                <lumx-list-item
-                    lumx-is-selected="lumx.isSelected(choice)"
-                    lumx-size="tiny"
-                    ng-repeat="choice in lumx.choices | lumxSelectChoicesFilter:lumx.filter:lumx.filterModel"
-                    ng-click="lumx.select(choice, $event)"
-                    lumx-enter-keypress="lumx.select(choice, $event)"
+                <!-- Default choices -->
+                <lx-list-item
+                    lx-is-selected="lx.isSelected(choice)"
+                    lx-size="tiny"
+                    ng-repeat="choice in lx.choices | lxSelectChoicesFilter:lx.filter:lx.filterModel"
+                    ng-click="lx.select(choice, $event)"
+                    lx-enter-keydown="lx.select(choice, $event)"
+                    ng-if="::lx.isChoicesArray()"
                 >
-                    <lumx-list-item-content ng-bind-html="lumx.displayChoice(choice)"></lumx-list-item-content>
-                </lumx-list-item>
-            </lumx-list>
+                    <lx-list-item-content ng-bind-html="::lx.displayChoice(choice)"></lx-list-item-content>
+                </lx-list-item>
 
-            <span class="lumx-select__helper" ng-if="lumx.hasHelper && !lumx.isLoading">
-                {{ lumx.helper }}
+                <!-- Subheader choices -->
+                <lx-list-subheader
+                    ng-repeat-start="(subheader, children) in lx.choices"
+                    ng-bind-html="lx.displaySubheader(subheader)"
+                    ng-if="::!lx.isChoicesArray()"
+                ></lx-list-subheader>
+
+                <lx-list-item
+                    lx-is-selected="lx.isSelected(choice)"
+                    lx-size="tiny"
+                    ng-repeat="choice in children | lxSelectChoicesFilter:lx.filter:lx.filterModel"
+                    ng-repeat-end
+                    ng-click="lx.select(choice, $event)"
+                    lx-enter-keydown="lx.select(choice, $event)"
+                    ng-if="::!lx.isChoicesArray()"
+                >
+                    <lx-list-item-content ng-bind-html="::lx.displayChoice(choice)"></lx-list-item-content>
+                </lx-list-item>
+            </lx-list>
+
+            <span class="lumx-select__helper" ng-if="lx.hasHelper && !lx.isLoading">
+                {{ lx.helper }}
             </span>
-        </lumx-dropdown-menu>
-    </lumx-dropdown>
+
+            <div class="lumx-select__loader" ng-if="lx.isLoading || lx.isInfiniteScrollLoading">
+                <lx-progress></lx-progress>
+            </div>
+        </lx-dropdown-menu>
+    </lx-dropdown>
 </div>

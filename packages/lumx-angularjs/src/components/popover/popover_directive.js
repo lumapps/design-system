@@ -1,23 +1,33 @@
 import PopperJs from 'popper.js';
 
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './popover.html';
 
 /////////////////////////////
 
-function PopoverController(LumXDepthService, $element, $scope, $timeout) {
+function PopoverController(LxDepthService, $element, $scope, $timeout) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        elevation: '3',
+    };
 
     /**
      * The source element.
@@ -46,14 +56,14 @@ function PopoverController(LumXDepthService, $element, $scope, $timeout) {
      *
      * @type {boolean}
      */
-    lumx.isOpen = false;
+    lx.isOpen = false;
 
     /**
      * The popover uuid.
      *
      * @type {string}
      */
-    lumx.uuid = undefined;
+    lx.uuid = undefined;
 
     /////////////////////////////
     //                         //
@@ -65,7 +75,7 @@ function PopoverController(LumXDepthService, $element, $scope, $timeout) {
      * Close popover.
      */
     function _close() {
-        lumx.isOpen = false;
+        lx.isOpen = false;
 
         $timeout(() => {
             if (angular.isDefined(_sourceEl)) {
@@ -78,19 +88,19 @@ function PopoverController(LumXDepthService, $element, $scope, $timeout) {
      * Open popover.
      */
     function _open() {
-        LumXDepthService.increase();
+        LxDepthService.increase();
 
-        $element.css('z-index', LumXDepthService.get());
+        $element.css('z-index', LxDepthService.get());
 
         // eslint-disable-next-line no-new
         new PopperJs(_targetEl, $element, {
             modifiers: {
-                offset: { enabled: true, offset: `0, ${lumx.offset}` },
+                offset: { enabled: true, offset: `0, ${lx.offset}` },
             },
-            placement: lumx.position || 'auto',
+            placement: lx.position || 'auto',
         });
 
-        lumx.isOpen = true;
+        lx.isOpen = true;
     }
 
     /**
@@ -113,6 +123,30 @@ function PopoverController(LumXDepthService, $element, $scope, $timeout) {
 
     /////////////////////////////
     //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get popover classes.
+     *
+     * @return {Array} The list of popover classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const elevation = lx.elevation ? lx.elevation : _DEFAULT_PROPS.elevation;
+        classes.push(`${CSS_PREFIX}-popover--elevation-${elevation}`);
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
+
+    /////////////////////////////
+    //                         //
     //          Events         //
     //                         //
     /////////////////////////////
@@ -124,8 +158,8 @@ function PopoverController(LumXDepthService, $element, $scope, $timeout) {
      * @param {string} popoverId The popover identifier.
      * @param {Object} params    An optional object that holds extra parameters.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-popover__open`, (evt, popoverId, params) => {
-        if (popoverId === lumx.uuid) {
+    $scope.$on('lx-popover__open', (evt, popoverId, params) => {
+        if (popoverId === lx.uuid) {
             _registerTarget(angular.element(params.target));
 
             if (angular.isDefined(params.source)) {
@@ -142,8 +176,8 @@ function PopoverController(LumXDepthService, $element, $scope, $timeout) {
      * @param {Event}  evt       The popover open event.
      * @param {Object} popoverId The popover identifier.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-popover__close`, (evt, popoverId) => {
-        if (popoverId === lumx.uuid && lumx.isOpen) {
+    $scope.$on('lx-popover__close', (evt, popoverId) => {
+        if (popoverId === lx.uuid && lx.isOpen) {
             _close();
         }
     });
@@ -158,36 +192,19 @@ function PopoverDirective() {
         attrs.$observe('id', (id) => {
             ctrl.uuid = id;
         });
-
-        const defaultProps = {
-            elevation: '3',
-        };
-
-        if (!attrs.lumxElevation) {
-            el.addClass(`${CSS_PREFIX}-popover--elevation-${defaultProps.elevation}`);
-        }
-
-        attrs.$observe('lumxElevation', (elevation) => {
-            if (!elevation) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*popover--elevation-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-popover--elevation-${elevation}`);
-        });
     }
 
     return {
         bindToController: true,
         controller: PopoverController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            offset: '@?lumxOffset',
-            position: '@?lumxPosition',
+            elevation: '@?lxElevation',
+            offset: '@?lxOffset',
+            position: '@?lxPosition',
         },
         template,
         transclude: true,
@@ -196,7 +213,7 @@ function PopoverDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.popover`).directive(`${COMPONENT_PREFIX}Popover`, PopoverDirective);
+angular.module('lumx.popover').directive('lxPopover', PopoverDirective);
 
 /////////////////////////////
 

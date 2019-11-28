@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Chip, ChipGroup, TextField, Size } from '@lumx/react';
+import { Chip, ChipGroup, Size, TextField } from '@lumx/react';
 
 const App = ({ theme }) => {
     const [value, setValue] = useState('');
@@ -12,15 +12,9 @@ const App = ({ theme }) => {
             theme={theme}
             chips={
                 <ChipGroup>
-                    <Chip size={Size.s}>
-                        First
-                    </Chip>
-                    <Chip size={Size.s}>
-                        Second
-                    </Chip>
-                    <Chip size={Size.s}>
-                        Third
-                    </Chip>
+                    <Chip size={Size.s}>First</Chip>
+                    <Chip size={Size.s}>Second</Chip>
+                    <Chip size={Size.s}>Third</Chip>
                 </ChipGroup>
             }
         />

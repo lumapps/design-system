@@ -5,7 +5,7 @@ $lumx-spacing-unit-big: $lumx-spacing-unit * 2;
 $lumx-spacing-unit-huge: $lumx-spacing-unit * 3;
 
 $lumx-spacing-directions: (
-    'null': null,
+    null: null,
     '-top': '-top',
     '-right': '-right',
     '-bottom': '-bottom',
@@ -20,7 +20,7 @@ $lumx-spacing-properties: (
 );
 
 $lumx-spacing-sizes: (
-    'null': $lumx-spacing-unit-regular,
+    null: $lumx-spacing-unit-regular,
     '-tiny': $lumx-spacing-unit-tiny,
     '-regular': $lumx-spacing-unit-regular,
     '-big': $lumx-spacing-unit-big,

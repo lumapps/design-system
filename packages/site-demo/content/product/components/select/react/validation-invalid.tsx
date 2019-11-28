@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Select, List, ListItem, Size } from '@lumx/react';
+import { List, ListItem, Select, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }) => {

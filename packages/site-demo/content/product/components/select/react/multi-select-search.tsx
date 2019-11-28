@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Select, List, ListItem, Size, TextField, Chip, ListDivider, Icon, ListSubheader } from '@lumx/react';
+import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
+import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
-import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiMagnify, mdiClose } from '@lumx/icons';
 
 const App = ({ theme }) => {
     const CHOICES_WITH_ICONS = [

@@ -1,34 +1,34 @@
-<lumx-toolbar>
-    <lumx-toolbar-label>
-        <lumx-grid lumx-orientation="horizontal" lumx-h-align="center">
+<lx-toolbar>
+    <lx-toolbar-label>
+        <lx-grid lx-orientation="horizontal" lx-h-align="center">
             <span
                 class="lumx-typography-title"
-                ng-class="{ 'lumx-theme-color-dark-N': theme === 'light',
-                            'lumx-theme-color-light-N': theme === 'dark' }"
+                ng-class="{ 'lumx-theme-color-dark-N': demoBlock.theme === 'light',
+                            'lumx-theme-color-light-N': demoBlock.theme === 'dark' }"
             >
                 Toolbar title
             </span>
 
-            <lumx-text-field
+            <lx-text-field
                 class="lumx-spacing-margin-left-big"
-                lumx-icon="{{ vm.icons.mdiMagnify }}"
-                lumx-theme="{{ theme }}"
+                lx-icon="{{ vm.icons.mdiMagnify }}"
+                lx-theme="{{ demoBlock.theme }}"
             >
                 <input type="text" ng-model="vm.searchFieldModel" placeholder="Search" />
-            </lumx-text-field>
-        </lumx-grid>
-    </lumx-toolbar-label>
+            </lx-text-field>
+        </lx-grid>
+    </lx-toolbar-label>
 
-    <lumx-toolbar-after>
-        <lumx-button
+    <lx-toolbar-after>
+        <lx-button
             class="lumx-spacing-margin-right-regular"
-            lumx-emphasis="low"
-            lumx-theme="{{ theme }}"
-            lumx-variant="icon"
+            lx-emphasis="low"
+            lx-theme="{{ demoBlock.theme }}"
+            lx-variant="icon"
         >
-            <lumx-icon lumx-path="{{ vm.icons.mdiViewGrid }}"></lumx-icon>
-        </lumx-button>
+            <lx-icon lx-path="{{ vm.icons.mdiViewGrid }}"></lx-icon>
+        </lx-button>
 
-        <lumx-button lumx-theme="{{ theme }}">Action</lumx-button>
-    </lumx-toolbar-after>
-</lumx-toolbar>
+        <lx-button lx-theme="{{ demoBlock.theme }}">Action</lx-button>
+    </lx-toolbar-after>
+</lx-toolbar>

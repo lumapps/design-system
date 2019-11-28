@@ -1,5 +1,4 @@
-import { CSS_PREFIX, ESCAPE_KEY_CODE } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
+import { CSS_PREFIX, ENTER_KEY_CODE, ESCAPE_KEY_CODE } from '@lumx/core/constants';
 
 import template from './dropdown.html';
 
@@ -7,18 +6,19 @@ import template from './dropdown.html';
 
 function DropdownController(
     $document,
+    $rootScope,
     $scope,
     $timeout,
     $window,
-    LumXDepthService,
-    LumXDropdownService,
-    LumXEventSchedulerService,
-    LumXUtilsService,
+    LxDepthService,
+    LxDropdownService,
+    LxEventSchedulerService,
+    LxUtilsService,
 ) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -34,6 +34,15 @@ function DropdownController(
      * @readonly
      */
     const _OFFSET_FROM_EDGE = 16;
+
+    /**
+     * Minimum space below trigger button.
+     *
+     * @type {number}
+     * @constant
+     * @readonly
+     */
+    const _MIN_SPACE_BELOW = 150;
 
     /**
      * The event scheduler id.
@@ -74,25 +83,18 @@ function DropdownController(
     /////////////////////////////
 
     /**
-     * Whether the directive has toggle slot filled or not.
-     *
-     * @type {boolean}
-     */
-    lumx.hasToggle = false;
-
-    /**
      * Whether the dropdown is open or not.
      *
      * @type {boolean}
      */
-    lumx.isOpen = false;
+    lx.isOpen = false;
 
     /**
      * The dropdown uuid.
      *
      * @type {string}
      */
-    lumx.uuid = LumXUtilsService.generateUUID();
+    lx.uuid = LxUtilsService.generateUUID();
 
     /////////////////////////////
     //                         //
@@ -101,11 +103,44 @@ function DropdownController(
     /////////////////////////////
 
     /**
-     * Close dropdown on document click.
+     * Close dropdown on document click/keydown.
+     *
+     * @param {Event} evt The click/keydown event.
      */
-    function _onDocumentClick() {
-        if (angular.isUndefined(lumx.closeOnClick) || lumx.closeOnClick) {
-            LumXDropdownService.closeActiveDropdown();
+    function _onDocumentEvent(evt) {
+        if (
+            (angular.isDefined(lx.escapeClose) && !lx.escapeClose) ||
+            (angular.isDefined(evt.keyCode) && evt.keyCode !== ESCAPE_KEY_CODE && evt.keyCode !== ENTER_KEY_CODE)
+        ) {
+            return;
+        }
+
+        evt.stopPropagation();
+
+        const isDocumentKeyDown = angular.isDefined(evt.keyCode);
+
+        LxDropdownService.closeLastDropdown(false, isDocumentKeyDown);
+    }
+
+    /**
+     * Stop event propagation on menu click.
+     *
+     * @param {Event} evt The click event.
+     */
+    function _stopMenuPropagation(evt) {
+        if (evt.keyCode === ESCAPE_KEY_CODE) {
+            return;
+        }
+
+        evt.stopPropagation();
+    }
+
+    /**
+     * Check if user has scrolled to the end of the dropdown.
+     */
+    function _checkScrollEnd() {
+        if (_menuEl.scrollTop() + _menuEl.innerHeight() >= _menuEl[0].scrollHeight) {
+            $rootScope.$broadcast('lx-dropdown__scroll-end', lx.uuid);
         }
     }
 
@@ -113,28 +148,23 @@ function DropdownController(
      * Close dropdown.
      */
     function _close() {
-        lumx.isOpen = false;
+        lx.isOpen = false;
 
-        LumXDropdownService.resetActiveDropdownId();
-
-        LumXUtilsService.restoreBodyScroll();
+        LxDropdownService.unregisterDropdownId(lx.uuid);
 
         $timeout(() => {
             _menuEl
                 .removeAttr('style')
                 .hide()
+                .off('scroll', _checkScrollEnd)
                 .insertAfter(_toggleEl);
 
-            if (angular.isUndefined(lumx.escapeClose) || lumx.escapeClose) {
-                LumXEventSchedulerService.unregister(_idEventScheduler);
-                _idEventScheduler = undefined;
+            if (angular.isDefined(lx.closeOnClick) && !lx.closeOnClick) {
+                _menuEl.off('click keydown', _stopMenuPropagation);
             }
 
-            $document.off('click keydown keypress', _onDocumentClick);
-
-            if (angular.isDefined(_sourceEl)) {
-                _sourceEl.focus();
-            }
+            LxEventSchedulerService.unregister(_idEventScheduler);
+            _idEventScheduler = undefined;
         });
     }
 
@@ -153,7 +183,7 @@ function DropdownController(
             height: $window.innerHeight,
         };
 
-        if (lumx.overToggle) {
+        if (lx.overToggle) {
             availaibleHeight.above = toggleProps.top;
             availaibleHeight.below = windowProps.height - toggleProps.top;
         } else {
@@ -179,21 +209,21 @@ function DropdownController(
             width: $window.innerWidth,
         };
 
-        if (angular.isDefined(lumx.width)) {
-            if (lumx.width.indexOf('%') > -1) {
+        if (angular.isDefined(lx.width)) {
+            if (lx.width.indexOf('%') > -1) {
                 // eslint-disable-next-line no-magic-numbers
-                menuProps.minWidth = toggleProps.width * (lumx.width.slice(0, -1) / 100);
+                menuProps.width = toggleProps.width * (lx.width.slice(0, -1) / 100);
             } else {
-                menuProps.width = lumx.width;
+                menuProps.width = lx.width;
             }
         } else {
             menuProps.width = 'auto';
         }
 
-        if (lumx.position === 'left') {
+        if (!lx.position || lx.position === 'left') {
             menuProps.left = toggleProps.left;
             menuProps.right = 'auto';
-        } else if (lumx.position === 'right') {
+        } else if (lx.position === 'right') {
             menuProps.left = 'auto';
             menuProps.right = windowProps.width - toggleProps.width - toggleProps.left;
         }
@@ -201,17 +231,8 @@ function DropdownController(
         _menuEl.css({
             left: menuProps.left,
             right: menuProps.right,
+            width: menuProps.width,
         });
-
-        if (angular.isDefined(menuProps.minWidth)) {
-            _menuEl.css({
-                minWidth: menuProps.minWidth,
-            });
-        } else {
-            _menuEl.css({
-                width: menuProps.width,
-            });
-        }
     }
 
     /**
@@ -224,22 +245,28 @@ function DropdownController(
             height: $window.innerHeight,
         };
 
-        if (availaibleHeight.below > availaibleHeight.above) {
-            if (lumx.overToggle) {
+        if (availaibleHeight.below >= _MIN_SPACE_BELOW) {
+            menuProps.bottom = 'auto';
+
+            if (lx.overToggle) {
                 menuProps.top = availaibleHeight.above;
                 menuProps.maxHeight = availaibleHeight.below;
             } else {
                 // eslint-disable-next-line no-bitwise
-                menuProps.top = availaibleHeight.above + _toggleEl.outerHeight() + ~~lumx.offset;
+                menuProps.top = availaibleHeight.above + _toggleEl.outerHeight() + ~~lx.offset;
                 menuProps.maxHeight = availaibleHeight.below;
             }
-        } else if (lumx.overToggle) {
-            menuProps.bottom = windowProps.height - availaibleHeight.above - _toggleEl.outerHeight();
-            menuProps.maxHeight = availaibleHeight.above + _toggleEl.outerHeight();
-        } else {
-            // eslint-disable-next-line no-bitwise
-            menuProps.bottom = windowProps.height - availaibleHeight.above + ~~lumx.offset;
-            menuProps.maxHeight = availaibleHeight.above;
+        } else if (availaibleHeight.below < _MIN_SPACE_BELOW) {
+            menuProps.top = 'auto';
+
+            if (lx.overToggle) {
+                menuProps.bottom = windowProps.height - availaibleHeight.above - _toggleEl.outerHeight();
+                menuProps.maxHeight = availaibleHeight.above + _toggleEl.outerHeight();
+            } else {
+                // eslint-disable-next-line no-bitwise
+                menuProps.bottom = windowProps.height - availaibleHeight.above + ~~lx.offset;
+                menuProps.maxHeight = availaibleHeight.above;
+            }
         }
 
         menuProps.maxHeight -= _OFFSET_FROM_EDGE;
@@ -248,44 +275,32 @@ function DropdownController(
     }
 
     /**
-     * Close dropdown on echap key up.
-     *
-     * @param {Event} evt The key up event.
-     */
-    function _onKeyUp(evt) {
-        if (evt.keyCode === ESCAPE_KEY_CODE) {
-            LumXDropdownService.closeActiveDropdown();
-        }
-
-        evt.stopPropagation();
-    }
-
-    /**
      * Open dropdown.
      */
     function _open() {
-        LumXDropdownService.closeActiveDropdown();
-        LumXDropdownService.registerActiveDropdownId(lumx.uuid);
+        LxDropdownService.closeLastDropdown(true);
+        LxDropdownService.registerDropdownId(lx.uuid);
 
-        if (angular.isUndefined(lumx.escapeClose) || lumx.escapeClose) {
-            _idEventScheduler = LumXEventSchedulerService.register('keyup', _onKeyUp);
-        }
-
-        LumXDepthService.increase();
+        LxDepthService.increase();
 
         _menuEl
             .appendTo('body')
             .show()
-            .css({ position: 'fixed', zIndex: LumXDepthService.get() });
+            .css({ position: 'fixed', zIndex: LxDepthService.get() });
 
         $timeout(() => {
             _initHorizontalPosition();
             _initVerticalPosition();
 
-            lumx.isOpen = true;
-            LumXUtilsService.disableBodyScroll();
+            lx.isOpen = true;
 
-            $document.on('click keydown keypress', _onDocumentClick);
+            _menuEl.on('scroll', _checkScrollEnd);
+
+            if (angular.isDefined(lx.closeOnClick) && !lx.closeOnClick) {
+                _menuEl.on('click keydown', _stopMenuPropagation);
+            }
+
+            _idEventScheduler = LxEventSchedulerService.register('click keydown', _onDocumentEvent);
         });
     }
 
@@ -326,15 +341,15 @@ function DropdownController(
     /**
      * Toggle the dropdown on toggle click.
      *
-     * @param {Event} evt The sclick event.
+     * @param {Event} evt The click event.
      */
     function toggle(evt) {
         if (angular.isDefined(evt.target)) {
             _registerSource(angular.element(evt.target));
         }
 
-        if (lumx.isOpen) {
-            LumXDropdownService.closeActiveDropdown();
+        if (lx.isOpen) {
+            LxDropdownService.close(lx.uuid);
         } else {
             _open();
         }
@@ -342,9 +357,9 @@ function DropdownController(
 
     /////////////////////////////
 
-    lumx.registerMenu = registerMenu;
-    lumx.registerToggle = registerToggle;
-    lumx.toggle = toggle;
+    lx.registerMenu = registerMenu;
+    lx.registerToggle = registerToggle;
+    lx.toggle = toggle;
 
     /////////////////////////////
     //                         //
@@ -359,14 +374,24 @@ function DropdownController(
      * @param {string} dropdownId The dropdown identifier.
      * @param {Object} params     An optional object that holds extra parameters.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dropdown__open`, (evt, dropdownId, params) => {
-        if (dropdownId === lumx.uuid && !lumx.isOpen) {
-            registerToggle(angular.element(params.target));
+    $scope.$on('lx-dropdown__open', (evt, dropdownId, params) => {
+        if (dropdownId === lx.uuid && !lx.isOpen) {
+            let toggleEl;
 
-            if (angular.isDefined(params.source)) {
+            if (angular.isElement(params)) {
+                toggleEl = params;
+            } else if (angular.isString(params)) {
+                toggleEl = angular.element(params);
+            } else if (angular.isObject(params)) {
+                toggleEl = angular.element(params.target);
+            }
+
+            registerToggle(toggleEl);
+
+            if (angular.isObject(params) && angular.isDefined(params.source)) {
                 _registerSource(angular.element(params.source));
             } else {
-                _registerSource(angular.element(params.target));
+                _registerSource(toggleEl);
             }
 
             _open();
@@ -376,37 +401,70 @@ function DropdownController(
     /**
      * Close a given dropdown.
      *
-     * @param {Event}  evt        The dropdown open event.
-     * @param {Object} dropdownId The dropdown identifier.
+     * @param {Event}   evt               The dropdown open event.
+     * @param {Object}  dropdownId        The dropdown identifier.
+     * @param {boolean} onOpen            Whether the order has been asked on dropdown open or not.
+     * @param {boolean} isDocumentKeyDown Whether the order has been asked on document key down or not.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dropdown__close`, (evt, dropdownId) => {
-        if (dropdownId === lumx.uuid && lumx.isOpen) {
+    $scope.$on('lx-dropdown__close', (evt, dropdownId, onOpen, isDocumentKeyDown) => {
+        if (dropdownId === lx.uuid && lx.isOpen) {
+            if (onOpen && angular.isDefined(lx.closeOnClick) && !lx.closeOnClick) {
+                return;
+            }
+
             _close();
+
+            if (isDocumentKeyDown && angular.isDefined(_sourceEl)) {
+                _sourceEl.focus();
+            }
         }
     });
 
     /**
      * Update the active dropdown position.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dropdown__update`, () => {
-        if (LumXDropdownService.isOpen(lumx.uuid)) {
+    $scope.$on('lx-dropdown__update', () => {
+        if (LxDropdownService.isOpen(lx.uuid)) {
             _initHorizontalPosition();
             _initVerticalPosition();
         }
+    });
+
+    /**
+     * Close on destroy.
+     */
+    $scope.$on('$destroy', () => {
+        if (!lx.isOpen) {
+            return;
+        }
+
+        _close();
     });
 }
 
 /////////////////////////////
 
-function DropdownDirective() {
+function DropdownDirective($timeout) {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
-        ctrl.registerToggle(el.find(`.${CSS_PREFIX}-dropdown__toggle`));
-        ctrl.registerMenu(el.find(`.${CSS_PREFIX}-dropdown__menu`));
+        const toggleEl = el.find(`.${CSS_PREFIX}-dropdown__toggle`);
+        ctrl.registerToggle(toggleEl);
+
+        const menuEl = el.find(`.${CSS_PREFIX}-dropdown__menu`);
+        ctrl.registerMenu(menuEl);
 
         if (transclude.isSlotFilled('toggle')) {
-            ctrl.hasToggle = true;
+            el.addClass(`${CSS_PREFIX}-dropdown--has-toggle`);
+        }
+
+        if (toggleEl.length > 0) {
+            $timeout(() => {
+                toggleEl.find('button, a').on('click', (evt) => {
+                    ctrl.toggle(evt);
+                    scope.$apply();
+                });
+            });
         }
 
         attrs.$observe('id', (id) => {
@@ -417,29 +475,29 @@ function DropdownDirective() {
     return {
         bindToController: true,
         controller: DropdownController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            closeOnClick: '=?lumxCloseOnClick',
-            escapeClose: '=?lumxEscapeClose',
-            offset: '@?lumxOffset',
-            overToggle: '=?lumxOverToggle',
-            position: '@?lumxPosition',
-            width: '@?lumxWidth',
+            closeOnClick: '=?lxCloseOnClick',
+            escapeClose: '=?lxEscapeClose',
+            offset: '@?lxOffset',
+            overToggle: '=?lxOverToggle',
+            position: '@?lxPosition',
+            width: '@?lxWidth',
         },
         template,
         transclude: {
-            menu: `${COMPONENT_PREFIX}DropdownMenu`,
-            toggle: `?${COMPONENT_PREFIX}DropdownToggle`,
+            menu: 'lxDropdownMenu',
+            toggle: '?lxDropdownToggle',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dropdown`).directive(`${COMPONENT_PREFIX}Dropdown`, DropdownDirective);
+angular.module('lumx.dropdown').directive('lxDropdown', DropdownDirective);
 
 /////////////////////////////
 

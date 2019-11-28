@@ -1,5 +1,4 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -16,7 +15,7 @@ function RadioGroupDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.radio-button`).directive(`${COMPONENT_PREFIX}RadioGroup`, RadioGroupDirective);
+angular.module('lumx.radio-button').directive('lxRadioGroup', RadioGroupDirective);
 
 /////////////////////////////
 

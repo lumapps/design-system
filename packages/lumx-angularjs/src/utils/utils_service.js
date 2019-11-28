@@ -1,8 +1,4 @@
-import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from '@lumx/angularjs/constants/common_constants';
-
-/////////////////////////////
-
-function UtilsService($rootScope) {
+function UtilsService() {
     'ngInject';
 
     const service = this;
@@ -12,20 +8,6 @@ function UtilsService($rootScope) {
     //     Public functions    //
     //                         //
     /////////////////////////////
-
-    /**
-     * Disable body scroll.
-     */
-    function disableBodyScroll() {
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-scroll__disable`);
-    }
-
-    /**
-     * Restore body scroll.
-     */
-    function restoreBodyScroll() {
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-scroll__restore`);
-    }
 
     /**
      * Generate a unique identifier.
@@ -47,14 +29,12 @@ function UtilsService($rootScope) {
 
     /////////////////////////////
 
-    service.disableBodyScroll = disableBodyScroll;
-    service.restoreBodyScroll = restoreBodyScroll;
     service.generateUUID = generateUUID;
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.utils`).service(`${SERVICE_PREFIX}UtilsService`, UtilsService);
+angular.module('lumx.utils.utils').service('LxUtilsService', UtilsService);
 
 /////////////////////////////
 

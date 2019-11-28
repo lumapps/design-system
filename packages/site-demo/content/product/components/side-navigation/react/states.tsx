@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SideNavigationItem, SideNavigation, Emphasis } from '@lumx/react';
 import { mdiEmail } from '@lumx/icons';
+import { Emphasis, SideNavigation, SideNavigationItem } from '@lumx/react';
 
 const App = () => (
     <>

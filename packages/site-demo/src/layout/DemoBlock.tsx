@@ -11,7 +11,6 @@ import 'highlight.js/styles/github.css';
 
 interface IDemoBlockProps {
     demo: string;
-    disableGrid: boolean;
     engine: string;
     code: ICode;
     withThemeSwitcher: boolean;
@@ -117,7 +116,6 @@ function renderDemo(demo: IDemoModule | null | undefined, theme: Theme, engine: 
 
 const DemoBlock: React.FC<IDemoBlockProps> = ({
     code,
-    disableGrid = false,
     engine,
     withThemeSwitcher = false,
 }: IDemoBlockProps): ReactElement => {
@@ -134,7 +132,7 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
     return (
         <div className="demo-block">
             <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-theme-background-dark-N')}>
-                <div className={disableGrid ? '' : 'demo-grid'}>{renderDemo(demo, theme, engine)}</div>
+                {renderDemo(demo, theme, engine)}
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">

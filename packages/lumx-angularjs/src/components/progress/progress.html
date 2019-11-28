@@ -1,11 +1,5 @@
-<div
-    class="lumx-progress"
-    ng-class="{ 'lumx-progress--theme-light': !lumx.theme || lumx.theme === 'light',
-                'lumx-progress--theme-dark': lumx.theme === 'dark',
-                'lumx-progress--variant-circular': !lumx.variant || lumx.variant === 'circular',
-                'lumx-custom-colors': lumx.customColors }"
->
-    <div class="lumx-progress-circular" ng-if="::!lumx.variant || lumx.variant === 'circular'">
+<div class="lumx-progress" ng-class="lx.getClasses()">
+    <div class="lumx-progress-circular" ng-if="::!lx.variant || lx.variant === 'circular'">
         <div class="lumx-progress-circular__double-bounce1"></div>
         <div class="lumx-progress-circular__double-bounce2"></div>
 
@@ -14,7 +8,7 @@
         </svg>
     </div>
 
-    <div class="lumx-progress-linear" ng-if="::lumx.variant === 'linear'">
+    <div class="lumx-progress-linear" ng-if="::lx.variant === 'linear'">
         <div class="lumx-progress-linear__line1"></div>
         <div class="lumx-progress-linear__line2"></div>
     </div>

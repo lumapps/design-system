@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import classNames from 'classnames';
 import { Tab, Tabs, TabsLayout, Theme } from '@lumx/react';
+import classNames from 'classnames';
 
 const App = ({ theme }) => {
     const [activeTab, setActiveTab] = useState(0);

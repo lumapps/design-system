@@ -1,88 +1,97 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
+
+/////////////////////////////
+
+function GridController() {
+    'ngInject';
+
+    // eslint-disable-next-line consistent-this
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        orientation: 'horizontal',
+        wrap: 'nowrap',
+    };
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get grid classes.
+     *
+     * @return {Array} The list of grid classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const orientation = lx.orientation ? lx.orientation : _DEFAULT_PROPS.orientation;
+        const wrap = lx.wrap ? lx.wrap : _DEFAULT_PROPS.wrap;
+
+        classes.push(`${CSS_PREFIX}-grid--orientation-${orientation}`);
+        classes.push(`${CSS_PREFIX}-grid--wrap-${wrap}`);
+
+        if (lx.gutter) {
+            classes.push(`${CSS_PREFIX}-grid--gutter-${lx.gutter}`);
+        }
+
+        if (lx.hAlign) {
+            classes.push(`${CSS_PREFIX}-grid--h-align-${lx.hAlign}`);
+        }
+
+        if (lx.vAlign) {
+            classes.push(`${CSS_PREFIX}-grid--v-align-${lx.vAlign}`);
+        }
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
+}
 
 /////////////////////////////
 
 function GridDirective() {
     'ngInject';
 
-    function link(scope, el, attrs) {
-        const defaultProps = {
-            orientation: 'horizontal',
-            wrap: 'nowrap',
-        };
-
-        if (!attrs.lumxOrientation) {
-            el.addClass(`${CSS_PREFIX}-grid--orientation-${defaultProps.orientation}`);
-        }
-
-        attrs.$observe('lumxOrientation', (orientation) => {
-            if (!orientation) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*grid--orientation-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-grid--orientation-${orientation}`);
-        });
-
-        if (!attrs.lumxWrap) {
-            el.addClass(`${CSS_PREFIX}-grid--wrap-${defaultProps.wrap}`);
-        }
-
-        attrs.$observe('lumxWrap', (wrap) => {
-            if (!wrap) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*grid--wrap-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-grid--wrap-${wrap}`);
-        });
-
-        attrs.$observe('lumxHAlign', (hAlign) => {
-            if (!hAlign) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*grid--hAlign-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-grid--h-align-${hAlign}`);
-        });
-
-        attrs.$observe('lumxVAlign', (vAlign) => {
-            if (!vAlign) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*grid--vAlign-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-grid--v-align-${vAlign}`);
-        });
-
-        attrs.$observe('lumxGutter', (gutter) => {
-            if (!gutter) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*grid--gutter-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-grid--gutter-${gutter}`);
-        });
-    }
-
     return {
-        link,
+        bindToController: true,
+        controller: GridController,
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
-        template: '<div class="lumx-grid" ng-transclude></div>',
+        scope: {
+            gutter: '@?lxGutter',
+            hAlign: '@?lxHAlign',
+            orientation: '@?lxOrientation',
+            vAlign: '@?lxVAlign',
+            wrap: '@?lxWrap',
+        },
+        template: '<div class="lumx-grid" ng-class="lx.getClasses()" ng-transclude></div>',
         transclude: true,
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.grid`).directive(`${COMPONENT_PREFIX}Grid`, GridDirective);
+angular.module('lumx.grid').directive('lxGrid', GridDirective);
 
 /////////////////////////////
 

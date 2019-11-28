@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Popover, Placement } from '@lumx/react';
+import { Placement, Popover } from '@lumx/react';
 
 const App = ({ theme }) => {
     const demoAnchorStyle = {
@@ -64,6 +64,7 @@ const App = ({ theme }) => {
                     </div>
                 </div>
             </div>
+
             <Popover popoverRef={popoverRef} isVisible={isVisible} popoverRect={computedPosition}>
                 <div style={demoPopperStyle}>
                     {

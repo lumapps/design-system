@@ -1,7 +1,5 @@
 import { mdiDragVertical } from '@lumx/icons';
 
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
 import template from './drag-handle.html';
 
 /////////////////////////////
@@ -10,7 +8,7 @@ function DragHandleController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -23,7 +21,7 @@ function DragHandleController() {
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiDragVertical,
     };
 }
@@ -36,11 +34,11 @@ function DragHandleDirective() {
     return {
         bindToController: true,
         controller: DragHandleController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {
-            theme: '@?lumxTheme',
+            theme: '@?lxTheme',
         },
         template,
     };
@@ -48,7 +46,7 @@ function DragHandleDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.drag-handle`).directive(`${COMPONENT_PREFIX}DragHandle`, DragHandleDirective);
+angular.module('lumx.drag-handle').directive('lxDragHandle', DragHandleDirective);
 
 /////////////////////////////
 

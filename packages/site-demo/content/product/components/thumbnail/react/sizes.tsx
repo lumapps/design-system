@@ -1,19 +1,20 @@
 import React from 'react';
 
-import { Size, Thumbnail } from '@lumx/react';
+import { Alignment, Grid, Orientation, Size, Thumbnail } from '@lumx/react';
 
-const App = ({ theme }) => (
-    <>
-        <Thumbnail image="https://picsum.photos/28" size={Size.xxs} theme={theme} />
-        <Thumbnail image="https://picsum.photos/40" size={Size.xs} theme={theme} />
-        <Thumbnail image="https://picsum.photos/48" size={Size.s} theme={theme} />
-        <Thumbnail image="https://picsum.photos/72" size={Size.m} theme={theme} />
-        <Thumbnail image="https://picsum.photos/128" size={Size.l} theme={theme} />
-        <Thumbnail image="https://picsum.photos/256" size={Size.xl} theme={theme} />
+const App = () => (
+    <Grid orientation={Orientation.horizontal} vAlign={Alignment.spaceBetween}>
+        <Thumbnail image="https://picsum.photos/28" size={Size.xxs} />
+        <Thumbnail image="https://picsum.photos/40" size={Size.xs} />
+        <Thumbnail image="https://picsum.photos/48" size={Size.s} />
+        <Thumbnail image="https://picsum.photos/72" size={Size.m} />
+        <Thumbnail image="https://picsum.photos/128" size={Size.l} />
+        <Thumbnail image="https://picsum.photos/256" size={Size.xl} />
+
         <div style={{ width: 300 }}>
-            <Thumbnail image="https://picsum.photos/400" size={Size.unset} theme={theme} />
+            <Thumbnail image="https://picsum.photos/400" />
         </div>
-    </>
+    </Grid>
 );
 
 export default App;

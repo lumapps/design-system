@@ -4,7 +4,7 @@ import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 import { Avatar, ButtonEmphasis, IconButton, Size, Theme } from '@lumx/react';
 
 const App = ({ theme }) => (
-    <>
+    <div className="demo-grid">
         <Avatar theme={theme} image="http://i.pravatar.cc/40" size={Size.xs} />
         <Avatar theme={theme} image="http://i.pravatar.cc/48" size={Size.s} />
         <Avatar theme={theme} image="http://i.pravatar.cc/72" size={Size.m} />
@@ -47,7 +47,7 @@ const App = ({ theme }) => (
                 </div>
             }
         />
-    </>
+    </div>
 );
 
 export default App;

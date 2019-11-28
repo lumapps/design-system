@@ -6,17 +6,9 @@ const App = ({ theme }) => {
     const [value, setValue] = useState(20);
     return (
         <>
-            <Slider
-                className="demo-slider-half-width"
-                max={100}
-                min={0}
-                hideMinMaxlabel
-                theme={theme}
-                value={value}
-                onChange={setValue}
-            />
+            <Slider max={100} min={0} hideMinMaxlabel theme={theme} value={value} onChange={setValue} />
         </>
-    )
+    );
 };
 
 export default App;

@@ -2,8 +2,8 @@ import React, { useCallback, useState } from 'react';
 
 import orderBy from 'lodash/orderBy';
 
-import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow, ThOrder, ThScope } from '@lumx/react';
 import { mdiCommentOutline } from '@lumx/icons';
+import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow, ThOrder, ThScope } from '@lumx/react';
 
 const App = ({ theme }) => {
     const [tableHeader, setTableHeader] = useState([
@@ -59,10 +59,12 @@ const App = ({ theme }) => {
     const handleSort = useCallback(
         (header) => {
             const sortOrder = header.sortOrder === ThOrder.asc ? ThOrder.desc : ThOrder.asc;
-            setTableHeader(tableHeader.map(h => ({
-                ...h,
-                sortOrder: h.name === header.name ? sortOrder : null,
-            })));
+            setTableHeader(
+                tableHeader.map((h) => ({
+                    ...h,
+                    sortOrder: h.name === header.name ? sortOrder : null,
+                })),
+            );
             setTableBody(orderBy(tableBody, header.name, sortOrder));
         },
         [tableHeader, tableBody],
@@ -73,7 +75,7 @@ const App = ({ theme }) => {
             <Table hasDividers theme={theme}>
                 <TableHeader>
                     <TableRow>
-                        {tableHeader.map((header) =>  (
+                        {tableHeader.map((header) => (
                             <TableCell
                                 key={header.name}
                                 icon={header.icon}

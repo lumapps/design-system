@@ -1,5 +1,3 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
 import template from './table-row.html';
 
 /////////////////////////////
@@ -8,7 +6,7 @@ function TableRowController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -21,7 +19,7 @@ function TableRowController() {
      *
      * @type {Object}
      */
-    lumx.parentController = undefined;
+    lx.parentController = undefined;
 }
 
 /////////////////////////////
@@ -39,13 +37,14 @@ function TableRowDirective() {
     return {
         bindToController: true,
         controller: TableRowController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
-        require: [`${COMPONENT_PREFIX}TableRow`, `^${COMPONENT_PREFIX}Table`, `?^${COMPONENT_PREFIX}TableBody`],
+        require: ['lxTableRow', '^lxTable', '?^lxTableBody'],
         restrict: 'E',
         scope: {
-            isSelected: '=?lumxIsSelected',
+            isClickable: '=?lxIsClickable',
+            isSelected: '=?lxIsSelected',
         },
         template,
         transclude: true,
@@ -54,7 +53,7 @@ function TableRowDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.table`).directive(`${COMPONENT_PREFIX}TableRow`, TableRowDirective);
+angular.module('lumx.table').directive('lxTableRow', TableRowDirective);
 
 /////////////////////////////
 

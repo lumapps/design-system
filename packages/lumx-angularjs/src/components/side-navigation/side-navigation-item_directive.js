@@ -1,6 +1,6 @@
 import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
 
 import template from './side-navigation-item.html';
 
@@ -10,7 +10,24 @@ function SideNavigationItemController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        emphasis: 'medium',
+    };
 
     /////////////////////////////
     //                         //
@@ -23,14 +40,14 @@ function SideNavigationItemController() {
      *
      * @type {boolean}
      */
-    lumx.hasChildren = false;
+    lx.hasChildren = false;
 
     /**
      * The side navigation item icons.
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiChevronDown,
         mdiChevronUp,
     };
@@ -42,19 +59,39 @@ function SideNavigationItemController() {
     /////////////////////////////
 
     /**
+     * Get side navigation item classes.
+     *
+     * @return {Array} The list of side navigation item classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const emphasis = lx.emphasis ? lx.emphasis : _DEFAULT_PROPS.emphasis;
+
+        classes.push(`${CSS_PREFIX}-side-navigation-item--emphasis-${emphasis}`);
+
+        if (lx.isSelected) {
+            classes.push(`${CSS_PREFIX}-side-navigation-item--is-selected`);
+        }
+
+        return classes;
+    }
+
+    /**
      * Handle click event on side navigation item link.
      */
     function handleClick() {
-        if (angular.isFunction(lumx.onClick)) {
-            lumx.onClick();
+        if (angular.isFunction(lx.onClick)) {
+            lx.onClick();
         } else {
-            lumx.isOpen = !lumx.isOpen;
+            lx.isOpen = !lx.isOpen;
         }
     }
 
     /////////////////////////////
 
-    lumx.handleClick = handleClick;
+    lx.getClasses = getClasses;
+    lx.handleClick = handleClick;
 }
 
 /////////////////////////////
@@ -73,17 +110,17 @@ function SideNavigationItemDirective() {
     return {
         bindToController: true,
         controller: SideNavigationItemController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            emphasis: '@?lumxEmphasis',
-            icon: '@?lumxIcon',
-            isOpen: '=?lumxIsOpen',
-            isSelected: '=?lumxIsSelected',
-            label: '@lumxLabel',
-            onClick: '&?lumxOnClick',
+            emphasis: '@?lxEmphasis',
+            icon: '@?lxIcon',
+            isOpen: '=?lxIsOpen',
+            isSelected: '=?lxIsSelected',
+            label: '@lxLabel',
+            onClick: '&?lxOnClick',
         },
         template,
         transclude: true,
@@ -92,9 +129,7 @@ function SideNavigationItemDirective() {
 
 /////////////////////////////
 
-angular
-    .module(`${MODULE_NAME}.side-navigation`)
-    .directive(`${COMPONENT_PREFIX}SideNavigationItem`, SideNavigationItemDirective);
+angular.module('lumx.side-navigation').directive('lxSideNavigationItem', SideNavigationItemDirective);
 
 /////////////////////////////
 

@@ -1,37 +1,29 @@
 <a
     class="lumx-chip"
-    ng-class="{ 'lumx-chip--has-before': lumx.hasBefore,
-                'lumx-chip--has-after': lumx.hasAfter || lumx.hasDropdownIndicator,
-                'lumx-chip--is-unselected': !lumx.isSelected,
-                'lumx-chip--is-selected': lumx.isSelected,
-                'lumx-chip--is-clickable': lumx.onClick,
-                'lumx-chip--is-disabled': lumx.isDisabled,
-                'lumx-chip--size-m': !lumx.size || lumx.size === 'm',
-                'lumx-chip--size-s': lumx.size === 's',
-                'lumx-custom-colors': lumx.customColors }"
-    ng-click="lumx.handleOnClick($event)"
-    lumx-enter-keypress="lumx.handleOnClick($event)"
-    tabindex="{{ lumx.isDisabled || !lumx.onClick ? -1 : 0 }}"
+    ng-class="lx.getClasses()"
+    ng-click="lx.handleOnClick($event)"
+    lx-enter-keydown="lx.handleOnClick($event)"
+    tabindex="{{ lx.isDisabled || !lx.onClick ? -1 : 0 }}"
 >
     <div
         class="lumx-chip__before"
-        ng-class="{ 'lumx-chip__before--is-clickable': lumx.onBeforeClick }"
-        ng-click="lumx.handleOnBeforeClick($event)"
+        ng-class="{ 'lumx-chip__before--is-clickable': lx.onBeforeClick }"
+        ng-click="lx.handleOnBeforeClick($event)"
         ng-transclude="before"
-        ng-if="::lumx.hasBefore"
+        ng-if="::lx.hasBefore"
     ></div>
 
     <div class="lumx-chip__label" ng-transclude="label"></div>
 
     <div
         class="lumx-chip__after"
-        ng-class="{ 'lumx-chip__after--is-clickable': lumx.onAfterClick }"
-        ng-click="lumx.handleOnAfterClick($event)"
+        ng-class="{ 'lumx-chip__after--is-clickable': lx.onAfterClick }"
+        ng-click="lx.handleOnAfterClick($event)"
         ng-transclude="after"
-        ng-if="lumx.hasAfter && !lumx.hasDropdownIndicator"
+        ng-if="lx.hasAfter && !lx.hasDropdownIndicator"
     ></div>
 
-    <div class="lumx-chip__after" ng-if="lumx.hasDropdownIndicator">
-        <lumx-icon lumx-path="{{ lumx.icons.mdiMenuDown }}" lumx-size="xs"></lumx-icon>
+    <div class="lumx-chip__after" ng-if="lx.hasDropdownIndicator">
+        <lx-icon lx-path="{{ lx.icons.mdiMenuDown }}" lx-size="xs"></lx-icon>
     </div>
 </a>

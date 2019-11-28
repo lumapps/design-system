@@ -1,6 +1,5 @@
 import './lumx';
 import './utils';
-import './constants';
 
 import './components/avatar/avatar_directive';
 import './components/button/button_directive';
@@ -16,7 +15,6 @@ import './components/divider/divider_directive';
 import './components/drag-handle/drag-handle_directive';
 import './components/dropdown/dropdown_directive';
 import './components/dropdown/dropdown_service';
-import './components/editable-media/editable-media_directive';
 import './components/expansion-panel/expansion-panel_directive';
 import './components/grid/grid_directive';
 import './components/grid/grid-item_directive';

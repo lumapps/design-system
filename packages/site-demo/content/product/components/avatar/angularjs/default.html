@@ -1,43 +1,45 @@
-<lumx-avatar lumx-image="http://i.pravatar.cc/40" lumx-size="xs"></lumx-avatar>
-<lumx-avatar lumx-image="http://i.pravatar.cc/48" lumx-size="s"></lumx-avatar>
-<lumx-avatar lumx-image="http://i.pravatar.cc/72" lumx-size="m"></lumx-avatar>
-<lumx-avatar lumx-image="http://i.pravatar.cc/128" lumx-size="l"></lumx-avatar>
-<lumx-avatar lumx-image="http://i.pravatar.cc/256" lumx-size="xl">
-    <lumx-avatar-actions>
-        <lumx-grid lumx-v-align="center">
-            <lumx-button
-                class="lumx-spacing-margin-right-regular"
-                lumx-color="dark"
-                lumx-emphasis="low"
-                lumx-has-background="true"
-                lumx-size="s"
-                lumx-variant="icon"
-            >
-                <lumx-icon lumx-path="{{ vm.icons.mdiPencil }}"></lumx-icon>
-            </lumx-button>
+<div class="demo-grid">
+    <lx-avatar lx-image="http://i.pravatar.cc/40" lx-size="xs"></lx-avatar>
+    <lx-avatar lx-image="http://i.pravatar.cc/48" lx-size="s"></lx-avatar>
+    <lx-avatar lx-image="http://i.pravatar.cc/72" lx-size="m"></lx-avatar>
+    <lx-avatar lx-image="http://i.pravatar.cc/128" lx-size="l"></lx-avatar>
+    <lx-avatar lx-image="http://i.pravatar.cc/256" lx-size="xl">
+        <lx-avatar-actions>
+            <lx-grid lx-v-align="center">
+                <lx-button
+                    class="lumx-spacing-margin-right-regular"
+                    lx-color="dark"
+                    lx-emphasis="low"
+                    lx-has-background="true"
+                    lx-size="s"
+                    lx-variant="icon"
+                >
+                    <lx-icon lx-path="{{ vm.icons.mdiPencil }}"></lx-icon>
+                </lx-button>
 
-            <lumx-button
-                class="lumx-spacing-margin-right-regular"
-                lumx-color="dark"
-                lumx-emphasis="low"
-                lumx-has-background="true"
-                lumx-size="s"
-                lumx-variant="icon"
-                ng-click="vm.openLightbox()"
-            >
-                <lumx-icon lumx-path="{{ vm.icons.mdiEye }}"></lumx-icon>
-            </lumx-button>
+                <lx-button
+                    class="lumx-spacing-margin-right-regular"
+                    lx-color="dark"
+                    lx-emphasis="low"
+                    lx-has-background="true"
+                    lx-size="s"
+                    lx-variant="icon"
+                    ng-click="vm.openLightbox()"
+                >
+                    <lx-icon lx-path="{{ vm.icons.mdiEye }}"></lx-icon>
+                </lx-button>
 
-            <lumx-button
-                lumx-color="dark"
-                lumx-emphasis="low"
-                lumx-has-background="true"
-                lumx-size="s"
-                lumx-variant="icon"
-                ng-click="vm.removeImage()"
-            >
-                <lumx-icon lumx-path="{{ vm.icons.mdiDelete }}"></lumx-icon>
-            </lumx-button>
-        </lumx-grid>
-    </lumx-avatar-actions>
-</lumx-avatar>
+                <lx-button
+                    lx-color="dark"
+                    lx-emphasis="low"
+                    lx-has-background="true"
+                    lx-size="s"
+                    lx-variant="icon"
+                    ng-click="vm.removeImage()"
+                >
+                    <lx-icon lx-path="{{ vm.icons.mdiDelete }}"></lx-icon>
+                </lx-button>
+            </lx-grid>
+        </lx-avatar-actions>
+    </lx-avatar>
+</div>

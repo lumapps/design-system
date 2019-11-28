@@ -1,19 +1,19 @@
-<div>
-    <lumx-button ng-click="vm.openDialog(vm.dialogIds[0], vm.sourceIds[0])" id="{{ vm.sourceIds[0] }}">
+<div class="demo-grid">
+    <lx-button ng-click="vm.openDialog(vm.dialogIds[0], vm.sourceIds[0])" id="{{ vm.sourceIds[0] }}">
         Open dialog
-    </lumx-button>
+    </lx-button>
 </div>
 
-<lumx-dialog id="{{ vm.dialogIds[0] }}">
-    <lumx-dialog-header>
-        <lumx-toolbar>
-            <lumx-toolbar-label>
+<lx-dialog id="{{ vm.dialogIds[0] }}">
+    <lx-dialog-header>
+        <lx-toolbar>
+            <lx-toolbar-label>
                 <span class="lumx-typography-title">Default dialog</span>
-            </lumx-toolbar-label>
-        </lumx-toolbar>
-    </lumx-dialog-header>
+            </lx-toolbar-label>
+        </lx-toolbar>
+    </lx-dialog-header>
 
-    <lumx-dialog-content>
+    <lx-dialog-content>
         <div class="lumx-spacing-padding-horizontal-huge">
             <p>
                 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros Afros.
@@ -29,16 +29,16 @@
                 Quisque ut dolor gravida, placerat libero vel, euismod.
             </p>
         </div>
-    </lumx-dialog-content>
+    </lx-dialog-content>
 
-    <lumx-dialog-footer>
-        <lumx-toolbar>
-            <lumx-toolbar-after>
-                <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
-                <lumx-button class="lumx-spacing-margin-left-regular" lumx-dialog-close lumx-focus-on-init>
+    <lx-dialog-footer>
+        <lx-toolbar>
+            <lx-toolbar-after>
+                <lx-button lx-emphasis="medium" lx-dialog-close>Cancel</lx-button>
+                <lx-button class="lumx-spacing-margin-left-regular" lx-dialog-close lx-focus-on-init>
                     Save
-                </lumx-button>
-            </lumx-toolbar-after>
-        </lumx-toolbar>
-    </lumx-dialog-footer>
-</lumx-dialog>
+                </lx-button>
+            </lx-toolbar-after>
+        </lx-toolbar>
+    </lx-dialog-footer>
+</lx-dialog>

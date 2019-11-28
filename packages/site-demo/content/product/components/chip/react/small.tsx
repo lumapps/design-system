@@ -8,17 +8,19 @@ const App = ({ theme }) => {
     const onClick = () => console.log('clicked chip');
 
     return (
-        <>
+        <div className="demo-grid">
             <Chip theme={theme} size={Size.s}>
                 Default
             </Chip>
+
             <Chip theme={theme} size={Size.s} before={<Icon icon={mdiEmail} size={Size.xxs} />}>
                 Rich
             </Chip>
+
             <Chip theme={theme} size={Size.s} after={<Icon icon={mdiClose} size={Size.xxs} />} onClick={onClick}>
                 Dismissible
             </Chip>
-        </>
+        </div>
     );
 };
 

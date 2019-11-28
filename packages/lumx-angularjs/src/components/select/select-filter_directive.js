@@ -1,5 +1,4 @@
-import { CSS_PREFIX, DOWN_KEY_CODE } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
+import { CSS_PREFIX, DOWN_KEY_CODE, ESCAPE_KEY_CODE } from '@lumx/core/constants';
 
 /////////////////////////////
 
@@ -7,7 +6,11 @@ function SelectFilterDirective() {
     'ngInject';
 
     function link(scope, el) {
-        el.focus().on('click keydown keypress', (evt) => {
+        el.focus().on('click keydown', (evt) => {
+            if (evt.keyCode === ESCAPE_KEY_CODE) {
+                return;
+            }
+
             evt.stopPropagation();
 
             if (evt.keyCode === DOWN_KEY_CODE) {
@@ -31,7 +34,7 @@ function SelectFilterDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.select`).directive(`${COMPONENT_PREFIX}SelectFilter`, SelectFilterDirective);
+angular.module('lumx.select').directive('lxSelectFilter', SelectFilterDirective);
 
 /////////////////////////////
 

@@ -2,7 +2,7 @@ import { mdiDotsVertical, mdiHeart, mdiReply } from '@lumx/icons';
 
 /////////////////////////////
 
-function DemoController(LumXNotificationService) {
+function DemoController(LxNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -70,21 +70,21 @@ function DemoController(LumXNotificationService) {
      * Callback on user block click.
      */
     function onClick() {
-        LumXNotificationService.success('Click callback');
+        LxNotificationService.success('Click callback');
     }
 
     /**
      * Callback on user block mouse enter.
      */
     function onMouseEnter() {
-        LumXNotificationService.success('Mouse enter callback');
+        LxNotificationService.success('Mouse enter callback');
     }
 
     /**
      * Callback on user block mouse leave.
      */
     function onMouseLeave() {
-        LumXNotificationService.success('Mouse leave callback');
+        LxNotificationService.success('Mouse leave callback');
     }
 
     /////////////////////////////

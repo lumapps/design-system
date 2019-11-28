@@ -1,4 +1,4 @@
-function DemoController(LumXLightboxService) {
+function DemoController(LxLightboxService) {
     'ngInject';
 
     const vm = this;
@@ -23,6 +23,13 @@ function DemoController(LumXLightboxService) {
      */
     vm.sourceId = 'lightbox-demo-source';
 
+    /**
+     * The list of tags.
+     *
+     * @type {Array}
+     */
+    vm.tags = ['Tag 1', 'Tag 2'];
+
     /////////////////////////////
     //                         //
     //     Public functions    //
@@ -33,7 +40,7 @@ function DemoController(LumXLightboxService) {
      * Open the lightbox.
      */
     function openLightbox() {
-        LumXLightboxService.open(vm.lightboxId, {
+        LxLightboxService.open(vm.lightboxId, {
             source: `#${vm.sourceId}`,
         });
     }

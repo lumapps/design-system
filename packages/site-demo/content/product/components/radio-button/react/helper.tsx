@@ -17,6 +17,7 @@ const App = ({ theme }) => {
                     value="lorem"
                     onChange={setValue}
                 />
+
                 <RadioButton
                     disabled
                     helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
@@ -25,6 +26,7 @@ const App = ({ theme }) => {
                     theme={theme}
                     value="ipsum"
                 />
+
                 <RadioButton
                     checked={value === 'dolor'}
                     helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."

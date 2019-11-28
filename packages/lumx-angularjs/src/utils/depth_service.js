@@ -1,7 +1,3 @@
-import { MODULE_NAME, SERVICE_PREFIX } from '@lumx/angularjs/constants/common_constants';
-
-/////////////////////////////
-
 function DepthService() {
     'ngInject';
 
@@ -47,11 +43,16 @@ function DepthService() {
 
     service.get = get;
     service.increase = increase;
+
+    // Backward compatibility.
+
+    service.getDepth = get;
+    service.register = increase;
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.depth`).service(`${SERVICE_PREFIX}DepthService`, DepthService);
+angular.module('lumx.utils.depth').service('LxDepthService', DepthService);
 
 /////////////////////////////
 

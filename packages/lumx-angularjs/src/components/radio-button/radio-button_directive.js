@@ -1,21 +1,31 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './radio-button.html';
 
 /////////////////////////////
 
-function RadioButtonController(LumXUtilsService) {
+function RadioButtonController(LxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        theme: 'light',
+    };
 
     /**
      * The model controller.
@@ -35,48 +45,69 @@ function RadioButtonController(LumXUtilsService) {
      *
      * @type {string}
      */
-    lumx.radioButtonId = LumXUtilsService.generateUUID();
+    lx.radioButtonId = LxUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasHelper = false;
+    lx.hasHelper = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasLabel = false;
+    lx.hasLabel = false;
 
     /**
      * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */
-    lumx.hasTranscluded = false;
+    lx.hasTranscluded = false;
 
     /**
      * The radio button value.
      *
      * @type {string}
      */
-    lumx.radioButtonValue = undefined;
+    lx.radioButtonValue = undefined;
 
     /**
      * The model view value.
      *
      * @type {string}
      */
-    lumx.viewValue = undefined;
+    lx.viewValue = undefined;
 
     /////////////////////////////
     //                         //
     //     Public functions    //
     //                         //
     /////////////////////////////
+
+    /**
+     * Get radio button classes.
+     *
+     * @return {Array} The list of radio button classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const state = lx.viewValue === lx.radioButtonValue ? 'checked' : 'unchecked';
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-radio-button--is-${state}`);
+        classes.push(`${CSS_PREFIX}-radio-button--theme-${theme}`);
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
+    }
 
     /**
      * Set the model controller.
@@ -87,7 +118,7 @@ function RadioButtonController(LumXUtilsService) {
         _modelController = modelController;
 
         _modelController.$render = function onModelRender() {
-            lumx.viewValue = _modelController.$viewValue;
+            lx.viewValue = _modelController.$viewValue;
         };
     }
 
@@ -99,14 +130,15 @@ function RadioButtonController(LumXUtilsService) {
             return;
         }
 
-        _modelController.$setViewValue(lumx.radioButtonValue);
+        _modelController.$setViewValue(lx.radioButtonValue);
         _modelController.$render();
     }
 
     /////////////////////////////
 
-    lumx.setModelController = setModelController;
-    lumx.updateViewValue = updateViewValue;
+    lx.getClasses = getClasses;
+    lx.setModelController = setModelController;
+    lx.updateViewValue = updateViewValue;
 }
 
 /////////////////////////////
@@ -159,26 +191,26 @@ function RadioButtonDirective() {
     return {
         bindToController: true,
         controller: RadioButtonController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
-        require: [`${COMPONENT_PREFIX}RadioButton`, '?ngModel'],
+        require: ['lxRadioButton', '?ngModel'],
         restrict: 'E',
         scope: {
-            customColors: '=?lumxCustomColors',
-            theme: '@?lumxTheme',
+            customColors: '=?lxCustomColors',
+            theme: '@?lxTheme',
         },
         template,
         transclude: {
-            helper: `?${COMPONENT_PREFIX}RadioButtonHelper`,
-            label: `?${COMPONENT_PREFIX}RadioButtonLabel`,
+            helper: '?lxRadioButtonHelp',
+            label: '?lxRadioButtonLabel',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.radio-button`).directive(`${COMPONENT_PREFIX}RadioButton`, RadioButtonDirective);
+angular.module('lumx.radio-button').directive('lxRadioButton', RadioButtonDirective);
 
 /////////////////////////////
 

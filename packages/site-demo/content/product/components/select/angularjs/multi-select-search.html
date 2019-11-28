@@ -1,19 +1,19 @@
-<lumx-select
+<lx-select
     ng-change="vm.selectCallback()"
     ng-model="vm.selectAjax.selected"
-    lumx-choices="vm.selectAjax.list"
-    lumx-filter="vm.selectAjax.update(newValue)"
-    lumx-has-filter="true"
-    lumx-has-helper="!vm.selectAjax.list.length"
-    lumx-helper="No results"
-    lumx-is-loading="vm.selectAjax.loading"
-    lumx-label="Select label"
-    lumx-multiple="true"
-    lumx-model-to-selection="vm.selectAjax.toSelection(data, callback)"
-    lumx-selection-to-model="vm.selectAjax.toModel(data, callback)"
-    lumx-placeholder="Select values"
-    lumx-theme="{{ theme }}"
+    lx-choices="vm.selectAjax.list"
+    lx-filter="vm.selectAjax.update(newValue)"
+    lx-display-filter="true"
+    lx-helper="!vm.selectAjax.list.length"
+    lx-helper-message="No results"
+    lx-loading="vm.selectAjax.loading"
+    lx-label="Select label"
+    lx-multiple="true"
+    lx-model-to-selection="vm.selectAjax.toSelection(data, callback)"
+    lx-selection-to-model="vm.selectAjax.toModel(data, callback)"
+    lx-placeholder="Select values"
+    lx-theme="{{ theme }}"
 >
-    <lumx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</lumx-select-selected>
-    <lumx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</lumx-select-choices>
-</lumx-select>
+    <lx-select-selected>{{ $selected.name }} (Born in {{ $selected.birth_year }})</lx-select-selected>
+    <lx-select-choices>{{ $choice.name }} (Appears in {{ $choice.films.length }} films)</lx-select-choices>
+</lx-select>

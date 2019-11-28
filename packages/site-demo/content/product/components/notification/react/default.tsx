@@ -97,25 +97,29 @@ const App = ({ theme }) => {
     };
 
     return (
-        <>
+        <div className="demo-grid">
             <Button type="button" theme={theme} onClick={() => open('info')}>
                 Info
             </Button>
+
             <Button type="button" theme={theme} onClick={() => open('success')}>
                 Success
             </Button>
+
             <Button type="button" theme={theme} onClick={() => open('warning')}>
                 Warning
             </Button>
+
             <Button type="button" theme={theme} onClick={() => open('error')}>
                 Error
             </Button>
+
             <Button type="button" theme={theme} onClick={() => open('infoWithCallback')}>
                 Info with callback
             </Button>
 
             {notificationProps !== null && <Notification {...notificationProps} />}
-        </>
+        </div>
     );
 };
 

@@ -1,5 +1,4 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './toolbar.html';
 
@@ -9,7 +8,7 @@ function ToolbarController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -22,21 +21,21 @@ function ToolbarController() {
      *
      * @type {boolean}
      */
-    lumx.hasAfter = false;
+    lx.hasAfter = false;
 
     /**
      * Whether the directive has before slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasBefore = false;
+    lx.hasBefore = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasLabel = false;
+    lx.hasLabel = false;
 }
 
 /////////////////////////////
@@ -64,22 +63,22 @@ function ToolbarDirective() {
     return {
         bindToController: true,
         controller: ToolbarController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         template,
         transclude: {
-            after: `?${COMPONENT_PREFIX}ToolbarAfter`,
-            before: `?${COMPONENT_PREFIX}ToolbarBefore`,
-            label: `?${COMPONENT_PREFIX}ToolbarLabel`,
+            after: '?lxToolbarAfter',
+            before: '?lxToolbarBefore',
+            label: '?lxToolbarLabel',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.toolbar`).directive(`${COMPONENT_PREFIX}Toolbar`, ToolbarDirective);
+angular.module('lumx.toolbar').directive('lxToolbar', ToolbarDirective);
 
 /////////////////////////////
 

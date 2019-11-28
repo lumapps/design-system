@@ -1,77 +1,73 @@
-<lumx-post-block
-    lumx-meta="{{ vm.postBlock.meta }}"
-    lumx-text="{{ vm.postBlock.text }}"
-    lumx-thumbnail="{{ vm.postBlock.thumbnail }}"
-    lumx-thumbnail-aspect-ratio="{{ vm.postBlock.thumbnailAspectRatio }}"
-    lumx-title="{{ vm.postBlock.title }}"
+<lx-post-block
+    lx-meta="{{ vm.postBlock.meta }}"
+    lx-text="{{ vm.postBlock.text }}"
+    lx-thumbnail="{{ vm.postBlock.thumbnail }}"
+    lx-thumbnail-aspect-ratio="{{ vm.postBlock.thumbnailAspectRatio }}"
+    lx-title="{{ vm.postBlock.title }}"
+    lx-theme="{{ theme }}"
 >
-    <lumx-post-block-author>
-        <lumx-user-block
-            lumx-avatar="http://i.pravatar.cc/128"
-            lumx-name="Matthias Manoukian"
-            lumx-size="s"
-            lumx-theme="{{ theme }}"
-        ></lumx-user-block>
-    </lumx-post-block-author>
+    <lx-post-block-author>
+        <lx-user-block
+            lx-avatar="http://i.pravatar.cc/128"
+            lx-name="Matthias Manoukian"
+            lx-size="s"
+            lx-theme="{{ theme }}"
+        ></lx-user-block>
+    </lx-post-block-author>
 
-    <lumx-post-block-attachments>
-        <lumx-list>
-            <lumx-list-item lumx-size="tiny">
-                <lumx-list-item-before>
-                    <lumx-icon lumx-path="{{ vm.icons.mdiComment }}" lumx-size="xs"></lumx-icon>
-                </lumx-list-item-before>
+    <lx-post-block-attachments>
+        <lx-list>
+            <lx-list-item lx-size="tiny">
+                <lx-list-item-before>
+                    <lx-icon lx-path="{{ vm.icons.mdiComment }}" lx-size="xs"></lx-icon>
+                </lx-list-item-before>
 
-                <lumx-list-item-content>
+                <lx-list-item-content>
                     Single-line item
-                </lumx-list-item-content>
-            </lumx-list-item>
+                </lx-list-item-content>
+            </lx-list-item>
 
-            <lumx-list-item lumx-size="tiny">
-                <lumx-list-item-before>
-                    <lumx-icon lumx-path="{{ vm.icons.mdiComment }}" lumx-size="xs"></lumx-icon>
-                </lumx-list-item-before>
+            <lx-list-item lx-size="tiny">
+                <lx-list-item-before>
+                    <lx-icon lx-path="{{ vm.icons.mdiComment }}" lx-size="xs"></lx-icon>
+                </lx-list-item-before>
 
-                <lumx-list-item-content>
+                <lx-list-item-content>
                     Single-line item
-                </lumx-list-item-content>
-            </lumx-list-item>
+                </lx-list-item-content>
+            </lx-list-item>
 
-            <lumx-list-item lumx-size="tiny">
-                <lumx-list-item-before>
-                    <lumx-icon lumx-path="{{ vm.icons.mdiComment }}" lumx-size="xs"></lumx-icon>
-                </lumx-list-item-before>
+            <lx-list-item lx-size="tiny">
+                <lx-list-item-before>
+                    <lx-icon lx-path="{{ vm.icons.mdiComment }}" lx-size="xs"></lx-icon>
+                </lx-list-item-before>
 
-                <lumx-list-item-content>
+                <lx-list-item-content>
                     Single-line item
-                </lumx-list-item-content>
-            </lumx-list-item>
-        </lumx-list>
-    </lumx-post-block-attachments>
+                </lx-list-item-content>
+            </lx-list-item>
+        </lx-list>
+    </lx-post-block-attachments>
 
-    <lumx-post-block-tags>
-        <lumx-grid>
-            <lumx-chip
-                class="lumx-spacing-margin-right-tiny"
-                lumx-size="s"
-                lumx-theme="{{ theme }}"
-                ng-repeat="tag in vm.postBlock.tags"
-            >
-                <lumx-chip-label>{{ tag }}</lumx-chip-label>
-            </lumx-chip>
-        </lumx-grid>
-    </lumx-post-block-tags>
+    <lx-post-block-tags>
+        <lx-chip-group>
+            <lx-chip lx-size="s" lx-theme="{{ theme }}" ng-repeat="tag in vm.postBlock.tags">
+                <lx-chip-label>{{ tag }}</lx-chip-label>
+            </lx-chip>
+        </lx-chip-group>
+    </lx-post-block-tags>
 
-    <lumx-post-block-actions>
-        <lumx-grid>
-            <lumx-button lumx-emphasis="low" lumx-size="s">
-                <lumx-icon lumx-path="{{ vm.icons.mdiHeart }}"></lumx-icon>
+    <lx-post-block-actions>
+        <lx-grid>
+            <lx-button lx-emphasis="low" lx-size="s" lx-theme="{{ theme }}">
+                <lx-icon lx-path="{{ vm.icons.mdiHeart }}"></lx-icon>
                 <span>16</span>
-            </lumx-button>
+            </lx-button>
 
-            <lumx-button lumx-emphasis="low" lumx-size="s">
-                <lumx-icon lumx-path="{{ vm.icons.mdiComment }}"></lumx-icon>
+            <lx-button lx-emphasis="low" lx-size="s" lx-theme="{{ theme }}">
+                <lx-icon lx-path="{{ vm.icons.mdiComment }}"></lx-icon>
                 <span>8</span>
-            </lumx-button>
-        </lumx-grid>
-    </lumx-post-block-actions>
-</lumx-post-block>
+            </lx-button>
+        </lx-grid>
+    </lx-post-block-actions>
+</lx-post-block>

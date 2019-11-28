@@ -1,5 +1,4 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -16,7 +15,7 @@ function ListSubheaderDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListSubheader`, ListSubheaderDirective);
+angular.module('lumx.list').directive('lxListSubheader', ListSubheaderDirective);
 
 /////////////////////////////
 

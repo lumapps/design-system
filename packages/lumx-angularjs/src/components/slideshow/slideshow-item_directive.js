@@ -1,5 +1,3 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
 import template from './slideshow-item.html';
 
 /////////////////////////////
@@ -16,7 +14,7 @@ function SlideshowItemDirective() {
         link,
         replace: true,
         restrict: 'E',
-        require: `^${COMPONENT_PREFIX}Slideshow`,
+        require: '^lxSlideshow',
         template,
         transclude: true,
     };
@@ -24,7 +22,7 @@ function SlideshowItemDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.slideshow`).directive(`${COMPONENT_PREFIX}SlideshowItem`, SlideshowItemDirective);
+angular.module('lumx.slideshow').directive('lxSlideshowItem', SlideshowItemDirective);
 
 /////////////////////////////
 

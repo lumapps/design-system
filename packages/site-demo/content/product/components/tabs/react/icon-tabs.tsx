@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import classNames from 'classnames';
-import { Tab, Tabs, Theme } from '@lumx/react';
 import { mdiBowl, mdiBreadSliceOutline, mdiSilverwareForkKnife } from '@lumx/icons';
+import { Tab, Tabs, Theme } from '@lumx/react';
+import classNames from 'classnames';
 
 const App = ({ theme }) => {
     const [activeTab, setActiveTab] = useState(0);

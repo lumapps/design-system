@@ -1,13 +1,6 @@
 import React from 'react';
 
-import {
-    Chip,
-    Grid,
-    ImageBlock,
-    ImageBlockCaptionPosition,
-    Size,
-    AspectRatio
-} from '@lumx/react';
+import { AspectRatio, Chip, ChipGroup, ImageBlock, ImageBlockCaptionPosition, Size } from '@lumx/react';
 
 const App = ({ theme }) => (
     <ImageBlock
@@ -15,18 +8,15 @@ const App = ({ theme }) => (
         captionPosition={ImageBlockCaptionPosition.over}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
         tags={
-            <Grid>
-                <Chip
-                    className="lumx-spacing-margin-right-tiny"
-                    size={Size.s}>
+            <ChipGroup>
+                <Chip size={Size.s} theme={theme}>
                     Tag 1
                 </Chip>
-                <Chip
-                    className="lumx-spacing-margin-right-tiny"
-                    size={Size.s}>
+
+                <Chip size={Size.s} theme={theme}>
                     Tag 2
                 </Chip>
-            </Grid>
+            </ChipGroup>
         }
         theme={theme}
         title="Lorem ipsum"

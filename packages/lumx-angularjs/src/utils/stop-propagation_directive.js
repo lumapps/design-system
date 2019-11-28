@@ -1,12 +1,8 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
-/////////////////////////////
-
 function StopPropagationDirective() {
     'ngInject';
 
     function link(scope, el, attrs) {
-        el.on(attrs.lumxStopPropagation, (evt) => {
+        el.on(attrs.lxStopPropagation, (evt) => {
             evt.stopPropagation();
         });
     }
@@ -18,9 +14,7 @@ function StopPropagationDirective() {
 
 /////////////////////////////
 
-angular
-    .module(`${MODULE_NAME}.utils.stop-propagation`)
-    .directive(`${COMPONENT_PREFIX}StopPropagation`, StopPropagationDirective);
+angular.module('lumx.utils.stop-propagation').directive('lxStopPropagation', StopPropagationDirective);
 
 /////////////////////////////
 

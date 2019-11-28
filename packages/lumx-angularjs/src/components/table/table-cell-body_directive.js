@@ -1,5 +1,3 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
 import template from './table-cell-body.html';
 
 /////////////////////////////
@@ -18,7 +16,7 @@ function TableCellBodyDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.table`).directive(`${COMPONENT_PREFIX}TableCellBody`, TableCellBodyDirective);
+angular.module('lumx.table').directive('lxTableCellBody', TableCellBodyDirective);
 
 /////////////////////////////
 

@@ -7,6 +7,8 @@ enum Alignment {
     end = 'end',
     left = 'left',
     right = 'right',
+    spaceAround = 'space-around',
+    spaceBetween = 'space-between',
     start = 'start',
     top = 'top',
 }

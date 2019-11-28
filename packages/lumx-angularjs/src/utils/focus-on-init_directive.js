@@ -1,12 +1,8 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
-/////////////////////////////
-
 function FocusOnInitDirective($timeout) {
     'ngInject';
 
     function link(scope, el, attrs) {
-        if (angular.isDefined(attrs.lumxFocusOnInit) && attrs.lumxFocusOnInit && !scope.$eval(attrs.lumxFocusOnInit)) {
+        if (angular.isDefined(attrs.lxFocusOnInit) && attrs.lxFocusOnInit && !scope.$eval(attrs.lxFocusOnInit)) {
             return;
         }
 
@@ -22,7 +18,7 @@ function FocusOnInitDirective($timeout) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.utils.focus-on-init`).directive(`${COMPONENT_PREFIX}FocusOnInit`, FocusOnInitDirective);
+angular.module('lumx.utils.focus-on-init').directive('lxFocusOnInit', FocusOnInitDirective);
 
 /////////////////////////////
 

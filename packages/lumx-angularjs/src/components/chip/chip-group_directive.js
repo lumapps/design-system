@@ -1,5 +1,4 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////
 
@@ -7,7 +6,7 @@ function ChipGroupController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -40,18 +39,15 @@ function ChipGroupController() {
     function getClasses() {
         const classes = [];
 
-        if (angular.isDefined(lumx.align) && lumx.align) {
-            classes.push(`${CSS_PREFIX}-chip-group--align-${lumx.align}`);
-        } else {
-            classes.push(`${CSS_PREFIX}-chip-group--align-${_DEFAULT_PROPS.align}`);
-        }
+        const align = lx.align ? lx.align : _DEFAULT_PROPS.align;
+        classes.push(`${CSS_PREFIX}-chip-group--align-${align}`);
 
         return classes;
     }
 
     /////////////////////////////
 
-    lumx.getClasses = getClasses;
+    lx.getClasses = getClasses;
 }
 
 /////////////////////////////
@@ -62,20 +58,20 @@ function ChipGroupDirective() {
     return {
         bindToController: true,
         controller: ChipGroupController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {
-            align: '@?lumxAlign',
+            align: '@?lxAlign',
         },
-        template: `<div class="${CSS_PREFIX}-chip-group" ng-class="lumx.getClasses()" ng-transclude></div>`,
+        template: `<div class="${CSS_PREFIX}-chip-group" ng-class="lx.getClasses()" ng-transclude></div>`,
         transclude: true,
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.chip`).directive(`${COMPONENT_PREFIX}ChipGroup`, ChipGroupDirective);
+angular.module('lumx.chip').directive('lxChipGroup', ChipGroupDirective);
 
 /////////////////////////////
 

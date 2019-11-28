@@ -1,14 +1,12 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
 import template from './tab.html';
 
 /////////////////////////////
 
-function TabController($scope, LumXUtilsService) {
+function TabController($scope, LxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -34,7 +32,7 @@ function TabController($scope, LumXUtilsService) {
      *
      * @type {Object}
      */
-    lumx.tab = {};
+    lx.tab = {};
 
     /////////////////////////////
     //                         //
@@ -48,7 +46,7 @@ function TabController($scope, LumXUtilsService) {
      * @return {boolean} Whether the current tab is active or not.
      */
     function isTabActive() {
-        return _parentController.isTabActive(lumx.tab.index);
+        return _parentController.isTabActive(lx.tab.index);
     }
 
     /**
@@ -60,20 +58,20 @@ function TabController($scope, LumXUtilsService) {
     function registerTab(parentController, tabIndex) {
         _parentController = parentController;
 
-        lumx.tab = {
-            icon: lumx.icon,
+        lx.tab = {
+            icon: lx.icon,
             index: tabIndex,
-            label: lumx.label,
-            uuid: LumXUtilsService.generateUUID(),
+            label: lx.label,
+            uuid: LxUtilsService.generateUUID(),
         };
 
-        _parentController.addTab(lumx.tab);
+        _parentController.addTab(lx.tab);
     }
 
     /////////////////////////////
 
-    lumx.isTabActive = isTabActive;
-    lumx.registerTab = registerTab;
+    lx.isTabActive = isTabActive;
+    lx.registerTab = registerTab;
 
     /////////////////////////////
     //                         //
@@ -86,17 +84,17 @@ function TabController($scope, LumXUtilsService) {
      *
      * @param {boolean} isDisabled Whether the tab is disabled or not.
      */
-    $scope.$watch('lumx.isDisabled', function isDisableddWatcher(isDisabled) {
-        lumx.tab.isDisabled = isDisabled;
+    $scope.$watch('lx.isDisabled', function isDisableddWatcher(isDisabled) {
+        lx.tab.isDisabled = isDisabled;
 
-        _parentController.updateTab(lumx.tab);
+        _parentController.updateTab(lx.tab);
     });
 
     /**
      * Remove the current tab on destroy.
      */
     $scope.$on('$destroy', () => {
-        _parentController.removeTab(lumx.tab);
+        _parentController.removeTab(lx.tab);
     });
 }
 
@@ -112,15 +110,15 @@ function TabDirective() {
     return {
         bindToController: true,
         controller: TabController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
-        require: [`${COMPONENT_PREFIX}Tab`, `^${COMPONENT_PREFIX}Tabs`],
+        require: ['lxTab', '^lxTabs'],
         restrict: 'E',
         scope: {
-            icon: '@?lumxIcon',
+            icon: '@?lxIcon',
             isDisabled: '=?ngDisabled',
-            label: '@?lumxLabel',
+            label: '@?lxLabel',
         },
         template,
         transclude: true,
@@ -129,7 +127,7 @@ function TabDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.tabs`).directive(`${COMPONENT_PREFIX}Tab`, TabDirective);
+angular.module('lumx.tabs').directive('lxTab', TabDirective);
 
 /////////////////////////////
 

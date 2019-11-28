@@ -1,7 +1,6 @@
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './progress-tracker-step.html';
 
@@ -11,7 +10,7 @@ function ProgressTrackerStepController($scope, $element) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -33,17 +32,44 @@ function ProgressTrackerStepController($scope, $element) {
     /////////////////////////////
 
     /**
+     * Get progress tracker step classes.
+     *
+     * @return {Array} The list of progress tracker step classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        if (lx.isActive) {
+            classes.push(`${CSS_PREFIX}-progress-tracker-step--is-active`);
+        }
+
+        if (lx.isComplete) {
+            classes.push(`${CSS_PREFIX}-progress-tracker-step--is-complete`);
+        }
+
+        if (lx.isClickable()) {
+            classes.push(`${CSS_PREFIX}-progress-tracker-step--is-clickable`);
+        }
+
+        if (lx.isActive && lx.hasError) {
+            classes.push(`${CSS_PREFIX}-progress-tracker-step--has-error`);
+        }
+
+        return classes;
+    }
+
+    /**
      * Get step icon according to its state.
      *
      * @return {string} The icon path.
      */
     function getIcon() {
-        if (lumx.isComplete) {
+        if (lx.isComplete) {
             return mdiCheckCircle;
         }
 
-        if (lumx.isActive) {
-            if (lumx.hasError) {
+        if (lx.isActive) {
+            if (lx.hasError) {
                 return mdiAlertCircle;
             }
 
@@ -60,9 +86,7 @@ function ProgressTrackerStepController($scope, $element) {
      */
     function isClickable() {
         return (
-            lumx.isActive ||
-            lumx.isComplete ||
-            $element.prev().hasClass(`${CSS_PREFIX}-progress-tracker-step--is-complete`)
+            lx.isActive || lx.isComplete || $element.prev().hasClass(`${CSS_PREFIX}-progress-tracker-step--is-complete`)
         );
     }
 
@@ -77,9 +101,10 @@ function ProgressTrackerStepController($scope, $element) {
 
     /////////////////////////////
 
-    lumx.getIcon = getIcon;
-    lumx.isClickable = isClickable;
-    lumx.setParentController = setParentController;
+    lx.getClasses = getClasses;
+    lx.getIcon = getIcon;
+    lx.isClickable = isClickable;
+    lx.setParentController = setParentController;
 
     /////////////////////////////
     //                         //
@@ -92,7 +117,7 @@ function ProgressTrackerStepController($scope, $element) {
      *
      * @param {boolean} isActive Whether the step is active or not.
      */
-    $scope.$watch('lumx.isActive', function isActiveWatcher(isActive) {
+    $scope.$watch('lx.isActive', function isActiveWatcher(isActive) {
         if (isActive) {
             _parentController.setActiveStep($element.index());
         }
@@ -112,17 +137,17 @@ function ProgressTrackerStepDirective() {
     return {
         bindToController: true,
         controller: ProgressTrackerStepController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
-        require: [`${COMPONENT_PREFIX}ProgressTrackerStep`, `^${COMPONENT_PREFIX}ProgressTracker`],
+        require: ['lxProgressTrackerStep', '^lxProgressTracker'],
         restrict: 'E',
         scope: {
-            hasError: '=?lumxHasError',
-            helper: '@?lumxHelper',
-            isActive: '=?lumxIsActive',
-            isComplete: '=?lumxIsComplete',
-            label: '@lumxLabel',
+            hasError: '=?lxHasError',
+            helper: '@?lxHelper',
+            isActive: '=?lxIsActive',
+            isComplete: '=?lxIsComplete',
+            label: '@lxLabel',
         },
         template,
     };
@@ -130,9 +155,7 @@ function ProgressTrackerStepDirective() {
 
 /////////////////////////////
 
-angular
-    .module(`${MODULE_NAME}.progress-tracker`)
-    .directive(`${COMPONENT_PREFIX}ProgressTrackerStep`, ProgressTrackerStepDirective);
+angular.module('lumx.progress-tracker').directive('lxProgressTrackerStep', ProgressTrackerStepDirective);
 
 /////////////////////////////
 

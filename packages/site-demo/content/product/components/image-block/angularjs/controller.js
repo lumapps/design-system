@@ -27,7 +27,7 @@ function DemoController() {
     };
 
     /**
-     * The user fields.
+     * The list of tags.
      *
      * @type {Array}
      */

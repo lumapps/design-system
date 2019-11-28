@@ -7,7 +7,7 @@ const App = ({ theme }) => {
     const [isSelected, setSelected] = useState(false);
 
     return (
-        <>
+        <div className="demo-grid">
             <Chip
                 theme={theme}
                 before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
@@ -24,7 +24,7 @@ const App = ({ theme }) => {
             >
                 Filter
             </Chip>
-        </>
+        </div>
     );
 };
 

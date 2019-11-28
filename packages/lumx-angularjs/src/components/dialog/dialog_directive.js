@@ -1,5 +1,4 @@
 import { CSS_PREFIX, ESCAPE_KEY_CODE } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './dialog.html';
 
@@ -10,20 +9,31 @@ function DialogController(
     $rootScope,
     $scope,
     $timeout,
-    LumXDepthService,
-    LumXEventSchedulerService,
-    LumXFocusTrapService,
+    LxDepthService,
+    LxEventSchedulerService,
+    LxFocusTrapService,
 ) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        size: 'big',
+    };
 
     /**
      * The dialog open/close transition duration.
@@ -96,14 +106,14 @@ function DialogController(
      *
      * @type {string}
      */
-    lumx.id = undefined;
+    lx.id = undefined;
 
     /**
      * Whether the dialog is open or not.
      *
      * @type {boolean}
      */
-    lumx.isOpen = false;
+    lx.isOpen = false;
 
     /////////////////////////////
     //                         //
@@ -114,19 +124,20 @@ function DialogController(
     /**
      * Close the current dialog.
      *
-     * @param {Object} params An optional object that holds extra parameters.
+     * @param {boolean} canceled Indicates if the dialog was closed via a cancel or not.
+     * @param {Object}  params   An optional object that holds extra parameters.
      */
-    function _close(params) {
-        if (!lumx.isOpen) {
+    function _close(canceled, params) {
+        if (!lx.isOpen) {
             return;
         }
 
         if (angular.isDefined(_idEventScheduler)) {
-            LumXEventSchedulerService.unregister(_idEventScheduler);
+            LxEventSchedulerService.unregister(_idEventScheduler);
             _idEventScheduler = undefined;
         }
 
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-start`, lumx.id, params);
+        $rootScope.$broadcast('lx-dialog__close-start', lx.id, canceled, params);
 
         _dialogOverlay.addClass(`${CSS_PREFIX}-dialog-overlay--is-hidden`);
         _dialog.addClass(`${CSS_PREFIX}-dialog--is-hidden`);
@@ -150,10 +161,10 @@ function DialogController(
                     .appendTo(_parentElement);
             }
 
-            lumx.isOpen = false;
-            LumXFocusTrapService.disable();
+            lx.isOpen = false;
+            LxFocusTrapService.disable();
 
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close-end`, lumx.id, params);
+            $rootScope.$broadcast('lx-dialog__close-end', lx.id, canceled, params);
         }, _TRANSITION_DURATION);
     }
 
@@ -167,7 +178,7 @@ function DialogController(
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--top`)) {
+                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--top`) && !lx.forceHeaderDivider) {
                     if (entry.isIntersecting) {
                         dialogHeader.removeClass(`${CSS_PREFIX}-dialog__header--has-divider`);
                     } else {
@@ -175,10 +186,13 @@ function DialogController(
                     }
                 }
 
-                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--bottom`)) {
+                if (
+                    entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--bottom`) &&
+                    !lx.forceFooterDivider
+                ) {
                     if (entry.isIntersecting) {
                         dialogFooter.removeClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
-                        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__scroll-end`, lumx.id);
+                        $rootScope.$broadcast('lx-dialog__scroll-end', lx.id);
                     } else {
                         dialogFooter.addClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
                     }
@@ -192,11 +206,11 @@ function DialogController(
     }
 
     /**
-     * Close dialog on escape key up.
+     * Close dialog on escape key down.
      *
-     * @param {Event} evt The key up event.
+     * @param {Event} evt The key down event.
      */
-    function _onKeyUp(evt) {
+    function _onKeyDown(evt) {
         if (evt.keyCode === ESCAPE_KEY_CODE) {
             _close();
         }
@@ -210,41 +224,41 @@ function DialogController(
      * @param {Object} params An optional object that holds extra parameters.
      */
     function _open(params) {
-        if (lumx.isOpen) {
+        if (lx.isOpen) {
             return;
         }
 
-        LumXDepthService.increase();
+        LxDepthService.increase();
 
         _dialogOverlay
-            .css('z-index', LumXDepthService.get())
+            .css('z-index', LxDepthService.get())
             .appendTo('body')
             .show();
 
-        if (angular.isUndefined(lumx.autoClose) || lumx.autoClose) {
+        if (angular.isUndefined(lx.autoClose) || lx.autoClose) {
             _dialogOverlay.on('click', _close);
         }
 
-        if (angular.isUndefined(lumx.escapeClose) || lumx.escapeClose) {
-            _idEventScheduler = LumXEventSchedulerService.register('keyup', _onKeyUp);
+        if (angular.isUndefined(lx.escapeClose) || lx.escapeClose) {
+            _idEventScheduler = LxEventSchedulerService.register('keydown', _onKeyDown);
         }
 
         _dialog
-            .css('z-index', LumXDepthService.get() + 1)
+            .css('z-index', LxDepthService.get() + 1)
             .appendTo('body')
             .addClass(`${CSS_PREFIX}-dialog--is-shown`);
 
         $timeout(() => {
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-start`, lumx.id, params);
+            $rootScope.$broadcast('lx-dialog__open-start', lx.id, params);
 
-            lumx.isOpen = true;
-            LumXFocusTrapService.activate(_dialog);
+            lx.isOpen = true;
+            LxFocusTrapService.activate(_dialog);
 
             $timeout(_createObserver);
         });
 
         $timeout(() => {
-            $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open-end`, lumx.id, params);
+            $rootScope.$broadcast('lx-dialog__open-end', lx.id, params);
         }, _TRANSITION_DURATION);
     }
 
@@ -259,6 +273,35 @@ function DialogController(
 
     /////////////////////////////
     //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get dialog classes.
+     *
+     * @return {Array} The list of dialog classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const size = lx.size ? lx.size : _DEFAULT_PROPS.size;
+
+        classes.push(`${CSS_PREFIX}-dialog--size-${size}`);
+
+        if (lx.isLoading) {
+            classes.push(`${CSS_PREFIX}-dialog--is-loading`);
+        }
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
+
+    /////////////////////////////
+    //                         //
     //          Events         //
     //                         //
     /////////////////////////////
@@ -270,8 +313,8 @@ function DialogController(
      * @param {string} dialogId The dialog identifier.
      * @param {Object} params   An optional object that holds extra parameters.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dialog__open`, (evt, dialogId, params) => {
-        if (dialogId === lumx.id) {
+    $scope.$on('lx-dialog__open', (evt, dialogId, params) => {
+        if (dialogId === lx.id) {
             _open(params);
 
             if (angular.isDefined(params) && angular.isDefined(params.isAlertDialog) && params.isAlertDialog) {
@@ -291,13 +334,14 @@ function DialogController(
     /**
      * Close a given dialog.
      *
-     * @param {Event}  evt      The dialog open event.
-     * @param {string} dialogId The dialog identifier.
-     * @param {Object} params   An optional object that holds extra parameters.
+     * @param {Event}   evt      The dialog open event.
+     * @param {string}  dialogId The dialog identifier.
+     * @param {boolean} canceled Indicates if the dialog was closed via a cancel or not.
+     * @param {Object}  params   An optional object that holds extra parameters.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dialog__close`, (evt, dialogId, params) => {
-        if (dialogId === lumx.id || dialogId === undefined) {
-            _close(params);
+    $scope.$on('lx-dialog__close', (evt, dialogId, canceled, params) => {
+        if (dialogId === lx.id || dialogId === undefined) {
+            _close(canceled, params);
         }
     });
 
@@ -310,6 +354,8 @@ function DialogController(
 /////////////////////////////
 
 function DialogDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl) {
         attrs.$observe('id', (newId) => {
             ctrl.id = newId;
@@ -319,28 +365,30 @@ function DialogDirective() {
     return {
         bindToController: true,
         controller: DialogController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            autoClose: '=?lumxAutoClose',
-            escapeClose: '=?lumxEscapeClose',
-            isLoading: '=?lumxIsLoading',
-            size: '@?lumxSize',
+            autoClose: '=?lxAutoClose',
+            escapeClose: '=?lxEscapeClose',
+            forceFooterDivider: '=?lxForceFooterDivider',
+            forceHeaderDivider: '=?lxForceHeaderDivider',
+            isLoading: '=?lxIsLoading',
+            size: '@?lxSize',
         },
         template,
         transclude: {
-            content: `${COMPONENT_PREFIX}DialogContent`,
-            footer: `?${COMPONENT_PREFIX}DialogFooter`,
-            header: `?${COMPONENT_PREFIX}DialogHeader`,
+            content: 'lxDialogContent',
+            footer: '?lxDialogFooter',
+            header: '?lxDialogHeader',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).directive(`${COMPONENT_PREFIX}Dialog`, DialogDirective);
+angular.module('lumx.dialog').directive('lxDialog', DialogDirective);
 
 /////////////////////////////
 

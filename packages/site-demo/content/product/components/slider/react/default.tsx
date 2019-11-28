@@ -9,8 +9,8 @@ const App = ({ theme }) => {
             <pre>{`Adjust threshold: ${value}`}</pre>
             <br />
             <Slider
-                label='Default'
-                helper='This is an helper text'
+                label="Default"
+                helper="This is an helper text"
                 max={10}
                 min={0}
                 theme={theme}
@@ -18,7 +18,7 @@ const App = ({ theme }) => {
                 onChange={setValue}
             />
         </>
-    )
+    );
 };
 
 export default App;

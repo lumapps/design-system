@@ -1,4 +1,4 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
 
 import template from './tabs.html';
 
@@ -8,7 +8,26 @@ function TabsController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        layout: 'fixed',
+        position: 'left',
+        theme: 'light',
+    };
 
     /////////////////////////////
     //                         //
@@ -21,14 +40,14 @@ function TabsController() {
      *
      * @type {number}
      */
-    lumx.activeTab = angular.isDefined(lumx.activeTab) ? lumx.activeTab : 0;
+    lx.activeTab = angular.isDefined(lx.activeTab) ? lx.activeTab : 0;
 
     /**
      * The list of tabs.
      *
      * @type {Array}
      */
-    lumx.tabs = [];
+    lx.tabs = [];
 
     /////////////////////////////
     //                         //
@@ -42,7 +61,30 @@ function TabsController() {
      * @param {Object} tabToAdd The tab to add.
      */
     function addTab(tabToAdd) {
-        lumx.tabs.push(tabToAdd);
+        lx.tabs.push(tabToAdd);
+    }
+
+    /**
+     * Get tabs classes.
+     *
+     * @return {Array} The list of tabs classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const layout = lx.layout ? lx.layout : _DEFAULT_PROPS.layout;
+        const position = lx.position ? lx.position : _DEFAULT_PROPS.position;
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-tabs--layout-${layout}`);
+        classes.push(`${CSS_PREFIX}-tabs--position-${position}`);
+        classes.push(`${CSS_PREFIX}-tabs--theme-${theme}`);
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
     }
 
     /**
@@ -52,7 +94,7 @@ function TabsController() {
      * @return {boolean} Whether the given tab is active or not.
      */
     function isTabActive(tabIndex) {
-        return lumx.activeTab === tabIndex;
+        return lx.activeTab === tabIndex;
     }
 
     /**
@@ -61,14 +103,14 @@ function TabsController() {
      * @param {Object} tabToRemove The tab to remove.
      */
     function removeTab(tabToRemove) {
-        lumx.tabs.splice(tabToRemove.index, 1);
+        lx.tabs.splice(tabToRemove.index, 1);
 
-        angular.forEach(lumx.tabs, (tab, index) => {
+        angular.forEach(lx.tabs, (tab, index) => {
             tab.index = index;
         });
 
-        if (lumx.tabs.length > 0) {
-            lumx.setActiveTab(lumx.tabs[0]);
+        if (lx.tabs.length > 0) {
+            lx.setActiveTab(lx.tabs[0]);
         }
     }
 
@@ -82,7 +124,7 @@ function TabsController() {
             return;
         }
 
-        lumx.activeTab = tab.index;
+        lx.activeTab = tab.index;
     }
 
     /**
@@ -91,7 +133,7 @@ function TabsController() {
      * @param {Object} updatedTab The tab to update.
      */
     function updateTab(updatedTab) {
-        angular.forEach(lumx.tabs, (tab) => {
+        angular.forEach(lx.tabs, (tab) => {
             if (tab.uuid === updatedTab.uuid) {
                 tab = updatedTab;
             }
@@ -100,11 +142,12 @@ function TabsController() {
 
     /////////////////////////////
 
-    lumx.addTab = addTab;
-    lumx.isTabActive = isTabActive;
-    lumx.removeTab = removeTab;
-    lumx.setActiveTab = setActiveTab;
-    lumx.updateTab = updateTab;
+    lx.addTab = addTab;
+    lx.getClasses = getClasses;
+    lx.isTabActive = isTabActive;
+    lx.removeTab = removeTab;
+    lx.setActiveTab = setActiveTab;
+    lx.updateTab = updateTab;
 }
 
 /////////////////////////////
@@ -115,15 +158,15 @@ function TabsDirective() {
     return {
         bindToController: true,
         controller: TabsController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {
-            activeTab: '=?lumxActiveTab',
-            customColors: '=?lumxCustomColors',
-            layout: '@?lumxLayout',
-            position: '@?lumxPosition',
-            theme: '@?lumxTheme',
+            activeTab: '=?lxActiveTab',
+            customColors: '=?lxCustomColors',
+            layout: '@?lxLayout',
+            position: '@?lxPosition',
+            theme: '@?lxTheme',
         },
         template,
         transclude: true,
@@ -132,7 +175,7 @@ function TabsDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.tabs`).directive(`${COMPONENT_PREFIX}Tabs`, TabsDirective);
+angular.module('lumx.tabs').directive('lxTabs', TabsDirective);
 
 /////////////////////////////
 

@@ -22,8 +22,6 @@ export { Divider, DividerProps } from './components/divider/Divider';
 
 export { Dropdown, DropdownProps } from './components/dropdown/Dropdown';
 
-export { EditableMedia, EditableMediaProps } from './components/editable-media/EditableMedia';
-
 export { Icon, IconProps } from './components/icon/Icon';
 
 export { IconButton, IconButtonProps } from './components/button/IconButton';

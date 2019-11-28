@@ -1,23 +1,33 @@
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './text-field.html';
 
 /////////////////////////////
 
-function TextFieldController(LumXUtilsService) {
+function TextFieldController(LxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        theme: 'light',
+    };
 
     /**
      * The model controller.
@@ -37,21 +47,21 @@ function TextFieldController(LumXUtilsService) {
      *
      * @type {boolean}
      */
-    lumx.hasChips = false;
+    lx.hasChips = false;
 
     /**
      * Whether the directive has input slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasInput = false;
+    lx.hasInput = false;
 
     /**
      * The text field icons.
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiAlertCircle,
         mdiCheckCircle,
         mdiCloseCircle,
@@ -62,7 +72,7 @@ function TextFieldController(LumXUtilsService) {
      *
      * @type {string}
      */
-    lumx.inputId = LumXUtilsService.generateUUID();
+    lx.inputId = LxUtilsService.generateUUID();
 
     /////////////////////////////
     //                         //
@@ -82,6 +92,53 @@ function TextFieldController(LumXUtilsService) {
 
         _modelController.$setViewValue(undefined);
         _modelController.$render();
+    }
+
+    /**
+     * Get text field classes.
+     *
+     * @return {Array} The list of text field classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-text-field--theme-${theme}`);
+
+        if (lx.hasChips) {
+            classes.push(`${CSS_PREFIX}-text-field--has-chips`);
+        }
+
+        if (lx.hasError) {
+            classes.push(`${CSS_PREFIX}-text-field--has-error`);
+        }
+
+        if (lx.icon) {
+            classes.push(`${CSS_PREFIX}-text-field--has-icon`);
+        }
+
+        if (lx.isClearable && lx.hasValue()) {
+            classes.push(`${CSS_PREFIX}-text-field--has-input-clear`);
+        }
+
+        if (lx.label) {
+            classes.push(`${CSS_PREFIX}-text-field--has-label`);
+        }
+
+        if (lx.hasValue()) {
+            classes.push(`${CSS_PREFIX}-text-field--has-value`);
+        }
+
+        if (lx.isValid) {
+            classes.push(`${CSS_PREFIX}-text-field--is-valid`);
+        }
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
     }
 
     /**
@@ -108,9 +165,10 @@ function TextFieldController(LumXUtilsService) {
 
     /////////////////////////////
 
-    lumx.clearModel = clearModel;
-    lumx.hasValue = hasValue;
-    lumx.setModelController = setModelController;
+    lx.clearModel = clearModel;
+    lx.getClasses = getClasses;
+    lx.hasValue = hasValue;
+    lx.setModelController = setModelController;
 }
 
 /////////////////////////////
@@ -127,28 +185,26 @@ function TextFieldDirective($timeout) {
             ctrl.hasInput = true;
         }
 
-        $timeout(() => {
-            const _MIN_ROWS = 2;
+        let input;
 
-            let input = el.find('input');
+        $timeout(() => {
+            input = el.find('input');
 
             if (input.length === 1) {
                 el.addClass(`${CSS_PREFIX}-text-field--has-input`);
             } else {
+                const minRows = 2;
+
                 input = el.find('textarea');
 
                 input.on('input', (evt) => {
-                    evt.target.rows = _MIN_ROWS;
-                    const currentRows = evt.target.scrollHeight / (evt.target.clientHeight / _MIN_ROWS);
+                    evt.target.rows = minRows;
+                    const currentRows = evt.target.scrollHeight / (evt.target.clientHeight / minRows);
                     evt.target.rows = currentRows;
                 });
 
                 el.addClass(`${CSS_PREFIX}-text-field--has-textarea`);
             }
-
-            const modelController = input.data('$ngModelController');
-
-            ctrl.setModelController(modelController);
 
             if (input.attr('id')) {
                 ctrl.inputId = input.attr('id');
@@ -157,63 +213,93 @@ function TextFieldDirective($timeout) {
             }
 
             input
-                .on('focus', function onFocus() {
+                .on('focus', () => {
                     el.addClass(`${CSS_PREFIX}-text-field--is-focus`);
                 })
-                .on('blur', function onBlur() {
+                .on('blur', () => {
                     el.removeClass(`${CSS_PREFIX}-text-field--is-focus`);
                 });
 
-            modelController.$$attr.$observe('disabled', (isDisabled) => {
-                if (isDisabled) {
-                    el.addClass(`${CSS_PREFIX}-text-field--is-disabled`);
-                } else {
-                    el.removeClass(`${CSS_PREFIX}-text-field--is-disabled`);
-                }
-            });
+            const modelController = input.data('$ngModelController');
 
-            modelController.$$attr.$observe('placeholder', (placeholder) => {
-                if (placeholder.length > 0) {
-                    el.addClass(`${CSS_PREFIX}-text-field--has-placeholder`);
-                } else {
-                    el.removeClass(`${CSS_PREFIX}-text-field--has-placeholder`);
-                }
-            });
+            ctrl.setModelController(modelController);
 
-            scope.$on('$destroy', () => {
-                input.off();
-            });
+            if (angular.isDefined(modelController.$$attr)) {
+                modelController.$$attr.$observe('disabled', (isDisabled) => {
+                    if (isDisabled) {
+                        el.addClass(`${CSS_PREFIX}-text-field--is-disabled`);
+                    } else {
+                        el.removeClass(`${CSS_PREFIX}-text-field--is-disabled`);
+                    }
+                });
+
+                modelController.$$attr.$observe('placeholder', (placeholder) => {
+                    if (placeholder.length > 0) {
+                        el.addClass(`${CSS_PREFIX}-text-field--has-placeholder`);
+                    } else {
+                        el.removeClass(`${CSS_PREFIX}-text-field--has-placeholder`);
+                    }
+                });
+            }
+        });
+
+        attrs.$observe('disabled', (isDisabled) => {
+            if (isDisabled) {
+                el.addClass(`${CSS_PREFIX}-text-field--is-disabled`);
+            } else {
+                el.removeClass(`${CSS_PREFIX}-text-field--is-disabled`);
+            }
+        });
+
+        scope.$watch(
+            () => {
+                return ctrl.focus;
+            },
+            (isfocus) => {
+                if (angular.isDefined(isfocus) && isfocus) {
+                    $timeout(() => {
+                        input.focus();
+
+                        ctrl.focus = false;
+                    });
+                }
+            },
+        );
+
+        scope.$on('$destroy', () => {
+            input.off();
         });
     }
 
     return {
         bindToController: true,
         controller: TextFieldController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            customColors: '=?lumxCustomColors',
-            hasError: '=?lumxHasError',
-            helper: '@?lumxHelper',
-            icon: '@?lumxIcon',
-            isClearable: '=?lumxIsClearable',
-            isValid: '=?lumxIsValid',
-            label: '@?lumxLabel',
-            theme: '@?lumxTheme',
+            customColors: '=?lxCustomColors',
+            focus: '=?lxFocus',
+            hasError: '=?lxError',
+            helper: '@?lxHelper',
+            icon: '@?lxIcon',
+            isClearable: '=?lxAllowClear',
+            isValid: '=?lxValid',
+            label: '@?lxLabel',
+            theme: '@?lxTheme',
         },
         template,
         transclude: {
-            chips: `?${COMPONENT_PREFIX}TextFieldChips`,
-            input: `?${COMPONENT_PREFIX}TextFieldInput`,
+            chips: '?lxTextFieldChips',
+            input: '?lxTextFieldInput',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.text-field`).directive(`${COMPONENT_PREFIX}TextField`, TextFieldDirective);
+angular.module('lumx.text-field').directive('lxTextField', TextFieldDirective);
 
 /////////////////////////////
 

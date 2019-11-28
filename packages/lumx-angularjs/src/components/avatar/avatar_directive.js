@@ -1,13 +1,32 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './avatar.html';
 
 /////////////////////////////
 
 function AvatarController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this, no-unused-vars
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        size: 'm',
+        theme: 'light',
+    };
 
     /////////////////////////////
     //                         //
@@ -20,7 +39,46 @@ function AvatarController() {
      *
      * @type {boolean}
      */
-    lumx.hasActions = false;
+    lx.hasActions = false;
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get background image according to image url.
+     *
+     * @return {Object} The image style properties.
+     */
+    function getBackgroundImage() {
+        return {
+            backgroundImage: `url(${lx.image})`,
+        };
+    }
+
+    /**
+     * Get avatar classes.
+     *
+     * @return {Array} The list of avatar classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const size = lx.size ? lx.size : _DEFAULT_PROPS.size;
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-avatar--size-${size}`);
+        classes.push(`${CSS_PREFIX}-avatar--theme-${theme}`);
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getBackgroundImage = getBackgroundImage;
+    lx.getClasses = getClasses;
 }
 
 /////////////////////////////
@@ -29,43 +87,6 @@ function AvatarDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl, transclude) {
-        const defaultProps = {
-            size: 'm',
-            theme: 'light',
-        };
-
-        attrs.$observe('lumxImage', (newImage) => {
-            el.css('background-image', `url(${newImage})`);
-        });
-
-        if (!attrs.lumxSize) {
-            el.addClass(`${CSS_PREFIX}-avatar--size-${defaultProps.size}`);
-        }
-
-        attrs.$observe('lumxSize', (size) => {
-            if (!size) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*avatar--size-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-avatar--size-${size}`);
-        });
-
-        if (!attrs.lumxTheme) {
-            el.addClass(`${CSS_PREFIX}-avatar--theme-${defaultProps.theme}`);
-        }
-
-        attrs.$observe('lumxTheme', (theme) => {
-            if (!theme) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*avatar--theme-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-avatar--theme-${theme}`);
-        });
-
         if (transclude.isSlotFilled('actions')) {
             ctrl.hasActions = true;
         }
@@ -74,21 +95,25 @@ function AvatarDirective() {
     return {
         bindToController: true,
         controller: AvatarController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
-        scope: {},
+        scope: {
+            image: '@lxImage',
+            size: '@?lxSize',
+            theme: '@?lxTheme',
+        },
         template,
         transclude: {
-            actions: `?${COMPONENT_PREFIX}AvatarActions`,
+            actions: '?lxAvatarActions',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.avatar`).directive(`${COMPONENT_PREFIX}Avatar`, AvatarDirective);
+angular.module('lumx.avatar').directive('lxAvatar', AvatarDirective);
 
 /////////////////////////////
 

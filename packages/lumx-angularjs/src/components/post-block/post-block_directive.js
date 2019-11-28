@@ -1,13 +1,32 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './post-block.html';
 
 /////////////////////////////
 
 function PostBlockController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        orientation: 'horizontal',
+        theme: 'light',
+    };
 
     /////////////////////////////
     //                         //
@@ -20,67 +39,63 @@ function PostBlockController() {
      *
      * @type {boolean}
      */
-    lumx.hasActions = false;
+    lx.hasActions = false;
 
     /**
      * Whether the directive has attachments slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasAttachments = false;
+    lx.hasAttachments = false;
 
     /**
      * Whether the directive has author slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasAuthor = false;
+    lx.hasAuthor = false;
 
     /**
      * Whether the directive has tags slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasTags = false;
+    lx.hasTags = false;
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get post block classes.
+     *
+     * @return {Array} The list of post block classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const orientation = lx.orientation ? lx.orientation : _DEFAULT_PROPS.orientation;
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-post-block--orientation-${orientation}`);
+        classes.push(`${CSS_PREFIX}-post-block--theme-${theme}`);
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
 }
 
 /////////////////////////////
 
 function PostBlockDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl, transclude) {
-        const defaultProps = {
-            orientation: 'horizontal',
-            theme: 'light',
-        };
-
-        if (!attrs.lumxOrientation) {
-            el.addClass(`${CSS_PREFIX}-post-block--orientation-${defaultProps.orientation}`);
-        }
-
-        attrs.$observe('lumxOrientation', (orientation) => {
-            if (!orientation) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*post-block--orientation-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-post-block--orientation-${orientation}`);
-        });
-
-        if (!attrs.lumxTheme) {
-            el.addClass(`${CSS_PREFIX}-post-block--theme-${defaultProps.theme}`);
-        }
-
-        attrs.$observe('lumxTheme', (theme) => {
-            if (!theme) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*post-block--theme-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-post-block--theme-${theme}`);
-        });
-
         if (transclude.isSlotFilled('actions')) {
             ctrl.hasActions = true;
         }
@@ -101,33 +116,33 @@ function PostBlockDirective() {
     return {
         bindToController: true,
         controller: PostBlockController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            meta: '@?lumxMeta',
-            onClick: '&?lumxOnClick',
-            orientation: '@?lumxOrientation',
-            text: '@?lumxText',
-            thumbnail: '@?lumxThumbnail',
-            thumbnailAspectRatio: '@?lumxThumbnailAspectRatio',
-            title: '@?lumxTitle',
-            theme: '@?lumxTheme',
+            meta: '@?lxMeta',
+            onClick: '&?lxOnClick',
+            orientation: '@?lxOrientation',
+            text: '@?lxText',
+            thumbnail: '@?lxThumbnail',
+            thumbnailAspectRatio: '@?lxThumbnailAspectRatio',
+            title: '@?lxTitle',
+            theme: '@?lxTheme',
         },
         template,
         transclude: {
-            actions: `?${COMPONENT_PREFIX}PostBlockActions`,
-            attachments: `?${COMPONENT_PREFIX}PostBlockAttachments`,
-            author: `?${COMPONENT_PREFIX}PostBlockAuthor`,
-            tags: `?${COMPONENT_PREFIX}PostBlockTags`,
+            actions: '?lxPostBlockActions',
+            attachments: '?lxPostBlockAttachments',
+            author: '?lxPostBlockAuthor',
+            tags: '?lxPostBlockTags',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.post-block`).directive(`${COMPONENT_PREFIX}PostBlock`, PostBlockDirective);
+angular.module('lumx.post-block').directive('lxPostBlock', PostBlockDirective);
 
 /////////////////////////////
 

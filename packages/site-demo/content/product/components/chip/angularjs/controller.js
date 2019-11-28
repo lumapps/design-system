@@ -2,7 +2,7 @@ import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant } from '
 
 /////////////////////////////
 
-function DemoController(LumXNotificationService) {
+function DemoController(LxNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -49,7 +49,7 @@ function DemoController(LumXNotificationService) {
      * When the chip has been clicked, display a notification.
      */
     function clickCallback() {
-        LumXNotificationService.success('Callback');
+        LxNotificationService.success('Callback');
     }
 
     /**

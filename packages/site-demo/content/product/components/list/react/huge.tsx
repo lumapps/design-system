@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import {
     Avatar,
     Button,
@@ -12,6 +11,7 @@ import {
     Thumbnail,
     ThumbnailVariant,
 } from '@lumx/react';
+import React, { useState } from 'react';
 
 import { mdiDotsHorizontal, mdiSend } from '@lumx/icons';
 
@@ -19,10 +19,12 @@ const App = () => (
     <>
         <List>
             <ListSubheader>text only</ListSubheader>
+
             <ListItem size={Size.huge}>
                 <div>
                     <span>Multi-line item</span>
                 </div>
+
                 <div>
                     <span className="lumx-theme-color-dark-L2">
                         Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
@@ -30,11 +32,14 @@ const App = () => (
                     </span>
                 </div>
             </ListItem>
+
             <ListSubheader>rich</ListSubheader>
+
             <ListItem size={Size.huge} before={<Icon icon={mdiSend} size={Size.xs} />}>
                 <div>
                     <span>Multi-line item</span>
                 </div>
+
                 <div>
                     <span className="lumx-theme-color-dark-L2">
                         Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
@@ -42,6 +47,7 @@ const App = () => (
                     </span>
                 </div>
             </ListItem>
+
             <ListItem
                 size={Size.huge}
                 before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
@@ -50,6 +56,7 @@ const App = () => (
                 <div>
                     <span>Multi-line item</span>
                 </div>
+
                 <div>
                     <span className="lumx-theme-color-dark-L2">
                         Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
@@ -57,6 +64,7 @@ const App = () => (
                     </span>
                 </div>
             </ListItem>
+
             <ListItem
                 size={Size.huge}
                 before={<Avatar image="http://i.pravatar.cc/72" size={Size.m} />}
@@ -65,6 +73,7 @@ const App = () => (
                 <div>
                     <span>Multi-line item</span>
                 </div>
+
                 <div>
                     <span className="lumx-theme-color-dark-L2">
                         Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus

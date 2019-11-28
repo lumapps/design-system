@@ -1,6 +1,4 @@
-import { COMPONENT_PREFIX } from '@lumx/angularjs/constants/common_constants';
-
-function DemoController($scope, LumXDialogService, LumXNotificationService) {
+function DemoController($scope, LxDialogService, LxNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -125,9 +123,9 @@ function DemoController($scope, LumXDialogService, LumXNotificationService) {
      * Display an alert dialog.
      */
     function alertDialog() {
-        LumXDialogService.alert({
+        LxDialogService.alert({
             cb: function onAnswer() {
-                LumXNotificationService.info('Alert callback');
+                LxNotificationService.info('Alert callback');
             },
             buttons: {
                 ok: 'Agree',
@@ -143,12 +141,12 @@ function DemoController($scope, LumXDialogService, LumXNotificationService) {
      * Display a confirm dialog.
      */
     function confirmDialog() {
-        LumXDialogService.confirm({
+        LxDialogService.confirm({
             cb: function onAnswer(answer) {
                 if (answer) {
-                    LumXNotificationService.success('Agree');
+                    LxNotificationService.success('Agree');
                 } else {
-                    LumXNotificationService.error('Disagree');
+                    LxNotificationService.error('Disagree');
                 }
             },
             buttons: {
@@ -169,7 +167,7 @@ function DemoController($scope, LumXDialogService, LumXNotificationService) {
      * @param {string} source The id of the button.
      */
     function openDialog(id, source) {
-        LumXDialogService.open(id, {
+        LxDialogService.open(id, {
             source: `#${source}`,
         });
     }
@@ -193,7 +191,7 @@ function DemoController($scope, LumXDialogService, LumXNotificationService) {
      * @param {Event}  evt      The dialog open start event.
      * @param {string} dialogId The id of the dialog that is starting to open.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dialog__open-start`, (evt, dialogId) => {
+    $scope.$on('lx-dialog__open-start', (evt, dialogId) => {
         if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Open start');
@@ -206,7 +204,7 @@ function DemoController($scope, LumXDialogService, LumXNotificationService) {
      * @param {Event}  evt      The dialog open end event.
      * @param {string} dialogId The id of the dialog that has opened.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dialog__open-end`, (evt, dialogId) => {
+    $scope.$on('lx-dialog__open-end', (evt, dialogId) => {
         if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Open end');
@@ -219,7 +217,7 @@ function DemoController($scope, LumXDialogService, LumXNotificationService) {
      * @param {Event}  evt      The dialog close start event.
      * @param {string} dialogId The id of the dialog that is starting to close.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dialog__close-start`, (evt, dialogId) => {
+    $scope.$on('lx-dialog__close-start', (evt, dialogId) => {
         if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Close start');
@@ -232,7 +230,7 @@ function DemoController($scope, LumXDialogService, LumXNotificationService) {
      * @param {Event}  evt      The dialog close end event.
      * @param {string} dialogId The id of the dialog that has closed.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dialog__close-end`, (evt, dialogId) => {
+    $scope.$on('lx-dialog__close-end', (evt, dialogId) => {
         if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Close end');
@@ -245,7 +243,7 @@ function DemoController($scope, LumXDialogService, LumXNotificationService) {
      * @param {Event}  evt      The dialog scroll end event.
      * @param {string} dialogId The id of the dialog that has been scrolled to the end.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-dialog__scroll-end`, (evt, dialogId) => {
+    $scope.$on('lx-dialog__scroll-end', (evt, dialogId) => {
         if (vm.dialogIds.includes(dialogId)) {
             // eslint-disable-next-line no-console
             console.log('Scroll end');

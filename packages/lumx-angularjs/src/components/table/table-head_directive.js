@@ -1,12 +1,8 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
-/////////////////////////////
-
 function TableHeadController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this, no-unused-vars
-    const lumx = this;
+    const lx = this;
 }
 
 /////////////////////////////
@@ -17,7 +13,7 @@ function TableHeadDirective() {
     return {
         bindToController: true,
         controller: TableHeadController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {},
@@ -28,7 +24,7 @@ function TableHeadDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.table`).directive(`${COMPONENT_PREFIX}TableHead`, TableHeadDirective);
+angular.module('lumx.table').directive('lxTableHead', TableHeadDirective);
 
 /////////////////////////////
 

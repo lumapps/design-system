@@ -1,39 +1,29 @@
-<div
-    class="lumx-expansion-panel"
-    ng-class="{ 'lumx-expansion-panel--is-open': lumx.isWrapperOpen,
-                'lumx-expansion-panel--is-close': !lumx.isWrapperOpen,
-                'lumx-expansion-panel--is-draggable': lumx.isDraggable,
-                'lumx-expansion-panel--theme-light': !lumx.theme || lumx.theme === 'light',
-                'lumx-expansion-panel--theme-dark': lumx.theme === 'dark',
-                'lumx-expansion-panel--variant-boxed': !lumx.variant || lumx.variant === 'boxed',
-                'lumx-expansion-panel--variant-trimmed': lumx.variant === 'trimmed', }"
->
-    <div class="lumx-expansion-panel__header" ng-click="lumx.toggle()">
-        <div class="lumx-expansion-panel__header-drag" ng-transclude="dragHandle" ng-if="::lumx.isDraggable"></div>
+<div class="lumx-expansion-panel" ng-class="lx.getClasses()">
+    <div class="lumx-expansion-panel__header" ng-click="lx.toggle()">
+        <div class="lumx-expansion-panel__header-drag" ng-transclude="dragHandle" ng-if="::lx.isDraggable"></div>
 
-        <div class="lumx-expansion-panel__header-content" ng-if="::lumx.label && !lumx.hasHeader">
-            <span class="lumx-expansion-panel__label">{{ lumx.label }}</span>
+        <div class="lumx-expansion-panel__header-content" ng-if="::lx.label && !lx.hasHeader">
+            <span class="lumx-expansion-panel__label">{{ lx.label }}</span>
         </div>
 
-        <div class="lumx-expansion-panel__header-content" ng-transclude="header" ng-if="::lumx.hasHeader"></div>
+        <div class="lumx-expansion-panel__header-content" ng-transclude="header" ng-if="::lx.hasHeader"></div>
 
         <div class="lumx-expansion-panel__header-toggle">
-            <lumx-button
-                lumx-color="{{ !lumx.theme || lumx.theme === 'light' ? 'dark' : 'light' }}"
-                lumx-emphasis="low"
-                lumx-variant="icon"
-                ng-click="lumx.toggle($event)"
+            <lx-button
+                lx-color="{{ !lx.theme || lx.theme === 'light' ? 'dark' : 'light' }}"
+                lx-emphasis="low"
+                lx-variant="icon"
+                ng-click="lx.toggle($event)"
             >
-                <lumx-icon lumx-path="{{ lumx.isWrapperOpen ? lumx.icons.mdiChevronUp : lumx.icons.mdiChevronDown }}">
-                </lumx-icon>
-            </lumx-button>
+                <lx-icon lx-path="{{ lx.isWrapperOpen ? lx.icons.mdiChevronUp : lx.icons.mdiChevronDown }}"> </lx-icon>
+            </lx-button>
         </div>
     </div>
 
-    <div class="lumx-expansion-panel__wrapper" ng-if="lumx.isWrapperDisplayed">
+    <div class="lumx-expansion-panel__wrapper" ng-if="lx.isWrapperDisplayed">
         <div class="lumx-expansion-panel__container">
             <div class="lumx-expansion-panel__content" ng-transclude="content"></div>
-            <div class="lumx-expansion-panel__footer" ng-transclude="footer" ng-if="::lumx.hasFooter"></div>
+            <div class="lumx-expansion-panel__footer" ng-transclude="footer" ng-if="::lx.hasFooter"></div>
         </div>
     </div>
 </div>

@@ -1,5 +1,228 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
+
+/////////////////////////////
+
+function ButtonController() {
+    'ngInject';
+
+    // eslint-disable-next-line consistent-this
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        emphasis: 'high',
+        size: 'm',
+        theme: 'light',
+        variant: 'button',
+    };
+
+    /**
+     * The emphasis fallback.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _EMPHASIS_FALLBACK = {
+        raised: 'high',
+        flat: 'low',
+        fab: 'high',
+        icon: 'low',
+    };
+
+    /**
+     * The size fallback.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _SIZE_FALLBACK = {
+        xs: 's',
+        // eslint-disable-next-line id-length
+        s: 's',
+        // eslint-disable-next-line id-length
+        m: 'm',
+        l: 'm',
+        xl: 'm',
+    };
+
+    /**
+     * The variant fallback.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _VARIANT_FALLBACK = {
+        raised: 'button',
+        flat: 'button',
+        fab: 'icon',
+        icon: 'icon',
+    };
+
+    /////////////////////////////
+    //                         //
+    //    Private functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Whether button has default emphasis or not.
+     *
+     * @return {boolean} Whether button has default emphasis or not.
+     */
+    function _isDefaultEmphasis() {
+        return (!lx.type && !lx.emphasis) || lx.emphasis === 'high' || lx.type === 'raised' || lx.type === 'fab';
+    }
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get button classes.
+     *
+     * @return {Array} The list of button classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        if (angular.isUndefined(lx.color) || !lx.color) {
+            if (angular.isDefined(lx.theme) && lx.theme && !_isDefaultEmphasis()) {
+                const buttonColor = lx.theme === 'light' ? 'dark' : 'light';
+                classes.push(`${CSS_PREFIX}-button--color-${buttonColor}`);
+            } else {
+                const defaultColor = _isDefaultEmphasis() ? 'primary' : 'dark';
+                classes.push(`${CSS_PREFIX}-button--color-${defaultColor}`);
+            }
+
+            // Backward compatibility.
+            classes.push('btn--primary');
+        } else {
+            classes.push(`${CSS_PREFIX}-button--color-${lx.color}`);
+
+            // Backward compatibility.
+            classes.push(`btn--${lx.color}`);
+        }
+
+        if (angular.isUndefined(lx.emphasis) || !lx.emphasis) {
+            if (angular.isDefined(lx.type) && lx.type) {
+                classes.push(`${CSS_PREFIX}-button--emphasis-${_EMPHASIS_FALLBACK[lx.type]}`);
+            } else {
+                classes.push(`${CSS_PREFIX}-button--emphasis-${_DEFAULT_PROPS.emphasis}`);
+            }
+        } else {
+            classes.push(`${CSS_PREFIX}-button--emphasis-${lx.emphasis}`);
+        }
+
+        if (lx.isSelected) {
+            classes.push(`${CSS_PREFIX}-button--is-selected`);
+        }
+
+        if (angular.isUndefined(lx.size) || !lx.size) {
+            classes.push(`${CSS_PREFIX}-button--size-${_DEFAULT_PROPS.size}`);
+
+            // Backward compatibility.
+            classes.push('btn--m');
+        } else {
+            classes.push(`${CSS_PREFIX}-button--size-${_SIZE_FALLBACK[lx.size]}`);
+
+            // Backward compatibility.
+            classes.push(`btn--${lx.size}`);
+        }
+
+        if (_isDefaultEmphasis()) {
+            if (angular.isUndefined(lx.theme) || !lx.theme) {
+                classes.push(`${CSS_PREFIX}-button--theme-${_DEFAULT_PROPS.theme}`);
+            } else {
+                classes.push(`${CSS_PREFIX}-button--theme-${lx.theme}`);
+            }
+        }
+
+        if (angular.isUndefined(lx.variant) || !lx.variant) {
+            if (angular.isDefined(lx.type) && lx.type) {
+                classes.push(`${CSS_PREFIX}-button--variant-${_VARIANT_FALLBACK[lx.type]}`);
+            } else {
+                classes.push(`${CSS_PREFIX}-button--variant-${_DEFAULT_PROPS.variant}`);
+            }
+        } else {
+            classes.push(`${CSS_PREFIX}-button--variant-${lx.variant}`);
+        }
+
+        if (angular.isUndefined(lx.type) || !lx.type) {
+            // Backward compatibility.
+            classes.push('btn--raised');
+        } else {
+            // Backward compatibility.
+            classes.push(`btn--${lx.type}`);
+        }
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
+    }
+
+    /**
+     * Get button wrapper classes.
+     *
+     * @return {Array} The list of button wrapper classes.
+     */
+    function getWrapperClasses() {
+        const wrapperClasses = [];
+
+        if (lx.hasBackground && lx.emphasis === 'low') {
+            if (angular.isUndefined(lx.color) || !lx.color) {
+                if (angular.isDefined(lx.theme) && lx.theme) {
+                    wrapperClasses.push(`${CSS_PREFIX}-button-wrapper--color-${lx.theme}`);
+                } else {
+                    wrapperClasses.push(`${CSS_PREFIX}-button-wrapper--color-light`);
+                }
+            } else {
+                let wrapperColor = 'light';
+
+                if (lx.color === 'light') {
+                    wrapperColor = 'dark';
+                }
+
+                wrapperClasses.push(`${CSS_PREFIX}-button-wrapper--color-${wrapperColor}`);
+            }
+
+            if (angular.isUndefined(lx.variant) || !lx.variant) {
+                if (angular.isDefined(lx.type) && lx.type) {
+                    wrapperClasses.push(`${CSS_PREFIX}-button-wrapper--variant-${_VARIANT_FALLBACK[lx.type]}`);
+                } else {
+                    wrapperClasses.push(`${CSS_PREFIX}-button-wrapper--variant-${_DEFAULT_PROPS.variant}`);
+                }
+            } else {
+                wrapperClasses.push(`${CSS_PREFIX}-button-wrapper--variant-${lx.variant}`);
+            }
+        }
+
+        return wrapperClasses;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
+    lx.getWrapperClasses = getWrapperClasses;
+}
 
 /////////////////////////////
 
@@ -32,15 +255,14 @@ function ButtonDirective() {
         let buttonContent;
 
         if (isAnchor(attrs)) {
-            buttonContent = `<a class="${CSS_PREFIX}-button" ng-transclude></a>`;
+            buttonContent = `<a class="${CSS_PREFIX}-button btn" ng-class="lx.getClasses()" ng-transclude></a>`;
         } else {
-            buttonContent = `<button class="${CSS_PREFIX}-button" ng-transclude></button>`;
+            buttonContent = `<button class="${CSS_PREFIX}-button btn" ng-class="lx.getClasses()" ng-transclude></button>`;
         }
 
-        if (attrs.lumxHasBackground) {
-            // Wrap button.
+        if (attrs.lxHasBackground) {
             return `
-                <div class="${CSS_PREFIX}-button-wrapper">
+                <div class="${CSS_PREFIX}-button-wrapper" ng-class="lx.getWrapperClasses()">
                     ${buttonContent}
                 </div>
             `;
@@ -52,17 +274,20 @@ function ButtonDirective() {
     function link(scope, el, attrs) {
         let buttonEl = el;
 
-        if (attrs.lumxHasBackground) {
+        if (attrs.lxHasBackground) {
             if (isAnchor(attrs)) {
                 buttonEl = el.find('a');
             } else {
                 buttonEl = el.find('button');
             }
-            // Forward disabled attr to the button element.
-            buttonEl.attr('disabled', attrs.ngDisabled || attrs.disabled);
         }
 
-        if (!attrs.lumxVariant || attrs.lumxVariant === 'button') {
+        if (
+            (!attrs.lxVariant && !attrs.lxType) ||
+            attrs.lxVariant === 'button' ||
+            attrs.lxType === 'raised' ||
+            attrs.lxType === 'flat'
+        ) {
             const leftIcon = buttonEl.find('i:first-child');
             const rightIcon = buttonEl.find('i:last-child');
             const label = buttonEl.find('span');
@@ -79,158 +304,26 @@ function ButtonDirective() {
                 buttonEl.wrapInner('<span></span>');
             }
         }
-
-        const isDefaultEmphasis = !attrs.lumxEmphasis || attrs.lumxEmphasis === 'high';
-
-        const defaultProps = {
-            color: isDefaultEmphasis ? 'primary' : 'dark',
-            emphasis: 'high',
-            size: 'm',
-            theme: 'light',
-            variant: 'button',
-        };
-
-        if (!attrs.lumxColor) {
-            buttonEl.addClass(`${CSS_PREFIX}-button--color-${defaultProps.color}`);
-
-            if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
-                el.removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button-wrapper--color-\S+/g) || []).join(' ');
-                }).addClass(`${CSS_PREFIX}-button-wrapper--color-light`);
-            }
-        }
-
-        attrs.$observe('lumxColor', (color) => {
-            if (!color) {
-                return;
-            }
-
-            buttonEl
-                .removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button--color-\S+/g) || []).join(' ');
-                })
-                .addClass(`${CSS_PREFIX}-button--color-${color}`);
-
-            if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
-                let wrapperColor = 'light';
-
-                if (color === 'light') {
-                    wrapperColor = 'dark';
-                }
-
-                el.removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button-wrapper--color-\S+/g) || []).join(' ');
-                }).addClass(`${CSS_PREFIX}-button-wrapper--color-${wrapperColor}`);
-            }
-        });
-
-        if (!attrs.lumxEmphasis) {
-            buttonEl.addClass(`${CSS_PREFIX}-button--emphasis-${defaultProps.emphasis}`);
-        }
-
-        attrs.$observe('lumxEmphasis', (emphasis) => {
-            if (!emphasis) {
-                return;
-            }
-
-            buttonEl
-                .removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button--emphasis-\S+/g) || []).join(' ');
-                })
-                .addClass(`${CSS_PREFIX}-button--emphasis-${emphasis}`);
-        });
-
-        if (!attrs.lumxSize) {
-            buttonEl.addClass(`${CSS_PREFIX}-button--size-${defaultProps.size}`);
-        }
-
-        attrs.$observe('lumxSize', (size) => {
-            if (!size) {
-                return;
-            }
-
-            buttonEl
-                .removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button--size-\S+/g) || []).join(' ');
-                })
-                .addClass(`${CSS_PREFIX}-button--size-${size}`);
-        });
-
-        if (!attrs.lumxTheme && isDefaultEmphasis) {
-            buttonEl.addClass(`${CSS_PREFIX}-button--theme-${defaultProps.theme}`);
-        }
-
-        attrs.$observe('lumxTheme', (theme) => {
-            if (!theme) {
-                return;
-            }
-
-            if (isDefaultEmphasis) {
-                buttonEl
-                    .removeClass((index, className) => {
-                        return (className.match(/(?:\S|-)*button--theme-\S+/g) || []).join(' ');
-                    })
-                    .addClass(`${CSS_PREFIX}-button--theme-${theme}`);
-            } else {
-                const buttonColor = theme === 'light' ? 'dark' : 'light';
-
-                buttonEl
-                    .removeClass((index, className) => {
-                        return (className.match(/(?:\S|-)*button--color-\S+/g) || []).join(' ');
-                    })
-                    .addClass(`${CSS_PREFIX}-button--color-${buttonColor}`);
-            }
-
-            if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
-                el.removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button-wrapper--color-\S+/g) || []).join(' ');
-                }).addClass(`${CSS_PREFIX}-button-wrapper--color-${theme}`);
-            }
-        });
-
-        if (!attrs.lumxVariant) {
-            buttonEl.addClass(`${CSS_PREFIX}-button--variant-${defaultProps.variant}`);
-        }
-
-        attrs.$observe('lumxVariant', (variant) => {
-            if (!variant) {
-                return;
-            }
-
-            buttonEl
-                .removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button--variant-\S+/g) || []).join(' ');
-                })
-                .addClass(`${CSS_PREFIX}-button--variant-${variant}`);
-
-            if (attrs.lumxHasBackground && attrs.lumxEmphasis === 'low') {
-                el.removeClass((index, className) => {
-                    return (className.match(/(?:\S|-)*button-wrapper--variant-\S+/g) || []).join(' ');
-                }).addClass(`${CSS_PREFIX}-button-wrapper--variant-${variant}`);
-            }
-        });
-
-        scope.$watch(attrs.lumxCustomColors, (customColors) => {
-            if (customColors) {
-                buttonEl.addClass(`${CSS_PREFIX}-custom-colors`);
-            } else {
-                buttonEl.removeClass(`${CSS_PREFIX}-custom-colors`);
-            }
-        });
-
-        scope.$watch(attrs.lumxIsSelected, (isSelected) => {
-            if (isSelected) {
-                buttonEl.addClass(`${CSS_PREFIX}-button--is-selected`);
-            } else {
-                buttonEl.removeClass(`${CSS_PREFIX}-button--is-selected`);
-            }
-        });
     }
 
     return {
+        bindToController: true,
+        controller: ButtonController,
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
+        scope: {
+            color: '@?lxColor',
+            customColors: '=?lxCustomColors',
+            emphasis: '@?lxEmphasis',
+            hasBackground: '=?lxHasBackground',
+            isSelected: '=?lxIsSelected',
+            size: '@?lxSize',
+            theme: '@?lxTheme',
+            type: '@?lxType',
+            variant: '@?lxVariant',
+        },
         template: getTemplate,
         transclude: true,
     };
@@ -238,7 +331,7 @@ function ButtonDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.button`).directive(`${COMPONENT_PREFIX}Button`, ButtonDirective);
+angular.module('lumx.button').directive('lxButton', ButtonDirective);
 
 /////////////////////////////
 

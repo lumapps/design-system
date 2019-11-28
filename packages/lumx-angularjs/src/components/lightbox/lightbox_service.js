@@ -1,7 +1,3 @@
-import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from '@lumx/angularjs/constants/common_constants';
-
-/////////////////////////////
-
 function LightboxService($rootScope) {
     'ngInject';
 
@@ -19,7 +15,7 @@ function LightboxService($rootScope) {
      * @param {string} lightboxId The lightbox identifier.
      */
     function closeLightbox(lightboxId) {
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-lightbox__close`, lightboxId);
+        $rootScope.$broadcast('lx-lightbox__close', lightboxId);
     }
 
     /**
@@ -29,7 +25,7 @@ function LightboxService($rootScope) {
      * @param {Object} params     An optional object that holds extra parameters.
      */
     function openLightbox(lightboxId, params) {
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-lightbox__open`, lightboxId, params);
+        $rootScope.$broadcast('lx-lightbox__open', lightboxId, params);
     }
 
     /////////////////////////////
@@ -40,7 +36,7 @@ function LightboxService($rootScope) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.lightbox`).service(`${SERVICE_PREFIX}LightboxService`, LightboxService);
+angular.module('lumx.lightbox').service('LxLightboxService', LightboxService);
 
 /////////////////////////////
 

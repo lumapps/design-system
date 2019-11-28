@@ -5,7 +5,7 @@ import { Button, ButtonGroup, IconButton } from '@lumx/react';
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
 const App = ({ theme }) => (
-    <>
+    <div className="demo-grid">
         <Button theme={theme}>Default</Button>
 
         <Button disabled theme={theme}>
@@ -26,7 +26,7 @@ const App = ({ theme }) => (
         </ButtonGroup>
 
         <IconButton icon={mdiPlus} theme={theme} />
-    </>
+    </div>
 );
 
 export default App;

@@ -1,4 +1,4 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
 
 import template from './side-navigation.html';
 
@@ -7,8 +7,33 @@ import template from './side-navigation.html';
 function SideNavigationController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this, no-unused-vars
-    const lumx = this;
+    // eslint-disable-next-line consistent-this
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get side navigation classes.
+     *
+     * @return {Array} The list of side navigation classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
 }
 
 /////////////////////////////
@@ -19,11 +44,11 @@ function SideNavigationDirective() {
     return {
         bindToController: true,
         controller: SideNavigationController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {
-            customColors: '=?lumxCustomColors',
+            customColors: '=?lxCustomColors',
         },
         template,
         transclude: true,
@@ -32,9 +57,7 @@ function SideNavigationDirective() {
 
 /////////////////////////////
 
-angular
-    .module(`${MODULE_NAME}.side-navigation`)
-    .directive(`${COMPONENT_PREFIX}SideNavigation`, SideNavigationDirective);
+angular.module('lumx.side-navigation').directive('lxSideNavigation', SideNavigationDirective);
 
 /////////////////////////////
 

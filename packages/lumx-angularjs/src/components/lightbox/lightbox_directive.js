@@ -1,22 +1,16 @@
 import { mdiClose } from '@lumx/icons';
 
 import { CSS_PREFIX, ESCAPE_KEY_CODE } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './lightbox.html';
 
 /////////////////////////////
 
-function LightboxController(
-    $element,
-    $scope,
-    LumXDepthService,
-    LumXFocusTrapService,
-    LumXEventSchedulerService,
-    $timeout,
-) {
+function LightboxController($element, $scope, LxDepthService, LxFocusTrapService, LxEventSchedulerService, $timeout) {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -72,7 +66,7 @@ function LightboxController(
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiClose,
     };
 
@@ -81,14 +75,14 @@ function LightboxController(
      *
      * @type {string}
      */
-    lumx.id = undefined;
+    lx.id = undefined;
 
     /**
      * Whether the lightbox is open or not.
      *
      * @type {boolean}
      */
-    lumx.isOpen = false;
+    lx.isOpen = false;
 
     /////////////////////////////
     //                         //
@@ -103,7 +97,7 @@ function LightboxController(
      */
     function _onKeyUp(evt) {
         if (evt.keyCode === ESCAPE_KEY_CODE) {
-            lumx.closeLightbox();
+            lx.closeLightbox();
         }
 
         evt.stopPropagation();
@@ -113,23 +107,23 @@ function LightboxController(
      * Open the current lightbox.
      */
     function _open() {
-        if (lumx.isOpen) {
+        if (lx.isOpen) {
             return;
         }
 
-        LumXDepthService.increase();
+        LxDepthService.increase();
 
         _lightbox
-            .css('z-index', LumXDepthService.get())
+            .css('z-index', LxDepthService.get())
             .appendTo('body')
             .show();
 
-        _idEventScheduler = LumXEventSchedulerService.register('keyup', _onKeyUp);
+        _idEventScheduler = LxEventSchedulerService.register('keyup', _onKeyUp);
 
         $timeout(() => {
-            lumx.isOpen = true;
+            lx.isOpen = true;
 
-            LumXFocusTrapService.activate(_lightbox);
+            LxFocusTrapService.activate(_lightbox);
         });
     }
 
@@ -152,12 +146,12 @@ function LightboxController(
      * Close the current lightbox.
      */
     function closeLightbox() {
-        if (!lumx.isOpen) {
+        if (!lx.isOpen) {
             return;
         }
 
         if (angular.isDefined(_idEventScheduler)) {
-            LumXEventSchedulerService.unregister(_idEventScheduler);
+            LxEventSchedulerService.unregister(_idEventScheduler);
             _idEventScheduler = undefined;
         }
 
@@ -173,15 +167,15 @@ function LightboxController(
                 .removeClass(`${CSS_PREFIX}-lightbox--is-hidden`)
                 .appendTo(_parentElement);
 
-            lumx.isOpen = false;
+            lx.isOpen = false;
 
-            LumXFocusTrapService.disable();
+            LxFocusTrapService.disable();
         }, _TRANSITION_DURATION);
     }
 
     /////////////////////////////
 
-    lumx.closeLightbox = closeLightbox;
+    lx.closeLightbox = closeLightbox;
 
     /////////////////////////////
     //                         //
@@ -196,8 +190,8 @@ function LightboxController(
      * @param {string} lightboxId The lightbox identifier.
      * @param {Object} params     An optional object that holds extra parameters.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-lightbox__open`, (evt, lightboxId, params) => {
-        if (lightboxId === lumx.id) {
+    $scope.$on('lx-lightbox__open', (evt, lightboxId, params) => {
+        if (lightboxId === lx.id) {
             _open(params);
 
             if (angular.isDefined(params) && angular.isDefined(params.source) && params.source) {
@@ -212,9 +206,9 @@ function LightboxController(
      * @param {Event}  evt        The lightbox open event.
      * @param {string} lightboxId The lightbox identifier.
      */
-    $scope.$on(`${COMPONENT_PREFIX}-lightbox__close`, (evt, lightboxId) => {
-        if (lightboxId === lumx.id || lightboxId === undefined) {
-            lumx.closeLightbox();
+    $scope.$on('lx-lightbox__close', (evt, lightboxId) => {
+        if (lightboxId === lx.id || lightboxId === undefined) {
+            lx.closeLightbox();
         }
     });
 
@@ -222,13 +216,15 @@ function LightboxController(
      * Close the current lightbox on destroy.
      */
     $scope.$on('$destroy', () => {
-        lumx.closeLightbox();
+        lx.closeLightbox();
     });
 }
 
 /////////////////////////////
 
 function LightboxDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl) {
         attrs.$observe('id', (newId) => {
             ctrl.id = newId;
@@ -238,7 +234,7 @@ function LightboxDirective() {
     return {
         bindToController: true,
         controller: LightboxController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
@@ -250,7 +246,7 @@ function LightboxDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.lightbox`).directive(`${COMPONENT_PREFIX}Lightbox`, LightboxDirective);
+angular.module('lumx.lightbox').directive('lxLightbox', LightboxDirective);
 
 /////////////////////////////
 

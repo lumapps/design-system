@@ -1,13 +1,34 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './thumbnail.html';
 
 /////////////////////////////
 
 function ThumbnailController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        align: 'left',
+        aspectRatio: 'original',
+        theme: 'light',
+        variant: 'squared',
+    };
 
     /////////////////////////////
     //                         //
@@ -21,18 +42,48 @@ function ThumbnailController() {
      * @return {Object} The image style properties.
      */
     function getBackgroundImage() {
-        if (angular.isUndefined(lumx.aspectRatio) || lumx.aspectRatio === 'original') {
+        if (angular.isUndefined(lx.aspectRatio) || lx.aspectRatio === 'original') {
             return {};
         }
 
         return {
-            backgroundImage: `url(${lumx.image})`,
+            backgroundImage: `url(${lx.image})`,
         };
+    }
+
+    /**
+     * Get thumbnail classes.
+     *
+     * @return {Array} The list of thumbnail classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const align = lx.align ? lx.align : _DEFAULT_PROPS.align;
+        const aspectRatio = lx.aspectRatio ? lx.aspectRatio : _DEFAULT_PROPS.aspectRatio;
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+        const variant = lx.variant ? lx.variant : _DEFAULT_PROPS.variant;
+
+        classes.push(`${CSS_PREFIX}-thumbnail--align-${align}`);
+        classes.push(`${CSS_PREFIX}-thumbnail--aspect-ratio-${aspectRatio}`);
+        classes.push(`${CSS_PREFIX}-thumbnail--theme-${theme}`);
+        classes.push(`${CSS_PREFIX}-thumbnail--variant-${variant}`);
+
+        if (lx.fillHeight) {
+            classes.push(`${CSS_PREFIX}-thumbnail--fill-height`);
+        }
+
+        if (lx.size) {
+            classes.push(`${CSS_PREFIX}-thumbnail--size-${lx.size}`);
+        }
+
+        return classes;
     }
 
     /////////////////////////////
 
-    lumx.getBackgroundImage = getBackgroundImage;
+    lx.getBackgroundImage = getBackgroundImage;
+    lx.getClasses = getClasses;
 }
 
 /////////////////////////////
@@ -40,64 +91,20 @@ function ThumbnailController() {
 function ThumbnailDirective() {
     'ngInject';
 
-    function link(scope, el, attrs) {
-        const defaultProps = {
-            aspectRatio: 'original',
-            variant: 'squared',
-        };
-
-        if (!attrs.lumxAspectRatio) {
-            el.addClass(`${CSS_PREFIX}-thumbnail--aspect-ratio-${defaultProps.aspectRatio}`);
-        }
-
-        attrs.$observe('lumxAspectRatio', (aspectRatio) => {
-            if (!aspectRatio) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*thumbnail--aspect-ratio-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-thumbnail--aspect-ratio-${aspectRatio}`);
-        });
-
-        attrs.$observe('lumxSize', (size) => {
-            if (!size) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*thumbnail--size-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-thumbnail--size-${size}`);
-        });
-
-        if (!attrs.lumxVariant) {
-            el.addClass(`${CSS_PREFIX}-thumbnail--variant-${defaultProps.variant}`);
-        }
-
-        attrs.$observe('lumxVariant', (variant) => {
-            if (!variant) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*thumbnail--variant-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-thumbnail--variant-${variant}`);
-        });
-    }
-
     return {
         bindToController: true,
         controller: ThumbnailController,
-        controllerAs: 'lumx',
-        link,
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {
-            align: '@?lumxAlign',
-            aspectRatio: '@?lumxAspectRatio',
-            fillHeight: '=?lumxFillHeight',
-            image: '@lumxImage',
-            theme: '@?lumxTheme',
+            align: '@?lxAlign',
+            aspectRatio: '@?lxAspectRatio',
+            fillHeight: '=?lxFillHeight',
+            image: '@lxImage',
+            size: '@?lxSize',
+            theme: '@?lxTheme',
+            variant: '@?lxVariant',
         },
         template,
     };
@@ -105,7 +112,7 @@ function ThumbnailDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.thumbnail`).directive(`${COMPONENT_PREFIX}Thumbnail`, ThumbnailDirective);
+angular.module('lumx.thumbnail').directive('lxThumbnail', ThumbnailDirective);
 
 /////////////////////////////
 

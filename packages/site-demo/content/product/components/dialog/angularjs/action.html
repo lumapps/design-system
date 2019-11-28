@@ -1,36 +1,36 @@
-<div>
-    <lumx-button ng-click="vm.openDialog(vm.dialogIds[6], vm.sourceIds[6])" id="{{ vm.sourceIds[6] }}">
+<div class="demo-grid">
+    <lx-button ng-click="vm.openDialog(vm.dialogIds[6], vm.sourceIds[6])" id="{{ vm.sourceIds[6] }}">
         Open dialog with actions
-    </lumx-button>
+    </lx-button>
 </div>
 
-<lumx-dialog id="{{ vm.dialogIds[6] }}">
-    <lumx-dialog-header>
-        <lumx-toolbar>
-            <lumx-toolbar-label>
+<lx-dialog id="{{ vm.dialogIds[6] }}">
+    <lx-dialog-header>
+        <lx-toolbar>
+            <lx-toolbar-label>
                 <span class="lumx-typography-title">Dialog with action</span>
-            </lumx-toolbar-label>
+            </lx-toolbar-label>
 
-            <lumx-toolbar-after>
-                <lumx-button lumx-emphasis="low" ng-click="vm.addPerson()" lumx-focus-on-init>
+            <lx-toolbar-after>
+                <lx-button lx-emphasis="low" ng-click="vm.addPerson()" lx-focus-on-init>
                     <span>Add</span>
-                </lumx-button>
-            </lumx-toolbar-after>
-        </lumx-toolbar>
-    </lumx-dialog-header>
+                </lx-button>
+            </lx-toolbar-after>
+        </lx-toolbar>
+    </lx-dialog-header>
 
-    <lumx-dialog-content>
+    <lx-dialog-content>
         <div class="lumx-spacing-padding-horizontal-huge">
             <div ng-repeat="person in vm.people">{{ person.name }} - {{ person.email }} - {{ person.age }}</div>
         </div>
-    </lumx-dialog-content>
+    </lx-dialog-content>
 
-    <lumx-dialog-footer>
-        <lumx-toolbar>
-            <lumx-toolbar-after>
-                <lumx-button lumx-emphasis="medium" lumx-dialog-close>Cancel</lumx-button>
-                <lumx-button class="lumx-spacing-margin-left-regular" lumx-dialog-close>Save</lumx-button>
-            </lumx-toolbar-after>
-        </lumx-toolbar>
-    </lumx-dialog-footer>
-</lumx-dialog>
+    <lx-dialog-footer>
+        <lx-toolbar>
+            <lx-toolbar-after>
+                <lx-button lx-emphasis="medium" lx-dialog-close>Cancel</lx-button>
+                <lx-button class="lumx-spacing-margin-left-regular" lx-dialog-close>Save</lx-button>
+            </lx-toolbar-after>
+        </lx-toolbar>
+    </lx-dialog-footer>
+</lx-dialog>

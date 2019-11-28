@@ -1,5 +1,4 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './user-block.html';
 
@@ -7,7 +6,26 @@ import template from './user-block.html';
 
 function UserBlockController() {
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        orientation: 'horizontal',
+        size: 'm',
+        theme: 'light',
+    };
 
     /////////////////////////////
     //                         //
@@ -20,73 +38,54 @@ function UserBlockController() {
      *
      * @type {boolean}
      */
-    lumx.hasAction = false;
+    lx.hasAction = false;
 
     /**
      * Whether the directive has actions slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasActions = false;
+    lx.hasActions = false;
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get user block classes.
+     *
+     * @return {Array} The list of user block classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const orientation = lx.orientation ? lx.orientation : _DEFAULT_PROPS.orientation;
+        const size = lx.size ? lx.size : _DEFAULT_PROPS.size;
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-user-block--orientation-${orientation}`);
+        classes.push(`${CSS_PREFIX}-user-block--size-${size}`);
+        classes.push(`${CSS_PREFIX}-user-block--theme-${theme}`);
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
 }
 
 /////////////////////////////
 
 function UserBlockDirective() {
     function link(scope, el, attrs, ctrl, transclude) {
-        const defaultProps = {
-            orientation: 'horizontal',
-            size: 'm',
-            theme: 'light',
-        };
-
-        if (!attrs.lumxOrientation) {
-            el.addClass(`${CSS_PREFIX}-user-block--orientation-${defaultProps.orientation}`);
-        }
-
-        attrs.$observe('lumxOrientation', (orientation) => {
-            if (!orientation || (orientation === 'vertical' && attrs.lumxSize !== 'l')) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*user-block--orientation-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-user-block--orientation-${orientation}`);
-        });
-
-        if (!attrs.lumxSize) {
-            el.addClass(`${CSS_PREFIX}-user-block--size-${defaultProps.size}`);
-        }
-
-        attrs.$observe('lumxSize', (size) => {
-            if (!size) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*user-block--size-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-user-block--size-${size}`);
-        });
-
-        if (!attrs.lumxTheme) {
-            el.addClass(`${CSS_PREFIX}-user-block--theme-${defaultProps.theme}`);
-        }
-
-        attrs.$observe('lumxTheme', (theme) => {
-            if (!theme) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*user-block--theme-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-user-block--theme-${theme}`);
-        });
-
-        if (transclude.isSlotFilled('action') && attrs.lumxOrientation === 'vertical') {
+        if (transclude.isSlotFilled('action')) {
             ctrl.hasAction = true;
         }
 
-        if (transclude.isSlotFilled('actions') && attrs.lumxOrientation === 'vertical') {
+        if (transclude.isSlotFilled('actions')) {
             ctrl.hasActions = true;
         }
     }
@@ -94,32 +93,32 @@ function UserBlockDirective() {
     return {
         bindToController: true,
         controller: UserBlockController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            avatar: '@?lumxAvatar',
-            fields: '=?lumxFields',
-            name: '@?lumxName',
-            onClick: '&?lumxOnClick',
-            onMouseEnter: '&?lumxOnMouseEnter',
-            onMouseLeave: '&?lumxOnMouseLeave',
-            orientation: '@?lumxOrientation',
-            size: '@?lumxSize',
-            theme: '@?lumxTheme',
+            avatar: '@?lxAvatar',
+            fields: '=?lxFields',
+            name: '@?lxName',
+            onClick: '&?lxOnClick',
+            onMouseEnter: '&?lxOnMouseEnter',
+            onMouseLeave: '&?lxOnMouseLeave',
+            orientation: '@?lxOrientation',
+            size: '@?lxSize',
+            theme: '@?lxTheme',
         },
         template,
         transclude: {
-            action: `?${COMPONENT_PREFIX}UserBlockAction`,
-            actions: `?${COMPONENT_PREFIX}UserBlockActions`,
+            action: '?lxUserBlockAction',
+            actions: '?lxUserBlockActions',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.user-block`).directive(`${COMPONENT_PREFIX}UserBlock`, UserBlockDirective);
+angular.module('lumx.user-block').directive('lxUserBlock', UserBlockDirective);
 
 /////////////////////////////
 

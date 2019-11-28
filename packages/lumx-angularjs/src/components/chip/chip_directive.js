@@ -1,7 +1,6 @@
 import { mdiMenuDown } from '@lumx/icons';
 
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './chip.html';
 
@@ -11,7 +10,25 @@ function ChipController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        color: 'dark',
+        size: 'm',
+    };
 
     /////////////////////////////
     //                         //
@@ -24,28 +41,28 @@ function ChipController() {
      *
      * @type {boolean}
      */
-    lumx.hasAfter = false;
+    lx.hasAfter = false;
 
     /**
      * Whether the directive has before slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasBefore = false;
+    lx.hasBefore = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasLabel = false;
+    lx.hasLabel = false;
 
     /**
      * The chip icons.
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiMenuDown,
     };
 
@@ -56,18 +73,67 @@ function ChipController() {
     /////////////////////////////
 
     /**
+     * Get chip classes.
+     *
+     * @return {Array} The list of chip classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        let color;
+        if (lx.color) {
+            // eslint-disable-next-line prefer-destructuring
+            color = lx.color;
+        } else if (angular.isDefined(lx.theme) && lx.theme) {
+            color = lx.theme === 'light' ? 'dark' : 'light';
+        } else {
+            // eslint-disable-next-line prefer-destructuring
+            color = _DEFAULT_PROPS.color;
+        }
+
+        const size = lx.size ? lx.size : _DEFAULT_PROPS.size;
+        const state = lx.isSelected ? 'selected' : 'unselected';
+
+        classes.push(`${CSS_PREFIX}-chip--color-${color}`);
+        classes.push(`${CSS_PREFIX}-chip--size-${size}`);
+        classes.push(`${CSS_PREFIX}-chip--is-${state}`);
+
+        if (lx.hasAfter || lx.hasDropdownIndicator) {
+            classes.push(`${CSS_PREFIX}-chip--has-after`);
+        }
+
+        if (lx.hasBefore) {
+            classes.push(`${CSS_PREFIX}-chip--has-before`);
+        }
+
+        if (angular.isFunction(lx.onClick)) {
+            classes.push(`${CSS_PREFIX}-chip--is-clickable`);
+        }
+
+        if (lx.isDisabled) {
+            classes.push(`${CSS_PREFIX}-chip--is-disabled`);
+        }
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
+    }
+
+    /**
      * Handle given function on after area click.
      *
      * @param {Event} evt The click event.
      */
     function handleOnAfterClick(evt) {
-        if (!angular.isFunction(lumx.onAfterClick)) {
+        if (!angular.isFunction(lx.onAfterClick)) {
             return;
         }
 
         evt.stopPropagation();
 
-        lumx.onAfterClick();
+        lx.onAfterClick();
     }
 
     /**
@@ -76,13 +142,13 @@ function ChipController() {
      * @param {Event} evt The click event.
      */
     function handleOnBeforeClick(evt) {
-        if (!angular.isFunction(lumx.onBeforeClick)) {
+        if (!angular.isFunction(lx.onBeforeClick)) {
             return;
         }
 
         evt.stopPropagation();
 
-        lumx.onBeforeClick();
+        lx.onBeforeClick();
     }
 
     /**
@@ -91,18 +157,19 @@ function ChipController() {
      * @param {Event} evt The click event.
      */
     function handleOnClick(evt) {
-        if (!angular.isFunction(lumx.onClick)) {
+        if (!angular.isFunction(lx.onClick)) {
             return;
         }
 
-        lumx.onClick({ $event: evt });
+        lx.onClick({ $event: evt });
     }
 
     /////////////////////////////
 
-    lumx.handleOnAfterClick = handleOnAfterClick;
-    lumx.handleOnBeforeClick = handleOnBeforeClick;
-    lumx.handleOnClick = handleOnClick;
+    lx.getClasses = getClasses;
+    lx.handleOnAfterClick = handleOnAfterClick;
+    lx.handleOnBeforeClick = handleOnBeforeClick;
+    lx.handleOnClick = handleOnClick;
 }
 
 /////////////////////////////
@@ -122,69 +189,39 @@ function ChipDirective() {
         if (transclude.isSlotFilled('label')) {
             ctrl.hasLabel = true;
         }
-
-        const defaultProps = {
-            color: 'dark',
-        };
-
-        if (!attrs.lumxColor) {
-            el.addClass(`${CSS_PREFIX}-chip--color-${defaultProps.color}`);
-        }
-
-        attrs.$observe('lumxColor', (color) => {
-            if (!color) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*chip--color-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-chip--color-${color}`);
-        });
-
-        attrs.$observe('lumxTheme', (theme) => {
-            if (!theme) {
-                return;
-            }
-
-            const chipColor = theme === 'light' ? 'dark' : 'light';
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*chip--color-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-chip--color-${chipColor}`);
-        });
     }
 
     return {
         bindToController: true,
         controller: ChipController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            color: '@?lumxColor',
-            customColors: '=?lumxCustomColors',
-            hasDropdownIndicator: '=?lumxHasDropdownIndicator',
+            color: '@?lxColor',
+            customColors: '=?lxCustomColors',
+            hasDropdownIndicator: '=?lxHasDropdownIndicator',
             isDisabled: '=?ngDisabled',
-            isSelected: '=?lumxIsSelected',
-            onAfterClick: '&?lumxOnAfterClick',
-            onBeforeClick: '&?lumxOnBeforeClick',
-            onClick: '&?lumxOnClick',
-            size: '@?lumxSize',
-            theme: '@?lumxTheme',
+            isSelected: '=?lxIsSelected',
+            onAfterClick: '&?lxOnAfterClick',
+            onBeforeClick: '&?lxOnBeforeClick',
+            onClick: '&?lxOnClick',
+            size: '@?lxSize',
+            theme: '@?lxTheme',
         },
         template,
         transclude: {
-            after: `?${COMPONENT_PREFIX}ChipAfter`,
-            before: `?${COMPONENT_PREFIX}ChipBefore`,
-            label: `${COMPONENT_PREFIX}ChipLabel`,
+            after: '?lxChipAfter',
+            before: '?lxChipBefore',
+            label: 'lxChipLabel',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.chip`).directive(`${COMPONENT_PREFIX}Chip`, ChipDirective);
+angular.module('lumx.chip').directive('lxChip', ChipDirective);
 
 /////////////////////////////
 

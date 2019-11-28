@@ -1,41 +1,41 @@
-<div>
-    <lumx-chip id="{{ vm.dropdownTarget }}">
-        <lumx-chip-label>Target</lumx-chip-label>
-    </lumx-chip>
+<div class="demo-grid">
+    <lx-chip id="{{ vm.dropdownTarget }}">
+        <lx-chip-label>Target</lx-chip-label>
+    </lx-chip>
 </div>
 
-<div>
-    <lumx-button id="{{ vm.dropdownSource }}" ng-click="vm.openDropdown($event)">
+<div class="demo-grid">
+    <lx-button id="{{ vm.dropdownSource }}" ng-click="vm.openDropdown($event)">
         Open dropdown
-    </lumx-button>
+    </lx-button>
 
-    <lumx-button ng-click="vm.closeDropdown($event)">
+    <lx-button ng-click="vm.closeDropdown($event)">
         Close dropdown
-    </lumx-button>
+    </lx-button>
 
-    <lumx-dropdown lumx-offset="8" lumx-position="left" id="{{ vm.dropdownId }}">
-        <lumx-dropdown-menu>
-            <lumx-list lumx-is-clickable="true" lumx-focus-on-init>
-                <lumx-list-item lumx-size="tiny">
-                    <lumx-list-item-content>Los Angeles</lumx-list-item-content>
-                </lumx-list-item>
+    <lx-dropdown lx-offset="8" lx-position="left" id="{{ vm.dropdownId }}">
+        <lx-dropdown-menu>
+            <lx-list lx-is-clickable="true" lx-focus-on-init>
+                <lx-list-item lx-size="tiny">
+                    <lx-list-item-content>Los Angeles</lx-list-item-content>
+                </lx-list-item>
 
-                <lumx-list-item lumx-size="tiny">
-                    <lumx-list-item-content>Monterrey</lumx-list-item-content>
-                </lumx-list-item>
+                <lx-list-item lx-size="tiny">
+                    <lx-list-item-content>Monterrey</lx-list-item-content>
+                </lx-list-item>
 
-                <lumx-list-item lumx-size="tiny">
-                    <lumx-list-item-content>Georgetown</lumx-list-item-content>
-                </lumx-list-item>
+                <lx-list-item lx-size="tiny">
+                    <lx-list-item-content>Georgetown</lx-list-item-content>
+                </lx-list-item>
 
-                <lumx-list-item lumx-size="tiny">
-                    <lumx-list-item-content>Cali</lumx-list-item-content>
-                </lumx-list-item>
+                <lx-list-item lx-size="tiny">
+                    <lx-list-item-content>Cali</lx-list-item-content>
+                </lx-list-item>
 
-                <lumx-list-item lumx-size="tiny">
-                    <lumx-list-item-content>Trondheim</lumx-list-item-content>
-                </lumx-list-item>
-            </lumx-list>
-        </lumx-dropdown-menu>
-    </lumx-dropdown>
+                <lx-list-item lx-size="tiny">
+                    <lx-list-item-content>Trondheim</lx-list-item-content>
+                </lx-list-item>
+            </lx-list>
+        </lx-dropdown-menu>
+    </lx-dropdown>
 </div>

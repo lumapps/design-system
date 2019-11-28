@@ -1,7 +1,3 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
-/////////////////////////////
-
 function SelectChoicesFilter($filter) {
     'ngInject';
 
@@ -28,7 +24,7 @@ function SelectChoicesFilter($filter) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.select`).filter(`${COMPONENT_PREFIX}SelectChoicesFilter`, SelectChoicesFilter);
+angular.module('lumx.select').filter('lxSelectChoicesFilter', SelectChoicesFilter);
 
 /////////////////////////////
 

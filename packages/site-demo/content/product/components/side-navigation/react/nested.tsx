@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SideNavigationItem, SideNavigation, Emphasis } from '@lumx/react';
+import { Emphasis, SideNavigation, SideNavigationItem } from '@lumx/react';
 
 const App = () => (
     <>
@@ -8,6 +8,7 @@ const App = () => (
             <SideNavigationItem label="Level 0 (closed)">
                 <SideNavigationItem label="Level 1" emphasis={Emphasis.medium} />
             </SideNavigationItem>
+
             <SideNavigationItem label="Level 0 (open)" isOpen>
                 <SideNavigationItem label="Level 1" emphasis={Emphasis.medium} />
                 <SideNavigationItem label="Level 1" emphasis={Emphasis.medium} />

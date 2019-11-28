@@ -1,9 +1,8 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME, SERVICE_PREFIX } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////
 
-function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
+function DialogService($compile, $rootScope, $timeout, LxUtilsService) {
     'ngInject';
 
     const service = this;
@@ -20,35 +19,35 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
      * @param {Object} params An object that holds title, text, button label, callback and source parameters.
      */
     function alertDialog(params) {
-        const alertDialogId = LumXUtilsService.generateUUID();
+        const alertDialogId = LxUtilsService.generateUUID();
         const alertDialogScope = $rootScope.$new(true);
 
         alertDialogScope.cb = params.cb;
 
         const compiledAlertDialog = $compile(
-            `<${COMPONENT_PREFIX}-dialog id="${alertDialogId}" lumx-size="tiny" lumx-auto-close="false" lumx-escape-close="false">
-                    <${COMPONENT_PREFIX}-dialog-header>
-                        <${COMPONENT_PREFIX}-toolbar>
-                            <${COMPONENT_PREFIX}-toolbar-label>
+            `<lx-dialog id="${alertDialogId}" lx-size="tiny" lx-auto-close="false" lx-escape-close="false">
+                    <lx-dialog-header>
+                        <lx-toolbar>
+                            <lx-toolbar-label>
                                 <span class="${CSS_PREFIX}-typography-title">${params.title}</span>
-                            </${COMPONENT_PREFIX}-toolbar-label>
-                        </${COMPONENT_PREFIX}-toolbar>
-                    </${COMPONENT_PREFIX}-dialog-header>
-                    <${COMPONENT_PREFIX}-dialog-content>
+                            </lx-toolbar-label>
+                        </lx-toolbar>
+                    </lx-dialog-header>
+                    <lx-dialog-content>
                         <div class="${CSS_PREFIX}-spacing-padding-horizontal-huge ${CSS_PREFIX}-spacing-padding-bottom-big">
                             <p>${params.text}</p>
                         </div>
-                    </${COMPONENT_PREFIX}-dialog-content>
-                    <${COMPONENT_PREFIX}-dialog-footer>
-                        <${COMPONENT_PREFIX}-toolbar>
-                            <${COMPONENT_PREFIX}-toolbar-after>
-                                <${COMPONENT_PREFIX}-button ng-click="cb()" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
+                    </lx-dialog-content>
+                    <lx-dialog-footer>
+                        <lx-toolbar>
+                            <lx-toolbar-after>
+                                <lx-button ng-click="cb()" lx-dialog-close lx-focus-on-init>
                                     ${params.buttons.ok}
-                                </${COMPONENT_PREFIX}-button>
-                            </${COMPONENT_PREFIX}-toolbar-after>
-                        </${COMPONENT_PREFIX}-toolbar>
-                    </${COMPONENT_PREFIX}-dialog-footer>
-                </${COMPONENT_PREFIX}-dialog>`,
+                                </lx-button>
+                            </lx-toolbar-after>
+                        </lx-toolbar>
+                    </lx-dialog-footer>
+                </lx-dialog>`,
         )(alertDialogScope);
 
         angular.element('body').append(compiledAlertDialog);
@@ -61,11 +60,12 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
     /**
      * Close a given dialog.
      *
-     * @param {string} dialogId The dialog identifier.
-     * @param {Object} params   An optional object that holds extra parameters.
+     * @param {string}  dialogId The dialog identifier.
+     * @param {boolean} canceled Indicates if the dialog was closed via a cancel or not.
+     * @param {Object}  params   An optional object that holds extra parameters.
      */
-    function closeDialog(dialogId, params) {
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__close`, dialogId, params);
+    function closeDialog(dialogId, canceled, params) {
+        $rootScope.$broadcast('lx-dialog__close', dialogId, canceled, params);
     }
 
     /**
@@ -74,38 +74,38 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
      * @param {Object} params An object that holds title, text, button labels, callback and source parameters.
      */
     function confirmDialog(params) {
-        const confirmDialogId = LumXUtilsService.generateUUID();
+        const confirmDialogId = LxUtilsService.generateUUID();
         const confirmDialogScope = $rootScope.$new(true);
 
         confirmDialogScope.cb = params.cb;
 
         const compiledConfirmDialog = $compile(
-            `<${COMPONENT_PREFIX}-dialog id="${confirmDialogId}" lumx-size="tiny" lumx-auto-close="false" lumx-escape-close="false">
-                    <${COMPONENT_PREFIX}-dialog-header>
-                        <${COMPONENT_PREFIX}-toolbar>
-                            <${COMPONENT_PREFIX}-toolbar-label>
+            `<lx-dialog id="${confirmDialogId}" lx-size="tiny" lx-auto-close="false" lx-escape-close="false">
+                    <lx-dialog-header>
+                        <lx-toolbar>
+                            <lx-toolbar-label>
                                 <span class="${CSS_PREFIX}-typography-title">${params.title}</span>
-                            </${COMPONENT_PREFIX}-toolbar-label>
-                        </${COMPONENT_PREFIX}-toolbar>
-                    </${COMPONENT_PREFIX}-dialog-header>
-                    <${COMPONENT_PREFIX}-dialog-content>
+                            </lx-toolbar-label>
+                        </lx-toolbar>
+                    </lx-dialog-header>
+                    <lx-dialog-content>
                         <div class="${CSS_PREFIX}-spacing-padding-horizontal-huge ${CSS_PREFIX}-spacing-padding-bottom-big">
                             <p>${params.text}</p>
                         </div>
-                    </${COMPONENT_PREFIX}-dialog-content>
-                    <${COMPONENT_PREFIX}-dialog-footer>
-                        <${COMPONENT_PREFIX}-toolbar>
-                            <${COMPONENT_PREFIX}-toolbar-after>
-                                <${COMPONENT_PREFIX}-button lumx-emphasis="medium" ng-click="cb(false)" ${COMPONENT_PREFIX}-dialog-close>
+                    </lx-dialog-content>
+                    <lx-dialog-footer>
+                        <lx-toolbar>
+                            <lx-toolbar-after>
+                                <lx-button lx-emphasis="medium" ng-click="cb(false)" lx-dialog-close>
                                     ${params.buttons.cancel}
-                                </${COMPONENT_PREFIX}-button>
-                                <${COMPONENT_PREFIX}-button class="${CSS_PREFIX}-spacing-margin-left-regular" ng-click="cb(true)" ${COMPONENT_PREFIX}-dialog-close ${COMPONENT_PREFIX}-focus-on-init>
+                                </lx-button>
+                                <lx-button class="${CSS_PREFIX}-spacing-margin-left-regular" ng-click="cb(true)" lx-dialog-close lx-focus-on-init>
                                     ${params.buttons.ok}
-                                </${COMPONENT_PREFIX}-button>
-                            </${COMPONENT_PREFIX}-toolbar-after>
-                        </${COMPONENT_PREFIX}-toolbar>
-                    </${COMPONENT_PREFIX}-dialog-footer>
-                </${COMPONENT_PREFIX}-dialog>`,
+                                </lx-button>
+                            </lx-toolbar-after>
+                        </lx-toolbar>
+                    </lx-dialog-footer>
+                </lx-dialog>`,
         )(confirmDialogScope);
 
         angular.element('body').append(compiledConfirmDialog);
@@ -122,7 +122,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
      * @param {Object} params   An optional object that holds extra parameters.
      */
     function openDialog(dialogId, params) {
-        $rootScope.$broadcast(`${COMPONENT_PREFIX}-dialog__open`, dialogId, params);
+        $rootScope.$broadcast('lx-dialog__open', dialogId, params);
     }
 
     /////////////////////////////
@@ -135,7 +135,7 @@ function DialogService($compile, $rootScope, $timeout, LumXUtilsService) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).service(`${SERVICE_PREFIX}DialogService`, DialogService);
+angular.module('lumx.dialog').service('LxDialogService', DialogService);
 
 /////////////////////////////
 

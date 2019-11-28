@@ -7,16 +7,9 @@ const App = ({ theme }) => {
     return (
         <>
             <pre>{`Change temperature: ${value}°C`}</pre>
-            <Slider
-                max={180}
-                min={30}
-                steps={5}
-                theme={theme}
-                value={value}
-                onChange={setValue}
-            />
+            <Slider max={180} min={30} steps={5} theme={theme} value={value} onChange={setValue} />
         </>
-    )
+    );
 };
 
 export default App;

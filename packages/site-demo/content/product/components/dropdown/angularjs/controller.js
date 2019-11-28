@@ -10,7 +10,7 @@ import {
 
 /////////////////////////////
 
-function DemoController(LumXDropdownService) {
+function DemoController(LxDropdownService) {
     'ngInject';
 
     const vm = this;
@@ -63,7 +63,7 @@ function DemoController(LumXDropdownService) {
     function closeDropdown(evt) {
         evt.stopPropagation();
 
-        LumXDropdownService.close(vm.dropdownId);
+        LxDropdownService.close(vm.dropdownId);
     }
 
     /**
@@ -74,7 +74,7 @@ function DemoController(LumXDropdownService) {
     function openDropdown(evt) {
         evt.stopPropagation();
 
-        LumXDropdownService.open(vm.dropdownId, {
+        LxDropdownService.open(vm.dropdownId, {
             target: `#${vm.dropdownTarget}`,
             source: `#${vm.dropdownSource}`,
         });

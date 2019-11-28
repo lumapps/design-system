@@ -1,5 +1,4 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './list-item.html';
 
@@ -9,7 +8,24 @@ function ListItemController($element, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        size: 'regular',
+    };
 
     /////////////////////////////
     //                         //
@@ -22,28 +38,28 @@ function ListItemController($element, $scope) {
      *
      * @type {boolean}
      */
-    lumx.hasAfter = false;
+    lx.hasAfter = false;
 
     /**
      * Whether the directive has before slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasBefore = false;
+    lx.hasBefore = false;
 
     /**
      * Whether the directive has content slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasContent = false;
+    lx.hasContent = false;
 
     /**
      * The parent controller (list).
      *
      * @type {Object}
      */
-    lumx.parentController = undefined;
+    lx.parentController = undefined;
 
     /////////////////////////////
     //                         //
@@ -55,12 +71,45 @@ function ListItemController($element, $scope) {
      * Register item index as active index to the list.
      */
     function _registerIndex() {
-        if (angular.isUndefined(lumx.parentController)) {
+        if (angular.isUndefined(lx.parentController)) {
             return;
         }
 
-        lumx.parentController.activeItemIndex = $element.index(`.${CSS_PREFIX}-list-item`);
+        lx.parentController.activeItemIndex = $element.index(`.${CSS_PREFIX}-list-item`);
     }
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get list item classes.
+     *
+     * @return {Array} The list of list item classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const size = lx.size ? lx.size : _DEFAULT_PROPS.size;
+
+        classes.push(`${CSS_PREFIX}-list-item--size-${size}`);
+
+        if (lx.parentController.isClickable) {
+            classes.push(`${CSS_PREFIX}-list-item--is-clickable`);
+        }
+
+        if (lx.isSelected) {
+            classes.push(`${CSS_PREFIX}-list-item--is-selected`);
+        }
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
 
     /////////////////////////////
     //                         //
@@ -108,27 +157,27 @@ function ListItemDirective() {
     return {
         bindToController: true,
         controller: ListItemController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
-        require: [`${COMPONENT_PREFIX}ListItem`, `?^${COMPONENT_PREFIX}List`],
+        require: ['lxListItem', '?^lxList'],
         restrict: 'E',
         scope: {
-            isSelected: '=?lumxIsSelected',
-            size: '@?lumxSize',
+            isSelected: '=?lxIsSelected',
+            size: '@?lxSize',
         },
         template,
         transclude: {
-            after: `?${COMPONENT_PREFIX}ListItemAfter`,
-            before: `?${COMPONENT_PREFIX}ListItemBefore`,
-            content: `?${COMPONENT_PREFIX}ListItemContent`,
+            after: '?lxListItemAfter',
+            before: '?lxListItemBefore',
+            content: '?lxListItemContent',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.list`).directive(`${COMPONENT_PREFIX}ListItem`, ListItemDirective);
+angular.module('lumx.list').directive('lxListItem', ListItemDirective);
 
 /////////////////////////////
 

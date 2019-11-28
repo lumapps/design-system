@@ -1,7 +1,6 @@
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import { EDGE_FROM_ACTIVE_INDEX, PAGINATION_ITEMS_MAX, PAGINATION_ITEM_SIZE } from './constants';
 
@@ -13,13 +12,24 @@ function SlideshowControlsController($element, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        theme: 'light',
+    };
 
     /**
      * The current slide index.
@@ -46,7 +56,7 @@ function SlideshowControlsController($element, $scope) {
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiChevronLeft,
         mdiChevronRight,
     };
@@ -56,21 +66,21 @@ function SlideshowControlsController($element, $scope) {
      *
      * @type {number}
      */
-    lumx.paginationItemsMax = PAGINATION_ITEMS_MAX;
+    lx.paginationItemsMax = PAGINATION_ITEMS_MAX;
 
     /**
      * The pagination items range.
      *
      * @type {Array}
      */
-    lumx.paginationItemsRange = [];
+    lx.paginationItemsRange = [];
 
     /**
      * The pagination items visible range.
      *
      * @type {Array}
      */
-    lumx.paginationItemsVisibleRange = [];
+    lx.paginationItemsVisibleRange = [];
 
     /////////////////////////////
     //                         //
@@ -93,22 +103,22 @@ function SlideshowControlsController($element, $scope) {
      * Initialize pagination items state.
      */
     function _initPaginationItemsState() {
-        let minRange = lumx.activeIndex - EDGE_FROM_ACTIVE_INDEX;
-        let maxRange = lumx.activeIndex + EDGE_FROM_ACTIVE_INDEX;
+        let minRange = lx.activeIndex - EDGE_FROM_ACTIVE_INDEX;
+        let maxRange = lx.activeIndex + EDGE_FROM_ACTIVE_INDEX;
 
         if (minRange < 0) {
             for (let i = minRange; i < 0; i++) {
                 minRange++;
                 maxRange++;
             }
-        } else if (maxRange > lumx.slidesCount - 1) {
-            for (let i = maxRange; i > lumx.slidesCount - 1; i--) {
+        } else if (maxRange > lx.slidesCount - 1) {
+            for (let i = maxRange; i > lx.slidesCount - 1; i--) {
                 minRange--;
                 maxRange--;
             }
         }
 
-        lumx.paginationItemsVisibleRange = [minRange, maxRange];
+        lx.paginationItemsVisibleRange = [minRange, maxRange];
 
         _curentTransformOffset = PAGINATION_ITEM_SIZE * minRange;
 
@@ -121,11 +131,11 @@ function SlideshowControlsController($element, $scope) {
     function _setPaginationItemsRange() {
         const range = [];
 
-        for (let i = 0; i < lumx.slidesCount; i++) {
+        for (let i = 0; i < lx.slidesCount; i++) {
             range.push(i);
         }
 
-        lumx.paginationItemsRange = range;
+        lx.paginationItemsRange = range;
     }
 
     /**
@@ -133,19 +143,19 @@ function SlideshowControlsController($element, $scope) {
      */
     function _updatePaginationItemsState() {
         const firstSlideIndex = 0;
-        const lastSlideIndex = lumx.slidesCount - 1;
+        const lastSlideIndex = lx.slidesCount - 1;
 
-        let [minRange, maxRange] = lumx.paginationItemsVisibleRange;
+        let [minRange, maxRange] = lx.paginationItemsVisibleRange;
 
-        if (lumx.activeIndex > _currentIndex) {
-            if (lumx.activeIndex === maxRange && lumx.activeIndex !== lastSlideIndex) {
+        if (lx.activeIndex > _currentIndex) {
+            if (lx.activeIndex === maxRange && lx.activeIndex !== lastSlideIndex) {
                 minRange++;
                 maxRange++;
 
                 _curentTransformOffset += PAGINATION_ITEM_SIZE;
             }
-        } else if (lumx.activeIndex < _currentIndex) {
-            if (lumx.activeIndex === minRange && lumx.activeIndex !== firstSlideIndex) {
+        } else if (lx.activeIndex < _currentIndex) {
+            if (lx.activeIndex === minRange && lx.activeIndex !== firstSlideIndex) {
                 minRange--;
                 maxRange--;
 
@@ -153,7 +163,7 @@ function SlideshowControlsController($element, $scope) {
             }
         }
 
-        lumx.paginationItemsVisibleRange = [minRange, maxRange];
+        lx.paginationItemsVisibleRange = [minRange, maxRange];
 
         _movePaginationWrapper();
     }
@@ -165,15 +175,37 @@ function SlideshowControlsController($element, $scope) {
     /////////////////////////////
 
     /**
+     * Get slideshow controls classes.
+     *
+     * @return {Array} The list of slideshow controls classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+        classes.push(`${CSS_PREFIX}-slideshow-controls--theme-${theme}`);
+
+        if (lx.slidesCount > lx.paginationItemsMax) {
+            classes.push(`${CSS_PREFIX}-slideshow-controls--has-infinite-pagination`);
+        }
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
+    }
+
+    /**
      * Go to the given slide index.
      *
      * @param {number} newIndex The new slide index.
      */
     function goToSlide(newIndex) {
-        lumx.activeIndex = newIndex;
+        lx.activeIndex = newIndex;
 
-        if (angular.isFunction(lumx.onPaginationClick)) {
-            lumx.onPaginationClick();
+        if (angular.isFunction(lx.onPaginationClick)) {
+            lx.onPaginationClick();
         }
     }
 
@@ -184,7 +216,7 @@ function SlideshowControlsController($element, $scope) {
      * @return {boolean} Whether the pagination item is on edge or not.
      */
     function isPaginationItemOnEdge(index) {
-        return index !== 0 && index !== lumx.slidesCount - 1 && lumx.paginationItemsVisibleRange.includes(index);
+        return index !== 0 && index !== lx.slidesCount - 1 && lx.paginationItemsVisibleRange.includes(index);
     }
 
     /**
@@ -194,21 +226,21 @@ function SlideshowControlsController($element, $scope) {
      * @return {boolean} Whether the pagination item is out of the visible range or not.
      */
     function isPaginationItemOutVisibleRange(index) {
-        return index < lumx.paginationItemsVisibleRange[0] || index > lumx.paginationItemsVisibleRange[1];
+        return index < lx.paginationItemsVisibleRange[0] || index > lx.paginationItemsVisibleRange[1];
     }
 
     /**
      * Go to next slide.
      */
     function nextSlide() {
-        if (lumx.activeIndex + 1 === lumx.slidesCount) {
-            lumx.activeIndex = 0;
+        if (lx.activeIndex + 1 === lx.slidesCount) {
+            lx.activeIndex = 0;
         } else {
-            lumx.activeIndex++;
+            lx.activeIndex++;
         }
 
-        if (angular.isFunction(lumx.onNextClick)) {
-            lumx.onNextClick();
+        if (angular.isFunction(lx.onNextClick)) {
+            lx.onNextClick();
         }
     }
 
@@ -216,24 +248,25 @@ function SlideshowControlsController($element, $scope) {
      * Go to previous slide.
      */
     function previousSlide() {
-        if (lumx.activeIndex === 0) {
-            lumx.activeIndex = lumx.slidesCount - 1;
+        if (lx.activeIndex === 0) {
+            lx.activeIndex = lx.slidesCount - 1;
         } else {
-            lumx.activeIndex--;
+            lx.activeIndex--;
         }
 
-        if (angular.isFunction(lumx.onPreviousClick)) {
-            lumx.onPreviousClick();
+        if (angular.isFunction(lx.onPreviousClick)) {
+            lx.onPreviousClick();
         }
     }
 
     /////////////////////////////
 
-    lumx.goToSlide = goToSlide;
-    lumx.isPaginationItemOnEdge = isPaginationItemOnEdge;
-    lumx.isPaginationItemOutVisibleRange = isPaginationItemOutVisibleRange;
-    lumx.nextSlide = nextSlide;
-    lumx.previousSlide = previousSlide;
+    lx.getClasses = getClasses;
+    lx.goToSlide = goToSlide;
+    lx.isPaginationItemOnEdge = isPaginationItemOnEdge;
+    lx.isPaginationItemOutVisibleRange = isPaginationItemOutVisibleRange;
+    lx.nextSlide = nextSlide;
+    lx.previousSlide = previousSlide;
 
     /////////////////////////////
     //                         //
@@ -246,16 +279,16 @@ function SlideshowControlsController($element, $scope) {
      *
      * @param {number} newIndex The new slide index.
      */
-    $scope.$watch('lumx.activeIndex', (newIndex, oldIndex) => {
+    $scope.$watch('lx.activeIndex', (newIndex, oldIndex) => {
         if (angular.isUndefined(newIndex)) {
             return;
         }
 
         _setPaginationItemsRange();
 
-        if (lumx.slidesCount > lumx.paginationItemsMax) {
+        if (lx.slidesCount > lx.paginationItemsMax) {
             const firstSlideIndex = 0;
-            const lastSlideIndex = lumx.slidesCount - 1;
+            const lastSlideIndex = lx.slidesCount - 1;
 
             if (
                 newIndex === oldIndex ||
@@ -268,7 +301,7 @@ function SlideshowControlsController($element, $scope) {
             }
         }
 
-        _currentIndex = lumx.activeIndex;
+        _currentIndex = lx.activeIndex;
     });
 }
 
@@ -280,17 +313,17 @@ function SlideshowControlsDirective() {
     return {
         bindToController: true,
         controller: SlideshowControlsController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {
-            activeIndex: '=?lumxActiveIndex',
-            customColors: '=?lumxCustomColors',
-            onNextClick: '&?lumxOnNextClick',
-            onPaginationClick: '&?lumxOnPaginationClick',
-            onPreviousClick: '&?lumxOnPreviousClick',
-            slidesCount: '=lumxSlidesCount',
-            theme: '@?lumxTheme',
+            activeIndex: '=?lxActiveIndex',
+            customColors: '=?lxCustomColors',
+            onNextClick: '&?lxOnNextClick',
+            onPaginationClick: '&?lxOnPaginationClick',
+            onPreviousClick: '&?lxOnPreviousClick',
+            slidesCount: '=lxSlidesCount',
+            theme: '@?lxTheme',
         },
         template,
     };
@@ -298,9 +331,7 @@ function SlideshowControlsDirective() {
 
 /////////////////////////////
 
-angular
-    .module(`${MODULE_NAME}.slideshow`)
-    .directive(`${COMPONENT_PREFIX}SlideshowControls`, SlideshowControlsDirective);
+angular.module('lumx.slideshow').directive('lxSlideshowControls', SlideshowControlsDirective);
 
 /////////////////////////////
 

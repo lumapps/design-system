@@ -1,16 +1,9 @@
-<a
-    class="lumx-progress-tracker-step"
-    ng-class="{ 'lumx-progress-tracker-step--is-active': lumx.isActive,
-                'lumx-progress-tracker-step--is-complete': lumx.isComplete,
-                'lumx-progress-tracker-step--is-clickable': lumx.isClickable(),
-                'lumx-progress-tracker-step--has-error': lumx.isActive && lumx.hasError }"
-    tabindex="{{ lumx.isClickable() ? 0 : -1 }}"
->
-    <lumx-icon class="lumx-progress-tracker-step__state" lumx-path="{{ lumx.getIcon() }}" lumx-size="s"></lumx-icon>
+<a class="lumx-progress-tracker-step" ng-class="lx.getClasses()" tabindex="{{ lx.isClickable() ? 0 : -1 }}">
+    <lx-icon class="lumx-progress-tracker-step__state" lx-path="{{ lx.getIcon() }}" lx-size="s"></lx-icon>
 
-    <span class="lumx-progress-tracker-step__label">{{ lumx.label }}</span>
+    <span class="lumx-progress-tracker-step__label">{{ lx.label }}</span>
 
-    <span class="lumx-progress-tracker-step__helper" ng-if="lumx.helper">
-        {{ lumx.helper }}
+    <span class="lumx-progress-tracker-step__helper" ng-if="lx.helper">
+        {{ lx.helper }}
     </span>
 </a>

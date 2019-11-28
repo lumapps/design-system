@@ -1,13 +1,12 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////
 
-function TooltipController($element, $timeout, $window) {
+function TooltipController($element, $timeout) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -77,16 +76,13 @@ function TooltipController($element, $timeout, $window) {
         const targetProps = {
             height: $element.outerHeight(),
             left: $element.offset().left,
-            top: $element.offset().top - angular.element($window).scrollTop(),
+            top: $element.offset().top,
             width: $element.outerWidth(),
         };
-        const tooltipPosition = angular.isDefined(lumx.position) ? lumx.position : 'top';
+        const tooltipPosition = angular.isDefined(lx.position) ? lx.position : 'top';
         const tooltipProps = {};
 
-        _tooltip
-            .addClass(`${CSS_PREFIX}-tooltip--position-${tooltipPosition}`)
-            .css({ position: 'absolute' })
-            .appendTo('body');
+        _tooltip.addClass(`${CSS_PREFIX}-tooltip--position-${tooltipPosition}`).appendTo('body');
 
         /* eslint-disable no-magic-numbers */
         if (tooltipPosition === 'top') {
@@ -133,7 +129,7 @@ function TooltipController($element, $timeout, $window) {
      * Show the tooltip on source element mouse enter.
      */
     function showTooltip() {
-        if (angular.isDefined(_tooltip)) {
+        if (angular.isDefined(_tooltip) || angular.isUndefined(lx.text) || !lx.text) {
             return;
         }
 
@@ -147,7 +143,7 @@ function TooltipController($element, $timeout, $window) {
 
         _tooltipInner = angular.element('<span/>', {
             class: `${CSS_PREFIX}-tooltip__inner`,
-            text: lumx.text,
+            text: lx.text,
         });
 
         _tooltip.append(_tooltipArrow).append(_tooltipInner);
@@ -157,8 +153,8 @@ function TooltipController($element, $timeout, $window) {
 
     /////////////////////////////
 
-    lumx.hideTooltip = hideTooltip;
-    lumx.showTooltip = showTooltip;
+    lx.hideTooltip = hideTooltip;
+    lx.showTooltip = showTooltip;
 }
 
 /////////////////////////////
@@ -167,6 +163,14 @@ function TooltipDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
+        attrs.$observe('lxTooltip', (text) => {
+            ctrl.text = text;
+        });
+
+        attrs.$observe('lxTooltipPosition', (position) => {
+            ctrl.position = position;
+        });
+
         el.on('mouseenter', ctrl.showTooltip);
         el.on('mouseleave', ctrl.hideTooltip);
 
@@ -179,19 +183,15 @@ function TooltipDirective() {
     return {
         bindToController: true,
         controller: TooltipController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         restrict: 'A',
-        scope: {
-            position: '@?lumxTooltipPosition',
-            text: '@lumxTooltip',
-        },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.tooltip`).directive(`${COMPONENT_PREFIX}Tooltip`, TooltipDirective);
+angular.module('lumx.tooltip').directive('lxTooltip', TooltipDirective);
 
 /////////////////////////////
 

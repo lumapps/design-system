@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Popover, Placement } from '@lumx/react';
+import { Placement, Popover } from '@lumx/react';
 
 const App = ({ theme }) => {
     const demoAnchorStyle = {
@@ -40,17 +40,20 @@ const App = ({ theme }) => {
             <div style={demoPopoverHolderStyle}>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
+
                 <div ref={anchorRef} style={demoAnchorStyle}>
                     {'This element will act as the anchor'}
                 </div>
+
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
                 <div style={{ ...demoAnchorStyle, ...demoRandomElementStyle }}>{'Random element'}</div>
             </div>
+
             <Popover theme={theme} popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
                 <div style={demoPopperStyle}>{'This element is the popper and is flying above the UI.'}</div>
             </Popover>
         </>
     );
-}
+};
 
 export default App;

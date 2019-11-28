@@ -1,12 +1,34 @@
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
+import { CSS_PREFIX } from '@lumx/core/constants';
 
 import template from './image-block.html';
 
 /////////////////////////////
 
 function ImageBlockController() {
+    'ngInject';
+
     // eslint-disable-next-line consistent-this, no-unused-vars
-    const lumx = this;
+    const lx = this;
+
+    /////////////////////////////
+    //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        align: 'left',
+        captionPosition: 'below',
+        format: 'original',
+        theme: 'light',
+    };
 
     /////////////////////////////
     //                         //
@@ -19,19 +41,60 @@ function ImageBlockController() {
      *
      * @type {boolean}
      */
-    lumx.hasActions = false;
+    lx.hasActions = false;
 
     /**
      * Whether the directive has tags slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasTags = false;
+    lx.hasTags = false;
+
+    /////////////////////////////
+    //                         //
+    //     Public functions    //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * Get image block classes.
+     *
+     * @return {Array} The list of image block classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const align = lx.align ? lx.align : _DEFAULT_PROPS.align;
+        const captionPosition = lx.captionPosition ? lx.captionPosition : _DEFAULT_PROPS.captionPosition;
+        const format = lx.format ? lx.format : _DEFAULT_PROPS.format;
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-image-block--align-${align}`);
+        classes.push(`${CSS_PREFIX}-image-block--caption-position-${captionPosition}`);
+        classes.push(`${CSS_PREFIX}-image-block--format-${format}`);
+        classes.push(`${CSS_PREFIX}-image-block--theme-${theme}`);
+
+        if (lx.aspectRatio) {
+            classes.push(`${CSS_PREFIX}-image-block--aspect-ratio-${lx.aspectRatio}`);
+        }
+
+        if (lx.fillHeight) {
+            classes.push(`${CSS_PREFIX}-image-block--fill-height`);
+        }
+
+        return classes;
+    }
+
+    /////////////////////////////
+
+    lx.getClasses = getClasses;
 }
 
 /////////////////////////////
 
 function ImageBlockDirective() {
+    'ngInject';
+
     function link(scope, el, attrs, ctrl, transclude) {
         if (transclude.isSlotFilled('actions')) {
             ctrl.hasActions = true;
@@ -45,33 +108,33 @@ function ImageBlockDirective() {
     return {
         bindToController: true,
         controller: ImageBlockController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            align: '@?lumxAlign',
-            aspectRatio: '@?lumxAspectRatio',
-            captionPosition: '@?lumxCaptionPosition',
-            captionStyle: '=?lumxCaptionStyle',
-            description: '@?lumxDescription',
-            fillHeight: '=?lumxFillHeight',
-            image: '@lumxImage',
-            onClick: '&?lumxOnClick',
-            theme: '@?lumxTheme',
-            title: '@?lumxTitle',
+            align: '@?lxAlign',
+            aspectRatio: '@?lxAspectRatio',
+            captionPosition: '@?lxCaptionPosition',
+            captionStyle: '=?lxCaptionStyle',
+            description: '@?lxDescription',
+            fillHeight: '=?lxFillHeight',
+            image: '@lxImage',
+            onClick: '&?lxOnClick',
+            theme: '@?lxTheme',
+            title: '@?lxTitle',
         },
         template,
         transclude: {
-            actions: `?${COMPONENT_PREFIX}ImageBlockActions`,
-            tags: `?${COMPONENT_PREFIX}ImageBlockTags`,
+            actions: '?lxImageBlockActions',
+            tags: '?lxImageBlockTags',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.image-block`).directive(`${COMPONENT_PREFIX}ImageBlock`, ImageBlockDirective);
+angular.module('lumx.image-block').directive('lxImageBlock', ImageBlockDirective);
 
 /////////////////////////////
 

@@ -1,14 +1,23 @@
 import React from 'react';
 
-import { Thumbnail, AspectRatio } from '@lumx/react';
+import { Alignment, AspectRatio, Grid, Orientation, Thumbnail } from '@lumx/react';
 
-const App = ({ theme }) => (
-    <>
-        <Thumbnail aspectRatio={AspectRatio.square} image="https://picsum.photos/150" theme={theme} />
-        <Thumbnail aspectRatio={AspectRatio.original} image="https://picsum.photos/150/80/" theme={theme} />
-        <Thumbnail aspectRatio={AspectRatio.vertical} image="https://picsum.photos/150/150" theme={theme} />
-        <Thumbnail aspectRatio={AspectRatio.horizontal} image="https://picsum.photos/150/150" theme={theme} />
-    </>
+const App = () => (
+    <Grid orientation={Orientation.horizontal} vAlign={Alignment.spaceBetween}>
+        <div style={{ width: 150 }}>
+            <Thumbnail aspectRatio={AspectRatio.square} image="https://picsum.photos/150" />
+        </div>
+
+        <Thumbnail aspectRatio={AspectRatio.original} image="https://picsum.photos/150/80/" />
+
+        <div style={{ width: 150 }}>
+            <Thumbnail aspectRatio={AspectRatio.vertical} image="https://picsum.photos/150/150" />
+        </div>
+
+        <div style={{ width: 150 }}>
+            <Thumbnail aspectRatio={AspectRatio.horizontal} image="https://picsum.photos/150/150" />
+        </div>
+    </Grid>
 );
 
 export default App;

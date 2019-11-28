@@ -1,15 +1,10 @@
 import React from 'react';
 
-import { Uploader, UploaderVariant } from '@lumx/react';
 import { mdiImagePlus } from '@lumx/icons';
+import { Uploader, UploaderVariant } from '@lumx/react';
 
 const App = ({ theme }) => (
-    <Uploader
-        icon={mdiImagePlus}
-        label="Add profile picture"
-        theme={theme}
-        variant={UploaderVariant.rounded}
-    />
+    <Uploader icon={mdiImagePlus} label="Add profile picture" theme={theme} variant={UploaderVariant.rounded} />
 );
 
 export default App;

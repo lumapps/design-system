@@ -1,7 +1,5 @@
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
 import template from './table-cell-head.html';
 
 /////////////////////////////
@@ -10,7 +8,7 @@ function TableCellHeadController() {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
@@ -23,7 +21,7 @@ function TableCellHeadController() {
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiArrowDown,
         mdiArrowUp,
     };
@@ -37,14 +35,14 @@ function TableCellHeadDirective() {
     return {
         bindToController: true,
         controller: TableCellHeadController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         replace: true,
         restrict: 'E',
         scope: {
-            icon: '@?lumxIcon',
-            isSortable: '=?lumxIsSortable',
-            scope: '@?lumxScope',
-            sortOrder: '@?lumxSortOrder',
+            icon: '@?lxIcon',
+            isSortable: '=?lxIsSortable',
+            scope: '@?lxScope',
+            sortOrder: '@?lxSortOrder',
         },
         template,
         transclude: true,
@@ -53,7 +51,7 @@ function TableCellHeadDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.table`).directive(`${COMPONENT_PREFIX}TableCellHead`, TableCellHeadDirective);
+angular.module('lumx.table').directive('lxTableCellHead', TableCellHeadDirective);
 
 /////////////////////////////
 

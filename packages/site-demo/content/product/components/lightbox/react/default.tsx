@@ -1,34 +1,37 @@
 import React, { useCallback, useRef, useState } from 'react';
 
-import { Alignment, Button, ImageBlock, Lightbox, Slideshow, SlideshowItem, Theme, ChipGroup, Chip, Size } from '@lumx/react';
+import {
+    Alignment,
+    Button,
+    Chip,
+    ChipGroup,
+    ImageBlock,
+    Lightbox,
+    Size,
+    Slideshow,
+    SlideshowItem,
+    Theme,
+} from '@lumx/react';
 
-
-const App = ({ theme }) => {
+const App = () => {
     const imageBlockDemoProps = {
-            align: Alignment.center,
-            description: 'What an image',
-            fillHeight: true,
-            tags: (
-                <ChipGroup align="center">
-                    <Chip
-                        className="lumx-spacing-margin-right-tiny"
-                        size={Size.s}
-                        theme={Theme.dark}
-                    >
-                        Tag 1
-                    </Chip>
-                    <Chip
-                        className="lumx-spacing-margin-right-tiny"
-                        size={Size.s}
-                        theme={Theme.dark}
-                    >
-                        Tag 2
-                    </Chip>
-                </ChipGroup>
-            ),
-            theme: Theme.dark,
-            title: 'Nice Image',
-        };
+        align: Alignment.center,
+        description: 'What an image',
+        fillHeight: true,
+        tags: (
+            <ChipGroup align="center">
+                <Chip size={Size.s} theme={Theme.dark}>
+                    Tag 1
+                </Chip>
+
+                <Chip size={Size.s} theme={Theme.dark}>
+                    Tag 2
+                </Chip>
+            </ChipGroup>
+        ),
+        theme: Theme.dark,
+        title: 'Nice Image',
+    };
 
     const [isOpened, setIsOpened] = useState(false);
 
@@ -47,48 +50,44 @@ const App = ({ theme }) => {
         setIsOpened(!isOpened);
     }, [isOpened]);
 
-
     return (
         <>
-            <Button
-                buttonRef={triggerElement}
-                aria-label="Close Modal"
-                type="button"
-                onClick={handleClick}
-                theme={theme}
-            >
-                Open Lightbox
-            </Button>
+            <div className="demo-grid">
+                <Button buttonRef={triggerElement} aria-label="Close Modal" type="button" onClick={handleClick}>
+                    Open Lightbox
+                </Button>
+            </div>
 
-            <Lightbox
-                isOpen={isOpened}
-                parentElement={triggerElement}
-                onClose={onCloseModal}
-                onOpen={onOpenModal}
-                theme={theme}
-            >
+            <Lightbox isOpen={isOpened} parentElement={triggerElement} onClose={onCloseModal} onOpen={onOpenModal}>
                 <Slideshow hasControls={true} autoPlay={true} fillHeight={true} theme={Theme.dark}>
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=24" {...imageBlockDemoProps} />
                     </SlideshowItem>
+
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=25" {...imageBlockDemoProps} />
                     </SlideshowItem>
+
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=26" {...imageBlockDemoProps} />
                     </SlideshowItem>
+
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=27" {...imageBlockDemoProps} />
                     </SlideshowItem>
+
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=28" {...imageBlockDemoProps} />
                     </SlideshowItem>
+
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=29" {...imageBlockDemoProps} />
                     </SlideshowItem>
+
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=30" {...imageBlockDemoProps} />
                     </SlideshowItem>
+
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=31" {...imageBlockDemoProps} />
                     </SlideshowItem>
@@ -96,6 +95,6 @@ const App = ({ theme }) => {
             </Lightbox>
         </>
     );
-}
+};
 
 export default App;

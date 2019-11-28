@@ -12,6 +12,7 @@ const App = ({ theme }) => {
             <div className="lumx-spacing-margin-bottom-big">
                 <Checkbox value={value} label="Checkbox" theme={theme} onChange={setValue} />
             </div>
+
             <div className="lumx-spacing-margin-bottom-big">
                 <Checkbox
                     value={value2}
@@ -21,6 +22,7 @@ const App = ({ theme }) => {
                     onChange={setValue2}
                 />
             </div>
+
             <Checkbox
                 value={value3}
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."

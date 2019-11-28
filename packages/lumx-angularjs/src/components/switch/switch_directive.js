@@ -1,21 +1,32 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './switch.html';
 
 /////////////////////////////
 
-function SwitchController(LumXUtilsService) {
+function SwitchController(LxUtilsService) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        position: 'left',
+        theme: 'light',
+    };
 
     /**
      * The model controller.
@@ -35,41 +46,64 @@ function SwitchController(LumXUtilsService) {
      *
      * @type {string}
      */
-    lumx.switchId = LumXUtilsService.generateUUID();
+    lx.switchId = LxUtilsService.generateUUID();
 
     /**
      * Whether the directive has helper slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasHelper = false;
+    lx.hasHelper = false;
 
     /**
      * Whether the directive has label slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasLabel = false;
+    lx.hasLabel = false;
 
     /**
      * Whether the directive has transcluded content if no transclude slot.
      *
      * @type {boolean}
      */
-    lumx.hasTranscluded = false;
+    lx.hasTranscluded = false;
 
     /**
      * The model view value.
      *
      * @type {string}
      */
-    lumx.viewValue = undefined;
+    lx.viewValue = undefined;
 
     /////////////////////////////
     //                         //
     //     Public functions    //
     //                         //
     /////////////////////////////
+
+    /**
+     * Get switch classes.
+     *
+     * @return {Array} The list of switch classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const position = lx.position ? lx.position : _DEFAULT_PROPS.position;
+        const state = lx.viewValue ? 'checked' : 'unchecked';
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-switch--position-${position}`);
+        classes.push(`${CSS_PREFIX}-switch--is-${state}`);
+        classes.push(`${CSS_PREFIX}-switch--theme-${theme}`);
+
+        if (lx.customColors) {
+            classes.push(`${CSS_PREFIX}-custom-colors`);
+        }
+
+        return classes;
+    }
 
     /**
      * Set the model controller.
@@ -80,7 +114,7 @@ function SwitchController(LumXUtilsService) {
         _modelController = modelController;
 
         _modelController.$render = function onModelRender() {
-            lumx.viewValue = _modelController.$viewValue;
+            lx.viewValue = _modelController.$viewValue;
         };
     }
 
@@ -89,7 +123,7 @@ function SwitchController(LumXUtilsService) {
      */
     function updateViewValue() {
         if (angular.isUndefined(_modelController)) {
-            lumx.viewValue = !lumx.viewValue;
+            lx.viewValue = !lx.viewValue;
 
             return;
         }
@@ -100,8 +134,9 @@ function SwitchController(LumXUtilsService) {
 
     /////////////////////////////
 
-    lumx.setModelController = setModelController;
-    lumx.updateViewValue = updateViewValue;
+    lx.getClasses = getClasses;
+    lx.setModelController = setModelController;
+    lx.updateViewValue = updateViewValue;
 }
 
 /////////////////////////////
@@ -150,27 +185,27 @@ function SwitchDirective() {
     return {
         bindToController: true,
         controller: SwitchController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
-        require: [`${COMPONENT_PREFIX}Switch`, '?ngModel'],
+        require: ['lxSwitch', '?ngModel'],
         restrict: 'E',
         scope: {
-            customColors: '=?lumxCustomColors',
-            position: '@?lumxPosition',
-            theme: '@?lumxTheme',
+            customColors: '=?lxCustomColors',
+            position: '@?lxPosition',
+            theme: '@?lxTheme',
         },
         template,
         transclude: {
-            helper: `?${COMPONENT_PREFIX}SwitchHelper`,
-            label: `?${COMPONENT_PREFIX}SwitchLabel`,
+            helper: '?lxSwitchHelp',
+            label: '?lxSwitchLabel',
         },
     };
 }
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.switch`).directive(`${COMPONENT_PREFIX}Switch`, SwitchDirective);
+angular.module('lumx.switch').directive('lxSwitch', SwitchDirective);
 
 /////////////////////////////
 

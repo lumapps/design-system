@@ -1,5 +1,4 @@
 import { CSS_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from './constants';
 
@@ -11,13 +10,25 @@ function SlideshowController($element, $interval, $scope) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        groupBy: '1',
+        theme: 'light',
+    };
 
     /**
      * The current slide index.
@@ -51,28 +62,28 @@ function SlideshowController($element, $interval, $scope) {
      *
      * @type {number}
      */
-    lumx.activeIndex = 0;
+    lx.activeIndex = 0;
 
     /**
      * The number of slideshow items.
      *
      * @type {number}
      */
-    lumx.itemsCount = 0;
+    lx.itemsCount = 0;
 
     /**
      * The number of slides.
      *
      * @type {number}
      */
-    lumx.slidesCount = 0;
+    lx.slidesCount = 0;
 
     /**
      * The slideshow wrapper style.
      *
      * @type {Object}
      */
-    lumx.wrapperStyle = {
+    lx.wrapperStyle = {
         transform: 'translate3d(0%, 0, 0)',
     };
 
@@ -96,17 +107,17 @@ function SlideshowController($element, $interval, $scope) {
 
         _curentIndex = newIndex;
 
-        lumx.wrapperStyle.transform = `translateX(${_curentTransformOffset}%)`;
+        lx.wrapperStyle.transform = `translateX(${_curentTransformOffset}%)`;
     }
 
     /**
      * Go to next slide.
      */
     function _nextSlide() {
-        if (lumx.activeIndex + 1 === lumx.slidesCount) {
-            lumx.activeIndex = 0;
+        if (lx.activeIndex + 1 === lx.slidesCount) {
+            lx.activeIndex = 0;
         } else {
-            lumx.activeIndex++;
+            lx.activeIndex++;
         }
     }
 
@@ -114,10 +125,10 @@ function SlideshowController($element, $interval, $scope) {
      * Go to previous slide.
      */
     function _previousSlide() {
-        if (lumx.activeIndex === 0) {
-            lumx.activeIndex = lumx.slidesCount - 1;
+        if (lx.activeIndex === 0) {
+            lx.activeIndex = lx.slidesCount - 1;
         } else {
-            lumx.activeIndex--;
+            lx.activeIndex--;
         }
     }
 
@@ -130,7 +141,7 @@ function SlideshowController($element, $interval, $scope) {
         if (evt.keyCode === LEFT_KEY_CODE) {
             _previousSlide();
 
-            lumx.stopAutoPlay();
+            lx.stopAutoPlay();
 
             $scope.$apply();
 
@@ -139,7 +150,7 @@ function SlideshowController($element, $interval, $scope) {
         } else if (evt.keyCode === RIGHT_KEY_CODE) {
             _nextSlide();
 
-            lumx.stopAutoPlay();
+            lx.stopAutoPlay();
 
             $scope.$apply();
 
@@ -155,14 +166,35 @@ function SlideshowController($element, $interval, $scope) {
     /////////////////////////////
 
     /**
+     * Get slideshow classes.
+     *
+     * @return {Array} The list of slideshow classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const groupBy = lx.groupBy ? lx.groupBy : _DEFAULT_PROPS.groupBy;
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+
+        classes.push(`${CSS_PREFIX}-slideshow--group-by-${groupBy}`);
+        classes.push(`${CSS_PREFIX}-slideshow--theme-${theme}`);
+
+        if (lx.fillHeight) {
+            classes.push(`${CSS_PREFIX}-slideshow--fill-height`);
+        }
+
+        return classes;
+    }
+
+    /**
      * Start auto play.
      */
     function startAutoPlay() {
-        if (angular.isUndefined(lumx.autoPlayInterval)) {
-            lumx.autoPlayInterval = AUTOPLAY_DEFAULT_INTERVAL;
+        if (angular.isUndefined(lx.autoPlayInterval)) {
+            lx.autoPlayInterval = AUTOPLAY_DEFAULT_INTERVAL;
         }
 
-        _autoPlayInterval = $interval(_nextSlide, lumx.autoPlayInterval);
+        _autoPlayInterval = $interval(_nextSlide, lx.autoPlayInterval);
     }
 
     /**
@@ -181,18 +213,19 @@ function SlideshowController($element, $interval, $scope) {
      * Update the number of slides according to the number of slideshow items and the group by parameter.
      */
     function updateSlidesCount() {
-        if (angular.isUndefined(lumx.groupBy)) {
-            lumx.groupBy = 1;
+        if (angular.isUndefined(lx.groupBy)) {
+            lx.groupBy = 1;
         }
 
-        lumx.slidesCount = Math.ceil(lumx.itemsCount / lumx.groupBy);
+        lx.slidesCount = Math.ceil(lx.itemsCount / lx.groupBy);
     }
 
     /////////////////////////////
 
-    lumx.startAutoPlay = startAutoPlay;
-    lumx.stopAutoPlay = stopAutoPlay;
-    lumx.updateSlidesCount = updateSlidesCount;
+    lx.getClasses = getClasses;
+    lx.startAutoPlay = startAutoPlay;
+    lx.stopAutoPlay = stopAutoPlay;
+    lx.updateSlidesCount = updateSlidesCount;
 
     /////////////////////////////
     //                         //
@@ -223,7 +256,7 @@ function SlideshowController($element, $interval, $scope) {
      *
      * @param {number} newIndex The new slide index.
      */
-    $scope.$watch('lumx.activeIndex', (newIndex) => {
+    $scope.$watch('lx.activeIndex', (newIndex) => {
         if (angular.isDefined(newIndex)) {
             _goToSlide(newIndex);
         }
@@ -236,25 +269,6 @@ function SlideshowDirective() {
     'ngInject';
 
     function link(scope, el, attrs, ctrl) {
-        const defaultProps = {
-            groupBy: 1,
-            theme: 'light',
-        };
-
-        if (!attrs.lumxGroupBy) {
-            el.addClass(`${CSS_PREFIX}-slideshow--group-by-${defaultProps.groupBy}`);
-        }
-
-        attrs.$observe('lumxGroupBy', (groupBy) => {
-            if (!groupBy) {
-                return;
-            }
-
-            el.removeClass((index, className) => {
-                return (className.match(/(?:\S|-)*slideshow--group-by-\S+/g) || []).join(' ');
-            }).addClass(`${CSS_PREFIX}-slideshow--group-by-${groupBy}`);
-        });
-
         attrs.$observe('lumxAutoPlay', (autoPlay) => {
             if (scope.$eval(autoPlay)) {
                 ctrl.startAutoPlay();
@@ -267,19 +281,19 @@ function SlideshowDirective() {
     return {
         bindToController: true,
         controller: SlideshowController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            activeIndex: '=?lumxActiveIndex',
-            autoPlay: '=?lumxAutoPlay',
-            autoPlayInterval: '@?lumxAutoPlayInterval',
-            customColors: '=?lumxCustomColors',
-            fillHeight: '=?lumxFillHeight',
-            groupBy: '=?lumxGroupBy',
-            hasControls: '=?lumxHasControls',
-            theme: '@?lumxTheme',
+            activeIndex: '=?lxActiveIndex',
+            autoPlay: '=?lxAutoPlay',
+            autoPlayInterval: '@?lxAutoPlayInterval',
+            customColors: '=?lxCustomColors',
+            fillHeight: '=?lxFillHeight',
+            groupBy: '=?lxGroupBy',
+            hasControls: '=?lxHasControls',
+            theme: '@?lxTheme',
         },
         template,
         transclude: true,
@@ -288,7 +302,7 @@ function SlideshowDirective() {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.slideshow`).directive(`${COMPONENT_PREFIX}Slideshow`, SlideshowDirective);
+angular.module('lumx.slideshow').directive('lxSlideshow', SlideshowDirective);
 
 /////////////////////////////
 

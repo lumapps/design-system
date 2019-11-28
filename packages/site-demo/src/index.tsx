@@ -8,9 +8,7 @@ import { reactAngularModule } from 'react-angular';
 
 import '@lumx/angularjs';
 
-import { MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
-
-angular.module('design-system', [MODULE_NAME, reactAngularModule(false).name]);
+angular.module('design-system', ['lumx', reactAngularModule(false).name]);
 
 /////////////////////////////
 

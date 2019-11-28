@@ -1,11 +1,11 @@
-<lumx-select
+<lx-select
     ng-model="vm.selectModel.selectedPeople"
-    lumx-choices="vm.selectPeople"
-    lumx-label="Select label"
-    lumx-multiple="true"
-    lumx-placeholder="Select values"
-    lumx-theme="{{ theme }}"
+    lx-choices="vm.selectPeople"
+    lx-label="Select label"
+    lx-multiple="true"
+    lx-placeholder="Select values"
+    lx-theme="{{ theme }}"
 >
-    <lumx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lumx-select-selected>
-    <lumx-select-choices>{{ $choice.email }}</lumx-select-choices>
-</lumx-select>
+    <lx-select-selected>{{ $selected.name }} - {{ $selected.age }}</lx-select-selected>
+    <lx-select-choices>{{ $choice.email }}</lx-select-choices>
+</lx-select>

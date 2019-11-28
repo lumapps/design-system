@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Popover, Placement } from '@lumx/react';
+import { Placement, Popover } from '@lumx/react';
 
 const App = ({ theme }) => {
     const demoAnchorStyle = {
@@ -56,19 +56,13 @@ const App = ({ theme }) => {
     }
 
     return (
-        <div
-            onMouseEnter={() => toggleTooltipDisplay(true)}
-            onMouseLeave={() => toggleTooltipDisplay(false)}
-        >
-            <select
-                onChange={(evt) =>
-                    setSelectedPlacement(evt.target.value)
-                }
-            >
+        <div onMouseEnter={() => toggleTooltipDisplay(true)} onMouseLeave={() => toggleTooltipDisplay(false)}>
+            <select onChange={(evt) => setSelectedPlacement(evt.target.value)}>
                 {availablePlacement.map((pos, index) => (
                     <option key={index}>{pos}</option>
                 ))}
             </select>
+
             <div style={{ height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div ref={anchorRef} style={demoAnchorStyle}>
                     {'This element will act as the anchor'}

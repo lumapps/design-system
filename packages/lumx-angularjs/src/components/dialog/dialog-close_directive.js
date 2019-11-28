@@ -1,14 +1,13 @@
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 /////////////////////////////
 
-function DialogCloseDirective(LumXDialogService) {
+function DialogCloseDirective(LxDialogService) {
     'ngInject';
 
     function link(scope, el) {
         el.on('click', () => {
-            LumXDialogService.close(el.parents(`.${CSS_PREFIX}-dialog`).attr('id'));
+            LxDialogService.close(el.parents(`.${CSS_PREFIX}-dialog`).attr('id'));
         });
 
         scope.$on('$destroy', () => {
@@ -24,7 +23,7 @@ function DialogCloseDirective(LumXDialogService) {
 
 /////////////////////////////
 
-angular.module(`${MODULE_NAME}.dialog`).directive(`${COMPONENT_PREFIX}DialogClose`, DialogCloseDirective);
+angular.module('lumx.dialog').directive('lxDialogClose', DialogCloseDirective);
 
 /////////////////////////////
 

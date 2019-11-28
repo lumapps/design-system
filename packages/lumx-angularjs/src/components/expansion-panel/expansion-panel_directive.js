@@ -1,7 +1,6 @@
 import { mdiChevronDown, mdiChevronUp, mdiDragVertical } from '@lumx/icons';
 
 import { CSS_PREFIX } from '@lumx/core/constants';
-import { COMPONENT_PREFIX, MODULE_NAME } from '@lumx/angularjs/constants/common_constants';
 
 import template from './expansion-panel.html';
 
@@ -11,13 +10,25 @@ function ExpansionPanelController($element, $scope, $timeout) {
     'ngInject';
 
     // eslint-disable-next-line consistent-this
-    const lumx = this;
+    const lx = this;
 
     /////////////////////////////
     //                         //
     //    Private attributes   //
     //                         //
     /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        theme: 'light',
+        variant: 'boxed',
+    };
 
     /**
      * The expansion panel toggle transition duration.
@@ -39,21 +50,21 @@ function ExpansionPanelController($element, $scope, $timeout) {
      *
      * @type {boolean}
      */
-    lumx.hasFooter = false;
+    lx.hasFooter = false;
 
     /**
      * Whether the directive has header slot filled or not.
      *
      * @type {boolean}
      */
-    lumx.hasHeader = false;
+    lx.hasHeader = false;
 
     /**
      * The expansion panel icons.
      *
      * @type {Object}
      */
-    lumx.icons = {
+    lx.icons = {
         mdiChevronDown,
         mdiChevronUp,
         mdiDragVertical,
@@ -64,21 +75,21 @@ function ExpansionPanelController($element, $scope, $timeout) {
      *
      * @type {boolean}
      */
-    lumx.isDraggable = false;
+    lx.isDraggable = false;
 
     /**
      * Whether the expansion panel wrapper is displayed or not.
      *
      * @type {boolean}
      */
-    lumx.isWrapperDisplayed = lumx.isOpen;
+    lx.isWrapperDisplayed = lx.isOpen;
 
     /**
      * Whether the expansion panel wrapper is open or not.
      *
      * @type {boolean}
      */
-    lumx.isWrapperOpen = lumx.isOpen;
+    lx.isWrapperOpen = lx.isOpen;
 
     /////////////////////////////
     //                         //
@@ -100,17 +111,17 @@ function ExpansionPanelController($element, $scope, $timeout) {
      * Close the expansion panel wrapper.
      */
     function _close() {
-        lumx.isWrapperOpen = false;
+        lx.isWrapperOpen = false;
 
         $timeout(() => {
-            lumx.isWrapperDisplayed = false;
+            lx.isWrapperDisplayed = false;
 
-            if (angular.isFunction(lumx.toggleCallback)) {
-                lumx.toggleCallback();
+            if (angular.isFunction(lx.toggleCallback)) {
+                lx.toggleCallback();
             }
 
-            if (angular.isFunction(lumx.closeCallback)) {
-                lumx.closeCallback();
+            if (angular.isFunction(lx.closeCallback)) {
+                lx.closeCallback();
             }
         }, _TRANSITION_DURATION);
     }
@@ -119,20 +130,20 @@ function ExpansionPanelController($element, $scope, $timeout) {
      * Open the expansion panel wrapper.
      */
     function _open() {
-        lumx.isWrapperDisplayed = true;
-        lumx.isWrapperOpen = false;
+        lx.isWrapperDisplayed = true;
+        lx.isWrapperOpen = false;
 
         $timeout(() => {
             _setWrapperMaxHeight();
 
-            lumx.isWrapperOpen = true;
+            lx.isWrapperOpen = true;
 
-            if (angular.isFunction(lumx.toggleCallback)) {
-                lumx.toggleCallback();
+            if (angular.isFunction(lx.toggleCallback)) {
+                lx.toggleCallback();
             }
 
-            if (angular.isFunction(lumx.openCallback)) {
-                lumx.openCallback();
+            if (angular.isFunction(lx.openCallback)) {
+                lx.openCallback();
             }
         });
     }
@@ -144,10 +155,33 @@ function ExpansionPanelController($element, $scope, $timeout) {
     /////////////////////////////
 
     /**
+     * Get expansion panel classes.
+     *
+     * @return {Array} The list of expansion panel classes.
+     */
+    function getClasses() {
+        const classes = [];
+
+        const state = lx.isWrapperOpen ? 'open' : 'close';
+        const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
+        const variant = lx.variant ? lx.variant : _DEFAULT_PROPS.variant;
+
+        classes.push(`${CSS_PREFIX}-expansion-panel--is-${state}`);
+        classes.push(`${CSS_PREFIX}-expansion-panel--theme-${theme}`);
+        classes.push(`${CSS_PREFIX}-expansion-panel--variant-${variant}`);
+
+        if (lx.isDraggable) {
+            classes.push(`${CSS_PREFIX}-expansion-panel--is-draggable`);
+        }
+
+        return classes;
+    }
+
+    /**
      * Initialize the expansion panel wrapper max height.
      */
     function initWrapperMaxHeight() {
-        if (!lumx.isOpen) {
+        if (!lx.isOpen) {
             return;
         }
 
@@ -164,13 +198,14 @@ function ExpansionPanelController($element, $scope, $timeout) {
             evt.stopPropagation();
         }
 
-        lumx.isOpen = !lumx.isOpen;
+        lx.isOpen = !lx.isOpen;
     }
 
     /////////////////////////////
 
-    lumx.initWrapperMaxHeight = initWrapperMaxHeight;
-    lumx.toggle = toggle;
+    lx.getClasses = getClasses;
+    lx.initWrapperMaxHeight = initWrapperMaxHeight;
+    lx.toggle = toggle;
 
     /////////////////////////////
     //                         //
@@ -183,7 +218,7 @@ function ExpansionPanelController($element, $scope, $timeout) {
      *
      * @param {boolean} isOpen Whether the expansion panel is open or not.
      */
-    $scope.$watch('lumx.isOpen', function isOpenWatcher(isOpen, wasOpen) {
+    $scope.$watch('lx.isOpen', function isOpenWatcher(isOpen, wasOpen) {
         if (isOpen !== wasOpen) {
             if (isOpen) {
                 _open();
@@ -218,34 +253,32 @@ function ExpansionPanelDirective() {
     return {
         bindToController: true,
         controller: ExpansionPanelController,
-        controllerAs: 'lumx',
+        controllerAs: 'lx',
         link,
         replace: true,
         restrict: 'E',
         scope: {
-            closeCallback: '&?lumxCloseCallback',
-            isOpen: '=?lumxIsOpen',
-            label: '@?lumxLabel',
-            openCallback: '&?lumxOpenCallback',
-            theme: '@?lumxTheme',
-            toggleCallback: '&?lumxToggleCallback',
-            variant: '@?lumxVariant',
+            closeCallback: '&?lxCloseCallback',
+            isOpen: '=?lxIsOpen',
+            label: '@?lxLabel',
+            openCallback: '&?lxOpenCallback',
+            theme: '@?lxTheme',
+            toggleCallback: '&?lxToggleCallback',
+            variant: '@?lxVariant',
         },
         template,
         transclude: {
-            content: `${COMPONENT_PREFIX}ExpansionPanelContent`,
-            dragHandle: `?${COMPONENT_PREFIX}ExpansionPanelDragHandle`,
-            footer: `?${COMPONENT_PREFIX}ExpansionPanelFooter`,
-            header: `?${COMPONENT_PREFIX}ExpansionPanelHeader`,
+            content: 'lxExpansionPanelContent',
+            dragHandle: '?lxExpansionPanelDragHandle',
+            footer: '?lxExpansionPanelFooter',
+            header: '?lxExpansionPanelHeader',
         },
     };
 }
 
 /////////////////////////////
 
-angular
-    .module(`${MODULE_NAME}.expansion-panel`)
-    .directive(`${COMPONENT_PREFIX}ExpansionPanel`, ExpansionPanelDirective);
+angular.module('lumx.expansion-panel').directive('lxExpansionPanel', ExpansionPanelDirective);
 
 /////////////////////////////
 

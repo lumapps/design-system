@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Popover, Placement, Size, Button, Emphasis } from '@lumx/react';
+import { Button, Emphasis, Placement, Popover, Size } from '@lumx/react';
 
 const App = ({ theme }) => {
     const demoAnchorStyle = {
@@ -52,12 +52,14 @@ const App = ({ theme }) => {
                 <Button theme={theme} size={Size.s} emphasis={Emphasis.high} onClick={toggleTooltipDisplay}>
                     Toggle visibility
                 </Button>
+
                 <div style={demoPopoverHolderStyle}>
                     <div ref={anchorRef} style={demoAnchorStyle}>
                         {'This element will act as the anchor'}
                     </div>
                 </div>
             </div>
+
             <Popover popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
                 <div style={demoPopperStyle}>
                     {

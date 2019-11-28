@@ -1,16 +1,9 @@
 import React from 'react';
 
-import { Popover, Placement, Size, Button, Emphasis, Orientation, UserBlock, Theme, IconButton } from '@lumx/react';
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@lumx/icons';
+import { Button, Emphasis, IconButton, Orientation, Placement, Popover, Size, UserBlock } from '@lumx/react';
 
-const App = ({ theme }) => {
-    const demoPopoverHolderStyle = {
-        display: 'flex',
-        height: 250,
-        justifyContent: 'center',
-        paddingTop: 100,
-    };
-
+const App = () => {
     const [isCardDisplayed, setCardDisplayed] = React.useState(false);
     let delayer;
     const anchorRef = React.useRef(null);
@@ -43,41 +36,27 @@ const App = ({ theme }) => {
         offsets,
     );
 
-    const createSimpleAction = (theme) => (
-        <Button
-            emphasis={Emphasis.medium}
-            color={theme === Theme.dark ? 'light' : undefined}
-            size={Size.s}
-            theme={theme}
-        >
+    const createSimpleAction = () => (
+        <Button emphasis={Emphasis.medium} size={Size.s}>
             Follow
         </Button>
     );
 
     const demoActions = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
-    const createMultipleActions = (theme) => (
+    const createMultipleActions = () => (
         <>
-            {demoActions.map(
-                (demoAction, idx) => (
-                    <IconButton
-                        key={`ubAction${idx}`}
-                        emphasis={Emphasis.low}
-                        color={theme === Theme.dark ? 'light' : undefined}
-                        icon={demoAction}
-                        theme={theme}
-                    />
-                ),
-            )}
+            {demoActions.map((demoAction, idx) => (
+                <IconButton key={`ubAction${idx}`} emphasis={Emphasis.low} icon={demoAction} />
+            ))}
         </>
     );
 
     return (
         <>
-            <div style={demoPopoverHolderStyle}>
+            <div className="demo-grid">
                 <UserBlock
                     userBlockRef={anchorRef}
-                    theme={theme}
                     name="Guillaume Nachury"
                     fields={['Bidouilleur', 'Meyzieu']}
                     avatar={'http://i.pravatar.cc/139'}
@@ -87,6 +66,7 @@ const App = ({ theme }) => {
                     size={Size.m}
                 />
             </div>
+
             <Popover popoverRef={popoverRef} isVisible={isVisible} popoverRect={computedPosition}>
                 <div
                     style={{
@@ -99,13 +79,12 @@ const App = ({ theme }) => {
                     }}
                 >
                     <UserBlock
-                        theme={theme}
                         name="Guillaume Nachury"
                         fields={['Bidouilleur', 'Meyzieu']}
                         avatar={'http://i.pravatar.cc/139'}
                         orientation={Orientation.vertical}
-                        simpleAction={createSimpleAction(theme)}
-                        multipleActions={createMultipleActions(theme)}
+                        simpleAction={createSimpleAction()}
+                        multipleActions={createMultipleActions()}
                     />
                 </div>
             </Popover>

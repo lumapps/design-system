@@ -2,7 +2,7 @@ import { mdiCellphone, mdiClose, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack
 
 /////////////////////////////
 
-function DemoController(LumXPopoverService) {
+function DemoController(LxPopoverService) {
     'ngInject';
 
     const vm = this;
@@ -55,14 +55,14 @@ function DemoController(LumXPopoverService) {
      * Close the popover.
      */
     function closePopover() {
-        LumXPopoverService.close(vm.popoverId);
+        LxPopoverService.close(vm.popoverId);
     }
 
     /**
      * Open the popover.
      */
     function openPopover() {
-        LumXPopoverService.open(vm.popoverId, {
+        LxPopoverService.open(vm.popoverId, {
             target: `#${vm.popoverTarget}`,
             source: `#${vm.popoverSource}`,
         });
