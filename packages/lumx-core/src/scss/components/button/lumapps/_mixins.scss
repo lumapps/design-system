@@ -96,7 +96,7 @@
     @include lumx-button-size($emphasis, $variant, $size);
 
     @if $icon-position {
-        @include lumx-button-size($size, $icon-position);
+        @include lumx-button-reduced-spacing($size, $icon-position);
     }
 
     @include lumx-button-color($emphasis, $color, $theme);
