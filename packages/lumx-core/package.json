@@ -37,7 +37,7 @@
         "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
         "prepublish": "yarn build"
     },
-    "version": "0.17.0",
+    "version": "0.18.0",
     "devDependencies": {
         "autoprefixer": "^9.7.1",
         "clean-webpack-plugin": "^3.0.0",
