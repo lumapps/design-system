@@ -71,7 +71,7 @@
     "husky": {
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-            "pre-commit": "lint-staged && changelog-verify CHANGELOG.react.md"
+            "pre-commit": "lint-staged"
         }
     },
     "keywords": [
