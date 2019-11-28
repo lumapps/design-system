@@ -15,6 +15,12 @@ import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
  * Defines the props of the component.
  */
 interface IAutocompleteProps extends IGenericProps {
+    /**
+     * Whether the suggestions list should display anchored to the input
+     * If false, it will be anchored to the text field wrapper.
+     */
+    anchorToInput: boolean;
+
     /** A ref that will be passed to the input or textarea element. */
     inputRef?: RefObject<HTMLInputElement>;
 
@@ -41,6 +47,11 @@ interface IAutocompleteProps extends IGenericProps {
      * @see {@link TextFieldProps#hasError}
      */
     hasError?: boolean;
+
+    /**
+     * Whether the text box should be focused upon closing the suggestions
+     */
+    shouldFocusOnClose?: boolean;
 
     /**
      * Whether the text field displays a clear button or not.
@@ -176,9 +187,11 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<AutocompleteProps> = {
+    anchorToInput: false,
     closeOnClick: true,
     closeOnEscape: true,
     isOpen: undefined,
+    shouldFocusOnClose: false,
 };
 
 /////////////////////////////
@@ -191,6 +204,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  */
 const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): ReactElement => {
     const {
+        anchorToInput = DEFAULT_PROPS.anchorToInput,
         className,
         children,
         chips,
@@ -212,6 +226,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         theme,
         onClose,
         offset,
+        shouldFocusOnClose = DEFAULT_PROPS.shouldFocusOnClose,
         placement,
         inputRef = useRef(null),
         fitToAnchorWidth,
@@ -220,7 +235,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
     } = props;
 
     const textFieldRef = useRef(null);
-    useFocusOnClose(inputRef.current, isOpen);
+    useFocusOnClose(inputRef.current, isOpen, shouldFocusOnClose);
 
     return (
         <div
@@ -252,7 +267,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 type={TextFieldType.input}
             />
             <Dropdown
-                anchorRef={textFieldRef as React.RefObject<HTMLElement>}
+                anchorRef={anchorToInput ? inputRef : textFieldRef}
                 showDropdown={isOpen}
                 closeOnClick={closeOnClick}
                 closeOnEscape={closeOnEscape}

@@ -97,6 +97,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
  */
 const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props: AutocompleteMultipleProps): ReactElement => {
     const {
+        anchorToInput,
         className,
         children,
         chipsAlignment,
@@ -125,6 +126,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props: Autoco
         offset,
         placement,
         fitToAnchorWidth,
+        shouldFocusOnClose,
         onInfiniteScroll,
         selectedChipRender = DEFAULT_PROPS.selectedChipRender,
         ...forwardedProps
@@ -132,6 +134,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props: Autoco
 
     return (
         <Autocomplete
+            anchorToInput={anchorToInput}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -142,6 +145,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props: Autoco
             onChange={onChange}
             onKeyDown={onKeyDown}
             onBlur={onBlur}
+            shouldFocusOnClose={shouldFocusOnClose}
             onFocus={onFocus}
             hasError={hasError}
             helper={helper}
