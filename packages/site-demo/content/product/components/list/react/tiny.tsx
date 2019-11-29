@@ -21,12 +21,14 @@ const App = () => (
 
             <ListItem
                 size={Size.tiny}
-                before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/48" size={Size.s} />}
+                before={
+                    <Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/48" size={Size.xs} />
+                }
             >
                 Single-line item
             </ListItem>
 
-            <ListItem size={Size.tiny} before={<Avatar image="http://i.pravatar.cc/48" size={Size.s} />}>
+            <ListItem size={Size.tiny} before={<Avatar image="http://i.pravatar.cc/48" size={Size.xs} />}>
                 Single-line item
             </ListItem>
         </List>
