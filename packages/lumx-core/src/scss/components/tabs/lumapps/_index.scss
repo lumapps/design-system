@@ -7,11 +7,11 @@
 
     &__links {
         #{$self}--theme-light & {
-            @include lumx-tabs-links('dark');
+            @include lumx-tabs-links(lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark & {
-            @include lumx-tabs-links('light');
+            @include lumx-tabs-links(lumx-base-const('theme', 'DARK'));
         }
     }
 
@@ -20,11 +20,11 @@
         @include lumx-state-transition;
 
         #{$self}--theme-light & {
-            @include lumx-state('state-default', 'emphasis-low', 'dark');
+            @include lumx-state(lumx-base-const('state', 'DEFAULT'), lumx-base-const('emphasis', 'LOW'), 'dark');
         }
 
         #{$self}--theme-dark & {
-            @include lumx-state('state-default', 'emphasis-low', 'light');
+            @include lumx-state(lumx-base-const('state', 'DEFAULT'), lumx-base-const('emphasis', 'LOW'), 'light');
         }
     }
 }
@@ -43,7 +43,7 @@
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-left {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position('position-left');
+        @include lumx-tabs-links-position(lumx-base-const('position', 'LEFT'));
     }
 }
 
@@ -55,7 +55,7 @@
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-right {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position('position-right');
+        @include lumx-tabs-links-position(lumx-base-const('position', 'RIGHT'));
     }
 }
 
@@ -65,11 +65,11 @@
 // Hover state
 .#{$lumx-base-prefix}-tabs__link:hover {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state('state-hover', 'emphasis-low', 'dark');
+        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state('state-hover', 'emphasis-low', 'light');
+        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'light');
     }
 }
 
@@ -77,33 +77,33 @@
 /* stylelint-disable-next-line no-descending-specificity */
 .#{$lumx-base-prefix}-tabs__link:active {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state('state-active', 'emphasis-low', 'dark');
+        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state('state-active', 'emphasis-low', 'light');
+        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'light');
     }
 }
 
 // Focus state
 .#{$lumx-base-prefix}-tabs__link[data-focus-visible-added] {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state('state-focus', 'emphasis-low', 'dark', null, true);
+        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark', null, true);
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state('state-focus', 'emphasis-low', 'light', null, true);
+        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light', null, true);
     }
 }
 
 // Disabled state
 .#{$lumx-base-prefix}-tabs__link--is-disabled {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-state-disabled-text('dark');
+        @include lumx-state-disabled-text(lumx-base-const('theme', 'LIGHT'));
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-state-disabled-text('light');
+        @include lumx-state-disabled-text(lumx-base-const('theme', 'DARK'));
     }
 }
 
@@ -112,10 +112,10 @@
 
 .#{$lumx-base-prefix}-tabs__link--is-active {
     .#{$lumx-base-prefix}-tabs--theme-light & {
-        @include lumx-tabs-link-active('dark');
+        @include lumx-tabs-link-active(lumx-base-const('theme', 'LIGHT'));
     }
 
     .#{$lumx-base-prefix}-tabs--theme-dark & {
-        @include lumx-tabs-link-active('light');
+        @include lumx-tabs-link-active(lumx-base-const('theme', 'DARK'));
     }
 }

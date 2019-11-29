@@ -40,13 +40,17 @@
 
 @mixin lumx-radio-button-input-background-status($status, $theme) {
     @if $status == 'checked' {
-        @if $theme == 'dark' {
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
             color: lumx-theme-color-variant($lumx-radio-button-color, 'N');
-        } @else if $theme == 'light' {
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
             color: lumx-theme-color-variant('light', 'N');
         }
     } @else if $status == 'unchecked' {
-        color: lumx-theme-color-variant($theme, 'N');
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
+            color: lumx-theme-color-variant('dark', 'N');
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
+            color: lumx-theme-color-variant('light', 'N');
+        }
     }
 }
 
@@ -70,9 +74,9 @@
         opacity: 0;
     }
 
-    @if $theme == 'dark' {
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
         background-color: lumx-theme-color-variant($lumx-radio-button-color, 'N');
-    } @else if $theme == 'light' {
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
         background-color: lumx-theme-color-variant('light', 'N');
     }
 }

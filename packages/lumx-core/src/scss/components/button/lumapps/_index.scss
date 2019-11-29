@@ -11,51 +11,51 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-sizes {
-    @if $key == s or $key == m {
+    @if $key == lumx-base-const('size', 'S') or $key == lumx-base-const('size', 'M') {
         .#{$lumx-base-prefix}-button--size-#{$key} {
             &.#{$lumx-base-prefix}-button--emphasis-high {
                 &.#{$lumx-base-prefix}-button--variant-button {
-                    @include lumx-button-size('emphasis-high', 'variant-button', $key);
+                    @include lumx-button-size(lumx-base-const('emphasis', 'HIGH'), 'button', $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
-                    @include lumx-button-size('emphasis-high', 'variant-icon', $key);
+                    @include lumx-button-size(lumx-base-const('emphasis', 'HIGH'), 'icon', $key);
                 }
             }
 
             &.#{$lumx-base-prefix}-button--emphasis-medium {
                 &.#{$lumx-base-prefix}-button--variant-button {
-                    @include lumx-button-size('emphasis-medium', 'variant-button', $key);
+                    @include lumx-button-size(lumx-base-const('emphasis', 'MEDIUM'), 'button', $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
-                    @include lumx-button-size('emphasis-medium', 'variant-icon', $key);
+                    @include lumx-button-size(lumx-base-const('emphasis', 'MEDIUM'), 'icon', $key);
                 }
             }
 
             &.#{$lumx-base-prefix}-button--emphasis-low {
                 &.#{$lumx-base-prefix}-button--variant-button {
-                    @include lumx-button-size('emphasis-low', 'variant-button', $key);
+                    @include lumx-button-size(lumx-base-const('emphasis', 'LOW'), 'button', $key);
                 }
 
                 &.#{$lumx-base-prefix}-button--variant-icon {
-                    @include lumx-button-size('emphasis-low', 'variant-icon', $key);
+                    @include lumx-button-size(lumx-base-const('emphasis', 'LOW'), 'icon', $key);
                 }
             }
 
             &.#{$lumx-base-prefix}-button--variant-button {
                 i:first-child {
-                    @include lumx-button-icon('variant-button', $key, 'position-left');
+                    @include lumx-button-icon('button', $key, lumx-base-const('position', 'LEFT'));
                 }
 
                 i:last-child {
-                    @include lumx-button-icon('variant-button', $key, 'position-right');
+                    @include lumx-button-icon('button', $key, lumx-base-const('position', 'RIGHT'));
                 }
             }
 
             &.#{$lumx-base-prefix}-button--variant-icon {
                 i {
-                    @include lumx-button-icon('variant-icon', $key);
+                    @include lumx-button-icon('icon', $key);
                 }
             }
 
@@ -73,21 +73,21 @@
 .#{$lumx-base-prefix}-button--variant-button.#{$lumx-base-prefix}-button--emphasis-medium {
     &.#{$lumx-base-prefix}-button--size-m {
         &.#{$lumx-base-prefix}-button--has-left-icon {
-            @include lumx-button-reduced-spacing('m', 'position-left');
+            @include lumx-button-reduced-spacing(lumx-base-const('size', 'M'), lumx-base-const('position', 'LEFT'));
         }
 
         &.#{$lumx-base-prefix}-button--has-right-icon {
-            @include lumx-button-reduced-spacing('m', 'position-right');
+            @include lumx-button-reduced-spacing(lumx-base-const('size', 'M'), lumx-base-const('position', 'RIGHT'));
         }
     }
 
     &.#{$lumx-base-prefix}-button--size-s {
         &.#{$lumx-base-prefix}-button--has-left-icon {
-            @include lumx-button-reduced-spacing('s', 'position-left');
+            @include lumx-button-reduced-spacing(lumx-base-const('size', 'S'), lumx-base-const('position', 'LEFT'));
         }
 
         &.#{$lumx-base-prefix}-button--has-right-icon {
-            @include lumx-button-reduced-spacing('s', 'position-right');
+            @include lumx-button-reduced-spacing(lumx-base-const('size', 'S'), lumx-base-const('position', 'RIGHT'));
         }
     }
 }
@@ -96,14 +96,18 @@
    ========================================================================== */
 
 @each $key, $color in $lumx-theme-color-palette {
-    @if $key != dark and $key != light {
+    @if $key != 'dark' and $key != 'light' {
         .#{$lumx-base-prefix}-button--color-#{$key} {
             &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-light {
-                @include lumx-button-color('emphasis-high', $key, 'dark');
+                @include lumx-button-color(
+                    lumx-base-const('emphasis', 'HIGH'),
+                    $key,
+                    lumx-base-const('theme', 'LIGHT')
+                );
             }
 
             &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-dark {
-                @include lumx-button-color('emphasis-high', $key, 'light');
+                @include lumx-button-color(lumx-base-const('emphasis', 'HIGH'), $key, lumx-base-const('theme', 'DARK'));
             }
         }
     }
@@ -112,11 +116,11 @@
 @each $key, $color in $lumx-theme-color-palette {
     .#{$lumx-base-prefix}-button--color-#{$key} {
         &.#{$lumx-base-prefix}-button--emphasis-medium {
-            @include lumx-button-color('emphasis-medium', $key);
+            @include lumx-button-color(lumx-base-const('emphasis', 'MEDIUM'), $key);
         }
 
         &.#{$lumx-base-prefix}-button--emphasis-low {
-            @include lumx-button-color('emphasis-low', $key);
+            @include lumx-button-color(lumx-base-const('emphasis', 'LOW'), $key);
         }
     }
 }
@@ -126,11 +130,11 @@
 
 .#{$lumx-base-prefix}-button--is-selected {
     &.#{$lumx-base-prefix}-button--color-dark {
-        @include lumx-button-is-selected('dark');
+        @include lumx-button-is-selected(lumx-base-const('theme', 'LIGHT'));
     }
 
     &.#{$lumx-base-prefix}-button--color-light {
-        @include lumx-button-is-selected('light');
+        @include lumx-button-is-selected(lumx-base-const('theme', 'DARK'));
     }
 }
 
@@ -143,7 +147,7 @@
     }
 
     &--variant-icon {
-        border-radius: 50%;
+        border-radius: $lumx-button-variant-icon-border-radius;
     }
 
     &--color-light {

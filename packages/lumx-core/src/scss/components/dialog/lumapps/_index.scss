@@ -63,11 +63,11 @@
     }
 
     &__header--has-divider {
-        @include lumx-has-divider('dark', 'bottom');
+        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), 'bottom');
     }
 
     &__footer--has-divider {
-        @include lumx-has-divider('dark', 'top');
+        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), 'top');
     }
 
     &__content {

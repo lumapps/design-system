@@ -1,6 +1,6 @@
 $lumx-chip-sizes: (
-    'm': map-get($lumx-sizes, 'm'),
-    's': map-get($lumx-sizes, 's')
+    'm': map-get($lumx-sizes, lumx-base-const('size', 'M')),
+    's': map-get($lumx-sizes, lumx-base-const('size', 'S'))
 ) !default;
 
 $lumx-chip-group-spacing: 3px;

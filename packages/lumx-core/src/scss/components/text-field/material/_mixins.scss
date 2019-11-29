@@ -3,12 +3,17 @@
     top: $lumx-spacing-unit;
     left: 0;
     height: $lumx-text-field-height;
-    color: lumx-theme-color-variant($theme, 'L2');
     line-height: $lumx-text-field-height;
     transform: translateY($lumx-spacing-unit * 3);
     transform-origin: bottom left;
     transition-duration: 200ms;
     transition-property: color, transform;
+
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-theme-color-variant('dark', 'L2');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-theme-color-variant('light', 'L2');
+    }
 }
 
 @mixin lumx-text-field-material-label-validity($validity) {
@@ -20,9 +25,9 @@
 }
 
 @mixin lumx-text-field-material-label-focus($theme) {
-    @if $theme == 'dark' {
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-theme-color-variant('primary', 'N');
-    } @else if $theme == 'light' {
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
         color: lumx-theme-color-variant('light', 'N');
     }
 }
@@ -40,9 +45,14 @@
         bottom: 0;
         left: 0;
         height: 1px;
-        background-color: lumx-theme-color-variant($theme, $lumx-divider-color-variant);
         content: '';
         pointer-events: none;
+
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
+            background-color: lumx-theme-color-variant('dark', $lumx-divider-color-variant);
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
+            background-color: lumx-theme-color-variant('light', $lumx-divider-color-variant);
+        }
     }
 
     &::after {
@@ -56,9 +66,9 @@
         transform: scaleX(0);
         transition: transform 200ms;
 
-        @if $theme == 'dark' {
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
             background-color: lumx-theme-color-variant('primary', 'N');
-        } @else if $theme == 'light' {
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
             background-color: lumx-theme-color-variant('light', 'N');
         }
     }

@@ -11,11 +11,11 @@
 
     &__label {
         #{$self}--theme-light & {
-            @include lumx-text-field-material-label('dark');
+            @include lumx-text-field-material-label(lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-material-label('light');
+            @include lumx-text-field-material-label(lumx-base-const('theme', 'DARK'));
         }
 
         #{$self}--has-placeholder &,
@@ -28,11 +28,11 @@
         padding-left: 0 !important;
 
         #{$self}--theme-light & {
-            @include lumx-text-field-material-wrapper('dark');
+            @include lumx-text-field-material-wrapper(lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark & {
-            @include lumx-text-field-material-wrapper('light');
+            @include lumx-text-field-material-wrapper(lumx-base-const('theme', 'DARK'));
         }
     }
 
@@ -64,14 +64,14 @@
 .#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-focus,
 .#{$lumx-base-prefix}-select--theme-light.#{$lumx-base-prefix}-select--is-open {
     .#{$lumx-base-prefix}-select__label {
-        @include lumx-text-field-material-label-focus('dark');
+        @include lumx-text-field-material-label-focus(lumx-base-const('theme', 'LIGHT'));
     }
 }
 
 .#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-focus,
 .#{$lumx-base-prefix}-select--theme-dark.#{$lumx-base-prefix}-select--is-open {
     .#{$lumx-base-prefix}-select__label {
-        @include lumx-text-field-material-label-focus('light');
+        @include lumx-text-field-material-label-focus(lumx-base-const('theme', 'DARK'));
     }
 }
 

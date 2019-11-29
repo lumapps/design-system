@@ -10,13 +10,13 @@
 
 @mixin lumx-table-row-is-clickable($theme, $is-selected) {
     &:hover {
-        @if $theme == 'dark' {
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
             @if $is-selected == true {
                 background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L5');
             } @else {
                 background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L6');
             }
-        } @else if $theme == 'light' {
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
             @if $is-selected == true {
                 background-color: lumx-theme-color-variant('light', 'L5');
             } @else {
@@ -26,14 +26,30 @@
     }
 
     &[data-focus-visible-added] {
-        @include lumx-state('state-focus', 'emphasis-low', $theme, null, true);
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
+            @include lumx-state(
+                lumx-base-const('state', 'FOCUS'),
+                lumx-base-const('emphasis', 'LOW'),
+                'dark',
+                null,
+                true
+            );
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
+            @include lumx-state(
+                lumx-base-const('state', 'FOCUS'),
+                lumx-base-const('emphasis', 'LOW'),
+                'light',
+                null,
+                true
+            );
+        }
     }
 }
 
 @mixin lumx-table-row-is-selected($theme) {
-    @if $theme == 'dark' {
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
         background-color: lumx-theme-color-variant($lumx-table-selected-color, 'L6');
-    } @else if $theme == 'light' {
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
         background-color: lumx-theme-color-variant('light', 'L6');
     }
 }
@@ -47,9 +63,17 @@
     @if $variant == 'head' {
         @include lumx-has-divider($theme);
 
-        color: lumx-theme-color-variant($theme, 'L2');
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
+            color: lumx-theme-color-variant('dark', 'L2');
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
+            color: lumx-theme-color-variant('light', 'L2');
+        }
     } @else if $variant == 'body' {
-        color: lumx-theme-color-variant($theme, 'N');
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
+            color: lumx-theme-color-variant('dark', 'N');
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
+            color: lumx-theme-color-variant('light', 'N');
+        }
     }
 }
 
@@ -59,7 +83,11 @@
 }
 
 @mixin lumx-table-cell-is-sorted($theme) {
-    color: lumx-theme-color-variant($theme, 'N');
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-theme-color-variant('dark', 'N');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-theme-color-variant('light', 'N');
+    }
 }
 
 @mixin lumx-table-cell-wrapper() {

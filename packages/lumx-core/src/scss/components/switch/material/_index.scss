@@ -30,12 +30,22 @@
 
         #{$self}--theme-light#{$self}--is-unchecked &,
         #{$self}--theme-dark#{$self}--is-unchecked & {
-            @include lumx-state('state-default', 'emphasis-high', $lumx-switch-checked-color, 'light');
+            @include lumx-state(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('emphasis', 'HIGH'),
+                $lumx-switch-checked-color,
+                lumx-base-const('theme', 'DARK')
+            );
         }
 
         #{$self}--theme-light#{$self}--is-checked &,
         #{$self}--theme-dark#{$self}--is-checked & {
-            @include lumx-state('state-default', 'emphasis-high', $lumx-switch-checked-color, 'dark');
+            @include lumx-state(
+                lumx-base-const('state', 'DEFAULT'),
+                lumx-base-const('emphasis', 'HIGH'),
+                $lumx-switch-checked-color,
+                lumx-base-const('theme', 'LIGHT')
+            );
         }
     }
 }
@@ -48,7 +58,12 @@
 .#{$lumx-base-prefix}-switch__input-native:hover
 + .#{$lumx-base-prefix}-switch__input-placeholder {
     .#{$lumx-base-prefix}-switch__input-indicator {
-        @include lumx-state('state-hover', 'emphasis-high', $lumx-switch-checked-color, 'light');
+        @include lumx-state(
+            lumx-base-const('state', 'HOVER'),
+            lumx-base-const('emphasis', 'HIGH'),
+            $lumx-switch-checked-color,
+            lumx-base-const('theme', 'DARK')
+        );
     }
 }
 
@@ -56,7 +71,12 @@
 .#{$lumx-base-prefix}-switch__input-native:hover
 + .#{$lumx-base-prefix}-switch__input-placeholder {
     .#{$lumx-base-prefix}-switch__input-indicator {
-        @include lumx-state('state-hover', 'emphasis-high', $lumx-switch-checked-color, 'dark');
+        @include lumx-state(
+            lumx-base-const('state', 'HOVER'),
+            lumx-base-const('emphasis', 'HIGH'),
+            $lumx-switch-checked-color,
+            lumx-base-const('theme', 'LIGHT')
+        );
     }
 }
 
@@ -65,7 +85,12 @@
 .#{$lumx-base-prefix}-switch__input-native:active
 + .#{$lumx-base-prefix}-switch__input-placeholder {
     .#{$lumx-base-prefix}-switch__input-indicator {
-        @include lumx-state('state-active', 'emphasis-high', $lumx-switch-checked-color, 'light');
+        @include lumx-state(
+            lumx-base-const('state', 'ACTIVE'),
+            lumx-base-const('emphasis', 'HIGH'),
+            $lumx-switch-checked-color,
+            lumx-base-const('theme', 'DARK')
+        );
     }
 }
 
@@ -73,7 +98,12 @@
 .#{$lumx-base-prefix}-switch__input-native:active
 + .#{$lumx-base-prefix}-switch__input-placeholder {
     .#{$lumx-base-prefix}-switch__input-indicator {
-        @include lumx-state('state-active', 'emphasis-high', $lumx-switch-checked-color, 'dark');
+        @include lumx-state(
+            lumx-base-const('state', 'ACTIVE'),
+            lumx-base-const('emphasis', 'HIGH'),
+            $lumx-switch-checked-color,
+            lumx-base-const('theme', 'LIGHT')
+        );
     }
 }
 
@@ -84,7 +114,12 @@
     box-shadow: none !important;
 
     .#{$lumx-base-prefix}-switch__input-indicator {
-        @include lumx-state('state-focus', 'emphasis-high', $lumx-switch-checked-color, 'light');
+        @include lumx-state(
+            lumx-base-const('state', 'FOCUS'),
+            lumx-base-const('emphasis', 'HIGH'),
+            $lumx-switch-checked-color,
+            lumx-base-const('theme', 'DARK')
+        );
     }
 }
 
@@ -94,6 +129,11 @@
     box-shadow: none !important;
 
     .#{$lumx-base-prefix}-switch__input-indicator {
-        @include lumx-state('state-focus', 'emphasis-high', $lumx-switch-checked-color, 'dark');
+        @include lumx-state(
+            lumx-base-const('state', 'FOCUS'),
+            lumx-base-const('emphasis', 'HIGH'),
+            $lumx-switch-checked-color,
+            lumx-base-const('theme', 'LIGHT')
+        );
     }
 }

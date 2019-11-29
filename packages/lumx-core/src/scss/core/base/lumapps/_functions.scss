@@ -1,0 +1,3 @@
+@function lumx-base-const($kind, $name) {
+    @return map-get(map-get($lumx-base-constants, $kind), $name);
+}

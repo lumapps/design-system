@@ -1,1 +1,33 @@
 $lumx-base-prefix: 'lumx';
+
+$lumx-base-constants: (
+    'emphasis': (
+        'HIGH': 'emphasis-high',
+        'MEDIUM': 'emphasis-medium',
+        'LOW': 'emphasis-low'
+    ),
+    'position': (
+        'LEFT': 'position-left',
+        'CENTER': 'position-center',
+        'RIGHT': 'position-right'
+    ),
+    'size': (
+        'XXS': 'xxs',
+        'XS': 'xs',
+        'S': 's',
+        'M': 'm',
+        'L': 'l',
+        'XL': 'xl',
+        'XXL': 'xxl'
+    ),
+    'state': (
+        'DEFAULT': 'state-default',
+        'HOVER': 'state-hover',
+        'ACTIVE': 'state-active',
+        'FOCUS': 'state-focus'
+    ),
+    'theme': (
+        'LIGHT': 'theme-light',
+        'DARK': 'theme-dark'
+    )
+);

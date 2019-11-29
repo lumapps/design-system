@@ -8,17 +8,22 @@
         bottom: 0;
         left: 0;
         height: 2px;
-        background-color: lumx-theme-color-variant($theme, $lumx-divider-color-variant);
         content: '';
+
+        @if $theme == lumx-base-const('theme', 'LIGHT') {
+            background-color: lumx-theme-color-variant('dark', $lumx-divider-color-variant);
+        } @else if $theme == lumx-base-const('theme', 'DARK') {
+            background-color: lumx-theme-color-variant('light', $lumx-divider-color-variant);
+        }
     }
 }
 
 @mixin lumx-tabs-links-position($position) {
-    @if $position == 'position-left' {
+    @if $position == lumx-base-const('position', 'LEFT') {
         justify-content: flex-start;
-    } @else if $position == 'position-center' {
+    } @else if $position == lumx-base-const('position', 'CENTER') {
         justify-content: center;
-    } @else if $position == 'position-right' {
+    } @else if $position == lumx-base-const('position', 'RIGHT') {
         justify-content: flex-end;
     }
 }
@@ -58,11 +63,11 @@
 }
 
 @mixin lumx-tabs-link-active($theme) {
-    @if $theme == 'dark' {
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
         &::after {
             background-color: lumx-theme-color-variant('primary', 'N');
         }
-    } @else if $theme == 'light' {
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
         &::after {
             background-color: lumx-theme-color-variant('light', 'N');
         }

@@ -11,11 +11,11 @@
         @include lumx-table-row;
 
         #{$self}--theme-light#{$self}--has-dividers & {
-            @include lumx-has-divider('dark');
+            @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark#{$self}--has-dividers & {
-            @include lumx-has-divider('light');
+            @include lumx-has-divider(lumx-base-const('theme', 'DARK'));
         }
 
         #{$self}--has-dividers &:last-child {
@@ -24,11 +24,11 @@
 
         &--is-selected {
             #{$self}--theme-light & {
-                @include lumx-table-row-is-selected('dark');
+                @include lumx-table-row-is-selected(lumx-base-const('theme', 'LIGHT'));
             }
 
             #{$self}--theme-dark & {
-                @include lumx-table-row-is-selected('light');
+                @include lumx-table-row-is-selected(lumx-base-const('theme', 'DARK'));
             }
         }
     }
@@ -36,21 +36,21 @@
     &__cell {
         &--head {
             #{$self}--theme-light & {
-                @include lumx-table-cell('head', 'dark');
+                @include lumx-table-cell('head', lumx-base-const('theme', 'LIGHT'));
             }
 
             #{$self}--theme-dark & {
-                @include lumx-table-cell('head', 'light');
+                @include lumx-table-cell('head', lumx-base-const('theme', 'DARK'));
             }
         }
 
         &--body {
             #{$self}--theme-light & {
-                @include lumx-table-cell('body', 'dark');
+                @include lumx-table-cell('body', lumx-base-const('theme', 'LIGHT'));
             }
 
             #{$self}--theme-dark & {
-                @include lumx-table-cell('body', 'light');
+                @include lumx-table-cell('body', lumx-base-const('theme', 'DARK'));
             }
         }
 
@@ -68,11 +68,11 @@
 
         &--is-sorted {
             #{$self}--theme-light & {
-                @include lumx-table-cell-is-sorted('dark');
+                @include lumx-table-cell-is-sorted(lumx-base-const('theme', 'LIGHT'));
             }
 
             #{$self}--theme-dark & {
-                @include lumx-table-cell-is-sorted('light');
+                @include lumx-table-cell-is-sorted(lumx-base-const('theme', 'DARK'));
             }
         }
     }
@@ -114,20 +114,20 @@
 
 .#{$lumx-base-prefix}-table__row--is-clickable:not(.#{$lumx-base-prefix}-table__row--is-selected) {
     .#{$lumx-base-prefix}-table--theme-light & {
-        @include lumx-table-row-is-clickable('dark', false);
+        @include lumx-table-row-is-clickable(lumx-base-const('theme', 'LIGHT'), false);
     }
 
     .#{$lumx-base-prefix}-table--theme-dark & {
-        @include lumx-table-row-is-clickable('light', false);
+        @include lumx-table-row-is-clickable(lumx-base-const('theme', 'DARK'), false);
     }
 }
 
 .#{$lumx-base-prefix}-table__row--is-clickable.#{$lumx-base-prefix}-table__row--is-selected {
     .#{$lumx-base-prefix}-table--theme-light & {
-        @include lumx-table-row-is-clickable('dark', true);
+        @include lumx-table-row-is-clickable(lumx-base-const('theme', 'LIGHT'), true);
     }
 
     .#{$lumx-base-prefix}-table--theme-dark & {
-        @include lumx-table-row-is-clickable('light', true);
+        @include lumx-table-row-is-clickable(lumx-base-const('theme', 'DARK'), true);
     }
 }

@@ -96,11 +96,11 @@
     }
 
     &:hover::after {
-        @include lumx-state('state-hover', 'emphasis-low', 'dark');
+        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 
     &:active::after {
-        @include lumx-state('state-active', 'emphasis-low', 'dark');
+        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 }
 
@@ -112,12 +112,12 @@
 
 .#{$lumx-base-prefix}-thumbnail--theme-light.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     &[data-focus-visible-added]::after {
-        @include lumx-state('state-focus', 'emphasis-low', 'dark');
+        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 }
 
 .#{$lumx-base-prefix}-thumbnail--theme-dark.#{$lumx-base-prefix}-thumbnail[tabindex='0'] {
     &[data-focus-visible-added]::after {
-        @include lumx-state('state-focus', 'emphasis-low', 'light');
+        @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
     }
 }

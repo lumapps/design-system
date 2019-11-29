@@ -13,11 +13,11 @@
 
     &__label {
         #{$self}--size-m & {
-            @include lumx-chip-label('m');
+            @include lumx-chip-label(lumx-base-const('size', 'M'));
         }
 
         #{$self}--size-s & {
-            @include lumx-chip-label('s');
+            @include lumx-chip-label(lumx-base-const('size', 'S'));
         }
     }
 
@@ -30,7 +30,7 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-chip--size-m {
-    @include lumx-chip-size('m');
+    @include lumx-chip-size(lumx-base-const('size', 'M'));
 
     padding: 0 $lumx-spacing-unit * 2;
 
@@ -44,7 +44,7 @@
 }
 
 .#{$lumx-base-prefix}-chip--size-s {
-    @include lumx-chip-size('s');
+    @include lumx-chip-size(lumx-base-const('size', 'S'));
 
     padding: 0 $lumx-spacing-unit * 1.5;
 
@@ -68,53 +68,53 @@
 
 @each $key, $color in $lumx-theme-color-palette {
     .#{$lumx-base-prefix}-chip--is-unselected.#{$lumx-base-prefix}-chip--color-#{$key} {
-        @include lumx-state('state-default', 'emphasis-medium', $key);
+        @include lumx-state(lumx-base-const('state', 'DEFAULT'), lumx-base-const('emphasis', 'MEDIUM'), $key);
 
         &.#{$lumx-base-prefix}-chip--is-clickable:hover {
-            @include lumx-state('state-hover', 'emphasis-medium', $key);
+            @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'MEDIUM'), $key);
         }
 
         &.#{$lumx-base-prefix}-chip--is-clickable:active {
-            @include lumx-state('state-active', 'emphasis-medium', $key);
+            @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'MEDIUM'), $key);
         }
 
         &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added],
         &.#{$lumx-base-prefix}-chip--is-highlighted {
-            @include lumx-state('state-focus', 'emphasis-medium', $key);
+            @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'MEDIUM'), $key);
         }
     }
 }
 
 .#{$lumx-base-prefix}-chip--is-selected {
     &.#{$lumx-base-prefix}-chip--color-dark {
-        @include lumx-state-as-selected('state-default', 'dark');
+        @include lumx-state-as-selected(lumx-base-const('state', 'DEFAULT'), lumx-base-const('theme', 'LIGHT'));
 
         &.#{$lumx-base-prefix}-chip--is-clickable:hover {
-            @include lumx-state-as-selected('state-hover', 'dark');
+            @include lumx-state-as-selected(lumx-base-const('state', 'HOVER'), lumx-base-const('theme', 'LIGHT'));
         }
 
         &.#{$lumx-base-prefix}-chip--is-clickable:active {
-            @include lumx-state-as-selected('state-active', 'dark');
+            @include lumx-state-as-selected(lumx-base-const('state', 'ACTIVE'), lumx-base-const('theme', 'LIGHT'));
         }
 
         &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
-            @include lumx-state-as-selected('state-focus', 'dark');
+            @include lumx-state-as-selected(lumx-base-const('state', 'FOCUS'), lumx-base-const('theme', 'LIGHT'));
         }
     }
 
     &.#{$lumx-base-prefix}-chip--color-light {
-        @include lumx-state-as-selected('state-default', 'light');
+        @include lumx-state-as-selected(lumx-base-const('state', 'DEFAULT'), lumx-base-const('theme', 'DARK'));
 
         &.#{$lumx-base-prefix}-chip--is-clickable:hover {
-            @include lumx-state-as-selected('state-hover', 'light');
+            @include lumx-state-as-selected(lumx-base-const('state', 'HOVER'), lumx-base-const('theme', 'DARK'));
         }
 
         &.#{$lumx-base-prefix}-chip--is-clickable:active {
-            @include lumx-state-as-selected('state-active', 'light');
+            @include lumx-state-as-selected(lumx-base-const('state', 'ACTIVE'), lumx-base-const('theme', 'DARK'));
         }
 
         &.#{$lumx-base-prefix}-chip--is-clickable[data-focus-visible-added] {
-            @include lumx-state-as-selected('state-focus', 'light');
+            @include lumx-state-as-selected(lumx-base-const('state', 'FOCUS'), lumx-base-const('theme', 'DARK'));
         }
     }
 }

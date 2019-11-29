@@ -9,7 +9,7 @@
     font-weight: map-get($lumx-typography-font-weight, $style);
     line-height: map-get($lumx-typography-line-height, $style);
 
-    @if $style == overline {
+    @if $style == 'overline' {
         text-transform: uppercase;
     }
 }

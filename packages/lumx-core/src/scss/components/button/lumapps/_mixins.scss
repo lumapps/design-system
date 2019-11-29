@@ -20,53 +20,53 @@
 @mixin lumx-button-size($emphasis, $variant, $size) {
     height: map-get($lumx-sizes, $size);
 
-    @if $variant == 'variant-button' {
+    @if $variant == 'button' {
         border-radius: $lumx-theme-border-radius;
 
-        @if $emphasis == 'emphasis-high' or $emphasis == 'emphasis-medium' {
-            @if $size == 'm' {
+        @if $emphasis == lumx-base-const('emphasis', 'HIGH') or $emphasis == lumx-base-const('emphasis', 'MEDIUM') {
+            @if $size == lumx-base-const('size', 'M') {
                 padding: 0 $lumx-spacing-unit * 2;
-            } @else if $size == 's' {
+            } @else if $size == lumx-base-const('size', 'S') {
                 padding: 0 $lumx-spacing-unit * 1.5;
             }
-        } @else if $emphasis == 'emphasis-low' {
+        } @else if $emphasis == lumx-base-const('emphasis', 'LOW') {
             padding: 0 $lumx-spacing-unit;
         }
-    } @else if $variant == 'variant-icon' {
+    } @else if $variant == 'icon' {
         width: map-get($lumx-sizes, $size);
         border-radius: $lumx-button-variant-icon-border-radius;
     }
 }
 
 @mixin lumx-button-reduced-spacing($size, $icon-position) {
-    @if $size == 'm' {
-        @if $icon-position == 'position-left' {
+    @if $size == lumx-base-const('size', 'M') {
+        @if $icon-position == lumx-base-const('position', 'LEFT') {
             padding-left: $lumx-spacing-unit * 1.5;
-        } @else if $icon-position == 'position-right' {
+        } @else if $icon-position == lumx-base-const('position', 'RIGHT') {
             padding-right: $lumx-spacing-unit * 1.5;
         }
-    } @else if $size == 's' {
-        @if $icon-position == 'position-left' {
+    } @else if $size == lumx-base-const('size', 'S') {
+        @if $icon-position == lumx-base-const('position', 'LEFT') {
             padding-left: $lumx-spacing-unit;
-        } @else if $icon-position == 'position-right' {
+        } @else if $icon-position == lumx-base-const('position', 'RIGHT') {
             padding-right: $lumx-spacing-unit;
         }
     }
 }
 
 @mixin lumx-button-color($emphasis, $color, $theme: null) {
-    @include lumx-state('state-default', $emphasis, $color, $theme);
+    @include lumx-state(lumx-base-const('state', 'DEFAULT'), $emphasis, $color, $theme);
 
     &:hover {
-        @include lumx-state('state-hover', $emphasis, $color, $theme);
+        @include lumx-state(lumx-base-const('state', 'HOVER'), $emphasis, $color, $theme);
     }
 
     &:active {
-        @include lumx-state('state-active', $emphasis, $color, $theme);
+        @include lumx-state(lumx-base-const('state', 'ACTIVE'), $emphasis, $color, $theme);
     }
 
     &[data-focus-visible-added] {
-        @include lumx-state('state-focus', $emphasis, $color, $theme);
+        @include lumx-state(lumx-base-const('state', 'FOCUS'), $emphasis, $color, $theme);
     }
 
     &:disabled {
@@ -75,18 +75,18 @@
 }
 
 @mixin lumx-button-is-selected($theme) {
-    @include lumx-state-as-selected('state-default', $theme);
+    @include lumx-state-as-selected(lumx-base-const('state', 'DEFAULT'), $theme);
 
     &:hover {
-        @include lumx-state-as-selected('state-hover', $theme);
+        @include lumx-state-as-selected(lumx-base-const('state', 'HOVER'), $theme);
     }
 
     &:active {
-        @include lumx-state-as-selected('state-active', $theme);
+        @include lumx-state-as-selected(lumx-base-const('state', 'ACTIVE'), $theme);
     }
 
     &[data-focus-visible-added] {
-        @include lumx-state-as-selected('state-focus', $theme);
+        @include lumx-state-as-selected(lumx-base-const('state', 'FOCUS'), $theme);
     }
 }
 
@@ -106,17 +106,17 @@
     font-size: map-get($lumx-button-icon-sizes, $size);
     pointer-events: none;
 
-    @if $variant == 'variant-button' {
-        @if $position == 'position-left' {
-            @if $size == 'm' {
+    @if $variant == 'button' {
+        @if $position == lumx-base-const('position', 'LEFT') {
+            @if $size == lumx-base-const('size', 'M') {
                 margin-right: $lumx-spacing-unit;
-            } @else if $size == 's' {
+            } @else if $size == lumx-base-const('size', 'S') {
                 margin-right: $lumx-spacing-unit / 2;
             }
-        } @else if $position == 'position-right' {
-            @if $size == 'm' {
+        } @else if $position == lumx-base-const('position', 'RIGHT') {
+            @if $size == lumx-base-const('size', 'M') {
                 margin-left: $lumx-spacing-unit;
-            } @else if $size == 's' {
+            } @else if $size == lumx-base-const('size', 'S') {
                 margin-left: $lumx-spacing-unit / 2;
             }
         }

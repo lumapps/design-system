@@ -2,7 +2,12 @@
     @include lumx-typography($lumx-input-label-typography);
 
     display: block;
-    color: lumx-theme-color-variant($theme, 'N');
+
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-theme-color-variant('dark', 'N');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-theme-color-variant('light', 'N');
+    }
 }
 
 @mixin lumx-input-helper($theme) {
@@ -10,5 +15,10 @@
 
     display: block;
     margin-top: $lumx-spacing-unit / 2;
-    color: lumx-theme-color-variant($theme, 'L2');
+
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-theme-color-variant('dark', 'L2');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-theme-color-variant('light', 'L2');
+    }
 }

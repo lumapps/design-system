@@ -23,19 +23,19 @@
         @include lumx-radio-button-input-background;
 
         #{$self}--theme-light#{$self}--is-unchecked & {
-            @include lumx-radio-button-input-background-status('unchecked', 'dark');
+            @include lumx-radio-button-input-background-status('unchecked', lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark#{$self}--is-unchecked & {
-            @include lumx-radio-button-input-background-status('unchecked', 'light');
+            @include lumx-radio-button-input-background-status('unchecked', lumx-base-const('theme', 'DARK'));
         }
 
         #{$self}--theme-light#{$self}--is-checked & {
-            @include lumx-radio-button-input-background-status('checked', 'dark');
+            @include lumx-radio-button-input-background-status('checked', lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark#{$self}--is-checked & {
-            @include lumx-radio-button-input-background-status('checked', 'light');
+            @include lumx-radio-button-input-background-status('checked', lumx-base-const('theme', 'DARK'));
         }
     }
 
@@ -43,19 +43,19 @@
         @include lumx-radio-button-input-indicator;
 
         #{$self}--theme-light#{$self}--is-unchecked & {
-            @include lumx-radio-button-input-indicator-status('unchecked', 'dark');
+            @include lumx-radio-button-input-indicator-status('unchecked', lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark#{$self}--is-unchecked & {
-            @include lumx-radio-button-input-indicator-status('unchecked', 'light');
+            @include lumx-radio-button-input-indicator-status('unchecked', lumx-base-const('theme', 'DARK'));
         }
 
         #{$self}--theme-light#{$self}--is-checked & {
-            @include lumx-radio-button-input-indicator-status('checked', 'dark');
+            @include lumx-radio-button-input-indicator-status('checked', lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark#{$self}--is-checked & {
-            @include lumx-radio-button-input-indicator-status('checked', 'light');
+            @include lumx-radio-button-input-indicator-status('checked', lumx-base-const('theme', 'DARK'));
         }
     }
 
@@ -63,11 +63,11 @@
         padding-left: $lumx-spacing-unit;
 
         #{$self}--theme-light & {
-            @include lumx-input-label('dark');
+            @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark & {
-            @include lumx-input-label('light');
+            @include lumx-input-label(lumx-base-const('theme', 'DARK'));
         }
     }
 
@@ -75,11 +75,11 @@
         padding-left: $lumx-spacing-unit;
 
         #{$self}--theme-light & {
-            @include lumx-input-helper('dark');
+            @include lumx-input-helper(lumx-base-const('theme', 'LIGHT'));
         }
 
         #{$self}--theme-dark & {
-            @include lumx-input-helper('light');
+            @include lumx-input-helper(lumx-base-const('theme', 'DARK'));
         }
     }
 }
@@ -100,14 +100,14 @@
     &.#{$lumx-base-prefix}-radio-button--theme-light {
         .#{$lumx-base-prefix}-radio-button__label,
         .#{$lumx-base-prefix}-radio-button__helper {
-            @include lumx-state-disabled-text('dark');
+            @include lumx-state-disabled-text(lumx-base-const('theme', 'LIGHT'));
         }
     }
 
     &.#{$lumx-base-prefix}-radio-button--theme-dark {
         .#{$lumx-base-prefix}-radio-button__label,
         .#{$lumx-base-prefix}-radio-button__helper {
-            @include lumx-state-disabled-text('light');
+            @include lumx-state-disabled-text(lumx-base-const('theme', 'DARK'));
         }
     }
 }
@@ -117,7 +117,7 @@
 .#{$lumx-base-prefix}-radio-button__input-native:hover
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
     .#{$lumx-base-prefix}-radio-button__input-background {
-        @include lumx-state('state-hover', 'emphasis-low', 'dark');
+        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 }
 
@@ -125,7 +125,7 @@
 .#{$lumx-base-prefix}-radio-button__input-native:hover
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
     .#{$lumx-base-prefix}-radio-button__input-background {
-        @include lumx-state('state-hover', 'emphasis-low', 'light');
+        @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'light');
     }
 }
 
@@ -134,7 +134,7 @@
 .#{$lumx-base-prefix}-radio-button__input-native:active
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
     .#{$lumx-base-prefix}-radio-button__input-background {
-        @include lumx-state('state-active', 'emphasis-low', 'dark');
+        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
     }
 }
 
@@ -142,7 +142,7 @@
 .#{$lumx-base-prefix}-radio-button__input-native:active
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
     .#{$lumx-base-prefix}-radio-button__input-background {
-        @include lumx-state('state-active', 'emphasis-low', 'light');
+        @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'light');
     }
 }
 
@@ -150,25 +150,35 @@
 .#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-unchecked
 .#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    @include lumx-state('state-focus', 'emphasis-low', 'dark');
+    @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'dark');
 }
 
 .#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-unchecked
 .#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    @include lumx-state('state-focus', 'emphasis-low', 'light');
+    @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
 }
 
 .#{$lumx-base-prefix}-radio-button--theme-light.#{$lumx-base-prefix}-radio-button--is-checked
 .#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    @include lumx-state('state-focus', 'emphasis-high', 'primary', 'dark');
+    @include lumx-state(
+        lumx-base-const('state', 'FOCUS'),
+        lumx-base-const('emphasis', 'HIGH'),
+        'primary',
+        lumx-base-const('theme', 'LIGHT')
+    );
 }
 
 .#{$lumx-base-prefix}-radio-button--theme-dark.#{$lumx-base-prefix}-radio-button--is-checked
 .#{$lumx-base-prefix}-radio-button__input-native[data-focus-visible-added]
 + .#{$lumx-base-prefix}-radio-button__input-placeholder {
-    @include lumx-state('state-focus', 'emphasis-high', 'primary', 'light');
+    @include lumx-state(
+        lumx-base-const('state', 'FOCUS'),
+        lumx-base-const('emphasis', 'HIGH'),
+        'primary',
+        lumx-base-const('theme', 'DARK')
+    );
 }
 
 /* Radio group
