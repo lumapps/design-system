@@ -40,6 +40,10 @@
             @include lumx-typography(subtitle2);
         }
 
+        & > p > a {
+            @include lumx-link('primary');
+        }
+
         & > h2,
         & > h3,
         & > h4 {
@@ -58,6 +62,11 @@
             &:last-child {
                 margin-bottom: 0;
             }
+        }
+
+        & > img {
+            display: block;
+            width: 100%;
         }
     }
 }

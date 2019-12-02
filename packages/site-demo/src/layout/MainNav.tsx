@@ -78,6 +78,10 @@ const ITEMS: Item[] = [
                 ],
                 label: 'Components',
             },
+            {
+                children: ['Stepper dialog'],
+                label: 'Patterns',
+            },
         ],
         label: 'Product',
     },
@@ -114,8 +118,8 @@ const generateNav = (goToHandler: (path: string) => Callback, location: string, 
 
         const props: Partial<SideNavigationItemProps> = {
             emphasis: EMPHASIS_BY_LEVEL[parent.length],
-            isSelected: location === slug,
             isOpen,
+            isSelected: location === slug,
         };
 
         if (isEmpty(children)) {
