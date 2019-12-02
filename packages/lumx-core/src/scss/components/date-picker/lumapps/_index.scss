@@ -1,0 +1,63 @@
+/* ==========================================================================
+   Date picker
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-date-picker {
+    &__month {
+        @include lumx-typography('subtitle1');
+
+        display: block;
+        text-align: center;
+    }
+
+    &__calendar {
+        padding: $lumx-spacing-unit * 2;
+        padding-top: 0;
+    }
+
+    &__days-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__day-wrapper {
+        display: flex;
+        max-width: #{(100 / 7) + '%'};
+        height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
+        // prettier-ignore
+        flex: unquote('0 0 #{(100 / 7) + '%'}');
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__week-day {
+        @include lumx-typography('body1');
+
+        display: block;
+        color: lumx-theme-color-variant('dark', 'L2');
+    }
+
+    &__month-day {
+        @include lumx-state-transition;
+        @include lumx-button-base;
+        @include lumx-button-color(lumx-base-const('emphasis', 'LOW'), 'dark');
+
+        width: map-get($lumx-sizes, lumx-base-const('size', 'M'));
+        height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
+        border-radius: 50%;
+        line-height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
+        text-align: center;
+
+        span {
+            @include lumx-typography('body1');
+        }
+
+        &--is-today span {
+            font-weight: $lumx-button-text-weight;
+        }
+
+        &--is-selected {
+            @include lumx-button-is-selected(lumx-base-const('theme', 'LIGHT'));
+        }
+    }
+}
