@@ -6,4 +6,4 @@ import { decorators } from '@lumx/react/story-block';
 
 export default { title: 'DatePicker', decorators };
 
-export const simpleDatePicker = () => <DatePicker locale="fr" />;
+export const simpleDatePicker = () => <DatePicker locale="fr" minDate={new Date()} />;
