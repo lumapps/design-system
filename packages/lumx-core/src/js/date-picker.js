@@ -81,6 +81,8 @@ function getAnnotatedMonthCalendar(locale, minDate = undefined, maxDate = undefi
             date,
             isDisplayed: date.month() === month,
             isClickable: clickableRange.contains(date),
+            isToday: date.isSame(moment(), 'day'),
+            isSelected: date.isSame(moment().add(3, 'days'), 'day'),
         };
     });
 }

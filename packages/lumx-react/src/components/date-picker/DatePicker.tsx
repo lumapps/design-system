@@ -1,8 +1,10 @@
 import React, { ReactElement } from 'react';
 
-import { IconButton, Toolbar } from '@lumx/react';
+import classNames from 'classnames';
 
-import { mdiGreaterThan, mdiLessThan } from '@lumx/icons';
+import { Emphasis, IconButton, Toolbar } from '@lumx/react';
+
+import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
 import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
 
@@ -69,27 +71,44 @@ const DatePicker: React.FC<DatePickerProps> = ({
     minDate = DEFAULT_PROPS.minDate,
 }: DatePickerProps): ReactElement => {
     return (
-        <div>
+        <div className={`${CLASSNAME}`}>
             <Toolbar
-                after={<IconButton icon={mdiGreaterThan} />}
-                before={<IconButton icon={mdiLessThan} />}
-                label="Date Picker"
+                className={`${CLASSNAME}__toolbar`}
+                after={<IconButton emphasis={Emphasis.low} icon={mdiChevronRight} />}
+                before={<IconButton emphasis={Emphasis.low} icon={mdiChevronLeft} />}
+                label={<span className={`${CLASSNAME}__month`}>Date Picker</span>}
             />
-            <div>
-                <div>
+            <div className={`${CLASSNAME}__calendar`}>
+                <div className={`${CLASSNAME}__week-days ${CLASSNAME}__days-wrapper`}>
                     {getWeekDays(locale).map((weekDay) => (
-                        <span key={weekDay}>{weekDay}</span>
+                        <div className={`${CLASSNAME}__day-wrapper`}>
+                            <span className={`${CLASSNAME}__week-day`} key={weekDay}>
+                                {weekDay}
+                            </span>
+                        </div>
                     ))}
                 </div>
-                <div>
+
+                <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
                     {getAnnotatedMonthCalendar(locale, minDate, maxDate).map((annotatedDate) => {
                         if (annotatedDate.isDisplayed) {
-                            if (annotatedDate.isClickable) {
-                                return <a key={annotatedDate.date.format()}>{annotatedDate.date.format('DD')}</a>;
-                            }
-                            return <span key={annotatedDate.date.format()}>{annotatedDate.date.format('DD')}</span>;
+                            return (
+                                <div className={`${CLASSNAME}__day-wrapper`}>
+                                    <button
+                                        className={classNames(`${CLASSNAME}__month-day`, {
+                                            [`${CLASSNAME}__month-day--is-selected`]: annotatedDate.isSelected,
+                                            [`${CLASSNAME}__month-day--is-today`]:
+                                                annotatedDate.isClickable && annotatedDate.isToday,
+                                        })}
+                                        key={annotatedDate.date.format()}
+                                        disabled={!annotatedDate.isClickable}
+                                    >
+                                        <span>{annotatedDate.date.format('DD')}</span>
+                                    </button>
+                                </div>
+                            );
                         }
-                        return <span key={annotatedDate.date.format()} />;
+                        return <div className={`${CLASSNAME}__day-wrapper`} key={annotatedDate.date.format()} />;
                     })}
                 </div>
             </div>

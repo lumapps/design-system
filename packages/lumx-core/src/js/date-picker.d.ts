@@ -8,8 +8,14 @@ type AnnotatedDate = {
     date: Moment;
     isDisplayed: boolean;
     isClickable: boolean;
+    isToday: boolean;
 };
 
-declare function getAnnotatedMonthCalendar(locale: string, maxDate?: Date, minDate?: Date, monthFromNow?: number): AnnotatedDate[];
+declare function getAnnotatedMonthCalendar(
+    locale: string,
+    maxDate?: Date,
+    minDate?: Date,
+    monthFromNow?: number,
+): AnnotatedDate[];
 
 export { getWeekDays, getMonthCalendar, getAnnotatedMonthCalendar };
