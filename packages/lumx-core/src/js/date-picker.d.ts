@@ -1,8 +1,8 @@
 import { Moment } from 'moment';
 
-declare function getWeekDays(locale: string): string[];
+declare function getWeekDays(locale: string): Moment[];
 
-declare function getMonthCalendar(locale: string, monthFromNow?: number): Moment[];
+declare function getMonthCalendar(locale: string, today?: Moment, monthFromNow?: number): Moment[];
 
 type AnnotatedDate = {
     date: Moment;
@@ -13,8 +13,9 @@ type AnnotatedDate = {
 
 declare function getAnnotatedMonthCalendar(
     locale: string,
-    maxDate?: Date,
     minDate?: Date,
+    maxDate?: Date,
+    today?: Moment,
     monthFromNow?: number,
 ): AnnotatedDate[];
 

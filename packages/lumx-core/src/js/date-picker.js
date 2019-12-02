@@ -1,7 +1,11 @@
+/* eslint-disable unicorn/prefer-spread */
+import range from 'lodash/range';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
 
 const moment = extendMoment(Moment);
+
+const DAYS_PER_WEEK = 7;
 
 /////////////////////////////
 //                         //
@@ -16,31 +20,29 @@ const moment = extendMoment(Moment);
  * @return {Array}  The list of days in a week based on locale.
  */
 function getWeekDays(locale) {
-    return [0, 1, 2, 3, 4, 5, 6].map((_, i) =>
+    return range(DAYS_PER_WEEK).map((_, i) =>
         moment()
             .locale(locale)
-            .weekday(i)
-            .format('dddd')
-            .slice(0, 1)
-            .toUpperCase(),
+            .weekday(i),
     );
 }
 
 /**
  * Get month calendar based on locale and start date.
  *
- * @param  {string} locale       The locale using to generate the order of days in a week.
- * @param  {int}    monthFromNow The number of month from now for which we want the calendar.
+ * @param  {string} locale      The locale using to generate the order of days in a week.
+ * @param  {Object} today       The current date.
+ * @param  {int}    monthOffset The number of month from now for which we want the calendar.
  * @return {Array}  The list of days in a week based on locale.
  */
-function getMonthCalendar(locale, monthFromNow = 0) {
+function getMonthCalendar(locale, today = moment(), monthOffset = 0) {
     const firstDay = moment()
         .locale(locale)
-        .add(monthFromNow, 'months')
+        .add(monthOffset, 'months')
         .startOf('month');
     const endDay = moment()
         .locale(locale)
-        .add(monthFromNow, 'months')
+        .add(monthOffset, 'months')
         .endOf('month');
 
     const monthRange = moment.range(firstDay, endDay);
@@ -62,27 +64,34 @@ function getMonthCalendar(locale, monthFromNow = 0) {
  * Get month calendar based on locale and start date.
  * Each day is annotated to know if they are displayed and/or clickable.
  *
- * @param  {string} locale       The locale using to generate the order of days in a week.
- * @param  {Object} minDate      The first selectable date.
- * @param  {Object} maxDate      The last selectable date.
- * @param  {int}    monthFromNow The number of month from now for which we want the calendar.
+ * @param  {string} locale      The locale using to generate the order of days in a week.
+ * @param  {Object} minDate     The first selectable date.
+ * @param  {Object} maxDate     The last selectable date.
+ * @param  {Object} today       The current date.
+ * @param  {int}    monthOffset The number of month from now for which we want the calendar.
  * @return {Array}  The list of days in a week based on locale.
  */
-function getAnnotatedMonthCalendar(locale, minDate = undefined, maxDate = undefined, monthFromNow = 0) {
-    const month = moment()
+function getAnnotatedMonthCalendar(
+    locale,
+    minDate = undefined,
+    maxDate = undefined,
+    today = moment(),
+    monthOffset = 0,
+) {
+    const month = today
         .locale(locale)
-        .add(monthFromNow, 'months')
+        .add(monthOffset, 'months')
         .month();
 
-    const clickableRange = moment().range(minDate, maxDate);
+    const clickableRange = moment.range(minDate, maxDate);
 
-    return getMonthCalendar(locale, monthFromNow).map((date) => {
+    return getMonthCalendar(locale, today, monthOffset).map((date) => {
         return {
             date,
             isDisplayed: date.month() === month,
             isClickable: clickableRange.contains(date),
-            isToday: date.isSame(moment(), 'day'),
-            isSelected: date.isSame(moment().add(3, 'days'), 'day'),
+            isToday: date.isSame(today, 'day'),
+            isSelected: date.isSame(today.add(3, 'days'), 'day'),
         };
     });
 }

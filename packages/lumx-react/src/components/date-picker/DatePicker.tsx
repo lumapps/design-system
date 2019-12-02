@@ -1,4 +1,6 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
+
+import moment from 'moment';
 
 import classNames from 'classnames';
 
@@ -18,22 +20,37 @@ import { getRootClassName } from '../../utils/getRootClassName';
 /**
  * Defines the props of the component.
  */
+
 interface IDatePickerProps extends IGenericProps {
     /** Locale. */
     locale: string;
+
     /** Max date. */
     maxDate?: Date;
+
     /** Min date. */
     minDate?: Date;
+
+    /** Value. */
+    value: Date;
+
+    /** On change. */
+    onChange(value: Date): void;
 }
 type DatePickerProps = IDatePickerProps;
 
-/////////////////////////////
+type DatePickerControlledProps = IDatePickerProps & {
+    /** Today. */
+    today: moment.Moment;
 
-/**
- * Define the types of the default props.
- */
-interface IDefaultPropsType extends Partial<DatePickerProps> {}
+    /** Month offset, positive or negative. */
+    monthOffset: number;
+
+    /** Changing month. */
+    onMonthChange(newMonth: Date): void;
+};
+
+/////////////////////////////
 
 /////////////////////////////
 //                         //
@@ -54,7 +71,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: Partial<DatePickerProps> = {
     maxDate: undefined,
     minDate: undefined,
 };
@@ -65,11 +82,13 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The component.
  */
-const DatePicker: React.FC<DatePickerProps> = ({
+const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     locale,
     maxDate = DEFAULT_PROPS.maxDate,
     minDate = DEFAULT_PROPS.minDate,
-}: DatePickerProps): ReactElement => {
+    monthOffset,
+    today,
+}: DatePickerControlledProps): ReactElement => {
     return (
         <div className={`${CLASSNAME}`}>
             <Toolbar
@@ -81,26 +100,28 @@ const DatePicker: React.FC<DatePickerProps> = ({
             <div className={`${CLASSNAME}__calendar`}>
                 <div className={`${CLASSNAME}__week-days ${CLASSNAME}__days-wrapper`}>
                     {getWeekDays(locale).map((weekDay) => (
-                        <div className={`${CLASSNAME}__day-wrapper`}>
-                            <span className={`${CLASSNAME}__week-day`} key={weekDay}>
-                                {weekDay}
+                        <div key={weekDay.unix()} className={`${CLASSNAME}__day-wrapper`}>
+                            <span className={`${CLASSNAME}__week-day`}>
+                                {weekDay
+                                    .format('dddd')
+                                    .slice(0, 1)
+                                    .toUpperCase()}
                             </span>
                         </div>
                     ))}
                 </div>
 
                 <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
-                    {getAnnotatedMonthCalendar(locale, minDate, maxDate).map((annotatedDate) => {
+                    {getAnnotatedMonthCalendar(locale, minDate, maxDate, today, monthOffset).map((annotatedDate) => {
                         if (annotatedDate.isDisplayed) {
                             return (
-                                <div className={`${CLASSNAME}__day-wrapper`}>
+                                <div key={annotatedDate.date.unix()} className={`${CLASSNAME}__day-wrapper`}>
                                     <button
                                         className={classNames(`${CLASSNAME}__month-day`, {
                                             [`${CLASSNAME}__month-day--is-selected`]: annotatedDate.isSelected,
                                             [`${CLASSNAME}__month-day--is-today`]:
                                                 annotatedDate.isClickable && annotatedDate.isToday,
                                         })}
-                                        key={annotatedDate.date.format()}
                                         disabled={!annotatedDate.isClickable}
                                     >
                                         <span>{annotatedDate.date.format('DD')}</span>
@@ -108,14 +129,21 @@ const DatePicker: React.FC<DatePickerProps> = ({
                                 </div>
                             );
                         }
-                        return <div className={`${CLASSNAME}__day-wrapper`} key={annotatedDate.date.format()} />;
+                        return <div key={annotatedDate.date.unix()} className={`${CLASSNAME}__day-wrapper`} />;
                     })}
                 </div>
             </div>
         </div>
     );
 };
-DatePicker.displayName = COMPONENT_NAME;
+DatePickerControlled.displayName = COMPONENT_NAME;
+
+const DatePicker = (props) => {
+    const today = moment();
+    const [monthOffset, setMonthOffset] = useState(0);
+
+    return <DatePickerControlled monthOffset={monthOffset} today={today} {...props} />;
+};
 
 /////////////////////////////
 
