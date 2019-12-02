@@ -3,6 +3,8 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-toolbar {
+    $self: &;
+
     display: flex;
     height: $lumx-toolbar-height;
     align-items: center;
@@ -17,10 +19,20 @@
     }
 
     &__before {
+        flex-shrink: 0;
         margin-right: $lumx-spacing-unit * 2;
     }
 
+    &__label {
+        flex: 1 1 auto;
+    }
+
     &__after {
+        flex-shrink: 0;
         margin-left: auto;
+
+        #{$self}--has-label & {
+            margin-left: $lumx-spacing-unit * 2;
+        }
     }
 }
