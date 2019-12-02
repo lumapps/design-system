@@ -40,7 +40,7 @@
             @include lumx-typography(subtitle2);
         }
 
-        & > p > a {
+        & > p a {
             @include lumx-link('primary');
         }
 
