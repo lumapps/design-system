@@ -7,26 +7,41 @@
 
     border-radius: $lumx-expansion-panel-radius;
 
+    &--theme-light {
+        background-color: lumx-theme-color-variant('dark', 'L6');
+    }
+
+    &--theme-dark {
+        background-color: lumx-theme-color-variant('light', 'L6');
+    }
+
+    &--variant-trimmed {
+        background-color: transparent;
+    }
+
     &__header {
         display: flex;
         align-items: center;
 
-        #{$self}--variant-boxed & {
-            padding: $lumx-spacing-unit;
+        #{$self}--theme-light#{$self}--is-open#{$self}--has-header-divider & {
+            @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'));
+        }
+
+        #{$self}--theme-dark#{$self}--is-open#{$self}--has-header-divider & {
+            @include lumx-has-divider(lumx-base-const('theme', 'DARK'));
         }
     }
 
     &__header-drag {
         flex-shrink: 0;
+        margin: 0 $lumx-spacing-unit;
     }
 
     &__header-content {
         flex: 1 1 auto;
-        margin-right: $lumx-spacing-unit;
 
-        #{$self}--variant-boxed &,
-        #{$self}--is-draggable & {
-            margin-left: $lumx-spacing-unit;
+        #{$self}--variant-boxed:not(#{$self}--is-draggable):not(#{$self}--has-header) & {
+            padding-left: $lumx-spacing-unit * 2;
         }
     }
 
@@ -42,6 +57,14 @@
 
     &__header-toggle {
         flex-shrink: 0;
+
+        #{$self}--variant-boxed & {
+            margin: $lumx-spacing-unit;
+        }
+
+        #{$self}--has-header & {
+            margin-left: 0;
+        }
     }
 
     &__wrapper {

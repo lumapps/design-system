@@ -170,6 +170,14 @@ function ExpansionPanelController($element, $scope, $timeout) {
         classes.push(`${CSS_PREFIX}-expansion-panel--theme-${theme}`);
         classes.push(`${CSS_PREFIX}-expansion-panel--variant-${variant}`);
 
+        if (lx.hasHeader) {
+            classes.push(`${CSS_PREFIX}-expansion-panel--has-header`);
+        }
+
+        if (lx.hasHeaderDivider) {
+            classes.push(`${CSS_PREFIX}-expansion-panel--has-header-divider`);
+        }
+
         if (lx.isDraggable) {
             classes.push(`${CSS_PREFIX}-expansion-panel--is-draggable`);
         }
@@ -259,6 +267,7 @@ function ExpansionPanelDirective() {
         restrict: 'E',
         scope: {
             closeCallback: '&?lxCloseCallback',
+            hasHeaderDivider: '=?lxHasHeaderDivider',
             isOpen: '=?lxIsOpen',
             label: '@?lxLabel',
             openCallback: '&?lxOpenCallback',
