@@ -19,36 +19,45 @@ interface IHasTheme {
     theme: Theme;
 }
 
-interface IDemoModule {
+// tslint:disable-next-line:interface-over-type-literal
+type Module = {};
+
+type NullModule = Module;
+
+type DemoModule = Module & {
     default: React.FC<IHasTheme>;
-}
+};
+
+type AngularControllerModule = Module & {
+    DemoController(): void;
+};
 
 interface ICode {
     react: {
-        demo: Promise<IDemoModule>;
+        demo: Promise<DemoModule | NullModule>;
         code: string;
     };
     angularjs: {
         demo: {
-            controller: Promise<{ DemoController(): void }>;
-            template: Promise<IDemoModule>;
+            controller: Promise<AngularControllerModule | NullModule>;
+            template: Promise<string | NullModule>;
         };
         code: string;
     };
 }
 
-async function loadReactDemo(code: ICode): Promise<IDemoModule | null> {
+async function loadReactDemo(code: ICode): Promise<DemoModule | null> {
     const demo = await code.react.demo;
-    if (!demo || !demo.default) {
+    if (!('default' in demo)) {
         return null;
     }
     return demo;
 }
 
-async function loadAngularjsDemo(code: ICode): Promise<IDemoModule | null> {
-    const { DemoController } = await code.angularjs.demo.controller;
+async function loadAngularjsDemo(code: ICode): Promise<DemoModule | null> {
+    const controllerModule = await code.angularjs.demo.controller;
     const template = await code.angularjs.demo.template;
-    if (!template || !DemoController) {
+    if (!(typeof template === 'string') || !('DemoController' in controllerModule)) {
         return null;
     }
 
@@ -69,7 +78,7 @@ async function loadAngularjsDemo(code: ICode): Promise<IDemoModule | null> {
                 <AngularTemplate
                     ref={(c) => (container = c)}
                     template={template}
-                    controller={DemoController}
+                    controller={controllerModule.DemoController}
                     controllerAs="vm"
                     scope={{ theme }}
                 />
@@ -78,8 +87,8 @@ async function loadAngularjsDemo(code: ICode): Promise<IDemoModule | null> {
     };
 }
 
-const useLoadDemo = (code: ICode, engine: string): IDemoModule | null | undefined => {
-    const [demo, setDemo] = useState<IDemoModule | null>();
+const useLoadDemo = (code: ICode, engine: string): DemoModule | null | undefined => {
+    const [demo, setDemo] = useState<DemoModule | null>();
 
     useEffect(() => {
         (async () => {
@@ -95,7 +104,7 @@ const useLoadDemo = (code: ICode, engine: string): IDemoModule | null | undefine
     return demo;
 };
 
-function renderDemo(demo: IDemoModule | null | undefined, theme: Theme, engine: string) {
+function renderDemo(demo: DemoModule | null | undefined, theme: Theme, engine: string) {
     if (demo === undefined) {
         return (
             <span>
