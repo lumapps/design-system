@@ -1,3 +1,4 @@
+/* eslint-disable no-irregular-whitespace, import/unambiguous, import/no-nodejs-modules, import/no-commonjs */
 const { get, partition, fromPairs, camelCase } = require('lodash');
 const path = require('path');
 const fs = require('fs');
@@ -40,7 +41,7 @@ function getDemoFromChildren(node, children) {
         children: `{<>${children}</>}`,
         code: `{{
             react: {
-               code: ${JSON.stringify(`\n${children}`)}
+               code: ${JSON.stringify(children.replace(/^\n/, '​'))}
             }
         }}`,
     };
