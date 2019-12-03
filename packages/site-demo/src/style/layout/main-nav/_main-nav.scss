@@ -17,6 +17,7 @@ $main-nav-width: 300px;
         display: flex;
         align-items: center;
         margin-bottom: $lumx-spacing-unit * 4;
+        cursor: pointer;
 
         img {
             height: map-get($lumx-sizes, s);

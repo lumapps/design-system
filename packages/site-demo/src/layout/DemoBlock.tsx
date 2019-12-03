@@ -4,11 +4,13 @@ import { mdiCodeTags } from '@lumx/icons';
 import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 
 import classNames from 'classnames';
-import React, { ReactElement, useEffect, useState } from 'react';
+import get from 'lodash/get';
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
 
 import AngularTemplate from 'react-angular';
 
 interface IDemoBlockProps {
+    children?: ReactNode;
     demo: string;
     engine: string;
     code: ICode;
@@ -123,6 +125,7 @@ function renderDemo(demo: DemoModule | null | undefined, theme: Theme, engine: s
 }
 
 const DemoBlock: React.FC<IDemoBlockProps> = ({
+    children,
     code,
     engine,
     withThemeSwitcher = false,
@@ -134,13 +137,13 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
     const toggleShowCode = (): void => setShowCode(!showCode);
 
     const demo = useLoadDemo(code, engine);
-
-    const highlightedCode = useHighlightedCode(code[engine].code, engine === 'react' ? 'tsx' : 'html');
+    const content = children || renderDemo(demo, theme, engine);
+    const highlightedCode = useHighlightedCode(get(code, [engine, 'code']), engine === 'react' ? 'tsx' : 'html');
 
     return (
         <div className="demo-block">
             <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-theme-background-dark-N')}>
-                {renderDemo(demo, theme, engine)}
+                {content}
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">

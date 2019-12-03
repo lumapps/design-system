@@ -8,8 +8,6 @@ import { ErrorBoundary } from './layout/ErrorBoundary';
 import { Main } from './layout/Main';
 import { MainNav } from './layout/MainNav';
 
-import './index.css';
-
 /**
  * Disable/Enable theme style sheet.
  *

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 import { mdiDownload, mdiFile } from '@lumx/icons';
 import { Button, Emphasis, Icon, Size } from '@lumx/react';
@@ -17,7 +17,7 @@ interface IAssetBlock {
      * Asset thumbnail preview image URL.
      * If not provided, a generic file icon will be displayed.
      */
-    thumbnailURL?: string;
+    children?: ReactNode;
 }
 
 /**
@@ -44,21 +44,12 @@ function getFileName(url: string): string {
  * @return ReactElement.
  */
 const AssetBlock: React.FC<IAssetBlock> = (props: IAssetBlock): ReactElement => {
-    const { downloadURL, fileName, thumbnailURL } = props;
+    const { downloadURL, fileName, children } = props;
 
     return (
         <div className="asset-block">
             <div className="asset-block__content">
-                {thumbnailURL ? (
-                    <img
-                        alt="File download thumbnail"
-                        className="asset-block__thumbnail"
-                        src={thumbnailURL}
-                        srcSet={`${thumbnailURL} 2x`}
-                    />
-                ) : (
-                    <Icon className="asset-block__thumbnail" icon={mdiFile} size={Size.xl} />
-                )}
+                {children || <Icon className="asset-block__thumbnail" icon={mdiFile} size={Size.xl} />}
             </div>
 
             <div className="asset-block__toolbar">

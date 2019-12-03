@@ -112,7 +112,7 @@ const generateNav = (goToHandler: (path: string) => Callback, location: string, 
         const label = typeof item === 'string' ? item : item.label;
         const children = typeof item !== 'string' && item.children;
         const path = [...parent, spaceToSlug(label)];
-        const slug = `/${path.join('/')}`;
+        const slug = `/${path.join('/')}/`;
 
         const [isOpen, setOpen] = useState(() => location.startsWith(slug));
 

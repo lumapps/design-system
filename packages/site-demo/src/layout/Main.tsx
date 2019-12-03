@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Route, RouteComponentProps } from 'react-router-dom';
+import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 
 import { Alignment, Grid, GridItem, Orientation } from '@lumx/react';
 
@@ -10,9 +10,6 @@ import { IGenericProps } from '@lumx/react/utils';
 import { EngineSelector } from './EngineSelector';
 import { MainContent } from './MainContent';
 import { ThemeSelector } from './ThemeSelector';
-
-// @ts-ignore
-import HomePage from 'content';
 
 /**
  * Defines the props of the component.
@@ -37,6 +34,14 @@ interface IProps extends IGenericProps {
      */
     changeTheme(theme: Theme): void;
 }
+
+const renderContent = (engine: Engine) => ({ location }: RouteComponentProps) => {
+    const path = location.pathname;
+    if (!path.endsWith('/')) {
+        return <Redirect to={path + '/'} />;
+    }
+    return <MainContent engine={engine} path={path} />;
+};
 
 /**
  * The main component.
@@ -63,13 +68,7 @@ const Main: React.FC<IProps> = ({ changeEngine, changeTheme, engine, theme }: IP
 
                 <div className="main-content">
                     <div className="main-content__wrapper">
-                        <Route exact path="/" render={(): ReactElement => <HomePage />} />
-                        <Route
-                            path="/:path*"
-                            render={({ match }: RouteComponentProps): ReactElement | null =>
-                                match.params.path ? <MainContent engine={engine} path={match.params.path} /> : null
-                            }
-                        />
+                        <Route path="*" render={renderContent(engine)} />
                     </div>
                 </div>
             </div>

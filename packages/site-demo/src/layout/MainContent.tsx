@@ -29,7 +29,7 @@ const useLoadContent = (engine: string, path: string): ReactElement | null | und
                 const loadedContent = await import(
                     /* webpackMode: "lazy" */
                     /* webpackChunkName: "content/[request]" */
-                    `content/${path}`
+                    `content/${path.replace(/^\//, '')}`
                 );
                 setContent(React.createElement(loadedContent.default, { engine }, null));
             } catch (exception) {
