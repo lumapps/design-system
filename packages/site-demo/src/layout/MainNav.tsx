@@ -40,7 +40,7 @@ const ITEMS: Item[] = [
     {
         children: [
             {
-                children: ['Colors', 'Typography'],
+                children: ['Colors', 'Iconography', 'Typography'],
                 label: 'Foundations',
             },
             {
