@@ -5,12 +5,24 @@
 .#{$lumx-base-prefix}-icon {
     display: block;
 
-    svg {
-        display: block;
+    &--path {
+        &::before {
+            display: none;
+        }
+
+        svg {
+            display: block;
+        }
     }
 
-    &--font svg {
-        display: none;
+    &--font {
+        &::before {
+            display: block;
+        }
+
+        svg {
+            display: none;
+        }
     }
 }
 

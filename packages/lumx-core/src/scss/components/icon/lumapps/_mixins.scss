@@ -1,5 +1,8 @@
 @mixin lumx-icon-size($size) {
+    width: map-get($lumx-sizes, $size);
+    height: map-get($lumx-sizes, $size);
     font-size: map-get($lumx-sizes, $size);
+    line-height: map-get($lumx-sizes, $size);
 }
 
 @mixin lumx-icon-color($color, $color-variant) {
