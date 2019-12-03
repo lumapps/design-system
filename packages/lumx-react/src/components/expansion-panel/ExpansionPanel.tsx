@@ -39,6 +39,9 @@ interface IExpansionPanelProps extends IGenericProps {
     /** The label text used when no `<header>` was provided in the children. */
     label?: string;
 
+    /** Whether the header has a divider. */
+    hasHeaderDivider?: boolean;
+
     /** Set panel open or not. */
     isOpen?: boolean;
 
@@ -84,6 +87,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
         label,
         theme = DEFAULT_PROPS.theme,
         variant = DEFAULT_PROPS.variant,
+        hasHeaderDivider,
         isOpen,
         className,
         openCallback,
@@ -128,7 +132,11 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
         theme === Theme.dark ? 'lumx-theme-color-light-N' : 'lumx-theme-color-dark-N',
         // Others.
         handleBasicClasses({
+            hasHeader: Boolean(!isEmpty(headerProps.children)),
+            hasHeaderDivider,
+            isClose: !isOpen,
             isDraggable: Boolean(dragHandle),
+            isOpen,
             prefix: CLASSNAME,
             theme,
             variant,
