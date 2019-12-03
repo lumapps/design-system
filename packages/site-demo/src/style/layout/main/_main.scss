@@ -20,6 +20,13 @@
 .main-content {
     margin-top: $lumx-spacing-unit * 6;
 
+    &__loading {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
     &__wrapper {
         display: flex;
         flex-direction: column;

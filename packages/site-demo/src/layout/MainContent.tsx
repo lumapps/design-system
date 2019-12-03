@@ -1,14 +1,14 @@
-import React, { ReactElement, useContext, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
-const renderContent = (path: string, demo: ReactElement | null | undefined): ReactElement => {
-    if (demo === undefined) {
-        return (
-            <span>
-                Loading content for <code>{path}</code>...
-            </span>
-        );
+import { LoadingContent } from '@lumx/demo/layout/LoadingContent';
+
+type Content = ReactElement | null | undefined;
+
+const renderContent = (path: string, content: Content): ReactElement => {
+    if (content === undefined) {
+        return <LoadingContent />;
     }
-    if (demo === null) {
+    if (content === null) {
         return (
             <span>
                 Could not load content for <code>{path}</code>
@@ -16,11 +16,11 @@ const renderContent = (path: string, demo: ReactElement | null | undefined): Rea
         );
     }
 
-    return demo;
+    return content;
 };
 
-const useLoadContent = (path: string): ReactElement | null | undefined => {
-    const [content, setContent] = useState<ReactElement | null>();
+const useLoadContent = (path: string): Content => {
+    const [content, setContent] = useState<Content>(undefined);
 
     useEffect((): void => {
         (async (): Promise<void> => {
