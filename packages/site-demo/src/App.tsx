@@ -16,16 +16,11 @@ import { MainNav } from './layout/MainNav';
  */
 function setThemeStyleSheetDisabled(theme: string, disabled: boolean): void {
     // tslint:disable-next-line:no-any
-    const element: any = document.getElementById(`theme-${theme}`);
+    const element = document.getElementById(`theme-${theme}`) as HTMLLinkElement;
     if (!element) {
         throw new Error(`Could not find '<link>' element for theme "${theme}"`);
     }
-    element.disabled = disabled;
-    const sheet = element.sheet || element.styleSheet;
-    if (!sheet) {
-        return;
-    }
-    sheet.disabled = disabled;
+    element.rel = disabled ? 'preload' : 'stylesheet';
 }
 
 /**
@@ -35,8 +30,10 @@ function setThemeStyleSheetDisabled(theme: string, disabled: boolean): void {
  */
 function switchThemeStyle(theme: string): void {
     setThemeStyleSheetDisabled(theme, false);
-    const otherTheme = theme === Theme.lumapps ? Theme.material : Theme.lumapps;
-    setThemeStyleSheetDisabled(otherTheme, true);
+    setTimeout(() => {
+        const otherTheme = theme === Theme.lumapps ? Theme.material : Theme.lumapps;
+        setThemeStyleSheetDisabled(otherTheme, true);
+    }, 100);
 }
 
 /**
@@ -48,6 +45,9 @@ const App: React.FC = (): ReactElement => {
     const [theme, setTheme] = useState(DEFAULT_THEME);
     const [engine, setEngine] = useState(DEFAULT_ENGINE);
     const changeTheme = (newTheme: Theme): void => {
+        if (newTheme === theme) {
+            return;
+        }
         setTheme(newTheme);
         switchThemeStyle(newTheme);
         setDemoCustomColors(theme);

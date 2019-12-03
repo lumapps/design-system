@@ -14,10 +14,10 @@
         for (const key in htmlWebpackPlugin.files.css) {
             const href = htmlWebpackPlugin.files.css[key];
             const id = href.split('.')[0].replace(/^\//, '');
-            const disabled = id === 'theme-material' ? 'disabled' : '';
+            const rel = id === 'theme-material' ? 'preload' : 'stylesheet';
 
             %>
-            <link href="<%= href %>" id="<%= id %>" rel="stylesheet" <%= disabled %> />
+            <link href="<%= href %>" id="<%= id %>" rel="<%= rel %>" />
             <%
         }
         %>
