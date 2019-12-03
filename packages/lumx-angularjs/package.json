@@ -28,7 +28,7 @@
         "AngularJS"
     ],
     "license": "MIT",
-    "main": "index.js",
+    "main": "lumx.angularjs.js",
     "name": "@lumx/angularjs",
     "publishConfig": {
         "directory": "dist"
