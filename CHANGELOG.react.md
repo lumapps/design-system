@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+-   When we are using the AutocompleteMultiple, you can now just display the suggestions with the same size as the input.
+-   For the Autocomplete simple, we add the possibility to prevent refocus on close.
+
 ## [0.18.8][] - 2019-12-12
 
 ## [0.18.7][] - 2019-12-06
