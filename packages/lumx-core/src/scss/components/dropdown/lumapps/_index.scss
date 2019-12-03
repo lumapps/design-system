@@ -12,7 +12,6 @@
         @include lumx-elevation(3);
 
         overflow: auto;
-        padding: $lumx-spacing-unit 0;
         background-color: lumx-theme-color-variant('light', 'N');
         border-radius: $lumx-theme-border-radius;
     }
