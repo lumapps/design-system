@@ -23,6 +23,7 @@ angular.module('lumx.button', []);
 angular.module('lumx.checkbox', []);
 angular.module('lumx.chip', []);
 angular.module('lumx.comment-block', []);
+angular.module('lumx.data-table', []);
 angular.module('lumx.dialog', []);
 angular.module('lumx.divider', []);
 angular.module('lumx.drag-handle', []);
@@ -60,6 +61,7 @@ angular.module('lumx', [
     'lumx.checkbox',
     'lumx.chip',
     'lumx.comment-block',
+    'lumx.data-table',
     'lumx.dialog',
     'lumx.divider',
     'lumx.drag-handle',

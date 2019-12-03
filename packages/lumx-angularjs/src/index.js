@@ -8,6 +8,8 @@ import './components/checkbox/checkbox_directive';
 import './components/chip/chip_directive';
 import './components/chip/chip-group_directive';
 import './components/comment-block/comment-block_directive';
+import './components/data-table/data-table_directive';
+import './components/data-table/data-table_service';
 import './components/dialog/dialog_directive';
 import './components/dialog/dialog_service';
 import './components/dialog/dialog-close_directive';
