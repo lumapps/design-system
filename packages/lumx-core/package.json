@@ -8,7 +8,8 @@
     "dependencies": {
         "classnames": "^2.2.6",
         "focus-visible": "^5.0.2",
-        "lodash": "^4.17.11"
+        "lodash": "^4.17.11",
+        "sass-mq": "^5.0.0"
     },
     "description": "LumX core",
     "engines": {
@@ -52,7 +53,6 @@
         "postcss-flexbox-unboxer": "^1.0.0",
         "postcss-loader": "^3.0.0",
         "sass-loader": "8.0.0",
-        "sass-mq": "^5.0.0",
         "unminified-webpack-plugin": "^2.0.0",
         "webpack": "^4.41.2",
         "webpack-notifier": "^1.8.0",
