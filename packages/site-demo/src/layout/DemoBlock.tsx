@@ -1,3 +1,4 @@
+import { Engine, EngineContext } from '@lumx/demo/context/engine';
 import { useHighlightedCode } from '@lumx/demo/layout/utils/useHighlightedCode';
 
 import { mdiCodeTags } from '@lumx/icons';
@@ -5,7 +6,7 @@ import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
-import React, { ReactElement, ReactNode, useEffect, useState } from 'react';
+import React, { ReactElement, ReactNode, useContext, useEffect, useState } from 'react';
 
 import AngularTemplate from 'react-angular';
 
@@ -127,9 +128,12 @@ function renderDemo(demo: DemoModule | null | undefined, theme: Theme, engine: s
 const DemoBlock: React.FC<IDemoBlockProps> = ({
     children,
     code,
-    engine,
+    engine: propEngine,
     withThemeSwitcher = false,
 }: IDemoBlockProps): ReactElement => {
+    const contextEngine = useContext(EngineContext).engine;
+    const engine = propEngine || contextEngine;
+
     const [theme, setTheme] = useState(Theme.light);
     const toggleTheme = (checked: boolean): void => (checked ? setTheme(Theme.dark) : setTheme(Theme.light));
 

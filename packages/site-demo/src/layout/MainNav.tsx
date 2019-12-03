@@ -1,9 +1,11 @@
 import { Callback } from '@lumx/react/utils';
-import { castArray, isEmpty } from 'lodash';
+import castArray from 'lodash/castArray';
+import isEmpty from 'lodash/isEmpty';
 import React, { ReactElement, ReactNode, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { LumXLogo } from '@lumx/demo/assets/images';
+// @ts-ignore
+import LumXLogo from '@lumx/demo/assets/images/logo.svg';
 import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
 
 /**

@@ -75,8 +75,6 @@ function getDemoFromProps(resourceFolder, node, propsIndex) {
         }
     }}`;
 
-    propsIndex.engine = '{props.engine}';
-
     return buildNewDemoBlock(node, propsIndex, [importReact, importAngular]);
 }
 

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useContext, useEffect, useState } from 'react';
 
 const renderContent = (path: string, demo: ReactElement | null | undefined): ReactElement => {
     if (demo === undefined) {
@@ -19,7 +19,7 @@ const renderContent = (path: string, demo: ReactElement | null | undefined): Rea
     return demo;
 };
 
-const useLoadContent = (engine: string, path: string): ReactElement | null | undefined => {
+const useLoadContent = (path: string): ReactElement | null | undefined => {
     const [content, setContent] = useState<ReactElement | null>();
 
     useEffect((): void => {
@@ -30,12 +30,12 @@ const useLoadContent = (engine: string, path: string): ReactElement | null | und
                     /* webpackChunkName: "content/[request]" */
                     `content/${path.replace(/^\//, '')}`
                 );
-                setContent(React.createElement(loadedContent.default, { engine }, null));
+                setContent(React.createElement(loadedContent.default, {}, null));
             } catch (exception) {
                 setContent(null);
             }
         })();
-    }, [engine, path]);
+    }, [path]);
 
     return content;
 };
@@ -45,8 +45,8 @@ const useLoadContent = (engine: string, path: string): ReactElement | null | und
  *
  * @return The main content component.
  */
-const MainContent = ({ engine, path }: { engine: string; path: string }): ReactElement => {
-    const content = useLoadContent(engine, path);
+const MainContent = ({ path }: { path: string }): ReactElement => {
+    const content = useLoadContent(path);
 
     return renderContent(path, content);
 };
