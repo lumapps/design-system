@@ -27,7 +27,6 @@ const useLoadContent = (engine: string, path: string): ReactElement | null | und
             setContent(undefined);
             try {
                 const loadedContent = await import(
-                    /* webpackMode: "lazy" */
                     /* webpackChunkName: "content/[request]" */
                     `content/${path.replace(/^\//, '')}`
                 );

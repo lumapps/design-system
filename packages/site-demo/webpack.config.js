@@ -155,7 +155,7 @@ module.exports = {
                 loader: 'file-loader',
                 options: {
                     name: '[path][name].[ext]',
-                    context: 'content',
+                    context: CONTENT_PATH,
                 },
             },
             {
@@ -227,6 +227,11 @@ module.exports = {
     optimization: {
         minimize: isProd,
         minimizer,
+        splitChunks: {
+            cacheGroups: {
+                vendors: false,
+            },
+        },
     },
 };
 
