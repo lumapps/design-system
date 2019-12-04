@@ -30,6 +30,8 @@ interface IDropdownProps extends IGenericProps {
     fitToAnchorWidth?: boolean;
     /** Children of the Dropdown. */
     children: React.ReactNode;
+    /** The z-axis position. */
+    zIndex?: number;
     /** The function to be called when the user clicks away or Escape is pressed */
     onClose?: VoidFunction;
     /**
@@ -92,6 +94,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     placement = DEFAULT_PROPS.placement,
     fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
     onInfiniteScroll,
+    zIndex,
     ...props
 }: DropdownProps): React.ReactElement | null => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
@@ -159,6 +162,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             isVisible={isVisible}
             offset={offset}
             placement={placement}
+            zIndex={zIndex}
         >
             {popperElement}
         </Popover>

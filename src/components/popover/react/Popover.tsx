@@ -78,6 +78,8 @@ interface IPopoverProps extends IGenericProps {
     elevation?: number;
     /* The classname to apply to the Popover wrapper */
     className?: string;
+    /** The z-axis position. */
+    zIndex?: number;
 }
 type PopoverProps = IPopoverProps;
 
@@ -111,6 +113,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     className: '',
     elevation: 3,
     placement: Placement.TOP,
+    zIndex: 9999,
 };
 
 /////////////////////////////
@@ -129,6 +132,7 @@ const Popover: React.FC<PopoverProps> & IPopover = ({
     className = DEFAULT_PROPS.className,
     elevation = DEFAULT_PROPS.elevation,
     isVisible,
+    zIndex = DEFAULT_PROPS.zIndex,
     ...props
 }: PopoverProps): ReactElement => {
     /**
@@ -149,7 +153,7 @@ const Popover: React.FC<PopoverProps> & IPopover = ({
         top: 0,
         transform: `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
         visibility: isPopoverVisible ? 'visible' : 'hidden',
-        zIndex: 9999,
+        zIndex,
     };
 
     return createPortal(

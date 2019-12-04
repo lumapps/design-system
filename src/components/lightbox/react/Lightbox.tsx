@@ -42,6 +42,8 @@ interface ILightboxProps extends IGenericProps {
     role?: string;
     /** Theme. */
     theme?: Theme;
+    /** The z-axis position. */
+    zIndex?: number;
     /** Callback called when lightbox is closing. */
     onClose?(): void;
     /** Callback called when lightbox is opening. */
@@ -106,6 +108,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     preventAutoClose = DEFAULT_PROPS.preventAutoClose,
     role = DEFAULT_PROPS.role,
     theme = DEFAULT_PROPS.theme,
+    zIndex,
 }: LightboxProps): ReactElement => {
     // tslint:disable-next-line: no-any
     const buttonRef: React.RefObject<any> = useRef(null);
@@ -225,6 +228,7 @@ const Lightbox: React.FC<LightboxProps> = ({
                             role={role}
                             style={{
                                 display: isTrapActive ? 'block' : '',
+                                zIndex,
                             }}
                             onClick={handleClose}
                         >

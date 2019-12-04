@@ -34,6 +34,8 @@ interface IDialogProps extends IGenericProps {
     theme?: Theme;
     /** Size of the dialog */
     size?: DialogSizes;
+    /** The z-axis position. */
+    zIndex?: number;
     /** Callback called when lightbox is closing. */
     onClose?(): void;
     /** Callback called when lightbox is opening. */
@@ -97,6 +99,7 @@ const Dialog: React.FC<DialogProps> = ({
     preventAutoClose = DEFAULT_PROPS.preventAutoClose,
     size = DEFAULT_PROPS.size,
     theme,
+    zIndex,
 }: DialogProps): ReactElement => {
     const [sentinel1, sentinel1Intersec] = useIntersectionObserver({ rootMargin: '0px', threshold: [0.0, 1.0] });
     const [sentinel2, sentinel2Intersec] = useIntersectionObserver({ rootMargin: '0px', threshold: [0.0, 1.0] });
@@ -110,6 +113,7 @@ const Dialog: React.FC<DialogProps> = ({
             isCloseButtonVisible={false}
             preventAutoClose={preventAutoClose}
             noWrapper={true}
+            zIndex={zIndex}
         >
             <div
                 role="dialog"

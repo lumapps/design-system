@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Add `zIndex` props on every appearing component
+
 ## [0.15.3][] - 2019-11-25
 
 ### Changed
