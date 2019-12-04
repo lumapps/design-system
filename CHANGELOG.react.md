@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.5][] - 2019-12-04
+
 ### Added
 
 -   Add `zIndex` props on every appearing component
@@ -152,3 +154,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.18.3]: https://github.com/lumapps/design-system/tree/v0.18.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.18.4...HEAD
 [0.18.4]: https://github.com/lumapps/design-system/tree/v0.18.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.5...HEAD
+[0.18.5]: https://github.com/lumapps/design-system/tree/v0.18.5
