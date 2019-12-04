@@ -46,8 +46,11 @@ type DatePickerControlledProps = IDatePickerProps & {
     /** Month offset, positive or negative. */
     monthOffset: number;
 
-    /** Changing month. */
-    onMonthChange(newMonth: Date): void;
+    /** Changing to previous month. */
+    onPrevMonthChange(newMonth: Date): void;
+
+    /** Changing to next month. */
+    onNextMonthChange(newMonth: Date): void;
 };
 
 /////////////////////////////
@@ -87,15 +90,24 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     maxDate = DEFAULT_PROPS.maxDate,
     minDate = DEFAULT_PROPS.minDate,
     monthOffset,
+    onPrevMonthChange,
+    onNextMonthChange,
     today,
 }: DatePickerControlledProps): ReactElement => {
     return (
         <div className={`${CLASSNAME}`}>
             <Toolbar
                 className={`${CLASSNAME}__toolbar`}
-                after={<IconButton emphasis={Emphasis.low} icon={mdiChevronRight} />}
-                before={<IconButton emphasis={Emphasis.low} icon={mdiChevronLeft} />}
-                label={<span className={`${CLASSNAME}__month`}>Date Picker</span>}
+                after={<IconButton emphasis={Emphasis.low} icon={mdiChevronRight} onClick={onNextMonthChange} />}
+                before={<IconButton emphasis={Emphasis.low} icon={mdiChevronLeft} onClick={onPrevMonthChange} />}
+                label={
+                    <span className={`${CLASSNAME}__month`}>
+                        {moment(today)
+                            .locale(locale)
+                            .add(monthOffset, 'months')
+                            .format('MMMM YYYY')}
+                    </span>
+                }
             />
             <div className={`${CLASSNAME}__calendar`}>
                 <div className={`${CLASSNAME}__week-days ${CLASSNAME}__days-wrapper`}>
@@ -105,7 +117,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                                 {weekDay
                                     .format('dddd')
                                     .slice(0, 1)
-                                    .toUpperCase()}
+                                    .toLocaleUpperCase()}
                             </span>
                         </div>
                     ))}
@@ -142,7 +154,18 @@ const DatePicker = (props) => {
     const today = moment();
     const [monthOffset, setMonthOffset] = useState(0);
 
-    return <DatePickerControlled monthOffset={monthOffset} today={today} {...props} />;
+    const setPrevMonth = () => setMonthOffset(monthOffset - 1);
+    const setNextMonth = () => setMonthOffset(monthOffset + 1);
+
+    return (
+        <DatePickerControlled
+            monthOffset={monthOffset}
+            today={today}
+            onPrevMonthChange={setPrevMonth}
+            onNextMonthChange={setNextMonth}
+            {...props}
+        />
+    );
 };
 
 /////////////////////////////

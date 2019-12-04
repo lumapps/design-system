@@ -36,11 +36,11 @@ function getWeekDays(locale) {
  * @return {Array}  The list of days in a week based on locale.
  */
 function getMonthCalendar(locale, today = moment(), monthOffset = 0) {
-    const firstDay = moment()
+    const firstDay = moment(today)
         .locale(locale)
         .add(monthOffset, 'months')
         .startOf('month');
-    const endDay = moment()
+    const endDay = moment(today)
         .locale(locale)
         .add(monthOffset, 'months')
         .endOf('month');
@@ -78,7 +78,7 @@ function getAnnotatedMonthCalendar(
     today = moment(),
     monthOffset = 0,
 ) {
-    const month = today
+    const month = moment(today)
         .locale(locale)
         .add(monthOffset, 'months')
         .month();
@@ -90,8 +90,8 @@ function getAnnotatedMonthCalendar(
             date,
             isDisplayed: date.month() === month,
             isClickable: clickableRange.contains(date),
-            isToday: date.isSame(today, 'day'),
-            isSelected: date.isSame(today.add(3, 'days'), 'day'),
+            isToday: date.isSame(moment(today), 'day'),
+            isSelected: date.isSame(moment(today).add(3, 'days'), 'day'),
         };
     });
 }
