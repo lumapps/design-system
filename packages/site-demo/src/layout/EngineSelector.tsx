@@ -1,28 +1,8 @@
-import React, { ReactElement } from 'react';
+import { Engine, EngineContext } from '@lumx/demo/context/engine';
+import React, { ReactElement, useContext } from 'react';
 
 import { mdiAngularjs, mdiReact } from '@lumx/icons';
 import { Button, Emphasis, Size } from '@lumx/react';
-
-import { Engine } from '@lumx/demo/constants';
-
-import { IGenericProps } from '@lumx/react/utils';
-
-/////////////////////////////
-
-/**
- * Defines the props of the component.
- */
-interface IProps extends IGenericProps {
-    /**
-     * The current selected engine.
-     */
-    engine: Engine;
-    /**
-     * The function to change the engine.
-     * When the engine selector is used, this function is called to update the current engine.
-     */
-    changeEngine(engine: Engine): void;
-}
 
 /////////////////////////////
 
@@ -33,22 +13,25 @@ interface IProps extends IGenericProps {
  *
  * @return The engine selector component.
  */
-const EngineSelector: React.FC<IProps> = ({ changeEngine, engine }: IProps): ReactElement | null => {
+const EngineSelector: React.FC = (): ReactElement | null => {
+    const { engine, changeEngine } = useContext(EngineContext);
+    const onClick = (newEngine) => () => changeEngine?.(newEngine);
+
     switch (engine) {
-        case 'react':
+        case Engine.react:
             return (
                 <Button
                     emphasis={Emphasis.low}
                     leftIcon={mdiAngularjs}
-                    onClick={() => changeEngine('angularjs')}
+                    onClick={onClick(Engine.angularjs)}
                     size={Size.s}
                 >
                     View Angularjs version
                 </Button>
             );
-        case 'angularjs':
+        case Engine.angularjs:
             return (
-                <Button emphasis={Emphasis.low} leftIcon={mdiReact} onClick={() => changeEngine('react')} size={Size.s}>
+                <Button emphasis={Emphasis.low} leftIcon={mdiReact} onClick={onClick(Engine.react)} size={Size.s}>
                     View React version
                 </Button>
             );

@@ -90,7 +90,8 @@
     },
     "scripts": {
         "build": "lerna run --stream build",
-	"clean": "rm -rf packages/*/dist && lerna clean --yes",
+        "build:site": "cd packages/site-demo && yarn build",
+        "clean": "rm -rf packages/*/dist && lerna clean --yes",
         "format": "yarn format:js && yarn format:ts && yarn format:style",
         "format:style": "prettier-stylelint --prettier-last --write packages/**/*.{css,scss}",
         "format:js": "prettier-eslint --prettier-last --write packages/**/*.{js,jsx}",

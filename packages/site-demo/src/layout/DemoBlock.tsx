@@ -1,18 +1,21 @@
+import { Engine, EngineContext } from '@lumx/demo/context/engine';
 import { useHighlightedCode } from '@lumx/demo/layout/utils/useHighlightedCode';
 
 import { mdiCodeTags } from '@lumx/icons';
 import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 
 import classNames from 'classnames';
-import React, { ReactElement, useEffect, useState } from 'react';
+import get from 'lodash/get';
+import React, { ReactElement, ReactNode, useContext, useEffect, useState } from 'react';
 
 import AngularTemplate from 'react-angular';
 
 interface IDemoBlockProps {
-    demo: string;
-    engine: string;
-    code: ICode;
-    withThemeSwitcher: boolean;
+    children?: ReactNode;
+    demo?: string;
+    engine?: string;
+    code?: Code;
+    withThemeSwitcher?: boolean;
 }
 
 interface IHasTheme {
@@ -32,32 +35,34 @@ type AngularControllerModule = Module & {
     DemoController(): void;
 };
 
-interface ICode {
-    react: {
-        demo: Promise<DemoModule | NullModule>;
-        code: string;
-    };
-    angularjs: {
-        demo: {
-            controller: Promise<AngularControllerModule | NullModule>;
-            template: Promise<string | NullModule>;
-        };
-        code: string;
-    };
-}
+type Code =
+    | undefined
+    | {
+          react?: {
+              demo?: DemoModule | NullModule;
+              code?: string;
+          };
+          angularjs?: {
+              demo?: {
+                  controller?: AngularControllerModule | NullModule;
+                  template?: string | NullModule;
+              };
+              code?: string;
+          };
+      };
 
-async function loadReactDemo(code: ICode): Promise<DemoModule | null> {
-    const demo = await code.react.demo;
-    if (!('default' in demo)) {
+function loadReactDemo(code: Code): DemoModule | null {
+    const demo = code?.react?.demo;
+    if (!demo || !('default' in demo)) {
         return null;
     }
     return demo;
 }
 
-async function loadAngularjsDemo(code: ICode): Promise<DemoModule | null> {
-    const controllerModule = await code.angularjs.demo.controller;
-    const template = await code.angularjs.demo.template;
-    if (!(typeof template === 'string') || !('DemoController' in controllerModule)) {
+function loadAngularjsDemo(code: Code): DemoModule | null {
+    const controllerModule = code?.angularjs?.demo?.controller;
+    const template = code?.angularjs?.demo?.template;
+    if (!template || !(typeof template === 'string') || !controllerModule || !('DemoController' in controllerModule)) {
         return null;
     }
 
@@ -87,32 +92,18 @@ async function loadAngularjsDemo(code: ICode): Promise<DemoModule | null> {
     };
 }
 
-const useLoadDemo = (code: ICode, engine: string): DemoModule | null | undefined => {
-    const [demo, setDemo] = useState<DemoModule | null>();
+const useLoadDemo = (code: Code, engine: string): DemoModule | null => {
+    const [demo, setDemo] = useState<DemoModule | null>(null);
 
     useEffect(() => {
-        (async () => {
-            setDemo(undefined);
-            try {
-                setDemo(engine === 'react' ? await loadReactDemo(code) : await loadAngularjsDemo(code));
-            } catch (exception) {
-                setDemo(null);
-            }
-        })();
+        setDemo(engine === Engine.react ? loadReactDemo(code) : loadAngularjsDemo(code));
     }, [engine]);
 
     return demo;
 };
 
-function renderDemo(demo: DemoModule | null | undefined, theme: Theme, engine: string) {
-    if (demo === undefined) {
-        return (
-            <span>
-                Loading demo for <code>{engine}</code>...
-            </span>
-        );
-    }
-    if (demo === null) {
+function renderDemo(demo: DemoModule | null, theme: Theme, engine: string) {
+    if (!demo) {
         return (
             <span>
                 No demo available for <code>{engine}</code>.
@@ -123,10 +114,14 @@ function renderDemo(demo: DemoModule | null | undefined, theme: Theme, engine: s
 }
 
 const DemoBlock: React.FC<IDemoBlockProps> = ({
+    children,
     code,
-    engine,
+    engine: propEngine,
     withThemeSwitcher = false,
 }: IDemoBlockProps): ReactElement => {
+    const contextEngine = useContext(EngineContext).engine;
+    const engine = propEngine || contextEngine;
+
     const [theme, setTheme] = useState(Theme.light);
     const toggleTheme = (checked: boolean): void => (checked ? setTheme(Theme.dark) : setTheme(Theme.light));
 
@@ -134,13 +129,13 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
     const toggleShowCode = (): void => setShowCode(!showCode);
 
     const demo = useLoadDemo(code, engine);
-
-    const highlightedCode = useHighlightedCode(code[engine].code, engine === 'react' ? 'tsx' : 'html');
+    const content = children || renderDemo(demo, theme, engine);
+    const highlightedCode = useHighlightedCode(get(code, [engine, 'code']), engine === 'react' ? 'tsx' : 'html');
 
     return (
         <div className="demo-block">
             <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-theme-background-dark-N')}>
-                {renderDemo(demo, theme, engine)}
+                {content}
             </div>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">

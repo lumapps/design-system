@@ -33,32 +33,6 @@ interface IDemoObject {
 type DemoObject = IDemoObject;
 
 /**
- * The available themes in the demo site.
- */
-enum Theme {
-    lumapps = 'lumapps',
-    material = 'material',
-}
-
-/**
- * The default theme to use in the demo site at startup.
- */
-const DEFAULT_THEME = Theme.lumapps;
-
-/**
- * The available engines in the demo site.
- */
-enum Engine {
-    react = 'react',
-    angularjs = 'angularjs',
-}
-
-/**
- * The default engine to use in the demo site at startup.
- */
-const DEFAULT_ENGINE = Engine.react;
-
-/**
  * Color variant details
  */
 interface IColorVariantDetail {
@@ -330,11 +304,7 @@ const COLOR_VARIANTS = {
 /////////////////////////////
 
 export {
-    DEFAULT_ENGINE,
-    DEFAULT_THEME,
     COLOR_VARIANTS,
-    Engine,
-    Theme,
     IColorPaletteWithVariants,
     IColorVariantDetail,
     Categories,

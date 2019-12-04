@@ -1,9 +1,10 @@
+/* eslint-disable no-irregular-whitespace, import/unambiguous, import/no-nodejs-modules, import/no-commonjs */
 const { get, partition, fromPairs, camelCase } = require('lodash');
 const path = require('path');
 const fs = require('fs');
 
-const propsRX = /<DemoBlock(.*)\/>/;
-const propRX = /(\w+)(=\{([^}]+)\}|=("[^"]+"))?/g;
+const demoBlockRX = /<DemoBlock([^>]*?)\/?>((?:\n|.)*(?=<\/\s*DemoBlock>))?/;
+const extractPropRX = /(\w+)(=\{([^}]+)\}|=("[^"]+"))?/g;
 
 /**
  * Read source code to string (or return null if source code not found).
@@ -22,18 +23,33 @@ function readSourceCode(resourceFolder, sourcePath) {
     }
 }
 
-/**
- * Update <DemoBlock/> props to import source code & inject the engine.
- * @param resourceFolder Current demo folder.
- * @param node           Current MDX node.
- * @return {{imports: [string, string], newNode: {value: string}}} Modified demo block with imports.
- */
-function updateDemoBlock(resourceFolder, node) {
-    const { value } = node;
-    const propsString = get(value.match(propsRX), 1);
-    const props = propsString.match(propRX);
+function buildNewDemoBlock(node, propsIndex = {}, imports = []) {
+    return {
+        newNode: {
+            ...node,
+            value: `<DemoBlock ${Object.entries(propsIndex)
+                .map(([name, value]) => (value ? `${name}=${value}` : name))
+                .join(' ')} />`,
+        },
+        imports,
+    };
+}
 
-    const propsIndex = fromPairs(props.map((prop) => prop.split('=')));
+function getDemoFromChildren(node, children) {
+    const propsIndex = {
+        engine: '"react"',
+        children: `{<>${children}</>}`,
+        code: `{{
+            react: {
+               code: ${JSON.stringify(children.replace(/^\n/, '​'))}
+            }
+        }}`,
+    };
+
+    return buildNewDemoBlock(node, propsIndex);
+}
+
+function getDemoFromProps(resourceFolder, node, propsIndex) {
     const demoName = propsIndex.demo.replace(/"/g, '');
 
     const reactCodePath = `./react/${demoName}.tsx`;
@@ -60,17 +76,32 @@ function updateDemoBlock(resourceFolder, node) {
         }
     }}`;
 
-    propsIndex.engine = '{props.engine}';
+    return buildNewDemoBlock(node, propsIndex, [importReact, importAngular]);
+}
 
-    return {
-        newNode: {
-            ...node,
-            value: `<DemoBlock ${Object.entries(propsIndex)
-                .map(([name, value]) => (value ? `${name}=${value}` : name))
-                .join(' ')} />`,
-        },
-        imports: [importReact, importAngular],
-    };
+/**
+ * Update <DemoBlock/> props to import source code & inject the engine.
+ * @param resourceFolder Current demo folder.
+ * @param node           Current MDX node.
+ * @return {{imports: [string, string], newNode: {value: string}}} Modified demo block with imports.
+ */
+function updateDemoBlock(resourceFolder, node) {
+    const { value } = node;
+    const match = value.match(demoBlockRX);
+
+    const children = get(match, 2);
+    if (children) {
+        return getDemoFromChildren(node, children);
+    }
+
+    const propsString = get(match, 1);
+    const props = propsString.match(extractPropRX);
+    const propsIndex = fromPairs(props.map((prop) => prop.split('=')));
+    if (propsIndex.demo) {
+        return getDemoFromProps(resourceFolder, node, propsIndex);
+    }
+
+    return buildNewDemoBlock(node);
 }
 
 /**
@@ -95,7 +126,7 @@ import { DemoBlock } from '@lumx/demo/layout/DemoBlock';
 import { PropTable } from '@lumx/demo/layout/PropTable';
 `;
 
-const isDemoBlock = (node) => node.type === 'jsx' && node.value.includes('<DemoBlock');
+const isDemoBlock = (node) => node.type === 'jsx' && node.value.match(demoBlockRX);
 const isPropTable = (node) => node.type === 'jsx' && node.value.includes('<PropTable');
 
 /**
@@ -119,13 +150,15 @@ module.exports = (resourcePath) => () => {
             const importCode = isJSXImport(node) ? node.value : get(node, ['children', 0, 'children', 0, 'value']);
             importStatement += importCode;
         });
-        importStatement += `\n${importController}`;
+
+        let contentHasDemo = false;
 
         /*
          * Transforms DemoBlock to import the required code.
          */
         const content = others.map((node) => {
             if (isDemoBlock(node)) {
+                contentHasDemo = true;
                 const { newNode, imports } = updateDemoBlock(resourceFolder, node);
                 importStatement += `\n${imports.join('\n')}`;
 
@@ -138,6 +171,10 @@ module.exports = (resourcePath) => () => {
 
             return node;
         });
+
+        if (contentHasDemo) {
+            importStatement += `\n${importController}`;
+        }
 
         tree.children = [
             // Group all imports at the top with demo block import.

@@ -1,27 +1,7 @@
-import React, { ChangeEvent, ReactElement } from 'react';
+import { Theme, ThemeContext } from '@lumx/demo/context/theme';
+import React, { ChangeEvent, ReactElement, useContext } from 'react';
 
 import { Chip, Size } from '@lumx/react';
-
-import { Theme } from '@lumx/demo/constants';
-
-import { IGenericProps } from '@lumx/react/utils';
-
-/////////////////////////////
-
-/**
- * Defines the props of the component.
- */
-interface IProps extends IGenericProps {
-    /**
-     * The current selected theme.
-     */
-    theme: Theme;
-    /**
-     * The function to change the theme.
-     * When the theme selector is used, this function is called to update the current theme.
-     */
-    changeTheme(theme: Theme): void;
-}
 
 /////////////////////////////
 
@@ -32,23 +12,23 @@ interface IProps extends IGenericProps {
  *
  * @return The theme selector component.
  */
-const ThemeSelector: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactElement => {
+const ThemeSelector: React.FC = (): ReactElement => {
+    const { theme, changeTheme } = useContext(ThemeContext);
+
     /**
      * When the select is changed, call the function to change the theme.
      *
      * @param evt The change event of the select element.
      */
-    const handleChange: (evt: React.ChangeEvent<HTMLSelectElement>) => void = (
-        evt: ChangeEvent<HTMLSelectElement>,
-    ): void => {
-        changeTheme((evt.target.textContent || '').toLocaleLowerCase() as Theme);
+    const handleChange = (evt: ChangeEvent<HTMLSelectElement>) => {
+        changeTheme?.((evt.target.textContent || '').toLocaleLowerCase() as Theme);
     };
 
     return (
         <>
             <Chip
                 className="lumx-spacing-margin-right-tiny"
-                isSelected={theme === 'lumapps'}
+                isSelected={theme === Theme.lumapps}
                 size={Size.s}
                 onClick={handleChange}
             >
@@ -56,7 +36,7 @@ const ThemeSelector: React.FC<IProps> = ({ changeTheme, theme }: IProps): ReactE
             </Chip>
             <Chip
                 className="lumx-spacing-margin-right-tiny"
-                isSelected={theme === 'material'}
+                isSelected={theme === Theme.material}
                 size={Size.s}
                 onClick={handleChange}
             >
