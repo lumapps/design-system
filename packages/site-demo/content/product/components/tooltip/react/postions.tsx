@@ -3,7 +3,7 @@ import React from 'react';
 const App = () => {
     return (
         <div className="demo-grid">
-            <img width="52" src="react/default.png" />
+            <img width="366" src="react/postions.png" />
         </div>
     );
 };
