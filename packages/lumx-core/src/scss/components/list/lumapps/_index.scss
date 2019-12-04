@@ -56,6 +56,10 @@
     i {
         @include lumx-list-subheader-icon;
     }
+
+    .#{$lumx-base-prefix}-list--is-clickable & {
+        padding: 0 $lumx-list-item-padding;
+    }
 }
 
 /* Divider
