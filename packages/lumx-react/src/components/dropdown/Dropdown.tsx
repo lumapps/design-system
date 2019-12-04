@@ -35,6 +35,8 @@ interface IDropdownProps extends IGenericProps {
      * The callback function called when the bottom of the dropdown is reached.
      */
     onInfinite?: VoidFunction;
+    /** The z-axis position. */
+    zIndex?: number;
 }
 type DropdownProps = IDropdownProps;
 
@@ -91,6 +93,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     placement = DEFAULT_PROPS.placement,
     fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
     onInfiniteScroll,
+    zIndex,
     ...props
 }: DropdownProps): React.ReactElement | null => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
@@ -158,6 +161,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             isVisible={isVisible}
             offset={offset}
             placement={placement}
+            zIndex={zIndex}
         >
             {popperElement}
         </Popover>

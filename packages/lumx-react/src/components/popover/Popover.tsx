@@ -65,18 +65,20 @@ type ElementPosition = IElementPosition;
  * Defines the props of the component.
  */
 interface IPopoverProps extends IGenericProps {
-    /* The position the popover should be bounded to. */
+    /** The position the popover should be bounded to. */
     popoverRect: ElementPosition;
-    /* Should the popper be displayed. */
+    /** Should the popper be displayed. */
     isVisible: boolean;
-    /* The reference forwarded to the popover container. */
+    /** The reference forwarded to the popover container. */
     popoverRef: React.RefObject<HTMLDivElement>;
-    /* Children element displayed inside popover. */
+    /** Children element displayed inside popover. */
     children: ReactChild;
-    /* How high the component is flying */
+    /** How high the component is flying */
     elevation?: number;
-    /* The classname to apply to the Popover wrapper */
+    /** The classname to apply to the Popover wrapper */
     className?: string;
+    /** The z-axis position. */
+    zIndex?: number;
 }
 type PopoverProps = IPopoverProps;
 
@@ -110,6 +112,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     className: '',
     elevation: 3,
     placement: Placement.TOP,
+    zIndex: 9999,
 };
 
 /////////////////////////////
@@ -128,6 +131,7 @@ const Popover: React.FC<PopoverProps> & IPopover = ({
     className = DEFAULT_PROPS.className,
     elevation = DEFAULT_PROPS.elevation,
     isVisible,
+    zIndex = DEFAULT_PROPS.zIndex,
     ...props
 }: PopoverProps): ReactElement => {
     /**
@@ -148,7 +152,7 @@ const Popover: React.FC<PopoverProps> & IPopover = ({
         top: 0,
         transform: `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
         visibility: isPopoverVisible ? 'visible' : 'hidden',
-        zIndex: 9999,
+        zIndex,
     };
 
     return createPortal(

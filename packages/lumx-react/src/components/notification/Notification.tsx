@@ -44,6 +44,9 @@ interface INotificationProps extends IGenericProps {
     /** Type of notification (info, success, warning, error). */
     type: NotificationType;
 
+    /** The z-axis position. */
+    zIndex?: number;
+
     /** Callback function for action button. */
     actionCallback?(): void;
 
@@ -81,6 +84,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: IDefaultPropsType = {
     content: '',
     theme: Theme.light,
+    zIndex: 9999,
 };
 /////////////////////////////
 
@@ -98,6 +102,7 @@ const Notification: React.FC<NotificationProps> = ({
     isOpen = false,
     theme = DEFAULT_PROPS.theme,
     type,
+    zIndex = DEFAULT_PROPS.zIndex,
     ...props
 }: NotificationProps): React.ReactElement => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
@@ -125,7 +130,7 @@ const Notification: React.FC<NotificationProps> = ({
                 )}
                 {...props}
                 onClick={handleClick}
-                style={{ zIndex: 9999 }}
+                style={{ zIndex }}
             >
                 <div className={`${CLASSNAME}__icon`}>
                     <Icon icon={NOTIFICATION_CONFIGURATION[type].icon} size={Size.s} />
