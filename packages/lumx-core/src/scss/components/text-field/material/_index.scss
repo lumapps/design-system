@@ -9,14 +9,8 @@
     padding-top: $lumx-spacing-unit * 4;
     padding-bottom: $lumx-spacing-unit;
 
-    &__label {
-        #{$self}--theme-light & {
-            @include lumx-text-field-material-label(lumx-base-const('theme', 'LIGHT'));
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-text-field-material-label(lumx-base-const('theme', 'DARK'));
-        }
+    &__header {
+        @include lumx-text-field-material-header;
 
         #{$self}--has-icon & {
             transform: translateY($lumx-spacing-unit * 3) translateX(28px);
@@ -26,12 +20,44 @@
         #{$self}--has-value &,
         #{$self}--is-focus &,
         #{$self}--has-chips & {
-            transform: scale(0.75) translateY(0);
+            transform: translateY(0);
         }
     }
 
-    &__helper {
-        display: none !important;
+    &__label {
+        @include lumx-text-field-material-float;
+
+        line-height: $lumx-text-field-height !important;
+
+        #{$self}--theme-light & {
+            @include lumx-text-field-material-label(lumx-base-const('theme', 'LIGHT'));
+        }
+
+        #{$self}--theme-dark & {
+            @include lumx-text-field-material-label(lumx-base-const('theme', 'DARK'));
+        }
+
+        #{$self}--has-placeholder &,
+        #{$self}--has-value &,
+        #{$self}--is-focus &,
+        #{$self}--has-chips & {
+            transform: scale(0.75);
+        }
+    }
+
+    &__char-counter {
+        @include lumx-text-field-material-float;
+
+        #{$self}--has-placeholder &,
+        #{$self}--has-value &,
+        #{$self}--is-focus &,
+        #{$self}--has-chips & {
+            transform: scale(0.75);
+        }
+
+        span {
+            line-height: $lumx-text-field-height !important;
+        }
     }
 
     &__wrapper {

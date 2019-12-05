@@ -1,3 +1,11 @@
-<lx-text-field lx-helper="Helper text" lx-label="Textfield label" lx-theme="{{ theme }}">
+<lx-text-field lx-label="Textfield label" lx-theme="{{ theme }}">
     <input type="text" ng-model="vm.textFields.model.empty" />
 </lx-text-field>
+
+<span
+    class="lumx-base-display-block lumx-spacing-margin-top-regular lumx-typography-caption"
+    ng-class="{ 'lumx-theme-color-dark-L2': theme === 'light',
+                'lumx-theme-color-light-L2': theme === 'dark' }"
+>
+    Helper text
+</span>

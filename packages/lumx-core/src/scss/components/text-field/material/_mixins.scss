@@ -1,19 +1,27 @@
-@mixin lumx-text-field-material-label($theme) {
+@mixin lumx-text-field-material-header() {
     position: absolute;
     top: $lumx-spacing-unit;
+    right: 0;
     left: 0;
-    height: $lumx-text-field-height;
-    line-height: $lumx-text-field-height;
+    margin-bottom: 0;
     transform: translateY($lumx-spacing-unit * 3);
     transform-origin: bottom left;
     transition-duration: 200ms;
-    transition-property: color, transform;
+    transition-property: transform;
+}
 
+@mixin lumx-text-field-material-label($theme) {
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-theme-color-variant('dark', 'L2');
     } @else if $theme == lumx-base-const('theme', 'DARK') {
         color: lumx-theme-color-variant('light', 'L2');
     }
+}
+
+@mixin lumx-text-field-material-float() {
+    transform-origin: bottom left;
+    transition-duration: 200ms;
+    transition-property: color, transform;
 }
 
 @mixin lumx-text-field-material-label-validity($validity) {

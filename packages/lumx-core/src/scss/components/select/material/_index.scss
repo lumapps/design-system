@@ -9,7 +9,20 @@
     padding-top: $lumx-spacing-unit * 4;
     padding-bottom: $lumx-spacing-unit;
 
+    &__header {
+        @include lumx-text-field-material-header;
+
+        #{$self}--has-placeholder &,
+        #{$self}--has-value & {
+            transform: translateY(0);
+        }
+    }
+
     &__label {
+        @include lumx-text-field-material-float;
+
+        line-height: $lumx-text-field-height !important;
+
         #{$self}--theme-light & {
             @include lumx-text-field-material-label(lumx-base-const('theme', 'LIGHT'));
         }
@@ -20,7 +33,7 @@
 
         #{$self}--has-placeholder &,
         #{$self}--has-value & {
-            transform: scale(0.75) translateY(0);
+            transform: scale(0.75);
         }
     }
 

@@ -74,6 +74,13 @@ function TextFieldController(LxUtilsService) {
      */
     lx.inputId = LxUtilsService.generateUUID();
 
+    /**
+     * The text field max length.
+     *
+     * @type {number}
+     */
+    lx.maxlength = undefined;
+
     /////////////////////////////
     //                         //
     //     Public functions    //
@@ -118,7 +125,7 @@ function TextFieldController(LxUtilsService) {
             classes.push(`${CSS_PREFIX}-text-field--has-icon`);
         }
 
-        if (lx.isClearable && lx.hasValue()) {
+        if (lx.isClearable && lx.getValueLength() > 0) {
             classes.push(`${CSS_PREFIX}-text-field--has-input-clear`);
         }
 
@@ -126,7 +133,7 @@ function TextFieldController(LxUtilsService) {
             classes.push(`${CSS_PREFIX}-text-field--has-label`);
         }
 
-        if (lx.hasValue()) {
+        if (lx.getValueLength() > 0) {
             classes.push(`${CSS_PREFIX}-text-field--has-value`);
         }
 
@@ -142,11 +149,11 @@ function TextFieldController(LxUtilsService) {
     }
 
     /**
-     * Define if the model controller has a value or not.
+     * Get the input value length.
      *
-     * @return {boolean} Wether the model controller has a value or not.
+     * @return {number} The input value length.
      */
-    function hasValue() {
+    function getValueLength() {
         if (angular.isUndefined(_modelController) || angular.isUndefined(_modelController.$viewValue)) {
             return false;
         }
@@ -167,7 +174,7 @@ function TextFieldController(LxUtilsService) {
 
     lx.clearModel = clearModel;
     lx.getClasses = getClasses;
-    lx.hasValue = hasValue;
+    lx.getValueLength = getValueLength;
     lx.setModelController = setModelController;
 }
 
@@ -240,6 +247,10 @@ function TextFieldDirective($timeout) {
                         el.removeClass(`${CSS_PREFIX}-text-field--has-placeholder`);
                     }
                 });
+
+                modelController.$$attr.$observe('maxlength', (maxlength) => {
+                    ctrl.maxlength = maxlength;
+                });
             }
         });
 
@@ -282,7 +293,6 @@ function TextFieldDirective($timeout) {
             customColors: '=?lxCustomColors',
             focus: '=?lxFocus',
             hasError: '=?lxError',
-            helper: '@?lxHelper',
             icon: '@?lxIcon',
             isClearable: '=?lxAllowClear',
             isValid: '=?lxValid',

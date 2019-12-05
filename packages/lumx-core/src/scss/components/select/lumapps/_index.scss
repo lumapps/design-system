@@ -5,6 +5,10 @@
 .#{$lumx-base-prefix}-select {
     $self: &;
 
+    &__header {
+        margin-bottom: $lumx-spacing-unit;
+    }
+
     &__label {
         #{$self}--theme-light & {
             @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
@@ -25,10 +29,6 @@
 
         #{$self}--theme-dark & {
             @include lumx-text-field-wrapper(lumx-base-const('theme', 'DARK'));
-        }
-
-        #{$self}--has-label & {
-            @include lumx-text-field-wrapper-has-label;
         }
     }
 

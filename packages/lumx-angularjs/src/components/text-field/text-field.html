@@ -1,9 +1,19 @@
 <div class="lumx-text-field" ng-class="lx.getClasses()">
-    <label for="{{ lx.inputId }}" class="lumx-text-field__label" ng-if="::lx.label">
-        {{ lx.label }}
-    </label>
+    <div class="lumx-text-field__header" ng-if="::lx.label">
+        <label for="{{ lx.inputId }}" class="lumx-text-field__label">
+            {{ lx.label }}
+        </label>
 
-    <span class="lumx-text-field__helper" ng-if="::lx.helper">{{ lx.helper }}</span>
+        <div class="lumx-text-field__char-counter" ng-if="lx.maxlength">
+            <span>{{ lx.maxlength - lx.getValueLength() }}</span>
+
+            <lx-icon
+                lx-path="{{ lx.icons.mdiAlertCircle }}"
+                lx-size="xxs"
+                ng-if="lx.maxlength - lx.getValueLength() === 0"
+            ></lx-icon>
+        </div>
+    </div>
 
     <div class="lumx-text-field__wrapper">
         <lx-icon
@@ -33,7 +43,7 @@
                 lx-size="s"
                 lx-theme="{{ lx.theme }}"
                 lx-variant="icon"
-                ng-if="lx.isClearable && lx.hasValue()"
+                ng-if="lx.isClearable && lx.getValueLength() > 0"
                 ng-click="lx.clearModel($event)"
             >
                 <lx-icon lx-path="{{ lx.icons.mdiCloseCircle }}"></lx-icon>

@@ -1,7 +1,9 @@
 <div class="lumx-select" ng-class="lx.getClasses()">
-    <span class="lumx-select__label" ng-if="::lx.label && (!lx.variant || lx.variant === 'input')">
-        {{ lx.label }}
-    </span>
+    <div class="lumx-select__header">
+        <span class="lumx-select__label" ng-if="::lx.label && (!lx.variant || lx.variant === 'input')">
+            {{ lx.label }}
+        </span>
+    </div>
 
     <div
         class="lumx-select__wrapper"
