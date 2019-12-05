@@ -12,10 +12,6 @@
     &__header {
         @include lumx-text-field-material-header;
 
-        #{$self}--has-icon & {
-            transform: translateY($lumx-spacing-unit * 3) translateX(28px);
-        }
-
         #{$self}--has-placeholder &,
         #{$self}--has-value &,
         #{$self}--is-focus &,
@@ -35,6 +31,10 @@
 
         #{$self}--theme-dark & {
             @include lumx-text-field-material-label(lumx-base-const('theme', 'DARK'));
+        }
+
+        #{$self}--has-icon & {
+            transform: translateX(28px);
         }
 
         #{$self}--has-placeholder &,
