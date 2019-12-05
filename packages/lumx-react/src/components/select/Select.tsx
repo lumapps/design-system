@@ -253,7 +253,9 @@ const Select: React.FC<SelectProps> = ({
             <>
                 {variant === SelectVariant.input && (
                     <>
-                        {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
+                        <div className={`${CLASSNAME}__header`}>
+                            {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
+                        </div>
                         {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
                         <div
