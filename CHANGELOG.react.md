@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 -   Added `maxLength` prop to `textField` component
+-   _[BREAKING]_ Removed `helper` prop from `textField` component
 
 ## [0.18.6][] - 2019-12-04
 

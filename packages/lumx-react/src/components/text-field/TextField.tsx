@@ -26,9 +26,6 @@ interface ITextFieldProps extends IGenericProps {
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
 
-    /** Text field helper message. */
-    helper?: string;
-
     /** The max length the input accepts. If set, a character counter will be displayed. */
     maxLength?: number;
 
@@ -191,7 +188,6 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         type,
         value,
         setFocus,
-        maxLength,
         onChange,
         onFocus,
         onBlur,
@@ -218,14 +214,11 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
     };
 
     const handleChange = (event: React.ChangeEvent): void => {
-        const currentVal = get(event, 'target.value');
-        const newVal = maxLength ? currentVal.slice(0, maxLength) : currentVal;
-
         if (type === TextFieldType.textarea) {
             recomputeNumberOfRows(event);
         }
 
-        onChange(newVal);
+        onChange(get(event, 'target.value'));
     };
 
     if (type === TextFieldType.textarea) {
@@ -271,7 +264,6 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         chips,
         className = '',
         hasError,
-        helper,
         icon,
         id = uuid(),
         isDisabled,
@@ -295,7 +287,8 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
 
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
-    const isNotEmpty = value && value.length > 0;
+    const valueLength = (value && value.length) || 0;
+    const isNotEmpty = valueLength > 0;
 
     /**
      * Function triggered when the Clear Button is clicked.
@@ -336,15 +329,20 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
             )}
             ref={textFieldRef}
         >
-            {label && (
-                <label htmlFor={id} className={`${CLASSNAME}__label`}>
-                    {label}
-                </label>
-            )}
+            <div className={`${CLASSNAME}__header`}>
+                {label && (
+                    <label htmlFor={id} className={`${CLASSNAME}__label`}>
+                        {label}
+                    </label>
+                )}
 
-            {maxLength && <span className={`${CLASSNAME}__character-counter`}>{`${value.length} / ${maxLength}`}</span>}
-
-            {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
+                {maxLength && (
+                    <div className={`${CLASSNAME}__char-counter`}>
+                        <span>{maxLength - valueLength}</span>
+                        {maxLength - valueLength === 0 && <Icon icon={mdiAlertCircle} size={Size.xxs} />}
+                    </div>
+                )}
+            </div>
 
             <div className={`${CLASSNAME}__wrapper`}>
                 {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
