@@ -1,4 +1,5 @@
-import React, { ReactElement } from 'react';
+import { Engine, EngineContext } from '@lumx/demo/context/engine';
+import React, { ReactElement, useContext } from 'react';
 
 import orderBy from 'lodash/orderBy';
 
@@ -37,8 +38,9 @@ const renderTypeTableRow = ({ type, defaultValue }: IProperty): ReactElement => 
     );
 };
 
-const PropTable: React.FC<IPropTableProps> = ({ component, engine }: IPropTableProps): ReactElement => {
-    if (engine === 'angularjs') {
+const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): ReactElement => {
+    const { engine } = useContext(EngineContext);
+    if (engine === Engine.angularjs) {
         return <span>Could not load properties of the angular.js {component} component.</span>;
     }
 
@@ -88,7 +90,6 @@ interface IProperty {
 
 interface IPropTableProps {
     component: string;
-    engine: string;
 }
 
 export { PropTable, IProperty };
