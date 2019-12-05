@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import classNames from 'classnames';
 
-import { ExpansionPanel } from '@lumx/react';
+import { DragHandle, ExpansionPanel } from '@lumx/react';
 
 const App = ({ theme }) => {
     const [isOpen, setOpen] = useState(false);
@@ -10,6 +10,8 @@ const App = ({ theme }) => {
     return (
         <>
             <ExpansionPanel label="Lorem ipsum" theme={theme} isOpen={isOpen} toggleCallback={setOpen}>
+                <DragHandle />
+
                 <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
                     <p
                         className={classNames(
