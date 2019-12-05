@@ -64,6 +64,7 @@ const ITEMS: Item[] = [
                     'Progress',
                     'Progress tracker',
                     'Radio button',
+                    'Search field',
                     'Select',
                     'Side navigation',
                     'Slider',
