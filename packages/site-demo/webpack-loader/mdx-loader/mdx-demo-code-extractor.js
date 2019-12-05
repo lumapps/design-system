@@ -104,18 +104,6 @@ function updateDemoBlock(resourceFolder, node) {
     return buildNewDemoBlock(node);
 }
 
-/**
- * Update <PropTable/> props to inject the engine.
- * @param  node     Current MDX node.
- * @return {Object} prop table.
- */
-function updatePropTable(node) {
-    return {
-        ...node,
-        value: node.value.replace('/>', 'engine={props.engine} />'),
-    };
-}
-
 const isJSXImport = (node) => node.type === 'import';
 const isPreImport = (node) =>
     node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'import']);
@@ -127,7 +115,6 @@ import { PropTable } from '@lumx/demo/layout/PropTable';
 `;
 
 const isDemoBlock = (node) => node.type === 'jsx' && node.value.match(demoBlockRX);
-const isPropTable = (node) => node.type === 'jsx' && node.value.includes('<PropTable');
 
 /**
  * MDX plugin to extract and insert source code from demo block in MDX documents.
@@ -163,10 +150,6 @@ module.exports = (resourcePath) => () => {
                 importStatement += `\n${imports.join('\n')}`;
 
                 return newNode;
-            }
-
-            if (isPropTable(node)) {
-                return updatePropTable(node);
             }
 
             return node;
