@@ -1,4 +1,4 @@
-import { mdiSend } from '@lumx/icons';
+import { mdiDotsVertical, mdiSend } from '@lumx/icons';
 
 /////////////////////////////
 
@@ -21,6 +21,7 @@ function DemoController() {
      * @readonly
      */
     vm.icons = {
+        mdiDotsVertical,
         mdiSend,
     };
 }
