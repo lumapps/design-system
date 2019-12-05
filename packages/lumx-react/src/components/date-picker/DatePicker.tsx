@@ -1,10 +1,12 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
+
+import noop from 'lodash/noop';
 
 import moment from 'moment';
 
 import classNames from 'classnames';
 
-import { Emphasis, IconButton, Toolbar } from '@lumx/react';
+import { Dropdown, Emphasis, IconButton, Placement, TextField, Theme, Toolbar } from '@lumx/react';
 
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
@@ -32,10 +34,10 @@ interface IDatePickerProps extends IGenericProps {
     minDate?: Date;
 
     /** Value. */
-    value: Date;
+    value: moment.Moment;
 
     /** On change. */
-    onChange(value: Date): void;
+    onChange(value: moment.Moment): void;
 }
 type DatePickerProps = IDatePickerProps;
 
@@ -47,10 +49,18 @@ type DatePickerControlledProps = IDatePickerProps & {
     monthOffset: number;
 
     /** Changing to previous month. */
-    onPrevMonthChange(newMonth: Date): void;
+    onPrevMonthChange(): void;
 
     /** Changing to next month. */
-    onNextMonthChange(newMonth: Date): void;
+    onNextMonthChange(): void;
+};
+
+type WrappedDatePickerProps = IDatePickerProps & {
+    /** Input label. */
+    label: string;
+
+    /** Theme. */
+    theme?: Theme;
 };
 
 /////////////////////////////
@@ -90,9 +100,11 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     maxDate = DEFAULT_PROPS.maxDate,
     minDate = DEFAULT_PROPS.minDate,
     monthOffset,
+    onChange,
     onPrevMonthChange,
     onNextMonthChange,
     today,
+    value,
 }: DatePickerControlledProps): ReactElement => {
     return (
         <div className={`${CLASSNAME}`}>
@@ -125,16 +137,18 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
 
                 <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
                     {getAnnotatedMonthCalendar(locale, minDate, maxDate, today, monthOffset).map((annotatedDate) => {
+                        const onClick = useCallback(() => onChange(annotatedDate.date), [annotatedDate]);
                         if (annotatedDate.isDisplayed) {
                             return (
                                 <div key={annotatedDate.date.unix()} className={`${CLASSNAME}__day-wrapper`}>
                                     <button
                                         className={classNames(`${CLASSNAME}__month-day`, {
-                                            [`${CLASSNAME}__month-day--is-selected`]: annotatedDate.isSelected,
+                                            [`${CLASSNAME}__month-day--is-selected`]: annotatedDate.date.isSame(value),
                                             [`${CLASSNAME}__month-day--is-today`]:
                                                 annotatedDate.isClickable && annotatedDate.isToday,
                                         })}
                                         disabled={!annotatedDate.isClickable}
+                                        onClick={onClick}
                                     >
                                         <span>{annotatedDate.date.format('DD')}</span>
                                     </button>
@@ -150,7 +164,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
 };
 DatePickerControlled.displayName = COMPONENT_NAME;
 
-const DatePicker = (props) => {
+const DatePicker = (props: DatePickerProps) => {
     const today = moment();
     const [monthOffset, setMonthOffset] = useState(0);
 
@@ -168,6 +182,53 @@ const DatePicker = (props) => {
     );
 };
 
+const WrappedDatePicker = ({ label, theme, value, ...props }: WrappedDatePickerProps) => {
+    const anchorSimpleRef = React.useRef(null);
+    const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
+
+    const toggleSimpleMenu = () => {
+        setSimpleIsOpen(!isSimpleOpen);
+    };
+
+    const closeSimpleMenu = () => {
+        setSimpleIsOpen(false);
+    };
+
+    return (
+        <>
+            <TextField
+                inputRef={anchorSimpleRef}
+                label={label}
+                value={value ? value.format('LL') : ''}
+                onClick={toggleSimpleMenu}
+                onChange={noop}
+                theme={theme}
+                readOnly={true}
+            />
+
+            <Dropdown
+                showDropdown={isSimpleOpen}
+                closeOnClick={false}
+                closeOnEscape={true}
+                onClose={closeSimpleMenu}
+                placement={Placement.AUTO_START}
+                anchorRef={anchorSimpleRef}
+            >
+                <DatePicker value={value} {...props} />
+            </Dropdown>
+        </>
+    );
+};
+
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, DatePicker, DatePickerProps };
+export {
+    CLASSNAME,
+    DEFAULT_PROPS,
+    DatePicker,
+    DatePickerProps,
+    DatePickerControlled,
+    DatePickerControlledProps,
+    WrappedDatePicker,
+    WrappedDatePickerProps,
+};

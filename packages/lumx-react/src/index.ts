@@ -18,7 +18,14 @@ export { Chip, ChipProps } from './components/chip/Chip';
 
 export { ChipGroup, ChipGroupProps } from './components/chip/ChipGroup';
 
-export { DatePicker, DatePickerProps } from './components/date-picker/DatePicker';
+export {
+    DatePicker,
+    DatePickerProps,
+    DatePickerControlled,
+    DatePickerControlledProps,
+    WrappedDatePicker,
+    WrappedDatePickerProps,
+} from './components/date-picker/DatePicker';
 
 export { Divider, DividerProps } from './components/divider/Divider';
 
