@@ -13,8 +13,7 @@
 
     display: flex;
     align-items: center;
-    padding: 0 $lumx-spacing-unit * 2 $lumx-spacing-unit;
-    margin-bottom: $lumx-spacing-unit;
+    padding: $lumx-spacing-unit $lumx-spacing-unit * 2;
 }
 
 @mixin lumx-select-loader() {
