@@ -41,6 +41,20 @@ const plugins = [
     }),
 ];
 
+const cssLoaders = [
+    {
+        loader: 'css-loader',
+    },
+    {
+        loader: 'postcss-loader',
+        options: {
+            config: {
+                path: `${PKG_PATH}/postcss.config.js`,
+            },
+        },
+    },
+];
+
 // Optimize/Minify CSS/HTML.
 if (isProd) {
     minimizer.push(
@@ -59,6 +73,15 @@ if (isProd) {
             cssProcessorOptions: CONFIGS.cssNano,
         }),
     );
+    cssLoaders.splice(0, 0, {
+        loader: MiniCssExtractPlugin.loader,
+    });
+}
+
+if (isDev) {
+    cssLoaders.splice(0, 0, {
+        loader: 'style-loader',
+    });
 }
 
 if (!IS_CI) {
@@ -105,24 +128,7 @@ module.exports = {
             {
                 test: /\.scss$/u,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hot: isDev,
-                            reloadAll: true,
-                        },
-                    },
-                    {
-                        loader: 'css-loader',
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            config: {
-                                path: `${PKG_PATH}/postcss.config.js`,
-                            },
-                        },
-                    },
+                    ...cssLoaders,
                     {
                         loader: 'sass-loader',
                     },
@@ -130,25 +136,7 @@ module.exports = {
             },
             {
                 test: /\.css$/u,
-                use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            hot: isDev,
-                        },
-                    },
-                    {
-                        loader: 'css-loader',
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            config: {
-                                path: `${PKG_PATH}/postcss.config.js`,
-                            },
-                        },
-                    },
-                ],
+                use: cssLoaders,
             },
             {
                 test: /content\/.*\.(png|jpe?g|gif|svg|sketch)$/,

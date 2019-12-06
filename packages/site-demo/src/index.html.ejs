@@ -11,7 +11,7 @@
 
         <%
         // CSS assets.
-        for (const key in htmlWebpackPlugin.files.css) {
+        for (const key of Object.keys(htmlWebpackPlugin.files.css)) {
             const href = htmlWebpackPlugin.files.css[key];
             const id = href.split('.')[0].replace(/^\//, '');
             const rel = id === 'theme-material' ? 'preload' : 'stylesheet';
@@ -35,13 +35,16 @@
 
         <%
         // JS chunks.
-        for (const key in htmlWebpackPlugin.files.chunks) {
+        for (const key of Object.keys(htmlWebpackPlugin.files.chunks)) {
             const entry = htmlWebpackPlugin.files.chunks[key].entry;
-            // Ignore theme chunks.
-            if (entry.includes('theme-')) continue;
+            // Ignore theme chunks in production.
+            if (webpackConfig.mode === 'production' && entry.includes('theme-material')) continue;
 
             %>
-            <script src="<%= entry %>" type="text/javascript" crossorigin="<%= webpackConfig.output.crossOriginLoading %>"></script>
+            <script src="<%= entry %>"
+                    type="text/javascript"
+                    id="<%= key %>"
+                    crossorigin="<%= webpackConfig.output.crossOriginLoading %>"></script>
             <%
         }
         %>
