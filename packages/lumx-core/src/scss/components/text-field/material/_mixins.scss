@@ -18,10 +18,15 @@
     }
 }
 
-@mixin lumx-text-field-material-float() {
-    transform-origin: bottom left;
+@mixin lumx-text-field-material-float($position) {
     transition-duration: 200ms;
     transition-property: color, transform;
+
+    @if $position == lumx-base-const('position', 'LEFT') {
+        transform-origin: bottom left;
+    } @else if $position == lumx-base-const('position', 'RIGHT') {
+        transform-origin: bottom right;
+    }
 }
 
 @mixin lumx-text-field-material-label-validity($validity) {

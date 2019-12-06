@@ -19,7 +19,7 @@
     }
 
     &__label {
-        @include lumx-text-field-material-float;
+        @include lumx-text-field-material-float(lumx-base-const('position', 'LEFT'));
 
         line-height: $lumx-text-field-height !important;
 

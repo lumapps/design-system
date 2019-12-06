@@ -21,7 +21,7 @@
     }
 
     &__label {
-        @include lumx-text-field-material-float;
+        @include lumx-text-field-material-float(lumx-base-const('position', 'LEFT'));
 
         line-height: $lumx-text-field-height !important;
 
@@ -46,7 +46,7 @@
     }
 
     &__char-counter {
-        @include lumx-text-field-material-float;
+        @include lumx-text-field-material-float(lumx-base-const('position', 'RIGHT'));
 
         #{$self}--has-placeholder &,
         #{$self}--has-value &,
