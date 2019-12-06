@@ -5,6 +5,9 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
   className="lumx-select lumx-select--is-empty lumx-select--theme-light"
 >
   <div
+    className="lumx-select__header"
+  />
+  <div
     className="lumx-select__wrapper"
     id="uuid"
     onKeyPress={[Function]}

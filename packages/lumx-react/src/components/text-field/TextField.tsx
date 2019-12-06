@@ -26,8 +26,8 @@ interface ITextFieldProps extends IGenericProps {
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
 
-    /** Text field helper message. */
-    helper?: string;
+    /** The max length the input accepts. If set, a character counter will be displayed. */
+    maxLength?: number;
 
     /** Text field icon (SVG path). */
     icon?: string;
@@ -168,6 +168,7 @@ interface IInputNativeProps {
     id?: string;
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     isDisabled?: boolean;
+    maxLength?: number;
     placeholder?: string;
     type?: TextFieldType;
     value: string;
@@ -263,13 +264,13 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         chips,
         className = '',
         hasError,
-        helper,
         icon,
         id = uuid(),
         isDisabled,
         isClearable = DEFAULT_PROPS.isClearable,
         isValid,
         label,
+        maxLength,
         onChange,
         onFocus,
         onBlur,
@@ -286,7 +287,8 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
 
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
-    const isNotEmpty = value && value.length > 0;
+    const valueLength = (value && value.length) || 0;
+    const isNotEmpty = valueLength > 0;
 
     /**
      * Function triggered when the Clear Button is clicked.
@@ -327,13 +329,20 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
             )}
             ref={textFieldRef}
         >
-            {label && (
-                <label htmlFor={id} className={`${CLASSNAME}__label`}>
-                    {label}
-                </label>
-            )}
+            <div className={`${CLASSNAME}__header`}>
+                {label && (
+                    <label htmlFor={id} className={`${CLASSNAME}__label`}>
+                        {label}
+                    </label>
+                )}
 
-            {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
+                {maxLength && (
+                    <div className={`${CLASSNAME}__char-counter`}>
+                        <span>{maxLength - valueLength}</span>
+                        {maxLength - valueLength === 0 && <Icon icon={mdiAlertCircle} size={Size.xxs} />}
+                    </div>
+                )}
+            </div>
 
             <div className={`${CLASSNAME}__wrapper`}>
                 {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
@@ -353,6 +362,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                             id,
                             inputRef,
                             isDisabled,
+                            maxLength,
                             onBlur,
                             onChange,
                             onFocus,

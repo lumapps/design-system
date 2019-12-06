@@ -24,10 +24,6 @@
     }
 }
 
-@mixin lumx-text-field-wrapper-has-label() {
-    margin-top: $lumx-spacing-unit;
-}
-
 @mixin lumx-text-field-wrapper-has-input-clear() {
     padding-right: $lumx-spacing-unit !important;
 }

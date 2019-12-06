@@ -9,7 +9,22 @@
     padding-top: $lumx-spacing-unit * 4;
     padding-bottom: $lumx-spacing-unit;
 
+    &__header {
+        @include lumx-text-field-material-header;
+
+        #{$self}--has-placeholder &,
+        #{$self}--has-value &,
+        #{$self}--is-focus &,
+        #{$self}--has-chips & {
+            transform: translateY(0);
+        }
+    }
+
     &__label {
+        @include lumx-text-field-material-float(lumx-base-const('position', 'LEFT'));
+
+        line-height: $lumx-text-field-height !important;
+
         #{$self}--theme-light & {
             @include lumx-text-field-material-label(lumx-base-const('theme', 'LIGHT'));
         }
@@ -19,19 +34,30 @@
         }
 
         #{$self}--has-icon & {
-            transform: translateY($lumx-spacing-unit * 3) translateX(28px);
+            transform: translateX(28px);
         }
 
         #{$self}--has-placeholder &,
         #{$self}--has-value &,
         #{$self}--is-focus &,
         #{$self}--has-chips & {
-            transform: scale(0.75) translateY(0);
+            transform: scale(0.75);
         }
     }
 
-    &__helper {
-        display: none !important;
+    &__char-counter {
+        @include lumx-text-field-material-float(lumx-base-const('position', 'RIGHT'));
+
+        #{$self}--has-placeholder &,
+        #{$self}--has-value &,
+        #{$self}--is-focus &,
+        #{$self}--has-chips & {
+            transform: scale(0.75);
+        }
+
+        span {
+            line-height: $lumx-text-field-height !important;
+        }
     }
 
     &__wrapper {

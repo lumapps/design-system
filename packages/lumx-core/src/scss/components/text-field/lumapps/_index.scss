@@ -5,7 +5,15 @@
 .#{$lumx-base-prefix}-text-field {
     $self: &;
 
+    &__header {
+        display: flex;
+        align-items: center;
+        margin-bottom: $lumx-spacing-unit;
+    }
+
     &__label {
+        flex: 1 1 auto;
+
         #{$self}--theme-light & {
             @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
         }
@@ -15,13 +23,34 @@
         }
     }
 
-    &__helper {
-        #{$self}--theme-light & {
-            @include lumx-input-helper(lumx-base-const('theme', 'LIGHT'));
+    &__char-counter {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        margin-left: $lumx-spacing-unit;
+
+        span {
+            @include lumx-typography($lumx-input-label-typography);
+
+            #{$self}--theme-light & {
+                color: lumx-theme-color-variant('dark', 'L2');
+            }
+
+            #{$self}--theme-dark & {
+                color: lumx-theme-color-variant('light', 'L2');
+            }
         }
 
-        #{$self}--theme-dark & {
-            @include lumx-input-helper(lumx-base-const('theme', 'DARK'));
+        i {
+            margin-left: $lumx-spacing-unit / 2;
+
+            #{$self}--theme-light & {
+                color: lumx-theme-color-variant('red', 'N');
+            }
+
+            #{$self}--theme-dark & {
+                color: lumx-theme-color-variant('light', 'N');
+            }
         }
     }
 
@@ -45,10 +74,6 @@
         #{$self}--has-input-clear & {
             @include lumx-text-field-wrapper-has-input-clear;
         }
-    }
-
-    &--has-label &__wrapper {
-        @include lumx-text-field-wrapper-has-label;
     }
 
     &__input-icon {
