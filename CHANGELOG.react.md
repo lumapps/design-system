@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.18.7][] - 2019-12-06
+
 -   Added `maxLength` prop to `textField` component
 -   _[BREAKING]_ Removed `helper` prop from `textField` component
 
@@ -163,3 +165,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.18.5]: https://github.com/lumapps/design-system/tree/v0.18.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.18.6...HEAD
 [0.18.6]: https://github.com/lumapps/design-system/tree/v0.18.6
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.7...HEAD
+[0.18.7]: https://github.com/lumapps/design-system/tree/v0.18.7
