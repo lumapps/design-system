@@ -21,7 +21,7 @@ interface ISlideshowProps extends IGenericProps {
     activeIndex?: number;
     /** Enable/disable automatic rotation of slideshow */
     autoPlay?: boolean;
-    /* Whether the image has to fill its container's height. */
+    /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
     /** Enable grouping of slides */
     groupBy?: number;
@@ -97,22 +97,18 @@ function _validate(props: SlideshowProps): ReactNode {
  * Displays a slideshow.
  */
 const Slideshow: React.FC<SlideshowProps> = ({
-    activeIndex = DEFAULT_PROPS.activeIndex,
+    activeIndex = DEFAULT_PROPS.activeIndex as number,
     autoPlay = DEFAULT_PROPS.autoPlay,
     children,
     className = '',
     fillHeight = DEFAULT_PROPS.fillHeight,
-    groupBy = DEFAULT_PROPS.groupBy,
+    groupBy = DEFAULT_PROPS.groupBy as number,
     hasControls = DEFAULT_PROPS.hasControls,
-    interval = DEFAULT_PROPS.interval,
+    interval = DEFAULT_PROPS.interval as number,
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     ...props
-}: SlideshowProps): ReactElement | null => {
-    if (typeof activeIndex === 'undefined' || typeof groupBy === 'undefined' || typeof interval === 'undefined') {
-        return null;
-    }
-
+}: SlideshowProps): ReactElement => {
     const newChildren: ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
     const [currentIndex, setCurrentIndex] = useState(activeIndex);
     const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
