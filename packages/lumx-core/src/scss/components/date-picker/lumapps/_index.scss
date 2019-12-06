@@ -17,6 +17,7 @@
 
     &__days-wrapper {
         display: flex;
+        width: map-get($lumx-sizes, lumx-base-const('size', 'M')) * 7;
         flex-wrap: wrap;
     }
 
