@@ -56,6 +56,7 @@ const ITEMS: Item[] = [
                     'Dropdown',
                     'Expansion panel',
                     'Image block',
+                    'Language switcher',
                     'Lightbox',
                     'List',
                     'Notification',
