@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { switchToTheme } from '@lumx/demo/theme-switch';
 import { setDemoCustomColors } from '@lumx/demo/utils';
@@ -31,7 +31,11 @@ const ThemeContext = React.createContext(DEFAULT);
 const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useState(DEFAULT.theme);
 
-    const changeTheme = (newTheme: Theme): void => {
+    useEffect(() => {
+        switchToTheme(Theme.material, Theme.lumapps);
+    }, []);
+
+    const changeTheme = (newTheme: Theme) => {
         if (newTheme === theme) {
             return;
         }
