@@ -119,7 +119,7 @@ const Dropdown: React.FC<DropdownProps> = ({
             ref={wrapperRef}
             style={{
                 maxHeight: computedPosition.maxHeight,
-                minWidth: computedPosition.anchorWidth,
+                minWidth: fitToAnchorWidth ? computedPosition.anchorWidth : 0,
             }}
             {...props}
         >

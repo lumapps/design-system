@@ -197,7 +197,7 @@ const WrappedDatePicker = ({ label, theme, value, ...props }: WrappedDatePickerP
     return (
         <>
             <TextField
-                inputRef={anchorSimpleRef}
+                textFieldRef={anchorSimpleRef}
                 label={label}
                 value={value ? value.format('LL') : ''}
                 onClick={toggleSimpleMenu}
@@ -208,11 +208,12 @@ const WrappedDatePicker = ({ label, theme, value, ...props }: WrappedDatePickerP
 
             <Dropdown
                 showDropdown={isSimpleOpen}
-                closeOnClick={false}
+                closeOnClick={true}
                 closeOnEscape={true}
                 onClose={closeSimpleMenu}
-                placement={Placement.AUTO_START}
+                placement={Placement.BOTTOM_START}
                 anchorRef={anchorSimpleRef}
+                fitToAnchorWidth={false}
             >
                 <DatePicker value={value} {...props} />
             </Dropdown>
