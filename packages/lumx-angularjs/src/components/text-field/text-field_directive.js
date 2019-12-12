@@ -227,31 +227,42 @@ function TextFieldDirective($timeout) {
                     el.removeClass(`${CSS_PREFIX}-text-field--is-focus`);
                 });
 
-            const modelController = input.data('$ngModelController');
+            ctrl.setModelController(input.data('$ngModelController'));
 
-            ctrl.setModelController(modelController);
-
-            if (angular.isDefined(modelController.$$attr)) {
-                modelController.$$attr.$observe('disabled', (isDisabled) => {
+            scope.$watch(
+                () => {
+                    return input.attr('disabled');
+                },
+                (isDisabled) => {
                     if (isDisabled) {
                         el.addClass(`${CSS_PREFIX}-text-field--is-disabled`);
                     } else {
                         el.removeClass(`${CSS_PREFIX}-text-field--is-disabled`);
                     }
-                });
+                },
+            );
 
-                modelController.$$attr.$observe('placeholder', (placeholder) => {
+            scope.$watch(
+                () => {
+                    return input.attr('placeholder');
+                },
+                (placeholder) => {
                     if (placeholder.length > 0) {
                         el.addClass(`${CSS_PREFIX}-text-field--has-placeholder`);
                     } else {
                         el.removeClass(`${CSS_PREFIX}-text-field--has-placeholder`);
                     }
-                });
+                },
+            );
 
-                modelController.$$attr.$observe('maxlength', (maxlength) => {
+            scope.$watch(
+                () => {
+                    return input.attr('maxlength');
+                },
+                (maxlength) => {
                     ctrl.maxlength = maxlength;
-                });
-            }
+                },
+            );
         });
 
         attrs.$observe('disabled', (isDisabled) => {
