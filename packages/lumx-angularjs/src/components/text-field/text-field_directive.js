@@ -247,7 +247,7 @@ function TextFieldDirective($timeout) {
                     return input.attr('placeholder');
                 },
                 (placeholder) => {
-                    if (placeholder.length > 0) {
+                    if (angular.isDefined(placeholder) && placeholder.length > 0) {
                         el.addClass(`${CSS_PREFIX}-text-field--has-placeholder`);
                     } else {
                         el.removeClass(`${CSS_PREFIX}-text-field--has-placeholder`);
