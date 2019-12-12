@@ -7972,9 +7972,9 @@ eslint-plugin-jsx-a11y@^6.2.1:
     has "^1.0.3"
     jsx-ast-utils "^2.2.1"
 
-"eslint-plugin-lumapps@git+ssh://git@github.com/lumapps/eslint-plugin-lumapps.git#master":
+"eslint-plugin-lumapps@https://github.com/lumapps/eslint-plugin-lumapps":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/lumapps/eslint-plugin-lumapps.git#8e178b83367711804991289f4414cf83a454ec97"
+  resolved "https://github.com/lumapps/eslint-plugin-lumapps#8e178b83367711804991289f4414cf83a454ec97"
 
 eslint-plugin-no-useless-assign@^1.0.2:
   version "1.0.3"

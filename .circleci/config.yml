@@ -5,6 +5,17 @@ executors:
             - image: circleci/node:10
         working_directory: ~/repo
 
+    python:
+        docker:
+            - image: circleci/python:3.7-buster
+
+filters: &tag_only_anchor
+    tags:
+        # borrowed from https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string
+        only: /^v?(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/
+    branches:
+        ignore: /.*/
+
 commands:
     install_dep:
         description: 'Install the frontend dependencies using Yarn and cache them'
@@ -47,8 +58,27 @@ jobs:
             - install_dep
             - run_react_tests
 
+    release:
+        executor: python
+
+        steps:
+            - checkout
+            - run:
+                  name: Authenticate with google cloud registry
+                  command: |
+                      echo ${registry_prod_creds} |base64 -d | docker login -u _json_key --password-stdin https://gcr.io
+            - run: setup_remote_docker
+            - run: make docker_build
+            - run: make docker_push
+
 workflows:
     version: 2.1
     tests:
         jobs:
             - frontend-test
+
+    release:
+        jobs:
+            - release:
+                  name: docker_build_push
+                  filters: *tag_only_anchor
