@@ -21,7 +21,7 @@ npm install @lumx/<angularjs|react>
 ## Documentation
 
 LumX's documentation is included in the "demo" directory. The demo/documentation site is built with [Webpack][webpack] and may be run locally.
-You can also find an online version of the demo and documentation site at https://design-system.lumapps.com.
+You can also find an online version of the demo and documentation site at https://design.lumapps.com.
 
 ## How to get help, contribute, or provide feedback
 
