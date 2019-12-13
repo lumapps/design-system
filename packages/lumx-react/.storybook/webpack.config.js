@@ -5,7 +5,7 @@ module.exports = async ({ config, mode }) => {
     config.module.rules.push({
         test: /\.scss$/,
         loaders: [
-            { loader: 'style-loader', options: { attrs: { id: 'injected-styles' } } },
+            { loader: 'style-loader', options: { attributes: { id: 'injected-styles' } } },
             'css-loader',
             'sass-loader',
         ],
