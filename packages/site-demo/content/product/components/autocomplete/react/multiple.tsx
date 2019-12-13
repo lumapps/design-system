@@ -206,8 +206,10 @@ const App = ({ theme }) => {
             value={navigationSuggestionValue || filterValue}
             onChange={onChange}
             onFocus={onFocus}
+            shouldFocusOnClose
             values={selectedValues}
             inputRef={inputRef}
+            fitToAnchorWidth
             onBlur={onBlur}
             selectedChipRender={(city, index) => (
                 <Chip

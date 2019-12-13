@@ -95,8 +95,8 @@ const useComputePosition: useComputePositionType = (
         const boundingPopover = popoverRef.current.getBoundingClientRect();
         const { horizontal = 0, vertical = 0 } = offset;
         let newPosition: ElementPosition = {
-            anchorHeight: boundingAnchor.height,
-            anchorWidth: boundingAnchor.width,
+            anchorHeight: hasParentHeight ? boundingAnchor.height : 0,
+            anchorWidth: hasParentWidth ? boundingAnchor.width : 0,
             height: boundingPopover.height,
             width: boundingPopover.width,
             x: horizontal,

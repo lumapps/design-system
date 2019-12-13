@@ -1,6 +1,6 @@
 import { RefObject, SetStateAction, useEffect, useState } from 'react';
 
-import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, UP_KEY_CODE } from '@lumx/react/constants';
+import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY_CODE } from '@lumx/react/constants';
 
 import get from 'lodash/get';
 
@@ -26,6 +26,7 @@ type useKeyboardListNavigationType = (
     onBackspacePressed: () => {},
     keepFocusAfterSelection: boolean,
     initialIndex: number,
+    preventTabOnEnteredValue: boolean,
 ) => IUseKeyboardListNavigationType;
 
 /////////////////////////////
@@ -46,6 +47,7 @@ const INITIAL_INDEX = -1;
  * @param onBackspacePressed callback to be executed when the BACKSPACE key is pressed
  * @param keepFocusAfterSelection determines whether after selecting an item, the focus should be maintained on the current target or not
  * @param initialIndex where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0`
+ * @param preventTabOnEnteredValue determines whether upon TAB, if there is a value entered, the event is prevented or not
  */
 const useKeyboardListNavigation: useKeyboardListNavigationType = (
     items: object[],
@@ -56,6 +58,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     onBackspacePressed?: (evt: KeyboardEvent) => {},
     keepFocusAfterSelection: boolean = false,
     initialIndex: number = INITIAL_INDEX,
+    preventTabOnEnteredValue: boolean = true,
 ): IUseKeyboardListNavigationType => {
     const [activeItemIndex, setActiveItemIndex] = useState(initialIndex);
 
@@ -149,6 +152,18 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     };
 
     /**
+     * Handles when the TAB key is pressed
+     * @param evt - key pressed event
+     */
+    const onTabKeyPressed = (evt: KeyboardEvent): void => {
+        const value = get(evt, 'target.value');
+
+        if (preventTabOnEnteredValue && value && value.length > 0) {
+            preventDefaultAndStopPropagation(evt);
+        }
+    };
+
+    /**
      * In order to make it easier in the future to add new events depending on the key
      * a map was created to add these handlers. In the future, if there is another event
      * that we need to manage depending on a specific key, we just need to add the key code
@@ -156,6 +171,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      */
     const eventsForKeyPressed = {
         [DOWN_KEY_CODE]: onArrowPressed,
+        [TAB_KEY_CODE]: onTabKeyPressed,
         [UP_KEY_CODE]: onArrowPressed,
         [ENTER_KEY_CODE]: onEnterKeyPressed,
         [BACKSPACE_KEY_CODE]: onBackspaceKeyPressed,
