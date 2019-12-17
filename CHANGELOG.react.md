@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ Removed `variant` prop from `expansionPanel` component
+
+### Added
+
+-   Added `hasBackground` prop to `expansionPanel` component
+
 ## [0.18.9][] - 2019-12-13
 
 -   When we are using the AutocompleteMultiple, you can now just display the suggestions with the same size as the input.
