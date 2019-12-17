@@ -118,7 +118,7 @@
                 lx-custom-colors="lx.customColors"
                 lx-focus-on-init="!lx.hasFilter"
                 lx-is-clickable="true"
-                ng-if="!lx.isLoading"
+                ng-if="lx.choices.length > 0 && !lx.isLoading"
             >
                 <!-- Default choices -->
                 <lx-list-item
