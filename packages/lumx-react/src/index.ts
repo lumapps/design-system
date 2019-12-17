@@ -136,4 +136,4 @@ export { WebBookmark, WebBookmarkProps } from './components/web-bookmark/WebBook
 
 export { FlexBox, FlexBoxProps } from './components/flex-box/FlexBox';
 
-export { Fieldset, IFieldsetProps, FIELDSET_DEFAULT_PROPS } from './components/fieldset/Fieldset';
+export { Fieldset, FieldsetProps } from './components/fieldset/Fieldset';
