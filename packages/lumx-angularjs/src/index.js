@@ -2,6 +2,7 @@ import './lumx';
 import './utils';
 
 import './components/avatar/avatar_directive';
+import './components/badge/badge_directive';
 import './components/button/button_directive';
 import './components/button/button-group_directive';
 import './components/checkbox/checkbox_directive';

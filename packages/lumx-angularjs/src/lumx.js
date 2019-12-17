@@ -19,6 +19,7 @@ angular.module('lumx.utils', [
 ]);
 
 angular.module('lumx.avatar', []);
+angular.module('lumx.badge', []);
 angular.module('lumx.button', []);
 angular.module('lumx.checkbox', []);
 angular.module('lumx.chip', []);
@@ -57,6 +58,7 @@ angular.module('lumx.user-block', []);
 
 angular.module('lumx', [
     'lumx.avatar',
+    'lumx.badge',
     'lumx.button',
     'lumx.checkbox',
     'lumx.chip',

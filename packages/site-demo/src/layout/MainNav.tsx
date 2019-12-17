@@ -47,6 +47,7 @@ const ITEMS: Item[] = [
                 children: [
                     'Autocomplete',
                     'Avatar',
+                    'Badge',
                     'Button',
                     'Checkbox',
                     'Chip',
