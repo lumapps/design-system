@@ -1,0 +1,15 @@
+.#{$lumx-base-prefix}-fieldset {
+    border: none;
+
+    &--theme-light {
+        legend {
+            color: lumx-theme-color-variant('dark', 'N');
+        }
+    }
+
+    &--theme-dark {
+        legend {
+            color: lumx-theme-color-variant('light', 'N');
+        }
+    }
+}
