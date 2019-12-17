@@ -21,11 +21,6 @@ import {
 
 /////////////////////////////
 
-enum ExpansionPanelVariant {
-    boxed = 'boxed',
-    trimmed = 'trimmed',
-}
-
 /**
  * Defines the props of the component.
  */
@@ -33,11 +28,11 @@ interface IExpansionPanelProps extends IGenericProps {
     /** The color theme. */
     theme?: Theme;
 
-    /** The panel variant. */
-    variant?: ExpansionPanelVariant;
-
     /** The label text used when no `<header>` was provided in the children. */
     label?: string;
+
+    /** Whether the hexpansion panel has a background. */
+    hasBackground?: boolean;
 
     /** Whether the header has a divider. */
     hasHeaderDivider?: boolean;
@@ -73,7 +68,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
     theme: Theme.light,
-    variant: ExpansionPanelVariant.boxed,
 };
 
 const isDragHandle = isComponent(DragHandle);
@@ -86,7 +80,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
     const {
         label,
         theme = DEFAULT_PROPS.theme,
-        variant = DEFAULT_PROPS.variant,
+        hasBackground,
         hasHeaderDivider,
         isOpen,
         className,
@@ -126,12 +120,8 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
 
     const rootClassName = classNames(
         className,
-        // Background color.
-        variant === ExpansionPanelVariant.boxed && `lumx-theme-background-${color}-L6`,
-        // Text color.
-        theme === Theme.dark ? 'lumx-theme-color-light-N' : 'lumx-theme-color-dark-N',
-        // Others.
         handleBasicClasses({
+            hasBackground,
             hasHeader: Boolean(!isEmpty(headerProps.children)),
             hasHeaderDivider,
             isClose: !isOpen,
@@ -139,7 +129,6 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
             isOpen,
             prefix: CLASSNAME,
             theme,
-            variant,
         }),
     );
 
@@ -183,4 +172,4 @@ ExpansionPanel.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps, ExpansionPanelVariant };
+export { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps };

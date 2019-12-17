@@ -7,16 +7,14 @@
 
     border-radius: $lumx-expansion-panel-radius;
 
-    &--theme-light {
-        background-color: lumx-theme-color-variant('dark', 'L6');
-    }
+    &--has-background {
+        &#{$self}--theme-light {
+            background-color: lumx-theme-color-variant('dark', 'L6');
+        }
 
-    &--theme-dark {
-        background-color: lumx-theme-color-variant('light', 'L6');
-    }
-
-    &--variant-trimmed {
-        background-color: transparent;
+        &#{$self}--theme-dark {
+            background-color: lumx-theme-color-variant('light', 'L6');
+        }
     }
 
     &__header {
@@ -40,7 +38,7 @@
     &__header-content {
         flex: 1 1 auto;
 
-        #{$self}--variant-boxed:not(#{$self}--is-draggable):not(#{$self}--has-header) & {
+        #{$self}--has-background:not(#{$self}--is-draggable):not(#{$self}--has-header) & {
             padding-left: $lumx-spacing-unit * 2;
         }
     }
@@ -58,7 +56,7 @@
     &__header-toggle {
         flex-shrink: 0;
 
-        #{$self}--variant-boxed & {
+        #{$self}--has-background & {
             margin: $lumx-spacing-unit;
         }
 

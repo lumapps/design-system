@@ -7,7 +7,6 @@ import {
     Divider,
     Emphasis,
     ExpansionPanel,
-    ExpansionPanelVariant,
     Grid,
     GridItem,
     IconButton,
@@ -27,7 +26,7 @@ const App = () => {
 
     return (
         <>
-            <ExpansionPanel hasHeaderDivider isOpen={isOpen1} toggleCallback={setOpen1}>
+            <ExpansionPanel hasBackground hasHeaderDivider isOpen={isOpen1} toggleCallback={setOpen1}>
                 <header>
                     <Grid className="lumx-spacing-margin-left-regular" hAlign={Alignment.center}>
                         <Thumbnail
@@ -48,6 +47,7 @@ const App = () => {
 
             <ExpansionPanel
                 className="lumx-spacing-margin-top-big"
+                hasBackground
                 hasHeaderDivider
                 isOpen={isOpen2}
                 toggleCallback={setOpen2}
@@ -75,7 +75,12 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel className="lumx-spacing-margin-top-big" isOpen={isOpen3} toggleCallback={setOpen3}>
+            <ExpansionPanel
+                className="lumx-spacing-margin-top-big"
+                hasBackground
+                isOpen={isOpen3}
+                toggleCallback={setOpen3}
+            >
                 <header>
                     <Grid className="lumx-spacing-margin-left-big" hAlign={Alignment.center}>
                         <GridItem>
@@ -91,18 +96,13 @@ const App = () => {
                     </Grid>
                 </header>
 
-                <div class="lumx-spacing-padding-big lumx-spacing-padding-top-none">
+                <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
                     <p className="lumx-typography-subtitle1">Curabitur est gravida et libero vitae dictum.</p>
                     <p className="lumx-typography-body1">Etiam habebis sem dicantur magna mollis euismod.</p>
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel
-                className="lumx-spacing-margin-top-big"
-                variant={ExpansionPanelVariant.trimmed}
-                isOpen={isOpen4}
-                toggleCallback={setOpen4}
-            >
+            <ExpansionPanel className="lumx-spacing-margin-top-big" isOpen={isOpen4} toggleCallback={setOpen4}>
                 <header>
                     <Grid hAlign={Alignment.center}>
                         <Thumbnail
@@ -123,7 +123,7 @@ const App = () => {
 
             <Divider className="lumx-spacing-margin-vertical-big" />
 
-            <ExpansionPanel variant={ExpansionPanelVariant.trimmed} isOpen={isOpen5} toggleCallback={setOpen5}>
+            <ExpansionPanel isOpen={isOpen5} toggleCallback={setOpen5}>
                 <header>
                     <Grid hAlign={Alignment.center}>
                         <Thumbnail
@@ -144,7 +144,7 @@ const App = () => {
 
             <Divider className="lumx-spacing-margin-vertical-big" />
 
-            <ExpansionPanel variant={ExpansionPanelVariant.trimmed} isOpen={isOpen6} toggleCallback={setOpen6}>
+            <ExpansionPanel isOpen={isOpen6} toggleCallback={setOpen6}>
                 <header>
                     <Grid hAlign={Alignment.center}>
                         <Thumbnail

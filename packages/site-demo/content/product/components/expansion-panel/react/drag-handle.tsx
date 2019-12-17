@@ -9,8 +9,8 @@ const App = ({ theme }) => {
 
     return (
         <>
-            <ExpansionPanel label="Lorem ipsum" theme={theme} isOpen={isOpen} toggleCallback={setOpen}>
-                <DragHandle />
+            <ExpansionPanel hasBackground label="Lorem ipsum" theme={theme} isOpen={isOpen} toggleCallback={setOpen}>
+                <DragHandle theme={theme} />
 
                 <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
                     <p
