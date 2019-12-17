@@ -63,7 +63,9 @@ function DividerDirective() {
         controllerAs: 'lx',
         replace: true,
         restrict: 'E',
-        theme: '@?lxTheme',
+        scope: {
+            theme: '@?lxTheme',
+        },
         template,
     };
 }
