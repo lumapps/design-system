@@ -4,7 +4,9 @@ import { mdiImagePlus } from '@lumx/icons';
 import { Uploader, UploaderVariant } from '@lumx/react';
 
 const App = ({ theme }) => (
-    <Uploader icon={mdiImagePlus} label="Add profile picture" theme={theme} variant={UploaderVariant.circle} />
+    <div className="demo-grid">
+        <Uploader icon={mdiImagePlus} label="Add photo" theme={theme} variant={UploaderVariant.circle} />
+    </div>
 );
 
 export default App;

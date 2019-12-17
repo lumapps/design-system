@@ -1,4 +1,4 @@
-import { mdiImagePlus } from '@lumx/icons';
+import { mdiFileDocumentBoxPlus, mdiImagePlus } from '@lumx/icons';
 
 /////////////////////////////
 
@@ -21,6 +21,7 @@ function DemoController() {
      * @readonly
      */
     vm.icons = {
+        mdiFileDocumentBoxPlus,
         mdiImagePlus,
     };
 }
