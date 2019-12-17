@@ -96,11 +96,7 @@ export { Toolbar } from './components/toolbar/Toolbar';
 
 export { DragHandle, DragHandleProps } from './components/drag-handle/DragHandle';
 
-export {
-    ExpansionPanel,
-    ExpansionPanelProps,
-    ExpansionPanelVariant,
-} from './components/expansion-panel/ExpansionPanel';
+export { ExpansionPanel, ExpansionPanelProps } from './components/expansion-panel/ExpansionPanel';
 
 export { Grid } from './components/grid/Grid';
 

@@ -2,7 +2,7 @@
 
 exports[`<ExpansionPanel> Snapshots and structure should render correctly 1`] = `
 <section
-  className="lumx-theme-background-dark-L6 lumx-theme-color-dark-N lumx-expansion-panel lumx-expansion-panel--is-close lumx-expansion-panel--theme-light lumx-expansion-panel--variant-boxed"
+  className="lumx-expansion-panel lumx-expansion-panel--is-close lumx-expansion-panel--theme-light"
 >
   <header
     className="lumx-expansion-panel__header"
