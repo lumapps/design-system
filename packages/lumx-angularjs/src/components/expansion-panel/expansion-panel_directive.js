@@ -27,7 +27,6 @@ function ExpansionPanelController($element, $scope, $timeout) {
      */
     const _DEFAULT_PROPS = {
         theme: 'light',
-        variant: 'boxed',
     };
 
     /**
@@ -164,11 +163,13 @@ function ExpansionPanelController($element, $scope, $timeout) {
 
         const state = lx.isWrapperOpen ? 'open' : 'close';
         const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
-        const variant = lx.variant ? lx.variant : _DEFAULT_PROPS.variant;
 
         classes.push(`${CSS_PREFIX}-expansion-panel--is-${state}`);
         classes.push(`${CSS_PREFIX}-expansion-panel--theme-${theme}`);
-        classes.push(`${CSS_PREFIX}-expansion-panel--variant-${variant}`);
+
+        if (lx.hasBackground) {
+            classes.push(`${CSS_PREFIX}-expansion-panel--has-background`);
+        }
 
         if (lx.hasHeader) {
             classes.push(`${CSS_PREFIX}-expansion-panel--has-header`);
@@ -267,13 +268,13 @@ function ExpansionPanelDirective() {
         restrict: 'E',
         scope: {
             closeCallback: '&?lxCloseCallback',
+            hasBackground: '=?lxHasBackground',
             hasHeaderDivider: '=?lxHasHeaderDivider',
             isOpen: '=?lxIsOpen',
             label: '@?lxLabel',
             openCallback: '&?lxOpenCallback',
             theme: '@?lxTheme',
             toggleCallback: '&?lxToggleCallback',
-            variant: '@?lxVariant',
         },
         template,
         transclude: {
