@@ -36,6 +36,7 @@ angular.module('lumx.image-block', []);
 angular.module('lumx.lightbox', []);
 angular.module('lumx.link', []);
 angular.module('lumx.list', []);
+angular.module('lumx.message', []);
 angular.module('lumx.notification', []);
 angular.module('lumx.popover', []);
 angular.module('lumx.post-block', []);
@@ -75,6 +76,7 @@ angular.module('lumx', [
     'lumx.lightbox',
     'lumx.link',
     'lumx.list',
+    'lumx.message',
     'lumx.notification',
     'lumx.popover',
     'lumx.post-block',

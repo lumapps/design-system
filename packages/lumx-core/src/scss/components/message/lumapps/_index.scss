@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Message
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-message {
+    display: flex;
+    align-items: flex-start;
+
+    &--has-background {
+        padding: $lumx-spacing-unit * 2;
+        border-radius: $lumx-theme-border-radius;
+    }
+
+    &__icon {
+        flex-shrink: 0;
+        margin-right: $lumx-spacing-unit * 2;
+    }
+
+    &__text {
+        @include lumx-typography('body1');
+
+        flex: 1;
+    }
+}
+
+/* Message kind
+   ========================================================================== */
+
+@each $color in $lumx-notification-color-palette {
+    .#{$lumx-base-prefix}-message--color-#{$color} {
+        &.#{$lumx-base-prefix}-message--has-background {
+            background-color: lumx-theme-color-variant($color, 'L6');
+        }
+
+        .#{$lumx-base-prefix}-message__icon,
+        .#{$lumx-base-prefix}-message__text {
+            color: lumx-theme-color-variant($color, 'D2');
+        }
+    }
+}

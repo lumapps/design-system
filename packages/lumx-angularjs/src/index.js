@@ -30,6 +30,7 @@ import './components/list/list_directive';
 import './components/list/list-divider_directive';
 import './components/list/list-item_directive';
 import './components/list/list-subheader_directive';
+import './components/message/message_directive';
 import './components/notification/notification_service';
 import './components/popover/popover_service';
 import './components/popover/popover_directive';

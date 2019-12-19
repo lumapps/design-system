@@ -60,6 +60,7 @@ const ITEMS: Item[] = [
                     'Image block',
                     'Lightbox',
                     'List',
+                    'Message',
                     'Notification',
                     'Popover',
                     'Post block',
