@@ -34,9 +34,9 @@ function BadgeController() {
     /////////////////////////////
 
     /**
-     * Get divider classes.
+     * Get badge classes.
      *
-     * @return {Array} The list of divider classes.
+     * @return {Array} The list of badge classes.
      */
     function getClasses() {
         const classes = [];
