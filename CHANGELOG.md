@@ -46,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   _[BREAKING]_ Removed `variant` prop from `expansionPanel` component
 -   _[BREAKING]_ Removed `isClickable` prop from `ListItem` component (use it on the `List` instead)
+-   Refactored `DatePicker` component to use Popover instead of Dropdown
 
 ### Added
 
@@ -54,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `theme` prop to `icon` component
 -   Added `itemPadding` prop to `list` component
 -   Added `badge` component
+-   Added keyboard interaction to `DatePicker` component
 
 ## [0.18.9][] - 2019-12-13
 
