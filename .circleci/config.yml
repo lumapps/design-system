@@ -4,6 +4,8 @@ executors:
         docker:
             - image: circleci/node:10
         working_directory: ~/repo
+        environment:
+            TZ: "Europe/Paris"
 
     python:
         docker:

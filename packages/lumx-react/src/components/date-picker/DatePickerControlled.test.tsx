@@ -9,7 +9,13 @@ import { ICommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
 import { DatePickerControlled, DatePickerControlledProps } from './DatePickerControlled';
 
-Date.now = jest.fn(() => new Date(Date.UTC(2017, 1, 14)).valueOf());
+Date.now = jest.fn(() =>
+    new Date(
+        new Date(1487721600).toLocaleString('en-US', {
+            timeZone: 'America/Toronto',
+        }),
+    ).valueOf(),
+);
 
 /////////////////////////////
 
