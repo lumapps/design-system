@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import noop from 'lodash/noop';
 
-import { Dropdown, Placement, TextField, Theme } from '@lumx/react';
+import { Placement, Popover, TextField, Theme } from '@lumx/react';
+import { useClickAway } from '@lumx/react/hooks/useClickAway';
+import { onEscapePressed } from '@lumx/react/utils';
 
 import { COMPONENT_NAME as COMPONENT_PREFIX, DatePicker, DatePickerProps } from './DatePicker';
 
@@ -41,8 +43,11 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
  * @return The component.
  */
 const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps) => {
-    const anchorSimpleRef = React.useRef(null);
-    const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
+    const wrapperRef = useRef(null);
+    const popoverRef = useRef(null);
+    const anchorRef = useRef(null);
+
+    const [isSimpleOpen, setSimpleIsOpen] = useState(false);
 
     const toggleSimpleMenu = () => {
         setSimpleIsOpen(!isSimpleOpen);
@@ -52,10 +57,46 @@ const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps
         setSimpleIsOpen(false);
     };
 
+    const { computedPosition, isVisible } = Popover.useComputePosition(
+        Placement.BOTTOM_START!,
+        anchorRef,
+        popoverRef,
+        isSimpleOpen,
+        undefined,
+        false,
+        false,
+    );
+
+    const onEscapeHandler = isSimpleOpen && onEscapePressed(closeSimpleMenu);
+
+    useEffect(() => {
+        if (!onEscapeHandler || !wrapperRef.current) {
+            return undefined;
+        }
+        if (isSimpleOpen && wrapperRef.current) {
+            window.addEventListener('keydown', onEscapeHandler);
+        }
+        return (): void => {
+            window.removeEventListener('keydown', onEscapeHandler);
+        };
+    }, [isSimpleOpen, closeSimpleMenu]);
+
+    useClickAway(
+        wrapperRef,
+        () => {
+            if (!isSimpleOpen) {
+                return;
+            }
+
+            closeSimpleMenu();
+        },
+        [anchorRef],
+    );
+
     return (
         <>
             <TextField
-                textFieldRef={anchorSimpleRef}
+                textFieldRef={anchorRef}
                 label={label}
                 value={value ? value.format('LL') : ''}
                 onClick={toggleSimpleMenu}
@@ -63,18 +104,24 @@ const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps
                 theme={theme}
                 readOnly={true}
             />
-
-            <Dropdown
-                showDropdown={isSimpleOpen}
-                closeOnClick={true}
-                closeOnEscape={true}
-                onClose={closeSimpleMenu}
-                placement={Placement.BOTTOM_START}
-                anchorRef={anchorSimpleRef}
-                fitToAnchorWidth={false}
-            >
-                <DatePicker value={value} {...props} />
-            </Dropdown>
+            {isSimpleOpen ? (
+                <Popover
+                    popoverRect={computedPosition}
+                    popoverRef={popoverRef}
+                    isVisible={isVisible}
+                    placement={Placement.BOTTOM_START}
+                >
+                    <div
+                        ref={wrapperRef}
+                        style={{
+                            maxHeight: computedPosition.maxHeight,
+                            minWidth: 0,
+                        }}
+                    >
+                        <DatePicker value={value} {...props} />
+                    </div>
+                </Popover>
+            ) : null}
         </>
     );
 };
