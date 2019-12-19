@@ -1,4 +1,4 @@
-import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from '@lumx/icons';
+import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 
 /**
  * The notification delay before hiding.
@@ -19,11 +19,11 @@ const NOTIFICATION_CONFIGURATION = {
     },
     success: {
         color: 'green',
-        icon: mdiCheck,
+        icon: mdiCheckCircle,
     },
     warning: {
         color: 'yellow',
-        icon: mdiAlertCircleOutline,
+        icon: mdiAlertCircle,
     },
 };
 

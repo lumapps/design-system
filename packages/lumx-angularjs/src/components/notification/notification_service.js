@@ -1,4 +1,4 @@
-import { mdiAlert, mdiAlertCircleOutline, mdiCheck, mdiInformation } from '@lumx/icons';
+import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 
 import { CSS_PREFIX } from '@lumx/core/js/constants';
 
@@ -49,11 +49,11 @@ function NotificationService($compile, $rootScope, $timeout, LxDepthService, LxD
         },
         successNotification: {
             color: 'green',
-            icon: mdiCheck,
+            icon: mdiCheckCircle,
         },
         warningNotification: {
             color: 'yellow',
-            icon: mdiAlertCircleOutline,
+            icon: mdiAlertCircle,
         },
     };
 
