@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback } from 'react';
+import React, { ReactElement } from 'react';
 
 import moment from 'moment';
 
@@ -94,7 +94,6 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
 
                 <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
                     {getAnnotatedMonthCalendar(locale, minDate, maxDate, today, monthOffset).map((annotatedDate) => {
-                        const onClick = useCallback(() => onChange(annotatedDate.date), [annotatedDate]);
                         if (annotatedDate.isDisplayed) {
                             return (
                                 <div key={annotatedDate.date.unix()} className={`${CLASSNAME}__day-wrapper`}>
@@ -105,7 +104,8 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                                                 annotatedDate.isClickable && annotatedDate.isToday,
                                         })}
                                         disabled={!annotatedDate.isClickable}
-                                        onClick={onClick}
+                                        // tslint:disable-next-line: jsx-no-lambda
+                                        onClick={() => onChange(annotatedDate.date)}
                                     >
                                         <span>{annotatedDate.date.format('DD')}</span>
                                     </button>
