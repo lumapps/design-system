@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DatePickerField> Snapshots and structure should render correctly 1`] = `
+<Fragment>
+  <TextField
+    label="DatePickerField"
+    onChange={[Function]}
+    onClick={[Function]}
+    readOnly={true}
+    textFieldRef={
+      Object {
+        "current": null,
+      }
+    }
+    value="February 14, 2017"
+  />
+</Fragment>
+`;

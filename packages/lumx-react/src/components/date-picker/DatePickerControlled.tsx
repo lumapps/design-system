@@ -123,4 +123,4 @@ DatePickerControlled.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { COMPONENT_NAME, DatePickerControlled, DatePickerControlledProps };
+export { CLASSNAME, COMPONENT_NAME, DatePickerControlled, DatePickerControlledProps };

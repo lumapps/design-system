@@ -6,7 +6,7 @@ import { Placement, Popover, TextField, Theme } from '@lumx/react';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { onEscapePressed } from '@lumx/react/utils';
 
-import { COMPONENT_NAME as COMPONENT_PREFIX, DatePicker, DatePickerProps } from './DatePicker';
+import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker, DatePickerProps } from './DatePicker';
 
 /////////////////////////////
 
@@ -129,4 +129,4 @@ DatePickerField.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { COMPONENT_NAME, DatePickerField, DatePickerFieldProps };
+export { CLASSNAME, COMPONENT_NAME, DatePickerField, DatePickerFieldProps };

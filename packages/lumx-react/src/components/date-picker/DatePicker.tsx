@@ -83,6 +83,7 @@ const DatePicker = (props: DatePickerProps) => {
         />
     );
 };
+DatePicker.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
