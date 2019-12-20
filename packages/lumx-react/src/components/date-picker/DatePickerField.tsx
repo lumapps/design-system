@@ -6,7 +6,10 @@ import { Placement, Popover, TextField, Theme } from '@lumx/react';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { onEscapePressed } from '@lumx/react/utils';
 
+import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker, DatePickerProps } from './DatePicker';
+
+import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
 
 /////////////////////////////
 
@@ -47,44 +50,51 @@ const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps
     const popoverRef = useRef(null);
     const anchorRef = useRef(null);
 
-    const [isSimpleOpen, setSimpleIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const toggleSimpleMenu = () => {
-        setSimpleIsOpen(!isSimpleOpen);
+        setIsOpen(!isOpen);
     };
 
     const closeSimpleMenu = () => {
-        setSimpleIsOpen(false);
+        setIsOpen(false);
     };
 
     const { computedPosition, isVisible } = Popover.useComputePosition(
         Placement.BOTTOM_START!,
         anchorRef,
         popoverRef,
-        isSimpleOpen,
+        isOpen,
         undefined,
         false,
         false,
     );
 
-    const onEscapeHandler = isSimpleOpen && onEscapePressed(closeSimpleMenu);
+    const onEscapeHandler = isOpen && onEscapePressed(closeSimpleMenu);
+
+    useFocusOnClose(anchorRef.current, isOpen);
+    const handleKeyboardNav = (evt: React.KeyboardEvent<HTMLElement>): void => {
+        if ((evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE) && toggleSimpleMenu) {
+            toggleSimpleMenu();
+        }
+    };
 
     useEffect(() => {
         if (!onEscapeHandler || !wrapperRef.current) {
             return undefined;
         }
-        if (isSimpleOpen && wrapperRef.current) {
+        if (isOpen && wrapperRef.current) {
             window.addEventListener('keydown', onEscapeHandler);
         }
         return (): void => {
             window.removeEventListener('keydown', onEscapeHandler);
         };
-    }, [isSimpleOpen, closeSimpleMenu]);
+    }, [isOpen, closeSimpleMenu]);
 
     useClickAway(
         wrapperRef,
         () => {
-            if (!isSimpleOpen) {
+            if (!isOpen) {
                 return;
             }
 
@@ -101,10 +111,11 @@ const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps
                 value={value ? value.format('LL') : ''}
                 onClick={toggleSimpleMenu}
                 onChange={noop}
+                onKeyPress={handleKeyboardNav}
                 theme={theme}
                 readOnly={true}
             />
-            {isSimpleOpen ? (
+            {isOpen ? (
                 <Popover
                     popoverRect={computedPosition}
                     popoverRef={popoverRef}
