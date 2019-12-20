@@ -3,7 +3,16 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-icon {
-    display: block;
+    &--no-shape {
+        display: block;
+    }
+
+    &--has-shape {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
 
     &--path {
         &::before {
@@ -30,8 +39,14 @@
    ========================================================================== */
 
 @each $size-key, $size in $lumx-sizes {
-    .#{$lumx-base-prefix}-icon--size-#{$size-key} {
-        @include lumx-icon-size($size-key);
+    .#{$lumx-base-prefix}-icon--no-shape.#{$lumx-base-prefix}-icon--size-#{$size-key} {
+        @include lumx-icon-size($size-key, false);
+    }
+}
+
+@each $size-key, $size in $lumx-icon-has-shape-size-map {
+    .#{$lumx-base-prefix}-icon--has-shape.#{$lumx-base-prefix}-icon--size-#{$size-key} {
+        @include lumx-icon-size($size-key, true);
     }
 }
 
@@ -40,12 +55,18 @@
 
 @each $color-key, $color in $lumx-theme-color-palette {
     .#{$lumx-base-prefix}-icon--color-#{$color-key} {
-        @include lumx-icon-color($color-key, 'N');
+        &.#{$lumx-base-prefix}-icon--no-shape {
+            @include lumx-icon-color($color-key, false);
+        }
+
+        &.#{$lumx-base-prefix}-icon--has-shape {
+            @include lumx-icon-color($color-key, true);
+        }
     }
 
     @each $color-variant in $lumx-theme-color-variants {
         .#{$lumx-base-prefix}-icon--color-#{$color-key}.#{$lumx-base-prefix}-icon--color-variant-#{$color-variant} {
-            @include lumx-icon-color($color-key, $color-variant);
+            color: lumx-theme-color-variant($color-key, $color-variant);
         }
     }
 }

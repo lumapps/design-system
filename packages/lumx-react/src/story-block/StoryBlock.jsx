@@ -83,7 +83,9 @@ const StoryBlock = (props) => {
     return [
         <div
             key="story"
-            className={classnames(CLASSNAME, { 'lumx-theme-background-dark-N': colorTheme === Theme.dark })}
+            className={classnames(CLASSNAME, {
+                'lumx-theme-background-dark-N lumx-theme-color-light-N': colorTheme === Theme.dark,
+            })}
             style={styles.block}
         >
             <div className={`${CLASSNAME}__theme-selector`} style={styles.selector}>

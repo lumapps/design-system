@@ -1,10 +1,21 @@
-@mixin lumx-icon-size($size) {
+@mixin lumx-icon-size($size, $has-shape: false) {
     width: map-get($lumx-sizes, $size);
     height: map-get($lumx-sizes, $size);
-    font-size: map-get($lumx-sizes, $size);
-    line-height: map-get($lumx-sizes, $size);
+
+    @if $has-shape == true {
+        font-size: map-get($lumx-sizes, map-get($lumx-icon-has-shape-size-map, $size));
+        line-height: map-get($lumx-sizes, map-get($lumx-icon-has-shape-size-map, $size));
+    } @else if $has-shape == false {
+        font-size: map-get($lumx-sizes, $size);
+        line-height: map-get($lumx-sizes, $size);
+    }
 }
 
-@mixin lumx-icon-color($color, $color-variant) {
-    color: lumx-theme-color-variant($color, $color-variant);
+@mixin lumx-icon-color($color, $has-shape: false) {
+    @if $has-shape == true {
+        background-color: lumx-theme-color-variant($color, 'L5');
+        color: lumx-theme-color-variant($color, 'L2');
+    } @else if $has-shape == false {
+        color: lumx-theme-color-variant($color, 'N');
+    }
 }

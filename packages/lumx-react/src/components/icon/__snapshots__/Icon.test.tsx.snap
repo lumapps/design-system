@@ -4,7 +4,7 @@ exports[`<Icon> Conditions should fail when no \`icon\` is given 1`] = `"<Icon> 
 
 exports[`<Icon> Snapshots and structure should render color & color variant 1`] = `
 <i
-  className="lumx-icon lumx-icon--color-primary lumx-icon--color-variant-D1"
+  className="lumx-icon lumx-icon--color-primary lumx-icon--color-variant-D1 lumx-icon--no-shape"
 >
   <svg
     aria-hidden="true"
@@ -28,7 +28,7 @@ exports[`<Icon> Snapshots and structure should render color & color variant 1`] 
 
 exports[`<Icon> Snapshots and structure should render correctly 1`] = `
 <i
-  className="lumx-icon"
+  className="lumx-icon lumx-icon--no-shape"
 >
   <svg
     aria-hidden="true"
