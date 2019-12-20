@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Color, ColorVariant, Size } from '@lumx/react';
+import { Color, ColorPalette, ColorVariant, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     IGenericProps,
@@ -37,6 +37,11 @@ interface IIconProps extends IGenericProps {
      * The icon color.
      */
     color?: Color;
+
+    /**
+     * Whether the icon has shape.
+     */
+    hasShape?: boolean;
 
     /**
      * The icon color variant.
@@ -77,7 +82,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    color: ColorPalette.dark,
     iconRef: undefined,
+    size: Size.m,
 };
 
 /////////////////////////////
@@ -123,6 +130,7 @@ const Icon: React.FC<IconProps> = ({
     className,
     color,
     colorVariant,
+    hasShape,
     icon,
     iconRef = DEFAULT_PROPS.iconRef,
     size,
@@ -133,7 +141,17 @@ const Icon: React.FC<IconProps> = ({
     return (
         <i
             ref={iconRef}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant, size }))}
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    color: color ? color : hasShape ? DEFAULT_PROPS.color : undefined,
+                    colorVariant,
+                    hasShape,
+                    prefix: CLASSNAME,
+                    size: size ? size : hasShape ? DEFAULT_PROPS.size : undefined,
+                }),
+                !hasShape && `${CLASSNAME}--no-shape`,
+            )}
             {...props}
         >
             <svg
