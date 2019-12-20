@@ -12,6 +12,24 @@ function IconController() {
 
     /////////////////////////////
     //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        color: 'dark',
+        size: 'm',
+    };
+
+    /////////////////////////////
+    //                         //
     //     Public functions    //
     //                         //
     /////////////////////////////
@@ -24,8 +42,16 @@ function IconController() {
     function getClasses() {
         const classes = [];
 
+        if (lx.hasShape) {
+            classes.push(`${CSS_PREFIX}-icon--has-shape`);
+        } else {
+            classes.push(`${CSS_PREFIX}-icon--no-shape`);
+        }
+
         if (lx.color) {
             classes.push(`${CSS_PREFIX}-icon--color-${lx.color}`);
+        } else if (lx.hasShape) {
+            classes.push(`${CSS_PREFIX}-icon--color-${_DEFAULT_PROPS.color}`);
         }
 
         if (lx.colorVariant) {
@@ -34,6 +60,8 @@ function IconController() {
 
         if (lx.size) {
             classes.push(`${CSS_PREFIX}-icon--size-${lx.size}`);
+        } else if (lx.hasShape) {
+            classes.push(`${CSS_PREFIX}-icon--size-${_DEFAULT_PROPS.size}`);
         }
 
         return classes;
@@ -70,6 +98,7 @@ function IconDirective() {
         scope: {
             color: '@?lxColor',
             colorVariant: '@?lxColorVariant',
+            hasShape: '=?lxHasShape',
             size: '@?lxSize',
         },
         template,
