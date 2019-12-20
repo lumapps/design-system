@@ -142,6 +142,23 @@ const Icon: React.FC<IconProps> = ({
         iconColor = DEFAULT_PROPS.color;
     }
 
+    let iconSize;
+    if (size) {
+        if (hasShape) {
+            if (size === Size.xxs || size === Size.xs) {
+                iconSize = Size.s;
+            } else if (size === Size.xxl) {
+                iconSize = Size.xl;
+            } else {
+                iconSize = size;
+            }
+        } else {
+            iconSize = size;
+        }
+    } else if (hasShape) {
+        iconSize = DEFAULT_PROPS.size;
+    }
+
     return (
         <i
             ref={iconRef}
@@ -152,7 +169,7 @@ const Icon: React.FC<IconProps> = ({
                     colorVariant,
                     hasShape,
                     prefix: CLASSNAME,
-                    size: size ? size : hasShape ? DEFAULT_PROPS.size : undefined,
+                    size: iconSize,
                 }),
                 !hasShape && `${CLASSNAME}--no-shape`,
             )}
@@ -175,4 +192,4 @@ Icon.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps };
+export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, IconSizes };
