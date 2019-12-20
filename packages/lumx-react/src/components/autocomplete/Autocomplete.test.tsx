@@ -148,7 +148,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
-                    </ListisClickable>
+                    </List>
                 ),
                 isOpen: false,
                 onChange,
