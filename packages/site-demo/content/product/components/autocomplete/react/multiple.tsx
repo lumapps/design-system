@@ -226,11 +226,10 @@ const App = ({ theme }) => {
                 </Chip>
             )}
         >
-            <List theme={theme}>
+            <List theme={theme} isClickable>
                 {filteredCities.map((city, index) => (
                     <ListItem
                         size={Size.tiny}
-                        isClickable
                         theme={theme}
                         key={city.id}
                         isHighlighted={index === activeItemIndex}

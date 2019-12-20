@@ -103,11 +103,10 @@ const App = ({ theme }) => {
             inputRef={inputRef}
         >
             {hasSuggestions && (
-                <List>
+                <List isClickable>
                     {filteredCities.map((city, index) => (
                         <ListItem
                             size={Size.tiny}
-                            isClickable
                             key={city.id}
                             isHighlighted={index === activeItemIndex}
                             onItemSelected={() => setSelectedCity(city)}

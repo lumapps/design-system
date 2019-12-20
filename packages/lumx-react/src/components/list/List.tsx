@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -22,7 +22,7 @@ import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/
  */
 interface IListProps extends IGenericProps {
     /** List content (should use `<ListItem>`, `<ListSubheader>` or `<ListDivider>`) */
-    children: ReactElement | ReactElement[];
+    children: ReactNode;
 
     /** Whether the list items are clickable */
     isClickable?: boolean;
@@ -37,7 +37,7 @@ interface IListProps extends IGenericProps {
     theme?: Theme;
 
     /** Callback used to retrieved the select entry */
-    onListItemSelected?(entry: ReactElement): void;
+    onListItemSelected?(entry: ReactNode): void;
 }
 type ListProps = IListProps;
 
@@ -173,9 +173,7 @@ const List: React.FC<ListProps> & IList = ({
      * @return Index of the element to activate.
      */
     const selectItemOnKeyDown = (previous: boolean): number => {
-        const lookupTable: ReactElement[] = children
-            .slice(activeItemIndex + 1)
-            .concat(children.slice(0, activeItemIndex + 1));
+        const lookupTable = children.slice(activeItemIndex + 1).concat(children.slice(0, activeItemIndex + 1));
 
         if (previous) {
             lookupTable.reverse();
@@ -221,12 +219,12 @@ const List: React.FC<ListProps> & IList = ({
             ref={listElementRef}
             {...props}
         >
-            {children.map((elm: ReactElement, idx: number) => {
+            {children.map((elm: ReactNode, idx: number) => {
                 if (isClickable && isComponent(ListItem)(elm)) {
                     const elemProps: Partial<ListItemProps> = {};
-                    elemProps.onMouseDown = (evt: React.MouseEvent): void => mouseDownHandler(evt, idx, elm.props);
+                    elemProps.onMouseDown = (evt: React.MouseEvent) => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
-                    elemProps.isClickable = isClickable;
+                    elemProps.tabIndex = 0;
 
                     return cloneElement(elm, { ...elemProps });
                 }

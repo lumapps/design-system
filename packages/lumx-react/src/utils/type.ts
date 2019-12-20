@@ -1,7 +1,7 @@
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
-import React, { ReactNode } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 /**
  * The properties of a component to use to determine it's name.
@@ -115,7 +115,7 @@ type Predicate<T> = (t: T) => boolean;
  * @param  component React function component or the component name
  * @return predicate returning true if value is instance of the component
  */
-const isComponent = <C>(component: React.FC<C> | string): Predicate<ReactNode> => (instance: ReactNode): boolean => {
+const isComponent = <C>(component: React.FC<C> | string) => (instance: ReactNode): instance is ReactElement => {
     const componentName = typeof component === 'string' ? component : component.displayName;
 
     return (

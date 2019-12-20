@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   _[BREAKING]_ Removed `variant` prop from `expansionPanel` component
+-   _[BREAKING]_ Removed `isClickable` prop from `ListItem` component (use it on the `List` instead)
 
 ### Added
 

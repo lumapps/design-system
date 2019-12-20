@@ -63,9 +63,9 @@ describe(`<${AutocompleteMultiple.displayName}>`, (): void => {
         it('should render correctly', (): void => {
             const { wrapper } = setup({
                 children: (
-                    <List>
+                    <List isClickable>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
