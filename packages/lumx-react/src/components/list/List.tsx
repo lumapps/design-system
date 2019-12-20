@@ -11,7 +11,7 @@ import {
     UP_KEY_CODE,
 } from '@lumx/react/constants';
 
-import { ListItem, ListItemProps, Theme } from '@lumx/react';
+import { ListItem, ListItemProps, ListItemSizes, Size, Theme } from '@lumx/react';
 import { IGenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks';
@@ -26,6 +26,9 @@ interface IListProps extends IGenericProps {
 
     /** Whether the list items are clickable */
     isClickable?: boolean;
+
+    /** Item padding size. */
+    itemPadding?: ListItemSizes;
 
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
@@ -66,6 +69,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isClickable: false,
+    itemPadding: Size.big,
     theme: Theme.light,
 };
 /////////////////////////////
@@ -82,6 +86,7 @@ interface IList {
 const List: React.FC<ListProps> & IList = ({
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
+    itemPadding = DEFAULT_PROPS.itemPadding,
     onListItemSelected,
     useCustomColors,
     theme = DEFAULT_PROPS.theme,
@@ -206,6 +211,7 @@ const List: React.FC<ListProps> & IList = ({
         <ul
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, clickable: isClickable }), {
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
+                [`${CSS_PREFIX}-list--item-padding-${itemPadding}`]: isClickable,
             })}
             tabIndex={isClickable ? 0 : -1}
             onKeyDown={onKeyInteraction}

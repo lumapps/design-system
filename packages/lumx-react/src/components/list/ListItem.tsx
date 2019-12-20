@@ -149,7 +149,6 @@ const ListItem: React.FC<ListItemProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({
-                    clickable: isClickable,
                     highlighted: isHighlighted,
                     prefix: CLASSNAME,
                     selected: isSelected,
@@ -173,4 +172,4 @@ ListItem.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize };
+export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize, ListItemSizes };

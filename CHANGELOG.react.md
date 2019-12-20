@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `hasBackground` prop to `expansionPanel` component
 -   Added `hasShape` prop to `icon` component
 -   Added `theme` prop to `icon` component
+-   Added `itemPadding` prop to `list` component
 
 ## [0.18.9][] - 2019-12-13
 

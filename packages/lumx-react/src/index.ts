@@ -42,7 +42,7 @@ export { List, ListProps } from './components/list/List';
 
 export { ListDivider, ListDividerProps } from './components/list/ListDivider';
 
-export { ListItem, ListItemProps, ListItemSize } from './components/list/ListItem';
+export { ListItem, ListItemProps, ListItemSize, ListItemSizes } from './components/list/ListItem';
 
 export { ListSubheader, ListSubheaderProps } from './components/list/ListSubheader';
 
