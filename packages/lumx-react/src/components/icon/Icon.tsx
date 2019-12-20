@@ -78,7 +78,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     color: ColorPalette.dark,
     iconRef: undefined,
     size: Size.m,
-    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -128,7 +127,7 @@ const Icon: React.FC<IconProps> = ({
     icon,
     iconRef = DEFAULT_PROPS.iconRef,
     size,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     ...props
 }: IconProps): ReactElement => {
     _validate({ color, icon, size, ...props });
