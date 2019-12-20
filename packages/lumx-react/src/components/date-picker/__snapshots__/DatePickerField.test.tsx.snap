@@ -6,6 +6,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly 1`] =
     label="DatePickerField"
     onChange={[Function]}
     onClick={[Function]}
+    onKeyPress={[Function]}
     readOnly={true}
     textFieldRef={
       Object {
