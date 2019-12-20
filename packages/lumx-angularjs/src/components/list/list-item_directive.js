@@ -96,10 +96,6 @@ function ListItemController($element, $scope) {
 
         classes.push(`${CSS_PREFIX}-list-item--size-${size}`);
 
-        if (lx.parentController.isClickable) {
-            classes.push(`${CSS_PREFIX}-list-item--is-clickable`);
-        }
-
         if (lx.isSelected) {
             classes.push(`${CSS_PREFIX}-list-item--is-selected`);
         }
