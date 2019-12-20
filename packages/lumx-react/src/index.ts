@@ -8,6 +8,8 @@ export { Autocomplete, AutocompleteProps } from './components/autocomplete/Autoc
 
 export { AutocompleteMultiple, AutocompleteMultipleProps } from './components/autocomplete/AutocompleteMultiple';
 
+export { Badge, IBaseBadgeProps } from './components/badge/Badge';
+
 export { Button, ButtonEmphasis, ButtonProps } from './components/button/Button';
 
 export { ButtonGroup, ButtonGroupProps } from './components/button/ButtonGroup';
