@@ -50,7 +50,7 @@ function IconController() {
 
         if (lx.color) {
             classes.push(`${CSS_PREFIX}-icon--color-${lx.color}`);
-        } else if (angular.isDefined(lx.theme) && lx.theme) {
+        } else if (lx.theme) {
             classes.push(`${CSS_PREFIX}-icon--color-${lx.theme === 'light' ? 'dark' : 'light'}`);
         } else if (lx.hasShape) {
             classes.push(`${CSS_PREFIX}-icon--color-${_DEFAULT_PROPS.color}`);
