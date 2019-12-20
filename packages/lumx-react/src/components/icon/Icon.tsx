@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isEmpty from 'lodash/isEmpty';
 
-import { Color, ColorPalette, ColorVariant, Size } from '@lumx/react';
+import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     IGenericProps,
@@ -28,30 +28,23 @@ interface IIconProps extends IGenericProps {
      */
     icon: string;
 
-    /**
-     * Reference on the `<i>` icon HTML element.
-     */
+    /** Reference on the `<i>` icon HTML element. */
     iconRef?: React.RefObject<HTMLElement>;
 
-    /**
-     * The icon color.
-     */
+    /** The icon color. */
     color?: Color;
 
-    /**
-     * Whether the icon has shape.
-     */
+    /** Whether the icon has shape. */
     hasShape?: boolean;
 
-    /**
-     * The icon color variant.
-     */
+    /** The icon color variant. */
     colorVariant?: ColorVariant;
 
-    /**
-     * The icon size.
-     */
+    /** The icon size. */
     size?: IconSizes;
+
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
 }
 type IconProps = IIconProps;
 
@@ -85,6 +78,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     color: ColorPalette.dark,
     iconRef: undefined,
     size: Size.m,
+    theme: Theme.light,
 };
 
 /////////////////////////////
@@ -134,9 +128,19 @@ const Icon: React.FC<IconProps> = ({
     icon,
     iconRef = DEFAULT_PROPS.iconRef,
     size,
+    theme = DEFAULT_PROPS.theme,
     ...props
 }: IconProps): ReactElement => {
     _validate({ color, icon, size, ...props });
+
+    let iconColor;
+    if (color) {
+        iconColor = color;
+    } else if (theme) {
+        iconColor = theme === Theme.light ? ColorPalette.dark : ColorPalette.light;
+    } else if (hasShape) {
+        iconColor = DEFAULT_PROPS.color;
+    }
 
     return (
         <i
@@ -144,7 +148,7 @@ const Icon: React.FC<IconProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({
-                    color: color ? color : hasShape ? DEFAULT_PROPS.color : undefined,
+                    color: iconColor,
                     colorVariant,
                     hasShape,
                     prefix: CLASSNAME,
