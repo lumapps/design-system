@@ -12,6 +12,23 @@ function ListController($element, $scope) {
 
     /////////////////////////////
     //                         //
+    //    Private attributes   //
+    //                         //
+    /////////////////////////////
+
+    /**
+     * The default props.
+     *
+     * @type {Object}
+     * @constant
+     * @readonly
+     */
+    const _DEFAULT_PROPS = {
+        itemPadding: 'big',
+    };
+
+    /////////////////////////////
+    //                         //
     //    Public attributes    //
     //                         //
     /////////////////////////////
@@ -120,6 +137,9 @@ function ListController($element, $scope) {
 
         if (lx.isClickable) {
             classes.push(`${CSS_PREFIX}-list--is-clickable`);
+
+            const itemPadding = lx.itemPadding ? lx.itemPadding : _DEFAULT_PROPS.itemPadding;
+            classes.push(`${CSS_PREFIX}-list--item-padding-${itemPadding}`);
         }
 
         if (lx.customColors) {
@@ -166,6 +186,7 @@ function ListDirective() {
         scope: {
             customColors: '=?lxCustomColors',
             isClickable: '=?lxIsClickable',
+            itemPadding: '@?lxItemPadding',
         },
         template,
         transclude: true,

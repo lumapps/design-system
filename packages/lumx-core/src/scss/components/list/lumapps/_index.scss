@@ -6,6 +6,35 @@
     @include lumx-list;
 }
 
+/* Item
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item {
+    &--is-selected {
+        @include lumx-list-item-selected;
+    }
+
+    &--is-highlighted {
+        @include lumx-list-item-highlighted;
+    }
+
+    .#{$lumx-base-prefix}-list--is-clickable & {
+        @include lumx-list-item-clickable;
+    }
+
+    .#{$lumx-base-prefix}-list--item-padding-big & {
+        @include lumx-list-item-padding('big');
+    }
+
+    .#{$lumx-base-prefix}-list--item-padding-huge & {
+        @include lumx-list-item-padding('huge');
+    }
+
+    &__content {
+        @include lumx-list-item-content;
+    }
+}
+
 /* Item sizes
    ========================================================================== */
 
@@ -23,30 +52,6 @@
     }
 }
 
-/* Item content
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-list-item__content {
-    @include lumx-list-item-content;
-}
-
-/* Item states
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-list-item {
-    &--is-clickable {
-        @include lumx-list-item-clickable;
-    }
-
-    &--is-selected {
-        @include lumx-list-item-selected;
-    }
-
-    &--is-highlighted {
-        @include lumx-list-item-highlighted;
-    }
-}
-
 /* Subheader
    ========================================================================== */
 
@@ -57,8 +62,12 @@
         @include lumx-list-subheader-icon;
     }
 
-    .#{$lumx-base-prefix}-list--is-clickable & {
-        padding: 0 $lumx-list-item-padding;
+    .#{$lumx-base-prefix}-list--item-padding-big & {
+        @include lumx-list-item-padding('big');
+    }
+
+    .#{$lumx-base-prefix}-list--item-padding-huge & {
+        @include lumx-list-item-padding('huge');
     }
 }
 

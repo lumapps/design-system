@@ -41,9 +41,6 @@ interface IListItemProps extends IGenericProps {
     /** Whether the list item should be highlighted. */
     isHighlighted?: boolean;
 
-    /** Whether the list item can be clicked. */
-    isClickable?: boolean;
-
     /** Whether the list item is selected or not. */
     isSelected?: boolean;
 
@@ -86,7 +83,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isActive: false,
-    isClickable: false,
     isHighlighted: false,
     isSelected: false,
     size: Size.regular,
@@ -105,7 +101,6 @@ const ListItem: React.FC<ListItemProps> = ({
     className = '',
     isHighlighted,
     isSelected = DEFAULT_PROPS.isSelected,
-    isClickable = DEFAULT_PROPS.isSelected,
     isActive = DEFAULT_PROPS.isActive,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
@@ -137,7 +132,7 @@ const ListItem: React.FC<ListItemProps> = ({
      * @return Returns either undefined or a callback
      */
     const onKeyDown = (): Callback | undefined => {
-        if (isClickable && onItemSelected) {
+        if (onItemSelected) {
             return onEnterPressed(onItemSelected);
         }
         return undefined;
@@ -149,7 +144,6 @@ const ListItem: React.FC<ListItemProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({
-                    clickable: isClickable,
                     highlighted: isHighlighted,
                     prefix: CLASSNAME,
                     selected: isSelected,
@@ -157,7 +151,6 @@ const ListItem: React.FC<ListItemProps> = ({
                     theme,
                 }),
             )}
-            tabIndex={isClickable ? 0 : -1}
             onFocusCapture={preventParentFocus}
             onClick={onItemSelected}
             onKeyDown={onKeyDown()}
@@ -173,4 +166,4 @@ ListItem.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize };
+export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize, ListItemSizes };

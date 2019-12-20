@@ -19,9 +19,10 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
   onChange={[MockFunction]}
   value=""
 >
-  <List>
+  <List
+    isClickable={true}
+  >
     <ListItem
-      isClickable={true}
       key="losangeles"
       size="tiny"
     >
@@ -30,7 +31,6 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
       </div>
     </ListItem>
     <ListItem
-      isClickable={true}
       key="sanfrancisco"
       size="tiny"
     >
@@ -39,7 +39,6 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
       </div>
     </ListItem>
     <ListItem
-      isClickable={true}
       key="paris"
       size="tiny"
     >
@@ -48,7 +47,6 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
       </div>
     </ListItem>
     <ListItem
-      isClickable={true}
       key="montpellier"
       size="tiny"
     >
@@ -57,7 +55,6 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
       </div>
     </ListItem>
     <ListItem
-      isClickable={true}
       key="bordeaux"
       size="tiny"
     >
@@ -66,7 +63,6 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
       </div>
     </ListItem>
     <ListItem
-      isClickable={true}
       key="toulouse"
       size="tiny"
     >
@@ -75,7 +71,6 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
       </div>
     </ListItem>
     <ListItem
-      isClickable={true}
       key="lyon"
       size="tiny"
     >
@@ -84,7 +79,6 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
       </div>
     </ListItem>
     <ListItem
-      isClickable={true}
       key="montevideo"
       size="tiny"
     >

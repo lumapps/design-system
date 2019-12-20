@@ -41,7 +41,6 @@ const App = ({ theme }) => {
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
-                              isClickable
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}

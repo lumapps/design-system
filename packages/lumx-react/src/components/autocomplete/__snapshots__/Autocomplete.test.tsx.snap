@@ -27,9 +27,10 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
     }
     showDropdown={false}
   >
-    <List>
+    <List
+      isClickable={true}
+    >
       <ListItem
-        isClickable={true}
         key="losangeles"
         size="tiny"
       >
@@ -38,7 +39,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="sanfrancisco"
         size="tiny"
       >
@@ -47,7 +47,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="paris"
         size="tiny"
       >
@@ -56,7 +55,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="montpellier"
         size="tiny"
       >
@@ -65,7 +63,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="bordeaux"
         size="tiny"
       >
@@ -74,7 +71,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="toulouse"
         size="tiny"
       >
@@ -83,7 +79,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="lyon"
         size="tiny"
       >
@@ -92,7 +87,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="montevideo"
         size="tiny"
       >
@@ -132,9 +126,10 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
     }
     showDropdown={true}
   >
-    <List>
+    <List
+      isClickable={true}
+    >
       <ListItem
-        isClickable={true}
         key="losangeles"
         size="tiny"
       >
@@ -143,7 +138,6 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="sanfrancisco"
         size="tiny"
       >
@@ -152,7 +146,6 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="paris"
         size="tiny"
       >
@@ -161,7 +154,6 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="montpellier"
         size="tiny"
       >
@@ -170,7 +162,6 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="bordeaux"
         size="tiny"
       >
@@ -179,7 +170,6 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="toulouse"
         size="tiny"
       >
@@ -188,7 +178,6 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="lyon"
         size="tiny"
       >
@@ -197,7 +186,6 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         </div>
       </ListItem>
       <ListItem
-        isClickable={true}
         key="montevideo"
         size="tiny"
       >

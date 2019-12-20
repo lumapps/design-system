@@ -109,8 +109,6 @@ const App = ({ theme }) => {
                 {filteredChoices.length > 0
                     ? filteredChoices.map((choice, index) => (
                           <ListItem
-                              size={Size.tiny}
-                              isClickable
                               isSelected={values.includes(choice.label)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice.label)}

@@ -10,12 +10,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   _[BREAKING]_ Removed `variant` prop from `expansionPanel` component
+-   _[BREAKING]_ Removed `isClickable` prop from `ListItem` component (use it on the `List` instead)
 
 ### Added
 
 -   Added `hasBackground` prop to `expansionPanel` component
 -   Added `hasShape` prop to `icon` component
 -   Added `theme` prop to `icon` component
+-   Added `itemPadding` prop to `list` component
 
 ## [0.18.9][] - 2019-12-13
 

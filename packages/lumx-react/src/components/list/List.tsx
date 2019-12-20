@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -11,7 +11,7 @@ import {
     UP_KEY_CODE,
 } from '@lumx/react/constants';
 
-import { ListItem, ListItemProps, Theme } from '@lumx/react';
+import { ListItem, ListItemProps, ListItemSizes, Size, Theme } from '@lumx/react';
 import { IGenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks';
@@ -22,10 +22,13 @@ import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/
  */
 interface IListProps extends IGenericProps {
     /** List content (should use `<ListItem>`, `<ListSubheader>` or `<ListDivider>`) */
-    children: ReactElement | ReactElement[];
+    children: ReactNode;
 
     /** Whether the list items are clickable */
     isClickable?: boolean;
+
+    /** Item padding size. */
+    itemPadding?: ListItemSizes;
 
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
@@ -34,7 +37,7 @@ interface IListProps extends IGenericProps {
     theme?: Theme;
 
     /** Callback used to retrieved the select entry */
-    onListItemSelected?(entry: ReactElement): void;
+    onListItemSelected?(entry: ReactNode): void;
 }
 type ListProps = IListProps;
 
@@ -66,6 +69,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isClickable: false,
+    itemPadding: Size.big,
     theme: Theme.light,
 };
 /////////////////////////////
@@ -82,6 +86,7 @@ interface IList {
 const List: React.FC<ListProps> & IList = ({
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
+    itemPadding = DEFAULT_PROPS.itemPadding,
     onListItemSelected,
     useCustomColors,
     theme = DEFAULT_PROPS.theme,
@@ -168,9 +173,7 @@ const List: React.FC<ListProps> & IList = ({
      * @return Index of the element to activate.
      */
     const selectItemOnKeyDown = (previous: boolean): number => {
-        const lookupTable: ReactElement[] = children
-            .slice(activeItemIndex + 1)
-            .concat(children.slice(0, activeItemIndex + 1));
+        const lookupTable = children.slice(activeItemIndex + 1).concat(children.slice(0, activeItemIndex + 1));
 
         if (previous) {
             lookupTable.reverse();
@@ -206,6 +209,7 @@ const List: React.FC<ListProps> & IList = ({
         <ul
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, clickable: isClickable }), {
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
+                [`${CSS_PREFIX}-list--item-padding-${itemPadding}`]: isClickable,
             })}
             tabIndex={isClickable ? 0 : -1}
             onKeyDown={onKeyInteraction}
@@ -215,12 +219,12 @@ const List: React.FC<ListProps> & IList = ({
             ref={listElementRef}
             {...props}
         >
-            {children.map((elm: ReactElement, idx: number) => {
+            {children.map((elm: ReactNode, idx: number) => {
                 if (isClickable && isComponent(ListItem)(elm)) {
                     const elemProps: Partial<ListItemProps> = {};
-                    elemProps.onMouseDown = (evt: React.MouseEvent): void => mouseDownHandler(evt, idx, elm.props);
+                    elemProps.onMouseDown = (evt: React.MouseEvent) => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
-                    elemProps.isClickable = isClickable;
+                    elemProps.tabIndex = 0;
 
                     return cloneElement(elm, { ...elemProps });
                 }

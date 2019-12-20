@@ -78,9 +78,9 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
         it('should render correctly', (): void => {
             const { wrapper, textField, dropdown } = setup({
                 children: (
-                    <List>
+                    <List isClickable>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
@@ -114,9 +114,9 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
         it('should render correctly when the dropdown is closed', (): void => {
             const { wrapper } = setup({
                 children: (
-                    <List>
+                    <List isClickable>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
@@ -142,9 +142,9 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
             const onChange = jest.fn();
             const { textField } = setup({
                 children: (
-                    <List>
+                    <List isClickable>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
@@ -164,9 +164,9 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
             const onFocus = jest.fn();
             const { textField } = setup({
                 children: (
-                    <List>
+                    <List isClickable>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
@@ -186,9 +186,9 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
             const onBlur = jest.fn();
             const { textField } = setup({
                 children: (
-                    <List>
+                    <List isClickable>
                         {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} isClickable key={suggestion.id}>
+                            <ListItem size={Size.tiny} key={suggestion.id}>
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
