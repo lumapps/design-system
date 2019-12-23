@@ -101,11 +101,11 @@
 
     @include lumx-button-color($emphasis, $color, $theme);
 
-    i {
+    & > i {
         @include lumx-button-icon($variant, $size, $icon-position);
     }
 
-    span {
+    & > span {
         @include lumx-button-text($size);
     }
 }
