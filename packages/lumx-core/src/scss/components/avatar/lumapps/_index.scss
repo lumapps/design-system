@@ -17,6 +17,12 @@
         left: 0;
         transform: translateY(-50%);
     }
+
+    &__badge {
+        position: absolute;
+        right: -$lumx-spacing-unit / 2;
+        bottom: -$lumx-spacing-unit / 2;
+    }
 }
 
 /* Avatar sizes

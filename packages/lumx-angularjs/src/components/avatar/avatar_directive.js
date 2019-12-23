@@ -90,6 +90,10 @@ function AvatarDirective() {
         if (transclude.isSlotFilled('actions')) {
             ctrl.hasActions = true;
         }
+
+        if (transclude.isSlotFilled('badge')) {
+            ctrl.hasBadge = true;
+        }
     }
 
     return {
@@ -107,6 +111,7 @@ function AvatarDirective() {
         template,
         transclude: {
             actions: '?lxAvatarActions',
+            badge: '?lxAvatarBadge',
         },
     };
 }
