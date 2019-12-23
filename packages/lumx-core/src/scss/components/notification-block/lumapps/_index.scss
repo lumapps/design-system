@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Notification block
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-notification-block {
+    display: flex;
+    align-items: flex-start;
+
+    &__before {
+        flex-shrink: 0;
+        margin-right: $lumx-spacing-unit * 2;
+    }
+
+    &__content {
+        flex: 1 1 auto;
+    }
+
+    &__title {
+        @include lumx-typography('subtitle1');
+
+        display: block;
+        margin-bottom: $lumx-spacing-unit / 2;
+    }
+
+    &__description {
+        @include lumx-typography('body1');
+    }
+
+    &__date {
+        @include lumx-typography('body1');
+
+        display: block;
+        color: lumx-theme-color-variant('dark', 'L2');
+    }
+
+    &__after {
+        flex-shrink: 0;
+        margin-left: $lumx-spacing-unit * 2;
+    }
+}

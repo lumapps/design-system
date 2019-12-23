@@ -38,6 +38,7 @@ angular.module('lumx.link', []);
 angular.module('lumx.list', []);
 angular.module('lumx.message', []);
 angular.module('lumx.notification', []);
+angular.module('lumx.notification-block', []);
 angular.module('lumx.popover', []);
 angular.module('lumx.post-block', []);
 angular.module('lumx.progress', []);
@@ -78,6 +79,7 @@ angular.module('lumx', [
     'lumx.list',
     'lumx.message',
     'lumx.notification',
+    'lumx.notification-block',
     'lumx.popover',
     'lumx.post-block',
     'lumx.progress',
