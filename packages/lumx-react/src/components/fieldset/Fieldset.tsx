@@ -20,12 +20,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Fieldset`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const Fieldset: React.FC<FieldsetProps> = ({
-    className = '',
-    children,
-    legend,
-    ...props
-}: FieldsetProps): React.ReactElement => (
+const Fieldset: React.FC<FieldsetProps> = ({ className = '', children, legend, ...props }) => (
     <fieldset className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {legend && <legend className={`${CLASSNAME}__legend`}>{legend}</legend>}
         {children}

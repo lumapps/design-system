@@ -1,6 +1,9 @@
 import React from 'react';
 
 import { text } from '@storybook/addon-knobs';
+
+import { Fieldset, TextField } from '@lumx/react';
+
 import { decorators } from '@lumx/react/story-block';
 
 import { Fieldset, TextField } from '@lumx/react';
