@@ -100,10 +100,21 @@
     }
 
     @include lumx-button-color($emphasis, $color, $theme);
+
+    i {
+        @include lumx-button-icon($variant, $size, $icon-position);
+    }
+
+    span {
+        @include lumx-button-text($size);
+    }
 }
 
 @mixin lumx-button-icon($variant, $size, $position: null) {
+    width: map-get($lumx-button-icon-sizes, $size);
+    height: map-get($lumx-button-icon-sizes, $size);
     font-size: map-get($lumx-button-icon-sizes, $size);
+    line-height: map-get($lumx-button-icon-sizes, $size);
     pointer-events: none;
 
     @if $variant == 'button' {
