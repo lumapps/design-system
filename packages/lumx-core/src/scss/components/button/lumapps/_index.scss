@@ -5,6 +5,12 @@
 .#{$lumx-base-prefix}-button {
     @include lumx-state-transition;
     @include lumx-button-base;
+
+    .#{$lumx-base-prefix}-badge {
+        position: absolute;
+        top: -$lumx-spacing-unit / 2;
+        right: -$lumx-spacing-unit / 2;
+    }
 }
 
 /* Button sizes
@@ -54,12 +60,12 @@
             }
 
             &.#{$lumx-base-prefix}-button--variant-icon {
-                i {
+                & > i {
                     @include lumx-button-icon('icon', $key);
                 }
             }
 
-            span {
+            & > span {
                 @include lumx-button-text($key);
             }
         }
