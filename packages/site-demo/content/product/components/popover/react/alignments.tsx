@@ -17,7 +17,7 @@ const App = ({ theme }) => {
     };
 
     const demoPopoverHolderStyle = {
-        alignItems: 'end',
+        alignItems: 'flex-end',
         display: 'flex',
         height: 132,
         justifyContent: 'space-around',
