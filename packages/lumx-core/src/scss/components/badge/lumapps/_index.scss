@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
+    pointer-events: none;
 
     span {
         @include lumx-typography('overline');
