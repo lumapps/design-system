@@ -12,16 +12,16 @@ const App = ({ theme }) => {
     };
 
     const demoPopoverHolderStyle = {
-        alignItems: 'start',
+        alignItems: 'center',
         display: 'flex',
-        height: 132,
+        height: 224,
         justifyContent: 'center',
     };
 
     const anchorRef = React.useRef(null);
     const popoverRef = React.useRef(null);
 
-    const { computedPosition, isVisible } = Popover.useComputePosition(Placement.BOTTOM, anchorRef, popoverRef, true);
+    const { computedPosition, isVisible } = Popover.useComputePosition(Placement.AUTO, anchorRef, popoverRef, true);
 
     return (
         <>

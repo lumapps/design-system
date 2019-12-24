@@ -1,36 +1,44 @@
 # Popover
 
-## Default behavior
+**Popovers display pieces of UI on top of others. They are positioned using anchor elements.**
 
-Popover can be used to display elements above the rest of the UI.
+## Default
 
 <DemoBlock demo="default" />
 
+## Positions
+
+### Directed
+
+Popovers can be placed to 4 positions :
+_TOP_, _RIGHT_, _BOTTOM_, _LEFT_
+
+<DemoBlock demo="positions" />
+
+### Auto
+
+Popovers can also be placed automatically where space is available. They are placed at the bottom of anchors by default.
+
+<DemoBlock demo="auto" />
+
 ## Offset
 
-Popover can be offseted from its anchor point.
+Popovers positions can have an offset.
 
 <DemoBlock demo="offset" />
 
-## Control the popper visibility
+## Alignments
 
-<DemoBlock demo="visibility" />
+In addition to positions, popovers can be aligned to a chosen anchor's side :
+_TOP_START_, _TOP_END_, _RIGHT_START_, _RIGHT_END_, _BOTTOM_START_, _BOTTOM_END_, _LEFT_START_, _LEFT_END_, _AUTO_START_, _AUTO_END_,
 
-## Using anchor point
+<DemoBlock demo="alignments" />
 
-Popover can be placed using one of 15 anchor points.
+## Matching width
 
-<DemoBlock demo="anchor" />
+Popovers width can be forced to match anchors.
 
-## Popover matches the anchor width
-
-You can force the width of the popper to match the anchor width.
-
-<DemoBlock demo="anchor-width" />
-
-## Using advanced components
-
-<DemoBlock demo="advanced" />
+<DemoBlock demo="matching-width" />
 
 ### Properties
 
