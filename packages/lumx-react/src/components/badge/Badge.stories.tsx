@@ -1,26 +1,35 @@
 import { mdiHeart } from '@lumx/icons';
-import { AspectRatio, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { AspectRatio, Badge, ColorPalette, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import { decorators } from '@lumx/react/story-block';
-import { text } from '@storybook/addon-knobs';
+import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
-import { ColorPalette } from '..';
-import { Badge } from './Badge';
+
+const options = {
+    Blue: ColorPalette.blue,
+    Dark: ColorPalette.dark,
+    Green: ColorPalette.green,
+    Light: ColorPalette.light,
+    Primary: ColorPalette.primary,
+    Red: ColorPalette.red,
+    Secondary: ColorPalette.secondary,
+    Yellow: ColorPalette.yellow,
+};
 
 export default { title: 'Badge', decorators };
 
 export const badgeValue = () => (
-    <Badge color={ColorPalette.blue}>
+    <Badge color={select('Colors', options, ColorPalette.blue)}>
         <span>{text('Value', '30')}</span>
     </Badge>
 );
 
 export const badgeIcon = () => (
-    <Badge color={ColorPalette.red}>
+    <Badge color={select('Colors', options, ColorPalette.red)}>
         <Icon icon={mdiHeart} />
     </Badge>
 );
 export const badgeThumbnail = () => (
-    <Badge color={ColorPalette.dark}>
+    <Badge color={select('Colors', options, ColorPalette.light)}>
         <Thumbnail
             aspectRatio={AspectRatio.square}
             image="https://www.lumapps.com/wp-content/uploads/2018/09/brandmark-color-1-150x150.png"
