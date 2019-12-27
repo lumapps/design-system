@@ -1,9 +1,8 @@
-import { Color } from '@lumx/react';
+import { Color, ColorPalette } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactElement, ReactNode } from 'react';
-import { ColorPalette } from '..';
 
 /////////////////////////////
 
