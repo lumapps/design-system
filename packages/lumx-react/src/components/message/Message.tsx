@@ -1,19 +1,19 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import React, { ReactElement } from 'react';
-
 import { ColorPalette, Icon } from '@lumx/react';
-import classNames from 'classnames';
-
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import classNames from 'classnames';
+import React, { ReactElement } from 'react';
 
 /////////////////////////////
+
 enum KindMessage {
     error = 'error',
     info = 'info',
     success = 'success',
     warning = 'warning',
 }
+
 /**
  * Defines the props of the component.
  */
@@ -58,7 +58,7 @@ const DEFAULT_PROPS: Partial<MessageProps> = {
 /**
  * The color according to kind props.
  */
-const _KIND_COLOR = {
+const KIND_COLOR = {
     [KindMessage.error]: ColorPalette.red,
     [KindMessage.info]: ColorPalette.dark,
     [KindMessage.success]: ColorPalette.green,
@@ -68,22 +68,23 @@ const _KIND_COLOR = {
 /**
  * The icons according to kind props.
  */
-const _KIND_ICON = {
+const KIND_ICON = {
     [KindMessage.error]: mdiAlert,
     [KindMessage.info]: mdiInformation,
     [KindMessage.success]: mdiCheckCircle,
     [KindMessage.warning]: mdiAlertCircle,
 };
+
 /////////////////////////////
 
 /**
- * [Enter the description of the component here].
+ * Component used to display a message, with an icon and possibly a background
  *
  * @return The component.
  */
 const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
     const { children, className, kind, hasBackground, ...forwardedProps } = props;
-    const icon = kind ? _KIND_ICON[kind] : null;
+    const icon = kind ? KIND_ICON[kind] : null;
     /**
      * Get message classes.
      *
@@ -92,7 +93,7 @@ const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
     function getClasses(): string[] {
         const classes: string[] = [];
 
-        const color = kind ? _KIND_COLOR[kind] : DEFAULT_PROPS.color;
+        const color = kind ? KIND_COLOR[kind] : DEFAULT_PROPS.color;
         classes.push(`${CSS_PREFIX}-message--color-${color}`);
 
         if (hasBackground) {
