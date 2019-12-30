@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Fieldset /> Snapshot should render correctly Chip component 1`] = `
+<fieldset
+  className="lumx-fieldset"
+>
+  <legend
+    className="lumx-fieldset__legend"
+  >
+    I am a legend
+  </legend>
+  <input
+    name="input"
+    type="text"
+  />
+</fieldset>
+`;
