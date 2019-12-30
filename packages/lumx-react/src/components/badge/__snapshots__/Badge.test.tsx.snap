@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Badge> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-badge lumx-badge--color-light"
+>
+  <span>
+    30
+  </span>
+</div>
+`;
