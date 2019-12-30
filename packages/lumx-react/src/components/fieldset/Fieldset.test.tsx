@@ -2,10 +2,10 @@ import { ShallowWrapper, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React from 'react';
 
-import { ICommonSetup } from '@lumx/react/testing/utils';
-import { CLASSNAME, Fieldset, IFieldsetProps } from './Fieldset';
+import { CommonSetup } from '@lumx/react/testing/utils';
+import { CLASSNAME, Fieldset, FieldsetProps } from './Fieldset';
 
-interface ISetup extends ICommonSetup {
+interface ISetup extends CommonSetup {
     children: ShallowWrapper;
     fieldset: ShallowWrapper;
     legend: ShallowWrapper;
@@ -17,7 +17,7 @@ interface ISetup extends ICommonSetup {
  * @param propOverrides An object that will extend the default properties.
  * @return An object with some shortcuts to elements or data required in tests.
  */
-const setup = (propOverrides: Partial<IFieldsetProps> = {}): ISetup => {
+const setup = (propOverrides: Partial<FieldsetProps> = {}): ISetup => {
     const props = {
         children: <input type="text" name="input" />,
         legend: 'I am a legend',
