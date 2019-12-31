@@ -96,7 +96,7 @@ describe('<Fieldset />', () => {
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
-        it('should not render the legend if there is no given', () => {
+        it('should not render the legend if none was provided', () => {
             const { legend } = setup({ legend: '' });
             expect(legend).toHaveLength(0);
         });

@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
@@ -26,7 +26,7 @@ const Fieldset: React.FC<IFieldsetProps> = ({
     legend,
     ...props
 }: IFieldsetProps): React.ReactElement => (
-    <fieldset className={classNames(className, CLASSNAME)} {...props}>
+    <fieldset className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {legend && <legend className={`${CLASSNAME}__legend`}>{legend}</legend>}
         {children}
     </fieldset>
