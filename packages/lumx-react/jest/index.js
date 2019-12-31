@@ -11,7 +11,7 @@ const moduleNameMapper = fromPairs(
 );
 
 module.exports = {
-    collectCoverageFrom: ['**/*.{ts,tsx}', '!**/node_modules/**'],
+    collectCoverageFrom: ['**/*.{ts,tsx}', '!**/node_modules/**', '!**/*.stories.tsx'],
     coverageDirectory: '<rootDir>jest/reports/coverage',
     coverageReporters: ['json', 'lcov', 'html', 'text'],
     moduleDirectories: [`${CONFIGS.path.ROOT_PATH}/node_modules`],
