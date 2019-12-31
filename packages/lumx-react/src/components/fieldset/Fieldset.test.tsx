@@ -80,6 +80,15 @@ describe('<Fieldset />', () => {
 
             expect(children).toHaveLength(0);
         });
+
+        it('should use the given className prop', (): void => {
+            const { fieldset }: ISetup = setup({
+                className: 'my-fieldset',
+            });
+
+            expect(fieldset).toHaveClassName(CLASSNAME);
+            expect(fieldset).toHaveClassName('my-fieldset');
+        });
     });
 
     // 3. Test events.
