@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Fixed `Date picker` component
+
 ## [0.18.9][] - 2019-12-13
 
 -   When we are using the AutocompleteMultiple, you can now just display the suggestions with the same size as the input.
