@@ -31,7 +31,7 @@ const renderTypeTableRow = ({ type, defaultValue }: IProperty): ReactElement => 
         );
     }
 
-    return <code className="lumx-typography-body1">{formattedType}</code>;
+    return <span className="lumx-typography-body1">{formattedType}</span>;
 };
 
 const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): ReactElement => {
@@ -47,7 +47,7 @@ const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): R
     }
 
     return (
-        <div>
+        <div className="prop-table">
             {orderBy(propertyList, ['required', 'name'], ['desc', 'asc']).map((property: IProperty, idx: number) => {
                 return (
                     <Fragment key={property.id}>
