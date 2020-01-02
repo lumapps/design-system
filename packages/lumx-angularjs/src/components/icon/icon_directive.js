@@ -24,6 +24,14 @@ function IconController() {
     function getClasses() {
         const classes = [];
 
+        if (lx.path) {
+            classes.push(`${CSS_PREFIX}-icon--path`);
+        } else if (lx.font) {
+            classes.push(`${CSS_PREFIX}-icon--font`);
+            classes.push('mdi');
+            classes.push(`mdi-${lx.font}`);
+        }
+
         if (lx.color) {
             classes.push(`${CSS_PREFIX}-icon--color-${lx.color}`);
         }
@@ -51,12 +59,7 @@ function IconDirective() {
 
     function link(scope, el, attrs) {
         attrs.$observe('lxPath', (path) => {
-            el.addClass(`${CSS_PREFIX}-icon--path`);
             el.find('path').attr('d', path);
-        });
-
-        attrs.$observe('lxId', (font) => {
-            el.addClass(`${CSS_PREFIX}-icon--font mdi mdi-${font}`);
         });
     }
 
@@ -70,6 +73,8 @@ function IconDirective() {
         scope: {
             color: '@?lxColor',
             colorVariant: '@?lxColorVariant',
+            font: '@?lxId',
+            path: '@?lxPath',
             size: '@?lxSize',
         },
         template,
