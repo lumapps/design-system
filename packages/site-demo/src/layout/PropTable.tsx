@@ -1,5 +1,5 @@
 import { Engine, EngineContext } from '@lumx/demo/context/engine';
-import React, { Fragment, ReactElement, useContext } from 'react';
+import React, { Fragment, ReactElement, useContext, useState } from 'react';
 
 import orderBy from 'lodash/orderBy';
 
@@ -34,6 +34,35 @@ const renderTypeTableRow = ({ type, defaultValue }: IProperty): ReactElement => 
     return <span className="lumx-typography-body1">{formattedType}</span>;
 };
 
+const PropTableRow: React.FC<IPropTableRowProps> = ({ property }: IPropTableRowProps): ReactElement => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleOpen = () => {
+        setIsOpen(!isOpen);
+    };
+
+    return (
+        <ExpansionPanel label="Lorem ipsum" isOpen={isOpen} toggleCallback={toggleOpen}>
+            <header>
+                <Grid hAlign={Alignment.center}>
+                    <GridItem width="4">
+                        {property.required ? (
+                            <span className="lumx-typography-subtitle1">{`${property.name} *`}</span>
+                        ) : (
+                            <span className="lumx-typography-body1">{property.name}</span>
+                        )}
+                    </GridItem>
+
+                    <GridItem width="8">{renderTypeTableRow(property)}</GridItem>
+                </Grid>
+            </header>
+
+            <div className="lumx-spacing-padding-vertical">
+                <p className="lumx-typography-body1">{property.description}</p>
+            </div>
+        </ExpansionPanel>
+    );
+};
+
 const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): ReactElement => {
     const { engine } = useContext(EngineContext);
     if (engine === Engine.angularjs) {
@@ -51,25 +80,7 @@ const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): R
             {orderBy(propertyList, ['required', 'name'], ['desc', 'asc']).map((property: IProperty, idx: number) => {
                 return (
                     <Fragment key={property.id}>
-                        <ExpansionPanel label="Lorem ipsum" isOpen={false}>
-                            <header>
-                                <Grid hAlign={Alignment.center}>
-                                    <GridItem width="4">
-                                        {property.required ? (
-                                            <span className="lumx-typography-subtitle1">{`${property.name} *`}</span>
-                                        ) : (
-                                            <span className="lumx-typography-body1">{property.name}</span>
-                                        )}
-                                    </GridItem>
-
-                                    <GridItem width="8">{renderTypeTableRow(property)}</GridItem>
-                                </Grid>
-                            </header>
-
-                            <div className="lumx-spacing-padding-vertical">
-                                <p className="lumx-typography-body1">{property.description}</p>
-                            </div>
-                        </ExpansionPanel>
+                        <PropTableRow property={property} />
 
                         {idx < propertyList.length - 1 && <Divider className="lumx-spacing-margin-vertical-regular" />}
                     </Fragment>
@@ -86,6 +97,10 @@ interface IProperty {
     type: string;
     description: string;
     defaultValue: string;
+}
+
+interface IPropTableRowProps {
+    property: IProperty;
 }
 
 interface IPropTableProps {
