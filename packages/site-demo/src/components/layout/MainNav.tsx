@@ -85,7 +85,7 @@ const ITEMS: Item[] = [
                 label: 'Components',
             },
             {
-                children: ['Stepper dialog'],
+                children: ['Filter and sort', 'Stepper dialog'],
                 label: 'Patterns',
             },
             {

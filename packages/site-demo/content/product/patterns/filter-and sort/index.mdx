@@ -1,0 +1,59 @@
+# Filter and sort
+
+**Use filter and sort patterns when users needs a way to shrink down long list of elements. Thus, they can find one or a several elements to process them according the context.**
+
+## Anatomy
+
+Filter and sort patterns has three sections: A text filter, trigger filters, and a sorting selector. Each zone is optional.
+
+<DemoBlock demo="anatomy" />
+
+## Exposed choices
+
+By default and when there is space, expose directly the choices to users.
+
+<DemoBlock demo="choices" />
+
+## Exposed facets
+
+If space is constrained or there is too much choices to display, only expose facets.
+
+<DemoBlock demo="facets" />
+
+## Full collapsed
+
+If space is really constrained or trigger filters are only secondary in the user scenario they can be collapsed in one chip that open a popover. In the popover, only a handful of choice is exposed for each filter. The "Show more link" shows the unexposed choices of a filter.
+
+<DemoBlock demo="collapsed" />
+
+## Responsive behaviors
+
+### Exposed choices
+
+When choices are exposed and the space come to be not enough to show them all on the same line then choices are not exposed anymore, instead the facet is.
+
+<DemoBlock demo="responsive-choices" />
+
+### Exposed facets
+
+When facets are exposed and the space come to be not enough to show them all on the same line they collapses. The lasts facets on the line collapses with the one next to it. As space reduces (when users resize their browser windows for example) each facet that doesn't fit collapses.
+
+<DemoBlock demo="responsive-facets" />
+
+### Extreme low width version
+
+In case of extreme low width the filter and sort behave like this.
+
+<DemoBlock demo="responsive" />
+
+### Vertical variant
+
+Vertical variant can be used when the page layout make difficult the use of the original horizontal layout.
+
+<DemoBlock demo="vertical" />
+
+## Sorting
+
+Sorting is a simple [select](/product/components/select/) component. Each sorting option is a select option, even for handling ascending and descending orders. Use words like "most recent", "most relevant", "least recent" to help users rapidly find the sorting they want.
+
+<DemoBlock demo="sorting" />
