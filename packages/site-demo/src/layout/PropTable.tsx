@@ -1,9 +1,9 @@
 import { Engine, EngineContext } from '@lumx/demo/context/engine';
-import React, { ReactElement, useContext } from 'react';
+import React, { Fragment, ReactElement, useContext, useState } from 'react';
 
 import orderBy from 'lodash/orderBy';
 
-import { Table, TableBody, TableCell, TableCellVariant, TableHeader, TableRow } from '@lumx/react';
+import { Alignment, Divider, ExpansionPanel, Grid, GridItem } from '@lumx/react';
 
 // @ts-ignore
 import { propsByComponent } from 'props-loader!';
@@ -31,10 +31,35 @@ const renderTypeTableRow = ({ type, defaultValue }: IProperty): ReactElement => 
         );
     }
 
+    return <span className="lumx-typography-body1">{formattedType}</span>;
+};
+
+const PropTableRow: React.FC<IPropTableRowProps> = ({ property }: IPropTableRowProps): ReactElement => {
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleOpen = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
-        <TableCell>
-            <code>{formattedType}</code>
-        </TableCell>
+        <ExpansionPanel label="Lorem ipsum" isOpen={isOpen} toggleCallback={toggleOpen}>
+            <header>
+                <Grid hAlign={Alignment.center}>
+                    <GridItem width="4">
+                        {property.required ? (
+                            <span className="lumx-typography-subtitle1">{`${property.name} *`}</span>
+                        ) : (
+                            <span className="lumx-typography-body1">{property.name}</span>
+                        )}
+                    </GridItem>
+
+                    <GridItem width="8">{renderTypeTableRow(property)}</GridItem>
+                </Grid>
+            </header>
+
+            <div className="lumx-spacing-padding-vertical">
+                <p className="lumx-typography-body1">{property.description}</p>
+            </div>
+        </ExpansionPanel>
     );
 };
 
@@ -49,33 +74,19 @@ const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): R
     if (!propertyList) {
         return <span>Could not load properties of the react {component} component.</span>;
     }
+
     return (
-        <Table hasDividers>
-            <TableHeader>
-                <TableRow>
-                    <TableCell variant={TableCellVariant.head}>Name</TableCell>
-                    <TableCell variant={TableCellVariant.head}>Type</TableCell>
-                    <TableCell variant={TableCellVariant.head}>Description</TableCell>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {orderBy(propertyList, ['required', 'name'], ['desc', 'asc']).map((property: IProperty) => {
-                    return (
-                        <TableRow key={property.id}>
-                            {property.required ? (
-                                <TableCell>
-                                    <strong>{`${property.name} *`}</strong>
-                                </TableCell>
-                            ) : (
-                                <TableCell>{property.name}</TableCell>
-                            )}
-                            {renderTypeTableRow(property)}
-                            <TableCell>{property.description}</TableCell>
-                        </TableRow>
-                    );
-                })}
-            </TableBody>
-        </Table>
+        <div className="prop-table">
+            {orderBy(propertyList, ['required', 'name'], ['desc', 'asc']).map((property: IProperty, idx: number) => {
+                return (
+                    <Fragment key={property.id}>
+                        <PropTableRow property={property} />
+
+                        {idx < propertyList.length - 1 && <Divider className="lumx-spacing-margin-vertical-regular" />}
+                    </Fragment>
+                );
+            })}
+        </div>
     );
 };
 
@@ -86,6 +97,10 @@ interface IProperty {
     type: string;
     description: string;
     defaultValue: string;
+}
+
+interface IPropTableRowProps {
+    property: IProperty;
 }
 
 interface IPropTableProps {
