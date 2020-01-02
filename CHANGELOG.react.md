@@ -7,9 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.18.11][] - 2019-12-23
-
-## [0.18.10][] - 2019-12-23
+## [0.19.0][] - 2020-01-02
 
 ### Changed
 
@@ -22,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `hasShape` prop to `icon` component
 -   Added `theme` prop to `icon` component
 -   Added `itemPadding` prop to `list` component
+-   Added `badge` component
 
 ## [0.18.9][] - 2019-12-13
 
@@ -194,7 +193,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.18.8]: https://github.com/lumapps/design-system/tree/v0.18.8
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.18.9...HEAD
 [0.18.9]: https://github.com/lumapps/design-system/tree/v0.18.9
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.10...HEAD
-[0.18.10]: https://github.com/lumapps/design-system/tree/v0.18.10
-[unreleased]: https://github.com/lumapps/design-system/compare/v0.18.11...HEAD
-[0.18.11]: https://github.com/lumapps/design-system/tree/v0.18.11
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.19.0...HEAD
+[0.19.0]: https://github.com/lumapps/design-system/tree/v0.19.0
