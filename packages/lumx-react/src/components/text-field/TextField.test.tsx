@@ -7,6 +7,7 @@ import { build } from 'test-data-bot';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
+import { Kind } from '@lumx/react';
 import { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps, TextFieldType } from './TextField';
 
 /////////////////////////////
@@ -55,8 +56,8 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
 
     const textarea = wrapper.find('textarea');
     const input = wrapper.find('input');
-    const error = wrapper.find(`.${CLASSNAME}__error`);
-    const helper = wrapper.find(`.${CLASSNAME}__info`);
+    const error = wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error);
+    const helper = wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === undefined);
 
     return {
         error,
@@ -176,6 +177,19 @@ describe(`<${TextField.displayName}>`, () => {
             });
 
             expect(error).toHaveLength(0);
+        });
+
+        it('should have error and helper text', () => {
+            const { error, helper } = setup({
+                error: 'error',
+                hasError: true,
+                helper: 'helper',
+                label: 'test',
+                placeholder: 'test',
+            });
+
+            expect(error).toHaveLength(1);
+            expect(helper).toHaveLength(1);
         });
     });
 
