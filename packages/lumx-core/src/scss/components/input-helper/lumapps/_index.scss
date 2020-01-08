@@ -1,0 +1,27 @@
+/* ==========================================================================
+   Input helper
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-input-helper {
+    $self: &;
+
+    &--theme-light {
+        @include lumx-input-helper(lumx-base-const('theme', 'LIGHT'));
+
+        @each $color in $lumx-input-helper-color-palette {
+            &#{$self}--color-#{$color} {
+                color: lumx-theme-color-variant($color, 'D1');
+            }
+        }
+    }
+
+    &--theme-dark {
+        @include lumx-input-helper(lumx-base-const('theme', 'DARK'));
+
+        @each $color in $lumx-input-helper-color-palette {
+            &#{$self}--color-#{$color} {
+                color: lumx-theme-color-variant($color, 'L1');
+            }
+        }
+    }
+}
