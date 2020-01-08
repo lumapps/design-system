@@ -397,10 +397,8 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     )}
                 </div>
             </div>
-            {hasError && error && (
-                <InputHelper className={`${CLASSNAME}__error`} kind={Kind.error} text={error} theme={theme} />
-            )}
-            {helper && <InputHelper className={`${CLASSNAME}__info`} text={helper} theme={theme} />}
+            {hasError && error && <InputHelper kind={Kind.error} text={error} theme={theme} />}
+            {helper && <InputHelper text={helper} theme={theme} />}
         </div>
     );
 };
