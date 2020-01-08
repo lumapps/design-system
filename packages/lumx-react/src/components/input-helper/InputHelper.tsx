@@ -12,10 +12,12 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
  * Defines the props of the component.
  */
 interface IInputHelperProps extends IGenericProps {
-    text?: ReactNode;
-    kind: string;
+    text: ReactNode;
+    kind?: Kind;
     theme?: Theme;
 }
+
+interface IDefaultPropsType extends Partial<IInputHelperProps> {}
 
 /**
  * The display name of the component.
@@ -30,16 +32,15 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IInputHelperProps = {
+const DEFAULT_PROPS: IDefaultPropsType = {
     kind: Kind.info,
-    text: '',
     theme: Theme.light,
 };
 
 const InputHelper: React.FC<IInputHelperProps> = ({
-    className,
-    kind = DEFAULT_PROPS.kind,
-    text = DEFAULT_PROPS.text,
+    className = '',
+    kind = DEFAULT_PROPS.kind as Kind,
+    text,
     theme = DEFAULT_PROPS.theme,
     ...props
 }: IInputHelperProps): ReactElement => {
