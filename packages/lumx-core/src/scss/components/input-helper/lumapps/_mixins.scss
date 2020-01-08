@@ -1,7 +1,8 @@
 @mixin lumx-input-helper($theme) {
     @include lumx-typography($lumx-input-helper-typography);
 
-    display: block;
+    display: flex;
+    align-items: center;
     margin-top: $lumx-spacing-unit / 2;
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {

@@ -24,4 +24,8 @@
             }
         }
     }
+
+    & .#{$lumx-base-prefix}-icon {
+        margin-right: $lumx-spacing-unit / 2;
+    }
 }

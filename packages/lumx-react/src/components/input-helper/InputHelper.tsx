@@ -1,4 +1,4 @@
-import { Icon, Kind, Theme } from '@lumx/react';
+import { Icon, Kind, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
@@ -47,7 +47,8 @@ const InputHelper: React.FC<IInputHelperProps> = ({
 
     return (
         <span className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))} {...props}>
-            {icon && <Icon icon={icon} />} {text}
+            {icon && <Icon icon={icon} size={Size.xxs} />}
+            {text}
         </span>
     );
 };
