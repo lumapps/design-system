@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import uuid from 'uuid/v4';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
-import { Emphasis, Icon, IconButton, Size, Theme } from '@lumx/react';
+import { Emphasis, Icon, IconButton, InputHelper, Kind, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -18,8 +18,14 @@ interface ITextFieldProps extends IGenericProps {
     /** A Chip Group to be rendered before the main text input */
     chips?: HTMLElement | ReactNode;
 
+    /**  */
+    error?: ReactNode;
+
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
+
+    /**  */
+    helper?: ReactNode;
 
     /** The max length the input accepts. If set, a character counter will be displayed. */
     maxLength?: number;
@@ -255,7 +261,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
     const {
         chips,
         className = '',
+        error,
         hasError,
+        helper,
         icon,
         id = uuid(),
         isDisabled,
@@ -389,6 +397,10 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     )}
                 </div>
             </div>
+            {hasError && error && (
+                <InputHelper className={`${CLASSNAME}__error`} kind={Kind.error} text={error} theme={theme} />
+            )}
+            {helper && <InputHelper className={`${CLASSNAME}__info`} text={helper} theme={theme} />}
         </div>
     );
 };

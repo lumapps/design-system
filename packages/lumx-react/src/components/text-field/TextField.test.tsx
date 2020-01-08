@@ -31,6 +31,12 @@ interface ISetup extends ICommonSetup {
      * The <input> or <textarea> element.
      */
     inputNative: Wrapper;
+
+    /** The <InputHelper> info */
+    helper: Wrapper;
+
+    /** The <InputHelper> error */
+    error: Wrapper;
 }
 
 /////////////////////////////
@@ -49,7 +55,12 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
 
     const textarea = wrapper.find('textarea');
     const input = wrapper.find('input');
+    const error = wrapper.find(`.${CLASSNAME}__error`);
+    const helper = wrapper.find(`.${CLASSNAME}__info`);
+
     return {
+        error,
+        helper,
         inputNative: textarea.length ? textarea : input,
         props,
         wrapper,
@@ -133,6 +144,38 @@ describe(`<${TextField.displayName}>`, () => {
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
                 );
             });
+        });
+
+        it('should have helper text', () => {
+            const { helper } = setup({
+                helper: 'test',
+                label: 'test',
+                placeholder: 'test',
+            });
+
+            expect(helper).toHaveLength(1);
+        });
+
+        it('should have error text', () => {
+            const { error } = setup({
+                error: 'error',
+                hasError: true,
+                label: 'test',
+                placeholder: 'test',
+            });
+
+            expect(error).toHaveLength(1);
+        });
+
+        it('should not have error text', () => {
+            const { error } = setup({
+                error: 'error',
+                hasError: false,
+                label: 'test',
+                placeholder: 'test',
+            });
+
+            expect(error).toHaveLength(0);
         });
     });
 
