@@ -405,6 +405,19 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
     }
 
     /**
+     * Check if choices are empty or not.
+     *
+     * @return {boolean} Whether choices aare empty or not.
+     */
+    function hasChoices() {
+        if (!lx.isChoicesArray()) {
+            return angular.isDefined(lx.choices);
+        }
+
+        return lx.choices.length > 0;
+    }
+
+    /**
      * Check if choices are in array format.
      *
      * @return {boolean} Whether choices are in array format or not.
@@ -544,6 +557,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
     lx.displaySubheader = displaySubheader;
     lx.enableKeyEvents = enableKeyEvents;
     lx.getClasses = getClasses;
+    lx.hasChoices = hasChoices;
     lx.isChoicesArray = isChoicesArray;
     lx.isModelEmpty = isModelEmpty;
     lx.isSelected = isSelected;
