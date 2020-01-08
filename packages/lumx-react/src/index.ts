@@ -48,7 +48,7 @@ export { ListItem, ListItemProps, ListItemSize, ListItemSizes } from './componen
 
 export { ListSubheader, ListSubheaderProps } from './components/list/ListSubheader';
 
-export { CLASSNAME, DEFAULT_PROPS, KindMessage, Message, MessageProps } from './components/message/Message';
+export { CLASSNAME, DEFAULT_PROPS, MessageKind, Message, MessageProps } from './components/message/Message';
 
 export { Notification, NotificationProps, NotificationType } from './components/notification/Notification';
 

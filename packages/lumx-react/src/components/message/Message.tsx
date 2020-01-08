@@ -3,11 +3,11 @@ import { ColorPalette, Icon } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 /////////////////////////////
 
-enum KindMessage {
+enum MessageKind {
     error = 'error',
     info = 'info',
     success = 'success',
@@ -18,6 +18,11 @@ enum KindMessage {
  * Defines the props of the component.
  */
 interface IMessageProps extends IGenericProps {
+    /**
+     * Message content.
+     */
+    children?: ReactNode;
+
     /**
      * The kind of message.
      */
@@ -59,20 +64,20 @@ const DEFAULT_PROPS: Partial<MessageProps> = {
  * The color according to kind props.
  */
 const KIND_COLOR = {
-    [KindMessage.error]: ColorPalette.red,
-    [KindMessage.info]: ColorPalette.dark,
-    [KindMessage.success]: ColorPalette.green,
-    [KindMessage.warning]: ColorPalette.yellow,
+    [MessageKind.error]: ColorPalette.red,
+    [MessageKind.info]: ColorPalette.dark,
+    [MessageKind.success]: ColorPalette.green,
+    [MessageKind.warning]: ColorPalette.yellow,
 };
 
 /**
  * The icons according to kind props.
  */
 const KIND_ICON = {
-    [KindMessage.error]: mdiAlert,
-    [KindMessage.info]: mdiInformation,
-    [KindMessage.success]: mdiCheckCircle,
-    [KindMessage.warning]: mdiAlertCircle,
+    [MessageKind.error]: mdiAlert,
+    [MessageKind.info]: mdiInformation,
+    [MessageKind.success]: mdiCheckCircle,
+    [MessageKind.warning]: mdiAlertCircle,
 };
 
 /////////////////////////////
@@ -85,32 +90,19 @@ const KIND_ICON = {
 const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
     const { children, className, kind, hasBackground, ...forwardedProps } = props;
     const icon = kind ? KIND_ICON[kind] : null;
-    /**
-     * Get message classes.
-     *
-     * @return The list of message classes.
-     */
-    function getClasses(): string[] {
-        const classes: string[] = [];
 
-        const color = kind ? KIND_COLOR[kind] : DEFAULT_PROPS.color;
-        classes.push(`${CSS_PREFIX}-message--color-${color}`);
-
-        if (hasBackground) {
-            classes.push(`${CSS_PREFIX}-message--has-background`);
-        }
-
-        return classes;
-    }
-
+    const color = kind ? KIND_COLOR[kind] : DEFAULT_PROPS.color;
     return (
         <div
             className={classNames(
                 className,
                 handleBasicClasses({
+                    hasBackground,
                     prefix: CLASSNAME,
                 }),
-                getClasses(),
+                {
+                    [`${CSS_PREFIX}-message--color-${color}`]: true,
+                },
             )}
             {...forwardedProps}
         >
@@ -123,4 +115,4 @@ Message.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, KindMessage, Message, MessageProps };
+export { CLASSNAME, DEFAULT_PROPS, MessageKind, Message, MessageProps };

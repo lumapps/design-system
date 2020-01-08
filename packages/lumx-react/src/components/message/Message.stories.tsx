@@ -1,4 +1,4 @@
-import { KindMessage, Message } from '@lumx/react';
+import { Message, MessageKind } from '@lumx/react';
 import { decorators } from '@lumx/react/story-block';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React from 'react';
@@ -6,15 +6,15 @@ import React from 'react';
 export default { title: 'Message', decorators };
 
 const options = {
-    Error: KindMessage.error,
-    Info: KindMessage.info,
-    Success: KindMessage.success,
-    Warning: KindMessage.warning,
+    Error: MessageKind.error,
+    Info: MessageKind.info,
+    Success: MessageKind.success,
+    Warning: MessageKind.warning,
 };
 
 export const message = () => (
     <Message
-        kind={select('Kind of message', options, KindMessage.error)}
+        kind={select('Kind of message', options, MessageKind.error)}
         hasBackground={boolean('Has background', false)}
     >
         <span>

@@ -3,7 +3,7 @@ import { getBasicClass } from '@lumx/react/utils';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
-import { CLASSNAME, DEFAULT_PROPS, KindMessage, Message, MessageProps } from './Message';
+import { CLASSNAME, DEFAULT_PROPS, Message, MessageKind, MessageProps } from './Message';
 
 /////////////////////////////
 
@@ -86,7 +86,7 @@ describe(`<${Message.displayName}>`, (): void => {
         it('should use the given `kind`', (): void => {
             const testedProp = 'kind';
             const modifiedProps: Partial<MessageProps> = {
-                [testedProp]: KindMessage.success,
+                [testedProp]: MessageKind.success,
             };
 
             const { message } = setup(modifiedProps);
