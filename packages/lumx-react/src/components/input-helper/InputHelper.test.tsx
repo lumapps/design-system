@@ -83,12 +83,15 @@ describe(`<${InputHelper.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render defaults', () => {
-            const { wrapper, helper, icon } = setup();
+            const text = 'The helper text';
+            const { wrapper, helper, icon } = setup({ text });
+
             expect(wrapper).toMatchSnapshot();
             expect(helper).toExist();
             expect(icon).toHaveLength(0);
             expect(helper).toHaveClassName(CLASSNAME);
             expect(helper).toHaveClassName(`${CLASSNAME}--theme-light`);
+            expect(helper).toHaveText(text);
         });
     });
 
@@ -121,6 +124,13 @@ describe(`<${InputHelper.displayName}>`, () => {
             const { helper } = setup({ ...properties.info, theme: Theme.dark });
             expect(helper).toHaveClassName(CLASSNAME);
             expect(helper).toHaveClassName(`${CLASSNAME}--theme-dark`);
+        });
+
+        it('should render custom className', () => {
+            const className = 'my-class__test';
+            const { helper } = setup({ ...properties.info, className });
+            expect(helper).toHaveClassName(CLASSNAME);
+            expect(helper).toHaveClassName(className);
         });
     });
 
