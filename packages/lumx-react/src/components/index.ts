@@ -92,6 +92,16 @@ enum AspectRatio {
     square = 'square',
 }
 
+/**
+ * Semantic info about the purpose of the component
+ */
+enum Kind {
+    info = 'info',
+    valid = 'success',
+    warning = 'warning',
+    error = 'error',
+}
+
 /////////////////////////////
 
 export {
@@ -105,4 +115,5 @@ export {
     Size,
     Orientation,
     Emphasis,
+    Kind,
 };

@@ -34,6 +34,8 @@ export { Icon, IconProps, IconSizes } from './components/icon/Icon';
 
 export { IconButton, IconButtonProps } from './components/button/IconButton';
 
+export { InputHelper, IInputHelperProps } from './components/input-helper/InputHelper';
+
 export { Thumbnail, ThumbnailProps, ThumbnailVariant, ThumbnailAspectRatio } from './components/thumbnail/Thumbnail';
 
 export { ImageBlock, ImageBlockProps, ImageBlockCaptionPosition } from './components/image-block/ImageBlock';
