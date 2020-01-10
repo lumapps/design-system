@@ -54,6 +54,7 @@ const ITEMS: Item[] = [
                     'Comment block',
                     'Date picker',
                     'Dialog',
+                    'Divider',
                     'Dropdown',
                     'Expansion panel',
                     'Grid',
