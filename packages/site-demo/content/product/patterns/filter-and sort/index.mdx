@@ -4,29 +4,35 @@
 
 ## Anatomy
 
-Filter and sort patterns has three sections: A text filter, trigger filters, and a sorting selector. Each zone is optional.
+Filter and sort patterns has three sections: A text filter, trigger filters, and a sorting selector. Every zone combine and is optional.
 
 <DemoBlock demo="anatomy" />
 
+## Text filter
+
+Filter by checking if the entered text matches one of the text values of list elements. Elements values checked are to defined accordingly to needs. Clearing the text filter input remove the filter.
+
+<DemoBlock demo="text" />
+
 ## Exposed choices
 
-By default and when there is space, expose directly the choices to users.
+By default and when there is space, expose choices directly to users.
 
 <DemoBlock demo="choices" />
 
 ## Exposed facets
 
-If space is constrained or there is too much choices to display, only expose facets.
+If space is constrained or there are too much choices to display, only expose facets.
 
 <DemoBlock demo="facets" />
 
 ## Full collapsed
 
-If space is really constrained or trigger filters are only secondary in the user scenario, they can be collapsed in one chip that open a popover. In the popover, only a handful of choices is exposed for each filter, clicking the "Show more" link reveal the others.
+If space is really constrained or trigger filters are only secondary in users scenario, they can be collapsed in one chip that open a popover. In the popover, only a handful of choices is exposed for each filter, clicking the "Show more" link reveal the others.
 
 <DemoBlock demo="collapsed" />
 
-## Responsive behaviors
+<!-- ## Responsive behaviors
 
 ### Exposed choices
 
@@ -44,9 +50,15 @@ When facets are exposed and the space come to be not enough to show them all on 
 
 In case of extreme low width, trigger filters and sorting selector may be turned to simple icon buttons.
 
-<DemoBlock demo="responsive" />
+<DemoBlock demo="responsive" /> -->
 
-### Vertical variant
+## Responsive
+
+As space reduces (when users resize their browser window for example) each element that doesn't fit go to the line.
+
+<DemoBlock demo="responsive-simple" />
+
+## Vertical variant
 
 Vertical variant can be used when the page layout make it difficult to use the original horizontal layout.
 
