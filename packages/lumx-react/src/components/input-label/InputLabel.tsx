@@ -2,7 +2,7 @@ import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, ReactNode } from 'react';
 
 /////////////////////////////
 
@@ -11,6 +11,7 @@ import React, { ReactElement } from 'react';
  */
 interface IInputLabelProps extends IGenericProps {
     theme?: Theme;
+    children: string | ReactNode;
 }
 
 interface IDefaultPropsType extends Partial<IInputLabelProps> {}
