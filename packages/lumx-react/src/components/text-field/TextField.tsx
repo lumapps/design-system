@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import uuid from 'uuid/v4';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
-import { Emphasis, Icon, IconButton, InputHelper, Kind, Size, Theme } from '@lumx/react';
+import { Emphasis, Icon, IconButton, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -339,9 +339,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         >
             <div className={`${CLASSNAME}__header`}>
                 {label && (
-                    <label htmlFor={id} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={id} className={`${CLASSNAME}__label`}>
                         {label}
-                    </label>
+                    </InputLabel>
                 )}
 
                 {maxLength && (
