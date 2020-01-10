@@ -18,14 +18,14 @@ interface ITextFieldProps extends IGenericProps {
     /** A Chip Group to be rendered before the main text input */
     chips?: HTMLElement | ReactNode;
 
-    /**  */
-    error?: ReactNode;
+    /** The error related to the TextField */
+    error?: string | ReactNode;
 
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
 
-    /**  */
-    helper?: ReactNode;
+    /** The helper related to the TextField */
+    helper?: string | ReactNode;
 
     /** The max length the input accepts. If set, a character counter will be displayed. */
     maxLength?: number;

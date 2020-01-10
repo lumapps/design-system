@@ -12,7 +12,7 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
  * Defines the props of the component.
  */
 interface IInputHelperProps extends IGenericProps {
-    text: ReactNode;
+    text: string | ReactNode;
     kind?: Kind;
     theme?: Theme;
 }
