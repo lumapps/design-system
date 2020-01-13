@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
-import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
+import { Chip, Icon, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }) => {
@@ -31,7 +31,7 @@ const App = ({ theme }) => {
     };
 
     const clearSelectedvalues = (event, value) => {
-        event && event.stopPropagation();
+        event?.stopPropagation();
         setValues(value ? values.filter((val) => val !== value) : []);
     };
 
@@ -95,35 +95,33 @@ const App = ({ theme }) => {
                 );
             }}
         >
-            <List isClickable={isOpen}>
-                <ListSubheader>
-                    <TextField
-                        style={{ width: '100%', padding: 0 }}
-                        value={filterValue}
-                        onChange={setFilterValue}
-                        icon={mdiMagnify}
-                        size={Size.tiny}
-                    />
-                </ListSubheader>
-                <ListDivider />
-                {filteredChoices.length > 0
-                    ? filteredChoices.map((choice, index) => (
-                          <ListItem
-                              isSelected={values.includes(choice.label)}
-                              key={index}
-                              onItemSelected={() => onItemSelectedHandler(choice.label)}
-                              before={<Icon size={Size.xs} icon={choice.icon} />}
-                              size={Size.tiny}
-                          >
-                              <div>{choice.label}</div>
-                          </ListItem>
-                      ))
-                    : [
-                          <ListItem key={0} size={Size.tiny}>
-                              No data
-                          </ListItem>,
-                      ]}
-            </List>
+            <ListSubheader>
+                <TextField
+                    style={{ width: '100%', padding: 0 }}
+                    value={filterValue}
+                    onChange={setFilterValue}
+                    icon={mdiMagnify}
+                    size={Size.tiny}
+                />
+            </ListSubheader>
+            <ListDivider />
+            {filteredChoices.length > 0
+                ? filteredChoices.map((choice, index) => (
+                      <ListItem
+                          isSelected={values.includes(choice.label)}
+                          key={index}
+                          onItemSelected={() => onItemSelectedHandler(choice.label)}
+                          before={<Icon size={Size.xs} icon={choice.icon} />}
+                          size={Size.tiny}
+                      >
+                          <div>{choice.label}</div>
+                      </ListItem>
+                  ))
+                : [
+                      <ListItem key={0} size={Size.tiny}>
+                          No data
+                      </ListItem>,
+                  ]}
         </Select>
     );
 };

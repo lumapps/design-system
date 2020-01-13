@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List, ListItem, Select, Size } from '@lumx/react';
+import { ListItem, Select, SelectVariant, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }) => {
@@ -11,8 +11,8 @@ const App = ({ theme }) => {
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
     const [values, setValues] = React.useState([]);
 
-    const clearSelectedvalues = (event, value) => {
-        event && event.stopPropagation();
+    const clearSelectedvalues = (event: { stopPropagation(): void }, value: any) => {
+        event?.stopPropagation();
         setValues(value ? values.filter((val) => val !== value) : []);
     };
 
@@ -31,30 +31,28 @@ const App = ({ theme }) => {
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
-            variant={'chip'}
+            variant={SelectVariant.chip}
             onClear={clearSelectedvalues}
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
         >
-            <List isClickable={isOpen}>
-                {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
-                          <ListItem
-                              isClickable
-                              isSelected={values.includes(choice)}
-                              key={index}
-                              onItemSelected={() => onItemSelectedHandler(choice)}
-                              size={Size.tiny}
-                          >
-                              {choice}
-                          </ListItem>
-                      ))
-                    : [
-                          <ListItem key={0} size={Size.tiny}>
-                              No data
-                          </ListItem>,
-                      ]}
-            </List>
+            {CHOICES.length > 0
+                ? CHOICES.map((choice, index) => (
+                      <ListItem
+                          isClickable
+                          isSelected={values.includes(choice)}
+                          key={index}
+                          onItemSelected={() => onItemSelectedHandler(choice)}
+                          size={Size.tiny}
+                      >
+                          {choice}
+                      </ListItem>
+                  ))
+                : [
+                      <ListItem key={0} size={Size.tiny}>
+                          No data
+                      </ListItem>,
+                  ]}
         </Select>
     );
 };

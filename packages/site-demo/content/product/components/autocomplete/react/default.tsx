@@ -5,36 +5,36 @@ import { Autocomplete, List, ListItem, Size } from '@lumx/react';
 const App = ({ theme }) => {
     const CITIES = [
         {
-            text: 'Los Angeles',
             id: 'losangeles',
+            text: 'Los Angeles',
         },
         {
-            text: 'San Francisco',
             id: 'sanfrancisco',
+            text: 'San Francisco',
         },
         {
-            text: 'Paris',
             id: 'paris',
+            text: 'Paris',
         },
         {
-            text: 'Montpellier',
             id: 'montpellier',
+            text: 'Montpellier',
         },
         {
-            text: 'Bordeaux',
             id: 'bordeaux',
+            text: 'Bordeaux',
         },
         {
-            text: 'Toulouse',
             id: 'toulouse',
+            text: 'Toulouse',
         },
         {
-            text: 'Lyon',
             id: 'lyon',
+            text: 'Lyon',
         },
         {
-            text: 'Montevideo',
             id: 'montevideo',
+            text: 'Montevideo',
         },
     ];
 
@@ -102,20 +102,17 @@ const App = ({ theme }) => {
             onFocus={onFocus}
             inputRef={inputRef}
         >
-            {hasSuggestions && (
-                <List isClickable>
-                    {filteredCities.map((city, index) => (
-                        <ListItem
-                            size={Size.tiny}
-                            key={city.id}
-                            isHighlighted={index === activeItemIndex}
-                            onItemSelected={() => setSelectedCity(city)}
-                        >
-                            <div>{city.text}</div>
-                        </ListItem>
-                    ))}
-                </List>
-            )}
+            {hasSuggestions &&
+                filteredCities.map((city, index) => (
+                    <ListItem
+                        size={Size.tiny}
+                        key={city.id}
+                        isHighlighted={index === activeItemIndex}
+                        onItemSelected={() => setSelectedCity(city)}
+                    >
+                        <div>{city.text}</div>
+                    </ListItem>
+                ))}
         </Autocomplete>
     );
 };

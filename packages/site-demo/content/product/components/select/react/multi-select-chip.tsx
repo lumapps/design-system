@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List, ListItem, Select, Size } from '@lumx/react';
+import { ListItem, Select, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }) => {
@@ -12,7 +12,7 @@ const App = ({ theme }) => {
     const [values, setValues] = React.useState([]);
 
     const clearSelectedvalues = (event, value) => {
-        event && event.stopPropagation();
+        event?.stopPropagation();
         setValues(value ? values.filter((val) => val !== value) : []);
     };
 
@@ -37,24 +37,22 @@ const App = ({ theme }) => {
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
         >
-            <List isClickable={isOpen}>
-                {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
-                          <ListItem
-                              isSelected={values.includes(choice)}
-                              key={index}
-                              onItemSelected={() => onItemSelectedHandler(choice)}
-                              size={Size.tiny}
-                          >
-                              {choice}
-                          </ListItem>
-                      ))
-                    : [
-                          <ListItem key={0} size={Size.tiny}>
-                              No data
-                          </ListItem>,
-                      ]}
-            </List>
+            {CHOICES.length > 0
+                ? CHOICES.map((choice, index) => (
+                      <ListItem
+                          isSelected={values.includes(choice)}
+                          key={index}
+                          onItemSelected={() => onItemSelectedHandler(choice)}
+                          size={Size.tiny}
+                      >
+                          {choice}
+                      </ListItem>
+                  ))
+                : [
+                      <ListItem key={0} size={Size.tiny}>
+                          No data
+                      </ListItem>,
+                  ]}
         </Select>
     );
 };

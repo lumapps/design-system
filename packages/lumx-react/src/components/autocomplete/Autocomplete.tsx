@@ -281,6 +281,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 fitToAnchorWidth={fitToAnchorWidth}
                 onInfiniteScroll={onInfiniteScroll}
                 theme={theme}
+                shouldFocusOnOpen={false}
             >
                 {children}
             </Dropdown>

@@ -226,19 +226,17 @@ const App = ({ theme }) => {
                 </Chip>
             )}
         >
-            <List theme={theme} isClickable>
-                {filteredCities.map((city, index) => (
-                    <ListItem
-                        size={Size.tiny}
-                        theme={theme}
-                        key={city.id}
-                        isHighlighted={index === activeItemIndex}
-                        onItemSelected={() => setSelectedCity(city)}
-                    >
-                        <div>{city.text}</div>
-                    </ListItem>
-                ))}
-            </List>
+            {filteredCities.map((city, index) => (
+                <ListItem
+                    size={Size.tiny}
+                    theme={theme}
+                    key={city.id}
+                    isHighlighted={index === activeItemIndex}
+                    onItemSelected={() => setSelectedCity(city)}
+                >
+                    <div>{city.text}</div>
+                </ListItem>
+            ))}
         </AutocompleteMultiple>
     );
 };

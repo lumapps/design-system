@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { List, ListItem, Size } from '@lumx/react';
+import { ListItem, Size } from '@lumx/react';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { Autocomplete, AutocompleteProps, CLASSNAME } from './Autocomplete';
@@ -77,15 +77,11 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
 
         it('should render correctly', (): void => {
             const { wrapper, textField, dropdown } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
+                children: suggestions.map((suggestion: ISuggestion) => (
+                    <ListItem size={Size.tiny} key={suggestion.id}>
+                        <div>{suggestion.text}</div>
+                    </ListItem>
+                )),
                 isOpen: true,
                 onChange: jest.fn(),
                 value: '',
@@ -113,15 +109,11 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
 
         it('should render correctly when the dropdown is closed', (): void => {
             const { wrapper } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
+                children: suggestions.map((suggestion: ISuggestion) => (
+                    <ListItem size={Size.tiny} key={suggestion.id}>
+                        <div>{suggestion.text}</div>
+                    </ListItem>
+                )),
                 isOpen: false,
                 onChange: jest.fn(),
                 value: '',
@@ -141,15 +133,11 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
         it('should trigger the onChange callback when there is a change on the Text Field', (): void => {
             const onChange = jest.fn();
             const { textField } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
+                children: suggestions.map((suggestion: ISuggestion) => (
+                    <ListItem size={Size.tiny} key={suggestion.id}>
+                        <div>{suggestion.text}</div>
+                    </ListItem>
+                )),
                 isOpen: false,
                 onChange,
                 value: '',
@@ -163,15 +151,11 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
         it('should trigger the onFocus callback when the text field is focused on', (): void => {
             const onFocus = jest.fn();
             const { textField } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
+                children: suggestions.map((suggestion: ISuggestion) => (
+                    <ListItem size={Size.tiny} key={suggestion.id}>
+                        <div>{suggestion.text}</div>
+                    </ListItem>
+                )),
                 isOpen: false,
                 onFocus,
                 value: '',
@@ -185,15 +169,11 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
         it('should trigger the onBlur callback when the Text Field loses focus', (): void => {
             const onBlur = jest.fn();
             const { textField } = setup({
-                children: (
-                    <List isClickable>
-                        {suggestions.map((suggestion: ISuggestion) => (
-                            <ListItem size={Size.tiny} key={suggestion.id}>
-                                <div>{suggestion.text}</div>
-                            </ListItem>
-                        ))}
-                    </List>
-                ),
+                children: suggestions.map((suggestion: ISuggestion) => (
+                    <ListItem size={Size.tiny} key={suggestion.id}>
+                        <div>{suggestion.text}</div>
+                    </ListItem>
+                )),
                 isOpen: false,
                 onBlur,
                 value: '',

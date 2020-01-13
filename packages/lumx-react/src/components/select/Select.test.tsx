@@ -3,7 +3,10 @@ import React, { ReactElement, RefObject } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { Chip, Icon, Kind, Theme } from '@lumx/react';
+import { Kind, Theme } from '@lumx/react/components';
+import { Chip } from '@lumx/react/components/chip/Chip';
+import { Icon } from '@lumx/react/components/icon/Icon';
+
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 

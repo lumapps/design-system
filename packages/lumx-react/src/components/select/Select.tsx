@@ -4,25 +4,35 @@ import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
-import {
-    Chip,
-    ChipGroup,
-    Dropdown,
-    Emphasis,
-    Icon,
-    IconButton,
-    InputHelper,
-    InputLabel,
-    Kind,
-    Placement,
-    Size,
-    Theme,
-} from '@lumx/react';
+// import {
+//     Chip,
+//     ChipGroup,
+//     Dropdown,
+//     Emphasis,
+//     Icon,
+//     IconButton,
+//     InputHelper,
+//     InputLabel,
+//     Kind,
+//     Placement,
+//     Size,
+//     Theme,
+// } from '@lumx/react';
+import { Emphasis, Kind, Size, Theme } from '@lumx/react/components';
+import { IconButton } from '@lumx/react/components/button/IconButton';
+import { Chip } from '@lumx/react/components/chip/Chip';
+import { ChipGroup } from '@lumx/react/components/chip/ChipGroup';
+import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
+import { Icon } from '@lumx/react/components/icon/Icon';
+import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
+import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
+import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
+
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 

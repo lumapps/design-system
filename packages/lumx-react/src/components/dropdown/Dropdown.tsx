@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
+import { List } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { useClickAway, useInfiniteScroll } from '@lumx/react/hooks';
+import { useClickAway } from '@lumx/react/hooks/useClickAway';
+import { useFocusOnOpen } from '@lumx/react/hooks/useFocusOnOpen';
+import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
+
 import { IGenericProps, getRootClassName, handleBasicClasses, onEscapePressed } from '@lumx/react/utils';
 
 /////////////////////////////
@@ -15,28 +19,30 @@ import { IGenericProps, getRootClassName, handleBasicClasses, onEscapePressed } 
 interface IDropdownProps extends IGenericProps {
     /** The reference of the DOM element used to set the position of the Dropdown. */
     anchorRef: React.RefObject<HTMLElement>;
+    /** Children of the Dropdown. */
+    children: React.ReactNode;
     /** Whether a click anywhere out of the Dropdown would close it. */
     closeOnClick?: boolean;
     /** Whether an escape key press would close the Dropdown. */
     closeOnEscape?: boolean;
+    /** Whether the dropdown should fit to the anchor width */
+    fitToAnchorWidth?: boolean;
     /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
     offset?: Offset;
     /** The preferred Dropdown location against the anchor element. */
     placement?: Placement;
+    /** Whether the focus should be set on the list when the dropdown is open. */
+    shouldFocusOnOpen?: boolean;
     /** Whether the dropdown should be displayed or not. Useful to control the Dropdown from outside the component. */
     showDropdown: boolean;
-    /** Whether the dropdown should fit to the anchor width */
-    fitToAnchorWidth?: boolean;
-    /** Children of the Dropdown. */
-    children: React.ReactNode;
+    /** The z-axis position. */
+    zIndex?: number;
     /** The function to be called when the user clicks away or Escape is pressed */
     onClose?: VoidFunction;
     /**
      * The callback function called when the bottom of the dropdown is reached.
      */
     onInfinite?: VoidFunction;
-    /** The z-axis position. */
-    zIndex?: number;
 }
 type DropdownProps = IDropdownProps;
 
@@ -71,6 +77,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     closeOnEscape: true,
     fitToAnchorWidth: true,
     placement: Placement.AUTO_START,
+    shouldFocusOnOpen: true,
     showDropdown: undefined,
 };
 
@@ -82,22 +89,24 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const Dropdown: React.FC<DropdownProps> = ({
+    anchorRef,
     children,
     className = '',
-    onClose,
     closeOnClick = DEFAULT_PROPS.closeOnClick,
     closeOnEscape = DEFAULT_PROPS.closeOnEscape,
-    offset,
-    showDropdown,
-    anchorRef,
-    placement = DEFAULT_PROPS.placement,
     fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
-    onInfiniteScroll,
+    offset,
+    placement = DEFAULT_PROPS.placement,
+    shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
+    showDropdown,
     zIndex,
+    onClose,
+    onInfiniteScroll,
     ...props
 }: DropdownProps): React.ReactElement | null => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
     const popoverRef: React.RefObject<HTMLDivElement> = useRef(null);
+    const listElementRef: React.RefObject<HTMLUListElement> = useRef(null);
 
     const { computedPosition, isVisible } = Popover.useComputePosition(
         placement!,
@@ -113,18 +122,25 @@ const Dropdown: React.FC<DropdownProps> = ({
         useInfiniteScroll(wrapperRef, onInfiniteScroll);
     }
 
-    const popperElement: React.ReactElement = (
-        <div
-            className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
-            ref={wrapperRef}
-            style={{
-                maxHeight: computedPosition.maxHeight,
-                minWidth: fitToAnchorWidth ? computedPosition.anchorWidth : 0,
-            }}
-            {...props}
-        >
-            <div className={`${CLASSNAME}__content`}>{children}</div>
-        </div>
+    const popperElement: React.ReactElement = useMemo(
+        () => (
+            <div
+                className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
+                ref={wrapperRef}
+                style={{
+                    maxHeight: computedPosition.maxHeight,
+                    minWidth: fitToAnchorWidth ? computedPosition.anchorWidth : 0,
+                }}
+                {...props}
+            >
+                <div className={`${CLASSNAME}__content`}>
+                    <List isClickable listElementRef={listElementRef}>
+                        {children}
+                    </List>
+                </div>
+            </div>
+        ),
+        [listElementRef, wrapperRef, children, className, computedPosition, fitToAnchorWidth, props],
     );
 
     const onEscapeHandler = closeOnEscape && onClose && showDropdown && onEscapePressed(onClose);
@@ -153,6 +169,10 @@ const Dropdown: React.FC<DropdownProps> = ({
         },
         [anchorRef],
     );
+
+    // Set the focus on the list when the dropdown opens,
+    // in order to enable keyboard controls.
+    useFocusOnOpen(listElementRef.current, isVisible, shouldFocusOnOpen);
 
     return showDropdown ? (
         <Popover
