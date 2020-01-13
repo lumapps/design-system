@@ -82,6 +82,13 @@ function DialogController(
     let _isConfirmDialog = false;
 
     /**
+     * Whether the sentinels are intersecting with dialog content or not.
+     *
+     * @type {Object}
+     */
+    const _isIntersecting = { top: false, bottom: false };
+
+    /**
      * The dialog parent element.
      *
      * @type {Element}
@@ -169,6 +176,15 @@ function DialogController(
     }
 
     /**
+     * Remove dialog scroll state if the sentinels are not intersecting.
+     */
+    function _removeScrollState() {
+        if (!_isIntersecting.top && !_isIntersecting.bottom) {
+            _dialog.removeClass(`${CSS_PREFIX}-dialog--has-scroll`);
+        }
+    }
+
+    /**
      * Create dialog content observer.
      */
     function _createObserver() {
@@ -178,10 +194,21 @@ function DialogController(
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
+                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--wrapper`)) {
+                    if (!entry.isIntersecting) {
+                        _dialog.addClass(`${CSS_PREFIX}-dialog--has-scroll`);
+                    }
+                }
+
                 if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--top`) && !lx.forceHeaderDivider) {
                     if (entry.isIntersecting) {
+                        _isIntersecting.top = false;
+                        _removeScrollState();
+
                         dialogHeader.removeClass(`${CSS_PREFIX}-dialog__header--has-divider`);
                     } else {
+                        _isIntersecting.top = true;
+
                         dialogHeader.addClass(`${CSS_PREFIX}-dialog__header--has-divider`);
                     }
                 }
@@ -191,9 +218,15 @@ function DialogController(
                     !lx.forceFooterDivider
                 ) {
                     if (entry.isIntersecting) {
+                        _isIntersecting.bottom = false;
+                        _removeScrollState();
+
                         dialogFooter.removeClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
+
                         $rootScope.$broadcast('lx-dialog__scroll-end', lx.id);
                     } else {
+                        _isIntersecting.bottom = true;
+
                         dialogFooter.addClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
                     }
                 }

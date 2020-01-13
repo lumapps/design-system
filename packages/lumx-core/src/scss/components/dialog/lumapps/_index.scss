@@ -94,6 +94,22 @@
         justify-content: center;
         background-color: lumx-theme-color-variant('light', 'L2');
     }
+
+    &__sentinel {
+        &--wrapper {
+            position: absolute;
+            right: 0;
+            left: 0;
+
+            @include mq($until: desktop) {
+                bottom: -$lumx-dialog-offset-portable - 1;
+            }
+
+            @include mq($from: desktop) {
+                bottom: -$lumx-dialog-offset-desktop - 1;
+            }
+        }
+    }
 }
 
 @keyframes lumx-dialog-overlay-show {
@@ -127,15 +143,21 @@
             top: $lumx-dialog-offset-portable;
             right: $lumx-dialog-offset-portable;
             left: $lumx-dialog-offset-portable;
-            height: calc(100% - 48px);
+
+            &.#{$lumx-base-prefix}-dialog--has-scroll {
+                bottom: $lumx-dialog-offset-portable;
+            }
         }
 
         @include mq($from: desktop) {
             top: $lumx-dialog-offset-desktop;
             left: 50%;
             width: $size;
-            height: calc(100% - 96px);
             margin-left: $size / -2;
+
+            &.#{$lumx-base-prefix}-dialog--has-scroll {
+                bottom: $lumx-dialog-offset-desktop;
+            }
         }
     }
 }
