@@ -52,15 +52,6 @@ function DialogController(
     const _dialog = $element;
 
     /**
-     * The dialog overlay.
-     *
-     * @type {Element}
-     */
-    const _dialogOverlay = angular.element('<div/>', {
-        class: `${CSS_PREFIX}-dialog-overlay`,
-    });
-
-    /**
      * The event scheduler id.
      *
      * @type {string}
@@ -146,7 +137,6 @@ function DialogController(
 
         $rootScope.$broadcast('lx-dialog__close-start', lx.id, canceled, params);
 
-        _dialogOverlay.addClass(`${CSS_PREFIX}-dialog-overlay--is-hidden`);
         _dialog.addClass(`${CSS_PREFIX}-dialog--is-hidden`);
 
         if (angular.isDefined(_sourceEl)) {
@@ -154,11 +144,6 @@ function DialogController(
         }
 
         $timeout(() => {
-            _dialogOverlay
-                .off('click', _close)
-                .removeClass(`${CSS_PREFIX}-dialog-overlay--is-hidden`)
-                .remove();
-
             if (_isAlertDialog || _isConfirmDialog) {
                 _dialog.remove();
             } else {
@@ -261,23 +246,14 @@ function DialogController(
             return;
         }
 
-        LxDepthService.increase();
-
-        _dialogOverlay
-            .css('z-index', LxDepthService.get())
-            .appendTo('body')
-            .show();
-
-        if (angular.isUndefined(lx.autoClose) || lx.autoClose) {
-            _dialogOverlay.on('click', _close);
-        }
-
         if (angular.isUndefined(lx.escapeClose) || lx.escapeClose) {
             _idEventScheduler = LxEventSchedulerService.register('keydown', _onKeyDown);
         }
 
+        LxDepthService.increase();
+
         _dialog
-            .css('z-index', LxDepthService.get() + 1)
+            .css('z-index', LxDepthService.get())
             .appendTo('body')
             .addClass(`${CSS_PREFIX}-dialog--is-shown`);
 
@@ -329,9 +305,19 @@ function DialogController(
         return classes;
     }
 
+    /**
+     * Close dialog on overlay click.
+     */
+    function onOverlayClick() {
+        if (angular.isUndefined(lx.autoClose) || lx.autoClose) {
+            _close();
+        }
+    }
+
     /////////////////////////////
 
     lx.getClasses = getClasses;
+    lx.onOverlayClick = onOverlayClick;
 
     /////////////////////////////
     //                         //

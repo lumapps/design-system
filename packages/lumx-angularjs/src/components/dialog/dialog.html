@@ -1,5 +1,7 @@
-<div class="lumx-dialog" role="dialog" ng-class="lx.getClasses()">
-    <div class="lumx-dialog__wrapper" ng-if="lx.isOpen">
+<div class="lumx-dialog" ng-class="lx.getClasses()">
+    <div class="lumx-dialog__overlay" ng-click="lx.onOverlayClick()" ng-if="lx.isOpen"></div>
+
+    <div class="lumx-dialog__wrapper" role="dialog" ng-if="lx.isOpen">
         <div
             class="lumx-dialog__header"
             ng-class="{ 'lumx-dialog__header--has-divider': lx.forceHeaderDivider }"
@@ -23,7 +25,7 @@
             ng-class="{ 'lumx-dialog__footer--has-divider': lx.forceFooterDivider }"
             ng-transclude="footer"
         ></div>
-    </div>
 
-    <div class="lumx-dialog__sentinel lumx-dialog__sentinel--wrapper"></div>
+        <div class="lumx-dialog__sentinel lumx-dialog__sentinel--wrapper"></div>
+    </div>
 </div>

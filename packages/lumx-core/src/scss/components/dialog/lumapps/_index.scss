@@ -2,7 +2,9 @@
    Dialog
    ========================================================================== */
 
-.#{$lumx-base-prefix}-dialog-overlay {
+.#{$lumx-base-prefix}-dialog {
+    $self: &;
+
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -10,51 +12,39 @@
     bottom: 0;
     left: 0;
     display: none;
-    animation: lumx-dialog-overlay-show $lumx-dialog-transition-duration;
-    background-color: lumx-theme-color-variant('dark', 'L1');
     opacity: 1;
-    transition: opacity $lumx-dialog-transition-duration;
-
-    &--is-hidden {
-        opacity: 0;
-    }
-}
-
-/**
- * 1. https://github.com/philipwalton/flexbugs/blob/master/README.md#flexbug-3
- */
-
-.#{$lumx-base-prefix}-dialog {
-    $self: &;
-
-    position: fixed;
-    display: none;
-    flex-direction: column; /* [1] */
-    animation: lumx-dialog-show $lumx-dialog-transition-duration;
-    opacity: 1;
-    transform: translateY(0);
     transition: opacity $lumx-dialog-transition-duration;
 
     &--is-shown {
-        display: flex; /* [1] */
+        display: block;
     }
 
     &--is-hidden {
         opacity: 0;
+    }
+
+    &__overlay {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        animation: lumx-dialog-overlay-show $lumx-dialog-transition-duration;
+        background-color: lumx-theme-color-variant('dark', 'L1');
     }
 
     &__wrapper {
         @include lumx-elevation(5);
 
+        position: absolute;
+        z-index: 2;
         display: flex;
-        max-height: 100%;
         flex-direction: column;
+        animation: lumx-dialog-show $lumx-dialog-transition-duration;
         background-color: #fff;
         border-radius: $lumx-theme-border-radius;
-
-        #{$self}--size-huge & {
-            height: 100%;
-        }
+        transform: translateY(0);
     }
 
     &__header,
@@ -138,15 +128,11 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-dialog-sizes {
-    .#{$lumx-base-prefix}-dialog--size-#{$key} {
+    .#{$lumx-base-prefix}-dialog--size-#{$key} .#{$lumx-base-prefix}-dialog__wrapper {
         @include mq($until: desktop) {
             top: $lumx-dialog-offset-portable;
             right: $lumx-dialog-offset-portable;
             left: $lumx-dialog-offset-portable;
-
-            &.#{$lumx-base-prefix}-dialog--has-scroll {
-                bottom: $lumx-dialog-offset-portable;
-            }
         }
 
         @include mq($from: desktop) {
@@ -155,14 +141,25 @@
             width: $size;
             margin-left: $size / -2;
 
-            &.#{$lumx-base-prefix}-dialog--has-scroll {
+            .#{$lumx-base-prefix}-dialog--has-scroll & {
                 bottom: $lumx-dialog-offset-desktop;
             }
         }
     }
+
+    .#{$lumx-base-prefix}-dialog--size-#{$key}.#{$lumx-base-prefix}-dialog--has-scroll
+    .#{$lumx-base-prefix}-dialog__wrapper {
+        @include mq($until: desktop) {
+            bottom: $lumx-dialog-offset-portable;
+        }
+
+        @include mq($from: desktop) {
+            bottom: $lumx-dialog-offset-desktop;
+        }
+    }
 }
 
-.#{$lumx-base-prefix}-dialog--size-huge {
+.#{$lumx-base-prefix}-dialog--size-huge .#{$lumx-base-prefix}-dialog__wrapper {
     @include mq($until: desktop) {
         top: $lumx-dialog-offset-portable;
         right: $lumx-dialog-offset-portable;
