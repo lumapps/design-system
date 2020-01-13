@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
 import { Chip, Icon, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
@@ -7,16 +7,16 @@ import { useBooleanState } from '@lumx/react/hooks';
 const App = ({ theme }) => {
     const CHOICES_WITH_ICONS = [
         {
-            label: 'First item',
             icon: mdiAccessPoint,
+            label: 'First item',
         },
         {
-            label: 'Second item',
             icon: mdiAccountBadge,
+            label: 'Second item',
         },
         {
-            label: 'Third item',
             icon: mdiAlphaF,
+            label: 'Third item',
         },
     ];
     const PLACEHOLDER = 'Select a value';
@@ -24,7 +24,7 @@ const App = ({ theme }) => {
     const getChoiceByValue = (value) => CHOICES_WITH_ICONS.find((ch) => ch.label === value);
 
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState([]);
+    const [values, setValues] = React.useState<string[]>([]);
 
     const onInfiniteScroll = () => {
         console.log('You have reached the bottom of the select dropdown.');

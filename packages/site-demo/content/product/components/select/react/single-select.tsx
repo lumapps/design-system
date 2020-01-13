@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { List, ListItem, Select, Size } from '@lumx/react';
+import { ListItem, Select, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }) => {
@@ -8,7 +8,7 @@ const App = ({ theme }) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [values, setValues] = React.useState([]);
+    const [values, setValues] = React.useState<string[]>([]);
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     const clearSelectedvalues = (event, value) => {

@@ -19,7 +19,7 @@ interface IAutocompleteProps extends IGenericProps {
      * Whether the suggestions list should display anchored to the input
      * If false, it will be anchored to the text field wrapper.
      */
-    anchorToInput: boolean;
+    anchorToInput?: boolean;
 
     /** A ref that will be passed to the input or textarea element. */
     inputRef?: RefObject<HTMLInputElement>;

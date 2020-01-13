@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -110,7 +110,7 @@ interface ISelectProps extends IGenericProps {
     /**
      * The callback function called when the clear button is clicked. NB: if not specified, clear buttons won't be displayed.
      */
-    onClear?(event: React.MouseEvent<HTMLDivElement, MouseEvent>, value?: string): void;
+    onClear?(event: SyntheticEvent, value?: string): void;
 
     /**
      * The callback function called on integrated search field change (500ms debounce).
@@ -143,7 +143,7 @@ interface ISelectProps extends IGenericProps {
     selectedChipRender?(
         choice: string,
         index: number,
-        onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
+        onClear?: (event: SyntheticEvent, choice: string) => void,
         isDisabled?: boolean,
     ): ReactNode | string;
 }

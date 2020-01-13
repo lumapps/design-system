@@ -9,7 +9,7 @@ const App = ({ theme }) => {
     const LABEL = 'Select label';
 
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState([]);
+    const [values, setValues] = React.useState<string[]>([]);
 
     const clearSelectedvalues = (event: { stopPropagation(): void }, value: any) => {
         event?.stopPropagation();

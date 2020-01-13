@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ListItem, Select, Size } from '@lumx/react';
+import { ListItem, Select, SelectVariant, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }) => {
@@ -9,7 +9,7 @@ const App = ({ theme }) => {
     const LABEL = 'Select label';
 
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState([]);
+    const [values, setValues] = React.useState<string[]>([]);
 
     const clearSelectedvalues = (event, value) => {
         event?.stopPropagation();
@@ -32,7 +32,7 @@ const App = ({ theme }) => {
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
-            variant={'chip'}
+            variant={SelectVariant.chip}
             onClear={clearSelectedvalues}
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}

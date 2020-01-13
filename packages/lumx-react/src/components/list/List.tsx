@@ -31,7 +31,7 @@ interface IListProps extends IGenericProps {
     itemPadding?: ListItemSizes;
 
     /** The ref passed to the ul element. */
-    listElementRef?: RefObject<HTMLElement>;
+    listElementRef: RefObject<HTMLElement>;
 
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
@@ -219,7 +219,7 @@ const List: React.FC<ListProps> & IList = ({
             onKeyPress={onKeyInteraction}
             onBlur={onListBlurred}
             onFocus={onListFocused}
-            ref={listElementRef}
+            ref={listElementRef as React.RefObject<HTMLUListElement>}
             {...props}
         >
             {children.map((elm: ReactNode, idx: number) => {

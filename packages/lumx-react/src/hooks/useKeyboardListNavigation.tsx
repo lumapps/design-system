@@ -20,13 +20,13 @@ interface IUseKeyboardListNavigationType {
 type useKeyboardListNavigationType = (
     items: object[],
     ref: RefObject<HTMLElement>,
-    onListItemSelected: (itemSelected: object) => {},
-    onListItemNavigated: (itemSelected: object) => {},
-    onEnterPressed: (itemSelected: object) => {},
-    onBackspacePressed: () => {},
-    keepFocusAfterSelection: boolean,
-    initialIndex: number,
-    preventTabOnEnteredValue: boolean,
+    onListItemSelected: (itemSelected: object) => void,
+    onListItemNavigated?: (itemSelected: object) => void,
+    onEnterPressed?: (itemSelected: object) => void,
+    onBackspacePressed?: () => void,
+    keepFocusAfterSelection?: boolean,
+    initialIndex?: number,
+    preventTabOnEnteredValue?: boolean,
 ) => IUseKeyboardListNavigationType;
 
 /////////////////////////////
@@ -52,10 +52,10 @@ const INITIAL_INDEX = -1;
 const useKeyboardListNavigation: useKeyboardListNavigationType = (
     items: object[],
     ref: RefObject<HTMLElement>,
-    onListItemSelected?: (itemSelected: object) => {},
-    onListItemNavigated?: (itemSelected: object) => {},
-    onEnterPressed?: (itemSelected: object) => {},
-    onBackspacePressed?: (evt: KeyboardEvent) => {},
+    onListItemSelected?: (itemSelected: object) => void,
+    onListItemNavigated?: (itemSelected: object) => void,
+    onEnterPressed?: (itemSelected: object) => void,
+    onBackspacePressed?: (evt: KeyboardEvent) => void,
     keepFocusAfterSelection: boolean = false,
     initialIndex: number = INITIAL_INDEX,
     preventTabOnEnteredValue: boolean = true,
