@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ Changed `type` prop to `multiline` flag prop in the `TextField` component
+
 ## [0.19.0][] - 2020-01-02
 
 ### Changed
