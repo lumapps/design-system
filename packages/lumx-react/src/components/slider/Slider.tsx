@@ -2,7 +2,7 @@ import React, { ReactElement, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme } from '@lumx/react';
+import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
@@ -276,12 +276,16 @@ const Slider: React.FC<SliderProps> = ({
             onMouseDown={handleMouseDown}
         >
             {label && (
-                <label htmlFor={id} className={`${CLASSNAME}__label`}>
+                <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} theme={theme}>
                     {label}
-                </label>
+                </InputLabel>
             )}
 
-            {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
+            {helper && (
+                <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                    {helper}
+                </InputHelper>
+            )}
 
             <div className={`${CLASSNAME}__ui-wrapper`}>
                 {!hideMinMaxlabel && (
