@@ -19,7 +19,7 @@
         @include lumx-input-helper(lumx-base-const('theme', 'DARK'));
     }
 
-    & .#{$lumx-base-prefix}-icon {
+    &__icon {
         margin-right: $lumx-spacing-unit / 2;
     }
 }
