@@ -13,14 +13,6 @@
 
     &__label {
         flex: 1 1 auto;
-
-        #{$self}--theme-light & {
-            @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-input-label(lumx-base-const('theme', 'DARK'));
-        }
     }
 
     &__char-counter {
