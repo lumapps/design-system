@@ -4,7 +4,7 @@ import { CSS_PREFIX, NOTIFICATION_TRANSITION_DURATION } from '@lumx/core/js/cons
 
 /////////////////////////////
 
-function NotificationService($compile, $rootScope, $timeout, LxDepthService, LxDialogService) {
+function NotificationService($compile, $rootScope, $timeout, LxDialogService) {
     'ngInject';
 
     const service = this;
@@ -129,16 +129,11 @@ function NotificationService($compile, $rootScope, $timeout, LxDepthService, LxD
             _hide(notification);
         }, _HIDE_DELAY);
 
-        LxDepthService.increase();
+        notification.appendTo('body').on('click', function onNotificationClick() {
+            _hide(notification);
 
-        notification
-            .css('z-index', LxDepthService.get())
-            .appendTo('body')
-            .on('click', function onNotificationClick() {
-                _hide(notification);
-
-                $timeout.cancel(notificationHideTimeout);
-            });
+            $timeout.cancel(notificationHideTimeout);
+        });
     }
 
     /**

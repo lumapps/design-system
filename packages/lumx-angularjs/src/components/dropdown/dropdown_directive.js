@@ -10,7 +10,6 @@ function DropdownController(
     $scope,
     $timeout,
     $window,
-    LxDepthService,
     LxDropdownService,
     LxEventSchedulerService,
     LxUtilsService,
@@ -282,12 +281,10 @@ function DropdownController(
         LxDropdownService.closeLastDropdown(true);
         LxDropdownService.registerDropdownId(lx.uuid);
 
-        LxDepthService.increase();
-
         _menuEl
             .appendTo('body')
             .show()
-            .css({ position: 'fixed', zIndex: LxDepthService.get() });
+            .css({ position: 'fixed' });
 
         $timeout(() => {
             _initHorizontalPosition();

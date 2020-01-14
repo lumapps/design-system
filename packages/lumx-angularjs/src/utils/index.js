@@ -1,6 +1,5 @@
 /* eslint-disable import/no-unassigned-import */
 
-import './depth_service';
 import './enter-keydown_directive';
 import './event-scheduler_service';
 import './focus-on-init_directive';

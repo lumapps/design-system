@@ -6,7 +6,7 @@
     $self: &;
 
     position: fixed;
-    z-index: 1000;
+    z-index: map-get($lumx-base-layers, 'low');
     top: 0;
     right: 0;
     bottom: 0;
@@ -80,7 +80,7 @@
 
     &__progress-overlay {
         position: absolute;
-        z-index: 1000;
+        z-index: map-get($lumx-base-layers, 'low');
         top: 0;
         right: 0;
         bottom: 0;

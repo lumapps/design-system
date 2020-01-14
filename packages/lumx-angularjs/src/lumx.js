@@ -1,6 +1,5 @@
 /* eslint-disable import/unambiguous */
 
-angular.module('lumx.utils.depth', []);
 angular.module('lumx.utils.enter-keydown', []);
 angular.module('lumx.utils.event-scheduler', []);
 angular.module('lumx.utils.focus-on-init', []);
@@ -9,7 +8,6 @@ angular.module('lumx.utils.stop-propagation', []);
 angular.module('lumx.utils.utils', []);
 
 angular.module('lumx.utils', [
-    'lumx.utils.depth',
     'lumx.utils.enter-keydown',
     'lumx.utils.event-scheduler',
     'lumx.utils.focus-on-init',
