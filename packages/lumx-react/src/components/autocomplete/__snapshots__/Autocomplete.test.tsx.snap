@@ -94,7 +94,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
           Montevideo
         </div>
       </ListItem>
-      ,
     </List>
   </Dropdown>
 </div>

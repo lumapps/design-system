@@ -120,7 +120,6 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
-                        ,
                     </List>
                 ),
                 isOpen: false,
@@ -149,7 +148,6 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
-                        ,
                     </List>
                 ),
                 isOpen: false,
@@ -172,7 +170,6 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
-                        ,
                     </List>
                 ),
                 isOpen: false,
@@ -195,7 +192,6 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
                                 <div>{suggestion.text}</div>
                             </ListItem>
                         ))}
-                        ,
                     </List>
                 ),
                 isOpen: false,
