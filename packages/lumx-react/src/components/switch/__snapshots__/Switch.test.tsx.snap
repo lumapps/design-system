@@ -33,46 +33,61 @@ exports[`<Switch> Conditions should not display the \`helper\` if no \`label\` i
 `;
 
 exports[`<Switch> Snapshots and structure should render correctly with a \`label\` and a \`helper\` 1`] = `
-<div
-  className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"
+<Switch
+  helper="Helper"
 >
   <div
-    className="lumx-switch__input-wrapper"
+    className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"
   >
-    <input
-      checked={false}
-      className="lumx-switch__input-native"
-      id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
-      onChange={[Function]}
-      type="checkbox"
-    />
     <div
-      className="lumx-switch__input-placeholder"
+      className="lumx-switch__input-wrapper"
     >
-      <div
-        className="lumx-switch__input-background"
+      <input
+        checked={false}
+        className="lumx-switch__input-native"
+        id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+        onChange={[Function]}
+        type="checkbox"
       />
       <div
-        className="lumx-switch__input-indicator"
-      />
+        className="lumx-switch__input-placeholder"
+      >
+        <div
+          className="lumx-switch__input-background"
+        />
+        <div
+          className="lumx-switch__input-indicator"
+        />
+      </div>
+    </div>
+    <div
+      className="lumx-switch__content"
+    >
+      <InputLabel
+        className="lumx-switch__label"
+        htmlFor="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+        theme="light"
+      >
+        <label
+          className="lumx-switch__label lumx-input-label lumx-input-label--theme-light"
+          htmlFor="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+        >
+          Label
+        </label>
+      </InputLabel>
+      <InputHelper
+        className="lumx-switch__helper"
+        theme="light"
+      >
+        <span
+          className="lumx-switch__helper lumx-input-helper lumx-input-helper--theme-light"
+        >
+          Helper
+        </span>
+      </InputHelper>
     </div>
   </div>
-  <div
-    className="lumx-switch__content"
-  >
-    <label
-      className="lumx-switch__label"
-      htmlFor="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
-    >
-      Label
-    </label>
-    <span
-      className="lumx-switch__helper"
-    >
-      Helper
-    </span>
-  </div>
-</div>
+</Switch>
 `;
 
 exports[`<Switch> Snapshots and structure should render correctly with only a \`label\` 1`] = `
@@ -103,12 +118,13 @@ exports[`<Switch> Snapshots and structure should render correctly with only a \`
   <div
     className="lumx-switch__content"
   >
-    <label
+    <InputLabel
       className="lumx-switch__label"
       htmlFor="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      theme="light"
     >
       Label
-    </label>
+    </InputLabel>
   </div>
 </div>
 `;

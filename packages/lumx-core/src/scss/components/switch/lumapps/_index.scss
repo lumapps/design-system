@@ -93,26 +93,6 @@
             padding-right: $lumx-spacing-unit;
         }
     }
-
-    &__label {
-        #{$self}--theme-light & {
-            @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-input-label(lumx-base-const('theme', 'DARK'));
-        }
-    }
-
-    &__helper {
-        #{$self}--theme-light & {
-            @include lumx-input-helper(lumx-base-const('theme', 'LIGHT'));
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-input-helper(lumx-base-const('theme', 'DARK'));
-        }
-    }
 }
 
 /* Switch states
