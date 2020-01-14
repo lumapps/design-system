@@ -4,7 +4,20 @@ import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
-import { Chip, ChipGroup, Dropdown, Emphasis, Icon, IconButton, Placement, Size, Theme } from '@lumx/react';
+import {
+    Chip,
+    ChipGroup,
+    Dropdown,
+    Emphasis,
+    Icon,
+    IconButton,
+    InputHelper,
+    InputLabel,
+    Kind,
+    Placement,
+    Size,
+    Theme,
+} from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -34,6 +47,9 @@ interface ISelectProps extends IGenericProps {
      * Whether the select (input variant) is displayed with error style or not.
      */
     hasError?: boolean;
+
+    /** The error related to the component */
+    error?: string | ReactNode;
 
     /**
      * The helper to display within the popover (last position).
@@ -190,7 +206,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: boolean) => void): void {
     useEffect((): VoidFunction | void => {
         if (!element) {
-            return;
+            return undefined;
         }
 
         const setFocus = (): void => setIsFocus(true);
@@ -213,6 +229,7 @@ function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: bool
 const Select: React.FC<SelectProps> = ({
     className = '',
     hasError = DEFAULT_PROPS.hasError,
+    error,
     onClear,
     isValid = DEFAULT_PROPS.isValid,
     isMultiple = DEFAULT_PROPS.isMultiple,
@@ -254,9 +271,8 @@ const Select: React.FC<SelectProps> = ({
                 {variant === SelectVariant.input && (
                     <>
                         <div className={`${CLASSNAME}__header`}>
-                            {label && <span className={`${CLASSNAME}__label`}>{label}</span>}
+                            {label && <InputLabel htmlFor={targetUuid}>{label}</InputLabel>}
                         </div>
-                        {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
 
                         <div
                             ref={anchorRef as RefObject<HTMLDivElement>}
@@ -380,6 +396,8 @@ const Select: React.FC<SelectProps> = ({
             >
                 {children}
             </Dropdown>
+            {hasError && error && <InputHelper kind={Kind.error} text={error} theme={theme} />}
+            {helper && <InputHelper text={helper} theme={theme} />}
         </div>
     );
 };
