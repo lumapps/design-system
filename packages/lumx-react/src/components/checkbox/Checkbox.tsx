@@ -133,7 +133,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
                         {label}
                     </InputLabel>
                 )}
-                {helper && <InputHelper text={helper} className={`${CLASSNAME}__helper`} theme={theme} />}
+                {helper && (
+                    <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                        {helper}
+                    </InputHelper>
+                )}
             </div>
         </div>
     );

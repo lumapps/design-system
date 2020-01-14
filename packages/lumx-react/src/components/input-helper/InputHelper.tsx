@@ -12,7 +12,7 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
  * Defines the props of the component.
  */
 interface IInputHelperProps extends IGenericProps {
-    text: string | ReactNode;
+    children: string | ReactNode;
     kind?: Kind;
     theme?: Theme;
 }
@@ -38,9 +38,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 };
 
 const InputHelper: React.FC<IInputHelperProps> = ({
+    children,
     className = '',
     kind = DEFAULT_PROPS.kind as Kind,
-    text,
     theme = DEFAULT_PROPS.theme,
     ...props
 }: IInputHelperProps): ReactElement => {
@@ -49,7 +49,7 @@ const InputHelper: React.FC<IInputHelperProps> = ({
     return (
         <span className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))} {...props}>
             {icon && <Icon icon={icon} size={Size.xxs} />}
-            {text}
+            {children}
         </span>
     );
 };
