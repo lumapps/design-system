@@ -48,7 +48,7 @@ const InputHelper: React.FC<IInputHelperProps> = ({
 
     return (
         <span className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))} {...props}>
-            {icon && <Icon icon={icon} size={Size.xxs} />}
+            {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xxs} />}
             {children}
         </span>
     );
