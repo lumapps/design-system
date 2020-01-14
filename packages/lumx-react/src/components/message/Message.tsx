@@ -1,6 +1,6 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Icon } from '@lumx/react';
-import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactElement, ReactNode } from 'react';
@@ -97,12 +97,10 @@ const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
             className={classNames(
                 className,
                 handleBasicClasses({
+                    color,
                     hasBackground,
                     prefix: CLASSNAME,
                 }),
-                {
-                    [`${CSS_PREFIX}-message--color-${color}`]: true,
-                },
             )}
             {...forwardedProps}
         >
