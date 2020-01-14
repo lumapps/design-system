@@ -129,11 +129,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
             <div className={`${CLASSNAME}__content`}>
                 {label && (
-                    <InputLabel htmlFor={inputId} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={inputId} className={`${CLASSNAME}__label`} theme={theme}>
                         {label}
                     </InputLabel>
                 )}
-                {helper && <InputHelper text={helper} className={`${CLASSNAME}__helper`} />}
+                {helper && <InputHelper text={helper} className={`${CLASSNAME}__helper`} theme={theme} />}
             </div>
         </div>
     );

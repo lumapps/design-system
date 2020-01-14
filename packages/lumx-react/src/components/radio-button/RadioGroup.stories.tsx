@@ -5,7 +5,7 @@ import React from 'react';
 
 export default { title: 'Radio Group', decorators };
 
-export const simpleRadioButton = ({ theme }) => (
+export const radioGroup = ({ theme }) => (
     <RadioGroup>
         <RadioButton
             checked={true}
