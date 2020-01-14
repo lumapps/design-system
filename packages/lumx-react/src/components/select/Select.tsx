@@ -266,7 +266,7 @@ const Select: React.FC<SelectProps> = ({
     const anchorRef = useRef<HTMLElement>(null);
     const hasInputClear = onClear && !isMultiple && !isEmpty;
 
-    useFocusOnClose(anchorRef.current, isOpen);
+    useFocusOnClose(anchorRef.current, Boolean(isOpen));
     useHandleElementFocus(anchorRef.current, setIsFocus);
 
     const handleKeyboardNav = (evt: React.KeyboardEvent<HTMLElement>): void => {

@@ -7,11 +7,7 @@ import { useEffect } from 'react';
  * @param isOpen              Whether or not the select is open.
  * @param shouldFocusOnOpen   Whether or not the focus should be set.
  */
-function useFocusOnOpen(
-    element: HTMLElement | null,
-    isOpen: boolean | undefined,
-    shouldFocusOnOpen: boolean | undefined,
-): void {
+function useFocusOnOpen(element: HTMLElement | null, isOpen: boolean, shouldFocusOnOpen: boolean = true): void {
     useEffect(() => {
         if (isOpen && element && shouldFocusOnOpen) {
             // Focus the element when the select is open.

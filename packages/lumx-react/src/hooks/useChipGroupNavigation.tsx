@@ -28,10 +28,10 @@ const INITIAL_STATE_ACTIVE_CHIP = -1;
  * @return chip navigation tools.
  */
 const useChipGroupNavigation: useChipGroupNavigationType = (
-    chips: object[],
-    onChipDeleted: (chipDeleted: object) => void,
-    initialActiveChip: number = INITIAL_STATE_ACTIVE_CHIP,
-): IUseChipGroupNavigation => {
+    chips,
+    onChipDeleted,
+    initialActiveChip = INITIAL_STATE_ACTIVE_CHIP,
+) => {
     const [wasBackspacePressed, setWasBackspacePressed] = useState(false);
     const [activeChip, setActiveChip] = useState(initialActiveChip);
 

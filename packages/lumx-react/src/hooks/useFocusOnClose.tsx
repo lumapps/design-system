@@ -7,11 +7,7 @@ import { useEffect } from 'react';
  * @param isOpen              Whether or not the select is open.
  * @param shouldFocusOnClose  Whether or not the select is open.
  */
-function useFocusOnClose(
-    element: HTMLElement | null,
-    isOpen: boolean | undefined,
-    shouldFocusOnClose: boolean | undefined = true,
-): void {
+function useFocusOnClose(element: HTMLElement | null, isOpen: boolean, shouldFocusOnClose: boolean = true): void {
     useEffect(() => {
         /**
          * `shouldFocusOnClose` is passed on and evaluated here in order to avoid

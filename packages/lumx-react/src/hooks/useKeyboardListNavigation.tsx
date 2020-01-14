@@ -23,7 +23,7 @@ type useKeyboardListNavigationType = (
     onListItemSelected: (itemSelected: object) => void,
     onListItemNavigated?: (itemSelected: object) => void,
     onEnterPressed?: (itemSelected: object) => void,
-    onBackspacePressed?: () => void,
+    onBackspacePressed?: (evt: KeyboardEvent) => void,
     keepFocusAfterSelection?: boolean,
     initialIndex?: number,
     preventTabOnEnteredValue?: boolean,
@@ -50,16 +50,16 @@ const INITIAL_INDEX = -1;
  * @param preventTabOnEnteredValue determines whether upon TAB, if there is a value entered, the event is prevented or not
  */
 const useKeyboardListNavigation: useKeyboardListNavigationType = (
-    items: object[],
-    ref: RefObject<HTMLElement>,
-    onListItemSelected?: (itemSelected: object) => void,
-    onListItemNavigated?: (itemSelected: object) => void,
-    onEnterPressed?: (itemSelected: object) => void,
-    onBackspacePressed?: (evt: KeyboardEvent) => void,
-    keepFocusAfterSelection: boolean = false,
-    initialIndex: number = INITIAL_INDEX,
-    preventTabOnEnteredValue: boolean = true,
-): IUseKeyboardListNavigationType => {
+    items,
+    ref,
+    onListItemSelected,
+    onListItemNavigated,
+    onEnterPressed,
+    onBackspacePressed,
+    keepFocusAfterSelection = false,
+    initialIndex = INITIAL_INDEX,
+    preventTabOnEnteredValue = true,
+) => {
     const [activeItemIndex, setActiveItemIndex] = useState(initialIndex);
 
     /**
