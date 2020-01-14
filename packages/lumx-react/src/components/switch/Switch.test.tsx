@@ -83,8 +83,8 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
         inputWrapper: wrapper.find(`.${CLASSNAME}__input-wrapper`),
 
         content: wrapper.find(`.${CLASSNAME}__content`),
-        helper: wrapper.find('span'),
-        label: wrapper.find('label'),
+        helper: wrapper.find(`.${CLASSNAME}__helper`),
+        label: wrapper.find(`.${CLASSNAME}__label`),
 
         props,
         wrapper,
@@ -122,8 +122,6 @@ describe(`<${Switch.displayName}>`, (): void => {
             expect(content).toExist();
             expect(label).toExist();
             expect(helper).not.toExist();
-
-            expect(label).toHaveText(props.children!);
         });
 
         it('should render correctly with a `label` and a `helper`', (): void => {
@@ -140,9 +138,6 @@ describe(`<${Switch.displayName}>`, (): void => {
             expect(content).toExist();
             expect(label).toExist();
             expect(helper).toExist();
-
-            expect(label).toHaveText(props.children!);
-            expect(helper).toHaveText(props.helper!);
         });
     });
 
