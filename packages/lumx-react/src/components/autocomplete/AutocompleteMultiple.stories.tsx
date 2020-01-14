@@ -180,18 +180,20 @@ export const simple = ({ theme }) => {
             onBlur={onBlur}
             selectedChipRender={renderChip}
         >
-            {filteredCities.map((city, index) => (
-                <ListItem
-                    size={Size.tiny}
-                    isClickable
-                    theme={theme}
-                    key={city.id}
-                    isHighlighted={index === activeItemIndex}
-                    onItemSelected={() => setSelectedCity(city)}
-                >
-                    <div>{city.text}</div>
-                </ListItem>
-            ))}
+            <List theme={theme}>
+                {filteredCities.map((city, index) => (
+                    <ListItem
+                        size={Size.tiny}
+                        isClickable
+                        theme={theme}
+                        key={city.id}
+                        isHighlighted={index === activeItemIndex}
+                        onItemSelected={() => setSelectedCity(city)}
+                    >
+                        <div>{city.text}</div>
+                    </ListItem>
+                ))}
+            </List>
         </AutocompleteMultiple>
     );
 };

@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ListItem, Size } from '@lumx/react';
+import { List, ListItem, Size } from '@lumx/react';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { AutocompleteMultiple, AutocompleteMultipleProps, CLASSNAME } from './AutocompleteMultiple';
@@ -62,11 +62,15 @@ describe(`<${AutocompleteMultiple.displayName}>`, (): void => {
 
         it('should render correctly', (): void => {
             const { wrapper } = setup({
-                children: suggestions.map((suggestion: ISuggestion) => (
-                    <ListItem size={Size.tiny} key={suggestion.id}>
-                        <div>{suggestion.text}</div>
-                    </ListItem>
-                )),
+                children: (
+                    <List isClickable>
+                        {suggestions.map((suggestion: ISuggestion) => (
+                            <ListItem size={Size.tiny} key={suggestion.id}>
+                                <div>{suggestion.text}</div>
+                            </ListItem>
+                        ))}
+                    </List>
+                ),
                 chips: [
                     {
                         id: 'lyon',

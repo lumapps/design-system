@@ -28,18 +28,9 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
     <div
       className="lumx-dropdown__content"
     >
-      <List
-        isClickable={true}
-        listElementRef={
-          Object {
-            "current": null,
-          }
-        }
-      >
-        <div>
-          This is the content of the dropdown
-        </div>
-      </List>
+      <div>
+        This is the content of the dropdown
+      </div>
     </div>
   </div>
 </Popover>

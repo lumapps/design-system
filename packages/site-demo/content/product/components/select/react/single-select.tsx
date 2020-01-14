@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ListItem, Select, Size } from '@lumx/react';
+import { List, ListItem, Select, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }) => {
@@ -36,22 +36,24 @@ const App = ({ theme }) => {
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            {CHOICES.length > 0
-                ? CHOICES.map((choice, index) => (
-                      <ListItem
-                          isSelected={values.includes(choice)}
-                          key={index}
-                          onItemSelected={() => onItemSelectedHandler(choice)}
-                          size={Size.tiny}
-                      >
-                          {choice}
-                      </ListItem>
-                  ))
-                : [
-                      <ListItem key={0} size={Size.tiny}>
-                          No data
-                      </ListItem>,
-                  ]}
+            <List isClickable>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={() => onItemSelectedHandler(choice)}
+                              size={Size.tiny}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size={Size.tiny}>
+                              No data
+                          </ListItem>,
+                      ]}
+            </List>
         </Select>
     );
 };

@@ -102,17 +102,20 @@ const App = ({ theme }) => {
             onFocus={onFocus}
             inputRef={inputRef}
         >
-            {hasSuggestions &&
-                filteredCities.map((city, index) => (
-                    <ListItem
-                        size={Size.tiny}
-                        key={city.id}
-                        isHighlighted={index === activeItemIndex}
-                        onItemSelected={() => setSelectedCity(city)}
-                    >
-                        <div>{city.text}</div>
-                    </ListItem>
-                ))}
+            {hasSuggestions && (
+                <List isClickable>
+                    {filteredCities.map((city, index) => (
+                        <ListItem
+                            size={Size.tiny}
+                            key={city.id}
+                            isHighlighted={index === activeItemIndex}
+                            onItemSelected={() => setSelectedCity(city)}
+                        >
+                            <div>{city.text}</div>
+                        </ListItem>
+                    ))}
+                </List>
+            )}
         </Autocomplete>
     );
 };

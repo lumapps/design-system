@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { cloneElement, useEffect, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,7 +9,7 @@ import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { useFocusOnOpen } from '@lumx/react/hooks/useFocusOnOpen';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 
-import { IGenericProps, getRootClassName, handleBasicClasses, onEscapePressed } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, isComponent, onEscapePressed } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -122,8 +122,13 @@ const Dropdown: React.FC<DropdownProps> = ({
         useInfiniteScroll(wrapperRef, onInfiniteScroll);
     }
 
-    const popperElement: React.ReactElement = useMemo(
-        () => (
+    const popperElement: React.ReactElement = useMemo(() => {
+        const clonedChildren =
+            !Array.isArray(children) && isComponent(List)(children)
+                ? cloneElement(children, { ...children.props, listElementRef })
+                : children;
+
+        return (
             <div
                 className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
                 ref={wrapperRef}
@@ -133,15 +138,10 @@ const Dropdown: React.FC<DropdownProps> = ({
                 }}
                 {...props}
             >
-                <div className={`${CLASSNAME}__content`}>
-                    <List isClickable listElementRef={listElementRef}>
-                        {children}
-                    </List>
-                </div>
+                <div className={`${CLASSNAME}__content`}>{clonedChildren}</div>
             </div>
-        ),
-        [listElementRef, wrapperRef, children, className, computedPosition, fitToAnchorWidth, props],
-    );
+        );
+    }, [listElementRef, wrapperRef, children, className, computedPosition, fitToAnchorWidth, props]);
 
     const onEscapeHandler = closeOnEscape && onClose && showDropdown && onEscapePressed(onClose);
 

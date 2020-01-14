@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Chip, Dropdown, ListItem, Placement, Size } from '@lumx/react';
+import { Button, Chip, Dropdown, List, ListItem, Placement, Size } from '@lumx/react';
 
 const App = ({ theme }) => {
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(true);
@@ -32,11 +32,13 @@ const App = ({ theme }) => {
                     showDropdown={isDropdownOpen}
                     anchorRef={ddRef}
                 >
-                    <ListItem size={Size.tiny}>Los Angeles</ListItem>
-                    <ListItem size={Size.tiny}>Monterrey</ListItem>
-                    <ListItem size={Size.tiny}>Georgetown</ListItem>
-                    <ListItem size={Size.tiny}>Cali</ListItem>
-                    <ListItem size={Size.tiny}>Trondheim</ListItem>
+                    <List isClickable>
+                        <ListItem size={Size.tiny}>Los Angeles</ListItem>
+                        <ListItem size={Size.tiny}>Monterrey</ListItem>
+                        <ListItem size={Size.tiny}>Georgetown</ListItem>
+                        <ListItem size={Size.tiny}>Cali</ListItem>
+                        <ListItem size={Size.tiny}>Trondheim</ListItem>
+                    </List>
                 </Dropdown>
             </div>
         </>

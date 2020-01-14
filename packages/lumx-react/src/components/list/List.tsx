@@ -31,7 +31,7 @@ interface IListProps extends IGenericProps {
     itemPadding?: ListItemSizes;
 
     /** The ref passed to the ul element. */
-    listElementRef: RefObject<HTMLElement>;
+    listElementRef?: RefObject<HTMLElement>;
 
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
