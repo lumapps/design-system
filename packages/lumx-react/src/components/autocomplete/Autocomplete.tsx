@@ -2,7 +2,7 @@ import React, { ReactElement, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, Offset, Placement, TextField, TextFieldType, Theme } from '@lumx/react';
+import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -264,7 +264,6 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 label={label}
                 placeholder={placeholder}
                 theme={theme}
-                type={TextFieldType.input}
             />
             <Dropdown
                 anchorRef={anchorToInput ? inputRef : textFieldRef}

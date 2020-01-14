@@ -11,11 +11,6 @@ import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react
 
 /////////////////////////////
 
-enum TextFieldType {
-    input = 'input',
-    textarea = 'textarea',
-}
-
 /**
  * Defines the props of the component.
  */
@@ -56,7 +51,10 @@ interface ITextFieldProps extends IGenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 
-    /** Minimum rows to be displayed in a text area. */
+    /** Switches the input to a textarea. */
+    multiline?: boolean;
+
+    /** Minimum rows to be displayed (requires multiline to be enabled). */
     minimumRows?: number;
 
     /** A ref that will be passed to the input or text area element. */
@@ -64,9 +62,6 @@ interface ITextFieldProps extends IGenericProps {
 
     /** Text field value. */
     value: string;
-
-    /** Text field type (input or textarea). */
-    type?: TextFieldType;
 
     /** A ref that will be passed to the wrapper element. */
     textFieldRef?: RefObject<HTMLDivElement>;
@@ -114,8 +109,8 @@ const DEFAULT_PROPS: Partial<TextFieldProps> = {
     isDisabled: false,
     isValid: false,
     minimumRows: MIN_ROWS,
+    multiline: false,
     theme: Theme.light,
-    type: TextFieldType.input,
 };
 /**
  * Hook that allows to calculate the number of rows needed for a text area.
@@ -168,9 +163,9 @@ interface IInputNativeProps {
     id?: string;
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     isDisabled?: boolean;
+    multiline?: boolean;
     maxLength?: number;
     placeholder?: string;
-    type?: TextFieldType;
     value: string;
     rows: number;
     setFocus(focus: boolean): void;
@@ -185,7 +180,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         id,
         isDisabled,
         placeholder,
-        type,
+        multiline,
         value,
         setFocus,
         onChange,
@@ -214,30 +209,27 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
     };
 
     const handleChange = (event: React.ChangeEvent): void => {
-        if (type === TextFieldType.textarea) {
+        if (multiline) {
             recomputeNumberOfRows(event);
         }
 
         onChange(get(event, 'target.value'));
     };
 
-    if (type === TextFieldType.textarea) {
-        return (
-            <textarea
-                id={id}
-                disabled={isDisabled}
-                placeholder={placeholder}
-                value={value}
-                rows={rows}
-                onFocus={onTextFieldFocus}
-                onBlur={onTextFieldBlur}
-                onChange={handleChange}
-                ref={inputRef as RefObject<HTMLTextAreaElement>}
-                {...forwardedProps}
-            />
-        );
-    }
-    return (
+    return multiline ? (
+        <textarea
+            id={id}
+            disabled={isDisabled}
+            placeholder={placeholder}
+            value={value}
+            rows={rows}
+            onFocus={onTextFieldFocus}
+            onBlur={onTextFieldBlur}
+            onChange={handleChange}
+            ref={inputRef as RefObject<HTMLTextAreaElement>}
+            {...forwardedProps}
+        />
+    ) : (
         <input
             id={id}
             disabled={isDisabled}
@@ -278,7 +270,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         minimumRows = DEFAULT_PROPS.minimumRows as number,
         inputRef = React.useRef(null),
         theme = DEFAULT_PROPS.theme,
-        type = DEFAULT_PROPS.type,
+        multiline = DEFAULT_PROPS.multiline,
         useCustomColors,
         textFieldRef,
         value,
@@ -312,11 +304,11 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     hasChips: Boolean(chips),
                     hasError: !isValid && hasError,
                     hasIcon: Boolean(icon),
-                    hasInput: type === TextFieldType.input,
+                    hasInput: !multiline,
                     hasInputClear: isClearable && isNotEmpty,
                     hasLabel: Boolean(label),
                     hasPlaceholder: Boolean(placeholder),
-                    hasTextarea: type === TextFieldType.textarea,
+                    hasTextarea: multiline,
                     hasValue: Boolean(value),
                     isClearable,
                     isDisabled,
@@ -363,6 +355,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                             inputRef,
                             isDisabled,
                             maxLength,
+                            multiline,
                             onBlur,
                             onChange,
                             onFocus,
@@ -370,7 +363,6 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                             recomputeNumberOfRows,
                             rows,
                             setFocus,
-                            type,
                             value,
                             ...forwardedProps,
                         })}
@@ -404,4 +396,4 @@ TextField.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldType, TextFieldProps };
+export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps };

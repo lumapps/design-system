@@ -16,7 +16,6 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         "current": null,
       }
     }
-    type="input"
     value=""
   />
   <Dropdown
@@ -115,7 +114,6 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
-    type="input"
     value=""
   />
   <Dropdown
