@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useRef } from 'react';
+import React, { ReactElement, ReactNode, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -41,6 +41,9 @@ interface IAutocompleteProps extends IGenericProps {
      * @see {@link DropdownProps#hasError}
      */
     fitToAnchorWidth?: boolean;
+
+    /** The error related to the component */
+    error?: string | ReactNode;
 
     /**
      * Whether the text field is displayed with error style or not.
@@ -215,6 +218,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
         isOpen,
         closeOnClick,
         closeOnEscape,
+        error,
         hasError,
         helper,
         icon,
@@ -257,6 +261,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 onBlur={onBlur}
                 onFocus={onFocus}
                 hasError={hasError}
+                error={error}
                 helper={helper}
                 icon={icon}
                 isDisabled={isDisabled}
