@@ -96,17 +96,19 @@ exports[`<RadioButton> Snapshots and structure should render label & helper 1`] 
   <div
     className="lumx-radio-button__content"
   >
-    <label
+    <InputLabel
       className="lumx-radio-button__label"
       htmlFor="lumx-radio-button-2"
+      theme="light"
     >
       Label
-    </label>
-    <span
+    </InputLabel>
+    <InputHelper
       className="lumx-radio-button__helper"
+      theme="light"
     >
       Helper
-    </span>
+    </InputHelper>
   </div>
 </div>
 `;

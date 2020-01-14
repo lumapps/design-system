@@ -147,7 +147,11 @@ const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps): React
                         {label}
                     </InputLabel>
                 )}
-                {helper && <InputHelper text={helper} theme={theme} className={`${CLASSNAME}__helper`} />}
+                {helper && (
+                    <InputHelper theme={theme} className={`${CLASSNAME}__helper`}>
+                        {helper}
+                    </InputHelper>
+                )}
             </div>
         </div>
     );

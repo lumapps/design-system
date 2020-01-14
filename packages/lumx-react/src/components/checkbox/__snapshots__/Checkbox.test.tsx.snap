@@ -36,13 +36,16 @@ exports[`<Checkbox> Props should use the given props 1`] = `
     <InputLabel
       className="lumx-checkbox__label"
       htmlFor="lumx-checkbox-3"
+      theme="light"
     >
       Test label
     </InputLabel>
     <InputHelper
       className="lumx-checkbox__helper"
-      text="Test helper"
-    />
+      theme="light"
+    >
+      Test helper
+    </InputHelper>
   </div>
 </div>
 `;
