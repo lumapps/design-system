@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 
-import { Icon, Size, Theme } from '@lumx/react';
+import { Icon, InputHelper, InputLabel, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
@@ -129,9 +129,15 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
         >
             <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Size.s} />
 
-            <span className={`${CLASSNAME}__label`}>{label}</span>
+            <InputLabel theme={theme} className={`${CLASSNAME}__label`}>
+                {label}
+            </InputLabel>
 
-            {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
+            {helper && (
+                <InputHelper theme={theme} className={`${CLASSNAME}__helper`}>
+                    {helper}
+                </InputHelper>
+            )}
         </a>
     );
 };
