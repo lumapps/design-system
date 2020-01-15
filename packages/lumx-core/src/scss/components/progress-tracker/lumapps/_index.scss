@@ -75,21 +75,13 @@
         }
     }
 
-    &__label {
-        margin-top: $lumx-spacing-unit;
-        text-align: center;
-
-        #{$self}--has-error & {
-            color: lumx-theme-color-variant('red', 'N');
-        }
-    }
-
+    &__label,
     &__helper {
         text-align: center;
+    }
 
-        #{$self}--has-error & {
-            color: lumx-theme-color-variant('red', 'N');
-        }
+    &__label {
+        margin-top: $lumx-spacing-unit;
     }
 }
 
