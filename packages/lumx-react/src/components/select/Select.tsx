@@ -271,7 +271,11 @@ const Select: React.FC<SelectProps> = ({
                 {variant === SelectVariant.input && (
                     <>
                         <div className={`${CLASSNAME}__header`}>
-                            {label && <InputLabel htmlFor={targetUuid}>{label}</InputLabel>}
+                            {label && (
+                                <InputLabel htmlFor={targetUuid} className={`${CLASSNAME}__label`}>
+                                    {label}
+                                </InputLabel>
+                            )}
                         </div>
 
                         <div
