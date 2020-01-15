@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ Rename `lx-checkbox-help` transclude slot to `lx-checkbox-helper` from `lx-checkbox` component
+
+### Added
+
 -   Added `helper` prop to `TextField` component
 -   Added `error` prop to `Autocomplete`, `Select` and `TextField` component
 
