@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   _[BREAKING]_ Rename `lx-checkbox-help` transclude slot to `lx-checkbox-helper` from `lx-checkbox` component
 -   _[BREAKING]_ Rename `lx-radio-button-help` transclude slot to `lx-radio-button-helper` from `lx-radio-button` component
+-   _[BREAKING]_ Rename `lx-switch-help` transclude slot to `lx-switch-helper` from `lx-switch` component
 
 ### Added
 
