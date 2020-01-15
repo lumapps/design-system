@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+-   Added `helper` prop to `TextField` component
+-   Added `error` prop to `Autocomplete`, `Select` and `TextField` component
+
 ### Changed
 
 -   _[BREAKING]_ Changed `type` prop to `multiline` flag prop in the `TextField` component
