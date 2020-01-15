@@ -8,7 +8,7 @@
     }
 }
 
-@mixin lumx-select-filter() {
+@mixin lumx-select-choices-filter() {
     @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'));
 
     display: flex;
@@ -16,13 +16,13 @@
     padding: $lumx-spacing-unit $lumx-spacing-unit * 2;
 }
 
-@mixin lumx-select-loader() {
+@mixin lumx-select-choices-loader() {
     display: flex;
     justify-content: center;
     padding: $lumx-spacing-unit * 2 0;
 }
 
-@mixin lumx-select-helper() {
+@mixin lumx-select-choices-helper() {
     @include lumx-typography('body1');
 
     display: flex;

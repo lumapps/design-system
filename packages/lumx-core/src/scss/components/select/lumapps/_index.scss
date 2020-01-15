@@ -78,8 +78,12 @@
         }
     }
 
-    &__filter {
-        @include lumx-select-filter;
+    &__helper {
+        margin-top: $lumx-spacing-unit;
+    }
+
+    &__choices-filter {
+        @include lumx-select-choices-filter;
 
         i {
             @include lumx-text-field-input-icon(lumx-base-const('theme', 'LIGHT'));
@@ -94,12 +98,12 @@
         }
     }
 
-    &__loader {
-        @include lumx-select-loader;
+    &__choices-loader {
+        @include lumx-select-choices-loader;
     }
 
-    &__helper {
-        margin-top: $lumx-spacing-unit;
+    &__choices-helper {
+        @include lumx-select-choices-helper;
     }
 }
 

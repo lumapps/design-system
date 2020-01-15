@@ -1,8 +1,6 @@
 <div class="lumx-select" ng-class="lx.getClasses()">
-    <div class="lumx-select__header">
-        <span class="lumx-select__label" ng-if="::lx.label && (!lx.variant || lx.variant === 'input')">
-            {{ lx.label }}
-        </span>
+    <div class="lumx-select__header" ng-if="::lx.label && (!lx.variant || lx.variant === 'input')">
+        <lx-input-label class="lumx-select__label" lx-label="{{ lx.label }}" lx-theme="{{ lx.theme }}"></lx-input-label>
     </div>
 
     <div
@@ -99,9 +97,24 @@
         </lx-chip-after>
     </lx-chip>
 
+    <lx-input-helper
+        class="lumx-select__helper "
+        lx-helper="{{ lx.error }}"
+        lx-kind="error"
+        lx-theme="{{ lx.theme }}"
+        ng-if="lx.error"
+    ></lx-input-helper>
+
+    <lx-input-helper
+        class="lumx-select__helper"
+        lx-helper="{{ lx.helper }}"
+        lx-theme="{{ lx.theme }}"
+        ng-if="lx.helper"
+    ></lx-input-helper>
+
     <lx-dropdown lx-position="left" lx-width="100%" id="{{ lx.dropdownUuid }}">
         <lx-dropdown-menu>
-            <div class="lumx-select__filter" ng-if="::lx.hasFilter">
+            <div class="lumx-select__choices-filter" ng-if="::lx.hasFilter">
                 <lx-icon lx-path="{{ lx.icons.mdiMagnify }}" lx-size="xs"></lx-icon>
 
                 <input
@@ -152,11 +165,11 @@
                 </lx-list-item>
             </lx-list>
 
-            <span class="lumx-select__helper" ng-if="lx.hasHelper && !lx.isLoading">
-                {{ lx.helper }}
+            <span class="lumx-select__choices-helper" ng-if="lx.hasChoicesHelper && !lx.isLoading">
+                {{ lx.choicesHelper }}
             </span>
 
-            <div class="lumx-select__loader" ng-if="lx.isLoading || lx.isInfiniteScrollLoading">
+            <div class="lumx-select__choices-loader" ng-if="lx.isLoading || lx.isInfiniteScrollLoading">
                 <lx-progress></lx-progress>
             </div>
         </lx-dropdown-menu>
