@@ -109,7 +109,7 @@ That's it! Thank you for your contribution!
 
 If you are developping in React please make sure to follow this check list:
 
--   [ ] Update the `CHANGELOG.react.md` file
+-   [ ] Update the `CHANGELOG.md` file
 -   [ ] Create or update component tests
 -   [ ] Keep props JSDoc comment up to date and check they appear on the demo site
 -   [ ] Keep the `lumx-react/src/index.tsx` file up to date
