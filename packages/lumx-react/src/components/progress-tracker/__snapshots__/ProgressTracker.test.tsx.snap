@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProgressTracker> Snapshots and structure should render defaults 1`] = `
+<div
+  className="lumx-progress-tracker lumx-progress-tracker--theme-light"
+>
+  <div
+    className="lumx-progress-tracker__steps"
+  >
+    <ProgressTrackerStep
+      label="Step label"
+      onClick={[Function]}
+    />
+  </div>
+  <div
+    className="lumx-progress-tracker__background-bar"
+    style={
+      Object {
+        "left": "0%",
+        "right": "0%",
+      }
+    }
+  />
+  <div
+    className="lumx-progress-tracker__foreground-bar"
+    style={
+      Object {
+        "left": "0%",
+        "right": "0%",
+        "transform": "scaleX(0)",
+      }
+    }
+  />
+</div>
+`;

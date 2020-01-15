@@ -76,10 +76,7 @@
     }
 
     &__label {
-        @include lumx-typography('body1');
-
         margin-top: $lumx-spacing-unit;
-        color: lumx-theme-color-variant('dark', 'N');
         text-align: center;
 
         #{$self}--has-error & {
@@ -88,9 +85,6 @@
     }
 
     &__helper {
-        @include lumx-typography('caption');
-
-        color: lumx-theme-color-variant('dark', 'L2');
         text-align: center;
 
         #{$self}--has-error & {
