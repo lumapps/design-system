@@ -29,11 +29,6 @@ interface ISetup extends ICommonSetup {
      * The element itselt
      */
     helper: Wrapper;
-
-    /**
-     * The element that wraps the <icon> element.
-     */
-    icon?: Wrapper;
 }
 
 /////////////////////////////
@@ -50,11 +45,9 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
     // @ts-ignore
     const wrapper: Wrapper = renderer(<InputHelper {...props} />);
     const helper: Wrapper = wrapper.find('.lumx-input-helper');
-    const icon: Wrapper = wrapper.find('Icon').first();
 
     return {
         helper,
-        icon,
         props,
         wrapper,
     };
@@ -84,11 +77,10 @@ describe(`<${InputHelper.displayName}>`, () => {
     describe('Snapshots and structure', () => {
         it('should render defaults', () => {
             const children = 'The helper text';
-            const { wrapper, helper, icon } = setup({ children });
+            const { wrapper, helper } = setup({ children });
 
             expect(wrapper).toMatchSnapshot();
             expect(helper).toExist();
-            expect(icon).toHaveLength(0);
             expect(helper).toHaveClassName(CLASSNAME);
             expect(helper).toHaveClassName(`${CLASSNAME}--theme-light`);
             expect(helper).toHaveText(children);
@@ -100,23 +92,19 @@ describe(`<${InputHelper.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should render info', () => {
-            const { helper, icon } = setup(properties.info);
-            expect(icon).toHaveLength(0);
+            const { helper } = setup(properties.info);
             expect(helper).toHaveText(properties.info.children);
         });
         it('should render error', () => {
-            const { helper, icon } = setup(properties.error);
-            expect(icon).toHaveLength(1);
+            const { helper } = setup(properties.error);
             expect(helper).toIncludeText(properties.error.children);
         });
         it('should render valid', () => {
-            const { helper, icon } = setup(properties.valid);
-            expect(icon).toHaveLength(1);
+            const { helper } = setup(properties.valid);
             expect(helper).toIncludeText(properties.valid.children);
         });
         it('should render warning', () => {
-            const { helper, icon } = setup(properties.warning);
-            expect(icon).toHaveLength(1);
+            const { helper } = setup(properties.warning);
             expect(helper).toIncludeText(properties.warning.children);
         });
 
