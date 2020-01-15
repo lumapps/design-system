@@ -8,7 +8,7 @@ import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/uti
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Kind } from '@lumx/react';
-import { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps, TextFieldType } from './TextField';
+import { CLASSNAME, TextField, TextFieldProps } from './TextField';
 
 /////////////////////////////
 
@@ -89,17 +89,17 @@ describe(`<${TextField.displayName}>`, () => {
             expect(wrapper).toHaveClassName(`${CLASSNAME}--theme-light`);
 
             expect(inputNative).toExist();
-            expect(inputNative.type()).toEqual(DEFAULT_PROPS.type);
+            expect(inputNative.type()).toEqual('input');
         });
 
         it('should render textarea', () => {
-            const { wrapper, inputNative } = setup({ id: 'fixedId', type: TextFieldType.textarea });
+            const { wrapper, inputNative } = setup({ id: 'fixedId', multiline: true });
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
 
             expect(inputNative).toExist();
-            expect(inputNative.type()).toEqual(TextFieldType.textarea);
+            expect(inputNative.type()).toEqual('textarea');
         });
     });
 
@@ -120,7 +120,7 @@ describe(`<${TextField.displayName}>`, () => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach((prop: string): void => {
+            Object.keys(modifiedProps).forEach((prop) => {
                 const propType =
                     prop === 'icon' || prop === 'label' || prop === 'placeholder'
                         ? `has${prop.charAt(0).toUpperCase() + prop.slice(1)}`
@@ -140,7 +140,7 @@ describe(`<${TextField.displayName}>`, () => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach((prop: string): void => {
+            Object.keys(modifiedProps).forEach((prop) => {
                 expect(wrapper).toHaveClassName(
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
                 );

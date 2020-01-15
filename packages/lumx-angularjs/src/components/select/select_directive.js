@@ -121,6 +121,29 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
     /////////////////////////////
 
     /**
+     * Check if two objects are equals according to their id in priority.
+     *
+     * @param  {Object} obj1 The first object to compare.
+     * @param  {Object} obj2 The second object to compare.
+     * @return {boolean} Whether obj1 is equal to obj2.
+     */
+    function _isEqual(obj1, obj2) {
+        if (angular.isUndefined(obj1) || angular.isUndefined(obj2)) {
+            return false;
+        }
+
+        if (angular.isDefined(obj1.id) && angular.isDefined(obj2.id)) {
+            return obj1.id === obj2.id;
+        } else if (angular.isDefined(obj1.uid) && angular.isDefined(obj2.uid)) {
+            return obj1.uid === obj2.uid;
+        } else if (angular.isDefined(obj1.uuid) && angular.isDefined(obj2.uuid)) {
+            return obj1.uuid === obj2.uuid;
+        }
+
+        return angular.equals(obj1, obj2);
+    }
+
+    /**
      * Returns the object index in an array.
      *
      * @param  {Array}  arr The array to check in.
@@ -129,7 +152,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
      */
     function _arrayObjectIndexOf(arr, obj) {
         for (let i = 0, len = arr.length; i < len; i++) {
-            if (angular.equals(obj, arr[i])) {
+            if (_isEqual(obj, arr[i])) {
                 return i;
             }
         }
@@ -405,6 +428,19 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
     }
 
     /**
+     * Check if choices are empty or not.
+     *
+     * @return {boolean} Whether choices aare empty or not.
+     */
+    function hasChoices() {
+        if (!lx.isChoicesArray()) {
+            return angular.isDefined(lx.choices);
+        }
+
+        return lx.choices.length > 0;
+    }
+
+    /**
      * Check if choices are in array format.
      *
      * @return {boolean} Whether choices are in array format or not.
@@ -437,7 +473,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
             return _arrayObjectIndexOf(lx.viewValue, choice) !== -1;
         }
 
-        return angular.equals(choice, lx.viewValue);
+        return _isEqual(choice, lx.viewValue);
     }
 
     /**
@@ -544,6 +580,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
     lx.displaySubheader = displaySubheader;
     lx.enableKeyEvents = enableKeyEvents;
     lx.getClasses = getClasses;
+    lx.hasChoices = hasChoices;
     lx.isChoicesArray = isChoicesArray;
     lx.isModelEmpty = isModelEmpty;
     lx.isSelected = isSelected;
