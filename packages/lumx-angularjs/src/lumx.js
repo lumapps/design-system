@@ -33,6 +33,8 @@ angular.module('lumx.expansion-panel', []);
 angular.module('lumx.grid', []);
 angular.module('lumx.icon', []);
 angular.module('lumx.image-block', []);
+angular.module('lumx.input-helper', []);
+angular.module('lumx.input-label', []);
 angular.module('lumx.lightbox', []);
 angular.module('lumx.link', []);
 angular.module('lumx.list', []);
@@ -74,6 +76,8 @@ angular.module('lumx', [
     'lumx.grid',
     'lumx.icon',
     'lumx.image-block',
+    'lumx.input-helper',
+    'lumx.input-label',
     'lumx.lightbox',
     'lumx.link',
     'lumx.list',
