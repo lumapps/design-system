@@ -100,7 +100,6 @@
     "scripts": {
         "build": "webpack",
         "prepublish": "yarn build",
-        "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles",
         "storybook": "start-storybook -p 9000"
     },
