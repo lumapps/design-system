@@ -159,16 +159,33 @@ function CheckboxDirective() {
 
         if (transclude.isSlotFilled('label')) {
             ctrls[0].hasLabel = true;
+
+            transclude(
+                (clone) => {
+                    ctrls[0].label = clone[0].innerText;
+                },
+                null,
+                'label',
+            );
         }
 
         if (transclude.isSlotFilled('helper')) {
             ctrls[0].hasHelper = true;
+
+            transclude(
+                (clone) => {
+                    ctrls[0].helper = clone[0].innerText;
+                },
+                null,
+                'helper',
+            );
         }
 
         if (!ctrls[0].hasLabel && !ctrls[0].hasHelper) {
             transclude((clone) => {
                 if (clone.length > 0) {
                     ctrls[0].hasTranscluded = true;
+                    ctrls[0].label = clone[0].innerText;
                 }
             });
         }
@@ -204,7 +221,7 @@ function CheckboxDirective() {
         },
         template,
         transclude: {
-            helper: '?lxCheckboxHelp',
+            helper: '?lxCheckboxHelper',
             label: '?lxCheckboxLabel',
         },
     };
