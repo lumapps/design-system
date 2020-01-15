@@ -68,8 +68,8 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ProgressTrackerProps): ReactElement => {
-    const backgroundPosition: number = children.lenght > 0 ? 100 / (children.length * 2) : 0;
-    const trackPosition: number = activeStep > 0 ? ((100 / (children.length - 1)) * activeStep) / 100 : 0;
+    const backgroundPosition: number = children.length > 0 ? 100 / (children.length * 2) : 0;
+    const trackPosition: number = children.length > 0 ? ((100 / (children.length - 1)) * activeStep) / 100 : 0;
 
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props}>
