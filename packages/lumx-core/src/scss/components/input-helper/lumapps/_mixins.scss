@@ -3,7 +3,6 @@
 
     display: flex;
     align-items: center;
-    margin-top: $lumx-spacing-unit / 2;
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-theme-color-variant('dark', 'L2');

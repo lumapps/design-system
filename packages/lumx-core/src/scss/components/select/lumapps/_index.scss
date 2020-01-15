@@ -97,6 +97,10 @@
     &__loader {
         @include lumx-select-loader;
     }
+
+    &__helper {
+        margin-top: $lumx-spacing-unit;
+    }
 }
 
 /* Select states
