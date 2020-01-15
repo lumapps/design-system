@@ -397,11 +397,15 @@ const Select: React.FC<SelectProps> = ({
                 {children}
             </Dropdown>
             {hasError && error && (
-                <InputHelper kind={Kind.error} theme={theme}>
+                <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme}>
                     {error}
                 </InputHelper>
             )}
-            {helper && <InputHelper theme={theme}>{helper}</InputHelper>}
+            {helper && (
+                <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                    {helper}
+                </InputHelper>
+            )}
         </div>
     );
 };

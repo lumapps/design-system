@@ -7,6 +7,10 @@
 
     user-select: none;
 
+    &__helper {
+        margin-top: $lumx-spacing-unit / 2;
+    }
+
     &__value-label {
         font-size: 10px;
 
