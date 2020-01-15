@@ -23,6 +23,8 @@ import './components/grid/grid_directive';
 import './components/grid/grid-item_directive';
 import './components/icon/icon_directive';
 import './components/image-block/image-block_directive';
+import './components/input-helper/input-helper_directive';
+import './components/input-label/input-label_directive';
 import './components/lightbox/lightbox_directive';
 import './components/lightbox/lightbox_service';
 import './components/link/link_directive';
