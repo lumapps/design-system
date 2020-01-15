@@ -1,10 +1,9 @@
-import { TextField, TextFieldType } from '@lumx/react';
-import { decorators } from '@lumx/react/story-block';
+import { TextField } from '@lumx/react';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'TextField', decorators };
+export default { title: 'TextField' };
 
 /**
  * TextField story
@@ -16,7 +15,6 @@ export const simpleTextField = ({ theme }) => (
         label={text('Label', 'I am the label')}
         placeholder={text('Placeholder', 'ex: A value')}
         theme={theme}
-        type={TextFieldType.input}
         onChange={noop}
     />
 );

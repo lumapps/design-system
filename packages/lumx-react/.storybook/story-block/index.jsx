@@ -1,3 +1,3 @@
 export * from './StoryBlock';
 
-export * from './decorators';
+export * from './decorator';

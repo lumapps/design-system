@@ -1,9 +1,8 @@
 import { RadioButton, RadioGroup } from '@lumx/react';
-import { decorators } from '@lumx/react/story-block';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'Radio Group', decorators };
+export default { title: 'Radio Group' };
 
 export const radioGroup = ({ theme }) => (
     <RadioGroup>

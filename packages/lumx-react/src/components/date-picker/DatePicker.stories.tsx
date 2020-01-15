@@ -2,9 +2,7 @@ import React from 'react';
 
 import { DatePickerField } from '@lumx/react';
 
-import { decorators } from '@lumx/react/story-block';
-
-export default { title: 'DatePicker', decorators };
+export default { title: 'DatePicker' };
 
 export const simpleDatePicker = ({ theme }) => {
     const [value, setValue] = React.useState();

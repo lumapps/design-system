@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-no-bind */
-import React, { useState, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 
 import classnames from 'classnames';
 
@@ -10,32 +10,27 @@ import classnames from 'classnames';
 import '@lumx/core/scss/lumx-theme-material.scss';
 import '@lumx/core/scss/lumx-theme-lumapps.scss';
 
-import { Chip, Size, Switch, SwitchPosition, Theme } from '@lumx/react';
+import { Chip, Size, Theme } from '@lumx/react';
 
 import { styles } from './styles';
 
 const THEMES = ['material', 'lumapps'];
 
-const stylesNodes = [];
+const stylesNodes: Node[] = [];
+
+interface IStoryBlockProps {
+    children(p: { theme: Theme }): ReactNode;
+}
 
 const CLASSNAME = 'story-block';
-const StoryBlock = (props) => {
+const StoryBlock: React.FC<IStoryBlockProps> = (props) => {
     const [theme, setTheme] = useState('lumapps');
+    const changeTheme = (newTheme) => () => setTheme(newTheme);
+
     const [colorTheme, setColorTheme] = useState(Theme.light);
+    const changeColorTheme = (newColorTheme) => () => setColorTheme(newColorTheme);
 
     const { children } = props;
-
-    const changeTheme = (newTheme) => {
-        setTheme(newTheme);
-    };
-
-    const toggleTheme = (checked) => {
-        if (checked) {
-            setColorTheme(Theme.dark);
-        } else {
-            setColorTheme(Theme.light);
-        }
-    };
 
     useEffect(() => {
         /**
@@ -78,9 +73,9 @@ const StoryBlock = (props) => {
 
             document.head.appendChild(stylesNodes[currentStyle]);
         }
-    });
+    }, [theme]);
 
-    return [
+    return (
         <div
             key="story"
             className={classnames(CLASSNAME, {
@@ -94,7 +89,7 @@ const StoryBlock = (props) => {
                     isSelected={theme === 'lumapps'}
                     size={Size.s}
                     theme={colorTheme}
-                    onClick={() => changeTheme('lumapps')}
+                    onClick={changeTheme('lumapps')}
                 >
                     LumApps
                 </Chip>
@@ -103,20 +98,33 @@ const StoryBlock = (props) => {
                     isSelected={theme === 'material'}
                     size={Size.s}
                     theme={colorTheme}
-                    onClick={() => changeTheme('material')}
+                    onClick={changeTheme('material')}
                 >
                     Material
+                </Chip>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    isSelected={colorTheme === Theme.light}
+                    size={Size.s}
+                    theme={colorTheme}
+                    onClick={changeColorTheme(Theme.light)}
+                >
+                    Light
+                </Chip>
+                <Chip
+                    className="lumx-spacing-margin-right-tiny"
+                    isSelected={colorTheme === Theme.dark}
+                    size={Size.s}
+                    theme={colorTheme}
+                    onClick={changeColorTheme(Theme.dark)}
+                >
+                    Dark
                 </Chip>
             </div>
 
             {children({ theme: colorTheme })}
-        </div>,
-        <div key="switcher" className={`${CLASSNAME}__color-theme-selector`} style={styles.colorThemeSelector}>
-            <Switch checked={colorTheme === Theme.dark} position={SwitchPosition.right} onToggle={toggleTheme}>
-                Dark Background
-            </Switch>
-        </div>,
-    ];
+        </div>
+    );
 };
 
 export { StoryBlock };

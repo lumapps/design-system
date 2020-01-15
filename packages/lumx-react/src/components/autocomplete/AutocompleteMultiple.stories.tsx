@@ -4,9 +4,7 @@ import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } fro
 
 import { mdiClose } from '@lumx/icons';
 
-import { decorators } from '@lumx/react/story-block';
-
-export default { title: 'Autocomplete Multiple', decorators };
+export default { title: 'Autocomplete Multiple' };
 
 const CITIES = [
     {

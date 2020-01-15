@@ -1,10 +1,9 @@
 import { ProgressTracker, ProgressTrackerStep } from '@lumx/react';
-import { decorators } from '@lumx/react/story-block';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'Progress Tracker', decorators };
+export default { title: 'Progress Tracker' };
 
 export const simpleSteps = ({ theme }) => (
     <ProgressTracker theme={theme}>

@@ -3,11 +3,9 @@ import React from 'react';
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 import { Avatar, Emphasis, IconButton, Size } from '@lumx/react';
 
-import { decorators } from '@lumx/react/story-block';
-
 import { text } from '@storybook/addon-knobs';
 
-export default { title: 'Avatar', decorators };
+export default { title: 'Avatar' };
 
 /**
  * Avatar stories showing a simple Avatar with different sizes.
