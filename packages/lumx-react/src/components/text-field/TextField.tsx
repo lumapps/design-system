@@ -406,11 +406,15 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 </div>
             </div>
             {hasError && error && (
-                <InputHelper kind={Kind.error} theme={theme}>
+                <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme}>
                     {error}
                 </InputHelper>
             )}
-            {helper && <InputHelper theme={theme}>{helper}</InputHelper>}
+            {helper && (
+                <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                    {helper}
+                </InputHelper>
+            )}
         </div>
     );
 };

@@ -93,6 +93,10 @@
             padding-right: $lumx-spacing-unit;
         }
     }
+
+    &__helper {
+        margin-top: $lumx-spacing-unit / 2;
+    }
 }
 
 /* Switch states

@@ -59,12 +59,13 @@
         }
     }
 
-    &__label {
+    &__label,
+    &__helper {
         padding-left: $lumx-spacing-unit;
     }
 
     &__helper {
-        padding-left: $lumx-spacing-unit;
+        margin-top: $lumx-spacing-unit / 2;
     }
 }
 
