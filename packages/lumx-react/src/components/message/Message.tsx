@@ -1,5 +1,5 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
-import { ColorPalette, Icon } from '@lumx/react';
+import { ColorPalette, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
@@ -104,7 +104,7 @@ const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
             )}
             {...forwardedProps}
         >
-            <Icon className="lumx-message__icon" icon={icon} />
+            <Icon className="lumx-message__icon" icon={icon} size={Size.xs} />
             <div className="lumx-message__text">{children}</div>
         </div>
     );
