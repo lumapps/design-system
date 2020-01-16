@@ -4,20 +4,6 @@ import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
-// import {
-//     Chip,
-//     ChipGroup,
-//     Dropdown,
-//     Emphasis,
-//     Icon,
-//     IconButton,
-//     InputHelper,
-//     InputLabel,
-//     Kind,
-//     Placement,
-//     Size,
-//     Theme,
-// } from '@lumx/react';
 import { Emphasis, Kind, Size, Theme } from '@lumx/react/components';
 import { IconButton } from '@lumx/react/components/button/IconButton';
 import { Chip } from '@lumx/react/components/chip/Chip';
@@ -30,7 +16,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
-import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
+import { useFocus } from '@lumx/react/hooks/useFocus';
 
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -268,7 +254,7 @@ const Select: React.FC<SelectProps> = ({
     const anchorRef = useRef<HTMLElement>(null);
     const hasInputClear = onClear && !isMultiple && !isEmpty;
 
-    useFocusOnClose(anchorRef.current, Boolean(isOpen));
+    useFocus(anchorRef.current, Boolean(isOpen));
     useHandleElementFocus(anchorRef.current, setIsFocus);
 
     const handleKeyboardNav = useCallback(

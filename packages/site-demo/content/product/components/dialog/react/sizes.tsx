@@ -1,125 +1,75 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
-import { Alignment, Button, ButtonEmphasis, Dialog, Grid, GridItem, Orientation, Size, Toolbar } from '@lumx/react';
+import { Button, Dialog, Emphasis, Size, Toolbar } from '@lumx/react';
 
 const App = ({ theme }) => {
-    const [isOpened, setIsOpened] = useState(false);
-    const [selectedSize, setSelectedSize] = useState();
+    const [size, setSize] = useState();
 
-    const triggerElement = useRef(null);
+    const [isOpen, setOpen] = useState(false);
+    const close = useCallback(() => setOpen(false), []);
+    const toggle = useCallback(() => setOpen(!isOpen), [isOpen]);
 
-    const onOpenModal = useCallback(() => {
-        // Do something.
-    }, []);
+    const buttonRef = useRef(null);
 
-    const onCloseModal = useCallback(() => {
-        // Do something.
-        setIsOpened(false);
-    }, []);
-
-    const handleClick = useCallback(() => {
-        setIsOpened(!isOpened);
-    }, [isOpened]);
-
-    const footerBtns = useMemo(
-        () => (
-            <>
-                <Button emphasis={ButtonEmphasis.medium} onClick={onCloseModal}>
-                    Cancel
-                </Button>
-
-                <Button className="lumx-spacing-margin-left-regular" onClick={onCloseModal}>
-                    Save
-                </Button>
-            </>
-        ),
-        [],
-    );
+    const onClickSize = (newSize: Size) => () => {
+        setSize(newSize);
+        toggle();
+    };
 
     return (
-        <>
-            <div className="demo-grid">
-                <Button
-                    buttonRef={triggerElement}
-                    aria-label="tiny Modal"
-                    type="button"
-                    onClick={() => {
-                        setSelectedSize(Size.tiny);
-                        setIsOpened(!isOpened);
-                    }}
-                    theme={theme}
-                >
-                    tiny
-                </Button>
+        <div className="demo-grid">
+            <Button buttonRef={buttonRef} onClick={onClickSize(Size.tiny)} theme={theme}>
+                Tiny
+            </Button>
 
-                <Button
-                    buttonRef={triggerElement}
-                    aria-label="regular Modal"
-                    type="button"
-                    onClick={() => {
-                        setSelectedSize(Size.regular);
-                        setIsOpened(!isOpened);
-                    }}
-                    theme={theme}
-                >
-                    regular
-                </Button>
+            <Button buttonRef={buttonRef} onClick={onClickSize(Size.regular)} theme={theme}>
+                Regular
+            </Button>
 
-                <Button
-                    buttonRef={triggerElement}
-                    aria-label="big Modal"
-                    type="button"
-                    onClick={() => {
-                        setSelectedSize(Size.big);
-                        setIsOpened(!isOpened);
-                    }}
-                    theme={theme}
-                >
-                    big
-                </Button>
+            <Button buttonRef={buttonRef} onClick={onClickSize(Size.big)} theme={theme}>
+                Big
+            </Button>
 
-                <Button
-                    buttonRef={triggerElement}
-                    aria-label="huge Modal"
-                    type="button"
-                    onClick={() => {
-                        setSelectedSize(Size.huge);
-                        setIsOpened(!isOpened);
-                    }}
-                    theme={theme}
-                >
-                    huge
-                </Button>
-            </div>
+            <Button buttonRef={buttonRef} onClick={onClickSize(Size.huge)} theme={theme}>
+                Huge
+            </Button>
 
-            <Dialog
-                theme={theme}
-                isOpen={isOpened}
-                parentElement={triggerElement}
-                onClose={onCloseModal}
-                onOpen={onOpenModal}
-                header={<Toolbar label={<span className="lumx-typography-title">Dialog</span>} />}
-                footer={<Toolbar after={footerBtns} />}
-                size={selectedSize}
-            >
-                <div className="lumx-spacing-padding-horizontal-huge">
-                    <p>
-                        Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
-                        Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
-                        dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
-                        commodi consequat. Inmensae subtilitatis, obscuris et malesuada fames. Me non paenitet nullum
-                        festiviorem excogitasse ad hoc. Cum ceteris in veneratione tui montes, nascetur mus. Etiam
-                        habebis sem dicantur magna mollis euismod. Quis aute iure reprehenderit in voluptate velit esse.
-                        Phasellus laoreet lorem vel dolor tempus vehicula. Ambitioni dedisse scripsisse iudicaretur.
-                        Paullum deliquit, ponderibus modulisque suis ratio utitur. Ab illo tempore, ab est sed
-                        immemorabili. Nec dubitamus multa iter quae et nos invenerat. Tu quoque, Brute, fili mi, nihil
-                        timor populi, nihil! Morbi fringilla convallis sapien, id pulvinar odio volutpat. Cras mattis
-                        iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutrum faucibus.
-                        Quisque ut dolor gravida, placerat libero vel, euismod.
-                    </p>
-                </div>
+            <Dialog isOpen={isOpen} parentElement={buttonRef} onClose={close} size={size}>
+                <header>
+                    <Toolbar label={<span className="lumx-typography-title">Dialog</span>} />
+                </header>
+
+                <p className="lumx-spacing-padding-horizontal-huge">
+                    Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
+                    Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum dapibus.
+                    Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea commodi
+                    consequat. Inmensae subtilitatis, obscuris et malesuada fames. Me non paenitet nullum festiviorem
+                    excogitasse ad hoc. Cum ceteris in veneratione tui montes, nascetur mus. Etiam habebis sem dicantur
+                    magna mollis euismod. Quis aute iure reprehenderit in voluptate velit esse. Phasellus laoreet lorem
+                    vel dolor tempus vehicula. Ambitioni dedisse scripsisse iudicaretur. Paullum deliquit, ponderibus
+                    modulisque suis ratio utitur. Ab illo tempore, ab est sed immemorabili. Nec dubitamus multa iter
+                    quae et nos invenerat. Tu quoque, Brute, fili mi, nihil timor populi, nihil! Morbi fringilla
+                    convallis sapien, id pulvinar odio volutpat. Cras mattis iudicium purus sit amet fermentum. Vivamus
+                    sagittis lacus vel augue laoreet rutrum faucibus. Quisque ut dolor gravida, placerat libero vel,
+                    euismod.
+                </p>
+
+                <footer>
+                    <Toolbar
+                        after={
+                            <>
+                                <Button emphasis={Emphasis.medium} onClick={close}>
+                                    Cancel
+                                </Button>
+                                <Button className="lumx-spacing-margin-left-regular" onClick={close}>
+                                    Save
+                                </Button>
+                            </>
+                        }
+                    />
+                </footer>
             </Dialog>
-        </>
+        </div>
     );
 };
 

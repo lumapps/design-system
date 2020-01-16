@@ -12,8 +12,8 @@ declare function detectSwipe(el: Element, cb: (swipeDirection: SwipeDirection) =
 
 declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
 
-declare function onEnterPressed(cb: Callback): Callback;
+declare function onEnterPressed(cb: Callback): (evt: KeyboardEvent | React.KeyboardEvent) => void;
 
-declare function onEscapePressed(cb: () => void): Callback;
+declare function onEscapePressed(cb: Callback): (evt: KeyboardEvent | React.KeyboardEvent) => void;
 
 export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed, SwipeDirection };

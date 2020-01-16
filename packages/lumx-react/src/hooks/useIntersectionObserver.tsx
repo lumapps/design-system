@@ -1,19 +1,27 @@
-/**
- * Convenient hook to create interaction observers
- */
-// tslint:disable: no-any typedef
-
 import { useEffect, useRef, useState } from 'react';
 
-export default ({ root = null, rootMargin = '0 px', threshold = [0] }: any): [any, IntersectionObserverEntry] => {
-    const [currentEntry, updateCurrentEntry] = useState<any>();
-    const [node, setNode] = useState(null);
+type returnType = [(HTMLElement) => void, IntersectionObserverEntry[]];
+type functionType = (IntersectionObserverInit) => returnType;
+
+/**
+ * Convenient hook to create interaction observers.
+ * @return Tuple of the sentinel ref and the list of intersections
+ */
+export const useIntersectionObserver: functionType = ({
+    root = null,
+    rootMargin = '0px',
+    threshold = [0],
+    ...options
+}) => {
+    const [intersections, setIntersections] = useState<IntersectionObserverEntry[]>([]);
+    const [element, setElement] = useState<HTMLElement>();
 
     const observer = useRef(
-        new IntersectionObserver(([entry]) => updateCurrentEntry(entry), {
+        new IntersectionObserver(setIntersections, {
             root,
             rootMargin,
             threshold,
+            ...options,
         }),
     );
 
@@ -21,12 +29,12 @@ export default ({ root = null, rootMargin = '0 px', threshold = [0] }: any): [an
         const { current: currentObserver } = observer;
         currentObserver.disconnect();
 
-        if (node) {
-            currentObserver.observe(node!);
+        if (element) {
+            currentObserver.observe(element);
+            return () => currentObserver.disconnect();
         }
+        return;
+    }, [element]);
 
-        return () => currentObserver.disconnect();
-    }, [node]);
-
-    return [setNode, currentEntry];
+    return [setElement, intersections];
 };
