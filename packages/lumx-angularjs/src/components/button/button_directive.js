@@ -164,12 +164,19 @@ function ButtonController() {
             classes.push(`${CSS_PREFIX}-button--variant-${lx.variant}`);
         }
 
-        if (angular.isUndefined(lx.type) || !lx.type) {
-            // Backward compatibility.
+        // Backward compatibility.
+        if (angular.isDefined(lx.type) && lx.type) {
+            classes.push(`btn--${lx.type}`);
+        } else if (lx.variant === 'icon') {
+            if (angular.isUndefined(lx.emphasis) || !lx.emphasis || lx.emphasis === 'high') {
+                classes.push('btn--fab');
+            } else {
+                classes.push('btn--icon');
+            }
+        } else if (angular.isUndefined(lx.emphasis) || !lx.emphasis || lx.emphasis === 'high') {
             classes.push('btn--raised');
         } else {
-            // Backward compatibility.
-            classes.push(`btn--${lx.type}`);
+            classes.push('btn--flat');
         }
 
         if (lx.customColors) {
