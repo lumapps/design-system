@@ -6,6 +6,7 @@ import { List } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
+import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
 import { useFocusOnOpen } from '@lumx/react/hooks/useFocusOnOpen';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 
@@ -173,6 +174,8 @@ const Dropdown: React.FC<DropdownProps> = ({
     // Set the focus on the list when the dropdown opens,
     // in order to enable keyboard controls.
     useFocusOnOpen(listElementRef.current, isVisible, shouldFocusOnOpen);
+
+    useFocusOnClose(anchorRef.current, isVisible, true);
 
     return showDropdown ? (
         <Popover

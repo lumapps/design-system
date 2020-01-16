@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -28,7 +28,7 @@ import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 import { Placement } from '@lumx/react/components/popover/Popover';
 
-import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
 import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
 
@@ -231,6 +231,8 @@ function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: bool
     }, [element]);
 }
 
+const stopPropagation = (evt: Event): void => evt.stopPropagation();
+
 /**
  * Select component.
  *
@@ -269,13 +271,20 @@ const Select: React.FC<SelectProps> = ({
     useFocusOnClose(anchorRef.current, Boolean(isOpen));
     useHandleElementFocus(anchorRef.current, setIsFocus);
 
-    const handleKeyboardNav = (evt: React.KeyboardEvent<HTMLElement>): void => {
-        if ((evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE) && onInputClick) {
-            onInputClick();
-        }
-    };
+    const handleKeyboardNav = useCallback(
+        (evt: React.KeyboardEvent<HTMLElement>): void => {
+            if (
+                (evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE || evt.which === DOWN_KEY_CODE) &&
+                onInputClick
+            ) {
+                evt.preventDefault();
+                onInputClick();
+            }
+        },
+        [onInputClick],
+    );
 
-    const createParentElement: () => ReactNode = (): ReactNode => {
+    const createParentElement: () => ReactNode = useCallback((): ReactNode => {
         return (
             <>
                 {variant === SelectVariant.input && (
@@ -293,7 +302,7 @@ const Select: React.FC<SelectProps> = ({
                             id={targetUuid}
                             className={`${CLASSNAME}__wrapper`}
                             onClick={onInputClick}
-                            onKeyPress={handleKeyboardNav}
+                            onKeyDown={handleKeyboardNav}
                             tabIndex={0}
                         >
                             <div className={`${CLASSNAME}__chips`}>
@@ -337,6 +346,7 @@ const Select: React.FC<SelectProps> = ({
                                     size={Size.s}
                                     theme={theme}
                                     onClick={onClear}
+                                    onKeyDown={stopPropagation}
                                 />
                             )}
 
@@ -372,7 +382,22 @@ const Select: React.FC<SelectProps> = ({
                 )}
             </>
         );
-    };
+    }, [
+        variant,
+        label,
+        value,
+        isEmpty,
+        isMultiple,
+        isValid,
+        hasError,
+        onClear,
+        onInputClick,
+        theme,
+        placeholder,
+        handleKeyboardNav,
+        targetUuid,
+        anchorRef,
+    ]);
 
     return (
         <div
