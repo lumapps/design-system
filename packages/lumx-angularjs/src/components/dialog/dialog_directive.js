@@ -185,34 +185,39 @@ function DialogController(
                     }
                 }
 
-                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--top`) && !lx.forceHeaderDivider) {
+                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--top`)) {
                     if (entry.isIntersecting) {
                         _isIntersecting.top = false;
                         _removeScrollState();
 
-                        dialogHeader.removeClass(`${CSS_PREFIX}-dialog__header--has-divider`);
+                        if (!lx.forceHeaderDivider) {
+                            dialogHeader.removeClass(`${CSS_PREFIX}-dialog__header--has-divider`);
+                        }
                     } else {
                         _isIntersecting.top = true;
 
-                        dialogHeader.addClass(`${CSS_PREFIX}-dialog__header--has-divider`);
+                        if (!lx.forceHeaderDivider) {
+                            dialogHeader.addClass(`${CSS_PREFIX}-dialog__header--has-divider`);
+                        }
                     }
                 }
 
-                if (
-                    entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--bottom`) &&
-                    !lx.forceFooterDivider
-                ) {
+                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--bottom`)) {
                     if (entry.isIntersecting) {
                         _isIntersecting.bottom = false;
                         _removeScrollState();
 
-                        dialogFooter.removeClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
+                        if (!lx.forceFooterDivider) {
+                            dialogFooter.removeClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
+                        }
 
                         $rootScope.$broadcast('lx-dialog__scroll-end', lx.id);
                     } else {
                         _isIntersecting.bottom = true;
 
-                        dialogFooter.addClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
+                        if (!lx.forceFooterDivider) {
+                            dialogFooter.addClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
+                        }
                     }
                 }
             });
