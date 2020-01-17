@@ -272,6 +272,9 @@ export const dialogWithFocusableElements = ({ theme }) => {
                             </List>
                         </Select>
                     </GridItem>
+                    <GridItem className="lumx-spacing-padding">
+                        <div tabIndex={0}>Focus div</div>
+                    </GridItem>
                 </Grid>
             </Dialog>
         </>

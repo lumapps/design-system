@@ -151,13 +151,12 @@ const Dialog: React.FC<DialogProps> = (props) => {
     useCallbackOnEscape(onClose, isOpen && !preventAutoClose);
 
     const wrapperRef = useRef<HTMLElement>(null);
-    useFocusTrap(wrapperRef.current);
 
     // Focus the parent element on close.
     useFocus(parentElement?.current, !Boolean(isOpen));
 
-    // Focus the focus element on open.
-    useFocus(focusElement?.current, Boolean(isOpen));
+    // Handle focus trap.
+    useFocusTrap(wrapperRef.current, focusElement?.current);
 
     const [sentinelTop, topIntersections] = useIntersectionObserver({ threshold: [0, 1] });
     const hasTopIntersection = topIntersections.some((i) => !i.isIntersecting);

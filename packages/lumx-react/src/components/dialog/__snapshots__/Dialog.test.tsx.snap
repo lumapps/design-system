@@ -201,6 +201,15 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
           </List>
         </Select>
       </GridItem>
+      <GridItem
+        className="lumx-spacing-padding"
+      >
+        <div
+          tabIndex={0}
+        >
+          Focus div
+        </div>
+      </GridItem>
     </Grid>
   </Component>
 </Fragment>
