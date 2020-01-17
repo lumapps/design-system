@@ -162,7 +162,7 @@ function CheckboxDirective() {
 
             transclude(
                 (clone) => {
-                    ctrls[0].label = clone[0].innerText;
+                    ctrls[0].label = clone.text().trim();
                 },
                 null,
                 'label',
@@ -174,7 +174,7 @@ function CheckboxDirective() {
 
             transclude(
                 (clone) => {
-                    ctrls[0].helper = clone[0].innerText;
+                    ctrls[0].helper = clone.text().trim();
                 },
                 null,
                 'helper',
@@ -185,7 +185,7 @@ function CheckboxDirective() {
             transclude((clone) => {
                 if (clone.length > 0) {
                     ctrls[0].hasTranscluded = true;
-                    ctrls[0].label = clone[0].innerText;
+                    ctrls[0].label = clone.text().trim();
                 }
             });
         }
