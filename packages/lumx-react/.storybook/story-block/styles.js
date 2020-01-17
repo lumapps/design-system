@@ -3,6 +3,8 @@ const styles = {
         padding: '20px',
     },
     selector: {
+        alignItems: 'center',
+        display: 'flex',
         marginBottom: '20px',
     },
     colorThemeSelector: {
