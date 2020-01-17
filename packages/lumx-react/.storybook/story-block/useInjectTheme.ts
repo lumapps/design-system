@@ -1,14 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 /**
  * Please make sure that these themes are in the same order
  * as the `THEMES` constant.
  */
-import '@lumx/core/scss/lumx-theme-material.scss';
 import '@lumx/core/scss/lumx-theme-lumapps.scss';
+import '@lumx/core/scss/lumx-theme-material.scss';
 
 export type GlobalTheme = 'material' | 'lumapps';
 const THEMES: GlobalTheme[] = ['material', 'lumapps'];
+const stylesNodes: Node[] = [];
 
 /**
  * This effect retrieves all the injected styles that were added
@@ -25,13 +26,11 @@ const THEMES: GlobalTheme[] = ['material', 'lumapps'];
  * @param globalTheme The theme to inject.
  */
 export function useInjectTheme(globalTheme: GlobalTheme) {
-    const stylesNodes = useRef<Node[]>([]);
-
     useEffect(() => {
         const currentStyle = THEMES.indexOf(globalTheme);
         const nodes = document.querySelectorAll('style#injected-styles');
 
-        if (stylesNodes.current.length === 0) {
+        if (stylesNodes.length === 0) {
             /**
              * In the first execution, we cache the styles that were added, in order to
              * use them later on once the theme changing starts.
@@ -39,7 +38,7 @@ export function useInjectTheme(globalTheme: GlobalTheme) {
              * We also take the opportunity to remove all the other styles that are not needed.
              */
             nodes.forEach((node, position) => {
-                stylesNodes.current.push(node.cloneNode(true));
+                stylesNodes.push(node.cloneNode(true));
 
                 if (position !== currentStyle) {
                     node.remove();
@@ -55,7 +54,7 @@ export function useInjectTheme(globalTheme: GlobalTheme) {
                 node.remove();
             });
 
-            document.head.appendChild(stylesNodes.current[currentStyle]);
+            document.head.appendChild(stylesNodes[currentStyle]);
         }
     }, [globalTheme]);
 }
