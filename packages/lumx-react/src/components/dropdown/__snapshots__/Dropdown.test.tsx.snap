@@ -2,7 +2,7 @@
 
 exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
 <Popover
-  isVisible={false}
+  isVisible={true}
   placement="auto-start"
   popoverRect={
     Object {
