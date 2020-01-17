@@ -1,0 +1,11 @@
+@mixin lumx-input-label($theme) {
+    @include lumx-typography($lumx-input-label-typography);
+
+    display: block;
+
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-theme-color-variant('dark', 'N');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-theme-color-variant('light', 'N');
+    }
+}

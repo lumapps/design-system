@@ -6,7 +6,7 @@ import uuid from 'uuid/v4';
 import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
-import { Theme } from '@lumx/react';
+import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
@@ -172,10 +172,14 @@ const Switch: React.FC<SwitchProps> = ({
 
             {Children.count(newChildren) > 0 && (
                 <div className={`${CLASSNAME}__content`}>
-                    <label htmlFor={switchId} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={switchId} theme={theme} className={`${CLASSNAME}__label`}>
                         {newChildren}
-                    </label>
-                    {!isEmpty(helper) && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
+                    </InputLabel>
+                    {!isEmpty(helper) && (
+                        <InputHelper theme={theme} className={`${CLASSNAME}__helper`}>
+                            {helper}
+                        </InputHelper>
+                    )}
                 </div>
             )}
         </div>

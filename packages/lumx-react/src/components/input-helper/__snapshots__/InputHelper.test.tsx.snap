@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputHelper> Snapshots and structure should render defaults 1`] = `
+<span
+  className="lumx-input-helper lumx-input-helper--theme-light"
+>
+  The helper text
+</span>
+`;

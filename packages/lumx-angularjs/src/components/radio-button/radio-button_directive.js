@@ -153,16 +153,33 @@ function RadioButtonDirective() {
 
         if (transclude.isSlotFilled('label')) {
             ctrls[0].hasLabel = true;
+
+            transclude(
+                (clone) => {
+                    ctrls[0].label = clone.text().trim();
+                },
+                null,
+                'label',
+            );
         }
 
         if (transclude.isSlotFilled('helper')) {
             ctrls[0].hasHelper = true;
+
+            transclude(
+                (clone) => {
+                    ctrls[0].helper = clone.text().trim();
+                },
+                null,
+                'helper',
+            );
         }
 
         if (!ctrls[0].hasLabel && !ctrls[0].hasHelper) {
             transclude((clone) => {
                 if (clone.length > 0) {
                     ctrls[0].hasTranscluded = true;
+                    ctrls[0].label = clone.text().trim();
                 }
             });
         }
@@ -202,7 +219,7 @@ function RadioButtonDirective() {
         },
         template,
         transclude: {
-            helper: '?lxRadioButtonHelp',
+            helper: '?lxRadioButtonHelper',
             label: '?lxRadioButtonLabel',
         },
     };

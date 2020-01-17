@@ -3,7 +3,7 @@ import React, { ReactElement, RefObject } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { Chip, Icon, Theme } from '@lumx/react';
+import { Chip, Icon, Kind, Theme } from '@lumx/react';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
@@ -30,6 +30,8 @@ interface ISetup extends ICommonSetup {
      */
     input: Wrapper;
     dropdown: Wrapper;
+    helper: Wrapper;
+    error: Wrapper;
     container: Wrapper;
 }
 
@@ -56,6 +58,8 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     return {
         container: wrapper.find('div').first(),
         dropdown: wrapper.find(Dropdown),
+        error: wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error).first(),
+        helper: wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === undefined),
         input: wrapper.find('#uuid'),
         props,
         wrapper,
@@ -135,6 +139,26 @@ describe(`<${Select.displayName}>`, (): void => {
             );
         });
 
+        it('should display the given `error`', (): void => {
+            const { container, error } = setup({
+                error: 'You are not bold!',
+                hasError: true,
+            });
+
+            expect(error).toExist();
+            expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasError', value: true }));
+        });
+
+        it('should NOT display the given `error`', (): void => {
+            const { container, error } = setup({
+                error: 'You are not bold!',
+                hasError: false,
+            });
+
+            expect(error).not.toExist();
+            expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasError', value: true }));
+        });
+
         it('should use the given `value`', (): void => {
             const testedProp = 'value';
             const modifiedProps: ISetupProps = {
@@ -178,6 +202,25 @@ describe(`<${Select.displayName}>`, (): void => {
             const { dropdown } = setup({ isOpen });
 
             expect(dropdown).toHaveProp('showDropdown', isOpen);
+        });
+
+        it('should display the given `helper`', (): void => {
+            const { helper } = setup({
+                helper: 'Be bold',
+            });
+
+            expect(helper).toExist();
+        });
+
+        it('should display the given `helper` and `error`', (): void => {
+            const { error, helper } = setup({
+                error: 'You are not bold!',
+                hasError: true,
+                helper: 'Be bold',
+            });
+
+            expect(error).toExist();
+            expect(helper).toExist();
         });
     });
 

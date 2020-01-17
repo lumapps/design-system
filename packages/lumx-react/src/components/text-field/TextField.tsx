@@ -5,7 +5,7 @@ import get from 'lodash/get';
 import uuid from 'uuid/v4';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
-import { Emphasis, Icon, IconButton, Size, Theme } from '@lumx/react';
+import { Emphasis, Icon, IconButton, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -18,8 +18,14 @@ interface ITextFieldProps extends IGenericProps {
     /** A Chip Group to be rendered before the main text input */
     chips?: HTMLElement | ReactNode;
 
+    /** The error related to the TextField */
+    error?: string | ReactNode;
+
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
+
+    /** The helper related to the TextField */
+    helper?: string | ReactNode;
 
     /** The max length the input accepts. If set, a character counter will be displayed. */
     maxLength?: number;
@@ -255,7 +261,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
     const {
         chips,
         className = '',
+        error,
         hasError,
+        helper,
         icon,
         id = uuid(),
         isDisabled,
@@ -323,9 +331,9 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         >
             <div className={`${CLASSNAME}__header`}>
                 {label && (
-                    <label htmlFor={id} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={id} className={`${CLASSNAME}__label`}>
                         {label}
-                    </label>
+                    </InputLabel>
                 )}
 
                 {maxLength && (
@@ -389,6 +397,16 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     )}
                 </div>
             </div>
+            {hasError && error && (
+                <InputHelper className={`${CLASSNAME}__helper`} kind={Kind.error} theme={theme}>
+                    {error}
+                </InputHelper>
+            )}
+            {helper && (
+                <InputHelper className={`${CLASSNAME}__helper`} theme={theme}>
+                    {helper}
+                </InputHelper>
+            )}
         </div>
     );
 };

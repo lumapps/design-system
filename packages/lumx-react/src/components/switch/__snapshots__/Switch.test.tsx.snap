@@ -60,17 +60,19 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
   <div
     className="lumx-switch__content"
   >
-    <label
+    <InputLabel
       className="lumx-switch__label"
       htmlFor="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      theme="light"
     >
       Label
-    </label>
-    <span
+    </InputLabel>
+    <InputHelper
       className="lumx-switch__helper"
+      theme="light"
     >
       Helper
-    </span>
+    </InputHelper>
   </div>
 </div>
 `;
@@ -103,12 +105,13 @@ exports[`<Switch> Snapshots and structure should render correctly with only a \`
   <div
     className="lumx-switch__content"
   >
-    <label
+    <InputLabel
       className="lumx-switch__label"
       htmlFor="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
+      theme="light"
     >
       Label
-    </label>
+    </InputLabel>
   </div>
 </div>
 `;

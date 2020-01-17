@@ -1,8 +1,11 @@
 <div class="lumx-text-field" ng-class="lx.getClasses()">
     <div class="lumx-text-field__header" ng-if="::lx.label">
-        <label for="{{ lx.inputId }}" class="lumx-text-field__label">
-            {{ lx.label }}
-        </label>
+        <lx-input-label
+            for="{{ lx.inputId }}"
+            class="lumx-text-field__label"
+            lx-label="{{ lx.label }}"
+            lx-theme="{{ lx.theme }}"
+        ></lx-input-label>
 
         <div class="lumx-text-field__char-counter" ng-if="lx.maxlength">
             <span>{{ lx.maxlength - lx.getValueLength() }}</span>
@@ -50,4 +53,19 @@
             </lx-button>
         </div>
     </div>
+
+    <lx-input-helper
+        class="lumx-text-field__helper"
+        lx-helper="{{ lx.error }}"
+        lx-kind="error"
+        lx-theme="{{ lx.theme }}"
+        ng-if="lx.error"
+    ></lx-input-helper>
+
+    <lx-input-helper
+        class="lumx-text-field__helper"
+        lx-helper="{{ lx.helper }}"
+        lx-theme="{{ lx.theme }}"
+        ng-if="lx.helper"
+    ></lx-input-helper>
 </div>

@@ -54,7 +54,7 @@ const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true)
 
     return {
         helper: wrapper.find(`.${CLASSNAME}__helper`),
-        label: wrapper.find('label'),
+        label: wrapper.find(`.${CLASSNAME}__label`),
         props,
         wrapper,
     };

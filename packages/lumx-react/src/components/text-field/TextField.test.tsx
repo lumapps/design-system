@@ -7,6 +7,7 @@ import { build } from 'test-data-bot';
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
+import { Kind } from '@lumx/react';
 import { CLASSNAME, TextField, TextFieldProps } from './TextField';
 
 /////////////////////////////
@@ -31,6 +32,12 @@ interface ISetup extends ICommonSetup {
      * The <input> or <textarea> element.
      */
     inputNative: Wrapper;
+
+    /** The <InputHelper> info */
+    helper: Wrapper;
+
+    /** The <InputHelper> error */
+    error: Wrapper;
 }
 
 /////////////////////////////
@@ -49,7 +56,12 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
 
     const textarea = wrapper.find('textarea');
     const input = wrapper.find('input');
+    const error = wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error);
+    const helper = wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === undefined);
+
     return {
+        error,
+        helper,
         inputNative: textarea.length ? textarea : input,
         props,
         wrapper,
@@ -133,6 +145,51 @@ describe(`<${TextField.displayName}>`, () => {
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
                 );
             });
+        });
+
+        it('should have helper text', () => {
+            const { helper } = setup({
+                helper: 'test',
+                label: 'test',
+                placeholder: 'test',
+            });
+
+            expect(helper).toHaveLength(1);
+        });
+
+        it('should have error text', () => {
+            const { error } = setup({
+                error: 'error',
+                hasError: true,
+                label: 'test',
+                placeholder: 'test',
+            });
+
+            expect(error).toHaveLength(1);
+        });
+
+        it('should not have error text', () => {
+            const { error } = setup({
+                error: 'error',
+                hasError: false,
+                label: 'test',
+                placeholder: 'test',
+            });
+
+            expect(error).toHaveLength(0);
+        });
+
+        it('should have error and helper text', () => {
+            const { error, helper } = setup({
+                error: 'error',
+                hasError: true,
+                helper: 'helper',
+                label: 'test',
+                placeholder: 'test',
+            });
+
+            expect(error).toHaveLength(1);
+            expect(helper).toHaveLength(1);
         });
     });
 

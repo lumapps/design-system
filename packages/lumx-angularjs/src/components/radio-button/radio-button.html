@@ -15,11 +15,27 @@
     </div>
 
     <div class="lumx-radio-button__content" ng-if="::!lx.hasLabel && !lx.hasHelper && lx.hasTranscluded">
-        <label for="{{ lx.radioButtonId }}" class="lumx-radio-button__label" ng-transclude></label>
+        <lx-input-label
+            for="{{ lx.radioButtonId }}"
+            class="lumx-radio-button__label"
+            lx-label="{{ lx.label }}"
+            lx-theme="{{ lx.theme }}"
+        ></lx-input-label>
     </div>
 
     <div class="lumx-radio-button__content" ng-if="::lx.hasLabel">
-        <label for="{{ lx.radioButtonId }}" class="lumx-radio-button__label" ng-transclude="label"></label>
-        <span class="lumx-radio-button__helper" ng-transclude="helper" ng-if="::lx.hasHelper"></span>
+        <lx-input-label
+            for="{{ lx.radioButtonId }}"
+            class="lumx-radio-button__label"
+            lx-label="{{ lx.label }}"
+            lx-theme="{{ lx.theme }}"
+        ></lx-input-label>
+
+        <lx-input-helper
+            class="lumx-radio-button__helper"
+            lx-helper="{{ lx.helper }}"
+            lx-theme="{{ lx.theme }}"
+            ng-if="::lx.hasHelper"
+        ></lx-input-helper>
     </div>
 </div>

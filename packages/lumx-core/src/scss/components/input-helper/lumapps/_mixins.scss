@@ -1,0 +1,12 @@
+@mixin lumx-input-helper($theme) {
+    @include lumx-typography($lumx-input-helper-typography);
+
+    display: flex;
+    align-items: center;
+
+    @if $theme == lumx-base-const('theme', 'LIGHT') {
+        color: lumx-theme-color-variant('dark', 'L2');
+    } @else if $theme == lumx-base-const('theme', 'DARK') {
+        color: lumx-theme-color-variant('light', 'L2');
+    }
+}

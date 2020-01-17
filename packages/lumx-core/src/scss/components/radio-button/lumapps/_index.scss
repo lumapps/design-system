@@ -59,28 +59,13 @@
         }
     }
 
-    &__label {
+    &__label,
+    &__helper {
         padding-left: $lumx-spacing-unit;
-
-        #{$self}--theme-light & {
-            @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-input-label(lumx-base-const('theme', 'DARK'));
-        }
     }
 
     &__helper {
-        padding-left: $lumx-spacing-unit;
-
-        #{$self}--theme-light & {
-            @include lumx-input-helper(lumx-base-const('theme', 'LIGHT'));
-        }
-
-        #{$self}--theme-dark & {
-            @include lumx-input-helper(lumx-base-const('theme', 'DARK'));
-        }
+        margin-top: $lumx-spacing-unit / 2;
     }
 }
 

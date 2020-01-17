@@ -2,7 +2,7 @@ import React, { ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme } from '@lumx/react';
+import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -143,11 +143,15 @@ const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps): React
 
             <div className={`${CLASSNAME}__content`}>
                 {label && (
-                    <label htmlFor={radioButtonId} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={radioButtonId} theme={theme} className={`${CLASSNAME}__label`}>
                         {label}
-                    </label>
+                    </InputLabel>
                 )}
-                {helper && <span className={`${CLASSNAME}__helper`}>{helper}</span>}
+                {helper && (
+                    <InputHelper theme={theme} className={`${CLASSNAME}__helper`}>
+                        {helper}
+                    </InputHelper>
+                )}
             </div>
         </div>
     );

@@ -60,7 +60,7 @@ const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true)
     return {
         helper: wrapper.find(`.${CLASSNAME}__helper`),
         input: wrapper.find(`input`),
-        label: wrapper.find(`label`),
+        label: wrapper.find(`.${CLASSNAME}__label`),
         props,
         wrapper,
     };

@@ -1,0 +1,13 @@
+/* ==========================================================================
+   Input label
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-input-label {
+    &--theme-light {
+        @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
+    }
+
+    &--theme-dark {
+        @include lumx-input-label(lumx-base-const('theme', 'DARK'));
+    }
+}
