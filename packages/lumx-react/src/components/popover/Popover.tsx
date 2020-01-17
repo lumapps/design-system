@@ -150,7 +150,7 @@ const Popover: React.FC<PopoverProps> & IPopover = ({
         left: 0,
         position: 'fixed',
         top: 0,
-        transform: `translate(${popoverRect.x}px, ${popoverRect.y}px)`,
+        transform: `translate(${Math.round(popoverRect.x)}px, ${Math.round(popoverRect.y)}px)`,
         visibility: isPopoverVisible ? 'visible' : 'hidden',
         zIndex,
     };
