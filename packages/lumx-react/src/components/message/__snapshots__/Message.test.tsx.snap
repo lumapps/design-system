@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Message> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-message lumx-message--color-dark"
+>
+  <Icon
+    className="lumx-message__icon"
+    icon={null}
+    size="xs"
+  />
+  <div
+    className="lumx-message__text"
+  >
+    <span>
+      Lorem Ipsum
+    </span>
+  </div>
+</div>
+`;
