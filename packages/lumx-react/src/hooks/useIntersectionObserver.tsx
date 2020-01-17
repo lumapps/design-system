@@ -1,40 +1,42 @@
-import { useEffect, useRef, useState } from 'react';
-
-type returnType = [(HTMLElement) => void, IntersectionObserverEntry[]];
-type functionType = (IntersectionObserverInit) => returnType;
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 /**
  * Convenient hook to create interaction observers.
- * @return Tuple of the sentinel ref and the list of intersections
+ *
+ * @param elementRefs Elements to observe.
+ * @param options     IntersectionObserver options.
+ * @return List of intersections
  */
-export const useIntersectionObserver: functionType = ({
-    root = null,
-    rootMargin = '0px',
-    threshold = [0],
-    ...options
-}) => {
+export function useIntersectionObserver(
+    elementRefs: Array<RefObject<HTMLElement>>,
+    options?: IntersectionObserverInit,
+) {
+    const { root = null, rootMargin = '0px', threshold = [0], ...otherOptions } = options ?? {};
     const [intersections, setIntersections] = useState<IntersectionObserverEntry[]>([]);
-    const [element, setElement] = useState<HTMLElement>();
 
-    const observer = useRef(
+    const observerRef = useRef(
         new IntersectionObserver(setIntersections, {
             root,
             rootMargin,
             threshold,
-            ...options,
+            ...otherOptions,
         }),
     );
 
     useEffect(() => {
-        const { current: currentObserver } = observer;
-        currentObserver.disconnect();
-
-        if (element) {
-            currentObserver.observe(element);
-            return () => currentObserver.disconnect();
+        const { current: observer } = observerRef;
+        observer.disconnect();
+        if (!elementRefs) {
+            return;
         }
-        return;
-    }, [element]);
 
-    return [setElement, intersections];
-};
+        for (const elementRef of elementRefs) {
+            if (elementRef.current) {
+                observer.observe(elementRef.current);
+            }
+        }
+        return () => observer.disconnect();
+    }, [elementRefs]);
+
+    return intersections;
+}

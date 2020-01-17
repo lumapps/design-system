@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -89,6 +89,13 @@ type DialogProps = IDialogProps;
 
 type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
+const isHeader = isComponent('header');
+const isFooter = isComponent('footer');
+
+// Returns true if the given element was intersecting in the IntersectionObserverEntry.
+const wasIntersecting = (element: HTMLElement | null) => (entry: IntersectionObserverEntry) =>
+    entry.target === element && !entry.isIntersecting;
+
 /////////////////////////////
 
 /////////////////////////////
@@ -119,9 +126,6 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
 };
 
 /////////////////////////////
-
-const isHeader = isComponent('header');
-const isFooter = isComponent('footer');
 
 /**
  * Dialog component.
@@ -158,14 +162,22 @@ const Dialog: React.FC<DialogProps> = (props) => {
     // Handle focus trap.
     useFocusTrap(wrapperRef.current, focusElement?.current);
 
-    const [sentinelTop, topIntersections] = useIntersectionObserver({ threshold: [0, 1] });
-    const hasTopIntersection = topIntersections.some((i) => !i.isIntersecting);
+    const sentinelTop = useRef<HTMLDivElement>(null);
+    const sentinelBottom = useRef<HTMLDivElement>(null);
+    const sentinelWrapper = useRef<HTMLDivElement>(null);
+    const sentinelRefs = useMemo(() => [sentinelTop, sentinelBottom, sentinelWrapper], []);
+    const intersections = useIntersectionObserver(sentinelRefs, { threshold: [0, 1] });
 
-    const [sentinelBottom, bottomIntersections] = useIntersectionObserver({ threshold: [0, 1] });
-    const hasBottomIntersection = bottomIntersections.some((i) => !i.isIntersecting);
+    const hasTopIntersection = intersections.some(wasIntersecting(sentinelTop.current));
+    const hasBottomIntersection = intersections.some(wasIntersecting(sentinelBottom.current));
+    const hasScroll =
+        hasBottomIntersection || hasTopIntersection || intersections.some(wasIntersecting(sentinelWrapper.current));
 
     // Separate header, footer and dialog content from children.
-    const [[headerChild], [footerChild], content] = partitionMulti(Children.toArray(children), [isHeader, isFooter]);
+    const [[headerChild], [footerChild], content] = useMemo(
+        () => partitionMulti(Children.toArray(children), [isHeader, isFooter]),
+        [children],
+    );
     const headerChildProps = (headerChild as ReactElement)?.props;
     const headerChildContent = headerChildProps?.children;
     const footerChildProps = (footerChild as ReactElement)?.props;
@@ -181,8 +193,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
             onOpen?.();
         }
     }, [isOpen]);
-
-    const hasScroll = hasBottomIntersection || hasTopIntersection;
 
     // Delay visibility to account for the 400ms of CSS opacity animation.
     const [isVisible, setVisible] = useState(isOpen);
@@ -258,7 +268,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
                           </div>
                       )}
 
-                      <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--wrapper`} />
+                      <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--wrapper`} ref={sentinelWrapper} />
                   </section>
               </div>,
               document.body,
