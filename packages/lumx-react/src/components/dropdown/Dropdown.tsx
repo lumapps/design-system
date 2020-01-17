@@ -116,6 +116,8 @@ const Dropdown: React.FC<DropdownProps> = ({
         offset,
         false,
         fitToAnchorWidth,
+        false,
+        [children],
     );
 
     if (onInfiniteScroll) {
