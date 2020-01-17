@@ -202,6 +202,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
                       handleBasicClasses({
                           hasScroll,
                           isHidden: !isOpen,
+                          isLoading,
                           isShown: isOpen || isVisible,
                           prefix: CLASSNAME,
                           size,
@@ -231,12 +232,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
 
                           {content}
 
-                          {isLoading && (
-                              <div className={`${CLASSNAME}__progress-overlay`}>
-                                  <Progress variant={ProgressVariant.circular} />
-                              </div>
-                          )}
-
                           <div
                               className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
                               ref={sentinelBottom}
@@ -256,6 +251,13 @@ const Dialog: React.FC<DialogProps> = (props) => {
                               {footerChildContent}
                           </footer>
                       )}
+
+                      {isLoading && (
+                          <div className={`${CLASSNAME}__progress-overlay`}>
+                              <Progress variant={ProgressVariant.circular} />
+                          </div>
+                      )}
+
                       <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--wrapper`} />
                   </section>
               </div>,

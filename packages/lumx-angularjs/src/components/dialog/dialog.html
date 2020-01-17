@@ -13,10 +13,6 @@
 
             <div ng-transclude="content"></div>
 
-            <div class="lumx-dialog__progress-overlay" ng-if="lx.isLoading">
-                <lx-progress lx-variant="circular"></lx-progress>
-            </div>
-
             <div class="lumx-dialog__sentinel lumx-dialog__sentinel--bottom"></div>
         </div>
 
@@ -25,6 +21,10 @@
             ng-class="{ 'lumx-dialog__footer--has-divider': lx.forceFooterDivider }"
             ng-transclude="footer"
         ></div>
+
+        <div class="lumx-dialog__progress-overlay" ng-if="lx.isLoading">
+            <lx-progress lx-variant="circular"></lx-progress>
+        </div>
 
         <div class="lumx-dialog__sentinel lumx-dialog__sentinel--wrapper"></div>
     </div>
