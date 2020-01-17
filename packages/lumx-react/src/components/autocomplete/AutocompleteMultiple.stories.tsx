@@ -10,38 +10,43 @@ export default { title: 'Autocomplete Multiple', decorators };
 
 const CITIES = [
     {
-        text: 'Los Angeles',
         id: 'losangeles',
+        text: 'Los Angeles',
     },
     {
-        text: 'San Francisco',
         id: 'sanfrancisco',
+        text: 'San Francisco',
     },
     {
-        text: 'Paris',
         id: 'paris',
+        text: 'Paris',
     },
     {
-        text: 'Montpellier',
         id: 'montpellier',
+        text: 'Montpellier',
     },
     {
-        text: 'Bordeaux',
         id: 'bordeaux',
+        text: 'Bordeaux',
     },
     {
-        text: 'Toulouse',
         id: 'toulouse',
+        text: 'Toulouse',
     },
     {
-        text: 'Lyon',
         id: 'lyon',
+        text: 'Lyon',
     },
     {
-        text: 'Montevideo',
         id: 'montevideo',
+        text: 'Montevideo',
     },
 ];
+
+interface ICity {
+    id: string;
+    text: string;
+}
 
 export const simple = ({ theme }) => {
     const INITIAL_STATE_SHOW_SUGGESTIONS = false;
@@ -52,8 +57,8 @@ export const simple = ({ theme }) => {
     const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(
         INITIAL_STATE_NAVIGATION_SUGGESTION,
     );
-    const [selectedValues, setSelectedValues] = React.useState([]);
-    const inputRef = React.useRef(null);
+    const [selectedValues, setSelectedValues] = React.useState<ICity[]>([]);
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
     const filteredCities = CITIES.filter((city) => {
         const noSpacesCity = city.text.replace(' ', '').toLowerCase();
@@ -88,8 +93,8 @@ export const simple = ({ theme }) => {
     const onNewCityCreated = (newCity) => {
         if (newCity && newCity.length > 0) {
             setSelectedCity({
-                text: newCity,
                 id: newCity.replace(' ', '').toLowerCase(),
+                text: newCity,
             });
 
             setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
@@ -97,7 +102,7 @@ export const simple = ({ theme }) => {
     };
 
     const clearSelectedValue = (event, city) => {
-        inputRef.current.focus();
+        inputRef?.current?.focus();
         setSelectedValues(city ? selectedValues.filter((c) => c.id !== city.id) : []);
     };
 

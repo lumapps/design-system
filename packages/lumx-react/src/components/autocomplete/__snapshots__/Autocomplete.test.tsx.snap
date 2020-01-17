@@ -24,6 +24,7 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         "current": null,
       }
     }
+    shouldFocusOnOpen={false}
     showDropdown={false}
   >
     <List
@@ -122,6 +123,7 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
+    shouldFocusOnOpen={false}
     showDropdown={true}
   >
     <List

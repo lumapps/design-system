@@ -8,7 +8,7 @@ const App = ({ theme }) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [values, setValues] = React.useState([]);
+    const [values, setValues] = React.useState<string[]>([]);
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     const clearSelectedvalues = (event, value) => {
@@ -36,11 +36,10 @@ const App = ({ theme }) => {
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List isClickable={isOpen}>
+            <List isClickable>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
-                              isClickable
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}

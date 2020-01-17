@@ -19,7 +19,7 @@ interface IAutocompleteProps extends IGenericProps {
      * Whether the suggestions list should display anchored to the input
      * If false, it will be anchored to the text field wrapper.
      */
-    anchorToInput: boolean;
+    anchorToInput?: boolean;
 
     /** A ref that will be passed to the input or textarea element. */
     inputRef?: RefObject<HTMLInputElement>;
@@ -281,6 +281,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
                 fitToAnchorWidth={fitToAnchorWidth}
                 onInfiniteScroll={onInfiniteScroll}
                 theme={theme}
+                shouldFocusOnOpen={false}
             >
                 {children}
             </Dropdown>

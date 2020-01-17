@@ -14,7 +14,7 @@ import {
 import { ListItem, ListItemProps, ListItemSizes, Size, Theme } from '@lumx/react';
 import { IGenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
-import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks';
+import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks/useKeyboardListNavigation';
 
 /////////////////////////////
 /**
@@ -29,6 +29,9 @@ interface IListProps extends IGenericProps {
 
     /** Item padding size. */
     itemPadding?: ListItemSizes;
+
+    /** The ref passed to the ul element. */
+    listElementRef?: RefObject<HTMLElement>;
 
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
@@ -87,6 +90,7 @@ const List: React.FC<ListProps> & IList = ({
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
     itemPadding = DEFAULT_PROPS.itemPadding,
+    listElementRef = useRef(null),
     onListItemSelected,
     useCustomColors,
     theme = DEFAULT_PROPS.theme,
@@ -95,7 +99,6 @@ const List: React.FC<ListProps> & IList = ({
     const children = Children.toArray(props.children);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
-    const listElementRef = useRef() as RefObject<HTMLUListElement>;
 
     /**
      * Override the mouse down event - forward the event if needed
@@ -216,7 +219,7 @@ const List: React.FC<ListProps> & IList = ({
             onKeyPress={onKeyInteraction}
             onBlur={onListBlurred}
             onFocus={onListFocused}
-            ref={listElementRef}
+            ref={listElementRef as React.RefObject<HTMLUListElement>}
             {...props}
         >
             {children.map((elm: ReactNode, idx: number) => {

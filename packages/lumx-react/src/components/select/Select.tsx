@@ -1,28 +1,38 @@
-import React, { ReactNode, RefObject, useEffect, useRef, useState } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
-import {
-    Chip,
-    ChipGroup,
-    Dropdown,
-    Emphasis,
-    Icon,
-    IconButton,
-    InputHelper,
-    InputLabel,
-    Kind,
-    Placement,
-    Size,
-    Theme,
-} from '@lumx/react';
+// import {
+//     Chip,
+//     ChipGroup,
+//     Dropdown,
+//     Emphasis,
+//     Icon,
+//     IconButton,
+//     InputHelper,
+//     InputLabel,
+//     Kind,
+//     Placement,
+//     Size,
+//     Theme,
+// } from '@lumx/react';
+import { Emphasis, Kind, Size, Theme } from '@lumx/react/components';
+import { IconButton } from '@lumx/react/components/button/IconButton';
+import { Chip } from '@lumx/react/components/chip/Chip';
+import { ChipGroup } from '@lumx/react/components/chip/ChipGroup';
+import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
+import { Icon } from '@lumx/react/components/icon/Icon';
+import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
+import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
+import { Placement } from '@lumx/react/components/popover/Popover';
 
-import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
 import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
+
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -100,7 +110,7 @@ interface ISelectProps extends IGenericProps {
     /**
      * The callback function called when the clear button is clicked. NB: if not specified, clear buttons won't be displayed.
      */
-    onClear?(event: React.MouseEvent<HTMLDivElement, MouseEvent>, value?: string): void;
+    onClear?(event: SyntheticEvent, value?: string): void;
 
     /**
      * The callback function called on integrated search field change (500ms debounce).
@@ -133,7 +143,7 @@ interface ISelectProps extends IGenericProps {
     selectedChipRender?(
         choice: string,
         index: number,
-        onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
+        onClear?: (event: SyntheticEvent, choice: string) => void,
         isDisabled?: boolean,
     ): ReactNode | string;
 }
@@ -221,6 +231,8 @@ function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: bool
     }, [element]);
 }
 
+const stopPropagation = (evt: Event): void => evt.stopPropagation();
+
 /**
  * Select component.
  *
@@ -256,16 +268,23 @@ const Select: React.FC<SelectProps> = ({
     const anchorRef = useRef<HTMLElement>(null);
     const hasInputClear = onClear && !isMultiple && !isEmpty;
 
-    useFocusOnClose(anchorRef.current, isOpen);
+    useFocusOnClose(anchorRef.current, Boolean(isOpen));
     useHandleElementFocus(anchorRef.current, setIsFocus);
 
-    const handleKeyboardNav = (evt: React.KeyboardEvent<HTMLElement>): void => {
-        if ((evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE) && onInputClick) {
-            onInputClick();
-        }
-    };
+    const handleKeyboardNav = useCallback(
+        (evt: React.KeyboardEvent<HTMLElement>): void => {
+            if (
+                (evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE || evt.which === DOWN_KEY_CODE) &&
+                onInputClick
+            ) {
+                evt.preventDefault();
+                onInputClick();
+            }
+        },
+        [onInputClick],
+    );
 
-    const createParentElement: () => ReactNode = (): ReactNode => {
+    const createParentElement: () => ReactNode = useCallback((): ReactNode => {
         return (
             <>
                 {variant === SelectVariant.input && (
@@ -283,7 +302,7 @@ const Select: React.FC<SelectProps> = ({
                             id={targetUuid}
                             className={`${CLASSNAME}__wrapper`}
                             onClick={onInputClick}
-                            onKeyPress={handleKeyboardNav}
+                            onKeyDown={handleKeyboardNav}
                             tabIndex={0}
                         >
                             <div className={`${CLASSNAME}__chips`}>
@@ -327,6 +346,7 @@ const Select: React.FC<SelectProps> = ({
                                     size={Size.s}
                                     theme={theme}
                                     onClick={onClear}
+                                    onKeyDown={stopPropagation}
                                 />
                             )}
 
@@ -362,7 +382,22 @@ const Select: React.FC<SelectProps> = ({
                 )}
             </>
         );
-    };
+    }, [
+        variant,
+        label,
+        value,
+        isEmpty,
+        isMultiple,
+        isValid,
+        hasError,
+        onClear,
+        onInputClick,
+        theme,
+        placeholder,
+        handleKeyboardNav,
+        targetUuid,
+        anchorRef,
+    ]);
 
     return (
         <div

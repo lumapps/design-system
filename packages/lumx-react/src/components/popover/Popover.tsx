@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { useComputePosition, useComputePositionType } from '@lumx/react/hooks';
+import { useComputePosition, useComputePositionType } from '@lumx/react/hooks/useComputePosition';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**

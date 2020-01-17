@@ -9,10 +9,10 @@ const App = ({ theme }) => {
     const LABEL = 'Select label';
 
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState([]);
+    const [values, setValues] = React.useState<string[]>([]);
 
     const clearSelectedvalues = (event, value) => {
-        event && event.stopPropagation();
+        event?.stopPropagation();
         setValues(value ? values.filter((val) => val !== value) : []);
     };
 
@@ -41,7 +41,6 @@ const App = ({ theme }) => {
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
-                              isClickable
                               isSelected={values.includes(choice)}
                               key={index}
                               onItemSelected={() => onItemSelectedHandler(choice)}

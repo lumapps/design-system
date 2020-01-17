@@ -3,39 +3,44 @@ import React from 'react';
 import { mdiClose } from '@lumx/icons';
 import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } from '@lumx/react';
 
+interface ICity {
+    id: string;
+    text: string;
+}
+
 const App = ({ theme }) => {
     const CITIES = [
         {
-            text: 'Los Angeles',
             id: 'losangeles',
+            text: 'Los Angeles',
         },
         {
-            text: 'San Francisco',
             id: 'sanfrancisco',
+            text: 'San Francisco',
         },
         {
-            text: 'Paris',
             id: 'paris',
+            text: 'Paris',
         },
         {
-            text: 'Montpellier',
             id: 'montpellier',
+            text: 'Montpellier',
         },
         {
-            text: 'Bordeaux',
             id: 'bordeaux',
+            text: 'Bordeaux',
         },
         {
-            text: 'Toulouse',
             id: 'toulouse',
+            text: 'Toulouse',
         },
         {
-            text: 'Lyon',
             id: 'lyon',
+            text: 'Lyon',
         },
         {
-            text: 'Montevideo',
             id: 'montevideo',
+            text: 'Montevideo',
         },
     ];
 
@@ -57,8 +62,8 @@ const App = ({ theme }) => {
     const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(
         INITIAL_STATE_NAVIGATION_SUGGESTION,
     );
-    const [selectedValues, setSelectedValues] = React.useState([]);
-    const inputRef = React.useRef(null);
+    const [selectedValues, setSelectedValues] = React.useState<ICity[]>([]);
+    const inputRef = React.useRef<HTMLInputElement>(null);
 
     const filteredCities = CITIES.filter((city) => {
         const noSpacesCity = city.text.replace(' ', '').toLowerCase();
@@ -107,8 +112,8 @@ const App = ({ theme }) => {
     const onNewCityCreated = (newCity) => {
         if (newCity && newCity.length > 0) {
             setSelectedCity({
-                text: newCity,
                 id: newCity.replace(' ', '').toLowerCase(),
+                text: newCity,
             });
 
             setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
@@ -122,7 +127,7 @@ const App = ({ theme }) => {
      * @param {Object} city city to be erased.
      */
     const clearSelectedValue = (event, city) => {
-        inputRef.current.focus();
+        inputRef?.current?.focus();
         setSelectedValues(city ? selectedValues.filter((c) => c.id !== city.id) : []);
     };
 
@@ -211,7 +216,7 @@ const App = ({ theme }) => {
             inputRef={inputRef}
             fitToAnchorWidth
             onBlur={onBlur}
-            selectedChipRender={(city, index) => (
+            selectedChipRender={(city: ICity, index) => (
                 <Chip
                     theme={theme}
                     isClickable

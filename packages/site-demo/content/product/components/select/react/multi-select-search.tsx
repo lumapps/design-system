@@ -7,16 +7,16 @@ import { useBooleanState } from '@lumx/react/hooks';
 const App = ({ theme }) => {
     const CHOICES_WITH_ICONS = [
         {
-            label: 'First item',
             icon: mdiAccessPoint,
+            label: 'First item',
         },
         {
-            label: 'Second item',
             icon: mdiAccountBadge,
+            label: 'Second item',
         },
         {
-            label: 'Third item',
             icon: mdiAlphaF,
+            label: 'Third item',
         },
     ];
     const PLACEHOLDER = 'Select a value';
@@ -24,14 +24,14 @@ const App = ({ theme }) => {
     const getChoiceByValue = (value) => CHOICES_WITH_ICONS.find((ch) => ch.label === value);
 
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState([]);
+    const [values, setValues] = React.useState<string[]>([]);
 
     const onInfiniteScroll = () => {
         console.log('You have reached the bottom of the select dropdown.');
     };
 
     const clearSelectedvalues = (event, value) => {
-        event && event.stopPropagation();
+        event?.stopPropagation();
         setValues(value ? values.filter((val) => val !== value) : []);
     };
 
