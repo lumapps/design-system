@@ -86,7 +86,7 @@ const useComputePosition: useComputePositionType = (
         );
         setIsAnchorInViewport(newIsAnchorInViewPort);
 
-        if (!anchorRef || !anchorRef.current || !popoverRef || !popoverRef.current || !newIsAnchorInViewPort) {
+        if (!anchorRef || !anchorRef.current || !popoverRef || !popoverRef.current) {
             setComputedPosition(defaultPosition);
             return;
         }
@@ -143,7 +143,12 @@ const useComputePosition: useComputePositionType = (
                     boundingAnchor,
                     boundingPopover,
                 );
-                const y = Math.max(WINDOW_BOUNDING_OFFSET, topY - newPosition.y);
+
+                const y =
+                    topY - newPosition.y > 0
+                        ? Math.max(WINDOW_BOUNDING_OFFSET, topY - newPosition.y)
+                        : topY - newPosition.y;
+
                 const topPosition = {
                     ...newPosition,
                     maxHeight: boundingAnchor.top + vertical,
@@ -154,7 +159,8 @@ const useComputePosition: useComputePositionType = (
             }
         } else {
             const { x, y } = calculatePopoverPlacement(placement, boundingAnchor, boundingPopover);
-            const newY = Math.max(WINDOW_BOUNDING_OFFSET, newPosition.y + y);
+            const newY =
+                newPosition.y + y > 0 ? Math.max(WINDOW_BOUNDING_OFFSET, newPosition.y + y) : newPosition.y + y;
             const maxHeight =
                 placement === Placement.TOP || placement === Placement.TOP_END || placement === Placement.TOP_START
                     ? boundingAnchor.top + vertical
@@ -217,7 +223,7 @@ const useComputePosition: useComputePositionType = (
         };
     }, [...dependencies, isAnchorInViewport, isVisible]);
 
-    return { computedPosition, isVisible: (isVisible && isAnchorInViewport) || (staysOpenOnHover && isMouseEntered) };
+    return { computedPosition, isVisible: isVisible || (staysOpenOnHover && isMouseEntered) };
 };
 
 export { useComputePosition, useComputePositionType };
