@@ -1,42 +1,35 @@
-import { RefObject, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Convenient hook to create interaction observers.
  *
- * @param elementRefs Elements to observe.
- * @param options     IntersectionObserver options.
- * @return List of intersections
+ * @param elements Elements to observe.
+ * @param options  IntersectionObserver options.
+ * @return Map of intersections.
  */
-export function useIntersectionObserver(
-    elementRefs: Array<RefObject<HTMLElement>>,
+export function useIntersectionObserver<T extends Element>(
+    elements: Array<T | null | undefined>,
     options?: IntersectionObserverInit,
 ) {
-    const { root = null, rootMargin = '0px', threshold = [0], ...otherOptions } = options ?? {};
-    const [intersections, setIntersections] = useState<IntersectionObserverEntry[]>([]);
-
-    const observerRef = useRef(
-        new IntersectionObserver(setIntersections, {
-            root,
-            rootMargin,
-            threshold,
-            ...otherOptions,
-        }),
-    );
+    const [intersections, setIntersections] = useState<Map<T, IntersectionObserverEntry>>(() => new Map());
 
     useEffect(() => {
-        const { current: observer } = observerRef;
-        observer.disconnect();
-        if (!elementRefs) {
+        if (elements.length < 1 || !elements.some(Boolean)) {
             return;
         }
 
-        for (const elementRef of elementRefs) {
-            if (elementRef.current) {
-                observer.observe(elementRef.current);
+        const observer = new IntersectionObserver((entries) => {
+            for (const entry of entries) {
+                intersections.set(entry.target as T, entry);
             }
+            setIntersections(new Map(intersections));
+        }, options);
+
+        for (const element of elements) {
+            observer.observe(element!);
         }
         return () => observer.disconnect();
-    }, [elementRefs]);
+    }, [...elements]);
 
     return intersections;
 }

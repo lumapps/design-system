@@ -92,10 +92,6 @@ type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
-// Returns true if the given element was intersecting in the IntersectionObserverEntry.
-const wasIntersecting = (element: HTMLElement | null) => (entry: IntersectionObserverEntry) =>
-    entry.target === element && !entry.isIntersecting;
-
 /////////////////////////////
 
 /////////////////////////////
@@ -162,16 +158,26 @@ const Dialog: React.FC<DialogProps> = (props) => {
     // Handle focus trap.
     useFocusTrap(wrapperRef.current, focusElement?.current);
 
-    const sentinelTop = useRef<HTMLDivElement>(null);
-    const sentinelBottom = useRef<HTMLDivElement>(null);
-    const sentinelWrapper = useRef<HTMLDivElement>(null);
-    const sentinelRefs = useMemo(() => [sentinelTop, sentinelBottom, sentinelWrapper], []);
-    const intersections = useIntersectionObserver(sentinelRefs, { threshold: [0, 1] });
+    const [sentinelTop, setSentinelTop] = useState<Element | null>(null);
+    const [sentinelBottom, setSentinelBottom] = useState<Element | null>(null);
+    const [sentinelWrapper, setSentinelWrapper] = useState<Element | null>(null);
+    const intersections = useIntersectionObserver([sentinelTop, sentinelBottom, sentinelWrapper], {
+        threshold: [0, 1],
+    });
 
-    const hasTopIntersection = intersections.some(wasIntersecting(sentinelTop.current));
-    const hasBottomIntersection = intersections.some(wasIntersecting(sentinelBottom.current));
-    const hasScroll =
-        hasBottomIntersection || hasTopIntersection || intersections.some(wasIntersecting(sentinelWrapper.current));
+    const hasTopIntersection = !(intersections.get(sentinelTop!)?.isIntersecting ?? true);
+    const hasBottomIntersection = !(intersections.get(sentinelBottom!)?.isIntersecting ?? true);
+    const intersectsWrapper = !(intersections.get(sentinelWrapper!)?.isIntersecting ?? true);
+
+    const [hasScroll, setHasScroll] = useState(intersectsWrapper);
+    useEffect(() => {
+        if (intersectsWrapper) {
+            setHasScroll(true);
+        }
+        if (hasScroll && !hasTopIntersection && !hasBottomIntersection) {
+            setHasScroll(false);
+        }
+    }, [intersectsWrapper, hasBottomIntersection, hasTopIntersection]);
 
     // Separate header, footer and dialog content from children.
     const [[headerChild], [footerChild], content] = useMemo(
@@ -238,13 +244,13 @@ const Dialog: React.FC<DialogProps> = (props) => {
                       )}
 
                       <div className={`${CLASSNAME}__content`}>
-                          <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`} ref={sentinelTop} />
+                          <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`} ref={setSentinelTop} />
 
                           {content}
 
                           <div
                               className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
-                              ref={sentinelBottom}
+                              ref={setSentinelBottom}
                           />
                       </div>
 
@@ -268,7 +274,10 @@ const Dialog: React.FC<DialogProps> = (props) => {
                           </div>
                       )}
 
-                      <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--wrapper`} ref={sentinelWrapper} />
+                      <div
+                          className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--wrapper`}
+                          ref={setSentinelWrapper}
+                      />
                   </section>
               </div>,
               document.body,

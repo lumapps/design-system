@@ -5,14 +5,13 @@ import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/uti
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import noop from 'lodash/noop';
 import React from 'react';
 
 import * as stories from './Dialog.stories';
 
 // Mock out the useIntersectionObserver hook since it can't work with Jest/Enzyme.
 jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
-    useIntersectionObserver: () => [noop, []],
+    useIntersectionObserver: () => new Map(),
 }));
 
 /////////////////////////////
