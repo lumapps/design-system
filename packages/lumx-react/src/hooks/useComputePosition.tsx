@@ -53,6 +53,7 @@ const useComputePosition: useComputePositionType = (
     isVisible: boolean;
 } => {
     const WINDOW_BOUNDING_OFFSET = 16;
+    const MIN_SPACE_BELOW = 150;
     const MATCHING_PLACEMENT = Placement && {
         [Placement.AUTO]: {
             bottom: Placement.BOTTOM,
@@ -132,7 +133,10 @@ const useComputePosition: useComputePositionType = (
             );
 
             // Priority to bottom placement if possible, if not take the most available place;
-            if (canBeBottom || boundingAnchor.top <= windowHeight - boundingAnchor.bottom) {
+            if (
+                (newPosition.height || 0) >= MIN_SPACE_BELOW &&
+                (canBeBottom || boundingAnchor.top <= windowHeight - boundingAnchor.bottom)
+            ) {
                 newPosition = {
                     ...bottomPosition,
                     maxHeight: windowHeight - (newPosition.y + bottomY) - WINDOW_BOUNDING_OFFSET,
