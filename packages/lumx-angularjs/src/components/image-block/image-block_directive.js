@@ -82,6 +82,10 @@ function ImageBlockController() {
             classes.push(`${CSS_PREFIX}-image-block--fill-height`);
         }
 
+        if (lx.size) {
+            classes.push(`${CSS_PREFIX}-image-block--size-${lx.size}`);
+        }
+
         return classes;
     }
 
@@ -121,6 +125,7 @@ function ImageBlockDirective() {
             fillHeight: '=?lxFillHeight',
             image: '@lxImage',
             onClick: '&?lxOnClick',
+            size: '@?lxSize',
             theme: '@?lxTheme',
             title: '@?lxTitle',
         },
