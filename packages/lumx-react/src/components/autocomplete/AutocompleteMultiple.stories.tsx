@@ -178,11 +178,10 @@ export const simple = ({ theme }) => {
             onBlur={onBlur}
             selectedChipRender={renderChip}
         >
-            <List theme={theme}>
+            <List isClickable theme={theme}>
                 {filteredCities.map((city, index) => (
                     <ListItem
                         size={Size.tiny}
-                        isClickable
                         theme={theme}
                         key={city.id}
                         isHighlighted={index === activeItemIndex}
