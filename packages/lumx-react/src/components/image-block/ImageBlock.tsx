@@ -84,6 +84,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     captionStyle: {},
     description: undefined,
     fillHeight: false,
+    size: undefined,
     tags: undefined,
     theme: Theme.light,
     title: undefined,
@@ -106,6 +107,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     description = DEFAULT_PROPS.description,
     fillHeight = DEFAULT_PROPS.fillHeight,
     image,
+    size = DEFAULT_PROPS.size,
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
@@ -122,6 +124,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                     aspectRatio,
                     captionPosition,
                     prefix: CLASSNAME,
+                    size,
                     theme,
                 }),
                 {
@@ -136,6 +139,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                 align={align}
                 className={`${CLASSNAME}__image`}
                 aspectRatio={aspectRatio}
+                size={size}
                 fillHeight={fillHeight}
                 image={image}
                 onClick={onClick}

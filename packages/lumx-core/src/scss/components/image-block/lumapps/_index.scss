@@ -98,3 +98,12 @@
         right: $lumx-spacing-unit * 1.5;
     }
 }
+
+/* Image block sizes
+   ========================================================================== */
+
+@each $key, $size in $lumx-sizes {
+    .#{$lumx-base-prefix}-image-block--size-#{$key} {
+        width: $size;
+    }
+}
