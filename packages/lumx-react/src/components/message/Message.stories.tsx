@@ -1,9 +1,8 @@
 import { Message, MessageKind } from '@lumx/react';
-import { decorators } from '@lumx/react/story-block';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'Message', decorators };
+export default { title: 'Message' };
 
 const options = {
     Error: MessageKind.error,
@@ -20,7 +19,7 @@ export const message = () => (
         <span>
             {text(
                 'Message',
-                `Message text quisque tincidunt lobortis dui non auctor.Donec porta, 
+                `Message text quisque tincidunt lobortis dui non auctor.Donec porta,
                 ligula volutpat vehicula aliquet, dui sapien tempus felis, sed.`,
             )}
         </span>

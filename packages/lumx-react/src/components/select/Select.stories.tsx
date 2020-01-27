@@ -1,10 +1,9 @@
 import { List, ListItem, Select, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
-import { decorators } from '@lumx/react/story-block';
 import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'Select', decorators };
+export default { title: 'Select' };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 

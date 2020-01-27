@@ -2,9 +2,7 @@ import React from 'react';
 
 import { Autocomplete, List, ListItem, Size } from '@lumx/react';
 
-import { decorators } from '@lumx/react/story-block';
-
-export default { title: 'Autocomplete', decorators };
+export default { title: 'Autocomplete' };
 
 const CITIES = [
     {

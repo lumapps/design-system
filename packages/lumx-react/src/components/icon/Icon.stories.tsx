@@ -3,9 +3,7 @@ import React from 'react';
 import { mdiEmail } from '@lumx/icons';
 import { ColorPalette, Grid, GridItem, Icon, IconSizes, Size } from '@lumx/react';
 
-import { decorators } from '@lumx/react/story-block';
-
-export default { title: 'Icon', decorators };
+export default { title: 'Icon' };
 
 const iconSizes: Array<IconSizes | undefined> = [
     undefined,

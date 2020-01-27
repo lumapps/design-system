@@ -1,10 +1,9 @@
 import { Checkbox } from '@lumx/react';
-import { decorators } from '@lumx/react/story-block';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React, { useState } from 'react';
 
-export default { title: 'Checkbox', decorators };
+export default { title: 'Checkbox' };
 
 export const simpleSelect = ({ theme }) => {
     const [value, setValue] = useState(false);

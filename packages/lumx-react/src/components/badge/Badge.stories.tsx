@@ -1,6 +1,5 @@
 import { mdiHeart } from '@lumx/icons';
 import { AspectRatio, Badge, ColorPalette, Icon, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
-import { decorators } from '@lumx/react/story-block';
 import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
@@ -15,7 +14,7 @@ const options = {
     Yellow: ColorPalette.yellow,
 };
 
-export default { title: 'Badge', decorators };
+export default { title: 'Badge' };
 
 export const simpleBadgeWithValue = () => (
     <Badge color={select('Colors', options, ColorPalette.blue)}>

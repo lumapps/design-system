@@ -1,10 +1,9 @@
 import { Switch, SwitchPosition } from '@lumx/react';
-import { decorators } from '@lumx/react/story-block';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'Switch', decorators };
+export default { title: 'Switch' };
 
 export const notCheckedSwitch = ({ theme }) => (
     <Switch checked={false} onToggle={noop} theme={theme}>
