@@ -269,7 +269,8 @@ function DropdownController(
             }
         }
 
-        menuProps.maxHeight -= _OFFSET_FROM_EDGE;
+        // eslint-disable-next-line no-bitwise
+        menuProps.maxHeight -= _OFFSET_FROM_EDGE + ~~lx.offset;
 
         _menuEl.css(menuProps);
     }
