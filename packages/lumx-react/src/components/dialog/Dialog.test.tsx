@@ -82,43 +82,30 @@ describe(`<${Dialog.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        const onClose: jest.Mock = jest.fn();
-        let eventListeners: {
-            keydown?(evt);
-        };
-
-        beforeEach(() => {
-            document.body.addEventListener = jest.fn((type, cb) => {
-                eventListeners[type] = cb;
-            });
-            eventListeners = {};
-            onClose.mockClear();
-        });
+        // @ts-ignore
+        const keyDown = (keyCode) => new KeyboardEvent('keydown', { keyCode });
 
         it('should trigger `onClose` when pressing `escape` key', () => {
-            setup(
-                {
-                    isOpen: true,
-                    onClose,
-                },
-                false,
-            );
+            const onClose = jest.fn();
+            setup({ isOpen: true, onClose }, false);
 
-            eventListeners.keydown!({ keyCode: ESCAPE_KEY_CODE });
+            document.body.dispatchEvent(keyDown(ESCAPE_KEY_CODE));
             expect(onClose).toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing any other key', () => {
-            setup({ isOpen: true, onClose, closeOnEscape: true }, false);
+            const onClose = jest.fn();
+            setup({ isOpen: true, onClose }, false);
 
-            eventListeners.keydown!({ keyCode: 26 });
+            document.body.dispatchEvent(keyDown(26));
             expect(onClose).not.toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', () => {
+        it('should not trigger `onClose` when pressing `escape` key with `preventAutoClose` set to `true`', () => {
+            const onClose = jest.fn();
             setup({ isOpen: true, onClose, preventAutoClose: true }, false);
 
-            eventListeners.keydown?.({ keyCode: ESCAPE_KEY_CODE });
+            document.body.dispatchEvent(keyDown(ESCAPE_KEY_CODE));
             expect(onClose).not.toHaveBeenCalled();
         });
     });
