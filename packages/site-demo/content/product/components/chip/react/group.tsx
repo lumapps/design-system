@@ -1,22 +1,49 @@
 import React from 'react';
 
-import { mdiClose, mdiEmail } from '@lumx/icons';
-import { Chip, ChipGroup, Icon, Size } from '@lumx/react';
+import { Chip, ChipGroup, Size } from '@lumx/react';
 
 const App = ({ theme }: any) => {
     return (
         <div className="demo-grid">
             <ChipGroup>
                 <Chip theme={theme} size={Size.s}>
-                    Default
+                    Apricot
                 </Chip>
-
-                <Chip theme={theme} size={Size.s} before={<Icon icon={mdiEmail} size={Size.xxs} />}>
-                    Rich
+                <Chip theme={theme} size={Size.s}>
+                    Apple
                 </Chip>
-
-                <Chip theme={theme} size={Size.s} after={<Icon icon={mdiClose} size={Size.xxs} />}>
-                    Dismissible
+                <Chip theme={theme} size={Size.s}>
+                    Banana
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Blueberry
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Lemon
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Orange
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Peach
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Pear
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Pineapple
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Melon
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Raspberry
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Strawberry
+                </Chip>
+                <Chip theme={theme} size={Size.s}>
+                    Watermelon
                 </Chip>
             </ChipGroup>
         </div>

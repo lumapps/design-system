@@ -8,7 +8,7 @@ const App = ({ theme }: any) => (
         <Chip theme={theme}>Default</Chip>
 
         <Chip before={<Icon icon={mdiEmail} size={Size.xs} />} theme={theme}>
-            Rich
+            Default rich
         </Chip>
     </div>
 );

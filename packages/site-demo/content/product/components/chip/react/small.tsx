@@ -11,15 +11,15 @@ const App = ({ theme }: any) => {
     return (
         <div className="demo-grid">
             <Chip theme={theme} size={Size.s}>
-                Default
+                Small
             </Chip>
 
             <Chip theme={theme} size={Size.s} before={<Icon icon={mdiEmail} size={Size.xxs} />}>
-                Rich
+                Small rich
             </Chip>
 
             <Chip theme={theme} size={Size.s} after={<Icon icon={mdiClose} size={Size.xxs} />} onClick={onClick}>
-                Dismissible
+                Small dismissible
             </Chip>
         </div>
     );
