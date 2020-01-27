@@ -52,7 +52,7 @@ const useComputePosition: useComputePositionType = (
     computedPosition: ElementPosition;
     isVisible: boolean;
 } => {
-    const WINDOW_BOUNDING_OFFSET = 8;
+    const WINDOW_BOUNDING_OFFSET = 16;
     const MATCHING_PLACEMENT = Placement && {
         [Placement.AUTO]: {
             bottom: Placement.BOTTOM,
