@@ -26,7 +26,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogSizes 1`] = 
     <div
       className="lumx-spacing-padding"
     >
-
+      
 
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
@@ -246,7 +246,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
     <div
       className="lumx-spacing-padding"
     >
-
+      
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
 dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
@@ -299,7 +299,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
     <div
       className="lumx-spacing-padding"
     >
-
+      
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
 dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
@@ -349,7 +349,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
     <div
       className="lumx-spacing-padding"
     >
-
+      
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
 dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
@@ -399,7 +399,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
     <div
       className="lumx-spacing-padding"
     >
-
+      
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
 dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
@@ -448,7 +448,7 @@ exports[`<Dialog> Snapshots and structure should render story loadingDialog 1`] 
     <div
       className="lumx-spacing-padding"
     >
-
+      
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
 dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
@@ -492,7 +492,7 @@ exports[`<Dialog> Snapshots and structure should render story preventDialogAutoC
     <div
       className="lumx-spacing-padding"
     >
-
+      
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
 dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
@@ -548,7 +548,7 @@ exports[`<Dialog> Snapshots and structure should render story scrollableDialog 1
     <div
       className="lumx-spacing-padding"
     >
-
+      
 
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
@@ -638,7 +638,7 @@ exports[`<Dialog> Snapshots and structure should render story scrollableDialogWi
     <div
       className="lumx-spacing-padding"
     >
-
+      
 
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
@@ -728,7 +728,7 @@ exports[`<Dialog> Snapshots and structure should render story simpleDialog 1`] =
     <div
       className="lumx-spacing-padding"
     >
-
+      
 Nihil hic munitissimus habendi senatus locus, nihil horum? At nos hinc posthac, sitientis piros
 Afros. Magna pars studiorum, prodita quaerimus. Integer legentibus erat a ante historiarum
 dapibus. Praeterea iter est quasdam res quas ex communi. Ullamco laboris nisi ut aliquid ex ea
