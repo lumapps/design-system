@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { Size, Theme } from '@lumx/react';
-import { Callback, IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /**
  *  Authorized size values.
@@ -131,11 +131,11 @@ const ListItem: React.FC<ListItemProps> = ({
      *
      * @return Returns either undefined or a callback
      */
-    const onKeyDown = (): Callback | undefined => {
+    const onKeyDown = () => {
         if (onItemSelected) {
             return onEnterPressed(onItemSelected);
         }
-        return undefined;
+        return;
     };
 
     return (

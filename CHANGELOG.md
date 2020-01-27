@@ -19,13 +19,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Changed `lx-helper-message` prop to `lx-choices-helper` from `lx-select` component
 -   Use the `useFocusOnOpen` hook to focus on the `List` child of a `Dropdown`
 
+### Fixed
+
+-   Fix: dialog focus trap interacting with other components (select, text field, etc.).
+-   Fix: dialog click away at the bottom of the dialog
+
 ### Added
 
 -   Added `helper` prop to `TextField` component
 -   Added `error` prop to `Autocomplete`, `Select` and `TextField` component
 -   Added `lx-helper` and `lx-error` props to `lx-text-field` and `lx-select` components
 -   Added `Message` component
--   Added `useFocusOnOpen` hook
+-   Added `useFocus` hook
+-   Added `focusElement` prop on dialog to select the element to focus when opening the dialog.
+-   Added `forceHeaderDivider` and `forceFooterDivider` props on dialog force the display of header and footer dividers.
+-   Added use of `<header>` and `<footer>` element in the dialog component.
 
 ## [0.19.0][] - 2020-01-02
 

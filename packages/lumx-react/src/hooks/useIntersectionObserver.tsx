@@ -1,32 +1,35 @@
+import { useEffect, useState } from 'react';
+
 /**
- * Convenient hook to create interaction observers
+ * Convenient hook to create interaction observers.
+ *
+ * @param elements Elements to observe.
+ * @param options  IntersectionObserver options.
+ * @return Map of intersections.
  */
-// tslint:disable: no-any typedef
-
-import { useEffect, useRef, useState } from 'react';
-
-export default ({ root = null, rootMargin = '0 px', threshold = [0] }: any): [any, IntersectionObserverEntry] => {
-    const [currentEntry, updateCurrentEntry] = useState<any>();
-    const [node, setNode] = useState(null);
-
-    const observer = useRef(
-        new IntersectionObserver(([entry]) => updateCurrentEntry(entry), {
-            root,
-            rootMargin,
-            threshold,
-        }),
-    );
+export function useIntersectionObserver<T extends Element>(
+    elements: Array<T | null | undefined>,
+    options?: IntersectionObserverInit,
+) {
+    const [intersections, setIntersections] = useState<Map<T, IntersectionObserverEntry>>(() => new Map());
 
     useEffect(() => {
-        const { current: currentObserver } = observer;
-        currentObserver.disconnect();
-
-        if (node) {
-            currentObserver.observe(node!);
+        if (elements.length < 1 || !elements.some(Boolean)) {
+            return;
         }
 
-        return () => currentObserver.disconnect();
-    }, [node]);
+        const observer = new IntersectionObserver((entries) => {
+            for (const entry of entries) {
+                intersections.set(entry.target as T, entry);
+            }
+            setIntersections(new Map(intersections));
+        }, options);
 
-    return [setNode, currentEntry];
-};
+        for (const element of elements) {
+            observer.observe(element!);
+        }
+        return () => observer.disconnect();
+    }, [...elements]);
+
+    return intersections;
+}

@@ -1,16 +1,15 @@
-import React, { cloneElement, useEffect, useMemo, useRef } from 'react';
+import React, { cloneElement, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
 import { List } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
-import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
-import { useFocusOnOpen } from '@lumx/react/hooks/useFocusOnOpen';
+import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
-
-import { IGenericProps, getRootClassName, handleBasicClasses, isComponent, onEscapePressed } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -92,7 +91,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const Dropdown: React.FC<DropdownProps> = ({
     anchorRef,
     children,
-    className = '',
+    className,
     closeOnClick = DEFAULT_PROPS.closeOnClick,
     closeOnEscape = DEFAULT_PROPS.closeOnEscape,
     fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
@@ -144,19 +143,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         );
     }, [listElementRef, wrapperRef, children, className, computedPosition, fitToAnchorWidth, props]);
 
-    const onEscapeHandler = closeOnEscape && onClose && showDropdown && onEscapePressed(onClose);
-
-    useEffect(() => {
-        if (!onEscapeHandler || !wrapperRef.current) {
-            return undefined;
-        }
-        if (closeOnEscape && showDropdown && wrapperRef.current) {
-            window.addEventListener('keydown', onEscapeHandler);
-        }
-        return (): void => {
-            window.removeEventListener('keydown', onEscapeHandler);
-        };
-    }, [showDropdown, closeOnEscape, onClose]);
+    useCallbackOnEscape(onClose, showDropdown && closeOnEscape);
 
     // Any click away from the dropdown container will close it.
     useClickAway(
@@ -173,9 +160,9 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     // Set the focus on the list when the dropdown opens,
     // in order to enable keyboard controls.
-    useFocusOnOpen(listElementRef.current, isVisible, shouldFocusOnOpen);
+    useFocus(listElementRef.current, isVisible && shouldFocusOnOpen);
 
-    useFocusOnClose(anchorRef.current, isVisible, true);
+    useFocus(anchorRef.current, !isVisible);
 
     return showDropdown ? (
         <Popover

@@ -7,7 +7,7 @@ import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
+import { useFocus } from '@lumx/react/hooks/useFocus';
 
 /////////////////////////////
 
@@ -239,7 +239,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
     } = props;
 
     const textFieldRef = useRef(null);
-    useFocusOnClose(inputRef.current, isOpen, shouldFocusOnClose);
+    useFocus(inputRef.current, !isOpen && shouldFocusOnClose);
 
     return (
         <div

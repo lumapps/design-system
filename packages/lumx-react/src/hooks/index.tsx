@@ -12,6 +12,4 @@ export { useInfiniteScroll } from './useInfiniteScroll';
 
 export { useChipGroupNavigation, useChipGroupNavigationType } from './useChipGroupNavigation';
 
-export { useFocusOnClose } from './useFocusOnClose';
-
-export { useFocusOnOpen } from './useFocusOnOpen';
+export { useFocus } from './useFocus';

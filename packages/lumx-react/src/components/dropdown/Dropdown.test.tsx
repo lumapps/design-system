@@ -1,3 +1,4 @@
+import { ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
@@ -85,18 +86,15 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     // 3. Test events.
     describe('Events', (): void => {
         const onClose: jest.Mock = jest.fn();
-        let windowEventListeners: {
+        let eventListeners: {
             keydown?(evt): void;
         };
 
-        const addEventListener = (type: string, cb: EventListenerOrEventListenerObject): void => {
-            windowEventListeners[type] = cb;
-        };
-
         beforeEach((): void => {
-            window.addEventListener = jest.fn(addEventListener);
-            document.addEventListener = jest.fn(addEventListener);
-            windowEventListeners = {};
+            document.body.addEventListener = jest.fn((type, cb) => {
+                eventListeners[type] = cb;
+            });
+            eventListeners = {};
             onClose.mockClear();
         });
 
@@ -110,26 +108,27 @@ describe(`<${Dropdown.displayName}>`, (): void => {
                 false,
             );
 
-            windowEventListeners.keydown!({ keyCode: 27 });
+            eventListeners.keydown!({ keyCode: ESCAPE_KEY_CODE });
             expect(onClose).toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing any other key', (): void => {
             setup({ showDropdown: true, onClose, closeOnEscape: true }, false);
 
-            windowEventListeners.keydown!({ keyCode: 26 });
+            eventListeners.keydown!({ keyCode: 26 });
             expect(onClose).not.toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', (): void => {
             setup({ showDropdown: true, onClose, closeOnEscape: false }, false);
 
-            if (windowEventListeners.keydown) {
-                windowEventListeners.keydown({ keyCode: 27 });
+            if (eventListeners.keydown) {
+                eventListeners.keydown({ keyCode: ESCAPE_KEY_CODE });
             }
             expect(onClose).not.toHaveBeenCalled();
         });
     });
+
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
