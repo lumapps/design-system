@@ -3,6 +3,7 @@
 exports[`<DatePickerField> Snapshots and structure should render correctly 1`] = `
 <Fragment>
   <TextField
+    isClearable={true}
     label="DatePickerField"
     onChange={[Function]}
     onClick={[Function]}
