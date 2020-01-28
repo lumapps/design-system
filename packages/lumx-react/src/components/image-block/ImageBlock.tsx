@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -18,6 +18,11 @@ enum ImageBlockCaptionPosition {
     below = 'below',
     over = 'over',
 }
+
+/**
+ *  Authorized size values.
+ */
+type ImageBlockSize = Size.xl | Size.xxl;
 
 /**
  * Defines the props of the component.
@@ -41,6 +46,8 @@ interface IImageBlockProps extends IGenericProps {
     fillHeight?: boolean;
     /** The url of the image we want to display in the image-block. */
     image: string;
+    /** The image block size. */
+    size?: ImageBlockSize;
     /** Tags elements to be transcluded into the component */
     tags?: HTMLElement | ReactNode;
     /** The theme to use to display the image-block. */
