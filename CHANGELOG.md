@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Changed `lx-helper` prop to `lx-has-choices-helper` from `lx-select` component
 -   _[BREAKING]_ Changed `lx-helper-message` prop to `lx-choices-helper` from `lx-select` component
 -   Use the `useFocusOnOpen` hook to focus on the `List` child of a `Dropdown`
+-   Refactor `DatePickerField` to add `useFocusTrap` and `clearable` prop
 
 ### Fixed
 

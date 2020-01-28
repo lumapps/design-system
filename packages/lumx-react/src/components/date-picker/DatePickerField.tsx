@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-import noop from 'lodash/noop';
-
-import { Placement, Popover, TextField, Theme } from '@lumx/react';
+import { Placement, Popover, TextField, TextFieldProps, Theme } from '@lumx/react';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { onEscapePressed } from '@lumx/react/utils';
@@ -19,8 +17,11 @@ import { useFocus } from '@lumx/react/hooks/useFocus';
  */
 
 type DatePickerFieldProps = DatePickerProps & {
+    /** Whether the text field is clearable. */
+    isClearable?: TextFieldProps['isClearable'];
+
     /** Input label. */
-    label: string;
+    label?: TextFieldProps['label'];
 
     /** Theme. */
     theme?: Theme;
@@ -39,6 +40,13 @@ type DatePickerFieldProps = DatePickerProps & {
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
 
+/**
+ * The default value of props.
+ */
+const DEFAULT_PROPS: Partial<DatePickerFieldProps> = {
+    isClearable: true,
+};
+
 /////////////////////////////
 
 /**
@@ -46,7 +54,13 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
  *
  * @return The component.
  */
-const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps) => {
+const DatePickerField = ({
+    isClearable = DEFAULT_PROPS.isClearable,
+    label,
+    theme,
+    value,
+    ...props
+}: DatePickerFieldProps) => {
     const wrapperRef = useRef(null);
     const popoverRef = useRef(null);
     const anchorRef = useRef(null);
@@ -108,14 +122,21 @@ const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps
     const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
     useFocusTrap(todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
 
+    const onChange = (textFieldValue: string) => {
+        if (!textFieldValue) {
+            props.onChange(undefined);
+        }
+    };
+
     return (
         <>
             <TextField
+                isClearable={isClearable}
                 textFieldRef={anchorRef}
                 label={label}
                 value={value ? value.format('LL') : ''}
                 onClick={toggleSimpleMenu}
-                onChange={noop}
+                onChange={onChange}
                 onKeyPress={handleKeyboardNav}
                 theme={theme}
                 readOnly={true}
@@ -145,4 +166,4 @@ DatePickerField.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, COMPONENT_NAME, DatePickerField, DatePickerFieldProps };
+export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, DatePickerField, DatePickerFieldProps };

@@ -29,10 +29,10 @@ interface IDatePickerProps extends IGenericProps {
     todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
 
     /** Value. */
-    value: moment.Moment;
+    value: moment.Moment | undefined;
 
     /** On change. */
-    onChange(value: moment.Moment): void;
+    onChange(value: moment.Moment | undefined): void;
 }
 type DatePickerProps = IDatePickerProps;
 
