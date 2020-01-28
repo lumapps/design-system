@@ -120,6 +120,7 @@ function DropdownService($rootScope) {
      * Update the active dropdown position on scroll.
      */
     window.addEventListener('scroll', service.updateActiveDropdownPosition, true);
+    window.addEventListener('resize', service.updateActiveDropdownPosition, true);
 }
 
 /////////////////////////////

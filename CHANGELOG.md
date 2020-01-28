@@ -23,6 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fix: dialog focus trap interacting with other components (select, text field, etc.).
 -   Fix: dialog click away at the bottom of the dialog
+-   Fixed `Popover` pixelated rendering
+-   Remove `Popover` closing when the anchor is out of the screen
+-   Fixed `Dropdown` position re-calculation when children changes
 
 ### Added
 

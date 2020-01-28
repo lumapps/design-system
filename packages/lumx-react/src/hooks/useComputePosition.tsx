@@ -52,7 +52,8 @@ const useComputePosition: useComputePositionType = (
     computedPosition: ElementPosition;
     isVisible: boolean;
 } => {
-    const WINDOW_BOUNDING_OFFSET = 8;
+    const WINDOW_BOUNDING_OFFSET = 16;
+    const MIN_SPACE_BELOW = 150;
     const MATCHING_PLACEMENT = Placement && {
         [Placement.AUTO]: {
             bottom: Placement.BOTTOM,
@@ -86,7 +87,7 @@ const useComputePosition: useComputePositionType = (
         );
         setIsAnchorInViewport(newIsAnchorInViewPort);
 
-        if (!anchorRef || !anchorRef.current || !popoverRef || !popoverRef.current || !newIsAnchorInViewPort) {
+        if (!anchorRef || !anchorRef.current || !popoverRef || !popoverRef.current) {
             setComputedPosition(defaultPosition);
             return;
         }
@@ -130,12 +131,17 @@ const useComputePosition: useComputePositionType = (
                 },
                 'full',
             );
+            const availableHeightBelow = windowHeight - (newPosition.y + bottomY) - WINDOW_BOUNDING_OFFSET;
 
             // Priority to bottom placement if possible, if not take the most available place;
-            if (canBeBottom || boundingAnchor.top <= windowHeight - boundingAnchor.bottom) {
+            if (
+                availableHeightBelow >= MIN_SPACE_BELOW ||
+                canBeBottom ||
+                boundingAnchor.top <= windowHeight - boundingAnchor.bottom
+            ) {
                 newPosition = {
                     ...bottomPosition,
-                    maxHeight: windowHeight - (newPosition.y + bottomY) - WINDOW_BOUNDING_OFFSET,
+                    maxHeight: availableHeightBelow,
                 };
             } else {
                 const { x: topX, y: topY } = calculatePopoverPlacement(
@@ -143,18 +149,22 @@ const useComputePosition: useComputePositionType = (
                     boundingAnchor,
                     boundingPopover,
                 );
+
                 const y = Math.max(WINDOW_BOUNDING_OFFSET, topY - newPosition.y);
+
                 const topPosition = {
                     ...newPosition,
-                    maxHeight: boundingAnchor.top + vertical,
+                    maxHeight: boundingAnchor.top - vertical - WINDOW_BOUNDING_OFFSET,
                     x: newPosition.x + topX,
                     y,
                 };
+
                 newPosition = topPosition;
             }
         } else {
             const { x, y } = calculatePopoverPlacement(placement, boundingAnchor, boundingPopover);
-            const newY = Math.max(WINDOW_BOUNDING_OFFSET, newPosition.y + y);
+            const newY =
+                newPosition.y + y > 0 ? Math.max(WINDOW_BOUNDING_OFFSET, newPosition.y + y) : newPosition.y + y;
             const maxHeight =
                 placement === Placement.TOP || placement === Placement.TOP_END || placement === Placement.TOP_START
                     ? boundingAnchor.top + vertical
@@ -217,7 +227,7 @@ const useComputePosition: useComputePositionType = (
         };
     }, [...dependencies, isAnchorInViewport, isVisible]);
 
-    return { computedPosition, isVisible: (isVisible && isAnchorInViewport) || (staysOpenOnHover && isMouseEntered) };
+    return { computedPosition, isVisible: isVisible || (staysOpenOnHover && isMouseEntered) };
 };
 
 export { useComputePosition, useComputePositionType };
