@@ -164,7 +164,6 @@ export const simple = ({ theme }) => {
 
     return (
         <AutocompleteMultiple
-            anchorToInput
             theme={theme}
             isOpen={showSuggestions && hasSuggestions}
             onClose={closeAutocomplete}
@@ -174,15 +173,14 @@ export const simple = ({ theme }) => {
             values={selectedValues}
             inputRef={inputRef}
             shouldFocusOnClose
-            fitToAnchorWidth={false}
+            fitToAnchorWidth={true}
             onBlur={onBlur}
             selectedChipRender={renderChip}
         >
-            <List theme={theme}>
+            <List isClickable theme={theme}>
                 {filteredCities.map((city, index) => (
                     <ListItem
                         size={Size.tiny}
-                        isClickable
                         theme={theme}
                         key={city.id}
                         isHighlighted={index === activeItemIndex}
