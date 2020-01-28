@@ -164,7 +164,6 @@ export const simple = ({ theme }) => {
 
     return (
         <AutocompleteMultiple
-            anchorToInput
             theme={theme}
             isOpen={showSuggestions && hasSuggestions}
             onClose={closeAutocomplete}
@@ -174,7 +173,7 @@ export const simple = ({ theme }) => {
             values={selectedValues}
             inputRef={inputRef}
             shouldFocusOnClose
-            fitToAnchorWidth={false}
+            fitToAnchorWidth={true}
             onBlur={onBlur}
             selectedChipRender={renderChip}
         >
