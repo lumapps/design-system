@@ -23,6 +23,9 @@ type DatePickerFieldProps = DatePickerProps & {
     /** Input label. */
     label?: TextFieldProps['label'];
 
+    /** Text field placeholder message. */
+    placeholder?: string;
+
     /** Theme. */
     theme?: Theme;
 };
@@ -57,6 +60,7 @@ const DEFAULT_PROPS: Partial<DatePickerFieldProps> = {
 const DatePickerField = ({
     isClearable = DEFAULT_PROPS.isClearable,
     label,
+    placeholder,
     theme,
     value,
     ...props
@@ -132,14 +136,16 @@ const DatePickerField = ({
         <>
             <TextField
                 isClearable={isClearable}
+                forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
                 label={label}
+                placeholder={placeholder}
                 value={value ? value.format('LL') : ''}
                 onClick={toggleSimpleMenu}
                 onChange={onChange}
                 onKeyPress={handleKeyboardNav}
                 theme={theme}
-                readOnly={true}
+                readOnly
             />
             {isOpen ? (
                 <Popover

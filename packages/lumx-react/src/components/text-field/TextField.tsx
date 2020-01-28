@@ -21,6 +21,9 @@ interface ITextFieldProps extends IGenericProps {
     /** The error related to the TextField */
     error?: string | ReactNode;
 
+    /** Whether we force the focus style */
+    forceFocusStyle?: boolean;
+
     /** Whether the text field is displayed with error style or not. */
     hasError?: boolean;
 
@@ -110,6 +113,7 @@ const MIN_ROWS = 2;
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
+    forceFocusStyle: false,
     hasError: false,
     isClearable: false,
     isDisabled: false,
@@ -262,6 +266,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         chips,
         className = '',
         error,
+        forceFocusStyle = DEFAULT_PROPS.forceFocusStyle,
         hasError,
         helper,
         icon,
@@ -320,7 +325,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     hasValue: Boolean(value),
                     isClearable,
                     isDisabled,
-                    isFocus,
+                    isFocus: isFocus || forceFocusStyle,
                     isValid,
                     prefix: CLASSNAME,
                     theme,
@@ -331,7 +336,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         >
             <div className={`${CLASSNAME}__header`}>
                 {label && (
-                    <InputLabel htmlFor={id} className={`${CLASSNAME}__label`}>
+                    <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} theme={theme}>
                         {label}
                     </InputLabel>
                 )}
