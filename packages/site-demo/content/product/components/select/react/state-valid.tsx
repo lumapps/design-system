@@ -8,12 +8,17 @@ const App = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
+<<<<<<< HEAD:packages/site-demo/content/product/components/select/react/validation-valid.tsx
     const [value, setValue] = React.useState<string>('');
     // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+=======
+    const [values, setValues] = React.useState<string[]>([]);
+    const [isOpen, closeSelect, toggleSelect] = useBooleanState(false);
+>>>>>>> 9aad2416... docs(select): updated texts:packages/site-demo/content/product/components/select/react/state-valid.tsx
 
     const clearSelected = (event: SyntheticEvent) => {
-        event.stopPropagation();
+        event?.stopPropagation();
         setValue('');
     };
 
@@ -23,7 +28,6 @@ const App = ({ theme }: any) => {
         } else {
             setValue(item);
         }
-
         closeSelect();
     };
 
@@ -31,7 +35,7 @@ const App = ({ theme }: any) => {
         <Select
             style={{ width: '100%' }}
             isOpen={isOpen}
-            hasError={true}
+            isValid={true}
             value={value}
             onClear={clearSelected}
             label={LABEL}

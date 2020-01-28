@@ -1,38 +1,36 @@
-import React, { SyntheticEvent } from 'react';
+import React from 'react';
 
 import { List, ListItem, Select, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
-const App = ({ theme }: any) => {
+const App = ({ theme }) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [value, setValue] = React.useState<string>('');
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [values, setValues] = React.useState<string[]>([]);
+    const [isOpen, closeSelect, toggleSelect] = useBooleanState(false);
 
-    const clearSelected = (event: SyntheticEvent) => {
-        event?.stopPropagation();
-        setValue('');
+    const clearSelectedvalues = (event, value) => {
+        event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
     };
 
-    const selectItem = (item: string) => () => {
-        if (value === item) {
-            setValue('');
-        } else {
-            setValue(item);
+    const onItemSelectedHandler = (item) => {
+        if (values.includes(item)) {
+            return;
         }
         closeSelect();
+        setValues([item]);
     };
 
     return (
         <Select
             style={{ width: '100%' }}
             isOpen={isOpen}
-            isValid={true}
-            value={value}
-            onClear={clearSelected}
+            isDisabled={true}
+            value={values}
+            onClear={clearSelectedvalues}
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
@@ -43,9 +41,9 @@ const App = ({ theme }: any) => {
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
-                              isSelected={value === choice}
+                              isSelected={values.includes(choice)}
                               key={index}
-                              onItemSelected={selectItem(choice)}
+                              onItemSelected={() => onItemSelectedHandler(choice)}
                               size={Size.tiny}
                           >
                               {choice}
