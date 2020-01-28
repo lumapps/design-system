@@ -31,9 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `lx-helper` and `lx-error` props to `lx-text-field` and `lx-select` components
 -   Added `Message` component
 -   Added `useFocus` hook
--   Added `focusElement` prop on dialog to select the element to focus when opening the dialog.
--   Added `forceHeaderDivider` and `forceFooterDivider` props on dialog force the display of header and footer dividers.
--   Added use of `<header>` and `<footer>` element in the dialog component.
+-   Added `focusElement` prop on dialog to select the element to focus when opening the dialog
+-   Added `forceHeaderDivider` and `forceFooterDivider` props on dialog force the display of header and footer dividers
+-   Added use of `<header>` and `<footer>` element in the dialog component
+-   Added `size` prop to `ImageBlock` component
+-   Added `lx-size` prop to `lx-image-block` component
 
 ## [0.19.0][] - 2020-01-02
 
