@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { RefObject, useState } from 'react';
 
 import moment from 'moment';
 
@@ -25,11 +25,14 @@ interface IDatePickerProps extends IGenericProps {
     /** Min date. */
     minDate?: Date;
 
+    /** Today or selected date Ref */
+    todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
+
     /** Value. */
-    value: moment.Moment;
+    value: moment.Moment | undefined;
 
     /** On change. */
-    onChange(value: moment.Moment): void;
+    onChange(value: moment.Moment | undefined): void;
 }
 type DatePickerProps = IDatePickerProps;
 
@@ -83,6 +86,7 @@ const DatePicker = (props: DatePickerProps) => {
         />
     );
 };
+DatePicker.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 

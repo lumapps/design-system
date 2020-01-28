@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DatePicker> Snapshots and structure should render correctly 1`] = `
+<undefinedControlled
+  locale="fr"
+  monthOffset={0}
+  onChange={[MockFunction]}
+  onNextMonthChange={[Function]}
+  onPrevMonthChange={[Function]}
+  today={"1970-01-17T23:15:21.000Z"}
+  value={"1970-01-17T23:15:21.000Z"}
+/>
+`;

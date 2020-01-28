@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Changed `lx-helper` prop to `lx-has-choices-helper` from `lx-select` component
 -   _[BREAKING]_ Changed `lx-helper-message` prop to `lx-choices-helper` from `lx-select` component
 -   Use the `useFocusOnOpen` hook to focus on the `List` child of a `Dropdown`
+-   Refactored `DatePicker` component to use Popover instead of Dropdown
 
 ### Fixed
 
@@ -39,6 +40,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added use of `<header>` and `<footer>` element in the dialog component
 -   Added `size` prop to `ImageBlock` component
 -   Added `lx-size` prop to `lx-image-block` component
+-   Added keyboard interaction to `DatePicker` component
+-   Added `useFocusTrap` on `DatePickerField`
+-   Added `clearable` prop on `DatePickerField`
 
 ## [0.19.0][] - 2020-01-02
 
