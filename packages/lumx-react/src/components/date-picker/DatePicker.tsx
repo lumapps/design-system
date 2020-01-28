@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { RefObject, useState } from 'react';
 
 import moment from 'moment';
 
@@ -24,6 +24,9 @@ interface IDatePickerProps extends IGenericProps {
 
     /** Min date. */
     minDate?: Date;
+
+    /** Today or selected date Ref */
+    todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
 
     /** Value. */
     value: moment.Moment;

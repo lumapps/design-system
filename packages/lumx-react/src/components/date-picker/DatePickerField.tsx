@@ -4,12 +4,13 @@ import noop from 'lodash/noop';
 
 import { Placement, Popover, TextField, Theme } from '@lumx/react';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
+import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { onEscapePressed } from '@lumx/react/utils';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker, DatePickerProps } from './DatePicker';
 
-import { useFocusOnClose } from '@lumx/react/hooks/useFocusOnClose';
+import { useFocus } from '@lumx/react/hooks/useFocus';
 
 /////////////////////////////
 
@@ -72,7 +73,7 @@ const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps
 
     const onEscapeHandler = isOpen && onEscapePressed(closeSimpleMenu);
 
-    useFocusOnClose(anchorRef.current, isOpen);
+    useFocus(anchorRef.current, isOpen);
     const handleKeyboardNav = (evt: React.KeyboardEvent<HTMLElement>): void => {
         if ((evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE) && toggleSimpleMenu) {
             toggleSimpleMenu();
@@ -103,6 +104,10 @@ const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps
         [anchorRef],
     );
 
+    // Handle focus trap.
+    const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
+    useFocusTrap(todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
+
     return (
         <>
             <TextField
@@ -129,7 +134,7 @@ const DatePickerField = ({ label, theme, value, ...props }: DatePickerFieldProps
                             minWidth: 0,
                         }}
                     >
-                        <DatePicker value={value} {...props} />
+                        <DatePicker value={value} todayOrSelectedDateRef={todayOrSelectedDateRef} {...props} />
                     </div>
                 </Popover>
             ) : null}
