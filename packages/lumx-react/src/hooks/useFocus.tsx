@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Hook focusing an element when defined and `focus` boolean `true`.
@@ -7,9 +7,11 @@ import { useEffect } from 'react';
  * @param shouldFocus   Boolean flag to trigger the focus
  */
 export function useFocus(element: HTMLElement | null | undefined, shouldFocus = true) {
+    const [wasFocus, setWasFocus] = useState(shouldFocus);
     useEffect(() => {
-        if (shouldFocus && element) {
+        if (wasFocus !== shouldFocus && element) {
             element.focus();
+            setWasFocus(shouldFocus);
         }
     }, [element, shouldFocus]);
 }

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fixed Dropdown focus trigger on open and close (fix on `useFocus` hook).
+
 ## [0.20.0][] - 2020-01-28
 
 ### Changed
