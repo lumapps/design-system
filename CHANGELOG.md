@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ Externalized `moment` and `moment-range` dependencies from @lumx/react bundle
+
 ## [0.20.1][] - 2020-01-29
 
 ### Fixed
