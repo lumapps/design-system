@@ -29,7 +29,7 @@
     "name": "@lumx/core",
     "publishConfig": {
         "directory": "dist",
-        "prepublish": "yarn build"
+        "prepublishOnly": "yarn build"
     },
     "repository": {
         "type": "git",
@@ -38,7 +38,8 @@
     "scripts": {
         "build": "webpack",
         "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
-        "prepublish": "yarn build"
+        "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
+        "prepublishOnly": "yarn build"
     },
     "version": "0.20.0",
     "devDependencies": {

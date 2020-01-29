@@ -39,7 +39,7 @@
     },
     "scripts": {
         "build": "webpack",
-        "prepublish": "yarn build"
+        "prepublishOnly": "yarn build"
     },
     "version": "0.20.0",
     "devDependencies": {

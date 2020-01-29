@@ -99,7 +99,7 @@
     },
     "scripts": {
         "build": "webpack",
-        "prepublish": "yarn build",
+        "prepublishOnly": "yarn build",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles",
         "storybook": "start-storybook -p 9000"
     },
