@@ -5,7 +5,7 @@ import { TextField } from '@lumx/react';
 const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
 
-    return <TextField label="Textfield label" value={value} onChange={setValue} theme={theme} />;
+    return <TextField label="Text field label" value={value} onChange={setValue} theme={theme} />;
 };
 
 export default App;
