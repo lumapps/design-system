@@ -82,6 +82,8 @@ module.exports = {
     },
 
     externals: [
+        'moment',
+        'moment-range',
         {
             react: {
                 amd: 'react',
