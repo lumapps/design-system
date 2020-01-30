@@ -15,6 +15,8 @@
         "intersection-observer": "^0.7.0",
         "jquery": "^3.3.1",
         "lodash": "^4.17.15",
+        "moment": "^2.24.0",
+        "moment-range": "^4.0.2",
         "prismjs": "^1.17.1",
         "react": "^16.11.0",
         "react-angular": "^0.4.0",

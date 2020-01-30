@@ -13,6 +13,8 @@
         "focus-trap-react": "^6.0.0",
         "focus-visible": "^5.0.2",
         "lodash": "^4.17.15",
+        "moment": "^2.24.0",
+        "moment-range": "^4.0.2",
         "react": "^16.8.5",
         "react-dom": "^16.8.5",
         "uuid": "^3.3.2"
@@ -73,6 +75,12 @@
         "webpack-notifier": "^1.8.0",
         "webpackbar": "^4.0.0",
         "yarn": "^1.19.1"
+    },
+    "peerDependencies": {
+        "moment": "^2.24.0",
+        "moment-range": "^4.0.2",
+        "react": "^16.8.5",
+        "react-dom": "^16.8.5"
     },
     "description": "The official LumApps Design System (LumX) for React applications",
     "engines": {

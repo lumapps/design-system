@@ -56,5 +56,8 @@
         "webpack": "^4.41.2",
         "webpack-notifier": "^1.8.0",
         "webpackbar": "^4.0.0"
+    },
+    "peerDependencies": {
+        "angular": "^1.7.8"
     }
 }

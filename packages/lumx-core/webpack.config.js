@@ -90,6 +90,8 @@ module.exports = {
         'lumx-theme-material': `${SRC_PATH}/scss/lumx-theme-material.scss`,
     },
 
+    externals: ['moment', 'moment-range'],
+
     bail: true,
     devtool: 'source-map',
     mode: 'production',
