@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.0-alpha.0][] - 2020-01-30
+
 ### Changed
 
 -   _[BREAKING]_ Externalized `moment` and `moment-range` dependencies from @lumx/react bundle
@@ -248,3 +250,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.20.0]: https://github.com/lumapps/design-system/tree/vundefined
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.20.1...HEAD
 [0.20.1]: https://github.com/lumapps/design-system/tree/v0.20.1
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.0-alpha.0...HEAD
+[0.21.0-alpha.0]: https://github.com/lumapps/design-system/tree/v0.21.0-alpha.0
