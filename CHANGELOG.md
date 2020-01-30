@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Remove useless `List` auto-focus on mount if is clickable
+
 ## [0.21.0-alpha.0][] - 2020-01-30
 
 ### Changed
