@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.0][] - 2020-01-30
+
 ### Fixed
 
 -   Remove useless `List` auto-focus on mount if is clickable
@@ -256,3 +258,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.20.1]: https://github.com/lumapps/design-system/tree/v0.20.1
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.0-alpha.0...HEAD
 [0.21.0-alpha.0]: https://github.com/lumapps/design-system/tree/v0.21.0-alpha.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.0...HEAD
+[0.21.0]: https://github.com/lumapps/design-system/tree/v0.21.0
