@@ -41,7 +41,7 @@
         "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
         "prepublishOnly": "yarn build"
     },
-    "version": "0.20.1",
+    "version": "0.21.0-alpha.0",
     "devDependencies": {
         "autoprefixer": "^9.7.1",
         "clean-webpack-plugin": "^3.0.0",
