@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode, RefObject, cloneElement, useEffect, useRef, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, RefObject, cloneElement, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -200,13 +200,6 @@ const List: React.FC<ListProps> & IList = ({
         }
         return nextIdx;
     };
-
-    // Let's place the focus on the list so we can navigate with the keyboard.
-    useEffect(() => {
-        if (isClickable && listElementRef && listElementRef.current) {
-            listElementRef.current.focus();
-        }
-    }, [isClickable]);
 
     return (
         <ul
