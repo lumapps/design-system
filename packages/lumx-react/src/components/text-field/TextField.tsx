@@ -323,7 +323,6 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                     hasPlaceholder: Boolean(placeholder),
                     hasTextarea: multiline,
                     hasValue: Boolean(value),
-                    isClearable,
                     isDisabled,
                     isFocus: isFocus || forceFocusStyle,
                     isValid,
@@ -334,20 +333,20 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
             )}
             ref={textFieldRef}
         >
-            <div className={`${CLASSNAME}__header`}>
-                {label && (
+            {label && (
+                <div className={`${CLASSNAME}__header`}>
                     <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} theme={theme}>
                         {label}
                     </InputLabel>
-                )}
 
-                {maxLength && (
-                    <div className={`${CLASSNAME}__char-counter`}>
-                        <span>{maxLength - valueLength}</span>
-                        {maxLength - valueLength === 0 && <Icon icon={mdiAlertCircle} size={Size.xxs} />}
-                    </div>
-                )}
-            </div>
+                    {maxLength && (
+                        <div className={`${CLASSNAME}__char-counter`}>
+                            <span>{maxLength - valueLength}</span>
+                            {maxLength - valueLength === 0 && <Icon icon={mdiAlertCircle} size={Size.xxs} />}
+                        </div>
+                    )}
+                </div>
+            )}
 
             <div className={`${CLASSNAME}__wrapper`}>
                 {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}

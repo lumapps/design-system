@@ -275,13 +275,13 @@ const Select: React.FC<SelectProps> = ({
             <>
                 {variant === SelectVariant.input && (
                     <>
-                        <div className={`${CLASSNAME}__header`}>
-                            {label && (
+                        {label && (
+                            <div className={`${CLASSNAME}__header`}>
                                 <InputLabel htmlFor={targetUuid} className={`${CLASSNAME}__label`}>
                                     {label}
                                 </InputLabel>
-                            )}
-                        </div>
+                            </div>
+                        )}
 
                         <div
                             ref={anchorRef as RefObject<HTMLDivElement>}
