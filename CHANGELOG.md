@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.1][] - 2020-01-31
+
 ### Fixed
 
 -   Do not display `TextField` and `Select` header if no label
@@ -264,3 +266,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.0-alpha.0]: https://github.com/lumapps/design-system/tree/v0.21.0-alpha.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.0...HEAD
 [0.21.0]: https://github.com/lumapps/design-system/tree/v0.21.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.1...HEAD
+[0.21.1]: https://github.com/lumapps/design-system/tree/v0.21.1
