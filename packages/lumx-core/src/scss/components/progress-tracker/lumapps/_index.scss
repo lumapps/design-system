@@ -78,10 +78,12 @@
     &__label,
     &__helper {
         text-align: center;
+        user-select: none;
     }
 
     &__label {
         margin-top: $lumx-spacing-unit;
+        cursor: unset;
     }
 }
 
