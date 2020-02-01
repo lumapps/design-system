@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.2][] - 2020-02-01
+
 ### Fixed
 
 -   Reset input label cursor on `ProgressTracker`
@@ -273,3 +275,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.0]: https://github.com/lumapps/design-system/tree/v0.21.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.1...HEAD
 [0.21.1]: https://github.com/lumapps/design-system/tree/v0.21.1
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.2...HEAD
+[0.21.2]: https://github.com/lumapps/design-system/tree/v0.21.2
