@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Reset input label cursor on `ProgressTracker`
+-   Apply `TextField` input min width only if has chips
 
 ## [0.21.1][] - 2020-01-31
 

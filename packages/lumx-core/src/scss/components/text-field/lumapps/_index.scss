@@ -99,6 +99,10 @@
         }
 
         input {
+            #{$self}--has-chips & {
+                min-width: $lumx-text-field-min-width;
+            }
+
             #{$self}--theme-light & {
                 @include lumx-text-field-input-native(lumx-base-const('theme', 'LIGHT'), 'input');
             }
