@@ -63,8 +63,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 const TableRow: React.FC<TableRowProps> = ({
     children,
     className = '',
-    isClickable,
-    isSelected,
+    isClickable = DEFAULT_PROPS.isClickable,
+    isSelected = DEFAULT_PROPS.isSelected,
     ...props
 }: TableRowProps): ReactElement => (
     <tr
