@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `isClickable` and `isSelected` props to `Table` component
+
 ## [0.21.2][] - 2020-02-01
 
 ### Fixed

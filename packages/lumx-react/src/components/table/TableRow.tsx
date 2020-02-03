@@ -10,7 +10,16 @@ import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react
 /**
  * Defines the props of the component.
  */
-interface ITableRowProps extends IGenericProps {}
+interface ITableRowProps extends IGenericProps {
+    /**
+     * Whether the table row is clickable.
+     */
+    isClickable?: boolean;
+    /**
+     * Whether the table row is clickable.
+     */
+    isSelected?: boolean;
+}
 type TableRowProps = ITableRowProps;
 
 /////////////////////////////
@@ -39,7 +48,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: IDefaultPropsType = {
+    isClickable: false,
+    isSelected: false,
+};
 
 /////////////////////////////
 
@@ -48,8 +60,17 @@ const DEFAULT_PROPS: IDefaultPropsType = {};
  *
  * @return The component.
  */
-const TableRow: React.FC<TableRowProps> = ({ children, className = '', ...props }: TableRowProps): ReactElement => (
-    <tr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
+const TableRow: React.FC<TableRowProps> = ({
+    children,
+    className = '',
+    isClickable,
+    isSelected,
+    ...props
+}: TableRowProps): ReactElement => (
+    <tr
+        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isClickable, isSelected }))}
+        {...props}
+    >
         {children}
     </tr>
 );
