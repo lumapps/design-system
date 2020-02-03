@@ -16,7 +16,7 @@ interface ITableRowProps extends IGenericProps {
      */
     isClickable?: boolean;
     /**
-     * Whether the table row is clickable.
+     * Whether the table row is selected.
      */
     isSelected?: boolean;
 }
