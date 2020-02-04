@@ -77,6 +77,11 @@
         }
     }
 
+    &__row--is-disabled &__cell {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
     &__cell-wrapper {
         @include lumx-table-cell-wrapper;
 
