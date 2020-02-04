@@ -16,6 +16,10 @@ interface ITableRowProps extends IGenericProps {
      */
     isClickable?: boolean;
     /**
+     * Whether the table row is disabled.
+     */
+    isDisabled?: boolean;
+    /**
      * Whether the table row is selected.
      */
     isSelected?: boolean;
@@ -50,6 +54,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     isClickable: false,
+    isDisabled: false,
     isSelected: false,
 };
 
@@ -64,11 +69,21 @@ const TableRow: React.FC<TableRowProps> = ({
     children,
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
+    isDisabled = DEFAULT_PROPS.isDisabled,
     isSelected = DEFAULT_PROPS.isSelected,
     ...props
 }: TableRowProps): ReactElement => (
     <tr
-        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isClickable, isSelected }))}
+        className={classNames(
+            className,
+            handleBasicClasses({
+                isClickable: isClickable && !isDisabled,
+                isDisabled,
+                isSelected: isSelected && !isDisabled,
+                prefix: CLASSNAME,
+            }),
+        )}
+        tabindex={isClickable && !isDisabled ? 0 : -1}
         {...props}
     >
         {children}

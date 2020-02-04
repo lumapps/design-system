@@ -44,6 +44,7 @@ function TableRowDirective() {
         restrict: 'E',
         scope: {
             isClickable: '=?lxIsClickable',
+            isDisabled: '=?lxIsDisabled',
             isSelected: '=?lxIsSelected',
         },
         template,
