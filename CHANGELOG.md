@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `isDisabled` prop to `TableRow` component
 -   Added `lx-is-disabled` prop to `lx-table-row` component
 
+### Fixed
+
+-   Interpolate variables when using `lx-input-label` and `lx-input-helper` components
+
 ## [0.21.3][] - 2020-02-03
 
 ### Added

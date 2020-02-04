@@ -1,6 +1,6 @@
 <div class="lumx-select" ng-class="lx.getClasses()">
     <div class="lumx-select__header" ng-if="::lx.label && (!lx.variant || lx.variant === 'input')">
-        <lx-input-label class="lumx-select__label" lx-label="{{ lx.label }}" lx-theme="{{ lx.theme }}"></lx-input-label>
+        <lx-input-label class="lumx-select__label" lx-theme="{{ lx.theme }}">{{ lx.label }}</lx-input-label>
     </div>
 
     <div
@@ -97,20 +97,13 @@
         </lx-chip-after>
     </lx-chip>
 
-    <lx-input-helper
-        class="lumx-select__helper "
-        lx-helper="{{ lx.error }}"
-        lx-kind="error"
-        lx-theme="{{ lx.theme }}"
-        ng-if="lx.error"
-    ></lx-input-helper>
+    <lx-input-helper class="lumx-select__helper " lx-kind="error" lx-theme="{{ lx.theme }}" ng-if="lx.error">
+        {{ lx.error }}
+    </lx-input-helper>
 
-    <lx-input-helper
-        class="lumx-select__helper"
-        lx-helper="{{ lx.helper }}"
-        lx-theme="{{ lx.theme }}"
-        ng-if="lx.helper"
-    ></lx-input-helper>
+    <lx-input-helper class="lumx-select__helper" lx-theme="{{ lx.theme }}" ng-if="lx.helper">
+        {{ lx.helper }}
+    </lx-input-helper>
 
     <lx-dropdown lx-position="left" lx-width="100%" id="{{ lx.dropdownUuid }}">
         <lx-dropdown-menu>

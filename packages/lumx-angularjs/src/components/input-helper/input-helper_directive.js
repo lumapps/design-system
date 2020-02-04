@@ -82,11 +82,11 @@ function InputHelperDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            helper: '@lxHelper',
             kind: '@?lxKind',
             theme: '@?lxTheme',
         },
         template,
+        transclude: true,
     };
 }
 

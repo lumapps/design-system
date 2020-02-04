@@ -64,10 +64,10 @@ function InputLabelDirective() {
         replace: true,
         restrict: 'E',
         scope: {
-            label: '@lxLabel',
             theme: '@?lxTheme',
         },
         template,
+        transclude: true,
     };
 }
 
