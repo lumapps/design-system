@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.4][] - 2020-02-04
+
 ### Added
 
 -   Added `isDisabled` prop to `TableRow` component
@@ -294,3 +296,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.2]: https://github.com/lumapps/design-system/tree/v0.21.2
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.3...HEAD
 [0.21.3]: https://github.com/lumapps/design-system/tree/v0.21.3
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.4...HEAD
+[0.21.4]: https://github.com/lumapps/design-system/tree/v0.21.4
