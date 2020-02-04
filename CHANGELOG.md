@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `isDisabled` prop to `TableRow` component
+-   Added `lx-is-disabled` prop to `lx-table-row` component
+
 ## [0.21.3][] - 2020-02-03
 
 ### Added
