@@ -83,7 +83,7 @@ const TableRow: React.FC<TableRowProps> = ({
                 prefix: CLASSNAME,
             }),
         )}
-        tabindex={isClickable && !isDisabled ? 0 : -1}
+        tabIndex={isClickable && !isDisabled ? 0 : -1}
         {...props}
     >
         {children}
