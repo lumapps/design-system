@@ -9,6 +9,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import isFunction from 'lodash/isFunction';
 
 import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { FocusedImage, ILumHTMLImageElement } from './FocusedImage';
 
 /**
  * Loading attribute is not yet supported in typescript, so we need
@@ -151,7 +152,30 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...restProps}
         >
             {aspectRatio === AspectRatio.original ? (
-                <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
+                <>
+                    <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
+                    <img
+                        ref={(f): FocusedImage | undefined => {
+                            if (!f) {
+                                return undefined;
+                            }
+
+                            // tslint:disable-next-line: no-unused-expression
+                            return new FocusedImage(f as ILumHTMLImageElement, {
+                                debounceTime: 17,
+                                focus: undefined,
+                                updateOnWindowResize: true,
+                            });
+                        }}
+                        className="lumx-thumbnail__image"
+                        crossOrigin="anonymous"
+                        src={image}
+                        alt={alt}
+                        loading={loading}
+                        data-focus-x="0"
+                        data-focus-y="0"
+                    />
+                </>
             ) : (
                 <div className="lumx-thumbnail__background" style={style} />
             )}
