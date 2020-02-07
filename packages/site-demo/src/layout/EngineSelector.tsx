@@ -15,7 +15,7 @@ import { Button, Emphasis, Size } from '@lumx/react';
  */
 const EngineSelector: React.FC = (): ReactElement | null => {
     const { engine, changeEngine } = useContext(EngineContext);
-    const onClick = (newEngine) => () => changeEngine?.(newEngine);
+    const onClick = (newEngine: Engine) => () => changeEngine?.(newEngine);
 
     switch (engine) {
         case Engine.react:

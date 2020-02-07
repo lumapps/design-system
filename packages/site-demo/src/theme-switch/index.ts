@@ -2,7 +2,7 @@ import { Theme } from '@lumx/demo/context/theme';
 import { switchDevTheme } from '@lumx/demo/theme-switch/switch-dev';
 import { switchProdTheme } from '@lumx/demo/theme-switch/switch-prod';
 
-const getThemeId = (theme) => `theme-${theme}`;
+const getThemeId = (theme: string) => `theme-${theme}`;
 
 const getThemeElement = (theme: Theme) => document.getElementById(getThemeId(theme));
 

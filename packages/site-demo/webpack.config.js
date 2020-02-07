@@ -211,6 +211,10 @@ module.exports = {
             },
         },
     },
+
+    performance: {
+        assetFilter: (file) => file.endsWith('.min.js'),
+    },
 };
 
 if (isDev) {
