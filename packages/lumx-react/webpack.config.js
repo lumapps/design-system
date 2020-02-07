@@ -81,7 +81,7 @@ if (!IS_CI) {
 
 module.exports = {
     entry: {
-        'lumx.react': `${SRC_PATH}/index.ts`,
+        'lumx.react': `${SRC_PATH}/index`,
     },
 
     externals: [
@@ -154,5 +154,9 @@ module.exports = {
 
     stats: {
         colors: !IS_CI,
+    },
+
+    performance: {
+        assetFilter: (file) => file.endsWith('.min.js'),
     },
 };

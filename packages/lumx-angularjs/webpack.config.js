@@ -140,4 +140,8 @@ module.exports = {
     stats: {
         colors: !IS_CI,
     },
+
+    performance: {
+        assetFilter: (file) => file.endsWith('.min.js'),
+    },
 };
