@@ -6,24 +6,26 @@ import get from 'lodash/get';
 
 /////////////////////////////
 
+type Listener = (evt: KeyboardEvent) => void;
+
 interface IUseKeyboardListNavigationType {
     /** the current active index */
     activeItemIndex: number;
     /** callback to be used when a key is pressed. usually used with the native prop `onKeyDown` */
-    onKeyboardNavigation(evt: KeyboardEvent): void;
+    onKeyboardNavigation: Listener;
     /** Resets the active index to the initial state */
     resetActiveIndex(): void;
     /** Sets the active index to a given value */
     setActiveItemIndex(value: SetStateAction<number>): void;
 }
 
-type useKeyboardListNavigationType = (
-    items: object[],
+type useKeyboardListNavigationType = <I>(
+    items: I[],
     ref: RefObject<HTMLElement>,
-    onListItemSelected: (itemSelected: object) => void,
-    onListItemNavigated?: (itemSelected: object) => void,
-    onEnterPressed?: (itemSelected: object) => void,
-    onBackspacePressed?: (evt: KeyboardEvent) => void,
+    onListItemSelected: (itemSelected: I) => void,
+    onListItemNavigated?: (itemSelected: I) => void,
+    onEnterPressed?: (itemSelected: string) => void,
+    onBackspacePressed?: Listener,
     keepFocusAfterSelection?: boolean,
     initialIndex?: number,
     preventTabOnEnteredValue?: boolean,
@@ -39,14 +41,14 @@ const INITIAL_INDEX = -1;
  * This custom hook provides the necessary set of functions and values to properly navigate
  * a list using the keyboard.
  *
- * @param items the list of items that will be navigated using the keyboard
- * @param ref A reference to the element that is controlling the navigation.
- * @param onListItemSelected callback to be executed when the ENTER key is pressed on an item
- * @param onListItemNavigated callback to be executed when the Arrow keys are pressed
- * @param onEnterPressed callback to be executed when the ENTER key is pressed
- * @param onBackspacePressed callback to be executed when the BACKSPACE key is pressed
- * @param keepFocusAfterSelection determines whether after selecting an item, the focus should be maintained on the current target or not
- * @param initialIndex where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0`
+ * @param items                    the list of items that will be navigated using the keyboard
+ * @param ref                      A reference to the element that is controlling the navigation.
+ * @param onListItemSelected       callback to be executed when the ENTER key is pressed on an item
+ * @param onListItemNavigated      callback to be executed when the Arrow keys are pressed
+ * @param onEnterPressed           callback to be executed when the ENTER key is pressed
+ * @param onBackspacePressed       callback to be executed when the BACKSPACE key is pressed
+ * @param keepFocusAfterSelection  determines whether after selecting an item, the focus should be maintained on the current target or not
+ * @param initialIndex             where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0`
  * @param preventTabOnEnteredValue determines whether upon TAB, if there is a value entered, the event is prevented or not
  */
 const useKeyboardListNavigation: useKeyboardListNavigationType = (
@@ -81,7 +83,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     /**
      * Resets the active index to the initial state
      */
-    const resetActiveIndex = (): void => {
+    const resetActiveIndex = () => {
         setActiveItemIndex(initialIndex);
     };
 
@@ -89,7 +91,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * Prevents the default event and stops the propagation of said event
      * @param evt - key pressed event
      */
-    const preventDefaultAndStopPropagation = (evt: KeyboardEvent): void => {
+    const preventDefaultAndStopPropagation: Listener = (evt) => {
         evt.preventDefault();
         evt.stopPropagation();
     };
@@ -98,15 +100,14 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * Handles navigation with the arrows using the keyboard
      * @param evt - key pressed event
      */
-    const onArrowPressed = (evt: KeyboardEvent): void => {
+    const onArrowPressed: Listener = (evt) => {
         // tslint:disable-next-line: deprecation
         const { keyCode } = evt;
         const nextActiveIndex = calculateActiveIndex(keyCode);
         setActiveItemIndex(nextActiveIndex);
         preventDefaultAndStopPropagation(evt);
         if (onListItemNavigated) {
-            const selectedItem: object = items[nextActiveIndex];
-            // tslint:disable-next-line: no-inferred-empty-object-type
+            const selectedItem = items[nextActiveIndex];
             onListItemNavigated(selectedItem);
         }
     };
@@ -115,9 +116,8 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * Handles the event when the backspace key is pressed
      * @param evt - key pressed event
      */
-    const onBackspaceKeyPressed = (evt: KeyboardEvent): void => {
+    const onBackspaceKeyPressed: Listener = (evt) => {
         if (onBackspacePressed) {
-            // tslint:disable-next-line: no-inferred-empty-object-type
             onBackspacePressed(evt);
         }
     };
@@ -126,7 +126,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * Handles when the ENTER key is pressed
      * @param evt - key pressed event
      */
-    const onEnterKeyPressed = (evt: KeyboardEvent): void => {
+    const onEnterKeyPressed: Listener = (evt) => {
         if (!onListItemSelected) {
             return;
         }
@@ -137,15 +137,13 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
             (evt.currentTarget as HTMLElement).blur();
         }
 
-        const selectedItem: object = items[activeItemIndex];
+        const selectedItem = items[activeItemIndex];
 
         if (selectedItem) {
-            // tslint:disable-next-line: no-inferred-empty-object-type
             onListItemSelected(selectedItem);
             resetActiveIndex();
         } else if (activeItemIndex === initialIndex && onEnterPressed) {
             const value = get(evt, 'target.value');
-            // tslint:disable-next-line: no-inferred-empty-object-type
             onEnterPressed(value);
             resetActiveIndex();
         }
@@ -155,7 +153,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * Handles when the TAB key is pressed
      * @param evt - key pressed event
      */
-    const onTabKeyPressed = (evt: KeyboardEvent): void => {
+    const onTabKeyPressed: Listener = (evt) => {
         const value = get(evt, 'target.value');
 
         if (preventTabOnEnteredValue && value && value.length > 0) {
@@ -169,7 +167,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * that we need to manage depending on a specific key, we just need to add the key code
      * here, and as a value, the handler for said key.
      */
-    const eventsForKeyPressed = {
+    const eventsForKeyPressed: Record<string, Listener> = {
         [DOWN_KEY_CODE]: onArrowPressed,
         [TAB_KEY_CODE]: onTabKeyPressed,
         [UP_KEY_CODE]: onArrowPressed,
@@ -183,7 +181,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * and resets the active index, since an item was selected.
      * @param evt - key pressed or key down event
      */
-    const onKeyboardNavigation = (evt: KeyboardEvent): void => {
+    const onKeyboardNavigation: Listener = (evt) => {
         // tslint:disable-next-line: deprecation
         const { keyCode } = evt;
         const handler = eventsForKeyPressed[keyCode];
@@ -194,18 +192,16 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     };
 
     useEffect(() => {
-        if (ref && ref.current) {
-            const textFieldRefCurrent = ref.current;
-            textFieldRefCurrent.addEventListener('focus', resetActiveIndex);
-            textFieldRefCurrent.addEventListener('keydown', onKeyboardNavigation);
-
-            return (): void => {
-                textFieldRefCurrent.removeEventListener('focus', resetActiveIndex);
-                textFieldRefCurrent.removeEventListener('keydown', onKeyboardNavigation);
-            };
+        const { current: currentElement } = ref;
+        if (!currentElement) {
+            return;
         }
-
-        return undefined;
+        currentElement.addEventListener('focus', resetActiveIndex);
+        currentElement.addEventListener('keydown', onKeyboardNavigation);
+        return () => {
+            currentElement.removeEventListener('focus', resetActiveIndex);
+            currentElement.removeEventListener('keydown', onKeyboardNavigation);
+        };
     });
 
     return {

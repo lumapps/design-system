@@ -7,7 +7,7 @@ export default { title: 'Select' };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
-export const simpleSelect = ({ theme }) => {
+export const simpleSelect = ({ theme }: any) => {
     const selectedItem = select('Selected item', CHOICES, CHOICES[0]);
     // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(true);
@@ -33,7 +33,7 @@ export const simpleSelect = ({ theme }) => {
     );
 };
 
-export const selectWithNoData = ({ theme }) => {
+export const selectWithNoData = ({ theme }: any) => {
     // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(true);
 
@@ -56,7 +56,7 @@ export const selectWithNoData = ({ theme }) => {
     );
 };
 
-export const selectWithHelper = ({ theme }) => {
+export const selectWithHelper = ({ theme }: any) => {
     // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
@@ -82,7 +82,7 @@ export const selectWithHelper = ({ theme }) => {
     );
 };
 
-export const selectWithError = ({ theme }) => {
+export const selectWithError = ({ theme }: any) => {
     // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
@@ -110,7 +110,7 @@ export const selectWithError = ({ theme }) => {
     );
 };
 
-export const selectSuccess = ({ theme }) => {
+export const selectSuccess = ({ theme }: any) => {
     // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 

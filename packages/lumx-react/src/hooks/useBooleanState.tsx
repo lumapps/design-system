@@ -3,15 +3,15 @@ import { useState } from 'react';
 const useBooleanState = (defaultValue: boolean): [boolean, () => void, () => void, () => void] => {
     const [booleanValue, setBoolean] = useState<boolean>(defaultValue);
 
-    const setToFalse = (): void => {
+    const setToFalse = () => {
         setBoolean(false);
     };
 
-    const setToTrue = (): void => {
+    const setToTrue = () => {
         setBoolean(true);
     };
 
-    const toggleBoolean = (): void => {
+    const toggleBoolean = () => {
         setBoolean(!booleanValue);
     };
 

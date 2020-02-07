@@ -4,7 +4,7 @@ import { DatePickerField, DatePickerProps } from '@lumx/react';
 
 export default { title: 'DatePickerField' };
 
-export const simpleDatePickerField = ({ theme }) => {
+export const simpleDatePickerField = ({ theme }: any) => {
     const [value, setValue] = React.useState<DatePickerProps['value']>();
 
     return (

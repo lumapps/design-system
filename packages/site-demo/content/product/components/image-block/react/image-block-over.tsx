@@ -2,7 +2,7 @@ import React from 'react';
 
 import { AspectRatio, Chip, ChipGroup, ImageBlock, ImageBlockCaptionPosition, Size } from '@lumx/react';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <ImageBlock
         aspectRatio={AspectRatio.horizontal}
         captionPosition={ImageBlockCaptionPosition.over}

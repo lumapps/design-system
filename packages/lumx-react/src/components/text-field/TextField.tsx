@@ -140,7 +140,7 @@ const useComputeNumberOfRows = (
 } => {
     const [rows, setRows] = useState(minimumRows);
 
-    const recompute = (event: React.ChangeEvent): void => {
+    const recompute = (event: React.ChangeEvent) => {
         /**
          * HEAD's UP! This part is a little bit tricky. The idea here is to only
          * display the necessary rows on the textarea. In order to dynamically adjust
@@ -202,7 +202,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         ...forwardedProps
     } = props;
 
-    const onTextFieldFocus = (event: React.FocusEvent): void => {
+    const onTextFieldFocus = (event: React.FocusEvent) => {
         if (onFocus) {
             onFocus(event);
         }
@@ -210,7 +210,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         return setFocus(true);
     };
 
-    const onTextFieldBlur = (event: React.FocusEvent): void => {
+    const onTextFieldBlur = (event: React.FocusEvent) => {
         if (onBlur) {
             onBlur(event);
         }
@@ -218,7 +218,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         return setFocus(false);
     };
 
-    const handleChange = (event: React.ChangeEvent): void => {
+    const handleChange = (event: React.ChangeEvent) => {
         if (multiline) {
             recomputeNumberOfRows(event);
         }
@@ -301,7 +301,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
      * and remove focus from the clear button.
      * @param evt On clear event.
      */
-    const onClear = (evt: React.ChangeEvent): void => {
+    const onClear = (evt: React.ChangeEvent) => {
         evt.nativeEvent.preventDefault();
         evt.nativeEvent.stopPropagation();
         (evt.currentTarget as HTMLElement).blur();

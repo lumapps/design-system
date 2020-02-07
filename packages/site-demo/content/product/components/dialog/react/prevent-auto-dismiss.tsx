@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 
 import { Button, Dialog, Emphasis, Toolbar } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
     const close = useCallback(() => setOpen(false), []);
     const toggle = useCallback(() => setOpen(!isOpen), [isOpen]);

@@ -1,6 +1,6 @@
 import { Theme } from '@lumx/demo/context/theme';
 
-const getThemeId = (theme) => `theme-${theme}`;
+const getThemeId = (theme: string) => `theme-${theme}`;
 
 const getThemeElement = (theme: Theme) => document.getElementById(getThemeId(theme));
 
@@ -21,13 +21,14 @@ function initDevThemeScript() {
     devThemeScripts[Theme.lumapps] = themeLumapps.src;
 }
 
-const injectThemeScript = (theme: Theme) =>
+const injectThemeScript = async (theme: Theme) =>
     new Promise((resolve, reject) => {
         const newScript = document.createElement('script');
         newScript.id = getThemeId(theme);
         document.body.append(newScript);
         newScript.addEventListener('load', resolve);
         newScript.addEventListener('error', reject);
+        // tslint:disable-next-line: deprecation
         newScript.charset = 'UTF-8';
         newScript.src = devThemeScripts[theme] as string;
     });

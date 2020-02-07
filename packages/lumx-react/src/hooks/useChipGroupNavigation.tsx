@@ -5,15 +5,17 @@ import { useState } from 'react';
 interface IUseChipGroupNavigation {
     /** the current active chip index */
     activeChip: number;
+
     /** callback to be executed when the backspace was pressed */
     onBackspacePressed(): void;
+
     /** function that allows to reset the navigation */
     resetChipNavigation(): void;
 }
 
-type useChipGroupNavigationType = (
-    chips: object[],
-    onChipDeleted: (object) => void,
+type useChipGroupNavigationType<C = any> = (
+    chips: C[],
+    onChipDeleted: (chip: C) => void,
     initialActiveChip?: number,
 ) => IUseChipGroupNavigation;
 
@@ -38,7 +40,7 @@ const useChipGroupNavigation: useChipGroupNavigationType = (
     /**
      * Resets the active index and backspace control to their initial state
      */
-    const resetChipNavigation = (): void => {
+    const resetChipNavigation = () => {
         setWasBackspacePressed(false);
         setActiveChip(initialActiveChip);
     };
@@ -52,14 +54,13 @@ const useChipGroupNavigation: useChipGroupNavigationType = (
      * If it was not pressed before, we set the `wasBackspacePressed` flag to true and
      * highlight the last chip.
      */
-    const onBackspacePressed = (): void => {
+    const onBackspacePressed = () => {
         if (chips.length === 0) {
             return;
         }
 
         if (wasBackspacePressed) {
-            const chipDeleted: object = chips[chips.length - 1];
-            // tslint:disable-next-line: no-inferred-empty-object-type
+            const chipDeleted: any = chips[chips.length - 1];
             onChipDeleted(chipDeleted);
             resetChipNavigation();
         } else {

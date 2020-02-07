@@ -2,42 +2,47 @@ import React from 'react';
 
 import { Autocomplete, List, ListItem, Size } from '@lumx/react';
 
-const App = ({ theme }) => {
-    const CITIES = [
-        {
-            id: 'losangeles',
-            text: 'Los Angeles',
-        },
-        {
-            id: 'sanfrancisco',
-            text: 'San Francisco',
-        },
-        {
-            id: 'paris',
-            text: 'Paris',
-        },
-        {
-            id: 'montpellier',
-            text: 'Montpellier',
-        },
-        {
-            id: 'bordeaux',
-            text: 'Bordeaux',
-        },
-        {
-            id: 'toulouse',
-            text: 'Toulouse',
-        },
-        {
-            id: 'lyon',
-            text: 'Lyon',
-        },
-        {
-            id: 'montevideo',
-            text: 'Montevideo',
-        },
-    ];
+interface ICity {
+    id: string;
+    text: string;
+}
 
+const CITIES: ICity[] = [
+    {
+        id: 'losangeles',
+        text: 'Los Angeles',
+    },
+    {
+        id: 'sanfrancisco',
+        text: 'San Francisco',
+    },
+    {
+        id: 'paris',
+        text: 'Paris',
+    },
+    {
+        id: 'montpellier',
+        text: 'Montpellier',
+    },
+    {
+        id: 'bordeaux',
+        text: 'Bordeaux',
+    },
+    {
+        id: 'toulouse',
+        text: 'Toulouse',
+    },
+    {
+        id: 'lyon',
+        text: 'Lyon',
+    },
+    {
+        id: 'montevideo',
+        text: 'Montevideo',
+    },
+];
+
+const App = ({ theme }: any) => {
     /**
      * Internal state and ref setup.
      * - `showSuggestions`: allows to control when the suggestions are displayed or not.
@@ -52,20 +57,20 @@ const App = ({ theme }) => {
         const noSpacesCity = city.text.replace(' ', '').toLowerCase();
         return noSpacesCity.includes(filterValue.replace(' ', '').toLowerCase());
     });
+
     /**
      * Callback executed when the autocomplete closes.
      * In that scenario, we need to update the internal state to `false`.
      */
-    const closeAutocomplete = () => setShowSuggestions(false);
+    const closeAutocomplete = (): void => setShowSuggestions(false);
 
     /**
      * Callback triggered when a city is selected from the list. In this case, we want
      * to add the new city to set the `filterValue` to the selected city text and hide
      * the suggestions dropdown.
-     * @param {Object} city      City selected from the list.
-     * @param {string} city.text City display text.
+     * @param city City selected from the list.
      */
-    const setSelectedCity = (city) => {
+    const setSelectedCity = (city: ICity) => {
         setFilterValue(city.text);
         setShowSuggestions(false);
     };
@@ -73,9 +78,9 @@ const App = ({ theme }) => {
     /**
      * Function triggered by the `onChange` event on the Text field. Here, we update the internal state
      * and set the suggestions as visible depending on whether the query is valid.
-     * @param {string} value New value entered on the text field.
+     * @param value New value entered on the text field.
      */
-    const onChange = (value) => {
+    const onChange = (value: string) => {
         setFilterValue(value);
         setShowSuggestions(value.length > 0);
     };
@@ -86,7 +91,7 @@ const App = ({ theme }) => {
      * Callback triggered when the Text field is focused on. In this scenario,
      * we want to show the suggestion list if there is some text entered.
      */
-    const onFocus = (evt) => {
+    const onFocus = () => {
         setShowSuggestions(filterValue.length > 0);
     };
 
@@ -104,16 +109,19 @@ const App = ({ theme }) => {
         >
             {hasSuggestions && (
                 <List isClickable>
-                    {filteredCities.map((city, index) => (
-                        <ListItem
-                            size={Size.tiny}
-                            key={city.id}
-                            isHighlighted={index === activeItemIndex}
-                            onItemSelected={() => setSelectedCity(city)}
-                        >
-                            <div>{city.text}</div>
-                        </ListItem>
-                    ))}
+                    {filteredCities.map((city, index) => {
+                        const onItemSelected = () => setSelectedCity(city);
+                        return (
+                            <ListItem
+                                size={Size.tiny}
+                                key={city.id}
+                                isHighlighted={index === activeItemIndex}
+                                onItemSelected={onItemSelected}
+                            >
+                                <div>{city.text}</div>
+                            </ListItem>
+                        );
+                    })}
                 </List>
             )}
         </Autocomplete>

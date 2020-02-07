@@ -101,7 +101,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps): React
         ...forwardedProps
     } = props;
     const radioButtonId: string = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
-    const handleChange = (): void => {
+    const handleChange = () => {
         if (onChange && value) {
             onChange(value);
         }

@@ -2,9 +2,9 @@ import { Callback } from '@lumx/react/utils';
 import castArray from 'lodash/castArray';
 import isEmpty from 'lodash/isEmpty';
 import React, { ReactElement, ReactNode, useState } from 'react';
+import { RouteComponentProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 
-// @ts-ignore
 import LumXLogo from '@lumx/demo/assets/images/logo.svg';
 import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
 
@@ -105,7 +105,7 @@ const ITEMS: Item[] = [
     },
 ];
 
-const EMPHASIS_BY_LEVEL = {
+const EMPHASIS_BY_LEVEL: Record<string, Emphasis> = {
     '0': Emphasis.high,
     '1': Emphasis.medium,
     '2': Emphasis.low,
@@ -124,7 +124,7 @@ const generateNav = (goToHandler: (path: string) => Callback, location: string, 
         const [isOpen, setOpen] = useState(() => location.startsWith(slug));
 
         const props: Partial<SideNavigationItemProps> = {
-            emphasis: EMPHASIS_BY_LEVEL[parent.length],
+            emphasis: EMPHASIS_BY_LEVEL[parent.length.toString()],
             isOpen,
             isSelected: location === slug,
         };
@@ -132,7 +132,7 @@ const generateNav = (goToHandler: (path: string) => Callback, location: string, 
         if (isEmpty(children)) {
             props.onClick = goToHandler(slug);
         } else {
-            props.onClick = (): void => setOpen(!isOpen);
+            props.onClick = () => setOpen(!isOpen);
         }
 
         return (
@@ -145,18 +145,13 @@ const generateNav = (goToHandler: (path: string) => Callback, location: string, 
     return <SideNavigation>{generateNavItem([], items) as ReactElement}</SideNavigation>;
 };
 
-interface IWithRouterProps {
-    location: { pathname: string };
-    history: { push(path: string): void };
-}
-
 /**
  * The main navigation component.
  *
  * @param  props nav props
  * @return The main navigation component.
  */
-const MainNav: React.FC<IWithRouterProps> = (props: IWithRouterProps): ReactElement => {
+const MainNav: React.FC<RouteComponentProps> = (props) => {
     const { location, history } = props;
     const goToHandler = (path: string) => () => history.push(path);
 

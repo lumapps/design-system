@@ -4,16 +4,9 @@ import React from 'react';
 
 export default { title: 'Message' };
 
-const options = {
-    Error: MessageKind.error,
-    Info: MessageKind.info,
-    Success: MessageKind.success,
-    Warning: MessageKind.warning,
-};
-
 export const message = () => (
     <Message
-        kind={select('Kind of message', options, MessageKind.error)}
+        kind={select('Kind of message', MessageKind, MessageKind.error)}
         hasBackground={boolean('Has background', false)}
     >
         <span>

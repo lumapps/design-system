@@ -92,23 +92,22 @@ const DatePickerField = ({
     const onEscapeHandler = isOpen && onEscapePressed(closeSimpleMenu);
 
     useFocus(anchorRef.current, isOpen);
-    const handleKeyboardNav = (evt: React.KeyboardEvent<HTMLElement>): void => {
+    const handleKeyboardNav = (evt: React.KeyboardEvent) => {
         if ((evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE) && toggleSimpleMenu) {
             toggleSimpleMenu();
         }
     };
 
     useEffect(() => {
-        if (!onEscapeHandler || !wrapperRef.current) {
-            return undefined;
+        if (!isOpen || !onEscapeHandler || !wrapperRef.current) {
+            return;
         }
-        if (isOpen && wrapperRef.current) {
-            window.addEventListener('keydown', onEscapeHandler);
-        }
-        return (): void => {
+
+        window.addEventListener('keydown', onEscapeHandler);
+        return () => {
             window.removeEventListener('keydown', onEscapeHandler);
         };
-    }, [isOpen, closeSimpleMenu]);
+    }, [isOpen, closeSimpleMenu, onEscapeHandler]);
 
     useClickAway(
         wrapperRef,

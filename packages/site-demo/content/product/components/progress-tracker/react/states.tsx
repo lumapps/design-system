@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { ProgressTracker, ProgressTrackerStep } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [activeIndex, setActiveIndex] = useState(2);
 
     const stepProps = [
@@ -22,7 +22,7 @@ const App = ({ theme }) => {
                         isActive={activeIndex === index}
                         onClick={index < 3 ? () => setActiveIndex(index) : null}
                         label={`Step ${index + 1}`}
-                        helper={index == 2 ? 'Error message' : `Helper text ${index + 1}`}
+                        helper={index === 2 ? 'Error message' : `Helper text ${index + 1}`}
                         {...step}
                     />
                 ))}

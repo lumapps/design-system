@@ -55,10 +55,10 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${Tab.displayName}>`, (): void => {
+describe(`<${Tab.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly', () => {
             const { wrapper } = setup();
 
             expect(wrapper).toMatchSnapshot();
@@ -70,8 +70,8 @@ describe(`<${Tab.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use the given props', (): void => {
+    describe('Props', () => {
+        it('should use the given props', () => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
                 children: 'Tab Content',
                 icon: mdiCheck,
@@ -84,7 +84,7 @@ describe(`<${Tab.displayName}>`, (): void => {
             expect(wrapper).toMatchSnapshot();
         });
 
-        it('should use the given props to add classes', (): void => {
+        it('should use the given props to add classes', () => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
                 isActive: true,
                 isDisabled: true,
@@ -94,7 +94,7 @@ describe(`<${Tab.displayName}>`, (): void => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach((prop: string): void => {
+            Object.keys(modifiedProps).forEach((prop: string) => {
                 expect(wrapper).toHaveClassName(
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
                 );
@@ -105,28 +105,28 @@ describe(`<${Tab.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         const onTabClick: jest.Mock = jest.fn();
 
-        beforeEach((): void => {
+        beforeEach(() => {
             onTabClick.mockClear();
         });
 
-        it('should trigger `onTabClick` when clicked', (): void => {
+        it('should trigger `onTabClick` when clicked', () => {
             const { wrapper } = setup({ index: 7, onTabClick }, false);
 
             wrapper.simulate('click');
             expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 7 });
         });
 
-        it('should trigger `onTabClick` when pressing `enter` key', (): void => {
+        it('should trigger `onTabClick` when pressing `enter` key', () => {
             const { wrapper } = setup({ index: 9, onTabClick }, false);
 
             wrapper.simulate('keypress', { keyCode: 13 });
             expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 9 });
         });
 
-        it('should not trigger `onTabClick` when pressing any other key', (): void => {
+        it('should not trigger `onTabClick` when pressing any other key', () => {
             const { wrapper } = setup({ index: 10, onTabClick }, false);
 
             wrapper.simulate('keypress', { keyCode: 12 });
@@ -136,14 +136,14 @@ describe(`<${Tab.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

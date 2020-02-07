@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 
 import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
 import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const CHOICES_WITH_ICONS = [
         {
             icon: mdiAccessPoint,
@@ -21,21 +21,23 @@ const App = ({ theme }) => {
     ];
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
-    const getChoiceByValue = (value) => CHOICES_WITH_ICONS.find((ch) => ch.label === value);
+    const getChoiceByValue = (value: string) => CHOICES_WITH_ICONS.find((ch) => ch.label === value);
 
+    // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
     const [values, setValues] = React.useState<string[]>([]);
 
     const onInfiniteScroll = () => {
+        // tslint:disable-next-line:no-console
         console.log('You have reached the bottom of the select dropdown.');
     };
 
-    const clearSelectedvalues = (event, value) => {
+    const clearSelected = (event: SyntheticEvent, value: string) => {
         event?.stopPropagation();
         setValues(value ? values.filter((val) => val !== value) : []);
     };
 
-    const onItemSelectedHandler = (item) => {
+    const selectItem = (item: string) => () => {
         if (values.includes(item)) {
             setValues(values.filter((val) => item !== val));
             return;
@@ -51,6 +53,32 @@ const App = ({ theme }) => {
             .includes(filterValue.replace(' ', '').toLowerCase()),
     );
 
+    const selectedChipRender = (choice: string, index: number, onClear: any, isDisabled: boolean) => {
+        const matchedChoice = getChoiceByValue(choice);
+        const onClick = (event: SyntheticEvent) => onClear && onClear(event, choice);
+        return (
+            <Chip
+                key={index}
+                after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
+                before={<Icon size={Size.xs} icon={(matchedChoice && matchedChoice.icon) || ''} />}
+                isDisabled={isDisabled}
+                size={Size.s}
+                onAfterClick={onClick}
+                onClick={onClick}
+            >
+                {choice}
+            </Chip>
+        );
+    };
+    const selectedValueRender = (choice: string) => {
+        const matchedChoice = getChoiceByValue(choice);
+        return (
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <Icon size={Size.xs} icon={(matchedChoice && matchedChoice.icon) || ''} style={{ marginRight: 5 }} />
+                {matchedChoice && matchedChoice.label}
+            </div>
+        );
+    };
     return (
         <Select
             style={{ width: '100%' }}
@@ -60,40 +88,12 @@ const App = ({ theme }) => {
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
-            onClear={clearSelectedvalues}
+            onClear={clearSelected}
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
             onInfiniteScroll={onInfiniteScroll}
-            selectedChipRender={(choice, index, onClear, isDisabled) => {
-                const matchedChoice = getChoiceByValue(choice);
-
-                return (
-                    <Chip
-                        key={index}
-                        after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
-                        before={<Icon size={Size.xs} icon={(matchedChoice && matchedChoice.icon) || ''} />}
-                        isDisabled={isDisabled}
-                        size={Size.s}
-                        onAfterClick={(event) => onClear && onClear(event, choice)}
-                        onClick={(event) => onClear && onClear(event, choice)}
-                    >
-                        {choice}
-                    </Chip>
-                );
-            }}
-            selectedValueRender={(choice) => {
-                const matchedChoice = getChoiceByValue(choice);
-                return (
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Icon
-                            size={Size.xs}
-                            icon={(matchedChoice && matchedChoice.icon) || ''}
-                            style={{ marginRight: 5 }}
-                        />
-                        {matchedChoice && matchedChoice.label}
-                    </div>
-                );
-            }}
+            selectedChipRender={selectedChipRender}
+            selectedValueRender={selectedValueRender}
         >
             <List isClickable={isOpen}>
                 <ListSubheader>
@@ -111,7 +111,7 @@ const App = ({ theme }) => {
                           <ListItem
                               isSelected={values.includes(choice.label)}
                               key={index}
-                              onItemSelected={() => onItemSelectedHandler(choice.label)}
+                              onItemSelected={selectItem(choice.label)}
                               before={<Icon size={Size.xs} icon={choice.icon} />}
                               size={Size.tiny}
                           >

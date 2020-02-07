@@ -18,7 +18,7 @@ const iconSizes: Array<IconSizes | undefined> = [
 const iconColors = [undefined, ...Object.values(ColorPalette)];
 const iconShapes = [false, true];
 
-export const allIcon = ({ theme }) => {
+export const allIcon = ({ theme }: any) => {
     return (
         <>
             {iconShapes.map((hasShape) => {

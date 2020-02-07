@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Slider } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [value, setValue] = useState(4.23765);
     const [value2, setValue2] = useState(42.99);
     return (

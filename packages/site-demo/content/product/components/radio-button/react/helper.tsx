@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { RadioButton, RadioGroup } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [value, setValue] = useState('lorem');
 
     return (

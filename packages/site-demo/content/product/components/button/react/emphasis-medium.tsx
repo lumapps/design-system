@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Emphasis, IconButton } from '@lumx/react';
 
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <div className="demo-grid">
         <Button emphasis={Emphasis.medium} theme={theme}>
             Default

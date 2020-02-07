@@ -89,7 +89,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     ...props
 }: CheckboxProps): ReactElement => {
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
-    const handleChange = (): void => {
+    const handleChange = () => {
         onChange(!value);
     };
 

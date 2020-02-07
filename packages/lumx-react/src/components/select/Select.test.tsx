@@ -1,6 +1,6 @@
 import React, { ReactElement, RefObject } from 'react';
 
-import { mount, shallow } from 'enzyme';
+import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { Kind, Theme } from '@lumx/react/components';
@@ -55,26 +55,31 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    const wrapper: Wrapper = renderer(<Select {...props} />);
+    const wrapper: ShallowWrapper | ReactWrapper = renderer(<Select {...props} />);
 
     return {
         container: wrapper.find('div').first(),
         dropdown: wrapper.find(Dropdown),
-        error: wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error).first(),
-        helper: wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === undefined),
+        error: wrapper
+            .findWhere(
+                (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error,
+            )
+            .first(),
+        helper: wrapper.findWhere(
+            (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === undefined,
+        ),
         input: wrapper.find('#uuid'),
         props,
         wrapper,
     };
 };
 
-describe(`<${Select.displayName}>`, (): void => {
+describe(`<${Select.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
+    describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
 
-        it('should render correctly', (): void => {
+        it('should render correctly', () => {
             const { container, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -86,10 +91,10 @@ describe(`<${Select.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
+    describe('Props', () => {
         // Here are some examples of basic props check.
 
-        it('should have default classNames', (): void => {
+        it('should have default classNames', () => {
             const { wrapper, container }: ISetup = setup();
             wrapper.update();
 
@@ -100,7 +105,7 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
 
-        it('should use the given `theme`', (): void => {
+        it('should use the given `theme`', () => {
             const testedProp = 'theme';
             const modifiedProps: ISetupProps = {
                 [testedProp]: Theme.dark,
@@ -116,7 +121,7 @@ describe(`<${Select.displayName}>`, (): void => {
             );
         });
 
-        it('should use the given `isValid`', (): void => {
+        it('should use the given `isValid`', () => {
             const testedProp = 'isValid';
             const modifiedProps: ISetupProps = {
                 [testedProp]: true,
@@ -129,7 +134,7 @@ describe(`<${Select.displayName}>`, (): void => {
             );
         });
 
-        it('should use the given `hasError`', (): void => {
+        it('should use the given `hasError`', () => {
             const testedProp = 'hasError';
             const modifiedProps: ISetupProps = {
                 [testedProp]: true,
@@ -142,7 +147,7 @@ describe(`<${Select.displayName}>`, (): void => {
             );
         });
 
-        it('should display the given `error`', (): void => {
+        it('should display the given `error`', () => {
             const { container, error } = setup({
                 error: 'You are not bold!',
                 hasError: true,
@@ -152,7 +157,7 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasError', value: true }));
         });
 
-        it('should NOT display the given `error`', (): void => {
+        it('should NOT display the given `error`', () => {
             const { container, error } = setup({
                 error: 'You are not bold!',
                 hasError: false,
@@ -162,7 +167,7 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasError', value: true }));
         });
 
-        it('should use the given `value`', (): void => {
+        it('should use the given `value`', () => {
             const testedProp = 'value';
             const modifiedProps: ISetupProps = {
                 [testedProp]: [''],
@@ -178,7 +183,7 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
 
-        it('should use the given `isMultiple`', (): void => {
+        it('should use the given `isMultiple`', () => {
             const testedProp = 'isMultiple';
             const modifiedProps: ISetupProps = {
                 [testedProp]: true,
@@ -193,21 +198,21 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
 
-        it('should pass the given `onDropdownClose` to the dropdown', (): void => {
+        it('should pass the given `onDropdownClose` to the dropdown', () => {
             const onDropdownClose = jest.fn();
             const { dropdown } = setup({ onDropdownClose });
 
             expect(dropdown).toHaveProp('onClose', onDropdownClose);
         });
 
-        it('should pass the given `isOpen` to the dropdown', (): void => {
+        it('should pass the given `isOpen` to the dropdown', () => {
             const isOpen = true;
             const { dropdown } = setup({ isOpen });
 
             expect(dropdown).toHaveProp('showDropdown', isOpen);
         });
 
-        it('should display the given `helper`', (): void => {
+        it('should display the given `helper`', () => {
             const { helper } = setup({
                 helper: 'Be bold',
             });
@@ -215,7 +220,7 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(helper).toExist();
         });
 
-        it('should display the given `helper` and `error`', (): void => {
+        it('should display the given `helper` and `error`', () => {
             const { error, helper } = setup({
                 error: 'You are not bold!',
                 hasError: true,
@@ -230,17 +235,17 @@ describe(`<${Select.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Here is an example how to check a `onClick` event.
 
         const onClick: jest.Mock = jest.fn();
 
-        beforeEach((): void => {
+        beforeEach(() => {
             onClick.mockClear();
         });
 
-        describe('should trigger `onInputClick` when the select button is clicked', (): void => {
-            it('with input variant', (): void => {
+        describe('should trigger `onInputClick` when the select button is clicked', () => {
+            it('with input variant', () => {
                 const { input } = setup({ onInputClick: onClick, variant: SelectVariant.input });
 
                 input.simulate('click');
@@ -248,7 +253,7 @@ describe(`<${Select.displayName}>`, (): void => {
                 expect(onClick).toHaveBeenCalled();
             });
 
-            it('with chip variant', (): void => {
+            it('with chip variant', () => {
                 const { input } = setup({ onInputClick: onClick, variant: SelectVariant.chip });
 
                 input.simulate('click');
@@ -257,7 +262,7 @@ describe(`<${Select.displayName}>`, (): void => {
             });
         });
 
-        it('should call onClear when clear icon is clicked in select input', (): void => {
+        it('should call onClear when clear icon is clicked in select input', () => {
             const value = 'Value';
             const onClear: jest.Mock = jest.fn();
             const { input } = setup({ value: [value], onClear });
@@ -269,7 +274,7 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(onClear).toHaveBeenCalled();
         });
 
-        it('should call onClear when a chip is clicked with the correct value', (): void => {
+        it('should call onClear when a chip is clicked with the correct value', () => {
             const value1 = 'Value 1';
             const value2 = 'Value 2';
 
@@ -288,7 +293,7 @@ describe(`<${Select.displayName}>`, (): void => {
             expect(onClear).toHaveBeenCalledWith(fakeEvent, value1);
         });
 
-        it('should call onClear when Chip onAfterClick is triggered with chip variant', (): void => {
+        it('should call onClear when Chip onAfterClick is triggered with chip variant', () => {
             const value1 = 'Value 1';
             const value2 = 'Value 2';
             const onClear: jest.Mock = jest.fn();
@@ -307,9 +312,9 @@ describe(`<${Select.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        describe('Input variant', (): void => {
-            it('should render a div as the select input', (): void => {
+    describe('Conditions', () => {
+        describe('Input variant', () => {
+            it('should render a div as the select input', () => {
                 const { dropdown, input } = setup({}, false);
                 const dropdownRef: RefObject<HTMLDivElement> = dropdown.prop('anchorRef');
                 expect(input.type()).toBe('div');
@@ -317,14 +322,14 @@ describe(`<${Select.displayName}>`, (): void => {
                 expect(input.html()).toEqual(dropdownRef && dropdownRef.current && dropdownRef.current.outerHTML);
             });
 
-            describe('Has value', (): void => {
+            describe('Has value', () => {
                 const value = 'Value';
                 const hasValueProps: Partial<ISetupProps> = {
                     value: [value],
                     variant: SelectVariant.input,
                 };
 
-                it('should render the value selected if not multiple ', (): void => {
+                it('should render the value selected if not multiple ', () => {
                     const { input } = setup({ ...hasValueProps });
 
                     expect(
@@ -336,7 +341,7 @@ describe(`<${Select.displayName}>`, (): void => {
                 });
             });
 
-            describe('Has multiple values', (): void => {
+            describe('Has multiple values', () => {
                 const value1 = 'Value1';
                 const value2 = 'Value2';
                 const value3 = 'Value3';
@@ -346,7 +351,7 @@ describe(`<${Select.displayName}>`, (): void => {
                     variant: SelectVariant.input,
                 };
 
-                it('should render the values selected in Chips if multiple ', (): void => {
+                it('should render the values selected in Chips if multiple ', () => {
                     const { input, props } = setup({ ...hasMultipleValues });
 
                     expect(input.find(Chip).length).toBe(props.value!.length);
@@ -374,7 +379,7 @@ describe(`<${Select.displayName}>`, (): void => {
                 });
             });
 
-            describe('No value', (): void => {
+            describe('No value', () => {
                 const placeholder = 'My placeholder';
                 const hasNoValueProps: Partial<ISetupProps> = {
                     placeholder,
@@ -382,7 +387,7 @@ describe(`<${Select.displayName}>`, (): void => {
                     variant: SelectVariant.input,
                 };
 
-                it('should render the placeholder when empty', (): void => {
+                it('should render the placeholder when empty', () => {
                     const { input } = setup({ ...hasNoValueProps });
 
                     expect(
@@ -395,22 +400,22 @@ describe(`<${Select.displayName}>`, (): void => {
             });
         });
 
-        describe('Chip variant', (): void => {
-            it('should render a Chip as the select input', (): void => {
+        describe('Chip variant', () => {
+            it('should render a Chip as the select input', () => {
                 const { dropdown, input } = setup({ variant: SelectVariant.chip });
 
                 expect(input.type()).toEqual(Chip);
                 expect(input.prop('chipRef')).toBe(dropdown.prop('anchorRef'));
             });
 
-            describe('Has value', (): void => {
+            describe('Has value', () => {
                 const value = 'Value';
                 const hasValueProps: Partial<ISetupProps> = {
                     value: [value],
                     variant: SelectVariant.chip,
                 };
 
-                it('should render the value', (): void => {
+                it('should render the value', () => {
                     const label = 'The label';
                     const { input } = setup({
                         ...hasValueProps,
@@ -420,7 +425,7 @@ describe(`<${Select.displayName}>`, (): void => {
                     expect(input.childAt(0).text()).toEqual(value);
                 });
 
-                it('should render the value even if isMultiple is true', (): void => {
+                it('should render the value even if isMultiple is true', () => {
                     const label = 'The label';
                     const { input } = setup({
                         ...hasValueProps,
@@ -431,7 +436,7 @@ describe(`<${Select.displayName}>`, (): void => {
                     expect(input.childAt(0).text()).toEqual(value);
                 });
 
-                it('should render a close icon if there is a value', (): void => {
+                it('should render a close icon if there is a value', () => {
                     const { input } = setup({ ...hasValueProps }, false);
 
                     expect(
@@ -443,7 +448,7 @@ describe(`<${Select.displayName}>`, (): void => {
                 });
             });
 
-            describe('Has multiple values', (): void => {
+            describe('Has multiple values', () => {
                 const value1 = 'Value1';
                 const value2 = 'Value2';
                 const value3 = 'Value3';
@@ -453,7 +458,7 @@ describe(`<${Select.displayName}>`, (): void => {
                     variant: SelectVariant.chip,
                 };
 
-                it('should render the value and additional text if multiple values', (): void => {
+                it('should render the value and additional text if multiple values', () => {
                     const label = 'The label';
                     const { input, props } = setup({
                         ...hasMultipleValues,
@@ -464,20 +469,20 @@ describe(`<${Select.displayName}>`, (): void => {
                 });
             });
 
-            describe('No value', (): void => {
+            describe('No value', () => {
                 const hasNoValue: Partial<ISetupProps> = {
                     value: [],
                     variant: SelectVariant.chip,
                 };
 
-                it('should render the label', (): void => {
+                it('should render the label', () => {
                     const label = 'The label';
                     const { input } = setup({ ...hasNoValue, label });
 
                     expect(input.childAt(0).text()).toEqual(label);
                 });
 
-                it('should render a MenuDown icon', (): void => {
+                it('should render a MenuDown icon', () => {
                     const { input } = setup({ ...hasNoValue }, false);
 
                     expect(
@@ -494,7 +499,7 @@ describe(`<${Select.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

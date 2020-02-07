@@ -22,7 +22,7 @@ const renderContent = (path: string, content: Content): ReactElement => {
 const useLoadContent = (path: string): Content => {
     const [content, setContent] = useState<Content>(undefined);
 
-    useEffect((): void => {
+    useEffect(() => {
         (async (): Promise<void> => {
             setContent(undefined);
             try {

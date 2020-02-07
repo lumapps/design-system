@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import { Tab, Tabs, Theme } from '@lumx/react';
 import classNames from 'classnames';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [activeTab, setActiveTab] = useState(0);
-
-    const handleTabClick = ({ index }) => {
+    const handleTabClick = ({ index }: any) => {
         setActiveTab(index);
     };
 

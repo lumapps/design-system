@@ -1,13 +1,10 @@
 import React, {
     AnchorHTMLAttributes,
-    KeyboardEvent,
     KeyboardEventHandler,
-    MouseEvent,
     MouseEventHandler,
     ReactElement,
+    SyntheticEvent,
 } from 'react';
-
-import noop from 'lodash/noop';
 
 import classNames from 'classnames';
 
@@ -21,18 +18,18 @@ import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
  * Defines the props of the component.
  */
 interface ITabProps extends IGenericProps {
-    /* Tab index */
+    /** Tab index */
     index?: number;
-    /* Tab icon*/
+    /** Tab icon */
     icon?: IconProps['icon'];
-    /* Is tab active */
+    /** Is tab active */
     isActive?: boolean;
-    /* Is tab disabled */
+    /** Is tab disabled */
     isDisabled?: boolean;
-    /* Tab label */
+    /** Tab label */
     label?: string;
-    /* Function to trigger on tab click */
-    onTabClick?: CallableFunction;
+    /** Function to trigger on tab click */
+    onTabClick?(e: { event: SyntheticEvent; index?: number }): void;
 }
 type TabProps = ITabProps;
 
@@ -67,8 +64,8 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isActive: false,
     isDisabled: false,
     label: undefined,
-    onTabClick: noop,
 };
+
 /////////////////////////////
 
 /**
@@ -83,23 +80,23 @@ const Tab: React.FC<TabProps> = ({
     isActive = DEFAULT_PROPS.isActive,
     isDisabled = DEFAULT_PROPS.isDisabled,
     label = DEFAULT_PROPS.label,
-    onTabClick = DEFAULT_PROPS.onTabClick,
+    onTabClick,
     ...props
 }: TabProps): ReactElement => {
     const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
 
-    const handleTabClick: MouseEventHandler = (event: MouseEvent<HTMLElement>): void => {
-        onTabClick!({ event, index });
+    const handleTabClick: MouseEventHandler = (event) => {
+        onTabClick?.({ event, index });
     };
 
-    const handleKeyPress: KeyboardEventHandler = (event: KeyboardEvent<HTMLElement>): void => {
-        const keyCode: KeyboardEvent['which'] = event.which || event.keyCode;
+    const handleKeyPress: KeyboardEventHandler = (event) => {
+        const keyCode = event.which ?? event.keyCode;
 
         if (keyCode !== ENTER_KEY_CODE) {
             return;
         }
 
-        onTabClick!({ event, index });
+        onTabClick?.({ event, index });
     };
 
     return (

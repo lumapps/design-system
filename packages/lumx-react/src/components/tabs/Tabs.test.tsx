@@ -60,10 +60,10 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${Tabs.displayName}>`, (): void => {
+describe(`<${Tabs.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly', () => {
             const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -81,10 +81,9 @@ describe(`<${Tabs.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use the given props', (): void => {
+    describe('Props', () => {
+        it('should use the given props', () => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
-                // tslint:disable-next-line: no-any
                 layout: TabsLayout.clustered,
                 position: oneOf(TabsPosition.center, TabsPosition.right),
             });
@@ -93,7 +92,7 @@ describe(`<${Tabs.displayName}>`, (): void => {
 
             const { wrapper } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach((prop: string): void => {
+            Object.keys(modifiedProps).forEach((prop: string) => {
                 expect(wrapper).toHaveClassName(
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
                 );
@@ -104,14 +103,14 @@ describe(`<${Tabs.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         const onTabClick: jest.Mock = jest.fn();
 
-        beforeEach((): void => {
+        beforeEach(() => {
             onTabClick.mockClear();
         });
 
-        it('should trigger `onTabClick` when a child tab is clicked', (): void => {
+        it('should trigger `onTabClick` when a child tab is clicked', () => {
             const { wrapper } = setup({ onTabClick }, false);
             const firstTab = wrapper.find('Tab[index=1]');
 
@@ -123,11 +122,10 @@ describe(`<${Tabs.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        it('should fail when no `Tab` children is given', (): void => {
-            expect((): void => {
+    describe('Conditions', () => {
+        it('should fail when no `Tab` children is given', () => {
+            expect(() => {
                 // We know that children must be given to <Tabs>, but for the test, ignore it.
-                // @ts-ignore
                 setup({ children: null });
             }).toThrowErrorMatchingSnapshot();
         });
@@ -136,7 +134,7 @@ describe(`<${Tabs.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

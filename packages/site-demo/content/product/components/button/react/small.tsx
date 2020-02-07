@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Emphasis, IconButton, Size } from '@lumx/react';
 
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <>
         <div className="demo-grid lumx-spacing-margin-bottom-big">
             <Button size={Size.s} theme={theme}>

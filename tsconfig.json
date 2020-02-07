@@ -1,26 +1,16 @@
 {
     "compilerOptions": {
-        "allowSyntheticDefaultImports": true,
-        "allowUnreachableCode": false,
-        "allowUnusedLabels": false,
-        "allowJs": true,
-        "alwaysStrict": false,
         "baseUrl": "./packages",
         "esModuleInterop": true,
-        "experimentalDecorators": true,
+        "declaration": true,
         "forceConsistentCasingInFileNames": true,
         "jsx": "react",
-        "lib": ["es6", "dom"],
-        "locale": "en",
+        "lib": ["es2020", "dom"],
         "module": "ESNext",
         "moduleResolution": "node",
         "noEmit": true,
         "noErrorTruncation": true,
         "noFallthroughCasesInSwitch": false,
-        "noImplicitAny": false,
-        "noImplicitReturns": true,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
         "paths": {
             "@lumx/core/*": ["lumx-core/src/*"],
             "@lumx/angularjs": ["lumx-angularjs/src"],
@@ -31,7 +21,7 @@
             "@lumx/icons/*": ["lumx-icons/*"]
         },
         "strict": true,
-        "strictNullChecks": true,
+        "skipLibCheck": true,
         "target": "es5"
     },
     "exclude": ["**/dist/", "node_modules"]

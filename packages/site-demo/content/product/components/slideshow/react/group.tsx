@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ImageBlock, ImageBlockCaptionPosition, Slideshow, SlideshowItem, ThumbnailAspectRatio } from '@lumx/react';
+import { AspectRatio, ImageBlock, ImageBlockCaptionPosition, Slideshow, SlideshowItem } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const slideshowStyle = {
         width: '100%',
     };
@@ -16,7 +16,7 @@ const App = ({ theme }) => {
         <Slideshow activeIndex={0} hasControls={true} theme={theme} autoPlay={false} groupBy={2} style={slideshowStyle}>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     captionPosition={ImageBlockCaptionPosition.over}
                     image="https://picsum.photos/640/480/?image=31"
                     theme={theme}
@@ -25,7 +25,7 @@ const App = ({ theme }) => {
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     captionPosition={ImageBlockCaptionPosition.over}
                     image="https://picsum.photos/640/480/?image=30"
                     theme={theme}
@@ -34,7 +34,7 @@ const App = ({ theme }) => {
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     captionPosition={ImageBlockCaptionPosition.over}
                     image="https://picsum.photos/640/480/?image=32"
                     theme={theme}
@@ -43,7 +43,7 @@ const App = ({ theme }) => {
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     captionPosition={ImageBlockCaptionPosition.over}
                     image="https://picsum.photos/640/480/?image=38"
                     theme={theme}
@@ -52,7 +52,7 @@ const App = ({ theme }) => {
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     captionPosition={ImageBlockCaptionPosition.over}
                     image="https://picsum.photos/640/480/?image=36"
                     theme={theme}
@@ -61,7 +61,7 @@ const App = ({ theme }) => {
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.horizontal}
+                    aspectRatio={AspectRatio.horizontal}
                     captionPosition={ImageBlockCaptionPosition.over}
                     image="https://picsum.photos/640/480/?image=34"
                     theme={theme}

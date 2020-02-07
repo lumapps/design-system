@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Chip, Placement, Popover, Size } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const demoPopperStyle = {
         alignItems: 'center',
         display: 'flex',

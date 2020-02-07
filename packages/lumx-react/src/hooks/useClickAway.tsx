@@ -22,13 +22,13 @@ function useClickAway(
     ref: React.RefObject<HTMLElement>,
     callback: EventCallback,
     additionalRefs?: Array<React.RefObject<HTMLElement>>,
-): void {
+) {
     useEffect(() => {
         if (!callback) {
             return undefined;
         }
 
-        const listener: EventCallback = (evt: HandledEventType): void => {
+        const listener: EventCallback = (evt: HandledEventType) => {
             const refs = additionalRefs ? [ref, ...additionalRefs] : [ref];
             const isClickAway = !refs.some!(
                 (r: React.RefObject<HTMLElement>) => r && r.current !== null && r.current.contains(evt.target as Node),
@@ -45,7 +45,7 @@ function useClickAway(
 
         EVENT_TYPES.forEach((evtType: string) => document.addEventListener(evtType, listener as EventListener));
 
-        return (): void => {
+        return () => {
             EVENT_TYPES.forEach((evtType: string) => document.removeEventListener(evtType, listener as EventListener));
         };
     }, [callback]);

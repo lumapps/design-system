@@ -56,10 +56,10 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${Divider.displayName}>`, (): void => {
+describe(`<${Divider.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly', () => {
             const { hr, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -71,18 +71,18 @@ describe(`<${Divider.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use default props', (): void => {
+    describe('Props', () => {
+        it('should use default props', () => {
             const { hr } = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach((prop: string): void => {
+            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
                 expect(hr).toHaveClassName(
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
                 );
             });
         });
 
-        it('should use the given `theme`', (): void => {
+        it('should use the given `theme`', () => {
             const testedProp = 'theme';
             const modifiedProps: ISetupProps = {
                 [testedProp]: Theme.dark,
@@ -102,20 +102,20 @@ describe(`<${Divider.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

@@ -40,7 +40,7 @@ function useOpenButton(theme: Theme) {
     };
 }
 
-export const simpleDialog = ({ theme }) => {
+export const simpleDialog = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -52,7 +52,7 @@ export const simpleDialog = ({ theme }) => {
     );
 };
 
-export const preventDialogAutoClose = ({ theme }) => {
+export const preventDialogAutoClose = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -73,7 +73,7 @@ export const preventDialogAutoClose = ({ theme }) => {
     );
 };
 
-export const dialogSizes = ({ theme }) => {
+export const dialogSizes = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     const sizes: DialogSizes[] = [Size.tiny, Size.regular, Size.big, Size.huge];
     return (
@@ -92,7 +92,7 @@ export const dialogSizes = ({ theme }) => {
     );
 };
 
-export const loadingDialog = ({ theme }) => {
+export const loadingDialog = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -104,7 +104,7 @@ export const loadingDialog = ({ theme }) => {
     );
 };
 
-export const dialogWithHeaderFooterProps = ({ theme }) => {
+export const dialogWithHeaderFooterProps = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -122,7 +122,7 @@ export const dialogWithHeaderFooterProps = ({ theme }) => {
     );
 };
 
-export const dialogWithHeaderFooterChildren = ({ theme }) => {
+export const dialogWithHeaderFooterChildren = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -136,7 +136,7 @@ export const dialogWithHeaderFooterChildren = ({ theme }) => {
     );
 };
 
-export const dialogWithHeaderFooterPropsAndChildren = ({ theme }) => {
+export const dialogWithHeaderFooterPropsAndChildren = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -156,7 +156,7 @@ export const dialogWithHeaderFooterPropsAndChildren = ({ theme }) => {
     );
 };
 
-export const dialogWithHeaderFooterAndDivider = ({ theme }) => {
+export const dialogWithHeaderFooterAndDivider = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -176,7 +176,7 @@ export const dialogWithHeaderFooterAndDivider = ({ theme }) => {
     );
 };
 
-export const scrollableDialog = ({ theme }) => {
+export const scrollableDialog = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -188,7 +188,7 @@ export const scrollableDialog = ({ theme }) => {
     );
 };
 
-export const scrollableDialogWithHeaderAndFooter = ({ theme }) => {
+export const scrollableDialogWithHeaderAndFooter = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -202,7 +202,7 @@ export const scrollableDialogWithHeaderAndFooter = ({ theme }) => {
     );
 };
 
-export const dialogWithFocusableElements = ({ theme }) => {
+export const dialogWithFocusableElements = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     const [textValue, setTextValue] = useState('value');
     const [checkboxValue, setCheckboxValue] = useState(false);
@@ -213,7 +213,7 @@ export const dialogWithFocusableElements = ({ theme }) => {
     const [isSelectOpen, setSelectOpen] = useState(false);
     const toggleSelect = () => setSelectOpen(!isSelectOpen);
     const closeSelect = () => setSelectOpen(false);
-    const onItemSelectedHandler = (item) => () => {
+    const selectItem = (item: any) => () => {
         if (values.includes(item)) {
             return;
         }
@@ -263,7 +263,7 @@ export const dialogWithFocusableElements = ({ theme }) => {
                                     <ListItem
                                         key={choice}
                                         isSelected={values.includes(choice)}
-                                        onItemSelected={onItemSelectedHandler(choice)}
+                                        onItemSelected={selectItem(choice)}
                                         size={Size.tiny}
                                     >
                                         {choice}

@@ -1,4 +1,4 @@
-const INPUT_HELPER_CONFIGURATION = {
+const INPUT_HELPER_CONFIGURATION: Record<string, { color: string }> = {
     error: {
         color: 'red',
     },

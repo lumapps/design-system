@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import { mount, shallow } from 'enzyme';
+import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import { build } from 'test-data-bot';
 
@@ -56,8 +56,12 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
 
     const textarea = wrapper.find('textarea');
     const input = wrapper.find('input');
-    const error = wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error);
-    const helper = wrapper.findWhere((n) => n.name() === 'InputHelper' && n.prop('kind') === undefined);
+    const error = wrapper.findWhere(
+        (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error,
+    );
+    const helper = wrapper.findWhere(
+        (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === undefined,
+    );
 
     return {
         error,

@@ -14,7 +14,6 @@ type useComputePositionType = (
     staysOpenOnHover?: boolean,
     hasParentWidth?: boolean,
     hasParentHeight?: boolean,
-    // tslint:disable-next-line: no-any
     dependencies?: any[],
     callback?: (position: ElementPosition) => void,
 ) => {
@@ -45,7 +44,6 @@ const useComputePosition: useComputePositionType = (
     staysOpenOnHover: boolean = true,
     hasParentWidth?: boolean,
     hasParentHeight?: boolean,
-    // tslint:disable-next-line: no-any
     dependencies: any[] = [placement, anchorRef, popoverRef],
     callback?: (position: ElementPosition) => void,
 ): {
@@ -78,7 +76,7 @@ const useComputePosition: useComputePositionType = (
 
     const [computedPosition, setComputedPosition] = useState(defaultPosition);
 
-    const computePosition = (): void => {
+    const computePosition = () => {
         const windowHeight = window.innerHeight || document.documentElement.clientHeight;
         const newIsAnchorInViewPort = !!(
             anchorRef &&
@@ -190,14 +188,14 @@ const useComputePosition: useComputePositionType = (
     /**
      * Handle mouse entering the popover.
      */
-    const handleMouseEnter = (): void => {
+    const handleMouseEnter = () => {
         setIsMouseEntered(true);
     };
 
     /**
      * Handle mouse leaving the popover.
      */
-    const handleMouseLeave = (): void => {
+    const handleMouseLeave = () => {
         setIsMouseEntered(false);
     };
 
@@ -207,7 +205,7 @@ const useComputePosition: useComputePositionType = (
             popoverRef.current!.addEventListener('mouseleave', handleMouseLeave);
         }
 
-        return (): void => {
+        return () => {
             if (popoverRef && popoverRef.current) {
                 popoverRef.current!.removeEventListener('mouseenter', handleMouseEnter);
                 popoverRef.current!.removeEventListener('mouseleave', handleMouseLeave);
@@ -221,7 +219,7 @@ const useComputePosition: useComputePositionType = (
 
         computePosition();
 
-        return (): void => {
+        return () => {
             window.removeEventListener('scroll', computePosition, true);
             window.removeEventListener('resize', computePosition);
         };

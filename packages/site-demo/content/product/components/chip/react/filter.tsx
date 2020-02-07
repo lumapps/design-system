@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { mdiCloseCircle, mdiFilterVariant, mdiMenuDown } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [isSelected, setSelected] = useState(false);
-
+    const onClick = () => !isSelected && setSelected(true);
+    const onAfterClick = () => isSelected && setSelected(false);
     return (
         <div className="demo-grid">
             <Chip
@@ -19,8 +20,8 @@ const App = ({ theme }) => {
                     )
                 }
                 isSelected={isSelected}
-                onClick={() => !isSelected && setSelected(true)}
-                onAfterClick={() => isSelected && setSelected(false)}
+                onClick={onClick}
+                onAfterClick={onAfterClick}
             >
                 Filter
             </Chip>

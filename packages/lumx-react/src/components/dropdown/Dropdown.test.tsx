@@ -58,10 +58,10 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${Dropdown.displayName}>`, (): void => {
+describe(`<${Dropdown.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly', () => {
             const { dropdown, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -73,8 +73,8 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use default props', (): void => {
+    describe('Props', () => {
+        it('should use default props', () => {
             const { dropdown }: ISetup = setup();
 
             expect(dropdown).toHaveClassName(CLASSNAME);
@@ -84,21 +84,21 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         const onClose: jest.Mock = jest.fn();
         let eventListeners: {
-            keydown?(evt): void;
+            keydown?(evt: any): void;
         };
 
-        beforeEach((): void => {
+        beforeEach(() => {
             document.body.addEventListener = jest.fn((type, cb) => {
-                eventListeners[type] = cb;
+                (eventListeners as any)[type] = cb;
             });
             eventListeners = {};
             onClose.mockClear();
         });
 
-        it('should trigger `onClose` when pressing `escape` key', (): void => {
+        it('should trigger `onClose` when pressing `escape` key', () => {
             setup(
                 {
                     closeOnEscape: true,
@@ -112,14 +112,14 @@ describe(`<${Dropdown.displayName}>`, (): void => {
             expect(onClose).toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing any other key', (): void => {
+        it('should not trigger `onClose` when pressing any other key', () => {
             setup({ showDropdown: true, onClose, closeOnEscape: true }, false);
 
             eventListeners.keydown!({ keyCode: 26 });
             expect(onClose).not.toHaveBeenCalled();
         });
 
-        it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', (): void => {
+        it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', () => {
             setup({ showDropdown: true, onClose, closeOnEscape: false }, false);
 
             if (eventListeners.keydown) {
@@ -132,14 +132,14 @@ describe(`<${Dropdown.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

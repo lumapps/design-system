@@ -166,28 +166,22 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     isMultiple: false,
     isOpen: false,
     isValid: false,
-    selectedChipRender: (
-        choice: string,
-        index: number,
-        onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: string) => void,
-        isDisabled?: boolean,
-    ): ReactNode | string => (
-        <Chip
-            key={index}
-            after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
-            isDisabled={isDisabled}
-            size={Size.s}
-            // tslint:disable-next-line: jsx-no-lambda
-            onAfterClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
-                onClear && onClear(event, choice)
-            }
-            // tslint:disable-next-line: jsx-no-lambda
-            onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => onClear && onClear(event, choice)}
-        >
-            {choice}
-        </Chip>
-    ),
-    selectedValueRender: (choice: string): ReactNode | string => choice,
+    selectedChipRender(choice, index, onClear, isDisabled?) {
+        const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
+        return (
+            <Chip
+                key={index}
+                after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
+                isDisabled={isDisabled}
+                size={Size.s}
+                onAfterClick={onClick}
+                onClick={onClick}
+            >
+                {choice}
+            </Chip>
+        );
+    },
+    selectedValueRender: (choice) => choice,
     theme: Theme.light,
     variant: SelectVariant.input,
 };
@@ -199,25 +193,25 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param element    Element to focus.
  * @param setIsFocus Setter used to store the focus status of the element.
  */
-function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: boolean) => void): void {
+function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: boolean) => void) {
     useEffect((): VoidFunction | void => {
         if (!element) {
             return undefined;
         }
 
-        const setFocus = (): void => setIsFocus(true);
-        const setBlur = (): void => setIsFocus(false);
+        const setFocus = () => setIsFocus(true);
+        const setBlur = () => setIsFocus(false);
         element.addEventListener('focus', setFocus);
         element.addEventListener('blur', setBlur);
 
-        return (): void => {
+        return () => {
             element.removeEventListener('focus', setFocus);
             element.removeEventListener('blur', setBlur);
         };
     }, [element]);
 }
 
-const stopPropagation = (evt: Event): void => evt.stopPropagation();
+const stopPropagation = (evt: Event) => evt.stopPropagation();
 
 /**
  * Select component.
@@ -258,7 +252,7 @@ const Select: React.FC<SelectProps> = ({
     useHandleElementFocus(anchorRef.current, setIsFocus);
 
     const handleKeyboardNav = useCallback(
-        (evt: React.KeyboardEvent<HTMLElement>): void => {
+        (evt: React.KeyboardEvent<HTMLElement>) => {
             if (
                 (evt.which === ENTER_KEY_CODE || evt.which === SPACE_KEY_CODE || evt.which === DOWN_KEY_CODE) &&
                 onInputClick
@@ -270,7 +264,7 @@ const Select: React.FC<SelectProps> = ({
         [onInputClick],
     );
 
-    const createParentElement: () => ReactNode = useCallback((): ReactNode => {
+    const createParentElement = useCallback((): ReactNode => {
         return (
             <>
                 {variant === SelectVariant.input && (

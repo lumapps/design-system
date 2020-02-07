@@ -6,7 +6,7 @@ import { mdiMenuDown, mdiTranslate } from '@lumx/icons';
 
 import { Button, Emphasis, Toolbar } from '@lumx/react';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <Toolbar
         label={
             <span

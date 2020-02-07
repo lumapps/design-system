@@ -49,12 +49,12 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${SideNavigation.displayName}>`, (): void => {
+describe(`<${SideNavigation.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
+    describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
 
-        it('should render correctly', (): void => {
+        it('should render correctly', () => {
             const { root, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 

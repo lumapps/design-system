@@ -8,26 +8,20 @@ const App = () => {
 
     const anchorComplexRef = React.useRef(null);
     const [isComplexOpen, setComplexIsOpen] = React.useState(false);
+    const toggleSimpleMenu = () => setSimpleIsOpen(!isSimpleOpen);
+    const closeSimpleMenu = () => setSimpleIsOpen(false);
+    const toggleComplexMenu = () => setComplexIsOpen(!isComplexOpen);
+    const closeComplexMenu = () => setComplexIsOpen(false);
 
-    function toggleSimpleMenu() {
-        setSimpleIsOpen(!isSimpleOpen);
-    }
-
-    function closeSimpleMenu() {
-        setSimpleIsOpen(false);
-    }
-
-    function toggleComplexMenu() {
-        setComplexIsOpen(!isComplexOpen);
-    }
-
-    function closeComplexMenu() {
-        setComplexIsOpen(false);
-    }
-
-    const onItemSelectedHandler = (item, onClose) => {
+    const onSimpleMenuSelected = (item: string) => () => {
+        // tslint:disable-next-line:no-console
         console.log('selected item', item);
-        onClose();
+        closeSimpleMenu();
+    };
+    const onComplexMenuSelected = (item: string) => () => {
+        // tslint:disable-next-line:no-console
+        console.log('selected item', item);
+        closeComplexMenu();
     };
 
     return (
@@ -38,43 +32,31 @@ const App = () => {
             </Button>
 
             <Dropdown
+                closeOnClick
+                closeOnEscape
                 showDropdown={isSimpleOpen}
-                closeOnClick={true}
-                closeOnEscape={true}
                 onClose={closeSimpleMenu}
                 placement={Placement.AUTO_START}
                 anchorRef={anchorSimpleRef}
             >
                 <List isClickable>
-                    <ListItem
-                        onItemSelected={() => onItemSelectedHandler('losangeles', closeSimpleMenu)}
-                        size={Size.tiny}
-                    >
+                    <ListItem onItemSelected={onSimpleMenuSelected('losangeles')} size={Size.tiny}>
                         Los Angeles
                     </ListItem>
 
-                    <ListItem
-                        onItemSelected={() => onItemSelectedHandler('monterrey', closeSimpleMenu)}
-                        size={Size.tiny}
-                    >
+                    <ListItem onItemSelected={onSimpleMenuSelected('monterrey')} size={Size.tiny}>
                         Monterrey
                     </ListItem>
 
-                    <ListItem
-                        onItemSelected={() => onItemSelectedHandler('georgetown', closeSimpleMenu)}
-                        size={Size.tiny}
-                    >
+                    <ListItem onItemSelected={onSimpleMenuSelected('georgetown')} size={Size.tiny}>
                         Georgetown
                     </ListItem>
 
-                    <ListItem onItemSelected={() => onItemSelectedHandler('cali', closeSimpleMenu)} size={Size.tiny}>
+                    <ListItem onItemSelected={onSimpleMenuSelected('cali')} size={Size.tiny}>
                         Cali
                     </ListItem>
 
-                    <ListItem
-                        onItemSelected={() => onItemSelectedHandler('trondheim', closeSimpleMenu)}
-                        size={Size.tiny}
-                    >
+                    <ListItem onItemSelected={onSimpleMenuSelected('trondheim')} size={Size.tiny}>
                         Trondheim
                     </ListItem>
                 </List>
@@ -86,9 +68,9 @@ const App = () => {
             </Button>
 
             <Dropdown
-                showDropdown={isComplexOpen}
                 closeOnClick={false}
                 closeOnEscape={false}
+                showDropdown={isComplexOpen}
                 offset={{ vertical: 20 }}
                 placement={Placement.AUTO_START}
                 anchorRef={anchorComplexRef}
@@ -96,42 +78,33 @@ const App = () => {
                 <List isClickable>
                     <ListSubheader>Contribution</ListSubheader>
 
-                    <ListItem onItemSelected={() => onItemSelectedHandler('pages', closeComplexMenu)} size={Size.tiny}>
+                    <ListItem onItemSelected={onComplexMenuSelected('pages')} size={Size.tiny}>
                         Pages
                     </ListItem>
 
-                    <ListItem onItemSelected={() => onItemSelectedHandler('news', closeComplexMenu)} size={Size.tiny}>
+                    <ListItem onItemSelected={onComplexMenuSelected('news')} size={Size.tiny}>
                         News Articles with a longer name
                     </ListItem>
 
-                    <ListItem onItemSelected={() => onItemSelectedHandler('jobs', closeComplexMenu)} size={Size.tiny}>
+                    <ListItem onItemSelected={onComplexMenuSelected('jobs')} size={Size.tiny}>
                         Job Offers
                     </ListItem>
 
                     <ListSubheader>Directories</ListSubheader>
 
-                    <ListItem
-                        onItemSelected={() => onItemSelectedHandler('projects', closeComplexMenu)}
-                        size={Size.tiny}
-                    >
+                    <ListItem onItemSelected={onComplexMenuSelected('projects')} size={Size.tiny}>
                         Projects
                     </ListItem>
 
-                    <ListItem onItemSelected={() => onItemSelectedHandler('useful', closeComplexMenu)} size={Size.tiny}>
+                    <ListItem onItemSelected={onComplexMenuSelected('useful')} size={Size.tiny}>
                         Useful links
                     </ListItem>
 
-                    <ListItem
-                        onItemSelected={() => onItemSelectedHandler('support', closeComplexMenu)}
-                        size={Size.tiny}
-                    >
+                    <ListItem onItemSelected={onComplexMenuSelected('support')} size={Size.tiny}>
                         Support links
                     </ListItem>
 
-                    <ListItem
-                        onItemSelected={() => onItemSelectedHandler('engineering', closeComplexMenu)}
-                        size={Size.tiny}
-                    >
+                    <ListItem onItemSelected={onComplexMenuSelected('engineering')} size={Size.tiny}>
                         Engineering
                     </ListItem>
                 </List>

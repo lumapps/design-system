@@ -121,7 +121,7 @@ const ListItem: React.FC<ListItemProps> = ({
      *
      * @param evt Focus event
      */
-    const preventParentFocus = (evt: React.FocusEvent): void => {
+    const preventParentFocus = (evt: React.FocusEvent) => {
         evt.preventDefault();
         evt.stopPropagation();
     };
