@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `@lumx/core` is now in full TypeScript (exposed on NPM)
+
 ## [0.21.4][] - 2020-02-04
 
 ### Added
