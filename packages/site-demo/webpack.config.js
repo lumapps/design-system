@@ -1,7 +1,13 @@
+/* eslint-disable import/no-nodejs-modules */
+/* eslint-disable import/no-commonjs */
+/* eslint-disable import/unambiguous */
+/* eslint-disable import/no-extraneous-dependencies */
+
 const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlMinifierPlugin = require('html-minifier-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const IS_CI = require('is-ci');
@@ -39,6 +45,8 @@ const plugins = [
         inject: false,
         template: `${SRC_PATH}/index.html.ejs`,
     }),
+
+    new ForkTsCheckerWebpackPlugin(),
 ];
 
 const cssLoaders = [
@@ -156,37 +164,19 @@ module.exports = {
                 },
             },
             {
-                exclude: [/node_modules/u, /\.(test|spec)\.jsx?/u],
-                test: /\.jsx?$/u,
-                use: [
-                    {
-                        loader: 'babel-loader?cacheDirectory=true',
-                        options: {
-                            ...CONFIGS.babel,
-                            plugins: [['angularjs-annotate', { explicitOnly: true }], ...CONFIGS.babel.plugins],
-                            presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
-                        },
-                    },
-                ],
-            },
-            {
-                exclude: [/node_modules/u, /\.(test|spec)\.tsx?/u],
-                test: /\.tsx?$/u,
-                loader: 'awesome-typescript-loader',
-                options: {
-                    reportFiles: ['**/*.(!test|spec).(ts|tsx)'],
-                    useCache: true,
+                exclude: [/node_modules/u, /\.(test|spec)\.[t|j]sx?/u],
+                test: /\.[t|j]sx?$/u,
+                use: {
+                    loader: 'babel-loader',
+                    options: CONFIGS.babel,
                 },
             },
             {
                 test: /\.mdx?$/,
                 use: [
                     {
-                        loader: 'babel-loader?cacheDirectory=true',
-                        options: {
-                            ...CONFIGS.babel,
-                            presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
-                        },
+                        loader: 'babel-loader',
+                        options: CONFIGS.babel,
                     },
                     {
                         loader: 'mdx-loader',

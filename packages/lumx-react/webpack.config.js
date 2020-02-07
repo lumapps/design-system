@@ -8,6 +8,7 @@ const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const TsDeclarationWebpackPlugin = require('ts-declaration-webpack-plugin');
@@ -65,6 +66,8 @@ const plugins = [
     new TsDeclarationWebpackPlugin({
         name: 'lumx.react.d.ts',
     }),
+
+    new ForkTsCheckerWebpackPlugin(),
 ];
 
 if (!IS_CI) {
@@ -78,7 +81,7 @@ if (!IS_CI) {
 
 module.exports = {
     entry: {
-        'lumx.react': `${SRC_PATH}/index`,
+        'lumx.react': `${SRC_PATH}/index.ts`,
     },
 
     externals: [
@@ -108,26 +111,14 @@ module.exports = {
     module: {
         rules: [
             {
-                exclude: [/node_modules/u, /\.(test|spec)\.jsx?/u],
-                test: /\.jsx?$/u,
+                exclude: [/node_modules/u, /\.(test|spec)\.[t|j]sx?/u],
+                test: /\.[j|t]sx?$/u,
                 use: [
                     {
-                        loader: 'babel-loader?cacheDirectory=true',
-                        options: {
-                            ...CONFIGS.babel,
-                            presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
-                        },
+                        loader: 'babel-loader',
+                        options: CONFIGS.babel,
                     },
                 ],
-            },
-            {
-                exclude: [/node_modules/u, /\.(test|spec)\.tsx?/u],
-                test: /\.tsx?$/u,
-                loader: 'awesome-typescript-loader',
-                options: {
-                    reportFiles: ['**/*.(!test|spec).(ts|tsx)'],
-                    useCache: true,
-                },
             },
         ],
     },

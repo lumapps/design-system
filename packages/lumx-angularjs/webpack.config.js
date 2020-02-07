@@ -95,14 +95,10 @@ module.exports = {
         rules: [
             {
                 exclude: /node_modules/u,
-                test: /\.js$/u,
+                test: /\.[j|t]sx?$/u,
                 use: {
-                    loader: 'babel-loader?cacheDirectory=true',
-                    options: {
-                        ...CONFIGS.babel,
-                        plugins: [['angularjs-annotate', { explicitOnly: true }], ...CONFIGS.babel.plugins],
-                        presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
-                    },
+                    loader: 'babel-loader',
+                    options: CONFIGS.babel,
                 },
             },
             {
@@ -113,6 +109,7 @@ module.exports = {
     },
 
     resolve: {
+        extensions: ['.ts', '.js'],
         alias: {
             [PKG_NAME]: SRC_PATH,
             // Use un-compiled code.
