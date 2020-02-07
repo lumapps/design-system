@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "allowJs": true,
         "baseUrl": "./packages",
         "esModuleInterop": true,
         "declaration": true,
