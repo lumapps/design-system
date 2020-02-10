@@ -6,4 +6,5 @@ module.exports = {
     cssNano: require('./css-nano.config'),
     terser: require('./terser.config'),
     path: require('./path'),
+    ignoreNotFoundExport: require('./ignore-not-found-export'),
 };

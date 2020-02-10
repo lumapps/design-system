@@ -11,6 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HtmlMinifierPlugin = require('html-minifier-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
@@ -110,11 +111,7 @@ module.exports = {
 
     resolve: {
         extensions: ['.ts', '.js'],
-        alias: {
-            [PKG_NAME]: SRC_PATH,
-            // Use un-compiled code.
-            '@lumx/core': '@lumx/core/src',
-        },
+        plugins: [new TsconfigPathsPlugin()],
     },
 
     output: {

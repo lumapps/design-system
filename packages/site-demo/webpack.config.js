@@ -14,6 +14,7 @@ const IS_CI = require('is-ci');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
@@ -36,6 +37,7 @@ const minimizer = [];
 const plugins = [
     new WebpackBar(),
     new FriendlyErrorsWebpackPlugin(),
+    CONFIGS.ignoreNotFoundExport,
 
     new MiniCssExtractPlugin({
         filename: `${filename}.css`,
@@ -101,6 +103,8 @@ if (!IS_CI) {
     );
 }
 
+const extensions = ['.md', '.mdx', '.ts', '.tsx', '.js', '.jsx', '.json'];
+
 module.exports = {
     bail: true,
     devtool: 'source-map',
@@ -115,13 +119,10 @@ module.exports = {
 
     resolve: {
         alias: {
-            [PKG_NAME]: SRC_PATH,
             content: CONTENT_PATH,
-            '@lumx/core': '@lumx/core/src',
-            '@lumx/react': '@lumx/react/src',
-            '@lumx/angularjs': '@lumx/angularjs/src',
         },
-        extensions: ['.md', '.mdx', '.ts', '.tsx', '.js', '.jsx', '.json'],
+        extensions,
+        plugins: [new TsconfigPathsPlugin({ extensions })],
     },
 
     resolveLoader: {

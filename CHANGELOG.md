@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes for `@lumx/react` will be documented in this file.
+All notable changes will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `@lumx/core` is now in full TypeScript (exposed on NPM)
 -   `@lumx/icons` now exposes TypeScript types on NPM
+-   `@lumx/react` now exposes TypeScript types on NPM
 
 ## [0.21.4][] - 2020-02-04
 

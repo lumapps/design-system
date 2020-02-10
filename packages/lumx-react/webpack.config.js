@@ -11,7 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const TsDeclarationWebpackPlugin = require('ts-declaration-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
@@ -37,6 +37,7 @@ const minimizer = [
 const plugins = [
     /* Clean output. */
     new CleanWebpackPlugin(),
+    CONFIGS.ignoreNotFoundExport,
 
     new WebpackBar(),
     new FriendlyErrorsWebpackPlugin(),
@@ -62,12 +63,9 @@ const plugins = [
     /* Bundle non-minified versions of js/css files. */
     new UnminifiedWebpackPlugin(),
 
-    /* Bundle TypeScript declaration file. */
-    new TsDeclarationWebpackPlugin({
-        name: 'lumx.react.d.ts',
+    new ForkTsCheckerWebpackPlugin({
+        reportFiles: ['!*.test.ts', '!*.test.tsx', '!*.stories.tsx'],
     }),
-
-    new ForkTsCheckerWebpackPlugin(),
 ];
 
 if (!IS_CI) {
@@ -81,7 +79,7 @@ if (!IS_CI) {
 
 module.exports = {
     entry: {
-        'lumx.react': `${SRC_PATH}/index`,
+        'lumx.react': `${SRC_PATH}/index.ts`,
     },
 
     externals: [
@@ -111,25 +109,19 @@ module.exports = {
     module: {
         rules: [
             {
-                exclude: [/node_modules/u, /\.(test|spec)\.[t|j]sx?/u],
+                exclude: [/node_modules/u, /\.(test|spec|stories)\.[t|j]sx?/u],
                 test: /\.[j|t]sx?$/u,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: CONFIGS.babel,
-                    },
-                ],
+                use: {
+                    loader: 'babel-loader',
+                    options: CONFIGS.babel,
+                },
             },
         ],
     },
 
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
-        alias: {
-            [PKG_NAME]: SRC_PATH,
-            // Use un-compiled code.
-            '@lumx/core': '@lumx/core/src',
-        },
+        plugins: [new TsconfigPathsPlugin()],
     },
 
     output: {
