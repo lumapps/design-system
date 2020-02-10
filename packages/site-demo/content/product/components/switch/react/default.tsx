@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Switch } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [state, setState] = useState(false);
 
     return (

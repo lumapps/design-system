@@ -146,15 +146,14 @@ function validateComponent(
     }
 
     if (isFunction(transformChild) || isFunction(validateChild) || !isEmpty(allowedTypes)) {
-        const childrenFunctionName: string = isFunction(transformChild) ? 'map' : 'forEach';
-
-        if (!isFunction(transformChild)) {
-            transformChild = ({ child }: ChildTransformParameters): ReactNode => child;
+        const isTransforming = isFunction(transformChild);
+        if (!isTransforming) {
+            transformChild = ({ child }) => child;
         }
         validateChild = validateChild || noop;
 
         let index = -1;
-        const transformedChildren: ReactNode = Children[childrenFunctionName](
+        const transformedChildren = Children.map(
             newChildren,
             (child: ReactNode): ReactNode => {
                 index++;
@@ -179,7 +178,7 @@ function validateComponent(
 
                     if (!isOfOneAllowedType) {
                         let allowedTypesString = '';
-                        allowedTypes.forEach((allowedType: string | ComponentType, idx: number): void => {
+                        allowedTypes.forEach((allowedType: string | ComponentType, idx: number) => {
                             if (!isEmpty(allowedTypesString)) {
                                 allowedTypesString += idx < allowedTypes.length - 1 ? ', ' : ' or ';
                             }
@@ -216,7 +215,7 @@ function validateComponent(
             },
         );
 
-        if (childrenFunctionName === 'map') {
+        if (isTransforming) {
             newChildren = transformedChildren;
         }
     }

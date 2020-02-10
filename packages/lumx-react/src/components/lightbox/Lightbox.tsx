@@ -28,7 +28,6 @@ interface ILightboxProps extends IGenericProps {
     /** Status of lightbox. */
     isOpen?: boolean;
     /** Ref of element that triggered modal opening to set focus on. */
-    // tslint:disable-next-line: no-any
     parentElement: RefObject<any>;
     /** Prevent clickaway and escape to dismiss the lightbox */
     preventAutoClose?: boolean;
@@ -109,21 +108,17 @@ const Lightbox: React.FC<LightboxProps> = ({
     theme = DEFAULT_PROPS.theme,
     zIndex,
 }: LightboxProps): ReactElement => {
-    // tslint:disable-next-line: no-any
-    const buttonRef: React.RefObject<any> = useRef(null);
-    // tslint:disable-next-line: no-any
+    const buttonRef: React.RefObject<HTMLButtonElement> = useRef(null);
     const childrenRef: React.RefObject<any> = useRef(null);
     const [isTrapActive, setTrapActive] = useState(false);
     const modalElement: Element | null = document.querySelector(`.${CLASSNAME}`);
 
     useEffect(() => {
-        if (isOpen) {
-            disableBodyScroll(modalElement);
+        if (!isOpen || !modalElement) {
+            return;
         }
-
-        return (): void => {
-            enableBodyScroll(modalElement);
-        };
+        disableBodyScroll(modalElement);
+        return () => enableBodyScroll(modalElement);
     }, [isOpen, modalElement]);
 
     useEffect(() => {
@@ -139,7 +134,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Callback on activation of focus trap.
      */
-    const handleFocusActivation = (): void => {
+    const handleFocusActivation = () => {
         if (childrenRef && childrenRef.current && childrenRef.current.firstChild) {
             // Set focus inside lightbox.
             childrenRef.current.firstChild.focus();
@@ -153,7 +148,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     /**
      * Callback on deactivation of focus trap.
      */
-    const handleFocusDeactivation = (): void => {
+    const handleFocusDeactivation = () => {
         if (parentElement && parentElement.current) {
             // Set focus back on parent element.
             parentElement.current.focus();
@@ -183,7 +178,7 @@ const Lightbox: React.FC<LightboxProps> = ({
      *
      * @param evt Click event.
      */
-    const preventClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>): void => {
+    const preventClick = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         evt.stopPropagation();
     };
 

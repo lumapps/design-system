@@ -28,7 +28,7 @@ const ThemeContext = React.createContext(DEFAULT);
  * @param children Children components.
  * @return The ThemeProvider.
  */
-const ThemeProvider = ({ children }) => {
+const ThemeProvider: React.FC = ({ children }) => {
     const [theme, setTheme] = useState(DEFAULT.theme);
 
     useEffect(() => {

@@ -8,44 +8,43 @@ interface ICity {
     text: string;
 }
 
-const App = ({ theme }) => {
-    const CITIES = [
-        {
-            id: 'losangeles',
-            text: 'Los Angeles',
-        },
-        {
-            id: 'sanfrancisco',
-            text: 'San Francisco',
-        },
-        {
-            id: 'paris',
-            text: 'Paris',
-        },
-        {
-            id: 'montpellier',
-            text: 'Montpellier',
-        },
-        {
-            id: 'bordeaux',
-            text: 'Bordeaux',
-        },
-        {
-            id: 'toulouse',
-            text: 'Toulouse',
-        },
-        {
-            id: 'lyon',
-            text: 'Lyon',
-        },
-        {
-            id: 'montevideo',
-            text: 'Montevideo',
-        },
-    ];
-
+const CITIES: ICity[] = [
+    {
+        id: 'losangeles',
+        text: 'Los Angeles',
+    },
+    {
+        id: 'sanfrancisco',
+        text: 'San Francisco',
+    },
+    {
+        id: 'paris',
+        text: 'Paris',
+    },
+    {
+        id: 'montpellier',
+        text: 'Montpellier',
+    },
+    {
+        id: 'bordeaux',
+        text: 'Bordeaux',
+    },
+    {
+        id: 'toulouse',
+        text: 'Toulouse',
+    },
+    {
+        id: 'lyon',
+        text: 'Lyon',
+    },
+    {
+        id: 'montevideo',
+        text: 'Montevideo',
+    },
+];
+const App = ({ theme }: any) => {
     const INITIAL_STATE_SHOW_SUGGESTIONS = false;
-    const INITIAL_STATE_NAVIGATION_SUGGESTION = undefined;
+    const INITIAL_STATE_NAVIGATION_SUGGESTION = '';
 
     /**
      * Internal state and ref setup.
@@ -96,8 +95,9 @@ const App = ({ theme }) => {
      * Callback triggered when a city is selected from the list. In this case, we want
      * to add the new city to the `selectedValues` list, and reset the `filterValue`,
      * `showSuggestions` and `navigationSuggestionValue` to their original state.
+     * @param city selected city
      */
-    const setSelectedCity = (city) => {
+    const setSelectedCity = (city: ICity) => {
         setSelectedValues([...selectedValues, city]);
         setFilterValue('');
         setShowSuggestions(INITIAL_STATE_SHOW_SUGGESTIONS);
@@ -108,25 +108,27 @@ const App = ({ theme }) => {
      * Function that adds the new value to the list of values and resets the autocomplete.
      * In case the value is empty, we avoid adding it to the list. Else,
      * we reset the text field and change the navigation suggestions to its initial state
+     * @param newCity new city name
      */
-    const onNewCityCreated = (newCity) => {
-        if (newCity && newCity.length > 0) {
-            setSelectedCity({
-                id: newCity.replace(' ', '').toLowerCase(),
-                text: newCity,
-            });
-
-            setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
+    const onNewCityCreated = (newCity: string) => {
+        if (!newCity || newCity.length > 0) {
+            return;
         }
+        setSelectedCity({
+            id: newCity.replace(' ', '').toLowerCase(),
+            text: newCity,
+        });
+
+        setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
     };
 
     /**
      * Function triggered when one of the selected values wants to be removed. Upon removing the value
      * we want to keep focus on the Text Field so the user can continue their selection.
-     * @param {Object} evt Event that triggered the function
-     * @param {Object} city city to be erased.
+     * @param city city to be erased.
+     * @return callback
      */
-    const clearSelectedValue = (event, city) => {
+    const clearSelectedValue = (city: ICity) => () => {
         inputRef?.current?.focus();
         setSelectedValues(city ? selectedValues.filter((c) => c.id !== city.id) : []);
     };
@@ -134,9 +136,9 @@ const App = ({ theme }) => {
     /**
      * Function triggered by the `onChange` event on the Text field. Here, we update the internal state
      * and set the suggestions as visible depending on whether the query is valid.
-     * @param {string} value New value entered on the text field.
+     * @param value New value entered on the text field.
      */
-    const onChange = (value) => {
+    const onChange = (value: string) => {
         setFilterValue(value);
         setShowSuggestions(value.length > 0);
         setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
@@ -146,10 +148,9 @@ const App = ({ theme }) => {
     /**
      * Function triggered when the user is navigating through the suggestions list. Useful to show
      * the suggestion on the Text Field.
-     * @param {Object} city      City navigated.
-     * @param {string} city.name City name.
+     * @param city      City navigated.
      */
-    const onItemNavigated = (city) => {
+    const onItemNavigated = (city: ICity) => {
         if (city && showSuggestions) {
             setNavigationSuggestionValue(city.text);
         }
@@ -191,7 +192,7 @@ const App = ({ theme }) => {
      * Callback triggered when the Text field is focused on. In this scenario,
      * we want to show the suggestion list if there is some text entered.
      */
-    const onFocus = (evt) => {
+    const onFocus = () => {
         setShowSuggestions(filterValue.length > 0);
     };
 
@@ -199,9 +200,24 @@ const App = ({ theme }) => {
      * Callback triggered when the Text field is blurred. In this scenario, we want
      * to hide the suggestions box and reset the chip navigation
      */
-    const onBlur = (evt) => {
+    const onBlur = () => {
         resetChipNavigation();
     };
+
+    const selectedChipRender = (city: ICity, index: number) => (
+        <Chip
+            theme={theme}
+            isClickable
+            key={index}
+            after={<Icon icon={mdiClose} size={Size.xxs} />}
+            size={Size.s}
+            onAfterClick={clearSelectedValue(city)}
+            onClick={clearSelectedValue(city)}
+            isHighlighted={index === activeChip}
+        >
+            {city.text}
+        </Chip>
+    );
 
     return (
         <AutocompleteMultiple
@@ -216,33 +232,23 @@ const App = ({ theme }) => {
             inputRef={inputRef}
             fitToAnchorWidth
             onBlur={onBlur}
-            selectedChipRender={(city: ICity, index) => (
-                <Chip
-                    theme={theme}
-                    isClickable
-                    key={index}
-                    after={<Icon icon={mdiClose} size={Size.xxs} />}
-                    size={Size.s}
-                    onAfterClick={(event) => clearSelectedValue(event, city)}
-                    onClick={(event) => clearSelectedValue(event, city)}
-                    isHighlighted={index === activeChip}
-                >
-                    {city.text}
-                </Chip>
-            )}
+            selectedChipRender={selectedChipRender}
         >
             <List theme={theme} isClickable>
-                {filteredCities.map((city, index) => (
-                    <ListItem
-                        size={Size.tiny}
-                        theme={theme}
-                        key={city.id}
-                        isHighlighted={index === activeItemIndex}
-                        onItemSelected={() => setSelectedCity(city)}
-                    >
-                        <div>{city.text}</div>
-                    </ListItem>
-                ))}
+                {filteredCities.map((city, index) => {
+                    const onItemSelected = () => setSelectedCity(city);
+                    return (
+                        <ListItem
+                            size={Size.tiny}
+                            theme={theme}
+                            key={city.id}
+                            isHighlighted={index === activeItemIndex}
+                            onItemSelected={onItemSelected}
+                        >
+                            <div>{city.text}</div>
+                        </ListItem>
+                    );
+                })}
             </List>
         </AutocompleteMultiple>
     );

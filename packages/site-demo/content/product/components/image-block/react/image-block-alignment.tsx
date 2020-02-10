@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <ImageBlock
         align={Alignment.center}
         aspectRatio={AspectRatio.original}

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { ImageBlock, Slideshow, SlideshowItem, ThumbnailAspectRatio } from '@lumx/react';
+import { AspectRatio, ImageBlock, Slideshow, SlideshowItem } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const slideshowStyle = {
         width: '50%',
     };
@@ -11,63 +11,63 @@ const App = ({ theme }) => {
         <Slideshow activeIndex={0} hasControls={true} theme={theme} autoPlay={true} groupBy={1} style={slideshowStyle}>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=31"
                     theme={theme}
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=1"
                     theme={theme}
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=2"
                     theme={theme}
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=8"
                     theme={theme}
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=3"
                     theme={theme}
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=4"
                     theme={theme}
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=5"
                     theme={theme}
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=36"
                     theme={theme}
                 />
             </SlideshowItem>
             <SlideshowItem>
                 <ImageBlock
-                    aspectRatio={ThumbnailAspectRatio.vertical}
+                    aspectRatio={AspectRatio.vertical}
                     image="https://picsum.photos/480/640/?image=7"
                     theme={theme}
                 />

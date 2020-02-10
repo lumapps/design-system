@@ -41,7 +41,7 @@ const Main: React.FC = (): ReactElement => {
                                 </Grid>
                             </GridItem>
                             <Route path="/product/components*">
-                                <EngineSelector/>
+                                <EngineSelector />
                             </Route>
                         </Grid>
                     </div>

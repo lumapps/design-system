@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Button, ButtonEmphasis, CommentBlock, Size } from '@lumx/react';
 import { mdiHeart, mdiReply } from '@lumx/icons';
+import { Button, CommentBlock, Emphasis, Size } from '@lumx/react';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <CommentBlock
         actions={[
-            <Button key="button0" emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiHeart}>
+            <Button key="button0" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                 24 likes
             </Button>,
-            <Button key="button1" emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiReply}>
+            <Button key="button1" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiReply}>
                 2 replies
             </Button>,
         ]}
@@ -20,18 +20,14 @@ const App = ({ theme }) => (
         name="Matthias Manoukian"
         hasChildren={true}
         isOpen={true}
-        onMouseEnter={console.log('Mouse entered')}
-        onMouseLeave={console.log('Mouse left')}
         children={[
             <CommentBlock
                 key="commentBlock0"
                 actions={
-                    <Button emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                    <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                         24 likes
                     </Button>
                 }
-                onMouseEnter={console.log('Mouse entered')}
-                onMouseLeave={console.log('Mouse left')}
                 hasActions={true}
                 avatar="http://i.pravatar.cc/72/random"
                 date="3 hours ago"
@@ -42,7 +38,7 @@ const App = ({ theme }) => (
             <CommentBlock
                 key="commentBlock1"
                 actions={
-                    <Button emphasis={ButtonEmphasis.low} size={Size.s} leftIcon={mdiHeart}>
+                    <Button emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                         16 likes
                     </Button>
                 }
@@ -51,8 +47,6 @@ const App = ({ theme }) => (
                 date="2 hours ago"
                 name="Hettie Powell"
                 theme={theme}
-                onMouseEnter={console.log('Mouse entered')}
-                onMouseLeave={console.log('Mouse left')}
                 text="Differentiate and you stand out in a crowded marketplace."
             />,
         ]}

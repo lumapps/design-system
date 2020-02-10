@@ -126,14 +126,14 @@ describe(`<${Button.displayName}>`, () => {
         it('should use default props', () => {
             const { buttonRoot } = setup();
 
-            const actualProps = buttonRoot.props() as ButtonProps;
+            const actualProps: ButtonProps = buttonRoot.props();
             expect(actualProps.variant).toEqual('button');
             for (const [propName, propValue] of Object.entries(DEFAULT_PROPS)) {
                 expect(actualProps[propName]).toEqual(propValue);
             }
         });
 
-        it('should forward any CSS class', (): void => {
+        it('should forward any CSS class', () => {
             const props: Partial<ButtonProps> = {
                 className: 'component component--is-tested',
             };

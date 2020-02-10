@@ -24,11 +24,11 @@ const useInfiniteScroll: useInfiniteScrollType = (
     ref: React.RefObject<HTMLElement>,
     callback: EventCallback,
     callbackOnMount: boolean = false,
-): void => {
+) => {
     const isAtBottom = (): boolean =>
         Boolean(ref.current && ref.current.scrollTop + ref.current.clientHeight >= ref.current.scrollHeight);
 
-    const onScroll: EventListener = (e?: Event): void => {
+    const onScroll: EventListener = (e?: Event) => {
         if (isAtBottom() && callback) {
             callback(e);
         }
@@ -39,7 +39,7 @@ const useInfiniteScroll: useInfiniteScrollType = (
             ref.current.addEventListener('scroll', onScroll);
             ref.current.addEventListener('resize', onScroll);
         }
-        return (): void => {
+        return () => {
             if (ref.current) {
                 ref.current.removeEventListener('scroll', onScroll);
                 ref.current.removeEventListener('resize', onScroll);

@@ -26,7 +26,7 @@ interface IMessageProps extends IGenericProps {
     /**
      * The kind of message.
      */
-    kind?: string;
+    kind?: MessageKind;
 
     /**
      * Put a background to the message
@@ -104,7 +104,7 @@ const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
             )}
             {...forwardedProps}
         >
-            <Icon className="lumx-message__icon" icon={icon} size={Size.xs} />
+            {icon && <Icon className="lumx-message__icon" icon={icon} size={Size.xs} />}
             <div className="lumx-message__text">{children}</div>
         </div>
     );

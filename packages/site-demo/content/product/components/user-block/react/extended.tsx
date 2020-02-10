@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@lumx/icons';
-import { Button, ButtonEmphasis, IconButton, Orientation, Size, Theme, UserBlock } from '@lumx/react';
+import { Button, Emphasis, IconButton, Orientation, Size, Theme, UserBlock } from '@lumx/react';
 
-const App = ({ theme }) => {
-    const createSimpleAction = (theme) => (
+const App = ({ theme }: any) => {
+    const createSimpleAction = () => (
         <Button
-            emphasis={ButtonEmphasis.medium}
+            emphasis={Emphasis.medium}
             color={theme === Theme.dark ? 'light' : undefined}
             size={Size.s}
             theme={theme}
@@ -17,12 +17,12 @@ const App = ({ theme }) => {
 
     const demoActions = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
-    const createMultipleActions = (theme) => (
+    const createMultipleActions = () => (
         <>
             {demoActions.map((demoAction, idx) => (
                 <IconButton
                     key={idx}
-                    emphasis={ButtonEmphasis.low}
+                    emphasis={Emphasis.low}
                     color={theme === Theme.dark ? 'light' : undefined}
                     icon={demoAction}
                     theme={theme}
@@ -30,6 +30,8 @@ const App = ({ theme }) => {
             ))}
         </>
     );
+    // tslint:disable-next-line:no-console
+    const logAction = (action: string) => () => console.log(action);
 
     return (
         <div className="demo-grid">
@@ -40,11 +42,11 @@ const App = ({ theme }) => {
                 avatar="http://i.pravatar.cc/128"
                 size={Size.l}
                 orientation={Orientation.vertical}
-                onMouseEnter={() => console.log('Mouse entered')}
-                onMouseLeave={() => console.log('Mouse left')}
-                onClick={() => console.log('UserBlock clicked')}
-                simpleAction={createSimpleAction(theme)}
-                multipleActions={createMultipleActions(theme)}
+                onMouseEnter={logAction('Mouse entered')}
+                onMouseLeave={logAction('Mouse left')}
+                onClick={logAction('UserBlock clicked')}
+                simpleAction={createSimpleAction()}
+                multipleActions={createMultipleActions()}
             />
         </div>
     );

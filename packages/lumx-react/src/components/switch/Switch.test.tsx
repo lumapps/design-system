@@ -92,10 +92,10 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
 };
 
 jest.mock('uuid/v4', (): (() => string) => (): string => 'a7b5d992-fe30-4d58-967a-89b8bb7e109c');
-describe(`<${Switch.displayName}>`, (): void => {
+describe(`<${Switch.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly without any label', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly without any label', () => {
             const { root, inputWrapper, input, content, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -108,7 +108,7 @@ describe(`<${Switch.displayName}>`, (): void => {
             expect(content).not.toExist();
         });
 
-        it('should render correctly with only a `label`', (): void => {
+        it('should render correctly with only a `label`', () => {
             const props: ISetupProps = { children: 'Label' };
             const { root, inputWrapper, input, content, helper, label, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
@@ -124,7 +124,7 @@ describe(`<${Switch.displayName}>`, (): void => {
             expect(helper).not.toExist();
         });
 
-        it('should render correctly with a `label` and a `helper`', (): void => {
+        it('should render correctly with a `label` and a `helper`', () => {
             const props: ISetupProps = { children: 'Label', helper: 'Helper' };
             const { root, inputWrapper, input, content, helper, label, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
@@ -144,12 +144,11 @@ describe(`<${Switch.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use default props', (): void => {
+    describe('Props', () => {
+        it('should use default props', () => {
             const { root } = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach((prop: string): void => {
-                // tslint:disable-next-line: no-any
+            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
                 let defaultProp: any = DEFAULT_PROPS[prop];
 
                 if (prop === 'checked') {
@@ -161,7 +160,7 @@ describe(`<${Switch.displayName}>`, (): void => {
             });
         });
 
-        it('should use the given props', (): void => {
+        it('should use the given props', () => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
                 checked: true,
                 position: oneOf(...without(Object.values(SwitchPosition), DEFAULT_PROPS.position)),
@@ -172,7 +171,7 @@ describe(`<${Switch.displayName}>`, (): void => {
 
             const { root } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach((prop: string): void => {
+            Object.keys(modifiedProps).forEach((prop: string) => {
                 if (prop === 'checked') {
                     if (modifiedProps[prop]) {
                         expect(root).toHaveClassName(
@@ -195,14 +194,14 @@ describe(`<${Switch.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         const onToggle: jest.Mock = jest.fn();
 
-        beforeEach((): void => {
+        beforeEach(() => {
             onToggle.mockClear();
         });
 
-        it('should trigger `onToggle` when toggled', (): void => {
+        it('should trigger `onToggle` when toggled', () => {
             const { input } = setup({ onToggle }, false);
 
             input.simulate('change');
@@ -212,8 +211,8 @@ describe(`<${Switch.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        it('should fail when more than one child is given', (): void => {
+    describe('Conditions', () => {
+        it('should fail when more than one child is given', () => {
             const children: ReactNode = (
                 <>
                     Label
@@ -221,22 +220,22 @@ describe(`<${Switch.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
         });
 
-        it('should fail when anything else than a text or a <span> is given', (): void => {
+        it('should fail when anything else than a text or a <span> is given', () => {
             mockConsole('debug');
 
             const children: ReactNode = <div>Label</div>;
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
         });
 
-        it('should not display the `helper` if no `label` is given', (): void => {
+        it('should not display the `helper` if no `label` is given', () => {
             const props: ISetupProps = { helper: 'Helper' };
             const { content, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
@@ -248,7 +247,7 @@ describe(`<${Switch.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

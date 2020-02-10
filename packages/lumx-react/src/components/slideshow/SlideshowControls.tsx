@@ -107,10 +107,12 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      *
      * @param evt Keyboard event.
      */
-    const handleKeyPressed = (evt: KeyboardEvent): void => {
-        if (evt.keyCode === LEFT_KEY_CODE) {
+    const handleKeyPressed = (evt: KeyboardEvent) => {
+        // tslint:disable-next-line: deprecation
+        const { keyCode } = evt;
+        if (keyCode === LEFT_KEY_CODE) {
             handlePreviousClick();
-        } else if (evt.keyCode === RIGHT_KEY_CODE) {
+        } else if (keyCode === RIGHT_KEY_CODE) {
             handleNextClick();
         }
 
@@ -145,7 +147,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      *
      * @param index Index used to determinate position in slides.
      */
-    const updateVisibleRange = (index: number): void => {
+    const updateVisibleRange = (index: number) => {
         if (index === visibleRange.maxRange && index < lastSlide) {
             setVisibleRange(() => ({ minRange: visibleRange.minRange + 1, maxRange: visibleRange.maxRange + 1 }));
         } else if (index === visibleRange.minRange && index > 0) {
@@ -175,7 +177,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
                     })}
                     key={i}
                     // tslint:disable-next-line: jsx-no-lambda
-                    onClick={(): void => handleItemClick(i)}
+                    onClick={() => handleItemClick(i)}
                     tabIndex={-1}
                 />,
             );
@@ -264,7 +266,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         if (parentRef && parentRef.current) {
             parentRef.current.addEventListener('keydown', handleKeyPressed);
 
-            swipeListeners = detectSwipe(parentRef.current, (swipeDirection: string): void => {
+            swipeListeners = detectSwipe(parentRef.current, (swipeDirection: string) => {
                 if (swipeDirection === 'right') {
                     handlePreviousClick();
                 }
@@ -275,7 +277,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
             });
         }
 
-        return (): void => {
+        return () => {
             if (parentRef && parentRef.current) {
                 parentRef.current.removeEventListener('keydown', handleKeyPressed);
                 swipeListeners();

@@ -91,7 +91,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @param props The properties of the component.
  */
-function _preValidate({ props }: ValidateParameters): void {
+function _preValidate({ props }: ValidateParameters) {
     if (!isEmpty(props.icon)) {
         return;
     }

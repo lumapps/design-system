@@ -26,12 +26,7 @@ declare module 'react' {
  * All available aspect ratios.
  * @deprecated
  */
-const ThumbnailAspectRatio: Record<string, AspectRatio> = {
-    horizontal: AspectRatio.horizontal,
-    original: AspectRatio.original,
-    square: AspectRatio.square,
-    vertical: AspectRatio.vertical,
-};
+const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
 
 /**
  *  Authorized size values.

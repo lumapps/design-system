@@ -6,7 +6,7 @@ import { mdiMagnify } from '@lumx/icons';
 
 import { Emphasis, IconButton, Toolbar } from '@lumx/react';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <Toolbar
         label={
             <span

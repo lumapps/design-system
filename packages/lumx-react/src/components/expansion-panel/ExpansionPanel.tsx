@@ -103,7 +103,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
         <span className={`${CLASSNAME}__label`}>{label}</span>
     );
 
-    const toggleOpen = (): void => {
+    const toggleOpen = () => {
         const shouldOpen = !isOpen;
         if (isFunction(openCallback) && shouldOpen) {
             openCallback();

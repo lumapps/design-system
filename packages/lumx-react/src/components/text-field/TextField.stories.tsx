@@ -9,7 +9,7 @@ export default { title: 'TextField' };
  * TextField story
  * @return simple TextField.
  */
-export const simpleTextField = ({ theme }) => (
+export const simpleTextField = ({ theme }: any) => (
     <TextField
         value={text('Value', 'myvalue')}
         label={text('Label', 'I am the label')}
@@ -19,7 +19,7 @@ export const simpleTextField = ({ theme }) => (
     />
 );
 
-export const textFieldWithHelp = ({ theme }) => (
+export const textFieldWithHelp = ({ theme }: any) => (
     <TextField
         value={text('Value', 'myvalue')}
         label={text('Label', 'I am the label')}
@@ -30,7 +30,7 @@ export const textFieldWithHelp = ({ theme }) => (
     />
 );
 
-export const textFieldWithError = ({ theme }) => (
+export const textFieldWithError = ({ theme }: any) => (
     <TextField
         value={text('Value', 'myvalue')}
         label={text('Label', 'I am the label')}

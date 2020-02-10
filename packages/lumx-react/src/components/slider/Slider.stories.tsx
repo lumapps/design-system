@@ -5,7 +5,7 @@ import React from 'react';
 
 export default { title: 'Slider' };
 
-export const defaultSlider = ({ theme }) => (
+export const defaultSlider = ({ theme }: any) => (
     <Slider
         label={text('label', 'Default')}
         max={number('max', 10)}
@@ -16,7 +16,7 @@ export const defaultSlider = ({ theme }) => (
     />
 );
 
-export const withHelperSlider = ({ theme }) => (
+export const withHelperSlider = ({ theme }: any) => (
     <Slider
         label={text('label', 'Default')}
         helper={text('helper', 'This is an helper text')}

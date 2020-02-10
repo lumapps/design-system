@@ -52,21 +52,21 @@ function commonTestsSuite(
     setup: (props?: IGenericProps, shallowRendering?: boolean) => ICommonSetup,
     { ...tests }: { className?: string | string[]; prop?: string | string[] },
     { ...params }: IGenericProps,
-): void {
+) {
     if (isEmpty(tests)) {
         return;
     }
 
-    describe('Common tests suite', (): void => {
+    describe('Common tests suite', () => {
         if (tests.className !== undefined && !isEmpty(tests.className)) {
-            it('should forward any CSS class', (): void => {
+            it('should forward any CSS class', () => {
                 const modifiedProps: IGenericProps = {
                     className: 'component component--is-tested',
                 };
 
-                const wrappers: ICommonSetup = setup(modifiedProps);
+                const wrappers: any = setup(modifiedProps);
 
-                const wrappersToTest: string[] = isArray(tests.className)
+                const wrappersToTest = isArray(tests.className)
                     ? tests.className!
                     : [tests.className!, tests.className!];
                 expect(wrappers[wrappersToTest[0]]).toHaveClassName(params.className);
@@ -76,16 +76,16 @@ function commonTestsSuite(
 
         // tslint:disable-next-line: early-exit
         if (tests.prop !== undefined && !isEmpty(tests.prop)) {
-            it('should forward any other prop', (): void => {
+            it('should forward any other prop', () => {
                 const testedProp: string = params.prop || 'winter';
                 const modifiedProps: IGenericProps = {
                     [testedProp]: params.propValue || 'is coming',
                 };
 
-                const wrappers: ICommonSetup = setup(modifiedProps);
+                const wrappers: any = setup(modifiedProps);
 
                 const wrappersToTest: string[] = isArray(tests.prop) ? tests.prop! : [tests.prop!];
-                wrappersToTest.forEach((wrapper: string): void => {
+                wrappersToTest.forEach((wrapper: string) => {
                     expect(wrappers[wrapper]).toHaveProp(testedProp, modifiedProps[testedProp]);
                 });
             });

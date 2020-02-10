@@ -222,7 +222,7 @@ const Slider: React.FC<SliderProps> = ({
      * Move to the next or previous value (i.e. + or - 10%) or next step
      * @param previous Should seek the previous value.
      */
-    const hopToValue = (previous: boolean = false): void => {
+    const hopToValue = (previous: boolean = false) => {
         const oldPercent = computePercentFromValue(value, min, max);
         let percent = clamp(oldPercent + (previous ? -0.1 : 0.1), 0, 1);
         if (steps) {

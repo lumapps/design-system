@@ -25,14 +25,12 @@ interface IGenericProps {
      * Any prop (particularly any supported prop for a HTML element).
      * E.g. classNames, onClick, disabled, ...
      */
-    // tslint:disable-next-line: no-any
     [propName: string]: any;
 }
 
 /**
  * Defines a generic component type.
  */
-// tslint:disable-next-line: no-any
 type ComponentType = ReactNode | React.FC<any> | React.PureComponent<any, any> | React.Component<any, any>;
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 

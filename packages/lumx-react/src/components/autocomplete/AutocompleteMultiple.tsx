@@ -1,12 +1,11 @@
-import React, { ReactElement, ReactNode } from 'react';
-
-import classNames from 'classnames';
-
 import { mdiClose } from '@lumx/icons';
 import { Autocomplete, AutocompleteProps, Chip, ChipGroup, Icon, Size } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
+import classNames from 'classnames';
+import React, { ReactElement, ReactNode } from 'react';
 
 /////////////////////////////
 
@@ -32,10 +31,11 @@ interface IAutocompleteMultipleProps extends AutocompleteProps {
     selectedChipRender(
         choice: object,
         index: number,
-        onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: object) => void,
+        onClear?: (event: React.MouseEvent, choice: object) => void,
         isDisabled?: boolean,
     ): ReactNode | string;
 }
+
 type AutocompleteMultipleProps = IAutocompleteMultipleProps;
 
 /////////////////////////////
@@ -63,27 +63,21 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     closeOnClick: true,
     closeOnEscape: true,
     isOpen: undefined,
-    selectedChipRender: (
-        choice: object,
-        index: number,
-        onClear?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, choice: object) => void,
-        isDisabled?: boolean,
-    ): ReactNode | string => (
-        <Chip
-            key={index}
-            after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
-            isDisabled={isDisabled}
-            size={Size.s}
-            // tslint:disable-next-line: jsx-no-lambda
-            onAfterClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void =>
-                onClear && onClear(event, choice)
-            }
-            // tslint:disable-next-line: jsx-no-lambda
-            onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void => onClear && onClear(event, choice)}
-        >
-            {choice}
-        </Chip>
-    ),
+    selectedChipRender(choice, index, onClear, isDisabled) {
+        const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
+        return (
+            <Chip
+                key={index}
+                after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
+                isDisabled={isDisabled}
+                size={Size.s}
+                onAfterClick={onClick}
+                onClick={onClick}
+            >
+                {choice}
+            </Chip>
+        );
+    },
     values: [],
 };
 

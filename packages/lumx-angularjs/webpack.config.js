@@ -11,6 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const HtmlMinifierPlugin = require('html-minifier-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
@@ -95,14 +96,10 @@ module.exports = {
         rules: [
             {
                 exclude: /node_modules/u,
-                test: /\.js$/u,
+                test: /\.[j|t]sx?$/u,
                 use: {
-                    loader: 'babel-loader?cacheDirectory=true',
-                    options: {
-                        ...CONFIGS.babel,
-                        plugins: [['angularjs-annotate', { explicitOnly: true }], ...CONFIGS.babel.plugins],
-                        presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
-                    },
+                    loader: 'babel-loader',
+                    options: CONFIGS.babel,
                 },
             },
             {
@@ -113,11 +110,8 @@ module.exports = {
     },
 
     resolve: {
-        alias: {
-            [PKG_NAME]: SRC_PATH,
-            // Use un-compiled code.
-            '@lumx/core': '@lumx/core/src',
-        },
+        extensions: ['.ts', '.js'],
+        plugins: [new TsconfigPathsPlugin()],
     },
 
     output: {
@@ -142,5 +136,9 @@ module.exports = {
 
     stats: {
         colors: !IS_CI,
+    },
+
+    performance: {
+        assetFilter: (file) => file.endsWith('.min.js'),
     },
 };

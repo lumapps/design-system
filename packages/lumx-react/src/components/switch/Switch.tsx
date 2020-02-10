@@ -132,7 +132,7 @@ const Switch: React.FC<SwitchProps> = ({
      * Toggle the state of the <Switch> inner checkbox.
      * @param event Change event.
      */
-    const toggleIsChecked = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const toggleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onToggle) {
             onToggle(get(event, 'target.checked'));
         }

@@ -3,7 +3,7 @@ import React from 'react';
 import { mdiEmail } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <div className="demo-grid">
         <Chip theme={theme}>Default</Chip>
 

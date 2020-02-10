@@ -42,7 +42,7 @@ interface INotificationProps extends IGenericProps {
     theme?: Theme;
 
     /** Type of notification (info, success, warning, error). */
-    type: NotificationType;
+    type?: NotificationType;
 
     /** The z-axis position. */
     zIndex?: number;
@@ -104,49 +104,47 @@ const Notification: React.FC<NotificationProps> = ({
     type,
     zIndex = DEFAULT_PROPS.zIndex,
     ...props
-}: NotificationProps): React.ReactElement => {
+}) => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
-    const handleCallback: (evt: React.MouseEvent<HTMLElement>) => void = (evt: React.MouseEvent<HTMLElement>): void => {
+    const handleCallback = (evt: React.MouseEvent) => {
         if (isFunction(actionCallback)) {
             actionCallback();
         }
-
         evt.stopPropagation();
     };
 
-    return (
-        !!type &&
-        createPortal(
-            <div
-                className={classNames(
-                    className,
-                    handleBasicClasses({
-                        color: `${NOTIFICATION_CONFIGURATION[type].color}`,
-                        hasAction,
-                        isHidden: !isOpen,
-                        prefix: CLASSNAME,
-                    }),
-                )}
-                {...props}
-                onClick={handleClick}
-                style={{ zIndex }}
-            >
-                <div className={`${CLASSNAME}__icon`}>
-                    <Icon icon={NOTIFICATION_CONFIGURATION[type].icon} size={Size.s} />
-                </div>
-                <div className={`${CLASSNAME}__content`}>{content}</div>
-                {hasAction && (
-                    <div className={`${CLASSNAME}__action`}>
-                        <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
-                            <span>{actionLabel}</span>
-                        </Button>
-                    </div>
-                )}
-            </div>,
-            document.body,
-        )
-    );
+    return type
+        ? createPortal(
+              <div
+                  className={classNames(
+                      className,
+                      handleBasicClasses({
+                          color: `${NOTIFICATION_CONFIGURATION[type].color}`,
+                          hasAction,
+                          isHidden: !isOpen,
+                          prefix: CLASSNAME,
+                      }),
+                  )}
+                  {...props}
+                  onClick={handleClick}
+                  style={{ zIndex }}
+              >
+                  <div className={`${CLASSNAME}__icon`}>
+                      <Icon icon={NOTIFICATION_CONFIGURATION[type].icon} size={Size.s} />
+                  </div>
+                  <div className={`${CLASSNAME}__content`}>{content}</div>
+                  {hasAction && (
+                      <div className={`${CLASSNAME}__action`}>
+                          <Button emphasis={Emphasis.medium} theme={theme} onClick={handleCallback}>
+                              <span>{actionLabel}</span>
+                          </Button>
+                      </div>
+                  )}
+              </div>,
+              document.body,
+          )
+        : null;
 };
 Notification.displayName = COMPONENT_NAME;
 

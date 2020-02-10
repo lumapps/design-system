@@ -22,7 +22,7 @@ const App = () => {
     const [isOpen4, setOpen4] = useState(false);
     const [isOpen5, setOpen5] = useState(false);
     const [isOpen6, setOpen6] = useState(false);
-    const stopPropagation = (evt) => evt.stopPropagation();
+    const stopPropagation = (evt: Event) => evt.stopPropagation();
 
     return (
         <>

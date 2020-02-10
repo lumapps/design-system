@@ -1,13 +1,20 @@
+/* eslint-disable import/no-nodejs-modules */
+/* eslint-disable import/no-commonjs */
+/* eslint-disable import/unambiguous */
+/* eslint-disable import/no-extraneous-dependencies */
+
 const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlMinifierPlugin = require('html-minifier-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const IS_CI = require('is-ci');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
@@ -30,6 +37,7 @@ const minimizer = [];
 const plugins = [
     new WebpackBar(),
     new FriendlyErrorsWebpackPlugin(),
+    CONFIGS.ignoreNotFoundExport,
 
     new MiniCssExtractPlugin({
         filename: `${filename}.css`,
@@ -39,6 +47,8 @@ const plugins = [
         inject: false,
         template: `${SRC_PATH}/index.html.ejs`,
     }),
+
+    new ForkTsCheckerWebpackPlugin(),
 ];
 
 const cssLoaders = [
@@ -93,6 +103,8 @@ if (!IS_CI) {
     );
 }
 
+const extensions = ['.md', '.mdx', '.ts', '.tsx', '.js', '.jsx', '.json'];
+
 module.exports = {
     bail: true,
     devtool: 'source-map',
@@ -107,13 +119,10 @@ module.exports = {
 
     resolve: {
         alias: {
-            [PKG_NAME]: SRC_PATH,
             content: CONTENT_PATH,
-            '@lumx/core': '@lumx/core/src',
-            '@lumx/react': '@lumx/react/src',
-            '@lumx/angularjs': '@lumx/angularjs/src',
         },
-        extensions: ['.md', '.mdx', '.ts', '.tsx', '.js', '.jsx', '.json'],
+        extensions,
+        plugins: [new TsconfigPathsPlugin({ extensions })],
     },
 
     resolveLoader: {
@@ -156,37 +165,19 @@ module.exports = {
                 },
             },
             {
-                exclude: [/node_modules/u, /\.(test|spec)\.jsx?/u],
-                test: /\.jsx?$/u,
-                use: [
-                    {
-                        loader: 'babel-loader?cacheDirectory=true',
-                        options: {
-                            ...CONFIGS.babel,
-                            plugins: [['angularjs-annotate', { explicitOnly: true }], ...CONFIGS.babel.plugins],
-                            presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
-                        },
-                    },
-                ],
-            },
-            {
-                exclude: [/node_modules/u, /\.(test|spec)\.tsx?/u],
-                test: /\.tsx?$/u,
-                loader: 'awesome-typescript-loader',
-                options: {
-                    reportFiles: ['**/*.(!test|spec).(ts|tsx)'],
-                    useCache: true,
+                exclude: [/node_modules/u, /\.(test|spec)\.[t|j]sx?/u],
+                test: /\.[t|j]sx?$/u,
+                use: {
+                    loader: 'babel-loader',
+                    options: CONFIGS.babel,
                 },
             },
             {
                 test: /\.mdx?$/,
                 use: [
                     {
-                        loader: 'babel-loader?cacheDirectory=true',
-                        options: {
-                            ...CONFIGS.babel,
-                            presets: ['@babel/preset-react', ...CONFIGS.babel.presets],
-                        },
+                        loader: 'babel-loader',
+                        options: CONFIGS.babel,
                     },
                     {
                         loader: 'mdx-loader',
@@ -220,6 +211,10 @@ module.exports = {
                 vendors: false,
             },
         },
+    },
+
+    performance: {
+        assetFilter: (file) => file.endsWith('.min.js'),
     },
 };
 

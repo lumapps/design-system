@@ -1,22 +1,22 @@
 import React from 'react';
 
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
-import { AspectRatio, ButtonEmphasis, Chip, ChipGroup, Grid, IconButton, ImageBlock, Size } from '@lumx/react';
+import { AspectRatio, Chip, ChipGroup, Emphasis, Grid, IconButton, ImageBlock, Size } from '@lumx/react';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <ImageBlock
         actions={
             <Grid>
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={ButtonEmphasis.low} hasBackground={true} icon={mdiPencil} />
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiPencil} />
                 </div>
 
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={ButtonEmphasis.low} hasBackground={true} icon={mdiEye} />
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiEye} />
                 </div>
 
                 <div>
-                    <IconButton color="dark" emphasis={ButtonEmphasis.low} hasBackground={true} icon={mdiDelete} />
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiDelete} />
                 </div>
             </Grid>
         }

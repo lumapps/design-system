@@ -8,7 +8,7 @@
     "rules": {
         "await-promise": true,
         "deprecation": true,
-        "no-any": true,
+        "no-any": false,
         "no-boolean-literal-compare": true,
         "no-console": [
             true,
@@ -25,7 +25,7 @@
         "no-empty-interface": false,
         "no-for-in-array": true,
         "no-inferrable-types": [true, "ignore-params", "ignore-properties"],
-        "no-inferred-empty-object-type": true,
+        "no-inferred-empty-object-type": false,
         "no-object-literal-type-assertion": true,
         "no-return-await": true,
         "no-unsafe-any": false,
@@ -45,7 +45,7 @@
         "restrict-plus-operands": {
             "severity": "warning"
         },
-        "return-undefined": true,
+        "return-undefined": false,
         "static-this": {
             "severity": "warning"
         },

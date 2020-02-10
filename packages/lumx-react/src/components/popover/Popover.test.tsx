@@ -72,10 +72,10 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${Popover.displayName}>`, (): void => {
+describe(`<${Popover.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly', () => {
             const { popover, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -87,8 +87,8 @@ describe(`<${Popover.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use default props', (): void => {
+    describe('Props', () => {
+        it('should use default props', () => {
             const { wrapper, popover }: ISetup = setup();
             wrapper.update();
 
@@ -102,26 +102,26 @@ describe(`<${Popover.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        it('should be displayed when isVisible is set to true', (): void => {
+    describe('Conditions', () => {
+        it('should be displayed when isVisible is set to true', () => {
             const { popover } = setup({ isVisible: true });
 
             expect(popover.prop('style')).toHaveProperty('visibility', 'visible');
         });
 
-        it('should be hidden when isVisible is set to false', (): void => {
+        it('should be hidden when isVisible is set to false', () => {
             const { popover } = setup({ isVisible: false });
 
             expect(popover.prop('style')).toHaveProperty('visibility', 'hidden');
         });
 
-        it('should be placed correctly by the popoverRect prop', (): void => {
+        it('should be placed correctly by the popoverRect prop', () => {
             const popoverRect = { x: 300, y: 300, width: 500, height: 200 };
             const { popover } = setup({ popoverRect });
 
@@ -131,7 +131,7 @@ describe(`<${Popover.displayName}>`, (): void => {
             );
         });
 
-        it('should be placed correctly by the popoverRect prop', (): void => {
+        it('should be placed correctly by the popoverRect prop', () => {
             const { popover } = setup({ elevation: 7 });
 
             expect(popover).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'elevation', value: 5 }));
@@ -141,7 +141,7 @@ describe(`<${Popover.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

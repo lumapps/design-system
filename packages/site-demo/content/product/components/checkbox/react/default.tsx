@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Checkbox } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [value, setValue] = useState(true);
     const [value2, setValue2] = useState(false);
     const [value3, setValue3] = useState(false);

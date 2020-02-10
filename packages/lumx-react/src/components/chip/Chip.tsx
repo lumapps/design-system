@@ -122,7 +122,7 @@ const Chip: React.FC<IChipProps> = ({
      *
      * @param evt The click event on the before element that triggers this method.
      */
-    const handleOnBeforeClick = (evt: SyntheticEvent): void => {
+    const handleOnBeforeClick = (evt: SyntheticEvent) => {
         if (!evt) {
             return;
         }
@@ -139,7 +139,7 @@ const Chip: React.FC<IChipProps> = ({
      *
      * @param evt The click event on the after element that triggers this method.
      */
-    const handleOnAfterClick = (evt: SyntheticEvent): void => {
+    const handleOnAfterClick = (evt: SyntheticEvent) => {
         if (!evt) {
             return;
         }

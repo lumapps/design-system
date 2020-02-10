@@ -2,7 +2,7 @@ import React, { Children, ReactElement, ReactNode, cloneElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme } from '@lumx/react';
+import { TabProps, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -32,7 +32,7 @@ interface ITabsProps extends IGenericProps {
     /** Tabs Layout */
     layout?: TabsLayout;
     /** Function to trigger on tab click */
-    onTabClick: CallableFunction;
+    onTabClick: TabProps['onTabClick'];
     /** Tabs Position */
     position?: TabsPosition;
     /** Component theme */

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { ExpansionPanel } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
 
     return (

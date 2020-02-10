@@ -3,7 +3,7 @@ import React from 'react';
 import {
     Avatar,
     Button,
-    ButtonEmphasis,
+    Emphasis,
     Icon,
     IconButton,
     List,
@@ -46,7 +46,7 @@ const App = () => (
             <ListItem
                 size={Size.big}
                 before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
-                after={<IconButton emphasis={ButtonEmphasis.low} icon={mdiDotsHorizontal} />}
+                after={<IconButton emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
             >
                 <div>
                     <span>Two-line item</span>
@@ -60,7 +60,7 @@ const App = () => (
             <ListItem
                 size={Size.big}
                 before={<Avatar image="http://i.pravatar.cc/72" size={Size.m} />}
-                after={<Button emphasis={ButtonEmphasis.low}>Button</Button>}
+                after={<Button emphasis={Emphasis.low}>Button</Button>}
             >
                 <div>
                     <span>Two-line item</span>

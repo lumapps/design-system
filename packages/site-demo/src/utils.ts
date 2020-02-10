@@ -1,18 +1,19 @@
 import { setCustomColors } from '@lumx/core/js/custom-colors';
-import { Theme } from '@lumx/demo/constants';
+import { Theme } from '@lumx/demo/context/theme';
 
 /**
  * Set primary and secondary custom colors.
  *
  * @param theme The theme to apply the custom color palette on.
  */
-function setDemoCustomColors(theme: Theme): void {
+function setDemoCustomColors(theme: Theme) {
     const styleTag = document.createElement('style');
     document.head.appendChild(styleTag);
 
     const { sheet } = styleTag;
 
-    setCustomColors(sheet, theme, {
+    /* tslint:disable object-literal-sort-keys */
+    setCustomColors(sheet as CSSStyleSheet, theme, {
         primary: {
             D2: '#fea41c',
             D1: '#ffb71f',

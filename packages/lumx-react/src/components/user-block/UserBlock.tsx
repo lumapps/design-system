@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, Ref } from 'react';
+import React, { ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
 
@@ -19,29 +19,29 @@ type UserBlockSize = Size.s | Size.m | Size.l;
  * Defines the props of the component.
  */
 interface IUserBlockProps extends IGenericProps {
-    /* Avatar image. */
+    /** Avatar image. */
     avatar?: string;
-    /* Simple Action block. */
+    /** Simple Action block. */
     simpleAction?: ReactNode;
-    /* Multiple Actions block. */
+    /** Multiple Actions block. */
     multipleActions?: ReactNode;
-    /* Additionnal fields used to describe the use. */
+    /** Additional fields used to describe the use. */
     fields?: string[];
-    /* User name. */
+    /** User name. */
     name?: string;
-    /* Orientation. */
+    /** Orientation. */
     orientation?: Orientation;
-    /* Size. */
+    /** Size. */
     size?: UserBlockSize;
-    /* Theme. */
+    /** Theme. */
     theme?: Theme;
-    /* Reference passed to the wrapper. */
+    /** Reference passed to the wrapper. */
     userBlockRef?: Ref<HTMLDivElement>;
-    /* Callback for the click event. */
+    /** Callback for the click event. */
     onClick?(): void;
-    /* Callback for the mouseEnter event. */
+    /** Callback for the mouseEnter event. */
     onMouseEnter?(): void;
-    /* Callback for the mouseEnter event. */
+    /** Callback for the mouseEnter event. */
     onMouseLeave?(): void;
 }
 type UserBlockProps = IUserBlockProps;
@@ -84,7 +84,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The component.
  */
-const UserBlock = ({
+const UserBlock: React.FC<IUserBlockProps> = ({
     avatar,
     theme = DEFAULT_PROPS.theme,
     orientation = DEFAULT_PROPS.orientation,
@@ -98,7 +98,7 @@ const UserBlock = ({
     multipleActions,
     size = DEFAULT_PROPS.size,
     userBlockRef,
-}: IUserBlockProps): ReactElement => {
+}) => {
     let componentSize = size;
 
     // Special case - When using vertical orientation force the size to be Sizes.l.

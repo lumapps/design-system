@@ -4,4 +4,4 @@ import { Button } from '@lumx/react';
 
 export default { title: 'Button' };
 
-export const simpleButton = ({ theme }) => <Button theme={theme}>Simple button</Button>;
+export const simpleButton = ({ theme }: any) => <Button theme={theme}>Simple button</Button>;

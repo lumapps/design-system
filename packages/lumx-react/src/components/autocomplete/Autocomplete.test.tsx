@@ -70,12 +70,12 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
     };
 };
 
-describe(`<${Autocomplete.displayName}>`, (): void => {
+describe(`<${Autocomplete.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
+    describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
 
-        it('should render correctly', (): void => {
+        it('should render correctly', () => {
             const { wrapper, textField, dropdown } = setup({
                 children: (
                     <List isClickable>
@@ -104,14 +104,14 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should use default props', (): void => {
+    describe('Props', () => {
+        it('should use default props', () => {
             const { wrapper }: ISetup = setup();
 
             expect(wrapper).toHaveClassName(CLASSNAME);
         });
 
-        it('should render correctly when the dropdown is closed', (): void => {
+        it('should render correctly when the dropdown is closed', () => {
             const { wrapper } = setup({
                 children: (
                     <List isClickable>
@@ -137,8 +137,8 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
-        it('should trigger the onChange callback when there is a change on the Text Field', (): void => {
+    describe('Events', () => {
+        it('should trigger the onChange callback when there is a change on the Text Field', () => {
             const onChange = jest.fn();
             const { textField } = setup({
                 children: (
@@ -160,7 +160,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
             expect(onChange).toHaveBeenCalled();
         });
 
-        it('should trigger the onFocus callback when the text field is focused on', (): void => {
+        it('should trigger the onFocus callback when the text field is focused on', () => {
             const onFocus = jest.fn();
             const { textField } = setup({
                 children: (
@@ -182,7 +182,7 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
             expect(onFocus).toHaveBeenCalled();
         });
 
-        it('should trigger the onBlur callback when the Text Field loses focus', (): void => {
+        it('should trigger the onBlur callback when the Text Field loses focus', () => {
             const onBlur = jest.fn();
             const { textField } = setup({
                 children: (
@@ -207,14 +207,14 @@ describe(`<${Autocomplete.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

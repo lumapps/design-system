@@ -53,12 +53,12 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
     };
 };
 
-describe(`<${Message.displayName}>`, (): void => {
+describe(`<${Message.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
+    describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
 
-        it('should render correctly', (): void => {
+        it('should render correctly', () => {
             const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -70,20 +70,20 @@ describe(`<${Message.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
+    describe('Props', () => {
         // Here are some examples of basic props check.
 
-        it('should use default props', (): void => {
+        it('should use default props', () => {
             const { wrapper } = setup();
 
-            Object.keys(DEFAULT_PROPS).forEach((prop: string): void => {
+            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
                 expect(wrapper).toHaveClassName(
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
                 );
             });
         });
 
-        it('should use the given `kind`', (): void => {
+        it('should use the given `kind`', () => {
             const testedProp = 'kind';
             const modifiedProps: Partial<MessageProps> = {
                 [testedProp]: MessageKind.success,
@@ -101,20 +101,20 @@ describe(`<${Message.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

@@ -55,12 +55,12 @@ const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetu
     };
 };
 
-describe(`<${AutocompleteMultiple.displayName}>`, (): void => {
+describe(`<${AutocompleteMultiple.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
+    describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
 
-        it('should render correctly', (): void => {
+        it('should render correctly', () => {
             const { wrapper } = setup({
                 children: (
                     <List isClickable>
@@ -96,27 +96,27 @@ describe(`<${AutocompleteMultiple.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
+    describe('Props', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

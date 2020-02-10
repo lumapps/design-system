@@ -6,7 +6,7 @@ import { mdiChevronLeft, mdiMagnify, mdiViewGrid } from '@lumx/icons';
 
 import { Alignment, Button, Emphasis, Grid, IconButton, TextField, Toolbar } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
 
     return (

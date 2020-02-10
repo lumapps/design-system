@@ -106,7 +106,7 @@ const List: React.FC<ListProps> & IList = ({
      * @param  idx       Index of the target in the list
      * @param  itemProps Base props
      */
-    const mouseDownHandler = (evt: React.MouseEvent, idx: number, itemProps: ListItemProps): void => {
+    const mouseDownHandler = (evt: React.MouseEvent, idx: number, itemProps: ListItemProps) => {
         setActiveItemIndex(idx);
         if (itemProps.onMouseDown) {
             itemProps.onMouseDown(evt);
@@ -116,14 +116,14 @@ const List: React.FC<ListProps> & IList = ({
     /**
      * Handle the blur event on the list -> we should reset the selection.
      */
-    const onListBlurred = (): void => {
+    const onListBlurred = () => {
         resetActiveIndex(true);
     };
 
     /**
      * Handle the focus event on the list -> we should reset the selection
      */
-    const onListFocused = (): void => {
+    const onListFocused = () => {
         resetActiveIndex(false);
     };
 
@@ -131,7 +131,7 @@ const List: React.FC<ListProps> & IList = ({
      * Reset the active element
      * @param fromBlur Is request from blur event
      */
-    const resetActiveIndex = (fromBlur: boolean): void => {
+    const resetActiveIndex = (fromBlur: boolean) => {
         if (!isClickable || preventResetOnBlurOrFocus.current) {
             if (fromBlur) {
                 preventResetOnBlurOrFocus.current = false;
@@ -146,7 +146,7 @@ const List: React.FC<ListProps> & IList = ({
      * Handle keyboard interactions
      * @param evt Keyboard input event
      */
-    const onKeyInteraction = (evt: React.KeyboardEvent<HTMLUListElement>): void => {
+    const onKeyInteraction = (evt: React.KeyboardEvent<HTMLUListElement>) => {
         if (!isClickable) {
             return;
         }

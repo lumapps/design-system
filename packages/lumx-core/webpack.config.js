@@ -5,8 +5,10 @@
 
 const IS_CI = require('is-ci');
 const path = require('path');
+const glob = require('glob');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
@@ -73,6 +75,7 @@ const plugins = [
         cssProcessorOptions: CONFIGS.cssNano,
         cssProcessorPluginOptions: {},
     }),
+    new ForkTsCheckerWebpackPlugin(),
 ];
 
 if (!IS_CI) {
@@ -84,10 +87,44 @@ if (!IS_CI) {
     );
 }
 
+const cssLoaders = [
+    {
+        loader: ExtractCssChunks.loader,
+        options: {
+            hot: false,
+            reloadAll: false,
+        },
+    },
+    {
+        loader: 'css-loader',
+        options: {
+            // eslint-disable-next-line no-magic-numbers
+            importLoaders: 2,
+            sourceMap: false,
+        },
+    },
+    {
+        loader: 'postcss-loader',
+        options: {
+            config: {
+                path: `${PKG_PATH}/postcss.config.js`,
+            },
+            sourceMap: false,
+        },
+    },
+];
+
 module.exports = {
     entry: {
         'lumx-theme-lumapps': `${SRC_PATH}/scss/lumx-theme-lumapps.scss`,
         'lumx-theme-material': `${SRC_PATH}/scss/lumx-theme-material.scss`,
+
+        // Compile all JS/TS files.
+        ...Object.fromEntries(
+            glob
+                .sync(`${SRC_PATH}/js/**/*.{js,ts}`)
+                .map((file) => [path.relative(SRC_PATH, file).replace(new RegExp(`${path.extname(file)}$`), ''), file]),
+        ),
     },
 
     externals: ['moment', 'moment-range'],
@@ -97,35 +134,16 @@ module.exports = {
     mode: 'production',
     name: PKG_NAME,
 
+    resolve: {
+        extensions: ['.js', '.ts'],
+    },
+
     module: {
         rules: [
             {
                 test: /\.scss$/u,
                 use: [
-                    {
-                        loader: ExtractCssChunks.loader,
-                        options: {
-                            hot: false,
-                            reloadAll: false,
-                        },
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            // eslint-disable-next-line no-magic-numbers
-                            importLoaders: 2,
-                            sourceMap: false,
-                        },
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            config: {
-                                path: `${PKG_PATH}/postcss.config.js`,
-                            },
-                            sourceMap: false,
-                        },
-                    },
+                    ...cssLoaders,
                     {
                         loader: 'sass-loader',
                         options: {
@@ -136,32 +154,15 @@ module.exports = {
             },
             {
                 test: /\.css$/u,
-                use: [
-                    {
-                        loader: ExtractCssChunks.loader,
-                        options: {
-                            hot: false,
-                            reloadAll: false,
-                        },
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            // eslint-disable-next-line no-magic-numbers
-                            importLoaders: 2,
-                            sourceMap: false,
-                        },
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            config: {
-                                path: `${PKG_PATH}/postcss.config.js`,
-                            },
-                            sourceMap: false,
-                        },
-                    },
-                ],
+                use: cssLoaders,
+            },
+            {
+                exclude: /node_modules/u,
+                test: /\.[j|t]sx?$/u,
+                use: {
+                    loader: 'babel-loader',
+                    options: CONFIGS.babel,
+                },
             },
         ],
     },

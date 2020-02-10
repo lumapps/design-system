@@ -68,7 +68,7 @@ function loadAngularjsDemo(code: Code): DemoModule | null {
 
     return {
         default({ theme }: IHasTheme) {
-            let container;
+            let container: any;
 
             useEffect(() => {
                 if (!container) {
@@ -81,7 +81,7 @@ function loadAngularjsDemo(code: Code): DemoModule | null {
 
             return (
                 <AngularTemplate
-                    ref={(c) => (container = c)}
+                    ref={(c: any) => (container = c)}
                     template={template}
                     controller={controllerModule.DemoController}
                     controllerAs="vm"
@@ -123,10 +123,10 @@ const DemoBlock: React.FC<IDemoBlockProps> = ({
     const engine = propEngine || contextEngine;
 
     const [theme, setTheme] = useState(Theme.light);
-    const toggleTheme = (checked: boolean): void => (checked ? setTheme(Theme.dark) : setTheme(Theme.light));
+    const toggleTheme = (checked: boolean) => (checked ? setTheme(Theme.dark) : setTheme(Theme.light));
 
     const [showCode, setShowCode] = useState(false);
-    const toggleShowCode = (): void => setShowCode(!showCode);
+    const toggleShowCode = () => setShowCode(!showCode);
 
     const demo = useLoadDemo(code, engine);
     const content = children || renderDemo(demo, theme, engine);

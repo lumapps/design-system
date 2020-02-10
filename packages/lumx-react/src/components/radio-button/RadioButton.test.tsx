@@ -66,10 +66,10 @@ const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true)
     };
 };
 
-describe(`<${RadioButton.displayName}>`, (): void => {
+describe(`<${RadioButton.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render defaults', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render defaults', () => {
             const { wrapper, input, helper } = setup({});
             expect(wrapper).toMatchSnapshot();
 
@@ -83,7 +83,7 @@ describe(`<${RadioButton.displayName}>`, (): void => {
             expect(helper).not.toExist();
         });
 
-        it('should render checked, disabled & id', (): void => {
+        it('should render checked, disabled & id', () => {
             const props = {
                 checked: true,
                 disabled: true,
@@ -98,7 +98,7 @@ describe(`<${RadioButton.displayName}>`, (): void => {
             expect(inputProps.id).toEqual(props.id);
         });
 
-        it('should render label & helper', (): void => {
+        it('should render label & helper', () => {
             const props = {
                 helper: 'Helper',
                 label: 'Label',
@@ -124,7 +124,7 @@ describe(`<${RadioButton.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
+    describe('Props', () => {
         it('should use props for classes', () => {
             const props = {
                 checked: true,
@@ -144,21 +144,21 @@ describe(`<${RadioButton.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

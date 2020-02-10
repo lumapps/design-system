@@ -101,7 +101,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     text,
     theme = DEFAULT_PROPS.theme,
 }: CommentBlockProps): React.ReactElement => {
-    const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>): void => {
+    const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
             onClick();
         }

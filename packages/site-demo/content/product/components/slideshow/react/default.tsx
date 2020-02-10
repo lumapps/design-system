@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
     Alignment,
+    AspectRatio,
     Chip,
     ChipGroup,
     ImageBlock,
@@ -9,10 +10,9 @@ import {
     Size,
     Slideshow,
     SlideshowItem,
-    ThumbnailAspectRatio,
 } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const slideshowStyle = {
         width: '50%',
     };
@@ -45,7 +45,7 @@ const App = ({ theme }) => {
             >
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=31"
                         theme={theme}
@@ -55,7 +55,7 @@ const App = ({ theme }) => {
 
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=1"
                         theme={theme}
@@ -65,7 +65,7 @@ const App = ({ theme }) => {
 
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=2"
                         theme={theme}
@@ -75,7 +75,7 @@ const App = ({ theme }) => {
 
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=8"
                         theme={theme}
@@ -85,7 +85,7 @@ const App = ({ theme }) => {
 
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=3"
                         theme={theme}
@@ -95,7 +95,7 @@ const App = ({ theme }) => {
 
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=4"
                         theme={theme}
@@ -105,7 +105,7 @@ const App = ({ theme }) => {
 
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=5"
                         theme={theme}
@@ -115,7 +115,7 @@ const App = ({ theme }) => {
 
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=36"
                         theme={theme}
@@ -125,7 +125,7 @@ const App = ({ theme }) => {
 
                 <SlideshowItem>
                     <ImageBlock
-                        aspectRatio={ThumbnailAspectRatio.horizontal}
+                        aspectRatio={AspectRatio.horizontal}
                         captionPosition={ImageBlockCaptionPosition.over}
                         image="https://picsum.photos/640/480/?image=7"
                         theme={theme}

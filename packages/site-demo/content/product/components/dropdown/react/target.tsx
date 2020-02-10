@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button, Chip, Dropdown, List, ListItem, Placement, Size } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [isDropdownOpen, setIsDropdownOpen] = React.useState(true);
     const ddRef = React.useRef(null);
     const openDropdown = () => setIsDropdownOpen(true);

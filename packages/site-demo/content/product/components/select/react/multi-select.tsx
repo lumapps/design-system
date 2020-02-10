@@ -1,24 +1,25 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 
 import { List, ListItem, Select, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
+    // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
     const [values, setValues] = React.useState<string[]>([]);
 
-    const clearSelectedvalues = (event, value) => {
+    const clearSelected = (event?: SyntheticEvent, value?: string) => {
         event?.stopPropagation();
         setValues(value ? values.filter((val) => val !== value) : []);
     };
 
-    const onItemSelectedHandler = (item) => {
+    const selectItem = (item: string) => () => {
         if (values.includes(item)) {
-            clearSelectedvalues(null, item);
+            clearSelected(undefined, item);
             return;
         }
         setValues([...values, item]);
@@ -35,7 +36,7 @@ const App = ({ theme }) => {
             isMultiple={true}
             placeholder={PLACEHOLDER}
             theme={theme}
-            onClear={clearSelectedvalues}
+            onClear={clearSelected}
         >
             <List isClickable={isOpen}>
                 {CHOICES.length > 0
@@ -43,7 +44,7 @@ const App = ({ theme }) => {
                           <ListItem
                               isSelected={values.includes(choice)}
                               key={index}
-                              onItemSelected={() => onItemSelectedHandler(choice)}
+                              onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >
                               {choice}

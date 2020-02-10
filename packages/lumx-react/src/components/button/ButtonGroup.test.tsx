@@ -65,10 +65,10 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${ButtonGroup.displayName}>`, (): void => {
+describe(`<${ButtonGroup.displayName}>`, () => {
     // 1. Test render via snapshot (default state of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly a group button', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly a group button', () => {
             const { group, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -82,22 +82,22 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
+    describe('Props', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        beforeEach((): void => {
+    describe('Conditions', () => {
+        beforeEach(() => {
             try {
                 // If `console.warn` has been mocked at least one, this exists. So disable TS here.
                 // @ts-ignore
@@ -107,21 +107,21 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
             }
         });
 
-        it('should fail when no child is given', (): void => {
-            expect((): void => {
+        it('should fail when no child is given', () => {
+            expect(() => {
                 setup({ children: null });
             }).toThrowErrorMatchingSnapshot();
         });
 
-        it('should fail when less than 2 children are given', (): void => {
+        it('should fail when less than 2 children are given', () => {
             const children: ReactNode = <Button>Label</Button>;
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
         });
 
-        it(`should fail when anything else than <${Button.displayName}>s or <${IconButton.displayName}> is passed as children`, (): void => {
+        it(`should fail when anything else than <${Button.displayName}>s or <${IconButton.displayName}> is passed as children`, () => {
             mockConsole('debug');
 
             let children: ReactNode = (
@@ -131,7 +131,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
 
@@ -144,7 +144,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
 
@@ -157,7 +157,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
 
@@ -170,7 +170,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
 
@@ -183,7 +183,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
 
@@ -196,7 +196,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
 
@@ -208,12 +208,12 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
         });
 
-        it('should fail when more than 2 children are given', (): void => {
+        it('should fail when more than 2 children are given', () => {
             const children: ReactNode = (
                 <>
                     <Button>Label</Button>
@@ -222,7 +222,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
                 </>
             );
 
-            expect((): void => {
+            expect(() => {
                 setup({ children });
             }).toThrowErrorMatchingSnapshot();
         });
@@ -231,7 +231,7 @@ describe(`<${ButtonGroup.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

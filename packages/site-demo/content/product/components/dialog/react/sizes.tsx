@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 
 import { Button, Dialog, Emphasis, Size, Toolbar } from '@lumx/react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [size, setSize] = useState();
 
     const [isOpen, setOpen] = useState(false);

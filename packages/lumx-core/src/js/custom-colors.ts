@@ -1,35 +1,64 @@
 import { CSS_PREFIX } from './constants';
 
+/* tslint:disable object-literal-sort-keys */
+
 /////////////////////////////
 //                         //
 //    Private functions    //
 //                         //
 /////////////////////////////
 
+interface IColorPalette {
+    primary: {
+        D2: string;
+        D1: string;
+        N: string;
+        L1: string;
+        L2: string;
+        L3: string;
+        L4: string;
+        L5: string;
+        L6: string;
+    };
+    secondary: {
+        D2: string;
+        D1: string;
+        N: string;
+        L1: string;
+        L2: string;
+        L3: string;
+        L4: string;
+        L5: string;
+        L6: string;
+    };
+}
+
+type Theme = 'lumapps' | 'material';
+
 /**
  * Add a css rule in a given sheet.
  *
- * @param {Element} sheet    The sheet to insert the new rules in.
- * @param {string}  selector The css rules selector.
- * @param {string}  rules    The css rules.
- * @param {number}  index    The css rule index.
+ * @param sheet    The sheet to insert the new rules in.
+ * @param selector The css rules selector.
+ * @param rules    The css rules.
+ * @param index    The css rule index.
  */
-function _addCSSRule(sheet, selector, rules, index) {
+function _addCSSRule(sheet: CSSStyleSheet, selector: string, rules: string, index: number) {
     if ('insertRule' in sheet) {
         sheet.insertRule(`${selector}{${rules}}`, index);
     } else if ('addRule' in sheet) {
-        sheet.addRule(selector, rules, index);
+        (sheet as any).addRule(selector, rules, index);
     }
 }
 
 /**
  * Get button css rules impacted by primary and secondary colors.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @param  {string} color        Whether to return primary or secondary variants.
- * @return {Array}  The button css rules.
+ * @param  colorPalette The custom color palette.
+ * @param  color        Whether to return primary or secondary variants.
+ * @return The button css rules.
  */
-function _getButtonCSSRules(colorPalette, color) {
+function _getButtonCSSRules(colorPalette: IColorPalette, color: keyof IColorPalette) {
     return [
         // Default state.
         {
@@ -95,10 +124,10 @@ function _getButtonCSSRules(colorPalette, color) {
 /**
  * Get selected button css rules impacted by primary color.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @return {Array}  The selected button css rules.
+ * @param  colorPalette The custom color palette.
+ * @return The selected button css rules.
  */
-function _getButtonSelectedCSSRules(colorPalette) {
+function _getButtonSelectedCSSRules(colorPalette: IColorPalette) {
     return [
         // Default state.
         {
@@ -134,11 +163,11 @@ function _getButtonSelectedCSSRules(colorPalette) {
 /**
  * Get checkbox css rules impacted by primary or secondary colors.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @param  {string} color        Whether to return primary or secondary variants.
- * @return {Array}  The checkbox css rules.
+ * @param  colorPalette The custom color palette.
+ * @param  color        Whether to return primary or secondary variants.
+ * @return The checkbox css rules.
  */
-function _getCheckboxCSSRules(colorPalette, color) {
+function _getCheckboxCSSRules(colorPalette: IColorPalette, color: keyof IColorPalette) {
     return [
         // Default state.
         {
@@ -186,10 +215,10 @@ function _getCheckboxCSSRules(colorPalette, color) {
 /**
  * Get chip css rules impacted by primary color.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @return {Array}  The chip css rules.
+ * @param  colorPalette The custom color palette.
+ * @return The chip css rules.
  */
-function _getChipCSSRules(colorPalette) {
+function _getChipCSSRules(colorPalette: IColorPalette) {
     return [
         // Default state.
         {
@@ -225,10 +254,10 @@ function _getChipCSSRules(colorPalette) {
 /**
  * Get list css rules impacted by primary color.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @return {Array}  The list css rules.
+ * @param  colorPalette The custom color palette.
+ * @return The list css rules.
  */
-function _getListCSSRules(colorPalette) {
+function _getListCSSRules(colorPalette: IColorPalette) {
     return [
         // Default state.
         {
@@ -258,10 +287,10 @@ function _getListCSSRules(colorPalette) {
 /**
  * Get progress css rules impacted by primary color.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @return {Array}  The progress css rules.
+ * @param  colorPalette The custom color palette.
+ * @return The progress css rules.
  */
-function _getProgressCSSRules(colorPalette) {
+function _getProgressCSSRules(colorPalette: IColorPalette) {
     return [
         {
             selector: `
@@ -284,11 +313,11 @@ function _getProgressCSSRules(colorPalette) {
 /**
  * Get radio button css rules impacted by primary or secondary colors.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @param  {string} color        Whether to return primary or secondary variants.
- * @return {Array}  The radio button css rules.
+ * @param  colorPalette The custom color palette.
+ * @param  color        Whether to return primary or secondary variants.
+ * @return The radio button css rules.
  */
-function _getRadioButtonCSSRules(colorPalette, color) {
+function _getRadioButtonCSSRules(colorPalette: IColorPalette, color: keyof IColorPalette) {
     return [
         // Default state.
         {
@@ -319,11 +348,11 @@ function _getRadioButtonCSSRules(colorPalette, color) {
 /**
  * Get select css rules impacted by primary color.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @param  {string} theme        The theme, lumapps or material.
- * @return {Array}  The select css rules.
+ * @param  colorPalette The custom color palette.
+ * @param  theme        The theme, lumapps or material.
+ * @return The select css rules.
  */
-function _getSelectCSSRules(colorPalette, theme) {
+function _getSelectCSSRules(colorPalette: IColorPalette, theme: Theme) {
     let selectRules;
 
     if (theme === 'lumapps') {
@@ -360,10 +389,10 @@ function _getSelectCSSRules(colorPalette, theme) {
 /**
  * Get side navigation css rules impacted by primary color.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @return {Array}  The side navigation css rules.
+ * @param  colorPalette The custom color palette.
+ * @return The side navigation css rules.
  */
-function _getSideNavigationCSSRules(colorPalette) {
+function _getSideNavigationCSSRules(colorPalette: IColorPalette) {
     return [
         // Default state.
         {
@@ -393,10 +422,10 @@ function _getSideNavigationCSSRules(colorPalette) {
 /**
  * Get slideshow controls css rules impacted by primary color.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @return {Array}  The slideshow controls css rules.
+ * @param  colorPalette The custom color palette.
+ * @return The slideshow controls css rules.
  */
-function _getSlideshowControlsCSSRules(colorPalette) {
+function _getSlideshowControlsCSSRules(colorPalette: IColorPalette) {
     return [
         {
             selector: `
@@ -411,11 +440,11 @@ function _getSlideshowControlsCSSRules(colorPalette) {
 /**
  * Get switch css rules impacted by primary or secondary colors.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @param  {string} theme        The theme, lumapps or material.
- * @return {Array}  The switch css rules.
+ * @param  colorPalette The custom color palette.
+ * @param  theme        The theme, lumapps or material.
+ * @return The switch css rules.
  */
-function _getSwitchCSSRules(colorPalette, theme) {
+function _getSwitchCSSRules(colorPalette: IColorPalette, theme: Theme) {
     let switchRules;
 
     if (theme === 'lumapps') {
@@ -513,11 +542,11 @@ function _getSwitchCSSRules(colorPalette, theme) {
 /**
  * Get tabs css rules impacted by primary or secondary colors.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @param  {string} theme        The theme, lumapps or material.
- * @return {Array}  The tabs css rules.
+ * @param  colorPalette The custom color palette.
+ * @param  theme        The theme, lumapps or material.
+ * @return The tabs css rules.
  */
-function _getTabsCSSRules(colorPalette, theme) {
+function _getTabsCSSRules(colorPalette: IColorPalette, theme: Theme) {
     const tabsRules = [
         {
             selector: `
@@ -543,11 +572,11 @@ function _getTabsCSSRules(colorPalette, theme) {
 /**
  * Get text field css rules impacted by primary color.
  *
- * @param  {Object} colorPalette The custom color palette.
- * @param  {string} theme        The theme, lumapps or material.
- * @return {Array}  The text field css rules.
+ * @param  colorPalette The custom color palette.
+ * @param  theme        The theme, lumapps or material.
+ * @return The text field css rules.
  */
-function _getTextFieldCSSRules(colorPalette, theme) {
+function _getTextFieldCSSRules(colorPalette: IColorPalette, theme: Theme) {
     let textFieldRules;
 
     if (theme === 'lumapps') {
@@ -588,19 +617,18 @@ function _getTextFieldCSSRules(colorPalette, theme) {
 /**
  * Set primary and secondary custom colors.
  *
- * @param {Element} sheet        The sheet to insert the custom rules in.
- * @param {string}  theme        The theme to apply the custom color palete on.
- * @param {Object}  colorPalette The custom color palette.
+ * @param sheet        The sheet to insert the custom rules in.
+ * @param theme        The theme to apply the custom color palette on.
+ * @param colorPalette The custom color palette.
  */
-function setCustomColors(sheet, theme, colorPalette) {
+function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: IColorPalette) {
     let index = 0;
 
-    let buttonRules = [];
-    buttonRules = buttonRules.concat(
-        _getButtonCSSRules(colorPalette, 'primary'),
-        _getButtonCSSRules(colorPalette, 'secondary'),
-        _getButtonSelectedCSSRules(colorPalette),
-    );
+    const buttonRules = [
+        ..._getButtonCSSRules(colorPalette, 'primary'),
+        ..._getButtonCSSRules(colorPalette, 'secondary'),
+        ..._getButtonSelectedCSSRules(colorPalette),
+    ];
 
     buttonRules.forEach((buttonRule) => {
         _addCSSRule(sheet, buttonRule.selector, buttonRule.rule, index);
@@ -614,7 +642,7 @@ function setCustomColors(sheet, theme, colorPalette) {
         checkboxRules = _getCheckboxCSSRules(colorPalette, 'secondary');
     }
 
-    checkboxRules.forEach((checkboxRule) => {
+    checkboxRules?.forEach((checkboxRule) => {
         _addCSSRule(sheet, checkboxRule.selector, checkboxRule.rule, index);
         index++;
     });
@@ -647,14 +675,14 @@ function setCustomColors(sheet, theme, colorPalette) {
         radioButtonRules = _getRadioButtonCSSRules(colorPalette, 'secondary');
     }
 
-    radioButtonRules.forEach((radioButtonRule) => {
+    radioButtonRules?.forEach((radioButtonRule) => {
         _addCSSRule(sheet, radioButtonRule.selector, radioButtonRule.rule, index);
         index++;
     });
 
     const selectRules = _getSelectCSSRules(colorPalette, theme);
 
-    selectRules.forEach((selectRule) => {
+    selectRules?.forEach((selectRule) => {
         _addCSSRule(sheet, selectRule.selector, selectRule.rule, index);
         index++;
     });
@@ -675,7 +703,7 @@ function setCustomColors(sheet, theme, colorPalette) {
 
     const switchRules = _getSwitchCSSRules(colorPalette, theme);
 
-    switchRules.forEach((switchRule) => {
+    switchRules?.forEach((switchRule) => {
         _addCSSRule(sheet, switchRule.selector, switchRule.rule, index);
         index++;
     });
@@ -689,7 +717,7 @@ function setCustomColors(sheet, theme, colorPalette) {
 
     const textFieldRules = _getTextFieldCSSRules(colorPalette, theme);
 
-    textFieldRules.forEach((textFieldRule) => {
+    textFieldRules?.forEach((textFieldRule) => {
         _addCSSRule(sheet, textFieldRule.selector, textFieldRule.rule, index);
         index++;
     });

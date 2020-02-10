@@ -62,12 +62,12 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${SideNavigationItem.displayName}>`, (): void => {
+describe(`<${SideNavigationItem.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
+    describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
 
-        it('should render correctly', (): void => {
+        it('should render correctly', () => {
             const { root, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -79,10 +79,10 @@ describe(`<${SideNavigationItem.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
+    describe('Props', () => {
         // Here are some examples of basic props check.
 
-        it('should use default props', (): void => {
+        it('should use default props', () => {
             const { root } = setup();
 
             for (const prop of Object.keys(DEFAULT_PROPS)) {
@@ -97,12 +97,12 @@ describe(`<${SideNavigationItem.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         const onClick: jest.Mock = jest.fn();
 
         beforeEach(onClick.mockClear);
 
-        it('should trigger `onClick`', (): void => {
+        it('should trigger `onClick`', () => {
             const { link } = setup({ onClick }, false);
             link.simulate('click');
             expect(onClick).toHaveBeenCalled();
@@ -112,12 +112,12 @@ describe(`<${SideNavigationItem.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Here is an example of children types check.
 
         const items = [<SideNavigationItem key="a" label="a" />, <SideNavigationItem key="b" label="b" />];
 
-        it('should hide chevron when no children are passed', (): void => {
+        it('should hide chevron when no children are passed', () => {
             const { chevron } = setup({
                 children: [],
             });
@@ -125,7 +125,7 @@ describe(`<${SideNavigationItem.displayName}>`, (): void => {
             expect(chevron).not.toExist();
         });
 
-        it('should show chevron when children are passed', (): void => {
+        it('should show chevron when children are passed', () => {
             const { chevron } = setup({
                 children: items,
             });
@@ -133,7 +133,7 @@ describe(`<${SideNavigationItem.displayName}>`, (): void => {
             expect(chevron).toExist();
         });
 
-        it('should hide children when children are passed and isOpen is false', (): void => {
+        it('should hide children when children are passed and isOpen is false', () => {
             const { children } = setup({
                 children: items,
                 isOpen: false,
@@ -142,7 +142,7 @@ describe(`<${SideNavigationItem.displayName}>`, (): void => {
             expect(children).not.toExist();
         });
 
-        it('should show children when children are passed and isOpen is true', (): void => {
+        it('should show children when children are passed and isOpen is true', () => {
             const { children } = setup({
                 children: items,
                 isOpen: true,
@@ -151,7 +151,7 @@ describe(`<${SideNavigationItem.displayName}>`, (): void => {
             expect(children).toExist();
         });
 
-        it('should show icon when provided', (): void => {
+        it('should show icon when provided', () => {
             const { icon } = setup({
                 icon: mdiAccount,
             });

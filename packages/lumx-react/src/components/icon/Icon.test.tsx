@@ -70,10 +70,10 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${Icon.displayName}>`, (): void => {
+describe(`<${Icon.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly', () => {
             const { i, path, svg, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -84,7 +84,7 @@ describe(`<${Icon.displayName}>`, (): void => {
             expect(path).toExist();
         });
 
-        it('should render color & color variant', (): void => {
+        it('should render color & color variant', () => {
             const { wrapper } = setup({ color: ColorPalette.primary, colorVariant: ColorVariant.D1 });
             expect(wrapper).toMatchSnapshot();
         });
@@ -93,18 +93,17 @@ describe(`<${Icon.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it("shouldn't use any default props", (): void => {
+    describe('Props', () => {
+        it("shouldn't use any default props", () => {
             const { i } = setup();
 
-            ['color', 'size'].forEach((prop: string): void => {
+            ['color', 'size'].forEach((prop: string) => {
                 expect(i).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: prop, value: '' }));
             });
         });
 
-        it('should use the given props', (): void => {
+        it('should use the given props', () => {
             const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
-                // tslint:disable-next-line: no-any
                 color: fake((fakeData: any) => fakeData.commerce.color()),
                 icon: oneOf(mdiPlus, mdiCheck),
                 size: oneOf(...Object.values(Size)),
@@ -114,7 +113,7 @@ describe(`<${Icon.displayName}>`, (): void => {
 
             const { i, path } = setup({ ...modifiedProps });
 
-            Object.keys(modifiedProps).forEach((prop: string): void => {
+            Object.keys(modifiedProps).forEach((prop: string) => {
                 if (prop === 'icon') {
                     expect(path).toHaveProp('d', modifiedProps[prop]);
                 } else {
@@ -129,15 +128,15 @@ describe(`<${Icon.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         // Nothing to do here.
     });
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
-        it('should fail when no `icon` is given', (): void => {
-            expect((): void => {
+    describe('Conditions', () => {
+        it('should fail when no `icon` is given', () => {
+            expect(() => {
                 // We know that icon must be given to <Icon>, but for the test, ignore it.
                 // @ts-ignore
                 setup({ icon: null });
@@ -148,7 +147,7 @@ describe(`<${Icon.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

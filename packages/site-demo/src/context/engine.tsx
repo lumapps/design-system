@@ -23,7 +23,7 @@ const EngineContext = React.createContext(DEFAULT);
  * @param children Children components.
  * @return The EngineProvider.
  */
-const EngineProvider = ({ children }) => {
+const EngineProvider: React.FC = ({ children }) => {
     const [engine, changeEngine] = useState(DEFAULT.engine);
     return <EngineContext.Provider value={{ engine, changeEngine }}>{children}</EngineContext.Provider>;
 };

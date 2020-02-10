@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
-import { Avatar, ButtonEmphasis, IconButton, Size, Theme } from '@lumx/react';
+import { Avatar, Emphasis, IconButton, Size } from '@lumx/react';
 
-const App = ({ theme }) => (
+const App = ({ theme }: any) => (
     <div className="demo-grid">
         <Avatar theme={theme} image="http://i.pravatar.cc/40" size={Size.xs} />
         <Avatar theme={theme} image="http://i.pravatar.cc/48" size={Size.s} />
@@ -18,7 +18,7 @@ const App = ({ theme }) => (
                     <div className="lumx-spacing-margin-right-regular">
                         <IconButton
                             color="dark"
-                            emphasis={ButtonEmphasis.low}
+                            emphasis={Emphasis.low}
                             hasBackground={true}
                             icon={mdiPencil}
                             size={Size.s}
@@ -28,7 +28,7 @@ const App = ({ theme }) => (
                     <div className="lumx-spacing-margin-right-regular">
                         <IconButton
                             color="dark"
-                            emphasis={ButtonEmphasis.low}
+                            emphasis={Emphasis.low}
                             hasBackground={true}
                             icon={mdiEye}
                             size={Size.s}
@@ -38,7 +38,7 @@ const App = ({ theme }) => (
                     <div>
                         <IconButton
                             color="dark"
-                            emphasis={ButtonEmphasis.low}
+                            emphasis={Emphasis.low}
                             hasBackground={true}
                             icon={mdiDelete}
                             size={Size.s}

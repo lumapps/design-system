@@ -12,24 +12,24 @@ import { Callback } from '../utils';
  * @param callback Function called by setInterval.
  * @param     delay    Delay for setInterval.
  */
-function useInterval(callback: Callback, delay: number | null): void {
-    const savedCallback: React.MutableRefObject<Callback | void> = useRef();
+function useInterval(callback: Callback, delay: number | null) {
+    const savedCallback = useRef<Callback>();
 
     useEffect(() => {
         savedCallback.current = callback;
     });
 
     useEffect((): Callback | void => {
-        function tick(): void {
+        function tick() {
             if (isFunction(savedCallback.current)) {
                 savedCallback.current();
             }
         }
 
         if (delay !== null) {
-            const id: NodeJS.Timeout = setInterval(tick, delay);
+            const id = setInterval(tick, delay);
 
-            return (): void => clearInterval(id);
+            return () => clearInterval(id);
         }
     }, [delay]);
 }

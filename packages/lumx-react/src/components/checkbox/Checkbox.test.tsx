@@ -60,10 +60,10 @@ const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true)
     };
 };
 
-describe(`<${Checkbox.displayName}>`, (): void => {
+describe(`<${Checkbox.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
-        it('should render correctly', (): void => {
+    describe('Snapshots and structure', () => {
+        it('should render correctly', () => {
             const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -77,8 +77,8 @@ describe(`<${Checkbox.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
-        it('should add a "disabled" and "checked" class names', (): void => {
+    describe('Props', () => {
+        it('should add a "disabled" and "checked" class names', () => {
             const { wrapper } = setup({
                 disabled: true,
                 value: true,
@@ -88,7 +88,7 @@ describe(`<${Checkbox.displayName}>`, (): void => {
             expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'checked', value: true }));
         });
 
-        it('should use the given props', (): void => {
+        it('should use the given props', () => {
             const { helper, label, wrapper } = setup({
                 helper: 'Test helper',
                 label: 'Test label',
@@ -103,14 +103,14 @@ describe(`<${Checkbox.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         const onChange: jest.Mock = jest.fn();
 
-        beforeEach((): void => {
+        beforeEach(() => {
             onChange.mockClear();
         });
 
-        it('should trigger `onChange` when checkbox is clicked', (): void => {
+        it('should trigger `onChange` when checkbox is clicked', () => {
             const { wrapper } = setup({ value: false, onChange }, false);
             const checkbox = wrapper.find('input');
 
@@ -122,14 +122,14 @@ describe(`<${Checkbox.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Nothing to do here.
     });
 
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

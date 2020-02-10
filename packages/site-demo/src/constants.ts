@@ -1,3 +1,4 @@
+/* tslint:disable object-literal-sort-keys */
 import { ColorPalette } from '@lumx/react';
 import { ReactNode } from 'react';
 
@@ -41,7 +42,7 @@ interface IColorVariantDetail {
     fontColor: string;
 }
 
-type IColorPaletteWithVariants = { [key in ColorPalette]: { [key in string]: IColorVariantDetail } };
+type IColorPaletteWithVariants = { [key in ColorPalette]: { [key2 in string]: IColorVariantDetail } };
 
 /**
  * The icons to use in the template.
@@ -303,11 +304,4 @@ const COLOR_VARIANTS = {
 
 /////////////////////////////
 
-export {
-    COLOR_VARIANTS,
-    IColorPaletteWithVariants,
-    IColorVariantDetail,
-    Categories,
-    Category,
-    DemoObject,
-};
+export { COLOR_VARIANTS, IColorPaletteWithVariants, IColorVariantDetail, Categories, Category, DemoObject };

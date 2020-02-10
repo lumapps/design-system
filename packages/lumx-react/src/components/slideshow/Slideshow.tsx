@@ -165,7 +165,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Handle click or keyboard event to go to next slide.
      */
-    const handleControlNextSlide = (): void => {
+    const handleControlNextSlide = () => {
         stopAutoPlay();
         goToNextSlide();
     };
@@ -173,7 +173,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Handle click or keyboard event to go to previous slide.
      */
-    const handleControlPreviousSlide = (): void => {
+    const handleControlPreviousSlide = () => {
         stopAutoPlay();
         goToPreviousSlide();
     };
@@ -196,14 +196,14 @@ const Slideshow: React.FC<SlideshowProps> = ({
         if (currentIndex === 0) {
             setCurrentIndex(() => slidesCount - 1);
         } else if (currentIndex > 0) {
-            setCurrentIndex((index: number): number => index - 1);
+            setCurrentIndex((index) => index - 1);
         }
     }, [currentIndex, slidesCount, setCurrentIndex]);
 
     /**
      * Stop slideshow auto rotating.
      */
-    const stopAutoPlay = (): void => {
+    const stopAutoPlay = () => {
         setIsAutoPlaying(false);
     };
 

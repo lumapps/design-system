@@ -89,7 +89,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     /**
      * Handle mouse over anchor element.
      */
-    const handleMouseEnter = (): void => {
+    const handleMouseEnter = () => {
         const id: number = setTimeout(() => {
             setIsOpen(true);
         }, delay);
@@ -100,7 +100,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     /**
      * Handle mouse out anchor element.
      */
-    const handleMouseLeave = (): void => {
+    const handleMouseLeave = () => {
         if (timer) {
             clearTimeout(timer);
             setTimer(0);
@@ -149,7 +149,7 @@ const Tooltip: React.FC<TooltipProps> = ({
             anchorRef.current.addEventListener('mouseleave', handleMouseLeave);
         }
 
-        return (): void => {
+        return () => {
             if (anchorRef && anchorRef.current) {
                 anchorRef.current.removeEventListener('mouseenter', handleMouseEnter);
                 anchorRef.current.removeEventListener('mouseleave', handleMouseLeave);

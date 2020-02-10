@@ -1,6 +1,6 @@
 import { Theme } from '@lumx/demo/context/theme';
 
-const getThemeId = (theme) => `theme-${theme}`;
+const getThemeId = (theme: string) => `theme-${theme}`;
 
 const getThemeElement = (theme: Theme) => document.getElementById(getThemeId(theme));
 

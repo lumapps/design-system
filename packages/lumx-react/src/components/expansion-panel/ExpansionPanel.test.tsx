@@ -57,12 +57,12 @@ const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolea
     };
 };
 
-describe(`<${ExpansionPanel.displayName}>`, (): void => {
+describe(`<${ExpansionPanel.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
-    describe('Snapshots and structure', (): void => {
+    describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
 
-        it('should render correctly', (): void => {
+        it('should render correctly', () => {
             const { root, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
@@ -74,10 +74,10 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
     /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', (): void => {
+    describe('Props', () => {
         // Here are some examples of basic props check.
 
-        it('should use default props', (): void => {
+        it('should use default props', () => {
             const { root } = setup();
 
             for (const prop of Object.keys(DEFAULT_PROPS)) {
@@ -87,7 +87,7 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
             }
         });
 
-        it('should ignore incorrect theme', (): void => {
+        it('should ignore incorrect theme', () => {
             const { root } = setup({ theme: 'not_a_valid_theme' as Theme });
 
             // Correct classes are applied
@@ -100,7 +100,7 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
     /////////////////////////////
 
     // 3. Test events.
-    describe('Events', (): void => {
+    describe('Events', () => {
         const openCallback: jest.Mock = jest.fn();
         const closeCallback: jest.Mock = jest.fn();
         const toggleCallback: jest.Mock = jest.fn();
@@ -109,19 +109,19 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
         beforeEach(closeCallback.mockClear);
         beforeEach(toggleCallback.mockClear);
 
-        it('should trigger `openCallback`', (): void => {
+        it('should trigger `openCallback`', () => {
             const { header } = setup({ openCallback }, false);
             header.simulate('click');
             expect(openCallback).toHaveBeenCalled();
         });
 
-        it('should trigger `closeCallback`', (): void => {
+        it('should trigger `closeCallback`', () => {
             const { header } = setup({ isOpen: true, closeCallback }, false);
             header.simulate('click');
             expect(closeCallback).toHaveBeenCalled();
         });
 
-        it('should trigger `toggleCallback`', (): void => {
+        it('should trigger `toggleCallback`', () => {
             const { header } = setup({ toggleCallback }, false);
             header.simulate('click');
             header.simulate('click');
@@ -131,29 +131,29 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
     /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', (): void => {
+    describe('Conditions', () => {
         // Here is an example of children types check.
 
-        it('should hide content when `isOpen` == false', (): void => {
+        it('should hide content when `isOpen` == false', () => {
             const { content } = setup({ isOpen: false });
 
             expect(content.exists()).toBe(false);
         });
 
-        it('should show content when `isOpen` == true', (): void => {
+        it('should show content when `isOpen` == true', () => {
             const { content } = setup({ isOpen: true });
 
             expect(content.exists()).toBe(true);
         });
 
-        it('should show label', (): void => {
+        it('should show label', () => {
             const labelText = 'Label text';
             const { header } = setup({ label: labelText });
 
             expect(header.text()).toContain(labelText);
         });
 
-        it('should show header instead of label', (): void => {
+        it('should show header instead of label', () => {
             const labelText = 'Label text';
             const headerText = 'Header text';
             const { header } = setup({ label: labelText, children: [<header>{headerText}</header>] });
@@ -165,7 +165,7 @@ describe(`<${ExpansionPanel.displayName}>`, (): void => {
     /////////////////////////////
 
     // 5. Test state.
-    describe('State', (): void => {
+    describe('State', () => {
         // Nothing to do here.
     });
 

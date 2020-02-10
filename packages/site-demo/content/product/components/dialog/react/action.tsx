@@ -1,7 +1,7 @@
 import { Button, Dialog, Emphasis, Toolbar } from '@lumx/react';
 import React, { useCallback, useRef, useState } from 'react';
 
-const App = ({ theme }) => {
+const App = ({ theme }: any) => {
     const [people, setPeople] = useState([
         { age: 10, email: 'adam@email.com', name: 'Adam' },
         { age: 12, email: 'amalie@email.com', name: 'Amalie' },

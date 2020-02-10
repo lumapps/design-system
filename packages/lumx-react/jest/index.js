@@ -36,7 +36,6 @@ module.exports = {
         require.resolve('jest-chain'),
         require.resolve('expect-more-jest'),
         require.resolve('jest-enzyme'),
-        // 'jest-mock-console/dist/setupTestFramework.js',.
         '<rootDir>jest/configure.js',
     ],
     snapshotSerializers: ['enzyme-to-json/serializer'],
@@ -45,7 +44,7 @@ module.exports = {
         enzymeAdapter: 'react16',
     },
     transform: {
-        '\\.(t|j)sx?$': 'ts-jest',
+        '\\.(t|j)sx?$': '<rootDir>jest/transform.js',
     },
     watchPlugins: [
         'jest-watch-master',
