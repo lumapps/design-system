@@ -17,7 +17,7 @@ import { ESCAPE_KEY_CODE } from './constants';
  * Enhance isEmpty method to also works with numbers.
  *
  * @param  value The value to check.
- * @return Whether if the input value is empty or != 0.
+ * @return Whether the input value is empty or != 0.
  */
 // tslint:disable-next-line:variable-name
 const _isEmpty = (value: any) => {
