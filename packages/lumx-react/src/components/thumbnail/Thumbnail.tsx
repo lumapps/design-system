@@ -161,6 +161,8 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...props}
         >
             {aspectRatio === AspectRatio.original ? (
+                <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
+            ) : (
                 <img
                     ref={(f): FocusedImage | undefined => {
                         return f
@@ -171,7 +173,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                               })
                             : undefined;
                     }}
-                    className="focused-image lumx-thumbnail__image"
+                    className="focused-image lumx-thumbnail__background"
                     crossOrigin="anonymous"
                     src={image}
                     alt={alt}
@@ -179,8 +181,6 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                     data-focus-x="0"
                     data-focus-y="0"
                 />
-            ) : (
-                <div className="lumx-thumbnail__background" style={style} />
             )}
         </div>
     );
