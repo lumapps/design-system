@@ -35,9 +35,9 @@ const filename = '[name].[hash:8]';
 const minimizer = [];
 
 const plugins = [
+    CONFIGS.ignoreNotFoundExport,
     new WebpackBar(),
     new FriendlyErrorsWebpackPlugin(),
-    CONFIGS.ignoreNotFoundExport,
 
     new MiniCssExtractPlugin({
         filename: `${filename}.css`,

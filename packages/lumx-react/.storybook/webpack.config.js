@@ -1,4 +1,5 @@
 const baseWebpackConfig = require('../webpack.config');
+const CONFIGS = require('../../../configs');
 
 module.exports = async ({ config, mode }) => {
     /** SCSS Loader */
@@ -11,9 +12,10 @@ module.exports = async ({ config, mode }) => {
         ],
     });
 
+    config.plugins = [CONFIGS.ignoreNotFoundExport, ...config.plugins];
     config.module.rules = [...config.module.rules, ...baseWebpackConfig.module.rules];
     config.resolve.extensions = [...config.resolve.extensions, ...baseWebpackConfig.resolve.extensions];
-    config.resolve.alias = { ...config.resolve.alias, ...baseWebpackConfig.resolve.alias };
+    config.resolve.plugins = baseWebpackConfig.resolve.plugins;
 
     return config;
 };

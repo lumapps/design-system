@@ -35,9 +35,9 @@ const minimizer = [
 ];
 
 const plugins = [
+    CONFIGS.ignoreNotFoundExport,
     /* Clean output. */
     new CleanWebpackPlugin(),
-    CONFIGS.ignoreNotFoundExport,
 
     new WebpackBar(),
     new FriendlyErrorsWebpackPlugin(),
@@ -109,7 +109,7 @@ module.exports = {
     module: {
         rules: [
             {
-                exclude: [/node_modules/u, /\.(test|spec|stories)\.[t|j]sx?/u],
+                exclude: [/node_modules/u, /\.(test|spec)\.[t|j]sx?/u],
                 test: /\.[j|t]sx?$/u,
                 use: {
                     loader: 'babel-loader',
