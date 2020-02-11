@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -23,11 +23,6 @@ declare module 'react' {
     }
 }
 
-interface ThumbnailFocalPoint {
-    x: number;
-    y: number;
-}
-
 /**
  * All available aspect ratios.
  * @deprecated
@@ -38,6 +33,14 @@ const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
  *  Authorized size values.
  */
 type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+
+/**
+ *  Focal point coordinates (from -1 to 1).
+ */
+interface IThumbnailFocalPoint {
+    x: number;
+    y: number;
+}
 
 /**
  * Authorized variants.
@@ -80,7 +83,7 @@ interface IThumbnailProps extends IGenericProps {
     variant?: ThumbnailVariant;
 
     /** Focal Point coordinates. */
-    focus?: ThumbnailFocalPoint;
+    focus?: IThumbnailFocalPoint;
 }
 type ThumbnailProps = IThumbnailProps;
 
@@ -142,10 +145,6 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     focus = DEFAULT_PROPS.focus,
     ...props
 }: ThumbnailProps): ReactElement => {
-    const style: CSSProperties = {
-        backgroundImage: `url(${image})`,
-    };
-
     return (
         <div
             className={classNames(
@@ -163,24 +162,26 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {aspectRatio === AspectRatio.original ? (
                 <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
             ) : (
-                <img
-                    ref={(f): FocusedImage | undefined => {
-                        return f
-                            ? new FocusedImage(f as ILumHTMLImageElement, {
-                                  debounceTime: 17,
-                                  focus,
-                                  updateOnWindowResize: true,
-                              })
-                            : undefined;
-                    }}
-                    className="focused-image lumx-thumbnail__background"
-                    crossOrigin="anonymous"
-                    src={image}
-                    alt={alt}
-                    loading={loading}
-                    data-focus-x="0"
-                    data-focus-y="0"
-                />
+                <div className="lumx-thumbnail__background">
+                    <img
+                        ref={(f): FocusedImage | undefined => {
+                            return f
+                                ? new FocusedImage(f as ILumHTMLImageElement, {
+                                      debounceTime: 17,
+                                      focus,
+                                      updateOnWindowResize: true,
+                                  })
+                                : undefined;
+                        }}
+                        className="focused-image"
+                        crossOrigin="anonymous"
+                        src={image}
+                        alt={alt}
+                        loading={loading}
+                        data-focus-x="0"
+                        data-focus-y="0"
+                    />
+                </div>
             )}
         </div>
     );
