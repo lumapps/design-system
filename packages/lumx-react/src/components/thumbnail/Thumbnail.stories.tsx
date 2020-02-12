@@ -1,5 +1,5 @@
 import { Alignment, AspectRatio, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
-import { boolean, number, select } from '@storybook/addon-knobs';
+import { boolean, number, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
 export default { title: 'Thumbnail' };
@@ -24,7 +24,7 @@ export const defaultThumbnail = ({ theme }) => (
             x: number('focusX', 0, numberKnobOtions, 'Options'),
             y: number('focusY', 0, numberKnobOtions, 'Options'),
         }}
-        image="https://i.picsum.photos/id/1001/2400/1400.jpg"
+        image={text('Url image', 'https://i.picsum.photos/id/1001/2400/1400.jpg', 'Options')}
         size={select(
             'Size',
             {
