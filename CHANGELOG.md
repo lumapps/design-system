@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.6][] - 2020-02-13
+
 ### Added
 
 -   Added `isRequired` prop to `InputLabel`, `TextField` and `Select` components
@@ -323,3 +325,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.4]: https://github.com/lumapps/design-system/tree/v0.21.4
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.5...HEAD
 [0.21.5]: https://github.com/lumapps/design-system/tree/v0.21.5
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.6...HEAD
+[0.21.6]: https://github.com/lumapps/design-system/tree/v0.21.6
