@@ -44,6 +44,10 @@ function InputLabelController() {
         const theme = lx.theme ? lx.theme : _DEFAULT_PROPS.theme;
         classes.push(`${CSS_PREFIX}-input-label--theme-${theme}`);
 
+        if (lx.isMandatory) {
+            classes.push(`${CSS_PREFIX}-input-label--is-mandatory`);
+        }
+
         return classes;
     }
 
@@ -64,6 +68,7 @@ function InputLabelDirective() {
         replace: true,
         restrict: 'E',
         scope: {
+            isMandatory: '=?lxIsMandatory',
             theme: '@?lxTheme',
         },
         template,
