@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-input-label {
-    &--is-mandatory:after {
+    &--is-required:after {
         content: '*';
         font-weight: 700;
     }
