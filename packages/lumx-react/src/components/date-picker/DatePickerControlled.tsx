@@ -106,10 +106,8 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                                                 : null
                                         }
                                         className={classNames(`${CLASSNAME}__month-day`, {
-                                            [`${CLASSNAME}__month-day--is-selected`]: annotatedDate.date.isSame(
-                                                value,
-                                                'day',
-                                            ),
+                                            [`${CLASSNAME}__month-day--is-selected`]:
+                                                value && annotatedDate.date.isSame(value, 'day'),
                                             [`${CLASSNAME}__month-day--is-today`]:
                                                 annotatedDate.isClickable && annotatedDate.isToday,
                                         })}
