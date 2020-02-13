@@ -117,6 +117,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     align: Alignment.left,
     aspectRatio: AspectRatio.original,
     fillHeight: false,
+    focus: { x: 0, y: 0 },
     loading: ImageLoading.lazy,
     size: undefined,
     theme: Theme.light,

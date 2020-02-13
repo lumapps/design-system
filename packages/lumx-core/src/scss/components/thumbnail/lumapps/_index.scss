@@ -121,3 +121,7 @@
         @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
     }
 }
+
+img.focused-image {
+    max-width: none;
+}
