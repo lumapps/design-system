@@ -1,19 +1,18 @@
 // Credits: https://github.com/third774/image-focus/
 import debounce from 'lodash/debounce';
-import { IFocus } from './IFocus';
-import { IFocusedImageOptions } from './IFocusedImageOptions';
+import { IFocusPoint, IFocusedImageOptions } from './IFocusedImageOptions';
 
 const CONTAINER_STYLES = {
-    position: 'relative',
     overflow: 'hidden',
+    position: 'relative',
 };
 
 const ABSOLUTE_STYLES = {
-    position: 'absolute',
-    top: '0',
-    right: '0',
     bottom: '0',
     left: '0',
+    position: 'absolute',
+    right: '0',
+    top: '0',
 };
 
 const IMG_STYLES = {
@@ -37,6 +36,7 @@ const RESIZE_LISTENER_OBJECT_STYLES = {
 };
 
 const DEFAULT_OPTIONS: IFocusedImageOptions = {
+    focus: { x: 0, y: 0 },
     containerPosition: 'relative',
     debounceTime: 17,
     updateOnContainerResize: false,
@@ -48,7 +48,7 @@ export interface ILumHTMLImageElement extends HTMLImageElement {
 }
 
 export class FocusedImage {
-    public focus: IFocus;
+    public focus: IFocusPoint;
     public options: IFocusedImageOptions;
     public container: HTMLElement;
     public img: ILumHTMLImageElement;
@@ -56,9 +56,9 @@ export class FocusedImage {
     public listening: boolean = false;
     public debounceApplyShift: () => void;
 
-    constructor(private readonly imageNode: ILumHTMLImageElement, options: IFocusedImageOptions = {}) {
+    constructor(private readonly imageNode: ILumHTMLImageElement, options = DEFAULT_OPTIONS) {
         // Merge in options
-        this.options = { ...DEFAULT_OPTIONS, ...options };
+        this.options = options;
 
         // Set up element references
         this.img = imageNode;
@@ -83,12 +83,7 @@ export class FocusedImage {
         this.debounceApplyShift = debounce(this.applyShift, this.options.debounceTime);
 
         // Initialize focus
-        this.focus = this.options.focus
-            ? this.options.focus
-            : {
-                  x: parseFloat(this.img.getAttribute('data-focus-x')!) || 0,
-                  y: parseFloat(this.img.getAttribute('data-focus-y')!) || 0,
-              };
+        this.focus = this.options.focus;
 
         // Start listening for resize events
         this.startListening();
@@ -97,7 +92,7 @@ export class FocusedImage {
         this.setFocus(this.focus);
     }
 
-    public setFocus = (focus: IFocus) => {
+    public setFocus = (focus: IFocusPoint) => {
         this.focus = focus;
         this.img.setAttribute('data-focus-x', focus.x.toString());
         this.img.setAttribute('data-focus-y', focus.y.toString());

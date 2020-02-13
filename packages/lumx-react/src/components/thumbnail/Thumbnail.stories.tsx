@@ -20,7 +20,7 @@ export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
         <Thumbnail
             align={select<Alignment>('Alignment', Alignment, Alignment.left, 'Options')}
             aspectRatio={select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Options')}
-            focus={{
+            focusPoint={{
                 x: number('focusX', 0, numberKnobOtions, 'Options'),
                 y: number('focusY', 0, numberKnobOtions, 'Options'),
             }}

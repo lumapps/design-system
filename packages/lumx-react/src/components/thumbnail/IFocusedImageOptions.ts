@@ -1,4 +1,10 @@
-import { IFocus } from './IFocus';
+/**
+ *  Focal point coordinates (from -1 to 1).
+ */
+export interface IFocusPoint {
+    x: number;
+    y: number;
+}
 
 // Credits: https://github.com/third774/image-focus/
 export interface IFocusedImageOptions {
@@ -25,7 +31,7 @@ export interface IFocusedImageOptions {
      *
      * Default value is `undefined`
      */
-    focus?: IFocus;
+    focus: IFocusPoint;
     /**
      * Container position
      *

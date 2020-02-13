@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,7 +9,9 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import isFunction from 'lodash/isFunction';
 
 import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
-import { FocusedImage, ILumHTMLImageElement } from './FocusedImage';
+
+import { IFocusPoint } from './IFocusedImageOptions';
+import useFocusedImage from './useFocusedImage';
 
 /**
  * Loading attribute is not yet supported in typescript, so we need
@@ -33,14 +35,6 @@ const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
  *  Authorized size values.
  */
 type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
-
-/**
- *  Focal point coordinates (from -1 to 1).
- */
-interface IThumbnailFocalPoint {
-    x: number;
-    y: number;
-}
 
 /**
  * Authorized variants.
@@ -83,7 +77,7 @@ interface IThumbnailProps extends IGenericProps {
     variant?: ThumbnailVariant;
 
     /** Focal Point coordinates. */
-    focus?: IThumbnailFocalPoint;
+    focusPoint?: IFocusPoint;
 }
 type ThumbnailProps = IThumbnailProps;
 
@@ -117,7 +111,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     align: Alignment.left,
     aspectRatio: AspectRatio.original,
     fillHeight: false,
-    focus: { x: 0, y: 0 },
+    focusPoint: { x: 0, y: 0 },
     loading: ImageLoading.lazy,
     size: undefined,
     theme: Theme.light,
@@ -143,9 +137,11 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     image,
     alt = 'Thumbnail',
     onClick = null,
-    focus = DEFAULT_PROPS.focus,
+    focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
 }: ThumbnailProps): ReactElement => {
+    const focusImageRef = useFocusedImage(focusPoint!);
+
     return (
         <div
             className={classNames(
@@ -165,22 +161,12 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             ) : (
                 <div className="lumx-thumbnail__background">
                     <img
-                        ref={(f): FocusedImage | undefined => {
-                            return f
-                                ? new FocusedImage(f as ILumHTMLImageElement, {
-                                      debounceTime: 17,
-                                      focus,
-                                      updateOnWindowResize: true,
-                                  })
-                                : undefined;
-                        }}
+                        ref={focusImageRef}
                         className="focused-image"
                         crossOrigin="anonymous"
                         src={image}
                         alt={alt}
                         loading={loading}
-                        data-focus-x="0"
-                        data-focus-y="0"
                     />
                 </div>
             )}
