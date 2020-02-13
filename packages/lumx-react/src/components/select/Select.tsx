@@ -58,6 +58,11 @@ interface ISelectProps extends IGenericProps {
     isDisabled?: boolean;
 
     /**
+     * Whether the select is required or not.
+     */
+    isRequired?: boolean;
+
+    /**
      * Whether the select is opened or not.
      */
     isOpen?: boolean;
@@ -230,6 +235,7 @@ const Select: React.FC<SelectProps> = ({
     value = [],
     helper,
     isDisabled,
+    isRequired,
     isOpen = DEFAULT_PROPS.isOpen,
     onInputClick,
     onDropdownClose,
@@ -271,7 +277,12 @@ const Select: React.FC<SelectProps> = ({
                     <>
                         {label && (
                             <div className={`${CLASSNAME}__header`}>
-                                <InputLabel htmlFor={targetUuid} className={`${CLASSNAME}__label`}>
+                                <InputLabel
+                                    htmlFor={targetUuid}
+                                    className={`${CLASSNAME}__label`}
+                                    isRequired={isRequired}
+                                    theme={theme}
+                                >
                                     {label}
                                 </InputLabel>
                             </div>

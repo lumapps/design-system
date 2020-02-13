@@ -42,6 +42,9 @@ interface ITextFieldProps extends IGenericProps {
     /** Whether the text field is disabled or not. */
     isDisabled?: boolean;
 
+    /** Whether the text field is required or not. */
+    isRequired?: boolean;
+
     /** Whether the text field is displayed with valid style or not. */
     isValid?: boolean;
 
@@ -117,6 +120,7 @@ const DEFAULT_PROPS: Partial<TextFieldProps> = {
     hasError: false,
     isClearable: false,
     isDisabled: false,
+    isRequired: false,
     isValid: false,
     minimumRows: MIN_ROWS,
     multiline: false,
@@ -173,6 +177,7 @@ interface IInputNativeProps {
     id?: string;
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     isDisabled?: boolean;
+    isRequired?: boolean;
     multiline?: boolean;
     maxLength?: number;
     placeholder?: string;
@@ -189,6 +194,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
     const {
         id,
         isDisabled,
+        isRequired,
         placeholder,
         multiline,
         value,
@@ -230,6 +236,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         <textarea
             id={id}
             disabled={isDisabled}
+            required={isRequired}
             placeholder={placeholder}
             value={value}
             rows={rows}
@@ -243,6 +250,7 @@ const renderInputNative = (props: IInputNativeProps): ReactElement => {
         <input
             id={id}
             disabled={isDisabled}
+            required={isRequired}
             type="text"
             placeholder={placeholder}
             value={value}
@@ -272,6 +280,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         icon,
         id = uuid(),
         isDisabled,
+        isRequired,
         isClearable = DEFAULT_PROPS.isClearable,
         isValid,
         label,
@@ -335,7 +344,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
         >
             {label && (
                 <div className={`${CLASSNAME}__header`}>
-                    <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} theme={theme}>
+                    <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} isRequired={isRequired} theme={theme}>
                         {label}
                     </InputLabel>
 
@@ -366,6 +375,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                             id,
                             inputRef,
                             isDisabled,
+                            isRequired,
                             maxLength,
                             multiline,
                             onBlur,
