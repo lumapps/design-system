@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-
 import { Placement, Popover, TextField, TextFieldProps, Theme } from '@lumx/react';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { onEscapePressed } from '@lumx/react/utils';
+
+import moment from 'moment';
+
+import React, { useEffect, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker, DatePickerProps } from './DatePicker';
@@ -125,10 +127,15 @@ const DatePickerField = ({
     const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
     useFocusTrap(todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
 
-    const onChange = (textFieldValue: string) => {
+    const onTextFieldChange = (textFieldValue: string) => {
         if (!textFieldValue) {
             props.onChange(undefined);
         }
+    };
+
+    const onDatePickerChange = (newDate: moment.Moment | undefined) => {
+        props.onChange(newDate);
+        closeSimpleMenu();
     };
 
     return (
@@ -141,7 +148,7 @@ const DatePickerField = ({
                 placeholder={placeholder}
                 value={value ? value.format('LL') : ''}
                 onClick={toggleSimpleMenu}
-                onChange={onChange}
+                onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
                 theme={theme}
                 readOnly
@@ -160,7 +167,12 @@ const DatePickerField = ({
                             minWidth: 0,
                         }}
                     >
-                        <DatePicker value={value} todayOrSelectedDateRef={todayOrSelectedDateRef} {...props} />
+                        <DatePicker
+                            {...props}
+                            value={value}
+                            onChange={onDatePickerChange}
+                            todayOrSelectedDateRef={todayOrSelectedDateRef}
+                        />
                     </div>
                 </Popover>
             ) : null}
