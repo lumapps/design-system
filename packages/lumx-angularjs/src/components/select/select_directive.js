@@ -708,6 +708,7 @@ function SelectDirective() {
             isDisabled: '=?ngDisabled',
             isInfiniteScrollLoading: '=?lxInfiniteScrollLoading',
             isLoading: '=?lxLoading',
+            isRequired: '=?lxIsRequired',
             isValid: '=?lxIsValid',
             label: '@?lxLabel',
             max: '=?lxMax',

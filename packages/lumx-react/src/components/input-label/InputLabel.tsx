@@ -10,6 +10,7 @@ import React, { ReactElement, ReactNode } from 'react';
  * Defines the props of the component.
  */
 interface IInputLabelProps extends IGenericProps {
+    isRequired?: boolean;
     theme?: Theme;
     children: string | ReactNode;
 }
@@ -30,16 +31,18 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    isRequired: false,
     theme: Theme.light,
 };
 
 const InputLabel: React.FC<IInputLabelProps> = ({
     className = '',
+    isRequired = DEFAULT_PROPS.isRequired,
     theme = DEFAULT_PROPS.theme,
     children,
     ...props
 }: IInputLabelProps): ReactElement => (
-    <label className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props}>
+    <label className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))} {...props}>
         {children}
     </label>
 );

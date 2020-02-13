@@ -3,8 +3,17 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-input-label {
+    &--is-required:before {
+        content: '*';
+        font-weight: 700;
+    }
+
     &--theme-light {
         @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
+
+        &:before {
+            color: lumx-theme-color-variant('red', 'N');
+        }
     }
 
     &--theme-dark {

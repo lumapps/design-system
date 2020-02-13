@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `isRequired` prop to `InputLabel`, `TextField` and `Select` components
+-   Added `lx-is-required` prop to `lx-input-label`, `lx-text-field` and `lx-select` components
+
 ## [0.21.5][] - 2020-02-10
 
 ### Added

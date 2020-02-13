@@ -263,6 +263,15 @@ function TextFieldDirective($timeout) {
                     ctrl.maxlength = maxlength;
                 },
             );
+
+            scope.$watch(
+                () => {
+                    return input.attr('required');
+                },
+                (isRequired) => {
+                    ctrl.isRequired = isRequired;
+                },
+            );
         });
 
         attrs.$observe('disabled', (isDisabled) => {

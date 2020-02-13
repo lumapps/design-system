@@ -1,6 +1,11 @@
 <div class="lumx-text-field" ng-class="lx.getClasses()">
     <div class="lumx-text-field__header" ng-if="::lx.label">
-        <lx-input-label for="{{ lx.inputId }}" class="lumx-text-field__label" lx-theme="{{ lx.theme }}">
+        <lx-input-label
+            for="{{ lx.inputId }}"
+            class="lumx-text-field__label"
+            lx-is-required="lx.isRequired"
+            lx-theme="{{ lx.theme }}"
+        >
             {{ lx.label }}
         </lx-input-label>
 
