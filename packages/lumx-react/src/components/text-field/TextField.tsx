@@ -340,7 +340,6 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
-            ref={textFieldRef}
         >
             {label && (
                 <div className={`${CLASSNAME}__header`}>
@@ -357,7 +356,7 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
                 </div>
             )}
 
-            <div className={`${CLASSNAME}__wrapper`}>
+            <div className={`${CLASSNAME}__wrapper`} ref={textFieldRef}>
                 {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
 
                 {icon && (

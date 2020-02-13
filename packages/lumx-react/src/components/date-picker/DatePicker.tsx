@@ -70,7 +70,7 @@ const DEFAULT_PROPS: Partial<DatePickerProps> = {
  * @return The component.
  */
 const DatePicker = (props: DatePickerProps) => {
-    const today = moment();
+    const today = props.value || moment();
     const [monthOffset, setMonthOffset] = useState(0);
 
     const setPrevMonth = () => setMonthOffset(monthOffset - 1);

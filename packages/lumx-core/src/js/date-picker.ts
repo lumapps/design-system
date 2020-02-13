@@ -98,7 +98,7 @@ function getAnnotatedMonthCalendar(
             date,
             isClickable: clickableRange.contains(date),
             isDisplayed: date.month() === month,
-            isToday: date.isSame(moment(today), 'day'),
+            isToday: date.isSame(moment(), 'day'),
         };
     });
 }

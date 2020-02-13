@@ -1,14 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-import { Placement, Popover, TextField, TextFieldProps, Theme } from '@lumx/react';
+import { Placement, Popover, TextField } from '@lumx/react';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { onEscapePressed } from '@lumx/react/utils';
 
+import moment from 'moment';
+
+import React, { useEffect, useRef, useState } from 'react';
+
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
-import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker, DatePickerProps } from './DatePicker';
+import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker } from './DatePicker';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
+import { IGenericProps } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -16,19 +19,23 @@ import { useFocus } from '@lumx/react/hooks/useFocus';
  * Defines the props of the component.
  */
 
-type DatePickerFieldProps = DatePickerProps & {
-    /** Whether the text field is clearable. */
-    isClearable?: TextFieldProps['isClearable'];
+interface IDatePickerFieldProps extends IGenericProps {
+    /** Locale. */
+    locale: string;
 
-    /** Input label. */
-    label?: TextFieldProps['label'];
+    /** Max date. */
+    maxDate?: Date;
 
-    /** Text field placeholder message. */
-    placeholder?: string;
+    /** Min date. */
+    minDate?: Date;
 
-    /** Theme. */
-    theme?: Theme;
-};
+    /** Value. */
+    value: moment.Moment | undefined;
+
+    /** On change. */
+    onChange(value: moment.Moment | undefined): void;
+}
+type DatePickerFieldProps = IDatePickerFieldProps;
 
 /////////////////////////////
 
@@ -43,13 +50,6 @@ type DatePickerFieldProps = DatePickerProps & {
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
 
-/**
- * The default value of props.
- */
-const DEFAULT_PROPS: Partial<DatePickerFieldProps> = {
-    isClearable: true,
-};
-
 /////////////////////////////
 
 /**
@@ -57,14 +57,7 @@ const DEFAULT_PROPS: Partial<DatePickerFieldProps> = {
  *
  * @return The component.
  */
-const DatePickerField = ({
-    isClearable = DEFAULT_PROPS.isClearable,
-    label,
-    placeholder,
-    theme,
-    value,
-    ...props
-}: DatePickerFieldProps) => {
+const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFieldProps }: DatePickerFieldProps) => {
     const wrapperRef = useRef(null);
     const popoverRef = useRef(null);
     const anchorRef = useRef(null);
@@ -125,26 +118,28 @@ const DatePickerField = ({
     const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
     useFocusTrap(todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
 
-    const onChange = (textFieldValue: string) => {
+    const onTextFieldChange = (textFieldValue: string) => {
         if (!textFieldValue) {
-            props.onChange(undefined);
+            onChange(undefined);
         }
+    };
+
+    const onDatePickerChange = (newDate: moment.Moment | undefined) => {
+        onChange(newDate);
+        closeSimpleMenu();
     };
 
     return (
         <>
             <TextField
-                isClearable={isClearable}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                label={label}
-                placeholder={placeholder}
                 value={value ? value.format('LL') : ''}
                 onClick={toggleSimpleMenu}
-                onChange={onChange}
+                onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
-                theme={theme}
                 readOnly
+                {...textFieldProps}
             />
             {isOpen ? (
                 <Popover
@@ -160,7 +155,14 @@ const DatePickerField = ({
                             minWidth: 0,
                         }}
                     >
-                        <DatePicker value={value} todayOrSelectedDateRef={todayOrSelectedDateRef} {...props} />
+                        <DatePicker
+                            locale={locale}
+                            maxDate={maxDate}
+                            minDate={minDate}
+                            value={value}
+                            onChange={onDatePickerChange}
+                            todayOrSelectedDateRef={todayOrSelectedDateRef}
+                        />
                     </div>
                 </Popover>
             ) : null}
@@ -171,4 +173,4 @@ DatePickerField.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, DatePickerField, DatePickerFieldProps };
+export { CLASSNAME, COMPONENT_NAME, DatePickerField, DatePickerFieldProps };
