@@ -396,6 +396,10 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
             classes.push(`${CSS_PREFIX}-select--has-input-clear`);
         }
 
+        if (lx.isMandatory) {
+            classes.push(`${CSS_PREFIX}-select--is-mandatory`);
+        }
+
         if (lx.label) {
             classes.push(`${CSS_PREFIX}-select--has-label`);
         }
@@ -708,6 +712,7 @@ function SelectDirective() {
             isDisabled: '=?ngDisabled',
             isInfiniteScrollLoading: '=?lxInfiniteScrollLoading',
             isLoading: '=?lxLoading',
+            isMandatory: '=?lxIsMandatory',
             isValid: '=?lxIsValid',
             label: '@?lxLabel',
             max: '=?lxMax',

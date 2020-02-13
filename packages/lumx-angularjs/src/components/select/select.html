@@ -1,6 +1,8 @@
 <div class="lumx-select" ng-class="lx.getClasses()">
     <div class="lumx-select__header" ng-if="::lx.label && (!lx.variant || lx.variant === 'input')">
-        <lx-input-label class="lumx-select__label" lx-theme="{{ lx.theme }}">{{ lx.label }}</lx-input-label>
+        <lx-input-label class="lumx-select__label" lx-is-mandatory="lx.isMandatory" lx-theme="{{ lx.theme }}">
+            {{ lx.label }}
+        </lx-input-label>
     </div>
 
     <div
