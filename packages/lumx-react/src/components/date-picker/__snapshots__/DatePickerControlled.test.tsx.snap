@@ -363,7 +363,7 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
         key="1465200"
       >
         <button
-          className="lumx-date-picker__month-day lumx-date-picker__month-day--is-today"
+          className="lumx-date-picker__month-day lumx-date-picker__month-day--is-selected lumx-date-picker__month-day--is-today"
           disabled={false}
           onClick={[Function]}
         >
