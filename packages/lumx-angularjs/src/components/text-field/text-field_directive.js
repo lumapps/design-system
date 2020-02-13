@@ -129,6 +129,10 @@ function TextFieldController(LxUtilsService) {
             classes.push(`${CSS_PREFIX}-text-field--has-input-clear`);
         }
 
+        if (lx.isMandatory) {
+            classes.push(`${CSS_PREFIX}-text-field--is-mandatory`);
+        }
+
         if (lx.label) {
             classes.push(`${CSS_PREFIX}-text-field--has-label`);
         }
@@ -308,6 +312,7 @@ function TextFieldDirective($timeout) {
             helper: '@?lxHelper',
             icon: '@?lxIcon',
             isClearable: '=?lxAllowClear',
+            isMandatory: '=?lxIsMandatory',
             isValid: '=?lxIsValid',
             label: '@?lxLabel',
             theme: '@?lxTheme',
