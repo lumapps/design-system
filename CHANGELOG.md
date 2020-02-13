@@ -12,6 +12,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `isRequired` prop to `InputLabel`, `TextField` and `Select` components
 -   Added `lx-is-required` prop to `lx-input-label`, `lx-text-field` and `lx-select` components
 
+### Changed
+
+-   Close popover on `DatePickerField` date pick
+-   Pass appropriated `DatePickerField` props to `TextField` component
+
+### Fixed
+
+-   Correctly init value by ignoring time on `DatePicker` component
+-   Move `textFieldRef` to `TextField` component wrapper
+
 ## [0.21.5][] - 2020-02-10
 
 ### Added
