@@ -1,6 +1,5 @@
 // Credits: https://github.com/third774/image-focus/
-import { assign } from '@lumx/react/utils';
-import { debounce } from '@lumx/react/utils';
+import debounce from 'lodash/debounce';
 import { IFocus } from './IFocus';
 import { IFocusedImageOptions } from './IFocusedImageOptions';
 
@@ -38,10 +37,10 @@ const RESIZE_LISTENER_OBJECT_STYLES = {
 };
 
 const DEFAULT_OPTIONS: IFocusedImageOptions = {
-    debounceTime: 17,
-    updateOnWindowResize: true,
-    updateOnContainerResize: false,
     containerPosition: 'relative',
+    debounceTime: 17,
+    updateOnContainerResize: false,
+    updateOnWindowResize: true,
 };
 
 export interface ILumHTMLImageElement extends HTMLImageElement {
@@ -59,7 +58,7 @@ export class FocusedImage {
 
     constructor(private readonly imageNode: ILumHTMLImageElement, options: IFocusedImageOptions = {}) {
         // Merge in options
-        this.options = assign(DEFAULT_OPTIONS, options);
+        this.options = { ...DEFAULT_OPTIONS, ...options };
 
         // Set up element references
         this.img = imageNode;
@@ -76,12 +75,12 @@ export class FocusedImage {
         this.img.addEventListener('load', this.applyShift);
 
         // Set up styles
-        assign(this.container.style, CONTAINER_STYLES);
+        Object.assign(this.container.style, CONTAINER_STYLES);
         this.container.style.position = this.options.containerPosition as string;
-        assign(this.img.style, IMG_STYLES, ABSOLUTE_STYLES);
+        Object.assign(this.img.style, IMG_STYLES, ABSOLUTE_STYLES);
 
         // Create debouncedShift function
-        this.debounceApplyShift = debounce(this.applyShift, this.options.debounceTime!);
+        this.debounceApplyShift = debounce(this.applyShift, this.options.debounceTime);
 
         // Initialize focus
         this.focus = this.options.focus
@@ -150,7 +149,7 @@ export class FocusedImage {
         }
         if (this.options.updateOnContainerResize) {
             const object = document.createElement('object');
-            assign(object.style, RESIZE_LISTENER_OBJECT_STYLES, ABSOLUTE_STYLES);
+            Object.assign(object.style, RESIZE_LISTENER_OBJECT_STYLES, ABSOLUTE_STYLES);
             // Use load event callback because contentDocument doesn't exist
             // until this fires in Firefox
             object.addEventListener('load', (e: Event) =>
@@ -171,14 +170,14 @@ export class FocusedImage {
         }
         this.listening = false;
         window.removeEventListener('resize', this.debounceApplyShift);
-        if (this.resizeListenerObject) {
-            this.resizeListenerObject.contentDocument!.defaultView!.removeEventListener(
-                'resize',
-                this.debounceApplyShift,
-            );
-            this.container.removeChild(this.resizeListenerObject);
-            delete this.resizeListenerObject;
+
+        if (!this.resizeListenerObject) {
+            return;
         }
+
+        this.resizeListenerObject.contentDocument!.defaultView!.removeEventListener('resize', this.debounceApplyShift);
+        this.container.removeChild(this.resizeListenerObject);
+        delete this.resizeListenerObject;
     }
 
     // Calculate the new left/top percentage shift of an image
