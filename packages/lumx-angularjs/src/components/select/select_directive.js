@@ -683,10 +683,6 @@ function SelectDirective() {
             null,
             'selected',
         );
-
-        attrs.$observe('required', (isRequired) => {
-            ctrls[0].isRequired = isRequired;
-        });
     }
 
     return {
@@ -712,7 +708,7 @@ function SelectDirective() {
             isDisabled: '=?ngDisabled',
             isInfiniteScrollLoading: '=?lxInfiniteScrollLoading',
             isLoading: '=?lxLoading',
-            isMandatory: '=?lxIsMandatory',
+            isRequired: '=?lxIsRequired',
             isValid: '=?lxIsValid',
             label: '@?lxLabel',
             max: '=?lxMax',
