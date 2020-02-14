@@ -32,6 +32,10 @@
         }
     }
 
+    &__focused-image {
+        max-width: none;
+    }
+
     &__image {
         display: block;
         max-width: 100%;
@@ -120,8 +124,4 @@
     &[data-focus-visible-added]::after {
         @include lumx-state(lumx-base-const('state', 'FOCUS'), lumx-base-const('emphasis', 'LOW'), 'light');
     }
-}
-
-img.focused-image {
-    max-width: none;
 }

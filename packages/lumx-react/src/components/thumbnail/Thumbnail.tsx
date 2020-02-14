@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef } from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -157,12 +157,12 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...props}
         >
             {aspectRatio === AspectRatio.original ? (
-                <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
+                <img className={`${CLASSNAME}__image`} src={image} alt={alt} loading={loading} />
             ) : (
-                <div className="lumx-thumbnail__background">
+                <div className={`${CLASSNAME}__background`}>
                     <img
                         ref={focusImageRef}
-                        className="focused-image"
+                        className={`${CLASSNAME}__focused-image`}
                         crossOrigin="anonymous"
                         src={image}
                         alt={alt}
