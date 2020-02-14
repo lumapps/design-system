@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,6 +9,9 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import isFunction from 'lodash/isFunction';
 
 import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+
+import { IFocusPoint } from './IFocusedImageOptions';
+import useFocusedImage from './useFocusedImage';
 
 /**
  * Loading attribute is not yet supported in typescript, so we need
@@ -72,6 +75,9 @@ interface IThumbnailProps extends IGenericProps {
     theme?: Theme;
     /** Variant. */
     variant?: ThumbnailVariant;
+
+    /** Focal Point coordinates. */
+    focusPoint?: IFocusPoint;
 }
 type ThumbnailProps = IThumbnailProps;
 
@@ -105,6 +111,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     align: Alignment.left,
     aspectRatio: AspectRatio.original,
     fillHeight: false,
+    focusPoint: { x: 0, y: 0 },
     loading: ImageLoading.lazy,
     size: undefined,
     theme: Theme.light,
@@ -128,13 +135,12 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     theme = DEFAULT_PROPS.theme,
     variant = DEFAULT_PROPS.variant,
     image,
+    alt = 'Thumbnail',
+    onClick = null,
+    focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
 }: ThumbnailProps): ReactElement => {
-    const style: CSSProperties = {
-        backgroundImage: `url(${image})`,
-    };
-
-    const { alt = 'Thumbnail', onClick = null, ...restProps } = props;
+    const focusImageRef = useFocusedImage(focusPoint!);
 
     return (
         <div
@@ -148,12 +154,21 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             tabIndex={isFunction(onClick) ? 0 : -1}
             onClick={onClick}
             onKeyDown={onEnterPressed(onClick)}
-            {...restProps}
+            {...props}
         >
             {aspectRatio === AspectRatio.original ? (
-                <img className="lumx-thumbnail__image" src={image} alt={alt} loading={loading} />
+                <img className={`${CLASSNAME}__image`} src={image} alt={alt} loading={loading} />
             ) : (
-                <div className="lumx-thumbnail__background" style={style} />
+                <div className={`${CLASSNAME}__background`}>
+                    <img
+                        ref={focusImageRef}
+                        className={`${CLASSNAME}__focused-image`}
+                        crossOrigin="anonymous"
+                        src={image}
+                        alt={alt}
+                        loading={loading}
+                    />
+                </div>
             )}
         </div>
     );

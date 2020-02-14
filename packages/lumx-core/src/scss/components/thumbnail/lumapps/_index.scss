@@ -32,6 +32,10 @@
         }
     }
 
+    &__focused-image {
+        max-width: none;
+    }
+
     &__image {
         display: block;
         max-width: 100%;
