@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.7][] - 2020-02-14
+
 ### Added
 
 -   Added `focusPoint` prop to `Thumbnail` component
@@ -331,3 +333,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.5]: https://github.com/lumapps/design-system/tree/v0.21.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.6...HEAD
 [0.21.6]: https://github.com/lumapps/design-system/tree/v0.21.6
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.7...HEAD
+[0.21.7]: https://github.com/lumapps/design-system/tree/v0.21.7
