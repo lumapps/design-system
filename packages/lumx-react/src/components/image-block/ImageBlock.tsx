@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, Size, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, IFocusPoint, Size, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -44,6 +44,8 @@ interface IImageBlockProps extends IGenericProps {
           };
     /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
+    /** Focal Point coordinates. */
+    focusPoint?: IFocusPoint;
     /** The url of the image we want to display in the image-block. */
     image: string;
     /** The image block size. */
@@ -54,6 +56,8 @@ interface IImageBlockProps extends IGenericProps {
     theme?: Theme;
     /** The image title to display in the caption. */
     title?: string;
+    /** Variant. */
+    variant?: ThumbnailVariant;
 }
 type ImageBlockProps = IImageBlockProps;
 
@@ -91,10 +95,12 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     captionStyle: {},
     description: undefined,
     fillHeight: false,
+    focusPoint: undefined,
     size: undefined,
     tags: undefined,
     theme: Theme.light,
     title: undefined,
+    variant: undefined,
 };
 
 /////////////////////////////
@@ -113,11 +119,13 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,
     fillHeight = DEFAULT_PROPS.fillHeight,
+    focusPoint = DEFAULT_PROPS.focusPoint,
     image,
     size = DEFAULT_PROPS.size,
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
+    variant = DEFAULT_PROPS.variant,
     ...props
 }: ImageBlockProps): ReactElement => {
     const { onClick = null, ...restProps } = props;
@@ -148,9 +156,11 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                 aspectRatio={aspectRatio}
                 size={size}
                 fillHeight={fillHeight}
+                focusPoint={focusPoint}
                 image={image}
                 onClick={onClick}
                 theme={theme}
+                variant={variant}
             />
             {(title || description || tags) && (
                 <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>

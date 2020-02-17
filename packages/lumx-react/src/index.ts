@@ -40,6 +40,8 @@ export { InputLabel, IInputLabelProps } from './components/input-label/InputLabe
 
 export { Thumbnail, ThumbnailProps, ThumbnailVariant, ThumbnailAspectRatio } from './components/thumbnail/Thumbnail';
 
+export { IFocusPoint } from './components/thumbnail/IFocusedImageOptions';
+
 export { ImageBlock, ImageBlockProps, ImageBlockCaptionPosition } from './components/image-block/ImageBlock';
 
 export { Lightbox, LightboxProps } from './components/lightbox/Lightbox';
