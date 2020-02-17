@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<web-bookmark> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-web-bookmark lumx-web-bookmark--theme-light lumx-web-bookmark--size-regular"
+>
+  <div
+    className="lumx-web-bookmark__thumbnail"
+  >
+    <Thumbnail
+      align="center"
+      aspectRatio="horizontal"
+      image=""
+    />
+  </div>
+  <div
+    className="lumx-web-bookmark__infos"
+  >
+    <p
+      className="lumx-web-bookmark__title"
+    />
+    <p
+      className="lumx-web-bookmark__description"
+    />
+    <p
+      className="lumx-web-bookmark__link"
+    />
+  </div>
+</div>
+`;
+
+exports[`<web-bookmark> Snapshots and structure should render correctly 2`] = `
+<div
+  className="lumx-web-bookmark lumx-web-bookmark--theme-light lumx-web-bookmark--size-big"
+>
+  <div
+    className="lumx-web-bookmark__thumbnail"
+  >
+    <Thumbnail
+      align="center"
+      aspectRatio="horizontal"
+      image=""
+    />
+  </div>
+  <div
+    className="lumx-web-bookmark__infos"
+  >
+    <p
+      className="lumx-web-bookmark__title"
+    />
+    <p
+      className="lumx-web-bookmark__description"
+    />
+    <p
+      className="lumx-web-bookmark__link"
+    />
+  </div>
+</div>
+`;
