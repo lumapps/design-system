@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<web-bookmark> Snapshots and structure should render correctly 1`] = `
-<div
+<a
   className="lumx-web-bookmark lumx-web-bookmark--theme-light lumx-web-bookmark--size-regular"
+  target="_blank"
 >
   <div
     className="lumx-web-bookmark__thumbnail"
@@ -26,12 +27,13 @@ exports[`<web-bookmark> Snapshots and structure should render correctly 1`] = `
       className="lumx-web-bookmark__link"
     />
   </div>
-</div>
+</a>
 `;
 
 exports[`<web-bookmark> Snapshots and structure should render correctly 2`] = `
-<div
+<a
   className="lumx-web-bookmark lumx-web-bookmark--theme-light lumx-web-bookmark--size-big"
+  target="_blank"
 >
   <div
     className="lumx-web-bookmark__thumbnail"
@@ -55,5 +57,5 @@ exports[`<web-bookmark> Snapshots and structure should render correctly 2`] = `
       className="lumx-web-bookmark__link"
     />
   </div>
-</div>
+</a>
 `;
