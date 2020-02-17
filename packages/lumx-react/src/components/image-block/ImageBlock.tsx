@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, Size, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -36,6 +36,8 @@ interface IImageBlockProps extends IGenericProps {
     captionPosition?: ImageBlockCaptionPosition;
     /** The style to apply to the caption section. */
     captionStyle?: CSSProperties;
+    /** ImageBlock content. */
+    children?: ReactNode;
     /** The image description. Can be either a string, or sanitized html. */
     description?:
         | string
@@ -44,8 +46,6 @@ interface IImageBlockProps extends IGenericProps {
           };
     /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
-    /** The url of the image we want to display in the image-block. */
-    image: string;
     /** The image block size. */
     size?: ImageBlockSize;
     /** Tags elements to be transcluded into the component */
@@ -111,68 +111,54 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     className = '',
     captionPosition = DEFAULT_PROPS.captionPosition,
     captionStyle = DEFAULT_PROPS.captionStyle,
+    children,
     description = DEFAULT_PROPS.description,
     fillHeight = DEFAULT_PROPS.fillHeight,
-    image,
     size = DEFAULT_PROPS.size,
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
     ...props
-}: ImageBlockProps): ReactElement => {
-    const { onClick = null, ...restProps } = props;
-
-    return (
-        <div
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    align,
-                    aspectRatio,
-                    captionPosition,
-                    prefix: CLASSNAME,
-                    size,
-                    theme,
-                }),
-                {
-                    [`${CLASSNAME}--fill-height`]: fillHeight,
-                    [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== AspectRatio.original,
-                    [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === AspectRatio.original,
-                },
-            )}
-            {...restProps}
-        >
-            <Thumbnail
-                align={align}
-                className={`${CLASSNAME}__image`}
-                aspectRatio={aspectRatio}
-                size={size}
-                fillHeight={fillHeight}
-                image={image}
-                onClick={onClick}
-                theme={theme}
-            />
-            {(title || description || tags) && (
-                <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
-                    {(title || description) && (
-                        <div className={`${CLASSNAME}__caption`}>
-                            {title && <span className={`${CLASSNAME}__title`}>{title}</span>}
-                            {/* Add an `&nbsp;` when there is description and title. */}
-                            {title && description && '\u00A0'}
-                            {isObject(description) && description.__html ? (
-                                <span dangerouslySetInnerHTML={description} className={`${CLASSNAME}__description`} />
-                            ) : (
-                                <span className={`${CLASSNAME}__description`}>{description}</span>
-                            )}
-                        </div>
-                    )}
-                    {tags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
-                </div>
-            )}
-            {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
-        </div>
-    );
-};
+}: ImageBlockProps): ReactElement => (
+    <div
+        className={classNames(
+            className,
+            handleBasicClasses({
+                align,
+                captionPosition,
+                prefix: CLASSNAME,
+                size,
+                theme,
+            }),
+            {
+                [`${CLASSNAME}--fill-height`]: fillHeight,
+                [`${CLASSNAME}--format-crop`]: aspectRatio && aspectRatio !== AspectRatio.original,
+                [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === AspectRatio.original,
+            },
+        )}
+        {...props}
+    >
+        {children ? children : null}
+        {(title || description || tags) && (
+            <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
+                {(title || description) && (
+                    <div className={`${CLASSNAME}__caption`}>
+                        {title && <span className={`${CLASSNAME}__title`}>{title}</span>}
+                        {/* Add an `&nbsp;` when there is description and title. */}
+                        {title && description && '\u00A0'}
+                        {isObject(description) && description.__html ? (
+                            <span dangerouslySetInnerHTML={description} className={`${CLASSNAME}__description`} />
+                        ) : (
+                            <span className={`${CLASSNAME}__description`}>{description}</span>
+                        )}
+                    </div>
+                )}
+                {tags && <div className={`${CLASSNAME}__tags`}>{tags}</div>}
+            </div>
+        )}
+        {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+    </div>
+);
 ImageBlock.displayName = COMPONENT_NAME;
 
 /////////////////////////////

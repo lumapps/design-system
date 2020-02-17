@@ -1,10 +1,10 @@
-import { Alignment, AspectRatio, Size, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { AspectRatio, Size, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import { number, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
 export default { title: 'Thumbnail' };
 
-const numberKnobOtions = {
+const numberKnobOptions = {
     max: 1,
     min: -1,
     range: true,
@@ -16,31 +16,37 @@ const numberKnobOtions = {
  * @return simple Thumbnail.
  */
 export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
+    const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Thumbnail');
+    const focusPoint = {
+        x: number('Focus X', 0, numberKnobOptions, 'Thumbnail'),
+        y: number('Focus Y', 0, numberKnobOptions, 'Thumbnail'),
+    };
+    const imageUrl = text('Url image', 'https://i.picsum.photos/id/1001/2400/1400.jpg', 'Thumbnail');
+    const size = select(
+        'Size',
+        {
+            XXS: Size.xxs,
+            // tslint:disable-next-line: object-literal-sort-keys
+            XS: Size.xs,
+            S: Size.s,
+            M: Size.m,
+            L: Size.l,
+            XL: Size.xl,
+            XXL: Size.xxl,
+        },
+        Size.xxl,
+        'Thumbnail',
+    );
+    const variant = select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared, 'Thumbnail');
+
     return (
         <Thumbnail
-            align={select<Alignment>('Alignment', Alignment, Alignment.left, 'Options')}
-            aspectRatio={select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Options')}
-            focusPoint={{
-                x: number('focusX', 0, numberKnobOtions, 'Options'),
-                y: number('focusY', 0, numberKnobOtions, 'Options'),
-            }}
-            image={text('Url image', 'https://i.picsum.photos/id/1001/2400/1400.jpg', 'Options')}
-            size={select(
-                'Size',
-                {
-                    XXS: Size.xxs,
-                    XS: Size.xs,
-                    S: Size.s,
-                    M: Size.m,
-                    L: Size.l,
-                    XL: Size.xl,
-                    XXL: Size.xxl,
-                },
-                Size.xxl,
-                'Options',
-            )}
+            aspectRatio={aspectRatio}
+            focusPoint={focusPoint}
+            image={imageUrl}
+            size={size}
             theme={theme}
-            variant={select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared, 'Options')}
+            variant={variant}
         />
     );
 };

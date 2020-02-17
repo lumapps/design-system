@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Alignment, AspectRatio, Size, Theme } from '@lumx/react';
+import { AspectRatio, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
@@ -59,8 +59,6 @@ enum ImageLoading {
  * Defines the props of the component.
  */
 interface IThumbnailProps extends IGenericProps {
-    /** The thumbnail alignment. */
-    align?: Alignment;
     /** The image aspect ratio. */
     aspectRatio?: AspectRatio;
     /** Whether the image has to fill its container's height. */
@@ -108,7 +106,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
-    align: Alignment.left,
     aspectRatio: AspectRatio.original,
     fillHeight: false,
     focusPoint: { x: 0, y: 0 },
@@ -127,7 +124,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  */
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',
-    align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     fillHeight = DEFAULT_PROPS.fillHeight,
     loading = DEFAULT_PROPS.loading,
@@ -146,7 +142,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         <div
             className={classNames(
                 className,
-                handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant }),
+                handleBasicClasses({ aspectRatio, prefix: CLASSNAME, size, theme, variant }),
                 {
                     [`${CLASSNAME}--fill-height`]: fillHeight,
                 },

@@ -97,6 +97,18 @@
         top: $lumx-spacing-unit * 1.5;
         right: $lumx-spacing-unit * 1.5;
     }
+
+    &--align-left .#{$lumx-base-prefix}-thumbnail {
+        margin-right: auto;
+    }
+
+    &--align-center .#{$lumx-base-prefix}-thumbnail {
+        margin: 0 auto;
+    }
+
+    &--align-right .#{$lumx-base-prefix}-thumbnail {
+        margin-left: auto;
+    }
 }
 
 /* Image block sizes
