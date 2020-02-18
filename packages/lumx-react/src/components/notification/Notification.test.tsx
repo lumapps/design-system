@@ -125,6 +125,13 @@ describe(`<${Notification.displayName}>`, () => {
             expect(notification).toHaveClassName(CLASSNAME);
             expect(notification).toHaveClassName(`${CLASSNAME}--color-dark`);
         });
+
+        it('should render nothing since the notification is closed', () => {
+            const { wrapper, notification } = setup({ ...properties.info, isOpen: false });
+            expect(wrapper).toMatchSnapshot();
+
+            expect(notification).not.toExist();
+        });
     });
 
     /////////////////////////////

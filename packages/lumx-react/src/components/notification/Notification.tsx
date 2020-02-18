@@ -105,6 +105,10 @@ const Notification: React.FC<NotificationProps> = ({
     zIndex = DEFAULT_PROPS.zIndex,
     ...props
 }) => {
+    if (!isOpen) {
+        return null;
+    }
+
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
     const handleCallback = (evt: React.MouseEvent) => {
