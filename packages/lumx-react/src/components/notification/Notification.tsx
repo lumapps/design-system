@@ -108,7 +108,7 @@ const Notification: React.FC<NotificationProps> = ({
     ...props
 }) => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
-    // Delay visibility to account for the 400ms of CSS opacity animation.
+
     const isVisible = useDelayedVisibility(isOpen);
 
     const handleCallback = (evt: React.MouseEvent) => {
