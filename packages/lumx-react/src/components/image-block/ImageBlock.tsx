@@ -138,7 +138,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
         )}
         {...props}
     >
-        {children ? children : null}
+        {children}
         {(title || description || tags) && (
             <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
                 {(title || description) && (

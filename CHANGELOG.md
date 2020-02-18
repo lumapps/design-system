@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `children` prop to `ImageBlock` component (to pass `Thumbnail` component)
+
+### Changed
+
+-   _[BREAKING]_ Remove `Thumbnail` component from `ImageBlock` component
+
 ## [0.21.7][] - 2020-02-14
 
 ### Added

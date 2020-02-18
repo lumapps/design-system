@@ -17,6 +17,7 @@ export const defaultImageBlock = ({ theme }: any) => {
     const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Image block');
     const title = text('Title', 'Hello world', 'Image block');
     const description = text('Description', 'My awesome description', 'Image block');
+    const isFillHeight = boolean('Fill height', false, 'Image block');
     const isDisplayedTags = boolean('Display tags', true, 'Image block');
     const tags = (
         <ChipGroup align={Alignment.left}>
@@ -31,6 +32,7 @@ export const defaultImageBlock = ({ theme }: any) => {
     );
 
     const aspectRatioThumbnail = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Thumbnail');
+    const isFillHeightThumbnail = boolean('Fill height', false, 'Thumbnail');
     const focusPoint = {
         x: number('Focus X', 1, numberKnobOptions, 'Thumbnail'),
         y: number('Focus Y', 0, numberKnobOptions, 'Thumbnail'),
@@ -38,16 +40,7 @@ export const defaultImageBlock = ({ theme }: any) => {
     const imageUrl = text('Url image', 'https://i.picsum.photos/id/1001/2400/1400.jpg', 'Thumbnail');
     const sizeThumbnail = select(
         'Size',
-        {
-            XXS: Size.xxs,
-            // tslint:disable-next-line: object-literal-sort-keys
-            XS: Size.xs,
-            S: Size.s,
-            M: Size.m,
-            L: Size.l,
-            XL: Size.xl,
-            XXL: Size.xxl,
-        },
+        [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl],
         Size.xxl,
         'Thumbnail',
     );
@@ -58,12 +51,14 @@ export const defaultImageBlock = ({ theme }: any) => {
             align={align}
             aspectRatio={aspectRatio}
             description={description}
+            fillHeight={isFillHeight}
             tags={isDisplayedTags && tags}
             title={title}
             theme={theme}
         >
             <Thumbnail
                 aspectRatio={aspectRatioThumbnail}
+                fillHeight={isFillHeightThumbnail}
                 focusPoint={focusPoint}
                 image={imageUrl}
                 size={sizeThumbnail}

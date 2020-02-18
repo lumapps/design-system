@@ -22,21 +22,7 @@ export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
         y: number('Focus Y', 0, numberKnobOptions, 'Thumbnail'),
     };
     const imageUrl = text('Url image', 'https://i.picsum.photos/id/1001/2400/1400.jpg', 'Thumbnail');
-    const size = select(
-        'Size',
-        {
-            XXS: Size.xxs,
-            // tslint:disable-next-line: object-literal-sort-keys
-            XS: Size.xs,
-            S: Size.s,
-            M: Size.m,
-            L: Size.l,
-            XL: Size.xl,
-            XXL: Size.xxl,
-        },
-        Size.xxl,
-        'Thumbnail',
-    );
+    const size = select('Size', [Size.xxs, Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl], Size.xxl, 'Thumbnail');
     const variant = select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared, 'Thumbnail');
 
     return (
