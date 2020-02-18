@@ -86,7 +86,12 @@ const WebBookmark: React.FC<WebBookmarkProps> = ({
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
         >
             <div className={`${CLASSNAME}__thumbnail`}>
-                <Thumbnail image={thumbnail} align={Alignment.center} aspectRatio={AspectRatio.horizontal} />
+                <Thumbnail
+                    tabIndex={0}
+                    image={thumbnail}
+                    align={Alignment.center}
+                    aspectRatio={AspectRatio.horizontal}
+                />
             </div>
 
             <div className={`${CLASSNAME}__infos`}>
