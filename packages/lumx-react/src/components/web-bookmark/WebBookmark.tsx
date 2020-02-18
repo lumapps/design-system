@@ -14,21 +14,21 @@ import { Alignment, Size } from '..';
  * Defines the props of the component.
  */
 interface IWebBookmarkProps extends IGenericProps {
-    /* The url of the link. */
+    /** The url of the link. */
     url: string;
-    /* Content text. Can be either a string, or sanitized html. */
+    /** Content text. Can be either a string, or sanitized html. */
     description?:
         | string
         | {
               __html: string;
           };
-    /* The size variant of the web bookmark. */
+    /** The size variant of the web bookmark. */
     size?: Size.regular | Size.big;
-    /* Theme. */
+    /** Theme. */
     theme?: Theme;
-    /* Thumbnail image source */
+    /** Thumbnail image source */
     thumbnail?: string;
-    /* Link title */
+    /** Link title */
     title?: string;
 }
 type WebBookmarkProps = IWebBookmarkProps;
@@ -49,7 +49,7 @@ interface IDefaultPropsType extends Partial<WebBookmarkProps> {}
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}web-bookmark`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}WebBookmark`;
 
 /**
  * The default class name and classes prefix for this component.
@@ -71,7 +71,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @return The component.
  */
 const WebBookmark: React.FC<WebBookmarkProps> = ({
-    className = '',
+    className,
     size = DEFAULT_PROPS.size,
     title,
     description,

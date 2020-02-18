@@ -23,10 +23,12 @@ interface ISetup extends ICommonSetup {
     props: ISetupProps;
 
     /**
-     * [Enter the description of this wrapper].
-     * [You should also probably change the name of the wrapper to something more meaningful].
+     * The wrapper of the bookmark.
      */
     wrapper: Wrapper;
+    /**
+     * The thumbnail of the bookmark.
+     */
     thumbnail: Wrapper;
 }
 
