@@ -13,7 +13,7 @@ import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
 /**
  * The authorized values for the `size` prop.
  */
-type ButtonSize = Size.s | Size.m;
+export type ButtonSize = Size.s | Size.m;
 
 interface IBaseButtonProps extends IGenericProps {
     /**

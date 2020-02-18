@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -81,7 +81,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The component.
  */
-const Button: React.FC<ButtonProps> = (props: ButtonProps): ReactElement => {
+const Button: React.FC<ButtonProps> = (props) => {
     const {
         className,
         children,
