@@ -12,6 +12,8 @@ import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
 import { IGenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
 
+import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+
 /////////////////////////////
 
 /**
@@ -200,15 +202,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
         }
     }, [isOpen]);
 
-    // Delay visibility to account for the 400ms of CSS opacity animation.
-    const [isVisible, setVisible] = useState(isOpen);
-    useEffect(() => {
-        if (isOpen) {
-            setVisible(true);
-        } else {
-            setTimeout(() => setVisible(false), 400);
-        }
-    }, [isOpen]);
+    const isVisible = useDelayedVisibility(Boolean(isOpen));
 
     return isOpen || isVisible
         ? createPortal(

@@ -11,6 +11,8 @@ import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
+import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
+
 /////////////////////////////
 
 /**
@@ -105,11 +107,9 @@ const Notification: React.FC<NotificationProps> = ({
     zIndex = DEFAULT_PROPS.zIndex,
     ...props
 }) => {
-    if (!isOpen) {
-        return null;
-    }
-
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
+    // Delay visibility to account for the 400ms of CSS opacity animation.
+    const isVisible = useDelayedVisibility(isOpen);
 
     const handleCallback = (evt: React.MouseEvent) => {
         if (isFunction(actionCallback)) {
@@ -118,7 +118,7 @@ const Notification: React.FC<NotificationProps> = ({
         evt.stopPropagation();
     };
 
-    return type
+    return type && isVisible
         ? createPortal(
               <div
                   className={classNames(
