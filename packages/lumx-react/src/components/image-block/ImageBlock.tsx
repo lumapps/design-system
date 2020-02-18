@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, IFocusPoint, Size, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { Alignment, AspectRatio, IFocusPoint, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -56,8 +56,6 @@ interface IImageBlockProps extends IGenericProps {
     theme?: Theme;
     /** The image title to display in the caption. */
     title?: string;
-    /** Variant. */
-    variant?: ThumbnailVariant;
 }
 type ImageBlockProps = IImageBlockProps;
 
@@ -100,7 +98,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     tags: undefined,
     theme: Theme.light,
     title: undefined,
-    variant: undefined,
 };
 
 /////////////////////////////
@@ -125,7 +122,6 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
-    variant = DEFAULT_PROPS.variant,
     ...props
 }: ImageBlockProps): ReactElement => {
     const { onClick = null, ...restProps } = props;
@@ -160,7 +156,6 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                 image={image}
                 onClick={onClick}
                 theme={theme}
-                variant={variant}
             />
             {(title || description || tags) && (
                 <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>

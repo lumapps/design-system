@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size, ThumbnailVariant } from '@lumx/react';
+import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 
 export default { title: 'Image Block' };
@@ -44,12 +44,6 @@ export const defaultImageBlock = ({ theme }: any) => {
         Size.xxl,
         'Image block',
     );
-    const variant = select<ThumbnailVariant>(
-        'Thumbnail Variant',
-        ThumbnailVariant,
-        ThumbnailVariant.squared,
-        'Image block',
-    );
 
     return (
         <ImageBlock
@@ -62,7 +56,6 @@ export const defaultImageBlock = ({ theme }: any) => {
             tags={isDisplayedTags && tags}
             title={title}
             theme={theme}
-            variant={variant}
         />
     );
 };
