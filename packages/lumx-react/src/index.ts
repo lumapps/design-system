@@ -30,6 +30,8 @@ export { Divider, DividerProps } from './components/divider/Divider';
 
 export { Dropdown, DropdownProps } from './components/dropdown/Dropdown';
 
+export { FileAttachment } from './components/file-attachment/FileAttachment';
+
 export { Icon, IconProps, IconSizes } from './components/icon/Icon';
 
 export { IconButton, IconButtonProps } from './components/button/IconButton';
