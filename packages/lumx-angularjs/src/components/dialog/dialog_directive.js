@@ -1,4 +1,4 @@
-import { CSS_PREFIX, ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
+import { CSS_PREFIX, DIALOG_TRANSITION_DURATION, ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
 
 import template from './dialog.html';
 
@@ -34,15 +34,6 @@ function DialogController(
     const _DEFAULT_PROPS = {
         size: 'big',
     };
-
-    /**
-     * The dialog open/close transition duration.
-     *
-     * @type {number}
-     * @constant
-     * @readonly
-     */
-    const _TRANSITION_DURATION = 400;
 
     /**
      * The dialog.
@@ -157,7 +148,7 @@ function DialogController(
             LxFocusTrapService.disable();
 
             $rootScope.$broadcast('lx-dialog__close-end', lx.id, canceled, params);
-        }, _TRANSITION_DURATION);
+        }, DIALOG_TRANSITION_DURATION);
     }
 
     /**
@@ -273,7 +264,7 @@ function DialogController(
 
         $timeout(() => {
             $rootScope.$broadcast('lx-dialog__open-end', lx.id, params);
-        }, _TRANSITION_DURATION);
+        }, DIALOG_TRANSITION_DURATION);
     }
 
     /**

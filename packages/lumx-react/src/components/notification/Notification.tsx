@@ -7,9 +7,13 @@ import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Size, Theme } from '@lumx/react';
 
+import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
+
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
+import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
 /////////////////////////////
 
@@ -107,6 +111,8 @@ const Notification: React.FC<NotificationProps> = ({
 }) => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
+    const isVisible = useDelayedVisibility(isOpen, NOTIFICATION_TRANSITION_DURATION);
+
     const handleCallback = (evt: React.MouseEvent) => {
         if (isFunction(actionCallback)) {
             actionCallback();
@@ -114,7 +120,7 @@ const Notification: React.FC<NotificationProps> = ({
         evt.stopPropagation();
     };
 
-    return type
+    return type && isVisible
         ? createPortal(
               <div
                   className={classNames(

@@ -27,9 +27,4 @@ const NOTIFICATION_CONFIGURATION = {
     },
 };
 
-/**
- * The notification open transition duration.
- */
-const TRANSITION_DURATION = 200;
-
-export { HIDE_DELAY, NOTIFICATION_CONFIGURATION, TRANSITION_DURATION };
+export { HIDE_DELAY, NOTIFICATION_CONFIGURATION };

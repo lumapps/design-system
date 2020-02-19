@@ -29,3 +29,5 @@ exports[`<Notification> Snapshots and structure should render defaults 1`] = `
   </div>
 </Portal>
 `;
+
+exports[`<Notification> Snapshots and structure should render nothing since the notification is closed 1`] = `""`;
