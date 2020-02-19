@@ -1,6 +1,6 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 
-import { CSS_PREFIX } from '@lumx/core/js/constants';
+import { CSS_PREFIX, NOTIFICATION_TRANSITION_DURATION } from '@lumx/core/js/constants';
 
 /////////////////////////////
 
@@ -25,13 +25,13 @@ function NotificationService($compile, $rootScope, $timeout, LxDepthService, LxD
     const _HIDE_DELAY = 6000;
 
     /**
-     * The notification open transition duration.
+     * The delay before displaying next transition.
      *
      * @type {number}
      * @constant
      * @readonly
      */
-    const _TRANSITION_DURATION = 200;
+    const _DELAY_BEFORE_DISPLAY_NEXT = 300;
 
     /**
      * The notification icon and colors according to their type.
@@ -73,7 +73,7 @@ function NotificationService($compile, $rootScope, $timeout, LxDepthService, LxD
 
         $timeout(function waitBeforeDeleting() {
             notification.remove();
-        }, _TRANSITION_DURATION);
+        }, NOTIFICATION_TRANSITION_DURATION);
     }
 
     /**
@@ -157,7 +157,7 @@ function NotificationService($compile, $rootScope, $timeout, LxDepthService, LxD
 
             $timeout(function waitBeforeShowingNext() {
                 _build(content, type, actionLabel, actionCallback);
-            }, _TRANSITION_DURATION);
+            }, _DELAY_BEFORE_DISPLAY_NEXT);
         } else {
             _build(content, type, actionLabel, actionCallback);
         }

@@ -38,7 +38,7 @@ const App = ({ theme }: any) => {
     const open = (typeToDisplay: keyof typeof properties) => {
         setType(typeToDisplay);
         setIsOpen(true);
-        setTimer(window.setTimeout(close, 5000));
+        setTimer(window.setTimeout(close, 3000));
     };
 
     const onClick = (typeToDisplay: keyof typeof properties) => () => {
@@ -51,7 +51,7 @@ const App = ({ theme }: any) => {
             close();
             setTimeout(() => {
                 open(typeToDisplay);
-            }, 500);
+            }, 300);
         } else {
             open(typeToDisplay);
         }
