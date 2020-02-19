@@ -217,9 +217,7 @@ function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: bool
         }
 
         const setFocus = () => {
-            if (onFocus) {
-                onFocus();
-            }
+            onFocus();
             setIsFocus(true);
         };
 
@@ -288,7 +286,10 @@ const Select: React.FC<SelectProps> = ({
     useFocus(anchorRef.current, Boolean(isOpen));
     useHandleElementFocus(anchorRef.current, setIsFocus, onSelectFocus);
 
-    // Any click away from the dropdown container will close it.
+    /**
+     * Since the select is not really an input, we need to fake the onBlur event.
+     * We can do this by listening to the click away event, which is basically an "onBlur"
+     */
     useClickAway(
         selectRef,
         () => {
@@ -296,8 +297,13 @@ const Select: React.FC<SelectProps> = ({
                 return;
             }
 
+            /**
+             * The select was really blurred if the dropdown is not open, the dropdown was in a focused state and
+             * we did not yet trigger the blur event
+             */
             if (!isOpen && isFocus && !wasBlurred) {
                 onBlur();
+                /** Setting the wasBlurred state to true in order to prevent further blur events when clicking away */
                 setWasBlurred(true);
             }
         },
