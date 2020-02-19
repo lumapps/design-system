@@ -5,6 +5,8 @@ import classNames from 'classnames';
 
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
+import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
+
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
@@ -202,7 +204,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
         }
     }, [isOpen]);
 
-    const isVisible = useDelayedVisibility(Boolean(isOpen));
+    const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION);
 
     return isOpen || isVisible
         ? createPortal(

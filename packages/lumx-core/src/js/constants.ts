@@ -54,6 +54,11 @@ const UP_KEY_CODE = 38;
  */
 const BACKSPACE_KEY_CODE = 8;
 
+/** Animation constants. Take into consideration that if you change one of these variables, you need to update their scss counterpart as well */
+const DIALOG_TRANSITION_DURATION = 400;
+
+const NOTIFICATION_TRANSITION_DURATION = 200;
+
 /////////////////////////////
 
 export {
@@ -67,4 +72,6 @@ export {
     RIGHT_KEY_CODE,
     TAB_KEY_CODE,
     UP_KEY_CODE,
+    DIALOG_TRANSITION_DURATION,
+    NOTIFICATION_TRANSITION_DURATION,
 };
