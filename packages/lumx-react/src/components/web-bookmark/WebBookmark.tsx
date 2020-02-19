@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import { AspectRatio, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, ColorPalette, ColorVariant, Link, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-import { Alignment, Size } from '..';
 
 /////////////////////////////
 
@@ -79,14 +78,14 @@ const WebBookmark: React.FC<WebBookmarkProps> = ({
     theme = DEFAULT_PROPS.theme,
     thumbnail = '',
 }) => {
+    const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
+
     return (
-        <a
-            target="_blank"
-            href={url}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}
-        >
+        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, size }))}>
             <div className={`${CLASSNAME}__thumbnail`}>
                 <Thumbnail
+                    onClick={goToUrl}
+                    role="link"
                     tabIndex={0}
                     image={thumbnail}
                     align={Alignment.center}
@@ -95,11 +94,27 @@ const WebBookmark: React.FC<WebBookmarkProps> = ({
             </div>
 
             <div className={`${CLASSNAME}__infos`}>
-                <p className={`${CLASSNAME}__title`}>{title}</p>
+                <Link
+                    className={`${CLASSNAME}__title`}
+                    target="_blank"
+                    href={url}
+                    color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
+                    colorVariant={ColorVariant.N}
+                >
+                    {title}
+                </Link>
                 <p className={`${CLASSNAME}__description`}>{description}</p>
-                <p className={`${CLASSNAME}__link`}>{url}</p>
+                <Link
+                    className={`${CLASSNAME}__link`}
+                    target="_blank"
+                    href={url}
+                    color={theme === Theme.light ? ColorPalette.blue : ColorPalette.light}
+                    colorVariant={ColorVariant.N}
+                >
+                    {url}
+                </Link>
             </div>
-        </a>
+        </div>
     );
 };
 

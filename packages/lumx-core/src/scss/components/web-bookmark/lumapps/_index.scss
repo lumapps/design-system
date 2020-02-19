@@ -38,13 +38,6 @@
 
     &__title {
         @include lumx-typography('subtitle1');
-
-        color: lumx-theme-color-variant('dark', 'N');
-        cursor: pointer;
-
-        &:hover {
-            text-decoration: underline;
-        }
     }
 
     &__description {
@@ -55,28 +48,13 @@
 
     &__link {
         @include lumx-typography('body1');
-
-        color: lumx-theme-color-variant('blue', 'N');
-        cursor: pointer;
-
-        &:hover {
-            text-decoration: underline;
-        }
     }
 
     &--theme-dark {
         background-color: lumx-theme-color-variant('light', 'L6');
 
-        #{$self}__title {
-            color: lumx-theme-color-variant('light', 'N');
-        }
-
         #{$self}__description {
             color: lumx-theme-color-variant('light', 'L2');
-        }
-
-        #{$self}__link {
-            color: lumx-theme-color-variant('light', 'N');
         }
     }
 
