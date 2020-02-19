@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Correctly init value by ignoring time on `DatePicker` component
 -   Move `textFieldRef` to `TextField` component wrapper
+-   Prevent `Notification` to be visible when `isOpen` is false
 
 ## [0.21.5][] - 2020-02-10
 

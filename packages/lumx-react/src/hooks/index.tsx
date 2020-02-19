@@ -1,5 +1,7 @@
 export * from './useClickAway';
 
+export * from './useDelayedVisibility';
+
 export * from './useComputePosition';
 
 export * from './useInterval';

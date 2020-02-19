@@ -5,12 +5,16 @@ import classNames from 'classnames';
 
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
+import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
+
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
 import { IGenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
+
+import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
 /////////////////////////////
 
@@ -200,15 +204,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
         }
     }, [isOpen]);
 
-    // Delay visibility to account for the 400ms of CSS opacity animation.
-    const [isVisible, setVisible] = useState(isOpen);
-    useEffect(() => {
-        if (isOpen) {
-            setVisible(true);
-        } else {
-            setTimeout(() => setVisible(false), 400);
-        }
-    }, [isOpen]);
+    const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION);
 
     return isOpen || isVisible
         ? createPortal(

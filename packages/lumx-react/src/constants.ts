@@ -15,6 +15,8 @@ export {
     RIGHT_KEY_CODE,
     TAB_KEY_CODE,
     UP_KEY_CODE,
+    DIALOG_TRANSITION_DURATION,
+    NOTIFICATION_TRANSITION_DURATION,
 } from '@lumx/core/js/constants';
 
 /**

@@ -304,6 +304,21 @@ const Select: React.FC<SelectProps> = ({
         [selectRef],
     );
 
+    // Any click away from the dropdown container will close it.
+    useClickAway(
+        selectRef,
+        () => {
+            if (!onBlur) {
+                return;
+            }
+
+            if (!isOpen && !isFocus) {
+                onBlur();
+            }
+        },
+        [selectRef],
+    );
+
     const handleKeyboardNav = useCallback(
         (evt: React.KeyboardEvent<HTMLElement>) => {
             if (
