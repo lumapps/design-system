@@ -111,6 +111,11 @@ interface ISelectProps extends IGenericProps {
     onBlur?(): void;
 
     /**
+     * The callback function called when the select field is focused on
+     */
+    onFocus?(): void;
+
+    /**
      * The callback function called on integrated search field change (500ms debounce).
      */
     onFilter?(): void;
@@ -205,14 +210,21 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param element    Element to focus.
  * @param setIsFocus Setter used to store the focus status of the element.
  */
-function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: boolean) => void) {
+function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: boolean) => void, onFocus: () => void) {
     useEffect((): VoidFunction | void => {
         if (!element) {
             return undefined;
         }
 
-        const setFocus = () => setIsFocus(true);
+        const setFocus = () => {
+            if (onFocus) {
+                onFocus();
+            }
+            setIsFocus(true);
+        };
+
         const setBlur = () => setIsFocus(false);
+
         element.addEventListener('focus', setFocus);
         element.addEventListener('blur', setBlur);
 
@@ -244,6 +256,7 @@ const Select: React.FC<SelectProps> = ({
     isDisabled,
     isRequired,
     onBlur,
+    onFocus,
     isOpen = DEFAULT_PROPS.isOpen,
     onInputClick,
     onDropdownClose,
@@ -257,14 +270,23 @@ const Select: React.FC<SelectProps> = ({
     ...props
 }: SelectProps): React.ReactElement => {
     const [isFocus, setIsFocus] = useState(false);
+    const [wasBlurred, setWasBlurred] = useState(false);
     const isEmpty = value.length === 0;
     const targetUuid = 'uuid';
     const anchorRef = useRef<HTMLElement>(null);
     const selectRef = useRef<HTMLDivElement>(null);
     const hasInputClear = onClear && !isMultiple && !isEmpty;
 
+    const onSelectFocus = () => {
+        if (onFocus) {
+            onFocus();
+        }
+
+        setWasBlurred(false);
+    };
+
     useFocus(anchorRef.current, Boolean(isOpen));
-    useHandleElementFocus(anchorRef.current, setIsFocus);
+    useHandleElementFocus(anchorRef.current, setIsFocus, onSelectFocus);
 
     // Any click away from the dropdown container will close it.
     useClickAway(
@@ -274,8 +296,9 @@ const Select: React.FC<SelectProps> = ({
                 return;
             }
 
-            if (!isOpen && !isFocus) {
+            if (!isOpen && isFocus && !wasBlurred) {
                 onBlur();
+                setWasBlurred(true);
             }
         },
         [selectRef],
