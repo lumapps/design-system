@@ -46,6 +46,8 @@ export { ImageBlock, ImageBlockProps, ImageBlockCaptionPosition } from './compon
 
 export { Lightbox, LightboxProps } from './components/lightbox/Lightbox';
 
+export { Link, LinkProps } from './components/link/Link';
+
 export { List, ListProps } from './components/list/List';
 
 export { ListDivider, ListDividerProps } from './components/list/ListDivider';
