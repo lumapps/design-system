@@ -1,115 +1,92 @@
-import { Button, Notification, NotificationProps, NotificationType } from '@lumx/react';
+import { Button, Notification, NotificationType } from '@lumx/react';
 
-import isFunction from 'lodash/isFunction';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
-    // tslint:disable-next-line:no-object-literal-type-assertion
-    const [notificationProps, setNotificationProps] = useState({} as NotificationProps);
-    const notificationPropsRef = useRef(notificationProps);
-    notificationPropsRef.current = notificationProps;
-
-    const [timer, setTimer] = useState<number | null>(null);
-
-    const open = (type: keyof typeof properties) => () => {
-        if (notificationProps && notificationProps.isOpen) {
-            close(() => {
-                setNotificationProps({ ...properties[type] });
-                setupTimer();
-            });
-        } else {
-            setNotificationProps({ ...properties[type] });
-            setupTimer();
-        }
-    };
-
-    const close = (callback?: any) => {
-        setNotificationProps({ ...notificationPropsRef.current, isOpen: false });
-
-        setTimeout(() => {
-            setNotificationProps({ type: undefined });
-
-            if (isFunction(callback)) {
-                callback();
-            }
-        }, 200);
-    };
-
     const properties = {
-        ['info']: {
-            content: 'Info',
-            handleClick: close,
-            isOpen: true,
-            type: NotificationType.info,
-        },
-        ['success']: {
-            content: 'Success',
-            handleClick: close,
-            isOpen: true,
-            type: NotificationType.success,
-        },
-        ['warning']: {
-            content: 'Warning',
-            handleClick: close,
-            isOpen: true,
-            type: NotificationType.warning,
-        },
-        ['error']: {
+        error: {
             content: 'Error',
-            handleClick: close,
-            isOpen: true,
             type: NotificationType.error,
         },
-        ['infoWithCallback']: {
-            actionCallback() {
-                close(() => {
-                    setNotificationProps({
-                        content: 'Callback',
-                        handleClick: close,
-                        isOpen: true,
-                        type: NotificationType.success,
-                    });
-                    setupTimer();
-                });
-            },
+        info: {
+            content: 'Info',
+            type: NotificationType.info,
+        },
+        infoWithCallback: {
             actionLabel: 'Undo',
             content: 'Info with callback',
-            handleClick: close,
-            isOpen: true,
             type: NotificationType.info,
+        },
+        success: {
+            content: 'Success',
+            type: NotificationType.success,
+        },
+        warning: {
+            content: 'Warning',
+            type: NotificationType.warning,
         },
     };
 
-    const setupTimer = () => {
+    const [type, setType] = useState<keyof typeof properties | null>(null);
+    const [timer, setTimer] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const close = () => {
+        setIsOpen(false);
+    };
+
+    const open = (typeToDisplay: keyof typeof properties) => {
+        setType(typeToDisplay);
+        setIsOpen(true);
+        setTimer(window.setTimeout(close, 5000));
+    };
+
+    const onClick = (typeToDisplay: keyof typeof properties) => () => {
         if (timer) {
             clearTimeout(timer);
         }
-        setTimer(window.setTimeout(close, 5000));
+
+        /** If the notification is displayed, we need to close it, let the state be reflected and then open the notification once more */
+        if (isOpen) {
+            close();
+            setTimeout(() => {
+                open(typeToDisplay);
+            }, 500);
+        } else {
+            open(typeToDisplay);
+        }
     };
 
     return (
         <div className="demo-grid">
-            <Button type="button" theme={theme} onClick={open('info')}>
+            <Button type="button" theme={theme} onClick={onClick('info')}>
                 Info
             </Button>
 
-            <Button type="button" theme={theme} onClick={open('success')}>
+            <Button type="button" theme={theme} onClick={onClick('success')}>
                 Success
             </Button>
 
-            <Button type="button" theme={theme} onClick={open('warning')}>
+            <Button type="button" theme={theme} onClick={onClick('warning')}>
                 Warning
             </Button>
 
-            <Button type="button" theme={theme} onClick={open('error')}>
+            <Button type="button" theme={theme} onClick={onClick('error')}>
                 Error
             </Button>
 
-            <Button type="button" theme={theme} onClick={open('infoWithCallback')}>
+            <Button type="button" theme={theme} onClick={onClick('infoWithCallback')}>
                 Info with callback
             </Button>
 
-            {notificationProps !== null && <Notification {...notificationProps} />}
+            {type && (
+                <Notification
+                    isOpen={isOpen}
+                    handleClick={close}
+                    actionCallback={onClick('success')}
+                    {...properties[type]}
+                />
+            )}
         </div>
     );
 };
