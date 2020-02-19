@@ -2,13 +2,12 @@
 
 exports[`<WebBookmark> Snapshots and structure should render correctly 1`] = `
 <div
-  className="lumx-web-bookmark lumx-web-bookmark--theme-light lumx-web-bookmark--size-regular"
+  className="lumx-web-bookmark lumx-web-bookmark--theme-light"
 >
   <div
     className="lumx-web-bookmark__thumbnail"
   >
     <Thumbnail
-      align="center"
       aspectRatio="horizontal"
       image=""
       onClick={[Function]}
@@ -17,36 +16,42 @@ exports[`<WebBookmark> Snapshots and structure should render correctly 1`] = `
     />
   </div>
   <div
-    className="lumx-web-bookmark__infos"
+    className="lumx-web-bookmark__wrapper"
   >
-    <Link
+    <div
       className="lumx-web-bookmark__title"
-      color="dark"
-      colorVariant="N"
-      target="_blank"
-    />
+    >
+      <Link
+        color="dark"
+        colorVariant="N"
+        target="_blank"
+      />
+    </div>
     <p
       className="lumx-web-bookmark__description"
     />
-    <Link
+    <div
       className="lumx-web-bookmark__link"
-      color="blue"
-      colorVariant="N"
-      target="_blank"
-    />
+    >
+      <Link
+        className="lumx-web-bookmark__link"
+        color="blue"
+        colorVariant="N"
+        target="_blank"
+      />
+    </div>
   </div>
 </div>
 `;
 
 exports[`<WebBookmark> Snapshots and structure should render correctly 2`] = `
 <div
-  className="lumx-web-bookmark lumx-web-bookmark--theme-light lumx-web-bookmark--size-big"
+  className="lumx-web-bookmark lumx-web-bookmark--theme-light"
 >
   <div
     className="lumx-web-bookmark__thumbnail"
   >
     <Thumbnail
-      align="center"
       aspectRatio="horizontal"
       image=""
       onClick={[Function]}
@@ -55,23 +60,30 @@ exports[`<WebBookmark> Snapshots and structure should render correctly 2`] = `
     />
   </div>
   <div
-    className="lumx-web-bookmark__infos"
+    className="lumx-web-bookmark__wrapper"
   >
-    <Link
+    <div
       className="lumx-web-bookmark__title"
-      color="dark"
-      colorVariant="N"
-      target="_blank"
-    />
+    >
+      <Link
+        color="dark"
+        colorVariant="N"
+        target="_blank"
+      />
+    </div>
     <p
       className="lumx-web-bookmark__description"
     />
-    <Link
+    <div
       className="lumx-web-bookmark__link"
-      color="blue"
-      colorVariant="N"
-      target="_blank"
-    />
+    >
+      <Link
+        className="lumx-web-bookmark__link"
+        color="blue"
+        colorVariant="N"
+        target="_blank"
+      />
+    </div>
   </div>
 </div>
 `;

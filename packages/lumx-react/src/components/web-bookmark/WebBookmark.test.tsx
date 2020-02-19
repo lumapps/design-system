@@ -106,12 +106,6 @@ describe(`<${WebBookmark.displayName}>`, () => {
             expect(thumbnail).toHaveProp('image', expectedThumbnail);
         });
 
-        it('should set --big class variant on wrapper if size = Size.big', () => {
-            const { wrapper } = setup({ size: Size.big });
-
-            expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'size', value: Size.big }));
-        });
-
         it('should set --theme-dark class variant on wrapper if theme = Theme.dark', () => {
             const { wrapper } = setup({ theme: Theme.dark });
 
@@ -123,7 +117,13 @@ describe(`<${WebBookmark.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        // Nothing to do here.
+        const expectedUrl = 'https://expected.url';
+        const { thumbnail } = setup({ url: expectedUrl });
+        window.open = jest.fn();
+
+        thumbnail.simulate('click');
+
+        expect(window.open).toHaveBeenCalledWith(expectedUrl, '_blank');
     });
     /////////////////////////////
 
