@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, Size, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, IFocusPoint, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -44,6 +44,8 @@ interface IImageBlockProps extends IGenericProps {
           };
     /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
+    /** Focal Point coordinates. */
+    focusPoint?: IFocusPoint;
     /** The url of the image we want to display in the image-block. */
     image: string;
     /** The image block size. */
@@ -91,6 +93,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     captionStyle: {},
     description: undefined,
     fillHeight: false,
+    focusPoint: undefined,
     size: undefined,
     tags: undefined,
     theme: Theme.light,
@@ -113,6 +116,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,
     fillHeight = DEFAULT_PROPS.fillHeight,
+    focusPoint = DEFAULT_PROPS.focusPoint,
     image,
     size = DEFAULT_PROPS.size,
     tags = DEFAULT_PROPS.tags,
@@ -148,6 +152,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                 aspectRatio={aspectRatio}
                 size={size}
                 fillHeight={fillHeight}
+                focusPoint={focusPoint}
                 image={image}
                 onClick={onClick}
                 theme={theme}

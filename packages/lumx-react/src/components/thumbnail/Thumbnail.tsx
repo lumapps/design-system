@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
-import { Alignment, AspectRatio, Size, Theme } from '@lumx/react';
+import { Alignment, AspectRatio, IFocusPoint, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
@@ -10,7 +10,6 @@ import isFunction from 'lodash/isFunction';
 
 import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
-import { IFocusPoint } from './IFocusedImageOptions';
 import useFocusedImage from './useFocusedImage';
 
 /**
