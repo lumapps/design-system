@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<WebBookmark> Snapshots and structure should render correctly 1`] = `
-<a
+<div
   className="lumx-web-bookmark lumx-web-bookmark--theme-light lumx-web-bookmark--size-regular"
-  target="_blank"
 >
   <div
     className="lumx-web-bookmark__thumbnail"
@@ -12,28 +11,36 @@ exports[`<WebBookmark> Snapshots and structure should render correctly 1`] = `
       align="center"
       aspectRatio="horizontal"
       image=""
+      onClick={[Function]}
+      role="link"
+      tabIndex={0}
     />
   </div>
   <div
     className="lumx-web-bookmark__infos"
   >
-    <p
+    <Link
       className="lumx-web-bookmark__title"
+      color="dark"
+      colorVariant="N"
+      target="_blank"
     />
     <p
       className="lumx-web-bookmark__description"
     />
-    <p
+    <Link
       className="lumx-web-bookmark__link"
+      color="blue"
+      colorVariant="N"
+      target="_blank"
     />
   </div>
-</a>
+</div>
 `;
 
 exports[`<WebBookmark> Snapshots and structure should render correctly 2`] = `
-<a
+<div
   className="lumx-web-bookmark lumx-web-bookmark--theme-light lumx-web-bookmark--size-big"
-  target="_blank"
 >
   <div
     className="lumx-web-bookmark__thumbnail"
@@ -42,20 +49,29 @@ exports[`<WebBookmark> Snapshots and structure should render correctly 2`] = `
       align="center"
       aspectRatio="horizontal"
       image=""
+      onClick={[Function]}
+      role="link"
+      tabIndex={0}
     />
   </div>
   <div
     className="lumx-web-bookmark__infos"
   >
-    <p
+    <Link
       className="lumx-web-bookmark__title"
+      color="dark"
+      colorVariant="N"
+      target="_blank"
     />
     <p
       className="lumx-web-bookmark__description"
     />
-    <p
+    <Link
       className="lumx-web-bookmark__link"
+      color="blue"
+      colorVariant="N"
+      target="_blank"
     />
   </div>
-</a>
+</div>
 `;
