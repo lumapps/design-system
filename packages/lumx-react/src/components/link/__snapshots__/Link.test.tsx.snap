@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Link> Snapshots and structure should render color & color variant 1`] = `
+<a
+  className="lumx-link lumx-link--color-primary lumx-link--color-variant-D1"
+/>
+`;
+
+exports[`<Link> Snapshots and structure should render correctly 1`] = `
+<a
+  className="lumx-link"
+/>
+`;
