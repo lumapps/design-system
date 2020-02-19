@@ -1,7 +1,6 @@
 /* istanbul ignore file */
 import { text } from '@storybook/addon-knobs';
 import React from 'react';
-import { Size } from '..';
 import { WebBookmark } from './WebBookmark';
 
 export default { title: 'Web bookmark' };
@@ -16,21 +15,6 @@ Mauris ultrices pellentesque vestibulum. Etiam vel turpis at eros condimentum fe
  */
 export const simpleWebBookmark = ({ theme }: any) => (
     <WebBookmark
-        title={text('Title', 'Link title')}
-        description={text('Description', LONG_LOREM_IPSUM)}
-        url={text('URL', 'https://google.com')}
-        theme={theme}
-        thumbnail={text('Image', 'https://loremflickr.com/320/2400')}
-    />
-);
-
-/**
- * WebBookmark story
- * @return simple WebBookmark.
- */
-export const bigWebBookmark = ({ theme }: any) => (
-    <WebBookmark
-        size={Size.big}
         title={text('Title', 'Link title')}
         description={text('Description', LONG_LOREM_IPSUM)}
         url={text('URL', 'https://google.com')}
