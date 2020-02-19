@@ -11,6 +11,9 @@ export const simpleSelect = ({ theme }: any) => {
     const selectedItem = select('Selected item', CHOICES, CHOICES[0]);
     // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(true);
+    const onBlur = () => {
+        alert('on blur!');
+    };
 
     return (
         <Select
@@ -21,6 +24,7 @@ export const simpleSelect = ({ theme }: any) => {
             theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
+            onBlur={onBlur}
         >
             <List theme={theme} isClickable>
                 {CHOICES.map((choice, index) => (

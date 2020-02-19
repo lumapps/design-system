@@ -14,6 +14,8 @@ import { InputHelper } from '@lumx/react/components/input-helper/InputHelper';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 import { Placement } from '@lumx/react/components/popover/Popover';
 
+import { useClickAway } from '@lumx/react/hooks/useClickAway';
+
 import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
@@ -102,6 +104,11 @@ interface ISelectProps extends IGenericProps {
      * The callback function called when the clear button is clicked. NB: if not specified, clear buttons won't be displayed.
      */
     onClear?(event: SyntheticEvent, value?: string): void;
+
+    /**
+     * The callback function called when the select field is blurred
+     */
+    onBlur?(): void;
 
     /**
      * The callback function called on integrated search field change (500ms debounce).
@@ -236,6 +243,7 @@ const Select: React.FC<SelectProps> = ({
     helper,
     isDisabled,
     isRequired,
+    onBlur,
     isOpen = DEFAULT_PROPS.isOpen,
     onInputClick,
     onDropdownClose,
@@ -252,10 +260,26 @@ const Select: React.FC<SelectProps> = ({
     const isEmpty = value.length === 0;
     const targetUuid = 'uuid';
     const anchorRef = useRef<HTMLElement>(null);
+    const selectRef = useRef<HTMLDivElement>(null);
     const hasInputClear = onClear && !isMultiple && !isEmpty;
 
     useFocus(anchorRef.current, Boolean(isOpen));
     useHandleElementFocus(anchorRef.current, setIsFocus);
+
+    // Any click away from the dropdown container will close it.
+    useClickAway(
+        selectRef,
+        () => {
+            if (!onBlur) {
+                return;
+            }
+
+            if (!isOpen && !isFocus) {
+                onBlur();
+            }
+        },
+        [selectRef],
+    );
 
     const handleKeyboardNav = useCallback(
         (evt: React.KeyboardEvent<HTMLElement>) => {
@@ -392,6 +416,7 @@ const Select: React.FC<SelectProps> = ({
 
     return (
         <div
+            ref={selectRef}
             className={classNames(
                 className,
                 handleBasicClasses({
