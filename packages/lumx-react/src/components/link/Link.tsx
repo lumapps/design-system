@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { HTMLProps } from 'react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import classNames from 'classnames';
 
 import { Color, ColorVariant } from '@lumx/react';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -12,7 +12,7 @@ import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react
  * Defines the props of the component.
  */
 
-interface ILinkProps extends IGenericProps {
+interface ILinkProps extends HTMLProps<HTMLAnchorElement> {
     /** The icon color. */
     color?: Color;
 
