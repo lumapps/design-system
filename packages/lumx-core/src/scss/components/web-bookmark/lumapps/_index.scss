@@ -1,0 +1,58 @@
+/* ==========================================================================
+   Web bookmark
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-web-bookmark {
+    $self: &;
+
+    display: flex;
+    flex-direction: row;
+
+    &--theme-light {
+        background-color: lumx-theme-color-variant('dark', 'L6');
+    }
+
+    &--theme-dark {
+        background-color: lumx-theme-color-variant('light', 'L6');
+    }
+
+    &__thumbnail {
+        flex: 0 0 138px; // 3:2 ratio according to height (92px)
+    }
+
+    &__wrapper {
+        display: flex;
+        overflow: hidden;
+        flex: 1 1 auto;
+        flex-direction: column;
+        padding: $lumx-spacing-unit * 2;
+    }
+
+    &__title,
+    &__description,
+    &__link {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__title {
+        @include lumx-typography('subtitle1');
+    }
+
+    &__description {
+        @include lumx-typography('body1');
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant('dark', 'L2');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'L2');
+        }
+    }
+
+    &__link {
+        @include lumx-typography('body1');
+    }
+}
