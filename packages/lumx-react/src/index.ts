@@ -123,3 +123,5 @@ export { Slider } from './components/slider/Slider';
 export { Dialog, DialogSizes } from './components/dialog/Dialog';
 
 export { Uploader, UploaderProps, UploaderVariant } from './components/uploader/Uploader';
+
+export { WebBookmark, WebBookmarkProps } from './components/web-bookmark/WebBookmark';
