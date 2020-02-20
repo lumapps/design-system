@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.9][] - 2020-02-20
+
 ### Added
 
 -   New component in React : `Link`
@@ -24,7 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Added `focusPoint` prop to `Thumbnail` component
-
 
 ## [0.21.6][] - 2020-02-13
 
@@ -351,3 +352,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.7]: https://github.com/lumapps/design-system/tree/v0.21.7
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.8...HEAD
 [0.21.8]: https://github.com/lumapps/design-system/tree/v0.21.8
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.9...HEAD
+[0.21.9]: https://github.com/lumapps/design-system/tree/v0.21.9
