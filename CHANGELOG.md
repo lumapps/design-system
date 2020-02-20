@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   New component in React : `Link`
+-   Added `onBlur` prop to `Select` component
 -   New component in React : `WebBookmark`
 
 ## [0.21.8][] - 2020-02-19

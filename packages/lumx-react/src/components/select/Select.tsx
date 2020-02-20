@@ -16,8 +16,6 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
-import { useFocus } from '@lumx/react/hooks/useFocus';
-
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
@@ -102,6 +100,11 @@ interface ISelectProps extends IGenericProps {
      * The callback function called when the clear button is clicked. NB: if not specified, clear buttons won't be displayed.
      */
     onClear?(event: SyntheticEvent, value?: string): void;
+
+    /**
+     * The callback function called when the select field is blurred
+     */
+    onBlur?(): void;
 
     /**
      * The callback function called on integrated search field change (500ms debounce).
@@ -198,14 +201,37 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  * @param element    Element to focus.
  * @param setIsFocus Setter used to store the focus status of the element.
  */
-function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: boolean) => void) {
+function useHandleElementFocus(
+    element: HTMLElement | null,
+    setIsFocus: (b: boolean) => void,
+    isOpen: boolean,
+    wasBlurred: boolean,
+    setWasBlurred: (b: boolean) => void,
+    onBlur?: () => void,
+) {
     useEffect((): VoidFunction | void => {
         if (!element) {
             return undefined;
         }
 
-        const setFocus = () => setIsFocus(true);
-        const setBlur = () => setIsFocus(false);
+        const setFocus = () => {
+            if (!isOpen) {
+                setIsFocus(true);
+            }
+        };
+
+        const setBlur = () => {
+            if (!isOpen) {
+                setIsFocus(false);
+
+                if (onBlur) {
+                    onBlur();
+                }
+            }
+
+            setWasBlurred(true);
+        };
+
         element.addEventListener('focus', setFocus);
         element.addEventListener('blur', setBlur);
 
@@ -213,7 +239,7 @@ function useHandleElementFocus(element: HTMLElement | null, setIsFocus: (b: bool
             element.removeEventListener('focus', setFocus);
             element.removeEventListener('blur', setBlur);
         };
-    }, [element]);
+    }, [element, isOpen, onBlur, wasBlurred]);
 }
 
 const stopPropagation = (evt: Event) => evt.stopPropagation();
@@ -236,6 +262,7 @@ const Select: React.FC<SelectProps> = ({
     helper,
     isDisabled,
     isRequired,
+    onBlur,
     isOpen = DEFAULT_PROPS.isOpen,
     onInputClick,
     onDropdownClose,
@@ -248,14 +275,15 @@ const Select: React.FC<SelectProps> = ({
     useCustomColors,
     ...props
 }: SelectProps): React.ReactElement => {
-    const [isFocus, setIsFocus] = useState(false);
     const isEmpty = value.length === 0;
     const targetUuid = 'uuid';
     const anchorRef = useRef<HTMLElement>(null);
+    const selectRef = useRef<HTMLDivElement>(null);
+    const [isFocus, setIsFocus] = useState(Boolean(isOpen));
+    const [wasBlurred, setWasBlurred] = useState(false);
     const hasInputClear = onClear && !isMultiple && !isEmpty;
 
-    useFocus(anchorRef.current, Boolean(isOpen));
-    useHandleElementFocus(anchorRef.current, setIsFocus);
+    useHandleElementFocus(anchorRef.current, setIsFocus, Boolean(isOpen), wasBlurred, setWasBlurred, onBlur);
 
     const handleKeyboardNav = useCallback(
         (evt: React.KeyboardEvent<HTMLElement>) => {
@@ -269,6 +297,15 @@ const Select: React.FC<SelectProps> = ({
         },
         [onInputClick],
     );
+
+    const onClose = () => {
+        if (onDropdownClose) {
+            onDropdownClose();
+        }
+
+        setWasBlurred(false);
+        anchorRef?.current?.blur();
+    };
 
     const createParentElement = useCallback((): ReactNode => {
         return (
@@ -392,6 +429,7 @@ const Select: React.FC<SelectProps> = ({
 
     return (
         <div
+            ref={selectRef}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -421,7 +459,7 @@ const Select: React.FC<SelectProps> = ({
                 placement={Placement.AUTO_START}
                 showDropdown={isOpen!}
                 anchorRef={anchorRef}
-                onClose={onDropdownClose}
+                onClose={onClose}
                 onInfiniteScroll={onInfiniteScroll}
             >
                 {children}

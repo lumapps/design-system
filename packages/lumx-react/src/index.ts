@@ -2,7 +2,7 @@ import 'focus-visible';
 
 export * from './components';
 
-export { Avatar, AvatarProps } from './components/avatar/Avatar';
+export { Avatar, AvatarProps, AvatarSize } from './components/avatar/Avatar';
 
 export { Autocomplete, AutocompleteProps } from './components/autocomplete/Autocomplete';
 

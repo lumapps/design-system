@@ -1,35 +1,138 @@
-import { List, ListItem, Select, Size } from '@lumx/react';
+import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
-import { select, text } from '@storybook/addon-knobs';
-import React from 'react';
+import { text } from '@storybook/addon-knobs';
+import noop from 'lodash/noop';
+import React, { SyntheticEvent } from 'react';
 
 export default { title: 'Select' };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
 export const simpleSelect = ({ theme }: any) => {
-    const selectedItem = select('Selected item', CHOICES, CHOICES[0]);
-    // tslint:disable-next-line: no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(true);
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [values, setValues] = React.useState<string[]>([]);
+    // tslint:disable-next-line:no-unused
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+
+    const clearSelected = (event: SyntheticEvent, value: string) => {
+        event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const selectItem = (item: string) => () => {
+        if (values.includes(item)) {
+            return;
+        }
+
+        closeSelect();
+        setValues([item]);
+    };
 
     return (
         <Select
+            style={{ width: '100%' }}
             isOpen={isOpen}
-            value={[selectedItem]}
-            label={text('label', 'My select')}
-            placeholder={text('placeholder', 'Placeholder')}
+            value={values}
+            onClear={clearSelected}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
             theme={theme}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List theme={theme} isClickable>
-                {CHOICES.map((choice, index) => (
-                    <ListItem isSelected={choice === selectedItem} key={index} size={Size.tiny}>
-                        {choice}
-                    </ListItem>
-                ))}
+            <List isClickable>
+                {CHOICES.length > 0
+                    ? CHOICES.map((choice, index) => (
+                          <ListItem
+                              isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={selectItem(choice)}
+                              size={Size.tiny}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size={Size.tiny}>
+                              No data
+                          </ListItem>,
+                      ]}
             </List>
         </Select>
+    );
+};
+
+export const selectWithAnotherField = ({ theme }: any) => {
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+
+    const [values, setValues] = React.useState<string[]>([]);
+    const [blurred, setWasBlurred] = React.useState('');
+    // tslint:disable-next-line:no-unused
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+
+    const clearSelected = (event: SyntheticEvent, value: string) => {
+        event.stopPropagation();
+        setValues(value ? values.filter((val) => val !== value) : []);
+    };
+
+    const selectItem = (item: string) => () => {
+        if (values.includes(item)) {
+            return;
+        }
+
+        closeSelect();
+        setValues([item]);
+    };
+
+    const onBlur = () => {
+        setWasBlurred('was blurred');
+    };
+
+    return (
+        <>
+            <TextField
+                value={text('Value', 'myvalue')}
+                label={text('Label', 'I am the label')}
+                placeholder={text('Placeholder', 'ex: A value')}
+                theme={theme}
+                onChange={noop}
+            />
+            <Select
+                style={{ width: '100%' }}
+                isOpen={isOpen}
+                value={values}
+                onClear={clearSelected}
+                label={LABEL}
+                placeholder={PLACEHOLDER}
+                theme={theme}
+                onInputClick={toggleSelect}
+                onDropdownClose={closeSelect}
+                onBlur={onBlur}
+            >
+                <List isClickable>
+                    {CHOICES.length > 0
+                        ? CHOICES.map((choice, index) => (
+                              <ListItem
+                                  isSelected={values.includes(choice)}
+                                  key={index}
+                                  onItemSelected={selectItem(choice)}
+                                  size={Size.tiny}
+                              >
+                                  {choice}
+                              </ListItem>
+                          ))
+                        : [
+                              <ListItem key={0} size={Size.tiny}>
+                                  No data
+                              </ListItem>,
+                          ]}
+                </List>
+            </Select>
+            {blurred}
+        </>
     );
 };
 
