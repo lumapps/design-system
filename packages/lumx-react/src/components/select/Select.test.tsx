@@ -198,11 +198,15 @@ describe(`<${Select.displayName}>`, () => {
             expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
 
-        it('should pass the given `onDropdownClose` to the dropdown', () => {
+        it('should trigger the given `onDropdownClose` on dropdown close', () => {
             const onDropdownClose = jest.fn();
             const { dropdown } = setup({ onDropdownClose });
 
-            expect(dropdown).toHaveProp('onClose', onDropdownClose);
+            const props: any = dropdown.props();
+
+            props.onClose();
+
+            expect(onDropdownClose).toHaveBeenCalled();
         });
 
         it('should pass the given `isOpen` to the dropdown', () => {
