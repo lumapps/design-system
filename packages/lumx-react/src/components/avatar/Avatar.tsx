@@ -97,4 +97,4 @@ Avatar.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps };
+export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps, AvatarSize };
