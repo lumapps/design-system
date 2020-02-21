@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FileAttachment> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-file-attachment lumx-file-attachment--theme-light"
+>
+  <Icon
+    className="lumx-file-attachment__icon"
+    color="dark"
+    icon="M13,9V3.5L18.5,9M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2H6Z"
+    onClick={[Function]}
+    role="link"
+    size="l"
+    tabIndex={0}
+    theme="light"
+  />
+  <div
+    className="lumx-file-attachment__infos"
+  >
+    <Link
+      className="lumx-file-attachment__title"
+      color="dark"
+      colorVariant="N"
+      href=""
+    />
+    <p
+      className="lumx-file-attachment__description"
+    />
+    <Link
+      className="lumx-file-attachment__link"
+      color="blue"
+      colorVariant="N"
+      href=""
+    />
+  </div>
+</div>
+`;

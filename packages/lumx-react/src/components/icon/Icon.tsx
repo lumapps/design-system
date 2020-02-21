@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { HTMLAttributes, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,13 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import {
-    IGenericProps,
-    ValidateParameters,
-    getRootClassName,
-    handleBasicClasses,
-    validateComponent,
-} from '@lumx/react/utils';
+import { ValidateParameters, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -21,7 +15,7 @@ type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.
 /**
  * Defines the props of the component.
  */
-interface IIconProps extends IGenericProps {
+interface IIconProps extends HTMLAttributes<HTMLElement> {
     /**
      * The icon SVG path draw code (`d` property of the `<path>` SVG element).
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}

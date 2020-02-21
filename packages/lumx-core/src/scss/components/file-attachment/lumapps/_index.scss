@@ -1,0 +1,83 @@
+/* ==========================================================================
+   File Attachment
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-file-attachment {
+    $self: &;
+
+    display: flex;
+    align-items: center;
+
+    padding: $lumx-spacing-unit * 2;
+
+    &--theme-light {
+        background-color: lumx-theme-color-variant('dark', 'L6');
+    }
+
+    &--theme-dark {
+        background-color: lumx-theme-color-variant('light', 'L6');
+    }
+
+    &__icon {
+        position: relative;
+        cursor: pointer;
+
+        &::after {
+            @include lumx-state-transition;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: $lumx-spacing-unit / 2;
+            content: '';
+            pointer-events: none;
+        }
+
+        &:hover::after {
+            @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        }
+
+        &:active::after {
+            @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        }
+    }
+
+    &__infos {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: $lumx-spacing-unit * 2;
+    }
+
+    &__title,
+    &__description,
+    &__link {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__title {
+        @include lumx-typography('subtitle1');
+    }
+
+    &__description {
+        @include lumx-typography('body1');
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant('dark', 'L2');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'L2');
+        }
+    }
+
+    &__link {
+        @include lumx-typography('body1');
+    }
+}

@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   New component in React : `Link`
 -   New component in React : `WebBookmark`
+-   New component in React : `FileAttachment`
+-   New component in React : `FileAttachmentMultiple`
 
 ## [0.21.8][] - 2020-02-19
 

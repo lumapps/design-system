@@ -2,32 +2,23 @@ import { mdiFile } from '@lumx/icons';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode, useMemo } from 'react';
-import { AspectRatio, Size } from '..';
+import React, { useCallback, useMemo } from 'react';
+import { AspectRatio, ColorPalette, ColorVariant, Size, Theme } from '..';
 import { Icon } from '../icon/Icon';
+import { Link } from '../link/Link';
 import { Thumbnail, ThumbnailVariant } from '../thumbnail/Thumbnail';
+import { IFile } from './types';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IBaseFileAttachmentProps extends IGenericProps {
-    /**
-     * FileAttachment content.
-     */
-    children?: ReactNode;
-
-    fileUrl?: string;
-
-    fileTitle?: string;
-
-    fileImage?: string;
-
-    fileIcon?: ReactNode;
-
-    fileDescription?: string;
+interface IFileAttachmentProps extends IGenericProps, IFile {
+    /** The theme. */
+    theme?: Theme;
 }
+type FileAttachmentProps = IFileAttachmentProps;
 
 /////////////////////////////
 //                         //
@@ -48,37 +39,65 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IBaseFileAttachmentProps = {
-    fileIcon: <Icon size={Size.l} icon={mdiFile} />,
+const DEFAULT_PROPS: Partial<FileAttachmentProps> = {
+    theme: Theme.light,
 };
 
-const FileAttachment: React.FC<IBaseFileAttachmentProps> = ({
+const FileAttachment: React.FC<FileAttachmentProps> = ({
     className,
-    fileIcon = DEFAULT_PROPS.fileIcon,
-    fileImage,
-    fileTitle,
-    fileUrl,
-    fileDescription,
+    icon = DEFAULT_PROPS.icon,
+    thumbnail,
+    title,
+    url = '',
+    description,
+    theme = DEFAULT_PROPS.theme,
     ...props
-}: IBaseFileAttachmentProps): ReactElement => {
-    const fileName = useMemo(() => fileUrl?.substr(fileUrl.lastIndexOf('/') + 1) || '', [fileUrl]);
-
+}) => {
+    const fileName = useMemo(() => url.substr(url.lastIndexOf('/') + 1) || '', [url]);
+    const onFileClick = useCallback(() => window.open(url, '_blank'), [url]);
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
-            {fileImage ? (
+        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props}>
+            {thumbnail ? (
                 <Thumbnail
-                    size={Size.l}
+                    role="link"
                     variant={ThumbnailVariant.rounded}
+                    onClick={onFileClick}
+                    tabIndex={0}
+                    {...thumbnail}
+                    size={Size.l}
                     aspectRatio={AspectRatio.square}
-                    image={fileImage}
                 />
             ) : (
-                fileIcon
+                <Icon
+                    role="link"
+                    tabIndex={0}
+                    onClick={onFileClick}
+                    icon={mdiFile}
+                    theme={theme}
+                    color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
+                    {...icon}
+                    className={classNames(`${CLASSNAME}__icon`, icon?.className)}
+                    size={Size.l}
+                />
             )}
             <div className={`${CLASSNAME}__infos`}>
-                <p className={`${CLASSNAME}__title`}>{fileTitle}</p>
-                <p className={`${CLASSNAME}__description`}>{fileDescription}</p>
-                <p className={`${CLASSNAME}__link`}>{fileName}</p>
+                <Link
+                    className={`${CLASSNAME}__title`}
+                    color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
+                    colorVariant={ColorVariant.N}
+                    href={url}
+                >
+                    {title}
+                </Link>
+                <p className={`${CLASSNAME}__description`}>{description}</p>
+                <Link
+                    className={`${CLASSNAME}__link`}
+                    color={theme === Theme.light ? ColorPalette.blue : ColorPalette.light}
+                    colorVariant={ColorVariant.N}
+                    href={url}
+                >
+                    {fileName}
+                </Link>
             </div>
         </div>
     );
@@ -86,4 +105,4 @@ const FileAttachment: React.FC<IBaseFileAttachmentProps> = ({
 
 FileAttachment.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, FileAttachment, IBaseFileAttachmentProps };
+export { CLASSNAME, DEFAULT_PROPS, FileAttachment, FileAttachmentProps };

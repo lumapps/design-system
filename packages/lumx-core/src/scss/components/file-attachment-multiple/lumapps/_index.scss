@@ -1,0 +1,55 @@
+/* ==========================================================================
+   File Attachment Multiple
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-file-attachment-multiple {
+    &--theme-light {
+        background-color: lumx-theme-color-variant('dark', 'L6');
+    }
+
+    &--theme-dark {
+        background-color: lumx-theme-color-variant('light', 'L6');
+    }
+
+    &__file {
+        padding-right: $lumx-spacing-unit * 2;
+        padding-left: $lumx-spacing-unit * 2;
+    }
+
+    &__link {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__divider {
+        margin: 0 $lumx-spacing-unit * 2 0 $lumx-spacing-unit * 8.5 !important;
+        margin-left: 68px;
+    }
+
+    &__file-icon {
+        position: relative;
+        cursor: pointer;
+
+        &::after {
+            @include lumx-state-transition;
+
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-radius: $lumx-spacing-unit / 2;
+            content: '';
+            pointer-events: none;
+        }
+
+        &:hover::after {
+            @include lumx-state(lumx-base-const('state', 'HOVER'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        }
+
+        &:active::after {
+            @include lumx-state(lumx-base-const('state', 'ACTIVE'), lumx-base-const('emphasis', 'LOW'), 'dark');
+        }
+    }
+}

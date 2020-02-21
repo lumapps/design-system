@@ -2,36 +2,32 @@ import { mdiFile } from '@lumx/icons';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
-import { AspectRatio, Size } from '..';
+import React, { Fragment, ReactElement, ReactNode } from 'react';
+import { AspectRatio, ColorPalette, ColorVariant, Size, Theme } from '..';
 import { Icon } from '../icon/Icon';
+import { Link } from '../link/Link';
 import { List } from '../list/List';
 import { ListDivider } from '../list/ListDivider';
 import { ListItem } from '../list/ListItem';
 import { Thumbnail, ThumbnailVariant } from '../thumbnail/Thumbnail';
+import { IFile } from './types';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IBaseFileAttachmentMultipleProps extends IGenericProps {
+interface IFileAttachmentMultipleProps extends IGenericProps {
+    /** Theme. */
+    theme: Theme;
     /**
      * FileAttachmentMultiple content.
      */
     children?: ReactNode;
-    files: Array<{
-        fileUrl?: string;
-
-        fileTitle?: string;
-
-        fileImage?: string;
-
-        fileIcon?: ReactElement;
-
-        fileDescription?: string;
-    }>;
+    /** Array of files you want to display. */
+    files: IFile[];
 }
+type FileAttachmentMultipleProps = IFileAttachmentMultipleProps;
 
 /////////////////////////////
 //                         //
@@ -52,44 +48,63 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IBaseFileAttachmentMultipleProps = {
-    files: [],
+const DEFAULT_PROPS: Partial<FileAttachmentMultipleProps> = {
+    theme: Theme.light,
 };
 
-const FileAttachmentMultiple: React.FC<IBaseFileAttachmentMultipleProps> = ({
+const makeOnFileClick = (url?: string) => () => window.open(url, '_blank');
+
+const FileAttachmentMultiple: React.FC<FileAttachmentMultipleProps> = ({
     className,
     files,
-}: IBaseFileAttachmentMultipleProps): ReactElement => {
+    theme = DEFAULT_PROPS.theme,
+    ...props
+}) => {
     return (
-        <List isClickable className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
-            {files.map(({ fileImage, fileIcon = <Icon icon={mdiFile} size={Size.m} />, fileUrl }, index) => {
+        <List className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props}>
+            {files.map(({ thumbnail, icon = { icon: mdiFile }, url }, index) => {
                 return (
-                    <>
+                    <Fragment key={url}>
                         <ListItem
+                            className={`${CLASSNAME}__file`}
                             before={
-                                fileImage ? (
+                                thumbnail ? (
                                     <Thumbnail
-                                        size={Size.m}
+                                        role="link"
                                         variant={ThumbnailVariant.rounded}
+                                        onClick={makeOnFileClick(url)}
+                                        tabIndex={0}
+                                        {...thumbnail}
+                                        size={Size.m}
                                         aspectRatio={AspectRatio.square}
-                                        image={fileImage}
                                     />
                                 ) : (
-                                    fileIcon
+                                    <Icon
+                                        role="link"
+                                        icon={mdiFile}
+                                        color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
+                                        theme={theme}
+                                        onClick={makeOnFileClick(url)}
+                                        tabIndex={0}
+                                        {...icon}
+                                        className={classNames(`${CLASSNAME}__file-icon`, icon.className)}
+                                        size={Size.m}
+                                    />
                                 )
                             }
                         >
-                            <p className={`${CLASSNAME}__link`}>{fileUrl?.substr(fileUrl.lastIndexOf('/') + 1)}</p>
+                            <Link
+                                className={`${CLASSNAME}__link`}
+                                href={url}
+                                target="_blank"
+                                color={theme === Theme.light ? ColorPalette.blue : ColorPalette.light}
+                                colorVariant={ColorVariant.N}
+                            >
+                                {url.substr(url.lastIndexOf('/') + 1)}
+                            </Link>
                         </ListItem>
-                        {index < files.length - 1 && (
-                            <ListDivider
-                                style={{
-                                    margin: '0px 16px',
-                                    marginLeft: '68px',
-                                }}
-                            />
-                        )}
-                    </>
+                        {index < files.length - 1 && <ListDivider className={`${CLASSNAME}__divider`} />}
+                    </Fragment>
                 );
             })}
         </List>
@@ -98,4 +113,4 @@ const FileAttachmentMultiple: React.FC<IBaseFileAttachmentMultipleProps> = ({
 
 FileAttachmentMultiple.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, FileAttachmentMultiple, IBaseFileAttachmentMultipleProps };
+export { CLASSNAME, DEFAULT_PROPS, FileAttachmentMultiple, FileAttachmentMultipleProps };

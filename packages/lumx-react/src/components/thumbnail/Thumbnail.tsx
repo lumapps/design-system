@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { HTMLAttributes, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,7 +8,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import isFunction from 'lodash/isFunction';
 
-import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { Callback, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import useFocusedImage from './useFocusedImage';
 
@@ -57,7 +57,7 @@ enum ImageLoading {
 /**
  * Defines the props of the component.
  */
-interface IThumbnailProps extends IGenericProps {
+interface IThumbnailProps extends HTMLAttributes<HTMLDivElement> {
     /** The thumbnail alignment. */
     align?: Alignment;
     /** The image aspect ratio. */
@@ -74,7 +74,8 @@ interface IThumbnailProps extends IGenericProps {
     theme?: Theme;
     /** Variant. */
     variant?: ThumbnailVariant;
-
+    /** Alt of the img. */
+    alt?: string;
     /** Focal Point coordinates. */
     focusPoint?: IFocusPoint;
 }
@@ -135,7 +136,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     variant = DEFAULT_PROPS.variant,
     image,
     alt = 'Thumbnail',
-    onClick = null,
+    onClick,
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
 }: ThumbnailProps): ReactElement => {
@@ -152,7 +153,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             )}
             tabIndex={isFunction(onClick) ? 0 : -1}
             onClick={onClick}
-            onKeyDown={onEnterPressed(onClick)}
+            onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}
             {...props}
         >
             {aspectRatio === AspectRatio.original ? (
