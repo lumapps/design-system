@@ -10,15 +10,15 @@ export const multipleAttachmentFile = ({ theme }: { theme: Theme }) => (
         theme={theme}
         files={[
             {
-                fileThumbnail: { image: 'https://loremflickr.com/320/240' },
-                fileUrl: 'https://cdn.com/api/pdf/presentation-2020.pdf',
+                thumbnail: { image: 'https://loremflickr.com/320/240' },
+                url: 'https://cdn.com/api/pdf/presentation-2020.pdf',
             },
             {
-                fileIcon: { icon: mdiFilePdfBox },
-                fileUrl: 'https://cdn.com/api/pdf/presentation-2020.pdf',
+                icon: { icon: mdiFilePdfBox },
+                url: 'https://cdn.com/api/pdf/presentation-2020.pdf',
             },
             {
-                fileUrl: 'https://cdn.com/api/pdf/presentation-2020.pdf',
+                url: 'https://cdn.com/api/pdf/presentation-2020.pdf',
             },
         ]}
     />

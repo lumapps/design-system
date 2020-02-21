@@ -110,7 +110,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
                         theme={theme}
                         onClick={onClick}
                         variant={ThumbnailVariant.rounded}
-                        tabIndex="0"
+                        tabIndex={0}
                     />
                 </div>
             )}
