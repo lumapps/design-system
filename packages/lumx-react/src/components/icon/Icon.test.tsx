@@ -118,7 +118,7 @@ describe(`<${Icon.displayName}>`, () => {
                     expect(path).toHaveProp('d', modifiedProps[prop]);
                 } else {
                     expect(i).toHaveClassName(
-                        getBasicClass({ prefix: CLASSNAME, type: prop, value: modifiedProps[prop] }),
+                        getBasicClass({ prefix: CLASSNAME, type: prop, value: (modifiedProps as any)[prop] }),
                     );
                 }
             });
