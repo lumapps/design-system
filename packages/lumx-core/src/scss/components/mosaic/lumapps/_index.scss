@@ -1,0 +1,96 @@
+/* ==========================================================================
+   Mosaic
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-mosaic {
+    $self: &;
+
+    position: relative;
+    overflow: hidden;
+    padding-top: map-get($lumx-thumbnail-aspect-ratio, 'horizontal');
+
+    &__wrapper {
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        left: -1px;
+        display: grid;
+
+        #{$self}--has-2-thumbnails & {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        #{$self}--has-3-thumbnails & {
+            grid-template-areas:
+                'big small1'
+                'big small2';
+            grid-template-columns: 3fr 1fr;
+        }
+
+        #{$self}--has-4-thumbnails & {
+            grid-template-areas:
+                'big big big'
+                'small1 small2 small3';
+            grid-template-rows: 2fr 1fr;
+        }
+    }
+
+    &__thumbnail {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin: 1px;
+
+        #{$self}--has-3-thumbnails & {
+            &:nth-child(1) {
+                grid-area: big;
+            }
+
+            &:nth-child(2) {
+                grid-area: small1;
+            }
+
+            &:nth-child(3) {
+                grid-area: small2;
+            }
+        }
+
+        #{$self}--has-4-thumbnails & {
+            &:nth-child(1) {
+                grid-area: big;
+            }
+
+            &:nth-child(2) {
+                grid-area: small1;
+            }
+
+            &:nth-child(3) {
+                grid-area: small2;
+            }
+
+            &:nth-child(4) {
+                grid-area: small3;
+            }
+        }
+    }
+
+    &__overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: lumx-theme-color-variant('dark', 'L3');
+        pointer-events: none;
+
+        span {
+            @include lumx-typography('subtitle1');
+
+            color: lumx-theme-color-variant('light', 'N');
+        }
+    }
+}
