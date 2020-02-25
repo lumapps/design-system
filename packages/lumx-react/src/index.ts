@@ -58,6 +58,8 @@ export { ListSubheader, ListSubheaderProps } from './components/list/ListSubhead
 
 export { MessageKind, Message, MessageProps } from './components/message/Message';
 
+export { Mosaic, MosaicProps } from './components/mosaic/Mosaic';
+
 export { Notification, NotificationProps, NotificationType } from './components/notification/Notification';
 
 export { ElementPosition, Popover, PopoverProps, Placement, Offset } from './components/popover/Popover';

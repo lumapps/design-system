@@ -1,0 +1,246 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-4-thumbnails"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/200"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="1"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/210"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="2"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/220"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="3"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/230"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/200"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-4-thumbnails"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/200"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="1"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/210"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="2"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/220"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="3"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/230"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+      <div
+        className="lumx-mosaic__overlay"
+      >
+        <span>
+          +
+          2
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-3-thumbnails"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/200"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="1"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/210"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="2"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/220"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-2-thumbnails"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/200"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="1"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/210"
+        onClick={[Function]}
+        tabIndex="0"
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
