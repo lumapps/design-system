@@ -1,4 +1,4 @@
-import { CLASSNAME, IMosaicProps, Mosaic } from '@lumx/react/components/mosaic/Mosaic';
+import { CLASSNAME, Mosaic, MosaicProps } from '@lumx/react/components/mosaic/Mosaic';
 
 import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
@@ -19,7 +19,7 @@ jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<IMosaicProps>;
+type ISetupProps = Partial<MosaicProps>;
 
 /**
  * Defines what the `setup` function will return.
