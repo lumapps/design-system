@@ -90,6 +90,7 @@ enum AspectRatio {
     horizontal = 'horizontal',
     vertical = 'vertical',
     square = 'square',
+    free = 'free',
 }
 
 /**
