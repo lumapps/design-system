@@ -31,7 +31,7 @@
                     lx-on-click="lx.select(selected, $event)"
                     lx-size="s"
                     lx-theme="{{ lx.theme === 'dark' ? 'dark' : 'light' }}"
-                    ng-repeat="selected in lx.viewValue"
+                    ng-repeat="selected in lx.viewValue track by $index"
                     ng-disabled="lx.isDisabled"
                 >
                     <lx-chip-label ng-bind-html="lx.displaySelected(selected)"></lx-chip-label>
@@ -122,29 +122,34 @@
                 />
             </div>
 
+            <!-- Default choices -->
             <lx-list
                 lx-custom-colors="lx.customColors"
                 lx-focus-on-init="!lx.hasFilter"
                 lx-is-clickable="true"
-                ng-if="lx.hasChoices() && !lx.isLoading"
+                ng-if="lx.isChoicesArray() && lx.hasChoices() && !lx.isLoading"
             >
-                <!-- Default choices -->
                 <lx-list-item
                     lx-is-selected="lx.isSelected(choice)"
                     lx-size="tiny"
                     ng-repeat="choice in lx.choices | lxSelectChoicesFilter:lx.filter:lx.filterModel"
                     ng-click="lx.select(choice, $event)"
                     lx-enter-keydown="lx.select(choice, $event)"
-                    ng-if="::lx.isChoicesArray()"
                 >
                     <lx-list-item-content ng-bind-html="::lx.displayChoice(choice)"></lx-list-item-content>
                 </lx-list-item>
+            </lx-list>
 
-                <!-- Subheader choices -->
+            <!-- Subheader choices -->
+            <lx-list
+                lx-custom-colors="lx.customColors"
+                lx-focus-on-init="!lx.hasFilter"
+                lx-is-clickable="true"
+                ng-if="!lx.isChoicesArray() && lx.hasChoices() && !lx.isLoading"
+            >
                 <lx-list-subheader
                     ng-repeat-start="(subheader, children) in lx.choices"
                     ng-bind-html="lx.displaySubheader(subheader)"
-                    ng-if="::!lx.isChoicesArray()"
                 ></lx-list-subheader>
 
                 <lx-list-item
@@ -154,7 +159,6 @@
                     ng-repeat-end
                     ng-click="lx.select(choice, $event)"
                     lx-enter-keydown="lx.select(choice, $event)"
-                    ng-if="::!lx.isChoicesArray()"
                 >
                     <lx-list-item-content ng-bind-html="::lx.displayChoice(choice)"></lx-list-item-content>
                 </lx-list-item>
