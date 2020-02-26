@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 
-import { AspectRatio, ImageBlock, Lightbox, Slideshow, SlideshowItem } from '@lumx/react';
+import { Alignment, ImageBlock, Lightbox, Slideshow, SlideshowItem, Theme } from '@lumx/react';
 import { Mosaic } from './Mosaic';
 
 export default { title: 'Mosaic' };
@@ -68,12 +68,12 @@ export const sixThumbnails = ({ theme }: any) => {
     const [activeIndex, setActiveIndex] = useState();
     const lightBoxParent = useRef(null);
     const thumbnails = [
-        { onClick: setActiveIndex, url: 'https://picsum.photos/200' },
-        { onClick: setActiveIndex, url: 'https://picsum.photos/210' },
-        { onClick: setActiveIndex, url: 'https://picsum.photos/220' },
-        { onClick: setActiveIndex, url: 'https://picsum.photos/230' },
-        { onClick: setActiveIndex, url: 'https://picsum.photos/240' },
-        { onClick: setActiveIndex, url: 'https://picsum.photos/250' },
+        { onClick: setActiveIndex, url: 'https://picsum.photos/640/480/?image=24' },
+        { onClick: setActiveIndex, url: 'https://picsum.photos/640/480/?image=25' },
+        { onClick: setActiveIndex, url: 'https://picsum.photos/640/480/?image=26' },
+        { onClick: setActiveIndex, url: 'https://picsum.photos/640/480/?image=27' },
+        { onClick: setActiveIndex, url: 'https://picsum.photos/640/480/?image=28' },
+        { onClick: setActiveIndex, url: 'https://picsum.photos/640/480/?image=29' },
     ];
     const closeLightBox = useCallback(() => {
         setActiveIndex(null);
@@ -82,16 +82,22 @@ export const sixThumbnails = ({ theme }: any) => {
     return (
         <div ref={lightBoxParent} style={wrapperStyle}>
             <Mosaic theme={theme} thumbnails={thumbnails} />
+
             <Lightbox
-                onClose={closeLightBox}
-                parentElement={lightBoxParent}
                 isOpen={activeIndex !== undefined && activeIndex !== null}
+                parentElement={lightBoxParent}
+                onClose={closeLightBox}
             >
-                <Slideshow activeIndex={activeIndex} hasControls={true} theme={theme} autoPlay={false} groupBy={1}>
+                <Slideshow activeIndex={activeIndex} hasControls={true} fillHeight={true} theme={Theme.dark}>
                     {thumbnails.map((th, idx) => {
                         return (
                             <SlideshowItem key={`${th.url}-${idx}`}>
-                                <ImageBlock aspectRatio={AspectRatio.horizontal} image={th.url} theme={theme} />
+                                <ImageBlock
+                                    image={th.url}
+                                    align={Alignment.center}
+                                    fillHeight={true}
+                                    theme={Theme.dark}
+                                />
                             </SlideshowItem>
                         );
                     })}
