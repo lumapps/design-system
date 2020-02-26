@@ -101,7 +101,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
-        image="https://picsum.photos/200"
+        image="https://picsum.photos/640/480/?image=24"
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -114,7 +114,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
-        image="https://picsum.photos/210"
+        image="https://picsum.photos/640/480/?image=25"
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -127,7 +127,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
-        image="https://picsum.photos/220"
+        image="https://picsum.photos/640/480/?image=26"
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -140,7 +140,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
-        image="https://picsum.photos/230"
+        image="https://picsum.photos/640/480/?image=27"
         onClick={[Function]}
         tabIndex="0"
         theme="light"
