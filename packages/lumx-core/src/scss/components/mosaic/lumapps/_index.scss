@@ -23,15 +23,15 @@
 
         #{$self}--has-3-thumbnails & {
             grid-template-areas:
-                'big small1'
-                'big small2';
+                'b3 s31'
+                'b3 s32';
             grid-template-columns: 3fr 1fr;
         }
 
         #{$self}--has-4-thumbnails & {
             grid-template-areas:
-                'big big big'
-                'small1 small2 small3';
+                'b4 b4 b4'
+                's41 s42 s43';
             grid-template-rows: 2fr 1fr;
         }
     }
@@ -44,33 +44,33 @@
 
         #{$self}--has-3-thumbnails & {
             &:nth-child(1) {
-                grid-area: big;
+                grid-area: b3;
             }
 
             &:nth-child(2) {
-                grid-area: small1;
+                grid-area: s31;
             }
 
             &:nth-child(3) {
-                grid-area: small2;
+                grid-area: s32;
             }
         }
 
         #{$self}--has-4-thumbnails & {
             &:nth-child(1) {
-                grid-area: big;
+                grid-area: b4;
             }
 
             &:nth-child(2) {
-                grid-area: small1;
+                grid-area: s41;
             }
 
             &:nth-child(3) {
-                grid-area: small2;
+                grid-area: s42;
             }
 
             &:nth-child(4) {
-                grid-area: small3;
+                grid-area: s43;
             }
         }
     }
