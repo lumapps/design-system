@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Flex-view
+   ========================================================================== */
+
+/* Orientation
+   ========================================================================== */
+
+.#{$lumx-base-prefix}--orientation-horizontal,
+.#{$lumx-base-prefix}--orientation-vertical {
+    display: flex;
+}
+
+.#{$lumx-base-prefix}--orientation-horizontal {
+    flex-direction: row;
+}
+
+.#{$lumx-base-prefix}--orientation-vertical {
+    min-height: 0;
+    flex-direction: column;
+}
+
+/* Alignment
+      ========================================================================== */
+
+.#{$lumx-base-prefix}--container-row.#{$lumx-base-prefix}--h-align-top,
+.#{$lumx-base-prefix}--container-column.#{$lumx-base-prefix}--v-align-left {
+    align-items: flex-start;
+}
+
+.#{$lumx-base-prefix}--container-row.#{$lumx-base-prefix}--h-align-center,
+.#{$lumx-base-prefix}--container-column.#{$lumx-base-prefix}--v-align-center {
+    align-items: center;
+}
+
+.#{$lumx-base-prefix}--container-row.#{$lumx-base-prefix}--h-align-bottom,
+.#{$lumx-base-prefix}--container-column.#{$lumx-base-prefix}--v-align-right {
+    align-items: flex-end;
+}
+
+.#{$lumx-base-prefix}--container-row.#{$lumx-base-prefix}--v-align-left,
+.#{$lumx-base-prefix}--container-column.#{$lumx-base-prefix}--h-align-top {
+    justify-content: flex-start;
+}
+
+.#{$lumx-base-prefix}--container-row.#{$lumx-base-prefix}--v-align-center,
+.#{$lumx-base-prefix}--container-column.#{$lumx-base-prefix}--h-align-center {
+    justify-content: center;
+}
+
+.#{$lumx-base-prefix}--container-row.#{$lumx-base-prefix}--v-align-right,
+.#{$lumx-base-prefix}--container-column.#{$lumx-base-prefix}--h-align-bottom {
+    justify-content: flex-end;
+}
+
+/* Wrap
+      ========================================================================== */
+
+.#{$lumx-base-prefix}--wrap {
+    flex-wrap: nowrap;
+}
+
+/* Fill space
+      ========================================================================== */
+
+.#{$lumx-base-prefix}--fill-space {
+    flex: 1 1 auto;
+}
+
+/* No shrink
+      ========================================================================== */
+
+.#{$lumx-base-prefix}--no-shrink {
+    flex-shrink: 0;
+}
+
+/* Margin
+      ========================================================================== */
+
+.#{$lumx-base-prefix}--margin-auto-top {
+    margin-top: auto;
+}
+
+.#{$lumx-base-prefix}--margin-auto-right {
+    margin-right: auto;
+}
+
+.#{$lumx-base-prefix}--margin-auto-bottom {
+    margin-bottom: auto;
+}
+
+.#{$lumx-base-prefix}--margin-auto-left {
+    margin-left: auto;
+}
