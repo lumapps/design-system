@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   New component in React: `Mosaic`
+-   Added `size` prop to `WebBookmark` component
 
 ## [0.21.9][] - 2020-02-20
 
