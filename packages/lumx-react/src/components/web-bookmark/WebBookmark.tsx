@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import { AspectRatio, ColorPalette, ColorVariant, Link, Theme, Thumbnail } from '@lumx/react';
+import { AspectRatio, ColorPalette, ColorVariant, Link, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -21,6 +21,8 @@ interface IWebBookmarkProps extends IGenericProps {
         | {
               __html: string;
           };
+    /** The size variant of the web bookmark. */
+    size?: Size.regular | Size.big;
     /** Theme. */
     theme?: Theme;
     /** Thumbnail image source */
@@ -57,6 +59,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    size: Size.regular,
     theme: Theme.light,
 };
 /////////////////////////////
@@ -71,47 +74,51 @@ const WebBookmark: React.FC<WebBookmarkProps> = ({
     title,
     description,
     url,
+    size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     thumbnail = '',
 }) => {
     const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
 
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}>
-            <div className={`${CLASSNAME}__thumbnail`}>
-                <Thumbnail
-                    onClick={goToUrl}
-                    role="link"
-                    tabIndex={0}
-                    image={thumbnail}
-                    aspectRatio={AspectRatio.horizontal}
-                />
-            </div>
-
+        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}>
             <div className={`${CLASSNAME}__wrapper`}>
-                <div className={`${CLASSNAME}__title`}>
-                    <Link
-                        target="_blank"
-                        href={url}
-                        color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
-                        colorVariant={ColorVariant.N}
-                    >
-                        {title}
-                    </Link>
+                <div className={`${CLASSNAME}__thumbnail`}>
+                    <Thumbnail
+                        onClick={goToUrl}
+                        role="link"
+                        tabIndex={0}
+                        image={thumbnail}
+                        aspectRatio={AspectRatio.free}
+                        fillHeight
+                    />
                 </div>
 
-                <p className={`${CLASSNAME}__description`}>{description}</p>
+                <div className={`${CLASSNAME}__container`}>
+                    <div className={`${CLASSNAME}__title`}>
+                        <Link
+                            target="_blank"
+                            href={url}
+                            color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
+                            colorVariant={ColorVariant.N}
+                        >
+                            {title}
+                        </Link>
+                    </div>
 
-                <div className={`${CLASSNAME}__link`}>
-                    <Link
-                        className={`${CLASSNAME}__link`}
-                        target="_blank"
-                        href={url}
-                        color={theme === Theme.light ? ColorPalette.blue : ColorPalette.light}
-                        colorVariant={ColorVariant.N}
-                    >
-                        {url}
-                    </Link>
+                    <p className={`${CLASSNAME}__description`}>{description}</p>
+
+                    <div className={`${CLASSNAME}__link`}>
+                        <Link
+                            className={`${CLASSNAME}__link`}
+                            target="_blank"
+                            href={url}
+                            color={theme === Theme.light ? ColorPalette.blue : ColorPalette.light}
+                            colorVariant={ColorVariant.N}
+                        >
+                            {url}
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
