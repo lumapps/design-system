@@ -7,15 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
--   New component in React : `Mosaic`
+### Added
+
+-   New component in React: `Mosaic`
 
 ## [0.21.9][] - 2020-02-20
 
 ### Added
 
--   New component in React : `Link`
+-   New component in React: `Link`
 -   Added `onBlur` prop to `Select` component
--   New component in React : `WebBookmark`
+-   New component in React: `WebBookmark`
 
 ## [0.21.8][] - 2020-02-19
 
