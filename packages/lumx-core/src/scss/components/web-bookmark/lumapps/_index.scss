@@ -5,8 +5,10 @@
 .#{$lumx-base-prefix}-web-bookmark {
     $self: &;
 
-    display: flex;
-    flex-direction: row;
+    &--size-big {
+        position: relative;
+        padding-top: map-get($lumx-thumbnail-aspect-ratio, 'horizontal');
+    }
 
     &--theme-light {
         background-color: lumx-theme-color-variant('dark', 'L6');
@@ -16,16 +18,49 @@
         background-color: lumx-theme-color-variant('light', 'L6');
     }
 
-    &__thumbnail {
-        flex: 0 0 138px; // 3:2 ratio according to height (92px)
-    }
-
     &__wrapper {
         display: flex;
+
+        #{$self}--size-regular & {
+            flex-direction: row;
+        }
+
+        #{$self}--size-big & {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            flex-direction: column;
+        }
+    }
+
+    &__thumbnail {
+        display: flex;
+        flex-direction: column;
+
+        #{$self}--size-regular & {
+            flex: 0 0 138px; // 3:2 ratio according to height (92px)
+        }
+
+        #{$self}--size-big & {
+            flex: 1 1 auto;
+        }
+    }
+
+    &__container {
+        display: flex;
         overflow: hidden;
-        flex: 1 1 auto;
         flex-direction: column;
         padding: $lumx-spacing-unit * 2;
+
+        #{$self}--size-regular & {
+            flex: 1 1 auto;
+        }
+
+        #{$self}--size-big & {
+            flex-shrink: 0;
+        }
     }
 
     &__title,
