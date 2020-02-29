@@ -17,14 +17,9 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { SelectVariant } from './constants';
 
-/**
- * The authorized variants.
- */
-enum SelectVariant {
-    input = 'input',
-    chip = 'chip',
-}
+/////////////////////////////
 
 /**
  * Defines the props of the component.
