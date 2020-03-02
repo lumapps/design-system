@@ -1,4 +1,11 @@
-import React, { AnchorHTMLAttributes, KeyboardEventHandler, MouseEventHandler, SyntheticEvent } from 'react';
+import React, {
+    AnchorHTMLAttributes,
+    KeyboardEventHandler,
+    MouseEventHandler,
+    ReactElement,
+    ReactNode,
+    SyntheticEvent,
+} from 'react';
 
 import classNames from 'classnames';
 
@@ -19,7 +26,7 @@ interface TabProps extends GenericProps {
     /** Is tab disabled */
     isDisabled?: boolean;
     /** Tab label */
-    label?: string;
+    label?: string | ReactNode;
     /** Function to trigger on tab click */
     onTabClick?(e: { event: SyntheticEvent; index?: number }): void;
 }
