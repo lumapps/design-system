@@ -28,7 +28,7 @@ interface ISideNavigationItemProps extends IGenericProps {
     emphasis?: Emphasis;
 
     /** Menu item label. */
-    label: string;
+    label: string | ReactNode;
 
     /** Menu item icon (SVG path code). */
     icon?: string;
