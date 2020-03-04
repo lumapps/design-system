@@ -92,7 +92,7 @@ const Tabs: React.FC<TabsProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     ...props
-}: TabsProps): ReactElement => {
+}) => {
     const tabs: ReactElement[] = Children.map(children as ReactElement[], (tab: ReactElement, index: number) => {
         return cloneElement(tab, { key: index, index, isActive: activeTab === index, onTabClick });
     });

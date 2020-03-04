@@ -3,7 +3,7 @@ import { ColorPalette, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 /////////////////////////////
 
@@ -86,7 +86,7 @@ const KIND_ICON = {
  *
  * @return The component.
  */
-const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
+const Message: React.FC<MessageProps> = (props) => {
     const { children, className, kind, hasBackground, ...forwardedProps } = props;
     const icon = kind ? KIND_ICON[kind] : null;
 

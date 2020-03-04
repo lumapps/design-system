@@ -106,7 +106,7 @@ const ListItem: React.FC<ListItemProps> = ({
     onItemSelected,
     before,
     ...props
-}: ListItemProps): ReactElement => {
+}) => {
     const element = useRef<HTMLLIElement | null>(null);
 
     useEffect(() => {

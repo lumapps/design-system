@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import classNames from 'classnames';
@@ -106,7 +106,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     role = DEFAULT_PROPS.role,
     theme = DEFAULT_PROPS.theme,
     zIndex,
-}: LightboxProps): ReactElement => {
+}) => {
     const buttonRef: React.RefObject<HTMLButtonElement> = useRef(null);
     const childrenRef: React.RefObject<any> = useRef(null);
     const [isTrapActive, setTrapActive] = useState(false);

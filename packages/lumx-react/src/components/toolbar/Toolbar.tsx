@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -54,13 +54,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const Toolbar: React.FC<ToolbarProps> = ({
-    after,
-    before,
-    className = '',
-    label,
-    ...props
-}: ToolbarProps): ReactElement => {
+const Toolbar: React.FC<ToolbarProps> = ({ after, before, className = '', label, ...props }) => {
     return (
         <div
             className={classNames(

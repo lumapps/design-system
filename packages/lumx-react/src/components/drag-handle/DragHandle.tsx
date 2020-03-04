@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -31,7 +31,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /////////////////////////////
 
-const DragHandle: React.FC<DragHandleProps> = (props: DragHandleProps): ReactElement => {
+const DragHandle: React.FC<DragHandleProps> = (props) => {
     const { className, theme, ...otherProps } = props;
 
     return (

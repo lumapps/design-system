@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -71,7 +71,7 @@ const TableRow: React.FC<TableRowProps> = ({
     isDisabled = DEFAULT_PROPS.isDisabled,
     isSelected = DEFAULT_PROPS.isSelected,
     ...props
-}: TableRowProps): ReactElement => (
+}) => (
     <tr
         className={classNames(
             className,

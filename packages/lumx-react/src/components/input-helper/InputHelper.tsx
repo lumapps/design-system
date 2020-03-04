@@ -2,7 +2,7 @@ import { Kind, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { INPUT_HELPER_CONFIGURATION } from './constants';
 
@@ -43,7 +43,7 @@ const InputHelper: React.FC<InputHelperProps> = ({
     kind = DEFAULT_PROPS.kind as Kind,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: InputHelperProps): ReactElement => {
+}) => {
     const { color } = INPUT_HELPER_CONFIGURATION[kind] || {};
 
     return (

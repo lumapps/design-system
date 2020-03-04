@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactChild, ReactElement } from 'react';
+import React, { CSSProperties, ReactChild } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -130,7 +130,7 @@ const Popover: React.FC<PopoverProps> & Popover = ({
     isVisible,
     zIndex = DEFAULT_PROPS.zIndex,
     ...props
-}: PopoverProps): ReactElement => {
+}) => {
     /**
      * Depending on which is assigned first, the `popoverRect` or `popoverRef`,
      * there are scenarios where the reference to the popover is still not assigned,

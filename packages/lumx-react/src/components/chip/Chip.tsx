@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, Ref, SyntheticEvent } from 'react';
+import React, { ReactNode, Ref, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -108,7 +108,7 @@ const Chip: React.FC<ChipProps> = ({
     useCustomColors,
     chipRef,
     ...props
-}: ChipProps): ReactElement => {
+}) => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
     const hasBeforeClick: boolean = isFunction(onBeforeClick);
     const hasOnClick: boolean = isFunction(onClick);

@@ -1,4 +1,4 @@
-import React, { Children, PropsWithChildren, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Children, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -75,7 +75,7 @@ const isFooter = isComponent('footer');
 
 /////////////////////////////
 
-const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProps): ReactElement => {
+const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const {
         label,
         theme = DEFAULT_PROPS.theme,

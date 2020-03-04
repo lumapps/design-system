@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, RefObject, useRef } from 'react';
+import React, { ReactNode, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -204,7 +204,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  *
  * @return The component.
  */
-const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): ReactElement => {
+const Autocomplete: React.FC<AutocompleteProps> = (props) => {
     const {
         anchorToInput = DEFAULT_PROPS.anchorToInput,
         className,

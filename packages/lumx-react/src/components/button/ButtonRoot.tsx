@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject } from 'react';
+import React, { RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -84,7 +84,7 @@ const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 /**
  * Render a button wrapper with the ButtonRoot inside.
  */
-const renderButtonWrapper = (props: ButtonRootProps): ReactElement => {
+const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const { color, emphasis, variant } = props;
 
     const adaptedColor =
@@ -116,7 +116,7 @@ const renderButtonWrapper = (props: ButtonRootProps): ReactElement => {
  * @param  props Component props.
  * @return React element.
  */
-const ButtonRoot = (props: ButtonRootProps): ReactElement => {
+const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     const {
         buttonRef,
         emphasis,

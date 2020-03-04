@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -50,11 +50,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const ListSubheader: React.FC<ListSubheaderProps> = ({
-    children,
-    className = '',
-    ...props
-}: ListSubheaderProps): ReactElement => {
+const ListSubheader: React.FC<ListSubheaderProps> = ({ children, className = '', ...props }) => {
     return (
         <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
             {children}

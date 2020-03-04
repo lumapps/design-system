@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -86,7 +86,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     label = DEFAULT_PROPS.label,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ProgressTrackerStepProps): ReactElement => {
+}) => {
     const { onClick = null, ...restProps }: ProgressTrackerStepProps = props;
 
     const isClickable: boolean = isFunction(onClick);

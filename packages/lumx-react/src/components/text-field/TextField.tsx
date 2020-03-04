@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, RefObject, useState } from 'react';
+import React, { ReactNode, RefObject, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -189,7 +189,7 @@ interface InputNativeProps {
     onBlur?(value: React.FocusEvent): void;
 }
 
-const renderInputNative = (props: InputNativeProps): ReactElement => {
+const renderInputNative: React.FC<InputNativeProps> = (props) => {
     const {
         id,
         isDisabled,
@@ -268,7 +268,7 @@ const renderInputNative = (props: InputNativeProps): ReactElement => {
  * @param  props Text field props.
  * @return The component.
  */
-const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElement => {
+const TextField: React.FC<TextFieldProps> = (props) => {
     const {
         chips,
         className = '',

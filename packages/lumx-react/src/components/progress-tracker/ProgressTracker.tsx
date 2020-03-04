@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { Children } from 'react';
 
 import classNames from 'classnames';
 
@@ -66,9 +66,11 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     className = '',
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ProgressTrackerProps): ReactElement => {
-    const backgroundPosition: number = children.length > 0 ? 100 / (children.length * 2) : 0;
-    const trackPosition: number = children.length > 0 ? ((100 / (children.length - 1)) * activeStep) / 100 : 0;
+}) => {
+    const childrenArray = Children.toArray(children);
+    const backgroundPosition: number = childrenArray.length > 0 ? 100 / (childrenArray.length * 2) : 0;
+    const trackPosition: number =
+        childrenArray.length > 0 ? ((100 / (childrenArray.length - 1)) * activeStep) / 100 : 0;
 
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props}>

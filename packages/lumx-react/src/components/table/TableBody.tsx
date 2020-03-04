@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -47,7 +47,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const TableBody: React.FC<TableBodyProps> = ({ children, className = '', ...props }: TableBodyProps): ReactElement => (
+const TableBody: React.FC<TableBodyProps> = ({ children, className = '', ...props }) => (
     <tbody className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {children}
     </tbody>

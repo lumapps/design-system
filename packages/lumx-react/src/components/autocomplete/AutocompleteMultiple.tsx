@@ -5,7 +5,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 /////////////////////////////
 
@@ -87,7 +87,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
  *
  * @return The component.
  */
-const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props: AutocompleteMultipleProps): ReactElement => {
+const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
     const {
         anchorToInput,
         className,
