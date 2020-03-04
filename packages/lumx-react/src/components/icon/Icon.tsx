@@ -1,18 +1,10 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import isEmpty from 'lodash/isEmpty';
-
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import {
-    GenericProps,
-    ValidateParameters,
-    getRootClassName,
-    handleBasicClasses,
-    validateComponent,
-} from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -86,34 +78,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
 /////////////////////////////
 
 /**
- * Globally validate the component before validating the children.
- *
- * @param props The properties of the component.
- */
-function _preValidate({ props }: ValidateParameters) {
-    if (!isEmpty(props.icon)) {
-        return;
-    }
-
-    throw new Error(`<${COMPONENT_NAME}> must have an \`icon\` prop!`);
-}
-
-/**
- * Validate the component props.
- *
- * @param       props The props of the component.
- * @return The processed children of the component.
- */
-function _validate(props: IconProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        preValidate: _preValidate,
-        props,
-    });
-}
-
-/////////////////////////////
-
-/**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
  *
  * @return The component
@@ -128,9 +92,7 @@ const Icon: React.FC<IconProps> = ({
     size,
     theme,
     ...props
-}: IconProps): ReactElement => {
-    _validate({ color, icon, size, ...props });
-
+}) => {
     let iconColor;
     if (color) {
         iconColor = color;

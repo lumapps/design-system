@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Icon> Conditions should fail when no \`icon\` is given 1`] = `"<Icon> must have an \`icon\` prop!"`;
-
 exports[`<Icon> Snapshots and structure should render color & color variant 1`] = `
 <i
   className="lumx-icon lumx-icon--color-primary lumx-icon--color-variant-D1 lumx-icon--no-shape"

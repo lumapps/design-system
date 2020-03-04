@@ -1,12 +1,9 @@
-import React, { ReactElement, ReactNode, Ref } from 'react';
+import React, { Ref } from 'react';
 
 import classNames from 'classnames';
 
-import { IconButton } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, validateComponent } from '@lumx/react/utils';
-
-import { Button } from './Button';
+import { GenericProps, getRootClassName } from '@lumx/react/utils';
 
 /////////////////////////////
 /**
@@ -51,22 +48,6 @@ const DEFAULT_PROPS: DefaultPropsType = {};
 //                         //
 /////////////////////////////
 
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param props The children and props of the component.
- * @return    The processed children of the component.
- */
-function _validate(props: ButtonGroupProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        allowedTypes: [IconButton, Button],
-        maxChildren: 2,
-        minChildren: 2,
-        props,
-    });
-}
-
 /////////////////////////////
 
 /**
@@ -76,20 +57,11 @@ function _validate(props: ButtonGroupProps): ReactNode {
  *
  * @return The component.
  */
-const ButtonGroup: React.FC<ButtonGroupProps> = ({
-    children,
-    className = '',
-    buttonGroupRef,
-    ...props
-}: ButtonGroupProps): ReactElement => {
-    const newChildren: ReactNode = _validate({ children });
-
-    return (
-        <div className={classNames(className, CLASSNAME)} ref={buttonGroupRef} {...props}>
-            {newChildren}
-        </div>
-    );
-};
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className = '', buttonGroupRef, ...props }) => (
+    <div className={classNames(className, CLASSNAME)} ref={buttonGroupRef} {...props}>
+        {children}
+    </div>
+);
 ButtonGroup.displayName = COMPONENT_NAME;
 
 /////////////////////////////

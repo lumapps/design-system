@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,7 +7,7 @@ import { Theme } from '@lumx/react';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
-import { GenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { SlideshowControls } from './SlideshowControls';
 
@@ -78,21 +78,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
 /////////////////////////////
 
 /**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param props The children and props of the component.
- * @return    The processed children of the component.
- */
-function _validate(props: SlideshowProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        props,
-    });
-}
-
-/////////////////////////////
-
-/**
  * Displays a slideshow.
  */
 const Slideshow: React.FC<SlideshowProps> = ({
@@ -107,8 +92,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     ...props
-}: SlideshowProps): ReactElement => {
-    const newChildren: ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
+}) => {
     const [currentIndex, setCurrentIndex] = useState(activeIndex);
     const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
     const parentRef: React.MutableRefObject<null> = useRef(null);
@@ -117,7 +101,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
      * The number of slideshow items.
      *
      */
-    const itemsCount: number = React.Children.count(newChildren);
+    const itemsCount: number = React.Children.count(children);
 
     /**
      * Number of slides when using groupBy prop.
@@ -219,7 +203,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
         >
             <div className={`${CLASSNAME}__slides`}>
                 <div className={`${CLASSNAME}__wrapper`} style={wrapperSyle}>
-                    {newChildren}
+                    {children}
                 </div>
             </div>
 

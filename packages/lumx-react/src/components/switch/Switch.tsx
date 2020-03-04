@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode } from 'react';
+import React, { Children, ReactElement } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
@@ -9,7 +9,7 @@ import isEmpty from 'lodash/isEmpty';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -90,24 +90,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
 /////////////////////////////
 
 /**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param props The children and props of the component.
- * @return    The processed children of the component.
- */
-function _validate(props: SwitchProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        allowedTypes: ['text', <span />],
-        maxChildren: 1,
-        minChildren: 0,
-        props,
-    });
-}
-
-/////////////////////////////
-
-/**
  * [Enter the description of the component here].
  *
  * @return The component.
@@ -124,8 +106,6 @@ const Switch: React.FC<SwitchProps> = ({
     ...props
 }: SwitchProps): ReactElement => {
     const switchId: string = uuid();
-
-    const newChildren: ReactNode = _validate({ children, checked, helper, position, theme, ...props });
 
     /**
      * Toggle the state of the <Switch> inner checkbox.
@@ -169,10 +149,10 @@ const Switch: React.FC<SwitchProps> = ({
                 </div>
             </div>
 
-            {Children.count(newChildren) > 0 && (
+            {Children.count(children) > 0 && (
                 <div className={`${CLASSNAME}__content`}>
                     <InputLabel htmlFor={switchId} theme={theme} className={`${CLASSNAME}__label`}>
-                        {newChildren}
+                        {children}
                     </InputLabel>
                     {!isEmpty(helper) && (
                         <InputHelper theme={theme} className={`${CLASSNAME}__helper`}>
