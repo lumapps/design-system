@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   New component in React: `Mosaic`
 -   Added `size` prop to `WebBookmark` component
 
+### Changed
+
+- Added ReactNode as an allowed type for the label of the `SideNavigationItem` for typescript support
+
 ## [0.21.9][] - 2020-02-20
 
 ### Added
