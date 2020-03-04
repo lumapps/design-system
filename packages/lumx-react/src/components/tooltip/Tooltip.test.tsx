@@ -3,7 +3,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipProps } from './Tooltip';
@@ -13,13 +13,13 @@ import { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipProps } from './Tooltip';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<TooltipProps>;
+type SetupProps = Partial<TooltipProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     wrapper: Wrapper;
     tooltip: Wrapper;
@@ -34,7 +34,7 @@ interface ISetup extends ICommonSetup {
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer = shallowRendering ? shallow : mount;
 
     // @ts-ignore

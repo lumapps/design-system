@@ -3,20 +3,20 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
-import { Badge, CLASSNAME, DEFAULT_PROPS, IBaseBadgeProps } from './Badge';
+import { Badge, BaseBadgeProps, CLASSNAME, DEFAULT_PROPS } from './Badge';
 
 /////////////////////////////
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
+interface Setup extends CommonSetup {
     badge: Wrapper;
-    props: Partial<IBaseBadgeProps>;
+    props: Partial<BaseBadgeProps>;
 
     /**
      * The <div> element wrapper.
@@ -34,8 +34,8 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<IBaseBadgeProps> = {}, shallowRendering: boolean = true): ISetup => {
-    const props: IBaseBadgeProps = {
+const setup = ({ ...propsOverrides }: Partial<BaseBadgeProps> = {}, shallowRendering: boolean = true): Setup => {
+    const props: BaseBadgeProps = {
         children: <span>30</span>,
         ...propsOverrides,
     };
@@ -79,7 +79,7 @@ describe(`<${Badge.displayName}>`, () => {
 
         it('should use the given `theme`', () => {
             const testedProp = 'color';
-            const modifiedProps: Partial<IBaseBadgeProps> = {
+            const modifiedProps: Partial<BaseBadgeProps> = {
                 [testedProp]: Theme.dark,
             };
 

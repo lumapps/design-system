@@ -5,22 +5,21 @@ import classNames from 'classnames';
 import { Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IProgressTrackerProps extends IGenericProps {}
-type ProgressTrackerProps = IProgressTrackerProps;
+interface ProgressTrackerProps extends GenericProps {}
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ProgressTrackerProps> {
+interface DefaultPropsType extends Partial<ProgressTrackerProps> {
     /** The active step index. */
     activeStep: number;
     /** The current component theme. */
@@ -46,7 +45,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     activeStep: 0,
     theme: Theme.light,
 };

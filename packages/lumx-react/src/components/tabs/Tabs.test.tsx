@@ -6,7 +6,7 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import { build, oneOf } from 'test-data-bot';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Tab } from '@lumx/react';
@@ -17,13 +17,13 @@ import { CLASSNAME, Tabs, TabsLayout, TabsPosition, TabsProps } from './Tabs';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<TabsProps>;
+type SetupProps = Partial<TabsProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that wraps tabs and content elements.
@@ -41,7 +41,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const tabs = [<Tab>Tab 0</Tab>, <Tab>Tab 1</Tab>];
     const props: TabsProps = {
         children: tabs,
@@ -83,12 +83,12 @@ describe(`<${Tabs.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use the given props', () => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
                 layout: TabsLayout.clustered,
                 position: oneOf(TabsPosition.center, TabsPosition.right),
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            const modifiedProps: SetupProps = modifiedPropsBuilder();
 
             const { wrapper } = setup({ ...modifiedProps });
 

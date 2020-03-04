@@ -3,20 +3,19 @@ import React, { ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IRadioGroupProps extends IGenericProps {
+interface RadioGroupProps extends GenericProps {
     /**
      * List of radio buttons in the group (should use <RadioButton>).
      */
     children: ReactNode;
 }
-type RadioGroupProps = IRadioGroupProps;
 
 /////////////////////////////
 

@@ -6,29 +6,27 @@ import isString from 'lodash/isString';
 
 import noop from 'lodash/noop';
 import React, { Children, ReactNode } from 'react';
-import { ComponentType, IGenericProps, getTypeName, isElementOfType, isElementText } from './type';
+import { ComponentType, GenericProps, getTypeName, isElementOfType, isElementText } from './type';
 
-interface IChildrenManipulationParameters {
+interface ChildrenManipulationParameters {
     child: ReactNode;
     children: ReactNode;
     childrenCount: number;
     index: number;
-    props: IGenericProps;
+    props: GenericProps;
 }
 
-type ChildTransformParameters = IChildrenManipulationParameters;
-type ChildValidateParameters = IChildrenManipulationParameters;
+type ChildTransformParameters = ChildrenManipulationParameters;
+type ChildValidateParameters = ChildrenManipulationParameters;
 
 /**
  * Defines the parameters of the pre/post validate callback of the `validateComponent` function below.
  */
-interface IValidateParameters {
+interface ValidateParameters {
     children: ReactNode;
     childrenCount: number;
-    props: IGenericProps;
+    props: GenericProps;
 }
-
-type ValidateParameters = IValidateParameters;
 
 /**
  * Unwrap the children contained in a fragment.
@@ -100,7 +98,7 @@ function validateComponent(
         allowedTypes?: Array<string | ComponentType>;
         maxChildren?: number;
         minChildren?: number;
-        props: IGenericProps;
+        props: GenericProps;
         postValidate?(params: ValidateParameters): string | boolean | void;
         preValidate?(params: ValidateParameters): string | boolean | void;
         transformChild?(params: ChildTransformParameters): ReactNode;

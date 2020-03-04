@@ -7,7 +7,7 @@ import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popov
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -19,7 +19,7 @@ type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Pla
 /**
  * Defines the props of the component.
  */
-interface ITooltipProps extends IGenericProps {
+interface TooltipProps extends GenericProps {
     /** Ref of anchor element. */
     anchorRef: RefObject<HTMLElement>;
 
@@ -29,14 +29,13 @@ interface ITooltipProps extends IGenericProps {
     /** Placement of tooltip relative to the anchor element. */
     placement?: TooltipPlacement;
 }
-type TooltipProps = ITooltipProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<TooltipProps> {}
+interface DefaultPropsType extends Partial<TooltipProps> {}
 
 /////////////////////////////
 //                         //
@@ -57,7 +56,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     delay: 500,
     placement: Placement.BOTTOM,
 };

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { useComputePosition, useComputePositionType } from '@lumx/react/hooks/useComputePosition';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Different possible placements for the popover.
@@ -36,16 +36,15 @@ enum Placement {
 /**
  * Vertical and horizontal offset of the popover.
  */
-interface IOffset {
+interface Offset {
     vertical?: number;
     horizontal?: number;
 }
-type Offset = IOffset;
 
 /**
  * Position for arrow or tooltip.
  */
-interface IElementPosition {
+interface ElementPosition {
     x: number;
     y: number;
     width?: number;
@@ -57,14 +56,13 @@ interface IElementPosition {
     anchorHeight?: number;
     anchorWidth?: number;
 }
-type ElementPosition = IElementPosition;
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IPopoverProps extends IGenericProps {
+interface PopoverProps extends GenericProps {
     /** The position the popover should be bounded to. */
     popoverRect: ElementPosition;
     /** Should the popper be displayed. */
@@ -80,14 +78,13 @@ interface IPopoverProps extends IGenericProps {
     /** The z-axis position. */
     zIndex?: number;
 }
-type PopoverProps = IPopoverProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<PopoverProps> {}
+interface DefaultPropsType extends Partial<PopoverProps> {}
 
 /////////////////////////////
 //                         //
@@ -108,7 +105,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     className: '',
     elevation: 3,
     placement: Placement.TOP,
@@ -116,7 +113,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 };
 
 /////////////////////////////
-interface IPopover {
+interface Popover {
     useComputePosition: useComputePositionType;
 }
 /**
@@ -124,7 +121,7 @@ interface IPopover {
  *
  * @return The component.
  */
-const Popover: React.FC<PopoverProps> & IPopover = ({
+const Popover: React.FC<PopoverProps> & Popover = ({
     popoverRect,
     popoverRef,
     children,

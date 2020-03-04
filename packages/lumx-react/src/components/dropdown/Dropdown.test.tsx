@@ -4,7 +4,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
 
@@ -13,13 +13,13 @@ import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<DropdownProps>;
+type SetupProps = Partial<DropdownProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that holds the dropdown content.
@@ -37,7 +37,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const anchorRef = React.createRef<HTMLButtonElement>();
     const props: DropdownProps = {
         // tslint:disable-next-line no-unused
@@ -75,7 +75,7 @@ describe(`<${Dropdown.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default props', () => {
-            const { dropdown }: ISetup = setup();
+            const { dropdown }: Setup = setup();
 
             expect(dropdown).toHaveClassName(CLASSNAME);
         });

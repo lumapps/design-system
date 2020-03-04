@@ -4,14 +4,14 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IToolbarProps extends IGenericProps {
+interface ToolbarProps extends GenericProps {
     /* Slot for the right element. */
     after?: ReactNode;
     /* Slot for the left element. */
@@ -19,14 +19,13 @@ interface IToolbarProps extends IGenericProps {
     /* Slot fo the main title element. */
     label?: ReactNode;
 }
-type ToolbarProps = IToolbarProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ToolbarProps> {}
+interface DefaultPropsType extends Partial<ToolbarProps> {}
 
 /////////////////////////////
 //                         //
@@ -47,7 +46,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: DefaultPropsType = {};
 /////////////////////////////
 
 /**

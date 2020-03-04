@@ -12,14 +12,13 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
  * Defines the props of the component.
  */
 
-interface ILinkProps extends HTMLProps<HTMLAnchorElement> {
+interface LinkProps extends HTMLProps<HTMLAnchorElement> {
     /** The icon color. */
     color?: Color;
 
     /** The icon color variant. */
     colorVariant?: ColorVariant;
 }
-type LinkProps = ILinkProps;
 
 /////////////////////////////
 

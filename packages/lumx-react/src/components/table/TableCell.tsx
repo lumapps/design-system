@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
@@ -41,7 +41,7 @@ enum TableCellVariant {
 /**
  * Defines the props of the component.
  */
-interface ITableCellProps extends IGenericProps {
+interface TableCellProps extends GenericProps {
     /**
      * The mdi name of the icon (thead only).
      */
@@ -72,14 +72,13 @@ interface ITableCellProps extends IGenericProps {
      */
     onHeaderClick?(): void;
 }
-type TableCellProps = ITableCellProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<TableCellProps> {
+interface DefaultPropsType extends Partial<TableCellProps> {
     variant: TableCellVariant;
 }
 
@@ -102,7 +101,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     onHeaderClick: undefined,
     variant: TableCellVariant.body,
 };

@@ -3,7 +3,7 @@ import React, { ReactElement, RefObject } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps } from './Popover';
@@ -13,13 +13,13 @@ import { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps } from './Popover';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<PopoverProps>;
+type SetupProps = Partial<PopoverProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that holds the popover content.
@@ -37,7 +37,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const popoverRef = React.createRef();
 
     const props: PopoverProps = {
@@ -89,7 +89,7 @@ describe(`<${Popover.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default props', () => {
-            const { wrapper, popover }: ISetup = setup();
+            const { wrapper, popover }: Setup = setup();
             wrapper.update();
 
             expect(popover).toHaveClassName(CLASSNAME);

@@ -7,7 +7,7 @@ import isEmpty from 'lodash/isEmpty';
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
-    IGenericProps,
+    GenericProps,
     ValidateParameters,
     getRootClassName,
     handleBasicClasses,
@@ -21,7 +21,7 @@ type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.
 /**
  * Defines the props of the component.
  */
-interface IIconProps extends IGenericProps {
+interface IconProps extends GenericProps {
     /**
      * The icon SVG path draw code (`d` property of the `<path>` SVG element).
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
@@ -46,14 +46,13 @@ interface IIconProps extends IGenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
-type IconProps = IIconProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<IconProps> {}
+interface DefaultPropsType extends Partial<IconProps> {}
 
 /////////////////////////////
 //                         //
@@ -74,7 +73,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     color: ColorPalette.dark,
     iconRef: undefined,
     size: Size.m,

@@ -6,7 +6,7 @@ import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import useEventCallback from '@lumx/react/hooks/useEventCallback';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uuid from 'uuid/v4';
 
@@ -15,7 +15,7 @@ import uuid from 'uuid/v4';
 /**
  * Defines the props of the component.
  */
-interface ISliderProps extends IGenericProps {
+interface SliderProps extends GenericProps {
     /** Deactivate the component */
     disabled?: boolean;
     /** Label */
@@ -39,14 +39,13 @@ interface ISliderProps extends IGenericProps {
     /** Callback function invoked when the component is clicked */
     onMouseDown?(event: React.SyntheticEvent): void;
 }
-type SliderProps = ISliderProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<SliderProps> {
+interface DefaultPropsType extends Partial<SliderProps> {
     /**
      * The theme.
      */
@@ -75,7 +74,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     disabled: false,
     hideMinMaxlabel: false,
     precision: 0,

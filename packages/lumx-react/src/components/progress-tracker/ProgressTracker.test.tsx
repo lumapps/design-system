@@ -5,7 +5,7 @@ import 'jest-enzyme';
 import noop from 'lodash/noop';
 
 import { ProgressTrackerStep } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { CLASSNAME, ProgressTracker, ProgressTrackerProps } from './ProgressTracker';
 
 /////////////////////////////
@@ -13,13 +13,13 @@ import { CLASSNAME, ProgressTracker, ProgressTrackerProps } from './ProgressTrac
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<ProgressTrackerProps>;
+type SetupProps = Partial<ProgressTrackerProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that wraps radio button and children elements.
@@ -38,7 +38,7 @@ interface ISetup extends ICommonSetup {
  * @param   [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return  An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...props }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const children = props.children ? props.children : <ProgressTrackerStep onClick={noop} label="Step label" />;
 

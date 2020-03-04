@@ -3,7 +3,7 @@ import React, { ReactElement, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
 
 /////////////////////////////
 //                         //
@@ -34,7 +34,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * @param props The children and props of the component.
  * @return    The processed children of the component.
  */
-function _validate(props: IGenericProps): ReactNode {
+function _validate(props: GenericProps): ReactNode {
     return validateComponent(COMPONENT_NAME, {
         maxChildren: 1,
         minChildren: 1,
@@ -49,11 +49,7 @@ function _validate(props: IGenericProps): ReactNode {
  *
  * @return The component.
  */
-const SlideshowItem: React.FC<IGenericProps> = ({
-    className = '',
-    children,
-    ...props
-}: IGenericProps): ReactElement => {
+const SlideshowItem: React.FC<GenericProps> = ({ className = '', children, ...props }: GenericProps): ReactElement => {
     const newChildren: ReactNode = _validate({ children, ...props });
 
     return (

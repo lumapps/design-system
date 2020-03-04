@@ -1,29 +1,28 @@
 import React from 'react';
 
-import { AspectRatio, IFocusPoint, Theme, Thumbnail } from '@lumx/react';
+import { AspectRatio, FocusPoint, Theme, Thumbnail } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import take from 'lodash/take';
 
 /////////////////////////////
 
-interface IMosaicElement {
+interface MosaicElement {
     url: string;
-    focusPoint?: IFocusPoint;
+    focusPoint?: FocusPoint;
     onClick?(index: number): void;
 }
 
 /**
  * Defines the props of the component.
  */
-interface IMosaicProps extends IGenericProps {
+interface MosaicProps extends GenericProps {
     theme?: Theme;
-    thumbnails: IMosaicElement[];
+    thumbnails: MosaicElement[];
 }
-type MosaicProps = IMosaicProps;
 
-interface IDefaultPropsType extends Partial<IMosaicProps> {}
+interface DefaultPropsType extends Partial<MosaicProps> {}
 
 /**
  * The display name of the component.
@@ -38,7 +37,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
 const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme, thumbnails, ...props }) => (

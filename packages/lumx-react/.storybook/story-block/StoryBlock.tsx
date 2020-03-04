@@ -7,13 +7,13 @@ import { Chip, Size, Switch, SwitchPosition, Theme } from '@lumx/react';
 import { styles } from './styles';
 import { GlobalTheme, useInjectTheme } from './useInjectTheme';
 
-interface IStoryBlockProps {
+interface StoryBlockProps {
     children(p: { theme: Theme }): ReactNode;
 }
 
 const CLASSNAME = 'story-block';
 
-const StoryBlock: React.FC<IStoryBlockProps> = (props) => {
+const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const [globalTheme, setGlobalTheme] = useState<GlobalTheme>('lumapps');
     const changeGlobalTheme = (newGlobalTheme) => () => setGlobalTheme(newGlobalTheme);
 

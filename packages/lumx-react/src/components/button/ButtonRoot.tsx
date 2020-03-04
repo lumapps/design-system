@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -15,7 +15,7 @@ import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
  */
 export type ButtonSize = Size.s | Size.m;
 
-interface IBaseButtonProps extends IGenericProps {
+interface BaseButtonProps extends GenericProps {
     /**
      * Reference on the `<a>` or `<button>` button HTML element.
      */
@@ -66,12 +66,10 @@ interface IBaseButtonProps extends IGenericProps {
      */
     useCustomColors?: boolean;
 }
-type BaseButtonProps = IBaseButtonProps;
 
-interface IButtonRootProps extends BaseButtonProps {
+interface ButtonRootProps extends BaseButtonProps {
     variant: 'button' | 'icon';
 }
-type ButtonRootProps = IButtonRootProps;
 
 /**
  * The display name of the component.
@@ -86,7 +84,7 @@ const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 /**
  * Render a button wrapper with the ButtonRoot inside.
  */
-const renderButtonWrapper = (props: IButtonRootProps): ReactElement => {
+const renderButtonWrapper = (props: ButtonRootProps): ReactElement => {
     const { color, emphasis, variant } = props;
 
     const adaptedColor =

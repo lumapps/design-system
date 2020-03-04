@@ -6,17 +6,16 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { mdiDragVertical } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IDragHandleProps extends IGenericProps {
+interface DragHandleProps extends GenericProps {
     theme?: Theme;
 }
-type DragHandleProps = IDragHandleProps;
 
 /////////////////////////////
 

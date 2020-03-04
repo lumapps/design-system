@@ -10,7 +10,7 @@ import React, { ReactElement, ReactNode, useContext, useEffect, useState } from 
 
 import AngularTemplate from 'react-angular';
 
-interface IDemoBlockProps {
+interface DemoBlockProps {
     children?: ReactNode;
     demo?: string;
     engine?: string;
@@ -18,7 +18,7 @@ interface IDemoBlockProps {
     withThemeSwitcher?: boolean;
 }
 
-interface IHasTheme {
+interface HasTheme {
     theme: Theme;
 }
 
@@ -28,7 +28,7 @@ type Module = {};
 type NullModule = Module;
 
 type DemoModule = Module & {
-    default: React.FC<IHasTheme>;
+    default: React.FC<HasTheme>;
 };
 
 type AngularControllerModule = Module & {
@@ -67,7 +67,7 @@ function loadAngularjsDemo(code: Code): DemoModule | null {
     }
 
     return {
-        default({ theme }: IHasTheme) {
+        default({ theme }: HasTheme) {
             let container: any;
 
             useEffect(() => {
@@ -113,12 +113,12 @@ function renderDemo(demo: DemoModule | null, theme: Theme, engine: string) {
     return <demo.default theme={theme} />;
 }
 
-const DemoBlock: React.FC<IDemoBlockProps> = ({
+const DemoBlock: React.FC<DemoBlockProps> = ({
     children,
     code,
     engine: propEngine,
     withThemeSwitcher = false,
-}: IDemoBlockProps): ReactElement => {
+}: DemoBlockProps): ReactElement => {
     const contextEngine = useContext(EngineContext).engine;
     const engine = propEngine || contextEngine;
 

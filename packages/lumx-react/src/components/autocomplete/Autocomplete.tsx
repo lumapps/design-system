@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 
@@ -14,7 +14,7 @@ import { useFocus } from '@lumx/react/hooks/useFocus';
 /**
  * Defines the props of the component.
  */
-interface IAutocompleteProps extends IGenericProps {
+interface AutocompleteProps extends GenericProps {
     /**
      * Whether the suggestions list should display anchored to the input
      * If false, it will be anchored to the text field wrapper.
@@ -166,7 +166,6 @@ interface IAutocompleteProps extends IGenericProps {
      */
     onBlur?(event: React.FocusEvent): void;
 }
-type AutocompleteProps = IAutocompleteProps;
 
 /////////////////////////////
 

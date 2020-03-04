@@ -3,12 +3,12 @@ import React from 'react';
 import { mdiClose } from '@lumx/icons';
 import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } from '@lumx/react';
 
-interface ICity {
+interface City {
     id: string;
     text: string;
 }
 
-const CITIES: ICity[] = [
+const CITIES: City[] = [
     {
         id: 'losangeles',
         text: 'Los Angeles',
@@ -61,7 +61,7 @@ const App = ({ theme }: any) => {
     const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(
         INITIAL_STATE_NAVIGATION_SUGGESTION,
     );
-    const [selectedValues, setSelectedValues] = React.useState<ICity[]>([]);
+    const [selectedValues, setSelectedValues] = React.useState<City[]>([]);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const filteredCities = CITIES.filter((city) => {
@@ -97,7 +97,7 @@ const App = ({ theme }: any) => {
      * `showSuggestions` and `navigationSuggestionValue` to their original state.
      * @param city selected city
      */
-    const setSelectedCity = (city: ICity) => {
+    const setSelectedCity = (city: City) => {
         setSelectedValues([...selectedValues, city]);
         setFilterValue('');
         setShowSuggestions(INITIAL_STATE_SHOW_SUGGESTIONS);
@@ -128,7 +128,7 @@ const App = ({ theme }: any) => {
      * @param city city to be erased.
      * @return callback
      */
-    const clearSelectedValue = (city: ICity) => () => {
+    const clearSelectedValue = (city: City) => () => {
         inputRef?.current?.focus();
         setSelectedValues(city ? selectedValues.filter((c) => c.id !== city.id) : []);
     };
@@ -150,7 +150,7 @@ const App = ({ theme }: any) => {
      * the suggestion on the Text Field.
      * @param city      City navigated.
      */
-    const onItemNavigated = (city: ICity) => {
+    const onItemNavigated = (city: City) => {
         if (city && showSuggestions) {
             setNavigationSuggestionValue(city.text);
         }
@@ -204,7 +204,7 @@ const App = ({ theme }: any) => {
         resetChipNavigation();
     };
 
-    const selectedChipRender = (city: ICity, index: number) => (
+    const selectedChipRender = (city: City, index: number) => (
         <Chip
             theme={theme}
             isClickable

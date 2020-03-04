@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { IconButton } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, validateComponent } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, validateComponent } from '@lumx/react/utils';
 
 import { Button } from './Button';
 
@@ -12,18 +12,17 @@ import { Button } from './Button';
 /**
  * Defines the props of the component
  */
-interface IButtonGroupProps extends IGenericProps {
+interface ButtonGroupProps extends GenericProps {
     /** Ref passed to the wrapper. */
     buttonGroupRef?: Ref<HTMLDivElement>;
 }
-type ButtonGroupProps = IButtonGroupProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ButtonGroupProps> {}
+interface DefaultPropsType extends Partial<ButtonGroupProps> {}
 
 /////////////////////////////
 //                         //
@@ -44,7 +43,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
+const DEFAULT_PROPS: DefaultPropsType = {};
 
 /////////////////////////////
 //                         //

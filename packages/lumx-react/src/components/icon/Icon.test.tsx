@@ -6,7 +6,7 @@ import { build, fake, oneOf } from 'test-data-bot';
 
 import { mdiCheck, mdiPlus } from '@lumx/icons';
 import { ColorPalette, ColorVariant, Size } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, Icon, IconProps } from './Icon';
@@ -16,13 +16,13 @@ import { CLASSNAME, Icon, IconProps } from './Icon';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<IconProps>;
+type SetupProps = Partial<IconProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <i> element that wraps the <svg> element.
@@ -50,7 +50,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: IconProps = {
         icon: 'mdiPlus',
         ...propsOverrides,
@@ -103,13 +103,13 @@ describe(`<${Icon.displayName}>`, () => {
         });
 
         it('should use the given props', () => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 color: fake((fakeData: any) => fakeData.commerce.color()),
                 icon: oneOf(mdiPlus, mdiCheck),
                 size: oneOf(...Object.values(Size)),
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            const modifiedProps: SetupProps = modifiedPropsBuilder();
 
             const { i, path } = setup({ ...modifiedProps });
 

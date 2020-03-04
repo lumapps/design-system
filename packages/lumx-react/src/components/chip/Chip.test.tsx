@@ -3,11 +3,11 @@ import 'jest-enzyme';
 import React from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
-import { ICommonSetup } from '@lumx/react/testing/utils';
+import { CommonSetup } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 import { CLASSNAME, Chip, ChipProps } from './Chip';
 
-interface ISetup extends ICommonSetup {
+interface Setup extends CommonSetup {
     after: ShallowWrapper;
     before: ShallowWrapper;
 }
@@ -18,7 +18,7 @@ interface ISetup extends ICommonSetup {
  * @param propOverrides An object that will extend the default properties.
  * @return An object with some shortcuts to elements or data required in tests.
  */
-const setup = (propOverrides: Partial<ChipProps> = {}): ISetup => {
+const setup = (propOverrides: Partial<ChipProps> = {}): Setup => {
     const props = {
         LabelComponent: 'Hello World!',
         ...propOverrides,

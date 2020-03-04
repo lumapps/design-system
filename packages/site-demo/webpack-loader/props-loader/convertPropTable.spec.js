@@ -1,3 +1,5 @@
+/* eslint-disable import/unambiguous */
+/* eslint-disable import/no-commonjs */
 /* eslint-disable no-magic-numbers */
 const { indexDefinitionById, findComponentsAndProps, convertToSimpleProp } = require('./convertPropTable');
 
@@ -14,7 +16,7 @@ describe('indexDefinitionById', () => {
                     children: [
                         {
                             id: 1657,
-                            name: 'IDefaultPropsType',
+                            name: 'DefaultPropsType',
                             kindString: 'Interface',
                         },
                     ],
@@ -79,7 +81,7 @@ describe('indexDefinitionById', () => {
             '1657': {
                 id: 1657,
                 kindString: 'Interface',
-                name: 'IDefaultPropsType',
+                name: 'DefaultPropsType',
                 parentId: 1650,
             },
         });
@@ -122,7 +124,7 @@ describe('findComponentsAndProps', () => {
             },
             '4': {
                 kindString: 'Interface',
-                name: 'IProps',
+                name: 'Props',
                 sources: [{ fileName: 'file1' }],
             },
             '5': {
@@ -149,7 +151,7 @@ describe('findComponentsAndProps', () => {
             {
                 children: [],
                 fileName: 'file1',
-                name: 'IProps',
+                name: 'Props',
                 type: 'Props',
             },
             {

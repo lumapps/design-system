@@ -5,7 +5,7 @@ import React, { ReactElement } from 'react';
 /**
  * Defines the state of the component
  */
-interface IState {
+interface State {
     error?: Error;
     hasError: boolean;
 }
@@ -15,18 +15,18 @@ interface IState {
 /**
  * This component is in charge of catching any error and avoid to the whole application to crash.
  */
-class ErrorBoundary extends React.Component<{}, IState> {
+class ErrorBoundary extends React.Component<{}, State> {
     /**
      * When an error occurred, save the error in the state so that we can display it in the fallback display.
      *
      * @param  error The error that occurred.
      * @return The new state of the component.
      */
-    public static getDerivedStateFromError(error: Error): IState {
+    public static getDerivedStateFromError(error: Error): State {
         return { error, hasError: true };
     }
 
-    public state: IState = {
+    public state: State = {
         error: undefined,
         hasError: false,
     };

@@ -10,7 +10,7 @@ import {
     PAGINATION_ITEM_SIZE,
 } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/constants';
-import { IGenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
@@ -20,7 +20,7 @@ import noop from 'lodash/noop';
 /**
  * Defines the props of the component.
  */
-interface ISlideshowControlsProps extends IGenericProps {
+interface SlideshowControlsProps extends GenericProps {
     activeIndex?: number;
     parentRef: RefObject<HTMLDivElement>;
     slidesCount: number;
@@ -29,23 +29,21 @@ interface ISlideshowControlsProps extends IGenericProps {
     onNextClick?(): void;
     onPreviousClick?(): void;
 }
-type SlideshowControlsProps = ISlideshowControlsProps;
 
 /**
  * Defines the visible range of navigation items.
  */
-interface IPaginationRange {
+interface PaginationRange {
     minRange: number;
     maxRange: number;
 }
-type PaginationRange = IPaginationRange;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<SlideshowControlsProps> {}
+interface DefaultPropsType extends Partial<SlideshowControlsProps> {}
 
 /////////////////////////////
 //                         //
@@ -66,7 +64,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     activeIndex: 0,
     onNextClick: noop,
     onPaginationClick: noop,

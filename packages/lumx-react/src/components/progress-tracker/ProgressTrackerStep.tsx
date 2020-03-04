@@ -7,7 +7,7 @@ import isFunction from 'lodash/isFunction';
 import { Icon, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 
@@ -16,15 +16,14 @@ import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } f
 /**
  * Defines the props of the component.
  */
-interface IProgressTrackerStepProps extends IGenericProps {}
-type ProgressTrackerStepProps = IProgressTrackerStepProps;
+interface ProgressTrackerStepProps extends GenericProps {}
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ProgressTrackerStepProps> {
+interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {
     /** Whether the step should be in error state or not. */
     hasError?: boolean;
 
@@ -63,7 +62,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     hasError: false,
     helper: null,
     isActive: false,
@@ -88,7 +87,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }: ProgressTrackerStepProps): ReactElement => {
-    const { onClick = null, ...restProps }: IProgressTrackerStepProps = props;
+    const { onClick = null, ...restProps }: ProgressTrackerStepProps = props;
 
     const isClickable: boolean = isFunction(onClick);
 

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
 
@@ -14,7 +14,7 @@ import uniqueId from 'lodash/uniqueId';
 /**
  * Defines the props of the component.
  */
-interface IRadioButtonProps extends IGenericProps {
+interface RadioButtonProps extends GenericProps {
     /** Whether or not the radio button is checked. */
     checked?: boolean;
 
@@ -45,14 +45,13 @@ interface IRadioButtonProps extends IGenericProps {
     /** Radio button onChange event (provides the radio input value).  */
     onChange?(value: string): void;
 }
-type RadioButtonProps = IRadioButtonProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<RadioButtonProps> {}
+interface DefaultPropsType extends Partial<RadioButtonProps> {}
 
 /////////////////////////////
 //                         //
@@ -73,7 +72,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     checked: false,
     disabled: false,
     theme: Theme.light,

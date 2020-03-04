@@ -3,14 +3,14 @@ import React, { ReactElement } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface ITableRowProps extends IGenericProps {
+interface TableRowProps extends GenericProps {
     /**
      * Whether the table row is clickable.
      */
@@ -24,14 +24,13 @@ interface ITableRowProps extends IGenericProps {
      */
     isSelected?: boolean;
 }
-type TableRowProps = ITableRowProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<TableRowProps> {}
+interface DefaultPropsType extends Partial<TableRowProps> {}
 
 /////////////////////////////
 //                         //
@@ -52,7 +51,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     isClickable: false,
     isDisabled: false,
     isSelected: false,

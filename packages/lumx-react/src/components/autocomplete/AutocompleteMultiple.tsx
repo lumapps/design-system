@@ -12,7 +12,7 @@ import React, { ReactElement, ReactNode } from 'react';
 /**
  * Defines the props of the component.
  */
-interface IAutocompleteMultipleProps extends AutocompleteProps {
+interface AutocompleteMultipleProps extends AutocompleteProps {
     /**
      * The list of selected values.
      */
@@ -35,8 +35,6 @@ interface IAutocompleteMultipleProps extends AutocompleteProps {
         isDisabled?: boolean,
     ): ReactNode | string;
 }
-
-type AutocompleteMultipleProps = IAutocompleteMultipleProps;
 
 /////////////////////////////
 
