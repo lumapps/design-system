@@ -6,7 +6,7 @@ import { Avatar, Orientation, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Authorized size values.
@@ -18,7 +18,7 @@ type UserBlockSize = Size.s | Size.m | Size.l;
 /**
  * Defines the props of the component.
  */
-interface IUserBlockProps extends IGenericProps {
+interface UserBlockProps extends GenericProps {
     /** Avatar image. */
     avatar?: string;
     /** Simple Action block. */
@@ -44,14 +44,13 @@ interface IUserBlockProps extends IGenericProps {
     /** Callback for the mouseEnter event. */
     onMouseLeave?(): void;
 }
-type UserBlockProps = IUserBlockProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<UserBlockProps> {}
+interface DefaultPropsType extends Partial<UserBlockProps> {}
 
 /////////////////////////////
 //                         //
@@ -72,7 +71,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     orientation: Orientation.horizontal,
     size: Size.m,
     theme: Theme.light,
@@ -84,7 +83,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The component.
  */
-const UserBlock: React.FC<IUserBlockProps> = ({
+const UserBlock: React.FC<UserBlockProps> = ({
     avatar,
     theme = DEFAULT_PROPS.theme,
     orientation = DEFAULT_PROPS.orientation,

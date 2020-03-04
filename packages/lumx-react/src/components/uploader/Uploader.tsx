@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -19,7 +19,7 @@ type UploaderSize = Size.xl | Size.xxl;
 /**
  * Defines the props of the component.
  */
-interface IUploaderProps extends IGenericProps {
+interface UploaderProps extends GenericProps {
     /**
      * Aspect ratio
      */
@@ -49,7 +49,6 @@ interface IUploaderProps extends IGenericProps {
      */
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
-type UploaderProps = IUploaderProps;
 
 /////////////////////////////
 

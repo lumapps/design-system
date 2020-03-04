@@ -4,27 +4,26 @@ import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IDividerProps extends IGenericProps {
+interface DividerProps extends GenericProps {
     /**
      * The <Divider> theme.
      */
     theme?: Theme;
 }
-type DividerProps = IDividerProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<DividerProps> {}
+interface DefaultPropsType extends Partial<DividerProps> {}
 
 /////////////////////////////
 //                         //
@@ -45,7 +44,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
 

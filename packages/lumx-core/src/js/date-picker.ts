@@ -8,7 +8,7 @@ const moment = extendMoment(mMoment);
 
 const DAYS_PER_WEEK = 7;
 
-interface IAnnotatedDate {
+interface AnnotatedDate {
     date: Moment;
     isDisplayed: boolean;
     isClickable: boolean;
@@ -85,7 +85,7 @@ function getAnnotatedMonthCalendar(
     maxDate?: Date,
     today?: Moment,
     monthOffset?: number,
-): IAnnotatedDate[] {
+): AnnotatedDate[] {
     const month = moment(today)
         .locale(locale)
         .add(monthOffset, 'months')

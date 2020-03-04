@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { Size, Theme } from '@lumx/react';
-import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /**
  *  Authorized size values.
@@ -25,7 +25,7 @@ type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 /**
  * Defines the props of the component.
  */
-interface IListItemProps extends IGenericProps {
+interface ListItemProps extends GenericProps {
     /** After content element */
     after?: ReactElement;
 
@@ -53,14 +53,13 @@ interface IListItemProps extends IGenericProps {
     /** Callback used to retrieved the selected entry. */
     onItemSelected?(): void;
 }
-type ListItemProps = IListItemProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ListItemProps> {}
+interface DefaultPropsType extends Partial<ListItemProps> {}
 
 /////////////////////////////
 //                         //
@@ -81,7 +80,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     isActive: false,
     isHighlighted: false,
     isSelected: false,

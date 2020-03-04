@@ -6,7 +6,7 @@ import { Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { getRootClassName } from '../../utils/getRootClassName';
 
 /**
@@ -19,7 +19,7 @@ type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 /**
  * Defines the props of the component.
  */
-interface IAvatarProps extends IGenericProps {
+interface AvatarProps extends GenericProps {
     /** Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
     /** Size. */
@@ -29,14 +29,13 @@ interface IAvatarProps extends IGenericProps {
     /** Avatar image */
     image: string;
 }
-type AvatarProps = IAvatarProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<AvatarProps> {}
+interface DefaultPropsType extends Partial<AvatarProps> {}
 
 /////////////////////////////
 //                         //
@@ -57,7 +56,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     actions: undefined,
     size: Size.m,
     theme: Theme.light,

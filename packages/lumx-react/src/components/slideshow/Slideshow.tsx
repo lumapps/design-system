@@ -7,7 +7,7 @@ import { Theme } from '@lumx/react';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
-import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
 
 import { SlideshowControls } from './SlideshowControls';
 
@@ -16,7 +16,7 @@ import { SlideshowControls } from './SlideshowControls';
 /**
  * Defines the props of the component.
  */
-interface ISlideshowProps extends IGenericProps {
+interface SlideshowProps extends GenericProps {
     /** Index of the current slide */
     activeIndex?: number;
     /** Enable/disable automatic rotation of slideshow */
@@ -34,14 +34,13 @@ interface ISlideshowProps extends IGenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 }
-type SlideshowProps = ISlideshowProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<SlideshowProps> {}
+interface DefaultPropsType extends Partial<SlideshowProps> {}
 
 /////////////////////////////
 //                         //
@@ -62,7 +61,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     activeIndex: 0,
     autoPlay: false,
     fillHeight: false,

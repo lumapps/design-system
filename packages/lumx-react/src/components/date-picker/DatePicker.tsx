@@ -4,7 +4,7 @@ import moment from 'moment';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps } from '@lumx/react/utils';
+import { GenericProps } from '@lumx/react/utils';
 import { getRootClassName } from '../../utils/getRootClassName';
 
 import { DatePickerControlled } from './DatePickerControlled';
@@ -15,7 +15,7 @@ import { DatePickerControlled } from './DatePickerControlled';
  * Defines the props of the component.
  */
 
-interface IDatePickerProps extends IGenericProps {
+interface DatePickerProps extends GenericProps {
     /** Locale. */
     locale: string;
 
@@ -34,7 +34,6 @@ interface IDatePickerProps extends IGenericProps {
     /** On change. */
     onChange(value: moment.Moment | undefined): void;
 }
-type DatePickerProps = IDatePickerProps;
 
 /////////////////////////////
 

@@ -6,7 +6,7 @@ import { mdiCheck } from '@lumx/icons';
 
 import { Icon, InputHelper, InputLabel, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
 
@@ -15,7 +15,7 @@ import uniqueId from 'lodash/uniqueId';
 /**
  * Defines the props of the component.
  */
-interface ICheckboxProps extends IGenericProps {
+interface CheckboxProps extends GenericProps {
     /** Is checkbox disabled */
     disabled?: boolean;
     /** Helper */
@@ -36,14 +36,13 @@ interface ICheckboxProps extends IGenericProps {
      */
     onChange(value: boolean): void;
 }
-type CheckboxProps = ICheckboxProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<CheckboxProps> {}
+interface DefaultPropsType extends Partial<CheckboxProps> {}
 
 /////////////////////////////
 //                         //
@@ -64,7 +63,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     disabled: false,
     theme: Theme.light,
     value: false,

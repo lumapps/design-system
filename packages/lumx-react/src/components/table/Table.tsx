@@ -5,14 +5,14 @@ import classNames from 'classnames';
 import { Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface ITableProps extends IGenericProps {
+interface TableProps extends GenericProps {
     /**
      * Whether the table has checkbox or thumbnail on first cell.
      */
@@ -26,14 +26,13 @@ interface ITableProps extends IGenericProps {
      */
     theme?: Theme;
 }
-type TableProps = ITableProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<TableProps> {}
+interface DefaultPropsType extends Partial<TableProps> {}
 
 /////////////////////////////
 //                         //
@@ -54,7 +53,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     hasBefore: false,
     hasDividers: false,
     theme: Theme.light,

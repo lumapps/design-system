@@ -8,7 +8,7 @@ export default { title: 'Autocomplete Multiple' };
 
 import { CITIES } from './__mockData__';
 
-interface ICity {
+interface City {
     id: string;
     text: string;
 }
@@ -22,7 +22,7 @@ export const simple = ({ theme }: any) => {
     const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(
         INITIAL_STATE_NAVIGATION_SUGGESTION,
     );
-    const [selectedValues, setSelectedValues] = React.useState<ICity[]>([]);
+    const [selectedValues, setSelectedValues] = React.useState<City[]>([]);
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const filteredCities = useMemo(
@@ -52,7 +52,7 @@ export const simple = ({ theme }: any) => {
         resetChipNavigation();
     };
 
-    const setSelectedCity = (city: ICity) => {
+    const setSelectedCity = (city: City) => {
         setSelectedValues([...selectedValues, city]);
         setFilterValue('');
         setShowSuggestions(INITIAL_STATE_SHOW_SUGGESTIONS);
@@ -71,7 +71,7 @@ export const simple = ({ theme }: any) => {
         setNavigationSuggestionValue(INITIAL_STATE_NAVIGATION_SUGGESTION);
     };
 
-    const clearSelectedValue = (city: ICity) => () => {
+    const clearSelectedValue = (city: City) => () => {
         inputRef?.current?.focus();
         setSelectedValues(city ? selectedValues.filter((c) => c.id !== city.id) : []);
     };
@@ -83,7 +83,7 @@ export const simple = ({ theme }: any) => {
         resetChipNavigation();
     };
 
-    const onItemNavigated = (city: ICity) => {
+    const onItemNavigated = (city: City) => {
         if (city && showSuggestions) {
             setNavigationSuggestionValue(city.text);
         }
@@ -119,7 +119,7 @@ export const simple = ({ theme }: any) => {
         resetChipNavigation();
     };
 
-    const renderChip = (city: ICity, index: number) => (
+    const renderChip = (city: City, index: number) => (
         <Chip
             theme={theme}
             isClickable

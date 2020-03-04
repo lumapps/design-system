@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { TabProps, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -24,7 +24,7 @@ enum TabsPosition {
 /**
  * Defines the props of the component.
  */
-interface ITabsProps extends IGenericProps {
+interface TabsProps extends GenericProps {
     /** Active tab */
     activeTab?: number;
     /** Component tabs */
@@ -40,14 +40,13 @@ interface ITabsProps extends IGenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 }
-type TabsProps = ITabsProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<TabsProps> {}
+interface DefaultPropsType extends Partial<TabsProps> {}
 
 /////////////////////////////
 //                         //
@@ -68,7 +67,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     activeTab: 0,
     children: [],
     layout: TabsLayout.fixed,

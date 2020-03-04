@@ -4,7 +4,7 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { ColorPalette, ColorVariant } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { CLASSNAME, Link, LinkProps } from './Link';
 
 /////////////////////////////
@@ -12,13 +12,13 @@ import { CLASSNAME, Link, LinkProps } from './Link';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<LinkProps>;
+type SetupProps = Partial<LinkProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 }
 
 /////////////////////////////
@@ -31,7 +31,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: LinkProps = {
         ...propsOverrides,
     };

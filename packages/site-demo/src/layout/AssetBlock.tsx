@@ -3,7 +3,7 @@ import React, { ReactElement, ReactNode } from 'react';
 import { mdiDownload, mdiFile } from '@lumx/icons';
 import { Button, Emphasis, Icon, Size } from '@lumx/react';
 
-interface IAssetBlock {
+interface AssetBlock {
     /**
      * Asset download URL.
      */
@@ -43,7 +43,7 @@ function getFileName(url: string): string {
  * @param props Components props.
  * @return ReactElement.
  */
-const AssetBlock: React.FC<IAssetBlock> = (props: IAssetBlock): ReactElement => {
+const AssetBlock: React.FC<AssetBlock> = (props: AssetBlock): ReactElement => {
     const { downloadURL, fileName, children } = props;
 
     return (

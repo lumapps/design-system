@@ -7,14 +7,14 @@ import uuid from 'uuid/v4';
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import { Emphasis, Icon, IconButton, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface ITextFieldProps extends IGenericProps {
+interface TextFieldProps extends GenericProps {
     /** A Chip Group to be rendered before the main text input */
     chips?: HTMLElement | ReactNode;
 
@@ -87,7 +87,6 @@ interface ITextFieldProps extends IGenericProps {
     /** Text field blur change handler. */
     onBlur?(event: React.FocusEvent): void;
 }
-type TextFieldProps = ITextFieldProps;
 
 /////////////////////////////
 
@@ -173,7 +172,7 @@ const useComputeNumberOfRows = (
 };
 /////////////////////////////
 
-interface IInputNativeProps {
+interface InputNativeProps {
     id?: string;
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
     isDisabled?: boolean;
@@ -190,7 +189,7 @@ interface IInputNativeProps {
     onBlur?(value: React.FocusEvent): void;
 }
 
-const renderInputNative = (props: IInputNativeProps): ReactElement => {
+const renderInputNative = (props: InputNativeProps): ReactElement => {
     const {
         id,
         isDisabled,

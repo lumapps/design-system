@@ -21,7 +21,7 @@ const ButtonEmphasis = Emphasis;
 /**
  * Defines the props of the component.
  */
-interface IBaseButtonProps extends BaseButtonProps {
+interface ButtonProps extends BaseButtonProps {
     /**
      * Button content.
      */
@@ -39,14 +39,13 @@ interface IBaseButtonProps extends BaseButtonProps {
      */
     rightIcon?: string;
 }
-type ButtonProps = IBaseButtonProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ButtonProps> {}
+interface DefaultPropsType extends Partial<ButtonProps> {}
 
 /////////////////////////////
 //                         //
@@ -67,7 +66,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     emphasis: Emphasis.high,
     size: Size.m,
     theme: Theme.light,

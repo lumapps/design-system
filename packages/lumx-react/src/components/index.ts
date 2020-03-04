@@ -16,11 +16,10 @@ enum Alignment {
 /**
  * Defines the type of a complex default prop (which depends on the value of another prop).
  */
-interface IComplexPropDefault<T> {
+interface ComplexPropDefault<T> {
     default: T;
     [key: string]: T;
 }
-type ComplexPropDefault<T> = IComplexPropDefault<T>;
 
 /**
  * See SCSS variable $lumx-theme-color-palette

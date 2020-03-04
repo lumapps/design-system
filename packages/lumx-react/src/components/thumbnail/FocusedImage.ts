@@ -1,6 +1,6 @@
 // Credits: https://github.com/third774/image-focus/
 import debounce from 'lodash/debounce';
-import { IFocusPoint, IFocusedImageOptions } from './IFocusedImageOptions';
+import { FocusPoint, FocusedImageOptions } from './FocusedImageOptions';
 
 const CONTAINER_STYLES = {
     overflow: 'hidden',
@@ -35,7 +35,7 @@ const RESIZE_LISTENER_OBJECT_STYLES = {
     pointerEvents: 'none',
 };
 
-const DEFAULT_OPTIONS: IFocusedImageOptions = {
+const DEFAULT_OPTIONS: FocusedImageOptions = {
     focus: { x: 0, y: 0 },
     containerPosition: 'relative',
     debounceTime: 17,
@@ -43,20 +43,20 @@ const DEFAULT_OPTIONS: IFocusedImageOptions = {
     updateOnWindowResize: true,
 };
 
-export interface ILumHTMLImageElement extends HTMLImageElement {
+export interface LumHTMLImageElement extends HTMLImageElement {
     __focused_image_instance__: FocusedImage;
 }
 
 export class FocusedImage {
-    public focus: IFocusPoint;
-    public options: IFocusedImageOptions;
+    public focus: FocusPoint;
+    public options: FocusedImageOptions;
     public container: HTMLElement;
-    public img: ILumHTMLImageElement;
+    public img: LumHTMLImageElement;
     public resizeListenerObject!: HTMLObjectElement;
     public listening: boolean = false;
     public debounceApplyShift: () => void;
 
-    constructor(private readonly imageNode: ILumHTMLImageElement, options = DEFAULT_OPTIONS) {
+    constructor(private readonly imageNode: LumHTMLImageElement, options = DEFAULT_OPTIONS) {
         // Merge in options
         this.options = options;
 
@@ -92,7 +92,7 @@ export class FocusedImage {
         this.setFocus(this.focus);
     }
 
-    public setFocus = (focus: IFocusPoint) => {
+    public setFocus = (focus: FocusPoint) => {
         this.focus = focus;
         this.img.setAttribute('data-focus-x', focus.x.toString());
         this.img.setAttribute('data-focus-y', focus.y.toString());
@@ -135,28 +135,26 @@ export class FocusedImage {
     };
 
     public startListening() {
-        if (this.listening) {
+        if (this.listening || !this.options.updateOnContainerResize) {
             return;
         }
         this.listening = true;
         if (this.options.updateOnWindowResize) {
             window.addEventListener('resize', this.debounceApplyShift);
         }
-        if (this.options.updateOnContainerResize) {
-            const object = document.createElement('object');
-            Object.assign(object.style, RESIZE_LISTENER_OBJECT_STYLES, ABSOLUTE_STYLES);
-            // Use load event callback because contentDocument doesn't exist
-            // until this fires in Firefox
-            object.addEventListener('load', (e: Event) =>
-                object.contentDocument!.defaultView!.addEventListener('resize', () => this.debounceApplyShift()),
-            );
-            object.type = 'text/html';
-            object.setAttribute('aria-hidden', 'true');
-            object.tabIndex = -1;
-            this.container.appendChild(object);
-            object.data = 'about:blank';
-            this.resizeListenerObject = object;
-        }
+        const object = document.createElement('object');
+        Object.assign(object.style, RESIZE_LISTENER_OBJECT_STYLES, ABSOLUTE_STYLES);
+        // Use load event callback because contentDocument doesn't exist
+        // until this fires in Firefox
+        object.addEventListener('load', () =>
+            object.contentDocument!.defaultView!.addEventListener('resize', () => this.debounceApplyShift()),
+        );
+        object.type = 'text/html';
+        object.setAttribute('aria-hidden', 'true');
+        object.tabIndex = -1;
+        this.container.appendChild(object);
+        object.data = 'about:blank';
+        this.resizeListenerObject = object;
     }
 
     public stopListening() {

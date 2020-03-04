@@ -8,7 +8,7 @@ import { createPortal } from 'react-dom';
 import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
@@ -20,7 +20,7 @@ const _TRANSITION_DURATION = 400;
 /**
  * Defines the props of the component.
  */
-interface ILightboxProps extends IGenericProps {
+interface LightboxProps extends GenericProps {
     /** Label for accessibility assistive devices. */
     ariaLabel?: string;
     /** should the close button be visible - default true */
@@ -47,14 +47,13 @@ interface ILightboxProps extends IGenericProps {
     /** Callback called when lightbox is opening. */
     onOpen?(): void;
 }
-type LightboxProps = ILightboxProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<LightboxProps> {}
+interface DefaultPropsType extends Partial<LightboxProps> {}
 
 /////////////////////////////
 //                         //
@@ -75,7 +74,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     ariaLabel: 'Lightbox',
     isCloseButtonVisible: true,
     isOpen: false,

@@ -12,7 +12,7 @@ import { ColorPalette, DragHandle, Emphasis, IconButton, Theme } from '@lumx/rea
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
-    IGenericProps,
+    GenericProps,
     getRootClassName,
     handleBasicClasses,
     isComponent,
@@ -24,7 +24,7 @@ import {
 /**
  * Defines the props of the component.
  */
-interface IExpansionPanelProps extends IGenericProps {
+interface ExpansionPanelProps extends GenericProps {
     /** The color theme. */
     theme?: Theme;
 
@@ -49,7 +49,6 @@ interface IExpansionPanelProps extends IGenericProps {
     /** The function called on open or close. */
     toggleCallback?(shouldOpen: boolean): void;
 }
-type ExpansionPanelProps = IExpansionPanelProps;
 
 /////////////////////////////
 

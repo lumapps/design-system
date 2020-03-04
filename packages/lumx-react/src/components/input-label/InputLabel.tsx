@@ -1,6 +1,6 @@
 import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactElement, ReactNode } from 'react';
 
@@ -9,13 +9,13 @@ import React, { ReactElement, ReactNode } from 'react';
 /**
  * Defines the props of the component.
  */
-interface IInputLabelProps extends IGenericProps {
+interface InputLabelProps extends GenericProps {
     isRequired?: boolean;
     theme?: Theme;
     children: string | ReactNode;
 }
 
-interface IDefaultPropsType extends Partial<IInputLabelProps> {}
+interface DefaultPropsType extends Partial<InputLabelProps> {}
 
 /**
  * The display name of the component.
@@ -30,18 +30,18 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     isRequired: false,
     theme: Theme.light,
 };
 
-const InputLabel: React.FC<IInputLabelProps> = ({
+const InputLabel: React.FC<InputLabelProps> = ({
     className = '',
     isRequired = DEFAULT_PROPS.isRequired,
     theme = DEFAULT_PROPS.theme,
     children,
     ...props
-}: IInputLabelProps): ReactElement => (
+}: InputLabelProps): ReactElement => (
     <label className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))} {...props}>
         {children}
     </label>
@@ -49,4 +49,4 @@ const InputLabel: React.FC<IInputLabelProps> = ({
 
 InputLabel.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, InputLabel, IInputLabelProps };
+export { CLASSNAME, DEFAULT_PROPS, InputLabel, InputLabelProps };

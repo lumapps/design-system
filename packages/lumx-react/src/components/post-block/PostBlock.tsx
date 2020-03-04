@@ -7,14 +7,14 @@ import isObject from 'lodash/isObject';
 import { AspectRatio, Orientation, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IPostBlockProps extends IGenericProps {
+interface PostBlockProps extends GenericProps {
     /* Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
     /* Atachments elements to be transcluded into the component */
@@ -44,14 +44,13 @@ interface IPostBlockProps extends IGenericProps {
     /* Callback for the click event. */
     onClick?(): void;
 }
-type PostBlockProps = IPostBlockProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<PostBlockProps> {}
+interface DefaultPropsType extends Partial<PostBlockProps> {}
 
 /////////////////////////////
 //                         //
@@ -72,7 +71,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     orientation: Orientation.horizontal,
     text: undefined,
     theme: Theme.light,

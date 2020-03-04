@@ -8,7 +8,7 @@ import get from 'lodash/get';
 
 type Listener = (evt: KeyboardEvent) => void;
 
-interface IUseKeyboardListNavigationType {
+interface UseKeyboardListNavigationType {
     /** the current active index */
     activeItemIndex: number;
     /** callback to be used when a key is pressed. usually used with the native prop `onKeyDown` */
@@ -29,7 +29,7 @@ type useKeyboardListNavigationType = <I>(
     keepFocusAfterSelection?: boolean,
     initialIndex?: number,
     preventTabOnEnteredValue?: boolean,
-) => IUseKeyboardListNavigationType;
+) => UseKeyboardListNavigationType;
 
 /////////////////////////////
 

@@ -4,7 +4,7 @@ import 'jest-enzyme';
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 
-import { IGenericProps } from '@lumx/react/utils';
+import { GenericProps } from '@lumx/react/utils';
 
 /////////////////////////////
 //                         //
@@ -21,11 +21,11 @@ type Wrapper = ShallowWrapper | ReactWrapper;
  * Defines what is always returned by the setup function.
  * Note that `props` should be retyped in the specific interface extending this one.
  */
-interface ICommonSetup {
+interface CommonSetup {
     /**
      * The properties of the tested component.
      */
-    props: IGenericProps;
+    props: GenericProps;
 
     /**
      * The Enzyme wrapper around of the tested component.
@@ -49,9 +49,9 @@ interface ICommonSetup {
  * @param   params The params that can be used by the tests.
  */
 function commonTestsSuite(
-    setup: (props?: IGenericProps, shallowRendering?: boolean) => ICommonSetup,
+    setup: (props?: GenericProps, shallowRendering?: boolean) => CommonSetup,
     { ...tests }: { className?: string | string[]; prop?: string | string[] },
-    { ...params }: IGenericProps,
+    { ...params }: GenericProps,
 ) {
     if (isEmpty(tests)) {
         return;
@@ -60,7 +60,7 @@ function commonTestsSuite(
     describe('Common tests suite', () => {
         if (tests.className !== undefined && !isEmpty(tests.className)) {
             it('should forward any CSS class', () => {
-                const modifiedProps: IGenericProps = {
+                const modifiedProps: GenericProps = {
                     className: 'component component--is-tested',
                 };
 
@@ -78,7 +78,7 @@ function commonTestsSuite(
         if (tests.prop !== undefined && !isEmpty(tests.prop)) {
             it('should forward any other prop', () => {
                 const testedProp: string = params.prop || 'winter';
-                const modifiedProps: IGenericProps = {
+                const modifiedProps: GenericProps = {
                     [testedProp]: params.propValue || 'is coming',
                 };
 
@@ -95,4 +95,4 @@ function commonTestsSuite(
 
 /////////////////////////////
 
-export { ICommonSetup, Wrapper, commonTestsSuite };
+export { CommonSetup, Wrapper, commonTestsSuite };

@@ -7,7 +7,7 @@ import isFunction from 'lodash/isFunction';
 import { Color, ColorPalette, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -19,7 +19,7 @@ type ChipSize = Size.s | Size.m;
 /**
  * Defines the props of the component.
  */
-interface IChipProps extends IGenericProps {
+interface ChipProps extends GenericProps {
     /** A component to be rendered after the main label area. */
     after?: HTMLElement | ReactNode;
     /** A component to be rendered before the main label area. */
@@ -47,14 +47,13 @@ interface IChipProps extends IGenericProps {
     /** A function to be executed when the before element is clicked. */
     onBeforeClick?(evt: SyntheticEvent): void;
 }
-type ChipProps = IChipProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ChipProps> {}
+interface DefaultPropsType extends Partial<ChipProps> {}
 
 /////////////////////////////
 //                         //
@@ -75,7 +74,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     isClickable: false,
     isDisabled: false,
     isHighlighted: false,
@@ -91,7 +90,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The Chip component.
  */
-const Chip: React.FC<IChipProps> = ({
+const Chip: React.FC<ChipProps> = ({
     after = DEFAULT_PROPS.after,
     before = DEFAULT_PROPS.before,
     className,

@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
@@ -14,13 +14,13 @@ import { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps } from './Divider';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<DividerProps>;
+type SetupProps = Partial<DividerProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <hr> element.
@@ -38,7 +38,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: DividerProps = {
         children: 'Label',
         ...propsOverrides,
@@ -84,7 +84,7 @@ describe(`<${Divider.displayName}>`, () => {
 
         it('should use the given `theme`', () => {
             const testedProp = 'theme';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: Theme.dark,
             };
 

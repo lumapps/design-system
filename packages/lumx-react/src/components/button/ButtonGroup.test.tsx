@@ -6,7 +6,7 @@ import mockConsole from 'jest-mock-console';
 
 import { mdiPlus } from '@lumx/icons';
 import { Button, Icon, IconButton } from '@lumx/react';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
 
@@ -15,16 +15,16 @@ import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<ButtonGroupProps>;
+type SetupProps = Partial<ButtonGroupProps>;
 
 /**
  * Defines what is returned by the setup function.
  */
-interface ISetup extends ICommonSetup {
+interface Setup extends CommonSetup {
     /**
      * The properties of the tested component.
      */
-    props: ISetupProps;
+    props: SetupProps;
 
     /**
      * The <div> element that is used as a wrapper for the buttons inside of the <ButtonGroup>.
@@ -42,7 +42,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of
  *                       the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: ButtonGroupProps = {
         children: (
             <>

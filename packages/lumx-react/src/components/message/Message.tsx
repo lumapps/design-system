@@ -1,7 +1,7 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactElement, ReactNode } from 'react';
 
@@ -17,7 +17,7 @@ enum MessageKind {
 /**
  * Defines the props of the component.
  */
-interface IMessageProps extends IGenericProps {
+interface MessageProps extends GenericProps {
     /**
      * Message content.
      */
@@ -33,7 +33,6 @@ interface IMessageProps extends IGenericProps {
      */
     hasBackground?: boolean;
 }
-type MessageProps = IMessageProps;
 
 /////////////////////////////
 

@@ -20,7 +20,7 @@ const NAME_PROPERTIES: string[] = [
 /**
  * Define a generic props types.
  */
-interface IGenericProps {
+interface GenericProps {
     /**
      * Any prop (particularly any supported prop for a HTML element).
      * E.g. classNames, onClick, disabled, ...
@@ -131,5 +131,5 @@ export {
     getTypeName,
     Omit,
     ComponentType,
-    IGenericProps,
+    GenericProps,
 };

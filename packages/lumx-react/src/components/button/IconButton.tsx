@@ -10,21 +10,20 @@ import { getRootClassName } from '@lumx/react/utils';
 /**
  * Defines the props of the component.
  */
-interface IIconButtonProps extends BaseButtonProps {
+interface IconButtonProps extends BaseButtonProps {
     /**
      * The icon used as the button label.
      * @see {@link IconProps#icon}
      */
     icon: string;
 }
-type IconButtonProps = IIconButtonProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<IconButtonProps> {}
+interface DefaultPropsType extends Partial<IconButtonProps> {}
 
 /////////////////////////////
 //                         //
@@ -45,7 +44,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     emphasis: Emphasis.high,
     size: Size.m,
     theme: Theme.light,

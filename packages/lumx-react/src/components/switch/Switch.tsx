@@ -9,7 +9,7 @@ import isEmpty from 'lodash/isEmpty';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
 
 /////////////////////////////
 
@@ -23,7 +23,7 @@ enum SwitchPosition {
 /**
  * Defines the props of the component.
  */
-interface ISwitchProps extends IGenericProps {
+interface SwitchProps extends GenericProps {
     /**
      * Indicates if it is toggled on or not.
      */
@@ -50,14 +50,13 @@ interface ISwitchProps extends IGenericProps {
     /** Switch value change handler. */
     onToggle?(enabled: boolean): void;
 }
-type SwitchProps = ISwitchProps;
 
 /////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<SwitchProps> {}
+interface DefaultPropsType extends Partial<SwitchProps> {}
 
 /////////////////////////////
 //                         //
@@ -78,7 +77,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     checked: false,
     position: SwitchPosition.left,
     theme: Theme.light,

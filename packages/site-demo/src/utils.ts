@@ -12,7 +12,6 @@ function setDemoCustomColors(theme: Theme) {
 
     const { sheet } = styleTag;
 
-    /* tslint:disable object-literal-sort-keys */
     setCustomColors(sheet as CSSStyleSheet, theme, {
         primary: {
             D2: '#fea41c',

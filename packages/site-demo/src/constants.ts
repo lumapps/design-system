@@ -1,4 +1,3 @@
-/* tslint:disable object-literal-sort-keys */
 import { ColorPalette } from '@lumx/react';
 import { ReactNode } from 'react';
 
@@ -14,7 +13,7 @@ enum Categories {
 
 type Category = Categories;
 
-interface IDemoObject {
+interface DemoObject {
     /**
      * The description of the demo.
      */
@@ -31,18 +30,16 @@ interface IDemoObject {
     title?: string;
 }
 
-type DemoObject = IDemoObject;
-
 /**
  * Color variant details
  */
-interface IColorVariantDetail {
+interface ColorVariantDetail {
     hexCode: string;
     opacity: string;
     fontColor: string;
 }
 
-type IColorPaletteWithVariants = { [key in ColorPalette]: { [key2 in string]: IColorVariantDetail } };
+type ColorPaletteWithVariants = { [key in ColorPalette]: { [key2 in string]: ColorVariantDetail } };
 
 /**
  * The icons to use in the template.
@@ -304,4 +301,4 @@ const COLOR_VARIANTS = {
 
 /////////////////////////////
 
-export { COLOR_VARIANTS, IColorPaletteWithVariants, IColorVariantDetail, Categories, Category, DemoObject };
+export { COLOR_VARIANTS, ColorPaletteWithVariants, ColorVariantDetail, Categories, Category, DemoObject };

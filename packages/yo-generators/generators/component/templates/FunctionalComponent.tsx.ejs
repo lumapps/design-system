@@ -3,14 +3,14 @@ import React, { ReactElement } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface I<%= componentName %>Props extends IGenericProps {}
+interface I<%= componentName %>Props extends GenericProps {}
 type <%= componentName %>Props = I<%= componentName %>Props;
 
 /////////////////////////////

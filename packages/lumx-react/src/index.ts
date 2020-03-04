@@ -8,7 +8,7 @@ export { Autocomplete, AutocompleteProps } from './components/autocomplete/Autoc
 
 export { AutocompleteMultiple, AutocompleteMultipleProps } from './components/autocomplete/AutocompleteMultiple';
 
-export { Badge, IBaseBadgeProps } from './components/badge/Badge';
+export { Badge, BaseBadgeProps } from './components/badge/Badge';
 
 export { Button, ButtonEmphasis, ButtonProps } from './components/button/Button';
 
@@ -34,13 +34,13 @@ export { Icon, IconProps, IconSizes } from './components/icon/Icon';
 
 export { IconButton, IconButtonProps } from './components/button/IconButton';
 
-export { InputHelper, IInputHelperProps } from './components/input-helper/InputHelper';
+export { InputHelper, InputHelperProps } from './components/input-helper/InputHelper';
 
-export { InputLabel, IInputLabelProps } from './components/input-label/InputLabel';
+export { InputLabel, InputLabelProps } from './components/input-label/InputLabel';
 
 export { Thumbnail, ThumbnailProps, ThumbnailVariant, ThumbnailAspectRatio } from './components/thumbnail/Thumbnail';
 
-export { IFocusPoint } from './components/thumbnail/IFocusedImageOptions';
+export { FocusPoint } from './components/thumbnail/FocusedImageOptions';
 
 export { ImageBlock, ImageBlockProps, ImageBlockCaptionPosition } from './components/image-block/ImageBlock';
 

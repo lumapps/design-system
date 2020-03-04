@@ -5,7 +5,7 @@ import moment from 'moment';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
 import { DatePickerControlled, DatePickerControlledProps } from './DatePickerControlled';
 
@@ -22,13 +22,13 @@ Date.now = jest.fn(() =>
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<DatePickerControlledProps>;
+type SetupProps = Partial<DatePickerControlledProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 }
 
 /////////////////////////////
@@ -41,7 +41,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: DatePickerControlledProps = {
         locale: 'fr',
         monthOffset: 0,

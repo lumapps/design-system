@@ -12,7 +12,7 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
-import { IGenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
@@ -21,7 +21,7 @@ import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 /**
  * Defines the props of the component.
  */
-interface IDialogProps extends IGenericProps {
+interface DialogProps extends GenericProps {
     /**
      * Element(s) to display in the footer part.
      */
@@ -88,8 +88,6 @@ interface IDialogProps extends IGenericProps {
      */
     onOpen?(): void;
 }
-
-type DialogProps = IDialogProps;
 
 type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
