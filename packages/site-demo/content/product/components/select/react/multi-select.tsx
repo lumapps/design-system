@@ -8,7 +8,6 @@ const App = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
     const [values, setValues] = React.useState<string[]>([]);
 

@@ -153,7 +153,6 @@ const Slider: React.FC<SliderProps> = ({
      */
     const findClosestStep = (percentValue: number): number => {
         const closest = avaibleSteps.reduce(
-            // tslint:disable-next-line: typedef
             (acc, step) => {
                 const aDst = Math.abs(percentValue - step);
                 if (aDst < acc.dst) {

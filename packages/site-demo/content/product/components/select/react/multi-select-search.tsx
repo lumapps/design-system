@@ -23,12 +23,10 @@ const App = ({ theme }: any) => {
     const LABEL = 'Select label';
     const getChoiceByValue = (value: string) => CHOICES_WITH_ICONS.find((ch) => ch.label === value);
 
-    // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
     const [values, setValues] = React.useState<string[]>([]);
 
     const onInfiniteScroll = () => {
-        // tslint:disable-next-line:no-console
         console.log('You have reached the bottom of the select dropdown.');
     };
 

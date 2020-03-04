@@ -21,7 +21,6 @@ type useComputePositionType = (
     isVisible: boolean;
 };
 
-// tslint:disable-next-line: valid-jsdoc
 /**
  * Calculate the position of the popover relative to the anchor element.
  *

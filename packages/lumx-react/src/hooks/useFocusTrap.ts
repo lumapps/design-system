@@ -44,7 +44,6 @@ export function useFocusTrap(
             }
 
             const onKeyDown = (evt: KeyboardEvent) => {
-                // tslint:disable-next-line: deprecation
                 const { keyCode } = evt;
                 if (keyCode !== TAB_KEY_CODE) {
                     return;

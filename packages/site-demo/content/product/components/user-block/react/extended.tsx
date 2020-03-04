@@ -30,7 +30,6 @@ const App = ({ theme }: any) => {
             ))}
         </>
     );
-    // tslint:disable-next-line:no-console
     const logAction = (action: string) => () => console.log(action);
 
     return (

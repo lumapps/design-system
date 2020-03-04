@@ -36,7 +36,6 @@ interface Setup extends CommonSetup {
 const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const anchorRef = React.createRef<HTMLButtonElement>();
     const props: DropdownProps = {
-        // tslint:disable-next-line no-unused
         anchorRef,
         children: <div>This is the content of the dropdown</div>,
         showDropdown: true,

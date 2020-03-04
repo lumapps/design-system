@@ -37,6 +37,9 @@
     },
     "scripts": {
         "build": "webpack",
+        "lint": "yarn lint:code; yarn lint:style",
+        "lint:style": "stylelint **/*.{css,scss}",
+        "lint:code": "eslint --ext=js,ts src",
         "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
         "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
         "prepublishOnly": "yarn build"

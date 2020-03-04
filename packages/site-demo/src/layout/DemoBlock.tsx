@@ -22,7 +22,6 @@ interface HasTheme {
     theme: Theme;
 }
 
-// tslint:disable-next-line:interface-over-type-literal
 type Module = {};
 
 type NullModule = Module;

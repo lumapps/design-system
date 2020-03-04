@@ -5,7 +5,6 @@ import { Chip, Icon, Size } from '@lumx/react';
 
 const App = ({ theme }: any) => {
     // Initialize a click handler
-    // tslint:disable-next-line:no-console
     const onClick = () => console.log('clicked chip');
 
     return (

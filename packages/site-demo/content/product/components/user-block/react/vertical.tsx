@@ -3,7 +3,6 @@ import React from 'react';
 import { Orientation, Size, UserBlock } from '@lumx/react';
 
 const App = ({ theme }: any) => {
-    // tslint:disable-next-line:no-console
     const logAction = (action: string) => () => console.log(action);
     return (
         <div className="demo-grid">

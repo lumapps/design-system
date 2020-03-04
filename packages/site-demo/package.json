@@ -82,6 +82,9 @@
     },
     "scripts": {
         "build": "webpack",
+        "lint": "yarn lint:code; yarn lint:style",
+        "lint:style": "stylelint **/*.{css,scss}",
+        "lint:code": "eslint --ext=js,ts src",
         "start": "NODE_ENV=development webpack-dev-server"
     },
     "version": "0.21.9"

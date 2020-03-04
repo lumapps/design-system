@@ -94,7 +94,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      * @param evt Keyboard event.
      */
     const handleKeyPressed = (evt: KeyboardEvent) => {
-        // tslint:disable-next-line: deprecation
         const { keyCode } = evt;
         if (keyCode === LEFT_KEY_CODE) {
             handlePreviousClick();
@@ -162,7 +161,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
                         [`${CLASSNAME}__pagination-item--is-out-range`]: isPaginationItemOutVisibleRange(i),
                     })}
                     key={i}
-                    // tslint:disable-next-line: jsx-no-lambda
                     onClick={() => handleItemClick(i)}
                     tabIndex={-1}
                 />,

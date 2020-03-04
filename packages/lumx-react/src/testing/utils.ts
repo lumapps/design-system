@@ -62,7 +62,6 @@ function commonTestsSuite(
             });
         }
 
-        // tslint:disable-next-line: early-exit
         if (tests.prop !== undefined && !isEmpty(tests.prop)) {
             it('should forward any other prop', () => {
                 const testedProp: string = params.prop || 'winter';

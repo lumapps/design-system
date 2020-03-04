@@ -95,7 +95,6 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * @param evt - key pressed event
      */
     const onArrowPressed: Listener = (evt) => {
-        // tslint:disable-next-line: deprecation
         const { keyCode } = evt;
         const nextActiveIndex = calculateActiveIndex(keyCode);
         setActiveItemIndex(nextActiveIndex);
@@ -176,7 +175,6 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
      * @param evt - key pressed or key down event
      */
     const onKeyboardNavigation: Listener = (evt) => {
-        // tslint:disable-next-line: deprecation
         const { keyCode } = evt;
         const handler = eventsForKeyPressed[keyCode];
 

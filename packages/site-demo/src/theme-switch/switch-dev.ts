@@ -28,7 +28,6 @@ const injectThemeScript = async (theme: Theme) =>
         document.body.append(newScript);
         newScript.addEventListener('load', resolve);
         newScript.addEventListener('error', reject);
-        // tslint:disable-next-line: deprecation
         newScript.charset = 'UTF-8';
         newScript.src = devThemeScripts[theme] as string;
     });

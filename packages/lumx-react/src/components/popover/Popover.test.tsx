@@ -37,7 +37,6 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
     const popoverRef = React.createRef();
 
     const props: PopoverProps = {
-        // tslint:disable-next-line no-unused
         children: 'This is the content of the popover',
         isVisible: true,
         popoverRect: {

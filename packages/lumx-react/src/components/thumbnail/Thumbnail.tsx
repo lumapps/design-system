@@ -18,7 +18,6 @@ import useFocusedImage from './useFocusedImage';
  * https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#adding-non-standard-attributes
  */
 declare module 'react' {
-    // tslint:disable-next-line: interface-name
     interface ImgHTMLAttributes<T> extends React.HTMLAttributes<T> {
         loading?: 'auto' | 'eager' | 'lazy';
     }

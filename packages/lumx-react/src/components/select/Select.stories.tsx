@@ -13,7 +13,6 @@ export const simpleSelect = ({ theme }: any) => {
     const LABEL = 'Select label';
 
     const [values, setValues] = React.useState<string[]>([]);
-    // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     const clearSelected = (event: SyntheticEvent, value: string) => {
@@ -70,7 +69,6 @@ export const selectWithAnotherField = ({ theme }: any) => {
 
     const [values, setValues] = React.useState<string[]>([]);
     const [blurred, setWasBlurred] = React.useState('');
-    // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     const clearSelected = (event: SyntheticEvent, value: string) => {
@@ -137,7 +135,6 @@ export const selectWithAnotherField = ({ theme }: any) => {
 };
 
 export const selectWithNoData = ({ theme }: any) => {
-    // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(true);
 
     return (
@@ -160,7 +157,6 @@ export const selectWithNoData = ({ theme }: any) => {
 };
 
 export const selectWithHelper = ({ theme }: any) => {
-    // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     return (
@@ -186,7 +182,6 @@ export const selectWithHelper = ({ theme }: any) => {
 };
 
 export const selectWithError = ({ theme }: any) => {
-    // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     return (
@@ -214,7 +209,6 @@ export const selectWithError = ({ theme }: any) => {
 };
 
 export const selectSuccess = ({ theme }: any) => {
-    // tslint:disable-next-line: no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     return (

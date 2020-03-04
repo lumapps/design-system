@@ -1,4 +1,3 @@
-// tslint:disable-next-line:no-unused
 import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';

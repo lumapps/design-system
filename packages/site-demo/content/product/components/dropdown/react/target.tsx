@@ -18,10 +18,8 @@ const App = ({ theme }: any) => {
             </div>
 
             <div className="demo-grid">
-                {/* tslint:disable-next-line jsx-no-lambda */}
                 <Button onClick={openDropdown}>Open dropdown</Button>
 
-                {/* tslint:disable-next-line jsx-no-lambda */}
                 <Button onClick={closeDropdown}>Close dropdown</Button>
 
                 <Dropdown

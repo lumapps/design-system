@@ -100,7 +100,6 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                                                 annotatedDate.isClickable && annotatedDate.isToday,
                                         })}
                                         disabled={!annotatedDate.isClickable}
-                                        // tslint:disable-next-line: jsx-no-lambda
                                         onClick={() => onChange(annotatedDate.date)}
                                     >
                                         <span>{annotatedDate.date.format('DD')}</span>

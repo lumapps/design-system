@@ -9,7 +9,6 @@ const App = ({ theme }: any) => {
     const LABEL = 'Select label';
 
     const [values, setValues] = React.useState<string[]>([]);
-    // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
     const clearSelected = (event: SyntheticEvent, value?: string) => {
