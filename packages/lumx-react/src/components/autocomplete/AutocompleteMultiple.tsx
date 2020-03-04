@@ -7,8 +7,6 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -35,14 +33,6 @@ interface AutocompleteMultipleProps extends AutocompleteProps {
         isDisabled?: boolean,
     ): ReactNode | string;
 }
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -78,8 +68,6 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     },
     values: [],
 };
-
-/////////////////////////////
 
 /**
  * This component allows to create a multiple autocomplete, allowing the user to select multiple values from a
@@ -170,7 +158,5 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
     );
 };
 AutocompleteMultiple.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, AutocompleteMultiple, AutocompleteMultipleProps };

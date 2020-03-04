@@ -12,8 +12,6 @@ import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picke
 
 import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DEFAULT_PROPS, DatePickerProps } from './DatePicker';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -32,20 +30,10 @@ type DatePickerControlledProps = DatePickerProps & {
     onNextMonthChange(): void;
 };
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Controlled`;
-
-/////////////////////////////
 
 /**
  * Simple component used to pick a date (controlled implementation).
@@ -128,7 +116,5 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     );
 };
 DatePickerControlled.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, COMPONENT_NAME, DatePickerControlled, DatePickerControlledProps };

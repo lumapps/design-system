@@ -7,14 +7,10 @@ import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
 interface ProgressTrackerProps extends GenericProps {}
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
@@ -25,12 +21,6 @@ interface DefaultPropsType extends Partial<ProgressTrackerProps> {
     /** The current component theme. */
     theme?: Theme;
 }
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -49,8 +39,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     activeStep: 0,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * Displays a track of steps.
@@ -93,7 +81,5 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     );
 };
 ProgressTracker.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ProgressTracker, ProgressTrackerProps };

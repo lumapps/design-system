@@ -5,8 +5,6 @@ import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/Butto
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getRootClassName } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -18,18 +16,10 @@ interface IconButtonProps extends BaseButtonProps {
     icon: string;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<IconButtonProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -49,8 +39,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     size: Size.m,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * Displays an icon button.
@@ -73,7 +61,5 @@ const IconButton: React.FC<IconButtonProps> = (props) => {
     );
 };
 IconButton.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps };

@@ -9,8 +9,6 @@ import { getBasicClass } from '@lumx/react/utils';
 import { Theme } from '@lumx/react';
 import { CLASSNAME, RadioButton, RadioButtonProps } from './RadioButton';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -42,8 +40,6 @@ interface Setup extends CommonSetup {
      */
     input: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -121,8 +117,6 @@ describe(`<${RadioButton.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use props for classes', () => {
@@ -141,28 +135,20 @@ describe(`<${RadioButton.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { prop: 'input', className: 'wrapper' }, { className: CLASSNAME });

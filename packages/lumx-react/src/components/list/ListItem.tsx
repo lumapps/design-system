@@ -20,8 +20,6 @@ const ListItemSize = {
 
 type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -54,18 +52,10 @@ interface ListItemProps extends GenericProps {
     onItemSelected?(): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ListItemProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -87,7 +77,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     size: Size.regular,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Component used in List element.
@@ -162,7 +151,5 @@ const ListItem: React.FC<ListItemProps> = ({
     );
 };
 ListItem.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize, ListItemSizes };

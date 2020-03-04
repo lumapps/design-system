@@ -10,8 +10,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 
 import uniqueId from 'lodash/uniqueId';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -37,18 +35,10 @@ interface CheckboxProps extends GenericProps {
     onChange(value: boolean): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<CheckboxProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -68,7 +58,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     value: false,
 };
-/////////////////////////////
 
 /**
  * Defines a checkbox.
@@ -142,7 +131,5 @@ const Checkbox: React.FC<CheckboxProps> = ({
     );
 };
 Checkbox.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps };

@@ -10,8 +10,6 @@ import { getBasicClass } from '@lumx/react/utils';
 import { Theme } from '@lumx/react';
 import { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps } from './ExpansionPanel';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -28,8 +26,6 @@ interface Setup extends CommonSetup {
     label: Wrapper;
     content: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -71,8 +67,6 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         // Here are some examples of basic props check.
@@ -96,8 +90,6 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             root.hasClass('lumx-theme-color-dark-N');
         });
     });
-
-    /////////////////////////////
 
     // 3. Test events.
     describe('Events', () => {
@@ -128,7 +120,6 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
             expect(toggleCallback).toHaveBeenCalledTimes(2);
         });
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
@@ -162,14 +153,10 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });

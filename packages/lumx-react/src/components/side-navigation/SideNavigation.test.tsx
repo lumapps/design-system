@@ -7,8 +7,6 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 
 import { CLASSNAME, SideNavigation, SideNavigationProps } from './SideNavigation';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -22,8 +20,6 @@ interface Setup extends CommonSetup {
 
     root: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -63,23 +59,13 @@ describe(`<${SideNavigation.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values. => no default props
-
-    /////////////////////////////
 
     // 3. Test events. => no events
 
-    /////////////////////////////
-
     // 4. Test conditions => no conditions
 
-    /////////////////////////////
-
     // 5. Test state => no state
-
-    /////////////////////////////
     // Common tests suite.
     commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });
 });

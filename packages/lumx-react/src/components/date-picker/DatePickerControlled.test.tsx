@@ -17,8 +17,6 @@ Date.now = jest.fn(() =>
     ).valueOf(),
 );
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -30,8 +28,6 @@ type SetupProps = Partial<DatePickerControlledProps>;
 interface Setup extends CommonSetup {
     props: SetupProps;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -72,27 +68,20 @@ describe(`<${DatePickerControlled.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 5. Test state.
     describe('State', () => {

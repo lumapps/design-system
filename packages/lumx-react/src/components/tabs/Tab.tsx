@@ -6,8 +6,6 @@ import { Icon, IconProps, Size } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
 import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -26,18 +24,10 @@ interface TabProps extends GenericProps {
     onTabClick?(e: { event: SyntheticEvent; index?: number }): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TabProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -58,8 +48,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     isDisabled: false,
     label: undefined,
 };
-
-/////////////////////////////
 
 /**
  * Define a single Tab for Tabs component.
@@ -106,7 +94,5 @@ const Tab: React.FC<TabProps> = ({
     );
 };
 Tab.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Tab, TabProps };

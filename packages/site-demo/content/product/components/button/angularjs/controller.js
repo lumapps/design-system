@@ -1,17 +1,9 @@
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
-/////////////////////////////
-
 function DemoController() {
     'ngInject';
 
     const vm = this;
-
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
 
     /**
      * The icons to use in the template.
@@ -33,12 +25,6 @@ function DemoController() {
      */
     vm.isSelected = false;
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Toggle chip selected state.
      */
@@ -46,15 +32,9 @@ function DemoController() {
         vm.isSelected = !vm.isSelected;
     }
 
-    /////////////////////////////
-
     vm.toggleSelected = toggleSelected;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

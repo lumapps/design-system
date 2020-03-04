@@ -9,8 +9,6 @@ import { getBasicClass } from '@lumx/react/utils';
 import { Size, Theme } from '..';
 import { CLASSNAME, DEFAULT_PROPS, WebBookmark, WebBookmarkProps } from './WebBookmark';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -31,8 +29,6 @@ interface Setup extends CommonSetup {
      */
     thumbnail: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -76,8 +72,6 @@ describe(`<${WebBookmark.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         // Here are some examples of basic props check.
@@ -113,8 +107,6 @@ describe(`<${WebBookmark.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         const expectedUrl = 'https://expected.url';
@@ -125,21 +117,16 @@ describe(`<${WebBookmark.displayName}>`, () => {
 
         expect(window.open).toHaveBeenCalledWith(expectedUrl, '_blank');
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, {}, { className: CLASSNAME });

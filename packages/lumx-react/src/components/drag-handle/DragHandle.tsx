@@ -8,16 +8,12 @@ import { mdiDragVertical } from '@lumx/icons';
 import { ColorPalette, Icon, Size, Theme } from '@lumx/react';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
 interface DragHandleProps extends GenericProps {
     theme?: Theme;
 }
-
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -29,8 +25,6 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}DragHandle`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-/////////////////////////////
-
 const DragHandle: React.FC<DragHandleProps> = (props) => {
     const { className, theme, ...otherProps } = props;
 
@@ -41,7 +35,5 @@ const DragHandle: React.FC<DragHandleProps> = (props) => {
     );
 };
 DragHandle.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DragHandle, DragHandleProps };

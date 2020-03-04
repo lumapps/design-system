@@ -7,8 +7,6 @@ import { Kind, Theme } from '@lumx/react';
 import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 import { CLASSNAME, InputHelper, InputHelperProps } from './InputHelper';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -30,8 +28,6 @@ interface Setup extends CommonSetup {
      */
     helper: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -87,8 +83,6 @@ describe(`<${InputHelper.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should render info', () => {
@@ -122,26 +116,18 @@ describe(`<${InputHelper.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 });

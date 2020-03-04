@@ -6,8 +6,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import classNames from 'classnames';
 import take from 'lodash/take';
 
-/////////////////////////////
-
 interface MosaicElement {
     url: string;
     focusPoint?: FocusPoint;

@@ -19,8 +19,6 @@ import {
     partitionMulti,
 } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -50,8 +48,6 @@ interface ExpansionPanelProps extends GenericProps {
     toggleCallback?(shouldOpen: boolean): void;
 }
 
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -72,8 +68,6 @@ const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
 const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
-
-/////////////////////////////
 
 const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const {
@@ -168,7 +162,5 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     );
 };
 ExpansionPanel.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps };

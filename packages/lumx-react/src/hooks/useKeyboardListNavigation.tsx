@@ -4,8 +4,6 @@ import { BACKSPACE_KEY_CODE, DOWN_KEY_CODE, ENTER_KEY_CODE, TAB_KEY_CODE, UP_KEY
 
 import get from 'lodash/get';
 
-/////////////////////////////
-
 type Listener = (evt: KeyboardEvent) => void;
 
 interface UseKeyboardListNavigationType {
@@ -31,11 +29,7 @@ type useKeyboardListNavigationType = <I>(
     preventTabOnEnteredValue?: boolean,
 ) => UseKeyboardListNavigationType;
 
-/////////////////////////////
-
 const INITIAL_INDEX = -1;
-
-/////////////////////////////
 
 /**
  * This custom hook provides the necessary set of functions and values to properly navigate

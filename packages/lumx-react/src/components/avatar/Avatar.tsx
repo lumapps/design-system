@@ -14,8 +14,6 @@ import { getRootClassName } from '../../utils/getRootClassName';
  */
 type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -30,18 +28,10 @@ interface AvatarProps extends GenericProps {
     image: string;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<AvatarProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -61,7 +51,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     size: Size.m,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Simple component used to identify user.
@@ -93,7 +82,5 @@ const Avatar: React.FC<AvatarProps> = ({
     );
 };
 Avatar.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps, AvatarSize };

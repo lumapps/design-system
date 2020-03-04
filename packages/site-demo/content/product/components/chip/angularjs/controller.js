@@ -1,17 +1,9 @@
 import { mdiCheck, mdiClose, mdiCloseCircle, mdiEmail, mdiFilterVariant } from '@lumx/icons';
 
-/////////////////////////////
-
 function DemoController(LxNotificationService) {
     'ngInject';
 
     const vm = this;
-
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
 
     /**
      * The icons to use in the template.
@@ -38,12 +30,6 @@ function DemoController(LxNotificationService) {
         multiple: [false, false, false, false, false, false],
         unique: [false, false, false, false, false, false],
     };
-
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
 
     /**
      * When the chip has been clicked, display a notification.
@@ -98,18 +84,12 @@ function DemoController(LxNotificationService) {
         vm.isSelected[kind][index] = false;
     }
 
-    /////////////////////////////
-
     vm.clickCallback = clickCallback;
     vm.toggleSelected = toggleSelected;
     vm.select = select;
     vm.unselect = unselect;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

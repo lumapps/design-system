@@ -1,9 +1,3 @@
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The prefix to use for the CSS classes.
  */
@@ -58,8 +52,6 @@ const BACKSPACE_KEY_CODE = 8;
 const DIALOG_TRANSITION_DURATION = 400;
 
 const NOTIFICATION_TRANSITION_DURATION = 200;
-
-/////////////////////////////
 
 export {
     BACKSPACE_KEY_CODE,

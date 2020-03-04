@@ -6,12 +6,6 @@ import isEmpty from 'lodash/isEmpty';
 
 import { GenericProps } from '@lumx/react/utils';
 
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The type of a wrapper that can be
  */
@@ -32,12 +26,6 @@ interface CommonSetup {
      */
     wrapper: Wrapper;
 }
-
-/////////////////////////////
-//                         //
-//     Public functions    //
-//                         //
-/////////////////////////////
 
 /**
  * Run the common tests suite: CSS class forwarding, prop forwarding, ...
@@ -92,7 +80,5 @@ function commonTestsSuite(
         }
     });
 }
-
-/////////////////////////////
 
 export { CommonSetup, Wrapper, commonTestsSuite };

@@ -6,8 +6,6 @@ import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
@@ -39,18 +37,10 @@ interface IconProps extends GenericProps {
     theme?: Theme;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<IconProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -70,12 +60,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     iconRef: undefined,
     size: Size.m,
 };
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
 
 /**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
@@ -149,7 +133,5 @@ const Icon: React.FC<IconProps> = ({
     );
 };
 Icon.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, IconSizes };

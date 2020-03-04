@@ -3,12 +3,6 @@ function DemoController($scope, LxDialogService, LxNotificationService) {
 
     const vm = this;
 
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
-
     /**
      * The ids of the dialogs.
      *
@@ -101,12 +95,6 @@ function DemoController($scope, LxDialogService, LxNotificationService) {
         },
     ];
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Add a person to the list.
      */
@@ -172,18 +160,10 @@ function DemoController($scope, LxDialogService, LxNotificationService) {
         });
     }
 
-    /////////////////////////////
-
     vm.addPerson = addPerson;
     vm.alertDialog = alertDialog;
     vm.confirmDialog = confirmDialog;
     vm.openDialog = openDialog;
-
-    /////////////////////////////
-    //                         //
-    //          Events         //
-    //                         //
-    /////////////////////////////
 
     /**
      * When the dialog starts to open, log a message in the console.
@@ -251,10 +231,6 @@ function DemoController($scope, LxDialogService, LxNotificationService) {
     });
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

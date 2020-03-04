@@ -5,8 +5,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
-/////////////////////////////
-
 enum MessageKind {
     error = 'error',
     info = 'info',
@@ -33,14 +31,6 @@ interface MessageProps extends GenericProps {
      */
     hasBackground?: boolean;
 }
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -79,8 +69,6 @@ const KIND_ICON = {
     [MessageKind.warning]: mdiAlertCircle,
 };
 
-/////////////////////////////
-
 /**
  * Component used to display a message, with an icon and possibly a background
  *
@@ -109,7 +97,5 @@ const Message: React.FC<MessageProps> = (props) => {
     );
 };
 Message.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, MessageKind, Message, MessageProps };

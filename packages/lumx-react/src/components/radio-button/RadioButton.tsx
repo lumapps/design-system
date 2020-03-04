@@ -9,8 +9,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 
 import uniqueId from 'lodash/uniqueId';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -46,18 +44,10 @@ interface RadioButtonProps extends GenericProps {
     onChange?(value: string): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<RadioButtonProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -77,7 +67,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     disabled: false,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Defines a radio button.
@@ -156,7 +145,5 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
     );
 };
 RadioButton.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, RadioButton, RadioButtonProps };

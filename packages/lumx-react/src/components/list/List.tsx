@@ -15,8 +15,6 @@ import { ListItem, ListItemProps, ListItemSizes, Size, Theme } from '@lumx/react
 import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks/useKeyboardListNavigation';
-
-/////////////////////////////
 /**
  * Defines the props of the component.
  */
@@ -43,18 +41,10 @@ interface ListProps extends GenericProps {
     onListItemSelected?(entry: ReactNode): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ListProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -74,7 +64,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     itemPadding: Size.big,
     theme: Theme.light,
 };
-/////////////////////////////
 
 interface List {
     useKeyboardListNavigation: useKeyboardListNavigationType;
@@ -232,7 +221,5 @@ const List: React.FC<ListProps> & List = ({
 
 List.displayName = COMPONENT_NAME;
 List.useKeyboardListNavigation = useKeyboardListNavigation;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, List, ListProps };

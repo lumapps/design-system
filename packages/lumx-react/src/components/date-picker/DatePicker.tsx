@@ -9,8 +9,6 @@ import { getRootClassName } from '../../utils/getRootClassName';
 
 import { DatePickerControlled } from './DatePickerControlled';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -35,14 +33,6 @@ interface DatePickerProps extends GenericProps {
     onChange(value: moment.Moment | undefined): void;
 }
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -60,8 +50,6 @@ const DEFAULT_PROPS: Partial<DatePickerProps> = {
     maxDate: undefined,
     minDate: undefined,
 };
-
-/////////////////////////////
 
 /**
  * Simple component used to pick a date (semi-controlled implementation).
@@ -86,7 +74,5 @@ const DatePicker = (props: DatePickerProps) => {
     );
 };
 DatePicker.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, DatePicker, DatePickerProps };

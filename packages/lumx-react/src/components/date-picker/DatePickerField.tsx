@@ -13,8 +13,6 @@ import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker } from './Dat
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -36,20 +34,10 @@ interface DatePickerFieldProps extends GenericProps {
     onChange(value: moment.Moment | undefined): void;
 }
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
-
-/////////////////////////////
 
 /**
  * Simple component used to pick a date (ready-to-use wrapped implementation).
@@ -169,7 +157,5 @@ const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFie
     );
 };
 DatePickerField.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, COMPONENT_NAME, DatePickerField, DatePickerFieldProps };

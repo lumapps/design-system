@@ -6,8 +6,6 @@ import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 enum UploaderVariant {
     square = 'square',
     rounded = 'rounded',
@@ -50,14 +48,6 @@ interface UploaderProps extends GenericProps {
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -77,8 +67,6 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
     theme: Theme.light,
     variant: UploaderVariant.square,
 };
-
-/////////////////////////////
 
 /**
  * [Enter the description of the component here].
@@ -129,7 +117,5 @@ const Uploader: React.FC<UploaderProps> = (props) => {
     );
 };
 Uploader.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Uploader, UploaderProps, UploaderVariant };

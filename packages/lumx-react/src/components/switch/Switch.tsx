@@ -11,14 +11,10 @@ import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 enum SwitchPosition {
     left = 'left',
     right = 'right',
 }
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -51,18 +47,10 @@ interface SwitchProps extends GenericProps {
     onToggle?(enabled: boolean): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<SwitchProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -82,12 +70,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     position: SwitchPosition.left,
     theme: Theme.light,
 };
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
 
 /**
  * [Enter the description of the component here].
@@ -165,7 +147,5 @@ const Switch: React.FC<SwitchProps> = ({
     );
 };
 Switch.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Switch, SwitchProps, SwitchPosition };

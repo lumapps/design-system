@@ -1,17 +1,9 @@
 import { mdiCellphone, mdiClose, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@lumx/icons';
 
-/////////////////////////////
-
 function DemoController(LxPopoverService) {
     'ngInject';
 
     const vm = this;
-
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
 
     /**
      * The id of the popover.
@@ -45,12 +37,6 @@ function DemoController(LxPopoverService) {
         mdiSlack,
     };
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Close the popover.
      */
@@ -68,16 +54,10 @@ function DemoController(LxPopoverService) {
         });
     }
 
-    /////////////////////////////
-
     vm.closePopover = closePopover;
     vm.openPopover = openPopover;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

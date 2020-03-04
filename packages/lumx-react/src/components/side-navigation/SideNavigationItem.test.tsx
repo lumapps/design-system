@@ -10,8 +10,6 @@ import { mdiAccount } from '@lumx/icons';
 
 import { CLASSNAME, DEFAULT_PROPS, SideNavigationItem, SideNavigationItemProps } from './SideNavigationItem';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -30,8 +28,6 @@ interface Setup extends CommonSetup {
     icon: Wrapper;
     label: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -76,8 +72,6 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         // Here are some examples of basic props check.
@@ -94,8 +88,6 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         const onClick: jest.Mock = jest.fn();
@@ -108,8 +100,6 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
             expect(onClick).toHaveBeenCalled();
         });
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
@@ -160,11 +150,7 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 5. Test state => no state
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });
