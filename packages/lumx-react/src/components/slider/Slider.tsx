@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -137,7 +137,7 @@ const Slider: React.FC<SliderProps> = ({
     disabled,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SliderProps): ReactElement => {
+}) => {
     const sliderRef = useRef<HTMLDivElement>(null);
     const avaibleSteps: number[] = [];
 

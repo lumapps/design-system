@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -86,7 +86,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     useCustomColors,
     value = DEFAULT_PROPS.value,
     ...props
-}: CheckboxProps): ReactElement => {
+}) => {
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = () => {
         onChange(!value);

@@ -94,7 +94,7 @@ const List: React.FC<ListProps> & List = ({
     useCustomColors,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ListProps): ReactElement => {
+}) => {
     const children = Children.toArray(props.children);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);

@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -122,7 +122,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
     ...props
-}: ImageBlockProps): ReactElement => {
+}) => {
     const { onClick = null, ...restProps } = props;
 
     return (

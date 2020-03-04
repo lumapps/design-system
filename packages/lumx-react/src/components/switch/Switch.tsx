@@ -1,4 +1,4 @@
-import React, { Children, ReactElement } from 'react';
+import React, { Children } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
@@ -104,7 +104,7 @@ const Switch: React.FC<SwitchProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     ...props
-}: SwitchProps): ReactElement => {
+}) => {
     const switchId: string = uuid();
 
     /**

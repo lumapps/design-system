@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -98,7 +98,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
     thumbnailAspectRatio = DEFAULT_PROPS.thumbnailAspectRatio,
     title,
     theme = DEFAULT_PROPS.theme,
-}: PostBlockProps): ReactElement => {
+}) => {
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
             {thumbnail && (

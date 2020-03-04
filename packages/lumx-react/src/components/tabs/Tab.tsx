@@ -1,10 +1,4 @@
-import React, {
-    AnchorHTMLAttributes,
-    KeyboardEventHandler,
-    MouseEventHandler,
-    ReactElement,
-    SyntheticEvent,
-} from 'react';
+import React, { AnchorHTMLAttributes, KeyboardEventHandler, MouseEventHandler, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -81,7 +75,7 @@ const Tab: React.FC<TabProps> = ({
     label = DEFAULT_PROPS.label,
     onTabClick,
     ...props
-}: TabProps): ReactElement => {
+}) => {
     const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
 
     const handleTabClick: MouseEventHandler = (event) => {

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -84,7 +84,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps): ReactElement => {
+const RadioButton: React.FC<RadioButtonProps> = (props) => {
     const {
         className,
         checked = DEFAULT_PROPS.checked,

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -36,7 +36,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  *
  * @return The component.
  */
-const RadioGroup: React.FC<RadioGroupProps> = (props: RadioGroupProps): ReactElement => {
+const RadioGroup: React.FC<RadioGroupProps> = (props) => {
     const { className, children, ...forwardedProps } = props;
 
     return (

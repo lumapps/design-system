@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -72,7 +72,7 @@ const Progress: React.FC<ProgressProps> = ({
     useCustomColors,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: ProgressProps): ReactElement => {
+}) => {
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }), {

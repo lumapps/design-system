@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -80,7 +80,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     delay = DEFAULT_PROPS.delay,
     placement = DEFAULT_PROPS.placement,
     ...props
-}: TooltipProps): ReactElement => {
+}) => {
     const [timer, setTimer] = useState(0);
     const tooltipRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [isOpen, setIsOpen] = useState(false);

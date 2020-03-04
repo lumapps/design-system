@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode } from 'react';
+import React, { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -62,7 +62,7 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     isSelected: false,
 };
 
-const SideNavigationItem: React.FC<SideNavigationItemProps> = (props: SideNavigationItemProps): ReactElement => {
+const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
     const {
         children,
         className,

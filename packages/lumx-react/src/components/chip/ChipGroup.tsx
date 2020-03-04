@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -66,7 +66,7 @@ const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
     align = DEFAULT_PROPS.align,
     children,
     ...props
-}: ChipGroupProps): ReactElement => {
+}) => {
     const chipGroupClassName = handleBasicClasses({
         align,
         prefix: CLASSNAME,

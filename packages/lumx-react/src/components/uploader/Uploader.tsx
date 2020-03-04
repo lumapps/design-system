@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, ReactElement } from 'react';
+import React, { MouseEventHandler } from 'react';
 
 import classNames from 'classnames';
 
@@ -85,7 +85,7 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
  *
  * @return The component.
  */
-const Uploader: React.FC<UploaderProps> = (props: UploaderProps): ReactElement => {
+const Uploader: React.FC<UploaderProps> = (props) => {
     const {
         aspectRatio = DEFAULT_PROPS.aspectRatio,
         className,

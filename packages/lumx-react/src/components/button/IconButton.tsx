@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { Emphasis, Icon, Size, Theme } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
@@ -57,7 +57,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const IconButton: React.FC<IconButtonProps> = (props: IconButtonProps): ReactElement => {
+const IconButton: React.FC<IconButtonProps> = (props) => {
     const {
         emphasis = DEFAULT_PROPS.emphasis,
         icon,

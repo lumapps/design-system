@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -32,7 +32,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  * @return The component.
  */
-const SlideshowItem: React.FC<GenericProps> = ({ className = '', children, ...props }: GenericProps): ReactElement => (
+const SlideshowItem: React.FC<GenericProps> = ({ className = '', children, ...props }) => (
     <div
         className={classNames(
             className,

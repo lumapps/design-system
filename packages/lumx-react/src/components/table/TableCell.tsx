@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -122,7 +122,7 @@ const TableCell: React.FC<TableCellProps> = ({
     sortOrder,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: TableCellProps): ReactElement => {
+}) => {
     /**
      * Handle click on the ordered thead.
      */

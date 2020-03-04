@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -137,7 +137,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
-}: ThumbnailProps): ReactElement => {
+}) => {
     const focusImageRef = useFocusedImage(focusPoint!);
 
     return (

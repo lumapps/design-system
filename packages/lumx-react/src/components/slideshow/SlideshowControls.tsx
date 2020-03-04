@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useCallback, useEffect, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -95,7 +95,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Theme */
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SlideshowControlsProps): ReactElement | null => {
+}) => {
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
         return null;
     }

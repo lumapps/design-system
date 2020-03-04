@@ -2,7 +2,7 @@ import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 /////////////////////////////
 
@@ -41,7 +41,7 @@ const InputLabel: React.FC<InputLabelProps> = ({
     theme = DEFAULT_PROPS.theme,
     children,
     ...props
-}: InputLabelProps): ReactElement => (
+}) => (
     <label className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))} {...props}>
         {children}
     </label>

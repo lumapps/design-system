@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import moment from 'moment';
 
@@ -63,7 +63,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     today,
     todayOrSelectedDateRef,
     value,
-}: DatePickerControlledProps): ReactElement => {
+}) => {
     return (
         <div className={`${CLASSNAME}`}>
             <Toolbar

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -47,11 +47,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const TableHeader: React.FC<TableHeaderProps> = ({
-    children,
-    className = '',
-    ...props
-}: TableHeaderProps): ReactElement => (
+const TableHeader: React.FC<TableHeaderProps> = ({ children, className = '', ...props }) => (
     <thead className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {children}
     </thead>
