@@ -1,23 +1,52 @@
 import { Alignment, Orientation } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName } from '@lumx/react/utils';
+import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React from 'react';
+import castArray from 'lodash/castArray';
+import React, { ReactNode } from 'react';
 
 /////////////////////////////
+
+export type MarginAutoAlignment = Alignment.top | Alignment.bottom | Alignment.right | Alignment.left;
 
 /**
  * Defines the props of the component.
  */
 interface IFlexViewProps extends IGenericProps {
+    /**
+     * Flex direction.
+     */
     orientation?: Orientation;
-    wrap?: string;
-    vAlign?: Alignment;
-    hAlign?: Alignment;
+    /**
+     * Enable/Disable flex wrap.
+     */
+    wrap?: boolean;
+    /**
+     * Flex vertical alignment.
+     */
+    vAlign?: Alignment.left | Alignment.center | Alignment.right;
+    /**
+     * Flex horizontal alignment.
+     */
+    hAlign?: Alignment.top | Alignment.center | Alignment.bottom;
+    /**
+     * Enable/Disable content filling space.
+     */
     fillSpace?: boolean;
+    /**
+     * Enable/Disable content shrink.
+     */
     noShrink?: boolean;
-    marginAuto?: Alignment;
+    /**
+     * Enable/Disable auto margin all around.
+     */
+    marginAuto?: MarginAutoAlignment | MarginAutoAlignment[];
+    /**
+     * Content on which to apply a flex layout.
+     */
+    children: ReactNode;
 }
+type FlexViewProps = IFlexViewProps;
 
 /**
  * The display name of the component.
@@ -27,36 +56,42 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexView`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const FlexView: React.FC<IFlexViewProps> = ({
+const DEFAULT_PROPS: Partial<FlexViewProps> = {
+    fillSpace: false,
+    noShrink: false,
+    orientation: Orientation.horizontal,
+    wrap: false,
+};
+
+const FlexView: React.FC<FlexViewProps> = ({
     children,
-    className = '',
-    orientation,
-    wrap,
+    className,
+    orientation = DEFAULT_PROPS.orientation,
+    wrap = DEFAULT_PROPS.wrap,
     vAlign,
     hAlign,
-    fillSpace,
-    noShrink,
+    fillSpace = DEFAULT_PROPS.fillSpace,
+    noShrink = DEFAULT_PROPS.noShrink,
     marginAuto,
     ...props
-}: IFlexViewProps): React.ReactElement => (
+}) => (
     <div
-        className={classNames(CLASSNAME, className, {
-            [`${CLASSNAME}--orientation-${orientation}`]: orientation,
-            [`${CLASSNAME}--v-align-${vAlign}`]: vAlign,
-            [`${CLASSNAME}--h-align-${hAlign}`]: hAlign,
-            [`${CLASSNAME}--wrap`]: wrap,
-            [`${CLASSNAME}--fill-space`]: fillSpace,
-            [`${CLASSNAME}--no-shrink`]: noShrink,
-            [`${CLASSNAME}--margin-auto-${marginAuto}`]: marginAuto,
-        })}
         {...props}
+        className={classNames(
+            CLASSNAME,
+            className,
+            handleBasicClasses({ prefix: CLASSNAME, orientation, vAlign, hAlign }),
+            wrap && `${CLASSNAME}--wrap`,
+            fillSpace && `${CLASSNAME}--fill-space`,
+            noShrink && `${CLASSNAME}--no-shrink`,
+            marginAuto && castArray(marginAuto).map((align) => `${CLASSNAME}--margin-auto-${align}`),
+        )}
     >
         {children}
     </div>
 );
-
 FlexView.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, FlexView, IFlexViewProps };
+export { CLASSNAME, DEFAULT_PROPS, FlexView, FlexViewProps };

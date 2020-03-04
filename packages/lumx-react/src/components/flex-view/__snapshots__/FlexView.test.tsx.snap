@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FlexView> Snapshots and structure should render story Align 1`] = `
+Array [
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-center lumx-flex-view--h-align-center"
+  >
+    <Button
+      style={
+        Object {
+          "height": 200,
+        }
+      }
+    >
+      Button
+    </Button>
+    <FlexView
+      style={
+        Object {
+          "height": "fit-content",
+        }
+      }
+    >
+      Some text
+    </FlexView>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    style={
+      Object {
+        "height": "fit-content",
+      }
+    }
+  >
+    Some text
+  </div>,
+]
+`;
+
+exports[`<FlexView> Snapshots and structure should render story Flex 1`] = `
+Array [
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+  >
+    <FlexView
+      fillSpace={false}
+      noShrink={false}
+    >
+      <Icon
+        icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+      />
+    </FlexView>
+    <FlexView
+      fillSpace={false}
+      noShrink={false}
+    >
+      Some text in a div
+    </FlexView>
+    <FlexView
+      fillSpace={false}
+      noShrink={false}
+    >
+      <Button>
+        OK
+      </Button>
+    </FlexView>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+  >
+    <Icon
+      icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
+    />
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+  >
+    Some text in a div
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+  >
+    <Button>
+      OK
+    </Button>
+  </div>,
+]
+`;
+
+exports[`<FlexView> Snapshots and structure should render story HorizontalFlex 1`] = `
+Array [
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    style={
+      Object {
+        "border": "1px solid red",
+        "height": "300px",
+      }
+    }
+  >
+    <Button>
+      Default
+    </Button>
+    <FlexView
+      hAlign="top"
+    >
+      <Button>
+        Top
+      </Button>
+    </FlexView>
+    <FlexView
+      fillSpace={true}
+      hAlign="center"
+      vAlign="center"
+    >
+      <Button>
+        Center button
+      </Button>
+    </FlexView>
+    <FlexView
+      hAlign="bottom"
+    >
+      <Button>
+        Bottom
+      </Button>
+    </FlexView>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--h-align-top"
+  >
+    <Button>
+      Top
+    </Button>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-center lumx-flex-view--h-align-center lumx-flex-view--fill-space"
+  >
+    <Button>
+      Center button
+    </Button>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--h-align-bottom"
+  >
+    <Button>
+      Bottom
+    </Button>
+  </div>,
+]
+`;
+
+exports[`<FlexView> Snapshots and structure should render story NoShrinkFlex 1`] = `
+Array [
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    style={
+      Object {
+        "border": "1px solid red",
+        "width": "150px",
+      }
+    }
+  >
+    <Button>
+      Button
+    </Button>
+    <FlexView
+      noShrink={true}
+    >
+      Some long text
+    </FlexView>
+    <Button>
+      Button
+    </Button>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--no-shrink"
+  >
+    Some long text
+  </div>,
+]
+`;
+
+exports[`<FlexView> Snapshots and structure should render story VerticalFlex 1`] = `
+Array [
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-vertical"
+    style={
+      Object {
+        "border": "1px solid red",
+        "height": "300px",
+      }
+    }
+  >
+    <Button>
+      Default
+    </Button>
+    <FlexView
+      vAlign="left"
+    >
+      <Button>
+        Left
+      </Button>
+    </FlexView>
+    <FlexView
+      fillSpace={true}
+      hAlign="center"
+      vAlign="center"
+    >
+      <Button>
+        Center button
+      </Button>
+    </FlexView>
+    <FlexView
+      vAlign="right"
+    >
+      <Button>
+        Right
+      </Button>
+    </FlexView>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-left"
+  >
+    <Button>
+      Left
+    </Button>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-center lumx-flex-view--h-align-center lumx-flex-view--fill-space"
+  >
+    <Button>
+      Center button
+    </Button>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-right"
+  >
+    <Button>
+      Right
+    </Button>
+  </div>,
+]
+`;
+
+exports[`<FlexView> Snapshots and structure should render story WrapFlex 1`] = `
+Array [
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--wrap"
+    style={
+      Object {
+        "border": "1px solid red",
+        "width": "150px",
+      }
+    }
+  >
+    <FlexView
+      fillSpace={true}
+      orientation="vertical"
+    >
+      <Button>
+        Button
+      </Button>
+    </FlexView>
+    <Button>
+      Button
+    </Button>
+    <Button>
+      Button
+    </Button>
+  </div>,
+  <div
+    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-vertical lumx-flex-view--fill-space"
+  >
+    <Button>
+      Button
+    </Button>
+  </div>,
+]
+`;

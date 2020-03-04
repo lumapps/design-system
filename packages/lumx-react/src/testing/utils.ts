@@ -1,5 +1,6 @@
-import { ReactWrapper, ShallowWrapper } from 'enzyme';
+import { ReactWrapper, ShallowWrapper, shallow } from 'enzyme';
 import 'jest-enzyme';
+import React from 'react';
 
 import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
@@ -81,4 +82,26 @@ function commonTestsSuite(
     });
 }
 
-export { CommonSetup, Wrapper, commonTestsSuite };
+/**
+ * Generate snapshots for StoryBook stories (diving into the given component).
+ * @param stories   Stories module.
+ * @param component Component to dive into (expanding the shallow rendering fot this particular component).
+ */
+function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: React.FC<any>) {
+    for (const [storyName, Story] of Object.entries(stories)) {
+        if (typeof Story !== 'function') {
+            continue;
+        }
+
+        it(`should render story ${storyName}`, () => {
+            const actual = shallow(React.createElement(Story))
+                .find(component.displayName as string)
+                .map((parts) => parts.dive());
+            expect(actual).toMatchSnapshot();
+        });
+    }
+}
+
+/////////////////////////////
+
+export { CommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots };
