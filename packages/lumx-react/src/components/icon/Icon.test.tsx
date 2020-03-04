@@ -125,33 +125,14 @@ describe(`<${Icon.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
-    /////////////////////////////
+    // N/A
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        it('should fail when no `icon` is given', () => {
-            expect(() => {
-                // We know that icon must be given to <Icon>, but for the test, ignore it.
-                // @ts-ignore
-                setup({ icon: null });
-            }).toThrowErrorMatchingSnapshot();
-        });
-    });
-
-    /////////////////////////////
+    // N/A
 
     // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
-    /////////////////////////////
+    // N/A
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'i', prop: 'i' }, { className: CLASSNAME });

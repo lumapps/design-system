@@ -1,25 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ButtonGroup> Conditions should fail when anything else than <Button>s or <IconButton> is passed as children 1`] = `"You can only have <IconButton> or <Button> children in <ButtonGroup> (got <Icon>)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when anything else than <Button>s or <IconButton> is passed as children 2`] = `"You can only have <IconButton> or <Button> children in <ButtonGroup> (got <span>)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when anything else than <Button>s or <IconButton> is passed as children 3`] = `"You can only have <IconButton> or <Button> children in <ButtonGroup> (got <span>)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when anything else than <Button>s or <IconButton> is passed as children 4`] = `"You can only have <IconButton> or <Button> children in <ButtonGroup> (got <Icon>)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when anything else than <Button>s or <IconButton> is passed as children 5`] = `"<ButtonGroup> must have exactly 2 children (got 3)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when anything else than <Button>s or <IconButton> is passed as children 6`] = `"You can only have <IconButton> or <Button> children in <ButtonGroup> (got <Icon>)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when anything else than <Button>s or <IconButton> is passed as children 7`] = `"<ButtonGroup> must have exactly 2 children (got 3)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when less than 2 children are given 1`] = `"<ButtonGroup> must have exactly 2 children (got 1)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when more than 2 children are given 1`] = `"<ButtonGroup> must have exactly 2 children (got 3)!"`;
-
-exports[`<ButtonGroup> Conditions should fail when no child is given 1`] = `"<ButtonGroup> must have exactly 2 children (got 0)!"`;
-
 exports[`<ButtonGroup> Snapshots and structure should render correctly a group button 1`] = `
 <div
   className="lumx-button-group"

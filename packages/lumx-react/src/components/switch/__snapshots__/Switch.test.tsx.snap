@@ -1,9 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Switch> Conditions should fail when anything else than a text or a <span> is given 1`] = `"You can only have text or <span> children in <Switch> (got <div>)!"`;
-
-exports[`<Switch> Conditions should fail when more than one child is given 1`] = `"<Switch> cannot have more than 1 child (got 2)!"`;
-
 exports[`<Switch> Conditions should not display the \`helper\` if no \`label\` is given 1`] = `
 <div
   className="lumx-switch lumx-switch--position-left lumx-switch--theme-light lumx-switch--is-unchecked"

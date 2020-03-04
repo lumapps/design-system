@@ -1,16 +1,13 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import mockConsole from 'jest-mock-console';
 
 import { mdiPlus } from '@lumx/icons';
-import { Button, Icon, IconButton } from '@lumx/react';
+import { Button, IconButton } from '@lumx/react';
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { ButtonGroup, ButtonGroupProps, CLASSNAME } from './ButtonGroup';
-
-/////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -31,8 +28,6 @@ interface Setup extends CommonSetup {
      */
     group: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -79,163 +74,17 @@ describe(`<${ButtonGroup.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Nothing to do here.
-    });
-
-    /////////////////////////////
+    // N/A
 
     // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
-
-    /////////////////////////////
+    // N/A
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        beforeEach(() => {
-            try {
-                // If `console.warn` has been mocked at least one, this exists. So disable TS here.
-                // @ts-ignore
-                global.console.warn.mockRestore();
-            } catch (exception) {
-                // Nothing to do here.
-            }
-        });
-
-        it('should fail when no child is given', () => {
-            expect(() => {
-                setup({ children: null });
-            }).toThrowErrorMatchingSnapshot();
-        });
-
-        it('should fail when less than 2 children are given', () => {
-            const children: ReactNode = <Button>Label</Button>;
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-        });
-
-        it(`should fail when anything else than <${Button.displayName}>s or <${IconButton.displayName}> is passed as children`, () => {
-            mockConsole('debug');
-
-            let children: ReactNode = (
-                <>
-                    <Icon icon={mdiPlus} />
-                    <Icon icon={mdiPlus} />
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-
-            /////////////////////////////
-
-            children = (
-                <>
-                    <span>Label</span>
-                    <Icon icon={mdiPlus} />
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-
-            /////////////////////////////
-
-            children = (
-                <>
-                    <span>Label</span>
-                    <span>Label 2</span>
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-
-            /////////////////////////////
-
-            children = (
-                <>
-                    <Button>Label</Button>
-                    <Icon icon={mdiPlus} />
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-
-            /////////////////////////////
-
-            children = (
-                <>
-                    <Button>Label</Button>
-                    <span>Label</span>>
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-
-            /////////////////////////////
-
-            children = (
-                <>
-                    <Icon icon={mdiPlus} />
-                    <Button>Label</Button>
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-
-            /////////////////////////////
-
-            children = (
-                <>
-                    <span>Label</span>><Button>Label</Button>
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-        });
-
-        it('should fail when more than 2 children are given', () => {
-            const children: ReactNode = (
-                <>
-                    <Button>Label</Button>
-                    <Button>Label 2</Button>
-                    <Button>Label 3</Button>
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-        });
-    });
-
-    /////////////////////////////
+    // N/A
 
     // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
-    /////////////////////////////
+    // N/A
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'group', prop: 'group' }, { className: CLASSNAME });

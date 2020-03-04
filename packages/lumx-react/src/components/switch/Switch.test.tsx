@@ -1,8 +1,7 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import mockConsole from 'jest-mock-console';
 import { build, oneOf } from 'test-data-bot';
 
 import without from 'lodash/without';
@@ -141,8 +140,6 @@ describe(`<${Switch.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default props', () => {
@@ -191,8 +188,6 @@ describe(`<${Switch.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         const onToggle: jest.Mock = jest.fn();
@@ -208,33 +203,9 @@ describe(`<${Switch.displayName}>`, () => {
             expect(onToggle).toHaveBeenCalled();
         });
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
-        it('should fail when more than one child is given', () => {
-            const children: ReactNode = (
-                <>
-                    Label
-                    <span>Label 2</span>
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-        });
-
-        it('should fail when anything else than a text or a <span> is given', () => {
-            mockConsole('debug');
-
-            const children: ReactNode = <div>Label</div>;
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-        });
-
         it('should not display the `helper` if no `label` is given', () => {
             const props: SetupProps = { helper: 'Helper' };
             const { content, wrapper } = setup(props);
@@ -244,14 +215,8 @@ describe(`<${Switch.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
-    /////////////////////////////
+    // N/A
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });
