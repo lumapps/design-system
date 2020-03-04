@@ -6,8 +6,6 @@ import React, { ReactNode } from 'react';
 
 import { INPUT_HELPER_CONFIGURATION } from './constants';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */

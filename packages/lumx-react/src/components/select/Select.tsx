@@ -18,8 +18,6 @@ import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * The authorized variants.
  */
@@ -142,18 +140,10 @@ interface SelectProps extends GenericProps {
     ): ReactNode | string;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<SelectProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -192,7 +182,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     variant: SelectVariant.input,
 };
-/////////////////////////////
 
 /**
  * Listen on element focus to store the focus status.
@@ -477,7 +466,5 @@ const Select: React.FC<SelectProps> = ({
     );
 };
 Select.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant };

@@ -3,12 +3,6 @@ function DemoController(LxLightboxService) {
 
     const vm = this;
 
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
-
     /**
      * The lightbox id.
      *
@@ -30,12 +24,6 @@ function DemoController(LxLightboxService) {
      */
     vm.tags = ['Tag 1', 'Tag 2'];
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Open the lightbox.
      */
@@ -45,15 +33,9 @@ function DemoController(LxLightboxService) {
         });
     }
 
-    /////////////////////////////
-
     vm.openLightbox = openLightbox;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

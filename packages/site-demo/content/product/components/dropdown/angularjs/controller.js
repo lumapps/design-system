@@ -8,18 +8,10 @@ import {
     mdiWrench,
 } from '@lumx/icons';
 
-/////////////////////////////
-
 function DemoController(LxDropdownService) {
     'ngInject';
 
     const vm = this;
-
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
 
     /**
      * The id of the dropdown.
@@ -49,12 +41,6 @@ function DemoController(LxDropdownService) {
         mdiWrench,
     };
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Close the dropdown.
      *
@@ -80,16 +66,10 @@ function DemoController(LxDropdownService) {
         });
     }
 
-    /////////////////////////////
-
     vm.closeDropdown = closeDropdown;
     vm.openDropdown = openDropdown;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

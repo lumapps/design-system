@@ -9,8 +9,6 @@ import { Emphasis, Icon, IconButton, InputHelper, InputLabel, Kind, Size, Theme 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -88,14 +86,6 @@ interface TextFieldProps extends GenericProps {
     onBlur?(event: React.FocusEvent): void;
 }
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -170,7 +160,6 @@ const useComputeNumberOfRows = (
         rows,
     };
 };
-/////////////////////////////
 
 interface InputNativeProps {
     id?: string;
@@ -423,7 +412,5 @@ const TextField: React.FC<TextFieldProps> = (props) => {
     );
 };
 TextField.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps };

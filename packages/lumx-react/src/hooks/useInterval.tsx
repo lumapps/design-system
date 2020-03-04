@@ -3,8 +3,6 @@ import { useEffect, useRef } from 'react';
 import isFunction from 'lodash/isFunction';
 import { Callback } from '../utils';
 
-/////////////////////////////
-
 /**
  * Making setInterval Declarative with React Hooks.
  * Credits: https://overreacted.io/making-setinterval-declarative-with-react-hooks/

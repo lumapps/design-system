@@ -13,8 +13,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-/////////////////////////////
-
 const _TRANSITION_DURATION = 400;
 
 /**
@@ -48,18 +46,10 @@ interface LightboxProps extends GenericProps {
     onOpen?(): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<LightboxProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -85,7 +75,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     role: 'dialog',
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Displays content within a modal.
@@ -247,7 +236,5 @@ const Lightbox: React.FC<LightboxProps> = ({
     );
 };
 Lightbox.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps };

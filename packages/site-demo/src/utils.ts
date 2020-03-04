@@ -38,6 +38,4 @@ function setDemoCustomColors(theme: Theme) {
     });
 }
 
-/////////////////////////////
-
 export { setDemoCustomColors };

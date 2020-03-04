@@ -9,8 +9,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -167,14 +165,6 @@ interface AutocompleteProps extends GenericProps {
     onBlur?(event: React.FocusEvent): void;
 }
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -195,8 +185,6 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     isOpen: undefined,
     shouldFocusOnClose: false,
 };
-
-/////////////////////////////
 
 /**
  * This component allows to make the connection between a Text Field and a Dropdown,
@@ -288,7 +276,5 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
     );
 };
 Autocomplete.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Autocomplete, AutocompleteProps };

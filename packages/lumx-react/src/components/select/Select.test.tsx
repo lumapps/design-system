@@ -14,8 +14,6 @@ import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant } from './Select';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -37,8 +35,6 @@ interface Setup extends CommonSetup {
     error: Wrapper;
     container: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -87,8 +83,6 @@ describe(`<${Select.displayName}>`, () => {
             expect(container).toHaveClassName(CLASSNAME);
         });
     });
-
-    /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
@@ -236,8 +230,6 @@ describe(`<${Select.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Here is an example how to check a `onClick` event.
@@ -312,8 +304,6 @@ describe(`<${Select.displayName}>`, () => {
             expect(input.prop('onAfterClick')).toBe(onClear);
         });
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
@@ -500,14 +490,10 @@ describe(`<${Select.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });

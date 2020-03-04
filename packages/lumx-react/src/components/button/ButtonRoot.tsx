@@ -8,8 +8,6 @@ import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * The authorized values for the `size` prop.
  */
@@ -78,8 +76,6 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
 
 const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
 const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
-
-/////////////////////////////
 
 /**
  * Render a button wrapper with the ButtonRoot inside.

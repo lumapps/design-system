@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react';
 
-/////////////////////////////
-
 type HandledEventType = MouseEvent | TouchEvent;
 type EventCallback = (evt: HandledEventType) => void;
 
-/////////////////////////////
-
 const EVENT_TYPES: string[] = ['mousedown', 'touchstart'];
-
-/////////////////////////////
 
 /**
  * Listen to clicks away from a given element and callback the passed in function.

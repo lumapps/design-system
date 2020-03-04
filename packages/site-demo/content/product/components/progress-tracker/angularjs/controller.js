@@ -3,12 +3,6 @@ function DemoController(LxNotificationService) {
 
     const vm = this;
 
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
-
     /**
      * The index of the currently active step of the stepper.
      *
@@ -49,12 +43,6 @@ function DemoController(LxNotificationService) {
             label: 'Step 4',
         },
     ];
-
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
 
     /**
      * Check if the stepper is complete, i.e. if all the steps have been completed.
@@ -123,18 +111,12 @@ function DemoController(LxNotificationService) {
         }
     }
 
-    /////////////////////////////
-
     vm.isComplete = isComplete;
     vm.next = next;
     vm.setActiveStep = setActiveStep;
     vm.setCompleteStep = setCompleteStep;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

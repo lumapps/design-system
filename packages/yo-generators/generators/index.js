@@ -3,8 +3,6 @@ const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
 
-/////////////////////////////
-
 module.exports = class extends Generator {
     constructor(args, opts) {
         super(args, opts);
@@ -20,8 +18,6 @@ module.exports = class extends Generator {
         }
 
         this.option('name', { description: 'The name of the component to create', type: String });
-
-        /////////////////////////////
 
         this.prompts = [
             {

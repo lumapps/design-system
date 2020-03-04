@@ -15,8 +15,6 @@ import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -38,18 +36,10 @@ interface PaginationRange {
     maxRange: number;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<SlideshowControlsProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -71,8 +61,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     onPreviousClick: noop,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * Controls for the slideshow component.
@@ -238,8 +226,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         );
     };
 
-    //////////////////////
-
     const [visibleRange, setVisibleRange]: [
         PaginationRange,
         React.Dispatch<React.SetStateAction<PaginationRange>>,
@@ -315,7 +301,5 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     );
 };
 SlideshowControls.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, SlideshowControls, SlideshowControlsProps as SlideshowProps };

@@ -1,11 +1,5 @@
 import { CSS_PREFIX } from './constants';
 
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
 interface ColorPalette {
     primary: {
         D2: string;
@@ -606,12 +600,6 @@ function _getTextFieldCSSRules(colorPalette: ColorPalette, theme: Theme) {
     return textFieldRules;
 }
 
-/////////////////////////////
-//                         //
-//     Public functions    //
-//                         //
-/////////////////////////////
-
 /**
  * Set primary and secondary custom colors.
  *
@@ -720,7 +708,5 @@ function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: Color
         index++;
     });
 }
-
-/////////////////////////////
 
 export { setCustomColors };

@@ -4,8 +4,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import classNames from 'classnames';
 import React, { ReactNode } from 'react';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -20,12 +18,6 @@ interface BaseBadgeProps extends GenericProps {
      */
     color?: Color;
 }
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.

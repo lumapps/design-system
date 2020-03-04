@@ -10,8 +10,6 @@ import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, Tab, TabProps } from './Tab';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -28,8 +26,6 @@ interface Setup extends CommonSetup {
      */
     wrapper: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -67,8 +63,6 @@ describe(`<${Tab.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use the given props', () => {
@@ -102,8 +96,6 @@ describe(`<${Tab.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         const onTabClick: jest.Mock = jest.fn();
@@ -133,21 +125,16 @@ describe(`<${Tab.displayName}>`, () => {
             expect(onTabClick).not.toHaveBeenCalled();
         });
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, {}, { className: CLASSNAME });

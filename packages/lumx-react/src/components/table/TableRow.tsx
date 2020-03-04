@@ -5,8 +5,6 @@ import classNames from 'classnames';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -25,18 +23,10 @@ interface TableRowProps extends GenericProps {
     isSelected?: boolean;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TableRowProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -56,8 +46,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     isDisabled: false,
     isSelected: false,
 };
-
-/////////////////////////////
 
 /**
  * The TableRow component displays an HTML Table Row, which contains table cells.
@@ -89,10 +77,6 @@ const TableRow: React.FC<TableRowProps> = ({
     </tr>
 );
 
-/////////////////////////////
-
 TableRow.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, TableRow, TableRowProps };

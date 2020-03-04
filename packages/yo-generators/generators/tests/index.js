@@ -2,8 +2,6 @@ const kebabCase = require('lodash/kebabCase');
 
 const MainGenerator = require('../');
 
-/////////////////////////////
-
 module.exports = class extends MainGenerator {
     constructor(args, opts) {
         super(args, opts);

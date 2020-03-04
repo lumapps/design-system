@@ -10,8 +10,6 @@ import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
 import isFunction from 'lodash/isFunction';
 
-/////////////////////////////
-
 /**
  * The authorized values for the `sortOrder` prop.
  */
@@ -35,8 +33,6 @@ enum TableCellVariant {
     body = 'body',
     head = 'head',
 }
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -73,20 +69,12 @@ interface TableCellProps extends GenericProps {
     onHeaderClick?(): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TableCellProps> {
     variant: TableCellVariant;
 }
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -105,8 +93,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     onHeaderClick: undefined,
     variant: TableCellVariant.body,
 };
-
-/////////////////////////////
 
 /**
  * The TableCell component displays an HTML Table Header Cell.
@@ -177,7 +163,5 @@ const TableCell: React.FC<TableCellProps> = ({
     );
 };
 TableCell.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, TableCell, TableCellProps, TableCellVariant, ThOrder, ThScope };

@@ -6,8 +6,6 @@ import { Alignment } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -20,18 +18,10 @@ interface GridItemProps extends GenericProps {
     width?: string;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<GridItemProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -50,7 +40,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  *
  */
 const DEFAULT_PROPS: DefaultPropsType = {};
-/////////////////////////////
 
 /**
  * [Enter the description of the component here].
@@ -75,7 +64,5 @@ const GridItem: React.FC<GridItemProps> = ({
     );
 };
 GridItem.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, GridItem, GridItemProps };

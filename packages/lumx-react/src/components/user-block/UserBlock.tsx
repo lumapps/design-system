@@ -13,8 +13,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  */
 type UserBlockSize = Size.s | Size.m | Size.l;
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -45,18 +43,10 @@ interface UserBlockProps extends GenericProps {
     onMouseLeave?(): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<UserBlockProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -76,7 +66,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     size: Size.m,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Render a user information as a card if orientation is vertical or no action user info block if horizontal.
@@ -158,7 +147,5 @@ const UserBlock: React.FC<UserBlockProps> = ({
     );
 };
 UserBlock.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, UserBlockSize };

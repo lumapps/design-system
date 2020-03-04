@@ -5,8 +5,6 @@ import classNames from 'classnames';
 import { Alignment, Orientation, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 type GridGutterSize = Size.regular | Size.big | Size.huge;
 
 /**
@@ -24,18 +22,10 @@ interface GridProps extends GenericProps {
     gutter?: GridGutterSize;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<GridProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -57,7 +47,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     orientation: Orientation.horizontal,
     wrap: 'nowrap',
 };
-/////////////////////////////
 
 /**
  * Grid layout component.
@@ -90,7 +79,5 @@ const Grid: React.FC<GridProps> = ({
     );
 };
 Grid.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Grid, GridProps };

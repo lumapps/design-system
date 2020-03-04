@@ -7,12 +7,6 @@ import noop from 'lodash/noop';
 
 import { ESCAPE_KEY_CODE } from './constants';
 
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
 /**
  * Enhance isEmpty method to also works with numbers.
  *
@@ -27,12 +21,6 @@ const _isEmpty = (value: any) => {
 
     return isEmpty(value);
 };
-
-/////////////////////////////
-//                         //
-//     Public functions    //
-//                         //
-/////////////////////////////
 type Callback = () => void;
 
 /**
@@ -198,7 +186,5 @@ function onEscapePressed(cb: Callback) {
         cb();
     };
 }
-
-/////////////////////////////
 
 export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed };

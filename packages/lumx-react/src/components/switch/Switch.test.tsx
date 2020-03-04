@@ -12,8 +12,6 @@ import { getBasicClass } from '@lumx/react/utils';
 import { Theme } from '@lumx/react';
 import { CLASSNAME, DEFAULT_PROPS, Switch, SwitchPosition, SwitchProps } from './Switch';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -55,8 +53,6 @@ interface Setup extends CommonSetup {
      */
     label: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.

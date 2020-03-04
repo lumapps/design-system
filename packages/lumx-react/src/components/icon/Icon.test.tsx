@@ -11,8 +11,6 @@ import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, Icon, IconProps } from './Icon';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -39,8 +37,6 @@ interface Setup extends CommonSetup {
      */
     svg: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -89,8 +85,6 @@ describe(`<${Icon.displayName}>`, () => {
             expect(wrapper).toMatchSnapshot();
         });
     });
-
-    /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {

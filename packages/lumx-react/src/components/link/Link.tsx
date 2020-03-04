@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import { Color, ColorVariant } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -19,14 +17,6 @@ interface LinkProps extends HTMLProps<HTMLAnchorElement> {
     /** The icon color variant. */
     colorVariant?: ColorVariant;
 }
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -43,8 +33,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<LinkProps> = {};
 
-/////////////////////////////
-
 /**
  * Simple component used to pick a date (semi-controlled implementation).
  *
@@ -58,7 +46,5 @@ const Link = ({ children, className, color, colorVariant, ...props }: LinkProps)
     );
 };
 Link.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, Link, LinkProps };

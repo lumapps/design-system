@@ -1,12 +1,6 @@
 import { ColorPalette } from '@lumx/react';
 import { ReactNode } from 'react';
 
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 enum Categories {
     components = 'Components',
 }
@@ -298,7 +292,5 @@ const COLOR_VARIANTS = {
         },
     },
 };
-
-/////////////////////////////
 
 export { COLOR_VARIANTS, ColorPaletteWithVariants, ColorVariantDetail, Categories, Category, DemoObject };

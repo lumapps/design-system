@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-/////////////////////////////
-
 interface UseChipGroupNavigation {
     /** the current active chip index */
     activeChip: number;

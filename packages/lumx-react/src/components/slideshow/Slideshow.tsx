@@ -11,8 +11,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 
 import { SlideshowControls } from './SlideshowControls';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -35,18 +33,10 @@ interface SlideshowProps extends GenericProps {
     useCustomColors?: boolean;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<SlideshowProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -70,12 +60,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     interval: AUTOPLAY_DEFAULT_INTERVAL,
     theme: Theme.light,
 };
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
 
 /**
  * Displays a slideshow.
@@ -224,7 +208,5 @@ const Slideshow: React.FC<SlideshowProps> = ({
     );
 };
 Slideshow.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Slideshow, SlideshowProps };
