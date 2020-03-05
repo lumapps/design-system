@@ -18,3 +18,11 @@ $lumx-theme-color-palette: (
 );
 
 $lumx-theme-border-radius: 2px;
+
+$lumx-theme-grey-N: map-get($lumx-theme-grey, 'N');
+$lumx-theme-grey-L1: map-get($lumx-theme-grey, 'L1');
+$lumx-theme-grey-L2: map-get($lumx-theme-grey, 'L2');
+$lumx-theme-grey-L3: map-get($lumx-theme-grey, 'L3');
+$lumx-theme-grey-L4: map-get($lumx-theme-grey, 'L4');
+$lumx-theme-grey-L5: map-get($lumx-theme-grey, 'L5');
+$lumx-theme-grey-L6: map-get($lumx-theme-grey, 'L6');
