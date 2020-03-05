@@ -176,6 +176,10 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
                     lx.modelToSelection({
                         // eslint-disable-next-line id-blacklist
                         callback(response) {
+                            if (angular.isUndefined(response) || !response) {
+                                return;
+                            }
+
                             lx.viewValue.push(response);
                         },
                         // eslint-disable-next-line id-blacklist
@@ -186,6 +190,10 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
                 lx.modelToSelection({
                     // eslint-disable-next-line id-blacklist
                     callback(response) {
+                        if (angular.isUndefined(response) || !response) {
+                            return;
+                        }
+
                         lx.viewValue = response;
                     },
                     // eslint-disable-next-line id-blacklist
@@ -518,6 +526,10 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
             lx.selectionToModel({
                 // eslint-disable-next-line id-blacklist
                 callback(response) {
+                    if (angular.isUndefined(response) || !response) {
+                        return;
+                    }
+
                     _updateModel(response);
                     _updateViewValue(choice);
                 },
