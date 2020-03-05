@@ -1,0 +1,133 @@
+import DesignTokenGroup from '@lumx/demo/layout/DesignTokenGroup';
+import DesignToken from '@lumx/demo/layout/DesignToken';
+import { COLOR_VARIANTS } from '@lumx/demo/constants';
+import { Grid, Theme } from '@lumx/react';
+
+# Colors
+
+**Generic colors to use within your application.**
+**Each color has different variants based on opacity.**
+
+## Primary palette
+
+### Blue
+
+Blue color is the primary color for your application.
+You can override it by defining another blue color palette in your scss file.
+You can also define another color as primary by overrding <code>\$lumx-theme-primary</code> variable.
+
+<DesignTokenGroup>
+    {Object.entries(COLOR_VARIANTS['blue']).map(([key, hue], index) => (
+        <DesignToken key={index} prefix={<div className={`lumx-theme-background-blue-${key}`} style={{ width: 20, height: 20 }} />} name={`$lumx-theme-blue-${key}`} description={hue.description} version="v0.22">
+            <Grid>
+                <div className={`lumx-theme-background-blue-${key}`} style={{ width: 60, height: 60 }} />
+                <div className="lumx-spacing-margin-left-big lumx-typography-body1 lumx-theme-color-dark-L2">
+                    <span className="lumx-base-display-block">{hue.hexCode}</span>
+                    <span className="lumx-base-display-block">{hue.rgb}</span>
+                    <span className="lumx-base-display-block">{hue.opacity}</span>
+                </div>
+            </Grid>
+        </DesignToken>
+    ))}
+</DesignTokenGroup>
+
+### Dark
+
+Dark color is the default font color for your application.
+You can override it by defining another dark color palette in your scss file.
+
+<DesignTokenGroup>
+    {Object.entries(COLOR_VARIANTS['dark']).map(([key, hue], index) => (
+        <DesignToken key={index} prefix={<div className={`lumx-theme-background-dark-${key}`} style={{ width: 20, height: 20 }} />} name={`$lumx-theme-dark-${key}`} description={hue.description} version="v0.22">
+            <Grid>
+                <div className={`lumx-theme-background-dark-${key}`} style={{ width: 60, height: 60 }} />
+                <div className="lumx-spacing-margin-left-big lumx-typography-body1 lumx-theme-color-dark-L2">
+                    <span className="lumx-base-display-block">{hue.hexCode}</span>
+                    <span className="lumx-base-display-block">{hue.rgb}</span>
+                    <span className="lumx-base-display-block">{hue.opacity}</span>
+                </div>
+            </Grid>
+        </DesignToken>
+    ))}
+</DesignTokenGroup>
+
+### Light
+
+Light color is the default font color for dark themes.
+You can override it by defining another light color palette in your scss file.
+
+<DesignTokenGroup theme={Theme.dark}>
+    {Object.entries(COLOR_VARIANTS['light']).map(([key, hue], index) => (
+        <DesignToken key={index} prefix={<div className={`lumx-theme-background-light-${key}`} style={{ width: 20, height: 20 }} />} name={`$lumx-theme-light-${key}`} description={hue.description} version="v0.22" theme={Theme.dark}>
+            <Grid>
+                <div className={`lumx-theme-background-light-${key}`} style={{ width: 60, height: 60 }} />
+                <div className="lumx-spacing-margin-left-big lumx-typography-body1 lumx-theme-color-light-L2">
+                    <span className="lumx-base-display-block">{hue.hexCode}</span>
+                    <span className="lumx-base-display-block">{hue.rgb}</span>
+                    <span className="lumx-base-display-block">{hue.opacity}</span>
+                </div>
+            </Grid>
+        </DesignToken>
+    ))}
+</DesignTokenGroup>
+
+## Secondary palette
+
+### Yellow
+
+Yellow color is the secondary color for your application.
+You can override it by defining another yellow color palette in your scss file.
+You can also define another color as secondary by overrding <code>\$lumx-theme-secondary</code> variable.
+
+<DesignTokenGroup>
+    {Object.entries(COLOR_VARIANTS['yellow']).map(([key, hue], index) => (
+        <DesignToken key={index} prefix={<div className={`lumx-theme-background-yellow-${key}`} style={{ width: 20, height: 20 }} />} name={`$lumx-theme-yellow-${key}`} description={hue.description} version="v0.22">
+            <Grid>
+                <div className={`lumx-theme-background-yellow-${key}`} style={{ width: 60, height: 60 }} />
+                <div className="lumx-spacing-margin-left-big lumx-typography-body1 lumx-theme-color-dark-L2">
+                    <span className="lumx-base-display-block">{hue.hexCode}</span>
+                    <span className="lumx-base-display-block">{hue.rgb}</span>
+                    <span className="lumx-base-display-block">{hue.opacity}</span>
+                </div>
+            </Grid>
+        </DesignToken>
+    ))}
+</DesignTokenGroup>
+
+### Red
+
+You can override it by defining another red color palette in your scss file.
+
+<DesignTokenGroup>
+    {Object.entries(COLOR_VARIANTS['red']).map(([key, hue], index) => (
+        <DesignToken key={index} prefix={<div className={`lumx-theme-background-red-${key}`} style={{ width: 20, height: 20 }} />} name={`$lumx-theme-red-${key}`} description={hue.description} version="v0.22">
+            <Grid>
+                <div className={`lumx-theme-background-red-${key}`} style={{ width: 60, height: 60 }} />
+                <div className="lumx-spacing-margin-left-big lumx-typography-body1 lumx-theme-color-dark-L2">
+                    <span className="lumx-base-display-block">{hue.hexCode}</span>
+                    <span className="lumx-base-display-block">{hue.rgb}</span>
+                    <span className="lumx-base-display-block">{hue.opacity}</span>
+                </div>
+            </Grid>
+        </DesignToken>
+    ))}
+</DesignTokenGroup>
+
+### Green
+
+You can override it by defining another green color palette in your scss file.
+
+<DesignTokenGroup>
+    {Object.entries(COLOR_VARIANTS['green']).map(([key, hue], index) => (
+        <DesignToken key={index} prefix={<div className={`lumx-theme-background-green-${key}`} style={{ width: 20, height: 20 }} />} name={`$lumx-theme-green-${key}`} description={hue.description} version="v0.22">
+            <Grid>
+                <div className={`lumx-theme-background-green-${key}`} style={{ width: 60, height: 60 }} />
+                <div className="lumx-spacing-margin-left-big lumx-typography-body1 lumx-theme-color-dark-L2">
+                    <span className="lumx-base-display-block">{hue.hexCode}</span>
+                    <span className="lumx-base-display-block">{hue.rgb}</span>
+                    <span className="lumx-base-display-block">{hue.opacity}</span>
+                </div>
+            </Grid>
+        </DesignToken>
+    ))}
+</DesignTokenGroup>

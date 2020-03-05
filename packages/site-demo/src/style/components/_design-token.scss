@@ -1,0 +1,83 @@
+/* ==========================================================================
+   Design token
+   ========================================================================== */
+
+.design-token-group {
+    border-radius: $lumx-theme-border-radius;
+
+    &--theme-light {
+        border: 1px solid lumx-theme-color-variant('dark', $lumx-divider-color-variant);
+    }
+
+    &--theme-dark {
+        background-color: lumx-theme-color-variant('dark', 'N');
+    }
+}
+
+.design-token {
+    $self: &;
+
+    background-color: transparent !important;
+
+    &--theme-light {
+        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), 'bottom');
+    }
+
+    &--theme-dark {
+        @include lumx-has-divider(lumx-base-const('theme', 'DARK'), 'bottom');
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &__header {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        margin: 0 $lumx-spacing-unit * 2;
+    }
+
+    &__prefix {
+        margin-right: $lumx-spacing-unit * 1.5;
+    }
+
+    &__name,
+    &__version {
+        @include lumx-typography('subtitle1');
+    }
+
+    &__name {
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'N');
+        }
+    }
+
+    &__version {
+        margin-left: auto;
+
+        #{$self}--theme-light & {
+            color: lumx-theme-color-variant('dark', 'L3');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'L3');
+        }
+    }
+
+    &__content {
+        padding: $lumx-spacing-unit * 2;
+    }
+
+    &__description {
+        @include lumx-typography('body1');
+
+        #{$self}--theme-dark & {
+            color: lumx-theme-color-variant('light', 'N');
+        }
+    }
+
+    &__demo {
+        margin-top: $lumx-spacing-unit * 2;
+    }
+}

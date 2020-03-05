@@ -89,6 +89,10 @@ const ITEMS: Item[] = [
                 children: ['Stepper dialog'],
                 label: 'Patterns',
             },
+            {
+                children: ['Colors'],
+                label: 'Design Tokens',
+            },
         ],
         label: 'Product',
     },
