@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -6,8 +6,6 @@ import { Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -27,18 +25,10 @@ interface TableProps extends GenericProps {
     theme?: Theme;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TableProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -59,8 +49,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
 
-/////////////////////////////
-
 /**
  * The Table component displays an HTML table, composed by a Table-head and a Table-body with Table-cells in Table Rows.
  *
@@ -73,7 +61,7 @@ const Table: React.FC<TableProps> = ({
     hasDividers,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: TableProps): ReactElement => (
+}) => (
     <table
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }))}
         {...props}
@@ -82,10 +70,6 @@ const Table: React.FC<TableProps> = ({
     </table>
 );
 
-/////////////////////////////
-
 Table.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Table, TableProps };

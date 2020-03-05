@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -9,12 +9,8 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /** Position of the tooltip relative to the anchor element. */
 type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -30,18 +26,10 @@ interface TooltipProps extends GenericProps {
     placement?: TooltipPlacement;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TooltipProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -66,8 +54,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const OFFSET = 8;
 
-/////////////////////////////
-
 /**
  * Tooltip.
  *
@@ -80,7 +66,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     delay = DEFAULT_PROPS.delay,
     placement = DEFAULT_PROPS.placement,
     ...props
-}: TooltipProps): ReactElement => {
+}) => {
     const [timer, setTimer] = useState(0);
     const tooltipRef: React.RefObject<HTMLDivElement> = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -197,7 +183,5 @@ const Tooltip: React.FC<TooltipProps> = ({
     );
 };
 Tooltip.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipPlacement, TooltipProps };

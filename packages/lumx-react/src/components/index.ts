@@ -102,8 +102,6 @@ enum Kind {
     error = 'error',
 }
 
-/////////////////////////////
-
 export {
     Alignment,
     AspectRatio,

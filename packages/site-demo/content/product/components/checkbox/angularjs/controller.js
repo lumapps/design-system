@@ -3,12 +3,6 @@ function DemoController() {
 
     const vm = this;
 
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
-
     /**
      * The various type of checkboxes states and status.
      *
@@ -25,10 +19,6 @@ function DemoController() {
     };
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', [DemoController]);
-
-/////////////////////////////
 
 export { DemoController };

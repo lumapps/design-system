@@ -1,29 +1,19 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
 interface TableHeaderProps extends GenericProps {}
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TableHeaderProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -40,27 +30,17 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
  */
 const DEFAULT_PROPS: DefaultPropsType = {};
 
-/////////////////////////////
-
 /**
  * The TableHeader component displays an HTML Table Head, composed TableHeader-cells in TableHeader Rows.
  *
  * @return The component.
  */
-const TableHeader: React.FC<TableHeaderProps> = ({
-    children,
-    className = '',
-    ...props
-}: TableHeaderProps): ReactElement => (
+const TableHeader: React.FC<TableHeaderProps> = ({ children, className = '', ...props }) => (
     <thead className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
         {children}
     </thead>
 );
 
-/////////////////////////////
-
 TableHeader.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, TableHeader, TableHeaderProps };

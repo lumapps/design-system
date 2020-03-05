@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import moment from 'moment';
 
@@ -11,8 +11,6 @@ import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
 
 import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DEFAULT_PROPS, DatePickerProps } from './DatePicker';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -32,20 +30,10 @@ type DatePickerControlledProps = DatePickerProps & {
     onNextMonthChange(): void;
 };
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Controlled`;
-
-/////////////////////////////
 
 /**
  * Simple component used to pick a date (controlled implementation).
@@ -63,7 +51,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     today,
     todayOrSelectedDateRef,
     value,
-}: DatePickerControlledProps): ReactElement => {
+}) => {
     return (
         <div className={`${CLASSNAME}`}>
             <Toolbar
@@ -128,7 +116,5 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     );
 };
 DatePickerControlled.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, COMPONENT_NAME, DatePickerControlled, DatePickerControlledProps };

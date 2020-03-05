@@ -1,18 +1,10 @@
-import React, {
-    AnchorHTMLAttributes,
-    KeyboardEventHandler,
-    MouseEventHandler,
-    ReactElement,
-    SyntheticEvent,
-} from 'react';
+import React, { AnchorHTMLAttributes, KeyboardEventHandler, MouseEventHandler, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
 import { Icon, IconProps, Size } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
 import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -32,18 +24,10 @@ interface TabProps extends GenericProps {
     onTabClick?(e: { event: SyntheticEvent; index?: number }): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TabProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -65,8 +49,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     label: undefined,
 };
 
-/////////////////////////////
-
 /**
  * Define a single Tab for Tabs component.
  *
@@ -81,7 +63,7 @@ const Tab: React.FC<TabProps> = ({
     label = DEFAULT_PROPS.label,
     onTabClick,
     ...props
-}: TabProps): ReactElement => {
+}) => {
     const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
 
     const handleTabClick: MouseEventHandler = (event) => {
@@ -112,7 +94,5 @@ const Tab: React.FC<TabProps> = ({
     );
 };
 Tab.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Tab, TabProps };

@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -52,8 +52,6 @@ enum ImageLoading {
     eager = 'eager',
 }
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -79,18 +77,10 @@ interface ThumbnailProps extends GenericProps {
     focusPoint?: FocusPoint;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ThumbnailProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -115,7 +105,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
 };
-/////////////////////////////
 
 /**
  * Simple component used to display image with square or round shape.
@@ -137,7 +126,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
-}: ThumbnailProps): ReactElement => {
+}) => {
     const focusImageRef = useFocusedImage(focusPoint!);
 
     return (
@@ -172,7 +161,5 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     );
 };
 Thumbnail.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Thumbnail, ThumbnailProps, ThumbnailAspectRatio, ThumbnailSize, ThumbnailVariant };

@@ -3,12 +3,6 @@ function DemoController($http) {
 
     const vm = this;
 
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
-
     /**
      * The configuration for the "Ajax" select demo.
      *
@@ -129,12 +123,6 @@ function DemoController($http) {
         selectedPerson: undefined,
     };
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * The callback to execute when a value has been selected in the "Ajax" select.
      */
@@ -143,11 +131,7 @@ function DemoController($http) {
         console.log('New value: ', vm.selectAjax.selected);
     }
 
-    /////////////////////////////
-
     vm.selectCallback = selectCallback;
-
-    /////////////////////////////
 
     /**
      * Initialize the controller.
@@ -163,10 +147,6 @@ function DemoController($http) {
     init();
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

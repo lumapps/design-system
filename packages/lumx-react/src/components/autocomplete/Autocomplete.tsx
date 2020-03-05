@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, RefObject, useRef } from 'react';
+import React, { ReactNode, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,8 +8,6 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -167,14 +165,6 @@ interface AutocompleteProps extends GenericProps {
     onBlur?(event: React.FocusEvent): void;
 }
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -196,15 +186,13 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     shouldFocusOnClose: false,
 };
 
-/////////////////////////////
-
 /**
  * This component allows to make the connection between a Text Field and a Dropdown,
  * displaying a list of suggestions from the text entered on the text field.
  *
  * @return The component.
  */
-const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): ReactElement => {
+const Autocomplete: React.FC<AutocompleteProps> = (props) => {
     const {
         anchorToInput = DEFAULT_PROPS.anchorToInput,
         className,
@@ -288,7 +276,5 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
     );
 };
 Autocomplete.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Autocomplete, AutocompleteProps };

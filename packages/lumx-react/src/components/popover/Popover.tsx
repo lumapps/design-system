@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactChild, ReactElement } from 'react';
+import React, { CSSProperties, ReactChild } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -57,8 +57,6 @@ interface ElementPosition {
     anchorWidth?: number;
 }
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -79,18 +77,10 @@ interface PopoverProps extends GenericProps {
     zIndex?: number;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<PopoverProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -111,8 +101,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     placement: Placement.TOP,
     zIndex: 9999,
 };
-
-/////////////////////////////
 interface Popover {
     useComputePosition: useComputePositionType;
 }
@@ -130,7 +118,7 @@ const Popover: React.FC<PopoverProps> & Popover = ({
     isVisible,
     zIndex = DEFAULT_PROPS.zIndex,
     ...props
-}: PopoverProps): ReactElement => {
+}) => {
     /**
      * Depending on which is assigned first, the `popoverRect` or `popoverRef`,
      * there are scenarios where the reference to the popover is still not assigned,
@@ -169,7 +157,5 @@ const Popover: React.FC<PopoverProps> & Popover = ({
 };
 Popover.displayName = COMPONENT_NAME;
 Popover.useComputePosition = useComputePosition;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, ElementPosition, Offset };

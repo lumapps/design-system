@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef } from 'react';
+import React, { useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,8 +9,6 @@ import useEventCallback from '@lumx/react/hooks/useEventCallback';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uuid from 'uuid/v4';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -40,8 +38,6 @@ interface SliderProps extends GenericProps {
     onMouseDown?(event: React.SyntheticEvent): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
@@ -51,12 +47,6 @@ interface DefaultPropsType extends Partial<SliderProps> {
      */
     theme?: Theme;
 }
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -81,7 +71,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     steps: 0,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Clamp value in range.
@@ -137,7 +126,7 @@ const Slider: React.FC<SliderProps> = ({
     disabled,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SliderProps): ReactElement => {
+}) => {
     const sliderRef = useRef<HTMLDivElement>(null);
     const avaibleSteps: number[] = [];
 
@@ -323,7 +312,5 @@ const Slider: React.FC<SliderProps> = ({
     );
 };
 Slider.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Slider, SliderProps };

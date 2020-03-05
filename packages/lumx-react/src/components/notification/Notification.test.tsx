@@ -9,8 +9,6 @@ import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
 import { CLASSNAME, Notification, NotificationProps, NotificationType } from './Notification';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -47,8 +45,6 @@ interface Setup extends CommonSetup {
      */
     action: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -134,33 +130,23 @@ describe(`<${Notification.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 });

@@ -8,8 +8,6 @@ import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, Checkbox, CheckboxProps } from './Checkbox';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -36,8 +34,6 @@ interface Setup extends CommonSetup {
      */
     helper: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -74,8 +70,6 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should add a "disabled" and "checked" class names', () => {
@@ -100,8 +94,6 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         const onChange: jest.Mock = jest.fn();
@@ -119,21 +111,15 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });

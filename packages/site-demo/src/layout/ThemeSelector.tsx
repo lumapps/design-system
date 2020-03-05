@@ -3,8 +3,6 @@ import React, { ChangeEvent, ReactElement, useContext } from 'react';
 
 import { Chip, Size } from '@lumx/react';
 
-/////////////////////////////
-
 /**
  * The theme selector component.
  * Display a select with the list of all available themes.
@@ -45,7 +43,5 @@ const ThemeSelector: React.FC = (): ReactElement => {
         </>
     );
 };
-
-/////////////////////////////
 
 export { ThemeSelector };

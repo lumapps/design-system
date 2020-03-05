@@ -6,8 +6,6 @@ import { TabProps, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-/////////////////////////////
-
 enum TabsLayout {
     clustered = 'clustered',
     fixed = 'fixed',
@@ -18,8 +16,6 @@ enum TabsPosition {
     left = 'left',
     right = 'right',
 }
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -41,18 +37,10 @@ interface TabsProps extends GenericProps {
     useCustomColors?: boolean;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TabsProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -75,8 +63,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
 
-/////////////////////////////
-
 /**
  * Defines a Tabs component.
  *
@@ -92,7 +78,7 @@ const Tabs: React.FC<TabsProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     ...props
-}: TabsProps): ReactElement => {
+}) => {
     const tabs: ReactElement[] = Children.map(children as ReactElement[], (tab: ReactElement, index: number) => {
         return cloneElement(tab, { key: index, index, isActive: activeTab === index, onTabClick });
     });
@@ -111,7 +97,5 @@ const Tabs: React.FC<TabsProps> = ({
     );
 };
 Tabs.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Tabs, TabsProps, TabsLayout, TabsPosition };

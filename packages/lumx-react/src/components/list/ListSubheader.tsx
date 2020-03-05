@@ -1,12 +1,10 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -16,18 +14,10 @@ interface ListSubheaderProps extends GenericProps {
     children: string | ReactNode;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ListSubheaderProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -43,18 +33,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: DefaultPropsType = {};
-/////////////////////////////
 
 /**
  * Component used in List to display some separator / title section.
  *
  * @return The component.
  */
-const ListSubheader: React.FC<ListSubheaderProps> = ({
-    children,
-    className = '',
-    ...props
-}: ListSubheaderProps): ReactElement => {
+const ListSubheader: React.FC<ListSubheaderProps> = ({ children, className = '', ...props }) => {
     return (
         <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
             {children}
@@ -62,7 +47,5 @@ const ListSubheader: React.FC<ListSubheaderProps> = ({
     );
 };
 ListSubheader.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ListSubheader, ListSubheaderProps };

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, RefObject, useState } from 'react';
+import React, { ReactNode, RefObject, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -8,8 +8,6 @@ import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import { Emphasis, Icon, IconButton, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -88,14 +86,6 @@ interface TextFieldProps extends GenericProps {
     onBlur?(event: React.FocusEvent): void;
 }
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -170,7 +160,6 @@ const useComputeNumberOfRows = (
         rows,
     };
 };
-/////////////////////////////
 
 interface InputNativeProps {
     id?: string;
@@ -189,7 +178,7 @@ interface InputNativeProps {
     onBlur?(value: React.FocusEvent): void;
 }
 
-const renderInputNative = (props: InputNativeProps): ReactElement => {
+const renderInputNative: React.FC<InputNativeProps> = (props) => {
     const {
         id,
         isDisabled,
@@ -268,7 +257,7 @@ const renderInputNative = (props: InputNativeProps): ReactElement => {
  * @param  props Text field props.
  * @return The component.
  */
-const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElement => {
+const TextField: React.FC<TextFieldProps> = (props) => {
     const {
         chips,
         className = '',
@@ -423,7 +412,5 @@ const TextField: React.FC<TextFieldProps> = (props: TextFieldProps): ReactElemen
     );
 };
 TextField.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps };

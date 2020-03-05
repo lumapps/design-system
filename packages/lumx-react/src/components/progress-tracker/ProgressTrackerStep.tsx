@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -11,14 +11,10 @@ import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } fr
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
 interface ProgressTrackerStepProps extends GenericProps {}
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
@@ -43,12 +39,6 @@ interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {
     theme?: Theme;
 }
 
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -70,7 +60,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     label: null,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Defines a step for the `ProgressTracker` element.
@@ -86,7 +75,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     label = DEFAULT_PROPS.label,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ProgressTrackerStepProps): ReactElement => {
+}) => {
     const { onClick = null, ...restProps }: ProgressTrackerStepProps = props;
 
     const isClickable: boolean = isFunction(onClick);
@@ -142,7 +131,5 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
 };
 
 ProgressTrackerStep.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ProgressTrackerStep, ProgressTrackerStepProps };

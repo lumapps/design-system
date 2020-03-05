@@ -8,8 +8,6 @@ import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipProps } from './Tooltip';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -24,8 +22,6 @@ interface Setup extends CommonSetup {
     wrapper: Wrapper;
     tooltip: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -62,8 +58,6 @@ describe(`<${Tooltip.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         // Here are some examples of basic props check.
@@ -77,27 +71,20 @@ describe(`<${Tooltip.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'tooltip', prop: 'tooltip' }, { className: CLASSNAME });

@@ -1,15 +1,9 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -21,18 +15,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowItem`;
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
 /**
  * Item of slideshow.
  *
  * @return The component.
  */
-const SlideshowItem: React.FC<GenericProps> = ({ className = '', children, ...props }: GenericProps): ReactElement => (
+const SlideshowItem: React.FC<GenericProps> = ({ className = '', children, ...props }) => (
     <div
         className={classNames(
             className,
@@ -46,7 +34,5 @@ const SlideshowItem: React.FC<GenericProps> = ({ className = '', children, ...pr
     </div>
 );
 SlideshowItem.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, SlideshowItem };

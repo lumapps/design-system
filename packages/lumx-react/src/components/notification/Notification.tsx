@@ -15,8 +15,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
-/////////////////////////////
-
 /**
  * Different types of notification.
  */
@@ -26,8 +24,6 @@ enum NotificationType {
     warning = 'warning',
     error = 'error',
 }
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -58,18 +54,10 @@ interface NotificationProps extends GenericProps {
     handleClick?(): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<NotificationProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -89,7 +77,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     zIndex: 9999,
 };
-/////////////////////////////
 
 /**
  * Notification.
@@ -152,7 +139,5 @@ const Notification: React.FC<NotificationProps> = ({
         : null;
 };
 Notification.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Notification, NotificationProps, NotificationType };

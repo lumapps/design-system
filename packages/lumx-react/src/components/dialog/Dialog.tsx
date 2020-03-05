@@ -16,8 +16,6 @@ import { GenericProps, getRootClassName, handleBasicClasses, isComponent, partit
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -94,14 +92,6 @@ type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -122,8 +112,6 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
     preventAutoClose: false,
     size: Size.big,
 };
-
-/////////////////////////////
 
 /**
  * Dialog component.
@@ -279,7 +267,5 @@ const Dialog: React.FC<DialogProps> = (props) => {
         : null;
 };
 Dialog.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Dialog, DialogProps, DialogSizes };

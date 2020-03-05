@@ -1,9 +1,3 @@
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 export {
     BACKSPACE_KEY_CODE,
     CSS_PREFIX,
@@ -23,7 +17,5 @@ export {
  * The prefix to use to name the React component.
  */
 const COMPONENT_PREFIX = '';
-
-/////////////////////////////
 
 export { COMPONENT_PREFIX };

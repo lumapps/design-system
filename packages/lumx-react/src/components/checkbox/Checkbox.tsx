@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,8 +9,6 @@ import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import uniqueId from 'lodash/uniqueId';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -37,18 +35,10 @@ interface CheckboxProps extends GenericProps {
     onChange(value: boolean): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<CheckboxProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -68,7 +58,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     value: false,
 };
-/////////////////////////////
 
 /**
  * Defines a checkbox.
@@ -86,7 +75,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     useCustomColors,
     value = DEFAULT_PROPS.value,
     ...props
-}: CheckboxProps): ReactElement => {
+}) => {
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = () => {
         onChange(!value);
@@ -142,7 +131,5 @@ const Checkbox: React.FC<CheckboxProps> = ({
     );
 };
 Checkbox.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps };

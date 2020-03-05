@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, Ref, SyntheticEvent } from 'react';
+import React, { ReactNode, Ref, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,8 +8,6 @@ import { Color, ColorPalette, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * Authorized size values.
@@ -48,18 +46,10 @@ interface ChipProps extends GenericProps {
     onBeforeClick?(evt: SyntheticEvent): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ChipProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -82,7 +72,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     size: Size.m,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Displays information or allow an action on a compact element.
@@ -108,7 +97,7 @@ const Chip: React.FC<ChipProps> = ({
     useCustomColors,
     chipRef,
     ...props
-}: ChipProps): ReactElement => {
+}) => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
     const hasBeforeClick: boolean = isFunction(onBeforeClick);
     const hasOnClick: boolean = isFunction(onClick);
@@ -203,7 +192,5 @@ const Chip: React.FC<ChipProps> = ({
 };
 
 Chip.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps };

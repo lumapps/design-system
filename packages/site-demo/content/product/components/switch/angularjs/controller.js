@@ -3,12 +3,6 @@ function DemoController() {
 
     const vm = this;
 
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Contains all the switches available on the demo page.
      *
@@ -25,10 +19,6 @@ function DemoController() {
     };
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

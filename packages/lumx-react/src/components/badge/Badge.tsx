@@ -2,9 +2,7 @@ import { Color, ColorPalette } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
-
-/////////////////////////////
+import React, { ReactNode } from 'react';
 
 /**
  * Defines the props of the component.
@@ -20,12 +18,6 @@ interface BaseBadgeProps extends GenericProps {
      */
     color?: Color;
 }
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -44,11 +36,7 @@ const DEFAULT_PROPS: BaseBadgeProps = {
     color: ColorPalette.light,
 };
 
-const Badge: React.FC<BaseBadgeProps> = ({
-    color = DEFAULT_PROPS.color,
-    className,
-    ...props
-}: BaseBadgeProps): ReactElement => {
+const Badge: React.FC<BaseBadgeProps> = ({ color = DEFAULT_PROPS.color, className, ...props }) => {
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color }))} {...props}>
             {props.children}

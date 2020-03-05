@@ -14,8 +14,6 @@ import {
 } from '@lumx/react/components/button/ButtonRoot';
 import { getBasicClass } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -132,8 +130,6 @@ describe(`<${ButtonRoot.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default color', () => {
@@ -190,28 +186,20 @@ describe(`<${ButtonRoot.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Tested in step 1.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'button', prop: 'button' }, { className: BUTTON_CLASSNAME });

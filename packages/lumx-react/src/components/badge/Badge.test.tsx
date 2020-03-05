@@ -9,8 +9,6 @@ import { getBasicClass } from '@lumx/react/utils';
 import { Theme } from '@lumx/react';
 import { Badge, BaseBadgeProps, CLASSNAME, DEFAULT_PROPS } from './Badge';
 
-/////////////////////////////
-
 /**
  * Defines what the `setup` function will return.
  */
@@ -23,8 +21,6 @@ interface Setup extends CommonSetup {
      */
     wrapper: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -63,8 +59,6 @@ describe(`<${Badge.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default props', () => {
@@ -94,27 +88,20 @@ describe(`<${Badge.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'badge', prop: 'badge' }, { className: CLASSNAME });

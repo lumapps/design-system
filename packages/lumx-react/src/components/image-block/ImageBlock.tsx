@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,8 +8,6 @@ import { Alignment, AspectRatio, FocusPoint, Size, Theme, Thumbnail } from '@lum
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * Authorized variants.
@@ -58,18 +56,10 @@ interface ImageBlockProps extends GenericProps {
     title?: string;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ImageBlockProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -99,8 +89,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     title: undefined,
 };
 
-/////////////////////////////
-
 /**
  * Displays an properly structured image block.
  *
@@ -122,7 +110,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
     ...props
-}: ImageBlockProps): ReactElement => {
+}) => {
     const { onClick = null, ...restProps } = props;
 
     return (
@@ -178,7 +166,5 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     );
 };
 ImageBlock.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };

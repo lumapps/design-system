@@ -4,8 +4,6 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName } from '@lumx/react/utils';
-
-/////////////////////////////
 /**
  * Defines the props of the component
  */
@@ -14,18 +12,10 @@ interface ButtonGroupProps extends GenericProps {
     buttonGroupRef?: Ref<HTMLDivElement>;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ButtonGroupProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -42,14 +32,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: DefaultPropsType = {};
 
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/////////////////////////////
-
 /**
  * Displays a group of <Button>s.
  *
@@ -63,7 +45,5 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className = '', but
     </div>
 );
 ButtonGroup.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ButtonGroup, ButtonGroupProps };

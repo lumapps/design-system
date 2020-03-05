@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode } from 'react';
+import React, { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -31,7 +31,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigation`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const SideNavigation: React.FC<SideNavigationProps> = (props: SideNavigationProps): ReactElement => {
+const SideNavigation: React.FC<SideNavigationProps> = (props) => {
     const { className, theme, children, useCustomColors, ...otherProps } = props;
 
     const content = Children.toArray(children).filter(isComponent(SideNavigationItem));

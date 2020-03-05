@@ -8,8 +8,6 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 
 import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -26,8 +24,6 @@ interface Setup extends CommonSetup {
      */
     dropdown: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -70,8 +66,6 @@ describe(`<${Dropdown.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default props', () => {
@@ -80,8 +74,6 @@ describe(`<${Dropdown.displayName}>`, () => {
             expect(dropdown).toHaveClassName(CLASSNAME);
         });
     });
-
-    /////////////////////////////
 
     // 3. Test events.
     describe('Events', () => {
@@ -129,21 +121,15 @@ describe(`<${Dropdown.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'dropdown', prop: 'dropdown' }, { className: CLASSNAME });

@@ -1,4 +1,4 @@
-import React, { ReactElement, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,8 +9,6 @@ import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } fr
 import { mdiArrowDown, mdiArrowUp } from '@lumx/icons';
 
 import isFunction from 'lodash/isFunction';
-
-/////////////////////////////
 
 /**
  * The authorized values for the `sortOrder` prop.
@@ -35,8 +33,6 @@ enum TableCellVariant {
     body = 'body',
     head = 'head',
 }
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -73,20 +69,12 @@ interface TableCellProps extends GenericProps {
     onHeaderClick?(): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<TableCellProps> {
     variant: TableCellVariant;
 }
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -106,8 +94,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     variant: TableCellVariant.body,
 };
 
-/////////////////////////////
-
 /**
  * The TableCell component displays an HTML Table Header Cell.
  *
@@ -122,7 +108,7 @@ const TableCell: React.FC<TableCellProps> = ({
     sortOrder,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: TableCellProps): ReactElement => {
+}) => {
     /**
      * Handle click on the ordered thead.
      */
@@ -177,7 +163,5 @@ const TableCell: React.FC<TableCellProps> = ({
     );
 };
 TableCell.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, TableCell, TableCellProps, TableCellVariant, ThOrder, ThScope };

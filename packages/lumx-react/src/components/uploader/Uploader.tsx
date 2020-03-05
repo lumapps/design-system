@@ -1,12 +1,10 @@
-import React, { MouseEventHandler, ReactElement } from 'react';
+import React, { MouseEventHandler } from 'react';
 
 import classNames from 'classnames';
 
 import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 
 enum UploaderVariant {
     square = 'square',
@@ -50,14 +48,6 @@ interface UploaderProps extends GenericProps {
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -78,14 +68,12 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
     variant: UploaderVariant.square,
 };
 
-/////////////////////////////
-
 /**
  * [Enter the description of the component here].
  *
  * @return The component.
  */
-const Uploader: React.FC<UploaderProps> = (props: UploaderProps): ReactElement => {
+const Uploader: React.FC<UploaderProps> = (props) => {
     const {
         aspectRatio = DEFAULT_PROPS.aspectRatio,
         className,
@@ -129,7 +117,5 @@ const Uploader: React.FC<UploaderProps> = (props: UploaderProps): ReactElement =
     );
 };
 Uploader.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Uploader, UploaderProps, UploaderVariant };

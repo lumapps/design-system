@@ -34,7 +34,7 @@ const renderTypeTableRow = ({ type, defaultValue }: Property): ReactElement => {
     return <span className="lumx-typography-body1">{formattedType}</span>;
 };
 
-const PropTableRow: React.FC<PropTableRowProps> = ({ property }: PropTableRowProps): ReactElement => {
+const PropTableRow: React.FC<PropTableRowProps> = ({ property }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleOpen = () => {
         setIsOpen(!isOpen);
@@ -63,7 +63,7 @@ const PropTableRow: React.FC<PropTableRowProps> = ({ property }: PropTableRowPro
     );
 };
 
-const PropTable: React.FC<PropTableProps> = ({ component }: PropTableProps): ReactElement => {
+const PropTable: React.FC<PropTableProps> = ({ component }) => {
     const { engine } = useContext(EngineContext);
     if (engine === Engine.angularjs) {
         return <span>Could not load properties of the angular.js {component} component.</span>;

@@ -6,8 +6,6 @@ import 'jest-enzyme';
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps } from './IconButton';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -61,8 +59,6 @@ describe(`<${IconButton.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default props', () => {
@@ -87,28 +83,20 @@ describe(`<${IconButton.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { prop: 'buttonRoot' }, { className: CLASSNAME });

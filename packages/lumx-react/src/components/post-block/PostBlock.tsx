@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,8 +8,6 @@ import { AspectRatio, Orientation, Theme, Thumbnail, ThumbnailVariant } from '@l
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -45,18 +43,10 @@ interface PostBlockProps extends GenericProps {
     onClick?(): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<PostBlockProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -77,7 +67,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     thumbnailAspectRatio: AspectRatio.horizontal,
 };
-/////////////////////////////
 
 /**
  * PostBlock Element that display a Lumapps post
@@ -98,7 +87,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
     thumbnailAspectRatio = DEFAULT_PROPS.thumbnailAspectRatio,
     title,
     theme = DEFAULT_PROPS.theme,
-}: PostBlockProps): ReactElement => {
+}) => {
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
             {thumbnail && (
@@ -144,7 +133,5 @@ const PostBlock: React.FC<PostBlockProps> = ({
 };
 
 PostBlock.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, PostBlock, PostBlockProps };

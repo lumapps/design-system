@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react';
 
-/////////////////////////////
-
 type useInfiniteScrollType = (
     ref: React.RefObject<HTMLElement>,
     callback: EventCallback,
     callbackOnMount?: boolean,
 ) => void;
 type EventCallback = (evt?: Event) => void;
-
-/////////////////////////////
 // CONSTANTS
-
-/////////////////////////////
 
 /**
  * Listen to clicks away from a given element and callback the passed in function.

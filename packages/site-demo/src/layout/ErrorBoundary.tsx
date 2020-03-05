@@ -1,7 +1,5 @@
 import React, { ReactElement } from 'react';
 
-/////////////////////////////
-
 /**
  * Defines the state of the component
  */
@@ -9,8 +7,6 @@ interface State {
     error?: Error;
     hasError: boolean;
 }
-
-/////////////////////////////
 
 /**
  * This component is in charge of catching any error and avoid to the whole application to crash.
@@ -51,7 +47,5 @@ class ErrorBoundary extends React.Component<{}, State> {
         return <>{this.props.children}</>;
     }
 }
-
-/////////////////////////////
 
 export { ErrorBoundary };

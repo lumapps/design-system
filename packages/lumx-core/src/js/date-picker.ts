@@ -15,12 +15,6 @@ interface AnnotatedDate {
     isToday: boolean;
 }
 
-/////////////////////////////
-//                         //
-//     Public functions    //
-//                         //
-/////////////////////////////
-
 /**
  * Get the list of days in a week based on locale.
  *
@@ -102,7 +96,5 @@ function getAnnotatedMonthCalendar(
         };
     });
 }
-
-/////////////////////////////
 
 export { getWeekDays, getMonthCalendar, getAnnotatedMonthCalendar };

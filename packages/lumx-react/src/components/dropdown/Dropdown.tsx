@@ -11,8 +11,6 @@ import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -45,18 +43,10 @@ interface DropdownProps extends GenericProps {
     onInfinite?: VoidFunction;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<DropdownProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -79,8 +69,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     shouldFocusOnOpen: true,
     showDropdown: undefined,
 };
-
-/////////////////////////////
 
 /**
  * Displays a dropdown.
@@ -179,7 +167,5 @@ const Dropdown: React.FC<DropdownProps> = ({
     ) : null;
 };
 Dropdown.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps };

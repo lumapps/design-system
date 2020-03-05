@@ -1,17 +1,9 @@
 import { mdiPencil } from '@lumx/icons';
 
-/////////////////////////////
-
 function DemoController() {
     'ngInject';
 
     const vm = this;
-
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
 
     /**
      * The tabs to display in the demo page.
@@ -37,10 +29,6 @@ function DemoController() {
     ];
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

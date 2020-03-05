@@ -16,8 +16,8 @@ exports[`<ProgressTracker> Snapshots and structure should render defaults 1`] = 
     className="lumx-progress-tracker__background-bar"
     style={
       Object {
-        "left": "0%",
-        "right": "0%",
+        "left": "50%",
+        "right": "50%",
       }
     }
   />
@@ -25,9 +25,9 @@ exports[`<ProgressTracker> Snapshots and structure should render defaults 1`] = 
     className="lumx-progress-tracker__foreground-bar"
     style={
       Object {
-        "left": "0%",
-        "right": "0%",
-        "transform": "scaleX(0)",
+        "left": "50%",
+        "right": "50%",
+        "transform": "scaleX(NaN)",
       }
     }
   />

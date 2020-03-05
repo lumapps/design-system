@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -7,8 +7,6 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/react/hooks/useChipGroupNavigation';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -21,18 +19,10 @@ interface ChipGroupProps extends GenericProps {
     align?: string;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ChipGroupProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The default value of props.
@@ -55,8 +45,6 @@ interface ChipGroup {
     useChipGroupNavigation: useChipGroupNavigationType;
 }
 
-/////////////////////////////
-
 /**
  * Displays a list of Chips in a grouped fashion.
  * @return The Chip Group component.
@@ -66,7 +54,7 @@ const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
     align = DEFAULT_PROPS.align,
     children,
     ...props
-}: ChipGroupProps): ReactElement => {
+}) => {
     const chipGroupClassName = handleBasicClasses({
         align,
         prefix: CLASSNAME,
@@ -81,7 +69,5 @@ const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
 
 ChipGroup.displayName = COMPONENT_NAME;
 ChipGroup.useChipGroupNavigation = useChipGroupNavigation;
-
-/////////////////////////////
 
 export { CLASSNAME, ChipGroup, ChipGroupProps };

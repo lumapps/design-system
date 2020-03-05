@@ -8,8 +8,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 
 import isFunction from 'lodash/isFunction';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -43,18 +41,10 @@ interface CommentBlockProps extends GenericProps {
     onMouseLeave?(): void;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<CommentBlockProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -76,8 +66,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     isRelevant: false,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * [Enter the description of the component here].
@@ -156,7 +144,5 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     );
 };
 CommentBlock.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, CommentBlock, CommentBlockProps };

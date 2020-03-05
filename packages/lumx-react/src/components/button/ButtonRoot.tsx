@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject } from 'react';
+import React, { RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -7,8 +7,6 @@ import classNames from 'classnames';
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * The authorized values for the `size` prop.
@@ -79,12 +77,10 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
 const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
 const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 
-/////////////////////////////
-
 /**
  * Render a button wrapper with the ButtonRoot inside.
  */
-const renderButtonWrapper = (props: ButtonRootProps): ReactElement => {
+const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const { color, emphasis, variant } = props;
 
     const adaptedColor =
@@ -116,7 +112,7 @@ const renderButtonWrapper = (props: ButtonRootProps): ReactElement => {
  * @param  props Component props.
  * @return React element.
  */
-const ButtonRoot = (props: ButtonRootProps): ReactElement => {
+const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     const {
         buttonRef,
         emphasis,

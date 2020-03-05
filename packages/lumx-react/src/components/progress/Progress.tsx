@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -15,8 +15,6 @@ enum ProgressVariant {
     circular = 'circular',
 }
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
@@ -29,18 +27,10 @@ interface ProgressProps extends GenericProps {
     variant?: ProgressVariant;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<ProgressProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -59,7 +49,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     variant: ProgressVariant.circular,
 };
-/////////////////////////////
 
 /**
  * Simple Progress component that can be displayed as a linear or circular element
@@ -72,7 +61,7 @@ const Progress: React.FC<ProgressProps> = ({
     useCustomColors,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: ProgressProps): ReactElement => {
+}) => {
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }), {
@@ -109,7 +98,5 @@ const Progress: React.FC<ProgressProps> = ({
     );
 };
 Progress.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Progress, ProgressProps, ProgressVariant };

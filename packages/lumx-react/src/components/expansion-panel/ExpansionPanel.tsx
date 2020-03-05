@@ -1,4 +1,4 @@
-import React, { Children, PropsWithChildren, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Children, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -18,8 +18,6 @@ import {
     isComponent,
     partitionMulti,
 } from '@lumx/react/utils';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -50,8 +48,6 @@ interface ExpansionPanelProps extends GenericProps {
     toggleCallback?(shouldOpen: boolean): void;
 }
 
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -73,9 +69,7 @@ const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
-/////////////////////////////
-
-const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProps): ReactElement => {
+const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const {
         label,
         theme = DEFAULT_PROPS.theme,
@@ -168,7 +162,5 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
     );
 };
 ExpansionPanel.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps };

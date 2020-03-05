@@ -6,7 +6,7 @@ import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
-import React, { ReactElement, ReactNode, useContext, useEffect, useState } from 'react';
+import React, { ReactNode, useContext, useEffect, useState } from 'react';
 
 import AngularTemplate from 'react-angular';
 
@@ -113,12 +113,7 @@ function renderDemo(demo: DemoModule | null, theme: Theme, engine: string) {
     return <demo.default theme={theme} />;
 }
 
-const DemoBlock: React.FC<DemoBlockProps> = ({
-    children,
-    code,
-    engine: propEngine,
-    withThemeSwitcher = false,
-}: DemoBlockProps): ReactElement => {
+const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngine, withThemeSwitcher = false }) => {
     const contextEngine = useContext(EngineContext).engine;
     const engine = propEngine || contextEngine;
 

@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useCallback, useEffect, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -14,8 +14,6 @@ import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from 
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
@@ -38,18 +36,10 @@ interface PaginationRange {
     maxRange: number;
 }
 
-/////////////////////////////
-
 /**
  * Define the types of the default props.
  */
 interface DefaultPropsType extends Partial<SlideshowControlsProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -72,8 +62,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
 
-/////////////////////////////
-
 /**
  * Controls for the slideshow component.
  */
@@ -95,7 +83,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Theme */
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SlideshowControlsProps): ReactElement | null => {
+}) => {
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
         return null;
     }
@@ -238,8 +226,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         );
     };
 
-    //////////////////////
-
     const [visibleRange, setVisibleRange]: [
         PaginationRange,
         React.Dispatch<React.SetStateAction<PaginationRange>>,
@@ -315,7 +301,5 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     );
 };
 SlideshowControls.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, SlideshowControls, SlideshowControlsProps as SlideshowProps };
