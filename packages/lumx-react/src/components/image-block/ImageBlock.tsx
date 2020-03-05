@@ -1,15 +1,13 @@
-import React, { CSSProperties, ReactElement, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, IFocusPoint, Size, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, FocusPoint, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Authorized variants.
@@ -27,7 +25,7 @@ type ImageBlockSize = Size.xl | Size.xxl;
 /**
  * Defines the props of the component.
  */
-interface IImageBlockProps extends IGenericProps {
+interface ImageBlockProps extends GenericProps {
     /** The caption wrapper alignment. */
     align?: Alignment;
     /** The aspect ratio the image will get. */
@@ -45,7 +43,7 @@ interface IImageBlockProps extends IGenericProps {
     /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
     /** Focal Point coordinates. */
-    focusPoint?: IFocusPoint;
+    focusPoint?: FocusPoint;
     /** The url of the image we want to display in the image-block. */
     image: string;
     /** The image block size. */
@@ -57,20 +55,11 @@ interface IImageBlockProps extends IGenericProps {
     /** The image title to display in the caption. */
     title?: string;
 }
-type ImageBlockProps = IImageBlockProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ImageBlockProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<ImageBlockProps> {}
 
 /**
  * The display name of the component.
@@ -85,7 +74,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     actions: undefined,
     align: Alignment.left,
     aspectRatio: AspectRatio.original,
@@ -99,8 +88,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     theme: Theme.light,
     title: undefined,
 };
-
-/////////////////////////////
 
 /**
  * Displays an properly structured image block.
@@ -123,7 +110,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
     ...props
-}: ImageBlockProps): ReactElement => {
+}) => {
     const { onClick = null, ...restProps } = props;
 
     return (
@@ -179,7 +166,5 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     );
 };
 ImageBlock.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };

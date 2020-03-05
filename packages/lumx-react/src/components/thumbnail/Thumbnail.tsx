@@ -1,14 +1,14 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import { Alignment, AspectRatio, IFocusPoint, Size, Theme } from '@lumx/react';
+import { Alignment, AspectRatio, FocusPoint, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import isFunction from 'lodash/isFunction';
 
-import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import useFocusedImage from './useFocusedImage';
 
@@ -52,12 +52,10 @@ enum ImageLoading {
     eager = 'eager',
 }
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface IThumbnailProps extends IGenericProps {
+interface ThumbnailProps extends GenericProps {
     /** The thumbnail alignment. */
     align?: Alignment;
     /** The image aspect ratio. */
@@ -76,22 +74,13 @@ interface IThumbnailProps extends IGenericProps {
     variant?: ThumbnailVariant;
 
     /** Focal Point coordinates. */
-    focusPoint?: IFocusPoint;
+    focusPoint?: FocusPoint;
 }
-type ThumbnailProps = IThumbnailProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ThumbnailProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<ThumbnailProps> {}
 
 /**
  * The display name of the component.
@@ -106,7 +95,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     align: Alignment.left,
     aspectRatio: AspectRatio.original,
     fillHeight: false,
@@ -116,7 +105,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
 };
-/////////////////////////////
 
 /**
  * Simple component used to display image with square or round shape.
@@ -138,7 +126,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
-}: ThumbnailProps): ReactElement => {
+}) => {
     const focusImageRef = useFocusedImage(focusPoint!);
 
     return (
@@ -173,7 +161,5 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     );
 };
 Thumbnail.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Thumbnail, ThumbnailProps, ThumbnailAspectRatio, ThumbnailSize, ThumbnailVariant };

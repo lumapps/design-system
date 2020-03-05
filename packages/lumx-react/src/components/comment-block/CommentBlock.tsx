@@ -4,16 +4,14 @@ import classNames from 'classnames';
 
 import { Avatar, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface ICommentBlockProps extends IGenericProps {
+interface CommentBlockProps extends GenericProps {
     /* Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
     /* The url of the avatar picture we want to display */
@@ -42,20 +40,11 @@ interface ICommentBlockProps extends IGenericProps {
     /* Callback for the mouseEnter event. */
     onMouseLeave?(): void;
 }
-type CommentBlockProps = ICommentBlockProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<CommentBlockProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<CommentBlockProps> {}
 
 /**
  * The display name of the component.
@@ -70,15 +59,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     hasActions: false,
     hasChildren: false,
     isOpen: false,
     isRelevant: false,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * [Enter the description of the component here].
@@ -157,7 +144,5 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     );
 };
 CommentBlock.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, CommentBlock, CommentBlockProps };

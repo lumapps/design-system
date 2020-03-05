@@ -1,30 +1,27 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import mockConsole from 'jest-mock-console';
 import { build, oneOf } from 'test-data-bot';
 
 import without from 'lodash/without';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
 import { CLASSNAME, DEFAULT_PROPS, Switch, SwitchPosition, SwitchProps } from './Switch';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<SwitchProps>;
+type SetupProps = Partial<SwitchProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The main container.
@@ -57,8 +54,6 @@ interface ISetup extends ICommonSetup {
     label: Wrapper;
 }
 
-/////////////////////////////
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
@@ -67,7 +62,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: SwitchProps = {
         ...propsOverrides,
     };
@@ -109,7 +104,7 @@ describe(`<${Switch.displayName}>`, () => {
         });
 
         it('should render correctly with only a `label`', () => {
-            const props: ISetupProps = { children: 'Label' };
+            const props: SetupProps = { children: 'Label' };
             const { root, inputWrapper, input, content, helper, label, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
@@ -125,7 +120,7 @@ describe(`<${Switch.displayName}>`, () => {
         });
 
         it('should render correctly with a `label` and a `helper`', () => {
-            const props: ISetupProps = { children: 'Label', helper: 'Helper' };
+            const props: SetupProps = { children: 'Label', helper: 'Helper' };
             const { root, inputWrapper, input, content, helper, label, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
@@ -140,8 +135,6 @@ describe(`<${Switch.displayName}>`, () => {
             expect(helper).toExist();
         });
     });
-
-    /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
@@ -161,13 +154,13 @@ describe(`<${Switch.displayName}>`, () => {
         });
 
         it('should use the given props', () => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 checked: true,
                 position: oneOf(...without(Object.values(SwitchPosition), DEFAULT_PROPS.position)),
                 theme: oneOf(...without(Object.values(Theme), DEFAULT_PROPS.theme)),
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            const modifiedProps: SetupProps = modifiedPropsBuilder();
 
             const { root } = setup({ ...modifiedProps });
 
@@ -191,8 +184,6 @@ describe(`<${Switch.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         const onToggle: jest.Mock = jest.fn();
@@ -208,35 +199,11 @@ describe(`<${Switch.displayName}>`, () => {
             expect(onToggle).toHaveBeenCalled();
         });
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
-        it('should fail when more than one child is given', () => {
-            const children: ReactNode = (
-                <>
-                    Label
-                    <span>Label 2</span>
-                </>
-            );
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-        });
-
-        it('should fail when anything else than a text or a <span> is given', () => {
-            mockConsole('debug');
-
-            const children: ReactNode = <div>Label</div>;
-
-            expect(() => {
-                setup({ children });
-            }).toThrowErrorMatchingSnapshot();
-        });
-
         it('should not display the `helper` if no `label` is given', () => {
-            const props: ISetupProps = { helper: 'Helper' };
+            const props: SetupProps = { helper: 'Helper' };
             const { content, wrapper } = setup(props);
             expect(wrapper).toMatchSnapshot();
 
@@ -244,14 +211,8 @@ describe(`<${Switch.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
-    /////////////////////////////
+    // N/A
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'root', prop: 'root' }, { className: CLASSNAME });

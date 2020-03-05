@@ -6,32 +6,28 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import { build, oneOf } from 'test-data-bot';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Tab } from '@lumx/react';
 import { CLASSNAME, Tabs, TabsLayout, TabsPosition, TabsProps } from './Tabs';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<TabsProps>;
+type SetupProps = Partial<TabsProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that wraps tabs and content elements.
      */
     wrapper: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -41,7 +37,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const tabs = [<Tab>Tab 0</Tab>, <Tab>Tab 1</Tab>];
     const props: TabsProps = {
         children: tabs,
@@ -78,17 +74,15 @@ describe(`<${Tabs.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use the given props', () => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
                 layout: TabsLayout.clustered,
                 position: oneOf(TabsPosition.center, TabsPosition.right),
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            const modifiedProps: SetupProps = modifiedPropsBuilder();
 
             const { wrapper } = setup({ ...modifiedProps });
 
@@ -99,8 +93,6 @@ describe(`<${Tabs.displayName}>`, () => {
             });
         });
     });
-
-    /////////////////////////////
 
     // 3. Test events.
     describe('Events', () => {
@@ -119,8 +111,6 @@ describe(`<${Tabs.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         it('should fail when no `Tab` children is given', () => {
@@ -131,14 +121,10 @@ describe(`<${Tabs.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, {}, { className: CLASSNAME });

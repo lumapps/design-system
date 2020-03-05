@@ -4,24 +4,22 @@ import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import { build } from 'test-data-bot';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Kind } from '@lumx/react';
 import { CLASSNAME, TextField, TextFieldProps } from './TextField';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<TextFieldProps>;
+type SetupProps = Partial<TextFieldProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that wraps checkbox and children elements.
@@ -40,8 +38,6 @@ interface ISetup extends ICommonSetup {
     error: Wrapper;
 }
 
-/////////////////////////////
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
@@ -49,7 +45,7 @@ interface ISetup extends ICommonSetup {
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     // @ts-ignore
     const wrapper: Wrapper = renderer(<TextField {...props} />);
@@ -107,12 +103,10 @@ describe(`<${TextField.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should add all class names (except has-error)', () => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
                 icon: 'icon',
                 isDisabled: true,
                 isValid: true,
@@ -120,7 +114,7 @@ describe(`<${TextField.displayName}>`, () => {
                 placeholder: 'test',
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            const modifiedProps: SetupProps = modifiedPropsBuilder();
 
             const { wrapper } = setup({ ...modifiedProps });
 
@@ -136,11 +130,11 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should add "has-error" class name', () => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
                 hasError: true,
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            const modifiedProps: SetupProps = modifiedPropsBuilder();
 
             const { wrapper } = setup({ ...modifiedProps });
 
@@ -197,8 +191,6 @@ describe(`<${TextField.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         const onChange: jest.Mock = jest.fn();
@@ -216,21 +208,15 @@ describe(`<${TextField.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'wrapper', prop: 'inputNative' }, { className: CLASSNAME });

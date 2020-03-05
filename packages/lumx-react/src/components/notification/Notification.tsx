@@ -11,11 +11,9 @@ import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
-
-/////////////////////////////
 
 /**
  * Different types of notification.
@@ -27,12 +25,10 @@ enum NotificationType {
     error = 'error',
 }
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface INotificationProps extends IGenericProps {
+interface NotificationProps extends GenericProps {
     /** Label for action button. */
     actionLabel?: string;
 
@@ -57,20 +53,11 @@ interface INotificationProps extends IGenericProps {
     /** Function to handle click on the notification. */
     handleClick?(): void;
 }
-type NotificationProps = INotificationProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<NotificationProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<NotificationProps> {}
 
 /**
  * The display name of the component.
@@ -85,12 +72,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     content: '',
     theme: Theme.light,
     zIndex: 9999,
 };
-/////////////////////////////
 
 /**
  * Notification.
@@ -153,7 +139,5 @@ const Notification: React.FC<NotificationProps> = ({
         : null;
 };
 Notification.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Notification, NotificationProps, NotificationType };

@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject } from 'react';
+import React, { RefObject } from 'react';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -6,16 +6,14 @@ import classNames from 'classnames';
 
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * The authorized values for the `size` prop.
  */
 export type ButtonSize = Size.s | Size.m;
 
-interface IBaseButtonProps extends IGenericProps {
+interface BaseButtonProps extends GenericProps {
     /**
      * Reference on the `<a>` or `<button>` button HTML element.
      */
@@ -66,12 +64,10 @@ interface IBaseButtonProps extends IGenericProps {
      */
     useCustomColors?: boolean;
 }
-type BaseButtonProps = IBaseButtonProps;
 
-interface IButtonRootProps extends BaseButtonProps {
+interface ButtonRootProps extends BaseButtonProps {
     variant: 'button' | 'icon';
 }
-type ButtonRootProps = IButtonRootProps;
 
 /**
  * The display name of the component.
@@ -81,12 +77,10 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
 const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
 const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 
-/////////////////////////////
-
 /**
  * Render a button wrapper with the ButtonRoot inside.
  */
-const renderButtonWrapper = (props: IButtonRootProps): ReactElement => {
+const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const { color, emphasis, variant } = props;
 
     const adaptedColor =
@@ -118,7 +112,7 @@ const renderButtonWrapper = (props: IButtonRootProps): ReactElement => {
  * @param  props Component props.
  * @return React element.
  */
-const ButtonRoot = (props: ButtonRootProps): ReactElement => {
+const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     const {
         buttonRef,
         emphasis,

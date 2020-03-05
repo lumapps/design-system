@@ -4,9 +4,7 @@ import classNames from 'classnames';
 
 import { TabProps, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 enum TabsLayout {
     clustered = 'clustered',
@@ -19,12 +17,10 @@ enum TabsPosition {
     right = 'right',
 }
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface ITabsProps extends IGenericProps {
+interface TabsProps extends GenericProps {
     /** Active tab */
     activeTab?: number;
     /** Component tabs */
@@ -40,20 +36,11 @@ interface ITabsProps extends IGenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 }
-type TabsProps = ITabsProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<TabsProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<TabsProps> {}
 
 /**
  * The display name of the component.
@@ -68,15 +55,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     activeTab: 0,
     children: [],
     layout: TabsLayout.fixed,
     position: TabsPosition.left,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * Defines a Tabs component.
@@ -93,7 +78,7 @@ const Tabs: React.FC<TabsProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     ...props
-}: TabsProps): ReactElement => {
+}) => {
     const tabs: ReactElement[] = Children.map(children as ReactElement[], (tab: ReactElement, index: number) => {
         return cloneElement(tab, { key: index, index, isActive: activeTab === index, onTabClick });
     });
@@ -112,7 +97,5 @@ const Tabs: React.FC<TabsProps> = ({
     );
 };
 Tabs.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Tabs, TabsProps, TabsLayout, TabsPosition };

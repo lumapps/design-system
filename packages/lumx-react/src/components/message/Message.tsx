@@ -1,11 +1,9 @@
 import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/icons';
 import { ColorPalette, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
-
-/////////////////////////////
+import React, { ReactNode } from 'react';
 
 enum MessageKind {
     error = 'error',
@@ -17,7 +15,7 @@ enum MessageKind {
 /**
  * Defines the props of the component.
  */
-interface IMessageProps extends IGenericProps {
+interface MessageProps extends GenericProps {
     /**
      * Message content.
      */
@@ -33,15 +31,6 @@ interface IMessageProps extends IGenericProps {
      */
     hasBackground?: boolean;
 }
-type MessageProps = IMessageProps;
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -80,14 +69,12 @@ const KIND_ICON = {
     [MessageKind.warning]: mdiAlertCircle,
 };
 
-/////////////////////////////
-
 /**
  * Component used to display a message, with an icon and possibly a background
  *
  * @return The component.
  */
-const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
+const Message: React.FC<MessageProps> = (props) => {
     const { children, className, kind, hasBackground, ...forwardedProps } = props;
     const icon = kind ? KIND_ICON[kind] : null;
 
@@ -110,7 +97,5 @@ const Message: React.FC<MessageProps> = (props: MessageProps): ReactElement => {
     );
 };
 Message.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, MessageKind, Message, MessageProps };

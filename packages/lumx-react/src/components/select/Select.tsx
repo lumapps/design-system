@@ -16,9 +16,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * The authorized variants.
@@ -31,7 +29,7 @@ enum SelectVariant {
 /**
  * Defines the props of the component.
  */
-interface ISelectProps extends IGenericProps {
+interface SelectProps extends GenericProps {
     /**
      * The list of selected values.
      */
@@ -141,20 +139,11 @@ interface ISelectProps extends IGenericProps {
         isDisabled?: boolean,
     ): ReactNode | string;
 }
-type SelectProps = ISelectProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<SelectProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<SelectProps> {}
 
 /**
  * The display name of the component.
@@ -169,7 +158,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     hasError: false,
     isMultiple: false,
     isOpen: false,
@@ -193,7 +182,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     theme: Theme.light,
     variant: SelectVariant.input,
 };
-/////////////////////////////
 
 /**
  * Listen on element focus to store the focus status.
@@ -478,7 +466,5 @@ const Select: React.FC<SelectProps> = ({
     );
 };
 Select.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant };

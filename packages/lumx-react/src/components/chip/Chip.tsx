@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, Ref, SyntheticEvent } from 'react';
+import React, { ReactNode, Ref, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,9 +7,7 @@ import isFunction from 'lodash/isFunction';
 import { Color, ColorPalette, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /**
  * Authorized size values.
@@ -19,7 +17,7 @@ type ChipSize = Size.s | Size.m;
 /**
  * Defines the props of the component.
  */
-interface IChipProps extends IGenericProps {
+interface ChipProps extends GenericProps {
     /** A component to be rendered after the main label area. */
     after?: HTMLElement | ReactNode;
     /** A component to be rendered before the main label area. */
@@ -47,20 +45,11 @@ interface IChipProps extends IGenericProps {
     /** A function to be executed when the before element is clicked. */
     onBeforeClick?(evt: SyntheticEvent): void;
 }
-type ChipProps = IChipProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ChipProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<ChipProps> {}
 
 /**
  * The display name of the component.
@@ -75,7 +64,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     isClickable: false,
     isDisabled: false,
     isHighlighted: false,
@@ -83,7 +72,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     size: Size.m,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Displays information or allow an action on a compact element.
@@ -91,7 +79,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The Chip component.
  */
-const Chip: React.FC<IChipProps> = ({
+const Chip: React.FC<ChipProps> = ({
     after = DEFAULT_PROPS.after,
     before = DEFAULT_PROPS.before,
     className,
@@ -109,7 +97,7 @@ const Chip: React.FC<IChipProps> = ({
     useCustomColors,
     chipRef,
     ...props
-}: ChipProps): ReactElement => {
+}) => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
     const hasBeforeClick: boolean = isFunction(onBeforeClick);
     const hasOnClick: boolean = isFunction(onClick);
@@ -204,7 +192,5 @@ const Chip: React.FC<IChipProps> = ({
 };
 
 Chip.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps };

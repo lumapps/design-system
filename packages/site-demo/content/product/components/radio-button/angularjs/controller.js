@@ -3,12 +3,6 @@ function DemoController() {
 
     const vm = this;
 
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Contains all the available radio buttons to display on the demo page.
      *
@@ -22,10 +16,6 @@ function DemoController() {
     };
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

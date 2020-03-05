@@ -8,7 +8,7 @@ import { Alignment, Divider, ExpansionPanel, Grid, GridItem } from '@lumx/react'
 // @ts-ignore
 import { propsByComponent } from 'props-loader!';
 
-const renderTypeTableRow = ({ type, defaultValue }: IProperty): ReactElement => {
+const renderTypeTableRow = ({ type, defaultValue }: Property): ReactElement => {
     let formattedType = <>{type}</>;
     const splitType = type.split(defaultValue);
 
@@ -34,7 +34,7 @@ const renderTypeTableRow = ({ type, defaultValue }: IProperty): ReactElement => 
     return <span className="lumx-typography-body1">{formattedType}</span>;
 };
 
-const PropTableRow: React.FC<IPropTableRowProps> = ({ property }: IPropTableRowProps): ReactElement => {
+const PropTableRow: React.FC<PropTableRowProps> = ({ property }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleOpen = () => {
         setIsOpen(!isOpen);
@@ -63,13 +63,13 @@ const PropTableRow: React.FC<IPropTableRowProps> = ({ property }: IPropTableRowP
     );
 };
 
-const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): ReactElement => {
+const PropTable: React.FC<PropTableProps> = ({ component }) => {
     const { engine } = useContext(EngineContext);
     if (engine === Engine.angularjs) {
         return <span>Could not load properties of the angular.js {component} component.</span>;
     }
 
-    const propertyList: IProperty[] = propsByComponent[component];
+    const propertyList: Property[] = propsByComponent[component];
 
     if (!propertyList) {
         return <span>Could not load properties of the react {component} component.</span>;
@@ -77,7 +77,7 @@ const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): R
 
     return (
         <div className="prop-table">
-            {orderBy(propertyList, ['required', 'name'], ['desc', 'asc']).map((property: IProperty, idx: number) => {
+            {orderBy(propertyList, ['required', 'name'], ['desc', 'asc']).map((property: Property, idx: number) => {
                 return (
                     <Fragment key={property.id}>
                         <PropTableRow property={property} />
@@ -90,7 +90,7 @@ const PropTable: React.FC<IPropTableProps> = ({ component }: IPropTableProps): R
     );
 };
 
-interface IProperty {
+interface Property {
     id: string;
     name: string;
     required: boolean;
@@ -99,12 +99,12 @@ interface IProperty {
     defaultValue: string;
 }
 
-interface IPropTableRowProps {
-    property: IProperty;
+interface PropTableRowProps {
+    property: Property;
 }
 
-interface IPropTableProps {
+interface PropTableProps {
     component: string;
 }
 
-export { PropTable, IProperty };
+export { PropTable, Property };

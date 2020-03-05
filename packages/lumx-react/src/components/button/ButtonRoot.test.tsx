@@ -3,7 +3,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import {
@@ -14,18 +14,16 @@ import {
 } from '@lumx/react/components/button/ButtonRoot';
 import { getBasicClass } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<ButtonRootProps>;
+type SetupProps = Partial<ButtonRootProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * Button element (<a> or <button> depending on the button type).
@@ -44,7 +42,7 @@ interface ISetup extends ICommonSetup {
  * @param  props                   The props to use to override the default props of the component.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...props }: ISetupProps = {}): ISetup => {
+const setup = ({ ...props }: SetupProps = {}): Setup => {
     // @ts-ignore
     const wrapper: Wrapper = mount(<ButtonRoot {...props} />);
 
@@ -132,8 +130,6 @@ describe(`<${ButtonRoot.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default color', () => {
@@ -190,28 +186,20 @@ describe(`<${ButtonRoot.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Tested in step 1.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'button', prop: 'button' }, { className: BUTTON_CLASSNAME });

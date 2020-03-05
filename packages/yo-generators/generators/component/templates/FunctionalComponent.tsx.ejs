@@ -3,23 +3,13 @@ import React, { ReactElement } from 'react';
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-interface I<%= componentName %>Props extends IGenericProps {}
+interface I<%= componentName %>Props extends GenericProps {}
 type <%= componentName %>Props = I<%= componentName %>Props;
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -35,8 +25,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<<%= componentName %>Props> = {};
-
-/////////////////////////////
 
 /**
  * [Enter the description of the component here].
@@ -61,7 +49,5 @@ const <%= componentName %>: React.FC<<%= componentName %>Props> = (props: <%= co
     );
 };
 <%= componentName %>.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, <%= componentName %>, <%= componentName %>Props };

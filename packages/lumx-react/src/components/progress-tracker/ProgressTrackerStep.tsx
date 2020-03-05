@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
@@ -7,24 +7,19 @@ import isFunction from 'lodash/isFunction';
 import { Icon, InputHelper, InputLabel, Kind, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } from '@lumx/icons';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IProgressTrackerStepProps extends IGenericProps {}
-type ProgressTrackerStepProps = IProgressTrackerStepProps;
-
-/////////////////////////////
+interface ProgressTrackerStepProps extends GenericProps {}
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ProgressTrackerStepProps> {
+interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {
     /** Whether the step should be in error state or not. */
     hasError?: boolean;
 
@@ -44,12 +39,6 @@ interface IDefaultPropsType extends Partial<ProgressTrackerStepProps> {
     theme?: Theme;
 }
 
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
 /**
  * The display name of the component.
  */
@@ -63,7 +52,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     hasError: false,
     helper: null,
     isActive: false,
@@ -71,7 +60,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     label: null,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Defines a step for the `ProgressTracker` element.
@@ -87,8 +75,8 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     label = DEFAULT_PROPS.label,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ProgressTrackerStepProps): ReactElement => {
-    const { onClick = null, ...restProps }: IProgressTrackerStepProps = props;
+}) => {
+    const { onClick = null, ...restProps }: ProgressTrackerStepProps = props;
 
     const isClickable: boolean = isFunction(onClick);
 
@@ -143,7 +131,5 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
 };
 
 ProgressTrackerStep.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ProgressTrackerStep, ProgressTrackerStepProps };

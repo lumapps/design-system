@@ -1,17 +1,17 @@
-import { IColorPaletteWithVariants, IColorVariantDetail } from '@lumx/demo/constants';
+import { ColorPaletteWithVariants, ColorVariantDetail } from '@lumx/demo/constants';
 import { ColorPalette, Theme } from '@lumx/react';
 import classNames from 'classnames';
-import React, { ReactElement } from 'react';
+import React from 'react';
 
-interface IDemoColorProps {
+interface DemoColorProps {
     theme: Theme;
     color: ColorPalette;
-    colorVariants: IColorPaletteWithVariants;
+    colorVariants: ColorPaletteWithVariants;
 }
 
-const DemoColor = ({ theme, color, colorVariants }: IDemoColorProps): ReactElement => (
+const DemoColor: React.FC<DemoColorProps> = ({ theme, color, colorVariants }) => (
     <div className={classNames('demo-colors', { 'lumx-theme-background-dark-N': theme === Theme.dark })}>
-        {Object.entries(colorVariants[color]).map(([key, hue]: [string, IColorVariantDetail]) => (
+        {Object.entries(colorVariants[color]).map(([key, hue]: [string, ColorVariantDetail]) => (
             <div
                 className={classNames(
                     'demo-colors__hue',

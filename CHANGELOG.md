@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Added ReactNode as an allowed type for the label of the `SideNavigationItem` for typescript support
+-   _[BREAKING]_ Rename `IBaseBadgeProps` as `BaseBadgeProps`
+-   _[BREAKING]_ Rename `IInputHelperProps` as `InputHelperProps`
+-   _[BREAKING]_ Rename `IInputLabelProps` as `InputLabelProps`
+-   _[BREAKING]_ Rename `IFocusPoint` as `FocusPoint`
 
 ## [0.21.9][] - 2020-02-20
 

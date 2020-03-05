@@ -1,17 +1,9 @@
 import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx/icons';
 
-/////////////////////////////
-
 function DemoController($filter) {
     'ngInject';
 
     const vm = this;
-
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
 
     /**
      * Whether all rows are selected or not.
@@ -106,12 +98,6 @@ function DemoController($filter) {
         },
     ];
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Select a row in the table.
      *
@@ -146,16 +132,10 @@ function DemoController($filter) {
         vm.tableBody = $filter('orderBy')(vm.tableBody, cellToSort.name, cellToSort.sortOrder === 'desc');
     }
 
-    /////////////////////////////
-
     vm.selectRow = selectRow;
     vm.updateSort = updateSort;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

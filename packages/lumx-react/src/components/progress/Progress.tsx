@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Authorized variants.
@@ -15,12 +15,10 @@ enum ProgressVariant {
     circular = 'circular',
 }
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface IProgressProps extends IGenericProps {
+interface ProgressProps extends GenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** Whether custom colors are applied to this component. */
@@ -28,20 +26,11 @@ interface IProgressProps extends IGenericProps {
     /* Type of progress */
     variant?: ProgressVariant;
 }
-type ProgressProps = IProgressProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ProgressProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<ProgressProps> {}
 
 /**
  * The display name of the component.
@@ -56,11 +45,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     variant: ProgressVariant.circular,
 };
-/////////////////////////////
 
 /**
  * Simple Progress component that can be displayed as a linear or circular element
@@ -73,7 +61,7 @@ const Progress: React.FC<ProgressProps> = ({
     useCustomColors,
     variant = DEFAULT_PROPS.variant,
     ...props
-}: ProgressProps): ReactElement => {
+}) => {
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }), {
@@ -110,7 +98,5 @@ const Progress: React.FC<ProgressProps> = ({
     );
 };
 Progress.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Progress, ProgressProps, ProgressVariant };

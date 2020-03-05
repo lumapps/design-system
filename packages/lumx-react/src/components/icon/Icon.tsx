@@ -1,27 +1,17 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
-import isEmpty from 'lodash/isEmpty';
-
 import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import {
-    IGenericProps,
-    ValidateParameters,
-    getRootClassName,
-    handleBasicClasses,
-    validateComponent,
-} from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
  * Defines the props of the component.
  */
-interface IIconProps extends IGenericProps {
+interface IconProps extends GenericProps {
     /**
      * The icon SVG path draw code (`d` property of the `<path>` SVG element).
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
@@ -46,20 +36,11 @@ interface IIconProps extends IGenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
-type IconProps = IIconProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<IconProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<IconProps> {}
 
 /**
  * The display name of the component.
@@ -74,45 +55,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     color: ColorPalette.dark,
     iconRef: undefined,
     size: Size.m,
 };
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Globally validate the component before validating the children.
- *
- * @param props The properties of the component.
- */
-function _preValidate({ props }: ValidateParameters) {
-    if (!isEmpty(props.icon)) {
-        return;
-    }
-
-    throw new Error(`<${COMPONENT_NAME}> must have an \`icon\` prop!`);
-}
-
-/**
- * Validate the component props.
- *
- * @param       props The props of the component.
- * @return The processed children of the component.
- */
-function _validate(props: IconProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        preValidate: _preValidate,
-        props,
-    });
-}
-
-/////////////////////////////
 
 /**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
@@ -129,9 +76,7 @@ const Icon: React.FC<IconProps> = ({
     size,
     theme,
     ...props
-}: IconProps): ReactElement => {
-    _validate({ color, icon, size, ...props });
-
+}) => {
     let iconColor;
     if (color) {
         iconColor = color;
@@ -188,7 +133,5 @@ const Icon: React.FC<IconProps> = ({
     );
 };
 Icon.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, IconSizes };

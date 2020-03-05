@@ -3,23 +3,21 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, Checkbox, CheckboxProps } from './Checkbox';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<CheckboxProps>;
+type SetupProps = Partial<CheckboxProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that wraps checkbox and children elements.
@@ -37,8 +35,6 @@ interface ISetup extends ICommonSetup {
     helper: Wrapper;
 }
 
-/////////////////////////////
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
@@ -47,7 +43,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...props }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     // @ts-ignore
     const wrapper: Wrapper = renderer(<Checkbox {...props} />);
@@ -74,8 +70,6 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should add a "disabled" and "checked" class names', () => {
@@ -100,8 +94,6 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         const onChange: jest.Mock = jest.fn();
@@ -119,21 +111,15 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });

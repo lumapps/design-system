@@ -1,6 +1,6 @@
 import { CLASSNAME, Mosaic, MosaicProps } from '@lumx/react/components/mosaic/Mosaic';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -14,18 +14,16 @@ jest.mock('@lumx/react/hooks/useIntersectionObserver', () => ({
     useIntersectionObserver: () => new Map(),
 }));
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<MosaicProps>;
+type SetupProps = Partial<MosaicProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that wraps the dialog and children elements.
@@ -35,8 +33,6 @@ interface ISetup extends ICommonSetup {
     thumbnails: Wrapper;
 }
 
-/////////////////////////////
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
@@ -45,7 +41,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...props }: ISetupProps = {}, shallowRendering = true): ISetup => {
+const setup = ({ ...props }: SetupProps = {}, shallowRendering = true): Setup => {
     const renderer = shallowRendering ? shallow : mount;
     // @ts-ignore
     const wrapper = renderer(<Mosaic {...props} />);
@@ -74,8 +70,6 @@ describe(`<${Mosaic.displayName}>`, () => {
         }
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should pass theme prop to Thumbnails', () => {
@@ -94,8 +88,6 @@ describe(`<${Mosaic.displayName}>`, () => {
             });
         });
     });
-
-    /////////////////////////////
 
     // 3. Test events.
     describe('Events', () => {
@@ -120,21 +112,15 @@ describe(`<${Mosaic.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'wrapper' }, { className: CLASSNAME });

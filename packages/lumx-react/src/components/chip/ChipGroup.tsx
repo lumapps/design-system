@@ -1,44 +1,33 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/react/hooks/useChipGroupNavigation';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IChipGroupProps extends IGenericProps {
+interface ChipGroupProps extends GenericProps {
     /** Children of the ChipGroup. This should be a list of Chips */
     children: React.ReactNode;
 
     /** Chip group alignment */
     align?: string;
 }
-type ChipGroupProps = IChipGroupProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ChipGroupProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<ChipGroupProps> {}
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     align: 'left',
 };
 
@@ -52,22 +41,20 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ChipGroup`;
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
-interface IChipGroup {
+interface ChipGroup {
     useChipGroupNavigation: useChipGroupNavigationType;
 }
-
-/////////////////////////////
 
 /**
  * Displays a list of Chips in a grouped fashion.
  * @return The Chip Group component.
  */
-const ChipGroup: React.FC<IChipGroupProps> & IChipGroup = ({
+const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
     className,
     align = DEFAULT_PROPS.align,
     children,
     ...props
-}: ChipGroupProps): ReactElement => {
+}) => {
     const chipGroupClassName = handleBasicClasses({
         align,
         prefix: CLASSNAME,
@@ -82,7 +69,5 @@ const ChipGroup: React.FC<IChipGroupProps> & IChipGroup = ({
 
 ChipGroup.displayName = COMPONENT_NAME;
 ChipGroup.useChipGroupNavigation = useChipGroupNavigation;
-
-/////////////////////////////
 
 export { CLASSNAME, ChipGroup, ChipGroupProps };

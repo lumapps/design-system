@@ -5,7 +5,7 @@ import moment from 'moment';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
 import { DatePickerField, DatePickerFieldProps } from './DatePickerField';
 
@@ -17,21 +17,17 @@ Date.now = jest.fn(() =>
     ).valueOf(),
 );
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<DatePickerFieldProps>;
+type SetupProps = Partial<DatePickerFieldProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -41,7 +37,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: DatePickerFieldProps = {
         label: 'DatePickerField',
         locale: 'fr',
@@ -69,27 +65,20 @@ describe(`<${DatePickerField.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 5. Test state.
     describe('State', () => {

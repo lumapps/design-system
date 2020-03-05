@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode } from 'react';
+import React, { Children, ReactNode } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
@@ -10,7 +10,7 @@ import { Emphasis, Icon, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
-    IGenericProps,
+    GenericProps,
     getRootClassName,
     handleBasicClasses,
     isComponent,
@@ -20,7 +20,7 @@ import {
 /**
  * Defines the props of the component.
  */
-interface ISideNavigationItemProps extends IGenericProps {
+interface SideNavigationItemProps extends GenericProps {
     /** Side navigation item content (should use `<SideNavigationItem>`). */
     children?: ReactNode;
 
@@ -42,7 +42,6 @@ interface ISideNavigationItemProps extends IGenericProps {
     /** On click handler. */
     onClick?(evt: React.MouseEvent): void;
 }
-type SideNavigationItemProps = ISideNavigationItemProps;
 
 /**
  * The display name of the component.
@@ -63,7 +62,7 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     isSelected: false,
 };
 
-const SideNavigationItem: React.FC<ISideNavigationItemProps> = (props: ISideNavigationItemProps): ReactElement => {
+const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
     const {
         children,
         className,

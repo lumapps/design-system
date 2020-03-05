@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import React, { CSSProperties, useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -7,16 +7,14 @@ import { Theme } from '@lumx/react';
 import { AUTOPLAY_DEFAULT_INTERVAL, FULL_WIDTH_PERCENT } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { useInterval } from '@lumx/react/hooks';
-import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { SlideshowControls } from './SlideshowControls';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface ISlideshowProps extends IGenericProps {
+interface SlideshowProps extends GenericProps {
     /** Index of the current slide */
     activeIndex?: number;
     /** Enable/disable automatic rotation of slideshow */
@@ -34,20 +32,11 @@ interface ISlideshowProps extends IGenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 }
-type SlideshowProps = ISlideshowProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<SlideshowProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<SlideshowProps> {}
 
 /**
  * The display name of the component.
@@ -62,7 +51,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     activeIndex: 0,
     autoPlay: false,
     fillHeight: false,
@@ -71,27 +60,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     interval: AUTOPLAY_DEFAULT_INTERVAL,
     theme: Theme.light,
 };
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param props The children and props of the component.
- * @return    The processed children of the component.
- */
-function _validate(props: SlideshowProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        props,
-    });
-}
-
-/////////////////////////////
 
 /**
  * Displays a slideshow.
@@ -108,8 +76,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     ...props
-}: SlideshowProps): ReactElement => {
-    const newChildren: ReactNode = _validate({ activeIndex, autoPlay, children, groupBy, interval, ...props });
+}) => {
     const [currentIndex, setCurrentIndex] = useState(activeIndex);
     const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
     const parentRef: React.MutableRefObject<null> = useRef(null);
@@ -118,7 +85,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
      * The number of slideshow items.
      *
      */
-    const itemsCount: number = React.Children.count(newChildren);
+    const itemsCount: number = React.Children.count(children);
 
     /**
      * Number of slides when using groupBy prop.
@@ -220,7 +187,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
         >
             <div className={`${CLASSNAME}__slides`}>
                 <div className={`${CLASSNAME}__wrapper`} style={wrapperSyle}>
-                    {newChildren}
+                    {children}
                 </div>
             </div>
 
@@ -241,7 +208,5 @@ const Slideshow: React.FC<SlideshowProps> = ({
     );
 };
 Slideshow.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Slideshow, SlideshowProps };

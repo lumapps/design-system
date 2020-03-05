@@ -3,12 +3,6 @@ function DemoController(LxNotificationService) {
 
     const vm = this;
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Display a notification.
      *
@@ -29,15 +23,9 @@ function DemoController(LxNotificationService) {
         }
     }
 
-    /////////////////////////////
-
     vm.notify = notify;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

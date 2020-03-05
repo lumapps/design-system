@@ -1,36 +1,25 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-interface IDividerProps extends IGenericProps {
+interface DividerProps extends GenericProps {
     /**
      * The <Divider> theme.
      */
     theme?: Theme;
 }
-type DividerProps = IDividerProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<DividerProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<DividerProps> {}
 
 /**
  * The display name of the component.
@@ -45,11 +34,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * Displays a divider.
@@ -57,15 +44,9 @@ const DEFAULT_PROPS: IDefaultPropsType = {
  *
  * @return The component.
  */
-const Divider: React.FC<DividerProps> = ({
-    className = '',
-    theme = DEFAULT_PROPS.theme,
-    ...props
-}: DividerProps): ReactElement => {
+const Divider: React.FC<DividerProps> = ({ className = '', theme = DEFAULT_PROPS.theme, ...props }) => {
     return <hr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props} />;
 };
 Divider.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps };

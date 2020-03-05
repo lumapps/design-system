@@ -2,11 +2,11 @@ import { shallow } from 'enzyme';
 import 'jest-enzyme';
 import React from 'react';
 
-import { ICommonSetup } from '@lumx/react/testing/utils';
+import { CommonSetup } from '@lumx/react/testing/utils';
 import { Chip } from './Chip';
 import { ChipGroup, ChipGroupProps } from './ChipGroup';
 
-interface ISetup extends ICommonSetup {}
+interface Setup extends CommonSetup {}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -14,7 +14,7 @@ interface ISetup extends ICommonSetup {}
  * @param propOverrides An object that will extend the default properties.
  * @return An object with some shortcuts to elements or data required in tests.
  */
-const setup = (propOverrides: Partial<ChipGroupProps> = {}): ISetup => {
+const setup = (propOverrides: Partial<ChipGroupProps> = {}): Setup => {
     const props = {
         children: [<Chip key="1">Chip 1</Chip>, <Chip key="2">Chip 2</Chip>, <Chip key="3">Chip 3</Chip>],
         ...propOverrides,

@@ -1,13 +1,13 @@
 /**
  *  Focal point coordinates (from -1 to 1).
  */
-export interface IFocusPoint {
+export interface FocusPoint {
     x: number;
     y: number;
 }
 
 // Credits: https://github.com/third774/image-focus/
-export interface IFocusedImageOptions {
+export interface FocusedImageOptions {
     /**
      * Time in MS before debounceApplyShift fires
      *
@@ -31,7 +31,7 @@ export interface IFocusedImageOptions {
      *
      * Default value is `undefined`
      */
-    focus: IFocusPoint;
+    focus: FocusPoint;
     /**
      * Container position
      *

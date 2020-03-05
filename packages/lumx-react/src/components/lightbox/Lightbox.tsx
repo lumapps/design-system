@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useCallback, useEffect, useRef, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import classNames from 'classnames';
@@ -8,19 +8,17 @@ import { createPortal } from 'react-dom';
 import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
-
-/////////////////////////////
 
 const _TRANSITION_DURATION = 400;
 
 /**
  * Defines the props of the component.
  */
-interface ILightboxProps extends IGenericProps {
+interface LightboxProps extends GenericProps {
     /** Label for accessibility assistive devices. */
     ariaLabel?: string;
     /** should the close button be visible - default true */
@@ -47,20 +45,11 @@ interface ILightboxProps extends IGenericProps {
     /** Callback called when lightbox is opening. */
     onOpen?(): void;
 }
-type LightboxProps = ILightboxProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<LightboxProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<LightboxProps> {}
 
 /**
  * The display name of the component.
@@ -75,7 +64,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     ariaLabel: 'Lightbox',
     isCloseButtonVisible: true,
     isOpen: false,
@@ -86,7 +75,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     role: 'dialog',
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Displays content within a modal.
@@ -107,7 +95,7 @@ const Lightbox: React.FC<LightboxProps> = ({
     role = DEFAULT_PROPS.role,
     theme = DEFAULT_PROPS.theme,
     zIndex,
-}: LightboxProps): ReactElement => {
+}) => {
     const buttonRef: React.RefObject<HTMLButtonElement> = useRef(null);
     const childrenRef: React.RefObject<any> = useRef(null);
     const [isTrapActive, setTrapActive] = useState(false);
@@ -248,7 +236,5 @@ const Lightbox: React.FC<LightboxProps> = ({
     );
 };
 Lightbox.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps };

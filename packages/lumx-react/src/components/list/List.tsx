@@ -12,15 +12,13 @@ import {
 } from '@lumx/react/constants';
 
 import { ListItem, ListItemProps, ListItemSizes, Size, Theme } from '@lumx/react';
-import { IGenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks/useKeyboardListNavigation';
-
-/////////////////////////////
 /**
  * Defines the props of the component.
  */
-interface IListProps extends IGenericProps {
+interface ListProps extends GenericProps {
     /** List content (should use `<ListItem>`, `<ListSubheader>` or `<ListDivider>`) */
     children: ReactNode;
 
@@ -42,20 +40,11 @@ interface IListProps extends IGenericProps {
     /** Callback used to retrieved the select entry */
     onListItemSelected?(entry: ReactNode): void;
 }
-type ListProps = IListProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ListProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<ListProps> {}
 
 /**
  * The display name of the component.
@@ -70,14 +59,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     isClickable: false,
     itemPadding: Size.big,
     theme: Theme.light,
 };
-/////////////////////////////
 
-interface IList {
+interface List {
     useKeyboardListNavigation: useKeyboardListNavigationType;
 }
 
@@ -86,7 +74,7 @@ interface IList {
  *
  * @return The component.
  */
-const List: React.FC<ListProps> & IList = ({
+const List: React.FC<ListProps> & List = ({
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
     itemPadding = DEFAULT_PROPS.itemPadding,
@@ -95,7 +83,7 @@ const List: React.FC<ListProps> & IList = ({
     useCustomColors,
     theme = DEFAULT_PROPS.theme,
     ...props
-}: ListProps): ReactElement => {
+}) => {
     const children = Children.toArray(props.children);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
@@ -233,7 +221,5 @@ const List: React.FC<ListProps> & IList = ({
 
 List.displayName = COMPONENT_NAME;
 List.useKeyboardListNavigation = useKeyboardListNavigation;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, List, ListProps };

@@ -8,20 +8,16 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getBasicClass, getRootClassName } from '@lumx/react/utils';
 import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
-/////////////////////////////
-
 /**
  * The authorized values for the `emphasis` prop.
  * @deprecated Use Emphasis instead.
  */
 const ButtonEmphasis = Emphasis;
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface IBaseButtonProps extends BaseButtonProps {
+interface ButtonProps extends BaseButtonProps {
     /**
      * Button content.
      */
@@ -39,20 +35,11 @@ interface IBaseButtonProps extends BaseButtonProps {
      */
     rightIcon?: string;
 }
-type ButtonProps = IBaseButtonProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ButtonProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<ButtonProps> {}
 
 /**
  * The display name of the component.
@@ -67,13 +54,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     emphasis: Emphasis.high,
     size: Size.m,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * Displays a button.
@@ -108,7 +93,5 @@ const Button: React.FC<ButtonProps> = (props) => {
     );
 };
 Button.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ButtonEmphasis, Button, ButtonProps };

@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject, useCallback, useEffect, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -10,17 +10,15 @@ import {
     PAGINATION_ITEM_SIZE,
 } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/constants';
-import { IGenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface ISlideshowControlsProps extends IGenericProps {
+interface SlideshowControlsProps extends GenericProps {
     activeIndex?: number;
     parentRef: RefObject<HTMLDivElement>;
     slidesCount: number;
@@ -29,29 +27,19 @@ interface ISlideshowControlsProps extends IGenericProps {
     onNextClick?(): void;
     onPreviousClick?(): void;
 }
-type SlideshowControlsProps = ISlideshowControlsProps;
 
 /**
  * Defines the visible range of navigation items.
  */
-interface IPaginationRange {
+interface PaginationRange {
     minRange: number;
     maxRange: number;
 }
-type PaginationRange = IPaginationRange;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<SlideshowControlsProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<SlideshowControlsProps> {}
 
 /**
  * The display name of the component.
@@ -66,15 +54,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     activeIndex: 0,
     onNextClick: noop,
     onPaginationClick: noop,
     onPreviousClick: noop,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * Controls for the slideshow component.
@@ -97,7 +83,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Theme */
     theme = DEFAULT_PROPS.theme,
     ...props
-}: SlideshowControlsProps): ReactElement | null => {
+}) => {
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
         return null;
     }
@@ -240,8 +226,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         );
     };
 
-    //////////////////////
-
     const [visibleRange, setVisibleRange]: [
         PaginationRange,
         React.Dispatch<React.SetStateAction<PaginationRange>>,
@@ -317,7 +301,5 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     );
 };
 SlideshowControls.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, SlideshowControls, SlideshowControlsProps as SlideshowProps };

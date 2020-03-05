@@ -5,14 +5,12 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode } from 'react';
-
-/////////////////////////////
+import React, { ReactNode } from 'react';
 
 /**
  * Defines the props of the component.
  */
-interface IAutocompleteMultipleProps extends AutocompleteProps {
+interface AutocompleteMultipleProps extends AutocompleteProps {
     /**
      * The list of selected values.
      */
@@ -35,16 +33,6 @@ interface IAutocompleteMultipleProps extends AutocompleteProps {
         isDisabled?: boolean,
     ): ReactNode | string;
 }
-
-type AutocompleteMultipleProps = IAutocompleteMultipleProps;
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -81,15 +69,13 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     values: [],
 };
 
-/////////////////////////////
-
 /**
  * This component allows to create a multiple autocomplete, allowing the user to select multiple values from a
  * list that can be filtered.
  *
  * @return The component.
  */
-const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props: AutocompleteMultipleProps): ReactElement => {
+const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
     const {
         anchorToInput,
         className,
@@ -172,7 +158,5 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props: Autoco
     );
 };
 AutocompleteMultiple.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, AutocompleteMultiple, AutocompleteMultipleProps };

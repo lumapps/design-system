@@ -12,16 +12,14 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
-import { IGenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IDialogProps extends IGenericProps {
+interface DialogProps extends GenericProps {
     /**
      * Element(s) to display in the footer part.
      */
@@ -89,20 +87,10 @@ interface IDialogProps extends IGenericProps {
     onOpen?(): void;
 }
 
-type DialogProps = IDialogProps;
-
 type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -124,8 +112,6 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
     preventAutoClose: false,
     size: Size.big,
 };
-
-/////////////////////////////
 
 /**
  * Dialog component.
@@ -281,7 +267,5 @@ const Dialog: React.FC<DialogProps> = (props) => {
         : null;
 };
 Dialog.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Dialog, DialogProps, DialogSizes };

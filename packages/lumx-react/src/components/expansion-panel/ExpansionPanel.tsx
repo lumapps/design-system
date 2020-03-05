@@ -1,4 +1,4 @@
-import React, { Children, PropsWithChildren, ReactElement, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Children, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -12,19 +12,17 @@ import { ColorPalette, DragHandle, Emphasis, IconButton, Theme } from '@lumx/rea
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import {
     Callback,
-    IGenericProps,
+    GenericProps,
     getRootClassName,
     handleBasicClasses,
     isComponent,
     partitionMulti,
 } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface IExpansionPanelProps extends IGenericProps {
+interface ExpansionPanelProps extends GenericProps {
     /** The color theme. */
     theme?: Theme;
 
@@ -49,9 +47,6 @@ interface IExpansionPanelProps extends IGenericProps {
     /** The function called on open or close. */
     toggleCallback?(shouldOpen: boolean): void;
 }
-type ExpansionPanelProps = IExpansionPanelProps;
-
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -74,9 +69,7 @@ const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
-/////////////////////////////
-
-const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProps): ReactElement => {
+const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const {
         label,
         theme = DEFAULT_PROPS.theme,
@@ -169,7 +162,5 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props: ExpansionPanelProp
     );
 };
 ExpansionPanel.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps };

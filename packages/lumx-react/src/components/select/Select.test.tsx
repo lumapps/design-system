@@ -7,25 +7,23 @@ import { Kind, Theme } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant } from './Select';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<SelectProps>;
+type SetupProps = Partial<SelectProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * [Enter the description of this wrapper].
@@ -38,8 +36,6 @@ interface ISetup extends ICommonSetup {
     container: Wrapper;
 }
 
-/////////////////////////////
-
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
@@ -47,7 +43,7 @@ interface ISetup extends ICommonSetup {
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: SelectProps = {
         children: <span>Select Component</span>,
         value: [],
@@ -88,14 +84,12 @@ describe(`<${Select.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         // Here are some examples of basic props check.
 
         it('should have default classNames', () => {
-            const { wrapper, container }: ISetup = setup();
+            const { wrapper, container }: Setup = setup();
             wrapper.update();
 
             expect(container).toHaveClassName(CLASSNAME);
@@ -107,7 +101,7 @@ describe(`<${Select.displayName}>`, () => {
 
         it('should use the given `theme`', () => {
             const testedProp = 'theme';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: Theme.dark,
             };
 
@@ -123,7 +117,7 @@ describe(`<${Select.displayName}>`, () => {
 
         it('should use the given `isValid`', () => {
             const testedProp = 'isValid';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: true,
             };
 
@@ -136,7 +130,7 @@ describe(`<${Select.displayName}>`, () => {
 
         it('should use the given `hasError`', () => {
             const testedProp = 'hasError';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: true,
             };
 
@@ -169,7 +163,7 @@ describe(`<${Select.displayName}>`, () => {
 
         it('should use the given `value`', () => {
             const testedProp = 'value';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: [''],
             };
 
@@ -185,7 +179,7 @@ describe(`<${Select.displayName}>`, () => {
 
         it('should use the given `isMultiple`', () => {
             const testedProp = 'isMultiple';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: true,
                 value: ['', ''],
             };
@@ -235,8 +229,6 @@ describe(`<${Select.displayName}>`, () => {
             expect(helper).toExist();
         });
     });
-
-    /////////////////////////////
 
     // 3. Test events.
     describe('Events', () => {
@@ -313,8 +305,6 @@ describe(`<${Select.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         describe('Input variant', () => {
@@ -328,7 +318,7 @@ describe(`<${Select.displayName}>`, () => {
 
             describe('Has value', () => {
                 const value = 'Value';
-                const hasValueProps: Partial<ISetupProps> = {
+                const hasValueProps: Partial<SetupProps> = {
                     value: [value],
                     variant: SelectVariant.input,
                 };
@@ -349,7 +339,7 @@ describe(`<${Select.displayName}>`, () => {
                 const value1 = 'Value1';
                 const value2 = 'Value2';
                 const value3 = 'Value3';
-                const hasMultipleValues: Partial<ISetupProps> = {
+                const hasMultipleValues: Partial<SetupProps> = {
                     isMultiple: true,
                     value: [value1, value2, value3],
                     variant: SelectVariant.input,
@@ -385,7 +375,7 @@ describe(`<${Select.displayName}>`, () => {
 
             describe('No value', () => {
                 const placeholder = 'My placeholder';
-                const hasNoValueProps: Partial<ISetupProps> = {
+                const hasNoValueProps: Partial<SetupProps> = {
                     placeholder,
                     value: [],
                     variant: SelectVariant.input,
@@ -414,7 +404,7 @@ describe(`<${Select.displayName}>`, () => {
 
             describe('Has value', () => {
                 const value = 'Value';
-                const hasValueProps: Partial<ISetupProps> = {
+                const hasValueProps: Partial<SetupProps> = {
                     value: [value],
                     variant: SelectVariant.chip,
                 };
@@ -456,7 +446,7 @@ describe(`<${Select.displayName}>`, () => {
                 const value1 = 'Value1';
                 const value2 = 'Value2';
                 const value3 = 'Value3';
-                const hasMultipleValues: Partial<ISetupProps> = {
+                const hasMultipleValues: Partial<SetupProps> = {
                     isMultiple: true,
                     value: [value1, value2, value3],
                     variant: SelectVariant.chip,
@@ -474,7 +464,7 @@ describe(`<${Select.displayName}>`, () => {
             });
 
             describe('No value', () => {
-                const hasNoValue: Partial<ISetupProps> = {
+                const hasNoValue: Partial<SetupProps> = {
                     value: [],
                     variant: SelectVariant.chip,
                 };
@@ -500,14 +490,10 @@ describe(`<${Select.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });

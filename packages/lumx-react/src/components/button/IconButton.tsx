@@ -1,36 +1,25 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import { Emphasis, Icon, Size, Theme } from '@lumx/react';
 import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getRootClassName } from '@lumx/react/utils';
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface IIconButtonProps extends BaseButtonProps {
+interface IconButtonProps extends BaseButtonProps {
     /**
      * The icon used as the button label.
      * @see {@link IconProps#icon}
      */
     icon: string;
 }
-type IconButtonProps = IIconButtonProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<IconButtonProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<IconButtonProps> {}
 
 /**
  * The display name of the component.
@@ -45,20 +34,18 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     emphasis: Emphasis.high,
     size: Size.m,
     theme: Theme.light,
 };
-
-/////////////////////////////
 
 /**
  * Displays an icon button.
  *
  * @return The component.
  */
-const IconButton: React.FC<IconButtonProps> = (props: IconButtonProps): ReactElement => {
+const IconButton: React.FC<IconButtonProps> = (props) => {
     const {
         emphasis = DEFAULT_PROPS.emphasis,
         icon,
@@ -74,7 +61,5 @@ const IconButton: React.FC<IconButtonProps> = (props: IconButtonProps): ReactEle
     );
 };
 IconButton.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps };

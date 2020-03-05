@@ -1,20 +1,18 @@
-import React, { ReactElement, ReactNode, RefObject, useRef } from 'react';
+import React, { ReactNode, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
 import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
-
-/////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface IAutocompleteProps extends IGenericProps {
+interface AutocompleteProps extends GenericProps {
     /**
      * Whether the suggestions list should display anchored to the input
      * If false, it will be anchored to the text field wrapper.
@@ -166,15 +164,6 @@ interface IAutocompleteProps extends IGenericProps {
      */
     onBlur?(event: React.FocusEvent): void;
 }
-type AutocompleteProps = IAutocompleteProps;
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
@@ -197,15 +186,13 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     shouldFocusOnClose: false,
 };
 
-/////////////////////////////
-
 /**
  * This component allows to make the connection between a Text Field and a Dropdown,
  * displaying a list of suggestions from the text entered on the text field.
  *
  * @return The component.
  */
-const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): ReactElement => {
+const Autocomplete: React.FC<AutocompleteProps> = (props) => {
     const {
         anchorToInput = DEFAULT_PROPS.anchorToInput,
         className,
@@ -289,7 +276,5 @@ const Autocomplete: React.FC<AutocompleteProps> = (props: AutocompleteProps): Re
     );
 };
 Autocomplete.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Autocomplete, AutocompleteProps };

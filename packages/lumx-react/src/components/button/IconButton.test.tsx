@@ -3,21 +3,19 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps } from './IconButton';
-
-/////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<IconButtonProps>;
+type SetupProps = Partial<IconButtonProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * ButtonRoot element.
@@ -37,7 +35,7 @@ interface ISetup extends ICommonSetup {
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...props }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...props }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     // @ts-ignore
     const wrapper: Wrapper = renderer(<IconButton {...props} />);
@@ -60,8 +58,6 @@ describe(`<${IconButton.displayName}>`, () => {
             expect(icon).toExist();
         });
     });
-
-    /////////////////////////////
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
@@ -87,28 +83,20 @@ describe(`<${IconButton.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { prop: 'buttonRoot' }, { className: CLASSNAME });

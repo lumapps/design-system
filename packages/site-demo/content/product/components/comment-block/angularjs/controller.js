@@ -1,17 +1,9 @@
 import { mdiDotsVertical, mdiHeart, mdiReply } from '@lumx/icons';
 
-/////////////////////////////
-
 function DemoController(LxNotificationService) {
     'ngInject';
 
     const vm = this;
-
-    /////////////////////////////
-    //                         //
-    //    Public attributes    //
-    //                         //
-    /////////////////////////////
 
     /**
      * The comments.
@@ -60,12 +52,6 @@ function DemoController(LxNotificationService) {
         mdiReply,
     };
 
-    /////////////////////////////
-    //                         //
-    //     Public functions    //
-    //                         //
-    /////////////////////////////
-
     /**
      * Callback on user block click.
      */
@@ -87,17 +73,11 @@ function DemoController(LxNotificationService) {
         LxNotificationService.success('Mouse leave callback');
     }
 
-    /////////////////////////////
-
     vm.onClick = onClick;
     vm.onMouseEnter = onMouseEnter;
     vm.onMouseLeave = onMouseLeave;
 }
 
-/////////////////////////////
-
 angular.module('design-system').controller('DemoController', DemoController);
-
-/////////////////////////////
 
 export { DemoController };

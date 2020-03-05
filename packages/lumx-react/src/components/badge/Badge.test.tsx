@@ -3,28 +3,24 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
-import { Badge, CLASSNAME, DEFAULT_PROPS, IBaseBadgeProps } from './Badge';
-
-/////////////////////////////
+import { Badge, BaseBadgeProps, CLASSNAME, DEFAULT_PROPS } from './Badge';
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
+interface Setup extends CommonSetup {
     badge: Wrapper;
-    props: Partial<IBaseBadgeProps>;
+    props: Partial<BaseBadgeProps>;
 
     /**
      * The <div> element wrapper.
      */
     wrapper: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -34,8 +30,8 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<IBaseBadgeProps> = {}, shallowRendering: boolean = true): ISetup => {
-    const props: IBaseBadgeProps = {
+const setup = ({ ...propsOverrides }: Partial<BaseBadgeProps> = {}, shallowRendering: boolean = true): Setup => {
+    const props: BaseBadgeProps = {
         children: <span>30</span>,
         ...propsOverrides,
     };
@@ -63,8 +59,6 @@ describe(`<${Badge.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use default props', () => {
@@ -79,7 +73,7 @@ describe(`<${Badge.displayName}>`, () => {
 
         it('should use the given `theme`', () => {
             const testedProp = 'color';
-            const modifiedProps: Partial<IBaseBadgeProps> = {
+            const modifiedProps: Partial<BaseBadgeProps> = {
                 [testedProp]: Theme.dark,
             };
 
@@ -94,27 +88,20 @@ describe(`<${Badge.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 3. Test events.
     describe('Events', () => {
         // Nothing to do here.
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'badge', prop: 'badge' }, { className: CLASSNAME });

@@ -1,31 +1,20 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-interface IListDividerProps extends IGenericProps {}
-type ListDividerProps = IListDividerProps;
-
-/////////////////////////////
+interface ListDividerProps extends GenericProps {}
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<ListDividerProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<ListDividerProps> {}
 
 /**
  * The display name of the component.
@@ -40,19 +29,16 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {};
-/////////////////////////////
+const DEFAULT_PROPS: DefaultPropsType = {};
 
 /**
  * Renders a thin line that will acts as a divider in List
  *
  * @return The component.
  */
-const ListDivider: React.FC<ListDividerProps> = ({ className = '', ...props }: ListDividerProps): ReactElement => {
+const ListDivider: React.FC<ListDividerProps> = ({ className = '', ...props }) => {
     return <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props} />;
 };
 ListDivider.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, ListDivider, ListDividerProps };

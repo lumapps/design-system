@@ -11,15 +11,13 @@ import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker } from './DatePicker';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
-import { IGenericProps } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
 
-interface IDatePickerFieldProps extends IGenericProps {
+interface DatePickerFieldProps extends GenericProps {
     /** Locale. */
     locale: string;
 
@@ -35,22 +33,11 @@ interface IDatePickerFieldProps extends IGenericProps {
     /** On change. */
     onChange(value: moment.Moment | undefined): void;
 }
-type DatePickerFieldProps = IDatePickerFieldProps;
-
-/////////////////////////////
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
 
 /**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
-
-/////////////////////////////
 
 /**
  * Simple component used to pick a date (ready-to-use wrapped implementation).
@@ -170,7 +157,5 @@ const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFie
     );
 };
 DatePickerField.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, COMPONENT_NAME, DatePickerField, DatePickerFieldProps };

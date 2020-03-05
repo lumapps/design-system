@@ -4,8 +4,6 @@ import React, { ReactElement, useContext } from 'react';
 import { mdiAngularjs, mdiReact } from '@lumx/icons';
 import { Button, Emphasis, Size } from '@lumx/react';
 
-/////////////////////////////
-
 /**
  * The engine selector component.
  * Display a select with the list of all available engines.
@@ -39,7 +37,5 @@ const EngineSelector: React.FC = (): ReactElement | null => {
             return null;
     }
 };
-
-/////////////////////////////
 
 export { EngineSelector };

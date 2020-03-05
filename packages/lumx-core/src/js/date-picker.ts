@@ -8,18 +8,12 @@ const moment = extendMoment(mMoment);
 
 const DAYS_PER_WEEK = 7;
 
-interface IAnnotatedDate {
+interface AnnotatedDate {
     date: Moment;
     isDisplayed: boolean;
     isClickable: boolean;
     isToday: boolean;
 }
-
-/////////////////////////////
-//                         //
-//     Public functions    //
-//                         //
-/////////////////////////////
 
 /**
  * Get the list of days in a week based on locale.
@@ -85,7 +79,7 @@ function getAnnotatedMonthCalendar(
     maxDate?: Date,
     today?: Moment,
     monthOffset?: number,
-): IAnnotatedDate[] {
+): AnnotatedDate[] {
     const month = moment(today)
         .locale(locale)
         .add(monthOffset, 'months')
@@ -102,7 +96,5 @@ function getAnnotatedMonthCalendar(
         };
     });
 }
-
-/////////////////////////////
 
 export { getWeekDays, getMonthCalendar, getAnnotatedMonthCalendar };

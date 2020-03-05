@@ -5,31 +5,27 @@ import 'jest-enzyme';
 import { build } from 'test-data-bot';
 
 import { mdiCheck } from '@lumx/icons';
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, Tab, TabProps } from './Tab';
 
-/////////////////////////////
-
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<TabProps>;
+type SetupProps = Partial<TabProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /**
      * The <div> element that wraps tab.
      */
     wrapper: Wrapper;
 }
-
-/////////////////////////////
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -39,7 +35,7 @@ interface ISetup extends ICommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: TabProps = {
         ...propsOverrides,
     };
@@ -67,30 +63,28 @@ describe(`<${Tab.displayName}>`, () => {
         });
     });
 
-    /////////////////////////////
-
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use the given props', () => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
                 children: 'Tab Content',
                 icon: mdiCheck,
                 label: 'Test Tab Label',
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            const modifiedProps: SetupProps = modifiedPropsBuilder();
 
             const { wrapper } = setup({ ...modifiedProps });
             expect(wrapper).toMatchSnapshot();
         });
 
         it('should use the given props to add classes', () => {
-            const modifiedPropsBuilder: () => ISetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
                 isActive: true,
                 isDisabled: true,
             });
 
-            const modifiedProps: ISetupProps = modifiedPropsBuilder();
+            const modifiedProps: SetupProps = modifiedPropsBuilder();
 
             const { wrapper } = setup({ ...modifiedProps });
 
@@ -101,8 +95,6 @@ describe(`<${Tab.displayName}>`, () => {
             });
         });
     });
-
-    /////////////////////////////
 
     // 3. Test events.
     describe('Events', () => {
@@ -133,21 +125,16 @@ describe(`<${Tab.displayName}>`, () => {
             expect(onTabClick).not.toHaveBeenCalled();
         });
     });
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
         // Nothing to do here.
     });
 
-    /////////////////////////////
-
     // 5. Test state.
     describe('State', () => {
         // Nothing to do here.
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, {}, { className: CLASSNAME });

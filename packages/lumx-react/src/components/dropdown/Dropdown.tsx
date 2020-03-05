@@ -9,14 +9,12 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
-import { IGenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-interface IDropdownProps extends IGenericProps {
+interface DropdownProps extends GenericProps {
     /** The reference of the DOM element used to set the position of the Dropdown. */
     anchorRef: React.RefObject<HTMLElement>;
     /** Children of the Dropdown. */
@@ -44,20 +42,11 @@ interface IDropdownProps extends IGenericProps {
      */
     onInfinite?: VoidFunction;
 }
-type DropdownProps = IDropdownProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<DropdownProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<DropdownProps> {}
 
 /**
  * The display name of the component.
@@ -72,7 +61,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     closeOnClick: true,
     closeOnEscape: true,
     fitToAnchorWidth: true,
@@ -80,8 +69,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     shouldFocusOnOpen: true,
     showDropdown: undefined,
 };
-
-/////////////////////////////
 
 /**
  * Displays a dropdown.
@@ -180,7 +167,5 @@ const Dropdown: React.FC<DropdownProps> = ({
     ) : null;
 };
 Dropdown.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps };

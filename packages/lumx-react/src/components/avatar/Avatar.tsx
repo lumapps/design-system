@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactElement, ReactNode } from 'react';
+import React, { CSSProperties, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -6,7 +6,7 @@ import { Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { getRootClassName } from '../../utils/getRootClassName';
 
 /**
@@ -14,12 +14,10 @@ import { getRootClassName } from '../../utils/getRootClassName';
  */
 type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface IAvatarProps extends IGenericProps {
+interface AvatarProps extends GenericProps {
     /** Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
     /** Size. */
@@ -29,20 +27,11 @@ interface IAvatarProps extends IGenericProps {
     /** Avatar image */
     image: string;
 }
-type AvatarProps = IAvatarProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<AvatarProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<AvatarProps> {}
 
 /**
  * The display name of the component.
@@ -57,12 +46,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     actions: undefined,
     size: Size.m,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * Simple component used to identify user.
@@ -76,7 +64,7 @@ const Avatar: React.FC<AvatarProps> = ({
     theme = DEFAULT_PROPS.theme,
     image,
     ...props
-}: AvatarProps): ReactElement => {
+}) => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
@@ -94,7 +82,5 @@ const Avatar: React.FC<AvatarProps> = ({
     );
 };
 Avatar.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps, AvatarSize };

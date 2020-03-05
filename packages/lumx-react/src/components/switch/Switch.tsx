@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode } from 'react';
+import React, { Children } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
@@ -9,21 +9,17 @@ import isEmpty from 'lodash/isEmpty';
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses, validateComponent } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 enum SwitchPosition {
     left = 'left',
     right = 'right',
 }
 
-/////////////////////////////
-
 /**
  * Defines the props of the component.
  */
-interface ISwitchProps extends IGenericProps {
+interface SwitchProps extends GenericProps {
     /**
      * Indicates if it is toggled on or not.
      */
@@ -50,20 +46,11 @@ interface ISwitchProps extends IGenericProps {
     /** Switch value change handler. */
     onToggle?(enabled: boolean): void;
 }
-type SwitchProps = ISwitchProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<SwitchProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<SwitchProps> {}
 
 /**
  * The display name of the component.
@@ -78,35 +65,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     checked: false,
     position: SwitchPosition.left,
     theme: Theme.light,
 };
-
-/////////////////////////////
-//                         //
-//    Private functions    //
-//                         //
-/////////////////////////////
-
-/**
- * Validate the component props and children.
- * Also, sanitize, cleanup and format the children and return the processed ones.
- *
- * @param props The children and props of the component.
- * @return    The processed children of the component.
- */
-function _validate(props: SwitchProps): ReactNode {
-    return validateComponent(COMPONENT_NAME, {
-        allowedTypes: ['text', <span />],
-        maxChildren: 1,
-        minChildren: 0,
-        props,
-    });
-}
-
-/////////////////////////////
 
 /**
  * [Enter the description of the component here].
@@ -123,10 +86,8 @@ const Switch: React.FC<SwitchProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     ...props
-}: SwitchProps): ReactElement => {
+}) => {
     const switchId: string = uuid();
-
-    const newChildren: ReactNode = _validate({ children, checked, helper, position, theme, ...props });
 
     /**
      * Toggle the state of the <Switch> inner checkbox.
@@ -170,10 +131,10 @@ const Switch: React.FC<SwitchProps> = ({
                 </div>
             </div>
 
-            {Children.count(newChildren) > 0 && (
+            {Children.count(children) > 0 && (
                 <div className={`${CLASSNAME}__content`}>
                     <InputLabel htmlFor={switchId} theme={theme} className={`${CLASSNAME}__label`}>
-                        {newChildren}
+                        {children}
                     </InputLabel>
                     {!isEmpty(helper) && (
                         <InputHelper theme={theme} className={`${CLASSNAME}__helper`}>
@@ -186,7 +147,5 @@ const Switch: React.FC<SwitchProps> = ({
     );
 };
 Switch.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Switch, SwitchProps, SwitchPosition };

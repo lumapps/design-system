@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-/////////////////////////////
-
-interface IUseChipGroupNavigation {
+interface UseChipGroupNavigation {
     /** the current active chip index */
     activeChip: number;
 
@@ -17,7 +15,7 @@ type useChipGroupNavigationType<C = any> = (
     chips: C[],
     onChipDeleted: (chip: C) => void,
     initialActiveChip?: number,
-) => IUseChipGroupNavigation;
+) => UseChipGroupNavigation;
 
 const INITIAL_STATE_ACTIVE_CHIP = -1;
 

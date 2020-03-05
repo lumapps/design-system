@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Autocomplete, List, ListItem, Size } from '@lumx/react';
 
-interface ICity {
+interface City {
     id: string;
     text: string;
 }
 
-const CITIES: ICity[] = [
+const CITIES: City[] = [
     {
         id: 'losangeles',
         text: 'Los Angeles',
@@ -70,7 +70,7 @@ const App = ({ theme }: any) => {
      * the suggestions dropdown.
      * @param city City selected from the list.
      */
-    const setSelectedCity = (city: ICity) => {
+    const setSelectedCity = (city: City) => {
         setFilterValue(city.text);
         setShowSuggestions(false);
     };

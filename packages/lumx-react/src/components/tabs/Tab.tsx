@@ -1,23 +1,15 @@
-import React, {
-    AnchorHTMLAttributes,
-    KeyboardEventHandler,
-    MouseEventHandler,
-    ReactElement,
-    SyntheticEvent,
-} from 'react';
+import React, { AnchorHTMLAttributes, KeyboardEventHandler, MouseEventHandler, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
 import { Icon, IconProps, Size } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
-import { IGenericProps, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-interface ITabProps extends IGenericProps {
+interface TabProps extends GenericProps {
     /** Tab index */
     index?: number;
     /** Tab icon */
@@ -31,20 +23,11 @@ interface ITabProps extends IGenericProps {
     /** Function to trigger on tab click */
     onTabClick?(e: { event: SyntheticEvent; index?: number }): void;
 }
-type TabProps = ITabProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<TabProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<TabProps> {}
 
 /**
  * The display name of the component.
@@ -59,14 +42,12 @@ const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     icon: undefined,
     isActive: false,
     isDisabled: false,
     label: undefined,
 };
-
-/////////////////////////////
 
 /**
  * Define a single Tab for Tabs component.
@@ -82,7 +63,7 @@ const Tab: React.FC<TabProps> = ({
     label = DEFAULT_PROPS.label,
     onTabClick,
     ...props
-}: TabProps): ReactElement => {
+}) => {
     const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
 
     const handleTabClick: MouseEventHandler = (event) => {
@@ -113,7 +94,5 @@ const Tab: React.FC<TabProps> = ({
     );
 };
 Tab.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, Tab, TabProps };

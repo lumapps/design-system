@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { FocusedImage, ILumHTMLImageElement } from './FocusedImage';
-import { IFocusPoint } from './IFocusedImageOptions';
+import { FocusedImage, LumHTMLImageElement } from './FocusedImage';
+import { FocusPoint } from './FocusedImageOptions';
 
-const useFocusedImage = (focus: IFocusPoint) => {
+const useFocusedImage = (focus: FocusPoint) => {
     const focusRef = useRef<FocusedImage>();
 
     useEffect(() => {
@@ -11,13 +11,14 @@ const useFocusedImage = (focus: IFocusPoint) => {
     }, [focusRef.current, focus?.x, focus?.y]);
 
     return useCallback((f: HTMLImageElement) => {
-        if (!focusRef.current) {
-            focusRef.current = new FocusedImage(f as ILumHTMLImageElement, {
-                debounceTime: 17,
-                focus,
-                updateOnWindowResize: true,
-            });
+        if (focusRef.current) {
+            return;
         }
+        focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
+            debounceTime: 17,
+            focus,
+            updateOnWindowResize: true,
+        });
     }, []);
 };
 

@@ -5,14 +5,12 @@ import classNames from 'classnames';
 import { AspectRatio, ColorPalette, ColorVariant, Link, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
-
-/////////////////////////////
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-interface IWebBookmarkProps extends IGenericProps {
+interface WebBookmarkProps extends GenericProps {
     /** The url of the link. */
     url: string;
     /** Content text. Can be either a string, or sanitized html. */
@@ -30,20 +28,11 @@ interface IWebBookmarkProps extends IGenericProps {
     /** Link title */
     title?: string;
 }
-type WebBookmarkProps = IWebBookmarkProps;
-
-/////////////////////////////
 
 /**
  * Define the types of the default props.
  */
-interface IDefaultPropsType extends Partial<WebBookmarkProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
+interface DefaultPropsType extends Partial<WebBookmarkProps> {}
 
 /**
  * The display name of the component.
@@ -58,11 +47,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     size: Size.regular,
     theme: Theme.light,
 };
-/////////////////////////////
 
 /**
  * WebBookmark Element that display a Lumapps post
@@ -126,7 +114,5 @@ const WebBookmark: React.FC<WebBookmarkProps> = ({
 };
 
 WebBookmark.displayName = COMPONENT_NAME;
-
-/////////////////////////////
 
 export { CLASSNAME, DEFAULT_PROPS, WebBookmark, WebBookmarkProps };
