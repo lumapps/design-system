@@ -264,6 +264,7 @@ const Select: React.FC<SelectProps> = ({
     const selectRef = useRef<HTMLDivElement>(null);
     const [isFocus, setIsFocus] = useState(Boolean(isOpen));
     const [wasBlurred, setWasBlurred] = useState(false);
+    // TODO: use this prop when calling the withSelectContext
     const hasInputClear = onClear && !isMultiple && !isEmpty;
 
     useHandleElementFocus(anchorRef.current, setIsFocus, Boolean(isOpen), wasBlurred, setWasBlurred, onBlur);

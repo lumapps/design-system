@@ -1,4 +1,4 @@
-import React, { ReactNode, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -9,76 +9,16 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { SelectVariant } from './constants';
+import { ICoreSelectProps, SelectVariant } from './constants';
 
 /////////////////////////////
 
 /**
  * Defines the props of the component.
  */
-interface ISelectProps extends IGenericProps {
-    value: any;
-
-    /** Whether the select (input variant) is displayed with error style or not. */
-    hasError?: boolean;
-
-    /** The error related to the component */
-    error?: string | ReactNode;
-
-    /** The helper to display within the popover (last position). */
-    helper?: string;
-
-    /** Whether the select is disabled or not. */
-    isDisabled?: boolean;
-
-    /** Whether the select is required or not. */
-    isRequired?: boolean;
-
-    /** Whether the select is opened or not. */
-    isOpen?: boolean;
-
-    /** Whether the select (input variant) is displayed with valid style or not. */
-    isValid?: boolean;
-
-    /** The select label. */
-    label?: string;
-
-    /** The select placeholder (input variant). */
-    placeholder?: string;
-
-    /** The theme. */
-    theme?: Theme;
-
-    /** Whether custom colors are applied to this component. */
-    useCustomColors?: boolean;
-
-    /** The selected choices area style. */
-    variant?: SelectVariant;
-
-    /** The callback function called when the clear button is clicked. NB: if not specified, clear buttons won't be displayed. */
-    onClear?(event: SyntheticEvent, value?: string): void;
-
-    /** The callback function called when the select field is blurred */
-    onBlur?(): void;
-
-    /** The callback function called on integrated search field change (500ms debounce). */
-    onFilter?(): void;
-
-    /** The callback function called when the select input is clicked, can be used for dropdown toggle. */
-    onInputClick?(): void;
-
-    /** The callback function called when the dropdown is closed. */
-    onDropdownClose?(): void;
-
-    /** The callback function called when the bottom of the dropdown is reached. */
-    onInfiniteScroll?(): void;
-
-    /** The function called to render the selected value. Default: Renders the value as a string. */
-    selectedValueRender?(choice: string): ReactNode | string;
-}
-type SelectProps = ISelectProps;
+type SelectProps = ICoreSelectProps;
 
 /////////////////////////////
 
@@ -196,7 +136,6 @@ const withSelectContext = (
     const selectRef = useRef<HTMLDivElement>(null);
     const [isFocus, setIsFocus] = useState(Boolean(isOpen));
     const [wasBlurred, setWasBlurred] = useState(false);
-    const hasInputClear = onClear && !isMultiple && !isEmpty;
 
     useHandleElementFocus(anchorRef.current, setIsFocus, Boolean(isOpen), wasBlurred, setWasBlurred, onBlur);
 
@@ -229,7 +168,6 @@ const withSelectContext = (
                 className,
                 handleBasicClasses({
                     hasError,
-                    hasInputClear,
                     hasLabel: Boolean(label),
                     hasMultiple: !isEmpty && isMultiple,
                     hasPlaceholder: Boolean(placeholder),
@@ -291,4 +229,4 @@ const withSelectContext = (
 
 /////////////////////////////
 
-export { withSelectContext };
+export { DEFAULT_PROPS, withSelectContext };

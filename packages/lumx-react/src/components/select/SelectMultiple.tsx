@@ -4,8 +4,7 @@ import classNames from 'classnames';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
-import { Emphasis, Size } from '@lumx/react/components';
-import { IconButton } from '@lumx/react/components/button/IconButton';
+import { Size } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
 import { ChipGroup } from '@lumx/react/components/chip/ChipGroup';
 import { Icon } from '@lumx/react/components/icon/Icon';
@@ -87,8 +86,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
 };
 /////////////////////////////
 
-const stopPropagation = (evt: Event) => evt.stopPropagation();
-
 /**
  * Select Multiple component.
  *
@@ -110,7 +107,6 @@ const SelectMultiple: React.FC<any> = ({
     anchorRef,
     isRequired,
     isDisabled,
-    hasInputClear,
     selectedChipRender = DEFAULT_PROPS.selectedChipRender,
     selectedValueRender = DEFAULT_PROPS.selectedValueRender,
 }): React.ReactElement => {
@@ -166,18 +162,6 @@ const SelectMultiple: React.FC<any> = ({
                             </div>
                         )}
 
-                        {hasInputClear && (
-                            <IconButton
-                                className={`${CLASSNAME}__input-clear`}
-                                icon={mdiCloseCircle}
-                                emphasis={Emphasis.low}
-                                size={Size.s}
-                                theme={theme}
-                                onClick={onClear}
-                                onKeyDown={stopPropagation}
-                            />
-                        )}
-
                         <div className={`${CLASSNAME}__input-indicator`}>
                             <Icon icon={mdiMenuDown} size={Size.s} />
                         </div>
@@ -209,11 +193,10 @@ const SelectMultiple: React.FC<any> = ({
         </>
     );
 };
-SelectMultiple.displayName = COMPONENT_NAME;
 
 /////////////////////////////
 
-const selectMultipleWithContext = (props) =>
+const selectMultipleWithContext = (props: any) =>
     withSelectContext(SelectMultiple, {
         ...props,
         className: classNames(
@@ -225,5 +208,7 @@ const selectMultipleWithContext = (props) =>
             }),
         ),
     });
+
+selectMultipleWithContext.displayName = COMPONENT_NAME;
 
 export { CLASSNAME, DEFAULT_PROPS, selectMultipleWithContext as SelectMultiple, SelectMultipleProps, SelectVariant };

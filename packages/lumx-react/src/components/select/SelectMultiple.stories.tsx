@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Chip, List, ListItem, SelectMultiple, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 import noop from 'lodash/noop';
