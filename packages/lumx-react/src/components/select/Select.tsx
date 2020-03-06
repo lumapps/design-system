@@ -1,6 +1,7 @@
 import React, { RefObject } from 'react';
 
 import classNames from 'classnames';
+import lodashIsEmpty from 'lodash/isEmpty';
 
 import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
@@ -35,6 +36,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: IDefaultPropsType = {
+    hasError: false,
+    isOpen: false,
+    isValid: false,
     selectedValueRender: (choice) => choice,
 };
 
@@ -101,7 +105,7 @@ const Select: React.FC<SelectProps> = ({
 
                         {!isEmpty && (
                             <div className={`${CLASSNAME}__input-native`}>
-                                <span>{selectedValueRender!(value[0])}</span>
+                                <span>{selectedValueRender!(value)}</span>
                             </div>
                         )}
 
@@ -142,7 +146,7 @@ const Select: React.FC<SelectProps> = ({
                 >
                     {isEmpty && <span>{label}</span>}
 
-                    {!isEmpty && <span>{selectedValueRender!(value[0])}</span>}
+                    {!isEmpty && <span>{selectedValueRender!(value)}</span>}
                 </Chip>
             )}
         </>
@@ -150,7 +154,7 @@ const Select: React.FC<SelectProps> = ({
 };
 
 const SelectWithContext = (props: SelectProps) => {
-    const isEmpty = props.value.length === 0;
+    const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && !isEmpty;
 
     return withSelectContext(Select, {

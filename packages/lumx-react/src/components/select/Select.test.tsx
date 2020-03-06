@@ -12,16 +12,13 @@ import { getBasicClass } from '@lumx/react/utils';
 
 import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
-import { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant } from './Select';
+import { CLASSNAME, Select, SelectProps, SelectVariant } from './Select';
+import { DEFAULT_PROPS } from './WithSelectContext';
 
-/**
- * Define the overriding properties waited by the `setup` function.
- */
+/** Define the overriding properties waited by the `setup` function. */
 type SetupProps = Partial<SelectProps>;
 
-/**
- * Defines what the `setup` function will return.
- */
+/** Defines what the `setup` function will return. */
 interface Setup extends CommonSetup {
     props: SetupProps;
 
@@ -46,7 +43,7 @@ interface Setup extends CommonSetup {
 const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: SelectProps = {
         children: <span>Select Component</span>,
-        value: [],
+        value: '',
         ...propsOverrides,
     };
 
@@ -64,7 +61,7 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
         helper: wrapper.findWhere(
             (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === undefined,
         ),
-        input: wrapper.find('#uuid'),
+        input: wrapper.find('#uuid').first(),
         props,
         wrapper,
     };
@@ -73,8 +70,6 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
 describe(`<${Select.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
-        // Here is an example of a basic rendering check, with snapshot.
-
         it('should render correctly', () => {
             const { container, wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
@@ -86,8 +81,6 @@ describe(`<${Select.displayName}>`, () => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        // Here are some examples of basic props check.
-
         it('should have default classNames', () => {
             const { wrapper, container }: Setup = setup();
             wrapper.update();
@@ -164,30 +157,12 @@ describe(`<${Select.displayName}>`, () => {
         it('should use the given `value`', () => {
             const testedProp = 'value';
             const modifiedProps: SetupProps = {
-                [testedProp]: [''],
+                [testedProp]: 'val1',
             };
 
             const { container } = setup(modifiedProps);
 
             expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasUnique', value: true }));
-            expect(container).not.toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: 'hasMultiple', value: true }),
-            );
-            expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasValue', value: true }));
-            expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
-        });
-
-        it('should use the given `isMultiple`', () => {
-            const testedProp = 'isMultiple';
-            const modifiedProps: SetupProps = {
-                [testedProp]: true,
-                value: ['', ''],
-            };
-
-            const { container } = setup(modifiedProps);
-
-            expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasUnique', value: true }));
-            expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasMultiple', value: true }));
             expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasValue', value: true }));
             expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
@@ -232,8 +207,6 @@ describe(`<${Select.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        // Here is an example how to check a `onClick` event.
-
         const onClick: jest.Mock = jest.fn();
 
         beforeEach(() => {
@@ -242,7 +215,7 @@ describe(`<${Select.displayName}>`, () => {
 
         describe('should trigger `onInputClick` when the select button is clicked', () => {
             it('with input variant', () => {
-                const { input } = setup({ onInputClick: onClick, variant: SelectVariant.input });
+                const { input } = setup({ onInputClick: onClick, variant: SelectVariant.input }, false);
 
                 input.simulate('click');
 
@@ -250,7 +223,7 @@ describe(`<${Select.displayName}>`, () => {
             });
 
             it('with chip variant', () => {
-                const { input } = setup({ onInputClick: onClick, variant: SelectVariant.chip });
+                const { input } = setup({ onInputClick: onClick, variant: SelectVariant.chip }, false);
 
                 input.simulate('click');
 
@@ -261,47 +234,13 @@ describe(`<${Select.displayName}>`, () => {
         it('should call onClear when clear icon is clicked in select input', () => {
             const value = 'Value';
             const onClear: jest.Mock = jest.fn();
-            const { input } = setup({ value: [value], onClear });
+            const { input } = setup({ value, onClear }, false);
 
             input
                 .find(`.${CLASSNAME}__input-clear`)
                 .first()
                 .simulate('click');
             expect(onClear).toHaveBeenCalled();
-        });
-
-        it('should call onClear when a chip is clicked with the correct value', () => {
-            const value1 = 'Value 1';
-            const value2 = 'Value 2';
-
-            const onClear: jest.Mock = jest.fn();
-            const { input } = setup({
-                isMultiple: true,
-                onClear,
-                value: [value1, value2],
-            });
-
-            const fakeEvent = new Event('click');
-            input
-                .find(Chip)
-                .first()
-                .simulate('click', fakeEvent);
-            expect(onClear).toHaveBeenCalledWith(fakeEvent, value1);
-        });
-
-        it('should call onClear when Chip onAfterClick is triggered with chip variant', () => {
-            const value1 = 'Value 1';
-            const value2 = 'Value 2';
-            const onClear: jest.Mock = jest.fn();
-
-            const { input } = setup({
-                isMultiple: true,
-                onClear,
-                value: [value1, value2],
-                variant: SelectVariant.chip,
-            });
-
-            expect(input.prop('onAfterClick')).toBe(onClear);
         });
     });
 
@@ -319,12 +258,12 @@ describe(`<${Select.displayName}>`, () => {
             describe('Has value', () => {
                 const value = 'Value';
                 const hasValueProps: Partial<SetupProps> = {
-                    value: [value],
+                    value,
                     variant: SelectVariant.input,
                 };
 
                 it('should render the value selected if not multiple ', () => {
-                    const { input } = setup({ ...hasValueProps });
+                    const { input } = setup({ ...hasValueProps }, false);
 
                     expect(
                         input
@@ -335,54 +274,16 @@ describe(`<${Select.displayName}>`, () => {
                 });
             });
 
-            describe('Has multiple values', () => {
-                const value1 = 'Value1';
-                const value2 = 'Value2';
-                const value3 = 'Value3';
-                const hasMultipleValues: Partial<SetupProps> = {
-                    isMultiple: true,
-                    value: [value1, value2, value3],
-                    variant: SelectVariant.input,
-                };
-
-                it('should render the values selected in Chips if multiple ', () => {
-                    const { input, props } = setup({ ...hasMultipleValues });
-
-                    expect(input.find(Chip).length).toBe(props.value!.length);
-                    expect(
-                        input
-                            .find(Chip)
-                            .at(0)
-                            .children()
-                            .text(),
-                    ).toBe(props.value![0]);
-                    expect(
-                        input
-                            .find(Chip)
-                            .at(1)
-                            .children()
-                            .text(),
-                    ).toBe(props.value![1]);
-                    expect(
-                        input
-                            .find(Chip)
-                            .at(2)
-                            .children()
-                            .text(),
-                    ).toBe(props.value![2]);
-                });
-            });
-
             describe('No value', () => {
                 const placeholder = 'My placeholder';
                 const hasNoValueProps: Partial<SetupProps> = {
                     placeholder,
-                    value: [],
+                    value: '',
                     variant: SelectVariant.input,
                 };
 
                 it('should render the placeholder when empty', () => {
-                    const { input } = setup({ ...hasNoValueProps });
+                    const { input } = setup({ ...hasNoValueProps }, false);
 
                     expect(
                         input
@@ -396,7 +297,7 @@ describe(`<${Select.displayName}>`, () => {
 
         describe('Chip variant', () => {
             it('should render a Chip as the select input', () => {
-                const { dropdown, input } = setup({ variant: SelectVariant.chip });
+                const { dropdown, input } = setup({ variant: SelectVariant.chip }, false);
 
                 expect(input.type()).toEqual(Chip);
                 expect(input.prop('chipRef')).toBe(dropdown.prop('anchorRef'));
@@ -405,29 +306,21 @@ describe(`<${Select.displayName}>`, () => {
             describe('Has value', () => {
                 const value = 'Value';
                 const hasValueProps: Partial<SetupProps> = {
-                    value: [value],
+                    value,
                     variant: SelectVariant.chip,
                 };
 
                 it('should render the value', () => {
                     const label = 'The label';
-                    const { input } = setup({
-                        ...hasValueProps,
-                        label,
-                    });
+                    const { input } = setup(
+                        {
+                            ...hasValueProps,
+                            label,
+                        },
+                        false,
+                    );
 
-                    expect(input.childAt(0).text()).toEqual(value);
-                });
-
-                it('should render the value even if isMultiple is true', () => {
-                    const label = 'The label';
-                    const { input } = setup({
-                        ...hasValueProps,
-                        isMultiple: true,
-                        label,
-                    });
-
-                    expect(input.childAt(0).text()).toEqual(value);
+                    expect(input.find('.lumx-chip__label').text()).toEqual(value);
                 });
 
                 it('should render a close icon if there is a value', () => {
@@ -442,38 +335,17 @@ describe(`<${Select.displayName}>`, () => {
                 });
             });
 
-            describe('Has multiple values', () => {
-                const value1 = 'Value1';
-                const value2 = 'Value2';
-                const value3 = 'Value3';
-                const hasMultipleValues: Partial<SetupProps> = {
-                    isMultiple: true,
-                    value: [value1, value2, value3],
-                    variant: SelectVariant.chip,
-                };
-
-                it('should render the value and additional text if multiple values', () => {
-                    const label = 'The label';
-                    const { input, props } = setup({
-                        ...hasMultipleValues,
-                        label,
-                    });
-
-                    expect(input.childAt(0).text()).toEqual(`${props.value![0]}\u00A0+${props.value!.length - 1}`);
-                });
-            });
-
             describe('No value', () => {
                 const hasNoValue: Partial<SetupProps> = {
-                    value: [],
+                    value: '',
                     variant: SelectVariant.chip,
                 };
 
                 it('should render the label', () => {
                     const label = 'The label';
-                    const { input } = setup({ ...hasNoValue, label });
+                    const { input } = setup({ ...hasNoValue, label }, false);
 
-                    expect(input.childAt(0).text()).toEqual(label);
+                    expect(input.find('.lumx-chip__label').text()).toEqual(label);
                 });
 
                 it('should render a MenuDown icon', () => {
@@ -496,5 +368,5 @@ describe(`<${Select.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper' }, { className: CLASSNAME });
 });

@@ -17,11 +17,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { withSelectContext } from './WithSelectContext';
 import { ICoreSelectProps, SelectVariant } from './constants';
 
-/////////////////////////////
-
-/**
- * Defines the props of the component.
- */
+/** Defines the props of the component. */
 interface ISelectMultipleProps extends ICoreSelectProps {
     /** The list of selected values. */
     value: string[];
@@ -36,35 +32,18 @@ interface ISelectMultipleProps extends ICoreSelectProps {
 }
 type SelectMultipleProps = ISelectMultipleProps;
 
-/////////////////////////////
-
-/**
- * Define the types of the default props.
- */
+/** Define the types of the default props. */
 interface IDefaultPropsType extends Partial<SelectMultipleProps> {}
 
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
-/**
- * The display name of the component.
- */
+/** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
-/**
- * The default class name and classes prefix for this component.
- */
+/** The default class name and classes prefix for this component. */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
-/**
- * The default value of props.
- */
+/** The default value of props. */
 const DEFAULT_PROPS: IDefaultPropsType = {
     hasError: false,
-    isMultiple: false,
     isOpen: false,
     isValid: false,
     selectedChipRender(choice, index, onClear, isDisabled?) {
@@ -84,7 +63,6 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     },
     selectedValueRender: (choice) => choice,
 };
-/////////////////////////////
 
 /**
  * Select Multiple component.
@@ -194,8 +172,6 @@ const SelectMultiple: React.FC<any> = ({
     );
 };
 
-/////////////////////////////
-
 const selectMultipleWithContext = (props: any) =>
     withSelectContext(SelectMultiple, {
         ...props,
@@ -203,7 +179,6 @@ const selectMultipleWithContext = (props: any) =>
             props.className,
             handleBasicClasses({
                 hasMultiple: !props.isEmpty,
-                hasUnique: false,
                 prefix: CLASSNAME,
             }),
         ),

@@ -16,8 +16,6 @@ import { CLASSNAME, SelectMultiple, SelectMultipleProps } from './SelectMultiple
 import { DEFAULT_PROPS } from './WithSelectContext';
 import { SelectVariant } from './constants';
 
-/////////////////////////////
-
 /** Define the overriding properties waited by the `setup` function. */
 type ISetupProps = Partial<SelectMultipleProps>;
 
@@ -165,7 +163,6 @@ describe(`<SelectMultiple>`, () => {
                 value: [''],
             });
 
-            expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasUnique', value: true }));
             expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasValue', value: true }));
             expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
@@ -207,8 +204,6 @@ describe(`<SelectMultiple>`, () => {
             expect(helper).toExist();
         });
     });
-
-    /////////////////////////////
 
     // 3. Test events.
     describe('Events', () => {
@@ -277,8 +272,6 @@ describe(`<SelectMultiple>`, () => {
             expect(onClear).toHaveBeenCalled();
         });
     });
-
-    /////////////////////////////
 
     // 4. Test conditions (i.e. things that display or not in the UI based on props).
     describe('Conditions', () => {
@@ -432,8 +425,6 @@ describe(`<SelectMultiple>`, () => {
             });
         });
     });
-
-    /////////////////////////////
 
     // Common tests suite.
     commonTestsSuite(setup, { className: 'wrapper' }, { className: CLASSNAME });

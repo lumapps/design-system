@@ -113,7 +113,7 @@
         "build": "webpack",
         "postbuild": "dts-bundle-generator --no-check --external-types=react --external-imports=moment -o dist/lumx.react.d.ts src/index.ts",
         "prepublishOnly": "yarn build",
-        "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
+        "test": "jest --config jest/index.js --notify --passWithNoTests --detectOpenHandles --runInBand",
         "storybook": "start-storybook -p 9000"
     },
     "sideEffects": false,

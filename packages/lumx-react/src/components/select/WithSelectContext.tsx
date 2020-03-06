@@ -110,7 +110,6 @@ const withSelectContext = (
         error,
         onClear,
         isValid = DEFAULT_PROPS.isValid,
-        isMultiple = DEFAULT_PROPS.isMultiple,
         theme = DEFAULT_PROPS.theme,
         variant = DEFAULT_PROPS.variant,
         value,
@@ -168,9 +167,7 @@ const withSelectContext = (
                 handleBasicClasses({
                     hasError,
                     hasLabel: Boolean(label),
-                    hasMultiple: !isEmpty && isMultiple,
                     hasPlaceholder: Boolean(placeholder),
-                    hasUnique: !isEmpty && !isMultiple,
                     hasValue: !isEmpty,
                     isDisabled,
                     isEmpty,
@@ -188,7 +185,6 @@ const withSelectContext = (
                 label={label}
                 value={value}
                 isEmpty={isEmpty}
-                isMultiple={isMultiple}
                 isValid={isValid}
                 hasError={hasError}
                 onClear={onClear}
