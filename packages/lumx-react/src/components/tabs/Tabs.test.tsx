@@ -32,22 +32,19 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
+ * @param  propsOverrides          The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
-    const tabs = [<Tab>Tab 0</Tab>, <Tab>Tab 1</Tab>];
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
     const props: TabsProps = {
-        children: tabs,
+        children: [<Tab key={0}>Tab 0</Tab>, <Tab key={1}>Tab 1</Tab>],
         onTabClick: noop,
         ...propsOverrides,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
-    // noinspection RequiredAttributes
     const wrapper: Wrapper = renderer(<Tabs {...props} />);
 
     return {
@@ -77,7 +74,7 @@ describe(`<${Tabs.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use the given props', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 layout: TabsLayout.clustered,
                 position: oneOf(TabsPosition.center, TabsPosition.right),
             });
@@ -107,7 +104,7 @@ describe(`<${Tabs.displayName}>`, () => {
             const firstTab = wrapper.find('Tab[index=1]');
 
             firstTab.simulate('click');
-            expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 1 });
+            expect(onTabClick).toHaveBeenCalledWith({ event: expect.any(Object), index: 1 });
         });
     });
 

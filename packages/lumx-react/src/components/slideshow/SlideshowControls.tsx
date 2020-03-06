@@ -1,31 +1,37 @@
-import React, { RefObject, useCallback, useEffect, useState } from 'react';
-
-import classNames from 'classnames';
-
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 import { Emphasis, IconButton, Theme } from '@lumx/react';
 import {
     EDGE_FROM_ACTIVE_INDEX,
-    PAGINATION_ITEMS_MAX,
     PAGINATION_ITEM_SIZE,
+    PAGINATION_ITEMS_MAX,
 } from '@lumx/react/components/slideshow/constants';
 import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/constants';
-import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { detectSwipe, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
+import classNames from 'classnames';
 
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
+import React, { RefObject, useCallback, useEffect, useState } from 'react';
 
 /**
  * Defines the props of the component.
  */
-interface SlideshowControlsProps extends GenericProps {
+export interface SlideshowControlsProps extends GenericProps {
+    /** Index of the current slide */
     activeIndex?: number;
+    /** Reference of parent element */
     parentRef: RefObject<HTMLDivElement>;
+    /** Number of slides */
     slidesCount: number;
-    theme?: Theme;
+    /** Callback for the click on a navigation item */
     onPaginationClick?(index: number): void;
+    /** Callback for the click on the "next" arrow */
     onNextClick?(): void;
+    /** Callback for the click on the "previous" arrow */
     onPreviousClick?(): void;
+    /** Theme */
+    theme?: Theme;
 }
 
 /**
@@ -37,11 +43,6 @@ interface PaginationRange {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SlideshowControlsProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowControls`;
@@ -49,12 +50,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowControls`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
     activeIndex: 0,
     onNextClick: noop,
     onPaginationClick: noop,
@@ -62,25 +63,26 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
 
+// https://lumapps.atlassian.net/browse/LUM-8429
+// TODO: Rework hooks
+// TODO: Split controlled vs non controlled component
+// TODO: Remove the following eslint-disable
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/control-has-associated-label */
+
 /**
  * Controls for the slideshow component.
  */
-const SlideshowControls: React.FC<SlideshowControlsProps> = ({
-    /** Index of the current slide */
+export const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     activeIndex = DEFAULT_PROPS.activeIndex,
-    /** Css class */
-    className = '',
-    /** Reference of parent element */
+    className,
     parentRef,
-    /** Number of slides */
     slidesCount,
-    /** Callback for the click on a navigation item */
     onPaginationClick = DEFAULT_PROPS.onPaginationClick,
-    /** Callback for the click on the "next" arrow */
     onNextClick = DEFAULT_PROPS.onNextClick,
-    /** Callback for the click on the "previous" arrow */
     onPreviousClick = DEFAULT_PROPS.onPreviousClick,
-    /** Theme */
     theme = DEFAULT_PROPS.theme,
     ...props
 }) => {
@@ -146,7 +148,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
      * Build an array of navigation items (bullets for example).
      *
      * @param lastIndex Index of last item.
-     * @return Array of nabiagtion items.
+     * @return Array of navigation items.
      */
     const buildItemsArray = (lastIndex: number): JSX.Element[] => {
         const items: JSX.Element[] = [];
@@ -163,6 +165,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
                     key={i}
                     onClick={() => handleItemClick(i)}
                     tabIndex={-1}
+                    type="button"
                 />,
             );
         }
@@ -243,29 +246,27 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     };
 
     useEffect(() => {
-        let swipeListeners: () => void;
-
-        if (parentRef && parentRef.current) {
-            parentRef.current.addEventListener('keydown', handleKeyPressed);
-
-            swipeListeners = detectSwipe(parentRef.current, (swipeDirection: string) => {
-                if (swipeDirection === 'right') {
-                    handlePreviousClick();
-                }
-
-                if (swipeDirection === 'left') {
-                    handleNextClick();
-                }
-            });
+        const parent = parentRef.current;
+        if (!parent) {
+            return undefined;
         }
+        parent.addEventListener('keydown', handleKeyPressed);
+
+        const swipeListeners = detectSwipe(parent, (swipeDirection: string) => {
+            if (swipeDirection === 'right') {
+                handlePreviousClick();
+            }
+
+            if (swipeDirection === 'left') {
+                handleNextClick();
+            }
+        });
 
         return () => {
-            if (parentRef && parentRef.current) {
-                parentRef.current.removeEventListener('keydown', handleKeyPressed);
-                swipeListeners();
-            }
+            parent.removeEventListener('keydown', handleKeyPressed);
+            swipeListeners();
         };
-    }, [activeIndex, parentRef]);
+    }, [activeIndex, parentRef, handleKeyPressed, handleNextClick, handlePreviousClick]);
 
     return (
         <div
@@ -299,5 +300,3 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     );
 };
 SlideshowControls.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, SlideshowControls, SlideshowControlsProps as SlideshowProps };

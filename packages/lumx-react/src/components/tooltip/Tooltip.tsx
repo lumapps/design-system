@@ -10,12 +10,12 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /** Position of the tooltip relative to the anchor element. */
-type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
+export type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
 
 /**
  * Defines the props of the component.
  */
-interface TooltipProps extends GenericProps {
+export interface TooltipProps extends GenericProps {
     /** Ref of anchor element. */
     anchorRef: RefObject<HTMLElement>;
 
@@ -27,11 +27,6 @@ interface TooltipProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TooltipProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Tooltip`;
@@ -39,12 +34,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Tooltip`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<TooltipProps> = {
     delay: 500,
     placement: Placement.BOTTOM,
 };
@@ -54,12 +49,15 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const OFFSET = 8;
 
+// TODO: https://lumapps.atlassian.net/browse/LUM-8430
+/* eslint-disable react-hooks/exhaustive-deps */
+
 /**
  * Tooltip.
  *
  * @return The component.
  */
-const Tooltip: React.FC<TooltipProps> = ({
+export const Tooltip: React.FC<TooltipProps> = ({
     anchorRef,
     children,
     className,
@@ -129,16 +127,17 @@ const Tooltip: React.FC<TooltipProps> = ({
     };
 
     useEffect(() => {
-        if (anchorRef && anchorRef.current && tooltipRef && tooltipRef.current) {
-            anchorRef.current.addEventListener('mouseenter', handleMouseEnter);
-            anchorRef.current.addEventListener('mouseleave', handleMouseLeave);
+        const anchor = anchorRef.current;
+        const tooltip = tooltipRef.current;
+        if (!anchor || !tooltip) {
+            return undefined;
         }
 
+        anchor.addEventListener('mouseenter', handleMouseEnter);
+        anchor.addEventListener('mouseleave', handleMouseLeave);
         return () => {
-            if (anchorRef && anchorRef.current) {
-                anchorRef.current.removeEventListener('mouseenter', handleMouseEnter);
-                anchorRef.current.removeEventListener('mouseleave', handleMouseLeave);
-            }
+            anchor.removeEventListener('mouseenter', handleMouseEnter);
+            anchor.removeEventListener('mouseleave', handleMouseLeave);
 
             if (timer) {
                 clearTimeout(timer);
@@ -149,7 +148,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     const offsets = computeOffset();
 
     const { computedPosition, isVisible } = Popover.useComputePosition(
-        placement!,
+        placement as Placement,
         anchorRef,
         tooltipRef,
         isOpen,
@@ -183,5 +182,3 @@ const Tooltip: React.FC<TooltipProps> = ({
     );
 };
 Tooltip.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipPlacement, TooltipProps };

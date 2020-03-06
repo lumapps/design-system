@@ -10,7 +10,7 @@ import { MainNav } from './layout/MainNav';
  *
  * @return The main application component.
  */
-const App: React.FC = (): ReactElement => {
+export const App: React.FC = (): ReactElement => {
     return (
         <Router>
             <MainNav />
@@ -21,5 +21,3 @@ const App: React.FC = (): ReactElement => {
         </Router>
     );
 };
-
-export { App };

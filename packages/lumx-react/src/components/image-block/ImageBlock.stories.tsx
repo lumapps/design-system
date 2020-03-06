@@ -12,7 +12,7 @@ const numberKnobOptions = {
     step: 0.1,
 };
 
-export const defaultImageBlock = ({ theme }: any) => {
+export const DefaultImageBlock = ({ theme }: any) => {
     const align = select<Alignment>('Alignment', Alignment, Alignment.center, 'Image block');
     const aspectRatio = select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Image block');
     const title = text('Title', 'Hello world', 'Image block');

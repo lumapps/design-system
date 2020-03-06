@@ -1,7 +1,3 @@
-import React, { ReactNode, RefObject, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
-
-import classNames from 'classnames';
-
 import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
 import { Emphasis, Kind, Size, Theme } from '@lumx/react/components';
@@ -18,10 +14,13 @@ import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
+import classNames from 'classnames';
+import React, { ReactNode, RefObject, SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react';
+
 /**
  * The authorized variants.
  */
-enum SelectVariant {
+export enum SelectVariant {
     input = 'input',
     chip = 'chip',
 }
@@ -29,7 +28,7 @@ enum SelectVariant {
 /**
  * Defines the props of the component.
  */
-interface SelectProps extends GenericProps {
+export interface SelectProps extends GenericProps {
     /**
      * The list of selected values.
      */
@@ -83,7 +82,9 @@ interface SelectProps extends GenericProps {
      */
     placeholder?: string;
 
-    /* The theme. */
+    /**
+     * The theme.
+     */
     theme?: Theme;
 
     /** Whether custom colors are applied to this component. */
@@ -141,11 +142,6 @@ interface SelectProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SelectProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
@@ -153,12 +149,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<SelectProps> = {
     hasError: false,
     isMultiple: false,
     isOpen: false,
@@ -211,10 +207,7 @@ function useHandleElementFocus(
         const setBlur = () => {
             if (!isOpen) {
                 setIsFocus(false);
-
-                if (onBlur) {
-                    onBlur();
-                }
+                onBlur?.();
             }
 
             setWasBlurred(true);
@@ -227,7 +220,7 @@ function useHandleElementFocus(
             element.removeEventListener('focus', setFocus);
             element.removeEventListener('blur', setBlur);
         };
-    }, [element, isOpen, onBlur, wasBlurred]);
+    }, [element, isOpen, onBlur, wasBlurred, setIsFocus, setWasBlurred]);
 }
 
 const stopPropagation = (evt: Event) => evt.stopPropagation();
@@ -237,8 +230,8 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
  *
  * @return The component.
  */
-const Select: React.FC<SelectProps> = ({
-    className = '',
+export const Select: React.FC<SelectProps> = ({
+    className,
     hasError = DEFAULT_PROPS.hasError,
     error,
     onClear,
@@ -262,7 +255,7 @@ const Select: React.FC<SelectProps> = ({
     onInfiniteScroll,
     useCustomColors,
     ...props
-}: SelectProps): React.ReactElement => {
+}) => {
     const isEmpty = value.length === 0;
     const targetUuid = 'uuid';
     const anchorRef = useRef<HTMLElement>(null);
@@ -292,7 +285,7 @@ const Select: React.FC<SelectProps> = ({
         }
 
         setWasBlurred(false);
-        anchorRef?.current?.blur();
+        anchorRef.current?.blur();
     };
 
     const createParentElement = useCallback((): ReactNode => {
@@ -320,12 +313,13 @@ const Select: React.FC<SelectProps> = ({
                             onClick={onInputClick}
                             onKeyDown={handleKeyboardNav}
                             tabIndex={0}
+                            role="textbox"
                         >
                             <div className={`${CLASSNAME}__chips`}>
                                 {!isEmpty && isMultiple && (
                                     <ChipGroup>
                                         {value.map((val: string, index: number) =>
-                                            selectedChipRender!(val, index, onClear, isDisabled),
+                                            selectedChipRender?.(val, index, onClear, isDisabled),
                                         )}
                                     </ChipGroup>
                                 )}
@@ -344,7 +338,7 @@ const Select: React.FC<SelectProps> = ({
 
                             {!isEmpty && !isMultiple && (
                                 <div className={`${CLASSNAME}__input-native`}>
-                                    <span>{selectedValueRender!(value[0])}</span>
+                                    <span>{selectedValueRender?.(value[0])}</span>
                                 </div>
                             )}
 
@@ -385,11 +379,11 @@ const Select: React.FC<SelectProps> = ({
                     >
                         {isEmpty && <span>{label}</span>}
 
-                        {!isEmpty && !isMultiple && <span>{selectedValueRender!(value[0])}</span>}
+                        {!isEmpty && !isMultiple && <span>{selectedValueRender?.(value[0])}</span>}
 
                         {!isEmpty && isMultiple && (
                             <span>
-                                <span>{selectedValueRender!(value[0])}</span>
+                                <span>{selectedValueRender?.(value[0])}</span>
 
                                 {value.length > 1 && <span>&nbsp;+{value.length - 1}</span>}
                             </span>
@@ -413,6 +407,11 @@ const Select: React.FC<SelectProps> = ({
         handleKeyboardNav,
         targetUuid,
         anchorRef,
+        hasInputClear,
+        isDisabled,
+        isRequired,
+        selectedChipRender,
+        selectedValueRender,
     ]);
 
     return (
@@ -442,10 +441,10 @@ const Select: React.FC<SelectProps> = ({
         >
             {createParentElement()}
             <Dropdown
-                closeOnClick={true}
-                closeOnEscape={true}
+                closeOnClick
+                closeOnEscape
                 placement={Placement.AUTO_START}
-                showDropdown={isOpen!}
+                showDropdown={Boolean(isOpen)}
                 anchorRef={anchorRef}
                 onClose={onClose}
                 onInfiniteScroll={onInfiniteScroll}
@@ -466,5 +465,3 @@ const Select: React.FC<SelectProps> = ({
     );
 };
 Select.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant };

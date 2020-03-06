@@ -1,4 +1,4 @@
-function DemoController($http) {
+export function DemoController($http) {
     'ngInject';
 
     const vm = this;
@@ -148,5 +148,3 @@ function DemoController($http) {
 }
 
 angular.module('design-system').controller('DemoController', DemoController);
-
-export { DemoController };

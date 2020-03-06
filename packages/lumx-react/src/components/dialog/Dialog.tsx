@@ -5,9 +5,8 @@ import classNames from 'classnames';
 
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
-import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
+import { DIALOG_TRANSITION_DURATION, COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
@@ -19,7 +18,7 @@ import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 /**
  * Defines the props of the component.
  */
-interface DialogProps extends GenericProps {
+export interface DialogProps extends GenericProps {
     /**
      * Element(s) to display in the footer part.
      */
@@ -87,7 +86,7 @@ interface DialogProps extends GenericProps {
     onOpen?(): void;
 }
 
-type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
+export type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
@@ -100,12 +99,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Dialog`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<DialogProps> = {
+export const DEFAULT_PROPS: Partial<DialogProps> = {
     forceFooterDivider: false,
     forceHeaderDivider: false,
     isOpen: false,
@@ -119,7 +118,7 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
  * @param props Component props.
  * @return The component.
  */
-const Dialog: React.FC<DialogProps> = (props) => {
+export const Dialog: React.FC<DialogProps> = (props) => {
     const {
         children,
         className,
@@ -143,7 +142,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
     const wrapperRef = useRef<HTMLElement>(null);
 
     // Focus the parent element on close.
-    useFocus(parentElement?.current, !Boolean(isOpen));
+    useFocus(parentElement?.current, !isOpen);
 
     // Handle focus trap.
     useFocusTrap(wrapperRef.current, focusElement?.current);
@@ -155,9 +154,9 @@ const Dialog: React.FC<DialogProps> = (props) => {
         threshold: [0, 1],
     });
 
-    const hasTopIntersection = !(intersections.get(sentinelTop!)?.isIntersecting ?? true);
-    const hasBottomIntersection = !(intersections.get(sentinelBottom!)?.isIntersecting ?? true);
-    const intersectsWrapper = !(intersections.get(sentinelWrapper!)?.isIntersecting ?? true);
+    const hasTopIntersection = !(intersections.get(sentinelTop as Element)?.isIntersecting ?? true);
+    const hasBottomIntersection = !(intersections.get(sentinelBottom as Element)?.isIntersecting ?? true);
+    const intersectsWrapper = !(intersections.get(sentinelWrapper as Element)?.isIntersecting ?? true);
 
     const [hasScroll, setHasScroll] = useState(intersectsWrapper);
     useEffect(() => {
@@ -167,7 +166,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
         if (hasScroll && !hasTopIntersection && !hasBottomIntersection) {
             setHasScroll(false);
         }
-    }, [intersectsWrapper, hasBottomIntersection, hasTopIntersection]);
+    }, [intersectsWrapper, hasBottomIntersection, hasTopIntersection, hasScroll]);
 
     // Separate header, footer and dialog content from children.
     const [[headerChild], [footerChild], content] = useMemo(
@@ -188,7 +187,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
         if (isOpen) {
             onOpen?.();
         }
-    }, [isOpen]);
+    }, [isOpen, onOpen]);
 
     const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION);
 
@@ -267,5 +266,3 @@ const Dialog: React.FC<DialogProps> = (props) => {
         : null;
 };
 Dialog.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Dialog, DialogProps, DialogSizes };

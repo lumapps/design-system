@@ -8,7 +8,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface RadioGroupProps extends GenericProps {
+export interface RadioGroupProps extends GenericProps {
     /**
      * List of radio buttons in the group (should use <RadioButton>).
      */
@@ -23,14 +23,14 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}RadioGroup`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Radio group component.
  *
  * @return The component.
  */
-const RadioGroup: React.FC<RadioGroupProps> = (props) => {
+export const RadioGroup: React.FC<RadioGroupProps> = (props) => {
     const { className, children, ...forwardedProps } = props;
 
     return (
@@ -48,5 +48,3 @@ const RadioGroup: React.FC<RadioGroupProps> = (props) => {
     );
 };
 RadioGroup.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, RadioGroup, RadioGroupProps };

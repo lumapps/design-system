@@ -11,19 +11,19 @@ import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } fr
  *  Authorized size values.
  *  @deprecated use Size instead.
  */
-const ListItemSize = {
+export const ListItemSize = {
     big: Size.big,
     huge: Size.huge,
     regular: Size.regular,
     tiny: Size.tiny,
 };
 
-type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
+export type ListItemSizes = Size.tiny | Size.regular | Size.big | Size.huge;
 
 /**
  * Defines the props of the component.
  */
-interface ListItemProps extends GenericProps {
+export interface ListItemProps extends GenericProps {
     /** After content element */
     after?: ReactElement;
 
@@ -53,11 +53,6 @@ interface ListItemProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ListItemProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
@@ -65,12 +60,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<ListItemProps> = {
     isActive: false,
     isHighlighted: false,
     isSelected: false,
@@ -83,10 +78,10 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const ListItem: React.FC<ListItemProps> = ({
+export const ListItem: React.FC<ListItemProps> = ({
     after,
     children,
-    className = '',
+    className,
     isHighlighted,
     isSelected = DEFAULT_PROPS.isSelected,
     isActive = DEFAULT_PROPS.isActive,
@@ -115,16 +110,9 @@ const ListItem: React.FC<ListItemProps> = ({
     };
 
     /**
-     * Currying the on enter press behavior.
-     *
-     * @return Returns either undefined or a callback
+     * Oon enter press behavior.
      */
-    const onKeyDown = () => {
-        if (onItemSelected) {
-            return onEnterPressed(onItemSelected);
-        }
-        return;
-    };
+    const onKeyDown = onItemSelected ? onEnterPressed(onItemSelected) : undefined;
 
     return (
         <li
@@ -141,7 +129,8 @@ const ListItem: React.FC<ListItemProps> = ({
             )}
             onFocusCapture={preventParentFocus}
             onClick={onItemSelected}
-            onKeyDown={onKeyDown()}
+            onKeyDown={onKeyDown}
+            role="menuitem"
             {...props}
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
@@ -151,5 +140,3 @@ const ListItem: React.FC<ListItemProps> = ({
     );
 };
 ListItem.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize, ListItemSizes };

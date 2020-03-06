@@ -1,18 +1,18 @@
-import React, { ReactNode, RefObject, useRef } from 'react';
-
-import classNames from 'classnames';
-
 import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { useExistingRef } from '@lumx/react/hooks/useExistingRef';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
+import classNames from 'classnames';
+import React, { ReactNode, RefObject, useRef } from 'react';
 
 /**
  * Defines the props of the component.
  */
-interface AutocompleteProps extends GenericProps {
+export interface AutocompleteProps extends GenericProps {
     /**
      * Whether the suggestions list should display anchored to the input
      * If false, it will be anchored to the text field wrapper.
@@ -142,9 +142,9 @@ interface AutocompleteProps extends GenericProps {
 
     /**
      * The callback function called when the bottom of the dropdown is reached.
-     * @see {@link DropdownProps#onInfinite}
+     * @see {@link DropdownProps#onInfiniteScroll}
      */
-    onInfinite?: VoidFunction;
+    onInfiniteScroll?: VoidFunction;
 
     /**
      * Text field value change handler.
@@ -173,12 +173,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Autocomplete`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<AutocompleteProps> = {
+export const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     anchorToInput: false,
     closeOnClick: true,
     closeOnEscape: true,
@@ -192,7 +192,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  *
  * @return The component.
  */
-const Autocomplete: React.FC<AutocompleteProps> = (props) => {
+export const Autocomplete: React.FC<AutocompleteProps> = (props) => {
     const {
         anchorToInput = DEFAULT_PROPS.anchorToInput,
         className,
@@ -219,12 +219,13 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
         offset,
         shouldFocusOnClose = DEFAULT_PROPS.shouldFocusOnClose,
         placement,
-        inputRef = useRef(null),
+        inputRef: propInputRef,
         fitToAnchorWidth,
         onInfiniteScroll,
         ...forwardedProps
     } = props;
 
+    const inputRef = useExistingRef(propInputRef);
     const textFieldRef = useRef(null);
     useFocus(inputRef.current, !isOpen && shouldFocusOnClose);
 
@@ -276,5 +277,3 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
     );
 };
 Autocomplete.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Autocomplete, AutocompleteProps };

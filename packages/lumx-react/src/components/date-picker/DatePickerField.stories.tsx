@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import moment from 'moment';
 
@@ -6,8 +6,8 @@ import { DatePickerField, DatePickerProps } from '@lumx/react';
 
 export default { title: 'DatePickerField' };
 
-export const simple = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>();
+export const Simple = ({ theme }: any) => {
+    const [value, setValue] = useState<DatePickerProps['value']>();
 
     return (
         <DatePickerField
@@ -21,8 +21,8 @@ export const simple = ({ theme }: any) => {
     );
 };
 
-export const withDefaultValue = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>(moment().add(20, 'days'));
+export const WithDefaultValue = ({ theme }: any) => {
+    const [value, setValue] = useState<DatePickerProps['value']>(moment().add(20, 'days'));
 
     return (
         <DatePickerField
@@ -36,8 +36,8 @@ export const withDefaultValue = ({ theme }: any) => {
     );
 };
 
-export const withErrorAndHelper = ({ theme }: any) => {
-    const [value, setValue] = React.useState<DatePickerProps['value']>();
+export const WithErrorAndHelper = ({ theme }: any) => {
+    const [value, setValue] = useState<DatePickerProps['value']>();
 
     return (
         <DatePickerField

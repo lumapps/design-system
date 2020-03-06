@@ -1,23 +1,20 @@
-import { Placement, Popover, TextField } from '@lumx/react';
-import { useClickAway } from '@lumx/react/hooks/useClickAway';
-import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-import { onEscapePressed } from '@lumx/react/utils';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import moment from 'moment';
 
-import React, { useEffect, useRef, useState } from 'react';
-
-import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
-import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker } from './DatePicker';
-
+import { Placement, Popover, TextField } from '@lumx/react';
+import { useClickAway } from '@lumx/react/hooks/useClickAway';
+import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
+import { onEscapePressed, GenericProps } from '@lumx/react/utils';
+import { COMPONENT_PREFIX, ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { useFocus } from '@lumx/react/hooks/useFocus';
-import { GenericProps } from '@lumx/react/utils';
+
+import { DatePicker } from './DatePicker';
 
 /**
  * Defines the props of the component.
  */
-
-interface DatePickerFieldProps extends GenericProps {
+export interface DatePickerFieldProps extends GenericProps {
     /** Locale. */
     locale: string;
 
@@ -37,30 +34,37 @@ interface DatePickerFieldProps extends GenericProps {
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
+export const COMPONENT_NAME = `${COMPONENT_PREFIX}DatePickerField`;
 
 /**
  * Simple component used to pick a date (ready-to-use wrapped implementation).
  *
  * @return The component.
  */
-const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFieldProps }: DatePickerFieldProps) => {
+export const DatePickerField: React.FC<DatePickerFieldProps> = ({
+    value,
+    locale,
+    minDate,
+    maxDate,
+    onChange,
+    ...textFieldProps
+}) => {
     const wrapperRef = useRef(null);
     const popoverRef = useRef(null);
     const anchorRef = useRef(null);
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleSimpleMenu = () => {
+    const toggleSimpleMenu = useCallback(() => {
         setIsOpen(!isOpen);
-    };
+    }, [isOpen]);
 
-    const closeSimpleMenu = () => {
+    const closeSimpleMenu = useCallback(() => {
         setIsOpen(false);
-    };
+    }, []);
 
     const { computedPosition, isVisible } = Popover.useComputePosition(
-        Placement.BOTTOM_START!,
+        Placement.BOTTOM_START,
         anchorRef,
         popoverRef,
         isOpen,
@@ -80,7 +84,7 @@ const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFie
 
     useEffect(() => {
         if (!isOpen || !onEscapeHandler || !wrapperRef.current) {
-            return;
+            return undefined;
         }
 
         window.addEventListener('keydown', onEscapeHandler);
@@ -157,5 +161,3 @@ const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFie
     );
 };
 DatePickerField.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, COMPONENT_NAME, DatePickerField, DatePickerFieldProps };

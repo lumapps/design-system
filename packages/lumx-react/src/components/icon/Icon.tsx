@@ -6,12 +6,12 @@ import { Color, ColorPalette, ColorVariant, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type IconSizes = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
  * Defines the props of the component.
  */
-interface IconProps extends GenericProps {
+export interface IconProps extends GenericProps {
     /**
      * The icon SVG path draw code (`d` property of the `<path>` SVG element).
      * @see {@link https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths}
@@ -38,11 +38,6 @@ interface IconProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<IconProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Icon`;
@@ -50,12 +45,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Icon`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<IconProps> = {
     color: ColorPalette.dark,
     iconRef: undefined,
     size: Size.m,
@@ -66,7 +61,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component
  */
-const Icon: React.FC<IconProps> = ({
+export const Icon: React.FC<IconProps> = ({
     className,
     color,
     colorVariant,
@@ -133,5 +128,3 @@ const Icon: React.FC<IconProps> = ({
     );
 };
 Icon.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, IconSizes };

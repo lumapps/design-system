@@ -1,4 +1,4 @@
-function DemoController($scope, LxDialogService, LxNotificationService) {
+export function DemoController($scope, LxDialogService, LxNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -232,5 +232,3 @@ function DemoController($scope, LxDialogService, LxNotificationService) {
 }
 
 angular.module('design-system').controller('DemoController', DemoController);
-
-export { DemoController };

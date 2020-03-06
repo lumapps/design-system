@@ -3,5 +3,6 @@
 exports[`<SideNavigation> Snapshots and structure should render correctly 1`] = `
 <ul
   className="lumx-side-navigation"
+  role="menu"
 />
 `;

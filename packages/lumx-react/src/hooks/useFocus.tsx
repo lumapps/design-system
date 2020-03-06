@@ -9,9 +9,10 @@ import { useEffect, useState } from 'react';
 export function useFocus(element: HTMLElement | null | undefined, shouldFocus = true) {
     const [wasFocus, setWasFocus] = useState(shouldFocus);
     useEffect(() => {
-        if (wasFocus !== shouldFocus && element) {
-            element.focus();
-            setWasFocus(shouldFocus);
+        if (!(wasFocus !== shouldFocus && element)) {
+            return;
         }
-    }, [element, shouldFocus]);
+        element.focus();
+        setWasFocus(shouldFocus);
+    }, [element, wasFocus, shouldFocus]);
 }

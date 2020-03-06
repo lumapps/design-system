@@ -1,6 +1,6 @@
 import { mdiCommentOutline, mdiDotsVertical, mdiInformationOutline } from '@lumx/icons';
 
-function DemoController($filter) {
+export function DemoController($filter) {
     'ngInject';
 
     const vm = this;
@@ -140,5 +140,3 @@ function DemoController($filter) {
 }
 
 angular.module('design-system').controller('DemoController', DemoController);
-
-export { DemoController };

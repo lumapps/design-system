@@ -17,7 +17,7 @@ type ChipSize = Size.s | Size.m;
 /**
  * Defines the props of the component.
  */
-interface ChipProps extends GenericProps {
+export interface ChipProps extends GenericProps {
     /** A component to be rendered after the main label area. */
     after?: HTMLElement | ReactNode;
     /** A component to be rendered before the main label area. */
@@ -47,11 +47,6 @@ interface ChipProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ChipProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
@@ -59,12 +54,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<ChipProps> = {
     isClickable: false,
     isDisabled: false,
     isHighlighted: false,
@@ -79,7 +74,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The Chip component.
  */
-const Chip: React.FC<ChipProps> = ({
+export const Chip: React.FC<ChipProps> = ({
     after = DEFAULT_PROPS.after,
     before = DEFAULT_PROPS.before,
     className,
@@ -190,7 +185,4 @@ const Chip: React.FC<ChipProps> = ({
         </a>
     );
 };
-
 Chip.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps };

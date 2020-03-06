@@ -37,38 +37,38 @@ export function useFocusTrap(
     rootElement = document.body,
 ) {
     useEffect(() => {
-        if (focusZoneElement) {
-            (document.activeElement as HTMLElement)?.blur();
-            if (focusElement) {
-                focusElement.focus();
+        if (!focusZoneElement) {
+            return undefined;
+        }
+        (document.activeElement as HTMLElement)?.blur();
+        if (focusElement) {
+            focusElement.focus();
+        }
+
+        const onKeyDown = (evt: KeyboardEvent) => {
+            const { keyCode } = evt;
+            if (keyCode !== TAB_KEY_CODE) {
+                return;
+            }
+            const { first, last } = getFocusable(focusZoneElement);
+
+            // Prevent focus switch if no focusable available.
+            if (!first) {
+                evt.preventDefault();
+                return;
             }
 
-            const onKeyDown = (evt: KeyboardEvent) => {
-                const { keyCode } = evt;
-                if (keyCode !== TAB_KEY_CODE) {
-                    return;
-                }
-                const { first, last } = getFocusable(focusZoneElement);
-
-                // Prevent focus switch if no focusable available.
-                if (!first) {
-                    evt.preventDefault();
-                    return;
-                }
-
-                if (evt.shiftKey) {
-                    if (document.activeElement === first) {
-                        last?.focus();
-                        evt.preventDefault();
-                    }
-                } else if (document.activeElement === last) {
-                    first?.focus();
+            if (evt.shiftKey) {
+                if (document.activeElement === first) {
+                    last?.focus();
                     evt.preventDefault();
                 }
-            };
-            rootElement.addEventListener('keydown', onKeyDown);
-            return () => rootElement.removeEventListener('keydown', onKeyDown);
-        }
-        return;
-    }, [focusZoneElement, rootElement]);
+            } else if (document.activeElement === last) {
+                first?.focus();
+                evt.preventDefault();
+            }
+        };
+        rootElement.addEventListener('keydown', onKeyDown);
+        return () => rootElement.removeEventListener('keydown', onKeyDown);
+    }, [focusElement, focusZoneElement, rootElement]);
 }

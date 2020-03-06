@@ -3,12 +3,12 @@ import { mdiAlert, mdiAlertCircle, mdiCheckCircle, mdiInformation } from '@lumx/
 /**
  * The notification delay before hiding.
  */
-const HIDE_DELAY = 6000;
+export const HIDE_DELAY = 6000;
 
 /**
  * The notification icon and colors according to their type.
  */
-const NOTIFICATION_CONFIGURATION = {
+export const NOTIFICATION_CONFIGURATION = {
     error: {
         color: 'red',
         icon: mdiAlert,
@@ -26,5 +26,3 @@ const NOTIFICATION_CONFIGURATION = {
         icon: mdiAlertCircle,
     },
 };
-
-export { HIDE_DELAY, NOTIFICATION_CONFIGURATION };

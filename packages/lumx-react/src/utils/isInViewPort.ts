@@ -1,4 +1,4 @@
-type ViewPortVisibility = 'full' | 'partial';
+export type ViewPortVisibility = 'full' | 'partial';
 
 /**
  * Test if an element is in the viewport.
@@ -7,7 +7,7 @@ type ViewPortVisibility = 'full' | 'partial';
  * @param visibility Visible only partially or fully.
  * @return Whether the element to test is in viewport.
  */
-const isInViewPort = (bounding: ClientRect | DOMRect, visibility: ViewPortVisibility): boolean => {
+export const isInViewPort = (bounding: ClientRect | DOMRect, visibility: ViewPortVisibility): boolean => {
     if (visibility === 'partial') {
         return (
             bounding.top <= (window.innerHeight || document.documentElement.clientHeight) &&
@@ -24,5 +24,3 @@ const isInViewPort = (bounding: ClientRect | DOMRect, visibility: ViewPortVisibi
         bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     );
 };
-
-export { isInViewPort, ViewPortVisibility };

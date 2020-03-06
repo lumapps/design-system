@@ -1,11 +1,10 @@
-import React, { ReactElement } from 'react';
+import { RadioButton } from '@lumx/react';
+
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-
-import { RadioButton } from '@lumx/react';
+import React, { ReactElement } from 'react';
 import { CLASSNAME, RadioGroup, RadioGroupProps } from './RadioGroup';
 
 /**
@@ -33,13 +32,16 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param   props The props to use to override the default props of the component.
- * @param   [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return  An object with the props, the component wrapper and some shortcut to some element inside of the component.
+ * @param  propsOverrides          The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...props }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: RadioGroupProps = {
+        children: null,
+        ...propsOverrides,
+    };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    // @ts-ignore
     const wrapper = renderer(<RadioGroup {...props} />);
 
     return {
@@ -63,7 +65,7 @@ describe(`<${RadioGroup.displayName}>`, () => {
         it('should render with radio button children', () => {
             const { wrapper, radioButtons } = setup({
                 children: [
-                    <RadioButton key={0} checked={true} label="Label 1" />,
+                    <RadioButton key={0} checked label="Label 1" />,
                     <RadioButton key={1} checked={false} label="Label 2" />,
                 ],
             });

@@ -11,40 +11,36 @@ import isFunction from 'lodash/isFunction';
 /**
  * Defines the props of the component.
  */
-interface CommentBlockProps extends GenericProps {
-    /* Actions elements to be transcluded into the component */
+export interface CommentBlockProps extends GenericProps {
+    /** Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
-    /* The url of the avatar picture we want to display */
+    /** The url of the avatar picture we want to display */
     avatar: string;
-    /* Children elements to be transcluded into the component */
+    /** Children elements to be transcluded into the component */
     children?: HTMLElement | ReactNode;
-    /* Comment timestamp */
+    /** Comment timestamp */
     date: string;
-    /* Where the component has actions to display */
+    /** Where the component has actions to display */
     hasActions?: boolean;
-    /* Whether the component has children blocks to display */
+    /** Whether the component has children blocks to display */
     hasChildren?: boolean;
-    /* Whether the children blocks are shown*/
+    /** Whether the children blocks are shown */
     isOpen?: boolean;
+    /** Whether the comment is relevant */
     isRelevant?: boolean;
-    /* Username display */
+    /** Username display */
     name: string;
-    /* Content to be displayed */
+    /** Content to be displayed */
     text: HTMLElement | string;
-    /* Component theme */
+    /** Component theme */
     theme?: Theme;
-    /* Callback for the click event. */
+    /** Callback for the click event. */
     onClick?(): void;
-    /* Callback for the mouseEnter event. */
+    /** Callback for the mouseEnter event. */
     onMouseEnter?(): void;
-    /* Callback for the mouseEnter event. */
+    /** Callback for the mouseEnter event. */
     onMouseLeave?(): void;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<CommentBlockProps> {}
 
 /**
  * The display name of the component.
@@ -54,12 +50,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}CommentBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<CommentBlockProps> = {
     hasActions: false,
     hasChildren: false,
     isOpen: false,
@@ -72,7 +68,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const CommentBlock: React.FC<CommentBlockProps> = ({
+export const CommentBlock: React.FC<CommentBlockProps> = ({
     actions,
     avatar,
     children,
@@ -87,7 +83,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     onMouseLeave,
     text,
     theme = DEFAULT_PROPS.theme,
-}: CommentBlockProps): React.ReactElement => {
+}) => {
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
             onClick();
@@ -144,5 +140,3 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     );
 };
 CommentBlock.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, CommentBlock, CommentBlockProps };

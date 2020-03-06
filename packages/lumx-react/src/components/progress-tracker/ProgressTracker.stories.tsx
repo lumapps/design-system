@@ -5,15 +5,15 @@ import React from 'react';
 
 export default { title: 'Progress Tracker' };
 
-export const simpleSteps = ({ theme }: any) => (
+export const SimpleSteps = ({ theme }: any) => (
     <ProgressTracker theme={theme}>
         <ProgressTrackerStep theme={theme} onClick={noop} label={text('label', 'First step')} />
-        <ProgressTrackerStep theme={theme} onClick={noop} label={`Second Step`} />
-        <ProgressTrackerStep theme={theme} onClick={noop} label={`Third Step`} />
+        <ProgressTrackerStep theme={theme} onClick={noop} label="Second Step" />
+        <ProgressTrackerStep theme={theme} onClick={noop} label="Third Step" />
     </ProgressTracker>
 );
 
-export const stepsWithHelper = ({ theme }: any) => (
+export const StepsWithHelper = ({ theme }: any) => (
     <ProgressTracker activeStep={1} theme={theme}>
         <ProgressTrackerStep
             theme={theme}
@@ -27,7 +27,7 @@ export const stepsWithHelper = ({ theme }: any) => (
     </ProgressTracker>
 );
 
-export const stepsWithError = ({ theme }: any) => (
+export const StepsWithError = ({ theme }: any) => (
     <ProgressTracker activeStep={1} theme={theme}>
         <ProgressTrackerStep theme={theme} onClick={noop} label="First Step" helper="your data" isComplete />
         <ProgressTrackerStep
@@ -41,7 +41,7 @@ export const stepsWithError = ({ theme }: any) => (
     </ProgressTracker>
 );
 
-export const stepsCompletedWithError = ({ theme }: any) => (
+export const StepsCompletedWithError = ({ theme }: any) => (
     <ProgressTracker activeStep={2} theme={theme}>
         <ProgressTrackerStep theme={theme} onClick={noop} label="First Step" helper="your data" isComplete />
         <ProgressTrackerStep

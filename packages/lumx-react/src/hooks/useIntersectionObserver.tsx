@@ -13,23 +13,27 @@ export function useIntersectionObserver<T extends Element>(
 ) {
     const [intersections, setIntersections] = useState<Map<T, IntersectionObserverEntry>>(() => new Map());
 
-    useEffect(() => {
-        if (elements.length < 1 || !elements.some(Boolean)) {
-            return;
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            for (const entry of entries) {
-                intersections.set(entry.target as T, entry);
+    useEffect(
+        () => {
+            if (elements.length < 1 || !elements.some(Boolean)) {
+                return undefined;
             }
-            setIntersections(new Map(intersections));
-        }, options);
 
-        for (const element of elements) {
-            observer.observe(element!);
-        }
-        return () => observer.disconnect();
-    }, [...elements]);
+            const observer = new IntersectionObserver((entries) => {
+                for (const entry of entries) {
+                    intersections.set(entry.target as T, entry);
+                }
+                setIntersections(new Map(intersections));
+            }, options);
+
+            for (const element of elements) {
+                observer.observe(element as T);
+            }
+            return () => observer.disconnect();
+        },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [...elements],
+    );
 
     return intersections;
 }

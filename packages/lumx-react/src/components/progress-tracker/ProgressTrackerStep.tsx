@@ -14,12 +14,7 @@ import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } f
 /**
  * Defines the props of the component.
  */
-interface ProgressTrackerStepProps extends GenericProps {}
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {
+export interface ProgressTrackerStepProps extends GenericProps {
     /** Whether the step should be in error state or not. */
     hasError?: boolean;
 
@@ -27,10 +22,10 @@ interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {
     helper?: string | null;
 
     /** Whether the current step is active. */
-    isActive: boolean;
+    isActive?: boolean;
 
     /** Whether the current step is completed. */
-    isComplete: boolean;
+    isComplete?: boolean;
 
     /** The step's label. */
     label: string | null;
@@ -47,12 +42,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStep`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {
     hasError: false,
     helper: null,
     isActive: false,
@@ -66,8 +61,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
-    className = '',
+export const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
+    className,
     hasError = DEFAULT_PROPS.hasError,
     helper = DEFAULT_PROPS.helper,
     isActive = DEFAULT_PROPS.isActive,
@@ -76,7 +71,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }) => {
-    const { onClick = null, ...restProps }: ProgressTrackerStepProps = props;
+    const { onClick = null, ...restProps } = props;
 
     const isClickable: boolean = isFunction(onClick);
 
@@ -111,6 +106,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
                 { [`${CLASSNAME}--has-error`]: hasError },
             )}
             tabIndex={isClickable ? 0 : -1}
+            role="button"
             onClick={onClick}
             onKeyDown={onEnterPressed(onClick)}
             {...restProps}
@@ -129,7 +125,4 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
         </a>
     );
 };
-
 ProgressTrackerStep.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, ProgressTrackerStep, ProgressTrackerStepProps };

@@ -6,7 +6,7 @@ const getThemeId = (theme: string) => `theme-${theme}`;
 
 const getThemeElement = (theme: Theme) => document.getElementById(getThemeId(theme));
 
-async function switchToTheme(oldTheme: Theme, newTheme: Theme) {
+export async function switchToTheme(oldTheme: Theme, newTheme: Theme) {
     const oldThemeElement = getThemeElement(oldTheme);
 
     if (oldThemeElement?.tagName === 'LINK') {
@@ -20,5 +20,3 @@ async function switchToTheme(oldTheme: Theme, newTheme: Theme) {
         switchDevTheme(oldTheme, newTheme);
     }
 }
-
-export { switchToTheme };

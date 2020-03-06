@@ -16,18 +16,18 @@ const options = {
 
 export default { title: 'Badge' };
 
-export const simpleBadgeWithValue = () => (
+export const SimpleBadgeWithValue = () => (
     <Badge color={select('Colors', options, ColorPalette.blue)}>
         <span>{text('Value', '30')}</span>
     </Badge>
 );
 
-export const simpleBadgeWithIcon = () => (
+export const SimpleBadgeWithIcon = () => (
     <Badge color={select('Colors', options, ColorPalette.red)}>
         <Icon icon={mdiHeart} />
     </Badge>
 );
-export const simpleBadgeWithThumbnail = () => (
+export const SimpleBadgeWithThumbnail = () => (
     <Badge color={select('Colors', options, ColorPalette.light)}>
         <Thumbnail
             aspectRatio={AspectRatio.square}

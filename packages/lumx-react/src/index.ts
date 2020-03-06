@@ -106,21 +106,21 @@ export { UserBlock, UserBlockProps } from './components/user-block/UserBlock';
 
 export { CommentBlock, CommentBlockProps } from './components/comment-block/CommentBlock';
 
-export { Toolbar } from './components/toolbar/Toolbar';
+export { Toolbar, ToolbarProps } from './components/toolbar/Toolbar';
 
 export { DragHandle, DragHandleProps } from './components/drag-handle/DragHandle';
 
 export { ExpansionPanel, ExpansionPanelProps } from './components/expansion-panel/ExpansionPanel';
 
-export { Grid } from './components/grid/Grid';
+export { Grid, GridProps } from './components/grid/Grid';
 
-export { GridItem } from './components/grid/GridItem';
+export { GridItem, GridItemProps } from './components/grid/GridItem';
 
 export { SideNavigation, SideNavigationProps } from './components/side-navigation/SideNavigation';
 
 export { SideNavigationItem, SideNavigationItemProps } from './components/side-navigation/SideNavigationItem';
 
-export { Slider } from './components/slider/Slider';
+export { Slider, SliderProps } from './components/slider/Slider';
 
 export { Dialog, DialogSizes } from './components/dialog/Dialog';
 

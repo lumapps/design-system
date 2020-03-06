@@ -33,7 +33,7 @@ const renderTypeTableRow = ({ type, defaultValue }: Property): ReactElement => {
     return <span className="lumx-typography-body1">{formattedType}</span>;
 };
 
-const PropTableRow: React.FC<PropTableRowProps> = ({ property }) => {
+export const PropTableRow: React.FC<PropTableRowProps> = ({ property }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleOpen = () => {
         setIsOpen(!isOpen);
@@ -98,10 +98,10 @@ export interface Property {
     defaultValue: string;
 }
 
-interface PropTableRowProps {
+export interface PropTableRowProps {
     property: Property;
 }
 
-interface PropTableProps {
+export interface PropTableProps {
     component: string;
 }

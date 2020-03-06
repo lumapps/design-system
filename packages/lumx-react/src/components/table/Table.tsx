@@ -10,7 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface TableProps extends GenericProps {
+export interface TableProps extends GenericProps {
     /**
      * Whether the table has checkbox or thumbnail on first cell.
      */
@@ -26,11 +26,6 @@ interface TableProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TableProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Table`;
@@ -38,12 +33,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Table`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<TableProps> = {
     hasBefore: false,
     hasDividers: false,
     theme: Theme.light,
@@ -54,9 +49,9 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Table: React.FC<TableProps> = ({
+export const Table: React.FC<TableProps> = ({
     children,
-    className = '',
+    className,
     hasBefore,
     hasDividers,
     theme = DEFAULT_PROPS.theme,
@@ -69,7 +64,4 @@ const Table: React.FC<TableProps> = ({
         {children}
     </table>
 );
-
 Table.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Table, TableProps };

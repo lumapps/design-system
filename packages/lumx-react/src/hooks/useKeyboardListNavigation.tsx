@@ -17,7 +17,7 @@ interface UseKeyboardListNavigationType {
     setActiveItemIndex(value: SetStateAction<number>): void;
 }
 
-type useKeyboardListNavigationType = <I>(
+export type useKeyboardListNavigationType = <I>(
     items: I[],
     ref: RefObject<HTMLElement>,
     onListItemSelected: (itemSelected: I) => void,
@@ -45,7 +45,7 @@ const INITIAL_INDEX = -1;
  * @param initialIndex             where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0`
  * @param preventTabOnEnteredValue determines whether upon TAB, if there is a value entered, the event is prevented or not
  */
-const useKeyboardListNavigation: useKeyboardListNavigationType = (
+export const useKeyboardListNavigation: useKeyboardListNavigationType = (
     items,
     ref,
     onListItemSelected,
@@ -186,7 +186,7 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
     useEffect(() => {
         const { current: currentElement } = ref;
         if (!currentElement) {
-            return;
+            return undefined;
         }
         currentElement.addEventListener('focus', resetActiveIndex);
         currentElement.addEventListener('keydown', onKeyboardNavigation);
@@ -203,5 +203,3 @@ const useKeyboardListNavigation: useKeyboardListNavigationType = (
         setActiveItemIndex,
     };
 };
-
-export { useKeyboardListNavigation, useKeyboardListNavigationType };

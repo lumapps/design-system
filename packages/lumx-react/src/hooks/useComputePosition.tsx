@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { ElementPosition, Offset, Placement } from '@lumx/react/components/popover/Popover';
 
 import { calculatePopoverPlacement } from '@lumx/react/utils/calculatePopoverPlacement';
 import { isInViewPort } from '@lumx/react/utils/isInViewPort';
 
-type useComputePositionType = (
+export type useComputePositionType = (
     placement: Placement,
     anchorRef: React.RefObject<HTMLElement>,
     popoverRef: React.RefObject<HTMLDivElement>,
@@ -27,28 +27,27 @@ type useComputePositionType = (
  * @param placement Placement of tooltip.
  * @param anchorRef Ref of anchor element.
  * @param popoverRef Ref of tooltip.
+ * @param isVisible Popover is visible.
  * @param [offset] Offset between the anchor and the popover.
  * @param [staysOpenOnHover] Whether the popover has to be displayed when hovered.
  * @param [hasParentWidth] Whether component has to match parent width.
  * @param [hasParentHeight] Whether component has to match parent height.
  * @param [dependencies] Dependencies of hook.
+ * @param [callback] Callback called with the updated position.
  * @return Position of the popover relative to the anchor element.
  */
-const useComputePosition: useComputePositionType = (
-    placement: Placement,
-    anchorRef: React.RefObject<HTMLElement>,
-    popoverRef: React.RefObject<HTMLDivElement>,
-    isVisible: boolean,
-    offset: Offset = { horizontal: 0, vertical: 0 },
-    staysOpenOnHover: boolean = true,
-    hasParentWidth?: boolean,
-    hasParentHeight?: boolean,
-    dependencies: any[] = [placement, anchorRef, popoverRef],
-    callback?: (position: ElementPosition) => void,
-): {
-    computedPosition: ElementPosition;
-    isVisible: boolean;
-} => {
+export const useComputePosition: useComputePositionType = (
+    placement,
+    anchorRef,
+    popoverRef,
+    isVisible,
+    offset = { horizontal: 0, vertical: 0 },
+    staysOpenOnHover = true,
+    hasParentWidth?,
+    hasParentHeight?,
+    dependencies = [placement, anchorRef, popoverRef],
+    callback?,
+) => {
     const WINDOW_BOUNDING_OFFSET = 16;
     const MIN_SPACE_BELOW = 150;
     const MATCHING_PLACEMENT = Placement && {
@@ -177,9 +176,7 @@ const useComputePosition: useComputePositionType = (
         newPosition.width = hasParentWidth ? boundingAnchor.width : 0;
         newPosition.height = hasParentHeight ? boundingAnchor.height : 0;
 
-        if (callback) {
-            callback(newPosition);
-        }
+        callback?.(newPosition);
 
         setComputedPosition(newPosition);
     };
@@ -187,28 +184,27 @@ const useComputePosition: useComputePositionType = (
     /**
      * Handle mouse entering the popover.
      */
-    const handleMouseEnter = () => {
+    const handleMouseEnter = useCallback(() => {
         setIsMouseEntered(true);
-    };
+    }, []);
 
     /**
      * Handle mouse leaving the popover.
      */
-    const handleMouseLeave = () => {
+    const handleMouseLeave = useCallback(() => {
         setIsMouseEntered(false);
-    };
+    }, []);
 
     useEffect(() => {
-        if (popoverRef && popoverRef.current && (isVisible || isMouseEntered)) {
-            popoverRef.current!.addEventListener('mouseenter', handleMouseEnter);
-            popoverRef.current!.addEventListener('mouseleave', handleMouseLeave);
+        const popover = popoverRef.current;
+        if (!(popover && (isVisible || isMouseEntered))) {
+            return undefined;
         }
-
+        popover.addEventListener('mouseenter', handleMouseEnter);
+        popover.addEventListener('mouseleave', handleMouseLeave);
         return () => {
-            if (popoverRef && popoverRef.current) {
-                popoverRef.current!.removeEventListener('mouseenter', handleMouseEnter);
-                popoverRef.current!.removeEventListener('mouseleave', handleMouseLeave);
-            }
+            popover.removeEventListener('mouseenter', handleMouseEnter);
+            popover.removeEventListener('mouseleave', handleMouseLeave);
         };
     }, [isAnchorInViewport, isVisible, isMouseEntered, handleMouseEnter, handleMouseLeave, popoverRef]);
 
@@ -222,9 +218,8 @@ const useComputePosition: useComputePositionType = (
             window.removeEventListener('scroll', computePosition, true);
             window.removeEventListener('resize', computePosition);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [...dependencies, isAnchorInViewport, isVisible]);
 
     return { computedPosition, isVisible: isVisible || (staysOpenOnHover && isMouseEntered) };
 };
-
-export { useComputePosition, useComputePositionType };

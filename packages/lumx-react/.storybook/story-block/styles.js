@@ -1,4 +1,4 @@
-const styles = {
+export const styles = {
     block: {
         padding: '20px',
     },
@@ -13,4 +13,3 @@ const styles = {
     },
 };
 
-export { styles };

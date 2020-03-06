@@ -11,7 +11,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Different possible placements for the popover.
  */
-enum Placement {
+export enum Placement {
     AUTO = 'auto',
     AUTO_END = 'auto-end',
     AUTO_START = 'auto-start',
@@ -36,7 +36,7 @@ enum Placement {
 /**
  * Vertical and horizontal offset of the popover.
  */
-interface Offset {
+export interface Offset {
     vertical?: number;
     horizontal?: number;
 }
@@ -44,7 +44,7 @@ interface Offset {
 /**
  * Position for arrow or tooltip.
  */
-interface ElementPosition {
+export interface ElementPosition {
     x: number;
     y: number;
     width?: number;
@@ -60,7 +60,7 @@ interface ElementPosition {
 /**
  * Defines the props of the component.
  */
-interface PopoverProps extends GenericProps {
+export interface PopoverProps extends GenericProps {
     /** The position the popover should be bounded to. */
     popoverRect: ElementPosition;
     /** Should the popper be displayed. */
@@ -78,11 +78,6 @@ interface PopoverProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<PopoverProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Popover`;
@@ -90,12 +85,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Popover`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<PopoverProps> = {
     className: '',
     elevation: 3,
     placement: Placement.TOP,
@@ -109,7 +104,7 @@ interface Popover {
  *
  * @return The component.
  */
-const Popover: React.FC<PopoverProps> & Popover = ({
+export const Popover: React.FC<PopoverProps> & Popover = ({
     popoverRect,
     popoverRef,
     children,
@@ -157,5 +152,3 @@ const Popover: React.FC<PopoverProps> & Popover = ({
 };
 Popover.displayName = COMPONENT_NAME;
 Popover.useComputePosition = useComputePosition;
-
-export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, ElementPosition, Offset };

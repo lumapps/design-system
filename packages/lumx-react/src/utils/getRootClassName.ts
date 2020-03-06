@@ -13,17 +13,15 @@ import trimStart from 'lodash/trimStart';
  * @return The name of the root CSS class. This classname include the CSS classname prefix and is written in
  *         lower-snake-case.
  */
-function getRootClassName(componentName: string, subComponent?: boolean): string {
+export function getRootClassName(componentName: string, subComponent?: boolean): string {
     const formattedClassName = `${CSS_PREFIX}-${kebabCase(trimStart(componentName, COMPONENT_PREFIX))}`;
 
     if (subComponent) {
         // See https://regex101.com/r/YjS1uI/3
-        const lastPieceOfClassNameRegExp: RegExp = /^(.*)-(.+)$/gi;
+        const lastPieceOfClassNameRegExp = /^(.*)-(.+)$/gi;
 
         return formattedClassName.replace(lastPieceOfClassNameRegExp, '$1__$2');
     }
 
     return formattedClassName;
 }
-
-export { getRootClassName };

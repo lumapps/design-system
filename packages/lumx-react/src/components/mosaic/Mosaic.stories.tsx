@@ -5,7 +5,7 @@ import { Mosaic } from './Mosaic';
 
 export default { title: 'Mosaic' };
 
-export const oneThumbnail = ({ theme }: any) => {
+export const OneThumbnail = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };
 
     return (
@@ -15,7 +15,7 @@ export const oneThumbnail = ({ theme }: any) => {
     );
 };
 
-export const twoThumbnails = ({ theme }: any) => {
+export const TwoThumbnails = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };
 
     return (
@@ -28,7 +28,7 @@ export const twoThumbnails = ({ theme }: any) => {
     );
 };
 
-export const threeThumbnails = ({ theme }: any) => {
+export const ThreeThumbnails = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };
 
     return (
@@ -45,7 +45,7 @@ export const threeThumbnails = ({ theme }: any) => {
     );
 };
 
-export const fourThumbnails = ({ theme }: any) => {
+export const FourThumbnails = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };
 
     return (
@@ -63,7 +63,7 @@ export const fourThumbnails = ({ theme }: any) => {
     );
 };
 
-export const sixThumbnails = ({ theme }: any) => {
+export const SixThumbnails = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };
     const [activeIndex, setActiveIndex] = useState();
     const lightBoxParent = useRef(null);
@@ -88,19 +88,12 @@ export const sixThumbnails = ({ theme }: any) => {
                 parentElement={lightBoxParent}
                 onClose={closeLightBox}
             >
-                <Slideshow activeIndex={activeIndex} hasControls={true} fillHeight={true} theme={Theme.dark}>
-                    {thumbnails.map((th, idx) => {
-                        return (
-                            <SlideshowItem key={`${th.url}-${idx}`}>
-                                <ImageBlock
-                                    image={th.url}
-                                    align={Alignment.center}
-                                    fillHeight={true}
-                                    theme={Theme.dark}
-                                />
-                            </SlideshowItem>
-                        );
-                    })}
+                <Slideshow activeIndex={activeIndex} hasControls fillHeight theme={Theme.dark}>
+                    {thumbnails.map((th) => (
+                        <SlideshowItem key={th.url}>
+                            <ImageBlock image={th.url} align={Alignment.center} fillHeight theme={Theme.dark} />
+                        </SlideshowItem>
+                    ))}
                 </Slideshow>
             </Lightbox>
         </div>

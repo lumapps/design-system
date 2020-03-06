@@ -8,7 +8,7 @@ import {
     mdiWrench,
 } from '@lumx/icons';
 
-function DemoController(LxDropdownService) {
+export function DemoController(LxDropdownService) {
     'ngInject';
 
     const vm = this;
@@ -71,5 +71,3 @@ function DemoController(LxDropdownService) {
 }
 
 angular.module('design-system').controller('DemoController', DemoController);
-
-export { DemoController };

@@ -45,6 +45,7 @@
         ],
         "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
         "no-unused-expressions": "off",
+        "no-underscore-dangle": ["error", { "allow": ["__html"] }],
         "@typescript-eslint/no-unused-expressions": "error",
         "import/extensions": [
             "error",
@@ -56,7 +57,7 @@
         ],
         "import/no-unresolved": "off",
         "import/prefer-default-export": "off",
-        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.test.ts", "**/*.test.jsx", "**/*.test.tsx"]}],
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.js", "**/*.test.ts", "**/*.test.jsx", "**/*.test.tsx", "**/*.stories.tsx", "**/testing/**/*.ts"]}],
         "react/prop-types": "off",
         "react/jsx-props-no-spreading": "off",
         "@typescript-eslint/no-explicit-any": "off",

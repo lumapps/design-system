@@ -30,12 +30,11 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
+ * @param  propsOverrides          The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
     const props: TabProps = {
         ...propsOverrides,
     };
@@ -66,7 +65,8 @@ describe(`<${Tab.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should use the given props', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
+            const props: any = build('props');
+            const modifiedPropsBuilder: () => SetupProps = props.fields({
                 children: 'Tab Content',
                 icon: mdiCheck,
                 label: 'Test Tab Label',
@@ -79,7 +79,8 @@ describe(`<${Tab.displayName}>`, () => {
         });
 
         it('should use the given props to add classes', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
+            const props: any = build('props');
+            const modifiedPropsBuilder: () => SetupProps = props.fields({
                 isActive: true,
                 isDisabled: true,
             });
@@ -108,14 +109,14 @@ describe(`<${Tab.displayName}>`, () => {
             const { wrapper } = setup({ index: 7, onTabClick }, false);
 
             wrapper.simulate('click');
-            expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 7 });
+            expect(onTabClick).toHaveBeenCalledWith({ event: expect.any(Object), index: 7 });
         });
 
         it('should trigger `onTabClick` when pressing `enter` key', () => {
             const { wrapper } = setup({ index: 9, onTabClick }, false);
 
             wrapper.simulate('keypress', { keyCode: 13 });
-            expect(onTabClick).toHaveBeenCalledWith({ event: jasmine.any(Object), index: 9 });
+            expect(onTabClick).toHaveBeenCalledWith({ event: expect.any(Object), index: 9 });
         });
 
         it('should not trigger `onTabClick` when pressing any other key', () => {

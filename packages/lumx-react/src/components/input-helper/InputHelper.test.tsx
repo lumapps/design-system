@@ -1,10 +1,9 @@
-import React, { ReactElement } from 'react';
+import { Kind, Theme } from '@lumx/react';
+import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-
-import { Kind, Theme } from '@lumx/react';
-import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
+import React, { ReactElement } from 'react';
 import { CLASSNAME, InputHelper, InputHelperProps } from './InputHelper';
 
 /**
@@ -32,13 +31,16 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  props                   The props to use to override the default props of the component.
+ * @param  propsOverrides          The props to use to override the default props of the component.
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: InputHelperProps = {
+        children: null,
+        ...propsOverrides,
+    };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    // @ts-ignore
     const wrapper: Wrapper = renderer(<InputHelper {...props} />);
     const helper: Wrapper = wrapper.find('.lumx-input-helper');
 

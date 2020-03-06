@@ -13,7 +13,7 @@ import uniqueId from 'lodash/uniqueId';
 /**
  * Defines the props of the component.
  */
-interface CheckboxProps extends GenericProps {
+export interface CheckboxProps extends GenericProps {
     /** Is checkbox disabled */
     disabled?: boolean;
     /** Helper */
@@ -36,11 +36,6 @@ interface CheckboxProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<CheckboxProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Checkbox`;
@@ -48,12 +43,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Checkbox`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<CheckboxProps> = {
     disabled: false,
     theme: Theme.light,
     value: false,
@@ -64,7 +59,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox: React.FC<CheckboxProps> = ({
     className,
     disabled = DEFAULT_PROPS.disabled,
     helper,
@@ -131,5 +126,3 @@ const Checkbox: React.FC<CheckboxProps> = ({
     );
 };
 Checkbox.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps };

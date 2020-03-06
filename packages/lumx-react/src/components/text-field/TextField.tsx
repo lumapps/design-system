@@ -1,4 +1,5 @@
-import React, { ReactNode, RefObject, useState } from 'react';
+import { useExistingRef } from '@lumx/react/hooks/useExistingRef';
+import React, { ReactNode, RefObject, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -12,7 +13,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface TextFieldProps extends GenericProps {
+export interface TextFieldProps extends GenericProps {
     /** A Chip Group to be rendered before the main text input */
     chips?: HTMLElement | ReactNode;
 
@@ -94,7 +95,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}TextField`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The minimum number of rows that we want to display on the text area
@@ -104,7 +105,7 @@ const MIN_ROWS = 2;
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<TextFieldProps> = {
+export const DEFAULT_PROPS: Partial<TextFieldProps> = {
     forceFocusStyle: false,
     hasError: false,
     isClearable: false,
@@ -115,6 +116,8 @@ const DEFAULT_PROPS: Partial<TextFieldProps> = {
     multiline: false,
     theme: Theme.light,
 };
+
+/* eslint-disable no-param-reassign */
 /**
  * Hook that allows to calculate the number of rows needed for a text area.
  * @param minimumRows Minimum number of rows that we want to display.
@@ -161,9 +164,9 @@ const useComputeNumberOfRows = (
     };
 };
 
-interface InputNativeProps {
+export interface InputNativeProps {
     id?: string;
-    inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
+    inputRef?: RefObject<HTMLInputElement | HTMLTextAreaElement>;
     isDisabled?: boolean;
     isRequired?: boolean;
     multiline?: boolean;
@@ -178,7 +181,7 @@ interface InputNativeProps {
     onBlur?(value: React.FocusEvent): void;
 }
 
-const renderInputNative: React.FC<InputNativeProps> = (props) => {
+export const renderInputNative: React.FC<InputNativeProps> = (props) => {
     const {
         id,
         isDisabled,
@@ -257,10 +260,10 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
  * @param  props Text field props.
  * @return The component.
  */
-const TextField: React.FC<TextFieldProps> = (props) => {
+export const TextField: React.FC<TextFieldProps> = (props) => {
     const {
         chips,
-        className = '',
+        className,
         error,
         forceFocusStyle = DEFAULT_PROPS.forceFocusStyle,
         hasError,
@@ -278,7 +281,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         onBlur,
         placeholder,
         minimumRows = DEFAULT_PROPS.minimumRows as number,
-        inputRef = React.useRef(null),
+        inputRef: propInputRef,
         theme = DEFAULT_PROPS.theme,
         multiline = DEFAULT_PROPS.multiline,
         useCustomColors,
@@ -287,6 +290,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         ...forwardedProps
     } = props;
 
+    const inputRef = useExistingRef<HTMLInputElement | HTMLTextAreaElement>(propInputRef);
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
     const valueLength = (value && value.length) || 0;
@@ -412,5 +416,3 @@ const TextField: React.FC<TextFieldProps> = (props) => {
     );
 };
 TextField.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps };

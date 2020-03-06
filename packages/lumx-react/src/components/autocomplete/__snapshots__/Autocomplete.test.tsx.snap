@@ -7,7 +7,7 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
   <TextField
     inputRef={
       Object {
-        "current": null,
+        "current": undefined,
       }
     }
     onChange={[MockFunction]}
@@ -106,7 +106,7 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
   <TextField
     inputRef={
       Object {
-        "current": null,
+        "current": undefined,
       }
     }
     onChange={[MockFunction]}

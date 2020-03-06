@@ -1,3 +1,4 @@
+import { useExistingRef } from '@lumx/react/hooks/useExistingRef';
 import React, { Children, ReactElement, ReactNode, RefObject, cloneElement, useRef, useState } from 'react';
 
 import classNames from 'classnames';
@@ -18,7 +19,7 @@ import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/
 /**
  * Defines the props of the component.
  */
-interface ListProps extends GenericProps {
+export interface ListProps extends GenericProps {
     /** List content (should use `<ListItem>`, `<ListSubheader>` or `<ListDivider>`) */
     children: ReactNode;
 
@@ -42,11 +43,6 @@ interface ListProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ListProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
@@ -54,12 +50,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}List`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<ListProps> = {
     isClickable: false,
     itemPadding: Size.big,
     theme: Theme.light,
@@ -74,17 +70,19 @@ interface List {
  *
  * @return The component.
  */
-const List: React.FC<ListProps> & List = ({
-    className = '',
+export const List: React.FC<ListProps> & List = ({
+    className,
     isClickable = DEFAULT_PROPS.isClickable,
     itemPadding = DEFAULT_PROPS.itemPadding,
-    listElementRef = useRef(null),
+    listElementRef: propListElementRef,
     onListItemSelected,
     useCustomColors,
     theme = DEFAULT_PROPS.theme,
+    children,
     ...props
 }) => {
-    const children = Children.toArray(props.children);
+    const listElementRef = useExistingRef(propListElementRef);
+    const childrenArray = Children.toArray(children);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
 
@@ -102,6 +100,21 @@ const List: React.FC<ListProps> & List = ({
     };
 
     /**
+     * Reset the active element
+     * @param fromBlur Is request from blur event
+     */
+    const resetActiveIndex = (fromBlur: boolean) => {
+        if (!isClickable || preventResetOnBlurOrFocus.current) {
+            if (fromBlur) {
+                preventResetOnBlurOrFocus.current = false;
+            }
+            return;
+        }
+        preventResetOnBlurOrFocus.current = false;
+        setActiveItemIndex(-1);
+    };
+
+    /**
      * Handle the blur event on the list -> we should reset the selection.
      */
     const onListBlurred = () => {
@@ -116,18 +129,37 @@ const List: React.FC<ListProps> & List = ({
     };
 
     /**
-     * Reset the active element
-     * @param fromBlur Is request from blur event
+     * Returns the index of the list item to activate. By default we search for the next
+     * available element.
+     * @param  previous Flag which indicates if we should search for the previous list item
+     * @return Index of the element to activate.
      */
-    const resetActiveIndex = (fromBlur: boolean) => {
-        if (!isClickable || preventResetOnBlurOrFocus.current) {
-            if (fromBlur) {
-                preventResetOnBlurOrFocus.current = false;
-            }
-            return;
+    const selectItemOnKeyDown = (previous: boolean): number => {
+        const lookupTable = childrenArray
+            .slice(activeItemIndex + 1)
+            .concat(childrenArray.slice(0, activeItemIndex + 1));
+
+        if (previous) {
+            lookupTable.reverse();
+            const first = lookupTable.shift() as ReactElement;
+            lookupTable.push(first);
         }
-        preventResetOnBlurOrFocus.current = false;
-        setActiveItemIndex(-1);
+
+        let nextIdx: number = activeItemIndex;
+
+        for (const child of lookupTable) {
+            nextIdx = previous ? nextIdx - 1 : nextIdx + 1;
+            if (nextIdx > childrenArray.length - 1) {
+                nextIdx = 0;
+            }
+            if (nextIdx < 0) {
+                nextIdx = lookupTable.length - 1;
+            }
+            if (isComponent(ListItem)(child)) {
+                break;
+            }
+        }
+        return nextIdx;
     };
 
     /**
@@ -153,40 +185,8 @@ const List: React.FC<ListProps> & List = ({
         } else if (evt.keyCode === ENTER_KEY_CODE && onListItemSelected) {
             evt.nativeEvent.preventDefault();
             evt.nativeEvent.stopPropagation();
-            onListItemSelected(children[activeItemIndex]);
+            onListItemSelected(childrenArray[activeItemIndex]);
         }
-    };
-
-    /**
-     * Returns the index of the list item to activate. By default we search for the next
-     * available element.
-     * @param  previous Flag which indicates if we should search for the previous list item
-     * @return Index of the element to activate.
-     */
-    const selectItemOnKeyDown = (previous: boolean): number => {
-        const lookupTable = children.slice(activeItemIndex + 1).concat(children.slice(0, activeItemIndex + 1));
-
-        if (previous) {
-            lookupTable.reverse();
-            const first = lookupTable.shift() as ReactElement;
-            lookupTable.push(first);
-        }
-
-        let nextIdx: number = activeItemIndex;
-
-        for (const child of lookupTable) {
-            nextIdx = previous ? nextIdx - 1 : nextIdx + 1;
-            if (nextIdx > children.length - 1) {
-                nextIdx = 0;
-            }
-            if (nextIdx < 0) {
-                nextIdx = lookupTable.length - 1;
-            }
-            if (isComponent(ListItem)(child)) {
-                break;
-            }
-        }
-        return nextIdx;
     };
 
     return (
@@ -195,6 +195,7 @@ const List: React.FC<ListProps> & List = ({
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
                 [`${CSS_PREFIX}-list--item-padding-${itemPadding}`]: isClickable,
             })}
+            role="menu"
             tabIndex={isClickable ? 0 : -1}
             onKeyDown={onKeyInteraction}
             onKeyPress={onKeyInteraction}
@@ -203,7 +204,7 @@ const List: React.FC<ListProps> & List = ({
             ref={listElementRef as React.RefObject<HTMLUListElement>}
             {...props}
         >
-            {children.map((elm: ReactNode, idx: number) => {
+            {childrenArray.map((elm: ReactNode, idx: number) => {
                 if (isClickable && isComponent(ListItem)(elm)) {
                     const elemProps: Partial<ListItemProps> = {};
                     elemProps.onMouseDown = (evt: React.MouseEvent) => mouseDownHandler(evt, idx, elm.props);
@@ -218,8 +219,5 @@ const List: React.FC<ListProps> & List = ({
         </ul>
     );
 };
-
 List.displayName = COMPONENT_NAME;
 List.useKeyboardListNavigation = useKeyboardListNavigation;
-
-export { CLASSNAME, DEFAULT_PROPS, List, ListProps };

@@ -10,7 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface WebBookmarkProps extends GenericProps {
+export interface WebBookmarkProps extends GenericProps {
     /** The url of the link. */
     url: string;
     /** Content text. Can be either a string, or sanitized html. */
@@ -30,11 +30,6 @@ interface WebBookmarkProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<WebBookmarkProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}WebBookmark`;
@@ -42,12 +37,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}WebBookmark`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<WebBookmarkProps> = {
     size: Size.regular,
     theme: Theme.light,
 };
@@ -57,7 +52,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const WebBookmark: React.FC<WebBookmarkProps> = ({
+export const WebBookmark: React.FC<WebBookmarkProps> = ({
     className,
     title,
     description,
@@ -112,7 +107,4 @@ const WebBookmark: React.FC<WebBookmarkProps> = ({
         </div>
     );
 };
-
 WebBookmark.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, WebBookmark, WebBookmarkProps };

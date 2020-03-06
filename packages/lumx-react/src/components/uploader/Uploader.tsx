@@ -6,18 +6,18 @@ import { AspectRatio, Icon, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-enum UploaderVariant {
+export enum UploaderVariant {
     square = 'square',
     rounded = 'rounded',
     circle = 'circle',
 }
 
-type UploaderSize = Size.xl | Size.xxl;
+export type UploaderSize = Size.xl | Size.xxl;
 
 /**
  * Defines the props of the component.
  */
-interface UploaderProps extends GenericProps {
+export interface UploaderProps extends GenericProps {
     /**
      * Aspect ratio
      */
@@ -56,12 +56,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Uploader`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<UploaderProps> = {
+export const DEFAULT_PROPS: Partial<UploaderProps> = {
     aspectRatio: AspectRatio.horizontal,
     size: Size.xl,
     theme: Theme.light,
@@ -73,7 +73,7 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
  *
  * @return The component.
  */
-const Uploader: React.FC<UploaderProps> = (props) => {
+export const Uploader: React.FC<UploaderProps> = (props) => {
     const {
         aspectRatio = DEFAULT_PROPS.aspectRatio,
         className,
@@ -117,5 +117,3 @@ const Uploader: React.FC<UploaderProps> = (props) => {
     );
 };
 Uploader.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Uploader, UploaderProps, UploaderVariant };

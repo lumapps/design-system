@@ -1,19 +1,17 @@
 import { Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import React, { LabelHTMLAttributes, ReactNode } from 'react';
 
 /**
  * Defines the props of the component.
  */
-interface InputLabelProps extends GenericProps {
+export interface InputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
     isRequired?: boolean;
     theme?: Theme;
     children: string | ReactNode;
 }
-
-interface DefaultPropsType extends Partial<InputLabelProps> {}
 
 /**
  * The display name of the component.
@@ -23,28 +21,30 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}InputLabel`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<InputLabelProps> = {
     isRequired: false,
     theme: Theme.light,
 };
 
-const InputLabel: React.FC<InputLabelProps> = ({
-    className = '',
+export const InputLabel: React.FC<InputLabelProps> = ({
+    className,
     isRequired = DEFAULT_PROPS.isRequired,
     theme = DEFAULT_PROPS.theme,
+    htmlFor,
     children,
     ...props
 }) => (
-    <label className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))} {...props}>
+    <label
+        {...props}
+        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))}
+        htmlFor={htmlFor}
+    >
         {children}
     </label>
 );
-
 InputLabel.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, InputLabel, InputLabelProps };

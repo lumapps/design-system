@@ -7,10 +7,8 @@ import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Size, Theme } from '@lumx/react';
 
-import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
-
+import { NOTIFICATION_TRANSITION_DURATION, COMPONENT_PREFIX } from '@lumx/react/constants';
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
@@ -18,7 +16,7 @@ import { useDelayedVisibility } from '@lumx/react/hooks/useDelayedVisibility';
 /**
  * Different types of notification.
  */
-enum NotificationType {
+export enum NotificationType {
     info = 'info',
     success = 'success',
     warning = 'warning',
@@ -28,7 +26,7 @@ enum NotificationType {
 /**
  * Defines the props of the component.
  */
-interface NotificationProps extends GenericProps {
+export interface NotificationProps extends GenericProps {
     /** Label for action button. */
     actionLabel?: string;
 
@@ -55,11 +53,6 @@ interface NotificationProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<NotificationProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Notification`;
@@ -67,12 +60,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Notification`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<NotificationProps> = {
     content: '',
     theme: Theme.light,
     zIndex: 9999,
@@ -83,11 +76,11 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The notification component.
  */
-const Notification: React.FC<NotificationProps> = ({
+export const Notification: React.FC<NotificationProps> = ({
     actionCallback,
     actionLabel,
     content = DEFAULT_PROPS.content,
-    className = '',
+    className,
     handleClick,
     isOpen = false,
     theme = DEFAULT_PROPS.theme,
@@ -95,7 +88,7 @@ const Notification: React.FC<NotificationProps> = ({
     zIndex = DEFAULT_PROPS.zIndex,
     ...props
 }) => {
-    const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
+    const hasAction = Boolean(actionCallback) && Boolean(actionLabel);
 
     const isVisible = useDelayedVisibility(isOpen, NOTIFICATION_TRANSITION_DURATION);
 
@@ -139,5 +132,3 @@ const Notification: React.FC<NotificationProps> = ({
         : null;
 };
 Notification.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Notification, NotificationProps, NotificationType };

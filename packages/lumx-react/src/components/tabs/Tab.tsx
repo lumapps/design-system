@@ -9,7 +9,7 @@ import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 /**
  * Defines the props of the component.
  */
-interface TabProps extends GenericProps {
+export interface TabProps extends GenericProps {
     /** Tab index */
     index?: number;
     /** Tab icon */
@@ -25,11 +25,6 @@ interface TabProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TabProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
@@ -37,12 +32,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
+export const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<TabProps> = {
     icon: undefined,
     isActive: false,
     isDisabled: false,
@@ -54,8 +49,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Tab: React.FC<TabProps> = ({
-    className = '',
+export const Tab: React.FC<TabProps> = ({
+    className,
     icon = DEFAULT_PROPS.icon,
     index = DEFAULT_PROPS.index,
     isActive = DEFAULT_PROPS.isActive,
@@ -86,6 +81,7 @@ const Tab: React.FC<TabProps> = ({
             tabIndex={tabIndex}
             onClick={handleTabClick}
             onKeyPress={handleKeyPress}
+            role="tab"
             {...props}
         >
             {icon && <Icon icon={icon} size={Size.xs} />}
@@ -94,5 +90,3 @@ const Tab: React.FC<TabProps> = ({
     );
 };
 Tab.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Tab, TabProps };

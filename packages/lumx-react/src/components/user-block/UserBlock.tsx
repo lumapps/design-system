@@ -11,12 +11,12 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Authorized size values.
  */
-type UserBlockSize = Size.s | Size.m | Size.l;
+export type UserBlockSize = Size.s | Size.m | Size.l;
 
 /**
  * Defines the props of the component.
  */
-interface UserBlockProps extends GenericProps {
+export interface UserBlockProps extends GenericProps {
     /** Avatar image. */
     avatar?: string;
     /** Simple Action block. */
@@ -44,11 +44,6 @@ interface UserBlockProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<UserBlockProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
@@ -56,12 +51,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<UserBlockProps> = {
     orientation: Orientation.horizontal,
     size: Size.m,
     theme: Theme.light,
@@ -72,7 +67,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const UserBlock: React.FC<UserBlockProps> = ({
+export const UserBlock: React.FC<UserBlockProps> = ({
     avatar,
     theme = DEFAULT_PROPS.theme,
     orientation = DEFAULT_PROPS.orientation,
@@ -81,20 +76,15 @@ const UserBlock: React.FC<UserBlockProps> = ({
     onClick,
     onMouseEnter,
     onMouseLeave,
-    className = '',
+    className,
     simpleAction,
     multipleActions,
     size = DEFAULT_PROPS.size,
     userBlockRef,
 }) => {
-    let componentSize = size;
-
     // Special case - When using vertical orientation force the size to be Sizes.l.
-    if (orientation === Orientation.vertical) {
-        componentSize = Size.l;
-    }
-
-    const shouldDisplayActions: boolean = orientation === Orientation.vertical;
+    const componentSize: UserBlockSize = orientation === Orientation.vertical ? Size.l : (size as UserBlockSize);
+    const shouldDisplayActions = orientation === Orientation.vertical;
 
     const nameBlock: ReactNode = name && (
         <span className={`${CLASSNAME}__name`} onClick={onClick} tabIndex={onClick ? 0 : -1}>
@@ -104,9 +94,9 @@ const UserBlock: React.FC<UserBlockProps> = ({
 
     const fieldsBlock: ReactNode = fields && componentSize !== Size.s && (
         <div className={`${CLASSNAME}__fields`}>
-            {fields.map((aField: string, idx: number) => (
+            {fields.map((field, idx) => (
                 <span key={`ubf${idx}`} className={`${CLASSNAME}__field`}>
-                    {aField}
+                    {field}
                 </span>
             ))}
         </div>
@@ -147,5 +137,3 @@ const UserBlock: React.FC<UserBlockProps> = ({
     );
 };
 UserBlock.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, UserBlockSize };

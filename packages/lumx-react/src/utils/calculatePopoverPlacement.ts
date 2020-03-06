@@ -1,6 +1,6 @@
 import { Placement } from '@lumx/react/components/popover/Popover';
 
-const calculatePopoverPlacement = (
+export const calculatePopoverPlacement = (
     placement: Placement,
     anchor: ClientRect,
     popover: ClientRect,
@@ -102,5 +102,3 @@ const calculatePopoverPlacement = (
 
     return { x, y };
 };
-
-export { calculatePopoverPlacement };

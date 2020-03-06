@@ -7,7 +7,7 @@ import React from 'react';
 
 export default { title: 'Button' };
 
-export const simpleButton = ({ theme }: any) => {
+export const SimpleButton = ({ theme }: any) => {
     return (
         <Button
             emphasis={select('Emphasis', Emphasis, DEFAULT_PROPS.emphasis)}

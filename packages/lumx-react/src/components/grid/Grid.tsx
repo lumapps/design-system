@@ -1,31 +1,27 @@
-import React from 'react';
-
-import classNames from 'classnames';
-
 import { Alignment, Orientation, Size } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
+import classNames from 'classnames';
+import React from 'react';
+
 type GridGutterSize = Size.regular | Size.big | Size.huge;
 
 /**
  * Defines the props of the component.
  */
-interface GridProps extends GenericProps {
+export interface GridProps extends GenericProps {
+    /** Grid orientation */
     orientation?: Orientation;
-    /* Should children wrap */
+    /** Should children wrap */
     wrap?: string;
-    /* How we should vertically align the children */
+    /** How we should vertically align the children */
     vAlign?: Alignment;
-    /* How we should horizontally align the children */
+    /** How we should horizontally align the children */
     hAlign?: Alignment;
-    /* Grid gutters */
+    /** Grid gutters */
     gutter?: GridGutterSize;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<GridProps> {}
 
 /**
  * The display name of the component.
@@ -37,13 +33,13 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Grid`;
  * The default class name and classes prefix for this component.
  *
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<GridProps> = {
     orientation: Orientation.horizontal,
     wrap: 'nowrap',
 };
@@ -53,16 +49,16 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Grid: React.FC<GridProps> = ({
+export const Grid: React.FC<GridProps> = ({
     children,
-    className = '',
+    className,
     gutter,
     hAlign,
     orientation = DEFAULT_PROPS.orientation,
     vAlign,
     wrap = DEFAULT_PROPS.wrap,
     ...props
-}: GridProps): React.ReactElement => {
+}) => {
     return (
         <div
             className={classNames(
@@ -79,5 +75,3 @@ const Grid: React.FC<GridProps> = ({
     );
 };
 Grid.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Grid, GridProps };

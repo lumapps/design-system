@@ -8,19 +8,12 @@ import { mdiChevronDown, mdiChevronUp } from '@lumx/icons';
 import { Emphasis, Icon, Size } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import {
-    Callback,
-    GenericProps,
-    getRootClassName,
-    handleBasicClasses,
-    isComponent,
-    onEnterPressed,
-} from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, isComponent, onEnterPressed } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-interface SideNavigationItemProps extends GenericProps {
+export interface SideNavigationItemProps extends GenericProps {
     /** Side navigation item content (should use `<SideNavigationItem>`). */
     children?: ReactNode;
 
@@ -51,18 +44,18 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigationItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
+export const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
     isOpen: false,
     isSelected: false,
 };
 
-const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
+export const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
     const {
         children,
         className,
@@ -91,9 +84,10 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         >
             <a
                 className={`${CLASSNAME}__link`}
+                role="menuitem"
                 tabIndex={0}
                 onClick={onClick}
-                onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}
+                onKeyDown={onClick ? onEnterPressed(onClick as VoidFunction) : undefined}
             >
                 {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
                 <span>{label}</span>
@@ -111,5 +105,3 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
     );
 };
 SideNavigationItem.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, SideNavigationItem, SideNavigationItemProps };

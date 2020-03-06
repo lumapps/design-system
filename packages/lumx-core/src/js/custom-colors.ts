@@ -609,7 +609,7 @@ function _getTextFieldCSSRules(colorPalette: ColorPalette, theme: Theme) {
  * @param theme        The theme to apply the custom color palette on.
  * @param colorPalette The custom color palette.
  */
-function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: ColorPalette) {
+export function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: ColorPalette) {
     let index = 0;
 
     const buttonRules = [
@@ -710,5 +710,3 @@ function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: Color
         index += 1;
     });
 }
-
-export { setCustomColors };

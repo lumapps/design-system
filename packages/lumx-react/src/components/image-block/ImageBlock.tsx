@@ -12,7 +12,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Authorized variants.
  */
-enum ImageBlockCaptionPosition {
+export enum ImageBlockCaptionPosition {
     below = 'below',
     over = 'over',
 }
@@ -25,7 +25,7 @@ type ImageBlockSize = Size.xl | Size.xxl;
 /**
  * Defines the props of the component.
  */
-interface ImageBlockProps extends GenericProps {
+export interface ImageBlockProps extends GenericProps {
     /** The caption wrapper alignment. */
     align?: Alignment;
     /** The aspect ratio the image will get. */
@@ -57,11 +57,6 @@ interface ImageBlockProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ImageBlockProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
@@ -69,12 +64,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     actions: undefined,
     align: Alignment.left,
     aspectRatio: AspectRatio.original,
@@ -94,11 +89,11 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const ImageBlock: React.FC<ImageBlockProps> = ({
+export const ImageBlock: React.FC<ImageBlockProps> = ({
     actions = DEFAULT_PROPS.actions,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
-    className = '',
+    className,
     captionPosition = DEFAULT_PROPS.captionPosition,
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,
@@ -166,5 +161,3 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     );
 };
 ImageBlock.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };

@@ -13,7 +13,7 @@ import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
  */
 export type ButtonSize = Size.s | Size.m;
 
-interface BaseButtonProps extends GenericProps {
+export interface BaseButtonProps extends GenericProps {
     /**
      * Reference on the `<a>` or `<button>` button HTML element.
      */
@@ -65,7 +65,7 @@ interface BaseButtonProps extends GenericProps {
     useCustomColors?: boolean;
 }
 
-interface ButtonRootProps extends BaseButtonProps {
+export interface ButtonRootProps extends BaseButtonProps {
     variant: 'button' | 'icon';
 }
 
@@ -74,13 +74,13 @@ interface ButtonRootProps extends BaseButtonProps {
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonRoot`;
 
-const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
-const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
+export const BUTTON_WRAPPER_CLASSNAME = `${CSS_PREFIX}-button-wrapper`;
+export const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 
 /**
  * Render a button wrapper with the ButtonRoot inside.
  */
-const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
+export const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const { color, emphasis, variant } = props;
 
     const adaptedColor =
@@ -112,10 +112,11 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
  * @param  props Component props.
  * @return React element.
  */
-const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
+export const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     const {
         buttonRef,
         emphasis,
+        href,
         isSelected,
         size,
         color,
@@ -152,19 +153,27 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
     );
 
-    if (!isEmpty(props.href)) {
+    if (!isEmpty(href)) {
         return (
-            <a ref={buttonRef as RefObject<HTMLAnchorElement>} className={buttonClassName} {...forwardedProps}>
+            <a
+                {...forwardedProps}
+                ref={buttonRef as RefObject<HTMLAnchorElement>}
+                href={href}
+                className={buttonClassName}
+            >
                 {children}
             </a>
         );
     }
     return (
-        <button ref={buttonRef as RefObject<HTMLButtonElement>} className={buttonClassName} {...forwardedProps}>
+        <button
+            {...forwardedProps}
+            ref={buttonRef as RefObject<HTMLButtonElement>}
+            className={buttonClassName}
+            type="button"
+        >
             {children}
         </button>
     );
 };
 ButtonRoot.displayName = COMPONENT_NAME;
-
-export { BUTTON_CLASSNAME, BUTTON_WRAPPER_CLASSNAME, BaseButtonProps, ButtonRootProps, ButtonRoot };

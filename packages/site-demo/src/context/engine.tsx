@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 /**
  * The available engines in the demo site.
  */
-enum Engine {
+export enum Engine {
     react = 'react',
     angularjs = 'angularjs',
 }
@@ -15,7 +15,7 @@ const DEFAULT = {
     engine: Engine.react,
 };
 
-const EngineContext = React.createContext(DEFAULT);
+export const EngineContext = React.createContext(DEFAULT);
 
 /**
  * Provide the EngineContext in children components exposing the hidden state with the setter.
@@ -23,9 +23,7 @@ const EngineContext = React.createContext(DEFAULT);
  * @param children Children components.
  * @return The EngineProvider.
  */
-const EngineProvider: React.FC = ({ children }) => {
+export const EngineProvider: React.FC = ({ children }) => {
     const [engine, changeEngine] = useState(DEFAULT.engine);
     return <EngineContext.Provider value={{ engine, changeEngine }}>{children}</EngineContext.Provider>;
 };
-
-export { Engine, EngineContext, EngineProvider };

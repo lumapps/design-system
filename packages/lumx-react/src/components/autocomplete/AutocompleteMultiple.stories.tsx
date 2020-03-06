@@ -1,29 +1,27 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } from '@lumx/react';
 
 import { mdiClose } from '@lumx/icons';
 
-export default { title: 'Autocomplete Multiple' };
-
 import { CITIES } from './__mockData__';
+
+export default { title: 'Autocomplete Multiple' };
 
 interface City {
     id: string;
     text: string;
 }
 
-export const simple = ({ theme }: any) => {
+export const Simple = ({ theme }: any) => {
     const INITIAL_STATE_SHOW_SUGGESTIONS = false;
     const INITIAL_STATE_NAVIGATION_SUGGESTION = '';
 
-    const [showSuggestions, setShowSuggestions] = React.useState(INITIAL_STATE_SHOW_SUGGESTIONS);
-    const [filterValue, setFilterValue] = React.useState('');
-    const [navigationSuggestionValue, setNavigationSuggestionValue] = React.useState(
-        INITIAL_STATE_NAVIGATION_SUGGESTION,
-    );
-    const [selectedValues, setSelectedValues] = React.useState<City[]>([]);
-    const inputRef = React.useRef<HTMLInputElement>(null);
+    const [showSuggestions, setShowSuggestions] = useState(INITIAL_STATE_SHOW_SUGGESTIONS);
+    const [filterValue, setFilterValue] = useState('');
+    const [navigationSuggestionValue, setNavigationSuggestionValue] = useState(INITIAL_STATE_NAVIGATION_SUGGESTION);
+    const [selectedValues, setSelectedValues] = useState<City[]>([]);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const filteredCities = useMemo(
         () =>
@@ -145,7 +143,7 @@ export const simple = ({ theme }: any) => {
             values={selectedValues}
             inputRef={inputRef}
             shouldFocusOnClose
-            fitToAnchorWidth={true}
+            fitToAnchorWidth
             onBlur={onBlur}
             selectedChipRender={renderChip}
         >

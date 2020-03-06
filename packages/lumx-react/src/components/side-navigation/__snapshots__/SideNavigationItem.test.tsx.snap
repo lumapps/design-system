@@ -6,6 +6,7 @@ exports[`<SideNavigationItem> Snapshots and structure should render correctly 1`
 >
   <a
     className="lumx-side-navigation-item__link"
+    role="menuitem"
     tabIndex={0}
   >
     <span />

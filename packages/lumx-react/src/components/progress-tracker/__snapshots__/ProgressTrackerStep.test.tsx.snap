@@ -5,6 +5,7 @@ exports[`<ProgressTrackerStep> Snapshots and structure should render defaults 1`
   className="lumx-progress-tracker-step lumx-progress-tracker-step--theme-light"
   onClick={null}
   onKeyDown={[Function]}
+  role="button"
   tabIndex={-1}
 >
   <Icon

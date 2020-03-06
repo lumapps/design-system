@@ -1,4 +1,4 @@
-import React, { cloneElement, useMemo, useRef } from 'react';
+import React, { cloneElement, ReactElement, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -14,7 +14,7 @@ import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from 
 /**
  * Defines the props of the component.
  */
-interface DropdownProps extends GenericProps {
+export interface DropdownProps extends GenericProps {
     /** The reference of the DOM element used to set the position of the Dropdown. */
     anchorRef: React.RefObject<HTMLElement>;
     /** Children of the Dropdown. */
@@ -40,13 +40,8 @@ interface DropdownProps extends GenericProps {
     /**
      * The callback function called when the bottom of the dropdown is reached.
      */
-    onInfinite?: VoidFunction;
+    onInfiniteScroll?: VoidFunction;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<DropdownProps> {}
 
 /**
  * The display name of the component.
@@ -56,12 +51,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Dropdown`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<DropdownProps> = {
     closeOnClick: true,
     closeOnEscape: true,
     fitToAnchorWidth: true,
@@ -75,7 +70,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Dropdown: React.FC<DropdownProps> = ({
+export const Dropdown: React.FC<DropdownProps> = ({
     anchorRef,
     children,
     className,
@@ -90,13 +85,13 @@ const Dropdown: React.FC<DropdownProps> = ({
     onClose,
     onInfiniteScroll,
     ...props
-}: DropdownProps): React.ReactElement | null => {
+}) => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
     const popoverRef: React.RefObject<HTMLDivElement> = useRef(null);
     const listElementRef: React.RefObject<HTMLUListElement> = useRef(null);
 
     const { computedPosition, isVisible } = Popover.useComputePosition(
-        placement!,
+        placement as Placement,
         anchorRef,
         popoverRef,
         showDropdown,
@@ -107,11 +102,9 @@ const Dropdown: React.FC<DropdownProps> = ({
         [children],
     );
 
-    if (onInfiniteScroll) {
-        useInfiniteScroll(wrapperRef, onInfiniteScroll);
-    }
+    useInfiniteScroll(wrapperRef, onInfiniteScroll);
 
-    const popperElement: React.ReactElement = useMemo(() => {
+    const popperElement: ReactElement = useMemo(() => {
         const clonedChildren =
             !Array.isArray(children) && isComponent(List)(children)
                 ? cloneElement(children, { ...children.props, listElementRef })
@@ -167,5 +160,3 @@ const Dropdown: React.FC<DropdownProps> = ({
     ) : null;
 };
 Dropdown.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps };

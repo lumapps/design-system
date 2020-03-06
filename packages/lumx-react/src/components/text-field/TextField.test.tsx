@@ -1,13 +1,15 @@
 import React, { ReactElement } from 'react';
 
-import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import { build } from 'test-data-bot';
 
+import noop from 'lodash/noop';
+
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
-
 import { Kind } from '@lumx/react';
+
 import { CLASSNAME, TextField, TextFieldProps } from './TextField';
 
 /**
@@ -41,23 +43,23 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  props                   The props to use to override the default props of the component.
+ * @param  propsOverrides           The props to use to override the default props of the component.
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: TextFieldProps = {
+        value: '',
+        onChange: noop,
+        ...propsOverrides,
+    };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    // @ts-ignore
     const wrapper: Wrapper = renderer(<TextField {...props} />);
 
     const textarea = wrapper.find('textarea');
     const input = wrapper.find('input');
-    const error = wrapper.findWhere(
-        (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error,
-    );
-    const helper = wrapper.findWhere(
-        (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === undefined,
-    );
+    const error = wrapper.findWhere((n: Wrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error);
+    const helper = wrapper.findWhere((n: Wrapper) => n.name() === 'InputHelper' && n.prop('kind') === undefined);
 
     return {
         error,
@@ -106,7 +108,7 @@ describe(`<${TextField.displayName}>`, () => {
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should add all class names (except has-error)', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 icon: 'icon',
                 isDisabled: true,
                 isValid: true,
@@ -130,7 +132,7 @@ describe(`<${TextField.displayName}>`, () => {
         });
 
         it('should add "has-error" class name', () => {
-            const modifiedPropsBuilder: () => SetupProps = build('props').fields!({
+            const modifiedPropsBuilder: () => SetupProps = build('props').fields({
                 hasError: true,
             });
 

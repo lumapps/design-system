@@ -9,13 +9,11 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
 /**
  * Defines the props of the component.
  */
-interface InputHelperProps extends GenericProps {
+export interface InputHelperProps extends GenericProps {
     children: string | ReactNode;
     kind?: Kind;
     theme?: Theme;
 }
-
-interface DefaultPropsType extends Partial<InputHelperProps> {}
 
 /**
  * The display name of the component.
@@ -25,19 +23,19 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}InputHelper`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<InputHelperProps> = {
     kind: Kind.info,
     theme: Theme.light,
 };
 
-const InputHelper: React.FC<InputHelperProps> = ({
+export const InputHelper: React.FC<InputHelperProps> = ({
     children,
-    className = '',
+    className,
     kind = DEFAULT_PROPS.kind as Kind,
     theme = DEFAULT_PROPS.theme,
     ...props
@@ -50,7 +48,4 @@ const InputHelper: React.FC<InputHelperProps> = ({
         </span>
     );
 };
-
 InputHelper.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, InputHelper, InputHelperProps };

@@ -4,7 +4,7 @@ import React from 'react';
 
 export default { title: 'Message' };
 
-export const message = () => (
+export const Simple = () => (
     <Message
         kind={select('Kind of message', MessageKind, MessageKind.error)}
         hasBackground={boolean('Has background', false)}

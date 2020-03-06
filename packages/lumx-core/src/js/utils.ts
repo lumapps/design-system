@@ -20,7 +20,6 @@ const _isEmpty = (value: any) => {
 
     return isEmpty(value);
 };
-type Callback = () => void;
 
 /**
  * Get the basic CSS class for the given type.
@@ -30,7 +29,7 @@ type Callback = () => void;
  * @param  value  The value of the type of the CSS class (e.g.: 'primary', 'button', ...).
  * @return The basic CSS class.
  */
-function getBasicClass({
+export function getBasicClass({
     prefix,
     type,
     value,
@@ -67,7 +66,7 @@ function getBasicClass({
  *                be used in the classname to represent the value of the given prop.
  * @return All LumX basic CSS classes.
  */
-function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string {
+export function handleBasicClasses({ prefix, ...props }: { prefix: string; [prop: string]: any }): string {
     const otherClasses: any = {};
     if (!isEmpty(props)) {
         Object.keys(props).forEach((prop) => {
@@ -90,7 +89,7 @@ declare type SwipeDirection = 'none' | 'up' | 'down' | 'left' | 'right';
  * @param  handleSwipe Callback function.
  * @return Function to remove listeners.
  */
-function detectSwipe(touchSurface: Element, handleSwipe: (direction: SwipeDirection) => void = noop) {
+export function detectSwipe(touchSurface: Element, handleSwipe: (direction: SwipeDirection) => void = noop) {
     let distX: number;
     let distY: number;
     let startX: number;
@@ -162,7 +161,7 @@ function detectSwipe(touchSurface: Element, handleSwipe: (direction: SwipeDirect
  * @param  cb The callback to call on enter/return press.
  * @return The decorated function.
  */
-function onEnterPressed(cb: Callback) {
+export function onEnterPressed(cb: VoidFunction) {
     return (evt: { key: string }) => {
         if (evt.key !== 'Enter') {
             return;
@@ -177,7 +176,7 @@ function onEnterPressed(cb: Callback) {
  * @param  cb The callback to call on escape press.
  * @return The decorated function.
  */
-function onEscapePressed(cb: Callback) {
+export function onEscapePressed(cb: VoidFunction) {
     return (evt: { keyCode: number }) => {
         if (evt.keyCode !== ESCAPE_KEY_CODE) {
             return;
@@ -185,5 +184,3 @@ function onEscapePressed(cb: Callback) {
         cb();
     };
 }
-
-export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscapePressed };

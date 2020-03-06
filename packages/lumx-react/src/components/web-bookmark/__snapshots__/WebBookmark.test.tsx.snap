@@ -28,6 +28,7 @@ exports[`<WebBookmark> Snapshots and structure should render correctly 1`] = `
         <Link
           color="dark"
           colorVariant="N"
+          href=""
           target="_blank"
         />
       </div>
@@ -41,6 +42,7 @@ exports[`<WebBookmark> Snapshots and structure should render correctly 1`] = `
           className="lumx-web-bookmark__link"
           color="blue"
           colorVariant="N"
+          href=""
           target="_blank"
         />
       </div>
@@ -77,6 +79,7 @@ exports[`<WebBookmark> Snapshots and structure should render correctly 2`] = `
         <Link
           color="dark"
           colorVariant="N"
+          href=""
           target="_blank"
         />
       </div>
@@ -90,6 +93,7 @@ exports[`<WebBookmark> Snapshots and structure should render correctly 2`] = `
           className="lumx-web-bookmark__link"
           color="blue"
           colorVariant="N"
+          href=""
           target="_blank"
         />
       </div>

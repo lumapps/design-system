@@ -1,4 +1,4 @@
-import { Callback, onEscapePressed } from '@lumx/react/utils';
+import { onEscapePressed } from '@lumx/react/utils';
 import { useEffect } from 'react';
 
 /**
@@ -9,16 +9,16 @@ import { useEffect } from 'react';
  * @param rootElement   Element on which to listen the escape key
  */
 export function useCallbackOnEscape(
-    callback: Callback | undefined,
+    callback?: VoidFunction,
     closeOnEscape = true,
     rootElement: HTMLElement = document.body,
 ) {
     useEffect(() => {
-        if (closeOnEscape && callback) {
-            const onKeyDown = onEscapePressed(callback);
-            rootElement.addEventListener('keydown', onKeyDown);
-            return () => rootElement.removeEventListener('keydown', onKeyDown);
+        if (!(closeOnEscape && callback)) {
+            return undefined;
         }
-        return;
-    }, [callback, closeOnEscape]);
+        const onKeyDown = onEscapePressed(callback);
+        rootElement.addEventListener('keydown', onKeyDown);
+        return () => rootElement.removeEventListener('keydown', onKeyDown);
+    }, [callback, closeOnEscape, rootElement]);
 }

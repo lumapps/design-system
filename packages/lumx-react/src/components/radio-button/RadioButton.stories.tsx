@@ -5,7 +5,7 @@ import React from 'react';
 
 export default { title: 'Radio button' };
 
-export const simpleRadioButton = ({ theme }: any) => (
+export const SimpleRadioButton = ({ theme }: any) => (
     <RadioButton
         checked={false}
         label={text('Label', 'Radio button')}
@@ -16,9 +16,9 @@ export const simpleRadioButton = ({ theme }: any) => (
     />
 );
 
-export const simpleCheckedRadioButton = ({ theme }: any) => (
+export const SimpleCheckedRadioButton = ({ theme }: any) => (
     <RadioButton
-        checked={true}
+        checked
         label={text('Label', 'Radio button')}
         name="test1"
         theme={theme}

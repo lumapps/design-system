@@ -28,12 +28,11 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
+ * @param  propsOverrides          The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
     const anchorRef = React.createRef<HTMLButtonElement>();
     const props: DropdownProps = {
         anchorRef,
@@ -99,23 +98,21 @@ describe(`<${Dropdown.displayName}>`, () => {
                 false,
             );
 
-            eventListeners.keydown!({ keyCode: ESCAPE_KEY_CODE });
+            eventListeners.keydown?.({ keyCode: ESCAPE_KEY_CODE });
             expect(onClose).toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing any other key', () => {
             setup({ showDropdown: true, onClose, closeOnEscape: true }, false);
 
-            eventListeners.keydown!({ keyCode: 26 });
+            eventListeners.keydown?.({ keyCode: 26 });
             expect(onClose).not.toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', () => {
             setup({ showDropdown: true, onClose, closeOnEscape: false }, false);
 
-            if (eventListeners.keydown) {
-                eventListeners.keydown({ keyCode: ESCAPE_KEY_CODE });
-            }
+            eventListeners.keydown?.({ keyCode: ESCAPE_KEY_CODE });
             expect(onClose).not.toHaveBeenCalled();
         });
     });

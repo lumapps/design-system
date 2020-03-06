@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Button, Notification, NotificationType } from '@lumx/react';
 
@@ -42,22 +42,24 @@ const properties = {
     },
 };
 
-export const error = () => <Notification {...properties.error} />;
+export const Error = () => <Notification {...properties.error} />;
 
-export const info = () => <Notification {...properties.info} />;
+export const Info = () => <Notification {...properties.info} />;
 
-export const infoWithCallback = () => <Notification {...properties.infoWithCallback} />;
+export const InfoWithCallback = () => <Notification {...properties.infoWithCallback} />;
 
-export const success = () => <Notification {...properties.success} />;
+export const Success = () => <Notification {...properties.success} />;
 
-export const warning = () => <Notification {...properties.warning} />;
+export const Warning = () => <Notification {...properties.warning} />;
 
-export const onTrigger = () => {
-    const [isOpen, setIsOpen] = React.useState(false);
+export const OnTrigger = () => {
+    const [isOpen, setIsOpen] = useState(false);
     const onClick = () => setIsOpen(!isOpen);
 
-    return [
-        <Button onClick={onClick}>{!isOpen ? 'Show Notification' : 'Close Notification'}</Button>,
-        <Notification {...properties.error} isOpen={isOpen} />,
-    ];
+    return (
+        <>
+            <Button onClick={onClick}>{!isOpen ? 'Show Notification' : 'Close Notification'}</Button>
+            <Notification {...properties.error} isOpen={isOpen} />
+        </>
+    );
 };

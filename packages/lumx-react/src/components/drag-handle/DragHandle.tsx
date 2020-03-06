@@ -11,7 +11,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface DragHandleProps extends GenericProps {
+export interface DragHandleProps extends GenericProps {
     theme?: Theme;
 }
 
@@ -23,9 +23,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}DragHandle`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const DragHandle: React.FC<DragHandleProps> = (props) => {
+export const DragHandle: React.FC<DragHandleProps> = (props) => {
     const { className, theme, ...otherProps } = props;
 
     return (
@@ -35,5 +35,3 @@ const DragHandle: React.FC<DragHandleProps> = (props) => {
     );
 };
 DragHandle.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DragHandle, DragHandleProps };

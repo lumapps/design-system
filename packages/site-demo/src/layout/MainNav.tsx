@@ -1,4 +1,3 @@
-import { Callback } from '@lumx/react/utils';
 import castArray from 'lodash/castArray';
 import isEmpty from 'lodash/isEmpty';
 import React, { ReactElement, ReactNode, useState } from 'react';
@@ -111,7 +110,7 @@ const EMPHASIS_BY_LEVEL: Record<string, Emphasis> = {
     '2': Emphasis.low,
 };
 
-const generateNav = (goToHandler: (path: string) => Callback, location: string, items: Item[]): ReactNode => {
+const generateNav = (goToHandler: (path: string) => VoidFunction, location: string, items: Item[]): ReactNode => {
     const generateNavItem = (parent: string[], item?: Item | Item[]): ReactNode => {
         if (!item || Array.isArray(item)) {
             return castArray(item).map((child: Item) => generateNavItem(parent, child));
@@ -180,5 +179,4 @@ const MainNav: React.FC<RouteComponentProps> = (props) => {
 };
 
 const MainNavWithRouter = withRouter(MainNav);
-
 export { MainNavWithRouter as MainNav };

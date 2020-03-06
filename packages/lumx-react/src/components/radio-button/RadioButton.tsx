@@ -12,7 +12,7 @@ import uniqueId from 'lodash/uniqueId';
 /**
  * Defines the props of the component.
  */
-interface RadioButtonProps extends GenericProps {
+export interface RadioButtonProps extends GenericProps {
     /** Whether or not the radio button is checked. */
     checked?: boolean;
 
@@ -45,11 +45,6 @@ interface RadioButtonProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<RadioButtonProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}RadioButton`;
@@ -57,12 +52,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}RadioButton`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     checked: false,
     disabled: false,
     theme: Theme.light,
@@ -73,7 +68,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const RadioButton: React.FC<RadioButtonProps> = (props) => {
+export const RadioButton: React.FC<RadioButtonProps> = (props) => {
     const {
         className,
         checked = DEFAULT_PROPS.checked,
@@ -145,5 +140,3 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
     );
 };
 RadioButton.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, RadioButton, RadioButtonProps };

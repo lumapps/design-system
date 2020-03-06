@@ -1,6 +1,6 @@
 import { mdiDotsVertical, mdiSend } from '@lumx/icons';
 
-function DemoController() {
+export function DemoController() {
     'ngInject';
 
     const vm = this;
@@ -19,5 +19,3 @@ function DemoController() {
 }
 
 angular.module('design-system').controller('DemoController', DemoController);
-
-export { DemoController };

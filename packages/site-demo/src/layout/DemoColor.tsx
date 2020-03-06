@@ -3,13 +3,13 @@ import { ColorPalette, Theme } from '@lumx/react';
 import classNames from 'classnames';
 import React from 'react';
 
-interface DemoColorProps {
+export interface DemoColorProps {
     theme: Theme;
     color: ColorPalette;
     colorVariants: ColorPaletteWithVariants;
 }
 
-const DemoColor: React.FC<DemoColorProps> = ({ theme, color, colorVariants }) => (
+export const DemoColor: React.FC<DemoColorProps> = ({ theme, color, colorVariants }) => (
     <div className={classNames('demo-colors', { 'lumx-theme-background-dark-N': theme === Theme.dark })}>
         {Object.entries(colorVariants[color]).map(([key, hue]: [string, ColorVariantDetail]) => (
             <div
@@ -30,5 +30,3 @@ const DemoColor: React.FC<DemoColorProps> = ({ theme, color, colorVariants }) =>
         ))}
     </div>
 );
-
-export { DemoColor };

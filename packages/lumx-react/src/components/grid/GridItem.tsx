@@ -9,19 +9,14 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface GridItemProps extends GenericProps {
-    /* How the item should self align */
+export interface GridItemProps extends GenericProps {
+    /** How the item should self align */
     align?: Alignment;
-    /* Order */
+    /** Order */
     order?: string;
-    /* Weight of the item in the grid*/
+    /** Weight of the item in the grid */
     width?: string;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<GridItemProps> {}
 
 /**
  * The display name of the component.
@@ -33,27 +28,20 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}GridItem`;
  * The default class name and classes prefix for this component.
  *
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: DefaultPropsType = {};
+export const DEFAULT_PROPS: Partial<GridItemProps> = {};
 
 /**
  * [Enter the description of the component here].
  *
  * @return The component.
  */
-const GridItem: React.FC<GridItemProps> = ({
-    children,
-    className = '',
-    width,
-    align,
-    order,
-    ...props
-}: GridItemProps): React.ReactElement => {
+export const GridItem: React.FC<GridItemProps> = ({ children, className, width, align, order, ...props }) => {
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, width, order, align }))}
@@ -64,5 +52,3 @@ const GridItem: React.FC<GridItemProps> = ({
     );
 };
 GridItem.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, GridItem, GridItemProps };

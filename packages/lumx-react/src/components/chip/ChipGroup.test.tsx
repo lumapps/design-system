@@ -6,7 +6,7 @@ import { CommonSetup } from '@lumx/react/testing/utils';
 import { Chip } from './Chip';
 import { ChipGroup, ChipGroupProps } from './ChipGroup';
 
-interface Setup extends CommonSetup {}
+type Setup = CommonSetup;
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.

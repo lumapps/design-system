@@ -1,11 +1,10 @@
-import React, { ReactElement } from 'react';
+import { ProgressTrackerStep } from '@lumx/react';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import noop from 'lodash/noop';
-
-import { ProgressTrackerStep } from '@lumx/react';
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import React, { ReactElement } from 'react';
 import { CLASSNAME, ProgressTracker, ProgressTrackerProps } from './ProgressTracker';
 
 /**
@@ -30,15 +29,16 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param   props The props to use to override the default props of the component.
+ * @param   propsOverrides          The props to use to override the default props of the component.
  * @param   [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return  An object with the props, the component wrapper and some shortcut to some element inside of the component.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...props }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: ProgressTrackerProps = {
+        ...propsOverrides,
+    };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const children = props.children ? props.children : <ProgressTrackerStep onClick={noop} label="Step label" />;
-
-    // @ts-ignore
+    const children = props.children ?? <ProgressTrackerStep onClick={noop} label="Step label" />;
     const wrapper = renderer(<ProgressTracker {...props}>{children}</ProgressTracker>);
 
     return {

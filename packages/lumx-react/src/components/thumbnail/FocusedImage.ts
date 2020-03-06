@@ -1,4 +1,6 @@
 // Credits: https://github.com/third774/image-focus/
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable @typescript-eslint/camelcase */
 import debounce from 'lodash/debounce';
 import { FocusPoint, FocusedImageOptions } from './FocusedImageOptions';
 
@@ -49,11 +51,17 @@ export interface LumHTMLImageElement extends HTMLImageElement {
 
 export class FocusedImage {
     public focus: FocusPoint;
+
     public options: FocusedImageOptions;
+
     public container: HTMLElement;
+
     public img: LumHTMLImageElement;
+
     public resizeListenerObject!: HTMLObjectElement;
-    public listening: boolean = false;
+
+    public listening = false;
+
     public debounceApplyShift: () => void;
 
     constructor(private readonly imageNode: LumHTMLImageElement, options = DEFAULT_OPTIONS) {
@@ -62,7 +70,7 @@ export class FocusedImage {
 
         // Set up element references
         this.img = imageNode;
-        this.container = imageNode.parentElement!;
+        this.container = imageNode.parentElement as HTMLElement;
 
         // Set up instance
         if (this.img.__focused_image_instance__) {
@@ -92,14 +100,14 @@ export class FocusedImage {
         this.setFocus(this.focus);
     }
 
-    public setFocus = (focus: FocusPoint) => {
+    public setFocus(focus: FocusPoint) {
         this.focus = focus;
         this.img.setAttribute('data-focus-x', focus.x.toString());
         this.img.setAttribute('data-focus-y', focus.y.toString());
         this.applyShift();
-    };
+    }
 
-    public applyShift = () => {
+    public applyShift() {
         const { naturalWidth: imageW, naturalHeight: imageH } = this.img;
         const { width: containerW, height: containerH } = this.container.getBoundingClientRect();
 
@@ -108,7 +116,7 @@ export class FocusedImage {
         let vShift = '0';
 
         if (!(containerW > 0 && containerH > 0 && imageW > 0 && imageH > 0)) {
-            return false; // Need dimensions to proceed
+            return; // Need dimensions to proceed
         }
 
         // Which is over by more?
@@ -125,14 +133,14 @@ export class FocusedImage {
         }
 
         if (wR > hR) {
-            hShift = `${this.calcShift(hR, containerW, imageW, this.focus.x)}%`;
+            hShift = `${FocusedImage.calcShift(hR, containerW, imageW, this.focus.x)}%`;
         } else if (wR < hR) {
-            vShift = `${this.calcShift(wR, containerH, imageH, this.focus.y, true)}%`;
+            vShift = `${FocusedImage.calcShift(wR, containerH, imageH, this.focus.y, true)}%`;
         }
 
         this.img.style.top = vShift;
         this.img.style.left = hShift;
-    };
+    }
 
     public startListening() {
         if (this.listening || !this.options.updateOnContainerResize) {
@@ -147,7 +155,7 @@ export class FocusedImage {
         // Use load event callback because contentDocument doesn't exist
         // until this fires in Firefox
         object.addEventListener('load', () =>
-            object.contentDocument!.defaultView!.addEventListener('resize', () => this.debounceApplyShift()),
+            object.contentDocument?.defaultView?.addEventListener('resize', () => this.debounceApplyShift()),
         );
         object.type = 'text/html';
         object.setAttribute('aria-hidden', 'true');
@@ -168,13 +176,13 @@ export class FocusedImage {
             return;
         }
 
-        this.resizeListenerObject.contentDocument!.defaultView!.removeEventListener('resize', this.debounceApplyShift);
+        this.resizeListenerObject.contentDocument?.defaultView?.removeEventListener('resize', this.debounceApplyShift);
         this.container.removeChild(this.resizeListenerObject);
         delete this.resizeListenerObject;
     }
 
     // Calculate the new left/top percentage shift of an image
-    private calcShift(
+    private static calcShift(
         conToImageRatio: number,
         containerSize: number,
         imageSize: number,

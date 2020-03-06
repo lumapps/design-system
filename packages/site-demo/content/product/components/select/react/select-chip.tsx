@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { List, ListItem, Select, SelectVariant, Size } from '@lumx/react';
-import { useBooleanState } from '@lumx/react/hooks';
-
 const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState<string[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
+    const [values, setValues] = useState<string[]>([]);
 
     const clearSelected = (event: { stopPropagation(): void }, value: any) => {
         event?.stopPropagation();
@@ -38,10 +38,10 @@ const App = ({ theme }: any) => {
         >
             <List isClickable={isOpen}>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={values.includes(choice)}
-                              key={index}
+                              key={choice}
                               onItemSelected={onItemSelected(choice)}
                               size={Size.tiny}
                           >

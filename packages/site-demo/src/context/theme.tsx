@@ -6,7 +6,7 @@ import { setDemoCustomColors } from '@lumx/demo/utils';
 /**
  * The available themes in the demo site.
  */
-enum Theme {
+export enum Theme {
     lumapps = 'lumapps',
     material = 'material',
 }
@@ -18,7 +18,7 @@ const DEFAULT = {
     theme: Theme.lumapps,
 };
 
-const ThemeContext = React.createContext(DEFAULT);
+export const ThemeContext = React.createContext(DEFAULT);
 
 /**
  * Provide the ThemeContext in children components.
@@ -28,7 +28,7 @@ const ThemeContext = React.createContext(DEFAULT);
  * @param children Children components.
  * @return The ThemeProvider.
  */
-const ThemeProvider: React.FC = ({ children }) => {
+export const ThemeProvider: React.FC = ({ children }) => {
     const [theme, setTheme] = useState(DEFAULT.theme);
 
     useEffect(() => {
@@ -46,5 +46,3 @@ const ThemeProvider: React.FC = ({ children }) => {
 
     return <ThemeContext.Provider value={{ theme, changeTheme }}>{children}</ThemeContext.Provider>;
 };
-
-export { Theme, ThemeContext, ThemeProvider };

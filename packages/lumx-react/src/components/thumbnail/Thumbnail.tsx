@@ -27,17 +27,17 @@ declare module 'react' {
  * All available aspect ratios.
  * @deprecated
  */
-const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
+export const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
 
 /**
  *  Authorized size values.
  */
-type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
  * Authorized variants.
  */
-enum ThumbnailVariant {
+export enum ThumbnailVariant {
     squared = 'squared',
     rounded = 'rounded',
 }
@@ -45,7 +45,7 @@ enum ThumbnailVariant {
 /**
  * Authorized types of image loading.
  */
-enum ImageLoading {
+export enum ImageLoading {
     auto = 'auto',
     lazy = 'lazy',
     eager = 'eager',
@@ -54,7 +54,7 @@ enum ImageLoading {
 /**
  * Defines the props of the component.
  */
-interface ThumbnailProps extends GenericProps {
+export interface ThumbnailProps extends GenericProps {
     /** The thumbnail alignment. */
     align?: Alignment;
     /** The image aspect ratio. */
@@ -71,15 +71,9 @@ interface ThumbnailProps extends GenericProps {
     theme?: Theme;
     /** Variant. */
     variant?: ThumbnailVariant;
-
     /** Focal Point coordinates. */
     focusPoint?: FocusPoint;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ThumbnailProps> {}
 
 /**
  * The display name of the component.
@@ -89,12 +83,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Thumbnail`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<ThumbnailProps> = {
     align: Alignment.left,
     aspectRatio: AspectRatio.original,
     fillHeight: false,
@@ -111,8 +105,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Thumbnail: React.FC<ThumbnailProps> = ({
-    className = '',
+export const Thumbnail: React.FC<ThumbnailProps> = ({
+    className,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     fillHeight = DEFAULT_PROPS.fillHeight,
@@ -126,7 +120,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
 }) => {
-    const focusImageRef = useFocusedImage(focusPoint!);
+    const focusImageRef = useFocusedImage(focusPoint as FocusPoint);
 
     return (
         <div
@@ -160,5 +154,3 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     );
 };
 Thumbnail.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Thumbnail, ThumbnailProps, ThumbnailAspectRatio, ThumbnailSize, ThumbnailVariant };

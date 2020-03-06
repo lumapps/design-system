@@ -15,12 +15,10 @@ interface MosaicElement {
 /**
  * Defines the props of the component.
  */
-interface MosaicProps extends GenericProps {
+export interface MosaicProps extends GenericProps {
     theme?: Theme;
     thumbnails: MosaicElement[];
 }
-
-interface DefaultPropsType extends Partial<MosaicProps> {}
 
 /**
  * The display name of the component.
@@ -30,15 +28,16 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Mosaic`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,
 };
-const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme, thumbnails, ...props }) => (
+
+export const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme, thumbnails, ...props }) => (
     <div
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
             [`${CLASSNAME}--has-2-thumbnails`]: thumbnails?.length === 2,
@@ -56,6 +55,7 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
                 };
 
                 return (
+                    // eslint-disable-next-line react/no-array-index-key
                     <div key={index} className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
                             tabIndex="0"
@@ -78,7 +78,4 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
         </div>
     </div>
 );
-
 Mosaic.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Mosaic, MosaicProps };

@@ -1,6 +1,6 @@
 import React, { ReactElement, RefObject } from 'react';
 
-import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { Kind, Theme } from '@lumx/react/components';
@@ -23,7 +23,7 @@ type SetupProps = Partial<SelectProps>;
  * Defines what the `setup` function will return.
  */
 interface Setup extends CommonSetup {
-    props: SetupProps;
+    props: SelectProps;
 
     /**
      * [Enter the description of this wrapper].
@@ -39,11 +39,11 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  props  The props to use to override the default props of the component.
+ * @param  propsOverrides          The props to use to override the default props of the component.
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
     const props: SelectProps = {
         children: <span>Select Component</span>,
         value: [],
@@ -51,19 +51,13 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: ShallowWrapper | ReactWrapper = renderer(<Select {...props} />);
+    const wrapper: Wrapper = renderer(<Select {...props} />);
 
     return {
         container: wrapper.find('div').first(),
         dropdown: wrapper.find(Dropdown),
-        error: wrapper
-            .findWhere(
-                (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error,
-            )
-            .first(),
-        helper: wrapper.findWhere(
-            (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === undefined,
-        ),
+        error: wrapper.findWhere((n: Wrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.error).first(),
+        helper: wrapper.findWhere((n: Wrapper) => n.name() === 'InputHelper' && n.prop('kind') === undefined),
         input: wrapper.find('#uuid'),
         props,
         wrapper,
@@ -348,28 +342,28 @@ describe(`<${Select.displayName}>`, () => {
                 it('should render the values selected in Chips if multiple ', () => {
                     const { input, props } = setup({ ...hasMultipleValues });
 
-                    expect(input.find(Chip).length).toBe(props.value!.length);
+                    expect(input.find(Chip).length).toBe(props.value.length);
                     expect(
                         input
                             .find(Chip)
                             .at(0)
                             .children()
                             .text(),
-                    ).toBe(props.value![0]);
+                    ).toBe(props.value[0]);
                     expect(
                         input
                             .find(Chip)
                             .at(1)
                             .children()
                             .text(),
-                    ).toBe(props.value![1]);
+                    ).toBe(props.value[1]);
                     expect(
                         input
                             .find(Chip)
                             .at(2)
                             .children()
                             .text(),
-                    ).toBe(props.value![2]);
+                    ).toBe(props.value[2]);
                 });
             });
 
@@ -459,7 +453,7 @@ describe(`<${Select.displayName}>`, () => {
                         label,
                     });
 
-                    expect(input.childAt(0).text()).toEqual(`${props.value![0]}\u00A0+${props.value!.length - 1}`);
+                    expect(input.childAt(0).text()).toEqual(`${props.value[0]}\u00A0+${props.value.length - 1}`);
                 });
             });
 

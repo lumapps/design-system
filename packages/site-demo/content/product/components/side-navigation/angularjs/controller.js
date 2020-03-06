@@ -1,6 +1,6 @@
 import { mdiFileDocumentBoxOutline, mdiMenu } from '@lumx/icons';
 
-function DemoSideNavigationController() {
+export function DemoSideNavigationController() {
     'ngInject';
 
     const vm = this;
@@ -17,5 +17,3 @@ function DemoSideNavigationController() {
         mdiMenu,
     };
 }
-
-export { DemoSideNavigationController };

@@ -10,7 +10,7 @@ import React, { ReactNode } from 'react';
 /**
  * Defines the props of the component.
  */
-interface AutocompleteMultipleProps extends AutocompleteProps {
+export interface AutocompleteMultipleProps extends AutocompleteProps {
     /**
      * The list of selected values.
      */
@@ -26,7 +26,7 @@ interface AutocompleteMultipleProps extends AutocompleteProps {
      * the values are strings, and will render them as such. If that is not the case, this function needs to be overrided
      * in order to reflect that.
      */
-    selectedChipRender(
+    selectedChipRender?(
         choice: object,
         index: number,
         onClear?: (event: React.MouseEvent, choice: object) => void,
@@ -42,12 +42,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}AutocompleteMultiple`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
+export const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     closeOnClick: true,
     closeOnEscape: true,
     isOpen: undefined,
@@ -75,7 +75,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
  *
  * @return The component.
  */
-const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
+export const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
     const {
         anchorToInput,
         className,
@@ -133,7 +133,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
             inputRef={inputRef}
             chips={
                 <ChipGroup align={chipsAlignment}>
-                    {values!.map((chip: object, index: number) => selectedChipRender!(chip, index, onClear))}
+                    {values?.map((chip, index) => selectedChipRender?.(chip, index, onClear))}
                 </ChipGroup>
             }
             isDisabled={isDisabled}
@@ -158,5 +158,3 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
     );
 };
 AutocompleteMultiple.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, AutocompleteMultiple, AutocompleteMultipleProps };

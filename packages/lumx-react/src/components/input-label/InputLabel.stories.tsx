@@ -6,4 +6,4 @@ import { InputLabel } from './InputLabel';
 
 export default { title: 'Input Label' };
 
-export const simpleLabel = ({ theme }: any) => <InputLabel theme={theme}>{text('Label', 'The label')}</InputLabel>;
+export const SimpleLabel = ({ theme }: any) => <InputLabel theme={theme}>{text('Label', 'The label')}</InputLabel>;

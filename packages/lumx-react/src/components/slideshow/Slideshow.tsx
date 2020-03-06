@@ -14,7 +14,7 @@ import { SlideshowControls } from './SlideshowControls';
 /**
  * Defines the props of the component.
  */
-interface SlideshowProps extends GenericProps {
+export interface SlideshowProps extends GenericProps {
     /** Index of the current slide */
     activeIndex?: number;
     /** Enable/disable automatic rotation of slideshow */
@@ -34,11 +34,6 @@ interface SlideshowProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SlideshowProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Slideshow`;
@@ -46,12 +41,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Slideshow`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<SlideshowProps> = {
     activeIndex: 0,
     autoPlay: false,
     fillHeight: false,
@@ -64,11 +59,11 @@ const DEFAULT_PROPS: DefaultPropsType = {
 /**
  * Displays a slideshow.
  */
-const Slideshow: React.FC<SlideshowProps> = ({
+export const Slideshow: React.FC<SlideshowProps> = ({
     activeIndex = DEFAULT_PROPS.activeIndex as number,
     autoPlay = DEFAULT_PROPS.autoPlay,
     children,
-    className = '',
+    className,
     fillHeight = DEFAULT_PROPS.fillHeight,
     groupBy = DEFAULT_PROPS.groupBy as number,
     hasControls = DEFAULT_PROPS.hasControls,
@@ -101,9 +96,38 @@ const Slideshow: React.FC<SlideshowProps> = ({
 
     useEffect(() => {
         if (currentIndex > slidesCount - 1) {
-            setCurrentIndex(DEFAULT_PROPS.activeIndex!);
+            setCurrentIndex(DEFAULT_PROPS.activeIndex as number);
         }
-    }, [currentIndex]);
+    }, [currentIndex, slidesCount]);
+
+    /**
+     * Change current index to display next slide.
+     */
+    const goToNextSlide = useCallback(() => {
+        if (currentIndex === slidesCount - 1) {
+            setCurrentIndex(() => 0);
+        } else if (currentIndex < slidesCount - 1) {
+            setCurrentIndex((index: number): number => index + 1);
+        }
+    }, [currentIndex, slidesCount, setCurrentIndex]);
+
+    /**
+     * Change current index to display previous slide.
+     */
+    const goToPreviousSlide = useCallback(() => {
+        if (currentIndex === 0) {
+            setCurrentIndex(() => slidesCount - 1);
+        } else if (currentIndex > 0) {
+            setCurrentIndex((index) => index - 1);
+        }
+    }, [currentIndex, slidesCount, setCurrentIndex]);
+
+    /**
+     * Stop slideshow auto rotating.
+     */
+    const stopAutoPlay = () => {
+        setIsAutoPlaying(false);
+    };
 
     /**
      * Start automatic rotation of slideshow.
@@ -145,35 +169,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
         goToPreviousSlide();
     };
 
-    /**
-     * Change current index to display next slide.
-     */
-    const goToNextSlide = useCallback(() => {
-        if (currentIndex === slidesCount - 1) {
-            setCurrentIndex(() => 0);
-        } else if (currentIndex < slidesCount - 1) {
-            setCurrentIndex((index: number): number => index + 1);
-        }
-    }, [currentIndex, slidesCount, setCurrentIndex]);
-
-    /**
-     * Change current index to display previous slide.
-     */
-    const goToPreviousSlide = useCallback(() => {
-        if (currentIndex === 0) {
-            setCurrentIndex(() => slidesCount - 1);
-        } else if (currentIndex > 0) {
-            setCurrentIndex((index) => index - 1);
-        }
-    }, [currentIndex, slidesCount, setCurrentIndex]);
-
-    /**
-     * Stop slideshow auto rotating.
-     */
-    const stopAutoPlay = () => {
-        setIsAutoPlaying(false);
-    };
-
     return (
         <div
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
@@ -208,5 +203,3 @@ const Slideshow: React.FC<SlideshowProps> = ({
     );
 };
 Slideshow.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Slideshow, SlideshowProps };

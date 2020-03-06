@@ -2,7 +2,6 @@ import { mdiClose } from '@lumx/icons';
 import {
     Button,
     Checkbox,
-    Dialog,
     Emphasis,
     Grid,
     GridItem,
@@ -16,9 +15,12 @@ import {
     Theme,
     Toolbar,
 } from '@lumx/react';
-import { DialogSizes } from '@lumx/react/components/dialog/Dialog';
 import { select } from '@storybook/addon-knobs';
 import React, { RefObject, useRef, useState } from 'react';
+import { Dialog, DialogSizes } from './Dialog';
+
+/*  eslint-disable @typescript-eslint/no-use-before-define */
+/*  eslint-disable jsx-a11y/no-noninteractive-tabindex */
 
 export default { title: 'Dialog' };
 
@@ -40,7 +42,7 @@ function useOpenButton(theme: Theme) {
     };
 }
 
-export const simpleDialog = ({ theme }: any) => {
+export const SimpleDialog = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -52,7 +54,7 @@ export const simpleDialog = ({ theme }: any) => {
     );
 };
 
-export const preventDialogAutoClose = ({ theme }: any) => {
+export const PreventDialogAutoClose = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -73,7 +75,7 @@ export const preventDialogAutoClose = ({ theme }: any) => {
     );
 };
 
-export const dialogSizes = ({ theme }: any) => {
+export const Sizes = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     const sizes: DialogSizes[] = [Size.tiny, Size.regular, Size.big, Size.huge];
     return (
@@ -92,7 +94,7 @@ export const dialogSizes = ({ theme }: any) => {
     );
 };
 
-export const loadingDialog = ({ theme }: any) => {
+export const LoadingDialog = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -104,7 +106,7 @@ export const loadingDialog = ({ theme }: any) => {
     );
 };
 
-export const dialogWithHeaderFooterProps = ({ theme }: any) => {
+export const DialogWithHeaderFooterProps = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -122,7 +124,7 @@ export const dialogWithHeaderFooterProps = ({ theme }: any) => {
     );
 };
 
-export const dialogWithHeaderFooterChildren = ({ theme }: any) => {
+export const DialogWithHeaderFooterChildren = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -136,7 +138,7 @@ export const dialogWithHeaderFooterChildren = ({ theme }: any) => {
     );
 };
 
-export const dialogWithHeaderFooterPropsAndChildren = ({ theme }: any) => {
+export const DialogWithHeaderFooterPropsAndChildren = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -156,7 +158,7 @@ export const dialogWithHeaderFooterPropsAndChildren = ({ theme }: any) => {
     );
 };
 
-export const dialogWithHeaderFooterAndDivider = ({ theme }: any) => {
+export const DialogWithHeaderFooterAndDivider = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -176,7 +178,7 @@ export const dialogWithHeaderFooterAndDivider = ({ theme }: any) => {
     );
 };
 
-export const scrollableDialog = ({ theme }: any) => {
+export const ScrollableDialog = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -188,7 +190,7 @@ export const scrollableDialog = ({ theme }: any) => {
     );
 };
 
-export const scrollableDialogWithHeaderAndFooter = ({ theme }: any) => {
+export const ScrollableDialogWithHeaderAndFooter = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     return (
         <>
@@ -202,7 +204,7 @@ export const scrollableDialogWithHeaderAndFooter = ({ theme }: any) => {
     );
 };
 
-export const dialogWithFocusableElements = ({ theme }: any) => {
+export const DialogWithFocusableElements = ({ theme }: any) => {
     const { button, buttonRef, closeDialog, isOpen } = useOpenButton(theme);
     const [textValue, setTextValue] = useState('value');
     const [checkboxValue, setCheckboxValue] = useState(false);

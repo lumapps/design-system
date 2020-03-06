@@ -18,7 +18,7 @@ const iconSizes: Array<IconSizes | undefined> = [
 const iconColors = [undefined, ...Object.values(ColorPalette)];
 const iconShapes = [false, true];
 
-export const allIcon = ({ theme }: any) => {
+export const AllIcon = ({ theme }: any) => {
     return (
         <>
             {iconShapes.map((hasShape) => {
@@ -30,20 +30,18 @@ export const allIcon = ({ theme }: any) => {
                                 <>
                                     <h2>{`Size: ${size}`}</h2>
                                     <Grid>
-                                        {iconColors.map((color) => {
-                                            return (
-                                                <GridItem>
-                                                    {`Color: ${color}`}
-                                                    <Icon
-                                                        hasShape={hasShape}
-                                                        icon={mdiEmail}
-                                                        color={color}
-                                                        size={size}
-                                                        theme={theme}
-                                                    />
-                                                </GridItem>
-                                            );
-                                        })}
+                                        {iconColors.map((color) => (
+                                            <GridItem key={color}>
+                                                {`Color: ${color}`}
+                                                <Icon
+                                                    hasShape={hasShape}
+                                                    icon={mdiEmail}
+                                                    color={color}
+                                                    size={size}
+                                                    theme={theme}
+                                                />
+                                            </GridItem>
+                                        ))}
                                     </Grid>
                                 </>
                             );

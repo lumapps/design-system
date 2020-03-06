@@ -45,10 +45,8 @@ const useLoadContent = (path: string): Content => {
  *
  * @return The main content component.
  */
-const MainContent = ({ path }: { path: string }): ReactElement => {
+export const MainContent: React.FC<{ path: string }> = ({ path }) => {
     const content = useLoadContent(path);
 
     return renderContent(path, content);
 };
-
-export { MainContent };

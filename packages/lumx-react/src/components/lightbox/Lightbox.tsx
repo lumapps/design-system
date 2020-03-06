@@ -13,12 +13,12 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import isFunction from 'lodash/isFunction';
 import noop from 'lodash/noop';
 
-const _TRANSITION_DURATION = 400;
+const TRANSITION_DURATION = 400;
 
 /**
  * Defines the props of the component.
  */
-interface LightboxProps extends GenericProps {
+export interface LightboxProps extends GenericProps {
     /** Label for accessibility assistive devices. */
     ariaLabel?: string;
     /** should the close button be visible - default true */
@@ -47,11 +47,6 @@ interface LightboxProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<LightboxProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
@@ -59,12 +54,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<LightboxProps> = {
     ariaLabel: 'Lightbox',
     isCloseButtonVisible: true,
     isOpen: false,
@@ -81,10 +76,10 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return Lightbox.
  */
-const Lightbox: React.FC<LightboxProps> = ({
+export const Lightbox: React.FC<LightboxProps> = ({
     ariaLabel = DEFAULT_PROPS.ariaLabel,
     children,
-    className = '',
+    className,
     isCloseButtonVisible = DEFAULT_PROPS.isCloseButtonVisible,
     isOpen = DEFAULT_PROPS.isOpen,
     noWrapper = DEFAULT_PROPS.noWrapper,
@@ -103,7 +98,7 @@ const Lightbox: React.FC<LightboxProps> = ({
 
     useEffect(() => {
         if (!isOpen || !modalElement) {
-            return;
+            return undefined;
         }
         disableBodyScroll(modalElement);
         return () => enableBodyScroll(modalElement);
@@ -115,7 +110,7 @@ const Lightbox: React.FC<LightboxProps> = ({
         } else {
             setTimeout(() => {
                 setTrapActive(false);
-            }, _TRANSITION_DURATION);
+            }, TRANSITION_DURATION);
         }
     }, [isOpen]);
 
@@ -147,19 +142,22 @@ const Lightbox: React.FC<LightboxProps> = ({
     };
 
     /**
-     * Desactivate trap and modal.
+     * Deactivate trap and modal.
      *
      * @param evt Click event.
      */
-    const handleClose = useCallback((evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (Boolean(preventAutoClose)) {
-            return;
-        }
-        evt.stopPropagation();
-        if (isFunction(onClose)) {
-            onClose();
-        }
-    }, []);
+    const handleClose = useCallback(
+        (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            if (preventAutoClose) {
+                return;
+            }
+            evt.stopPropagation();
+            if (isFunction(onClose)) {
+                onClose();
+            }
+        },
+        [preventAutoClose, onClose],
+    );
 
     /**
      * Prevent click bubbling to parent.
@@ -236,5 +234,3 @@ const Lightbox: React.FC<LightboxProps> = ({
     );
 };
 Lightbox.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps };

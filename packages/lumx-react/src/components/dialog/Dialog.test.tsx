@@ -1,11 +1,11 @@
 import { ESCAPE_KEY_CODE } from '@lumx/core/js/constants';
 import { CLASSNAME, Dialog, DialogProps } from '@lumx/react/components/dialog/Dialog';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import * as stories from './Dialog.stories';
 
@@ -34,15 +34,17 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param props  The props to use to override the default props of the component.
- * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
- *                       component.
+ * @param  propsOverrides          The props to use to override the default props of the component.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...props }: SetupProps = {}, shallowRendering = true): Setup => {
-    const renderer = shallowRendering ? shallow : mount;
-    // @ts-ignore
-    const wrapper = renderer(<Dialog isOpen {...props} />);
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: DialogProps = {
+        isOpen: true,
+        ...propsOverrides,
+    };
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const wrapper = renderer(<Dialog {...props} />);
 
     return {
         props,
@@ -55,15 +57,14 @@ describe(`<${Dialog.displayName}>`, () => {
     describe('Snapshots and structure', () => {
         // Do snapshot render test on every stories.
         for (const [storyName, Story] of Object.entries(stories)) {
-            if (typeof Story !== 'function') {
-                continue;
+            if (typeof Story === 'function') {
+                it(`should render story ${storyName}`, () => {
+                    const wrapper = shallow(<Story />)
+                        .find(Dialog.displayName as string)
+                        .dive();
+                    expect(wrapper).toMatchSnapshot();
+                });
             }
-
-            it(`should render story ${storyName}`, () => {
-                // @ts-ignore
-                const wrapper = shallow(<Story />);
-                expect(wrapper).toMatchSnapshot();
-            });
         }
     });
 
@@ -74,8 +75,7 @@ describe(`<${Dialog.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        // @ts-ignore
-        const keyDown = (keyCode) => new KeyboardEvent('keydown', { keyCode });
+        const keyDown = (keyCode: number) => new KeyboardEvent('keydown', { keyCode } as any);
 
         it('should trigger `onClose` when pressing `escape` key', () => {
             const onClose = jest.fn();

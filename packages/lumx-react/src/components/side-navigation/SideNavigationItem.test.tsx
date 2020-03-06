@@ -32,18 +32,16 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  props                    The props to use to override the default props of the component.
+ * @param  propsOverrides           The props to use to override the default props of the component.
  * @param  [shallowRendering=true]  Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
-    const props: Partial<SideNavigationItemProps> = {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: SideNavigationItemProps = {
+        label: null,
         ...propsOverrides,
     };
-
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-
-    // @ts-ignore
     const wrapper: Wrapper = renderer(<SideNavigationItem {...props} />);
 
     return {

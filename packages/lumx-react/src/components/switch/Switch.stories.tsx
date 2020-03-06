@@ -5,31 +5,31 @@ import React from 'react';
 
 export default { title: 'Switch' };
 
-export const notCheckedSwitch = ({ theme }: any) => (
+export const NotCheckedSwitch = ({ theme }: any) => (
     <Switch checked={false} onToggle={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );
 
-export const checkedSwitch = ({ theme }: any) => (
+export const CheckedSwitch = ({ theme }: any) => (
     <Switch checked onToggle={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );
 
-export const disabledCheckedSwitch = ({ theme }: any) => (
+export const DisabledCheckedSwitch = ({ theme }: any) => (
     <Switch checked disabled onToggle={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );
 
-export const disabledSwitch = ({ theme }: any) => (
+export const DisabledSwitch = ({ theme }: any) => (
     <Switch disabled onToggle={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );
 
-export const leftPositionSwitch = ({ theme }: any) => (
+export const LeftPositionSwitch = ({ theme }: any) => (
     <Switch position={SwitchPosition.right} onToggle={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>

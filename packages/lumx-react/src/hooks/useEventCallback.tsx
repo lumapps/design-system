@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 
 const useEnhancedEffect = typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
 
@@ -9,9 +9,9 @@ const useEnhancedEffect = typeof window !== 'undefined' ? React.useLayoutEffect 
  * @return A React callback
  */
 export default function useEventCallback(fn: (...args: any[]) => any) {
-    const ref = React.useRef(fn);
+    const ref = useRef(fn);
     useEnhancedEffect(() => {
         ref.current = fn;
     });
-    return React.useCallback((event: any) => ref.current(event), []);
+    return useCallback((event: any) => ref.current(event), []);
 }

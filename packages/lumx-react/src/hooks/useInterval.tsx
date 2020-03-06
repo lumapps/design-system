@@ -1,35 +1,31 @@
 import { useEffect, useRef } from 'react';
 
 import isFunction from 'lodash/isFunction';
-import { Callback } from '../utils';
 
 /**
  * Making setInterval Declarative with React Hooks.
  * Credits: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
  *
  * @param callback Function called by setInterval.
- * @param     delay    Delay for setInterval.
+ * @param delay    Delay for setInterval.
  */
-function useInterval(callback: Callback, delay: number | null) {
-    const savedCallback = useRef<Callback>();
+export function useInterval(callback: VoidFunction, delay: number | null) {
+    const savedVoidFunction = useRef<VoidFunction>();
 
     useEffect(() => {
-        savedCallback.current = callback;
+        savedVoidFunction.current = callback;
     });
 
-    useEffect((): Callback | void => {
+    useEffect(() => {
+        if (delay === null) {
+            return undefined;
+        }
         function tick() {
-            if (isFunction(savedCallback.current)) {
-                savedCallback.current();
+            if (isFunction(savedVoidFunction.current)) {
+                savedVoidFunction.current();
             }
         }
-
-        if (delay !== null) {
-            const id = setInterval(tick, delay);
-
-            return () => clearInterval(id);
-        }
+        const id = setInterval(tick, delay);
+        return () => clearInterval(id);
     }, [delay]);
 }
-
-export { useInterval };

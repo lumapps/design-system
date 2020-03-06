@@ -10,7 +10,7 @@ import React, { ReactNode, useContext, useEffect, useState } from 'react';
 
 import AngularTemplate from 'react-angular';
 
-interface DemoBlockProps {
+export interface DemoBlockProps {
     children?: ReactNode;
     demo?: string;
     engine?: string;
@@ -115,7 +115,12 @@ function renderDemo(demo: DemoModule | null, theme: Theme, engine: string) {
     return <demo.default theme={theme} />;
 }
 
-const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngine, withThemeSwitcher = false }) => {
+export const DemoBlock: React.FC<DemoBlockProps> = ({
+    children,
+    code,
+    engine: propEngine,
+    withThemeSwitcher = false,
+}) => {
     const contextEngine = useContext(EngineContext).engine;
     const engine = propEngine || contextEngine;
 
@@ -170,5 +175,3 @@ const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngin
         </div>
     );
 };
-
-export { DemoBlock };

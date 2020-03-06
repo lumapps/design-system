@@ -1,6 +1,6 @@
 import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@lumx/icons';
 
-function DemoController(LxNotificationService) {
+export function DemoController(LxNotificationService) {
     'ngInject';
 
     const vm = this;
@@ -52,5 +52,3 @@ function DemoController(LxNotificationService) {
 }
 
 angular.module('design-system').controller('DemoController', DemoController);
-
-export { DemoController };

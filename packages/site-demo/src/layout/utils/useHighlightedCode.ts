@@ -10,7 +10,7 @@ import 'prismjs/components/prism-tsx';
 
 import 'prismjs/themes/prism-coy.css';
 
-function useHighlightedCode(sourceCode: string, language: string): string {
+export function useHighlightedCode(sourceCode: string, language: string): string {
     return useMemo(() => {
         if (!sourceCode || !language) {
             return null;
@@ -18,5 +18,3 @@ function useHighlightedCode(sourceCode: string, language: string): string {
         return Prism.highlight(sourceCode.trim(), Prism.languages[language], language);
     }, [sourceCode, language]);
 }
-
-export { useHighlightedCode };

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`] = `
+exports[`<Mosaic> Snapshots and structure should render story FourThumbnails 1`] = `
 <div
   className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-4-thumbnails"
 >
@@ -63,7 +63,7 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
 </div>
 `;
 
-exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] = `
+exports[`<Mosaic> Snapshots and structure should render story OneThumbnail 1`] = `
 <div
   className="lumx-mosaic lumx-mosaic--theme-light"
 >
@@ -87,7 +87,7 @@ exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] =
 </div>
 `;
 
-exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] = `
+exports[`<Mosaic> Snapshots and structure should render story SixThumbnails 1`] = `
 <div
   className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-4-thumbnails"
 >
@@ -158,7 +158,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
 </div>
 `;
 
-exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`] = `
+exports[`<Mosaic> Snapshots and structure should render story ThreeThumbnails 1`] = `
 <div
   className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-3-thumbnails"
 >
@@ -208,7 +208,7 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
 </div>
 `;
 
-exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] = `
+exports[`<Mosaic> Snapshots and structure should render story TwoThumbnails 1`] = `
 <div
   className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-2-thumbnails"
 >

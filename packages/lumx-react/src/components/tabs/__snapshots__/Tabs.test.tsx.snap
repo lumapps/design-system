@@ -5,6 +5,7 @@ exports[`<Tabs> Conditions should fail when no \`Tab\` children is given 1`] = `
 exports[`<Tabs> Snapshots and structure should render correctly 1`] = `
 <div
   className="lumx-tabs lumx-tabs--layout-fixed lumx-tabs--position-left lumx-tabs--theme-light"
+  role="tabpanel"
 >
   <div
     className="lumx-tabs__links"
@@ -12,7 +13,7 @@ exports[`<Tabs> Snapshots and structure should render correctly 1`] = `
     <Tab
       index={0}
       isActive={true}
-      key="0/.0"
+      key=".$0"
       onTabClick={[Function]}
     >
       Tab 0
@@ -20,7 +21,7 @@ exports[`<Tabs> Snapshots and structure should render correctly 1`] = `
     <Tab
       index={1}
       isActive={false}
-      key="1/.1"
+      key=".$1"
       onTabClick={[Function]}
     >
       Tab 1

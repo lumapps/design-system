@@ -6,7 +6,7 @@ import { Theme } from '@lumx/demo/context/theme';
  *
  * @param theme The theme to apply the custom color palette on.
  */
-function setDemoCustomColors(theme: Theme) {
+export function setDemoCustomColors(theme: Theme) {
     const styleTag = document.createElement('style');
     document.head.appendChild(styleTag);
 
@@ -37,5 +37,3 @@ function setDemoCustomColors(theme: Theme) {
         },
     });
 }
-
-export { setDemoCustomColors };

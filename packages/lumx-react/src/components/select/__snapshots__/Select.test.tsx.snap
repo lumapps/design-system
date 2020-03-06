@@ -8,6 +8,7 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
     className="lumx-select__wrapper"
     id="uuid"
     onKeyDown={[Function]}
+    role="textbox"
     tabIndex={0}
   >
     <div

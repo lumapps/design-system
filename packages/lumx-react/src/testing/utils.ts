@@ -1,7 +1,6 @@
 import { ReactWrapper, ShallowWrapper } from 'enzyme';
 import 'jest-enzyme';
 
-import isArray from 'lodash/isArray';
 import isEmpty from 'lodash/isEmpty';
 
 import { GenericProps } from '@lumx/react/utils';
@@ -9,13 +8,13 @@ import { GenericProps } from '@lumx/react/utils';
 /**
  * The type of a wrapper that can be
  */
-type Wrapper = ShallowWrapper | ReactWrapper;
+export type Wrapper = ShallowWrapper | ReactWrapper;
 
 /**
  * Defines what is always returned by the setup function.
  * Note that `props` should be retyped in the specific interface extending this one.
  */
-interface CommonSetup {
+export interface CommonSetup {
     /**
      * The properties of the tested component.
      */
@@ -31,14 +30,14 @@ interface CommonSetup {
  * Run the common tests suite: CSS class forwarding, prop forwarding, ...
  *
  * @param setup  The setup function.
- * @param   tests  The tests to enable.
- *                          The key is the name of the test, the value is the name of the wrapper in the object returned
- *                          by the `setup` function.
- * @param   params The params that can be used by the tests.
+ * @param tests  The tests to enable.
+ *               The key is the name of the test, the value is the name of the wrapper in the object returned
+ *               by the `setup` function.
+ * @param params The params that can be used by the tests.
  */
-function commonTestsSuite(
-    setup: (props?: GenericProps, shallowRendering?: boolean) => CommonSetup,
-    { ...tests }: { className?: string | string[]; prop?: string | string[] },
+export function commonTestsSuite<S extends CommonSetup>(
+    setup: (props?: GenericProps, shallowRendering?: boolean) => S,
+    { ...tests }: { className?: keyof S; prop?: keyof S },
     { ...params }: GenericProps,
 ) {
     if (isEmpty(tests)) {
@@ -46,38 +45,26 @@ function commonTestsSuite(
     }
 
     describe('Common tests suite', () => {
-        if (tests.className !== undefined && !isEmpty(tests.className)) {
+        const { className: testClassNameForwarding, prop: testPropForwarding } = tests;
+        if (testClassNameForwarding) {
             it('should forward any CSS class', () => {
-                const modifiedProps: GenericProps = {
+                const modifiedProps = {
                     className: 'component component--is-tested',
                 };
-
-                const wrappers: any = setup(modifiedProps);
-
-                const wrappersToTest = isArray(tests.className)
-                    ? tests.className!
-                    : [tests.className!, tests.className!];
-                expect(wrappers[wrappersToTest[0]]).toHaveClassName(params.className);
-                expect(wrappers[wrappersToTest[1]]).toHaveClassName(modifiedProps.className);
+                const wrappers = setup(modifiedProps);
+                expect(wrappers[testClassNameForwarding]).toHaveClassName(params.className);
             });
         }
 
-        if (tests.prop !== undefined && !isEmpty(tests.prop)) {
+        if (testPropForwarding) {
             it('should forward any other prop', () => {
-                const testedProp: string = params.prop || 'winter';
-                const modifiedProps: GenericProps = {
-                    [testedProp]: params.propValue || 'is coming',
+                const testedProp = params.prop ?? 'winter';
+                const modifiedProps = {
+                    [testedProp]: params.propValue ?? 'is coming',
                 };
-
-                const wrappers: any = setup(modifiedProps);
-
-                const wrappersToTest: string[] = isArray(tests.prop) ? tests.prop! : [tests.prop!];
-                wrappersToTest.forEach((wrapper: string) => {
-                    expect(wrappers[wrapper]).toHaveProp(testedProp, modifiedProps[testedProp]);
-                });
+                const wrappers = setup(modifiedProps);
+                expect(wrappers[testPropForwarding]).toHaveProp(testedProp, modifiedProps[testedProp]);
             });
         }
     });
 }
-
-export { CommonSetup, Wrapper, commonTestsSuite };

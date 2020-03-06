@@ -15,7 +15,7 @@ const numberKnobOtions = {
  * Thumbnail story
  * @return simple Thumbnail.
  */
-export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
+export const DefaultThumbnail = ({ theme }: { theme: Theme }) => {
     return (
         <Thumbnail
             align={select<Alignment>('Alignment', Alignment, Alignment.left, 'Options')}

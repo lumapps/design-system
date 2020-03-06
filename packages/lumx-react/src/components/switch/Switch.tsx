@@ -11,7 +11,7 @@ import { InputHelper, InputLabel, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-enum SwitchPosition {
+export enum SwitchPosition {
     left = 'left',
     right = 'right',
 }
@@ -19,7 +19,7 @@ enum SwitchPosition {
 /**
  * Defines the props of the component.
  */
-interface SwitchProps extends GenericProps {
+export interface SwitchProps extends GenericProps {
     /**
      * Indicates if it is toggled on or not.
      */
@@ -48,11 +48,6 @@ interface SwitchProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SwitchProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Switch`;
@@ -60,12 +55,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Switch`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<SwitchProps> = {
     checked: false,
     position: SwitchPosition.left,
     theme: Theme.light,
@@ -76,10 +71,11 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Switch: React.FC<SwitchProps> = ({
-    className = '',
+export const Switch: React.FC<SwitchProps> = ({
+    className,
     children,
     checked = DEFAULT_PROPS.checked,
+    disabled,
     helper,
     onToggle,
     position = DEFAULT_PROPS.position,
@@ -105,12 +101,11 @@ const Switch: React.FC<SwitchProps> = ({
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
-
                     checked: Boolean(checked),
-                    disabled: props.disabled,
+                    disabled,
                     position,
                     theme,
-                    unchecked: !Boolean(checked),
+                    unchecked: !checked,
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
@@ -147,5 +142,3 @@ const Switch: React.FC<SwitchProps> = ({
     );
 };
 Switch.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Switch, SwitchProps, SwitchPosition };

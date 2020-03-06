@@ -1,22 +1,21 @@
+import { getRootClassName } from '@lumx/react/utils';
 import React from 'react';
-
 import moment from 'moment';
 
 import classNames from 'classnames';
 
 import { Emphasis, IconButton, Toolbar } from '@lumx/react';
+import { BaseDatePickerProps } from '@lumx/react/components/date-picker/types';
 
 import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
 import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
-
-import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DEFAULT_PROPS, DatePickerProps } from './DatePicker';
+import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 /**
  * Defines the props of the component.
  */
-
-type DatePickerControlledProps = DatePickerProps & {
+export type DatePickerControlledProps = BaseDatePickerProps & {
     /** Today. */
     today: moment.Moment;
 
@@ -33,17 +32,22 @@ type DatePickerControlledProps = DatePickerProps & {
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Controlled`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}DatePicker`;
+
+/**
+ * The default class name and classes prefix for this component.
+ */
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Simple component used to pick a date (controlled implementation).
  *
  * @return The component.
  */
-const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
+export const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     locale,
-    maxDate = DEFAULT_PROPS.maxDate,
-    minDate = DEFAULT_PROPS.minDate,
+    maxDate,
+    minDate,
     monthOffset,
     onChange,
     onPrevMonthChange,
@@ -101,6 +105,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                                         })}
                                         disabled={!annotatedDate.isClickable}
                                         onClick={() => onChange(annotatedDate.date)}
+                                        type="button"
                                     >
                                         <span>{annotatedDate.date.format('DD')}</span>
                                     </button>
@@ -115,5 +120,3 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     );
 };
 DatePickerControlled.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, COMPONENT_NAME, DatePickerControlled, DatePickerControlledProps };

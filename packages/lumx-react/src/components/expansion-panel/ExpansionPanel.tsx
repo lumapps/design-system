@@ -1,4 +1,4 @@
-import React, { Children, PropsWithChildren, ReactNode, useEffect, useRef, useState } from 'react';
+import React, { Children, PropsWithChildren, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -10,26 +10,19 @@ import isFunction from 'lodash/isFunction';
 
 import { ColorPalette, DragHandle, Emphasis, IconButton, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import {
-    Callback,
-    GenericProps,
-    getRootClassName,
-    handleBasicClasses,
-    isComponent,
-    partitionMulti,
-} from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses, isComponent, partitionMulti } from '@lumx/react/utils';
 
 /**
  * Defines the props of the component.
  */
-interface ExpansionPanelProps extends GenericProps {
+export interface ExpansionPanelProps extends GenericProps {
     /** The color theme. */
     theme?: Theme;
 
     /** The label text used when no `<header>` was provided in the children. */
     label?: string;
 
-    /** Whether the hexpansion panel has a background. */
+    /** Whether the expansion panel has a background. */
     hasBackground?: boolean;
 
     /** Whether the header has a divider. */
@@ -39,10 +32,10 @@ interface ExpansionPanelProps extends GenericProps {
     isOpen?: boolean;
 
     /** The function called on open. */
-    openCallback?: Callback;
+    openCallback?(): void;
 
     /** The function called on close. */
-    closeCallback?: Callback;
+    closeCallback?(): void;
 
     /** The function called on open or close. */
     toggleCallback?(shouldOpen: boolean): void;
@@ -56,12 +49,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ExpansionPanel`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
+export const DEFAULT_PROPS: Partial<ExpansionPanelProps> = {
     theme: Theme.light,
 };
 
@@ -69,7 +62,7 @@ const isDragHandle = isComponent(DragHandle);
 const isHeader = isComponent('header');
 const isFooter = isComponent('footer');
 
-const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
+export const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const {
         label,
         theme = DEFAULT_PROPS.theme,
@@ -80,13 +73,18 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
         openCallback,
         closeCallback,
         toggleCallback,
+        children,
         ...otherProps
     } = props;
 
-    const children: ReactNode[] = Children.toArray(props.children);
+    const childrenArray = Children.toArray(children);
 
     // Partition children by types.
-    const [[dragHandle], [header], [footer], content] = partitionMulti(children, [isDragHandle, isHeader, isFooter]);
+    const [[dragHandle], [header], [footer], content] = partitionMulti(childrenArray, [
+        isDragHandle,
+        isHeader,
+        isFooter,
+    ]);
 
     // Either take the header in children or create one with the label.
     const headerProps: PropsWithChildren<{}> = React.isValidElement(header) ? header.props : {};
@@ -133,7 +131,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     useEffect(() => {
         const height = isOpen ? get(wrapperRef.current, 'offsetHeight', 0) : 0;
         setMaxHeight(`${height}px`);
-    }, [children, isOpen, wrapperRef.current]);
+    }, [children, isOpen, wrapperRef]);
 
     return (
         <section className={rootClassName} {...otherProps}>
@@ -162,5 +160,3 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     );
 };
 ExpansionPanel.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps };

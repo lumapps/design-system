@@ -1,6 +1,6 @@
 import { mdiCellphone, mdiClose, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@lumx/icons';
 
-function DemoController(LxPopoverService) {
+export function DemoController(LxPopoverService) {
     'ngInject';
 
     const vm = this;
@@ -59,5 +59,3 @@ function DemoController(LxPopoverService) {
 }
 
 angular.module('design-system').controller('DemoController', DemoController);
-
-export { DemoController };

@@ -1,5 +1,5 @@
 import partition from 'lodash/partition';
-import { partitionMulti } from './';
+import { partitionMulti } from '.';
 
 describe(`partitionMulti`, () => {
     it('should act like partition for single predicate', () => {

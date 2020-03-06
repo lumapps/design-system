@@ -1,7 +1,7 @@
 import { EngineProvider } from '@lumx/demo/context/engine';
 import { ThemeProvider } from '@lumx/demo/context/theme';
 import { ErrorBoundary } from '@lumx/demo/layout/ErrorBoundary';
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 
 import { Alignment, Grid, GridItem, Orientation } from '@lumx/react';
@@ -23,7 +23,7 @@ const renderContent = ({ location }: RouteComponentProps) => {
  *
  * @return The main component.
  */
-const Main: React.FC = (): ReactElement => {
+export const Main: React.FC = () => {
     return (
         <div className="main">
             <EngineProvider>
@@ -58,5 +58,3 @@ const Main: React.FC = (): ReactElement => {
         </div>
     );
 };
-
-export { Main };

@@ -4,10 +4,10 @@ import React from 'react';
 
 export default { title: 'Radio Group' };
 
-export const radioGroup = ({ theme }: any) => (
+export const Simple = ({ theme }: any) => (
     <RadioGroup>
         <RadioButton
-            checked={true}
+            checked
             helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
             label="Radio button with help 1"
             name="test2"

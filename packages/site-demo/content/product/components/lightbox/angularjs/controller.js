@@ -1,4 +1,4 @@
-function DemoController(LxLightboxService) {
+export function DemoController(LxLightboxService) {
     'ngInject';
 
     const vm = this;
@@ -37,5 +37,3 @@ function DemoController(LxLightboxService) {
 }
 
 angular.module('design-system').controller('DemoController', DemoController);
-
-export { DemoController };

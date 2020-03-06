@@ -1,10 +1,9 @@
-import React from 'react';
+import { CommonSetup, commonTestsSuite, Wrapper } from '@lumx/react/testing/utils';
+import { getBasicClass } from '@lumx/react/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
+import React, { ReactElement } from 'react';
 
 import { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipProps } from './Tooltip';
 
@@ -26,16 +25,18 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param  props  The props to use to override the default props of the component.
+ * @param  propsOverrides          The props to use to override the default props of the component.
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
-    const renderer = shallowRendering ? shallow : mount;
-
-    // @ts-ignore
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: TooltipProps = {
+        anchorRef: undefined as any,
+        ...propsOverrides,
+    };
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
     const wrapper = renderer(<Tooltip {...props} />);
-    const tooltip = wrapper.find('.' + CLASSNAME);
+    const tooltip = wrapper.find(`.${CLASSNAME}`);
 
     return {
         props,

@@ -14,7 +14,7 @@ Mauris ultrices pellentesque vestibulum. Etiam vel turpis at eros condimentum fe
  * WebBookmark story
  * @return regular WebBookmark.
  */
-export const regularWebBookmark = ({ theme }: any) => (
+export const RegularWebBookmark = ({ theme }: any) => (
     <WebBookmark
         title={text('Title', 'Link title')}
         description={text('Description', LONG_LOREM_IPSUM)}
@@ -28,7 +28,7 @@ export const regularWebBookmark = ({ theme }: any) => (
  * WebBookmark story
  * @return big WebBookmark.
  */
-export const bigWebBookmark = ({ theme }: any) => {
+export const BigWebBookmark = ({ theme }: any) => {
     const wrapperStyle = { width: 400 };
 
     return (

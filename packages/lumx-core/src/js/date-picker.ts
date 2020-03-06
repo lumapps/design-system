@@ -19,7 +19,7 @@ interface AnnotatedDate {
  * @param  locale The locale using to generate the order of days in a week.
  * @return The list of days in a week based on locale.
  */
-function getWeekDays(locale: string): Moment[] {
+export function getWeekDays(locale: string): Moment[] {
     return range(DAYS_PER_WEEK).map((_, i) =>
         moment()
             .locale(locale)
@@ -35,7 +35,7 @@ function getWeekDays(locale: string): Moment[] {
  * @param  monthOffset The number of month from now for which we want the calendar.
  * @return The list of days in a week based on locale.
  */
-function getMonthCalendar(locale: string, today?: Moment, monthOffset = 0): Moment[] {
+export function getMonthCalendar(locale: string, today?: Moment, monthOffset = 0): Moment[] {
     const firstDay = moment(today)
         .locale(locale)
         .add(monthOffset, 'months')
@@ -71,7 +71,7 @@ function getMonthCalendar(locale: string, today?: Moment, monthOffset = 0): Mome
  * @param  monthOffset The number of month from now for which we want the calendar.
  * @return The list of days in a week based on locale.
  */
-function getAnnotatedMonthCalendar(
+export function getAnnotatedMonthCalendar(
     locale: string,
     minDate?: Date,
     maxDate?: Date,
@@ -94,5 +94,3 @@ function getAnnotatedMonthCalendar(
         };
     });
 }
-
-export { getWeekDays, getMonthCalendar, getAnnotatedMonthCalendar };

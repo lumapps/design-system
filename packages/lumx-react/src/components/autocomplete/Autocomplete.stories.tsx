@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import { Autocomplete, List, ListItem, Size } from '@lumx/react';
 
@@ -8,10 +8,10 @@ export default { title: 'Autocomplete' };
 
 const cityNames = CITIES.map((city) => city.text);
 
-export const simple = ({ theme }: any) => {
-    const [showSuggestions, setShowSuggestions] = React.useState(false);
-    const [value, setValue] = React.useState('');
-    const inputRef = React.useRef(null);
+export const Simple = ({ theme }: any) => {
+    const [showSuggestions, setShowSuggestions] = useState(false);
+    const [value, setValue] = useState('');
+    const inputRef = useRef(null);
 
     const filteredCities = useMemo(
         () =>

@@ -5,6 +5,7 @@ exports[`<Tab> Props should use the given props 1`] = `
   className="lumx-tabs__link"
   onClick={[Function]}
   onKeyPress={[Function]}
+  role="tab"
   tabIndex={0}
 >
   <Icon
@@ -22,6 +23,7 @@ exports[`<Tab> Snapshots and structure should render correctly 1`] = `
   className="lumx-tabs__link"
   onClick={[Function]}
   onKeyPress={[Function]}
+  role="tab"
   tabIndex={0}
 />
 `;

@@ -1,51 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 
-type useInfiniteScrollType = (
+type EventCallback = (evt?: Event) => void;
+
+export type useInfiniteScrollType = (
     ref: React.RefObject<HTMLElement>,
-    callback: EventCallback,
+    callback?: EventCallback,
     callbackOnMount?: boolean,
 ) => void;
-type EventCallback = (evt?: Event) => void;
-// CONSTANTS
+
+const isAtBottom = (element?: HTMLElement | null) =>
+    element && element.scrollTop + element.clientHeight >= element.scrollHeight;
 
 /**
  * Listen to clicks away from a given element and callback the passed in function.
  *
- * @param  ref              A reference to the element on which you want to listen scroll event.
- * @param  [callback]       A callback function to call when the bottom of the reference element is reached.
+ * @param  ref               A reference to the element on which you want to listen scroll event.
+ * @param  callback          A callback function to call when the bottom of the reference element is reached.
+ * @param  [callbackOnMount] Whether to call the callback on mount.
  */
-const useInfiniteScroll: useInfiniteScrollType = (
-    ref: React.RefObject<HTMLElement>,
-    callback: EventCallback,
-    callbackOnMount: boolean = false,
-) => {
-    const isAtBottom = (): boolean =>
-        Boolean(ref.current && ref.current.scrollTop + ref.current.clientHeight >= ref.current.scrollHeight);
-
-    const onScroll: EventListener = (e?: Event) => {
-        if (isAtBottom() && callback) {
+export const useInfiniteScroll: useInfiniteScrollType = (ref, callback, callbackOnMount = false) => {
+    const onScroll = useCallback(
+        (e: Event) => {
+            if (!isAtBottom(ref.current) || !callback) {
+                return;
+            }
             callback(e);
-        }
-    };
+        },
+        [ref, callback],
+    );
 
     useEffect(() => {
-        if (ref.current) {
-            ref.current.addEventListener('scroll', onScroll);
-            ref.current.addEventListener('resize', onScroll);
+        const { current } = ref;
+        if (!current) {
+            return undefined;
         }
+        current.addEventListener('scroll', onScroll);
+        current.addEventListener('resize', onScroll);
         return () => {
-            if (ref.current) {
-                ref.current.removeEventListener('scroll', onScroll);
-                ref.current.removeEventListener('resize', onScroll);
-            }
+            current.removeEventListener('scroll', onScroll);
+            current.removeEventListener('resize', onScroll);
         };
-    }, [ref, callback]);
+    }, [ref, onScroll]);
 
-    if (callbackOnMount) {
-        useEffect(() => {
-            callback();
-        }, []);
-    }
+    useEffect(() => {
+        if (callbackOnMount) {
+            callback?.();
+        }
+    });
 };
-
-export { useInfiniteScroll };

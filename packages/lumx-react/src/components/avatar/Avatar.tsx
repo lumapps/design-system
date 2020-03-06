@@ -3,21 +3,18 @@ import React, { CSSProperties, ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { Size, Theme } from '@lumx/react';
-
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-
-import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
-import { getRootClassName } from '../../utils/getRootClassName';
+import { GenericProps, handleBasicClasses, getRootClassName } from '@lumx/react/utils';
 
 /**
  * Authorized size values.
  */
-type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
+export type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
  * Defines the props of the component.
  */
-interface AvatarProps extends GenericProps {
+export interface AvatarProps extends GenericProps {
     /** Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
     /** Size. */
@@ -29,11 +26,6 @@ interface AvatarProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<AvatarProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Avatar`;
@@ -41,12 +33,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Avatar`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+export const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+export const DEFAULT_PROPS: Partial<AvatarProps> = {
     actions: undefined,
     size: Size.m,
     theme: Theme.light,
@@ -57,9 +49,9 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Avatar: React.FC<AvatarProps> = ({
+export const Avatar: React.FC<AvatarProps> = ({
     actions = DEFAULT_PROPS.actions,
-    className = '',
+    className,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     image,
@@ -82,5 +74,3 @@ const Avatar: React.FC<AvatarProps> = ({
     );
 };
 Avatar.displayName = COMPONENT_NAME;
-
-export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps, AvatarSize };

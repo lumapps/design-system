@@ -1,19 +1,20 @@
 import { List, ListItem, Select, Size, TextField } from '@lumx/react';
-import { useBooleanState } from '@lumx/react/hooks';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 
 export default { title: 'Select' };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
-export const simpleSelect = ({ theme }: any) => {
+export const SimpleSelect = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [values, setValues] = React.useState<string[]>([]);
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [values, setValues] = useState<string[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
 
     const clearSelected = (event: SyntheticEvent, value: string) => {
         event.stopPropagation();
@@ -43,10 +44,10 @@ export const simpleSelect = ({ theme }: any) => {
         >
             <List isClickable>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={values.includes(choice)}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >
@@ -63,13 +64,15 @@ export const simpleSelect = ({ theme }: any) => {
     );
 };
 
-export const selectWithAnotherField = ({ theme }: any) => {
+export const SelectWithAnotherField = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [values, setValues] = React.useState<string[]>([]);
-    const [blurred, setWasBlurred] = React.useState('');
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [values, setValues] = useState<string[]>([]);
+    const [blurred, setWasBlurred] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
 
     const clearSelected = (event: SyntheticEvent, value: string) => {
         event.stopPropagation();
@@ -112,10 +115,10 @@ export const selectWithAnotherField = ({ theme }: any) => {
             >
                 <List isClickable>
                     {CHOICES.length > 0
-                        ? CHOICES.map((choice, index) => (
+                        ? CHOICES.map((choice) => (
                               <ListItem
                                   isSelected={values.includes(choice)}
-                                  key={index}
+                                  key={choice}
                                   onItemSelected={selectItem(choice)}
                                   size={Size.tiny}
                               >
@@ -134,8 +137,10 @@ export const selectWithAnotherField = ({ theme }: any) => {
     );
 };
 
-export const selectWithNoData = ({ theme }: any) => {
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(true);
+export const SelectWithNoData = ({ theme }: any) => {
+    const [isOpen, setIsOpen] = useState(true);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
 
     return (
         <Select
@@ -148,16 +153,16 @@ export const selectWithNoData = ({ theme }: any) => {
             onDropdownClose={closeSelect}
         >
             <List theme={theme} isClickable>
-                <ListItem key={0} size={Size.tiny}>
-                    No data
-                </ListItem>
+                <ListItem size={Size.tiny}>No data</ListItem>
             </List>
         </Select>
     );
 };
 
-export const selectWithHelper = ({ theme }: any) => {
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const SelectWithHelper = ({ theme }: any) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
 
     return (
         <Select
@@ -171,8 +176,8 @@ export const selectWithHelper = ({ theme }: any) => {
             onDropdownClose={closeSelect}
         >
             <List theme={theme} isClickable>
-                {CHOICES.map((choice, index) => (
-                    <ListItem key={index} size={Size.tiny}>
+                {CHOICES.map((choice) => (
+                    <ListItem key={choice} size={Size.tiny}>
                         {choice}
                     </ListItem>
                 ))}
@@ -181,8 +186,10 @@ export const selectWithHelper = ({ theme }: any) => {
     );
 };
 
-export const selectWithError = ({ theme }: any) => {
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const SelectWithError = ({ theme }: any) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
 
     return (
         <Select
@@ -194,12 +201,12 @@ export const selectWithError = ({ theme }: any) => {
             helper={text('helper', 'This is used in analytics')}
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
-            hasError={true}
+            hasError
             error={text('Error', 'Please select something :)')}
         >
             <List theme={theme} isClickable>
-                {CHOICES.map((choice, index) => (
-                    <ListItem key={index} size={Size.tiny}>
+                {CHOICES.map((choice) => (
+                    <ListItem key={choice} size={Size.tiny}>
                         {choice}
                     </ListItem>
                 ))}
@@ -208,8 +215,10 @@ export const selectWithError = ({ theme }: any) => {
     );
 };
 
-export const selectSuccess = ({ theme }: any) => {
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+export const SelectSuccess = ({ theme }: any) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
 
     return (
         <Select
@@ -224,8 +233,8 @@ export const selectSuccess = ({ theme }: any) => {
             isValid
         >
             <List theme={theme} isClickable>
-                {CHOICES.map((choice, index) => (
-                    <ListItem key={index} size={Size.tiny}>
+                {CHOICES.map((choice) => (
+                    <ListItem key={choice} size={Size.tiny}>
                         {choice}
                     </ListItem>
                 ))}

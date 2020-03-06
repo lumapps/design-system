@@ -1,4 +1,4 @@
-const CITIES = [
+export const CITIES = [
     {
         text: 'Los Angeles',
         id: 'losangeles',
@@ -32,5 +32,3 @@ const CITIES = [
         id: 'montevideo',
     },
 ];
-
-export { CITIES };
