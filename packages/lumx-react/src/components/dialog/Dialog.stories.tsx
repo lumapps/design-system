@@ -206,16 +206,13 @@ export const dialogWithFocusableElements = ({ theme }: any) => {
     const inputRef = useRef(null);
 
     const selectChoices = ['First item', 'Second item', 'Third item'];
-    const [values, setValues] = React.useState<string[]>([]);
+    const [value, setValue] = React.useState<string>('');
     const [isSelectOpen, setSelectOpen] = useState(false);
     const toggleSelect = () => setSelectOpen(!isSelectOpen);
     const closeSelect = () => setSelectOpen(false);
     const selectItem = (item: any) => () => {
-        if (values.includes(item)) {
-            return;
-        }
         closeSelect();
-        setValues([item]);
+        setValue(item);
     };
     return (
         <>
@@ -233,7 +230,6 @@ export const dialogWithFocusableElements = ({ theme }: any) => {
                         after={<IconButton icon={mdiClose} onClick={closeDialog} emphasis={Emphasis.low} />}
                     />
                 </header>
-
                 <div className="lumx-spacing-padding-horizontal-huge lumx-spacing-padding-bottom-huge">
                     <div className="lumx-spacing-margin-bottom-huge">
                         The text field should capture the focus on open and a focus trap should be in place.
@@ -258,7 +254,7 @@ export const dialogWithFocusableElements = ({ theme }: any) => {
                     <Select
                         className="lumx-spacing-margin-bottom-huge"
                         isOpen={isSelectOpen}
-                        value={values}
+                        value={value}
                         label="Select label"
                         onInputClick={toggleSelect}
                         onDropdownClose={closeSelect}
@@ -267,7 +263,7 @@ export const dialogWithFocusableElements = ({ theme }: any) => {
                             {selectChoices.map((choice) => (
                                 <ListItem
                                     key={choice}
-                                    isSelected={values.includes(choice)}
+                                    isSelected={value === choice}
                                     onItemSelected={selectItem(choice)}
                                     size={Size.tiny}
                                 >

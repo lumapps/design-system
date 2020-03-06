@@ -10,7 +10,7 @@ enum SelectVariant {
     chip = 'chip',
 }
 
-interface ICoreSelectProps extends GenericProps {
+interface CoreSelectProps extends GenericProps {
     /** Whether the select (input variant) is displayed with error style or not. */
     hasError?: boolean;
 
@@ -69,4 +69,4 @@ interface ICoreSelectProps extends GenericProps {
     selectedValueRender?(choice: string): ReactNode | string;
 }
 
-export { SelectVariant, ICoreSelectProps };
+export { SelectVariant, CoreSelectProps };

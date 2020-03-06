@@ -11,55 +11,38 @@ import { COMPONENT_PREFIX, CSS_PREFIX, DOWN_KEY_CODE, ENTER_KEY_CODE, SPACE_KEY_
 
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-import { ICoreSelectProps, SelectVariant } from './constants';
+import { CoreSelectProps, SelectVariant } from './constants';
 
-/////////////////////////////
+/** Defines the props of the component. */
+interface SelectProps extends CoreSelectProps {}
 
-/**
- * Defines the props of the component.
- */
-type SelectProps = ICoreSelectProps;
+/** Define the types of the default props. */
+interface DefaultPropsType extends Partial<SelectProps> {}
 
-/////////////////////////////
-
-/**
- * Define the types of the default props.
- */
-interface IDefaultPropsType extends Partial<SelectProps> {}
-
-/////////////////////////////
-//                         //
-//    Public attributes    //
-//                         //
-/////////////////////////////
-
-/**
- * The display name of the component.
- */
+/** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
-/**
- * The default class name and classes prefix for this component.
- */
+/** The default class name and classes prefix for this component. */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
-/**
- * The default value of props.
- */
-const DEFAULT_PROPS: IDefaultPropsType = {
+/** The default value of props. */
+const DEFAULT_PROPS: DefaultPropsType = {
     hasError: false,
     isOpen: false,
     isValid: false,
     theme: Theme.light,
     variant: SelectVariant.input,
 };
-/////////////////////////////
 
 /**
  * Listen on element focus to store the focus status.
  *
  * @param element    Element to focus.
  * @param setIsFocus Setter used to store the focus status of the element.
+ * @param isOpen Is the list opened
+ * @param wasBlurred is it blurred
+ * @param setWasBlurred set blurred
+ * @param onBlur when its blurred
  */
 function useHandleElementFocus(
     element: HTMLElement | null,
@@ -221,7 +204,5 @@ const withSelectContext = (
         </div>
     );
 };
-
-/////////////////////////////
 
 export { DEFAULT_PROPS, withSelectContext };

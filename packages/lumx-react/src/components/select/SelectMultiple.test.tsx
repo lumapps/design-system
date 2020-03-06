@@ -9,7 +9,7 @@ import { Chip } from '@lumx/react/components/chip/Chip';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
-import { ICommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
 import { CLASSNAME, SelectMultiple, SelectMultipleProps } from './SelectMultiple';
@@ -17,11 +17,11 @@ import { DEFAULT_PROPS } from './WithSelectContext';
 import { SelectVariant } from './constants';
 
 /** Define the overriding properties waited by the `setup` function. */
-type ISetupProps = Partial<SelectMultipleProps>;
+type SetupProps = Partial<SelectMultipleProps>;
 
 /** Defines what the `setup` function will return. */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
 
     /** The <div> element that wraps multiSelect button and children elements. */
     wrapper: Wrapper;
@@ -39,7 +39,7 @@ interface ISetup extends ICommonSetup {
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (props: ISetupProps = {}, shallowRendering: boolean = true): ISetup => {
+const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const setupProps: SelectMultipleProps = {
         children: <span>Select Component</span>,
         value: [],
@@ -86,7 +86,7 @@ describe(`<SelectMultiple>`, () => {
 
     describe('Props', () => {
         it('should have default classNames', () => {
-            const { wrapper, container }: ISetup = setup();
+            const { wrapper, container }: Setup = setup();
             wrapper.update();
 
             expect(container).toHaveClassName(CLASSNAME);
@@ -98,7 +98,7 @@ describe(`<SelectMultiple>`, () => {
 
         it('should use the given `theme`', () => {
             const testedProp = 'theme';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: Theme.dark,
             };
 
@@ -114,7 +114,7 @@ describe(`<SelectMultiple>`, () => {
 
         it('should use the given `isValid`', () => {
             const testedProp = 'isValid';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: true,
             };
 
@@ -127,7 +127,7 @@ describe(`<SelectMultiple>`, () => {
 
         it('should use the given `hasError`', () => {
             const testedProp = 'hasError';
-            const modifiedProps: ISetupProps = {
+            const modifiedProps: SetupProps = {
                 [testedProp]: true,
             };
 
@@ -288,7 +288,7 @@ describe(`<SelectMultiple>`, () => {
                 const value1 = 'Value1';
                 const value2 = 'Value2';
                 const value3 = 'Value3';
-                const hasMultipleValues: Partial<ISetupProps> = {
+                const hasMultipleValues: Partial<SetupProps> = {
                     value: [value1, value2, value3],
                     variant: SelectVariant.input,
                 };
@@ -323,7 +323,7 @@ describe(`<SelectMultiple>`, () => {
 
             describe('No value', () => {
                 const placeholder = 'My placeholder';
-                const hasNoValueProps: Partial<ISetupProps> = {
+                const hasNoValueProps: Partial<SetupProps> = {
                     placeholder,
                     value: [],
                     variant: SelectVariant.input,
@@ -352,7 +352,7 @@ describe(`<SelectMultiple>`, () => {
 
             describe('Has value', () => {
                 const value = 'Value';
-                const hasValueProps: Partial<ISetupProps> = {
+                const hasValueProps: Partial<SetupProps> = {
                     value: [value],
                     variant: SelectVariant.chip,
                 };
@@ -400,7 +400,7 @@ describe(`<SelectMultiple>`, () => {
             });
 
             describe('No value', () => {
-                const hasNoValue: Partial<ISetupProps> = {
+                const hasNoValue: Partial<SetupProps> = {
                     value: [],
                     variant: SelectVariant.chip,
                 };

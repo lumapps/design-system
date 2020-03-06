@@ -16,17 +16,16 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { withSelectContext } from './WithSelectContext';
-import { ICoreSelectProps, SelectVariant } from './constants';
+import { CoreSelectProps, SelectVariant } from './constants';
 
 /** Defines the props of the component. */
-interface ISelectProps extends ICoreSelectProps {
+interface SelectProps extends CoreSelectProps {
     /** The selected value. */
     value: string;
 }
-type SelectProps = ISelectProps;
 
 /** Define the types of the default props. */
-interface IDefaultPropsType extends Partial<SelectProps> {}
+interface DefaultPropsType extends Partial<SelectProps> {}
 
 /** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
@@ -35,7 +34,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
-const DEFAULT_PROPS: IDefaultPropsType = {
+const DEFAULT_PROPS: DefaultPropsType = {
     hasError: false,
     isOpen: false,
     isValid: false,
