@@ -19,16 +19,14 @@ module.exports = class extends MainGenerator {
 
         const path = `packages/site-demo/content/product/components/${kbComponentName}`;
 
-        this.fs.copyTpl(
-            this.templatePath('index.mdx.ejs'),
-            this.destinationPath(`${path}/index.mdx`),
-            { componentName, kbComponentName },
-        );
-        this.fs.copyTpl(
-            this.templatePath('react/default.tsx.ejs'),
-            this.destinationPath(`${path}/react/default.tsx`),
-            { componentName, kbComponentName },
-        );
+        this.fs.copyTpl(this.templatePath('index.mdx.ejs'), this.destinationPath(`${path}/index.mdx`), {
+            componentName,
+            kbComponentName,
+        });
+        this.fs.copyTpl(this.templatePath('react/default.tsx.ejs'), this.destinationPath(`${path}/react/default.tsx`), {
+            componentName,
+            kbComponentName,
+        });
         this.fs.copyTpl(
             this.templatePath('angularjs/controller.js.ejs'),
             this.destinationPath(`${path}/angularjs/controller.js`),
@@ -43,6 +41,6 @@ module.exports = class extends MainGenerator {
         console.warn(`\nWarning: Add the following line to the 'lumx-react/src/index.js' file for the demo to work:
 
             export { ${componentName}, ${componentName}Props } from './components/${kbComponentName}/${componentName}';
-        `)
+        `);
     }
 };
