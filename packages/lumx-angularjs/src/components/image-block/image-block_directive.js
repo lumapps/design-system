@@ -7,7 +7,6 @@ import template from './image-block.html';
 function ImageBlockController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this, no-unused-vars
     const lx = this;
 
     /////////////////////////////

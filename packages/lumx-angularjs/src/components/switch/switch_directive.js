@@ -7,7 +7,6 @@ import template from './switch.html';
 function SwitchController(LxUtilsService) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

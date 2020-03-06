@@ -15,7 +15,6 @@ function DialogController(
 ) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

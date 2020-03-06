@@ -14,7 +14,6 @@ function DepthService() {
      *
      * @type {number}
      */
-    // eslint-disable-next-line no-magic-numbers
     let _depth = 1000;
 
     /////////////////////////////

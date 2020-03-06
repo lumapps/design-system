@@ -7,7 +7,6 @@ import template from './table.html';
 function TableController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

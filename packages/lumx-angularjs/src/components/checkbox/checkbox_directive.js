@@ -9,7 +9,6 @@ import template from './checkbox.html';
 function CheckboxController(LxUtilsService) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

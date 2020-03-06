@@ -5,7 +5,6 @@ import template from './user-block.html';
 /////////////////////////////
 
 function UserBlockController() {
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

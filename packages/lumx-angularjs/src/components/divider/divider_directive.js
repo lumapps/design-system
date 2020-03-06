@@ -7,7 +7,6 @@ import template from './divider.html';
 function DividerController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

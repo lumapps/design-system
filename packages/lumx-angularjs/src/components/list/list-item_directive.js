@@ -7,7 +7,6 @@ import template from './list-item.html';
 function ListItemController($element, $scope) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////
@@ -145,7 +144,6 @@ function ListItemDirective() {
         }
 
         if (angular.isDefined(ctrls[1]) && ctrls[1]) {
-            // eslint-disable-next-line prefer-destructuring
             ctrls[0].parentController = ctrls[1];
         }
     }

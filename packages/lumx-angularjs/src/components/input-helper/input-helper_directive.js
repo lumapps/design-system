@@ -7,7 +7,6 @@ import template from './input-helper.html';
 function InputHelperController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

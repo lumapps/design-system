@@ -9,7 +9,6 @@ import template from './select.html';
 function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDropdownService, LxUtilsService) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////
@@ -41,7 +40,6 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
      *
      * @type {Object}
      */
-    // eslint-disable-next-line one-var
     let _modelController;
 
     /**
@@ -49,7 +47,6 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
      *
      * @type {string}
      */
-    // eslint-disable-next-line one-var
     let _selectedTemplate;
 
     /////////////////////////////
@@ -174,7 +171,6 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
 
                 angular.forEach(_modelController.$viewValue, (item) => {
                     lx.modelToSelection({
-                        // eslint-disable-next-line id-blacklist
                         callback(response) {
                             if (angular.isUndefined(response) || !response) {
                                 return;
@@ -182,13 +178,12 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
 
                             lx.viewValue.push(response);
                         },
-                        // eslint-disable-next-line id-blacklist
+
                         data: item,
                     });
                 });
             } else {
                 lx.modelToSelection({
-                    // eslint-disable-next-line id-blacklist
                     callback(response) {
                         if (angular.isUndefined(response) || !response) {
                             return;
@@ -196,7 +191,7 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
 
                         lx.viewValue = response;
                     },
-                    // eslint-disable-next-line id-blacklist
+
                     data: _modelController.$viewValue,
                 });
             }
@@ -524,7 +519,6 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
 
         if (angular.isDefined(lx.selectionToModel)) {
             lx.selectionToModel({
-                // eslint-disable-next-line id-blacklist
                 callback(response) {
                     if (angular.isUndefined(response) || !response) {
                         return;
@@ -533,7 +527,6 @@ function SelectController($document, $interpolate, $sce, $scope, $timeout, LxDro
                     _updateModel(response);
                     _updateViewValue(choice);
                 },
-                // eslint-disable-next-line id-blacklist
                 data: choice,
             });
         } else {

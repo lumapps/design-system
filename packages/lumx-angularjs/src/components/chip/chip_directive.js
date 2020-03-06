@@ -9,7 +9,6 @@ import template from './chip.html';
 function ChipController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////
@@ -82,12 +81,10 @@ function ChipController() {
 
         let color;
         if (lx.color) {
-            // eslint-disable-next-line prefer-destructuring
             color = lx.color;
         } else if (angular.isDefined(lx.theme) && lx.theme) {
             color = lx.theme === 'light' ? 'dark' : 'light';
         } else {
-            // eslint-disable-next-line prefer-destructuring
             color = _DEFAULT_PROPS.color;
         }
 

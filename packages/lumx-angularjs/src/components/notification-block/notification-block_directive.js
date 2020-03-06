@@ -5,7 +5,6 @@ import template from './notification-block.html';
 function NotificationBlockController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

@@ -5,7 +5,6 @@ import template from './data-table.html';
 function DataTableController($rootScope, $sce, $scope) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

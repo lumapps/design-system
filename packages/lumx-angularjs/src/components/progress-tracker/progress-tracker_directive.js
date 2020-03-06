@@ -5,7 +5,6 @@ import template from './progress-tracker.html';
 function ProgressTrackerController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

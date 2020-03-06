@@ -7,7 +7,6 @@ import template from './radio-button.html';
 function RadioButtonController(LxUtilsService) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

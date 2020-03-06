@@ -7,7 +7,6 @@ import template from './avatar.html';
 function AvatarController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this, no-unused-vars
     const lx = this;
 
     /////////////////////////////

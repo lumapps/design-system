@@ -9,7 +9,6 @@ import template from './message.html';
 function MessageController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

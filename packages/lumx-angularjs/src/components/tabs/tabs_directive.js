@@ -7,7 +7,6 @@ import template from './tabs.html';
 function TabsController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

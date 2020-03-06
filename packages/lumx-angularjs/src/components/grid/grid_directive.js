@@ -5,7 +5,6 @@ import { CSS_PREFIX } from '@lumx/core/js/constants';
 function GridController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

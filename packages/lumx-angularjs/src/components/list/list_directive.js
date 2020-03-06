@@ -7,7 +7,6 @@ import template from './list.html';
 function ListController($element, $scope) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this, no-unused-vars
     const lx = this;
 
     /////////////////////////////

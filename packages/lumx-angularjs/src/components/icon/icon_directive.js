@@ -7,7 +7,6 @@ import template from './icon.html';
 function IconController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

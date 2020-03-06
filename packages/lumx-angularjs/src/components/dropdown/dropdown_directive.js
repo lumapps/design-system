@@ -17,7 +17,6 @@ function DropdownController(
 ) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////
@@ -49,7 +48,6 @@ function DropdownController(
      *
      * @type {string}
      */
-    // eslint-disable-next-line one-var
     let _idEventScheduler;
 
     /**
@@ -57,7 +55,6 @@ function DropdownController(
      *
      * @type {element}
      */
-    // eslint-disable-next-line one-var
     let _menuEl;
 
     /**
@@ -65,7 +62,6 @@ function DropdownController(
      *
      * @type {element}
      */
-    // eslint-disable-next-line one-var
     let _sourceEl;
 
     /**
@@ -73,7 +69,6 @@ function DropdownController(
      *
      * @type {element}
      */
-    // eslint-disable-next-line one-var
     let _toggleEl;
 
     /////////////////////////////
@@ -211,7 +206,6 @@ function DropdownController(
 
         if (angular.isDefined(lx.width)) {
             if (lx.width.indexOf('%') > -1) {
-                // eslint-disable-next-line no-magic-numbers
                 menuProps.width = toggleProps.width * (lx.width.slice(0, -1) / 100);
             } else {
                 menuProps.width = lx.width;
@@ -252,7 +246,6 @@ function DropdownController(
                 menuProps.top = availaibleHeight.above;
                 menuProps.maxHeight = availaibleHeight.below;
             } else {
-                // eslint-disable-next-line no-bitwise
                 menuProps.top = availaibleHeight.above + _toggleEl.outerHeight() + ~~lx.offset;
                 menuProps.maxHeight = availaibleHeight.below;
             }
@@ -263,13 +256,11 @@ function DropdownController(
                 menuProps.bottom = windowProps.height - availaibleHeight.above - _toggleEl.outerHeight();
                 menuProps.maxHeight = availaibleHeight.above + _toggleEl.outerHeight();
             } else {
-                // eslint-disable-next-line no-bitwise
                 menuProps.bottom = windowProps.height - availaibleHeight.above + ~~lx.offset;
                 menuProps.maxHeight = availaibleHeight.above;
             }
         }
 
-        // eslint-disable-next-line no-bitwise
         menuProps.maxHeight -= _OFFSET_FROM_EDGE + ~~lx.offset;
 
         _menuEl.css(menuProps);

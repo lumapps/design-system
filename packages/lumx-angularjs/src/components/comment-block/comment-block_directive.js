@@ -7,7 +7,6 @@ import template from './comment-block.html';
 function CommentBlockController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

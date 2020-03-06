@@ -7,7 +7,6 @@ import template from './thumbnail.html';
 function ThumbnailController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

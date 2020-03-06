@@ -9,7 +9,6 @@ import template from './side-navigation-item.html';
 function SideNavigationItemController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

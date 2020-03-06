@@ -9,7 +9,6 @@ import template from './popover.html';
 function PopoverController(LxDepthService, $element, $scope, $timeout) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////
@@ -34,7 +33,6 @@ function PopoverController(LxDepthService, $element, $scope, $timeout) {
      *
      * @type {element}
      */
-    // eslint-disable-next-line one-var
     let _sourceEl;
 
     /**
@@ -42,7 +40,6 @@ function PopoverController(LxDepthService, $element, $scope, $timeout) {
      *
      * @type {element}
      */
-    // eslint-disable-next-line one-var
     let _targetEl;
 
     /////////////////////////////
@@ -92,7 +89,6 @@ function PopoverController(LxDepthService, $element, $scope, $timeout) {
 
         $element.css('z-index', LxDepthService.get());
 
-        // eslint-disable-next-line no-new
         new PopperJs(_targetEl, $element, {
             modifiers: {
                 offset: { enabled: true, offset: `0, ${lx.offset}` },

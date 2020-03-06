@@ -9,7 +9,6 @@ import template from './lightbox.html';
 function LightboxController($element, $scope, LxDepthService, LxFocusTrapService, LxEventSchedulerService, $timeout) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

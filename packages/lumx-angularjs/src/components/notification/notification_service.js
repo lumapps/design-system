@@ -253,7 +253,6 @@ function NotificationService($compile, $rootScope, $timeout, LxDepthService, LxD
 
     service.alert = backwardAlert;
     service.confirm = backwardConfirm;
-    // eslint-disable-next-line id-blacklist
     service.error = errorNotification;
     service.info = infoNotification;
     service.success = successNotification;

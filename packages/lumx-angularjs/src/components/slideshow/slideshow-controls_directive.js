@@ -11,7 +11,6 @@ import template from './slideshow-controls.html';
 function SlideshowControlsController($element, $scope) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

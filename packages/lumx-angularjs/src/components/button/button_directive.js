@@ -5,7 +5,6 @@ import { CSS_PREFIX } from '@lumx/core/js/constants';
 function ButtonController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////
@@ -51,9 +50,7 @@ function ButtonController() {
      */
     const _SIZE_FALLBACK = {
         xs: 's',
-        // eslint-disable-next-line id-length
         s: 's',
-        // eslint-disable-next-line id-length
         m: 'm',
         l: 'm',
         xl: 'm',

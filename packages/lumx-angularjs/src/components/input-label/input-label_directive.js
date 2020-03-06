@@ -7,7 +7,6 @@ import template from './input-label.html';
 function InputLabelController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

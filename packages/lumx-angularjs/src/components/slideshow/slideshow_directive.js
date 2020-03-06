@@ -9,7 +9,6 @@ import template from './slideshow.html';
 function SlideshowController($element, $interval, $scope) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

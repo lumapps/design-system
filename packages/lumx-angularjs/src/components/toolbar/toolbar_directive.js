@@ -7,7 +7,6 @@ import template from './toolbar.html';
 function ToolbarController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

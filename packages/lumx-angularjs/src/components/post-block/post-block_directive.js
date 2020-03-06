@@ -7,7 +7,6 @@ import template from './post-block.html';
 function PostBlockController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

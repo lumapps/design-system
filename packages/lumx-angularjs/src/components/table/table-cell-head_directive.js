@@ -7,7 +7,6 @@ import template from './table-cell-head.html';
 function TableCellHeadController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

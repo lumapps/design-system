@@ -1,7 +1,6 @@
 function TableBodyController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this, no-unused-vars
     const lx = this;
 }
 

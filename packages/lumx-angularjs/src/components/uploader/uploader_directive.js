@@ -7,7 +7,6 @@ import template from './uploader.html';
 function UploaderController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

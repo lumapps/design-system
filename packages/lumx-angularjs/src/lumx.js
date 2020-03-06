@@ -1,5 +1,3 @@
-/* eslint-disable import/unambiguous */
-
 angular.module('lumx.utils.depth', []);
 angular.module('lumx.utils.enter-keydown', []);
 angular.module('lumx.utils.event-scheduler', []);

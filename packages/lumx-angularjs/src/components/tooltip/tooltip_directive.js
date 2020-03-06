@@ -5,7 +5,6 @@ import { CSS_PREFIX } from '@lumx/core/js/constants';
 function TooltipController($element, $timeout) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////
@@ -44,7 +43,6 @@ function TooltipController($element, $timeout) {
      *
      * @type {element}
      */
-    // eslint-disable-next-line one-var
     let _tooltip;
 
     /**
@@ -52,7 +50,6 @@ function TooltipController($element, $timeout) {
      *
      * @type {element}
      */
-    // eslint-disable-next-line one-var
     let _tooltipArrow;
 
     /**
@@ -60,7 +57,6 @@ function TooltipController($element, $timeout) {
      *
      * @type {element}
      */
-    // eslint-disable-next-line one-var
     let _tooltipInner;
 
     /////////////////////////////

@@ -5,7 +5,6 @@ import template from './tab.html';
 function TabController($scope, LxUtilsService) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

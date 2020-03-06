@@ -7,7 +7,6 @@ import template from './drag-handle.html';
 function DragHandleController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

@@ -7,7 +7,6 @@ import template from './progress.html';
 function ProgressController() {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

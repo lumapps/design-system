@@ -9,7 +9,6 @@ import template from './expansion-panel.html';
 function ExpansionPanelController($element, $scope, $timeout) {
     'ngInject';
 
-    // eslint-disable-next-line consistent-this
     const lx = this;
 
     /////////////////////////////

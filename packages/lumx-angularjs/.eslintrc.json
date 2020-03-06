@@ -1,0 +1,19 @@
+{
+    "globals": {
+        "angular": false
+    },
+
+    "rules": {
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "spaced-comment": "off",
+        "no-restricted-syntax": "off",
+        "no-else-return": "off",
+        "no-underscore-dangle": "off",
+        "no-param-reassign": "off",
+        "no-plusplus": "off",
+        "no-new": "off",
+        "no-bitwise": "off",
+        "prefer-destructuring": "off"
+    }
+}
