@@ -3,14 +3,14 @@ import { Alignment, Button, Icon, Orientation } from '@lumx/react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-import { DEFAULT_PROPS, FlexView, FlexViewProps } from './FlexView';
+import { DEFAULT_PROPS, FlexBox, FlexBoxProps } from './FlexBox';
 /*  tslint:disable object-literal-sort-keys */
 
-export default { title: 'FlexView' };
+export default { title: 'FlexBox' };
 
-type FlexViewPropName = keyof FlexViewProps;
+type FlexBoxPropName = keyof FlexBoxProps;
 const flexViewKnobConfigs: Array<
-    [FlexViewPropName, typeof boolean] | [string & FlexViewPropName, typeof select, any[] | Record<any, any>]
+    [FlexBoxPropName, typeof boolean] | [string & FlexBoxPropName, typeof select, any[] | Record<any, any>]
 > = [
     ['fillSpace', boolean],
     ['noShrink', boolean],
@@ -34,9 +34,9 @@ const flexViewKnobConfigs: Array<
     ],
 ];
 
-const setupFlexViewKnobs = (group: string, knobs: FlexViewPropName[] = []) =>
+const setupFlexBoxKnobs = (group: string, knobs: FlexBoxPropName[] = []) =>
     Object.fromEntries(
-        knobs.map((knob: FlexViewPropName) => {
+        knobs.map((knob: FlexBoxPropName) => {
             const [prop, knobFn, selectOptions] = flexViewKnobConfigs.find(([k]) => k === knob)! as any;
             if (selectOptions) {
                 return [prop, knobFn(prop, selectOptions, DEFAULT_PROPS[prop], group)];
@@ -45,20 +45,20 @@ const setupFlexViewKnobs = (group: string, knobs: FlexViewPropName[] = []) =>
         }),
     );
 
-const flexChildKnobs: FlexViewPropName[] = ['fillSpace', 'noShrink', 'marginAuto'];
+const flexChildKnobs: FlexBoxPropName[] = ['fillSpace', 'noShrink', 'marginAuto'];
 
 export const Flex = () => (
-    <FlexView {...setupFlexViewKnobs('-flex container', ['orientation', 'hAlign', 'vAlign', 'wrap'])}>
-        <FlexView {...setupFlexViewKnobs('start', flexChildKnobs)}>
+    <FlexBox {...setupFlexBoxKnobs('-flex container', ['orientation', 'hAlign', 'vAlign', 'wrap'])}>
+        <FlexBox {...setupFlexBoxKnobs('start', flexChildKnobs)}>
             <Icon icon={mdiPencil} />
-        </FlexView>
-        <FlexView {...setupFlexViewKnobs('middle', flexChildKnobs)}>
+        </FlexBox>
+        <FlexBox {...setupFlexBoxKnobs('middle', flexChildKnobs)}>
             {text('Text content', 'Some text in a div', 'middle')}
-        </FlexView>
-        <FlexView {...setupFlexViewKnobs('end', flexChildKnobs)}>
+        </FlexBox>
+        <FlexBox {...setupFlexBoxKnobs('end', flexChildKnobs)}>
             <Button>OK</Button>
-        </FlexView>
-    </FlexView>
+        </FlexBox>
+    </FlexBox>
 );
 
 const hAlign = (prefix?: string) =>
@@ -75,79 +75,79 @@ const vAlign = (prefix?: string) =>
     );
 
 export const HorizontalFlex = () => (
-    <FlexView
+    <FlexBox
         orientation={Orientation.horizontal}
         style={{ height: `${number('height (px)', 300)}px`, border: '1px solid red' }}
     >
         <Button>Default</Button>
-        <FlexView hAlign={Alignment.top}>
+        <FlexBox hAlign={Alignment.top}>
             <Button>Top</Button>
-        </FlexView>
-        <FlexView
+        </FlexBox>
+        <FlexBox
             fillSpace={boolean('Center button: fill space', true)}
             hAlign={hAlign('Center button')}
             vAlign={vAlign('Center button')}
         >
             <Button>Center button</Button>
-        </FlexView>
-        <FlexView hAlign={Alignment.bottom}>
+        </FlexBox>
+        <FlexBox hAlign={Alignment.bottom}>
             <Button>Bottom</Button>
-        </FlexView>
-    </FlexView>
+        </FlexBox>
+    </FlexBox>
 );
 
 export const VerticalFlex = () => (
     <>
-        <FlexView
+        <FlexBox
             orientation={Orientation.vertical}
             style={{ height: `${number('height (px)', 300)}px`, border: '1px solid red' }}
         >
             <Button>Default</Button>
-            <FlexView vAlign={Alignment.left}>
+            <FlexBox vAlign={Alignment.left}>
                 <Button>Left</Button>
-            </FlexView>
-            <FlexView
+            </FlexBox>
+            <FlexBox
                 fillSpace={boolean('Center button: fill space', true)}
                 hAlign={hAlign('Center button')}
                 vAlign={vAlign('Center button')}
             >
                 <Button>Center button</Button>
-            </FlexView>
-            <FlexView vAlign={Alignment.right}>
+            </FlexBox>
+            <FlexBox vAlign={Alignment.right}>
                 <Button>Right</Button>
-            </FlexView>
-        </FlexView>
+            </FlexBox>
+        </FlexBox>
     </>
 );
 
 export const WrapFlex = () => (
-    <FlexView
+    <FlexBox
         orientation={Orientation.horizontal}
         wrap={boolean('wrap', true)}
         style={{ width: `${number('width (px)', 150)}px`, border: '1px solid red' }}
     >
-        <FlexView fillSpace orientation={Orientation.vertical}>
+        <FlexBox fillSpace orientation={Orientation.vertical}>
             <Button>Button</Button>
-        </FlexView>
+        </FlexBox>
         <Button>Button</Button>
         <Button>Button</Button>
-    </FlexView>
+    </FlexBox>
 );
 
 export const NoShrinkFlex = () => (
-    <FlexView
+    <FlexBox
         orientation={Orientation.horizontal}
         style={{ width: `${number('width (px)', 150)}px`, border: '1px solid red' }}
     >
         <Button>Button</Button>
-        <FlexView noShrink={boolean('no shrink', true)}>{text('Center text', 'Some long text')}</FlexView>
+        <FlexBox noShrink={boolean('no shrink', true)}>{text('Center text', 'Some long text')}</FlexBox>
         <Button>Button</Button>
-    </FlexView>
+    </FlexBox>
 );
 
 export const Align = () => (
-    <FlexView orientation={Orientation.horizontal} vAlign={vAlign()} hAlign={hAlign()}>
+    <FlexBox orientation={Orientation.horizontal} vAlign={vAlign()} hAlign={hAlign()}>
         <Button style={{ height: 200 }}>Button</Button>
-        <FlexView style={{ height: 'fit-content' }}>Some text</FlexView>
-    </FlexView>
+        <FlexBox style={{ height: 'fit-content' }}>Some text</FlexBox>
+    </FlexBox>
 );

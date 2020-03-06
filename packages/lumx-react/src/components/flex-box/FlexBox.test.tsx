@@ -2,23 +2,23 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 
-import { ICommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
 
-import { CLASSNAME, FlexView, FlexViewProps } from './FlexView';
-import * as stories from './FlexView.stories';
+import { CLASSNAME, FlexBox, FlexBoxProps } from './FlexBox';
+import * as stories from './FlexBox.stories';
 
 /////////////////////////////
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type ISetupProps = Partial<FlexViewProps>;
+type SetupProps = Partial<FlexBoxProps>;
 
 /**
  * Defines what the `setup` function will return.
  */
-interface ISetup extends ICommonSetup {
-    props: ISetupProps;
+interface Setup extends CommonSetup {
+    props: SetupProps;
     wrapper: Wrapper;
 }
 
@@ -31,13 +31,13 @@ interface ISetup extends ICommonSetup {
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = (propsOverrides: ISetupProps = {}, shallowRendering = true): ISetup => {
-    const props: FlexViewProps = {
+const setup = (propsOverrides: SetupProps = {}, shallowRendering = true): Setup => {
+    const props: FlexBoxProps = {
         children: null,
         ...propsOverrides,
     };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper = renderer(<FlexView {...props} />);
+    const wrapper = renderer(<FlexBox {...props} />);
 
     return {
         props,
@@ -45,10 +45,10 @@ const setup = (propsOverrides: ISetupProps = {}, shallowRendering = true): ISetu
     };
 };
 
-describe(`<${FlexView.displayName}>`, () => {
+describe(`<${FlexBox.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        expectStoriesToMatchSnapshots(stories, FlexView);
+        expectStoriesToMatchSnapshots(stories, FlexBox);
     });
 
     /////////////////////////////

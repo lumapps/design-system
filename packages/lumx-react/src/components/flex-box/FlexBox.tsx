@@ -1,18 +1,16 @@
 import { Alignment, Orientation } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { IGenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
 import React, { ReactNode } from 'react';
-
-/////////////////////////////
 
 export type MarginAutoAlignment = Alignment.top | Alignment.bottom | Alignment.right | Alignment.left;
 
 /**
  * Defines the props of the component.
  */
-interface IFlexViewProps extends IGenericProps {
+interface FlexBoxProps extends GenericProps {
     /**
      * Flex direction.
      */
@@ -46,26 +44,25 @@ interface IFlexViewProps extends IGenericProps {
      */
     children: ReactNode;
 }
-type FlexViewProps = IFlexViewProps;
 
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexView`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexBox`;
 
 /**
  * The default class name and classes prefix for this component.
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const DEFAULT_PROPS: Partial<FlexViewProps> = {
+const DEFAULT_PROPS: Partial<FlexBoxProps> = {
     fillSpace: false,
     noShrink: false,
     orientation: Orientation.horizontal,
     wrap: false,
 };
 
-const FlexView: React.FC<FlexViewProps> = ({
+const FlexBox: React.FC<FlexBoxProps> = ({
     children,
     className,
     orientation = DEFAULT_PROPS.orientation,
@@ -92,6 +89,6 @@ const FlexView: React.FC<FlexViewProps> = ({
         {children}
     </div>
 );
-FlexView.displayName = COMPONENT_NAME;
+FlexBox.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, FlexView, FlexViewProps };
+export { CLASSNAME, DEFAULT_PROPS, FlexBox, FlexBoxProps };

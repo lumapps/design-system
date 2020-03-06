@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FlexView> Snapshots and structure should render story Align 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story Align 1`] = `
 Array [
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-center lumx-flex-view--h-align-center"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center"
   >
     <Button
       style={
@@ -14,7 +14,7 @@ Array [
     >
       Button
     </Button>
-    <FlexView
+    <FlexBox
       style={
         Object {
           "height": "fit-content",
@@ -22,10 +22,10 @@ Array [
       }
     >
       Some text
-    </FlexView>
+    </FlexBox>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal"
     style={
       Object {
         "height": "fit-content",
@@ -37,48 +37,48 @@ Array [
 ]
 `;
 
-exports[`<FlexView> Snapshots and structure should render story Flex 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story Flex 1`] = `
 Array [
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal"
   >
-    <FlexView
+    <FlexBox
       fillSpace={false}
       noShrink={false}
     >
       <Icon
         icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
       />
-    </FlexView>
-    <FlexView
+    </FlexBox>
+    <FlexBox
       fillSpace={false}
       noShrink={false}
     >
       Some text in a div
-    </FlexView>
-    <FlexView
+    </FlexBox>
+    <FlexBox
       fillSpace={false}
       noShrink={false}
     >
       <Button>
         OK
       </Button>
-    </FlexView>
+    </FlexBox>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal"
   >
     <Icon
       icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
     />
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal"
   >
     Some text in a div
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal"
   >
     <Button>
       OK
@@ -87,10 +87,10 @@ Array [
 ]
 `;
 
-exports[`<FlexView> Snapshots and structure should render story HorizontalFlex 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story HorizontalFlex 1`] = `
 Array [
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal"
     style={
       Object {
         "border": "1px solid red",
@@ -101,14 +101,14 @@ Array [
     <Button>
       Default
     </Button>
-    <FlexView
+    <FlexBox
       hAlign="top"
     >
       <Button>
         Top
       </Button>
-    </FlexView>
-    <FlexView
+    </FlexBox>
+    <FlexBox
       fillSpace={true}
       hAlign="center"
       vAlign="center"
@@ -116,31 +116,31 @@ Array [
       <Button>
         Center button
       </Button>
-    </FlexView>
-    <FlexView
+    </FlexBox>
+    <FlexBox
       hAlign="bottom"
     >
       <Button>
         Bottom
       </Button>
-    </FlexView>
+    </FlexBox>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--h-align-top"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--h-align-top"
   >
     <Button>
       Top
     </Button>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-center lumx-flex-view--h-align-center lumx-flex-view--fill-space"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--fill-space"
   >
     <Button>
       Center button
     </Button>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--h-align-bottom"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--h-align-bottom"
   >
     <Button>
       Bottom
@@ -149,10 +149,10 @@ Array [
 ]
 `;
 
-exports[`<FlexView> Snapshots and structure should render story NoShrinkFlex 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story NoShrinkFlex 1`] = `
 Array [
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal"
     style={
       Object {
         "border": "1px solid red",
@@ -163,27 +163,27 @@ Array [
     <Button>
       Button
     </Button>
-    <FlexView
+    <FlexBox
       noShrink={true}
     >
       Some long text
-    </FlexView>
+    </FlexBox>
     <Button>
       Button
     </Button>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--no-shrink"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--no-shrink"
   >
     Some long text
   </div>,
 ]
 `;
 
-exports[`<FlexView> Snapshots and structure should render story VerticalFlex 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story VerticalFlex 1`] = `
 Array [
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-vertical"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-vertical"
     style={
       Object {
         "border": "1px solid red",
@@ -194,14 +194,14 @@ Array [
     <Button>
       Default
     </Button>
-    <FlexView
+    <FlexBox
       vAlign="left"
     >
       <Button>
         Left
       </Button>
-    </FlexView>
-    <FlexView
+    </FlexBox>
+    <FlexBox
       fillSpace={true}
       hAlign="center"
       vAlign="center"
@@ -209,31 +209,31 @@ Array [
       <Button>
         Center button
       </Button>
-    </FlexView>
-    <FlexView
+    </FlexBox>
+    <FlexBox
       vAlign="right"
     >
       <Button>
         Right
       </Button>
-    </FlexView>
+    </FlexBox>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-left"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left"
   >
     <Button>
       Left
     </Button>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-center lumx-flex-view--h-align-center lumx-flex-view--fill-space"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--fill-space"
   >
     <Button>
       Center button
     </Button>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--v-align-right"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-right"
   >
     <Button>
       Right
@@ -242,10 +242,10 @@ Array [
 ]
 `;
 
-exports[`<FlexView> Snapshots and structure should render story WrapFlex 1`] = `
+exports[`<FlexBox> Snapshots and structure should render story WrapFlex 1`] = `
 Array [
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-horizontal lumx-flex-view--wrap"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--wrap"
     style={
       Object {
         "border": "1px solid red",
@@ -253,14 +253,14 @@ Array [
       }
     }
   >
-    <FlexView
+    <FlexBox
       fillSpace={true}
       orientation="vertical"
     >
       <Button>
         Button
       </Button>
-    </FlexView>
+    </FlexBox>
     <Button>
       Button
     </Button>
@@ -269,7 +269,7 @@ Array [
     </Button>
   </div>,
   <div
-    className="lumx-flex-view lumx-flex-view lumx-flex-view--orientation-vertical lumx-flex-view--fill-space"
+    className="lumx-flex-box lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--fill-space"
   >
     <Button>
       Button
