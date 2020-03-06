@@ -1,0 +1,9 @@
+{
+    "globals": {
+        "angular": false
+    },
+
+    "rules": {
+        "@typescript-eslint/no-this-alias": "off"
+    }
+}

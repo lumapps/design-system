@@ -1,8 +1,7 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 
 import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
 import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
-import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }: any) => {
     const CHOICES_WITH_ICONS = [
@@ -23,12 +22,10 @@ const App = ({ theme }: any) => {
     const LABEL = 'Select label';
     const getChoiceByValue = (value: string) => CHOICES_WITH_ICONS.find((ch) => ch.label === value);
 
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState<string[]>([]);
-
-    const onInfiniteScroll = () => {
-        console.log('You have reached the bottom of the select dropdown.');
-    };
+    const [isOpen, setIsOpen] = useState(false);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
+    const [values, setValues] = useState<string[]>([]);
 
     const clearSelected = (event: SyntheticEvent, value: string) => {
         event?.stopPropagation();
@@ -89,7 +86,6 @@ const App = ({ theme }: any) => {
             onClear={clearSelected}
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
-            onInfiniteScroll={onInfiniteScroll}
             selectedChipRender={selectedChipRender}
             selectedValueRender={selectedValueRender}
         >
@@ -105,10 +101,10 @@ const App = ({ theme }: any) => {
                 </ListSubheader>
                 <ListDivider />
                 {filteredChoices.length > 0
-                    ? filteredChoices.map((choice, index) => (
+                    ? filteredChoices.map((choice) => (
                           <ListItem
                               isSelected={values.includes(choice.label)}
-                              key={index}
+                              key={choice.label}
                               onItemSelected={selectItem(choice.label)}
                               before={<Icon size={Size.xs} icon={choice.icon} />}
                               size={Size.tiny}

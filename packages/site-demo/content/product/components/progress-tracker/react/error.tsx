@@ -4,7 +4,7 @@ import { ProgressTrackerStep } from '@lumx/react';
 
 const App = () => (
     <>
-        <ProgressTrackerStep hasError={true} label={'Step'} helper={'Error message'} />
+        <ProgressTrackerStep hasError label="Step" helper="Error message" />
     </>
 );
 

@@ -8,7 +8,7 @@ const App = ({ theme }: any) => {
     };
 
     return (
-        <Slideshow activeIndex={0} hasControls={true} theme={theme} autoPlay={true} groupBy={1} style={slideshowStyle}>
+        <Slideshow activeIndex={0} hasControls theme={theme} autoPlay groupBy={1} style={slideshowStyle}>
             <SlideshowItem>
                 <ImageBlock
                     aspectRatio={AspectRatio.vertical}

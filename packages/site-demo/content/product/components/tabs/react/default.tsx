@@ -23,7 +23,7 @@ const App = ({ theme }: any) => {
                     </p>
                 </Tab>
 
-                <Tab label="Tab 2" isDisabled={true}>
+                <Tab label="Tab 2" isDisabled>
                     <p
                         className={classNames(
                             'lumx-spacing-padding-vertical-huge',

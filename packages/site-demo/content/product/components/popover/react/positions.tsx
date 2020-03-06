@@ -72,7 +72,7 @@ const App = ({ theme }: any) => {
                     popoverRef={topPopoverRef}
                     isVisible={topIsVisible}
                 >
-                    <div style={demoPopperStyle}>{'Popover'}</div>
+                    <div style={demoPopperStyle}>Popover</div>
                 </Popover>
             </GridItem>
 
@@ -88,7 +88,7 @@ const App = ({ theme }: any) => {
                     popoverRef={rightPopoverRef}
                     isVisible={rightIsVisible}
                 >
-                    <div style={demoPopperStyle}>{'Popover'}</div>
+                    <div style={demoPopperStyle}>Popover</div>
                 </Popover>
             </GridItem>
 
@@ -106,7 +106,7 @@ const App = ({ theme }: any) => {
                     popoverRef={bottomPopoverRef}
                     isVisible={bottomIsVisible}
                 >
-                    <div style={demoPopperStyle}>{'Popover'}</div>
+                    <div style={demoPopperStyle}>Popover</div>
                 </Popover>
             </GridItem>
 
@@ -124,7 +124,7 @@ const App = ({ theme }: any) => {
                     popoverRef={leftPopoverRef}
                     isVisible={leftIsVisible}
                 >
-                    <div style={demoPopperStyle}>{'Popover'}</div>
+                    <div style={demoPopperStyle}>Popover</div>
                 </Popover>
             </GridItem>
         </Grid>

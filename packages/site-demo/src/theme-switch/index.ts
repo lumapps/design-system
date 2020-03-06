@@ -18,7 +18,6 @@ async function switchToTheme(oldTheme: Theme, newTheme: Theme) {
     if (oldThemeElement?.tagName === 'SCRIPT') {
         // In development (for hot code reload).
         switchDevTheme(oldTheme, newTheme);
-        return;
     }
 }
 

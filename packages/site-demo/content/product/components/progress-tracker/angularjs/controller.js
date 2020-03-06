@@ -54,15 +54,11 @@ function DemoController(LxNotificationService) {
 
         angular.forEach(vm.stepper, (step) => {
             if (step.isComplete) {
-                countComplete++;
+                countComplete += 1;
             }
         });
 
-        if (countComplete === vm.stepper.length) {
-            return true;
-        }
-
-        return false;
+        return countComplete === vm.stepper.length;
     }
 
     /**
@@ -87,6 +83,7 @@ function DemoController(LxNotificationService) {
         }
 
         angular.forEach(vm.stepper, (step) => {
+            // eslint-disable-next-line no-param-reassign
             step.isActive = false;
         });
 

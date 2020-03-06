@@ -17,20 +17,16 @@ const App = ({ theme }: any) => {
 
     const demoActions = [mdiPhone, mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiSlack];
 
-    const createMultipleActions = () => (
-        <>
-            {demoActions.map((demoAction, idx) => (
-                <IconButton
-                    key={idx}
-                    emphasis={Emphasis.low}
-                    color={theme === Theme.dark ? 'light' : undefined}
-                    icon={demoAction}
-                    theme={theme}
-                />
-            ))}
-        </>
-    );
-    const logAction = (action: string) => () => console.log(action);
+    const createMultipleActions = () =>
+        demoActions.map((demoAction) => (
+            <IconButton
+                key={demoAction}
+                emphasis={Emphasis.low}
+                color={theme === Theme.dark ? 'light' : undefined}
+                icon={demoAction}
+                theme={theme}
+            />
+        ));
 
     return (
         <div className="demo-grid">
@@ -41,9 +37,6 @@ const App = ({ theme }: any) => {
                 avatar="http://i.pravatar.cc/128"
                 size={Size.l}
                 orientation={Orientation.vertical}
-                onMouseEnter={logAction('Mouse entered')}
-                onMouseLeave={logAction('Mouse left')}
-                onClick={logAction('UserBlock clicked')}
                 simpleAction={createSimpleAction()}
                 multipleActions={createMultipleActions()}
             />

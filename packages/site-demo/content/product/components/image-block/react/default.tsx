@@ -8,15 +8,15 @@ const App = ({ theme }: any) => (
         actions={
             <Grid>
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiPencil} />
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiPencil} />
                 </div>
 
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiEye} />
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiEye} />
                 </div>
 
                 <div>
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiDelete} />
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiDelete} />
                 </div>
             </Grid>
         }

@@ -4,7 +4,7 @@ import { ProgressTrackerStep } from '@lumx/react';
 
 const App = () => (
     <>
-        <ProgressTrackerStep isActive={false} label={'Step'} helper={'Helper text'} />
+        <ProgressTrackerStep isActive={false} label="Step" helper="Helper text" />
     </>
 );
 

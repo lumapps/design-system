@@ -27,7 +27,6 @@ function DemoController($filter) {
      * This represents the data to display in the table.
      *
      * @type {Object}
-     * @constant
      * @readonly
      */
     vm.tableBody = [
@@ -104,6 +103,7 @@ function DemoController($filter) {
      * @param {Object} rowToSelect The row to select.
      */
     function selectRow(rowToSelect) {
+        // eslint-disable-next-line no-param-reassign
         rowToSelect.isSelected = !rowToSelect.isSelected;
     }
 
@@ -119,13 +119,16 @@ function DemoController($filter) {
 
         angular.forEach(vm.tableHead, (cell) => {
             if (cell !== cellToSort) {
+                // eslint-disable-next-line no-param-reassign
                 cell.sortOrder = undefined;
             }
         });
 
         if (cellToSort.sortOrder === 'asc') {
+            // eslint-disable-next-line no-param-reassign
             cellToSort.sortOrder = 'desc';
         } else {
+            // eslint-disable-next-line no-param-reassign
             cellToSort.sortOrder = 'asc';
         }
 

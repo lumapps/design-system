@@ -6,11 +6,11 @@ const App = ({ theme }: any) => {
     const [activeIndex, setActiveIndex] = useState(2);
 
     const stepProps = [
-        { isComplete: true },
-        { isComplete: true },
-        { hasError: true },
-        { isComplete: false },
-        { isComplete: false },
+        { label: 'Step 1', isComplete: true },
+        { label: 'Step 2', isComplete: true },
+        { label: 'Step 3', hasError: true },
+        { label: 'Step 4', isComplete: false },
+        { label: 'Step 5', isComplete: false },
     ];
 
     return (
@@ -18,10 +18,10 @@ const App = ({ theme }: any) => {
             <ProgressTracker activeStep={activeIndex} theme={theme}>
                 {stepProps.map((step, index) => (
                     <ProgressTrackerStep
-                        key={index}
+                        key={step.label}
                         isActive={activeIndex === index}
                         onClick={index < 3 ? () => setActiveIndex(index) : null}
-                        label={`Step ${index + 1}`}
+                        label={step.label}
                         helper={index === 2 ? 'Error message' : `Helper text ${index + 1}`}
                         {...step}
                     />

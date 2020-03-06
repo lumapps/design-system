@@ -49,7 +49,7 @@ const App = ({ theme }: any) => {
                 popoverRef={topStartPopoverRef}
                 isVisible={topStartPosition.isVisible}
             >
-                <div style={demoPopperStyle}>{'Popover aligned on start of the top side'}</div>
+                <div style={demoPopperStyle}>Popover aligned on start of the top side</div>
             </Popover>
 
             <div style={demoPopoverHolderStyle}>
@@ -63,7 +63,7 @@ const App = ({ theme }: any) => {
                 popoverRef={topEndPopoverRef}
                 isVisible={topEndPosition.isVisible}
             >
-                <div style={demoPopperStyle}>{'Popover aligned on start of the top side'}</div>
+                <div style={demoPopperStyle}>Popover aligned on start of the top side</div>
             </Popover>
         </div>
     );

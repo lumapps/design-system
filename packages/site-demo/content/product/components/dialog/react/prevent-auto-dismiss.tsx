@@ -17,7 +17,7 @@ const App = ({ theme }: any) => {
 
             <Dialog preventAutoClose isOpen={isOpen} parentElement={buttonRef} onClose={close}>
                 <header>
-                    <Toolbar label={<span className="lumx-typography-title">Can't escape</span>} />
+                    <Toolbar label={<span className="lumx-typography-title">Can&lsquo;t escape</span>} />
                 </header>
 
                 <p className="lumx-spacing-padding-horizontal-huge">

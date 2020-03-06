@@ -121,6 +121,7 @@ const generateNav = (goToHandler: (path: string) => Callback, location: string, 
         const path = [...parent, spaceToSlug(label)];
         const slug = `/${path.join('/')}/`;
 
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const [isOpen, setOpen] = useState(() => location.startsWith(slug));
 
         const props: Partial<SideNavigationItemProps> = {
@@ -167,7 +168,7 @@ const MainNav: React.FC<RouteComponentProps> = (props) => {
                 >
                     <img src={LumXLogo} alt="LumX" />
                     <span>
-                        <strong>{'LumApps'}</strong>
+                        <strong>LumApps</strong>
                         {' design system'}
                     </span>
                 </div>

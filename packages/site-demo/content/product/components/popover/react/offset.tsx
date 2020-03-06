@@ -34,7 +34,7 @@ const App = ({ theme }: any) => {
                 </Chip>
             </div>
             <Popover theme={theme} popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
-                <div style={demoPopperStyle}>{'Popover'}</div>
+                <div style={demoPopperStyle}>Popover</div>
             </Popover>
         </>
     );

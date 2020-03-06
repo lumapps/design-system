@@ -13,7 +13,7 @@ import { ThemeSelector } from './ThemeSelector';
 const renderContent = ({ location }: RouteComponentProps) => {
     const path = location.pathname;
     if (!path.endsWith('/')) {
-        return <Redirect to={path + '/'} />;
+        return <Redirect to={`${path}/`} />;
     }
     return <MainContent path={path} />;
 };

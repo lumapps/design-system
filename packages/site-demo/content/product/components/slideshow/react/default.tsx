@@ -35,14 +35,7 @@ const App = ({ theme }: any) => {
 
     return (
         <div className="demo-grid">
-            <Slideshow
-                activeIndex={0}
-                hasControls={true}
-                theme={theme}
-                autoPlay={false}
-                groupBy={1}
-                style={slideshowStyle}
-            >
+            <Slideshow activeIndex={0} hasControls theme={theme} autoPlay={false} groupBy={1} style={slideshowStyle}>
                 <SlideshowItem>
                     <ImageBlock
                         aspectRatio={AspectRatio.horizontal}

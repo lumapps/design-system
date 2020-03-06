@@ -5,7 +5,7 @@ import orderBy from 'lodash/orderBy';
 
 import { Alignment, Divider, ExpansionPanel, Grid, GridItem } from '@lumx/react';
 
-// @ts-ignore
+// eslint-disable-next-line import/no-webpack-loader-syntax
 import { propsByComponent } from 'props-loader!';
 
 const renderTypeTableRow = ({ type, defaultValue }: Property): ReactElement => {
@@ -25,8 +25,7 @@ const renderTypeTableRow = ({ type, defaultValue }: Property): ReactElement => {
             <>
                 {type}
                 {' (default: '}
-                <strong>{defaultValue}</strong>
-                {')'}
+                <strong>{defaultValue}</strong>)
             </>
         );
     }
@@ -63,7 +62,7 @@ const PropTableRow: React.FC<PropTableRowProps> = ({ property }) => {
     );
 };
 
-const PropTable: React.FC<PropTableProps> = ({ component }) => {
+export const PropTable: React.FC<PropTableProps> = ({ component }) => {
     const { engine } = useContext(EngineContext);
     if (engine === Engine.angularjs) {
         return <span>Could not load properties of the angular.js {component} component.</span>;
@@ -90,7 +89,7 @@ const PropTable: React.FC<PropTableProps> = ({ component }) => {
     );
 };
 
-interface Property {
+export interface Property {
     id: string;
     name: string;
     required: boolean;
@@ -106,5 +105,3 @@ interface PropTableRowProps {
 interface PropTableProps {
     component: string;
 }
-
-export { PropTable, Property };

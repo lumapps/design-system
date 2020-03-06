@@ -10,7 +10,7 @@ const App = ({ theme }: any) => {
             label="Textfield label"
             value={value}
             onChange={setValue}
-            placeholder={'Placeholder text'}
+            placeholder="Placeholder text"
             theme={theme}
         />
     );

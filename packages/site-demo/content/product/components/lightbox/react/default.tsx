@@ -59,7 +59,7 @@ const App = () => {
             </div>
 
             <Lightbox isOpen={isOpened} parentElement={triggerElement} onClose={onCloseModal} onOpen={onOpenModal}>
-                <Slideshow hasControls={true} autoPlay={true} fillHeight={true} theme={Theme.dark}>
+                <Slideshow hasControls autoPlay fillHeight theme={Theme.dark}>
                     <SlideshowItem>
                         <ImageBlock image="https://picsum.photos/640/480/?image=24" {...imageBlockDemoProps} />
                     </SlideshowItem>

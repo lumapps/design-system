@@ -31,21 +31,19 @@ const App = ({ theme }: any) => {
     };
 
     return (
-        <>
-            <div style={demoPopoverHolderStyle}>
-                <TextField
-                    value={searchValue}
-                    placeholder="Search"
-                    onChange={setSearchValue}
-                    icon={mdiMagnify}
-                    theme={theme}
-                    textFieldRef={anchorRef}
-                />
-                <Popover theme={theme} popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
-                    <div style={demoPopperStyle}>Popover's width matching anchor's</div>
-                </Popover>
-            </div>
-        </>
+        <div style={demoPopoverHolderStyle}>
+            <TextField
+                value={searchValue}
+                placeholder="Search"
+                onChange={setSearchValue}
+                icon={mdiMagnify}
+                theme={theme}
+                textFieldRef={anchorRef}
+            />
+            <Popover theme={theme} popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
+                <div style={demoPopperStyle}>Popover&lsquo;s width matching anchor&lsquo;s</div>
+            </Popover>
+        </div>
     );
 };
 

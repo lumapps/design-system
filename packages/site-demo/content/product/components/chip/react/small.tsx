@@ -4,9 +4,6 @@ import { mdiClose, mdiEmail } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
 
 const App = ({ theme }: any) => {
-    // Initialize a click handler
-    const onClick = () => console.log('clicked chip');
-
     return (
         <div className="demo-grid">
             <Chip theme={theme} size={Size.s}>
@@ -17,7 +14,7 @@ const App = ({ theme }: any) => {
                 Rich
             </Chip>
 
-            <Chip theme={theme} size={Size.s} after={<Icon icon={mdiClose} size={Size.xxs} />} onClick={onClick}>
+            <Chip theme={theme} size={Size.s} after={<Icon icon={mdiClose} size={Size.xxs} />}>
                 Dismissible
             </Chip>
         </div>

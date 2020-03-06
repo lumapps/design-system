@@ -16,7 +16,7 @@ function useHighlightedCode(sourceCode: string, language: string): string {
             return null;
         }
         return Prism.highlight(sourceCode.trim(), Prism.languages[language], language);
-    }, [sourceCode]);
+    }, [sourceCode, language]);
 }
 
 export { useHighlightedCode };

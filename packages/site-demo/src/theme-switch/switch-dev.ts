@@ -36,7 +36,7 @@ function cleanUpOldStyles(newTheme: Theme) {
     let currentStyleFound = false;
     Array.from(document.getElementsByTagName('style'))
         .reverse()
-        .map((style) => {
+        .forEach((style) => {
             if (!style.textContent) {
                 style.remove();
             }

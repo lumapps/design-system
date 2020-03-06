@@ -13,12 +13,12 @@ const App = ({ theme }: any) => (
                 Reply
             </Button>,
         ]}
-        hasActions={true}
+        hasActions
         theme={theme}
         avatar="http://i.pravatar.cc/72"
         date="4 hours ago"
         name="Matthias Manoukian"
-        hasChildren={true}
+        hasChildren
         text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."
     />
 );

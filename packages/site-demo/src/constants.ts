@@ -1,13 +1,13 @@
 import { ColorPalette } from '@lumx/react';
 import { ReactNode } from 'react';
 
-enum Categories {
+export enum Categories {
     components = 'Components',
 }
 
-type Category = Categories;
+export type Category = Categories;
 
-interface DemoObject {
+export interface DemoObject {
     /**
      * The description of the demo.
      */
@@ -27,18 +27,18 @@ interface DemoObject {
 /**
  * Color variant details
  */
-interface ColorVariantDetail {
+export interface ColorVariantDetail {
     hexCode: string;
     opacity: string;
     fontColor: string;
 }
 
-type ColorPaletteWithVariants = { [key in ColorPalette]: { [key2 in string]: ColorVariantDetail } };
+export type ColorPaletteWithVariants = { [key in ColorPalette]: { [key2 in string]: ColorVariantDetail } };
 
 /**
  * The icons to use in the template.
  */
-const COLOR_VARIANTS = {
+export const COLOR_VARIANTS = {
     blue: {
         D2: {
             fontColor: 'light',
@@ -292,5 +292,3 @@ const COLOR_VARIANTS = {
         },
     },
 };
-
-export { COLOR_VARIANTS, ColorPaletteWithVariants, ColorVariantDetail, Categories, Category, DemoObject };

@@ -69,6 +69,7 @@ function loadAngularjsDemo(code: Code): DemoModule | null {
         default({ theme }: HasTheme) {
             let container: any;
 
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             useEffect(() => {
                 if (!container) {
                     return;
@@ -80,7 +81,9 @@ function loadAngularjsDemo(code: Code): DemoModule | null {
 
             return (
                 <AngularTemplate
-                    ref={(c: any) => (container = c)}
+                    ref={(c: any) => {
+                        container = c;
+                    }}
                     template={template}
                     controller={controllerModule.DemoController}
                     controllerAs="vm"
@@ -96,7 +99,7 @@ const useLoadDemo = (code: Code, engine: string): DemoModule | null => {
 
     useEffect(() => {
         setDemo(engine === Engine.react ? loadReactDemo(code) : loadAngularjsDemo(code));
-    }, [engine]);
+    }, [engine, code]);
 
     return demo;
 };

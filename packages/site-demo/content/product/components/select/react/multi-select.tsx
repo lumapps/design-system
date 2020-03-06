@@ -1,15 +1,16 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 
 import { List, ListItem, Select, Size } from '@lumx/react';
-import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState<string[]>([]);
+    const [isOpen, setIsOpen] = useState(false);
+    const closeSelect = () => setIsOpen(false);
+    const toggleSelect = () => setIsOpen(!isOpen);
+    const [values, setValues] = useState<string[]>([]);
 
     const clearSelected = (event?: SyntheticEvent, value?: string) => {
         event?.stopPropagation();
@@ -32,17 +33,17 @@ const App = ({ theme }: any) => {
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
             label={LABEL}
-            isMultiple={true}
+            isMultiple
             placeholder={PLACEHOLDER}
             theme={theme}
             onClear={clearSelected}
         >
             <List isClickable={isOpen}>
                 {CHOICES.length > 0
-                    ? CHOICES.map((choice, index) => (
+                    ? CHOICES.map((choice) => (
                           <ListItem
                               isSelected={values.includes(choice)}
-                              key={index}
+                              key={choice}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
                           >

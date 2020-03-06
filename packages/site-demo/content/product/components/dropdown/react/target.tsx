@@ -24,7 +24,7 @@ const App = ({ theme }: any) => {
 
                 <Dropdown
                     closeOnClick={false}
-                    closeOnEscape={true}
+                    closeOnEscape
                     onClose={closeDropdown}
                     placement={Placement.BOTTOM_START}
                     showDropdown={isDropdownOpen}

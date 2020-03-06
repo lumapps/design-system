@@ -14,18 +14,18 @@ const App = ({ theme }: any) => {
             </div>
 
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onToggle={setState} theme={theme} helper={'Helper text'}>
+                <Switch checked={state} onToggle={setState} theme={theme} helper="Helper text">
                     With helper
                 </Switch>
             </div>
 
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onToggle={setState} disabled={true} theme={theme}>
+                <Switch checked={state} onToggle={setState} disabled theme={theme}>
                     Disabled
                 </Switch>
             </div>
 
-            <Switch checked={true} disabled={true} theme={theme}>
+            <Switch checked disabled theme={theme}>
                 Disabled checked
             </Switch>
         </>
