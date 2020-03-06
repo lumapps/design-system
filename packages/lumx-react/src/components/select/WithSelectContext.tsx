@@ -48,7 +48,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: IDefaultPropsType = {
     hasError: false,
-    isMultiple: false,
     isOpen: false,
     isValid: false,
     theme: Theme.light,
@@ -104,7 +103,7 @@ function useHandleElementFocus(
 }
 
 const withSelectContext = (
-    SelectElement: any, // TODO: update the type
+    SelectElement: any,
     {
         className = '',
         hasError = DEFAULT_PROPS.hasError,
@@ -127,10 +126,10 @@ const withSelectContext = (
         children,
         onInfiniteScroll,
         useCustomColors,
+        isEmpty,
         ...props
     }: SelectProps,
 ): React.ReactElement => {
-    const isEmpty = value.length === 0;
     const targetUuid = 'uuid';
     const anchorRef = useRef<HTMLElement>(null);
     const selectRef = useRef<HTMLDivElement>(null);

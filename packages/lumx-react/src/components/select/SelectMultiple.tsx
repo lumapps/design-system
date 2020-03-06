@@ -207,6 +207,7 @@ const selectMultipleWithContext = (props: any) =>
                 prefix: CLASSNAME,
             }),
         ),
+        isEmpty: props.value.length === 0,
     });
 
 selectMultipleWithContext.displayName = COMPONENT_NAME;

@@ -1,5 +1,5 @@
 import { Theme } from '@lumx/react/components';
-import { IGenericProps } from '@lumx/react/utils';
+import { GenericProps } from '@lumx/react/utils';
 import { ReactNode, SyntheticEvent } from 'react';
 
 /**
@@ -10,7 +10,7 @@ enum SelectVariant {
     chip = 'chip',
 }
 
-interface ICoreSelectProps extends IGenericProps {
+interface ICoreSelectProps extends GenericProps {
     /** Whether the select (input variant) is displayed with error style or not. */
     hasError?: boolean;
 
