@@ -97,27 +97,25 @@ export const HorizontalFlex = () => (
 );
 
 export const VerticalFlex = () => (
-    <>
-        <FlexBox
-            orientation={Orientation.vertical}
-            style={{ height: `${number('height (px)', 300)}px`, border: '1px solid red' }}
-        >
-            <Button>Default</Button>
-            <FlexBox vAlign={Alignment.left}>
-                <Button>Left</Button>
-            </FlexBox>
-            <FlexBox
-                fillSpace={boolean('Center button: fill space', true)}
-                hAlign={hAlign('Center button')}
-                vAlign={vAlign('Center button')}
-            >
-                <Button>Center button</Button>
-            </FlexBox>
-            <FlexBox vAlign={Alignment.right}>
-                <Button>Right</Button>
-            </FlexBox>
+    <FlexBox
+        orientation={Orientation.vertical}
+        style={{ height: `${number('height (px)', 300)}px`, border: '1px solid red' }}
+    >
+        <Button>Default</Button>
+        <FlexBox vAlign={Alignment.left}>
+            <Button>Left</Button>
         </FlexBox>
-    </>
+        <FlexBox
+            fillSpace={boolean('Center button: fill space', true)}
+            hAlign={hAlign('Center button')}
+            vAlign={vAlign('Center button')}
+        >
+            <Button>Center button</Button>
+        </FlexBox>
+        <FlexBox vAlign={Alignment.right}>
+            <Button>Right</Button>
+        </FlexBox>
+    </FlexBox>
 );
 
 export const WrapFlex = () => (

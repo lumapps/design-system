@@ -77,7 +77,6 @@ const FlexBox: React.FC<FlexBoxProps> = ({
     <div
         {...props}
         className={classNames(
-            CLASSNAME,
             className,
             handleBasicClasses({ prefix: CLASSNAME, orientation, vAlign, hAlign }),
             wrap && `${CLASSNAME}--wrap`,
