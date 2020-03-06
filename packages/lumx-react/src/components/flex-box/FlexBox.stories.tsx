@@ -1,6 +1,7 @@
 import { mdiPencil } from '@lumx/icons';
 import { Alignment, Button, Icon, Orientation } from '@lumx/react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
+import fromPairs from 'lodash/fromPairs';
 import React from 'react';
 
 import { DEFAULT_PROPS, FlexBox, FlexBoxProps } from './FlexBox';
@@ -35,7 +36,7 @@ const flexViewKnobConfigs: Array<
 ];
 
 const setupFlexBoxKnobs = (group: string, knobs: FlexBoxPropName[] = []) =>
-    Object.fromEntries(
+    fromPairs(
         knobs.map((knob: FlexBoxPropName) => {
             const [prop, knobFn, selectOptions] = flexViewKnobConfigs.find(([k]) => k === knob)! as any;
             if (selectOptions) {
