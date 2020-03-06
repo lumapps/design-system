@@ -1,4 +1,4 @@
-import React, { HTMLProps } from 'react';
+import React, { AnchorHTMLAttributes } from 'react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import classNames from 'classnames';
@@ -9,8 +9,7 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 /**
  * Defines the props of the component.
  */
-
-interface LinkProps extends HTMLProps<HTMLAnchorElement> {
+interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     /** The icon color. */
     color?: Color;
 
@@ -29,16 +28,11 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Link`;
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /**
- * The default value of props.
- */
-const DEFAULT_PROPS: Partial<LinkProps> = {};
-
-/**
- * Simple component used to pick a date (semi-controlled implementation).
+ * Link component.
  *
  * @return The component.
  */
-const Link = ({ children, className, color, colorVariant, ...props }: LinkProps) => {
+const Link: React.FC<LinkProps> = ({ children, className, color, colorVariant, ...props }) => {
     return (
         <a className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))} {...props}>
             {children}
@@ -47,4 +41,4 @@ const Link = ({ children, className, color, colorVariant, ...props }: LinkProps)
 };
 Link.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, Link, LinkProps };
+export { CLASSNAME, COMPONENT_NAME, Link, LinkProps };
