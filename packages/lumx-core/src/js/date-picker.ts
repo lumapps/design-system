@@ -1,10 +1,8 @@
-/* eslint-disable unicorn/prefer-spread */
 import range from 'lodash/range';
 import mMoment, { Moment } from 'moment';
 import { extendMoment } from 'moment-range';
 
-// @ts-ignore
-const moment = extendMoment(mMoment);
+const moment = extendMoment(mMoment as any);
 
 const DAYS_PER_WEEK = 7;
 
@@ -85,7 +83,7 @@ function getAnnotatedMonthCalendar(
         .add(monthOffset, 'months')
         .month();
 
-    const clickableRange = moment.range(minDate!, maxDate!);
+    const clickableRange = moment.range(minDate as Date, maxDate as Date);
 
     return getMonthCalendar(locale, today, monthOffset).map((date) => {
         return {

@@ -1,5 +1,7 @@
 import { CSS_PREFIX } from './constants';
 
+/* eslint-disable no-underscore-dangle */
+
 interface ColorPalette {
     primary: {
         D2: string;
@@ -618,7 +620,7 @@ function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: Color
 
     buttonRules.forEach((buttonRule) => {
         _addCSSRule(sheet, buttonRule.selector, buttonRule.rule, index);
-        index++;
+        index += 1;
     });
 
     let checkboxRules;
@@ -630,28 +632,28 @@ function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: Color
 
     checkboxRules?.forEach((checkboxRule) => {
         _addCSSRule(sheet, checkboxRule.selector, checkboxRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const chipRules = _getChipCSSRules(colorPalette);
 
     chipRules.forEach((chipRule) => {
         _addCSSRule(sheet, chipRule.selector, chipRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const listRules = _getListCSSRules(colorPalette);
 
     listRules.forEach((listRule) => {
         _addCSSRule(sheet, listRule.selector, listRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const progressRules = _getProgressCSSRules(colorPalette);
 
     progressRules.forEach((progressRule) => {
         _addCSSRule(sheet, progressRule.selector, progressRule.rule, index);
-        index++;
+        index += 1;
     });
 
     let radioButtonRules;
@@ -663,49 +665,49 @@ function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: Color
 
     radioButtonRules?.forEach((radioButtonRule) => {
         _addCSSRule(sheet, radioButtonRule.selector, radioButtonRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const selectRules = _getSelectCSSRules(colorPalette, theme);
 
     selectRules?.forEach((selectRule) => {
         _addCSSRule(sheet, selectRule.selector, selectRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const sideNavigationRules = _getSideNavigationCSSRules(colorPalette);
 
     sideNavigationRules.forEach((sideNavigationRule) => {
         _addCSSRule(sheet, sideNavigationRule.selector, sideNavigationRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const slideshowControlsRules = _getSlideshowControlsCSSRules(colorPalette);
 
     slideshowControlsRules.forEach((slideshowControlsRule) => {
         _addCSSRule(sheet, slideshowControlsRule.selector, slideshowControlsRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const switchRules = _getSwitchCSSRules(colorPalette, theme);
 
     switchRules?.forEach((switchRule) => {
         _addCSSRule(sheet, switchRule.selector, switchRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const tabsRules = _getTabsCSSRules(colorPalette, theme);
 
     tabsRules.forEach((tabsRule) => {
         _addCSSRule(sheet, tabsRule.selector, tabsRule.rule, index);
-        index++;
+        index += 1;
     });
 
     const textFieldRules = _getTextFieldCSSRules(colorPalette, theme);
 
     textFieldRules?.forEach((textFieldRule) => {
         _addCSSRule(sheet, textFieldRule.selector, textFieldRule.rule, index);
-        index++;
+        index += 1;
     });
 }
 
