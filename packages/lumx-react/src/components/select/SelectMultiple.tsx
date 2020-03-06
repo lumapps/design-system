@@ -28,6 +28,7 @@ interface ISelectMultipleProps extends ICoreSelectProps {
         index: number,
         onClear?: (event: SyntheticEvent, choice: string) => void,
         isDisabled?: boolean,
+        theme?: any,
     ): ReactNode | string;
 }
 type SelectMultipleProps = ISelectMultipleProps;
@@ -46,7 +47,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
     hasError: false,
     isOpen: false,
     isValid: false,
-    selectedChipRender(choice, index, onClear, isDisabled?) {
+    selectedChipRender(choice, index, onClear, isDisabled?, theme?) {
         const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
         return (
             <Chip
@@ -56,6 +57,7 @@ const DEFAULT_PROPS: IDefaultPropsType = {
                 size={Size.s}
                 onAfterClick={onClick}
                 onClick={onClick}
+                theme={theme}
             >
                 {choice}
             </Chip>
@@ -115,9 +117,9 @@ const SelectMultiple: React.FC<any> = ({
                     >
                         <div className={`${CLASSNAME}__chips`}>
                             {!isEmpty && (
-                                <ChipGroup>
+                                <ChipGroup theme={theme}>
                                     {value.map((val: string, index: number) =>
-                                        selectedChipRender!(val, index, onClear, isDisabled),
+                                        selectedChipRender!(val, index, onClear, isDisabled, theme),
                                     )}
                                 </ChipGroup>
                             )}

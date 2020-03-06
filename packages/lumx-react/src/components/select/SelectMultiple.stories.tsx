@@ -184,10 +184,19 @@ export const chipsCustomSelectMultiple = ({ theme }: any) => {
         index: number,
         onClear?: (event: SyntheticEvent, choice: string) => void,
         isDisabled?: boolean,
+        // tslint:disable-next-line: no-shadowed-variable
+        theme?: any,
     ) => {
         const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
         return (
-            <Chip key={index} isDisabled={isDisabled} size={Size.s} onAfterClick={onClick} onClick={onClick}>
+            <Chip
+                key={index}
+                isDisabled={isDisabled}
+                size={Size.s}
+                onAfterClick={onClick}
+                onClick={onClick}
+                theme={theme}
+            >
                 -> {choice}
             </Chip>
         );
