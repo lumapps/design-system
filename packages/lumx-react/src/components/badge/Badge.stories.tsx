@@ -3,32 +3,21 @@ import { AspectRatio, Badge, ColorPalette, Icon, Size, Thumbnail, ThumbnailVaria
 import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-const options = {
-    Blue: ColorPalette.blue,
-    Dark: ColorPalette.dark,
-    Green: ColorPalette.green,
-    Light: ColorPalette.light,
-    Primary: ColorPalette.primary,
-    Red: ColorPalette.red,
-    Secondary: ColorPalette.secondary,
-    Yellow: ColorPalette.yellow,
-};
-
 export default { title: 'Badge' };
 
 export const simpleBadgeWithValue = () => (
-    <Badge color={select('Colors', options, ColorPalette.blue)}>
+    <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
         <span>{text('Value', '30')}</span>
     </Badge>
 );
 
 export const simpleBadgeWithIcon = () => (
-    <Badge color={select('Colors', options, ColorPalette.red)}>
+    <Badge color={select('Colors', ColorPalette, ColorPalette.red)}>
         <Icon icon={mdiHeart} />
     </Badge>
 );
 export const simpleBadgeWithThumbnail = () => (
-    <Badge color={select('Colors', options, ColorPalette.light)}>
+    <Badge color={select('Colors', ColorPalette, ColorPalette.light)}>
         <Thumbnail
             aspectRatio={AspectRatio.square}
             image="https://www.lumapps.com/wp-content/uploads/2018/09/brandmark-color-1-150x150.png"

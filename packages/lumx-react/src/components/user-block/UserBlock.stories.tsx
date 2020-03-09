@@ -1,6 +1,7 @@
 import { mdiStar } from '@lumx/icons';
-import { Badge, ColorPalette, Icon, List, ListItem, Size, UserBlock } from '@lumx/react';
+import { Badge, ColorPalette, Icon, List, ListItem, Size } from '@lumx/react';
 import React from 'react';
+import { UserBlock } from './UserBlock';
 
 export default { title: 'UserBlock' };
 

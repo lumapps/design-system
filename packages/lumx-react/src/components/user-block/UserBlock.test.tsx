@@ -5,15 +5,14 @@ import 'jest-enzyme';
 
 import { CommonSetup, Wrapper, commonTestsSuite, expectStoriesToMatchSnapshots } from '@lumx/react/testing/utils';
 
-import { Avatar, AvatarProps, CLASSNAME } from './Avatar';
-import * as stories from './Avatar.stories';
+import { CLASSNAME, UserBlock, UserBlockProps } from './UserBlock';
+import * as stories from './UserBlock.stories';
 
 /**
  * Defines what the `setup` function will return.
  */
 interface Setup extends CommonSetup {
-    avatar: Wrapper;
-    props: Partial<AvatarProps>;
+    props: Partial<UserBlockProps>;
 
     /**
      * The <div> element wrapper.
@@ -29,29 +28,27 @@ interface Setup extends CommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<AvatarProps> = {}, shallowRendering: boolean = true): Setup => {
-    const props: AvatarProps = {
-        image: 'http://i.pravatar.cc/40',
+const setup = ({ ...propsOverrides }: Partial<UserBlockProps> = {}, shallowRendering: boolean = true): Setup => {
+    const props: UserBlockProps = {
         ...propsOverrides,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
-    const wrapper: Wrapper = renderer(<Avatar {...props} />);
+    const wrapper: Wrapper = renderer(<UserBlock {...props} />);
 
     return {
-        avatar: wrapper.find(`div`),
         props,
         wrapper,
     };
 };
 
-describe(`<${Avatar.displayName}>`, () => {
+describe(`<${UserBlock.displayName}>`, () => {
     // 1. Test render via snapshot.
     describe('Snapshots and structure', () => {
-        expectStoriesToMatchSnapshots(stories, Avatar);
+        expectStoriesToMatchSnapshots(stories, UserBlock);
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'avatar', prop: 'avatar' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper' }, { className: CLASSNAME });
 });

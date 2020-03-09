@@ -1,20 +1,10 @@
 import React from 'react';
 
 import { mdiDelete, mdiEye, mdiPencil, mdiStar } from '@lumx/icons';
-import { Avatar, Badge, ColorPalette, Emphasis, Icon, IconButton, Size } from '@lumx/react';
+import { Badge, ColorPalette, Emphasis, Icon, IconButton, Size } from '@lumx/react';
+import { Avatar } from './Avatar';
 
 import { select, text } from '@storybook/addon-knobs';
-
-const options = {
-    Blue: ColorPalette.blue,
-    Dark: ColorPalette.dark,
-    Green: ColorPalette.green,
-    Light: ColorPalette.light,
-    Primary: ColorPalette.primary,
-    Red: ColorPalette.red,
-    Secondary: ColorPalette.secondary,
-    Yellow: ColorPalette.yellow,
-};
 
 export default { title: 'Avatar' };
 
@@ -75,7 +65,7 @@ export const avatarWithBadge = () => (
             image={text('Image', 'http://i.pravatar.cc/40')}
             size={Size.xs}
             badge={
-                <Badge color={select('Colors', options, ColorPalette.blue)}>
+                <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
                     <Icon icon={mdiStar} />
                 </Badge>
             }
@@ -85,7 +75,7 @@ export const avatarWithBadge = () => (
             image={text('Image', 'http://i.pravatar.cc/48')}
             size={Size.s}
             badge={
-                <Badge color={select('Colors', options, ColorPalette.blue)}>
+                <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
                     <Icon icon={mdiStar} />
                 </Badge>
             }
@@ -95,7 +85,7 @@ export const avatarWithBadge = () => (
             image={text('Image', 'http://i.pravatar.cc/72')}
             size={Size.m}
             badge={
-                <Badge color={select('Colors', options, ColorPalette.blue)}>
+                <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
                     <Icon icon={mdiStar} />
                 </Badge>
             }
@@ -105,7 +95,7 @@ export const avatarWithBadge = () => (
             image={text('Image', 'http://i.pravatar.cc/128')}
             size={Size.l}
             badge={
-                <Badge color={select('Colors', options, ColorPalette.blue)}>
+                <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
                     <Icon icon={mdiStar} />
                 </Badge>
             }
