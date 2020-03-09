@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Rename `IInputHelperProps` as `InputHelperProps`
 -   _[BREAKING]_ Rename `IInputLabelProps` as `InputLabelProps`
 -   _[BREAKING]_ Rename `IFocusPoint` as `FocusPoint`
+- Added ReactNode as an allowed type for the label of the `Tab` component for typescript support
 
 ### Fixed
 
