@@ -7,14 +7,14 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
-import { Badge, BaseBadgeProps, CLASSNAME, DEFAULT_PROPS } from './Badge';
+import { Badge, BadgeProps, CLASSNAME, DEFAULT_PROPS } from './Badge';
 
 /**
  * Defines what the `setup` function will return.
  */
 interface Setup extends CommonSetup {
     badge: Wrapper;
-    props: Partial<BaseBadgeProps>;
+    props: Partial<BadgeProps>;
 
     /**
      * The <div> element wrapper.
@@ -30,8 +30,8 @@ interface Setup extends CommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: Partial<BaseBadgeProps> = {}, shallowRendering: boolean = true): Setup => {
-    const props: BaseBadgeProps = {
+const setup = ({ ...propsOverrides }: Partial<BadgeProps> = {}, shallowRendering: boolean = true): Setup => {
+    const props: BadgeProps = {
         children: <span>30</span>,
         ...propsOverrides,
     };
@@ -73,7 +73,7 @@ describe(`<${Badge.displayName}>`, () => {
 
         it('should use the given `theme`', () => {
             const testedProp = 'color';
-            const modifiedProps: Partial<BaseBadgeProps> = {
+            const modifiedProps: Partial<BadgeProps> = {
                 [testedProp]: Theme.dark,
             };
 

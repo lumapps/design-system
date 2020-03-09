@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Avatar> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-avatar lumx-avatar--size-m lumx-avatar--variant-rounded lumx-avatar--theme-light"
+  style={
+    Object {
+      "backgroundImage": "url(http://i.pravatar.cc/40)",
+    }
+  }
+/>
+`;
