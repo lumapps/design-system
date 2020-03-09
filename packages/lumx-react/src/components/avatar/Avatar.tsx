@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -8,8 +8,6 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
 import { getRootClassName } from '../../utils/getRootClassName';
-
-import { BadgeProps } from '../badge/Badge';
 
 /**
  * Authorized size values.
@@ -22,8 +20,8 @@ type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 interface AvatarProps extends GenericProps {
     /** Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
-    /** Whether the avatar has a badge */
-    badge?: BadgeProps;
+    /** Avatar badge */
+    badge?: ReactElement;
     /** Size. */
     size?: AvatarSize;
     /** Theme. */
