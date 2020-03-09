@@ -7,6 +7,7 @@ import { Avatar, Orientation, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { AvatarProps } from '../avatar/Avatar';
 
 /**
  * Authorized size values.
@@ -18,7 +19,7 @@ type UserBlockSize = Size.s | Size.m | Size.l;
  */
 interface UserBlockProps extends GenericProps {
     /** Avatar image. */
-    avatar?: string;
+    avatar?: AvatarProps;
     /** Simple Action block. */
     simpleAction?: ReactNode;
     /** Multiple Actions block. */
@@ -125,7 +126,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
             {avatar && (
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
-                        image={avatar}
+                        {...avatar}
                         size={componentSize}
                         onClick={onClick}
                         tabIndex={onClick ? 0 : -1}
