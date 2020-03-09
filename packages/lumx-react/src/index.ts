@@ -127,3 +127,5 @@ export { Dialog, DialogSizes } from './components/dialog/Dialog';
 export { Uploader, UploaderProps, UploaderVariant } from './components/uploader/Uploader';
 
 export { WebBookmark, WebBookmarkProps } from './components/web-bookmark/WebBookmark';
+
+export { FlexBox, FlexBoxProps } from './components/flex-box/FlexBox';
