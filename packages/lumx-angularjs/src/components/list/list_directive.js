@@ -137,9 +137,12 @@ function ListController($element, $scope) {
 
         if (lx.isClickable) {
             classes.push(`${CSS_PREFIX}-list--is-clickable`);
+        }
 
-            const itemPadding = lx.itemPadding ? lx.itemPadding : _DEFAULT_PROPS.itemPadding;
-            classes.push(`${CSS_PREFIX}-list--item-padding-${itemPadding}`);
+        if (lx.itemPadding) {
+            classes.push(`${CSS_PREFIX}-list--item-padding-${lx.itemPadding}`);
+        } else if (lx.isClickable) {
+            classes.push(`${CSS_PREFIX}-list--item-padding-${_DEFAULT_PROPS.itemPadding}`);
         }
 
         if (lx.customColors) {

@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode } from 'react';
+import React, { CSSProperties, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
@@ -20,6 +20,8 @@ type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 interface AvatarProps extends GenericProps {
     /** Actions elements to be transcluded into the component */
     actions?: HTMLElement | ReactNode;
+    /** Avatar badge */
+    badge?: ReactElement;
     /** Size. */
     size?: AvatarSize;
     /** Theme. */
@@ -48,6 +50,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: DefaultPropsType = {
     actions: undefined,
+    badge: undefined,
     size: Size.m,
     theme: Theme.light,
 };
@@ -59,6 +62,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Avatar: React.FC<AvatarProps> = ({
     actions = DEFAULT_PROPS.actions,
+    badge = DEFAULT_PROPS.badge,
     className = '',
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
@@ -78,6 +82,7 @@ const Avatar: React.FC<AvatarProps> = ({
             style={style}
         >
             {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}
+            {badge && <div className={`${CLASSNAME}__badge`}>{badge}</div>}
         </div>
     );
 };

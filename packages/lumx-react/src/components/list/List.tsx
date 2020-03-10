@@ -11,7 +11,7 @@ import {
     UP_KEY_CODE,
 } from '@lumx/react/constants';
 
-import { ListItem, ListItemProps, ListItemSizes, Size, Theme } from '@lumx/react';
+import { ListItem, ListItemProps, Size, Theme } from '@lumx/react';
 import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
 import { useKeyboardListNavigation, useKeyboardListNavigationType } from '@lumx/react/hooks/useKeyboardListNavigation';
@@ -26,7 +26,7 @@ interface ListProps extends GenericProps {
     isClickable?: boolean;
 
     /** Item padding size. */
-    itemPadding?: ListItemSizes;
+    itemPadding?: Size.big | Size.huge;
 
     /** The ref passed to the ul element. */
     listElementRef?: RefObject<HTMLElement>;
@@ -77,7 +77,7 @@ interface List {
 const List: React.FC<ListProps> & List = ({
     className = '',
     isClickable = DEFAULT_PROPS.isClickable,
-    itemPadding = DEFAULT_PROPS.itemPadding,
+    itemPadding = isClickable && DEFAULT_PROPS.itemPadding,
     listElementRef = useRef(null),
     onListItemSelected,
     useCustomColors,
@@ -193,7 +193,7 @@ const List: React.FC<ListProps> & List = ({
         <ul
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, clickable: isClickable }), {
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
-                [`${CSS_PREFIX}-list--item-padding-${itemPadding}`]: isClickable,
+                [`${CSS_PREFIX}-list--item-padding-${itemPadding}`]: itemPadding,
             })}
             tabIndex={isClickable ? 0 : -1}
             onKeyDown={onKeyInteraction}

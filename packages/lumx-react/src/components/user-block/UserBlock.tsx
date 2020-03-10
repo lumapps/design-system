@@ -1,3 +1,5 @@
+import isObject from 'lodash/isObject';
+
 import React, { ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
@@ -7,6 +9,7 @@ import { Avatar, Orientation, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { AvatarProps } from '../avatar/Avatar';
 
 /**
  * Authorized size values.
@@ -18,7 +21,7 @@ type UserBlockSize = Size.s | Size.m | Size.l;
  */
 interface UserBlockProps extends GenericProps {
     /** Avatar image. */
-    avatar?: string;
+    avatar?: AvatarProps | string;
     /** Simple Action block. */
     simpleAction?: ReactNode;
     /** Multiple Actions block. */
@@ -125,7 +128,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
             {avatar && (
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
-                        image={avatar}
+                        {...(isObject(avatar) ? avatar : { image: avatar })}
                         size={componentSize}
                         onClick={onClick}
                         tabIndex={onClick ? 0 : -1}

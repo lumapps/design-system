@@ -7,7 +7,7 @@ import React, { ReactNode } from 'react';
 /**
  * Defines the props of the component.
  */
-interface BaseBadgeProps extends GenericProps {
+interface BadgeProps extends GenericProps {
     /**
      * Badge content.
      */
@@ -32,11 +32,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: BaseBadgeProps = {
+const DEFAULT_PROPS: BadgeProps = {
     color: ColorPalette.light,
 };
 
-const Badge: React.FC<BaseBadgeProps> = ({ color = DEFAULT_PROPS.color, className, ...props }) => {
+const Badge: React.FC<BadgeProps> = ({ color = DEFAULT_PROPS.color, className, ...props }) => {
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color }))} {...props}>
             {props.children}
@@ -46,4 +46,4 @@ const Badge: React.FC<BaseBadgeProps> = ({ color = DEFAULT_PROPS.color, classNam
 
 Badge.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, Badge, BaseBadgeProps };
+export { CLASSNAME, DEFAULT_PROPS, Badge, BadgeProps };
