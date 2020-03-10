@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   New component in React: `Mosaic`
 -   Added `size` prop to `WebBookmark` component
 -   Added `badge` prop to `Avatar` component
--   Change `avatar` prop of `UserBlock` component from `string` to `AvatarProp` to pass badge
+-   Change `avatar` prop of `UserBlock` component from `string` to `AvatarProp | string` to pass badge properties
 
 ### Changed
 
