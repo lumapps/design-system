@@ -58,14 +58,13 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<FlexBoxProps> = {
     fillSpace: false,
     noShrink: false,
-    orientation: Orientation.horizontal,
     wrap: false,
 };
 
 const FlexBox: React.FC<FlexBoxProps> = ({
     children,
     className,
-    orientation = DEFAULT_PROPS.orientation,
+    orientation,
     wrap = DEFAULT_PROPS.wrap,
     vAlign,
     hAlign,
