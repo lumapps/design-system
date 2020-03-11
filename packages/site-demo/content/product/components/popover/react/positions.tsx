@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Chip, Grid, GridItem, Placement, Popover, Size } from '@lumx/react';
+import { Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
 
 const App = ({ theme }: any) => {
     const demoPopperStyle = {
@@ -59,8 +59,11 @@ const App = ({ theme }: any) => {
     );
 
     return (
-        <Grid className="lumx-spacing-margin-top-huge lumx-spacing-margin-bottom-huge">
-            <GridItem>
+        <FlexBox
+            className="lumx-spacing-margin-top-huge lumx-spacing-margin-bottom-huge"
+            orientation={Orientation.horizontal}
+        >
+            <FlexBox fillSpace>
                 <div style={demoPopoverHolderStyle}>
                     <Chip chipRef={topAnchorRef} theme={theme} size={Size.s}>
                         TOP
@@ -74,9 +77,9 @@ const App = ({ theme }: any) => {
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
-            </GridItem>
+            </FlexBox>
 
-            <GridItem>
+            <FlexBox fillSpace>
                 <div style={demoPopoverHolderStyle}>
                     <Chip chipRef={rightAnchorRef} theme={theme} size={Size.s}>
                         RIGHT
@@ -90,11 +93,11 @@ const App = ({ theme }: any) => {
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
-            </GridItem>
+            </FlexBox>
 
-            <GridItem />
+            <FlexBox fillSpace />
 
-            <GridItem>
+            <FlexBox fillSpace>
                 <div style={demoPopoverHolderStyle}>
                     <Chip chipRef={bottomAnchorRef} theme={theme} size={Size.s}>
                         BOTTOM
@@ -108,11 +111,11 @@ const App = ({ theme }: any) => {
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
-            </GridItem>
+            </FlexBox>
 
-            <GridItem />
+            <FlexBox fillSpace />
 
-            <GridItem>
+            <FlexBox fillSpace>
                 <div style={demoPopoverHolderStyle}>
                     <Chip chipRef={leftAnchorRef} theme={theme} size={Size.s}>
                         LEFT
@@ -126,8 +129,8 @@ const App = ({ theme }: any) => {
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
-            </GridItem>
-        </Grid>
+            </FlexBox>
+        </FlexBox>
     );
 };
 

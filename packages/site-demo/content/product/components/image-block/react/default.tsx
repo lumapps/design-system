@@ -1,12 +1,22 @@
 import React from 'react';
 
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
-import { AspectRatio, Chip, ChipGroup, Emphasis, Grid, IconButton, ImageBlock, Size } from '@lumx/react';
+import {
+    AspectRatio,
+    Chip,
+    ChipGroup,
+    Emphasis,
+    FlexBox,
+    IconButton,
+    ImageBlock,
+    Orientation,
+    Size,
+} from '@lumx/react';
 
 const App = ({ theme }: any) => (
     <ImageBlock
         actions={
-            <Grid>
+            <FlexBox orientation={Orientation.horizontal}>
                 <div className="lumx-spacing-margin-right-regular">
                     <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiPencil} />
                 </div>
@@ -18,7 +28,7 @@ const App = ({ theme }: any) => (
                 <div>
                     <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiDelete} />
                 </div>
-            </Grid>
+            </FlexBox>
         }
         aspectRatio={AspectRatio.horizontal}
         description="Lorem ipsum dolor sit amet, consectur adipiscing "
