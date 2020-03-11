@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { mdiEmail } from '@lumx/icons';
-import { ColorPalette, Grid, GridItem, Icon, IconSizes, Size } from '@lumx/react';
+import { ColorPalette, FlexBox, Icon, IconSizes, Size } from '@lumx/react';
+import { Orientation } from '..';
 
 export default { title: 'Icon' };
 
@@ -29,10 +30,10 @@ export const allIcon = ({ theme }: any) => {
                             return (
                                 <>
                                     <h2>{`Size: ${size}`}</h2>
-                                    <Grid>
+                                    <FlexBox orientation={Orientation.horizontal}>
                                         {iconColors.map((color) => {
                                             return (
-                                                <GridItem>
+                                                <FlexBox fillSpace>
                                                     {`Color: ${color}`}
                                                     <Icon
                                                         hasShape={hasShape}
@@ -41,10 +42,10 @@ export const allIcon = ({ theme }: any) => {
                                                         size={size}
                                                         theme={theme}
                                                     />
-                                                </GridItem>
+                                                </FlexBox>
                                             );
                                         })}
-                                    </Grid>
+                                    </FlexBox>
                                 </>
                             );
                         })}

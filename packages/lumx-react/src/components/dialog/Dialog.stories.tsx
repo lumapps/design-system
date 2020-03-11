@@ -4,12 +4,9 @@ import {
     Checkbox,
     Dialog,
     Emphasis,
-    Grid,
-    GridItem,
     IconButton,
     List,
     ListItem,
-    Orientation,
     Select,
     Size,
     TextField,
@@ -232,50 +229,55 @@ export const dialogWithFocusableElements = ({ theme }: any) => {
             >
                 <header>
                     <Toolbar
-                        before={<span className="lumx-typography-title">Dialog header</span>}
+                        label={<span className="lumx-typography-title">Dialog header</span>}
                         after={<IconButton icon={mdiClose} onClick={closeDialog} emphasis={Emphasis.low} />}
                     />
                 </header>
-                <Grid orientation={Orientation.vertical} className="lumx-spacing-padding">
-                    The text field should capture the focus on open and a focus trap should be in place.
-                    <GridItem className="lumx-spacing-padding">
-                        <TextField
-                            inputRef={inputRef}
-                            value={textValue}
-                            onChange={setTextValue}
-                            label="Text input"
-                            maxLength={10}
-                        />
-                    </GridItem>
-                    <GridItem className="lumx-spacing-padding">
-                        <Checkbox value={checkboxValue} onChange={setCheckboxValue} label="Checkbox input" />
-                    </GridItem>
-                    <GridItem className="lumx-spacing-padding">
-                        <Select
-                            isOpen={isSelectOpen}
-                            value={values}
-                            label="Select label"
-                            onInputClick={toggleSelect}
-                            onDropdownClose={closeSelect}
-                        >
-                            <List isClickable>
-                                {selectChoices.map((choice) => (
-                                    <ListItem
-                                        key={choice}
-                                        isSelected={values.includes(choice)}
-                                        onItemSelected={selectItem(choice)}
-                                        size={Size.tiny}
-                                    >
-                                        {choice}
-                                    </ListItem>
-                                ))}
-                            </List>
-                        </Select>
-                    </GridItem>
-                    <GridItem className="lumx-spacing-padding">
-                        <div tabIndex={0}>Focus div</div>
-                    </GridItem>
-                </Grid>
+
+                <div className="lumx-spacing-padding-horizontal-huge lumx-spacing-padding-bottom-huge">
+                    <div className="lumx-spacing-margin-bottom-huge">
+                        The text field should capture the focus on open and a focus trap should be in place.
+                    </div>
+
+                    <TextField
+                        className="lumx-spacing-margin-bottom-huge"
+                        inputRef={inputRef}
+                        value={textValue}
+                        onChange={setTextValue}
+                        label="Text input"
+                        maxLength={10}
+                    />
+
+                    <Checkbox
+                        className="lumx-spacing-margin-bottom-huge"
+                        value={checkboxValue}
+                        onChange={setCheckboxValue}
+                        label="Checkbox input"
+                    />
+
+                    <Select
+                        className="lumx-spacing-margin-bottom-huge"
+                        isOpen={isSelectOpen}
+                        value={values}
+                        label="Select label"
+                        onInputClick={toggleSelect}
+                        onDropdownClose={closeSelect}
+                    >
+                        <List isClickable>
+                            {selectChoices.map((choice) => (
+                                <ListItem
+                                    key={choice}
+                                    isSelected={values.includes(choice)}
+                                    onItemSelected={selectItem(choice)}
+                                    size={Size.tiny}
+                                >
+                                    {choice}
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Select>
+                    <div tabIndex={0}>Focus div</div>
+                </div>
             </Dialog>
         </>
     );

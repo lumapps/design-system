@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { mdiChevronLeft, mdiMagnify, mdiViewGrid } from '@lumx/icons';
 
-import { Alignment, Button, Emphasis, Grid, IconButton, TextField, Toolbar } from '@lumx/react';
+import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextField, Toolbar } from '@lumx/react';
 
 const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
@@ -13,7 +13,7 @@ const App = ({ theme }: any) => {
         <Toolbar
             before={<IconButton emphasis={Emphasis.low} theme={theme} icon={mdiChevronLeft} />}
             label={
-                <Grid hAlign={Alignment.center}>
+                <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                     <span
                         className={classNames(
                             'lumx-typography-title',
@@ -30,10 +30,10 @@ const App = ({ theme }: any) => {
                         icon={mdiMagnify}
                         theme={theme}
                     />
-                </Grid>
+                </FlexBox>
             }
             after={
-                <Grid hAlign={Alignment.center}>
+                <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                     <IconButton
                         className="lumx-spacing-margin-right-regular"
                         emphasis={Emphasis.low}
@@ -42,7 +42,7 @@ const App = ({ theme }: any) => {
                     />
 
                     <Button theme={theme}>Action</Button>
-                </Grid>
+                </FlexBox>
             }
         />
     );

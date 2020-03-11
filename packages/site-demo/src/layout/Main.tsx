@@ -4,7 +4,7 @@ import { ErrorBoundary } from '@lumx/demo/layout/ErrorBoundary';
 import React, { ReactElement } from 'react';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
 
-import { Alignment, Grid, GridItem, Orientation } from '@lumx/react';
+import { Alignment, FlexBox, Orientation } from '@lumx/react';
 
 import { EngineSelector } from './EngineSelector';
 import { MainContent } from './MainContent';
@@ -29,21 +29,21 @@ const Main: React.FC = (): ReactElement => {
             <EngineProvider>
                 <div className="main__wrapper">
                     <div className="main-header">
-                        <Grid orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                            <GridItem>
-                                <Grid orientation={Orientation.horizontal} hAlign={Alignment.center}>
+                        <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
+                            <FlexBox fillSpace>
+                                <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                                     <span className="lumx-typography-overline lumx-spacing-margin-right-regular">
                                         Theme
                                     </span>
                                     <ThemeProvider>
                                         <ThemeSelector />
                                     </ThemeProvider>
-                                </Grid>
-                            </GridItem>
+                                </FlexBox>
+                            </FlexBox>
                             <Route path="/product/components*">
                                 <EngineSelector />
                             </Route>
-                        </Grid>
+                        </FlexBox>
                     </div>
 
                     <div className="main-content">

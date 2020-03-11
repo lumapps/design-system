@@ -7,7 +7,7 @@ import {
     ChipGroup,
     ColorPalette,
     Emphasis,
-    Grid,
+    FlexBox,
     Orientation,
     PostBlock,
     Size,
@@ -19,7 +19,7 @@ const App = ({ theme }: any) => (
     <>
         <PostBlock
             actions={
-                <Grid>
+                <FlexBox orientation={Orientation.horizontal}>
                     <Button
                         color={theme === Theme.dark ? ColorPalette.light : undefined}
                         emphasis={Emphasis.low}
@@ -37,7 +37,7 @@ const App = ({ theme }: any) => (
                     >
                         <span>8</span>
                     </Button>
-                </Grid>
+                </FlexBox>
             }
             attachments={
                 <UserBlock

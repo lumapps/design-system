@@ -7,9 +7,9 @@ import {
     Divider,
     Emphasis,
     ExpansionPanel,
-    Grid,
-    GridItem,
+    FlexBox,
     IconButton,
+    Orientation,
     Size,
     Thumbnail,
     ThumbnailVariant,
@@ -28,7 +28,11 @@ const App = () => {
         <>
             <ExpansionPanel hasBackground hasHeaderDivider isOpen={isOpen1} toggleCallback={setOpen1}>
                 <header>
-                    <Grid className="lumx-spacing-margin-left-regular" hAlign={Alignment.center}>
+                    <FlexBox
+                        className="lumx-spacing-margin-left-regular"
+                        orientation={Orientation.horizontal}
+                        hAlign={Alignment.center}
+                    >
                         <Thumbnail
                             image="https://picsum.photos/72/72/?random"
                             size={Size.m}
@@ -36,7 +40,7 @@ const App = () => {
                         />
 
                         <span className="lumx-spacing-margin-left-big lumx-typography-body1">With thumbnail</span>
-                    </Grid>
+                    </FlexBox>
                 </header>
 
                 <div className="lumx-spacing-padding-big">
@@ -53,7 +57,11 @@ const App = () => {
                 toggleCallback={setOpen2}
             >
                 <header>
-                    <Grid className="lumx-spacing-margin-left-regular" hAlign={Alignment.center}>
+                    <FlexBox
+                        className="lumx-spacing-margin-left-regular"
+                        orientation={Orientation.horizontal}
+                        hAlign={Alignment.center}
+                    >
                         <Thumbnail
                             image="https://picsum.photos/72/72/?random"
                             size={Size.m}
@@ -66,7 +74,7 @@ const App = () => {
                                 And secondary text
                             </span>
                         </div>
-                    </Grid>
+                    </FlexBox>
                 </header>
 
                 <div className="lumx-spacing-padding-big">
@@ -82,18 +90,22 @@ const App = () => {
                 toggleCallback={setOpen3}
             >
                 <header>
-                    <Grid className="lumx-spacing-margin-left-big" hAlign={Alignment.center}>
-                        <GridItem>
-                            <span className="lumx-base-display-block lumx-typography-body1">With secondary action</span>
-                        </GridItem>
+                    <FlexBox
+                        className="lumx-spacing-margin-left-big"
+                        orientation={Orientation.horizontal}
+                        hAlign={Alignment.center}
+                    >
+                        <span className="lumx-typography-body1">With secondary action</span>
 
-                        <IconButton
-                            icon={mdiDotsVertical}
-                            emphasis={Emphasis.low}
-                            size={Size.m}
-                            onClick={stopPropagation}
-                        />
-                    </Grid>
+                        <FlexBox marginAuto={Alignment.left}>
+                            <IconButton
+                                icon={mdiDotsVertical}
+                                emphasis={Emphasis.low}
+                                size={Size.m}
+                                onClick={stopPropagation}
+                            />
+                        </FlexBox>
+                    </FlexBox>
                 </header>
 
                 <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
@@ -104,7 +116,7 @@ const App = () => {
 
             <ExpansionPanel className="lumx-spacing-margin-top-big" isOpen={isOpen4} toggleCallback={setOpen4}>
                 <header>
-                    <Grid hAlign={Alignment.center}>
+                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail
                             image="https://picsum.photos/72/72/?random"
                             size={Size.m}
@@ -112,7 +124,7 @@ const App = () => {
                         />
 
                         <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
-                    </Grid>
+                    </FlexBox>
                 </header>
 
                 <div className="lumx-spacing-padding-top">
@@ -125,7 +137,7 @@ const App = () => {
 
             <ExpansionPanel isOpen={isOpen5} toggleCallback={setOpen5}>
                 <header>
-                    <Grid hAlign={Alignment.center}>
+                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail
                             image="https://picsum.photos/72/72/?random"
                             size={Size.m}
@@ -133,7 +145,7 @@ const App = () => {
                         />
 
                         <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
-                    </Grid>
+                    </FlexBox>
                 </header>
 
                 <div className="lumx-spacing-padding-top">
@@ -146,7 +158,7 @@ const App = () => {
 
             <ExpansionPanel isOpen={isOpen6} toggleCallback={setOpen6}>
                 <header>
-                    <Grid hAlign={Alignment.center}>
+                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail
                             image="https://picsum.photos/72/72/?random"
                             size={Size.m}
@@ -154,7 +166,7 @@ const App = () => {
                         />
 
                         <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
-                    </Grid>
+                    </FlexBox>
                 </header>
 
                 <div className="lumx-spacing-padding-top">
