@@ -4,6 +4,7 @@ import { boolean, number, select, text } from '@storybook/addon-knobs';
 import fromPairs from 'lodash/fromPairs';
 import React from 'react';
 
+import isArray from 'lodash/isArray';
 import { DEFAULT_PROPS, FlexBox, FlexBoxProps } from './FlexBox';
 /*  tslint:disable object-literal-sort-keys */
 
@@ -18,7 +19,7 @@ const flexViewKnobConfigs: Array<
     ['wrap', boolean],
     ['hAlign', select, [DEFAULT_PROPS.hAlign, Alignment.center, Alignment.top, Alignment.bottom]],
     ['vAlign', select, [DEFAULT_PROPS.vAlign, Alignment.center, Alignment.right, Alignment.left]],
-    ['orientation', select, Orientation],
+    ['orientation', select, [undefined, Orientation.horizontal, Orientation.vertical]],
     [
         'marginAuto',
         select,
@@ -40,7 +41,8 @@ const setupFlexBoxKnobs = (group: string, knobs: FlexBoxPropName[] = []) =>
         knobs.map((knob: FlexBoxPropName) => {
             const [prop, knobFn, selectOptions] = flexViewKnobConfigs.find(([k]) => k === knob)! as any;
             if (selectOptions) {
-                return [prop, knobFn(prop, selectOptions, DEFAULT_PROPS[prop], group)];
+                const defaultValue = isArray(selectOptions) ? selectOptions[0] : DEFAULT_PROPS[prop];
+                return [prop, knobFn(prop, selectOptions, defaultValue, group)];
             }
             return [prop, knobFn(prop, DEFAULT_PROPS[prop], group)];
         }),

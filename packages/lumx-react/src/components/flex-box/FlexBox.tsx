@@ -77,7 +77,12 @@ const FlexBox: React.FC<FlexBoxProps> = ({
         {...props}
         className={classNames(
             className,
-            handleBasicClasses({ prefix: CLASSNAME, orientation, vAlign, hAlign }),
+            handleBasicClasses({
+                prefix: CLASSNAME,
+                orientation: orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null),
+                vAlign,
+                hAlign,
+            }),
             wrap && `${CLASSNAME}--wrap`,
             fillSpace && `${CLASSNAME}--fill-space`,
             noShrink && `${CLASSNAME}--no-shrink`,

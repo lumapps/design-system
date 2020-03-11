@@ -126,21 +126,21 @@ Array [
     </FlexBox>
   </div>,
   <div
-    className="lumx-flex-box lumx-flex-box--h-align-top"
+    className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--h-align-top"
   >
     <Button>
       Top
     </Button>
   </div>,
   <div
-    className="lumx-flex-box lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--fill-space"
+    className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--fill-space"
   >
     <Button>
       Center button
     </Button>
   </div>,
   <div
-    className="lumx-flex-box lumx-flex-box--h-align-bottom"
+    className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--h-align-bottom"
   >
     <Button>
       Bottom
@@ -219,21 +219,21 @@ Array [
     </FlexBox>
   </div>,
   <div
-    className="lumx-flex-box lumx-flex-box--v-align-left"
+    className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left"
   >
     <Button>
       Left
     </Button>
   </div>,
   <div
-    className="lumx-flex-box lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--fill-space"
+    className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--fill-space"
   >
     <Button>
       Center button
     </Button>
   </div>,
   <div
-    className="lumx-flex-box lumx-flex-box--v-align-right"
+    className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-right"
   >
     <Button>
       Right
