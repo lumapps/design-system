@@ -60,6 +60,7 @@ const plugins = [
         },
         {
             from: SRC_PATH,
+            ignore: ['*.snap'],
             to: `${DIST_PATH}/src/`,
         },
     ]),
