@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Publish source code on NPM for `@lumx/react`
+
 ## [0.21.10][] - 2020-03-12
 
 ### Added
