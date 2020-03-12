@@ -42,7 +42,7 @@ interface FlexBoxProps extends GenericProps {
     /**
      * Content on which to apply a flex layout.
      */
-    children: ReactNode;
+    children?: ReactNode;
 }
 
 /**
