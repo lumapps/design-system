@@ -58,6 +58,11 @@ const plugins = [
             from: `${PKG_PATH}/package.json`,
             to: DIST_PATH,
         },
+        {
+            from: SRC_PATH,
+            ignore: ['*.snap'],
+            to: `${DIST_PATH}/src/`,
+        },
     ]),
 
     /* Bundle non-minified versions of js/css files. */
