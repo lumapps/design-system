@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -11,6 +11,8 @@ import isFunction from 'lodash/isFunction';
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import useFocusedImage from './useFocusedImage';
+
+import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 
 /**
  * Loading attribute is not yet supported in typescript, so we need
@@ -126,8 +128,8 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
-}) => {
-    const focusImageRef = useFocusedImage(focusPoint!);
+}: ThumbnailProps): ReactElement => {
+    const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!);
 
     return (
         <div
@@ -144,13 +146,13 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...props}
         >
             {aspectRatio === AspectRatio.original ? (
-                <img className={`${CLASSNAME}__image`} src={image} alt={alt} loading={loading} />
+                <img ref={focusImageRef} className={`${CLASSNAME}__image`} src={image} alt={alt} loading={loading} />
             ) : (
                 <div className={`${CLASSNAME}__background`}>
                     <img
                         ref={focusImageRef}
                         className={`${CLASSNAME}__focused-image`}
-                        crossOrigin="anonymous"
+                        crossOrigin={isInternetExplorer() ? undefined : 'anonymous'}
                         src={image}
                         alt={alt}
                         loading={loading}
