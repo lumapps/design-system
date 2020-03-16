@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.12][] - 2020-03-16
+
+### Fixed
+
+-   Fix thumbnail image loading on IE
+-   Fix thumbnail focus point update when changing size or aspect ratio
+
 ## [0.21.11][] - 2020-03-12
 
 ### Added
@@ -387,3 +394,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.10]: https://github.com/lumapps/design-system/tree/v0.21.10
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.11...HEAD
 [0.21.11]: https://github.com/lumapps/design-system/tree/v0.21.11
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.12...HEAD
+[0.21.12]: https://github.com/lumapps/design-system/tree/v0.21.12
