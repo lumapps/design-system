@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix thumbnail image loading on IE
+-   Fix thumbnail focus point update when changing size or aspect ratio
+
 ## [0.21.11][] - 2020-03-12
 
 ### Added
