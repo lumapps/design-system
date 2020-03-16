@@ -126,8 +126,24 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
-}) => {
-    const focusImageRef = useFocusedImage(focusPoint!);
+}: ThumbnailProps): ReactElement => {
+    const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!);
+
+    /**
+     * Check if browser is IE
+     * @return Browser is IE or not
+     */
+    const isInternetExplorer = () => {
+        const ua = window.navigator.userAgent;
+        const msie = ua.indexOf('MSIE ');
+        const isIEVersion = !!navigator.userAgent.match(/Trident.*rv\:11\./);
+
+        if (msie > 0 || isIEVersion) {
+            return true;
+        }
+
+        return false;
+    };
 
     return (
         <div
@@ -144,13 +160,13 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...props}
         >
             {aspectRatio === AspectRatio.original ? (
-                <img className={`${CLASSNAME}__image`} src={image} alt={alt} loading={loading} />
+                <img ref={focusImageRef} className={`${CLASSNAME}__image`} src={image} alt={alt} loading={loading} />
             ) : (
                 <div className={`${CLASSNAME}__background`}>
                     <img
                         ref={focusImageRef}
                         className={`${CLASSNAME}__focused-image`}
-                        crossOrigin="anonymous"
+                        crossOrigin={isInternetExplorer ? undefined : 'anonymous'}
                         src={image}
                         alt={alt}
                         loading={loading}
