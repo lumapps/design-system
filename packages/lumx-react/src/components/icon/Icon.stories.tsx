@@ -4,7 +4,7 @@ import { mdiEmail } from '@lumx/icons';
 import { ColorPalette, FlexBox, Icon, IconSizes, Size } from '@lumx/react';
 import { Orientation } from '..';
 
-export default { title: 'Icon' };
+export default { title: 'LumX components/Icon' };
 
 const iconSizes: Array<IconSizes | undefined> = [
     undefined,

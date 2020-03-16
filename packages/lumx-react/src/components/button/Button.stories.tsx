@@ -5,7 +5,7 @@ import { DEFAULT_PROPS } from '@lumx/react/components/button/Button';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'Button' };
+export default { title: 'LumX components/Button' };
 
 export const simpleButton = ({ theme }: any) => {
     return (

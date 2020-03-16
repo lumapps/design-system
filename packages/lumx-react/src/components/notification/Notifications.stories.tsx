@@ -4,7 +4,7 @@ import { Button, Notification, NotificationType } from '@lumx/react';
 
 import noop from 'lodash/noop';
 
-export default { title: 'Notification' };
+export default { title: 'LumX components/Notification' };
 
 const properties = {
     error: {

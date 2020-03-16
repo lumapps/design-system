@@ -3,7 +3,7 @@ import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'Switch' };
+export default { title: 'LumX components/Switch' };
 
 export const notCheckedSwitch = ({ theme }: any) => (
     <Switch checked={false} onToggle={noop} theme={theme}>

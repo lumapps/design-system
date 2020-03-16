@@ -3,7 +3,7 @@ import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'TextField' };
+export default { title: 'LumX components/TextField' };
 
 /**
  * TextField story

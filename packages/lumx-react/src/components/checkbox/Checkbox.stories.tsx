@@ -3,7 +3,7 @@ import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React, { useState } from 'react';
 
-export default { title: 'Checkbox' };
+export default { title: 'LumX components/Checkbox' };
 
 export const simpleSelect = ({ theme }: any) => {
     const [value, setValue] = useState(false);

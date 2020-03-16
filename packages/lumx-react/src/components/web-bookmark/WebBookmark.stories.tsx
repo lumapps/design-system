@@ -4,7 +4,7 @@ import React from 'react';
 import { Size } from '..';
 import { WebBookmark } from './WebBookmark';
 
-export default { title: 'Web bookmark' };
+export default { title: 'LumX components/Web bookmark' };
 
 const LONG_LOREM_IPSUM = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut quam sollicitudin, viverra quam eget, pretium tellus. Praesent sit amet augue in odio varius accumsan vitae quis nunc. Aliquam iaculis neque at augue laoreet, eu sagittis dolor tempus. Nullam sit amet bibendum velit, in pharetra lorem. Aliquam semper accumsan placerat. Sed felis risus, efficitur non eros non, rhoncus viverra lectus. Aliquam eget interdum tellus. Praesent non ex ut urna tempus facilisis. Sed tellus tortor, pharetra vel velit sit amet, aliquet condimentum quam. Sed dictum nibh eget nibh ullamcorper dignissim. Vestibulum elementum at mauris sit amet iaculis. Maecenas pretium luctus enim vel commodo. Cras accumsan sagittis eros, vel maximus sem molestie id. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 

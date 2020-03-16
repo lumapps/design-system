@@ -3,7 +3,7 @@ import React from 'react';
 import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
 import { boolean, number, select, text } from '@storybook/addon-knobs';
 
-export default { title: 'Image Block' };
+export default { title: 'LumX components/Image Block' };
 
 const numberKnobOptions = {
     max: 1,
