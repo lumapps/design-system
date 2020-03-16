@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -11,6 +11,8 @@ import isFunction from 'lodash/isFunction';
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import useFocusedImage from './useFocusedImage';
+
+import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 
 /**
  * Loading attribute is not yet supported in typescript, so we need
@@ -128,22 +130,6 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     ...props
 }: ThumbnailProps): ReactElement => {
     const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!);
-
-    /**
-     * Check if browser is IE
-     * @return Browser is IE or not
-     */
-    const isInternetExplorer = () => {
-        const ua = window.navigator.userAgent;
-        const msie = ua.indexOf('MSIE ');
-        const isIEVersion = !!navigator.userAgent.match(/Trident.*rv\:11\./);
-
-        if (msie > 0 || isIEVersion) {
-            return true;
-        }
-
-        return false;
-    };
 
     return (
         <div
