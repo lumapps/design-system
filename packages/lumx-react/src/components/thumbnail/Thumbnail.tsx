@@ -152,7 +152,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                     <img
                         ref={focusImageRef}
                         className={`${CLASSNAME}__focused-image`}
-                        crossOrigin={isInternetExplorer ? undefined : 'anonymous'}
+                        crossOrigin={isInternetExplorer() ? undefined : 'anonymous'}
                         src={image}
                         alt={alt}
                         loading={loading}
