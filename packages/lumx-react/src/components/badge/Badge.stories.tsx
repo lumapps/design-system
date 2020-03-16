@@ -3,7 +3,7 @@ import { AspectRatio, Badge, ColorPalette, Icon, Size, Thumbnail, ThumbnailVaria
 import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'Badge' };
+export default { title: 'LumX components/Badge' };
 
 export const simpleBadgeWithValue = () => (
     <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>

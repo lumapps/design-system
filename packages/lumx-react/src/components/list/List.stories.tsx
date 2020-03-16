@@ -1,7 +1,7 @@
 import { List, ListItem, Size } from '@lumx/react';
 import React from 'react';
 
-export default { title: 'List' };
+export default { title: 'LumX components/List' };
 
 export const withItemPadding = () => {
     return (

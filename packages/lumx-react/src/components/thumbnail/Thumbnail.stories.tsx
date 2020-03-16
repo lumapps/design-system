@@ -2,7 +2,7 @@ import { Alignment, AspectRatio, Size, Theme, Thumbnail, ThumbnailVariant } from
 import { number, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'Thumbnail' };
+export default { title: 'LumX components/Thumbnail' };
 
 const numberKnobOtions = {
     max: 1,

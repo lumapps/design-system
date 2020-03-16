@@ -2,7 +2,7 @@ import { InputHelper, Kind } from '@lumx/react';
 import { text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'Input Helper' };
+export default { title: 'LumX components/Input Helper' };
 
 export const informationHelper = ({ theme }: any) => (
     <InputHelper kind={Kind.info} theme={theme}>

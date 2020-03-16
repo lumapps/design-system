@@ -3,7 +3,7 @@ import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'Radio button' };
+export default { title: 'LumX components/Radio button' };
 
 export const simpleRadioButton = ({ theme }: any) => (
     <RadioButton

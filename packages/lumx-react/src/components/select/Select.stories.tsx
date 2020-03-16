@@ -4,7 +4,7 @@ import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React, { SyntheticEvent } from 'react';
 
-export default { title: 'Select' };
+export default { title: 'LumX components/Select' };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 

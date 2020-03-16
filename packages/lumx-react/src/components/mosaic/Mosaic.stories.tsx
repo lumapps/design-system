@@ -3,7 +3,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import { Alignment, ImageBlock, Lightbox, Slideshow, SlideshowItem, Theme } from '@lumx/react';
 import { Mosaic } from './Mosaic';
 
-export default { title: 'Mosaic' };
+export default { title: 'LumX components/Mosaic' };
 
 export const oneThumbnail = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };

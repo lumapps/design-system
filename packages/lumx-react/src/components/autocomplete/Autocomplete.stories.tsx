@@ -4,7 +4,7 @@ import { Autocomplete, List, ListItem, Size } from '@lumx/react';
 
 import { CITIES } from './__mockData__';
 
-export default { title: 'Autocomplete' };
+export default { title: 'LumX components/Autocomplete' };
 
 const cityNames = CITIES.map((city) => city.text);
 

@@ -8,7 +8,7 @@ import isArray from 'lodash/isArray';
 import { DEFAULT_PROPS, FlexBox, FlexBoxProps } from './FlexBox';
 /*  tslint:disable object-literal-sort-keys */
 
-export default { title: 'FlexBox' };
+export default { title: 'LumX components/FlexBox' };
 
 type FlexBoxPropName = keyof FlexBoxProps;
 const flexViewKnobConfigs: Array<
