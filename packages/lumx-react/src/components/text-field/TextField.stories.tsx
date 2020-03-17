@@ -26,6 +26,7 @@ export const simpleTextNumberField = ({ theme }: any) => (
         placeholder={text('Placeholder', 'ex: A value')}
         theme={theme}
         onChange={noop}
+        type="number"
     />
 );
 
