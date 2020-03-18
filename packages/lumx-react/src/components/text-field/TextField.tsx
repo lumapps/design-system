@@ -9,8 +9,6 @@ import { Emphasis, Icon, IconButton, InputHelper, InputLabel, Kind, Size, Theme 
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
-type TextFieldValue = string | number | undefined;
-
 /**
  * Defines the props of the component.
  */
@@ -73,7 +71,7 @@ interface TextFieldProps extends GenericProps {
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
 
     /** Text field value. */
-    value: TextFieldValue;
+    value?: string | number;
 
     /** A ref that will be passed to the wrapper element. */
     textFieldRef?: RefObject<HTMLDivElement>;
@@ -171,11 +169,11 @@ interface InputNativeProps {
     multiline?: boolean;
     maxLength?: number;
     placeholder?: string;
-    value: TextFieldValue;
+    value?: string | number;
     rows: number;
     setFocus(focus: boolean): void;
     recomputeNumberOfRows(event: React.ChangeEvent): void;
-    onChange(value: TextFieldValue): void;
+    onChange(value: any): void;
     onFocus?(value: React.FocusEvent): void;
     onBlur?(value: React.FocusEvent): void;
 }
