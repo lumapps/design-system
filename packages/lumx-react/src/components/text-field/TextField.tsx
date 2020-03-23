@@ -77,7 +77,7 @@ interface TextFieldProps extends GenericProps {
     textFieldRef?: RefObject<HTMLDivElement>;
 
     /** Text field value change handler. */
-    onChange(value: any): void;
+    onChange(value: string): void;
 
     /** Text field focus change handler. */
     onFocus?(event: React.FocusEvent): void;
@@ -173,7 +173,7 @@ interface InputNativeProps {
     rows: number;
     setFocus(focus: boolean): void;
     recomputeNumberOfRows(event: React.ChangeEvent): void;
-    onChange(value: any): void;
+    onChange(value: string): void;
     onFocus?(value: React.FocusEvent): void;
     onBlur?(value: React.FocusEvent): void;
 }
