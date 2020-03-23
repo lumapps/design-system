@@ -6,8 +6,8 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@lumx/core": "^0.21.12",
-        "@lumx/icons": "^0.21.12",
+        "@lumx/core": "^0.21.13",
+        "@lumx/icons": "^0.21.13",
         "body-scroll-lock": "^2.6.4",
         "classnames": "^2.2.6",
         "focus-trap-react": "^6.0.0",
@@ -116,5 +116,5 @@
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
         "storybook": "start-storybook -p 9000"
     },
-    "version": "0.21.12"
+    "version": "0.21.13"
 }
