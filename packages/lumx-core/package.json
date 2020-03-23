@@ -41,7 +41,7 @@
         "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
         "prepublishOnly": "yarn build"
     },
-    "version": "0.21.12",
+    "version": "0.21.13",
     "devDependencies": {
         "@babel/core": "^7.8.3",
         "@babel/plugin-proposal-class-properties": "^7.8.3",
