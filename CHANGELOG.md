@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.13][] - 2020-03-23
+
 ### Fixed
 
 -   Allow number type on `TextField` component value
@@ -400,3 +402,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.11]: https://github.com/lumapps/design-system/tree/v0.21.11
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.12...HEAD
 [0.21.12]: https://github.com/lumapps/design-system/tree/v0.21.12
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.13...HEAD
+[0.21.13]: https://github.com/lumapps/design-system/tree/v0.21.13
