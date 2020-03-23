@@ -145,6 +145,27 @@ describe(`<${TextField.displayName}>`, () => {
             });
         });
 
+        it('should have text as value', () => {
+            const value = 'test';
+            const { inputNative } = setup({ value });
+
+            expect(inputNative).toHaveValue(value);
+        });
+
+        it('should have no value', () => {
+            const value = undefined;
+            const { inputNative } = setup({ value });
+
+            expect(inputNative).toHaveValue(value);
+        });
+
+        it('should have number as value', () => {
+            const value = 2;
+            const { inputNative } = setup({ value });
+
+            expect(inputNative).toHaveValue(value);
+        });
+
         it('should have helper text', () => {
             const { helper } = setup({
                 helper: 'test',

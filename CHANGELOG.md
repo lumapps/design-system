@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Allow number type on `TextField` component value
+
 ## [0.21.12][] - 2020-03-16
 
 ### Fixed

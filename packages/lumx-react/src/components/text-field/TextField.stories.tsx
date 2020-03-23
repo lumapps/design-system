@@ -1,5 +1,5 @@
 import { TextField } from '@lumx/react';
-import { text } from '@storybook/addon-knobs';
+import { number, text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
@@ -16,6 +16,17 @@ export const simpleTextField = ({ theme }: any) => (
         placeholder={text('Placeholder', 'ex: A value')}
         theme={theme}
         onChange={noop}
+    />
+);
+
+export const simpleTextNumberField = ({ theme }: any) => (
+    <TextField
+        value={number('Value', 2)}
+        label={text('Label', 'I am the label')}
+        placeholder={text('Placeholder', 'ex: A value')}
+        theme={theme}
+        onChange={noop}
+        type="number"
     />
 );
 
