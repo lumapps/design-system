@@ -1,7 +1,7 @@
 import React, { SyntheticEvent } from 'react';
 
 import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
-import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
+import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, SelectMultiple, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }: any) => {
@@ -80,9 +80,8 @@ const App = ({ theme }: any) => {
         );
     };
     return (
-        <Select
+        <SelectMultiple
             style={{ width: '100%' }}
-            isMultiple
             isOpen={isOpen}
             value={values}
             label={LABEL}
@@ -124,7 +123,7 @@ const App = ({ theme }: any) => {
                           </ListItem>,
                       ]}
             </List>
-        </Select>
+        </SelectMultiple>
     );
 };
 
