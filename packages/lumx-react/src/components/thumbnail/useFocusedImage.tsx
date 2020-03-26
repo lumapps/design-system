@@ -4,7 +4,13 @@ import { AspectRatio, Size } from '..';
 import { FocusedImage, LumHTMLImageElement } from './FocusedImage';
 import { FocusPoint } from './FocusedImageOptions';
 
-const useFocusedImage = (focus: FocusPoint, aspectRatio: AspectRatio, size: Size) => {
+const useFocusedImage = (
+    focus: FocusPoint,
+    aspectRatio: AspectRatio,
+    size: Size,
+    debounceTime: number,
+    updateOnWindowResize: boolean,
+) => {
     const focusRef = useRef<FocusedImage | null>(null);
 
     useEffect(() => {
@@ -16,9 +22,10 @@ const useFocusedImage = (focus: FocusPoint, aspectRatio: AspectRatio, size: Size
             focusRef.current = null;
         } else if (!focusRef.current) {
             focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
-                debounceTime: 17,
+                debounceTime,
                 focus,
-                updateOnWindowResize: true,
+                updateOnWindowResize,
+                updateOnContainerResize: updateOnWindowResize,
             });
         }
     };

@@ -35,14 +35,6 @@ const RESIZE_LISTENER_OBJECT_STYLES = {
     pointerEvents: 'none',
 };
 
-const DEFAULT_OPTIONS: FocusedImageOptions = {
-    focus: { x: 0, y: 0 },
-    containerPosition: 'relative',
-    debounceTime: 17,
-    updateOnContainerResize: false,
-    updateOnWindowResize: true,
-};
-
 export interface LumHTMLImageElement extends HTMLImageElement {
     __focused_image_instance__: FocusedImage;
 }
@@ -56,7 +48,7 @@ export class FocusedImage {
     public listening: boolean = false;
     public debounceApplyShift: () => void;
 
-    constructor(private readonly imageNode: LumHTMLImageElement, options = DEFAULT_OPTIONS) {
+    constructor(private readonly imageNode: LumHTMLImageElement, options: FocusedImageOptions) {
         // Merge in options
         this.options = options;
 
