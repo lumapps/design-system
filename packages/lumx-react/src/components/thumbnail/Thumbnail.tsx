@@ -38,6 +38,14 @@ const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
 type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
+ *  Cross-origin values.
+ */
+enum CrossOrigin {
+    anonymous = 'anonymous',
+    useCredentials = 'use-credentials',
+}
+
+/**
  * Authorized variants.
  */
 enum ThumbnailVariant {
@@ -62,6 +70,13 @@ interface ThumbnailProps extends GenericProps {
     align?: Alignment;
     /** The image aspect ratio. */
     aspectRatio?: AspectRatio;
+    /** Active cross origin. */
+    isCrossOriginEnabled?: boolean;
+    /**
+     * Allows images that are loaded from foreign origins
+     * to be used as if they had been loaded from the current origin.
+     */
+    crossOrigin?: CrossOrigin;
     /** Whether the image has to fill its container's height. */
     fillHeight?: boolean;
     /** Avatar image. */
@@ -74,9 +89,12 @@ interface ThumbnailProps extends GenericProps {
     theme?: Theme;
     /** Variant. */
     variant?: ThumbnailVariant;
-
     /** Focal Point coordinates. */
     focusPoint?: FocusPoint;
+    /** Allows to re-center the image according to the focal point after after window resizing */
+    isFollowingWindowSize?: boolean;
+    /** Time before recalculating focal point if isFollowingWindowSize is activated */
+    resizeDebounceTime?: number;
 }
 
 /**
@@ -99,6 +117,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: DefaultPropsType = {
     align: Alignment.left,
+    isCrossOriginEnabled: true,
+    crossOrigin: CrossOrigin.anonymous,
     aspectRatio: AspectRatio.original,
     fillHeight: false,
     focusPoint: { x: 0, y: 0 },
@@ -106,6 +126,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
     size: undefined,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
+    debounceTime: 20,
+    isFollowingWindowSize: true,
 };
 
 /**
@@ -116,6 +138,10 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',
+    isCrossOriginEnabled = DEFAULT_PROPS.isCrossOriginEnabled,
+    crossOrigin = DEFAULT_PROPS.crossOrigin,
+    debounceTime = DEFAULT_PROPS.debounceTime,
+    isFollowingWindowSize = DEFAULT_PROPS.isFollowingWindowSize,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     fillHeight = DEFAULT_PROPS.fillHeight,
@@ -129,7 +155,11 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
 }: ThumbnailProps): ReactElement => {
-    const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!);
+    const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, isFollowingWindowSize!);
+
+    const setCrossOrigin = () => {
+        return !isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined;
+    };
 
     return (
         <div
@@ -152,7 +182,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                     <img
                         ref={focusImageRef}
                         className={`${CLASSNAME}__focused-image`}
-                        crossOrigin={isInternetExplorer() ? undefined : 'anonymous'}
+                        crossOrigin={setCrossOrigin()}
                         src={image}
                         alt={alt}
                         loading={loading}
@@ -164,4 +194,13 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 };
 Thumbnail.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, Thumbnail, ThumbnailProps, ThumbnailAspectRatio, ThumbnailSize, ThumbnailVariant };
+export {
+    CLASSNAME,
+    DEFAULT_PROPS,
+    Thumbnail,
+    ThumbnailProps,
+    ThumbnailAspectRatio,
+    ThumbnailSize,
+    ThumbnailVariant,
+    CrossOrigin,
+};

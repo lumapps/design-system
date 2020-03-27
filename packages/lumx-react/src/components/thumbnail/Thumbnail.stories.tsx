@@ -1,5 +1,5 @@
-import { Alignment, AspectRatio, Size, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
-import { number, select, text } from '@storybook/addon-knobs';
+import { Alignment, AspectRatio, CrossOrigin, Size, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { boolean, number, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
 export default { title: 'LumX components/Thumbnail' };
@@ -20,6 +20,9 @@ export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
         <Thumbnail
             align={select<Alignment>('Alignment', Alignment, Alignment.left, 'Options')}
             aspectRatio={select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Options')}
+            isCrossOriginEnabled={boolean('Enable CORS', true, 'Options')}
+            crossOrigin={select('CORS', CrossOrigin, CrossOrigin.anonymous, 'Options')}
+            fillHeight={boolean('Fill Height', false, 'Options')}
             focusPoint={{
                 x: number('focusX', 0, numberKnobOtions, 'Options'),
                 y: number('focusY', 0, numberKnobOtions, 'Options'),
@@ -40,6 +43,8 @@ export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
                 'Options',
             )}
             theme={theme}
+            isFollowingWindowSize={boolean('Update on window resize', true, 'Options')}
+            resizeDebounceTime={number('Debounce time after resize', 20, undefined, 'Options')}
             variant={select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared, 'Options')}
         />
     );
