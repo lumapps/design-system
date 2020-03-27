@@ -6,10 +6,10 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@lumx/angularjs": "^0.21.13",
-        "@lumx/core": "^0.21.13",
-        "@lumx/icons": "^0.21.13",
-        "@lumx/react": "^0.21.13",
+        "@lumx/angularjs": "^0.21.14",
+        "@lumx/core": "^0.21.14",
+        "@lumx/icons": "^0.21.14",
+        "@lumx/react": "^0.21.14",
         "angular": "^1.7.8",
         "classnames": "^2.2.6",
         "intersection-observer": "^0.7.0",
@@ -84,5 +84,5 @@
         "build": "webpack",
         "start": "NODE_ENV=development webpack-dev-server"
     },
-    "version": "0.21.13"
+    "version": "0.21.14"
 }

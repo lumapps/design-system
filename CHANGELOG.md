@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.14][] - 2020-03-27
+
 ### Added
 
 -   Added `isCrossOriginEnabled` prop to `Tumbnail` component
@@ -411,3 +413,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.12]: https://github.com/lumapps/design-system/tree/v0.21.12
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.13...HEAD
 [0.21.13]: https://github.com/lumapps/design-system/tree/v0.21.13
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.14...HEAD
+[0.21.14]: https://github.com/lumapps/design-system/tree/v0.21.14
