@@ -21,15 +21,7 @@ export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
             align={select<Alignment>('Alignment', Alignment, Alignment.left, 'Options')}
             aspectRatio={select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Options')}
             enableCrossOrigin={boolean('Enable CORS', true, 'Options')}
-            crossOrigin={select(
-                'CORS',
-                {
-                    anonymous: CrossOrigin.anonymous,
-                    useCredentials: CrossOrigin.useCredentials,
-                },
-                CrossOrigin.anonymous,
-                'Options',
-            )}
+            crossOrigin={select('CORS', CrossOrigin, CrossOrigin.anonymous, 'Options')}
             fillHeight={boolean('Fill Height', false, 'Options')}
             focusPoint={{
                 x: number('focusX', 0, numberKnobOtions, 'Options'),
@@ -51,7 +43,7 @@ export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
                 'Options',
             )}
             theme={theme}
-            updateOnWindowResize={boolean('Update on window resize', true, 'Options')}
+            isFollowingWindowSize={boolean('Update on window resize', true, 'Options')}
             resizeDebounceTime={number('Debounce time after resize', 20, undefined, 'Options')}
             variant={select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared, 'Options')}
         />

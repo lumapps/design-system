@@ -92,8 +92,8 @@ interface ThumbnailProps extends GenericProps {
     /** Focal Point coordinates. */
     focusPoint?: FocusPoint;
     /** Allows to re-center the image according to the focal point after after window resizing */
-    updateOnWindowResize?: boolean;
-    /** Time before recalculating focal point if updateOnWindowResize is activated */
+    isFollowingWindowSize?: boolean;
+    /** Time before recalculating focal point if isFollowingWindowSize is activated */
     resizeDebounceTime?: number;
 }
 
@@ -127,7 +127,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
     debounceTime: 20,
-    updateOnWindowResize: true,
+    isFollowingWindowSize: true,
 };
 
 /**
@@ -141,7 +141,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     enableCrossOrigin = DEFAULT_PROPS.enableCrossOrigin,
     crossOrigin = DEFAULT_PROPS.crossOrigin,
     debounceTime = DEFAULT_PROPS.debounceTime,
-    updateOnWindowResize = DEFAULT_PROPS.updateOnWindowResize,
+    isFollowingWindowSize = DEFAULT_PROPS.isFollowingWindowSize,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
     fillHeight = DEFAULT_PROPS.fillHeight,
@@ -155,7 +155,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     focusPoint = DEFAULT_PROPS.focusPoint,
     ...props
 }: ThumbnailProps): ReactElement => {
-    const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, updateOnWindowResize!);
+    const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, isFollowingWindowSize!);
 
     const setCrossOrigin = () => {
         return !isInternetExplorer() && enableCrossOrigin ? crossOrigin : undefined;

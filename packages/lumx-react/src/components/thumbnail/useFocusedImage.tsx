@@ -9,7 +9,7 @@ const useFocusedImage = (
     aspectRatio: AspectRatio,
     size: Size,
     debounceTime: number,
-    updateOnWindowResize: boolean,
+    isFollowingWindowSize: boolean,
 ) => {
     const focusRef = useRef<FocusedImage | null>(null);
 
@@ -24,8 +24,8 @@ const useFocusedImage = (
             focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
                 debounceTime,
                 focus,
-                updateOnWindowResize,
-                updateOnContainerResize: updateOnWindowResize,
+                updateOnWindowResize: isFollowingWindowSize,
+                updateOnContainerResize: isFollowingWindowSize,
             });
         }
     };
