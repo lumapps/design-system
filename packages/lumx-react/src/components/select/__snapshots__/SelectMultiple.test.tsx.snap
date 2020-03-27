@@ -4,7 +4,7 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
 <div
   className="lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"
 >
-  <SelectMultiple
+  <SelectMultipleField
     anchorRef={
       Object {
         "current": null,
@@ -42,7 +42,7 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
 <div
   className="lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"
 >
-  <SelectMultiple
+  <SelectMultipleField
     anchorRef={
       Object {
         "current": null,

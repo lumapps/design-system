@@ -48,7 +48,7 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
  *
  * @return The component.
  */
-const Select: React.FC<SelectProps> = ({
+const SelectField: React.FC<SelectProps> = ({
     variant,
     label,
     value,
@@ -65,7 +65,7 @@ const Select: React.FC<SelectProps> = ({
     isRequired,
     hasInputClear,
     selectedValueRender = DEFAULT_PROPS.selectedValueRender,
-}): React.ReactElement => {
+}) => {
     return (
         <>
             {variant === SelectVariant.input && (
@@ -152,11 +152,11 @@ const Select: React.FC<SelectProps> = ({
     );
 };
 
-const SelectWithContext = (props: SelectProps) => {
+const Select = (props: SelectProps) => {
     const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && !isEmpty;
 
-    return withSelectContext(Select, {
+    return withSelectContext(SelectField, {
         ...props,
         className: classNames(
             props.className,
@@ -171,6 +171,6 @@ const SelectWithContext = (props: SelectProps) => {
     });
 };
 
-SelectWithContext.displayName = COMPONENT_NAME;
+Select.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, SelectWithContext as Select, SelectProps, SelectVariant };
+export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant };

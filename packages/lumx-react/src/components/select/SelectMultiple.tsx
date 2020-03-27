@@ -70,7 +70,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const SelectMultiple: React.FC<any> = ({
+const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     variant,
     label,
     value,
@@ -88,7 +88,7 @@ const SelectMultiple: React.FC<any> = ({
     isDisabled,
     selectedChipRender = DEFAULT_PROPS.selectedChipRender,
     selectedValueRender = DEFAULT_PROPS.selectedValueRender,
-}): React.ReactElement => {
+}) => {
     return (
         <>
             {variant === SelectVariant.input && (
@@ -173,8 +173,8 @@ const SelectMultiple: React.FC<any> = ({
     );
 };
 
-const selectMultipleWithContext = (props: any) =>
-    withSelectContext(SelectMultiple, {
+const SelectMultiple = (props: any) =>
+    withSelectContext(SelectMultipleField, {
         ...props,
         className: classNames(
             props.className,
@@ -186,6 +186,6 @@ const selectMultipleWithContext = (props: any) =>
         isEmpty: props.value.length === 0,
     });
 
-selectMultipleWithContext.displayName = COMPONENT_NAME;
+SelectMultiple.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, selectMultipleWithContext as SelectMultiple, SelectMultipleProps, SelectVariant };
+export { CLASSNAME, DEFAULT_PROPS, SelectMultiple, SelectMultipleProps, SelectVariant };
