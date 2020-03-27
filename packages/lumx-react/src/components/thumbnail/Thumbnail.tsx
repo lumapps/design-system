@@ -71,7 +71,7 @@ interface ThumbnailProps extends GenericProps {
     /** The image aspect ratio. */
     aspectRatio?: AspectRatio;
     /** Active cross origin. */
-    enableCrossOrigin?: boolean;
+    isCrossOriginEnabled?: boolean;
     /**
      * Allows images that are loaded from foreign origins
      * to be used as if they had been loaded from the current origin.
@@ -117,7 +117,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: DefaultPropsType = {
     align: Alignment.left,
-    enableCrossOrigin: true,
+    isCrossOriginEnabled: true,
     crossOrigin: CrossOrigin.anonymous,
     aspectRatio: AspectRatio.original,
     fillHeight: false,
@@ -138,7 +138,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',
-    enableCrossOrigin = DEFAULT_PROPS.enableCrossOrigin,
+    isCrossOriginEnabled = DEFAULT_PROPS.isCrossOriginEnabled,
     crossOrigin = DEFAULT_PROPS.crossOrigin,
     debounceTime = DEFAULT_PROPS.debounceTime,
     isFollowingWindowSize = DEFAULT_PROPS.isFollowingWindowSize,
@@ -158,7 +158,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, isFollowingWindowSize!);
 
     const setCrossOrigin = () => {
-        return !isInternetExplorer() && enableCrossOrigin ? crossOrigin : undefined;
+        return !isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined;
     };
 
     return (

@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Added `enableCrossOrigin` prop to `Tumbnail` component
+-   Added `isCrossOriginEnabled` prop to `Tumbnail` component
 -   Added `crossOrigin` prop to `Tumbnail` component
 -   Added `isFollowingWindowSize` prop to `Tumbnail` component
 -   Added `resizeDebounceTime` prop to `Tumbnail` component

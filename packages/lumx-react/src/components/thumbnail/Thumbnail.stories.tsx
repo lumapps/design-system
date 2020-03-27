@@ -20,7 +20,7 @@ export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
         <Thumbnail
             align={select<Alignment>('Alignment', Alignment, Alignment.left, 'Options')}
             aspectRatio={select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Options')}
-            enableCrossOrigin={boolean('Enable CORS', true, 'Options')}
+            isCrossOriginEnabled={boolean('Enable CORS', true, 'Options')}
             crossOrigin={select('CORS', CrossOrigin, CrossOrigin.anonymous, 'Options')}
             fillHeight={boolean('Fill Height', false, 'Options')}
             focusPoint={{
