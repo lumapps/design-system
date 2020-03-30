@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `isCrossOriginEnabled` prop to `ImageBlock` component
+-   Added `crossOrigin` prop to `ImageBlock` component
+-   Added `isFollowingWindowSize` prop to `ImageBlock` component
+-   Added `resizeDebounceTime` prop to `ImageBlock` component
+
 ## [0.21.15][] - 2020-04-01
 
 ### Added
