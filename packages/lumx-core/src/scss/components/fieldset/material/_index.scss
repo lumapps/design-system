@@ -3,9 +3,9 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-fieldset {
-    border: none;
+    margin-top: $lumx-spacing-unit-regular * 5;
 
-    &__legend {
-        // TODO
+    &--with-negative-margin-bottom {
+        margin-bottom: -$lumx-spacing-unit-regular;
     }
 }
