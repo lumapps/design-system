@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { createRef, ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -58,7 +58,11 @@ describe(`<${Link.displayName}>`, () => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        // Nothing to do here.
+        it('should use ref', () => {
+            const linkRef = createRef<HTMLAnchorElement>();
+            const { wrapper } = setup({ linkRef }, false);
+            expect(linkRef.current).toBe(wrapper.getDOMNode());
+        });
     });
 
     // 3. Test events.
