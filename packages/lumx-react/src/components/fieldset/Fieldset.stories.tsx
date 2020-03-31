@@ -1,30 +1,31 @@
 import React from 'react';
 
 import { useBooleanState } from '@lumx/react/hooks';
-import { decorators } from '@lumx/react/story-block';
 import { text } from '@storybook/addon-knobs';
 
 import { Emphasis, Fieldset, List, ListItem, RadioButton, RadioGroup, Select, TextField } from '@lumx/react';
 
+export default { title: 'LumX components/Fieldset' };
+
 const Headline = () => <p className="lumx-typography-headline">Headline</p>;
 const Title = () => <p className="lumx-typography-title">Title</p>;
 const Subtitle2 = () => <p className="lumx-typography-subtitle2">Subtitle2</p>;
-const BasicTextField = ({ theme }) => {
+const BasicTextField = ({ theme }: any) => {
     const [value, setValue] = React.useState('');
     return <TextField label="Textfield label" value={value} theme={theme} onChange={setValue} />;
 };
 
-export const lowEmphasisFieldset = ({ theme }) => (
+export const lowEmphasisFieldset = ({ theme }: any) => (
     <Fieldset emphasis={Emphasis.low} legend={text('Legend', 'Fieldset')} theme={theme} />
 );
-export const mediumEmphasisFieldset = ({ theme }) => (
+export const mediumEmphasisFieldset = ({ theme }: any) => (
     <Fieldset emphasis={Emphasis.medium} legend={text('Legend', 'Fieldset')} theme={theme} />
 );
-export const highEmphasisFieldset = ({ theme }) => (
+export const highEmphasisFieldset = ({ theme }: any) => (
     <Fieldset emphasis={Emphasis.high} legend={text('Legend', 'Fieldset')} theme={theme} />
 );
 
-export const withLowEmphasisFieldset = ({ theme }) => {
+export const withLowEmphasisFieldset = ({ theme }: any) => {
     const legendText = text('Legend', 'Fieldset', 'Content');
 
     return (
@@ -43,7 +44,7 @@ export const withLowEmphasisFieldset = ({ theme }) => {
     );
 };
 
-export const withMediumEmphasisFieldset = ({ theme }) => {
+export const withMediumEmphasisFieldset = ({ theme }: any) => {
     const legendText = text('Legend', 'Fieldset', 'Content');
 
     return (
@@ -61,7 +62,7 @@ export const withMediumEmphasisFieldset = ({ theme }) => {
     );
 };
 
-export const withHighEmphasisFieldset = ({ theme }) => {
+export const withHighEmphasisFieldset = ({ theme }: any) => {
     const legendText = text('Legend', 'Fieldset', 'Content');
 
     return (
@@ -78,7 +79,7 @@ export const withHighEmphasisFieldset = ({ theme }) => {
     );
 };
 
-export const withTextfieldFieldset = ({ theme }) => (
+export const withTextfieldFieldset = ({ theme }: any) => (
     <Fieldset legend={text('Legend', 'Fieldset', 'Content')} theme={theme} hasFirstInputWithElevation>
         <RadioGroup>
             <BasicTextField theme={theme} />
@@ -87,7 +88,7 @@ export const withTextfieldFieldset = ({ theme }) => (
     </Fieldset>
 );
 
-export const withRadioGroupFieldset = ({ theme }) => (
+export const withRadioGroupFieldset = ({ theme }: any) => (
     <Fieldset legend={text('Legend', 'Fieldset', 'Content')} theme={theme}>
         <RadioGroup>
             <RadioButton checked label="Radio button 1" name="test1" theme={theme} value="lorem" />
@@ -96,7 +97,7 @@ export const withRadioGroupFieldset = ({ theme }) => (
     </Fieldset>
 );
 
-export const withSelectFieldset = ({ theme }) => {
+export const withSelectFieldset = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];
     const [values, setValues] = React.useState<string[]>([]);
     // tslint:disable-next-line: no-unused
@@ -106,7 +107,7 @@ export const withSelectFieldset = ({ theme }) => {
         setValues([]);
     };
 
-    const onItemSelectedHandler = (item) => () => {
+    const onItemSelectedHandler = (item: string) => () => {
         if (values.includes(item)) {
             return;
         }
