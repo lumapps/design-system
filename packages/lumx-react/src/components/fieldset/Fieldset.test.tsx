@@ -2,6 +2,7 @@ import { ShallowWrapper, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React from 'react';
 
+import { Emphasis } from '@lumx/react';
 import { CommonSetup } from '@lumx/react/testing/utils';
 import { CLASSNAME, Fieldset, FieldsetProps } from './Fieldset';
 
@@ -88,6 +89,22 @@ describe('<Fieldset />', () => {
 
             expect(fieldset).toHaveClassName(CLASSNAME);
             expect(fieldset).toHaveClassName('my-fieldset');
+        });
+
+        it('should add className if hasFirstInputWithElevation', (): void => {
+            const { legend }: ISetup = setup({
+                hasFirstInputWithElevation: true,
+            });
+
+            expect(legend).toHaveClassName(`${CLASSNAME}--with-negative-margin-bottom`);
+        });
+
+        it('should add className if the emphasis is medium', (): void => {
+            const { legend }: ISetup = setup({
+                emphasis: Emphasis.medium,
+            });
+
+            expect(legend).toHaveClassName(`${CLASSNAME}--emphasis-medium`);
         });
     });
 

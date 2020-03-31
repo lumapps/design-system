@@ -5,7 +5,7 @@ exports[`<Fieldset /> Snapshot should render correctly Chip component 1`] = `
   className="lumx-fieldset"
 >
   <legend
-    className="lumx-fieldset__legend"
+    className="lumx-fieldset__legend lumx-fieldset--emphasis-low"
   >
     I am a legend
   </legend>
