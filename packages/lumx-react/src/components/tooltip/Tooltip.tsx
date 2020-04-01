@@ -160,7 +160,7 @@ const Tooltip: React.FC<TooltipProps> = ({
         () => ({
             display: isVisible ? 'block' : 'none',
             position: 'fixed',
-            transform: `translate3d(${computedPosition.x}px, ${computedPosition.y}px, 0)`,
+            transform: `translate3d(${Math.round(computedPosition.x)}px, ${Math.round(computedPosition.y)}px, 0)`,
         }),
         [isVisible, computedPosition],
     );
