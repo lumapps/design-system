@@ -56,6 +56,11 @@ interface DialogProps extends GenericProps {
     parentElement?: RefObject<HTMLElement>;
 
     /**
+     * Ref of content section of the Dialog.
+     */
+    contentRef?: RefObject<HTMLDivElement>;
+
+    /**
      * Ref of the element that should get the focus when the dialogs opens.
      * By default, the first child will take focus.
      */
@@ -133,6 +138,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
         onOpen,
         onClose,
         parentElement,
+        contentRef,
         preventAutoClose = DEFAULT_PROPS.preventAutoClose,
         size = DEFAULT_PROPS.size,
         zIndex,
@@ -225,7 +231,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
                           </header>
                       )}
 
-                      <div className={`${CLASSNAME}__content`}>
+                      <div ref={contentRef} className={`${CLASSNAME}__content`}>
                           <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`} ref={setSentinelTop} />
 
                           {content}
