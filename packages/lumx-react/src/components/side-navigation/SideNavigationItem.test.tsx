@@ -148,6 +148,16 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
 
             expect(icon).toExist();
         });
+
+        it('should add props to link when provided', () => {
+            const { link } = setup({
+                linkProps: {
+                    href: '/',
+                },
+            });
+
+            expect(link.prop('href')).toEqual('/');
+        });
     });
 
     // 5. Test state => no state

@@ -39,6 +39,9 @@ interface SideNavigationItemProps extends GenericProps {
     /** Whether or not the menu is selected. */
     isSelected?: boolean;
 
+    /** props that will be passed on to the Link */
+    linkProps?: Record<string, string>;
+
     /** On click handler. */
     onClick?(evt: React.MouseEvent): void;
 }
@@ -72,6 +75,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         isOpen = DEFAULT_PROPS.isOpen,
         isSelected = DEFAULT_PROPS.isSelected,
         onClick,
+        linkProps,
         ...otherProps
     } = props;
 
@@ -94,6 +98,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                 tabIndex={0}
                 onClick={onClick}
                 onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}
+                {...(linkProps || {})}
             >
                 {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
                 <span>{label}</span>
