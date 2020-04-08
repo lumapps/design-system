@@ -3,9 +3,12 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-fieldset {
-    margin-top: $lumx-spacing-unit-regular * 5;
+    $self: &;
+    margin-top: $lumx-spacing-unit-huge;
 
     &--with-negative-margin-bottom {
-        margin-bottom: -$lumx-spacing-unit-regular;
+        #{$self}__wrapper {
+            margin-top: 0;
+        }
     }
 }

@@ -10,9 +10,9 @@ export default { title: 'LumX components/Fieldset' };
 const Headline = () => <p className="lumx-typography-headline">Headline</p>;
 const Title = () => <p className="lumx-typography-title">Title</p>;
 const Subtitle2 = () => <p className="lumx-typography-subtitle2">Subtitle2</p>;
-const BasicTextField = ({ theme }: any) => {
+const BasicTextField = ({ theme, ...props }: any) => {
     const [value, setValue] = React.useState('');
-    return <TextField label="Textfield label" value={value} theme={theme} onChange={setValue} />;
+    return <TextField label="Textfield label" value={value} theme={theme} onChange={setValue} {...props} />;
 };
 
 export const lowEmphasisFieldset = ({ theme }: any) => (
@@ -35,7 +35,7 @@ export const withLowEmphasisFieldset = ({ theme }: any) => {
             <Subtitle2 />
             <Fieldset legend={legendText} theme={theme} hasFirstInputWithElevation>
                 <BasicTextField theme={theme} />
-                <BasicTextField theme={theme} />
+                <BasicTextField theme={theme} className="lumx-spacing-margin-top-regular" />
             </Fieldset>
             <Fieldset legend="Fieldset legend" hasFirstInputWithElevation>
                 <BasicTextField theme={theme} />
@@ -53,7 +53,7 @@ export const withMediumEmphasisFieldset = ({ theme }: any) => {
             <Title />
             <Fieldset emphasis={Emphasis.medium} legend={legendText} theme={theme} hasFirstInputWithElevation>
                 <BasicTextField theme={theme} />
-                <BasicTextField theme={theme} />
+                <BasicTextField theme={theme} className="lumx-spacing-margin-top-regular" />
             </Fieldset>
             <Fieldset emphasis={Emphasis.medium} legend="Fieldset legend" hasFirstInputWithElevation>
                 <BasicTextField theme={theme} />
@@ -81,10 +81,20 @@ export const withHighEmphasisFieldset = ({ theme }: any) => {
 
 export const withTextfieldFieldset = ({ theme }: any) => (
     <Fieldset legend={text('Legend', 'Fieldset', 'Content')} theme={theme} hasFirstInputWithElevation>
-        <RadioGroup>
-            <BasicTextField theme={theme} />
-            <BasicTextField theme={theme} />
-        </RadioGroup>
+        <BasicTextField theme={theme} />
+        <BasicTextField theme={theme} />
+    </Fieldset>
+);
+
+export const withTextfieldAndHelperFieldset = ({ theme }: any) => (
+    <Fieldset
+        legend={text('Legend', 'Fieldset', 'Content')}
+        helper="I'm an amazing helper"
+        theme={theme}
+        hasFirstInputWithElevation
+    >
+        <BasicTextField theme={theme} />
+        <BasicTextField theme={theme} />
     </Fieldset>
 );
 

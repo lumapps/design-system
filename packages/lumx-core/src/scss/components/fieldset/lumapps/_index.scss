@@ -6,19 +6,25 @@
     border: none;
     margin-top: $lumx-spacing-unit-huge;
 
-    &__legend {
-        margin-bottom: $lumx-spacing-unit-big;
+    &__wrapper {
+        margin-top: $lumx-spacing-unit-big;
     }
 
     &--emphasis-high {
-        @include lumx-typography('title');
+        legend {
+            @include lumx-typography('title');
+        }
     }
 
     &--emphasis-medium {
-        @include lumx-typography('subtitle2');
+        legend {
+            @include lumx-typography('subtitle2');
+        }
     }
 
     &--emphasis-low {
-        @include lumx-typography('subtitle1');
+        legend {
+            @include lumx-typography('subtitle1');
+        }
     }
 }
