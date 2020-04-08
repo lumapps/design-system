@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes } from 'react';
+import React, { Ref } from 'react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import classNames from 'classnames';
@@ -9,12 +9,15 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 /**
  * Defines the props of the component.
  */
-interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkProps extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> {
     /** The icon color. */
     color?: Color;
 
     /** The icon color variant. */
     colorVariant?: ColorVariant;
+
+    /** Ref to the native HTML anchor element. */
+    linkRef?: Ref<HTMLAnchorElement>;
 }
 
 /**
@@ -32,9 +35,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  * @return The component.
  */
-const Link: React.FC<LinkProps> = ({ children, className, color, colorVariant, ...props }) => {
+const Link: React.FC<LinkProps> = ({ children, className, linkRef, color, colorVariant, ...props }) => {
     return (
-        <a className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))} {...props}>
+        <a
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))}
+            ref={linkRef}
+            {...props}
+        >
             {children}
         </a>
     );
