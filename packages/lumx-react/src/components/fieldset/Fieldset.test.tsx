@@ -10,6 +10,7 @@ interface ISetup extends CommonSetup {
     children: ShallowWrapper;
     fieldset: ShallowWrapper;
     legend: ShallowWrapper;
+    helper: ShallowWrapper;
 }
 
 /**
@@ -29,6 +30,7 @@ const setup = (propOverrides: Partial<FieldsetProps> = {}): ISetup => {
 
     return {
         children: fieldset.find('input'),
+        helper: fieldset.find('InputHelper'),
         fieldset,
         legend: fieldset.find('legend').first(),
         props,
@@ -39,7 +41,7 @@ const setup = (propOverrides: Partial<FieldsetProps> = {}): ISetup => {
 describe('<Fieldset />', () => {
     // 1. Test render via snapshot (default state of component).
     describe('Snapshot', () => {
-        it('should render correctly Chip component', () => {
+        it('should render correctly Fieldset component', () => {
             const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
         });
@@ -92,19 +94,28 @@ describe('<Fieldset />', () => {
         });
 
         it('should add className if hasFirstInputWithElevation', (): void => {
-            const { legend }: ISetup = setup({
+            const { fieldset }: ISetup = setup({
                 hasFirstInputWithElevation: true,
             });
 
-            expect(legend).toHaveClassName(`${CLASSNAME}--with-negative-margin-bottom`);
+            expect(fieldset).toHaveClassName(`${CLASSNAME}--with-negative-margin-bottom`);
         });
 
         it('should add className if the emphasis is medium', (): void => {
-            const { legend }: ISetup = setup({
+            const { fieldset }: ISetup = setup({
                 emphasis: Emphasis.medium,
             });
 
-            expect(legend).toHaveClassName(`${CLASSNAME}--emphasis-medium`);
+            expect(fieldset).toHaveClassName(`${CLASSNAME}--emphasis-medium`);
+        });
+
+        it('should render the helper', (): void => {
+            const text = 'I am the helper';
+            const { helper }: ISetup = setup({
+                helper: text,
+            });
+
+            expect(helper.prop('children')).toEqual(text);
         });
     });
 

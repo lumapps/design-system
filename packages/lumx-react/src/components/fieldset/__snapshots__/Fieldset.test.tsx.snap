@@ -1,17 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Fieldset /> Snapshot should render correctly Chip component 1`] = `
+exports[`<Fieldset /> Snapshot should render correctly Fieldset component 1`] = `
 <fieldset
-  className="lumx-fieldset"
+  className="lumx-fieldset lumx-fieldset--emphasis-low"
 >
-  <legend
-    className="lumx-fieldset__legend lumx-fieldset--emphasis-low"
-  >
+  <legend>
     I am a legend
   </legend>
-  <input
-    name="input"
-    type="text"
-  />
+  <div
+    className="lumx-fieldset__wrapper"
+  >
+    <input
+      name="input"
+      type="text"
+    />
+  </div>
 </fieldset>
 `;
