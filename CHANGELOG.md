@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix padding on `Chip` component if has after or has before
+
 ## [0.21.15][] - 2020-04-01
 
 ### Added
