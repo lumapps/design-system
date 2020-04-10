@@ -40,7 +40,7 @@ interface SideNavigationItemProps extends GenericProps {
     isSelected?: boolean;
 
     /** props that will be passed on to the Link */
-    linkProps?: Record<string, string>;
+    linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
     /** On click handler. */
     onClick?(evt: React.MouseEvent): void;
@@ -94,11 +94,11 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
             {...otherProps}
         >
             <a
+                {...(linkProps || {})}
                 className={`${CLASSNAME}__link`}
                 tabIndex={0}
                 onClick={onClick}
                 onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}
-                {...(linkProps || {})}
             >
                 {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
                 <span>{label}</span>
