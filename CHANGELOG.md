@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added `linkProps` prop to `SideNavigationItem` component
+
 ## [0.21.16][] - 2020-04-10
 
 ### Fixed
