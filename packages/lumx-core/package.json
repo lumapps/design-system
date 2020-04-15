@@ -41,6 +41,7 @@
         "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
         "prepublishOnly": "yarn build"
     },
+    "sideEffects": false,
     "version": "0.21.16",
     "devDependencies": {
         "@babel/core": "^7.8.3",
