@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Added `linkProps` prop to `SideNavigationItem` component
+-   Declared `@lumx/react`, `@lumx/icons` and `@lumx/core` as side-effect free
 
 ## [0.21.16][] - 2020-04-10
 

@@ -20,5 +20,6 @@
         "type": "git",
         "url": "git+https://github.com/lumapps/design-system.git"
     },
+    "sideEffects": false,
     "version": "0.21.16"
 }
