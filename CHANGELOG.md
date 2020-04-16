@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.18][] - 2020-04-16
+
 ## [0.21.17][] - 2020-04-15
 
 ### Added
@@ -445,3 +447,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.16]: https://github.com/lumapps/design-system/tree/v0.21.16
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.17...HEAD
 [0.21.17]: https://github.com/lumapps/design-system/tree/v0.21.17
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.18...HEAD
+[0.21.18]: https://github.com/lumapps/design-system/tree/v0.21.18
