@@ -7,7 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+-   Added `hasIndentedChildren` prop to `CommentBlock` component
+
 ## [0.21.18][] - 2020-04-16
+
+-   Fix `SideNavigationItem` link color
 
 ## [0.21.17][] - 2020-04-15
 

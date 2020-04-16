@@ -24,8 +24,11 @@ interface CommentBlockProps extends GenericProps {
     hasActions?: boolean;
     /* Whether the component has children blocks to display */
     hasChildren?: boolean;
+    /* Whether the component children are indented below parent */
+    hasIndentedChildren?: boolean;
     /* Whether the children blocks are shown*/
     isOpen?: boolean;
+    /* Whether the comment is relevant */
     isRelevant?: boolean;
     /* Username display */
     name: string;
@@ -62,6 +65,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: DefaultPropsType = {
     hasActions: false,
     hasChildren: false,
+    hasIndentedChildren: false,
     isOpen: false,
     isRelevant: false,
     theme: Theme.light,
@@ -79,6 +83,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     date,
     hasActions,
     hasChildren = DEFAULT_PROPS.hasChildren,
+    hasIndentedChildren = DEFAULT_PROPS.hasIndentedChildren,
     isOpen = DEFAULT_PROPS.isOpen,
     isRelevant = DEFAULT_PROPS.isRelevant,
     name,
@@ -99,6 +104,8 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
             className={classNames(
                 handleBasicClasses({
                     hasChildren: hasChildren && isOpen,
+                    hasIndentedChildren: hasChildren && hasIndentedChildren,
+                    hasLinearChildren: hasChildren && !hasIndentedChildren,
                     isRelevant,
                     prefix: CLASSNAME,
                     theme,

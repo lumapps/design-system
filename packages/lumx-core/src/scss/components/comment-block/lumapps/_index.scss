@@ -5,7 +5,29 @@
 .#{$lumx-base-prefix}-comment-block {
     $self: &;
 
-    #{$self}__children & {
+    position: relative;
+
+    &--has-children#{$self}--has-indented-children::before,
+    &--has-children#{$self}--has-indented-children &::before {
+        position: absolute;
+        top: 52px;
+        bottom: 0;
+        left: 16px;
+        width: 4px;
+        content: '';
+    }
+
+    &--has-children#{$self}--has-indented-children#{$self}--theme-light::before,
+    &--has-children#{$self}--has-indented-children#{$self}--theme-light &::before {
+        background-color: lumx-theme-color-variant('dark', 'L5');
+    }
+
+    &--has-children#{$self}--has-indented-children#{$self}--theme-dark::before,
+    &--has-children#{$self}--has-indented-children#{$self}--theme-dark &::before {
+        background-color: lumx-theme-color-variant('light', 'L5');
+    }
+
+    &__children & {
         margin-top: $lumx-spacing-unit * 2;
     }
 
@@ -14,24 +36,24 @@
         display: flex;
         align-items: flex-start;
 
-        #{$self}--has-children &::before {
+        #{$self}--has-linear-children#{$self}--has-children &::before {
             position: absolute;
-            top: 44px;
-            bottom: -8px;
+            top: 52px;
+            bottom: 0;
             left: 16px;
             width: 4px;
             content: '';
         }
 
-        #{$self}--theme-light#{$self}--has-children &::before {
+        #{$self}--has-linear-children#{$self}--has-children#{$self}--theme-light &::before {
             background-color: lumx-theme-color-variant('dark', 'L5');
         }
 
-        #{$self}--theme-dark#{$self}--has-children &::before {
+        #{$self}--has-linear-children#{$self}--has-children#{$self}--theme-dark &::before {
             background-color: lumx-theme-color-variant('light', 'L5');
         }
 
-        #{$self}__children #{$self}:last-child &::before {
+        #{$self}--has-linear-children #{$self}__children #{$self}:last-child &::before {
             display: none;
         }
     }
@@ -129,5 +151,11 @@
 
     &__actions {
         margin-top: $lumx-spacing-unit;
+    }
+
+    &__children {
+        #{$self}--has-indented-children & {
+            margin-left: map-get($lumx-sizes, lumx-base-const('size', 'M')) + $lumx-spacing-unit * 2;
+        }
     }
 }
