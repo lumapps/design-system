@@ -2,26 +2,23 @@
 
 exports[`<Select> Snapshots and structure should render correctly 1`] = `
 <div
-  className="lumx-select lumx-select--is-empty lumx-select--theme-light"
+  className="lumx-select lumx-select--has-unique lumx-select lumx-select--is-empty lumx-select--theme-light"
 >
-  <div
-    className="lumx-select__wrapper"
-    id="uuid"
-    onKeyDown={[Function]}
-    tabIndex={0}
-  >
-    <div
-      className="lumx-select__chips"
-    />
-    <div
-      className="lumx-select__input-indicator"
-    >
-      <Icon
-        icon="M7,10L12,15L17,10H7Z"
-        size="s"
-      />
-    </div>
-  </div>
+  <SelectField
+    anchorRef={
+      Object {
+        "current": null,
+      }
+    }
+    handleKeyboardNav={[Function]}
+    hasError={false}
+    isEmpty={true}
+    isValid={false}
+    targetUuid="uuid"
+    theme="light"
+    value=""
+    variant="input"
+  />
   <Dropdown
     anchorRef={
       Object {

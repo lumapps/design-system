@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
+<div
+  className="lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"
+>
+  <SelectMultipleField
+    anchorRef={
+      Object {
+        "current": null,
+      }
+    }
+    handleKeyboardNav={[Function]}
+    hasError={false}
+    isEmpty={true}
+    isValid={false}
+    targetUuid="uuid"
+    theme="light"
+    value={Array []}
+    variant="chip"
+  />
+  <Dropdown
+    anchorRef={
+      Object {
+        "current": null,
+      }
+    }
+    closeOnClick={true}
+    closeOnEscape={true}
+    onClose={[Function]}
+    placement="auto-start"
+    showDropdown={false}
+  >
+    <span>
+      Select Component
+    </span>
+  </Dropdown>
+</div>
+`;
+
+exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
+<div
+  className="lumx-select lumx-select--has-multiple lumx-select lumx-select--is-empty lumx-select--theme-light"
+>
+  <SelectMultipleField
+    anchorRef={
+      Object {
+        "current": null,
+      }
+    }
+    handleKeyboardNav={[Function]}
+    hasError={false}
+    isEmpty={true}
+    isValid={false}
+    targetUuid="uuid"
+    theme="light"
+    value={Array []}
+    variant="input"
+  />
+  <Dropdown
+    anchorRef={
+      Object {
+        "current": null,
+      }
+    }
+    closeOnClick={true}
+    closeOnEscape={true}
+    onClose={[Function]}
+    placement="auto-start"
+    showDropdown={false}
+  >
+    <span>
+      Select Component
+    </span>
+  </Dropdown>
+</div>
+`;

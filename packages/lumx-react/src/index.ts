@@ -84,6 +84,8 @@ export { RadioGroup, RadioGroupProps } from './components/radio-button/RadioGrou
 
 export { Select, SelectProps, SelectVariant } from './components/select/Select';
 
+export { SelectMultiple, SelectMultipleProps } from './components/select/SelectMultiple';
+
 export { Slideshow, SlideshowProps } from './components/slideshow/Slideshow';
 
 export { SlideshowItem } from './components/slideshow/SlideshowItem';

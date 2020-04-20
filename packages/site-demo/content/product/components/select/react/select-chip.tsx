@@ -10,25 +10,26 @@ const App = ({ theme }: any) => {
 
     // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
-    const [values, setValues] = React.useState<string[]>([]);
+    const [value, setValue] = React.useState<string>('');
 
-    const clearSelected = (event: { stopPropagation(): void }, value: any) => {
+    const clearSelected = (event: { stopPropagation(): void }) => {
         event?.stopPropagation();
-        setValues(value ? values.filter((val) => val !== value) : []);
+        setValue('');
     };
 
     const selectItem = (item: any) => {
-        if (values.includes(item)) {
-            return;
+        if (value === item) {
+            setValue('');
+        } else {
+            setValue(item);
         }
         closeSelect();
-        setValues([item]);
     };
     const onItemSelected = (choice: any) => () => selectItem(choice);
     return (
         <Select
             isOpen={isOpen}
-            value={values}
+            value={value}
             label={LABEL}
             placeholder={PLACEHOLDER}
             theme={theme}
@@ -41,7 +42,7 @@ const App = ({ theme }: any) => {
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
-                              isSelected={values.includes(choice)}
+                              isSelected={value === choice}
                               key={index}
                               onItemSelected={onItemSelected(choice)}
                               size={Size.tiny}

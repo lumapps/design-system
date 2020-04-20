@@ -164,7 +164,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         label="Select label"
         onDropdownClose={[Function]}
         onInputClick={[Function]}
-        value={Array []}
+        value=""
       >
         <List
           isClickable={true}

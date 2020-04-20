@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 
-import { List, ListItem, Select, Size } from '@lumx/react';
+import { List, ListItem, SelectMultiple, Size } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }: any) => {
@@ -26,14 +26,13 @@ const App = ({ theme }: any) => {
     };
 
     return (
-        <Select
+        <SelectMultiple
             style={{ width: '100%' }}
             value={values}
             isOpen={isOpen}
             onDropdownClose={closeSelect}
             onInputClick={toggleSelect}
             label={LABEL}
-            isMultiple={true}
             placeholder={PLACEHOLDER}
             theme={theme}
             onClear={clearSelected}
@@ -56,7 +55,7 @@ const App = ({ theme }: any) => {
                           </ListItem>,
                       ]}
             </List>
-        </Select>
+        </SelectMultiple>
     );
 };
 

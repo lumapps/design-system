@@ -3,29 +3,28 @@ import React, { ReactElement, RefObject } from 'react';
 import { ReactWrapper, ShallowWrapper, mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
+import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 import { Kind, Theme } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
+import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { Icon } from '@lumx/react/components/icon/Icon';
 
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
-import { mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
-import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
-import { CLASSNAME, Select, SelectProps, SelectVariant } from './Select';
+import { CLASSNAME, SelectMultiple, SelectMultipleProps } from './SelectMultiple';
 import { DEFAULT_PROPS } from './WithSelectContext';
+import { SelectVariant } from './constants';
 
 /** Define the overriding properties waited by the `setup` function. */
-type SetupProps = Partial<SelectProps>;
+type SetupProps = Partial<SelectMultipleProps>;
 
 /** Defines what the `setup` function will return. */
 interface Setup extends CommonSetup {
     props: SetupProps;
 
-    /**
-     * [Enter the description of this wrapper].
-     * [You should also probably change the name of the wrapper to something more meaningful].
-     */
+    /** The <div> element that wraps multiSelect button and children elements. */
+    wrapper: Wrapper;
     input: Wrapper;
     dropdown: Wrapper;
     helper: Wrapper;
@@ -40,15 +39,15 @@ interface Setup extends CommonSetup {
  * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with the props, the component wrapper and some shortcut to some element inside of the component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
-    const props: SelectProps = {
+const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+    const setupProps: SelectMultipleProps = {
         children: <span>Select Component</span>,
-        value: '',
-        ...propsOverrides,
+        value: [],
+        ...props,
     };
 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: ShallowWrapper | ReactWrapper = renderer(<Select {...props} />);
+    const wrapper = renderer(<SelectMultiple {...setupProps} />);
 
     return {
         container: wrapper.find('div').first(),
@@ -67,19 +66,24 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
     };
 };
 
-describe(`<${Select.displayName}>`, () => {
+describe(`<SelectMultiple>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
-        it('should render correctly', () => {
-            const { container, wrapper } = setup();
+        it('should render defaults', () => {
+            const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
+            expect(wrapper).toExist();
+            expect(wrapper).toHaveClassName(CLASSNAME);
+        });
 
-            expect(container).toExist();
-            expect(container).toHaveClassName(CLASSNAME);
+        it('should render chips', () => {
+            const { wrapper } = setup({
+                variant: SelectVariant.chip,
+            });
+            expect(wrapper).toMatchSnapshot();
         });
     });
 
-    // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
         it('should have default classNames', () => {
             const { wrapper, container }: Setup = setup();
@@ -155,14 +159,10 @@ describe(`<${Select.displayName}>`, () => {
         });
 
         it('should use the given `value`', () => {
-            const testedProp = 'value';
-            const modifiedProps: SetupProps = {
-                [testedProp]: 'val1',
-            };
+            const { container } = setup({
+                value: [''],
+            });
 
-            const { container } = setup(modifiedProps);
-
-            expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasUnique', value: true }));
             expect(container).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'hasValue', value: true }));
             expect(container).not.toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'isEmpty', value: true }));
         });
@@ -231,15 +231,44 @@ describe(`<${Select.displayName}>`, () => {
             });
         });
 
-        it('should call onClear when clear icon is clicked in select input', () => {
-            const value = 'Value';
+        it('should call onClear when an item is clicked with the correct value', () => {
             const onClear: jest.Mock = jest.fn();
-            const { input } = setup({ value, onClear }, false);
+            const { input } = setup(
+                {
+                    onClear,
+                    value: ['val 1', 'val 2'],
+                    variant: SelectVariant.input,
+                },
+                false,
+            );
 
             input
-                .find(`.${CLASSNAME}__input-clear`)
+                .find('Chip')
                 .first()
                 .simulate('click');
+
+            expect(onClear).toHaveBeenCalled();
+        });
+
+        it('should call onClear when a chip is clicked with the correct value', () => {
+            const value1 = 'Value 1';
+            const value2 = 'Value 2';
+
+            const onClear: jest.Mock = jest.fn();
+            const { input } = setup(
+                {
+                    onClear,
+                    value: [value1, value2],
+                    variant: SelectVariant.chip,
+                },
+                false,
+            );
+
+            (input
+                .find('Chip')
+                .first()
+                .props() as any).onAfterClick();
+
             expect(onClear).toHaveBeenCalled();
         });
     });
@@ -255,22 +284,40 @@ describe(`<${Select.displayName}>`, () => {
                 expect(input.html()).toEqual(dropdownRef && dropdownRef.current && dropdownRef.current.outerHTML);
             });
 
-            describe('Has value', () => {
-                const value = 'Value';
-                const hasValueProps: Partial<SetupProps> = {
-                    value,
+            describe('Has multiple values', () => {
+                const value1 = 'Value1';
+                const value2 = 'Value2';
+                const value3 = 'Value3';
+                const hasMultipleValues: Partial<SetupProps> = {
+                    value: [value1, value2, value3],
                     variant: SelectVariant.input,
                 };
 
-                it('should render the value selected if not multiple ', () => {
-                    const { input } = setup({ ...hasValueProps }, false);
+                it('should render the values selected in Chips if multiple ', () => {
+                    const { input, props } = setup({ ...hasMultipleValues }, false);
 
+                    expect(input.find(Chip).length).toBe(props.value!.length);
                     expect(
                         input
-                            .find(`.${CLASSNAME}__input-native span`)
-                            .first()
+                            .find(Chip)
+                            .at(0)
+                            .children()
                             .text(),
-                    ).toBe(value);
+                    ).toBe(props.value![0]);
+                    expect(
+                        input
+                            .find(Chip)
+                            .at(1)
+                            .children()
+                            .text(),
+                    ).toBe(props.value![1]);
+                    expect(
+                        input
+                            .find(Chip)
+                            .at(2)
+                            .children()
+                            .text(),
+                    ).toBe(props.value![2]);
                 });
             });
 
@@ -278,7 +325,7 @@ describe(`<${Select.displayName}>`, () => {
                 const placeholder = 'My placeholder';
                 const hasNoValueProps: Partial<SetupProps> = {
                     placeholder,
-                    value: '',
+                    value: [],
                     variant: SelectVariant.input,
                 };
 
@@ -306,7 +353,7 @@ describe(`<${Select.displayName}>`, () => {
             describe('Has value', () => {
                 const value = 'Value';
                 const hasValueProps: Partial<SetupProps> = {
-                    value,
+                    value: [value],
                     variant: SelectVariant.chip,
                 };
 
@@ -335,9 +382,26 @@ describe(`<${Select.displayName}>`, () => {
                 });
             });
 
+            describe('Has multiple values', () => {
+                const value = ['v1', 'v2', 'v3'];
+
+                it('should render the value and additional text if multiple values', () => {
+                    const { input } = setup(
+                        {
+                            label: 'The label',
+                            value,
+                            variant: SelectVariant.chip,
+                        },
+                        false,
+                    );
+
+                    expect(input.find('.lumx-chip__label').text()).toEqual(`${value[0]}\u00A0+${value.length - 1}`);
+                });
+            });
+
             describe('No value', () => {
                 const hasNoValue: Partial<SetupProps> = {
-                    value: '',
+                    value: [],
                     variant: SelectVariant.chip,
                 };
 
@@ -360,11 +424,6 @@ describe(`<${Select.displayName}>`, () => {
                 });
             });
         });
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.

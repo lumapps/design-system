@@ -1,13 +1,12 @@
-import React, { RefObject } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
-import lodashIsEmpty from 'lodash/isEmpty';
 
-import { mdiAlertCircle, mdiCheckCircle, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
+import { mdiAlertCircle, mdiCheckCircle, mdiClose, mdiCloseCircle, mdiMenuDown } from '@lumx/icons';
 
-import { Emphasis, Size } from '@lumx/react/components';
-import { IconButton } from '@lumx/react/components/button/IconButton';
+import { Size } from '@lumx/react/components';
 import { Chip } from '@lumx/react/components/chip/Chip';
+import { ChipGroup } from '@lumx/react/components/chip/ChipGroup';
 import { Icon } from '@lumx/react/components/icon/Icon';
 import { InputLabel } from '@lumx/react/components/input-label/InputLabel';
 
@@ -19,13 +18,22 @@ import { withSelectContext } from './WithSelectContext';
 import { CoreSelectProps, SelectVariant } from './constants';
 
 /** Defines the props of the component. */
-interface SelectProps extends CoreSelectProps {
-    /** The selected value. */
-    value: string;
+interface SelectMultipleProps extends CoreSelectProps {
+    /** The list of selected values. */
+    value: string[];
+
+    /** The function called to render a selected value when `isMultiple` is true. Default: Renders the value inside of a Chip */
+    selectedChipRender?(
+        choice: string,
+        index: number,
+        onClear?: (event: SyntheticEvent, choice: string) => void,
+        isDisabled?: boolean,
+        theme?: any,
+    ): ReactNode | string;
 }
 
 /** Define the types of the default props. */
-interface DefaultPropsType extends Partial<SelectProps> {}
+interface DefaultPropsType extends Partial<SelectMultipleProps> {}
 
 /** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
@@ -38,17 +46,31 @@ const DEFAULT_PROPS: DefaultPropsType = {
     hasError: false,
     isOpen: false,
     isValid: false,
+    selectedChipRender(choice, index, onClear, isDisabled?, theme?) {
+        const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
+        return (
+            <Chip
+                key={index}
+                after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
+                isDisabled={isDisabled}
+                size={Size.s}
+                onAfterClick={onClick}
+                onClick={onClick}
+                theme={theme}
+            >
+                {choice}
+            </Chip>
+        );
+    },
     selectedValueRender: (choice) => choice,
 };
 
-const stopPropagation = (evt: Event) => evt.stopPropagation();
-
 /**
- * Select component.
+ * Select Multiple component.
  *
  * @return The component.
  */
-const SelectField: React.FC<SelectProps> = ({
+const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     variant,
     label,
     value,
@@ -63,7 +85,8 @@ const SelectField: React.FC<SelectProps> = ({
     targetUuid,
     anchorRef,
     isRequired,
-    hasInputClear,
+    isDisabled,
+    selectedChipRender = DEFAULT_PROPS.selectedChipRender,
     selectedValueRender = DEFAULT_PROPS.selectedValueRender,
 }) => {
     return (
@@ -91,6 +114,16 @@ const SelectField: React.FC<SelectProps> = ({
                         onKeyDown={handleKeyboardNav}
                         tabIndex={0}
                     >
+                        <div className={`${CLASSNAME}__chips`}>
+                            {!isEmpty && (
+                                <ChipGroup theme={theme}>
+                                    {value.map((val: string, index: number) =>
+                                        selectedChipRender!(val, index, onClear, isDisabled, theme),
+                                    )}
+                                </ChipGroup>
+                            )}
+                        </div>
+
                         {isEmpty && placeholder && (
                             <div
                                 className={classNames([
@@ -102,28 +135,10 @@ const SelectField: React.FC<SelectProps> = ({
                             </div>
                         )}
 
-                        {!isEmpty && (
-                            <div className={`${CLASSNAME}__input-native`}>
-                                <span>{selectedValueRender!(value)}</span>
-                            </div>
-                        )}
-
                         {(isValid || hasError) && (
                             <div className={`${CLASSNAME}__input-validity`}>
                                 <Icon icon={isValid ? mdiCheckCircle : mdiAlertCircle} size={Size.xxs} />
                             </div>
-                        )}
-
-                        {hasInputClear && (
-                            <IconButton
-                                className={`${CLASSNAME}__input-clear`}
-                                icon={mdiCloseCircle}
-                                emphasis={Emphasis.low}
-                                size={Size.s}
-                                theme={theme}
-                                onClick={onClear}
-                                onKeyDown={stopPropagation}
-                            />
                         )}
 
                         <div className={`${CLASSNAME}__input-indicator`}>
@@ -145,32 +160,32 @@ const SelectField: React.FC<SelectProps> = ({
                 >
                     {isEmpty && <span>{label}</span>}
 
-                    {!isEmpty && <span>{selectedValueRender!(value)}</span>}
+                    {!isEmpty && (
+                        <span>
+                            <span>{selectedValueRender!(value[0])}</span>
+
+                            {value.length > 1 && <span>&nbsp;+{value.length - 1}</span>}
+                        </span>
+                    )}
                 </Chip>
             )}
         </>
     );
 };
 
-const Select = (props: SelectProps) => {
-    const isEmpty = lodashIsEmpty(props.value);
-    const hasInputClear = props.onClear && !isEmpty;
-
-    return withSelectContext(SelectField, {
+const SelectMultiple = (props: any) =>
+    withSelectContext(SelectMultipleField, {
         ...props,
         className: classNames(
             props.className,
             handleBasicClasses({
-                hasInputClear,
-                hasUnique: !props.isEmpty,
+                hasMultiple: !props.isEmpty,
                 prefix: CLASSNAME,
             }),
         ),
-        hasInputClear,
-        isEmpty,
+        isEmpty: props.value.length === 0,
     });
-};
 
-Select.displayName = COMPONENT_NAME;
+SelectMultiple.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant };
+export { CLASSNAME, DEFAULT_PROPS, SelectMultiple, SelectMultipleProps, SelectVariant };

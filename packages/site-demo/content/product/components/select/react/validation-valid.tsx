@@ -8,21 +8,22 @@ const App = ({ theme }: any) => {
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    const [values, setValues] = React.useState<string[]>([]);
+    const [value, setValue] = React.useState<string>('');
     // tslint:disable-next-line:no-unused
     const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
 
-    const clearSelected = (event: SyntheticEvent, value?: string) => {
+    const clearSelected = (event: SyntheticEvent) => {
         event?.stopPropagation();
-        setValues(value ? values.filter((val) => val !== value) : []);
+        setValue('');
     };
 
     const selectItem = (item: string) => () => {
-        if (values.includes(item)) {
-            return;
+        if (value === item) {
+            setValue('');
+        } else {
+            setValue(item);
         }
         closeSelect();
-        setValues([item]);
     };
 
     return (
@@ -30,7 +31,7 @@ const App = ({ theme }: any) => {
             style={{ width: '100%' }}
             isOpen={isOpen}
             isValid={true}
-            value={values}
+            value={value}
             onClear={clearSelected}
             label={LABEL}
             placeholder={PLACEHOLDER}
@@ -42,7 +43,7 @@ const App = ({ theme }: any) => {
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
-                              isSelected={values.includes(choice)}
+                              isSelected={value === choice}
                               key={index}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
