@@ -10,7 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface WebBookmarkProps extends GenericProps {
+interface LinkPreviewProps extends GenericProps {
     /** The url of the link. */
     url: string;
     /** Content text. Can be either a string, or sanitized html. */
@@ -32,12 +32,12 @@ interface WebBookmarkProps extends GenericProps {
 /**
  * Define the types of the default props.
  */
-interface DefaultPropsType extends Partial<WebBookmarkProps> {}
+interface DefaultPropsType extends Partial<LinkPreviewProps> {}
 
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}WebBookmark`;
+const COMPONENT_NAME = `${COMPONENT_PREFIX}LinkPreview`;
 
 /**
  * The default class name and classes prefix for this component.
@@ -53,11 +53,11 @@ const DEFAULT_PROPS: DefaultPropsType = {
 };
 
 /**
- * WebBookmark Element that display a Lumapps post
+ * LinkPreview Element that display a Lumapps post
  *
  * @return The component.
  */
-const WebBookmark: React.FC<WebBookmarkProps> = ({
+const LinkPreview: React.FC<LinkPreviewProps> = ({
     className,
     title,
     description,
@@ -69,32 +69,44 @@ const WebBookmark: React.FC<WebBookmarkProps> = ({
     const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
 
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, size, theme }))}>
+        <div
+            className={classNames(
+                className,
+                handleBasicClasses({
+                    prefix: CLASSNAME,
+                    size: size === Size.big && thumbnail ? Size.big : Size.regular,
+                    theme,
+                }),
+            )}
+        >
             <div className={`${CLASSNAME}__wrapper`}>
-                <div className={`${CLASSNAME}__thumbnail`}>
-                    <Thumbnail
-                        onClick={goToUrl}
-                        role="link"
-                        tabIndex={0}
-                        image={thumbnail}
-                        aspectRatio={AspectRatio.free}
-                        fillHeight
-                    />
-                </div>
+                {thumbnail && (
+                    <div className={`${CLASSNAME}__thumbnail`}>
+                        <Thumbnail
+                            onClick={goToUrl}
+                            role="link"
+                            tabIndex={0}
+                            image={thumbnail}
+                            aspectRatio={AspectRatio.free}
+                            fillHeight
+                        />
+                    </div>
+                )}
 
                 <div className={`${CLASSNAME}__container`}>
-                    <div className={`${CLASSNAME}__title`}>
-                        <Link
-                            target="_blank"
-                            href={url}
-                            color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
-                            colorVariant={ColorVariant.N}
-                        >
-                            {title}
-                        </Link>
-                    </div>
-
-                    <p className={`${CLASSNAME}__description`}>{description}</p>
+                    {title && (
+                        <div className={`${CLASSNAME}__title`}>
+                            <Link
+                                target="_blank"
+                                href={url}
+                                color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
+                                colorVariant={ColorVariant.N}
+                            >
+                                {title}
+                            </Link>
+                        </div>
+                    )}
+                    {description && <p className={`${CLASSNAME}__description`}>{description}</p>}
 
                     <div className={`${CLASSNAME}__link`}>
                         <Link
@@ -113,6 +125,6 @@ const WebBookmark: React.FC<WebBookmarkProps> = ({
     );
 };
 
-WebBookmark.displayName = COMPONENT_NAME;
+LinkPreview.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, WebBookmark, WebBookmarkProps };
+export { CLASSNAME, DEFAULT_PROPS, LinkPreview, LinkPreviewProps };
