@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LinkPreview> Snapshots and structure should render correctly 1`] = `
+<div
+  className="lumx-link-preview lumx-link-preview--size-regular lumx-link-preview--theme-light"
+>
+  <div
+    className="lumx-link-preview__wrapper"
+  >
+    <div
+      className="lumx-link-preview__container"
+    >
+      <div
+        className="lumx-link-preview__link"
+      >
+        <Link
+          className="lumx-link-preview__link"
+          color="blue"
+          colorVariant="N"
+          target="_blank"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<LinkPreview> Snapshots and structure should render correctly 2`] = `
+<div
+  className="lumx-link-preview lumx-link-preview--size-regular lumx-link-preview--theme-light"
+>
+  <div
+    className="lumx-link-preview__wrapper"
+  >
+    <div
+      className="lumx-link-preview__container"
+    >
+      <div
+        className="lumx-link-preview__link"
+      >
+        <Link
+          className="lumx-link-preview__link"
+          color="blue"
+          colorVariant="N"
+          target="_blank"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
