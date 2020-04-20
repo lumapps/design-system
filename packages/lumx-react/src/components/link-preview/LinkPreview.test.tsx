@@ -83,7 +83,7 @@ describe(`<${LinkPreview.displayName}>`, () => {
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
                 );
             });
-            expect(thumbnail).toHaveProp('image', '');
+            expect(thumbnail).not.toExist();
         });
 
         it('should pass className prop to the wrapper', () => {
@@ -110,7 +110,7 @@ describe(`<${LinkPreview.displayName}>`, () => {
     // 3. Test events.
     describe('Events', () => {
         const expectedUrl = 'https://expected.url';
-        const { thumbnail } = setup({ url: expectedUrl });
+        const { thumbnail } = setup({ url: expectedUrl, thumbnail: 'https://expected.url/image.png' });
         window.open = jest.fn();
 
         thumbnail.simulate('click');
