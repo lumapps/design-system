@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.22.0][] - 2020-04-21
+
 ### Changed
 
 -   _[BREAKING]_ The component `WebBookmark` has been renamed `LinkPreview`.
@@ -467,3 +469,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.18]: https://github.com/lumapps/design-system/tree/v0.21.18
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.19...HEAD
 [0.21.19]: https://github.com/lumapps/design-system/tree/v0.21.19
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.22.0...HEAD
+[0.22.0]: https://github.com/lumapps/design-system/tree/v0.22.0
