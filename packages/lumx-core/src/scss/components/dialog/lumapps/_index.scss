@@ -34,17 +34,28 @@
         background-color: lumx-theme-color-variant('dark', 'L1');
     }
 
-    &__wrapper {
-        @include lumx-elevation(5);
-
+    &__container {
         position: absolute;
         z-index: 2;
         display: flex;
         flex-direction: column;
         animation: lumx-dialog-show $lumx-dialog-transition-duration;
-        background-color: #fff;
-        border-radius: $lumx-theme-border-radius;
         transform: translateY(0);
+    }
+
+    &__wrapper {
+        @include lumx-elevation(5);
+
+        position: relative;
+        display: flex;
+        max-height: 100%;
+        flex-direction: column;
+        background-color: lumx-theme-color-variant('light', 'N');
+        border-radius: $lumx-theme-border-radius;
+
+        #{$self}--size-huge & {
+            height: 100%;
+        }
     }
 
     &__header,
@@ -78,22 +89,7 @@
         align-items: center;
         justify-content: center;
         background-color: lumx-theme-color-variant('light', 'L2');
-    }
-
-    &__sentinel {
-        &--wrapper {
-            position: absolute;
-            right: 0;
-            left: 0;
-
-            @include mq($until: desktop) {
-                bottom: -$lumx-dialog-offset-portable - 1;
-            }
-
-            @include mq($from: desktop) {
-                bottom: -$lumx-dialog-offset-desktop - 1;
-            }
-        }
+        border-radius: $lumx-theme-border-radius;
     }
 }
 
@@ -123,38 +119,25 @@
    ========================================================================== */
 
 @each $key, $size in $lumx-dialog-sizes {
-    .#{$lumx-base-prefix}-dialog--size-#{$key} .#{$lumx-base-prefix}-dialog__wrapper {
+    .#{$lumx-base-prefix}-dialog--size-#{$key} .#{$lumx-base-prefix}-dialog__container {
         @include mq($until: desktop) {
             top: $lumx-dialog-offset-portable;
             right: $lumx-dialog-offset-portable;
             left: $lumx-dialog-offset-portable;
+            height: calc(100% - 48px);
         }
 
         @include mq($from: desktop) {
             top: $lumx-dialog-offset-desktop;
             left: 50%;
             width: $size;
+            height: calc(100% - 96px);
             margin-left: $size / -2;
-
-            .#{$lumx-base-prefix}-dialog--has-scroll & {
-                bottom: $lumx-dialog-offset-desktop;
-            }
-        }
-    }
-
-    .#{$lumx-base-prefix}-dialog--size-#{$key}.#{$lumx-base-prefix}-dialog--has-scroll
-    .#{$lumx-base-prefix}-dialog__wrapper {
-        @include mq($until: desktop) {
-            bottom: $lumx-dialog-offset-portable;
-        }
-
-        @include mq($from: desktop) {
-            bottom: $lumx-dialog-offset-desktop;
         }
     }
 }
 
-.#{$lumx-base-prefix}-dialog--size-huge .#{$lumx-base-prefix}-dialog__wrapper {
+.#{$lumx-base-prefix}-dialog--size-huge .#{$lumx-base-prefix}-dialog__container {
     @include mq($until: desktop) {
         top: $lumx-dialog-offset-portable;
         right: $lumx-dialog-offset-portable;

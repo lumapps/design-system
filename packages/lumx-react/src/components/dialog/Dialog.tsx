@@ -9,6 +9,7 @@ import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
+import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { useIntersectionObserver } from '@lumx/react/hooks/useIntersectionObserver';
@@ -146,7 +147,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
 
     useCallbackOnEscape(onClose, isOpen && !preventAutoClose);
 
-    const wrapperRef = useRef<HTMLElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
     // Focus the parent element on close.
     useFocus(parentElement?.current, !Boolean(isOpen));
@@ -156,24 +157,12 @@ const Dialog: React.FC<DialogProps> = (props) => {
 
     const [sentinelTop, setSentinelTop] = useState<Element | null>(null);
     const [sentinelBottom, setSentinelBottom] = useState<Element | null>(null);
-    const [sentinelWrapper, setSentinelWrapper] = useState<Element | null>(null);
-    const intersections = useIntersectionObserver([sentinelTop, sentinelBottom, sentinelWrapper], {
+    const intersections = useIntersectionObserver([sentinelTop, sentinelBottom], {
         threshold: [0, 1],
     });
 
     const hasTopIntersection = !(intersections.get(sentinelTop!)?.isIntersecting ?? true);
     const hasBottomIntersection = !(intersections.get(sentinelBottom!)?.isIntersecting ?? true);
-    const intersectsWrapper = !(intersections.get(sentinelWrapper!)?.isIntersecting ?? true);
-
-    const [hasScroll, setHasScroll] = useState(intersectsWrapper);
-    useEffect(() => {
-        if (intersectsWrapper) {
-            setHasScroll(true);
-        }
-        if (hasScroll && !hasTopIntersection && !hasBottomIntersection) {
-            setHasScroll(false);
-        }
-    }, [intersectsWrapper, hasBottomIntersection, hasTopIntersection]);
 
     // Separate header, footer and dialog content from children.
     const [[headerChild], [footerChild], content] = useMemo(
@@ -185,11 +174,18 @@ const Dialog: React.FC<DialogProps> = (props) => {
     const footerChildProps = (footerChild as ReactElement)?.props;
     const footerChildContent = footerChildProps?.children;
 
-    const onClickOverlay = () => {
-        if (!preventAutoClose) {
+    useClickAway(
+        wrapperRef,
+        () => {
+            if (preventAutoClose) {
+                return;
+            }
+
             onClose?.();
-        }
-    };
+        },
+        [],
+    );
+
     useEffect(() => {
         if (isOpen) {
             onOpen?.();
@@ -204,7 +200,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
                   className={classNames(
                       className,
                       handleBasicClasses({
-                          hasScroll,
                           isHidden: !isOpen,
                           isLoading,
                           isShown: isOpen || isVisible,
@@ -214,58 +209,59 @@ const Dialog: React.FC<DialogProps> = (props) => {
                   )}
                   style={{ zIndex }}
               >
-                  <div className={`${CLASSNAME}__overlay`} onClick={onClickOverlay} />
+                  <div className={`${CLASSNAME}__overlay`} />
 
-                  <section ref={wrapperRef} className={`${CLASSNAME}__wrapper`} role="dialog">
-                      {(header || headerChildContent) && (
-                          <header
-                              {...headerChildProps}
-                              className={classNames(
-                                  `${CLASSNAME}__header`,
-                                  (forceHeaderDivider || hasTopIntersection) && `${CLASSNAME}__header--has-divider`,
-                                  headerChildProps?.className,
-                              )}
-                          >
-                              {header}
-                              {headerChildContent}
-                          </header>
-                      )}
+                  <section className={`${CLASSNAME}__container`} role="dialog">
+                      <div className={`${CLASSNAME}__wrapper`} ref={wrapperRef}>
+                          {(header || headerChildContent) && (
+                              <header
+                                  {...headerChildProps}
+                                  className={classNames(
+                                      `${CLASSNAME}__header`,
+                                      (forceHeaderDivider || hasTopIntersection) && `${CLASSNAME}__header--has-divider`,
+                                      headerChildProps?.className,
+                                  )}
+                              >
+                                  {header}
+                                  {headerChildContent}
+                              </header>
+                          )}
 
-                      <div ref={contentRef} className={`${CLASSNAME}__content`}>
-                          <div className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`} ref={setSentinelTop} />
+                          <div ref={contentRef} className={`${CLASSNAME}__content`}>
+                              <div
+                                  className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--top`}
+                                  ref={setSentinelTop}
+                              />
 
-                          {content}
+                              {content}
 
-                          <div
-                              className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
-                              ref={setSentinelBottom}
-                          />
-                      </div>
-
-                      {(footer || footerChildContent) && (
-                          <footer
-                              {...footerChildProps}
-                              className={classNames(
-                                  `${CLASSNAME}__footer`,
-                                  (forceFooterDivider || hasBottomIntersection) && `${CLASSNAME}__footer--has-divider`,
-                                  footerChildProps?.className,
-                              )}
-                          >
-                              {footer}
-                              {footerChildContent}
-                          </footer>
-                      )}
-
-                      {isLoading && (
-                          <div className={`${CLASSNAME}__progress-overlay`}>
-                              <Progress variant={ProgressVariant.circular} />
+                              <div
+                                  className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--bottom`}
+                                  ref={setSentinelBottom}
+                              />
                           </div>
-                      )}
 
-                      <div
-                          className={`${CLASSNAME}__sentinel ${CLASSNAME}__sentinel--wrapper`}
-                          ref={setSentinelWrapper}
-                      />
+                          {(footer || footerChildContent) && (
+                              <footer
+                                  {...footerChildProps}
+                                  className={classNames(
+                                      `${CLASSNAME}__footer`,
+                                      (forceFooterDivider || hasBottomIntersection) &&
+                                          `${CLASSNAME}__footer--has-divider`,
+                                      footerChildProps?.className,
+                                  )}
+                              >
+                                  {footer}
+                                  {footerChildContent}
+                              </footer>
+                          )}
+
+                          {isLoading && (
+                              <div className={`${CLASSNAME}__progress-overlay`}>
+                                  <Progress variant={ProgressVariant.circular} />
+                              </div>
+                          )}
+                      </div>
                   </section>
               </div>,
               document.body,
