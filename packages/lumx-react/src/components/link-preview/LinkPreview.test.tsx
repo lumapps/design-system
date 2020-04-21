@@ -7,12 +7,12 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Size, Theme } from '..';
-import { CLASSNAME, DEFAULT_PROPS, WebBookmark, WebBookmarkProps } from './WebBookmark';
+import { CLASSNAME, DEFAULT_PROPS, LinkPreview, LinkPreviewProps } from './LinkPreview';
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type SetupProps = Partial<WebBookmarkProps>;
+type SetupProps = Partial<LinkPreviewProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -41,7 +41,7 @@ const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup 
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     // @ts-ignore
-    const wrapper: Wrapper = renderer(<WebBookmark {...props} />);
+    const wrapper: Wrapper = renderer(<LinkPreview {...props} />);
 
     return {
         props,
@@ -50,7 +50,7 @@ const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup 
     };
 };
 
-describe(`<${WebBookmark.displayName}>`, () => {
+describe(`<${LinkPreview.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
@@ -83,7 +83,7 @@ describe(`<${WebBookmark.displayName}>`, () => {
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
                 );
             });
-            expect(thumbnail).toHaveProp('image', '');
+            expect(thumbnail).not.toExist();
         });
 
         it('should pass className prop to the wrapper', () => {
@@ -110,7 +110,7 @@ describe(`<${WebBookmark.displayName}>`, () => {
     // 3. Test events.
     describe('Events', () => {
         const expectedUrl = 'https://expected.url';
-        const { thumbnail } = setup({ url: expectedUrl });
+        const { thumbnail } = setup({ url: expectedUrl, thumbnail: 'https://expected.url/image.png' });
         window.open = jest.fn();
 
         thumbnail.simulate('click');

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ The component `WebBookmark` has been renamed `LinkPreview`.
+
+### Fixed
+
+-   Fix for `LinkPreview`: elements linked to optional props are no longer rendered when the related prop is not defined.
+
 ## [0.21.19][] - 2020-04-16
 
 -   Added `hasIndentedChildren` prop to `CommentBlock` component
