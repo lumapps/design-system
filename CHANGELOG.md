@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   _[BREAKING]_ The component `WebBookmark` has been renamed `LinkPreview`.
+-   _[BREAKING]_ split `Select` component into `Select` (with single value selected) and `SelectMultiple` for multiple value selected
 
 ### Fixed
 
