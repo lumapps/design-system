@@ -174,17 +174,13 @@ const Dialog: React.FC<DialogProps> = (props) => {
     const footerChildProps = (footerChild as ReactElement)?.props;
     const footerChildContent = footerChildProps?.children;
 
-    useClickAway(
-        wrapperRef,
-        () => {
-            if (preventAutoClose) {
-                return;
-            }
+    useClickAway(wrapperRef, () => {
+        if (preventAutoClose) {
+            return;
+        }
 
-            onClose?.();
-        },
-        [],
-    );
+        onClose?.();
+    });
 
     useEffect(() => {
         if (isOpen) {
