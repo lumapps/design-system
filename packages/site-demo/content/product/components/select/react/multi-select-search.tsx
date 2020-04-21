@@ -1,8 +1,7 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 
 import { mdiAccessPoint, mdiAccountBox, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
 import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, SelectMultiple, Size, TextField } from '@lumx/react';
-import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }: any) => {
     const CHOICES_WITH_ICONS = [
@@ -23,8 +22,9 @@ const App = ({ theme }: any) => {
     const LABEL = 'Select label';
     const getChoiceByValue = (value: string) => CHOICES_WITH_ICONS.find((ch) => ch.label === value);
 
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
     const [values, setValues] = React.useState<string[]>([]);
 
     const onInfiniteScroll = () => {

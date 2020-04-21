@@ -1,15 +1,15 @@
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 
 import { List, ListItem, SelectMultiple, SelectVariant, Size } from '@lumx/react';
-import { useBooleanState } from '@lumx/react/hooks';
 
 const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
 
-    // tslint:disable-next-line:no-unused
-    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
     const [values, setValues] = React.useState<string[]>([]);
 
     const clearSelected = (event?: SyntheticEvent, value?: string) => {
