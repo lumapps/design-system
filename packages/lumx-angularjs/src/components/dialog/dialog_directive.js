@@ -152,15 +152,6 @@ function DialogController(
     }
 
     /**
-     * Remove dialog scroll state if the sentinels are not intersecting.
-     */
-    function _removeScrollState() {
-        if (!_isIntersecting.top && !_isIntersecting.bottom) {
-            _dialog.removeClass(`${CSS_PREFIX}-dialog--has-scroll`);
-        }
-    }
-
-    /**
      * Create dialog content observer.
      */
     function _createObserver() {
@@ -170,16 +161,9 @@ function DialogController(
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
-                if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--wrapper`)) {
-                    if (!entry.isIntersecting) {
-                        _dialog.addClass(`${CSS_PREFIX}-dialog--has-scroll`);
-                    }
-                }
-
                 if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--top`)) {
                     if (entry.isIntersecting) {
                         _isIntersecting.top = false;
-                        _removeScrollState();
 
                         if (!lx.forceHeaderDivider) {
                             dialogHeader.removeClass(`${CSS_PREFIX}-dialog__header--has-divider`);
@@ -196,7 +180,6 @@ function DialogController(
                 if (entry.target.classList.contains(`${CSS_PREFIX}-dialog__sentinel--bottom`)) {
                     if (entry.isIntersecting) {
                         _isIntersecting.bottom = false;
-                        _removeScrollState();
 
                         if (!lx.forceFooterDivider) {
                             dialogFooter.removeClass(`${CSS_PREFIX}-dialog__footer--has-divider`);
