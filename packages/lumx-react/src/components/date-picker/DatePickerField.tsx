@@ -8,7 +8,7 @@ import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
-import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker } from './DatePicker';
+import { CLASSNAME, DatePicker } from './DatePicker';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
@@ -40,7 +40,7 @@ interface DatePickerFieldProps extends GenericProps {
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
+const COMPONENT_NAME = 'DatePickerField';
 
 /**
  * Simple component used to pick a date (ready-to-use wrapped implementation).

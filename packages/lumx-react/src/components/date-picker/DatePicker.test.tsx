@@ -59,7 +59,7 @@ describe(`<${DatePicker.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render correctly', () => {
-            const { wrapper } = setup();
+            const { wrapper } = setup({}, false);
             expect(wrapper).toMatchSnapshot();
         });
     });

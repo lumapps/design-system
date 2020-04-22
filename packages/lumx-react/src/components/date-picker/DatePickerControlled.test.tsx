@@ -40,11 +40,10 @@ interface Setup extends CommonSetup {
 const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const props: DatePickerControlledProps = {
         locale: 'fr',
-        monthOffset: 0,
         onChange: jest.fn(),
         onNextMonthChange: jest.fn(),
         onPrevMonthChange: jest.fn(),
-        today: moment(),
+        selectedMonth: moment(),
         value: moment(),
         ...propsOverrides,
     };
