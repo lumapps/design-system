@@ -30,6 +30,9 @@ interface DatePickerFieldProps extends GenericProps {
     /** Value. */
     value: moment.Moment | undefined;
 
+    /** Month to display by default */
+    defaultMonth?: moment.Moment;
+
     /** On change. */
     onChange(value: moment.Moment | undefined): void;
 }
@@ -44,7 +47,15 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
  *
  * @return The component.
  */
-const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFieldProps }: DatePickerFieldProps) => {
+const DatePickerField = ({
+    value,
+    locale,
+    minDate,
+    maxDate,
+    defaultMonth,
+    onChange,
+    ...textFieldProps
+}: DatePickerFieldProps) => {
     const wrapperRef = useRef(null);
     const popoverRef = useRef(null);
     const anchorRef = useRef(null);
@@ -149,6 +160,7 @@ const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFie
                             value={value}
                             onChange={onDatePickerChange}
                             todayOrSelectedDateRef={todayOrSelectedDateRef}
+                            defaultMonth={defaultMonth}
                         />
                     </div>
                 </Popover>
