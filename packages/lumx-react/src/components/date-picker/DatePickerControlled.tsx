@@ -10,18 +10,15 @@ import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
 import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
 
-import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DEFAULT_PROPS, DatePickerProps } from './DatePicker';
+import { CLASSNAME, DEFAULT_PROPS, DatePickerProps } from './DatePicker';
 
 /**
  * Defines the props of the component.
  */
 
 type DatePickerControlledProps = DatePickerProps & {
-    /** Today. */
-    today: moment.Moment;
-
-    /** Month offset, positive or negative. */
-    monthOffset: number;
+    /** The selected month to display. */
+    selectedMonth: moment.Moment;
 
     /** Changing to previous month. */
     onPrevMonthChange(): void;
@@ -33,7 +30,7 @@ type DatePickerControlledProps = DatePickerProps & {
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Controlled`;
+const COMPONENT_NAME = 'DatePickerControlled';
 
 /**
  * Simple component used to pick a date (controlled implementation).
@@ -44,11 +41,10 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     locale,
     maxDate = DEFAULT_PROPS.maxDate,
     minDate = DEFAULT_PROPS.minDate,
-    monthOffset,
     onChange,
     onPrevMonthChange,
     onNextMonthChange,
-    today,
+    selectedMonth,
     todayOrSelectedDateRef,
     value,
 }) => {
@@ -60,9 +56,8 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                 before={<IconButton emphasis={Emphasis.low} icon={mdiChevronLeft} onClick={onPrevMonthChange} />}
                 label={
                     <span className={`${CLASSNAME}__month`}>
-                        {moment(today)
+                        {moment(selectedMonth)
                             .locale(locale)
-                            .add(monthOffset, 'months')
                             .format('MMMM YYYY')}
                     </span>
                 }
@@ -82,7 +77,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                 </div>
 
                 <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
-                    {getAnnotatedMonthCalendar(locale, minDate, maxDate, today, monthOffset).map((annotatedDate) => {
+                    {getAnnotatedMonthCalendar(locale, minDate, maxDate, selectedMonth).map((annotatedDate) => {
                         if (annotatedDate.isDisplayed) {
                             return (
                                 <div key={annotatedDate.date.unix()} className={`${CLASSNAME}__day-wrapper`}>

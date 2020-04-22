@@ -32,19 +32,16 @@ function getWeekDays(locale: string): Moment[] {
 /**
  * Get month calendar based on locale and start date.
  *
- * @param  locale      The locale using to generate the order of days in a week.
- * @param  today       The current date.
- * @param  monthOffset The number of month from now for which we want the calendar.
+ * @param  locale        The locale using to generate the order of days in a week.
+ * @param  selectedMonth The selected month.
  * @return The list of days in a week based on locale.
  */
-function getMonthCalendar(locale: string, today?: Moment, monthOffset = 0): Moment[] {
-    const firstDay = moment(today)
+function getMonthCalendar(locale: string, selectedMonth?: Moment): Moment[] {
+    const firstDay = moment(selectedMonth)
         .locale(locale)
-        .add(monthOffset, 'months')
         .startOf('month');
-    const endDay = moment(today)
+    const endDay = moment(selectedMonth)
         .locale(locale)
-        .add(monthOffset, 'months')
         .endOf('month');
 
     const monthRange = moment.range(firstDay, endDay);
@@ -66,28 +63,25 @@ function getMonthCalendar(locale: string, today?: Moment, monthOffset = 0): Mome
  * Get month calendar based on locale and start date.
  * Each day is annotated to know if they are displayed and/or clickable.
  *
- * @param  locale      The locale using to generate the order of days in a week.
- * @param  minDate     The first selectable date.
- * @param  maxDate     The last selectable date.
- * @param  today       The current date.
- * @param  monthOffset The number of month from now for which we want the calendar.
+ * @param  locale        The locale using to generate the order of days in a week.
+ * @param  minDate       The first selectable date.
+ * @param  maxDate       The last selectable date.
+ * @param  selectedMonth The selected month.
  * @return The list of days in a week based on locale.
  */
 function getAnnotatedMonthCalendar(
     locale: string,
     minDate?: Date,
     maxDate?: Date,
-    today?: Moment,
-    monthOffset?: number,
+    selectedMonth?: Moment,
 ): AnnotatedDate[] {
-    const month = moment(today)
+    const month = moment(selectedMonth)
         .locale(locale)
-        .add(monthOffset, 'months')
         .month();
 
     const clickableRange = moment.range(minDate!, maxDate!);
 
-    return getMonthCalendar(locale, today, monthOffset).map((date) => {
+    return getMonthCalendar(locale, selectedMonth).map((date) => {
         return {
             date,
             isClickable: clickableRange.contains(date),
