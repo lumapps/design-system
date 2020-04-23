@@ -4,6 +4,7 @@ type useInfiniteScrollType = (
     ref: React.RefObject<HTMLElement>,
     callback: EventCallback,
     callbackOnMount?: boolean,
+    threshold?: number,
 ) => void;
 type EventCallback = (evt?: Event) => void;
 
@@ -13,14 +14,18 @@ type EventCallback = (evt?: Event) => void;
  * @param  ref               A reference to the element on which you want to listen scroll event.
  * @param  [callback]        A callback function to call when the bottom of the reference element is reached.
  * @param  [callbackOnMount] A callback function to call when the component is mounted.
+ * @param  [threshold]       The distance to the bottom .
  */
 const useInfiniteScroll: useInfiniteScrollType = (
     ref: React.RefObject<HTMLElement>,
     callback: EventCallback,
     callbackOnMount: boolean = false,
+    threshold = 8,
 ) => {
     const isAtBottom = (): boolean =>
-        Boolean(ref.current && ref.current.scrollTop + ref.current.clientHeight >= ref.current.scrollHeight);
+        Boolean(
+            ref.current && ref.current.scrollTop + ref.current.clientHeight + threshold >= ref.current.scrollHeight,
+        );
 
     const onScroll = (e?: Event): void => {
         if (isAtBottom() && callback) {
