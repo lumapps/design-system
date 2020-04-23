@@ -59,12 +59,12 @@ export const customMonth = ({ theme }: any) => {
     return (
         <DatePickerField
             locale="fr"
-            label="Start date"
+            label="Initialized to 2019 July"
             placeholder="Pick a date"
             theme={theme}
             onChange={setValue}
             value={value}
-            defaultMonth={moment('2021 July')}
+            defaultMonth={moment('2019 July')}
         />
     );
 };
