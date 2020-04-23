@@ -2,7 +2,7 @@ import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
-import React, { SyntheticEvent } from 'react';
+import React, { SyntheticEvent, useState } from 'react';
 
 export default { title: 'LumX components/Select' };
 
@@ -47,6 +47,57 @@ export const simpleSelect = ({ theme }: any) => {
                     ? CHOICES.map((choice, index) => (
                           <ListItem
                               isSelected={values.includes(choice)}
+                              key={index}
+                              onItemSelected={selectItem(choice)}
+                              size={Size.tiny}
+                          >
+                              {choice}
+                          </ListItem>
+                      ))
+                    : [
+                          <ListItem key={0} size={Size.tiny}>
+                              No data
+                          </ListItem>,
+                      ]}
+            </List>
+        </Select>
+    );
+};
+
+export const simpleSelectWithInfiniteScroll = ({ theme }: any) => {
+    const PLACEHOLDER = 'Select a value';
+    const LABEL = 'Select label';
+    const [items, setItems] = useState(CHOICES);
+    const [value, setValue] = React.useState<string>('');
+    // tslint:disable-next-line:no-unused
+    const [isOpen, closeSelect, openSelect, toggleSelect] = useBooleanState(false);
+
+    const selectItem = (item: string) => () => {
+        closeSelect();
+        setValue(item);
+    };
+
+    const onInfinite = () => {
+        setItems([...items, `item ${items.length + 1}`]);
+    };
+
+    return (
+        <Select
+            style={{ width: '100%' }}
+            isOpen={isOpen}
+            value={[value]}
+            label={LABEL}
+            placeholder={PLACEHOLDER}
+            theme={theme}
+            onInputClick={toggleSelect}
+            onDropdownClose={closeSelect}
+            onInfiniteScroll={onInfinite}
+        >
+            <List isClickable>
+                {items.length > 0
+                    ? items.map((choice, index) => (
+                          <ListItem
+                              isSelected={value === choice}
                               key={index}
                               onItemSelected={selectItem(choice)}
                               size={Size.tiny}
