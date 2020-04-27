@@ -64,7 +64,7 @@ export const customMonth = ({ theme }: any) => {
             theme={theme}
             onChange={setValue}
             value={value}
-            defaultMonth={moment('2019 July')}
+            defaultMonth={moment('2019-07-14')}
         />
     );
 };
