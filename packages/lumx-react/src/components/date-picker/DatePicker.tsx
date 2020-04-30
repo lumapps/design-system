@@ -27,7 +27,7 @@ interface DatePickerProps extends GenericProps {
     todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
 
     /** Value. */
-    value: moment.Moment | undefined;
+    value: Date | moment.Moment | undefined;
 
     /** Month to display by default */
     defaultMonth?: moment.Moment;
@@ -61,7 +61,7 @@ const DEFAULT_PROPS: Partial<DatePickerProps> = {
  * @return The component.
  */
 const DatePicker = (props: DatePickerProps) => {
-    const today = props.value || props.defaultMonth || moment();
+    const today = moment(props.value);
     const [monthOffset, setMonthOffset] = useState(0);
 
     const setPrevMonth = () => setMonthOffset(monthOffset - 1);

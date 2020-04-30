@@ -28,7 +28,7 @@ interface DatePickerFieldProps extends GenericProps {
     minDate?: Date;
 
     /** Value. */
-    value: moment.Moment | undefined;
+    value: Date | moment.Moment | undefined;
 
     /** Month to display by default */
     defaultMonth?: moment.Moment;
@@ -132,7 +132,7 @@ const DatePickerField = ({
             <TextField
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                value={value ? value.format('LL') : ''}
+                value={value ? moment(value).format('LL') : ''}
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}

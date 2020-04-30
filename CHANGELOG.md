@@ -34,6 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `type="button"` to `TextField` "clear" button when `isClearable` is `true` to avoid clearing field when user tries to submit a form.
 -   Moved `useFocusedImage` to `hooks` folder.
 
+### Changed
+
+-   The `<DatePicker />` and `<DatePickerFields />` components now accept a javascript Date object as value.
+
 ## [0.22.0][] - 2020-04-21
 
 ### Changed

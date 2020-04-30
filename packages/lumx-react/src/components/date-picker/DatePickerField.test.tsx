@@ -27,6 +27,7 @@ type SetupProps = Partial<DatePickerFieldProps>;
  */
 interface Setup extends CommonSetup {
     props: SetupProps;
+    withDateObjectWrapper: Wrapper;
 }
 
 /**
@@ -49,10 +50,14 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
 
     const wrapper: Wrapper = renderer(<DatePickerField {...props} />);
+    const withDateObjectWrapper: Wrapper = renderer(
+        <DatePickerField {...props} value={new Date('January 18, 1970')} />,
+    );
 
     return {
         props,
         wrapper,
+        withDateObjectWrapper,
     };
 };
 
@@ -60,8 +65,9 @@ describe(`<${DatePickerField.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render correctly', () => {
-            const { wrapper } = setup();
+            const { wrapper, withDateObjectWrapper } = setup();
             expect(wrapper).toMatchSnapshot();
+            expect(withDateObjectWrapper).toMatchSnapshot();
         });
     });
 
