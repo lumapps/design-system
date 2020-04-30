@@ -1,0 +1,9 @@
+{
+    "name": "@lumx/e2e",
+    "version": "1.0.0",
+    "license": "MIT",
+    "devDependencies": {
+        "cucumber-puppeteer": "^1.0.15",
+        "cucumber": "5.1.0"
+    }
+}

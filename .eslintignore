@@ -3,3 +3,4 @@
 **/*.ts
 **/*.tsx
 yo-generators/**
+dev-packages/**
