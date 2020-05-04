@@ -36,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   The `<DatePicker />` and `<DatePickerFields />` components now accept a javascript Date object as value.
+-   The `DatePicker` and `DatePickerFields` components now accept a javascript Date object or string as value.
 
 ## [0.22.0][] - 2020-04-21
 

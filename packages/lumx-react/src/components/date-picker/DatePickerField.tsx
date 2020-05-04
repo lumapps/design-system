@@ -130,6 +130,9 @@ const DatePickerField = ({
 
     const castedValue = value && moment(value).isValid() ? moment(value) : undefined
     const castedDefaultMonth = defaultMonth && moment(defaultMonth).isValid() ? moment(defaultMonth) : undefined
+    if ((value && !moment(value).isValid()) || (defaultMonth && !moment(defaultMonth).isValid())) {
+        console.warn(`[@lumx/react/DatePickerField] Invalid date provided '${value}'`)
+    }
     return (
         <>
             <TextField

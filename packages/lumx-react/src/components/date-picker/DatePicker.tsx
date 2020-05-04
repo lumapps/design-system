@@ -70,6 +70,9 @@ const DatePicker = (props: DatePickerProps) => {
     else if (defaultMonth) {
         castedValue = moment(defaultMonth);
     }
+    if (castedValue && !castedValue.isValid()) {
+        console.warn(`[@lumx/react/DatePicker] Invalid date provided ${castedValue}`)
+    }
     const today = castedValue && castedValue.isValid() ? castedValue : moment();
 
     const [monthOffset, setMonthOffset] = useState(0);
