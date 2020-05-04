@@ -32,7 +32,7 @@ interface DatePickerFieldProps extends GenericProps {
     value: DatePickerValueProp;
 
     /** Month to display by default */
-    defaultMonth?: moment.Moment;
+    defaultMonth?: DatePickerValueProp;
 
     /** On change. */
     onChange(value: moment.Moment | undefined): void;
@@ -129,6 +129,7 @@ const DatePickerField = ({
     };
 
     const castedValue = value && moment(value).isValid() ? moment(value) : undefined
+    const castedDefaultMonth = defaultMonth && moment(defaultMonth).isValid() ? moment(defaultMonth) : undefined
     return (
         <>
             <TextField
@@ -162,7 +163,7 @@ const DatePickerField = ({
                             value={castedValue}
                             onChange={onDatePickerChange}
                             todayOrSelectedDateRef={todayOrSelectedDateRef}
-                            defaultMonth={defaultMonth}
+                            defaultMonth={castedDefaultMonth}
                         />
                     </div>
                 </Popover>
