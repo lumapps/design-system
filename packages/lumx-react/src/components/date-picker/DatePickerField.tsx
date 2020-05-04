@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, DatePicker } from './DatePicker';
+import DatePickerValueProp from './DatePickerValueProp';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
@@ -28,7 +29,7 @@ interface DatePickerFieldProps extends GenericProps {
     minDate?: Date;
 
     /** Value. */
-    value: Date | moment.Moment | undefined;
+    value: DatePickerValueProp;
 
     /** Month to display by default */
     defaultMonth?: moment.Moment;

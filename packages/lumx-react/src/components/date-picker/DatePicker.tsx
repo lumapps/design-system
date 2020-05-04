@@ -8,6 +8,7 @@ import { GenericProps } from '@lumx/react/utils';
 import { getRootClassName } from '../../utils/getRootClassName';
 
 import { DatePickerControlled } from './DatePickerControlled';
+import DatePickerValueProp from './DatePickerValueProp';
 
 /**
  * Defines the props of the component.
@@ -27,7 +28,7 @@ interface DatePickerProps extends GenericProps {
     todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
 
     /** Value. */
-    value: Date | moment.Moment | undefined;
+    value: DatePickerValueProp;
 
     /** Month to display by default */
     defaultMonth?: moment.Moment;
