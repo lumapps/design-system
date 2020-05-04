@@ -128,12 +128,13 @@ const DatePickerField = ({
         closeSimpleMenu();
     };
 
+    const castedValue = value && moment(value).isValid() ? moment(value) : undefined
     return (
         <>
             <TextField
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                value={value ? moment(value).format('LL') : ''}
+                value={castedValue ? castedValue.format('LL') : ''}
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
@@ -158,7 +159,7 @@ const DatePickerField = ({
                             locale={locale}
                             maxDate={maxDate}
                             minDate={minDate}
-                            value={value}
+                            value={castedValue}
                             onChange={onDatePickerChange}
                             todayOrSelectedDateRef={todayOrSelectedDateRef}
                             defaultMonth={defaultMonth}
