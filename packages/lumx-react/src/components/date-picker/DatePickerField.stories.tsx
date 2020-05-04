@@ -83,3 +83,33 @@ export const withDateObject = ({ theme }: any) => {
         />
     );
 };
+
+export const withCompatibleString = ({ theme }: any) => {
+    const [value, setValue] = React.useState<DatePickerProps['value']>('2020-05-22');
+
+    return (
+        <DatePickerField
+            locale="fr"
+            label="Start date"
+            placeholder="Pick a date"
+            theme={theme}
+            onChange={setValue}
+            value={value}
+        />
+    );
+};
+
+export const withIncompatibleString = ({ theme }: any) => {
+    const [value, setValue] = React.useState<DatePickerProps['value']>('not a real date');
+
+    return (
+        <DatePickerField
+            locale="fr"
+            label="Start date"
+            placeholder="Pick a date"
+            theme={theme}
+            onChange={setValue}
+            value={value}
+        />
+    );
+};
