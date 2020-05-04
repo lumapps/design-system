@@ -8,7 +8,7 @@ import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
-import { CLASSNAME, COMPONENT_NAME as COMPONENT_PREFIX, DatePicker } from './DatePicker';
+import { CLASSNAME, DatePicker } from './DatePicker';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
@@ -30,6 +30,9 @@ interface DatePickerFieldProps extends GenericProps {
     /** Value. */
     value: moment.Moment | undefined;
 
+    /** Month to display by default */
+    defaultMonth?: moment.Moment;
+
     /** On change. */
     onChange(value: moment.Moment | undefined): void;
 }
@@ -37,14 +40,22 @@ interface DatePickerFieldProps extends GenericProps {
 /**
  * The display name of the component.
  */
-const COMPONENT_NAME = `${COMPONENT_PREFIX}Field`;
+const COMPONENT_NAME = 'DatePickerField';
 
 /**
  * Simple component used to pick a date (ready-to-use wrapped implementation).
  *
  * @return The component.
  */
-const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFieldProps }: DatePickerFieldProps) => {
+const DatePickerField = ({
+    value,
+    locale,
+    minDate,
+    maxDate,
+    defaultMonth,
+    onChange,
+    ...textFieldProps
+}: DatePickerFieldProps) => {
     const wrapperRef = useRef(null);
     const popoverRef = useRef(null);
     const anchorRef = useRef(null);
@@ -149,6 +160,7 @@ const DatePickerField = ({ value, locale, minDate, maxDate, onChange, ...textFie
                             value={value}
                             onChange={onDatePickerChange}
                             todayOrSelectedDateRef={todayOrSelectedDateRef}
+                            defaultMonth={defaultMonth}
                         />
                     </div>
                 </Popover>
