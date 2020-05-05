@@ -31,7 +31,7 @@ interface DatePickerProps extends GenericProps {
     value: DatePickerValueProp;
 
     /** Month to display by default */
-    defaultMonth?: moment.Moment;
+    defaultMonth?: DatePickerValueProp;
 
     /** On change. */
     onChange(value: moment.Moment | undefined): void;
@@ -63,15 +63,14 @@ const DEFAULT_PROPS: Partial<DatePickerProps> = {
  */
 const DatePicker = (props: DatePickerProps) => {
     let castedValue;
-    const { value, defaultMonth } = props
+    const { value, defaultMonth } = props;
     if (value) {
         castedValue = moment(value);
-    }
-    else if (defaultMonth) {
+    } else if (defaultMonth) {
         castedValue = moment(defaultMonth);
     }
     if (castedValue && !castedValue.isValid()) {
-        console.warn(`[@lumx/react/DatePicker] Invalid date provided ${castedValue}`)
+        console.warn(`[@lumx/react/DatePicker] Invalid date provided ${castedValue}`);
     }
     const today = castedValue && castedValue.isValid() ? castedValue : moment();
 

@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `TextField` component is now computing the number of rows (if `multiple` is set) at the first rendering
 
+### Changed
+
+-   The `DatePicker` and `DatePickerFields` components now accept a javascript Date object or string as value.
+
 ## [0.23.0][] - 2020-05-29
 
 ### Added
@@ -33,10 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Fixed prop Interfaces of `Autocomplete` and `Dropdown` by changing `onInfinite` to `onInfiniteScroll`.
 -   Added `type="button"` to `TextField` "clear" button when `isClearable` is `true` to avoid clearing field when user tries to submit a form.
 -   Moved `useFocusedImage` to `hooks` folder.
-
-### Changed
-
--   The `DatePicker` and `DatePickerFields` components now accept a javascript Date object or string as value.
 
 ## [0.22.0][] - 2020-04-21
 

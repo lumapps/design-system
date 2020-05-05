@@ -75,30 +75,6 @@ describe(`<${DatePickerField.displayName}>`, () => {
             const { wrapper } = setup({ value: 'not a real date' });
             expect(wrapper).toMatchSnapshot();
         });
-        it('should render correctly when passed a date object', () => {
-            const { wrapper } = setup({ value: new Date('January 18, 1970') });
-            expect(wrapper).toMatchSnapshot();
-        });
-        it('should render correctly when passed a compatible string', () => {
-            const { wrapper } = setup({ value: '1970-01-18' });
-            expect(wrapper).toMatchSnapshot();
-        });
-        it('should render without selected date when passed a invalid string', () => {
-            const { wrapper } = setup({ value: 'not a real date' });
-            expect(wrapper).toMatchSnapshot();
-        });
-        it('should render correctly when passed a date object', () => {
-            const { wrapper } = setup({ value: new Date('January 18, 1970') });
-            expect(wrapper).toMatchSnapshot();
-        });
-        it('should render correctly when passed a compatible string', () => {
-            const { wrapper } = setup({ value: '1970-01-18' });
-            expect(wrapper).toMatchSnapshot();
-        });
-        it('should render without selected date when passed a invalid string', () => {
-            const { wrapper } = setup({ value: 'not a real date' });
-            expect(wrapper).toMatchSnapshot();
-        });
     });
 
     // 2. Test defaultProps value and important props custom values.
