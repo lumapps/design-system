@@ -130,7 +130,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     variant: ThumbnailVariant.squared,
     debounceTime: 20,
     isFollowingWindowSize: true,
-    imgProps: {},
 };
 
 /**
@@ -156,7 +155,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     alt = 'Thumbnail',
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
-    imgProps = DEFAULT_PROPS.imgProps,
+    imgProps,
     ...props
 }: ThumbnailProps): ReactElement => {
     const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, isFollowingWindowSize!);
@@ -186,7 +185,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                     src={image}
                     alt={alt}
                     loading={loading}
-                    {...imgProps}
+                    {...(imgProps || {})}
                 />
             ) : (
                 <div className={`${CLASSNAME}__background`}>
@@ -197,7 +196,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                         src={image}
                         alt={alt}
                         loading={loading}
-                        {...imgProps}
+                        {...(imgProps || {})}
                     />
                 </div>
             )}
