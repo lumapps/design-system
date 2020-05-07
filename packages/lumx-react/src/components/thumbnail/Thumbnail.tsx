@@ -95,6 +95,7 @@ interface ThumbnailProps extends GenericProps {
     isFollowingWindowSize?: boolean;
     /** Time before recalculating focal point if isFollowingWindowSize is activated */
     resizeDebounceTime?: number;
+    /** props that will be passed directly to the `img` tag */
     imgProps?: ImgHTMLAttributes<HTMLImageElement>;
 }
 
