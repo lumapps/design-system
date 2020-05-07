@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ImgHTMLAttributes, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -95,6 +95,7 @@ interface ThumbnailProps extends GenericProps {
     isFollowingWindowSize?: boolean;
     /** Time before recalculating focal point if isFollowingWindowSize is activated */
     resizeDebounceTime?: number;
+    imgProps?: ImgHTMLAttributes<HTMLImageElement>;
 }
 
 /**
@@ -128,6 +129,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
     variant: ThumbnailVariant.squared,
     debounceTime: 20,
     isFollowingWindowSize: true,
+    imgProps: {},
 };
 
 /**
@@ -153,6 +155,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     alt = 'Thumbnail',
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
+    imgProps = DEFAULT_PROPS.imgProps,
     ...props
 }: ThumbnailProps): ReactElement => {
     const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, isFollowingWindowSize!);
@@ -176,7 +179,14 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...props}
         >
             {aspectRatio === AspectRatio.original ? (
-                <img ref={focusImageRef} className={`${CLASSNAME}__image`} src={image} alt={alt} loading={loading} />
+                <img
+                    ref={focusImageRef}
+                    className={`${CLASSNAME}__image`}
+                    src={image}
+                    alt={alt}
+                    loading={loading}
+                    {...imgProps}
+                />
             ) : (
                 <div className={`${CLASSNAME}__background`}>
                     <img
@@ -186,6 +196,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                         src={image}
                         alt={alt}
                         loading={loading}
+                        {...imgProps}
                     />
                 </div>
             )}
