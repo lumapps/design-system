@@ -5,7 +5,7 @@ import noop from 'lodash/noop';
 import React, { SyntheticEvent } from 'react';
 import { SelectVariant } from './constants';
 
-export default { title: 'Select Multiple' };
+export default { title: 'LumX components/Select Multiple' };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 
