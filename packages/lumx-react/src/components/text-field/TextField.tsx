@@ -345,8 +345,6 @@ const TextField: React.FC<TextFieldProps> = (props) => {
             )}
 
             <div className={`${CLASSNAME}__wrapper`} ref={textFieldRef}>
-                {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
-
                 {icon && (
                     <Icon
                         className={`${CLASSNAME}__input-icon`}
@@ -355,6 +353,8 @@ const TextField: React.FC<TextFieldProps> = (props) => {
                         size={Size.xs}
                     />
                 )}
+
+                {chips && <div className={`${CLASSNAME}__chips`}>{chips}</div>}
 
                 <div className={`${CLASSNAME}__input-wrapper`}>
                     <div className={`${CLASSNAME}__input-native`}>

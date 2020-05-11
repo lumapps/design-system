@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } from '@lumx/react';
 
-import { mdiClose } from '@lumx/icons';
+import { mdiClose, mdiFlag } from '@lumx/icons';
 
 export default { title: 'LumX components/Autocomplete Multiple' };
 
@@ -148,6 +148,7 @@ export const simple = ({ theme }: any) => {
             fitToAnchorWidth={true}
             onBlur={onBlur}
             selectedChipRender={renderChip}
+            icon={mdiFlag}
         >
             <List isClickable theme={theme}>
                 {filteredCities.map((city, index) => {
