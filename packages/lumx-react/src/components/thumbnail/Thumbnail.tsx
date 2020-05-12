@@ -180,23 +180,23 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         >
             {aspectRatio === AspectRatio.original ? (
                 <img
+                    {...(imgProps || {})}
                     ref={focusImageRef}
                     className={`${CLASSNAME}__image`}
                     src={image}
                     alt={alt}
                     loading={loading}
-                    {...(imgProps || {})}
                 />
             ) : (
                 <div className={`${CLASSNAME}__background`}>
                     <img
+                        {...(imgProps || {})}
                         ref={focusImageRef}
                         className={`${CLASSNAME}__focused-image`}
                         crossOrigin={setCrossOrigin()}
                         src={image}
                         alt={alt}
                         loading={loading}
-                        {...(imgProps || {})}
                     />
                 </div>
             )}
