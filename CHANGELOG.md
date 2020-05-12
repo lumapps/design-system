@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Renamed CSS classes `.lumx-theme-color-*` into `.lumx-color-font-*`
 -   _[BREAKING]_ Renamed CSS classes `.lumx-theme-background-*` into `.lumx-color-background-*`
 -   Handle default size on fallback icon in `Thumbnail` component (Size.m).
+-   Updated `@mdi/js` and `@mdi/font` dependencies to the latest versions
 
 ## [0.23.0][] - 2020-05-29
 
