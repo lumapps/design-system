@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.22.1][] - 2020-05-12
+
 ### Added
 
 -   Added optional `imgProps` prop to component `Thumbnail`
@@ -481,3 +483,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.19]: https://github.com/lumapps/design-system/tree/v0.21.19
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.22.0...HEAD
 [0.22.0]: https://github.com/lumapps/design-system/tree/v0.22.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.22.1...HEAD
+[0.22.1]: https://github.com/lumapps/design-system/tree/v0.22.1
