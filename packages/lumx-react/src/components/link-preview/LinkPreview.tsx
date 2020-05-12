@@ -25,6 +25,8 @@ interface LinkPreviewProps extends GenericProps {
     theme?: Theme;
     /** Thumbnail image source */
     thumbnail?: string;
+    /** Active thumbnail cross origin. */
+    isThumbnailCrossOriginEnabled?: boolean;
     /** Link title */
     title?: string;
 }
@@ -65,6 +67,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     thumbnail = '',
+    isThumbnailCrossOriginEnabled = true,
 }) => {
     const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
 
@@ -89,6 +92,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
                             image={thumbnail}
                             aspectRatio={AspectRatio.free}
                             fillHeight
+                            isCrossOriginEnabled={isThumbnailCrossOriginEnabled}
                         />
                     </div>
                 )}
