@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import classNames from 'classnames';
 
 import { AspectRatio, ColorPalette, ColorVariant, Link, Size, Theme, Thumbnail } from '@lumx/react';
+import { ThumbnailProps } from '../thumbnail/Thumbnail';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -26,7 +27,7 @@ interface LinkPreviewProps extends GenericProps {
     /** Thumbnail image source */
     thumbnail?: string;
     /** Thumbnail component props. */
-    thumbnailProps?: boolean;
+    thumbnailProps?: ThumbnailProps;
     /** Link title */
     title?: string;
 }
