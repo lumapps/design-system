@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Added optional `defaultMonth` prop to components `DatePickerField` and `DatePicker`.
+-   Added optional `imgProps` prop to component `Thumbnail`
 
 ### Changed
 

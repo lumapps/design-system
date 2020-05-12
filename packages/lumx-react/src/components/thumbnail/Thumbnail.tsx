@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ImgHTMLAttributes, ReactElement } from 'react';
 
 import classNames from 'classnames';
 
@@ -95,6 +95,8 @@ interface ThumbnailProps extends GenericProps {
     isFollowingWindowSize?: boolean;
     /** Time before recalculating focal point if isFollowingWindowSize is activated */
     resizeDebounceTime?: number;
+    /** props that will be passed directly to the `img` tag */
+    imgProps?: ImgHTMLAttributes<HTMLImageElement>;
 }
 
 /**
@@ -153,6 +155,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     alt = 'Thumbnail',
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
+    imgProps,
     ...props
 }: ThumbnailProps): ReactElement => {
     const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, isFollowingWindowSize!);
@@ -176,10 +179,18 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             {...props}
         >
             {aspectRatio === AspectRatio.original ? (
-                <img ref={focusImageRef} className={`${CLASSNAME}__image`} src={image} alt={alt} loading={loading} />
+                <img
+                    {...(imgProps || {})}
+                    ref={focusImageRef}
+                    className={`${CLASSNAME}__image`}
+                    src={image}
+                    alt={alt}
+                    loading={loading}
+                />
             ) : (
                 <div className={`${CLASSNAME}__background`}>
                     <img
+                        {...(imgProps || {})}
                         ref={focusImageRef}
                         className={`${CLASSNAME}__focused-image`}
                         crossOrigin={setCrossOrigin()}
