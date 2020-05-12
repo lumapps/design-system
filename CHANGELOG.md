@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Added optional `defaultMonth` prop to components `DatePickerField` and `DatePicker`.
 -   Added optional `imgProps` prop to component `Thumbnail`
--   Added `isThumbnailCrossOriginEnabled` prop to `LinkPreview`.
+-   Added `thumbnailProps` prop to `LinkPreview`.
 
 ### Changed
 
