@@ -9,17 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Added optional `defaultMonth` prop to components `DatePickerField` and `DatePicker`.
 -   Added optional `imgProps` prop to component `Thumbnail`
 -   Added `thumbnailProps` prop to `LinkPreview`.
-
-### Changed
-
--   _[BREAKING]_ Replaced `today` and `monthOffset` props by `selectedMonth` for `DatePickerControlled` component.
 
 ### Fixed
 
 -   Trigger the infinite scroll callback on display if enough space with the `useInfiniteScroll` hook.
+-   Fixed chips taking place before icons in `TextField` component.
 
 ## [0.22.0][] - 2020-04-21
 
