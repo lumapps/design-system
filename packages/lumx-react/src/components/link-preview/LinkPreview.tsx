@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import classNames from 'classnames';
 
 import { AspectRatio, ColorPalette, ColorVariant, Link, Size, Theme, Thumbnail } from '@lumx/react';
+import { ThumbnailProps } from '../thumbnail/Thumbnail';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -25,6 +26,8 @@ interface LinkPreviewProps extends GenericProps {
     theme?: Theme;
     /** Thumbnail image source */
     thumbnail?: string;
+    /** Thumbnail component props. */
+    thumbnailProps?: ThumbnailProps;
     /** Link title */
     title?: string;
 }
@@ -65,6 +68,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     thumbnail = '',
+    thumbnailProps = {},
 }) => {
     const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
 
@@ -83,6 +87,7 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
                 {thumbnail && (
                     <div className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
+                            {...thumbnailProps}
                             onClick={goToUrl}
                             role="link"
                             tabIndex={0}
