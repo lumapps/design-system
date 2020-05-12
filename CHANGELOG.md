@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Trigger the infinite scroll callback on display if enough space with the `useInfiniteScroll` hook.
+-   Fixed chips taking place before icons in `TextField` component.
 
 ## [0.22.0][] - 2020-04-21
 
