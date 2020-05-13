@@ -87,6 +87,27 @@ describe(`<${Mosaic.displayName}>`, () => {
                 expect(thumbnail.prop('theme')).toBe(expectedTheme);
             });
         });
+
+        it('should only set tabIndex at 0 if thumbnail has onClick', () => {
+            const expectedTheme = Theme.dark;
+            const onClick = jest.fn();
+            const { thumbnails } = setup({
+                theme: expectedTheme,
+                thumbnails: [
+                    { url: 'https://picsum.photos/200' },
+                    { url: 'https://picsum.photos/210', onClick },
+                    { url: 'https://picsum.photos/220' },
+                    { url: 'https://picsum.photos/230', onClick },
+                ],
+            });
+            thumbnails.forEach((thumbnail: Wrapper, index: number) => {
+                if (index === 1 || index === 3) {
+                    expect(thumbnail.prop('tabIndex')).toBe('0');
+                } else {
+                    expect(thumbnail.prop('tabIndex')).toBeUndefined();
+                }
+            });
+        });
     });
 
     // 3. Test events.

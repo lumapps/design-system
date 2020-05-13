@@ -63,9 +63,28 @@ export const fourThumbnails = ({ theme }: any) => {
     );
 };
 
+export const clickableThumbnails = ({ theme }: any) => {
+    const wrapperStyle = { width: 250 };
+    const onClick = (index: number) => alert(`Clicked n°${index}`);
+
+    return (
+        <div style={wrapperStyle}>
+            <Mosaic
+                theme={theme}
+                thumbnails={[
+                    { url: 'https://picsum.photos/200', onClick },
+                    { url: 'https://picsum.photos/210', onClick },
+                    { url: 'https://picsum.photos/220', onClick },
+                    { url: 'https://picsum.photos/230', onClick },
+                ]}
+            />
+        </div>
+    );
+};
+
 export const sixThumbnails = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };
-    const [activeIndex, setActiveIndex] = useState();
+    const [activeIndex, setActiveIndex] = useState<number>();
     const lightBoxParent = useRef(null);
     const thumbnails = [
         { onClick: setActiveIndex, url: 'https://picsum.photos/640/480/?image=24' },
@@ -76,7 +95,7 @@ export const sixThumbnails = ({ theme }: any) => {
         { onClick: setActiveIndex, url: 'https://picsum.photos/640/480/?image=29' },
     ];
     const closeLightBox = useCallback(() => {
-        setActiveIndex(null);
+        setActiveIndex(0);
     }, [setActiveIndex]);
 
     return (

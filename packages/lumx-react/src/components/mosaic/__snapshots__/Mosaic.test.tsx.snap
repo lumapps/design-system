@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`] = `
+exports[`<Mosaic> Snapshots and structure should render story clickableThumbnails 1`] = `
 <div
   className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-4-thumbnails"
 >
@@ -63,6 +63,65 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
 </div>
 `;
 
+exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-4-thumbnails"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/200"
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="1"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/210"
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="2"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/220"
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="3"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/230"
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
+
 exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] = `
 <div
   className="lumx-mosaic lumx-mosaic--theme-light"
@@ -79,7 +138,6 @@ exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] =
         fillHeight={true}
         image="https://picsum.photos/200"
         onClick={[Function]}
-        tabIndex="0"
         theme="light"
       />
     </div>
@@ -174,7 +232,6 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
         fillHeight={true}
         image="https://picsum.photos/200"
         onClick={[Function]}
-        tabIndex="0"
         theme="light"
       />
     </div>
@@ -187,7 +244,6 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
         fillHeight={true}
         image="https://picsum.photos/210"
         onClick={[Function]}
-        tabIndex="0"
         theme="light"
       />
     </div>
@@ -200,7 +256,6 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
         fillHeight={true}
         image="https://picsum.photos/220"
         onClick={[Function]}
-        tabIndex="0"
         theme="light"
       />
     </div>
@@ -224,7 +279,6 @@ exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] 
         fillHeight={true}
         image="https://picsum.photos/200"
         onClick={[Function]}
-        tabIndex="0"
         theme="light"
       />
     </div>
@@ -237,7 +291,6 @@ exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] 
         fillHeight={true}
         image="https://picsum.photos/210"
         onClick={[Function]}
-        tabIndex="0"
         theme="light"
       />
     </div>

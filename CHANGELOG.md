@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Trigger the infinite scroll callback on display if enough space with the `useInfiniteScroll` hook.
 -   Fixed chips taking place before icons in `TextField` component.
+-   Fixed `Mosaic` thumbnails showing as clickable even though `onClick` wasn't defined.
 
 ## [0.22.0][] - 2020-04-21
 
