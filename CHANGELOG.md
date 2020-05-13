@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.22.2][] - 2020-05-13
+
+### Fixed
+
+-   Fixed `Mosaic` thumbnails showing as clickable even though `onClick` wasn't defined.
+
 ## [0.22.1][] - 2020-05-12
 
 ### Added
