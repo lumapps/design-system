@@ -58,7 +58,7 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
                 return (
                     <div key={index} className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
-                            tabIndex="0"
+                            tabIndex={thumbnail.onClick && '0'}
                             onClick={handleClick}
                             aspectRatio={AspectRatio.free}
                             fillHeight
