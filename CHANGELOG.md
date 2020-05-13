@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.22.2][] - 2020-05-13
 
+## [0.22.2][] - 2020-05-13
+
 ### Fixed
 
 -   Fixed `Mosaic` thumbnails showing as clickable even though `onClick` wasn't defined.
@@ -492,3 +494,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.22.0]: https://github.com/lumapps/design-system/tree/v0.22.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.22.1...HEAD
 [0.22.1]: https://github.com/lumapps/design-system/tree/v0.22.1
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.22.2...HEAD
+[0.22.2]: https://github.com/lumapps/design-system/tree/v0.22.2
