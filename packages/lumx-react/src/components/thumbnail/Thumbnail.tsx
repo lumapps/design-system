@@ -128,7 +128,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
     size: undefined,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
-    debounceTime: 20,
+    resizeDebounceTime: 20,
     isFollowingWindowSize: true,
 };
 
@@ -142,7 +142,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',
     isCrossOriginEnabled = DEFAULT_PROPS.isCrossOriginEnabled,
     crossOrigin = DEFAULT_PROPS.crossOrigin,
-    debounceTime = DEFAULT_PROPS.debounceTime,
+    resizeDebounceTime = DEFAULT_PROPS.resizeDebounceTime,
     isFollowingWindowSize = DEFAULT_PROPS.isFollowingWindowSize,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
@@ -158,8 +158,13 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     imgProps,
     ...props
 }: ThumbnailProps): ReactElement => {
-    const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, isFollowingWindowSize!);
-
+    const focusImageRef = useFocusedImage(
+        focusPoint!,
+        aspectRatio!,
+        size!,
+        resizeDebounceTime!,
+        isFollowingWindowSize!,
+    );
     const setCrossOrigin = () => {
         return !isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined;
     };
