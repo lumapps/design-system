@@ -15,3 +15,5 @@ export * from './useInfiniteScroll';
 export * from './useChipGroupNavigation';
 
 export * from './useFocus';
+
+export * from './useImage';
