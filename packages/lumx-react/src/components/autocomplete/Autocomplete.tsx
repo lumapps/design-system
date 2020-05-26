@@ -142,9 +142,9 @@ interface AutocompleteProps extends GenericProps {
 
     /**
      * The callback function called when the bottom of the dropdown is reached.
-     * @see {@link DropdownProps#onInfinite}
+     * @see {@link DropdownProps#onInfiniteScroll}
      */
-    onInfinite?: VoidFunction;
+    onInfiniteScroll?: VoidFunction;
 
     /**
      * Text field value change handler.

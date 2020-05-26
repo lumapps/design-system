@@ -40,7 +40,7 @@ interface DropdownProps extends GenericProps {
     /**
      * The callback function called when the bottom of the dropdown is reached.
      */
-    onInfinite?: VoidFunction;
+    onInfiniteScroll?: VoidFunction;
 }
 
 /**
