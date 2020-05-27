@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { AspectRatio, Size } from '..';
 import { FocusedImage, LumHTMLImageElement } from './FocusedImage';
@@ -10,25 +10,37 @@ const useFocusedImage = (
     size: Size,
     debounceTime: number,
     isFollowingWindowSize: boolean,
+    isLoaded: boolean,
 ) => {
     const focusRef = useRef<FocusedImage | null>(null);
 
     useEffect(() => {
-        focusRef.current?.setFocus(focus!);
+        if (focusRef.current) {
+            focusRef.current.setFocus(focus!);
+        }
     }, [focusRef.current, focus?.x, focus?.y, size]);
 
-    return (f: HTMLImageElement) => {
-        if (aspectRatio === AspectRatio.original) {
+    useEffect(() => {
+        if (aspectRatio === AspectRatio.original || !isLoaded) {
             focusRef.current = null;
-        } else if (!focusRef.current) {
-            focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
-                debounceTime,
-                focus,
-                updateOnWindowResize: isFollowingWindowSize,
-                updateOnContainerResize: isFollowingWindowSize,
-            });
         }
-    };
+    }, [aspectRatio, isLoaded]);
+
+    return useCallback(
+        (f: HTMLImageElement) => {
+            if (aspectRatio === AspectRatio.original || !isLoaded) {
+                focusRef.current = null;
+            } else if (!focusRef.current) {
+                focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
+                    debounceTime,
+                    focus,
+                    updateOnWindowResize: isFollowingWindowSize,
+                    updateOnContainerResize: isFollowingWindowSize,
+                });
+            }
+        },
+        [focusRef.current, aspectRatio, isLoaded],
+    );
 };
 
 export default useFocusedImage;

@@ -12,6 +12,7 @@ import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } fr
 
 import useFocusedImage from './useFocusedImage';
 
+import { useImage } from '@lumx/react/hooks/useImage';
 import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 
 /**
@@ -158,55 +159,65 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     imgProps,
     ...props
 }: ThumbnailProps): ReactElement => {
+    const { isLoaded, hasError } = useImage(image);
     const focusImageRef = useFocusedImage(
         focusPoint!,
         aspectRatio!,
         size!,
         resizeDebounceTime!,
         isFollowingWindowSize!,
+        isLoaded,
     );
     const setCrossOrigin = () => {
         return !isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined;
     };
 
-    return (
-        <div
-            className={classNames(
-                className,
-                handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant }),
-                {
-                    [`${CLASSNAME}--fill-height`]: fillHeight,
-                },
-            )}
-            tabIndex={isFunction(onClick) ? 0 : -1}
-            onClick={onClick}
-            onKeyDown={onEnterPressed(onClick)}
-            {...props}
-        >
-            {aspectRatio === AspectRatio.original ? (
-                <img
-                    {...(imgProps || {})}
-                    ref={focusImageRef}
-                    className={`${CLASSNAME}__image`}
-                    src={image}
-                    alt={alt}
-                    loading={loading}
-                />
-            ) : (
-                <div className={`${CLASSNAME}__background`}>
+    if (hasError) {
+        return <span>Image broken</span>;
+    }
+
+    if (isLoaded) {
+        return (
+            <div
+                className={classNames(
+                    className,
+                    handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant }),
+                    {
+                        [`${CLASSNAME}--fill-height`]: fillHeight,
+                    },
+                )}
+                tabIndex={isFunction(onClick) ? 0 : -1}
+                onClick={onClick}
+                onKeyDown={onEnterPressed(onClick)}
+                {...props}
+            >
+                {aspectRatio === AspectRatio.original ? (
                     <img
                         {...(imgProps || {})}
                         ref={focusImageRef}
-                        className={`${CLASSNAME}__focused-image`}
-                        crossOrigin={setCrossOrigin()}
+                        className={`${CLASSNAME}__image`}
                         src={image}
                         alt={alt}
                         loading={loading}
                     />
-                </div>
-            )}
-        </div>
-    );
+                ) : (
+                    <div className={`${CLASSNAME}__background`}>
+                        <img
+                            {...(imgProps || {})}
+                            ref={focusImageRef}
+                            className={`${CLASSNAME}__focused-image`}
+                            crossOrigin={setCrossOrigin()}
+                            src={image}
+                            alt={alt}
+                            loading={loading}
+                        />
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    return <></>;
 };
 Thumbnail.displayName = COMPONENT_NAME;
 
