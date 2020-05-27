@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Fixed chips taking place before icons in `TextField` component.
 -   Fixed `Mosaic` thumbnails showing as clickable even though `onClick` wasn't defined.
 -   _[BREAKING]_ Fixed prop Interfaces of `Autocomplete` and `Dropdown` by changing `onInfinite` to `onInfiniteScroll`.
+-   Added `type="button"` to `TextField` "clear" button when `isClearable` is `true` to avoid clearing field when user tries to submit a form.
 
 ## [0.22.0][] - 2020-04-21
 

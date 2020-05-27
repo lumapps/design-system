@@ -394,6 +394,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
                             size={Size.s}
                             theme={theme}
                             onClick={onClear}
+                            type="button"
                         />
                     )}
                 </div>
