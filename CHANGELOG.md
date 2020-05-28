@@ -10,8 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Added optional `defaultMonth` prop to components `DatePickerField` and `DatePicker`.
--   Added optional `imgProps` prop to component `Thumbnail`
+-   Added optional `imgProps` prop to component `Thumbnail`.
+-   Added optional `fallback` prop (svg string or react node) to component `Thumbnail`.
 -   Added `thumbnailProps` prop to `LinkPreview`.
+-   Added `useImage` hook to preload an image and get states from it (isLoaded and hasError).
 
 ### Changed
 
@@ -24,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Fixed `Mosaic` thumbnails showing as clickable even though `onClick` wasn't defined.
 -   _[BREAKING]_ Fixed prop Interfaces of `Autocomplete` and `Dropdown` by changing `onInfinite` to `onInfiniteScroll`.
 -   Added `type="button"` to `TextField` "clear" button when `isClearable` is `true` to avoid clearing field when user tries to submit a form.
+-   Moved `useFocusedImage` to `hooks` folder.
 
 ## [0.22.0][] - 2020-04-21
 
