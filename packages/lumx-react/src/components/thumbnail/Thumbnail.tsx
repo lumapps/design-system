@@ -11,7 +11,8 @@ import isFunction from 'lodash/isFunction';
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 import { mdiImageBrokenVariant } from '@lumx/icons';
-import { useFocusedImage, useImage } from '@lumx/react/hooks';
+import { useFocusedImage } from '@lumx/react/hooks/useFocusedImage';
+import { useImage } from '@lumx/react/hooks/useImage';
 import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 
 /**

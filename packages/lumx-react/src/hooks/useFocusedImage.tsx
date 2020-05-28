@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { AspectRatio, Size } from '../components';
-import { FocusedImage, LumHTMLImageElement } from '../components/thumbnail/FocusedImage';
-import { FocusPoint } from '../components/thumbnail/FocusedImageOptions';
+import { AspectRatio, Size } from '@lumx/react/components';
+import { FocusedImage, LumHTMLImageElement } from '@lumx/react/components/thumbnail/FocusedImage';
+import { FocusPoint } from '@lumx/react/components/thumbnail/FocusedImageOptions';
 
 /**
  * Handle the focus point and the aspect ratio of an image.
