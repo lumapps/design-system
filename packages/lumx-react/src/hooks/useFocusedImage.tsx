@@ -1,9 +1,20 @@
 import { useCallback, useEffect, useRef } from 'react';
 
-import { AspectRatio, Size } from '..';
-import { FocusedImage, LumHTMLImageElement } from './FocusedImage';
-import { FocusPoint } from './FocusedImageOptions';
+import { AspectRatio, Size } from '../components';
+import { FocusedImage, LumHTMLImageElement } from '../components/thumbnail/FocusedImage';
+import { FocusPoint } from '../components/thumbnail/FocusedImageOptions';
 
+/**
+ * Handle the focus point and the aspect ratio of an image.
+ *
+ * @param   focus                 Focus point value.
+ * @param   aspectRatio           Aspect ratio of the image.
+ * @param   size                  Size of the image.
+ * @param   debounceTime          Debounce time when resizing.
+ * @param   isFollowingWindowSize Update on resize.
+ * @param   isLoaded              Loaded state of the image.
+ * @return                        Function to handle ref.
+ */
 const useFocusedImage = (
     focus: FocusPoint,
     aspectRatio: AspectRatio,
@@ -43,4 +54,4 @@ const useFocusedImage = (
     );
 };
 
-export default useFocusedImage;
+export { useFocusedImage };

@@ -10,10 +10,8 @@ import isFunction from 'lodash/isFunction';
 
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
-import useFocusedImage from './useFocusedImage';
-
 import { mdiImageBrokenVariant } from '@lumx/icons';
-import { useImage } from '@lumx/react/hooks/useImage';
+import { useFocusedImage, useImage } from '@lumx/react/hooks';
 import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 
 /**
@@ -140,6 +138,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 /**
  * Simple component used to display image with square or round shape.
  * Convenient to display image previews or user avatar.
+ * Has a fallback image when the source image is in error.
  *
  * @return The component.
  */
@@ -179,7 +178,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 
     if (hasError) {
         if (typeof fallback === 'string') {
-            return <Icon icon={fallback} size={Size.m} theme={theme} />;
+            return <Icon icon={fallback} size={size} theme={theme} />;
         }
 
         return <>{fallback}</>;
