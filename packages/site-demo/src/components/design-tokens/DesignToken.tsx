@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import React, { ReactElement, ReactNode, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 import { ExpansionPanel, Theme } from '@lumx/react';
 
-interface IDesignToken {
+interface DesignTokenProps {
     /**
      * The design token name.
      */
@@ -31,31 +31,19 @@ interface IDesignToken {
 }
 
 /**
- * Define the types of the default props.
- */
-interface IDefaultPropsType extends Partial<IDesignToken> {}
-
-/**
- * The default value of props.
- */
-const DEFAULT_PROPS: IDefaultPropsType = {
-    theme: Theme.light,
-};
-
-/**
  * Component used to present a design token in the documentation site.
  *
  * @param props Components props.
  * @return ReactElement.
  */
-const DesignToken: React.FC<IDesignToken> = ({
+export const DesignToken: React.FC<DesignTokenProps> = ({
     name,
     prefix,
     description,
     version,
-    theme = DEFAULT_PROPS.theme,
+    theme = Theme.light,
     children,
-}: IDesignToken): ReactElement => {
+}) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -80,5 +68,3 @@ const DesignToken: React.FC<IDesignToken> = ({
         </ExpansionPanel>
     );
 };
-
-export default DesignToken;

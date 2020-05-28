@@ -4,3 +4,4 @@
 **/*.tsx
 yo-generators/**
 **/.yarn/**
+**/style-dictionary

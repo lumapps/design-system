@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 
+import { GLOBAL_THEMES } from '@lumx/core/js/constants';
+import { GlobalTheme } from '@lumx/core/js/types';
+
 /**
  * Please make sure that these themes are in the same order
  * as the `THEMES` constant.
@@ -8,8 +11,7 @@ import '@lumx/core/scss/lumx-theme-material.scss';
 
 import '@lumx/core/scss/lumx-theme-lumapps.scss';
 
-export type GlobalTheme = 'material' | 'lumapps';
-const THEMES: GlobalTheme[] = ['material', 'lumapps'];
+const THEMES = Object.keys(GLOBAL_THEMES) as GlobalTheme[];
 const stylesNodes: Node[] = [];
 
 /**

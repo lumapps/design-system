@@ -1,8 +1,8 @@
-import { Theme } from '@lumx/demo/context/theme';
+import { GlobalTheme } from '@lumx/core/js/types';
 
 const getThemeId = (theme: string) => `theme-${theme}`;
 
-const getThemeElement = (theme: Theme) => document.getElementById(getThemeId(theme));
+const getThemeElement = (theme: GlobalTheme) => document.getElementById(getThemeId(theme));
 
 /**
  * Switch between LumApps/Material theme in production mode.
@@ -13,7 +13,7 @@ const getThemeElement = (theme: Theme) => document.getElementById(getThemeId(the
  * @param oldTheme Previously selected theme
  * @param newTheme New theme to apply
  */
-export function switchProdTheme(oldTheme: Theme, newTheme: Theme) {
+export function switchProdTheme(oldTheme: GlobalTheme, newTheme: GlobalTheme) {
     const oldStyle = getThemeElement(oldTheme) as HTMLLinkElement;
     const newStyle = getThemeElement(newTheme) as HTMLLinkElement;
     newStyle.rel = 'stylesheet';
