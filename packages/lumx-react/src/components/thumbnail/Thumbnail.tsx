@@ -176,30 +176,29 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         return !isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined;
     };
 
-    if (hasError) {
-        if (typeof fallback === 'string') {
-            return <Icon icon={fallback} size={size} theme={theme} />;
-        }
+    return (
+        <div
+            className={classNames(
+                className,
+                handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant }),
+                {
+                    [`${CLASSNAME}--fill-height`]: fillHeight,
+                },
+            )}
+            tabIndex={isFunction(onClick) ? 0 : -1}
+            onClick={onClick}
+            onKeyDown={onEnterPressed(onClick)}
+            {...props}
+        >
+            {hasError &&
+                (typeof fallback === 'string' ? (
+                    <Icon icon={fallback as string} size={size} theme={theme} />
+                ) : (
+                    <>{fallback}</>
+                ))}
 
-        return <>{fallback}</>;
-    }
-
-    if (isLoaded) {
-        return (
-            <div
-                className={classNames(
-                    className,
-                    handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant }),
-                    {
-                        [`${CLASSNAME}--fill-height`]: fillHeight,
-                    },
-                )}
-                tabIndex={isFunction(onClick) ? 0 : -1}
-                onClick={onClick}
-                onKeyDown={onEnterPressed(onClick)}
-                {...props}
-            >
-                {aspectRatio === AspectRatio.original ? (
+            {isLoaded &&
+                (aspectRatio === AspectRatio.original ? (
                     <img
                         {...(imgProps || {})}
                         ref={focusImageRef}
@@ -220,12 +219,9 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                             loading={loading}
                         />
                     </div>
-                )}
-            </div>
-        );
-    }
-
-    return <></>;
+                ))}
+        </div>
+    );
 };
 Thumbnail.displayName = COMPONENT_NAME;
 
