@@ -1,8 +1,8 @@
-import React, { ImgHTMLAttributes, ReactElement } from 'react';
+import React, { ImgHTMLAttributes, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Alignment, AspectRatio, FocusPoint, Size, Theme } from '@lumx/react';
+import { Alignment, AspectRatio, FocusPoint, Icon, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
@@ -12,6 +12,7 @@ import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } fr
 
 import useFocusedImage from './useFocusedImage';
 
+import { mdiImageBrokenVariant } from '@lumx/icons';
 import { useImage } from '@lumx/react/hooks/useImage';
 import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 
@@ -98,6 +99,8 @@ interface ThumbnailProps extends GenericProps {
     resizeDebounceTime?: number;
     /** props that will be passed directly to the `img` tag */
     imgProps?: ImgHTMLAttributes<HTMLImageElement>;
+    /** Fallback svg or react node. */
+    fallback: string | ReactNode;
 }
 
 /**
@@ -123,6 +126,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
     isCrossOriginEnabled: true,
     crossOrigin: CrossOrigin.anonymous,
     aspectRatio: AspectRatio.original,
+    fallback: mdiImageBrokenVariant,
     fillHeight: false,
     focusPoint: { x: 0, y: 0 },
     loading: ImageLoading.lazy,
@@ -147,6 +151,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     isFollowingWindowSize = DEFAULT_PROPS.isFollowingWindowSize,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
+    fallback = DEFAULT_PROPS.fallback,
     fillHeight = DEFAULT_PROPS.fillHeight,
     loading = DEFAULT_PROPS.loading,
     size = DEFAULT_PROPS.size,
@@ -173,7 +178,11 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     };
 
     if (hasError) {
-        return <span>Image broken</span>;
+        if (typeof fallback === 'string') {
+            return <Icon icon={fallback} size={Size.m} theme={theme} />;
+        }
+
+        return <>{fallback}</>;
     }
 
     if (isLoaded) {
