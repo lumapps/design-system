@@ -1,8 +1,8 @@
-import React, { ImgHTMLAttributes, ReactElement } from 'react';
+import React, { ImgHTMLAttributes, ReactElement, ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Alignment, AspectRatio, FocusPoint, Size, Theme } from '@lumx/react';
+import { Alignment, AspectRatio, FocusPoint, Icon, Size, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
@@ -10,8 +10,9 @@ import isFunction from 'lodash/isFunction';
 
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
-import useFocusedImage from './useFocusedImage';
-
+import { mdiImageBrokenVariant } from '@lumx/icons';
+import { useFocusedImage } from '@lumx/react/hooks/useFocusedImage';
+import { useImage } from '@lumx/react/hooks/useImage';
 import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 
 /**
@@ -97,6 +98,8 @@ interface ThumbnailProps extends GenericProps {
     resizeDebounceTime?: number;
     /** props that will be passed directly to the `img` tag */
     imgProps?: ImgHTMLAttributes<HTMLImageElement>;
+    /** Fallback svg or react node. */
+    fallback?: string | ReactNode;
 }
 
 /**
@@ -122,19 +125,21 @@ const DEFAULT_PROPS: DefaultPropsType = {
     isCrossOriginEnabled: true,
     crossOrigin: CrossOrigin.anonymous,
     aspectRatio: AspectRatio.original,
+    fallback: mdiImageBrokenVariant,
     fillHeight: false,
     focusPoint: { x: 0, y: 0 },
     loading: ImageLoading.lazy,
     size: undefined,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
-    debounceTime: 20,
+    resizeDebounceTime: 20,
     isFollowingWindowSize: true,
 };
 
 /**
  * Simple component used to display image with square or round shape.
  * Convenient to display image previews or user avatar.
+ * Has a fallback image when the source image is in error.
  *
  * @return The component.
  */
@@ -142,10 +147,11 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     className = '',
     isCrossOriginEnabled = DEFAULT_PROPS.isCrossOriginEnabled,
     crossOrigin = DEFAULT_PROPS.crossOrigin,
-    debounceTime = DEFAULT_PROPS.debounceTime,
+    resizeDebounceTime = DEFAULT_PROPS.resizeDebounceTime,
     isFollowingWindowSize = DEFAULT_PROPS.isFollowingWindowSize,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
+    fallback = DEFAULT_PROPS.fallback,
     fillHeight = DEFAULT_PROPS.fillHeight,
     loading = DEFAULT_PROPS.loading,
     size = DEFAULT_PROPS.size,
@@ -158,8 +164,15 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     imgProps,
     ...props
 }: ThumbnailProps): ReactElement => {
-    const focusImageRef = useFocusedImage(focusPoint!, aspectRatio!, size!, debounceTime!, isFollowingWindowSize!);
-
+    const { isLoaded, hasError } = useImage(image);
+    const focusImageRef = useFocusedImage(
+        focusPoint!,
+        aspectRatio!,
+        size!,
+        resizeDebounceTime!,
+        isFollowingWindowSize!,
+        isLoaded,
+    );
     const setCrossOrigin = () => {
         return !isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined;
     };
@@ -178,28 +191,36 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             onKeyDown={onEnterPressed(onClick)}
             {...props}
         >
-            {aspectRatio === AspectRatio.original ? (
-                <img
-                    {...(imgProps || {})}
-                    ref={focusImageRef}
-                    className={`${CLASSNAME}__image`}
-                    src={image}
-                    alt={alt}
-                    loading={loading}
-                />
-            ) : (
-                <div className={`${CLASSNAME}__background`}>
+            {hasError &&
+                (typeof fallback === 'string' ? (
+                    <Icon icon={fallback as string} size={size} theme={theme} />
+                ) : (
+                    fallback
+                ))}
+
+            {isLoaded &&
+                (aspectRatio === AspectRatio.original ? (
                     <img
                         {...(imgProps || {})}
                         ref={focusImageRef}
-                        className={`${CLASSNAME}__focused-image`}
-                        crossOrigin={setCrossOrigin()}
+                        className={`${CLASSNAME}__image`}
                         src={image}
                         alt={alt}
                         loading={loading}
                     />
-                </div>
-            )}
+                ) : (
+                    <div className={`${CLASSNAME}__background`}>
+                        <img
+                            {...(imgProps || {})}
+                            ref={focusImageRef}
+                            className={`${CLASSNAME}__focused-image`}
+                            crossOrigin={setCrossOrigin()}
+                            src={image}
+                            alt={alt}
+                            loading={loading}
+                        />
+                    </div>
+                ))}
         </div>
     );
 };
