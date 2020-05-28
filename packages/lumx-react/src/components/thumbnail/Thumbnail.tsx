@@ -98,7 +98,7 @@ interface ThumbnailProps extends GenericProps {
     /** props that will be passed directly to the `img` tag */
     imgProps?: ImgHTMLAttributes<HTMLImageElement>;
     /** Fallback svg or react node. */
-    fallback: string | ReactNode;
+    fallback?: string | ReactNode;
 }
 
 /**
