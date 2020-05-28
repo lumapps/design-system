@@ -1,0 +1,238 @@
+/*
+  Do not edit directly
+  Generated on Thu, 28 May 2020 17:23:58 GMT
+*/
+
+$lumx-theme-dark-N: #28336d !default; // Neutral dark color
+$lumx-theme-dark-L1: rgba(40, 51, 109, 0.8) !default; // Base dark color with 80% opacity
+$lumx-theme-dark-L2: rgba(40, 51, 109, 0.6) !default; // Base dark color with 60% opacity
+$lumx-theme-dark-L3: rgba(40, 51, 109, 0.4) !default; // Base dark color with 40% opacity
+$lumx-theme-dark-L4: rgba(40, 51, 109, 0.2) !default; // Base dark color with 20% opacity
+$lumx-theme-dark-L5: rgba(40, 51, 109, 0.1) !default; // Base dark color with 10% opacity
+$lumx-theme-dark-L6: rgba(40, 51, 109, 0.05) !default; // Base dark color with 5% opacity
+$lumx-theme-light-N: #ffffff !default; // Neutral light color
+$lumx-theme-light-L1: rgba(255, 255, 255, 0.9) !default; // Light color with 90% opacity
+$lumx-theme-light-L2: rgba(255, 255, 255, 0.8) !default; // Light color with 80% opacity
+$lumx-theme-light-L3: rgba(255, 255, 255, 0.6) !default; // Light color with 60% opacity
+$lumx-theme-light-L4: rgba(255, 255, 255, 0.4) !default; // Light color with 40% opacity
+$lumx-theme-light-L5: rgba(255, 255, 255, 0.2) !default; // Light color with 20% opacity
+$lumx-theme-light-L6: rgba(255, 255, 255, 0.1) !default; // Light color with 10% opacity
+$lumx-theme-blue-D2: #2972e2 !default; // Darkest blue color
+$lumx-theme-blue-D1: #2885f6 !default; // Dark blue color
+$lumx-theme-blue-N: #2493ff !default; // Neutral blue color
+$lumx-theme-blue-L1: rgba(36, 147, 255, 0.8) !default; // Base blue color with 80% opacity
+$lumx-theme-blue-L2: rgba(36, 147, 255, 0.6) !default; // Base blue color with 60% opacity
+$lumx-theme-blue-L3: rgba(36, 147, 255, 0.4) !default; // Base blue color with 40% opacity
+$lumx-theme-blue-L4: rgba(36, 147, 255, 0.2) !default; // Base blue color with 20% opacity
+$lumx-theme-blue-L5: rgba(36, 147, 255, 0.1) !default; // Base blue color with 10% opacity
+$lumx-theme-blue-L6: rgba(36, 147, 255, 0.05) !default; // Base blue color with 5% opacity
+$lumx-theme-yellow-D2: #e16b00 !default; // Darkest yellow color
+$lumx-theme-yellow-D1: #fea41c !default; // Dark yellow color
+$lumx-theme-yellow-N: #ffc525 !default; // Neutral yellow color
+$lumx-theme-yellow-L1: rgba(255, 197, 37, 0.8) !default; // Yellow color with 80% opacity
+$lumx-theme-yellow-L2: rgba(255, 197, 37, 0.7) !default; // Yellow color with 60% opacity
+$lumx-theme-yellow-L3: rgba(255, 197, 37, 0.6) !default; // Yellow color with 40% opacity
+$lumx-theme-yellow-L4: rgba(255, 197, 37, 0.4) !default; // Yellow color with 20% opacity
+$lumx-theme-yellow-L5: rgba(255, 197, 37, 0.2) !default; // Yellow color with 10% opacity
+$lumx-theme-yellow-L6: rgba(255, 197, 37, 0.1) !default; // Yellow color with 5% opacity
+$lumx-theme-red-D2: #c2395a !default; // Darkest red color
+$lumx-theme-red-D1: #d83e5e !default; // Dark red color
+$lumx-theme-red-N: #e94361 !default; // Neutral red color
+$lumx-theme-red-L1: rgba(233, 67, 97, 0.8) !default; // Red color with 80% opacity
+$lumx-theme-red-L2: rgba(233, 67, 97, 0.6) !default; // Red color with 60% opacity
+$lumx-theme-red-L3: rgba(233, 67, 97, 0.4) !default; // Red color with 40% opacity
+$lumx-theme-red-L4: rgba(233, 67, 97, 0.2) !default; // Red color with 20% opacity
+$lumx-theme-red-L5: rgba(233, 67, 97, 0.1) !default; // Red color with 10% opacity
+$lumx-theme-red-L6: rgba(233, 67, 97, 0.05) !default; // Red color with 5% opacity
+$lumx-theme-green-D2: #008f4e !default; // Darkest green color
+$lumx-theme-green-D1: #0fa15a !default; // Dark green color
+$lumx-theme-green-N: #19b065 !default; // Neutral green color
+$lumx-theme-green-L1: rgba(25, 176, 101, 0.8) !default; // Green color with 80% opacity
+$lumx-theme-green-L2: rgba(25, 176, 101, 0.6) !default; // Green color with 60% opacity
+$lumx-theme-green-L3: rgba(25, 176, 101, 0.4) !default; // Green color with 40% opacity
+$lumx-theme-green-L4: rgba(25, 176, 101, 0.2) !default; // Green color with 20% opacity
+$lumx-theme-green-L5: rgba(25, 176, 101, 0.1) !default; // Green color with 10% opacity
+$lumx-theme-green-L6: rgba(25, 176, 101, 0.05) !default; // Green color with 5% opacity
+$lumx-theme-primary-D2: #2972e2 !default; // Darkest blue color
+$lumx-theme-primary-D1: #2885f6 !default; // Dark blue color
+$lumx-theme-primary-N: #2493ff !default; // Neutral blue color
+$lumx-theme-primary-L1: rgba(36, 147, 255, 0.8) !default; // Base blue color with 80% opacity
+$lumx-theme-primary-L2: rgba(36, 147, 255, 0.6) !default; // Base blue color with 60% opacity
+$lumx-theme-primary-L3: rgba(36, 147, 255, 0.4) !default; // Base blue color with 40% opacity
+$lumx-theme-primary-L4: rgba(36, 147, 255, 0.2) !default; // Base blue color with 20% opacity
+$lumx-theme-primary-L5: rgba(36, 147, 255, 0.1) !default; // Base blue color with 10% opacity
+$lumx-theme-primary-L6: rgba(36, 147, 255, 0.05) !default; // Base blue color with 5% opacity
+$lumx-theme-secondary-D2: #e16b00 !default; // Darkest yellow color
+$lumx-theme-secondary-D1: #fea41c !default; // Dark yellow color
+$lumx-theme-secondary-N: #ffc525 !default; // Neutral yellow color
+$lumx-theme-secondary-L1: rgba(255, 197, 37, 0.8) !default; // Yellow color with 80% opacity
+$lumx-theme-secondary-L2: rgba(255, 197, 37, 0.7) !default; // Yellow color with 60% opacity
+$lumx-theme-secondary-L3: rgba(255, 197, 37, 0.6) !default; // Yellow color with 40% opacity
+$lumx-theme-secondary-L4: rgba(255, 197, 37, 0.4) !default; // Yellow color with 20% opacity
+$lumx-theme-secondary-L5: rgba(255, 197, 37, 0.2) !default; // Yellow color with 10% opacity
+$lumx-theme-secondary-L6: rgba(255, 197, 37, 0.1) !default; // Yellow color with 5% opacity
+$lumx-theme-accent-D2: #e16b00 !default; // Darkest yellow color
+$lumx-theme-accent-D1: #fea41c !default; // Dark yellow color
+$lumx-theme-accent-N: #ffc525 !default; // Neutral yellow color
+$lumx-theme-accent-L1: rgba(255, 197, 37, 0.8) !default; // Yellow color with 80% opacity
+$lumx-theme-accent-L2: rgba(255, 197, 37, 0.7) !default; // Yellow color with 60% opacity
+$lumx-theme-accent-L3: rgba(255, 197, 37, 0.6) !default; // Yellow color with 40% opacity
+$lumx-theme-accent-L4: rgba(255, 197, 37, 0.4) !default; // Yellow color with 20% opacity
+$lumx-theme-accent-L5: rgba(255, 197, 37, 0.2) !default; // Yellow color with 10% opacity
+$lumx-theme-accent-L6: rgba(255, 197, 37, 0.1) !default; // Yellow color with 5% opacity
+$lumx-theme-black-N: #28336d !default; // Neutral dark color
+$lumx-theme-black-L1: rgba(40, 51, 109, 0.8) !default; // Base dark color with 80% opacity
+$lumx-theme-black-L2: rgba(40, 51, 109, 0.6) !default; // Base dark color with 60% opacity
+$lumx-theme-black-L3: rgba(40, 51, 109, 0.4) !default; // Base dark color with 40% opacity
+$lumx-theme-black-L4: rgba(40, 51, 109, 0.2) !default; // Base dark color with 20% opacity
+$lumx-theme-black-L5: rgba(40, 51, 109, 0.1) !default; // Base dark color with 10% opacity
+$lumx-theme-black-L6: rgba(40, 51, 109, 0.05) !default; // Base dark color with 5% opacity
+$lumx-theme-white-N: #ffffff !default; // Neutral light color
+$lumx-theme-white-L1: rgba(255, 255, 255, 0.9) !default; // Light color with 90% opacity
+$lumx-theme-white-L2: rgba(255, 255, 255, 0.8) !default; // Light color with 80% opacity
+$lumx-theme-white-L3: rgba(255, 255, 255, 0.6) !default; // Light color with 60% opacity
+$lumx-theme-white-L4: rgba(255, 255, 255, 0.4) !default; // Light color with 40% opacity
+$lumx-theme-white-L5: rgba(255, 255, 255, 0.2) !default; // Light color with 20% opacity
+$lumx-theme-white-L6: rgba(255, 255, 255, 0.1) !default; // Light color with 10% opacity
+$lumx-theme-orange-D2: #e16b00 !default; // Darkest yellow color
+$lumx-theme-orange-D1: #fea41c !default; // Dark yellow color
+$lumx-theme-orange-N: #ffc525 !default; // Neutral yellow color
+$lumx-theme-orange-L1: rgba(255, 197, 37, 0.8) !default; // Yellow color with 80% opacity
+$lumx-theme-orange-L2: rgba(255, 197, 37, 0.7) !default; // Yellow color with 60% opacity
+$lumx-theme-orange-L3: rgba(255, 197, 37, 0.6) !default; // Yellow color with 40% opacity
+$lumx-theme-orange-L4: rgba(255, 197, 37, 0.4) !default; // Yellow color with 20% opacity
+$lumx-theme-orange-L5: rgba(255, 197, 37, 0.2) !default; // Yellow color with 10% opacity
+$lumx-theme-orange-L6: rgba(255, 197, 37, 0.1) !default; // Yellow color with 5% opacity
+$lumx-theme-border-radius: 4px !default;
+
+$lumx-theme: (
+    'color': (
+        'dark': (
+            'N': $lumx-theme-dark-N,
+            'L1': $lumx-theme-dark-L1,
+            'L2': $lumx-theme-dark-L2,
+            'L3': $lumx-theme-dark-L3,
+            'L4': $lumx-theme-dark-L4,
+            'L5': $lumx-theme-dark-L5,
+            'L6': $lumx-theme-dark-L6
+        ),
+        'light': (
+            'N': $lumx-theme-light-N,
+            'L1': $lumx-theme-light-L1,
+            'L2': $lumx-theme-light-L2,
+            'L3': $lumx-theme-light-L3,
+            'L4': $lumx-theme-light-L4,
+            'L5': $lumx-theme-light-L5,
+            'L6': $lumx-theme-light-L6
+        ),
+        'blue': (
+            'D2': $lumx-theme-blue-D2,
+            'D1': $lumx-theme-blue-D1,
+            'N': $lumx-theme-blue-N,
+            'L1': $lumx-theme-blue-L1,
+            'L2': $lumx-theme-blue-L2,
+            'L3': $lumx-theme-blue-L3,
+            'L4': $lumx-theme-blue-L4,
+            'L5': $lumx-theme-blue-L5,
+            'L6': $lumx-theme-blue-L6
+        ),
+        'yellow': (
+            'D2': $lumx-theme-yellow-D2,
+            'D1': $lumx-theme-yellow-D1,
+            'N': $lumx-theme-yellow-N,
+            'L1': $lumx-theme-yellow-L1,
+            'L2': $lumx-theme-yellow-L2,
+            'L3': $lumx-theme-yellow-L3,
+            'L4': $lumx-theme-yellow-L4,
+            'L5': $lumx-theme-yellow-L5,
+            'L6': $lumx-theme-yellow-L6
+        ),
+        'red': (
+            'D2': $lumx-theme-red-D2,
+            'D1': $lumx-theme-red-D1,
+            'N': $lumx-theme-red-N,
+            'L1': $lumx-theme-red-L1,
+            'L2': $lumx-theme-red-L2,
+            'L3': $lumx-theme-red-L3,
+            'L4': $lumx-theme-red-L4,
+            'L5': $lumx-theme-red-L5,
+            'L6': $lumx-theme-red-L6
+        ),
+        'green': (
+            'D2': $lumx-theme-green-D2,
+            'D1': $lumx-theme-green-D1,
+            'N': $lumx-theme-green-N,
+            'L1': $lumx-theme-green-L1,
+            'L2': $lumx-theme-green-L2,
+            'L3': $lumx-theme-green-L3,
+            'L4': $lumx-theme-green-L4,
+            'L5': $lumx-theme-green-L5,
+            'L6': $lumx-theme-green-L6
+        ),
+        'primary': (
+            'D2': $lumx-theme-primary-D2,
+            'D1': $lumx-theme-primary-D1,
+            'N': $lumx-theme-primary-N,
+            'L1': $lumx-theme-primary-L1,
+            'L2': $lumx-theme-primary-L2,
+            'L3': $lumx-theme-primary-L3,
+            'L4': $lumx-theme-primary-L4,
+            'L5': $lumx-theme-primary-L5,
+            'L6': $lumx-theme-primary-L6
+        ),
+        'secondary': (
+            'D2': $lumx-theme-secondary-D2,
+            'D1': $lumx-theme-secondary-D1,
+            'N': $lumx-theme-secondary-N,
+            'L1': $lumx-theme-secondary-L1,
+            'L2': $lumx-theme-secondary-L2,
+            'L3': $lumx-theme-secondary-L3,
+            'L4': $lumx-theme-secondary-L4,
+            'L5': $lumx-theme-secondary-L5,
+            'L6': $lumx-theme-secondary-L6
+        ),
+        'accent': (
+            'D2': $lumx-theme-accent-D2,
+            'D1': $lumx-theme-accent-D1,
+            'N': $lumx-theme-accent-N,
+            'L1': $lumx-theme-accent-L1,
+            'L2': $lumx-theme-accent-L2,
+            'L3': $lumx-theme-accent-L3,
+            'L4': $lumx-theme-accent-L4,
+            'L5': $lumx-theme-accent-L5,
+            'L6': $lumx-theme-accent-L6
+        ),
+        'black': (
+            'N': $lumx-theme-black-N,
+            'L1': $lumx-theme-black-L1,
+            'L2': $lumx-theme-black-L2,
+            'L3': $lumx-theme-black-L3,
+            'L4': $lumx-theme-black-L4,
+            'L5': $lumx-theme-black-L5,
+            'L6': $lumx-theme-black-L6
+        ),
+        'white': (
+            'N': $lumx-theme-white-N,
+            'L1': $lumx-theme-white-L1,
+            'L2': $lumx-theme-white-L2,
+            'L3': $lumx-theme-white-L3,
+            'L4': $lumx-theme-white-L4,
+            'L5': $lumx-theme-white-L5,
+            'L6': $lumx-theme-white-L6
+        ),
+        'orange': (
+            'D2': $lumx-theme-orange-D2,
+            'D1': $lumx-theme-orange-D1,
+            'N': $lumx-theme-orange-N,
+            'L1': $lumx-theme-orange-L1,
+            'L2': $lumx-theme-orange-L2,
+            'L3': $lumx-theme-orange-L3,
+            'L4': $lumx-theme-orange-L4,
+            'L5': $lumx-theme-orange-L5,
+            'L6': $lumx-theme-orange-L6
+        )
+    ),
+    'size': (
+        'border-radius': $lumx-theme-border-radius
+    )
+);

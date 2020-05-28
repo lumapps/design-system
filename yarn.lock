@@ -9665,6 +9665,15 @@ fs-extra@^0.30.0:
     path-is-absolute "^1.0.0"
     rimraf "^2.2.8"
 
+fs-extra@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-6.0.1.tgz#8abc128f7946e310135ddc93b98bddb410e7a34b"
+  integrity sha512-GnyIkKhhzXZUWFCaJzvyDLEEgDkPfb4/TPvJCJVuS8MWZgoSsErf++QpiAlDnKFcqhRlm+tIOcencCjyJE6ZCA==
+  dependencies:
+    graceful-fs "^4.1.2"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs-extra@^8.0.1, fs-extra@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
@@ -19101,6 +19110,20 @@ strong-log-transformer@^2.0.0:
     duplexer "^0.1.1"
     minimist "^1.2.0"
     through "^2.3.4"
+
+style-dictionary@^2.10.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/style-dictionary/-/style-dictionary-2.10.0.tgz#9da99b13facbadb671bd5848dd59ab6ac8f58893"
+  integrity sha512-H4NpAKExmQdSMLNm9jVY8Kv+qfliFOgpxl07mqL+NyMMRs7HjR8IDvNJfxYqiVm0BhSpwFAp/hkUlD+8i7+P8w==
+  dependencies:
+    chalk "^2.4.1"
+    commander "^2.9.0"
+    fs-extra "^6.0.1"
+    glob "^7.1.1"
+    json5 "^2.1.0"
+    lodash "^4.17.15"
+    resolve-cwd "^2.0.0"
+    tinycolor2 "^1.4.1"
 
 style-loader@^1.0.0:
   version "1.1.2"

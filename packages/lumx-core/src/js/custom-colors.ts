@@ -1,3 +1,5 @@
+import { GlobalTheme } from '@lumx/core/js/types';
+
 import { CSS_PREFIX } from './constants';
 
 interface ColorPalette {
@@ -24,8 +26,6 @@ interface ColorPalette {
         L6: string;
     };
 }
-
-type Theme = 'lumapps' | 'material';
 
 /**
  * Add a css rule in a given sheet.
@@ -344,7 +344,7 @@ function _getRadioButtonCSSRules(colorPalette: ColorPalette, color: keyof ColorP
  * @param  theme        The theme, lumapps or material.
  * @return The select css rules.
  */
-function _getSelectCSSRules(colorPalette: ColorPalette, theme: Theme) {
+function _getSelectCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
     let selectRules;
 
     if (theme === 'lumapps') {
@@ -436,7 +436,7 @@ function _getSlideshowControlsCSSRules(colorPalette: ColorPalette) {
  * @param  theme        The theme, lumapps or material.
  * @return The switch css rules.
  */
-function _getSwitchCSSRules(colorPalette: ColorPalette, theme: Theme) {
+function _getSwitchCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
     let switchRules;
 
     if (theme === 'lumapps') {
@@ -538,7 +538,7 @@ function _getSwitchCSSRules(colorPalette: ColorPalette, theme: Theme) {
  * @param  theme        The theme, lumapps or material.
  * @return The tabs css rules.
  */
-function _getTabsCSSRules(colorPalette: ColorPalette, theme: Theme) {
+function _getTabsCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
     const tabsRules = [
         {
             selector: `
@@ -568,7 +568,7 @@ function _getTabsCSSRules(colorPalette: ColorPalette, theme: Theme) {
  * @param  theme        The theme, lumapps or material.
  * @return The text field css rules.
  */
-function _getTextFieldCSSRules(colorPalette: ColorPalette, theme: Theme) {
+function _getTextFieldCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
     let textFieldRules;
 
     if (theme === 'lumapps') {
@@ -607,7 +607,7 @@ function _getTextFieldCSSRules(colorPalette: ColorPalette, theme: Theme) {
  * @param theme        The theme to apply the custom color palette on.
  * @param colorPalette The custom color palette.
  */
-function setCustomColors(sheet: CSSStyleSheet, theme: Theme, colorPalette: ColorPalette) {
+function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette: ColorPalette) {
     let index = 0;
 
     const buttonRules = [
