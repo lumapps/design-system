@@ -195,7 +195,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                 (typeof fallback === 'string' ? (
                     <Icon icon={fallback as string} size={size} theme={theme} />
                 ) : (
-                    <>{fallback}</>
+                    fallback
                 ))}
 
             {isLoaded &&
