@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.23.0][] - 2020-05-29
+
 ### Added
 
 -   Added optional `defaultMonth` prop to components `DatePickerField` and `DatePicker`.
@@ -492,3 +494,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.19]: https://github.com/lumapps/design-system/tree/v0.21.19
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.22.0...HEAD
 [0.22.0]: https://github.com/lumapps/design-system/tree/v0.22.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.23.0...HEAD
+[0.23.0]: https://github.com/lumapps/design-system/tree/v0.23.0
