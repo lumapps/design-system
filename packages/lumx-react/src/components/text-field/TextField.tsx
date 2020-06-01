@@ -129,11 +129,11 @@ const useComputeNumberOfRows = (
      * Callback in order to recalculate the number of rows due to a change on the text area
      * @param event Change event.
      */
-    recomputeNumberOfRows(event: React.ChangeEvent): void;
+    recomputeNumberOfRows(target: Element): void;
 } => {
     const [rows, setRows] = useState(minimumRows);
 
-    const recompute = (event: React.ChangeEvent) => {
+    const recompute = (target: Element) => {
         /**
          * HEAD's UP! This part is a little bit tricky. The idea here is to only
          * display the necessary rows on the textarea. In order to dynamically adjust
@@ -148,9 +148,9 @@ const useComputeNumberOfRows = (
          * 5. In case there is any other update on the component that changes the UI, we need to keep the number of rows
          * on the state in order to allow React to re-render. Therefore, we save them using `useState`
          */
-        (event.target as HTMLTextAreaElement).rows = minimumRows;
-        const currentRows = event.target.scrollHeight / (event.target.clientHeight / minimumRows);
-        (event.target as HTMLTextAreaElement).rows = currentRows;
+        (target as HTMLTextAreaElement).rows = minimumRows;
+        const currentRows = target.scrollHeight / (target.clientHeight / minimumRows);
+        (target as HTMLTextAreaElement).rows = currentRows;
 
         setRows(currentRows);
     };
@@ -172,7 +172,7 @@ interface InputNativeProps {
     value?: string | number;
     rows: number;
     setFocus(focus: boolean): void;
-    recomputeNumberOfRows(event: React.ChangeEvent): void;
+    recomputeNumberOfRows(target: Element): void;
     onChange(value: string): void;
     onFocus?(value: React.FocusEvent): void;
     onBlur?(value: React.FocusEvent): void;
@@ -196,6 +196,13 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         ...forwardedProps
     } = props;
 
+    React.useEffect(() => {
+        // Recompute the number of rows for the first rendering
+        if (multiline && inputRef && inputRef.current) {
+            recomputeNumberOfRows(inputRef.current);
+        }
+    }, [inputRef]);
+
     const onTextFieldFocus = (event: React.FocusEvent) => {
         if (onFocus) {
             onFocus(event);
@@ -214,7 +221,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
 
     const handleChange = (event: React.ChangeEvent) => {
         if (multiline) {
-            recomputeNumberOfRows(event);
+            recomputeNumberOfRows(event.target);
         }
 
         onChange(get(event, 'target.value'));
