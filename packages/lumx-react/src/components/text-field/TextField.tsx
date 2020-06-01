@@ -149,7 +149,8 @@ const useComputeNumberOfRows = (
          * on the state in order to allow React to re-render. Therefore, we save them using `useState`
          */
         (target as HTMLTextAreaElement).rows = minimumRows;
-        const currentRows = target.scrollHeight / (target.clientHeight / minimumRows);
+        let currentRows = target.scrollHeight / (target.clientHeight / minimumRows);
+        currentRows = currentRows >= minimumRows ? currentRows : minimumRows;
         (target as HTMLTextAreaElement).rows = currentRows;
 
         setRows(currentRows);
