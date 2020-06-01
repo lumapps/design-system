@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   _[BREAKING]_ Replaced `today` and `monthOffset` props by `selectedMonth` for `DatePickerControlled` component.
+-   `TextField` component is now computing the number of rows (if `multiple` is set) at the first rendering
 
 ### Fixed
 
