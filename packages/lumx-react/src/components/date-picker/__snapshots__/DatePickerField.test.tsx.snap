@@ -18,3 +18,60 @@ exports[`<DatePickerField> Snapshots and structure should render correctly 1`] =
   />
 </Fragment>
 `;
+
+exports[`<DatePickerField> Snapshots and structure should render correctly when passed a compatible string 1`] = `
+<Fragment>
+  <TextField
+    forceFocusStyle={false}
+    label="DatePickerField"
+    onChange={[Function]}
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    readOnly={true}
+    textFieldRef={
+      Object {
+        "current": null,
+      }
+    }
+    value="January 18, 1970"
+  />
+</Fragment>
+`;
+
+exports[`<DatePickerField> Snapshots and structure should render correctly when passed a date object 1`] = `
+<Fragment>
+  <TextField
+    forceFocusStyle={false}
+    label="DatePickerField"
+    onChange={[Function]}
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    readOnly={true}
+    textFieldRef={
+      Object {
+        "current": null,
+      }
+    }
+    value="January 18, 1970"
+  />
+</Fragment>
+`;
+
+exports[`<DatePickerField> Snapshots and structure should render without selected date when passed a invalid string 1`] = `
+<Fragment>
+  <TextField
+    forceFocusStyle={false}
+    label="DatePickerField"
+    onChange={[Function]}
+    onClick={[Function]}
+    onKeyPress={[Function]}
+    readOnly={true}
+    textFieldRef={
+      Object {
+        "current": null,
+      }
+    }
+    value=""
+  />
+</Fragment>
+`;

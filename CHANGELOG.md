@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `TextField` component is now computing the number of rows (if `multiple` is set) at the first rendering
 
+### Changed
+
+-   The `DatePicker` and `DatePickerFields` components now accept a javascript Date object or string as value.
+
 ## [0.23.0][] - 2020-05-29
 
 ### Added

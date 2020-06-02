@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, DatePicker } from './DatePicker';
+import DatePickerValueProp from './DatePickerValueProp';
 
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
@@ -28,10 +29,10 @@ interface DatePickerFieldProps extends GenericProps {
     minDate?: Date;
 
     /** Value. */
-    value: moment.Moment | undefined;
+    value: DatePickerValueProp;
 
     /** Month to display by default */
-    defaultMonth?: moment.Moment;
+    defaultMonth?: DatePickerValueProp;
 
     /** On change. */
     onChange(value: moment.Moment | undefined): void;
@@ -127,12 +128,17 @@ const DatePickerField = ({
         closeSimpleMenu();
     };
 
+    const castedValue = value && moment(value).isValid() ? moment(value) : undefined
+    const castedDefaultMonth = defaultMonth && moment(defaultMonth).isValid() ? moment(defaultMonth) : undefined
+    if ((value && !moment(value).isValid()) || (defaultMonth && !moment(defaultMonth).isValid())) {
+        console.warn(`[@lumx/react/DatePickerField] Invalid date provided '${value}'`)
+    }
     return (
         <>
             <TextField
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                value={value ? value.format('LL') : ''}
+                value={castedValue ? castedValue.format('LL') : ''}
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
@@ -157,10 +163,10 @@ const DatePickerField = ({
                             locale={locale}
                             maxDate={maxDate}
                             minDate={minDate}
-                            value={value}
+                            value={castedValue}
                             onChange={onDatePickerChange}
                             todayOrSelectedDateRef={todayOrSelectedDateRef}
-                            defaultMonth={defaultMonth}
+                            defaultMonth={castedDefaultMonth}
                         />
                     </div>
                 </Popover>

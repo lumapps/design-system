@@ -68,3 +68,48 @@ export const customMonth = ({ theme }: any) => {
         />
     );
 };
+
+export const withDateObject = ({ theme }: any) => {
+    const [value, setValue] = React.useState<DatePickerProps['value']>(new Date('2020-05-18'));
+
+    return (
+        <DatePickerField
+            locale="fr"
+            label="Start date"
+            placeholder="Pick a date"
+            theme={theme}
+            onChange={setValue}
+            value={value}
+        />
+    );
+};
+
+export const withCompatibleString = ({ theme }: any) => {
+    const [value, setValue] = React.useState<DatePickerProps['value']>('2020-05-22');
+
+    return (
+        <DatePickerField
+            locale="fr"
+            label="Start date"
+            placeholder="Pick a date"
+            theme={theme}
+            onChange={setValue}
+            value={value}
+        />
+    );
+};
+
+export const withIncompatibleString = ({ theme }: any) => {
+    const [value, setValue] = React.useState<DatePickerProps['value']>('not a real date');
+
+    return (
+        <DatePickerField
+            locale="fr"
+            label="Start date"
+            placeholder="Pick a date"
+            theme={theme}
+            onChange={setValue}
+            value={value}
+        />
+    );
+};

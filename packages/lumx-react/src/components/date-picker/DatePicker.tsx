@@ -8,6 +8,7 @@ import { GenericProps } from '@lumx/react/utils';
 import { getRootClassName } from '../../utils/getRootClassName';
 
 import { DatePickerControlled } from './DatePickerControlled';
+import DatePickerValueProp from './DatePickerValueProp';
 
 /**
  * Defines the props of the component.
@@ -27,10 +28,10 @@ interface DatePickerProps extends GenericProps {
     todayOrSelectedDateRef?: RefObject<HTMLButtonElement>;
 
     /** Value. */
-    value: moment.Moment | undefined;
+    value: DatePickerValueProp;
 
     /** Month to display by default */
-    defaultMonth?: moment.Moment;
+    defaultMonth?: DatePickerValueProp;
 
     /** On change. */
     onChange(value: moment.Moment | undefined): void;
@@ -61,7 +62,18 @@ const DEFAULT_PROPS: Partial<DatePickerProps> = {
  * @return The component.
  */
 const DatePicker = (props: DatePickerProps) => {
-    const today = props.value || props.defaultMonth || moment();
+    let castedValue;
+    const { value, defaultMonth } = props;
+    if (value) {
+        castedValue = moment(value);
+    } else if (defaultMonth) {
+        castedValue = moment(defaultMonth);
+    }
+    if (castedValue && !castedValue.isValid()) {
+        console.warn(`[@lumx/react/DatePicker] Invalid date provided ${castedValue}`);
+    }
+    const today = castedValue && castedValue.isValid() ? castedValue : moment();
+
     const [monthOffset, setMonthOffset] = useState(0);
 
     const setPrevMonth = () => setMonthOffset(monthOffset - 1);
