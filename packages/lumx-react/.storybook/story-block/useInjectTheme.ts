@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { GLOBAL_THEMES } from '@lumx/core/js/constants';
+import { CORE } from '@lumx/core/js/constants';
 import { GlobalTheme } from '@lumx/core/js/types';
 
 /**
@@ -11,7 +11,7 @@ import '@lumx/core/scss/lumx-theme-material.scss';
 
 import '@lumx/core/scss/lumx-theme-lumapps.scss';
 
-const THEMES = Object.keys(GLOBAL_THEMES) as GlobalTheme[];
+const GLOBAL_THEMES = Object.keys(CORE) as GlobalTheme[];
 const stylesNodes: Node[] = [];
 
 /**
@@ -30,7 +30,7 @@ const stylesNodes: Node[] = [];
  */
 export function useInjectTheme(globalTheme: GlobalTheme) {
     useEffect(() => {
-        const currentStyle = THEMES.indexOf(globalTheme);
+        const currentStyle = GLOBAL_THEMES.indexOf(globalTheme);
         const nodes = document.querySelectorAll('style#injected-styles');
 
         if (stylesNodes.length === 0) {

@@ -30,7 +30,7 @@
         @include lumx-typography('body1');
 
         display: block;
-        color: lumx-theme-color-variant('dark', 'L2');
+        color: lumx-color-variant('dark', 'L2');
     }
 
     &__after {

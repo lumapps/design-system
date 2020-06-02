@@ -9,12 +9,12 @@
 /* Link colors
    ========================================================================== */
 
-@each $color-key, $color in $lumx-theme-color-palette {
+@each $color-key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-link--color-#{$color-key} {
         @include lumx-link-color($color-key, 'N');
     }
 
-    @each $color-variant in $lumx-theme-color-variants {
+    @each $color-variant in $lumx-color-variants {
         .#{$lumx-base-prefix}-link--color-#{$color-key}.#{$lumx-base-prefix}-link--color-variant-#{$color-variant} {
             @include lumx-link-color($color-key, $color-variant);
         }

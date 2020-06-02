@@ -15,11 +15,11 @@
         font-size: 10px;
 
         #{$self}--theme-light & {
-            color: lumx-theme-color-variant('dark', 'L2');
+            color: lumx-color-variant('dark', 'L2');
         }
 
         #{$self}--theme-dark & {
-            color: lumx-theme-color-variant('light', 'L2');
+            color: lumx-color-variant('light', 'L2');
         }
 
         &--min {
@@ -57,21 +57,21 @@
 
         &--background {
             #{$self}--theme-light & {
-                background-color: lumx-theme-color-variant('dark', 'L5');
+                background-color: lumx-color-variant('dark', 'L5');
             }
 
             #{$self}--theme-dark & {
-                background-color: lumx-theme-color-variant('light', 'L5');
+                background-color: lumx-color-variant('light', 'L5');
             }
         }
 
         &--active {
             #{$self}--theme-light & {
-                background-color: lumx-theme-color-variant('primary', 'N');
+                background-color: lumx-color-variant('primary', 'N');
             }
 
             #{$self}--theme-dark & {
-                background-color: lumx-theme-color-variant('light', 'N');
+                background-color: lumx-color-variant('light', 'N');
             }
         }
     }
@@ -130,11 +130,11 @@
         }
 
         #{$self}--theme-light & {
-            background-color: lumx-theme-color-variant('dark', 'L5');
+            background-color: lumx-color-variant('dark', 'L5');
         }
 
         #{$self}--theme-dark & {
-            background-color: lumx-theme-color-variant('light', 'L5');
+            background-color: lumx-color-variant('light', 'L5');
         }
     }
 }

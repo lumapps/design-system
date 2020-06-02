@@ -101,7 +101,7 @@
 /* Button colors
    ========================================================================== */
 
-@each $key, $color in $lumx-theme-color-palette {
+@each $key, $color in $lumx-color-palette {
     @if $key != 'dark' and $key != 'light' {
         .#{$lumx-base-prefix}-button--color-#{$key} {
             &.#{$lumx-base-prefix}-button--emphasis-high.#{$lumx-base-prefix}-button--theme-light {
@@ -119,7 +119,7 @@
     }
 }
 
-@each $key, $color in $lumx-theme-color-palette {
+@each $key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-button--color-#{$key} {
         &.#{$lumx-base-prefix}-button--emphasis-medium {
             @include lumx-button-color(lumx-base-const('emphasis', 'MEDIUM'), $key);
@@ -149,7 +149,7 @@
 
 .#{$lumx-base-prefix}-button-wrapper {
     &--variant-button {
-        border-radius: $lumx-theme-border-radius;
+        border-radius: $lumx-border-radius;
     }
 
     &--variant-icon {
@@ -157,11 +157,11 @@
     }
 
     &--color-light {
-        background-color: lumx-theme-color-variant('light', 'N');
+        background-color: lumx-color-variant('light', 'N');
     }
 
     &--color-dark {
-        background-color: lumx-theme-color-variant('dark', 'N');
+        background-color: lumx-color-variant('dark', 'N');
     }
 }
 
@@ -177,12 +177,12 @@
         border-radius: 0 !important;
 
         &:first-child {
-            border-radius: $lumx-theme-border-radius 0 0 $lumx-theme-border-radius !important;
+            border-radius: $lumx-border-radius 0 0 $lumx-border-radius !important;
         }
 
         &:last-child {
             margin-right: 0;
-            border-radius: 0 $lumx-theme-border-radius $lumx-theme-border-radius 0 !important;
+            border-radius: 0 $lumx-border-radius $lumx-border-radius 0 !important;
         }
     }
 }

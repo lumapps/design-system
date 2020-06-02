@@ -12,13 +12,13 @@ interface DemoColorProps {
 const DemoColor: React.FC<DemoColorProps> = ({ color, theme }) => {
     const colorVariants = useThemeColorVariants(color);
     return (
-        <div className={classNames('demo-colors', { 'lumx-theme-background-dark-N': theme === Theme.dark })}>
+        <div className={classNames('demo-colors', { 'lumx-color-background-dark-N': theme === Theme.dark })}>
             {Object.entries(colorVariants).map(([variant, colorDescription]) => (
                 <div
                     className={classNames(
                         'demo-colors__hue',
-                        `lumx-theme-background-${colorDescription.colorName}-${variant}`,
-                        `lumx-theme-color-${colorDescription.fontColor}-N`,
+                        `lumx-color-background-${colorDescription.colorName}-${variant}`,
+                        `lumx-color-font-${colorDescription.fontColor}-N`,
                     )}
                     key={variant}
                 >

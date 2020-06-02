@@ -27,7 +27,7 @@ const App = () => (
                 </div>
 
                 <div>
-                    <span className="lumx-theme-color-dark-L2">Secondary text</span>
+                    <span className="lumx-color-font-dark-L2">Secondary text</span>
                 </div>
             </ListItem>
 
@@ -39,7 +39,7 @@ const App = () => (
                 </div>
 
                 <div>
-                    <span className="lumx-theme-color-dark-L2">Secondary text</span>
+                    <span className="lumx-color-font-dark-L2">Secondary text</span>
                 </div>
             </ListItem>
 
@@ -53,7 +53,7 @@ const App = () => (
                 </div>
 
                 <div>
-                    <span className="lumx-theme-color-dark-L2">Secondary text</span>
+                    <span className="lumx-color-font-dark-L2">Secondary text</span>
                 </div>
             </ListItem>
 
@@ -67,7 +67,7 @@ const App = () => (
                 </div>
 
                 <div>
-                    <span className="lumx-theme-color-dark-L2">Secondary text</span>
+                    <span className="lumx-color-font-dark-L2">Secondary text</span>
                 </div>
             </ListItem>
         </List>

@@ -1,6 +1,0 @@
-$lumx-theme-color-palette: map-get($lumx-theme, 'color') !default;
-
-$lumx-theme-primary: map-get($lumx-theme-color-palette, 'primary') !default;
-$lumx-theme-secondary: map-get($lumx-theme-color-palette, 'secondary') !default;
-
-$lumx-theme-color-variants: ('D2', 'D1', 'N', 'L1', 'L2', 'L3', 'L4', 'L5', 'L6');

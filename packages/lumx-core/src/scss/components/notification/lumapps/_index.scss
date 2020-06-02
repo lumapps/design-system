@@ -14,8 +14,8 @@
     overflow: hidden;
     align-items: center;
     animation: lumx-notification-show $lumx-notification-transition-duration;
-    background-color: lumx-theme-color-variant('light', 'N');
-    border-radius: $lumx-theme-border-radius;
+    background-color: lumx-color-variant('light', 'N');
+    border-radius: $lumx-border-radius;
     transition: opacity $lumx-notification-transition-duration;
 
     &--is-hidden {
@@ -28,14 +28,14 @@
         height: $lumx-notification-height;
         align-items: center;
         justify-content: center;
-        color: lumx-theme-color-variant('light', 'L3');
+        color: lumx-color-variant('light', 'L3');
     }
 
     &__content {
         @include lumx-typography('body1');
 
         padding: 0 $lumx-spacing-unit * 2;
-        color: lumx-theme-color-variant('dark', 'N');
+        color: lumx-color-variant('dark', 'N');
     }
 
     &__action {
@@ -60,6 +60,6 @@
 
 @each $color in $lumx-notification-color-palette {
     .#{$lumx-base-prefix}-notification--color-#{$color} .#{$lumx-base-prefix}-notification__icon {
-        background-color: lumx-theme-color-variant($color, 'N');
+        background-color: lumx-color-variant($color, 'N');
     }
 }

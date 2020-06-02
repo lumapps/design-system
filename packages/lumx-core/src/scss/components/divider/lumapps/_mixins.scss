@@ -4,16 +4,16 @@
     margin: 0;
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {
-        background-color: lumx-theme-color-variant('dark', $lumx-divider-color-variant);
+        background-color: lumx-color-variant('dark', $lumx-divider-color-variant);
     } @else if $theme == lumx-base-const('theme', 'DARK') {
-        background-color: lumx-theme-color-variant('light', $lumx-divider-color-variant);
+        background-color: lumx-color-variant('light', $lumx-divider-color-variant);
     }
 }
 
 @mixin lumx-has-divider($theme, $position: 'bottom') {
     @if $theme == lumx-base-const('theme', 'LIGHT') {
-        border-#{$position}: 1px solid lumx-theme-color-variant('dark', $lumx-divider-color-variant);
+        border-#{$position}: 1px solid lumx-color-variant('dark', $lumx-divider-color-variant);
     } @else if $theme == lumx-base-const('theme', 'DARK') {
-        border-#{$position}: 1px solid lumx-theme-color-variant('light', $lumx-divider-color-variant);
+        border-#{$position}: 1px solid lumx-color-variant('light', $lumx-divider-color-variant);
     }
 }

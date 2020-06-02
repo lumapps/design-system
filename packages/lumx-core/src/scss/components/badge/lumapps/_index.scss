@@ -28,14 +28,14 @@
 /* Badge colors
    ========================================================================== */
 
-@each $key, $color in $lumx-theme-color-palette {
+@each $key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-badge--color-#{$key} {
-        background-color: lumx-theme-color-variant($key, 'N');
+        background-color: lumx-color-variant($key, 'N');
 
         @if $key == 'light' {
             @include lumx-elevation(2);
         } @else {
-            color: lumx-theme-color-variant('light', 'N');
+            color: lumx-color-variant('light', 'N');
         }
     }
 }

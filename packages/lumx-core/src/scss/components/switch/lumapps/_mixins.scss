@@ -53,25 +53,25 @@
         right: $lumx-switch-indicator-offset;
 
         @if $theme == lumx-base-const('theme', 'LIGHT') {
-            background-color: lumx-theme-color-variant('light', 'N');
+            background-color: lumx-color-variant('light', 'N');
         } @else if $theme == lumx-base-const('theme', 'DARK') {
-            background-color: lumx-theme-color-variant($lumx-switch-checked-color, 'N');
+            background-color: lumx-color-variant($lumx-switch-checked-color, 'N');
         }
     } @else if $status == 'unchecked' {
         left: $lumx-switch-indicator-offset;
 
         @if $theme == lumx-base-const('theme', 'LIGHT') {
-            background-color: lumx-theme-color-variant('dark', 'N');
+            background-color: lumx-color-variant('dark', 'N');
         } @else if $theme == lumx-base-const('theme', 'DARK') {
-            background-color: lumx-theme-color-variant('light', 'N');
+            background-color: lumx-color-variant('light', 'N');
         }
     }
 }
 
 @mixin lumx-switch-input-indicator-disabled($theme) {
     @if $theme == lumx-base-const('theme', 'LIGHT') {
-        background-color: lumx-theme-color-variant('dark', 'L3');
+        background-color: lumx-color-variant('dark', 'L3');
     } @else if $theme == lumx-base-const('theme', 'DARK') {
-        background-color: lumx-theme-color-variant('light', 'L3');
+        background-color: lumx-color-variant('light', 'L3');
     }
 }

@@ -12,7 +12,7 @@
         @include lumx-input-label(lumx-base-const('theme', 'LIGHT'));
 
         &:before {
-            color: lumx-theme-color-variant('red', 'N');
+            color: lumx-color-variant('red', 'N');
         }
     }
 

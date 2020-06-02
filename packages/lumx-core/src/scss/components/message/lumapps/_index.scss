@@ -8,7 +8,7 @@
 
     &--has-background {
         padding: $lumx-spacing-unit * 2;
-        border-radius: $lumx-theme-border-radius;
+        border-radius: $lumx-border-radius;
     }
 
     &__icon {
@@ -29,12 +29,12 @@
 @each $color in $lumx-notification-color-palette {
     .#{$lumx-base-prefix}-message--color-#{$color} {
         &.#{$lumx-base-prefix}-message--has-background {
-            background-color: lumx-theme-color-variant($color, 'L6');
+            background-color: lumx-color-variant($color, 'L6');
         }
 
         .#{$lumx-base-prefix}-message__icon,
         .#{$lumx-base-prefix}-message__text {
-            color: lumx-theme-color-variant($color, 'D2');
+            color: lumx-color-variant($color, 'D2');
         }
     }
 }

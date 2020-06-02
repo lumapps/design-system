@@ -70,7 +70,7 @@ const App = () => {
 
                         <div className="lumx-spacing-margin-left-big">
                             <span className="lumx-base-display-block lumx-typography-body1">With thumbnail</span>
-                            <span className="lumx-base-display-block lumx-typography-caption lumx-theme-color-dark-L2">
+                            <span className="lumx-base-display-block lumx-typography-caption lumx-color-font-dark-L2">
                                 And secondary text
                             </span>
                         </div>

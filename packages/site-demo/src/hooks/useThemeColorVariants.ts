@@ -2,7 +2,7 @@ import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
 import { useContext, useMemo } from 'react';
 
-import { GLOBAL_THEMES } from '@lumx/core/js/constants';
+import { CORE } from '@lumx/core/js/constants';
 import { GlobalTheme } from '@lumx/core/js/types';
 import { GlobalThemeContext } from '@lumx/demo/context/global-theme';
 
@@ -35,7 +35,7 @@ function getFontColor(colorName: string, colorVariant: string): 'dark' | 'light'
 }
 
 function formatColorDescription(globalTheme: GlobalTheme, colorName: string): ColorVariants {
-    const colorWithVariants = get(GLOBAL_THEMES, [globalTheme, 'color', colorName]);
+    const colorWithVariants = get(CORE, [globalTheme, 'color', colorName]);
 
     return mapValues(
         colorWithVariants,

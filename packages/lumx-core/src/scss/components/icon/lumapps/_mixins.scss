@@ -13,9 +13,9 @@
 
 @mixin lumx-icon-color($color, $has-shape: false) {
     @if $has-shape == true {
-        background-color: lumx-theme-color-variant($color, 'L5');
-        color: lumx-theme-color-variant($color, 'L2');
+        background-color: lumx-color-variant($color, 'L5');
+        color: lumx-color-variant($color, 'L2');
     } @else if $has-shape == false {
-        color: lumx-theme-color-variant($color, 'N');
+        color: lumx-color-variant($color, 'N');
     }
 }

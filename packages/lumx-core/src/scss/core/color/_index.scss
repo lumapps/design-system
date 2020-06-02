@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Color (font & background)
+   ========================================================================== */
+
+@each $color-key, $color in $lumx-color-palette {
+    @each $color-variant in $lumx-color-variants {
+        .#{$lumx-base-prefix}-color-background-#{$color-key}-#{$color-variant} {
+            background-color: lumx-color-variant($color-key, $color-variant);
+        }
+
+        .#{$lumx-base-prefix}-color-font-#{$color-key}-#{$color-variant} {
+            color: lumx-color-variant($color-key, $color-variant);
+        }
+    }
+}

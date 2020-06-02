@@ -25,11 +25,11 @@
             @include lumx-typography($lumx-input-label-typography);
 
             #{$self}--theme-light & {
-                color: lumx-theme-color-variant('dark', 'L2');
+                color: lumx-color-variant('dark', 'L2');
             }
 
             #{$self}--theme-dark & {
-                color: lumx-theme-color-variant('light', 'L2');
+                color: lumx-color-variant('light', 'L2');
             }
         }
 
@@ -37,11 +37,11 @@
             margin-left: $lumx-spacing-unit / 2;
 
             #{$self}--theme-light & {
-                color: lumx-theme-color-variant('red', 'N');
+                color: lumx-color-variant('red', 'N');
             }
 
             #{$self}--theme-dark & {
-                color: lumx-theme-color-variant('light', 'N');
+                color: lumx-color-variant('light', 'N');
             }
         }
     }

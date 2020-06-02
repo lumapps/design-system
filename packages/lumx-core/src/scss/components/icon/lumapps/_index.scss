@@ -53,7 +53,7 @@
 /* Icon colors
    ========================================================================== */
 
-@each $color-key, $color in $lumx-theme-color-palette {
+@each $color-key, $color in $lumx-color-palette {
     .#{$lumx-base-prefix}-icon--color-#{$color-key} {
         &.#{$lumx-base-prefix}-icon--no-shape {
             @include lumx-icon-color($color-key, false);
@@ -64,9 +64,9 @@
         }
     }
 
-    @each $color-variant in $lumx-theme-color-variants {
+    @each $color-variant in $lumx-color-variants {
         .#{$lumx-base-prefix}-icon--color-#{$color-key}.#{$lumx-base-prefix}-icon--color-variant-#{$color-variant} {
-            color: lumx-theme-color-variant($color-key, $color-variant);
+            color: lumx-color-variant($color-key, $color-variant);
         }
     }
 }

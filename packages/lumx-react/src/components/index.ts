@@ -22,7 +22,7 @@ interface ComplexPropDefault<T> {
 }
 
 /**
- * See SCSS variable $lumx-theme-color-palette
+ * See SCSS variable $lumx-color-palette
  */
 enum ColorPalette {
     primary = 'primary',
@@ -37,7 +37,7 @@ enum ColorPalette {
 type Color = ColorPalette | string;
 
 /**
- * See SCSS variable $lumx-theme-color-variants
+ * See SCSS variable $lumx-color-variants
  */
 enum ColorVariant {
     D1 = 'D1',

@@ -28,7 +28,7 @@ const StoryBlock: React.FC<StoryBlockProps> = (props) => {
         <div
             key="story"
             className={classNames(CLASSNAME, {
-                'lumx-theme-background-dark-N lumx-theme-color-light-N': theme === Theme.dark,
+                'lumx-color-background-dark-N lumx-color-font-light-N': theme === Theme.dark,
             })}
             style={styles.block}
         >

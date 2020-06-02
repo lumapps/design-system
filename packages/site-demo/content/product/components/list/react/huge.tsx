@@ -26,7 +26,7 @@ const App = () => (
                 </div>
 
                 <div>
-                    <span className="lumx-theme-color-dark-L2">
+                    <span className="lumx-color-font-dark-L2">
                         Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
                         inter se differunt. Idque Caesaris facere voluntate liceret: sese habere
                     </span>
@@ -41,7 +41,7 @@ const App = () => (
                 </div>
 
                 <div>
-                    <span className="lumx-theme-color-dark-L2">
+                    <span className="lumx-color-font-dark-L2">
                         Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
                         inter se differunt. Idque Caesaris facere voluntate liceret: sese habere
                     </span>
@@ -58,7 +58,7 @@ const App = () => (
                 </div>
 
                 <div>
-                    <span className="lumx-theme-color-dark-L2">
+                    <span className="lumx-color-font-dark-L2">
                         Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
                         inter se differunt. Idque Caesaris facere voluntate liceret: sese habere
                     </span>
@@ -75,7 +75,7 @@ const App = () => (
                 </div>
 
                 <div>
-                    <span className="lumx-theme-color-dark-L2">
+                    <span className="lumx-color-font-dark-L2">
                         Secondary text Ambitioni dedisse scripsisse iudicaretur. Hi omnes lingua, institutis, legibus
                         inter se differunt. Idque Caesaris facere voluntate liceret: sese habere
                     </span>

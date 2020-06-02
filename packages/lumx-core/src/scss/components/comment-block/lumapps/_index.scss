@@ -19,12 +19,12 @@
 
     &--has-children#{$self}--has-indented-children#{$self}--theme-light::before,
     &--has-children#{$self}--has-indented-children#{$self}--theme-light &::before {
-        background-color: lumx-theme-color-variant('dark', 'L5');
+        background-color: lumx-color-variant('dark', 'L5');
     }
 
     &--has-children#{$self}--has-indented-children#{$self}--theme-dark::before,
     &--has-children#{$self}--has-indented-children#{$self}--theme-dark &::before {
-        background-color: lumx-theme-color-variant('light', 'L5');
+        background-color: lumx-color-variant('light', 'L5');
     }
 
     &__children & {
@@ -46,11 +46,11 @@
         }
 
         #{$self}--has-linear-children#{$self}--has-children#{$self}--theme-light &::before {
-            background-color: lumx-theme-color-variant('dark', 'L5');
+            background-color: lumx-color-variant('dark', 'L5');
         }
 
         #{$self}--has-linear-children#{$self}--has-children#{$self}--theme-dark &::before {
-            background-color: lumx-theme-color-variant('light', 'L5');
+            background-color: lumx-color-variant('light', 'L5');
         }
 
         #{$self}--has-linear-children #{$self}__children #{$self}:last-child &::before {
@@ -72,14 +72,14 @@
         overflow: hidden;
         padding: $lumx-spacing-unit * 1.5;
         padding-top: $lumx-spacing-unit;
-        border-radius: $lumx-theme-border-radius;
+        border-radius: $lumx-border-radius;
 
         #{$self}--theme-light > #{$self}__wrapper & {
-            background-color: lumx-theme-color-variant('dark', 'L6');
+            background-color: lumx-color-variant('dark', 'L6');
         }
 
         #{$self}--theme-dark > #{$self}__wrapper & {
-            background-color: lumx-theme-color-variant('light', 'L6');
+            background-color: lumx-color-variant('light', 'L6');
         }
 
         #{$self}--is-relevant > #{$self}__wrapper &::before {
@@ -88,7 +88,7 @@
             bottom: 0;
             left: 0;
             width: 4px;
-            background-color: lumx-theme-color-variant('green', 'N');
+            background-color: lumx-color-variant('green', 'N');
             content: '';
         }
     }
@@ -105,11 +105,11 @@
         outline: none;
 
         #{$self}--theme-light > #{$self}__wrapper & {
-            color: lumx-theme-color-variant('dark', 'N');
+            color: lumx-color-variant('dark', 'N');
         }
 
         #{$self}--theme-dark > #{$self}__wrapper & {
-            color: lumx-theme-color-variant('light', 'N');
+            color: lumx-color-variant('light', 'N');
         }
 
         &[tabindex='0'] {
@@ -127,11 +127,11 @@
         @include lumx-typography('body1');
 
         #{$self}--theme-light > #{$self}__wrapper & {
-            color: lumx-theme-color-variant('dark', 'L2');
+            color: lumx-color-variant('dark', 'L2');
         }
 
         #{$self}--theme-dark > #{$self}__wrapper & {
-            color: lumx-theme-color-variant('light', 'L2');
+            color: lumx-color-variant('light', 'L2');
         }
     }
 
@@ -139,11 +139,11 @@
         @include lumx-typography('body1');
 
         #{$self}--theme-light > #{$self}__wrapper & {
-            color: lumx-theme-color-variant('dark', 'N');
+            color: lumx-color-variant('dark', 'N');
         }
 
         #{$self}--theme-dark > #{$self}__wrapper & {
-            color: lumx-theme-color-variant('light', 'N');
+            color: lumx-color-variant('light', 'N');
         }
 
         word-break: break-word;

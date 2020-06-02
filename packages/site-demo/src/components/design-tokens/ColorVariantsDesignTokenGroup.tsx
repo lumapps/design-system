@@ -25,19 +25,19 @@ export const ColorVariantsDesignTokenGroup: React.FC<Props> = ({ color, theme = 
         {Object.entries(useThemeColorVariants(color)).map(([key, hue], index) => (
             <DesignToken
                 key={index}
-                prefix={<div className={`lumx-theme-background-${color}-${key}`} style={{ width: 20, height: 20 }} />}
-                name={`$lumx-theme-${color}-${key}`}
+                prefix={<div className={`lumx-color-background-${color}-${key}`} style={{ width: 20, height: 20 }} />}
+                name={`$lumx-color-${color}-${key}`}
                 description={hue.comment}
                 version={hue.version}
                 theme={theme}
             >
                 <FlexBox orientation={Orientation.horizontal}>
-                    <div className={`lumx-theme-background-${color}-${key}`} style={{ width: 60, height: 60 }} />
+                    <div className={`lumx-color-background-${color}-${key}`} style={{ width: 60, height: 60 }} />
                     <div
                         className={classNames(
                             'lumx-typography-body1',
                             `lumx-spacing-margin-left-big  `,
-                            `lumx-theme-color-${theme === 'light' ? 'dark' : 'light'}-L2`,
+                            `lumx-color-font-${theme === 'light' ? 'dark' : 'light'}-L2`,
                         )}
                     >
                         <span className="lumx-base-display-block">#{hue.hex}</span>

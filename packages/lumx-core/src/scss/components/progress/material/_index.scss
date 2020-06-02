@@ -28,11 +28,11 @@
     }
 
     .#{$lumx-base-prefix}-progress--theme-light &__path {
-        stroke: lumx-theme-color-variant('primary', 'N');
+        stroke: lumx-color-variant('primary', 'N');
     }
 
     .#{$lumx-base-prefix}-progress--theme-dark &__path {
-        stroke: lumx-theme-color-variant('light', 'N');
+        stroke: lumx-color-variant('light', 'N');
     }
 
     &__double-bounce1,

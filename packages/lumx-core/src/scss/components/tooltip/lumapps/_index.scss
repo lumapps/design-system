@@ -13,7 +13,7 @@
     left: 0;
     padding: $lumx-spacing-unit / 2 $lumx-spacing-unit;
     background-color: $lumx-tooltip-background-color;
-    border-radius: $lumx-theme-border-radius;
+    border-radius: $lumx-border-radius;
     will-change: transform;
 
     &__arrow {
@@ -21,7 +21,7 @@
         width: 0;
         height: 0;
         border-style: solid;
-        border-color: lumx-theme-color-variant('light', 'N');
+        border-color: lumx-color-variant('light', 'N');
         margin: $lumx-tooltip-arrow-size;
 
         #{$self}--position-top & {
