@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## Fixed
+
+-   Fix dialog scrollable sentinel using only CSS
+
 ## [0.21.21][] - 2020-04-23
 
 ## [0.21.20][] - 2020-04-23
