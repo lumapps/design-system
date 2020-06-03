@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.21.22][] - 2020-06-03
+
 ## Fixed
 
 -   Fix dialog scrollable sentinel using only CSS
@@ -467,3 +469,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.21.20]: https://github.com/lumapps/design-system/tree/v0.21.20
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.21.21...HEAD
 [0.21.21]: https://github.com/lumapps/design-system/tree/v0.21.21
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.21.22...HEAD
+[0.21.22]: https://github.com/lumapps/design-system/tree/v0.21.22
