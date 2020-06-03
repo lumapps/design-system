@@ -129,7 +129,7 @@ const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngin
 
     return (
         <div className="demo-block">
-            <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-theme-background-dark-N')}>
+            <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-color-background-dark-N')}>
                 {content}
             </div>
             <div className="demo-block__toolbar">

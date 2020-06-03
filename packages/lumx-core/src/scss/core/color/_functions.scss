@@ -1,0 +1,18 @@
+@function lumx-color-variant($color, $variant) {
+    @if map-has-key($lumx-color-palette, $color) {
+        @return map-get(map-get($lumx-color-palette, $color), $variant);
+    } @else {
+        @return map-get(map-get($lumx-color-palette, 'dark'), $variant);
+    }
+}
+
+@function lumx-best-color($base, $colors: (lumx-color-variant('light', 'N'), lumx-color-variant('dark', 'N'))) {
+    $color-brightness: round((red($base) * 299) + (green($base) * 587) + (blue($base) * 114) / 1000);
+    $light-color: round((red(#fff) * 299) + (green(#fff) * 587) + (blue(#fff) * 114) / 1000);
+
+    @if abs($color-brightness) < ($light-color/2) {
+        @return nth($colors, 1);
+    } @else {
+        @return nth($colors, 2);
+    }
+}

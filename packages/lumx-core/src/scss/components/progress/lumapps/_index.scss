@@ -30,12 +30,12 @@
 
     .#{$lumx-base-prefix}-progress--theme-light &__double-bounce1,
     .#{$lumx-base-prefix}-progress--theme-light &__double-bounce2 {
-        background-color: lumx-theme-color-variant('primary', 'L3');
+        background-color: lumx-color-variant('primary', 'L3');
     }
 
     .#{$lumx-base-prefix}-progress--theme-dark &__double-bounce1,
     .#{$lumx-base-prefix}-progress--theme-dark &__double-bounce2 {
-        background-color: lumx-theme-color-variant('light', 'L3');
+        background-color: lumx-color-variant('light', 'L3');
     }
 
     &__double-bounce2 {
@@ -78,12 +78,12 @@
 
     .#{$lumx-base-prefix}-progress--theme-light &__line1,
     .#{$lumx-base-prefix}-progress--theme-light &__line2 {
-        background-color: lumx-theme-color-variant('primary', 'L3');
+        background-color: lumx-color-variant('primary', 'L3');
     }
 
     .#{$lumx-base-prefix}-progress--theme-dark &__line1,
     .#{$lumx-base-prefix}-progress--theme-dark &__line2 {
-        background-color: lumx-theme-color-variant('light', 'L3');
+        background-color: lumx-color-variant('light', 'L3');
     }
 
     &__line2 {

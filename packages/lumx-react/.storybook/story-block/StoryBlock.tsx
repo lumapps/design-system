@@ -2,10 +2,11 @@ import React, { ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 
+import { GlobalTheme } from '@lumx/core/js/types';
 import { Chip, Size, Switch, SwitchPosition, Theme } from '@lumx/react';
 
 import { styles } from './styles';
-import { GlobalTheme, useInjectTheme } from './useInjectTheme';
+import { useInjectTheme } from './useInjectTheme';
 
 interface StoryBlockProps {
     children(p: { theme: Theme }): ReactNode;
@@ -15,7 +16,7 @@ const CLASSNAME = 'story-block';
 
 const StoryBlock: React.FC<StoryBlockProps> = (props) => {
     const [globalTheme, setGlobalTheme] = useState<GlobalTheme>('lumapps');
-    const changeGlobalTheme = (newGlobalTheme) => () => setGlobalTheme(newGlobalTheme);
+    const changeGlobalTheme = (newGlobalTheme: GlobalTheme) => () => setGlobalTheme(newGlobalTheme);
 
     const [theme, setTheme] = useState(Theme.light);
     const toggleTheme = () => setTheme(theme === Theme.light ? Theme.dark : Theme.light);
@@ -27,7 +28,7 @@ const StoryBlock: React.FC<StoryBlockProps> = (props) => {
         <div
             key="story"
             className={classNames(CLASSNAME, {
-                'lumx-theme-background-dark-N lumx-theme-color-light-N': theme === Theme.dark,
+                'lumx-color-background-dark-N lumx-color-font-light-N': theme === Theme.dark,
             })}
             style={styles.block}
         >

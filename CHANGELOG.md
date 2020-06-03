@@ -14,6 +14,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   The `DatePicker` and `DatePickerFields` components now accept a javascript Date object or string as value.
+-   _[BREAKING]_ Removed SCSS variables `$lumx-theme-{primary,blue,...}`
+-   _[BREAKING]_ Renamed SCSS variables `$lumx-theme-{primary,blue,...}-{N,L1,...}` into `$lumx-color-{primary,blue,...}-{N,L1,...}`
+-   _[BREAKING]_ Renamed SCSS variable `$lumx-theme-border-radius` into `$lumx-border-radius`
+-   _[BREAKING]_ Renamed SCSS mixin `lumx-theme-color-variant()` into `$lumx-color-variant()`
+-   _[BREAKING]_ Renamed SCSS mixin `lumx-theme-best-color()` into `$lumx-best-color()`
+-   _[BREAKING]_ Renamed CSS classes `.lumx-theme-color-*` into `.lumx-color-font-*`
+-   _[BREAKING]_ Renamed CSS classes `.lumx-theme-background-*` into `.lumx-color-background-*`
 
 ## [0.23.0][] - 2020-05-29
 

@@ -36,6 +36,7 @@
         "url": "git+https://github.com/lumapps/design-system.git"
     },
     "scripts": {
+        "generate:design-tokens": "yarn node style-dictionary",
         "build": "webpack",
         "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
         "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
@@ -68,6 +69,8 @@
         "postcss-flexbox-unboxer": "^1.0.0",
         "postcss-loader": "^3.0.0",
         "sass-loader": "8.0.2",
+        "style-dictionary": "^2.10.0",
+        "tinycolor2": "^1.4.1",
         "unminified-webpack-plugin": "^2.0.0",
         "webpack": "^4.41.5",
         "webpack-notifier": "^1.8.0",

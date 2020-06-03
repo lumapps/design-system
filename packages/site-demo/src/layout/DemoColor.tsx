@@ -1,34 +1,39 @@
-import { ColorPaletteWithVariants, ColorVariantDetail } from '@lumx/demo/constants';
-import { ColorPalette, Theme } from '@lumx/react';
 import classNames from 'classnames';
 import React from 'react';
 
+import { useThemeColorVariants } from '@lumx/demo/hooks/useThemeColorVariants';
+import { Theme } from '@lumx/react';
+
 interface DemoColorProps {
     theme: Theme;
-    color: ColorPalette;
-    colorVariants: ColorPaletteWithVariants;
+    color: string;
 }
 
-const DemoColor: React.FC<DemoColorProps> = ({ theme, color, colorVariants }) => (
-    <div className={classNames('demo-colors', { 'lumx-theme-background-dark-N': theme === Theme.dark })}>
-        {Object.entries(colorVariants[color]).map(([key, hue]: [string, ColorVariantDetail]) => (
-            <div
-                className={classNames(
-                    'demo-colors__hue',
-                    `lumx-theme-background-${color}-${key}`,
-                    `lumx-theme-color-${hue.fontColor}-N`,
-                )}
-                key={key}
-            >
-                <span className="demo-colors__key">{key}</span>
+const DemoColor: React.FC<DemoColorProps> = ({ color, theme }) => {
+    const colorVariants = useThemeColorVariants(color);
+    return (
+        <div className={classNames('demo-colors', { 'lumx-color-background-dark-N': theme === Theme.dark })}>
+            {Object.entries(colorVariants).map(([variant, colorDescription]) => (
+                <div
+                    className={classNames(
+                        'demo-colors__hue',
+                        `lumx-color-background-${colorDescription.colorName}-${variant}`,
+                        `lumx-color-font-${colorDescription.fontColor}-N`,
+                    )}
+                    key={variant}
+                >
+                    <span className="demo-colors__key">{variant}</span>
 
-                <div className="demo-colors__meta">
-                    <span className="demo-colors__hex-code">{hue.hexCode}</span>
-                    {hue.opacity && <span className="demo-colors__opacity">{hue.opacity}</span>}
+                    <div className="demo-colors__meta">
+                        <span className="demo-colors__hex-code">#{colorDescription.hex}</span>
+                        {colorDescription.rgb.a < 1 && (
+                            <span className="demo-colors__opacity">{colorDescription.rgb.a * 100}%</span>
+                        )}
+                    </div>
                 </div>
-            </div>
-        ))}
-    </div>
-);
+            ))}
+        </div>
+    );
+};
 
 export { DemoColor };

@@ -1,6 +1,7 @@
-import { Theme, ThemeContext } from '@lumx/demo/context/theme';
+import { GlobalThemeContext } from '@lumx/demo/context/global-theme';
 import React, { ChangeEvent, ReactElement, useContext } from 'react';
 
+import { GlobalTheme } from '@lumx/core/js/types';
 import { Chip, Size } from '@lumx/react';
 
 /**
@@ -11,7 +12,7 @@ import { Chip, Size } from '@lumx/react';
  * @return The theme selector component.
  */
 const ThemeSelector: React.FC = (): ReactElement => {
-    const { theme, changeTheme } = useContext(ThemeContext);
+    const { globalTheme, changeGlobalTheme } = useContext(GlobalThemeContext);
 
     /**
      * When the select is changed, call the function to change the theme.
@@ -19,14 +20,14 @@ const ThemeSelector: React.FC = (): ReactElement => {
      * @param evt The change event of the select element.
      */
     const handleChange = (evt: ChangeEvent<HTMLSelectElement>) => {
-        changeTheme?.((evt.target.textContent || '').toLocaleLowerCase() as Theme);
+        changeGlobalTheme?.((evt.target.textContent || '').toLocaleLowerCase() as GlobalTheme);
     };
 
     return (
         <>
             <Chip
                 className="lumx-spacing-margin-right-tiny"
-                isSelected={theme === Theme.lumapps}
+                isSelected={globalTheme === 'lumapps'}
                 size={Size.s}
                 onClick={handleChange}
             >
@@ -34,7 +35,7 @@ const ThemeSelector: React.FC = (): ReactElement => {
             </Chip>
             <Chip
                 className="lumx-spacing-margin-right-tiny"
-                isSelected={theme === Theme.material}
+                isSelected={globalTheme === 'material'}
                 size={Size.s}
                 onClick={handleChange}
             >

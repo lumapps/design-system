@@ -2,6 +2,6 @@
     @if $elevation == 0 {
         box-shadow: none;
     } @else {
-        box-shadow: unquote(map-get($lumx-elevation-shadows, $elevation)) lumx-theme-color-variant('dark', $variant);
+        box-shadow: unquote(map-get($lumx-elevation-shadows, $elevation)) lumx-color-variant('dark', $variant);
     }
 }

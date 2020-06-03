@@ -3,8 +3,8 @@ import React from 'react';
 import { AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
 
 const App = () => (
-    <div className="lumx-theme-background-dark-L5 lumx-spacing-padding-huge">
-        <div className="lumx-theme-background-light-N">
+    <div className="lumx-color-background-dark-L5 lumx-spacing-padding-huge">
+        <div className="lumx-color-background-light-N">
             <ImageBlock
                 aspectRatio={AspectRatio.horizontal}
                 captionStyle={{ padding: 16 }}

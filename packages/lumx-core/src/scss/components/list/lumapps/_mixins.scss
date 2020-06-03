@@ -7,7 +7,7 @@
 
 @mixin lumx-list-item($size) {
     display: flex;
-    color: lumx-theme-color-variant('dark', 'N');
+    color: lumx-color-variant('dark', 'N');
     outline: none;
     text-decoration: none;
 
@@ -99,7 +99,7 @@
     display: flex;
     height: map-get($lumx-list-item-sizes, 'tiny');
     align-items: center;
-    color: lumx-theme-color-variant('dark', 'L3');
+    color: lumx-color-variant('dark', 'L3');
 }
 
 @mixin lumx-list-subheader-icon {
@@ -111,7 +111,7 @@
 @mixin lumx-list-divider() {
     height: 1px;
     margin: $lumx-spacing-unit 0;
-    background-color: lumx-theme-color-variant('dark', $lumx-divider-color-variant);
+    background-color: lumx-color-variant('dark', $lumx-divider-color-variant);
 }
 
 @mixin lumx-list-item-padding($size) {

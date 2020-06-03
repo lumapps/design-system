@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 
+import { CORE } from '@lumx/core/js/constants';
+import { GlobalTheme } from '@lumx/core/js/types';
+
 /**
  * Please make sure that these themes are in the same order
  * as the `THEMES` constant.
@@ -8,8 +11,7 @@ import '@lumx/core/scss/lumx-theme-material.scss';
 
 import '@lumx/core/scss/lumx-theme-lumapps.scss';
 
-export type GlobalTheme = 'material' | 'lumapps';
-const THEMES: GlobalTheme[] = ['material', 'lumapps'];
+const GLOBAL_THEMES = Object.keys(CORE) as GlobalTheme[];
 const stylesNodes: Node[] = [];
 
 /**
@@ -28,7 +30,7 @@ const stylesNodes: Node[] = [];
  */
 export function useInjectTheme(globalTheme: GlobalTheme) {
     useEffect(() => {
-        const currentStyle = THEMES.indexOf(globalTheme);
+        const currentStyle = GLOBAL_THEMES.indexOf(globalTheme);
         const nodes = document.querySelectorAll('style#injected-styles');
 
         if (stylesNodes.length === 0) {

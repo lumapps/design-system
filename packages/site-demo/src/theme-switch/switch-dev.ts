@@ -1,27 +1,27 @@
-import { Theme } from '@lumx/demo/context/theme';
+import { GlobalTheme } from '@lumx/core/js/types';
 
 const getThemeId = (theme: string) => `theme-${theme}`;
 
-const getThemeElement = (theme: Theme) => document.getElementById(getThemeId(theme));
+const getThemeElement = (theme: GlobalTheme) => document.getElementById(getThemeId(theme));
 
 // Cache of theme script URL by theme.
-const devThemeScripts: Record<Theme, string | null> = {
+const devThemeScripts: Record<GlobalTheme, string | null> = {
     lumapps: null,
     material: null,
 };
 
 function initDevThemeScript() {
-    if (devThemeScripts[Theme.material] || devThemeScripts[Theme.lumapps]) {
+    if (devThemeScripts.material || devThemeScripts.lumapps) {
         return;
     }
 
-    const themeMaterial = getThemeElement(Theme.material) as HTMLScriptElement;
-    devThemeScripts[Theme.material] = themeMaterial.src;
-    const themeLumapps = getThemeElement(Theme.lumapps) as HTMLScriptElement;
-    devThemeScripts[Theme.lumapps] = themeLumapps.src;
+    const themeMaterial = getThemeElement('material') as HTMLScriptElement;
+    devThemeScripts.material = themeMaterial.src;
+    const themeLumapps = getThemeElement('lumapps') as HTMLScriptElement;
+    devThemeScripts.lumapps = themeLumapps.src;
 }
 
-const injectThemeScript = async (theme: Theme) =>
+const injectThemeScript = async (theme: GlobalTheme) =>
     new Promise((resolve, reject) => {
         const newScript = document.createElement('script');
         newScript.id = getThemeId(theme);
@@ -33,7 +33,7 @@ const injectThemeScript = async (theme: Theme) =>
         newScript.src = devThemeScripts[theme] as string;
     });
 
-function cleanUpOldStyles(newTheme: Theme) {
+function cleanUpOldStyles(newTheme: GlobalTheme) {
     let currentStyleFound = false;
     Array.from(document.getElementsByTagName('style'))
         .reverse()
@@ -60,7 +60,7 @@ function cleanUpOldStyles(newTheme: Theme) {
  * @param oldTheme Previously selected theme
  * @param newTheme New theme to apply
  */
-export async function switchDevTheme(oldTheme: Theme, newTheme: Theme) {
+export async function switchDevTheme(oldTheme: GlobalTheme, newTheme: GlobalTheme) {
     initDevThemeScript();
     const oldThemeElement = getThemeElement(oldTheme);
     const newThemeElement = getThemeElement(newTheme);

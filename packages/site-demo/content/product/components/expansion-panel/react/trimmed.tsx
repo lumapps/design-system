@@ -14,7 +14,7 @@ const App = ({ theme }: any) => {
                     <p
                         className={classNames(
                             'lumx-typography-subtitle1',
-                            theme === 'light' ? 'lumx-theme-color-dark-N' : 'lumx-theme-color-light-N',
+                            theme === 'light' ? 'lumx-color-font-dark-N' : 'lumx-color-font-light-N',
                         )}
                     >
                         Curabitur est gravida et libero vitae dictum.
@@ -23,7 +23,7 @@ const App = ({ theme }: any) => {
                     <p
                         className={classNames(
                             'lumx-typography-body1',
-                            theme === 'light' ? 'lumx-theme-color-dark-N' : 'lumx-theme-color-light-N',
+                            theme === 'light' ? 'lumx-color-font-dark-N' : 'lumx-color-font-light-N',
                         )}
                     >
                         Etiam habebis sem dicantur magna mollis euismod.

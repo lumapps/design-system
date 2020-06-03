@@ -90,7 +90,7 @@ export const list = () => {
     return (
         <div className="demo-grid">
             <List itemPadding={Size.big}>
-                <ListItem className="lumx-theme-background-dark-L6" size={Size.big}>
+                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
@@ -108,7 +108,7 @@ export const list = () => {
                         onClick={logAction('UserBlock clicked')}
                     />
                 </ListItem>
-                <ListItem className="lumx-theme-background-dark-L6" size={Size.big}>
+                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}
@@ -126,7 +126,7 @@ export const list = () => {
                         onClick={logAction('UserBlock clicked')}
                     />
                 </ListItem>
-                <ListItem className="lumx-theme-background-dark-L6" size={Size.big}>
+                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
                     <UserBlock
                         name="Emmitt O. Lum"
                         fields={['Creative developer', 'Denpasar']}

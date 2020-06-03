@@ -20,11 +20,11 @@
     }
 
     &__background-bar {
-        background-color: lumx-theme-color-variant('dark', $lumx-divider-color-variant);
+        background-color: lumx-color-variant('dark', $lumx-divider-color-variant);
     }
 
     &__foreground-bar {
-        background-color: lumx-theme-color-variant('primary', 'N');
+        background-color: lumx-color-variant('primary', 'N');
         transform-origin: left;
         transition: transform $lumx-progress-tracker-transition-duration;
     }
@@ -41,7 +41,7 @@
     flex-direction: column;
     align-items: center;
     padding: $lumx-spacing-unit 0;
-    border-radius: $lumx-theme-border-radius;
+    border-radius: $lumx-border-radius;
     outline: none;
 
     &--is-clickable {
@@ -52,15 +52,15 @@
 
     &__state {
         position: relative;
-        color: lumx-theme-color-variant('dark', 'L5');
+        color: lumx-color-variant('dark', 'L5');
 
         #{$self}--is-active &,
         #{$self}--is-complete & {
-            color: lumx-theme-color-variant('primary', 'N');
+            color: lumx-color-variant('primary', 'N');
         }
 
         #{$self}--has-error & {
-            color: lumx-theme-color-variant('red', 'N');
+            color: lumx-color-variant('red', 'N');
         }
 
         &::before {
@@ -70,7 +70,7 @@
             left: 2px;
             width: 20px;
             height: 20px;
-            background-color: lumx-theme-color-variant('light', 'N');
+            background-color: lumx-color-variant('light', 'N');
             content: '';
         }
     }

@@ -12,7 +12,7 @@
         @include lumx-elevation(3);
 
         overflow: auto;
-        background-color: lumx-theme-color-variant('light', 'N');
-        border-radius: $lumx-theme-border-radius;
+        background-color: lumx-color-variant('light', 'N');
+        border-radius: $lumx-border-radius;
     }
 }

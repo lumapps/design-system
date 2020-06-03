@@ -11,9 +11,9 @@
         content: '';
 
         @if $theme == lumx-base-const('theme', 'LIGHT') {
-            background-color: lumx-theme-color-variant('dark', $lumx-divider-color-variant);
+            background-color: lumx-color-variant('dark', $lumx-divider-color-variant);
         } @else if $theme == lumx-base-const('theme', 'DARK') {
-            background-color: lumx-theme-color-variant('light', $lumx-divider-color-variant);
+            background-color: lumx-color-variant('light', $lumx-divider-color-variant);
         }
     }
 }
@@ -65,11 +65,11 @@
 @mixin lumx-tabs-link-active($theme) {
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         &::after {
-            background-color: lumx-theme-color-variant('primary', 'N');
+            background-color: lumx-color-variant('primary', 'N');
         }
     } @else if $theme == lumx-base-const('theme', 'DARK') {
         &::after {
-            background-color: lumx-theme-color-variant('light', 'N');
+            background-color: lumx-color-variant('light', 'N');
         }
     }
 }

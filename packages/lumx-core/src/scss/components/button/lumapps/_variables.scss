@@ -11,4 +11,4 @@ $lumx-button-icon-sizes: (
     's': map-get($lumx-sizes, lumx-base-const('size', 'XXS'))
 ) !default;
 
-$lumx-button-variant-icon-border-radius: $lumx-theme-border-radius !default;
+$lumx-button-variant-icon-border-radius: $lumx-border-radius !default;

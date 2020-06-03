@@ -12,8 +12,8 @@
     flex-direction: row;
     align-items: center;
     padding: 0 $lumx-spacing-unit;
-    border-radius: $lumx-theme-border-radius;
-    color: lumx-theme-color-variant('dark', 'N');
+    border-radius: $lumx-border-radius;
+    color: lumx-color-variant('dark', 'N');
     outline: none;
     text-decoration: none;
 }

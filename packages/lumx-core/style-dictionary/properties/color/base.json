@@ -1,0 +1,66 @@
+{
+    "color": {
+        "dark": {
+            "N": { "version": "0.22" ,"comment": "Neutral dark color" },
+            "L1": { "version": "0.22" ,"comment": "Base dark color with 80% opacity" },
+            "L2": { "version": "0.22" ,"comment": "Base dark color with 60% opacity" },
+            "L3": { "version": "0.22" ,"comment": "Base dark color with 40% opacity" },
+            "L4": { "version": "0.22" ,"comment": "Base dark color with 20% opacity" },
+            "L5": { "version": "0.22" ,"comment": "Base dark color with 10% opacity" },
+            "L6": { "version": "0.22" ,"comment": "Base dark color with 5% opacity" }
+        },
+        "light": {
+            "N": { "version": "0.22" ,"comment": "Neutral light color" },
+            "L1": { "version": "0.22" ,"comment": "Light color with 90% opacity" },
+            "L2": { "version": "0.22" ,"comment": "Light color with 80% opacity" },
+            "L3": { "version": "0.22" ,"comment": "Light color with 60% opacity" },
+            "L4": { "version": "0.22" ,"comment": "Light color with 40% opacity" },
+            "L5": { "version": "0.22" ,"comment": "Light color with 20% opacity" },
+            "L6": { "version": "0.22" ,"comment": "Light color with 10% opacity" }
+        },
+        "blue": {
+            "D2": { "version": "0.22" ,"comment": "Darkest blue color" },
+            "D1": { "version": "0.22" ,"comment": "Dark blue color" },
+            "N": { "version": "0.22" ,"comment": "Neutral blue color" },
+            "L1": { "version": "0.22" ,"comment": "Base blue color with 80% opacity" },
+            "L2": { "version": "0.22" ,"comment": "Base blue color with 60% opacity" },
+            "L3": { "version": "0.22" ,"comment": "Base blue color with 40% opacity" },
+            "L4": { "version": "0.22" ,"comment": "Base blue color with 20% opacity" },
+            "L5": { "version": "0.22" ,"comment": "Base blue color with 10% opacity" },
+            "L6": { "version": "0.22" ,"comment": "Base blue color with 5% opacity" }
+        },
+        "yellow": {
+            "D2": { "version": "0.22" ,"comment": "Darkest yellow color" },
+            "D1": { "version": "0.22" ,"comment": "Dark yellow color" },
+            "N": { "version": "0.22" ,"comment": "Neutral yellow color" },
+            "L1": { "version": "0.22" ,"comment": "Yellow color with 80% opacity" },
+            "L2": { "version": "0.22" ,"comment": "Yellow color with 60% opacity" },
+            "L3": { "version": "0.22" ,"comment": "Yellow color with 40% opacity" },
+            "L4": { "version": "0.22" ,"comment": "Yellow color with 20% opacity" },
+            "L5": { "version": "0.22" ,"comment": "Yellow color with 10% opacity" },
+            "L6": { "version": "0.22" ,"comment": "Yellow color with 5% opacity" }
+        },
+        "red": {
+            "D2": { "version": "0.22" ,"comment": "Darkest red color" },
+            "D1": { "version": "0.22" ,"comment": "Dark red color" },
+            "N": { "version": "0.22" ,"comment": "Neutral red color" },
+            "L1": { "version": "0.22" ,"comment": "Red color with 80% opacity" },
+            "L2": { "version": "0.22" ,"comment": "Red color with 60% opacity" },
+            "L3": { "version": "0.22" ,"comment": "Red color with 40% opacity" },
+            "L4": { "version": "0.22" ,"comment": "Red color with 20% opacity" },
+            "L5": { "version": "0.22" ,"comment": "Red color with 10% opacity" },
+            "L6": { "version": "0.22" ,"comment": "Red color with 5% opacity" }
+        },
+        "green": {
+            "D2": { "version": "0.22" ,"comment": "Darkest green color" },
+            "D1": { "version": "0.22" ,"comment": "Dark green color" },
+            "N": { "version": "0.22" ,"comment": "Neutral green color" },
+            "L1": { "version": "0.22" ,"comment": "Green color with 80% opacity" },
+            "L2": { "version": "0.22" ,"comment": "Green color with 60% opacity" },
+            "L3": { "version": "0.22" ,"comment": "Green color with 40% opacity" },
+            "L4": { "version": "0.22" ,"comment": "Green color with 20% opacity" },
+            "L5": { "version": "0.22" ,"comment": "Green color with 10% opacity" },
+            "L6": { "version": "0.22" ,"comment": "Green color with 5% opacity" }
+        }
+    }
+}

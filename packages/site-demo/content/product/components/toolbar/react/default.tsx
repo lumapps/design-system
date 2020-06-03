@@ -12,7 +12,7 @@ const App = ({ theme }: any) => (
             <span
                 className={classNames(
                     'lumx-typography-title',
-                    theme === 'light' ? 'lumx-theme-color-dark-N' : 'lumx-theme-color-light-N',
+                    theme === 'light' ? 'lumx-color-font-dark-N' : 'lumx-color-font-light-N',
                 )}
             >
                 Toolbar title

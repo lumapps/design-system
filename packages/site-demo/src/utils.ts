@@ -1,12 +1,12 @@
 import { setCustomColors } from '@lumx/core/js/custom-colors';
-import { Theme } from '@lumx/demo/context/theme';
+import { GlobalTheme } from '@lumx/core/js/types';
 
 /**
  * Set primary and secondary custom colors.
  *
  * @param theme The theme to apply the custom color palette on.
  */
-function setDemoCustomColors(theme: Theme) {
+function setDemoCustomColors(theme: GlobalTheme) {
     const styleTag = document.createElement('style');
     document.head.appendChild(styleTag);
 

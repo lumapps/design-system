@@ -1,3 +1,4 @@
+@import './core/generated/lumapps/variables';
 @import './core/base/lumapps/variables';
 @import './core/base/lumapps/functions';
 @import './core/elevation/lumapps/variables';
@@ -6,8 +7,8 @@
 @import './core/spacing/lumapps/variables';
 @import './core/state/lumapps/variables';
 @import './core/state/lumapps/mixins';
-@import './core/theme/lumapps/color-palette';
-@import './core/theme/lumapps/variables';
-@import './core/theme/lumapps/functions';
+@import './core/color/variables';
+@import './core/color/functions';
 @import './core/typography/lumapps/variables';
 @import './core/typography/lumapps/mixins';
+@import './core/border-radius/lumapps/variables';

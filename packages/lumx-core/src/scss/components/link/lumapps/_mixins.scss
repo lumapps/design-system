@@ -10,7 +10,7 @@
 }
 
 @mixin lumx-link-color($color, $variant) {
-    color: lumx-theme-color-variant($color, $variant);
+    color: lumx-color-variant($color, $variant);
 }
 
 @mixin lumx-link($color: $lumx-link-default-color, $variant: 'N') {

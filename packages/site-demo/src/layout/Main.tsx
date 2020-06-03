@@ -1,5 +1,5 @@
 import { EngineProvider } from '@lumx/demo/context/engine';
-import { ThemeProvider } from '@lumx/demo/context/theme';
+import { GlobalThemeProvider } from '@lumx/demo/context/global-theme';
 import { ErrorBoundary } from '@lumx/demo/layout/ErrorBoundary';
 import React, { ReactElement } from 'react';
 import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
@@ -27,33 +27,33 @@ const Main: React.FC = (): ReactElement => {
     return (
         <div className="main">
             <EngineProvider>
-                <div className="main__wrapper">
-                    <div className="main-header">
-                        <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                            <FlexBox fillSpace>
-                                <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                                    <span className="lumx-typography-overline lumx-spacing-margin-right-regular">
-                                        Theme
-                                    </span>
-                                    <ThemeProvider>
+                <GlobalThemeProvider>
+                    <div className="main__wrapper">
+                        <div className="main-header">
+                            <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
+                                <FlexBox fillSpace>
+                                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
+                                        <span className="lumx-typography-overline lumx-spacing-margin-right-regular">
+                                            Theme
+                                        </span>
                                         <ThemeSelector />
-                                    </ThemeProvider>
+                                    </FlexBox>
                                 </FlexBox>
+                                <Route path="/product/components*">
+                                    <EngineSelector />
+                                </Route>
                             </FlexBox>
-                            <Route path="/product/components*">
-                                <EngineSelector />
-                            </Route>
-                        </FlexBox>
-                    </div>
+                        </div>
 
-                    <div className="main-content">
-                        <div className="main-content__wrapper">
-                            <ErrorBoundary>
-                                <Route path="*" render={renderContent} />
-                            </ErrorBoundary>
+                        <div className="main-content">
+                            <div className="main-content__wrapper">
+                                <ErrorBoundary>
+                                    <Route path="*" render={renderContent} />
+                                </ErrorBoundary>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </GlobalThemeProvider>
             </EngineProvider>
         </div>
     );

@@ -39,7 +39,7 @@ const SideNavigation: React.FC<SideNavigationProps> = (props) => {
         <ul
             className={classNames(
                 className,
-                theme === Theme.dark && 'lumx-theme-color-light-N',
+                theme === Theme.dark && 'lumx-color-font-light-N',
                 handleBasicClasses({ prefix: CLASSNAME }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}

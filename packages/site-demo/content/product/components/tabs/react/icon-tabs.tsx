@@ -17,7 +17,7 @@ const App = ({ theme }: any) => {
                     <p
                         className={classNames(
                             'lumx-spacing-padding-vertical-huge',
-                            theme === Theme.dark && 'lumx-theme-color-light-N',
+                            theme === Theme.dark && 'lumx-color-font-light-N',
                         )}
                     >
                         Tab 1 content
@@ -28,7 +28,7 @@ const App = ({ theme }: any) => {
                     <p
                         className={classNames(
                             'lumx-spacing-padding-vertical-huge',
-                            theme === Theme.dark && 'lumx-theme-color-light-N',
+                            theme === Theme.dark && 'lumx-color-font-light-N',
                         )}
                     >
                         Tab 2 content
@@ -39,7 +39,7 @@ const App = ({ theme }: any) => {
                     <p
                         className={classNames(
                             'lumx-spacing-padding-vertical-huge',
-                            theme === Theme.dark && 'lumx-theme-color-light-N',
+                            theme === Theme.dark && 'lumx-color-font-light-N',
                         )}
                     >
                         Tab 3 content
