@@ -193,7 +193,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         >
             {hasError &&
                 (typeof fallback === 'string' ? (
-                    <Icon icon={fallback as string} size={size} theme={theme} />
+                    <Icon className={`${CLASSNAME}__fallback`} icon={fallback as string} size={size} theme={theme} />
                 ) : (
                     fallback
                 ))}

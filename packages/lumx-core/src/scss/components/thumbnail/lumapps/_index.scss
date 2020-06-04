@@ -59,6 +59,11 @@
             border-radius: $lumx-theme-border-radius;
         }
     }
+
+    &__fallback {
+        /* Center fallback icon when using fill-height prop */
+        margin: 0 auto;
+    }
 }
 
 /* Thumbnail sizes
