@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix centering issue on fallback icon in `Thumbnail` component when using `fillHeight`prop.
+
+### Changed
+
+-   Handle default size on fallback icon in `Thumbnail` component (Size.m).
+
 ## [0.23.0][] - 2020-05-29
 
 ### Added
