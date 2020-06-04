@@ -110,7 +110,7 @@ text`;
     );
 };
 
-// Even with programatically set value, the number of rows should react
+// Even with value set programmatically, the number of rows should be updated
 export const TextAreaWithKnobValue = ({ theme }: any) => (
     <TextField
         value={text('Value', 'myvalue')}
