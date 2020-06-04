@@ -202,7 +202,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         if (multiline && inputRef && inputRef.current) {
             recomputeNumberOfRows(inputRef.current);
         }
-    }, [inputRef]);
+    }, [inputRef, value]);
 
     const onTextFieldFocus = (event: React.FocusEvent) => {
         if (onFocus) {
@@ -221,10 +221,6 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     };
 
     const handleChange = (event: React.ChangeEvent) => {
-        if (multiline) {
-            recomputeNumberOfRows(event.target);
-        }
-
         onChange(get(event, 'target.value'));
     };
 

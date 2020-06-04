@@ -109,3 +109,16 @@ text`;
         />
     );
 };
+
+// Even with programatically set value, the number of rows should react
+export const TextAreaWithKnobValue = ({ theme }: any) => (
+    <TextField
+        value={text('Value', 'myvalue')}
+        label={text('Label', 'I am the label')}
+        placeholder={text('Placeholder', 'ex: A value')}
+        multiline
+        minimumRows={1}
+        theme={theme}
+        onChange={noop}
+    />
+);
