@@ -50,7 +50,7 @@ export const defaultThumbnail = ({ theme }: { theme: Theme }) => {
     );
 };
 
-export const defaultThumbnailWithCustomImgProps = ({ theme }: { theme: Theme }) => {
+export const thumbnailWithCustomImgProps = ({ theme }: { theme: Theme }) => {
     const [image, setImage] = React.useState('https://not-found');
     const onError = () => {
         setImage('https://i.picsum.photos/id/1001/2400/1400.jpg');
@@ -90,3 +90,16 @@ export const defaultThumbnailWithCustomImgProps = ({ theme }: { theme: Theme }) 
         />
     );
 };
+
+export const brokenThumbnailWithFallbackProps = ({ theme }: { theme: Theme }) => (
+    <Thumbnail
+        align={select<Alignment>('Alignment', Alignment, Alignment.left, 'Options')}
+        aspectRatio={select<AspectRatio>('Aspect ratio', AspectRatio, AspectRatio.square, 'Options')}
+        isCrossOriginEnabled={boolean('Enable CORS', true, 'Options')}
+        crossOrigin={select('CORS', CrossOrigin, CrossOrigin.anonymous, 'Options')}
+        fillHeight={boolean('Fill Height', false, 'Options')}
+        image={text('Url image', 'https://i.picsum.photos/id/1001/2400/1400.jp', 'Options')}
+        theme={theme}
+        variant={select<ThumbnailVariant>('Variant', ThumbnailVariant, ThumbnailVariant.squared, 'Options')}
+    />
+);
