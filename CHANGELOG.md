@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.22.5][] - 2020-06-05
+
 ### Fixed
 
 -   Fix `TextField` number of rows computation
@@ -512,3 +514,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.22.3]: https://github.com/lumapps/design-system/tree/v0.22.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.22.4...HEAD
 [0.22.4]: https://github.com/lumapps/design-system/tree/v0.22.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.22.5...HEAD
+[0.22.5]: https://github.com/lumapps/design-system/tree/v0.22.5
