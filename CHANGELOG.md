@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.23.1][] - 2020-06-05
+
 ### Fixed
 
 -   Fix centering issue on fallback icon in `Thumbnail` component when using `fillHeight`prop.
@@ -504,3 +506,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.22.0]: https://github.com/lumapps/design-system/tree/v0.22.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.23.0...HEAD
 [0.23.0]: https://github.com/lumapps/design-system/tree/v0.23.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.23.1...HEAD
+[0.23.1]: https://github.com/lumapps/design-system/tree/v0.23.1
