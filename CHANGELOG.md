@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
--   `TextField` component is now computing the number of rows (if `multiple` is set) at the first rendering
+-   `TextField` component is now computing the number of rows (if `multiple` is set) at the first rendering.
+-   Fix centering issue on fallback icon in `Thumbnail` component when using `fillHeight`prop.
 
 ### Changed
 
@@ -21,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Renamed SCSS mixin `lumx-theme-best-color()` into `$lumx-best-color()`
 -   _[BREAKING]_ Renamed CSS classes `.lumx-theme-color-*` into `.lumx-color-font-*`
 -   _[BREAKING]_ Renamed CSS classes `.lumx-theme-background-*` into `.lumx-color-background-*`
+-   Handle default size on fallback icon in `Thumbnail` component (Size.m).
 
 ## [0.23.0][] - 2020-05-29
 
