@@ -149,7 +149,8 @@ const useComputeNumberOfRows = (
          * on the state in order to allow React to re-render. Therefore, we save them using `useState`
          */
         (target as HTMLTextAreaElement).rows = minimumRows;
-        const currentRows = target.scrollHeight / (target.clientHeight / minimumRows);
+        let currentRows = target.scrollHeight / (target.clientHeight / minimumRows);
+        currentRows = currentRows >= minimumRows ? currentRows : minimumRows;
         (target as HTMLTextAreaElement).rows = currentRows;
 
         setRows(currentRows);
@@ -201,7 +202,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         if (multiline && inputRef && inputRef.current) {
             recomputeNumberOfRows(inputRef.current);
         }
-    }, [inputRef]);
+    }, [inputRef, value]);
 
     const onTextFieldFocus = (event: React.FocusEvent) => {
         if (onFocus) {
@@ -220,10 +221,6 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     };
 
     const handleChange = (event: React.ChangeEvent) => {
-        if (multiline) {
-            recomputeNumberOfRows(event.target);
-        }
-
         onChange(get(event, 'target.value'));
     };
 
