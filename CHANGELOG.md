@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix `TextField` number of rows computation
+
 ## [0.22.4][] - 2020-06-01
 
 ### Fixed
