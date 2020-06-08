@@ -122,6 +122,12 @@ const isComponent = <C>(component: React.FC<C> | string) => (instance: ReactNode
     );
 };
 
+/**
+ * JS falsy values.
+ * (excluding `NaN` as it can't be distinguished from `number`)
+ */
+type Falsy = false | undefined | null | 0 | '';
+
 export {
     isComponent,
     Predicate,
@@ -132,4 +138,5 @@ export {
     Omit,
     ComponentType,
     GenericProps,
+    Falsy,
 };
