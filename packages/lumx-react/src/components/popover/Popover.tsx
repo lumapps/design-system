@@ -1,11 +1,11 @@
-import React, { CSSProperties, ReactChild } from 'react';
+import React, { ReactChild } from 'react';
 import { createPortal } from 'react-dom';
+import { usePopper } from 'react-popper';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { useComputePosition, useComputePositionType } from '@lumx/react/hooks/useComputePosition';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /**
@@ -42,31 +42,15 @@ interface Offset {
 }
 
 /**
- * Position for arrow or tooltip.
- */
-interface ElementPosition {
-    x: number;
-    y: number;
-    width?: number;
-    height?: number;
-    maxHeight?: number;
-    maxWidth?: number;
-    minHeight?: number;
-    minWidth?: number;
-    anchorHeight?: number;
-    anchorWidth?: number;
-}
-
-/**
  * Defines the props of the component.
  */
 interface PopoverProps extends GenericProps {
-    /** The position the popover should be bounded to. */
-    popoverRect: ElementPosition;
+    /** The reference of the anchor. */
+    anchorRef: React.RefObject<HTMLDivElement>;
+    /** The desired placement */
+    placement: Placement;
     /** Should the popper be displayed. */
     isVisible: boolean;
-    /** The reference forwarded to the popover container. */
-    popoverRef: React.RefObject<HTMLDivElement>;
     /** Children element displayed inside popover. */
     children: ReactChild;
     /** How high the component is flying */
@@ -101,17 +85,15 @@ const DEFAULT_PROPS: DefaultPropsType = {
     placement: Placement.TOP,
     zIndex: 9999,
 };
-interface Popover {
-    useComputePosition: useComputePositionType;
-}
+
 /**
  * Popover.
  *
  * @return The component.
  */
-const Popover: React.FC<PopoverProps> & Popover = ({
-    popoverRect,
-    popoverRef,
+const Popover: React.FC<PopoverProps> = ({
+    anchorRef,
+    placement,
     children,
     className = DEFAULT_PROPS.className,
     elevation = DEFAULT_PROPS.elevation,
@@ -119,36 +101,21 @@ const Popover: React.FC<PopoverProps> & Popover = ({
     zIndex = DEFAULT_PROPS.zIndex,
     ...props
 }) => {
-    /**
-     * Depending on which is assigned first, the `popoverRect` or `popoverRef`,
-     * there are scenarios where the reference to the popover is still not assigned,
-     * which makes the popover to be shown at (0,0), then it moves under the anchor.
-     * Since the position is calculated with a `useEffect`, the first time it is calculated,
-     * `popoverRef` is still not defined, and the hook defaults to a (0,0) position. Once the reference
-     * is set and the `useEffect` has the `popoverRef` as dependency, it can recalculate the position and
-     * provide the accurate one. In order to fix this border case, we simply state that, for the popover
-     * to be visible, `isVisible` needs to be true and the ref needs to be defined.
-     */
-    const isPopoverVisible = isVisible && popoverRef && popoverRef.current;
-
-    const cssPopover: CSSProperties = {
-        left: 0,
-        position: 'fixed',
-        top: 0,
-        transform: `translate(${Math.round(popoverRect.x)}px, ${Math.round(popoverRect.y)}px)`,
-        visibility: isPopoverVisible ? 'visible' : 'hidden',
-        zIndex,
-    };
+    const [popperElement, setPopperElement] = React.useState<null | HTMLElement>(null);
+    const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
+        placement,
+    });
+    console.log(styles, attributes);
 
     return createPortal(
         <div
-            ref={popoverRef}
+            ref={setPopperElement}
             className={classNames(
                 className,
-                handleBasicClasses({ prefix: CLASSNAME, elevation: elevation && elevation > 5 ? 5 : elevation }),
+                handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5) }),
             )}
-            {...props}
-            style={cssPopover}
+            style={styles.popper}
+            {...attributes.popper}
         >
             <div className={`${CLASSNAME}__wrapper`}>{children}</div>
         </div>,
@@ -156,6 +123,5 @@ const Popover: React.FC<PopoverProps> & Popover = ({
     );
 };
 Popover.displayName = COMPONENT_NAME;
-Popover.useComputePosition = useComputePosition;
 
-export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, ElementPosition, Offset };
+export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, Offset };

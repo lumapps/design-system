@@ -68,7 +68,7 @@ export { Mosaic, MosaicProps } from './components/mosaic/Mosaic';
 
 export { Notification, NotificationProps, NotificationType } from './components/notification/Notification';
 
-export { ElementPosition, Popover, PopoverProps, Placement, Offset } from './components/popover/Popover';
+export { Popover, PopoverProps, Placement, Offset } from './components/popover/Popover';
 
 export { PostBlock, PostBlockProps } from './components/post-block/PostBlock';
 
