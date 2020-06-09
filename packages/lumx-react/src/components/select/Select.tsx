@@ -91,22 +91,16 @@ const SelectField: React.FC<SelectProps> = ({
                         onKeyDown={handleKeyboardNav}
                         tabIndex={0}
                     >
-                        {isEmpty && placeholder && (
-                            <div
-                                className={classNames([
-                                    `${CLASSNAME}__input-native`,
-                                    `${CLASSNAME}__input-native--placeholder`,
-                                ])}
-                            >
-                                <span>{placeholder}</span>
-                            </div>
-                        )}
+                        <div
+                            className={classNames([
+                                `${CLASSNAME}__input-native`,
+                                isEmpty && placeholder && `${CLASSNAME}__input-native--placeholder`,
+                            ])}
+                        >
+                            {!isEmpty && <span>{selectedValueRender!(value)}</span>}
 
-                        {!isEmpty && (
-                            <div className={`${CLASSNAME}__input-native`}>
-                                <span>{selectedValueRender!(value)}</span>
-                            </div>
-                        )}
+                            {isEmpty && placeholder && <span>{placeholder}</span>}
+                        </div>
 
                         {(isValid || hasError) && (
                             <div className={`${CLASSNAME}__input-validity`}>
