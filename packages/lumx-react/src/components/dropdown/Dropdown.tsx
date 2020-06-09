@@ -5,11 +5,12 @@ import classNames from 'classnames';
 import { List } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { useComputePosition } from '@lumx/react/hooks';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
-import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
+import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 /**
  * Defines the props of the component.
@@ -95,7 +96,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     const popoverRef: React.RefObject<HTMLDivElement> = useRef(null);
     const listElementRef: React.RefObject<HTMLUListElement> = useRef(null);
 
-    const { computedPosition, isVisible } = Popover.useComputePosition(
+    const { computedPosition, isVisible } = useComputePosition(
         placement!,
         anchorRef,
         popoverRef,
@@ -134,19 +135,6 @@ const Dropdown: React.FC<DropdownProps> = ({
 
     useCallbackOnEscape(onClose, showDropdown && closeOnEscape);
 
-    // Any click away from the dropdown container will close it.
-    useClickAway(
-        wrapperRef,
-        () => {
-            if (!closeOnClick || !onClose || !showDropdown) {
-                return;
-            }
-
-            onClose();
-        },
-        [anchorRef],
-    );
-
     // Set the focus on the list when the dropdown opens,
     // in order to enable keyboard controls.
     useFocus(listElementRef.current, isVisible && shouldFocusOnOpen);
@@ -162,7 +150,9 @@ const Dropdown: React.FC<DropdownProps> = ({
             placement={placement}
             zIndex={zIndex}
         >
-            {popperElement}
+            <ClickAwayProvider callback={closeOnClick && onClose} refs={[wrapperRef, anchorRef]}>
+                {popperElement}
+            </ClickAwayProvider>
         </Popover>
     ) : null;
 };

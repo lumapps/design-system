@@ -1,11 +1,11 @@
 import { Placement, Popover, TextField } from '@lumx/react';
-import { useClickAway } from '@lumx/react/hooks/useClickAway';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 import { onEscapePressed } from '@lumx/react/utils';
+import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import moment from 'moment';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, DatePicker } from './DatePicker';
@@ -67,9 +67,9 @@ const DatePickerField = ({
         setIsOpen(!isOpen);
     };
 
-    const closeSimpleMenu = () => {
+    const closeSimpleMenu = useCallback(() => {
         setIsOpen(false);
-    };
+    }, []);
 
     const { computedPosition, isVisible } = Popover.useComputePosition(
         Placement.BOTTOM_START!,
@@ -100,18 +100,6 @@ const DatePickerField = ({
             window.removeEventListener('keydown', onEscapeHandler);
         };
     }, [isOpen, closeSimpleMenu, onEscapeHandler]);
-
-    useClickAway(
-        wrapperRef,
-        () => {
-            if (!isOpen) {
-                return;
-            }
-
-            closeSimpleMenu();
-        },
-        [anchorRef],
-    );
 
     // Handle focus trap.
     const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
@@ -146,30 +134,32 @@ const DatePickerField = ({
                 {...textFieldProps}
             />
             {isOpen ? (
-                <Popover
-                    popoverRect={computedPosition}
-                    popoverRef={popoverRef}
-                    isVisible={isVisible}
-                    placement={Placement.BOTTOM_START}
-                >
-                    <div
-                        ref={wrapperRef}
-                        style={{
-                            maxHeight: computedPosition.maxHeight,
-                            minWidth: 0,
-                        }}
+                <ClickAwayProvider callback={closeSimpleMenu} refs={[wrapperRef, anchorRef]}>
+                    <Popover
+                        popoverRect={computedPosition}
+                        popoverRef={popoverRef}
+                        isVisible={isVisible}
+                        placement={Placement.BOTTOM_START}
                     >
-                        <DatePicker
-                            locale={locale}
-                            maxDate={maxDate}
-                            minDate={minDate}
-                            value={castedValue}
-                            onChange={onDatePickerChange}
-                            todayOrSelectedDateRef={todayOrSelectedDateRef}
-                            defaultMonth={castedDefaultMonth}
-                        />
-                    </div>
-                </Popover>
+                        <div
+                            ref={wrapperRef}
+                            style={{
+                                maxHeight: computedPosition.maxHeight,
+                                minWidth: 0,
+                            }}
+                        >
+                            <DatePicker
+                                locale={locale}
+                                maxDate={maxDate}
+                                minDate={minDate}
+                                value={castedValue}
+                                onChange={onDatePickerChange}
+                                todayOrSelectedDateRef={todayOrSelectedDateRef}
+                                defaultMonth={castedDefaultMonth}
+                            />
+                        </div>
+                    </Popover>
+                </ClickAwayProvider>
             ) : null}
         </>
     );
