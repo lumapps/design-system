@@ -169,7 +169,7 @@ const MainNav: React.FC<RouteComponentProps> = (props) => {
                     onClick={goToHandler('/')}
                     onKeyPress={goToHandler('/')}
                 >
-                    <img src={LumXLogo} alt="LumX" />
+                    <img src={LumXLogo} width="24px" height="24px" alt="LumX" />
                     <span>
                         <strong>{'LumApps'}</strong>
                         {' design system'}

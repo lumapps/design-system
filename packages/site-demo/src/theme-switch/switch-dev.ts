@@ -25,7 +25,7 @@ const injectThemeScript = async (theme: GlobalTheme) =>
     new Promise((resolve, reject) => {
         const newScript = document.createElement('script');
         newScript.id = getThemeId(theme);
-        document.body.append(newScript);
+        document.body.appendChild(newScript);
         newScript.addEventListener('load', resolve);
         newScript.addEventListener('error', reject);
         // tslint:disable-next-line: deprecation
@@ -39,12 +39,12 @@ function cleanUpOldStyles(newTheme: GlobalTheme) {
         .reverse()
         .map((style) => {
             if (!style.textContent) {
-                style.remove();
+                style.parentNode?.removeChild?.(style);
             }
             if (!currentStyleFound && style.textContent?.includes(`/** DEMO THEME - ${newTheme.toUpperCase()} */`)) {
                 currentStyleFound = true;
             } else if (currentStyleFound && style.textContent?.includes(`/** DEMO THEME`)) {
-                style.remove();
+                style.parentNode?.removeChild?.(style);
             }
         });
 }
@@ -64,8 +64,9 @@ export async function switchDevTheme(oldTheme: GlobalTheme, newTheme: GlobalThem
     initDevThemeScript();
     const oldThemeElement = getThemeElement(oldTheme);
     const newThemeElement = getThemeElement(newTheme);
-    oldThemeElement?.remove();
-    newThemeElement?.remove();
+
+    oldThemeElement?.parentNode?.removeChild(oldThemeElement);
+    newThemeElement?.parentNode?.removeChild(newThemeElement);
 
     await injectThemeScript(newTheme);
     cleanUpOldStyles(newTheme);

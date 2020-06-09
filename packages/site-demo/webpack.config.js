@@ -112,9 +112,9 @@ module.exports = {
     name: PKG_NAME,
     externals: ['angular'],
     entry: {
-        main: `${SRC_PATH}/index.tsx`,
         'theme-material': `${SRC_PATH}/style/material.scss`,
         'theme-lumapps': `${SRC_PATH}/style/lumapps.scss`,
+        main: `${SRC_PATH}/index.tsx`,
     },
 
     resolve: {
@@ -165,7 +165,7 @@ module.exports = {
                 },
             },
             {
-                exclude: [/node_modules/u, /\.(test|spec)\.[t|j]sx?/u],
+                exclude: [/node_modules\/(?!(loader-utils|schema-utils))/u, /\.(test|spec)\.[t|j]sx?/u],
                 test: /\.[t|j]sx?$/u,
                 use: {
                     loader: 'babel-loader',
