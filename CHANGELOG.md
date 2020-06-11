@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `TextField` component is now computing the number of rows (if `multiple` is set) at the first rendering.
 -   Fix centering issue on fallback icon in `Thumbnail` component when using `fillHeight`prop.
 -   Fix nested click away for `Dialog`, `Dropdown`, `Select` and `Autocomplete` (this fixes the dialog automatically closing when clicking on a nested select or dropdown.)
+-   Fix position of the dropdown arrow icon when the select has no value (Material theme).
 
 ### Changed
 
