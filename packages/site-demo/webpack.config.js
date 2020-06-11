@@ -165,7 +165,7 @@ module.exports = {
                 },
             },
             {
-                exclude: [/node_modules\/(?!(loader-utils|schema-utils))/u, /\.(test|spec)\.[t|j]sx?/u],
+                exclude: [/node_modules/u, /\.(test|spec)\.[t|j]sx?/u],
                 test: /\.[t|j]sx?$/u,
                 use: {
                     loader: 'babel-loader',
