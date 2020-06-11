@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.0][] - 2020-06-11
+
 ### Fixed
 
 -   `TextField` component is now computing the number of rows (if `multiple` is set) at the first rendering.
@@ -515,3 +517,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.22.0]: https://github.com/lumapps/design-system/tree/v0.22.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.23.0...HEAD
 [0.23.0]: https://github.com/lumapps/design-system/tree/v0.23.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.0...HEAD
+[0.24.0]: https://github.com/lumapps/design-system/tree/v0.24.0
