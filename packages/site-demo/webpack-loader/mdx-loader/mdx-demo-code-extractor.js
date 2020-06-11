@@ -49,28 +49,28 @@ function getDemoFromChildren(node, children) {
     return buildNewDemoBlock(node, propsIndex);
 }
 
-function getDemoFromProps(resourceFolder, node, propsIndex) {
+function getDemoFromProps(resourceFolder, node, propsIndex, hasAngularController) {
     const demoName = propsIndex.demo.replace(/"/g, '');
 
     const reactCodePath = `./react/${demoName}.tsx`;
     const reactCode = readSourceCode(resourceFolder, reactCodePath);
     const reactDemoVar = `react${camelCase(demoName)}`;
-    const importReact = `import * as ${reactDemoVar} from '${reactCode ? reactCodePath : 'null-loader'}';`;
+    const importReact = reactCode ? `import * as ${reactDemoVar} from '${reactCodePath}';` : '';
 
     const angularCodePath = `./angularjs/${demoName}.html`;
     const angularCode = readSourceCode(resourceFolder, angularCodePath);
     const angularDemoVar = `angular${camelCase(demoName)}`;
-    const importAngular = `import * as ${angularDemoVar} from '${angularCode ? angularCodePath : 'null-loader'}';`;
+    const importAngular = angularCode ? `import * as ${angularDemoVar} from '${angularCodePath}';` : '';
 
     propsIndex.code = `{{
         react: {
-           demo: ${reactDemoVar},
+           demo: ${reactCode ? reactDemoVar : 'null'},
            code: ${reactCode}
         },
         angularjs: {
            demo: {
-              controller: angularController,
-              template: ${angularDemoVar},
+              controller: ${hasAngularController ? 'angularController' : 'null'},
+              template: ${angularCode ? angularDemoVar : 'null'},
            },
            code: ${angularCode}
         }
@@ -81,11 +81,12 @@ function getDemoFromProps(resourceFolder, node, propsIndex) {
 
 /**
  * Update <DemoBlock/> props to import source code & inject the engine.
- * @param resourceFolder Current demo folder.
- * @param node           Current MDX node.
+ * @param resourceFolder       Current demo folder.
+ * @param node                 Current MDX node.
+ * @param hasAngularController Demo has an angular controller.
  * @return {{imports: [string, string], newNode: {value: string}}} Modified demo block with imports.
  */
-function updateDemoBlock(resourceFolder, node) {
+function updateDemoBlock(resourceFolder, node, hasAngularController) {
     const { value } = node;
     const match = value.match(demoBlockRX);
 
@@ -98,7 +99,7 @@ function updateDemoBlock(resourceFolder, node) {
     const props = propsString.match(extractPropRX);
     const propsIndex = fromPairs(props.map((prop) => prop.split('=')));
     if (propsIndex.demo) {
-        return getDemoFromProps(resourceFolder, node, propsIndex);
+        return getDemoFromProps(resourceFolder, node, propsIndex, hasAngularController);
     }
 
     return buildNewDemoBlock(node);
@@ -126,7 +127,7 @@ module.exports = (resourcePath) => () => {
     const controllerPath = './angularjs/controller.js';
     // eslint-disable-next-line no-sync
     const hasController = fs.existsSync(path.resolve(resourceFolder, controllerPath));
-    const importController = `import * as angularController from '${hasController ? controllerPath : 'null-loader'}';`;
+    const importController = hasController ? `import * as angularController from '${controllerPath}';` : '';
 
     return (tree) => {
         const [importNodes, others] = partition(tree.children, isImport);
@@ -146,7 +147,7 @@ module.exports = (resourcePath) => () => {
         const content = others.map((node) => {
             if (isDemoBlock(node)) {
                 contentHasDemo = true;
-                const { newNode, imports } = updateDemoBlock(resourceFolder, node);
+                const { newNode, imports } = updateDemoBlock(resourceFolder, node, hasController);
                 importStatement += `\n${imports.join('\n')}`;
 
                 return newNode;

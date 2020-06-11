@@ -117,7 +117,7 @@ const isComponent = <C>(component: React.FC<C> | string) => (instance: ReactNode
     const componentName = typeof component === 'string' ? component : component.displayName;
 
     return (
-        get(instance, '$$typeof') === Symbol.for('react.element') &&
+        !!get(instance, '$$typeof') &&
         NAME_PROPERTIES.some((nameProperty: string): boolean => get(instance, nameProperty) === componentName)
     );
 };
