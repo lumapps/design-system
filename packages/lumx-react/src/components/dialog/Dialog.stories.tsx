@@ -217,13 +217,7 @@ export const dialogWithFocusableElements = ({ theme }: any) => {
     return (
         <>
             {button}
-            <Dialog
-                isOpen={isOpen}
-                onClose={closeDialog}
-                parentElement={buttonRef}
-                preventAutoClose
-                focusElement={inputRef}
-            >
+            <Dialog isOpen={isOpen} onClose={closeDialog} parentElement={buttonRef} focusElement={inputRef}>
                 <header>
                     <Toolbar
                         label={<span className="lumx-typography-title">Dialog header</span>}

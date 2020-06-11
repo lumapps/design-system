@@ -16,22 +16,35 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
     }
   }
 >
-  <div
-    className="lumx-dropdown__menu lumx-dropdown"
-    style={
-      Object {
-        "maxHeight": undefined,
-        "minWidth": undefined,
-      }
+  <ClickAwayProvider
+    refs={
+      Array [
+        Object {
+          "current": null,
+        },
+        Object {
+          "current": null,
+        },
+      ]
     }
   >
     <div
-      className="lumx-dropdown__content"
+      className="lumx-dropdown__menu lumx-dropdown"
+      style={
+        Object {
+          "maxHeight": undefined,
+          "minWidth": undefined,
+        }
+      }
     >
-      <div>
-        This is the content of the dropdown
+      <div
+        className="lumx-dropdown__content"
+      >
+        <div>
+          This is the content of the dropdown
+        </div>
       </div>
     </div>
-  </div>
+  </ClickAwayProvider>
 </Popover>
 `;

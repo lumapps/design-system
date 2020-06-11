@@ -112,7 +112,6 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         "current": undefined,
       }
     }
-    preventAutoClose={true}
   >
     <header>
       <Toolbar
