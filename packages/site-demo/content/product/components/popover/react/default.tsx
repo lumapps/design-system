@@ -19,9 +19,6 @@ const App = ({ theme }: any) => {
     };
 
     const anchorRef = React.useRef(null);
-    const popoverRef = React.useRef(null);
-
-    const { computedPosition, isVisible } = Popover.useComputePosition(Placement.BOTTOM, anchorRef, popoverRef, true);
 
     return (
         <>
@@ -30,7 +27,7 @@ const App = ({ theme }: any) => {
                     Anchor
                 </Chip>
             </div>
-            <Popover theme={theme} popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
+            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.BOTTOM}>
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>
         </>

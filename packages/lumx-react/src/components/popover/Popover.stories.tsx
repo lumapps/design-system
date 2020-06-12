@@ -22,17 +22,9 @@ export const positions = ({ theme }: any) => {
     };
 
     const topAnchorRef = React.useRef(null);
-    const topPopoverRef = React.useRef(null);
-
     const rightAnchorRef = React.useRef(null);
-    const rightPopoverRef = React.useRef(null);
-
     const bottomAnchorRef = React.useRef(null);
-    const bottomPopoverRef = React.useRef(null);
-
     const leftAnchorRef = React.useRef(null);
-    const leftPopoverRef = React.useRef(null);
-
 
     return (
         <FlexBox
@@ -48,9 +40,7 @@ export const positions = ({ theme }: any) => {
                 <Popover
                     theme={theme}
                     anchorRef={topAnchorRef}
-                    popoverRef={topPopoverRef}
                     placement={Placement.TOP}
-                    isVisible
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
@@ -65,9 +55,7 @@ export const positions = ({ theme }: any) => {
                 <Popover
                     theme={theme}
                     anchorRef={rightAnchorRef}
-                    popoverRef={rightPopoverRef}
                     placement={Placement.RIGHT}
-                    isVisible
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
@@ -84,9 +72,7 @@ export const positions = ({ theme }: any) => {
                 <Popover
                     theme={theme}
                     anchorRef={bottomAnchorRef}
-                    popoverRef={bottomPopoverRef}
                     placement={Placement.BOTTOM}
-                    isVisible
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
@@ -103,9 +89,7 @@ export const positions = ({ theme }: any) => {
                 <Popover
                     theme={theme}
                     anchorRef={leftAnchorRef}
-                    popoverRef={leftPopoverRef}
                     placement={Placement.LEFT}
-                    isVisible
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
@@ -140,7 +124,7 @@ export const auto = ({ theme }: any) => {
                     Anchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO} isVisible>
+            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO}>
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>
         </div>

@@ -11,7 +11,6 @@ import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, DatePicker } from './DatePicker';
 import DatePickerValueProp from './DatePickerValueProp';
 
-import { useComputePosition } from '@lumx/react/hooks/useComputePosition';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
 
@@ -59,7 +58,6 @@ const DatePickerField = ({
     ...textFieldProps
 }: DatePickerFieldProps) => {
     const wrapperRef = useRef(null);
-    const popoverRef = useRef(null);
     const anchorRef = useRef(null);
 
     const [isOpen, setIsOpen] = useState(false);
@@ -71,16 +69,6 @@ const DatePickerField = ({
     const closeSimpleMenu = useCallback(() => {
         setIsOpen(false);
     }, []);
-
-    const { computedPosition, isVisible } = useComputePosition(
-        Placement.BOTTOM_START!,
-        anchorRef,
-        popoverRef,
-        isOpen,
-        undefined,
-        false,
-        false,
-    );
 
     const onEscapeHandler = isOpen && onEscapePressed(closeSimpleMenu);
 
@@ -137,17 +125,11 @@ const DatePickerField = ({
             {isOpen ? (
                 <ClickAwayProvider callback={closeSimpleMenu} refs={[wrapperRef, anchorRef]}>
                     <Popover
-                        popoverRect={computedPosition}
-                        popoverRef={popoverRef}
-                        isVisible={isVisible}
+                        anchorRef={anchorRef}
                         placement={Placement.BOTTOM_START}
                     >
                         <div
                             ref={wrapperRef}
-                            style={{
-                                maxHeight: computedPosition.maxHeight,
-                                minWidth: 0,
-                            }}
                         >
                             <DatePicker
                                 locale={locale}

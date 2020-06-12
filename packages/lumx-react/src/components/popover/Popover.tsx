@@ -46,13 +46,13 @@ interface Offset {
  */
 interface PopoverProps extends GenericProps {
     /** The reference of the anchor. */
-    anchorRef: React.RefObject<HTMLDivElement>;
+    anchorRef: React.RefObject<HTMLElement>;
     /** The desired placement */
-    placement: Placement;
-    /** Should the popper be displayed. */
-    isVisible: boolean;
+    placement?: Placement;
     /** Children element displayed inside popover. */
     children: ReactChild;
+    /** The desired offset */
+    offset?: Offset;
     /** How high the component is flying */
     elevation?: number;
     /** The classname to apply to the Popover wrapper */
@@ -97,7 +97,6 @@ const Popover: React.FC<PopoverProps> = ({
     children,
     className = DEFAULT_PROPS.className,
     elevation = DEFAULT_PROPS.elevation,
-    isVisible,
     zIndex = DEFAULT_PROPS.zIndex,
     ...props
 }) => {
@@ -116,6 +115,7 @@ const Popover: React.FC<PopoverProps> = ({
             )}
             style={styles.popper}
             {...attributes.popper}
+            {...props}
         >
             <div className={`${CLASSNAME}__wrapper`}>{children}</div>
         </div>,

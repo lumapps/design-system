@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import { List } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { useComputePosition } from '@lumx/react/hooks';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
@@ -93,20 +92,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     ...props
 }: DropdownProps): React.ReactElement | null => {
     const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
-    const popoverRef: React.RefObject<HTMLDivElement> = useRef(null);
     const listElementRef: React.RefObject<HTMLUListElement> = useRef(null);
-
-    const { computedPosition, isVisible } = useComputePosition(
-        placement!,
-        anchorRef,
-        popoverRef,
-        showDropdown,
-        offset,
-        false,
-        fitToAnchorWidth,
-        false,
-        [children],
-    );
 
     if (onInfiniteScroll) {
         useInfiniteScroll(wrapperRef, onInfiniteScroll);
@@ -123,31 +109,23 @@ const Dropdown: React.FC<DropdownProps> = ({
                 {...props}
                 className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
                 ref={wrapperRef}
-                style={{
-                    maxHeight: computedPosition.maxHeight,
-                    minWidth: fitToAnchorWidth ? computedPosition.anchorWidth : 0,
-                }}
             >
                 <div className={`${CLASSNAME}__content`}>{clonedChildren}</div>
             </div>
         );
-    }, [listElementRef, wrapperRef, children, className, computedPosition, fitToAnchorWidth, props]);
+    }, [listElementRef, wrapperRef, children, className, props]);
 
     useCallbackOnEscape(onClose, showDropdown && closeOnEscape);
 
     // Set the focus on the list when the dropdown opens,
     // in order to enable keyboard controls.
-    useFocus(listElementRef.current, isVisible && shouldFocusOnOpen);
-
-    useFocus(anchorRef.current, !isVisible);
+    useFocus(listElementRef.current, shouldFocusOnOpen);
 
     return showDropdown ? (
         <Popover
-            popoverRect={computedPosition}
-            popoverRef={popoverRef}
-            isVisible={isVisible}
-            offset={offset}
+            anchorRef={anchorRef}
             placement={placement}
+            offset={offset}
             zIndex={zIndex}
         >
             <ClickAwayProvider callback={closeOnClick && onClose} refs={[wrapperRef, anchorRef]}>
