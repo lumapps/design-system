@@ -124,7 +124,7 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
 
 exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] = `
 <div
-  className="lumx-mosaic lumx-mosaic--theme-light"
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-1-thumbnail"
 >
   <div
     className="lumx-mosaic__wrapper"
