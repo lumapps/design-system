@@ -17,8 +17,16 @@
         left: -1px;
         display: grid;
 
+        #{$self}--has-1-thumbnail & {
+            grid-template-areas: 'b';
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+        }
+
         #{$self}--has-2-thumbnails & {
+            grid-template-areas: 'b21 b22';
             grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
         }
 
         #{$self}--has-3-thumbnails & {
@@ -26,12 +34,14 @@
                 'b3 s31'
                 'b3 s32';
             grid-template-columns: 3fr 1fr;
+            grid-template-rows: 1fr 1fr;
         }
 
         #{$self}--has-4-thumbnails & {
             grid-template-areas:
                 'b4 b4 b4'
                 's41 s42 s43';
+            grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: 2fr 1fr;
         }
     }
@@ -41,6 +51,22 @@
         display: flex;
         flex-direction: column;
         margin: 1px;
+
+        #{$self}--has-1-thumbnail & {
+            &:nth-child(1) {
+                grid-area: b;
+            }
+        }
+
+        #{$self}--has-2-thumbnails & {
+            &:nth-child(1) {
+                grid-area: b21;
+            }
+
+            &:nth-child(2) {
+                grid-area: b22;
+            }
+        }
 
         #{$self}--has-3-thumbnails & {
             &:nth-child(1) {
