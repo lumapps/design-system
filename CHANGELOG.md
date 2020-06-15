@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Mosaic` component is now correctly displayed on IE11.
+
 ## [0.24.0][] - 2020-06-11
 
 ### Fixed
