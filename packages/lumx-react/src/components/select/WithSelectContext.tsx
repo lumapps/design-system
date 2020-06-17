@@ -181,10 +181,10 @@ const withSelectContext = (
                 isRequired={isRequired}
             />
             <Dropdown
-                closeOnClick={true}
+                closeOnClickAway={true}
                 closeOnEscape={true}
                 placement={Placement.AUTO_START}
-                showDropdown={isOpen!}
+                isOpen={isOpen!}
                 anchorRef={anchorRef}
                 onClose={onClose}
                 onInfiniteScroll={onInfiniteScroll}

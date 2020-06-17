@@ -34,11 +34,7 @@ const App = ({ theme }: any) => {
                         TOP
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={topAnchorRef}
-                    placement={Placement.TOP}
-                >
+                <Popover theme={theme} anchorRef={topAnchorRef} placement={Placement.TOP} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -49,11 +45,7 @@ const App = ({ theme }: any) => {
                         RIGHT
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={rightAnchorRef}
-                    placement={Placement.RIGHT}
-                >
+                <Popover theme={theme} anchorRef={rightAnchorRef} placement={Placement.RIGHT} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -66,11 +58,7 @@ const App = ({ theme }: any) => {
                         BOTTOM
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={bottomAnchorRef}
-                    placement={Placement.BOTTOM}
-                >
+                <Popover theme={theme} anchorRef={bottomAnchorRef} placement={Placement.BOTTOM} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -83,11 +71,7 @@ const App = ({ theme }: any) => {
                         LEFT
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={leftAnchorRef}
-                    placement={Placement.LEFT}
-                >
+                <Popover theme={theme} anchorRef={leftAnchorRef} placement={Placement.LEFT} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>

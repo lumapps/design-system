@@ -1,11 +1,9 @@
 import { Placement, Popover, TextField } from '@lumx/react';
 import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
-import { onEscapePressed } from '@lumx/react/utils';
-import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import moment from 'moment';
 
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, DatePicker } from './DatePicker';
@@ -66,11 +64,9 @@ const DatePickerField = ({
         setIsOpen(!isOpen);
     };
 
-    const closeSimpleMenu = useCallback(() => {
+    const onClose = useCallback(() => {
         setIsOpen(false);
     }, []);
-
-    const onEscapeHandler = isOpen && onEscapePressed(closeSimpleMenu);
 
     useFocus(anchorRef.current, isOpen);
     const handleKeyboardNav = (evt: React.KeyboardEvent) => {
@@ -78,17 +74,6 @@ const DatePickerField = ({
             toggleSimpleMenu();
         }
     };
-
-    useEffect(() => {
-        if (!isOpen || !onEscapeHandler || !wrapperRef.current) {
-            return;
-        }
-
-        window.addEventListener('keydown', onEscapeHandler);
-        return () => {
-            window.removeEventListener('keydown', onEscapeHandler);
-        };
-    }, [isOpen, closeSimpleMenu, onEscapeHandler]);
 
     // Handle focus trap.
     const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
@@ -102,7 +87,7 @@ const DatePickerField = ({
 
     const onDatePickerChange = (newDate: moment.Moment | undefined) => {
         onChange(newDate);
-        closeSimpleMenu();
+        onClose();
     };
 
     const castedValue = value && moment(value).isValid() ? moment(value) : undefined;
@@ -123,26 +108,26 @@ const DatePickerField = ({
                 readOnly
             />
             {isOpen ? (
-                <ClickAwayProvider callback={closeSimpleMenu} refs={[wrapperRef, anchorRef]}>
-                    <Popover
-                        anchorRef={anchorRef}
-                        placement={Placement.BOTTOM_START}
-                    >
-                        <div
-                            ref={wrapperRef}
-                        >
-                            <DatePicker
-                                locale={locale}
-                                maxDate={maxDate}
-                                minDate={minDate}
-                                value={castedValue}
-                                onChange={onDatePickerChange}
-                                todayOrSelectedDateRef={todayOrSelectedDateRef}
-                                defaultMonth={castedDefaultMonth}
-                            />
-                        </div>
-                    </Popover>
-                </ClickAwayProvider>
+                <Popover
+                    anchorRef={anchorRef}
+                    placement={Placement.BOTTOM_START}
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    closeOnClickAway
+                    closeOnEscape
+                >
+                    <div ref={wrapperRef}>
+                        <DatePicker
+                            locale={locale}
+                            maxDate={maxDate}
+                            minDate={minDate}
+                            value={castedValue}
+                            onChange={onDatePickerChange}
+                            todayOrSelectedDateRef={todayOrSelectedDateRef}
+                            defaultMonth={castedDefaultMonth}
+                        />
+                    </div>
+                </Popover>
             ) : null}
         </>
     );

@@ -36,6 +36,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `Mosaic` component is now correctly displayed on IE11.
 -   Fix missing grey color (in material theme) in the generated SCSS color palette
 
+### Changed
+
+-   _[BREAKING]_ `Popover` computes position internally and add popover ref internally. `popoverRect`, `isVisible` and `popoverRef` props have been removed. `anchorRef`, `placement`, `offset`, `fitToAnchorWidth`, `isOpen`, `closeOnClickAway`, `closeOnEscape` and `onClose` props have been added.
+-   _[BREAKING]_ `Tooltip` takes anchor as children and label as prop. `anchorRef` prop has been removed. `label` prop has been added.
+-   _[BREAKING]_ `Popover.useComputePosition` hook has been removed.
+-   _[BREAKING]_ For the `Dropdown` component, the prop `closeOnClick` has been renamed `closeOnClickAway`, the prop `isOpen` has been renamed `isOpen`.
+-   _[BREAKING]_ For the `Autocomplete` component, the prop `closeOnClick` has been renamed `closeOnClickAway`.
+
 ## [0.24.0][] - 2020-06-11
 
 ### Fixed

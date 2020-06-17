@@ -1,7 +1,6 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
-import { usePopper } from 'react-popper';
 
 export default { title: 'LumX components/Popover' };
 
@@ -37,11 +36,7 @@ export const positions = ({ theme }: any) => {
                         TOP
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={topAnchorRef}
-                    placement={Placement.TOP}
-                >
+                <Popover theme={theme} anchorRef={topAnchorRef} placement={Placement.TOP} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -52,11 +47,7 @@ export const positions = ({ theme }: any) => {
                         RIGHT
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={rightAnchorRef}
-                    placement={Placement.RIGHT}
-                >
+                <Popover theme={theme} anchorRef={rightAnchorRef} placement={Placement.RIGHT} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -69,11 +60,7 @@ export const positions = ({ theme }: any) => {
                         BOTTOM
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={bottomAnchorRef}
-                    placement={Placement.BOTTOM}
-                >
+                <Popover theme={theme} anchorRef={bottomAnchorRef} placement={Placement.BOTTOM} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -86,11 +73,7 @@ export const positions = ({ theme }: any) => {
                         LEFT
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    anchorRef={leftAnchorRef}
-                    placement={Placement.LEFT}
-                >
+                <Popover theme={theme} anchorRef={leftAnchorRef} placement={Placement.LEFT} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -113,7 +96,7 @@ export const auto = ({ theme }: any) => {
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'center',
-    }
+    };
 
     const anchorRef = React.useRef(null);
 
@@ -124,7 +107,8 @@ export const auto = ({ theme }: any) => {
                     Anchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO}>
+            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO} isOpen>
+                isOpen
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>
         </div>
@@ -146,7 +130,7 @@ export const top = ({ theme }: any) => {
         alignItems: 'center',
         display: 'flex',
         justifyContent: 'center',
-    }
+    };
 
     const anchorRef = React.useRef(null);
 
@@ -157,7 +141,8 @@ export const top = ({ theme }: any) => {
                     Anchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.TOP}>
+            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.TOP} isOpen>
+                isOpen
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>
         </div>

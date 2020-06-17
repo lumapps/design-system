@@ -27,7 +27,7 @@ const App = ({ theme }: any) => {
                     Anchor
                 </Chip>
             </div>
-            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO}>
+            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO} isOpen>
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>
         </>

@@ -39,7 +39,7 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
         // tslint:disable-next-line no-unused
         anchorRef,
         children: <div>This is the content of the dropdown</div>,
-        showDropdown: true,
+        isOpen: true,
         ...propsOverrides,
     };
 
@@ -95,7 +95,7 @@ describe(`<${Dropdown.displayName}>`, () => {
                 {
                     closeOnEscape: true,
                     onClose,
-                    showDropdown: true,
+                    isOpen: true,
                 },
                 false,
             );
@@ -105,14 +105,14 @@ describe(`<${Dropdown.displayName}>`, () => {
         });
 
         it('should not trigger `onClose` when pressing any other key', () => {
-            setup({ showDropdown: true, onClose, closeOnEscape: true }, false);
+            setup({ isOpen: true, onClose, closeOnEscape: true }, false);
 
             eventListeners.keydown!({ keyCode: 26 });
             expect(onClose).not.toHaveBeenCalled();
         });
 
         it('should not trigger `onClose` when pressing `escape` key with `closeOnEscape` set to `false`', () => {
-            setup({ showDropdown: true, onClose, closeOnEscape: false }, false);
+            setup({ isOpen: true, onClose, closeOnEscape: false }, false);
 
             if (eventListeners.keydown) {
                 eventListeners.keydown({ keyCode: ESCAPE_KEY_CODE });

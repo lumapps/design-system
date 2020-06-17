@@ -7,31 +7,22 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
       "current": null,
     }
   }
+  closeOnClickAway={true}
+  closeOnEscape={true}
+  fitToAnchorWidth={true}
+  isOpen={true}
   placement="auto-start"
 >
-  <ClickAwayProvider
-    refs={
-      Array [
-        Object {
-          "current": null,
-        },
-        Object {
-          "current": null,
-        },
-      ]
-    }
+  <div
+    className="lumx-dropdown__menu lumx-dropdown"
   >
     <div
-      className="lumx-dropdown__menu lumx-dropdown"
+      className="lumx-dropdown__content"
     >
-      <div
-        className="lumx-dropdown__content"
-      >
-        <div>
-          This is the content of the dropdown
-        </div>
+      <div>
+        This is the content of the dropdown
       </div>
     </div>
-  </ClickAwayProvider>
+  </div>
 </Popover>
 `;

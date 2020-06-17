@@ -124,9 +124,9 @@ interface AutocompleteProps extends GenericProps {
 
     /**
      * Whether a click anywhere out of the Autocomplete would close it
-     * @see {@link DropdownProps#closeOnClick}
+     * @see {@link DropdownProps#closeOnClickAway}
      */
-    closeOnClick?: boolean;
+    closeOnClickAway?: boolean;
 
     /**
      * Whether an escape key press would close the Autocomplete.
@@ -180,7 +180,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     anchorToInput: false,
-    closeOnClick: true,
+    closeOnClickAway: true,
     closeOnEscape: true,
     isOpen: undefined,
     shouldFocusOnClose: false,
@@ -190,6 +190,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  * This component allows to make the connection between a Text Field and a Dropdown,
  * displaying a list of suggestions from the text entered on the text field.
  *
+ * @param  props The component props
  * @return The component.
  */
 const Autocomplete: React.FC<AutocompleteProps> = (props) => {
@@ -203,7 +204,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
         onChange,
         onFocus,
         isOpen,
-        closeOnClick,
+        closeOnClickAway,
         closeOnEscape,
         error,
         hasError,
@@ -259,8 +260,8 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
             />
             <Dropdown
                 anchorRef={anchorToInput ? inputRef : textFieldRef}
-                showDropdown={isOpen}
-                closeOnClick={closeOnClick}
+                isOpen={isOpen}
+                closeOnClickAway={closeOnClickAway}
                 closeOnEscape={closeOnEscape}
                 onClose={onClose}
                 offset={offset}

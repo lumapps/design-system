@@ -63,6 +63,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
 
 /**
  * Displays a slideshow.
+ *
+ * @return The component.
  */
 const Slideshow: React.FC<SlideshowProps> = ({
     activeIndex = DEFAULT_PROPS.activeIndex as number,

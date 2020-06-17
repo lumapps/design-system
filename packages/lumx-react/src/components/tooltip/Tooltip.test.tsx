@@ -7,6 +7,8 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 
 import { CLASSNAME, Tooltip, TooltipProps } from './Tooltip';
 
+jest.mock('uuid/v4', () => () => 123);
+
 /**
  * Define the overriding properties waited by the `setup` function.
  */
@@ -32,7 +34,11 @@ interface Setup extends CommonSetup {
 const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer = shallowRendering ? shallow : mount;
     // @ts-ignore
-    const wrapper = renderer(<Tooltip label="Tooltip" {...props}>Anchor</Tooltip>);
+    const wrapper = renderer(
+        <Tooltip label="Tooltip" {...props}>
+            Anchor
+        </Tooltip>,
+    );
     const tooltip = wrapper.find('.' + CLASSNAME);
 
     return {
@@ -42,10 +48,9 @@ const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup 
     };
 };
 
-jest.mock('./useTooltipOpen', () => ({ useTooltipOpen: () => true}));
+jest.mock('./useTooltipOpen', () => ({ useTooltipOpen: () => true }));
 
 describe(`<${Tooltip.displayName}>`, () => {
-
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.

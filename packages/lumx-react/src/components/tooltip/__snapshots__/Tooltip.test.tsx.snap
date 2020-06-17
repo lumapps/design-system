@@ -2,7 +2,9 @@
 
 exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
 <Fragment>
-  <span>
+  <span
+    aria-describedby="tooltip-123"
+  >
     Anchor
   </span>
   <Portal
@@ -10,6 +12,8 @@ exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
   >
     <div
       className="lumx-tooltip"
+      id="tooltip-123"
+      role="tooltip"
       style={
         Object {
           "left": "0",

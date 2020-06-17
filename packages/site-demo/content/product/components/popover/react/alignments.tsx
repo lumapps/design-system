@@ -34,12 +34,8 @@ const App = ({ theme }: any) => {
                     TOP_START
                 </Chip>
             </div>
-            <Popover
-                theme={theme}
-                anchorRef={topStartAnchorRef}
-                placement={Placement.TOP_START}
-            >
-                <div style={demoPopperStyle}>{'Popover aligned on start of the top side'}</div>
+            <Popover theme={theme} anchorRef={topStartAnchorRef} placement={Placement.TOP_START} isOpen>
+                <div style={demoPopperStyle}>Popover aligned on start of the top side</div>
             </Popover>
 
             <div style={demoPopoverHolderStyle}>
@@ -47,12 +43,8 @@ const App = ({ theme }: any) => {
                     TOP_END
                 </Chip>
             </div>
-            <Popover
-                theme={theme}
-                anchorRef={topEndAnchorRef}
-                placement={Placement.TOP_END}
-            >
-                <div style={demoPopperStyle}>{'Popover aligned on start of the top side'}</div>
+            <Popover theme={theme} anchorRef={topEndAnchorRef} placement={Placement.TOP_END} isOpen>
+                <div style={demoPopperStyle}>Popover aligned on start of the top side</div>
             </Popover>
         </div>
     );

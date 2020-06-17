@@ -71,6 +71,7 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
 /**
  * [Enter the description of the component here].
  *
+ * @param  props The component props.
  * @return The component.
  */
 const Uploader: React.FC<UploaderProps> = (props) => {

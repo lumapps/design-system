@@ -35,6 +35,7 @@ const App = ({ theme }: any) => {
                     horizontal: 30,
                     vertical: 60,
                 }}
+                isOpen
             >
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>

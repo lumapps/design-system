@@ -1,4 +1,4 @@
-import React, { createRef, ReactElement } from 'react';
+import React, { ReactElement, createRef } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';

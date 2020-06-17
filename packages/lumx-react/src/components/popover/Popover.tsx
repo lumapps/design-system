@@ -1,10 +1,12 @@
-import React, { ReactNode, useMemo, useState } from 'react';
+import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
+import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -55,12 +57,20 @@ interface OptionalPopoverProps extends GenericProps {
     zIndex?: number;
     /** Whether the dropdown should fit to the anchor width */
     fitToAnchorWidth?: boolean;
+    /** Whether a click anywhere out of the popover would close it. */
+    closeOnClickAway?: boolean;
+    /** Whether an escape key press would close the popover. */
+    closeOnEscape?: boolean;
+    /** The function to be called when the user clicks away or Escape is pressed */
+    onClose?: VoidFunction;
 }
 interface PopoverProps extends OptionalPopoverProps {
     /** The reference of the anchor. */
     anchorRef: React.RefObject<HTMLElement>;
     /** Children element displayed inside popover. */
     children: ReactNode;
+    /** Whether the popover is open */
+    isOpen: boolean;
 }
 
 /**
@@ -76,7 +86,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Required<OptionalPopoverProps> = {
+const DEFAULT_PROPS: Omit<Required<OptionalPopoverProps>, 'onClose'> = {
     elevation: 3,
     placement: Placement.AUTO,
     offset: {
@@ -85,26 +95,34 @@ const DEFAULT_PROPS: Required<OptionalPopoverProps> = {
     },
     zIndex: 9999,
     fitToAnchorWidth: false,
+    closeOnClickAway: false,
+    closeOnEscape: false,
 };
 
 /**
  * Popover.
  *
+ * @param  props The component props.
  * @return The component.
  */
 const Popover: React.FC<PopoverProps> = (props) => {
     const {
         anchorRef,
         placement,
+        isOpen,
         children,
         fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
         offset = DEFAULT_PROPS.offset,
         elevation = DEFAULT_PROPS.elevation,
         zIndex = DEFAULT_PROPS.zIndex,
+        closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
+        closeOnEscape = DEFAULT_PROPS.closeOnEscape,
         className,
+        onClose,
         ...forwardedProps
     } = props;
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
+    const wrapperRef = useRef(null);
     const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
         placement,
         modifiers: [
@@ -118,20 +136,23 @@ const Popover: React.FC<PopoverProps> = (props) => {
     });
 
     const popoverStyle = useMemo(() => {
-        if(!fitToAnchorWidth || !anchorRef.current) {
-            return styles.popper;
+        if (!fitToAnchorWidth || !anchorRef.current) {
+            return { ...styles.popper, zIndex };
         }
 
         const boundingAnchor = anchorRef.current.getBoundingClientRect();
         return {
             ...styles.popper,
+            zIndex,
             width: boundingAnchor.width,
-        }
+        };
     }, [fitToAnchorWidth, anchorRef, styles]);
+
+    useCallbackOnEscape(onClose, isOpen && closeOnEscape);
 
     return createPortal(
         <div
-           {...forwardedProps}
+            {...forwardedProps}
             ref={setPopperElement}
             className={classNames(
                 className,
@@ -140,7 +161,11 @@ const Popover: React.FC<PopoverProps> = (props) => {
             style={popoverStyle}
             {...attributes.popper}
         >
-            <div className={`${CLASSNAME}__wrapper`}>{children}</div>
+            <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
+                <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
+                    {children}
+                </ClickAwayProvider>
+            </div>
         </div>,
         document.body,
     );

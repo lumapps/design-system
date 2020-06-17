@@ -79,6 +79,9 @@ const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 
 /**
  * Render a button wrapper with the ButtonRoot inside.
+ *
+ * @param  props The component props.
+ * @return The component.
  */
 const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const { color, emphasis, variant } = props;

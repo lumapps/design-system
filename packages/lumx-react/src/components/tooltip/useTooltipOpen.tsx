@@ -1,11 +1,10 @@
-import { RefObject, useState, useEffect } from "react";
-
+import { RefObject, useEffect, useState } from 'react';
 
 /**
  * Hook controlling tooltip visibillity using mouse hover the anchor and delay.
  * @return whether or not to show the tooltip.
  */
-export function useTooltipOpen({ delay, anchorRef}: {delay: number, anchorRef: RefObject<HTMLElement>}) {
+export function useTooltipOpen({ delay, anchorRef }: { delay: number; anchorRef: RefObject<HTMLElement> }) {
     const [timer, setTimer] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -29,12 +28,12 @@ export function useTooltipOpen({ delay, anchorRef}: {delay: number, anchorRef: R
             setIsOpen(false);
         };
 
-            anchor.addEventListener('mouseenter', handleMouseEnter);
-            anchor.addEventListener('mouseleave', handleMouseLeave);
+        anchor.addEventListener('mouseenter', handleMouseEnter);
+        anchor.addEventListener('mouseleave', handleMouseLeave);
 
         return () => {
-                anchor.removeEventListener('mouseenter', handleMouseEnter);
-                anchor.removeEventListener('mouseleave', handleMouseLeave);
+            anchor.removeEventListener('mouseenter', handleMouseEnter);
+            anchor.removeEventListener('mouseleave', handleMouseLeave);
 
             if (timer) {
                 clearTimeout(timer);

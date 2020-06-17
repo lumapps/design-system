@@ -32,9 +32,9 @@ const App = () => {
             </Button>
 
             <Dropdown
-                closeOnClick
+                closeOnClickAway
                 closeOnEscape
-                showDropdown={isSimpleOpen}
+                isOpen={isSimpleOpen}
                 onClose={closeSimpleMenu}
                 placement={Placement.AUTO_START}
                 anchorRef={anchorSimpleRef}
@@ -68,9 +68,9 @@ const App = () => {
             </Button>
 
             <Dropdown
-                closeOnClick={false}
+                closeOnClickAway={false}
                 closeOnEscape={false}
-                showDropdown={isComplexOpen}
+                isOpen={isComplexOpen}
                 offset={{ vertical: 20 }}
                 placement={Placement.AUTO_START}
                 anchorRef={anchorComplexRef}
