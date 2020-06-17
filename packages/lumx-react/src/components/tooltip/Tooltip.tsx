@@ -1,10 +1,11 @@
-import React, { CSSProperties, RefObject, useEffect, useRef, useState, Ref } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
+import uuid from 'uuid/v4';
 
 import classNames from 'classnames';
 
-import { Offset, Placement } from '@lumx/react/components/popover/Popover';
+import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
@@ -60,6 +61,7 @@ const OFFSET = 8;
 /**
  * Tooltip.
  *
+ * @param  props The component props.
  * @return The component.
  */
 const Tooltip: React.FC<TooltipProps> = (props) => {
@@ -71,6 +73,7 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
         placement = DEFAULT_PROPS.placement,
         ...forwardedProps
     } = props;
+    const id = useMemo(uuid, []);
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const anchorRef = useRef(null);
     const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
@@ -86,17 +89,20 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     });
 
     const actualPlacement = attributes?.popper?.['data-popper-placement'];
-    const isOpen = useTooltipOpen({delay, anchorRef});
+    const isOpen = useTooltipOpen({ delay, anchorRef });
 
     return (
-            <>
-                <span ref={anchorRef}>
-                    {children}
-                </span>
-                {isOpen && createPortal(
+        <>
+            <span ref={anchorRef} aria-describedby={isOpen ? `tooltip-${id}` : undefined}>
+                {children}
+            </span>
+            {isOpen &&
+                createPortal(
                     <div
                         {...forwardedProps}
+                        id={`tooltip-${id}`}
                         ref={setPopperElement}
+                        role="tooltip"
                         className={classNames(
                             className,
                             handleBasicClasses({ prefix: CLASSNAME }),
@@ -110,8 +116,8 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
                     </div>,
                     document.body,
                 )}
-            </>
-        );
+        </>
+    );
 };
 Tooltip.displayName = COMPONENT_NAME;
 
