@@ -30,8 +30,8 @@ interface OptionalTooltipProps extends GenericProps {
  * Defines the props of the component.
  */
 interface TooltipProps extends OptionalTooltipProps {
-    /** Ref of anchor element. */
-    anchorRef: RefObject<HTMLElement>;
+    /** Label */
+    label: string;
 }
 
 /**
@@ -64,7 +64,7 @@ const OFFSET = 8;
  */
 const Tooltip: React.FC<TooltipProps> = (props) => {
     const {
-        anchorRef,
+        label,
         children,
         className,
         delay = DEFAULT_PROPS.delay,
@@ -72,6 +72,7 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
         ...forwardedProps
     } = props;
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
+    const anchorRef = useRef(null);
     const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
         placement,
         modifiers: [
@@ -87,23 +88,30 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     const actualPlacement = attributes?.popper?.['data-popper-placement'];
     const isOpen = useTooltipOpen({delay, anchorRef});
 
-    return isOpen ? createPortal(
-        <div
-            {...forwardedProps}
-            ref={setPopperElement}
-            className={classNames(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME }),
-                actualPlacement && `${CLASSNAME}--position-${actualPlacement}`,
-            )}
-            style={styles.popper}
-            {...attributes.popper}
-        >
-            <div className={`${CLASSNAME}__arrow`} />
-            <div className={`${CLASSNAME}__inner`}>{children}</div>
-        </div>,
-        document.body,
-    ) : null;
+    return (
+            <>
+                <span ref={anchorRef}>
+                    {children}
+                </span>
+                {isOpen && createPortal(
+                    <div
+                        {...forwardedProps}
+                        ref={setPopperElement}
+                        className={classNames(
+                            className,
+                            handleBasicClasses({ prefix: CLASSNAME }),
+                            actualPlacement && `${CLASSNAME}--position-${actualPlacement}`,
+                        )}
+                        style={styles.popper}
+                        {...attributes.popper}
+                    >
+                        <div className={`${CLASSNAME}__arrow`} />
+                        <div className={`${CLASSNAME}__inner`}>{label}</div>
+                    </div>,
+                    document.body,
+                )}
+            </>
+        );
 };
 Tooltip.displayName = COMPONENT_NAME;
 

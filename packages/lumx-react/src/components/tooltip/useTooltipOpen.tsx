@@ -9,8 +9,6 @@ export function useTooltipOpen({ delay, anchorRef}: {delay: number, anchorRef: R
     const [timer, setTimer] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
 
-    console.log('ok');
-
     useEffect(() => {
         const anchor = anchorRef.current;
         if (!anchor) {

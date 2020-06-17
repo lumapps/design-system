@@ -1,12 +1,11 @@
-import React, { useRef, createRef } from 'react';
+import React from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipProps } from './Tooltip';
+import { CLASSNAME, Tooltip, TooltipProps } from './Tooltip';
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -32,10 +31,8 @@ interface Setup extends CommonSetup {
  */
 const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer = shallowRendering ? shallow : mount;
-
-    const anchorRef = createRef();
     // @ts-ignore
-    const wrapper = renderer(<Tooltip anchorRef={anchorRef} {...props} />);
+    const wrapper = renderer(<Tooltip label="Tooltip" {...props}>Anchor</Tooltip>);
     const tooltip = wrapper.find('.' + CLASSNAME);
 
     return {
@@ -54,8 +51,8 @@ describe(`<${Tooltip.displayName}>`, () => {
         // Here is an example of a basic rendering check, with snapshot.
 
         it('should render correctly', () => {
-            const { tooltip } = setup();
-            expect(tooltip).toMatchSnapshot();
+            const { tooltip, wrapper } = setup();
+            expect(wrapper).toMatchSnapshot();
 
             expect(tooltip).toExist();
             expect(tooltip).toHaveClassName(CLASSNAME);

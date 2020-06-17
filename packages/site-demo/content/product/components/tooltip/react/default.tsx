@@ -1,43 +1,29 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import { Button, Placement, Tooltip } from '@lumx/react';
 
-const App = () => {
-    const anchorRefTop = useRef(null);
-    const anchorRefRight = useRef(null);
-    const anchorRefBottom = useRef(null);
-    const anchorRefLeft = useRef(null);
-    const anchorRefDelay = useRef(null);
+const App = () => (
+    <div className="demo-grid">
+        <Tooltip placement={Placement.TOP} label="Top Tooltip">
+            <Button>Top</Button>
+        </Tooltip>
 
-    return (
-        <div className="demo-grid">
-            <Button buttonRef={anchorRefTop}>Top</Button>
-            <Button buttonRef={anchorRefRight}>Right</Button>
-            <Button buttonRef={anchorRefBottom}>Bottom</Button>
-            <Button buttonRef={anchorRefLeft}>Left</Button>
-            <Button buttonRef={anchorRefDelay}>With 2s delay</Button>
+        <Tooltip placement={Placement.RIGHT} label="Right Tooltip">
+            <Button>Right</Button>
+        </Tooltip>
 
-            <Tooltip anchorRef={anchorRefTop} placement={Placement.TOP}>
-                Top Tooltip
-            </Tooltip>
+        <Tooltip placement={Placement.BOTTOM} label="Bottom Tooltip">
+            <Button>Bottom</Button>
+        </Tooltip>
 
-            <Tooltip anchorRef={anchorRefRight} placement={Placement.RIGHT}>
-                Right Tooltip
-            </Tooltip>
+        <Tooltip placement={Placement.LEFT} label="Left Tooltip">
+            <Button>Left</Button>
+        </Tooltip>
 
-            <Tooltip anchorRef={anchorRefBottom} placement={Placement.BOTTOM}>
-                Bottom Tooltip
-            </Tooltip>
-
-            <Tooltip anchorRef={anchorRefLeft} placement={Placement.LEFT}>
-                Left Tooltip
-            </Tooltip>
-
-            <Tooltip anchorRef={anchorRefDelay} delay={2000} placement={Placement.BOTTOM}>
-                Tooltip with delay
-            </Tooltip>
-        </div>
-    );
-};
+        <Tooltip placement={Placement.BOTTOM} delay={2000} label="Tooltip with delay">
+            <Button>Tooltip with delay</Button>
+        </Tooltip>
+    </div>
+);
 
 export default App;
