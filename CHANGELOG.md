@@ -38,11 +38,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   _[BREAKING]_ `Popover` computes position internally and add popover ref internally. `popoverRect`, `isVisible` and `popoverRef` props have been removed. `anchorRef`, `placement`, `offset`, `fitToAnchorWidth`, `isOpen`, `closeOnClickAway`, `closeOnEscape` and `onClose` props have been added.
--   _[BREAKING]_ `Tooltip` takes anchor as children and label as prop. `anchorRef` prop has been removed. `label` prop has been added.
 -   _[BREAKING]_ `Popover.useComputePosition` hook has been removed.
--   _[BREAKING]_ For the `Dropdown` component, the prop `closeOnClick` has been renamed `closeOnClickAway`, the prop `isOpen` has been renamed `isOpen`.
--   _[BREAKING]_ For the `Autocomplete` component, the prop `closeOnClick` has been renamed `closeOnClickAway`.
+-   _[BREAKING]_ `Offset` type does not have `vertical` and `horizontal` keys anymore but has `along` and `away` props.
+-   _[BREAKING]_ `Popover` computes position internally and add popover ref internally. Click away and escape are handled inside the popover. The popover can now have an anchor. `popoverRect`, `isVisible` and `popoverRef` props have been removed. `anchorRef`, `placement`, `offset`, `fitToAnchorWidth`, `isOpen`, `closeOnClickAway`, `closeOnEscape`, `onClose` and `hasArrow` props have been added.
+-   _[BREAKING]_ `Tooltip` takes anchor as children and label as prop. `anchorRef` prop has been removed. `label` prop has been added.
+-   _[BREAKING]_ For the `Dropdown` component, the prop `closeOnClick` has been renamed `closeOnClickAway`, the prop `isOpen` has been renamed `isOpen`. Also, see `Offset` typing change.
+-   _[BREAKING]_ For the `Autocomplete` component, the prop `closeOnClick` has been renamed `closeOnClickAway`. Also, see `Offset` typing change.
 
 ## [0.24.0][] - 2020-06-11
 

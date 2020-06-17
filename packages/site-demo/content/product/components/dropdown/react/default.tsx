@@ -71,7 +71,7 @@ const App = () => {
                 closeOnClickAway={false}
                 closeOnEscape={false}
                 isOpen={isComplexOpen}
-                offset={{ vertical: 20 }}
+                offset={{ along: 20 }}
                 placement={Placement.AUTO_START}
                 anchorRef={anchorComplexRef}
             >

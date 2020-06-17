@@ -32,8 +32,8 @@ const App = ({ theme }: any) => {
                 anchorRef={anchorRef}
                 placement={Placement.RIGHT}
                 offset={{
-                    horizontal: 30,
-                    vertical: 60,
+                    away: 30,
+                    along: 60,
                 }}
                 isOpen
             >

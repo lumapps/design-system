@@ -36,12 +36,19 @@ enum Placement {
 }
 
 /**
- * Vertical and horizontal offset of the popover.
+ * Offset of the popover.
  */
 interface Offset {
-    vertical?: number;
-    horizontal?: number;
+    /** Offset size along the reference. */
+    along?: number;
+    /** Offset size away from the reference. */
+    away?: number;
 }
+
+/**
+ * The offset from the target in case of arrow.
+ */
+const OFFSET = 8;
 
 /**
  * Defines the props of the component.
@@ -61,6 +68,8 @@ interface OptionalPopoverProps extends GenericProps {
     closeOnClickAway?: boolean;
     /** Whether an escape key press would close the popover. */
     closeOnEscape?: boolean;
+    /** Whether we put an arrow or not. */
+    hasArrow?: boolean;
     /** The function to be called when the user clicks away or Escape is pressed */
     onClose?: VoidFunction;
 }
@@ -86,17 +95,18 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Omit<Required<OptionalPopoverProps>, 'onClose'> = {
+const DEFAULT_PROPS = {
     elevation: 3,
     placement: Placement.AUTO,
     offset: {
-        vertical: 0,
-        horizontal: 0,
+        along: 0,
+        away: 0,
     },
     zIndex: 9999,
     fitToAnchorWidth: false,
     closeOnClickAway: false,
     closeOnEscape: false,
+    hasArrow: false,
 };
 
 /**
@@ -117,20 +127,20 @@ const Popover: React.FC<PopoverProps> = (props) => {
         zIndex = DEFAULT_PROPS.zIndex,
         closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
         closeOnEscape = DEFAULT_PROPS.closeOnEscape,
+        hasArrow = DEFAULT_PROPS.hasArrow,
         className,
         onClose,
         ...forwardedProps
     } = props;
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const wrapperRef = useRef(null);
+    const actualOffset: [number, number] = [offset.along ?? 0, (offset.away ?? 0) + (hasArrow ? OFFSET : 0)];
     const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
         placement,
         modifiers: [
             {
                 name: 'offset',
-                options: {
-                    offset: [offset.vertical, offset.horizontal],
-                },
+                options: { offset: actualOffset },
             },
         ],
     });
@@ -150,6 +160,8 @@ const Popover: React.FC<PopoverProps> = (props) => {
 
     useCallbackOnEscape(onClose, isOpen && closeOnEscape);
 
+    const actualPlacement = attributes?.popper?.['data-popper-placement'];
+
     return createPortal(
         <div
             {...forwardedProps}
@@ -157,13 +169,21 @@ const Popover: React.FC<PopoverProps> = (props) => {
             className={classNames(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5) }),
+                actualPlacement && `${CLASSNAME}--position-${actualPlacement}`,
             )}
             style={popoverStyle}
             {...attributes.popper}
         >
             <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
                 <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
-                    {children}
+                    {hasArrow ? (
+                        <>
+                            <div className={`${CLASSNAME}__arrow`} />
+                            <div className={`${CLASSNAME}__inner`}>{children}</div>
+                        </>
+                    ) : (
+                        children
+                    )}
                 </ClickAwayProvider>
             </div>
         </div>,

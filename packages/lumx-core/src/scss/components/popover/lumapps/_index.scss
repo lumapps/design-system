@@ -3,11 +3,70 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-popover {
+    $self: &;
+
     background-color: lumx-color-variant('light', 'N');
     border-radius: $lumx-border-radius;
 
     &__wrapper {
         position: relative;
+    }
+
+    &__arrow {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: lumx-color-variant('light', 'N');
+        margin: $lumx-popover-arrow-size;
+
+        #{$self}--position-top & {
+            bottom: -$lumx-popover-arrow-size;
+            left: 50%;
+            border-width: $lumx-popover-arrow-size $lumx-popover-arrow-size 0 $lumx-popover-arrow-size;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: -$lumx-popover-arrow-size;
+        }
+
+        #{$self}--position-bottom & {
+            top: -$lumx-popover-arrow-size;
+            left: 50%;
+            border-width: 0 $lumx-popover-arrow-size $lumx-popover-arrow-size $lumx-popover-arrow-size;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-left-color: transparent;
+            margin-top: 0;
+            margin-bottom: 0;
+            margin-left: -$lumx-popover-arrow-size;
+        }
+
+        #{$self}--position-left & {
+            top: 50%;
+            right: -$lumx-popover-arrow-size;
+            border-width: $lumx-popover-arrow-size 0 $lumx-popover-arrow-size $lumx-popover-arrow-size;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            margin-top: -$lumx-popover-arrow-size;
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        #{$self}--position-right & {
+            top: 50%;
+            left: -$lumx-popover-arrow-size;
+            border-width: $lumx-popover-arrow-size $lumx-popover-arrow-size $lumx-popover-arrow-size 0;
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            margin-top: -$lumx-popover-arrow-size;
+            margin-right: 0;
+            margin-left: 0;
+        }
     }
 }
 
