@@ -1,4 +1,4 @@
-import React, { ReactChild } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
@@ -44,27 +44,24 @@ interface Offset {
 /**
  * Defines the props of the component.
  */
-interface PopoverProps extends GenericProps {
-    /** The reference of the anchor. */
-    anchorRef: React.RefObject<HTMLElement>;
+interface OptionalPopoverProps extends GenericProps {
     /** The desired placement */
     placement?: Placement;
-    /** Children element displayed inside popover. */
-    children: ReactChild;
     /** The desired offset */
     offset?: Offset;
     /** How high the component is flying */
     elevation?: number;
-    /** The classname to apply to the Popover wrapper */
-    className?: string;
     /** The z-axis position. */
     zIndex?: number;
+    /** Whether the dropdown should fit to the anchor width */
+    fitToAnchorWidth?: boolean;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<PopoverProps> {}
+interface PopoverProps extends OptionalPopoverProps {
+    /** The reference of the anchor. */
+    anchorRef: React.RefObject<HTMLElement>;
+    /** Children element displayed inside popover. */
+    children: ReactNode;
+}
 
 /**
  * The display name of the component.
@@ -79,11 +76,15 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    className: '',
+const DEFAULT_PROPS: Required<OptionalPopoverProps> = {
     elevation: 3,
-    placement: Placement.TOP,
+    placement: Placement.AUTO,
+    offset: {
+        vertical: 0,
+        horizontal: 0,
+    },
     zIndex: 9999,
+    fitToAnchorWidth: false,
 };
 
 /**
@@ -91,31 +92,53 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Popover: React.FC<PopoverProps> = ({
-    anchorRef,
-    placement,
-    children,
-    className = DEFAULT_PROPS.className,
-    elevation = DEFAULT_PROPS.elevation,
-    zIndex = DEFAULT_PROPS.zIndex,
-    ...props
-}) => {
-    const [popperElement, setPopperElement] = React.useState<null | HTMLElement>(null);
+const Popover: React.FC<PopoverProps> = (props) => {
+    const {
+        anchorRef,
+        placement,
+        children,
+        fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
+        offset = DEFAULT_PROPS.offset,
+        elevation = DEFAULT_PROPS.elevation,
+        zIndex = DEFAULT_PROPS.zIndex,
+        className,
+        ...forwardedProps
+    } = props;
+    const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
         placement,
+        modifiers: [
+            {
+                name: 'offset',
+                options: {
+                    offset: [offset.vertical, offset.horizontal],
+                },
+            },
+        ],
     });
-    console.log(styles, attributes);
+
+    const popoverStyle = useMemo(() => {
+        if(!fitToAnchorWidth || !anchorRef.current) {
+            return styles.popper;
+        }
+
+        const boundingAnchor = anchorRef.current.getBoundingClientRect();
+        return {
+            ...styles.popper,
+            width: boundingAnchor.width,
+        }
+    }, [fitToAnchorWidth, anchorRef, styles]);
 
     return createPortal(
         <div
+           {...forwardedProps}
             ref={setPopperElement}
             className={classNames(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5) }),
             )}
-            style={styles.popper}
+            style={popoverStyle}
             {...attributes.popper}
-            {...props}
         >
             <div className={`${CLASSNAME}__wrapper`}>{children}</div>
         </div>,

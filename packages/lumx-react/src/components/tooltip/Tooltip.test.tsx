@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, createRef } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
@@ -33,8 +33,9 @@ interface Setup extends CommonSetup {
 const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer = shallowRendering ? shallow : mount;
 
+    const anchorRef = createRef();
     // @ts-ignore
-    const wrapper = renderer(<Tooltip {...props} />);
+    const wrapper = renderer(<Tooltip anchorRef={anchorRef} {...props} />);
     const tooltip = wrapper.find('.' + CLASSNAME);
 
     return {
@@ -44,7 +45,10 @@ const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup 
     };
 };
 
+jest.mock('./useTooltipOpen', () => ({ useTooltipOpen: () => true}));
+
 describe(`<${Tooltip.displayName}>`, () => {
+
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
@@ -56,34 +60,6 @@ describe(`<${Tooltip.displayName}>`, () => {
             expect(tooltip).toExist();
             expect(tooltip).toHaveClassName(CLASSNAME);
         });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Here are some examples of basic props check.
-
-        it('should use default props', () => {
-            const { tooltip } = setup();
-
-            expect(tooltip).toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: 'position', value: DEFAULT_PROPS.placement }),
-            );
-        });
-    });
-
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.

@@ -29,7 +29,7 @@ const App = ({ theme }: any) => {
                     theme={theme}
                     textFieldRef={anchorRef}
                 />
-                <Popover theme={theme} anchorRef={anchorRef} placement={Placement.BOTTOM_START}>
+                <Popover theme={theme} anchorRef={anchorRef} placement={Placement.BOTTOM_START} fitToAnchorWidth>
                     <div style={demoPopperStyle}>Popover's width matching anchor's</div>
                 </Popover>
             </div>

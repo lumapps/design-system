@@ -130,3 +130,36 @@ export const auto = ({ theme }: any) => {
         </div>
     );
 };
+
+export const top = ({ theme }: any) => {
+    const demoPopperStyle = {
+        alignItems: 'center',
+        display: 'flex',
+        height: 100,
+        justifyContent: 'center',
+        width: 200,
+    };
+
+    const container = {
+        width: '200%',
+        height: '2000px',
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+    }
+
+    const anchorRef = React.useRef(null);
+
+    return (
+        <div style={container}>
+            <div>
+                <Chip chipRef={anchorRef} theme={theme} size={Size.s}>
+                    Anchor
+                </Chip>
+            </div>
+            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.TOP}>
+                <div style={demoPopperStyle}>{'Popover'}</div>
+            </Popover>
+        </div>
+    );
+};

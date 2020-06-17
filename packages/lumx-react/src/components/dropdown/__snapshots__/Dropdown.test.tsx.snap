@@ -2,19 +2,12 @@
 
 exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
 <Popover
-  isVisible={true}
-  placement="auto-start"
-  popoverRect={
-    Object {
-      "x": 0,
-      "y": 0,
-    }
-  }
-  popoverRef={
+  anchorRef={
     Object {
       "current": null,
     }
   }
+  placement="auto-start"
 >
   <ClickAwayProvider
     refs={
@@ -30,12 +23,6 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
   >
     <div
       className="lumx-dropdown__menu lumx-dropdown"
-      style={
-        Object {
-          "maxHeight": undefined,
-          "minWidth": undefined,
-        }
-      }
     >
       <div
         className="lumx-dropdown__content"
