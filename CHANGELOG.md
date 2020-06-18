@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.1][] - 2020-06-18
+
 ### Fixed
 
 -   `Mosaic` component is now correctly displayed on IE11.
@@ -523,3 +525,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.23.0]: https://github.com/lumapps/design-system/tree/v0.23.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.24.0...HEAD
 [0.24.0]: https://github.com/lumapps/design-system/tree/v0.24.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.1...HEAD
+[0.24.1]: https://github.com/lumapps/design-system/tree/v0.24.1
