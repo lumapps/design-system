@@ -1,7 +1,7 @@
-/*
-  Do not edit directly
-  Generated on Tue, 02 Jun 2020 10:24:31 GMT
-*/
+/**
+ * Do not edit directly
+ * Generated on Thu, 18 Jun 2020 13:00:52 GMT
+ */
 
 $lumx-color-dark-N: rgba(0, 0, 0, 0.87) !default; // Neutral dark color
 $lumx-color-dark-L1: rgba(0, 0, 0, 0.8) !default; // Base dark color with 80% opacity
@@ -247,4 +247,4 @@ $lumx-core: (
             'L6': $lumx-color-orange-L6
         )
     )
-);
+) !default;
