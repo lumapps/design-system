@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   `Mosaic` component is now correctly displayed on IE11.
 -   Fix missing grey color (in material theme) in the generated SCSS color palette
 
+### Added
+
+-   `ListItem` component is now able to use a link as HTML element as content wrapper
+
 ## [0.24.0][] - 2020-06-11
 
 ### Fixed
