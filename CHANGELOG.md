@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   `Mosaic` component is now correctly displayed on IE11.
+-   Fix missing grey color (in material theme) in the generated SCSS color palette
 
 ## [0.24.0][] - 2020-06-11
 

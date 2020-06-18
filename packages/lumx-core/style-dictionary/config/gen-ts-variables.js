@@ -25,10 +25,7 @@ StyleDictionary.registerFormat({
     formatter(dictionary) {
         const properties = this.pickFields ? pickFieldsInTree(dictionary.properties, this.pickFields) : dictionary.properties;
         return `
-            /**
-             * Do not edit directly
-             * Generated on ${new Date().toUTCString()}
-             */
+            ${require('./utils/_genHeader')()}
 
             export const CORE = ${JSON.stringify(properties, null, 2)}
         `;
