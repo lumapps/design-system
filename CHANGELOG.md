@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+-   _[BREAKING]_ Changed `thumbnailProps` prop type from `LinkPreview` to avoid typescript throwing an error
+if `thumbnailProps.image` was not specified even though it is already set by the `image` prop.
+
 ## [0.24.2][] - 2020-06-18
 
 ### Fixed
