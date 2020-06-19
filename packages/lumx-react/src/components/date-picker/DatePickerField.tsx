@@ -124,6 +124,7 @@ const DatePickerField = ({
     return (
         <>
             <TextField
+                {...textFieldProps}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
                 value={castedValue ? castedValue.format('LL') : ''}
@@ -131,7 +132,6 @@ const DatePickerField = ({
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
                 readOnly
-                {...textFieldProps}
             />
             {isOpen ? (
                 <ClickAwayProvider callback={closeSimpleMenu} refs={[wrapperRef, anchorRef]}>

@@ -44,8 +44,10 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Divider: React.FC<DividerProps> = ({ className = '', theme = DEFAULT_PROPS.theme, ...props }) => {
-    return <hr className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props} />;
+const Divider: React.FC<DividerProps> = ({ className, theme = DEFAULT_PROPS.theme, ...forwardedProps }) => {
+    return (
+        <hr {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} />
+    );
 };
 Divider.displayName = COMPONENT_NAME;
 

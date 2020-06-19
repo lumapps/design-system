@@ -80,7 +80,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
         openCallback,
         closeCallback,
         toggleCallback,
-        ...otherProps
+        ...forwardedProps
     } = props;
 
     const children: ReactNode[] = Children.toArray(props.children);
@@ -136,11 +136,11 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     }, [children, isOpen, wrapperRef.current]);
 
     return (
-        <section className={rootClassName} {...otherProps}>
+        <section {...forwardedProps} className={rootClassName}>
             <header className={`${CLASSNAME}__header`} onClick={toggleOpen}>
                 {dragHandle && <div className={`${CLASSNAME}__header-drag`}>{dragHandle}</div>}
 
-                <div className={`${CLASSNAME}__header-content`} {...headerProps}>
+                <div {...headerProps} className={`${CLASSNAME}__header-content`}>
                     {headerContent}
                 </div>
 

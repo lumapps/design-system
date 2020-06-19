@@ -76,12 +76,13 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         isSelected = DEFAULT_PROPS.isSelected,
         onClick,
         linkProps,
-        ...otherProps
+        ...forwardedProps
     } = props;
 
     const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
     return (
         <li
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -91,7 +92,6 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                     prefix: CLASSNAME,
                 }),
             )}
-            {...otherProps}
         >
             <a
                 {...(linkProps || {})}

@@ -111,7 +111,7 @@ const computePercentFromValue = (value: number, min: number, max: number): numbe
  * @return The component.
  */
 const Slider: React.FC<SliderProps> = ({
-    className = '',
+    className,
     label,
     helper,
     id = uuid(),
@@ -125,7 +125,7 @@ const Slider: React.FC<SliderProps> = ({
     value = DEFAULT_PROPS.value!,
     disabled,
     theme = DEFAULT_PROPS.theme,
-    ...props
+    ...forwardedProps
 }) => {
     const sliderRef = useRef<HTMLDivElement>(null);
     const avaibleSteps: number[] = [];
@@ -256,11 +256,11 @@ const Slider: React.FC<SliderProps> = ({
     const percentString = `${computePercentFromValue(value, min, max) * 100}%`;
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, theme, hasLabel: Boolean(label) }),
             )}
-            {...props}
             onMouseDown={handleMouseDown}
         >
             {label && (

@@ -74,7 +74,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     value = DEFAULT_PROPS.value,
-    ...props
+    ...forwardedProps
 }) => {
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = () => {
@@ -83,6 +83,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -94,7 +95,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
-            {...props}
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input

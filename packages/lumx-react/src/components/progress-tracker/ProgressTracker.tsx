@@ -51,9 +51,9 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     activeStep = DEFAULT_PROPS.activeStep,
     children,
-    className = '',
+    className,
     theme = DEFAULT_PROPS.theme,
-    ...props
+    ...forwardedProps
 }) => {
     const childrenArray = Children.toArray(children);
     const backgroundPosition: number = childrenArray.length > 0 ? 100 / (childrenArray.length * 2) : 0;
@@ -61,7 +61,7 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
         childrenArray.length > 0 ? ((100 / (childrenArray.length - 1)) * activeStep) / 100 : 0;
 
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...props}>
+        <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}>
             <div className={`${CLASSNAME}__steps`}>{children}</div>
 
             <div

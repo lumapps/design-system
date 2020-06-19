@@ -86,7 +86,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const ListItem: React.FC<ListItemProps> = ({
     after,
     children,
-    className = '',
+    className,
     isHighlighted,
     isSelected = DEFAULT_PROPS.isSelected,
     isActive = DEFAULT_PROPS.isActive,
@@ -94,7 +94,7 @@ const ListItem: React.FC<ListItemProps> = ({
     theme = DEFAULT_PROPS.theme,
     onItemSelected,
     before,
-    ...props
+    ...forwardedProps
 }) => {
     const element = useRef<HTMLLIElement | null>(null);
 
@@ -128,6 +128,7 @@ const ListItem: React.FC<ListItemProps> = ({
 
     return (
         <li
+            {...forwardedProps}
             ref={element}
             className={classNames(
                 className,
@@ -142,7 +143,6 @@ const ListItem: React.FC<ListItemProps> = ({
             onFocusCapture={preventParentFocus}
             onClick={onItemSelected}
             onKeyDown={onKeyDown()}
-            {...props}
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
             <div className={classNames(`${CLASSNAME}__content`)}>{children}</div>

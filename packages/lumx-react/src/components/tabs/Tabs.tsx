@@ -71,13 +71,13 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Tabs: React.FC<TabsProps> = ({
     activeTab = DEFAULT_PROPS.activeTab,
     children,
-    className = '',
+    className,
     layout = DEFAULT_PROPS.layout,
     onTabClick,
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
-    ...props
+    ...forwardedProps
 }) => {
     const tabs: ReactElement[] = Children.map(children as ReactElement[], (tab: ReactElement, index: number) => {
         return cloneElement(tab, { key: index, index, isActive: activeTab === index, onTabClick });
@@ -85,10 +85,10 @@ const Tabs: React.FC<TabsProps> = ({
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, layout, position, theme }), {
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
             })}
-            {...props}
         >
             <div className={`${CLASSNAME}__links`}>{tabs}</div>
 

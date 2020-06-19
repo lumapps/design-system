@@ -71,10 +71,10 @@ const FlexBox: React.FC<FlexBoxProps> = ({
     fillSpace = DEFAULT_PROPS.fillSpace,
     noShrink = DEFAULT_PROPS.noShrink,
     marginAuto,
-    ...props
+    ...forwardedProps
 }) => (
     <div
-        {...props}
+        {...forwardedProps}
         className={classNames(
             className,
             handleBasicClasses({

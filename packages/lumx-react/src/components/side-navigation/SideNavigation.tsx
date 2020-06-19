@@ -32,18 +32,18 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}SideNavigation`;
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 const SideNavigation: React.FC<SideNavigationProps> = (props) => {
-    const { className, theme, children, useCustomColors, ...otherProps } = props;
+    const { className, theme, children, useCustomColors, ...forwardedProps } = props;
 
     const content = Children.toArray(children).filter(isComponent(SideNavigationItem));
     return (
         <ul
+            {...forwardedProps}
             className={classNames(
                 className,
                 theme === Theme.dark && 'lumx-color-font-light-N',
                 handleBasicClasses({ prefix: CLASSNAME }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
-            {...otherProps}
         >
             {content}
         </ul>

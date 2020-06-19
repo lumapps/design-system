@@ -226,6 +226,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
 
     return multiline ? (
         <textarea
+            {...forwardedProps}
             id={id}
             disabled={isDisabled}
             required={isRequired}
@@ -236,10 +237,10 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
             onBlur={onTextFieldBlur}
             onChange={handleChange}
             ref={inputRef as RefObject<HTMLTextAreaElement>}
-            {...forwardedProps}
         />
     ) : (
         <input
+            {...forwardedProps}
             id={id}
             disabled={isDisabled}
             required={isRequired}
@@ -250,7 +251,6 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
             onBlur={onTextFieldBlur}
             onChange={handleChange}
             ref={inputRef as RefObject<HTMLInputElement>}
-            {...forwardedProps}
         />
     );
 };
@@ -264,7 +264,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
 const TextField: React.FC<TextFieldProps> = (props) => {
     const {
         chips,
-        className = '',
+        className,
         error,
         forceFocusStyle = DEFAULT_PROPS.forceFocusStyle,
         hasError,

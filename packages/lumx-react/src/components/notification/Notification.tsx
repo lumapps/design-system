@@ -87,13 +87,13 @@ const Notification: React.FC<NotificationProps> = ({
     actionCallback,
     actionLabel,
     content = DEFAULT_PROPS.content,
-    className = '',
+    className,
     handleClick,
     isOpen = false,
     theme = DEFAULT_PROPS.theme,
     type,
     zIndex = DEFAULT_PROPS.zIndex,
-    ...props
+    ...forwardedProps
 }) => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
@@ -109,6 +109,7 @@ const Notification: React.FC<NotificationProps> = ({
     return type && isVisible
         ? createPortal(
               <div
+                  {...forwardedProps}
                   className={classNames(
                       className,
                       handleBasicClasses({
@@ -118,7 +119,6 @@ const Notification: React.FC<NotificationProps> = ({
                           prefix: CLASSNAME,
                       }),
                   )}
-                  {...props}
                   onClick={handleClick}
                   style={{ zIndex }}
               >

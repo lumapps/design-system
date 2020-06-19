@@ -43,9 +43,10 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const Toolbar: React.FC<ToolbarProps> = ({ after, before, className = '', label, ...props }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, label, ...forwardedProps }) => {
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -55,7 +56,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ after, before, className = '', label,
                     prefix: CLASSNAME,
                 }),
             )}
-            {...props}
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
             {label && <div className={`${CLASSNAME}__label`}>{label}</div>}

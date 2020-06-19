@@ -20,15 +20,15 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  * @return The component.
  */
-const SlideshowItem: React.FC<GenericProps> = ({ className = '', children, ...props }) => (
+const SlideshowItem: React.FC<GenericProps> = ({ className, children, ...forwardedProps }) => (
     <div
+        {...forwardedProps}
         className={classNames(
             className,
             handleBasicClasses({
                 prefix: CLASSNAME,
             }),
         )}
-        {...props}
     >
         {children}
     </div>

@@ -84,7 +84,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Lightbox: React.FC<LightboxProps> = ({
     ariaLabel = DEFAULT_PROPS.ariaLabel,
     children,
-    className = '',
+    className,
     isCloseButtonVisible = DEFAULT_PROPS.isCloseButtonVisible,
     isOpen = DEFAULT_PROPS.isOpen,
     noWrapper = DEFAULT_PROPS.noWrapper,

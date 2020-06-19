@@ -48,16 +48,16 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  */
 const GridItem: React.FC<GridItemProps> = ({
     children,
-    className = '',
+    className,
     width,
     align,
     order,
-    ...props
+    ...forwardedProps
 }: GridItemProps): React.ReactElement => {
     return (
         <div
+            {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, width, order, align }))}
-            {...props}
         >
             {children}
         </div>

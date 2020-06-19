@@ -63,22 +63,22 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Avatar: React.FC<AvatarProps> = ({
     actions = DEFAULT_PROPS.actions,
     badge = DEFAULT_PROPS.badge,
-    className = '',
+    className,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     image,
-    ...props
+    ...forwardedProps
 }) => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({ prefix: CLASSNAME, size, variant: 'rounded', theme }),
             )}
-            {...props}
             style={style}
         >
             {actions && <div className={`${CLASSNAME}__actions`}>{actions}</div>}

@@ -25,10 +25,11 @@ type SetupProps = Partial<DialogProps>;
 interface Setup extends CommonSetup {
     props: SetupProps;
 
-    /**
-     * The <div> element that wraps the dialog and children elements.
-     */
+    /** The portal that wraps the dialog and children elements. */
     wrapper: Wrapper;
+
+    /** The dialog div */
+    dialog: Wrapper;
 }
 
 /**
@@ -43,10 +44,12 @@ const setup = ({ ...props }: SetupProps = {}, shallowRendering = true): Setup =>
     const renderer = shallowRendering ? shallow : mount;
     // @ts-ignore
     const wrapper = renderer(<Dialog isOpen {...props} />);
+    const dialog = wrapper.find(`.${CLASSNAME}`);
 
     return {
         props,
         wrapper,
+        dialog,
     };
 };
 
@@ -113,5 +116,5 @@ describe(`<${Dialog.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, {}, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'dialog', prop: 'dialog' }, { className: CLASSNAME });
 });

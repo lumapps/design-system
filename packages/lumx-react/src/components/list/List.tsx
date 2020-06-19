@@ -75,16 +75,16 @@ interface List {
  * @return The component.
  */
 const List: React.FC<ListProps> & List = ({
-    className = '',
+    className,
     isClickable = DEFAULT_PROPS.isClickable,
     itemPadding = isClickable && DEFAULT_PROPS.itemPadding,
     listElementRef = useRef(null),
     onListItemSelected,
     useCustomColors,
     theme = DEFAULT_PROPS.theme,
-    ...props
+    ...forwardedProps
 }) => {
-    const children = Children.toArray(props.children);
+    const children = Children.toArray(forwardedProps.children);
     const [activeItemIndex, setActiveItemIndex] = useState(-1);
     const preventResetOnBlurOrFocus = useRef(false);
 
@@ -191,6 +191,7 @@ const List: React.FC<ListProps> & List = ({
 
     return (
         <ul
+            {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, clickable: isClickable }), {
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
                 [`${CSS_PREFIX}-list--item-padding-${itemPadding}`]: itemPadding,
@@ -201,7 +202,6 @@ const List: React.FC<ListProps> & List = ({
             onBlur={onListBlurred}
             onFocus={onListFocused}
             ref={listElementRef as React.RefObject<HTMLUListElement>}
-            {...props}
         >
             {children.map((elm: ReactNode, idx: number) => {
                 if (isClickable && isComponent(ListItem)(elm)) {

@@ -67,7 +67,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
-    className = '',
+    className,
     hasError = DEFAULT_PROPS.hasError,
     helper = DEFAULT_PROPS.helper,
     isActive = DEFAULT_PROPS.isActive,
@@ -76,7 +76,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     theme = DEFAULT_PROPS.theme,
     ...props
 }) => {
-    const { onClick = null, ...restProps }: ProgressTrackerStepProps = props;
+    const { onClick = null, ...forwardedProps }: ProgressTrackerStepProps = props;
 
     const isClickable: boolean = isFunction(onClick);
 
@@ -99,6 +99,7 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
 
     return (
         <a
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -113,7 +114,6 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
             tabIndex={isClickable ? 0 : -1}
             onClick={onClick}
             onKeyDown={onEnterPressed(onClick)}
-            {...restProps}
         >
             <Icon className={`${CLASSNAME}__state`} icon={getIcon()} size={Size.s} />
 

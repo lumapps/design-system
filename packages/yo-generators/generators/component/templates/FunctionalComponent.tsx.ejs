@@ -36,13 +36,13 @@ const <%= componentName %>: React.FC<<%= componentName %>Props> = (props: <%= co
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
                 }),
             )}
-            {...forwardedProps}
         >
             {children}
         </div>

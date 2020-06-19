@@ -143,6 +143,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
         preventAutoClose = DEFAULT_PROPS.preventAutoClose,
         size = DEFAULT_PROPS.size,
         zIndex,
+        ...forwardedProps
     } = props;
 
     useCallbackOnEscape(onClose, isOpen && !preventAutoClose);
@@ -185,6 +186,7 @@ const Dialog: React.FC<DialogProps> = (props) => {
     return isOpen || isVisible
         ? createPortal(
               <div
+                  {...forwardedProps}
                   className={classNames(
                       className,
                       handleBasicClasses({

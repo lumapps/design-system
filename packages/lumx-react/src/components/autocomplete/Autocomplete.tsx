@@ -230,13 +230,13 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
                 }),
             )}
-            {...forwardedProps}
         >
             <TextField
                 value={value}

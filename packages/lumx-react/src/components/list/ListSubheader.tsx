@@ -39,9 +39,9 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const ListSubheader: React.FC<ListSubheaderProps> = ({ children, className = '', ...props }) => {
+const ListSubheader: React.FC<ListSubheaderProps> = ({ children, className, ...forwardedProps }) => {
     return (
-        <li className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} {...props}>
+        <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
             {children}
         </li>
     );

@@ -56,15 +56,15 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Table: React.FC<TableProps> = ({
     children,
-    className = '',
+    className,
     hasBefore,
     hasDividers,
     theme = DEFAULT_PROPS.theme,
-    ...props
+    ...forwardedProps
 }) => (
     <table
+        {...forwardedProps}
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }))}
-        {...props}
     >
         {children}
     </table>
