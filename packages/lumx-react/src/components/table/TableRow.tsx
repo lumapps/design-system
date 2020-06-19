@@ -58,9 +58,10 @@ const TableRow: React.FC<TableRowProps> = ({
     isClickable = DEFAULT_PROPS.isClickable,
     isDisabled = DEFAULT_PROPS.isDisabled,
     isSelected = DEFAULT_PROPS.isSelected,
-    ...props
+    ...forwardedProps
 }) => (
     <tr
+        {...forwardedProps}
         className={classNames(
             className,
             handleBasicClasses({
@@ -71,7 +72,6 @@ const TableRow: React.FC<TableRowProps> = ({
             }),
         )}
         tabIndex={isClickable && !isDisabled ? 0 : -1}
-        {...props}
     >
         {children}
     </tr>

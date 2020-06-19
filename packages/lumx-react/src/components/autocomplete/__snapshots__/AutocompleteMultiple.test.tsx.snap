@@ -2,18 +2,7 @@
 
 exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 1`] = `
 <Autocomplete
-  chips={
-    Array [
-      Object {
-        "id": "lyon",
-        "text": "Lyon",
-      },
-      Object {
-        "id": "montevideo",
-        "text": "Montevideo",
-      },
-    ]
-  }
+  chips={<ChipGroup />}
   className="lumx-autocomplete-multiple"
   isOpen={true}
   onChange={[MockFunction]}

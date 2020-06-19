@@ -107,7 +107,7 @@ const TableCell: React.FC<TableCellProps> = ({
     onHeaderClick = DEFAULT_PROPS.onHeaderClick,
     sortOrder,
     variant = DEFAULT_PROPS.variant,
-    ...props
+    ...forwardedProps
 }) => {
     /**
      * Handle click on the ordered thead.
@@ -122,6 +122,7 @@ const TableCell: React.FC<TableCellProps> = ({
         <>
             {variant === TableCellVariant.head && (
                 <th
+                    {...forwardedProps}
                     className={classNames(
                         handleBasicClasses({ prefix: CLASSNAME, isSortable }),
                         className,
@@ -133,7 +134,6 @@ const TableCell: React.FC<TableCellProps> = ({
                     tabIndex={isSortable && isFunction(onHeaderClick) ? 0 : -1}
                     onClick={handleOnHeaderClick}
                     onKeyDown={onEnterPressed(handleOnHeaderClick)}
-                    {...props}
                 >
                     <div className={`${CLASSNAME}-wrapper`}>
                         {icon && !isSortable && <Icon className={`${CLASSNAME}-icon`} icon={icon} size={Size.xxs} />}
@@ -153,8 +153,8 @@ const TableCell: React.FC<TableCellProps> = ({
 
             {variant === TableCellVariant.body && (
                 <td
+                    {...forwardedProps}
                     className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }), `${CLASSNAME}--body`)}
-                    {...props}
                 >
                     <div className={`${CLASSNAME}-content`}>{children}</div>
                 </td>

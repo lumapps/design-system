@@ -154,13 +154,13 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
 
     if (!isEmpty(props.href)) {
         return (
-            <a ref={buttonRef as RefObject<HTMLAnchorElement>} className={buttonClassName} {...forwardedProps}>
+            <a {...forwardedProps} ref={buttonRef as RefObject<HTMLAnchorElement>} className={buttonClassName}>
                 {children}
             </a>
         );
     }
     return (
-        <button ref={buttonRef as RefObject<HTMLButtonElement>} className={buttonClassName} {...forwardedProps}>
+        <button {...forwardedProps} ref={buttonRef as RefObject<HTMLButtonElement>} className={buttonClassName}>
             {children}
         </button>
     );

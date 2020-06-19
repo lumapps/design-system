@@ -35,13 +35,13 @@ const RadioGroup: React.FC<RadioGroupProps> = (props) => {
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
                 }),
             )}
-            {...forwardedProps}
         >
             {children}
         </div>

@@ -111,10 +111,11 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     title = DEFAULT_PROPS.title,
     ...props
 }) => {
-    const { onClick = null, ...restProps } = props;
+    const { onClick = null, ...forwardedProps } = props;
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -131,7 +132,6 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                     [`${CLASSNAME}--format-original`]: !aspectRatio || aspectRatio === AspectRatio.original,
                 },
             )}
-            {...restProps}
         >
             <Thumbnail
                 align={align}

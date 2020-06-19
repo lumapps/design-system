@@ -36,10 +36,10 @@ const DEFAULT_PROPS: BadgeProps = {
     color: ColorPalette.light,
 };
 
-const Badge: React.FC<BadgeProps> = ({ color = DEFAULT_PROPS.color, className, ...props }) => {
+const Badge: React.FC<BadgeProps> = ({ color = DEFAULT_PROPS.color, className, ...forwardedProps }) => {
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color }))} {...props}>
-            {props.children}
+        <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color }))}>
+            {forwardedProps.children}
         </div>
     );
 };

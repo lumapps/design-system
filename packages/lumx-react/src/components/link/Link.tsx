@@ -35,12 +35,12 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  * @return The component.
  */
-const Link: React.FC<LinkProps> = ({ children, className, linkRef, color, colorVariant, ...props }) => {
+const Link: React.FC<LinkProps> = ({ children, className, linkRef, color, colorVariant, ...forwardedProps }) => {
     return (
         <a
+            {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))}
             ref={linkRef}
-            {...props}
         >
             {children}
         </a>

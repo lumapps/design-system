@@ -38,9 +38,12 @@ const InputLabel: React.FC<InputLabelProps> = ({
     isRequired = DEFAULT_PROPS.isRequired,
     theme = DEFAULT_PROPS.theme,
     children,
-    ...props
+    ...forwardedProps
 }) => (
-    <label className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))} {...props}>
+    <label
+        {...forwardedProps}
+        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))}
+    >
         {children}
     </label>
 );

@@ -26,10 +26,10 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}DragHandle`;
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 const DragHandle: React.FC<DragHandleProps> = (props) => {
-    const { className, theme, ...otherProps } = props;
+    const { className, theme, ...forwardedProps } = props;
 
     return (
-        <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} {...otherProps}>
+        <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}>
             <Icon icon={mdiDragVertical} color={theme === Theme.dark ? ColorPalette.light : undefined} size={Size.xs} />
         </div>
     );

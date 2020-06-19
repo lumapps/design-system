@@ -85,7 +85,7 @@ const Switch: React.FC<SwitchProps> = ({
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
-    ...props
+    ...forwardedProps
 }) => {
     const switchId: string = uuid();
 
@@ -101,20 +101,20 @@ const Switch: React.FC<SwitchProps> = ({
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
 
                     checked: Boolean(checked),
-                    disabled: props.disabled,
+                    disabled: forwardedProps.disabled,
                     position,
                     theme,
                     unchecked: !Boolean(checked),
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
-            {...props}
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input

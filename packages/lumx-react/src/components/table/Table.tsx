@@ -60,11 +60,11 @@ const Table: React.FC<TableProps> = ({
     hasBefore,
     hasDividers,
     theme = DEFAULT_PROPS.theme,
-    ...props
+    ...forwardedProps
 }) => (
     <table
+        {...forwardedProps}
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }))}
-        {...props}
     >
         {children}
     </table>

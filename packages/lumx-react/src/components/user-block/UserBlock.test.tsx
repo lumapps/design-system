@@ -50,5 +50,5 @@ describe(`<${UserBlock.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
 });

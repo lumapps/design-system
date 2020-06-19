@@ -75,7 +75,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     interval = DEFAULT_PROPS.interval as number,
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
-    ...props
+    ...forwardedProps
 }) => {
     const [currentIndex, setCurrentIndex] = useState(activeIndex);
     const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
@@ -176,12 +176,12 @@ const Slideshow: React.FC<SlideshowProps> = ({
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--fill-height`]: fillHeight,
                 [`${CLASSNAME}--group-by-${groupBy}`]: Boolean(groupBy),
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
             })}
-            {...props}
             tabIndex={0}
             ref={parentRef}
         >

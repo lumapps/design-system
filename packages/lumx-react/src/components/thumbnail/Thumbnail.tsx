@@ -162,7 +162,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     onClick = null,
     focusPoint = DEFAULT_PROPS.focusPoint,
     imgProps,
-    ...props
+    ...forwardedProps
 }: ThumbnailProps): ReactElement => {
     const { isLoaded, hasError } = useImage(image);
     const focusImageRef = useFocusedImage(
@@ -179,6 +179,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({ align, aspectRatio, prefix: CLASSNAME, size, theme, variant }),
@@ -189,7 +190,6 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             tabIndex={isFunction(onClick) ? 0 : -1}
             onClick={onClick}
             onKeyDown={onEnterPressed(onClick)}
-            {...props}
         >
             {hasError &&
                 (typeof fallback === 'string' ? (

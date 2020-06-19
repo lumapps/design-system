@@ -96,7 +96,7 @@ const Chip: React.FC<ChipProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     chipRef,
-    ...props
+    ...forwardedProps
 }) => {
     const hasAfterClick: boolean = isFunction(onAfterClick);
     const hasBeforeClick: boolean = isFunction(onBeforeClick);
@@ -141,6 +141,7 @@ const Chip: React.FC<ChipProps> = ({
 
     return (
         <a
+            {...forwardedProps}
             ref={chipRef}
             className={classNames(
                 className,
@@ -162,7 +163,6 @@ const Chip: React.FC<ChipProps> = ({
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
             onClick={hasOnClick ? onClick : undefined}
             onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
-            {...props}
         >
             {before && (
                 <div

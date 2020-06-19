@@ -137,5 +137,5 @@ describe(`<${Tab.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, {}, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
 });

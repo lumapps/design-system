@@ -111,6 +111,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
+                    {...forwardedProps}
                     checked={checked}
                     className={`${CLASSNAME}__input-native`}
                     disabled={disabled}
@@ -120,7 +121,6 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
                     type="radio"
                     value={value}
                     onChange={handleChange}
-                    {...forwardedProps}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>

@@ -61,10 +61,11 @@ const Grid: React.FC<GridProps> = ({
     orientation = DEFAULT_PROPS.orientation,
     vAlign,
     wrap = DEFAULT_PROPS.wrap,
-    ...props
+    ...forwardedProps
 }: GridProps): React.ReactElement => {
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 `${CLASSNAME}-container`,
@@ -72,7 +73,6 @@ const Grid: React.FC<GridProps> = ({
                 { [`${CLASSNAME}--v-align-${vAlign}`]: vAlign },
                 handleBasicClasses({ prefix: CLASSNAME, orientation, wrap, gutter }),
             )}
-            {...props}
         >
             {children}
         </div>

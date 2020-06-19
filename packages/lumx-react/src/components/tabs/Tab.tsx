@@ -69,7 +69,7 @@ const Tab: React.FC<TabProps> = ({
     isDisabled = DEFAULT_PROPS.isDisabled,
     label = DEFAULT_PROPS.label,
     onTabClick,
-    ...props
+    ...forwardedProps
 }) => {
     const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
 
@@ -89,11 +89,11 @@ const Tab: React.FC<TabProps> = ({
 
     return (
         <a
+            {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled }))}
             tabIndex={tabIndex}
             onClick={handleTabClick}
             onKeyPress={handleKeyPress}
-            {...props}
         >
             {icon && <Icon icon={icon} size={Size.xs} />}
             {label && <span>{label}</span>}

@@ -53,7 +53,7 @@ const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
     className,
     align = DEFAULT_PROPS.align,
     children,
-    ...props
+    ...forwardedProps
 }) => {
     const chipGroupClassName = handleBasicClasses({
         align,
@@ -61,7 +61,7 @@ const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
     });
 
     return (
-        <div className={classNames(className, chipGroupClassName)} {...props}>
+        <div {...forwardedProps} className={classNames(className, chipGroupClassName)}>
             {children}
         </div>
     );

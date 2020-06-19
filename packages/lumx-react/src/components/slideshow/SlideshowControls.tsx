@@ -82,7 +82,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     onPreviousClick = DEFAULT_PROPS.onPreviousClick,
     /** Theme */
     theme = DEFAULT_PROPS.theme,
-    ...props
+    ...forwardedProps
 }) => {
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
         return null;
@@ -271,10 +271,10 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
                 [`${CLASSNAME}--has-infinite-pagination`]: slidesCount > PAGINATION_ITEMS_MAX,
             })}
-            {...props}
         >
             <IconButton
                 icon={mdiChevronLeft}

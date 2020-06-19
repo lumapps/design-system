@@ -114,6 +114,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
 
     return (
         <Autocomplete
+            {...forwardedProps}
             anchorToInput={anchorToInput}
             className={classNames(
                 className,
@@ -151,7 +152,6 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
             placement={placement}
             fitToAnchorWidth={fitToAnchorWidth}
             onInfiniteScroll={onInfiniteScroll}
-            {...forwardedProps}
         >
             {children}
         </Autocomplete>

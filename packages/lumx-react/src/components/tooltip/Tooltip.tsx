@@ -65,7 +65,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     className,
     delay = DEFAULT_PROPS.delay,
     placement = DEFAULT_PROPS.placement,
-    ...props
+    ...forwardedProps
 }) => {
     const [timer, setTimer] = useState(0);
     const tooltipRef: React.RefObject<HTMLDivElement> = useRef(null);
@@ -167,6 +167,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
     return createPortal(
         <div
+            {...forwardedProps}
             ref={tooltipRef}
             style={tooltipStyles}
             className={classNames(
@@ -174,7 +175,6 @@ const Tooltip: React.FC<TooltipProps> = ({
                 handleBasicClasses({ prefix: CLASSNAME }),
                 `${CLASSNAME}--position-${placement}`,
             )}
-            {...props}
         >
             <div className={`${CLASSNAME}__arrow`} />
             <div className={`${CLASSNAME}__inner`}>{children}</div>

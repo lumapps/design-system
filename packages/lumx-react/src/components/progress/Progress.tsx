@@ -60,14 +60,14 @@ const Progress: React.FC<ProgressProps> = ({
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     variant = DEFAULT_PROPS.variant,
-    ...props
+    ...forwardedProps
 }) => {
     return (
         <div
+            {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme, variant }), {
                 [`${CSS_PREFIX}-custom-colors`]: useCustomColors,
             })}
-            {...props}
         >
             <div className={classNames(`${CLASSNAME}-${variant}`)}>
                 {variant === ProgressVariant.circular && (

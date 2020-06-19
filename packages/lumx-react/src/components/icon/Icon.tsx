@@ -75,7 +75,7 @@ const Icon: React.FC<IconProps> = ({
     iconRef = DEFAULT_PROPS.iconRef,
     size,
     theme,
-    ...props
+    ...forwardedProps
 }) => {
     let iconColor;
     if (color) {
@@ -105,6 +105,7 @@ const Icon: React.FC<IconProps> = ({
 
     return (
         <i
+            {...forwardedProps}
             ref={iconRef}
             className={classNames(
                 className,
@@ -117,7 +118,6 @@ const Icon: React.FC<IconProps> = ({
                 }),
                 !hasShape && `${CLASSNAME}--no-shape`,
             )}
-            {...props}
         >
             <svg
                 aria-hidden="true"

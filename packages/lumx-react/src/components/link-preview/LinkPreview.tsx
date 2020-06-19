@@ -69,11 +69,13 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
     theme = DEFAULT_PROPS.theme,
     thumbnail = '',
     thumbnailProps = {},
+    ...forwardedProps
 }) => {
     const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({

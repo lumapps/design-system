@@ -40,12 +40,15 @@ const InputHelper: React.FC<InputHelperProps> = ({
     className = '',
     kind = DEFAULT_PROPS.kind as Kind,
     theme = DEFAULT_PROPS.theme,
-    ...props
+    ...forwardedProps
 }) => {
     const { color } = INPUT_HELPER_CONFIGURATION[kind] || {};
 
     return (
-        <span className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))} {...props}>
+        <span
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, theme }))}
+        >
             {children}
         </span>
     );

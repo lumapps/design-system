@@ -120,13 +120,13 @@ const Dropdown: React.FC<DropdownProps> = ({
 
         return (
             <div
+                {...props}
                 className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
                 ref={wrapperRef}
                 style={{
                     maxHeight: computedPosition.maxHeight,
                     minWidth: fitToAnchorWidth ? computedPosition.anchorWidth : 0,
                 }}
-                {...props}
             >
                 <div className={`${CLASSNAME}__content`}>{clonedChildren}</div>
             </div>

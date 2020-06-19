@@ -109,7 +109,7 @@ const withSelectContext = (
         onInfiniteScroll,
         useCustomColors,
         isEmpty,
-        ...props
+        ...forwardedProps
     }: SelectProps,
 ): React.ReactElement => {
     const targetUuid = 'uuid';
@@ -164,6 +164,7 @@ const withSelectContext = (
             )}
         >
             <SelectElement
+                {...forwardedProps}
                 variant={variant}
                 label={label}
                 value={value}
@@ -178,7 +179,6 @@ const withSelectContext = (
                 targetUuid={targetUuid}
                 anchorRef={anchorRef}
                 isRequired={isRequired}
-                {...props}
             />
             <Dropdown
                 closeOnClick={true}

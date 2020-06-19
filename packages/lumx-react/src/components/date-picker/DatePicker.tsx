@@ -85,10 +85,10 @@ const DatePicker = (props: DatePickerProps) => {
 
     return (
         <DatePickerControlled
+            {...props}
             onPrevMonthChange={setPrevMonth}
             onNextMonthChange={setNextMonth}
             selectedMonth={selectedMonth}
-            {...props}
         />
     );
 };

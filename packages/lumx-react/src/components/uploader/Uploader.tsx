@@ -90,6 +90,7 @@ const Uploader: React.FC<UploaderProps> = (props) => {
 
     return (
         <div
+            {...forwardedProps}
             className={classNames(
                 className,
                 handleBasicClasses({
@@ -100,7 +101,6 @@ const Uploader: React.FC<UploaderProps> = (props) => {
                     variant,
                 }),
             )}
-            {...forwardedProps}
         >
             <div className={`${CLASSNAME}__background`} />
 
