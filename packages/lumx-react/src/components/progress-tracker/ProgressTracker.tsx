@@ -51,7 +51,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     activeStep = DEFAULT_PROPS.activeStep,
     children,
-    className = '',
+    className,
     theme = DEFAULT_PROPS.theme,
     ...forwardedProps
 }) => {

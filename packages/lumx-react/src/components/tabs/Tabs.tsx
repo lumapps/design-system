@@ -71,7 +71,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Tabs: React.FC<TabsProps> = ({
     activeTab = DEFAULT_PROPS.activeTab,
     children,
-    className = '',
+    className,
     layout = DEFAULT_PROPS.layout,
     onTabClick,
     position = DEFAULT_PROPS.position,

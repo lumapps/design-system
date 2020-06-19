@@ -48,7 +48,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  */
 const GridItem: React.FC<GridItemProps> = ({
     children,
-    className = '',
+    className,
     width,
     align,
     order,

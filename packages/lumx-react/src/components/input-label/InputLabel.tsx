@@ -34,7 +34,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 };
 
 const InputLabel: React.FC<InputLabelProps> = ({
-    className = '',
+    className,
     isRequired = DEFAULT_PROPS.isRequired,
     theme = DEFAULT_PROPS.theme,
     children,

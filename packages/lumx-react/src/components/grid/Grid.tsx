@@ -55,7 +55,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Grid: React.FC<GridProps> = ({
     children,
-    className = '',
+    className,
     gutter,
     hAlign,
     orientation = DEFAULT_PROPS.orientation,

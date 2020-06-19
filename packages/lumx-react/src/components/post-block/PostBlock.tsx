@@ -77,7 +77,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
     actions,
     attachments,
     author,
-    className = '',
+    className,
     meta,
     onClick,
     orientation = DEFAULT_PROPS.orientation,

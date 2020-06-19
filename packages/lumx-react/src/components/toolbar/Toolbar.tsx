@@ -43,7 +43,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const Toolbar: React.FC<ToolbarProps> = ({ after, before, className = '', label, ...forwardedProps }) => {
+const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, label, ...forwardedProps }) => {
     return (
         <div
             {...forwardedProps}

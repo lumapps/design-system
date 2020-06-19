@@ -101,7 +101,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const TableCell: React.FC<TableCellProps> = ({
     children,
-    className = '',
+    className,
     icon,
     isSortable,
     onHeaderClick = DEFAULT_PROPS.onHeaderClick,

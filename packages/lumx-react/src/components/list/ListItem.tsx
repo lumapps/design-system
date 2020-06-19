@@ -86,7 +86,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const ListItem: React.FC<ListItemProps> = ({
     after,
     children,
-    className = '',
+    className,
     isHighlighted,
     isSelected = DEFAULT_PROPS.isSelected,
     isActive = DEFAULT_PROPS.isActive,

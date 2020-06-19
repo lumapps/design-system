@@ -264,7 +264,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
 const TextField: React.FC<TextFieldProps> = (props) => {
     const {
         chips,
-        className = '',
+        className,
         error,
         forceFocusStyle = DEFAULT_PROPS.forceFocusStyle,
         hasError,

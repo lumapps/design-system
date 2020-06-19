@@ -75,7 +75,7 @@ interface List {
  * @return The component.
  */
 const List: React.FC<ListProps> & List = ({
-    className = '',
+    className,
     isClickable = DEFAULT_PROPS.isClickable,
     itemPadding = isClickable && DEFAULT_PROPS.itemPadding,
     listElementRef = useRef(null),

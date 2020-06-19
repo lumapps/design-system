@@ -37,7 +37,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 
 const InputHelper: React.FC<InputHelperProps> = ({
     children,
-    className = '',
+    className,
     kind = DEFAULT_PROPS.kind as Kind,
     theme = DEFAULT_PROPS.theme,
     ...forwardedProps

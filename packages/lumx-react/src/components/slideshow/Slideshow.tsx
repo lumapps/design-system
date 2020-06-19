@@ -68,7 +68,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     activeIndex = DEFAULT_PROPS.activeIndex as number,
     autoPlay = DEFAULT_PROPS.autoPlay,
     children,
-    className = '',
+    className,
     fillHeight = DEFAULT_PROPS.fillHeight,
     groupBy = DEFAULT_PROPS.groupBy as number,
     hasControls = DEFAULT_PROPS.hasControls,

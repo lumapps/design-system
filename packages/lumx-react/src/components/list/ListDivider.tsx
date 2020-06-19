@@ -36,7 +36,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const ListDivider: React.FC<ListDividerProps> = ({ className = '', ...forwardedProps }) => {
+const ListDivider: React.FC<ListDividerProps> = ({ className, ...forwardedProps }) => {
     return <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} />;
 };
 ListDivider.displayName = COMPONENT_NAME;

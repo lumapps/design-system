@@ -35,7 +35,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const TableHeader: React.FC<TableHeaderProps> = ({ children, className = '', ...forwardedProps }) => (
+const TableHeader: React.FC<TableHeaderProps> = ({ children, className, ...forwardedProps }) => (
     <thead {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
         {children}
     </thead>

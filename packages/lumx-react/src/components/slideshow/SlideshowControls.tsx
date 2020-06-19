@@ -69,7 +69,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Index of the current slide */
     activeIndex = DEFAULT_PROPS.activeIndex,
     /** Css class */
-    className = '',
+    className,
     /** Reference of parent element */
     parentRef,
     /** Number of slides */

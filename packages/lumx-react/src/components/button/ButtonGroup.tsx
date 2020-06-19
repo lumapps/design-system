@@ -39,7 +39,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className = '', buttonGroupRef, ...forwardedProps }) => (
+const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className, buttonGroupRef, ...forwardedProps }) => (
     <div {...forwardedProps} className={classNames(className, CLASSNAME)} ref={buttonGroupRef}>
         {children}
     </div>

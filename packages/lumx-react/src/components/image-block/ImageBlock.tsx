@@ -98,7 +98,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     actions = DEFAULT_PROPS.actions,
     align = DEFAULT_PROPS.align,
     aspectRatio = DEFAULT_PROPS.aspectRatio,
-    className = '',
+    className,
     captionPosition = DEFAULT_PROPS.captionPosition,
     captionStyle = DEFAULT_PROPS.captionStyle,
     description = DEFAULT_PROPS.description,

@@ -88,7 +88,7 @@ function useHandleElementFocus(
 const withSelectContext = (
     SelectElement: any,
     {
-        className = '',
+        className,
         hasError = DEFAULT_PROPS.hasError,
         error,
         onClear,

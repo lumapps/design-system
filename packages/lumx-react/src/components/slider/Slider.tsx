@@ -111,7 +111,7 @@ const computePercentFromValue = (value: number, min: number, max: number): numbe
  * @return The component.
  */
 const Slider: React.FC<SliderProps> = ({
-    className = '',
+    className,
     label,
     helper,
     id = uuid(),

@@ -87,7 +87,7 @@ const Notification: React.FC<NotificationProps> = ({
     actionCallback,
     actionLabel,
     content = DEFAULT_PROPS.content,
-    className = '',
+    className,
     handleClick,
     isOpen = false,
     theme = DEFAULT_PROPS.theme,

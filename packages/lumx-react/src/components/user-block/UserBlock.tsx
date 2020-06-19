@@ -84,7 +84,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
     onClick,
     onMouseEnter,
     onMouseLeave,
-    className = '',
+    className,
     simpleAction,
     multipleActions,
     size = DEFAULT_PROPS.size,

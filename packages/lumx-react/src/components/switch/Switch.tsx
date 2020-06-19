@@ -77,7 +77,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const Switch: React.FC<SwitchProps> = ({
-    className = '',
+    className,
     children,
     checked = DEFAULT_PROPS.checked,
     helper,

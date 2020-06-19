@@ -67,7 +67,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
-    className = '',
+    className,
     hasError = DEFAULT_PROPS.hasError,
     helper = DEFAULT_PROPS.helper,
     isActive = DEFAULT_PROPS.isActive,

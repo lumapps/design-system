@@ -35,7 +35,7 @@ const DEFAULT_PROPS: DefaultPropsType = {};
  *
  * @return The component.
  */
-const TableBody: React.FC<TableBodyProps> = ({ children, className = '', ...forwardedProps }) => (
+const TableBody: React.FC<TableBodyProps> = ({ children, className, ...forwardedProps }) => (
     <tbody {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
         {children}
     </tbody>

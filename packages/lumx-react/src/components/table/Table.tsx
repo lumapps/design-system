@@ -56,7 +56,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Table: React.FC<TableProps> = ({
     children,
-    className = '',
+    className,
     hasBefore,
     hasDividers,
     theme = DEFAULT_PROPS.theme,

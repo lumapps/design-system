@@ -144,7 +144,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const Thumbnail: React.FC<ThumbnailProps> = ({
-    className = '',
+    className,
     isCrossOriginEnabled = DEFAULT_PROPS.isCrossOriginEnabled,
     crossOrigin = DEFAULT_PROPS.crossOrigin,
     resizeDebounceTime = DEFAULT_PROPS.resizeDebounceTime,

@@ -56,7 +56,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const Progress: React.FC<ProgressProps> = ({
-    className = '',
+    className,
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
     variant = DEFAULT_PROPS.variant,

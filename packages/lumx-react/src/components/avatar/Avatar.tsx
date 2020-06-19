@@ -63,7 +63,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Avatar: React.FC<AvatarProps> = ({
     actions = DEFAULT_PROPS.actions,
     badge = DEFAULT_PROPS.badge,
-    className = '',
+    className,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
     image,

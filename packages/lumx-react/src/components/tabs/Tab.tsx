@@ -62,7 +62,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const Tab: React.FC<TabProps> = ({
-    className = '',
+    className,
     icon = DEFAULT_PROPS.icon,
     index = DEFAULT_PROPS.index,
     isActive = DEFAULT_PROPS.isActive,
