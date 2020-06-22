@@ -26,8 +26,11 @@ interface LinkPreviewProps extends GenericProps {
     theme?: Theme;
     /** Thumbnail image source */
     thumbnail?: string;
-    /** Thumbnail component props. */
-    thumbnailProps?: ThumbnailProps;
+    /** Thumbnail component props, without the props set by the component. */
+    thumbnailProps?: Omit<
+        ThumbnailProps,
+        'image' | 'onClick' | 'role' | 'tabIndex' | 'image' | 'aspectRatio' | 'fillHeight'
+    >;
     /** Link title */
     title?: string;
 }
