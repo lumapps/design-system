@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
+### Fixed
+
 -   _[BREAKING]_ Changed `thumbnailProps` prop type from `LinkPreview` to avoid typescript throwing an error
 if `thumbnailProps.image` was not specified even though it is already set by the `image` prop.
+-   Allow event propagation on before/after element on `Chip` component when no handler is provided.
 
 ## [0.24.2][] - 2020-06-18
 

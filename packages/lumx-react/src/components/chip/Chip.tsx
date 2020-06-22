@@ -1,4 +1,4 @@
-import React, { ReactNode, Ref, SyntheticEvent } from 'react';
+import React, { MouseEventHandler, ReactNode, Ref, useCallback } from 'react';
 
 import classNames from 'classnames';
 
@@ -19,9 +19,9 @@ type ChipSize = Size.s | Size.m;
  */
 interface ChipProps extends GenericProps {
     /** A component to be rendered after the main label area. */
-    after?: HTMLElement | ReactNode;
+    after?: ReactNode;
     /** A component to be rendered before the main label area. */
-    before?: HTMLElement | ReactNode;
+    before?: ReactNode;
     /** The component color variant. */
     color?: Color;
     /** Whether the chip has pointer on hover. */
@@ -41,9 +41,9 @@ interface ChipProps extends GenericProps {
     /** A ref that will be passed to the wrapper element. */
     chipRef?: Ref<HTMLAnchorElement>;
     /** A function to be executed when the after element is clicked. */
-    onAfterClick?(evt: SyntheticEvent): void;
+    onAfterClick?: MouseEventHandler;
     /** A function to be executed when the before element is clicked. */
-    onBeforeClick?(evt: SyntheticEvent): void;
+    onBeforeClick?: MouseEventHandler;
 }
 
 /**
@@ -74,6 +74,25 @@ const DEFAULT_PROPS: DefaultPropsType = {
 };
 
 /**
+ * Wrap mouse event handler to stop event propagation.
+ *
+ * @param  handler   The mouse handler to wrap.
+ * @return Mouse handler stopping propagation.
+ */
+function useStopPropagation(handler?: MouseEventHandler): MouseEventHandler {
+    return useCallback(
+        (evt) => {
+            if (!evt || !isFunction(handler)) {
+                return;
+            }
+            handler(evt);
+            evt.stopPropagation();
+        },
+        [handler],
+    );
+}
+
+/**
  * Displays information or allow an action on a compact element.
  * This is the base component for all variations of the chips see https://material.io/design/components/chips.html.
  *
@@ -98,46 +117,15 @@ const Chip: React.FC<ChipProps> = ({
     chipRef,
     ...forwardedProps
 }) => {
-    const hasAfterClick: boolean = isFunction(onAfterClick);
-    const hasBeforeClick: boolean = isFunction(onBeforeClick);
-    const hasOnClick: boolean = isFunction(onClick);
+    const hasAfterClick = isFunction(onAfterClick);
+    const hasBeforeClick = isFunction(onBeforeClick);
+    const hasOnClick = isFunction(onClick);
 
     // Adapt color to the theme.
     const chipColor = color || (theme === Theme.light ? ColorPalette.dark : ColorPalette.light);
 
-    /**
-     * Execute the onBeforeClick method passed as a prop but stop propagation to avoid triggering the onClick method.
-     *
-     * @param evt The click event on the before element that triggers this method.
-     */
-    const handleOnBeforeClick = (evt: SyntheticEvent) => {
-        if (!evt) {
-            return;
-        }
-
-        if (onBeforeClick && isFunction(onBeforeClick)) {
-            onBeforeClick(evt);
-        }
-
-        evt.stopPropagation();
-    };
-
-    /**
-     * Execute the onAfterClick method passed as a prop but stop propagation to avoid triggering the onClick method.
-     *
-     * @param evt The click event on the after element that triggers this method.
-     */
-    const handleOnAfterClick = (evt: SyntheticEvent) => {
-        if (!evt) {
-            return;
-        }
-
-        if (onAfterClick && isFunction(onAfterClick)) {
-            onAfterClick(evt);
-        }
-
-        evt.stopPropagation();
-    };
+    const handleOnBeforeClick = useStopPropagation(onBeforeClick);
+    const handleOnAfterClick = useStopPropagation(onAfterClick);
 
     return (
         <a

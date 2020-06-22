@@ -1,9 +1,9 @@
-import { ShallowWrapper, shallow } from 'enzyme';
+import { ShallowWrapper, mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import React from 'react';
+import React, { ReactElement } from 'react';
 
 import { ColorPalette, Theme } from '@lumx/react';
-import { CommonSetup } from '@lumx/react/testing/utils';
+import { CommonSetup, Wrapper } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 import { CLASSNAME, Chip, ChipProps } from './Chip';
 
@@ -15,19 +15,21 @@ interface Setup extends CommonSetup {
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param propOverrides An object that will extend the default properties.
+ * @param  propOverrides An object that will extend the default properties.
+ * @param  [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
  * @return An object with some shortcuts to elements or data required in tests.
  */
-const setup = (propOverrides: Partial<ChipProps> = {}): Setup => {
+const setup = (propOverrides: Partial<ChipProps> = {}, shallowRendering = true): Setup => {
     const props = {
         LabelComponent: 'Hello World!',
         ...propOverrides,
     };
-    const wrapper = shallow(<Chip {...props} />);
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+    const wrapper = renderer(<Chip {...props} />);
 
     return {
-        after: wrapper.find('.lumx-chip__after'),
-        before: wrapper.find('.lumx-chip__before'),
+        after: wrapper.find('.lumx-chip__after') as any,
+        before: wrapper.find('.lumx-chip__before') as any,
         props,
         wrapper,
     };
@@ -126,6 +128,26 @@ describe('<Chip />', () => {
 
             before.simulate('click', mockClickEvent);
             expect(mockOnAfterClick).not.toHaveBeenCalled();
+        });
+
+        it('should not stop propagation when clicking on a "before"or "after" element without an event handler', () => {
+            const onClick = jest.fn();
+            const { after, before } = setup(
+                {
+                    after: 'after',
+                    before: 'before',
+                    onClick,
+                },
+                false,
+            );
+
+            before.simulate('click', mockClickEvent);
+            expect(onClick).toHaveBeenCalled();
+
+            onClick.mockClear();
+
+            after.simulate('click', mockClickEvent);
+            expect(onClick).toHaveBeenCalled();
         });
     });
 
