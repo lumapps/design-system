@@ -143,14 +143,17 @@ export const asLink = () => {
     return (
         <div className="demo-grid">
             <List isClickable>
-                <ListItem before={<Icon icon={mdiAccount} />} className="lumx-color-background-dark-L6" href="#">
+                <ListItem
+                    before={<Icon icon={mdiAccount} />}
+                    className="lumx-color-background-dark-L6"
+                    linkProps={{ href: '#' }}
+                >
                     <span>My first link</span>
                 </ListItem>
                 <ListItem
                     className="lumx-color-background-dark-L6"
-                    href="http://www.google.com"
-                    target="_blank"
                     after={<Icon icon={mdiOpenInNew} />}
+                    linkProps={{ href: 'http://www.google.com', target: '_blank' }}
                 >
                     <span>Google</span>
                 </ListItem>

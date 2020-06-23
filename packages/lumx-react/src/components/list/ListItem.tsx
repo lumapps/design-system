@@ -50,9 +50,6 @@ interface ListItemProps extends GenericProps {
     /** Theme. */
     theme?: Theme;
 
-    /** Href of a link. If this prop is provided, the component will use an <a> to wrap the content */
-    href?: string;
-
     /** props that will be passed on to the Link */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
@@ -102,11 +99,11 @@ const ListItem: React.FC<ListItemProps> = ({
     theme = DEFAULT_PROPS.theme,
     onItemSelected,
     before,
-    href,
-    linkProps,
+    linkProps = {},
     ...forwardedProps
 }) => {
     const element = useRef<HTMLLIElement | null>(null);
+    const useAsLink = linkProps && !isEmpty(linkProps?.href);
 
     useEffect(() => {
         if (element && element.current && isActive) {
@@ -154,18 +151,18 @@ const ListItem: React.FC<ListItemProps> = ({
             onClick={onItemSelected}
             onKeyDown={onKeyDown()}
         >
-            {isEmpty(href) ? (
+            {useAsLink ? (
+                <a {...linkProps}>
+                    <ListItemContent before={before} after={after} baseClassName={CLASSNAME}>
+                        {children}
+                    </ListItemContent>
+                </a>
+            ) : (
                 <div>
                     <ListItemContent before={before} after={after} baseClassName={CLASSNAME}>
                         {children}
                     </ListItemContent>
                 </div>
-            ) : (
-                <a href={href} {...(linkProps || {})}>
-                    <ListItemContent before={before} after={after} baseClassName={CLASSNAME}>
-                        {children}
-                    </ListItemContent>
-                </a>
             )}
         </li>
     );
