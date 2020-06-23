@@ -7,7 +7,6 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { Size, Theme } from '@lumx/react';
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
-import { ListItemContent } from './ListItemContent';
 
 /**
  *  Authorized size values.
@@ -133,6 +132,14 @@ const ListItem: React.FC<ListItemProps> = ({
         return;
     };
 
+    const content = (
+        <>
+            {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
+            <div className={`${CLASSNAME}__content`}>{children}</div>
+            {after && <div className={`${CLASSNAME}__after`}>{after}</div>}
+        </>
+    );
+
     return (
         <li
             {...forwardedProps}
@@ -151,19 +158,7 @@ const ListItem: React.FC<ListItemProps> = ({
             onClick={onItemSelected}
             onKeyDown={onKeyDown()}
         >
-            {useAsLink ? (
-                <a {...linkProps}>
-                    <ListItemContent before={before} after={after} baseClassName={CLASSNAME}>
-                        {children}
-                    </ListItemContent>
-                </a>
-            ) : (
-                <div>
-                    <ListItemContent before={before} after={after} baseClassName={CLASSNAME}>
-                        {children}
-                    </ListItemContent>
-                </div>
-            )}
+            {useAsLink ? <a {...linkProps}>{content}</a> : <div>{content}</div>}
         </li>
     );
 };
