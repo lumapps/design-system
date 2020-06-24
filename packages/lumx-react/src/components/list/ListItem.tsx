@@ -1,6 +1,7 @@
 import React, { ReactElement, ReactNode, useEffect, useRef } from 'react';
 
 import classNames from 'classnames';
+import isEmpty from 'lodash/isEmpty';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
@@ -48,6 +49,9 @@ interface ListItemProps extends GenericProps {
     /** Theme. */
     theme?: Theme;
 
+    /** props that will be passed on to the Link */
+    linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
+
     /** Callback used to retrieved the selected entry. */
     onItemSelected?(): void;
 }
@@ -94,13 +98,15 @@ const ListItem: React.FC<ListItemProps> = ({
     theme = DEFAULT_PROPS.theme,
     onItemSelected,
     before,
+    linkProps = {},
     ...forwardedProps
 }) => {
-    const element = useRef<HTMLLIElement | null>(null);
+    const linkElement = useRef<HTMLAnchorElement | null>(null);
+    const isClickable = (linkProps && !isEmpty(linkProps?.href)) || onItemSelected;
 
     useEffect(() => {
-        if (element && element.current && isActive) {
-            element.current.focus();
+        if (linkElement && linkElement.current && isActive) {
+            linkElement.current.focus();
         }
     }, [isActive]);
 
@@ -126,27 +132,48 @@ const ListItem: React.FC<ListItemProps> = ({
         return;
     };
 
+    const content = (
+        <>
+            {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
+            <div className={`${CLASSNAME}__content`}>{children}</div>
+            {after && <div className={`${CLASSNAME}__after`}>{after}</div>}
+        </>
+    );
+
     return (
         <li
             {...forwardedProps}
-            ref={element}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    highlighted: isHighlighted,
                     prefix: CLASSNAME,
-                    selected: isSelected,
                     size,
                     theme,
                 }),
             )}
             onFocusCapture={preventParentFocus}
-            onClick={onItemSelected}
-            onKeyDown={onKeyDown()}
         >
-            {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
-            <div className={classNames(`${CLASSNAME}__content`)}>{children}</div>
-            {after && <div className={`${CLASSNAME}__after`}>{after}</div>}
+            {isClickable ? (
+                <a
+                    className={classNames(
+                        handleBasicClasses({
+                            prefix: `${CLASSNAME}__link`,
+                            isHighlighted,
+                            isSelected,
+                        }),
+                    )}
+                    onClick={onItemSelected}
+                    onKeyDown={onKeyDown()}
+                    ref={linkElement}
+                    role={onItemSelected ? 'button' : undefined}
+                    tabIndex={0}
+                    {...linkProps}
+                >
+                    {content}
+                </a>
+            ) : (
+                <div className={`${CLASSNAME}__wrapper`}>{content}</div>
+            )}
         </li>
     );
 };

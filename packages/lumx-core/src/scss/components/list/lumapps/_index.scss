@@ -6,41 +6,15 @@
     @include lumx-list;
 }
 
-/* Item
-   ========================================================================== */
-
-.#{$lumx-base-prefix}-list-item {
-    &--is-selected {
-        @include lumx-list-item-selected;
-    }
-
-    &--is-highlighted {
-        @include lumx-list-item-highlighted;
-    }
-
-    .#{$lumx-base-prefix}-list--is-clickable & {
-        @include lumx-list-item-clickable;
-    }
-
-    .#{$lumx-base-prefix}-list--item-padding-big & {
-        @include lumx-list-item-padding('big');
-    }
-
-    .#{$lumx-base-prefix}-list--item-padding-huge & {
-        @include lumx-list-item-padding('huge');
-    }
-
-    &__content {
-        @include lumx-list-item-content;
-    }
-}
-
 /* Item sizes
    ========================================================================== */
 
 @each $key, $size in $lumx-list-item-sizes {
     .#{$lumx-base-prefix}-list-item--size-#{$key} {
-        @include lumx-list-item($key);
+        .#{$lumx-base-prefix}-list-item__wrapper,
+        .#{$lumx-base-prefix}-list-item__link {
+            @include lumx-list-item($key);
+        }
 
         .#{$lumx-base-prefix}-list-item__before {
             @include lumx-list-item-before($key);
@@ -50,6 +24,38 @@
             @include lumx-list-item-after($key);
         }
     }
+}
+
+/* Item link
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item {
+    &__link {
+        @include lumx-list-item-clickable;
+    }
+
+    &__link--is-highlighted {
+        @include lumx-list-item-highlighted;
+    }
+
+    &__link--is-selected {
+        @include lumx-list-item-selected;
+    }
+
+    .#{$lumx-base-prefix}-list--item-padding-big &__link {
+        @include lumx-list-item-padding('big');
+    }
+
+    .#{$lumx-base-prefix}-list--item-padding-huge &__link {
+        @include lumx-list-item-padding('huge');
+    }
+}
+
+/* Item content
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item__content {
+    @include lumx-list-item-content;
 }
 
 /* Subheader

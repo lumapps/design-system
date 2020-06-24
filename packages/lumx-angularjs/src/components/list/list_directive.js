@@ -55,15 +55,12 @@ function ListController($element, $scope) {
         if (nextItem.length === 0) {
             lx.activeItemIndex = 0;
 
-            nextItem = $element
-                .find(`.${CSS_PREFIX}-list-item`)
-                .eq(lx.activeItemIndex)
-                .focus();
+            nextItem = $element.find(`.${CSS_PREFIX}-list-item`).eq(lx.activeItemIndex);
         } else {
             lx.activeItemIndex++;
         }
 
-        nextItem.focus();
+        nextItem.find(`.${CSS_PREFIX}-list-item__link`).focus();
     }
 
     /**
@@ -75,15 +72,12 @@ function ListController($element, $scope) {
         if (previousItem.length === 0) {
             lx.activeItemIndex = $element.find(`.${CSS_PREFIX}-list-item`).length - 1;
 
-            previousItem = $element
-                .find(`.${CSS_PREFIX}-list-item`)
-                .eq(lx.activeItemIndex)
-                .focus();
+            previousItem = $element.find(`.${CSS_PREFIX}-list-item`).eq(lx.activeItemIndex);
         } else {
             lx.activeItemIndex--;
         }
 
-        previousItem.focus();
+        previousItem.find(`.${CSS_PREFIX}-list-item__link`).focus();
     }
 
     /**
