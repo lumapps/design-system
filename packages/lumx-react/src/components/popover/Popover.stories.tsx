@@ -123,7 +123,6 @@ export const auto = ({ theme }: any) => {
                 </Chip>
             </div>
             <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO} isOpen>
-                isOpen
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>
         </div>
@@ -157,7 +156,6 @@ export const top = ({ theme }: any) => {
                 </Chip>
             </div>
             <Popover theme={theme} anchorRef={anchorRef} placement={Placement.TOP} isOpen>
-                isOpen
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>
         </div>
