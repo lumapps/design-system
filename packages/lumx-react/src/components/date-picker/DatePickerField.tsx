@@ -11,6 +11,7 @@ import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, DatePicker } from './DatePicker';
 import DatePickerValueProp from './DatePickerValueProp';
 
+import { useComputePosition } from '@lumx/react/hooks/useComputePosition';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { GenericProps } from '@lumx/react/utils';
 
@@ -71,7 +72,7 @@ const DatePickerField = ({
         setIsOpen(false);
     }, []);
 
-    const { computedPosition, isVisible } = Popover.useComputePosition(
+    const { computedPosition, isVisible } = useComputePosition(
         Placement.BOTTOM_START!,
         anchorRef,
         popoverRef,
