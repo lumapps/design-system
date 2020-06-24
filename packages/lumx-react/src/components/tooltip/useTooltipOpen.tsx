@@ -1,11 +1,12 @@
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 
 /**
- * Hook controlling tooltip visibillity using mouse hover the anchor and delay.
+ * Hook controlling tooltip visibility using mouse hover the anchor and delay.
+ *
  * @return whether or not to show the tooltip.
  */
 export function useTooltipOpen({ delay, anchorRef }: { delay: number; anchorRef: RefObject<HTMLElement> }) {
-    const [timer, setTimer] = useState(0);
+    const timer = useRef<number>();
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -14,16 +15,15 @@ export function useTooltipOpen({ delay, anchorRef }: { delay: number; anchorRef:
             return;
         }
         const handleMouseEnter = () => {
-            const id: any = setTimeout(() => {
+            timer.current = setTimeout(() => {
                 setIsOpen(true);
-            }, delay);
-            setTimer(id);
+            }, delay) as any;
         };
 
         const handleMouseLeave = () => {
-            if (timer) {
-                clearTimeout(timer);
-                setTimer(0);
+            if (timer.current) {
+                clearTimeout(timer.current);
+                timer.current = undefined;
             }
             setIsOpen(false);
         };
@@ -35,8 +35,8 @@ export function useTooltipOpen({ delay, anchorRef }: { delay: number; anchorRef:
             anchor.removeEventListener('mouseenter', handleMouseEnter);
             anchor.removeEventListener('mouseleave', handleMouseLeave);
 
-            if (timer) {
-                clearTimeout(timer);
+            if (timer.current) {
+                clearTimeout(timer.current);
             }
         };
     }, [anchorRef, timer]);
