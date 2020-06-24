@@ -113,3 +113,18 @@ export const withIncompatibleString = ({ theme }: any) => {
         />
     );
 };
+
+export const with28FebruarySelected = ({ theme }: any) => {
+    const [value, setValue] = React.useState<DatePickerProps['value']>(new Date('2019-02-28'));
+
+    return (
+        <DatePickerField
+            locale="fr"
+            label="Start date"
+            placeholder="Pick a date"
+            theme={theme}
+            onChange={setValue}
+            value={value}
+        />
+    );
+};

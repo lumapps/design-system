@@ -42,17 +42,18 @@ function getMonthCalendar(locale: string, selectedMonth?: Moment): Moment[] {
         .startOf('month');
     const endDay = moment(selectedMonth)
         .locale(locale)
-        .endOf('month');
+        .endOf('month')
+        .add(1, 'day');
 
-    const monthRange = moment.range(firstDay, endDay);
-
+    const monthRange = moment().range(firstDay.toDate(), endDay.toDate());
     const weeks = Array.from(monthRange.by('week'));
-
     const calendar = [];
+
     for (const week of weeks) {
         const firstWeekDay = moment(week).startOf('week');
         const lastWeekDay = moment(week).endOf('week');
         const weekRange = moment.range(firstWeekDay, lastWeekDay);
+
         calendar.push(...Array.from(weekRange.by('day')));
     }
 

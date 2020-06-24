@@ -48,6 +48,14 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     todayOrSelectedDateRef,
     value,
 }) => {
+    const days = React.useMemo(() => {
+        return getAnnotatedMonthCalendar(locale, minDate, maxDate, selectedMonth);
+    }, [locale, minDate, maxDate, selectedMonth]);
+
+    const weekDays = React.useMemo(() => {
+        return getWeekDays(locale);
+    }, [locale]);
+
     return (
         <div className={`${CLASSNAME}`}>
             <Toolbar
@@ -64,7 +72,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
             />
             <div className={`${CLASSNAME}__calendar`}>
                 <div className={`${CLASSNAME}__week-days ${CLASSNAME}__days-wrapper`}>
-                    {getWeekDays(locale).map((weekDay) => (
+                    {weekDays.map((weekDay) => (
                         <div key={weekDay.unix()} className={`${CLASSNAME}__day-wrapper`}>
                             <span className={`${CLASSNAME}__week-day`}>
                                 {weekDay
@@ -77,7 +85,7 @@ const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
                 </div>
 
                 <div className={`${CLASSNAME}__month-days ${CLASSNAME}__days-wrapper`}>
-                    {getAnnotatedMonthCalendar(locale, minDate, maxDate, selectedMonth).map((annotatedDate) => {
+                    {days.map((annotatedDate) => {
                         if (annotatedDate.isDisplayed) {
                             return (
                                 <div key={annotatedDate.date.unix()} className={`${CLASSNAME}__day-wrapper`}>
