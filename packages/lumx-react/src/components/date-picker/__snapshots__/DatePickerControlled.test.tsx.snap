@@ -554,10 +554,6 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
           </span>
         </button>
       </div>
-      <div
-        className="lumx-date-picker__day-wrapper"
-        key="2674800"
-      />
     </div>
   </div>
 </div>
