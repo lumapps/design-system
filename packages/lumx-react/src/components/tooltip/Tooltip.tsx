@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 import uuid from 'uuid/v4';
@@ -25,14 +25,20 @@ interface OptionalTooltipProps extends GenericProps {
 
     /** Placement of tooltip relative to the anchor element. */
     placement?: TooltipPlacement;
+
+    /** Force tooltip to show even without the mouse over the anchor. */
+    forceOpen?: boolean;
 }
 
 /**
  * Defines the props of the component.
  */
 interface TooltipProps extends OptionalTooltipProps {
-    /** Label */
+    /** Tooltip label. */
     label: string;
+
+    /** Tooltip anchor. */
+    children: ReactNode;
 }
 
 /**
@@ -51,6 +57,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Required<OptionalTooltipProps> = {
     delay: 500,
     placement: Placement.BOTTOM,
+    forceOpen: false,
 };
 
 /**
@@ -61,6 +68,7 @@ const OFFSET = 8;
 /**
  * Tooltip.
  *
+ * @see WAI-ARIA https://www.w3.org/TR/wai-aria-practices/#tooltip
  * @param  props The component props.
  * @return The component.
  */
@@ -71,9 +79,10 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
         className,
         delay = DEFAULT_PROPS.delay,
         placement = DEFAULT_PROPS.placement,
+        forceOpen = DEFAULT_PROPS.forceOpen,
         ...forwardedProps
     } = props;
-    const id = useMemo(uuid, []);
+    const id = useMemo(() => `tooltip-${uuid()}`, []);
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const anchorRef = useRef(null);
     const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
@@ -81,33 +90,28 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
         modifiers: [
             {
                 name: 'offset',
-                options: {
-                    offset: [0, OFFSET],
-                },
+                options: { offset: [0, OFFSET] },
             },
         ],
     });
 
-    const actualPlacement = attributes?.popper?.['data-popper-placement'];
-    const isOpen = useTooltipOpen({ delay, anchorRef });
+    const position = attributes?.popper?.['data-popper-placement'] ?? placement;
+    const isOpen = useTooltipOpen({ delay, anchorRef }) || forceOpen;
 
     return (
         <>
-            <span ref={anchorRef} aria-describedby={isOpen ? `tooltip-${id}` : undefined}>
+            <div style={{ display: 'inline-block' }} ref={anchorRef} aria-describedby={isOpen ? id : undefined}>
                 {children}
-            </span>
+            </div>
             {isOpen &&
                 createPortal(
                     <div
                         {...forwardedProps}
-                        id={`tooltip-${id}`}
+                        id={id}
                         ref={setPopperElement}
                         role="tooltip"
-                        className={classNames(
-                            className,
-                            handleBasicClasses({ prefix: CLASSNAME }),
-                            actualPlacement && `${CLASSNAME}--position-${actualPlacement}`,
-                        )}
+                        aria-label={label}
+                        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, position }))}
                         style={styles.popper}
                         {...attributes.popper}
                     >

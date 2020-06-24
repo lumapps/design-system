@@ -2,16 +2,22 @@
 
 exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
 <Fragment>
-  <span
+  <div
     aria-describedby="tooltip-123"
+    style={
+      Object {
+        "display": "inline-block",
+      }
+    }
   >
     Anchor
-  </span>
+  </div>
   <Portal
     containerInfo={<body />}
   >
     <div
-      className="lumx-tooltip"
+      aria-label="Tooltip"
+      className="lumx-tooltip lumx-tooltip--position-bottom"
       id="tooltip-123"
       role="tooltip"
       style={
