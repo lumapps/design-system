@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.3][] - 2020-06-24
+
 ### Fixed
 
 -   _[BREAKING]_ Changed `thumbnailProps` prop type from `LinkPreview` to avoid typescript throwing an error if `thumbnailProps.image` was not specified even though it is already set by the `image` prop.
@@ -534,3 +536,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.24.0]: https://github.com/lumapps/design-system/tree/v0.24.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.24.2...HEAD
 [0.24.2]: https://github.com/lumapps/design-system/tree/v0.24.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.3...HEAD
+[0.24.3]: https://github.com/lumapps/design-system/tree/v0.24.3
