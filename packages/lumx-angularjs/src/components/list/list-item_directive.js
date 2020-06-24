@@ -96,16 +96,28 @@ function ListItemController($element, $scope) {
 
         classes.push(`${CSS_PREFIX}-list-item--size-${size}`);
 
+        return classes;
+    }
+
+    /**
+     * Get list item link classes.
+     *
+     * @return {Array} The list of list item classes.
+     */
+    function getLinkClasses() {
+        const linkClasses = [];
+
         if (lx.isSelected) {
-            classes.push(`${CSS_PREFIX}-list-item--is-selected`);
+            linkClasses.push(`${CSS_PREFIX}-list-item__link--is-selected`);
         }
 
-        return classes;
+        return linkClasses;
     }
 
     /////////////////////////////
 
     lx.getClasses = getClasses;
+    lx.getLinkClasses = getLinkClasses;
 
     /////////////////////////////
     //                         //
