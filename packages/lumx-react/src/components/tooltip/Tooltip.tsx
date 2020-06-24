@@ -3,10 +3,11 @@ import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
 
-import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
+import { Offset, Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
+import { useComputePosition } from '@lumx/react/hooks/useComputePosition';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 /** Position of the tooltip relative to the anchor element. */
@@ -148,13 +149,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
     const offsets = computeOffset();
 
-    const { computedPosition, isVisible } = Popover.useComputePosition(
-        placement!,
-        anchorRef,
-        tooltipRef,
-        isOpen,
-        offsets,
-    );
+    const { computedPosition, isVisible } = useComputePosition(placement!, anchorRef, tooltipRef, isOpen, offsets);
 
     const tooltipStyles: CSSProperties = useMemo(
         () => ({
