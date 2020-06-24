@@ -208,7 +208,6 @@ const List: React.FC<ListProps> & List = ({
                     const elemProps: Partial<ListItemProps> = {};
                     elemProps.onMouseDown = (evt: React.MouseEvent) => mouseDownHandler(evt, idx, elm.props);
                     elemProps.isActive = idx === activeItemIndex;
-                    elemProps.tabIndex = 0;
 
                     return cloneElement(elm, { ...elemProps });
                 }

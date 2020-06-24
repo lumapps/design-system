@@ -101,12 +101,12 @@ const ListItem: React.FC<ListItemProps> = ({
     linkProps = {},
     ...forwardedProps
 }) => {
-    const element = useRef<HTMLLIElement | null>(null);
-    const useAsLink = linkProps && !isEmpty(linkProps?.href);
+    const linkElement = useRef<HTMLAnchorElement | null>(null);
+    const isClickable = (linkProps && !isEmpty(linkProps?.href)) || onItemSelected;
 
     useEffect(() => {
-        if (element && element.current && isActive) {
-            element.current.focus();
+        if (linkElement && linkElement.current && isActive) {
+            linkElement.current.focus();
         }
     }, [isActive]);
 
@@ -143,22 +143,37 @@ const ListItem: React.FC<ListItemProps> = ({
     return (
         <li
             {...forwardedProps}
-            ref={element}
             className={classNames(
                 className,
                 handleBasicClasses({
-                    highlighted: isHighlighted,
                     prefix: CLASSNAME,
-                    selected: isSelected,
                     size,
                     theme,
                 }),
             )}
             onFocusCapture={preventParentFocus}
-            onClick={onItemSelected}
-            onKeyDown={onKeyDown()}
         >
-            {useAsLink ? <a {...linkProps}>{content}</a> : <div>{content}</div>}
+            {isClickable ? (
+                <a
+                    className={classNames(
+                        handleBasicClasses({
+                            prefix: `${CLASSNAME}__link`,
+                            isHighlighted,
+                            isSelected,
+                        }),
+                    )}
+                    onClick={onItemSelected}
+                    onKeyDown={onKeyDown()}
+                    ref={linkElement}
+                    role={onItemSelected ? 'button' : undefined}
+                    tabIndex={0}
+                    {...linkProps}
+                >
+                    {content}
+                </a>
+            ) : (
+                <div className={`${CLASSNAME}__wrapper`}>{content}</div>
+            )}
         </li>
     );
 };

@@ -7,7 +7,6 @@
 
 @mixin lumx-list-item($size) {
     display: flex;
-    color: lumx-color-variant('dark', 'N');
     outline: none;
     text-decoration: none;
 
@@ -24,6 +23,7 @@
 }
 
 @mixin lumx-list-item-clickable() {
+    color: lumx-color-variant('dark', 'N');
     cursor: pointer;
 
     &:hover,
