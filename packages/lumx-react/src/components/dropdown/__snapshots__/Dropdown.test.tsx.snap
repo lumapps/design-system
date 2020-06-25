@@ -15,6 +15,7 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
 >
   <div
     className="lumx-dropdown__menu lumx-dropdown"
+    onClick={[Function]}
   >
     <div
       className="lumx-dropdown__content"

@@ -48,6 +48,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
+    closeOnClick: false,
     closeOnClickAway: true,
     closeOnEscape: true,
     isOpen: undefined,
@@ -146,6 +147,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
             theme={theme}
             type={type}
             isOpen={isOpen}
+            closeOnClick={false}
             closeOnClickAway={closeOnClickAway}
             closeOnEscape={closeOnEscape}
             onClose={onClose}

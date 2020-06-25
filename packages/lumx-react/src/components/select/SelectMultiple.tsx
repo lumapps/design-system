@@ -184,6 +184,7 @@ const SelectMultiple = (props: any) =>
             }),
         ),
         isEmpty: props.value.length === 0,
+        isMultiple: true,
     });
 
 SelectMultiple.displayName = COMPONENT_NAME;

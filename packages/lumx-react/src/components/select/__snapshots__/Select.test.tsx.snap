@@ -25,6 +25,7 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
+    closeOnClick={true}
     closeOnClickAway={true}
     closeOnEscape={true}
     isOpen={false}

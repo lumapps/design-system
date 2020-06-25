@@ -2,7 +2,7 @@ import React, { ReactNode, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
+import { Dropdown, DropdownProps, Offset, Placement, PopoverProps, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -123,22 +123,28 @@ interface AutocompleteProps extends GenericProps {
     isOpen: boolean;
 
     /**
-     * Whether a click anywhere out of the Autocomplete would close it
-     * @see {@link DropdownProps#closeOnClickAway}
+     * Whether a click in the Autocomplete dropdown would close it
+     * @see {@link DropdownProps#closeOnClick}
      */
-    closeOnClickAway?: boolean;
+    closeOnClick?: DropdownProps['closeOnClick'];
+
+    /**
+     * Whether a click anywhere out of the Autocomplete would close it
+     * @see {@link PopoverProps#closeOnClickAway}
+     */
+    closeOnClickAway?: PopoverProps['closeOnClickAway'];
 
     /**
      * Whether an escape key press would close the Autocomplete.
-     * @see {@link DropdownProps#closeOnEscape}
+     * @see {@link PopoverProps#closeOnEscape}
      */
-    closeOnEscape?: boolean;
+    closeOnEscape?: PopoverProps['closeOnEscape'];
 
     /**
      * The function to be called when the user clicks away or Escape is pressed
-     * @see {@link DropdownProps#onClose}
+     * @see {@link PopoverProps#onClose}
      */
-    onClose?: VoidFunction;
+    onClose?: PopoverProps['onClose'];
 
     /**
      * The callback function called when the bottom of the dropdown is reached.
@@ -204,6 +210,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
         onChange,
         onFocus,
         isOpen,
+        closeOnClick,
         closeOnClickAway,
         closeOnEscape,
         error,
@@ -261,6 +268,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
             <Dropdown
                 anchorRef={anchorToInput ? inputRef : textFieldRef}
                 isOpen={isOpen}
+                closeOnClick={closeOnClick}
                 closeOnClickAway={closeOnClickAway}
                 closeOnEscape={closeOnEscape}
                 onClose={onClose}

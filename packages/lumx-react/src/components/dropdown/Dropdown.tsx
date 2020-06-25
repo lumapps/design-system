@@ -1,4 +1,4 @@
-import React, { cloneElement, useMemo, useRef } from 'react';
+import React, { MouseEventHandler, cloneElement, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -21,6 +21,8 @@ interface DropdownProps extends GenericProps {
     closeOnClickAway?: boolean;
     /** Whether an escape key press would close the Dropdown. */
     closeOnEscape?: boolean;
+    /** Whether to close the Dropdown when clicking in it. */
+    closeOnClick?: boolean;
     /** Whether the dropdown should fit to the anchor width */
     fitToAnchorWidth?: boolean;
     /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
@@ -60,6 +62,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: DefaultPropsType = {
+    closeOnClick: true,
     closeOnClickAway: true,
     closeOnEscape: true,
     fitToAnchorWidth: true,
@@ -77,6 +80,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     anchorRef,
     children,
     className,
+    closeOnClick = DEFAULT_PROPS.closeOnClick,
     closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
     closeOnEscape = DEFAULT_PROPS.closeOnEscape,
     fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
@@ -85,6 +89,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
     isOpen,
     zIndex,
+    onClick,
     onClose,
     onInfiniteScroll,
     ...props
@@ -102,16 +107,24 @@ const Dropdown: React.FC<DropdownProps> = ({
                 ? cloneElement(children, { ...children.props, listElementRef })
                 : children;
 
+        const handleClick: MouseEventHandler = (evt) => {
+            onClick?.(evt);
+            if (closeOnClick) {
+                onClose?.();
+            }
+        };
+
         return (
             <div
                 {...props}
                 className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
                 ref={wrapperRef}
+                onClick={handleClick}
             >
                 <div className={`${CLASSNAME}__content`}>{clonedChildren}</div>
             </div>
         );
-    }, [listElementRef, wrapperRef, children, className, props]);
+    }, [listElementRef, wrapperRef, children, className, onClick, closeOnClick, props]);
 
     // Set the focus on the list when the dropdown opens,
     // in order to enable keyboard controls.

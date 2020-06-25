@@ -109,6 +109,7 @@ const withSelectContext = (
         onInfiniteScroll,
         useCustomColors,
         isEmpty,
+        isMultiple,
         ...forwardedProps
     }: SelectProps,
 ): React.ReactElement => {
@@ -181,6 +182,7 @@ const withSelectContext = (
                 isRequired={isRequired}
             />
             <Dropdown
+                closeOnClick={!isMultiple}
                 closeOnClickAway={true}
                 closeOnEscape={true}
                 placement={Placement.AUTO_START}

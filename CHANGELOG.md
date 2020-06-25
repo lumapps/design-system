@@ -24,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ `Offset` type does not have `vertical` and `horizontal` keys anymore but has `along` and `away` props.
 -   _[BREAKING]_ `Popover` computes position internally and add popover ref internally. Click away and escape are handled inside the popover. The popover can now have an anchor. `popoverRect`, `isVisible` and `popoverRef` props have been removed. `anchorRef`, `placement`, `offset`, `fitToAnchorWidth`, `isOpen`, `closeOnClickAway`, `closeOnEscape`, `onClose` and `hasArrow` props have been added.
 -   _[BREAKING]_ `Tooltip` takes anchor as children and label as prop. `anchorRef` prop has been removed. `label` prop has been added.
--   _[BREAKING]_ For the `Dropdown` component, the prop `closeOnClick` has been renamed `closeOnClickAway`, the prop `isOpen` has been renamed `isOpen`. Also, see `Offset` typing change.
+-   _[BREAKING]_ For the `Dropdown` component, the prop `closeOnClick` now controls whether to close the dropdown when clicking inside it whereas the `closeOnClickAway` prop controls whether to close the dropdown when clicking outside. The prop `showDropdown` has been renamed `isOpen`. Also, see `Offset` typing change.
 -   _[BREAKING]_ For the `Autocomplete` component, the prop `closeOnClick` has been renamed `closeOnClickAway`. Also, see `Offset` typing change.
 
 ### Fixed
@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Remove required prop on `lx-text-field` and `lx-select` input label
 -   Fix calendar display for the `DatePicker`.
 -   Fix on `Tooltip` that would persist even after the mouse has been moved out of the anchor.
+-   `AutocompleteSimple` and `Select` now automatically close when a value is selected.
 
 ## [0.24.3][] - 2020-06-24
 

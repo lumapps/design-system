@@ -25,6 +25,7 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
         "current": null,
       }
     }
+    closeOnClick={false}
     closeOnClickAway={true}
     closeOnEscape={true}
     isOpen={false}
@@ -63,6 +64,7 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
         "current": null,
       }
     }
+    closeOnClick={false}
     closeOnClickAway={true}
     closeOnEscape={true}
     isOpen={false}
