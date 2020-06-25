@@ -160,35 +160,36 @@ const Popover: React.FC<PopoverProps> = (props) => {
 
     useCallbackOnEscape(onClose, isOpen && closeOnEscape);
 
-    const actualPlacement = attributes?.popper?.['data-popper-placement'];
+    const position = attributes?.popper?.['data-popper-placement'] ?? placement;
 
-    return createPortal(
-        <div
-            {...forwardedProps}
-            ref={setPopperElement}
-            className={classNames(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5) }),
-                actualPlacement && `${CLASSNAME}--position-${actualPlacement}`,
-            )}
-            style={popoverStyle}
-            {...attributes.popper}
-        >
-            <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
-                <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
-                    {hasArrow ? (
-                        <>
-                            <div className={`${CLASSNAME}__arrow`} />
-                            <div className={`${CLASSNAME}__inner`}>{children}</div>
-                        </>
-                    ) : (
-                        children
-                    )}
-                </ClickAwayProvider>
-            </div>
-        </div>,
-        document.body,
-    );
+    return isOpen
+        ? createPortal(
+              <div
+                  {...forwardedProps}
+                  ref={setPopperElement}
+                  className={classNames(
+                      className,
+                      handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
+                  )}
+                  style={popoverStyle}
+                  {...attributes.popper}
+              >
+                  <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
+                      <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
+                          {hasArrow ? (
+                              <>
+                                  <div className={`${CLASSNAME}__arrow`} />
+                                  <div className={`${CLASSNAME}__inner`}>{children}</div>
+                              </>
+                          ) : (
+                              children
+                          )}
+                      </ClickAwayProvider>
+                  </div>
+              </div>,
+              document.body,
+          )
+        : null;
 };
 Popover.displayName = COMPONENT_NAME;
 
