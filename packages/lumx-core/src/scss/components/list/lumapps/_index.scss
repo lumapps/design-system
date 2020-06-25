@@ -41,12 +41,30 @@
     &__link--is-selected {
         @include lumx-list-item-selected;
     }
+}
 
-    .#{$lumx-base-prefix}-list--item-padding-big &__link {
+/* Item link
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item__link {
+    .#{$lumx-base-prefix}-list--item-padding-big & {
         @include lumx-list-item-padding('big');
     }
 
-    .#{$lumx-base-prefix}-list--item-padding-huge &__link {
+    .#{$lumx-base-prefix}-list--item-padding-huge & {
+        @include lumx-list-item-padding('huge');
+    }
+}
+
+/* Item wrapper
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-list-item__wrapper {
+    .#{$lumx-base-prefix}-list--item-padding-big & {
+        @include lumx-list-item-padding('big');
+    }
+
+    .#{$lumx-base-prefix}-list--item-padding-huge & {
         @include lumx-list-item-padding('huge');
     }
 }
