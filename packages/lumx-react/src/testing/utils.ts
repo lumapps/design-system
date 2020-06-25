@@ -97,7 +97,7 @@ function expectStoriesToMatchSnapshots(stories: Record<string, any>, component: 
             const actual = shallow(React.createElement(Story))
                 .find(component.displayName as string)
                 .map((parts) => parts.dive());
-            expect(actual).toMatchSnapshot();
+            expect(actual.length === 1 ? actual[0] : actual).toMatchSnapshot();
         });
     }
 }

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ListDivider> Snapshots and structure should render story Default 1`] = `
+<li
+  className="lumx-list-divider"
+/>
+`;
