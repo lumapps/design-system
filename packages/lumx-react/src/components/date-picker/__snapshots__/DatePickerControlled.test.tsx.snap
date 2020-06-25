@@ -110,10 +110,6 @@ exports[`<DatePickerControlled> Snapshots and structure should render correctly 
     >
       <div
         className="lumx-date-picker__day-wrapper"
-        key="-349200"
-      />
-      <div
-        className="lumx-date-picker__day-wrapper"
         key="-262800"
       />
       <div
