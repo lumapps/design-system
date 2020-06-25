@@ -159,7 +159,7 @@ function DropdownController(
                 .off('scroll', _checkScrollEnd)
                 .insertAfter(_toggleEl);
 
-            if (angular.isDefined(lx.closeOnClickAway) && !lx.closeOnClickAway) {
+            if (angular.isDefined(lx.closeOnClick) && !lx.closeOnClick) {
                 _menuEl.off('click keydown', _stopMenuPropagation);
             }
 
@@ -297,7 +297,7 @@ function DropdownController(
 
             _menuEl.on('scroll', _checkScrollEnd);
 
-            if (angular.isDefined(lx.closeOnClickAway) && !lx.closeOnClickAway) {
+            if (angular.isDefined(lx.closeOnClick) && !lx.closeOnClick) {
                 _menuEl.on('click keydown', _stopMenuPropagation);
             }
 
@@ -409,7 +409,7 @@ function DropdownController(
      */
     $scope.$on('lx-dropdown__close', (evt, dropdownId, onOpen, isDocumentKeyDown) => {
         if (dropdownId === lx.uuid && lx.isOpen) {
-            if (onOpen && angular.isDefined(lx.closeOnClickAway) && !lx.closeOnClickAway) {
+            if (onOpen && angular.isDefined(lx.closeOnClick) && !lx.closeOnClick) {
                 return;
             }
 
@@ -481,7 +481,7 @@ function DropdownDirective($timeout) {
         replace: true,
         restrict: 'E',
         scope: {
-            closeOnClickAway: '=?lxCloseOnClick',
+            closeOnClick: '=?lxCloseOnClick',
             escapeClose: '=?lxEscapeClose',
             offset: '@?lxOffset',
             overToggle: '=?lxOverToggle',

@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   `ListItem` component is now able to use a link as HTML element to wrap content.
+-   Click away and escape are handled inside the `Popover` using `closeOnClickAway` and `closeOnEscape` props.
+-   The `Popover` can now have an anchor.
+-   `Popover` now can show an arrow pointing on the anchor using the `hasArrow` prop.
+-   `label` prop has been added to `Tooltip` component.
 
 ### Changed
 
@@ -27,7 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Remove required prop on `lx-text-field` and `lx-select` input label
 -   Fix calendar display for the `DatePicker`.
--   Fix on tooltip that would persist even after the mouse has been moved out of the anchor.
+-   Fix on `Tooltip` that would persist even after the mouse has been moved out of the anchor.
 
 ## [0.24.3][] - 2020-06-24
 
