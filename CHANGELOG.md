@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `ListItem` component is now able to use a link as HTML element to wrap content
+
 ## [0.24.3][] - 2020-06-24
 
 ### Fixed
@@ -21,10 +25,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `Mosaic` component is now correctly displayed on IE11.
 -   Fix missing grey color (in material theme) in the generated SCSS color palette
-
-### Added
-
--   `ListItem` component is now able to use a link as HTML element to wrap content
 
 ## [0.24.0][] - 2020-06-11
 
