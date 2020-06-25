@@ -17,6 +17,7 @@
         "moment-range": "^4.0.2",
         "react": "^16.8.5",
         "react-dom": "^16.8.5",
+        "react-is": "^16.8.5",
         "uuid": "^3.3.2"
     },
     "devDependencies": {
@@ -31,6 +32,7 @@
         "@babel/preset-react": "^7.8.3",
         "@babel/preset-typescript": "^7.8.3",
         "@storybook/addon-a11y": "^5.3.12",
+        "@storybook/addon-actions": "^5.3.19",
         "@storybook/addon-knobs": "^5.3.12",
         "@storybook/addon-viewport": "^5.3.12",
         "@storybook/react": "^5.3.12",
@@ -41,6 +43,7 @@
         "@types/lodash": "^4.14.149",
         "@types/react": "^16.9.11",
         "@types/react-dom": "^16.9.4",
+        "@types/react-is": "^16.7.1",
         "@types/uuid": "^3.4.7",
         "babel-loader": "^8.0.6",
         "babel-plugin-smart-webpack-import": "^1.6.0",

@@ -1,52 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserBlock> Snapshots and structure should render story l 1`] = `
-Array [
+<div
+  className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-l lumx-user-block--theme-light"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-l lumx-user-block--theme-light"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    className="lumx-user-block__avatar"
   >
-    <div
-      className="lumx-user-block__avatar"
+    <Avatar
+      image="http://i.pravatar.cc/128"
+      onClick={[Function]}
+      size="l"
+      tabIndex={0}
+      theme="light"
+    />
+  </div>
+  <div
+    className="lumx-user-block__wrapper"
+  >
+    <span
+      className="lumx-user-block__name"
+      onClick={[Function]}
+      tabIndex={0}
     >
-      <Avatar
-        image="http://i.pravatar.cc/128"
-        onClick={[Function]}
-        size="l"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      Emmitt O. Lum
+    </span>
     <div
-      className="lumx-user-block__wrapper"
+      className="lumx-user-block__fields"
     >
       <span
-        className="lumx-user-block__name"
-        onClick={[Function]}
-        tabIndex={0}
+        className="lumx-user-block__field"
+        key="ubf0"
       >
-        Emmitt O. Lum
+        Creative developer
       </span>
-      <div
-        className="lumx-user-block__fields"
+      <span
+        className="lumx-user-block__field"
+        key="ubf1"
       >
-        <span
-          className="lumx-user-block__field"
-          key="ubf0"
-        >
-          Creative developer
-        </span>
-        <span
-          className="lumx-user-block__field"
-          key="ubf1"
-        >
-          Denpasar
-        </span>
-      </div>
+        Denpasar
+      </span>
     </div>
-  </div>,
-]
+  </div>
+</div>
 `;
 
 exports[`<UserBlock> Snapshots and structure should render story list 1`] = `
@@ -214,141 +212,135 @@ Array [
 `;
 
 exports[`<UserBlock> Snapshots and structure should render story m 1`] = `
-Array [
+<div
+  className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    className="lumx-user-block__avatar"
   >
-    <div
-      className="lumx-user-block__avatar"
+    <Avatar
+      image="http://i.pravatar.cc/72"
+      onClick={[Function]}
+      size="m"
+      tabIndex={0}
+      theme="light"
+    />
+  </div>
+  <div
+    className="lumx-user-block__wrapper"
+  >
+    <span
+      className="lumx-user-block__name"
+      onClick={[Function]}
+      tabIndex={0}
     >
-      <Avatar
-        image="http://i.pravatar.cc/72"
-        onClick={[Function]}
-        size="m"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      Emmitt O. Lum
+    </span>
     <div
-      className="lumx-user-block__wrapper"
+      className="lumx-user-block__fields"
     >
       <span
-        className="lumx-user-block__name"
-        onClick={[Function]}
-        tabIndex={0}
+        className="lumx-user-block__field"
+        key="ubf0"
       >
-        Emmitt O. Lum
+        Creative developer
       </span>
-      <div
-        className="lumx-user-block__fields"
+      <span
+        className="lumx-user-block__field"
+        key="ubf1"
       >
-        <span
-          className="lumx-user-block__field"
-          key="ubf0"
-        >
-          Creative developer
-        </span>
-        <span
-          className="lumx-user-block__field"
-          key="ubf1"
-        >
-          Denpasar
-        </span>
-      </div>
+        Denpasar
+      </span>
     </div>
-  </div>,
-]
+  </div>
+</div>
 `;
 
 exports[`<UserBlock> Snapshots and structure should render story s 1`] = `
-Array [
+<div
+  className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-s lumx-user-block--theme-light"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-s lumx-user-block--theme-light"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    className="lumx-user-block__avatar"
   >
-    <div
-      className="lumx-user-block__avatar"
+    <Avatar
+      image="http://i.pravatar.cc/40"
+      onClick={[Function]}
+      size="s"
+      tabIndex={0}
+      theme="light"
+    />
+  </div>
+  <div
+    className="lumx-user-block__wrapper"
+  >
+    <span
+      className="lumx-user-block__name"
+      onClick={[Function]}
+      tabIndex={0}
     >
-      <Avatar
-        image="http://i.pravatar.cc/40"
-        onClick={[Function]}
-        size="s"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
-    <div
-      className="lumx-user-block__wrapper"
-    >
-      <span
-        className="lumx-user-block__name"
-        onClick={[Function]}
-        tabIndex={0}
-      >
-        Emmitt O. Lum
-      </span>
-    </div>
-  </div>,
-]
+      Emmitt O. Lum
+    </span>
+  </div>
+</div>
 `;
 
 exports[`<UserBlock> Snapshots and structure should render story withBadge 1`] = `
-Array [
+<div
+  className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
   <div
-    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    className="lumx-user-block__avatar"
   >
-    <div
-      className="lumx-user-block__avatar"
+    <Avatar
+      badge={
+        <Badge
+          color="blue"
+        >
+          <Icon
+            icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+          />
+        </Badge>
+      }
+      image="http://i.pravatar.cc/72"
+      onClick={[Function]}
+      size="m"
+      tabIndex={0}
+      theme="light"
+    />
+  </div>
+  <div
+    className="lumx-user-block__wrapper"
+  >
+    <span
+      className="lumx-user-block__name"
+      onClick={[Function]}
+      tabIndex={0}
     >
-      <Avatar
-        badge={
-          <Badge
-            color="blue"
-          >
-            <Icon
-              icon="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
-            />
-          </Badge>
-        }
-        image="http://i.pravatar.cc/72"
-        onClick={[Function]}
-        size="m"
-        tabIndex={0}
-        theme="light"
-      />
-    </div>
+      Emmitt O. Lum
+    </span>
     <div
-      className="lumx-user-block__wrapper"
+      className="lumx-user-block__fields"
     >
       <span
-        className="lumx-user-block__name"
-        onClick={[Function]}
-        tabIndex={0}
+        className="lumx-user-block__field"
+        key="ubf0"
       >
-        Emmitt O. Lum
+        Creative developer
       </span>
-      <div
-        className="lumx-user-block__fields"
+      <span
+        className="lumx-user-block__field"
+        key="ubf1"
       >
-        <span
-          className="lumx-user-block__field"
-          key="ubf0"
-        >
-          Creative developer
-        </span>
-        <span
-          className="lumx-user-block__field"
-          key="ubf1"
-        >
-          Denpasar
-        </span>
-      </div>
+        Denpasar
+      </span>
     </div>
-  </div>,
-]
+  </div>
+</div>
 `;

@@ -1,148 +1,101 @@
-import React from 'react';
+/* tslint:disable:no-console jsx-no-lambda */
+import React, { useRef } from 'react';
 
 import { mdiAccount, mdiOpenInNew } from '@lumx/icons';
-import { Icon, List, ListItem, Size } from '@lumx/react';
+import { Icon, ListDivider, ListSubheader, Size } from '@lumx/react';
+import { action } from '@storybook/addon-actions';
+import { select, text } from '@storybook/addon-knobs';
 
-export default { title: 'LumX components/List' };
+import { List } from './List';
+import { ListItem } from './ListItem';
 
-export const withItemPadding = () => {
+export default { title: 'LumX components/List/List' };
+
+export const KeyboardNavigation = () => {
+    const listRef = useRef<any>();
+    const firstItemRef = useRef<any>();
+
+    const focusList = () => {
+        return listRef.current?.focus();
+    };
+
+    const focusFirsItem = () => {
+        return firstItemRef.current?.focus();
+    };
+
+    const CustomListItem = () => {
+        return <ListItem onItemSelected={action('onItemSelected custom list item')}>Custom list item</ListItem>;
+    };
+
     return (
-        <div className="demo-grid">
-            <List>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
+        <>
+            <button onClick={focusList}>focus list</button>
+            <button onClick={focusFirsItem}>focus first item</button>
+            <List onListItemSelected={action('List onListItemSelected')} listElementRef={listRef}>
+                <ListItem linkRef={firstItemRef} onItemSelected={action('onItemSelected: Clickable item 1')}>
+                    Clickable item 1
                 </ListItem>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
+                <ListDivider />
+                <ListItem linkProps={{ href: '#' }}>Link item 1</ListItem>
+                <>
+                    <ListItem>Non clickable (=non navigable) item</ListItem>
+                    <ListSubheader>Header</ListSubheader>
+                    <ListItem linkProps={{ href: '#' }}>Link item 2</ListItem>
+                    <ListSubheader>Header</ListSubheader>
+                </>
+                <CustomListItem />
+                {[
+                    <ListItem key="1" linkProps={{ href: '#' }}>
+                        Link item 3
+                    </ListItem>,
+                ]}
             </List>
-            <List itemPadding={Size.big}>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
-            </List>
-            <List itemPadding={Size.huge}>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
-            </List>
-        </div>
+            <pre>{`
+                When focused:
+                arrow up/down to move focus on list item
+                tab/shift+tab to move focus on list item AND outside the list
+            `}</pre>
+        </>
     );
 };
 
-export const clickableWithItemPadding = () => {
+export const WithItemPadding = () => {
+    const listItemSize = select('list item size', [Size.tiny, Size.regular, Size.big, Size.huge], Size.big);
+    const listItem = (
+        <ListItem
+            className="lumx-color-background-dark-L6"
+            size={listItemSize}
+            linkProps={{ href: text('link href', '#') }}
+        >
+            <div>Two-line item</div>
+            <div className="lumx-color-font-dark-L2">Secondary text</div>
+        </ListItem>
+    );
     return (
-        <div className="demo-grid">
-            <List isClickable>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
+        <>
+            Default item padding:
+            <List>
+                {listItem}
+                {listItem}
             </List>
-            <List isClickable itemPadding={Size.big}>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
+            Big item padding:
+            <List itemPadding={Size.big}>
+                {listItem}
+                {listItem}
             </List>
-            <List isClickable itemPadding={Size.huge}>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
-                <ListItem className="lumx-color-background-dark-L6" size={Size.big}>
-                    <div>
-                        <span>Two-line item</span>
-                    </div>
-
-                    <div>
-                        <span className="lumx-color-font-dark-L2">Secondary text</span>
-                    </div>
-                </ListItem>
+            Huge item padding:
+            <List itemPadding={Size.huge}>
+                {listItem}
+                {listItem}
             </List>
-        </div>
+        </>
     );
 };
 
 export const asLink = () => {
     return (
         <div className="demo-grid">
-            <List isClickable>
+            <List>
                 <ListItem
                     before={<Icon icon={mdiAccount} />}
                     className="lumx-color-background-dark-L6"
