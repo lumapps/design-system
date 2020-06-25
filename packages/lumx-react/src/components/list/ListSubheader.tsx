@@ -15,11 +15,6 @@ interface ListSubheaderProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ListSubheaderProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ListSubheader`;
@@ -27,12 +22,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListSubheader`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
-
-/**
- * The default value of props.
- */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Component used in List to display some separator / title section.
@@ -48,4 +38,4 @@ const ListSubheader: React.FC<ListSubheaderProps> = ({ children, className, ...f
 };
 ListSubheader.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, ListSubheader, ListSubheaderProps };
+export { CLASSNAME, ListSubheader, ListSubheaderProps };
