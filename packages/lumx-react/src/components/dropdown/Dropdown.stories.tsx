@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Button, Dropdown, List, ListItem, ListSubheader, Placement, Size } from '@lumx/react';
 
-export default { title: 'LumX components/Dropdown' };
+export default { title: 'LumX components/dropdown/Dropdown' };
 
 export const simple = () => {
     const anchorSimpleRef = React.useRef(null);

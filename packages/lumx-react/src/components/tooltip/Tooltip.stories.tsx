@@ -2,9 +2,7 @@ import { Button, Placement, Tooltip } from '@lumx/react';
 import { select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'LumX components/Tooltip' };
-
-export { default as DemoDefault } from './demos/default';
+export default { title: 'LumX components/tooltip/Tooltip' };
 
 export const ForceOpen = () => {
     return (

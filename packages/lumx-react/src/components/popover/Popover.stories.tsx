@@ -1,9 +1,10 @@
 import React from 'react';
 
 import { Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, select } from '@storybook/addon-knobs';
+import { DEFAULT_PROPS } from './Popover';
 
-export default { title: 'LumX components/Popover' };
+export default { title: 'LumX components/popover/Popover' };
 
 export const positions = ({ theme }: any) => {
     const demoPopperStyle = {
@@ -26,7 +27,8 @@ export const positions = ({ theme }: any) => {
     const bottomAnchorRef = React.useRef(null);
     const leftAnchorRef = React.useRef(null);
 
-    const hasArrow = boolean('hasArrow', false);
+    const hasArrow = boolean('hasArrow', DEFAULT_PROPS.hasArrow as any);
+    const elevation: any = select('elevation', [5, 4, 3, 2, 1], DEFAULT_PROPS.elevation);
 
     return (
         <FlexBox
@@ -39,7 +41,14 @@ export const positions = ({ theme }: any) => {
                         TOP
                     </Chip>
                 </div>
-                <Popover theme={theme} anchorRef={topAnchorRef} placement={Placement.TOP} isOpen hasArrow={hasArrow}>
+                <Popover
+                    theme={theme}
+                    anchorRef={topAnchorRef}
+                    placement={Placement.TOP}
+                    isOpen
+                    hasArrow={hasArrow}
+                    elevation={elevation}
+                >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -56,6 +65,7 @@ export const positions = ({ theme }: any) => {
                     placement={Placement.RIGHT}
                     isOpen
                     hasArrow={hasArrow}
+                    elevation={elevation}
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
@@ -75,6 +85,7 @@ export const positions = ({ theme }: any) => {
                     placement={Placement.BOTTOM}
                     isOpen
                     hasArrow={hasArrow}
+                    elevation={elevation}
                 >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
@@ -88,7 +99,14 @@ export const positions = ({ theme }: any) => {
                         LEFT
                     </Chip>
                 </div>
-                <Popover theme={theme} anchorRef={leftAnchorRef} placement={Placement.LEFT} isOpen hasArrow={hasArrow}>
+                <Popover
+                    theme={theme}
+                    anchorRef={leftAnchorRef}
+                    placement={Placement.LEFT}
+                    isOpen
+                    hasArrow={hasArrow}
+                    elevation={elevation}
+                >
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>

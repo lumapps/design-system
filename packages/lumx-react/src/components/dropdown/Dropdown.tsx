@@ -44,11 +44,6 @@ interface DropdownProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<DropdownProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Dropdown`;
@@ -61,7 +56,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<DropdownProps> = {
     closeOnClick: true,
     closeOnClickAway: true,
     closeOnEscape: true,
@@ -74,26 +69,28 @@ const DEFAULT_PROPS: DefaultPropsType = {
 /**
  * Displays a dropdown.
  *
+ * @param  props The component props.
  * @return The component.
  */
-const Dropdown: React.FC<DropdownProps> = ({
-    anchorRef,
-    children,
-    className,
-    closeOnClick = DEFAULT_PROPS.closeOnClick,
-    closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
-    closeOnEscape = DEFAULT_PROPS.closeOnEscape,
-    fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
-    offset,
-    placement = DEFAULT_PROPS.placement,
-    shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
-    isOpen,
-    zIndex,
-    onClick,
-    onClose,
-    onInfiniteScroll,
-    ...props
-}: DropdownProps): React.ReactElement | null => {
+const Dropdown: React.FC<DropdownProps> = (props) => {
+    const {
+        anchorRef,
+        children,
+        className,
+        closeOnClick = DEFAULT_PROPS.closeOnClick,
+        closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
+        closeOnEscape = DEFAULT_PROPS.closeOnEscape,
+        fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
+        offset,
+        placement = DEFAULT_PROPS.placement,
+        shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
+        isOpen,
+        zIndex,
+        onClick,
+        onClose,
+        onInfiniteScroll,
+        ...forwardedProps
+    } = props;
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [listElement, setListElement] = useState<HTMLUListElement>();
 
@@ -116,7 +113,7 @@ const Dropdown: React.FC<DropdownProps> = ({
 
         return (
             <div
-                {...props}
+                {...forwardedProps}
                 className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
                 ref={wrapperRef}
                 onClick={handleClick}
