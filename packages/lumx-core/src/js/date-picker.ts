@@ -37,26 +37,13 @@ function getWeekDays(locale: string): Moment[] {
  * @return The list of days in a week based on locale.
  */
 function getMonthCalendar(locale: string, selectedMonth?: Moment): Moment[] {
-    const firstDay = moment(selectedMonth)
-        .locale(locale)
-        .startOf('month');
-    const endDay = moment(selectedMonth)
-        .locale(locale)
-        .endOf('month');
+    const firstDayOfMonth = moment(selectedMonth).startOf('month');
+    const endDayOfMonth = moment(selectedMonth).endOf('month');
+    // The first day of the week depends on the locale used. In FR the first day is a monday but in EN the first day is sunday
+    const firstDay = firstDayOfMonth.locale(locale).startOf('week');
+    const monthRange = moment.range(firstDay.toDate(), endDayOfMonth.toDate());
 
-    const monthRange = moment.range(firstDay, endDay);
-
-    const weeks = Array.from(monthRange.by('week'));
-
-    const calendar = [];
-    for (const week of weeks) {
-        const firstWeekDay = moment(week).startOf('week');
-        const lastWeekDay = moment(week).endOf('week');
-        const weekRange = moment.range(firstWeekDay, lastWeekDay);
-        calendar.push(...Array.from(weekRange.by('day')));
-    }
-
-    return calendar;
+    return Array.from(monthRange.by('day'));
 }
 
 /**

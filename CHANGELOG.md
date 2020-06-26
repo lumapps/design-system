@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Remove required prop on `lx-text-field` and `lx-select` input label
+-   Fix calendar display for the `DatePicker`.
 
 ## [0.24.3][] - 2020-06-24
 
