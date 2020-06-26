@@ -65,7 +65,7 @@ const List: React.FC<ListProps> & List = (props) => {
     const {
         className,
         isClickable,
-        itemPadding = Size.big,
+        itemPadding,
         listElementRef,
         onListItemSelected,
         useCustomColors,
