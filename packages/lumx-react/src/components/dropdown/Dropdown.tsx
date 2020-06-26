@@ -1,8 +1,8 @@
-import React, { MouseEventHandler, cloneElement, useMemo, useRef } from 'react';
+import React, { MouseEventHandler, cloneElement, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
-import { List } from '@lumx/react/components/list/List';
+import { List, ListProps } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useFocus } from '@lumx/react/hooks/useFocus';
@@ -94,8 +94,8 @@ const Dropdown: React.FC<DropdownProps> = ({
     onInfiniteScroll,
     ...props
 }: DropdownProps): React.ReactElement | null => {
-    const wrapperRef: React.RefObject<HTMLDivElement> = useRef(null);
-    const listElementRef: React.RefObject<HTMLUListElement> = useRef(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
+    const [listElement, setListElement] = useState<HTMLUListElement>();
 
     if (onInfiniteScroll) {
         useInfiniteScroll(wrapperRef, onInfiniteScroll);
@@ -104,7 +104,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     const popperElement: React.ReactElement = useMemo(() => {
         const clonedChildren =
             !Array.isArray(children) && isComponent(List)(children)
-                ? cloneElement(children, { ...children.props, listElementRef })
+                ? cloneElement<ListProps>(children, { ...children.props, listElementRef: setListElement })
                 : children;
 
         const handleClick: MouseEventHandler = (evt) => {
@@ -124,11 +124,11 @@ const Dropdown: React.FC<DropdownProps> = ({
                 <div className={`${CLASSNAME}__content`}>{clonedChildren}</div>
             </div>
         );
-    }, [listElementRef, wrapperRef, children, className, onClick, closeOnClick, props]);
+    }, [setListElement, wrapperRef, children, className, onClick, closeOnClick, props]);
 
     // Set the focus on the list when the dropdown opens,
     // in order to enable keyboard controls.
-    useFocus(listElementRef.current, shouldFocusOnOpen);
+    useFocus(listElement, isOpen && shouldFocusOnOpen);
 
     return isOpen ? (
         <Popover
