@@ -4,26 +4,9 @@ import React, { ReactElement } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import { Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { CLASSNAME, Dropdown, DropdownProps } from './Dropdown';
-
-/**
- * Define the overriding properties waited by the `setup` function.
- */
-type SetupProps = Partial<DropdownProps>;
-
-/**
- * Defines what the `setup` function will return.
- */
-interface Setup extends CommonSetup {
-    props: SetupProps;
-
-    /**
-     * The <div> element that holds the dropdown content.
-     */
-    dropdown: Wrapper;
-}
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
@@ -33,7 +16,7 @@ interface Setup extends CommonSetup {
  * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
  *                       component.
  */
-const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+const setup = ({ ...propsOverrides }: Partial<DropdownProps> = {}, shallowRendering: boolean = true) => {
     const anchorRef = React.createRef<HTMLButtonElement>();
     const props: DropdownProps = {
         // tslint:disable-next-line no-unused
@@ -47,8 +30,6 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
 
     const wrapper: Wrapper = renderer(<Dropdown {...props} />);
     return {
-        dropdown: wrapper.find('div').first(),
-
         props,
         wrapper,
     };
@@ -58,20 +39,9 @@ describe(`<${Dropdown.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render correctly', () => {
-            const { dropdown, wrapper } = setup();
+            const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
-
-            expect(dropdown).toExist();
-            expect(dropdown).toHaveClassName(CLASSNAME);
-        });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        it('should use default props', () => {
-            const { dropdown }: Setup = setup();
-
-            expect(dropdown).toHaveClassName(CLASSNAME);
+            expect(wrapper).toHaveClassName(CLASSNAME);
         });
     });
 
@@ -132,5 +102,5 @@ describe(`<${Dropdown.displayName}>`, () => {
     });
 
     // Common tests suite.
-    commonTestsSuite(setup, { className: 'dropdown', prop: 'dropdown' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
 });

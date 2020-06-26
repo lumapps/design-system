@@ -53,7 +53,7 @@ type Elevation = 1 | 2 | 3 | 4 | 5;
 /**
  * The offset from the target in case of arrow.
  */
-const ARROW_OFFSET = 8;
+const OFFSET = 8;
 
 /**
  * Defines the props of the component.
@@ -76,6 +76,8 @@ interface PopoverProps extends GenericProps {
     zIndex?: number;
     /** Whether the dropdown should fit to the anchor width */
     fitToAnchorWidth?: boolean;
+    /** Shrink popover if even after flipping there is not enough space */
+    fitWithinViewportHeight?: boolean;
     /** Whether a click anywhere out of the popover would close it. */
     closeOnClickAway?: boolean;
     /** Whether an escape key press would close the popover. */
@@ -104,9 +106,23 @@ const DEFAULT_PROPS: Partial<PopoverProps> = {
     placement: Placement.AUTO,
     zIndex: 9999,
     fitToAnchorWidth: false,
+    fitWithinViewportHeight: false,
     closeOnClickAway: false,
     closeOnEscape: false,
     hasArrow: false,
+};
+
+const sameWidth = {
+    name: 'sameWidth',
+    enabled: true,
+    phase: 'beforeWrite',
+    requires: ['computeStyles'],
+    fn({ state }: any) {
+        state.styles.popper.width = `${state.rects.reference.width}px`;
+    },
+    effect({ state }: any) {
+        state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`;
+    },
 };
 
 /**
@@ -122,6 +138,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
         isOpen,
         children,
         fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
+        fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
         offset,
         elevation = DEFAULT_PROPS.elevation,
         zIndex = DEFAULT_PROPS.zIndex,
@@ -133,34 +150,46 @@ const Popover: React.FC<PopoverProps> = (props) => {
         ...forwardedProps
     } = props;
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
-    const wrapperRef = useRef(null);
-    const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? ARROW_OFFSET : 0)];
-    const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
-        placement,
-        modifiers: [
-            {
-                name: 'offset',
-                options: { offset: actualOffset },
-            },
-        ],
+    const wrapperRef = useRef<HTMLDivElement>(null);
+
+    const modifiers: any = [];
+    const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? OFFSET : 0)];
+    modifiers.push({
+        name: 'offset',
+        options: { offset: actualOffset },
     });
 
+    if (fitToAnchorWidth) {
+        modifiers.push(sameWidth);
+    }
+
+    const { styles, attributes, state } = usePopper(anchorRef.current, popperElement, {
+        placement,
+        modifiers,
+    });
+
+    const position = state?.placement ?? placement;
+    const anchorRect = state?.rects?.reference;
+
     const popoverStyle = useMemo(() => {
-        if (!fitToAnchorWidth || !anchorRef.current) {
-            return { ...styles.popper, zIndex };
+        const newStyles = { ...styles.popper, zIndex };
+
+        if (!anchorRect) {
+            return newStyles;
         }
 
-        const boundingAnchor = anchorRef.current.getBoundingClientRect();
-        return {
-            ...styles.popper,
-            zIndex,
-            width: boundingAnchor.width,
-        };
-    }, [fitToAnchorWidth, anchorRef, styles]);
+        if (fitWithinViewportHeight) {
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            newStyles.maxHeight =
+                windowHeight -
+                (position === Placement.BOTTOM ? anchorRect.y + anchorRect.height : anchorRect.height) -
+                OFFSET;
+        }
+
+        return newStyles;
+    }, [zIndex, styles.popper, anchorRect]);
 
     useCallbackOnEscape(onClose, isOpen && closeOnEscape);
-
-    const position = attributes?.popper?.['data-popper-placement'] ?? placement;
 
     return isOpen
         ? createPortal(

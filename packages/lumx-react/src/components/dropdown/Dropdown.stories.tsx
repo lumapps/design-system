@@ -6,10 +6,11 @@ export default { title: 'LumX components/dropdown/Dropdown' };
 
 export const simple = () => {
     const anchorSimpleRef = React.useRef(null);
-    const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
-
     const anchorComplexRef = React.useRef(null);
+
+    const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
     const [isComplexOpen, setComplexIsOpen] = React.useState(false);
+
     const toggleSimpleMenu = () => setSimpleIsOpen(!isSimpleOpen);
     const closeSimpleMenu = () => setSimpleIsOpen(false);
     const toggleComplexMenu = () => setComplexIsOpen(!isComplexOpen);
@@ -38,7 +39,7 @@ export const simple = () => {
                 closeOnEscape
                 isOpen={isSimpleOpen}
                 onClose={closeSimpleMenu}
-                placement={Placement.AUTO_START}
+                placement={Placement.BOTTOM}
                 anchorRef={anchorSimpleRef}
             >
                 <List isClickable>
@@ -73,8 +74,7 @@ export const simple = () => {
                 closeOnClickAway={false}
                 closeOnEscape={false}
                 isOpen={isComplexOpen}
-                offset={{ along: 20 }}
-                placement={Placement.AUTO_START}
+                placement={Placement.BOTTOM}
                 anchorRef={anchorComplexRef}
             >
                 <List isClickable>

@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   The `Popover` can now have an anchor.
 -   `Popover` now can show an arrow pointing on the anchor using the `hasArrow` prop.
 -   `label` prop has been added to `Tooltip` component.
+-   `fitWithinViewportHeight` props has been added to `Popover` component (`false` by default, set to `true` for `Dropdown`). It shrink the popover if there is not enough space even after flipping.
 
 ### Changed
 

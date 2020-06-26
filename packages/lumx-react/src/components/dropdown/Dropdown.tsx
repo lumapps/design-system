@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, cloneElement, useMemo, useRef, useState } from 'react';
+import React, { cloneElement, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -86,7 +86,6 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
         isOpen,
         zIndex,
-        onClick,
         onClose,
         onInfiniteScroll,
         ...forwardedProps
@@ -98,30 +97,22 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         useInfiniteScroll(wrapperRef, onInfiniteScroll);
     }
 
-    const popperElement: React.ReactElement = useMemo(() => {
-        const clonedChildren =
-            !Array.isArray(children) && isComponent(List)(children)
-                ? cloneElement<ListProps>(children, { ...children.props, listElementRef: setListElement })
-                : children;
+    const popperElement = useMemo(() => {
+        return !Array.isArray(children) && isComponent(List)(children)
+            ? cloneElement<ListProps>(children, {
+                  ...children.props,
+                  listElementRef: setListElement,
+                  onClick(evt: MouseEvent) {
+                      children.props.onClick?.(evt);
 
-        const handleClick: MouseEventHandler = (evt) => {
-            onClick?.(evt);
-            if (closeOnClick) {
-                onClose?.();
-            }
-        };
-
-        return (
-            <div
-                {...forwardedProps}
-                className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
-                ref={wrapperRef}
-                onClick={handleClick}
-            >
-                <div className={`${CLASSNAME}__content`}>{clonedChildren}</div>
-            </div>
-        );
-    }, [setListElement, wrapperRef, children, className, onClick, closeOnClick, props]);
+                      if (closeOnClick) {
+                          onClose?.();
+                      }
+                  },
+                  isClickable: true,
+              })
+            : children;
+    }, [setListElement, wrapperRef, children, className, closeOnClick, props]);
 
     // Set the focus on the list when the dropdown opens,
     // in order to enable keyboard controls.
@@ -129,11 +120,14 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
 
     return isOpen ? (
         <Popover
+            {...forwardedProps}
+            className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
             anchorRef={anchorRef}
             placement={placement}
             offset={offset}
             zIndex={zIndex}
             fitToAnchorWidth={fitToAnchorWidth}
+            fitWithinViewportHeight
             isOpen={isOpen}
             onClose={onClose}
             closeOnClickAway={closeOnClickAway}
