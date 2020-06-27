@@ -18,8 +18,33 @@ export const simpleButton = ({ theme }: any) => {
             isSelected={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
             color={select('color', ColorPalette, DEFAULT_PROPS.color)}
             hasBackground={boolean('hasBackground', Boolean(DEFAULT_PROPS.hasBackground))}
+            isLoading={boolean('isLoading', false)}
         >
             {text('Button content', 'Simple button')}
         </Button>
+    );
+};
+
+export const isLoading = ({ theme }: any) => {
+    const commonProps = {
+        ...DEFAULT_PROPS,
+        theme,
+        isLoading: true,
+    };
+
+    return (
+        <>
+            <Button {...commonProps} emphasis={Emphasis.high}>
+                {text('High Button content', 'High emphasis')}
+            </Button>
+            <br />
+            <Button {...commonProps} emphasis={Emphasis.low}>
+                {text('Low Button content', 'Low emphasis')}
+            </Button>
+            <br />
+            <Button {...commonProps} emphasis={Emphasis.medium}>
+                {text('Medium Button content', 'Medium emphasis')}
+            </Button>
+        </>
     );
 };

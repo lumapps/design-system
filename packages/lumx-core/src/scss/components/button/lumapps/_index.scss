@@ -11,6 +11,26 @@
         top: -$lumx-spacing-unit / 2;
         right: -$lumx-spacing-unit / 2;
     }
+
+    &--is-loading {
+        .#{$lumx-base-prefix}-progress .#{$lumx-base-prefix}-progress-linear {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .#{$lumx-base-prefix}-progress--theme-light .#{$lumx-base-prefix}-progress-linear__line1,
+        .#{$lumx-base-prefix}-progress--theme-light .#{$lumx-base-prefix}-progress-linear__line2 {
+            background-color: lumx-color-variant('light', 'L5');
+        }
+
+        .#{$lumx-base-prefix}-progress--theme-dark .#{$lumx-base-prefix}-progress-linear__line1,
+        .#{$lumx-base-prefix}-progress--theme-dark .#{$lumx-base-prefix}-progress-linear__line2 {
+            background-color: lumx-color-variant('dark', 'L5');
+        }
+    }
 }
 
 /* Button sizes

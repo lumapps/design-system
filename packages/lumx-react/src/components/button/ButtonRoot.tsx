@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { Progress, ProgressVariant } from '../progress/Progress';
 
 /**
  * The authorized values for the `size` prop.
@@ -63,6 +64,11 @@ interface BaseButtonProps extends GenericProps {
      * Whether custom colors are applied to this component.
      */
     useCustomColors?: boolean;
+
+    /**
+     * If the button is loading? It also disable the component
+     */
+    isLoading?: boolean;
 }
 
 interface ButtonRootProps extends BaseButtonProps {
@@ -79,6 +85,8 @@ const BUTTON_CLASSNAME = `${CSS_PREFIX}-button`;
 
 /**
  * Render a button wrapper with the ButtonRoot inside.
+ * @param props Button props
+ * @return The component wrapped
  */
 const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     const { color, emphasis, variant } = props;
@@ -125,6 +133,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         theme,
         useCustomColors,
         variant,
+        isLoading,
         ...forwardedProps
     } = props;
 
@@ -148,20 +157,33 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
             size,
             theme: emphasis === Emphasis.high && theme,
             variant,
+            isLoading,
         }),
         { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
+    );
+
+    const content = (
+        <>
+            {children}
+            {isLoading && <Progress theme={theme} variant={ProgressVariant.linear} useCustomColors />}
+        </>
     );
 
     if (!isEmpty(props.href)) {
         return (
             <a {...forwardedProps} ref={buttonRef as RefObject<HTMLAnchorElement>} className={buttonClassName}>
-                {children}
+                {content}
             </a>
         );
     }
     return (
-        <button {...forwardedProps} ref={buttonRef as RefObject<HTMLButtonElement>} className={buttonClassName}>
-            {children}
+        <button
+            disabled={isLoading}
+            {...forwardedProps}
+            ref={buttonRef as RefObject<HTMLButtonElement>}
+            className={buttonClassName}
+        >
+            {content}
         </button>
     );
 };
