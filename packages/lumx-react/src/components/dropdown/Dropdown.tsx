@@ -90,11 +90,11 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         onInfiniteScroll,
         ...forwardedProps
     } = props;
-    const wrapperRef = useRef<HTMLDivElement>(null);
+    const popoverRef = useRef<HTMLDivElement>(null);
     const [listElement, setListElement] = useState<HTMLUListElement>();
 
     if (onInfiniteScroll) {
-        useInfiniteScroll(wrapperRef, onInfiniteScroll);
+        useInfiniteScroll(popoverRef, onInfiniteScroll);
     }
 
     const popperElement = useMemo(() => {
@@ -112,7 +112,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                   isClickable: true,
               })
             : children;
-    }, [setListElement, wrapperRef, children, className, closeOnClick, props]);
+    }, [setListElement, popoverRef, children, className, closeOnClick, props]);
 
     // Set the focus on the list when the dropdown opens,
     // in order to enable keyboard controls.
@@ -123,6 +123,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
             {...forwardedProps}
             className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
             anchorRef={anchorRef}
+            popoverRef={popoverRef}
             placement={placement}
             offset={offset}
             zIndex={zIndex}

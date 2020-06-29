@@ -9,6 +9,7 @@ import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Different possible placements for the popover.
@@ -65,7 +66,8 @@ interface PopoverProps extends GenericProps {
     children: ReactNode;
     /** Whether the popover is open */
     isOpen: boolean;
-
+    /** The reference of the popover. */
+    popoverRef?: React.RefObject<HTMLDivElement>;
     /** The desired placement */
     placement?: Placement;
     /** The desired offset */
@@ -134,6 +136,7 @@ const sameWidth = {
 const Popover: React.FC<PopoverProps> = (props) => {
     const {
         anchorRef,
+        popoverRef,
         placement,
         isOpen,
         children,
@@ -169,7 +172,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
     });
 
     const position = state?.placement ?? placement;
-    const anchorRect = state?.rects?.reference;
+    const anchorRect = state?.rects?.reference ?? anchorRef.current?.getBoundingClientRect();
 
     const popoverStyle = useMemo(() => {
         const newStyles = { ...styles.popper, zIndex };
@@ -182,12 +185,12 @@ const Popover: React.FC<PopoverProps> = (props) => {
             const windowHeight = window.innerHeight || document.documentElement.clientHeight;
             newStyles.maxHeight =
                 windowHeight -
-                (position === Placement.BOTTOM ? anchorRect.y + anchorRect.height : anchorRect.height) -
+                (position?.startsWith(Placement.BOTTOM) ? anchorRect.y + anchorRect.height : anchorRect.height) -
                 OFFSET;
         }
 
         return newStyles;
-    }, [zIndex, styles.popper, anchorRect]);
+    }, [zIndex, styles.popper.transform, anchorRect?.y, anchorRect?.height]);
 
     useCallbackOnEscape(onClose, isOpen && closeOnEscape);
 
@@ -195,7 +198,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
         ? createPortal(
               <div
                   {...forwardedProps}
-                  ref={setPopperElement}
+                  ref={mergeRefs(setPopperElement, popoverRef)}
                   className={classNames(
                       className,
                       handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
@@ -203,7 +206,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
                   style={popoverStyle}
                   {...attributes.popper}
               >
-                  <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
+                  <div className={`${CLASSNAME}__wrapper`}>
                       <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
                           {hasArrow ? (
                               <>

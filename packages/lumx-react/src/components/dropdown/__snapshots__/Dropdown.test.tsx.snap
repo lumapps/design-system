@@ -14,6 +14,11 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
   fitWithinViewportHeight={true}
   isOpen={true}
   placement="auto-start"
+  popoverRef={
+    Object {
+      "current": null,
+    }
+  }
 >
   <div>
     This is the content of the dropdown

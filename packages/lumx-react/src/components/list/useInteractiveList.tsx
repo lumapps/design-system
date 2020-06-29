@@ -141,7 +141,6 @@ export const useInteractiveList: useInteractiveList = (options) => {
          * @param evt Focus out event
          */
         const onFocusOut = (evt: FocusEvent) => {
-            console.debug('onFocusOut', evt.relatedTarget, listElement.contains(evt.relatedTarget as any));
             if (!evt.relatedTarget || !listElement.contains(evt.relatedTarget as any)) {
                 resetActiveIndex();
             }
@@ -179,8 +178,7 @@ export const useInteractiveList: useInteractiveList = (options) => {
                     item.props.onItemSelected?.();
                     onListItemSelected?.(index, item.key);
                 },
-                ...onKeyboardFocus(item.props, (evt) => {
-                    console.debug('evt', evt);
+                ...onKeyboardFocus(item.props, () => {
                     setActiveItemIndex(index);
                 }),
             });

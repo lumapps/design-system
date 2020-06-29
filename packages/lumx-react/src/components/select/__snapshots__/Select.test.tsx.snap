@@ -30,7 +30,7 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
     closeOnEscape={true}
     isOpen={false}
     onClose={[Function]}
-    placement="auto-start"
+    placement="bottom-start"
   >
     <span>
       Select Component
