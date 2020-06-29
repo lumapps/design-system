@@ -1,11 +1,11 @@
-import React, { ReactElement, ReactNode, useEffect, useRef } from 'react';
+import React, { ReactElement, ReactNode, Ref, useMemo } from 'react';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { Size, Theme } from '@lumx/react';
+import { ListProps, Size } from '@lumx/react';
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
 
 /**
@@ -34,9 +34,6 @@ interface ListItemProps extends GenericProps {
     /** List item content. */
     children: string | ReactNode;
 
-    /** Whether the list item is active. */
-    isActive?: boolean;
-
     /** Whether the list item should be highlighted. */
     isHighlighted?: boolean;
 
@@ -46,20 +43,18 @@ interface ListItemProps extends GenericProps {
     /** List item size. */
     size?: ListItemSizes;
 
-    /** Theme. */
-    theme?: Theme;
+    /** List item reference. */
+    listItemRef?: Ref<HTMLLIElement>;
 
     /** props that will be passed on to the Link */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
+    /** Link element reference (use with {@link linkProps} prop). */
+    linkRef?: Ref<HTMLAnchorElement>;
+
     /** Callback used to retrieved the selected entry. */
     onItemSelected?(): void;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ListItemProps> {}
 
 /**
  * The display name of the component.
@@ -69,68 +64,45 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListItem`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    isActive: false,
-    isHighlighted: false,
-    isSelected: false,
+const DEFAULT_PROPS: Partial<ListProps> = {
     size: Size.regular,
-    theme: Theme.light,
 };
+
+/**
+ * Check if the list item is clickable.
+ * @return `true` if the list item is clickable; `false` otherwise.
+ */
+function isClickable({ linkProps, onItemSelected }: ListItemProps): boolean {
+    return !isEmpty(linkProps?.href) || !!onItemSelected;
+}
 
 /**
  * Component used in List element.
  *
+ * @param  props The component props.
  * @return The component.
  */
-const ListItem: React.FC<ListItemProps> = ({
-    after,
-    children,
-    className,
-    isHighlighted,
-    isSelected = DEFAULT_PROPS.isSelected,
-    isActive = DEFAULT_PROPS.isActive,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
-    onItemSelected,
-    before,
-    linkProps = {},
-    ...forwardedProps
-}) => {
-    const linkElement = useRef<HTMLAnchorElement | null>(null);
-    const isClickable = (linkProps && !isEmpty(linkProps?.href)) || onItemSelected;
-
-    useEffect(() => {
-        if (linkElement && linkElement.current && isActive) {
-            linkElement.current.focus();
-        }
-    }, [isActive]);
-
-    /**
-     * Prevent the focus event to be trigger on the parent.
-     *
-     * @param evt Focus event
-     */
-    const preventParentFocus = (evt: React.FocusEvent) => {
-        evt.preventDefault();
-        evt.stopPropagation();
-    };
-
-    /**
-     * Currying the on enter press behavior.
-     *
-     * @return Returns either undefined or a callback
-     */
-    const onKeyDown = () => {
-        if (onItemSelected) {
-            return onEnterPressed(onItemSelected);
-        }
-        return;
-    };
+const ListItem: React.FC<ListItemProps> = (props) => {
+    const {
+        after,
+        children,
+        className,
+        isHighlighted,
+        isSelected,
+        size = DEFAULT_PROPS.size,
+        onItemSelected,
+        before,
+        linkProps = {},
+        linkRef,
+        listItemRef,
+        ...forwardedProps
+    } = props;
+    const onKeyDown = useMemo(() => (onItemSelected ? onEnterPressed(onItemSelected) : undefined), [onItemSelected]);
 
     const content = (
         <>
@@ -143,18 +115,19 @@ const ListItem: React.FC<ListItemProps> = ({
     return (
         <li
             {...forwardedProps}
+            ref={listItemRef}
             className={classNames(
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
                     size,
-                    theme,
                 }),
             )}
-            onFocusCapture={preventParentFocus}
         >
-            {isClickable ? (
+            {isClickable(props) ? (
+                /* Clickable list item */
                 <a
+                    {...linkProps}
                     className={classNames(
                         handleBasicClasses({
                             prefix: `${CLASSNAME}__link`,
@@ -163,15 +136,15 @@ const ListItem: React.FC<ListItemProps> = ({
                         }),
                     )}
                     onClick={onItemSelected}
-                    onKeyDown={onKeyDown()}
-                    ref={linkElement}
+                    onKeyDown={onKeyDown}
+                    ref={linkRef}
                     role={onItemSelected ? 'button' : undefined}
                     tabIndex={0}
-                    {...linkProps}
                 >
                     {content}
                 </a>
             ) : (
+                /* Non clickable list item */
                 <div className={`${CLASSNAME}__wrapper`}>{content}</div>
             )}
         </li>
@@ -179,4 +152,4 @@ const ListItem: React.FC<ListItemProps> = ({
 };
 ListItem.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize, ListItemSizes };
+export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize, ListItemSizes, isClickable };

@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   `ListItem` component is now able to use a link as HTML element to wrap content
+-   `ListItem` component is now able to use a link as HTML element to wrap content.
+
+### Changed
+
+-   `List` no longer requires to have the `isClickable` prop set to have the correct styling on clickable list item.
+-   `List` keyboard navigation now correctly skips non clickable list items.
 
 ### Fixed
 

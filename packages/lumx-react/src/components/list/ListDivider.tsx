@@ -12,11 +12,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 interface ListDividerProps extends GenericProps {}
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ListDividerProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ListDivider`;
@@ -24,12 +19,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListDivider`;
 /**
  * The default class name and classes prefix for this component.
  */
-const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
-
-/**
- * The default value of props.
- */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
 /**
  * Renders a thin line that will acts as a divider in List
@@ -41,4 +31,4 @@ const ListDivider: React.FC<ListDividerProps> = ({ className, ...forwardedProps 
 };
 ListDivider.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, ListDivider, ListDividerProps };
+export { CLASSNAME, ListDivider, ListDividerProps };
