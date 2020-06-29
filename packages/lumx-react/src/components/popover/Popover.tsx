@@ -1,12 +1,15 @@
-import React, { CSSProperties, ReactChild } from 'react';
+import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { usePopper } from 'react-popper';
 
 import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
+import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
-import { useComputePosition, useComputePositionType } from '@lumx/react/hooks/useComputePosition';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 
 /**
  * Different possible placements for the popover.
@@ -34,53 +37,58 @@ enum Placement {
 }
 
 /**
- * Vertical and horizontal offset of the popover.
+ * Offset of the popover.
  */
 interface Offset {
-    vertical?: number;
-    horizontal?: number;
+    /** Offset size along the reference. */
+    along?: number;
+    /** Offset size away from the reference. */
+    away?: number;
 }
 
 /**
- * Position for arrow or tooltip.
+ * Popover elevation index.
  */
-interface ElementPosition {
-    x: number;
-    y: number;
-    width?: number;
-    height?: number;
-    maxHeight?: number;
-    maxWidth?: number;
-    minHeight?: number;
-    minWidth?: number;
-    anchorHeight?: number;
-    anchorWidth?: number;
-}
+type Elevation = 1 | 2 | 3 | 4 | 5;
+
+/**
+ * The offset from the target in case of arrow.
+ */
+const OFFSET = 8;
 
 /**
  * Defines the props of the component.
  */
 interface PopoverProps extends GenericProps {
-    /** The position the popover should be bounded to. */
-    popoverRect: ElementPosition;
-    /** Should the popper be displayed. */
-    isVisible: boolean;
-    /** The reference forwarded to the popover container. */
-    popoverRef: React.RefObject<HTMLDivElement>;
+    /** The reference of the anchor. */
+    anchorRef: React.RefObject<HTMLElement>;
     /** Children element displayed inside popover. */
-    children: ReactChild;
+    children: ReactNode;
+    /** Whether the popover is open */
+    isOpen: boolean;
+    /** The reference of the popover. */
+    popoverRef?: React.RefObject<HTMLDivElement>;
+    /** The desired placement */
+    placement?: Placement;
+    /** The desired offset */
+    offset?: Offset;
     /** How high the component is flying */
-    elevation?: number;
-    /** The classname to apply to the Popover wrapper */
-    className?: string;
+    elevation?: Elevation;
     /** The z-axis position. */
     zIndex?: number;
+    /** Whether the dropdown should fit to the anchor width */
+    fitToAnchorWidth?: boolean;
+    /** Shrink popover if even after flipping there is not enough space */
+    fitWithinViewportHeight?: boolean;
+    /** Whether a click anywhere out of the popover would close it. */
+    closeOnClickAway?: boolean;
+    /** Whether an escape key press would close the popover. */
+    closeOnEscape?: boolean;
+    /** Whether we put an arrow or not. */
+    hasArrow?: boolean;
+    /** The function to be called when the user clicks away or Escape is pressed */
+    onClose?: VoidFunction;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<PopoverProps> {}
 
 /**
  * The display name of the component.
@@ -95,67 +103,126 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    className: '',
+const DEFAULT_PROPS: Partial<PopoverProps> = {
     elevation: 3,
-    placement: Placement.TOP,
+    placement: Placement.AUTO,
     zIndex: 9999,
+    fitToAnchorWidth: false,
+    fitWithinViewportHeight: false,
+    closeOnClickAway: false,
+    closeOnEscape: false,
+    hasArrow: false,
 };
-interface Popover {
-    useComputePosition: useComputePositionType;
-}
+
+const sameWidth = {
+    name: 'sameWidth',
+    enabled: true,
+    phase: 'beforeWrite',
+    requires: ['computeStyles'],
+    fn({ state }: any) {
+        state.styles.popper.width = `${state.rects.reference.width}px`;
+    },
+    effect({ state }: any) {
+        state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`;
+    },
+};
+
 /**
  * Popover.
  *
+ * @param  props The component props.
  * @return The component.
  */
-const Popover: React.FC<PopoverProps> & Popover = ({
-    popoverRect,
-    popoverRef,
-    children,
-    className = DEFAULT_PROPS.className,
-    elevation = DEFAULT_PROPS.elevation,
-    isVisible,
-    zIndex = DEFAULT_PROPS.zIndex,
-    ...props
-}) => {
-    /**
-     * Depending on which is assigned first, the `popoverRect` or `popoverRef`,
-     * there are scenarios where the reference to the popover is still not assigned,
-     * which makes the popover to be shown at (0,0), then it moves under the anchor.
-     * Since the position is calculated with a `useEffect`, the first time it is calculated,
-     * `popoverRef` is still not defined, and the hook defaults to a (0,0) position. Once the reference
-     * is set and the `useEffect` has the `popoverRef` as dependency, it can recalculate the position and
-     * provide the accurate one. In order to fix this border case, we simply state that, for the popover
-     * to be visible, `isVisible` needs to be true and the ref needs to be defined.
-     */
-    const isPopoverVisible = isVisible && popoverRef && popoverRef.current;
+const Popover: React.FC<PopoverProps> = (props) => {
+    const {
+        anchorRef,
+        popoverRef,
+        placement,
+        isOpen,
+        children,
+        fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
+        fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
+        offset,
+        elevation = DEFAULT_PROPS.elevation,
+        zIndex = DEFAULT_PROPS.zIndex,
+        closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
+        closeOnEscape = DEFAULT_PROPS.closeOnEscape,
+        hasArrow = DEFAULT_PROPS.hasArrow,
+        className,
+        onClose,
+        ...forwardedProps
+    } = props;
+    const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
-    const cssPopover: CSSProperties = {
-        left: 0,
-        position: 'fixed',
-        top: 0,
-        transform: `translate(${Math.round(popoverRect.x)}px, ${Math.round(popoverRect.y)}px)`,
-        visibility: isPopoverVisible ? 'visible' : 'hidden',
-        zIndex,
-    };
+    const modifiers: any = [];
+    const actualOffset: [number, number] = [offset?.along ?? 0, (offset?.away ?? 0) + (hasArrow ? OFFSET : 0)];
+    modifiers.push({
+        name: 'offset',
+        options: { offset: actualOffset },
+    });
 
-    return createPortal(
-        <div
-            ref={popoverRef}
-            className={classNames(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME, elevation: elevation && elevation > 5 ? 5 : elevation }),
-            )}
-            {...props}
-            style={cssPopover}
-        >
-            <div className={`${CLASSNAME}__wrapper`}>{children}</div>
-        </div>,
-        document.body,
-    );
+    if (fitToAnchorWidth) {
+        modifiers.push(sameWidth);
+    }
+
+    const { styles, attributes, state } = usePopper(anchorRef.current, popperElement, {
+        placement,
+        modifiers,
+    });
+
+    const position = state?.placement ?? placement;
+    const anchorRect = state?.rects?.reference ?? anchorRef.current?.getBoundingClientRect();
+
+    const popoverStyle = useMemo(() => {
+        const newStyles = { ...styles.popper, zIndex };
+
+        if (!anchorRect) {
+            return newStyles;
+        }
+
+        if (fitWithinViewportHeight) {
+            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+            newStyles.maxHeight =
+                windowHeight -
+                (position?.startsWith(Placement.BOTTOM) ? anchorRect.y + anchorRect.height : anchorRect.height) -
+                OFFSET;
+        }
+
+        return newStyles;
+    }, [zIndex, styles.popper.transform, anchorRect?.y, anchorRect?.height]);
+
+    useCallbackOnEscape(onClose, isOpen && closeOnEscape);
+
+    return isOpen
+        ? createPortal(
+              <div
+                  {...forwardedProps}
+                  ref={mergeRefs(setPopperElement, popoverRef)}
+                  className={classNames(
+                      className,
+                      handleBasicClasses({ prefix: CLASSNAME, elevation: Math.min(elevation || 0, 5), position }),
+                  )}
+                  style={popoverStyle}
+                  {...attributes.popper}
+              >
+                  <div className={`${CLASSNAME}__wrapper`}>
+                      <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
+                          {hasArrow ? (
+                              <>
+                                  <div className={`${CLASSNAME}__arrow`} />
+                                  <div className={`${CLASSNAME}__inner`}>{children}</div>
+                              </>
+                          ) : (
+                              children
+                          )}
+                      </ClickAwayProvider>
+                  </div>
+              </div>,
+              document.body,
+          )
+        : null;
 };
 Popover.displayName = COMPONENT_NAME;
-Popover.useComputePosition = useComputePosition;
 
-export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, ElementPosition, Offset };
+export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, Offset };

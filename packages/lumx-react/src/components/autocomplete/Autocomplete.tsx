@@ -2,7 +2,7 @@ import React, { ReactNode, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, Offset, Placement, TextField, Theme } from '@lumx/react';
+import { Dropdown, DropdownProps, Offset, Placement, PopoverProps, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -123,22 +123,28 @@ interface AutocompleteProps extends GenericProps {
     isOpen: boolean;
 
     /**
-     * Whether a click anywhere out of the Autocomplete would close it
+     * Whether a click in the Autocomplete dropdown would close it
      * @see {@link DropdownProps#closeOnClick}
      */
-    closeOnClick?: boolean;
+    closeOnClick?: DropdownProps['closeOnClick'];
+
+    /**
+     * Whether a click anywhere out of the Autocomplete would close it
+     * @see {@link PopoverProps#closeOnClickAway}
+     */
+    closeOnClickAway?: PopoverProps['closeOnClickAway'];
 
     /**
      * Whether an escape key press would close the Autocomplete.
-     * @see {@link DropdownProps#closeOnEscape}
+     * @see {@link PopoverProps#closeOnEscape}
      */
-    closeOnEscape?: boolean;
+    closeOnEscape?: PopoverProps['closeOnEscape'];
 
     /**
      * The function to be called when the user clicks away or Escape is pressed
-     * @see {@link DropdownProps#onClose}
+     * @see {@link PopoverProps#onClose}
      */
-    onClose?: VoidFunction;
+    onClose?: PopoverProps['onClose'];
 
     /**
      * The callback function called when the bottom of the dropdown is reached.
@@ -180,7 +186,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     anchorToInput: false,
-    closeOnClick: true,
+    closeOnClickAway: true,
     closeOnEscape: true,
     isOpen: undefined,
     shouldFocusOnClose: false,
@@ -190,6 +196,7 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
  * This component allows to make the connection between a Text Field and a Dropdown,
  * displaying a list of suggestions from the text entered on the text field.
  *
+ * @param  props The component props
  * @return The component.
  */
 const Autocomplete: React.FC<AutocompleteProps> = (props) => {
@@ -204,6 +211,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
         onFocus,
         isOpen,
         closeOnClick,
+        closeOnClickAway,
         closeOnEscape,
         error,
         hasError,
@@ -259,8 +267,9 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
             />
             <Dropdown
                 anchorRef={anchorToInput ? inputRef : textFieldRef}
-                showDropdown={isOpen}
+                isOpen={isOpen}
                 closeOnClick={closeOnClick}
+                closeOnClickAway={closeOnClickAway}
                 closeOnEscape={closeOnEscape}
                 onClose={onClose}
                 offset={offset}

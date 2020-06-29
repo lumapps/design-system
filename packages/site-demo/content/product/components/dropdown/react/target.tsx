@@ -25,11 +25,11 @@ const App = ({ theme }: any) => {
                 <Button onClick={closeDropdown}>Close dropdown</Button>
 
                 <Dropdown
-                    closeOnClick={false}
+                    closeOnClickAway={false}
                     closeOnEscape={true}
                     onClose={closeDropdown}
                     placement={Placement.BOTTOM_START}
-                    showDropdown={isDropdownOpen}
+                    isOpen={isDropdownOpen}
                     anchorRef={ddRef}
                 >
                     <List isClickable>

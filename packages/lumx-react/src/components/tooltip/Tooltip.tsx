@@ -1,36 +1,45 @@
-import React, { CSSProperties, RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import React, { ReactNode, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { usePopper } from 'react-popper';
+import uuid from 'uuid/v4';
 
 import classNames from 'classnames';
 
-import { Offset, Placement } from '@lumx/react/components/popover/Popover';
+import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { useComputePosition } from '@lumx/react/hooks/useComputePosition';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+
+import { useTooltipOpen } from './useTooltipOpen';
 
 /** Position of the tooltip relative to the anchor element. */
 type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
 
 /**
- * Defines the props of the component.
+ * Defines the optional props of the component.
  */
-interface TooltipProps extends GenericProps {
-    /** Ref of anchor element. */
-    anchorRef: RefObject<HTMLElement>;
-
+interface OptionalTooltipProps extends GenericProps {
     /** Delay in ms before closing the tooltip . */
     delay?: number;
 
     /** Placement of tooltip relative to the anchor element. */
     placement?: TooltipPlacement;
+
+    /** Force tooltip to show even without the mouse over the anchor. */
+    forceOpen?: boolean;
 }
 
 /**
- * Define the types of the default props.
+ * Defines the props of the component.
  */
-interface DefaultPropsType extends Partial<TooltipProps> {}
+interface TooltipProps extends OptionalTooltipProps {
+    /** Tooltip label. */
+    label: string;
+
+    /** Tooltip anchor. */
+    children: ReactNode;
+}
 
 /**
  * The display name of the component.
@@ -45,9 +54,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Required<OptionalTooltipProps> = {
     delay: 500,
     placement: Placement.BOTTOM,
+    forceOpen: false,
 };
 
 /**
@@ -58,125 +68,61 @@ const OFFSET = 8;
 /**
  * Tooltip.
  *
+ * @see WAI-ARIA https://www.w3.org/TR/wai-aria-practices/#tooltip
+ * @param  props The component props.
  * @return The component.
  */
-const Tooltip: React.FC<TooltipProps> = ({
-    anchorRef,
-    children,
-    className,
-    delay = DEFAULT_PROPS.delay,
-    placement = DEFAULT_PROPS.placement,
-    ...forwardedProps
-}) => {
-    const [timer, setTimer] = useState(0);
-    const tooltipRef: React.RefObject<HTMLDivElement> = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
+const Tooltip: React.FC<TooltipProps> = (props) => {
+    const {
+        label,
+        children,
+        className,
+        delay = DEFAULT_PROPS.delay,
+        placement = DEFAULT_PROPS.placement,
+        forceOpen = DEFAULT_PROPS.forceOpen,
+        ...forwardedProps
+    } = props;
+    const id = useMemo(() => `tooltip-${uuid()}`, []);
+    const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
+    const anchorRef = useRef(null);
+    const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
+        placement,
+        modifiers: [
+            {
+                name: 'offset',
+                options: { offset: [0, OFFSET] },
+            },
+        ],
+    });
 
-    /**
-     * Handle mouse over anchor element.
-     */
-    const handleMouseEnter = () => {
-        const id: number = setTimeout(() => {
-            setIsOpen(true);
-        }, delay);
+    const position = attributes?.popper?.['data-popper-placement'] ?? placement;
+    const isOpen = useTooltipOpen({ delay, anchorRef }) || forceOpen;
 
-        setTimer(id);
-    };
-
-    /**
-     * Handle mouse out anchor element.
-     */
-    const handleMouseLeave = () => {
-        if (timer) {
-            clearTimeout(timer);
-            setTimer(0);
-        }
-
-        setIsOpen(false);
-    };
-
-    const computeOffset = (): Offset => {
-        switch (placement) {
-            case Placement.TOP:
-                return {
-                    horizontal: 0,
-                    vertical: -OFFSET,
-                };
-
-            case Placement.BOTTOM:
-                return {
-                    horizontal: 0,
-                    vertical: OFFSET,
-                };
-
-            case Placement.LEFT:
-                return {
-                    horizontal: -OFFSET,
-                    vertical: 0,
-                };
-
-            case Placement.RIGHT:
-                return {
-                    horizontal: OFFSET,
-                    vertical: 0,
-                };
-
-            default:
-                return {
-                    horizontal: 0,
-                    vertical: 0,
-                };
-        }
-    };
-
-    useEffect(() => {
-        if (anchorRef && anchorRef.current && tooltipRef && tooltipRef.current) {
-            anchorRef.current.addEventListener('mouseenter', handleMouseEnter);
-            anchorRef.current.addEventListener('mouseleave', handleMouseLeave);
-        }
-
-        return () => {
-            if (anchorRef && anchorRef.current) {
-                anchorRef.current.removeEventListener('mouseenter', handleMouseEnter);
-                anchorRef.current.removeEventListener('mouseleave', handleMouseLeave);
-            }
-
-            if (timer) {
-                clearTimeout(timer);
-            }
-        };
-    }, [anchorRef, tooltipRef, timer]);
-
-    const offsets = computeOffset();
-
-    const { computedPosition, isVisible } = useComputePosition(placement!, anchorRef, tooltipRef, isOpen, offsets);
-
-    const tooltipStyles: CSSProperties = useMemo(
-        () => ({
-            display: isVisible ? 'block' : 'none',
-            position: 'fixed',
-            transform: `translate3d(${Math.round(computedPosition.x)}px, ${Math.round(computedPosition.y)}px, 0)`,
-        }),
-        [isVisible, computedPosition],
-    );
-
-    return createPortal(
-        <div
-            {...forwardedProps}
-            ref={tooltipRef}
-            style={tooltipStyles}
-            className={classNames(
-                className,
-                handleBasicClasses({ prefix: CLASSNAME }),
-                `${CLASSNAME}--position-${placement}`,
-            )}
-        >
-            <div className={`${CLASSNAME}__arrow`} />
-            <div className={`${CLASSNAME}__inner`}>{children}</div>
-        </div>,
-        document.body,
+    return (
+        <>
+            <div style={{ display: 'inline-block' }} ref={anchorRef} aria-describedby={isOpen ? id : undefined}>
+                {children}
+            </div>
+            {isOpen &&
+                createPortal(
+                    <div
+                        {...forwardedProps}
+                        id={id}
+                        ref={setPopperElement}
+                        role="tooltip"
+                        aria-label={label}
+                        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, position }))}
+                        style={styles.popper}
+                        {...attributes.popper}
+                    >
+                        <div className={`${CLASSNAME}__arrow`} />
+                        <div className={`${CLASSNAME}__inner`}>{label}</div>
+                    </div>,
+                    document.body,
+                )}
+        </>
     );
 };
 Tooltip.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipPlacement, TooltipProps };
+export { CLASSNAME, DEFAULT_PROPS, useTooltipOpen, Tooltip, TooltipPlacement, TooltipProps };

@@ -24,8 +24,8 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         "current": null,
       }
     }
+    isOpen={false}
     shouldFocusOnOpen={false}
-    showDropdown={false}
   >
     <List
       isClickable={true}
@@ -123,8 +123,8 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
+    isOpen={true}
     shouldFocusOnOpen={false}
-    showDropdown={true}
   >
     <List
       isClickable={true}

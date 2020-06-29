@@ -64,6 +64,9 @@ const DEFAULT_PROPS: DefaultPropsType = {
 
 /**
  * Controls for the slideshow component.
+ *
+ * @param  props The component props.
+ * @return The component.
  */
 const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Index of the current slide */

@@ -64,6 +64,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * Displays a button.
  * If the `href` property is set, it will display a `<a>` HTML tag. If not, it will use a `<button>` HTML tag instead.
  *
+ * @param  props The component props.
  * @return The component.
  */
 const Button: React.FC<ButtonProps> = (props) => {

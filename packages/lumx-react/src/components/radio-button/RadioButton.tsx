@@ -71,6 +71,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 /**
  * Defines a radio button.
  *
+ * @param  props The component props.
  * @return The component.
  */
 const RadioButton: React.FC<RadioButtonProps> = (props) => {

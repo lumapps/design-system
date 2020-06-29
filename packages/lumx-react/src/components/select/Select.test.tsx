@@ -182,7 +182,7 @@ describe(`<${Select.displayName}>`, () => {
             const isOpen = true;
             const { dropdown } = setup({ isOpen });
 
-            expect(dropdown).toHaveProp('showDropdown', isOpen);
+            expect(dropdown).toHaveProp('isOpen', isOpen);
         });
 
         it('should display the given `helper`', () => {

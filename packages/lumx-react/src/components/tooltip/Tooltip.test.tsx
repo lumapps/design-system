@@ -4,9 +4,10 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { getBasicClass } from '@lumx/react/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, Tooltip, TooltipProps } from './Tooltip';
+import { CLASSNAME, Tooltip, TooltipProps } from './Tooltip';
+
+jest.mock('uuid/v4', () => () => 123);
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -32,9 +33,12 @@ interface Setup extends CommonSetup {
  */
 const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer = shallowRendering ? shallow : mount;
-
     // @ts-ignore
-    const wrapper = renderer(<Tooltip {...props} />);
+    const wrapper = renderer(
+        <Tooltip label="Tooltip" {...props}>
+            Anchor
+        </Tooltip>,
+    );
     const tooltip = wrapper.find('.' + CLASSNAME);
 
     return {
@@ -44,46 +48,20 @@ const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup 
     };
 };
 
+jest.mock('./useTooltipOpen', () => ({ useTooltipOpen: () => true }));
+
 describe(`<${Tooltip.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         // Here is an example of a basic rendering check, with snapshot.
 
         it('should render correctly', () => {
-            const { tooltip } = setup();
-            expect(tooltip).toMatchSnapshot();
+            const { tooltip, wrapper } = setup();
+            expect(wrapper).toMatchSnapshot();
 
             expect(tooltip).toExist();
             expect(tooltip).toHaveClassName(CLASSNAME);
         });
-    });
-
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Here are some examples of basic props check.
-
-        it('should use default props', () => {
-            const { tooltip } = setup();
-
-            expect(tooltip).toHaveClassName(
-                getBasicClass({ prefix: CLASSNAME, type: 'position', value: DEFAULT_PROPS.placement }),
-            );
-        });
-    });
-
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here.
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
     });
 
     // Common tests suite.

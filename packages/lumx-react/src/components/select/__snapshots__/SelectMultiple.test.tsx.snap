@@ -25,11 +25,12 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
         "current": null,
       }
     }
-    closeOnClick={true}
+    closeOnClick={false}
+    closeOnClickAway={true}
     closeOnEscape={true}
+    isOpen={false}
     onClose={[Function]}
-    placement="auto-start"
-    showDropdown={false}
+    placement="bottom-start"
   >
     <span>
       Select Component
@@ -63,11 +64,12 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
         "current": null,
       }
     }
-    closeOnClick={true}
+    closeOnClick={false}
+    closeOnClickAway={true}
     closeOnEscape={true}
+    isOpen={false}
     onClose={[Function]}
-    placement="auto-start"
-    showDropdown={false}
+    placement="bottom-start"
   >
     <span>
       Select Component

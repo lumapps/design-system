@@ -35,15 +35,16 @@ const INITIAL_INDEX = -1;
  * This custom hook provides the necessary set of functions and values to properly navigate
  * a list using the keyboard.
  *
- * @param items                    the list of items that will be navigated using the keyboard
- * @param ref                      A reference to the element that is controlling the navigation.
- * @param onListItemSelected       callback to be executed when the ENTER key is pressed on an item
- * @param onListItemNavigated      callback to be executed when the Arrow keys are pressed
- * @param onEnterPressed           callback to be executed when the ENTER key is pressed
- * @param onBackspacePressed       callback to be executed when the BACKSPACE key is pressed
- * @param keepFocusAfterSelection  determines whether after selecting an item, the focus should be maintained on the current target or not
- * @param initialIndex             where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0`
- * @param preventTabOnEnteredValue determines whether upon TAB, if there is a value entered, the event is prevented or not
+ * @param  items                    the list of items that will be navigated using the keyboard.
+ * @param  ref                      A reference to the element that is controlling the navigation.
+ * @param  onListItemSelected       callback to be executed when the ENTER key is pressed on an item.
+ * @param  onListItemNavigated      callback to be executed when the Arrow keys are pressed.
+ * @param  onEnterPressed           callback to be executed when the ENTER key is pressed.
+ * @param  onBackspacePressed       callback to be executed when the BACKSPACE key is pressed.
+ * @param  keepFocusAfterSelection  determines whether after selecting an item, the focus should be maintained on the current target or not.
+ * @param  initialIndex             where should the navigation start from. it defaults to `-1`, so the first item navigated is the item on position `0`.
+ * @param  preventTabOnEnteredValue determines whether upon TAB, if there is a value entered, the event is prevented or not.
+ * @return useKeyboardListNavigation helpers.
  */
 const useKeyboardListNavigation: useKeyboardListNavigationType = (
     items,

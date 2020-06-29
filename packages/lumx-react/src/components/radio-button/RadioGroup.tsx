@@ -28,6 +28,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
 /**
  * Radio group component.
  *
+ * @param  props The component props.
  * @return The component.
  */
 const RadioGroup: React.FC<RadioGroupProps> = (props) => {

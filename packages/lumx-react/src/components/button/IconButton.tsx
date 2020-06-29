@@ -43,6 +43,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
 /**
  * Displays an icon button.
  *
+ * @param  props The component props.
  * @return The component.
  */
 const IconButton: React.FC<IconButtonProps> = (props) => {

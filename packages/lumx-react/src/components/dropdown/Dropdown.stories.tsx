@@ -2,12 +2,15 @@ import React from 'react';
 
 import { Button, Dropdown, List, ListItem, ListSubheader, Placement, Size } from '@lumx/react';
 
-const App = () => {
-    const anchorSimpleRef = React.useRef(null);
-    const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
+export default { title: 'LumX components/dropdown/Dropdown' };
 
+export const simple = () => {
+    const anchorSimpleRef = React.useRef(null);
     const anchorComplexRef = React.useRef(null);
+
+    const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
     const [isComplexOpen, setComplexIsOpen] = React.useState(false);
+
     const toggleSimpleMenu = () => setSimpleIsOpen(!isSimpleOpen);
     const closeSimpleMenu = () => setSimpleIsOpen(false);
     const toggleComplexMenu = () => setComplexIsOpen(!isComplexOpen);
@@ -36,7 +39,7 @@ const App = () => {
                 closeOnEscape
                 isOpen={isSimpleOpen}
                 onClose={closeSimpleMenu}
-                placement={Placement.AUTO_START}
+                placement={Placement.BOTTOM}
                 anchorRef={anchorSimpleRef}
             >
                 <List isClickable>
@@ -71,8 +74,7 @@ const App = () => {
                 closeOnClickAway={false}
                 closeOnEscape={false}
                 isOpen={isComplexOpen}
-                offset={{ along: 20 }}
-                placement={Placement.AUTO_START}
+                placement={Placement.BOTTOM}
                 anchorRef={anchorComplexRef}
             >
                 <List isClickable>
@@ -112,5 +114,3 @@ const App = () => {
         </div>
     );
 };
-
-export default App;

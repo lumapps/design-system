@@ -6,17 +6,6 @@ import { Placement, Popover, TextField } from '@lumx/react';
 const App = ({ theme }: any) => {
     const [searchValue, setSearchValue] = React.useState('');
     const anchorRef = React.useRef(null);
-    const popoverRef = React.useRef(null);
-
-    const { computedPosition, isVisible } = Popover.useComputePosition(
-        Placement.BOTTOM_START,
-        anchorRef,
-        popoverRef,
-        true,
-        undefined,
-        true,
-        true,
-    );
 
     const demoPopoverHolderStyle = {
         height: 132,
@@ -27,7 +16,6 @@ const App = ({ theme }: any) => {
         display: 'flex',
         height: 80,
         justifyContent: 'center',
-        width: computedPosition.width,
     };
 
     return (
@@ -41,7 +29,7 @@ const App = ({ theme }: any) => {
                     theme={theme}
                     textFieldRef={anchorRef}
                 />
-                <Popover theme={theme} popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
+                <Popover theme={theme} anchorRef={anchorRef} placement={Placement.BOTTOM_START} fitToAnchorWidth isOpen>
                     <div style={demoPopperStyle}>Popover's width matching anchor's</div>
                 </Popover>
             </div>

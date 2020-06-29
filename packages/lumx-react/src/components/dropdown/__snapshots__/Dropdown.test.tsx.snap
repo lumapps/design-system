@@ -2,49 +2,26 @@
 
 exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
 <Popover
-  isVisible={true}
-  placement="auto-start"
-  popoverRect={
+  anchorRef={
     Object {
-      "x": 0,
-      "y": 0,
+      "current": null,
     }
   }
+  className="lumx-dropdown__menu lumx-dropdown"
+  closeOnClickAway={true}
+  closeOnEscape={true}
+  fitToAnchorWidth={true}
+  fitWithinViewportHeight={true}
+  isOpen={true}
+  placement="auto-start"
   popoverRef={
     Object {
       "current": null,
     }
   }
 >
-  <ClickAwayProvider
-    refs={
-      Array [
-        Object {
-          "current": null,
-        },
-        Object {
-          "current": null,
-        },
-      ]
-    }
-  >
-    <div
-      className="lumx-dropdown__menu lumx-dropdown"
-      style={
-        Object {
-          "maxHeight": undefined,
-          "minWidth": undefined,
-        }
-      }
-    >
-      <div
-        className="lumx-dropdown__content"
-      >
-        <div>
-          This is the content of the dropdown
-        </div>
-      </div>
-    </div>
-  </ClickAwayProvider>
+  <div>
+    This is the content of the dropdown
+  </div>
 </Popover>
 `;

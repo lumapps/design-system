@@ -48,7 +48,8 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
-    closeOnClick: true,
+    closeOnClick: false,
+    closeOnClickAway: true,
     closeOnEscape: true,
     isOpen: undefined,
     selectedChipRender(choice, index, onClear, isDisabled) {
@@ -73,6 +74,7 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
  * This component allows to create a multiple autocomplete, allowing the user to select multiple values from a
  * list that can be filtered.
  *
+ * @param  props The component props.
  * @return The component.
  */
 const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
@@ -88,7 +90,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
         onFocus,
         onKeyDown,
         isOpen,
-        closeOnClick,
+        closeOnClickAway,
         closeOnEscape,
         hasError,
         helper,
@@ -145,7 +147,8 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
             theme={theme}
             type={type}
             isOpen={isOpen}
-            closeOnClick={closeOnClick}
+            closeOnClick={false}
+            closeOnClickAway={closeOnClickAway}
             closeOnEscape={closeOnEscape}
             onClose={onClose}
             offset={offset}

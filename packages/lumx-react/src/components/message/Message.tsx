@@ -72,6 +72,7 @@ const KIND_ICON = {
 /**
  * Component used to display a message, with an icon and possibly a background
  *
+ * @param  props The component props.
  * @return The component.
  */
 const Message: React.FC<MessageProps> = (props) => {

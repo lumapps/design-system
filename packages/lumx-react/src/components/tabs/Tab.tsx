@@ -1,11 +1,4 @@
-import React, {
-    AnchorHTMLAttributes,
-    KeyboardEventHandler,
-    MouseEventHandler,
-    ReactElement,
-    ReactNode,
-    SyntheticEvent,
-} from 'react';
+import React, { AnchorHTMLAttributes, KeyboardEventHandler, MouseEventHandler, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 

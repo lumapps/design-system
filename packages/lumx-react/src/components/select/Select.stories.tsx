@@ -2,6 +2,7 @@ import { List, ListItem, Select, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
+import range from 'lodash/range';
 import React, { SyntheticEvent, useState } from 'react';
 import { SelectVariant } from './constants';
 
@@ -69,7 +70,7 @@ export const simpleSelectWithInfiniteScroll = ({ theme }: any) => {
     };
 
     const onInfinite = () => {
-        setItems([...items, `item ${items.length + 1}`]);
+        setItems([...items, ...range(10).map((i) => `item ${items.length + i}`)]);
     };
 
     return (

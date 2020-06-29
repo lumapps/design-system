@@ -149,6 +149,7 @@ export const simple = ({ theme }: any) => {
             onBlur={onBlur}
             selectedChipRender={renderChip}
             icon={mdiFlag}
+            label="Label"
         >
             <List isClickable theme={theme}>
                 {filteredCities.map((city, index) => {

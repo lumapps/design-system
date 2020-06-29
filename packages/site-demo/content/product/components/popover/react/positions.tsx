@@ -19,44 +19,9 @@ const App = ({ theme }: any) => {
     };
 
     const topAnchorRef = React.useRef(null);
-    const topPopoverRef = React.useRef(null);
-
-    const { computedPosition: topComputedPosition, isVisible: topIsVisible } = Popover.useComputePosition(
-        Placement.TOP,
-        topAnchorRef,
-        topPopoverRef,
-        true,
-    );
-
     const rightAnchorRef = React.useRef(null);
-    const rightPopoverRef = React.useRef(null);
-
-    const { computedPosition: rightComputedPosition, isVisible: rightIsVisible } = Popover.useComputePosition(
-        Placement.RIGHT,
-        rightAnchorRef,
-        rightPopoverRef,
-        true,
-    );
-
     const bottomAnchorRef = React.useRef(null);
-    const bottomPopoverRef = React.useRef(null);
-
-    const { computedPosition: bottomComputedPosition, isVisible: bottomIsVisible } = Popover.useComputePosition(
-        Placement.BOTTOM,
-        bottomAnchorRef,
-        bottomPopoverRef,
-        true,
-    );
-
     const leftAnchorRef = React.useRef(null);
-    const leftPopoverRef = React.useRef(null);
-
-    const { computedPosition: leftComputedPosition, isVisible: leftIsVisible } = Popover.useComputePosition(
-        Placement.LEFT,
-        leftAnchorRef,
-        leftPopoverRef,
-        true,
-    );
 
     return (
         <FlexBox
@@ -69,12 +34,7 @@ const App = ({ theme }: any) => {
                         TOP
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    popoverRect={topComputedPosition}
-                    popoverRef={topPopoverRef}
-                    isVisible={topIsVisible}
-                >
+                <Popover theme={theme} anchorRef={topAnchorRef} placement={Placement.TOP} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -85,12 +45,7 @@ const App = ({ theme }: any) => {
                         RIGHT
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    popoverRect={rightComputedPosition}
-                    popoverRef={rightPopoverRef}
-                    isVisible={rightIsVisible}
-                >
+                <Popover theme={theme} anchorRef={rightAnchorRef} placement={Placement.RIGHT} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -103,12 +58,7 @@ const App = ({ theme }: any) => {
                         BOTTOM
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    popoverRect={bottomComputedPosition}
-                    popoverRef={bottomPopoverRef}
-                    isVisible={bottomIsVisible}
-                >
+                <Popover theme={theme} anchorRef={bottomAnchorRef} placement={Placement.BOTTOM} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>
@@ -121,12 +71,7 @@ const App = ({ theme }: any) => {
                         LEFT
                     </Chip>
                 </div>
-                <Popover
-                    theme={theme}
-                    popoverRect={leftComputedPosition}
-                    popoverRef={leftPopoverRef}
-                    isVisible={leftIsVisible}
-                >
+                <Popover theme={theme} anchorRef={leftAnchorRef} placement={Placement.LEFT} isOpen>
                     <div style={demoPopperStyle}>{'Popover'}</div>
                 </Popover>
             </FlexBox>

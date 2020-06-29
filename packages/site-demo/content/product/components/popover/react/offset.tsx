@@ -19,12 +19,6 @@ const App = ({ theme }: any) => {
     };
 
     const anchorRef = React.useRef(null);
-    const popoverRef = React.useRef(null);
-
-    const { computedPosition, isVisible } = Popover.useComputePosition(Placement.RIGHT, anchorRef, popoverRef, true, {
-        horizontal: 30,
-        vertical: 60,
-    });
 
     return (
         <>
@@ -33,7 +27,16 @@ const App = ({ theme }: any) => {
                     Anchor
                 </Chip>
             </div>
-            <Popover theme={theme} popoverRect={computedPosition} popoverRef={popoverRef} isVisible={isVisible}>
+            <Popover
+                theme={theme}
+                anchorRef={anchorRef}
+                placement={Placement.RIGHT}
+                offset={{
+                    away: 30,
+                    along: 60,
+                }}
+                isOpen
+            >
                 <div style={demoPopperStyle}>{'Popover'}</div>
             </Popover>
         </>
