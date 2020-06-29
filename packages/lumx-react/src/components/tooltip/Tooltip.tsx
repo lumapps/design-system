@@ -35,7 +35,7 @@ interface OptionalTooltipProps extends GenericProps {
  */
 interface TooltipProps extends OptionalTooltipProps {
     /** Tooltip label. */
-    label: string;
+    label?: string | null | false;
 
     /** Tooltip anchor. */
     children: ReactNode;
@@ -82,6 +82,10 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
         forceOpen = DEFAULT_PROPS.forceOpen,
         ...forwardedProps
     } = props;
+    if (!label) {
+        return <>{children}</>;
+    }
+
     const id = useMemo(() => `tooltip-${uuid()}`, []);
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const anchorRef = useRef(null);
@@ -116,7 +120,11 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
                         {...attributes.popper}
                     >
                         <div className={`${CLASSNAME}__arrow`} />
-                        <div className={`${CLASSNAME}__inner`}>{label}</div>
+                        <div className={`${CLASSNAME}__inner`}>
+                            {label.indexOf('\n') !== -1
+                                ? label.split('\n').map((sentence) => <p key={sentence}>{sentence}</p>)
+                                : label}
+                        </div>
                     </div>,
                     document.body,
                 )}
