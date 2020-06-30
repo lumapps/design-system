@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   `Tooltip` can have a multiline `label` by putting `\n` character inside the string.
+
+### Changed
+
+-   `Tooltip` does not appear if the `label` is empty, `null` or `undefined`.
+
 ## [0.25.0][] - 2020-06-29
 
 ### Added
