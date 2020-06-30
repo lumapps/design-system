@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.2][] - 2020-06-30
+
 ### Added
 
 -   `Tooltip` can have a multiline `label` by putting `\n` character inside the string.
@@ -578,3 +580,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.24.3]: https://github.com/lumapps/design-system/tree/v0.24.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.0...HEAD
 [0.25.0]: https://github.com/lumapps/design-system/tree/v0.25.0
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.2...HEAD
+[0.25.2]: https://github.com/lumapps/design-system/tree/v0.25.2
