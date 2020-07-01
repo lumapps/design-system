@@ -76,7 +76,7 @@ interface PopoverProps extends GenericProps {
     elevation?: Elevation;
     /** The z-axis position. */
     zIndex?: number;
-    /** Whether the dropdown should fit to the anchor width */
+    /** Whether the dropdown should fit to the anchor width (if dropdown is smaller). */
     fitToAnchorWidth?: boolean;
     /** Shrink popover if even after flipping there is not enough space */
     fitWithinViewportHeight?: boolean;
@@ -114,16 +114,19 @@ const DEFAULT_PROPS: Partial<PopoverProps> = {
     hasArrow: false,
 };
 
+/**
+ * Popper js modifier to fit popover min width to the anchor width.
+ */
 const sameWidth = {
     name: 'sameWidth',
     enabled: true,
     phase: 'beforeWrite',
     requires: ['computeStyles'],
     fn({ state }: any) {
-        state.styles.popper.width = `${state.rects.reference.width}px`;
+        state.styles.popper.minWidth = `${state.rects.reference.width}px`;
     },
     effect({ state }: any) {
-        state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`;
+        state.elements.popper.style.minWidth = `${state.elements.reference.offsetWidth}px`;
     },
 };
 
@@ -206,7 +209,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
                   style={popoverStyle}
                   {...attributes.popper}
               >
-                  <div className={`${CLASSNAME}__wrapper`}>
+                  <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
                       <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
                           {hasArrow ? (
                               <>

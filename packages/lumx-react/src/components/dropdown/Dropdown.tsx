@@ -23,7 +23,7 @@ interface DropdownProps extends GenericProps {
     closeOnEscape?: boolean;
     /** Whether to close the Dropdown when clicking in it. */
     closeOnClick?: boolean;
-    /** Whether the dropdown should fit to the anchor width */
+    /** Whether the dropdown should fit to the anchor width (if dropdown is smaller). */
     fitToAnchorWidth?: boolean;
     /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
     offset?: Offset;
@@ -61,7 +61,7 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
     closeOnClickAway: true,
     closeOnEscape: true,
     fitToAnchorWidth: true,
-    placement: Placement.AUTO_START,
+    placement: Placement.BOTTOM_START,
     shouldFocusOnOpen: true,
     isOpen: undefined,
 };
