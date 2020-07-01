@@ -13,7 +13,7 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
   fitToAnchorWidth={true}
   fitWithinViewportHeight={true}
   isOpen={true}
-  placement="auto-start"
+  placement="bottom-start"
   popoverRef={
     Object {
       "current": null,
