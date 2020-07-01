@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.3][] - 2020-07-01
+
 ### Fixed
 
 -   `Popover` (and `Dropdown`) now fits to anchor width using min width.
@@ -588,3 +590,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.0]: https://github.com/lumapps/design-system/tree/v0.25.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.2...HEAD
 [0.25.2]: https://github.com/lumapps/design-system/tree/v0.25.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.3...HEAD
+[0.25.3]: https://github.com/lumapps/design-system/tree/v0.25.3
