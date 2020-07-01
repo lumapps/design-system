@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `Popover` (and `Dropdown`) now fits to anchor width using min width.
 -   `Dropdown` now has `BOTTOM` placement by default.
+-   fix `Popover` click away wrapper reference
 
 ## [0.25.2][] - 2020-06-30
 

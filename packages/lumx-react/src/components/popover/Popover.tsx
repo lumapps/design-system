@@ -209,7 +209,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
                   style={popoverStyle}
                   {...attributes.popper}
               >
-                  <div className={`${CLASSNAME}__wrapper`}>
+                  <div ref={wrapperRef} className={`${CLASSNAME}__wrapper`}>
                       <ClickAwayProvider callback={closeOnClickAway && onClose} refs={[wrapperRef, anchorRef]}>
                           {hasArrow ? (
                               <>
