@@ -79,6 +79,8 @@
 
 @mixin lumx-list-item-content() {
     @include lumx-typography('body1');
+    display: flex;
+    min-width: 0;
 
     flex: 1 1 auto;
 }
