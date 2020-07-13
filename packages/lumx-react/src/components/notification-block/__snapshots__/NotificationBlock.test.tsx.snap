@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NotificationBlock> Snapshots and structure should render story avatar 1`] = `
+<div
+  className="lumx-notification-block lumx-notification-block--theme-light"
+>
+  <div
+    className="lumx-notification-block__before"
+  >
+    <Avatar
+      badge={
+        <Badge
+          color="red"
+        >
+          <Icon
+            icon="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+          />
+        </Badge>
+      }
+      image="http://i.pravatar.cc/40"
+      size="m"
+    />
+  </div>
+  <div
+    className="lumx-notification-block__content"
+  >
+    <span
+      className="lumx-notification-block__title"
+    >
+      Title
+    </span>
+    <p
+      className="lumx-notification-block__description"
+    >
+      Description message
+    </p>
+    <span
+      className="lumx-notification-block__date"
+    >
+      2min ago
+    </span>
+  </div>
+  <div
+    className="lumx-notification-block__after"
+  >
+    <IconButton
+      emphasis="low"
+      icon="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+    />
+  </div>
+</div>
+`;
+
+exports[`<NotificationBlock> Snapshots and structure should render story icon 1`] = `
+<div
+  className="lumx-notification-block lumx-notification-block--theme-light"
+>
+  <div
+    className="lumx-notification-block__before"
+  >
+    <Icon
+      hasShape={true}
+      icon="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M4,4V17.17L5.17,16H20V4H4M6,7H18V9H6V7M6,11H15V13H6V11Z"
+    />
+  </div>
+  <div
+    className="lumx-notification-block__content"
+  >
+    <span
+      className="lumx-notification-block__title"
+    >
+      Title
+    </span>
+    <p
+      className="lumx-notification-block__description"
+    >
+      Description message
+    </p>
+    <span
+      className="lumx-notification-block__date"
+    >
+      2min ago
+    </span>
+  </div>
+  <div
+    className="lumx-notification-block__after"
+  >
+    <IconButton
+      emphasis="low"
+      icon="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
+    />
+  </div>
+</div>
+`;
