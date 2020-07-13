@@ -17,11 +17,11 @@ interface NotificationBlockProps extends GenericProps {
     /** Before content element */
     before?: ReactElement;
     /** Date when the notification occurs */
-    date?: string;
+    date: string;
     /** Description message of the notification */
-    description?: string;
+    description: string;
     /** Title of the notification */
-    title?: string;
+    title: string;
     /** Reference passed to the wrapper. */
     notificationBlockRef?: Ref<HTMLDivElement>;
 }

@@ -33,6 +33,9 @@ const setup = (
     shallowRendering: boolean = true,
 ): Setup => {
     const props: NotificationBlockProps = {
+        date: '2min ago',
+        description: 'Description message',
+        title: 'Title',
         ...propsOverrides,
     };
 
