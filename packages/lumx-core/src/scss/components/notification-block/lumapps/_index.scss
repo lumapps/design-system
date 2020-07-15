@@ -3,8 +3,19 @@
    ========================================================================== */
 
 .#{$lumx-base-prefix}-notification-block {
+    $self: &;
+
     display: flex;
     align-items: flex-start;
+    padding: $lumx-spacing-unit * 2 $lumx-spacing-unit * 3;
+
+    &--theme-light:hover {
+        background-color: lumx-color-variant('dark', 'L6');
+    }
+
+    &--theme-dark:hover {
+        background-color: lumx-color-variant('light', 'L6');
+    }
 
     &__before {
         flex-shrink: 0;
@@ -30,7 +41,14 @@
         @include lumx-typography('body1');
 
         display: block;
-        color: lumx-color-variant('dark', 'L2');
+
+        #{$self}--theme-light & {
+            color: lumx-color-variant('dark', 'L2');
+        }
+
+        #{$self}--theme-dark & {
+            color: lumx-color-variant('light', 'L2');
+        }
     }
 
     &__after {

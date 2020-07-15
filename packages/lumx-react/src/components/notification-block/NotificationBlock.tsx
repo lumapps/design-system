@@ -1,4 +1,4 @@
-import React, { ReactElement, Ref } from 'react';
+import React, { ReactElement, ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
 
@@ -19,9 +19,11 @@ interface NotificationBlockProps extends GenericProps {
     /** Date when the notification occurs */
     date: string;
     /** Description message of the notification */
-    description: string;
+    description: string | ReactNode;
     /** Title of the notification */
-    title: string;
+    title?: string;
+    /** The theme to use to display the image-block. */
+    theme?: Theme;
     /** Reference passed to the wrapper. */
     notificationBlockRef?: Ref<HTMLDivElement>;
 }
@@ -78,7 +80,7 @@ const NotificationBlock: React.FC<NotificationBlockProps> = ({
         >
             {before && <div className={`${CLASSNAME}__before`}>{before}</div>}
             <div className={`${CLASSNAME}__content`}>
-                <span className={`${CLASSNAME}__title`}>{title}</span>
+                {title && <span className={`${CLASSNAME}__title`}>{title}</span>}
                 <p className={`${CLASSNAME}__description`}>{description}</p>
                 <span className={`${CLASSNAME}__date`}>{date}</span>
             </div>
