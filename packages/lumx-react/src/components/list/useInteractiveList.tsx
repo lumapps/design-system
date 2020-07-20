@@ -168,7 +168,7 @@ export const useInteractiveList: useInteractiveList = (options) => {
             // Clone list item: inject ref, add tab index and active state.
             return cloneElement<ListItemProps>(item, {
                 ...item.props,
-                isHighlighted,
+                isHighlighted: item.props.isHighlighted ?? isHighlighted,
                 linkRef: mergeRefs(item.props.linkRef, (element) => {
                     if (isHighlighted) {
                         element?.focus();
