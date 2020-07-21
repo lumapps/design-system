@@ -4,7 +4,7 @@ import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } fro
 
 import { mdiClose, mdiFlag } from '@lumx/icons';
 
-export default { title: 'LumX components/Autocomplete Multiple' };
+export default { title: 'LumX components/autocomplete/Autocomplete Multiple' };
 
 import { CITIES } from './__mockData__';
 
