@@ -55,10 +55,12 @@ export const DesignToken: React.FC<DesignTokenProps> = ({
             toggleCallback={setIsOpen}
             theme={theme}
         >
-            <header className="design-token__header">
-                <div className="design-token__prefix">{prefix}</div>
-                <span className="design-token__name">{name}</span>
-                <span className="design-token__version">{version}</span>
+            <header>
+                <div className="design-token__header">
+                    <div className="design-token__prefix">{prefix}</div>
+                    <span className="design-token__name">{name}</span>
+                    <span className="design-token__version">{version}</span>
+                </div>
             </header>
 
             <div className="design-token__content">
