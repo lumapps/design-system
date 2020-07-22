@@ -11,13 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   `ListItem` now properly keep the given `isHighligthed` prop value when controlled from a parent component. Fixes `Autocomplete` & `AutocompleteMultiple` keyboard arrow navigation in the completed suggestions.
 
+### Changed
+
+-   _[BREAKING]_ `Dropdown` placement is limited to `bottom`, `bottom-start` and `bottom-end`.
+
 ## [0.25.3][] - 2020-07-01
 
 ### Fixed
 
 -   `Popover` (and `Dropdown`) now fits to anchor width using min width.
 -   `Dropdown` now has `BOTTOM` placement by default.
--   fix `Popover` click away wrapper reference
+-   Fix `Popover` click away wrapper reference.
 
 ## [0.25.2][] - 2020-06-30
 

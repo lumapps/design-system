@@ -36,7 +36,7 @@ const App = () => {
                 closeOnEscape
                 isOpen={isSimpleOpen}
                 onClose={closeSimpleMenu}
-                placement={Placement.AUTO_START}
+                placement={Placement.BOTTOM_START}
                 anchorRef={anchorSimpleRef}
             >
                 <List isClickable>
@@ -72,7 +72,7 @@ const App = () => {
                 closeOnEscape={false}
                 isOpen={isComplexOpen}
                 offset={{ along: 20 }}
-                placement={Placement.AUTO_START}
+                placement={Placement.BOTTOM_START}
                 anchorRef={anchorComplexRef}
             >
                 <List isClickable>
