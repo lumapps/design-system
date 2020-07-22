@@ -63,6 +63,11 @@ interface BaseButtonProps extends GenericProps {
      * Whether custom colors are applied to this component.
      */
     useCustomColors?: boolean;
+
+    /**
+     * If the button is rounded or not
+     */
+    isRounded?: boolean;
 }
 
 interface ButtonRootProps extends BaseButtonProps {
@@ -128,6 +133,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         theme,
         useCustomColors,
         variant,
+        isRounded = false,
         ...forwardedProps
     } = props;
 
@@ -151,6 +157,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
             size,
             theme: emphasis === Emphasis.high && theme,
             variant,
+            isRounded,
         }),
         { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
     );

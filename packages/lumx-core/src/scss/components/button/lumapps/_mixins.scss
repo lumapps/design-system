@@ -15,6 +15,10 @@
     &:hover {
         cursor: pointer;
     }
+
+    &--is-rounded {
+        border-radius: 100% !important;
+    }
 }
 
 @mixin lumx-button-size($emphasis, $variant, $size) {

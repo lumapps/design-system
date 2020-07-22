@@ -24,6 +24,18 @@
         margin-bottom: 0;
     }
 
+    &__wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        #{$self}__link {
+            flex: 1;
+            margin-right: $lumx-spacing-unit-regular;
+        }
+    }
+
     &__link {
         @include lumx-side-navigation-link;
 
