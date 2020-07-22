@@ -11,7 +11,7 @@ const moduleNameMapper = fromPairs(
 );
 
 module.exports = {
-    collectCoverageFrom: ['**/*.{ts,tsx}', '!**/node_modules/**'],
+    collectCoverageFrom: ['src/**/*.{ts,tsx}'],
     coverageDirectory: '<rootDir>jest/reports/coverage',
     coverageReporters: ['json', 'lcov', 'html', 'text'],
     moduleDirectories: [`${CONFIGS.path.ROOT_PATH}/node_modules`],
@@ -43,6 +43,7 @@ module.exports = {
     testEnvironmentOptions: {
         enzymeAdapter: 'react16',
     },
+    testMatch: ['<rootDir>src/**/?(*.)+(spec|test).[jt]s?(x)'],
     transform: {
         '\\.(t|j)sx?$': '<rootDir>jest/transform.js',
     },

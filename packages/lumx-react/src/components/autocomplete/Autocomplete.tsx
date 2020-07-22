@@ -2,7 +2,7 @@ import React, { ReactNode, RefObject, useRef } from 'react';
 
 import classNames from 'classnames';
 
-import { Dropdown, DropdownProps, Offset, Placement, PopoverProps, TextField, Theme } from '@lumx/react';
+import { Dropdown, DropdownProps, Offset, PopoverProps, TextField, Theme } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -32,7 +32,7 @@ interface AutocompleteProps extends GenericProps {
      * The preferred Dropdown location against the anchor element.
      * @see {@link DropdownProps#placement}
      */
-    placement?: Placement;
+    placement?: DropdownProps['placement'];
 
     /**
      * Whether the dropdown should fit to the anchor width
