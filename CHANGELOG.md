@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.4][] - 2020-07-22
+
 ### Fixed
 
 -   `ListItem` now properly keep the given `isHighligthed` prop value when controlled from a parent component. Fixes `Autocomplete` & `AutocompleteMultiple` keyboard arrow navigation in the completed suggestions.
@@ -601,3 +603,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.2]: https://github.com/lumapps/design-system/tree/v0.25.2
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.3...HEAD
 [0.25.3]: https://github.com/lumapps/design-system/tree/v0.25.3
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.4...HEAD
+[0.25.4]: https://github.com/lumapps/design-system/tree/v0.25.4
