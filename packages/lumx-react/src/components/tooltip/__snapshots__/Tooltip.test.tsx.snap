@@ -17,7 +17,7 @@ exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
   >
     <div
       aria-label="Tooltip"
-      className="lumx-tooltip lumx-tooltip--position-bottom"
+      className="lumx-tooltip lumx-tooltip--position-top"
       id="tooltip-123"
       role="tooltip"
       style={
