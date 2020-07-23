@@ -56,7 +56,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Required<OptionalTooltipProps> = {
     delay: 500,
-    placement: Placement.TOP,
+    placement: Placement.BOTTOM,
     forceOpen: false,
 };
 
