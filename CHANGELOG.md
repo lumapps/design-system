@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ `Tooltip` placement is now `bottom` by default.
+
 ## [0.25.4][] - 2020-07-22
 
 ### Fixed
