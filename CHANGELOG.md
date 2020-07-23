@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.5][] - 2020-07-23
+
 ### Changed
 
 -   _[BREAKING]_ `Tooltip` placement is now `bottom` by default.
@@ -609,3 +611,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.3]: https://github.com/lumapps/design-system/tree/v0.25.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.4...HEAD
 [0.25.4]: https://github.com/lumapps/design-system/tree/v0.25.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.5...HEAD
+[0.25.5]: https://github.com/lumapps/design-system/tree/v0.25.5
