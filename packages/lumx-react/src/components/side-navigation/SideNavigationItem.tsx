@@ -43,6 +43,9 @@ interface SideNavigationItemProps extends GenericProps {
     /** props that will be passed on to the Link */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
+    /** the level of the elem */
+    level?: number;
+
     /** On click handler. */
     onClick?(evt: React.MouseEvent): void;
 }
@@ -64,6 +67,7 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
     isOpen: false,
     isSelected: false,
+    level: 1,
 };
 
 const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
@@ -77,6 +81,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         isSelected = DEFAULT_PROPS.isSelected,
         onClick,
         linkProps,
+        level = DEFAULT_PROPS.level,
         ...forwardedProps
     } = props;
 
@@ -99,7 +104,13 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         >
             {shouldSplitActions ? (
                 <div className={`${CLASSNAME}__wrapper`}>
-                    <a {...(linkProps || {})} className={`${CLASSNAME}__link`} tabIndex={0}>
+                    <a
+                        {...(linkProps || {})}
+                        className={classNames(`${CLASSNAME}__link`, ` ${CLASSNAME}__link--level-${level}`, {
+                            [`${CLASSNAME}__link-noicon`]: !Boolean(icon),
+                        })}
+                        tabIndex={0}
+                    >
                         {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
                         <span>{label}</span>
                     </a>
@@ -116,7 +127,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
             ) : (
                 <a
                     {...(linkProps || {})}
-                    className={`${CLASSNAME}__link`}
+                    className={`${CLASSNAME}__link ${CLASSNAME}__link--level-${level}`}
                     tabIndex={0}
                     onClick={onClick}
                     onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}

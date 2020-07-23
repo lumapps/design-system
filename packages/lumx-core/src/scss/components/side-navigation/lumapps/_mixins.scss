@@ -6,12 +6,16 @@
     }
 }
 
+@mixin lumx-side-navigation-item-level($level) {
+    padding-left: (map-get($lumx-sizes, 'xs') + $lumx-spacing-unit-big) * ($level - 1) + $lumx-spacing-unit-big;
+}
+
 @mixin lumx-side-navigation-link() {
     display: flex;
     min-height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
     flex-direction: row;
     align-items: center;
-    padding: 0 $lumx-spacing-unit;
+    padding: 0 $lumx-spacing-unit-big;
     border-radius: $lumx-border-radius;
     color: lumx-color-variant('dark', 'N');
     outline: none;

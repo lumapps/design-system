@@ -39,6 +39,14 @@
     &__link {
         @include lumx-side-navigation-link;
 
+        &--level-2 {
+            @include lumx-side-navigation-item-level(2);
+        }
+
+        &--level-3 {
+            @include lumx-side-navigation-item-level(3);
+        }
+
         & > i:first-child {
             @include lumx-side-navigation-link-icon(lumx-base-const('position', 'LEFT'));
         }
