@@ -5,6 +5,7 @@ import 'jest-enzyme';
 
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
+import { Button, Icon } from '@lumx/react';
 import { CLASSNAME, Tooltip, TooltipProps } from './Tooltip';
 
 jest.mock('uuid/v4', () => () => 123);
@@ -61,6 +62,47 @@ describe(`<${Tooltip.displayName}>`, () => {
 
             expect(tooltip).toExist();
             expect(tooltip).toHaveClassName(CLASSNAME);
+        });
+
+        it('should return children when empty label', () => {
+            const wrapper = shallow(
+                <Tooltip label="">
+                    <Icon icon="icon" />
+                </Tooltip>,
+            );
+            expect(wrapper).toMatchSnapshot();
+        });
+
+        it('should wrap children', () => {
+            // Wrap string children
+            const wrapper1 = shallow(<Tooltip label="tooltip1">children</Tooltip>);
+            expect(wrapper1).toMatchSnapshot();
+
+            // Wrap fragment children
+            const wrapper2 = shallow(
+                <Tooltip label="tooltip1">
+                    <>children</>
+                </Tooltip>,
+            );
+            expect(wrapper2).toMatchSnapshot();
+        });
+
+        it('should not wrap Icon', () => {
+            const wrapper = shallow(
+                <Tooltip label="tooltip1">
+                    <Icon icon="icon" />
+                </Tooltip>,
+            );
+            expect(wrapper).toMatchSnapshot();
+        });
+
+        it('should not wrap Button', () => {
+            const wrapper = shallow(
+                <Tooltip label="tooltip1">
+                    <Button>button</Button>
+                </Tooltip>,
+            );
+            expect(wrapper).toMatchSnapshot();
         });
     });
 

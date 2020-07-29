@@ -1,6 +1,7 @@
 import { Button, Placement, Tooltip } from '@lumx/react';
 import { select, text } from '@storybook/addon-knobs';
-import React from 'react';
+import React, { useRef } from 'react';
+import { Dropdown } from '../dropdown/Dropdown';
 
 export default { title: 'LumX components/tooltip/Tooltip' };
 
@@ -23,9 +24,7 @@ export const ForceOpen = () => {
 export const InlineTooltip = () => (
     <>
         {'Some text with a '}
-        <Tooltip label="A tooltip on the word 'tooltip'">
-            <u>tooltip</u>
-        </Tooltip>
+        <Tooltip label="A tooltip on the word 'tooltip'">tooltip</Tooltip>
         {' on one word.'}
     </>
 );
@@ -51,3 +50,17 @@ export const EmptyTooltip = () => (
         </Tooltip>
     </>
 );
+
+export const TooltipWithDropdown = () => {
+    const buttonRef = useRef(null);
+    return (
+        <>
+            <Tooltip label={'Tooltip'}>
+                <Button buttonRef={buttonRef}>Anchor</Button>
+            </Tooltip>
+            <Dropdown anchorRef={buttonRef} isOpen>
+                Dropdown
+            </Dropdown>
+        </>
+    );
+};

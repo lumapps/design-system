@@ -11,6 +11,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
+import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
 
 /** Position of the tooltip relative to the anchor element. */
@@ -87,6 +88,7 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     }
 
     const id = useMemo(() => `tooltip-${uuid()}`, []);
+
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const anchorRef = useRef(null);
     const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
@@ -102,11 +104,11 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
     const isOpen = useTooltipOpen({ delay, anchorRef }) || forceOpen;
 
+    const wrappedChildren = useInjectTooltipRef(children, anchorRef, isOpen, id);
+
     return (
         <>
-            <div style={{ display: 'inline-block' }} ref={anchorRef} aria-describedby={isOpen ? id : undefined}>
-                {children}
-            </div>
+            {wrappedChildren}
             {isOpen &&
                 createPortal(
                     <div

@@ -1,14 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Tooltip> Snapshots and structure should not wrap Button 1`] = `
+<Fragment>
+  <Button
+    aria-describedby="tooltip-123"
+    buttonRef={[Function]}
+  >
+    button
+  </Button>
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      aria-label="tooltip1"
+      className="lumx-tooltip lumx-tooltip--position-bottom"
+      id="tooltip-123"
+      role="tooltip"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <div
+        className="lumx-tooltip__arrow"
+      />
+      <div
+        className="lumx-tooltip__inner"
+      >
+        tooltip1
+      </div>
+    </div>
+  </Portal>
+</Fragment>
+`;
+
+exports[`<Tooltip> Snapshots and structure should not wrap Icon 1`] = `
+<Fragment>
+  <Icon
+    aria-describedby="tooltip-123"
+    icon="icon"
+    iconRef={[Function]}
+  />
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      aria-label="tooltip1"
+      className="lumx-tooltip lumx-tooltip--position-bottom"
+      id="tooltip-123"
+      role="tooltip"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <div
+        className="lumx-tooltip__arrow"
+      />
+      <div
+        className="lumx-tooltip__inner"
+      >
+        tooltip1
+      </div>
+    </div>
+  </Portal>
+</Fragment>
+`;
+
 exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
 <Fragment>
   <div
     aria-describedby="tooltip-123"
-    style={
-      Object {
-        "display": "inline-block",
-      }
-    }
+    className="lumx-tooltip-anchor-wrapper"
   >
     Anchor
   </div>
@@ -35,6 +104,88 @@ exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
         className="lumx-tooltip__inner"
       >
         Tooltip
+      </div>
+    </div>
+  </Portal>
+</Fragment>
+`;
+
+exports[`<Tooltip> Snapshots and structure should return children when empty label 1`] = `
+<Fragment>
+  <Icon
+    icon="icon"
+  />
+</Fragment>
+`;
+
+exports[`<Tooltip> Snapshots and structure should wrap children 1`] = `
+<Fragment>
+  <div
+    aria-describedby="tooltip-123"
+    className="lumx-tooltip-anchor-wrapper"
+  >
+    children
+  </div>
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      aria-label="tooltip1"
+      className="lumx-tooltip lumx-tooltip--position-bottom"
+      id="tooltip-123"
+      role="tooltip"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <div
+        className="lumx-tooltip__arrow"
+      />
+      <div
+        className="lumx-tooltip__inner"
+      >
+        tooltip1
+      </div>
+    </div>
+  </Portal>
+</Fragment>
+`;
+
+exports[`<Tooltip> Snapshots and structure should wrap children 2`] = `
+<Fragment>
+  <div
+    aria-describedby="tooltip-123"
+    className="lumx-tooltip-anchor-wrapper"
+  >
+    children
+  </div>
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      aria-label="tooltip1"
+      className="lumx-tooltip lumx-tooltip--position-bottom"
+      id="tooltip-123"
+      role="tooltip"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <div
+        className="lumx-tooltip__arrow"
+      />
+      <div
+        className="lumx-tooltip__inner"
+      >
+        tooltip1
       </div>
     </div>
   </Portal>
