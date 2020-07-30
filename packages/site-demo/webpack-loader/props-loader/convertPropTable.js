@@ -34,7 +34,7 @@ function findComponentsAndProps(definitionById) {
             // Component => Something that returns a react element.
             if (
                 signatures &&
-                signatures.every((sign) => sign.type.name && sign.type.name.endsWith('ReactElement')) &&
+                signatures.every((sign) => sign.type.name && sign.type.name.endsWith('Element')) &&
                 sources[0].fileName.includes(name)
             ) {
                 return {
