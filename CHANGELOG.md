@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   `Dropdown` placement is not limited to `bottom`, `bottom-start` and `bottom-end` anymore.
+-   `Tooltip` anchor is wrapped only if it is not a Button, IconButton, Icon or React HTML Element. Removed `inline-block` display style.
+-   Fixed `Popover` maxHeight when value is NaN.
+
 ## [0.25.5][] - 2020-07-23
 
 ### Changed

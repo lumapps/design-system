@@ -28,7 +28,7 @@ interface DropdownProps extends GenericProps {
     /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
     offset?: Offset;
     /** The preferred Dropdown location against the anchor element. */
-    placement?: Placement.BOTTOM | Placement.BOTTOM_END | Placement.BOTTOM_START;
+    placement?: Placement;
     /** Whether the focus should be set on the list when the dropdown is open. */
     shouldFocusOnOpen?: boolean;
     /** Whether the dropdown should be displayed or not. Useful to control the Dropdown from outside the component. */

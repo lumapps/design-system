@@ -184,12 +184,14 @@ const Popover: React.FC<PopoverProps> = (props) => {
             return newStyles;
         }
 
-        if (fitWithinViewportHeight) {
+        const isBottom = position?.startsWith(Placement.BOTTOM);
+        const isTop = position?.startsWith(Placement.TOP);
+        if (fitWithinViewportHeight && (isBottom || isTop)) {
             const windowHeight = window.innerHeight || document.documentElement.clientHeight;
             newStyles.maxHeight =
-                windowHeight -
-                (position?.startsWith(Placement.BOTTOM) ? anchorRect.y + anchorRect.height : anchorRect.height) -
-                OFFSET;
+                windowHeight - (isBottom ? anchorRect.y + anchorRect.height : anchorRect.height) - OFFSET;
+            // Use undefined in case of NaN maxHeight.
+            newStyles.maxHeight = isNaN(newStyles.maxHeight) ? undefined : newStyles.maxHeight;
         }
 
         return newStyles;
