@@ -1,8 +1,7 @@
 @mixin lumx-input-helper($theme) {
     @include lumx-typography($lumx-input-helper-typography);
 
-    display: flex;
-    align-items: center;
+    display: block;
 
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-color-variant('dark', 'L2');
