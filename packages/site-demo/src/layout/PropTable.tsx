@@ -6,7 +6,7 @@ import orderBy from 'lodash/orderBy';
 import { Alignment, Divider, ExpansionPanel, Grid, GridItem } from '@lumx/react';
 
 // @ts-ignore
-import { propsByComponent } from 'props-loader!';
+import { propsByComponent, propsByProps } from 'props-loader!';
 
 const renderTypeTableRow = ({ type, defaultValue }: Property): ReactElement => {
     let formattedType = <>{type}</>;
@@ -63,16 +63,21 @@ const PropTableRow: React.FC<PropTableRowProps> = ({ property }) => {
     );
 };
 
-const PropTable: React.FC<PropTableProps> = ({ component }) => {
+const PropTable: React.FC<PropTableProps> = ({ component, props }) => {
     const { engine } = useContext(EngineContext);
     if (engine === Engine.angularjs) {
         return <span>Could not load properties of the angular.js {component} component.</span>;
     }
 
-    const propertyList: Property[] = propsByComponent[component];
+    let propertyList: Property[] | undefined;
+    if (component) {
+        propertyList = propsByComponent[component];
+    } else if (props) {
+        propertyList = propsByProps[props];
+    }
 
     if (!propertyList) {
-        return <span>Could not load properties of the react {component} component.</span>;
+        return <span>Could not load properties of the react {component || props} component.</span>;
     }
 
     return (
@@ -104,7 +109,8 @@ interface PropTableRowProps {
 }
 
 interface PropTableProps {
-    component: string;
+    component?: string;
+    props?: string;
 }
 
 export { PropTable, Property };

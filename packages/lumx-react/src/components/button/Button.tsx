@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import isEmpty from 'lodash/isEmpty';
 
 import { Emphasis, Icon, Size, Theme } from '@lumx/react';
+import { BaseButtonProps, ButtonRoot } from '@lumx/react/components/button/ButtonRoot';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { getBasicClass, getRootClassName } from '@lumx/react/utils';
-import { BaseButtonProps, ButtonRoot } from './ButtonRoot';
 
 /**
  * The authorized values for the `emphasis` prop.

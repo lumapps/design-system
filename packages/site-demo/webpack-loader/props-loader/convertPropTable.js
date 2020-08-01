@@ -1,3 +1,4 @@
+/* eslint-disable import/unambiguous */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-use-before-define */
 const lodash = require('lodash');
@@ -88,6 +89,34 @@ function getPropsByComponents(definitionById) {
                     props: props.children.map((child) => ({
                         ...child,
                         componentId: component.id,
+                        defaultValue: (
+                            elements.find((el) => el.type === 'DefaultProps' && el.name === child.name) || {}
+                        ).value,
+                    })),
+                };
+            }
+
+            return undefined;
+        })
+        .values()
+        .filter(Boolean)
+        .keyBy('component')
+        .mapValues(({ props }) => props || [])
+        .value();
+}
+
+function getPropsByProps(definitionById) {
+    return findComponentsAndProps(definitionById)
+        .groupBy('fileName')
+        .mapValues((elements) => {
+            const props = elements.find((el) => el.type === 'Props');
+
+            if (props) {
+                return {
+                    component: props.name,
+                    props: props.children.map((child) => ({
+                        ...child,
+                        componentId: props.id,
                         defaultValue: (
                             elements.find((el) => el.type === 'DefaultProps' && el.name === child.name) || {}
                         ).value,
@@ -277,4 +306,22 @@ function convertToSimplePropsByComponent(typeDocDef) {
     return convertToSimpleProps(definitionById, propsByComponents);
 }
 
-module.exports = { convertToSimplePropsByComponent, indexDefinitionById, findComponentsAndProps, convertToSimpleProp };
+/**
+ * Convert typedoc JSON to a map of simple props indexed by props names.
+ * @param  {Object} typeDocDef Typedoc data.
+ * @return {Object} The simple props description.
+ */
+function convertToSimplePropsByProps(typeDocDef) {
+    const definitionById = indexDefinitionById(typeDocDef);
+    const propsByProps = getPropsByProps(definitionById);
+
+    return convertToSimpleProps(definitionById, propsByProps);
+}
+
+module.exports = {
+    convertToSimplePropsByProps,
+    convertToSimplePropsByComponent,
+    indexDefinitionById,
+    findComponentsAndProps,
+    convertToSimpleProp,
+};

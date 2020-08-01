@@ -1,7 +1,7 @@
 const lodash = require('lodash');
 const typedoc = require('typedoc');
 
-const { convertToSimplePropsByComponent } = require('./convertPropTable');
+const { convertToSimplePropsByComponent, convertToSimplePropsByProps } = require('./convertPropTable');
 
 const inputFiles = ['../lumx-react'];
 const tsconfig = require('../../tsconfig.json');
@@ -32,5 +32,7 @@ module.exports = function propsLoader() {
     // Convert to simple props description.
     const propsByComponent = convertToSimplePropsByComponent(typeDocDef);
 
-    return `module.exports = ${JSON.stringify({ propsByComponent })}`;
+    const propsByProps = convertToSimplePropsByProps(typeDocDef);
+
+    return `module.exports = ${JSON.stringify({ propsByComponent, propsByProps })}`;
 };
