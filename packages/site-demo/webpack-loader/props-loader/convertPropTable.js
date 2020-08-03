@@ -32,11 +32,7 @@ function findComponentsAndProps(definitionById) {
         .map((def) => {
             const { id, kindString, signatures, name, sources, children } = def;
             // Component => Something that returns a react element.
-            if (
-                signatures &&
-                signatures.every((sign) => sign.type.name && sign.type.name.endsWith('Element')) &&
-                sources[0].fileName.includes(name)
-            ) {
+            if (signatures && signatures.every((sign) => sign.type.name) && sources[0].fileName.includes(name)) {
                 return {
                     name,
                     id,
