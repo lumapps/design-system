@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   `@mdi/font` update to the version 5.4.55
--   `@mdi/js` update to the version 5.4.55
+-   `@mdi/font` is updated to the version 5.4.55
+-   `@mdi/js` is updated to the version 5.4.55
 
 ## [0.25.6][] - 2020-07-31
 
