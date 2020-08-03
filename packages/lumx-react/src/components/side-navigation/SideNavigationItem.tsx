@@ -96,6 +96,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                 className,
                 handleBasicClasses({
                     emphasis,
+                    level,
                     isOpen,
                     isSelected,
                     prefix: CLASSNAME,
@@ -106,9 +107,13 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                 <div className={`${CLASSNAME}__wrapper`}>
                     <a
                         {...(linkProps || {})}
-                        className={classNames(`${CLASSNAME}__link`, ` ${CLASSNAME}__link--level-${level}`, {
-                            [`${CLASSNAME}__link-noicon`]: !Boolean(icon),
-                        })}
+                        className={classNames(
+                            handleBasicClasses({
+                                level,
+                                noicon: !Boolean(icon),
+                                prefix: `${CLASSNAME}__link`,
+                            }),
+                        )}
                         tabIndex={0}
                     >
                         {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
