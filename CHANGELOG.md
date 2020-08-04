@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.7][] - 2020-08-04
+
 ### Fixed
 
 -   Fixed and improved `Dropdown` shrinking system.
@@ -638,3 +640,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.5]: https://github.com/lumapps/design-system/tree/v0.25.5
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.6...HEAD
 [0.25.6]: https://github.com/lumapps/design-system/tree/v0.25.6
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.7...HEAD
+[0.25.7]: https://github.com/lumapps/design-system/tree/v0.25.7
