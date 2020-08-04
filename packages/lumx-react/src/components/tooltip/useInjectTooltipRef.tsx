@@ -21,7 +21,12 @@ export const useInjectTooltipRef = (
 ): ReactNode => {
     return useMemo(() => {
         const ariaProps = { 'aria-describedby': isOpen ? id : undefined };
-        if (children && get(children, '$$typeof')) {
+        if (
+            children &&
+            get(children, '$$typeof') &&
+            get(children, 'props.disabled') !== true &&
+            get(children, 'props.isDisabled') !== true
+        ) {
             const type = get(children, 'type');
 
             // Base React HTML element.

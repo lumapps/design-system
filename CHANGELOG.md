@@ -7,14 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Fixed
+### Fixed
 
 -   Fixed and improved `Dropdown` shrinking system.
 -   Fixed unwanted scroll to the top on the screen when opening a `Dropdown`.
+-   Fix `Tooltip` display on disabled anchor.
 
 ### Changed
 
--   Improved `useInfiniteScroll` to prevent conditionnal hooks.
+-   Improved `useInfiniteScroll` to prevent conditional hooks.
 
 ### Added
 

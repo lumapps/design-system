@@ -118,6 +118,47 @@ exports[`<Tooltip> Snapshots and structure should return children when empty lab
 </Fragment>
 `;
 
+exports[`<Tooltip> Snapshots and structure should work on disabled elements 1`] = `
+<Fragment>
+  <div
+    aria-describedby="tooltip-123"
+    className="lumx-tooltip-anchor-wrapper"
+  >
+    <Button
+      disabled={true}
+    >
+      Empty
+    </Button>
+  </div>
+  <Portal
+    containerInfo={<body />}
+  >
+    <div
+      aria-label="Tooltip on disabled button"
+      className="lumx-tooltip lumx-tooltip--position-bottom"
+      id="tooltip-123"
+      role="tooltip"
+      style={
+        Object {
+          "left": "0",
+          "position": "absolute",
+          "top": "0",
+        }
+      }
+    >
+      <div
+        className="lumx-tooltip__arrow"
+      />
+      <div
+        className="lumx-tooltip__inner"
+      >
+        Tooltip on disabled button
+      </div>
+    </div>
+  </Portal>
+</Fragment>
+`;
+
 exports[`<Tooltip> Snapshots and structure should wrap children 1`] = `
 <Fragment>
   <div
