@@ -6,7 +6,7 @@ import { Avatar } from './Avatar';
 
 import { select, text } from '@storybook/addon-knobs';
 
-export default { title: 'LumX components/Avatar' };
+export default { title: 'LumX components/avatar/Avatar' };
 
 /**
  * Avatar stories showing a simple Avatar with different sizes.

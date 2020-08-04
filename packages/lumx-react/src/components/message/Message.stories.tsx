@@ -2,7 +2,7 @@ import { Message, MessageKind } from '@lumx/react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'LumX components/Message' };
+export default { title: 'LumX components/message/Message' };
 
 export const message = () => (
     <Message

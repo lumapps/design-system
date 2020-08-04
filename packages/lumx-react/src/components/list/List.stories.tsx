@@ -9,7 +9,7 @@ import { select, text } from '@storybook/addon-knobs';
 import { List } from './List';
 import { ListItem } from './ListItem';
 
-export default { title: 'LumX components/List/List' };
+export default { title: 'LumX components/list/List' };
 
 export const KeyboardNavigation = () => {
     const listRef = useRef<any>();

@@ -4,7 +4,7 @@ import React from 'react';
 import { mdiClose, mdiViewList } from '@lumx/icons';
 import { Chip, Icon } from '@lumx/react';
 
-export default { title: 'LumX components/Chip' };
+export default { title: 'LumX components/chip/Chip' };
 
 export const simple = ({ theme }: any) => <Chip theme={theme}>The chip</Chip>;
 

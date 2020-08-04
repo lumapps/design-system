@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Emphasis, SideNavigation, SideNavigationItem } from '@lumx/react';
 
-export default { title: 'LumX components/Side Navigation' };
+export default { title: 'LumX components/side-navigation/Side Navigation' };
 
 export const sideNavigation = () => (
     <SideNavigation>

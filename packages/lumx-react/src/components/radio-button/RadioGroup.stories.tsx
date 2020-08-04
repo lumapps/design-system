@@ -2,7 +2,7 @@ import { RadioButton, RadioGroup } from '@lumx/react';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'LumX components/Radio Group' };
+export default { title: 'LumX components/radio-button/Radio Group' };
 
 export const radioGroup = ({ theme }: any) => (
     <RadioGroup>

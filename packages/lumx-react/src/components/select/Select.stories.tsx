@@ -6,7 +6,7 @@ import range from 'lodash/range';
 import React, { SyntheticEvent, useState } from 'react';
 import { SelectVariant } from './constants';
 
-export default { title: 'LumX components/Select' };
+export default { title: 'LumX components/select/Select' };
 
 const CHOICES = ['First item', 'Second item', 'Third item'];
 

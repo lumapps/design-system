@@ -17,7 +17,7 @@ import { DialogSizes } from '@lumx/react/components/dialog/Dialog';
 import { select } from '@storybook/addon-knobs';
 import React, { RefObject, useRef, useState } from 'react';
 
-export default { title: 'LumX components/Dialog' };
+export default { title: 'LumX components/dialog/Dialog' };
 
 function useOpenButton(theme: Theme) {
     const buttonRef = useRef() as RefObject<HTMLButtonElement>;

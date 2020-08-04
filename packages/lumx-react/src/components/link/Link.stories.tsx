@@ -2,7 +2,7 @@ import { ColorPalette, ColorVariant, Link } from '@lumx/react';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import React from 'react';
 
-export default { title: 'LumX components/Link' };
+export default { title: 'LumX components/link/Link' };
 
 export const simpleLink = () => (
     <>
