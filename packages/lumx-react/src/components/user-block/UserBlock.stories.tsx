@@ -3,7 +3,7 @@ import { Badge, ColorPalette, Icon, List, ListItem, Size } from '@lumx/react';
 import React from 'react';
 import { UserBlock } from './UserBlock';
 
-export default { title: 'LumX components/UserBlock' };
+export default { title: 'LumX components/user-block/UserBlock' };
 
 export const s = () => {
     // tslint:disable-next-line:no-console

@@ -5,7 +5,7 @@ import { select, text } from '@storybook/addon-knobs';
 
 import { ListItem } from './ListItem';
 
-export default { title: 'LumX components/List/ListItem' };
+export default { title: 'LumX components/list/ListItem' };
 
 export const Default = ({ theme }: any) => <ListItem theme={theme}>{text('text', 'Text')}</ListItem>;
 

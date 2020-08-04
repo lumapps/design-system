@@ -3,7 +3,7 @@ import { number, text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'LumX components/Slider' };
+export default { title: 'LumX components/slider/Slider' };
 
 export const defaultSlider = ({ theme }: any) => (
     <Slider

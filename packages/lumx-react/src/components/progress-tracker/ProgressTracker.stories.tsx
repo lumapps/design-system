@@ -3,7 +3,7 @@ import { text } from '@storybook/addon-knobs';
 import noop from 'lodash/noop';
 import React from 'react';
 
-export default { title: 'LumX components/Progress Tracker' };
+export default { title: 'LumX components/progress-tracker/Progress Tracker' };
 
 export const simpleSteps = ({ theme }: any) => (
     <ProgressTracker theme={theme}>
