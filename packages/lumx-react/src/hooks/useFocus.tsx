@@ -7,9 +7,9 @@ import { useEffect, useState } from 'react';
  * @param shouldFocus   Boolean flag to trigger the focus
  */
 export function useFocus(element: HTMLElement | null | undefined, shouldFocus = true) {
-    const [wasFocus, setWasFocus] = useState(shouldFocus);
+    const [wasFocus, setWasFocus] = useState(false);
     useEffect(() => {
-        if (wasFocus !== shouldFocus && element) {
+        if (shouldFocus && wasFocus !== shouldFocus && element) {
             element.focus();
             setWasFocus(shouldFocus);
         }

@@ -1,4 +1,6 @@
-import React, { ReactNode, useMemo, useRef, useState } from 'react';
+// @ts-ignore
+import { detectOverflow } from '@popperjs/core';
+import React, { ReactNode, RefObject, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
@@ -6,6 +8,7 @@ import classNames from 'classnames';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
+import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -86,6 +89,8 @@ interface PopoverProps extends GenericProps {
     closeOnEscape?: boolean;
     /** Whether we put an arrow or not. */
     hasArrow?: boolean;
+    /** Element to focus when opening the popover. */
+    focusElement?: RefObject<HTMLElement>;
     /** The function to be called when the user clicks away or Escape is pressed */
     onClose?: VoidFunction;
 }
@@ -131,6 +136,45 @@ const sameWidth = {
 };
 
 /**
+ * Popper js modifier to compute max size of the popover.
+ */
+const maxSize = {
+    name: 'maxSize',
+    enabled: true,
+    phase: 'main',
+    requiresIfExists: ['offset', 'preventOverflow', 'flip'],
+    fn({ state, name, options }: any) {
+        const overflow = detectOverflow(state, options);
+
+        const { y = 0, x = 0 } = state.modifiersData.preventOverflow;
+        const { width, height } = state.rects.popper;
+
+        const [basePlacement] = state.placement.split('-');
+
+        const widthProp = basePlacement === 'left' ? 'left' : 'right';
+        const heightProp = basePlacement === 'top' ? 'top' : 'bottom';
+        state.modifiersData[name] = {
+            width: width - overflow[widthProp] - x,
+            height: height - overflow[heightProp] - y,
+        };
+    },
+};
+
+/**
+ * Popper js modifier to apply the max height.
+ */
+const applyMaxHeight = {
+    name: 'applyMaxHeight',
+    enabled: true,
+    phase: 'beforeWrite',
+    requires: ['maxSize'],
+    fn({ state }: any) {
+        const { height } = state.modifiersData.maxSize;
+        state.elements.popper.style.maxHeight = `${height - OFFSET}px`;
+    },
+};
+
+/**
  * Popover.
  *
  * @param  props The component props.
@@ -151,6 +195,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
         closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
         closeOnEscape = DEFAULT_PROPS.closeOnEscape,
         hasArrow = DEFAULT_PROPS.hasArrow,
+        focusElement,
         className,
         onClose,
         ...forwardedProps
@@ -168,6 +213,9 @@ const Popover: React.FC<PopoverProps> = (props) => {
     if (fitToAnchorWidth) {
         modifiers.push(sameWidth);
     }
+    if (fitWithinViewportHeight) {
+        modifiers.push(maxSize, applyMaxHeight);
+    }
 
     const { styles, attributes, state } = usePopper(anchorRef.current, popperElement, {
         placement,
@@ -175,29 +223,20 @@ const Popover: React.FC<PopoverProps> = (props) => {
     });
 
     const position = state?.placement ?? placement;
-    const anchorRect = state?.rects?.reference ?? anchorRef.current?.getBoundingClientRect();
 
     const popoverStyle = useMemo(() => {
         const newStyles = { ...styles.popper, zIndex };
 
-        if (!anchorRect) {
-            return newStyles;
-        }
-
-        const isBottom = position?.startsWith(Placement.BOTTOM);
-        const isTop = position?.startsWith(Placement.TOP);
-        if (fitWithinViewportHeight && (isBottom || isTop)) {
+        if (fitWithinViewportHeight && !newStyles.maxHeight) {
             const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-            newStyles.maxHeight =
-                windowHeight - (isBottom ? anchorRect.y + anchorRect.height : anchorRect.height) - OFFSET;
-            // Use undefined in case of NaN maxHeight.
-            newStyles.maxHeight = isNaN(newStyles.maxHeight) ? undefined : newStyles.maxHeight;
+            newStyles.maxHeight = windowHeight;
         }
 
         return newStyles;
-    }, [zIndex, styles.popper.transform, anchorRect?.y, anchorRect?.height]);
+    }, [zIndex, styles.popper.transform]);
 
     useCallbackOnEscape(onClose, isOpen && closeOnEscape);
+    useFocus(focusElement?.current, isOpen && (state?.rects?.popper?.y ?? -1) >= 0);
 
     return isOpen
         ? createPortal(

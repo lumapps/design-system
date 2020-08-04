@@ -12,6 +12,11 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
   closeOnEscape={true}
   fitToAnchorWidth={true}
   fitWithinViewportHeight={true}
+  focusElement={
+    Object {
+      "current": null,
+    }
+  }
   isOpen={true}
   placement="bottom-start"
   popoverRef={
