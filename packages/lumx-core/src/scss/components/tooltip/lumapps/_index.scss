@@ -79,4 +79,8 @@
         font-size: $lumx-tooltip-font-size;
         line-height: $lumx-tooltip-line-height;
     }
+
+    &-anchor-wrapper {
+        display: inline-block;
+    }
 }

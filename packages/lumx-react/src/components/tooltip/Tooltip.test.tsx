@@ -104,6 +104,15 @@ describe(`<${Tooltip.displayName}>`, () => {
             );
             expect(wrapper).toMatchSnapshot();
         });
+
+        it('should work on disabled elements', () => {
+            const wrapper = shallow(
+                <Tooltip label="Tooltip on disabled button" forceOpen>
+                    <Button disabled>Empty</Button>
+                </Tooltip>,
+            );
+            expect(wrapper).toMatchSnapshot();
+        });
     });
 
     // Common tests suite.

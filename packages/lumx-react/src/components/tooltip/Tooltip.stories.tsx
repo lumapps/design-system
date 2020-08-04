@@ -64,3 +64,11 @@ export const TooltipWithDropdown = () => {
         </>
     );
 };
+
+export const TooltipOnDisabledButton = () => {
+    return (
+        <Tooltip label={'Tooltip on disabled button'}>
+            <Button disabled>Empty</Button>
+        </Tooltip>
+    );
+};
