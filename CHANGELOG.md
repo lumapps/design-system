@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fixed and improved `Dropdown` shrinking system.
+-   Fixed unwanted scroll to the top on the screen when opening a `Dropdown`.
+
+### Changed
+
+-   Improved `useInfiniteScroll` to prevent conditionnal hooks.
+
+### Added
+
+-   Added `focusElement` prop to the `Popover` component to be able to focus on open.
+
 ## [0.25.6][] - 2020-07-31
 
 ### Fixed

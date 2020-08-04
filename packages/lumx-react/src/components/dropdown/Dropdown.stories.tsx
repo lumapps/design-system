@@ -1,7 +1,19 @@
 import { mdiHome } from '@lumx/icons/index';
 
-import { Alignment, Button, Dropdown, FlexBox, IconButton, Orientation } from '@lumx/react';
-import React, { useRef } from 'react';
+import {
+    Alignment,
+    Button,
+    Dropdown,
+    FlexBox,
+    IconButton,
+    List,
+    ListItem,
+    Orientation,
+    Placement,
+    Size,
+} from '@lumx/react';
+import range from 'lodash/range';
+import React, { useRef, useState } from 'react';
 
 export default { title: 'LumX components/dropdown/Dropdown' };
 
@@ -24,6 +36,176 @@ export const matchAnchorWithMinWidth = () => {
                     Small Dropdown
                 </Dropdown>
             </FlexBox>
+        </>
+    );
+};
+
+export const dropdownInLongPage = () => {
+    const anchorFirstRef = React.useRef(null);
+    const [isFirstOpen, setFirstIsOpen] = React.useState(false);
+    const toggleFirstMenu = () => setFirstIsOpen(!isFirstOpen);
+    const closeFirstMenu = () => setFirstIsOpen(false);
+
+    const onFirstMenuSelected = (item: string) => () => {
+        // tslint:disable-next-line:no-console
+        console.log('selected item', item);
+        closeFirstMenu();
+    };
+
+    const anchorSecondRef = React.useRef(null);
+    const [isSecondOpen, setSecondIsOpen] = React.useState(false);
+    const toggleSecondMenu = () => setSecondIsOpen(!isSecondOpen);
+    const closeSecondMenu = () => setSecondIsOpen(false);
+
+    const onSecondMenuSelected = (item: string) => () => {
+        // tslint:disable-next-line:no-console
+        console.log('selected item', item);
+        closeSecondMenu();
+    };
+
+    const anchorThirdRef = React.useRef(null);
+    const [isThirdOpen, setThirdIsOpen] = React.useState(false);
+    const toggleThirdMenu = () => setThirdIsOpen(!isThirdOpen);
+    const closeThirdMenu = () => setThirdIsOpen(false);
+
+    const onThirdMenuSelected = (item: string) => () => {
+        // tslint:disable-next-line:no-console
+        console.log('selected item', item);
+        closeThirdMenu();
+    };
+
+    return (
+        <div className="demo-grid">
+            Scroll down and open the dropdown.
+            <div style={{ marginTop: '100px' }}>
+                <Button buttonRef={anchorFirstRef} onClick={toggleFirstMenu}>
+                    First Menu
+                </Button>
+
+                <Dropdown
+                    closeOnClickAway
+                    closeOnEscape
+                    isOpen={isFirstOpen}
+                    onClose={closeFirstMenu}
+                    placement={Placement.BOTTOM_START}
+                    anchorRef={anchorFirstRef}
+                >
+                    <List isClickable>
+                        <ListItem onItemSelected={onFirstMenuSelected('losangeles')} size={Size.tiny}>
+                            Los Angeles
+                        </ListItem>
+
+                        <ListItem onItemSelected={onFirstMenuSelected('monterrey')} size={Size.tiny}>
+                            Monterrey
+                        </ListItem>
+
+                        <ListItem onItemSelected={onFirstMenuSelected('georgetown')} size={Size.tiny}>
+                            Georgetown
+                        </ListItem>
+
+                        <ListItem onItemSelected={onFirstMenuSelected('cali')} size={Size.tiny}>
+                            Cali
+                        </ListItem>
+
+                        <ListItem onItemSelected={onFirstMenuSelected('trondheim')} size={Size.tiny}>
+                            Trondheim
+                        </ListItem>
+                    </List>
+                </Dropdown>
+            </div>
+            <div style={{ marginTop: '1000px' }}>
+                <Button buttonRef={anchorSecondRef} onClick={toggleSecondMenu}>
+                    Second Menu
+                </Button>
+
+                <Dropdown
+                    closeOnClickAway
+                    closeOnEscape
+                    isOpen={isSecondOpen}
+                    onClose={closeSecondMenu}
+                    placement={Placement.BOTTOM_START}
+                    anchorRef={anchorSecondRef}
+                >
+                    <List isClickable>
+                        <ListItem onItemSelected={onSecondMenuSelected('losangeles')} size={Size.tiny}>
+                            Los Angeles
+                        </ListItem>
+
+                        <ListItem onItemSelected={onSecondMenuSelected('monterrey')} size={Size.tiny}>
+                            Monterrey
+                        </ListItem>
+
+                        <ListItem onItemSelected={onSecondMenuSelected('georgetown')} size={Size.tiny}>
+                            Georgetown
+                        </ListItem>
+
+                        <ListItem onItemSelected={onSecondMenuSelected('cali')} size={Size.tiny}>
+                            Cali
+                        </ListItem>
+
+                        <ListItem onItemSelected={onSecondMenuSelected('trondheim')} size={Size.tiny}>
+                            Trondheim
+                        </ListItem>
+                    </List>
+                </Dropdown>
+            </div>
+            <div style={{ marginTop: '2000px' }}>
+                <Button buttonRef={anchorThirdRef} onClick={toggleThirdMenu}>
+                    Third Menu
+                </Button>
+
+                <Dropdown
+                    closeOnClickAway
+                    closeOnEscape
+                    isOpen={isThirdOpen}
+                    onClose={closeThirdMenu}
+                    placement={Placement.BOTTOM_START}
+                    anchorRef={anchorThirdRef}
+                >
+                    <List isClickable>
+                        <ListItem onItemSelected={onThirdMenuSelected('losangeles')} size={Size.tiny}>
+                            Los Angeles
+                        </ListItem>
+
+                        <ListItem onItemSelected={onThirdMenuSelected('monterrey')} size={Size.tiny}>
+                            Monterrey
+                        </ListItem>
+
+                        <ListItem onItemSelected={onThirdMenuSelected('georgetown')} size={Size.tiny}>
+                            Georgetown
+                        </ListItem>
+
+                        <ListItem onItemSelected={onThirdMenuSelected('cali')} size={Size.tiny}>
+                            Cali
+                        </ListItem>
+
+                        <ListItem onItemSelected={onThirdMenuSelected('trondheim')} size={Size.tiny}>
+                            Trondheim
+                        </ListItem>
+                    </List>
+                </Dropdown>
+            </div>
+        </div>
+    );
+};
+
+export const dropdownInfiniteScroll = () => {
+    const buttonRef = useRef(null);
+    const [items, setItems] = useState(range(10));
+    const onInfiniteScroll = () => {
+        setItems([...items, ...range(items.length, items.length + 10)]);
+    };
+
+    return (
+        <>
+            <Button buttonRef={buttonRef}>Anchor</Button>
+            <Dropdown anchorRef={buttonRef} isOpen onInfiniteScroll={onInfiniteScroll}>
+                <List>
+                    {items.map((item) => (
+                        <ListItem key={item}>{item}</ListItem>
+                    ))}
+                </List>
+            </Dropdown>
         </>
     );
 };

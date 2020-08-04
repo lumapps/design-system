@@ -1,11 +1,10 @@
-import React, { cloneElement, useMemo, useRef, useState } from 'react';
+import React, { cloneElement, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
 import { List, ListProps } from '@lumx/react/components/list/List';
 import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
-import { useFocus } from '@lumx/react/hooks/useFocus';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
 
@@ -91,17 +90,15 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         ...forwardedProps
     } = props;
     const popoverRef = useRef<HTMLDivElement>(null);
-    const [listElement, setListElement] = useState<HTMLUListElement>();
+    const listElement = useRef(null);
 
-    if (onInfiniteScroll) {
-        useInfiniteScroll(popoverRef, onInfiniteScroll);
-    }
+    useInfiniteScroll(popoverRef, onInfiniteScroll);
 
     const popperElement = useMemo(() => {
         return !Array.isArray(children) && isComponent(List)(children)
             ? cloneElement<ListProps>(children, {
                   ...children.props,
-                  listElementRef: setListElement,
+                  listElementRef: listElement,
                   onClick(evt: MouseEvent) {
                       children.props.onClick?.(evt);
 
@@ -112,11 +109,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
                   isClickable: true,
               })
             : children;
-    }, [setListElement, popoverRef, children, className, closeOnClick, props]);
-
-    // Set the focus on the list when the dropdown opens,
-    // in order to enable keyboard controls.
-    useFocus(listElement, isOpen && shouldFocusOnOpen);
+    }, [listElement, popoverRef, children, className, closeOnClick, props]);
 
     return isOpen ? (
         <Popover
@@ -133,6 +126,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
             onClose={onClose}
             closeOnClickAway={closeOnClickAway}
             closeOnEscape={closeOnEscape}
+            focusElement={shouldFocusOnOpen ? listElement : undefined}
         >
             {popperElement}
         </Popover>
