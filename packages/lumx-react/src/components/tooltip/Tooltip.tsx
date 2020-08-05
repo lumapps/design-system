@@ -1,4 +1,4 @@
-import React, { ReactNode, useMemo, useRef, useState } from 'react';
+import React, { ReactNode, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 import uuid from 'uuid/v4';
@@ -90,8 +90,8 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     const id = useMemo(() => `tooltip-${uuid()}`, []);
 
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
-    const anchorRef = useRef(null);
-    const { styles, attributes } = usePopper(anchorRef.current, popperElement, {
+    const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
+    const { styles, attributes } = usePopper(anchorElement, popperElement, {
         placement,
         modifiers: [
             {
@@ -102,9 +102,8 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     });
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
-    const isOpen = useTooltipOpen({ delay, anchorRef }) || forceOpen;
-
-    const wrappedChildren = useInjectTooltipRef(children, anchorRef, isOpen, id);
+    const isOpen = useTooltipOpen(delay, anchorElement) || forceOpen;
+    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id);
 
     return (
         <>
