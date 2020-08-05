@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.8][] - 2020-08-05
+
 ### Fixed
 
 -   Fix frozen `Tooltip` when changing disabled state of a button wrapped in a tooltip.
@@ -646,3 +648,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.6]: https://github.com/lumapps/design-system/tree/v0.25.6
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.7...HEAD
 [0.25.7]: https://github.com/lumapps/design-system/tree/v0.25.7
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.8...HEAD
+[0.25.8]: https://github.com/lumapps/design-system/tree/v0.25.8
