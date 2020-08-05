@@ -1,21 +1,21 @@
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
 import { get } from 'lodash';
-import React, { MutableRefObject, ReactNode, cloneElement, useMemo } from 'react';
+import React, { ReactNode, cloneElement, useMemo } from 'react';
 
 /**
  * Add ref and ARIA attribute(s) in tooltip children or wrapped children.
  * Button, IconButton, Icon and React HTML elements don't need to be wrapped but any other kind of children (array, fragment, custom components)
  * will be wrapped in a <span>.
  *
- * @param  children  Original tooltip anchor.
- * @param  anchorRef Tooltip anchor ref.
- * @param  isOpen    Whether the tooltip is open or not.
- * @param  id        Tooltip id.
+ * @param  children         Original tooltip anchor.
+ * @param  setAnchorElement Set tooltip anchor element.
+ * @param  isOpen           Whether the tooltip is open or not.
+ * @param  id               Tooltip id.
  * @return tooltip anchor.
  */
 export const useInjectTooltipRef = (
     children: any,
-    anchorRef: MutableRefObject<any>,
+    setAnchorElement: (e: HTMLDivElement) => void,
     isOpen: boolean,
     id: string,
 ): ReactNode => {
@@ -32,12 +32,12 @@ export const useInjectTooltipRef = (
             // Base React HTML element.
             if (typeof type === 'string') {
                 if (children.ref) {
-                    anchorRef.current = children.ref.current;
+                    setAnchorElement(children.ref.current);
                 }
                 return cloneElement(children, {
                     ...children.props,
                     ...ariaProps,
-                    ref: mergeRefs(children.ref, anchorRef),
+                    ref: mergeRefs(children.ref, setAnchorElement),
                 });
             }
 
@@ -46,7 +46,7 @@ export const useInjectTooltipRef = (
                 return cloneElement(children, {
                     ...children.props,
                     ...ariaProps,
-                    buttonRef: mergeRefs(children.props.buttonRef, anchorRef),
+                    buttonRef: mergeRefs(children.props.buttonRef, setAnchorElement),
                 });
             }
 
@@ -55,12 +55,12 @@ export const useInjectTooltipRef = (
                 return cloneElement(children, {
                     ...children.props,
                     ...ariaProps,
-                    iconRef: mergeRefs(children.props.iconRef, anchorRef),
+                    iconRef: mergeRefs(children.props.iconRef, setAnchorElement),
                 });
             }
         }
         return (
-            <div className="lumx-tooltip-anchor-wrapper" ref={anchorRef} {...ariaProps}>
+            <div className="lumx-tooltip-anchor-wrapper" ref={setAnchorElement} {...ariaProps}>
                 {children}
             </div>
         );
