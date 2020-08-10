@@ -21,7 +21,6 @@ interface Setup extends CommonSetup {
  */
 const setup = (propOverrides: Partial<ChipProps> = {}, shallowRendering = true): Setup => {
     const props = {
-        LabelComponent: 'Hello World!',
         ...propOverrides,
     };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;

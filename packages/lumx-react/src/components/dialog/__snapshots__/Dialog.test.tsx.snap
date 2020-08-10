@@ -13,7 +13,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogSizes 1`] = 
     Open dialog
   </Button>
   Use the knobs to change the dialog size!
-  <Component
+  <Dialog
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -83,7 +83,7 @@ Plura mihi bona sunt, inclinet, amari petere vellent. Quae vero auctorem tractat
 dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Unam incolunt Belgae, aliam
 Aquitani, tertiam.
     </div>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -99,7 +99,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     focusElement={
       Object {
         "current": null,
@@ -200,7 +200,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         Focus div
       </div>
     </div>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -216,7 +216,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     forceFooterDivider={true}
     forceHeaderDivider={true}
     isOpen={true}
@@ -255,7 +255,7 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
     >
       Dialog footer
     </footer>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -271,7 +271,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -308,7 +308,7 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
     >
       Dialog footer
     </footer>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -324,7 +324,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     footer="Footer prop"
     header="Header prop"
     isOpen={true}
@@ -353,7 +353,7 @@ iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutr
 Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani,
 tertiam. Cras mattis iudicium purus sit amet fermentum
     </div>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -369,7 +369,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     footer=" Footer prop"
     header=" Header prop"
     isOpen={true}
@@ -408,7 +408,7 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
     >
       Dialog footer
     </footer>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -424,7 +424,7 @@ exports[`<Dialog> Snapshots and structure should render story loadingDialog 1`] 
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     isLoading={true}
     isOpen={true}
     onClose={[Function]}
@@ -452,7 +452,7 @@ iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutr
 Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani,
 tertiam. Cras mattis iudicium purus sit amet fermentum
     </div>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -468,7 +468,7 @@ exports[`<Dialog> Snapshots and structure should render story preventDialogAutoC
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -508,7 +508,7 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
         }
       />
     </footer>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -524,7 +524,7 @@ exports[`<Dialog> Snapshots and structure should render story scrollableDialog 1
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -594,7 +594,7 @@ Plura mihi bona sunt, inclinet, amari petere vellent. Quae vero auctorem tractat
 dicuntur. Me non paenitet nullum festiviorem excogitasse ad hoc. Unam incolunt Belgae, aliam
 Aquitani, tertiam.
     </div>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -610,7 +610,7 @@ exports[`<Dialog> Snapshots and structure should render story scrollableDialogWi
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -689,7 +689,7 @@ Aquitani, tertiam.
     >
       Dialog footer
     </footer>
-  </Component>
+  </Dialog>
 </Fragment>
 `;
 
@@ -705,7 +705,7 @@ exports[`<Dialog> Snapshots and structure should render story simpleDialog 1`] =
   >
     Open dialog
   </Button>
-  <Component
+  <Dialog
     isOpen={true}
     onClose={[Function]}
     parentElement={
@@ -732,6 +732,6 @@ iudicium purus sit amet fermentum. Vivamus sagittis lacus vel augue laoreet rutr
 Quisque ut dolor gravida, placerat libero vel, euismod. Unam incolunt Belgae, aliam Aquitani,
 tertiam. Cras mattis iudicium purus sit amet fermentum
     </div>
-  </Component>
+  </Dialog>
 </Fragment>
 `;

@@ -59,6 +59,15 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
 describe(`<${DatePickerField.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
+        const originalConsoleWarn = console.warn;
+
+        beforeEach(() => {
+            console.warn = jest.fn();
+        });
+        afterEach(() => {
+            console.warn = originalConsoleWarn;
+        });
+
         it('should render correctly', () => {
             const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
@@ -74,6 +83,7 @@ describe(`<${DatePickerField.displayName}>`, () => {
         it('should render without selected date when passed a invalid string', () => {
             const { wrapper } = setup({ value: 'not a real date' });
             expect(wrapper).toMatchSnapshot();
+            expect(console.warn).toHaveBeenCalled();
         });
     });
 
