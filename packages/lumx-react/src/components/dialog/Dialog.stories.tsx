@@ -2,7 +2,6 @@ import { mdiClose } from '@lumx/icons';
 import {
     Button,
     Checkbox,
-    Dialog,
     Emphasis,
     IconButton,
     List,
@@ -13,9 +12,9 @@ import {
     Theme,
     Toolbar,
 } from '@lumx/react';
-import { DialogSizes } from '@lumx/react/components/dialog/Dialog';
 import { select } from '@storybook/addon-knobs';
 import React, { RefObject, useRef, useState } from 'react';
+import { Dialog, DialogSizes } from './Dialog';
 
 export default { title: 'LumX components/dialog/Dialog' };
 
