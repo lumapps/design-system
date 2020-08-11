@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Added `isCrossOriginEnabled` and `crossOrigin` props to the `MosaicElement` interface to be able to forward those props to the `Thumbnail` component inside the `Mosaic`component.
+-   Added `ThumbnailProps` props to the `MosaicElement` interface to be able to forward those props to the `Thumbnail` component inside the `Mosaic`component.
 
 ## [0.25.8][] - 2020-08-05
 
