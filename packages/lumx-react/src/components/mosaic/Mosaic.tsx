@@ -6,7 +6,11 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import classNames from 'classnames';
 import take from 'lodash/take';
 
-interface MosaicElement extends Exclude<ThumbnailProps, 'aspectRatio' | 'fillHeight'> {
+interface MosaicElement extends Omit<ThumbnailProps, 'aspectRatio' | 'fillHeight' | 'theme' | 'image'> {
+    /** @deprecated Use `image` instead. */
+    url: string;
+    /** @todo breaking change removing the `url` prop and making the `image` required. */
+    image?: ThumbnailProps['image'];
     onClick?(index: number): void;
 }
 
@@ -47,10 +51,10 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
         })}
     >
         <div className={`${CLASSNAME}__wrapper`}>
-            {take(thumbnails, 4).map((thumbnail, index) => {
+            {take(thumbnails, 4).map(({ url, image, onClick, ...thumbnail }, index) => {
                 const handleClick = () => {
-                    if (thumbnail.onClick) {
-                        thumbnail.onClick(index);
+                    if (onClick) {
+                        onClick(index);
                     }
                 };
 
@@ -58,9 +62,11 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
                     <div key={index} className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
                             {...thumbnail}
+                            theme={theme}
+                            image={image ?? url}
                             aspectRatio={AspectRatio.free}
                             fillHeight
-                            tabIndex={thumbnail.onClick && '0'}
+                            tabIndex={onClick && '0'}
                             onClick={handleClick}
                         />
 
