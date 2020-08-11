@@ -1,14 +1,15 @@
 import React from 'react';
 
-import { AspectRatio, FocusPoint, Theme, Thumbnail } from '@lumx/react';
+import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import take from 'lodash/take';
 
-interface MosaicElement {
-    url: string;
-    focusPoint?: FocusPoint;
+interface MosaicElement extends Omit<ThumbnailProps, 'aspectRatio' | 'fillHeight' | 'image'> {
+    /** @deprecated use `image` prop instead */
+    url?: string;
+    image?: ThumbnailProps['image'];
     onClick?(index: number): void;
 }
 
@@ -49,23 +50,19 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
         })}
     >
         <div className={`${CLASSNAME}__wrapper`}>
-            {take(thumbnails, 4).map((thumbnail, index) => {
-                const handleClick = () => {
-                    if (thumbnail.onClick) {
-                        thumbnail.onClick(index);
-                    }
-                };
+            {take(thumbnails, 4).map(({ url, image, onClick, ...thumbnail }, index) => {
+                const handleClick = () => onClick?.(index);
 
                 return (
                     <div key={index} className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
-                            tabIndex={thumbnail.onClick && '0'}
+                            {...thumbnail}
+                            tabIndex={onClick && '0'}
                             onClick={handleClick}
                             aspectRatio={AspectRatio.free}
                             fillHeight
-                            image={thumbnail.url}
+                            image={(image || url) as string}
                             theme={theme}
-                            focusPoint={thumbnail.focusPoint}
                         />
 
                         {thumbnails.length > 4 && index === 3 && (
