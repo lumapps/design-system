@@ -208,21 +208,21 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
                     <img
                         {...(imgProps || {})}
                         ref={focusImageRef}
-                        className={`${CLASSNAME}__image`}
-                        src={image}
                         alt={alt}
+                        className={`${CLASSNAME}__image`}
                         loading={loading}
+                        src={image}
                     />
                 ) : (
                     <div className={`${CLASSNAME}__background`}>
                         <img
                             {...(imgProps || {})}
                             ref={focusImageRef}
+                            alt={alt}
                             className={`${CLASSNAME}__focused-image`}
                             crossOrigin={setCrossOrigin()}
-                            src={image}
-                            alt={alt}
                             loading={loading}
+                            src={image}
                         />
                     </div>
                 ))}

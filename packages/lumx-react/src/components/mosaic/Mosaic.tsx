@@ -1,14 +1,21 @@
 import React from 'react';
 
-import { AspectRatio, FocusPoint, Theme, Thumbnail } from '@lumx/react';
+import { AspectRatio, CrossOrigin, FocusPoint, Theme, Thumbnail } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import take from 'lodash/take';
 
 interface MosaicElement {
-    url: string;
+    /**
+     * Allows images that are loaded from foreign origins
+     * to be used as if they had been loaded from the current origin.
+     */
+    crossOrigin?: CrossOrigin;
     focusPoint?: FocusPoint;
+    /** Active cross origin. */
+    isCrossOriginEnabled?: boolean;
+    url: string;
     onClick?(index: number): void;
 }
 
@@ -59,13 +66,15 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
                 return (
                     <div key={index} className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
-                            tabIndex={thumbnail.onClick && '0'}
-                            onClick={handleClick}
                             aspectRatio={AspectRatio.free}
+                            crossOrigin={thumbnail.crossOrigin}
                             fillHeight
-                            image={thumbnail.url}
-                            theme={theme}
                             focusPoint={thumbnail.focusPoint}
+                            image={thumbnail.url}
+                            isCrossOriginEnabled={thumbnail.isCrossOriginEnabled}
+                            tabIndex={thumbnail.onClick && '0'}
+                            theme={theme}
+                            onClick={handleClick}
                         />
 
                         {thumbnails.length > 4 && index === 3 && (
