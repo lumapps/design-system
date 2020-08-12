@@ -58,8 +58,8 @@
         "tslint-eslint-rules": "^5.4.0",
         "tslint-plugin-prettier": "^2.0.1",
         "tslint-react": "^4.1.0",
-        "typescript": "^3.7.5",
-        "webpack": ">=4.41.5",
+        "typescript": "^3.9.7",
+        "webpack": ">=4.44.1",
         "yeoman-generator": "^4.1.0",
         "yo": "^3.1.0"
     },
