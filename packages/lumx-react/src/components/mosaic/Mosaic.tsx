@@ -1,14 +1,16 @@
 import React from 'react';
 
-import { AspectRatio, FocusPoint, Theme, Thumbnail } from '@lumx/react';
+import { AspectRatio, Theme, Thumbnail, ThumbnailProps } from '@lumx/react';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import classNames from 'classnames';
 import take from 'lodash/take';
 
-interface MosaicElement {
+interface MosaicElement extends Omit<ThumbnailProps, 'aspectRatio' | 'fillHeight' | 'theme' | 'image'> {
+    /** @deprecated Use `image` instead. */
     url: string;
-    focusPoint?: FocusPoint;
+    /** @todo breaking change removing the `url` prop and making the `image` required. */
+    image?: ThumbnailProps['image'];
     onClick?(index: number): void;
 }
 
@@ -49,23 +51,23 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
         })}
     >
         <div className={`${CLASSNAME}__wrapper`}>
-            {take(thumbnails, 4).map((thumbnail, index) => {
+            {take(thumbnails, 4).map(({ url, image, onClick, ...thumbnail }, index) => {
                 const handleClick = () => {
-                    if (thumbnail.onClick) {
-                        thumbnail.onClick(index);
+                    if (onClick) {
+                        onClick(index);
                     }
                 };
 
                 return (
                     <div key={index} className={`${CLASSNAME}__thumbnail`}>
                         <Thumbnail
-                            tabIndex={thumbnail.onClick && '0'}
-                            onClick={handleClick}
+                            {...thumbnail}
+                            theme={theme}
+                            image={image ?? url}
                             aspectRatio={AspectRatio.free}
                             fillHeight
-                            image={thumbnail.url}
-                            theme={theme}
-                            focusPoint={thumbnail.focusPoint}
+                            tabIndex={onClick && '0'}
+                            onClick={handleClick}
                         />
 
                         {thumbnails.length > 4 && index === 3 && (
