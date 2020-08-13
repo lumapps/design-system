@@ -3,7 +3,7 @@ import React, { cloneElement, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 
 import { List, ListProps } from '@lumx/react/components/list/List';
-import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
+import { Offset, Placement, Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
@@ -24,6 +24,8 @@ interface DropdownProps extends GenericProps {
     closeOnClick?: boolean;
     /** Whether the dropdown should fit to the anchor width (if dropdown is smaller). */
     fitToAnchorWidth?: boolean;
+    /** Whether the dropdown should shrink to fit within the viewport height. */
+    fitWithinViewportHeight?: PopoverProps['fitWithinViewportHeight'];
     /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
     offset?: Offset;
     /** The preferred Dropdown location against the anchor element. */
@@ -60,6 +62,7 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
     closeOnClickAway: true,
     closeOnEscape: true,
     fitToAnchorWidth: true,
+    fitWithinViewportHeight: true,
     placement: Placement.BOTTOM_START,
     shouldFocusOnOpen: true,
     isOpen: undefined,
@@ -80,6 +83,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
         closeOnEscape = DEFAULT_PROPS.closeOnEscape,
         fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
+        fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
         offset,
         placement = DEFAULT_PROPS.placement,
         shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
@@ -121,7 +125,7 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
             offset={offset}
             zIndex={zIndex}
             fitToAnchorWidth={fitToAnchorWidth}
-            fitWithinViewportHeight
+            fitWithinViewportHeight={fitWithinViewportHeight}
             isOpen={isOpen}
             onClose={onClose}
             closeOnClickAway={closeOnClickAway}
