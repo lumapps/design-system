@@ -1,9 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react';
 
-import { Button, Dialog, Emphasis, Size, Toolbar } from '@lumx/react';
+import { Button, Dialog, DialogSizes, Emphasis, Size, Toolbar } from '@lumx/react';
 
 const App = ({ theme }: any) => {
-    const [size, setSize] = useState();
+    const [size, setSize] = useState<DialogSizes>();
 
     const [isOpen, setOpen] = useState(false);
     const close = useCallback(() => setOpen(false), []);
@@ -11,7 +11,7 @@ const App = ({ theme }: any) => {
 
     const buttonRef = useRef(null);
 
-    const onClickSize = (newSize: Size) => () => {
+    const onClickSize = (newSize: DialogSizes) => () => {
         setSize(newSize);
         toggle();
     };
