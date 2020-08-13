@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Added `ThumbnailProps` props to the `MosaicElement` interface to be able to forward those props to the `Thumbnail` component inside the `Mosaic`component.
 
+### Changed
+
+-   `Tooltip` are now displayed on `focus` in addition with `mouse` events.
+
 ## [0.25.8][] - 2020-08-05
 
 ### Fixed
