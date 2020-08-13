@@ -30,10 +30,14 @@ export function useTooltipOpen(delay: number, anchorElement: HTMLElement | null)
         };
 
         anchorElement.addEventListener('mouseenter', handleMouseEnter);
+        anchorElement.addEventListener('focusin', handleMouseEnter);
         anchorElement.addEventListener('mouseleave', handleMouseLeave);
+        anchorElement.addEventListener('focusout', handleMouseLeave);
         return () => {
             anchorElement.removeEventListener('mouseenter', handleMouseEnter);
+            anchorElement.removeEventListener('focusin', handleMouseEnter);
             anchorElement.removeEventListener('mouseleave', handleMouseLeave);
+            anchorElement.removeEventListener('focusout', handleMouseLeave);
 
             if (timer.current) {
                 clearTimeout(timer.current);
