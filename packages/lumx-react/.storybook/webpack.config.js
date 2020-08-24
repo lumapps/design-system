@@ -1,5 +1,8 @@
+const path = require('path');
 const baseWebpackConfig = require('../webpack.config');
 const CONFIGS = require('../../../configs');
+
+const POSTCSS_CONFIG = path.resolve(__dirname, 'postcss.config.js');
 
 module.exports = async ({ config, mode }) => {
     /** SCSS Loader */
@@ -8,6 +11,14 @@ module.exports = async ({ config, mode }) => {
         loaders: [
             { loader: 'style-loader', options: { attributes: { id: 'injected-styles' } } },
             'css-loader',
+            {
+                loader: 'postcss-loader',
+                options: {
+                    config: {
+                        path: POSTCSS_CONFIG,
+                    },
+                },
+            },
             'sass-loader',
         ],
     });
