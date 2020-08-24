@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Make `Thumbnail` appear correctly on Safari into `Mosaic` component.
+
 ## [0.24.3][] - 2020-06-24
 
 ### Fixed
