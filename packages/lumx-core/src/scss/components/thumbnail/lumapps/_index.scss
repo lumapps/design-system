@@ -10,6 +10,8 @@
 
     &--fill-height {
         display: flex;
+        /* Safari hack to force the image ratio */
+        height: fit-content;
         min-height: 0;
         flex: 1 1 auto;
         flex-direction: column;
