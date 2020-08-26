@@ -101,7 +101,7 @@ const DatePickerField = ({
                 {...textFieldProps}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
-                value={castedValue ? castedValue.format('LL') : ''}
+                value={castedValue ? castedValue.locale(locale).format('LL') : ''}
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
