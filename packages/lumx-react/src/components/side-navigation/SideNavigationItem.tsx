@@ -122,7 +122,13 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                 >
                     {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
                     <span>{label}</span>
-                    {hasContent && <Icon icon={isOpen ? mdiChevronUp : mdiChevronDown} size={Size.xs} />}
+                    {hasContent && (
+                        <Icon
+                            className={`${CLASSNAME}__chevron`}
+                            icon={isOpen ? mdiChevronUp : mdiChevronDown}
+                            size={Size.xs}
+                        />
+                    )}
                 </a>
             )}
 
