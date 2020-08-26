@@ -14,7 +14,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly 1`] =
         "current": null,
       }
     }
-    value="January 18, 1970"
+    value="18 janvier 1970"
   />
 </Fragment>
 `;
@@ -33,7 +33,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly when 
         "current": null,
       }
     }
-    value="January 18, 1970"
+    value="18 janvier 1970"
   />
 </Fragment>
 `;
@@ -52,7 +52,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly when 
         "current": null,
       }
     }
-    value="January 18, 1970"
+    value="18 janvier 1970"
   />
 </Fragment>
 `;
