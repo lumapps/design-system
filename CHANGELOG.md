@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.10][] - 2020-08-26
+
 ### Fixed
 
 -   Use locale prop on `DatePickerField` component.
@@ -671,3 +673,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.8]: https://github.com/lumapps/design-system/tree/v0.25.8
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.9...HEAD
 [0.25.9]: https://github.com/lumapps/design-system/tree/v0.25.9
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.10...HEAD
+[0.25.10]: https://github.com/lumapps/design-system/tree/v0.25.10
