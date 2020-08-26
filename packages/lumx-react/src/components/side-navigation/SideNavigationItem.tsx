@@ -43,9 +43,6 @@ interface SideNavigationItemProps extends GenericProps {
     /** props that will be passed on to the Link */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
-    /** the level of the elem */
-    level?: number;
-
     /** On click handler. */
     onClick?(evt: React.MouseEvent): void;
 }
@@ -67,7 +64,6 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
     isOpen: false,
     isSelected: false,
-    level: 1,
 };
 
 const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
@@ -81,7 +77,6 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         isSelected = DEFAULT_PROPS.isSelected,
         onClick,
         linkProps,
-        level = DEFAULT_PROPS.level,
         ...forwardedProps
     } = props;
 
@@ -96,7 +91,6 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                 className,
                 handleBasicClasses({
                     emphasis,
-                    level,
                     isOpen,
                     isSelected,
                     prefix: CLASSNAME,
@@ -105,47 +99,30 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         >
             {shouldSplitActions ? (
                 <div className={`${CLASSNAME}__wrapper`}>
-                    <a
-                        {...(linkProps || {})}
-                        className={classNames(
-                            handleBasicClasses({
-                                level,
-                                noicon: !Boolean(icon),
-                                prefix: `${CLASSNAME}__link`,
-                            }),
-                        )}
-                        tabIndex={0}
-                    >
+                    <a {...(linkProps || {})} className={`${CLASSNAME}__link`} tabIndex={0}>
                         {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
                         <span>{label}</span>
                     </a>
 
                     <IconButton
-                        className={`${CLASSNAME}__chevron`}
+                        className={`${CLASSNAME}__toggle`}
                         icon={isOpen ? mdiChevronUp : mdiChevronDown}
                         size={Size.m}
                         emphasis={Emphasis.low}
                         onClick={onClick}
-                        isRounded
                     />
                 </div>
             ) : (
                 <a
                     {...(linkProps || {})}
-                    className={`${CLASSNAME}__link ${CLASSNAME}__link--level-${level}`}
+                    className={`${CLASSNAME}__link`}
                     tabIndex={0}
                     onClick={onClick}
                     onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}
                 >
                     {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
                     <span>{label}</span>
-                    {hasContent && (
-                        <Icon
-                            className={`${CLASSNAME}__chevron`}
-                            icon={isOpen ? mdiChevronUp : mdiChevronDown}
-                            size={Size.s}
-                        />
-                    )}
+                    {hasContent && <Icon icon={isOpen ? mdiChevronUp : mdiChevronDown} size={Size.s} />}
                 </a>
             )}
 

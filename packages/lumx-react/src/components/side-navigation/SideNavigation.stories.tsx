@@ -38,14 +38,8 @@ export const With3Levels = () => {
     return (
         <SideNavigation>
             <SideNavigationItem label="Level 1" emphasis={Emphasis.high} isOpen={l1IsOpen} onClick={toggleL1}>
-                <SideNavigationItem
-                    label="Level 2"
-                    emphasis={Emphasis.medium}
-                    isOpen={l2IsOpen}
-                    onClick={toggleL2}
-                    level={2}
-                >
-                    <SideNavigationItem label="Level 3" emphasis={Emphasis.low} level={3} />
+                <SideNavigationItem label="Level 2" emphasis={Emphasis.medium} isOpen={l2IsOpen} onClick={toggleL2}>
+                    <SideNavigationItem label="Level 3" emphasis={Emphasis.low} />
                 </SideNavigationItem>
             </SideNavigationItem>
         </SideNavigation>
@@ -65,7 +59,6 @@ export const With3LevelsAndIcons = () => {
                 emphasis={Emphasis.high}
                 isOpen={l1IsOpen}
                 onClick={toggleL1}
-                level={1}
                 icon={mdiAccount}
             >
                 <SideNavigationItem
@@ -73,10 +66,11 @@ export const With3LevelsAndIcons = () => {
                     emphasis={Emphasis.medium}
                     isOpen={l2IsOpen}
                     onClick={toggleL2}
-                    level={2}
                     icon={mdiAccount}
                 >
-                    <SideNavigationItem label="Level 3" emphasis={Emphasis.low} level={3} icon={mdiAccount} />
+                    <SideNavigationItem label="Level 3.1" emphasis={Emphasis.low} isSelected />
+                    <SideNavigationItem label="Level 3.2" emphasis={Emphasis.low} icon={mdiAccount} />
+                    <SideNavigationItem label="Level 3.3" emphasis={Emphasis.low} icon={mdiAccount} />
                 </SideNavigationItem>
             </SideNavigationItem>
         </SideNavigation>
@@ -103,7 +97,6 @@ export const With3LevelsAndMultiActions = () => {
             >
                 <SideNavigationItem
                     label="Level 2"
-                    level={2}
                     emphasis={Emphasis.medium}
                     isOpen={l2IsOpen}
                     // tslint:disable-next-line: ter-no-script-url
@@ -111,8 +104,14 @@ export const With3LevelsAndMultiActions = () => {
                     onClick={toggleL2}
                 >
                     <SideNavigationItem
-                        label="Level 3"
-                        level={3}
+                        label="Level 3.1"
+                        emphasis={Emphasis.low}
+                        // tslint:disable-next-line: ter-no-script-url
+                        linkProps={{ href: 'javascript:alert("Level 3")' }}
+                        onClick={action3Click}
+                    />
+                    <SideNavigationItem
+                        label="Level 3.2"
                         emphasis={Emphasis.low}
                         // tslint:disable-next-line: ter-no-script-url
                         linkProps={{ href: 'javascript:alert("Level 3")' }}
