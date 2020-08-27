@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Remove useImage hook usage temporarily to fix CORS issues on `Thumbnail` component
+
 ## [0.24.4][] - 2020-08-26
 
 ### Fixed

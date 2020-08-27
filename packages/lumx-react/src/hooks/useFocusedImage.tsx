@@ -12,7 +12,6 @@ import { FocusPoint } from '@lumx/react/components/thumbnail/FocusedImageOptions
  * @param   size                  Size of the image.
  * @param   debounceTime          Debounce time when resizing.
  * @param   isFollowingWindowSize Update on resize.
- * @param   isLoaded              Loaded state of the image.
  * @return                        Function to handle ref.
  */
 const useFocusedImage = (
@@ -21,7 +20,6 @@ const useFocusedImage = (
     size: Size,
     debounceTime: number,
     isFollowingWindowSize: boolean,
-    isLoaded: boolean,
 ) => {
     const focusRef = useRef<FocusedImage | null>(null);
 
@@ -32,14 +30,14 @@ const useFocusedImage = (
     }, [focusRef.current, focus?.x, focus?.y, size]);
 
     useEffect(() => {
-        if (aspectRatio === AspectRatio.original || !isLoaded) {
+        if (aspectRatio === AspectRatio.original) {
             focusRef.current = null;
         }
-    }, [aspectRatio, isLoaded]);
+    }, [aspectRatio]);
 
     return useCallback(
         (f: HTMLImageElement) => {
-            if (aspectRatio === AspectRatio.original || !isLoaded) {
+            if (aspectRatio === AspectRatio.original) {
                 focusRef.current = null;
             } else if (!focusRef.current) {
                 focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
@@ -50,7 +48,7 @@ const useFocusedImage = (
                 });
             }
         },
-        [focusRef.current, aspectRatio, isLoaded],
+        [focusRef.current, aspectRatio],
     );
 };
 
