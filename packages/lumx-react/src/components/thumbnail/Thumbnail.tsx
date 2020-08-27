@@ -1,4 +1,4 @@
-import React, { ImgHTMLAttributes, ReactElement, ReactNode } from 'react';
+import React, { ImgHTMLAttributes, ReactElement, ReactNode, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -12,7 +12,6 @@ import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } fr
 
 import { mdiImageBrokenVariant } from '@lumx/icons';
 import { useFocusedImage } from '@lumx/react/hooks/useFocusedImage';
-import { useImage } from '@lumx/react/hooks/useImage';
 import { isInternetExplorer } from '@lumx/react/utils/isInternetExplorer';
 
 /**
@@ -164,18 +163,54 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     imgProps,
     ...forwardedProps
 }: ThumbnailProps): ReactElement => {
-    const { isLoaded, hasError } = useImage(image);
+    const [hasError, setHasError] = useState(false);
+    const [isLoading, setLoading] = useState(true);
     const focusImageRef = useFocusedImage(
         focusPoint!,
         aspectRatio!,
         size!,
         resizeDebounceTime!,
         isFollowingWindowSize!,
-        isLoaded,
     );
     const setCrossOrigin = () => {
         return !isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined;
     };
+    const onError = () => setHasError(true);
+    const onLoad = () => setLoading(false);
+
+    const renderFallback = () =>
+        typeof fallback === 'string' ? (
+            <Icon className={`${CLASSNAME}__fallback`} icon={fallback as string} size={size || Size.m} theme={theme} />
+        ) : (
+            fallback
+        );
+
+    const renderImage = () =>
+        isLoading || aspectRatio === AspectRatio.original ? (
+            <img
+                {...(imgProps || {})}
+                className={`${CLASSNAME}__image`}
+                src={image}
+                alt={alt}
+                loading={loading}
+                onError={onError}
+                onLoad={onLoad}
+            />
+        ) : (
+            <div className={`${CLASSNAME}__background`}>
+                <img
+                    {...(imgProps || {})}
+                    ref={focusImageRef}
+                    className={`${CLASSNAME}__focused-image`}
+                    crossOrigin={setCrossOrigin()}
+                    src={image}
+                    alt={alt}
+                    loading={loading}
+                    onError={onError}
+                    onLoad={onLoad}
+                />
+            </div>
+        );
 
     return (
         <div
@@ -191,41 +226,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             onClick={onClick}
             onKeyDown={onEnterPressed(onClick)}
         >
-            {hasError &&
-                (typeof fallback === 'string' ? (
-                    <Icon
-                        className={`${CLASSNAME}__fallback`}
-                        icon={fallback as string}
-                        size={size || Size.m}
-                        theme={theme}
-                    />
-                ) : (
-                    fallback
-                ))}
-
-            {isLoaded &&
-                (aspectRatio === AspectRatio.original ? (
-                    <img
-                        {...(imgProps || {})}
-                        ref={focusImageRef}
-                        alt={alt}
-                        className={`${CLASSNAME}__image`}
-                        loading={loading}
-                        src={image}
-                    />
-                ) : (
-                    <div className={`${CLASSNAME}__background`}>
-                        <img
-                            {...(imgProps || {})}
-                            ref={focusImageRef}
-                            alt={alt}
-                            className={`${CLASSNAME}__focused-image`}
-                            crossOrigin={setCrossOrigin()}
-                            loading={loading}
-                            src={image}
-                        />
-                    </div>
-                ))}
+            {hasError ? renderFallback() : renderImage()}
         </div>
     );
 };

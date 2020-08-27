@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix CORS issues on `Thumbnail` component
+
 ### Added
 
 -   Add `isCrossOriginEnabled` and `crossOrigin` missing props on `ImageBlock` component to forward them to `Thumbnail` component
