@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.11][] - 2020-08-27
+
 ### Changed
 
 -   `SideNavigationItem` is now able to handle 2 actions. On the label link and on the chevron icon button.
@@ -680,3 +682,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.9]: https://github.com/lumapps/design-system/tree/v0.25.9
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.10...HEAD
 [0.25.10]: https://github.com/lumapps/design-system/tree/v0.25.10
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.11...HEAD
+[0.25.11]: https://github.com/lumapps/design-system/tree/v0.25.11
