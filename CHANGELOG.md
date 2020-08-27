@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `Tooltip` are now displayed on `focus` in addition with `mouse` events.
+-   `SideNavigationItem` is now able to handle 2 actions. On the label link and on the chevron icon button.
 
 ## [0.25.8][] - 2020-08-05
 

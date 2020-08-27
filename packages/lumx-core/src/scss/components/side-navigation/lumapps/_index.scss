@@ -9,19 +9,13 @@
 /* Item
    ========================================================================== */
 
-/**
- * 1. https://github.com/philipwalton/flexbugs/blob/master/README.md#flexbug-3
- */
-
 .#{$lumx-base-prefix}-side-navigation-item {
     $self: &;
 
-    display: flex; /* [1] */
-    flex-direction: column; /* [1] */
-    margin-bottom: $lumx-spacing-unit / 2;
+    @include lumx-side-navigation-item;
 
-    &:last-child {
-        margin-bottom: 0;
+    &__wrapper {
+        @include lumx-side-navigation-wrapper;
     }
 
     &__link {
@@ -50,10 +44,12 @@
         }
     }
 
-    &__children {
-        @include lumx-list;
+    &__toggle {
+        @include lumx-side-navigation-link-toggle;
+    }
 
-        margin-top: $lumx-spacing-unit / 2;
+    &__children {
+        @include lumx-side-navigation-children;
     }
 }
 

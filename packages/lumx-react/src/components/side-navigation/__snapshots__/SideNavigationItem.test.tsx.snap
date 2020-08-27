@@ -12,3 +12,28 @@ exports[`<SideNavigationItem> Snapshots and structure should render correctly 1`
   </a>
 </li>
 `;
+
+exports[`<SideNavigationItem> Snapshots and structure should render correctly with splitted actions 1`] = `
+<li
+  className="lumx-side-navigation-item lumx-side-navigation-item--emphasis-high"
+>
+  <div
+    className="lumx-side-navigation-item__wrapper"
+  >
+    <a
+      className="lumx-side-navigation-item__link"
+      href="http://toto.com"
+      tabIndex={0}
+    >
+      <span />
+    </a>
+    <IconButton
+      className="lumx-side-navigation-item__toggle"
+      emphasis="low"
+      icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+      onClick={[Function]}
+      size="m"
+    />
+  </div>
+</li>
+`;

@@ -70,6 +70,14 @@ describe(`<${SideNavigationItem.displayName}>`, () => {
             expect(root).toExist();
             expect(root).toHaveClassName(CLASSNAME);
         });
+
+        it('should render correctly with splitted actions', () => {
+            const { root, wrapper } = setup({ linkProps: { href: 'http://toto.com' }, onClick: () => null });
+            expect(wrapper).toMatchSnapshot();
+
+            expect(root).toExist();
+            expect(root).toHaveClassName(CLASSNAME);
+        });
     });
 
     // 2. Test defaultProps value and important props custom values.

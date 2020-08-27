@@ -1,14 +1,22 @@
-@mixin lumx-side-navigation-item() {
-    margin-bottom: $lumx-spacing-unit / 2;
+/**
+ * 1. https://github.com/philipwalton/flexbugs/blob/master/README.md#flexbug-3
+ */
 
-    &:last-child {
-        margin-bottom: 0;
-    }
+@mixin lumx-side-navigation-item() {
+    display: flex; /* [1] */
+    flex-direction: column; /* [1] */
+}
+
+@mixin lumx-side-navigation-wrapper() {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 @mixin lumx-side-navigation-link() {
     display: flex;
     min-height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
+    flex: 1;
     flex-direction: row;
     align-items: center;
     padding: 0 $lumx-spacing-unit;
@@ -38,4 +46,15 @@
     } @else if $emphasis == lumx-base-const('emphasis', 'LOW') {
         @include lumx-typography('body1');
     }
+}
+
+@mixin lumx-side-navigation-link-toggle() {
+    flex-shrink: 0;
+    margin-left: $lumx-spacing-unit;
+}
+
+@mixin lumx-side-navigation-children() {
+    @include lumx-list;
+
+    margin-left: $lumx-spacing-unit * 4.5;
 }

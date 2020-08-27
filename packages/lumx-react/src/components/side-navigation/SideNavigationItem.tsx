@@ -16,6 +16,7 @@ import {
     isComponent,
     onEnterPressed,
 } from '@lumx/react/utils';
+import { IconButton } from '../button/IconButton';
 
 /**
  * Defines the props of the component.
@@ -80,6 +81,9 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
     } = props;
 
     const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
+    const hasContent = !isEmpty(content);
+    const shouldSplitActions = Boolean(linkProps && onClick);
+
     return (
         <li
             {...forwardedProps}
@@ -93,25 +97,42 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                 }),
             )}
         >
-            <a
-                {...(linkProps || {})}
-                className={`${CLASSNAME}__link`}
-                tabIndex={0}
-                onClick={onClick}
-                onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}
-            >
-                {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
-                <span>{label}</span>
-                {!isEmpty(content) && (
-                    <Icon
-                        className={`${CLASSNAME}__chevron`}
-                        icon={isOpen ? mdiChevronUp : mdiChevronDown}
-                        size={Size.xs}
-                    />
-                )}
-            </a>
+            {shouldSplitActions ? (
+                <div className={`${CLASSNAME}__wrapper`}>
+                    <a {...(linkProps || {})} className={`${CLASSNAME}__link`} tabIndex={0}>
+                        {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
+                        <span>{label}</span>
+                    </a>
 
-            {!isEmpty(content) && isOpen && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
+                    <IconButton
+                        className={`${CLASSNAME}__toggle`}
+                        icon={isOpen ? mdiChevronUp : mdiChevronDown}
+                        size={Size.m}
+                        emphasis={Emphasis.low}
+                        onClick={onClick}
+                    />
+                </div>
+            ) : (
+                <a
+                    {...(linkProps || {})}
+                    className={`${CLASSNAME}__link`}
+                    tabIndex={0}
+                    onClick={onClick}
+                    onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}
+                >
+                    {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
+                    <span>{label}</span>
+                    {hasContent && (
+                        <Icon
+                            className={`${CLASSNAME}__chevron`}
+                            icon={isOpen ? mdiChevronUp : mdiChevronDown}
+                            size={Size.xs}
+                        />
+                    )}
+                </a>
+            )}
+
+            {hasContent && isOpen && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
         </li>
     );
 };
