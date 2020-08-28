@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.5][] - 2020-08-28
+
 ### Fixed
 
 -   Remove useImage hook usage temporarily to fix CORS issues on `Thumbnail` component
@@ -550,3 +552,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.24.3]: https://github.com/lumapps/design-system/tree/v0.24.3
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.24.4...HEAD
 [0.24.4]: https://github.com/lumapps/design-system/tree/v0.24.4
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.5...HEAD
+[0.24.5]: https://github.com/lumapps/design-system/tree/v0.24.5
