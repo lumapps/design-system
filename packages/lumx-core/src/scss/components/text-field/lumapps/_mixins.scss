@@ -55,6 +55,15 @@
     background-color: transparent;
     outline: none;
 
+    &[type='number'] {
+        appearance: textfield;
+    }
+
+    &[type='number']::-webkit-inner-spin-button,
+    &[type='number']::-webkit-outer-spin-button {
+        appearance: none;
+    }
+
     @if $theme == lumx-base-const('theme', 'LIGHT') {
         color: lumx-color-variant('dark', 'N');
     } @else if $theme == lumx-base-const('theme', 'DARK') {
