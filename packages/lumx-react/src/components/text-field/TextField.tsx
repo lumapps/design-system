@@ -114,6 +114,7 @@ const DEFAULT_PROPS: Partial<TextFieldProps> = {
     minimumRows: MIN_ROWS,
     multiline: false,
     theme: Theme.light,
+    type: 'text',
 };
 /**
  * Hook that allows to calculate the number of rows needed for a text area.
@@ -170,8 +171,9 @@ interface InputNativeProps {
     multiline?: boolean;
     maxLength?: number;
     placeholder?: string;
-    value?: string | number;
     rows: number;
+    type: string;
+    value?: string | number;
     setFocus(focus: boolean): void;
     recomputeNumberOfRows(target: Element): void;
     onChange(value: string): void;
@@ -194,6 +196,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         inputRef,
         rows,
         recomputeNumberOfRows,
+        type,
         ...forwardedProps
     } = props;
 
@@ -244,7 +247,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
             id={id}
             disabled={isDisabled}
             required={isRequired}
-            type="text"
+            type={type}
             placeholder={placeholder}
             value={value}
             onFocus={onTextFieldFocus}
@@ -287,6 +290,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         multiline = DEFAULT_PROPS.multiline,
         useCustomColors,
         textFieldRef,
+        type = DEFAULT_PROPS.type,
         value,
         ...forwardedProps
     } = props;
@@ -376,6 +380,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
                             recomputeNumberOfRows,
                             rows,
                             setFocus,
+                            type,
                             value,
                             ...forwardedProps,
                         })}

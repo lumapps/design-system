@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Pass type props to input on `TextField` component.
+
 ## [0.25.11][] - 2020-08-27
 
 ### Changed
