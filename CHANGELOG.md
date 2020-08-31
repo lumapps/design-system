@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Fix CORS issues on `Thumbnail` component
+-   Fix `Thumbnail` component loading and error state handling
 
 ### Added
 
