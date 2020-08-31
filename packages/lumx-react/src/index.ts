@@ -39,11 +39,11 @@ export { InputHelper, InputHelperProps } from './components/input-helper/InputHe
 export { InputLabel, InputLabelProps } from './components/input-label/InputLabel';
 
 export {
+    CrossOrigin,
     Thumbnail,
+    ThumbnailAspectRatio,
     ThumbnailProps,
     ThumbnailVariant,
-    ThumbnailAspectRatio,
-    CrossOrigin,
 } from './components/thumbnail/Thumbnail';
 
 export { FocusPoint } from './components/thumbnail/FocusedImageOptions';

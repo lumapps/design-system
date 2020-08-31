@@ -2,10 +2,12 @@ export { getBasicClass, handleBasicClasses, detectSwipe, onEnterPressed, onEscap
 
 export * from './calculatePopoverPlacement';
 
+export { getRootClassName } from './getRootClassName';
+
+export { htmlDecode } from './htmlDecode';
+
 export * from './isInViewPort';
 
 export * from './partitionMulti';
-
-export { getRootClassName } from './getRootClassName';
 
 export * from './type';

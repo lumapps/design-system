@@ -1,4 +1,4 @@
-import React, { ImgHTMLAttributes, ReactElement, ReactNode, useState } from 'react';
+import React, { ImgHTMLAttributes, ReactElement, ReactNode, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -38,6 +38,11 @@ const ThumbnailAspectRatio: Record<string, AspectRatio> = { ...AspectRatio };
 type ThumbnailSize = Size.xxs | Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
 
 /**
+ *  Thumbnail status.
+ */
+type ThumbnailStates = 'isLoading' | 'hasError' | 'isLoaded';
+
+/**
  *  Cross-origin values.
  */
 enum CrossOrigin {
@@ -70,7 +75,7 @@ interface ThumbnailProps extends GenericProps {
     align?: Alignment;
     /** The image aspect ratio. */
     aspectRatio?: AspectRatio;
-    /** Active cross origin. */
+    /** Enable cross origin attribute. */
     isCrossOriginEnabled?: boolean;
     /**
      * Allows images that are loaded from foreign origins
@@ -121,12 +126,12 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: DefaultPropsType = {
     align: Alignment.left,
-    isCrossOriginEnabled: true,
     crossOrigin: CrossOrigin.anonymous,
     aspectRatio: AspectRatio.original,
     fallback: mdiImageBrokenVariant,
     fillHeight: false,
     focusPoint: { x: 0, y: 0 },
+    isCrossOriginEnabled: true,
     loading: ImageLoading.lazy,
     size: undefined,
     theme: Theme.light,
@@ -144,6 +149,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className,
+    // tslint:disable-next-line: no-unused
     isCrossOriginEnabled = DEFAULT_PROPS.isCrossOriginEnabled,
     crossOrigin = DEFAULT_PROPS.crossOrigin,
     resizeDebounceTime = DEFAULT_PROPS.resizeDebounceTime,
@@ -163,21 +169,28 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     imgProps,
     ...forwardedProps
 }: ThumbnailProps): ReactElement => {
-    const [hasError, setHasError] = useState(false);
-    const [isLoading, setLoading] = useState(true);
+    const [thumbnailState, setThumbnailState] = useState<ThumbnailStates>('isLoading');
     const focusImageRef = useFocusedImage(
         focusPoint!,
         aspectRatio!,
         size!,
         resizeDebounceTime!,
         isFollowingWindowSize!,
+        thumbnailState,
     );
-    const setCrossOrigin = () => {
-        return !isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined;
+    const setCrossOrigin = () => (!isInternetExplorer() && isCrossOriginEnabled ? crossOrigin : undefined);
+    const onImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        if (imgProps?.onError) {
+            imgProps.onError(event);
+        }
+        setThumbnailState('hasError');
     };
-    const onError = () => setHasError(true);
-    const onLoad = () => setLoading(false);
-
+    const onImageLoad = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+        if (imgProps?.onLoad) {
+            imgProps.onLoad(event);
+        }
+        setThumbnailState('isLoaded');
+    };
     const renderFallback = () =>
         typeof fallback === 'string' ? (
             <Icon className={`${CLASSNAME}__fallback`} icon={fallback as string} size={size || Size.m} theme={theme} />
@@ -185,32 +198,28 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             fallback
         );
 
-    const renderImage = () =>
-        isLoading || aspectRatio === AspectRatio.original ? (
+    const renderImage = () => {
+        const isOriginalAspectRatio = aspectRatio === AspectRatio.original;
+        const imgClassname = isOriginalAspectRatio ? `${CLASSNAME}__image` : `${CLASSNAME}__focused-image`;
+        const img = (
             <img
                 {...(imgProps || {})}
-                className={`${CLASSNAME}__image`}
+                ref={focusImageRef}
+                className={imgClassname}
+                crossOrigin={setCrossOrigin()}
                 src={image}
                 alt={alt}
                 loading={loading}
-                onError={onError}
-                onLoad={onLoad}
+                onLoad={onImageLoad}
+                onError={onImageError}
             />
-        ) : (
-            <div className={`${CLASSNAME}__background`}>
-                <img
-                    {...(imgProps || {})}
-                    ref={focusImageRef}
-                    className={`${CLASSNAME}__focused-image`}
-                    crossOrigin={setCrossOrigin()}
-                    src={image}
-                    alt={alt}
-                    loading={loading}
-                    onError={onError}
-                    onLoad={onLoad}
-                />
-            </div>
         );
+        return isOriginalAspectRatio ? img : <div className={`${CLASSNAME}__background`}>{img}</div>;
+    };
+
+    useEffect(() => {
+        setThumbnailState('isLoading');
+    }, [image, isCrossOriginEnabled, crossOrigin]);
 
     return (
         <div
@@ -226,7 +235,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             onClick={onClick}
             onKeyDown={onEnterPressed(onClick)}
         >
-            {hasError ? renderFallback() : renderImage()}
+            {thumbnailState === 'hasError' ? renderFallback() : renderImage()}
         </div>
     );
 };
@@ -239,6 +248,7 @@ export {
     ThumbnailProps,
     ThumbnailAspectRatio,
     ThumbnailSize,
+    ThumbnailStates,
     ThumbnailVariant,
     CrossOrigin,
 };

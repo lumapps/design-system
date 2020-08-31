@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix `Thumbnail` component loading and error state handling
+
 ## [0.24.5][] - 2020-08-28
 
 ### Fixed
