@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.6][] - 2020-09-01
+
 ### Fixed
 
 -   Fix `Thumbnail` component loading and error state handling
@@ -563,3 +565,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.24.4]: https://github.com/lumapps/design-system/tree/v0.24.4
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.24.5...HEAD
 [0.24.5]: https://github.com/lumapps/design-system/tree/v0.24.5
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.6...HEAD
+[0.24.6]: https://github.com/lumapps/design-system/tree/v0.24.6
