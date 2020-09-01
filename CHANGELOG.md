@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 -   Fix `Thumbnail` component loading and error state handling
+-   Fix `type` props forwarding on `TextField` component.
 
 ### Added
 
