@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.13][] - 2020-09-01
+
 ### Fixed
 
 -   Fix CORS issues on `Thumbnail` component
@@ -702,3 +704,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.11]: https://github.com/lumapps/design-system/tree/v0.25.11
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.12...HEAD
 [0.25.12]: https://github.com/lumapps/design-system/tree/v0.25.12
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.13...HEAD
+[0.25.13]: https://github.com/lumapps/design-system/tree/v0.25.13
