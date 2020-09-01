@@ -15,5 +15,3 @@ export * from './useChipGroupNavigation';
 export * from './useFocus';
 
 export * from './useFocusedImage';
-
-export * from './useImage';

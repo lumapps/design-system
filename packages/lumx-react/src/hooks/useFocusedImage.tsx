@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { AspectRatio, Size } from '@lumx/react/components';
 import { FocusedImage, LumHTMLImageElement } from '@lumx/react/components/thumbnail/FocusedImage';
 import { FocusPoint } from '@lumx/react/components/thumbnail/FocusedImageOptions';
+import { ThumbnailStates } from '@lumx/react/components/thumbnail/Thumbnail';
 
 /**
  * Handle the focus point and the aspect ratio of an image.
@@ -12,7 +13,7 @@ import { FocusPoint } from '@lumx/react/components/thumbnail/FocusedImageOptions
  * @param   size                  Size of the image.
  * @param   debounceTime          Debounce time when resizing.
  * @param   isFollowingWindowSize Update on resize.
- * @param   isLoaded              Loaded state of the image.
+ * @param   thumbnailState        State of the thumbnail.
  * @return                        Function to handle ref.
  */
 const useFocusedImage = (
@@ -21,7 +22,7 @@ const useFocusedImage = (
     size: Size,
     debounceTime: number,
     isFollowingWindowSize: boolean,
-    isLoaded: boolean,
+    thumbnailState: ThumbnailStates,
 ) => {
     const focusRef = useRef<FocusedImage | null>(null);
 
@@ -32,26 +33,23 @@ const useFocusedImage = (
     }, [focusRef.current, focus?.x, focus?.y, size]);
 
     useEffect(() => {
-        if (aspectRatio === AspectRatio.original || !isLoaded) {
+        if (thumbnailState !== 'isLoaded' || aspectRatio === AspectRatio.original) {
             focusRef.current = null;
         }
-    }, [aspectRatio, isLoaded]);
+    }, [aspectRatio, thumbnailState]);
 
-    return useCallback(
-        (f: HTMLImageElement) => {
-            if (aspectRatio === AspectRatio.original || !isLoaded) {
-                focusRef.current = null;
-            } else if (!focusRef.current) {
-                focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
-                    debounceTime,
-                    focus,
-                    updateOnWindowResize: isFollowingWindowSize,
-                    updateOnContainerResize: isFollowingWindowSize,
-                });
-            }
-        },
-        [focusRef.current, aspectRatio, isLoaded],
-    );
+    return (f: HTMLImageElement) => {
+        if (thumbnailState !== 'isLoaded' || aspectRatio === AspectRatio.original) {
+            focusRef.current = null;
+        } else if (thumbnailState === 'isLoaded' && f) {
+            focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
+                debounceTime,
+                focus,
+                updateOnWindowResize: isFollowingWindowSize,
+                updateOnContainerResize: isFollowingWindowSize,
+            });
+        }
+    };
 };
 
 export { useFocusedImage };
