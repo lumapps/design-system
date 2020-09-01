@@ -102,7 +102,6 @@ export const With3LevelsAndMultiActions = () => {
                     // tslint:disable-next-line: ter-no-script-url
                     linkProps={{ href: 'javascript:alert("Level 2")' }}
                     onActionClick={toggleL2}
-                    hasActionsSplitted
                 >
                     <SideNavigationItem
                         label="Level 3.1"
