@@ -45,6 +45,9 @@ interface SideNavigationItemProps extends GenericProps {
 
     /** On click handler. */
     onClick?(evt: React.MouseEvent): void;
+
+    /** On the action button is clicked */
+    onActionClick?(evt: React.MouseEvent): void;
 }
 
 /**
@@ -75,14 +78,15 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         icon,
         isOpen = DEFAULT_PROPS.isOpen,
         isSelected = DEFAULT_PROPS.isSelected,
-        onClick,
         linkProps,
+        onClick,
+        onActionClick,
         ...forwardedProps
     } = props;
 
     const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
     const hasContent = !isEmpty(content);
-    const shouldSplitActions = Boolean(linkProps && onClick);
+    const shouldSplitActions = Boolean(onActionClick);
 
     return (
         <li
@@ -99,7 +103,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         >
             {shouldSplitActions ? (
                 <div className={`${CLASSNAME}__wrapper`}>
-                    <a {...(linkProps || {})} className={`${CLASSNAME}__link`} tabIndex={0}>
+                    <a {...(linkProps || {})} className={`${CLASSNAME}__link`} onClick={onClick} tabIndex={0}>
                         {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
                         <span>{label}</span>
                     </a>
@@ -109,7 +113,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                         icon={isOpen ? mdiChevronUp : mdiChevronDown}
                         size={Size.m}
                         emphasis={Emphasis.low}
-                        onClick={onClick}
+                        onClick={onActionClick}
                     />
                 </div>
             ) : (
