@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { Alignment, AspectRatio, FocusPoint, Size, Theme, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, CrossOrigin, FocusPoint, Size, Theme, Thumbnail } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -34,6 +34,11 @@ interface ImageBlockProps extends GenericProps {
     captionPosition?: ImageBlockCaptionPosition;
     /** The style to apply to the caption section. */
     captionStyle?: CSSProperties;
+    /**
+     * Allows images that are loaded from foreign origins
+     * to be used as if they had been loaded from the current origin.
+     */
+    crossOrigin?: CrossOrigin;
     /** The image description. Can be either a string, or sanitized html. */
     description?:
         | string
@@ -46,6 +51,8 @@ interface ImageBlockProps extends GenericProps {
     focusPoint?: FocusPoint;
     /** The url of the image we want to display in the image-block. */
     image: string;
+    /** Enable cross origin attribute. */
+    isCrossOriginEnabled?: boolean;
     /** The image block size. */
     size?: ImageBlockSize;
     /** Tags elements to be transcluded into the component */
@@ -101,10 +108,12 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     className,
     captionPosition = DEFAULT_PROPS.captionPosition,
     captionStyle = DEFAULT_PROPS.captionStyle,
+    crossOrigin,
     description = DEFAULT_PROPS.description,
     fillHeight = DEFAULT_PROPS.fillHeight,
     focusPoint = DEFAULT_PROPS.focusPoint,
     image,
+    isCrossOriginEnabled,
     size = DEFAULT_PROPS.size,
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
@@ -135,14 +144,16 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
         >
             <Thumbnail
                 align={align}
-                className={`${CLASSNAME}__image`}
                 aspectRatio={aspectRatio}
-                size={size}
+                className={`${CLASSNAME}__image`}
+                crossOrigin={crossOrigin}
                 fillHeight={fillHeight}
                 focusPoint={focusPoint}
                 image={image}
-                onClick={onClick}
+                isCrossOriginEnabled={isCrossOriginEnabled}
+                size={size}
                 theme={theme}
+                onClick={onClick}
             />
             {(title || description || tags) && (
                 <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>
