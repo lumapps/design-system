@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Fix CORS issues on `Thumbnail` component
 -   Fix `Thumbnail` component loading and error state handling
+-   Remove anchor wrapper style from `Tooltip` component.
 
 ### Added
 
