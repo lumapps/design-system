@@ -15,6 +15,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const WebpackNotifierPlugin = require('webpack-notifier');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { argv } = require('yargs');
 
 const CONFIGS = require('../../configs');
 
@@ -78,6 +80,18 @@ if (!IS_CI) {
         new WebpackNotifierPlugin({
             alwaysNotify: true,
             title: `LumX - ${PKG_NAME} Package`,
+        }),
+    );
+}
+
+if (argv && argv.analyze) {
+    plugins.push(
+        new BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            defaultSizes: 'gzip',
+            generateStatsFile: true,
+            logLevel: 'silent',
+            openAnalyzer: false,
         }),
     );
 }

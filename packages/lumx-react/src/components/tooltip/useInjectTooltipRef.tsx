@@ -1,5 +1,5 @@
 import { mergeRefs } from '@lumx/react/utils/mergeRefs';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import React, { ReactNode, cloneElement, useMemo } from 'react';
 
 /**
