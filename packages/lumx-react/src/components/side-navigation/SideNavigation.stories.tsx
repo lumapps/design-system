@@ -82,7 +82,7 @@ export const With3LevelsAndMultiActions = () => {
     const [l2IsOpen, setL2IsOpen] = React.useState(true);
     const toggleL1 = () => setL1IsOpen(!l1IsOpen);
     const toggleL2 = () => setL2IsOpen(!l2IsOpen);
-    const action3Click = () => alert('Level 3 chevron');
+    const alertMessage = (message: string) => () => alert(message);
 
     return (
         <SideNavigation>
@@ -92,8 +92,8 @@ export const With3LevelsAndMultiActions = () => {
                 isOpen={l1IsOpen}
                 // tslint:disable-next-line: ter-no-script-url
                 linkProps={{ href: 'javascript:alert("Level 1")' }}
-                onClick={toggleL1}
                 icon={mdiAccount}
+                onActionClick={toggleL1}
             >
                 <SideNavigationItem
                     label="Level 2"
@@ -101,21 +101,20 @@ export const With3LevelsAndMultiActions = () => {
                     isOpen={l2IsOpen}
                     // tslint:disable-next-line: ter-no-script-url
                     linkProps={{ href: 'javascript:alert("Level 2")' }}
-                    onClick={toggleL2}
+                    onActionClick={toggleL2}
                 >
                     <SideNavigationItem
                         label="Level 3.1"
                         emphasis={Emphasis.low}
                         // tslint:disable-next-line: ter-no-script-url
-                        linkProps={{ href: 'javascript:alert("Level 3")' }}
-                        onClick={action3Click}
+                        linkProps={{ href: 'javascript:alert("Level 3.1 item is clicked")' }}
+                        onActionClick={alertMessage('Level 3.1 action is clicked')}
                     />
                     <SideNavigationItem
                         label="Level 3.2"
                         emphasis={Emphasis.low}
-                        // tslint:disable-next-line: ter-no-script-url
-                        linkProps={{ href: 'javascript:alert("Level 3")' }}
-                        onClick={action3Click}
+                        onClick={alertMessage('Level 3.2 item is clicked')}
+                        onActionClick={alertMessage('Level 3.2 action is clicked')}
                     />
                 </SideNavigationItem>
             </SideNavigationItem>
