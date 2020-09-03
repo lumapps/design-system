@@ -44,7 +44,7 @@ export class FocusedImage {
     public options: FocusedImageOptions;
     public container: HTMLElement;
     public img: LumHTMLImageElement;
-    public resizeListenerObject!: HTMLObjectElement;
+    public resizeListenerObject?: HTMLObjectElement;
     public listening: boolean = false;
     public debounceApplyShift: () => void;
 
@@ -139,7 +139,7 @@ export class FocusedImage {
         // Use load event callback because contentDocument doesn't exist
         // until this fires in Firefox
         object.addEventListener('load', () =>
-            object.contentDocument!.defaultView!.addEventListener('resize', () => this.debounceApplyShift()),
+            object.contentDocument?.defaultView?.addEventListener('resize', () => this.debounceApplyShift()),
         );
         object.type = 'text/html';
         object.setAttribute('aria-hidden', 'true');
@@ -160,7 +160,7 @@ export class FocusedImage {
             return;
         }
 
-        this.resizeListenerObject.contentDocument!.defaultView!.removeEventListener('resize', this.debounceApplyShift);
+        this.resizeListenerObject.contentDocument?.defaultView?.removeEventListener('resize', this.debounceApplyShift);
         this.container.removeChild(this.resizeListenerObject);
         delete this.resizeListenerObject;
     }
