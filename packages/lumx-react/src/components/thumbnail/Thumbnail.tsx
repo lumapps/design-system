@@ -1,4 +1,4 @@
-import React, { ImgHTMLAttributes, ReactElement, ReactNode, useEffect, useState } from 'react';
+import React, { ImgHTMLAttributes, ReactElement, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -191,14 +191,22 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
         }
         setThumbnailState('isLoaded');
     };
-    const renderFallback = () =>
-        typeof fallback === 'string' ? (
-            <Icon className={`${CLASSNAME}__fallback`} icon={fallback as string} size={size || Size.m} theme={theme} />
-        ) : (
-            fallback
-        );
+    const renderedFallback = useMemo(
+        () =>
+            typeof fallback === 'string' ? (
+                <Icon
+                    className={`${CLASSNAME}__fallback`}
+                    icon={fallback as string}
+                    size={size || Size.m}
+                    theme={theme}
+                />
+            ) : (
+                fallback
+            ),
+        [fallback, size],
+    );
 
-    const renderImage = () => {
+    const renderedImage = useMemo(() => {
         const isOriginalAspectRatio = aspectRatio === AspectRatio.original;
         const imgClassname = isOriginalAspectRatio ? `${CLASSNAME}__image` : `${CLASSNAME}__focused-image`;
         const img = (
@@ -215,7 +223,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             />
         );
         return isOriginalAspectRatio ? img : <div className={`${CLASSNAME}__background`}>{img}</div>;
-    };
+    }, [aspectRatio, crossOrigin, image, imgProps, onImageError, onImageLoad]);
 
     useEffect(() => {
         setThumbnailState('isLoading');
@@ -235,7 +243,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
             onClick={onClick}
             onKeyDown={onEnterPressed(onClick)}
         >
-            {thumbnailState === 'hasError' ? renderFallback() : renderImage()}
+            {thumbnailState === 'hasError' ? renderedFallback : renderedImage}
         </div>
     );
 };

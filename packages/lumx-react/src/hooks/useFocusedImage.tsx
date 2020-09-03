@@ -33,15 +33,15 @@ const useFocusedImage = (
     }, [focusRef.current, focus?.x, focus?.y, size]);
 
     useEffect(() => {
-        if (thumbnailState !== 'isLoaded' || aspectRatio === AspectRatio.original) {
+        if (thumbnailState === 'hasError' || aspectRatio === AspectRatio.original) {
             focusRef.current = null;
         }
     }, [aspectRatio, thumbnailState]);
 
     return (f: HTMLImageElement) => {
-        if (thumbnailState !== 'isLoaded' || aspectRatio === AspectRatio.original) {
+        if (thumbnailState === 'hasError' || aspectRatio === AspectRatio.original) {
             focusRef.current = null;
-        } else if (thumbnailState === 'isLoaded' && f) {
+        } else if (f && !focusRef.current) {
             focusRef.current = new FocusedImage(f as LumHTMLImageElement, {
                 debounceTime,
                 focus,

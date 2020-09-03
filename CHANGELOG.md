@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Add `onActionClick` on `SideNavigationItem` to have a dedicated action on the chevron icon and let the onClick on the link.
+
+### Fixed
+
+-   Fix `Thumbnail` component loading issues for firefox
+
 ## [0.25.13][] - 2020-09-01
 
 ### Fixed
@@ -18,7 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Add `isCrossOriginEnabled` and `crossOrigin` missing props on `ImageBlock` component to forward them to `Thumbnail` component
--   Add `onActionClick` on `SideNavigationItem` to have a dedicated action on the chevron icon and let the onClick on the link.
 
 ## [0.25.12][] - 2020-08-31
 
