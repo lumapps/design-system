@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.25.14][] - 2020-09-03
+
 ### Added
 
 -   Add `onActionClick` on `SideNavigationItem` to have a dedicated action on the chevron icon and let the onClick on the link.
@@ -714,3 +716,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.12]: https://github.com/lumapps/design-system/tree/v0.25.12
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.13...HEAD
 [0.25.13]: https://github.com/lumapps/design-system/tree/v0.25.13
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.25.14...HEAD
+[0.25.14]: https://github.com/lumapps/design-system/tree/v0.25.14
