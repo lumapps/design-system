@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix `Thumbnail` component loading issues for firefox
+
 ## [0.25.13][] - 2020-09-01
 
 ### Fixed
