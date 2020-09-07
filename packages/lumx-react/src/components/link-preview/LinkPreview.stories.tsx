@@ -1,4 +1,5 @@
 /* istanbul ignore file */
+import { landscapeImageKnob, portraitImageKnob } from '@lumx/react/stories/knobs';
 import { text } from '@storybook/addon-knobs';
 import React from 'react';
 import { Size } from '..';
@@ -20,7 +21,7 @@ export const regularLinkPreview = ({ theme }: any) => (
         description={text('Description', LONG_LOREM_IPSUM)}
         link={text('URL', 'https://google.com')}
         theme={theme}
-        thumbnail={text('Image', 'https://loremflickr.com/320/240')}
+        thumbnail={portraitImageKnob()}
     />
 );
 
@@ -57,7 +58,7 @@ export const bigLinkPreview = ({ theme }: any) => {
                 description={text('Description', LONG_LOREM_IPSUM)}
                 link={text('URL', 'https://google.com')}
                 theme={theme}
-                thumbnail={text('Image', 'https://loremflickr.com/320/240')}
+                thumbnail={landscapeImageKnob()}
                 size={Size.big}
             />
         </div>
@@ -86,7 +87,7 @@ export const bigWithoutThumbnail = ({ theme }: any) => {
 
 /**
  * LinkPreview story
- * @return big LinkPreview without thumbnail, title and descritpion.
+ * @return big LinkPreview without thumbnail, title and description.
  */
 export const bigWithOnlyUrl = ({ theme }: any) => {
     const wrapperStyle = { width: 400 };

@@ -15,7 +15,7 @@ import {
     UserBlock,
 } from '@lumx/react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <>
         <PostBlock
             actions={
@@ -41,7 +41,7 @@ const App = ({ theme }: any) => (
             }
             attachments={
                 <UserBlock
-                    avatar="http://i.pravatar.cc/128"
+                    avatar="/demo-assets/persona.png"
                     name="Matthias Manoukian"
                     fields={['Head of Design', 'Lyon']}
                     orientation={Orientation.vertical}
@@ -50,7 +50,7 @@ const App = ({ theme }: any) => (
                 />
             }
             author={
-                <UserBlock avatar="http://i.pravatar.cc/128" name="Matthias Manoukian" size={Size.s} theme={theme} />
+                <UserBlock avatar="/demo-assets/avatar2.jpg" name="Matthias Manoukian" size={Size.s} theme={theme} />
             }
             tags={
                 <ChipGroup>
@@ -73,10 +73,8 @@ const App = ({ theme }: any) => (
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rhoncus libero aliquet pharetra luctus. Fusce nisl turpis, posuere ac tellus at, euismod vulputate libero...',
             }}
             theme={theme}
-            thumbnail="https://picsum.photos/800/600/?random"
+            thumbnail="/demo-assets/landscape1.jpg"
             title="Annual Bonus Payments"
         />
     </>
 );
-
-export default App;

@@ -25,5 +25,5 @@
         "skipLibCheck": true,
         "target": "es5"
     },
-    "exclude": ["**/dist/", "node_modules"]
+    "exclude": ["**/dist/", "**/public/", "node_modules"]
 }

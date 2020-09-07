@@ -4,7 +4,13 @@ import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
 import React, { useCallback, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
-export default { title: 'LumX components/ClickAwayProvider' };
+export default {
+    title: 'LumX components/ClickAwayProvider',
+    parameters: {
+        // Disables Chromatic snapshot (not relevant for this story).
+        chromatic: { disable: true },
+    },
+};
 
 const Card = React.forwardRef<any, any>(({ children, close }, ref) => (
     <ClickAwayProvider callback={close} refs={[ref as any]}>

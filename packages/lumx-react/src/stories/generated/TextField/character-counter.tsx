@@ -1,1 +1,1 @@
-/home/gcornut/git/design-system/packages/site-demo/content/product/components/text-field/react/character-counter.tsx
+/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/text-field/react/character-counter.tsx

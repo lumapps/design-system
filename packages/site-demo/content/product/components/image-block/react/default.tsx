@@ -44,6 +44,6 @@ export const App = ({ theme }: any) => (
         }
         theme={theme}
         title="Lorem ipsum"
-        image="https://picsum.photos/800/600/?random"
+        image="/demo-assets/landscape1.jpg"
     />
 );

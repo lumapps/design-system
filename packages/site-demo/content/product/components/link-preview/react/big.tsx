@@ -6,10 +6,10 @@ export const App = ({ theme }: any) => (
         <LinkPreview
             title={'Link title'}
             description={'Description'}
-            url={'https://google.com'}
+            link={'https://google.com'}
             size={Size.big}
             theme={theme}
-            thumbnail={'https://picsum.photos/320/240'}
+            thumbnail="/demo-assets/landscape3.jpg"
         />
     </div>
 );

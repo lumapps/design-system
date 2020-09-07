@@ -32,11 +32,7 @@ export const App = () => {
                         orientation={Orientation.horizontal}
                         hAlign={Alignment.center}
                     >
-                        <Thumbnail
-                            image="https://picsum.photos/72/72/?random"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
+                        <Thumbnail image="/demo-assets/square1.jpg" size={Size.m} variant={ThumbnailVariant.rounded} />
 
                         <span className="lumx-spacing-margin-left-big lumx-typography-body1">With thumbnail</span>
                     </FlexBox>
@@ -55,11 +51,7 @@ export const App = () => {
                         orientation={Orientation.horizontal}
                         hAlign={Alignment.center}
                     >
-                        <Thumbnail
-                            image="https://picsum.photos/72/72/?random"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
+                        <Thumbnail image="/demo-assets/square1.jpg" size={Size.m} variant={ThumbnailVariant.rounded} />
 
                         <div className="lumx-spacing-margin-left-big">
                             <span className="lumx-base-display-block lumx-typography-body1">With thumbnail</span>
@@ -105,11 +97,7 @@ export const App = () => {
             <ExpansionPanel isOpen={isOpen4} onToggleOpen={setOpen4}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                        <Thumbnail
-                            image="https://picsum.photos/72/72/?random"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
+                        <Thumbnail image="/demo-assets/square1.jpg" size={Size.m} variant={ThumbnailVariant.rounded} />
 
                         <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
                     </FlexBox>
@@ -126,11 +114,7 @@ export const App = () => {
             <ExpansionPanel isOpen={isOpen5} onToggleOpen={setOpen5}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                        <Thumbnail
-                            image="https://picsum.photos/72/72/?random"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
+                        <Thumbnail image="/demo-assets/square1.jpg" size={Size.m} variant={ThumbnailVariant.rounded} />
 
                         <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
                     </FlexBox>
@@ -147,11 +131,7 @@ export const App = () => {
             <ExpansionPanel isOpen={isOpen6} onToggleOpen={setOpen6}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                        <Thumbnail
-                            image="https://picsum.photos/72/72/?random"
-                            size={Size.m}
-                            variant={ThumbnailVariant.rounded}
-                        />
+                        <Thumbnail image="/demo-assets/square1.jpg" size={Size.m} variant={ThumbnailVariant.rounded} />
 
                         <span className="lumx-spacing-margin-left-big lumx-typography-body1">With Dividers</span>
                     </FlexBox>

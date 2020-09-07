@@ -5,7 +5,7 @@ import React from 'react';
 export const App = ({ theme }: any) => (
     <Avatar
         theme={theme}
-        image="./assets/persona.png"
+        image="/demo-assets/persona.png"
         size={Size.xl}
         actions={
             <FlexBox orientation={Orientation.horizontal} vAlign={Alignment.center} gap={Size.regular}>

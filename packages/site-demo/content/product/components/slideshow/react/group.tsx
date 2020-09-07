@@ -2,71 +2,33 @@ import { AspectRatio, ImageBlock, ImageBlockCaptionPosition, Slideshow, Slidesho
 import React from 'react';
 
 export const App = ({ theme }: any) => {
-    const slideshowStyle = {
-        width: '100%',
-    };
-
     const imageBlockDemoProps = {
         description: 'What an image',
         title: 'Nice Image',
     };
 
+    const images = [
+        '/demo-assets/landscape1.jpg',
+        '/demo-assets/portrait1.jpg',
+        '/demo-assets/landscape2.jpg',
+        '/demo-assets/portrait2.jpg',
+        '/demo-assets/landscape3.jpg',
+        '/demo-assets/portrait3.jpg',
+    ];
+
     return (
-        <Slideshow activeIndex={0} hasControls theme={theme} autoPlay groupBy={2} style={slideshowStyle}>
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=31"
-                    theme={theme}
-                    {...imageBlockDemoProps}
-                />
-            </SlideshowItem>
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=30"
-                    theme={theme}
-                    {...imageBlockDemoProps}
-                />
-            </SlideshowItem>
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=32"
-                    theme={theme}
-                    {...imageBlockDemoProps}
-                />
-            </SlideshowItem>
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=38"
-                    theme={theme}
-                    {...imageBlockDemoProps}
-                />
-            </SlideshowItem>
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=36"
-                    theme={theme}
-                    {...imageBlockDemoProps}
-                />
-            </SlideshowItem>
-            <SlideshowItem>
-                <ImageBlock
-                    aspectRatio={AspectRatio.horizontal}
-                    captionPosition={ImageBlockCaptionPosition.over}
-                    image="https://picsum.photos/640/480/?image=34"
-                    theme={theme}
-                    {...imageBlockDemoProps}
-                />
-            </SlideshowItem>
+        <Slideshow activeIndex={0} hasControls theme={theme} autoPlay groupBy={2} style={{ width: '100%' }}>
+            {images.map((image) => (
+                <SlideshowItem key={image}>
+                    <ImageBlock
+                        aspectRatio={AspectRatio.horizontal}
+                        captionPosition={ImageBlockCaptionPosition.over}
+                        image={image}
+                        theme={theme}
+                        {...imageBlockDemoProps}
+                    />
+                </SlideshowItem>
+            ))}
         </Slideshow>
     );
 };

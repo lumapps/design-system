@@ -10,7 +10,7 @@ export const App = ({ theme }: any) => {
             theme={theme}
             name="Emmitt O. Lum"
             fields={['Creative developer', 'Denpasar']}
-            avatar="../avatar/assets/persona.png"
+            avatar="/demo-assets/persona.png"
             size={Size.l}
             orientation={Orientation.vertical}
             onMouseEnter={logAction('Mouse entered')}

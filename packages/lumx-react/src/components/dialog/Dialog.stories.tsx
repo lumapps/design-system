@@ -16,7 +16,13 @@ import { select } from '@storybook/addon-knobs';
 import React, { RefObject, useRef, useState } from 'react';
 import { Dialog, DialogSizes } from './Dialog';
 
-export default { title: 'LumX components/dialog/Dialog' };
+export default {
+    title: 'LumX components/dialog/Dialog',
+    parameters: {
+        // Notifies Chromatic to pause the animations when they finish for the specific story.
+        chromatic: { pauseAnimationAtEnd: true },
+    },
+};
 
 function useOpenButton(theme: Theme) {
     const buttonRef = useRef() as RefObject<HTMLButtonElement>;

@@ -15,7 +15,7 @@ export const App = () => (
                 </ChipGroup>
             }
             title="Lorem ipsum"
-            image="https://picsum.photos/800/600/?random"
+            image="/demo-assets/landscape3.jpg"
         />
     </div>
 );

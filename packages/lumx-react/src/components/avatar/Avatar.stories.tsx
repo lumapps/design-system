@@ -1,104 +1,67 @@
+import { mdiDelete, mdiEye, mdiPencil, mdiStar } from '@lumx/icons';
+import { AvatarSize, Badge, ColorPalette, Emphasis, Icon, IconButton, Size } from '@lumx/react';
+import { AVATAR_IMAGES, avatarImageKnob } from '@lumx/react/stories/knobs';
+import { select } from '@storybook/addon-knobs';
 import React from 'react';
 
-import { mdiDelete, mdiEye, mdiPencil, mdiStar } from '@lumx/icons';
-import { Badge, ColorPalette, Emphasis, Icon, IconButton, Size } from '@lumx/react';
 import { Avatar } from './Avatar';
 
-import { select, text } from '@storybook/addon-knobs';
-
 export default { title: 'LumX components/avatar/Avatar' };
+
+const AVATAR_SIZES: AvatarSize[] = [Size.xs, Size.s, Size.m, Size.l, Size.xl, Size.xxl];
 
 /**
  * Avatar stories showing a simple Avatar with different sizes.
  * @return component with different sizes.
  */
-export const xs = () => <Avatar image={text('Image', 'http://i.pravatar.cc/40')} size={Size.xs} />;
-
-export const s = () => <Avatar image={text('Image', 'http://i.pravatar.cc/48')} size={Size.s} />;
-
-export const m = () => <Avatar image={text('Image', 'http://i.pravatar.cc/72')} size={Size.m} />;
-
-export const l = () => <Avatar image={text('Image', 'http://i.pravatar.cc/128')} size={Size.l} />;
+export const AvatarSizes = () =>
+    AVATAR_SIZES.map((size) => (
+        <Avatar
+            key={size}
+            className="lumx-spacing-margin-bottom"
+            image={avatarImageKnob('Avatar', AVATAR_IMAGES.avatar1)}
+            size={size}
+        />
+    ));
 
 /**
  * Avatar story showing a simple avatar with different actions.
  * @return component with different actions.
  */
-export const avatarWithActions = () => (
-    <Avatar
-        image={text('Image', 'http://i.pravatar.cc/256')}
-        size={Size.xl}
-        actions={
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <div className="lumx-spacing-margin-right-regular">
-                    <IconButton
-                        color="dark"
-                        emphasis={Emphasis.low}
-                        hasBackground={true}
-                        icon={mdiPencil}
-                        size={Size.s}
-                    />
-                </div>
+export const AvatarWithActions = () =>
+    AVATAR_SIZES.map((size) => (
+        <Avatar
+            image={avatarImageKnob('Avatar', AVATAR_IMAGES.avatar2)}
+            size={size}
+            actions={
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div className="lumx-spacing-margin-right-regular">
+                        <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiPencil} size={Size.s} />
+                    </div>
 
-                <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiEye} size={Size.s} />
-                </div>
+                    <div className="lumx-spacing-margin-right-regular">
+                        <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiEye} size={Size.s} />
+                    </div>
 
-                <div>
-                    <IconButton
-                        color="dark"
-                        emphasis={Emphasis.low}
-                        hasBackground={true}
-                        icon={mdiDelete}
-                        size={Size.s}
-                    />
+                    <div>
+                        <IconButton color="dark" emphasis={Emphasis.low} hasBackground icon={mdiDelete} size={Size.s} />
+                    </div>
                 </div>
-            </div>
-        }
-    />
-);
+            }
+        />
+    ));
 
-export const avatarWithBadge = () => (
-    <>
+export const AvatarWithBadge = () =>
+    AVATAR_SIZES.map((size) => (
         <Avatar
-            className="lumx-spacing-margin-bottom-regular"
-            image={text('Image', 'http://i.pravatar.cc/40')}
-            size={Size.xs}
+            key={size}
+            className="lumx-spacing-margin-bottom"
+            image={avatarImageKnob('Avatar', AVATAR_IMAGES.avatar3)}
             badge={
                 <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
                     <Icon icon={mdiStar} />
                 </Badge>
             }
+            size={size}
         />
-        <Avatar
-            className="lumx-spacing-margin-bottom-regular"
-            image={text('Image', 'http://i.pravatar.cc/48')}
-            size={Size.s}
-            badge={
-                <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
-                    <Icon icon={mdiStar} />
-                </Badge>
-            }
-        />
-        <Avatar
-            className="lumx-spacing-margin-bottom-regular"
-            image={text('Image', 'http://i.pravatar.cc/72')}
-            size={Size.m}
-            badge={
-                <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
-                    <Icon icon={mdiStar} />
-                </Badge>
-            }
-        />
-        <Avatar
-            className="lumx-spacing-margin-bottom-regular"
-            image={text('Image', 'http://i.pravatar.cc/128')}
-            size={Size.l}
-            badge={
-                <Badge color={select('Colors', ColorPalette, ColorPalette.blue)}>
-                    <Icon icon={mdiStar} />
-                </Badge>
-            }
-        />
-    </>
-);
+    ));

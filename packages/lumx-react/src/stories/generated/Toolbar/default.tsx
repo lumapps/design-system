@@ -1,1 +1,1 @@
-/home/gcornut/git/design-system/packages/site-demo/content/product/components/toolbar/react/default.tsx
+/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/toolbar/react/default.tsx

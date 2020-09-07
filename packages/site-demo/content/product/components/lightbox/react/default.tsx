@@ -17,121 +17,76 @@ import {
 } from '@lumx/react';
 import React, { useCallback, useRef, useState } from 'react';
 
+const images = [
+    { image: '/demo-assets/portrait1.jpg' },
+    { image: '/demo-assets/portrait2.jpg' },
+    { image: '/demo-assets/landscape3.jpg' },
+    { image: '/demo-assets/landscape2.jpg' },
+];
+
 export const App = () => {
-    const imageBlockDemoProps = {
-        align: Alignment.center,
-        description: 'What an image',
-        fillHeight: true,
-        tags: (
-            <ChipGroup align="center">
-                <Chip size={Size.s} theme={Theme.dark}>
-                    Tag 1
-                </Chip>
-
-                <Chip size={Size.s} theme={Theme.dark}>
-                    Tag 2
-                </Chip>
-            </ChipGroup>
-        ),
-        theme: Theme.dark,
-        title: 'Nice Image',
-    };
-
-    const [isOpened, setIsOpened] = useState(false);
+    const [isOpen, setOpen] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
 
     const triggerElement = useRef(null);
 
-    const onCloseModal = useCallback(() => {
-        // Do something.
-        setIsOpened(false);
+    const close = useCallback(() => {
+        setOpen(false);
     }, []);
 
     const handleClick = useCallback(
-        (newActiveIndex) => {
+        (newActiveIndex) => () => {
             setActiveIndex(newActiveIndex);
-            setIsOpened(!isOpened);
+            setOpen(!isOpen);
         },
-        [isOpened],
+        [isOpen],
     );
 
     return (
-        <>
-            <div style={{ width: 536, margin: '0 auto' }}>
-                <FlexBox orientation={Orientation.horizontal} gap={Size.regular}>
-                    <Thumbnail
-                        image="https://picsum.photos/640/480/?image=24"
-                        size={Size.xl}
-                        aspectRatio={AspectRatio.square}
-                        // tslint:disable-next-line: jsx-no-lambda
-                        onClick={() => handleClick(0)}
-                    />
+        <div style={{ width: 536, margin: '0 auto' }}>
+            <Lightbox isOpen={isOpen} parentElement={triggerElement} onClose={close}>
+                <Slideshow activeIndex={activeIndex} hasControls autoPlay fillHeight theme={Theme.dark}>
+                    {images.map(({ image }) => (
+                        <SlideshowItem key={image}>
+                            <ImageBlock
+                                fillHeight
+                                title="Nice Image"
+                                description="What an image"
+                                theme={Theme.dark}
+                                image={image}
+                                align={Alignment.center}
+                                tags={
+                                    <ChipGroup align="center">
+                                        <Chip size={Size.s} theme={Theme.dark}>
+                                            Tag 1
+                                        </Chip>
 
-                    <Thumbnail
-                        image="https://picsum.photos/640/480/?image=25"
-                        size={Size.xl}
-                        aspectRatio={AspectRatio.square}
-                        // tslint:disable-next-line: jsx-no-lambda
-                        onClick={() => handleClick(1)}
-                    />
-
-                    <Thumbnail
-                        image="https://picsum.photos/640/480/?image=26"
-                        size={Size.xl}
-                        aspectRatio={AspectRatio.square}
-                        // tslint:disable-next-line: jsx-no-lambda
-                        onClick={() => handleClick(2)}
-                    />
-
-                    <Thumbnail
-                        image="https://picsum.photos/640/480/?image=27"
-                        size={Size.xl}
-                        aspectRatio={AspectRatio.square}
-                        // tslint:disable-next-line: jsx-no-lambda
-                        onClick={() => handleClick(3)}
-                    />
-                </FlexBox>
-
-                <Message className="lumx-spacing-margin-top-big" kind={MessageKind.info} hasBackground>
-                    <span>Click on a picture to lauch a slideshow on lightbox mode.</span>
-                </Message>
-            </div>
-
-            <Lightbox isOpen={isOpened} parentElement={triggerElement} onClose={onCloseModal}>
-                <Slideshow activeIndex={activeIndex} hasControls={true} autoPlay={true} fillHeight={true} theme={Theme.dark}>
-                    <SlideshowItem>
-                        <ImageBlock image="https://picsum.photos/640/480/?image=24" {...imageBlockDemoProps} />
-                    </SlideshowItem>
-
-                    <SlideshowItem>
-                        <ImageBlock image="https://picsum.photos/640/480/?image=25" {...imageBlockDemoProps} />
-                    </SlideshowItem>
-
-                    <SlideshowItem>
-                        <ImageBlock image="https://picsum.photos/640/480/?image=26" {...imageBlockDemoProps} />
-                    </SlideshowItem>
-
-                    <SlideshowItem>
-                        <ImageBlock image="https://picsum.photos/640/480/?image=27" {...imageBlockDemoProps} />
-                    </SlideshowItem>
-
-                    <SlideshowItem>
-                        <ImageBlock image="https://picsum.photos/640/480/?image=28" {...imageBlockDemoProps} />
-                    </SlideshowItem>
-
-                    <SlideshowItem>
-                        <ImageBlock image="https://picsum.photos/640/480/?image=29" {...imageBlockDemoProps} />
-                    </SlideshowItem>
-
-                    <SlideshowItem>
-                        <ImageBlock image="https://picsum.photos/640/480/?image=30" {...imageBlockDemoProps} />
-                    </SlideshowItem>
-
-                    <SlideshowItem>
-                        <ImageBlock image="https://picsum.photos/640/480/?image=31" {...imageBlockDemoProps} />
-                    </SlideshowItem>
+                                        <Chip size={Size.s} theme={Theme.dark}>
+                                            Tag 2
+                                        </Chip>
+                                    </ChipGroup>
+                                }
+                            />
+                        </SlideshowItem>
+                    ))}
                 </Slideshow>
             </Lightbox>
-        </>
+
+            <FlexBox orientation={Orientation.horizontal} gap={Size.regular}>
+                {images.map(({ image }, index) => (
+                    <Thumbnail
+                        key={image}
+                        image={image}
+                        size={Size.xl}
+                        aspectRatio={AspectRatio.square}
+                        onClick={handleClick(index)}
+                    />
+                ))}
+            </FlexBox>
+
+            <Message className="lumx-spacing-margin-top-big" kind={MessageKind.info} hasBackground>
+                <span>Click on a picture to lauch a slideshow on lightbox mode.</span>
+            </Message>
+        </div>
     );
 };

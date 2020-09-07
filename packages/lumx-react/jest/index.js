@@ -1,3 +1,4 @@
+/* eslint-disable import/unambiguous,import/no-commonjs */
 const tsconfig = require('../../../tsconfig');
 const CONFIGS = require('../../../configs');
 
@@ -46,6 +47,8 @@ module.exports = {
     testMatch: ['<rootDir>src/**/?(*.)+(spec|test).[jt]s?(x)'],
     transform: {
         '\\.(t|j)sx?$': '<rootDir>jest/transform.js',
+        // Mock file import returning their file path.
+        '\\.(jpg|jpeg|png|gif)$': '<rootDir>jest/__mocks__/emptyFileMockTransformer.js',
     },
     watchPlugins: [
         'jest-watch-master',

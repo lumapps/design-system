@@ -1,1 +1,1 @@
-/home/gcornut/git/design-system/packages/site-demo/content/product/components/chip/react/small.tsx
+/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/chip/react/small.tsx

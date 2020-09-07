@@ -1,35 +1,38 @@
-import React, { ReactNode, useState } from 'react';
-
-import classNames from 'classnames';
-
 import { GlobalTheme } from '@lumx/core/js/types';
 import { Chip, Size, Switch, SwitchPosition, Theme } from '@lumx/react';
+import isChromatic from 'chromatic/isChromatic';
+import React, { ReactElement, useState } from 'react';
 
+import classNames from 'classnames';
 import { styles } from './styles';
 import { useInjectTheme } from './useInjectTheme';
 
 interface StoryBlockProps {
-    children(p: { theme: Theme }): ReactNode;
+    children(p: { theme: Theme }): ReactElement;
 }
 
 const CLASSNAME = 'story-block';
 
 const StoryBlock: React.FC<StoryBlockProps> = (props) => {
+    const { children } = props;
+
     const [globalTheme, setGlobalTheme] = useState<GlobalTheme>('lumapps');
     const changeGlobalTheme = (newGlobalTheme: GlobalTheme) => () => setGlobalTheme(newGlobalTheme);
+    useInjectTheme(globalTheme);
 
     const [theme, setTheme] = useState(Theme.light);
     const toggleTheme = () => setTheme(theme === Theme.light ? Theme.dark : Theme.light);
 
-    const { children } = props;
-    useInjectTheme(globalTheme);
+    if (isChromatic()) {
+        return children({ theme });
+    }
 
     return (
         <div
-            key="story"
-            className={classNames(CLASSNAME, {
-                'lumx-color-background-dark-N lumx-color-font-light-N': theme === Theme.dark,
-            })}
+            className={classNames(
+                CLASSNAME,
+                theme === Theme.dark && 'lumx-color-background-dark-N lumx-color-font-light-N',
+            )}
             style={styles.block}
         >
             <div style={styles.selector}>

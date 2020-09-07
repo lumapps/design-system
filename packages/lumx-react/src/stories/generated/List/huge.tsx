@@ -1,1 +1,1 @@
-/home/gcornut/git/design-system/packages/site-demo/content/product/components/list/react/huge.tsx
+/home/gcornut/git/dup-design-system/packages/site-demo/content/product/components/list/react/huge.tsx

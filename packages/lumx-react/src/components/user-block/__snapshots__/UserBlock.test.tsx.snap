@@ -1,50 +1,124 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UserBlock> Snapshots and structure should render story l 1`] = `
-<div
-  className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-l lumx-user-block--theme-light"
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
->
+exports[`<UserBlock> Snapshots and structure should render story Sizes 1`] = `
+Array [
   <div
-    className="lumx-user-block__avatar"
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-s lumx-user-block--theme-light"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
-    <Avatar
-      image="http://i.pravatar.cc/128"
-      onClick={[Function]}
-      size="l"
-      tabIndex={0}
-      theme="light"
-    />
-  </div>
-  <div
-    className="lumx-user-block__wrapper"
-  >
-    <span
-      className="lumx-user-block__name"
-      onClick={[Function]}
-      tabIndex={0}
-    >
-      Emmitt O. Lum
-    </span>
     <div
-      className="lumx-user-block__fields"
+      className="lumx-user-block__avatar"
+    >
+      <Avatar
+        image="avatar1.jpg"
+        onClick={[Function]}
+        size="s"
+        tabIndex={0}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-user-block__wrapper"
     >
       <span
-        className="lumx-user-block__field"
-        key="ubf0"
+        className="lumx-user-block__name"
+        onClick={[Function]}
+        tabIndex={0}
       >
-        Creative developer
-      </span>
-      <span
-        className="lumx-user-block__field"
-        key="ubf1"
-      >
-        Denpasar
+        Emmitt O. Lum
       </span>
     </div>
-  </div>
-</div>
+  </div>,
+  <div
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="lumx-user-block__avatar"
+    >
+      <Avatar
+        image="avatar1.jpg"
+        onClick={[Function]}
+        size="m"
+        tabIndex={0}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-user-block__wrapper"
+    >
+      <span
+        className="lumx-user-block__name"
+        onClick={[Function]}
+        tabIndex={0}
+      >
+        Emmitt O. Lum
+      </span>
+      <div
+        className="lumx-user-block__fields"
+      >
+        <span
+          className="lumx-user-block__field"
+          key="ubf0"
+        >
+          Creative developer
+        </span>
+        <span
+          className="lumx-user-block__field"
+          key="ubf1"
+        >
+          Denpasar
+        </span>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-l lumx-user-block--theme-light"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="lumx-user-block__avatar"
+    >
+      <Avatar
+        image="avatar1.jpg"
+        onClick={[Function]}
+        size="l"
+        tabIndex={0}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-user-block__wrapper"
+    >
+      <span
+        className="lumx-user-block__name"
+        onClick={[Function]}
+        tabIndex={0}
+      >
+        Emmitt O. Lum
+      </span>
+      <div
+        className="lumx-user-block__fields"
+      >
+        <span
+          className="lumx-user-block__field"
+          key="ubf0"
+        >
+          Creative developer
+        </span>
+        <span
+          className="lumx-user-block__field"
+          key="ubf1"
+        >
+          Denpasar
+        </span>
+      </div>
+    </div>
+  </div>,
+]
 `;
 
 exports[`<UserBlock> Snapshots and structure should render story list 1`] = `
@@ -67,7 +141,7 @@ Array [
             />
           </Badge>
         }
-        image="http://i.pravatar.cc/72"
+        image="avatar1.jpg"
         onClick={[Function]}
         size="m"
         tabIndex={0}
@@ -120,7 +194,7 @@ Array [
             />
           </Badge>
         }
-        image="http://i.pravatar.cc/72"
+        image="avatar2.jpg"
         onClick={[Function]}
         size="m"
         tabIndex={0}
@@ -173,7 +247,7 @@ Array [
             />
           </Badge>
         }
-        image="http://i.pravatar.cc/72"
+        image="avatar3.jpg"
         onClick={[Function]}
         size="m"
         tabIndex={0}
@@ -211,84 +285,6 @@ Array [
 ]
 `;
 
-exports[`<UserBlock> Snapshots and structure should render story m 1`] = `
-<div
-  className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
->
-  <div
-    className="lumx-user-block__avatar"
-  >
-    <Avatar
-      image="http://i.pravatar.cc/72"
-      onClick={[Function]}
-      size="m"
-      tabIndex={0}
-      theme="light"
-    />
-  </div>
-  <div
-    className="lumx-user-block__wrapper"
-  >
-    <span
-      className="lumx-user-block__name"
-      onClick={[Function]}
-      tabIndex={0}
-    >
-      Emmitt O. Lum
-    </span>
-    <div
-      className="lumx-user-block__fields"
-    >
-      <span
-        className="lumx-user-block__field"
-        key="ubf0"
-      >
-        Creative developer
-      </span>
-      <span
-        className="lumx-user-block__field"
-        key="ubf1"
-      >
-        Denpasar
-      </span>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<UserBlock> Snapshots and structure should render story s 1`] = `
-<div
-  className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-s lumx-user-block--theme-light"
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
->
-  <div
-    className="lumx-user-block__avatar"
-  >
-    <Avatar
-      image="http://i.pravatar.cc/40"
-      onClick={[Function]}
-      size="s"
-      tabIndex={0}
-      theme="light"
-    />
-  </div>
-  <div
-    className="lumx-user-block__wrapper"
-  >
-    <span
-      className="lumx-user-block__name"
-      onClick={[Function]}
-      tabIndex={0}
-    >
-      Emmitt O. Lum
-    </span>
-  </div>
-</div>
-`;
-
 exports[`<UserBlock> Snapshots and structure should render story withBadge 1`] = `
 <div
   className="lumx-user-block lumx-user-block--orientation-horizontal lumx-user-block--size-m lumx-user-block--theme-light"
@@ -308,7 +304,7 @@ exports[`<UserBlock> Snapshots and structure should render story withBadge 1`] =
           />
         </Badge>
       }
-      image="http://i.pravatar.cc/72"
+      image="avatar1.jpg"
       onClick={[Function]}
       size="m"
       tabIndex={0}
