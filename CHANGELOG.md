@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+-   Fix `Thumbnail` css issues when displayed with `lumx-thumbnail--fill-height` classname.
+
 ## [0.24.8][] - 2020-09-08
 
 ## [0.24.7][] - 2020-09-03
