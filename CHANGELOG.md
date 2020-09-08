@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.9][] - 2020-09-08
+
 ### Fixed
 
 -   Fix `Thumbnail` css issues when displayed with `lumx-thumbnail--fill-height` classname.
@@ -583,3 +585,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.24.7]: https://github.com/lumapps/design-system/tree/v0.24.7
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.24.8...HEAD
 [0.24.8]: https://github.com/lumapps/design-system/tree/v0.24.8
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.9...HEAD
+[0.24.9]: https://github.com/lumapps/design-system/tree/v0.24.9
