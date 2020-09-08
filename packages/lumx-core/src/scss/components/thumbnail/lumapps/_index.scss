@@ -12,7 +12,7 @@
         display: flex;
         /* Safari hack to force the image ratio */
         height: fit-content;
-        min-height: 0;
+        min-height: 100%;
         flex: 1 1 auto;
         flex-direction: column;
         justify-content: center;
