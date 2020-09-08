@@ -6,8 +6,8 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@lumx/core": "^0.24.8",
-        "@lumx/icons": "^0.24.8",
+        "@lumx/core": "^0.24.9",
+        "@lumx/icons": "^0.24.9",
         "angular": "^1.7.8",
         "focus-visible": "^5.0.2",
         "jquery": "^3.3.1",
@@ -41,7 +41,7 @@
         "build": "webpack",
         "prepublishOnly": "yarn build"
     },
-    "version": "0.24.8",
+    "version": "0.24.9",
     "devDependencies": {
         "@babel/core": "^7.8.3",
         "@babel/plugin-proposal-class-properties": "^7.8.3",
