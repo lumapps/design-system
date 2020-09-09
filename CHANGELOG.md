@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.24.10][] - 2020-09-09
+
 ### Added
 
 -   Added `ThumbnailProps` props to the `MosaicElement` interface to be able to forward those props to the `Thumbnail` component inside the `Mosaic`component.
@@ -591,3 +593,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.24.8]: https://github.com/lumapps/design-system/tree/v0.24.8
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.24.9...HEAD
 [0.24.9]: https://github.com/lumapps/design-system/tree/v0.24.9
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.24.10...HEAD
+[0.24.10]: https://github.com/lumapps/design-system/tree/v0.24.10
