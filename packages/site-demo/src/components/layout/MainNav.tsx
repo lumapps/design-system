@@ -60,6 +60,7 @@ const ITEMS: Item[] = [
                     'Grid',
                     'Image block',
                     'Lightbox',
+                    'Link preview',
                     'List',
                     'Message',
                     'Notification',
