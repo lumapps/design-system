@@ -8,6 +8,7 @@ import { Alignment, AspectRatio, CrossOrigin, FocusPoint, Size, Theme, Thumbnail
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { ThumbnailProps } from '../thumbnail/Thumbnail';
 
 /**
  * Authorized variants.
@@ -51,6 +52,20 @@ interface ImageBlockProps extends GenericProps {
     focusPoint?: FocusPoint;
     /** The url of the image we want to display in the image-block. */
     image: string;
+    /** The props to pass to the thumbnail, minus those already set by the ImageBlock props. */
+    thumbnailProps?: Omit<
+        ThumbnailProps,
+        | 'align'
+        | 'aspectRatio'
+        | 'crossOrigin'
+        | 'fillHeight'
+        | 'focusPoint'
+        | 'image'
+        | 'isCrossOriginEnabled'
+        | 'size'
+        | 'theme'
+        | 'onClick'
+    >;
     /** Enable cross origin attribute. */
     isCrossOriginEnabled?: boolean;
     /** The image block size. */
@@ -94,6 +109,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
     tags: undefined,
     theme: Theme.light,
     title: undefined,
+    thumbnailProps: undefined,
 };
 
 /**
@@ -118,6 +134,7 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     tags = DEFAULT_PROPS.tags,
     theme = DEFAULT_PROPS.theme,
     title = DEFAULT_PROPS.title,
+    thumbnailProps = DEFAULT_PROPS.thumbnailProps,
     ...props
 }) => {
     const { onClick = null, ...forwardedProps } = props;
@@ -143,9 +160,10 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
             )}
         >
             <Thumbnail
+                {...thumbnailProps}
                 align={align}
                 aspectRatio={aspectRatio}
-                className={`${CLASSNAME}__image`}
+                className={classNames(`${CLASSNAME}__image`, thumbnailProps?.className)}
                 crossOrigin={crossOrigin}
                 fillHeight={fillHeight}
                 focusPoint={focusPoint}

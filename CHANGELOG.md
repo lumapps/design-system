@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Add `thumbnailProps` to `ImageBlock` to allow setting custom props to the thumbnail.
+
 ## [0.25.15][] - 2020-09-08
 
 ### Fixed
