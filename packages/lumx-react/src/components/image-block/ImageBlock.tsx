@@ -52,18 +52,20 @@ interface ImageBlockProps extends GenericProps {
     focusPoint?: FocusPoint;
     /** The url of the image we want to display in the image-block. */
     image: string;
-    /** The alternative text of the image we want to display in the image-block. */
-    thumbnailProps?: Omit<ThumbnailProps,
-        'align' |
-        'aspectRatio' |
-        'crossOrigin' |
-        'fillHeight' |
-        'focusPoint' |
-        'image' |
-        'isCrossOriginEnabled' |
-        'size' |
-        'theme' |
-        'onClick'>;
+    /** The props to pass to the thumbnail, minus those already set by the ImageBlock props. */
+    thumbnailProps?: Omit<
+        ThumbnailProps,
+        | 'align'
+        | 'aspectRatio'
+        | 'crossOrigin'
+        | 'fillHeight'
+        | 'focusPoint'
+        | 'image'
+        | 'isCrossOriginEnabled'
+        | 'size'
+        | 'theme'
+        | 'onClick'
+    >;
     /** Enable cross origin attribute. */
     isCrossOriginEnabled?: boolean;
     /** The image block size. */
