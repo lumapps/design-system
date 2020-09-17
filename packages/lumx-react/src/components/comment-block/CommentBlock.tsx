@@ -7,6 +7,7 @@ import { COMPONENT_PREFIX, ENTER_KEY_CODE } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
+import { AvatarProps } from '../avatar/Avatar';
 
 /**
  * Defines the props of the component.
@@ -16,6 +17,8 @@ interface CommentBlockProps extends GenericProps {
     actions?: HTMLElement | ReactNode;
     /* The url of the avatar picture we want to display */
     avatar: string;
+    /** The props to pass to the avatar, minus those already set by the CommentBlock props. */
+    avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'tabIndex' | 'onClick' | 'onKeyPress'>;
     /* Children elements to be transcluded into the component */
     children?: HTMLElement | ReactNode;
     /* Comment timestamp */
@@ -69,6 +72,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
     isOpen: false,
     isRelevant: false,
     theme: Theme.light,
+    avatarProps: undefined,
 };
 
 /**
@@ -92,6 +96,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     onMouseLeave,
     text,
     theme = DEFAULT_PROPS.theme,
+    avatarProps = DEFAULT_PROPS.avatarProps,
 }: CommentBlockProps): React.ReactElement => {
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
@@ -115,6 +120,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
             <div className={`${CLASSNAME}__wrapper`}>
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
+                        {...avatarProps}
                         image={avatar}
                         size={Size.m}
                         tabIndex={onClick ? 0 : -1}

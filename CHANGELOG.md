@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Add `avatarProps` to `CommentBlock` to allow setting custom props to the avatar.
+
 ### Changed
 
 -   Upgrade to mdi v5.6.55 and handle backward compatibility.
