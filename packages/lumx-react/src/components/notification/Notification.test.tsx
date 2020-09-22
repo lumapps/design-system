@@ -76,34 +76,34 @@ const setup = (props: SetupProps = {}, shallowRendering: boolean = true): Setup 
 const properties = {
     error: {
         content: 'Error',
-        handleClick: noop,
+        onClick: noop,
         isOpen: true,
         type: NotificationType.error,
     },
     info: {
         content: 'Info',
-        handleClick: noop,
+        onClick: noop,
         isOpen: true,
         type: NotificationType.info,
     },
     infoWithCallback: {
-        actionCallback: noop,
+        onActionClick: noop,
         actionLabel: 'Undo',
         content: 'Info with callback',
-        handleClick: noop,
+        onClick: noop,
         isOpen: true,
         type: NotificationType.info,
     },
     success: {
         content: 'Success',
-        handleClick: noop,
+        onClick: noop,
         isOpen: true,
         type: NotificationType.success,
     },
 
     warning: {
         content: 'Warning',
-        handleClick: noop,
+        onClick: noop,
         isOpen: true,
         type: NotificationType.warning,
     },

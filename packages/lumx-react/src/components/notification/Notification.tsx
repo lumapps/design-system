@@ -48,10 +48,10 @@ interface NotificationProps extends GenericProps {
     zIndex?: number;
 
     /** Callback function for action button. */
-    actionCallback?(): void;
+    onActionClick?(): void;
 
     /** Function to handle click on the notification. */
-    handleClick?(): void;
+    onClick?(): void;
 }
 
 /**
@@ -84,24 +84,24 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The notification component.
  */
 const Notification: React.FC<NotificationProps> = ({
-    actionCallback,
+    onActionClick,
     actionLabel,
     content = DEFAULT_PROPS.content,
     className,
-    handleClick,
+    onClick,
     isOpen = false,
     theme = DEFAULT_PROPS.theme,
     type,
     zIndex = DEFAULT_PROPS.zIndex,
     ...forwardedProps
 }) => {
-    const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
+    const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
 
     const isVisible = useDelayedVisibility(isOpen, NOTIFICATION_TRANSITION_DURATION);
 
     const handleCallback = (evt: React.MouseEvent) => {
-        if (isFunction(actionCallback)) {
-            actionCallback();
+        if (isFunction(onActionClick)) {
+            onActionClick();
         }
         evt.stopPropagation();
     };
@@ -119,7 +119,7 @@ const Notification: React.FC<NotificationProps> = ({
                           prefix: CLASSNAME,
                       }),
                   )}
-                  onClick={handleClick}
+                  onClick={onClick}
                   style={{ zIndex }}
               >
                   <div className={`${CLASSNAME}__icon`}>

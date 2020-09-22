@@ -82,8 +82,8 @@ const App = ({ theme }: any) => {
             {type && (
                 <Notification
                     isOpen={isOpen}
-                    handleClick={close}
-                    actionCallback={onClick('success')}
+                    onClick={close}
+                    onActionClick={onClick('success')}
                     {...properties[type]}
                 />
             )}

@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Renamed `url` prop to `link` for `LinkPreview` component.
 -   _[BREAKING]_ Renamed `onToggle` prop to `onChange` for `Switch` component.
 -   _[BREAKING]_ `avatar` prop from `UserBlock` component is now a string and corresponds to the avatar url. Any other avatar props should be passed to `avatarProps` prop.
+-   _[BREAKING]_ Renamed `handleClick` prop to `onClick` and `actionCallback` prop to `onActionClick` for `Notification` component.
 
 ### Removed
 
