@@ -10,6 +10,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Added `avatarProps` to `CommentBlock` to allow setting custom props to the avatar.
+-   Add `linkProps` to `LinkPreview` to allow setting custom props to the link.
+
+### Changed
+
+-   _[BREAKING]_ Renamed `url` props to `link` for `LinkPreview` component.
 
 ### Removed
 

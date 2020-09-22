@@ -2,8 +2,17 @@ import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import { AspectRatio, ColorPalette, ColorVariant, Link, Size, Theme, Thumbnail } from '@lumx/react';
-import { ThumbnailProps } from '../thumbnail/Thumbnail';
+import {
+    AspectRatio,
+    ColorPalette,
+    ColorVariant,
+    Link,
+    LinkProps,
+    Size,
+    Theme,
+    Thumbnail,
+    ThumbnailProps,
+} from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -13,7 +22,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  */
 interface LinkPreviewProps extends GenericProps {
     /** The url of the link. */
-    url: string;
+    link: string;
     /** Content text. Can be either a string, or sanitized html. */
     description?:
         | string
@@ -26,11 +35,10 @@ interface LinkPreviewProps extends GenericProps {
     theme?: Theme;
     /** Thumbnail image source */
     thumbnail?: string;
-    /** Thumbnail component props, without the props set by the component. */
-    thumbnailProps?: Omit<
-        ThumbnailProps,
-        'image' | 'onClick' | 'role' | 'tabIndex' | 'image' | 'aspectRatio' | 'fillHeight'
-    >;
+    /** The props to pass to the thumbnail, minus those already set by the LinkPreview props. */
+    thumbnailProps?: Omit<ThumbnailProps, 'aspectRatio' | 'fillHeight' | 'image' | 'onClick' | 'role' | 'tabIndex'>;
+    /** The props to pass to the link, minus those already set by the LinkPreview props. */
+    linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
     /** Link title */
     title?: string;
 }
@@ -51,6 +59,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
     size: Size.regular,
     theme: Theme.light,
+    thumbnailProps: undefined,
+    linkProps: undefined,
 };
 
 /**
@@ -62,14 +72,15 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
     className,
     title,
     description,
-    url,
+    link,
     size,
     theme,
     thumbnail = '',
     thumbnailProps,
+    linkProps,
     ...forwardedProps
 }) => {
-    const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
+    const goToUrl = useCallback(() => window.open(link, '_blank'), [link]);
 
     return (
         <div
@@ -102,8 +113,9 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
                     {title && (
                         <div className={`${CLASSNAME}__title`}>
                             <Link
+                                {...linkProps}
                                 target="_blank"
-                                href={url}
+                                href={link}
                                 color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}
                                 colorVariant={ColorVariant.N}
                             >
@@ -115,13 +127,14 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
 
                     <div className={`${CLASSNAME}__link`}>
                         <Link
-                            className={`${CLASSNAME}__link`}
+                            {...linkProps}
+                            className={classNames(`${CLASSNAME}__link`, linkProps?.className)}
                             target="_blank"
-                            href={url}
+                            href={link}
                             color={theme === Theme.light ? ColorPalette.blue : ColorPalette.light}
                             colorVariant={ColorVariant.N}
                         >
-                            {url}
+                            {link}
                         </Link>
                     </div>
                 </div>

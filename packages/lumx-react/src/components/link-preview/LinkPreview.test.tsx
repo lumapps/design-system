@@ -76,11 +76,9 @@ describe(`<${LinkPreview.displayName}>`, () => {
 
     // 2. Test defaultProps value and important props custom values.
     describe('Props', () => {
-        // Here are some examples of basic props check.
-
         it('should use default props', () => {
             const { wrapper, thumbnail } = setup();
-            Object.keys(DEFAULT_PROPS).forEach((prop: string) => {
+            ['size', 'theme'].forEach((prop: string) => {
                 expect(wrapper).toHaveClassName(
                     getBasicClass({ prefix: CLASSNAME, type: prop, value: DEFAULT_PROPS[prop] }),
                 );
@@ -112,7 +110,7 @@ describe(`<${LinkPreview.displayName}>`, () => {
     // 3. Test events.
     describe('Events', () => {
         const expectedUrl = 'https://expected.url';
-        const { thumbnail } = setup({ url: expectedUrl, thumbnail: 'https://expected.url/image.png' });
+        const { thumbnail } = setup({ link: expectedUrl, thumbnail: 'https://expected.url/image.png' });
         window.open = jest.fn();
 
         thumbnail.simulate('click');
