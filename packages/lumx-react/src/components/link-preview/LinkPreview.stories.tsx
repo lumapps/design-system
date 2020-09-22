@@ -18,7 +18,7 @@ export const regularLinkPreview = ({ theme }: any) => (
     <LinkPreview
         title={text('Title', 'Link title')}
         description={text('Description', LONG_LOREM_IPSUM)}
-        url={text('URL', 'https://google.com')}
+        link={text('URL', 'https://google.com')}
         theme={theme}
         thumbnail={text('Image', 'https://loremflickr.com/320/240')}
     />
@@ -32,7 +32,7 @@ export const noThumbnail = ({ theme }: any) => (
     <LinkPreview
         title={text('Title', 'Link title')}
         description={text('Description', LONG_LOREM_IPSUM)}
-        url={text('URL', 'https://google.com')}
+        link={text('URL', 'https://google.com')}
         theme={theme}
     />
 );
@@ -41,7 +41,7 @@ export const noThumbnail = ({ theme }: any) => (
  * LinkPreview story
  * @return regular LinkPreview without thumbnail, title and description.
  */
-export const onlyUrl = ({ theme }: any) => <LinkPreview url={text('URL', 'https://google.com')} theme={theme} />;
+export const onlyUrl = ({ theme }: any) => <LinkPreview link={text('URL', 'https://google.com')} theme={theme} />;
 
 /**
  * LinkPreview story
@@ -55,7 +55,7 @@ export const bigLinkPreview = ({ theme }: any) => {
             <LinkPreview
                 title={text('Title', 'Link title')}
                 description={text('Description', LONG_LOREM_IPSUM)}
-                url={text('URL', 'https://google.com')}
+                link={text('URL', 'https://google.com')}
                 theme={theme}
                 thumbnail={text('Image', 'https://loremflickr.com/320/240')}
                 size={Size.big}
@@ -76,7 +76,7 @@ export const bigWithoutThumbnail = ({ theme }: any) => {
             <LinkPreview
                 title={text('Title', 'Link title')}
                 description={text('Description', LONG_LOREM_IPSUM)}
-                url={text('URL', 'https://google.com')}
+                link={text('URL', 'https://google.com')}
                 theme={theme}
                 size={Size.big}
             />
@@ -93,7 +93,7 @@ export const bigWithOnlyUrl = ({ theme }: any) => {
 
     return (
         <div style={wrapperStyle}>
-            <LinkPreview url={text('URL', 'https://google.com')} theme={theme} size={Size.big} />
+            <LinkPreview link={text('URL', 'https://google.com')} theme={theme} size={Size.big} />
         </div>
     );
 };
