@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   _[BREAKING]_ Renamed `url` props to `link` for `LinkPreview` component.
+-   _[BREAKING]_ Renamed `onToggle` props to `onChange` for `Switch` component.
 
 ### Removed
 

@@ -44,7 +44,7 @@ interface SwitchProps extends GenericProps {
     useCustomColors?: boolean;
 
     /** Switch value change handler. */
-    onToggle?(enabled: boolean): void;
+    onChange?(enabled: boolean): void;
 }
 
 /**
@@ -75,7 +75,7 @@ const Switch: React.FC<SwitchProps> = ({
     children,
     checked,
     helper,
-    onToggle,
+    onChange,
     position,
     theme,
     useCustomColors,
@@ -88,8 +88,8 @@ const Switch: React.FC<SwitchProps> = ({
      * @param event Change event.
      */
     const toggleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (onToggle) {
-            onToggle(get(event, 'target.checked'));
+        if (onChange) {
+            onChange(get(event, 'target.checked'));
         }
     };
 

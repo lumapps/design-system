@@ -6,15 +6,15 @@ export const App = ({ theme }: any) => {
 
     return (
         <>
-            <Switch checked={state} onToggle={setState} theme={theme}>
+            <Switch checked={state} onChange={setState} theme={theme}>
                 Default
             </Switch>
 
-            <Switch checked={state} onToggle={setState} theme={theme} helper="Helper text">
+            <Switch checked={state} onChange={setState} theme={theme} helper="Helper text">
                 With helper
             </Switch>
 
-            <Switch disabled checked={state} onToggle={setState} theme={theme}>
+            <Switch disabled checked={state} onChange={setState} theme={theme}>
                 Disabled
             </Switch>
 
