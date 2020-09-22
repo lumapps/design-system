@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import isObject from 'lodash/isObject';
 
-import { AspectRatio, Orientation, Theme, Thumbnail, ThumbnailVariant } from '@lumx/react';
+import { Orientation, Theme, Thumbnail, ThumbnailProps, ThumbnailVariant } from '@lumx/react';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
@@ -14,27 +14,27 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  */
 interface PostBlockProps extends GenericProps {
     /* Actions elements to be transcluded into the component */
-    actions?: HTMLElement | ReactNode;
+    actions?: ReactNode;
     /* Atachments elements to be transcluded into the component */
-    attachments?: HTMLElement | ReactNode;
+    attachments?: ReactNode;
     /* Author element to be transcluded into the component */
-    author?: HTMLElement | ReactNode;
+    author?: ReactNode;
     /* Meta elements to be transcluded into the component */
-    meta?: HTMLElement | ReactNode;
+    meta?: ReactNode;
     /* Orientation. */
     orientation?: Orientation;
     /* Tags elements to be transcluded into the component */
-    tags?: HTMLElement | ReactNode;
+    tags?: ReactNode;
     /* Content text. Can be either a string, or sanitized html. */
     text?:
         | string
         | {
               __html: string;
           };
-    /* Thumbnail image source */
-    thumbnail: string;
-    /* The image aspect ratio. */
-    thumbnailAspectRatio?: AspectRatio;
+    /** Thumbnail image source */
+    thumbnail?: string;
+    /** The props to pass to the thumbnail, minus those already set by the PostBlock props. */
+    thumbnailProps?: Omit<ThumbnailProps, 'image' | 'theme' | 'onClick' | 'variant' | 'tabIndex'>;
     /* Post title */
     title: string;
     /* Theme. */
@@ -65,7 +65,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
     orientation: Orientation.horizontal,
     text: undefined,
     theme: Theme.light,
-    thumbnailAspectRatio: AspectRatio.horizontal,
+    thumbnailProps: undefined,
 };
 
 /**
@@ -84,7 +84,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
     tags,
     text = DEFAULT_PROPS.text,
     thumbnail,
-    thumbnailAspectRatio = DEFAULT_PROPS.thumbnailAspectRatio,
+    thumbnailProps = DEFAULT_PROPS.thumbnailProps,
     title,
     theme = DEFAULT_PROPS.theme,
 }) => {
@@ -93,7 +93,7 @@ const PostBlock: React.FC<PostBlockProps> = ({
             {thumbnail && (
                 <div className={`${CLASSNAME}__thumbnail`}>
                     <Thumbnail
-                        aspectRatio={thumbnailAspectRatio}
+                        {...thumbnailProps}
                         image={thumbnail}
                         theme={theme}
                         onClick={onClick}
