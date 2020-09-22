@@ -10,16 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Added `avatarProps` to `CommentBlock` to allow setting custom props to the avatar.
--   Add `linkProps` to `LinkPreview` to allow setting custom props to the link.
+-   Added `linkProps` to `LinkPreview` to allow setting custom props to the link.
 
 ### Changed
 
--   _[BREAKING]_ Renamed `url` props to `link` for `LinkPreview` component.
--   _[BREAKING]_ Renamed `onToggle` props to `onChange` for `Switch` component.
+-   _[BREAKING]_ Renamed `url` prop to `link` for `LinkPreview` component.
+-   _[BREAKING]_ Renamed `onToggle` prop to `onChange` for `Switch` component.
+-   _[BREAKING]_ `avatar` prop from `UserBlock` component is now a string and corresponds to the avatar url. Any other avatar props should be passed to `avatarProps` prop.
 
 ### Removed
 
--   _[BREAKING]_ Removed `onOpen` props from `Dialog` component. User should use `isOpen` from its side.
+-   _[BREAKING]_ Removed `onOpen` prop from `Dialog` component. User should use `isOpen` from its side.
 
 ## [0.28.0][] - 2020-11-17
 
