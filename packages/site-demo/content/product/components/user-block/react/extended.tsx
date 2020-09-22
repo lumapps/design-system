@@ -39,7 +39,7 @@ const App = ({ theme }: any) => {
                 theme={theme}
                 name="Emmitt O. Lum"
                 fields={['Creative developer', 'Denpasar']}
-                avatar={{ image: 'http://i.pravatar.cc/128' }}
+                avatar="http://i.pravatar.cc/128"
                 size={Size.l}
                 orientation={Orientation.vertical}
                 onMouseEnter={logAction('Mouse entered')}

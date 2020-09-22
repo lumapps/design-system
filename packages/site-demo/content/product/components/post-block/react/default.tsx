@@ -41,7 +41,7 @@ const App = ({ theme }: any) => (
             }
             attachments={
                 <UserBlock
-                    avatar={{ image: 'http://i.pravatar.cc/128' }}
+                    avatar="http://i.pravatar.cc/128"
                     name="Matthias Manoukian"
                     fields={['Head of Design', 'Lyon']}
                     orientation={Orientation.vertical}
@@ -50,12 +50,7 @@ const App = ({ theme }: any) => (
                 />
             }
             author={
-                <UserBlock
-                    avatar={{ image: 'http://i.pravatar.cc/128' }}
-                    name="Matthias Manoukian"
-                    size={Size.s}
-                    theme={theme}
-                />
+                <UserBlock avatar="http://i.pravatar.cc/128" name="Matthias Manoukian" size={Size.s} theme={theme} />
             }
             tags={
                 <ChipGroup>

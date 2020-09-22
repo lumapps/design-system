@@ -1,5 +1,3 @@
-import isObject from 'lodash/isObject';
-
 import React, { ReactNode, Ref } from 'react';
 
 import classNames from 'classnames';
@@ -20,8 +18,10 @@ type UserBlockSize = Size.s | Size.m | Size.l;
  * Defines the props of the component.
  */
 interface UserBlockProps extends GenericProps {
-    /** Avatar image. */
-    avatar?: AvatarProps | string;
+    /* The url of the avatar picture we want to display */
+    avatar?: string;
+    /** The props to pass to the avatar, minus those already set by the UserBlock props. */
+    avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'onClick' | 'tabIndex' | 'theme'>;
     /** Simple Action block. */
     simpleAction?: ReactNode;
     /** Multiple Actions block. */
@@ -68,6 +68,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
     orientation: Orientation.horizontal,
     size: Size.m,
     theme: Theme.light,
+    avatarProps: undefined,
 };
 
 /**
@@ -89,6 +90,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
     multipleActions,
     size = DEFAULT_PROPS.size,
     userBlockRef,
+    avatarProps = DEFAULT_PROPS.avatarProps,
     ...forwardedProps
 }) => {
     let componentSize = size;
@@ -130,7 +132,8 @@ const UserBlock: React.FC<UserBlockProps> = ({
             {avatar && (
                 <div className={`${CLASSNAME}__avatar`}>
                     <Avatar
-                        {...(isObject(avatar) ? avatar : { image: avatar })}
+                        {...avatarProps}
+                        image={avatar}
                         size={componentSize}
                         onClick={onClick}
                         tabIndex={onClick ? 0 : -1}
