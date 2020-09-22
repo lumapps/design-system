@@ -1,4 +1,4 @@
-import React, { Children, ReactElement, ReactNode, RefObject, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Children, ReactElement, ReactNode, RefObject, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import classNames from 'classnames';
@@ -86,11 +86,6 @@ interface DialogProps extends GenericProps {
      * Callback called when the dialog is closing.
      */
     onClose?(): void;
-
-    /**
-     * Callback called when the dialog is opening.
-     */
-    onOpen?(): void;
 }
 
 type DialogSizes = Size.tiny | Size.regular | Size.big | Size.huge;
@@ -136,7 +131,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
         footer,
         isLoading,
         isOpen = DEFAULT_PROPS.isOpen,
-        onOpen,
         onClose,
         parentElement,
         contentRef,
@@ -174,12 +168,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
     const headerChildContent = headerChildProps?.children;
     const footerChildProps = (footerChild as ReactElement)?.props;
     const footerChildContent = footerChildProps?.children;
-
-    useEffect(() => {
-        if (isOpen) {
-            onOpen?.();
-        }
-    }, [isOpen]);
 
     const isVisible = useDelayedVisibility(Boolean(isOpen), DIALOG_TRANSITION_DURATION);
 
