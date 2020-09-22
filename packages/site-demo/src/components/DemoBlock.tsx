@@ -150,7 +150,7 @@ const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngin
                             disabled={!demo}
                             position={SwitchPosition.right}
                             checked={theme === Theme.dark}
-                            onToggle={toggleTheme}
+                            onChange={toggleTheme}
                         >
                             Dark Background
                         </Switch>
