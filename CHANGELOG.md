@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Added `avatarProps` to `CommentBlock` to allow setting custom props to the avatar.
 -   Added `linkProps` to `LinkPreview` to allow setting custom props to the link.
+-   Added `avatarProps` to `UserBlock` to allow setting custom props to the link.
+-   Added `thumbnailProps` to `PostBlock` to allow setting custom props to the link.
 
 ### Changed
 
@@ -18,10 +20,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Renamed `onToggle` prop to `onChange` for `Switch` component.
 -   _[BREAKING]_ `avatar` prop from `UserBlock` component is now a string and corresponds to the avatar url. Any other avatar props should be passed to `avatarProps` prop.
 -   _[BREAKING]_ Renamed `handleClick` prop to `onClick` and `actionCallback` prop to `onActionClick` for `Notification` component.
+-   _[BREAKING]_ Removed `HTMLElement` as type in `PostBlock` component props.
 
 ### Removed
 
 -   _[BREAKING]_ Removed `onOpen` prop from `Dialog` component. User should use `isOpen` from its side.
+-   _[BREAKING]_ Removed `thumbnailAspectRatio` prop from `PostBlock` component. User should pass it using `thumbnailProps` instead.
 
 ## [0.28.0][] - 2020-11-17
 
