@@ -9,7 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
--   Add `avatarProps` to `CommentBlock` to allow setting custom props to the avatar.
+-   Added `avatarProps` to `CommentBlock` to allow setting custom props to the avatar.
+
+### Removed
+
+-   _[BREAKING]_ Removed `onOpen` props from `Dialog` component. User should use `isOpen` from its side.
 
 ## [0.28.0][] - 2020-11-17
 
