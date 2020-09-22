@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `linkProps` to `LinkPreview` to allow setting custom props to the link.
 -   Added `avatarProps` to `UserBlock` to allow setting custom props to the link.
 -   Added `thumbnailProps` to `PostBlock` to allow setting custom props to the link.
+-   Added props forwarding to `Lightbox` component.
 
 ### Changed
 
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   _[BREAKING]_ Removed `onOpen` prop from `Dialog` component. User should use `isOpen` from its side.
 -   _[BREAKING]_ Removed `thumbnailAspectRatio` prop from `PostBlock` component. User should pass it using `thumbnailProps` instead.
+-   _[BREAKING]_ Removed `onOpen`, `role` and `noWrapper` props from `Lightbox` component.
 
 ## [0.28.0][] - 2020-11-17
 
