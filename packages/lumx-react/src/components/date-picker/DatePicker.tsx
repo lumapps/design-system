@@ -34,7 +34,7 @@ interface DatePickerProps extends GenericProps {
     defaultMonth?: DatePickerValueProp;
 
     /** On change. */
-    onChange(value: moment.Moment | undefined): void;
+    onChange(value?: moment.Moment): void;
 }
 
 /**

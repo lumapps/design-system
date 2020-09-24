@@ -111,6 +111,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
         shouldFocusOnClose,
         onInfiniteScroll,
         selectedChipRender = DEFAULT_PROPS.selectedChipRender,
+        name,
         ...forwardedProps
     } = props;
 
@@ -124,6 +125,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
                     prefix: CLASSNAME,
                 }),
             )}
+            name={name}
             value={value}
             onChange={onChange}
             onKeyDown={onKeyDown}

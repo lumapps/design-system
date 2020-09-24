@@ -223,9 +223,13 @@ describe(`<${TextField.displayName}>`, () => {
             const event = {
                 target: { value: 'my value' },
             };
-            const component = shallow(<TextField value="" onChange={onChangeMock} />);
+            const component = shallow(<TextField value="" name="my name" onChange={onChangeMock} />);
             component.find('input').simulate('change', event);
-            expect(onChangeMock).toBeCalledWith('my value');
+            expect(onChangeMock).toBeCalledWith('my value', 'my name', {
+                target: {
+                    value: 'my value',
+                },
+            });
         });
     });
 

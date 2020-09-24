@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useRef } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -122,6 +122,9 @@ interface AutocompleteProps extends GenericProps {
      */
     isOpen: boolean;
 
+    /** Native input name. */
+    name?: string;
+
     /**
      * Whether a click in the Autocomplete dropdown would close it
      * @see {@link DropdownProps#closeOnClick}
@@ -152,11 +155,8 @@ interface AutocompleteProps extends GenericProps {
      */
     onInfiniteScroll?: VoidFunction;
 
-    /**
-     * Text field value change handler.
-     * @see {@link TextFieldProps#onChange}
-     */
-    onChange(value: string): void;
+    /** Handle onChange event. */
+    onChange(value: string, name?: string, event?: SyntheticEvent): void;
 
     /**
      * Text field focus change handler.
@@ -230,6 +230,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
         inputRef = useRef(null),
         fitToAnchorWidth,
         onInfiniteScroll,
+        name,
         ...forwardedProps
     } = props;
 
@@ -248,6 +249,7 @@ const Autocomplete: React.FC<AutocompleteProps> = (props) => {
         >
             <TextField
                 value={value}
+                name={name}
                 onChange={onChange}
                 chips={chips}
                 textFieldRef={textFieldRef}
