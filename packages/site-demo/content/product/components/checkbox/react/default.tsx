@@ -8,10 +8,10 @@ export const App = ({ theme }: any) => {
 
     return (
         <>
-            <Checkbox value={value} label="Checkbox" theme={theme} onChange={setValue} />
+            <Checkbox checked={value} label="Checkbox" theme={theme} onChange={setValue} />
 
             <Checkbox
-                value={value2}
+                checked={value2}
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Checkbox with help"
                 theme={theme}
@@ -19,7 +19,7 @@ export const App = ({ theme }: any) => {
             />
 
             <Checkbox
-                value={value3}
+                checked={value3}
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Disabled checkbox with help"
                 theme={theme}

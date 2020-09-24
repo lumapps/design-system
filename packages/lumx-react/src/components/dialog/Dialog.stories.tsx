@@ -239,7 +239,7 @@ export const dialogWithFocusableElements = ({ theme }: any) => {
 
                     <Checkbox
                         className="lumx-spacing-margin-bottom-huge"
-                        value={checkboxValue}
+                        checked={checkboxValue}
                         onChange={setCheckboxValue}
                         label="Checkbox input"
                     />
