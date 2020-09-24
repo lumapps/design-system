@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -32,8 +32,10 @@ interface SliderProps extends GenericProps {
     steps?: number;
     /** Value */
     value: number;
-    /** Callback function invoked when the slider value changes */
-    onChange(value: number): void;
+    /** Native input name. */
+    name?: string;
+    /** Handle onChange event. */
+    onChange(value: number, name?: string, event?: SyntheticEvent): void;
     /** Callback function invoked when the component is clicked */
     onMouseDown?(event: React.SyntheticEvent): void;
 }
@@ -125,6 +127,7 @@ const Slider: React.FC<SliderProps> = ({
     value = DEFAULT_PROPS.value!,
     disabled,
     theme = DEFAULT_PROPS.theme,
+    name,
     ...forwardedProps
 }) => {
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -191,7 +194,7 @@ const Slider: React.FC<SliderProps> = ({
         const newValue = getPercentValue(event, slider!);
 
         if (onChange) {
-            onChange(computeValueFromPercent(newValue, min, max, precision!));
+            onChange(computeValueFromPercent(newValue, min, max, precision!), name, event);
         }
     });
 
@@ -218,7 +221,7 @@ const Slider: React.FC<SliderProps> = ({
             percent = findClosestStep(percent);
         }
         if (onChange) {
-            onChange(computeValueFromPercent(percent, min, max, precision!));
+            onChange(computeValueFromPercent(percent, min, max, precision!), name);
         }
     };
 
@@ -246,7 +249,7 @@ const Slider: React.FC<SliderProps> = ({
         const { current: slider } = sliderRef;
         const newValue = getPercentValue(event, slider!);
         if (onChange) {
-            onChange(computeValueFromPercent(newValue, min, max, precision!));
+            onChange(computeValueFromPercent(newValue, min, max, precision!), name, event);
         }
 
         document.body.addEventListener('mousemove', handleMove);
@@ -299,6 +302,7 @@ const Slider: React.FC<SliderProps> = ({
                         </div>
                     )}
                     <button
+                        name={name}
                         className={`${CLASSNAME}__handle`}
                         style={{ left: percentString }}
                         onKeyDown={handleKeyDown}
