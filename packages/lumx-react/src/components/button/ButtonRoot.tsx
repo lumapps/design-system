@@ -59,6 +59,9 @@ interface BaseButtonProps extends GenericProps {
      */
     theme?: Theme;
 
+    /** Native input name. */
+    name?: string;
+
     /**
      * Whether custom colors are applied to this component.
      */
@@ -128,6 +131,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         theme,
         useCustomColors,
         variant,
+        name,
         ...forwardedProps
     } = props;
 
@@ -163,7 +167,12 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         );
     }
     return (
-        <button {...forwardedProps} ref={buttonRef as RefObject<HTMLButtonElement>} className={buttonClassName}>
+        <button
+            {...forwardedProps}
+            ref={buttonRef as RefObject<HTMLButtonElement>}
+            className={buttonClassName}
+            name={name}
+        >
             {children}
         </button>
     );

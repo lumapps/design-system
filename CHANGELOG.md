@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `thumbnailProps` to `PostBlock` to allow setting custom props to the link.
 -   Added props forwarding to `Lightbox` component.
 -   Added `name` and `value` props to `Switch`, `CheckBox` and `RadioButton` components.
--   Added `name` prop to `Autocomplete`, `DatePicker` and `TextField` components.
+-   Added `name` prop to `Autocomplete`, `DatePicker`, `TextField`, `Button` and `IconButton` components.
 
 ### Changed
 
