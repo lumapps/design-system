@@ -14,7 +14,7 @@ import uniqueId from 'lodash/uniqueId';
  * Defines the props of the component.
  */
 interface CheckboxProps extends GenericProps {
-    /** Whether it is toggled on or not. */
+    /** Whether it is checked or not. */
     checked?: boolean;
     /** Is checkbox disabled */
     disabled?: boolean;
@@ -24,15 +24,15 @@ interface CheckboxProps extends GenericProps {
     id?: string;
     /** Label */
     label?: ReactNode;
-    /** Name of the checkbox. */
+    /** Native input name. */
     name?: string;
     /** Component theme */
     theme?: Theme;
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
-    /** String representation of the boolean checked value. */
+    /** Native input value. */
     value?: string;
-    /** Checkbox value change handler. */
+    /** Handle onChange event. */
     onChange?(checked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
@@ -74,7 +74,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     ...forwardedProps
 }) => {
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
-    const toggleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
             onChange(!checked, value, name, event);
         }
@@ -104,7 +104,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                     name={name}
                     value={value}
                     checked={checked}
-                    onChange={toggleIsChecked}
+                    onChange={handleChange}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>
