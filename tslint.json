@@ -142,7 +142,12 @@
         "no-unnecessary-else": true,
         "no-unused": true,
         "no-var-before-return": [true, "allow-destructuring"],
-        "prefer-const-enum": false
+        "prefer-const-enum": false,
+        "variable-name": [
+            true,
+            "allow-leading-underscore",
+            "allow-pascal-case"
+        ]
     },
     "rulesDirectory": ["tslint-consistent-codestyle", "tslint-plugin-prettier"]
 }

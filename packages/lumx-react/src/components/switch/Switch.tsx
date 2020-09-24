@@ -1,9 +1,8 @@
-import React, { Children } from 'react';
+import React, { Children, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
 
-import get from 'lodash/get';
 import isEmpty from 'lodash/isEmpty';
 
 import { InputHelper, InputLabel, Theme } from '@lumx/react';
@@ -20,15 +19,16 @@ enum SwitchPosition {
  * Defines the props of the component.
  */
 interface SwitchProps extends GenericProps {
-    /**
-     * Indicates if it is toggled on or not.
-     */
+    /** Whether it is toggled on or not. */
     checked?: boolean;
 
     /**
      * A small help to display below.
      */
     helper?: string;
+
+    /** Name of the switch. */
+    name?: string;
 
     /**
      * The position of the toggle regarding the label.
@@ -43,8 +43,11 @@ interface SwitchProps extends GenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 
+    /** String representation of the boolean checked value. */
+    value?: string;
+
     /** Switch value change handler. */
-    onChange?(enabled: boolean): void;
+    onChange?(checked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -81,10 +84,12 @@ const Switch: React.FC<SwitchProps> = ({
     children,
     checked = DEFAULT_PROPS.checked,
     helper,
+    name,
     onChange,
     position = DEFAULT_PROPS.position,
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
+    value,
     ...forwardedProps
 }) => {
     const switchId: string = uuid();
@@ -95,7 +100,7 @@ const Switch: React.FC<SwitchProps> = ({
      */
     const toggleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
-            onChange(get(event, 'target.checked'));
+            onChange(!checked, value, name, event);
         }
     };
 
@@ -121,6 +126,8 @@ const Switch: React.FC<SwitchProps> = ({
                     type="checkbox"
                     id={switchId}
                     className={`${CLASSNAME}__input-native`}
+                    name={name}
+                    value={value}
                     checked={checked}
                     onChange={toggleIsChecked}
                 />
