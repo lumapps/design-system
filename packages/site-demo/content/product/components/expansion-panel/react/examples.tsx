@@ -26,7 +26,7 @@ const App = () => {
 
     return (
         <>
-            <ExpansionPanel hasBackground hasHeaderDivider isOpen={isOpen1} toggleCallback={setOpen1}>
+            <ExpansionPanel hasBackground hasHeaderDivider isOpen={isOpen1} onToggleOpen={setOpen1}>
                 <header>
                     <FlexBox
                         className="lumx-spacing-margin-left-regular"
@@ -54,7 +54,7 @@ const App = () => {
                 hasBackground
                 hasHeaderDivider
                 isOpen={isOpen2}
-                toggleCallback={setOpen2}
+                onToggleOpen={setOpen2}
             >
                 <header>
                     <FlexBox
@@ -87,7 +87,7 @@ const App = () => {
                 className="lumx-spacing-margin-top-big"
                 hasBackground
                 isOpen={isOpen3}
-                toggleCallback={setOpen3}
+                onToggleOpen={setOpen3}
             >
                 <header>
                     <FlexBox
@@ -114,7 +114,7 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel className="lumx-spacing-margin-top-big" isOpen={isOpen4} toggleCallback={setOpen4}>
+            <ExpansionPanel className="lumx-spacing-margin-top-big" isOpen={isOpen4} onToggleOpen={setOpen4}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail
@@ -135,7 +135,7 @@ const App = () => {
 
             <Divider className="lumx-spacing-margin-vertical-big" />
 
-            <ExpansionPanel isOpen={isOpen5} toggleCallback={setOpen5}>
+            <ExpansionPanel isOpen={isOpen5} onToggleOpen={setOpen5}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail
@@ -156,7 +156,7 @@ const App = () => {
 
             <Divider className="lumx-spacing-margin-vertical-big" />
 
-            <ExpansionPanel isOpen={isOpen6} toggleCallback={setOpen6}>
+            <ExpansionPanel isOpen={isOpen6} onToggleOpen={setOpen6}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail

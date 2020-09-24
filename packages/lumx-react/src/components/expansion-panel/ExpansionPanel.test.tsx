@@ -93,31 +93,31 @@ describe(`<${ExpansionPanel.displayName}>`, () => {
 
     // 3. Test events.
     describe('Events', () => {
-        const openCallback: jest.Mock = jest.fn();
-        const closeCallback: jest.Mock = jest.fn();
-        const toggleCallback: jest.Mock = jest.fn();
+        const onOpen: jest.Mock = jest.fn();
+        const onClose: jest.Mock = jest.fn();
+        const onToggleOpen: jest.Mock = jest.fn();
 
-        beforeEach(openCallback.mockClear);
-        beforeEach(closeCallback.mockClear);
-        beforeEach(toggleCallback.mockClear);
+        beforeEach(onOpen.mockClear);
+        beforeEach(onClose.mockClear);
+        beforeEach(onToggleOpen.mockClear);
 
-        it('should trigger `openCallback`', () => {
-            const { header } = setup({ openCallback }, false);
+        it('should trigger `onOpen`', () => {
+            const { header } = setup({ onOpen }, false);
             header.simulate('click');
-            expect(openCallback).toHaveBeenCalled();
+            expect(onOpen).toHaveBeenCalled();
         });
 
-        it('should trigger `closeCallback`', () => {
-            const { header } = setup({ isOpen: true, closeCallback }, false);
+        it('should trigger `onClose`', () => {
+            const { header } = setup({ isOpen: true, onClose }, false);
             header.simulate('click');
-            expect(closeCallback).toHaveBeenCalled();
+            expect(onClose).toHaveBeenCalled();
         });
 
-        it('should trigger `toggleCallback`', () => {
-            const { header } = setup({ toggleCallback }, false);
+        it('should trigger `onToggleOpen`', () => {
+            const { header } = setup({ onToggleOpen }, false);
             header.simulate('click');
             header.simulate('click');
-            expect(toggleCallback).toHaveBeenCalledTimes(2);
+            expect(onToggleOpen).toHaveBeenCalledTimes(2);
         });
     });
 

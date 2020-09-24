@@ -9,7 +9,7 @@ const App = ({ theme }: any) => {
 
     return (
         <>
-            <ExpansionPanel hasBackground label="Lorem ipsum" theme={theme} isOpen={isOpen} toggleCallback={setOpen}>
+            <ExpansionPanel hasBackground label="Lorem ipsum" theme={theme} isOpen={isOpen} onToggleOpen={setOpen}>
                 <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
                     <p
                         className={classNames(
