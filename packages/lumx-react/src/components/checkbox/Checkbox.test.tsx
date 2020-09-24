@@ -75,7 +75,7 @@ describe(`<${Checkbox.displayName}>`, () => {
         it('should add a "disabled" and "checked" class names', () => {
             const { wrapper } = setup({
                 disabled: true,
-                value: true,
+                checked: true,
             });
 
             expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'disabled', value: true }));
@@ -103,11 +103,11 @@ describe(`<${Checkbox.displayName}>`, () => {
         });
 
         it('should trigger `onChange` when checkbox is clicked', () => {
-            const { wrapper } = setup({ value: false, onChange }, false);
+            const { wrapper } = setup({ checked: false, onChange }, false);
             const checkbox = wrapper.find('input');
 
             checkbox.simulate('change');
-            expect(onChange).toHaveBeenCalledWith(true);
+            expect(onChange).toHaveBeenCalled();
         });
     });
 

@@ -152,10 +152,10 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         value="value"
       />
       <Checkbox
+        checked={false}
         className="lumx-spacing-margin-bottom-huge"
         label="Checkbox input"
         onChange={[Function]}
-        value={false}
       />
       <Select
         className="lumx-spacing-margin-bottom-huge"

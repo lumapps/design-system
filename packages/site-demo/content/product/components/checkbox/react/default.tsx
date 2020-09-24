@@ -10,12 +10,12 @@ const App = ({ theme }: any) => {
     return (
         <>
             <div className="lumx-spacing-margin-bottom-big">
-                <Checkbox value={value} label="Checkbox" theme={theme} onChange={setValue} />
+                <Checkbox checked={value} label="Checkbox" theme={theme} onChange={setValue} />
             </div>
 
             <div className="lumx-spacing-margin-bottom-big">
                 <Checkbox
-                    value={value2}
+                    checked={value2}
                     helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                     label="Checkbox with help"
                     theme={theme}
@@ -24,7 +24,7 @@ const App = ({ theme }: any) => {
             </div>
 
             <Checkbox
-                value={value3}
+                checked={value3}
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Disable checkbox with help"
                 theme={theme}
