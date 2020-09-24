@@ -22,6 +22,9 @@ interface SwitchProps extends GenericProps {
     /** Whether it is checked or not. */
     checked?: boolean;
 
+    /** Switch disabled state. */
+    isDisabled?: boolean;
+
     /**
      * A small help to display below.
      */
@@ -74,10 +77,12 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
  * @return The component.
  */
 const Switch: React.FC<SwitchProps> = ({
-    className,
-    children,
     checked,
+    children,
+    className,
+    disabled,
     helper,
+    isDisabled = disabled,
     name,
     onChange,
     position,
@@ -101,13 +106,14 @@ const Switch: React.FC<SwitchProps> = ({
                 handleBasicClasses({
                     prefix: CLASSNAME,
                     checked: Boolean(checked),
-                    disabled: forwardedProps.disabled,
+                    isDisabled,
                     position,
                     theme,
                     unchecked: !Boolean(checked),
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
+            aria-disabled={isDisabled}
         >
             <div className={`${CLASSNAME}__input-wrapper`}>
                 <input
@@ -116,6 +122,7 @@ const Switch: React.FC<SwitchProps> = ({
                     className={`${CLASSNAME}__input-native`}
                     name={name}
                     value={value}
+                    disabled={isDisabled}
                     checked={checked}
                     onChange={handleChange}
                 />

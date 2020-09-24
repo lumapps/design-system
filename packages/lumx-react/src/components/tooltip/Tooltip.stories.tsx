@@ -75,7 +75,7 @@ export const TooltipOnDisabledButton = () => {
                 Toggle button disabled
             </Switch>
             <Tooltip label={'Tooltip on disabled button'}>
-                <Button disabled={disabled} onClick={noop}>
+                <Button isDisabled={disabled} onClick={noop}>
                     Click to disable button
                 </Button>
             </Tooltip>

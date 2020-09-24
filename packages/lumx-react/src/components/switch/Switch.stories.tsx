@@ -18,13 +18,13 @@ export const checkedSwitch = ({ theme }: any) => (
 );
 
 export const disabledCheckedSwitch = ({ theme }: any) => (
-    <Switch checked disabled onChange={noop} theme={theme}>
+    <Switch checked isDisabled onChange={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );
 
 export const disabledSwitch = ({ theme }: any) => (
-    <Switch disabled onChange={noop} theme={theme}>
+    <Switch isDisabled onChange={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );

@@ -87,7 +87,8 @@ const withSelectContext = (
         error,
         hasError,
         helper,
-        isDisabled,
+        disabled,
+        isDisabled = disabled,
         isEmpty,
         isMultiple,
         isOpen,
@@ -162,6 +163,7 @@ const withSelectContext = (
             <SelectElement
                 {...forwardedProps}
                 anchorRef={anchorRef}
+                aria-disabled={isDisabled}
                 handleKeyboardNav={handleKeyboardNav}
                 hasError={hasError}
                 isEmpty={isEmpty}

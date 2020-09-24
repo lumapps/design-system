@@ -6,7 +6,7 @@ export const App = ({ theme }: any) => (
     <>
         <Button theme={theme}>Default</Button>
 
-        <Button disabled theme={theme}>
+        <Button isDisabled theme={theme}>
             Disabled
         </Button>
 

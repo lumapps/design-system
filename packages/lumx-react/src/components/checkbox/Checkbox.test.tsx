@@ -74,7 +74,7 @@ describe(`<${Checkbox.displayName}>`, () => {
     describe('Props', () => {
         it('should add a "disabled" and "checked" class names', () => {
             const { wrapper } = setup({
-                disabled: true,
+                isDisabled: true,
                 checked: true,
             });
 

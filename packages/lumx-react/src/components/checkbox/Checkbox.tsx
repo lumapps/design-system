@@ -17,7 +17,7 @@ interface CheckboxProps extends GenericProps {
     /** Whether it is checked or not. */
     checked?: boolean;
     /** Is checkbox disabled */
-    disabled?: boolean;
+    isDisabled?: boolean;
     /** Helper */
     helper?: string;
     /** Native input id */
@@ -51,7 +51,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<CheckboxProps> = {
     theme: Theme.light,
-    checked: false,
 };
 
 /**
@@ -63,6 +62,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     checked,
     className,
     disabled,
+    isDisabled = disabled,
     helper,
     id,
     label,
@@ -87,7 +87,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 className,
                 handleBasicClasses({
                     isChecked: checked,
-                    isDisabled: disabled,
+                    isDisabled,
                     isUnchecked: !checked,
                     prefix: CLASSNAME,
                     theme,
@@ -100,7 +100,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                     type="checkbox"
                     id={inputId}
                     className={`${CLASSNAME}__input-native`}
-                    tabIndex={disabled ? -1 : 0}
+                    tabIndex={isDisabled ? -1 : 0}
                     name={name}
                     value={value}
                     checked={checked}

@@ -82,7 +82,7 @@ describe(`<${RadioButton.displayName}>`, () => {
         it('should render checked, disabled & id', () => {
             const props = {
                 checked: true,
-                disabled: true,
+                isDisabled: true,
                 id: 'inputID',
             };
             const { wrapper, input } = setup(props);
@@ -122,7 +122,7 @@ describe(`<${RadioButton.displayName}>`, () => {
         it('should use props for classes', () => {
             const props = {
                 checked: true,
-                disabled: true,
+                isDisabled: true,
                 theme: Theme.dark,
             };
             const { wrapper } = setup(props as RadioButtonProps);

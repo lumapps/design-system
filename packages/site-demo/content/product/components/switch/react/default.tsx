@@ -14,11 +14,11 @@ export const App = ({ theme }: any) => {
                 With helper
             </Switch>
 
-            <Switch disabled checked={state} onChange={setState} theme={theme}>
+            <Switch isDisabled checked={state} onChange={setState} theme={theme}>
                 Disabled
             </Switch>
 
-            <Switch checked disabled theme={theme}>
+            <Switch checked isDisabled theme={theme}>
                 Disabled checked
             </Switch>
         </>

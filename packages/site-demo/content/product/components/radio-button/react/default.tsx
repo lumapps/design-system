@@ -34,7 +34,7 @@ export const App = ({ theme }: any) => {
                 theme={theme}
                 value="dolor"
                 onChange={onChange}
-                disabled
+                isDisabled
             />
         </RadioGroup>
     );

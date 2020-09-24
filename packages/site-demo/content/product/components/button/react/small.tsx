@@ -10,7 +10,7 @@ export const App = ({ theme }: any) => (
                 Default
             </Button>
 
-            <Button disabled size={Size.s} theme={theme}>
+            <Button isDisabled size={Size.s} theme={theme}>
                 Disabled
             </Button>
 
@@ -37,7 +37,7 @@ export const App = ({ theme }: any) => (
                 Default
             </Button>
 
-            <Button disabled emphasis={Emphasis.medium} size={Size.s} theme={theme}>
+            <Button isDisabled emphasis={Emphasis.medium} size={Size.s} theme={theme}>
                 Disabled
             </Button>
             <Button emphasis={Emphasis.medium} leftIcon={mdiPencil} size={Size.s} theme={theme}>
@@ -63,7 +63,7 @@ export const App = ({ theme }: any) => (
                 Default
             </Button>
 
-            <Button disabled emphasis={Emphasis.low} size={Size.s} theme={theme}>
+            <Button isDisabled emphasis={Emphasis.low} size={Size.s} theme={theme}>
                 Disabled
             </Button>
 

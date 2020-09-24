@@ -46,8 +46,9 @@ const DEFAULT_PROPS: Partial<TableRowProps> = {};
 const TableRow: React.FC<TableRowProps> = ({
     children,
     className,
+    disabled,
     isClickable,
-    isDisabled,
+    isDisabled = disabled,
     isSelected,
     ...forwardedProps
 }) => (
@@ -63,6 +64,7 @@ const TableRow: React.FC<TableRowProps> = ({
             }),
         )}
         tabIndex={isClickable && !isDisabled ? 0 : -1}
+        aria-disabled={isDisabled}
     >
         {children}
     </tr>

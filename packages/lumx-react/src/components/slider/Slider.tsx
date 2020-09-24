@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { SyntheticEvent, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -15,7 +15,7 @@ import uuid from 'uuid/v4';
  */
 interface SliderProps extends GenericProps {
     /** Deactivate the component */
-    disabled?: boolean;
+    isDisabled?: boolean;
     /** Label */
     label?: string;
     /** Helper message */
@@ -34,8 +34,10 @@ interface SliderProps extends GenericProps {
     theme?: Theme;
     /** Value */
     value: number;
-    /** Callback function invoked when the slider value changes */
-    onChange(value: number): void;
+    /** Native input name. */
+    name?: string;
+    /** Handle onChange event. */
+    onChange(value: number, name?: string, event?: SyntheticEvent): void;
     /** Callback function invoked when the component is clicked */
     onMouseDown?(event: React.SyntheticEvent): void;
 }
@@ -102,19 +104,21 @@ const computePercentFromValue = (value: number, min: number, max: number): numbe
  */
 const Slider: React.FC<SliderProps> = ({
     className,
-    label,
+    disabled,
     helper,
+    hideMinMaxlabel,
     id = uuid(),
+    isDisabled = disabled,
+    label,
     max,
     min,
-    onMouseDown,
+    name,
     onChange,
-    steps,
+    onMouseDown,
     precision,
-    hideMinMaxlabel,
-    value,
-    disabled,
+    steps,
     theme,
+    value,
     ...forwardedProps
 }) => {
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -181,7 +185,7 @@ const Slider: React.FC<SliderProps> = ({
         const newValue = getPercentValue(event, slider!);
 
         if (onChange) {
-            onChange(computeValueFromPercent(newValue, min, max, precision!));
+            onChange(computeValueFromPercent(newValue, min, max, precision!), name, event);
         }
     });
 
@@ -208,7 +212,7 @@ const Slider: React.FC<SliderProps> = ({
             percent = findClosestStep(percent);
         }
         if (onChange) {
-            onChange(computeValueFromPercent(percent, min, max, precision!));
+            onChange(computeValueFromPercent(percent, min, max, precision!), name);
         }
     };
 
@@ -230,13 +234,13 @@ const Slider: React.FC<SliderProps> = ({
         if (onMouseDown) {
             onMouseDown(event);
         }
-        if (disabled) {
+        if (isDisabled) {
             return;
         }
         const { current: slider } = sliderRef;
         const newValue = getPercentValue(event, slider!);
         if (onChange) {
-            onChange(computeValueFromPercent(newValue, min, max, precision!));
+            onChange(computeValueFromPercent(newValue, min, max, precision!), name, event);
         }
 
         document.body.addEventListener('mousemove', handleMove);
@@ -252,6 +256,7 @@ const Slider: React.FC<SliderProps> = ({
                 handleBasicClasses({ prefix: CLASSNAME, theme, hasLabel: Boolean(label) }),
             )}
             onMouseDown={handleMouseDown}
+            aria-disabled={isDisabled}
         >
             {label && (
                 <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} theme={theme}>
@@ -289,9 +294,11 @@ const Slider: React.FC<SliderProps> = ({
                         </div>
                     ) : null}
                     <button
+                        name={name}
                         className={`${CLASSNAME}__handle`}
                         style={{ left: percentString }}
                         onKeyDown={handleKeyDown}
+                        disabled={isDisabled}
                     />
                 </div>
                 {!hideMinMaxlabel && (

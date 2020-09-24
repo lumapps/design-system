@@ -17,7 +17,7 @@ interface RadioButtonProps extends GenericProps {
     checked?: boolean;
 
     /**  Whether or not the radio button is disabled. */
-    disabled?: boolean;
+    isDisabled?: boolean;
 
     /** Radio button helper. */
     helper?: string;
@@ -69,17 +69,18 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {
  */
 const RadioButton: React.FC<RadioButtonProps> = (props) => {
     const {
-        className,
         checked,
+        className,
         disabled,
         helper,
         id,
+        isDisabled = disabled,
         label,
         name,
+        onChange,
         theme,
         useCustomColors,
         value,
-        onChange,
         ...forwardedProps
     } = props;
     const radioButtonId: string = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
@@ -95,7 +96,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
                 className,
                 handleBasicClasses({
                     isChecked: checked,
-                    isDisabled: disabled,
+                    isDisabled,
                     isUnchecked: !checked,
                     prefix: CLASSNAME,
                     theme,
@@ -107,9 +108,9 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
                 <input
                     {...forwardedProps}
                     className={`${CLASSNAME}__input-native`}
-                    disabled={disabled}
+                    disabled={isDisabled}
                     id={radioButtonId}
-                    tabIndex={disabled ? -1 : 0}
+                    tabIndex={isDisabled ? -1 : 0}
                     type="radio"
                     name={name}
                     value={value}

@@ -92,20 +92,21 @@ function useStopPropagation(handler?: MouseEventHandler): MouseEventHandler {
 const Chip: React.FC<ChipProps> = ({
     after,
     before,
-    className,
     children,
+    chipRef,
+    className,
     color,
+    disabled,
     isClickable,
-    isSelected,
-    isDisabled,
+    isDisabled = disabled,
     isHighlighted,
+    isSelected,
     onAfterClick,
     onBeforeClick,
     onClick,
     size,
     theme,
     useCustomColors,
-    chipRef,
     ...forwardedProps
 }) => {
     const hasAfterClick = isFunction(onAfterClick);
@@ -127,7 +128,7 @@ const Chip: React.FC<ChipProps> = ({
                 handleBasicClasses({
                     clickable: Boolean(hasOnClick) || isClickable,
                     color: chipColor,
-                    disabled: Boolean(isDisabled),
+                    isDisabled,
                     hasAfter: Boolean(after),
                     hasBefore: Boolean(before),
                     highlighted: Boolean(isHighlighted),
@@ -138,8 +139,9 @@ const Chip: React.FC<ChipProps> = ({
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
-            role="button"
+            role={hasOnClick ? 'button' : undefined}
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
+            aria-disabled={(hasOnClick && isDisabled) || undefined}
             onClick={hasOnClick ? onClick : undefined}
             onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
         >

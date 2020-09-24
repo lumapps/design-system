@@ -23,8 +23,8 @@ export const App = ({ theme }: any) => {
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                 label="Disabled checkbox with help"
                 theme={theme}
+                isDisabled
                 onChange={setValue3}
-                disabled
             />
         </>
     );

@@ -15,7 +15,6 @@ import { GenericProps } from '@lumx/react/utils';
 /**
  * Defines the props of the component.
  */
-
 interface DatePickerFieldProps extends GenericProps {
     /** Locale. */
     locale: string;
@@ -34,6 +33,9 @@ interface DatePickerFieldProps extends GenericProps {
 
     /** Native input name. */
     name?: string;
+
+    /** Disabled state. */
+    isDisabled?: boolean;
 
     /** On change. */
     onChange(value?: moment.Moment, name?: string, event?: SyntheticEvent): void;
@@ -56,6 +58,9 @@ const DatePickerField = ({
     maxDate,
     defaultMonth,
     onChange,
+    name,
+    disabled,
+    isDisabled = disabled,
     ...textFieldProps
 }: DatePickerFieldProps) => {
     const wrapperRef = useRef(null);
@@ -82,9 +87,9 @@ const DatePickerField = ({
     const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
     useFocusTrap(todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
 
-    const onTextFieldChange = (textFieldValue: string, name?: string, event?: SyntheticEvent) => {
+    const onTextFieldChange = (textFieldValue: string, textFieldName?: string, event?: SyntheticEvent) => {
         if (!textFieldValue) {
-            onChange(undefined, name, event);
+            onChange(undefined, textFieldName, event);
         }
     };
 
@@ -109,6 +114,7 @@ const DatePickerField = ({
                 onClick={toggleSimpleMenu}
                 onChange={onTextFieldChange}
                 onKeyPress={handleKeyboardNav}
+                isDisabled={isDisabled}
                 readOnly
             />
             {isOpen ? (

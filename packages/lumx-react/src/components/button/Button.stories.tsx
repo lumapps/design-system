@@ -17,6 +17,7 @@ export const simpleButton = ({ theme }: any) => {
             leftIcon={select('Left icon', { none: undefined, mdiSend }, undefined)}
             size={select('Size', [Size.m, Size.s], DEFAULT_PROPS.size)}
             isSelected={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
+            isDisabled={boolean('isDisabled', Boolean(DEFAULT_PROPS.isDisabled))}
             color={select('color', ColorPalette, DEFAULT_PROPS.color)}
             hasBackground={boolean('hasBackground', Boolean(DEFAULT_PROPS.hasBackground))}
         >

@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, KeyboardEventHandler, MouseEventHandler, ReactNode, SyntheticEvent } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -46,16 +46,15 @@ const DEFAULT_PROPS: Partial<TabProps> = {};
  */
 const Tab: React.FC<TabProps> = ({
     className,
+    disabled,
     icon,
     index,
     isActive,
-    isDisabled,
+    isDisabled = disabled,
     label,
     onTabClick,
     ...forwardedProps
 }) => {
-    const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
-
     const handleTabClick: MouseEventHandler = (event) => {
         onTabClick?.({ event, index });
     };
@@ -74,9 +73,10 @@ const Tab: React.FC<TabProps> = ({
         <a
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled }))}
-            tabIndex={tabIndex}
+            tabIndex={isDisabled ? -1 : 0}
             onClick={handleTabClick}
             onKeyPress={handleKeyPress}
+            aria-disabled={isDisabled}
         >
             {icon && <Icon icon={icon} size={Size.xs} />}
             {label && <span>{label}</span>}
@@ -85,4 +85,4 @@ const Tab: React.FC<TabProps> = ({
 };
 Tab.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, Tab, TabProps };
+export { CLASSNAME, Tab, TabProps };

@@ -36,6 +36,11 @@ interface BaseButtonProps extends GenericProps {
     isSelected?: boolean;
 
     /**
+     * Button disabled state.
+     */
+    isDisabled?: boolean;
+
+    /**
      * Use this property if you specified a URL in the `href` property and you want to customize the link button target property.
      */
     target?: '_self' | '_blank' | '_parent' | '_top';
@@ -131,8 +136,10 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         children,
         className,
         color,
+        disabled,
         emphasis,
         hasBackground,
+        isDisabled = disabled,
         isSelected,
         linkAs,
         name,
@@ -159,6 +166,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
             color: adaptedColor,
             emphasis,
             isSelected,
+            isDisabled,
             prefix: BUTTON_CLASSNAME,
             size,
             theme: emphasis === Emphasis.high && theme,
@@ -173,6 +181,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
                 linkAs,
                 ref: buttonRef as RefObject<HTMLAnchorElement>,
                 className: buttonClassName,
+                disabled: isDisabled,
                 ...forwardedProps,
             },
             children,
@@ -181,6 +190,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     return (
         <button
             {...forwardedProps}
+            disabled={isDisabled}
             ref={buttonRef as RefObject<HTMLButtonElement>}
             className={buttonClassName}
             name={name}
