@@ -39,13 +39,13 @@ interface ExpansionPanelProps extends GenericProps {
     isOpen?: boolean;
 
     /** The function called on open. */
-    openCallback?: Callback;
+    onOpen?: Callback;
 
     /** The function called on close. */
-    closeCallback?: Callback;
+    onClose?: Callback;
 
     /** The function called on open or close. */
-    toggleCallback?(shouldOpen: boolean): void;
+    onToggleOpen?(shouldOpen: boolean): void;
 }
 
 /**
@@ -77,9 +77,9 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
         hasHeaderDivider,
         isOpen,
         className,
-        openCallback,
-        closeCallback,
-        toggleCallback,
+        onOpen,
+        onClose,
+        onToggleOpen,
         ...forwardedProps
     } = props;
 
@@ -98,14 +98,14 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
 
     const toggleOpen = () => {
         const shouldOpen = !isOpen;
-        if (isFunction(openCallback) && shouldOpen) {
-            openCallback();
+        if (isFunction(onOpen) && shouldOpen) {
+            onOpen();
         }
-        if (isFunction(closeCallback) && !shouldOpen) {
-            closeCallback();
+        if (isFunction(onClose) && !shouldOpen) {
+            onClose();
         }
-        if (isFunction(toggleCallback)) {
-            toggleCallback(shouldOpen);
+        if (isFunction(onToggleOpen)) {
+            onToggleOpen(shouldOpen);
         }
     };
 

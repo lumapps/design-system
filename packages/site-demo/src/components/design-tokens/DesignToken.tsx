@@ -52,7 +52,7 @@ export const DesignToken: React.FC<DesignTokenProps> = ({
             hasBackground
             hasHeaderDivider
             isOpen={isOpen}
-            toggleCallback={setIsOpen}
+            onToggleOpen={setIsOpen}
             theme={theme}
         >
             <header>

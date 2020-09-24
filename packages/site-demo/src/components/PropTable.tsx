@@ -49,7 +49,7 @@ const PropTableRow: React.FC<{ property: Property }> = ({ property }) => {
     };
 
     return (
-        <ExpansionPanel label="Lorem ipsum" isOpen={isOpen} toggleCallback={toggleOpen}>
+        <ExpansionPanel label="Lorem ipsum" isOpen={isOpen} onToggleOpen={toggleOpen}>
             <header>
                 <Grid hAlign={Alignment.center}>
                     <GridItem width="4">
