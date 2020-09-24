@@ -1,5 +1,6 @@
 import { Button, Placement, Switch, Tooltip } from '@lumx/react';
 import { select, text } from '@storybook/addon-knobs';
+import noop from 'lodash/noop';
 import React, { useRef, useState } from 'react';
 import { Dropdown } from '../dropdown/Dropdown';
 
@@ -67,7 +68,6 @@ export const TooltipWithDropdown = () => {
 
 export const TooltipOnDisabledButton = () => {
     const [disabled, setDisabled] = useState(false);
-    const disable = () => setDisabled(true);
 
     return (
         <>
@@ -75,7 +75,7 @@ export const TooltipOnDisabledButton = () => {
                 Toggle button disabled
             </Switch>
             <Tooltip label={'Tooltip on disabled button'}>
-                <Button disabled={disabled} onClick={disable}>
+                <Button disabled={disabled} onClick={noop}>
                     Click to disable button
                 </Button>
             </Tooltip>

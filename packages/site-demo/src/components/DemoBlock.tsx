@@ -38,7 +38,9 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     ...flexBoxProps
 }) => {
     const [theme, setTheme] = useState(Theme.light);
-    const toggleTheme = (checked: boolean) => (checked ? setTheme(Theme.dark) : setTheme(Theme.light));
+    const toggleTheme = (checked: boolean) => {
+        setTheme(checked ? Theme.dark : Theme.light);
+    };
 
     const [showCode, setShowCode] = useState(false);
     const toggleShowCode = () => setShowCode(!showCode);

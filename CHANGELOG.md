@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `avatarProps` to `UserBlock` to allow setting custom props to the link.
 -   Added `thumbnailProps` to `PostBlock` to allow setting custom props to the link.
 -   Added props forwarding to `Lightbox` component.
+-   Added `name` and `value` props to `Switch` component.
 
 ### Changed
 
@@ -23,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ Renamed `handleClick` prop to `onClick` and `actionCallback` prop to `onActionClick` for `Notification` component.
 -   _[BREAKING]_ Removed `HTMLElement` as type in `PostBlock` component props.
 -   _[BREAKING]_ Renamed `closeCallback`, `openCallback` and `toggleCallback` props respectively to `onClose`, `onOpen` and `onToggleOpen` for `ExpansionPanel` component.
+-   _[BREAKING]_ Changed `onChange` method signature for `Switch` component.
 
 ### Removed
 
