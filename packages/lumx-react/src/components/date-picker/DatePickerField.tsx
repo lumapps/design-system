@@ -3,7 +3,7 @@ import { useFocusTrap } from '@lumx/react/hooks/useFocusTrap';
 
 import moment from 'moment';
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, { SyntheticEvent, useCallback, useRef, useState } from 'react';
 
 import { ENTER_KEY_CODE, SPACE_KEY_CODE } from '@lumx/react/constants';
 import { CLASSNAME, DatePicker } from './DatePicker';
@@ -32,8 +32,11 @@ interface DatePickerFieldProps extends GenericProps {
     /** Month to display by default */
     defaultMonth?: DatePickerValueProp;
 
+    /** Native input name. */
+    name?: string;
+
     /** On change. */
-    onChange(value: moment.Moment | undefined): void;
+    onChange(value?: moment.Moment, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -79,14 +82,14 @@ const DatePickerField = ({
     const todayOrSelectedDateRef = useRef<HTMLButtonElement>(null);
     useFocusTrap(todayOrSelectedDateRef.current && wrapperRef.current, todayOrSelectedDateRef.current);
 
-    const onTextFieldChange = (textFieldValue: string) => {
+    const onTextFieldChange = (textFieldValue: string, name?: string, event?: SyntheticEvent) => {
         if (!textFieldValue) {
-            onChange(undefined);
+            onChange(undefined, name, event);
         }
     };
 
-    const onDatePickerChange = (newDate: moment.Moment | undefined) => {
-        onChange(newDate);
+    const onDatePickerChange = (newDate?: moment.Moment) => {
+        onChange(newDate, name);
         onClose();
     };
 
@@ -99,6 +102,7 @@ const DatePickerField = ({
         <>
             <TextField
                 {...textFieldProps}
+                name={name}
                 forceFocusStyle={isOpen}
                 textFieldRef={anchorRef}
                 value={castedValue ? castedValue.locale(locale).format('LL') : ''}

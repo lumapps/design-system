@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useState } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -70,14 +70,17 @@ interface TextFieldProps extends GenericProps {
     /** A ref that will be passed to the input or text area element. */
     inputRef?: RefObject<HTMLInputElement> | RefObject<HTMLTextAreaElement>;
 
+    /** Native input name. */
+    name?: string;
+
     /** Text field value. */
     value?: string | number;
 
     /** A ref that will be passed to the wrapper element. */
     textFieldRef?: RefObject<HTMLDivElement>;
 
-    /** Text field value change handler. */
-    onChange(value: string): void;
+    /** Handle onChange event. */
+    onChange(value: string, name?: string, event?: SyntheticEvent): void;
 
     /** Text field focus change handler. */
     onFocus?(event: React.FocusEvent): void;
@@ -165,10 +168,11 @@ interface InputNativeProps {
     placeholder?: string;
     rows: number;
     type: string;
+    name?: string;
     value?: string | number;
     setFocus(focus: boolean): void;
     recomputeNumberOfRows(target: Element): void;
-    onChange(value: string): void;
+    onChange(value: string, name?: string, event?: SyntheticEvent): void;
     onFocus?(value: React.FocusEvent): void;
     onBlur?(value: React.FocusEvent): void;
 }
@@ -189,6 +193,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
         rows,
         recomputeNumberOfRows,
         type,
+        name,
         ...forwardedProps
     } = props;
 
@@ -216,7 +221,11 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     };
 
     const handleChange = (event: React.ChangeEvent) => {
-        onChange(get(event, 'target.value'));
+        onChange(
+            typeof value === 'number' ? Number(get(event, 'target.value')) : get(event, 'target.value'),
+            name,
+            event,
+        );
     };
 
     return multiline ? (
@@ -227,6 +236,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
             required={isRequired}
             placeholder={placeholder}
             value={value}
+            name={name}
             rows={rows}
             onFocus={onTextFieldFocus}
             onBlur={onTextFieldBlur}
@@ -242,6 +252,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
             type={type}
             placeholder={placeholder}
             value={value}
+            name={name}
             onFocus={onTextFieldFocus}
             onBlur={onTextFieldBlur}
             onChange={handleChange}
@@ -284,6 +295,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         textFieldRef,
         type,
         value,
+        name,
         ...forwardedProps
     } = props;
 
@@ -374,6 +386,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
                             setFocus,
                             type,
                             value,
+                            name,
                             ...forwardedProps,
                         })}
                     </div>

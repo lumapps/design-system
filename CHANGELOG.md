@@ -14,17 +14,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Added `avatarProps` to `UserBlock` to allow setting custom props to the link.
 -   Added `thumbnailProps` to `PostBlock` to allow setting custom props to the link.
 -   Added props forwarding to `Lightbox` component.
--   Added `name` and `value` props to `Switch` component.
+-   Added `name` and `value` props to `Switch`, `CheckBox` and `RadioButton` components.
+-   Added `name` prop to `Autocomplete`, `DatePicker` and `TextField` components.
 
 ### Changed
 
+-   Upgrade to mdi v5.6.55 and handle backward compatibility.
 -   _[BREAKING]_ Renamed `url` prop to `link` for `LinkPreview` component.
 -   _[BREAKING]_ Renamed `onToggle` prop to `onChange` for `Switch` component.
 -   _[BREAKING]_ `avatar` prop from `UserBlock` component is now a string and corresponds to the avatar url. Any other avatar props should be passed to `avatarProps` prop.
 -   _[BREAKING]_ Renamed `handleClick` prop to `onClick` and `actionCallback` prop to `onActionClick` for `Notification` component.
 -   _[BREAKING]_ Removed `HTMLElement` as type in `PostBlock` component props.
 -   _[BREAKING]_ Renamed `closeCallback`, `openCallback` and `toggleCallback` props respectively to `onClose`, `onOpen` and `onToggleOpen` for `ExpansionPanel` component.
--   _[BREAKING]_ Changed `onChange` method signature for `Switch` component.
+-   _[BREAKING]_ Changed `onChange` method signature for `RadioButton` component.
+-   Changed `onChange` method signature for `Switch`, `CheckBox`, `Autocomplete`, `TextField` and `DatePicker` component.
 
 ### Removed
 

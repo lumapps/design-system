@@ -80,37 +80,38 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
 const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
     const {
         anchorToInput,
-        className,
         children,
         chipsAlignment,
-        value,
-        values,
-        onBlur,
-        onChange,
-        onFocus,
-        onKeyDown,
-        isOpen,
+        className,
         closeOnClickAway,
         closeOnEscape,
+        fitToAnchorWidth,
         hasError,
         helper,
         icon,
         inputRef,
-        isDisabled,
         isClearable,
+        isDisabled,
+        isOpen,
         isValid,
         label,
+        name,
+        offset,
+        onBlur,
+        onChange,
+        onClear,
+        onClose,
+        onFocus,
+        onInfiniteScroll,
+        onKeyDown,
         placeholder,
+        placement,
+        selectedChipRender,
+        shouldFocusOnClose,
         theme,
         type,
-        onClose,
-        onClear,
-        offset,
-        placement,
-        fitToAnchorWidth,
-        shouldFocusOnClose,
-        onInfiniteScroll,
-        selectedChipRender,
+        value,
+        values,
         ...forwardedProps
     } = props;
 
@@ -124,6 +125,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
                     prefix: CLASSNAME,
                 }),
             )}
+            name={name}
             value={value}
             onChange={onChange}
             onKeyDown={onKeyDown}

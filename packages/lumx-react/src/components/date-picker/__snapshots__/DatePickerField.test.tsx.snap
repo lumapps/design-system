@@ -5,6 +5,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly 1`] =
   <TextField
     forceFocusStyle={false}
     label="DatePickerField"
+    name="nodejs"
     onChange={[Function]}
     onClick={[Function]}
     onKeyPress={[Function]}
@@ -26,6 +27,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly when 
   <TextField
     forceFocusStyle={false}
     label="DatePickerField"
+    name="nodejs"
     onChange={[Function]}
     onClick={[Function]}
     onKeyPress={[Function]}
@@ -47,6 +49,7 @@ exports[`<DatePickerField> Snapshots and structure should render correctly when 
   <TextField
     forceFocusStyle={false}
     label="DatePickerField"
+    name="nodejs"
     onChange={[Function]}
     onClick={[Function]}
     onKeyPress={[Function]}
@@ -68,6 +71,7 @@ exports[`<DatePickerField> Snapshots and structure should render without selecte
   <TextField
     forceFocusStyle={false}
     label="DatePickerField"
+    name="nodejs"
     onChange={[Function]}
     onClick={[Function]}
     onKeyPress={[Function]}
