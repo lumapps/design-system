@@ -19,7 +19,7 @@ enum SwitchPosition {
  * Defines the props of the component.
  */
 interface SwitchProps extends GenericProps {
-    /** Whether it is toggled on or not. */
+    /** Whether it is checked or not. */
     checked?: boolean;
 
     /**
@@ -27,7 +27,7 @@ interface SwitchProps extends GenericProps {
      */
     helper?: string;
 
-    /** Name of the switch. */
+    /** Native input name. */
     name?: string;
 
     /**
@@ -43,10 +43,10 @@ interface SwitchProps extends GenericProps {
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
 
-    /** String representation of the boolean checked value. */
+    /** Native input value. */
     value?: string;
 
-    /** Switch value change handler. */
+    /** Handle onChange event. */
     onChange?(checked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
@@ -93,12 +93,7 @@ const Switch: React.FC<SwitchProps> = ({
     ...forwardedProps
 }) => {
     const switchId: string = uuid();
-
-    /**
-     * Toggle the state of the <Switch> inner checkbox.
-     * @param event Change event.
-     */
-    const toggleIsChecked = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
             onChange(!checked, value, name, event);
         }
@@ -111,7 +106,6 @@ const Switch: React.FC<SwitchProps> = ({
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
-
                     checked: Boolean(checked),
                     disabled: forwardedProps.disabled,
                     position,
@@ -129,7 +123,7 @@ const Switch: React.FC<SwitchProps> = ({
                     name={name}
                     value={value}
                     checked={checked}
-                    onChange={toggleIsChecked}
+                    onChange={handleChange}
                 />
 
                 <div className={`${CLASSNAME}__input-placeholder`}>

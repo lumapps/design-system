@@ -1,37 +1,44 @@
 import { RadioButton, RadioGroup } from '@lumx/react';
-import noop from 'lodash/noop';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default { title: 'LumX components/radio-button/Radio Group' };
 
-export const radioGroup = ({ theme }: any) => (
-    <RadioGroup>
-        <RadioButton
-            checked={true}
-            helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
-            label="Radio button with help 1"
-            name="test2"
-            theme={theme}
-            value="lorem"
-            onChange={noop}
-        />
+export const radioGroup = ({ theme }: any) => {
+    const [value, setValue] = useState('lorem');
+    const onChange = (newValue: string) => setValue(newValue);
 
-        <RadioButton
-            disabled
-            helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
-            label="Radio button with help 2"
-            name="test2"
-            theme={theme}
-            value="ipsum"
-        />
+    return (
+        <>
+            <RadioGroup>
+                <RadioButton
+                    checked={value === 'lorem'}
+                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                    label="Radio button with help 1"
+                    name="test2"
+                    theme={theme}
+                    value="lorem"
+                    onChange={onChange}
+                />
 
-        <RadioButton
-            helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
-            label="Radio button with help 3"
-            name="test2"
-            theme={theme}
-            value="dolor"
-            onChange={noop}
-        />
-    </RadioGroup>
-);
+                <RadioButton
+                    disabled
+                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                    label="Radio button with help 2"
+                    name="test2"
+                    theme={theme}
+                    value="ipsum"
+                />
+
+                <RadioButton
+                    checked={value === 'dolor'}
+                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                    label="Radio button with help 3"
+                    name="test2"
+                    theme={theme}
+                    value="dolor"
+                    onChange={onChange}
+                />
+            </RadioGroup>
+        </>
+    );
+};

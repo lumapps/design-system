@@ -4,6 +4,7 @@ import { RadioButton, RadioGroup } from '@lumx/react';
 
 const App = ({ theme }: any) => {
     const [value, setValue] = useState('lorem');
+    const onChange = (newValue: string) => setValue(newValue);
 
     return (
         <>
@@ -15,7 +16,7 @@ const App = ({ theme }: any) => {
                     name="test2"
                     theme={theme}
                     value="lorem"
-                    onChange={setValue}
+                    onChange={onChange}
                 />
 
                 <RadioButton
@@ -34,7 +35,7 @@ const App = ({ theme }: any) => {
                     name="test2"
                     theme={theme}
                     value="dolor"
-                    onChange={setValue}
+                    onChange={onChange}
                 />
             </RadioGroup>
         </>
