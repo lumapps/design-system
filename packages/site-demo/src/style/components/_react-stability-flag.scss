@@ -1,0 +1,17 @@
+.react-stability-flag {
+    margin-top: $lumx-spacing-unit * 1.5;
+    margin-left: $lumx-spacing-unit-big;
+
+    .#{$lumx-base-prefix}-chip__label {
+        @include lumx-typography('overline');
+
+        text-transform: uppercase;
+    }
+
+    @each $key, $color in $lumx-color-palette {
+        &.#{$lumx-base-prefix}-chip--color-#{$key} {
+            border: 2px solid lumx-color-variant($key, 'L4');
+            background-color: transparent;
+        }
+    }
+}

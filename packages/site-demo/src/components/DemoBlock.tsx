@@ -1,5 +1,5 @@
+import { useHighlightedCode } from '@lumx/demo/components/layout/utils/useHighlightedCode';
 import { Engine, EngineContext } from '@lumx/demo/context/engine';
-import { useHighlightedCode } from '@lumx/demo/layout/utils/useHighlightedCode';
 
 import { mdiCodeTags } from '@lumx/icons';
 import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';

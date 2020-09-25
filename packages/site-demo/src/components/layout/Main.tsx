@@ -1,29 +1,26 @@
+import React, { ReactElement } from 'react';
+import { Redirect, Route, useHistory } from 'react-router-dom';
+
+import { ErrorBoundary } from '@lumx/demo/components/ErrorBoundary';
 import { EngineProvider } from '@lumx/demo/context/engine';
 import { GlobalThemeProvider } from '@lumx/demo/context/global-theme';
-import { ErrorBoundary } from '@lumx/demo/layout/ErrorBoundary';
-import React, { ReactElement } from 'react';
-import { Redirect, Route, RouteComponentProps } from 'react-router-dom';
-
 import { Alignment, FlexBox, Orientation } from '@lumx/react';
 
 import { EngineSelector } from './EngineSelector';
 import { MainContent } from './MainContent';
 import { ThemeSelector } from './ThemeSelector';
 
-const renderContent = ({ location }: RouteComponentProps) => {
-    const path = location.pathname;
-    if (!path.endsWith('/')) {
-        return <Redirect to={path + '/'} />;
-    }
-    return <MainContent path={path} />;
-};
-
 /**
  * The main component.
  *
  * @return The main component.
  */
-const Main: React.FC = (): ReactElement => {
+export const Main: React.FC = (): ReactElement => {
+    const { location } = useHistory();
+    if (!location.pathname.endsWith('/')) {
+        return <Redirect to={location.pathname + '/'} />;
+    }
+
     return (
         <div className="main">
             <EngineProvider>
@@ -45,18 +42,14 @@ const Main: React.FC = (): ReactElement => {
                             </FlexBox>
                         </div>
 
-                        <div className="main-content">
-                            <div className="main-content__wrapper">
-                                <ErrorBoundary>
-                                    <Route path="*" render={renderContent} />
-                                </ErrorBoundary>
-                            </div>
-                        </div>
+                        <Route path="*">
+                            <ErrorBoundary>
+                                <MainContent />
+                            </ErrorBoundary>
+                        </Route>
                     </div>
                 </GlobalThemeProvider>
             </EngineProvider>
         </div>
     );
 };
-
-export { Main };

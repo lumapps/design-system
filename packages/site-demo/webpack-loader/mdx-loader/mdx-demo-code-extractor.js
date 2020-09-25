@@ -111,8 +111,9 @@ const isPreImport = (node) =>
 const isImport = (node) => isJSXImport(node) || isPreImport(node);
 
 const ADDITIONAL_IMPORT = `
-import { DemoBlock } from '@lumx/demo/layout/DemoBlock';
-import { PropTable } from '@lumx/demo/layout/PropTable';
+import { DemoBlock } from '@lumx/demo/components/DemoBlock';
+import { PropTable } from '@lumx/demo/components/PropTable';
+import { ReactStabilityFlag } from '@lumx/demo/components/ReactStabilityFlag';
 `;
 
 const isDemoBlock = (node) => node.type === 'jsx' && node.value.match(demoBlockRX);

@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-import { ErrorBoundary } from './layout/ErrorBoundary';
-import { Main } from './layout/Main';
-import { MainNav } from './layout/MainNav';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { Main } from './components/layout/Main';
+import { MainNav } from './components/layout/MainNav';
 
 /**
  * The main application component.
