@@ -22,19 +22,6 @@ const IMG_STYLES = {
     minWidth: '100%',
 };
 
-const RESIZE_LISTENER_OBJECT_STYLES = {
-    height: '100%',
-    width: '100%',
-    border: 'none',
-
-    // set these styles to emulate "visibility: hidden"
-    // can't use visibility because it breaks the object
-    // events in Firefox
-    opacity: 0,
-    zIndex: -1,
-    pointerEvents: 'none',
-};
-
 export interface LumHTMLImageElement extends HTMLImageElement {
     __focused_image_instance__: FocusedImage;
 }
@@ -134,19 +121,6 @@ export class FocusedImage {
         if (this.options.updateOnWindowResize) {
             window.addEventListener('resize', this.debounceApplyShift);
         }
-        const object = document.createElement('object');
-        Object.assign(object.style, RESIZE_LISTENER_OBJECT_STYLES, ABSOLUTE_STYLES);
-        // Use load event callback because contentDocument doesn't exist
-        // until this fires in Firefox
-        object.addEventListener('load', () =>
-            object.contentDocument?.defaultView?.addEventListener('resize', () => this.debounceApplyShift()),
-        );
-        object.type = 'text/html';
-        object.setAttribute('aria-hidden', 'true');
-        object.tabIndex = -1;
-        this.container.appendChild(object);
-        object.data = 'about:blank';
-        this.resizeListenerObject = object;
     }
 
     public stopListening() {
