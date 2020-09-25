@@ -108,7 +108,7 @@ describe(`<${Tooltip.displayName}>`, () => {
         it('should work on disabled elements', () => {
             const wrapper = shallow(
                 <Tooltip label="Tooltip on disabled button" forceOpen>
-                    <Button disabled>Empty</Button>
+                    <Button isDisabled>Empty</Button>
                 </Tooltip>,
             );
             expect(wrapper).toMatchSnapshot();

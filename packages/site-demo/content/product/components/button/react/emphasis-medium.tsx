@@ -10,7 +10,7 @@ const App = ({ theme }: any) => (
             Default
         </Button>
 
-        <Button disabled emphasis={Emphasis.medium} theme={theme}>
+        <Button isDisabled emphasis={Emphasis.medium} theme={theme}>
             Disabled
         </Button>
 

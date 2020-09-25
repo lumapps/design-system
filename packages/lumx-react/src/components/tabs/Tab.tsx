@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes, KeyboardEventHandler, MouseEventHandler, ReactNode, SyntheticEvent } from 'react';
+import React, { KeyboardEventHandler, MouseEventHandler, ReactNode, SyntheticEvent } from 'react';
 
 import classNames from 'classnames';
 
@@ -25,11 +25,6 @@ interface TabProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TabProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
@@ -40,32 +35,21 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
 const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 
 /**
- * The default value of props.
- */
-const DEFAULT_PROPS: DefaultPropsType = {
-    icon: undefined,
-    isActive: false,
-    isDisabled: false,
-    label: undefined,
-};
-
-/**
  * Define a single Tab for Tabs component.
  *
  * @return The component.
  */
 const Tab: React.FC<TabProps> = ({
     className,
-    icon = DEFAULT_PROPS.icon,
-    index = DEFAULT_PROPS.index,
-    isActive = DEFAULT_PROPS.isActive,
-    isDisabled = DEFAULT_PROPS.isDisabled,
-    label = DEFAULT_PROPS.label,
+    icon,
+    index,
+    isActive,
+    disabled,
+    isDisabled = disabled,
+    label,
     onTabClick,
     ...forwardedProps
 }) => {
-    const tabIndex: AnchorHTMLAttributes<HTMLAnchorElement>['tabIndex'] = isDisabled ? -1 : 0;
-
     const handleTabClick: MouseEventHandler = (event) => {
         onTabClick?.({ event, index });
     };
@@ -84,9 +68,10 @@ const Tab: React.FC<TabProps> = ({
         <a
             {...forwardedProps}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled }))}
-            tabIndex={tabIndex}
+            tabIndex={isDisabled ? -1 : 0}
             onClick={handleTabClick}
             onKeyPress={handleKeyPress}
+            aria-disabled={isDisabled}
         >
             {icon && <Icon icon={icon} size={Size.xs} />}
             {label && <span>{label}</span>}
@@ -95,4 +80,4 @@ const Tab: React.FC<TabProps> = ({
 };
 Tab.displayName = COMPONENT_NAME;
 
-export { CLASSNAME, DEFAULT_PROPS, Tab, TabProps };
+export { CLASSNAME, Tab, TabProps };

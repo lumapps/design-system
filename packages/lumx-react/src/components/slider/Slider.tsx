@@ -15,7 +15,7 @@ import uuid from 'uuid/v4';
  */
 interface SliderProps extends GenericProps {
     /** Deactivate the component */
-    disabled?: boolean;
+    isDisabled?: boolean;
     /** Label */
     label?: string;
     /** Helper message */
@@ -67,7 +67,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  */
 const DEFAULT_PROPS: DefaultPropsType = {
-    disabled: false,
     hideMinMaxlabel: false,
     precision: 0,
     steps: 0,
@@ -126,6 +125,7 @@ const Slider: React.FC<SliderProps> = ({
     hideMinMaxlabel = DEFAULT_PROPS.hideMinMaxlabel,
     value = DEFAULT_PROPS.value!,
     disabled,
+    isDisabled = disabled,
     theme = DEFAULT_PROPS.theme,
     name,
     ...forwardedProps
@@ -243,7 +243,7 @@ const Slider: React.FC<SliderProps> = ({
         if (onMouseDown) {
             onMouseDown(event);
         }
-        if (disabled) {
+        if (isDisabled) {
             return;
         }
         const { current: slider } = sliderRef;
@@ -265,6 +265,7 @@ const Slider: React.FC<SliderProps> = ({
                 handleBasicClasses({ prefix: CLASSNAME, theme, hasLabel: Boolean(label) }),
             )}
             onMouseDown={handleMouseDown}
+            aria-disabled={isDisabled}
         >
             {label && (
                 <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} theme={theme}>
@@ -306,6 +307,7 @@ const Slider: React.FC<SliderProps> = ({
                         className={`${CLASSNAME}__handle`}
                         style={{ left: percentString }}
                         onKeyDown={handleKeyDown}
+                        disabled={isDisabled}
                     />
                 </div>
                 {!hideMinMaxlabel && (

@@ -8,7 +8,7 @@ const App = ({ theme }: any) => (
     <div className="demo-grid">
         <Button theme={theme}>Default</Button>
 
-        <Button disabled theme={theme}>
+        <Button isDisabled theme={theme}>
             Disabled
         </Button>
 

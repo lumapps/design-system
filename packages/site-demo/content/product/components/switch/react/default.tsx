@@ -20,12 +20,12 @@ const App = ({ theme }: any) => {
             </div>
 
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onChange={setState} disabled={true} theme={theme}>
+                <Switch checked={state} onChange={setState} isDisabled theme={theme}>
                     Disabled
                 </Switch>
             </div>
 
-            <Switch checked={true} disabled={true} theme={theme}>
+            <Switch checked={true} isDisabled theme={theme}>
                 Disabled checked
             </Switch>
         </>

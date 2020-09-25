@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ `Checkbox` now uses `checked` prop instead of `value` prop to know whether it is toggled on or not. This is more consistant with HTML native naming convention and this is also how it is used for `RadioButton` and `Switch`. As said above, `value` has been added as prop and acts like the HTML native prop `value`.
 -   _[BREAKING]_ Changed `onChange` method signature for `RadioButton` component. This is breaking since now the `value` argument of `onChange` method is required.
 -   Changed `onChange` method signature for `Switch`, `CheckBox`, `Autocomplete`, `TextField`, `DatePicker` and `Slider` components.
+-   `isDisabled` prop is now the official name for the disabled state of all components (although `disabled` will also work for compatibility with the HTML `disabled` attribute)
 
 ### Removed
 

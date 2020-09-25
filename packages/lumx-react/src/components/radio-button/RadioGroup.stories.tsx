@@ -21,7 +21,7 @@ export const radioGroup = ({ theme }: any) => {
                 />
 
                 <RadioButton
-                    disabled
+                    isDisabled
                     helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                     label="Radio button with help 2"
                     name="test2"

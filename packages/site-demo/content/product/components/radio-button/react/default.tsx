@@ -18,7 +18,7 @@ const App = ({ theme }: any) => {
                     onChange={onChange}
                 />
 
-                <RadioButton disabled label="Radio button 2" name="test1" theme={theme} value="ipsum" />
+                <RadioButton isDisabled label="Radio button 2" name="test1" theme={theme} value="ipsum" />
 
                 <RadioButton
                     checked={value === 'dolor'}

@@ -18,7 +18,7 @@ export const disabledSelect = ({ theme }: any) => {
             helper={text('Helper', 'You will receive our newsletter each month')}
             theme={theme}
             onChange={noop}
-            disabled
+            isDisabled
         />
     );
 };

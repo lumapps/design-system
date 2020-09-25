@@ -97,7 +97,8 @@ const withSelectContext = (
         variant = DEFAULT_PROPS.variant,
         value,
         helper,
-        isDisabled,
+        disabled,
+        isDisabled = disabled,
         isRequired,
         onBlur,
         isOpen = DEFAULT_PROPS.isOpen,
@@ -180,6 +181,7 @@ const withSelectContext = (
                 targetUuid={targetUuid}
                 anchorRef={anchorRef}
                 isRequired={isRequired}
+                aria-disabled={isDisabled}
             />
             <Dropdown
                 closeOnClick={!isMultiple}

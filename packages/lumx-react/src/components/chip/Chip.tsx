@@ -65,10 +65,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: DefaultPropsType = {
-    isClickable: false,
-    isDisabled: false,
-    isHighlighted: false,
-    isSelected: false,
     size: Size.m,
     theme: Theme.light,
 };
@@ -104,10 +100,11 @@ const Chip: React.FC<ChipProps> = ({
     className,
     children,
     color,
-    isClickable = DEFAULT_PROPS.isClickable,
-    isSelected = DEFAULT_PROPS.isSelected,
-    isDisabled = DEFAULT_PROPS.isDisabled,
-    isHighlighted = DEFAULT_PROPS.isHighlighted,
+    isClickable,
+    isSelected,
+    disabled,
+    isDisabled = disabled,
+    isHighlighted,
     onAfterClick,
     onBeforeClick,
     onClick,
@@ -136,7 +133,7 @@ const Chip: React.FC<ChipProps> = ({
                 handleBasicClasses({
                     clickable: Boolean(hasOnClick) || isClickable,
                     color: chipColor,
-                    disabled: Boolean(isDisabled),
+                    isDisabled,
                     hasAfter: Boolean(after),
                     hasBefore: Boolean(before),
                     highlighted: Boolean(isHighlighted),
@@ -147,8 +144,9 @@ const Chip: React.FC<ChipProps> = ({
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
-            role="button"
+            role={hasOnClick ? 'button' : undefined}
             tabIndex={isDisabled || !hasOnClick ? -1 : 0}
+            aria-disabled={(hasOnClick && isDisabled) || undefined}
             onClick={hasOnClick ? onClick : undefined}
             onKeyDown={hasOnClick ? onEnterPressed(onClick) : undefined}
         >
