@@ -157,7 +157,7 @@ describe(`<${Switch.displayName}>`, () => {
 
         it('should use the given props', () => {
             const modifiedPropsBuilder: () => SetupProps = build('props').fields({
-                checked: true,
+                isChecked: true,
                 position: oneOf(...without(Object.values(SwitchPosition), DEFAULT_PROPS.position)),
                 theme: oneOf(...without(Object.values(Theme), DEFAULT_PROPS.theme)),
             });

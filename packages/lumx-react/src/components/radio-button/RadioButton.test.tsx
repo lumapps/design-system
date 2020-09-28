@@ -81,7 +81,7 @@ describe(`<${RadioButton.displayName}>`, () => {
 
         it('should render checked, disabled & id', () => {
             const props = {
-                checked: true,
+                isChecked: true,
                 isDisabled: true,
                 id: 'inputID',
             };
@@ -121,7 +121,7 @@ describe(`<${RadioButton.displayName}>`, () => {
     describe('Props', () => {
         it('should use props for classes', () => {
             const props = {
-                checked: true,
+                isChecked: true,
                 isDisabled: true,
                 theme: Theme.dark,
             };

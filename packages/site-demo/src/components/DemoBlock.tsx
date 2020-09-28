@@ -38,8 +38,8 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     ...flexBoxProps
 }) => {
     const [theme, setTheme] = useState(Theme.light);
-    const toggleTheme = (checked: boolean) => {
-        setTheme(checked ? Theme.dark : Theme.light);
+    const toggleTheme = (isChecked: boolean) => {
+        setTheme(isChecked ? Theme.dark : Theme.light);
     };
 
     const [showCode, setShowCode] = useState(false);
@@ -79,7 +79,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
                         <Switch
                             disabled={!children}
                             position={SwitchPosition.right}
-                            checked={theme === Theme.dark}
+                            isChecked={theme === Theme.dark}
                             onChange={toggleTheme}
                         >
                             Dark Background

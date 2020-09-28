@@ -7,13 +7,13 @@ export default { title: 'LumX components/checkbox/Checkbox' };
 
 export const simpleSelect = ({ theme }: any) => {
     const [value, setValue] = useState(false);
-    return <Checkbox checked={value} label={text('Label', 'My label')} theme={theme} onChange={setValue} />;
+    return <Checkbox isChecked={value} label={text('Label', 'My label')} theme={theme} onChange={setValue} />;
 };
 
 export const disabledSelect = ({ theme }: any) => {
     return (
         <Checkbox
-            checked={false}
+            isChecked={false}
             label={text('Label', 'My label')}
             helper={text('Helper', 'You will receive our newsletter each month')}
             theme={theme}
@@ -27,7 +27,7 @@ export const withHelperSelect = ({ theme }: any) => {
     const [value, setValue] = useState(false);
     return (
         <Checkbox
-            checked={value}
+            isChecked={value}
             label={text('Label', 'My label')}
             helper={text('Helper', 'You will receive our newsletter each month')}
             theme={theme}

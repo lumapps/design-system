@@ -6,19 +6,19 @@ export const App = ({ theme }: any) => {
 
     return (
         <>
-            <Switch checked={state} onChange={setState} theme={theme}>
+            <Switch isChecked={state} onChange={setState} theme={theme}>
                 Default
             </Switch>
 
-            <Switch checked={state} onChange={setState} theme={theme} helper="Helper text">
+            <Switch isChecked={state} onChange={setState} theme={theme} helper="Helper text">
                 With helper
             </Switch>
 
-            <Switch isDisabled checked={state} onChange={setState} theme={theme}>
+            <Switch isDisabled isChecked={state} onChange={setState} theme={theme}>
                 Disabled
             </Switch>
 
-            <Switch checked isDisabled theme={theme}>
+            <Switch isChecked isDisabled theme={theme}>
                 Disabled checked
             </Switch>
         </>

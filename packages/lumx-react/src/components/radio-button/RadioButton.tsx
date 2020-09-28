@@ -14,7 +14,7 @@ import uniqueId from 'lodash/uniqueId';
  */
 interface RadioButtonProps extends GenericProps {
     /** Whether it is checked or not. */
-    checked?: boolean;
+    isChecked?: boolean;
 
     /**  Whether or not the radio button is disabled. */
     isDisabled?: boolean;
@@ -74,6 +74,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
         disabled,
         helper,
         id,
+        isChecked = checked,
         isDisabled = disabled,
         label,
         name,
@@ -95,9 +96,9 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
             className={classNames(
                 className,
                 handleBasicClasses({
-                    isChecked: checked,
+                    isChecked,
                     isDisabled,
-                    isUnchecked: !checked,
+                    isUnchecked: !isChecked,
                     prefix: CLASSNAME,
                     theme,
                 }),
@@ -114,7 +115,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
                     type="radio"
                     name={name}
                     value={value}
-                    checked={checked}
+                    checked={isChecked}
                     onChange={handleChange}
                 />
 

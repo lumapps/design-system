@@ -75,7 +75,7 @@ describe(`<${Checkbox.displayName}>`, () => {
         it('should add a "disabled" and "checked" class names', () => {
             const { wrapper } = setup({
                 isDisabled: true,
-                checked: true,
+                isChecked: true,
             });
 
             expect(wrapper).toHaveClassName(getBasicClass({ prefix: CLASSNAME, type: 'disabled', value: true }));
