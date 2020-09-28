@@ -74,7 +74,7 @@ interface TextFieldProps extends GenericProps {
     name?: string;
 
     /** Text field value. */
-    value?: string | number;
+    value?: string;
 
     /** A ref that will be passed to the wrapper element. */
     textFieldRef?: RefObject<HTMLDivElement>;
@@ -177,7 +177,7 @@ interface InputNativeProps {
     rows: number;
     type: string;
     name?: string;
-    value?: string | number;
+    value?: string;
     setFocus(focus: boolean): void;
     recomputeNumberOfRows(target: Element): void;
     onChange(value: string, name?: string, event?: SyntheticEvent): void;
@@ -229,11 +229,7 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     };
 
     const handleChange = (event: React.ChangeEvent) => {
-        onChange(
-            typeof value === 'number' ? Number(get(event, 'target.value')) : get(event, 'target.value'),
-            name,
-            event,
-        );
+        onChange(get(event, 'target.value'), name, event);
     };
 
     return multiline ? (
@@ -310,7 +306,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
 
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
-    const valueLength = (value && `${value}`.length) || 0;
+    const valueLength = (value || '').length;
     const isNotEmpty = valueLength > 0;
 
     /**
