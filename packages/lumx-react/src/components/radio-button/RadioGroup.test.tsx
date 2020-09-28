@@ -63,8 +63,8 @@ describe(`<${RadioGroup.displayName}>`, () => {
         it('should render with radio button children', () => {
             const { wrapper, radioButtons } = setup({
                 children: [
-                    <RadioButton key={0} checked={true} label="Label 1" />,
-                    <RadioButton key={1} checked={false} label="Label 2" />,
+                    <RadioButton key={0} isChecked={true} label="Label 1" />,
+                    <RadioButton key={1} isChecked={false} label="Label 2" />,
                 ],
             });
             expect(wrapper).toMatchSnapshot();

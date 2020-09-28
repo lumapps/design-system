@@ -8,7 +8,6 @@ exports[`<Checkbox> Props should use the given props 1`] = `
     className="lumx-checkbox__input-wrapper"
   >
     <input
-      checked={false}
       className="lumx-checkbox__input-native"
       id="lumx-checkbox-3"
       onChange={[Function]}
@@ -58,7 +57,6 @@ exports[`<Checkbox> Snapshots and structure should render correctly 1`] = `
     className="lumx-checkbox__input-wrapper"
   >
     <input
-      checked={false}
       className="lumx-checkbox__input-native"
       id="lumx-checkbox-1"
       onChange={[Function]}

@@ -6,19 +6,19 @@ import React from 'react';
 export default { title: 'LumX components/switch/Switch' };
 
 export const notCheckedSwitch = ({ theme }: any) => (
-    <Switch checked={false} onChange={noop} theme={theme}>
+    <Switch isChecked={false} onChange={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );
 
 export const checkedSwitch = ({ theme }: any) => (
-    <Switch checked onChange={noop} theme={theme}>
+    <Switch isChecked onChange={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );
 
 export const disabledCheckedSwitch = ({ theme }: any) => (
-    <Switch checked isDisabled onChange={noop} theme={theme}>
+    <Switch isChecked isDisabled onChange={noop} theme={theme}>
         {text('text', 'The switch')}
     </Switch>
 );

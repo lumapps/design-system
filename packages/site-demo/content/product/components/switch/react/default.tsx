@@ -8,24 +8,24 @@ const App = ({ theme }: any) => {
     return (
         <>
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onChange={setState} theme={theme}>
+                <Switch isChecked={state} onChange={setState} theme={theme}>
                     Default
                 </Switch>
             </div>
 
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onChange={setState} theme={theme} helper={'Helper text'}>
+                <Switch isChecked={state} onChange={setState} theme={theme} helper={'Helper text'}>
                     With helper
                 </Switch>
             </div>
 
             <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onChange={setState} isDisabled theme={theme}>
+                <Switch isChecked={state} onChange={setState} isDisabled theme={theme}>
                     Disabled
                 </Switch>
             </div>
 
-            <Switch checked={true} isDisabled theme={theme}>
+            <Switch isChecked={true} isDisabled theme={theme}>
                 Disabled checked
             </Switch>
         </>

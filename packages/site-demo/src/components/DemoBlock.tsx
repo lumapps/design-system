@@ -118,8 +118,8 @@ const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngin
     const engine = propEngine || contextEngine;
 
     const [theme, setTheme] = useState(Theme.light);
-    const toggleTheme = (checked: boolean) => {
-        setTheme(checked ? Theme.dark : Theme.light);
+    const toggleTheme = (isChecked: boolean) => {
+        setTheme(isChecked ? Theme.dark : Theme.light);
     };
 
     const [showCode, setShowCode] = useState(false);
@@ -151,7 +151,7 @@ const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngin
                         <Switch
                             disabled={!demo}
                             position={SwitchPosition.right}
-                            checked={theme === Theme.dark}
+                            isChecked={theme === Theme.dark}
                             onChange={toggleTheme}
                         >
                             Dark Background

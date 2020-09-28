@@ -20,7 +20,7 @@ enum SwitchPosition {
  */
 interface SwitchProps extends GenericProps {
     /** Whether it is checked or not. */
-    checked?: boolean;
+    isChecked?: boolean;
 
     /** Switch disabled state. */
     isDisabled?: boolean;
@@ -50,7 +50,7 @@ interface SwitchProps extends GenericProps {
     value?: string;
 
     /** Handle onChange event. */
-    onChange?(checked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
+    onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -72,7 +72,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: DefaultPropsType = {
-    checked: false,
     position: SwitchPosition.left,
     theme: Theme.light,
 };
@@ -85,7 +84,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Switch: React.FC<SwitchProps> = ({
     className,
     children,
-    checked = DEFAULT_PROPS.checked,
+    checked,
+    isChecked = checked,
     disabled,
     isDisabled = disabled,
     helper,
@@ -100,7 +100,7 @@ const Switch: React.FC<SwitchProps> = ({
     const switchId: string = uuid();
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
-            onChange(!checked, value, name, event);
+            onChange(!isChecked, value, name, event);
         }
     };
 
@@ -111,11 +111,11 @@ const Switch: React.FC<SwitchProps> = ({
                 className,
                 handleBasicClasses({
                     prefix: CLASSNAME,
-                    checked: Boolean(checked),
+                    isChecked,
                     isDisabled,
                     position,
                     theme,
-                    unchecked: !Boolean(checked),
+                    isUnchecked: !isChecked,
                 }),
                 { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
             )}
@@ -129,7 +129,7 @@ const Switch: React.FC<SwitchProps> = ({
                     name={name}
                     value={value}
                     disabled={isDisabled}
-                    checked={checked}
+                    checked={isChecked}
                     onChange={handleChange}
                 />
 

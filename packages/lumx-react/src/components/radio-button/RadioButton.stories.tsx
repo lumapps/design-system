@@ -7,7 +7,7 @@ export default { title: 'LumX components/radio-button/Radio button' };
 
 export const simpleRadioButton = ({ theme }: any) => (
     <RadioButton
-        checked={false}
+        isChecked={false}
         label={text('Label', 'Radio button')}
         name="test1"
         theme={theme}
@@ -18,7 +18,7 @@ export const simpleRadioButton = ({ theme }: any) => (
 
 export const simpleCheckedRadioButton = ({ theme }: any) => (
     <RadioButton
-        checked={true}
+        isChecked={true}
         label={text('Label', 'Radio button')}
         name="test1"
         theme={theme}

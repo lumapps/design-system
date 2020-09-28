@@ -73,7 +73,7 @@ describe(`<${RadioButton.displayName}>`, () => {
 
             expect(input).toExist();
             const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBe(false);
+            expect(inputProps.checked).toBe(undefined);
             expect(inputProps.disabled).toBe(undefined);
 
             expect(helper).not.toExist();
@@ -81,7 +81,7 @@ describe(`<${RadioButton.displayName}>`, () => {
 
         it('should render checked, disabled & id', () => {
             const props = {
-                checked: true,
+                isChecked: true,
                 isDisabled: true,
                 id: 'inputID',
             };
@@ -104,7 +104,7 @@ describe(`<${RadioButton.displayName}>`, () => {
 
             expect(input).toExist();
             const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBe(false);
+            expect(inputProps.checked).toBe(undefined);
             expect(inputProps.disabled).toBe(undefined);
 
             expect(label).toExist();
@@ -121,7 +121,7 @@ describe(`<${RadioButton.displayName}>`, () => {
     describe('Props', () => {
         it('should use props for classes', () => {
             const props = {
-                checked: true,
+                isChecked: true,
                 isDisabled: true,
                 theme: Theme.dark,
             };

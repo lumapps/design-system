@@ -10,7 +10,7 @@ const App = ({ theme }: any) => {
         <>
             <RadioGroup>
                 <RadioButton
-                    checked={value === 'lorem'}
+                    isChecked={value === 'lorem'}
                     helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                     label="Radio button with help 1"
                     name="test2"
@@ -29,7 +29,7 @@ const App = ({ theme }: any) => {
                 />
 
                 <RadioButton
-                    checked={value === 'dolor'}
+                    isChecked={value === 'dolor'}
                     helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
                     label="Radio button with help 3"
                     name="test2"

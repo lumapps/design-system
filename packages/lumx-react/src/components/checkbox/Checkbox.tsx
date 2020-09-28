@@ -15,7 +15,7 @@ import uniqueId from 'lodash/uniqueId';
  */
 interface CheckboxProps extends GenericProps {
     /** Whether it is checked or not. */
-    checked?: boolean;
+    isChecked?: boolean;
     /** Is checkbox disabled */
     isDisabled?: boolean;
     /** Helper */
@@ -33,7 +33,7 @@ interface CheckboxProps extends GenericProps {
     /** Native input value. */
     value?: string;
     /** Handle onChange event. */
-    onChange?(checked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
+    onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
 /**
@@ -56,7 +56,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
-    checked: false,
 };
 
 /**
@@ -74,7 +73,8 @@ const Checkbox: React.FC<CheckboxProps> = ({
     onChange,
     theme = DEFAULT_PROPS.theme,
     useCustomColors,
-    checked = DEFAULT_PROPS.checked,
+    checked,
+    isChecked = checked,
     value,
     name,
     ...forwardedProps
@@ -82,7 +82,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
-            onChange(!checked, value, name, event);
+            onChange(!isChecked, value, name, event);
         }
     };
 
@@ -92,9 +92,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
             className={classNames(
                 className,
                 handleBasicClasses({
-                    isChecked: checked,
+                    isChecked,
                     isDisabled,
-                    isUnchecked: !checked,
+                    isUnchecked: !isChecked,
                     prefix: CLASSNAME,
                     theme,
                 }),
@@ -109,7 +109,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                     tabIndex={isDisabled ? -1 : 0}
                     name={name}
                     value={value}
-                    checked={checked}
+                    checked={isChecked}
                     onChange={handleChange}
                 />
 

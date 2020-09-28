@@ -14,7 +14,7 @@ import uniqueId from 'lodash/uniqueId';
  */
 interface RadioButtonProps extends GenericProps {
     /** Whether it is checked or not. */
-    checked?: boolean;
+    isChecked?: boolean;
 
     /**  Whether or not the radio button is disabled. */
     isDisabled?: boolean;
@@ -63,7 +63,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: DefaultPropsType = {
-    checked: false,
     theme: Theme.light,
 };
 
@@ -76,7 +75,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const RadioButton: React.FC<RadioButtonProps> = (props) => {
     const {
         className,
-        checked = DEFAULT_PROPS.checked,
+        checked,
+        isChecked = checked,
         disabled,
         isDisabled = disabled,
         helper,
@@ -101,9 +101,9 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
             className={classNames(
                 className,
                 handleBasicClasses({
-                    isChecked: checked,
+                    isChecked,
                     isDisabled,
-                    isUnchecked: !checked,
+                    isUnchecked: !isChecked,
                     prefix: CLASSNAME,
                     theme,
                 }),
@@ -120,7 +120,7 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
                     type="radio"
                     name={name}
                     value={value}
-                    checked={checked}
+                    checked={isChecked}
                     onChange={handleChange}
                 />
 
