@@ -18,6 +18,7 @@ export const simpleButton = ({ theme }: any) => {
             isSelected={boolean('isSelected', Boolean(DEFAULT_PROPS.isSelected))}
             isDisabled={boolean('isDisabled', Boolean(DEFAULT_PROPS.isDisabled))}
             color={select('color', ColorPalette, DEFAULT_PROPS.color)}
+            href={text('Button link', '')}
             hasBackground={boolean('hasBackground', Boolean(DEFAULT_PROPS.hasBackground))}
         >
             {text('Button content', 'Simple button')}

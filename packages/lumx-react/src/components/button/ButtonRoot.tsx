@@ -139,6 +139,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         useCustomColors,
         variant,
         name,
+        href,
         ...forwardedProps
     } = props;
 
@@ -167,13 +168,14 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
     );
 
-    if (!isEmpty(props.href)) {
+    if (!isEmpty(href)) {
         return (
             <a
                 {...forwardedProps}
+                href={!isDisabled ? href : undefined}
                 ref={buttonRef as RefObject<HTMLAnchorElement>}
                 className={buttonClassName}
-                aria-disabled={isDisabled}
+                aria-disabled={isDisabled || undefined}
             >
                 {children}
             </a>

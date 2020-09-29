@@ -69,7 +69,8 @@
         @include lumx-state(lumx-base-const('state', 'FOCUS'), $emphasis, $color, $theme);
     }
 
-    &:disabled {
+    &:disabled,
+    &[aria-disabled='true'] {
         @include lumx-state-disabled-input;
     }
 }
