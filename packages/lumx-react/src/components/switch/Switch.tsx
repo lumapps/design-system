@@ -1,4 +1,4 @@
-import React, { Children, SyntheticEvent } from 'react';
+import React, { Children, SyntheticEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import uuid from 'uuid/v4';
@@ -83,6 +83,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Switch: React.FC<SwitchProps> = ({
     className,
+    id,
     children,
     checked,
     isChecked = checked,
@@ -97,7 +98,7 @@ const Switch: React.FC<SwitchProps> = ({
     value,
     ...forwardedProps
 }) => {
-    const switchId: string = uuid();
+    const switchId = useMemo(() => id || `switch-${uuid()}`, [id]);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
             onChange(!isChecked, value, name, event);

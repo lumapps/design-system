@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, SyntheticEvent, useState } from 'react';
+import React, { ReactNode, RefObject, SyntheticEvent, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
@@ -280,7 +280,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         hasError,
         helper,
         icon,
-        id = uuid(),
+        id,
         disabled,
         isDisabled = disabled,
         isRequired,
@@ -304,6 +304,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         ...forwardedProps
     } = props;
 
+    const textFieldId = useMemo(() => id || `text-field-${uuid()}`, [id]);
     const [isFocus, setFocus] = useState(false);
     const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
     const valueLength = (value || '').length;
@@ -348,7 +349,12 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         >
             {label && (
                 <div className={`${CLASSNAME}__header`}>
-                    <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} isRequired={isRequired} theme={theme}>
+                    <InputLabel
+                        htmlFor={textFieldId}
+                        className={`${CLASSNAME}__label`}
+                        isRequired={isRequired}
+                        theme={theme}
+                    >
                         {label}
                     </InputLabel>
 
@@ -376,7 +382,7 @@ const TextField: React.FC<TextFieldProps> = (props) => {
                 <div className={`${CLASSNAME}__input-wrapper`}>
                     <div className={`${CLASSNAME}__input-native`}>
                         {renderInputNative({
-                            id,
+                            id: textFieldId,
                             inputRef,
                             isDisabled,
                             isRequired,
