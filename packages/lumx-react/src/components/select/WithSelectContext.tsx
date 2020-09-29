@@ -181,7 +181,7 @@ const withSelectContext = (
                 targetUuid={targetUuid}
                 anchorRef={anchorRef}
                 isRequired={isRequired}
-                aria-disabled={isDisabled}
+                isDisabled={isDisabled}
             />
             <Dropdown
                 closeOnClick={!isMultiple}
