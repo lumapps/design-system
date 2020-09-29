@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useRef } from 'react';
+import React, { SyntheticEvent, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 
@@ -107,7 +107,7 @@ const Slider: React.FC<SliderProps> = ({
     disabled,
     helper,
     hideMinMaxlabel,
-    id = uuid(),
+    id,
     isDisabled = disabled,
     label,
     max,
@@ -121,6 +121,7 @@ const Slider: React.FC<SliderProps> = ({
     value,
     ...forwardedProps
 }) => {
+    const sliderId = useMemo(() => id || `slider-${uuid()}`, [id]);
     const sliderRef = useRef<HTMLDivElement>(null);
     const avaibleSteps: number[] = [];
 
@@ -259,7 +260,7 @@ const Slider: React.FC<SliderProps> = ({
             aria-disabled={isDisabled}
         >
             {label && (
-                <InputLabel htmlFor={id} className={`${CLASSNAME}__label`} theme={theme}>
+                <InputLabel htmlFor={sliderId} className={`${CLASSNAME}__label`} theme={theme}>
                     {label}
                 </InputLabel>
             )}
@@ -295,6 +296,7 @@ const Slider: React.FC<SliderProps> = ({
                     ) : null}
                     <button
                         name={name}
+                        id={sliderId}
                         className={`${CLASSNAME}__handle`}
                         style={{ left: percentString }}
                         onKeyDown={handleKeyDown}
