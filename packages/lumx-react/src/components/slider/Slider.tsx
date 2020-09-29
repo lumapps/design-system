@@ -21,7 +21,7 @@ interface SliderProps extends GenericProps {
     /** Helper message */
     helper?: string;
     /** Should the min and max labels be hidden */
-    hideMinMaxlabel?: boolean;
+    hideMinMaxLabel?: boolean;
     /** Maximum value */
     max: number;
     /** Minimum value */
@@ -106,7 +106,7 @@ const Slider: React.FC<SliderProps> = ({
     className,
     disabled,
     helper,
-    hideMinMaxlabel,
+    hideMinMaxLabel,
     id,
     isDisabled = disabled,
     label,
@@ -123,17 +123,17 @@ const Slider: React.FC<SliderProps> = ({
 }) => {
     const sliderId = useMemo(() => id || `slider-${uuid()}`, [id]);
     const sliderRef = useRef<HTMLDivElement>(null);
-    const avaibleSteps: number[] = [];
+    const availableSteps: number[] = [];
 
     // build a lookup array for the steps.
     if (steps) {
-        avaibleSteps.push(0);
+        availableSteps.push(0);
         const percentStep = 1 / ((max - min) / steps);
         let ptr = 0;
         while (true) {
             if (ptr + percentStep < 1) {
                 ptr += percentStep;
-                avaibleSteps.push(ptr);
+                availableSteps.push(ptr);
             } else {
                 break;
             }
@@ -147,7 +147,7 @@ const Slider: React.FC<SliderProps> = ({
      * @return The closest step value
      */
     const findClosestStep = (percentValue: number): number => {
-        const closest = avaibleSteps.reduce(
+        const closest = availableSteps.reduce(
             // tslint:disable-next-line: typedef
             (acc, step) => {
                 const aDst = Math.abs(percentValue - step);
@@ -209,7 +209,7 @@ const Slider: React.FC<SliderProps> = ({
         const oldPercent = computePercentFromValue(value, min, max);
         let percent = clamp(oldPercent + (previous ? -0.1 : 0.1), 0, 1);
         if (steps) {
-            percent = oldPercent + avaibleSteps[1] * (previous ? -1 : 1);
+            percent = oldPercent + availableSteps[1] * (previous ? -1 : 1);
             percent = findClosestStep(percent);
         }
         if (onChange) {
@@ -272,7 +272,7 @@ const Slider: React.FC<SliderProps> = ({
             )}
 
             <div className={`${CLASSNAME}__ui-wrapper`}>
-                {!hideMinMaxlabel && (
+                {!hideMinMaxLabel && (
                     <span className={`${CLASSNAME}__value-label ${CLASSNAME}__value-label--min`}>{min}</span>
                 )}
                 <div className={`${CLASSNAME}__wrapper`} ref={sliderRef}>
@@ -283,7 +283,7 @@ const Slider: React.FC<SliderProps> = ({
                     />
                     {steps ? (
                         <div className={`${CLASSNAME}__ticks`}>
-                            {avaibleSteps.map((step: number, idx: number) => {
+                            {availableSteps.map((step: number, idx: number) => {
                                 return (
                                     <div
                                         key={`tick_${idx}`}
@@ -303,7 +303,7 @@ const Slider: React.FC<SliderProps> = ({
                         disabled={isDisabled}
                     />
                 </div>
-                {!hideMinMaxlabel && (
+                {!hideMinMaxLabel && (
                     <span className={`${CLASSNAME}__value-label ${CLASSNAME}__value-label--max`}>{max}</span>
                 )}
             </div>

@@ -9,7 +9,7 @@ export const App = ({ theme }: any) => {
             helper="Helper text"
             max={100}
             min={0}
-            hideMinMaxlabel
+            hideMinMaxLabel
             theme={theme}
             value={value}
             onChange={setValue}
