@@ -106,7 +106,8 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                         className={`${CLASSNAME}__wrapper`}
                         onClick={onInputClick}
                         onKeyDown={handleKeyboardNav}
-                        tabIndex={0}
+                        tabIndex={isDisabled ? undefined : 0}
+                        aria-disabled={isDisabled || undefined}
                     >
                         <div className={`${CLASSNAME}__chips`}>
                             {!isEmpty && (
@@ -146,6 +147,7 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                 <Chip
                     id={targetUuid}
                     isSelected={!isEmpty}
+                    isDisabled={isDisabled}
                     after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
                     onAfterClick={isEmpty ? onInputClick : onClear}
                     onClick={onInputClick}

@@ -166,6 +166,7 @@ const withSelectContext = (
                 aria-disabled={isDisabled}
                 handleKeyboardNav={handleKeyboardNav}
                 hasError={hasError}
+                isDisabled={isDisabled}
                 isEmpty={isEmpty}
                 isRequired={isRequired}
                 isValid={isValid}

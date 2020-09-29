@@ -57,6 +57,7 @@ const SelectField: React.FC<SelectProps> = ({
     targetUuid,
     anchorRef,
     isRequired,
+    isDisabled,
     hasInputClear,
     selectedValueRender,
 }) => {
@@ -83,7 +84,8 @@ const SelectField: React.FC<SelectProps> = ({
                         className={`${CLASSNAME}__wrapper`}
                         onClick={onInputClick}
                         onKeyDown={handleKeyboardNav}
-                        tabIndex={0}
+                        tabIndex={isDisabled ? undefined : 0}
+                        aria-disabled={isDisabled || undefined}
                     >
                         <div
                             className={classNames([
@@ -125,6 +127,7 @@ const SelectField: React.FC<SelectProps> = ({
                 <Chip
                     id={targetUuid}
                     isSelected={!isEmpty}
+                    isDisabled={isDisabled}
                     after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
                     onAfterClick={isEmpty ? onInputClick : onClear}
                     onClick={onInputClick}
