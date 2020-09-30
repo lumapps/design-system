@@ -18,31 +18,31 @@ type ChipSize = Size.s | Size.m;
  * Defines the props of the component.
  */
 interface ChipProps extends GenericProps {
-    /** A component to be rendered after the main label area. */
+    /** A component to be rendered after the content. */
     after?: ReactNode;
-    /** A component to be rendered before the main label area. */
+    /** A component to be rendered before the content. */
     before?: ReactNode;
-    /** The component color variant. */
+    /** The reference passed to the <a> element. */
+    chipRef?: Ref<HTMLAnchorElement>;
+    /** The color variant of the component. */
     color?: Color;
-    /** Whether the chip has pointer on hover. */
+    /** Whether the component is clickable or not. */
     isClickable?: boolean;
-    /** Indicates if the chip is currently in an active state or not. */
-    isSelected?: boolean;
-    /** Indicates if the chip is currently disabled or not. */
+    /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** Indicates if the chip is currently in a highlighted state or not. */
+    /** Whether the chip is currently in a highlighted state or not. */
     isHighlighted?: boolean;
-    /** The size of the chip. */
+    /** Whether the component is selected or not. */
+    isSelected?: boolean;
+    /** The size variant of the component. */
     size?: ChipSize;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** A ref that will be passed to the wrapper element. */
-    chipRef?: Ref<HTMLAnchorElement>;
-    /** A function to be executed when the after element is clicked. */
+    /** The function called when the "after" element is clicked. */
     onAfterClick?: MouseEventHandler;
-    /** A function to be executed when the before element is clicked. */
+    /** The function called when the "before" element is clicked. */
     onBeforeClick?: MouseEventHandler;
 }
 
@@ -83,12 +83,6 @@ function useStopPropagation(handler?: MouseEventHandler): MouseEventHandler {
     );
 }
 
-/**
- * Displays information or allow an action on a compact element.
- * This is the base component for all variations of the chips see https://material.io/design/components/chips.html.
- *
- * @return The Chip component.
- */
 const Chip: React.FC<ChipProps> = ({
     after,
     before,

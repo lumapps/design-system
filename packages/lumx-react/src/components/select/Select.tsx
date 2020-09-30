@@ -43,23 +43,23 @@ const stopPropagation = (evt: Event) => evt.stopPropagation();
  * @return The component.
  */
 const SelectField: React.FC<SelectProps> = ({
-    variant,
-    label,
-    value,
-    isEmpty,
-    isValid,
+    anchorRef,
+    handleKeyboardNav,
     hasError,
+    hasInputClear,
+    isDisabled,
+    isEmpty,
+    isRequired,
+    isValid,
+    label,
     onClear,
     onInputClick,
-    theme,
     placeholder,
-    handleKeyboardNav,
-    targetUuid,
-    anchorRef,
-    isRequired,
-    isDisabled,
-    hasInputClear,
     selectedValueRender,
+    targetUuid,
+    theme,
+    value,
+    variant,
 }) => {
     return (
         <>

@@ -13,7 +13,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 interface ProgressTrackerProps extends GenericProps {
     /** The active step index. */
     activeStep?: number;
-    /** The current component theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
 
@@ -35,14 +35,6 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {
     theme: Theme.light,
 };
 
-/**
- * Displays a track of steps.
- *
- * Each step can have multiple attributes defining their current state to keep the user
- * aware of it's position in the process.
- *
- * @return The component.
- */
 const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     activeStep,
     children,

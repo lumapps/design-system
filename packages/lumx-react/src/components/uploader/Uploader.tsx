@@ -18,33 +18,19 @@ type UploaderSize = Size.xl | Size.xxl;
  * Defines the props of the component.
  */
 interface UploaderProps extends GenericProps {
-    /**
-     * Aspect ratio
-     */
+    /** The aspect ratio the image will get. */
     aspectRatio?: AspectRatio;
-    /**
-     * Icon
-     */
+    /** The icon of the uploader. */
     icon?: string;
-    /**
-     * Label
-     */
+    /** The label of the uploader. */
     label?: string;
-    /**
-     * Size
-     */
+    /** The size variant of the component. */
     size?: UploaderSize;
-    /**
-     * Theme
-     */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /**
-     * Uploader variant
-     */
+    /** The variant of the component. */
     variant?: UploaderVariant;
-    /**
-     * On click handler
-     */
+    /** The function called on click. */
     onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
@@ -68,12 +54,6 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
     variant: UploaderVariant.square,
 };
 
-/**
- * [Enter the description of the component here].
- *
- * @param  props The component props.
- * @return The component.
- */
 const Uploader: React.FC<UploaderProps> = (props) => {
     const { aspectRatio, className, label, icon, size, theme, variant, ...forwardedProps } = props;
 

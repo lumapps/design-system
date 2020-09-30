@@ -10,7 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface ListSubheaderProps extends GenericProps {
-    /** List sub header content. */
+    /** The children elements to be transcluded into the component. */
     children: string | ReactNode;
 }
 
@@ -24,18 +24,11 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListSubheader`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-/**
- * Component used in List to display some separator / title section.
- *
- * @return The component.
- */
-const ListSubheader: React.FC<ListSubheaderProps> = ({ children, className, ...forwardedProps }) => {
-    return (
-        <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
-            {children}
-        </li>
-    );
-};
+const ListSubheader: React.FC<ListSubheaderProps> = ({ children, className, ...forwardedProps }) => (
+    <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
+        {children}
+    </li>
+);
 ListSubheader.displayName = COMPONENT_NAME;
 
 export { CLASSNAME, ListSubheader, ListSubheaderProps };

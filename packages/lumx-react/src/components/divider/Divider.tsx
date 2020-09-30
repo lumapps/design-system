@@ -10,9 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface DividerProps extends GenericProps {
-    /**
-     * The <Divider> theme.
-     */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
 
@@ -33,12 +31,6 @@ const DEFAULT_PROPS: Partial<DividerProps> = {
     theme: Theme.light,
 };
 
-/**
- * Displays a divider.
- * This simply wraps a <hr> element.
- *
- * @return The component.
- */
 const Divider: React.FC<DividerProps> = ({ className, theme, ...forwardedProps }) => {
     return (
         <hr {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} />

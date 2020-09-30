@@ -13,11 +13,10 @@ import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/react/
  * Defines the props of the component.
  */
 interface ChipGroupProps extends GenericProps {
-    /** Children of the ChipGroup. This should be a list of Chips */
-    children: React.ReactNode;
-
-    /** Chip group alignment */
+    /** The alignment of the component. */
     align?: string;
+    /** The children elements to be transcluded into the component. Should be a list of Chip. */
+    children: React.ReactNode;
 }
 
 /**
@@ -41,10 +40,6 @@ interface ChipGroup {
     useChipGroupNavigation: useChipGroupNavigationType;
 }
 
-/**
- * Displays a list of Chips in a grouped fashion.
- * @return The Chip Group component.
- */
 const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({ className, align, children, ...forwardedProps }) => {
     const chipGroupClassName = handleBasicClasses({
         align,

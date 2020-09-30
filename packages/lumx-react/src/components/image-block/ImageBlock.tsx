@@ -27,30 +27,41 @@ type ImageBlockSize = Size.xl | Size.xxl;
  * Defines the props of the component.
  */
 interface ImageBlockProps extends GenericProps {
-    /** The caption wrapper alignment. */
+    /**
+     * The caption wrapper alignment.
+     * @see {@link ThumbnailProps#align}
+     */
     align?: Alignment;
-    /** The aspect ratio the image will get. */
+    /**
+     * The aspect ratio the image will get.
+     * @see {@link ThumbnailProps#aspectRatio}
+     */
     aspectRatio?: AspectRatio;
-    /** Caption position. */
+    /** The position of the caption. */
     captionPosition?: ImageBlockCaptionPosition;
     /** The style to apply to the caption section. */
     captionStyle?: CSSProperties;
     /**
-     * Allows images that are loaded from foreign origins
-     * to be used as if they had been loaded from the current origin.
+     * Allows images that are loaded from foreign origins to be used as if they had been loaded from the current origin.
+     * @see {@link ThumbnailProps#crossOrigin}
      */
     crossOrigin?: CrossOrigin;
     /** The image description. Can be either a string, or sanitized html. */
-    description?:
-        | string
-        | {
-              __html: string;
-          };
-    /** Whether the image has to fill its container's height. */
+    description?: string | { __html: string };
+    /**
+     * Whether the image has to fill its container's height.
+     * @see {@link ThumbnailProps#fillHeight}
+     */
     fillHeight?: boolean;
-    /** Focal Point coordinates. */
+    /**
+     * The focal point coordinates.
+     * @see {@link ThumbnailProps#focusPoint}
+     */
     focusPoint?: FocusPoint;
-    /** The url of the image we want to display in the image-block. */
+    /**
+     * The url of the image we want to display.
+     * @see {@link ThumbnailProps#image}
+     */
     image: string;
     /** The props to pass to the thumbnail, minus those already set by the ImageBlock props. */
     thumbnailProps?: Omit<
@@ -66,16 +77,27 @@ interface ImageBlockProps extends GenericProps {
         | 'theme'
         | 'onClick'
     >;
-    /** Enable cross origin attribute. */
+    /**
+     * Whether the cross origin attribute is enabled.
+     * @see {@link ThumbnailProps#isCrossOriginEnabled}
+     */
     isCrossOriginEnabled?: boolean;
-    /** The image block size. */
+    /**
+     * The size variant of the component.
+     * @see {@link ThumbnailProps#size}
+     */
     size?: ImageBlockSize;
     /** Tags elements to be transcluded into the component */
     tags?: HTMLElement | ReactNode;
-    /** The theme to use to display the image-block. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** The image title to display in the caption. */
     title?: string;
+    /**
+     * The function called on click.
+     * @see {@link ThumbnailProps#onClick}
+     */
+    onClick?(): void;
 }
 
 /**
@@ -98,33 +120,27 @@ const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     theme: Theme.light,
 };
 
-/**
- * Displays an properly structured image block.
- *
- * @return The component.
- */
 const ImageBlock: React.FC<ImageBlockProps> = ({
     actions,
     align,
     aspectRatio,
-    className,
     captionPosition,
     captionStyle,
+    className,
     crossOrigin,
     description,
     fillHeight,
     focusPoint,
     image,
     isCrossOriginEnabled,
+    onClick,
     size,
     tags,
     theme,
-    title,
     thumbnailProps,
-    ...props
+    title,
+    ...forwardedProps
 }) => {
-    const { onClick = null, ...forwardedProps } = props;
-
     return (
         <div
             {...forwardedProps}
@@ -155,9 +171,9 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
                 focusPoint={focusPoint}
                 image={image}
                 isCrossOriginEnabled={isCrossOriginEnabled}
+                onClick={onClick}
                 size={size}
                 theme={theme}
-                onClick={onClick}
             />
             {(title || description || tags) && (
                 <div className={`${CLASSNAME}__wrapper`} style={captionStyle}>

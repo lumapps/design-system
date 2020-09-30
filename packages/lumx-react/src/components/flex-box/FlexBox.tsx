@@ -13,41 +13,23 @@ export type GapSize = Size.regular | Size.big | Size.huge;
  * Defines the props of the component.
  */
 interface FlexBoxProps extends GenericProps {
-    /**
-     * Flex direction.
-     */
+    /** The flex direction. */
     orientation?: Orientation;
-    /**
-     * Enable/Disable flex wrap.
-     */
+    /** Whether the "flex wrap" is enabled or not. */
     wrap?: boolean;
-    /**
-     * Flex vertical alignment.
-     */
+    /** The flex vertical alignment. */
     vAlign?: Alignment.left | Alignment.center | Alignment.right;
-    /**
-     * Flex horizontal alignment.
-     */
+    /** The flex horizontal alignment. */
     hAlign?: Alignment.top | Alignment.center | Alignment.bottom;
-    /**
-     * Enable/Disable content filling space.
-     */
+    /** Whether the "content filling space" is enabled or not. */
     fillSpace?: boolean;
-    /**
-     * Enable/Disable content shrink.
-     */
+    /** Whether the "content shrink" is disabled or not. */
     noShrink?: boolean;
-    /**
-     * Enable/Disable auto margin all around.
-     */
+    /** Whether the "auto margin" is enabled all around or not. */
     marginAuto?: MarginAutoAlignment | MarginAutoAlignment[];
-    /**
-     * Flex gap.
-     */
+    /** The gap space between flexbox items. */
     gap?: GapSize;
-    /**
-     * Content on which to apply a flex layout.
-     */
+    /** The children elements to be transcluded into the component. */
     children?: ReactNode;
 }
 
@@ -66,14 +48,14 @@ const DEFAULT_PROPS: Partial<FlexBoxProps> = {};
 const FlexBox: React.FC<FlexBoxProps> = ({
     children,
     className,
-    orientation,
-    wrap,
-    vAlign,
-    hAlign,
     fillSpace,
-    noShrink,
-    marginAuto,
     gap,
+    hAlign,
+    marginAuto,
+    noShrink,
+    orientation,
+    vAlign,
+    wrap,
     ...forwardedProps
 }) => (
     <div

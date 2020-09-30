@@ -21,20 +21,20 @@ enum TabsPosition {
  * Defines the props of the component.
  */
 interface TabsProps extends GenericProps {
-    /** Active tab */
+    /** The active tab. */
     activeTab?: number;
-    /** Component tabs */
+    /** The children elements to be transcluded into the component. */
     children: ReactNode;
-    /** Tabs Layout */
+    /** The layout of the tabs. */
     layout?: TabsLayout;
-    /** Function to trigger on tab click */
-    onTabClick: TabProps['onTabClick'];
-    /** Tabs Position */
+    /** The position of the tabs. */
     position?: TabsPosition;
-    /** Component theme */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
+    /** The function called on click. */
+    onTabClick: TabProps['onTabClick'];
 }
 
 /**
@@ -57,11 +57,6 @@ const DEFAULT_PROPS: Partial<TabsProps> = {
     theme: Theme.light,
 };
 
-/**
- * Defines a Tabs component.
- *
- * @return The component.
- */
 const Tabs: React.FC<TabsProps> = ({
     activeTab,
     children,

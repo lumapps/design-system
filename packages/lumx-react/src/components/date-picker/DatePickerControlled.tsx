@@ -19,11 +19,9 @@ import { CLASSNAME, DatePickerProps } from './DatePicker';
 type DatePickerControlledProps = DatePickerProps & {
     /** The selected month to display. */
     selectedMonth: moment.Moment;
-
-    /** Changing to previous month. */
+    /** The function called when switching to previous month. */
     onPrevMonthChange(): void;
-
-    /** Changing to next month. */
+    /** The function called when switching to next month. */
     onNextMonthChange(): void;
 };
 
@@ -32,18 +30,13 @@ type DatePickerControlledProps = DatePickerProps & {
  */
 const COMPONENT_NAME = 'DatePickerControlled';
 
-/**
- * Simple component used to pick a date (controlled implementation).
- *
- * @return The component.
- */
 const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     locale,
     maxDate,
     minDate,
     onChange,
-    onPrevMonthChange,
     onNextMonthChange,
+    onPrevMonthChange,
     selectedMonth,
     todayOrSelectedDateRef,
     value,

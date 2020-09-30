@@ -14,31 +14,31 @@ import uuid from 'uuid/v4';
  * Defines the props of the component.
  */
 interface SliderProps extends GenericProps {
-    /** Deactivate the component */
-    isDisabled?: boolean;
-    /** Label */
-    label?: string;
-    /** Helper message */
+    /** The helper message of the slider. */
     helper?: string;
-    /** Should the min and max labels be hidden */
+    /** Whether the min and max labels should be hidden or not. */
     hideMinMaxLabel?: boolean;
-    /** Maximum value */
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
+    /** The label of the slider. */
+    label?: string;
+    /** The maximum value of the slider range. */
     max: number;
-    /** Minimum value */
+    /** The minimum value of the slider range. */
     min: number;
-    /**  Number of figures used for the fractional part of the value */
+    /** The native input name property. */
+    name?: string;
+    /** The number of figures used for the fractional part of the value. */
     precision?: number;
-    /** Value between 2 steps */
+    /** The value between two steps. */
     steps?: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Value */
+    /** The current selected value of the slider. */
     value: number;
-    /** Native input name. */
-    name?: string;
-    /** Handle onChange event. */
+    /** The function called on change. */
     onChange(value: number, name?: string, event?: SyntheticEvent): void;
-    /** Callback function invoked when the component is clicked */
+    /** The function called on click. */
     onMouseDown?(event: React.SyntheticEvent): void;
 }
 
@@ -97,11 +97,6 @@ const computeValueFromPercent = (percent: number, min: number, max: number, prec
 const computePercentFromValue = (value: number, min: number, max: number): number =>
     Number((value - min) / (max - min));
 
-/**
- * Slider component.
- *
- * @return The component.
- */
 const Slider: React.FC<SliderProps> = ({
     className,
     disabled,

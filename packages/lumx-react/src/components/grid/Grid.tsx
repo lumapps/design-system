@@ -11,14 +11,15 @@ type GridGutterSize = Size.regular | Size.big | Size.huge;
  * Defines the props of the component.
  */
 interface GridProps extends GenericProps {
+    /** The grid orientation. */
     orientation?: Orientation;
-    /* Should children wrap */
+    /** Whether the children are wrapped or not. */
     wrap?: string;
-    /* How we should vertically align the children */
+    /** The grid vertical alignment. */
     vAlign?: Alignment;
-    /* How we should horizontally align the children */
+    /** The grid horizontal alignment. */
     hAlign?: Alignment;
-    /* Grid gutters */
+    /** The grid gutter size. */
     gutter?: GridGutterSize;
 }
 
@@ -43,11 +44,6 @@ const DEFAULT_PROPS: Partial<GridProps> = {
     wrap: 'nowrap',
 };
 
-/**
- * Grid layout component.
- *
- * @return The component.
- */
 const Grid: React.FC<GridProps> = ({
     children,
     className,

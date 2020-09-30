@@ -14,25 +14,25 @@ import uniqueId from 'lodash/uniqueId';
  * Defines the props of the component.
  */
 interface CheckboxProps extends GenericProps {
+    /** The helper of the checkbox. */
+    helper?: string;
+    /** The native input id property. */
+    id?: string;
     /** Whether it is checked or not. */
     isChecked?: boolean;
-    /** Is checkbox disabled */
+    /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** Helper */
-    helper?: string;
-    /** Native input id */
-    id?: string;
-    /** Label */
+    /** The label of the checkbox. */
     label?: ReactNode;
-    /** Native input name. */
+    /** The native input name property. */
     name?: string;
-    /** Component theme */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /** Native input value. */
+    /** The native input value property. */
     value?: string;
-    /** Handle onChange event. */
+    /** The function called on change. */
     onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 

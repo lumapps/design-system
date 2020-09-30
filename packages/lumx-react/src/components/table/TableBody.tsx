@@ -25,11 +25,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
  */
 const DEFAULT_PROPS: Partial<TableBodyProps> = {};
 
-/**
- * The TableBody component displays an HTML Table Body, composed TableBody-cells in TableBody Rows.
- *
- * @return The component.
- */
 const TableBody: React.FC<TableBodyProps> = ({ children, className, ...forwardedProps }) => (
     <tbody {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}>
         {children}

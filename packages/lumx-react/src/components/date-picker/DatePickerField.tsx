@@ -16,28 +16,21 @@ import { GenericProps } from '@lumx/react/utils';
  * Defines the props of the component.
  */
 interface DatePickerFieldProps extends GenericProps {
-    /** Locale. */
-    locale: string;
-
-    /** Max date. */
-    maxDate?: Date;
-
-    /** Min date. */
-    minDate?: Date;
-
-    /** Value. */
-    value: DatePickerValueProp;
-
-    /** Month to display by default */
+    /** The month to display by default. */
     defaultMonth?: DatePickerValueProp;
-
-    /** Native input name. */
-    name?: string;
-
-    /** Disabled state. */
+    /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-
-    /** On change. */
+    /** The locale (language or region) to use. */
+    locale: string;
+    /** The date after which no date can be selected. */
+    maxDate?: Date;
+    /** The date before which no date can be selected. */
+    minDate?: Date;
+    /** The native input name property. */
+    name?: string;
+    /** The current value of the text field. */
+    value: DatePickerValueProp;
+    /** The function called on change. */
     onChange(value?: moment.Moment, name?: string, event?: SyntheticEvent): void;
 }
 
@@ -46,21 +39,17 @@ interface DatePickerFieldProps extends GenericProps {
  */
 const COMPONENT_NAME = 'DatePickerField';
 
-/**
- * Simple component used to pick a date (ready-to-use wrapped implementation).
- *
- * @return The component.
- */
 const DatePickerField = ({
-    value,
-    locale,
-    minDate,
-    maxDate,
     defaultMonth,
     onChange,
     name,
     disabled,
     isDisabled = disabled,
+    locale,
+    maxDate,
+    minDate,
+    onChange,
+    value,
     ...textFieldProps
 }: DatePickerFieldProps) => {
     const wrapperRef = useRef(null);

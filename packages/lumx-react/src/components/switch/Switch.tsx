@@ -19,37 +19,23 @@ enum SwitchPosition {
  * Defines the props of the component.
  */
 interface SwitchProps extends GenericProps {
+    /** The helper of the switch. */
+    helper?: string;
     /** Whether it is checked or not. */
     isChecked?: boolean;
-
-    /** Switch disabled state. */
+    /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-
-    /**
-     * A small help to display below.
-     */
-    helper?: string;
-
-    /** Native input name. */
+    /** The native input name property. */
     name?: string;
-
-    /**
-     * The position of the toggle regarding the label.
-     */
+    /** The position of the toggle regarding the label. */
     position?: SwitchPosition;
-
-    /**
-     * The theme.
-     */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-
-    /** Native input value. */
+    /** The native input value property. */
     value?: string;
-
-    /** Handle onChange event. */
+    /** The function called on change. */
     onChange?(isChecked: boolean, value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
@@ -71,11 +57,6 @@ const DEFAULT_PROPS: Partial<SwitchProps> = {
     theme: Theme.light,
 };
 
-/**
- * [Enter the description of the component here].
- *
- * @return The component.
- */
 const Switch: React.FC<SwitchProps> = ({
     checked,
     children,

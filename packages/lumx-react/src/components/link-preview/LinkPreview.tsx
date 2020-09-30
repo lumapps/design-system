@@ -21,25 +21,27 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface LinkPreviewProps extends GenericProps {
-    /** The url of the link. */
+    /** The text of the link. Can be either a string, or sanitized html. */
+    description?: string | { __html: string };
+    /**
+     * The url of the link.
+     * @see {@link LinkProps#image}
+     */
     link: string;
-    /** Content text. Can be either a string, or sanitized html. */
-    description?:
-        | string
-        | {
-              __html: string;
-          };
-    /** The size variant of the web bookmark. */
+    /** The props to pass to the link, minus those already set by the LinkPreview props. */
+    linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
+    /** The size variant of the component. */
     size?: Size.regular | Size.big;
-    /** Theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Thumbnail image source */
+    /**
+     * The image URL of the Thumbnail.
+     * @see {@link ThumbnailProps#image}
+     */
     thumbnail?: string;
     /** The props to pass to the thumbnail, minus those already set by the LinkPreview props. */
     thumbnailProps?: Omit<ThumbnailProps, 'aspectRatio' | 'fillHeight' | 'image' | 'onClick' | 'role' | 'tabIndex'>;
-    /** The props to pass to the link, minus those already set by the LinkPreview props. */
-    linkProps?: Omit<LinkProps, 'color' | 'colorVariant' | 'href' | 'target'>;
-    /** Link title */
+    /** The title of the link. */
     title?: string;
 }
 
@@ -59,25 +61,18 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
     size: Size.regular,
     theme: Theme.light,
-    thumbnailProps: undefined,
-    linkProps: undefined,
 };
 
-/**
- * LinkPreview Element that display a Lumapps post
- *
- * @return The component.
- */
 const LinkPreview: React.FC<LinkPreviewProps> = ({
     className,
-    title,
     description,
     link,
+    linkProps,
     size,
     theme,
     thumbnail = '',
     thumbnailProps,
-    linkProps,
+    title,
     ...forwardedProps
 }) => {
     const goToUrl = useCallback(() => window.open(link, '_blank'), [link]);

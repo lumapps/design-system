@@ -15,62 +15,29 @@ import { renderLink } from '@lumx/react/utils/renderLink';
 export type ButtonSize = Size.s | Size.m;
 
 interface BaseButtonProps extends GenericProps {
-    /**
-     * Reference on the `<a>` or `<button>` button HTML element.
-     */
+    /** The reference passed to the <a> or <button> element. */
     buttonRef?: RefObject<HTMLButtonElement> | RefObject<HTMLAnchorElement>;
-
-    /**
-     * Use this property to add a background color to the button in low emphasis.
-     */
-    hasBackground?: boolean;
-
-    /**
-     * Use this property to create a link button pointing to the given URL.
-     */
-    href?: string;
-
-    /**
-     * Button selected state.
-     */
-    isSelected?: boolean;
-
-    /**
-     * Button disabled state.
-     */
-    isDisabled?: boolean;
-
-    /**
-     * Use this property if you specified a URL in the `href` property and you want to customize the link button target property.
-     */
-    target?: '_self' | '_blank' | '_parent' | '_top';
-
-    /**
-     * Button color.
-     */
+    /** The color variant of the component. */
     color?: Color;
-
-    /**
-     * Button emphasis.
-     */
+    /** The emphasis variant of the component. */
     emphasis?: Emphasis;
-
-    /**
-     * Button size.
-     */
-    size?: ButtonSize;
-
-    /**
-     * Theme.
-     */
-    theme?: Theme;
-
-    /** Native input name. */
+    /** Whether or not the button has a background color in low emphasis. */
+    hasBackground?: boolean;
+    /** The native anchor href property. It determines whether the Button will be a <button> or an <a>. */
+    href?: string;
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
+    /** Whether the component is selected or not. */
+    isSelected?: boolean;
+    /** The native input name property. */
     name?: string;
-
-    /**
-     * Whether custom colors are applied to this component.
-     */
+    /** The size variant of the component. */
+    size?: ButtonSize;
+    /** The native anchor target property. */
+    target?: '_self' | '_blank' | '_parent' | '_top';
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
 
     /**
@@ -120,16 +87,6 @@ const renderButtonWrapper: React.FC<ButtonRootProps> = (props) => {
     );
 };
 
-/**
- * A generic button component used to implement the Button and IconButton components.
- * To use internally.
- *
- * Renders a <a> anchor if an `href` is provided or a <button> otherwise.
- * Wraps the element in a wrapper if the `hasBackground` param is set to true.
- *
- * @param  props Component props.
- * @return React element.
- */
 const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     const {
         buttonRef,

@@ -13,33 +13,32 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface PostBlockProps extends GenericProps {
-    /* Actions elements to be transcluded into the component */
+    /** The action elements to be transcluded into the component. */
     actions?: ReactNode;
-    /* Atachments elements to be transcluded into the component */
+    /** The attachment elements to be transcluded into the component. */
     attachments?: ReactNode;
-    /* Author element to be transcluded into the component */
+    /** The author element to be transcluded into the component. */
     author?: ReactNode;
-    /* Meta elements to be transcluded into the component */
+    /** The meta elements to be transcluded into the component. */
     meta?: ReactNode;
-    /* Orientation. */
+    /** The orientation. */
     orientation?: Orientation;
-    /* Tags elements to be transcluded into the component */
+    /** The tag elements to be transcluded into the component. */
     tags?: ReactNode;
-    /* Content text. Can be either a string, or sanitized html. */
-    text?:
-        | string
-        | {
-              __html: string;
-          };
-    /** Thumbnail image source */
+    /** Content text. Can be either a string, or sanitized html. */
+    text?: string | { __html: string };
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
+    /**
+     * The url of the image we want to display.
+     * @see {@link ThumbnailProps#image}
+     */
     thumbnail?: string;
     /** The props to pass to the thumbnail, minus those already set by the PostBlock props. */
     thumbnailProps?: Omit<ThumbnailProps, 'image' | 'theme' | 'onClick' | 'variant' | 'tabIndex'>;
-    /* Post title */
+    /** The title of the post. */
     title: string;
-    /* Theme. */
-    theme?: Theme;
-    /* Callback for the click event. */
+    /** The function called on click. */
     onClick?(): void;
 }
 
@@ -59,14 +58,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<PostBlockProps> = {
     orientation: Orientation.horizontal,
     theme: Theme.light,
-    thumbnailProps: undefined,
 };
 
-/**
- * PostBlock Element that display a Lumapps post
- *
- * @return The component.
- */
 const PostBlock: React.FC<PostBlockProps> = ({
     actions,
     attachments,
@@ -77,10 +70,10 @@ const PostBlock: React.FC<PostBlockProps> = ({
     orientation,
     tags,
     text,
+    theme,
     thumbnail,
     thumbnailProps,
     title,
-    theme,
 }) => {
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>

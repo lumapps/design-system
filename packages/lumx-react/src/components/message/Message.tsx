@@ -16,20 +16,12 @@ enum MessageKind {
  * Defines the props of the component.
  */
 interface MessageProps extends GenericProps {
-    /**
-     * Message content.
-     */
+    /** The children elements to be transcluded into the component. */
     children?: ReactNode;
-
-    /**
-     * The kind of message.
-     */
-    kind?: MessageKind;
-
-    /**
-     * Put a background to the message
-     */
+    /** Whether the message has a background or not. */
     hasBackground?: boolean;
+    /** The kind of helper (error or sucess for exemple). */
+    kind?: MessageKind;
 }
 
 /**
@@ -69,14 +61,7 @@ const KIND_ICON = {
     [MessageKind.warning]: mdiAlertCircle,
 };
 
-/**
- * Component used to display a message, with an icon and possibly a background
- *
- * @param  props The component props.
- * @return The component.
- */
-const Message: React.FC<MessageProps> = (props) => {
-    const { children, className, kind, hasBackground, ...forwardedProps } = props;
+const Message: React.FC<MessageProps> = ({ children, className, hasBackground, kind, ...forwardedProps }) => {
     const icon = kind ? KIND_ICON[kind] : null;
 
     const color = kind ? KIND_COLOR[kind] : DEFAULT_PROPS.color;

@@ -13,34 +13,25 @@ import uniqueId from 'lodash/uniqueId';
  * Defines the props of the component.
  */
 interface RadioButtonProps extends GenericProps {
+    /** The helper of the radio button. */
+    helper?: string;
+    /** The native input id property. */
+    id?: string;
     /** Whether it is checked or not. */
     isChecked?: boolean;
-
-    /**  Whether or not the radio button is disabled. */
+    /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-
-    /** Radio button helper. */
-    helper?: string;
-
-    /** Native radio input id. */
-    id?: string;
-
-    /** Radio button label. */
+    /** The label of the radio button. */
     label?: ReactNode;
-
-    /** Native input name. */
+    /** The native input name property. */
     name?: string;
-
-    /** Theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-
-    /** Native input value. */
+    /** The native input value property. */
     value?: string;
-
-    /** Handle onChange event. */
+    /** The function called on change. */
     onChange?(value?: string, name?: string, event?: SyntheticEvent): void;
 }
 
@@ -61,12 +52,6 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     theme: Theme.light,
 };
 
-/**
- * Defines a radio button.
- *
- * @param  props The component props.
- * @return The component.
- */
 const RadioButton: React.FC<RadioButtonProps> = (props) => {
     const {
         checked,

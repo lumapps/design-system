@@ -14,7 +14,9 @@ interface ClickableThumbnailProps
     onClick?(index: number): void;
 }
 interface MosaicProps extends GenericProps {
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** The list of thumbnails. */
     thumbnails: ClickableThumbnailProps[];
 }
 

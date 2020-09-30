@@ -18,12 +18,19 @@ import isFunction from 'lodash/isFunction';
  * Defines the props of the component.
  */
 interface SlideshowControlsProps extends GenericProps {
+    /** The index of the current slide. */
     activeIndex?: number;
+    /** The reference of the parent element. */
     parentRef: RefObject<HTMLDivElement>;
+    /** The number of slides. */
     slidesCount: number;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    onPaginationClick?(index: number): void;
+    /** The function called on click on the "next" arrow */
     onNextClick?(): void;
+    /** The function called on click on a navigation item */
+    onPaginationClick?(index: number): void;
+    /** The function called on click on the "previous" arrow */
     onPreviousClick?(): void;
 }
 
@@ -53,28 +60,14 @@ const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
     theme: Theme.light,
 };
 
-/**
- * Controls for the slideshow component.
- *
- * @param  props The component props.
- * @return The component.
- */
 const SlideshowControls: React.FC<SlideshowControlsProps> = ({
-    /** Index of the current slide */
     activeIndex,
-    /** Css class */
     className,
-    /** Reference of parent element */
-    parentRef,
-    /** Number of slides */
-    slidesCount,
-    /** Callback for the click on a navigation item */
-    onPaginationClick,
-    /** Callback for the click on the "next" arrow */
     onNextClick,
-    /** Callback for the click on the "previous" arrow */
+    onPaginationClick,
     onPreviousClick,
-    /** Theme */
+    parentRef,
+    slidesCount,
     theme,
     ...forwardedProps
 }) => {

@@ -18,21 +18,21 @@ const _TRANSITION_DURATION = 400;
  * Defines the props of the component.
  */
 interface LightboxProps extends GenericProps {
-    /** Label for accessibility assistive devices. */
+    /** The label for accessibility assistive devices. */
     ariaLabel?: string;
-    /** should the close button be visible - default true */
+    /** Whether the closing button should be visible or not. */
     isCloseButtonVisible?: boolean;
-    /** Status of lightbox. */
+    /** Whether the component is open or not. */
     isOpen?: boolean;
-    /** Ref of element that triggered modal opening to set focus on. */
+    /** The reference of the element that triggered modal opening to set focus on. */
     parentElement: RefObject<any>;
-    /** Prevent clickaway and escape to dismiss the lightbox */
+    /** Whether to keep the dialog open on clickaway or escape press. */
     preventAutoClose?: boolean;
-    /** Theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /** The z-axis position. */
     zIndex?: number;
-    /** Callback called when lightbox is closing. */
+    /** The function called on close. */
     onClose?(): void;
 }
 
