@@ -1,3 +1,52 @@
 $mdi-font-path: '~@mdi/font/fonts';
 
 @import '~@mdi/font/scss/materialdesignicons';
+
+.mdi-account-card-details {
+    @extend .mdi-card-account-details;
+}
+
+.mdi-account-card-details-outline {
+    @extend .mdi-card-account-details-outline;
+}
+
+.mdi-facebook-box {
+    @extend .mdi-facebook;
+}
+
+.mdi-file-document-box {
+    @extend .mdi-text-box;
+}
+
+.mdi-github-circle,
+.mdi-github-face {
+    @extend .mdi-github;
+}
+
+.mdi-google-pages {
+    @extend .mdi-format-list-bulleted;
+}
+
+.mdi-image-filter {
+    @extend .mdi-image-multiple-outline;
+}
+
+.mdi-library-books {
+    @extend .mdi-text-box-multiple;
+}
+
+.mdi-linkedin-box {
+    @extend .mdi-linkedin;
+}
+
+.mdi-mail-ru {
+    @extend .mdi-at;
+}
+
+.mdi-settings {
+    @extend .mdi-cog;
+}
+
+.mdi-twitter-box {
+    @extend .mdi-twitter;
+}
