@@ -2,7 +2,7 @@
 
 exports[`<Badge> Snapshots and structure should render correctly 1`] = `
 <div
-  className="lumx-badge lumx-badge--color-light"
+  className="lumx-badge lumx-badge--color-primary"
 >
   <span>
     30

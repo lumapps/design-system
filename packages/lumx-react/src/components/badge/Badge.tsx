@@ -33,7 +33,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: BadgeProps = {
-    color: ColorPalette.light,
+    color: ColorPalette.primary,
 };
 
 const Badge: React.FC<BadgeProps> = ({ color = DEFAULT_PROPS.color, className, ...forwardedProps }) => {
