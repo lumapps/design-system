@@ -11,7 +11,7 @@ import { Button, Emphasis, Size } from '@lumx/react';
  *
  * @return The engine selector component.
  */
-const EngineSelector: React.FC = (): ReactElement | null => {
+export const EngineSelector: React.FC = (): ReactElement | null => {
     const { engine, changeEngine } = useContext(EngineContext);
     const onClick = (newEngine: Engine) => () => changeEngine?.(newEngine);
 
@@ -37,5 +37,3 @@ const EngineSelector: React.FC = (): ReactElement | null => {
             return null;
     }
 };
-
-export { EngineSelector };

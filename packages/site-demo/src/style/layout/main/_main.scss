@@ -33,6 +33,8 @@
 
         & > h1 {
             @include lumx-typography(display1);
+
+            display: flex;
         }
 
         & > h2 {

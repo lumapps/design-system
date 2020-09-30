@@ -11,7 +11,7 @@ import { Chip, Size } from '@lumx/react';
  *
  * @return The theme selector component.
  */
-const ThemeSelector: React.FC = (): ReactElement => {
+export const ThemeSelector: React.FC = (): ReactElement => {
     const { globalTheme, changeGlobalTheme } = useContext(GlobalThemeContext);
 
     /**
@@ -44,5 +44,3 @@ const ThemeSelector: React.FC = (): ReactElement => {
         </>
     );
 };
-
-export { ThemeSelector };
