@@ -1,18 +1,12 @@
-import React, { useRef } from 'react';
-
-import { Emphasis, IconButton, Placement, Tooltip } from '@lumx/react';
-
 import { mdiPrinter } from '@lumx/icons';
+import { Emphasis, IconButton, Tooltip } from '@lumx/react';
+import React from 'react';
 
 const App = () => {
-    const anchorRefDelay = useRef(null);
-
     return (
         <div className="demo-grid">
-            <IconButton buttonRef={anchorRefDelay} emphasis={Emphasis.medium} icon={mdiPrinter} />
-
-            <Tooltip anchorRef={anchorRefDelay} delay={2000} placement={Placement.BOTTOM}>
-                Delayed tooltip
+            <Tooltip delay={2000} label="Print">
+                <IconButton emphasis={Emphasis.medium} icon={mdiPrinter} />
             </Tooltip>
         </div>
     );
