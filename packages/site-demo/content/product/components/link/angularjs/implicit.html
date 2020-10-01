@@ -1,0 +1,30 @@
+<style>
+    .implicit-link-style {
+        color: rgba(40, 51, 109, 1); /* dark-N */
+        text-decoration: none;
+    }
+    .implicit-link-style:hover {
+        color: rgba(40, 51, 109, 0.8); /* dark-L1 */
+        text-decoration: underline;
+    }
+    .implicit-link-style:active {
+        color: rgba(40, 51, 109, 0.6); /* dark-L2 */
+    }
+</style>
+<div lumx-grid-container="row" style="justify-content:space-evenly; align-items: center;">
+    <a href="#" class="implicit-link-style">Link</a>
+
+    <a
+        href="#"
+        class="implicit-link-style"
+        style="    display: inline-flex;
+    align-items: center;"
+        ><lumx-icon
+            lumx-size="xs"
+            lumx-path="{{ vm.icons.mdiHelpCircle }}"
+            style="display:inline-block; margin-right:4px"
+        ></lumx-icon>
+        Link with icon</a
+    >
+    <a href="#" class="implicit-link-style"><h2 style="margin:0;">Link</h2></a>
+</div>
