@@ -7,7 +7,7 @@ const App = ({ theme }: any) => {
 
     return (
         <TextField
-            label="Textfield label"
+            label="Text field label"
             value={value}
             onChange={setValue}
             placeholder={'Placeholder text'}
