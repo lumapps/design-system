@@ -5,7 +5,7 @@ import React from 'react';
 const App = () => {
     return (
         <div className="demo-grid">
-            <Tooltip label="Print">
+            <Tooltip delay={2000} label="Print">
                 <IconButton emphasis={Emphasis.medium} icon={mdiPrinter} />
             </Tooltip>
         </div>
