@@ -10,12 +10,13 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
  * Defines the props of the component.
  */
 interface InputHelperProps extends GenericProps {
+    /** The children elements to be transcluded into the component. */
     children: string | ReactNode;
+    /** The kind of helper (error or sucess for exemple). */
     kind?: Kind;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
-
-interface DefaultPropsType extends Partial<InputHelperProps> {}
 
 /**
  * The display name of the component.
@@ -30,7 +31,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<InputHelperProps> = {
     kind: Kind.info,
     theme: Theme.light,
 };

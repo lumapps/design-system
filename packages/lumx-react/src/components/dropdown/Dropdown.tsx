@@ -3,7 +3,7 @@ import React, { cloneElement, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 
 import { List, ListProps } from '@lumx/react/components/list/List';
-import { Offset, Placement, Popover, PopoverProps } from '@lumx/react/components/popover/Popover';
+import { Offset, Placement, Popover } from '@lumx/react/components/popover/Popover';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useInfiniteScroll } from '@lumx/react/hooks/useInfiniteScroll';
 import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from '@lumx/react/utils';
@@ -12,36 +12,65 @@ import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from 
  * Defines the props of the component.
  */
 interface DropdownProps extends GenericProps {
-    /** The reference of the DOM element used to set the position of the Dropdown. */
-    anchorRef: React.RefObject<HTMLElement>;
-    /** Children of the Dropdown. */
-    children: React.ReactNode;
-    /** Whether a click anywhere out of the Dropdown would close it. */
-    closeOnClickAway?: boolean;
-    /** Whether an escape key press would close the Dropdown. */
-    closeOnEscape?: boolean;
-    /** Whether to close the Dropdown when clicking in it. */
-    closeOnClick?: boolean;
-    /** Whether the dropdown should fit to the anchor width (if dropdown is smaller). */
-    fitToAnchorWidth?: boolean;
-    /** Whether the dropdown should shrink to fit within the viewport height. */
-    fitWithinViewportHeight?: PopoverProps['fitWithinViewportHeight'];
-    /** Vertical and/or horizontal offsets that will be applied to the Dropdown position. */
-    offset?: Offset;
-    /** The preferred Dropdown location against the anchor element. */
-    placement?: Placement;
-    /** Whether the focus should be set on the list when the dropdown is open. */
-    shouldFocusOnOpen?: boolean;
-    /** Whether the dropdown should be displayed or not. Useful to control the Dropdown from outside the component. */
-    isOpen: boolean;
-    /** The z-axis position. */
-    zIndex?: number;
-    /** The function to be called when the user clicks away or Escape is pressed */
-    onClose?: VoidFunction;
-    /**
-     * The callback function called when the bottom of the dropdown is reached.
+    /** The reference of the DOM element used to set the position of the popover.
+     * @see {@link PopoverProps#anchorRef}
      */
-    onInfiniteScroll?: VoidFunction;
+    anchorRef: React.RefObject<HTMLElement>;
+    /** The children elements to be transcluded into the component. */
+    children: React.ReactNode;
+    /**
+     * Whether a click anywhere out of the Dropdown would close it or not.
+     * @see {@link PopoverProps#closeOnClickAway}
+     */
+    closeOnClickAway?: boolean;
+    /**
+     * Whether to close the Dropdown when clicking in it or not.
+     */
+    closeOnClick?: boolean;
+    /**
+     * Whether an escape key press would close the Dropdown or not.
+     * @see {@link PopoverProps#closeOnEscape}
+     */
+    closeOnEscape?: boolean;
+    /**
+     * Whether the dropdown should fit to the anchor width (if dropdown is smaller) or not.
+     * @see {@link PopoverProps#fitToAnchorWidth}
+     */
+    fitToAnchorWidth?: boolean;
+    /**
+     * Whether the dropdown should shrink to fit within the viewport height or not.
+     * @see {@link PopoverProps#fitWithinViewportHeight}
+     */
+    fitWithinViewportHeight?: boolean;
+    /**
+     * Whether the dropdown should be displayed or not. Useful to control the Dropdown from outside the component.
+     * @see {@link PopoverProps#isOpen}
+     */
+    isOpen: boolean;
+    /**
+     * The offset that will be applied to the Dropdown position.
+     * @see {@link PopoverProps#offset}
+     */
+    offset?: Offset;
+    /**
+     * The preferred Dropdown location against the anchor element.
+     * @see {@link PopoverProps#placement}
+     */
+    placement?: Placement;
+    /** Whether the focus should be set on the list when the dropdown is open or not. */
+    shouldFocusOnOpen?: boolean;
+    /**
+     * The z-axis position.
+     * @see {@link PopoverProps#zIndex}
+     */
+    zIndex?: number;
+    /**
+     * The function called on close.
+     * @see {@link PopoverProps#onClose}
+     */
+    onClose?(): void;
+    /** The callback function called when the bottom of the dropdown is reached. */
+    onInfiniteScroll?(): void;
 }
 
 /**
@@ -63,17 +92,11 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
     closeOnEscape: true,
     fitToAnchorWidth: true,
     fitWithinViewportHeight: true,
+    isOpen: false,
     placement: Placement.BOTTOM_START,
     shouldFocusOnOpen: true,
-    isOpen: undefined,
 };
 
-/**
- * Displays a dropdown.
- *
- * @param  props The component props.
- * @return The component.
- */
 const Dropdown: React.FC<DropdownProps> = (props) => {
     const {
         anchorRef,
@@ -84,13 +107,13 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         closeOnEscape = DEFAULT_PROPS.closeOnEscape,
         fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
         fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
+        isOpen = DEFAULT_PROPS.isOpen,
         offset,
-        placement = DEFAULT_PROPS.placement,
-        shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
-        isOpen,
-        zIndex,
         onClose,
         onInfiniteScroll,
+        placement = DEFAULT_PROPS.placement,
+        shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
+        zIndex,
         ...forwardedProps
     } = props;
     const popoverRef = useRef<HTMLDivElement>(null);
@@ -118,19 +141,19 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
     return isOpen ? (
         <Popover
             {...forwardedProps}
-            className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
             anchorRef={anchorRef}
-            popoverRef={popoverRef}
-            placement={placement}
-            offset={offset}
-            zIndex={zIndex}
-            fitToAnchorWidth={fitToAnchorWidth}
-            fitWithinViewportHeight={fitWithinViewportHeight}
-            isOpen={isOpen}
-            onClose={onClose}
+            className={classNames(className, `${CLASSNAME}__menu`, handleBasicClasses({ prefix: CLASSNAME }))}
             closeOnClickAway={closeOnClickAway}
             closeOnEscape={closeOnEscape}
+            fitToAnchorWidth={fitToAnchorWidth}
+            fitWithinViewportHeight={fitWithinViewportHeight}
             focusElement={shouldFocusOnOpen ? listElement : undefined}
+            isOpen={isOpen}
+            offset={offset}
+            onClose={onClose}
+            placement={placement}
+            popoverRef={popoverRef}
+            zIndex={zIndex}
         >
             {popperElement}
         </Popover>

@@ -10,17 +10,17 @@ import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
  * Defines the props of the component.
  */
 interface TabProps extends GenericProps {
-    /** Tab index */
-    index?: number;
-    /** Tab icon */
+    /** The icon of the tab. */
     icon?: IconProps['icon'];
-    /** Is tab active */
+    /** The index of the tab. */
+    index?: number;
+    /** Whether the tab is active or not. */
     isActive?: boolean;
-    /** Is tab disabled */
+    /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-    /** Tab label */
+    /** The label of the tab. */
     label?: string | ReactNode;
-    /** Function to trigger on tab click */
+    /** The function called on click. */
     onTabClick?(e: { event: SyntheticEvent; index?: number }): void;
 }
 
@@ -34,17 +34,12 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Tab`;
  */
 const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 
-/**
- * Define a single Tab for Tabs component.
- *
- * @return The component.
- */
 const Tab: React.FC<TabProps> = ({
     className,
+    disabled,
     icon,
     index,
     isActive,
-    disabled,
     isDisabled = disabled,
     label,
     onTabClick,

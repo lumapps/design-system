@@ -20,9 +20,7 @@ interface DesignTokenProps {
      * From which version the design token is available.
      */
     version?: string;
-    /**
-     * The design token theme.
-     */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
     /**
      * The design token demo.

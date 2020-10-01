@@ -10,13 +10,11 @@ import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
  * Defines the props of the component.
  */
 interface LinkProps extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> {
-    /** The icon color. */
+    /** The color of the icon. */
     color?: Color;
-
-    /** The icon color variant. */
+    /** The degree of lightness and darkness of the selected icon color. */
     colorVariant?: ColorVariant;
-
-    /** Ref to the native HTML anchor element. */
+    /** The reference passed to the <a> element. */
     linkRef?: Ref<HTMLAnchorElement>;
 }
 
@@ -30,22 +28,15 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Link`;
  */
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
-/**
- * Link component.
- *
- * @return The component.
- */
-const Link: React.FC<LinkProps> = ({ children, className, linkRef, color, colorVariant, ...forwardedProps }) => {
-    return (
-        <a
-            {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))}
-            ref={linkRef}
-        >
-            {children}
-        </a>
-    );
-};
+const Link: React.FC<LinkProps> = ({ children, className, color, colorVariant, linkRef, ...forwardedProps }) => (
+    <a
+        {...forwardedProps}
+        className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))}
+        ref={linkRef}
+    >
+        {children}
+    </a>
+);
 Link.displayName = COMPONENT_NAME;
 
 export { CLASSNAME, COMPONENT_NAME, Link, LinkProps };

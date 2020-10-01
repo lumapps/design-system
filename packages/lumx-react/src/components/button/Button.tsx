@@ -18,28 +18,19 @@ const ButtonEmphasis = Emphasis;
  * Defines the props of the component.
  */
 interface ButtonProps extends BaseButtonProps {
-    /**
-     * Button content.
-     */
+    /** The children elements to be transcluded into the component. */
     children?: ReactNode;
-
     /**
-     * Adds an icon to the left of the button label.
+     * The icon name to place at the left of the button label.
      * @see {@link IconProps#icon}
      */
     leftIcon?: string;
-
     /**
-     * Adds an icon to the right of the button label.
+     * The icon name to place at the right of the button label.
      * @see {@link IconProps#icon}
      */
     rightIcon?: string;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ButtonProps> {}
 
 /**
  * The display name of the component.
@@ -54,23 +45,16 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<ButtonProps> = {
     emphasis: Emphasis.high,
     size: Size.m,
     theme: Theme.light,
 };
 
-/**
- * Displays a button.
- * If the `href` property is set, it will display a `<a>` HTML tag. If not, it will use a `<button>` HTML tag instead.
- *
- * @param  props The component props.
- * @return The component.
- */
 const Button: React.FC<ButtonProps> = (props) => {
     const {
-        className,
         children,
+        className,
         emphasis = DEFAULT_PROPS.emphasis,
         leftIcon,
         rightIcon,

@@ -48,10 +48,8 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
-    closeOnClick: false,
     closeOnClickAway: true,
     closeOnEscape: true,
-    isOpen: undefined,
     selectedChipRender(choice, index, onClear, isDisabled) {
         const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
         return (
@@ -70,98 +68,87 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     values: [],
 };
 
-/**
- * This component allows to create a multiple autocomplete, allowing the user to select multiple values from a
- * list that can be filtered.
- *
- * @param  props The component props.
- * @return The component.
- */
-const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
-    const {
-        anchorToInput,
-        className,
-        children,
-        chipsAlignment,
-        value,
-        values = DEFAULT_PROPS.values,
-        onBlur,
-        onChange,
-        onFocus,
-        onKeyDown,
-        isOpen,
-        closeOnClickAway,
-        closeOnEscape,
-        hasError,
-        helper,
-        icon,
-        inputRef,
-        isDisabled,
-        isClearable,
-        isValid,
-        label,
-        placeholder,
-        theme,
-        type,
-        onClose,
-        onClear,
-        offset,
-        placement,
-        fitToAnchorWidth,
-        shouldFocusOnClose,
-        onInfiniteScroll,
-        selectedChipRender = DEFAULT_PROPS.selectedChipRender,
-        name,
-        ...forwardedProps
-    } = props;
-
-    return (
-        <Autocomplete
-            {...forwardedProps}
-            anchorToInput={anchorToInput}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
-            name={name}
-            value={value}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            onBlur={onBlur}
-            shouldFocusOnClose={shouldFocusOnClose}
-            onFocus={onFocus}
-            hasError={hasError}
-            helper={helper}
-            icon={icon}
-            inputRef={inputRef}
-            chips={
-                <ChipGroup align={chipsAlignment}>
-                    {values!.map((chip: object, index: number) => selectedChipRender!(chip, index, onClear))}
-                </ChipGroup>
-            }
-            isDisabled={isDisabled}
-            isClearable={isClearable}
-            isValid={isValid}
-            label={label}
-            placeholder={placeholder}
-            theme={theme}
-            type={type}
-            isOpen={isOpen}
-            closeOnClick={false}
-            closeOnClickAway={closeOnClickAway}
-            closeOnEscape={closeOnEscape}
-            onClose={onClose}
-            offset={offset}
-            placement={placement}
-            fitToAnchorWidth={fitToAnchorWidth}
-            onInfiniteScroll={onInfiniteScroll}
-        >
-            {children}
-        </Autocomplete>
-    );
-};
+const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
+    anchorToInput,
+    children,
+    chipsAlignment,
+    className,
+    closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
+    closeOnEscape = DEFAULT_PROPS.closeOnEscape,
+    fitToAnchorWidth,
+    hasError,
+    helper,
+    icon,
+    inputRef,
+    isClearable,
+    isDisabled,
+    isOpen,
+    isValid,
+    label,
+    name,
+    offset,
+    onBlur,
+    onChange,
+    onClear,
+    onClose,
+    onFocus,
+    onInfiniteScroll,
+    onKeyDown,
+    placeholder,
+    placement,
+    selectedChipRender = DEFAULT_PROPS.selectedChipRender,
+    shouldFocusOnClose,
+    theme,
+    type,
+    value,
+    values = DEFAULT_PROPS.values,
+    ...forwardedProps
+}) => (
+    <Autocomplete
+        {...forwardedProps}
+        anchorToInput={anchorToInput}
+        className={classNames(
+            className,
+            handleBasicClasses({
+                prefix: CLASSNAME,
+            }),
+        )}
+        name={name}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        onBlur={onBlur}
+        shouldFocusOnClose={shouldFocusOnClose}
+        onFocus={onFocus}
+        hasError={hasError}
+        helper={helper}
+        icon={icon}
+        inputRef={inputRef}
+        chips={
+            <ChipGroup align={chipsAlignment}>
+                {values!.map((chip: object, index: number) => selectedChipRender!(chip, index, onClear))}
+            </ChipGroup>
+        }
+        isDisabled={isDisabled}
+        isClearable={isClearable}
+        isValid={isValid}
+        label={label}
+        placeholder={placeholder}
+        theme={theme}
+        type={type}
+        isOpen={isOpen}
+        closeOnClick={false}
+        closeOnClickAway={closeOnClickAway}
+        closeOnEscape={closeOnEscape}
+        onClose={onClose}
+        offset={offset}
+        placement={placement}
+        fitToAnchorWidth={fitToAnchorWidth}
+        onInfiniteScroll={onInfiniteScroll}
+    >
+        {children}
+    </Autocomplete>
+);
 AutocompleteMultiple.displayName = COMPONENT_NAME;
 
 export { CLASSNAME, DEFAULT_PROPS, AutocompleteMultiple, AutocompleteMultipleProps };

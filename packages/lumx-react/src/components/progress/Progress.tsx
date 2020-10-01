@@ -21,16 +21,11 @@ enum ProgressVariant {
 interface ProgressProps extends GenericProps {
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-    /* Type of progress */
+    /** The component variant. */
     variant?: ProgressVariant;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ProgressProps> {}
 
 /**
  * The display name of the component.
@@ -45,16 +40,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<ProgressProps> = {
     theme: Theme.light,
     variant: ProgressVariant.circular,
 };
 
-/**
- * Simple Progress component that can be displayed as a linear or circular element
- *
- * @return The component.
- */
 const Progress: React.FC<ProgressProps> = ({
     className,
     theme = DEFAULT_PROPS.theme,

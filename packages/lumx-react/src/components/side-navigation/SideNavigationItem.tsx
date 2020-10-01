@@ -22,32 +22,24 @@ import { IconButton } from '../button/IconButton';
  * Defines the props of the component.
  */
 interface SideNavigationItemProps extends GenericProps {
-    /** Side navigation item content (should use `<SideNavigationItem>`). */
+    /** The children elements to be transcluded into the component. Should use SideNavigationItem. */
     children?: ReactNode;
-
-    /** Menu item emphasis. */
+    /** The emphasis variant of the component. */
     emphasis?: Emphasis;
-
-    /** Menu item label. */
+    /** The label of the menu item. */
     label: string | ReactNode;
-
-    /** Menu item icon (SVG path code). */
+    /** The icon the menu item (SVG path code). */
     icon?: string;
-
-    /** Whether or not the menu is open. */
+    /** Whether the component is open or not. */
     isOpen?: boolean;
-
-    /** Whether or not the menu is selected. */
+    /** Whether the component is selected or not. */
     isSelected?: boolean;
-
-    /** props that will be passed on to the Link */
+    /** The props to pass to the link, minus those already set by the SideNavigationItem props. */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
-
-    /** On click handler. */
-    onClick?(evt: React.MouseEvent): void;
-
-    /** On the action button is clicked */
+    /** The function called on click on the action button. */
     onActionClick?(evt: React.MouseEvent): void;
+    /** The function called on click on the component. */
+    onClick?(evt: React.MouseEvent): void;
 }
 
 /**
@@ -69,21 +61,19 @@ const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     isSelected: false,
 };
 
-const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
-    const {
-        children,
-        className,
-        emphasis = DEFAULT_PROPS.emphasis,
-        label,
-        icon,
-        isOpen = DEFAULT_PROPS.isOpen,
-        isSelected = DEFAULT_PROPS.isSelected,
-        linkProps,
-        onClick,
-        onActionClick,
-        ...forwardedProps
-    } = props;
-
+const SideNavigationItem: React.FC<SideNavigationItemProps> = ({
+    children,
+    className,
+    emphasis = DEFAULT_PROPS.emphasis,
+    icon,
+    isOpen = DEFAULT_PROPS.isOpen,
+    isSelected = DEFAULT_PROPS.isSelected,
+    label,
+    linkProps,
+    onActionClick,
+    onClick,
+    ...forwardedProps
+}) => {
     const content = children && Children.toArray(children).filter(isComponent(SideNavigationItem));
     const hasContent = !isEmpty(content);
     const shouldSplitActions = Boolean(onActionClick);

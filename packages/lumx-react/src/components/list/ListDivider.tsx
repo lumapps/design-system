@@ -21,14 +21,9 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}ListDivider`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-/**
- * Renders a thin line that will acts as a divider in List
- *
- * @return The component.
- */
-const ListDivider: React.FC<ListDividerProps> = ({ className, ...forwardedProps }) => {
-    return <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} />;
-};
+const ListDivider: React.FC<ListDividerProps> = ({ className, ...forwardedProps }) => (
+    <li {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))} />
+);
 ListDivider.displayName = COMPONENT_NAME;
 
 export { CLASSNAME, ListDivider, ListDividerProps };

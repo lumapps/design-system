@@ -10,18 +10,13 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface GridItemProps extends GenericProps {
-    /* How the item should self align */
+    /** The alignment of the grid item. */
     align?: Alignment;
-    /* Order */
+    /** The order of the grid item. */
     order?: string;
-    /* Weight of the item in the grid*/
+    /** The width of the grid item. */
     width?: string;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<GridItemProps> {}
 
 /**
  * The display name of the component.
@@ -39,13 +34,8 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const DEFAULT_PROPS: Partial<GridItemProps> = {};
 
-/**
- * [Enter the description of the component here].
- *
- * @return The component.
- */
 const GridItem: React.FC<GridItemProps> = ({
     children,
     className,

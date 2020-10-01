@@ -19,12 +19,19 @@ import noop from 'lodash/noop';
  * Defines the props of the component.
  */
 interface SlideshowControlsProps extends GenericProps {
+    /** The index of the current slide. */
     activeIndex?: number;
+    /** The reference of the parent element. */
     parentRef: RefObject<HTMLDivElement>;
+    /** The number of slides. */
     slidesCount: number;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    onPaginationClick?(index: number): void;
+    /** The function called on click on the "next" arrow */
     onNextClick?(): void;
+    /** The function called on click on a navigation item */
+    onPaginationClick?(index: number): void;
+    /** The function called on click on the "previous" arrow */
     onPreviousClick?(): void;
 }
 
@@ -62,28 +69,14 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
 
-/**
- * Controls for the slideshow component.
- *
- * @param  props The component props.
- * @return The component.
- */
 const SlideshowControls: React.FC<SlideshowControlsProps> = ({
-    /** Index of the current slide */
     activeIndex = DEFAULT_PROPS.activeIndex,
-    /** Css class */
     className,
-    /** Reference of parent element */
-    parentRef,
-    /** Number of slides */
-    slidesCount,
-    /** Callback for the click on a navigation item */
-    onPaginationClick = DEFAULT_PROPS.onPaginationClick,
-    /** Callback for the click on the "next" arrow */
     onNextClick = DEFAULT_PROPS.onNextClick,
-    /** Callback for the click on the "previous" arrow */
+    onPaginationClick = DEFAULT_PROPS.onPaginationClick,
     onPreviousClick = DEFAULT_PROPS.onPreviousClick,
-    /** Theme */
+    parentRef,
+    slidesCount,
     theme = DEFAULT_PROPS.theme,
     ...forwardedProps
 }) => {

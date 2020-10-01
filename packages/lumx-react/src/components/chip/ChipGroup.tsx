@@ -12,22 +12,16 @@ import { useChipGroupNavigation, useChipGroupNavigationType } from '@lumx/react/
  * Defines the props of the component.
  */
 interface ChipGroupProps extends GenericProps {
-    /** Children of the ChipGroup. This should be a list of Chips */
-    children: React.ReactNode;
-
-    /** Chip group alignment */
+    /** The alignment of the component. */
     align?: string;
+    /** The children elements to be transcluded into the component. Should be a list of Chip. */
+    children: React.ReactNode;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ChipGroupProps> {}
 
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<ChipGroupProps> = {
     align: 'left',
 };
 
@@ -50,9 +44,9 @@ interface ChipGroup {
  * @return The Chip Group component.
  */
 const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
-    className,
     align = DEFAULT_PROPS.align,
     children,
+    className,
     ...forwardedProps
 }) => {
     const chipGroupClassName = handleBasicClasses({

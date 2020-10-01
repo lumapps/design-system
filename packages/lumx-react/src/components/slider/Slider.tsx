@@ -14,40 +14,32 @@ import uuid from 'uuid/v4';
  * Defines the props of the component.
  */
 interface SliderProps extends GenericProps {
-    /** Deactivate the component */
-    isDisabled?: boolean;
-    /** Label */
-    label?: string;
-    /** Helper message */
+    /** The helper message of the slider. */
     helper?: string;
-    /** Should the min and max labels be hidden */
+    /** Whether the min and max labels should be hidden or not. */
     hideMinMaxLabel?: boolean;
-    /** Maximum value */
+    /** Whether the component is disabled or not. */
+    isDisabled?: boolean;
+    /** The label of the slider. */
+    label?: string;
+    /** The maximum value of the slider range. */
     max: number;
-    /** Minimum value */
+    /** The minimum value of the slider range. */
     min: number;
-    /**  Number of figures used for the fractional part of the value */
-    precision?: number;
-    /** Value between 2 steps */
-    steps?: number;
-    /** Value */
-    value: number;
-    /** Native input name. */
+    /** The native input name property. */
     name?: string;
-    /** Handle onChange event. */
-    onChange(value: number, name?: string, event?: SyntheticEvent): void;
-    /** Callback function invoked when the component is clicked */
-    onMouseDown?(event: React.SyntheticEvent): void;
-}
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SliderProps> {
-    /**
-     * The theme.
-     */
+    /** The number of figures used for the fractional part of the value. */
+    precision?: number;
+    /** The value between two steps. */
+    steps?: number;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** The current selected value of the slider. */
+    value: number;
+    /** The function called on change. */
+    onChange(value: number, name?: string, event?: SyntheticEvent): void;
+    /** The function called on click. */
+    onMouseDown?(event: React.SyntheticEvent): void;
 }
 
 /**
@@ -66,7 +58,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<SliderProps> = {
     hideMinMaxLabel: false,
     precision: 0,
     steps: 0,
@@ -106,28 +98,23 @@ const computeValueFromPercent = (percent: number, min: number, max: number, prec
 const computePercentFromValue = (value: number, min: number, max: number): number =>
     Number((value - min) / (max - min));
 
-/**
- * Slider component.
- *
- * @return The component.
- */
 const Slider: React.FC<SliderProps> = ({
     className,
-    label,
+    disabled,
     helper,
+    hideMinMaxLabel = DEFAULT_PROPS.hideMinMaxLabel,
     id,
+    isDisabled = disabled,
+    label,
     max,
     min,
-    onMouseDown,
-    onChange,
-    steps,
-    precision = DEFAULT_PROPS.precision,
-    hideMinMaxLabel = DEFAULT_PROPS.hideMinMaxLabel,
-    value = DEFAULT_PROPS.value!,
-    disabled,
-    isDisabled = disabled,
-    theme = DEFAULT_PROPS.theme,
     name,
+    onChange,
+    onMouseDown,
+    precision = DEFAULT_PROPS.precision,
+    steps,
+    theme = DEFAULT_PROPS.theme,
+    value = DEFAULT_PROPS.value!,
     ...forwardedProps
 }) => {
     const sliderId = useMemo(() => id || `slider-${uuid()}`, [id]);
