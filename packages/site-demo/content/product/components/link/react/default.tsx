@@ -1,26 +1,25 @@
 import React from 'react';
 
 import { mdiPencil } from '@lumx/icons';
-import { Alignment, FlexBox, Icon, Link, Orientation, Size } from '@lumx/react';
-import { boolean, text } from '@storybook/addon-knobs';
+import { Alignment, ColorPalette, FlexBox, Icon, Link, Orientation, Size, Theme } from '@lumx/react';
 
-const App = () => (
+const App = ({ theme }: any) => (
     <>
-        <Link href={text('href', '#', 'Link 1')} target={boolean('target: _blank', false, 'Link 1') ? '_blank' : ''}>
-            {text('Value', 'Default link', 'Link 1')}
-        </Link>
-        <br />
-        <br />
-        <Link href={text('href', '#', 'Link 2')} target={boolean('target: _blank', false, 'Link 2') ? '_blank' : ''}>
-            <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                <Icon icon={mdiPencil} size={Size.xs} className="lumx-spacing-margin-right-tiny" />
-                {text('Value', 'Link with an icon', 'Link 2')}
-            </FlexBox>
-        </Link>
-        <br />
-        <br />
-        <Link href={text('href', '#', 'Link 3')} target={boolean('target: _blank', false, 'Link 3') ? '_blank' : ''}>
-            <span className="lumx-typography-title">{text('Value', 'Link with Title typography', 'Link 3')}</span>
+        <div className="lumx-spacing-margin-bottom">
+            <Link color={theme === Theme.light ? ColorPalette.primary : ColorPalette.light}>Default link</Link>
+        </div>
+
+        <div className="lumx-spacing-margin-bottom">
+            <Link color={theme === Theme.light ? ColorPalette.primary : ColorPalette.light}>
+                <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
+                    <Icon icon={mdiPencil} size={Size.xs} className="lumx-spacing-margin-right-tiny" />
+                    <span>Link with an icon</span>
+                </FlexBox>
+            </Link>
+        </div>
+
+        <Link color={theme === Theme.light ? ColorPalette.primary : ColorPalette.light}>
+            <span className="lumx-typography-title">Link with Title typography</span>
         </Link>
     </>
 );
