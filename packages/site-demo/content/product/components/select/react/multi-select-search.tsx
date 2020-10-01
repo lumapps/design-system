@@ -1,6 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 
-import { mdiAccessPoint, mdiAccountBadge, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
+import { mdiAccessPoint, mdiAccountBox, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
 import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, SelectMultiple, Size, TextField } from '@lumx/react';
 import { useBooleanState } from '@lumx/react/hooks';
 
@@ -11,7 +11,7 @@ const App = ({ theme }: any) => {
             label: 'First item',
         },
         {
-            icon: mdiAccountBadge,
+            icon: mdiAccountBox,
             label: 'Second item',
         },
         {

@@ -1,4 +1,4 @@
-import { mdiFileDocumentBoxOutline, mdiMenu } from '@lumx/icons';
+import { mdiTextBoxOutline, mdiMenu } from '@lumx/icons';
 
 function DemoSideNavigationController() {
     'ngInject';
@@ -13,7 +13,7 @@ function DemoSideNavigationController() {
      * @readonly
      */
     vm.icons = {
-        mdiFileDocumentBoxOutline,
+        mdiTextBoxOutline,
         mdiMenu,
     };
 }
