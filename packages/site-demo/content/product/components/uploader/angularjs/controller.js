@@ -1,4 +1,4 @@
-import { mdiFileDocumentBoxPlus, mdiImagePlus } from '@lumx/icons';
+import { mdiTextBoxPlus, mdiImagePlus } from '@lumx/icons';
 
 function DemoController() {
     'ngInject';
@@ -13,7 +13,7 @@ function DemoController() {
      * @readonly
      */
     vm.icons = {
-        mdiFileDocumentBoxPlus,
+        mdiTextBoxPlus,
         mdiImagePlus,
     };
 }
