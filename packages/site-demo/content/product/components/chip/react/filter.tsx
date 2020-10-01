@@ -11,7 +11,6 @@ const App = ({ theme }: any) => {
         <div className="demo-grid">
             <Chip
                 theme={theme}
-                before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
                 after={
                     isSelected ? (
                         <Icon icon={mdiCloseCircle} size={Size.xs} />
@@ -24,6 +23,22 @@ const App = ({ theme }: any) => {
                 onAfterClick={onAfterClick}
             >
                 Filter
+            </Chip>
+            <Chip
+                theme={theme}
+                before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
+                after={
+                    isSelected ? (
+                        <Icon icon={mdiCloseCircle} size={Size.xs} />
+                    ) : (
+                        <Icon icon={mdiMenuDown} size={Size.xs} />
+                    )
+                }
+                isSelected={isSelected}
+                onClick={() => !isSelected && setSelected(true)}
+                onAfterClick={() => isSelected && setSelected(false)}
+            >
+                Filter rich
             </Chip>
         </div>
     );
