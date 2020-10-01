@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { Redirect, Route, useHistory } from 'react-router-dom';
 
 import { ErrorBoundary } from '@lumx/demo/components/ErrorBoundary';
+import { LumxVersion } from '@lumx/demo/components/LumxVersion';
 import { EngineProvider } from '@lumx/demo/context/engine';
 import { GlobalThemeProvider } from '@lumx/demo/context/global-theme';
 import { Alignment, FlexBox, Orientation } from '@lumx/react';
@@ -28,17 +29,19 @@ export const Main: React.FC = (): ReactElement => {
                     <div className="main__wrapper">
                         <div className="main-header">
                             <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                                <FlexBox fillSpace>
-                                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                                        <span className="lumx-typography-overline lumx-spacing-margin-right-regular">
-                                            Theme
-                                        </span>
-                                        <ThemeSelector />
-                                    </FlexBox>
+                                <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
+                                    <span className="lumx-typography-overline lumx-spacing-margin-right-regular">
+                                        Theme
+                                    </span>
+                                    <ThemeSelector />
                                 </FlexBox>
-                                <Route path="/product/components*">
-                                    <EngineSelector />
-                                </Route>
+
+                                <FlexBox marginAuto={Alignment.left}>
+                                    <Route path="/product/components*">
+                                        <EngineSelector />
+                                        <LumxVersion />
+                                    </Route>
+                                </FlexBox>
                             </FlexBox>
                         </div>
 

@@ -16,9 +16,11 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const WebpackBar = require('webpackbar');
+const webpack = require('webpack');
 const WebpackNotifierPlugin = require('webpack-notifier');
 
 const CONFIGS = require('../../configs');
+const LUMX_VERSION = require('../../lerna.json').version;
 
 const PKG_NAME = '@lumx/demo';
 const PKG_PATH = path.resolve(__dirname, './');
@@ -43,6 +45,9 @@ const plugins = [
         filename: `${filename}.css`,
     }),
 
+    new webpack.DefinePlugin({
+        LUMX_VERSION: JSON.stringify(LUMX_VERSION),
+    }),
     new HtmlWebpackPlugin({
         inject: false,
         template: `${SRC_PATH}/index.html.ejs`,
