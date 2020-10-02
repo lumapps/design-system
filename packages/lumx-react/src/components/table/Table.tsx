@@ -33,8 +33,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<TableProps> = {
-    hasBefore: false,
-    hasDividers: false,
     theme: Theme.light,
 };
 
@@ -43,14 +41,7 @@ const DEFAULT_PROPS: Partial<TableProps> = {
  *
  * @return The component.
  */
-const Table: React.FC<TableProps> = ({
-    children,
-    className,
-    hasBefore = DEFAULT_PROPS.hasBefore,
-    hasDividers = DEFAULT_PROPS.hasDividers,
-    theme = DEFAULT_PROPS.theme,
-    ...forwardedProps
-}) => (
+const Table: React.FC<TableProps> = ({ children, className, hasBefore, hasDividers, theme, ...forwardedProps }) => (
     <table
         {...forwardedProps}
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }))}
@@ -60,5 +51,6 @@ const Table: React.FC<TableProps> = ({
 );
 
 Table.displayName = COMPONENT_NAME;
+Table.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Table, TableProps };
+export { CLASSNAME, Table, TableProps };

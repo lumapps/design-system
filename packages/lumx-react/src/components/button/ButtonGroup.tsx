@@ -33,5 +33,6 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ buttonGroupRef, children, cla
     </div>
 );
 ButtonGroup.displayName = COMPONENT_NAME;
+ButtonGroup.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ButtonGroup, ButtonGroupProps };
+export { CLASSNAME, ButtonGroup, ButtonGroupProps };

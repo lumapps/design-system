@@ -13,7 +13,6 @@ import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/con
 import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
-import noop from 'lodash/noop';
 
 /**
  * Defines the props of the component.
@@ -63,21 +62,18 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: DefaultPropsType = {
     activeIndex: 0,
-    onNextClick: noop,
-    onPaginationClick: noop,
-    onPreviousClick: noop,
     theme: Theme.light,
 };
 
 const SlideshowControls: React.FC<SlideshowControlsProps> = ({
-    activeIndex = DEFAULT_PROPS.activeIndex,
+    activeIndex,
     className,
-    onNextClick = DEFAULT_PROPS.onNextClick,
-    onPaginationClick = DEFAULT_PROPS.onPaginationClick,
-    onPreviousClick = DEFAULT_PROPS.onPreviousClick,
+    onNextClick,
+    onPaginationClick,
+    onPreviousClick,
     parentRef,
     slidesCount,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     ...forwardedProps
 }) => {
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
@@ -297,5 +293,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     );
 };
 SlideshowControls.displayName = COMPONENT_NAME;
+SlideshowControls.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, SlideshowControls, SlideshowControlsProps as SlideshowProps };
+export { CLASSNAME, SlideshowControls, SlideshowControlsProps as SlideshowProps };

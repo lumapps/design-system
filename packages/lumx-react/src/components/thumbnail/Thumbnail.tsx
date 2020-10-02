@@ -124,36 +124,34 @@ const DEFAULT_PROPS: Partial<ThumbnailProps> = {
     aspectRatio: AspectRatio.original,
     crossOrigin: CrossOrigin.anonymous,
     fallback: mdiImageBrokenVariant,
-    fillHeight: false,
     focusPoint: { x: 0, y: 0 },
     isCrossOriginEnabled: true,
     isFollowingWindowSize: true,
     loading: ImageLoading.lazy,
     resizeDebounceTime: 20,
-    size: undefined,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
 };
 
 const Thumbnail: React.FC<ThumbnailProps> = ({
-    align = DEFAULT_PROPS.align,
+    align,
     alt = 'Thumbnail',
-    aspectRatio = DEFAULT_PROPS.aspectRatio,
+    aspectRatio,
     className,
-    crossOrigin = DEFAULT_PROPS.crossOrigin,
-    fallback = DEFAULT_PROPS.fallback,
-    fillHeight = DEFAULT_PROPS.fillHeight,
-    focusPoint = DEFAULT_PROPS.focusPoint,
+    crossOrigin,
+    fallback,
+    fillHeight,
+    focusPoint,
     image,
     imgProps,
-    isCrossOriginEnabled = DEFAULT_PROPS.isCrossOriginEnabled,
-    isFollowingWindowSize = DEFAULT_PROPS.isFollowingWindowSize,
-    loading = DEFAULT_PROPS.loading,
+    isCrossOriginEnabled,
+    isFollowingWindowSize,
+    loading,
     onClick = null,
-    resizeDebounceTime = DEFAULT_PROPS.resizeDebounceTime,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
-    variant = DEFAULT_PROPS.variant,
+    resizeDebounceTime,
+    size,
+    theme,
+    variant,
     ...forwardedProps
 }: ThumbnailProps): ReactElement => {
     const [thumbnailState, setThumbnailState] = useState<ThumbnailStates>('isLoading');
@@ -235,10 +233,10 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     );
 };
 Thumbnail.displayName = COMPONENT_NAME;
+Thumbnail.defaultProps = DEFAULT_PROPS;
 
 export {
     CLASSNAME,
-    DEFAULT_PROPS,
     Thumbnail,
     ThumbnailProps,
     ThumbnailAspectRatio,

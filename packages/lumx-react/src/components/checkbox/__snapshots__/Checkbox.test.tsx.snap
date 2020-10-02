@@ -24,7 +24,9 @@ exports[`<Checkbox> Props should use the given props 1`] = `
         className="lumx-checkbox__input-indicator"
       >
         <Icon
+          color="dark"
           icon="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+          size="m"
         />
       </div>
     </div>
@@ -41,6 +43,7 @@ exports[`<Checkbox> Props should use the given props 1`] = `
     </InputLabel>
     <InputHelper
       className="lumx-checkbox__helper"
+      kind="info"
       theme="light"
     >
       Test helper
@@ -73,7 +76,9 @@ exports[`<Checkbox> Snapshots and structure should render correctly 1`] = `
         className="lumx-checkbox__input-indicator"
       >
         <Icon
+          color="dark"
           icon="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+          size="m"
         />
       </div>
     </div>

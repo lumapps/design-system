@@ -66,7 +66,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<TableCellProps> = {
-    onHeaderClick: undefined,
     variant: TableCellVariant.body,
 };
 
@@ -75,9 +74,9 @@ const TableCell: React.FC<TableCellProps> = ({
     className,
     icon,
     isSortable,
-    onHeaderClick = DEFAULT_PROPS.onHeaderClick,
+    onHeaderClick,
     sortOrder,
-    variant = DEFAULT_PROPS.variant,
+    variant,
     ...forwardedProps
 }) => {
     /**
@@ -134,5 +133,6 @@ const TableCell: React.FC<TableCellProps> = ({
     );
 };
 TableCell.displayName = COMPONENT_NAME;
+TableCell.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, TableCell, TableCellProps, TableCellVariant, ThOrder, ThScope };
+export { CLASSNAME, TableCell, TableCellProps, TableCellVariant, ThOrder, ThScope };

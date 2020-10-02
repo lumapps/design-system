@@ -8,7 +8,10 @@ exports[`<Dialog> Snapshots and structure should render story dialogSizes 1`] = 
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -95,7 +98,10 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -112,6 +118,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         "current": undefined,
       }
     }
+    size="big"
   >
     <header>
       <Toolbar
@@ -120,6 +127,8 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
             emphasis="low"
             icon="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z"
             onClick={[Function]}
+            size="m"
+            theme="light"
           />
         }
         label={
@@ -149,6 +158,8 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         label="Text input"
         maxLength={10}
         onChange={[Function]}
+        theme="light"
+        type="text"
         value="value"
       />
       <Checkbox
@@ -156,6 +167,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         isChecked={false}
         label="Checkbox input"
         onChange={[Function]}
+        theme="light"
       />
       <Select
         className="lumx-spacing-margin-bottom-huge"
@@ -163,6 +175,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithFocusabl
         label="Select label"
         onDropdownClose={[Function]}
         onInputClick={[Function]}
+        selectedValueRender={[Function]}
         value=""
       >
         <List
@@ -212,7 +225,10 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -226,6 +242,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
         "current": undefined,
       }
     }
+    size="big"
   >
     <header
       className="lumx-spacing-padding lumx-typography-title"
@@ -267,7 +284,10 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -279,6 +299,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
         "current": undefined,
       }
     }
+    size="big"
   >
     <header
       className="lumx-spacing-padding lumx-typography-title"
@@ -320,7 +341,10 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -334,6 +358,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
         "current": undefined,
       }
     }
+    size="big"
   >
     <div
       className="lumx-spacing-padding"
@@ -365,7 +390,10 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -379,6 +407,7 @@ exports[`<Dialog> Snapshots and structure should render story dialogWithHeaderFo
         "current": undefined,
       }
     }
+    size="big"
   >
     <header
       className="lumx-spacing-padding lumx-typography-title"
@@ -420,7 +449,10 @@ exports[`<Dialog> Snapshots and structure should render story loadingDialog 1`] 
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -433,6 +465,7 @@ exports[`<Dialog> Snapshots and structure should render story loadingDialog 1`] 
         "current": undefined,
       }
     }
+    size="big"
   >
     <div
       className="lumx-spacing-padding"
@@ -464,7 +497,10 @@ exports[`<Dialog> Snapshots and structure should render story preventDialogAutoC
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -477,6 +513,7 @@ exports[`<Dialog> Snapshots and structure should render story preventDialogAutoC
       }
     }
     preventAutoClose={true}
+    size="big"
   >
     <div
       className="lumx-spacing-padding"
@@ -502,6 +539,8 @@ tertiam. Cras mattis iudicium purus sit amet fermentum
           <Button
             emphasis="low"
             onClick={[Function]}
+            size="m"
+            theme="light"
           >
             Close
           </Button>
@@ -520,7 +559,10 @@ exports[`<Dialog> Snapshots and structure should render story scrollableDialog 1
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -606,7 +648,10 @@ exports[`<Dialog> Snapshots and structure should render story scrollableDialogWi
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -618,6 +663,7 @@ exports[`<Dialog> Snapshots and structure should render story scrollableDialogWi
         "current": undefined,
       }
     }
+    size="big"
   >
     <header
       className="lumx-spacing-padding lumx-typography-title"
@@ -701,7 +747,10 @@ exports[`<Dialog> Snapshots and structure should render story simpleDialog 1`] =
         "current": undefined,
       }
     }
+    emphasis="high"
     onClick={[Function]}
+    size="m"
+    theme="light"
   >
     Open dialog
   </Button>
@@ -713,6 +762,7 @@ exports[`<Dialog> Snapshots and structure should render story simpleDialog 1`] =
         "current": undefined,
       }
     }
+    size="big"
   >
     <div
       className="lumx-spacing-padding"

@@ -64,11 +64,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<CommentBlockProps> = {
-    hasActions: false,
-    hasChildren: false,
-    hasIndentedChildren: false,
-    isOpen: false,
-    isRelevant: false,
     theme: Theme.light,
 };
 
@@ -78,18 +73,18 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     avatarProps,
     children,
     date,
-    hasActions = DEFAULT_PROPS.hasActions,
-    hasChildren = DEFAULT_PROPS.hasChildren,
-    hasIndentedChildren = DEFAULT_PROPS.hasIndentedChildren,
-    isOpen = DEFAULT_PROPS.isOpen,
-    isRelevant = DEFAULT_PROPS.isRelevant,
+    hasActions,
+    hasChildren,
+    hasIndentedChildren,
+    isOpen,
+    isRelevant,
     name,
     onClick,
     onMouseEnter,
     onMouseLeave,
     text,
-    theme = DEFAULT_PROPS.theme,
-}: CommentBlockProps): React.ReactElement => {
+    theme,
+}) => {
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
             onClick();
@@ -149,5 +144,6 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     );
 };
 CommentBlock.displayName = COMPONENT_NAME;
+CommentBlock.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, CommentBlock, CommentBlockProps };
+export { CLASSNAME, CommentBlock, CommentBlockProps };

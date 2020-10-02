@@ -66,7 +66,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     id,
     label,
     onChange,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     useCustomColors,
     checked,
     isChecked = checked,
@@ -133,5 +133,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
     );
 };
 Checkbox.displayName = COMPONENT_NAME;
+Checkbox.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps };
+export { CLASSNAME, Checkbox, CheckboxProps };

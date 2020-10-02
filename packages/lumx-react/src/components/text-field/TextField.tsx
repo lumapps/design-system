@@ -78,20 +78,12 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The minimum number of rows that we want to display on the text area
  */
-const MIN_ROWS = 2;
+const DEFULAT_MIN_ROWS = 2;
 
 /**
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
-    forceFocusStyle: false,
-    hasError: false,
-    isClearable: false,
-    isDisabled: false,
-    isRequired: false,
-    isValid: false,
-    minimumRows: MIN_ROWS,
-    multiline: false,
     theme: Theme.light,
     type: 'text',
 };
@@ -247,35 +239,35 @@ const TextField: React.FC<TextFieldProps> = ({
     className,
     disabled,
     error,
-    forceFocusStyle = DEFAULT_PROPS.forceFocusStyle,
+    forceFocusStyle,
     hasError,
     helper,
     icon,
     id,
     inputRef = React.useRef(null),
-    isClearable = DEFAULT_PROPS.isClearable,
+    isClearable,
     isDisabled = disabled,
     isRequired,
     isValid,
     label,
     maxLength,
-    minimumRows = DEFAULT_PROPS.minimumRows as number,
-    multiline = DEFAULT_PROPS.multiline,
+    minimumRows,
+    multiline,
     name,
     onBlur,
     onChange,
     onFocus,
     placeholder,
     textFieldRef,
-    theme = DEFAULT_PROPS.theme,
-    type = DEFAULT_PROPS.type,
+    theme,
+    type,
     useCustomColors,
     value,
     ...forwardedProps
 }) => {
     const textFieldId = useMemo(() => id || `text-field-${uuid()}`, [id]);
     const [isFocus, setFocus] = useState(false);
-    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
+    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(multiline ? minimumRows || DEFULAT_MIN_ROWS : 0);
     const valueLength = (value || '').length;
     const isNotEmpty = valueLength > 0;
 
@@ -407,5 +399,6 @@ const TextField: React.FC<TextFieldProps> = ({
     );
 };
 TextField.displayName = COMPONENT_NAME;
+TextField.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps };
+export { CLASSNAME, TextField, TextFieldProps };

@@ -19,10 +19,14 @@ exports[`<Button> Props should use the given props for class names 1`] = `
   variant="button"
 >
   <Icon
+    color="dark"
     icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+    size="m"
   />
   <Icon
+    color="dark"
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    size="m"
   />
 </ButtonRoot>
 `;
@@ -50,13 +54,17 @@ exports[`<Button> Snapshots and structure should render button with label and ic
   variant="button"
 >
   <Icon
+    color="dark"
     icon="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+    size="m"
   />
   <span>
     Label
   </span>
   <Icon
+    color="dark"
     icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+    size="m"
   />
 </ButtonRoot>
 `;
@@ -70,7 +78,9 @@ exports[`<Button> Snapshots and structure should render button with label and le
   variant="button"
 >
   <Icon
+    color="dark"
     icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+    size="m"
   />
   <span>
     Label
@@ -90,7 +100,9 @@ exports[`<Button> Snapshots and structure should render button with label and ri
     Label
   </span>
   <Icon
+    color="dark"
     icon="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+    size="m"
   />
 </ButtonRoot>
 `;

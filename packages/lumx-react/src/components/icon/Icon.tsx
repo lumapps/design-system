@@ -116,5 +116,6 @@ const Icon: React.FC<IconProps> = ({
     );
 };
 Icon.displayName = COMPONENT_NAME;
+Icon.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, IconSizes };
+export { CLASSNAME, Icon, IconProps, IconSizes };

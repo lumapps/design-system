@@ -32,5 +32,6 @@ const TableHeader: React.FC<TableHeaderProps> = ({ children, className, ...forwa
 );
 
 TableHeader.displayName = COMPONENT_NAME;
+TableHeader.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, TableHeader, TableHeaderProps };
+export { CLASSNAME, TableHeader, TableHeaderProps };

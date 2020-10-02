@@ -12,12 +12,26 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
       key="0"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/200"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -25,12 +39,26 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
       key="1"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/210"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -38,12 +66,26 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
       key="2"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/220"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -51,12 +93,26 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
       key="3"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/230"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
+        variant="squared"
       />
     </div>
   </div>
@@ -75,11 +131,25 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
       key="0"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/200"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -87,11 +157,25 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
       key="1"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/210"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -99,11 +183,25 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
       key="2"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/220"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -111,11 +209,25 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
       key="3"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/230"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
   </div>
@@ -134,11 +246,25 @@ exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] =
       key="0"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/200"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
   </div>
@@ -157,12 +283,26 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
       key="0"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/640/480/?image=24"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -170,12 +310,26 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
       key="1"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/640/480/?image=25"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -183,12 +337,26 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
       key="2"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/640/480/?image=26"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -196,12 +364,26 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
       key="3"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/640/480/?image=27"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
+        variant="squared"
       />
       <div
         className="lumx-mosaic__overlay"
@@ -228,11 +410,25 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
       key="0"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/200"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -240,11 +436,25 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
       key="1"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/210"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -252,11 +462,25 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
       key="2"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/220"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
   </div>
@@ -275,11 +499,25 @@ exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] 
       key="0"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/200"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
     <div
@@ -287,11 +525,25 @@ exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] 
       key="1"
     >
       <Thumbnail
+        align="left"
         aspectRatio="free"
+        crossOrigin="anonymous"
+        fallback="M21,5V11.59L18,8.58L14,12.59L10,8.59L6,12.59L3,9.58V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5M18,11.42L21,14.43V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19V12.42L6,15.41L10,11.41L14,15.41"
         fillHeight={true}
+        focusPoint={
+          Object {
+            "x": 0,
+            "y": 0,
+          }
+        }
         image="https://picsum.photos/210"
+        isCrossOriginEnabled={true}
+        isFollowingWindowSize={true}
+        loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
+        variant="squared"
       />
     </div>
   </div>

@@ -63,6 +63,7 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
     </InputLabel>
     <InputHelper
       className="lumx-switch__helper"
+      kind="info"
       theme="light"
     >
       Helper

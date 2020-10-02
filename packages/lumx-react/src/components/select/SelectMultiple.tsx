@@ -39,8 +39,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
-    hasError: false,
-    isValid: false,
     selectedChipRender(choice, index, onClear, isDisabled?, theme?) {
         const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
         return (
@@ -163,7 +161,7 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     </>
 );
 
-const SelectMultiple = (props: any) =>
+const SelectMultiple: React.FC<SelectMultipleProps> = (props) =>
     withSelectContext(SelectMultipleField, {
         ...props,
         className: classNames(
@@ -178,5 +176,6 @@ const SelectMultiple = (props: any) =>
     });
 
 SelectMultiple.displayName = COMPONENT_NAME;
+SelectMultiple.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, SelectMultiple, SelectMultipleProps, SelectVariant };
+export { CLASSNAME, SelectMultiple, SelectMultipleProps, SelectVariant };

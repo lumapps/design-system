@@ -48,15 +48,7 @@ const DEFAULT_PROPS: Partial<AvatarProps> = {
     theme: Theme.light,
 };
 
-const Avatar: React.FC<AvatarProps> = ({
-    actions,
-    badge,
-    className,
-    image,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
-    ...forwardedProps
-}) => {
+const Avatar: React.FC<AvatarProps> = ({ actions, badge, className, image, size, theme, ...forwardedProps }) => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
@@ -75,5 +67,6 @@ const Avatar: React.FC<AvatarProps> = ({
     );
 };
 Avatar.displayName = COMPONENT_NAME;
+Avatar.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps, AvatarSize };
+export { CLASSNAME, Avatar, AvatarProps, AvatarSize };

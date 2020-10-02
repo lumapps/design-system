@@ -68,8 +68,8 @@ const Switch: React.FC<SwitchProps> = ({
     isDisabled = disabled,
     name,
     onChange,
-    position = DEFAULT_PROPS.position,
-    theme = DEFAULT_PROPS.theme,
+    position,
+    theme,
     useCustomColors,
     value,
     ...forwardedProps
@@ -132,5 +132,6 @@ const Switch: React.FC<SwitchProps> = ({
     );
 };
 Switch.displayName = COMPONENT_NAME;
+Switch.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Switch, SwitchProps, SwitchPosition };
+export { CLASSNAME, Switch, SwitchProps, SwitchPosition };

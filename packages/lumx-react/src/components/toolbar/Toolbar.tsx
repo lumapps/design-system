@@ -52,5 +52,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, label, ...f
     </div>
 );
 Toolbar.displayName = COMPONENT_NAME;
+Toolbar.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Toolbar, ToolbarProps };
+export { CLASSNAME, Toolbar, ToolbarProps };

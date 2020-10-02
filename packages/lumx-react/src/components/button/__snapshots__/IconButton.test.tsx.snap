@@ -8,7 +8,10 @@ exports[`<IconButton> Props should forward any CSS class 1`] = `
   theme="light"
   variant="icon"
 >
-  <Icon />
+  <Icon
+    color="dark"
+    size="m"
+  />
 </ButtonRoot>
 `;
 
@@ -19,7 +22,10 @@ exports[`<IconButton> Props should use default props 1`] = `
   theme="light"
   variant="icon"
 >
-  <Icon />
+  <Icon
+    color="dark"
+    size="m"
+  />
 </ButtonRoot>
 `;
 
@@ -30,6 +36,9 @@ exports[`<IconButton> Snapshots and structure should render icon button 1`] = `
   theme="light"
   variant="icon"
 >
-  <Icon />
+  <Icon
+    color="dark"
+    size="m"
+  />
 </ButtonRoot>
 `;

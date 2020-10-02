@@ -61,7 +61,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<NotificationProps> = {
-    content: '',
     theme: Theme.light,
     zIndex: 9999,
 };
@@ -74,13 +73,13 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
 const Notification: React.FC<NotificationProps> = ({
     actionLabel,
     className,
-    content = DEFAULT_PROPS.content,
+    content,
     isOpen = false,
     onActionClick,
     onClick,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     type,
-    zIndex = DEFAULT_PROPS.zIndex,
+    zIndex,
     ...forwardedProps
 }) => {
     const hasAction: boolean = Boolean(onActionClick) && Boolean(actionLabel);
@@ -127,5 +126,6 @@ const Notification: React.FC<NotificationProps> = ({
         : null;
 };
 Notification.displayName = COMPONENT_NAME;
+Notification.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Notification, NotificationProps, NotificationType };
+export { CLASSNAME, Notification, NotificationProps, NotificationType };

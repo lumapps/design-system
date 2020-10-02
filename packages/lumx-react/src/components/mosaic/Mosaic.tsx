@@ -37,7 +37,7 @@ const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,
 };
 
-const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme, thumbnails, ...forwardedProps }) => (
+const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, ...forwardedProps }) => (
     <div
         {...forwardedProps}
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
@@ -80,5 +80,6 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
 );
 
 Mosaic.displayName = COMPONENT_NAME;
+Mosaic.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Mosaic, MosaicProps };
+export { CLASSNAME, Mosaic, MosaicProps };

@@ -43,12 +43,7 @@ interface ChipGroup {
  * Displays a list of Chips in a grouped fashion.
  * @return The Chip Group component.
  */
-const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
-    align = DEFAULT_PROPS.align,
-    children,
-    className,
-    ...forwardedProps
-}) => {
+const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({ align, children, className, ...forwardedProps }) => {
     const chipGroupClassName = handleBasicClasses({
         align,
         prefix: CLASSNAME,
@@ -62,6 +57,7 @@ const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
 };
 
 ChipGroup.displayName = COMPONENT_NAME;
+ChipGroup.defaultProps = DEFAULT_PROPS;
 ChipGroup.useChipGroupNavigation = useChipGroupNavigation;
 
 export { CLASSNAME, ChipGroup, ChipGroupProps };

@@ -101,6 +101,7 @@ exports[`<RadioButton> Snapshots and structure should render label & helper 1`] 
     </InputLabel>
     <InputHelper
       className="lumx-radio-button__helper"
+      kind="info"
       theme="light"
     >
       Helper

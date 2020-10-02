@@ -36,14 +36,8 @@ const DEFAULT_PROPS: Partial<InputHelperProps> = {
     theme: Theme.light,
 };
 
-const InputHelper: React.FC<InputHelperProps> = ({
-    children,
-    className,
-    kind = DEFAULT_PROPS.kind as Kind,
-    theme = DEFAULT_PROPS.theme,
-    ...forwardedProps
-}) => {
-    const { color } = INPUT_HELPER_CONFIGURATION[kind] || {};
+const InputHelper: React.FC<InputHelperProps> = ({ children, className, kind, theme, ...forwardedProps }) => {
+    const { color } = INPUT_HELPER_CONFIGURATION[kind as any] || {};
 
     return (
         <span
@@ -56,5 +50,6 @@ const InputHelper: React.FC<InputHelperProps> = ({
 };
 
 InputHelper.displayName = COMPONENT_NAME;
+InputHelper.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, InputHelper, InputHelperProps };
+export { CLASSNAME, InputHelper, InputHelperProps };

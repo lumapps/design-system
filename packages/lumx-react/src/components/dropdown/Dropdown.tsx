@@ -92,7 +92,6 @@ const DEFAULT_PROPS: Partial<DropdownProps> = {
     closeOnEscape: true,
     fitToAnchorWidth: true,
     fitWithinViewportHeight: true,
-    isOpen: false,
     placement: Placement.BOTTOM_START,
     shouldFocusOnOpen: true,
 };
@@ -102,17 +101,17 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
         anchorRef,
         children,
         className,
-        closeOnClick = DEFAULT_PROPS.closeOnClick,
-        closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
-        closeOnEscape = DEFAULT_PROPS.closeOnEscape,
-        fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
-        fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
-        isOpen = DEFAULT_PROPS.isOpen,
+        closeOnClick,
+        closeOnClickAway,
+        closeOnEscape,
+        fitToAnchorWidth,
+        fitWithinViewportHeight,
+        isOpen,
         offset,
         onClose,
         onInfiniteScroll,
-        placement = DEFAULT_PROPS.placement,
-        shouldFocusOnOpen = DEFAULT_PROPS.shouldFocusOnOpen,
+        placement,
+        shouldFocusOnOpen,
         zIndex,
         ...forwardedProps
     } = props;
@@ -160,5 +159,6 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
     ) : null;
 };
 Dropdown.displayName = COMPONENT_NAME;
+Dropdown.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Dropdown, DropdownProps };
+export { CLASSNAME, Dropdown, DropdownProps };

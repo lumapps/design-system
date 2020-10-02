@@ -63,7 +63,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     label,
     name,
     onChange,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     useCustomColors,
     value,
     ...forwardedProps
@@ -125,5 +125,6 @@ const RadioButton: React.FC<RadioButtonProps> = ({
     );
 };
 RadioButton.displayName = COMPONENT_NAME;
+RadioButton.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, RadioButton, RadioButtonProps };
+export { CLASSNAME, RadioButton, RadioButtonProps };

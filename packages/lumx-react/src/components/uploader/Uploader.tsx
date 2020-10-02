@@ -55,13 +55,13 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
 };
 
 const Uploader: React.FC<UploaderProps> = ({
-    aspectRatio = DEFAULT_PROPS.aspectRatio,
+    aspectRatio,
     className,
     label,
     icon,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
-    variant = DEFAULT_PROPS.variant,
+    size,
+    theme,
+    variant,
     ...forwardedProps
 }) => {
     // Adjust to square aspect ratio when using circle variants.
@@ -96,5 +96,6 @@ const Uploader: React.FC<UploaderProps> = ({
     );
 };
 Uploader.displayName = COMPONENT_NAME;
+Uploader.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Uploader, UploaderProps, UploaderVariant };
+export { CLASSNAME, Uploader, UploaderProps, UploaderVariant };

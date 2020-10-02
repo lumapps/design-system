@@ -43,11 +43,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {
-    hasError: false,
-    helper: null,
-    isActive: false,
-    isComplete: false,
-    label: null,
     theme: Theme.light,
 };
 
@@ -58,13 +53,13 @@ const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {
  */
 const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     className,
-    hasError = DEFAULT_PROPS.hasError,
-    helper = DEFAULT_PROPS.helper,
-    isActive = DEFAULT_PROPS.isActive,
-    isComplete = DEFAULT_PROPS.isComplete,
-    label = DEFAULT_PROPS.label,
-    theme = DEFAULT_PROPS.theme,
-    onClick = null,
+    hasError,
+    helper,
+    isActive,
+    isComplete,
+    label,
+    theme,
+    onClick,
     ...forwardedProps
 }) => {
     const isClickable: boolean = isFunction(onClick);
@@ -120,5 +115,6 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
 };
 
 ProgressTrackerStep.displayName = COMPONENT_NAME;
+ProgressTrackerStep.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ProgressTrackerStep, ProgressTrackerStepProps };
+export { CLASSNAME, ProgressTrackerStep, ProgressTrackerStepProps };

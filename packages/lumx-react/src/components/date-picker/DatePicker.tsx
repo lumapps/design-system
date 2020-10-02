@@ -46,7 +46,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<DatePickerProps> = {};
 
-const DatePicker: React.FC<DatePickerProps> = ({ defaultMonth, locale, value, ...forwaredProps }) => {
+const DatePicker: React.FC<DatePickerProps> = ({ defaultMonth, locale, value, ...forwardedProps }) => {
     let castedValue;
     if (value) {
         castedValue = moment(value);
@@ -69,7 +69,7 @@ const DatePicker: React.FC<DatePickerProps> = ({ defaultMonth, locale, value, ..
 
     return (
         <DatePickerControlled
-            {...forwaredProps}
+            {...forwardedProps}
             defaultMonth={defaultMonth}
             locale={locale}
             value={value}
@@ -80,5 +80,6 @@ const DatePicker: React.FC<DatePickerProps> = ({ defaultMonth, locale, value, ..
     );
 };
 DatePicker.displayName = COMPONENT_NAME;
+DatePicker.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, DatePicker, DatePickerProps };
+export { CLASSNAME, COMPONENT_NAME, DatePicker, DatePickerProps };

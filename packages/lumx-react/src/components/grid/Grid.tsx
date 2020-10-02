@@ -49,11 +49,11 @@ const Grid: React.FC<GridProps> = ({
     className,
     gutter,
     hAlign,
-    orientation = DEFAULT_PROPS.orientation,
+    orientation,
     vAlign,
-    wrap = DEFAULT_PROPS.wrap,
+    wrap,
     ...forwardedProps
-}: GridProps): React.ReactElement => {
+}) => {
     return (
         <div
             {...forwardedProps}
@@ -70,5 +70,6 @@ const Grid: React.FC<GridProps> = ({
     );
 };
 Grid.displayName = COMPONENT_NAME;
+Grid.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Grid, GridProps };
+export { CLASSNAME, Grid, GridProps };

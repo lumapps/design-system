@@ -2,13 +2,19 @@
 
 exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 1`] = `
 <Autocomplete
-  chips={<ChipGroup />}
+  anchorToInput={false}
+  chips={
+    <ChipGroup
+      align="left"
+    />
+  }
   className="lumx-autocomplete-multiple"
   closeOnClick={false}
   closeOnClickAway={true}
   closeOnEscape={true}
   isOpen={true}
   onChange={[MockFunction]}
+  shouldFocusOnClose={false}
   value=""
 >
   <List

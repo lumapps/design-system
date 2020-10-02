@@ -11,9 +11,9 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
       }
     }
     handleKeyboardNav={[Function]}
-    hasError={false}
     isEmpty={true}
-    isValid={false}
+    selectedChipRender={[Function]}
+    selectedValueRender={[Function]}
     targetUuid="uuid"
     theme="light"
     value={Array []}
@@ -28,9 +28,11 @@ exports[`<SelectMultiple> Snapshots and structure should render chips 1`] = `
     closeOnClick={false}
     closeOnClickAway={true}
     closeOnEscape={true}
-    isOpen={false}
+    fitToAnchorWidth={true}
+    fitWithinViewportHeight={true}
     onClose={[Function]}
     placement="bottom-start"
+    shouldFocusOnOpen={true}
   >
     <span>
       Select Component
@@ -50,9 +52,9 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
       }
     }
     handleKeyboardNav={[Function]}
-    hasError={false}
     isEmpty={true}
-    isValid={false}
+    selectedChipRender={[Function]}
+    selectedValueRender={[Function]}
     targetUuid="uuid"
     theme="light"
     value={Array []}
@@ -67,9 +69,11 @@ exports[`<SelectMultiple> Snapshots and structure should render defaults 1`] = `
     closeOnClick={false}
     closeOnClickAway={true}
     closeOnEscape={true}
-    isOpen={false}
+    fitToAnchorWidth={true}
+    fitWithinViewportHeight={true}
     onClose={[Function]}
     placement="bottom-start"
+    shouldFocusOnOpen={true}
   >
     <span>
       Select Component

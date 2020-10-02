@@ -73,8 +73,8 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
     children,
     chipsAlignment,
     className,
-    closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
-    closeOnEscape = DEFAULT_PROPS.closeOnEscape,
+    closeOnClickAway,
+    closeOnEscape,
     fitToAnchorWidth,
     hasError,
     helper,
@@ -96,12 +96,12 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
     onKeyDown,
     placeholder,
     placement,
-    selectedChipRender = DEFAULT_PROPS.selectedChipRender,
+    selectedChipRender,
     shouldFocusOnClose,
     theme,
     type,
     value,
-    values = DEFAULT_PROPS.values,
+    values,
     ...forwardedProps
 }) => (
     <Autocomplete
@@ -150,5 +150,6 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
     </Autocomplete>
 );
 AutocompleteMultiple.displayName = COMPONENT_NAME;
+AutocompleteMultiple.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, AutocompleteMultiple, AutocompleteMultipleProps };
+export { CLASSNAME, AutocompleteMultiple, AutocompleteMultipleProps };

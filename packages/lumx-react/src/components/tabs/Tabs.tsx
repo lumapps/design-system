@@ -59,13 +59,13 @@ const DEFAULT_PROPS: Partial<TabsProps> = {
 };
 
 const Tabs: React.FC<TabsProps> = ({
-    activeTab = DEFAULT_PROPS.activeTab,
-    children = DEFAULT_PROPS.children,
+    activeTab,
+    children,
     className,
-    layout = DEFAULT_PROPS.layout,
+    layout,
     onTabClick,
-    position = DEFAULT_PROPS.position,
-    theme = DEFAULT_PROPS.theme,
+    position,
+    theme,
     useCustomColors,
     ...forwardedProps
 }) => {
@@ -87,5 +87,6 @@ const Tabs: React.FC<TabsProps> = ({
     );
 };
 Tabs.displayName = COMPONENT_NAME;
+Tabs.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Tabs, TabsProps, TabsLayout, TabsPosition };
+export { CLASSNAME, Tabs, TabsProps, TabsLayout, TabsPosition };

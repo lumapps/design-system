@@ -24,9 +24,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectProps> = {
-    hasError: false,
-    isOpen: false,
-    isValid: false,
     theme: Theme.light,
     variant: SelectVariant.input,
 };
@@ -86,10 +83,10 @@ const withSelectContext = (
     SelectElement: any,
     {
         className,
-        hasError = DEFAULT_PROPS.hasError,
+        hasError,
         error,
         onClear,
-        isValid = DEFAULT_PROPS.isValid,
+        isValid,
         theme = DEFAULT_PROPS.theme,
         variant = DEFAULT_PROPS.variant,
         value,
@@ -98,7 +95,7 @@ const withSelectContext = (
         isDisabled = disabled,
         isRequired,
         onBlur,
-        isOpen = DEFAULT_PROPS.isOpen,
+        isOpen,
         onInputClick,
         onDropdownClose,
         label,

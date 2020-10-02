@@ -45,13 +45,7 @@ const DEFAULT_PROPS: Partial<ProgressProps> = {
     variant: ProgressVariant.circular,
 };
 
-const Progress: React.FC<ProgressProps> = ({
-    className,
-    theme = DEFAULT_PROPS.theme,
-    useCustomColors,
-    variant = DEFAULT_PROPS.variant,
-    ...forwardedProps
-}) => {
+const Progress: React.FC<ProgressProps> = ({ className, theme, useCustomColors, variant, ...forwardedProps }) => {
     return (
         <div
             {...forwardedProps}
@@ -88,5 +82,6 @@ const Progress: React.FC<ProgressProps> = ({
     );
 };
 Progress.displayName = COMPONENT_NAME;
+Progress.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Progress, ProgressProps, ProgressVariant };
+export { CLASSNAME, Progress, ProgressProps, ProgressVariant };

@@ -68,8 +68,8 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
     description,
     link,
     linkProps,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
+    size,
+    theme,
     thumbnail = '',
     thumbnailProps,
     title,
@@ -139,5 +139,6 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
 };
 
 LinkPreview.displayName = COMPONENT_NAME;
+LinkPreview.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, LinkPreview, LinkPreviewProps };
+export { CLASSNAME, LinkPreview, LinkPreviewProps };

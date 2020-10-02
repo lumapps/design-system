@@ -52,16 +52,7 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
-    const {
-        children,
-        className,
-        emphasis = DEFAULT_PROPS.emphasis,
-        leftIcon,
-        rightIcon,
-        size = DEFAULT_PROPS.size,
-        theme = DEFAULT_PROPS.theme,
-        ...forwardedProps
-    } = props;
+    const { children, className, emphasis, leftIcon, rightIcon, size, theme, ...forwardedProps } = props;
 
     const buttonClassName = classNames(
         className,
@@ -78,5 +69,6 @@ const Button: React.FC<ButtonProps> = (props) => {
     );
 };
 Button.displayName = COMPONENT_NAME;
+Button.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ButtonEmphasis, Button, ButtonProps };
+export { CLASSNAME, ButtonEmphasis, Button, ButtonProps };

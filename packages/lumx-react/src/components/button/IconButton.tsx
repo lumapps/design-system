@@ -36,13 +36,7 @@ const DEFAULT_PROPS: Partial<IconButtonProps> = {
 };
 
 const IconButton: React.FC<IconButtonProps> = (props) => {
-    const {
-        emphasis = DEFAULT_PROPS.emphasis,
-        icon,
-        size = DEFAULT_PROPS.size,
-        theme = DEFAULT_PROPS.theme,
-        ...forwardedProps
-    } = props;
+    const { emphasis, icon, size, theme, ...forwardedProps } = props;
 
     return (
         <ButtonRoot {...{ emphasis, size, theme, ...forwardedProps }} variant="icon">
@@ -51,5 +45,6 @@ const IconButton: React.FC<IconButtonProps> = (props) => {
     );
 };
 IconButton.displayName = COMPONENT_NAME;
+IconButton.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps };
+export { CLASSNAME, IconButton, IconButtonProps };

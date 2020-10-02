@@ -31,9 +31,10 @@ const DEFAULT_PROPS: Partial<DividerProps> = {
     theme: Theme.light,
 };
 
-const Divider: React.FC<DividerProps> = ({ className, theme = DEFAULT_PROPS.theme, ...forwardedProps }) => (
+const Divider: React.FC<DividerProps> = ({ className, theme, ...forwardedProps }) => (
     <hr {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} />
 );
 Divider.displayName = COMPONENT_NAME;
+Divider.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps };
+export { CLASSNAME, Divider, DividerProps };

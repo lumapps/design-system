@@ -5,6 +5,9 @@ exports[`<Tooltip> Snapshots and structure should not wrap Button 1`] = `
   <Button
     aria-describedby="tooltip-123"
     buttonRef={[Function]}
+    emphasis="high"
+    size="m"
+    theme="light"
   >
     button
   </Button>
@@ -41,8 +44,10 @@ exports[`<Tooltip> Snapshots and structure should not wrap Icon 1`] = `
 <Fragment>
   <Icon
     aria-describedby="tooltip-123"
+    color="dark"
     icon="icon"
     iconRef={[Function]}
+    size="m"
   />
   <Portal
     containerInfo={<body />}
@@ -113,7 +118,9 @@ exports[`<Tooltip> Snapshots and structure should render correctly 1`] = `
 exports[`<Tooltip> Snapshots and structure should return children when empty label 1`] = `
 <Fragment>
   <Icon
+    color="dark"
     icon="icon"
+    size="m"
   />
 </Fragment>
 `;
@@ -125,7 +132,10 @@ exports[`<Tooltip> Snapshots and structure should work on disabled elements 1`] 
     className="lumx-tooltip-anchor-wrapper"
   >
     <Button
+      emphasis="high"
       isDisabled={true}
+      size="m"
+      theme="light"
     >
       Empty
     </Button>

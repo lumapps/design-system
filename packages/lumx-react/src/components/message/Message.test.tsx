@@ -3,7 +3,9 @@ import { getBasicClass } from '@lumx/react/utils';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
-import { CLASSNAME, DEFAULT_PROPS, Message, MessageKind, MessageProps } from './Message';
+import { CLASSNAME, Message, MessageKind, MessageProps } from './Message';
+
+const DEFAULT_PROPS = Message.defaultProps as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.

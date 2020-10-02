@@ -59,7 +59,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  */
 const DEFAULT_PROPS: Partial<SliderProps> = {
-    hideMinMaxLabel: false,
     precision: 0,
     steps: 0,
     theme: Theme.light,
@@ -102,7 +101,7 @@ const Slider: React.FC<SliderProps> = ({
     className,
     disabled,
     helper,
-    hideMinMaxLabel = DEFAULT_PROPS.hideMinMaxLabel,
+    hideMinMaxLabel,
     id,
     isDisabled = disabled,
     label,
@@ -111,10 +110,10 @@ const Slider: React.FC<SliderProps> = ({
     name,
     onChange,
     onMouseDown,
-    precision = DEFAULT_PROPS.precision,
+    precision,
     steps,
-    theme = DEFAULT_PROPS.theme,
-    value = DEFAULT_PROPS.value!,
+    theme,
+    value,
     ...forwardedProps
 }) => {
     const sliderId = useMemo(() => id || `slider-${uuid()}`, [id]);
@@ -307,5 +306,6 @@ const Slider: React.FC<SliderProps> = ({
     );
 };
 Slider.displayName = COMPONENT_NAME;
+Slider.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Slider, SliderProps };
+export { CLASSNAME, Slider, SliderProps };

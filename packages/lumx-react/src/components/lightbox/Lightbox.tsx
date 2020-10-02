@@ -11,7 +11,6 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
-import noop from 'lodash/noop';
 
 const _TRANSITION_DURATION = 400;
 
@@ -53,9 +52,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 const DEFAULT_PROPS: Partial<LightboxProps> = {
     ariaLabel: 'Lightbox',
     isCloseButtonVisible: true,
-    isOpen: false,
-    onClose: noop,
-    preventAutoClose: false,
     theme: Theme.light,
 };
 
@@ -65,15 +61,15 @@ const DEFAULT_PROPS: Partial<LightboxProps> = {
  * @return Lightbox.
  */
 const Lightbox: React.FC<LightboxProps> = ({
-    ariaLabel = DEFAULT_PROPS.ariaLabel,
+    ariaLabel,
     children,
     className,
-    isCloseButtonVisible = DEFAULT_PROPS.isCloseButtonVisible,
-    isOpen = DEFAULT_PROPS.isOpen,
-    onClose = DEFAULT_PROPS.onClose,
+    isCloseButtonVisible,
+    isOpen,
+    onClose,
     parentElement,
-    preventAutoClose = DEFAULT_PROPS.preventAutoClose,
-    theme = DEFAULT_PROPS.theme,
+    preventAutoClose,
+    theme,
     zIndex,
     ...forwardedProps
 }) => {
@@ -209,5 +205,6 @@ const Lightbox: React.FC<LightboxProps> = ({
     );
 };
 Lightbox.displayName = COMPONENT_NAME;
+Lightbox.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps };
+export { CLASSNAME, Lightbox, LightboxProps };

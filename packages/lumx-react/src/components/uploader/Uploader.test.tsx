@@ -6,7 +6,9 @@ import 'jest-enzyme';
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, Uploader, UploaderProps } from './Uploader';
+import { CLASSNAME, Uploader, UploaderProps } from './Uploader';
+
+const DEFAULT_PROPS = Uploader.defaultProps as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.

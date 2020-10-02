@@ -174,13 +174,13 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
 };
 
 const Autocomplete: React.FC<AutocompleteProps> = ({
-    anchorToInput = DEFAULT_PROPS.anchorToInput,
+    anchorToInput,
     children,
     chips,
     className,
-    closeOnClick = DEFAULT_PROPS.closeOnClick,
-    closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
-    closeOnEscape = DEFAULT_PROPS.closeOnEscape,
+    closeOnClick,
+    closeOnClickAway,
+    closeOnEscape,
     disabled,
     error,
     fitToAnchorWidth,
@@ -202,7 +202,7 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     onInfiniteScroll,
     placeholder,
     placement,
-    shouldFocusOnClose = DEFAULT_PROPS.shouldFocusOnClose,
+    shouldFocusOnClose,
     theme,
     value,
     ...forwardedProps
@@ -260,5 +260,6 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
     );
 };
 Autocomplete.displayName = COMPONENT_NAME;
+Autocomplete.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Autocomplete, AutocompleteProps };
+export { CLASSNAME, Autocomplete, AutocompleteProps };

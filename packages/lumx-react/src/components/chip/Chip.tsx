@@ -98,8 +98,8 @@ const Chip: React.FC<ChipProps> = ({
     onAfterClick,
     onBeforeClick,
     onClick,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
+    size,
+    theme,
     useCustomColors,
     ...forwardedProps
 }) => {
@@ -167,5 +167,6 @@ const Chip: React.FC<ChipProps> = ({
 };
 
 Chip.displayName = COMPONENT_NAME;
+Chip.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps };
+export { CLASSNAME, Chip, ChipProps };

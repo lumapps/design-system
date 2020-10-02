@@ -31,7 +31,7 @@ const DEFAULT_PROPS: Partial<BadgeProps> = {
     color: ColorPalette.primary,
 };
 
-const Badge: React.FC<BadgeProps> = ({ children, className, color = DEFAULT_PROPS.color, ...forwardedProps }) => {
+const Badge: React.FC<BadgeProps> = ({ children, className, color, ...forwardedProps }) => {
     return (
         <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color }))}>
             {children}
@@ -40,5 +40,6 @@ const Badge: React.FC<BadgeProps> = ({ children, className, color = DEFAULT_PROP
 };
 
 Badge.displayName = COMPONENT_NAME;
+Badge.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Badge, BadgeProps };
+export { CLASSNAME, Badge, BadgeProps };

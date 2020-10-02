@@ -124,21 +124,21 @@ const DEFAULT_PROPS: Partial<ImageBlockProps> = {
 
 const ImageBlock: React.FC<ImageBlockProps> = ({
     actions,
-    align = DEFAULT_PROPS.align,
-    aspectRatio = DEFAULT_PROPS.aspectRatio,
-    captionPosition = DEFAULT_PROPS.captionPosition,
-    captionStyle = DEFAULT_PROPS.captionStyle,
+    align,
+    aspectRatio,
+    captionPosition,
+    captionStyle,
     className,
     crossOrigin,
     description,
-    fillHeight = DEFAULT_PROPS.fillHeight,
+    fillHeight,
     focusPoint,
     image,
     isCrossOriginEnabled,
     onClick,
     size,
     tags,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     thumbnailProps,
     title,
     ...forwardedProps
@@ -199,5 +199,6 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     );
 };
 ImageBlock.displayName = COMPONENT_NAME;
+ImageBlock.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };
+export { CLASSNAME, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };

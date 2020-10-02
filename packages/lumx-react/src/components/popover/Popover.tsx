@@ -109,12 +109,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<PopoverProps> = {
-    closeOnClickAway: false,
-    closeOnEscape: false,
     elevation: 3,
-    fitToAnchorWidth: false,
-    fitWithinViewportHeight: false,
-    hasArrow: false,
     placement: Placement.AUTO,
     zIndex: 9999,
 };
@@ -178,19 +173,19 @@ const Popover: React.FC<PopoverProps> = ({
     anchorRef,
     children,
     className,
-    closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
-    closeOnEscape = DEFAULT_PROPS.closeOnEscape,
-    elevation = DEFAULT_PROPS.elevation,
-    fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
-    fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
+    closeOnClickAway,
+    closeOnEscape,
+    elevation,
+    fitToAnchorWidth,
+    fitWithinViewportHeight,
     focusElement,
-    hasArrow = DEFAULT_PROPS.hasArrow,
+    hasArrow,
     isOpen,
     offset,
     onClose,
-    placement = DEFAULT_PROPS.placement,
+    placement,
     popoverRef,
-    zIndex = DEFAULT_PROPS.zIndex,
+    zIndex,
     ...forwardedProps
 }) => {
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
@@ -261,5 +256,6 @@ const Popover: React.FC<PopoverProps> = ({
         : null;
 };
 Popover.displayName = COMPONENT_NAME;
+Popover.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, Offset };
+export { CLASSNAME, Popover, PopoverProps, Placement, Offset };

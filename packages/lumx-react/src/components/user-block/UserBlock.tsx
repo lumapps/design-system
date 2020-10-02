@@ -63,7 +63,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<UserBlockProps> = {
-    avatarProps: undefined,
     orientation: Orientation.horizontal,
     size: Size.m,
     theme: Theme.light,
@@ -71,7 +70,7 @@ const DEFAULT_PROPS: Partial<UserBlockProps> = {
 
 const UserBlock: React.FC<UserBlockProps> = ({
     avatar,
-    avatarProps = DEFAULT_PROPS.avatarProps,
+    avatarProps,
     className,
     fields,
     multipleActions,
@@ -79,10 +78,10 @@ const UserBlock: React.FC<UserBlockProps> = ({
     onClick,
     onMouseEnter,
     onMouseLeave,
-    orientation = DEFAULT_PROPS.orientation,
+    orientation,
     simpleAction,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
+    size,
+    theme,
     userBlockRef,
     ...forwardedProps
 }) => {
@@ -148,5 +147,6 @@ const UserBlock: React.FC<UserBlockProps> = ({
     );
 };
 UserBlock.displayName = COMPONENT_NAME;
+UserBlock.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, UserBlockSize };
+export { CLASSNAME, UserBlock, UserBlockProps, UserBlockSize };

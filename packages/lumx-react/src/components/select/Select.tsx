@@ -32,8 +32,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
 const DEFAULT_PROPS: Partial<SelectProps> = {
-    hasError: false,
-    isValid: false,
     selectedValueRender: (choice) => choice,
 };
 
@@ -145,7 +143,7 @@ const SelectField: React.FC<SelectProps> = ({
     );
 };
 
-const Select = (props: SelectProps) => {
+const Select: React.FC<SelectProps> = (props) => {
     const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && !isEmpty;
 
@@ -165,5 +163,6 @@ const Select = (props: SelectProps) => {
 };
 
 Select.displayName = COMPONENT_NAME;
+Select.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant };
+export { CLASSNAME, Select, SelectProps, SelectVariant };

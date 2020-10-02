@@ -12,7 +12,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  */
 interface ProgressTrackerProps extends GenericProps {
     /** The active step index. */
-    activeStep: number;
+    activeStep?: number;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
@@ -36,16 +36,16 @@ const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {
 };
 
 const ProgressTracker: React.FC<ProgressTrackerProps> = ({
-    activeStep = DEFAULT_PROPS.activeStep as number,
+    activeStep,
     children,
     className,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     ...forwardedProps
 }) => {
     const childrenArray = Children.toArray(children);
     const backgroundPosition: number = childrenArray.length > 0 ? 100 / (childrenArray.length * 2) : 0;
     const trackPosition: number =
-        childrenArray.length > 0 ? ((100 / (childrenArray.length - 1)) * activeStep) / 100 : 0;
+        childrenArray.length > 0 ? ((100 / (childrenArray.length - 1)) * (activeStep as number)) / 100 : 0;
 
     return (
         <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}>
@@ -68,5 +68,6 @@ const ProgressTracker: React.FC<ProgressTrackerProps> = ({
     );
 };
 ProgressTracker.displayName = COMPONENT_NAME;
+ProgressTracker.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ProgressTracker, ProgressTrackerProps };
+export { CLASSNAME, ProgressTracker, ProgressTrackerProps };

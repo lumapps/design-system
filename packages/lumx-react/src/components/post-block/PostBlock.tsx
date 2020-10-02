@@ -67,10 +67,10 @@ const PostBlock: React.FC<PostBlockProps> = ({
     className,
     meta,
     onClick,
-    orientation = DEFAULT_PROPS.orientation,
+    orientation,
     tags,
     text,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     thumbnail,
     thumbnailProps,
     title,
@@ -120,5 +120,6 @@ const PostBlock: React.FC<PostBlockProps> = ({
 };
 
 PostBlock.displayName = COMPONENT_NAME;
+PostBlock.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, PostBlock, PostBlockProps };
+export { CLASSNAME, PostBlock, PostBlockProps };

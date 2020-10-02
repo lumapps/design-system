@@ -60,10 +60,10 @@ const OFFSET = 8;
 const Tooltip: React.FC<TooltipProps> = ({
     children,
     className,
-    delay = DEFAULT_PROPS.delay as number,
-    forceOpen = DEFAULT_PROPS.forceOpen as boolean,
+    delay,
+    forceOpen,
     label,
-    placement = DEFAULT_PROPS.placement,
+    placement,
     ...forwardedProps
 }) => {
     if (!label) {
@@ -85,8 +85,8 @@ const Tooltip: React.FC<TooltipProps> = ({
     });
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
-    const isOpen = useTooltipOpen(delay, anchorElement) || forceOpen;
-    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id);
+    const isOpen = useTooltipOpen(delay as number, anchorElement) || forceOpen;
+    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen as boolean, id);
 
     return (
         <>
@@ -116,5 +116,6 @@ const Tooltip: React.FC<TooltipProps> = ({
     );
 };
 Tooltip.displayName = COMPONENT_NAME;
+Tooltip.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, useTooltipOpen, Tooltip, TooltipPlacement, TooltipProps };
+export { CLASSNAME, useTooltipOpen, Tooltip, TooltipPlacement, TooltipProps };

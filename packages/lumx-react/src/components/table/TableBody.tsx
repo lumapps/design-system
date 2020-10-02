@@ -32,5 +32,6 @@ const TableBody: React.FC<TableBodyProps> = ({ children, className, ...forwarded
 );
 
 TableBody.displayName = COMPONENT_NAME;
+TableBody.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, TableBody, TableBodyProps };
+export { CLASSNAME, TableBody, TableBodyProps };

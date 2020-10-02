@@ -83,7 +83,7 @@ const ListItem: React.FC<ListItemProps> = ({
     linkRef,
     listItemRef,
     onItemSelected,
-    size = DEFAULT_PROPS.size,
+    size,
     ...forwardedProps
 }) => {
     const onKeyDown = useMemo(() => (onItemSelected ? onEnterPressed(onItemSelected) : undefined), [onItemSelected]);
@@ -135,5 +135,6 @@ const ListItem: React.FC<ListItemProps> = ({
     );
 };
 ListItem.displayName = COMPONENT_NAME;
+ListItem.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize, ListItemSizes, isClickable };
+export { CLASSNAME, ListItem, ListItemProps, ListItemSize, ListItemSizes, isClickable };

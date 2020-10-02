@@ -5,10 +5,12 @@ import fromPairs from 'lodash/fromPairs';
 import React from 'react';
 
 import isArray from 'lodash/isArray';
-import { DEFAULT_PROPS, FlexBox, FlexBoxProps } from './FlexBox';
+import { FlexBox, FlexBoxProps } from './FlexBox';
 /*  tslint:disable object-literal-sort-keys */
 
 export default { title: 'LumX components/flex-box/FlexBox' };
+
+const DEFAULT_PROPS = FlexBox.defaultProps as any;
 
 type FlexBoxPropName = keyof FlexBoxProps;
 const flexViewKnobConfigs: Array<
