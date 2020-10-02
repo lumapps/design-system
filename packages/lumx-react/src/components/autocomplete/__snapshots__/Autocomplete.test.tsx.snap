@@ -24,6 +24,9 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         "current": null,
       }
     }
+    closeOnClick={false}
+    closeOnClickAway={true}
+    closeOnEscape={true}
     isOpen={false}
     shouldFocusOnOpen={false}
   >
@@ -123,6 +126,9 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
+    closeOnClick={false}
+    closeOnClickAway={true}
+    closeOnEscape={true}
     isOpen={true}
     shouldFocusOnOpen={false}
   >

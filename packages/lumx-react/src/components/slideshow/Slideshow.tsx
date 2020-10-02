@@ -15,28 +15,23 @@ import { SlideshowControls } from './SlideshowControls';
  * Defines the props of the component.
  */
 interface SlideshowProps extends GenericProps {
-    /** Index of the current slide */
+    /** The index of the current slide. */
     activeIndex?: number;
-    /** Enable/disable automatic rotation of slideshow */
+    /** Whether the automatic rotation of the slideshow is enabled or not. */
     autoPlay?: boolean;
-    /** Whether the image has to fill its container's height. */
+    /** Whether the image has to fill its container height or not. */
     fillHeight?: boolean;
-    /** Enable grouping of slides */
+    /** The number of slides to group together. */
     groupBy?: number;
-    /** Enable/disable controls for slideshow */
+    /** Whether slideshow has controls or not. */
     hasControls?: boolean;
-    /** Interval between each slide when automatic rotation is enabled */
+    /** The interval between each slide when automatic rotation is enabled. */
     interval?: number;
-    /** Theme */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SlideshowProps> {}
 
 /**
  * The display name of the component.
@@ -51,7 +46,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<SlideshowProps> = {
     activeIndex: 0,
     autoPlay: false,
     fillHeight: false,
@@ -61,11 +56,6 @@ const DEFAULT_PROPS: DefaultPropsType = {
     theme: Theme.light,
 };
 
-/**
- * Displays a slideshow.
- *
- * @return The component.
- */
 const Slideshow: React.FC<SlideshowProps> = ({
     activeIndex = DEFAULT_PROPS.activeIndex as number,
     autoPlay = DEFAULT_PROPS.autoPlay,

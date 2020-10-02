@@ -14,30 +14,20 @@ import { useInteractiveList } from './useInteractiveList';
  * Defines the props of the component.
  */
 interface ListProps extends GenericProps {
-    /** List content (should use `<ListItem>`, `<ListSubheader>` or `<ListDivider>`) */
+    /** The children elements to be transcluded into the component. Should be ListItem, ListSubheader or ListDivider. */
     children: ReactNode;
-
     /**
      * Whether the list items are clickable.
      * @deprecated not needed anymore.
      */
     isClickable?: boolean;
-
-    /** Item padding size. */
+    /** The item padding size. */
     itemPadding?: Size.big | Size.huge;
-
-    /** The ref passed to the ul element. */
+    /** The reference passed to the <ul> element. */
     listElementRef?: Ref<HTMLUListElement>;
-
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-
-    /**
-     * Callback used to retrieved the select entry.
-     *
-     * @param key   React key of the selected item.
-     * @param index Index of the selected item among the sibling items.
-     */
+    /** The function called when a list item is selected. */
     onListItemSelected?(key: Key, index: number): void;
 }
 
@@ -55,23 +45,16 @@ interface List {
     useKeyboardListNavigation: useKeyboardListNavigationType;
 }
 
-/**
- * List component - Use vertical layout to display elements
- *
- * @param  props The component props.
- * @return The component.
- */
-const List: React.FC<ListProps> & List = (props) => {
-    const {
-        className,
-        isClickable,
-        itemPadding,
-        listElementRef,
-        onListItemSelected,
-        useCustomColors,
-        children,
-        ...forwardedProps
-    } = props;
+const List: React.FC<ListProps> & List = ({
+    children,
+    className,
+    isClickable,
+    itemPadding,
+    listElementRef,
+    onListItemSelected,
+    useCustomColors,
+    ...forwardedProps
+}) => {
     const ref = useRef<HTMLUListElement>(null);
 
     const { items, hasClickableItem } = useInteractiveList({

@@ -11,21 +11,17 @@ type GridGutterSize = Size.regular | Size.big | Size.huge;
  * Defines the props of the component.
  */
 interface GridProps extends GenericProps {
+    /** The grid orientation. */
     orientation?: Orientation;
-    /* Should children wrap */
+    /** Whether the children are wrapped or not. */
     wrap?: string;
-    /* How we should vertically align the children */
+    /** The grid vertical alignment. */
     vAlign?: Alignment;
-    /* How we should horizontally align the children */
+    /** The grid horizontal alignment. */
     hAlign?: Alignment;
-    /* Grid gutters */
+    /** The grid gutter size. */
     gutter?: GridGutterSize;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<GridProps> {}
 
 /**
  * The display name of the component.
@@ -43,16 +39,11 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<GridProps> = {
     orientation: Orientation.horizontal,
     wrap: 'nowrap',
 };
 
-/**
- * Grid layout component.
- *
- * @return The component.
- */
 const Grid: React.FC<GridProps> = ({
     children,
     className,

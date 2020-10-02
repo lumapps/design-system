@@ -18,22 +18,17 @@ type AvatarSize = Size.xs | Size.s | Size.m | Size.l | Size.xl | Size.xxl;
  * Defines the props of the component.
  */
 interface AvatarProps extends GenericProps {
-    /** Actions elements to be transcluded into the component */
+    /** The action elements to be transcluded into the component. */
     actions?: HTMLElement | ReactNode;
-    /** Avatar badge */
+    /** The optional avatar badge. */
     badge?: ReactElement;
-    /** Size. */
-    size?: AvatarSize;
-    /** Theme. */
-    theme?: Theme;
-    /** Avatar image */
+    /** The avatar image URL. */
     image: string;
+    /** The size variant of the component. */
+    size?: AvatarSize;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<AvatarProps> {}
 
 /**
  * The display name of the component.
@@ -48,25 +43,18 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    actions: undefined,
-    badge: undefined,
+const DEFAULT_PROPS: Partial<AvatarProps> = {
     size: Size.m,
     theme: Theme.light,
 };
 
-/**
- * Simple component used to identify user.
- *
- * @return The component.
- */
 const Avatar: React.FC<AvatarProps> = ({
-    actions = DEFAULT_PROPS.actions,
-    badge = DEFAULT_PROPS.badge,
+    actions,
+    badge,
     className,
+    image,
     size = DEFAULT_PROPS.size,
     theme = DEFAULT_PROPS.theme,
-    image,
     ...forwardedProps
 }) => {
     const style: CSSProperties = {

@@ -29,35 +29,23 @@ enum NotificationType {
  * Defines the props of the component.
  */
 interface NotificationProps extends GenericProps {
-    /** Label for action button. */
+    /** The label of the action button. */
     actionLabel?: string;
-
-    /** Content of notification. */
+    /** The content of the notification. */
     content?: React.ReactNode;
-
-    /** Whether notification is open or not. */
+    /** Whether the component is open or not. */
     isOpen?: boolean;
-
-    /** Theme */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-
-    /** Type of notification (info, success, warning, error). */
+    /** The type of notification (error or success for example). */
     type?: NotificationType;
-
     /** The z-axis position. */
     zIndex?: number;
-
-    /** Callback function for action button. */
+    /** The function called on click on the action button. */
     onActionClick?(): void;
-
-    /** Function to handle click on the notification. */
+    /** The function called on click on the component. */
     onClick?(): void;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<NotificationProps> {}
 
 /**
  * The display name of the component.
@@ -72,7 +60,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<NotificationProps> = {
     content: '',
     theme: Theme.light,
     zIndex: 9999,
@@ -84,12 +72,12 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The notification component.
  */
 const Notification: React.FC<NotificationProps> = ({
-    onActionClick,
     actionLabel,
-    content = DEFAULT_PROPS.content,
     className,
-    onClick,
+    content = DEFAULT_PROPS.content,
     isOpen = false,
+    onActionClick,
+    onClick,
     theme = DEFAULT_PROPS.theme,
     type,
     zIndex = DEFAULT_PROPS.zIndex,

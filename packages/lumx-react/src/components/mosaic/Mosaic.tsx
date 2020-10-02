@@ -14,11 +14,11 @@ interface ClickableThumbnailProps
     onClick?(index: number): void;
 }
 interface MosaicProps extends GenericProps {
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
+    /** The list of thumbnails. */
     thumbnails: ClickableThumbnailProps[];
 }
-
-interface DefaultPropsType extends Partial<MosaicProps> {}
 
 /**
  * The display name of the component.
@@ -33,9 +33,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,
 };
+
 const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme, thumbnails, ...forwardedProps }) => (
     <div
         {...forwardedProps}

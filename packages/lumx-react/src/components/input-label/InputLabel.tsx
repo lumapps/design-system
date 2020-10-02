@@ -8,12 +8,13 @@ import React, { ReactNode } from 'react';
  * Defines the props of the component.
  */
 interface InputLabelProps extends GenericProps {
-    isRequired?: boolean;
-    theme?: Theme;
+    /** The children elements to be transcluded into the component. */
     children: string | ReactNode;
+    /** Whether the component is required or not. */
+    isRequired?: boolean;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
 }
-
-interface DefaultPropsType extends Partial<InputLabelProps> {}
 
 /**
  * The display name of the component.
@@ -28,16 +29,16 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<InputLabelProps> = {
     isRequired: false,
     theme: Theme.light,
 };
 
 const InputLabel: React.FC<InputLabelProps> = ({
+    children,
     className,
     isRequired = DEFAULT_PROPS.isRequired,
     theme = DEFAULT_PROPS.theme,
-    children,
     ...forwardedProps
 }) => (
     <label

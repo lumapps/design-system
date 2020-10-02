@@ -14,28 +14,18 @@ import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } f
 /**
  * Defines the props of the component.
  */
-interface ProgressTrackerStepProps extends GenericProps {}
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {
+interface ProgressTrackerStepProps extends GenericProps {
     /** Whether the step should be in error state or not. */
     hasError?: boolean;
-
-    /** The step's helper text. */
+    /** The helper of the step. */
     helper?: string | null;
-
-    /** Whether the current step is active. */
-    isActive: boolean;
-
-    /** Whether the current step is completed. */
-    isComplete: boolean;
-
-    /** The step's label. */
+    /** Whether the current step is active or not. */
+    isActive?: boolean;
+    /** Whether the current step is completed or not. */
+    isComplete?: boolean;
+    /** The label of the step. */
     label: string | null;
-
-    /** The component theme to apply. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
 
@@ -52,7 +42,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {
     hasError: false,
     helper: null,
     isActive: false,
@@ -74,10 +64,9 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     isComplete = DEFAULT_PROPS.isComplete,
     label = DEFAULT_PROPS.label,
     theme = DEFAULT_PROPS.theme,
-    ...props
+    onClick = null,
+    ...forwardedProps
 }) => {
-    const { onClick = null, ...forwardedProps }: ProgressTrackerStepProps = props;
-
     const isClickable: boolean = isFunction(onClick);
 
     /**

@@ -11,24 +11,13 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface TableProps extends GenericProps {
-    /**
-     * Whether the table has checkbox or thumbnail on first cell.
-     */
+    /** Whether the table has checkbox or thumbnail on first cell or not. */
     hasBefore?: boolean;
-    /**
-     * Whether the table has dividers.
-     */
+    /** Whether the table has dividers or not. */
     hasDividers?: boolean;
-    /**
-     * The theme.
-     */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TableProps> {}
 
 /**
  * The display name of the component.
@@ -43,7 +32,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<TableProps> = {
     hasBefore: false,
     hasDividers: false,
     theme: Theme.light,
@@ -57,8 +46,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Table: React.FC<TableProps> = ({
     children,
     className,
-    hasBefore,
-    hasDividers,
+    hasBefore = DEFAULT_PROPS.hasBefore,
+    hasDividers = DEFAULT_PROPS.hasDividers,
     theme = DEFAULT_PROPS.theme,
     ...forwardedProps
 }) => (

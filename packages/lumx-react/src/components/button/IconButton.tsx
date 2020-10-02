@@ -10,16 +10,11 @@ import { getRootClassName } from '@lumx/react/utils';
  */
 interface IconButtonProps extends BaseButtonProps {
     /**
-     * The icon used as the button label.
+     * The icon name to use as the button label.
      * @see {@link IconProps#icon}
      */
     icon: string;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<IconButtonProps> {}
 
 /**
  * The display name of the component.
@@ -34,18 +29,12 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<IconButtonProps> = {
     emphasis: Emphasis.high,
     size: Size.m,
     theme: Theme.light,
 };
 
-/**
- * Displays an icon button.
- *
- * @param  props The component props.
- * @return The component.
- */
 const IconButton: React.FC<IconButtonProps> = (props) => {
     const {
         emphasis = DEFAULT_PROPS.emphasis,

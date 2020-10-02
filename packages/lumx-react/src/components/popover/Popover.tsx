@@ -63,36 +63,36 @@ const OFFSET = 8;
  * Defines the props of the component.
  */
 interface PopoverProps extends GenericProps {
-    /** The reference of the anchor. */
+    /** The reference of the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
-    /** Children element displayed inside popover. */
+    /** The children elements to be transcluded into the component. */
     children: ReactNode;
-    /** Whether the popover is open */
-    isOpen: boolean;
-    /** The reference of the popover. */
-    popoverRef?: React.RefObject<HTMLDivElement>;
-    /** The desired placement */
-    placement?: Placement;
-    /** The desired offset */
-    offset?: Offset;
-    /** How high the component is flying */
-    elevation?: Elevation;
-    /** The z-axis position. */
-    zIndex?: number;
-    /** Whether the dropdown should fit to the anchor width (if dropdown is smaller). */
-    fitToAnchorWidth?: boolean;
-    /** Shrink popover if even after flipping there is not enough space */
-    fitWithinViewportHeight?: boolean;
     /** Whether a click anywhere out of the popover would close it. */
     closeOnClickAway?: boolean;
     /** Whether an escape key press would close the popover. */
     closeOnEscape?: boolean;
-    /** Whether we put an arrow or not. */
-    hasArrow?: boolean;
+    /** How high the component is flying. */
+    elevation?: Elevation;
+    /** Whether the dropdown should fit to the anchor width (if dropdown is smaller). */
+    fitToAnchorWidth?: boolean;
+    /** Shrink popover if even after flipping there is not enough space. */
+    fitWithinViewportHeight?: boolean;
     /** Element to focus when opening the popover. */
     focusElement?: RefObject<HTMLElement>;
-    /** The function to be called when the user clicks away or Escape is pressed */
-    onClose?: VoidFunction;
+    /** Whether we put an arrow or not. */
+    hasArrow?: boolean;
+    /** Whether the popover is open or not. */
+    isOpen: boolean;
+    /** The desired offset. */
+    offset?: Offset;
+    /** The desired placement. */
+    placement?: Placement;
+    /** The reference of the popover. */
+    popoverRef?: React.RefObject<HTMLDivElement>;
+    /** The z-axis position. */
+    zIndex?: number;
+    /** The function to be called when the user clicks away or Escape is pressed. */
+    onClose?(): void;
 }
 
 /**
@@ -109,14 +109,14 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<PopoverProps> = {
-    elevation: 3,
-    placement: Placement.AUTO,
-    zIndex: 9999,
-    fitToAnchorWidth: false,
-    fitWithinViewportHeight: false,
     closeOnClickAway: false,
     closeOnEscape: false,
+    elevation: 3,
+    fitToAnchorWidth: false,
+    fitWithinViewportHeight: false,
     hasArrow: false,
+    placement: Placement.AUTO,
+    zIndex: 9999,
 };
 
 /**
@@ -174,32 +174,25 @@ const applyMaxHeight = {
     },
 };
 
-/**
- * Popover.
- *
- * @param  props The component props.
- * @return The component.
- */
-const Popover: React.FC<PopoverProps> = (props) => {
-    const {
-        anchorRef,
-        popoverRef,
-        placement,
-        isOpen,
-        children,
-        fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
-        fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
-        offset,
-        elevation = DEFAULT_PROPS.elevation,
-        zIndex = DEFAULT_PROPS.zIndex,
-        closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
-        closeOnEscape = DEFAULT_PROPS.closeOnEscape,
-        hasArrow = DEFAULT_PROPS.hasArrow,
-        focusElement,
-        className,
-        onClose,
-        ...forwardedProps
-    } = props;
+const Popover: React.FC<PopoverProps> = ({
+    anchorRef,
+    children,
+    className,
+    closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
+    closeOnEscape = DEFAULT_PROPS.closeOnEscape,
+    elevation = DEFAULT_PROPS.elevation,
+    fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
+    fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
+    focusElement,
+    hasArrow = DEFAULT_PROPS.hasArrow,
+    isOpen,
+    offset,
+    onClose,
+    placement = DEFAULT_PROPS.placement,
+    popoverRef,
+    zIndex = DEFAULT_PROPS.zIndex,
+    ...forwardedProps
+}) => {
     const [popperElement, setPopperElement] = useState<null | HTMLElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
 

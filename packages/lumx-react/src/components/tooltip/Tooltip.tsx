@@ -18,28 +18,19 @@ import { useTooltipOpen } from './useTooltipOpen';
 type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
 
 /**
- * Defines the optional props of the component.
- */
-interface OptionalTooltipProps extends GenericProps {
-    /** Delay in ms before closing the tooltip . */
-    delay?: number;
-
-    /** Placement of tooltip relative to the anchor element. */
-    placement?: TooltipPlacement;
-
-    /** Force tooltip to show even without the mouse over the anchor. */
-    forceOpen?: boolean;
-}
-
-/**
  * Defines the props of the component.
  */
-interface TooltipProps extends OptionalTooltipProps {
-    /** Tooltip label. */
-    label?: string | null | false;
-
-    /** Tooltip anchor. */
+interface TooltipProps extends GenericProps {
+    /** The children elements to be transcluded into the component. Will act as the tooltip anchor. */
     children: ReactNode;
+    /** The delay (in ms) before closing the tooltip. */
+    delay?: number;
+    /** Whether the tooltip is displayed even without the mouse hovering the anchor. */
+    forceOpen?: boolean;
+    /** The label of the tooltip. */
+    label?: string | null | false;
+    /** The placement of the tooltip based on the anchor element placement. */
+    placement?: TooltipPlacement;
 }
 
 /**
@@ -55,10 +46,10 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Required<OptionalTooltipProps> = {
+const DEFAULT_PROPS: Partial<TooltipProps> = {
     delay: 500,
-    placement: Placement.BOTTOM,
     forceOpen: false,
+    placement: Placement.BOTTOM,
 };
 
 /**
@@ -66,23 +57,15 @@ const DEFAULT_PROPS: Required<OptionalTooltipProps> = {
  */
 const OFFSET = 8;
 
-/**
- * Tooltip.
- *
- * @see WAI-ARIA https://www.w3.org/TR/wai-aria-practices/#tooltip
- * @param  props The component props.
- * @return The component.
- */
-const Tooltip: React.FC<TooltipProps> = (props) => {
-    const {
-        label,
-        children,
-        className,
-        delay = DEFAULT_PROPS.delay,
-        placement = DEFAULT_PROPS.placement,
-        forceOpen = DEFAULT_PROPS.forceOpen,
-        ...forwardedProps
-    } = props;
+const Tooltip: React.FC<TooltipProps> = ({
+    children,
+    className,
+    delay = DEFAULT_PROPS.delay as number,
+    forceOpen = DEFAULT_PROPS.forceOpen as boolean,
+    label,
+    placement = DEFAULT_PROPS.placement,
+    ...forwardedProps
+}) => {
     if (!label) {
         return <>{children}</>;
     }

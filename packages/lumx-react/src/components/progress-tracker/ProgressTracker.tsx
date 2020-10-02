@@ -10,15 +10,10 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 /**
  * Defines the props of the component.
  */
-interface ProgressTrackerProps extends GenericProps {}
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ProgressTrackerProps> {
+interface ProgressTrackerProps extends GenericProps {
     /** The active step index. */
     activeStep: number;
-    /** The current component theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
 }
 
@@ -35,21 +30,13 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {
     activeStep: 0,
     theme: Theme.light,
 };
 
-/**
- * Displays a track of steps.
- *
- * Each step can have multiple attributes defining their current state to keep the user
- * aware of it's position in the process.
- *
- * @return The component.
- */
 const ProgressTracker: React.FC<ProgressTrackerProps> = ({
-    activeStep = DEFAULT_PROPS.activeStep,
+    activeStep = DEFAULT_PROPS.activeStep as number,
     children,
     className,
     theme = DEFAULT_PROPS.theme,

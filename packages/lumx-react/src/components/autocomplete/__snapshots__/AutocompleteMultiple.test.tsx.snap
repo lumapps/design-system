@@ -5,6 +5,8 @@ exports[`<AutocompleteMultiple> Snapshots and structure should render correctly 
   chips={<ChipGroup />}
   className="lumx-autocomplete-multiple"
   closeOnClick={false}
+  closeOnClickAway={true}
+  closeOnEscape={true}
   isOpen={true}
   onChange={[MockFunction]}
   value=""

@@ -8,14 +8,9 @@ import React, { ReactNode } from 'react';
  * Defines the props of the component.
  */
 interface BadgeProps extends GenericProps {
-    /**
-     * Badge content.
-     */
+    /** The children elements to be transcluded into the component. */
     children?: ReactNode;
-
-    /**
-     * The badge color.
-     */
+    /** The color variant of the component. */
     color?: Color;
 }
 
@@ -32,14 +27,14 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: BadgeProps = {
+const DEFAULT_PROPS: Partial<BadgeProps> = {
     color: ColorPalette.primary,
 };
 
-const Badge: React.FC<BadgeProps> = ({ color = DEFAULT_PROPS.color, className, ...forwardedProps }) => {
+const Badge: React.FC<BadgeProps> = ({ children, className, color = DEFAULT_PROPS.color, ...forwardedProps }) => {
     return (
         <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color }))}>
-            {forwardedProps.children}
+            {children}
         </div>
     );
 };

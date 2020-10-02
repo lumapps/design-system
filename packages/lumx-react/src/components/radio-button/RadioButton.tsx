@@ -13,41 +13,27 @@ import uniqueId from 'lodash/uniqueId';
  * Defines the props of the component.
  */
 interface RadioButtonProps extends GenericProps {
+    /** The helper of the radio button. */
+    helper?: string;
+    /** The native input id property. */
+    id?: string;
     /** Whether it is checked or not. */
     isChecked?: boolean;
-
-    /**  Whether or not the radio button is disabled. */
+    /** Whether the component is disabled or not. */
     isDisabled?: boolean;
-
-    /** Radio button helper. */
-    helper?: string;
-
-    /** Native radio input id. */
-    id?: string;
-
-    /** Radio button label. */
+    /** The label of the radio button. */
     label?: ReactNode;
-
-    /** Native input name. */
+    /** The native input name property. */
     name?: string;
-
-    /** Theme. */
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-
-    /** Whether custom colors are applied to this component. */
+    /** Whether custom colors are applied to this component or not. */
     useCustomColors?: boolean;
-
-    /** Native input value. */
+    /** The native input value property. */
     value?: string;
-
-    /** Handle onChange event. */
+    /** The function called on change. */
     onChange?(value?: string, name?: string, event?: SyntheticEvent): void;
 }
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<RadioButtonProps> {}
 
 /**
  * The display name of the component.
@@ -62,33 +48,26 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     theme: Theme.light,
 };
 
-/**
- * Defines a radio button.
- *
- * @param  props The component props.
- * @return The component.
- */
-const RadioButton: React.FC<RadioButtonProps> = (props) => {
-    const {
-        className,
-        checked,
-        isChecked = checked,
-        disabled,
-        isDisabled = disabled,
-        helper,
-        id,
-        label,
-        name,
-        theme = DEFAULT_PROPS.theme,
-        useCustomColors,
-        value,
-        onChange,
-        ...forwardedProps
-    } = props;
+const RadioButton: React.FC<RadioButtonProps> = ({
+    checked,
+    className,
+    disabled,
+    helper,
+    id,
+    isChecked = checked,
+    isDisabled = disabled,
+    label,
+    name,
+    onChange,
+    theme = DEFAULT_PROPS.theme,
+    useCustomColors,
+    value,
+    ...forwardedProps
+}) => {
     const radioButtonId: string = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {
