@@ -47,6 +47,7 @@ const SelectField: React.FC<SelectProps> = ({
     handleKeyboardNav,
     hasError,
     hasInputClear,
+    id,
     isDisabled,
     isEmpty,
     isRequired,
@@ -56,7 +57,6 @@ const SelectField: React.FC<SelectProps> = ({
     onInputClick,
     placeholder,
     selectedValueRender,
-    targetUuid,
     theme,
     value,
     variant,
@@ -68,7 +68,7 @@ const SelectField: React.FC<SelectProps> = ({
                     {label && (
                         <div className={`${CLASSNAME}__header`}>
                             <InputLabel
-                                htmlFor={targetUuid}
+                                htmlFor={id}
                                 className={`${CLASSNAME}__label`}
                                 isRequired={isRequired}
                                 theme={theme}
@@ -80,7 +80,7 @@ const SelectField: React.FC<SelectProps> = ({
 
                     <div
                         ref={anchorRef as RefObject<HTMLDivElement>}
-                        id={targetUuid}
+                        id={id}
                         className={`${CLASSNAME}__wrapper`}
                         onClick={onInputClick}
                         onKeyDown={handleKeyboardNav}
@@ -125,7 +125,7 @@ const SelectField: React.FC<SelectProps> = ({
 
             {variant === SelectVariant.chip && (
                 <Chip
-                    id={targetUuid}
+                    id={id}
                     isSelected={!isEmpty}
                     isDisabled={isDisabled}
                     after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
@@ -143,7 +143,7 @@ const SelectField: React.FC<SelectProps> = ({
     );
 };
 
-const Select = (props: SelectProps) => {
+const Select: React.FC<SelectProps> = (props) => {
     const isEmpty = lodashIsEmpty(props.value);
     const hasInputClear = props.onClear && !isEmpty;
 

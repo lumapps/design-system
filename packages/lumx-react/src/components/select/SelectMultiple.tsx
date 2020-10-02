@@ -62,6 +62,7 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     anchorRef,
     handleKeyboardNav,
     hasError,
+    id,
     isDisabled,
     isEmpty,
     isRequired,
@@ -72,7 +73,6 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     placeholder,
     selectedChipRender,
     selectedValueRender,
-    targetUuid,
     theme,
     value,
     variant,
@@ -83,7 +83,7 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
                 {label && (
                     <div className={`${CLASSNAME}__header`}>
                         <InputLabel
-                            htmlFor={targetUuid}
+                            htmlFor={id}
                             className={`${CLASSNAME}__label`}
                             isRequired={isRequired}
                             theme={theme}
@@ -95,7 +95,7 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
 
                 <div
                     ref={anchorRef as RefObject<HTMLDivElement>}
-                    id={targetUuid}
+                    id={id}
                     className={`${CLASSNAME}__wrapper`}
                     onClick={onInputClick}
                     onKeyDown={handleKeyboardNav}
@@ -138,7 +138,7 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
 
         {variant === SelectVariant.chip && (
             <Chip
-                id={targetUuid}
+                id={id}
                 isSelected={!isEmpty}
                 isDisabled={isDisabled}
                 after={<Icon icon={isEmpty ? mdiMenuDown : mdiCloseCircle} />}
@@ -161,7 +161,7 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     </>
 );
 
-const SelectMultiple = (props: any) =>
+const SelectMultiple: React.FC<SelectMultipleProps> = (props) =>
     withSelectContext(SelectMultipleField, {
         ...props,
         className: classNames(

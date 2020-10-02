@@ -9,7 +9,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface RadioGroupProps extends GenericProps {
-    /** The children elements to be transcluded into the component. Should use RadioButton. */
+    /** The children elements. Should use RadioButton. */
     children: ReactNode;
 }
 

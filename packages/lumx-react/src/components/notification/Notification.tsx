@@ -72,11 +72,11 @@ const DEFAULT_PROPS: Partial<NotificationProps> = {
  */
 const Notification: React.FC<NotificationProps> = ({
     actionLabel,
-    content,
     className,
+    content,
+    isOpen,
     onActionClick,
     onClick,
-    isOpen,
     theme,
     type,
     zIndex,

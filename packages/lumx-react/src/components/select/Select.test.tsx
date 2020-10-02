@@ -15,6 +15,8 @@ import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
 import { CLASSNAME, Select, SelectProps, SelectVariant } from './Select';
 import { DEFAULT_PROPS } from './WithSelectContext';
 
+jest.mock('uuid/v4', () => () => 'uuid');
+
 /** Define the overriding properties waited by the `setup` function. */
 type SetupProps = Partial<SelectProps>;
 
@@ -61,7 +63,7 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
         helper: wrapper.findWhere(
             (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.info,
         ),
-        input: wrapper.find('#uuid').first(),
+        input: wrapper.find('#select-uuid:not(SelectField)').first(),
         props,
         wrapper,
     };

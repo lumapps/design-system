@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
+import uuid from 'uuid/v4';
 
 import { Kind, Theme } from '@lumx/react/components';
 import { Dropdown } from '@lumx/react/components/dropdown/Dropdown';
@@ -84,32 +85,33 @@ const withSelectContext = (
     {
         children,
         className,
+        isMultiple,
+        closeOnClick = !isMultiple,
+        disabled,
         error,
         hasError,
         helper,
-        disabled,
+        id,
         isDisabled = disabled,
         isEmpty,
-        isMultiple,
         isOpen,
         isRequired,
         isValid,
-        closeOnClick = !isMultiple,
         label,
-        placeholder,
-        theme = DEFAULT_PROPS.theme,
-        useCustomColors,
-        value,
-        variant = DEFAULT_PROPS.variant,
         onBlur,
         onClear,
         onDropdownClose,
         onInfiniteScroll,
         onInputClick,
+        placeholder,
+        theme = DEFAULT_PROPS.theme,
+        useCustomColors,
+        value,
+        variant = DEFAULT_PROPS.variant,
         ...forwardedProps
     }: SelectProps,
 ): React.ReactElement => {
-    const targetUuid = 'uuid';
+    const selectId = useMemo(() => id || `select-${uuid()}`, [id]);
     const anchorRef = useRef<HTMLElement>(null);
     const selectRef = useRef<HTMLDivElement>(null);
     const [isFocus, setIsFocus] = useState(Boolean(isOpen));
@@ -172,7 +174,7 @@ const withSelectContext = (
                 isValid={isValid}
                 label={label}
                 placeholder={placeholder}
-                targetUuid={targetUuid}
+                id={selectId}
                 theme={theme}
                 value={value}
                 variant={variant}

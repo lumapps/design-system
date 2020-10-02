@@ -13,7 +13,7 @@ import { AvatarProps } from '../avatar/Avatar';
  * Defines the props of the component.
  */
 interface CommentBlockProps extends GenericProps {
-    /** The action elements to be transcluded into the component. */
+    /** The action elements. */
     actions?: HTMLElement | ReactNode;
     /**
      * The url of the avatar picture we want to display.
@@ -22,7 +22,7 @@ interface CommentBlockProps extends GenericProps {
     avatar: string;
     /** The props to pass to the avatar, minus those already set by the CommentBlock props. */
     avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'tabIndex' | 'onClick' | 'onKeyPress'>;
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children?: HTMLElement | ReactNode;
     /** The timestamp of the component. */
     date: string;
@@ -84,7 +84,7 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     onMouseLeave,
     text,
     theme,
-}: CommentBlockProps): React.ReactElement => {
+}) => {
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
             onClick();

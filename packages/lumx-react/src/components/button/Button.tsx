@@ -18,7 +18,7 @@ const ButtonEmphasis = Emphasis;
  * Defines the props of the component.
  */
 interface ButtonProps extends BaseButtonProps {
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children?: ReactNode;
     /**
      * The icon name to place at the left of the button label.
@@ -52,7 +52,7 @@ const DEFAULT_PROPS: Partial<ButtonProps> = {
 };
 
 const Button: React.FC<ButtonProps> = (props) => {
-    const { className, children, emphasis, leftIcon, rightIcon, size, theme, ...forwardedProps } = props;
+    const { children, className, emphasis, leftIcon, rightIcon, size, theme, ...forwardedProps } = props;
 
     const buttonClassName = classNames(
         className,

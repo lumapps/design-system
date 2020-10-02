@@ -13,17 +13,17 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface PostBlockProps extends GenericProps {
-    /** The action elements to be transcluded into the component. */
+    /** The action elements. */
     actions?: ReactNode;
-    /** The attachment elements to be transcluded into the component. */
+    /** The attachment elements. */
     attachments?: ReactNode;
-    /** The author element to be transcluded into the component. */
+    /** The author element. */
     author?: ReactNode;
-    /** The meta elements to be transcluded into the component. */
+    /** The meta elements. */
     meta?: ReactNode;
     /** The orientation. */
     orientation?: Orientation;
-    /** The tag elements to be transcluded into the component. */
+    /** The tag elements. */
     tags?: ReactNode;
     /** Content text. Can be either a string, or sanitized html. */
     text?: string | { __html: string };

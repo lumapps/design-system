@@ -23,7 +23,7 @@ enum TabsPosition {
 interface TabsProps extends GenericProps {
     /** The active tab. */
     activeTab?: number;
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children: ReactNode;
     /** The layout of the tabs. */
     layout?: TabsLayout;

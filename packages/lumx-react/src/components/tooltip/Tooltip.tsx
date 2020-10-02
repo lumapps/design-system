@@ -21,7 +21,7 @@ type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Pla
  * Defines the props of the component.
  */
 interface TooltipProps extends GenericProps {
-    /** The children elements to be transcluded into the component. Will act as the tooltip anchor. */
+    /** The children elements. Will act as the tooltip anchor. */
     children: ReactNode;
     /** The delay (in ms) before closing the tooltip. */
     delay?: number;

@@ -68,91 +68,87 @@ const DEFAULT_PROPS: Partial<AutocompleteMultipleProps> = {
     values: [],
 };
 
-const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
-    const {
-        anchorToInput,
-        children,
-        chipsAlignment,
-        className,
-        closeOnClickAway,
-        closeOnEscape,
-        fitToAnchorWidth,
-        hasError,
-        helper,
-        icon,
-        inputRef,
-        isClearable,
-        isDisabled,
-        isOpen,
-        isValid,
-        label,
-        name,
-        offset,
-        onBlur,
-        onChange,
-        onClear,
-        onClose,
-        onFocus,
-        onInfiniteScroll,
-        onKeyDown,
-        placeholder,
-        placement,
-        selectedChipRender,
-        shouldFocusOnClose,
-        theme,
-        type,
-        value,
-        values,
-        ...forwardedProps
-    } = props;
-
-    return (
-        <Autocomplete
-            {...forwardedProps}
-            anchorToInput={anchorToInput}
-            className={classNames(
-                className,
-                handleBasicClasses({
-                    prefix: CLASSNAME,
-                }),
-            )}
-            name={name}
-            value={value}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            onBlur={onBlur}
-            shouldFocusOnClose={shouldFocusOnClose}
-            onFocus={onFocus}
-            hasError={hasError}
-            helper={helper}
-            icon={icon}
-            inputRef={inputRef}
-            chips={
-                <ChipGroup align={chipsAlignment}>
-                    {values!.map((chip: object, index: number) => selectedChipRender!(chip, index, onClear))}
-                </ChipGroup>
-            }
-            isDisabled={isDisabled}
-            isClearable={isClearable}
-            isValid={isValid}
-            label={label}
-            placeholder={placeholder}
-            theme={theme}
-            type={type}
-            isOpen={isOpen}
-            closeOnClick={false}
-            closeOnClickAway={closeOnClickAway}
-            closeOnEscape={closeOnEscape}
-            onClose={onClose}
-            offset={offset}
-            placement={placement}
-            fitToAnchorWidth={fitToAnchorWidth}
-            onInfiniteScroll={onInfiniteScroll}
-        >
-            {children}
-        </Autocomplete>
-    );
-};
+const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = ({
+    anchorToInput,
+    children,
+    chipsAlignment,
+    className,
+    closeOnClickAway,
+    closeOnEscape,
+    fitToAnchorWidth,
+    hasError,
+    helper,
+    icon,
+    inputRef,
+    isClearable,
+    isDisabled,
+    isOpen,
+    isValid,
+    label,
+    name,
+    offset,
+    onBlur,
+    onChange,
+    onClear,
+    onClose,
+    onFocus,
+    onInfiniteScroll,
+    onKeyDown,
+    placeholder,
+    placement,
+    selectedChipRender,
+    shouldFocusOnClose,
+    theme,
+    type,
+    value,
+    values,
+    ...forwardedProps
+}) => (
+    <Autocomplete
+        {...forwardedProps}
+        anchorToInput={anchorToInput}
+        className={classNames(
+            className,
+            handleBasicClasses({
+                prefix: CLASSNAME,
+            }),
+        )}
+        name={name}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        onBlur={onBlur}
+        shouldFocusOnClose={shouldFocusOnClose}
+        onFocus={onFocus}
+        hasError={hasError}
+        helper={helper}
+        icon={icon}
+        inputRef={inputRef}
+        chips={
+            <ChipGroup align={chipsAlignment}>
+                {values!.map((chip: object, index: number) => selectedChipRender!(chip, index, onClear))}
+            </ChipGroup>
+        }
+        isDisabled={isDisabled}
+        isClearable={isClearable}
+        isValid={isValid}
+        label={label}
+        placeholder={placeholder}
+        theme={theme}
+        type={type}
+        isOpen={isOpen}
+        closeOnClick={false}
+        closeOnClickAway={closeOnClickAway}
+        closeOnEscape={closeOnEscape}
+        onClose={onClose}
+        offset={offset}
+        placement={placement}
+        fitToAnchorWidth={fitToAnchorWidth}
+        onInfiniteScroll={onInfiniteScroll}
+    >
+        {children}
+    </Autocomplete>
+);
 AutocompleteMultiple.displayName = COMPONENT_NAME;
 AutocompleteMultiple.defaultProps = DEFAULT_PROPS;
 

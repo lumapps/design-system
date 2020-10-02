@@ -31,11 +31,9 @@ const DEFAULT_PROPS: Partial<DividerProps> = {
     theme: Theme.light,
 };
 
-const Divider: React.FC<DividerProps> = ({ className, theme, ...forwardedProps }) => {
-    return (
-        <hr {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} />
-    );
-};
+const Divider: React.FC<DividerProps> = ({ className, theme, ...forwardedProps }) => (
+    <hr {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} />
+);
 Divider.displayName = COMPONENT_NAME;
 Divider.defaultProps = DEFAULT_PROPS;
 

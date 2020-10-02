@@ -10,7 +10,7 @@ import { INPUT_HELPER_CONFIGURATION } from './constants';
  * Defines the props of the component.
  */
 interface InputHelperProps extends GenericProps {
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children: string | ReactNode;
     /** The kind of helper (error or sucess for exemple). */
     kind?: Kind;

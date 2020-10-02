@@ -28,6 +28,7 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
         variant="squared"
@@ -54,6 +55,7 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
         variant="squared"
@@ -80,6 +82,7 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
         variant="squared"
@@ -106,6 +109,7 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
         variant="squared"
@@ -143,6 +147,7 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -168,6 +173,7 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -193,6 +199,7 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -218,6 +225,7 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -254,6 +262,7 @@ exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] =
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -290,6 +299,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
         variant="squared"
@@ -316,6 +326,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
         variant="squared"
@@ -342,6 +353,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
         variant="squared"
@@ -368,6 +380,7 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         tabIndex="0"
         theme="light"
         variant="squared"
@@ -413,6 +426,7 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -438,6 +452,7 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -463,6 +478,7 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -499,6 +515,7 @@ exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] 
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />
@@ -524,6 +541,7 @@ exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] 
         isFollowingWindowSize={true}
         loading="lazy"
         onClick={[Function]}
+        resizeDebounceTime={20}
         theme="light"
         variant="squared"
       />

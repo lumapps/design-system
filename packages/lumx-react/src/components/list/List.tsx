@@ -14,7 +14,7 @@ import { useInteractiveList } from './useInteractiveList';
  * Defines the props of the component.
  */
 interface ListProps extends GenericProps {
-    /** The children elements to be transcluded into the component. Should be ListItem, ListSubheader or ListDivider. */
+    /** The children elements. Should be ListItem, ListSubheader or ListDivider. */
     children: ReactNode;
     /**
      * Whether the list items are clickable.

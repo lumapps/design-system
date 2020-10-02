@@ -16,7 +16,7 @@ enum MessageKind {
  * Defines the props of the component.
  */
 interface MessageProps extends GenericProps {
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children?: ReactNode;
     /** Whether the message has a background or not. */
     hasBackground?: boolean;

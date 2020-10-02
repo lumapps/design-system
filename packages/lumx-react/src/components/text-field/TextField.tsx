@@ -78,7 +78,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The minimum number of rows that we want to display on the text area
  */
-const MIN_ROWS = 2;
+const DEFAULT_MIN_ROWS = 2;
 
 /**
  * The default value of props.
@@ -234,42 +234,40 @@ const renderInputNative: React.FC<InputNativeProps> = (props) => {
     );
 };
 
-const TextField: React.FC<TextFieldProps> = (props) => {
-    const {
-        chips,
-        className,
-        error,
-        forceFocusStyle,
-        hasError,
-        helper,
-        icon,
-        id,
-        disabled,
-        isDisabled = disabled,
-        isRequired,
-        isClearable,
-        isValid,
-        label,
-        maxLength,
-        onChange,
-        onFocus,
-        onBlur,
-        placeholder,
-        minimumRows,
-        inputRef = React.useRef(null),
-        theme,
-        multiline,
-        useCustomColors,
-        textFieldRef,
-        type,
-        value,
-        name,
-        ...forwardedProps
-    } = props;
-
+const TextField: React.FC<TextFieldProps> = ({
+    chips,
+    className,
+    disabled,
+    error,
+    forceFocusStyle,
+    hasError,
+    helper,
+    icon,
+    id,
+    inputRef = React.useRef(null),
+    isClearable,
+    isDisabled = disabled,
+    isRequired,
+    isValid,
+    label,
+    maxLength,
+    minimumRows,
+    multiline,
+    name,
+    onBlur,
+    onChange,
+    onFocus,
+    placeholder,
+    textFieldRef,
+    theme,
+    type,
+    useCustomColors,
+    value,
+    ...forwardedProps
+}) => {
     const textFieldId = useMemo(() => id || `text-field-${uuid()}`, [id]);
     const [isFocus, setFocus] = useState(false);
-    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows || MIN_ROWS);
+    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(multiline ? minimumRows || DEFAULT_MIN_ROWS : 0);
     const valueLength = (value || '').length;
     const isNotEmpty = valueLength > 0;
 

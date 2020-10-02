@@ -25,9 +25,9 @@ interface UserBlockProps extends GenericProps {
     avatar?: string;
     /** The props to pass to the avatar, minus those already set by the UserBlock props. */
     avatarProps?: Omit<AvatarProps, 'image' | 'size' | 'onClick' | 'tabIndex' | 'theme'>;
-    /** The single action element to be transcluded into the component. */
+    /** The single action element. */
     simpleAction?: ReactNode;
-    /** The group of action elements to be transcluded into the component. */
+    /** The group of action elements. */
     multipleActions?: ReactNode;
     /** The additional fields used to describe the user. */
     fields?: string[];

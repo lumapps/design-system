@@ -54,9 +54,16 @@ const DEFAULT_PROPS: Partial<UploaderProps> = {
     variant: UploaderVariant.square,
 };
 
-const Uploader: React.FC<UploaderProps> = (props) => {
-    const { aspectRatio, className, label, icon, size, theme, variant, ...forwardedProps } = props;
-
+const Uploader: React.FC<UploaderProps> = ({
+    aspectRatio,
+    className,
+    label,
+    icon,
+    size,
+    theme,
+    variant,
+    ...forwardedProps
+}) => {
     // Adjust to square aspect ratio when using circle variants.
     const adjustedAspectRatio = variant === UploaderVariant.circle ? AspectRatio.square : aspectRatio;
 

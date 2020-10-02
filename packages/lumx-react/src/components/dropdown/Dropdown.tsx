@@ -16,7 +16,7 @@ interface DropdownProps extends GenericProps {
      * @see {@link PopoverProps#anchorRef}
      */
     anchorRef: React.RefObject<HTMLElement>;
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children: React.ReactNode;
     /**
      * Whether a click anywhere out of the Dropdown would close it or not.

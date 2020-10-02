@@ -24,7 +24,7 @@ import { IconButton } from '../button/IconButton';
  * Defines the props of the component.
  */
 interface SideNavigationItemProps extends GenericProps {
-    /** The children elements to be transcluded into the component. Should use SideNavigationItem. */
+    /** The children elements. Should use SideNavigationItem. */
     children?: ReactNode;
     /** The emphasis variant of the component. */
     emphasis?: Emphasis;
@@ -68,10 +68,10 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         children,
         className,
         emphasis,
-        label,
         icon,
         isOpen,
         isSelected,
+        label,
         linkAs,
         linkProps,
         onActionClick,

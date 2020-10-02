@@ -52,23 +52,22 @@ const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     theme: Theme.light,
 };
 
-const RadioButton: React.FC<RadioButtonProps> = (props) => {
-    const {
-        checked,
-        className,
-        disabled,
-        helper,
-        id,
-        isChecked = checked,
-        isDisabled = disabled,
-        label,
-        name,
-        onChange,
-        theme,
-        useCustomColors,
-        value,
-        ...forwardedProps
-    } = props;
+const RadioButton: React.FC<RadioButtonProps> = ({
+    checked,
+    className,
+    disabled,
+    helper,
+    id,
+    isChecked = checked,
+    isDisabled = disabled,
+    label,
+    name,
+    onChange,
+    theme,
+    useCustomColors,
+    value,
+    ...forwardedProps
+}) => {
     const radioButtonId: string = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (onChange) {

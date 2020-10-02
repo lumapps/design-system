@@ -65,7 +65,7 @@ const OFFSET = 8;
 interface PopoverProps extends GenericProps {
     /** The reference of the DOM element used to set the position of the popover. */
     anchorRef: React.RefObject<HTMLElement>;
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children: ReactNode;
     /** Whether a click anywhere out of the popover would close it. */
     closeOnClickAway?: boolean;
@@ -109,8 +109,6 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<PopoverProps> = {
-    closeOnClickAway: false,
-    closeOnEscape: false,
     elevation: 3,
     placement: Placement.AUTO,
     zIndex: 9999,

@@ -87,7 +87,7 @@ interface ImageBlockProps extends GenericProps {
      * @see {@link ThumbnailProps#size}
      */
     size?: ImageBlockSize;
-    /** Tags elements to be transcluded into the component */
+    /** The tags elements. */
     tags?: HTMLElement | ReactNode;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;

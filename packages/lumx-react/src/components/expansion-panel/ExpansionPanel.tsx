@@ -72,7 +72,7 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
         onClose,
         onOpen,
         onToggleOpen,
-        theme = DEFAULT_PROPS.theme,
+        theme,
         ...forwardedProps
     } = props;
 

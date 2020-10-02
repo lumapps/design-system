@@ -10,7 +10,7 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
  * Defines the props of the component.
  */
 interface ListSubheaderProps extends GenericProps {
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children: string | ReactNode;
 }
 

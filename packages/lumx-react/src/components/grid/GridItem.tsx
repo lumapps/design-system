@@ -36,14 +36,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<GridItemProps> = {};
 
-const GridItem: React.FC<GridItemProps> = ({
-    children,
-    className,
-    width,
-    align,
-    order,
-    ...forwardedProps
-}: GridItemProps): React.ReactElement => {
+const GridItem: React.FC<GridItemProps> = ({ children, className, width, align, order, ...forwardedProps }) => {
     return (
         <div
             {...forwardedProps}

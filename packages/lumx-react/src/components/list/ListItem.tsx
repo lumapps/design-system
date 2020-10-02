@@ -30,7 +30,7 @@ interface ListItemProps extends GenericProps {
     after?: ReactNode;
     /** A component to be rendered before the content. */
     before?: ReactNode;
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children: string | ReactNode;
     /** Whether the list item should be highlighted or not. */
     isHighlighted?: boolean;

@@ -89,7 +89,7 @@ interface AutocompleteProps extends GenericProps {
     placeholder?: string;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;
-    /** The children elements to be transcluded into the component. Should be a list of suggestions. */
+    /** The children elements. Should be a list of suggestions. */
     children: React.ReactNode;
     /**
      * The list of chips to be displayed before the text field input.
@@ -173,42 +173,40 @@ const DEFAULT_PROPS: Partial<AutocompleteProps> = {
     shouldFocusOnClose: false,
 };
 
-const Autocomplete: React.FC<AutocompleteProps> = (props) => {
-    const {
-        anchorToInput,
-        children,
-        chips,
-        className,
-        closeOnClick,
-        closeOnClickAway,
-        closeOnEscape,
-        disabled,
-        error,
-        fitToAnchorWidth,
-        hasError,
-        helper,
-        icon,
-        inputRef = useRef(null),
-        isClearable,
-        isDisabled = disabled,
-        isOpen,
-        isValid,
-        label,
-        name,
-        offset,
-        onBlur,
-        onChange,
-        onClose,
-        onFocus,
-        onInfiniteScroll,
-        placeholder,
-        placement,
-        shouldFocusOnClose,
-        theme,
-        value,
-        ...forwardedProps
-    } = props;
-
+const Autocomplete: React.FC<AutocompleteProps> = ({
+    anchorToInput,
+    children,
+    chips,
+    className,
+    closeOnClick,
+    closeOnClickAway,
+    closeOnEscape,
+    disabled,
+    error,
+    fitToAnchorWidth,
+    hasError,
+    helper,
+    icon,
+    inputRef = useRef(null),
+    isClearable,
+    isDisabled = disabled,
+    isOpen,
+    isValid,
+    label,
+    name,
+    offset,
+    onBlur,
+    onChange,
+    onClose,
+    onFocus,
+    onInfiniteScroll,
+    placeholder,
+    placement,
+    shouldFocusOnClose,
+    theme,
+    value,
+    ...forwardedProps
+}) => {
     const textFieldRef = useRef(null);
     useFocus(inputRef.current, !isOpen && shouldFocusOnClose);
 

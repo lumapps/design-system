@@ -8,7 +8,7 @@ import React, { ReactNode } from 'react';
  * Defines the props of the component.
  */
 interface InputLabelProps extends GenericProps {
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children: string | ReactNode;
     /** Whether the component is required or not. */
     isRequired?: boolean;

@@ -11,7 +11,7 @@ import { GenericProps, getRootClassName, handleBasicClasses, isComponent } from 
  * Defines the props of the component.
  */
 interface SideNavigationProps extends GenericProps {
-    /** The children elements to be transcluded into the component. Should use SideNavigationItem. */
+    /** The children elements. Should use SideNavigationItem. */
     children: ReactNode;
     /** The theme to apply to the component. Can be either 'light' or 'dark'. */
     theme?: Theme;

@@ -8,7 +8,7 @@ import React, { ReactNode } from 'react';
  * Defines the props of the component.
  */
 interface BadgeProps extends GenericProps {
-    /** The children elements to be transcluded into the component. */
+    /** The children elements. */
     children?: ReactNode;
     /** The color variant of the component. */
     color?: Color;
