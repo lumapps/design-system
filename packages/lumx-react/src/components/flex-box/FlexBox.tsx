@@ -4,8 +4,10 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 import classNames from 'classnames';
 import castArray from 'lodash/castArray';
 import React, { ReactNode } from 'react';
+import { Size } from '..';
 
 export type MarginAutoAlignment = Alignment.top | Alignment.bottom | Alignment.right | Alignment.left;
+export type GapSize = Size.regular | Size.big | Size.huge;
 
 /**
  * Defines the props of the component.
@@ -40,6 +42,10 @@ interface FlexBoxProps extends GenericProps {
      */
     marginAuto?: MarginAutoAlignment | MarginAutoAlignment[];
     /**
+     * Flex gap.
+     */
+    gap?: GapSize;
+    /**
      * Content on which to apply a flex layout.
      */
     children?: ReactNode;
@@ -71,6 +77,7 @@ const FlexBox: React.FC<FlexBoxProps> = ({
     fillSpace = DEFAULT_PROPS.fillSpace,
     noShrink = DEFAULT_PROPS.noShrink,
     marginAuto,
+    gap,
     ...forwardedProps
 }) => (
     <div
@@ -82,6 +89,7 @@ const FlexBox: React.FC<FlexBoxProps> = ({
                 orientation: orientation ?? (wrap || hAlign || vAlign ? Orientation.horizontal : null),
                 vAlign,
                 hAlign,
+                gap,
             }),
             wrap && `${CLASSNAME}--wrap`,
             fillSpace && `${CLASSNAME}--fill-space`,

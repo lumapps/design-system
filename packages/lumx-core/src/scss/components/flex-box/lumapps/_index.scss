@@ -20,7 +20,7 @@
 }
 
 /* Alignment
-      ========================================================================== */
+   ========================================================================== */
 
 .#{$lumx-base-prefix}-flex-box--orientation-horizontal.#{$lumx-base-prefix}-flex-box--h-align-top,
 .#{$lumx-base-prefix}-flex-box--orientation-vertical.#{$lumx-base-prefix}-flex-box--v-align-left {
@@ -53,28 +53,28 @@
 }
 
 /* Wrap
-      ========================================================================== */
+   ========================================================================== */
 
 .#{$lumx-base-prefix}-flex-box--wrap {
     flex-wrap: wrap;
 }
 
 /* Fill space
-      ========================================================================== */
+   ========================================================================== */
 
 .#{$lumx-base-prefix}-flex-box--fill-space {
     flex: 1 1 auto;
 }
 
 /* No shrink
-      ========================================================================== */
+   ========================================================================== */
 
 .#{$lumx-base-prefix}-flex-box--no-shrink {
     flex-shrink: 0;
 }
 
 /* Margin
-      ========================================================================== */
+   ========================================================================== */
 
 .#{$lumx-base-prefix}-flex-box--margin-auto-top {
     margin-top: auto;
@@ -90,4 +90,19 @@
 
 .#{$lumx-base-prefix}-flex-box--margin-auto-left {
     margin-left: auto;
+}
+
+/* Gap
+   ========================================================================== */
+
+.#{$lumx-base-prefix}-flex-box--gap-regular {
+    gap: $lumx-spacing-unit;
+}
+
+.#{$lumx-base-prefix}-flex-box--gap-big {
+    gap: $lumx-spacing-unit-big;
+}
+
+.#{$lumx-base-prefix}-flex-box--gap-huge {
+    gap: $lumx-spacing-unit-huge;
 }
