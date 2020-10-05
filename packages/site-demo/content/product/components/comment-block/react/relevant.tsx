@@ -16,7 +16,7 @@ const App = ({ theme }: any) => (
         hasActions={true}
         theme={theme}
         isRelevant={true}
-        avatar="http://i.pravatar.cc/72"
+        avatar="../avatar/assets/persona.png"
         date="4 hours ago"
         name="Matthias Manoukian"
         hasChildren={true}

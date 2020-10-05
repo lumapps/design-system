@@ -15,7 +15,7 @@ const App = ({ theme }: any) => (
         ]}
         hasActions={true}
         theme={theme}
-        avatar="http://i.pravatar.cc/72"
+        avatar="../avatar/assets/persona.png"
         date="4 hours ago"
         name="Matthias Manoukian"
         hasChildren={true}
@@ -29,7 +29,7 @@ const App = ({ theme }: any) => (
                     </Button>
                 }
                 hasActions={true}
-                avatar="http://i.pravatar.cc/72/random"
+                avatar="../avatar/assets/persona.png"
                 date="3 hours ago"
                 name="Jackson Ray"
                 theme={theme}
@@ -43,7 +43,7 @@ const App = ({ theme }: any) => (
                     </Button>
                 }
                 hasActions={true}
-                avatar="http://i.pravatar.cc/72/women"
+                avatar="../avatar/assets/persona.png"
                 date="2 hours ago"
                 name="Hettie Powell"
                 theme={theme}
