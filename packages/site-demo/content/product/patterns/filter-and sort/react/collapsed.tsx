@@ -1,7 +1,20 @@
 import React, { useRef, useState } from 'react';
 
 import { mdiFilterVariant, mdiMagnify, mdiMenuDown, mdiSort } from '@lumx/icons';
-import { Button, Chip, Emphasis, FlexBox, Icon, Orientation, Placement, Popover, Size, TextField } from '@lumx/react';
+import {
+    Button,
+    Chip,
+    ChipGroup,
+    Divider,
+    Emphasis,
+    FlexBox,
+    Icon,
+    Orientation,
+    Placement,
+    Popover,
+    Size,
+    TextField,
+} from '@lumx/react';
 
 const TYPES = ['Fruit', 'Vegetable', 'Meat', 'Cereal', 'Fish'];
 const COLORS = ['Red', 'Green', 'Blue'];
@@ -43,56 +56,44 @@ const App = () => {
                 closeOnClickAway
                 closeOnEscape
             >
-                <div className="lumx-spacing-padding-huge lumx-has-divider">
+                <div className="lumx-spacing-padding-huge">
                     <span className="lumx-display-block lumx-typography-subtitle1">Type</span>
 
-                    <FlexBox
-                        className="lumx-spacing-margin-top-big"
-                        orientation={Orientation.horizontal}
-                        gap={Size.regular}
-                        wrap
-                        style={{ maxWidth: 250 }}
-                    >
+                    <ChipGroup className="lumx-spacing-margin-top-big" style={{ maxWidth: 250 }}>
                         {TYPES.map((type, index) => (
                             <Chip key={index} isClickable>
                                 {type}
                             </Chip>
                         ))}
-                    </FlexBox>
+                    </ChipGroup>
                 </div>
 
-                <div className="lumx-spacing-padding-huge lumx-has-divider">
+                <Divider />
+
+                <div className="lumx-spacing-padding-huge">
                     <span className="lumx-display-block lumx-typography-subtitle1">Color</span>
 
-                    <FlexBox
-                        className="lumx-spacing-margin-top-big"
-                        orientation={Orientation.horizontal}
-                        gap={Size.regular}
-                        wrap
-                    >
+                    <ChipGroup className="lumx-spacing-margin-top-big" style={{ maxWidth: 250 }}>
                         {COLORS.map((color, index) => (
                             <Chip key={index} isClickable>
                                 {color}
                             </Chip>
                         ))}
-                    </FlexBox>
+                    </ChipGroup>
                 </div>
 
-                <div className="lumx-spacing-padding-huge lumx-has-divider">
+                <Divider />
+
+                <div className="lumx-spacing-padding-huge">
                     <span className="lumx-display-block lumx-typography-subtitle1">Shape</span>
 
-                    <FlexBox
-                        className="lumx-spacing-margin-top-big"
-                        orientation={Orientation.horizontal}
-                        gap={Size.regular}
-                        wrap
-                    >
+                    <ChipGroup className="lumx-spacing-margin-top-big" style={{ maxWidth: 250 }}>
                         {SHAPES.map((shape, index) => (
                             <Chip key={index} isClickable>
                                 {shape}
                             </Chip>
                         ))}
-                    </FlexBox>
+                    </ChipGroup>
                 </div>
             </Popover>
         </>
