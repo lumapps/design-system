@@ -49,7 +49,7 @@
 
 .#{$lumx-base-prefix}-tabs--layout-clustered.#{$lumx-base-prefix}-tabs--position-center {
     .#{$lumx-base-prefix}-tabs__links {
-        @include lumx-tabs-links-position('position-center');
+        @include lumx-tabs-links-position(lumx-base-const('position', 'CENTER'));
     }
 }
 

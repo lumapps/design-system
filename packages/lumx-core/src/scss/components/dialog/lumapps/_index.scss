@@ -64,11 +64,11 @@
     }
 
     &__header--has-divider {
-        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), 'bottom');
+        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), lumx-base-const('position', 'BOTTOM'));
     }
 
     &__footer--has-divider {
-        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), 'top');
+        @include lumx-has-divider(lumx-base-const('theme', 'LIGHT'), lumx-base-const('position', 'TOP'));
     }
 
     &__content {
