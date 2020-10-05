@@ -10,7 +10,7 @@ Filter and sort patterns has three sections: A text filter, trigger filters, and
 
 ## Text filter
 
-Filter by checking if the entered text matches one of the text values of list elements. Elements values checked are to defined accordingly to needs. Clearing the text filter input remove the filter.
+Filter by checking if the entered text matches one of the text values of list elements. Elements values checked are to defined accordingly to needs. Clearing the text filter input remove the filter. Checks are delayed for 500ms to prevent filtering on each keystroke.
 
 <DemoBlock demo="text" />
 
@@ -32,31 +32,11 @@ If space is really constrained or trigger filters are only secondary in users sc
 
 <DemoBlock demo="collapsed" />
 
-<!-- ## Responsive behaviors
-
-### Exposed choices
-
-When choices are exposed and the space come to be not enough to show them all on the same line then choices are not exposed anymore, instead the facet is.
-
-<DemoBlock demo="responsive-choices" />
-
-### Exposed facets
-
-When facets are exposed and the space come to be not enough to show them all on the same line they collapses. The lasts facets on the line collapses with the one next to it. As space reduces (when users resize their browser windows for example) each facet that doesn't fit collapses.
-
-<DemoBlock demo="responsive-facets" />
-
-### Extreme low width version
-
-In case of extreme low width, trigger filters and sorting selector may be turned to simple icon buttons.
-
-<DemoBlock demo="responsive" /> -->
-
 ## Responsive
 
 As space reduces (when users resize their browser window for example) each element that doesn't fit go to the line.
 
-<DemoBlock demo="responsive-simple" />
+<DemoBlock demo="responsive" />
 
 ## Vertical variant
 
@@ -66,6 +46,6 @@ Vertical variant can be used when the page layout make it difficult to use the o
 
 ## Sorting
 
-Sorting is a simple [select](/product/components/select/) component. Each sorting option is a select option, even for handling ascending and descending orders. Use words like "most recent", "most relevant", "least recent" to help users rapidly find the sorting they want.
+Each sorting option is an option, even for handling ascending and descending orders. Use words like "most recent", "most relevant", "least recent" to help users rapidly find the sorting they want.
 
 <DemoBlock demo="sorting" />

@@ -1,9 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const App = ({}) => (
-    <>
-        <img src="assets/filter-and-sort-facets.png" width="100%" />
-    </>
-);
+import { mdiMagnify, mdiMenuDown, mdiSort } from '@lumx/icons';
+import {
+    Button,
+    Chip,
+    Emphasis,
+    FlexBox,
+    Icon,
+    List,
+    ListItem,
+    Orientation,
+    Select,
+    SelectVariant,
+    Size,
+    TextField,
+} from '@lumx/react';
+
+const COLORS = ['Red', 'Green', 'Blue'];
+
+const App = () => {
+    const [query, setQuery] = useState('');
+    const [isOpen, setOpen] = useState(false);
+    const closeSelect = () => setOpen(false);
+    const toggleSelect = () => setOpen(!isOpen);
+    const [value, setValue] = useState('Green');
+
+    const clearSelected = (event: { stopPropagation(): void }) => {
+        event?.stopPropagation();
+        setValue('');
+    };
+
+    const selectItem = (item: any) => {
+        if (value === item) {
+            setValue('');
+        } else {
+            setValue(item);
+        }
+        closeSelect();
+    };
+    const onItemSelected = (choice: any) => () => selectItem(choice);
+
+    return (
+        <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap>
+            <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
+                <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
+
+                <FlexBox orientation={Orientation.horizontal} gap={Size.regular} wrap>
+                    <Chip after={<Icon icon={mdiMenuDown} size={Size.xs} />} isClickable>
+                        Type
+                    </Chip>
+
+                    <Select
+                        isOpen={isOpen}
+                        value={value}
+                        label="Color"
+                        variant={SelectVariant.chip}
+                        onClear={clearSelected}
+                        onDropdownClose={closeSelect}
+                        onInputClick={toggleSelect}
+                    >
+                        <List>
+                            {COLORS.map((color, index) => (
+                                <ListItem
+                                    isSelected={value === color}
+                                    key={index}
+                                    onItemSelected={onItemSelected(color)}
+                                    size={Size.tiny}
+                                >
+                                    {color}
+                                </ListItem>
+                            ))}
+                        </List>
+                    </Select>
+
+                    <Chip after={<Icon icon={mdiMenuDown} size={Size.xs} />} isClickable>
+                        Shape
+                    </Chip>
+                </FlexBox>
+            </FlexBox>
+
+            <Button emphasis={Emphasis.low} leftIcon={mdiSort} rightIcon={mdiMenuDown}>
+                Most relevant
+            </Button>
+        </FlexBox>
+    );
+};
 
 export default App;
