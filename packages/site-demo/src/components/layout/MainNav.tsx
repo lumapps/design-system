@@ -57,7 +57,6 @@ const ITEMS: Item[] = [
                     'Divider',
                     'Dropdown',
                     'Expansion panel',
-                    'Grid',
                     'Image block',
                     'Lightbox',
                     'Link',
