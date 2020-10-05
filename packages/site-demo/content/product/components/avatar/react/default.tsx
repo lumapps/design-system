@@ -5,13 +5,13 @@ import { Avatar, Emphasis, IconButton, Size } from '@lumx/react';
 
 const App = ({ theme }: any) => (
     <div className="demo-grid">
-        <Avatar theme={theme} image="http://i.pravatar.cc/40" size={Size.xs} />
-        <Avatar theme={theme} image="http://i.pravatar.cc/48" size={Size.s} />
-        <Avatar theme={theme} image="http://i.pravatar.cc/72" size={Size.m} />
-        <Avatar theme={theme} image="http://i.pravatar.cc/128" size={Size.l} />
+        <Avatar theme={theme} image="./assets/persona.png" size={Size.xs} />
+        <Avatar theme={theme} image="./assets/persona.png" size={Size.s} />
+        <Avatar theme={theme} image="./assets/persona.png" size={Size.m} />
+        <Avatar theme={theme} image="./assets/persona.png" size={Size.l} />
         <Avatar
             theme={theme}
-            image="http://i.pravatar.cc/256"
+            image="./assets/persona.png"
             size={Size.xl}
             actions={
                 <div style={{ display: 'flex', justifyContent: 'center' }}>

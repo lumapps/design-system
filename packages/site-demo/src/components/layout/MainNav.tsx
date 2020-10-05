@@ -40,7 +40,7 @@ const ITEMS: Item[] = [
     {
         children: [
             {
-                children: ['Colors', 'Iconography', 'Typography'],
+                children: ['Color', 'Iconography', 'Typography'],
                 label: 'Foundations',
             },
             {
@@ -92,11 +92,11 @@ const ITEMS: Item[] = [
                 label: 'Patterns',
             },
             {
-                children: ['Colors', 'Spacing', 'Typography'],
+                children: ['Color', 'Spacing', 'Typography'],
                 label: 'Utilities',
             },
             {
-                children: ['Colors'],
+                children: ['Color', 'Size'],
                 label: 'Design Tokens',
             },
         ],

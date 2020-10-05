@@ -11,7 +11,7 @@ interface DesignTokenProps {
     /**
      * The design token prefix.
      */
-    prefix: ReactNode;
+    prefix?: ReactNode;
     /**
      * The design token description.
      */
@@ -57,14 +57,14 @@ export const DesignToken: React.FC<DesignTokenProps> = ({
         >
             <header>
                 <div className="design-token__header">
-                    <div className="design-token__prefix">{prefix}</div>
+                    {prefix && <div className="design-token__prefix">{prefix}</div>}
                     <span className="design-token__name">{name}</span>
                     <span className="design-token__version">{version}</span>
                 </div>
             </header>
 
             <div className="design-token__content">
-                <p className="design-token__description">{description}</p>
+                {description && <p className="design-token__description">{description}</p>}
                 <div className="design-token__demo">{children}</div>
             </div>
         </ExpansionPanel>

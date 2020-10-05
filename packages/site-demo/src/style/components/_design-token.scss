@@ -72,12 +72,10 @@
     &__description {
         @include lumx-typography('body1');
 
+        margin-bottom: $lumx-spacing-unit * 2;
+
         #{$self}--theme-dark & {
             color: lumx-color-variant('light', 'N');
         }
-    }
-
-    &__demo {
-        margin-top: $lumx-spacing-unit * 2;
     }
 }
