@@ -7,9 +7,11 @@ $lumx-base-constants: (
         'LOW': 'emphasis-low'
     ),
     'position': (
+        'TOP': 'position-top',
+        'RIGHT': 'position-right',
+        'BOTTOM': 'position-bottom',
         'LEFT': 'position-left',
-        'CENTER': 'position-center',
-        'RIGHT': 'position-right'
+        'CENTER': 'position-center'
     ),
     'size': (
         'XXS': 'xxs',

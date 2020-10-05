@@ -11,3 +11,29 @@
         @include lumx-divider(lumx-base-const('theme', 'DARK'));
     }
 }
+
+.#{$lumx-base-prefix}-has-divider {
+    @include lumx-has-divider;
+
+    &--theme-light {
+        @include lumx-divider-color(lumx-base-const('theme', 'LIGHT'));
+    }
+
+    &--theme-dark {
+        @include lumx-divider-color(lumx-base-const('theme', 'DARK'));
+    }
+}
+
+@each $key, $positon in $lumx-divider-positions {
+    .#{$lumx-base-prefix}-has-divider.#{$lumx-base-prefix}-has-divider--position-#{$key} {
+        @include lumx-divider-position($positon);
+
+        &--theme-light {
+            @include lumx-divider-color(lumx-base-const('theme', 'LIGHT'), $positon);
+        }
+
+        &--theme-dark {
+            @include lumx-divider-color(lumx-base-const('theme', 'DARK'), $positon);
+        }
+    }
+}
