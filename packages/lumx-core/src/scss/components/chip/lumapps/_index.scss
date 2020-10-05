@@ -129,6 +129,7 @@
 .#{$lumx-base-prefix}-chip-group {
     display: flex;
     flex-wrap: wrap;
+    margin: -$lumx-chip-group-spacing 0;
 
     .#{$lumx-base-prefix}-chip {
         margin: $lumx-chip-group-spacing 0;
