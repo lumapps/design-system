@@ -92,6 +92,10 @@ const ITEMS: Item[] = [
                 label: 'Patterns',
             },
             {
+                children: ['Colors', 'Spacing', 'Typography'],
+                label: 'Utilities',
+            },
+            {
                 children: ['Colors'],
                 label: 'Design Tokens',
             },

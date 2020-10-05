@@ -1,0 +1,31 @@
+# Spacing
+
+**Use spacing utility classes to add margins or paddings to elements.**
+
+## About
+
+-   Our spacing base unit metric is `8`.
+-   Classes are prefix by `lumx-spacing-margin` for margin and `lumx-spacing-padding` for paddings.
+-   The directions available for the spacing classes are `top`, `right`, `bottom`, and `left`.
+-   You can use the `vertical` shortcut for both `top` and `bottom`, `horizontal` for both `right` and `left`, and nothing for all sides.
+-   Use the `tiny` through `huge` scale to choose the size needed.
+-   You can also use `none` as the size on any of the directions to enforce zero margin.
+
+## Margin
+
+<DemoBlock>
+<div style={{ border: '1px dashed rgba(40, 51, 109, 0.2)' }}>
+    <div
+        className="lumx-color-background-primary-N lumx-spacing-margin-vertical-big lumx-spacing-margin-left-huge"
+        style={{ height: 100 }}
+    />
+</div>
+</DemoBlock>
+
+## Padding
+
+<DemoBlock>
+<div className="lumx-color-background-primary-N lumx-spacing-padding-huge">
+    <span className="lumx-color-font-light-N">The quick brown fox jumps over the lazy dog</span>
+</div>
+</DemoBlock>
