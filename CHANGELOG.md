@@ -10,10 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 -   Add `gap` property to `FlexBox` component.
+-   Add has divider helper.
 
 ### Changed
 
 -   Upgrade to mdi v5.6.55 and handle backward compatibility.
+-   _[BREAKING]_ `lumx-has-divider` mixin now accepts a position constant as second parameter (`lumx-base-const('position', 'TOP|RIGHT|BOTTOM|LEFT')`).
 
 ## [0.25.16][] - 2020-09-16
 
