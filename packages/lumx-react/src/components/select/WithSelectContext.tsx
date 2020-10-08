@@ -99,6 +99,7 @@ const withSelectContext = (
         isOpen = DEFAULT_PROPS.isOpen,
         isRequired,
         isValid = DEFAULT_PROPS.isValid,
+        closeOnClick = !isMultiple,
         label,
         placeholder,
         theme = DEFAULT_PROPS.theme,
@@ -183,7 +184,7 @@ const withSelectContext = (
             />
             <Dropdown
                 anchorRef={anchorRef}
-                closeOnClick={!isMultiple}
+                closeOnClick={closeOnClick}
                 closeOnClickAway={true}
                 closeOnEscape={true}
                 isOpen={isOpen!}
