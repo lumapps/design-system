@@ -2,6 +2,7 @@ const mdx = require('@mdx-js/mdx');
 
 const mdxBreakLine = require('./mdx-break-line');
 const mdxDemoCodeExtractor = require('./mdx-demo-code-extractor');
+const mdxInlineCode = require('./mdx-inline-code');
 
 // Imports needed in generated code.
 const IMPORT_REACT_FRAGMENT = 'import React, { Fragment } from "react"';
@@ -33,7 +34,7 @@ module.exports = async function mdxLoader(source) {
     // MDX to JSX.
     const jsx = await mdx(source, {
         remarkPlugins: [mdxDemoCodeExtractor(this.resourcePath)],
-        rehypePlugins: [mdxBreakLine],
+        rehypePlugins: [mdxBreakLine, mdxInlineCode],
         preserveNewlines: true,
     });
 

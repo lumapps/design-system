@@ -53,8 +53,7 @@
             @include lumx-link('primary');
         }
 
-        /* stylelint-disable-next-line selector-type-no-unknown */
-        inlinecode {
+        p code {
             padding: 0 $lumx-spacing-unit-tiny;
             background-color: $lumx-color-dark-L5;
             color: $lumx-color-dark-N;
