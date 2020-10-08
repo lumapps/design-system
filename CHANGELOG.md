@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Add `gap` property to `FlexBox` component.
 -   Add has divider helper.
+-   Add optional `closeOnClick` property to `Select` component.
 
 ### Changed
 
