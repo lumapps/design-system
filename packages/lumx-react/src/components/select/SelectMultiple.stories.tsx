@@ -197,7 +197,7 @@ export const chipsCustomSelectMultiple = ({ theme }: any) => {
                 onClick={onClick}
                 theme={theme}
             >
-                -> {choice}
+                {choice}
             </Chip>
         );
     };
