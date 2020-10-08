@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Add optional `closeOnClick` property to `Select` component.
+
 ## [0.25.16][] - 2020-09-16
 
 ### Added
