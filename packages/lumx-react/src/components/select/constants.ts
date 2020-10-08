@@ -20,6 +20,9 @@ interface CoreSelectProps extends GenericProps {
     /** The helper to display within the popover (last position). */
     helper?: string;
 
+    /** Whether the select should close on click. */
+    closeOnClick?: boolean;
+
     /** Whether the select is disabled or not. */
     isDisabled?: boolean;
 
