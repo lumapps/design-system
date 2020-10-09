@@ -6,7 +6,7 @@ import { GlobalTheme } from '@lumx/core/js/types';
  *
  * @param theme The theme to apply the custom color palette on.
  */
-function setDemoCustomColors(theme: GlobalTheme) {
+export function setDemoCustomColors(theme: GlobalTheme) {
     const styleTag = document.createElement('style');
     document.head.appendChild(styleTag);
 
@@ -38,4 +38,11 @@ function setDemoCustomColors(theme: GlobalTheme) {
     });
 }
 
-export { setDemoCustomColors };
+declare global {
+    interface Window {
+        /**
+         * App root path ('/', '/lumapps-prod/', 'lumapps-foo', etc.).
+         */
+        PUBLIC_PATH: string;
+    }
+}

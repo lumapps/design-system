@@ -45,7 +45,7 @@ export const Main: React.FC = (): ReactElement => {
                             </FlexBox>
                         </div>
 
-                        <Route path="*">
+                        <Route path="/:path*">
                             <ErrorBoundary>
                                 <MainContent />
                             </ErrorBoundary>

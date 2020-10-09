@@ -1,111 +1,20 @@
-import { Callback } from '@lumx/react/utils';
-import castArray from 'lodash/castArray';
-import isEmpty from 'lodash/isEmpty';
-import React, { ReactElement, ReactNode, useState } from 'react';
-import { RouteComponentProps } from 'react-router';
-import { withRouter } from 'react-router-dom';
+import kebabCase from 'lodash/kebabCase';
+import React, { ReactNode, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import LumXLogo from '@lumx/demo/assets/images/logo.svg';
 import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
 
+import ITEMS from 'content/menu.yml';
+
 /**
  * Defines the type of a navigation item.
  */
-type Item =
-    | {
-          /**
-           * The label of the navigation item.
-           */
-          label: string;
-          /**
-           * The optional subnavigation items.
-           */
-          children?: Item[];
-      }
-    | string;
+type Item = Record<string, Item[]> | string;
 
-/**
- * Transform space separated string to a slug.
- * @param  s a string
- * @return slug string.
- */
-const spaceToSlug = (s: string): string => {
-    return s.toLocaleLowerCase().replace(' ', '-');
-};
-
-/**
- * The navigation item tree.
- */
-const ITEMS: Item[] = [
-    {
-        children: [
-            {
-                children: ['Color', 'Iconography', 'Typography'],
-                label: 'Foundations',
-            },
-            {
-                children: [
-                    'Autocomplete',
-                    'Avatar',
-                    'Badge',
-                    'Button',
-                    'Checkbox',
-                    'Chip',
-                    'Comment block',
-                    'Date picker',
-                    'Dialog',
-                    'Divider',
-                    'Dropdown',
-                    'Expansion panel',
-                    'Image block',
-                    'Lightbox',
-                    'Link',
-                    'Link preview',
-                    'List',
-                    'Message',
-                    'Notification',
-                    'Popover',
-                    'Progress',
-                    'Progress tracker',
-                    'Radio button',
-                    'Select',
-                    'Side navigation',
-                    'Slider',
-                    'Slideshow',
-                    'Switch',
-                    'Table',
-                    'Tabs',
-                    'Text field',
-                    'Thumbnail',
-                    'Toolbar',
-                    'Tooltip',
-                    'Uploader',
-                    'User block',
-                ],
-                label: 'Components',
-            },
-            {
-                children: ['Filter and sort'],
-                label: 'Patterns',
-            },
-            {
-                children: ['Color', 'Spacing', 'Typography'],
-                label: 'Utilities',
-            },
-            {
-                children: ['Color', 'Size'],
-                label: 'Design Tokens',
-            },
-        ],
-        label: 'Product',
-    },
-    {
-        label: 'Brand',
-    },
-    {
-        label: 'Partners',
-    },
-];
+function getLabelAndChildren(item: Item) {
+    return typeof item === 'string' ? [item] : Object.entries(item)[0];
+}
 
 const EMPHASIS_BY_LEVEL: Record<string, Emphasis> = {
     '0': Emphasis.high,
@@ -113,73 +22,62 @@ const EMPHASIS_BY_LEVEL: Record<string, Emphasis> = {
     '2': Emphasis.low,
 };
 
-const generateNav = (goToHandler: (path: string) => Callback, location: string, items: Item[]): ReactNode => {
-    const generateNavItem = (parent: string[], item?: Item | Item[]): ReactNode => {
-        if (!item || Array.isArray(item)) {
-            return castArray(item).map((child: Item) => generateNavItem(parent, child));
+const generateNav = (locationPath: string, items: Item[]): ReactNode => {
+    const generateNavItem = (parentPathParts: string[], item: Item | Item[]): ReactNode => {
+        if (Array.isArray(item)) {
+            return item.map((child) => generateNavItem(parentPathParts, child));
         }
-        const label = typeof item === 'string' ? item : item.label;
-        const children = typeof item !== 'string' && item.children;
-        const path = [...parent, spaceToSlug(label)];
-        const slug = `/${path.join('/')}/`;
+        const [label, children] = getLabelAndChildren(item);
+        const pathParts = [...parentPathParts, kebabCase(label)];
+        const path = pathParts.join('/');
 
-        const [isOpen, setOpen] = useState(() => location.startsWith(slug));
+        const [isOpen, setOpen] = useState(() => locationPath.startsWith(path));
 
-        const props: Partial<SideNavigationItemProps> = {
-            emphasis: EMPHASIS_BY_LEVEL[parent.length.toString()],
+        const props: SideNavigationItemProps = {
+            emphasis: EMPHASIS_BY_LEVEL[parentPathParts.length.toString()],
             isOpen,
-            isSelected: location === slug,
+            isSelected: locationPath === path,
+            label,
+            key: path,
         };
 
-        if (isEmpty(children)) {
-            props.onClick = goToHandler(slug);
+        if (!children) {
+            // Menu using react router Link.
+            props.linkAs = Link;
+            props.linkProps = { to: '/' + path } as any;
         } else {
+            // Toggle open child navigation.
             props.onClick = () => setOpen(!isOpen);
+            props.children = generateNavItem(pathParts, children);
         }
 
-        return (
-            <SideNavigationItem key={slug} label={label} {...props}>
-                {generateNavItem(path, children || []) as ReactElement}
-            </SideNavigationItem>
-        );
+        return <SideNavigationItem {...props} />;
     };
 
-    return <SideNavigation>{generateNavItem([], items) as ReactElement}</SideNavigation>;
+    return <SideNavigation>{generateNavItem([], items)}</SideNavigation>;
 };
 
 /**
  * The main navigation component.
  *
- * @param  props nav props
  * @return The main navigation component.
  */
-const MainNav: React.FC<RouteComponentProps> = (props) => {
-    const { location, history } = props;
-    const goToHandler = (path: string) => () => history.push(path);
+export const MainNav: React.FC = () => {
+    const { path = '' } = useParams();
 
     return (
         <div className="main-nav">
             <div className="main-nav__wrapper">
-                <div
-                    className="main-nav__logo"
-                    role="button"
-                    tabIndex={0}
-                    onClick={goToHandler('/')}
-                    onKeyPress={goToHandler('/')}
-                >
+                <Link className="main-nav__logo" to="/">
                     <img src={LumXLogo} width="24px" height="24px" alt="LumX" />
                     <span>
                         <strong>{'LumApps'}</strong>
                         {' design system'}
                     </span>
-                </div>
+                </Link>
 
-                {generateNav(goToHandler, location.pathname, ITEMS)}
+                {generateNav(path, ITEMS)}
             </div>
         </div>
     );
 };
-
-const MainNavWithRouter = withRouter(MainNav);
-
-export { MainNavWithRouter as MainNav };

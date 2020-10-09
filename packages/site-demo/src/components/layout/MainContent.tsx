@@ -3,7 +3,7 @@ import React, { ReactElement, useContext, useEffect, useState } from 'react';
 import { LoadingContent } from '@lumx/demo/components/layout/LoadingContent';
 import { EngineContext } from '@lumx/demo/context/engine';
 import classNames from 'classnames';
-import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 type Content = ReactElement | null | undefined;
 
@@ -16,7 +16,7 @@ const useLoadContent = (path: string): Content => {
             try {
                 const loadedContent = await import(
                     /* webpackChunkName: "content/[request]" */
-                    `content/${path.replace(/^\//, '')}`
+                    `content/${path}`
                 );
                 setContent(React.createElement(loadedContent.default, {}, null));
             } catch (exception) {
@@ -34,8 +34,8 @@ const useLoadContent = (path: string): Content => {
  * @return The main content component.
  */
 export const MainContent: React.FC = () => {
-    const { location } = useHistory();
-    const content = useLoadContent(location.pathname);
+    const { path = '' } = useParams();
+    const content = useLoadContent(path);
     const { engine } = useContext(EngineContext);
 
     return (
@@ -43,9 +43,9 @@ export const MainContent: React.FC = () => {
             <div className="main-content__wrapper">
                 {content === undefined && <LoadingContent />}
                 {content === null && (
-                    <span>
-                        Could not load content for <code>{location.pathname}</code>
-                    </span>
+                    <p>
+                        Could not load content for <code>{path}</code>
+                    </p>
                 )}
                 {content ? content : null}
             </div>

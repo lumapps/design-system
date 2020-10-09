@@ -17,7 +17,8 @@ $main-nav-width: 300px;
         display: flex;
         align-items: center;
         margin-bottom: $lumx-spacing-unit * 4;
-        cursor: pointer;
+        color: lumx-color-variant(dark, N);
+        text-decoration: none;
 
         img {
             height: map-get($lumx-sizes, s);

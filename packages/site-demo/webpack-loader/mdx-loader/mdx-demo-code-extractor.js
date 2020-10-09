@@ -110,7 +110,7 @@ const isPreImport = (node) =>
     node.type === 'element' && node.tagName === 'pre' && get(node, ['children', 0, 'properties', 'import']);
 const isImport = (node) => isJSXImport(node) || isPreImport(node);
 
-const ADDITIONAL_IMPORT = `
+const COMP_DEMO_ADDITIONAL_IMPORT = `
 import { DemoBlock } from '@lumx/demo/components/DemoBlock';
 import { PropTable } from '@lumx/demo/components/PropTable';
 import { ReactStabilityFlag } from '@lumx/demo/components/ReactStabilityFlag';
@@ -159,11 +159,12 @@ module.exports = (resourcePath) => () => {
 
         if (contentHasDemo) {
             importStatement += `\n${importController}`;
+            importStatement += COMP_DEMO_ADDITIONAL_IMPORT;
         }
 
         tree.children = [
             // Group all imports at the top with demo block import.
-            { type: 'import', value: ADDITIONAL_IMPORT + importStatement },
+            { type: 'import', value: importStatement },
 
             // Transformed content.
             ...content,

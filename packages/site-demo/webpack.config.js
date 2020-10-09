@@ -7,7 +7,6 @@ const path = require('path');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlMinifierPlugin = require('html-minifier-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const IS_CI = require('is-ci');
@@ -45,6 +44,7 @@ const plugins = [
         filename: `${filename}.css`,
     }),
 
+    // Define LumX version variable to inject in the HTML.
     new webpack.DefinePlugin({
         LUMX_VERSION: JSON.stringify(LUMX_VERSION),
     }),
@@ -52,8 +52,6 @@ const plugins = [
         inject: false,
         template: `${SRC_PATH}/index.html.ejs`,
     }),
-
-    new ForkTsCheckerWebpackPlugin(),
 ];
 
 const cssLoaders = [
@@ -178,6 +176,11 @@ module.exports = {
                 },
             },
             {
+                test: /\.ya?ml$/,
+                type: 'json',
+                use: 'yaml-loader',
+            },
+            {
                 test: /\.mdx?$/,
                 use: [
                     {
@@ -199,7 +202,6 @@ module.exports = {
     output: {
         filename: `${filename}.js`,
         path: DIST_PATH,
-        publicPath: '/',
     },
 
     node: {
@@ -231,7 +233,7 @@ if (isDev) {
             'Access-Control-Allow-Origin': '*',
         },
         historyApiFallback: {
-            index: '/',
+            index: '/lumapps-prod/',
         },
         host: '0.0.0.0',
         hot: true,
@@ -239,6 +241,7 @@ if (isDev) {
         overlay: true,
         port: 4000,
         quiet: true,
+        publicPath: '/lumapps-prod/',
     };
 
     module.exports.watch = true;

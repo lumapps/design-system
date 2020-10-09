@@ -1,14 +1,13 @@
+import { Code, DemoModule, useLoadDemo } from '@lumx/demo/components/DemoBlock/useLoadDemo';
 import { useHighlightedCode } from '@lumx/demo/components/layout/utils/useHighlightedCode';
-import { Engine, EngineContext } from '@lumx/demo/context/engine';
+import { EngineContext } from '@lumx/demo/context/engine';
 
 import { mdiCodeTags } from '@lumx/icons';
 import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
 
 import classNames from 'classnames';
 import get from 'lodash/get';
-import React, { ReactNode, useContext, useEffect, useState } from 'react';
-
-import AngularTemplate from 'react-angular';
+import React, { ReactNode, useContext, useState } from 'react';
 
 interface DemoBlockProps {
     children?: ReactNode;
@@ -17,90 +16,6 @@ interface DemoBlockProps {
     code?: Code;
     withThemeSwitcher?: boolean;
 }
-
-interface HasTheme {
-    theme: Theme;
-}
-
-// tslint:disable-next-line:interface-over-type-literal
-type Module = {};
-
-type NullModule = Module;
-
-type DemoModule = Module & {
-    default: React.FC<HasTheme>;
-};
-
-type AngularControllerModule = Module & {
-    DemoController(): void;
-};
-
-type Code =
-    | undefined
-    | {
-          react?: {
-              demo?: DemoModule | NullModule;
-              code?: string;
-          };
-          angularjs?: {
-              demo?: {
-                  controller?: AngularControllerModule | NullModule;
-                  template?: string | NullModule;
-              };
-              code?: string;
-          };
-      };
-
-function loadReactDemo(code: Code): DemoModule | null {
-    const demo = code?.react?.demo;
-    if (!demo || !('default' in demo)) {
-        return null;
-    }
-    return demo;
-}
-
-function loadAngularjsDemo(code: Code): DemoModule | null {
-    const controllerModule = code?.angularjs?.demo?.controller;
-    const template = code?.angularjs?.demo?.template;
-    if (!template || !(typeof template === 'string') || !controllerModule || !('DemoController' in controllerModule)) {
-        return null;
-    }
-
-    return {
-        default({ theme }: HasTheme) {
-            let container: any;
-
-            useEffect(() => {
-                if (!container) {
-                    return;
-                }
-
-                container.$scope.theme = theme;
-                container.$scope.$apply();
-            }, [container, theme]);
-
-            return (
-                <AngularTemplate
-                    ref={(c: any) => (container = c)}
-                    template={template}
-                    controller={controllerModule.DemoController}
-                    controllerAs="vm"
-                    scope={{ theme }}
-                />
-            );
-        },
-    };
-}
-
-const useLoadDemo = (code: Code, engine: string): DemoModule | null => {
-    const [demo, setDemo] = useState<DemoModule | null>(null);
-
-    useEffect(() => {
-        setDemo(engine === Engine.react ? loadReactDemo(code) : loadAngularjsDemo(code));
-    }, [engine]);
-
-    return demo;
-};
 
 function renderDemo(demo: DemoModule | null, theme: Theme, engine: string) {
     if (!demo) {
@@ -113,7 +28,12 @@ function renderDemo(demo: DemoModule | null, theme: Theme, engine: string) {
     return <demo.default theme={theme} />;
 }
 
-const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngine, withThemeSwitcher = false }) => {
+export const DemoBlock: React.FC<DemoBlockProps> = ({
+    children,
+    code,
+    engine: propEngine,
+    withThemeSwitcher = false,
+}) => {
     const contextEngine = useContext(EngineContext).engine;
     const engine = propEngine || contextEngine;
 
@@ -168,5 +88,3 @@ const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngin
         </div>
     );
 };
-
-export { DemoBlock };

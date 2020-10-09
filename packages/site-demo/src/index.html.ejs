@@ -9,29 +9,32 @@
 
         <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700" />
 
+        <base href="/" />
+
+        <script type="text/javascript">
+            window.LUMX_VERSION = '<%= LUMX_VERSION %>';
+            window.PUBLIC_PATH = window.location.pathname.match(/(^\/(lumapps-[^\/]+\/?)?)/)[0];
+            if (!window.PUBLIC_PATH.match(/\/$/)) {
+                window.location.href += '/';
+            }
+            document.querySelector('base').attributes.href.value = window.PUBLIC_PATH;
+        </script>
+
         <%
         // CSS assets.
         for (const key of Object.keys(htmlWebpackPlugin.files.css)) {
             const href = htmlWebpackPlugin.files.css[key];
             const id = href.split('.')[0].replace(/^\//, '');
-            const rel = id === 'theme-material' ? 'preload' : 'stylesheet';
+            const rel = id === 'theme-material' ? 'rel="preload" as="style"' : 'rel="stylesheet"';
 
             %>
-            <link href="<%= href %>" id="<%= id %>" rel="<%= rel %>" />
+            <link href="<%= href %>" id="<%= id %>" <%= rel %> />
             <%
         }
         %>
-        <script type="text/javascript">window.LUMX_VERSION = '<%= LUMX_VERSION %>';</script>
     </head>
 
     <body>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-                crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js"
-                integrity="sha384-TBbVc3SDLcWU5RloNEsoiDVvRK9iYkBNMm1OsAcOIVEASb7zzMWB0aMobj6CzKUw"
-                crossorigin="anonymous"></script>
-
         <div class="app" id="root"></div>
 
         <%

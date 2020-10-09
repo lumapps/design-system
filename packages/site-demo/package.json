@@ -64,7 +64,9 @@
         "webpack-cli": "^3.3.12",
         "webpack-dev-server": "^3.11.0",
         "webpack-notifier": "^1.8.0",
-        "webpackbar": "^4.0.0"
+        "webpackbar": "^4.0.0",
+        "yaml-loader": "^0.6.0",
+        "yargs": "^16.0.3"
     },
     "description": "The official LumApps Design System (LumX) demo site",
     "engines": {
