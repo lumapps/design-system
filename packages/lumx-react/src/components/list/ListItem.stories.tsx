@@ -26,3 +26,12 @@ export const Sizes = ({ theme }: any) => (
         {text('text', 'Text')}
     </ListItem>
 );
+
+const CustomLink: React.FC = ({ children, ...props }) =>
+    React.createElement('a', { ...props, style: { color: 'red' } }, children);
+
+export const WithCustomLink = ({ theme }: any) => (
+    <ListItem theme={theme} linkAs={CustomLink} linkProps={{ href: 'http://google.com' }}>
+        My custom link
+    </ListItem>
+);

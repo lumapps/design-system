@@ -7,6 +7,7 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
 import { ListProps, Size } from '@lumx/react';
 import { GenericProps, getRootClassName, handleBasicClasses, onEnterPressed } from '@lumx/react/utils';
+import { renderLink } from '@lumx/react/utils/renderLink';
 
 /**
  *  Authorized size values.
@@ -45,6 +46,9 @@ interface ListItemProps extends GenericProps {
 
     /** List item reference. */
     listItemRef?: Ref<HTMLLIElement>;
+
+    /** Sets a custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
 
     /** props that will be passed on to the Link */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
@@ -97,6 +101,7 @@ const ListItem: React.FC<ListItemProps> = (props) => {
         size = DEFAULT_PROPS.size,
         onItemSelected,
         before,
+        linkAs,
         linkProps = {},
         linkRef,
         listItemRef,
@@ -126,23 +131,25 @@ const ListItem: React.FC<ListItemProps> = (props) => {
         >
             {isClickable(props) ? (
                 /* Clickable list item */
-                <a
-                    {...linkProps}
-                    className={classNames(
-                        handleBasicClasses({
-                            prefix: `${CLASSNAME}__link`,
-                            isHighlighted,
-                            isSelected,
-                        }),
-                    )}
-                    onClick={onItemSelected}
-                    onKeyDown={onKeyDown}
-                    ref={linkRef}
-                    role={onItemSelected ? 'button' : undefined}
-                    tabIndex={0}
-                >
-                    {content}
-                </a>
+                renderLink(
+                    {
+                        linkAs,
+                        ...linkProps,
+                        className: classNames(
+                            handleBasicClasses({
+                                prefix: `${CLASSNAME}__link`,
+                                isHighlighted,
+                                isSelected,
+                            }),
+                        ),
+                        onClick: onItemSelected,
+                        onKeyDown,
+                        ref: linkRef,
+                        role: onItemSelected ? 'button' : undefined,
+                        tabIndex: 0,
+                    },
+                    content,
+                )
             ) : (
                 /* Non clickable list item */
                 <div className={`${CLASSNAME}__wrapper`}>{content}</div>

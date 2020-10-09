@@ -30,3 +30,8 @@ export const simpleLink = () => (
         </Link>
     </>
 );
+
+const CustomLink: React.FC = ({ children, ...props }) =>
+    React.createElement('a', { ...props, style: { color: 'red' } }, children);
+
+export const withCustomLink = () => <Link linkAs={CustomLink}>My link text</Link>;

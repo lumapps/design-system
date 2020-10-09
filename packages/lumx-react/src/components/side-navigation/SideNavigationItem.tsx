@@ -16,6 +16,8 @@ import {
     isComponent,
     onEnterPressed,
 } from '@lumx/react/utils';
+import { renderLink } from '@lumx/react/utils/renderLink';
+
 import { IconButton } from '../button/IconButton';
 
 /**
@@ -39,6 +41,9 @@ interface SideNavigationItemProps extends GenericProps {
 
     /** Whether or not the menu is selected. */
     isSelected?: boolean;
+
+    /** Sets a custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
 
     /** props that will be passed on to the Link */
     linkProps?: React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
@@ -78,6 +83,7 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         icon,
         isOpen = DEFAULT_PROPS.isOpen,
         isSelected = DEFAULT_PROPS.isSelected,
+        linkAs,
         linkProps,
         onClick,
         onActionClick,
@@ -103,10 +109,17 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
         >
             {shouldSplitActions ? (
                 <div className={`${CLASSNAME}__wrapper`}>
-                    <a {...(linkProps || {})} className={`${CLASSNAME}__link`} onClick={onClick} tabIndex={0}>
-                        {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
-                        <span>{label}</span>
-                    </a>
+                    {renderLink(
+                        {
+                            linkAs,
+                            ...linkProps,
+                            className: `${CLASSNAME}__link`,
+                            onClick,
+                            tabIndex: 0,
+                        },
+                        icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />,
+                        <span>{label}</span>,
+                    )}
 
                     <IconButton
                         className={`${CLASSNAME}__toggle`}
@@ -117,23 +130,25 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
                     />
                 </div>
             ) : (
-                <a
-                    {...(linkProps || {})}
-                    className={`${CLASSNAME}__link`}
-                    tabIndex={0}
-                    onClick={onClick}
-                    onKeyDown={onClick ? onEnterPressed(onClick as Callback) : undefined}
-                >
-                    {icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />}
-                    <span>{label}</span>
-                    {hasContent && (
+                renderLink(
+                    {
+                        linkAs,
+                        ...linkProps,
+                        className: `${CLASSNAME}__link`,
+                        tabIndex: 0,
+                        onClick,
+                        onKeyDown: onClick ? onEnterPressed(onClick as Callback) : undefined,
+                    },
+                    icon && <Icon className={`${CLASSNAME}__icon`} icon={icon} size={Size.xs} />,
+                    <span>{label}</span>,
+                    hasContent && (
                         <Icon
                             className={`${CLASSNAME}__chevron`}
                             icon={isOpen ? mdiChevronUp : mdiChevronDown}
                             size={Size.xs}
                         />
-                    )}
-                </a>
+                    ),
+                )
             )}
 
             {hasContent && isOpen && <ul className={`${CLASSNAME}__children`}>{content}</ul>}
