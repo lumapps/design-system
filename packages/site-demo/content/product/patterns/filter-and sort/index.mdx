@@ -4,48 +4,53 @@
 
 ## Anatomy
 
-Filter and sort patterns has three sections: A text filter, trigger filters, and a sorting selector. Every zone combine and is optional.
+Filter and sort patterns have three sections: A text filter, trigger filters, and a sorting selector. Sections are optional and combine.
 
 <img src="assets/filter-and-sort-anatomy.png" width="100%" />
 
 ## Text filter
 
-Filter by checking if the entered text matches one of the text values of list elements. Elements values checked are to defined accordingly to needs. Clearing the text filter input remove the filter. Checks are delayed for 500ms to prevent filtering on each keystroke.
+Filter by checking if the entered text matches one of the text values of list elements. Define elements' values checked according to needs. Clearing the text filter input remove the filter. Checks are delayed for 500ms to prevent filtering on each keystroke.
 
 <DemoBlock demo="text" />
 
-## Exposed choices
+## Trigger filters
+
+### Exposed choices
 
 By default and when there is space, expose choices directly to users.
 
 <DemoBlock demo="choices" />
 
-## Exposed facets
+### Exposed facets
 
-If space is constrained or there are too much choices to display, only expose facets.
+When space is a constraint or there are too much choices to display, only expose facets.
 
 <DemoBlock demo="facets" />
 
-## Full collapsed
+### Grouped
 
-If space is really constrained or trigger filters are only secondary in users scenario, they can be collapsed in one chip that open a popover. In the popover, only a handful of choices is exposed for each filter, clicking the "Show more" link reveal the others.
+When space is really a constraint or trigger filters are only secondary in users scenario, they can be grouped in one single filter chip.
 
 <DemoBlock demo="collapsed" />
 
-## Responsive
-
-As space reduces (when users resize their browser window for example) each element that doesn't fit go to the line.
-
-<DemoBlock demo="responsive" />
-
-## Vertical variant
-
-Vertical variant can be used when the page layout make it difficult to use the original horizontal layout.
-
-<DemoBlock demo="vertical" />
-
-## Sorting
+## Sorting selector
 
 Each sorting option is an option, even for handling ascending and descending orders. Use words like "most recent", "most relevant", "least recent" to help users rapidly find the sorting they want.
 
 <DemoBlock demo="sorting" />
+
+
+## Layout behavior
+
+### Responsive
+
+As space reduces (when users resize their browser window for example) each section that doesn't fit go to new line. Inside each section elements behave the same way.
+
+<DemoBlock demo="responsive" />
+
+### Vertical variant
+
+When pages layout make it difficult to use the original horizontal layout use vertical variant.
+
+<DemoBlock demo="vertical" />
