@@ -67,3 +67,21 @@ exports[`<ListItem> Snapshots and structure should render story Sizes 1`] = `
   </div>
 </li>
 `;
+
+exports[`<ListItem> Snapshots and structure should render story WithCustomLink 1`] = `
+<li
+  className="lumx-list-item lumx-list-item--size-regular"
+>
+  <CustomLink
+    className="lumx-list-item__link"
+    href="http://google.com"
+    tabIndex={0}
+  >
+    <div
+      className="lumx-list-item__content"
+    >
+      My custom link
+    </div>
+  </CustomLink>
+</li>
+`;

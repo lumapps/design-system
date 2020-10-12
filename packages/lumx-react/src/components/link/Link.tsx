@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import { Color, ColorVariant } from '@lumx/react';
 import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { renderLink } from '@lumx/react/utils/renderLink';
 
 /**
  * Defines the props of the component.
@@ -15,6 +16,9 @@ interface LinkProps extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<H
 
     /** The icon color variant. */
     colorVariant?: ColorVariant;
+
+    /** Sets a custom react component for the link (can be used to inject react router Link). */
+    linkAs?: 'a' | any;
 
     /** Ref to the native HTML anchor element. */
     linkRef?: Ref<HTMLAnchorElement>;
@@ -35,15 +39,23 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  *
  * @return The component.
  */
-const Link: React.FC<LinkProps> = ({ children, className, linkRef, color, colorVariant, ...forwardedProps }) => {
-    return (
-        <a
-            {...forwardedProps}
-            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant }))}
-            ref={linkRef}
-        >
-            {children}
-        </a>
+const Link: React.FC<LinkProps> = ({
+    children,
+    className,
+    linkAs,
+    linkRef,
+    color,
+    colorVariant,
+    ...forwardedProps
+}) => {
+    return renderLink(
+        {
+            linkAs,
+            ...forwardedProps,
+            className: classNames(className, handleBasicClasses({ prefix: CLASSNAME, color, colorVariant })),
+            ref: linkRef,
+        },
+        children,
     );
 };
 Link.displayName = COMPONENT_NAME;

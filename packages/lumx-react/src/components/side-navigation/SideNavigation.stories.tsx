@@ -5,6 +5,9 @@ import { Emphasis, SideNavigation, SideNavigationItem } from '@lumx/react';
 
 export default { title: 'LumX components/side-navigation/Side Navigation' };
 
+const CustomLink: React.FC = ({ children, ...props }) =>
+    React.createElement('a', { ...props, style: { color: 'red' } }, children);
+
 export const sideNavigation = () => (
     <SideNavigation>
         <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
@@ -21,8 +24,9 @@ export const sideNavigation = () => (
             linkProps={{ href: 'https://www.google.com/not-visited' }}
         />
         <SideNavigationItem
-            label="Navigation item"
+            label="Navigation item (custom link)"
             emphasis={Emphasis.low}
+            linkAs={CustomLink}
             linkProps={{ href: 'https://www.google.com/not-visited-1' }}
         />
         <SideNavigationItem label="Navigation item" emphasis={Emphasis.low} />
