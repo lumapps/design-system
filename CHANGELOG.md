@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   Upgrade to mdi v5.6.55 and handle backward compatibility.
+-   On `Mosaic` component, change the default behavior for vertical images when at first position to contain mode instead of cover.
 -   _[BREAKING]_ `lumx-has-divider` mixin now accepts a position constant as second parameter (`lumx-base-const('position', 'TOP|RIGHT|BOTTOM|LEFT')`).
 
 ## [0.25.16][] - 2020-09-16

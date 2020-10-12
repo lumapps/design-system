@@ -8,13 +8,18 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
     className="lumx-mosaic__wrapper"
   >
     <div
-      className="lumx-mosaic__thumbnail"
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
       key="0"
     >
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/200"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -28,6 +33,11 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/210"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -41,6 +51,11 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/220"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -54,6 +69,11 @@ exports[`<Mosaic> Snapshots and structure should render story clickableThumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/230"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -71,13 +91,18 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
     className="lumx-mosaic__wrapper"
   >
     <div
-      className="lumx-mosaic__thumbnail"
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
       key="0"
     >
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/200"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
@@ -90,6 +115,11 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/210"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
@@ -102,6 +132,11 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/220"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
@@ -114,6 +149,90 @@ exports[`<Mosaic> Snapshots and structure should render story fourThumbnails 1`]
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/230"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Mosaic> Snapshots and structure should render story fourVerticalThumbnails 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-4-thumbnails"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/150"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="1"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/160"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="2"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/170"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="3"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/180"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
@@ -130,13 +249,46 @@ exports[`<Mosaic> Snapshots and structure should render story oneThumbnail 1`] =
     className="lumx-mosaic__wrapper"
   >
     <div
-      className="lumx-mosaic__thumbnail"
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
       key="0"
     >
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/200"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Mosaic> Snapshots and structure should render story oneVerticalThumbnail 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-1-thumbnail"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/150"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
@@ -153,13 +305,18 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
     className="lumx-mosaic__wrapper"
   >
     <div
-      className="lumx-mosaic__thumbnail"
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
       key="0"
     >
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/640/480/?image=24"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -173,6 +330,11 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/640/480/?image=25"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -186,6 +348,11 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/640/480/?image=26"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -199,6 +366,11 @@ exports[`<Mosaic> Snapshots and structure should render story sixThumbnails 1`] 
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/640/480/?image=27"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         tabIndex="0"
         theme="light"
@@ -224,13 +396,18 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
     className="lumx-mosaic__wrapper"
   >
     <div
-      className="lumx-mosaic__thumbnail"
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
       key="0"
     >
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/200"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
@@ -243,6 +420,11 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/210"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
@@ -255,6 +437,73 @@ exports[`<Mosaic> Snapshots and structure should render story threeThumbnails 1`
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/220"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Mosaic> Snapshots and structure should render story threeVerticalThumbnails 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-3-thumbnails"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/150"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="1"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/160"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail"
+      key="2"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/170"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
@@ -271,25 +520,80 @@ exports[`<Mosaic> Snapshots and structure should render story twoThumbnails 1`] 
     className="lumx-mosaic__wrapper"
   >
     <div
-      className="lumx-mosaic__thumbnail"
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
       key="0"
     >
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/200"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />
     </div>
     <div
-      className="lumx-mosaic__thumbnail"
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
       key="1"
     >
       <Thumbnail
         aspectRatio="free"
         fillHeight={true}
         image="https://picsum.photos/210"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Mosaic> Snapshots and structure should render story twoVerticalThumbnails 1`] = `
+<div
+  className="lumx-mosaic lumx-mosaic--theme-light lumx-mosaic--has-2-thumbnails"
+>
+  <div
+    className="lumx-mosaic__wrapper"
+  >
+    <div
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
+      key="0"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/150"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
+        onClick={[Function]}
+        theme="light"
+      />
+    </div>
+    <div
+      className="lumx-mosaic__thumbnail lumx-mosaic__thumbnail--is-contain-mode"
+      key="1"
+    >
+      <Thumbnail
+        aspectRatio="free"
+        fillHeight={true}
+        image="https://picsum.photos/100/160"
+        imgProps={
+          Object {
+            "onLoad": [Function],
+          }
+        }
         onClick={[Function]}
         theme="light"
       />

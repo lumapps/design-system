@@ -16,8 +16,8 @@
         bottom: -1px;
         left: -1px;
         display: grid;
-        /* Safari hack to make the mosaic fit the height of the parent */
-        height: stretch;
+        height: 100%;
+        background-color: lumx-color-variant('dark', 'L6');
 
         #{$self}--has-1-thumbnail & {
             grid-template-areas: 'b';
@@ -99,6 +99,15 @@
 
             &:nth-child(4) {
                 grid-area: s43;
+            }
+        }
+
+        &--is-contain-mode {
+            img {
+                top: 0 !important;
+                min-width: auto !important;
+                height: 100% !important;
+                margin: auto;
             }
         }
     }

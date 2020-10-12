@@ -15,6 +15,16 @@ export const oneThumbnail = ({ theme }: any) => {
     );
 };
 
+export const oneVerticalThumbnail = ({ theme }: any) => {
+    const wrapperStyle = { width: 250 };
+
+    return (
+        <div style={wrapperStyle}>
+            <Mosaic theme={theme} thumbnails={[{ url: 'https://picsum.photos/100/150' }]} />
+        </div>
+    );
+};
+
 export const twoThumbnails = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };
 
@@ -28,6 +38,18 @@ export const twoThumbnails = ({ theme }: any) => {
     );
 };
 
+export const twoVerticalThumbnails = ({ theme }: any) => {
+    const wrapperStyle = { width: 250 };
+
+    return (
+        <div style={wrapperStyle}>
+            <Mosaic
+                theme={theme}
+                thumbnails={[{ url: 'https://picsum.photos/100/150' }, { url: 'https://picsum.photos/100/160' }]}
+            />
+        </div>
+    );
+};
 export const threeThumbnails = ({ theme }: any) => {
     const wrapperStyle = { width: 250 };
 
@@ -39,6 +61,23 @@ export const threeThumbnails = ({ theme }: any) => {
                     { url: 'https://picsum.photos/200' },
                     { url: 'https://picsum.photos/210' },
                     { url: 'https://picsum.photos/220' },
+                ]}
+            />
+        </div>
+    );
+};
+
+export const threeVerticalThumbnails = ({ theme }: any) => {
+    const wrapperStyle = { width: 250 };
+
+    return (
+        <div style={wrapperStyle}>
+            <Mosaic
+                theme={theme}
+                thumbnails={[
+                    { url: 'https://picsum.photos/100/150' },
+                    { url: 'https://picsum.photos/100/160' },
+                    { url: 'https://picsum.photos/100/170' },
                 ]}
             />
         </div>
@@ -57,6 +96,24 @@ export const fourThumbnails = ({ theme }: any) => {
                     { url: 'https://picsum.photos/210' },
                     { url: 'https://picsum.photos/220' },
                     { url: 'https://picsum.photos/230' },
+                ]}
+            />
+        </div>
+    );
+};
+
+export const fourVerticalThumbnails = ({ theme }: any) => {
+    const wrapperStyle = { width: 250 };
+
+    return (
+        <div style={wrapperStyle}>
+            <Mosaic
+                theme={theme}
+                thumbnails={[
+                    { url: 'https://picsum.photos/100/150' },
+                    { url: 'https://picsum.photos/100/160' },
+                    { url: 'https://picsum.photos/100/170' },
+                    { url: 'https://picsum.photos/100/180' },
                 ]}
             />
         </div>
