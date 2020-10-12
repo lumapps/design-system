@@ -88,28 +88,29 @@ function useHandleElementFocus(
 const withSelectContext = (
     SelectElement: any,
     {
+        children,
         className,
-        hasError = DEFAULT_PROPS.hasError,
         error,
-        onClear,
-        isValid = DEFAULT_PROPS.isValid,
-        theme = DEFAULT_PROPS.theme,
-        variant = DEFAULT_PROPS.variant,
-        value,
+        hasError = DEFAULT_PROPS.hasError,
         helper,
         isDisabled,
-        isRequired,
-        onBlur,
-        isOpen = DEFAULT_PROPS.isOpen,
-        onInputClick,
-        onDropdownClose,
-        label,
-        placeholder,
-        children,
-        onInfiniteScroll,
-        useCustomColors,
         isEmpty,
         isMultiple,
+        isOpen = DEFAULT_PROPS.isOpen,
+        isRequired,
+        isValid = DEFAULT_PROPS.isValid,
+        closeOnClick = !isMultiple,
+        label,
+        placeholder,
+        theme = DEFAULT_PROPS.theme,
+        useCustomColors,
+        value,
+        variant = DEFAULT_PROPS.variant,
+        onBlur,
+        onClear,
+        onDropdownClose,
+        onInfiniteScroll,
+        onInputClick,
         ...forwardedProps
     }: SelectProps,
 ): React.ReactElement => {
@@ -166,28 +167,28 @@ const withSelectContext = (
         >
             <SelectElement
                 {...forwardedProps}
-                variant={variant}
-                label={label}
-                value={value}
-                isEmpty={isEmpty}
-                isValid={isValid}
+                anchorRef={anchorRef}
+                handleKeyboardNav={handleKeyboardNav}
                 hasError={hasError}
+                isEmpty={isEmpty}
+                isRequired={isRequired}
+                isValid={isValid}
+                label={label}
+                placeholder={placeholder}
+                targetUuid={targetUuid}
+                theme={theme}
+                value={value}
+                variant={variant}
                 onClear={onClear}
                 onInputClick={onInputClick}
-                theme={theme}
-                placeholder={placeholder}
-                handleKeyboardNav={handleKeyboardNav}
-                targetUuid={targetUuid}
-                anchorRef={anchorRef}
-                isRequired={isRequired}
             />
             <Dropdown
-                closeOnClick={!isMultiple}
+                anchorRef={anchorRef}
+                closeOnClick={closeOnClick}
                 closeOnClickAway={true}
                 closeOnEscape={true}
-                placement={Placement.BOTTOM_START}
                 isOpen={isOpen!}
-                anchorRef={anchorRef}
+                placement={Placement.BOTTOM_START}
                 onClose={onClose}
                 onInfiniteScroll={onInfiniteScroll}
             >
