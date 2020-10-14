@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ Downgrade mdi back to v4.2.95.
+
 ## [0.26.0][] - 2020-10-13
 
 ### Added
@@ -18,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
--   Upgrade to mdi v5.6.55 and handle backward compatibility.
+-   _[BREAKING]_ Upgrade to mdi v5.6.55 and handle backward compatibility.
 -   _[BREAKING]_ `lumx-has-divider` mixin now accepts a position constant as second parameter (`lumx-base-const('position', 'TOP|RIGHT|BOTTOM|LEFT')`).
 
 ## [0.25.16][] - 2020-09-16

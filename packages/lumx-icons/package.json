@@ -4,8 +4,8 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@mdi/font": "5.6.55",
-        "@mdi/js": "5.6.55"
+        "@mdi/font": "4.2.95",
+        "@mdi/js": "4.2.95"
     },
     "description": "LumX icons",
     "engines": {
