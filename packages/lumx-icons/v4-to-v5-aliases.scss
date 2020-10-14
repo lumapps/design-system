@@ -1,0 +1,518 @@
+.mdi-cowboy {
+    @extend .mdi-account-cowboy-hat;
+}
+
+.mdi-worker {
+    @extend .mdi-account-hard-hat;
+}
+
+.mdi-artist {
+    @extend .mdi-account-music;
+}
+
+.mdi-artist-outline {
+    @extend .mdi-account-music-outline;
+}
+
+.mdi-voice {
+    @extend .mdi-account-voice;
+}
+
+.mdi-airplay {
+    @extend .mdi-apple-airplay;
+}
+
+.mdi-account-badge {
+    @extend .mdi-badge-account;
+}
+
+.mdi-account-badge-alert {
+    @extend .mdi-badge-account-alert;
+}
+
+.mdi-account-badge-alert-outline {
+    @extend .mdi-badge-account-alert-outline;
+}
+
+.mdi-account-badge-horizontal {
+    @extend .mdi-badge-account-horizontal;
+}
+
+.mdi-account-badge-horizontal-outline {
+    @extend .mdi-badge-account-horizontal-outline;
+}
+
+.mdi-account-badge-outline {
+    @extend .mdi-badge-account-outline;
+}
+
+.mdi-hotel {
+    @extend .mdi-bed;
+}
+
+.mdi-dictionary {
+    @extend .mdi-book-alphabet;
+}
+
+.mdi-bible {
+    @extend .mdi-book-cross;
+}
+
+.mdi-audiobook {
+    @extend .mdi-book-music;
+}
+
+.mdi-book-open-variant {
+    @extend .mdi-book-open-blank-variant;
+}
+
+.mdi-square-inc {
+    @extend .mdi-book-remove-multiple-outline;
+}
+
+.mdi-bowl {
+    @extend .mdi-bowl-mix;
+}
+
+.mdi-calendar-repeat {
+    @extend .mdi-calendar-sync;
+}
+
+.mdi-calendar-repeat-outline {
+    @extend .mdi-calendar-sync-outline;
+}
+
+.mdi-account-card-details {
+    @extend .mdi-card-account-details;
+}
+
+.mdi-account-card-details-outline {
+    @extend .mdi-card-account-details-outline;
+}
+
+.mdi-github-box {
+    @extend .mdi-card-account-details-star;
+}
+
+.mdi-github-face {
+    @extend .mdi-card-account-details-star-outline;
+}
+
+.mdi-contact-mail {
+    @extend .mdi-card-account-mail;
+}
+
+.mdi-contact-mail-outline {
+    @extend .mdi-card-account-mail-outline;
+}
+
+.mdi-contact-phone {
+    @extend .mdi-card-account-phone;
+}
+
+.mdi-contact-phone-outline {
+    @extend .mdi-card-account-phone-outline;
+}
+
+.mdi-cellphone-settings-variant {
+    @extend .mdi-cellphone-cog;
+}
+
+.mdi-coins {
+    @extend .mdi-circle-multiple-outline;
+}
+
+.mdi-tor {
+    @extend .mdi-cloud-refresh;
+}
+
+.mdi-json {
+    @extend .mdi-code-json;
+}
+
+.mdi-settings {
+    @extend .mdi-cog;
+}
+
+.mdi-settings-box {
+    @extend .mdi-cog-box;
+}
+
+.mdi-settings-outline {
+    @extend .mdi-cog-outline;
+}
+
+.mdi-settings-transfer {
+    @extend .mdi-cog-transfer;
+}
+
+.mdi-settings-transfer-outline {
+    @extend .mdi-cog-transfer-outline;
+}
+
+.mdi-coin-outline {
+    @extend .mdi-currency-usd-circle-outline;
+}
+
+.mdi-database-refresh {
+    @extend .mdi-database-sync;
+}
+
+.mdi-file-settings-variant {
+    @extend .mdi-file-cog;
+}
+
+.mdi-file-settings-variant-outline {
+    @extend .mdi-file-cog-outline;
+}
+
+.mdi-library-books {
+    @extend .mdi-filmstrip-box;
+}
+
+.mdi-library-movie {
+    @extend .mdi-filmstrip-box-multiple;
+}
+
+.mdi-folder-settings-variant {
+    @extend .mdi-folder-cog;
+}
+
+.mdi-folder-settings-variant-outline {
+    @extend .mdi-folder-cog-outline;
+}
+
+.mdi-tumblr-reblog {
+    @extend .mdi-folder-refresh-outline;
+}
+
+.mdi-textarea {
+    @extend .mdi-form-textarea;
+}
+
+.mdi-textbox {
+    @extend .mdi-form-textbox;
+}
+
+.mdi-textbox-password {
+    @extend .mdi-form-textbox-password;
+}
+
+.mdi-github-circle {
+    @extend .mdi-github;
+}
+
+.mdi-nfc-off {
+    @extend .mdi-ice-cream-off;
+}
+
+.mdi-image-filter {
+    @extend .mdi-image-multiple-outline;
+}
+
+.mdi-markdown {
+    @extend .mdi-language-markdown;
+}
+
+.mdi-markdown-outline {
+    @extend .mdi-language-markdown-outline;
+}
+
+.mdi-ruby {
+    @extend .mdi-language-ruby;
+}
+
+.mdi-xaml {
+    @extend .mdi-language-xaml;
+}
+
+.mdi-message-settings-variant {
+    @extend .mdi-message-cog;
+}
+
+.mdi-azure {
+    @extend .mdi-microsoft-azure;
+}
+
+.mdi-azure-devops {
+    @extend .mdi-microsoft-azure-devops;
+}
+
+.mdi-bing {
+    @extend .mdi-microsoft-bing;
+}
+
+.mdi-microsoft-dynamics {
+    @extend .mdi-microsoft-dynamics-365;
+}
+
+.mdi-edge {
+    @extend .mdi-microsoft-edge;
+}
+
+.mdi-internet-explorer {
+    @extend .mdi-microsoft-internet-explorer;
+}
+
+.mdi-office {
+    @extend .mdi-microsoft-office;
+}
+
+.mdi-onedrive {
+    @extend .mdi-microsoft-onedrive;
+}
+
+.mdi-onenote {
+    @extend .mdi-microsoft-onenote;
+}
+
+.mdi-outlook {
+    @extend .mdi-microsoft-outlook;
+}
+
+.mdi-visual-studio {
+    @extend .mdi-microsoft-visual-studio;
+}
+
+.mdi-visual-studio-code {
+    @extend .mdi-microsoft-visual-studio-code;
+}
+
+.mdi-windows {
+    @extend .mdi-microsoft-windows;
+}
+
+.mdi-windows-classic {
+    @extend .mdi-microsoft-windows-classic;
+}
+
+.mdi-xbox {
+    @extend .mdi-microsoft-xbox;
+}
+
+.mdi-xbox-controller {
+    @extend .mdi-microsoft-xbox-controller;
+}
+
+.mdi-xbox-controller-battery-alert {
+    @extend .mdi-microsoft-xbox-controller-battery-alert;
+}
+
+.mdi-xbox-controller-battery-charging {
+    @extend .mdi-microsoft-xbox-controller-battery-charging;
+}
+
+.mdi-xbox-controller-battery-empty {
+    @extend .mdi-microsoft-xbox-controller-battery-empty;
+}
+
+.mdi-xbox-controller-battery-full {
+    @extend .mdi-microsoft-xbox-controller-battery-full;
+}
+
+.mdi-xbox-controller-battery-low {
+    @extend .mdi-microsoft-xbox-controller-battery-low;
+}
+
+.mdi-xbox-controller-battery-medium {
+    @extend .mdi-microsoft-xbox-controller-battery-medium;
+}
+
+.mdi-xbox-controller-battery-unknown {
+    @extend .mdi-microsoft-xbox-controller-battery-unknown;
+}
+
+.mdi-xbox-controller-menu {
+    @extend .mdi-microsoft-xbox-controller-menu;
+}
+
+.mdi-xbox-controller-off {
+    @extend .mdi-microsoft-xbox-controller-off;
+}
+
+.mdi-xbox-controller-view {
+    @extend .mdi-microsoft-xbox-controller-view;
+}
+
+.mdi-yammer {
+    @extend .mdi-microsoft-yammer;
+}
+
+.mdi-periodic-table-co2 {
+    @extend .mdi-molecule-co2;
+}
+
+.mdi-library-music {
+    @extend .mdi-music-box-multiple;
+}
+
+.mdi-library-music-outline {
+    @extend .mdi-music-box-multiple-outline;
+}
+
+.mdi-wii {
+    @extend .mdi-nintendo-wii;
+}
+
+.mdi-wiiu {
+    @extend .mdi-nintendo-wiiu;
+}
+
+.mdi-facebook-box {
+    @extend .mdi-facebook;
+}
+
+.mdi-google-plus-box {
+    @extend .mdi-google-plus;
+}
+
+.mdi-npm-variant,
+.mdi-npm-variant-outline {
+    @extend .mdi-npm;
+}
+
+.mdi-twitter-box,
+.mdi-twitter-circle {
+    @extend .mdi-twitter;
+}
+
+.mdi-library-video {
+    @extend .mdi-play-box-multiple;
+}
+
+.mdi-pot {
+    @extend .mdi-pot-steam;
+}
+
+.mdi-cisco-webex {
+    @extend .mdi-roller-skate-off;
+}
+
+.mdi-network-router {
+    @extend .mdi-router-network;
+}
+
+.mdi-sailing {
+    @extend .mdi-sail-boat;
+}
+
+.mdi-current-ac {
+    @extend .mdi-sine-wave;
+}
+
+.mdi-playstation {
+    @extend .mdi-sony-playstation;
+}
+
+.mdi-sort-alphabetical {
+    @extend .mdi-sort-alphabetical-variant;
+}
+
+.mdi-sort-numeric {
+    @extend .mdi-sort-numeric-variant;
+}
+
+.mdi-star-half {
+    @extend .mdi-star-half-full;
+}
+
+.mdi-sticker {
+    @extend .mdi-sticker-circle-outline;
+}
+
+.mdi-storefront {
+    @extend .mdi-storefront-outline;
+}
+
+.mdi-file-document-box {
+    @extend .mdi-text-box;
+}
+
+.mdi-file-document-box-check {
+    @extend .mdi-text-box-check;
+}
+
+.mdi-file-document-box-check-outline {
+    @extend .mdi-text-box-check-outline;
+}
+
+.mdi-file-document-box-minus {
+    @extend .mdi-text-box-minus;
+}
+
+.mdi-file-document-box-minus-outline {
+    @extend .mdi-text-box-minus-outline;
+}
+
+.mdi-file-document-box-multiple {
+    @extend .mdi-text-box-multiple;
+}
+
+.mdi-file-document-box-multiple-outline {
+    @extend .mdi-text-box-multiple-outline;
+}
+
+.mdi-file-document-box-outline {
+    @extend .mdi-text-box-outline;
+}
+
+.mdi-file-document-box-plus {
+    @extend .mdi-text-box-plus;
+}
+
+.mdi-file-document-box-plus-outline {
+    @extend .mdi-text-box-plus-outline;
+}
+
+.mdi-file-document-box-remove {
+    @extend .mdi-text-box-remove;
+}
+
+.mdi-file-document-box-remove-outline {
+    @extend .mdi-text-box-remove-outline;
+}
+
+.mdi-file-document-box-search {
+    @extend .mdi-text-box-search;
+}
+
+.mdi-file-document-box-search-outline {
+    @extend .mdi-text-box-search-outline;
+}
+
+.mdi-timer-off {
+    @extend .mdi-timer-off-outline;
+}
+
+.mdi-timer {
+    @extend .mdi-timer-outline;
+}
+
+.mdi-towing {
+    @extend .mdi-tow-truck;
+}
+
+.mdi-camcorder-box {
+    @extend .mdi-video-box;
+}
+
+.mdi-camcorder-box-off {
+    @extend .mdi-video-box-off;
+}
+
+.mdi-wall-sconce-variant {
+    @extend .mdi-wall-sconce-round-variant;
+}
+
+.mdi-hackernews {
+    @extend .mdi-y-combinator;
+}
+
+.mdi-youtube-creator-studio {
+    @extend .mdi-youtube-studio;
+}
+
+.mdi-linkedin-box {
+    @extend .mdi-linkedin;
+}
+

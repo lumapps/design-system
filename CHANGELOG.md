@@ -76,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   _[BREAKING]_ The alternative text is now required (`alt` prop in `Thumbnail`, `thumbnails[].alt` in `Mosaic`, `alt` in `ImageBlock`, `thumbnailProps.alt` in `PostBlock` and `thumbnailProps.alt` in `LinkPreview`).
 -   _[BREAKING]_ The title is now required in `ImageBlock`.
 -   _[BREAKING]_ Reworked Thumbnail CORS default. `crossOrigin` now default to `undefined` instead of `'anonymous'`. `isCrossOriginEnabled` prop was removed (use `crossOrigin={undefined}` instead).
+-   _[BREAKING]_ Upgrade to mdi v5.8.55 and handle backward compatibility (see [details]([./packages/lumx-icons/README-v4-to-v5-migration.md])).
 
 ### Removed
 
@@ -143,11 +144,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Added component `SlideshowControls` to control a slideshow from the outside
 -   Add `linkAs` prop on `Button` and `IconButton` to customize the link component (can be used to inject the `Link` component from `react-router`).
--   Make it possible to override `tabIndex` and `role` props of `ListItem.linkProps`.
-
-### Fixed
-
--   Fixed page freeze when trying to use keyboard navigation on `List` component that has custom children.
 
 ### Changed
 
