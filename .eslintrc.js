@@ -1123,7 +1123,7 @@ module.exports = {
             },
         ],
         'import/first': 'error',
-        'import/group-exports': 'off',
+        'import/group-exports': 'error',
         'import/max-dependencies': [
             'warn',
             {
