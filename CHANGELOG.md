@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.0][] - 2020-10-13
+
 ### Added
 
 -   Add `gap` property to `FlexBox` component.
@@ -746,3 +748,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.25.15]: https://github.com/lumapps/design-system/tree/v0.25.15
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.25.16...HEAD
 [0.25.16]: https://github.com/lumapps/design-system/tree/v0.25.16
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.26.0...HEAD
+[0.26.0]: https://github.com/lumapps/design-system/tree/v0.26.0
