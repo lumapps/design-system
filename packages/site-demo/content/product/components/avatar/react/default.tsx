@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
-import { Avatar, Emphasis, IconButton, Size } from '@lumx/react';
+import { Avatar, Size } from '@lumx/react';
 
 const App = ({ theme }: any) => (
     <div className="demo-grid">
@@ -9,44 +8,7 @@ const App = ({ theme }: any) => (
         <Avatar theme={theme} image="./assets/persona.png" size={Size.s} />
         <Avatar theme={theme} image="./assets/persona.png" size={Size.m} />
         <Avatar theme={theme} image="./assets/persona.png" size={Size.l} />
-        <Avatar
-            theme={theme}
-            image="./assets/persona.png"
-            size={Size.xl}
-            actions={
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <div className="lumx-spacing-margin-right-regular">
-                        <IconButton
-                            color="dark"
-                            emphasis={Emphasis.low}
-                            hasBackground={true}
-                            icon={mdiPencil}
-                            size={Size.s}
-                        />
-                    </div>
-
-                    <div className="lumx-spacing-margin-right-regular">
-                        <IconButton
-                            color="dark"
-                            emphasis={Emphasis.low}
-                            hasBackground={true}
-                            icon={mdiEye}
-                            size={Size.s}
-                        />
-                    </div>
-
-                    <div>
-                        <IconButton
-                            color="dark"
-                            emphasis={Emphasis.low}
-                            hasBackground={true}
-                            icon={mdiDelete}
-                            size={Size.s}
-                        />
-                    </div>
-                </div>
-            }
-        />
+        <Avatar theme={theme} image="./assets/persona.png" size={Size.xl} />
     </div>
 );
 
