@@ -1,12 +1,24 @@
 import React from 'react';
 
-import { Badge, ColorPalette } from '@lumx/react';
+import { Avatar, Badge, ColorPalette, Size } from '@lumx/react';
 
 const App = () => {
     return (
-        <Badge color={ColorPalette.blue}>
-            <span>30</span>
-        </Badge>
+        <div className="demo-grid">
+            <Badge color={ColorPalette.red}>
+                <span>4</span>
+            </Badge>
+
+            <Avatar
+                image="../avatar/assets/persona.png"
+                size={Size.m}
+                badge={
+                    <Badge color={ColorPalette.red}>
+                        <span>4</span>
+                    </Badge>
+                }
+            />
+        </div>
     );
 };
 
