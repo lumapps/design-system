@@ -5,11 +5,11 @@ import { Alignment, ColorPalette, FlexBox, Icon, Link, Orientation, Size, Theme 
 
 const App = ({ theme }: any) => (
     <>
-        <div className="lumx-spacing-margin-bottom">
+        <div className="lumx-spacing-margin-bottom-big">
             <Link color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}>Default link</Link>
         </div>
 
-        <div className="lumx-spacing-margin-bottom">
+        <div className="lumx-spacing-margin-bottom-big">
             <Link color={theme === Theme.light ? ColorPalette.dark : ColorPalette.light}>
                 <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                     <Icon icon={mdiPencil} size={Size.xs} className="lumx-spacing-margin-right-tiny" />
