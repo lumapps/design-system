@@ -32,7 +32,7 @@ const App = () => {
             </Button>
 
             <Dropdown isOpen={isSimpleOpen} onClose={closeSimpleMenu} anchorRef={anchorSimpleRef}>
-                <List isClickable>
+                <List>
                     <ListItem onItemSelected={onSimpleMenuSelected('losangeles')} size={Size.tiny}>
                         Los Angeles
                     </ListItem>
@@ -61,7 +61,7 @@ const App = () => {
             </Button>
 
             <Dropdown isOpen={isComplexOpen} onClose={closeComplexMenu} anchorRef={anchorComplexRef}>
-                <List isClickable>
+                <List>
                     <ListSubheader>Contribution</ListSubheader>
 
                     <ListItem onItemSelected={onComplexMenuSelected('pages')} size={Size.tiny}>

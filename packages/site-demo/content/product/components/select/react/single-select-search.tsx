@@ -46,7 +46,7 @@ const App = ({ theme }: any) => {
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List isClickable>
+            <List>
                 <ListSubheader>
                     <TextField
                         style={{ width: '100%', padding: 0 }}

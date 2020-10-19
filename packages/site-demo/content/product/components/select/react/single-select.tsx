@@ -38,7 +38,7 @@ const App = ({ theme }: any) => {
             onInputClick={toggleSelect}
             onDropdownClose={closeSelect}
         >
-            <List isClickable>
+            <List>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem

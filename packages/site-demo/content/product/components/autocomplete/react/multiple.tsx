@@ -234,7 +234,7 @@ const App = ({ theme }: any) => {
             onBlur={onBlur}
             selectedChipRender={selectedChipRender}
         >
-            <List theme={theme} isClickable>
+            <List theme={theme}>
                 {filteredCities.map((city, index) => {
                     const onItemSelected = () => setSelectedCity(city);
                     return (

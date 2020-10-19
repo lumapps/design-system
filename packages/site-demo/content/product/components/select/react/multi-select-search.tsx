@@ -94,7 +94,7 @@ const App = ({ theme }: any) => {
             selectedChipRender={selectedChipRender}
             selectedValueRender={selectedValueRender}
         >
-            <List isClickable={isOpen}>
+            <List>
                 <ListSubheader>
                     <TextField
                         style={{ width: '100%', padding: 0 }}

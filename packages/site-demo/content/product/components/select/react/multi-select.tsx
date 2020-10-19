@@ -37,7 +37,7 @@ const App = ({ theme }: any) => {
             theme={theme}
             onClear={clearSelected}
         >
-            <List isClickable={isOpen}>
+            <List>
                 {CHOICES.length > 0
                     ? CHOICES.map((choice, index) => (
                           <ListItem
