@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Dropdown, List, ListItem, ListSubheader, Placement, Size } from '@lumx/react';
+import { Button, Dropdown, List, ListItem, ListSubheader, Size } from '@lumx/react';
 
 const App = () => {
     const anchorSimpleRef = React.useRef(null);
@@ -31,14 +31,7 @@ const App = () => {
                 Simple Menu
             </Button>
 
-            <Dropdown
-                closeOnClickAway
-                closeOnEscape
-                isOpen={isSimpleOpen}
-                onClose={closeSimpleMenu}
-                placement={Placement.BOTTOM_START}
-                anchorRef={anchorSimpleRef}
-            >
+            <Dropdown isOpen={isSimpleOpen} onClose={closeSimpleMenu} anchorRef={anchorSimpleRef}>
                 <List isClickable>
                     <ListItem onItemSelected={onSimpleMenuSelected('losangeles')} size={Size.tiny}>
                         Los Angeles
@@ -67,14 +60,7 @@ const App = () => {
                 Complex Menu
             </Button>
 
-            <Dropdown
-                closeOnClickAway={false}
-                closeOnEscape={false}
-                isOpen={isComplexOpen}
-                offset={{ along: 20 }}
-                placement={Placement.BOTTOM_START}
-                anchorRef={anchorComplexRef}
-            >
+            <Dropdown isOpen={isComplexOpen} onClose={closeComplexMenu} anchorRef={anchorComplexRef}>
                 <List isClickable>
                     <ListSubheader>Contribution</ListSubheader>
 
