@@ -4,55 +4,77 @@
 
 <DemoBlock demo="default" withThemeSwitcher />
 
-## States
+## Special states
 
-There are three states: _disabled_, _valid_, and _invalid_.
+There are three special states: `isDisabled`, `isValid`, and `hasError`.
 
-### Disabled
+### Is disabled
+
+Use `isDisabled` when values can't be edited.
 
 <DemoBlock demo="disabled" withThemeSwitcher />
 
-### Valid
+### Is valid
+
+Use `isValid` to tell that entered values are considered correct.
 
 <DemoBlock demo="valid" withThemeSwitcher />
 
-### Invalid
+### Has error
+
+Use `hasError` to tell that entered values are considered incorrect.
 
 <DemoBlock demo="invalid" withThemeSwitcher />
 
 ## Options
 
-There are six options: _helper text_, _placeholder_, _icon_, _clearable_, _with counter_ and _with chips_.
+There are seven options: `isRequired`, `helper`, `placeholder`, `icon`, `isClearable`, `maxLength` and `chips`.
 
-### Helper text
+### Is required
+
+Use `isRequired` to tell that the text field must be filled to submit the form.
+
+<DemoBlock demo="required" withThemeSwitcher />
+
+### Helper
+
+Use `helper` to provide gidance.
 
 <DemoBlock demo="helper" withThemeSwitcher />
 
 ### Placeholder
 
+Use `placeholder` to give an example of expected values or invite filling text fields.
+
 <DemoBlock demo="placeholder" withThemeSwitcher />
 
 ### Icon
 
+Use `icon` to illustrate text fields `label`, `icon` complements `label` but can't replace it.
+
 <DemoBlock demo="icon" withThemeSwitcher />
 
-### Clearable
+### Is clearable
 
 <DemoBlock demo="clearable" withThemeSwitcher />
 
-### With Counter
+Use `clearable` when it is useful for users or if it trigger an action like clearing a text filter to remove the filtering.
 
-Use textfields with counter when users inputs length is limited.
+### Max length
+
+Use `maxLength` when users inputs length are limited.
 
 <DemoBlock demo="character-counter" withThemeSwitcher />
 
-### With Chips
+### Chips
 
-Use textfields with chips when users inputs need to be split in distinct parts such as tag entry.
+Use `chips` when users inputs need to be split in distinct parts such as tag entry.
 
 <DemoBlock demo="with-chips" withThemeSwitcher />
 
 ## Textarea
+
+Use Text areas when users are expect to enter more than one line of text.
 
 <DemoBlock demo="text-area" withThemeSwitcher />
 
