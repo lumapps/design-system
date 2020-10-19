@@ -7,7 +7,8 @@ const App = () => {
     const LOCALE = 'en';
 
     const now = new Date();
-    now.setDate(now.getDate() + 45);
+    const minDate = new Date();
+    minDate.setDate(minDate.getDate() - 1);
 
     const [datePicked, setDatePicked] = React.useState<Date | Moment | string>(now);
 
@@ -17,7 +18,8 @@ const App = () => {
 
     return (
         <div className="demo-grid">
-            <DatePicker value={datePicked} locale={LOCALE} onChange={handleDatePicked} />
+            <DatePicker value={datePicked} locale={LOCALE} onChange={handleDatePicked} minDate={minDate} />
+            <DatePicker value={datePicked} locale={LOCALE} onChange={handleDatePicked} maxDate={now} />
         </div>
     );
 };
