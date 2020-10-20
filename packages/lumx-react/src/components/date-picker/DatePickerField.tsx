@@ -41,13 +41,12 @@ const COMPONENT_NAME = 'DatePickerField';
 
 const DatePickerField = ({
     defaultMonth,
-    onChange,
-    name,
     disabled,
     isDisabled = disabled,
     locale,
     maxDate,
     minDate,
+    name,
     onChange,
     value,
     ...textFieldProps
