@@ -1,8 +1,9 @@
+import { mdiPlay } from '@lumx/icons';
 import { Button, Notification, NotificationType } from '@lumx/react';
 
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+const App = () => {
     const properties = {
         error: {
             content: 'Error',
@@ -59,23 +60,23 @@ const App = ({ theme }: any) => {
 
     return (
         <div className="demo-grid">
-            <Button type="button" theme={theme} onClick={onClick('info')}>
+            <Button leftIcon={mdiPlay} onClick={onClick('info')}>
                 Info
             </Button>
 
-            <Button type="button" theme={theme} onClick={onClick('success')}>
+            <Button leftIcon={mdiPlay} onClick={onClick('success')}>
                 Success
             </Button>
 
-            <Button type="button" theme={theme} onClick={onClick('warning')}>
+            <Button leftIcon={mdiPlay} onClick={onClick('warning')}>
                 Warning
             </Button>
 
-            <Button type="button" theme={theme} onClick={onClick('error')}>
+            <Button leftIcon={mdiPlay} onClick={onClick('error')}>
                 Error
             </Button>
 
-            <Button type="button" theme={theme} onClick={onClick('infoWithCallback')}>
+            <Button leftIcon={mdiPlay} onClick={onClick('infoWithCallback')}>
                 Info with callback
             </Button>
 
