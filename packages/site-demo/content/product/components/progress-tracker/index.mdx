@@ -1,32 +1,34 @@
 # Progress tracker <ReactStabilityFlag status="unstable" />
 
 **Progress tracker convey user progress through a sequence of steps.**
-A step can be completed by a helper text.
+
+<DemoBlock demo="default" />
 
 ## States
 
-There are four states: _Current_, _Future_, _Completed_, and _Error_.
+A step can be active or complete.
 
 <DemoBlock demo="states" />
 
-### Current
+### Helper
 
-<DemoBlock demo="current" />
-
-### Future
-
-<DemoBlock demo="future" />
-
-### Completed
-
-<DemoBlock demo="completed" />
-
-### Future with helper
+A step can be completed by a helper text.
 
 <DemoBlock demo="helper" />
 
 ### Error
 
 When an error occurs, the error message can replace the helper text.
+Step can be inactive or active but can't be completed while in error.
 
 <DemoBlock demo="error" />
+
+### Properties
+
+#### ProgressTracker
+
+<PropTable component="ProgressTracker" />
+
+#### ProgressTrackerStep
+
+<PropTable component="ProgressTrackerStep" />
