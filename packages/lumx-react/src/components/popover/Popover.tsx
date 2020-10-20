@@ -6,7 +6,7 @@ import { usePopper } from 'react-popper';
 
 import classNames from 'classnames';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, DOCUMENT, WINDOW } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
 import { useFocus } from '@lumx/react/hooks/useFocus';
 import { ClickAwayProvider } from '@lumx/react/utils/ClickAwayProvider';
@@ -176,6 +176,11 @@ const applyMaxHeight = {
  * @return The component.
  */
 const Popover: React.FC<PopoverProps> = (props) => {
+    if (!DOCUMENT) {
+        // Can't render in SSR.
+        return null;
+    }
+
     const {
         anchorRef,
         popoverRef,
@@ -223,8 +228,7 @@ const Popover: React.FC<PopoverProps> = (props) => {
         const newStyles = { ...styles.popper, zIndex };
 
         if (fitWithinViewportHeight && !newStyles.maxHeight) {
-            const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-            newStyles.maxHeight = windowHeight;
+            newStyles.maxHeight = WINDOW?.innerHeight || DOCUMENT?.documentElement.clientHeight;
         }
 
         return newStyles;

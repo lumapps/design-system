@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { TAB_KEY_CODE } from '@lumx/react/constants';
+import { DOCUMENT, TAB_KEY_CODE } from '@lumx/react/constants';
 
 /**
  * Get first and last elements focusable in an element.
@@ -34,10 +34,10 @@ function getFocusable(parentElement: HTMLElement) {
 export function useFocusTrap(
     focusZoneElement: HTMLElement | null,
     focusElement?: HTMLElement | null,
-    rootElement = document.body,
+    rootElement = DOCUMENT?.body,
 ) {
     useEffect(() => {
-        if (focusZoneElement) {
+        if (rootElement && focusZoneElement) {
             (document.activeElement as HTMLElement)?.blur();
             if (focusElement) {
                 focusElement.focus();

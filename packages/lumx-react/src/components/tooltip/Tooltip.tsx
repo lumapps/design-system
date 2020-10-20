@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 import { Placement } from '@lumx/react/components/popover/Popover';
 
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 
 import { Falsy, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
@@ -68,6 +68,10 @@ const OFFSET = 8;
  * @return The component.
  */
 const Tooltip: React.FC<TooltipProps> = (props) => {
+    if (!DOCUMENT) {
+        // Can't render in SSR.
+        return null;
+    }
     const { label, children, className, delay, placement, forceOpen, ...forwardedProps } = props;
     if (!label) {
         return <>{children}</>;

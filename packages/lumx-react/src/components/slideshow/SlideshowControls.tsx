@@ -81,6 +81,7 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
         return null;
     }
+    const lastSlide = slidesCount - 1;
 
     /**
      * Handle keyboard shortcuts to navigate through slideshow.
@@ -224,7 +225,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
         PaginationRange,
         React.Dispatch<React.SetStateAction<PaginationRange>>,
     ] = useState(initVisibleRange(activeIndex));
-    const lastSlide: number = slidesCount - 1;
     const paginationItems: JSX.Element[] = buildItemsArray(lastSlide);
 
     useEffect(() => {
