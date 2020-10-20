@@ -3,18 +3,25 @@
    ========================================================================== */
 
 .demo-block {
-    border: 1px solid lumx-color-variant(dark, L4);
+    $self: &;
+    border: 1px solid $lumx-color-dark-L4;
     border-radius: $lumx-border-radius;
 
     &__content {
         padding: $lumx-spacing-unit * 3;
+
+        #{$self}--has-play-button & {
+            display: flex;
+            justify-content: center;
+            background-color: $lumx-color-dark-L6;
+        }
     }
 
     &__toolbar {
         display: flex;
         align-items: center;
         padding: $lumx-spacing-unit $lumx-spacing-unit * 2 $lumx-spacing-unit $lumx-spacing-unit;
-        border-top: 1px solid lumx-color-variant(dark, L4);
+        border-top: 1px solid $lumx-color-dark-L4;
     }
 
     &__code-toggle {
@@ -26,7 +33,7 @@
     }
 
     &__code {
-        border-top: 1px solid lumx-color-variant(dark, L4);
+        border-top: 1px solid $lumx-color-dark-L4;
 
         code {
             display: block;

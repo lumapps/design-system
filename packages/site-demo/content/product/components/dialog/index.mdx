@@ -1,46 +1,35 @@
 # Dialog <ReactStabilityFlag status="unstable" />
 
-## Default
+**Inform users about a task and can contain critical information, require decisions, or involve multiple tasks.**
 
-Dialogs have a title, a body, and at least one or more buttons.
+<DemoBlock demo="default" hasPlayButton />
 
-<DemoBlock demo="default" withThemeSwitcher />
+## Anatomy
 
-## Prevent Auto dismiss
+Dialogs can have three sections: header ([toolbar component](/product/components/toolbar)), body and footer ([toolbar component](/product/components/toolbar)).
+On user scroll, the header stays fixed on top and the footer at the bottom of the dialog.
 
-Prevent the clickaway and the escape to dismiss.
+<img width="100%" src="assets/anatomy.png" />
 
-<DemoBlock demo="prevent-auto-dismiss" withThemeSwitcher />
+## Typology
 
-## With scrollbar
-
-When a dialog requires scrolling, the title stays at the top while the buttons stay at the bottom.
-
-<DemoBlock demo="scrollable" withThemeSwitcher />
-
-### With header action
-
-There can be actions in the dialog header.
-
-<DemoBlock demo="action" withThemeSwitcher />
-
-## Alert dialog
-
-Use alert dialogs to interrupt users with urgent information, details, or action requests.
-
-<DemoBlock demo="alert" withThemeSwitcher />
-
-## Confirm dialog
+### Confirm dialog
 
 Confirmation dialogs cannot be dismissed until users confirm a choice.
 
-<DemoBlock demo="confirm" withThemeSwitcher />
+<DemoBlock demo="confirm" hasPlayButton />
+
+### Alert dialog
+
+Use alert dialogs to interrupt users with urgent information, details, or action requests.
+
+<DemoBlock demo="alert" hasPlayButton />
 
 ## Sizes
 
-Dialogs come in four sizes: tiny (400dp), regular (600dp), big (800dp), and huge (full screen).
+Dialogs come in four sizes: `tiny` (400dp), `regular` (600dp), `big` (800dp), and `huge` (full screen).
 
-<DemoBlock demo="sizes" withThemeSwitcher />
+<DemoBlock demo="sizes" hasPlayButton />
 
 ### Properties
 

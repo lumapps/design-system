@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 
+import { mdiPlay } from '@lumx/icons';
 import { Button, Dialog, DialogSizes, Emphasis, Size, Toolbar } from '@lumx/react';
 
 const App = ({ theme }: any) => {
@@ -17,20 +18,44 @@ const App = ({ theme }: any) => {
     };
 
     return (
-        <div className="demo-grid">
-            <Button buttonRef={buttonRef} onClick={onClickSize(Size.tiny)} theme={theme}>
+        <>
+            <Button
+                className="lumx-spacing-margin-horizontal-tiny"
+                leftIcon={mdiPlay}
+                buttonRef={buttonRef}
+                onClick={onClickSize(Size.tiny)}
+                theme={theme}
+            >
                 Tiny
             </Button>
 
-            <Button buttonRef={buttonRef} onClick={onClickSize(Size.regular)} theme={theme}>
+            <Button
+                className="lumx-spacing-margin-horizontal-tiny"
+                leftIcon={mdiPlay}
+                buttonRef={buttonRef}
+                onClick={onClickSize(Size.regular)}
+                theme={theme}
+            >
                 Regular
             </Button>
 
-            <Button buttonRef={buttonRef} onClick={onClickSize(Size.big)} theme={theme}>
+            <Button
+                className="lumx-spacing-margin-horizontal-tiny"
+                leftIcon={mdiPlay}
+                buttonRef={buttonRef}
+                onClick={onClickSize(Size.big)}
+                theme={theme}
+            >
                 Big
             </Button>
 
-            <Button buttonRef={buttonRef} onClick={onClickSize(Size.huge)} theme={theme}>
+            <Button
+                className="lumx-spacing-margin-horizontal-tiny"
+                leftIcon={mdiPlay}
+                buttonRef={buttonRef}
+                onClick={onClickSize(Size.huge)}
+                theme={theme}
+            >
                 Huge
             </Button>
 
@@ -69,7 +94,7 @@ const App = ({ theme }: any) => {
                     />
                 </footer>
             </Dialog>
-        </div>
+        </>
     );
 };
 

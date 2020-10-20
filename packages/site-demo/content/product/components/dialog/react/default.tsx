@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
 
+import { mdiPlay } from '@lumx/icons';
 import { Button, Dialog, Emphasis, Toolbar } from '@lumx/react';
 
 const App = ({ theme }: any) => {
@@ -10,9 +11,9 @@ const App = ({ theme }: any) => {
     const buttonRef = useRef(null);
 
     return (
-        <div className="demo-grid">
-            <Button buttonRef={buttonRef} onClick={toggle} theme={theme}>
-                Open dialog
+        <>
+            <Button leftIcon={mdiPlay} buttonRef={buttonRef} onClick={toggle} theme={theme}>
+                Try dialog
             </Button>
 
             <Dialog isOpen={isOpen} parentElement={buttonRef} onClose={close}>
@@ -50,7 +51,7 @@ const App = ({ theme }: any) => {
                     />
                 </footer>
             </Dialog>
-        </div>
+        </>
     );
 };
 

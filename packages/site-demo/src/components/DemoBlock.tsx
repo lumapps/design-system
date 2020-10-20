@@ -16,6 +16,7 @@ interface DemoBlockProps {
     engine?: string;
     code?: Code;
     withThemeSwitcher?: boolean;
+    hasPlayButton?: boolean;
 }
 
 interface HasTheme {
@@ -113,7 +114,13 @@ function renderDemo(demo: DemoModule | null, theme: Theme, engine: string) {
     return <demo.default theme={theme} />;
 }
 
-const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngine, withThemeSwitcher = false }) => {
+const DemoBlock: React.FC<DemoBlockProps> = ({
+    children,
+    code,
+    engine: propEngine,
+    withThemeSwitcher = false,
+    hasPlayButton = false,
+}) => {
     const contextEngine = useContext(EngineContext).engine;
     const engine = propEngine || contextEngine;
 
@@ -128,7 +135,7 @@ const DemoBlock: React.FC<DemoBlockProps> = ({ children, code, engine: propEngin
     const highlightedCode = useHighlightedCode(get(code, [engine, 'code']), engine === 'react' ? 'tsx' : 'html');
 
     return (
-        <div className="demo-block">
+        <div className={classNames('demo-block', { 'demo-block--has-play-button': hasPlayButton })}>
             <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-color-background-dark-N')}>
                 {content}
             </div>
