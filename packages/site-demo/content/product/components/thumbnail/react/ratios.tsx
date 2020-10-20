@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Alignment, AspectRatio, Grid, Orientation, Thumbnail } from '@lumx/react';
+import { Alignment, AspectRatio, FlexBox, Orientation, Size, Thumbnail } from '@lumx/react';
 
 const App = () => (
-    <Grid orientation={Orientation.horizontal} vAlign={Alignment.spaceBetween}>
+    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center} vAlign={Alignment.center} gap={Size.big}>
         <div style={{ width: 150 }}>
             <Thumbnail aspectRatio={AspectRatio.square} image="https://picsum.photos/150" />
         </div>
@@ -17,7 +17,7 @@ const App = () => (
         <div style={{ width: 150 }}>
             <Thumbnail aspectRatio={AspectRatio.horizontal} image="https://picsum.photos/150/150" />
         </div>
-    </Grid>
+    </FlexBox>
 );
 
 export default App;
