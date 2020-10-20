@@ -4,20 +4,17 @@ import { Slider } from '@lumx/react';
 
 const App = ({ theme }: any) => {
     const [value, setValue] = useState(4);
+
     return (
-        <>
-            <pre>{`Adjust threshold: ${value}`}</pre>
-            <br />
-            <Slider
-                label="Default"
-                helper="This is an helper text"
-                max={10}
-                min={0}
-                theme={theme}
-                value={value}
-                onChange={setValue}
-            />
-        </>
+        <Slider
+            label="Slider label"
+            helper="Helper text"
+            max={100}
+            min={0}
+            theme={theme}
+            value={value}
+            onChange={setValue}
+        />
     );
 };
 
