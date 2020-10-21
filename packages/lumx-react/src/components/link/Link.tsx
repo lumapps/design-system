@@ -4,13 +4,15 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import classNames from 'classnames';
 
 import { Color, ColorVariant } from '@lumx/react';
-import { getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 import { renderLink } from '@lumx/react/utils/renderLink';
+
+type HTMLAnchorProps = React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
 
 /**
  * Defines the props of the component.
  */
-interface LinkProps extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement> {
+interface LinkProps extends GenericProps {
     /** The icon color. */
     color?: Color;
 
@@ -22,6 +24,12 @@ interface LinkProps extends React.DetailedHTMLProps<React.AnchorHTMLAttributes<H
 
     /** Ref to the native HTML anchor element. */
     linkRef?: Ref<HTMLAnchorElement>;
+
+    /** Link href. */
+    href?: HTMLAnchorProps['href'];
+
+    /** Link target. */
+    target?: HTMLAnchorProps['target'];
 }
 
 /**
