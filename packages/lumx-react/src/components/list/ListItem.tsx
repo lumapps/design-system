@@ -134,6 +134,8 @@ const ListItem: React.FC<ListItemProps> = (props) => {
                 renderLink(
                     {
                         linkAs,
+                        tabIndex: 0,
+                        role: onItemSelected ? 'button' : undefined,
                         ...linkProps,
                         className: classNames(
                             handleBasicClasses({
@@ -145,8 +147,6 @@ const ListItem: React.FC<ListItemProps> = (props) => {
                         onClick: onItemSelected,
                         onKeyDown,
                         ref: linkRef,
-                        role: onItemSelected ? 'button' : undefined,
-                        tabIndex: 0,
                     },
                     content,
                 )
