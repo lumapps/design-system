@@ -14,6 +14,7 @@ $main-nav-width: 300px;
     }
 
     &__logo {
+        @include lumx-link('dark');
         display: flex;
         align-items: center;
         margin-bottom: $lumx-spacing-unit * 4;

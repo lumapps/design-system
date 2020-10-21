@@ -1,0 +1,81 @@
+const { camelCase, partial } = require('lodash');
+const path = require('path');
+const fs = require('fs');
+const uuid = require('uuid/v4');
+
+const CONTENT_DIR = path.resolve('./content');
+const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
+const debug = require('../utils/debug');
+
+/** Read source code to string (or return null if source code not found). */
+async function readSourceCode(sourcePath) {
+    try {
+        const buffer = await fs.promises.readFile(sourcePath);
+        return buffer.toString();
+    } catch (exception) {
+        console.warn(`Could not load demo in '${path.relative(CONTENT_DIR, sourcePath)}'`);
+        return null;
+    }
+}
+
+/** Update <DemoBlock/> props to import source code. */
+async function updateDemoBlock(resourceFolder, addImport, props) {
+    if (props.children) {
+        // <DemoBlock> with children already have a demo inside them.
+        // We copy the demo as string into the `codeString` prop.
+        props.codeString = JSON.stringify(props.children.trim());
+        return props;
+    }
+
+    if (!props.demo) {
+        // Nothing to do.
+        return props;
+    }
+
+    const demoName = props.demo.replace(/"/g, '');
+    const relativeSourcePath = `./react/${demoName}.tsx`;
+    const sourcePath = path.join(resourceFolder, relativeSourcePath);
+
+    // Get demo code.
+    const code = await readSourceCode(sourcePath);
+    if (!code) {
+        return props;
+    }
+    props.codeString = JSON.stringify(code.trim());
+
+    // Import demo (will be added at the top).
+    const demoVar = camelCase(`demo-${uuid()}`);
+    addImport(`import ${demoVar} from '@content/${path.relative(CONTENT_DIR, sourcePath)}';`);
+
+    // Add demo as children.
+    props.children = `{${demoVar}}`;
+
+    return props;
+}
+
+/**
+ * MDX plugin to extract and insert source code from demo block in MDX documents.
+ */
+module.exports = async (filePath, mdxString) => {
+    try {
+        const resourceFolder = path.dirname(filePath);
+        const imports = [];
+        const addImport = (i) => imports.push(i);
+
+        // Rewrite demo blocks.
+        mdxString = await rewriteJSXComponents(
+            'DemoBlock',
+            mdxString,
+            partial(updateDemoBlock, resourceFolder, addImport)
+        );
+
+        if (imports.length) {
+            // Inject imports at the top.
+            mdxString = `${imports.join('\n')}\n\n${mdxString}`;
+        }
+
+        return mdxString;
+    } catch (e) {
+        debug(e);
+    }
+};

@@ -1,87 +1,68 @@
 {
+    "name": "lumx-site-demo",
+    "version": "0.26.1",
+    "private": true,
+    "description": "The official LumApps Design System (LumX) demo site",
+    "bugs": {
+        "url": "https://github.com/lumapps/design-system/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lumapps/design-system.git"
+    },
+    "license": "MIT",
     "author": {
         "name": "LumApps"
     },
-    "bugs": {
-        "url": "https://github.com/lumapps/design-system/issues"
+    "scripts": {
+        "build": "gatsby build --prefix-paths",
+        "start": "gatsby develop"
     },
     "dependencies": {
         "@lumx/angularjs": "^0.26.1",
         "@lumx/core": "^0.26.1",
         "@lumx/icons": "^0.26.1",
         "@lumx/react": "^0.26.1",
-        "angular": "^1.7.8",
+        "@mdx-js/react": "^1.4.0",
         "classnames": "^2.2.6",
+        "focus-visible": "^5.2.0",
+        "gatsby": "^2.24.82",
+        "gatsby-image": "^2.4.21",
+        "gatsby-plugin-copy-files-enhanced": "^1.1.1",
+        "gatsby-plugin-mdx": "^1.2.48",
+        "gatsby-plugin-offline": "^2.0.5",
+        "gatsby-plugin-react-helmet": "^3.3.14",
+        "gatsby-plugin-sass": "^2.3.16",
+        "gatsby-plugin-split-css": "^1.0.2",
+        "gatsby-plugin-swarm": "^1.0.3",
+        "gatsby-remark-autolink-headers": "^2.3.15",
+        "gatsby-remark-smartypants": "^2.0.5",
+        "gatsby-source-filesystem": "^2.0.2",
+        "gatsby-transformer-remark": "^2.1.6",
         "intersection-observer": "^0.7.0",
-        "jquery": "^3.3.1",
         "lodash": "4.17.19",
+        "mdx-utils": "^0.2.0",
         "moment": "^2.24.0",
         "moment-range": "^4.0.2",
+        "prism-react-renderer": "^0.1.5",
         "prismjs": "^1.17.1",
-        "react": "^16.11.0",
-        "react-angular": "^0.4.0",
-        "react-dom": "^16.11.0",
-        "react-router-dom": "^5.1.2"
+        "react": "^16.13.1",
+        "react-docgen-typescript": "^1.20.5",
+        "react-dom": "^16.13.1",
+        "react-helmet": "^6.1.0"
     },
     "devDependencies": {
-        "@babel/core": "^7.8.3",
-        "@babel/plugin-proposal-class-properties": "^7.8.3",
-        "@babel/plugin-proposal-export-default-from": "^7.8.3",
-        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",
-        "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
-        "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-        "@babel/preset-env": "^7.8.3",
-        "@babel/preset-react": "^7.8.3",
-        "@babel/preset-typescript": "^7.8.3",
-        "@types/react-router-dom": "^5.1.3",
-        "autoprefixer": "^9.7.4",
-        "babel-loader": "^8.0.6",
-        "babel-plugin-angularjs-annotate": "^0.10.0",
-        "clean-webpack-plugin": "^3.0.0",
-        "core-js": "^3.6.4",
-        "css-loader": "^3.4.2",
-        "expose-loader": "^0.7.5",
-        "file-loader": "^5.0.2",
-        "friendly-errors-webpack-plugin": "^1.7.0",
-        "html-loader": "^0.5.5",
-        "html-minifier-webpack-plugin": "^2.2.3",
-        "html-webpack-plugin": "^3.2.0",
-        "is-ci": "^2.0.0",
-        "mdx-loader": "^3.0.2",
-        "mini-css-extract-plugin": "^0.9.0",
-        "node-sass": "^4.13.1",
-        "optimize-css-assets-webpack-plugin": "^5.0.3",
-        "postcss-flexbox-unboxer": "^1.0.0",
-        "postcss-loader": "^3.0.0",
-        "sass-loader": "^8.0.2",
-        "style-loader": "^1.1.3",
-        "terser-webpack-plugin": "^2.3.4",
+        "@types/reach__router": "^1.3.6",
+        "@types/react-helmet": "^6.1.0",
+        "glob": "^7.1.6",
         "tsconfig-paths-webpack-plugin": "^3.2.0",
-        "typedoc": "^0.15.2",
         "typescript": "^3.9.7",
-        "webpack": "^4.44.1",
-        "webpack-cli": "^3.3.12",
-        "webpack-dev-server": "^3.11.0",
-        "webpack-notifier": "^1.8.0",
-        "webpackbar": "^4.0.0"
+        "uuid": "^3.3.2",
+        "yaml": "^1.10.0"
     },
-    "description": "The official LumApps Design System (LumX) demo site",
     "engines": {
         "node": ">= 10.0.0",
         "npm": ">= 4.0.0",
         "yarn": ">= 1.3.0"
-    },
-    "license": "MIT",
-    "name": "lumx-site-demo",
-    "private": true,
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/lumapps/design-system.git"
-    },
-    "scripts": {
-        "build": "webpack",
-        "start": "NODE_ENV=development webpack-dev-server"
-    },
-    "version": "0.26.1"
+    }
 }
