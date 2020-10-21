@@ -64,7 +64,12 @@ module.exports = {
         // Update document head using react.
         'gatsby-plugin-react-helmet',
         // Compile SASS.
-        'gatsby-plugin-sass',
+        {
+            resolve: 'gatsby-plugin-sass',
+            options: {
+                postCssPlugins: [require('./postcss.config')],
+            },
+        },
         // Prevent styles from being squashed into a single CSS file.
         'gatsby-plugin-split-css',
     ],
