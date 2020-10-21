@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import { Color, ColorPalette, Emphasis, Size, Theme } from '@lumx/react';
 import { COMPONENT_PREFIX, CSS_PREFIX } from '@lumx/react/constants';
 import { GenericProps, handleBasicClasses } from '@lumx/react/utils';
+import { renderLink } from '@lumx/react/utils/renderLink';
 
 /**
  * The authorized values for the `size` prop.
@@ -63,6 +64,12 @@ interface BaseButtonProps extends GenericProps {
      * Whether custom colors are applied to this component.
      */
     useCustomColors?: boolean;
+
+    /**
+     * Use this property if you specified a URL in the `href` property and you want to customize the react component
+     * for the link (can be used to inject react router Link).
+     */
+    linkAs?: 'a' | any;
 }
 
 interface ButtonRootProps extends BaseButtonProps {
@@ -128,6 +135,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         theme,
         useCustomColors,
         variant,
+        linkAs,
         ...forwardedProps
     } = props;
 
@@ -156,10 +164,14 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     );
 
     if (!isEmpty(props.href)) {
-        return (
-            <a {...forwardedProps} ref={buttonRef as RefObject<HTMLAnchorElement>} className={buttonClassName}>
-                {children}
-            </a>
+        return renderLink(
+            {
+                linkAs,
+                ref: buttonRef as RefObject<HTMLAnchorElement>,
+                className: buttonClassName,
+                ...forwardedProps,
+            },
+            children,
         );
     }
     return (

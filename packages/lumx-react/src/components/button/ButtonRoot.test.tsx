@@ -128,6 +128,13 @@ describe(`<${ButtonRoot.displayName}>`, () => {
             expect(actualProps.href).toEqual(props.href);
             expect(actualProps.target).toEqual(props.target);
         });
+
+        it('should render custom link', () => {
+            const CustomLink: React.FC = ({ children, ...props }) =>
+                React.createElement('a', { ...props, style: { color: 'red' } }, children);
+            const { wrapper } = setup({ href: 'foo', linkAs: CustomLink });
+            expect(wrapper).toMatchSnapshot();
+        });
     });
 
     // 2. Test defaultProps value and important props custom values.

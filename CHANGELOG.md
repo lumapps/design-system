@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 -   `Link` prop type is now more permissive to accommodate for alternative components injected in `linkAs`.
+-   Add `linkAs` prop on `Button` and `IconButton` to customize the link component (can be used to inject the `Link` component from `react-router`).
 
 ## [0.26.1][] - 2020-10-14
 
