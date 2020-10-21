@@ -43,6 +43,7 @@ export const PageHead: React.FC<Props> = (props) => {
             <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
             <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+            <link id="font" rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700" />
 
             {/* SEO */}
             <meta name="description" content={metaDescription} />

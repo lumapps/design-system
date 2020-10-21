@@ -3,7 +3,7 @@ import { GlobalTheme } from '@lumx/core/js/types';
 const DELAY_THEME_DISABLE = 200;
 
 export function createGlobalThemeSwitcher(defaultGlobalTheme: GlobalTheme) {
-    const linkStylesheet = document.querySelector('link[rel=stylesheet]');
+    const linkStylesheet = document.querySelector('link[rel=stylesheet]:not(#font)');
     if (linkStylesheet) {
         return createDevThemeSwitcher(defaultGlobalTheme, linkStylesheet);
     }
@@ -28,7 +28,7 @@ function createDevThemeSwitcher(defaultGlobalTheme: GlobalTheme, defaultLinkStyl
         if (newGlobalTheme !== defaultGlobalTheme) {
             if (!otherLinkStylesheet) {
                 await import(`../style/theme/${newGlobalTheme}.scss`);
-                otherLinkStylesheet = document.querySelectorAll('link[rel=stylesheet]')[1];
+                otherLinkStylesheet = document.querySelectorAll('link[rel=stylesheet]:not(#font)')[1];
             }
             otherLinkStylesheet.disabled = false;
             setTimeout(() => {
@@ -59,7 +59,7 @@ function createProdThemeSwitcher(defaultGlobalTheme: GlobalTheme, defaultStylesh
         if (newGlobalTheme !== defaultGlobalTheme) {
             if (!otherLinkStylesheet) {
                 await import(`../style/theme/${newGlobalTheme}.scss`);
-                otherLinkStylesheet = document.querySelectorAll('link[rel=stylesheet]')[0];
+                otherLinkStylesheet = document.querySelectorAll('link[rel=stylesheet]:not(#font)')[0];
             }
             otherLinkStylesheet.disabled = false;
             setTimeout(() => {
