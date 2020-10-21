@@ -99,6 +99,7 @@ const App = ({ theme }: any) => {
 
     return (
         <Autocomplete
+            label="Cities"
             theme={theme}
             isOpen={showSuggestions && hasSuggestions}
             onClose={closeAutocomplete}

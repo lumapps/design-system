@@ -221,6 +221,7 @@ const App = ({ theme }: any) => {
 
     return (
         <AutocompleteMultiple
+            label="Cities"
             theme={theme}
             isOpen={showSuggestions && hasSuggestions}
             onClose={closeAutocomplete}
