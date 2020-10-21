@@ -35,7 +35,7 @@ const App = () => (
             </ListItem>
 
             <ListItem
-                before={<Avatar image="http://i.pravatar.cc/72" size={Size.m} />}
+                before={<Avatar image="../avatar/assets/persona.png" size={Size.m} />}
                 after={<Button emphasis={Emphasis.low}>Button</Button>}
             >
                 Single-line item

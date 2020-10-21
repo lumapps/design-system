@@ -17,7 +17,7 @@ const App = ({ theme }: any) => (
         theme={theme}
         avatar="../avatar/assets/persona.png"
         date="4 hours ago"
-        name="Matthias Manoukian"
+        name="Emmitt O. Lum"
         hasChildren={true}
         text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."
     />

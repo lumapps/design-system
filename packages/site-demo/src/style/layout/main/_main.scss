@@ -42,7 +42,7 @@
         }
 
         & > h3 {
-            @include lumx-typography(title);
+            @include lumx-typography(subtitle2);
         }
 
         & > p > strong {

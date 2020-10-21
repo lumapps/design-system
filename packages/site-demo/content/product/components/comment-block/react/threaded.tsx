@@ -17,7 +17,7 @@ const App = ({ theme }: any) => (
         theme={theme}
         avatar="../avatar/assets/persona.png"
         date="4 hours ago"
-        name="Matthias Manoukian"
+        name="Emmitt O. Lum"
         hasChildren={true}
         isOpen={true}
         children={[

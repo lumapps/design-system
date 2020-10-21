@@ -10,22 +10,32 @@ const App = ({ theme }: any) => {
             <RadioGroup>
                 <RadioButton
                     checked={value === 'lorem'}
-                    label="Radio button 1"
+                    label="Radio button"
                     name="test1"
                     theme={theme}
                     value="lorem"
                     onChange={setValue}
                 />
 
-                <RadioButton disabled label="Radio button 2" name="test1" theme={theme} value="ipsum" />
+                <RadioButton
+                    checked={value === 'ipsum'}
+                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                    label="Radio button with help"
+                    name="test1"
+                    theme={theme}
+                    value="ipsum"
+                    onChange={setValue}
+                />
 
                 <RadioButton
                     checked={value === 'dolor'}
+                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                    label="Disabled radio button with help"
                     name="test1"
-                    label="Radio button 3"
                     theme={theme}
                     value="dolor"
                     onChange={setValue}
+                    disabled
                 />
             </RadioGroup>
         </>

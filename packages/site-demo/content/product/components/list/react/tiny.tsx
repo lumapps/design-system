@@ -28,7 +28,7 @@ const App = () => (
                 Single-line item
             </ListItem>
 
-            <ListItem size={Size.tiny} before={<Avatar image="http://i.pravatar.cc/48" size={Size.xs} />}>
+            <ListItem size={Size.tiny} before={<Avatar image="../avatar/assets/persona.png" size={Size.xs} />}>
                 Single-line item
             </ListItem>
         </List>

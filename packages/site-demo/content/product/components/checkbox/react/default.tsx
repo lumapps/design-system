@@ -26,10 +26,10 @@ const App = ({ theme }: any) => {
             <Checkbox
                 value={value3}
                 helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
-                label="Disable checkbox with help"
+                label="Disabled checkbox with help"
                 theme={theme}
-                disabled
                 onChange={setValue3}
+                disabled
             />
         </>
     );
