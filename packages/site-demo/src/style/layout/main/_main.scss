@@ -3,13 +3,11 @@
    ========================================================================== */
 
 .main {
-    flex: 1 1 auto;
-    justify-content: center;
-    padding: $lumx-spacing-unit * 6;
-    overflow-y: scroll;
+    padding: $lumx-spacing-unit * 6 0;
+    margin-left: $main-nav-width;
 
     &__wrapper {
-        max-width: 800px;
+        width: 800px;
         margin: 0 auto;
     }
 }

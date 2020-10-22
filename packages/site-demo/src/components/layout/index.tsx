@@ -7,10 +7,10 @@ interface Props {
 }
 
 const Layout: React.FC<Props> = ({ children, location }) => (
-    <div className="app">
+    <>
         <MainNav location={location} />
         <Main>{children}</Main>
-    </div>
+    </>
 );
 
 export default Layout;
