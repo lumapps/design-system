@@ -16,7 +16,6 @@ const query = graphql`
                 node {
                     path
                     label
-                    isRoot
                     hasDynamicChildren
                     children {
                         id
@@ -30,21 +29,11 @@ const query = graphql`
 interface MenuEntry {
     path: string;
     label: string;
-    isRoot: boolean;
     hasDynamicChildren: boolean;
     children: Array<{ id: string }>;
 }
 
 type MenuEntryByPath = Record<string, MenuEntry>;
-
-const useMenuItems = () => {
-    const data = useStaticQuery(query);
-    const entries = map(data.allMenuEntry.edges, 'node') as MenuEntry[];
-    const menuEntryByPath = keyBy(entries, 'path') as MenuEntryByPath;
-    const rootMenuEntries = entries.filter((menuEntry) => menuEntry.isRoot);
-
-    return { rootMenuEntries, menuEntryByPath };
-};
 
 const EMPHASIS_BY_LEVEL: Record<string, Emphasis> = {
     '1': Emphasis.high,
@@ -68,6 +57,15 @@ function getChildren(menuEntryByPath: MenuEntryByPath, menuEntry: MenuEntry): Me
     }
     return null;
 }
+
+const useMenuItems = () => {
+    const data = useStaticQuery(query);
+    const entries = map(data.allMenuEntry.edges, 'node') as MenuEntry[];
+    const menuEntryByPath = keyBy(entries, 'path') as MenuEntryByPath;
+    const rootMenuEntries = getChildren(menuEntryByPath, menuEntryByPath['/']);
+
+    return { rootMenuEntries, menuEntryByPath };
+};
 
 const renderNavItem = (
     openPaths: string[],
@@ -139,7 +137,7 @@ export const MainNav: React.FC<{ location?: Location }> = ({ location }) => {
                 </Link>
 
                 <SideNavigation>
-                    {rootMenuEntries.map(
+                    {rootMenuEntries?.map(
                         partial(renderNavItem, openPaths, toggleOpenPath, menuEntryByPath, locationPath),
                     )}
                 </SideNavigation>
