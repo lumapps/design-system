@@ -14,7 +14,6 @@ export const HighlightedCode: React.FC<Props> = ({ codeString, language }: any) 
         {({ className, tokens, getLineProps, getTokenProps }) => (
             <pre className={className}>
                 {tokens.map((line, i) => {
-                    debugger
                     return (
                         <div {...getLineProps({ line, key: i })}>
                             {line.map((token, key) => (
