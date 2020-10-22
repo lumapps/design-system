@@ -118,3 +118,25 @@ exports[`<ButtonRoot> Snapshots and structure should render button with wrapper 
   </div>
 </ButtonRoot>
 `;
+
+exports[`<ButtonRoot> Snapshots and structure should render custom link 1`] = `
+<ButtonRoot
+  href="foo"
+  linkAs={[Function]}
+>
+  <CustomLink
+    className="lumx-button lumx-button--color-dark"
+    href="foo"
+  >
+    <a
+      className="lumx-button lumx-button--color-dark"
+      href="foo"
+      style={
+        Object {
+          "color": "red",
+        }
+      }
+    />
+  </CustomLink>
+</ButtonRoot>
+`;
