@@ -163,7 +163,7 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
         { [`${CSS_PREFIX}-custom-colors`]: useCustomColors },
     );
 
-    if (!isEmpty(props.href)) {
+    if (!isEmpty(props.href) || linkAs) {
         return renderLink(
             {
                 linkAs,
