@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-
 import { mdiMagnify, mdiMenuDown, mdiSort } from '@lumx/icons';
 import { Button, Chip, ChipGroup, Emphasis, FlexBox, Orientation, Size, TextField } from '@lumx/react';
+import React, { useState } from 'react';
 
 const COLORS = ['Red', 'Green', 'Blue'];
 
@@ -11,7 +10,7 @@ const App = () => {
     return (
         <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap>
             <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
-                <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
+                <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
 
                 <ChipGroup>
                     {COLORS.map((color, index) => (

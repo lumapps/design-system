@@ -1,5 +1,3 @@
-import React, { useCallback, useRef, useState } from 'react';
-
 import {
     Alignment,
     AspectRatio,
@@ -17,6 +15,7 @@ import {
     Theme,
     Thumbnail,
 } from '@lumx/react';
+import React, { useCallback, useRef, useState } from 'react';
 
 const App = () => {
     const imageBlockDemoProps = {

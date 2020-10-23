@@ -1,36 +1,33 @@
-import React, { useState } from 'react';
+import { ExpansionPanel } from '@lumx/react';
 
 import classNames from 'classnames';
-
-import { ExpansionPanel } from '@lumx/react';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
 
     return (
-        <>
-            <ExpansionPanel label="Lorem ipsum" theme={theme} isOpen={isOpen} toggleCallback={setOpen}>
-                <div className="lumx-spacing-padding-top">
-                    <p
-                        className={classNames(
-                            'lumx-typography-subtitle1',
-                            theme === 'light' ? 'lumx-color-font-dark-N' : 'lumx-color-font-light-N',
-                        )}
-                    >
-                        Curabitur est gravida et libero vitae dictum.
-                    </p>
+        <ExpansionPanel label="Lorem ipsum" theme={theme} isOpen={isOpen} toggleCallback={setOpen}>
+            <div className="lumx-spacing-padding-top">
+                <p
+                    className={classNames(
+                        'lumx-typography-subtitle1',
+                        theme === 'light' ? 'lumx-color-font-dark-N' : 'lumx-color-font-light-N',
+                    )}
+                >
+                    Curabitur est gravida et libero vitae dictum.
+                </p>
 
-                    <p
-                        className={classNames(
-                            'lumx-typography-body1',
-                            theme === 'light' ? 'lumx-color-font-dark-N' : 'lumx-color-font-light-N',
-                        )}
-                    >
-                        Etiam habebis sem dicantur magna mollis euismod.
-                    </p>
-                </div>
-            </ExpansionPanel>
-        </>
+                <p
+                    className={classNames(
+                        'lumx-typography-body1',
+                        theme === 'light' ? 'lumx-color-font-dark-N' : 'lumx-color-font-light-N',
+                    )}
+                >
+                    Etiam habebis sem dicantur magna mollis euismod.
+                </p>
+            </div>
+        </ExpansionPanel>
     );
 };
 

@@ -1,34 +1,23 @@
-import React from 'react';
-
 import { Chip, Placement, Popover, Size } from '@lumx/react';
+import React, { useRef } from 'react';
 
 const App = ({ theme }: any) => {
-    const demoPopperStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 100,
-        justifyContent: 'center',
-        width: 200,
-    };
-
-    const demoPopoverHolderStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 224,
-        justifyContent: 'center',
-    };
-
-    const anchorRef = React.useRef(null);
+    const anchorRef = useRef(null);
 
     return (
         <>
-            <div style={demoPopoverHolderStyle}>
-                <Chip chipRef={anchorRef} theme={theme} size={Size.s}>
-                    Anchor
-                </Chip>
-            </div>
-            <Popover theme={theme} anchorRef={anchorRef} placement={Placement.AUTO} isOpen>
-                <div style={demoPopperStyle}>{'Popover'}</div>
+            <Chip style={{ margin: 80 }} chipRef={anchorRef} theme={theme} size={Size.s}>
+                Anchor
+            </Chip>
+
+            <Popover
+                isOpen
+                className="lumx-spacing-padding-huge"
+                theme={theme}
+                anchorRef={anchorRef}
+                placement={Placement.AUTO}
+            >
+                Popover
             </Popover>
         </>
     );

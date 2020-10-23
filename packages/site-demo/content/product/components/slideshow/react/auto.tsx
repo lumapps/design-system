@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { AspectRatio, ImageBlock, Slideshow, SlideshowItem } from '@lumx/react';
+import React from 'react';
 
 const App = ({ theme }: any) => {
     const slideshowStyle = {
@@ -8,7 +7,7 @@ const App = ({ theme }: any) => {
     };
 
     return (
-        <Slideshow activeIndex={0} hasControls={true} theme={theme} autoPlay={true} groupBy={1} style={slideshowStyle}>
+        <Slideshow activeIndex={0} hasControls theme={theme} autoPlay groupBy={1} style={slideshowStyle}>
             <SlideshowItem>
                 <ImageBlock
                     aspectRatio={AspectRatio.vertical}

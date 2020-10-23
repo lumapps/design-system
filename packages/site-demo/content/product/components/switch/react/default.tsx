@@ -1,31 +1,24 @@
-import React, { useState } from 'react';
-
 import { Switch } from '@lumx/react';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [state, setState] = useState(false);
 
     return (
         <>
-            <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onToggle={setState} theme={theme}>
-                    Default
-                </Switch>
-            </div>
+            <Switch checked={state} onToggle={setState} theme={theme}>
+                Default
+            </Switch>
 
-            <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onToggle={setState} theme={theme} helper={'Helper text'}>
-                    With helper
-                </Switch>
-            </div>
+            <Switch checked={state} onToggle={setState} theme={theme} helper="Helper text">
+                With helper
+            </Switch>
 
-            <div className="lumx-spacing-margin-bottom-big">
-                <Switch checked={state} onToggle={setState} disabled={true} theme={theme}>
-                    Disabled
-                </Switch>
-            </div>
+            <Switch disabled checked={state} onToggle={setState} theme={theme}>
+                Disabled
+            </Switch>
 
-            <Switch checked={true} disabled={true} theme={theme}>
+            <Switch checked disabled theme={theme}>
                 Disabled checked
             </Switch>
         </>

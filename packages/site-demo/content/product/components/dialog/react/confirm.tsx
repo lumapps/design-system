@@ -1,7 +1,6 @@
-import React, { useCallback, useRef, useState } from 'react';
-
 import { mdiPlay } from '@lumx/icons';
 import { Button, Dialog, Emphasis, Size, Toolbar } from '@lumx/react';
+import React, { useCallback, useRef, useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
@@ -18,7 +17,7 @@ const App = ({ theme }: any) => {
 
             <Dialog size={Size.tiny} isOpen={isOpen} parentElement={buttonRef} onClose={close} preventAutoClose>
                 <header>
-                    <Toolbar label={<span className="lumx-typography-title">Confirm dialog</span>} />
+                    <Toolbar label={<span className="lumx-typography-title">Confirm dialog</span>}/>
                 </header>
 
                 <p className="lumx-spacing-padding-horizontal-huge">

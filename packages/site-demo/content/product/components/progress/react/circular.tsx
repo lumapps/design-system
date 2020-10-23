@@ -1,10 +1,9 @@
-import React from 'react';
-
 import { Progress } from '@lumx/react';
+import React from 'react';
 
 const App = ({ theme }: any) => (
     <>
-        <Progress theme={theme} />
+        <Progress theme={theme}/>
     </>
 );
 

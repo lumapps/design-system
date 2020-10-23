@@ -1,7 +1,6 @@
-import React from 'react';
-
 import { mdiClose } from '@lumx/icons';
 import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } from '@lumx/react';
+import React from 'react';
 
 interface City {
     id: string;
@@ -209,7 +208,7 @@ const App = ({ theme }: any) => {
             theme={theme}
             isClickable
             key={index}
-            after={<Icon icon={mdiClose} size={Size.xxs} />}
+            after={<Icon icon={mdiClose} size={Size.xxs}/>}
             size={Size.s}
             onAfterClick={clearSelectedValue(city)}
             onClick={clearSelectedValue(city)}

@@ -1,10 +1,9 @@
-import React from 'react';
-
-import classNames from 'classnames';
-
 import { mdiMenuDown, mdiTranslate } from '@lumx/icons';
 
 import { Button, Emphasis, Toolbar } from '@lumx/react';
+
+import classNames from 'classnames';
+import React from 'react';
 
 const App = ({ theme }: any) => (
     <Toolbar

@@ -1,12 +1,11 @@
-import React from 'react';
-
-import { Button, ButtonGroup, Emphasis, IconButton, Size } from '@lumx/react';
-
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
+
+import { Button, ButtonGroup, Emphasis, FlexBox, IconButton, Orientation, Size } from '@lumx/react';
+import React from 'react';
 
 const App = ({ theme }: any) => (
     <>
-        <div className="demo-grid lumx-spacing-margin-bottom-big">
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
             <Button size={Size.s} theme={theme}>
                 Default
             </Button>
@@ -27,13 +26,13 @@ const App = ({ theme }: any) => (
                 <Button size={Size.s} theme={theme}>
                     Split
                 </Button>
-                <IconButton size={Size.s} icon={mdiMenuDown} theme={theme} />
+                <IconButton size={Size.s} icon={mdiMenuDown} theme={theme}/>
             </ButtonGroup>
 
-            <IconButton icon={mdiPlus} size={Size.s} theme={theme} />
-        </div>
+            <IconButton icon={mdiPlus} size={Size.s} theme={theme}/>
+        </FlexBox>
 
-        <div className="demo-grid lumx-spacing-margin-bottom-big">
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
             <Button emphasis={Emphasis.medium} size={Size.s} theme={theme}>
                 Default
             </Button>
@@ -53,13 +52,13 @@ const App = ({ theme }: any) => (
                 <Button emphasis={Emphasis.medium} size={Size.s} theme={theme}>
                     Split
                 </Button>
-                <IconButton emphasis={Emphasis.medium} icon={mdiMenuDown} size={Size.s} theme={theme} />
+                <IconButton emphasis={Emphasis.medium} icon={mdiMenuDown} size={Size.s} theme={theme}/>
             </ButtonGroup>
 
-            <IconButton icon={mdiPlus} emphasis={Emphasis.medium} size={Size.s} theme={theme} />
-        </div>
+            <IconButton icon={mdiPlus} emphasis={Emphasis.medium} size={Size.s} theme={theme}/>
+        </FlexBox>
 
-        <div className="demo-grid">
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
             <Button emphasis={Emphasis.low} size={Size.s} theme={theme}>
                 Default
             </Button>
@@ -76,8 +75,8 @@ const App = ({ theme }: any) => (
                 Dropdown
             </Button>
 
-            <IconButton icon={mdiPlus} emphasis={Emphasis.low} size={Size.s} theme={theme} />
-        </div>
+            <IconButton icon={mdiPlus} emphasis={Emphasis.low} size={Size.s} theme={theme}/>
+        </FlexBox>
     </>
 );
 

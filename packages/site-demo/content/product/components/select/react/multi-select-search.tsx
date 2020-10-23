@@ -1,7 +1,6 @@
-import React, { SyntheticEvent, useState } from 'react';
-
 import { mdiAccessPoint, mdiAccountBox, mdiAlphaF, mdiClose, mdiMagnify } from '@lumx/icons';
 import { Chip, Icon, List, ListDivider, ListItem, ListSubheader, SelectMultiple, Size, TextField } from '@lumx/react';
+import React, { SyntheticEvent, useState } from 'react';
 
 const App = ({ theme }: any) => {
     const CHOICES_WITH_ICONS = [
@@ -59,8 +58,8 @@ const App = ({ theme }: any) => {
         return (
             <Chip
                 key={index}
-                after={onClear && <Icon icon={mdiClose} size={Size.xxs} />}
-                before={<Icon size={Size.xs} icon={(matchedChoice && matchedChoice.icon) || ''} />}
+                after={onClear && <Icon icon={mdiClose} size={Size.xxs}/>}
+                before={<Icon size={Size.xs} icon={(matchedChoice && matchedChoice.icon) || ''}/>}
                 isDisabled={isDisabled}
                 size={Size.s}
                 onAfterClick={onClick}
@@ -74,7 +73,7 @@ const App = ({ theme }: any) => {
         const matchedChoice = getChoiceByValue(choice);
         return (
             <div style={{ display: 'flex', alignItems: 'center' }}>
-                <Icon size={Size.xs} icon={(matchedChoice && matchedChoice.icon) || ''} style={{ marginRight: 5 }} />
+                <Icon size={Size.xs} icon={(matchedChoice && matchedChoice.icon) || ''} style={{ marginRight: 5 }}/>
                 {matchedChoice && matchedChoice.label}
             </div>
         );
@@ -104,24 +103,24 @@ const App = ({ theme }: any) => {
                         size={Size.tiny}
                     />
                 </ListSubheader>
-                <ListDivider />
+                <ListDivider/>
                 {filteredChoices.length > 0
                     ? filteredChoices.map((choice, index) => (
-                          <ListItem
-                              isSelected={values.includes(choice.label)}
-                              key={index}
-                              onItemSelected={selectItem(choice.label)}
-                              before={<Icon size={Size.xs} icon={choice.icon} />}
-                              size={Size.tiny}
-                          >
-                              <div>{choice.label}</div>
-                          </ListItem>
-                      ))
+                        <ListItem
+                            isSelected={values.includes(choice.label)}
+                            key={index}
+                            onItemSelected={selectItem(choice.label)}
+                            before={<Icon size={Size.xs} icon={choice.icon}/>}
+                            size={Size.tiny}
+                        >
+                            <div>{choice.label}</div>
+                        </ListItem>
+                    ))
                     : [
-                          <ListItem key={0} size={Size.tiny}>
-                              No data
-                          </ListItem>,
-                      ]}
+                        <ListItem key={0} size={Size.tiny}>
+                            No data
+                        </ListItem>,
+                    ]}
             </List>
         </SelectMultiple>
     );

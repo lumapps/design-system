@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-
-import classNames from 'classnames';
-
 import { mdiChevronLeft, mdiMagnify, mdiViewGrid } from '@lumx/icons';
 
 import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextField, Toolbar } from '@lumx/react';
+
+import classNames from 'classnames';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
 
     return (
         <Toolbar
-            before={<IconButton emphasis={Emphasis.low} theme={theme} icon={mdiChevronLeft} />}
+            before={<IconButton emphasis={Emphasis.low} theme={theme} icon={mdiChevronLeft}/>}
             label={
                 <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                     <span

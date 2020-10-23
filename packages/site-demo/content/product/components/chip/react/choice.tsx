@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
 import { Chip } from '@lumx/react';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [selected, setSelected] = useState<number>(-1);
@@ -11,7 +10,7 @@ const App = ({ theme }: any) => {
     });
 
     return (
-        <div className="demo-grid">
+        <>
             <Chip theme={theme} {...indexedProps(0)}>
                 Am
             </Chip>
@@ -35,7 +34,7 @@ const App = ({ theme }: any) => {
             <Chip theme={theme} {...indexedProps(5)}>
                 Colegram
             </Chip>
-        </div>
+        </>
     );
 };
 

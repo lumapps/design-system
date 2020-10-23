@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-
-import classNames from 'classnames';
-
 import { mdiMagnify, mdiViewGrid } from '@lumx/icons';
 
 import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextField, Toolbar } from '@lumx/react';
+
+import classNames from 'classnames';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [value, setValue] = useState('');

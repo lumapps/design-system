@@ -1,12 +1,11 @@
+import { ProgressTrackerStep } from '@lumx/react';
 import React from 'react';
 
-import { ProgressTrackerStep } from '@lumx/react';
-
 const App = () => (
-    <div className="demo-grid">
-        <ProgressTrackerStep hasError={true} label={'Step'} helper={'Error message'} />
-        <ProgressTrackerStep isActive={true} hasError={true} label={'Step'} helper={'Error message'} />
-    </div>
+    <>
+        <ProgressTrackerStep hasError label="Step" helper="Error message"/>
+        <ProgressTrackerStep isActive hasError label="Step" helper="Error message"/>
+    </>
 );
 
 export default App;

@@ -1,5 +1,3 @@
-import React, { useRef, useState } from 'react';
-
 import { mdiFilterVariant, mdiMagnify, mdiMenuDown, mdiSort } from '@lumx/icons';
 import {
     Button,
@@ -15,6 +13,7 @@ import {
     Size,
     TextField,
 } from '@lumx/react';
+import React, { useRef, useState } from 'react';
 
 const TYPES = ['Fruit', 'Vegetable', 'Meat', 'Cereal', 'Fish'];
 const COLORS = ['Red', 'Green', 'Blue'];
@@ -31,11 +30,11 @@ const App = () => {
         <>
             <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap>
                 <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
-                    <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
+                    <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
 
                     <Chip
-                        before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
-                        after={<Icon icon={mdiMenuDown} size={Size.xs} />}
+                        before={<Icon icon={mdiFilterVariant} size={Size.xs}/>}
+                        after={<Icon icon={mdiMenuDown} size={Size.xs}/>}
                         chipRef={anchorRef}
                         onClick={togglePopover}
                     >
@@ -68,7 +67,7 @@ const App = () => {
                     </ChipGroup>
                 </div>
 
-                <Divider />
+                <Divider/>
 
                 <div className="lumx-spacing-padding-huge">
                     <span className="lumx-display-block lumx-typography-subtitle1">Color</span>
@@ -82,7 +81,7 @@ const App = () => {
                     </ChipGroup>
                 </div>
 
-                <Divider />
+                <Divider/>
 
                 <div className="lumx-spacing-padding-huge">
                     <span className="lumx-display-block lumx-typography-subtitle1">Shape</span>

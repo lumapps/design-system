@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-
 import { mdiBowl, mdiBreadSliceOutline, mdiSilverwareForkKnife } from '@lumx/icons';
 import { Tab, Tabs, Theme } from '@lumx/react';
-import classNames from 'classnames';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [activeTab, setActiveTab] = useState(0);
@@ -11,42 +9,24 @@ const App = ({ theme }: any) => {
     };
 
     return (
-        <>
-            <Tabs theme={theme} activeTab={activeTab} onTabClick={handleTabClick}>
-                <Tab label="Tab 1" icon={mdiBowl}>
-                    <p
-                        className={classNames(
-                            'lumx-spacing-padding-vertical-huge',
-                            theme === Theme.dark && 'lumx-color-font-light-N',
-                        )}
-                    >
-                        Tab 1 content
-                    </p>
-                </Tab>
+        <Tabs
+            className={theme === Theme.dark && 'lumx-color-font-light-N'}
+            theme={theme}
+            activeTab={activeTab}
+            onTabClick={handleTabClick}
+        >
+            <Tab label="Tab 1" icon={mdiBowl} className>
+                <p className="lumx-spacing-padding-vertical-huge">Tab 1 content</p>
+            </Tab>
 
-                <Tab label="Tab 2" icon={mdiBreadSliceOutline}>
-                    <p
-                        className={classNames(
-                            'lumx-spacing-padding-vertical-huge',
-                            theme === Theme.dark && 'lumx-color-font-light-N',
-                        )}
-                    >
-                        Tab 2 content
-                    </p>
-                </Tab>
+            <Tab label="Tab 2" icon={mdiBreadSliceOutline}>
+                <p className="lumx-spacing-padding-vertical-huge">Tab 2 content</p>
+            </Tab>
 
-                <Tab label="Tab 3" icon={mdiSilverwareForkKnife}>
-                    <p
-                        className={classNames(
-                            'lumx-spacing-padding-vertical-huge',
-                            theme === Theme.dark && 'lumx-color-font-light-N',
-                        )}
-                    >
-                        Tab 3 content
-                    </p>
-                </Tab>
-            </Tabs>
-        </>
+            <Tab label="Tab 3" icon={mdiSilverwareForkKnife}>
+                <p className="lumx-spacing-padding-vertical-huge">Tab 3 content</p>
+            </Tab>
+        </Tabs>
     );
 };
 

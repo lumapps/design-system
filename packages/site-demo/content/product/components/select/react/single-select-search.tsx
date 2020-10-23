@@ -57,24 +57,24 @@ const App = ({ theme }: any) => {
                     />
                 </ListSubheader>
 
-                <ListDivider />
+                <ListDivider/>
 
                 {filteredChoices.length > 0
                     ? filteredChoices.map((choice, index) => (
-                          <ListItem
-                              isSelected={value === choice}
-                              key={index}
-                              onItemSelected={selectItem(choice)}
-                              size={Size.tiny}
-                          >
-                              {choice}
-                          </ListItem>
-                      ))
+                        <ListItem
+                            isSelected={value === choice}
+                            key={index}
+                            onItemSelected={selectItem(choice)}
+                            size={Size.tiny}
+                        >
+                            {choice}
+                        </ListItem>
+                    ))
                     : [
-                          <ListItem key={0} size={Size.tiny}>
-                              No data
-                          </ListItem>,
-                      ]}
+                        <ListItem key={0} size={Size.tiny}>
+                            No data
+                        </ListItem>,
+                    ]}
             </List>
         </Select>
     );

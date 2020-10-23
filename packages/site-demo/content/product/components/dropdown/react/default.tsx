@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { Button, Dropdown, List, ListItem, ListSubheader, Size } from '@lumx/react';
+import React from 'react';
 
 const App = () => {
     const anchorSimpleRef = React.useRef(null);
@@ -25,7 +24,7 @@ const App = () => {
     };
 
     return (
-        <div className="demo-grid">
+        <>
             {/* Simple menu */}
             <Button buttonRef={anchorSimpleRef} onClick={toggleSimpleMenu}>
                 Simple Menu
@@ -95,7 +94,7 @@ const App = () => {
                     </ListItem>
                 </List>
             </Dropdown>
-        </div>
+        </>
     );
 };
 

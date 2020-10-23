@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
 import { Checkbox } from '@lumx/react';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [value, setValue] = useState(true);
@@ -9,19 +8,15 @@ const App = ({ theme }: any) => {
 
     return (
         <>
-            <div className="lumx-spacing-margin-bottom-big">
-                <Checkbox value={value} label="Checkbox" theme={theme} onChange={setValue} />
-            </div>
+            <Checkbox value={value} label="Checkbox" theme={theme} onChange={setValue}/>
 
-            <div className="lumx-spacing-margin-bottom-big">
-                <Checkbox
-                    value={value2}
-                    helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
-                    label="Checkbox with help"
-                    theme={theme}
-                    onChange={setValue2}
-                />
-            </div>
+            <Checkbox
+                value={value2}
+                helper="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed posuere faucibus efficitur."
+                label="Checkbox with help"
+                theme={theme}
+                onChange={setValue2}
+            />
 
             <Checkbox
                 value={value3}

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
     Alignment,
     AspectRatio,
@@ -11,6 +9,7 @@ import {
     Slideshow,
     SlideshowItem,
 } from '@lumx/react';
+import React from 'react';
 
 const App = ({ theme }: any) => {
     const slideshowStyle = {
@@ -34,106 +33,97 @@ const App = ({ theme }: any) => {
     };
 
     return (
-        <div className="demo-grid">
-            <Slideshow
-                activeIndex={0}
-                hasControls={true}
-                theme={theme}
-                autoPlay={false}
-                groupBy={1}
-                style={slideshowStyle}
-            >
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=31"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
+        <Slideshow activeIndex={0} hasControls theme={theme} groupBy={1} style={slideshowStyle}>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=31"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
 
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=1"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=1"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
 
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=2"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=2"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
 
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=8"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=8"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
 
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=3"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=3"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
 
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=4"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=4"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
 
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=5"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=5"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
 
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=36"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=36"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
 
-                <SlideshowItem>
-                    <ImageBlock
-                        aspectRatio={AspectRatio.horizontal}
-                        captionPosition={ImageBlockCaptionPosition.over}
-                        image="https://picsum.photos/640/480/?image=7"
-                        theme={theme}
-                        {...imageBlockDemoProps}
-                    />
-                </SlideshowItem>
-            </Slideshow>
-        </div>
+            <SlideshowItem>
+                <ImageBlock
+                    aspectRatio={AspectRatio.horizontal}
+                    captionPosition={ImageBlockCaptionPosition.over}
+                    image="https://picsum.photos/640/480/?image=7"
+                    theme={theme}
+                    {...imageBlockDemoProps}
+                />
+            </SlideshowItem>
+        </Slideshow>
     );
 };
 

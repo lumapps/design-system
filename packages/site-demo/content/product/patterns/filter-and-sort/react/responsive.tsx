@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-
 import { mdiMagnify, mdiMenuDown, mdiSort } from '@lumx/icons';
 import { Alignment, Button, Chip, ChipGroup, Emphasis, FlexBox, Icon, Orientation, Size, TextField } from '@lumx/react';
+import React, { useState } from 'react';
 
 const COLORS = ['Red', 'Green', 'Blue'];
 
@@ -12,7 +11,7 @@ const App = () => {
         <FlexBox orientation={Orientation.horizontal} gap={Size.huge} hAlign={Alignment.top}>
             <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
                 <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
-                    <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
+                    <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
 
                     <ChipGroup>
                         {COLORS.map((color, index) => (
@@ -30,11 +29,11 @@ const App = () => {
 
             <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap style={{ width: 250 }}>
                 <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
-                    <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
+                    <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
 
                     <ChipGroup>
                         {COLORS.map((color, index) => (
-                            <Chip key={index} after={<Icon icon={mdiMenuDown} size={Size.xs} />} isClickable>
+                            <Chip key={index} after={<Icon icon={mdiMenuDown} size={Size.xs}/>} isClickable>
                                 {color}
                             </Chip>
                         ))}

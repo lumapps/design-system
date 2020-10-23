@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 import { mdiMagnify } from '@lumx/icons';
 import {
     Alignment,
@@ -12,6 +10,7 @@ import {
     Thumbnail,
     ThumbnailVariant,
 } from '@lumx/react';
+import React, { useState } from 'react';
 
 const RESULTS = [
     {
@@ -41,14 +40,14 @@ const App = () => {
 
     return (
         <FlexBox orientation={Orientation.vertical} vAlign={Alignment.left}>
-            <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
+            <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
 
             <List>
                 {RESULTS.map((result, index) => (
                     <ListItem
                         key={index}
                         size={Size.big}
-                        before={<Thumbnail variant={ThumbnailVariant.rounded} image={result.thumbnail} size={Size.m} />}
+                        before={<Thumbnail variant={ThumbnailVariant.rounded} image={result.thumbnail} size={Size.m}/>}
                     >
                         <div>
                             <span>{result.label}</span>

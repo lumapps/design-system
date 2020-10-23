@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { Message, MessageKind } from '@lumx/react';
+import React from 'react';
 
 const App = () => (
     <Message kind={MessageKind.info}>

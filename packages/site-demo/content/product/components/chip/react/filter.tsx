@@ -1,46 +1,35 @@
-import React, { useState } from 'react';
-
 import { mdiCloseCircle, mdiFilterVariant, mdiMenuDown } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [isSelected, setSelected] = useState(false);
     const onClick = () => !isSelected && setSelected(true);
-    const onAfterClick = () => isSelected && setSelected(false);
+    const onAfterClick = () => setSelected(!isSelected);
+
     return (
-        <div className="demo-grid">
+        <>
             <Chip
                 theme={theme}
-                after={
-                    isSelected ? (
-                        <Icon icon={mdiCloseCircle} size={Size.xs} />
-                    ) : (
-                        <Icon icon={mdiMenuDown} size={Size.xs} />
-                    )
-                }
+                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs}/>}
                 isSelected={isSelected}
                 onClick={onClick}
                 onAfterClick={onAfterClick}
             >
                 Filter
             </Chip>
+
             <Chip
                 theme={theme}
-                before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
-                after={
-                    isSelected ? (
-                        <Icon icon={mdiCloseCircle} size={Size.xs} />
-                    ) : (
-                        <Icon icon={mdiMenuDown} size={Size.xs} />
-                    )
-                }
+                before={<Icon icon={mdiFilterVariant} size={Size.xs}/>}
+                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs}/>}
                 isSelected={isSelected}
-                onClick={() => !isSelected && setSelected(true)}
-                onAfterClick={() => isSelected && setSelected(false)}
+                onClick={onClick}
+                onAfterClick={onAfterClick}
             >
                 Filter rich
             </Chip>
-        </div>
+        </>
     );
 };
 

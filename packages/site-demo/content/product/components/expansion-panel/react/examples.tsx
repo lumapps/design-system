@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-
 import { mdiDotsVertical } from '@lumx/icons';
 
 import {
@@ -14,6 +12,7 @@ import {
     Thumbnail,
     ThumbnailVariant,
 } from '@lumx/react';
+import React, { useState } from 'react';
 
 const App = () => {
     const [isOpen1, setOpen1] = useState(false);
@@ -49,13 +48,7 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel
-                className="lumx-spacing-margin-top-big"
-                hasBackground
-                hasHeaderDivider
-                isOpen={isOpen2}
-                toggleCallback={setOpen2}
-            >
+            <ExpansionPanel hasBackground hasHeaderDivider isOpen={isOpen2} toggleCallback={setOpen2}>
                 <header>
                     <FlexBox
                         className="lumx-spacing-margin-left-regular"
@@ -83,12 +76,7 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel
-                className="lumx-spacing-margin-top-big"
-                hasBackground
-                isOpen={isOpen3}
-                toggleCallback={setOpen3}
-            >
+            <ExpansionPanel hasBackground isOpen={isOpen3} toggleCallback={setOpen3}>
                 <header>
                     <FlexBox
                         className="lumx-spacing-margin-left-big"
@@ -114,7 +102,7 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <ExpansionPanel className="lumx-spacing-margin-top-big" isOpen={isOpen4} toggleCallback={setOpen4}>
+            <ExpansionPanel isOpen={isOpen4} toggleCallback={setOpen4}>
                 <header>
                     <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                         <Thumbnail
@@ -133,7 +121,7 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <Divider className="lumx-spacing-margin-vertical-big" />
+            <Divider/>
 
             <ExpansionPanel isOpen={isOpen5} toggleCallback={setOpen5}>
                 <header>
@@ -154,7 +142,7 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <Divider className="lumx-spacing-margin-vertical-big" />
+            <Divider/>
 
             <ExpansionPanel isOpen={isOpen6} toggleCallback={setOpen6}>
                 <header>

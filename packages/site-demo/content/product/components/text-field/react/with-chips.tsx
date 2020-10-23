@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-
 import { Chip, ChipGroup, Size, TextField } from '@lumx/react';
+import React, { useState } from 'react';
 
 const App = ({ theme }: any) => {
     const [value, setValue] = useState('');

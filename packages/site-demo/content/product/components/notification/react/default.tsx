@@ -59,7 +59,7 @@ const App = () => {
     };
 
     return (
-        <div className="demo-grid">
+        <>
             <Button leftIcon={mdiPlay} onClick={onClick('info')}>
                 Info
             </Button>
@@ -88,7 +88,7 @@ const App = () => {
                     {...properties[type]}
                 />
             )}
-        </div>
+        </>
     );
 };
 

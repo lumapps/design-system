@@ -1,17 +1,33 @@
 import { HighlightedCode } from '@lumx/demo/components/HighlightedCode';
 import { mdiCodeTags } from '@lumx/icons';
-import { Button, Emphasis, Switch, SwitchPosition, Theme } from '@lumx/react';
-import isFunction from 'lodash/isFunction';
+import {
+    Alignment,
+    Button,
+    Emphasis,
+    FlexBox,
+    FlexBoxProps,
+    Orientation,
+    Size,
+    Switch,
+    SwitchPosition,
+    Theme,
+} from '@lumx/react';
 
 import classNames from 'classnames';
+import isFunction from 'lodash/isFunction';
 import React, { useState } from 'react';
 
-interface DemoBlockProps {
+interface DemoBlockProps extends FlexBoxProps {
     demo?: string;
     codeString?: string;
     withThemeSwitcher?: boolean;
     hasPlayButton?: boolean;
 }
+
+const DEFAULT_PROPS: Partial<DemoBlockProps> = {
+    gap: Size.big,
+    orientation: Orientation.vertical,
+};
 
 export const DemoBlock: React.FC<DemoBlockProps> = ({
     children,
@@ -19,6 +35,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     codeString,
     withThemeSwitcher = false,
     hasPlayButton = false,
+    ...flexBoxProps
 }) => {
     const [theme, setTheme] = useState(Theme.light);
     const toggleTheme = (checked: boolean) => (checked ? setTheme(Theme.dark) : setTheme(Theme.light));
@@ -26,16 +43,23 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
     const [showCode, setShowCode] = useState(false);
     const toggleShowCode = () => setShowCode(!showCode);
 
+    if (flexBoxProps.orientation === Orientation.horizontal) {
+        flexBoxProps.hAlign = flexBoxProps.hAlign || Alignment.center;
+        flexBoxProps.vAlign = flexBoxProps.vAlign || Alignment.center;
+    }
     return (
         <div className={classNames('demo-block', { 'demo-block--has-play-button': hasPlayButton })}>
-            <div className={classNames('demo-block__content', theme === Theme.dark && 'lumx-color-background-dark-N')}>
+            <FlexBox
+                className={classNames('demo-block__content', theme === Theme.dark && 'lumx-color-background-dark-N')}
+                {...flexBoxProps}
+            >
                 {!children && (
                     <span>
                         Could not load demo <code>{demo}</code>.
                     </span>
                 )}
                 {isFunction(children) ? children({ theme }) : children}
-            </div>
+            </FlexBox>
             <div className="demo-block__toolbar">
                 <div className="demo-block__code-toggle">
                     <Button
@@ -70,3 +94,4 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
         </div>
     );
 };
+DemoBlock.defaultProps = DEFAULT_PROPS;
