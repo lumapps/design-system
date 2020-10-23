@@ -1,34 +1,55 @@
 const lodash = require('lodash');
+const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
+const ts = require('typescript');
 const docgen = require('react-docgen-typescript');
 
 const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
+const fixCompTypeProgramProvider = require('../utils/fixCompTypeProgramProvider');
 const aliasPropType = require('../utils/aliasPropType');
 const debug = require('../utils/debug');
 
-/** Init `react-docgen-typescript` with ts config. */
-const tsConfigParser = docgen.withCustomConfig(path.resolve('../../tsconfig.json'), {
-    savePropValueAsString: true,
-    shouldExtractValuesFromUnion: true,
-    shouldExtractLiteralValuesFromEnum: true,
-    shouldRemoveUndefinedFromOptional: true,
-});
+const globPromise = (globString) => new Promise((resolve, reject) =>
+    glob(globString, (err, files) => {
+        if (err) reject(err);
+        else resolve(files);
+    }));
 
-/** Find Lumx react component path by component name. */
-const getComponentPath = (component) => new Promise((resolve, reject) => {
+let parserConfig;
+const getDocgenParser = async () => {
+    if (!parserConfig) {
+        const tsconfigPath = path.resolve('../../tsconfig.json');
+        const basePath = path.dirname(tsconfigPath);
+        const { config, error } = ts.readConfigFile(tsconfigPath, filename =>
+            fs.readFileSync(filename, 'utf8'),
+        );
+        if (error) debug(error);
+        const { options, errors } = ts.parseJsonConfigFileContent(config, ts.sys, basePath, {}, tsconfigPath);
+        if (errors && errors.length) debug(errors);
+
+        /** Init `react-docgen-typescript` with ts config. */
+        const tsDocParser = docgen.withCompilerOptions(options, {
+            savePropValueAsString: true,
+            shouldExtractValuesFromUnion: true,
+            shouldExtractLiteralValuesFromEnum: true,
+            shouldRemoveUndefinedFromOptional: true,
+        });
+        parserConfig = { tsDocParser, options };
+    }
+
+    return (path) => parserConfig.tsDocParser.parseWithProgramProvider(path, fixCompTypeProgramProvider([path], parserConfig.options));
+};
+
+/** Find LumX react component path by component name. */
+const getComponentPath = async (component) => {
     const dir = path.resolve(`../lumx-react/src/components/`);
-    glob(path.join(dir, '**', `${component}.tsx`), (err, files) => {
-        if (err) {
-            reject(err);
-        } else {
-            if (files.length === 0) {
-                console.warn(`Could not found component ${component} in ${dir} for <PropTable> generation.`);
-            }
-            resolve(files[0]);
-        }
-    });
-});
+    const files = await globPromise(path.join(dir, '**', `${component}.tsx`));
+    if (files.length === 0) {
+        console.warn(`Could not found component ${component} in ${dir} for <PropTable> generation.`);
+    }
+    return files[0];
+};
 
 /** Format component prop documentation. */
 function formatProp(prop) {
@@ -63,12 +84,10 @@ function formatProp(prop) {
     return prop;
 }
 
-async function updatePropTable(props) {
+async function updatePropTable(docgenParser, props) {
     const component = JSON.parse(props.component);
     const componentPath = await getComponentPath(component);
-    const doc = tsConfigParser.parse(componentPath);
-
-    if (component === 'List') console.debug('doc', doc);
+    const doc = docgenParser(componentPath);
 
     const componentDoc = doc.find(d => d.displayName === component);
     if (componentDoc) {
@@ -84,11 +103,13 @@ async function updatePropTable(props) {
  */
 module.exports = async (mdxString) => {
     try {
+        const docgenParser = await getDocgenParser();
+
         // Rewrite prop table.
         mdxString = await rewriteJSXComponents(
             'PropTable',
             mdxString,
-            updatePropTable,
+            lodash.partial(updatePropTable, docgenParser),
         );
 
         return mdxString;
