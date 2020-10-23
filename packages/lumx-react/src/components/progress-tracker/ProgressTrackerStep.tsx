@@ -14,12 +14,7 @@ import { mdiAlertCircle, mdiCheckCircle, mdiRadioboxBlank, mdiRadioboxMarked } f
 /**
  * Defines the props of the component.
  */
-interface ProgressTrackerStepProps extends GenericProps {}
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {
+interface ProgressTrackerStepProps extends GenericProps {
     /** Whether the step should be in error state or not. */
     hasError?: boolean;
 
@@ -27,10 +22,10 @@ interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {
     helper?: string | null;
 
     /** Whether the current step is active. */
-    isActive: boolean;
+    isActive?: boolean;
 
     /** Whether the current step is completed. */
-    isComplete: boolean;
+    isComplete?: boolean;
 
     /** The step's label. */
     label: string | null;
@@ -52,12 +47,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    hasError: false,
-    helper: null,
-    isActive: false,
-    isComplete: false,
-    label: null,
+const DEFAULT_PROPS: Partial<ProgressTrackerStepProps> = {
     theme: Theme.light,
 };
 
@@ -68,15 +58,15 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
     className,
-    hasError = DEFAULT_PROPS.hasError,
-    helper = DEFAULT_PROPS.helper,
-    isActive = DEFAULT_PROPS.isActive,
-    isComplete = DEFAULT_PROPS.isComplete,
-    label = DEFAULT_PROPS.label,
-    theme = DEFAULT_PROPS.theme,
+    hasError,
+    helper,
+    isActive,
+    isComplete,
+    label,
+    theme,
     ...props
 }) => {
-    const { onClick = null, ...forwardedProps }: ProgressTrackerStepProps = props;
+    const { onClick = null, ...forwardedProps } = props;
 
     const isClickable: boolean = isFunction(onClick);
 
@@ -131,5 +121,6 @@ const ProgressTrackerStep: React.FC<ProgressTrackerStepProps> = ({
 };
 
 ProgressTrackerStep.displayName = COMPONENT_NAME;
+ProgressTrackerStep.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ProgressTrackerStep, ProgressTrackerStepProps };
+export { CLASSNAME, ProgressTrackerStep, ProgressTrackerStepProps };

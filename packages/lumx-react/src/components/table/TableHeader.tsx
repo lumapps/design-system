@@ -11,11 +11,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 interface TableHeaderProps extends GenericProps {}
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TableHeaderProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}TableHeader`;
@@ -28,7 +23,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const DEFAULT_PROPS: Partial<TableHeaderProps> = {};
 
 /**
  * The TableHeader component displays an HTML Table Head, composed TableHeader-cells in TableHeader Rows.
@@ -42,5 +37,6 @@ const TableHeader: React.FC<TableHeaderProps> = ({ children, className, ...forwa
 );
 
 TableHeader.displayName = COMPONENT_NAME;
+TableHeader.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, TableHeader, TableHeaderProps };
+export { CLASSNAME, TableHeader, TableHeaderProps };

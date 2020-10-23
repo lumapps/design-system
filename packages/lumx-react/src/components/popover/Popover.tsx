@@ -112,11 +112,6 @@ const DEFAULT_PROPS: Partial<PopoverProps> = {
     elevation: 3,
     placement: Placement.AUTO,
     zIndex: 9999,
-    fitToAnchorWidth: false,
-    fitWithinViewportHeight: false,
-    closeOnClickAway: false,
-    closeOnEscape: false,
-    hasArrow: false,
 };
 
 /**
@@ -187,14 +182,14 @@ const Popover: React.FC<PopoverProps> = (props) => {
         placement,
         isOpen,
         children,
-        fitToAnchorWidth = DEFAULT_PROPS.fitToAnchorWidth,
-        fitWithinViewportHeight = DEFAULT_PROPS.fitWithinViewportHeight,
+        fitToAnchorWidth,
+        fitWithinViewportHeight,
         offset,
-        elevation = DEFAULT_PROPS.elevation,
-        zIndex = DEFAULT_PROPS.zIndex,
-        closeOnClickAway = DEFAULT_PROPS.closeOnClickAway,
-        closeOnEscape = DEFAULT_PROPS.closeOnEscape,
-        hasArrow = DEFAULT_PROPS.hasArrow,
+        elevation,
+        zIndex,
+        closeOnClickAway,
+        closeOnEscape,
+        hasArrow,
         focusElement,
         className,
         onClose,
@@ -268,5 +263,6 @@ const Popover: React.FC<PopoverProps> = (props) => {
         : null;
 };
 Popover.displayName = COMPONENT_NAME;
+Popover.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Popover, PopoverProps, Placement, Offset };
+export { CLASSNAME, Popover, PopoverProps, Placement, Offset };

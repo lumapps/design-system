@@ -14,6 +14,8 @@ exports[`<DatePickerField> Snapshots and structure should render correctly 1`] =
         "current": null,
       }
     }
+    theme="light"
+    type="text"
     value="18 janvier 1970"
   />
 </Fragment>
@@ -33,6 +35,8 @@ exports[`<DatePickerField> Snapshots and structure should render correctly when 
         "current": null,
       }
     }
+    theme="light"
+    type="text"
     value="18 janvier 1970"
   />
 </Fragment>
@@ -52,6 +56,8 @@ exports[`<DatePickerField> Snapshots and structure should render correctly when 
         "current": null,
       }
     }
+    theme="light"
+    type="text"
     value="18 janvier 1970"
   />
 </Fragment>
@@ -71,6 +77,8 @@ exports[`<DatePickerField> Snapshots and structure should render without selecte
         "current": null,
       }
     }
+    theme="light"
+    type="text"
     value=""
   />
 </Fragment>

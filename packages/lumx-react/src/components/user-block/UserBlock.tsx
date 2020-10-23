@@ -47,11 +47,6 @@ interface UserBlockProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<UserBlockProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}UserBlock`;
@@ -64,7 +59,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<UserBlockProps> = {
     orientation: Orientation.horizontal,
     size: Size.m,
     theme: Theme.light,
@@ -77,8 +72,8 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const UserBlock: React.FC<UserBlockProps> = ({
     avatar,
-    theme = DEFAULT_PROPS.theme,
-    orientation = DEFAULT_PROPS.orientation,
+    theme,
+    orientation,
     fields,
     name,
     onClick,
@@ -87,7 +82,7 @@ const UserBlock: React.FC<UserBlockProps> = ({
     className,
     simpleAction,
     multipleActions,
-    size = DEFAULT_PROPS.size,
+    size,
     userBlockRef,
     ...forwardedProps
 }) => {
@@ -152,5 +147,6 @@ const UserBlock: React.FC<UserBlockProps> = ({
     );
 };
 UserBlock.displayName = COMPONENT_NAME;
+UserBlock.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, UserBlock, UserBlockProps, UserBlockSize };
+export { CLASSNAME, UserBlock, UserBlockProps, UserBlockSize };

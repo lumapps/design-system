@@ -11,7 +11,6 @@ import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
-import noop from 'lodash/noop';
 
 const _TRANSITION_DURATION = 400;
 
@@ -47,11 +46,6 @@ interface LightboxProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<LightboxProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Lightbox`;
@@ -64,14 +58,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<LightboxProps> = {
     ariaLabel: 'Lightbox',
     isCloseButtonVisible: true,
-    isOpen: false,
-    noWrapper: false,
-    onClose: noop,
-    onOpen: noop,
-    preventAutoClose: false,
     role: 'dialog',
     theme: Theme.light,
 };
@@ -82,18 +71,18 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return Lightbox.
  */
 const Lightbox: React.FC<LightboxProps> = ({
-    ariaLabel = DEFAULT_PROPS.ariaLabel,
+    ariaLabel,
     children,
     className,
-    isCloseButtonVisible = DEFAULT_PROPS.isCloseButtonVisible,
-    isOpen = DEFAULT_PROPS.isOpen,
-    noWrapper = DEFAULT_PROPS.noWrapper,
-    onClose = DEFAULT_PROPS.onClose,
-    onOpen = DEFAULT_PROPS.onOpen,
+    isCloseButtonVisible,
+    isOpen,
+    noWrapper,
+    onClose,
+    onOpen,
     parentElement,
-    preventAutoClose = DEFAULT_PROPS.preventAutoClose,
-    role = DEFAULT_PROPS.role,
-    theme = DEFAULT_PROPS.theme,
+    preventAutoClose,
+    role,
+    theme,
     zIndex,
 }) => {
     const buttonRef: React.RefObject<HTMLButtonElement> = useRef(null);
@@ -236,5 +225,6 @@ const Lightbox: React.FC<LightboxProps> = ({
     );
 };
 Lightbox.displayName = COMPONENT_NAME;
+Lightbox.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Lightbox, LightboxProps };
+export { CLASSNAME, Lightbox, LightboxProps };

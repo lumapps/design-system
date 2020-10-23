@@ -50,10 +50,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<DatePickerProps> = {
-    maxDate: undefined,
-    minDate: undefined,
-};
+const DEFAULT_PROPS: Partial<DatePickerProps> = {};
 
 /**
  * Simple component used to pick a date (semi-controlled implementation).
@@ -93,5 +90,6 @@ const DatePicker = (props: DatePickerProps) => {
     );
 };
 DatePicker.displayName = COMPONENT_NAME;
+DatePicker.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, COMPONENT_NAME, DEFAULT_PROPS, DatePicker, DatePickerProps };
+export { CLASSNAME, COMPONENT_NAME, DatePicker, DatePickerProps };

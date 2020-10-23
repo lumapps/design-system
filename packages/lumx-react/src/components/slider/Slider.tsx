@@ -30,22 +30,14 @@ interface SliderProps extends GenericProps {
     precision?: number;
     /** Value between 2 steps */
     steps?: number;
+    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
+    theme?: Theme;
     /** Value */
     value: number;
     /** Callback function invoked when the slider value changes */
     onChange(value: number): void;
     /** Callback function invoked when the component is clicked */
     onMouseDown?(event: React.SyntheticEvent): void;
-}
-
-/**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SliderProps> {
-    /**
-     * The theme.
-     */
-    theme?: Theme;
 }
 
 /**
@@ -64,9 +56,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    disabled: false,
-    hideMinMaxlabel: false,
+const DEFAULT_PROPS: Partial<SliderProps> = {
     precision: 0,
     steps: 0,
     theme: Theme.light,
@@ -120,11 +110,11 @@ const Slider: React.FC<SliderProps> = ({
     onMouseDown,
     onChange,
     steps,
-    precision = DEFAULT_PROPS.precision,
-    hideMinMaxlabel = DEFAULT_PROPS.hideMinMaxlabel,
-    value = DEFAULT_PROPS.value!,
+    precision,
+    hideMinMaxlabel,
+    value,
     disabled,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     ...forwardedProps
 }) => {
     const sliderRef = useRef<HTMLDivElement>(null);
@@ -285,7 +275,7 @@ const Slider: React.FC<SliderProps> = ({
                         className={`${CLASSNAME}__track ${CLASSNAME}__track--active`}
                         style={{ width: percentString }}
                     />
-                    {steps && (
+                    {steps ? (
                         <div className={`${CLASSNAME}__ticks`}>
                             {avaibleSteps.map((step: number, idx: number) => {
                                 return (
@@ -297,7 +287,7 @@ const Slider: React.FC<SliderProps> = ({
                                 );
                             })}
                         </div>
-                    )}
+                    ) : null}
                     <button
                         className={`${CLASSNAME}__handle`}
                         style={{ left: percentString }}
@@ -312,5 +302,6 @@ const Slider: React.FC<SliderProps> = ({
     );
 };
 Slider.displayName = COMPONENT_NAME;
+Slider.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Slider, SliderProps };
+export { CLASSNAME, Slider, SliderProps };

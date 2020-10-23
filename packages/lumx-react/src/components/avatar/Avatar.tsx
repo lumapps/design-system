@@ -31,11 +31,6 @@ interface AvatarProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<AvatarProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Avatar`;
@@ -48,9 +43,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    actions: undefined,
-    badge: undefined,
+const DEFAULT_PROPS: Partial<AvatarProps> = {
     size: Size.m,
     theme: Theme.light,
 };
@@ -60,15 +53,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Avatar: React.FC<AvatarProps> = ({
-    actions = DEFAULT_PROPS.actions,
-    badge = DEFAULT_PROPS.badge,
-    className,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
-    image,
-    ...forwardedProps
-}) => {
+const Avatar: React.FC<AvatarProps> = ({ actions, badge, className, size, theme, image, ...forwardedProps }) => {
     const style: CSSProperties = {
         backgroundImage: `url(${image})`,
     };
@@ -87,5 +72,6 @@ const Avatar: React.FC<AvatarProps> = ({
     );
 };
 Avatar.displayName = COMPONENT_NAME;
+Avatar.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Avatar, AvatarProps, AvatarSize };
+export { CLASSNAME, Avatar, AvatarProps, AvatarSize };

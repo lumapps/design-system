@@ -38,11 +38,6 @@ interface IconProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<IconProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Icon`;
@@ -55,11 +50,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    color: ColorPalette.dark,
-    iconRef: undefined,
-    size: Size.m,
-};
+const DEFAULT_PROPS: Partial<IconProps> = {};
 
 /**
  * Displays an icon in the form of a HTML <svg> tag with the wanted icon path.
@@ -72,7 +63,7 @@ const Icon: React.FC<IconProps> = ({
     colorVariant,
     hasShape,
     icon,
-    iconRef = DEFAULT_PROPS.iconRef,
+    iconRef,
     size,
     theme,
     ...forwardedProps
@@ -83,7 +74,7 @@ const Icon: React.FC<IconProps> = ({
     } else if (theme) {
         iconColor = theme === Theme.light ? ColorPalette.dark : ColorPalette.light;
     } else if (hasShape) {
-        iconColor = DEFAULT_PROPS.color;
+        iconColor = ColorPalette.dark;
     }
 
     let iconSize;
@@ -100,7 +91,7 @@ const Icon: React.FC<IconProps> = ({
             iconSize = size;
         }
     } else if (hasShape) {
-        iconSize = DEFAULT_PROPS.size;
+        iconSize = Size.m;
     }
 
     return (
@@ -133,5 +124,6 @@ const Icon: React.FC<IconProps> = ({
     );
 };
 Icon.displayName = COMPONENT_NAME;
+Icon.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Icon, IconProps, IconSizes };
+export { CLASSNAME, Icon, IconProps, IconSizes };

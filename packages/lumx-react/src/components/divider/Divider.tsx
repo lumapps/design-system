@@ -17,11 +17,6 @@ interface DividerProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<DividerProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Divider`;
@@ -34,7 +29,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<DividerProps> = {
     theme: Theme.light,
 };
 
@@ -44,11 +39,12 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Divider: React.FC<DividerProps> = ({ className, theme = DEFAULT_PROPS.theme, ...forwardedProps }) => {
+const Divider: React.FC<DividerProps> = ({ className, theme, ...forwardedProps }) => {
     return (
         <hr {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))} />
     );
 };
 Divider.displayName = COMPONENT_NAME;
+Divider.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps };
+export { CLASSNAME, Divider, DividerProps };

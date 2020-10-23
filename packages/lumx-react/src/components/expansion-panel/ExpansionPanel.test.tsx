@@ -8,7 +8,9 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
-import { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps } from './ExpansionPanel';
+import { CLASSNAME, ExpansionPanel, ExpansionPanelProps } from './ExpansionPanel';
+
+const DEFAULT_PROPS = ExpansionPanel.defaultProps as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.

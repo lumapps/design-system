@@ -6,11 +6,14 @@ Array [
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center"
   >
     <Button
+      emphasis="high"
+      size="m"
       style={
         Object {
           "height": 200,
         }
       }
+      theme="light"
     >
       Button
     </Button>
@@ -42,25 +45,20 @@ Array [
   <div
     className="lumx-flex-box"
   >
-    <FlexBox
-      fillSpace={false}
-      noShrink={false}
-    >
+    <FlexBox>
       <Icon
         icon="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z"
       />
     </FlexBox>
-    <FlexBox
-      fillSpace={false}
-      noShrink={false}
-    >
+    <FlexBox>
       Some text in a div
     </FlexBox>
-    <FlexBox
-      fillSpace={false}
-      noShrink={false}
-    >
-      <Button>
+    <FlexBox>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
         OK
       </Button>
     </FlexBox>
@@ -80,7 +78,11 @@ Array [
   <div
     className="lumx-flex-box"
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       OK
     </Button>
   </div>,
@@ -98,13 +100,21 @@ Array [
       }
     }
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Default
     </Button>
     <FlexBox
       hAlign="top"
     >
-      <Button>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
         Top
       </Button>
     </FlexBox>
@@ -113,14 +123,22 @@ Array [
       hAlign="center"
       vAlign="center"
     >
-      <Button>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
         Center button
       </Button>
     </FlexBox>
     <FlexBox
       hAlign="bottom"
     >
-      <Button>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
         Bottom
       </Button>
     </FlexBox>
@@ -128,21 +146,33 @@ Array [
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--h-align-top"
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Top
     </Button>
   </div>,
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--fill-space"
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Center button
     </Button>
   </div>,
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--h-align-bottom"
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Bottom
     </Button>
   </div>,
@@ -160,7 +190,11 @@ Array [
       }
     }
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Button
     </Button>
     <FlexBox
@@ -168,7 +202,11 @@ Array [
     >
       Some long text
     </FlexBox>
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Button
     </Button>
   </div>,
@@ -191,13 +229,21 @@ Array [
       }
     }
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Default
     </Button>
     <FlexBox
       vAlign="left"
     >
-      <Button>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
         Left
       </Button>
     </FlexBox>
@@ -206,14 +252,22 @@ Array [
       hAlign="center"
       vAlign="center"
     >
-      <Button>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
         Center button
       </Button>
     </FlexBox>
     <FlexBox
       vAlign="right"
     >
-      <Button>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
         Right
       </Button>
     </FlexBox>
@@ -221,21 +275,33 @@ Array [
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-left"
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Left
     </Button>
   </div>,
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-center lumx-flex-box--h-align-center lumx-flex-box--fill-space"
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Center button
     </Button>
   </div>,
   <div
     className="lumx-flex-box lumx-flex-box--orientation-horizontal lumx-flex-box--v-align-right"
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Right
     </Button>
   </div>,
@@ -257,21 +323,37 @@ Array [
       fillSpace={true}
       orientation="vertical"
     >
-      <Button>
+      <Button
+        emphasis="high"
+        size="m"
+        theme="light"
+      >
         Button
       </Button>
     </FlexBox>
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Button
     </Button>
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Button
     </Button>
   </div>,
   <div
     className="lumx-flex-box lumx-flex-box--orientation-vertical lumx-flex-box--fill-space"
   >
-    <Button>
+    <Button
+      emphasis="high"
+      size="m"
+      theme="light"
+    >
       Button
     </Button>
   </div>,

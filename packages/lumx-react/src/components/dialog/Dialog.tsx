@@ -112,10 +112,6 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<DialogProps> = {
-    forceFooterDivider: false,
-    forceHeaderDivider: false,
-    isOpen: false,
-    preventAutoClose: false,
     size: Size.big,
 };
 
@@ -131,17 +127,17 @@ const Dialog: React.FC<DialogProps> = (props) => {
         className,
         header,
         focusElement,
-        forceFooterDivider = DEFAULT_PROPS.forceFooterDivider,
-        forceHeaderDivider = DEFAULT_PROPS.forceHeaderDivider,
+        forceFooterDivider,
+        forceHeaderDivider,
         footer,
         isLoading,
-        isOpen = DEFAULT_PROPS.isOpen,
+        isOpen,
         onOpen,
         onClose,
         parentElement,
         contentRef,
-        preventAutoClose = DEFAULT_PROPS.preventAutoClose,
-        size = DEFAULT_PROPS.size,
+        preventAutoClose,
+        size,
         zIndex,
         ...forwardedProps
     } = props;
@@ -262,5 +258,6 @@ const Dialog: React.FC<DialogProps> = (props) => {
         : null;
 };
 Dialog.displayName = COMPONENT_NAME;
+Dialog.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Dialog, DialogProps, DialogSizes };
+export { CLASSNAME, Dialog, DialogProps, DialogSizes };

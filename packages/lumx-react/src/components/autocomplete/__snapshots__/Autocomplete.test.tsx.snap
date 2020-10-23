@@ -16,6 +16,8 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         "current": null,
       }
     }
+    theme="light"
+    type="text"
     value=""
   />
   <Dropdown
@@ -24,7 +26,13 @@ exports[`<Autocomplete> Props should render correctly when the dropdown is close
         "current": null,
       }
     }
+    closeOnClick={true}
+    closeOnClickAway={true}
+    closeOnEscape={true}
+    fitToAnchorWidth={true}
+    fitWithinViewportHeight={true}
     isOpen={false}
+    placement="bottom-start"
     shouldFocusOnOpen={false}
   >
     <List
@@ -115,6 +123,8 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
+    theme="light"
+    type="text"
     value=""
   />
   <Dropdown
@@ -123,7 +133,13 @@ exports[`<Autocomplete> Snapshots and structure should render correctly 1`] = `
         "current": null,
       }
     }
+    closeOnClick={true}
+    closeOnClickAway={true}
+    closeOnEscape={true}
+    fitToAnchorWidth={true}
+    fitWithinViewportHeight={true}
     isOpen={true}
+    placement="bottom-start"
     shouldFocusOnOpen={false}
   >
     <List

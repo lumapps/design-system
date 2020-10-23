@@ -8,7 +8,9 @@ import { getBasicClass } from '@lumx/react/utils';
 
 import { mdiAccount } from '@lumx/icons';
 
-import { CLASSNAME, DEFAULT_PROPS, SideNavigationItem, SideNavigationItemProps } from './SideNavigationItem';
+import { CLASSNAME, SideNavigationItem, SideNavigationItemProps } from './SideNavigationItem';
+
+const DEFAULT_PROPS = SideNavigationItem.defaultProps as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.

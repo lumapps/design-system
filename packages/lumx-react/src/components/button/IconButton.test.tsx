@@ -4,7 +4,9 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
-import { CLASSNAME, DEFAULT_PROPS, IconButton, IconButtonProps } from './IconButton';
+import { CLASSNAME, IconButton, IconButtonProps } from './IconButton';
+
+const DEFAULT_PROPS = IconButton.defaultProps as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.

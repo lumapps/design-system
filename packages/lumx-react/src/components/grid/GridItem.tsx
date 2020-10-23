@@ -19,11 +19,6 @@ interface GridItemProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<GridItemProps> {}
-
-/**
  * The display name of the component.
  *
  */
@@ -39,7 +34,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const DEFAULT_PROPS: Partial<GridItemProps> = {};
 
 /**
  * [Enter the description of the component here].
@@ -64,5 +59,6 @@ const GridItem: React.FC<GridItemProps> = ({
     );
 };
 GridItem.displayName = COMPONENT_NAME;
+GridItem.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, GridItem, GridItemProps };
+export { CLASSNAME, GridItem, GridItemProps };

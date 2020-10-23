@@ -10,6 +10,7 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
   className="lumx-dropdown__menu lumx-dropdown"
   closeOnClickAway={true}
   closeOnEscape={true}
+  elevation={3}
   fitToAnchorWidth={true}
   fitWithinViewportHeight={true}
   focusElement={
@@ -24,6 +25,7 @@ exports[`<Dropdown> Snapshots and structure should render correctly 1`] = `
       "current": null,
     }
   }
+  zIndex={9999}
 >
   <div>
     This is the content of the dropdown

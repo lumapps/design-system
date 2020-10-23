@@ -42,12 +42,7 @@ const CLASSNAME = `${CSS_PREFIX}-tabs__link`;
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    icon: undefined,
-    isActive: false,
-    isDisabled: false,
-    label: undefined,
-};
+const DEFAULT_PROPS: DefaultPropsType = {};
 
 /**
  * Define a single Tab for Tabs component.

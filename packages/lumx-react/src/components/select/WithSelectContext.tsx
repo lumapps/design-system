@@ -16,9 +16,6 @@ import { CoreSelectProps, SelectVariant } from './constants';
 /** Defines the props of the component. */
 interface SelectProps extends CoreSelectProps {}
 
-/** Define the types of the default props. */
-interface DefaultPropsType extends Partial<SelectProps> {}
-
 /** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
@@ -26,10 +23,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
-const DEFAULT_PROPS: DefaultPropsType = {
-    hasError: false,
-    isOpen: false,
-    isValid: false,
+const DEFAULT_PROPS: Partial<SelectProps> = {
     theme: Theme.light,
     variant: SelectVariant.input,
 };
@@ -91,14 +85,14 @@ const withSelectContext = (
         children,
         className,
         error,
-        hasError = DEFAULT_PROPS.hasError,
+        hasError,
         helper,
         isDisabled,
         isEmpty,
         isMultiple,
-        isOpen = DEFAULT_PROPS.isOpen,
+        isOpen,
         isRequired,
-        isValid = DEFAULT_PROPS.isValid,
+        isValid,
         closeOnClick = !isMultiple,
         label,
         placeholder,

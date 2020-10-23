@@ -98,7 +98,7 @@ const ListItem: React.FC<ListItemProps> = (props) => {
         className,
         isHighlighted,
         isSelected,
-        size = DEFAULT_PROPS.size,
+        size,
         onItemSelected,
         before,
         linkAs,
@@ -158,5 +158,6 @@ const ListItem: React.FC<ListItemProps> = (props) => {
     );
 };
 ListItem.displayName = COMPONENT_NAME;
+ListItem.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ListItem, ListItemProps, ListItemSize, ListItemSizes, isClickable };
+export { CLASSNAME, ListItem, ListItemProps, ListItemSize, ListItemSizes, isClickable };

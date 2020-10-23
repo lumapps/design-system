@@ -84,7 +84,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
         children,
         chipsAlignment,
         value,
-        values = DEFAULT_PROPS.values,
+        values,
         onBlur,
         onChange,
         onFocus,
@@ -110,7 +110,7 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
         fitToAnchorWidth,
         shouldFocusOnClose,
         onInfiniteScroll,
-        selectedChipRender = DEFAULT_PROPS.selectedChipRender,
+        selectedChipRender,
         ...forwardedProps
     } = props;
 
@@ -161,5 +161,6 @@ const AutocompleteMultiple: React.FC<AutocompleteMultipleProps> = (props) => {
     );
 };
 AutocompleteMultiple.displayName = COMPONENT_NAME;
+AutocompleteMultiple.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, AutocompleteMultiple, AutocompleteMultipleProps };
+export { CLASSNAME, AutocompleteMultiple, AutocompleteMultipleProps };

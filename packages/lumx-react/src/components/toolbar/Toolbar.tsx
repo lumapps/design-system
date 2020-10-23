@@ -19,11 +19,6 @@ interface ToolbarProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ToolbarProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Toolbar`;
@@ -36,7 +31,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const DEFAULT_PROPS: Partial<ToolbarProps> = {};
 
 /**
  * Toolbar component.
@@ -64,5 +59,6 @@ const Toolbar: React.FC<ToolbarProps> = ({ after, before, className, label, ...f
     );
 };
 Toolbar.displayName = COMPONENT_NAME;
+Toolbar.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Toolbar, ToolbarProps };
+export { CLASSNAME, Toolbar, ToolbarProps };

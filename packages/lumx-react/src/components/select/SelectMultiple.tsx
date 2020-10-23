@@ -32,9 +32,6 @@ interface SelectMultipleProps extends CoreSelectProps {
     ): ReactNode | string;
 }
 
-/** Define the types of the default props. */
-interface DefaultPropsType extends Partial<SelectMultipleProps> {}
-
 /** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
@@ -42,10 +39,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
-const DEFAULT_PROPS: DefaultPropsType = {
-    hasError: false,
-    isOpen: false,
-    isValid: false,
+const DEFAULT_PROPS: Partial<SelectMultipleProps> = {
     selectedChipRender(choice, index, onClear, isDisabled?, theme?) {
         const onClick = (event: React.MouseEvent) => onClear && onClear(event, choice);
         return (
@@ -86,8 +80,8 @@ const SelectMultipleField: React.FC<SelectMultipleProps> = ({
     anchorRef,
     isRequired,
     isDisabled,
-    selectedChipRender = DEFAULT_PROPS.selectedChipRender,
-    selectedValueRender = DEFAULT_PROPS.selectedValueRender,
+    selectedChipRender,
+    selectedValueRender,
 }) => {
     return (
         <>
@@ -188,5 +182,6 @@ const SelectMultiple = (props: any) =>
     });
 
 SelectMultiple.displayName = COMPONENT_NAME;
+SelectMultiple.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, SelectMultiple, SelectMultipleProps, SelectVariant };
+export { CLASSNAME, SelectMultiple, SelectMultipleProps, SelectVariant };

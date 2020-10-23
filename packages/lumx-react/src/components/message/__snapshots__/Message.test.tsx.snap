@@ -3,6 +3,7 @@
 exports[`<Message> Snapshots and structure should render correctly 1`] = `
 <div
   className="lumx-message lumx-message--color-dark"
+  color="dark"
 >
   <div
     className="lumx-message__text"

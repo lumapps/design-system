@@ -10,7 +10,7 @@ import { mdiChevronLeft, mdiChevronRight } from '@lumx/icons';
 
 import { getAnnotatedMonthCalendar, getWeekDays } from '@lumx/core/js/date-picker';
 
-import { CLASSNAME, DEFAULT_PROPS, DatePickerProps } from './DatePicker';
+import { CLASSNAME, DatePickerProps } from './DatePicker';
 
 /**
  * Defines the props of the component.
@@ -39,8 +39,8 @@ const COMPONENT_NAME = 'DatePickerControlled';
  */
 const DatePickerControlled: React.FC<DatePickerControlledProps> = ({
     locale,
-    maxDate = DEFAULT_PROPS.maxDate,
-    minDate = DEFAULT_PROPS.minDate,
+    maxDate,
+    minDate,
     onChange,
     onPrevMonthChange,
     onNextMonthChange,

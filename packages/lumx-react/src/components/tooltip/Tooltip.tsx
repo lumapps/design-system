@@ -9,7 +9,7 @@ import { Placement } from '@lumx/react/components/popover/Popover';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 
-import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { Falsy, GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import { useInjectTooltipRef } from './useInjectTooltipRef';
 import { useTooltipOpen } from './useTooltipOpen';
@@ -18,28 +18,23 @@ import { useTooltipOpen } from './useTooltipOpen';
 type TooltipPlacement = Placement.TOP | Placement.RIGHT | Placement.BOTTOM | Placement.LEFT;
 
 /**
- * Defines the optional props of the component.
+ * Defines the props of the component.
  */
-interface OptionalTooltipProps extends GenericProps {
+interface TooltipProps extends GenericProps {
+    /** Tooltip label. */
+    label?: string | Falsy;
+
+    /** Tooltip anchor. */
+    children: ReactNode;
+
+    /** Force tooltip to show even without the mouse over the anchor. */
+    forceOpen?: boolean;
+
     /** Delay in ms before closing the tooltip . */
     delay?: number;
 
     /** Placement of tooltip relative to the anchor element. */
     placement?: TooltipPlacement;
-
-    /** Force tooltip to show even without the mouse over the anchor. */
-    forceOpen?: boolean;
-}
-
-/**
- * Defines the props of the component.
- */
-interface TooltipProps extends OptionalTooltipProps {
-    /** Tooltip label. */
-    label?: string | null | false;
-
-    /** Tooltip anchor. */
-    children: ReactNode;
 }
 
 /**
@@ -55,10 +50,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Required<OptionalTooltipProps> = {
+const DEFAULT_PROPS: Partial<TooltipProps> = {
     delay: 500,
     placement: Placement.BOTTOM,
-    forceOpen: false,
 };
 
 /**
@@ -74,15 +68,7 @@ const OFFSET = 8;
  * @return The component.
  */
 const Tooltip: React.FC<TooltipProps> = (props) => {
-    const {
-        label,
-        children,
-        className,
-        delay = DEFAULT_PROPS.delay,
-        placement = DEFAULT_PROPS.placement,
-        forceOpen = DEFAULT_PROPS.forceOpen,
-        ...forwardedProps
-    } = props;
+    const { label, children, className, delay, placement, forceOpen, ...forwardedProps } = props;
     if (!label) {
         return <>{children}</>;
     }
@@ -102,8 +88,8 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     });
 
     const position = attributes?.popper?.['data-popper-placement'] ?? placement;
-    const isOpen = useTooltipOpen(delay, anchorElement) || forceOpen;
-    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen, id);
+    const isOpen = useTooltipOpen(delay as number, anchorElement) || forceOpen;
+    const wrappedChildren = useInjectTooltipRef(children, setAnchorElement, isOpen as boolean, id);
 
     return (
         <>
@@ -133,5 +119,6 @@ const Tooltip: React.FC<TooltipProps> = (props) => {
     );
 };
 Tooltip.displayName = COMPONENT_NAME;
+Tooltip.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, useTooltipOpen, Tooltip, TooltipPlacement, TooltipProps };
+export { CLASSNAME, useTooltipOpen, Tooltip, TooltipPlacement, TooltipProps };

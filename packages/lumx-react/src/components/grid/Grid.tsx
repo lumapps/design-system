@@ -23,11 +23,6 @@ interface GridProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<GridProps> {}
-
-/**
  * The display name of the component.
  *
  */
@@ -43,7 +38,7 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  * The default value of props.
  *
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<GridProps> = {
     orientation: Orientation.horizontal,
     wrap: 'nowrap',
 };
@@ -58,11 +53,11 @@ const Grid: React.FC<GridProps> = ({
     className,
     gutter,
     hAlign,
-    orientation = DEFAULT_PROPS.orientation,
+    orientation,
     vAlign,
-    wrap = DEFAULT_PROPS.wrap,
+    wrap,
     ...forwardedProps
-}: GridProps): React.ReactElement => {
+}) => {
     return (
         <div
             {...forwardedProps}
@@ -79,5 +74,6 @@ const Grid: React.FC<GridProps> = ({
     );
 };
 Grid.displayName = COMPONENT_NAME;
+Grid.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Grid, GridProps };
+export { CLASSNAME, Grid, GridProps };

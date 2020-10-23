@@ -59,7 +59,7 @@ const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean
             )
             .first(),
         helper: wrapper.findWhere(
-            (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === undefined,
+            (n: ShallowWrapper | ReactWrapper) => n.name() === 'InputHelper' && n.prop('kind') === Kind.info,
         ),
         input: wrapper.find('#uuid').first(),
         props,

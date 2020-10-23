@@ -181,5 +181,6 @@ const ButtonRoot: React.FC<ButtonRootProps> = (props) => {
     );
 };
 ButtonRoot.displayName = COMPONENT_NAME;
+ButtonRoot.defaultProps = {};
 
 export { BUTTON_CLASSNAME, BUTTON_WRAPPER_CLASSNAME, BaseButtonProps, ButtonRootProps, ButtonRoot };

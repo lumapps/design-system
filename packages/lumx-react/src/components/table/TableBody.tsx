@@ -11,11 +11,6 @@ import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/
 interface TableBodyProps extends GenericProps {}
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TableBodyProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}TableBody`;
@@ -28,7 +23,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const DEFAULT_PROPS: Partial<TableBodyProps> = {};
 
 /**
  * The TableBody component displays an HTML Table Body, composed TableBody-cells in TableBody Rows.
@@ -42,5 +37,6 @@ const TableBody: React.FC<TableBodyProps> = ({ children, className, ...forwarded
 );
 
 TableBody.displayName = COMPONENT_NAME;
+TableBody.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, TableBody, TableBodyProps };
+export { CLASSNAME, TableBody, TableBodyProps };

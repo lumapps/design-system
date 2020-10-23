@@ -36,11 +36,6 @@ interface LinkPreviewProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<LinkPreviewProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}LinkPreview`;
@@ -53,7 +48,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<LinkPreviewProps> = {
     size: Size.regular,
     theme: Theme.light,
 };
@@ -68,10 +63,10 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
     title,
     description,
     url,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
+    size,
+    theme,
     thumbnail = '',
-    thumbnailProps = {},
+    thumbnailProps,
     ...forwardedProps
 }) => {
     const goToUrl = useCallback(() => window.open(url, '_blank'), [url]);
@@ -136,5 +131,6 @@ const LinkPreview: React.FC<LinkPreviewProps> = ({
 };
 
 LinkPreview.displayName = COMPONENT_NAME;
+LinkPreview.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, LinkPreview, LinkPreviewProps };
+export { CLASSNAME, LinkPreview, LinkPreviewProps };

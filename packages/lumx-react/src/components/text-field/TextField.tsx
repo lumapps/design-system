@@ -105,14 +105,6 @@ const MIN_ROWS = 2;
  * The default value of props.
  */
 const DEFAULT_PROPS: Partial<TextFieldProps> = {
-    forceFocusStyle: false,
-    hasError: false,
-    isClearable: false,
-    isDisabled: false,
-    isRequired: false,
-    isValid: false,
-    minimumRows: MIN_ROWS,
-    multiline: false,
     theme: Theme.light,
     type: 'text',
 };
@@ -269,14 +261,14 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         chips,
         className,
         error,
-        forceFocusStyle = DEFAULT_PROPS.forceFocusStyle,
+        forceFocusStyle,
         hasError,
         helper,
         icon,
         id = uuid(),
         isDisabled,
         isRequired,
-        isClearable = DEFAULT_PROPS.isClearable,
+        isClearable,
         isValid,
         label,
         maxLength,
@@ -284,19 +276,19 @@ const TextField: React.FC<TextFieldProps> = (props) => {
         onFocus,
         onBlur,
         placeholder,
-        minimumRows = DEFAULT_PROPS.minimumRows as number,
+        minimumRows,
         inputRef = React.useRef(null),
-        theme = DEFAULT_PROPS.theme,
-        multiline = DEFAULT_PROPS.multiline,
+        theme,
+        multiline,
         useCustomColors,
         textFieldRef,
-        type = DEFAULT_PROPS.type,
+        type,
         value,
         ...forwardedProps
     } = props;
 
     const [isFocus, setFocus] = useState(false);
-    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows);
+    const { rows, recomputeNumberOfRows } = useComputeNumberOfRows(minimumRows || MIN_ROWS);
     const valueLength = (value && `${value}`.length) || 0;
     const isNotEmpty = valueLength > 0;
 
@@ -422,5 +414,6 @@ const TextField: React.FC<TextFieldProps> = (props) => {
     );
 };
 TextField.displayName = COMPONENT_NAME;
+TextField.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, TextField, TextFieldProps };
+export { CLASSNAME, TextField, TextFieldProps };

@@ -41,9 +41,7 @@ exports[`<RadioButton> Snapshots and structure should render defaults 1`] = `
     className="lumx-radio-button__input-wrapper"
   >
     <input
-      checked={false}
       className="lumx-radio-button__input-native"
-      disabled={false}
       id="lumx-radio-button-1"
       onChange={[Function]}
       tabIndex={0}
@@ -74,9 +72,7 @@ exports[`<RadioButton> Snapshots and structure should render label & helper 1`] 
     className="lumx-radio-button__input-wrapper"
   >
     <input
-      checked={false}
       className="lumx-radio-button__input-native"
-      disabled={false}
       id="lumx-radio-button-2"
       onChange={[Function]}
       tabIndex={0}
@@ -105,6 +101,7 @@ exports[`<RadioButton> Snapshots and structure should render label & helper 1`] 
     </InputLabel>
     <InputHelper
       className="lumx-radio-button__helper"
+      kind="info"
       theme="light"
     >
       Helper

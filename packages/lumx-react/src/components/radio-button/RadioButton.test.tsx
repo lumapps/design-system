@@ -73,8 +73,8 @@ describe(`<${RadioButton.displayName}>`, () => {
 
             expect(input).toExist();
             const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBe(false);
-            expect(inputProps.disabled).toBe(false);
+            expect(inputProps.checked).toBeFalsy();
+            expect(inputProps.disabled).toBeFalsy();
 
             expect(helper).not.toExist();
         });
@@ -104,8 +104,8 @@ describe(`<${RadioButton.displayName}>`, () => {
 
             expect(input).toExist();
             const inputProps: InputHTMLAttributes<HTMLInputElement> = input.props();
-            expect(inputProps.checked).toBe(false);
-            expect(inputProps.disabled).toBe(false);
+            expect(inputProps.checked).toBeFalsy();
+            expect(inputProps.disabled).toBeFalsy();
 
             expect(label).toExist();
             expect(label.contains(props.label)).toBe(true);

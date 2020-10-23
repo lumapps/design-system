@@ -8,7 +8,6 @@ exports[`<Switch> Conditions should not display the \`helper\` if no \`label\` i
     className="lumx-switch__input-wrapper"
   >
     <input
-      checked={false}
       className="lumx-switch__input-native"
       id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
       onChange={[Function]}
@@ -36,7 +35,6 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
     className="lumx-switch__input-wrapper"
   >
     <input
-      checked={false}
       className="lumx-switch__input-native"
       id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
       onChange={[Function]}
@@ -65,6 +63,7 @@ exports[`<Switch> Snapshots and structure should render correctly with a \`label
     </InputLabel>
     <InputHelper
       className="lumx-switch__helper"
+      kind="info"
       theme="light"
     >
       Helper
@@ -81,7 +80,6 @@ exports[`<Switch> Snapshots and structure should render correctly with only a \`
     className="lumx-switch__input-wrapper"
   >
     <input
-      checked={false}
       className="lumx-switch__input-native"
       id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
       onChange={[Function]}
@@ -120,7 +118,6 @@ exports[`<Switch> Snapshots and structure should render correctly without any la
     className="lumx-switch__input-wrapper"
   >
     <input
-      checked={false}
       className="lumx-switch__input-native"
       id="a7b5d992-fe30-4d58-967a-89b8bb7e109c"
       onChange={[Function]}
