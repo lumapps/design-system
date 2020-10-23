@@ -1,4 +1,4 @@
-import { HighlightedCode } from '@lumx/demo/components/HighlightedCode';
+import { CodeBlock } from '@lumx/demo/components/CodeBlock';
 import { mdiCodeTags } from '@lumx/icons';
 import {
     Alignment,
@@ -87,9 +87,7 @@ export const DemoBlock: React.FC<DemoBlockProps> = ({
             </div>
 
             {showCode && codeString && (
-                <div className="demo-block__code">
-                    <HighlightedCode codeString={codeString} language="tsx" />
-                </div>
+                <CodeBlock className="demo-block__code" codeString={codeString} language="tsx" />
             )}
         </div>
     );

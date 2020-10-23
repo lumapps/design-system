@@ -5,8 +5,8 @@ import 'focus-visible';
 import 'intersection-observer';
 import { preToCodeBlock } from 'mdx-utils';
 
+import { CodeBlock } from '@lumx/demo/components/CodeBlock';
 import { DemoBlock } from '@lumx/demo/components/DemoBlock';
-import { HighlightedCode } from '@lumx/demo/components/HighlightedCode';
 import { Link } from '@lumx/demo/components/Link';
 import { PropTable } from '@lumx/demo/components/PropTable';
 import { ReactStabilityFlag } from '@lumx/demo/components/ReactStabilityFlag';
@@ -18,7 +18,7 @@ import { GlobalThemeProvider } from '@lumx/demo/global-theme';
 const mdxComponents = {
     pre: (preProps: any) => {
         const codeProps = preToCodeBlock(preProps);
-        return codeProps ? <HighlightedCode {...codeProps} /> : <pre {...preProps} />;
+        return codeProps ? <CodeBlock {...codeProps} /> : <pre {...preProps} />;
     },
     inlineCode: (props: any) => <code {...props} />,
     ReactStabilityFlag,
