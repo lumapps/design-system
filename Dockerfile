@@ -2,7 +2,7 @@ FROM node:10.16-buster AS builder
 
 WORKDIR /tmp
 
-COPY package.json lerna.json yarn.lock tsconfig.json tslint.json ./
+COPY package.json lerna.json .yarn yarn.lock tsconfig.json tslint.json ./
 COPY configs ./configs
 COPY packages ./packages/
 
@@ -14,7 +14,7 @@ FROM nginx:1.17
 
 ARG WEBROOT=/var/www
 
-COPY --from=builder /tmp/packages/site-demo/dist $WEBROOT
+COPY --from=builder /tmp/packages/site-demo/public $WEBROOT
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
 COPY .docker/robots.txt ${WEBROOT}
 

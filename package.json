@@ -91,7 +91,7 @@
     },
     "scripts": {
         "build": "lerna run --stream build",
-        "build:site": "yarn --cwd packages/site-demo build",
+        "build:site": "yarn --cwd packages/site-demo gatsby clean && yarn --cwd packages/site-demo build",
         "clean": "rm -rf packages/*/dist && lerna clean --yes",
         "format": "yarn format:js && yarn format:ts && yarn format:style",
         "format:style": "prettier-stylelint --prettier-last --write packages/**/*.{css,scss}",
