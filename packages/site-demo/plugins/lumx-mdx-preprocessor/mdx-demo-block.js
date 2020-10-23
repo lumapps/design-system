@@ -1,7 +1,6 @@
 const { camelCase, partial } = require('lodash');
 const path = require('path');
 const fs = require('fs');
-const uuid = require('uuid/v4');
 
 const CONTENT_DIR = path.resolve('./content');
 const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
@@ -44,8 +43,9 @@ async function updateDemoBlock(resourceFolder, addImport, props) {
     props.codeString = JSON.stringify(code.trim());
 
     // Import demo (will be added at the top).
-    const demoVar = camelCase(`demo-${uuid()}`);
-    addImport(`import ${demoVar} from '@content/${path.relative(CONTENT_DIR, sourcePath)}';`);
+    let relativePath = path.relative(CONTENT_DIR, sourcePath);
+    const demoVar = camelCase(`demo-${relativePath.replace('/', '-')}`);
+    addImport(`import ${demoVar} from '@content/${relativePath}';`);
 
     // Add demo as children.
     props.children = `{${demoVar}}`;
