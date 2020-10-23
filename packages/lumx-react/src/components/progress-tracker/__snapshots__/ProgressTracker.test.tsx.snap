@@ -9,7 +9,6 @@ exports[`<ProgressTracker> Snapshots and structure should render defaults 1`] = 
   >
     <ProgressTrackerStep
       label="Step label"
-      onClick={[Function]}
       theme="light"
     />
   </div>

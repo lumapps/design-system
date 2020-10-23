@@ -3,8 +3,8 @@ const path = require('path');
 const glob = require('glob');
 const docgen = require('react-docgen-typescript');
 
-const splitUnionType = require('../utils/splitUnionType');
 const rewriteJSXComponents = require('../utils/rewriteJSXComponents');
+const aliasPropType = require('../utils/aliasPropType');
 const debug = require('../utils/debug');
 
 /** Init `react-docgen-typescript` with ts config. */
@@ -30,20 +30,6 @@ const getComponentPath = (component) => new Promise((resolve, reject) => {
     });
 });
 
-const ReactElement = 'ReactElement<any, string | ((props: any) => ReactElement<any, string | any | (new (props: any) => Component<any, any, any>)> | null) | (new (props: any) => Component<any, any, any>)>';
-
-/** Pairs of types that, combined, should all be replaced by an alias. */
-const TYPE_ALIASES = [
-   [
-        ['string', 'number', 'boolean', '{}', ReactElement, 'ReactNodeArray', 'ReactPortal', 'null'],
-        'ReactNode',
-    ],
-    [
-        [ReactElement],
-        'ReactElement',
-    ],
-];
-
 /** Format component prop documentation. */
 function formatProp(prop) {
     delete prop.parent;
@@ -52,22 +38,20 @@ function formatProp(prop) {
     prop.defaultValue = prop.defaultValue === 'undefined' ? null : prop.defaultValue;
 
     if (prop.type.name === 'enum') {
-        if (!prop.type.raw.includes(' | ') && !prop.type.raw.startsWith('React')) {
-            prop.type = prop.type.value.map(t => t.value);
+        const isReactType = !prop.type.raw.includes(' | ') && prop.type.raw.startsWith('React');
+        if (isReactType) {
+            // Use raw react type.
+            prop.type = [prop.type.raw];
         } else {
-            prop.type = splitUnionType(prop.type.raw);
+            // Use enum values.
+            prop.type = prop.type.value.map(t => t.value);
         }
     } else {
         prop.type = [prop.type.name];
     }
 
     // Replace types by their alias.
-    for (const [toAlias, alias] of TYPE_ALIASES) {
-        if (toAlias.every(lodash.partial(lodash.includes, prop.type))) {
-            lodash.pull(prop.type, ...toAlias);
-            prop.type.push(alias);
-        }
-    }
+    prop.type = aliasPropType(prop.type);
 
     if (prop.type.includes('undefined')) {
         lodash.pull(prop.type, 'undefined');
@@ -83,6 +67,8 @@ async function updatePropTable(props) {
     const component = JSON.parse(props.component);
     const componentPath = await getComponentPath(component);
     const doc = tsConfigParser.parse(componentPath);
+
+    if (component === 'List') console.debug('doc', doc);
 
     const componentDoc = doc.find(d => d.displayName === component);
     if (componentDoc) {
@@ -102,7 +88,7 @@ module.exports = async (mdxString) => {
         mdxString = await rewriteJSXComponents(
             'PropTable',
             mdxString,
-            updatePropTable
+            updatePropTable,
         );
 
         return mdxString;
