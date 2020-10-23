@@ -41,7 +41,7 @@ const CITIES: City[] = [
         text: 'Montevideo',
     },
 ];
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const INITIAL_STATE_SHOW_SUGGESTIONS = false;
     const INITIAL_STATE_NAVIGATION_SUGGESTION = '';
 
@@ -208,7 +208,7 @@ const App = ({ theme }: any) => {
             theme={theme}
             isClickable
             key={index}
-            after={<Icon icon={mdiClose} size={Size.xxs}/>}
+            after={<Icon icon={mdiClose} size={Size.xxs} />}
             size={Size.s}
             onAfterClick={clearSelectedValue(city)}
             onClick={clearSelectedValue(city)}
@@ -253,5 +253,3 @@ const App = ({ theme }: any) => {
         </AutocompleteMultiple>
     );
 };
-
-export default App;

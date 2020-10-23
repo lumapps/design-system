@@ -19,7 +19,7 @@ const TYPES = ['Fruit', 'Vegetable', 'Meat', 'Cereal', 'Fish'];
 const COLORS = ['Red', 'Green', 'Blue'];
 const SHAPES = ['Oval', 'Rectangle', 'Triangle'];
 
-const App = () => {
+export const App = () => {
     const [query, setQuery] = useState('');
     const [isOpen, setOpen] = useState(false);
     const closePopover = () => setOpen(false);
@@ -30,11 +30,11 @@ const App = () => {
         <>
             <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap>
                 <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
-                    <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
+                    <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
 
                     <Chip
-                        before={<Icon icon={mdiFilterVariant} size={Size.xs}/>}
-                        after={<Icon icon={mdiMenuDown} size={Size.xs}/>}
+                        before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
+                        after={<Icon icon={mdiMenuDown} size={Size.xs} />}
                         chipRef={anchorRef}
                         onClick={togglePopover}
                     >
@@ -67,7 +67,7 @@ const App = () => {
                     </ChipGroup>
                 </div>
 
-                <Divider/>
+                <Divider />
 
                 <div className="lumx-spacing-padding-huge">
                     <span className="lumx-display-block lumx-typography-subtitle1">Color</span>
@@ -81,7 +81,7 @@ const App = () => {
                     </ChipGroup>
                 </div>
 
-                <Divider/>
+                <Divider />
 
                 <div className="lumx-spacing-padding-huge">
                     <span className="lumx-display-block lumx-typography-subtitle1">Shape</span>
@@ -98,5 +98,3 @@ const App = () => {
         </>
     );
 };
-
-export default App;

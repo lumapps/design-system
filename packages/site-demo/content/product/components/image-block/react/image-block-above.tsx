@@ -1,7 +1,7 @@
 import { AspectRatio, Chip, ChipGroup, ImageBlock, ImageBlockCaptionPosition, Size } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <ImageBlock
         aspectRatio={AspectRatio.horizontal}
         captionPosition={ImageBlockCaptionPosition.over}
@@ -22,5 +22,3 @@ const App = ({ theme }: any) => (
         image="https://picsum.photos/800/600/?random"
     />
 );
-
-export default App;

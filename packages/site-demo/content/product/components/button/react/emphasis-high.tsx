@@ -2,7 +2,7 @@ import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 import { Button, ButtonGroup, IconButton } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <>
         <Button theme={theme}>Default</Button>
 
@@ -20,11 +20,9 @@ const App = ({ theme }: any) => (
 
         <ButtonGroup>
             <Button theme={theme}>Split</Button>
-            <IconButton icon={mdiMenuDown} theme={theme}/>
+            <IconButton icon={mdiMenuDown} theme={theme} />
         </ButtonGroup>
 
-        <IconButton icon={mdiPlus} theme={theme}/>
+        <IconButton icon={mdiPlus} theme={theme} />
     </>
 );
-
-export default App;

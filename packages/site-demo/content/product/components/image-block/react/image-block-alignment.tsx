@@ -1,7 +1,7 @@
 import { Alignment, AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <ImageBlock
         align={Alignment.center}
         aspectRatio={AspectRatio.original}
@@ -22,5 +22,3 @@ const App = ({ theme }: any) => (
         image="https://picsum.photos/320/240/?random"
     />
 );
-
-export default App;

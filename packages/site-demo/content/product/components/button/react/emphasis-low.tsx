@@ -2,7 +2,7 @@ import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 import { Button, Emphasis, IconButton } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <>
         <Button emphasis={Emphasis.low} theme={theme}>
             Default
@@ -20,8 +20,6 @@ const App = ({ theme }: any) => (
             Dropdown
         </Button>
 
-        <IconButton emphasis={Emphasis.low} icon={mdiPlus} theme={theme}/>
+        <IconButton emphasis={Emphasis.low} icon={mdiPlus} theme={theme} />
     </>
 );
-
-export default App;

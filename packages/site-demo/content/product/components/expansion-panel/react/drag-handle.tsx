@@ -3,12 +3,12 @@ import { DragHandle, ExpansionPanel } from '@lumx/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
 
     return (
         <ExpansionPanel hasBackground label="Lorem ipsum" theme={theme} isOpen={isOpen} toggleCallback={setOpen}>
-            <DragHandle theme={theme}/>
+            <DragHandle theme={theme} />
 
             <div className="lumx-spacing-padding-big lumx-spacing-padding-top-none">
                 <p
@@ -32,5 +32,3 @@ const App = ({ theme }: any) => {
         </ExpansionPanel>
     );
 };
-
-export default App;

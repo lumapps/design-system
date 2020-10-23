@@ -2,7 +2,7 @@ import { mdiHeart, mdiReply } from '@lumx/icons';
 import { Button, CommentBlock, Emphasis, Size } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <CommentBlock
         hasActions
         hasChildren
@@ -49,5 +49,3 @@ const App = ({ theme }: any) => (
         />
     </CommentBlock>
 );
-
-export default App;

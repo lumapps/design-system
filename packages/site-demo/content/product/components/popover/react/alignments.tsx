@@ -1,7 +1,7 @@
 import { Alignment, Chip, FlexBox, Placement, Popover, Size } from '@lumx/react';
 import React, { useRef } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const topStartAnchorRef = useRef(null);
     const topEndAnchorRef = useRef(null);
 
@@ -39,5 +39,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

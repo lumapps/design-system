@@ -35,19 +35,19 @@ const RESULTS = [
     },
 ];
 
-const App = () => {
+export const App = () => {
     const [query, setQuery] = useState('');
 
     return (
         <FlexBox orientation={Orientation.vertical} vAlign={Alignment.left}>
-            <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
+            <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
 
             <List>
                 {RESULTS.map((result, index) => (
                     <ListItem
                         key={index}
                         size={Size.big}
-                        before={<Thumbnail variant={ThumbnailVariant.rounded} image={result.thumbnail} size={Size.m}/>}
+                        before={<Thumbnail variant={ThumbnailVariant.rounded} image={result.thumbnail} size={Size.m} />}
                     >
                         <div>
                             <span>{result.label}</span>
@@ -62,5 +62,3 @@ const App = () => {
         </FlexBox>
     );
 };
-
-export default App;

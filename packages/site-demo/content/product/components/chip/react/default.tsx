@@ -2,14 +2,12 @@ import { mdiEmail } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <>
         <Chip theme={theme}>Default</Chip>
 
-        <Chip before={<Icon icon={mdiEmail} size={Size.xs}/>} theme={theme}>
+        <Chip before={<Icon icon={mdiEmail} size={Size.xs} />} theme={theme}>
             Default rich
         </Chip>
     </>
 );
-
-export default App;

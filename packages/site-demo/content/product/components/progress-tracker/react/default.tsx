@@ -1,7 +1,7 @@
 import { ProgressTracker, ProgressTrackerStep } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [activeIndex, setActiveIndex] = useState(2);
     const stepProps = [
         { isComplete: true },
@@ -26,5 +26,3 @@ const App = ({ theme }: any) => {
         </ProgressTracker>
     );
 };
-
-export default App;

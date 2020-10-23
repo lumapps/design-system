@@ -1,7 +1,7 @@
 import { LinkPreview } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <LinkPreview
         title={'Link title'}
         description={'Description'}
@@ -10,5 +10,3 @@ const App = ({ theme }: any) => (
         thumbnail={'https://picsum.photos/320/240'}
     />
 );
-
-export default App;

@@ -3,7 +3,7 @@ import { DatePickerField } from '@lumx/react';
 import { Moment } from 'moment';
 import React from 'react';
 
-const App = () => {
+export const App = () => {
     const LOCALE = 'en';
     const now = new Date();
     const [datePicked, setDatePicked] = React.useState<Date | Moment | string>(now);
@@ -22,5 +22,3 @@ const App = () => {
         />
     );
 };
-
-export default App;

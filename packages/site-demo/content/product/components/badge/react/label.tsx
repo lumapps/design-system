@@ -1,7 +1,7 @@
 import { Avatar, Badge, ColorPalette, Size } from '@lumx/react';
 import React from 'react';
 
-const App = () => (
+export const App = () => (
     <>
         <Badge color={ColorPalette.red}>
             <span>4</span>
@@ -18,5 +18,3 @@ const App = () => (
         />
     </>
 );
-
-export default App;

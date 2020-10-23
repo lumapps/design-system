@@ -12,20 +12,20 @@ import {
 } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <ImageBlock
         actions={
             <FlexBox orientation={Orientation.horizontal}>
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiPencil}/>
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiPencil} />
                 </div>
 
                 <div className="lumx-spacing-margin-right-regular">
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiEye}/>
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiEye} />
                 </div>
 
                 <div>
-                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiDelete}/>
+                    <IconButton color="dark" emphasis={Emphasis.low} hasBackground={true} icon={mdiDelete} />
                 </div>
             </FlexBox>
         }
@@ -47,5 +47,3 @@ const App = ({ theme }: any) => (
         image="https://picsum.photos/800/600/?random"
     />
 );
-
-export default App;

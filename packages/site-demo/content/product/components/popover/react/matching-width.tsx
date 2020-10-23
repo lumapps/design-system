@@ -2,7 +2,7 @@ import { mdiMagnify } from '@lumx/icons';
 import { Placement, Popover, TextField } from '@lumx/react';
 import React, { useRef } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [searchValue, setSearchValue] = React.useState('');
     const anchorRef = useRef(null);
 
@@ -31,5 +31,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

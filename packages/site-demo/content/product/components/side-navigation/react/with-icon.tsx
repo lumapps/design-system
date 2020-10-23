@@ -2,10 +2,8 @@ import { mdiEmail } from '@lumx/icons';
 import { Emphasis, SideNavigation, SideNavigationItem } from '@lumx/react';
 import React from 'react';
 
-const App = () => (
+export const App = () => (
     <SideNavigation>
-        <SideNavigationItem label="With leading icon" icon={mdiEmail} emphasis={Emphasis.low}/>
+        <SideNavigationItem label="With leading icon" icon={mdiEmail} emphasis={Emphasis.low} />
     </SideNavigation>
 );
-
-export default App;

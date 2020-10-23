@@ -1,7 +1,7 @@
 import { TextField } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
 
     return (
@@ -14,5 +14,3 @@ const App = ({ theme }: any) => {
         />
     );
 };
-
-export default App;

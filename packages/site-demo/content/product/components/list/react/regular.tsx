@@ -15,7 +15,7 @@ import {
 } from '@lumx/react';
 import React from 'react';
 
-const App = () => (
+export const App = () => (
     <List>
         <ListSubheader>text only</ListSubheader>
 
@@ -23,22 +23,20 @@ const App = () => (
 
         <ListSubheader>rich</ListSubheader>
 
-        <ListItem before={<Icon icon={mdiSend} size={Size.xs}/>}>Single-line item</ListItem>
+        <ListItem before={<Icon icon={mdiSend} size={Size.xs} />}>Single-line item</ListItem>
 
         <ListItem
-            before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m}/>}
-            after={<IconButton emphasis={Emphasis.low} icon={mdiDotsHorizontal}/>}
+            before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
+            after={<IconButton emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
         >
             Single-line item
         </ListItem>
 
         <ListItem
-            before={<Avatar image="../avatar/assets/persona.png" size={Size.m}/>}
+            before={<Avatar image="../avatar/assets/persona.png" size={Size.m} />}
             after={<Button emphasis={Emphasis.low}>Button</Button>}
         >
             Single-line item
         </ListItem>
     </List>
 );
-
-export default App;

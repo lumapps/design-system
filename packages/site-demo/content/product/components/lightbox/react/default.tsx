@@ -17,7 +17,7 @@ import {
 } from '@lumx/react';
 import React, { useCallback, useRef, useState } from 'react';
 
-const App = () => {
+export const App = () => {
     const imageBlockDemoProps = {
         align: Alignment.center,
         description: 'What an image',
@@ -145,5 +145,3 @@ const App = () => {
         </>
     );
 };
-
-export default App;

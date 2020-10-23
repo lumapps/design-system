@@ -1,7 +1,7 @@
 import { Size, UserBlock } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     // tslint:disable-next-line:no-console
     const logAction = (action: string) => () => console.log(action);
 
@@ -18,5 +18,3 @@ const App = ({ theme }: any) => {
         />
     );
 };
-
-export default App;

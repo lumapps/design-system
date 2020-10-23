@@ -2,7 +2,7 @@ import { mdiCloseCircle, mdiFilterVariant, mdiMenuDown } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [isSelected, setSelected] = useState(false);
     const onClick = () => !isSelected && setSelected(true);
     const onAfterClick = () => setSelected(!isSelected);
@@ -11,7 +11,7 @@ const App = ({ theme }: any) => {
         <>
             <Chip
                 theme={theme}
-                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs}/>}
+                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs} />}
                 isSelected={isSelected}
                 onClick={onClick}
                 onAfterClick={onAfterClick}
@@ -21,8 +21,8 @@ const App = ({ theme }: any) => {
 
             <Chip
                 theme={theme}
-                before={<Icon icon={mdiFilterVariant} size={Size.xs}/>}
-                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs}/>}
+                before={<Icon icon={mdiFilterVariant} size={Size.xs} />}
+                after={<Icon icon={isSelected ? mdiCloseCircle : mdiMenuDown} size={Size.xs} />}
                 isSelected={isSelected}
                 onClick={onClick}
                 onAfterClick={onAfterClick}
@@ -32,5 +32,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

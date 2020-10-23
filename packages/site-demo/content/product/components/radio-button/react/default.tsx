@@ -1,7 +1,7 @@
 import { RadioButton, RadioGroup } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [value, setValue] = useState('lorem');
 
     return (
@@ -38,5 +38,3 @@ const App = ({ theme }: any) => {
         </RadioGroup>
     );
 };
-
-export default App;

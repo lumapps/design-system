@@ -1,7 +1,7 @@
 import { Button, Chip, Dropdown, FlexBox, List, ListItem, Orientation, Placement, Size } from '@lumx/react';
 import React, { useRef, useState } from 'react';
 
-const App = () => {
+export const App = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const anchorRef = useRef(null);
     const openDropdown = () => setIsDropdownOpen(true);
@@ -35,5 +35,3 @@ const App = () => {
         </>
     );
 };
-
-export default App;

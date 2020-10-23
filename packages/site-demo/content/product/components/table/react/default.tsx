@@ -66,7 +66,7 @@ const initialHeaders: Array<Partial<TableHeaderProps>> = [
     },
 ];
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [tableHeader, setTableHeader] = useState(initialHeaders);
     const [tableBody, setTableBody] = useState(initialTable);
     const toggleSort = useCallback(
@@ -119,5 +119,3 @@ const App = ({ theme }: any) => {
         </Table>
     );
 };
-
-export default App;

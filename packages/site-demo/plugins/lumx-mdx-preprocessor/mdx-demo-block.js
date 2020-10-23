@@ -45,10 +45,10 @@ async function updateDemoBlock(resourceFolder, addImport, props) {
     // Import demo (will be added at the top).
     let relativePath = path.relative(CONTENT_DIR, sourcePath);
     const demoVar = camelCase(`demo-${relativePath.replace('/', '-')}`);
-    addImport(`import ${demoVar} from '@content/${relativePath}';`);
+    addImport(`import * as ${demoVar} from '@content/${relativePath}';`);
 
     // Add demo as children.
-    props.children = `{${demoVar}}`;
+    props.children = `{Object.values(${demoVar}).find(v => typeof v === 'function')}`;
 
     return props;
 }

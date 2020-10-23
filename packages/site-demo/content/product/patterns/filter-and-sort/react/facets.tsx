@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 
 const COLORS = ['Red', 'Green', 'Blue'];
 
-const App = () => {
+export const App = () => {
     const [query, setQuery] = useState('');
     const [isOpen, setOpen] = useState(false);
     const closeSelect = () => setOpen(false);
@@ -43,10 +43,10 @@ const App = () => {
     return (
         <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap>
             <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
-                <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
+                <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
 
                 <ChipGroup>
-                    <Chip after={<Icon icon={mdiMenuDown} size={Size.xs}/>} isClickable>
+                    <Chip after={<Icon icon={mdiMenuDown} size={Size.xs} />} isClickable>
                         Type
                     </Chip>
 
@@ -73,7 +73,7 @@ const App = () => {
                         </List>
                     </Select>
 
-                    <Chip after={<Icon icon={mdiMenuDown} size={Size.xs}/>} isClickable>
+                    <Chip after={<Icon icon={mdiMenuDown} size={Size.xs} />} isClickable>
                         Shape
                     </Chip>
                 </ChipGroup>
@@ -85,5 +85,3 @@ const App = () => {
         </FlexBox>
     );
 };
-
-export default App;

@@ -1,7 +1,7 @@
 import { Switch } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [state, setState] = useState(false);
 
     return (
@@ -24,5 +24,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

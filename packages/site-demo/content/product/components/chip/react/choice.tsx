@@ -1,7 +1,7 @@
 import { Chip } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [selected, setSelected] = useState<number>(-1);
 
     const indexedProps = (index: number) => ({
@@ -37,5 +37,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

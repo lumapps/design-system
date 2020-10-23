@@ -3,7 +3,7 @@ import { ExpansionPanel } from '@lumx/react';
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
 
     return (
@@ -30,5 +30,3 @@ const App = ({ theme }: any) => {
         </ExpansionPanel>
     );
 };
-
-export default App;

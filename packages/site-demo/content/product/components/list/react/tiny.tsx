@@ -3,7 +3,7 @@ import { mdiSend } from '@lumx/icons';
 import { Avatar, Icon, List, ListItem, ListSubheader, Size, Thumbnail, ThumbnailVariant } from '@lumx/react';
 import React from 'react';
 
-const App = () => (
+export const App = () => (
     <List>
         <ListSubheader>text only</ListSubheader>
 
@@ -13,21 +13,19 @@ const App = () => (
 
         <ListSubheader>rich</ListSubheader>
 
-        <ListItem size={Size.tiny} before={<Icon icon={mdiSend} size={Size.xs}/>}>
+        <ListItem size={Size.tiny} before={<Icon icon={mdiSend} size={Size.xs} />}>
             Single-line item
         </ListItem>
 
         <ListItem
             size={Size.tiny}
-            before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/48" size={Size.xs}/>}
+            before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/48" size={Size.xs} />}
         >
             Single-line item
         </ListItem>
 
-        <ListItem size={Size.tiny} before={<Avatar image="../avatar/assets/persona.png" size={Size.xs}/>}>
+        <ListItem size={Size.tiny} before={<Avatar image="../avatar/assets/persona.png" size={Size.xs} />}>
             Single-line item
         </ListItem>
     </List>
 );
-
-export default App;

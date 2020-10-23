@@ -1,7 +1,7 @@
 import { LinkPreview, Size } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <div style={{ width: 350 }}>
         <LinkPreview
             title={'Link title'}
@@ -13,5 +13,3 @@ const App = ({ theme }: any) => (
         />
     </div>
 );
-
-export default App;

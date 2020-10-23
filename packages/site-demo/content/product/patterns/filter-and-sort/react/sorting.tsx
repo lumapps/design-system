@@ -3,7 +3,7 @@ import { Button, Dropdown, Emphasis, List, ListItem, Placement, Size } from '@lu
 import { noop } from 'lodash';
 import React, { useRef, useState } from 'react';
 
-const App = () => {
+export const App = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     const close = () => setIsOpen(false);
@@ -44,5 +44,3 @@ const App = () => {
         </>
     );
 };
-
-export default App;

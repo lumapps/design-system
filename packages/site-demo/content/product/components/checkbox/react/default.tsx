@@ -1,14 +1,14 @@
 import { Checkbox } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [value, setValue] = useState(true);
     const [value2, setValue2] = useState(false);
     const [value3, setValue3] = useState(false);
 
     return (
         <>
-            <Checkbox value={value} label="Checkbox" theme={theme} onChange={setValue}/>
+            <Checkbox value={value} label="Checkbox" theme={theme} onChange={setValue} />
 
             <Checkbox
                 value={value2}
@@ -29,5 +29,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

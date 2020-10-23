@@ -1,7 +1,7 @@
 import { AspectRatio, ImageBlock, ImageBlockCaptionPosition, Slideshow, SlideshowItem } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const slideshowStyle = {
         width: '100%',
     };
@@ -70,5 +70,3 @@ const App = ({ theme }: any) => {
         </Slideshow>
     );
 };
-
-export default App;

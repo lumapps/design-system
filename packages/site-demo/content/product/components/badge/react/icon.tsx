@@ -3,14 +3,14 @@ import { mdiCheck, mdiClose, mdiHeart, mdiStar } from '@lumx/icons';
 import { Avatar, Badge, ColorPalette, Icon, Size } from '@lumx/react';
 import React from 'react';
 
-const App = () => (
+export const App = () => (
     <>
         <Badge color={ColorPalette.green}>
-            <Icon icon={mdiCheck}/>
+            <Icon icon={mdiCheck} />
         </Badge>
 
         <Badge color={ColorPalette.red}>
-            <Icon icon={mdiClose}/>
+            <Icon icon={mdiClose} />
         </Badge>
 
         <Avatar
@@ -18,7 +18,7 @@ const App = () => (
             size={Size.m}
             badge={
                 <Badge color={ColorPalette.yellow}>
-                    <Icon icon={mdiStar}/>
+                    <Icon icon={mdiStar} />
                 </Badge>
             }
         />
@@ -28,11 +28,9 @@ const App = () => (
             size={Size.m}
             badge={
                 <Badge color={ColorPalette.red}>
-                    <Icon icon={mdiHeart}/>
+                    <Icon icon={mdiHeart} />
                 </Badge>
             }
         />
     </>
 );
-
-export default App;

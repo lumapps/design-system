@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 
 const COLORS = ['Red', 'Green', 'Blue'];
 
-const App = () => {
+export const App = () => {
     const [query, setQuery] = useState('');
 
     return (
         <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap>
             <FlexBox orientation={Orientation.horizontal} gap={Size.big} wrap fillSpace>
-                <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search"/>
+                <TextField value={query} onChange={setQuery} icon={mdiMagnify} placeholder="Search" />
 
                 <ChipGroup>
                     {COLORS.map((color, index) => (
@@ -27,5 +27,3 @@ const App = () => {
         </FlexBox>
     );
 };
-
-export default App;

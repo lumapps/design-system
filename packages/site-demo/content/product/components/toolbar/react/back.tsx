@@ -5,12 +5,12 @@ import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextFiel
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
 
     return (
         <Toolbar
-            before={<IconButton emphasis={Emphasis.low} theme={theme} icon={mdiChevronLeft}/>}
+            before={<IconButton emphasis={Emphasis.low} theme={theme} icon={mdiChevronLeft} />}
             label={
                 <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
                     <span
@@ -46,5 +46,3 @@ const App = ({ theme }: any) => {
         />
     );
 };
-
-export default App;

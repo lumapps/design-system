@@ -1,7 +1,7 @@
 import { Chip, ChipGroup, Size } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <ChipGroup>
         <Chip theme={theme} size={Size.s}>
             Apricot
@@ -44,5 +44,3 @@ const App = ({ theme }: any) => (
         </Chip>
     </ChipGroup>
 );
-
-export default App;

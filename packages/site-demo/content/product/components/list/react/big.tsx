@@ -15,7 +15,7 @@ import {
 } from '@lumx/react';
 import React from 'react';
 
-const App = () => (
+export const App = () => (
     <List>
         <ListSubheader>text only</ListSubheader>
 
@@ -31,7 +31,7 @@ const App = () => (
 
         <ListSubheader>rich</ListSubheader>
 
-        <ListItem size={Size.big} before={<Icon icon={mdiSend} size={Size.xs}/>}>
+        <ListItem size={Size.big} before={<Icon icon={mdiSend} size={Size.xs} />}>
             <div>
                 <span>Two-line item</span>
             </div>
@@ -43,8 +43,8 @@ const App = () => (
 
         <ListItem
             size={Size.big}
-            before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m}/>}
-            after={<IconButton emphasis={Emphasis.low} icon={mdiDotsHorizontal}/>}
+            before={<Thumbnail variant={ThumbnailVariant.rounded} image="https://picsum.photos/72" size={Size.m} />}
+            after={<IconButton emphasis={Emphasis.low} icon={mdiDotsHorizontal} />}
         >
             <div>
                 <span>Two-line item</span>
@@ -57,7 +57,7 @@ const App = () => (
 
         <ListItem
             size={Size.big}
-            before={<Avatar image="../avatar/assets/persona.png" size={Size.m}/>}
+            before={<Avatar image="../avatar/assets/persona.png" size={Size.m} />}
             after={<Button emphasis={Emphasis.low}>Button</Button>}
         >
             <div>
@@ -70,5 +70,3 @@ const App = () => (
         </ListItem>
     </List>
 );
-
-export default App;

@@ -41,7 +41,7 @@ const CITIES: City[] = [
     },
 ];
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     /**
      * Internal state and ref setup.
      * - `showSuggestions`: allows to control when the suggestions are displayed or not.
@@ -125,5 +125,3 @@ const App = ({ theme }: any) => {
         </Autocomplete>
     );
 };
-
-export default App;

@@ -1,7 +1,7 @@
 import { Alignment, Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
 import React, { RefObject, useRef } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const popovers: Array<[Placement, RefObject<any>]> = [
         [Placement.LEFT, useRef(null)],
         [Placement.TOP, useRef(null)],
@@ -31,5 +31,3 @@ const App = ({ theme }: any) => {
         </FlexBox>
     );
 };
-
-export default App;

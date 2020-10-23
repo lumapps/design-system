@@ -1,7 +1,7 @@
 import { Tab, Tabs, TabsLayout, Theme } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [activeTab, setActiveTab] = useState(0);
     const handleTabClick = ({ index }: any) => {
         setActiveTab(index);
@@ -29,5 +29,3 @@ const App = ({ theme }: any) => {
         </Tabs>
     );
 };
-
-export default App;

@@ -1,7 +1,7 @@
 import { Chip, Placement, Popover, Size } from '@lumx/react';
 import React, { useRef } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const anchorRef = useRef(null);
 
     return (
@@ -22,5 +22,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

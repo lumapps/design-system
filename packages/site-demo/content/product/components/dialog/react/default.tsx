@@ -2,7 +2,7 @@ import { mdiPlay } from '@lumx/icons';
 import { Button, Dialog, Emphasis, Toolbar } from '@lumx/react';
 import React, { useCallback, useRef, useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [isOpen, setOpen] = useState(false);
     const close = useCallback(() => setOpen(false), []);
     const toggle = useCallback(() => setOpen(!isOpen), [isOpen]);
@@ -17,7 +17,7 @@ const App = ({ theme }: any) => {
 
             <Dialog isOpen={isOpen} parentElement={buttonRef} onClose={close}>
                 <header>
-                    <Toolbar label={<span className="lumx-typography-title">Default dialog</span>}/>
+                    <Toolbar label={<span className="lumx-typography-title">Default dialog</span>} />
                 </header>
 
                 <p className="lumx-spacing-padding-horizontal-huge">
@@ -53,5 +53,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

@@ -1,7 +1,7 @@
 import { Button, Dropdown, List, ListItem, ListSubheader, Size } from '@lumx/react';
 import React from 'react';
 
-const App = () => {
+export const App = () => {
     const anchorSimpleRef = React.useRef(null);
     const [isSimpleOpen, setSimpleIsOpen] = React.useState(false);
 
@@ -97,5 +97,3 @@ const App = () => {
         </>
     );
 };
-
-export default App;

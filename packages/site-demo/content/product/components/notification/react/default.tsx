@@ -3,7 +3,7 @@ import { Button, Notification, NotificationType } from '@lumx/react';
 
 import React, { useState } from 'react';
 
-const App = () => {
+export const App = () => {
     const properties = {
         error: {
             content: 'Error',
@@ -91,5 +91,3 @@ const App = () => {
         </>
     );
 };
-
-export default App;

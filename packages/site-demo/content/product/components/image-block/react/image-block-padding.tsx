@@ -1,7 +1,7 @@
 import { AspectRatio, Chip, ChipGroup, ImageBlock, Size } from '@lumx/react';
 import React from 'react';
 
-const App = () => (
+export const App = () => (
     <div className="lumx-color-background-dark-L5 lumx-spacing-padding-huge">
         <ImageBlock
             className="lumx-color-background-light-N"
@@ -19,5 +19,3 @@ const App = () => (
         />
     </div>
 );
-
-export default App;

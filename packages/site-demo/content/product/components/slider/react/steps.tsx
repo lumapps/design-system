@@ -1,7 +1,7 @@
 import { Slider } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [value, setValue] = useState(40);
 
     return (
@@ -17,5 +17,3 @@ const App = ({ theme }: any) => {
         />
     );
 };
-
-export default App;

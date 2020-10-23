@@ -2,7 +2,7 @@ import { DatePicker } from '@lumx/react';
 import { Moment } from 'moment';
 import React from 'react';
 
-const App = () => {
+export const App = () => {
     const LOCALE = 'en';
     const now = new Date();
     const minDate = new Date();
@@ -15,10 +15,8 @@ const App = () => {
 
     return (
         <>
-            <DatePicker value={datePicked} locale={LOCALE} onChange={handleDatePicked} minDate={minDate}/>
-            <DatePicker value={datePicked} locale={LOCALE} onChange={handleDatePicked} maxDate={now}/>
+            <DatePicker value={datePicked} locale={LOCALE} onChange={handleDatePicked} minDate={minDate} />
+            <DatePicker value={datePicked} locale={LOCALE} onChange={handleDatePicked} maxDate={now} />
         </>
     );
 };
-
-export default App;

@@ -2,7 +2,7 @@ import { mdiCellphone, mdiEmail, mdiGoogleHangouts, mdiPhone, mdiSlack } from '@
 import { Button, Emphasis, IconButton, Orientation, Size, Theme, UserBlock } from '@lumx/react';
 import React from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const createSimpleAction = () => (
         <Button
             emphasis={Emphasis.medium}
@@ -46,5 +46,3 @@ const App = ({ theme }: any) => {
         />
     );
 };
-
-export default App;

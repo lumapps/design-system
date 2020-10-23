@@ -5,7 +5,7 @@ import { Button, Emphasis, Toolbar } from '@lumx/react';
 import classNames from 'classnames';
 import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <Toolbar
         label={
             <span
@@ -24,5 +24,3 @@ const App = ({ theme }: any) => (
         }
     />
 );
-
-export default App;

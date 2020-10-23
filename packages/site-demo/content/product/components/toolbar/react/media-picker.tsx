@@ -5,7 +5,7 @@ import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextFiel
 import classNames from 'classnames';
 import React, { useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
 
     return (
@@ -45,5 +45,3 @@ const App = ({ theme }: any) => {
         />
     );
 };
-
-export default App;

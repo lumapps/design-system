@@ -14,7 +14,7 @@ import {
 } from '@lumx/react';
 import React, { useState } from 'react';
 
-const App = () => {
+export const App = () => {
     const [isOpen1, setOpen1] = useState(false);
     const [isOpen2, setOpen2] = useState(false);
     const [isOpen3, setOpen3] = useState(false);
@@ -121,7 +121,7 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <Divider/>
+            <Divider />
 
             <ExpansionPanel isOpen={isOpen5} toggleCallback={setOpen5}>
                 <header>
@@ -142,7 +142,7 @@ const App = () => {
                 </div>
             </ExpansionPanel>
 
-            <Divider/>
+            <Divider />
 
             <ExpansionPanel isOpen={isOpen6} toggleCallback={setOpen6}>
                 <header>
@@ -165,5 +165,3 @@ const App = () => {
         </>
     );
 };
-
-export default App;
