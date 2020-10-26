@@ -72,7 +72,7 @@ const isFooter = isComponent('footer');
 const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     const {
         label,
-        theme = DEFAULT_PROPS.theme,
+        theme,
         hasBackground,
         hasHeaderDivider,
         isOpen,
@@ -162,5 +162,6 @@ const ExpansionPanel: React.FC<ExpansionPanelProps> = (props) => {
     );
 };
 ExpansionPanel.displayName = COMPONENT_NAME;
+ExpansionPanel.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ExpansionPanel, ExpansionPanelProps };
+export { CLASSNAME, ExpansionPanel, ExpansionPanelProps };

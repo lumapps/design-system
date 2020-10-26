@@ -36,11 +36,6 @@ interface CheckboxProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<CheckboxProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Checkbox`;
@@ -53,8 +48,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    disabled: false,
+const DEFAULT_PROPS: Partial<CheckboxProps> = {
     theme: Theme.light,
     value: false,
 };
@@ -66,14 +60,14 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Checkbox: React.FC<CheckboxProps> = ({
     className,
-    disabled = DEFAULT_PROPS.disabled,
+    disabled,
     helper,
     id,
     label,
     onChange,
-    theme = DEFAULT_PROPS.theme,
+    theme,
     useCustomColors,
-    value = DEFAULT_PROPS.value,
+    value,
     ...forwardedProps
 }) => {
     const inputId = id || uniqueId(`${CLASSNAME.toLowerCase()}-`);
@@ -131,5 +125,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
     );
 };
 Checkbox.displayName = COMPONENT_NAME;
+Checkbox.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Checkbox, CheckboxProps };
+export { CLASSNAME, Checkbox, CheckboxProps };

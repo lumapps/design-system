@@ -13,8 +13,6 @@ interface InputLabelProps extends GenericProps {
     children: string | ReactNode;
 }
 
-interface DefaultPropsType extends Partial<InputLabelProps> {}
-
 /**
  * The display name of the component.
  */
@@ -28,18 +26,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    isRequired: false,
+const DEFAULT_PROPS: Partial<InputLabelProps> = {
     theme: Theme.light,
 };
 
-const InputLabel: React.FC<InputLabelProps> = ({
-    className,
-    isRequired = DEFAULT_PROPS.isRequired,
-    theme = DEFAULT_PROPS.theme,
-    children,
-    ...forwardedProps
-}) => (
+const InputLabel: React.FC<InputLabelProps> = ({ className, isRequired, theme, children, ...forwardedProps }) => (
     <label
         {...forwardedProps}
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isRequired, theme }))}
@@ -49,5 +40,6 @@ const InputLabel: React.FC<InputLabelProps> = ({
 );
 
 InputLabel.displayName = COMPONENT_NAME;
+InputLabel.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, InputLabel, InputLabelProps };
+export { CLASSNAME, InputLabel, InputLabelProps };

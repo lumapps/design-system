@@ -22,8 +22,6 @@ interface MosaicProps extends GenericProps {
     thumbnails: MosaicElement[];
 }
 
-interface DefaultPropsType extends Partial<MosaicProps> {}
-
 /**
  * The display name of the component.
  */
@@ -37,10 +35,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<MosaicProps> = {
     theme: Theme.light,
 };
-const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme, thumbnails, ...forwardedProps }) => (
+
+const Mosaic: React.FC<MosaicProps> = ({ className, theme, thumbnails, ...forwardedProps }) => (
     <div
         {...forwardedProps}
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }), {
@@ -83,5 +82,6 @@ const Mosaic: React.FC<MosaicProps> = ({ className, theme = DEFAULT_PROPS.theme,
 );
 
 Mosaic.displayName = COMPONENT_NAME;
+Mosaic.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Mosaic, MosaicProps };
+export { CLASSNAME, Mosaic, MosaicProps };

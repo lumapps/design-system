@@ -107,11 +107,6 @@ interface ThumbnailProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ThumbnailProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Thumbnail`;
@@ -124,16 +119,14 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<ThumbnailProps> = {
     align: Alignment.left,
     crossOrigin: CrossOrigin.anonymous,
     aspectRatio: AspectRatio.original,
     fallback: mdiImageBrokenVariant,
-    fillHeight: false,
     focusPoint: { x: 0, y: 0 },
     isCrossOriginEnabled: true,
     loading: ImageLoading.lazy,
-    size: undefined,
     theme: Theme.light,
     variant: ThumbnailVariant.squared,
     resizeDebounceTime: 20,
@@ -149,23 +142,22 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const Thumbnail: React.FC<ThumbnailProps> = ({
     className,
-    // tslint:disable-next-line: no-unused
-    isCrossOriginEnabled = DEFAULT_PROPS.isCrossOriginEnabled,
-    crossOrigin = DEFAULT_PROPS.crossOrigin,
-    resizeDebounceTime = DEFAULT_PROPS.resizeDebounceTime,
-    isFollowingWindowSize = DEFAULT_PROPS.isFollowingWindowSize,
-    align = DEFAULT_PROPS.align,
-    aspectRatio = DEFAULT_PROPS.aspectRatio,
-    fallback = DEFAULT_PROPS.fallback,
-    fillHeight = DEFAULT_PROPS.fillHeight,
-    loading = DEFAULT_PROPS.loading,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
-    variant = DEFAULT_PROPS.variant,
+    isCrossOriginEnabled,
+    crossOrigin,
+    resizeDebounceTime,
+    isFollowingWindowSize,
+    align,
+    aspectRatio,
+    fallback,
+    fillHeight,
+    loading,
+    size,
+    theme,
+    variant,
     image,
     alt = 'Thumbnail',
-    onClick = null,
-    focusPoint = DEFAULT_PROPS.focusPoint,
+    onClick,
+    focusPoint,
     imgProps,
     ...forwardedProps
 }: ThumbnailProps): ReactElement => {
@@ -248,10 +240,10 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
     );
 };
 Thumbnail.displayName = COMPONENT_NAME;
+Thumbnail.defaultProps = DEFAULT_PROPS;
 
 export {
     CLASSNAME,
-    DEFAULT_PROPS,
     Thumbnail,
     ThumbnailProps,
     ThumbnailAspectRatio,

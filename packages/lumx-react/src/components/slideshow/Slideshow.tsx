@@ -34,11 +34,6 @@ interface SlideshowProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SlideshowProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Slideshow`;
@@ -51,12 +46,9 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<SlideshowProps> = {
     activeIndex: 0,
-    autoPlay: false,
-    fillHeight: false,
     groupBy: 1,
-    hasControls: false,
     interval: AUTOPLAY_DEFAULT_INTERVAL,
     theme: Theme.light,
 };
@@ -67,19 +59,19 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const Slideshow: React.FC<SlideshowProps> = ({
-    activeIndex = DEFAULT_PROPS.activeIndex as number,
-    autoPlay = DEFAULT_PROPS.autoPlay,
+    activeIndex,
+    autoPlay,
     children,
     className,
-    fillHeight = DEFAULT_PROPS.fillHeight,
-    groupBy = DEFAULT_PROPS.groupBy as number,
-    hasControls = DEFAULT_PROPS.hasControls,
-    interval = DEFAULT_PROPS.interval as number,
-    theme = DEFAULT_PROPS.theme,
+    fillHeight,
+    groupBy,
+    hasControls,
+    interval,
+    theme,
     useCustomColors,
     ...forwardedProps
 }) => {
-    const [currentIndex, setCurrentIndex] = useState(activeIndex);
+    const [currentIndex, setCurrentIndex] = useState<number>(activeIndex as number);
     const [isAutoPlaying, setIsAutoPlaying] = useState(Boolean(autoPlay));
     const parentRef: React.MutableRefObject<null> = useRef(null);
 
@@ -92,12 +84,12 @@ const Slideshow: React.FC<SlideshowProps> = ({
     /**
      * Number of slides when using groupBy prop.
      */
-    const slidesCount: number = Math.ceil(itemsCount / groupBy);
+    const slidesCount: number = Math.ceil(itemsCount / (groupBy as number));
 
     /**
      * Inline style of wrapper element.
      */
-    const wrapperSyle: CSSProperties = {
+    const wrapperStyle: CSSProperties = {
         transform: `translateX(-${FULL_WIDTH_PERCENT * currentIndex}%)`,
     };
 
@@ -114,7 +106,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
         () => {
             goToNextSlide();
         },
-        isAutoPlaying && slidesCount > 1 ? interval : null,
+        isAutoPlaying && slidesCount > 1 ? (interval as number) : null,
     );
 
     /**
@@ -188,7 +180,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
             ref={parentRef}
         >
             <div className={`${CLASSNAME}__slides`}>
-                <div className={`${CLASSNAME}__wrapper`} style={wrapperSyle}>
+                <div className={`${CLASSNAME}__wrapper`} style={wrapperStyle}>
                     {children}
                 </div>
             </div>
@@ -210,5 +202,6 @@ const Slideshow: React.FC<SlideshowProps> = ({
     );
 };
 Slideshow.displayName = COMPONENT_NAME;
+Slideshow.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Slideshow, SlideshowProps };
+export { CLASSNAME, Slideshow, SlideshowProps };

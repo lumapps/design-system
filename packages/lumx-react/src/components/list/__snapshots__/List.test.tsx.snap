@@ -13,6 +13,7 @@ exports[`<List> Snapshots and structure should render story KeyboardNavigation 1
     onItemSelected={[Function]}
     onMouseDown={[Function]}
     onMouseUp={[Function]}
+    size="regular"
   >
     Clickable item 1
   </ListItem>
@@ -32,11 +33,13 @@ exports[`<List> Snapshots and structure should render story KeyboardNavigation 1
     onItemSelected={[Function]}
     onMouseDown={[Function]}
     onMouseUp={[Function]}
+    size="regular"
   >
     Link item 1
   </ListItem>
   <ListItem
     key=".3..0"
+    size="regular"
   >
     Non clickable (=non navigable) item
   </ListItem>
@@ -58,6 +61,7 @@ exports[`<List> Snapshots and structure should render story KeyboardNavigation 1
     onItemSelected={[Function]}
     onMouseDown={[Function]}
     onMouseUp={[Function]}
+    size="regular"
   >
     Link item 2
   </ListItem>
@@ -82,6 +86,7 @@ exports[`<List> Snapshots and structure should render story KeyboardNavigation 1
     onItemSelected={[Function]}
     onMouseDown={[Function]}
     onMouseUp={[Function]}
+    size="regular"
   >
     Link item 3
   </ListItem>
@@ -282,6 +287,7 @@ exports[`<List> Snapshots and structure should render story asLink 1`] = `
     onItemSelected={[Function]}
     onMouseDown={[Function]}
     onMouseUp={[Function]}
+    size="regular"
   >
     <span>
       My first link
@@ -307,6 +313,7 @@ exports[`<List> Snapshots and structure should render story asLink 1`] = `
     onItemSelected={[Function]}
     onMouseDown={[Function]}
     onMouseUp={[Function]}
+    size="regular"
   >
     <span>
       Google

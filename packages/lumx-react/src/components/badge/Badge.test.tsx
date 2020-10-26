@@ -7,7 +7,9 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
-import { Badge, BadgeProps, CLASSNAME, DEFAULT_PROPS } from './Badge';
+import { Badge, BadgeProps, CLASSNAME } from './Badge';
+
+const DEFAULT_PROPS = Badge.defaultProps as any;
 
 /**
  * Defines what the `setup` function will return.

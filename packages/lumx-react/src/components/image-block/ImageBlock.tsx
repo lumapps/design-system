@@ -79,11 +79,6 @@ interface ImageBlockProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ImageBlockProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ImageBlock`;
@@ -96,20 +91,11 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    actions: undefined,
+const DEFAULT_PROPS: Partial<ImageBlockProps> = {
     align: Alignment.left,
     aspectRatio: AspectRatio.original,
     captionPosition: ImageBlockCaptionPosition.below,
-    captionStyle: {},
-    description: undefined,
-    fillHeight: false,
-    focusPoint: undefined,
-    size: undefined,
-    tags: undefined,
     theme: Theme.light,
-    title: undefined,
-    thumbnailProps: undefined,
 };
 
 /**
@@ -118,23 +104,23 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const ImageBlock: React.FC<ImageBlockProps> = ({
-    actions = DEFAULT_PROPS.actions,
-    align = DEFAULT_PROPS.align,
-    aspectRatio = DEFAULT_PROPS.aspectRatio,
+    actions,
+    align,
+    aspectRatio,
     className,
-    captionPosition = DEFAULT_PROPS.captionPosition,
-    captionStyle = DEFAULT_PROPS.captionStyle,
+    captionPosition,
+    captionStyle,
     crossOrigin,
-    description = DEFAULT_PROPS.description,
-    fillHeight = DEFAULT_PROPS.fillHeight,
-    focusPoint = DEFAULT_PROPS.focusPoint,
+    description,
+    fillHeight,
+    focusPoint,
     image,
     isCrossOriginEnabled,
-    size = DEFAULT_PROPS.size,
-    tags = DEFAULT_PROPS.tags,
-    theme = DEFAULT_PROPS.theme,
-    title = DEFAULT_PROPS.title,
-    thumbnailProps = DEFAULT_PROPS.thumbnailProps,
+    size,
+    tags,
+    theme,
+    title,
+    thumbnailProps,
     ...props
 }) => {
     const { onClick = null, ...forwardedProps } = props;
@@ -195,5 +181,6 @@ const ImageBlock: React.FC<ImageBlockProps> = ({
     );
 };
 ImageBlock.displayName = COMPONENT_NAME;
+ImageBlock.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };
+export { CLASSNAME, ImageBlockCaptionPosition, ImageBlock, ImageBlockProps };

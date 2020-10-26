@@ -5,6 +5,9 @@ exports[`<Tooltip> Snapshots and structure should not wrap Button 1`] = `
   <Button
     aria-describedby="tooltip-123"
     buttonRef={[Function]}
+    emphasis="high"
+    size="m"
+    theme="light"
   >
     button
   </Button>
@@ -126,6 +129,9 @@ exports[`<Tooltip> Snapshots and structure should work on disabled elements 1`] 
   >
     <Button
       disabled={true}
+      emphasis="high"
+      size="m"
+      theme="light"
     >
       Empty
     </Button>

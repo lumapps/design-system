@@ -26,11 +26,6 @@ interface TableProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TableProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Table`;
@@ -43,9 +38,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    hasBefore: false,
-    hasDividers: false,
+const DEFAULT_PROPS: Partial<TableProps> = {
     theme: Theme.light,
 };
 
@@ -54,14 +47,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Table: React.FC<TableProps> = ({
-    children,
-    className,
-    hasBefore,
-    hasDividers,
-    theme = DEFAULT_PROPS.theme,
-    ...forwardedProps
-}) => (
+const Table: React.FC<TableProps> = ({ children, className, hasBefore, hasDividers, theme, ...forwardedProps }) => (
     <table
         {...forwardedProps}
         className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, hasBefore, hasDividers, theme }))}
@@ -71,5 +57,6 @@ const Table: React.FC<TableProps> = ({
 );
 
 Table.displayName = COMPONENT_NAME;
+Table.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Table, TableProps };
+export { CLASSNAME, Table, TableProps };

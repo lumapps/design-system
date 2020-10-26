@@ -11,9 +11,8 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
       }
     }
     handleKeyboardNav={[Function]}
-    hasError={false}
     isEmpty={true}
-    isValid={false}
+    selectedValueRender={[Function]}
     targetUuid="uuid"
     theme="light"
     value=""
@@ -28,9 +27,11 @@ exports[`<Select> Snapshots and structure should render correctly 1`] = `
     closeOnClick={true}
     closeOnClickAway={true}
     closeOnEscape={true}
-    isOpen={false}
+    fitToAnchorWidth={true}
+    fitWithinViewportHeight={true}
     onClose={[Function]}
     placement="bottom-start"
+    shouldFocusOnOpen={true}
   >
     <span>
       Select Component

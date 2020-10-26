@@ -41,11 +41,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    isClickable: false,
-    isDisabled: false,
-    isSelected: false,
-};
+const DEFAULT_PROPS: DefaultPropsType = {};
 
 /**
  * The TableRow component displays an HTML Table Row, which contains table cells.
@@ -78,5 +74,6 @@ const TableRow: React.FC<TableRowProps> = ({
 );
 
 TableRow.displayName = COMPONENT_NAME;
+TableRow.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, TableRow, TableRowProps };
+export { CLASSNAME, TableRow, TableRowProps };

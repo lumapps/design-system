@@ -70,19 +70,17 @@ const CLASSNAME = getRootClassName(COMPONENT_NAME);
  */
 const DEFAULT_PROPS: Partial<SideNavigationItemProps> = {
     emphasis: Emphasis.high,
-    isOpen: false,
-    isSelected: false,
 };
 
 const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
     const {
         children,
         className,
-        emphasis = DEFAULT_PROPS.emphasis,
+        emphasis,
         label,
         icon,
-        isOpen = DEFAULT_PROPS.isOpen,
-        isSelected = DEFAULT_PROPS.isSelected,
+        isOpen,
+        isSelected,
         linkAs,
         linkProps,
         onClick,
@@ -156,5 +154,6 @@ const SideNavigationItem: React.FC<SideNavigationItemProps> = (props) => {
     );
 };
 SideNavigationItem.displayName = COMPONENT_NAME;
+SideNavigationItem.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, SideNavigationItem, SideNavigationItemProps };
+export { CLASSNAME, SideNavigationItem, SideNavigationItemProps };

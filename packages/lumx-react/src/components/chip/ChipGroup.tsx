@@ -1,3 +1,4 @@
+import { Alignment } from '@lumx/react/components';
 import React from 'react';
 
 import classNames from 'classnames';
@@ -20,15 +21,10 @@ interface ChipGroupProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ChipGroupProps> {}
-
-/**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    align: 'left',
+const DEFAULT_PROPS: Partial<ChipGroupProps> = {
+    align: Alignment.left,
 };
 
 /**
@@ -49,12 +45,7 @@ interface ChipGroup {
  * Displays a list of Chips in a grouped fashion.
  * @return The Chip Group component.
  */
-const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
-    className,
-    align = DEFAULT_PROPS.align,
-    children,
-    ...forwardedProps
-}) => {
+const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({ className, align, children, ...forwardedProps }) => {
     const chipGroupClassName = handleBasicClasses({
         align,
         prefix: CLASSNAME,
@@ -68,6 +59,7 @@ const ChipGroup: React.FC<ChipGroupProps> & ChipGroup = ({
 };
 
 ChipGroup.displayName = COMPONENT_NAME;
+ChipGroup.defaultProps = DEFAULT_PROPS;
 ChipGroup.useChipGroupNavigation = useChipGroupNavigation;
 
 export { CLASSNAME, ChipGroup, ChipGroupProps };

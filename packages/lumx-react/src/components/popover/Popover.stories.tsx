@@ -2,9 +2,10 @@ import React from 'react';
 
 import { Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
 import { boolean, select } from '@storybook/addon-knobs';
-import { DEFAULT_PROPS } from './Popover';
 
 export default { title: 'LumX components/popover/Popover' };
+
+const DEFAULT_PROPS = Popover.defaultProps as any;
 
 export const positions = ({ theme }: any) => {
     const demoPopperStyle = {

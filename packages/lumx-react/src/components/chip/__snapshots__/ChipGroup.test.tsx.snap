@@ -6,16 +6,22 @@ exports[`<ChipGroup /> Snapshot should render correctly Chip Group component 1`]
 >
   <Chip
     key="1"
+    size="m"
+    theme="light"
   >
     Chip 1
   </Chip>
   <Chip
     key="2"
+    size="m"
+    theme="light"
   >
     Chip 2
   </Chip>
   <Chip
     key="3"
+    size="m"
+    theme="light"
   >
     Chip 3
   </Chip>

@@ -28,11 +28,6 @@ interface ProgressProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ProgressProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Progress`;
@@ -45,7 +40,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<ProgressProps> = {
     theme: Theme.light,
     variant: ProgressVariant.circular,
 };
@@ -55,13 +50,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  *
  * @return The component.
  */
-const Progress: React.FC<ProgressProps> = ({
-    className,
-    theme = DEFAULT_PROPS.theme,
-    useCustomColors,
-    variant = DEFAULT_PROPS.variant,
-    ...forwardedProps
-}) => {
+const Progress: React.FC<ProgressProps> = ({ className, theme, useCustomColors, variant, ...forwardedProps }) => {
     return (
         <div
             {...forwardedProps}
@@ -98,5 +87,6 @@ const Progress: React.FC<ProgressProps> = ({
     );
 };
 Progress.displayName = COMPONENT_NAME;
+Progress.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Progress, ProgressProps, ProgressVariant };
+export { CLASSNAME, Progress, ProgressProps, ProgressVariant };

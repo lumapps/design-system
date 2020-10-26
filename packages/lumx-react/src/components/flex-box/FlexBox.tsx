@@ -61,21 +61,17 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}FlexBox`;
  */
 const CLASSNAME = getRootClassName(COMPONENT_NAME);
 
-const DEFAULT_PROPS: Partial<FlexBoxProps> = {
-    fillSpace: false,
-    noShrink: false,
-    wrap: false,
-};
+const DEFAULT_PROPS: Partial<FlexBoxProps> = {};
 
 const FlexBox: React.FC<FlexBoxProps> = ({
     children,
     className,
     orientation,
-    wrap = DEFAULT_PROPS.wrap,
+    wrap,
     vAlign,
     hAlign,
-    fillSpace = DEFAULT_PROPS.fillSpace,
-    noShrink = DEFAULT_PROPS.noShrink,
+    fillSpace,
+    noShrink,
     marginAuto,
     gap,
     ...forwardedProps
@@ -101,5 +97,6 @@ const FlexBox: React.FC<FlexBoxProps> = ({
     </div>
 );
 FlexBox.displayName = COMPONENT_NAME;
+FlexBox.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, FlexBox, FlexBoxProps };
+export { CLASSNAME, FlexBox, FlexBoxProps };

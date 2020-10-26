@@ -6,7 +6,9 @@ import 'jest-enzyme';
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { getBasicClass } from '@lumx/react/utils';
 
-import { CLASSNAME, DEFAULT_PROPS, <%= componentName %>, <%= componentName %>Props } from './<%= componentName %>';
+import { CLASSNAME, <%= componentName %>, <%= componentName %>Props } from './<%= componentName %>';
+
+const DEFAULT_PROPS = <%= componentName %>.defaultProps as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.

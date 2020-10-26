@@ -98,5 +98,6 @@ const Message: React.FC<MessageProps> = (props) => {
     );
 };
 Message.displayName = COMPONENT_NAME;
+Message.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, MessageKind, Message, MessageProps };
+export { CLASSNAME, MessageKind, Message, MessageProps };

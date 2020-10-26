@@ -37,11 +37,6 @@ interface ButtonProps extends BaseButtonProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ButtonProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Button`;
@@ -54,7 +49,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<ButtonProps> = {
     emphasis: Emphasis.high,
     size: Size.m,
     theme: Theme.light,
@@ -68,16 +63,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  * @return The component.
  */
 const Button: React.FC<ButtonProps> = (props) => {
-    const {
-        className,
-        children,
-        emphasis = DEFAULT_PROPS.emphasis,
-        leftIcon,
-        rightIcon,
-        size = DEFAULT_PROPS.size,
-        theme = DEFAULT_PROPS.theme,
-        ...forwardedProps
-    } = props;
+    const { className, children, emphasis, leftIcon, rightIcon, size, theme, ...forwardedProps } = props;
 
     const buttonClassName = classNames(
         className,
@@ -94,5 +80,6 @@ const Button: React.FC<ButtonProps> = (props) => {
     );
 };
 Button.displayName = COMPONENT_NAME;
+Button.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ButtonEmphasis, Button, ButtonProps };
+export { CLASSNAME, ButtonEmphasis, Button, ButtonProps };

@@ -13,11 +13,6 @@ interface ButtonGroupProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ButtonGroupProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ButtonGroup`;
@@ -30,7 +25,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const DEFAULT_PROPS: Partial<ButtonGroupProps> = {};
 
 /**
  * Displays a group of <Button>s.
@@ -45,5 +40,6 @@ const ButtonGroup: React.FC<ButtonGroupProps> = ({ children, className, buttonGr
     </div>
 );
 ButtonGroup.displayName = COMPONENT_NAME;
+ButtonGroup.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, ButtonGroup, ButtonGroupProps };
+export { CLASSNAME, ButtonGroup, ButtonGroupProps };

@@ -7,7 +7,9 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Size, Theme } from '..';
-import { CLASSNAME, DEFAULT_PROPS, LinkPreview, LinkPreviewProps } from './LinkPreview';
+import { CLASSNAME, LinkPreview, LinkPreviewProps } from './LinkPreview';
+
+const DEFAULT_PROPS = LinkPreview.defaultProps as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.

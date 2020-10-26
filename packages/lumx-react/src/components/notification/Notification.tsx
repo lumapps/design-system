@@ -55,11 +55,6 @@ interface NotificationProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<NotificationProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Notification`;
@@ -72,8 +67,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    content: '',
+const DEFAULT_PROPS: Partial<NotificationProps> = {
     theme: Theme.light,
     zIndex: 9999,
 };
@@ -86,18 +80,18 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Notification: React.FC<NotificationProps> = ({
     actionCallback,
     actionLabel,
-    content = DEFAULT_PROPS.content,
+    content,
     className,
     handleClick,
-    isOpen = false,
-    theme = DEFAULT_PROPS.theme,
+    isOpen,
+    theme,
     type,
-    zIndex = DEFAULT_PROPS.zIndex,
+    zIndex,
     ...forwardedProps
 }) => {
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
-    const isVisible = useDelayedVisibility(isOpen, NOTIFICATION_TRANSITION_DURATION);
+    const isVisible = useDelayedVisibility(!!isOpen, NOTIFICATION_TRANSITION_DURATION);
 
     const handleCallback = (evt: React.MouseEvent) => {
         if (isFunction(actionCallback)) {
@@ -139,5 +133,6 @@ const Notification: React.FC<NotificationProps> = ({
         : null;
 };
 Notification.displayName = COMPONENT_NAME;
+Notification.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Notification, NotificationProps, NotificationType };
+export { CLASSNAME, Notification, NotificationProps, NotificationType };

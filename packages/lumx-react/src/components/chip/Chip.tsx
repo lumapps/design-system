@@ -47,11 +47,6 @@ interface ChipProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ChipProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Chip`;
@@ -64,11 +59,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    isClickable: false,
-    isDisabled: false,
-    isHighlighted: false,
-    isSelected: false,
+const DEFAULT_PROPS: Partial<ChipProps> = {
     size: Size.m,
     theme: Theme.light,
 };
@@ -111,8 +102,8 @@ const Chip: React.FC<ChipProps> = ({
     onAfterClick,
     onBeforeClick,
     onClick,
-    size = DEFAULT_PROPS.size,
-    theme = DEFAULT_PROPS.theme,
+    size,
+    theme,
     useCustomColors,
     chipRef,
     ...forwardedProps
@@ -180,5 +171,6 @@ const Chip: React.FC<ChipProps> = ({
 };
 
 Chip.displayName = COMPONENT_NAME;
+Chip.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Chip, ChipProps };
+export { CLASSNAME, Chip, ChipProps };

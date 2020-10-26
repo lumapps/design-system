@@ -7,7 +7,9 @@ import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/util
 import { getBasicClass } from '@lumx/react/utils';
 
 import { Theme } from '@lumx/react';
-import { CLASSNAME, DEFAULT_PROPS, Divider, DividerProps } from './Divider';
+import { CLASSNAME, Divider, DividerProps } from './Divider';
+
+const DEFAULT_PROPS = Divider.defaultProps as any;
 
 /**
  * Define the overriding properties waited by the `setup` function.

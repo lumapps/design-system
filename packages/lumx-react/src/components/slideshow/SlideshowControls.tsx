@@ -13,7 +13,6 @@ import { COMPONENT_PREFIX, LEFT_KEY_CODE, RIGHT_KEY_CODE } from '@lumx/react/con
 import { GenericProps, detectSwipe, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
-import noop from 'lodash/noop';
 
 /**
  * Defines the props of the component.
@@ -37,11 +36,6 @@ interface PaginationRange {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SlideshowControlsProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}SlideshowControls`;
@@ -54,11 +48,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<SlideshowControlsProps> = {
     activeIndex: 0,
-    onNextClick: noop,
-    onPaginationClick: noop,
-    onPreviousClick: noop,
     theme: Theme.light,
 };
 
@@ -70,7 +61,7 @@ const DEFAULT_PROPS: DefaultPropsType = {
  */
 const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Index of the current slide */
-    activeIndex = DEFAULT_PROPS.activeIndex,
+    activeIndex,
     /** Css class */
     className,
     /** Reference of parent element */
@@ -78,13 +69,13 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     /** Number of slides */
     slidesCount,
     /** Callback for the click on a navigation item */
-    onPaginationClick = DEFAULT_PROPS.onPaginationClick,
+    onPaginationClick,
     /** Callback for the click on the "next" arrow */
-    onNextClick = DEFAULT_PROPS.onNextClick,
+    onNextClick,
     /** Callback for the click on the "previous" arrow */
-    onPreviousClick = DEFAULT_PROPS.onPreviousClick,
+    onPreviousClick,
     /** Theme */
-    theme = DEFAULT_PROPS.theme,
+    theme,
     ...forwardedProps
 }) => {
     if (typeof activeIndex === 'undefined' || typeof slidesCount === 'undefined') {
@@ -304,5 +295,6 @@ const SlideshowControls: React.FC<SlideshowControlsProps> = ({
     );
 };
 SlideshowControls.displayName = COMPONENT_NAME;
+SlideshowControls.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, SlideshowControls, SlideshowControlsProps as SlideshowProps };
+export { CLASSNAME, SlideshowControls, SlideshowControlsProps as SlideshowProps };

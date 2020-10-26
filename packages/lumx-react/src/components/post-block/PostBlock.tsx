@@ -44,11 +44,6 @@ interface PostBlockProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<PostBlockProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}PostBlock`;
@@ -61,9 +56,8 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
+const DEFAULT_PROPS: Partial<PostBlockProps> = {
     orientation: Orientation.horizontal,
-    text: undefined,
     theme: Theme.light,
     thumbnailAspectRatio: AspectRatio.horizontal,
 };
@@ -80,13 +74,13 @@ const PostBlock: React.FC<PostBlockProps> = ({
     className,
     meta,
     onClick,
-    orientation = DEFAULT_PROPS.orientation,
+    orientation,
     tags,
-    text = DEFAULT_PROPS.text,
+    text,
     thumbnail,
-    thumbnailAspectRatio = DEFAULT_PROPS.thumbnailAspectRatio,
+    thumbnailAspectRatio,
     title,
-    theme = DEFAULT_PROPS.theme,
+    theme,
 }) => {
     return (
         <div className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, orientation, theme }))}>
@@ -133,5 +127,6 @@ const PostBlock: React.FC<PostBlockProps> = ({
 };
 
 PostBlock.displayName = COMPONENT_NAME;
+PostBlock.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, PostBlock, PostBlockProps };
+export { CLASSNAME, PostBlock, PostBlockProps };

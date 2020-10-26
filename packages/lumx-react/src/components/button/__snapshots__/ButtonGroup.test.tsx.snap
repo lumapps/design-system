@@ -4,11 +4,18 @@ exports[`<ButtonGroup> Snapshots and structure should render correctly a group b
 <div
   className="lumx-button-group"
 >
-  <Button>
+  <Button
+    emphasis="high"
+    size="m"
+    theme="light"
+  >
     Label
   </Button>
   <IconButton
+    emphasis="high"
     icon="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+    size="m"
+    theme="light"
   />
 </div>
 `;

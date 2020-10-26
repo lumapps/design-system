@@ -48,11 +48,6 @@ interface SwitchProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<SwitchProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Switch`;
@@ -65,8 +60,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    checked: false,
+const DEFAULT_PROPS: Partial<SwitchProps> = {
     position: SwitchPosition.left,
     theme: Theme.light,
 };
@@ -79,11 +73,11 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const Switch: React.FC<SwitchProps> = ({
     className,
     children,
-    checked = DEFAULT_PROPS.checked,
+    checked,
     helper,
     onToggle,
-    position = DEFAULT_PROPS.position,
-    theme = DEFAULT_PROPS.theme,
+    position,
+    theme,
     useCustomColors,
     ...forwardedProps
 }) => {
@@ -147,5 +141,6 @@ const Switch: React.FC<SwitchProps> = ({
     );
 };
 Switch.displayName = COMPONENT_NAME;
+Switch.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Switch, SwitchProps, SwitchPosition };
+export { CLASSNAME, Switch, SwitchProps, SwitchPosition };

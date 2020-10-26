@@ -24,9 +24,6 @@ interface SelectProps extends CoreSelectProps {
     value: string;
 }
 
-/** Define the types of the default props. */
-interface DefaultPropsType extends Partial<SelectProps> {}
-
 /** The display name of the component. */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 
@@ -34,10 +31,7 @@ const COMPONENT_NAME = `${COMPONENT_PREFIX}Select`;
 const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 
 /** The default value of props. */
-const DEFAULT_PROPS: DefaultPropsType = {
-    hasError: false,
-    isOpen: false,
-    isValid: false,
+const DEFAULT_PROPS: Partial<SelectProps> = {
     selectedValueRender: (choice) => choice,
 };
 
@@ -64,7 +58,7 @@ const SelectField: React.FC<SelectProps> = ({
     anchorRef,
     isRequired,
     hasInputClear,
-    selectedValueRender = DEFAULT_PROPS.selectedValueRender,
+    selectedValueRender,
 }) => {
     return (
         <>
@@ -166,5 +160,6 @@ const Select = (props: SelectProps) => {
 };
 
 Select.displayName = COMPONENT_NAME;
+Select.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, Select, SelectProps, SelectVariant };
+export { CLASSNAME, Select, SelectProps, SelectVariant };

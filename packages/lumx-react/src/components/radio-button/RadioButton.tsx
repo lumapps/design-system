@@ -45,11 +45,6 @@ interface RadioButtonProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<RadioButtonProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}RadioButton`;
@@ -62,9 +57,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    checked: false,
-    disabled: false,
+const DEFAULT_PROPS: Partial<RadioButtonProps> = {
     theme: Theme.light,
 };
 
@@ -77,13 +70,13 @@ const DEFAULT_PROPS: DefaultPropsType = {
 const RadioButton: React.FC<RadioButtonProps> = (props) => {
     const {
         className,
-        checked = DEFAULT_PROPS.checked,
-        disabled = DEFAULT_PROPS.disabled,
+        checked,
+        disabled,
         helper,
         id,
         label,
         name,
-        theme = DEFAULT_PROPS.theme,
+        theme,
         useCustomColors,
         value,
         onChange,
@@ -146,5 +139,6 @@ const RadioButton: React.FC<RadioButtonProps> = (props) => {
     );
 };
 RadioButton.displayName = COMPONENT_NAME;
+RadioButton.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, RadioButton, RadioButtonProps };
+export { CLASSNAME, RadioButton, RadioButtonProps };

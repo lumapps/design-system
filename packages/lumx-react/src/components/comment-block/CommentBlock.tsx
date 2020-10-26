@@ -45,11 +45,6 @@ interface CommentBlockProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<CommentBlockProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}CommentBlock`;
@@ -62,12 +57,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {
-    hasActions: false,
-    hasChildren: false,
-    hasIndentedChildren: false,
-    isOpen: false,
-    isRelevant: false,
+const DEFAULT_PROPS: Partial<CommentBlockProps> = {
     theme: Theme.light,
 };
 
@@ -82,16 +72,16 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     children,
     date,
     hasActions,
-    hasChildren = DEFAULT_PROPS.hasChildren,
-    hasIndentedChildren = DEFAULT_PROPS.hasIndentedChildren,
-    isOpen = DEFAULT_PROPS.isOpen,
-    isRelevant = DEFAULT_PROPS.isRelevant,
+    hasChildren,
+    hasIndentedChildren,
+    isOpen,
+    isRelevant,
     name,
     onClick,
     onMouseEnter,
     onMouseLeave,
     text,
-    theme = DEFAULT_PROPS.theme,
+    theme,
 }: CommentBlockProps): React.ReactElement => {
     const enterKeyPress: KeyboardEventHandler<HTMLElement> = (evt: KeyboardEvent<HTMLElement>) => {
         if (evt.which === ENTER_KEY_CODE && isFunction(onClick)) {
@@ -151,5 +141,6 @@ const CommentBlock: React.FC<CommentBlockProps> = ({
     );
 };
 CommentBlock.displayName = COMPONENT_NAME;
+CommentBlock.defaultProps = DEFAULT_PROPS;
 
-export { CLASSNAME, DEFAULT_PROPS, CommentBlock, CommentBlockProps };
+export { CLASSNAME, CommentBlock, CommentBlockProps };
