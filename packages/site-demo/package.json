@@ -15,8 +15,9 @@
         "name": "LumApps"
     },
     "scripts": {
-        "build": "gatsby build --prefix-paths",
-        "start": "gatsby develop"
+        "clean": "NODE_OPTIONS=--no-warnings gatsby clean",
+        "build": "NODE_OPTIONS=--no-warnings gatsby build --prefix-paths",
+        "start": "NODE_OPTIONS=--no-warnings gatsby develop"
     },
     "dependencies": {
         "@lumx/angularjs": "^0.26.1",
