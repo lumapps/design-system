@@ -90,6 +90,8 @@ export { Slideshow, SlideshowProps } from './components/slideshow/Slideshow';
 
 export { SlideshowItem } from './components/slideshow/SlideshowItem';
 
+export { SlideshowControls } from './components/slideshow/SlideshowControls';
+
 export { Switch, SwitchProps, SwitchPosition } from './components/switch/Switch';
 
 export { Table, TableProps } from './components/table/Table';

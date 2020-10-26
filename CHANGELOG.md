@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+-   Added component `SlideshowControls` to control a slideshow from the outside
+
 ### Changed
 
 -   `Link` prop type is now more permissive to accommodate for alternative components injected in `linkAs`.
