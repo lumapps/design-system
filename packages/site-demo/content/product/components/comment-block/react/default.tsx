@@ -1,10 +1,11 @@
-import React from 'react';
-
 import { mdiHeart, mdiReply } from '@lumx/icons';
 import { Button, CommentBlock, Emphasis, Size } from '@lumx/react';
+import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <CommentBlock
+        hasActions
+        hasChildren
         actions={[
             <Button key="button0" emphasis={Emphasis.low} size={Size.s} leftIcon={mdiHeart}>
                 24 likes
@@ -13,14 +14,10 @@ const App = ({ theme }: any) => (
                 Reply
             </Button>,
         ]}
-        hasActions={true}
         theme={theme}
         avatar="../avatar/assets/persona.png"
         date="4 hours ago"
         name="Emmitt O. Lum"
-        hasChildren={true}
         text="All the rumors have finally died down and many skeptics have tightened their lips, the iPod does support video format now on its fifth generation."
     />
 );
-
-export default App;

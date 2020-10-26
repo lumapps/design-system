@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom';
 
 import { mdiClose } from '@lumx/icons';
 import { ColorPalette, Emphasis, IconButton, Theme } from '@lumx/react';
-import { COMPONENT_PREFIX } from '@lumx/react/constants';
+import { COMPONENT_PREFIX, DOCUMENT } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
 
 import isFunction from 'lodash/isFunction';
@@ -85,6 +85,11 @@ const Lightbox: React.FC<LightboxProps> = ({
     theme,
     zIndex,
 }) => {
+    if (!DOCUMENT) {
+        // Can't render in SSR.
+        return null;
+    }
+
     const buttonRef: React.RefObject<HTMLButtonElement> = useRef(null);
     const childrenRef: React.RefObject<any> = useRef(null);
     const [isTrapActive, setTrapActive] = useState(false);

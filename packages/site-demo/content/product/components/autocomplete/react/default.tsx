@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { Autocomplete, List, ListItem, Size } from '@lumx/react';
+import React from 'react';
 
 interface City {
     id: string;
@@ -42,7 +41,7 @@ const CITIES: City[] = [
     },
 ];
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     /**
      * Internal state and ref setup.
      * - `showSuggestions`: allows to control when the suggestions are displayed or not.
@@ -99,6 +98,7 @@ const App = ({ theme }: any) => {
 
     return (
         <Autocomplete
+            label="Cities"
             theme={theme}
             isOpen={showSuggestions && hasSuggestions}
             onClose={closeAutocomplete}
@@ -125,5 +125,3 @@ const App = ({ theme }: any) => {
         </Autocomplete>
     );
 };
-
-export default App;

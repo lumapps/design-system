@@ -1,9 +1,8 @@
-import React, { useCallback, useRef, useState } from 'react';
-
 import { mdiPlay } from '@lumx/icons';
 import { Button, Dialog, DialogSizes, Emphasis, Size, Toolbar } from '@lumx/react';
+import React, { useCallback, useRef, useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [size, setSize] = useState<DialogSizes>();
 
     const [isOpen, setOpen] = useState(false);
@@ -97,5 +96,3 @@ const App = ({ theme }: any) => {
         </>
     );
 };
-
-export default App;

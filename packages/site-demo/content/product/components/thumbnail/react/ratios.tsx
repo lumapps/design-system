@@ -1,9 +1,8 @@
+import { AspectRatio, Thumbnail } from '@lumx/react';
 import React from 'react';
 
-import { Alignment, AspectRatio, FlexBox, Orientation, Size, Thumbnail } from '@lumx/react';
-
-const App = () => (
-    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center} vAlign={Alignment.center} gap={Size.big}>
+export const App = () => (
+    <>
         <div style={{ width: 150 }}>
             <Thumbnail aspectRatio={AspectRatio.square} image="https://picsum.photos/150" />
         </div>
@@ -17,7 +16,5 @@ const App = () => (
         <div style={{ width: 150 }}>
             <Thumbnail aspectRatio={AspectRatio.horizontal} image="https://picsum.photos/150/150" />
         </div>
-    </FlexBox>
+    </>
 );
-
-export default App;

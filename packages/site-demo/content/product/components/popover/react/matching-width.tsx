@@ -1,40 +1,33 @@
-import React from 'react';
-
 import { mdiMagnify } from '@lumx/icons';
 import { Placement, Popover, TextField } from '@lumx/react';
+import React, { useRef } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [searchValue, setSearchValue] = React.useState('');
-    const anchorRef = React.useRef(null);
-
-    const demoPopoverHolderStyle = {
-        height: 132,
-    };
-
-    const demoPopperStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 80,
-        justifyContent: 'center',
-    };
+    const anchorRef = useRef(null);
 
     return (
         <>
-            <div style={demoPopoverHolderStyle}>
+            <div style={{ marginBottom: 80 }}>
                 <TextField
-                    value={searchValue}
                     placeholder="Search"
+                    value={searchValue}
                     onChange={setSearchValue}
                     icon={mdiMagnify}
                     theme={theme}
                     textFieldRef={anchorRef}
                 />
-                <Popover theme={theme} anchorRef={anchorRef} placement={Placement.BOTTOM_START} fitToAnchorWidth isOpen>
-                    <div style={demoPopperStyle}>Popover's width matching anchor's</div>
-                </Popover>
             </div>
+            <Popover
+                isOpen
+                className="lumx-spacing-padding-huge"
+                theme={theme}
+                anchorRef={anchorRef}
+                placement={Placement.BOTTOM_START}
+                fitToAnchorWidth
+            >
+                Popover's width matching anchor's
+            </Popover>
         </>
     );
 };
-
-export default App;

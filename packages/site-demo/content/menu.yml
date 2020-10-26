@@ -1,0 +1,18 @@
+- Product:
+    - Foundations:
+        - Color
+        - Iconography
+        - Typography
+    - Components: '*'
+    - Patterns:
+        - Filter and sort
+    - Utilities:
+        - Color
+        - Spacing
+        - Typography
+    - Design Tokens:
+        - Color
+        - Size
+        - Spacing
+- Brand
+- Partners

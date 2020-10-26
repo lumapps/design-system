@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { useThemeColorVariants } from '@lumx/demo/hooks/useThemeColorVariants';
+import { useThemeColorVariants } from '@lumx/demo/utils/hooks/useThemeColorVariants';
 import { Theme } from '@lumx/react';
 
 interface DemoColorProps {
@@ -9,7 +9,7 @@ interface DemoColorProps {
     color: string;
 }
 
-const DemoColor: React.FC<DemoColorProps> = ({ color, theme }) => {
+export const DemoColor: React.FC<DemoColorProps> = ({ color, theme }) => {
     const colorVariants = useThemeColorVariants(color);
     return (
         <div className={classNames('demo-colors', { 'lumx-color-background-dark-N': theme === Theme.dark })}>
@@ -35,5 +35,3 @@ const DemoColor: React.FC<DemoColorProps> = ({ color, theme }) => {
         </div>
     );
 };
-
-export { DemoColor };

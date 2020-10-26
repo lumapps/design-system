@@ -2,7 +2,7 @@ import { mdiMagnify } from '@lumx/icons';
 import { List, ListDivider, ListItem, ListSubheader, Select, Size, TextField } from '@lumx/react';
 import React, { SyntheticEvent, useState } from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
@@ -79,5 +79,3 @@ const App = ({ theme }: any) => {
         </Select>
     );
 };
-
-export default App;

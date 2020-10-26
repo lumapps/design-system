@@ -1,82 +1,33 @@
-import React from 'react';
+import { Alignment, Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
+import React, { RefObject, useRef } from 'react';
 
-import { Chip, FlexBox, Orientation, Placement, Popover, Size } from '@lumx/react';
-
-const App = ({ theme }: any) => {
-    const demoPopperStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 80,
-        justifyContent: 'center',
-        width: 100,
-    };
-
-    const demoPopoverHolderStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 132,
-        justifyContent: 'center',
-    };
-
-    const topAnchorRef = React.useRef(null);
-    const rightAnchorRef = React.useRef(null);
-    const bottomAnchorRef = React.useRef(null);
-    const leftAnchorRef = React.useRef(null);
+export const App = ({ theme }: any) => {
+    const popovers: Array<[Placement, RefObject<any>]> = [
+        [Placement.LEFT, useRef(null)],
+        [Placement.TOP, useRef(null)],
+        [Placement.BOTTOM, useRef(null)],
+        [Placement.RIGHT, useRef(null)],
+    ];
 
     return (
-        <FlexBox
-            className="lumx-spacing-margin-top-huge lumx-spacing-margin-bottom-huge"
-            orientation={Orientation.horizontal}
-        >
-            <FlexBox fillSpace>
-                <div style={demoPopoverHolderStyle}>
-                    <Chip chipRef={topAnchorRef} theme={theme} size={Size.s}>
-                        TOP
+        <FlexBox style={{ padding: 80 }} orientation={Orientation.horizontal}>
+            {popovers.map(([placement, ref]) => (
+                <FlexBox key={placement} fillSpace vAlign={Alignment.center} hAlign={Alignment.center}>
+                    <Chip chipRef={ref} theme={theme} size={Size.s}>
+                        {placement.toUpperCase()}
                     </Chip>
-                </div>
-                <Popover theme={theme} anchorRef={topAnchorRef} placement={Placement.TOP} isOpen>
-                    <div style={demoPopperStyle}>{'Popover'}</div>
-                </Popover>
-            </FlexBox>
 
-            <FlexBox fillSpace>
-                <div style={demoPopoverHolderStyle}>
-                    <Chip chipRef={rightAnchorRef} theme={theme} size={Size.s}>
-                        RIGHT
-                    </Chip>
-                </div>
-                <Popover theme={theme} anchorRef={rightAnchorRef} placement={Placement.RIGHT} isOpen>
-                    <div style={demoPopperStyle}>{'Popover'}</div>
-                </Popover>
-            </FlexBox>
-
-            <FlexBox fillSpace />
-
-            <FlexBox fillSpace>
-                <div style={demoPopoverHolderStyle}>
-                    <Chip chipRef={bottomAnchorRef} theme={theme} size={Size.s}>
-                        BOTTOM
-                    </Chip>
-                </div>
-                <Popover theme={theme} anchorRef={bottomAnchorRef} placement={Placement.BOTTOM} isOpen>
-                    <div style={demoPopperStyle}>{'Popover'}</div>
-                </Popover>
-            </FlexBox>
-
-            <FlexBox fillSpace />
-
-            <FlexBox fillSpace>
-                <div style={demoPopoverHolderStyle}>
-                    <Chip chipRef={leftAnchorRef} theme={theme} size={Size.s}>
-                        LEFT
-                    </Chip>
-                </div>
-                <Popover theme={theme} anchorRef={leftAnchorRef} placement={Placement.LEFT} isOpen>
-                    <div style={demoPopperStyle}>{'Popover'}</div>
-                </Popover>
-            </FlexBox>
+                    <Popover
+                        isOpen
+                        className="lumx-spacing-padding-huge"
+                        theme={theme}
+                        anchorRef={ref}
+                        placement={placement}
+                    >
+                        Popover
+                    </Popover>
+                </FlexBox>
+            ))}
         </FlexBox>
     );
 };
-
-export default App;

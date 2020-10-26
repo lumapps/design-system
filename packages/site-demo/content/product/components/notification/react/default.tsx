@@ -3,7 +3,7 @@ import { Button, Notification, NotificationType } from '@lumx/react';
 
 import React, { useState } from 'react';
 
-const App = () => {
+export const App = () => {
     const properties = {
         error: {
             content: 'Error',
@@ -59,7 +59,7 @@ const App = () => {
     };
 
     return (
-        <div className="demo-grid">
+        <>
             <Button leftIcon={mdiPlay} onClick={onClick('info')}>
                 Info
             </Button>
@@ -88,8 +88,6 @@ const App = () => {
                     {...properties[type]}
                 />
             )}
-        </div>
+        </>
     );
 };
-
-export default App;

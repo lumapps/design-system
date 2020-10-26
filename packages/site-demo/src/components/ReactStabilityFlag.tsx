@@ -1,13 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { mdiCheckCircle, mdiCloseCircle } from '@lumx/icons';
 import { Chip, Icon, Size, Tooltip } from '@lumx/react';
-
-import { Engine, EngineContext } from '@lumx/demo/context/engine';
-
-interface ReactStabilityFlagProps {
-    status: 'stable' | 'unstable';
-}
 
 const STABILITY = {
     stable: {
@@ -24,17 +18,16 @@ const STABILITY = {
     },
 };
 
+type Status = keyof typeof STABILITY;
+
 /**
  * Flag marking a component as stable in React.
  *
  * @return the component.
  */
-export const ReactStabilityFlag: React.FC<ReactStabilityFlagProps> = ({ status }) => {
-    const contextEngine = useContext(EngineContext).engine;
+export const ReactStabilityFlag: React.FC<{ status: Status }> = ({ status }) => {
     const { label, color, icon, description } = STABILITY[status];
-    if (contextEngine !== Engine.react || !label) {
-        return null;
-    }
+
     return (
         <Tooltip label={description}>
             <Chip

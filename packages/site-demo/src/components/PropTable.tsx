@@ -1,40 +1,48 @@
-import { Engine, EngineContext } from '@lumx/demo/context/engine';
-import React, { Fragment, ReactElement, useContext, useState } from 'react';
-
-import orderBy from 'lodash/orderBy';
-
 import { Alignment, Divider, ExpansionPanel, Grid, GridItem } from '@lumx/react';
+import castArray from 'lodash/castArray';
+import orderBy from 'lodash/orderBy';
+import React, { Fragment, ReactNode, useState } from 'react';
 
-// @ts-ignore
-import { propsByComponent } from 'props-loader!';
+export interface Property {
+    /** Name. */
+    name: string;
+    /** Required flag. */
+    required: boolean;
+    /** Description. */
+    description: string;
+    /** Accepted type or types (union type). */
+    type: string | string[];
+    /** Default value. */
+    defaultValue: string;
+}
 
-const renderTypeTableRow = ({ type, defaultValue }: Property): ReactElement => {
-    let formattedType = <>{type}</>;
-    const splitType = type.split(defaultValue);
+const renderTypeTableRow = ({ type, defaultValue }: Property) => (
+    <span className="lumx-typography-body1">
+        {castArray(type).reduce((acc, typeName, index, arr) => {
+            if (typeName === defaultValue) {
+                // Display default value in bold.
+                acc.push(<strong>{defaultValue}</strong>);
+            } else {
+                acc.push(typeName);
+            }
 
-    if (splitType.length > 1) {
-        formattedType = (
+            if (index !== arr.length - 1) {
+                // Interleave with pipes.
+                acc.push(' | ');
+            }
+            return acc;
+        }, [] as ReactNode[])}
+        {defaultValue && !castArray(type).includes(defaultValue) && (
             <>
-                {splitType[0]}
-                <strong>{defaultValue}</strong>
-                {splitType[1]}
-            </>
-        );
-    } else if (splitType.length === 1 && defaultValue) {
-        formattedType = (
-            <>
-                {type}
                 {' (default: '}
                 <strong>{defaultValue}</strong>
                 {')'}
             </>
-        );
-    }
+        )}
+    </span>
+);
 
-    return <span className="lumx-typography-body1">{formattedType}</span>;
-};
-
-const PropTableRow: React.FC<PropTableRowProps> = ({ property }) => {
+const PropTableRow: React.FC<{ property: Property }> = ({ property }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleOpen = () => {
         setIsOpen(!isOpen);
@@ -63,48 +71,27 @@ const PropTableRow: React.FC<PropTableRowProps> = ({ property }) => {
     );
 };
 
-const PropTable: React.FC<PropTableProps> = ({ component }) => {
-    const { engine } = useContext(EngineContext);
-    if (engine === Engine.angularjs) {
-        return <span>Could not load properties of the angular.js {component} component.</span>;
-    }
+export interface PropTableProps {
+    /** Component name. */
+    component: string;
+    /** Component props doc. */
+    props?: Property[];
+}
 
-    const propertyList: Property[] = propsByComponent[component];
-
-    if (!propertyList) {
-        return <span>Could not load properties of the react {component} component.</span>;
+export const PropTable: React.FC<PropTableProps> = ({ component, props }) => {
+    if (!props) {
+        return <span>Could not load properties of the {component} component.</span>;
     }
 
     return (
         <div className="prop-table">
-            {orderBy(propertyList, ['required', 'name'], ['desc', 'asc']).map((property: Property, idx: number) => {
-                return (
-                    <Fragment key={property.id}>
-                        <PropTableRow property={property} />
+            {orderBy(props, ['required', 'name'], ['desc', 'asc']).map((property, idx) => (
+                <Fragment key={property.name}>
+                    <PropTableRow property={property} />
 
-                        {idx < propertyList.length - 1 && <Divider className="lumx-spacing-margin-vertical-regular" />}
-                    </Fragment>
-                );
-            })}
+                    {idx < props.length - 1 && <Divider className="lumx-spacing-margin-vertical-regular" />}
+                </Fragment>
+            ))}
         </div>
     );
 };
-
-interface Property {
-    id: string;
-    name: string;
-    required: boolean;
-    type: string;
-    description: string;
-    defaultValue: string;
-}
-
-interface PropTableRowProps {
-    property: Property;
-}
-
-interface PropTableProps {
-    component: string;
-}
-
-export { PropTable, Property };

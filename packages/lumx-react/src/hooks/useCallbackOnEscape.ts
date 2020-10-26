@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@lumx/react/constants';
 import { Callback, onEscapePressed } from '@lumx/react/utils';
 import { useEffect } from 'react';
 
@@ -11,14 +12,14 @@ import { useEffect } from 'react';
 export function useCallbackOnEscape(
     callback: Callback | undefined,
     closeOnEscape = true,
-    rootElement: HTMLElement = document.body,
+    rootElement = DOCUMENT?.body,
 ) {
     useEffect(() => {
-        if (closeOnEscape && callback) {
+        if (closeOnEscape && callback && rootElement) {
             const onKeyDown = onEscapePressed(callback);
             rootElement.addEventListener('keydown', onKeyDown);
             return () => rootElement.removeEventListener('keydown', onKeyDown);
         }
         return;
-    }, [callback, closeOnEscape]);
+    }, [callback, closeOnEscape, rootElement]);
 }

@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-
-import classNames from 'classnames';
-
 import { mdiMagnify, mdiViewGrid } from '@lumx/icons';
 
 import { Alignment, Button, Emphasis, FlexBox, IconButton, Orientation, TextField, Toolbar } from '@lumx/react';
 
-const App = ({ theme }: any) => {
+import classNames from 'classnames';
+import React, { useState } from 'react';
+
+export const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
 
     return (
@@ -46,5 +45,3 @@ const App = ({ theme }: any) => {
         />
     );
 };
-
-export default App;

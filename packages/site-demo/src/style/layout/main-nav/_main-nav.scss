@@ -5,6 +5,10 @@
 $main-nav-width: 300px;
 
 .main-nav {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
     width: $main-nav-width;
     background-color: lumx-color-variant(dark, L6);
     overflow-y: auto;
@@ -14,6 +18,7 @@ $main-nav-width: 300px;
     }
 
     &__logo {
+        @include lumx-link('dark');
         display: flex;
         align-items: center;
         margin-bottom: $lumx-spacing-unit * 4;

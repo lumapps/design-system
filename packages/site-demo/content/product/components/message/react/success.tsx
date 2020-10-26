@@ -1,8 +1,7 @@
+import { Message, MessageKind } from '@lumx/react';
 import React from 'react';
 
-import { Message, MessageKind } from '@lumx/react';
-
-const App = () => (
+export const App = () => (
     <Message kind={MessageKind.success} hasBackground>
         <p>
             Message text quisque tincidunt lobortis dui non auctor. Donec porta, ligula volutpat vehicula aliquet, dui
@@ -10,5 +9,3 @@ const App = () => (
         </p>
     </Message>
 );
-
-export default App;

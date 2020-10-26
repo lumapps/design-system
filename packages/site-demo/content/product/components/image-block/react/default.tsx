@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { mdiDelete, mdiEye, mdiPencil } from '@lumx/icons';
 import {
     AspectRatio,
@@ -12,8 +10,9 @@ import {
     Orientation,
     Size,
 } from '@lumx/react';
+import React from 'react';
 
-const App = ({ theme }: any) => (
+export const App = ({ theme }: any) => (
     <ImageBlock
         actions={
             <FlexBox orientation={Orientation.horizontal}>
@@ -48,5 +47,3 @@ const App = ({ theme }: any) => (
         image="https://picsum.photos/800/600/?random"
     />
 );
-
-export default App;

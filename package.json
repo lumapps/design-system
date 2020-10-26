@@ -91,8 +91,8 @@
     },
     "scripts": {
         "build": "lerna run --stream build",
-        "build:site": "cd packages/site-demo && yarn build",
-        "clean": "rm -rf packages/*/dist && lerna clean --yes",
+        "build:site": "yarn --cwd packages/site-demo clean && yarn --cwd packages/site-demo build",
+        "clean": "rm -rf packages/*/dist && lerna clean --yes && lerna run --stream clean",
         "format": "yarn format:js && yarn format:ts && yarn format:style",
         "format:style": "prettier-stylelint --prettier-last --write packages/**/*.{css,scss}",
         "format:js": "prettier-eslint --prettier-last --write packages/**/*.{js,jsx}",
@@ -106,10 +106,10 @@
         "release": "yarn lerna publish --force-publish",
         "scaffold": "yo ./packages/yo-generators --with-tests --with-demo",
         "setup:git-hooks": "node node_modules/husky/bin/uninstall.js && node node_modules/husky/bin/install.js",
-        "start": "cd packages/site-demo && yarn start && cd -",
+        "start": "yarn --cwd packages/site-demo start",
         "test": "lerna run --stream test",
-        "storybook:react": "cd packages/lumx-react && yarn storybook",
-        "generate:design-tokens": "cd packages/lumx-core && yarn generate:design-tokens"
+        "storybook:react": "yarn --cwd packages/lumx-react storybook",
+        "generate:design-tokens": "yarn --cwd packages/lumx-core generate:design-tokens"
     },
     "workspaces": [
         "packages/*"

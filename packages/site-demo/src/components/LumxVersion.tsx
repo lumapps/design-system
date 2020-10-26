@@ -1,22 +1,30 @@
 import { mdiTagOutline } from '@lumx/icons';
 import { Button, Emphasis, Size } from '@lumx/react';
+import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
 
-declare global {
-    interface Window {
-        LUMX_VERSION: any;
+const query = graphql`
+    query LumxVersion {
+        site {
+            siteMetadata {
+                version
+            }
+        }
     }
-}
+`;
 
-export const LumxVersion: React.FC = () => (
-    <Button
-        className="lumx-spacing-margin-left"
-        emphasis={Emphasis.low}
-        size={Size.s}
-        leftIcon={mdiTagOutline}
-        href={`https://github.com/lumapps/design-system/blob/v${window.LUMX_VERSION}/CHANGELOG.md`}
-        target="_blank"
-    >
-        v{window.LUMX_VERSION}
-    </Button>
-);
+export const LumxVersion: React.FC = () => {
+    const data = useStaticQuery(query);
+    const version = data.site.siteMetadata.version;
+    return (
+        <Button
+            emphasis={Emphasis.low}
+            size={Size.s}
+            leftIcon={mdiTagOutline}
+            href={`https://github.com/lumapps/design-system/blob/v${version}/CHANGELOG.md`}
+            target="_blank"
+        >
+            v{version}
+        </Button>
+    );
+};

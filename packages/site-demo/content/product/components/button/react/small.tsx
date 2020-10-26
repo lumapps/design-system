@@ -1,12 +1,11 @@
-import React from 'react';
-
-import { Button, ButtonGroup, Emphasis, IconButton, Size } from '@lumx/react';
-
 import { mdiMenuDown, mdiPencil, mdiPlus } from '@lumx/icons';
 
-const App = ({ theme }: any) => (
+import { Button, ButtonGroup, Emphasis, FlexBox, IconButton, Orientation, Size } from '@lumx/react';
+import React from 'react';
+
+export const App = ({ theme }: any) => (
     <>
-        <div className="demo-grid lumx-spacing-margin-bottom-big">
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
             <Button size={Size.s} theme={theme}>
                 Default
             </Button>
@@ -31,9 +30,9 @@ const App = ({ theme }: any) => (
             </ButtonGroup>
 
             <IconButton icon={mdiPlus} size={Size.s} theme={theme} />
-        </div>
+        </FlexBox>
 
-        <div className="demo-grid lumx-spacing-margin-bottom-big">
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
             <Button emphasis={Emphasis.medium} size={Size.s} theme={theme}>
                 Default
             </Button>
@@ -57,9 +56,9 @@ const App = ({ theme }: any) => (
             </ButtonGroup>
 
             <IconButton icon={mdiPlus} emphasis={Emphasis.medium} size={Size.s} theme={theme} />
-        </div>
+        </FlexBox>
 
-        <div className="demo-grid">
+        <FlexBox gap={Size.big} orientation={Orientation.horizontal}>
             <Button emphasis={Emphasis.low} size={Size.s} theme={theme}>
                 Default
             </Button>
@@ -77,8 +76,6 @@ const App = ({ theme }: any) => (
             </Button>
 
             <IconButton icon={mdiPlus} emphasis={Emphasis.low} size={Size.s} theme={theme} />
-        </div>
+        </FlexBox>
     </>
 );
-
-export default App;

@@ -1506,12 +1506,7 @@ module.exports = {
                         ignoreClassFields: true,
                     },
                 ],
-                'react/display-name': [
-                    'warn',
-                    {
-                        ignoreTranspilerName: false,
-                    },
-                ],
+                'react/display-name': 'off',
                 'react/forbid-component-props': 'off',
                 'react/forbid-dom-props': [
                     'error',
@@ -1642,7 +1637,7 @@ module.exports = {
                 'react/jsx-pascal-case': [
                     'error',
                     {
-                        allowAllCaps: false,
+                        allowAllCaps: true,
                         ignore: [],
                     },
                 ],

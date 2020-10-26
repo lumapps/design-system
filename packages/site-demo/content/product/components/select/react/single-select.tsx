@@ -1,8 +1,7 @@
+import { List, ListItem, Select, Size } from '@lumx/react';
 import React, { SyntheticEvent, useState } from 'react';
 
-import { List, ListItem, Select, Size } from '@lumx/react';
-
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const CHOICES = ['First item', 'Second item', 'Third item'];
     const PLACEHOLDER = 'Select a value';
     const LABEL = 'Select label';
@@ -59,5 +58,3 @@ const App = ({ theme }: any) => {
         </Select>
     );
 };
-
-export default App;

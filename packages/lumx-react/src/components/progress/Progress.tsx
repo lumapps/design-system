@@ -23,7 +23,7 @@ interface ProgressProps extends GenericProps {
     theme?: Theme;
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
-    /* Type of progress */
+    /** Type of progress */
     variant?: ProgressVariant;
 }
 

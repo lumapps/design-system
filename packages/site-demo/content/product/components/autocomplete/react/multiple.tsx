@@ -1,7 +1,6 @@
-import React from 'react';
-
 import { mdiClose } from '@lumx/icons';
 import { AutocompleteMultiple, Chip, ChipGroup, Icon, List, ListItem, Size } from '@lumx/react';
+import React from 'react';
 
 interface City {
     id: string;
@@ -42,7 +41,7 @@ const CITIES: City[] = [
         text: 'Montevideo',
     },
 ];
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const INITIAL_STATE_SHOW_SUGGESTIONS = false;
     const INITIAL_STATE_NAVIGATION_SUGGESTION = '';
 
@@ -221,6 +220,7 @@ const App = ({ theme }: any) => {
 
     return (
         <AutocompleteMultiple
+            label="Cities"
             theme={theme}
             isOpen={showSuggestions && hasSuggestions}
             onClose={closeAutocomplete}
@@ -253,5 +253,3 @@ const App = ({ theme }: any) => {
         </AutocompleteMultiple>
     );
 };
-
-export default App;

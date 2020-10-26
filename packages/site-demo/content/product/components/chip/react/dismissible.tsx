@@ -1,15 +1,14 @@
-import React from 'react';
-
 import { mdiClose, mdiEmail } from '@lumx/icons';
 import { Chip, Icon, Size } from '@lumx/react';
+import React from 'react';
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     // Initialize a click handler
     // tslint:disable-next-line:no-console
     const onClick = () => console.log('clicked chip');
 
     return (
-        <div className="demo-grid">
+        <>
             <Chip theme={theme} after={<Icon icon={mdiClose} size={Size.xs} />} onClick={onClick}>
                 Dismissible
             </Chip>
@@ -22,8 +21,6 @@ const App = ({ theme }: any) => {
             >
                 Dismissible rich
             </Chip>
-        </div>
+        </>
     );
 };
-
-export default App;

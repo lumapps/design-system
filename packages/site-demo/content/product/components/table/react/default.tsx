@@ -1,7 +1,3 @@
-import React, { useCallback, useState } from 'react';
-
-import orderBy from 'lodash/orderBy';
-
 import { mdiCommentOutline } from '@lumx/icons';
 import {
     Table,
@@ -14,6 +10,9 @@ import {
     ThOrder,
     ThScope,
 } from '@lumx/react';
+
+import orderBy from 'lodash/orderBy';
+import React, { useCallback, useState } from 'react';
 
 const initialTable = [
     {
@@ -38,6 +37,7 @@ const initialTable = [
         id: 3,
     },
 ];
+
 const initialHeaders: Array<Partial<TableHeaderProps>> = [
     {
         isSortable: true,
@@ -66,7 +66,7 @@ const initialHeaders: Array<Partial<TableHeaderProps>> = [
     },
 ];
 
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [tableHeader, setTableHeader] = useState(initialHeaders);
     const [tableBody, setTableBody] = useState(initialTable);
     const toggleSort = useCallback(
@@ -84,42 +84,38 @@ const App = ({ theme }: any) => {
     );
 
     return (
-        <>
-            <Table hasDividers theme={theme}>
-                <TableHeader>
-                    <TableRow>
-                        {tableHeader.map((header) => {
-                            const onHeaderClick = () => toggleSort(header);
-                            return (
-                                <TableCell
-                                    key={header.name}
-                                    icon={header.icon}
-                                    isSortable={header.isSortable}
-                                    scope={header.scope}
-                                    sortOrder={header.sortOrder}
-                                    variant={TableCellVariant.head}
-                                    onHeaderClick={onHeaderClick}
-                                >
-                                    {header.label}
-                                </TableCell>
-                            );
-                        })}
-                    </TableRow>
-                </TableHeader>
+        <Table hasDividers theme={theme}>
+            <TableHeader>
+                <TableRow>
+                    {tableHeader.map((header) => {
+                        const onHeaderClick = () => toggleSort(header);
+                        return (
+                            <TableCell
+                                key={header.name}
+                                icon={header.icon}
+                                isSortable={header.isSortable}
+                                scope={header.scope}
+                                sortOrder={header.sortOrder}
+                                variant={TableCellVariant.head}
+                                onHeaderClick={onHeaderClick}
+                            >
+                                {header.label}
+                            </TableCell>
+                        );
+                    })}
+                </TableRow>
+            </TableHeader>
 
-                <TableBody>
-                    {tableBody.map((body) => (
-                        <TableRow key={body.id}>
-                            <TableCell>{body.dessert}</TableCell>
-                            <TableCell>{String(body.calories)}</TableCell>
-                            <TableCell>{String(body.fat)}</TableCell>
-                            <TableCell>{body.comments}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </>
+            <TableBody>
+                {tableBody.map((body) => (
+                    <TableRow key={body.id}>
+                        <TableCell>{body.dessert}</TableCell>
+                        <TableCell>{String(body.calories)}</TableCell>
+                        <TableCell>{String(body.fat)}</TableCell>
+                        <TableCell>{body.comments}</TableCell>
+                    </TableRow>
+                ))}
+            </TableBody>
+        </Table>
     );
 };
-
-export default App;

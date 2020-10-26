@@ -1,150 +1,108 @@
-import { Callback } from '@lumx/react/utils';
-import castArray from 'lodash/castArray';
-import isEmpty from 'lodash/isEmpty';
-import React, { ReactElement, ReactNode, useState } from 'react';
-import { RouteComponentProps } from 'react-router';
-import { withRouter } from 'react-router-dom';
+import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
+import { Link, graphql, useStaticQuery } from 'gatsby';
+import includes from 'lodash/includes';
+import keyBy from 'lodash/keyBy';
+import map from 'lodash/map';
+import partial from 'lodash/partial';
+import without from 'lodash/without';
+import React, { useState } from 'react';
 
 import LumXLogo from '@lumx/demo/assets/images/logo.svg';
-import { Emphasis, SideNavigation, SideNavigationItem, SideNavigationItemProps } from '@lumx/react';
 
-/**
- * Defines the type of a navigation item.
- */
-type Item =
-    | {
-          /**
-           * The label of the navigation item.
-           */
-          label: string;
-          /**
-           * The optional subnavigation items.
-           */
-          children?: Item[];
-      }
-    | string;
+const query = graphql`
+    query MenuQuery {
+        allMenuEntry {
+            edges {
+                node {
+                    path
+                    label
+                    hasDynamicChildren
+                    children {
+                        id
+                    }
+                }
+            }
+        }
+    }
+`;
 
-/**
- * Transform space separated string to a slug.
- * @param  s a string
- * @return slug string.
- */
-const spaceToSlug = (s: string): string => {
-    return s.toLocaleLowerCase().replace(' ', '-');
-};
+interface MenuEntry {
+    path: string;
+    label: string;
+    hasDynamicChildren: boolean;
+    children: Array<{ id: string }>;
+}
 
-/**
- * The navigation item tree.
- */
-const ITEMS: Item[] = [
-    {
-        children: [
-            {
-                children: ['Color', 'Iconography', 'Typography'],
-                label: 'Foundations',
-            },
-            {
-                children: [
-                    'Autocomplete',
-                    'Avatar',
-                    'Badge',
-                    'Button',
-                    'Checkbox',
-                    'Chip',
-                    'Comment block',
-                    'Date picker',
-                    'Dialog',
-                    'Divider',
-                    'Dropdown',
-                    'Expansion panel',
-                    'Image block',
-                    'Lightbox',
-                    'Link',
-                    'Link preview',
-                    'List',
-                    'Message',
-                    'Notification',
-                    'Popover',
-                    'Progress',
-                    'Progress tracker',
-                    'Radio button',
-                    'Select',
-                    'Side navigation',
-                    'Slider',
-                    'Slideshow',
-                    'Switch',
-                    'Table',
-                    'Tabs',
-                    'Text field',
-                    'Thumbnail',
-                    'Toolbar',
-                    'Tooltip',
-                    'Uploader',
-                    'User block',
-                ],
-                label: 'Components',
-            },
-            {
-                children: ['Filter and sort'],
-                label: 'Patterns',
-            },
-            {
-                children: ['Color', 'Spacing', 'Typography'],
-                label: 'Utilities',
-            },
-            {
-                children: ['Color', 'Size'],
-                label: 'Design Tokens',
-            },
-        ],
-        label: 'Product',
-    },
-    {
-        label: 'Brand',
-    },
-    {
-        label: 'Partners',
-    },
-];
+type MenuEntryByPath = Record<string, MenuEntry>;
 
 const EMPHASIS_BY_LEVEL: Record<string, Emphasis> = {
-    '0': Emphasis.high,
-    '1': Emphasis.medium,
-    '2': Emphasis.low,
+    '1': Emphasis.high,
+    '2': Emphasis.medium,
+    '3': Emphasis.low,
 };
 
-const generateNav = (goToHandler: (path: string) => Callback, location: string, items: Item[]): ReactNode => {
-    const generateNavItem = (parent: string[], item?: Item | Item[]): ReactNode => {
-        if (!item || Array.isArray(item)) {
-            return castArray(item).map((child: Item) => generateNavItem(parent, child));
-        }
-        const label = typeof item === 'string' ? item : item.label;
-        const children = typeof item !== 'string' && item.children;
-        const path = [...parent, spaceToSlug(label)];
-        const slug = `/${path.join('/')}/`;
+function getChildren(menuEntryByPath: MenuEntryByPath, menuEntry: MenuEntry): MenuEntry[] | null {
+    if (menuEntry.children.length) {
+        return menuEntry.children.map(({ id }) => menuEntryByPath[id]);
+    }
+    if (menuEntry.hasDynamicChildren) {
+        const children = Object.keys(menuEntryByPath)
+            // Find children paths of the current menu entry.
+            .filter((childPath) => childPath.startsWith(menuEntry.path) && childPath !== menuEntry.path)
+            // Get children menu entries.
+            .map((path) => menuEntryByPath[path])
+            // Sort by label.
+            .sort(({ label: labelA }, { label: labelB }) => labelA.localeCompare(labelB));
+        return children.length ? children : null;
+    }
+    return null;
+}
 
-        const [isOpen, setOpen] = useState(() => location.startsWith(slug));
+const useMenuItems = () => {
+    const data = useStaticQuery(query);
+    const entries = map(data.allMenuEntry.edges, 'node') as MenuEntry[];
+    const menuEntryByPath = keyBy(entries, 'path') as MenuEntryByPath;
+    const rootMenuEntries = getChildren(menuEntryByPath, menuEntryByPath['/']);
 
-        const props: Partial<SideNavigationItemProps> = {
-            emphasis: EMPHASIS_BY_LEVEL[parent.length.toString()],
-            isOpen,
-            isSelected: location === slug,
-        };
+    return { rootMenuEntries, menuEntryByPath };
+};
 
-        if (isEmpty(children)) {
-            props.onClick = goToHandler(slug);
-        } else {
-            props.onClick = () => setOpen(!isOpen);
-        }
-
-        return (
-            <SideNavigationItem key={slug} label={label} {...props}>
-                {generateNavItem(path, children || []) as ReactElement}
-            </SideNavigationItem>
-        );
+const renderNavItem = (
+    openPaths: string[],
+    toggleOpenPath: (path: string) => void,
+    menuEntryByPath: MenuEntryByPath,
+    locationPath: string,
+    menuEntry: MenuEntry,
+) => {
+    const { label, path } = menuEntry;
+    const children = getChildren(menuEntryByPath, menuEntry);
+    const level = path.split('/').length - 2;
+    const props: SideNavigationItemProps = {
+        label,
+        emphasis: EMPHASIS_BY_LEVEL[level],
+        isOpen: includes(openPaths, path),
+        isSelected: locationPath === path,
     };
 
-    return <SideNavigation>{generateNavItem([], items) as ReactElement}</SideNavigation>;
+    if (!children?.length) {
+        // Menu using router Link.
+        props.linkAs = Link;
+        props.linkProps = { to: path } as any;
+    } else {
+        props.onClick = partial(toggleOpenPath, path);
+        props.children = children.map(partial(renderNavItem, openPaths, toggleOpenPath, menuEntryByPath, locationPath));
+    }
+
+    return <SideNavigationItem key={path} label={label} {...props} />;
+};
+
+const getParentPaths = (path: string) => {
+    let parentPath = path;
+    const parentPaths: string[] = [];
+    do {
+        parentPaths.push((parentPath = parentPath.replace(/[^\/]*\/?$/, '')));
+    } while (parentPath.length > 1);
+    return parentPaths;
 };
 
 /**
@@ -153,33 +111,37 @@ const generateNav = (goToHandler: (path: string) => Callback, location: string, 
  * @param  props nav props
  * @return The main navigation component.
  */
-const MainNav: React.FC<RouteComponentProps> = (props) => {
-    const { location, history } = props;
-    const goToHandler = (path: string) => () => history.push(path);
+export const MainNav: React.FC<{ location?: Location }> = ({ location }) => {
+    const locationPath = location?.pathname || '';
+    const { rootMenuEntries, menuEntryByPath } = useMenuItems();
+
+    // List of path opened in the menu.
+    const [openPaths, setOpenPaths] = useState<string[]>(() => getParentPaths(locationPath));
+    const toggleOpenPath = (path: string) => {
+        if (includes(openPaths, path)) {
+            setOpenPaths(without(openPaths, path));
+        } else {
+            setOpenPaths([...openPaths, path]);
+        }
+    };
 
     return (
-        <div className="main-nav">
+        <nav className="main-nav">
             <div className="main-nav__wrapper">
-                <div
-                    className="main-nav__logo"
-                    role="button"
-                    tabIndex={0}
-                    onClick={goToHandler('/')}
-                    onKeyPress={goToHandler('/')}
-                >
+                <Link className="main-nav__logo" to="/">
                     <img src={LumXLogo} width="24px" height="24px" alt="LumX" />
                     <span>
                         <strong>{'LumApps'}</strong>
                         {' design system'}
                     </span>
-                </div>
+                </Link>
 
-                {generateNav(goToHandler, location.pathname, ITEMS)}
+                <SideNavigation>
+                    {rootMenuEntries?.map(
+                        partial(renderNavItem, openPaths, toggleOpenPath, menuEntryByPath, locationPath),
+                    )}
+                </SideNavigation>
             </div>
-        </div>
+        </nav>
     );
 };
-
-const MainNavWithRouter = withRouter(MainNav);
-
-export { MainNavWithRouter as MainNav };

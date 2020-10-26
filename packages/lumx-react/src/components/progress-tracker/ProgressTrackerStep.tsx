@@ -28,11 +28,16 @@ interface ProgressTrackerStepProps extends GenericProps {
     isComplete?: boolean;
 
     /** The step's label. */
-    label: string | null;
+    label?: string | null;
 
     /** The component theme to apply. */
     theme?: Theme;
 }
+
+/**
+ * Define the types of the default props.
+ */
+interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {}
 
 /**
  * The display name of the component.

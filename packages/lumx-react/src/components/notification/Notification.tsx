@@ -7,7 +7,7 @@ import isFunction from 'lodash/isFunction';
 
 import { Button, Emphasis, Icon, Size, Theme } from '@lumx/react';
 
-import { NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
+import { DOCUMENT, NOTIFICATION_TRANSITION_DURATION } from '@lumx/react/constants';
 
 import { NOTIFICATION_CONFIGURATION } from '@lumx/react/components/notification/constants';
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
@@ -89,6 +89,10 @@ const Notification: React.FC<NotificationProps> = ({
     zIndex,
     ...forwardedProps
 }) => {
+    if (!DOCUMENT) {
+        // Can't render in SSR.
+        return null;
+    }
     const hasAction: boolean = Boolean(actionCallback) && Boolean(actionLabel);
 
     const isVisible = useDelayedVisibility(!!isOpen, NOTIFICATION_TRANSITION_DURATION);

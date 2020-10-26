@@ -1,53 +1,41 @@
-import React from 'react';
+import { Alignment, Chip, FlexBox, Placement, Popover, Size } from '@lumx/react';
+import React, { useRef } from 'react';
 
-import { Chip, Placement, Popover, Size } from '@lumx/react';
-
-const App = ({ theme }: any) => {
-    const demoWrapperStyle = {
-        display: 'flex',
-        justifyContent: 'space-between',
-    };
-
-    const demoPopperStyle = {
-        alignItems: 'center',
-        display: 'flex',
-        height: 80,
-        justifyContent: 'center',
-        width: 350,
-    };
-
-    const demoPopoverHolderStyle = {
-        alignItems: 'flex-end',
-        display: 'flex',
-        height: 132,
-        justifyContent: 'space-around',
-    };
-
-    const topStartAnchorRef = React.useRef(null);
-
-    const topEndAnchorRef = React.useRef(null);
+export const App = ({ theme }: any) => {
+    const topStartAnchorRef = useRef(null);
+    const topEndAnchorRef = useRef(null);
 
     return (
-        <div style={demoWrapperStyle}>
-            <div style={demoPopoverHolderStyle}>
+        <>
+            <FlexBox marginAuto={Alignment.right} style={{ marginTop: 80 }}>
                 <Chip chipRef={topStartAnchorRef} theme={theme} size={Size.s}>
                     TOP_START
                 </Chip>
-            </div>
-            <Popover theme={theme} anchorRef={topStartAnchorRef} placement={Placement.TOP_START} isOpen>
-                <div style={demoPopperStyle}>Popover aligned on start of the top side</div>
+            </FlexBox>
+            <Popover
+                isOpen
+                className="lumx-spacing-padding-huge"
+                theme={theme}
+                anchorRef={topStartAnchorRef}
+                placement={Placement.TOP_START}
+            >
+                Popover aligned on start of the top side
             </Popover>
 
-            <div style={demoPopoverHolderStyle}>
+            <FlexBox marginAuto={Alignment.left} style={{ marginTop: 80 }}>
                 <Chip chipRef={topEndAnchorRef} theme={theme} size={Size.s}>
                     TOP_END
                 </Chip>
-            </div>
-            <Popover theme={theme} anchorRef={topEndAnchorRef} placement={Placement.TOP_END} isOpen>
-                <div style={demoPopperStyle}>Popover aligned on start of the top side</div>
+            </FlexBox>
+            <Popover
+                isOpen
+                className="lumx-spacing-padding-huge"
+                theme={theme}
+                anchorRef={topEndAnchorRef}
+                placement={Placement.TOP_END}
+            >
+                Popover aligned on start of the top side
             </Popover>
-        </div>
+        </>
     );
 };
-
-export default App;

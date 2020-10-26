@@ -1,1 +1,4 @@
 .git
+packages/site-demo/.cache
+packages/site-demo/public
+*/*/node_modules

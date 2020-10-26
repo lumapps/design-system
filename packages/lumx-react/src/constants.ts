@@ -16,6 +16,14 @@ export {
 /**
  * The prefix to use to name the React component.
  */
-const COMPONENT_PREFIX = '';
+export const COMPONENT_PREFIX = '';
 
-export { COMPONENT_PREFIX };
+/**
+ * Optional global `window` instance (not defined when running SSR).
+ */
+export const WINDOW = typeof window !== `undefined` ? window : undefined;
+
+/**
+ * Optional global `document` instance (not defined when running SSR).
+ */
+export const DOCUMENT = typeof document !== `undefined` ? document : undefined;

@@ -43,7 +43,7 @@ function getFileName(url: string): string {
  * @param props Components props.
  * @return ReactElement.
  */
-const AssetBlock: React.FC<AssetBlock> = (props: AssetBlock): ReactElement => {
+export const AssetBlock: React.FC<AssetBlock> = (props: AssetBlock): ReactElement => {
     const { downloadURL, fileName, children } = props;
 
     return (
@@ -64,5 +64,3 @@ const AssetBlock: React.FC<AssetBlock> = (props: AssetBlock): ReactElement => {
         </div>
     );
 };
-
-export { AssetBlock };

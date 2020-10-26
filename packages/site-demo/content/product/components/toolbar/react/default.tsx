@@ -1,12 +1,11 @@
-import React from 'react';
-
-import classNames from 'classnames';
-
 import { mdiMagnify } from '@lumx/icons';
 
 import { Emphasis, IconButton, Toolbar } from '@lumx/react';
 
-const App = ({ theme }: any) => (
+import classNames from 'classnames';
+import React from 'react';
+
+export const App = ({ theme }: any) => (
     <Toolbar
         label={
             <span
@@ -21,5 +20,3 @@ const App = ({ theme }: any) => (
         after={<IconButton emphasis={Emphasis.low} theme={theme} icon={mdiMagnify} />}
     />
 );
-
-export default App;

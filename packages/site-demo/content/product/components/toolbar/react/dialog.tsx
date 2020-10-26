@@ -1,12 +1,11 @@
-import React from 'react';
-
-import classNames from 'classnames';
-
 import { mdiMenuDown, mdiTranslate } from '@lumx/icons';
 
 import { Button, Emphasis, Toolbar } from '@lumx/react';
 
-const App = ({ theme }: any) => (
+import classNames from 'classnames';
+import React from 'react';
+
+export const App = ({ theme }: any) => (
     <Toolbar
         label={
             <span
@@ -25,5 +24,3 @@ const App = ({ theme }: any) => (
         }
     />
 );
-
-export default App;

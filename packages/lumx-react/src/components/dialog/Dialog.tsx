@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { Progress, ProgressVariant, Size } from '@lumx/react';
 
-import { DIALOG_TRANSITION_DURATION } from '@lumx/react/constants';
+import { DIALOG_TRANSITION_DURATION, DOCUMENT } from '@lumx/react/constants';
 
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { useCallbackOnEscape } from '@lumx/react/hooks/useCallbackOnEscape';
@@ -122,6 +122,11 @@ const DEFAULT_PROPS: Partial<DialogProps> = {
  * @return The component.
  */
 const Dialog: React.FC<DialogProps> = (props) => {
+    if (!DOCUMENT) {
+        // Can't render in SSR.
+        return null;
+    }
+
     const {
         children,
         className,

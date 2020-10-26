@@ -1,8 +1,7 @@
+import { TextField } from '@lumx/react';
 import React, { useState } from 'react';
 
-import { TextField } from '@lumx/react';
-
-const App = ({ theme }: any) => {
+export const App = ({ theme }: any) => {
     const [value, setValue] = useState('');
 
     return (
@@ -10,10 +9,8 @@ const App = ({ theme }: any) => {
             label="Text field label"
             value={value}
             onChange={setValue}
-            placeholder={'Placeholder text'}
+            placeholder="Placeholder text"
             theme={theme}
         />
     );
 };
-
-export default App;

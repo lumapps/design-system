@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 
 /**
  * Defines the state of the component
@@ -11,7 +11,7 @@ interface State {
 /**
  * This component is in charge of catching any error and avoid to the whole application to crash.
  */
-class ErrorBoundary extends React.Component<{}, State> {
+export class ErrorBoundary extends React.Component<{}, State> {
     /**
      * When an error occurred, save the error in the state so that we can display it in the fallback display.
      *
@@ -27,25 +27,18 @@ class ErrorBoundary extends React.Component<{}, State> {
         hasError: false,
     };
 
-    public componentDidCatch(): void {
-        // Nothing to do here, the error is already logged in the console and in the fallback display.
-    }
-
-    public render(): ReactElement {
+    public render() {
         const { error, hasError } = this.state;
 
         if (hasError) {
             return (
-                <div className="main">
-                    <h1 className="mb++">Something went wrong with this page</h1>
+                <>
+                    <h1>Something went wrong with this page</h1>
 
                     {error && <pre style={{ color: 'red' }}>{error.toString()}</pre>}
-                </div>
+                </>
             );
         }
-
-        return <>{this.props.children}</>;
+        return this.props.children;
     }
 }
-
-export { ErrorBoundary };

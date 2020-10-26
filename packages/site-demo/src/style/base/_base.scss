@@ -5,13 +5,3 @@
 *:not(.focus-visible) {
     outline: none;
 }
-
-.float-right {
-    @include mq($from: tablet) {
-        float: right;
-    }
-
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-}

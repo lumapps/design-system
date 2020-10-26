@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-import noop from 'lodash/noop';
 
 import { ProgressTrackerStep } from '@lumx/react';
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
@@ -36,7 +35,7 @@ interface Setup extends CommonSetup {
  */
 const setup = ({ ...props }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const children = props.children ? props.children : <ProgressTrackerStep onClick={noop} label="Step label" />;
+    const children = props.children ? props.children : <ProgressTrackerStep label="Step label" />;
 
     // @ts-ignore
     const wrapper = renderer(<ProgressTracker {...props}>{children}</ProgressTracker>);

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { useThemeColorVariants } from '@lumx/demo/hooks/useThemeColorVariants';
+import { useThemeColorVariants } from '@lumx/demo/utils/hooks/useThemeColorVariants';
 import { FlexBox, Orientation, Theme } from '@lumx/react';
 
 import { DesignToken } from './DesignToken';
