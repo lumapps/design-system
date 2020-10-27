@@ -24,7 +24,8 @@ export const renderLines = ({ tokens, getLineProps, getTokenProps }: RenderLineP
         </div>
     ));
 
-export const CodeBlock: React.FC<Props> = ({ className, codeString, language, children }) => {
+export const CodeBlock: React.FC<Props> = ({ className, codeString, language: propLanguage, children }) => {
+    const language = propLanguage || className?.match(/language-(\w+)/)?.[1];
     if (!language) {
         return <pre className={classNames('code-block', className)}>{children || codeString}</pre>;
     }

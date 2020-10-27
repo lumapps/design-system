@@ -3,7 +3,6 @@ import React from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import 'focus-visible';
 import 'intersection-observer';
-import { preToCodeBlock } from 'mdx-utils';
 
 import { CodeBlock } from '@lumx/demo/components/CodeBlock';
 import { DemoBlock } from '@lumx/demo/components/DemoBlock';
@@ -16,16 +15,19 @@ import { GlobalThemeProvider } from '@lumx/demo/global-theme';
  * Customize MDX components.
  */
 const mdxComponents = {
-    pre: (preProps: any) => {
-        const codeProps = preToCodeBlock(preProps);
-        return codeProps ? <CodeBlock {...codeProps} /> : <pre {...preProps} />;
+    pre(props: any) {
+        const codeProps = props.children?.props?.mdxType === 'code' && props.children?.props;
+        if (codeProps) {
+            return <CodeBlock {...codeProps} />;
+        }
+        return <pre {...props} />;
     },
     inlineCode: (props: any) => <code {...props} />,
+    // Use router link when possible.
+    a: Link,
     ReactStabilityFlag,
     DemoBlock,
     PropTable,
-    // Use router link when possible.
-    a: Link,
 };
 
 /**
