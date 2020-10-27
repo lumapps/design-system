@@ -1,15 +1,15 @@
 export default { title: 'LumX components/text-field/Demos' };
 
-export { default as CharacterCounter } from './demos/character-counter';
-export { default as Clearable } from './demos/clearable';
-export { default as Default } from './demos/default';
-export { default as Disabled } from './demos/disabled';
-export { default as Helper } from './demos/helper';
-export { default as Icon } from './demos/icon';
-export { default as Invalid } from './demos/invalid';
-export { default as Placeholder } from './demos/placeholder';
-export { default as TextAreaInvalid } from './demos/text-area-invalid';
-export { default as TextArea } from './demos/text-area';
-export { default as TextAreaValid } from './demos/text-area-valid';
-export { default as Valid } from './demos/valid';
-export { default as WithChips } from './demos/with-chips';
+export { App as CharacterCounter } from './demos/character-counter';
+export { App as Clearable } from './demos/clearable';
+export { App as Default } from './demos/default';
+export { App as Disabled } from './demos/disabled';
+export { App as Helper } from './demos/helper';
+export { App as Icon } from './demos/icon';
+export { App as Invalid } from './demos/invalid';
+export { App as Placeholder } from './demos/placeholder';
+export { App as TextAreaInvalid } from './demos/text-area-invalid';
+export { App as TextArea } from './demos/text-area';
+export { App as TextAreaValid } from './demos/text-area-valid';
+export { App as Valid } from './demos/valid';
+export { App as WithChips } from './demos/with-chips';

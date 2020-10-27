@@ -1,5 +1,5 @@
 export default { title: 'LumX components/uploader/Demos' };
 
-export { default as Avatar } from './demos/avatar';
-export { default as Default } from './demos/default';
-export { default as Thumbnail } from './demos/thumbnail';
+export { App as Avatar } from './demos/avatar';
+export { App as Default } from './demos/default';
+export { App as Thumbnail } from './demos/thumbnail';

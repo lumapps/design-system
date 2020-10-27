@@ -1,8 +1,8 @@
 export default { title: 'LumX components/chip/Demos' };
 
-export { default as Choice } from './demos/choice';
-export { default as Default } from './demos/default';
-export { default as Dismissible } from './demos/dismissible';
-export { default as Filter } from './demos/filter';
-export { default as Group } from './demos/group';
-export { default as Small } from './demos/small';
+export { App as Choice } from './demos/choice';
+export { App as Default } from './demos/default';
+export { App as Dismissible } from './demos/dismissible';
+export { App as Filter } from './demos/filter';
+export { App as Group } from './demos/group';
+export { App as Small } from './demos/small';

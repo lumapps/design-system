@@ -1,3 +1,3 @@
 export default { title: 'LumX components/tooltip/Demos' };
 
-export { default as DemoDefault } from './demos/default';
+export { App as DemoDefault } from './demos/default';

@@ -1,6 +1,6 @@
 export default { title: 'LumX components/toolbar/Demos' };
 
-export { default as Back } from './demos/back';
-export { default as Default } from './demos/default';
-export { default as Dialog } from './demos/dialog';
-export { default as MediaPicker } from './demos/media-picker';
+export { App as Back } from './demos/back';
+export { App as Default } from './demos/default';
+export { App as Dialog } from './demos/dialog';
+export { App as MediaPicker } from './demos/media-picker';

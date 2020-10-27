@@ -1,6 +1,6 @@
 export default { title: 'LumX components/list/Demos' };
 
-export { default as tiny } from './demos/tiny';
-export { default as regular } from './demos/regular';
-export { default as big } from './demos/big';
-export { default as huge } from './demos/huge';
+export { App as tiny } from './demos/tiny';
+export { App as regular } from './demos/regular';
+export { App as big } from './demos/big';
+export { App as huge } from './demos/huge';

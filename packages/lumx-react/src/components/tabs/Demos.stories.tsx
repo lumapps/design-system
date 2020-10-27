@@ -1,5 +1,5 @@
 export default { title: 'LumX components/tabs/Demos' };
 
-export { default as Default } from './demos/default';
-export { default as IconTabs } from './demos/icon-tabs';
-export { default as LeftTabs } from './demos/left-tabs';
+export { App as Default } from './demos/default';
+export { App as IconTabs } from './demos/icon-tabs';
+export { App as LeftTabs } from './demos/left-tabs';
