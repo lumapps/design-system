@@ -93,6 +93,23 @@ exports[`<List> Snapshots and structure should render story KeyboardNavigation 1
 </ul>
 `;
 
+exports[`<List> Snapshots and structure should render story WithCustomChildren 1`] = `
+<ul
+  className="lumx-list"
+  tabIndex={-1}
+>
+  <CustomListItem
+    key=".0"
+  />
+  <CustomListItem
+    key=".1"
+  />
+  <CustomListItem
+    key=".2"
+  />
+</ul>
+`;
+
 exports[`<List> Snapshots and structure should render story WithItemPadding 1`] = `
 Array [
   <ul

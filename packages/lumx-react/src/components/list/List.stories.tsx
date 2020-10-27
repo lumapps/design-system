@@ -114,3 +114,19 @@ export const asLink = () => {
         </div>
     );
 };
+
+export const WithCustomChildren = () => {
+    const CustomListItem = () => {
+        return <ListItem onItemSelected={action('onItemSelected custom list item')}>Custom list item</ListItem>;
+    };
+
+    return (
+        <div className="demo-grid">
+            <List>
+                <CustomListItem />
+                <CustomListItem />
+                <CustomListItem />
+            </List>
+        </div>
+    );
+};

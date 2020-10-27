@@ -18,6 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Expose component default props in React's `Component.defaultProps`
 -   Make it possible to override `tabIndex` and `role` props of `ListItem.linkProps`.
 
+### Fixed
+
+-   Fixed page freeze when trying to use keyboard navigation on `List` component that has custom children.
+
 ## [0.26.1][] - 2020-10-14
 
 ### Changed

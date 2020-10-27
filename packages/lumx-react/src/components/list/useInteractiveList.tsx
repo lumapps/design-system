@@ -120,14 +120,17 @@ export const useInteractiveList: useInteractiveList = (options) => {
             }
 
             let nextIndex = activeItemIndex;
+            let iterations = 0;
 
             // Move to next navigable item.
             do {
                 nextIndex = getNextIndex(nextIndex, keyCode);
+                iterations++;
             } while (
                 nextIndex !== INITIAL_INDEX &&
                 nextIndex !== activeItemIndex &&
-                !isNavigableItem(items[nextIndex] as any)
+                !isNavigableItem(items[nextIndex] as any) &&
+                iterations < items.length
             );
 
             setActiveItemIndex(nextIndex);
