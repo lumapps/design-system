@@ -173,7 +173,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
 
     /* If the activeIndex props changes, update the current slide */
     React.useEffect(() => {
-        setCurrentIndex(activeIndex);
+        setCurrentIndex(activeIndex as number);
     }, [activeIndex]);
 
     /* If the slide changes, with autoplay for example, trigger "onChange" */

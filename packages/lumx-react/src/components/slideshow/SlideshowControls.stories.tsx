@@ -2,7 +2,31 @@ import React from 'react';
 
 import { AspectRatio, ImageBlock, Slideshow, SlideshowControls, SlideshowItem } from '@lumx/react';
 
-const App = ({ theme }: any) => {
+export default { title: 'LumX components/slideshow/Slideshow controls' };
+
+export const Simple = () => {
+    const parentRef = React.useRef(null);
+    const slidesCount = 9;
+    const [activeIndex, setActiveIndex] = React.useState(0);
+    const maxIndex = slidesCount - 1;
+
+    const onNextClick = () => setActiveIndex(activeIndex === maxIndex ? 0 : activeIndex + 1);
+    const onPreviousClick = () => setActiveIndex(activeIndex === 0 ? maxIndex : activeIndex - 1);
+    const onPaginationClick = (index: number) => setActiveIndex(index);
+
+    return (
+        <SlideshowControls
+            activeIndex={activeIndex}
+            slidesCount={slidesCount}
+            parentRef={parentRef}
+            onNextClick={onNextClick}
+            onPreviousClick={onPreviousClick}
+            onPaginationClick={onPaginationClick}
+        />
+    );
+};
+
+export const ControllingSlideshow = ({ theme }: any) => {
     const parentRef = React.useRef(null);
     const items = [
         'https://picsum.photos/480/400/?image=1',
@@ -34,7 +58,7 @@ const App = ({ theme }: any) => {
                 autoPlay={true}
                 groupBy={1}
                 style={slideshowStyle}
-                onIndexChange={setActiveIndex}
+                onChange={setActiveIndex}
             >
                 {items.map((item) => (
                     <SlideshowItem key={item}>
@@ -55,5 +79,3 @@ const App = ({ theme }: any) => {
         </div>
     );
 };
-
-export default App;
