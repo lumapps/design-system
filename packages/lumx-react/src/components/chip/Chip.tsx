@@ -90,15 +90,15 @@ function useStopPropagation(handler?: MouseEventHandler): MouseEventHandler {
  * @return The Chip component.
  */
 const Chip: React.FC<ChipProps> = ({
-    after = DEFAULT_PROPS.after,
-    before = DEFAULT_PROPS.before,
+    after,
+    before,
     className,
     children,
     color,
-    isClickable = DEFAULT_PROPS.isClickable,
-    isSelected = DEFAULT_PROPS.isSelected,
-    isDisabled = DEFAULT_PROPS.isDisabled,
-    isHighlighted = DEFAULT_PROPS.isHighlighted,
+    isClickable,
+    isSelected,
+    isDisabled,
+    isHighlighted,
     onAfterClick,
     onBeforeClick,
     onClick,

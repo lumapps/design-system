@@ -24,11 +24,6 @@ interface TableRowProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<TableRowProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}TableRow`;
@@ -41,7 +36,7 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME, true);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: DefaultPropsType = {};
+const DEFAULT_PROPS: Partial<TableRowProps> = {};
 
 /**
  * The TableRow component displays an HTML Table Row, which contains table cells.
@@ -51,9 +46,9 @@ const DEFAULT_PROPS: DefaultPropsType = {};
 const TableRow: React.FC<TableRowProps> = ({
     children,
     className,
-    isClickable = DEFAULT_PROPS.isClickable,
-    isDisabled = DEFAULT_PROPS.isDisabled,
-    isSelected = DEFAULT_PROPS.isSelected,
+    isClickable,
+    isDisabled,
+    isSelected,
     ...forwardedProps
 }) => (
     <tr
