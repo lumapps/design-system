@@ -35,11 +35,6 @@ interface ProgressTrackerStepProps extends GenericProps {
 }
 
 /**
- * Define the types of the default props.
- */
-interface DefaultPropsType extends Partial<ProgressTrackerStepProps> {}
-
-/**
  * The display name of the component.
  */
 const COMPONENT_NAME = `${COMPONENT_PREFIX}ProgressTrackerStep`;
