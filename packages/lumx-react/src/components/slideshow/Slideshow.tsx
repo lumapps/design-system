@@ -31,6 +31,8 @@ interface SlideshowProps extends GenericProps {
     theme?: Theme;
     /** Whether custom colors are applied to this component. */
     useCustomColors?: boolean;
+    /* Callback when slide changes */
+    onChange?(index: number): void;
 }
 
 /**
@@ -69,6 +71,7 @@ const Slideshow: React.FC<SlideshowProps> = ({
     interval,
     theme,
     useCustomColors,
+    onChange,
     ...forwardedProps
 }) => {
     const [currentIndex, setCurrentIndex] = useState<number>(activeIndex as number);
@@ -167,6 +170,18 @@ const Slideshow: React.FC<SlideshowProps> = ({
     const stopAutoPlay = () => {
         setIsAutoPlaying(false);
     };
+
+    /* If the activeIndex props changes, update the current slide */
+    React.useEffect(() => {
+        setCurrentIndex(activeIndex as number);
+    }, [activeIndex]);
+
+    /* If the slide changes, with autoplay for example, trigger "onChange" */
+    React.useEffect(() => {
+        if (onChange) {
+            onChange(currentIndex);
+        }
+    }, [currentIndex, onChange]);
 
     return (
         <div
