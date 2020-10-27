@@ -143,6 +143,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 -   Added component `SlideshowControls` to control a slideshow from the outside
 -   Add `linkAs` prop on `Button` and `IconButton` to customize the link component (can be used to inject the `Link` component from `react-router`).
+-   Make it possible to override `tabIndex` and `role` props of `ListItem.linkProps`.
+
+### Fixed
+
+-   Fixed page freeze when trying to use keyboard navigation on `List` component that has custom children.
 
 ### Changed
 
