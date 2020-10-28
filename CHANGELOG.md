@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.26.2][] - 2020-10-28
+
 ### Added
 
 -   Added component `SlideshowControls` to control a slideshow from the outside
@@ -773,3 +775,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.26.0]: https://github.com/lumapps/design-system/tree/v0.26.0
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.26.1...HEAD
 [0.26.1]: https://github.com/lumapps/design-system/tree/v0.26.1
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.26.2...HEAD
+[0.26.2]: https://github.com/lumapps/design-system/tree/v0.26.2
