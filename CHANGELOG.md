@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   _[BREAKING]_ `react`, `react-dom`, `moment` and `moment-range` are now exclusively defined as `peerDependencies`. You must install them separately from `@lumx` packages.
+
 ## [0.26.2][] - 2020-10-28
 
 ### Added
