@@ -113,5 +113,8 @@
     },
     "workspaces": [
         "packages/*"
-    ]
+    ],
+    "resolutions": {
+        "**/style-loader": "^1.0.0"
+    }
 }
