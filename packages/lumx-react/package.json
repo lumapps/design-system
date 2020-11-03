@@ -14,11 +14,7 @@
         "focus-trap-react": "^6.0.0",
         "focus-visible": "^5.0.2",
         "lodash": "4.17.19",
-        "moment": "^2.24.0",
-        "moment-range": "^4.0.2",
-        "react": "^16.8.5",
-        "react-dom": "^16.8.5",
-        "react-is": "^16.8.5",
+        "react-is": "^16.13.0",
         "react-popper": "^2.2.3",
         "uuid": "^3.3.2"
     },
@@ -61,6 +57,7 @@
         "fork-ts-checker-webpack-plugin": "^4.0.3",
         "friendly-errors-webpack-plugin": "^1.7.0",
         "html-minifier-webpack-plugin": "^2.2.3",
+        "install-peers-cli": "^2.2.0",
         "is-ci": "^2.0.0",
         "jest": "^26.3.0",
         "jest-chain": "^1.1.5",
@@ -92,8 +89,8 @@
     "peerDependencies": {
         "moment": "^2.24.0",
         "moment-range": "^4.0.2",
-        "react": "^16.8.5",
-        "react-dom": "^16.8.5"
+        "react": "^16.13.0",
+        "react-dom": "^16.13.0"
     },
     "description": "The official LumApps Design System (LumX) for React applications",
     "engines": {
@@ -121,6 +118,7 @@
     "scripts": {
         "build": "webpack",
         "postbuild": "dts-bundle-generator --no-check --external-types=react --external-imports=moment -o dist/lumx.react.d.ts src/index.ts",
+        "postinstall": "install-peers",
         "prepublishOnly": "yarn build",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
         "storybook": "start-storybook -p 9000"
