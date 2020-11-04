@@ -3,7 +3,6 @@ import { DemoBlock } from '@lumx/demo/components/DemoBlock';
 import { Link } from '@lumx/demo/components/Link';
 import { PropTable } from '@lumx/demo/components/PropTable';
 import { ReactStabilityFlag } from '@lumx/demo/components/ReactStabilityFlag';
-import { GlobalThemeProvider } from '@lumx/demo/global-theme';
 
 import { MDXProvider } from '@mdx-js/react';
 import 'focus-visible';
@@ -37,8 +36,4 @@ const mdxComponents = {
  * @return wrapped element.
  */
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const wrapRootElement = ({ element }: any) => (
-    <GlobalThemeProvider>
-        <MDXProvider components={mdxComponents}>{element}</MDXProvider>
-    </GlobalThemeProvider>
-);
+export const wrapRootElement = ({ element }: any) => <MDXProvider components={mdxComponents}>{element}</MDXProvider>;

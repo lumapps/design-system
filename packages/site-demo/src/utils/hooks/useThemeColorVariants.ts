@@ -1,10 +1,8 @@
 import get from 'lodash/get';
 import mapValues from 'lodash/mapValues';
-import { useContext, useMemo } from 'react';
+import { useMemo } from 'react';
 
-import { CORE } from '@lumx/core/js/constants';
-import { GlobalTheme } from '@lumx/core/js/types';
-import { GlobalThemeContext } from '@lumx/demo/global-theme';
+import { CORE } from '@lumx/core/js/constants/generated/constants';
 
 interface ColorDocumentation {
     colorName: string;
@@ -34,8 +32,8 @@ function getFontColor(colorName: string, colorVariant: string): 'dark' | 'light'
     return variant === 'L' ? 'dark' : 'light';
 }
 
-function formatColorDescription(globalTheme: GlobalTheme, colorName: string): ColorVariants {
-    const colorWithVariants = get(CORE, [globalTheme, 'color', colorName]);
+function formatColorDescription(colorName: string): ColorVariants {
+    const colorWithVariants = get(CORE, ['color', colorName]);
 
     return mapValues(
         colorWithVariants,
@@ -56,6 +54,5 @@ function formatColorDescription(globalTheme: GlobalTheme, colorName: string): Co
 }
 
 export const useThemeColorVariants = (colorName: string) => {
-    const { globalTheme } = useContext(GlobalThemeContext);
-    return useMemo(() => formatColorDescription(globalTheme, colorName), [globalTheme, colorName]);
+    return useMemo(() => formatColorDescription(colorName), [colorName]);
 };

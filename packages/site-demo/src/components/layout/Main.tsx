@@ -1,5 +1,4 @@
 import { ErrorBoundary } from '@lumx/demo/components/ErrorBoundary';
-import { GlobalThemeSelector } from '@lumx/demo/components/GlobalThemeSelector';
 import { LumxVersion } from '@lumx/demo/components/LumxVersion';
 import { Alignment, FlexBox, Orientation } from '@lumx/react';
 import { Match } from '@reach/router';
@@ -10,11 +9,6 @@ export const Main: React.FC = ({ children }) => (
         <div className="main__wrapper">
             <div className="main-header">
                 <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                    <FlexBox orientation={Orientation.horizontal} hAlign={Alignment.center}>
-                        <span className="lumx-typography-overline lumx-spacing-margin-right-regular">Theme</span>
-                        <GlobalThemeSelector />
-                    </FlexBox>
-
                     <Match path="/product/components/*">
                         {({ match }) =>
                             match && (
