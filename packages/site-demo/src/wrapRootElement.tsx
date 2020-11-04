@@ -9,7 +9,6 @@ import { DemoBlock } from '@lumx/demo/components/DemoBlock';
 import { Link } from '@lumx/demo/components/Link';
 import { PropTable } from '@lumx/demo/components/PropTable';
 import { ReactStabilityFlag } from '@lumx/demo/components/ReactStabilityFlag';
-import { GlobalThemeProvider } from '@lumx/demo/global-theme';
 
 /**
  * Customize MDX components.
@@ -35,8 +34,4 @@ const mdxComponents = {
  *
  * @return wrapped element.
  */
-export const wrapRootElement = ({ element }: any) => (
-    <GlobalThemeProvider>
-        <MDXProvider components={mdxComponents}>{element}</MDXProvider>
-    </GlobalThemeProvider>
-);
+export const wrapRootElement = ({ element }: any) => <MDXProvider components={mdxComponents}>{element}</MDXProvider>;

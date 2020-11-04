@@ -1,5 +1,3 @@
-import { GlobalTheme } from '@lumx/core/js/types';
-
 import { CSS_PREFIX } from './constants';
 
 interface ColorPalette {
@@ -344,38 +342,16 @@ function _getRadioButtonCSSRules(colorPalette: ColorPalette, color: keyof ColorP
  * @param  theme        The theme, lumapps or material.
  * @return The select css rules.
  */
-function _getSelectCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
-    let selectRules;
-
-    if (theme === 'lumapps') {
-        selectRules = [
-            {
-                selector: `
+function _getSelectCSSRules(colorPalette: ColorPalette) {
+    return [
+        {
+            selector: `
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__wrapper,
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__wrapper:focus
                 `,
-                rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
-            },
-        ];
-    } else if (theme === 'material') {
-        selectRules = [
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-focus:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__label,
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light.${CSS_PREFIX}-select--is-open:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__label
-                `,
-                rule: `color: ${colorPalette.primary.N}`,
-            },
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-select--theme-light:not(.${CSS_PREFIX}-select--has-error):not(.${CSS_PREFIX}-select--is-valid) .${CSS_PREFIX}-select__wrapper::after
-                `,
-                rule: `background-color: ${colorPalette.primary.N}`,
-            },
-        ];
-    }
-
-    return selectRules;
+            rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
+        },
+    ];
 }
 
 /**
@@ -436,99 +412,50 @@ function _getSlideshowControlsCSSRules(colorPalette: ColorPalette) {
  * @param  theme        The theme, lumapps or material.
  * @return The switch css rules.
  */
-function _getSwitchCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
-    let switchRules;
-
-    if (theme === 'lumapps') {
-        switchRules = [
-            // Default state.
-            {
-                selector: `
+function _getSwitchCSSRules(colorPalette: ColorPalette) {
+    return [
+        // Default state.
+        {
+            selector: `
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-background,
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-dark.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-indicator
                 `,
-                rule: `background-color: ${colorPalette.primary.N}`,
-            },
-            {
-                selector: `
+            rule: `background-color: ${colorPalette.primary.N}`,
+        },
+        {
+            selector: `
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-dark.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-background
                 `,
-                rule: `color: ${colorPalette.primary.N}`,
-            },
-            // Hover state.
-            {
-                selector: `
+            rule: `color: ${colorPalette.primary.N}`,
+        },
+        // Hover state.
+        {
+            selector: `
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked
                     .${CSS_PREFIX}-switch__input-native:hover
                     + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-background
                 `,
-                rule: `background-color: ${colorPalette.primary.D1}`,
-            },
-            // Active state.
-            {
-                selector: `
+            rule: `background-color: ${colorPalette.primary.D1}`,
+        },
+        // Active state.
+        {
+            selector: `
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked
                     .${CSS_PREFIX}-switch__input-native:active
                     + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-background
                 `,
-                rule: `background-color: ${colorPalette.primary.D2}`,
-            },
-            // Focus state.
-            {
-                selector: `
+            rule: `background-color: ${colorPalette.primary.D2}`,
+        },
+        // Focus state.
+        {
+            selector: `
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked
                     .${CSS_PREFIX}-switch__input-native[data-focus-visible-added]
                     + .${CSS_PREFIX}-switch__input-placeholder
                 `,
-                rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
-            },
-        ];
-    } else if (theme === 'material') {
-        switchRules = [
-            // Default state.
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--theme-light.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-background
-                `,
-                rule: `background-color: ${colorPalette.secondary.L3} !important`,
-            },
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--is-checked .${CSS_PREFIX}-switch__input-indicator
-                `,
-                rule: `background-color: ${colorPalette.secondary.N} !important`,
-            },
-            // Hover state.
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--is-checked
-                    .${CSS_PREFIX}-switch__input-native:hover
-                    + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-indicator
-                `,
-                rule: `background-color: ${colorPalette.secondary.D1} !important`,
-            },
-            // Active state.
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--is-checked
-                    .${CSS_PREFIX}-switch__input-native:active
-                    + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-indicator
-                `,
-                rule: `background-color: ${colorPalette.secondary.D2} !important`,
-            },
-            // Focus state.
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-switch--is-checked
-                    .${CSS_PREFIX}-switch__input-native[data-focus-visible-added]
-                    + .${CSS_PREFIX}-switch__input-placeholder .${CSS_PREFIX}-switch__input-indicator
-                `,
-                rule: `box-shadow: 0 0 0 2px ${colorPalette.secondary.L3}`,
-            },
-        ];
-    }
-
-    return switchRules;
+            rule: `box-shadow: 0 0 0 2px ${colorPalette.primary.L3}`,
+        },
+    ];
 }
 
 /**
@@ -538,8 +465,8 @@ function _getSwitchCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
  * @param  theme        The theme, lumapps or material.
  * @return The tabs css rules.
  */
-function _getTabsCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
-    const tabsRules = [
+function _getTabsCSSRules(colorPalette: ColorPalette) {
+    return [
         {
             selector: `
                 .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-tabs--theme-light .${CSS_PREFIX}-tabs__link--is-active::after
@@ -547,18 +474,6 @@ function _getTabsCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
             rule: `background-color: ${colorPalette.primary.N}`,
         },
     ];
-
-    if (theme === 'material') {
-        tabsRules.push({
-            selector: `
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-tabs--theme-light .${CSS_PREFIX}-tabs__link:hover,
-                .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-tabs--theme-light .${CSS_PREFIX}-tabs__link--is-active
-            `,
-            rule: `color: ${colorPalette.primary.N}`,
-        });
-    }
-
-    return tabsRules;
 }
 
 /**
@@ -568,46 +483,24 @@ function _getTabsCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
  * @param  theme        The theme, lumapps or material.
  * @return The text field css rules.
  */
-function _getTextFieldCSSRules(colorPalette: ColorPalette, theme: GlobalTheme) {
-    let textFieldRules;
-
-    if (theme === 'lumapps') {
-        textFieldRules = [
-            {
-                selector: `
+function _getTextFieldCSSRules(colorPalette: ColorPalette) {
+    return [
+        {
+            selector: `
                     .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light.${CSS_PREFIX}-text-field--is-focus:not(.${CSS_PREFIX}-text-field--has-error):not(.${CSS_PREFIX}-text-field--is-valid) .${CSS_PREFIX}-text-field__wrapper
                 `,
-                rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
-            },
-        ];
-    } else if (theme === 'material') {
-        textFieldRules = [
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light.${CSS_PREFIX}-text-field--is-focus:not(.${CSS_PREFIX}-text-field--has-error):not(.${CSS_PREFIX}-text-field--is-valid) .${CSS_PREFIX}-text-field__label
-                `,
-                rule: `color: ${colorPalette.primary.N}`,
-            },
-            {
-                selector: `
-                    .${CSS_PREFIX}-custom-colors.${CSS_PREFIX}-text-field--theme-light:not(.${CSS_PREFIX}-text-field--has-error):not(.${CSS_PREFIX}-text-field--is-valid) .${CSS_PREFIX}-text-field__wrapper::after
-                `,
-                rule: `background-color: ${colorPalette.primary.N}`,
-            },
-        ];
-    }
-
-    return textFieldRules;
+            rule: `box-shadow: inset 0 0 0 2px ${colorPalette.primary.L2}`,
+        },
+    ];
 }
 
 /**
  * Set primary and secondary custom colors.
  *
  * @param sheet        The sheet to insert the custom rules in.
- * @param theme        The theme to apply the custom color palette on.
  * @param colorPalette The custom color palette.
  */
-function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette: ColorPalette) {
+function setCustomColors(sheet: CSSStyleSheet, colorPalette: ColorPalette) {
     let index = 0;
 
     const buttonRules = [
@@ -622,11 +515,7 @@ function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette:
     });
 
     let checkboxRules;
-    if (theme === 'lumapps') {
-        checkboxRules = _getCheckboxCSSRules(colorPalette, 'primary');
-    } else if (theme === 'material') {
-        checkboxRules = _getCheckboxCSSRules(colorPalette, 'secondary');
-    }
+    checkboxRules = _getCheckboxCSSRules(colorPalette, 'primary');
 
     checkboxRules?.forEach((checkboxRule) => {
         _addCSSRule(sheet, checkboxRule.selector, checkboxRule.rule, index);
@@ -655,18 +544,14 @@ function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette:
     });
 
     let radioButtonRules;
-    if (theme === 'lumapps') {
-        radioButtonRules = _getRadioButtonCSSRules(colorPalette, 'primary');
-    } else if (theme === 'material') {
-        radioButtonRules = _getRadioButtonCSSRules(colorPalette, 'secondary');
-    }
+    radioButtonRules = _getRadioButtonCSSRules(colorPalette, 'primary');
 
     radioButtonRules?.forEach((radioButtonRule) => {
         _addCSSRule(sheet, radioButtonRule.selector, radioButtonRule.rule, index);
         index++;
     });
 
-    const selectRules = _getSelectCSSRules(colorPalette, theme);
+    const selectRules = _getSelectCSSRules(colorPalette);
 
     selectRules?.forEach((selectRule) => {
         _addCSSRule(sheet, selectRule.selector, selectRule.rule, index);
@@ -687,21 +572,21 @@ function setCustomColors(sheet: CSSStyleSheet, theme: GlobalTheme, colorPalette:
         index++;
     });
 
-    const switchRules = _getSwitchCSSRules(colorPalette, theme);
+    const switchRules = _getSwitchCSSRules(colorPalette);
 
     switchRules?.forEach((switchRule) => {
         _addCSSRule(sheet, switchRule.selector, switchRule.rule, index);
         index++;
     });
 
-    const tabsRules = _getTabsCSSRules(colorPalette, theme);
+    const tabsRules = _getTabsCSSRules(colorPalette);
 
     tabsRules.forEach((tabsRule) => {
         _addCSSRule(sheet, tabsRule.selector, tabsRule.rule, index);
         index++;
     });
 
-    const textFieldRules = _getTextFieldCSSRules(colorPalette, theme);
+    const textFieldRules = _getTextFieldCSSRules(colorPalette);
 
     textFieldRules?.forEach((textFieldRule) => {
         _addCSSRule(sheet, textFieldRule.selector, textFieldRule.rule, index);
