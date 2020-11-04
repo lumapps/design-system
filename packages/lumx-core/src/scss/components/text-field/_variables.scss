@@ -1,0 +1,5 @@
+$lumx-text-field-height: map-get($lumx-sizes, lumx-base-const('size', 'M'));
+$lumx-text-field-horizontal-padding: $lumx-spacing-unit * 1.5;
+$lumx-text-field-vertical-padding: $lumx-spacing-unit * 1.5;
+$lumx-text-field-transition-duration: 100ms;
+$lumx-text-field-min-width: 100px;

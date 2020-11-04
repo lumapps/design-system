@@ -1,0 +1,23 @@
+@mixin lumx-link-base() {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    background: none;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+
+    &:hover,
+    &[data-focus-visible-added] {
+        text-decoration: underline;
+    }
+}
+
+@mixin lumx-link-color($color, $variant) {
+    color: lumx-color-variant($color, $variant);
+}
+
+@mixin lumx-link($color: 'primary', $variant: 'N') {
+    @include lumx-link-base;
+    @include lumx-link-color($color, $variant);
+}
