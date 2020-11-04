@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Tue, 02 Jun 2020 10:24:31 GMT
+ * Generated on Wed, 04 Nov 2020 08:02:09 GMT
  */
 
 export const CORE = {
@@ -8,7 +8,6 @@ export const CORE = {
         dark: {
             N: {
                 version: '0.22',
-                comment: 'Neutral dark color',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -24,7 +23,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Base dark color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -40,7 +38,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Base dark color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -56,7 +53,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Base dark color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -72,7 +68,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Base dark color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -88,7 +83,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Base dark color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -104,7 +98,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Base dark color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'dark',
@@ -122,7 +115,6 @@ export const CORE = {
         light: {
             N: {
                 version: '0.22',
-                comment: 'Neutral light color',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -138,7 +130,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Light color with 90% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -154,7 +145,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Light color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -170,7 +160,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Light color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -186,7 +175,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Light color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -202,7 +190,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Light color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -218,7 +205,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Light color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'light',
@@ -236,7 +222,6 @@ export const CORE = {
         blue: {
             D2: {
                 version: '0.22',
-                comment: 'Darkest blue color',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -252,7 +237,6 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
-                comment: 'Dark blue color',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -268,7 +252,6 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
-                comment: 'Neutral blue color',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -284,7 +267,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Base blue color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -300,7 +282,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Base blue color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -316,7 +297,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Base blue color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -332,7 +312,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Base blue color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -348,7 +327,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Base blue color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -364,7 +342,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Base blue color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'blue',
@@ -379,10 +356,146 @@ export const CORE = {
                 },
             },
         },
+        green: {
+            D2: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'D2',
+                    hex: '388e3c',
+                    rgb: {
+                        r: 56,
+                        g: 142,
+                        b: 60,
+                        a: 1,
+                    },
+                },
+            },
+            D1: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'D1',
+                    hex: '43a047',
+                    rgb: {
+                        r: 67,
+                        g: 160,
+                        b: 71,
+                        a: 1,
+                    },
+                },
+            },
+            N: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'N',
+                    hex: '4caf50',
+                    rgb: {
+                        r: 76,
+                        g: 175,
+                        b: 80,
+                        a: 1,
+                    },
+                },
+            },
+            L1: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'L1',
+                    hex: '4caf50',
+                    rgb: {
+                        r: 76,
+                        g: 175,
+                        b: 80,
+                        a: 0.8,
+                    },
+                },
+            },
+            L2: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'L2',
+                    hex: '4caf50',
+                    rgb: {
+                        r: 76,
+                        g: 175,
+                        b: 80,
+                        a: 0.6,
+                    },
+                },
+            },
+            L3: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'L3',
+                    hex: '4caf50',
+                    rgb: {
+                        r: 76,
+                        g: 175,
+                        b: 80,
+                        a: 0.4,
+                    },
+                },
+            },
+            L4: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'L4',
+                    hex: '4caf50',
+                    rgb: {
+                        r: 76,
+                        g: 175,
+                        b: 80,
+                        a: 0.2,
+                    },
+                },
+            },
+            L5: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'L5',
+                    hex: '4caf50',
+                    rgb: {
+                        r: 76,
+                        g: 175,
+                        b: 80,
+                        a: 0.1,
+                    },
+                },
+            },
+            L6: {
+                version: '0.22',
+                attributes: {
+                    category: 'color',
+                    type: 'green',
+                    item: 'L6',
+                    hex: '4caf50',
+                    rgb: {
+                        r: 76,
+                        g: 175,
+                        b: 80,
+                        a: 0.05,
+                    },
+                },
+            },
+        },
         yellow: {
             D2: {
                 version: '0.22',
-                comment: 'Darkest yellow color',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -398,7 +511,6 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
-                comment: 'Dark yellow color',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -414,7 +526,6 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
-                comment: 'Neutral yellow color',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -430,7 +541,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Yellow color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -446,7 +556,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Yellow color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -462,7 +571,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Yellow color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -478,7 +586,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Yellow color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -494,7 +601,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Yellow color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -510,7 +616,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Yellow color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'yellow',
@@ -528,7 +633,6 @@ export const CORE = {
         red: {
             D2: {
                 version: '0.22',
-                comment: 'Darkest red color',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -544,7 +648,6 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
-                comment: 'Dark red color',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -560,7 +663,6 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
-                comment: 'Neutral red color',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -576,7 +678,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Red color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -592,7 +693,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Red color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -608,7 +708,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Red color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -624,7 +723,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Red color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -640,7 +738,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Red color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -656,7 +753,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Red color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'red',
@@ -671,147 +767,108 @@ export const CORE = {
                 },
             },
         },
-        green: {
-            D2: {
-                version: '0.22',
-                comment: 'Darkest green color',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'D2',
-                    hex: '388e3c',
-                    rgb: {
-                        r: 56,
-                        g: 142,
-                        b: 60,
-                        a: 1,
-                    },
-                },
-            },
-            D1: {
-                version: '0.22',
-                comment: 'Dark green color',
-                attributes: {
-                    category: 'color',
-                    type: 'green',
-                    item: 'D1',
-                    hex: '43a047',
-                    rgb: {
-                        r: 67,
-                        g: 160,
-                        b: 71,
-                        a: 1,
-                    },
-                },
-            },
+        grey: {
             N: {
                 version: '0.22',
-                comment: 'Neutral green color',
                 attributes: {
                     category: 'color',
-                    type: 'green',
+                    type: 'grey',
                     item: 'N',
-                    hex: '4caf50',
+                    hex: '757575',
                     rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
+                        r: 117,
+                        g: 117,
+                        b: 117,
                         a: 1,
                     },
                 },
             },
             L1: {
                 version: '0.22',
-                comment: 'Green color with 80% opacity',
                 attributes: {
                     category: 'color',
-                    type: 'green',
+                    type: 'grey',
                     item: 'L1',
-                    hex: '4caf50',
+                    hex: '757575',
                     rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
+                        r: 117,
+                        g: 117,
+                        b: 117,
                         a: 0.8,
                     },
                 },
             },
             L2: {
                 version: '0.22',
-                comment: 'Green color with 60% opacity',
                 attributes: {
                     category: 'color',
-                    type: 'green',
+                    type: 'grey',
                     item: 'L2',
-                    hex: '4caf50',
+                    hex: '757575',
                     rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
+                        r: 117,
+                        g: 117,
+                        b: 117,
                         a: 0.6,
                     },
                 },
             },
             L3: {
                 version: '0.22',
-                comment: 'Green color with 40% opacity',
                 attributes: {
                     category: 'color',
-                    type: 'green',
+                    type: 'grey',
                     item: 'L3',
-                    hex: '4caf50',
+                    hex: '757575',
                     rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
+                        r: 117,
+                        g: 117,
+                        b: 117,
                         a: 0.4,
                     },
                 },
             },
             L4: {
                 version: '0.22',
-                comment: 'Green color with 20% opacity',
                 attributes: {
                     category: 'color',
-                    type: 'green',
+                    type: 'grey',
                     item: 'L4',
-                    hex: '4caf50',
+                    hex: '757575',
                     rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
+                        r: 117,
+                        g: 117,
+                        b: 117,
                         a: 0.2,
                     },
                 },
             },
             L5: {
                 version: '0.22',
-                comment: 'Green color with 10% opacity',
                 attributes: {
                     category: 'color',
-                    type: 'green',
+                    type: 'grey',
                     item: 'L5',
-                    hex: '4caf50',
+                    hex: '757575',
                     rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
+                        r: 117,
+                        g: 117,
+                        b: 117,
                         a: 0.1,
                     },
                 },
             },
             L6: {
                 version: '0.22',
-                comment: 'Green color with 5% opacity',
                 attributes: {
                     category: 'color',
-                    type: 'green',
+                    type: 'grey',
                     item: 'L6',
-                    hex: '4caf50',
+                    hex: '757575',
                     rgb: {
-                        r: 76,
-                        g: 175,
-                        b: 80,
+                        r: 117,
+                        g: 117,
+                        b: 117,
                         a: 0.05,
                     },
                 },
@@ -820,7 +877,6 @@ export const CORE = {
         primary: {
             D2: {
                 version: '0.22',
-                comment: 'Darkest blue color',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -836,7 +892,6 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
-                comment: 'Dark blue color',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -852,7 +907,6 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
-                comment: 'Neutral blue color',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -868,7 +922,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Base blue color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -884,7 +937,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Base blue color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -900,7 +952,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Base blue color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -916,7 +967,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Base blue color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -932,7 +982,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Base blue color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -948,7 +997,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Base blue color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'primary',
@@ -966,7 +1014,6 @@ export const CORE = {
         secondary: {
             D2: {
                 version: '0.22',
-                comment: 'Darkest green color',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -982,7 +1029,6 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
-                comment: 'Dark green color',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -998,7 +1044,6 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
-                comment: 'Neutral green color',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1014,7 +1059,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Green color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1030,7 +1074,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Green color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1046,7 +1089,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Green color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1062,7 +1104,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Green color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1078,7 +1119,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Green color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1094,7 +1134,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Green color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'secondary',
@@ -1104,106 +1143,6 @@ export const CORE = {
                         r: 76,
                         g: 175,
                         b: 80,
-                        a: 0.05,
-                    },
-                },
-            },
-        },
-        grey: {
-            N: {
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'N',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 1,
-                    },
-                },
-            },
-            L1: {
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L1',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 0.8,
-                    },
-                },
-            },
-            L2: {
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L2',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 0.6,
-                    },
-                },
-            },
-            L3: {
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L3',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 0.4,
-                    },
-                },
-            },
-            L4: {
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L4',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 0.2,
-                    },
-                },
-            },
-            L5: {
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L5',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
-                        a: 0.1,
-                    },
-                },
-            },
-            L6: {
-                attributes: {
-                    category: 'color',
-                    type: 'grey',
-                    item: 'L6',
-                    hex: '757575',
-                    rgb: {
-                        r: 117,
-                        g: 117,
-                        b: 117,
                         a: 0.05,
                     },
                 },
@@ -1212,7 +1151,6 @@ export const CORE = {
         accent: {
             D2: {
                 version: '0.22',
-                comment: 'Darkest green color',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1228,7 +1166,6 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
-                comment: 'Dark green color',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1244,7 +1181,6 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
-                comment: 'Neutral green color',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1260,7 +1196,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Green color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1276,7 +1211,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Green color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1292,7 +1226,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Green color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1308,7 +1241,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Green color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1324,7 +1256,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Green color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1340,7 +1271,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Green color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'accent',
@@ -1358,7 +1288,6 @@ export const CORE = {
         black: {
             N: {
                 version: '0.22',
-                comment: 'Neutral dark color',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1374,7 +1303,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Base dark color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1390,7 +1318,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Base dark color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1406,7 +1333,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Base dark color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1422,7 +1348,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Base dark color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1438,7 +1363,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Base dark color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1454,7 +1378,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Base dark color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'black',
@@ -1472,7 +1395,6 @@ export const CORE = {
         white: {
             N: {
                 version: '0.22',
-                comment: 'Neutral light color',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1488,7 +1410,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Light color with 90% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1504,7 +1425,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Light color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1520,7 +1440,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Light color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1536,7 +1455,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Light color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1552,7 +1470,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Light color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1568,7 +1485,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Light color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'white',
@@ -1586,7 +1502,6 @@ export const CORE = {
         orange: {
             D2: {
                 version: '0.22',
-                comment: 'Darkest yellow color',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1602,7 +1517,6 @@ export const CORE = {
             },
             D1: {
                 version: '0.22',
-                comment: 'Dark yellow color',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1618,7 +1532,6 @@ export const CORE = {
             },
             N: {
                 version: '0.22',
-                comment: 'Neutral yellow color',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1634,7 +1547,6 @@ export const CORE = {
             },
             L1: {
                 version: '0.22',
-                comment: 'Yellow color with 80% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1650,7 +1562,6 @@ export const CORE = {
             },
             L2: {
                 version: '0.22',
-                comment: 'Yellow color with 60% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1666,7 +1577,6 @@ export const CORE = {
             },
             L3: {
                 version: '0.22',
-                comment: 'Yellow color with 40% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1682,7 +1592,6 @@ export const CORE = {
             },
             L4: {
                 version: '0.22',
-                comment: 'Yellow color with 20% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1698,7 +1607,6 @@ export const CORE = {
             },
             L5: {
                 version: '0.22',
-                comment: 'Yellow color with 10% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
@@ -1714,7 +1622,6 @@ export const CORE = {
             },
             L6: {
                 version: '0.22',
-                comment: 'Yellow color with 5% opacity',
                 attributes: {
                     category: 'color',
                     type: 'orange',
