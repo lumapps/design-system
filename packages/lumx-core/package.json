@@ -37,8 +37,8 @@
         "generate:design-tokens": "yarn node style-dictionary",
         "build": "webpack",
         "postbuild": "rm -rf ./dist/*.js ./dist/*.js.map",
-        "postinstall": "install-peers",
         "postversion": "version-changelog ../../CHANGELOG.md && git add ../../CHANGELOG.md && git commit --amend",
+        "prepare": "install-peers",
         "prepublishOnly": "yarn build"
     },
     "sideEffects": false,
