@@ -1,0 +1,6 @@
+$lumx-tooltip-arrow-size: 5px;
+$lumx-tooltip-background-color: lumx-color-variant('light', 'N');
+$lumx-tooltip-color: lumx-color-variant('dark', 'N');
+$lumx-tooltip-elevation: 3;
+$lumx-tooltip-font-size: map-get($lumx-typography-font-size, 'caption');
+$lumx-tooltip-line-height: map-get($lumx-typography-line-height, 'caption');
