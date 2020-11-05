@@ -6,8 +6,8 @@
         "url": "https://github.com/lumapps/design-system/issues"
     },
     "dependencies": {
-        "@lumx/core": "^0.26.2",
-        "@lumx/icons": "^0.26.2",
+        "@lumx/core": "^0.27.0",
+        "@lumx/icons": "^0.27.0",
         "@popperjs/core": "^2.4.0",
         "body-scroll-lock": "^2.6.4",
         "classnames": "^2.2.6",
@@ -118,11 +118,11 @@
     "scripts": {
         "build": "webpack",
         "postbuild": "dts-bundle-generator --no-check --external-types=react --external-imports=moment -o dist/lumx.react.d.ts src/index.ts",
-        "postinstall": "install-peers",
+        "prepare": "install-peers",
         "prepublishOnly": "yarn build",
         "test": "jest --config jest/index.js --coverage --notify --passWithNoTests --detectOpenHandles --runInBand",
         "storybook": "start-storybook -p 9000"
     },
     "sideEffects": false,
-    "version": "0.26.2"
+    "version": "0.27.0"
 }

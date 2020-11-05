@@ -102,6 +102,7 @@
         "lint:js": "eslint packages/*/src/**/*.{js,jsx}",
         "lint:ts": "tslint --project tsconfig.json packages/**/*.{ts,tsx}",
         "postinstall": "lerna bootstrap",
+        "prepare": "lerna run --stream prepare",
         "preversion": "git symbolic-ref --short -q HEAD | egrep -q '^master$' && echo 'ERROR: You can not release from the master branch.' && exit 1 || true",
         "release": "yarn lerna publish --force-publish",
         "scaffold": "yo ./packages/yo-generators --with-tests --with-demo",

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.27.0][] - 2020-11-05
+
 ### Changed
 
 -   _[BREAKING]_ `react`, `react-dom`, `moment` and `moment-range` are now exclusively defined as `peerDependencies`. You must install them separately from `@lumx` packages.
@@ -781,3 +783,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.26.1]: https://github.com/lumapps/design-system/tree/v0.26.1
 [unreleased]: https://github.com/lumapps/design-system/compare/v0.26.2...HEAD
 [0.26.2]: https://github.com/lumapps/design-system/tree/v0.26.2
+[unreleased]: https://github.com/lumapps/design-system/compare/v0.27.0...HEAD
+[0.27.0]: https://github.com/lumapps/design-system/tree/v0.27.0
