@@ -116,8 +116,7 @@ const cssLoaders = [
 
 module.exports = {
     entry: {
-        'lumx-theme-lumapps': `${SRC_PATH}/scss/lumx-theme-lumapps.scss`,
-        'lumx-theme-material': `${SRC_PATH}/scss/lumx-theme-material.scss`,
+        lumx: `${SRC_PATH}/scss/lumx.scss`,
 
         // Compile all JS/TS files.
         ...Object.fromEntries(

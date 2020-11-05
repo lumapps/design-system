@@ -339,7 +339,6 @@ function _getRadioButtonCSSRules(colorPalette: ColorPalette, color: keyof ColorP
  * Get select css rules impacted by primary color.
  *
  * @param  colorPalette The custom color palette.
- * @param  theme        The theme, lumapps or material.
  * @return The select css rules.
  */
 function _getSelectCSSRules(colorPalette: ColorPalette) {
@@ -409,7 +408,6 @@ function _getSlideshowControlsCSSRules(colorPalette: ColorPalette) {
  * Get switch css rules impacted by primary or secondary colors.
  *
  * @param  colorPalette The custom color palette.
- * @param  theme        The theme, lumapps or material.
  * @return The switch css rules.
  */
 function _getSwitchCSSRules(colorPalette: ColorPalette) {
@@ -462,7 +460,6 @@ function _getSwitchCSSRules(colorPalette: ColorPalette) {
  * Get tabs css rules impacted by primary or secondary colors.
  *
  * @param  colorPalette The custom color palette.
- * @param  theme        The theme, lumapps or material.
  * @return The tabs css rules.
  */
 function _getTabsCSSRules(colorPalette: ColorPalette) {
@@ -480,7 +477,6 @@ function _getTabsCSSRules(colorPalette: ColorPalette) {
  * Get text field css rules impacted by primary color.
  *
  * @param  colorPalette The custom color palette.
- * @param  theme        The theme, lumapps or material.
  * @return The text field css rules.
  */
 function _getTextFieldCSSRules(colorPalette: ColorPalette) {
