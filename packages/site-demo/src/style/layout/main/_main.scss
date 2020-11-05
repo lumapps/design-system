@@ -7,17 +7,25 @@
     margin-left: $main-nav-width;
 
     &__wrapper {
+        position: relative;
         width: 800px;
         margin: 0 auto;
     }
+}
+
+/* Main header
+   ========================================================================== */
+
+.main-header {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 /* Main content
    ========================================================================== */
 
 .main-content {
-    margin-top: $lumx-spacing-unit * 6;
-
     &__loading {
         display: flex;
         width: 100%;
