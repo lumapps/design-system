@@ -42,7 +42,7 @@
         "prepublishOnly": "yarn build"
     },
     "sideEffects": false,
-    "version": "0.26.2",
+    "version": "0.27.0",
     "devDependencies": {
         "@babel/core": "^7.8.3",
         "@babel/plugin-proposal-class-properties": "^7.8.3",
