@@ -1,0 +1,35 @@
+import { Alignment, FlexBox, Orientation, Size } from '@lumx/react';
+
+# Sizes
+
+**Sizes are names given to steps of dimension scales. They help design with visual consistency and give imaged names to easily refer to.**
+
+There are two scales, **T-shirt** scale, and **Abstract** scale.
+
+## T-shirt
+
+T-shirt sizes correspond to standardised values accross all the design system. T-shirt sizes go from `xxs` to `xxl`. Use t-shirt sizes to define precise and unvariable dimensions to elements. An element doesn’t have to exist in each of every sizes.
+
+<FlexBox gap={Size.big} orientation={Orientation.horizontal} hAlign="center" vAlign="center">
+        <FlexBox hAlign={Alignment.center} vAlign={Alignment.center}
+    className="lumx-color-background-dark-L6 lumx-color-font-dark-L3" style={{fontSize: "10px", width: "14px", height: "14px"}}>xxs</FlexBox>
+    <FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L6 lumx-color-font-dark-L3" style={{width: "20px", height: "20px"}}>xs</FlexBox>
+    <FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L6 lumx-color-font-dark-L3" style={{width: "24px", height: "24px"}}>s</FlexBox>
+    <FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L6 lumx-color-font-dark-L3" style={{width: "36px", height: "36px"}}>m</FlexBox>
+    <FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L6 lumx-color-font-dark-L3" style={{width: "64px", height: "64px"}}>l</FlexBox>
+    <FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L6 lumx-color-font-dark-L3" style={{width: "128px", height: "128px"}}>xl</FlexBox>
+    <FlexBox hAlign={Alignment.center} vAlign={Alignment.center} className="lumx-color-background-dark-L6 lumx-color-font-dark-L3" style={{width: "256px", height: "256px"}}>xxl</FlexBox>
+</FlexBox>
+
+### Example of user block in T-shirt size `m`
+
+<DemoBlock orientation="horizontal" demo="t-shirt-example" />
+
+## Abstract
+
+Abstract sizes don’t correspond to standardised values across the design system, they represent specific dimensions at a component level. They can be values like 400px or a specific behavior like full-screen with margins (see [Dialog](/product/components/dialog)). Abstract sizes are: `tiny`, `regular`, `big`, `huge`. Use Abstract sizes to define elements dimensions that don’t need to or can’t be standardised. An element doesn’t have to exist in each of every sizes.
+
+
+Example of a `big` [list](/product/components/list) component and a `big` [link-preview](/product/components/link-preview)
+
+<DemoBlock orientation="horizontal" demo="abstract-example" />
