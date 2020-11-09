@@ -82,6 +82,21 @@ enum Emphasis {
 }
 
 /**
+ * List of typographies.
+ */
+enum Typography {
+    overline = 'overline',
+    caption = 'caption',
+    body1 = 'body1',
+    body2 = 'body2',
+    subtitle1 = 'subtitle1',
+    subtitle2 = 'subtitle2',
+    title = 'title',
+    headline = 'headline',
+    display1 = 'display1',
+}
+
+/**
  * All available aspect ratios.
  */
 enum AspectRatio {
@@ -114,4 +129,5 @@ export {
     Orientation,
     Emphasis,
     Kind,
+    Typography,
 };

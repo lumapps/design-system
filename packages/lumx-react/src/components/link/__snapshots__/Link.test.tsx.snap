@@ -1,13 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Link> Snapshots and structure should render a button if href attribute is missing 1`] = `
+<button
+  className="lumx-link"
+/>
+`;
+
 exports[`<Link> Snapshots and structure should render color & color variant 1`] = `
 <a
   className="lumx-link lumx-link--color-primary lumx-link--color-variant-D1"
+  href="https://google.com"
 />
 `;
 
 exports[`<Link> Snapshots and structure should render correctly 1`] = `
 <a
   className="lumx-link"
+  href="https://google.com"
+/>
+`;
+
+exports[`<Link> Snapshots and structure should render typography 1`] = `
+<a
+  className="lumx-link lumx-typography-title"
+  href="https://google.com"
 />
 `;

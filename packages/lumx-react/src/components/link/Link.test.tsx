@@ -3,7 +3,7 @@ import React, { ReactElement, createRef } from 'react';
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 
-import { ColorPalette, ColorVariant } from '@lumx/react';
+import { ColorPalette, ColorVariant, Typography } from '@lumx/react';
 import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 import { CLASSNAME, Link, LinkProps } from './Link';
 
@@ -46,12 +46,22 @@ describe(`<${Link.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render correctly', () => {
-            const { wrapper } = setup();
+            const { wrapper } = setup({ href: 'https://google.com' });
             expect(wrapper).toMatchSnapshot();
         });
 
         it('should render color & color variant', () => {
-            const { wrapper } = setup({ color: ColorPalette.primary, colorVariant: ColorVariant.D1 });
+            const { wrapper } = setup({ href: 'https://google.com', color: ColorPalette.primary, colorVariant: ColorVariant.D1 });
+            expect(wrapper).toMatchSnapshot();
+        });
+
+        it('should render typography', () => {
+            const { wrapper } = setup({ href: 'https://google.com', typography: Typography.title });
+            expect(wrapper).toMatchSnapshot();
+        });
+
+        it('should render a button if href attribute is missing', () => {
+            const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
         });
     });
