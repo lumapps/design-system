@@ -1,31 +1,20 @@
-import { Tab, Tabs, TabsLayout, Theme } from '@lumx/react';
+import { Tab, TabList, TabListLayout, TabPanel, TabProvider } from '@lumx/react';
 import React, { useState } from 'react';
 
 export const App = ({ theme }: any) => {
     const [activeTab, setActiveTab] = useState(0);
-    const handleTabClick = ({ index }: any) => {
-        setActiveTab(index);
-    };
 
     return (
-        <Tabs
-            className={theme === Theme.dark && 'lumx-color-font-light-N'}
-            theme={theme}
-            activeTab={activeTab}
-            onTabClick={handleTabClick}
-            layout={TabsLayout.clustered}
-        >
-            <Tab label="Tab 1">
-                <p className="lumx-spacing-padding-vertical-huge">Tab 1 content</p>
-            </Tab>
+        <TabProvider activeTabIndex={activeTab} onChange={setActiveTab}>
+            <TabList theme={theme} layout={TabListLayout.clustered} aria-label="Tab list">
+                <Tab label="Tab 1" />
+                <Tab label="Tab 2" />
+                <Tab label="Tab 3" />
+            </TabList>
 
-            <Tab label="Tab 2">
-                <p className="lumx-spacing-padding-vertical-huge">Tab 2 content</p>
-            </Tab>
-
-            <Tab label="Tab 3">
-                <p className="lumx-spacing-padding-vertical-huge">Tab 3 content</p>
-            </Tab>
-        </Tabs>
+            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 1 content</TabPanel>
+            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 2 content</TabPanel>
+            <TabPanel className="lumx-spacing-padding-vertical-huge">Tab 3 content</TabPanel>
+        </TabProvider>
     );
 };
