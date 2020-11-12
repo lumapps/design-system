@@ -11,7 +11,9 @@ import { CLASSNAME, TabList, TabListLayout, TabListPosition, TabListProps } from
 import { setupTabProviderMocks } from './test.mocks';
 
 // Mock useTabProviderContext.
-jest.mock('./state', () => ({ useTabProviderContext: jest.fn() }));
+jest.mock('./state', () => {
+    return { useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
+});
 
 /**
  * Define the overriding properties waited by the `setup` function.

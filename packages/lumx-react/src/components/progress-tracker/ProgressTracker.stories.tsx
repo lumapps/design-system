@@ -1,57 +1,136 @@
-import { ProgressTracker, ProgressTrackerStep } from '@lumx/react';
-import { text } from '@storybook/addon-knobs';
-import noop from 'lodash/noop';
-import React from 'react';
+import {
+    Button,
+    ColorPalette,
+    FlexBox,
+    Orientation,
+    ProgressTracker,
+    ProgressTrackerProvider,
+    ProgressTrackerStep,
+    ProgressTrackerStepPanel,
+} from '@lumx/react';
+import cloneDeep from 'lodash/cloneDeep';
+import set from 'lodash/set';
+import React, { useState } from 'react';
 
 export default { title: 'LumX components/progress-tracker/Progress Tracker' };
 
-export const simpleSteps = ({ theme }: any) => (
-    <ProgressTracker theme={theme}>
-        <ProgressTrackerStep theme={theme} onClick={noop} label={text('label', 'First step')} />
-        <ProgressTrackerStep theme={theme} onClick={noop} label={`Second Step`} />
-        <ProgressTrackerStep theme={theme} onClick={noop} label={`Third Step`} />
-    </ProgressTracker>
-);
+export const Controlled = () => {
+    const [activeStep, setActiveStep] = useState(1);
 
-export const stepsWithHelper = ({ theme }: any) => (
-    <ProgressTracker activeStep={1} theme={theme}>
-        <ProgressTrackerStep
-            theme={theme}
-            onClick={noop}
-            label={text('label', 'First step')}
-            helper={text('helper', 'your data')}
-            isComplete
-        />
-        <ProgressTrackerStep theme={theme} onClick={noop} label="Second Step" helper="payment" />
-        <ProgressTrackerStep theme={theme} onClick={noop} label="Third Step" />
-    </ProgressTracker>
-);
+    const [steps, setSteps] = useState([
+        {
+            label: 'First',
+            isDisabled: false,
+            isComplete: true,
+            hasError: false,
+        },
+        {
+            label: 'Second',
+            isDisabled: false,
+            isComplete: false,
+            hasError: false,
+        },
+        {
+            label: 'Third',
+            isDisabled: true,
+            isComplete: false,
+            hasError: false,
+        },
+        {
+            label: 'Fourth',
+            isDisabled: true,
+            isComplete: false,
+            hasError: false,
+        },
+        {
+            label: 'Fifth',
+            helper: 'Almost done',
+            isDisabled: true,
+            isComplete: false,
+            hasError: false,
+        },
+    ]);
 
-export const stepsWithError = ({ theme }: any) => (
-    <ProgressTracker activeStep={1} theme={theme}>
-        <ProgressTrackerStep theme={theme} onClick={noop} label="First Step" helper="your data" isComplete />
-        <ProgressTrackerStep
-            theme={theme}
-            onClick={noop}
-            label={text('label', 'Second step with error')}
-            helper={text('helper', 'Second step helper')}
-            hasError
-        />
-        <ProgressTrackerStep theme={theme} onClick={noop} label="Third Step" />
-    </ProgressTracker>
-);
+    const toggleError = (index: number) => () => {
+        const clonedSteps = cloneDeep(steps);
+        set(clonedSteps, [index, 'hasError'], !steps[index].hasError);
+        set(clonedSteps, [index, 'isComplete'], false);
+        setSteps(clonedSteps);
+    };
 
-export const stepsCompletedWithError = ({ theme }: any) => (
-    <ProgressTracker activeStep={2} theme={theme}>
-        <ProgressTrackerStep theme={theme} onClick={noop} label="First Step" helper="your data" isComplete />
-        <ProgressTrackerStep
-            theme={theme}
-            onClick={noop}
-            label={text('label', 'Second step with error')}
-            helper={text('helper', 'Second step helper')}
-            hasError
-            isComplete
-        />
-        <ProgressTrackerStep theme={theme} onClick={noop} label="Third Step" />
-    </ProgressTracker>
-);
+    const previous = (index: number) => () => setActiveStep(index - 1);
+
+    const next = (index: number) => () => {
+        const isLast = index === steps.length - 1;
+        const clonedSteps = cloneDeep(steps);
+        set(clonedSteps, [index, 'isComplete'], true);
+        set(clonedSteps, [index, 'hasError'], false);
+        if (!isLast) {
+            set(clonedSteps, [index + 1, 'isDisabled'], false);
+            setActiveStep(index + 1);
+        }
+        setSteps(clonedSteps);
+    };
+
+    return (
+        <ProgressTrackerProvider activeStepIndex={activeStep} onChange={setActiveStep}>
+            <ProgressTracker aria-label="Steps with a linear progression">
+                {steps.map((step) => (
+                    <ProgressTrackerStep key={step.label} {...step} />
+                ))}
+            </ProgressTracker>
+            {steps.map((step, index) => (
+                <ProgressTrackerStepPanel key={`${step.label}-panel`}>
+                    <FlexBox orientation={Orientation.horizontal}>
+                        <FlexBox fillSpace />
+                        <FlexBox
+                            orientation={Orientation.vertical}
+                            style={{ width: '700px' }}
+                            className="lumx-spacing-margin-top-huge"
+                        >
+                            <p style={{ textAlign: 'justify' }}>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam semper aliquet purus, a
+                                viverra odio pharetra vitae. Morbi condimentum et dui luctus tristique. Etiam turpis
+                                turpis, tristique eu lobortis vel, vulputate at mi. Ut commodo metus non fringilla
+                                semper. Aenean eu dignissim ante. Cras libero ligula, luctus quis mauris eget,
+                                vestibulum mattis ante. Donec elementum mi nisl, quis dictum lorem scelerisque sit amet.
+                                Nullam blandit tellus et tortor ornare efficitur. Vivamus blandit mauris in elementum
+                                lobortis. Nam molestie aliquet vehicula. Maecenas lacinia sodales nunc. Nam orci nisl,
+                                pellentesque sed hendrerit eget, tincidunt id lacus. Donec malesuada ex elit, eget
+                                sagittis nisl aliquam vitae. Aliquam efficitur tellus non enim efficitur suscipit a sit
+                                amet eros. Donec non lorem ullamcorper, varius ligula vitae, efficitur risus. Cras
+                                porttitor libero justo, nec porta enim eleifend vel.
+                            </p>
+                            <FlexBox orientation={Orientation.horizontal} className="lumx-spacing-margin-top-huge">
+                                <FlexBox fillSpace>
+                                    {index === 0 ? (
+                                        undefined
+                                    ) : (
+                                        <Button onClick={previous(index)} color={ColorPalette.secondary}>
+                                            Previous
+                                        </Button>
+                                    )}
+                                </FlexBox>
+                                <Button
+                                    onClick={toggleError(index)}
+                                    color={ColorPalette.red}
+                                    className="lumx-spacing-margin-right-regular"
+                                >
+                                    Toggle error
+                                </Button>
+                                {index === steps.length - 1 && step.isComplete ? (
+                                    undefined
+                                ) : (
+                                    <Button onClick={next(index)} color={ColorPalette.primary}>
+                                        {index === steps.length - 1 ? 'Complete' : 'Next with success'}
+                                    </Button>
+                                )}
+                            </FlexBox>
+                        </FlexBox>
+                        <FlexBox fillSpace />
+                    </FlexBox>
+                </ProgressTrackerStepPanel>
+            ))}
+        </ProgressTrackerProvider>
+    );
+};

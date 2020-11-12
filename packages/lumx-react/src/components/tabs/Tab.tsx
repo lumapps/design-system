@@ -62,23 +62,23 @@ const Tab: React.FC<TabProps> = (props) => {
         ...forwardedProps
     } = props;
     const state = useTabProviderContext('tab', id);
-    const isActive = propIsActive || state.isActive;
+    const isActive = propIsActive || state?.isActive;
 
     const changeToCurrentTab = useCallback(() => {
         if (isDisabled) {
             return;
         }
-        state.changeToTab();
-    }, [isDisabled, state.changeToTab]);
+        state?.changeToTab();
+    }, [isDisabled, state?.changeToTab]);
 
     const handleFocus: FocusEventHandler = useCallback(
         (event) => {
             onFocus?.(event);
-            if (state.shouldActivateOnFocus) {
+            if (state?.shouldActivateOnFocus) {
                 changeToCurrentTab();
             }
         },
-        [onFocus, state.shouldActivateOnFocus],
+        [onFocus, state?.shouldActivateOnFocus],
     );
 
     const handleKeyPress: KeyboardEventHandler = useCallback(
@@ -96,7 +96,7 @@ const Tab: React.FC<TabProps> = (props) => {
     return (
         <button
             {...forwardedProps}
-            id={state.tabId}
+            id={state?.tabId}
             className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, isActive, isDisabled }))}
             onClick={changeToCurrentTab}
             onKeyPress={handleKeyPress}
@@ -105,7 +105,7 @@ const Tab: React.FC<TabProps> = (props) => {
             tabIndex={isActive ? 0 : tabIndex}
             aria-disabled={isDisabled}
             aria-selected={isActive}
-            aria-controls={state.tabPanelId}
+            aria-controls={state?.tabPanelId}
         >
             {icon && <Icon icon={icon} size={Size.xs} />}
             {label && <span>{label}</span>}

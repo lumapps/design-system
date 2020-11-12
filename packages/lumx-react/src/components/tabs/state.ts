@@ -48,10 +48,10 @@ export type TabState = Pick<Required<State>, 'isLazy' | 'shouldActivateOnFocus'>
     changeToTab(): void;
 };
 
-export const useTabProviderContext = (type: TabType, originalId?: string): TabState => {
+export const useTabProviderContext = (type: TabType, originalId?: string): undefined | TabState => {
     const context = useContext(TabProviderContext);
     if (!context) {
-        throw new Error('No TabProvider context found.\nPlease wrap Tab and TabPanel components in a TabProvider.');
+        return undefined;
     }
     const [state, dispatch] = context;
 
@@ -76,4 +76,9 @@ export const useTabProviderContext = (type: TabType, originalId?: string): TabSt
         isActive,
         changeToTab,
     };
+};
+
+export const useTabProviderContextState = (): State | undefined => {
+    const context = useContext(TabProviderContext);
+    return context?.[0];
 };

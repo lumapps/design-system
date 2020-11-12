@@ -78,6 +78,16 @@ export { ProgressTracker, ProgressTrackerProps } from './components/progress-tra
 
 export { ProgressTrackerStep, ProgressTrackerStepProps } from './components/progress-tracker/ProgressTrackerStep';
 
+export {
+    ProgressTrackerStepPanel,
+    ProgressTrackerStepPanelProps,
+} from './components/progress-tracker/ProgressTrackerStepPanel';
+
+export {
+    ProgressTrackerProvider,
+    ProgressTrackerProviderProps,
+} from './components/progress-tracker/ProgressTrackerProvider';
+
 export { RadioButton, RadioButtonProps } from './components/radio-button/RadioButton';
 
 export { RadioGroup, RadioGroupProps } from './components/radio-button/RadioGroup';

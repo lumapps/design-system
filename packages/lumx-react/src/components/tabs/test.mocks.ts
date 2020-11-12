@@ -1,8 +1,4 @@
-import { TabState, useTabProviderContext } from './state';
-
-jest.mock('./state', () => {
-    return { useTabProviderContext: jest.fn() };
-});
+import { TabState, useTabProviderContext, useTabProviderContextState } from './state';
 
 export function setupTabProviderMocks(options: any = {}) {
     const changeToTab = jest.fn();
@@ -23,5 +19,15 @@ export function setupTabProviderMocks(options: any = {}) {
         },
     );
     (useTabProviderContext as jest.Mock).mockImplementationOnce(mockedHook);
+
+    const mockedHook2 = jest.fn((): any => {
+        const index = options.index || 0;
+        const numberOfSteps = options.numberOfSteps || 2;
+        return {
+            ids: { tab: { length: numberOfSteps } },
+            activeTabIndex: index,
+        };
+    });
+    (useTabProviderContextState as jest.Mock).mockImplementationOnce(mockedHook2);
     return { mockedHook, changeToTab };
 }

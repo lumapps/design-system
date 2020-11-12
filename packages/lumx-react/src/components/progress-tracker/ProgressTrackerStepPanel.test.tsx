@@ -3,18 +3,18 @@ import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
 import React, { ReactElement } from 'react';
 
-import { CLASSNAME, TabPanel, TabPanelProps } from './TabPanel';
-import { setupTabProviderMocks } from './test.mocks';
+import { setupTabProviderMocks } from '../tabs/test.mocks';
+import { CLASSNAME, ProgressTrackerStepPanel, ProgressTrackerStepPanelProps } from './ProgressTrackerStepPanel';
 
 // Mock useTabProviderContext.
-jest.mock('./state', () => {
+jest.mock('../tabs/state', () => {
     return { useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
 });
 
 /**
  * Define the overriding properties waited by the `setup` function.
  */
-type SetupProps = Partial<TabPanelProps>;
+type SetupProps = Partial<ProgressTrackerStepPanelProps>;
 
 /**
  * Defines what the `setup` function will return.
@@ -23,7 +23,7 @@ interface Setup extends CommonSetup {
     props: SetupProps;
 
     /**
-     * The <div> element that wraps tab.
+     * The <div> element that wraps step.
      */
     wrapper: Wrapper;
 }
@@ -37,14 +37,14 @@ interface Setup extends CommonSetup {
  *                       component.
  */
 const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
-    const props: TabPanelProps = { ...propsOverrides, children: 'Tab panel content' };
+    const props: ProgressTrackerStepPanelProps = { ...propsOverrides, children: 'Tab panel content' };
     const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const wrapper: Wrapper = renderer(<TabPanel {...props} />);
+    const wrapper: Wrapper = renderer(<ProgressTrackerStepPanel {...props} />);
 
     return { props, wrapper };
 };
 
-describe(`<${TabPanel.displayName}>`, () => {
+describe(`<${ProgressTrackerStepPanel.displayName}>`, () => {
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
         it('should render correctly', () => {

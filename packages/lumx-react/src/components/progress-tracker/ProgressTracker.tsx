@@ -1,20 +1,20 @@
-import React, { Children } from 'react';
+import React, { ReactNode } from 'react';
 
 import classNames from 'classnames';
 
-import { Theme } from '@lumx/react';
-
 import { COMPONENT_PREFIX } from '@lumx/react/constants';
 import { GenericProps, getRootClassName, handleBasicClasses } from '@lumx/react/utils';
+import { useRovingTabIndex } from '../../hooks/useRovingTabIndex';
+import { useTabProviderContextState } from '../tabs/state';
 
 /**
  * Defines the props of the component.
  */
 interface ProgressTrackerProps extends GenericProps {
-    /** The active step index. */
-    activeStep?: number;
-    /** The theme to apply to the component. Can be either 'light' or 'dark'. */
-    theme?: Theme;
+    /** The label that describes the purpose of the set of steps. */
+    ['aria-label']: string;
+    /** The children elements. */
+    children: ReactNode;
 }
 
 /**
@@ -30,26 +30,40 @@ const CLASSNAME: string = getRootClassName(COMPONENT_NAME);
 /**
  * The default value of props.
  */
-const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {
-    activeStep: 0,
-    theme: Theme.light,
-};
+const DEFAULT_PROPS: Partial<ProgressTrackerProps> = {};
 
-const ProgressTracker: React.FC<ProgressTrackerProps> = ({
-    activeStep,
-    children,
-    className,
-    theme,
-    ...forwardedProps
-}) => {
-    const childrenArray = Children.toArray(children);
-    const backgroundPosition: number = childrenArray.length > 0 ? 100 / (childrenArray.length * 2) : 0;
-    const trackPosition: number =
-        childrenArray.length > 0 ? ((100 / (childrenArray.length - 1)) * (activeStep as number)) / 100 : 0;
+/**
+ * ProgressTracker component.
+ *
+ * Implements WAI-ARIA `tablist` role {@see https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-1/tabs.html#rps_label}
+ *
+ * @param  props Component props.
+ * @return React element.
+ */
+const ProgressTracker: React.FC<ProgressTrackerProps> = (props) => {
+    const { ['aria-label']: ariaLabel, children, className, ...forwardedProps } = props;
+    const stepListRef = React.useRef(null);
+    useRovingTabIndex({
+        parentRef: stepListRef,
+        elementSelector: '[role="tab"]',
+        keepTabIndex: false,
+        extraDependencies: [children],
+    });
+
+    const state = useTabProviderContextState();
+    const numberOfSteps = state?.ids?.tab?.length || 0;
+    const backgroundPosition: number = numberOfSteps > 0 ? 100 / (numberOfSteps * 2) : 0;
+    const trackPosition: number = numberOfSteps > 0 ? ((100 / (numberOfSteps - 1)) * (state?.activeTabIndex || 0)) / 100 : 0;
 
     return (
-        <div {...forwardedProps} className={classNames(className, handleBasicClasses({ prefix: CLASSNAME, theme }))}>
-            <div className={`${CLASSNAME}__steps`}>{children}</div>
+        <div
+            ref={stepListRef}
+            {...forwardedProps}
+            className={classNames(className, handleBasicClasses({ prefix: CLASSNAME }))}
+        >
+            <div className={`${CLASSNAME}__steps`} role="tablist" aria-label={ariaLabel}>
+                {children}
+            </div>
 
             <div
                 className={`${CLASSNAME}__background-bar`}

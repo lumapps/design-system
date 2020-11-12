@@ -1,11 +1,17 @@
-import React, { ReactElement } from 'react';
+import { ProgressTrackerStep } from '@lumx/react';
+
+import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
 
 import { mount, shallow } from 'enzyme';
 import 'jest-enzyme';
-
-import { ProgressTrackerStep } from '@lumx/react';
-import { CommonSetup, Wrapper, commonTestsSuite } from '@lumx/react/testing/utils';
+import React, { ReactElement } from 'react';
+import { setupTabProviderMocks } from '../tabs/test.mocks';
 import { CLASSNAME, ProgressTracker, ProgressTrackerProps } from './ProgressTracker';
+
+// Mock useTabProviderContext.
+jest.mock('../tabs/state', () => {
+    return { useTabProviderContext: jest.fn(), useTabProviderContextState: jest.fn() };
+});
 
 /**
  * Define the overriding properties waited by the `setup` function.
@@ -19,66 +25,53 @@ interface Setup extends CommonSetup {
     props: SetupProps;
 
     /**
-     * The <div> element that wraps radio button and children elements.
+     * The <div> element that wraps steps and content elements.
      */
     wrapper: Wrapper;
-
-    steps: Wrapper;
 }
 
 /**
  * Mounts the component and returns common DOM elements / data needed in multiple tests further down.
  *
- * @param   props The props to use to override the default props of the component.
- * @param   [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
- * @return  An object with the props, the component wrapper and some shortcut to some element inside of the component.
+ * @param props  The props to use to override the default props of the component.
+ * @param     [shallowRendering=true] Indicates if we want to do a shallow or a full rendering.
+ * @return      An object with the props, the component wrapper and some shortcut to some element inside of the
+ *                       component.
  */
-const setup = ({ ...props }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
-    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
-    const children = props.children ? props.children : <ProgressTrackerStep label="Step label" />;
-
-    // @ts-ignore
-    const wrapper = renderer(<ProgressTracker {...props}>{children}</ProgressTracker>);
-
-    return {
-        props,
-        steps: wrapper.find('ProgressTrackerStep'),
-        wrapper,
+const setup = ({ ...propsOverrides }: SetupProps = {}, shallowRendering: boolean = true): Setup => {
+    const steps = [<ProgressTrackerStep key={0} label="Step 0" />, <ProgressTrackerStep key={1} label="Step 1" />];
+    const props: ProgressTrackerProps = {
+        children: steps,
+        'aria-label': 'Steps',
+        ...propsOverrides,
     };
+    const renderer: (el: ReactElement) => Wrapper = shallowRendering ? shallow : mount;
+
+    // noinspection RequiredAttributes
+    const wrapper: Wrapper = renderer(<ProgressTracker {...props} />);
+
+    return { props, wrapper };
 };
 
 describe(`<${ProgressTracker.displayName}>`, () => {
+    beforeEach(() => {
+        setupTabProviderMocks();
+    });
+
     // 1. Test render via snapshot (default states of component).
     describe('Snapshots and structure', () => {
-        it('should render defaults', () => {
+        it('should render correctly', () => {
             const { wrapper } = setup();
             expect(wrapper).toMatchSnapshot();
 
             expect(wrapper).toExist();
             expect(wrapper).toHaveClassName(CLASSNAME);
+
+            expect(wrapper.childAt(0)).toExist();
+            expect(wrapper.childAt(0)).toHaveClassName('lumx-progress-tracker__steps');
         });
     });
 
-    // 2. Test defaultProps value and important props custom values.
-    describe('Props', () => {
-        // Nothing to do here.
-    });
-
-    // 3. Test events.
-    describe('Events', () => {
-        // Nothing to do here
-    });
-
-    // 4. Test conditions (i.e. things that display or not in the UI based on props).
-    describe('Conditions', () => {
-        // Nothing to do here.
-    });
-
-    // 5. Test state.
-    describe('State', () => {
-        // Nothing to do here.
-    });
-
     // Common tests suite.
-    commonTestsSuite(setup, { prop: 'wrapper', className: 'wrapper' }, { className: CLASSNAME });
+    commonTestsSuite(setup, { className: 'wrapper', prop: 'wrapper' }, { className: CLASSNAME });
 });
